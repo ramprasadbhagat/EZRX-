@@ -32,7 +32,8 @@ void main() {
         bundleDto: const BundleDto(
             bundleCode: 'fake-code',
             bundleInformation: [],
-            bundleName: 'fake-name'),
+            bundleName: 'fake-name',
+            materials: <MaterialDto>[]),
         materialDto: const MaterialDto(
             bundles: [],
             defaultMaterialDescription: '',

@@ -201,6 +201,7 @@ void main() {
           ],
           quantity: 10,
           bundle: Bundle(
+            materials: <MaterialInfo>[],
             bundleInformation: [],
             bundleCode: '',
             bundleName: BundleName('test'),
@@ -626,8 +627,8 @@ void main() {
         final listWidget = find.byWidgetPredicate((w) => w is ListTile);
         expect(listWidget, findsAtLeastNWidgets(1));
 
-        final remarkWidget = find.byKey(
-            Key('remarks${mockCartItemWithRemarkDataList[0].materialInfo.remarks}'));
+        final remarkWidget = find.byKey(Key(
+            'remarks${mockCartItemWithRemarkDataList[0].materialInfo.remarks}'));
         expect(remarkWidget, findsOneWidget);
       });
 

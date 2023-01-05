@@ -581,3 +581,15 @@ class PriceOverrideValue extends ValueObject<double> {
 
   const PriceOverrideValue._(this.value);
 }
+
+class MaterialItemType extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory MaterialItemType(String input) =>
+      MaterialItemType._(validateStringNotEmpty(input));
+
+  bool get isBundle => value.getOrElse(() => '') == 'Bundle';
+
+  const MaterialItemType._(this.value);
+}

@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'cart_view_model.freezed.dart';
@@ -94,7 +95,7 @@ class CartItem with _$CartItem {
             bundleInformation: materials.first.bundle.bundleInformation,
             totalQuantity: _totalQty,
             materials: bundleItems,
-            type: 'Bundle',
+            type: MaterialItemType('Bundle'),
           ),
         );
       }

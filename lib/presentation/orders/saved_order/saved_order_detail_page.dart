@@ -9,14 +9,17 @@ import 'package:ezrxmobile/application/order/material_price_detail/material_pric
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
+import 'package:ezrxmobile/domain/order/entities/bundle_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_action_button.dart';
+import 'package:ezrxmobile/presentation/orders/core/order_bundle_item.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_invalid_warning.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_material_item.dart';
 import 'package:ezrxmobile/presentation/orders/saved_order/saved_order_bouns_tile.dart';
@@ -109,15 +112,22 @@ class SavedOrderDetailPage extends StatelessWidget {
                                 .getMaterialItemBonus,
                           ),
                       );
-                      
+
                       return Column(
                         children: [
-                          OrderMaterialItem(
-                            materialQueryInfo: material.queryInfo,
-                            materialNumber:
-                                material.materialNumber.displayMatNo,
-                            qty: material.qty.toString(),
-                          ),
+                          material.type.isBundle
+                              ? OrderBundleItem(
+                                  material: material,
+                                  materialNumber:
+                                      material.materialNumber.displayMatNo,
+                                  qty: material.qty.toString(),
+                                )
+                              : OrderMaterialItem(
+                                  materialQueryInfo: material.queryInfo,
+                                  materialNumber:
+                                      material.materialNumber.displayMatNo,
+                                  qty: material.qty.toString(),
+                                ),
                           if (material.bonuses.isNotEmpty)
                             SaveOrderBounsTile(
                               item: material,
@@ -169,6 +179,7 @@ class SavedOrderDetailPage extends StatelessWidget {
     cartBloc.add(const CartEvent.clearCart());
     final priceAggregateList = order.items.map((material) {
       final itemInfo = state.materialDetails[material.queryInfo];
+
       if (itemInfo != null) {
         final priceAggregate = PriceAggregate(
           price: itemInfo.price.copyWith(
@@ -180,7 +191,14 @@ class SavedOrderDetailPage extends StatelessWidget {
           salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
           quantity: material.qty,
           discountedMaterialCount: cartBloc.state.zmgMaterialCount,
-          bundle: Bundle.empty(),
+          bundle: material.type.isBundle
+              ? Bundle(
+                  bundleName: BundleName(material.bundleName),
+                  bundleCode: material.bundleCode,
+                  bundleInformation: <BundleInfo>[],
+                  materials: material.materials,
+                )
+              : Bundle.empty(),
           addedBonusList: material.bonuses,
           stockInfo: StockInfo.empty().copyWith(
             materialNumber: itemInfo.info.materialNumber,

@@ -119,6 +119,7 @@ void main() {
     mockBundleItems = [
       BundleAggregate(
         bundle: Bundle(
+          materials: <MaterialInfo>[],
           bundleName: BundleName(''),
           bundleCode: '0010276811',
           bundleInformation: mockBundleInfoList,
@@ -127,6 +128,7 @@ void main() {
       ),
       BundleAggregate(
           bundle: Bundle(
+            materials: <MaterialInfo>[],
             bundleName: BundleName(''),
             bundleCode: '0010276812',
             bundleInformation: mockBundleInfoList,
@@ -134,6 +136,7 @@ void main() {
           materialInfos: <MaterialInfo>[]),
       BundleAggregate(
         bundle: Bundle(
+          materials: <MaterialInfo>[],
           bundleName: BundleName(''),
           bundleCode: '0010276813',
           bundleInformation: mockBundleInfoList,
@@ -142,6 +145,7 @@ void main() {
       ),
       BundleAggregate(
           bundle: Bundle(
+            materials: <MaterialInfo>[],
             bundleName: BundleName(''),
             bundleCode: '0010276814',
             bundleInformation: mockBundleInfoList,
@@ -149,6 +153,7 @@ void main() {
           materialInfos: <MaterialInfo>[]),
       BundleAggregate(
           bundle: Bundle(
+            materials: <MaterialInfo>[],
             bundleName: BundleName(''),
             bundleCode: '0010276815',
             bundleInformation: mockBundleInfoList,

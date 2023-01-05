@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$Bundle {
   BundleName get bundleName => throw _privateConstructorUsedError;
+  List<MaterialInfo> get materials => throw _privateConstructorUsedError;
   String get bundleCode => throw _privateConstructorUsedError;
   List<BundleInfo> get bundleInformation => throw _privateConstructorUsedError;
 
@@ -31,6 +32,7 @@ abstract class $BundleCopyWith<$Res> {
   @useResult
   $Res call(
       {BundleName bundleName,
+      List<MaterialInfo> materials,
       String bundleCode,
       List<BundleInfo> bundleInformation});
 }
@@ -49,6 +51,7 @@ class _$BundleCopyWithImpl<$Res, $Val extends Bundle>
   @override
   $Res call({
     Object? bundleName = null,
+    Object? materials = null,
     Object? bundleCode = null,
     Object? bundleInformation = null,
   }) {
@@ -57,6 +60,10 @@ class _$BundleCopyWithImpl<$Res, $Val extends Bundle>
           ? _value.bundleName
           : bundleName // ignore: cast_nullable_to_non_nullable
               as BundleName,
+      materials: null == materials
+          ? _value.materials
+          : materials // ignore: cast_nullable_to_non_nullable
+              as List<MaterialInfo>,
       bundleCode: null == bundleCode
           ? _value.bundleCode
           : bundleCode // ignore: cast_nullable_to_non_nullable
@@ -77,6 +84,7 @@ abstract class _$$_BundleCopyWith<$Res> implements $BundleCopyWith<$Res> {
   @useResult
   $Res call(
       {BundleName bundleName,
+      List<MaterialInfo> materials,
       String bundleCode,
       List<BundleInfo> bundleInformation});
 }
@@ -92,6 +100,7 @@ class __$$_BundleCopyWithImpl<$Res>
   @override
   $Res call({
     Object? bundleName = null,
+    Object? materials = null,
     Object? bundleCode = null,
     Object? bundleInformation = null,
   }) {
@@ -100,6 +109,10 @@ class __$$_BundleCopyWithImpl<$Res>
           ? _value.bundleName
           : bundleName // ignore: cast_nullable_to_non_nullable
               as BundleName,
+      materials: null == materials
+          ? _value._materials
+          : materials // ignore: cast_nullable_to_non_nullable
+              as List<MaterialInfo>,
       bundleCode: null == bundleCode
           ? _value.bundleCode
           : bundleCode // ignore: cast_nullable_to_non_nullable
@@ -117,13 +130,22 @@ class __$$_BundleCopyWithImpl<$Res>
 class _$_Bundle extends _Bundle {
   const _$_Bundle(
       {required this.bundleName,
+      required final List<MaterialInfo> materials,
       required this.bundleCode,
       required final List<BundleInfo> bundleInformation})
-      : _bundleInformation = bundleInformation,
+      : _materials = materials,
+        _bundleInformation = bundleInformation,
         super._();
 
   @override
   final BundleName bundleName;
+  final List<MaterialInfo> _materials;
+  @override
+  List<MaterialInfo> get materials {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_materials);
+  }
+
   @override
   final String bundleCode;
   final List<BundleInfo> _bundleInformation;
@@ -135,7 +157,7 @@ class _$_Bundle extends _Bundle {
 
   @override
   String toString() {
-    return 'Bundle(bundleName: $bundleName, bundleCode: $bundleCode, bundleInformation: $bundleInformation)';
+    return 'Bundle(bundleName: $bundleName, materials: $materials, bundleCode: $bundleCode, bundleInformation: $bundleInformation)';
   }
 
   @override
@@ -145,6 +167,8 @@ class _$_Bundle extends _Bundle {
             other is _$_Bundle &&
             (identical(other.bundleName, bundleName) ||
                 other.bundleName == bundleName) &&
+            const DeepCollectionEquality()
+                .equals(other._materials, _materials) &&
             (identical(other.bundleCode, bundleCode) ||
                 other.bundleCode == bundleCode) &&
             const DeepCollectionEquality()
@@ -152,7 +176,11 @@ class _$_Bundle extends _Bundle {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, bundleName, bundleCode,
+  int get hashCode => Object.hash(
+      runtimeType,
+      bundleName,
+      const DeepCollectionEquality().hash(_materials),
+      bundleCode,
       const DeepCollectionEquality().hash(_bundleInformation));
 
   @JsonKey(ignore: true)
@@ -165,12 +193,15 @@ class _$_Bundle extends _Bundle {
 abstract class _Bundle extends Bundle {
   const factory _Bundle(
       {required final BundleName bundleName,
+      required final List<MaterialInfo> materials,
       required final String bundleCode,
       required final List<BundleInfo> bundleInformation}) = _$_Bundle;
   const _Bundle._() : super._();
 
   @override
   BundleName get bundleName;
+  @override
+  List<MaterialInfo> get materials;
   @override
   String get bundleCode;
   @override

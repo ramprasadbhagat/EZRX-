@@ -118,7 +118,10 @@ class PriceAggregateDtoAdapter extends TypeAdapter<PriceAggregateDto> {
       zmgMaterialCountOnCart: fields[4] == null ? 0 : fields[4] as int,
       bundleDto: fields[5] == null
           ? const BundleDto(
-              bundleName: '', bundleCode: '', bundleInformation: [])
+              bundleName: '',
+              bundleCode: '',
+              bundleInformation: [],
+              materials: [])
           : fields[5] as BundleDto,
       bonusItem: fields[6] == null
           ? []

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_item_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -154,9 +155,9 @@ class _OrderProductItemListConverter
 
   @override
   List<MaterialItemDto> fromJson(String json) {
-    return List.from(jsonDecode(json)['value'])
-        .map((e) => MaterialItemDto.fromJson(e))
-        .toList();
+    final data = makeResponseCamelCase(json)['value'];
+
+    return List.from(data).map((e) => MaterialItemDto.fromJson(e)).toList();
   }
 
   @override

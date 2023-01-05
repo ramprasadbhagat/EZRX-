@@ -20,6 +20,12 @@ MaterialItemDto _$MaterialItemDtoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$MaterialItemDto {
+  @JsonKey(name: 'bundleName', defaultValue: '')
+  String get bundleName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'bundleCode', defaultValue: '')
+  String get bundleCode => throw _privateConstructorUsedError;
+  @JsonKey(name: 'materials', defaultValue: <MaterialDto>[])
+  List<MaterialDto> get materials => throw _privateConstructorUsedError;
   @JsonKey(name: 'qty', defaultValue: 0)
   int get qty => throw _privateConstructorUsedError;
   @JsonKey(name: 'hidePrice', defaultValue: false)
@@ -57,15 +63,9 @@ mixin _$MaterialItemDto {
   double get zdp8Override => throw _privateConstructorUsedError;
   @JsonKey(name: 'remarks', defaultValue: '')
   String get remarks => throw _privateConstructorUsedError;
-  @JsonKey(name: 'BundleName', defaultValue: '')
-  String get bundleName => throw _privateConstructorUsedError;
-  @JsonKey(name: 'BundleCode', defaultValue: '')
-  String get bundleCode => throw _privateConstructorUsedError;
   @JsonKey(name: 'BundleInformation', defaultValue: [])
   List<BundleInfoDto> get bundleInformation =>
       throw _privateConstructorUsedError;
-  @JsonKey(name: 'materials', defaultValue: [])
-  List<MaterialDto> get materials => throw _privateConstructorUsedError;
   @JsonKey(name: 'totalQuantity', defaultValue: 0)
   int get totalQuantity => throw _privateConstructorUsedError;
 
@@ -82,7 +82,13 @@ abstract class $MaterialItemDtoCopyWith<$Res> {
       _$MaterialItemDtoCopyWithImpl<$Res, MaterialItemDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'qty', defaultValue: 0)
+      {@JsonKey(name: 'bundleName', defaultValue: '')
+          String bundleName,
+      @JsonKey(name: 'bundleCode', defaultValue: '')
+          String bundleCode,
+      @JsonKey(name: 'materials', defaultValue: <MaterialDto>[])
+          List<MaterialDto> materials,
+      @JsonKey(name: 'qty', defaultValue: 0)
           int qty,
       @JsonKey(name: 'hidePrice', defaultValue: false)
           bool hidePrice,
@@ -114,14 +120,8 @@ abstract class $MaterialItemDtoCopyWith<$Res> {
           double zdp8Override,
       @JsonKey(name: 'remarks', defaultValue: '')
           String remarks,
-      @JsonKey(name: 'BundleName', defaultValue: '')
-          String bundleName,
-      @JsonKey(name: 'BundleCode', defaultValue: '')
-          String bundleCode,
       @JsonKey(name: 'BundleInformation', defaultValue: [])
           List<BundleInfoDto> bundleInformation,
-      @JsonKey(name: 'materials', defaultValue: [])
-          List<MaterialDto> materials,
       @JsonKey(name: 'totalQuantity', defaultValue: 0)
           int totalQuantity});
 }
@@ -139,6 +139,9 @@ class _$MaterialItemDtoCopyWithImpl<$Res, $Val extends MaterialItemDto>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? bundleName = null,
+    Object? bundleCode = null,
+    Object? materials = null,
     Object? qty = null,
     Object? hidePrice = null,
     Object? bonuses = null,
@@ -155,13 +158,22 @@ class _$MaterialItemDtoCopyWithImpl<$Res, $Val extends MaterialItemDto>
     Object? batchNumber = null,
     Object? zdp8Override = null,
     Object? remarks = null,
-    Object? bundleName = null,
-    Object? bundleCode = null,
     Object? bundleInformation = null,
-    Object? materials = null,
     Object? totalQuantity = null,
   }) {
     return _then(_value.copyWith(
+      bundleName: null == bundleName
+          ? _value.bundleName
+          : bundleName // ignore: cast_nullable_to_non_nullable
+              as String,
+      bundleCode: null == bundleCode
+          ? _value.bundleCode
+          : bundleCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      materials: null == materials
+          ? _value.materials
+          : materials // ignore: cast_nullable_to_non_nullable
+              as List<MaterialDto>,
       qty: null == qty
           ? _value.qty
           : qty // ignore: cast_nullable_to_non_nullable
@@ -226,22 +238,10 @@ class _$MaterialItemDtoCopyWithImpl<$Res, $Val extends MaterialItemDto>
           ? _value.remarks
           : remarks // ignore: cast_nullable_to_non_nullable
               as String,
-      bundleName: null == bundleName
-          ? _value.bundleName
-          : bundleName // ignore: cast_nullable_to_non_nullable
-              as String,
-      bundleCode: null == bundleCode
-          ? _value.bundleCode
-          : bundleCode // ignore: cast_nullable_to_non_nullable
-              as String,
       bundleInformation: null == bundleInformation
           ? _value.bundleInformation
           : bundleInformation // ignore: cast_nullable_to_non_nullable
               as List<BundleInfoDto>,
-      materials: null == materials
-          ? _value.materials
-          : materials // ignore: cast_nullable_to_non_nullable
-              as List<MaterialDto>,
       totalQuantity: null == totalQuantity
           ? _value.totalQuantity
           : totalQuantity // ignore: cast_nullable_to_non_nullable
@@ -259,7 +259,13 @@ abstract class _$$_MaterialItemDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'qty', defaultValue: 0)
+      {@JsonKey(name: 'bundleName', defaultValue: '')
+          String bundleName,
+      @JsonKey(name: 'bundleCode', defaultValue: '')
+          String bundleCode,
+      @JsonKey(name: 'materials', defaultValue: <MaterialDto>[])
+          List<MaterialDto> materials,
+      @JsonKey(name: 'qty', defaultValue: 0)
           int qty,
       @JsonKey(name: 'hidePrice', defaultValue: false)
           bool hidePrice,
@@ -291,14 +297,8 @@ abstract class _$$_MaterialItemDtoCopyWith<$Res>
           double zdp8Override,
       @JsonKey(name: 'remarks', defaultValue: '')
           String remarks,
-      @JsonKey(name: 'BundleName', defaultValue: '')
-          String bundleName,
-      @JsonKey(name: 'BundleCode', defaultValue: '')
-          String bundleCode,
       @JsonKey(name: 'BundleInformation', defaultValue: [])
           List<BundleInfoDto> bundleInformation,
-      @JsonKey(name: 'materials', defaultValue: [])
-          List<MaterialDto> materials,
       @JsonKey(name: 'totalQuantity', defaultValue: 0)
           int totalQuantity});
 }
@@ -314,6 +314,9 @@ class __$$_MaterialItemDtoCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? bundleName = null,
+    Object? bundleCode = null,
+    Object? materials = null,
     Object? qty = null,
     Object? hidePrice = null,
     Object? bonuses = null,
@@ -330,13 +333,22 @@ class __$$_MaterialItemDtoCopyWithImpl<$Res>
     Object? batchNumber = null,
     Object? zdp8Override = null,
     Object? remarks = null,
-    Object? bundleName = null,
-    Object? bundleCode = null,
     Object? bundleInformation = null,
-    Object? materials = null,
     Object? totalQuantity = null,
   }) {
     return _then(_$_MaterialItemDto(
+      bundleName: null == bundleName
+          ? _value.bundleName
+          : bundleName // ignore: cast_nullable_to_non_nullable
+              as String,
+      bundleCode: null == bundleCode
+          ? _value.bundleCode
+          : bundleCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      materials: null == materials
+          ? _value._materials
+          : materials // ignore: cast_nullable_to_non_nullable
+              as List<MaterialDto>,
       qty: null == qty
           ? _value.qty
           : qty // ignore: cast_nullable_to_non_nullable
@@ -401,22 +413,10 @@ class __$$_MaterialItemDtoCopyWithImpl<$Res>
           ? _value.remarks
           : remarks // ignore: cast_nullable_to_non_nullable
               as String,
-      bundleName: null == bundleName
-          ? _value.bundleName
-          : bundleName // ignore: cast_nullable_to_non_nullable
-              as String,
-      bundleCode: null == bundleCode
-          ? _value.bundleCode
-          : bundleCode // ignore: cast_nullable_to_non_nullable
-              as String,
       bundleInformation: null == bundleInformation
           ? _value._bundleInformation
           : bundleInformation // ignore: cast_nullable_to_non_nullable
               as List<BundleInfoDto>,
-      materials: null == materials
-          ? _value._materials
-          : materials // ignore: cast_nullable_to_non_nullable
-              as List<MaterialDto>,
       totalQuantity: null == totalQuantity
           ? _value.totalQuantity
           : totalQuantity // ignore: cast_nullable_to_non_nullable
@@ -429,7 +429,13 @@ class __$$_MaterialItemDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_MaterialItemDto extends _MaterialItemDto {
   const _$_MaterialItemDto(
-      {@JsonKey(name: 'qty', defaultValue: 0)
+      {@JsonKey(name: 'bundleName', defaultValue: '')
+          required this.bundleName,
+      @JsonKey(name: 'bundleCode', defaultValue: '')
+          required this.bundleCode,
+      @JsonKey(name: 'materials', defaultValue: <MaterialDto>[])
+          required final List<MaterialDto> materials,
+      @JsonKey(name: 'qty', defaultValue: 0)
           required this.qty,
       @JsonKey(name: 'hidePrice', defaultValue: false)
           required this.hidePrice,
@@ -461,23 +467,31 @@ class _$_MaterialItemDto extends _MaterialItemDto {
           required this.zdp8Override,
       @JsonKey(name: 'remarks', defaultValue: '')
           required this.remarks,
-      @JsonKey(name: 'BundleName', defaultValue: '')
-          required this.bundleName,
-      @JsonKey(name: 'BundleCode', defaultValue: '')
-          required this.bundleCode,
       @JsonKey(name: 'BundleInformation', defaultValue: [])
           required final List<BundleInfoDto> bundleInformation,
-      @JsonKey(name: 'materials', defaultValue: [])
-          required final List<MaterialDto> materials,
       @JsonKey(name: 'totalQuantity', defaultValue: 0)
           required this.totalQuantity})
-      : _bonuses = bonuses,
+      : _materials = materials,
+        _bonuses = bonuses,
         _bundleInformation = bundleInformation,
-        _materials = materials,
         super._();
 
   factory _$_MaterialItemDto.fromJson(Map<String, dynamic> json) =>
       _$$_MaterialItemDtoFromJson(json);
+
+  @override
+  @JsonKey(name: 'bundleName', defaultValue: '')
+  final String bundleName;
+  @override
+  @JsonKey(name: 'bundleCode', defaultValue: '')
+  final String bundleCode;
+  final List<MaterialDto> _materials;
+  @override
+  @JsonKey(name: 'materials', defaultValue: <MaterialDto>[])
+  List<MaterialDto> get materials {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_materials);
+  }
 
   @override
   @JsonKey(name: 'qty', defaultValue: 0)
@@ -537,12 +551,6 @@ class _$_MaterialItemDto extends _MaterialItemDto {
   @override
   @JsonKey(name: 'remarks', defaultValue: '')
   final String remarks;
-  @override
-  @JsonKey(name: 'BundleName', defaultValue: '')
-  final String bundleName;
-  @override
-  @JsonKey(name: 'BundleCode', defaultValue: '')
-  final String bundleCode;
   final List<BundleInfoDto> _bundleInformation;
   @override
   @JsonKey(name: 'BundleInformation', defaultValue: [])
@@ -551,21 +559,13 @@ class _$_MaterialItemDto extends _MaterialItemDto {
     return EqualUnmodifiableListView(_bundleInformation);
   }
 
-  final List<MaterialDto> _materials;
-  @override
-  @JsonKey(name: 'materials', defaultValue: [])
-  List<MaterialDto> get materials {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_materials);
-  }
-
   @override
   @JsonKey(name: 'totalQuantity', defaultValue: 0)
   final int totalQuantity;
 
   @override
   String toString() {
-    return 'MaterialItemDto(qty: $qty, hidePrice: $hidePrice, bonuses: $bonuses, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, materialNumber: $materialNumber, overridenPrice: $overridenPrice, unitOfMeasurement: $unitOfMeasurement, itemRegistrationNumber: $itemRegistrationNumber, defaultMaterialDescription: $defaultMaterialDescription, materialDescription: $materialDescription, type: $type, comment: $comment, batchNumber: $batchNumber, zdp8Override: $zdp8Override, remarks: $remarks, bundleName: $bundleName, bundleCode: $bundleCode, bundleInformation: $bundleInformation, materials: $materials, totalQuantity: $totalQuantity)';
+    return 'MaterialItemDto(bundleName: $bundleName, bundleCode: $bundleCode, materials: $materials, qty: $qty, hidePrice: $hidePrice, bonuses: $bonuses, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, materialNumber: $materialNumber, overridenPrice: $overridenPrice, unitOfMeasurement: $unitOfMeasurement, itemRegistrationNumber: $itemRegistrationNumber, defaultMaterialDescription: $defaultMaterialDescription, materialDescription: $materialDescription, type: $type, comment: $comment, batchNumber: $batchNumber, zdp8Override: $zdp8Override, remarks: $remarks, bundleInformation: $bundleInformation, totalQuantity: $totalQuantity)';
   }
 
   @override
@@ -573,6 +573,12 @@ class _$_MaterialItemDto extends _MaterialItemDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_MaterialItemDto &&
+            (identical(other.bundleName, bundleName) ||
+                other.bundleName == bundleName) &&
+            (identical(other.bundleCode, bundleCode) ||
+                other.bundleCode == bundleCode) &&
+            const DeepCollectionEquality()
+                .equals(other._materials, _materials) &&
             (identical(other.qty, qty) || other.qty == qty) &&
             (identical(other.hidePrice, hidePrice) ||
                 other.hidePrice == hidePrice) &&
@@ -602,14 +608,8 @@ class _$_MaterialItemDto extends _MaterialItemDto {
             (identical(other.zdp8Override, zdp8Override) ||
                 other.zdp8Override == zdp8Override) &&
             (identical(other.remarks, remarks) || other.remarks == remarks) &&
-            (identical(other.bundleName, bundleName) ||
-                other.bundleName == bundleName) &&
-            (identical(other.bundleCode, bundleCode) ||
-                other.bundleCode == bundleCode) &&
             const DeepCollectionEquality()
                 .equals(other._bundleInformation, _bundleInformation) &&
-            const DeepCollectionEquality()
-                .equals(other._materials, _materials) &&
             (identical(other.totalQuantity, totalQuantity) ||
                 other.totalQuantity == totalQuantity));
   }
@@ -618,6 +618,9 @@ class _$_MaterialItemDto extends _MaterialItemDto {
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
+        bundleName,
+        bundleCode,
+        const DeepCollectionEquality().hash(_materials),
         qty,
         hidePrice,
         const DeepCollectionEquality().hash(_bonuses),
@@ -634,10 +637,7 @@ class _$_MaterialItemDto extends _MaterialItemDto {
         batchNumber,
         zdp8Override,
         remarks,
-        bundleName,
-        bundleCode,
         const DeepCollectionEquality().hash(_bundleInformation),
-        const DeepCollectionEquality().hash(_materials),
         totalQuantity
       ]);
 
@@ -657,7 +657,13 @@ class _$_MaterialItemDto extends _MaterialItemDto {
 
 abstract class _MaterialItemDto extends MaterialItemDto {
   const factory _MaterialItemDto(
-      {@JsonKey(name: 'qty', defaultValue: 0)
+      {@JsonKey(name: 'bundleName', defaultValue: '')
+          required final String bundleName,
+      @JsonKey(name: 'bundleCode', defaultValue: '')
+          required final String bundleCode,
+      @JsonKey(name: 'materials', defaultValue: <MaterialDto>[])
+          required final List<MaterialDto> materials,
+      @JsonKey(name: 'qty', defaultValue: 0)
           required final int qty,
       @JsonKey(name: 'hidePrice', defaultValue: false)
           required final bool hidePrice,
@@ -689,14 +695,8 @@ abstract class _MaterialItemDto extends MaterialItemDto {
           required final double zdp8Override,
       @JsonKey(name: 'remarks', defaultValue: '')
           required final String remarks,
-      @JsonKey(name: 'BundleName', defaultValue: '')
-          required final String bundleName,
-      @JsonKey(name: 'BundleCode', defaultValue: '')
-          required final String bundleCode,
       @JsonKey(name: 'BundleInformation', defaultValue: [])
           required final List<BundleInfoDto> bundleInformation,
-      @JsonKey(name: 'materials', defaultValue: [])
-          required final List<MaterialDto> materials,
       @JsonKey(name: 'totalQuantity', defaultValue: 0)
           required final int totalQuantity}) = _$_MaterialItemDto;
   const _MaterialItemDto._() : super._();
@@ -704,6 +704,15 @@ abstract class _MaterialItemDto extends MaterialItemDto {
   factory _MaterialItemDto.fromJson(Map<String, dynamic> json) =
       _$_MaterialItemDto.fromJson;
 
+  @override
+  @JsonKey(name: 'bundleName', defaultValue: '')
+  String get bundleName;
+  @override
+  @JsonKey(name: 'bundleCode', defaultValue: '')
+  String get bundleCode;
+  @override
+  @JsonKey(name: 'materials', defaultValue: <MaterialDto>[])
+  List<MaterialDto> get materials;
   @override
   @JsonKey(name: 'qty', defaultValue: 0)
   int get qty;
@@ -758,17 +767,8 @@ abstract class _MaterialItemDto extends MaterialItemDto {
   @JsonKey(name: 'remarks', defaultValue: '')
   String get remarks;
   @override
-  @JsonKey(name: 'BundleName', defaultValue: '')
-  String get bundleName;
-  @override
-  @JsonKey(name: 'BundleCode', defaultValue: '')
-  String get bundleCode;
-  @override
   @JsonKey(name: 'BundleInformation', defaultValue: [])
   List<BundleInfoDto> get bundleInformation;
-  @override
-  @JsonKey(name: 'materials', defaultValue: [])
-  List<MaterialDto> get materials;
   @override
   @JsonKey(name: 'totalQuantity', defaultValue: 0)
   int get totalQuantity;

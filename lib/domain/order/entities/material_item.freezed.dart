@@ -16,8 +16,11 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$MaterialItem {
+  String get bundleName => throw _privateConstructorUsedError;
+  String get bundleCode => throw _privateConstructorUsedError;
+  List<MaterialInfo> get materials => throw _privateConstructorUsedError;
   int get qty => throw _privateConstructorUsedError;
-  String get type => throw _privateConstructorUsedError;
+  MaterialItemType get type => throw _privateConstructorUsedError;
   String get comment => throw _privateConstructorUsedError;
   bool get hidePrice => throw _privateConstructorUsedError;
   String get batchNumber => throw _privateConstructorUsedError;
@@ -32,10 +35,7 @@ mixin _$MaterialItem {
   String get materialDescription => throw _privateConstructorUsedError;
   String get remarks => throw _privateConstructorUsedError;
   Zdp8OverrideValue get zdp8Override => throw _privateConstructorUsedError;
-  String get bundleName => throw _privateConstructorUsedError;
-  String get bundleCode => throw _privateConstructorUsedError;
   List<BundleInfo> get bundleInformation => throw _privateConstructorUsedError;
-  List<MaterialInfo> get materials => throw _privateConstructorUsedError;
   int get totalQuantity => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -50,8 +50,11 @@ abstract class $MaterialItemCopyWith<$Res> {
       _$MaterialItemCopyWithImpl<$Res, MaterialItem>;
   @useResult
   $Res call(
-      {int qty,
-      String type,
+      {String bundleName,
+      String bundleCode,
+      List<MaterialInfo> materials,
+      int qty,
+      MaterialItemType type,
       String comment,
       bool hidePrice,
       String batchNumber,
@@ -66,10 +69,7 @@ abstract class $MaterialItemCopyWith<$Res> {
       String materialDescription,
       String remarks,
       Zdp8OverrideValue zdp8Override,
-      String bundleName,
-      String bundleCode,
       List<BundleInfo> bundleInformation,
-      List<MaterialInfo> materials,
       int totalQuantity});
 }
 
@@ -86,6 +86,9 @@ class _$MaterialItemCopyWithImpl<$Res, $Val extends MaterialItem>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? bundleName = null,
+    Object? bundleCode = null,
+    Object? materials = null,
     Object? qty = null,
     Object? type = null,
     Object? comment = null,
@@ -102,13 +105,22 @@ class _$MaterialItemCopyWithImpl<$Res, $Val extends MaterialItem>
     Object? materialDescription = null,
     Object? remarks = null,
     Object? zdp8Override = null,
-    Object? bundleName = null,
-    Object? bundleCode = null,
     Object? bundleInformation = null,
-    Object? materials = null,
     Object? totalQuantity = null,
   }) {
     return _then(_value.copyWith(
+      bundleName: null == bundleName
+          ? _value.bundleName
+          : bundleName // ignore: cast_nullable_to_non_nullable
+              as String,
+      bundleCode: null == bundleCode
+          ? _value.bundleCode
+          : bundleCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      materials: null == materials
+          ? _value.materials
+          : materials // ignore: cast_nullable_to_non_nullable
+              as List<MaterialInfo>,
       qty: null == qty
           ? _value.qty
           : qty // ignore: cast_nullable_to_non_nullable
@@ -116,7 +128,7 @@ class _$MaterialItemCopyWithImpl<$Res, $Val extends MaterialItem>
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as String,
+              as MaterialItemType,
       comment: null == comment
           ? _value.comment
           : comment // ignore: cast_nullable_to_non_nullable
@@ -173,22 +185,10 @@ class _$MaterialItemCopyWithImpl<$Res, $Val extends MaterialItem>
           ? _value.zdp8Override
           : zdp8Override // ignore: cast_nullable_to_non_nullable
               as Zdp8OverrideValue,
-      bundleName: null == bundleName
-          ? _value.bundleName
-          : bundleName // ignore: cast_nullable_to_non_nullable
-              as String,
-      bundleCode: null == bundleCode
-          ? _value.bundleCode
-          : bundleCode // ignore: cast_nullable_to_non_nullable
-              as String,
       bundleInformation: null == bundleInformation
           ? _value.bundleInformation
           : bundleInformation // ignore: cast_nullable_to_non_nullable
               as List<BundleInfo>,
-      materials: null == materials
-          ? _value.materials
-          : materials // ignore: cast_nullable_to_non_nullable
-              as List<MaterialInfo>,
       totalQuantity: null == totalQuantity
           ? _value.totalQuantity
           : totalQuantity // ignore: cast_nullable_to_non_nullable
@@ -206,8 +206,11 @@ abstract class _$$_MaterialItemCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int qty,
-      String type,
+      {String bundleName,
+      String bundleCode,
+      List<MaterialInfo> materials,
+      int qty,
+      MaterialItemType type,
       String comment,
       bool hidePrice,
       String batchNumber,
@@ -222,10 +225,7 @@ abstract class _$$_MaterialItemCopyWith<$Res>
       String materialDescription,
       String remarks,
       Zdp8OverrideValue zdp8Override,
-      String bundleName,
-      String bundleCode,
       List<BundleInfo> bundleInformation,
-      List<MaterialInfo> materials,
       int totalQuantity});
 }
 
@@ -240,6 +240,9 @@ class __$$_MaterialItemCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? bundleName = null,
+    Object? bundleCode = null,
+    Object? materials = null,
     Object? qty = null,
     Object? type = null,
     Object? comment = null,
@@ -256,13 +259,22 @@ class __$$_MaterialItemCopyWithImpl<$Res>
     Object? materialDescription = null,
     Object? remarks = null,
     Object? zdp8Override = null,
-    Object? bundleName = null,
-    Object? bundleCode = null,
     Object? bundleInformation = null,
-    Object? materials = null,
     Object? totalQuantity = null,
   }) {
     return _then(_$_MaterialItem(
+      bundleName: null == bundleName
+          ? _value.bundleName
+          : bundleName // ignore: cast_nullable_to_non_nullable
+              as String,
+      bundleCode: null == bundleCode
+          ? _value.bundleCode
+          : bundleCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      materials: null == materials
+          ? _value._materials
+          : materials // ignore: cast_nullable_to_non_nullable
+              as List<MaterialInfo>,
       qty: null == qty
           ? _value.qty
           : qty // ignore: cast_nullable_to_non_nullable
@@ -270,7 +282,7 @@ class __$$_MaterialItemCopyWithImpl<$Res>
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as String,
+              as MaterialItemType,
       comment: null == comment
           ? _value.comment
           : comment // ignore: cast_nullable_to_non_nullable
@@ -327,22 +339,10 @@ class __$$_MaterialItemCopyWithImpl<$Res>
           ? _value.zdp8Override
           : zdp8Override // ignore: cast_nullable_to_non_nullable
               as Zdp8OverrideValue,
-      bundleName: null == bundleName
-          ? _value.bundleName
-          : bundleName // ignore: cast_nullable_to_non_nullable
-              as String,
-      bundleCode: null == bundleCode
-          ? _value.bundleCode
-          : bundleCode // ignore: cast_nullable_to_non_nullable
-              as String,
       bundleInformation: null == bundleInformation
           ? _value._bundleInformation
           : bundleInformation // ignore: cast_nullable_to_non_nullable
               as List<BundleInfo>,
-      materials: null == materials
-          ? _value._materials
-          : materials // ignore: cast_nullable_to_non_nullable
-              as List<MaterialInfo>,
       totalQuantity: null == totalQuantity
           ? _value.totalQuantity
           : totalQuantity // ignore: cast_nullable_to_non_nullable
@@ -355,7 +355,10 @@ class __$$_MaterialItemCopyWithImpl<$Res>
 
 class _$_MaterialItem extends _MaterialItem {
   const _$_MaterialItem(
-      {required this.qty,
+      {required this.bundleName,
+      required this.bundleCode,
+      required final List<MaterialInfo> materials,
+      required this.qty,
       required this.type,
       required this.comment,
       required this.hidePrice,
@@ -371,20 +374,28 @@ class _$_MaterialItem extends _MaterialItem {
       required this.materialDescription,
       required this.remarks,
       required this.zdp8Override,
-      required this.bundleName,
-      required this.bundleCode,
       required final List<BundleInfo> bundleInformation,
-      required final List<MaterialInfo> materials,
       required this.totalQuantity})
-      : _bonuses = bonuses,
+      : _materials = materials,
+        _bonuses = bonuses,
         _bundleInformation = bundleInformation,
-        _materials = materials,
         super._();
+
+  @override
+  final String bundleName;
+  @override
+  final String bundleCode;
+  final List<MaterialInfo> _materials;
+  @override
+  List<MaterialInfo> get materials {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_materials);
+  }
 
   @override
   final int qty;
   @override
-  final String type;
+  final MaterialItemType type;
   @override
   final String comment;
   @override
@@ -418,10 +429,6 @@ class _$_MaterialItem extends _MaterialItem {
   final String remarks;
   @override
   final Zdp8OverrideValue zdp8Override;
-  @override
-  final String bundleName;
-  @override
-  final String bundleCode;
   final List<BundleInfo> _bundleInformation;
   @override
   List<BundleInfo> get bundleInformation {
@@ -429,19 +436,12 @@ class _$_MaterialItem extends _MaterialItem {
     return EqualUnmodifiableListView(_bundleInformation);
   }
 
-  final List<MaterialInfo> _materials;
-  @override
-  List<MaterialInfo> get materials {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_materials);
-  }
-
   @override
   final int totalQuantity;
 
   @override
   String toString() {
-    return 'MaterialItem(qty: $qty, type: $type, comment: $comment, hidePrice: $hidePrice, batchNumber: $batchNumber, bonuses: $bonuses, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, materialNumber: $materialNumber, defaultMaterialDescription: $defaultMaterialDescription, overridenPrice: $overridenPrice, unitOfMeasurement: $unitOfMeasurement, itemRegistrationNumber: $itemRegistrationNumber, materialDescription: $materialDescription, remarks: $remarks, zdp8Override: $zdp8Override, bundleName: $bundleName, bundleCode: $bundleCode, bundleInformation: $bundleInformation, materials: $materials, totalQuantity: $totalQuantity)';
+    return 'MaterialItem(bundleName: $bundleName, bundleCode: $bundleCode, materials: $materials, qty: $qty, type: $type, comment: $comment, hidePrice: $hidePrice, batchNumber: $batchNumber, bonuses: $bonuses, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, materialNumber: $materialNumber, defaultMaterialDescription: $defaultMaterialDescription, overridenPrice: $overridenPrice, unitOfMeasurement: $unitOfMeasurement, itemRegistrationNumber: $itemRegistrationNumber, materialDescription: $materialDescription, remarks: $remarks, zdp8Override: $zdp8Override, bundleInformation: $bundleInformation, totalQuantity: $totalQuantity)';
   }
 
   @override
@@ -449,6 +449,12 @@ class _$_MaterialItem extends _MaterialItem {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_MaterialItem &&
+            (identical(other.bundleName, bundleName) ||
+                other.bundleName == bundleName) &&
+            (identical(other.bundleCode, bundleCode) ||
+                other.bundleCode == bundleCode) &&
+            const DeepCollectionEquality()
+                .equals(other._materials, _materials) &&
             (identical(other.qty, qty) || other.qty == qty) &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.comment, comment) || other.comment == comment) &&
@@ -478,14 +484,8 @@ class _$_MaterialItem extends _MaterialItem {
             (identical(other.remarks, remarks) || other.remarks == remarks) &&
             (identical(other.zdp8Override, zdp8Override) ||
                 other.zdp8Override == zdp8Override) &&
-            (identical(other.bundleName, bundleName) ||
-                other.bundleName == bundleName) &&
-            (identical(other.bundleCode, bundleCode) ||
-                other.bundleCode == bundleCode) &&
             const DeepCollectionEquality()
                 .equals(other._bundleInformation, _bundleInformation) &&
-            const DeepCollectionEquality()
-                .equals(other._materials, _materials) &&
             (identical(other.totalQuantity, totalQuantity) ||
                 other.totalQuantity == totalQuantity));
   }
@@ -493,6 +493,9 @@ class _$_MaterialItem extends _MaterialItem {
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
+        bundleName,
+        bundleCode,
+        const DeepCollectionEquality().hash(_materials),
         qty,
         type,
         comment,
@@ -509,10 +512,7 @@ class _$_MaterialItem extends _MaterialItem {
         materialDescription,
         remarks,
         zdp8Override,
-        bundleName,
-        bundleCode,
         const DeepCollectionEquality().hash(_bundleInformation),
-        const DeepCollectionEquality().hash(_materials),
         totalQuantity
       ]);
 
@@ -525,8 +525,11 @@ class _$_MaterialItem extends _MaterialItem {
 
 abstract class _MaterialItem extends MaterialItem {
   const factory _MaterialItem(
-      {required final int qty,
-      required final String type,
+      {required final String bundleName,
+      required final String bundleCode,
+      required final List<MaterialInfo> materials,
+      required final int qty,
+      required final MaterialItemType type,
       required final String comment,
       required final bool hidePrice,
       required final String batchNumber,
@@ -541,17 +544,20 @@ abstract class _MaterialItem extends MaterialItem {
       required final String materialDescription,
       required final String remarks,
       required final Zdp8OverrideValue zdp8Override,
-      required final String bundleName,
-      required final String bundleCode,
       required final List<BundleInfo> bundleInformation,
-      required final List<MaterialInfo> materials,
       required final int totalQuantity}) = _$_MaterialItem;
   const _MaterialItem._() : super._();
 
   @override
+  String get bundleName;
+  @override
+  String get bundleCode;
+  @override
+  List<MaterialInfo> get materials;
+  @override
   int get qty;
   @override
-  String get type;
+  MaterialItemType get type;
   @override
   String get comment;
   @override
@@ -581,13 +587,7 @@ abstract class _MaterialItem extends MaterialItem {
   @override
   Zdp8OverrideValue get zdp8Override;
   @override
-  String get bundleName;
-  @override
-  String get bundleCode;
-  @override
   List<BundleInfo> get bundleInformation;
-  @override
-  List<MaterialInfo> get materials;
   @override
   int get totalQuantity;
   @override

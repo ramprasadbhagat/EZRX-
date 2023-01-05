@@ -8,6 +8,12 @@ part of 'material_item_dto.dart';
 
 _$_MaterialItemDto _$$_MaterialItemDtoFromJson(Map<String, dynamic> json) =>
     _$_MaterialItemDto(
+      bundleName: json['bundleName'] as String? ?? '',
+      bundleCode: json['bundleCode'] as String? ?? '',
+      materials: (json['materials'] as List<dynamic>?)
+              ?.map((e) => MaterialDto.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
       qty: json['qty'] as int? ?? 0,
       hidePrice: json['hidePrice'] as bool? ?? false,
       bonuses: (json['additionalBonus'] as List<dynamic>?)
@@ -31,14 +37,8 @@ _$_MaterialItemDto _$$_MaterialItemDtoFromJson(Map<String, dynamic> json) =>
       zdp8Override:
           (doubleFormatCheck(json, 'zdp8Override') as num?)?.toDouble() ?? 0,
       remarks: json['remarks'] as String? ?? '',
-      bundleName: json['BundleName'] as String? ?? '',
-      bundleCode: json['BundleCode'] as String? ?? '',
       bundleInformation: (json['BundleInformation'] as List<dynamic>?)
               ?.map((e) => BundleInfoDto.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          [],
-      materials: (json['materials'] as List<dynamic>?)
-              ?.map((e) => MaterialDto.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
       totalQuantity: json['totalQuantity'] as int? ?? 0,
@@ -46,6 +46,9 @@ _$_MaterialItemDto _$$_MaterialItemDtoFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$_MaterialItemDtoToJson(_$_MaterialItemDto instance) {
   final val = <String, dynamic>{
+    'bundleName': instance.bundleName,
+    'bundleCode': instance.bundleCode,
+    'materials': instance.materials.map((e) => e.toJson()).toList(),
     'qty': instance.qty,
     'hidePrice': instance.hidePrice,
     'additionalBonus': instance.bonuses.map((e) => e.toJson()).toList(),
@@ -70,11 +73,8 @@ Map<String, dynamic> _$$_MaterialItemDtoToJson(_$_MaterialItemDto instance) {
   val['batchNumber'] = instance.batchNumber;
   val['zdp8Override'] = instance.zdp8Override;
   val['remarks'] = instance.remarks;
-  val['BundleName'] = instance.bundleName;
-  val['BundleCode'] = instance.bundleCode;
   val['BundleInformation'] =
       instance.bundleInformation.map((e) => e.toJson()).toList();
-  val['materials'] = instance.materials.map((e) => e.toJson()).toList();
   val['totalQuantity'] = instance.totalQuantity;
   return val;
 }

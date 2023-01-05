@@ -76,7 +76,7 @@ class PriceAggregate with _$PriceAggregate {
       materialNumber: materialInfo.materialNumber,
       qty: quantity,
       defaultMaterialDescription: materialInfo.materialDescription,
-      type: 'Comm',
+      type: MaterialItemType('Comm'),
       itemRegistrationNumber: materialInfo.itemRegistrationNumber,
       unitOfMeasurement: materialInfo.unitOfMeasurement,
       bonuses: addedBonusList

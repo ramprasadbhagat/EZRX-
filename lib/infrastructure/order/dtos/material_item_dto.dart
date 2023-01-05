@@ -13,6 +13,12 @@ class MaterialItemDto with _$MaterialItemDto {
   const MaterialItemDto._();
 
   const factory MaterialItemDto({
+    @JsonKey(name: 'bundleName', defaultValue: '')
+        required String bundleName,
+    @JsonKey(name: 'bundleCode', defaultValue: '')
+        required String bundleCode,
+    @JsonKey(name: 'materials', defaultValue: <MaterialDto>[])
+        required List<MaterialDto> materials,
     @JsonKey(name: 'qty', defaultValue: 0)
         required int qty,
     @JsonKey(name: 'hidePrice', defaultValue: false)
@@ -55,23 +61,19 @@ class MaterialItemDto with _$MaterialItemDto {
         required double zdp8Override,
     @JsonKey(name: 'remarks', defaultValue: '')
         required String remarks,
-    @JsonKey(name: 'BundleName', defaultValue: '')
-        required String bundleName,
-    @JsonKey(name: 'BundleCode', defaultValue: '')
-        required String bundleCode,
     @JsonKey(name: 'BundleInformation', defaultValue: [])
         required List<BundleInfoDto> bundleInformation,
-    @JsonKey(name: 'materials', defaultValue: [])
-        required List<MaterialDto> materials,
     @JsonKey(name: 'totalQuantity', defaultValue: 0)
         required int totalQuantity,
   }) = _MaterialItemDto;
 
   MaterialItem toDomain() {
     return MaterialItem(
+      bundleName: bundleName,
+      bundleCode: bundleCode,
       defaultMaterialDescription: defaultMaterialDescription,
       qty: qty,
-      type: type,
+      type: MaterialItemType(type),
       comment: comment,
       hidePrice: hidePrice,
       batchNumber: batchNumber,
@@ -85,8 +87,6 @@ class MaterialItemDto with _$MaterialItemDto {
       itemRegistrationNumber: itemRegistrationNumber,
       materialDescription: materialDescription,
       remarks: remarks,
-      bundleName: bundleName,
-      bundleCode: bundleCode,
       bundleInformation: bundleInformation.map((e) => e.toDomain()).toList(),
       materials: materials.map((e) => e.toDomain()).toList(),
       totalQuantity: totalQuantity,
@@ -95,6 +95,10 @@ class MaterialItemDto with _$MaterialItemDto {
 
   factory MaterialItemDto.fromDomain(MaterialItem materialItem) {
     return MaterialItemDto(
+      bundleCode: materialItem.bundleCode,
+      bundleName: materialItem.bundleName,
+      materials:
+          materialItem.materials.map((e) => MaterialDto.fromDomain(e)).toList(),
       batchNumber: materialItem.batchNumber,
       bonuses: materialItem.bonuses
           .map((e) => MaterialItemBonusDto.fromDomain(e))
@@ -109,18 +113,14 @@ class MaterialItemDto with _$MaterialItemDto {
       materialNumber: materialItem.materialNumber.getValue(),
       overridenPrice: materialItem.overridenPrice.getOrDefaultValue(0),
       qty: materialItem.qty,
-      type: materialItem.type,
+      type: materialItem.type.getValue(),
       unitOfMeasurement: materialItem.unitOfMeasurement,
       zdp8Override: materialItem.zdp8Override.getOrDefaultValue(0),
       remarks: materialItem.remarks,
-      bundleName: materialItem.bundleName,
-      bundleCode: materialItem.bundleCode,
       bundleInformation: materialItem.bundleInformation
           .map((e) => BundleInfoDto.fromDomain(e))
           .toList(),
       totalQuantity: materialItem.totalQuantity,
-      materials:
-          materialItem.materials.map((e) => MaterialDto.fromDomain(e)).toList(),
     );
   }
 

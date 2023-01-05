@@ -11,8 +11,11 @@ part 'material_item.freezed.dart';
 class MaterialItem with _$MaterialItem {
   const MaterialItem._();
   const factory MaterialItem({
+    required String bundleName,
+    required String bundleCode,
+    required List<MaterialInfo> materials,
     required int qty,
-    required String type,
+    required MaterialItemType type,
     required String comment,
     required bool hidePrice,
     required String batchNumber,
@@ -27,16 +30,16 @@ class MaterialItem with _$MaterialItem {
     required String materialDescription,
     required String remarks,
     required Zdp8OverrideValue zdp8Override,
-    required String bundleName,
-    required String bundleCode,
     required List<BundleInfo> bundleInformation,
-    required List<MaterialInfo> materials,
     required int totalQuantity,
   }) = _MaterialItem;
 
   factory MaterialItem.empty() => MaterialItem(
+        bundleCode: '',
+        bundleName: '',
+        materials: <MaterialInfo>[],
         qty: 0,
-        type: '',
+        type: MaterialItemType(''),
         comment: '',
         defaultMaterialDescription: '',
         hidePrice: false,
@@ -51,10 +54,7 @@ class MaterialItem with _$MaterialItem {
         materialDescription: '',
         remarks: '',
         zdp8Override: Zdp8OverrideValue(0),
-        bundleName: '',
-        bundleCode: '',
         bundleInformation: [],
-        materials: [],
         totalQuantity: 0,
       );
 

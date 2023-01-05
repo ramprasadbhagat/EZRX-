@@ -21,19 +21,23 @@ class BundleDtoAdapter extends TypeAdapter<_$_BundleDto> {
       bundleCode: fields[19] == null ? '' : fields[19] as String,
       bundleInformation:
           fields[20] == null ? [] : (fields[20] as List).cast<BundleInfoDto>(),
+      materials:
+          fields[21] == null ? [] : (fields[21] as List).cast<MaterialDto>(),
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_BundleDto obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(4)
       ..writeByte(18)
       ..write(obj.bundleName)
       ..writeByte(19)
       ..write(obj.bundleCode)
       ..writeByte(20)
-      ..write(obj.bundleInformation);
+      ..write(obj.bundleInformation)
+      ..writeByte(21)
+      ..write(obj.materials);
   }
 
   @override
@@ -58,6 +62,9 @@ _$_BundleDto _$$_BundleDtoFromJson(Map<String, dynamic> json) => _$_BundleDto(
               ?.map((e) => BundleInfoDto.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
+      materials: (handleEmptyMaterialList(json, 'materials') as List<dynamic>)
+          .map((e) => MaterialDto.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$$_BundleDtoToJson(_$_BundleDto instance) =>
@@ -66,4 +73,5 @@ Map<String, dynamic> _$$_BundleDtoToJson(_$_BundleDto instance) =>
       'bundleCode': instance.bundleCode,
       'bundleInformation':
           instance.bundleInformation.map((e) => e.toJson()).toList(),
+      'materials': instance.materials.map((e) => e.toJson()).toList(),
     };

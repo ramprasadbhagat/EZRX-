@@ -182,6 +182,7 @@ const BundleDto _emptyBundleDto = BundleDto(
   bundleName: '',
   bundleCode: '',
   bundleInformation: [],
+  materials: [],
 );
 
 const StockInfoDto _emptyStockInfoDto = StockInfoDto(
