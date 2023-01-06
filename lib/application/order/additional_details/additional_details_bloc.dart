@@ -64,12 +64,6 @@ class AdditionalDetailsBloc
     required Emitter<AdditionalDetailsState> emit,
     required SalesOrganisationConfigs config,
   }) {
-    emit(
-      state.copyWith(
-        isValidated: false,
-        showErrorMessages: false,
-      ),
-    );
     final isCustomerPoReferenceValid = config.ponRequired
         ? state.additionalDetailsData.customerPoReference.isValid()
         : true;
@@ -87,22 +81,12 @@ class AdditionalDetailsBloc
         isContactNumberValid &&
         isPaymentTermValid;
 
-    if (isFormValid) {
-      emit(
-        state.copyWith(
-          isValidated: true,
-          showErrorMessages: false,
-        ),
-      );
-    } else {
-      emit(
-        state.copyWith(
-          isValidated: false,
-          showErrorMessages: true,
-          additionalDetailsData: state.additionalDetailsData,
-        ),
-      );
-    }
+    emit(
+      state.copyWith(
+        isValidated: isFormValid,
+        showErrorMessages: !isFormValid,
+      ),
+    );
   }
 
   void _emitAfterOnTextChange({

@@ -56,6 +56,7 @@ class OrderSummaryBloc extends Bloc<OrderSummaryEvent, OrderSummaryState> {
         ));
       },
       submitOrder: (value) async {
+        if (state.isSubmitting) return;
         emit(
           state.copyWith(
             apiFailureOrSuccessOption: none(),

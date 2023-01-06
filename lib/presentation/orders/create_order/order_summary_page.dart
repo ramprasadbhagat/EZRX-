@@ -175,11 +175,18 @@ class _SubmitContinueButton extends StatelessWidget {
   void _validateForm({
     required BuildContext context,
   }) {
-    context.read<AdditionalDetailsBloc>().add(
+    final orderSummaryBloc = context.read<OrderSummaryBloc>();
+    if(context.read<AdditionalDetailsBloc>().state.isValidated){
+      orderSummaryState.step == orderSummaryState.additionalDetailsStep
+              ? orderSummaryBloc.add(const OrderSummaryEvent.stepContinue())
+              : _submitOrder(context);
+    }else{
+      context.read<AdditionalDetailsBloc>().add(
           AdditionalDetailsEvent.validateForm(
             config: context.read<SalesOrgBloc>().state.configs,
           ),
         );
+    }
   }
 
   void _stepContinue(BuildContext context) {
