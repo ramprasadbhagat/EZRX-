@@ -27,6 +27,11 @@ Contact salesOrgContact(String salesOrg) {
             '(02) 84241228 (Manila Line)\n(049) 5598120 (Laguna Line)\nMobile: 09190560455',
         phoneNumbers: ['0284241228', '0495598120', '09190560455'],
       );
+    case '2504':
+      return Contact(
+        instruction: 'Telephone Number: +632 9082222 (loc 253)',
+        phoneNumbers: ['+6329082222'],
+      );
     case '2601':
       return Contact(
         instruction: '',
@@ -73,6 +78,7 @@ String salesOrgEmail(String value) {
     '2250': 'Zinkohtay@zuelligpharma.com',
     '2500': 'PHZPCallCenter@zuelligpharma.com',
     '2501': 'customerservice@metrodrug.com.ph',
+    '2504': 'customerservice@interpharmasolutions.com',
     '2601': 'SGZPSCallCenterMailbox@zuelligpharma.com',
     '2800': 'ezrx4u@zuelligpharma.com',
     '2801': 'ezrx4u@zuelligpharma.com',
@@ -102,6 +108,7 @@ String salesOrgContactPerson(String value) {
     '2250': 'Mr Zin Ko Htay, Trade Sales Team',
     '2500': 'ZPC Customer Service',
     '2501': 'MDI Customer Service',
+    '2504': 'ISPI Customer Service',
     '2601': 'SG Customer Support',
     '2800': 'eZRx Service Team',
     '2801': 'eZRx Service Team',
@@ -138,6 +145,7 @@ String salesOrgBuName(String salesOrg) {
     '2250': 'ZPMM',
     '2500': 'ZPC PH',
     '2501': 'MDI PH',
+    '2504': 'ISPI PH',
     '2601': 'ZPSG',
     '2800': 'ZPTW',
     '2801': 'ZPTW',
@@ -176,6 +184,7 @@ String salesOrgCountry(String salesOrg) {
     '2250': 'MM',
     '2500': 'PH',
     '2501': 'PH',
+    '2504': 'PH',
     'PH02': 'PH',
     'PH03': 'PH',
     '2601': 'SG',

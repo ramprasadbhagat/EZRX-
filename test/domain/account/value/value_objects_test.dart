@@ -4,6 +4,15 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   group('SalesOrg value object', () {
     test(
+      'should return ISPI when get BU Name with SalesOrg 2504',
+      () async {
+        const input = '2504';
+        final salesOrg = SalesOrg(input);
+        final result = salesOrg.buName;
+        expect(result, 'ISPI PH');
+      },
+    );
+    test(
       'should return ZPTH when get BU Name with SalesOrg 2900',
       () async {
         const input = '2900';
@@ -40,6 +49,16 @@ void main() {
         final salesOrg = SalesOrg(input);
         final result = salesOrg.fullName;
         expect(result, '2601 - ZPSG');
+      },
+    );
+
+    test(
+      'should return 2504 - ISPI PH when get Full Name with SalesOrg 2504',
+      () async {
+        const input = '2504';
+        final salesOrg = SalesOrg(input);
+        final result = salesOrg.fullName;
+        expect(result, '2504 - ISPI PH');
       },
     );
 
@@ -81,6 +100,17 @@ void main() {
         final result = salesOrg.country;
         expect(result, 'TW');
         expect(salesOrg.isTW, true);
+      },
+    );
+
+    test(
+      'should return PH when get country with SalesOrg 2504',
+      () async {
+        const input = '2504';
+        final salesOrg = SalesOrg(input);
+        final result = salesOrg.country;
+        expect(result, 'PH');
+        expect(salesOrg.isPH, true);
       },
     );
 
@@ -366,6 +396,14 @@ void main() {
         expect(result, 'customerservice@metrodrug.com.ph');
       });
       test(
+          'Should Return customerservice@interpharmasolutions.com when Sales org 2504',
+          () {
+        const input = '2504';
+        final salesOrg = SalesOrg(input);
+        final result = salesOrg.contactEmail;
+        expect(result, 'customerservice@interpharmasolutions.com');
+      });
+      test(
           'Should Return SGZPSCallCenterMailbox@zuelligpharma.com when Sales org 2601',
           () {
         const input = '2601';
@@ -525,6 +563,14 @@ void main() {
         final salesOrg = SalesOrg(input);
         final result = salesOrg.contact.phoneNumbers[0];
         expect(result, '+63282366488');
+      });
+
+      test('Should Return Telephone Number: +6329082222 when Sales org 2504',
+          () {
+        const input = '2504';
+        final salesOrg = SalesOrg(input);
+        final result = salesOrg.contact.phoneNumbers[0];
+        expect(result, '+6329082222');
       });
 
       test('Should Return 0284241228  when Sales org 2501', () {
@@ -716,6 +762,13 @@ void main() {
         expect(result, 'MDI Customer Service');
       });
 
+      test('Should Return ISPI Customer Service when Sales org 2504', () {
+        const input = '2504';
+        final salesOrg = SalesOrg(input);
+        final result = salesOrg.contactPersonName;
+        expect(result, 'ISPI Customer Service');
+      });
+
       test('Should Return SG Customer Support when Sales org 2601', () {
         const input = '2601';
         final salesOrg = SalesOrg(input);
@@ -874,6 +927,15 @@ void main() {
       final salesOrg = SalesOrg(input);
       final result = salesOrg.contactEmail;
       expect(result, 'PHZPCallCenter@zuelligpharma.com');
+    });
+
+    test(
+        'Should Return customerservice@interpharmasolutions.com when Sales org 2504',
+        () {
+      const input = '2504';
+      final salesOrg = SalesOrg(input);
+      final result = salesOrg.contactEmail;
+      expect(result, 'customerservice@interpharmasolutions.com');
     });
     test('Should Return customerservice@metrodrug.com.ph when Sales org 2501',
         () {
@@ -1061,6 +1123,13 @@ void main() {
       expect(result, '09190560455');
     });
 
+    test('+6329082222 when Sales org 2504', () {
+      const input = '2504';
+      final salesOrg = SalesOrg(input);
+      final result = salesOrg.contact.phoneNumbers[0];
+      expect(result, '+6329082222');
+    });
+
     test('Should Return +6565483190 when Sales org 2601', () {
       const input = '2601';
       final salesOrg = SalesOrg(input);
@@ -1231,6 +1300,13 @@ void main() {
       expect(result, 'MDI Customer Service');
     });
 
+    test('Should Return ISPI Customer Service when Sales org 2504', () {
+      const input = '2504';
+      final salesOrg = SalesOrg(input);
+      final result = salesOrg.contactPersonName;
+      expect(result, 'ISPI Customer Service');
+    });
+
     test('Should Return SG Customer Support when Sales org 2601', () {
       const input = '2601';
       final salesOrg = SalesOrg(input);
@@ -1370,7 +1446,7 @@ void main() {
       },
     );
 
-  group('RoleName value object', () {
+    group('RoleName value object', () {
 
     test(
       'should return external_sales_rep when user role type is External Sales Rep',
@@ -1411,7 +1487,6 @@ void main() {
         expect(result, false);
       },
     );
-
     });
   });
 }
