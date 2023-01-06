@@ -57,6 +57,8 @@ void main() {
     customerInfos: fakeMultipleSalesOrgCustomerInfos,
   );
 
+  const fakePageSize = 10;
+
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
 
@@ -110,11 +112,13 @@ void main() {
         );
 
         when(() => customerCodeMockRepo.getCustomerCode(
-              fakeSaleOrg,
-              fakeSalesOrgCustomerInfos.first.customerCodeSoldTo.getOrCrash(),
-              false,
-              0,
-              fakeUser,
+              salesOrganisation: fakeSaleOrg,
+              customerCode: fakeSalesOrgCustomerInfos.first.customerCodeSoldTo
+                  .getOrCrash(),
+              hideCustomer: false,
+              offset: 0,
+              user: fakeUser,
+              pageSize: fakePageSize,
             )).thenAnswer(
           (invocation) async => const Left(
             ApiFailure.other('fake-error'),
@@ -122,11 +126,12 @@ void main() {
         );
 
         when(() => customerCodeMockRepo.getCustomerCode(
-              fakeSaleOrg,
-              AccountSelector.empty().customerCode,
-              false,
-              0,
-              fakeUser,
+              salesOrganisation: fakeSaleOrg,
+              customerCode: AccountSelector.empty().customerCode,
+              hideCustomer: false,
+              offset: 0,
+              user: fakeUser,
+              pageSize: fakePageSize,
             )).thenAnswer(
           (invocation) async => const Left(
             ApiFailure.other('fake-error'),
@@ -168,11 +173,14 @@ void main() {
         ).thenAnswer((invocation) async => const Right(unit));
 
         when(() => customerCodeMockRepo.getCustomerCode(
-            fakeSaleOrg,
-            fakeSalesOrgCustomerInfos.first.customerCodeSoldTo.getOrCrash(),
-            false,
-            0,
-            fakeUser)).thenAnswer(
+              salesOrganisation: fakeSaleOrg,
+              customerCode: fakeSalesOrgCustomerInfos.first.customerCodeSoldTo
+                  .getOrCrash(),
+              hideCustomer: false,
+              offset: 0,
+              user: fakeUser,
+              pageSize: fakePageSize,
+            )).thenAnswer(
           (invocation) async => Right(
             customerMockData,
           ),
@@ -232,7 +240,13 @@ void main() {
           CustomerCodeBloc(customerCodeRepository: customerCodeMockRepo),
       setUp: () {
         when(() => customerCodeMockRepo.getCustomerCode(
-            fakeSaleOrg, 'fake-customer-code', false, 0, fakeUser)).thenAnswer(
+              salesOrganisation: fakeSaleOrg,
+              customerCode: 'fake-customer-code',
+              hideCustomer: false,
+              offset: 0,
+              user: fakeUser,
+              pageSize: fakePageSize,
+            )).thenAnswer(
           (invocation) async => Right(
             [
               CustomerCodeInfo.empty()
@@ -273,7 +287,13 @@ void main() {
           CustomerCodeBloc(customerCodeRepository: customerCodeMockRepo),
       setUp: () {
         when(() => customerCodeMockRepo.getCustomerCode(
-            fakeSaleOrg, 'fake-customer-code', false, 0, fakeUser)).thenAnswer(
+              salesOrganisation: fakeSaleOrg,
+              customerCode: 'fake-customer-code',
+              hideCustomer: false,
+              offset: 0,
+              user: fakeUser,
+              pageSize: fakePageSize,
+            )).thenAnswer(
           (invocation) async => const Left(
             ApiFailure.other('fake-error'),
           ),
@@ -313,11 +333,13 @@ void main() {
           CustomerCodeBloc(customerCodeRepository: customerCodeMockRepo),
       setUp: () {
         when(() => customerCodeMockRepo.getCustomerCode(
-              fakeSaleOrg,
-              fakeSalesOrgCustomerInfos.first.customerCodeSoldTo.getOrCrash(),
-              false,
-              0,
-              fakeUser,
+              salesOrganisation: fakeSaleOrg,
+              customerCode: fakeSalesOrgCustomerInfos.first.customerCodeSoldTo
+                  .getOrCrash(),
+              hideCustomer: false,
+              offset: 0,
+              user: fakeUser,
+              pageSize: fakePageSize,
             )).thenAnswer(
           (invocation) async => const Left(
             ApiFailure.other('fake-error'),
@@ -354,11 +376,13 @@ void main() {
           CustomerCodeBloc(customerCodeRepository: customerCodeMockRepo),
       setUp: () {
         when(() => customerCodeMockRepo.getCustomerCode(
-              fakeSaleOrg,
-              fakeSalesOrgCustomerInfos.first.customerCodeSoldTo.getOrCrash(),
-              false,
-              0,
-              fakeUser,
+              salesOrganisation: fakeSaleOrg,
+              customerCode: fakeSalesOrgCustomerInfos.first.customerCodeSoldTo
+                  .getOrCrash(),
+              hideCustomer: false,
+              offset: 0,
+              user: fakeUser,
+              pageSize: fakePageSize,
             )).thenAnswer(
           (invocation) async => Right(
             customerMockData,
@@ -395,11 +419,13 @@ void main() {
           CustomerCodeBloc(customerCodeRepository: customerCodeMockRepo),
       setUp: () {
         when(() => customerCodeMockRepo.getCustomerCode(
-              fakeSaleOrg,
-              fakeSalesOrgCustomerInfos.first.customerCodeSoldTo.getOrCrash(),
-              false,
-              0,
-              fakeUser,
+              salesOrganisation: fakeSaleOrg,
+              customerCode: fakeSalesOrgCustomerInfos.first.customerCodeSoldTo
+                  .getOrCrash(),
+              hideCustomer: false,
+              offset: 0,
+              user: fakeUser,
+              pageSize: fakePageSize,
             )).thenAnswer(
           (invocation) async => Right(
             customerMockData,
@@ -447,11 +473,14 @@ void main() {
             .thenAnswer((_) async => const Left(ApiFailure.serverTimeout()));
 
         when(() => customerCodeMockRepo.getCustomerCode(
-            fakeSaleOrg,
-            fakeSalesOrgCustomerInfos.first.customerCodeSoldTo.getOrCrash(),
-            false,
-            0,
-            fakeUser)).thenAnswer(
+              salesOrganisation: fakeSaleOrg,
+              customerCode: fakeSalesOrgCustomerInfos.first.customerCodeSoldTo
+                  .getOrCrash(),
+              hideCustomer: false,
+              offset: 0,
+              user: fakeUser,
+              pageSize: fakePageSize,
+            )).thenAnswer(
           (invocation) async => Right(
             customerMockData,
           ),
@@ -492,18 +521,27 @@ void main() {
                 shippingAddress: 'mockShippingAddress')));
 
         when(() => customerCodeMockRepo.getCustomerCode(
-            fakeSaleOrg, 'mockCustomerCode', false, 0, fakeUser)).thenAnswer(
+              salesOrganisation: fakeSaleOrg,
+              customerCode: 'mockCustomerCode',
+              hideCustomer: false,
+              offset: 0,
+              user: fakeUser,
+              pageSize: fakePageSize,
+            )).thenAnswer(
           (invocation) async => const Left(
             ApiFailure.serverTimeout(),
           ),
         );
 
         when(() => customerCodeMockRepo.getCustomerCode(
-            fakeSaleOrg,
-            fakeSalesOrgCustomerInfos.first.customerCodeSoldTo.getOrCrash(),
-            false,
-            0,
-            fakeUser)).thenAnswer(
+              salesOrganisation: fakeSaleOrg,
+              customerCode: fakeSalesOrgCustomerInfos.first.customerCodeSoldTo
+                  .getOrCrash(),
+              hideCustomer: false,
+              offset: 0,
+              user: fakeUser,
+              pageSize: fakePageSize,
+            )).thenAnswer(
           (invocation) async => Right(
             customerMockData,
           ),
@@ -544,16 +582,25 @@ void main() {
                 shippingAddress: 'mockShippingAddress')));
 
         when(() => customerCodeMockRepo.getCustomerCode(
-            fakeSaleOrg, 'mockCustomerCode', false, 0, fakeUser)).thenAnswer(
+              salesOrganisation: fakeSaleOrg,
+              customerCode: 'mockCustomerCode',
+              hideCustomer: false,
+              offset: 0,
+              user: fakeUser,
+              pageSize: fakePageSize,
+            )).thenAnswer(
           (invocation) async => const Right([]),
         );
 
         when(() => customerCodeMockRepo.getCustomerCode(
-            fakeSaleOrg,
-            fakeSalesOrgCustomerInfos.first.customerCodeSoldTo.getOrCrash(),
-            false,
-            0,
-            fakeUser)).thenAnswer(
+              salesOrganisation: fakeSaleOrg,
+              customerCode: fakeSalesOrgCustomerInfos.first.customerCodeSoldTo
+                  .getOrCrash(),
+              hideCustomer: false,
+              offset: 0,
+              user: fakeUser,
+              pageSize: fakePageSize,
+            )).thenAnswer(
           (invocation) async => Right(
             customerMockData,
           ),
@@ -594,16 +641,25 @@ void main() {
                 shippingAddress: 'mockShippingAddress')));
 
         when(() => customerCodeMockRepo.getCustomerCode(
-            fakeSaleOrg, 'mockCustomerCode', false, 0, fakeUser)).thenAnswer(
+              salesOrganisation: fakeSaleOrg,
+              customerCode: 'mockCustomerCode',
+              hideCustomer: false,
+              offset: 0,
+              user: fakeUser,
+              pageSize: fakePageSize,
+            )).thenAnswer(
           (invocation) async => Right([customerMockData.first]),
         );
 
         when(() => customerCodeMockRepo.getCustomerCode(
-            fakeSaleOrg,
-            fakeSalesOrgCustomerInfos.first.customerCodeSoldTo.getOrCrash(),
-            false,
-            0,
-            fakeUser)).thenAnswer(
+              salesOrganisation: fakeSaleOrg,
+              customerCode: fakeSalesOrgCustomerInfos.first.customerCodeSoldTo
+                  .getOrCrash(),
+              hideCustomer: false,
+              offset: 0,
+              user: fakeUser,
+              pageSize: fakePageSize,
+            )).thenAnswer(
           (invocation) async => Right(
             customerMockData,
           ),
@@ -645,24 +701,26 @@ void main() {
           CustomerCodeBloc(customerCodeRepository: customerCodeMockRepo),
       setUp: () {
         when(() => customerCodeMockRepo.getCustomerCode(
-              fakeSaleOrgWithMultipleCustomerInfo,
-              fakeMultipleSalesOrgCustomerInfos[0]
+              salesOrganisation: fakeSaleOrgWithMultipleCustomerInfo,
+              customerCode: fakeMultipleSalesOrgCustomerInfos[0]
                   .customerCodeSoldTo
                   .checkAllOrCustomerCode,
-              false,
-              0,
-              fakeUser,
+              hideCustomer: false,
+              offset: 0,
+              user: fakeUser,
+              pageSize: fakePageSize,
             )).thenAnswer(
           (invocation) async => Right([customerMockData.first]),
         );
         when(() => customerCodeMockRepo.getCustomerCode(
-              fakeSaleOrgWithMultipleCustomerInfo,
-              fakeMultipleSalesOrgCustomerInfos[1]
+              salesOrganisation: fakeSaleOrgWithMultipleCustomerInfo,
+              customerCode: fakeMultipleSalesOrgCustomerInfos[1]
                   .customerCodeSoldTo
                   .checkAllOrCustomerCode,
-              false,
-              1,
-              fakeUser,
+              hideCustomer: false,
+              offset: 1,
+              user: fakeUser,
+              pageSize: fakePageSize,
             )).thenAnswer(
           (invocation) async => Right([customerMockData.first]),
         );
@@ -702,13 +760,14 @@ void main() {
           CustomerCodeBloc(customerCodeRepository: customerCodeMockRepo),
       setUp: () {
         when(() => customerCodeMockRepo.getCustomerCode(
-              fakeSaleOrg,
-              fakeSalesOrgCustomerInfos[0]
+              salesOrganisation: fakeSaleOrg,
+              customerCode: fakeSalesOrgCustomerInfos[0]
                   .customerCodeSoldTo
                   .checkAllOrCustomerCode,
-              false,
-              0,
-              fakeUser,
+              hideCustomer: false,
+              offset: 0,
+              user: fakeUser,
+              pageSize: fakePageSize,
             )).thenAnswer(
           (invocation) async => const Right(<CustomerCodeInfo>[]),
         );
@@ -727,14 +786,12 @@ void main() {
         CustomerCodeState.initial().copyWith(isFetching: true),
         CustomerCodeState.initial().copyWith(
           isFetching: false,
-         customerCodeInfo: CustomerCodeInfo.empty(),
+          customerCodeInfo: CustomerCodeInfo.empty(),
           customerCodeList: [],
           apiFailureOrSuccessOption: none(),
           canLoadMore: false,
         ),
       ],
-    );  
-
-
+    );
   });
 }

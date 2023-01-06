@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/account_selector.dart';
@@ -8,9 +9,9 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/repository/i_customer_code_repository.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/account_selector_storage.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_remote.dart';
-import 'package:ezrxmobile/infrastructure/account/datasource/account_selector_storage.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/account_selector_storage_dto.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 
@@ -30,13 +31,14 @@ class CustomerCodeRepository implements ICustomerCodeRepository {
   });
 
   @override
-  Future<Either<ApiFailure, List<CustomerCodeInfo>>> getCustomerCode(
-    SalesOrganisation salesOrganisation,
-    String customerCode,
-    bool hideCustomer,
-    int pageIndex,
-    User user,
-  ) async {
+  Future<Either<ApiFailure, List<CustomerCodeInfo>>> getCustomerCode({
+    required SalesOrganisation salesOrganisation,
+    required String customerCode,
+    required bool hideCustomer,
+    required User user,
+    required int pageSize,
+    required int offset,
+  }) async {
     final salesOrg = salesOrganisation.salesOrg.getOrCrash();
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -54,15 +56,17 @@ class CustomerCodeRepository implements ICustomerCodeRepository {
           ? await remoteDataSource.getSalesRepCustomerCodeList(
               salesOrg: salesOrg,
               customerCode: customerCode,
-              paginate: pageIndex,
               hidecustomer: hideCustomer,
               userName: user.username.getOrCrash(),
+              pageSize: pageSize,
+              offset: offset,
             )
           : await remoteDataSource.getCustomerCodeList(
               salesOrg: salesOrg,
               customerCode: customerCode,
-              paginate: pageIndex,
               hidecustomer: hideCustomer,
+              pageSize: pageSize,
+              offset: offset,
             );
 
       return Right(customerCodeInfo);

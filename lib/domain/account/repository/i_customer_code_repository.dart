@@ -6,13 +6,14 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 
 abstract class ICustomerCodeRepository {
-  Future<Either<ApiFailure, List<CustomerCodeInfo>>> getCustomerCode(
-    SalesOrganisation salesOrganisation,
-    String customerCode,
-    bool hideCustomer,
-    int pageIndex,
-    User user,
-  );
+  Future<Either<ApiFailure, List<CustomerCodeInfo>>> getCustomerCode({
+    required SalesOrganisation salesOrganisation,
+    required String customerCode,
+    required bool hideCustomer,
+    required int offset,
+    required User user,
+    required int pageSize,
+  });
 
   Future<Either<ApiFailure, Unit>> storeCustomerCode({
     required String customerCode,

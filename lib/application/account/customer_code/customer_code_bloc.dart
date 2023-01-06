@@ -1,3 +1,4 @@
+import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
@@ -8,7 +9,6 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:bloc_concurrency/bloc_concurrency.dart';
 
 part 'customer_code_bloc.freezed.dart';
 part 'customer_code_event.dart';
@@ -45,11 +45,12 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
         isFetching: true,
       ));
       final failureOrSuccess = await customerCodeRepository.getCustomerCode(
-        e.selectedSalesOrg,
-        state.searchKey.getValue(),
-        e.hidecustomer,
-        state.customerCodeList.length,
-        e.userInfo,
+        salesOrganisation: e.selectedSalesOrg,
+        customerCode: state.searchKey.getValue(),
+        hideCustomer: e.hidecustomer,
+        user: e.userInfo,
+        pageSize: _pageSize,
+        offset: state.customerCodeList.length,
       );
       failureOrSuccess.fold(
         (failure) {
@@ -99,11 +100,12 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
       }
 
       final failureOrSuccess = await customerCodeRepository.getCustomerCode(
-        e.selectedSalesOrg,
-        lastSavedCustomerCode,
-        e.hidecustomer,
-        state.customerCodeList.length,
-        e.userInfo,
+        salesOrganisation: e.selectedSalesOrg,
+        customerCode: lastSavedCustomerCode,
+        hideCustomer: e.hidecustomer,
+        user: e.userInfo,
+        pageSize: _pageSize,
+        offset: state.customerCodeList.length,
       );
 
       final customerCodeInfoList =
@@ -149,11 +151,13 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
 
         for (final customerItem in finalCustomerCodeinfo) {
           final failureOrSuccess = await customerCodeRepository.getCustomerCode(
-            e.selectedSalesOrg,
-            customerItem.customerCodeSoldTo.checkAllOrCustomerCode,
-            e.hidecustomer,
-            state.customerCodeList.length,
-            e.userInfo,
+            salesOrganisation: e.selectedSalesOrg,
+            customerCode:
+                customerItem.customerCodeSoldTo.checkAllOrCustomerCode,
+            hideCustomer: e.hidecustomer,
+            user: e.userInfo,
+            pageSize: _pageSize,
+            offset: state.customerCodeList.length,
           );
           failureOrSuccess.fold(
             (failure) {
@@ -210,11 +214,12 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
               : '';
       if (customerCodeInfo.isEmpty) return;
       final failureOrSuccess = await customerCodeRepository.getCustomerCode(
-        e.selectedSalesOrg,
-        customerCodeInfo,
-        e.hidecustomer,
-        state.customerCodeList.length,
-        e.userInfo,
+        salesOrganisation: e.selectedSalesOrg,
+        customerCode: customerCodeInfo,
+        hideCustomer: e.hidecustomer,
+        user: e.userInfo,
+        pageSize: _pageSize,
+        offset: state.customerCodeList.length,
       );
       failureOrSuccess.fold(
         (failure) {

@@ -24,8 +24,9 @@ class CustomerCodeRemoteDataSource {
   Future<List<CustomerCodeInfo>> getCustomerCodeList({
     required String customerCode,
     required String salesOrg,
-    required int paginate,
     required bool hidecustomer,
+    required int pageSize,
+    required int offset,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
       final queryData = customerCodeQueryMutation.getCustomerInfoBySearch();
@@ -33,8 +34,8 @@ class CustomerCodeRemoteDataSource {
       final variables = {
         'searchKey': customerCode,
         'salesOrganisation': salesOrg,
-        'first': 20,
-        'after': paginate,
+        'first': pageSize,
+        'after': offset,
         'filterBlockCustomer': hidecustomer,
       };
 
@@ -61,17 +62,18 @@ class CustomerCodeRemoteDataSource {
   Future<List<CustomerCodeInfo>> getSalesRepCustomerCodeList({
     required String customerCode,
     required String salesOrg,
-    required int paginate,
     required bool hidecustomer,
     required String userName,
+    required int pageSize,
+    required int offset,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
       final queryData = customerCodeQueryMutation.getCustomerListForSalesRep();
 
       final variables = {
         'salesOrganisation': salesOrg,
-        'first': 20,
-        'after': paginate,
+        'first': pageSize,
+        'after': offset,
         'username': userName,
       };
 

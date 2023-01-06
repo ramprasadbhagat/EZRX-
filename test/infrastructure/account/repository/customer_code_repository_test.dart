@@ -29,7 +29,8 @@ class ConfigMock extends Mock implements Config {}
 class CountlyServiceMock extends Mock implements CountlyService {}
 
 void main() {
-  late int pageIndex;
+  late int offset;
+  late int pageSize;
   late Config configMock;
   late bool hideCustomer;
   late String mockCustomerCode;
@@ -48,7 +49,8 @@ void main() {
     customerCodeLocalDataSourceMock = CustomerCodeLocalDataSourceMock();
     customerCodeRemoteDataSourceMock = CustomerCodeRemoteDataSourceMock();
 
-    pageIndex = 0;
+    offset = 0;
+    pageSize = 10;
     hideCustomer = true;
     mockCustomerCode = 'mockCustomerCode';
     mockSalesOrg = SalesOrganisation.empty().copyWith(
@@ -90,11 +92,12 @@ void main() {
           .thenAnswer((invocation) async => <CustomerCodeInfo>[]);
 
       final result = await customerCodeRepository.getCustomerCode(
-        mockSalesOrg,
-        mockCustomerCode,
-        hideCustomer,
-        pageIndex,
-        mockSalesRepUser,
+        salesOrganisation: mockSalesOrg,
+        customerCode: mockCustomerCode,
+        hideCustomer: hideCustomer,
+        offset: offset,
+        user: mockSalesRepUser,
+        pageSize: pageSize,
       );
 
       expect(result.isRight(), true);
@@ -108,11 +111,12 @@ void main() {
           .thenThrow((invocation) async => MockException());
 
       final result = await customerCodeRepository.getCustomerCode(
-        mockSalesOrg,
-        mockCustomerCode,
-        hideCustomer,
-        pageIndex,
-        mockSalesRepUser,
+        salesOrganisation: mockSalesOrg,
+        customerCode: mockCustomerCode,
+        hideCustomer: hideCustomer,
+        offset: offset,
+        user: mockSalesRepUser,
+        pageSize: pageSize,
       );
 
       expect(result.isLeft(), true);
@@ -127,11 +131,12 @@ void main() {
           .thenAnswer((invocation) async => <CustomerCodeInfo>[]);
 
       final result = await customerCodeRepository.getCustomerCode(
-        mockSalesOrg,
-        mockCustomerCode,
-        hideCustomer,
-        pageIndex,
-        mockClientUser,
+        salesOrganisation: mockSalesOrg,
+        customerCode: mockCustomerCode,
+        hideCustomer: hideCustomer,
+        offset: offset,
+        user: mockClientUser,
+        pageSize: pageSize,
       );
 
       expect(result.isRight(), true);
@@ -146,11 +151,12 @@ void main() {
           .thenThrow((invocation) async => MockException());
 
       final result = await customerCodeRepository.getCustomerCode(
-        mockSalesOrg,
-        mockCustomerCode,
-        hideCustomer,
-        pageIndex,
-        mockClientUser,
+        salesOrganisation: mockSalesOrg,
+        customerCode: mockCustomerCode,
+        hideCustomer: hideCustomer,
+        offset: offset,
+        user: mockClientUser,
+        pageSize: pageSize,
       );
 
       expect(result.isLeft(), true);
@@ -165,18 +171,20 @@ void main() {
         () => customerCodeRemoteDataSourceMock.getSalesRepCustomerCodeList(
           customerCode: mockCustomerCode,
           salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
-          paginate: pageIndex,
           hidecustomer: hideCustomer,
           userName: mockSalesRepUser.username.getOrCrash(),
+          pageSize: pageSize,
+          offset: offset,
         ),
       ).thenAnswer((invocation) async => <CustomerCodeInfo>[]);
 
       final result = await customerCodeRepository.getCustomerCode(
-        mockSalesOrg,
-        mockCustomerCode,
-        hideCustomer,
-        pageIndex,
-        mockSalesRepUser,
+        salesOrganisation: mockSalesOrg,
+        customerCode: mockCustomerCode,
+        hideCustomer: hideCustomer,
+        offset: offset,
+        user: mockSalesRepUser,
+        pageSize: pageSize,
       );
 
       expect(result.isRight(), true);
@@ -190,18 +198,20 @@ void main() {
         () => customerCodeRemoteDataSourceMock.getSalesRepCustomerCodeList(
           customerCode: mockCustomerCode,
           salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
-          paginate: pageIndex,
           hidecustomer: hideCustomer,
           userName: mockSalesRepUser.username.getOrCrash(),
+          pageSize: pageSize,
+          offset: offset,
         ),
       ).thenThrow((invocation) async => Error());
 
       final result = await customerCodeRepository.getCustomerCode(
-        mockSalesOrg,
-        mockCustomerCode,
-        hideCustomer,
-        pageIndex,
-        mockSalesRepUser,
+        salesOrganisation: mockSalesOrg,
+        customerCode: mockCustomerCode,
+        hideCustomer: hideCustomer,
+        offset: offset,
+        user: mockSalesRepUser,
+        pageSize: pageSize,
       );
 
       expect(result.isLeft(), true);
@@ -216,17 +226,19 @@ void main() {
         () => customerCodeRemoteDataSourceMock.getCustomerCodeList(
           customerCode: mockCustomerCode,
           salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
-          paginate: pageIndex,
           hidecustomer: hideCustomer,
+          pageSize: pageSize,
+          offset: offset,
         ),
       ).thenAnswer((invocation) async => <CustomerCodeInfo>[]);
 
       final result = await customerCodeRepository.getCustomerCode(
-        mockSalesOrg,
-        mockCustomerCode,
-        hideCustomer,
-        pageIndex,
-        mockClientUser,
+        salesOrganisation: mockSalesOrg,
+        customerCode: mockCustomerCode,
+        hideCustomer: hideCustomer,
+        offset: offset,
+        user: mockClientUser,
+        pageSize: pageSize,
       );
 
       expect(result.isRight(), true);
@@ -241,17 +253,19 @@ void main() {
         () => customerCodeRemoteDataSourceMock.getCustomerCodeList(
           customerCode: mockCustomerCode,
           salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
-          paginate: pageIndex,
           hidecustomer: hideCustomer,
+          pageSize: pageSize,
+          offset: offset,
         ),
       ).thenThrow((invocation) async => Error());
 
       final result = await customerCodeRepository.getCustomerCode(
-        mockSalesOrg,
-        mockCustomerCode,
-        hideCustomer,
-        pageIndex,
-        mockClientUser,
+        salesOrganisation: mockSalesOrg,
+        customerCode: mockCustomerCode,
+        hideCustomer: hideCustomer,
+        offset: offset,
+        user: mockClientUser,
+        pageSize: pageSize,
       );
 
       expect(result.isLeft(), true);
