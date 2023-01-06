@@ -118,6 +118,7 @@ class OrderTemplateRepository implements IOrderTemplateRepository {
 
       final newOrderTemplateList = List<OrderTemplate>.from(templateList)
         ..insert(0, savedTemplate);
+
       await countlyService.addCountlyEvent('save_as_template');
 
       return right(newOrderTemplateList);

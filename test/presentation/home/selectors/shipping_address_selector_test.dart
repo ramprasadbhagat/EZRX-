@@ -108,7 +108,7 @@ final fakeShipToInfo2 =
     ShipToInfo.empty().copyWith(shipToCustomerCode: '00001235');
 
 final fakeCustomerInfo =
-    CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: '00001234');
+    CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: '00001234456');
 
 final fakeUser = User.empty().copyWith(
   username: Username('fake-user'),

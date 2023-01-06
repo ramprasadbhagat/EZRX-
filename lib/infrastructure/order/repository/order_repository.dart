@@ -202,7 +202,8 @@ class OrderRepository implements IOrderRepository {
     if (config.appFlavor == Flavor.mock) {
       try {
         final submitOrderResponse = await localDataSource.submitOrder(
-          submitOrder: SubmitOrderDto.fromDomain(submitOrder, configs.currency.getValue()),
+          submitOrder: SubmitOrderDto.fromDomain(
+              submitOrder, configs.currency.getValue(),),
         );
 
         return Right(submitOrderResponse);
@@ -214,7 +215,8 @@ class OrderRepository implements IOrderRepository {
     }
     try {
       final submitOrderResponse = await remoteDataSource.submitOrder(
-        submitOrder: SubmitOrderDto.fromDomain(submitOrder, configs.currency.getValue()),
+        submitOrder:
+            SubmitOrderDto.fromDomain(submitOrder, configs.currency.getValue()),
       );
 
       return Right(submitOrderResponse);
@@ -304,7 +306,8 @@ class OrderRepository implements IOrderRepository {
           : '',
       purchaseOrderType: user.role.type.purchaseOrderType,
       shippingCondition: '',
-      paymentTerms: cartItems.first.tenderContract.contractPaymentTerm.getValue(),
+      paymentTerms:
+          cartItems.first.tenderContract.contractPaymentTerm.getValue(),
       customer: _getSubmitOrderCustomer(
         customerCodeInfo: customerCodeInfo,
         salesOrganisation: salesOrganisation,
@@ -334,16 +337,6 @@ List<SubmitMaterialInfo> _getMaterialInfoList({
   required List<PriceAggregate> cartItems,
 }) {
   return cartItems.map((e) => e.toSubmitMaterialInfo()).toList();
-}
-
-bool gettenderAvailability({
-  required PriceAggregate cartItem,
-}) {
-  //TODO : also need to check if tenderContractDetails is null or not, it will come from tenderContractDetails query
-  return cartItem.materialInfo.hasValidTenderContract ||
-          cartItem.materialInfo.hasMandatoryTenderContract
-      ? true
-      : false;
 }
 
 String getOrderType({
