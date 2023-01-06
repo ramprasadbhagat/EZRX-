@@ -18,14 +18,12 @@ class UserRestrictionListState with _$UserRestrictionListState {
         apiFailureOrSuccessOption: none(),
       );
 
-  List<String> getSearchedUsernamesList() {
-    if (searchKey.isEmpty) return usernames;
-
-    final filteredList = usernames
-        .where((element) =>
-            element.toLowerCase().contains(searchKey.toLowerCase()))
-        .toList();
-
-    return filteredList;
+  List<String> get getSearchedUsernamesList {
+    return searchKey.isEmpty
+        ? usernames
+        : usernames
+            .where((element) =>
+                element.toLowerCase().contains(searchKey.toLowerCase()))
+            .toList();
   }
 }
