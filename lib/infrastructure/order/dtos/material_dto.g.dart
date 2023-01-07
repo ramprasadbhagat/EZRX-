@@ -139,7 +139,7 @@ _$_MaterialDto _$$_MaterialDtoFromJson(Map<String, dynamic> json) =>
       defaultMaterialDescription:
           json['defaultMaterialDescription'] as String? ?? '',
       isFOCMaterial: json['isFOCMaterial'] as bool? ?? false,
-      quantity: json['quantity'] as int? ?? 0,
+      quantity: _validateQantity(json, 'quantity') as int? ?? 0,
       remarks: json['remarks'] as String? ?? '',
     );
 

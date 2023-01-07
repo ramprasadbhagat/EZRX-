@@ -63,7 +63,7 @@ mixin _$MaterialItemDto {
   double get zdp8Override => throw _privateConstructorUsedError;
   @JsonKey(name: 'remarks', defaultValue: '')
   String get remarks => throw _privateConstructorUsedError;
-  @JsonKey(name: 'BundleInformation', defaultValue: [])
+  @JsonKey(name: 'bundleInformation', defaultValue: [])
   List<BundleInfoDto> get bundleInformation =>
       throw _privateConstructorUsedError;
   @JsonKey(name: 'totalQuantity', defaultValue: 0)
@@ -120,7 +120,7 @@ abstract class $MaterialItemDtoCopyWith<$Res> {
           double zdp8Override,
       @JsonKey(name: 'remarks', defaultValue: '')
           String remarks,
-      @JsonKey(name: 'BundleInformation', defaultValue: [])
+      @JsonKey(name: 'bundleInformation', defaultValue: [])
           List<BundleInfoDto> bundleInformation,
       @JsonKey(name: 'totalQuantity', defaultValue: 0)
           int totalQuantity});
@@ -297,7 +297,7 @@ abstract class _$$_MaterialItemDtoCopyWith<$Res>
           double zdp8Override,
       @JsonKey(name: 'remarks', defaultValue: '')
           String remarks,
-      @JsonKey(name: 'BundleInformation', defaultValue: [])
+      @JsonKey(name: 'bundleInformation', defaultValue: [])
           List<BundleInfoDto> bundleInformation,
       @JsonKey(name: 'totalQuantity', defaultValue: 0)
           int totalQuantity});
@@ -467,7 +467,7 @@ class _$_MaterialItemDto extends _MaterialItemDto {
           required this.zdp8Override,
       @JsonKey(name: 'remarks', defaultValue: '')
           required this.remarks,
-      @JsonKey(name: 'BundleInformation', defaultValue: [])
+      @JsonKey(name: 'bundleInformation', defaultValue: [])
           required final List<BundleInfoDto> bundleInformation,
       @JsonKey(name: 'totalQuantity', defaultValue: 0)
           required this.totalQuantity})
@@ -553,7 +553,7 @@ class _$_MaterialItemDto extends _MaterialItemDto {
   final String remarks;
   final List<BundleInfoDto> _bundleInformation;
   @override
-  @JsonKey(name: 'BundleInformation', defaultValue: [])
+  @JsonKey(name: 'bundleInformation', defaultValue: [])
   List<BundleInfoDto> get bundleInformation {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_bundleInformation);
@@ -695,7 +695,7 @@ abstract class _MaterialItemDto extends MaterialItemDto {
           required final double zdp8Override,
       @JsonKey(name: 'remarks', defaultValue: '')
           required final String remarks,
-      @JsonKey(name: 'BundleInformation', defaultValue: [])
+      @JsonKey(name: 'bundleInformation', defaultValue: [])
           required final List<BundleInfoDto> bundleInformation,
       @JsonKey(name: 'totalQuantity', defaultValue: 0)
           required final int totalQuantity}) = _$_MaterialItemDto;
@@ -767,7 +767,7 @@ abstract class _MaterialItemDto extends MaterialItemDto {
   @JsonKey(name: 'remarks', defaultValue: '')
   String get remarks;
   @override
-  @JsonKey(name: 'BundleInformation', defaultValue: [])
+  @JsonKey(name: 'bundleInformation', defaultValue: [])
   List<BundleInfoDto> get bundleInformation;
   @override
   @JsonKey(name: 'totalQuantity', defaultValue: 0)

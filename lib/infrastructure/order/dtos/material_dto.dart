@@ -74,7 +74,7 @@ class MaterialDto with _$MaterialDto {
     @JsonKey(name: 'isFOCMaterial', defaultValue: false)
     @HiveField(19, defaultValue: false)
         required bool isFOCMaterial,
-    @JsonKey(name: 'quantity', defaultValue: 0)
+    @JsonKey(name: 'quantity', defaultValue: 0, readValue: _validateQantity)
     @HiveField(20, defaultValue: 0)
         required int quantity,
     @JsonKey(name: 'remarks', defaultValue: '')
@@ -150,4 +150,12 @@ List handleEmptyTaxList(Map json, String key) {
   }
 
   return json[key];
+}
+
+int _validateQantity(Map json, String key) {
+  return (json[key] ?? 0) > 0
+      ? json[key]
+      : (json['qty'] ?? 0) > 0
+          ? json['qty']
+          : 0;
 }

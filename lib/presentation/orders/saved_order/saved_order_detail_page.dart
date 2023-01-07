@@ -9,7 +9,9 @@ import 'package:ezrxmobile/application/order/material_price_detail/material_pric
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
-import 'package:ezrxmobile/domain/order/entities/bundle_info.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/entities/material_item.dart';
+import 'package:ezrxmobile/domain/order/entities/material_price_detail.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
@@ -174,49 +176,112 @@ class SavedOrderDetailPage extends StatelessWidget {
     );
   }
 
-  void _addToCartPressed(BuildContext context, MaterialPriceDetailState state) {
+  PriceAggregate _getCommercialTypeMaterial({
+    required MaterialPriceDetail itemInfo,
+    required MaterialItem material,
+    required BuildContext context,
+    required bool isBundle,
+    required MaterialInfo materialInfo,
+  }) {
     final cartBloc = context.read<CartBloc>();
-    cartBloc.add(const CartEvent.clearCart());
-    final priceAggregateList = order.items.map((material) {
-      final itemInfo = state.materialDetails[material.queryInfo];
+    final priceAggregate = PriceAggregate(
+      price: isBundle
+          ? itemInfo.price
+          : itemInfo.price.copyWith(
+              isPriceOverride: material.overridenPrice.isValid(),
+              zdp8Override: material.zdp8Override,
+              priceOverride: material.overridenPrice,
+            ),
+      materialInfo: itemInfo.info,
+      salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+      quantity: isBundle ? materialInfo.quantity : material.qty,
+      discountedMaterialCount: cartBloc.state.zmgMaterialCount,
+      bundle: isBundle
+          ? Bundle(
+              bundleName: BundleName(material.bundleName),
+              bundleCode: material.bundleCode,
+              bundleInformation: material.bundleInformation,
+              materials: material.materials,
+            )
+          : Bundle.empty(),
+      addedBonusList: material.bonuses,
+      stockInfo: StockInfo.empty().copyWith(
+        materialNumber: itemInfo.info.materialNumber,
+      ),
+      tenderContract: TenderContract.empty(),
+    );
 
+    return priceAggregate.copyWith(
+      addedBonusList: List.from(priceAggregate.addedBonusList)
+        ..addAll(priceAggregate.getMaterialItemBonus),
+    );
+  }
+
+  List<PriceAggregate> _getBundleTypeMaterials({
+    required MaterialPriceDetailState state,
+    required MaterialItem material,
+    required BuildContext context,
+    required bool isBundle,
+  }) {
+    return material.materials.map((materialInfo) {
+      final itemInfo = state.materialDetails[materialInfo.queryInfo];
       if (itemInfo != null) {
-        final priceAggregate = PriceAggregate(
-          price: itemInfo.price.copyWith(
-            isPriceOverride: material.overridenPrice.isValid(),
-            zdp8Override: material.zdp8Override,
-            priceOverride: material.overridenPrice,
-          ),
-          materialInfo: itemInfo.info,
-          salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
-          quantity: material.qty,
-          discountedMaterialCount: cartBloc.state.zmgMaterialCount,
-          bundle: material.type.isBundle
-              ? Bundle(
-                  bundleName: BundleName(material.bundleName),
-                  bundleCode: material.bundleCode,
-                  bundleInformation: <BundleInfo>[],
-                  materials: material.materials,
-                )
-              : Bundle.empty(),
-          addedBonusList: material.bonuses,
-          stockInfo: StockInfo.empty().copyWith(
-            materialNumber: itemInfo.info.materialNumber,
-          ),
-          tenderContract: TenderContract.empty(),
-        );
-
-        return priceAggregate.copyWith(
-          addedBonusList: List.from(priceAggregate.addedBonusList)
-            ..addAll(priceAggregate.getMaterialItemBonus),
+        return _getCommercialTypeMaterial(
+          itemInfo: itemInfo,
+          material: material,
+          context: context,
+          isBundle: true,
+          materialInfo: materialInfo,
         );
       }
 
       return PriceAggregate.empty();
     }).toList();
+  }
+
+  List<PriceAggregate> _buildPriceAggregateList({
+    required List<MaterialItem> items,
+    required MaterialPriceDetailState state,
+    required BuildContext context,
+  }) {
+    final priceAggregateList = <PriceAggregate>[];
+    for (final material in order.items) {
+      final itemInfo = state.materialDetails[material.queryInfo];
+      material.type.isBundle
+          ? priceAggregateList.addAll(
+              _getBundleTypeMaterials(
+                state: state,
+                material: material,
+                context: context,
+                isBundle: true,
+              ),
+            )
+          : itemInfo != null
+              ? priceAggregateList.add(
+                  _getCommercialTypeMaterial(
+                    itemInfo: itemInfo,
+                    material: material,
+                    context: context,
+                    isBundle: false,
+                    materialInfo: MaterialInfo.empty(),
+                  ),
+                )
+              : priceAggregateList.add(PriceAggregate.empty());
+    }
+
+    return priceAggregateList;
+  }
+
+  void _addToCartPressed(BuildContext context, MaterialPriceDetailState state) {
+    final cartBloc = context.read<CartBloc>();
+    cartBloc.add(const CartEvent.clearCart());
 
     cartBloc.add(CartEvent.addToCartFromList(
-      items: priceAggregateList,
+      items: _buildPriceAggregateList(
+        items: order.items,
+        state: state,
+        context: context,
+      ),
       customerCodeInfo: context.read<EligibilityBloc>().state.customerCodeInfo,
       salesOrganisation:
           context.read<EligibilityBloc>().state.salesOrganisation,

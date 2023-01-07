@@ -80,7 +80,7 @@ mixin _$MaterialDto {
   @JsonKey(name: 'isFOCMaterial', defaultValue: false)
   @HiveField(19, defaultValue: false)
   bool get isFOCMaterial => throw _privateConstructorUsedError;
-  @JsonKey(name: 'quantity', defaultValue: 0)
+  @JsonKey(name: 'quantity', defaultValue: 0, readValue: _validateQantity)
   @HiveField(20, defaultValue: 0)
   int get quantity => throw _privateConstructorUsedError;
   @JsonKey(name: 'remarks', defaultValue: '')
@@ -161,7 +161,7 @@ abstract class $MaterialDtoCopyWith<$Res> {
       @JsonKey(name: 'isFOCMaterial', defaultValue: false)
       @HiveField(19, defaultValue: false)
           bool isFOCMaterial,
-      @JsonKey(name: 'quantity', defaultValue: 0)
+      @JsonKey(name: 'quantity', defaultValue: 0, readValue: _validateQantity)
       @HiveField(20, defaultValue: 0)
           int quantity,
       @JsonKey(name: 'remarks', defaultValue: '')
@@ -368,7 +368,7 @@ abstract class _$$_MaterialDtoCopyWith<$Res>
       @JsonKey(name: 'isFOCMaterial', defaultValue: false)
       @HiveField(19, defaultValue: false)
           bool isFOCMaterial,
-      @JsonKey(name: 'quantity', defaultValue: 0)
+      @JsonKey(name: 'quantity', defaultValue: 0, readValue: _validateQantity)
       @HiveField(20, defaultValue: 0)
           int quantity,
       @JsonKey(name: 'remarks', defaultValue: '')
@@ -569,7 +569,7 @@ class _$_MaterialDto extends _MaterialDto {
       @JsonKey(name: 'isFOCMaterial', defaultValue: false)
       @HiveField(19, defaultValue: false)
           required this.isFOCMaterial,
-      @JsonKey(name: 'quantity', defaultValue: 0)
+      @JsonKey(name: 'quantity', defaultValue: 0, readValue: _validateQantity)
       @HiveField(20, defaultValue: 0)
           required this.quantity,
       @JsonKey(name: 'remarks', defaultValue: '')
@@ -673,7 +673,7 @@ class _$_MaterialDto extends _MaterialDto {
   @HiveField(19, defaultValue: false)
   final bool isFOCMaterial;
   @override
-  @JsonKey(name: 'quantity', defaultValue: 0)
+  @JsonKey(name: 'quantity', defaultValue: 0, readValue: _validateQantity)
   @HiveField(20, defaultValue: 0)
   final int quantity;
   @override
@@ -843,7 +843,7 @@ abstract class _MaterialDto extends MaterialDto {
       @JsonKey(name: 'isFOCMaterial', defaultValue: false)
       @HiveField(19, defaultValue: false)
           required final bool isFOCMaterial,
-      @JsonKey(name: 'quantity', defaultValue: 0)
+      @JsonKey(name: 'quantity', defaultValue: 0, readValue: _validateQantity)
       @HiveField(20, defaultValue: 0)
           required final int quantity,
       @JsonKey(name: 'remarks', defaultValue: '')
@@ -935,7 +935,7 @@ abstract class _MaterialDto extends MaterialDto {
   @HiveField(19, defaultValue: false)
   bool get isFOCMaterial;
   @override
-  @JsonKey(name: 'quantity', defaultValue: 0)
+  @JsonKey(name: 'quantity', defaultValue: 0, readValue: _validateQantity)
   @HiveField(20, defaultValue: 0)
   int get quantity;
   @override

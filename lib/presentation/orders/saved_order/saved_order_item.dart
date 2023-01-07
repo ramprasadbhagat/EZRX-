@@ -7,6 +7,7 @@ import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.da
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
+import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
@@ -53,13 +54,7 @@ class SavedOrderItem extends StatelessWidget {
                     salesOrganisationConfigs:
                         context.read<SalesOrgBloc>().state.configs,
                     shipToCode: context.read<ShipToCodeBloc>().state.shipToInfo,
-                    materialInfoList: order.items
-                        .map(
-                          (item) => MaterialQueryInfo.fromSavedOrder(
-                            orderMaterial: item,
-                          ),
-                        )
-                        .toList(),
+                    materialInfoList: _getMaterialList(order.items),
                     pickAndPack: context
                         .read<EligibilityBloc>()
                         .state
@@ -104,5 +99,20 @@ class SavedOrderItem extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  List<MaterialQueryInfo> _getMaterialList(List<MaterialItem> items) {
+    final materialList = <MaterialQueryInfo>[];
+    for (final item in items) {
+      item.type.isBundle
+          ? materialList.addAll(item.materials
+              .map((material) =>
+                  MaterialQueryInfo.fromBundles(materialInfo: material))
+              .toList())
+          : materialList
+              .add(MaterialQueryInfo.fromSavedOrder(orderMaterial: item));
+    }
+
+    return materialList;
   }
 }

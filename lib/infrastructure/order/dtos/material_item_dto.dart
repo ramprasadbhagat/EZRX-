@@ -61,7 +61,7 @@ class MaterialItemDto with _$MaterialItemDto {
         required double zdp8Override,
     @JsonKey(name: 'remarks', defaultValue: '')
         required String remarks,
-    @JsonKey(name: 'BundleInformation', defaultValue: [])
+    @JsonKey(name: 'bundleInformation', defaultValue: [])
         required List<BundleInfoDto> bundleInformation,
     @JsonKey(name: 'totalQuantity', defaultValue: 0)
         required int totalQuantity,
