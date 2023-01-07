@@ -12,6 +12,7 @@ abstract class ZPColors {
   static const Color black = Color.fromRGBO(0, 0, 0, 1);
   static const Color red = Color.fromRGBO(244, 67, 54, 1);
   static const Color lightRed = Color.fromRGBO(251, 208, 208, 1);
+  static const Color lightYellow = Color.fromRGBO(250, 234, 176, 1);
   static const Color systrmMessageColor = Color.fromRGBO(240, 248, 230, 1.0);
 
   static const Color error = Color.fromRGBO(227, 23, 16, 1);
