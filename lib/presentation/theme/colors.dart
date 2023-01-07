@@ -11,12 +11,14 @@ abstract class ZPColors {
   static const Color white = Color.fromRGBO(250, 250, 250, 1);
   static const Color black = Color.fromRGBO(0, 0, 0, 1);
   static const Color red = Color.fromRGBO(244, 67, 54, 1);
+  static const Color lightRed = Color.fromRGBO(251, 208, 208, 1);
   static const Color systrmMessageColor = Color.fromRGBO(240, 248, 230, 1.0);
 
   static const Color error = Color.fromRGBO(227, 23, 16, 1);
   static const Color tender = Color.fromRGBO(246, 138, 37, 1);
   static const Color primary = Color.fromRGBO(0, 93, 98, 1.0);
   static const Color secondary = Color.fromRGBO(195, 213, 0, 1.0);
+  static const Color lightSecondary = Color.fromRGBO(227, 236, 147, 1.0);
   static const Color gradient = Color.fromRGBO(0, 133, 138, 1.0);
   static const Color announcementColor = Color(0xffff7c65);
   static const Color secondaryBGColor = Color.fromRGBO(171, 191, 193, 1);

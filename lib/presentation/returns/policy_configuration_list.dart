@@ -95,38 +95,67 @@ class PolicyConfigurationListItem extends StatelessWidget {
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Sales Org: ${policyConfigurationList.salesOrg}',
-              style: Theme.of(context).textTheme.subtitle2?.apply(
-                    color: ZPColors.kPrimaryColor,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  flex: 1,
+                  child: Text(
+                    '${'Sales Org'.tr()}: ${policyConfigurationList.salesOrg}',
+                    style: Theme.of(context).textTheme.subtitle2?.apply(
+                          color: ZPColors.black,
+                        ),
                   ),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 6,
+                      vertical: 4,
+                    ),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: policyConfigurationList.returnsAllowed
+                          ? ZPColors.lightSecondary
+                          : ZPColors.lightRed,
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(12),
+                      ),
+                    ),
+                    child: Text(
+                      '${'Returns Alllowed'.tr()}: ${policyConfigurationList.returnsAllowed ? 'Yes'.tr() : 'No'.tr()}',
+                      style: const TextStyle(
+                        color: ZPColors.black,
+                        fontSize: 10,
+                        fontWeight: FontWeight.w600,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+              ],
             ),
             Text(
-              'Principal Code: ${policyConfigurationList.principalCode}',
+              '${'Principal Code'.tr()}: ${policyConfigurationList.principalCode}',
               style: Theme.of(context).textTheme.bodyText1,
             ),
             Text(
-              'Principal Name: ${policyConfigurationList.principalName}',
+              '${'Principal Name'.tr()}: ${policyConfigurationList.principalName}',
               style: Theme.of(context).textTheme.subtitle2?.apply(
                     color: ZPColors.lightGray,
                   ),
             ),
             Text(
-              'Returns Alllowed: ${policyConfigurationList.returnsAllowed}',
-              style: Theme.of(context).textTheme.subtitle2?.apply(
+              '${'Months Before Expiry'.tr()}: ${policyConfigurationList.monthsBeforeExpiry}',
+              style: Theme.of(context).textTheme.bodyText1?.apply(
                     color: ZPColors.lightGray,
                   ),
             ),
             Text(
-              'Months Before Expiry: ${policyConfigurationList.monthsBeforeExpiry}',
+              '${'Months After Expiry'.tr()}: ${policyConfigurationList.monthsAfterExpiry}',
               style: Theme.of(context).textTheme.bodyText1?.apply(
-                    color: ZPColors.black,
-                  ),
-            ),
-            Text(
-              'Months After Expiry: ${policyConfigurationList.monthsAfterExpiry}',
-              style: Theme.of(context).textTheme.bodyText1?.apply(
-                    color: ZPColors.black,
+                    color: ZPColors.lightGray,
                   ),
             ),
           ],
