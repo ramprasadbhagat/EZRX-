@@ -118,7 +118,7 @@ void main() {
     itemBrand: 'Item not listed in I',
     principalData: PrincipalData(
       principalName: '台灣羅氏醫療診斷設備(股)公司',
-      principalCode: PrincipleCode('0000102004'),
+      principalCode: PrincipalCode('0000102004'),
     ),
     taxClassification: MaterialTaxClassification('Product : Full Tax'),
     itemRegistrationNumber: 'NA',
@@ -391,7 +391,7 @@ void main() {
             itemBrand: 'Item not listed in I',
             principalData: PrincipalData(
               principalName: '台灣羅氏醫療診斷設備(股)公司',
-              principalCode: PrincipleCode('0000102004'),
+              principalCode: PrincipalCode('0000102004'),
             ),
             taxClassification: MaterialTaxClassification('Product : Full Tax'),
             itemRegistrationNumber: 'NA',

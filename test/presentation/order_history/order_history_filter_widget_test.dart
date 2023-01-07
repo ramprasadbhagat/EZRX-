@@ -77,7 +77,7 @@ void main() {
       final orderIdTextField = find.byKey(const Key('filterOrderIdField'));
       final poNumberField = find.byKey(const Key('filterPoNumberField'));
       final princeplesearchField =
-          find.byKey(const Key('filterPrincipleSearchField'));
+          find.byKey(const Key('filterPrincipalSearchField'));
       final materialsearchField =
           find.byKey(const Key('filterMaterialSearchField'));
       final fromdateField = find.byKey(const Key('filteFromdateField'));
@@ -170,7 +170,7 @@ void main() {
 
       await tester.pump();
       await tester.enterText(
-          find.byKey(const Key('filterPrincipleSearchField')), '188');
+          find.byKey(const Key('filterPrincipalSearchField')), '188');
       await tester.pump();
       expect(find.text('123'), findsNothing);
       expect(find.text('188'), findsOneWidget);

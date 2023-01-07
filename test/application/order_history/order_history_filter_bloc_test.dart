@@ -20,7 +20,7 @@ void main() {
   const fakeOrderId = '0200190077';
   const fakePoNumber = '1000';
   const fakeMaterialSearch = '1990';
-  const fakePrincipleSearch = '1880';
+  const fakePrincipalSearch = '1880';
   mockOrderHistoryFilter = mockOrderHistoryFilter.copyWith(
       fromDate: fakeFromDate, toDate: fakeToDate);
   orderHistoryFilterState = orderHistoryFilterState.copyWith(
@@ -110,7 +110,7 @@ void main() {
                 .copyWith(fromDate: fakeFromDate, toDate: fakeToDate)),
         act: (OrderHistoryFilterBloc bloc) => bloc.add(
             OrderHistoryFilterEvent.principalSearchChanged(
-                SearchKey.orderHistoryFilter(fakePrincipleSearch)
+                SearchKey.orderHistoryFilter(fakePrincipalSearch)
                     .getOrCrash())),
         expect: () => [
               OrderHistoryFilterState.initial().copyWith(
@@ -118,7 +118,7 @@ void main() {
                       fromDate: fakeFromDate,
                       toDate: fakeToDate,
                       principalSearch:
-                          SearchKey.orderHistoryFilter(fakePrincipleSearch)))
+                          SearchKey.orderHistoryFilter(fakePrincipalSearch)))
             ]);
     blocTest('materialSearchChanged',
         build: (() => OrderHistoryFilterBloc()),

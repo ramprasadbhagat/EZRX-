@@ -57,7 +57,7 @@ class CustomerMaterialDto with _$CustomerMaterialDto {
         therapeuticClass: therapeuticClass,
         itemBrand: itemBrand,
         principalData: PrincipalData(
-          principalCode: PrincipleCode(principalCode),
+          principalCode: PrincipalCode(principalCode),
           principalName: principalName,
         ),
         itemRegistrationNumber: itemRegistrationNumber,

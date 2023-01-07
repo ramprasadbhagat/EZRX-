@@ -53,7 +53,7 @@ class OrderHistoryFilterDrawer extends StatelessWidget {
                           const SizedBox(
                             height: 16,
                           ),
-                          const _PrincipleSearchByFilter(),
+                          const _PrincipalSearchByFilter(),
                           const SizedBox(
                             height: 16,
                           ),
@@ -348,8 +348,8 @@ class _MaterialSearchByFilter extends StatelessWidget {
   }
 }
 
-class _PrincipleSearchByFilter extends StatelessWidget {
-  const _PrincipleSearchByFilter({Key? key}) : super(key: key);
+class _PrincipalSearchByFilter extends StatelessWidget {
+  const _PrincipalSearchByFilter({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<OrderHistoryFilterBloc, OrderHistoryFilterState>(
@@ -361,7 +361,7 @@ class _PrincipleSearchByFilter extends StatelessWidget {
         state,
       ) {
         return TextFormField(
-          key: const Key('filterPrincipleSearchField'),
+          key: const Key('filterPrincipalSearchField'),
           initialValue: state.orderHistoryFilterList.principalSearch
               .getOrDefaultValue(''),
           onChanged: (value) => context.read<OrderHistoryFilterBloc>().add(

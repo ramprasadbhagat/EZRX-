@@ -120,7 +120,7 @@ class MaterialDto with _$MaterialDto {
       itemBrand: itemBrand,
       principalData: PrincipalData(
         principalName: principalName,
-        principalCode: PrincipleCode(principalCode),
+        principalCode: PrincipalCode(principalCode),
       ),
       taxClassification: MaterialTaxClassification(taxClassification),
       itemRegistrationNumber: itemRegistrationNumber,

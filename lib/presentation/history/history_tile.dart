@@ -119,7 +119,7 @@ class OrderHistoryListTile extends StatelessWidget {
                             ),
                             alignment: Alignment.center,
                             decoration: const BoxDecoration(
-                              color: ZPColors.secondary,
+                              color: ZPColors.lightSecondary,
                               borderRadius: BorderRadius.all(
                                 Radius.circular(12),
                               ),

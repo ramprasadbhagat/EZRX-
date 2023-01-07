@@ -36,7 +36,7 @@ class MaterialBundleDto with _$MaterialBundleDto {
       itemBrand: '',
       principalData: PrincipalData(
         principalName: '',
-        principalCode: PrincipleCode(''),
+        principalCode: PrincipalCode(''),
       ),
       taxClassification: MaterialTaxClassification(''),
       itemRegistrationNumber: '',

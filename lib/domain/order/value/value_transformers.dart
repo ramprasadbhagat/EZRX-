@@ -62,10 +62,10 @@ bool materialTaxClassificationIsFullTax(String taxClassification) {
   return taxClassification == 'Product : Full Tax';
 }
 
-bool havingSubmitPrincipleForClient(String principleCode) {
-  return principleCode == '100822';
+bool havingSubmitPrincipalForClient(String principalCode) {
+  return principalCode == '100822';
 }
 
-bool havingSubmitPrincipleForSalesRep(String principleCode) {
-  return principleCode == '100225';
+bool havingSubmitPrincipalForSalesRep(String principalCode) {
+  return principalCode == '100225';
 }

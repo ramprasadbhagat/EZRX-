@@ -111,6 +111,33 @@ class PrincipalName extends ValueObject<String> {
   const PrincipalName._(this.value);
 }
 
+class PrincipalCode extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory PrincipalCode(String input) {
+    return PrincipalCode._(validateStringNotEmpty(input));
+  }
+
+  const PrincipalCode._(this.value);
+
+  bool isSubmitAllowedForClient() {
+    return havingSubmitPrincipalForClient(
+      removeLeadingZero(
+        value.getOrElse(() => ''),
+      ),
+    );
+  }
+
+  bool isSubmitAllowedForSalesRep() {
+    return havingSubmitPrincipalForSalesRep(
+      removeLeadingZero(
+        value.getOrElse(() => ''),
+      ),
+    );
+  }
+}
+
 class MaterialNumber extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
@@ -284,33 +311,6 @@ class OrderItemType extends ValueObject<String> {
   }
 
   const OrderItemType._(this.value);
-}
-
-class PrincipleCode extends ValueObject<String> {
-  @override
-  final Either<ValueFailure<String>, String> value;
-
-  factory PrincipleCode(String input) {
-    return PrincipleCode._(validateStringNotEmpty(input));
-  }
-
-  const PrincipleCode._(this.value);
-
-  bool isSubmitAllowedForClient() {
-    return havingSubmitPrincipleForClient(
-      removeLeadingZero(
-        value.getOrElse(() => ''),
-      ),
-    );
-  }
-
-  bool isSubmitAllowedForSalesRep() {
-    return havingSubmitPrincipleForSalesRep(
-      removeLeadingZero(
-        value.getOrElse(() => ''),
-      ),
-    );
-  }
 }
 
 class TenderPrice extends ValueObject<String> {

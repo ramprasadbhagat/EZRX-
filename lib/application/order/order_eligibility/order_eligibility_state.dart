@@ -27,7 +27,7 @@ class OrderEligibilityState with _$OrderEligibilityState {
       );
 
   bool get isMinOrderValuePassed {
-    if (hasPrinciple) {
+    if (hasPrincipal) {
       return false;
     }
     if (eligibleOrderType) {
@@ -69,10 +69,10 @@ class OrderEligibilityState with _$OrderEligibilityState {
         (orderType.contains('ZPFC') || orderType.contains('ZPFB'));
   }
 
-  bool get hasPrinciple {
+  bool get hasPrincipal {
     return user.role.type.isSalesRep
-        ? cartItems.where((element) => element.hasSalesRepPrinciple).isNotEmpty
-        : cartItems.where((element) => element.hasClientPrinciple).isNotEmpty;
+        ? cartItems.where((element) => element.hasSalesRepPrincipal).isNotEmpty
+        : cartItems.where((element) => element.hasClientPrincipal).isNotEmpty;
   }
 
   bool get isDisablePriceOverRide =>

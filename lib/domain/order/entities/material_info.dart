@@ -43,7 +43,7 @@ class MaterialInfo with _$MaterialInfo {
         itemBrand: '',
         principalData: PrincipalData(
           principalName: '',
-          principalCode: PrincipleCode(''),
+          principalCode: PrincipalCode(''),
         ),
         taxClassification: MaterialTaxClassification(''),
         itemRegistrationNumber: '',

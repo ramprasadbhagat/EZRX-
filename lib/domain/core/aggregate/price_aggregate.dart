@@ -358,12 +358,12 @@ class PriceAggregate with _$PriceAggregate {
       !materialInfo.hidePrice &&
       (salesOrgConfig.netPriceOverride || price.additionalBonusEligible);
 
-  bool get hasSalesRepPrinciple {
+  bool get hasSalesRepPrincipal {
     return materialInfo.principalData.principalCode
         .isSubmitAllowedForSalesRep();
   }
 
-  bool get hasClientPrinciple {
+  bool get hasClientPrincipal {
     return materialInfo.principalData.principalCode.isSubmitAllowedForClient();
   }
 

@@ -76,7 +76,7 @@ void main() {
         itemBrand: 'Genotropin GQ 5.3MG',
         principalData: PrincipalData(
           principalName: 'Pfizer PFE Private Limited test',
-          principalCode: PrincipleCode('0000103892'),
+          principalCode: PrincipalCode('0000103892'),
         ),
         itemRegistrationNumber: 'NA',
         unitOfMeasurement: 'EA',
@@ -93,8 +93,10 @@ void main() {
         quantity: 0,
         remarks: ''),
     bundle: Bundle(
-      materials: [],
-        bundleName: BundleName('0'), bundleCode: '', bundleInformation: []),
+        materials: [],
+        bundleName: BundleName('0'),
+        bundleCode: '',
+        bundleInformation: []),
     salesOrgConfig: SalesOrganisationConfigs(
         enableIRN: true,
         enableDefaultMD: false,
@@ -275,11 +277,7 @@ void main() {
   );
 
   const emptyBundleDto = BundleDto(
-    bundleName: '',
-    bundleCode: '',
-    bundleInformation: [],
-    materials: []
-  );
+      bundleName: '', bundleCode: '', bundleInformation: [], materials: []);
 
   const emptyStockInfoDto = StockInfoDto(
     batch: '',
@@ -411,7 +409,6 @@ void main() {
   });
 
   test('update cart storage successfully', () async {
-    
     when(() => cartStorageMock
             .updateItem(PriceAggregateDto.fromDomain(mockPriceAggregate)))
         .thenAnswer((invocation) async {
@@ -419,7 +416,7 @@ void main() {
     });
     await cartRepositoryMock.updateCartItem(cartItem: mockPriceAggregate);
     // final result =
-     await cartRepositoryMock.fetchCartItems();
+    await cartRepositoryMock.fetchCartItems();
     // expect(
     //   result.isRight(),
     //   true,

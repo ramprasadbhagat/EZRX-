@@ -355,13 +355,13 @@ void main() {
             .copyWith(
                 materialFilter: MaterialFilter.empty().copyWith(
                   uniquePrincipalName: [
-                    'principle-1',
-                    'principle-2',
+                    'principal-1',
+                    'principal-2',
                   ],
                 ),
-                searchKey: 'principle-2')
+                searchKey: 'principal-2')
             .getSearchedFilterList(MaterialFilterType.principal);
-        expect(filterList, ['principle-2']);
+        expect(filterList, ['principal-2']);
       },
     );
   });

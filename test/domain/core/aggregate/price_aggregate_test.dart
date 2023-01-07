@@ -124,7 +124,8 @@ void main() {
                 MaterialItemOverrideDto.fromPrice(priceAggregate.price)
                     .toDomain(),
             quantity: priceAggregate.quantity,
-            salesDistrict: stockInfo.salesDistrict, tenderContract: priceAggregate.tenderContract,
+            salesDistrict: stockInfo.salesDistrict,
+            tenderContract: priceAggregate.tenderContract,
           ),
         );
       },
@@ -399,17 +400,17 @@ void main() {
     );
 
     test(
-      'PriceAggregate hasClientPrinciple ',
+      'PriceAggregate hasClientPrincipal ',
       () async {
         final priceAggregate = mockPriceAggregateList.first.copyWith(
           materialInfo: MaterialInfo.empty().copyWith(
             principalData: PrincipalData.empty().copyWith(
-              principalCode: PrincipleCode('100822'),
+              principalCode: PrincipalCode('100822'),
             ),
           ),
         );
         expect(
-          priceAggregate.hasClientPrinciple,
+          priceAggregate.hasClientPrincipal,
           true,
         );
       },
