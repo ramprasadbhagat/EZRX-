@@ -116,15 +116,13 @@ class PolicyConfigurationListItem extends StatelessWidget {
                     ),
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                      color: policyConfigurationList.returnsAllowed
-                          ? ZPColors.lightSecondary
-                          : ZPColors.lightRed,
+                      color: policyConfigurationList.returnsAllowed.labelColor,
                       borderRadius: const BorderRadius.all(
                         Radius.circular(12),
                       ),
                     ),
                     child: Text(
-                      '${'Returns Alllowed'.tr()}: ${policyConfigurationList.returnsAllowed ? 'Yes'.tr() : 'No'.tr()}',
+                      '${'Returns Alllowed'.tr()}: ${policyConfigurationList.returnsAllowed.display.tr()}',
                       style: const TextStyle(
                         color: ZPColors.black,
                         fontSize: 10,
@@ -137,11 +135,11 @@ class PolicyConfigurationListItem extends StatelessWidget {
               ],
             ),
             Text(
-              '${'Principal Code'.tr()}: ${policyConfigurationList.principalCode}',
+              '${'Principal Code'.tr()}: ${policyConfigurationList.principalCode.getOrDefaultValue('')}',
               style: Theme.of(context).textTheme.bodyText1,
             ),
             Text(
-              '${'Principal Name'.tr()}: ${policyConfigurationList.principalName}',
+              '${'Principal Name'.tr()}: ${policyConfigurationList.principalName.name}',
               style: Theme.of(context).textTheme.subtitle2?.apply(
                     color: ZPColors.lightGray,
                   ),

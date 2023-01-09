@@ -6,7 +6,7 @@ class PolicyConfigurationListState with _$PolicyConfigurationListState {
     required List<PolicyConfigurationList> policyConfigurationList,
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
     required bool isLoading,
-  }) = _FavouriteState;
+  }) = _PolicyConfigurationListState;
 
   factory PolicyConfigurationListState.initial() =>
       PolicyConfigurationListState(

@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 PolicyConfigurationListDto _$PolicyConfigurationListDtoFromJson(
     Map<String, dynamic> json) {
-  return _FavouriteDto.fromJson(json);
+  return _PolicyConfigurationListDto.fromJson(json);
 }
 
 /// @nodoc
@@ -122,11 +122,12 @@ class _$PolicyConfigurationListDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_FavouriteDtoCopyWith<$Res>
+abstract class _$$_PolicyConfigurationListDtoCopyWith<$Res>
     implements $PolicyConfigurationListDtoCopyWith<$Res> {
-  factory _$$_FavouriteDtoCopyWith(
-          _$_FavouriteDto value, $Res Function(_$_FavouriteDto) then) =
-      __$$_FavouriteDtoCopyWithImpl<$Res>;
+  factory _$$_PolicyConfigurationListDtoCopyWith(
+          _$_PolicyConfigurationListDto value,
+          $Res Function(_$_PolicyConfigurationListDto) then) =
+      __$$_PolicyConfigurationListDtoCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -147,11 +148,13 @@ abstract class _$$_FavouriteDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_FavouriteDtoCopyWithImpl<$Res>
-    extends _$PolicyConfigurationListDtoCopyWithImpl<$Res, _$_FavouriteDto>
-    implements _$$_FavouriteDtoCopyWith<$Res> {
-  __$$_FavouriteDtoCopyWithImpl(
-      _$_FavouriteDto _value, $Res Function(_$_FavouriteDto) _then)
+class __$$_PolicyConfigurationListDtoCopyWithImpl<$Res>
+    extends _$PolicyConfigurationListDtoCopyWithImpl<$Res,
+        _$_PolicyConfigurationListDto>
+    implements _$$_PolicyConfigurationListDtoCopyWith<$Res> {
+  __$$_PolicyConfigurationListDtoCopyWithImpl(
+      _$_PolicyConfigurationListDto _value,
+      $Res Function(_$_PolicyConfigurationListDto) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -165,7 +168,7 @@ class __$$_FavouriteDtoCopyWithImpl<$Res>
     Object? returnsAllowed = null,
     Object? principalName = null,
   }) {
-    return _then(_$_FavouriteDto(
+    return _then(_$_PolicyConfigurationListDto(
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
@@ -200,8 +203,8 @@ class __$$_FavouriteDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_FavouriteDto extends _FavouriteDto {
-  const _$_FavouriteDto(
+class _$_PolicyConfigurationListDto extends _PolicyConfigurationListDto {
+  const _$_PolicyConfigurationListDto(
       {@JsonKey(name: 'salesOrg', defaultValue: '')
           required this.salesOrg,
       @JsonKey(name: 'principalCode', defaultValue: '')
@@ -218,8 +221,8 @@ class _$_FavouriteDto extends _FavouriteDto {
           required this.principalName})
       : super._();
 
-  factory _$_FavouriteDto.fromJson(Map<String, dynamic> json) =>
-      _$$_FavouriteDtoFromJson(json);
+  factory _$_PolicyConfigurationListDto.fromJson(Map<String, dynamic> json) =>
+      _$$_PolicyConfigurationListDtoFromJson(json);
 
   @override
   @JsonKey(name: 'salesOrg', defaultValue: '')
@@ -252,7 +255,7 @@ class _$_FavouriteDto extends _FavouriteDto {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FavouriteDto &&
+            other is _$_PolicyConfigurationListDto &&
             (identical(other.salesOrg, salesOrg) ||
                 other.salesOrg == salesOrg) &&
             (identical(other.principalCode, principalCode) ||
@@ -283,19 +286,20 @@ class _$_FavouriteDto extends _FavouriteDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FavouriteDtoCopyWith<_$_FavouriteDto> get copyWith =>
-      __$$_FavouriteDtoCopyWithImpl<_$_FavouriteDto>(this, _$identity);
+  _$$_PolicyConfigurationListDtoCopyWith<_$_PolicyConfigurationListDto>
+      get copyWith => __$$_PolicyConfigurationListDtoCopyWithImpl<
+          _$_PolicyConfigurationListDto>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_FavouriteDtoToJson(
+    return _$$_PolicyConfigurationListDtoToJson(
       this,
     );
   }
 }
 
-abstract class _FavouriteDto extends PolicyConfigurationListDto {
-  const factory _FavouriteDto(
+abstract class _PolicyConfigurationListDto extends PolicyConfigurationListDto {
+  const factory _PolicyConfigurationListDto(
       {@JsonKey(name: 'salesOrg', defaultValue: '')
           required final String salesOrg,
       @JsonKey(name: 'principalCode', defaultValue: '')
@@ -309,11 +313,11 @@ abstract class _FavouriteDto extends PolicyConfigurationListDto {
       @JsonKey(name: 'returnsAllowed', defaultValue: false)
           required final bool returnsAllowed,
       @JsonKey(name: 'principalName', defaultValue: '')
-          required final String principalName}) = _$_FavouriteDto;
-  const _FavouriteDto._() : super._();
+          required final String principalName}) = _$_PolicyConfigurationListDto;
+  const _PolicyConfigurationListDto._() : super._();
 
-  factory _FavouriteDto.fromJson(Map<String, dynamic> json) =
-      _$_FavouriteDto.fromJson;
+  factory _PolicyConfigurationListDto.fromJson(Map<String, dynamic> json) =
+      _$_PolicyConfigurationListDto.fromJson;
 
   @override
   @JsonKey(name: 'salesOrg', defaultValue: '')
@@ -338,6 +342,6 @@ abstract class _FavouriteDto extends PolicyConfigurationListDto {
   String get principalName;
   @override
   @JsonKey(ignore: true)
-  _$$_FavouriteDtoCopyWith<_$_FavouriteDto> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$_PolicyConfigurationListDtoCopyWith<_$_PolicyConfigurationListDto>
+      get copyWith => throw _privateConstructorUsedError;
 }

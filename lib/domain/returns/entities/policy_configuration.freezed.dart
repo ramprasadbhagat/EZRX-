@@ -17,12 +17,12 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$PolicyConfigurationList {
   String get salesOrg => throw _privateConstructorUsedError;
-  String get principalCode => throw _privateConstructorUsedError;
+  PrincipalCode get principalCode => throw _privateConstructorUsedError;
   String get monthsBeforeExpiry => throw _privateConstructorUsedError;
   String get monthsAfterExpiry => throw _privateConstructorUsedError;
   String get uuid => throw _privateConstructorUsedError;
-  bool get returnsAllowed => throw _privateConstructorUsedError;
-  String get principalName => throw _privateConstructorUsedError;
+  ReturnsAllowed get returnsAllowed => throw _privateConstructorUsedError;
+  PrincipalName get principalName => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PolicyConfigurationListCopyWith<PolicyConfigurationList> get copyWith =>
@@ -37,12 +37,12 @@ abstract class $PolicyConfigurationListCopyWith<$Res> {
   @useResult
   $Res call(
       {String salesOrg,
-      String principalCode,
+      PrincipalCode principalCode,
       String monthsBeforeExpiry,
       String monthsAfterExpiry,
       String uuid,
-      bool returnsAllowed,
-      String principalName});
+      ReturnsAllowed returnsAllowed,
+      PrincipalName principalName});
 }
 
 /// @nodoc
@@ -75,7 +75,7 @@ class _$PolicyConfigurationListCopyWithImpl<$Res,
       principalCode: null == principalCode
           ? _value.principalCode
           : principalCode // ignore: cast_nullable_to_non_nullable
-              as String,
+              as PrincipalCode,
       monthsBeforeExpiry: null == monthsBeforeExpiry
           ? _value.monthsBeforeExpiry
           : monthsBeforeExpiry // ignore: cast_nullable_to_non_nullable
@@ -91,11 +91,11 @@ class _$PolicyConfigurationListCopyWithImpl<$Res,
       returnsAllowed: null == returnsAllowed
           ? _value.returnsAllowed
           : returnsAllowed // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as ReturnsAllowed,
       principalName: null == principalName
           ? _value.principalName
           : principalName // ignore: cast_nullable_to_non_nullable
-              as String,
+              as PrincipalName,
     ) as $Val);
   }
 }
@@ -110,12 +110,12 @@ abstract class _$$_PolicyConfigurationListCopyWith<$Res>
   @useResult
   $Res call(
       {String salesOrg,
-      String principalCode,
+      PrincipalCode principalCode,
       String monthsBeforeExpiry,
       String monthsAfterExpiry,
       String uuid,
-      bool returnsAllowed,
-      String principalName});
+      ReturnsAllowed returnsAllowed,
+      PrincipalName principalName});
 }
 
 /// @nodoc
@@ -146,7 +146,7 @@ class __$$_PolicyConfigurationListCopyWithImpl<$Res>
       principalCode: null == principalCode
           ? _value.principalCode
           : principalCode // ignore: cast_nullable_to_non_nullable
-              as String,
+              as PrincipalCode,
       monthsBeforeExpiry: null == monthsBeforeExpiry
           ? _value.monthsBeforeExpiry
           : monthsBeforeExpiry // ignore: cast_nullable_to_non_nullable
@@ -162,11 +162,11 @@ class __$$_PolicyConfigurationListCopyWithImpl<$Res>
       returnsAllowed: null == returnsAllowed
           ? _value.returnsAllowed
           : returnsAllowed // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as ReturnsAllowed,
       principalName: null == principalName
           ? _value.principalName
           : principalName // ignore: cast_nullable_to_non_nullable
-              as String,
+              as PrincipalName,
     ));
   }
 }
@@ -187,7 +187,7 @@ class _$_PolicyConfigurationList extends _PolicyConfigurationList {
   @override
   final String salesOrg;
   @override
-  final String principalCode;
+  final PrincipalCode principalCode;
   @override
   final String monthsBeforeExpiry;
   @override
@@ -195,9 +195,9 @@ class _$_PolicyConfigurationList extends _PolicyConfigurationList {
   @override
   final String uuid;
   @override
-  final bool returnsAllowed;
+  final ReturnsAllowed returnsAllowed;
   @override
-  final String principalName;
+  final PrincipalName principalName;
 
   @override
   String toString() {
@@ -247,18 +247,18 @@ class _$_PolicyConfigurationList extends _PolicyConfigurationList {
 abstract class _PolicyConfigurationList extends PolicyConfigurationList {
   const factory _PolicyConfigurationList(
       {required final String salesOrg,
-      required final String principalCode,
+      required final PrincipalCode principalCode,
       required final String monthsBeforeExpiry,
       required final String monthsAfterExpiry,
       required final String uuid,
-      required final bool returnsAllowed,
-      required final String principalName}) = _$_PolicyConfigurationList;
+      required final ReturnsAllowed returnsAllowed,
+      required final PrincipalName principalName}) = _$_PolicyConfigurationList;
   const _PolicyConfigurationList._() : super._();
 
   @override
   String get salesOrg;
   @override
-  String get principalCode;
+  PrincipalCode get principalCode;
   @override
   String get monthsBeforeExpiry;
   @override
@@ -266,9 +266,9 @@ abstract class _PolicyConfigurationList extends PolicyConfigurationList {
   @override
   String get uuid;
   @override
-  bool get returnsAllowed;
+  ReturnsAllowed get returnsAllowed;
   @override
-  String get principalName;
+  PrincipalName get principalName;
   @override
   @JsonKey(ignore: true)
   _$$_PolicyConfigurationListCopyWith<_$_PolicyConfigurationList>

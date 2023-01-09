@@ -6,8 +6,9 @@ part of 'policy_configuration_list_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_FavouriteDto _$$_FavouriteDtoFromJson(Map<String, dynamic> json) =>
-    _$_FavouriteDto(
+_$_PolicyConfigurationListDto _$$_PolicyConfigurationListDtoFromJson(
+        Map<String, dynamic> json) =>
+    _$_PolicyConfigurationListDto(
       salesOrg: json['salesOrg'] as String? ?? '',
       principalCode: json['principalCode'] as String? ?? '',
       monthsBeforeExpiry: json['monthsBeforeExpiry'] as String? ?? '',
@@ -17,7 +18,8 @@ _$_FavouriteDto _$$_FavouriteDtoFromJson(Map<String, dynamic> json) =>
       principalName: json['principalName'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_FavouriteDtoToJson(_$_FavouriteDto instance) =>
+Map<String, dynamic> _$$_PolicyConfigurationListDtoToJson(
+        _$_PolicyConfigurationListDto instance) =>
     <String, dynamic>{
       'salesOrg': instance.salesOrg,
       'principalCode': instance.principalCode,

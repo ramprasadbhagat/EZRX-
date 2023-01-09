@@ -385,11 +385,12 @@ class _$PolicyConfigurationListStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_FavouriteStateCopyWith<$Res>
+abstract class _$$_PolicyConfigurationListStateCopyWith<$Res>
     implements $PolicyConfigurationListStateCopyWith<$Res> {
-  factory _$$_FavouriteStateCopyWith(
-          _$_FavouriteState value, $Res Function(_$_FavouriteState) then) =
-      __$$_FavouriteStateCopyWithImpl<$Res>;
+  factory _$$_PolicyConfigurationListStateCopyWith(
+          _$_PolicyConfigurationListState value,
+          $Res Function(_$_PolicyConfigurationListState) then) =
+      __$$_PolicyConfigurationListStateCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -399,11 +400,13 @@ abstract class _$$_FavouriteStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_FavouriteStateCopyWithImpl<$Res>
-    extends _$PolicyConfigurationListStateCopyWithImpl<$Res, _$_FavouriteState>
-    implements _$$_FavouriteStateCopyWith<$Res> {
-  __$$_FavouriteStateCopyWithImpl(
-      _$_FavouriteState _value, $Res Function(_$_FavouriteState) _then)
+class __$$_PolicyConfigurationListStateCopyWithImpl<$Res>
+    extends _$PolicyConfigurationListStateCopyWithImpl<$Res,
+        _$_PolicyConfigurationListState>
+    implements _$$_PolicyConfigurationListStateCopyWith<$Res> {
+  __$$_PolicyConfigurationListStateCopyWithImpl(
+      _$_PolicyConfigurationListState _value,
+      $Res Function(_$_PolicyConfigurationListState) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -413,7 +416,7 @@ class __$$_FavouriteStateCopyWithImpl<$Res>
     Object? failureOrSuccessOption = null,
     Object? isLoading = null,
   }) {
-    return _then(_$_FavouriteState(
+    return _then(_$_PolicyConfigurationListState(
       policyConfigurationList: null == policyConfigurationList
           ? _value._policyConfigurationList
           : policyConfigurationList // ignore: cast_nullable_to_non_nullable
@@ -432,8 +435,8 @@ class __$$_FavouriteStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_FavouriteState implements _FavouriteState {
-  const _$_FavouriteState(
+class _$_PolicyConfigurationListState implements _PolicyConfigurationListState {
+  const _$_PolicyConfigurationListState(
       {required final List<PolicyConfigurationList> policyConfigurationList,
       required this.failureOrSuccessOption,
       required this.isLoading})
@@ -460,7 +463,7 @@ class _$_FavouriteState implements _FavouriteState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FavouriteState &&
+            other is _$_PolicyConfigurationListState &&
             const DeepCollectionEquality().equals(
                 other._policyConfigurationList, _policyConfigurationList) &&
             (identical(other.failureOrSuccessOption, failureOrSuccessOption) ||
@@ -479,15 +482,17 @@ class _$_FavouriteState implements _FavouriteState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FavouriteStateCopyWith<_$_FavouriteState> get copyWith =>
-      __$$_FavouriteStateCopyWithImpl<_$_FavouriteState>(this, _$identity);
+  _$$_PolicyConfigurationListStateCopyWith<_$_PolicyConfigurationListState>
+      get copyWith => __$$_PolicyConfigurationListStateCopyWithImpl<
+          _$_PolicyConfigurationListState>(this, _$identity);
 }
 
-abstract class _FavouriteState implements PolicyConfigurationListState {
-  const factory _FavouriteState(
+abstract class _PolicyConfigurationListState
+    implements PolicyConfigurationListState {
+  const factory _PolicyConfigurationListState(
       {required final List<PolicyConfigurationList> policyConfigurationList,
       required final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
-      required final bool isLoading}) = _$_FavouriteState;
+      required final bool isLoading}) = _$_PolicyConfigurationListState;
 
   @override
   List<PolicyConfigurationList> get policyConfigurationList;
@@ -497,6 +502,6 @@ abstract class _FavouriteState implements PolicyConfigurationListState {
   bool get isLoading;
   @override
   @JsonKey(ignore: true)
-  _$$_FavouriteStateCopyWith<_$_FavouriteState> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$_PolicyConfigurationListStateCopyWith<_$_PolicyConfigurationListState>
+      get copyWith => throw _privateConstructorUsedError;
 }

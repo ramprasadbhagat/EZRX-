@@ -1,4 +1,6 @@
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/policy_configuration.dart';
+import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'policy_configuration_list_dto.freezed.dart';
@@ -21,18 +23,18 @@ class PolicyConfigurationListDto with _$PolicyConfigurationListDto {
         required bool returnsAllowed,
     @JsonKey(name: 'principalName', defaultValue: '')
         required String principalName,
-  }) = _FavouriteDto;
+  }) = _PolicyConfigurationListDto;
 
   factory PolicyConfigurationListDto.fromDomain(
     PolicyConfigurationList policy,
   ) {
     return PolicyConfigurationListDto(
       salesOrg: policy.salesOrg,
-      principalCode: policy.principalCode,
+      principalCode: policy.principalCode.getOrCrash(),
       monthsBeforeExpiry: policy.monthsBeforeExpiry,
       monthsAfterExpiry: policy.monthsAfterExpiry,
-      principalName: policy.principalName,
-      returnsAllowed: policy.returnsAllowed,
+      principalName: policy.principalName.name,
+      returnsAllowed: policy.returnsAllowed.getOrCrash(),
       uuid: policy.uuid,
     );
   }
@@ -43,9 +45,9 @@ class PolicyConfigurationListDto with _$PolicyConfigurationListDto {
       uuid: uuid,
       monthsAfterExpiry: monthsAfterExpiry,
       monthsBeforeExpiry: monthsBeforeExpiry,
-      principalCode: principalCode,
-      principalName: principalName,
-      returnsAllowed: returnsAllowed,
+      principalCode: PrincipalCode(principalCode),
+      principalName: PrincipalName(principalName),
+      returnsAllowed: ReturnsAllowed(returnsAllowed),
     );
   }
 

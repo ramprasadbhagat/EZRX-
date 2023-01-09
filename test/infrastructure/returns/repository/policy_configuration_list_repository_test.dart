@@ -3,7 +3,9 @@ import 'package:ezrxmobile/domain/account/entities/sales_org_customer_info.dart'
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/policy_configuration.dart';
+import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/policy_configuration_list_local.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/policy_configuration_list_remote.dart';
@@ -32,14 +34,14 @@ void main() {
   late PolicyConfigurationRemoteDataSource policyConfigurationRemoteSource;
   late CountlyService countlyService;
   final policyConfigurationListMock = [
-    const PolicyConfigurationList(
+    PolicyConfigurationList(
       salesOrg: '2601',
-      principalCode: '2601',
+      principalCode: PrincipalCode('2601'),
       monthsBeforeExpiry: '"0',
       monthsAfterExpiry: '"0',
       uuid: 'cfe3d45d-9812-49d7-8b83-ad028b9ae383',
-      returnsAllowed: true,
-      principalName: '',
+      returnsAllowed: ReturnsAllowed(true),
+      principalName: PrincipalName(''),
     ),
   ];
 
