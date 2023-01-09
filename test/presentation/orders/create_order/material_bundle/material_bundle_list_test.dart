@@ -265,10 +265,10 @@ void main() {
         );
       });
 
-      final noBundle =
-          find.image(Image.asset('assets/images/ezrxlogo.png').image);
-      expect(noBundle, findsOneWidget);
+      final loader = find.byKey(const Key('loaderImage'));
+      expect(loader, findsOneWidget);
     });
+
     testWidgets('Test while data has been fetched', (tester) async {
       when(() => materialBundleListBloc.state).thenReturn(
         MaterialBundleListState.initial().copyWith(

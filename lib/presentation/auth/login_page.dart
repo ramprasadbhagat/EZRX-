@@ -9,6 +9,7 @@ import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dar
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -113,8 +114,8 @@ class _Logo extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size.width * 0.35;
 
-    return Image.asset(
-      'assets/images/ezrxlogo.png',
+    return SvgPicture.asset(
+      'assets/svg/ezrxlogo.svg',
       width: size,
       height: size,
     );
@@ -157,6 +158,7 @@ class _SSOLoginButton extends StatelessWidget {
 
 class _OrDivider extends StatelessWidget {
   const _OrDivider({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -172,6 +174,7 @@ class _OrDivider extends StatelessWidget {
 
 class _UsernameField extends StatelessWidget {
   final TextEditingController controller;
+
   const _UsernameField({
     Key? key,
     required this.controller,
@@ -227,6 +230,7 @@ class _UsernameField extends StatelessWidget {
 
 class _PasswordField extends StatelessWidget {
   final TextEditingController controller;
+
   const _PasswordField({
     Key? key,
     required this.controller,

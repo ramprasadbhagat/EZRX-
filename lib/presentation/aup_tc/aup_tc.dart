@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class AupTCDialog extends StatefulWidget {
   final bool fromSetting;
@@ -34,8 +35,8 @@ class AupTCDialogState extends State<AupTCDialog> {
           child: Scaffold(
             appBar: AppBar(
               key: const ValueKey('auptcappBar'),
-              title: Image.asset(
-                'assets/images/ezrxlogo.png',
+              title: SvgPicture.asset(
+                'assets/svg/ezrxlogo.svg',
                 width: 80,
                 height: 80,
               ),

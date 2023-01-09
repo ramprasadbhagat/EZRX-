@@ -7,8 +7,8 @@ class _Logo extends StatelessWidget {
   Widget build(BuildContext context) {
     return _WithChild(
       enabled: true,
-      child: Image.asset(
-        'assets/images/ezrxlogo.png',
+      child: SvgPicture.asset(
+        'assets/svg/ezrxlogo.svg',
         width: 80,
         height: 80,
       ),

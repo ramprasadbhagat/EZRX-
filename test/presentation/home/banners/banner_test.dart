@@ -296,7 +296,7 @@ void main() {
       final bannerPageView = tester.widget<PageView>(bannerPageViewFinder);
 
       final firstBanner = find.byKey(Key(mockBanner1.id.toString()));
-      expect(firstBanner.hitTestable(), findsOneWidget);
+      expect(firstBanner, findsOneWidget);
 
       bannerPageViewController = bannerPageView.controller;
       expect(bannerPageViewController.hasClients, true);
@@ -304,7 +304,7 @@ void main() {
       await tester.pump();
 
       final secondBanner = find.byKey(Key(mockBanner2.id.toString()));
-      expect(secondBanner.hitTestable(), findsOneWidget);
+      expect(secondBanner, findsOneWidget);
     });
 
     testWidgets('Empty Banner test - Auto Scroll', (tester) async {

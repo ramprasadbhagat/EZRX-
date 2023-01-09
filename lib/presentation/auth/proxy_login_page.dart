@@ -8,6 +8,7 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class LoginOnBehalfPage extends StatelessWidget {
   const LoginOnBehalfPage({Key? key}) : super(key: key);
@@ -77,8 +78,8 @@ class Logo extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size.width * 0.35;
 
-    return Image.asset(
-      'assets/images/ezrxlogo.png',
+    return SvgPicture.asset(
+      'assets/svg/ezrxlogo.svg',
       width: size,
       height: size,
     );
@@ -94,6 +95,7 @@ class UsernameField extends StatefulWidget {
 
 class _UsernameFieldState extends State<UsernameField> {
   final TextEditingController _usernameController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ProxyLoginFormBloc, ProxyLoginFormState>(

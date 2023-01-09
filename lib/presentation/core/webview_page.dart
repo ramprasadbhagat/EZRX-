@@ -1,6 +1,7 @@
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class WebViewPage extends StatefulWidget {
   final String url;
@@ -20,8 +21,8 @@ class _WebViewPageState extends State<WebViewPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Image.asset(
-          'assets/images/ezrxlogo.png',
+        title: SvgPicture.asset(
+          'assets/svg/ezrxlogo.svg',
           width: 80,
           height: 80,
         ),
