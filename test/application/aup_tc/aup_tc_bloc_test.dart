@@ -6,6 +6,7 @@ import 'package:ezrxmobile/domain/account/entities/setting_tc.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/aup_tc/entities/tncdate.dart';
+import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/user_local.dart';
 import 'package:ezrxmobile/infrastructure/aup_tc/repository/aup_tc_repository.dart';
 import 'package:ezrxmobile/infrastructure/auth/dtos/jwt_dto.dart';
@@ -33,16 +34,24 @@ void main() {
   late TncDate tncDate;
   // late TncDate tncDate;
   // late Role role;
+  late TokenStorage tokenStorage;
 
   setUpAll(() async {
+    const rootAdminToken =
+        'eyJhbGciOiJIUzI1NiIshghhjggCI6IkpXVCJ9.eyJBVVRIX1RPS0VOIjoidzl4cEFhQkRZUSIsImV4cCI6MTY2MzQwOTAzNiwiaWF0IjoxNjYzMzIyNjM2LCJpZCI6MTE0NjEsInJpZ2h0cyI6W3sidmFsdWUiOlt7ImN1c3RvbWVyQ29kZSI6ImFsbCIsInNhbGVzT3JnIjoiMjYwMSIsInNoaXBUb0NvZGUiOlsiYWxsIl19XX1dLCJyb2xlIjoiWlAgQWRtaW4iLCJzYWxlc09yZ3MiOlsiMjYwMSJdLCJ1c2VybmFtZSI6ImV6cnh0ZXN0MDUifQ.MakZTQ3JUVqeRuXQcBU1cUKmHZft5AmFPJDvuG4DjlA';
+    final fakeJWT = JWT(rootAdminToken);
     config = Config()..appFlavor = Flavor.uat;
     aupTcRepository = MockAupTcRepository();
     aupTcRepository = MockAupTcRepository();
     tncDate = TncDate.empty();
-    final TokenStorage tokenStorage = MockTokenStorage();
+    tokenStorage = MockTokenStorage();
     when(() => tokenStorage.get())
-        .thenAnswer((invocation) async => JWTDto(access: ''));
+        .thenAnswer((invocation) async => JWTDto(access: rootAdminToken));
     user = await UserLocalDataSource(tokenStorage: tokenStorage).getUser();
+    await UserLocalDataSource(tokenStorage: tokenStorage)
+        .updateUserNotificationAndLanguagePreference();
+    await UserLocalDataSource(tokenStorage: tokenStorage).updateUserTC();
+
     settingTc = SettingTc(
         acceptPrivacyPolicy: false,
         acceptPrivacyPolicyTime: tncDate.date,
@@ -54,9 +63,12 @@ void main() {
   group(
     'UserLogin Accept Updated Privacy Policy',
     () {
-      setUpAll(() {
+      setUpAll(() async {
         salesOrganisation = user.userSalesOrganisations.first
             .copyWith(salesOrg: SalesOrg('2500'));
+        when(() => MockTokenStorage().get())
+            .thenAnswer((invocation) async => JWTDto(access: ''));
+        user = await UserLocalDataSource(tokenStorage: tokenStorage).getUser();
       });
 
       blocTest<AupTcBloc, AupTcState>(
@@ -119,8 +131,7 @@ void main() {
               user.copyWith(
                 settingTc: settingTc.copyWith(
                     acceptPrivacyPolicy: false,
-                    acceptPrivacyPolicyTime:
-                        tncDate.date,
+                    acceptPrivacyPolicyTime: tncDate.date,
                     privacyPolicyAcceptedPlatform: 'Mobile'),
               ),
               SalesOrg('3070')));
@@ -145,8 +156,7 @@ void main() {
               user.copyWith(
                 settingTc: settingTc.copyWith(
                     acceptPrivacyPolicy: false,
-                    acceptPrivacyPolicyTime:
-                        tncDate.date,
+                    acceptPrivacyPolicyTime: tncDate.date,
                     privacyPolicyAcceptedPlatform: 'Mobile'),
               ),
               SalesOrg('2800')));
@@ -171,8 +181,7 @@ void main() {
               user.copyWith(
                 settingTc: settingTc.copyWith(
                     acceptPrivacyPolicy: false,
-                    acceptPrivacyPolicyTime:
-                        tncDate.date,
+                    acceptPrivacyPolicyTime: tncDate.date,
                     privacyPolicyAcceptedPlatform: 'Mobile'),
               ),
               SalesOrg('2902')));
@@ -197,8 +206,7 @@ void main() {
               user.copyWith(
                 settingTc: settingTc.copyWith(
                     acceptPrivacyPolicy: false,
-                    acceptPrivacyPolicyTime:
-                        tncDate.date,
+                    acceptPrivacyPolicyTime: tncDate.date,
                     privacyPolicyAcceptedPlatform: 'Mobile'),
               ),
               SalesOrg('2201')));
@@ -223,8 +231,7 @@ void main() {
               user.copyWith(
                 settingTc: settingTc.copyWith(
                     acceptPrivacyPolicy: false,
-                    acceptPrivacyPolicyTime:
-                        tncDate.date,
+                    acceptPrivacyPolicyTime: tncDate.date,
                     privacyPolicyAcceptedPlatform: 'Mobile'),
               ),
               SalesOrg('1500')));

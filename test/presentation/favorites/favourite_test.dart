@@ -8,6 +8,7 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
@@ -31,6 +32,8 @@ import '../../application/auth/auth_bloc_test.dart';
 import '../../utils/material_frame_wrapper.dart';
 
 class UserMockBloc extends MockBloc<UserEvent, UserState> implements UserBloc {}
+
+class AuthMockBloc extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 
 class ShipToCodeMockBloc extends MockBloc<ShipToCodeEvent, ShipToCodeState>
     implements ShipToCodeBloc {}
@@ -71,6 +74,7 @@ void main() {
   var mockMaterialPriceDetailBloc = MaterialPriceDetailMockBloc();
   late EligibilityBlocMock mockEligiblityBloc;
   late AddToCartBlocMock addToCartBlocMock;
+  late AuthMockBloc authBlocMock;
 
   final mockFavourite1 = Favourite(
     id: 'fake-id-1',
@@ -90,11 +94,12 @@ void main() {
 
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
-    locator.registerFactory<MaterialPriceDetailBloc>
-      (() => mockMaterialPriceDetailBloc);
+    locator.registerFactory<MaterialPriceDetailBloc>(
+        () => mockMaterialPriceDetailBloc);
   });
 
   void initialSetup() {
+    authBlocMock = AuthMockBloc();
     mockFavouriteBloc = MockFavouriteBloc();
     userBlocMock = UserMockBloc();
     shipToCodeMockBloc = ShipToCodeMockBloc();
@@ -137,6 +142,7 @@ void main() {
           child: MaterialFrameWrapper(
             child: MultiBlocProvider(
               providers: [
+                BlocProvider<AuthBloc>(create: (context) => authBlocMock),
                 BlocProvider<UserBloc>(create: (context) => userBlocMock),
                 BlocProvider<SalesOrgBloc>(
                     create: ((context) => salesOrgMockBloc)),
@@ -235,6 +241,29 @@ void main() {
                   isLoading: false,
                   failureOrSuccessOption: optionOf(
                     const Left(ApiFailure.other('Fake Error')),
+                  )),
+            ],
+          );
+        });
+        await tester.pumpWidget(getFavoritePage());
+        await tester.pump();
+
+        expect(find.byKey(const Key('snackBarMessage')), findsOneWidget);
+        expect(find.byType(FavouriteListTile), findsNothing);
+        expect(find.text('No favorite found'), findsOneWidget);
+      });
+
+      testWidgets('Favourite API failure, user is not authenticate',
+          (tester) async {
+        initialSetup();
+        when(() => mockFavouriteBloc.stream).thenAnswer((invocation) {
+          return Stream.fromIterable(
+            [
+              FavouriteState.initial(),
+              FavouriteState.initial().copyWith(
+                  isLoading: false,
+                  failureOrSuccessOption: optionOf(
+                    const Left(ApiFailure.authenticationFailed()),
                   )),
             ],
           );
@@ -466,7 +495,7 @@ void main() {
                     MaterialQueryInfo.fromFavorite(material: mockFavourite1):
                         MaterialPriceDetail.empty().copyWith(
                       info: MaterialInfo.empty().copyWith(
-                          defaultMaterialDescription: 'test',
+                        defaultMaterialDescription: 'test',
                       ),
                     ),
                   },
@@ -513,7 +542,7 @@ void main() {
                     MaterialQueryInfo.fromFavorite(material: mockFavourite1):
                         MaterialPriceDetail.empty().copyWith(
                       info: MaterialInfo.empty().copyWith(
-                          defaultMaterialDescription: 'test',
+                        defaultMaterialDescription: 'test',
                       ),
                     ),
                   },

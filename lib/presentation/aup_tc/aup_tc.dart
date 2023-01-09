@@ -130,7 +130,11 @@ class AcceptButton extends StatelessWidget {
                             .tr(),
                   );
                 } else {
-                  context.read<UserBloc>().add(const UserEvent.accptTnc());
+                  context.read<UserBloc>().add(
+                        UserEvent.accptTnc(
+                          date: DateTime.now().toUtc().toIso8601String(),
+                        ),
+                      );
                   if (fromSetting) {
                     context.router.pop();
                   }

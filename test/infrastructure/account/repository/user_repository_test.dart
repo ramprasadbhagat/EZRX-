@@ -41,7 +41,7 @@ void main() {
   late FirebaseCrashlytics firebaseCrashlyticsMock;
   const rootAdminToken =
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBVVRIX1RPS0VOIjoidzl4cEFhQkRZUSIsImV4cCI6MTY2MzQwOTAzNiwiaWF0IjoxNjYzMzIyNjM2LCJpZCI6MTE0NjEsInJpZ2h0cyI6W3sidmFsdWUiOlt7ImN1c3RvbWVyQ29kZSI6ImFsbCIsInNhbGVzT3JnIjoiMjYwMSIsInNoaXBUb0NvZGUiOlsiYWxsIl19XX1dLCJyb2xlIjoiWlAgQWRtaW4iLCJzYWxlc09yZ3MiOlsiMjYwMSJdLCJ1c2VybmFtZSI6ImV6cnh0ZXN0MDUifQ.MakZTQ3JUVqeRuXQcBU1cUKmHZft5AmFPJDvuG4DjlA';
-
+  late String date;
   setUpAll(
     () async {
       configMock = ConfigMock();
@@ -67,6 +67,7 @@ void main() {
         localDataSource: localDataSourceMock,
         tokenStorage: tokenStorageMock,
       );
+      date = DateTime.now().toUtc().toIso8601String();
     },
   );
   group('User Repository should - ', () {
@@ -284,7 +285,7 @@ void main() {
         when(() => localDataSourceMock.updateUserTC())
             .thenAnswer((invocation) async => User.empty().settingTc);
 
-        final result = await repository.updateUserTc(User.empty());
+        final result = await repository.updateUserTc(User.empty(), date: date);
         expect(result.isRight(), true);
       },
     );
@@ -307,7 +308,7 @@ void main() {
         when(() => localDataSourceMock.updateUserTC())
             .thenThrow(MockException(message: 'mockException'));
 
-        final result = await repository.updateUserTc(User.empty());
+        final result = await repository.updateUserTc(User.empty(), date: date);
         expect(result.isLeft(), true);
       },
     );
@@ -328,9 +329,10 @@ void main() {
 
         when(() => remoteDataSourceMock.updateUserTC(
               userId: User.empty().id,
+              date: date,
             )).thenAnswer((invocation) async => User.empty().settingTc);
 
-        final result = await repository.updateUserTc(User.empty());
+        final result = await repository.updateUserTc(User.empty(), date: date);
         expect(result.isRight(), true);
       },
     );
@@ -351,9 +353,10 @@ void main() {
 
         when(() => remoteDataSourceMock.updateUserTC(
               userId: User.empty().id,
+              date: date,
             )).thenThrow(Error());
 
-        final result = await repository.updateUserTc(User.empty());
+        final result = await repository.updateUserTc(User.empty(), date: date);
         expect(result.isLeft(), true);
       },
     );

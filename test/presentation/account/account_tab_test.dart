@@ -15,6 +15,7 @@ import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/infrastructure/favourites/datasource/favourite_remote.dart';
 import 'package:ezrxmobile/presentation/account/account_tab.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
@@ -45,6 +46,9 @@ class ApproverBlocMock extends MockBloc<ApproverEvent, ApproverState>
     implements ApproverBloc {}
 
 class AutoRouterMock extends Mock implements AppRouter {}
+
+class FavoriteRemoteDataSourceMock extends Mock
+    implements FavouriteRemoteDataSource {}
 
 final locator = GetIt.instance;
 
@@ -99,6 +103,8 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   late UserBloc userBlocMock;
   late SalesOrgBloc salesOrgBlocMock;
+  late FavouriteRemoteDataSource favoriteRemoteSource;
+
   late CustomerCodeBloc customerCodeBlocMock;
   late ShipToCodeBloc shipToCodeBlocMock;
   late AuthBloc authBlocMock;

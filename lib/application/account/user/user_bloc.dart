@@ -42,22 +42,24 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         );
       },
       accptTnc: (e) async {
-        final failureOrSuccess =
-              await userRepository.updateUserTc(state.user);
+        final failureOrSuccess = await userRepository.updateUserTc(
+          state.user,
+          date: e.date, // DateTime.now().toUtc().toIso8601String(),
+        );
 
-          failureOrSuccess.fold(
-            (failure) => emit(
-              state.copyWith(
-                userFailureOrSuccessOption: optionOf(failureOrSuccess),
-              ),
+        failureOrSuccess.fold(
+          (failure) => emit(
+            state.copyWith(
+              userFailureOrSuccessOption: optionOf(failureOrSuccess),
             ),
-            (settingTc) => emit(
-              state.copyWith(
-                user: state.user.copyWith(settingTc: settingTc),
-                userFailureOrSuccessOption: none(),
-              ),
+          ),
+          (settingTc) => emit(
+            state.copyWith(
+              user: state.user.copyWith(settingTc: settingTc),
+              userFailureOrSuccessOption: none(),
             ),
-          );
+          ),
+        );
       },
       updateNotificationSettings: (e) async {
         final user = state.user.copyWith(

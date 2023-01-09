@@ -52,30 +52,35 @@ class UserRemoteDataSource {
     }
   }
 
-  Future<SettingTc> updateUserTC({required String userId}) async {
+  Future<SettingTc> updateUserTC({
+    required String userId,
+    required String date,
+  }) async {
     return await dataSourceExceptionHandler.handle(() async {
+      final data = {
+        'input': {
+          'where': {'id': int.parse(userId)},
+          'data': {
+            'acceptPrivacyPolicy': true,
+            'acceptPrivacyPolicyTime':
+                date, // DateTime.now().toUtc().toIso8601String(),
+            'privacyPolicyAcceptedPlatform': 'Mobile',
+          },
+        },
+      };
+
       final res = await httpService.request(
         method: 'POST',
         url: '/api/strapiEngine',
         data: jsonEncode({
           'query': userQueryMutation.updatePrivacyPolicy(),
-          'variables': {
-            'input': {
-              'where': {'id': int.parse(userId)},
-              'data': {
-                'acceptPrivacyPolicy': true,
-                'acceptPrivacyPolicyTime': DateTime.now().toUtc().toIso8601String(),
-                'privacyPolicyAcceptedPlatform':'Mobile',
-              },
-            },
-          },
+          'variables': data,
         }),
         apiEndpoint: 'updateUserMutation',
       );
       _userExceptionChecker(res: res);
 
-      return SettingTcDto.fromJson(res.data['data']['updateUser']['user'])
-          .toDomain();
+      return SettingTcDto.fromJson(res.data['data']['user']).toDomain();
     });
   }
 
@@ -84,28 +89,34 @@ class UserRemoteDataSource {
     required bool emailNotification,
     required String userId,
   }) async {
-    return await dataSourceExceptionHandler.handle(() async {
-      final res = await httpService.request(
-        method: 'POST',
-        url: '/api/strapiEngineMutation',
-        data: jsonEncode({
-          'query': userQueryMutation.updateNotification(),
-          'variables': {
-            'input': {
-              'where': {'id': int.parse(userId)},
-              'data': {
-                'emailNotifications': emailNotification,
-                'languagePreference': languagePreference,
-              },
+    return await dataSourceExceptionHandler.handle(
+      () async {
+        final data = {
+          'input': {
+            'where': {'id': int.parse(userId)},
+            'data': {
+              'emailNotifications': emailNotification,
+              'languagePreference': languagePreference,
             },
           },
-        }),
-        apiEndpoint: 'updateUserMutation',
-      );
-      _userExceptionChecker(res: res);
+        };
 
-      return UserDto.fromJson(res.data['data']['updateUser']['user'])
-          .toDomain();
-    });
+        final res = await httpService.request(
+          method: 'POST',
+          url: '/api/strapiEngineMutation',
+          data: jsonEncode(
+            {
+              'query': userQueryMutation.updateNotification(),
+              'variables': data,
+            },
+          ),
+          apiEndpoint: 'updateUserMutation',
+        );
+        _userExceptionChecker(res: res);
+
+        return UserDto.fromJson(res.data['data']['updateUser']['user'])
+            .toDomain();
+      },
+    );
   }
 }

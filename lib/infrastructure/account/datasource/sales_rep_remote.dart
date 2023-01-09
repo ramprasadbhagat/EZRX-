@@ -22,12 +22,13 @@ class SalesRepRemoteDataSource {
     required String userName,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
+      final data = {'userName': userName};
       final res = await httpService.request(
         method: 'POST',
         url: '/api/license',
         data: jsonEncode({
           'query': salesRepQueryMutation.getSalesRepInfo(),
-          'variables': {'userName': userName},
+          'variables': data,
         }),
         apiEndpoint: 'salesRepresentativeInfo',
       );

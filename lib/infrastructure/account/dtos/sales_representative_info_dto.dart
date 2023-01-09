@@ -18,17 +18,6 @@ class SalesRepresentativeInfoDto with _$SalesRepresentativeInfoDto {
         required List<String> uniqueSalesOrganisations,
   }) = _SalesRepresentativeInfoDto;
 
-  factory SalesRepresentativeInfoDto.fromDomain(
-    SalesRepresentativeInfo salesRepInfo,
-  ) {
-    return SalesRepresentativeInfoDto(
-      count: salesRepInfo.count,
-      uniquePrincipalGroups: salesRepInfo.uniquePrincipalGroup,
-      uniquePrincipalNumbers: salesRepInfo.uniquePrincipalNumber,
-      uniqueSalesOrganisations: salesRepInfo.uniqueSalesOrganisation,
-    );
-  }
-
   SalesRepresentativeInfo toDomain() {
     return SalesRepresentativeInfo(
       count: count,

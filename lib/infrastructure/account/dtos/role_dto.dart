@@ -1,5 +1,4 @@
 import 'package:ezrxmobile/domain/account/entities/role.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'role_dto.freezed.dart';
@@ -22,15 +21,6 @@ class RoleDto with _$RoleDto {
       name: role.name,
       type: role.type.getOrCrash(),
       description: role.description,
-    );
-  }
-
-  Role toDomain() {
-    return Role(
-      id: id,
-      name: name,
-      type: RoleType(type),
-      description: description,
     );
   }
 

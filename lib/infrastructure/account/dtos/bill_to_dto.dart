@@ -53,49 +53,6 @@ class BillToDto with _$BillToDto {
     @JsonKey(name: 'emailAddresses') required List emailAddresses,
   }) = _BillToDto;
 
-  factory BillToDto.fromDomain(BillToInfo billToInfo) {
-    return BillToDto(
-      billToCustomerCode: billToInfo.billToCustomerCode,
-      defaulBillToAddress: billToInfo.defaulBillToAddress,
-      name1: billToInfo.billToName.name1,
-      name2: billToInfo.billToName.name2,
-      name3: billToInfo.billToName.name3,
-      name4: billToInfo.billToName.name4,
-      altName1: billToInfo.billToAltName.altName1,
-      altName2: billToInfo.billToAltName.altName2,
-      altName3: billToInfo.billToAltName.altName3,
-      altName4: billToInfo.billToAltName.altName4,
-      status: billToInfo.status,
-      street: billToInfo.billToAddress.street,
-      street2: billToInfo.billToAddress.street2,
-      street3: billToInfo.billToAddress.street3,
-      street4: billToInfo.billToAddress.street4,
-      street5: billToInfo.billToAddress.street5,
-      postalCode: billToInfo.postalCode,
-      postalCode2: billToInfo.postalCode2,
-      city1: billToInfo.city1,
-      city2: billToInfo.city2,
-      emailAddresses: billToInfo.emailAddresses,
-      telephoneNumber: billToInfo.telephoneNumber,
-      telephoneExtension: billToInfo.telephoneExtension,
-      faxNumber: billToInfo.faxNumber,
-      faxExtension: billToInfo.faxExtension,
-      taxNumber: billToInfo.taxNumber,
-      houseNumber1: billToInfo.houseNumber1,
-      houseNumber2: billToInfo.houseNumber2,
-      building: billToInfo.building,
-      country: billToInfo.country,
-      district: billToInfo.district,
-      region: billToInfo.region,
-      floor: billToInfo.floor,
-      plant: billToInfo.plant,
-      roomnumber: billToInfo.roomnumber,
-      taxIncludedBySalesOrganization: billToInfo.taxIncludedBySalesOrganization,
-      customerClassification: billToInfo.customerClassification,
-      customerLocalGroup: billToInfo.customerLocalGroup,
-    );
-  }
-
   BillToInfo toDomain() {
     return BillToInfo(
       billToCustomerCode: billToCustomerCode,

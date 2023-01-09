@@ -44,42 +44,6 @@ class CustomerCodeDto with _$CustomerCodeDto {
         required List<String> emailAddresses,
   }) = _CustomerCodeDto;
 
-  factory CustomerCodeDto.fromDomain(CustomerCodeInfo customerCodeInfo) {
-    return CustomerCodeDto(
-      customerCodeSoldTo: customerCodeInfo.customerCodeSoldTo,
-      name1: customerCodeInfo.customerName.name1,
-      name2: customerCodeInfo.customerName.name2,
-      name3: customerCodeInfo.customerName.name3,
-      name4: customerCodeInfo.customerName.name4,
-      status: customerCodeInfo.status.getOrCrash(),
-      street1: customerCodeInfo.customerAddress.street1,
-      street2: customerCodeInfo.customerAddress.street2,
-      street3: customerCodeInfo.customerAddress.street3,
-      street4: customerCodeInfo.customerAddress.street4,
-      street5: customerCodeInfo.customerAddress.street5,
-      city1: customerCodeInfo.customerAddress.city1,
-      city2: customerCodeInfo.customerAddress.city2,
-      division: customerCodeInfo.division,
-      postalCode: customerCodeInfo.postalCode,
-      customerClassification: customerCodeInfo.customerClassification,
-      customerLocalGroup: customerCodeInfo.customerLocalGroup,
-      paymentTermDescription: customerCodeInfo.paymentTermDescription,
-      shipToInfos: customerCodeInfo.shipToInfos
-          .map((e) => ShipToDto.fromDomain(e))
-          .toList(),
-      billToInfos: customerCodeInfo.billToInfos
-          .map((e) => BillToDto.fromDomain(e))
-          .toList(),
-      customerAttr7: customerCodeInfo.customerAttr7.getOrCrash(),
-      customerGrp4: customerCodeInfo.customerGrp4.getOrCrash(),
-      region: customerCodeInfo.region,
-      emailAddresses: customerCodeInfo.emailAddresses
-          .map((e) => e.value.getOrElse(() => ''))
-          .toList(),
-      telephoneNumber: customerCodeInfo.telephoneNumber,
-    );
-  }
-
   CustomerCodeInfo toDomain() {
     return CustomerCodeInfo(
       customerCodeSoldTo: customerCodeSoldTo,
@@ -116,11 +80,4 @@ class CustomerCodeDto with _$CustomerCodeDto {
 
   factory CustomerCodeDto.fromJson(Map<String, dynamic> json) =>
       _$CustomerCodeDtoFromJson(json);
-}
-
-//======================================================================
-//
-//======================================================================
-String getFullNameAndAddress(CustomerCodeInfo customerCodeInfo) {
-  return '${customerCodeInfo.customerCodeSoldTo} ${customerCodeInfo.customerName} - ${customerCodeInfo.customerAddress} - ${customerCodeInfo.postalCode}';
 }
