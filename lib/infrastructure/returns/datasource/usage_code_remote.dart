@@ -6,19 +6,19 @@ import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/returns/entities/usage.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
-import 'package:ezrxmobile/infrastructure/returns/datasource/usage_query_mutation.dart';
+import 'package:ezrxmobile/infrastructure/returns/datasource/usage_code_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/returns/dtos/usage_dto.dart';
 
-class UsageRemoteDataSource {
+class UsageCodeRemoteDataSource {
   HttpService httpService;
-  UsageQueryMutation usageQueryMutation;
+  UsageCodeQueryMutation usageCodeQueryMutation;
   DataSourceExceptionHandler dataSourceExceptionHandler;
   Config config;
 
-  UsageRemoteDataSource({
+  UsageCodeRemoteDataSource({
     required this.config,
     required this.httpService,
-    required this.usageQueryMutation,
+    required this.usageCodeQueryMutation,
     required this.dataSourceExceptionHandler,
   });
 
@@ -30,12 +30,11 @@ class UsageRemoteDataSource {
         method: 'POST',
         url: '${config.urlConstants}ereturn',
         data: jsonEncode({
-          'query': usageQueryMutation.getUsageQuery(),
+          'query': usageCodeQueryMutation.getUsageQuery(),
           'variables': {
             'salesOrg': salesOrg,
           },
         }),
-        apiEndpoint: 'getUsages',
       );
 
       _usageExceptionChecker(res: res);

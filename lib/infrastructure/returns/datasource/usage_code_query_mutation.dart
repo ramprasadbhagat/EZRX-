@@ -2,7 +2,7 @@
 // for fetching the data from the APIs and the params are mentioned
 // in each and every query we require for the functionality
 
-class UsageQueryMutation {
+class UsageCodeQueryMutation {
   // For fetching Usages data by Sales Org
   String getUsageQuery() {
     return '''

@@ -5,13 +5,13 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/returns/entities/usage.dart';
 import 'package:ezrxmobile/domain/returns/repository/i_usage_repository.dart';
-import 'package:ezrxmobile/infrastructure/returns/datasource/usage_local.dart';
-import 'package:ezrxmobile/infrastructure/returns/datasource/usage_remote.dart';
+import 'package:ezrxmobile/infrastructure/returns/datasource/usage_code_local.dart';
+import 'package:ezrxmobile/infrastructure/returns/datasource/usage_code_remote.dart';
 
 class UsageRepository implements IUsageRepository {
   final Config config;
-  final UsageLocalDataSource usageLocalDataSource;
-  final UsageRemoteDataSource usageRemoteDataSource;
+  final UsageCodeLocalDataSource usageLocalDataSource;
+  final UsageCodeRemoteDataSource usageRemoteDataSource;
 
   UsageRepository({
     required this.config,
@@ -25,15 +25,15 @@ class UsageRepository implements IUsageRepository {
   }) async {
     try {
       if (config.appFlavor == Flavor.mock) {
-        final usage = await usageLocalDataSource.getUsages();
+        final usages = await usageLocalDataSource.getUsages();
 
-        return Right(usage);
+        return Right(usages);
       } else {
-        final usage = await usageRemoteDataSource.getUsages(
+        final usages = await usageRemoteDataSource.getUsages(
           salesOrg: salesOrg.getOrCrash(),
         );
 
-        return Right(usage);
+        return Right(usages);
       }
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));

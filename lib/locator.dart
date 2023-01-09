@@ -181,14 +181,14 @@ import 'package:ezrxmobile/infrastructure/order/repository/valid_customer_materi
 import 'package:ezrxmobile/infrastructure/returns/datasource/policy_configuration_list_local.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/policy_configuration_list_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/policy_configuration_list_remote.dart';
-import 'package:ezrxmobile/infrastructure/returns/datasource/usage_local.dart';
-import 'package:ezrxmobile/infrastructure/returns/datasource/usage_query_mutation.dart';
-import 'package:ezrxmobile/infrastructure/returns/datasource/usage_remote.dart';
+import 'package:ezrxmobile/infrastructure/returns/datasource/usage_code_local.dart';
+import 'package:ezrxmobile/infrastructure/returns/datasource/usage_code_query_mutation.dart';
+import 'package:ezrxmobile/infrastructure/returns/datasource/usage_code_remote.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/user_restriction_local.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/user_restriction_mutation.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/user_restriction_remote.dart';
 import 'package:ezrxmobile/infrastructure/returns/repository/policy_configuration_list_repository.dart';
-import 'package:ezrxmobile/infrastructure/returns/repository/usage_repository.dart';
+import 'package:ezrxmobile/infrastructure/returns/repository/usage_code_repository.dart';
 import 'package:ezrxmobile/infrastructure/returns/repository/user_restriction_repository.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/routes/router_observer.dart';
@@ -1414,24 +1414,24 @@ void setupLocator() {
     () => UsageCodeBloc(usageRepository: locator<UsageRepository>()),
   );
   locator.registerLazySingleton(
-    () => UsageLocalDataSource(),
+    () => UsageCodeLocalDataSource(),
   );
   locator.registerLazySingleton(
-    () => UsageQueryMutation(),
+    () => UsageCodeQueryMutation(),
   );
   locator.registerLazySingleton(
-    () => UsageRemoteDataSource(
+    () => UsageCodeRemoteDataSource(
       config: locator<Config>(),
       httpService: locator<HttpService>(),
-      usageQueryMutation: locator<UsageQueryMutation>(),
+      usageCodeQueryMutation: locator<UsageCodeQueryMutation>(),
       dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
     ),
   );
   locator.registerLazySingleton(
     () => UsageRepository(
       config: locator<Config>(),
-      usageLocalDataSource: locator<UsageLocalDataSource>(),
-      usageRemoteDataSource: locator<UsageRemoteDataSource>(),
+      usageLocalDataSource: locator<UsageCodeLocalDataSource>(),
+      usageRemoteDataSource: locator<UsageCodeRemoteDataSource>(),
     ),
   );
 }
