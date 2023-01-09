@@ -5,6 +5,7 @@ import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -39,6 +40,12 @@ class UserRestrictionListPage extends StatelessWidget {
             previous.isFetching != current.isFetching ||
             previous.searchKey != current.searchKey,
         builder: (context, state) {
+          if (state.isFetching) {
+            return LoadingShimmer.logo(
+              key: const Key('LoaderImage'),
+            );
+          }
+
           return Column(
             children: [
               _HeaderMessage(state: state),
@@ -175,6 +182,7 @@ class _UserRestrictionListSearchState extends State<UserRestrictionListSearch> {
 
 class _HeaderMessage extends StatelessWidget {
   final UserRestrictionListState state;
+
   const _HeaderMessage({Key? key, required this.state}) : super(key: key);
 
   @override
