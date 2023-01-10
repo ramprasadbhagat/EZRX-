@@ -4,6 +4,7 @@ import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
+import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
@@ -57,6 +58,9 @@ class SalesOrgSelector extends StatelessWidget {
           }
           if (state.haveSelectedSalesOrganisation &&
               state.configs != SalesOrganisationConfigs.empty()) {
+            context
+                .read<AdditionalDetailsBloc>()
+                .add(AdditionalDetailsEvent.initialized(config: state.configs));
             _callBannerAndDocType(context, state, true);
           }
         },

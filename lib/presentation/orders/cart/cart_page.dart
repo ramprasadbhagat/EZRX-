@@ -34,8 +34,16 @@ class CartPage extends StatelessWidget {
     return BlocConsumer<CartBloc, CartState>(
       listenWhen: (previous, current) =>
           previous.apiFailureOrSuccessOption !=
-          current.apiFailureOrSuccessOption,
+              current.apiFailureOrSuccessOption ||
+          previous.cartItemList != current.cartItemList,
       listener: (context, state) {
+        if (state.cartItemList.isEmpty) {
+          context
+              .read<AdditionalDetailsBloc>()
+              .add(AdditionalDetailsEvent.initialized(
+                config: context.read<SalesOrgBloc>().state.configs,
+              ));
+        }
         state.apiFailureOrSuccessOption.fold(
           () {},
           (either) => either.fold(
@@ -177,11 +185,6 @@ class CartPage extends StatelessWidget {
           additionalDetailsStep: additionDetailsStep,
           maxSteps: maxStep,
           step: 0,
-          config: config,
-        ));
-    context
-        .read<AdditionalDetailsBloc>()
-        .add(AdditionalDetailsEvent.initialized(
           config: config,
         ));
     final selectedMaterialList =

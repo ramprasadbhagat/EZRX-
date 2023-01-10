@@ -258,28 +258,6 @@ void main() {
           ),
         ],
       );
-
-      blocTest<AdditionalDetailsBloc, AdditionalDetailsState>(
-        'Additional Details Flush',
-        build: () => AdditionalDetailsBloc(),
-        seed: () => AdditionalDetailsState.initial().copyWith(
-            additionalDetailsData: AdditionalDetailsData.empty().copyWith(
-          customerPoReference: CustomerPoReference('CO REF'),
-          contactPerson: ContactPerson(''),
-          contactNumber: ContactNumber('123456'),
-          paymentTerm: PaymentTerm('0001-TEST'),
-        )),
-        act: (AdditionalDetailsBloc bloc) {
-          bloc.add(const AdditionalDetailsEvent.flushForm());
-        },
-        expect: () => [
-          AdditionalDetailsState.initial().copyWith(
-            isValidated: false,
-            showErrorMessages: false,
-            additionalDetailsData: AdditionalDetailsData.empty(),
-          ),
-        ],
-      );
     },
   );
 }

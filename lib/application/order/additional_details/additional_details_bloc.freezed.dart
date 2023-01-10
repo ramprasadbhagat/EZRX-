@@ -22,7 +22,6 @@ mixin _$AdditionalDetailsEvent {
     required TResult Function(AdditionalDetailsLabel label, String newValue)
         onTextChange,
     required TResult Function(SalesOrganisationConfigs config) validateForm,
-    required TResult Function() flushForm,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -31,7 +30,6 @@ mixin _$AdditionalDetailsEvent {
     TResult? Function(AdditionalDetailsLabel label, String newValue)?
         onTextChange,
     TResult? Function(SalesOrganisationConfigs config)? validateForm,
-    TResult? Function()? flushForm,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -40,7 +38,6 @@ mixin _$AdditionalDetailsEvent {
     TResult Function(AdditionalDetailsLabel label, String newValue)?
         onTextChange,
     TResult Function(SalesOrganisationConfigs config)? validateForm,
-    TResult Function()? flushForm,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -51,7 +48,6 @@ mixin _$AdditionalDetailsEvent {
         onTextChange,
     required TResult Function(_AdditionalDetailsValidateForm value)
         validateForm,
-    required TResult Function(_AdditionalDetailsFlushForm value) flushForm,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -59,7 +55,6 @@ mixin _$AdditionalDetailsEvent {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_AdditionalDetailsTextOnChange value)? onTextChange,
     TResult? Function(_AdditionalDetailsValidateForm value)? validateForm,
-    TResult? Function(_AdditionalDetailsFlushForm value)? flushForm,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -67,7 +62,6 @@ mixin _$AdditionalDetailsEvent {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_AdditionalDetailsTextOnChange value)? onTextChange,
     TResult Function(_AdditionalDetailsValidateForm value)? validateForm,
-    TResult Function(_AdditionalDetailsFlushForm value)? flushForm,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -170,7 +164,6 @@ class _$_Initialized implements _Initialized {
     required TResult Function(AdditionalDetailsLabel label, String newValue)
         onTextChange,
     required TResult Function(SalesOrganisationConfigs config) validateForm,
-    required TResult Function() flushForm,
   }) {
     return initialized(config);
   }
@@ -182,7 +175,6 @@ class _$_Initialized implements _Initialized {
     TResult? Function(AdditionalDetailsLabel label, String newValue)?
         onTextChange,
     TResult? Function(SalesOrganisationConfigs config)? validateForm,
-    TResult? Function()? flushForm,
   }) {
     return initialized?.call(config);
   }
@@ -194,7 +186,6 @@ class _$_Initialized implements _Initialized {
     TResult Function(AdditionalDetailsLabel label, String newValue)?
         onTextChange,
     TResult Function(SalesOrganisationConfigs config)? validateForm,
-    TResult Function()? flushForm,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -211,7 +202,6 @@ class _$_Initialized implements _Initialized {
         onTextChange,
     required TResult Function(_AdditionalDetailsValidateForm value)
         validateForm,
-    required TResult Function(_AdditionalDetailsFlushForm value) flushForm,
   }) {
     return initialized(this);
   }
@@ -222,7 +212,6 @@ class _$_Initialized implements _Initialized {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_AdditionalDetailsTextOnChange value)? onTextChange,
     TResult? Function(_AdditionalDetailsValidateForm value)? validateForm,
-    TResult? Function(_AdditionalDetailsFlushForm value)? flushForm,
   }) {
     return initialized?.call(this);
   }
@@ -233,7 +222,6 @@ class _$_Initialized implements _Initialized {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_AdditionalDetailsTextOnChange value)? onTextChange,
     TResult Function(_AdditionalDetailsValidateForm value)? validateForm,
-    TResult Function(_AdditionalDetailsFlushForm value)? flushForm,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -336,7 +324,6 @@ class _$_AdditionalDetailsTextOnChange
     required TResult Function(AdditionalDetailsLabel label, String newValue)
         onTextChange,
     required TResult Function(SalesOrganisationConfigs config) validateForm,
-    required TResult Function() flushForm,
   }) {
     return onTextChange(label, newValue);
   }
@@ -348,7 +335,6 @@ class _$_AdditionalDetailsTextOnChange
     TResult? Function(AdditionalDetailsLabel label, String newValue)?
         onTextChange,
     TResult? Function(SalesOrganisationConfigs config)? validateForm,
-    TResult? Function()? flushForm,
   }) {
     return onTextChange?.call(label, newValue);
   }
@@ -360,7 +346,6 @@ class _$_AdditionalDetailsTextOnChange
     TResult Function(AdditionalDetailsLabel label, String newValue)?
         onTextChange,
     TResult Function(SalesOrganisationConfigs config)? validateForm,
-    TResult Function()? flushForm,
     required TResult orElse(),
   }) {
     if (onTextChange != null) {
@@ -377,7 +362,6 @@ class _$_AdditionalDetailsTextOnChange
         onTextChange,
     required TResult Function(_AdditionalDetailsValidateForm value)
         validateForm,
-    required TResult Function(_AdditionalDetailsFlushForm value) flushForm,
   }) {
     return onTextChange(this);
   }
@@ -388,7 +372,6 @@ class _$_AdditionalDetailsTextOnChange
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_AdditionalDetailsTextOnChange value)? onTextChange,
     TResult? Function(_AdditionalDetailsValidateForm value)? validateForm,
-    TResult? Function(_AdditionalDetailsFlushForm value)? flushForm,
   }) {
     return onTextChange?.call(this);
   }
@@ -399,7 +382,6 @@ class _$_AdditionalDetailsTextOnChange
     TResult Function(_Initialized value)? initialized,
     TResult Function(_AdditionalDetailsTextOnChange value)? onTextChange,
     TResult Function(_AdditionalDetailsValidateForm value)? validateForm,
-    TResult Function(_AdditionalDetailsFlushForm value)? flushForm,
     required TResult orElse(),
   }) {
     if (onTextChange != null) {
@@ -505,7 +487,6 @@ class _$_AdditionalDetailsValidateForm
     required TResult Function(AdditionalDetailsLabel label, String newValue)
         onTextChange,
     required TResult Function(SalesOrganisationConfigs config) validateForm,
-    required TResult Function() flushForm,
   }) {
     return validateForm(config);
   }
@@ -517,7 +498,6 @@ class _$_AdditionalDetailsValidateForm
     TResult? Function(AdditionalDetailsLabel label, String newValue)?
         onTextChange,
     TResult? Function(SalesOrganisationConfigs config)? validateForm,
-    TResult? Function()? flushForm,
   }) {
     return validateForm?.call(config);
   }
@@ -529,7 +509,6 @@ class _$_AdditionalDetailsValidateForm
     TResult Function(AdditionalDetailsLabel label, String newValue)?
         onTextChange,
     TResult Function(SalesOrganisationConfigs config)? validateForm,
-    TResult Function()? flushForm,
     required TResult orElse(),
   }) {
     if (validateForm != null) {
@@ -546,7 +525,6 @@ class _$_AdditionalDetailsValidateForm
         onTextChange,
     required TResult Function(_AdditionalDetailsValidateForm value)
         validateForm,
-    required TResult Function(_AdditionalDetailsFlushForm value) flushForm,
   }) {
     return validateForm(this);
   }
@@ -557,7 +535,6 @@ class _$_AdditionalDetailsValidateForm
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_AdditionalDetailsTextOnChange value)? onTextChange,
     TResult? Function(_AdditionalDetailsValidateForm value)? validateForm,
-    TResult? Function(_AdditionalDetailsFlushForm value)? flushForm,
   }) {
     return validateForm?.call(this);
   }
@@ -568,7 +545,6 @@ class _$_AdditionalDetailsValidateForm
     TResult Function(_Initialized value)? initialized,
     TResult Function(_AdditionalDetailsTextOnChange value)? onTextChange,
     TResult Function(_AdditionalDetailsValidateForm value)? validateForm,
-    TResult Function(_AdditionalDetailsFlushForm value)? flushForm,
     required TResult orElse(),
   }) {
     if (validateForm != null) {
@@ -588,129 +564,6 @@ abstract class _AdditionalDetailsValidateForm
   @JsonKey(ignore: true)
   _$$_AdditionalDetailsValidateFormCopyWith<_$_AdditionalDetailsValidateForm>
       get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$_AdditionalDetailsFlushFormCopyWith<$Res> {
-  factory _$$_AdditionalDetailsFlushFormCopyWith(
-          _$_AdditionalDetailsFlushForm value,
-          $Res Function(_$_AdditionalDetailsFlushForm) then) =
-      __$$_AdditionalDetailsFlushFormCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$_AdditionalDetailsFlushFormCopyWithImpl<$Res>
-    extends _$AdditionalDetailsEventCopyWithImpl<$Res,
-        _$_AdditionalDetailsFlushForm>
-    implements _$$_AdditionalDetailsFlushFormCopyWith<$Res> {
-  __$$_AdditionalDetailsFlushFormCopyWithImpl(
-      _$_AdditionalDetailsFlushForm _value,
-      $Res Function(_$_AdditionalDetailsFlushForm) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$_AdditionalDetailsFlushForm implements _AdditionalDetailsFlushForm {
-  const _$_AdditionalDetailsFlushForm();
-
-  @override
-  String toString() {
-    return 'AdditionalDetailsEvent.flushForm()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_AdditionalDetailsFlushForm);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(SalesOrganisationConfigs config) initialized,
-    required TResult Function(AdditionalDetailsLabel label, String newValue)
-        onTextChange,
-    required TResult Function(SalesOrganisationConfigs config) validateForm,
-    required TResult Function() flushForm,
-  }) {
-    return flushForm();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrganisationConfigs config)? initialized,
-    TResult? Function(AdditionalDetailsLabel label, String newValue)?
-        onTextChange,
-    TResult? Function(SalesOrganisationConfigs config)? validateForm,
-    TResult? Function()? flushForm,
-  }) {
-    return flushForm?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrganisationConfigs config)? initialized,
-    TResult Function(AdditionalDetailsLabel label, String newValue)?
-        onTextChange,
-    TResult Function(SalesOrganisationConfigs config)? validateForm,
-    TResult Function()? flushForm,
-    required TResult orElse(),
-  }) {
-    if (flushForm != null) {
-      return flushForm();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initialized value) initialized,
-    required TResult Function(_AdditionalDetailsTextOnChange value)
-        onTextChange,
-    required TResult Function(_AdditionalDetailsValidateForm value)
-        validateForm,
-    required TResult Function(_AdditionalDetailsFlushForm value) flushForm,
-  }) {
-    return flushForm(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_AdditionalDetailsTextOnChange value)? onTextChange,
-    TResult? Function(_AdditionalDetailsValidateForm value)? validateForm,
-    TResult? Function(_AdditionalDetailsFlushForm value)? flushForm,
-  }) {
-    return flushForm?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_AdditionalDetailsTextOnChange value)? onTextChange,
-    TResult Function(_AdditionalDetailsValidateForm value)? validateForm,
-    TResult Function(_AdditionalDetailsFlushForm value)? flushForm,
-    required TResult orElse(),
-  }) {
-    if (flushForm != null) {
-      return flushForm(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _AdditionalDetailsFlushForm implements AdditionalDetailsEvent {
-  const factory _AdditionalDetailsFlushForm() = _$_AdditionalDetailsFlushForm;
 }
 
 /// @nodoc

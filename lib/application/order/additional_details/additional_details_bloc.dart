@@ -33,16 +33,19 @@ class AdditionalDetailsBloc
   ) async {
     await event.map(
       initialized: (value) async => emit(
-        state.copyWith(
-          additionalDetailsData: state.additionalDetailsData.copyWith(
-            deliveryDate: DeliveryDate(
-              _initialDate(
-                futureDeliveryDay: value.config.futureDeliveryDay,
-                stateDate: state.additionalDetailsData.deliveryDate
-                    .getOrDefaultValue(''),
-              ),
-            ),
-          ),
+        AdditionalDetailsState.initial().copyWith(
+          additionalDetailsData:
+              AdditionalDetailsState.initial().additionalDetailsData.copyWith(
+                    deliveryDate: DeliveryDate(
+                      _initialDate(
+                        futureDeliveryDay: value.config.futureDeliveryDay,
+                        stateDate: AdditionalDetailsState.initial()
+                            .additionalDetailsData
+                            .deliveryDate
+                            .getOrDefaultValue(''),
+                      ),
+                    ),
+                  ),
         ),
       ),
       onTextChange: (value) async => _onTextChange(
@@ -53,9 +56,6 @@ class AdditionalDetailsBloc
       validateForm: (value) async => _validateAdditionalDetails(
         emit: emit,
         config: value.config,
-      ),
-      flushForm: (value) async => emit(
-        AdditionalDetailsState.initial(),
       ),
     );
   }

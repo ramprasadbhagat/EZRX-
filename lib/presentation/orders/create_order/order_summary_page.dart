@@ -357,7 +357,9 @@ class _Stepper extends StatelessWidget {
     if (state.isSubmitSuccess) {
       context
           .read<AdditionalDetailsBloc>()
-          .add(const AdditionalDetailsEvent.flushForm());
+          .add(AdditionalDetailsEvent.initialized(
+            config: context.read<SalesOrgBloc>().state.configs,
+          ));
       _moveToOrderHistory(context);
     }
     _handleError(context, state);

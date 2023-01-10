@@ -7,6 +7,7 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
+import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/config.dart';
@@ -55,6 +56,10 @@ class OrderDocumentTypeBlocMock
 
 class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
 
+class AdditionalDetailsBlocMock
+    extends MockBloc<AdditionalDetailsEvent, AdditionalDetailsState>
+    implements AdditionalDetailsBloc {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
@@ -66,6 +71,7 @@ void main() {
   late OrderDocumentTypeBlocMock orderDocumentTypeBlocMock;
   late UserBlocMock userBlocMock;
   late AppRouter autoRouterMock;
+  late AdditionalDetailsBlocMock additionalDetailsBlocMock;
   const salesCodeText = '1300 - ZPBN';
   const salesCodeText2 = '1500 - ZPKH';
 
@@ -132,7 +138,6 @@ void main() {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
     locator.registerLazySingleton(() => AppRouter());
     locator = GetIt.instance;
-    
   });
 
   setUp(() {
@@ -143,6 +148,7 @@ void main() {
     userBlocMock = UserBlocMock();
     autoRouterMock = AppRouter();
     bannerBlocMock = BannerBlocMock();
+    additionalDetailsBlocMock = AdditionalDetailsBlocMock();
     orderDocumentTypeBlocMock = OrderDocumentTypeBlocMock();
     when(() => mockCustomerCodeBloc.state)
         .thenReturn(CustomerCodeState.initial());
@@ -155,6 +161,8 @@ void main() {
     when(() => bannerBlocMock.state).thenReturn(BannerState.initial());
     when(() => orderDocumentTypeBlocMock.state)
         .thenReturn(OrderDocumentTypeState.initial());
+    when(() => additionalDetailsBlocMock.state)
+        .thenReturn(AdditionalDetailsState.initial());
   });
 
   group('Sales Org Selector Test ', () {
@@ -182,6 +190,8 @@ void main() {
               BlocProvider<OrderDocumentTypeBloc>(
                   create: (context) => orderDocumentTypeBlocMock),
               BlocProvider<UserBloc>(create: (context) => userBlocMock),
+              BlocProvider<AdditionalDetailsBloc>(
+                  create: (context) => additionalDetailsBlocMock),
             ],
             child: Material(
               child: Scaffold(

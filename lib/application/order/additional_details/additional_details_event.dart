@@ -12,8 +12,6 @@ class AdditionalDetailsEvent with _$AdditionalDetailsEvent {
   const factory AdditionalDetailsEvent.validateForm({
     required SalesOrganisationConfigs config,
   }) = _AdditionalDetailsValidateForm;
-  const factory AdditionalDetailsEvent.flushForm() =
-      _AdditionalDetailsFlushForm;
 }
 
 enum AdditionalDetailsLabel {
