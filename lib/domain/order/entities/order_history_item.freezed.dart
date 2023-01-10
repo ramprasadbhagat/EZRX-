@@ -21,7 +21,7 @@ mixin _$OrderHistoryItem {
   int get qty => throw _privateConstructorUsedError;
   ZpPrice get unitPrice => throw _privateConstructorUsedError;
   TotalPrice get totalPrice => throw _privateConstructorUsedError;
-  String get status => throw _privateConstructorUsedError;
+  StatusType get status => throw _privateConstructorUsedError;
   String get deliveryDate => throw _privateConstructorUsedError;
   String get deliveryTime => throw _privateConstructorUsedError;
   String get lineNumber => throw _privateConstructorUsedError;
@@ -51,7 +51,7 @@ abstract class $OrderHistoryItemCopyWith<$Res> {
       int qty,
       ZpPrice unitPrice,
       TotalPrice totalPrice,
-      String status,
+      StatusType status,
       String deliveryDate,
       String deliveryTime,
       String lineNumber,
@@ -120,7 +120,7 @@ class _$OrderHistoryItemCopyWithImpl<$Res, $Val extends OrderHistoryItem>
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StatusType,
       deliveryDate: null == deliveryDate
           ? _value.deliveryDate
           : deliveryDate // ignore: cast_nullable_to_non_nullable
@@ -183,7 +183,7 @@ abstract class _$$_OrderHistoryItemCopyWith<$Res>
       int qty,
       ZpPrice unitPrice,
       TotalPrice totalPrice,
-      String status,
+      StatusType status,
       String deliveryDate,
       String deliveryTime,
       String lineNumber,
@@ -250,7 +250,7 @@ class __$$_OrderHistoryItemCopyWithImpl<$Res>
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StatusType,
       deliveryDate: null == deliveryDate
           ? _value.deliveryDate
           : deliveryDate // ignore: cast_nullable_to_non_nullable
@@ -333,7 +333,7 @@ class _$_OrderHistoryItem extends _OrderHistoryItem {
   @override
   final TotalPrice totalPrice;
   @override
-  final String status;
+  final StatusType status;
   @override
   final String deliveryDate;
   @override
@@ -434,7 +434,7 @@ abstract class _OrderHistoryItem extends OrderHistoryItem {
       required final int qty,
       required final ZpPrice unitPrice,
       required final TotalPrice totalPrice,
-      required final String status,
+      required final StatusType status,
       required final String deliveryDate,
       required final String deliveryTime,
       required final String lineNumber,
@@ -459,7 +459,7 @@ abstract class _OrderHistoryItem extends OrderHistoryItem {
   @override
   TotalPrice get totalPrice;
   @override
-  String get status;
+  StatusType get status;
   @override
   String get deliveryDate;
   @override

@@ -26,6 +26,7 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_basic_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_history_local.dart';
@@ -532,8 +533,8 @@ void main() {
         when(() => mockOrderHistoryFilterByStatusBloc.state).thenReturn(
           OrderHistoryFilterByStatusState.initial().copyWith(
             filterByStatusName: [
-              'Cancelled',
-              'Delivered',
+              StatusType('Cancelled'),
+              StatusType('Delivered'),
             ],
           ),
         );
@@ -560,7 +561,7 @@ void main() {
         when(() => mockOrderHistoryFilterByStatusBloc.state).thenReturn(
           OrderHistoryFilterByStatusState.initial().copyWith(
             filterByStatusName: [
-              'Pending',
+              StatusType('Pending'),
             ],
           ),
         );

@@ -30,7 +30,7 @@ mixin _$OrderHistoryItemDto {
   double get unitPrice => throw _privateConstructorUsedError;
   @JsonKey(name: 'TotalPrice', defaultValue: 0.0)
   double get totalPrice => throw _privateConstructorUsedError;
-  @JsonKey(name: 'Status', defaultValue: 'NA')
+  @JsonKey(name: 'Status', defaultValue: '')
   String get status => throw _privateConstructorUsedError;
   @JsonKey(name: 'DeliveryDate')
   String get deliveryDate => throw _privateConstructorUsedError;
@@ -73,7 +73,7 @@ abstract class $OrderHistoryItemDtoCopyWith<$Res> {
       @JsonKey(name: 'Qty') int qty,
       @JsonKey(name: 'UnitPrice', defaultValue: 0.0) double unitPrice,
       @JsonKey(name: 'TotalPrice', defaultValue: 0.0) double totalPrice,
-      @JsonKey(name: 'Status', defaultValue: 'NA') String status,
+      @JsonKey(name: 'Status', defaultValue: '') String status,
       @JsonKey(name: 'DeliveryDate') String deliveryDate,
       @JsonKey(name: 'DeliveryTime') String deliveryTime,
       @JsonKey(name: 'LineNumber') String lineNumber,
@@ -205,7 +205,7 @@ abstract class _$$_OrderHistoryItemDtoCopyWith<$Res>
       @JsonKey(name: 'Qty') int qty,
       @JsonKey(name: 'UnitPrice', defaultValue: 0.0) double unitPrice,
       @JsonKey(name: 'TotalPrice', defaultValue: 0.0) double totalPrice,
-      @JsonKey(name: 'Status', defaultValue: 'NA') String status,
+      @JsonKey(name: 'Status', defaultValue: '') String status,
       @JsonKey(name: 'DeliveryDate') String deliveryDate,
       @JsonKey(name: 'DeliveryTime') String deliveryTime,
       @JsonKey(name: 'LineNumber') String lineNumber,
@@ -330,7 +330,7 @@ class _$_OrderHistoryItemDto extends _OrderHistoryItemDto {
       @JsonKey(name: 'Qty') required this.qty,
       @JsonKey(name: 'UnitPrice', defaultValue: 0.0) required this.unitPrice,
       @JsonKey(name: 'TotalPrice', defaultValue: 0.0) required this.totalPrice,
-      @JsonKey(name: 'Status', defaultValue: 'NA') required this.status,
+      @JsonKey(name: 'Status', defaultValue: '') required this.status,
       @JsonKey(name: 'DeliveryDate') required this.deliveryDate,
       @JsonKey(name: 'DeliveryTime') required this.deliveryTime,
       @JsonKey(name: 'LineNumber') required this.lineNumber,
@@ -363,7 +363,7 @@ class _$_OrderHistoryItemDto extends _OrderHistoryItemDto {
   @JsonKey(name: 'TotalPrice', defaultValue: 0.0)
   final double totalPrice;
   @override
-  @JsonKey(name: 'Status', defaultValue: 'NA')
+  @JsonKey(name: 'Status', defaultValue: '')
   final String status;
   @override
   @JsonKey(name: 'DeliveryDate')
@@ -490,7 +490,7 @@ abstract class _OrderHistoryItemDto extends OrderHistoryItemDto {
           required final double unitPrice,
       @JsonKey(name: 'TotalPrice', defaultValue: 0.0)
           required final double totalPrice,
-      @JsonKey(name: 'Status', defaultValue: 'NA')
+      @JsonKey(name: 'Status', defaultValue: '')
           required final String status,
       @JsonKey(name: 'DeliveryDate')
           required final String deliveryDate,
@@ -535,7 +535,7 @@ abstract class _OrderHistoryItemDto extends OrderHistoryItemDto {
   @JsonKey(name: 'TotalPrice', defaultValue: 0.0)
   double get totalPrice;
   @override
-  @JsonKey(name: 'Status', defaultValue: 'NA')
+  @JsonKey(name: 'Status', defaultValue: '')
   String get status;
   @override
   @JsonKey(name: 'DeliveryDate')

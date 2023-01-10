@@ -19,20 +19,22 @@ mixin _$OrderHistoryFilterByStatusEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(String statusName, bool isChecked)
+    required TResult Function(StatusType statusName, bool isChecked)
         checkedStatusFilter,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(String statusName, bool isChecked)? checkedStatusFilter,
+    TResult? Function(StatusType statusName, bool isChecked)?
+        checkedStatusFilter,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(String statusName, bool isChecked)? checkedStatusFilter,
+    TResult Function(StatusType statusName, bool isChecked)?
+        checkedStatusFilter,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -117,7 +119,7 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(String statusName, bool isChecked)
+    required TResult Function(StatusType statusName, bool isChecked)
         checkedStatusFilter,
   }) {
     return initialized();
@@ -127,7 +129,8 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(String statusName, bool isChecked)? checkedStatusFilter,
+    TResult? Function(StatusType statusName, bool isChecked)?
+        checkedStatusFilter,
   }) {
     return initialized?.call();
   }
@@ -136,7 +139,8 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(String statusName, bool isChecked)? checkedStatusFilter,
+    TResult Function(StatusType statusName, bool isChecked)?
+        checkedStatusFilter,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -187,7 +191,7 @@ abstract class _$$_CheckedStatusFilterCopyWith<$Res> {
           $Res Function(_$_CheckedStatusFilter) then) =
       __$$_CheckedStatusFilterCopyWithImpl<$Res>;
   @useResult
-  $Res call({String statusName, bool isChecked});
+  $Res call({StatusType statusName, bool isChecked});
 }
 
 /// @nodoc
@@ -209,7 +213,7 @@ class __$$_CheckedStatusFilterCopyWithImpl<$Res>
       statusName: null == statusName
           ? _value.statusName
           : statusName // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StatusType,
       isChecked: null == isChecked
           ? _value.isChecked
           : isChecked // ignore: cast_nullable_to_non_nullable
@@ -225,7 +229,7 @@ class _$_CheckedStatusFilter implements _CheckedStatusFilter {
       {required this.statusName, required this.isChecked});
 
   @override
-  final String statusName;
+  final StatusType statusName;
   @override
   final bool isChecked;
 
@@ -259,7 +263,7 @@ class _$_CheckedStatusFilter implements _CheckedStatusFilter {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(String statusName, bool isChecked)
+    required TResult Function(StatusType statusName, bool isChecked)
         checkedStatusFilter,
   }) {
     return checkedStatusFilter(statusName, isChecked);
@@ -269,7 +273,8 @@ class _$_CheckedStatusFilter implements _CheckedStatusFilter {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(String statusName, bool isChecked)? checkedStatusFilter,
+    TResult? Function(StatusType statusName, bool isChecked)?
+        checkedStatusFilter,
   }) {
     return checkedStatusFilter?.call(statusName, isChecked);
   }
@@ -278,7 +283,8 @@ class _$_CheckedStatusFilter implements _CheckedStatusFilter {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(String statusName, bool isChecked)? checkedStatusFilter,
+    TResult Function(StatusType statusName, bool isChecked)?
+        checkedStatusFilter,
     required TResult orElse(),
   }) {
     if (checkedStatusFilter != null) {
@@ -321,10 +327,10 @@ class _$_CheckedStatusFilter implements _CheckedStatusFilter {
 
 abstract class _CheckedStatusFilter implements OrderHistoryFilterByStatusEvent {
   const factory _CheckedStatusFilter(
-      {required final String statusName,
+      {required final StatusType statusName,
       required final bool isChecked}) = _$_CheckedStatusFilter;
 
-  String get statusName;
+  StatusType get statusName;
   bool get isChecked;
   @JsonKey(ignore: true)
   _$$_CheckedStatusFilterCopyWith<_$_CheckedStatusFilter> get copyWith =>
@@ -333,7 +339,7 @@ abstract class _CheckedStatusFilter implements OrderHistoryFilterByStatusEvent {
 
 /// @nodoc
 mixin _$OrderHistoryFilterByStatusState {
-  List<String> get filterByStatusName => throw _privateConstructorUsedError;
+  List<StatusType> get filterByStatusName => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $OrderHistoryFilterByStatusStateCopyWith<OrderHistoryFilterByStatusState>
@@ -348,7 +354,7 @@ abstract class $OrderHistoryFilterByStatusStateCopyWith<$Res> {
       _$OrderHistoryFilterByStatusStateCopyWithImpl<$Res,
           OrderHistoryFilterByStatusState>;
   @useResult
-  $Res call({List<String> filterByStatusName});
+  $Res call({List<StatusType> filterByStatusName});
 }
 
 /// @nodoc
@@ -371,7 +377,7 @@ class _$OrderHistoryFilterByStatusStateCopyWithImpl<$Res,
       filterByStatusName: null == filterByStatusName
           ? _value.filterByStatusName
           : filterByStatusName // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<StatusType>,
     ) as $Val);
   }
 }
@@ -385,7 +391,7 @@ abstract class _$$_OrderHistoryFilterByStatusStateCopyWith<$Res>
       __$$_OrderHistoryFilterByStatusStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<String> filterByStatusName});
+  $Res call({List<StatusType> filterByStatusName});
 }
 
 /// @nodoc
@@ -407,7 +413,7 @@ class __$$_OrderHistoryFilterByStatusStateCopyWithImpl<$Res>
       filterByStatusName: null == filterByStatusName
           ? _value._filterByStatusName
           : filterByStatusName // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<StatusType>,
     ));
   }
 }
@@ -417,13 +423,13 @@ class __$$_OrderHistoryFilterByStatusStateCopyWithImpl<$Res>
 class _$_OrderHistoryFilterByStatusState
     extends _OrderHistoryFilterByStatusState {
   const _$_OrderHistoryFilterByStatusState(
-      {required final List<String> filterByStatusName})
+      {required final List<StatusType> filterByStatusName})
       : _filterByStatusName = filterByStatusName,
         super._();
 
-  final List<String> _filterByStatusName;
+  final List<StatusType> _filterByStatusName;
   @override
-  List<String> get filterByStatusName {
+  List<StatusType> get filterByStatusName {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_filterByStatusName);
   }
@@ -458,12 +464,12 @@ class _$_OrderHistoryFilterByStatusState
 abstract class _OrderHistoryFilterByStatusState
     extends OrderHistoryFilterByStatusState {
   const factory _OrderHistoryFilterByStatusState(
-          {required final List<String> filterByStatusName}) =
+          {required final List<StatusType> filterByStatusName}) =
       _$_OrderHistoryFilterByStatusState;
   const _OrderHistoryFilterByStatusState._() : super._();
 
   @override
-  List<String> get filterByStatusName;
+  List<StatusType> get filterByStatusName;
   @override
   @JsonKey(ignore: true)
   _$$_OrderHistoryFilterByStatusStateCopyWith<

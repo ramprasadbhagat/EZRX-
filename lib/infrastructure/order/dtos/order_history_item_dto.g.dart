@@ -14,7 +14,7 @@ _$_OrderHistoryItemDto _$$_OrderHistoryItemDtoFromJson(
       qty: json['Qty'] as int,
       unitPrice: (json['UnitPrice'] as num?)?.toDouble() ?? 0.0,
       totalPrice: (json['TotalPrice'] as num?)?.toDouble() ?? 0.0,
-      status: json['Status'] as String? ?? 'NA',
+      status: json['Status'] as String? ?? '',
       deliveryDate: json['DeliveryDate'] as String,
       deliveryTime: json['DeliveryTime'] as String,
       lineNumber: json['LineNumber'] as String,

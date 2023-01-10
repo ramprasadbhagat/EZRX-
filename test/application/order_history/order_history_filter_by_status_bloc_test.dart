@@ -1,11 +1,11 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/order/order_history_filter_by_status/order_history_filter_by_status_bloc.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
-  final fakestatusName = <String>[];
-  const fakestatus = '';
+  final fakestatusName = <StatusType>[];
 
   group(' Order History Filter Bloc', () {
     blocTest('Intial',
@@ -17,28 +17,23 @@ void main() {
     blocTest('checkedStatusFilter failed',
         build: () => OrderHistoryFilterByStatusBloc(),
         act: (OrderHistoryFilterByStatusBloc bloc) async {
-          bloc.add(const OrderHistoryFilterByStatusEvent.checkedStatusFilter(
-              statusName: fakestatus, isChecked: false));
+          bloc.add(OrderHistoryFilterByStatusEvent.checkedStatusFilter(
+              statusName: StatusType(''), isChecked: false));
         },
         expect: () => [
               OrderHistoryFilterByStatusState.initial().copyWith(
-                filterByStatusName: [
-                  
-                ],
+                filterByStatusName: [],
               )
             ]);
-             blocTest('checkedStatusFilter succeed',
+    blocTest('checkedStatusFilter succeed',
         build: () => OrderHistoryFilterByStatusBloc(),
         act: (OrderHistoryFilterByStatusBloc bloc) async {
-          bloc.add(const OrderHistoryFilterByStatusEvent.checkedStatusFilter(
-              statusName: fakestatus, isChecked: true));
+          bloc.add(OrderHistoryFilterByStatusEvent.checkedStatusFilter(
+              statusName: StatusType(''), isChecked: true));
         },
         expect: () => [
               OrderHistoryFilterByStatusState.initial().copyWith(
-                filterByStatusName:[...fakestatusName, fakestatus]
-                
-              )
+                  filterByStatusName: [...fakestatusName, StatusType('')])
             ]);
   });
 }
-

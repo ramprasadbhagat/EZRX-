@@ -118,14 +118,15 @@ class OrderHistoryListTile extends StatelessWidget {
                               vertical: 4,
                             ),
                             alignment: Alignment.center,
-                            decoration: const BoxDecoration(
-                              color: ZPColors.lightSecondary,
-                              borderRadius: BorderRadius.all(
+                            decoration: BoxDecoration(
+                              color: orderHistoryItem
+                                  .status.displayStatusLabelColor,
+                              borderRadius: const BorderRadius.all(
                                 Radius.circular(12),
                               ),
                             ),
                             child: Text(
-                              orderHistoryItem.status.tr(),
+                              orderHistoryItem.status.getOrCrash(),
                               style: const TextStyle(
                                 color: ZPColors.black,
                                 fontSize: 10,

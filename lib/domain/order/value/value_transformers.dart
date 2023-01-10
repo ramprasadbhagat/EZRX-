@@ -1,4 +1,7 @@
+import 'dart:ui';
+
 import 'package:ezrxmobile/domain/order/entities/price_bonus.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
 
 double totalPriceStringAsFixed(String value) {
   return double.parse(value);
@@ -68,4 +71,20 @@ bool havingSubmitPrincipalForClient(String principalCode) {
 
 bool havingSubmitPrincipalForSalesRep(String principalCode) {
   return principalCode == '100225';
+}
+
+Color getStatusLabelColor(String statusType) {
+  switch (statusType) {
+    case 'Delivered':
+      return ZPColors.lightSecondary;
+    case 'Cancelled':
+    case 'Failed':
+      return ZPColors.lightRed;
+    case 'Pending':
+    case 'Picking in-progress':
+    case 'Order Created':
+    case 'Out for delivery':
+    default:
+      return ZPColors.lightYellow;
+  }
 }

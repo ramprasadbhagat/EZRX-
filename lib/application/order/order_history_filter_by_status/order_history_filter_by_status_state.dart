@@ -5,12 +5,12 @@ class OrderHistoryFilterByStatusState with _$OrderHistoryFilterByStatusState {
   const OrderHistoryFilterByStatusState._();
 
   const factory OrderHistoryFilterByStatusState({
-    required List<String> filterByStatusName,
+    required List<StatusType> filterByStatusName,
   }) = _OrderHistoryFilterByStatusState;
 
   factory OrderHistoryFilterByStatusState.initial() =>
       const OrderHistoryFilterByStatusState(
-        filterByStatusName: <String>[],
+        filterByStatusName: <StatusType>[],
       );
 
   List<String> get getAllStatusName => [
@@ -24,6 +24,6 @@ class OrderHistoryFilterByStatusState with _$OrderHistoryFilterByStatusState {
       ];
 
   bool isChecked(String status) {
-    return filterByStatusName.contains(status);
+    return filterByStatusName.contains(StatusType(status));
   }
 }
