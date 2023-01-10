@@ -22,7 +22,7 @@ class SavedOrderListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     locator<CountlyService>().recordCountlyView('Saved Order Screen');
-    
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Saved Orders').tr(),

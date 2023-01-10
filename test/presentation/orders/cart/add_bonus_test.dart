@@ -30,9 +30,7 @@ import 'package:mocktail/mocktail.dart';
 
 import '../../../utils/multi_bloc_provider_frame_wrapper.dart';
 
-class BonusMaterialBlocMock
-    extends MockBloc<BonusMaterialEvent, BonusMaterialState>
-    implements BonusMaterialBloc {}
+class BonusMaterialBlocMock extends MockBloc<BonusMaterialEvent, BonusMaterialState> implements BonusMaterialBloc {}
 
 class CartRepositoryMock extends Mock implements CartRepository {}
 
@@ -58,17 +56,22 @@ class CustomerCodeBlocMock
 class ShipToBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState>
     implements ShipToCodeBloc {}
 
+class MockSalesOrgBloc extends MockBloc<SalesOrgEvent, SalesOrgState> implements SalesOrgBloc {}
+
+class ShipToCodeBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState> implements ShipToCodeBloc {}
+
+
 void main() {
   late BonusMaterialBloc bonusMaterialBloc;
   late List<MaterialInfo> mockbonusItemWithDataList;
   late PriceAggregate cartItem;
   late TenderContractBloc tenderContractBlocMock;
   late BonusMaterialRepositoryMock bonusMaterialRepository;
-  late UserBloc userBloc;
-  late SalesOrgBloc salesOrgBloc;
-  late EligibilityBloc eligibilityBloc;
-  late CustomerCodeBloc customerCodeBloc;
-  late ShipToCodeBloc shipToCodeBloc;
+  late SalesOrgBloc salesOrgBlocMock;
+  late EligibilityBloc eligibilityBlocMock;
+  late UserBloc userBlocMock;
+  late CustomerCodeBloc customerCodeBlocMock;
+  late ShipToCodeBloc shipToCodeBlocMock;
 
   setUp(
     () {
@@ -76,11 +79,11 @@ void main() {
       bonusMaterialBloc = BonusMaterialBlocMock();
       tenderContractBlocMock = TenderContractBlocMock();
       bonusMaterialRepository = BonusMaterialRepositoryMock();
-      userBloc = UserBlocMock();
-      salesOrgBloc = SalesOrgBlocMock();
-      eligibilityBloc = EligibilityBlocMock();
-      customerCodeBloc = CustomerCodeBlocMock();
-      shipToCodeBloc = ShipToBlocMock();
+      salesOrgBlocMock = SalesOrgBlocMock();
+      eligibilityBlocMock = EligibilityBlocMock();
+      userBlocMock = UserBlocMock();
+      customerCodeBlocMock = CustomerCodeBlocMock();
+      shipToCodeBlocMock = ShipToCodeBlocMock();
 
       cartItem = PriceAggregate.empty().copyWith(
         quantity: 2,
@@ -92,6 +95,7 @@ void main() {
           ),
         ),
       );
+
       mockbonusItemWithDataList = [
         MaterialInfo.empty().copyWith(
           materialNumber: MaterialNumber('0000000000111111'),
@@ -101,20 +105,17 @@ void main() {
           ),
         ),
       ];
-      when(() => bonusMaterialBloc.state)
-          .thenReturn(BonusMaterialState.initial().copyWith(
+      when(() => bonusMaterialBloc.state).thenReturn(BonusMaterialState.initial().copyWith(
         failureOrSuccessOption: none(),
         bonus: mockbonusItemWithDataList,
         isFetching: false,
         isStarting: true,
       ));
-      when(() => userBloc.state).thenReturn(UserState.initial());
-      when(() => salesOrgBloc.state).thenReturn(SalesOrgState.initial());
-      when(() => eligibilityBloc.state).thenReturn(EligibilityState.initial());
-      when(() => customerCodeBloc.state).thenReturn(
-        CustomerCodeState.initial(),
-      );
-      when(() => shipToCodeBloc.state).thenReturn(ShipToCodeState.initial());
+when(() => userBlocMock.state).thenReturn(UserState.initial());
+      when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
+      when(() => eligibilityBlocMock.state).thenReturn(EligibilityState.initial());
+      when(() => customerCodeBlocMock.state).thenReturn(CustomerCodeState.initial());
+      when(() => shipToCodeBlocMock.state).thenReturn(ShipToCodeState.initial());
     },
   );
   group('Test Add_Bonus', () {
@@ -126,12 +127,35 @@ void main() {
           ),
           BlocProvider<TenderContractBloc>(
               create: (context) => tenderContractBlocMock),
-          BlocProvider<EligibilityBloc>(create: (context) => eligibilityBloc),
-          BlocProvider<ShipToCodeBloc>(create: (context) => shipToCodeBloc),
-          BlocProvider<UserBloc>(create: (context) => userBloc),
-          BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBloc),
+          BlocProvider<UserBloc>(
+            create: (context) => userBlocMock,
+          ),
+          BlocProvider<ShipToCodeBloc>(
+            create: (context) => shipToCodeBlocMock,
+          ),
+          BlocProvider<EligibilityBloc>(
+            create: (context) => eligibilityBlocMock,
+          ),
           BlocProvider<CustomerCodeBloc>(
-            create: (context) => customerCodeBloc,
+            create: (context) => customerCodeBlocMock,
+          ),
+          BlocProvider<SalesOrgBloc>(
+            create: (context) => salesOrgBlocMock,
+          ),
+          BlocProvider<UserBloc>(
+            create: (context) => userBlocMock,
+          ),
+          BlocProvider<ShipToCodeBloc>(
+            create: (context) => shipToCodeBlocMock,
+          ),
+          BlocProvider<EligibilityBloc>(
+            create: (context) => eligibilityBlocMock,
+          ),
+          BlocProvider<CustomerCodeBloc>(
+            create: (context) => customerCodeBlocMock,
+          ),
+          BlocProvider<SalesOrgBloc>(
+            create: (context) => salesOrgBlocMock,
           ),
         ],
         child: BonusAddPage(
@@ -172,12 +196,18 @@ void main() {
     });
 
     testWidgets('Test have bonus item list is fecthing.', (tester) async {
-      when(() => bonusMaterialBloc.state).thenReturn(
+      final expectedStates = <BonusMaterialState>[
+        BonusMaterialState.initial().copyWith(
+          isFetching: false,
+          isStarting: false,
+        ),
         BonusMaterialState.initial().copyWith(
           isFetching: true,
           isStarting: false,
-        ),
-      );
+        )
+      ];
+
+      whenListen(bonusMaterialBloc, Stream.fromIterable(expectedStates));
 
       await tester.runAsync(() async {
         await tester.pumpWidget(getWidget());
@@ -215,6 +245,83 @@ void main() {
       final bonusItemList = find.byKey(const Key('bonusItemList'));
       expect(bonusItemList, findsOneWidget);
     });
+
+    testWidgets('Test have bonus item list fetch failed.', (tester) async {
+      final expectedStates = <BonusMaterialState>[
+        BonusMaterialState.initial().copyWith(
+          isFetching: true,
+          isStarting: false,
+        ),
+        BonusMaterialState.initial().copyWith(
+          failureOrSuccessOption: optionOf(const Left(ApiFailure.other('Fake-error'))),
+          isFetching: false,
+          isStarting: false,
+        ),
+      ];
+
+      whenListen(bonusMaterialBloc, Stream.fromIterable(expectedStates));
+
+      await tester.pumpWidget(getWidget());
+      await tester.pumpAndSettle(const Duration(seconds: 3));
+      const snackBarText = 'Fake-error';
+      final snackBar = find.text(snackBarText);
+
+      expect(snackBar, findsOneWidget);
+    });
+
+    testWidgets('Test have bonus item list fetched when search text is initially valid.', (tester) async {
+      when(() => bonusMaterialBloc.state).thenReturn(BonusMaterialState.initial().copyWith(
+        isFetching: false,
+        isStarting: false,
+        searchKey: SearchKey('000'),
+        bonus: mockbonusItemWithDataList,
+      ));
+      await tester.runAsync(() async {
+        await tester.pumpWidget(getWidget());
+      });
+
+      await tester.pumpWidget(getWidget());
+      await tester.pump();
+      final cartPage = find.byKey(const Key('addBonus'));
+      expect(cartPage, findsOneWidget);
+      // await tester.pump();
+      final addBonusTextField = find.byKey(const Key('addBonusTextField'));
+      expect(addBonusTextField, findsOneWidget);
+      final bonusItemList = find.byKey(const Key('bonusItemList'));
+      expect(bonusItemList, findsOneWidget);
+    });
+
+    testWidgets('Test have bonus item list fetched when search text is valid', (tester) async {
+      final expectedStates = <BonusMaterialState>[
+        BonusMaterialState.initial().copyWith(
+          isFetching: false,
+          isStarting: false,
+          bonus: mockbonusItemWithDataList,
+        ),
+        BonusMaterialState.initial().copyWith(
+          isFetching: false,
+          isStarting: false,
+          searchKey: SearchKey('000'),
+          bonus: mockbonusItemWithDataList,
+        )
+      ];
+
+      whenListen(bonusMaterialBloc, Stream.fromIterable(expectedStates));
+
+      await tester.runAsync(() async {
+        await tester.pumpWidget(getWidget());
+      });
+
+      await tester.pumpWidget(getWidget());
+      await tester.pump();
+      final cartPage = find.byKey(const Key('addBonus'));
+      expect(cartPage, findsOneWidget);
+      // await tester.pump();
+      final addBonusTextField = find.byKey(const Key('addBonusTextField'));
+      expect(addBonusTextField, findsOneWidget);
+      final bonusItemList = find.byKey(const Key('bonusItemList'));
+      expect(bonusItemList, findsOneWidget);
+    });
     testWidgets('Test have bonus add.', (tester) async {
       when(() => bonusMaterialBloc.state).thenReturn(
         BonusMaterialState.initial().copyWith(
@@ -223,8 +330,7 @@ void main() {
           bonus: mockbonusItemWithDataList,
         ),
       );
-      when(() => tenderContractBlocMock.state)
-          .thenReturn(TenderContractState.initial());
+      when(() => tenderContractBlocMock.state).thenReturn(TenderContractState.initial());
       await tester.runAsync(() async {
         await tester.pumpWidget(getWidget());
       });

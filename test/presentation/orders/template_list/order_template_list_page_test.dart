@@ -183,7 +183,14 @@ void main() {
           orderTemplateList: orderTemplatesMock,
         ),
       );
+      final expectedStates = [
+        OrderTemplateListState.initial().copyWith(
+          isFetching: false,
+          apiFailureOrSuccessOption: optionOf(Right(orderTemplatesMock)),
+        ),
+      ];
 
+      whenListen(orderTemplateListBloc, Stream.fromIterable(expectedStates));
       await tester.pumpWidget(orderTemplatePage());
 
       final noOrderTemplate = find.text('No order template found');
@@ -226,6 +233,35 @@ void main() {
       await tester.pump();
       final errorMessage = find.byKey(const Key('snackBarMessage'));
       expect(errorMessage, findsOneWidget);
+    });
+
+    testWidgets('No Test fetch fail', (tester) async {
+      when(() => orderTemplateListBloc.state).thenReturn(
+        OrderTemplateListState.initial().copyWith(
+          isFetching: false,
+          apiFailureOrSuccessOption: none(),
+        ),
+      );
+
+      final expectedStates = [
+        OrderTemplateListState.initial().copyWith(
+          isFetching: false,
+          apiFailureOrSuccessOption: none(),
+        ),
+      ];
+
+      whenListen(orderTemplateListBloc, Stream.fromIterable(expectedStates));
+
+      await tester.runAsync(() async {
+        await tester.pumpWidget(orderTemplatePage());
+      });
+
+      final noOrderTemplate = find.text('No order template found');
+      final orderTemplateItem = find.byType(OrderTemplateItem);
+
+      expect(noOrderTemplate, findsOneWidget);
+      expect(orderTemplateItem, findsNothing);
+      await tester.pump();
     });
 
     testWidgets('Test order templates deletion', (tester) async {

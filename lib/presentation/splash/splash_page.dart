@@ -24,6 +24,7 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:ezrxmobile/presentation/splash/upgrader_localization_message.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -247,7 +248,7 @@ class SplashPage extends StatelessWidget {
       ],
       child: UpgradeAlert(
         upgrader: Upgrader(
-          messages: _UpgraderLocalizationMessage(),
+          messages: UpgraderLocalizationMessage(),
           dialogStyle: Platform.isIOS
               ? UpgradeDialogStyle.cupertino
               : UpgradeDialogStyle.material,
@@ -291,26 +292,4 @@ class SplashPage extends StatelessWidget {
   }
 }
 
-class _UpgraderLocalizationMessage extends UpgraderMessages {
-  @override
-  String message(UpgraderMessage messageKey) {
-    switch (messageKey) {
-      case UpgraderMessage.body:
-        return 'A new version of {{appName}} is available!'.tr();
-      case UpgraderMessage.buttonTitleIgnore:
-        return 'Ignore'.tr();
-      case UpgraderMessage.buttonTitleLater:
-        return 'Later'.tr();
-      case UpgraderMessage.buttonTitleUpdate:
-        return 'Update Now'.tr();
-      case UpgraderMessage.prompt:
-        return 'Want to update?'.tr();
-      case UpgraderMessage.releaseNotes:
-        return 'Release Notes'.tr();
-      case UpgraderMessage.title:
-        return 'Update App?'.tr();
-      default:
-        return super.message(messageKey) ?? '';
-    }
-  }
-}
+

@@ -11,8 +11,7 @@ import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.d
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
-import 'package:ezrxmobile/infrastructure/core/package_info/package_info.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/account/settings_page.dart';
 import 'package:ezrxmobile/presentation/aup_tc/aup_tc.dart';
 import 'package:ezrxmobile/presentation/home_tab.dart';
@@ -76,22 +75,26 @@ void main() {
   late ResetPasswordBloc resetPasswordBlocMock;
 
   setUpAll(() async {
+    setupLocator();
+
     TestWidgetsFlutterBinding.ensureInitialized();
     mockSalesOrgBloc = MockSalesOrgBloc();
     mockAuthBloc = MockAuthBloc();
     mockAupTcBloc = MockAupTcBloc();
     eligibilityBlocMock = EligibilityBlocMock();
     locator = GetIt.instance;
-    locator.registerLazySingleton(() => AppRouter());
-    locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
-    locator.registerLazySingleton(() => mockAuthBloc);
-
-    locator.registerLazySingleton(() => resetPasswordBlocMock);
-
-    locator.registerLazySingleton(() => PackageInfoService());
+    locator<Config>().appName;
+    locator<Config>().getCountlyApiKey;
+    locator<Config>().getCountlyServerUrl;
+    locator<Config>().getTCKHUrl;
+    locator<Config>().getTCMMUrl;
+    locator<Config>().getTCTHUrl;
+    locator<Config>().getTCTWUrl;
+    locator<Config>().getTCVNUrl;
+    locator<Config>().getTCENUrl;
+    locator<Config>().oktaConfig;
+    locator<Config>().packageName;
     autoRouterMock = locator<AppRouter>();
-    locator
-        .registerLazySingleton(() => CountlyService(config: locator<Config>()));
     PackageInfo.setMockInitialValues(
         appName: '',
         packageName: '"packageName"',
@@ -103,14 +106,11 @@ void main() {
 
   group('AupTc Widget Show hide base on state.showTermsAndConditon true', () {
     setUp(() {
-      // autoRouterMock = locator<AppRouter>();
       userBlocMock = UserBlocMock();
-      // authBlocMock = AuthBlocMock();
       cartBlocMock = CartBlocMock();
       paymentCustomerInformationBlocMock = PaymentCustomerInfoMockBloc();
       eligibilityBlocMock = EligibilityBlocMock();
       resetPasswordBlocMock = ResetPasswordMockBloc();
-      // autoRouterMock = locator<AppRouter>();
       when(() => userBlocMock.state).thenReturn(UserState.initial());
       when(() => mockAuthBloc.state).thenReturn(const AuthState.initial());
       when(() => cartBlocMock.state).thenReturn(CartState.initial());

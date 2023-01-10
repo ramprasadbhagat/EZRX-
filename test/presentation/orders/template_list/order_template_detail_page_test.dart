@@ -137,6 +137,14 @@ void main() {
     testWidgets(
       'Order Template Detail with material items',
       (tester) async {
+        when(() => materialPriceDetailBlocMock.state).thenReturn(
+            MaterialPriceDetailState.initial().copyWith(isValidating: false));
+        final expectedStates = [
+          MaterialPriceDetailState.initial().copyWith(isValidating: false)
+        ];
+
+        whenListen(
+            materialPriceDetailBlocMock, Stream.fromIterable(expectedStates));
         await tester.pumpWidget(orderTemplateDetailPage());
         expect(
             find.byKey(const Key('OrderTemplateDetailPage')), findsOneWidget);

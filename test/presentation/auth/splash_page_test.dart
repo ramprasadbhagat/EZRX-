@@ -10,27 +10,35 @@ import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/application/order/covid_material_list/covid_material_list_bloc.dart';
+import 'package:ezrxmobile/application/order/material_bundle_list/material_bundle_list_bloc.dart';
+import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
 import 'package:ezrxmobile/application/returns/user_restriction/user_restriction_list_bloc.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/full_name.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/payment_customer_information.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/splash/splash_page.dart';
+import 'package:ezrxmobile/presentation/splash/upgrader_localization_message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:upgrader/upgrader.dart';
 
 import '../../utils/widget_utils.dart';
 
@@ -72,6 +80,17 @@ class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
 class UserRestrictionListBlocMock
     extends MockBloc<UserRestrictionListEvent, UserRestrictionListState>
     implements UserRestrictionListBloc {}
+class MaterialBundleListBlocMock
+    extends MockBloc<MaterialBundleListEvent, MaterialBundleListState>
+    implements MaterialBundleListBloc {}
+
+class CovidMaterialListBlocMock
+    extends MockBloc<CovidMaterialListEvent, CovidMaterialListState>
+    implements CovidMaterialListBloc {}
+
+class OrderDocumentTypeBlocMock
+    extends MockBloc<OrderDocumentTypeEvent, OrderDocumentTypeState>
+    implements OrderDocumentTypeBloc {}
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -91,6 +110,9 @@ void main() {
   late ApproverBloc approverBlocMock;
   late UserRestrictionListBloc userRestrictionListBlocMock;
 
+  late MaterialBundleListBloc materialBundleListBlocMock;
+  late CovidMaterialListBloc covidMaterialListBlocMock;
+  late OrderDocumentTypeBloc orderDocumentTypeMock;
   final fakeSalesOrganisation =
       SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601'));
 
@@ -122,6 +144,8 @@ void main() {
       userBlocMock = UserBlocMock();
       salesOrgBlocMock = SalesOrgBlocMock();
       shipToCodeBLocMock = ShipToCodeBlocMock();
+      covidMaterialListBlocMock = CovidMaterialListBlocMock();
+      orderDocumentTypeMock = OrderDocumentTypeBlocMock();
       salesRepBlocMock = SalesRepBlocMock();
       aupTcBlocMock = AupTcBlocMock();
       cartBlocMock = CartBlocMock();
@@ -131,7 +155,7 @@ void main() {
       userRestrictionListBlocMock = UserRestrictionListBlocMock();
       eligibilityBlocMock = EligibilityBlocMock();
       autoRouterMock = locator<AppRouter>();
-
+      materialBundleListBlocMock = MaterialBundleListBlocMock();
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
       when(() => authBlocMock.state).thenReturn(const AuthState.initial());
       when(() => userBlocMock.state).thenReturn(UserState.initial());
@@ -176,8 +200,14 @@ void main() {
                 create: (context) => paymentCustomerInformationBlocMock),
             BlocProvider<PaymentTermBloc>(
                 create: (context) => paymentTermBlocMock),
+            BlocProvider<MaterialBundleListBloc>(
+                create: (context) => materialBundleListBlocMock),
             BlocProvider<EligibilityBloc>(
                 create: (context) => eligibilityBlocMock),
+            BlocProvider<CovidMaterialListBloc>(
+                create: (context) => covidMaterialListBlocMock),
+            BlocProvider<OrderDocumentTypeBloc>(
+                create: (context) => orderDocumentTypeMock),
           ],
           child: const SplashPage(),
         ),
@@ -190,6 +220,7 @@ void main() {
         const AuthState.initial(),
       ];
       whenListen(authBlocMock, Stream.fromIterable(expectedAuthListStates));
+
       await getWidget(tester);
       await tester.pump();
       final splashLoadingIndicator =
@@ -223,6 +254,20 @@ void main() {
     });
 
     testWidgets('When user has state organization', (tester) async {
+      final expectedStates = [
+        CartState.initial().copyWith(
+          apiFailureOrSuccessOption: optionOf(
+            Right([PriceAggregate.empty()]),
+          ),
+          isFetching: true,
+        ),
+        CartState.initial().copyWith(
+          apiFailureOrSuccessOption: none(),
+          isFetching: true,
+        ),
+      ];
+      whenListen(cartBlocMock, Stream.fromIterable(expectedStates));
+
       final expectedUserListStates = [
         UserState.initial(),
         UserState.initial().copyWith(user: fakeUser),
@@ -291,6 +336,70 @@ void main() {
       await getWidget(tester);
       await tester.pump();
       expect(find.text('Fake-Error'), findsOneWidget);
+    });
+
+    testWidgets('When user dont have state organization', (tester) async {
+      final expectedEligibilityStates = [
+        EligibilityState.initial().copyWith(
+            salesOrganisation: SalesOrganisation.empty(),
+            customerCodeInfo: CustomerCodeInfo.empty()
+                .copyWith(customerGrp4: CustomerGrp4('VR')),
+            salesOrgConfigs: SalesOrganisationConfigs.empty(),
+            user: fakeUser),
+        EligibilityState.initial().copyWith(
+          salesOrganisation:
+              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601')),
+          customerCodeInfo: CustomerCodeInfo.empty()
+              .copyWith(customerGrp4: CustomerGrp4('VR')),
+          salesOrgConfigs: SalesOrganisationConfigs.empty()
+              .copyWith(disableBundles: false, salesOrg: SalesOrg('2601')),
+          user: fakeUser.copyWith(
+            role: Role.empty().copyWith(
+              type: RoleType('internal_sales_rep'),
+            ),
+          ),
+        ),
+      ];
+
+      whenListen(
+          eligibilityBlocMock, Stream.fromIterable(expectedEligibilityStates));
+      final expectedStates = [
+        CartState.initial().copyWith(apiFailureOrSuccessOption: none()),
+        CartState.initial().copyWith(
+          apiFailureOrSuccessOption: optionOf(
+            Right([PriceAggregate.empty()]),
+          ),
+          isFetching: true,
+        ),
+      ];
+      whenListen(cartBlocMock, Stream.fromIterable(expectedStates));
+      final expectedUserListStates = [
+        UserState.initial(),
+        UserState.initial().copyWith(
+          user: fakeUser.copyWith(userSalesOrganisations: []),
+        ),
+      ];
+      whenListen(userBlocMock, Stream.fromIterable(expectedUserListStates));
+
+      await getWidget(tester);
+      await tester.pump();
+
+      verify(() => aupTcBlocMock
+              .add(AupTcEvent.show(fakeUser, salesOrgBlocMock.state.salesOrg)))
+          .called(1);
+
+      verify(() => cartBlocMock.add(const CartEvent.initialized())).called(1);
+      expect(find.byType(UpgradeAlert), findsOneWidget);
+    });
+
+    test('testing UpgraderLocalizationMessage valid', () async {
+      expect(UpgraderLocalizationMessage(), isNotNull);
+      expect(() => UpgraderLocalizationMessage().message(UpgraderMessage.body), isNotNull);
+      expect(() => UpgraderLocalizationMessage().message(UpgraderMessage.buttonTitleIgnore), isNotNull);
+      expect(() => UpgraderLocalizationMessage().message(UpgraderMessage.buttonTitleLater), isNotNull);
+      expect(() => UpgraderLocalizationMessage().message(UpgraderMessage.prompt), isNotNull);
+      expect(() => UpgraderLocalizationMessage().message(UpgraderMessage.releaseNotes), isNotNull);
+      expect(() => UpgraderLocalizationMessage().message(UpgraderMessage.title), isNotNull);
     });
   });
 }

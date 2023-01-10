@@ -172,6 +172,16 @@ void main() {
           isFetching: true,
         ),
       );
+
+      final expectedStates = [
+        SavedOrderListState.initial().copyWith(
+          isFetching: true,
+          apiFailureOrSuccessOption: none(),
+        ),
+      ];
+
+      whenListen(savedOrderListBlocMock, Stream.fromIterable(expectedStates));
+
       await getWidget(tester);
       await tester.pump(const Duration(milliseconds: 100));
       final loadIndicator = find.byKey(const Key('loadIndicator'));
@@ -189,6 +199,14 @@ void main() {
         canLoadMore: true,
         isFetching: false,
       ));
+      final expectedStates = [
+        SavedOrderListState.initial().copyWith(
+          isFetching: false,
+          apiFailureOrSuccessOption: optionOf(Right(savedOrdersMock)),
+        ),
+      ];
+
+      whenListen(savedOrderListBlocMock, Stream.fromIterable(expectedStates));
 
       await getWidget(tester);
       await tester.pump(const Duration(milliseconds: 100));
@@ -281,6 +299,23 @@ void main() {
 
     testWidgets('Press order item to go to Detail screen', (tester) async {
       final order = savedOrdersMock.first;
+
+      final expectedStatess = [
+        SavedOrderListState.initial().copyWith(
+          isFetching: false,
+          savedOrders: [order],
+          apiFailureOrSuccessOption: optionOf(
+            Right(savedOrdersMock),
+          ),
+        ),
+        SavedOrderListState.initial().copyWith(
+          isFetching: false,
+          savedOrders: [order],
+          apiFailureOrSuccessOption: none(),
+        ),
+      ];
+
+      whenListen(savedOrderListBlocMock, Stream.fromIterable(expectedStatess));
       when(() => savedOrderListBlocMock.state).thenReturn(
         SavedOrderListState.initial().copyWith(
           savedOrders: [order],

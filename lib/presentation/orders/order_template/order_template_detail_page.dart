@@ -43,32 +43,32 @@ class OrderTemplateDetailPage extends StatelessWidget {
       body: RefreshIndicator(
         color: ZPColors.primary,
         onRefresh: () async => context.read<MaterialPriceDetailBloc>().add(
-          MaterialPriceDetailEvent.refresh(
-            user: context.read<UserBloc>().state.user,
-            customerCode:
-            context.read<CustomerCodeBloc>().state.customerCodeInfo,
-            salesOrganisation:
-            context.read<SalesOrgBloc>().state.salesOrganisation,
-            salesOrganisationConfigs:
-            context.read<SalesOrgBloc>().state.configs,
-            shipToCode: context.read<ShipToCodeBloc>().state.shipToInfo,
-            materialInfoList: order.allMaterialQueryInfo,
-            pickAndPack:
-            context.read<EligibilityBloc>().state.getPNPValueMaterial,
-          ),
-        ),
+              MaterialPriceDetailEvent.refresh(
+                user: context.read<UserBloc>().state.user,
+                customerCode:
+                    context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                salesOrganisation:
+                    context.read<SalesOrgBloc>().state.salesOrganisation,
+                salesOrganisationConfigs:
+                    context.read<SalesOrgBloc>().state.configs,
+                shipToCode: context.read<ShipToCodeBloc>().state.shipToInfo,
+                materialInfoList: order.allMaterialQueryInfo,
+                pickAndPack:
+                    context.read<EligibilityBloc>().state.getPNPValueMaterial,
+              ),
+            ),
         child: CustomScrollView(
           slivers: [
             SliverToBoxAdapter(
               child: BlocBuilder<MaterialPriceDetailBloc,
                   MaterialPriceDetailState>(
                 buildWhen: (previous, current) =>
-                previous.isValidating != current.isValidating,
+                    previous.isValidating != current.isValidating,
                 builder: (context, state) {
                   return OrderInvalidWarning(
                     isLoading: state.isValidating,
                     isInvalidOrder: order.allMaterialQueryInfo.every(
-                          (item) => !state.isValidMaterial(
+                      (item) => !state.isValidMaterial(
                         query: item,
                       ),
                     ),
@@ -78,7 +78,7 @@ class OrderTemplateDetailPage extends StatelessWidget {
             ),
             SliverList(
               delegate: SliverChildBuilderDelegate(
-                    (context, index) {
+                (context, index) {
                   final material = order.items[index];
 
                   return OrderMaterialItem(
@@ -97,21 +97,21 @@ class OrderTemplateDetailPage extends StatelessWidget {
               child: BlocBuilder<MaterialPriceDetailBloc,
                   MaterialPriceDetailState>(
                 buildWhen: (previous, current) =>
-                previous.isValidating != current.isValidating ||
+                    previous.isValidating != current.isValidating ||
                     previous.isFetching != current.isFetching,
                 builder: (context, state) {
                   return OrderActionButton(
                     onAddToCartPressed: () => _addToCartPressed(context, state),
                     onDeletePressed: () {
                       context.read<OrderTemplateListBloc>().add(
-                        OrderTemplateListEvent.delete(
-                          order,
-                        ),
-                      );
+                            OrderTemplateListEvent.delete(
+                              order,
+                            ),
+                          );
                       context.router.pop();
                     },
                     enableAddToCart: order.allMaterialQueryInfo.any(
-                          (item) => state.isValidMaterial(
+                      (item) => state.isValidMaterial(
                         query: item,
                       ),
                     ),
@@ -152,14 +152,14 @@ class OrderTemplateDetailPage extends StatelessWidget {
     }).toList();
 
     context.read<CartBloc>().add(CartEvent.addToCartFromList(
-      items: items,
-      customerCodeInfo: eligibilityState.customerCodeInfo,
-      salesOrganisationConfigs: eligibilityState.salesOrgConfigs,
-      salesOrganisation: eligibilityState.salesOrganisation,
-      shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
-      doNotAllowOutOfStockMaterials:
-      eligibilityState.doNotAllowOutOfStockMaterials,
-    ));
+          items: items,
+          customerCodeInfo: eligibilityState.customerCodeInfo,
+          salesOrganisationConfigs: eligibilityState.salesOrgConfigs,
+          salesOrganisation: eligibilityState.salesOrganisation,
+          shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+          doNotAllowOutOfStockMaterials:
+              eligibilityState.doNotAllowOutOfStockMaterials,
+        ));
     context.router.pushNamed('cart_page');
     locator<CountlyService>().addCountlyEvent('Use template');
   }

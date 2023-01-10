@@ -497,13 +497,13 @@ void main() {
       tester.binding.window.physicalSizeTestValue = const Size(1080, 1920);
       tester.binding.window.devicePixelRatioTestValue = 1.0;
       final eligibilityState = eligibilityBlocMock.state.copyWith(
-          salesOrganisation:
-              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601')),
-          user: User.empty().copyWith(
-              role:
-                  Role.empty().copyWith(type: RoleType('internal_sales_rep'))),
-          salesOrgConfigs: SalesOrganisationConfigs.empty()
-              .copyWith(disableOrderType: false));
+        salesOrganisation:
+            SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601')),
+        user: User.empty().copyWith(
+            role: Role.empty().copyWith(type: RoleType('internal_sales_rep'))),
+        salesOrgConfigs:
+            SalesOrganisationConfigs.empty().copyWith(disableOrderType: false),
+      );
       final isOrderTypeEnable = eligibilityState.isOrderTypeEnable;
       expect(isOrderTypeEnable, true);
 
