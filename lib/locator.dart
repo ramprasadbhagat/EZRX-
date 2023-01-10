@@ -198,6 +198,16 @@ import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
 import 'package:local_auth/local_auth.dart';
 
+import 'package:ezrxmobile/infrastructure/returns/datasource/return_request_type_code_local.dart';
+
+import 'package:ezrxmobile/infrastructure/returns/datasource/return_request_type_code_query.dart';
+
+import 'package:ezrxmobile/infrastructure/returns/datasource/return_request_type_code_remote.dart';
+
+import 'package:ezrxmobile/infrastructure/returns/repository/return_request_type_code_repository.dart';
+
+import 'package:ezrxmobile/application/returns/return_request_type_code/return_request_type_code_bloc.dart';
+
 GetIt locator = GetIt.instance;
 
 void setupLocator() {
@@ -1330,6 +1340,38 @@ void setupLocator() {
   locator.registerFactory(
     () => DiscountOverrideBloc(
       repository: locator<DiscountOverrideRepository>(),
+    ),
+  );
+
+  //============================================================
+  //  Return Request Code Type
+  //
+  //============================================================
+
+  locator.registerLazySingleton(() => ReturnRequestTypeCodeLocalDataSource());
+
+  locator.registerLazySingleton(() => ReturnRequestTypeCodeQuery());
+
+  locator.registerLazySingleton(
+    () => ReturnRequestTypeCodeRemoteDataSource(
+      httpService: locator<HttpService>(),
+      queryMutation: locator<ReturnRequestTypeCodeQuery>(),
+      config: locator<Config>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => ReturnRequestTypeCodeRepository(
+      config: locator<Config>(),
+      localDataSource: locator<ReturnRequestTypeCodeLocalDataSource>(),
+      remoteDataSource: locator<ReturnRequestTypeCodeRemoteDataSource>(),
+    ),
+  );
+
+  locator.registerFactory(
+    () => ReturnRequestTypeCodeBloc(
+      returnRequestTypeCodeRepository: locator<ReturnRequestTypeCodeRepository>(),
     ),
   );
 

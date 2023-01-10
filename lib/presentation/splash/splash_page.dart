@@ -31,6 +31,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:upgrader/upgrader.dart';
 
+import 'package:ezrxmobile/application/returns/return_request_type_code/return_request_type_code_bloc.dart';
+
 class SplashPage extends StatelessWidget {
   const SplashPage({Key? key}) : super(key: key);
 
@@ -214,10 +216,21 @@ class SplashPage extends StatelessWidget {
               previous.user.role.type.hasReturnsAdminAccess !=
                   current.user.role.type.hasReturnsAdminAccess,
           listener: (context, state) {
-            final areReturnsEnabled = state.isReturnsEnable;
-            final isAdmin = state.user.role.type.hasReturnsAdminAccess;
+            if (!state.isReturnsEnable) return;
 
-            if (!areReturnsEnabled || !isAdmin) return;
+            context.read<UsageCodeBloc>().add(
+                  UsageCodeEvent.fetch(
+                    salesOrg: state.salesOrganisation.salesOrg,
+                  ),
+                );
+
+            context.read<ReturnRequestTypeCodeBloc>().add(
+                  ReturnRequestTypeCodeEvent.fetch(
+                    salesOrganisation: state.salesOrganisation,
+                  ),
+                );
+
+            if (!state.user.role.type.hasReturnsAdminAccess) return;
 
             context.read<UserRestrictionListBloc>().add(
                   UserRestrictionListEvent.fetch(
@@ -229,18 +242,6 @@ class SplashPage extends StatelessWidget {
                   PolicyConfigurationListEvent.fetch(
                     salesOrganisation:
                         context.read<SalesOrgBloc>().state.salesOrganisation,
-                  ),
-                );
-          },
-        ),
-        BlocListener<EligibilityBloc, EligibilityState>(
-          listenWhen: (previous, current) =>
-              previous.isReturnsEnable != current.isReturnsEnable &&
-              current.isReturnsEnable,
-          listener: (context, state) {
-            context.read<UsageCodeBloc>().add(
-                  UsageCodeEvent.fetch(
-                    salesOrg: state.salesOrganisation.salesOrg,
                   ),
                 );
           },

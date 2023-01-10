@@ -70,6 +70,8 @@ import 'package:sizer/sizer.dart';
 import 'package:upgrader/upgrader.dart';
 import 'package:wakelock/wakelock.dart';
 
+import 'package:ezrxmobile/application/returns/return_request_type_code/return_request_type_code_bloc.dart';
+
 final _crashlytics = locator<FirebaseCrashlyticsService>().crashlytics;
 
 Future<void> _firebaseMessagingBackgroundHandler(
@@ -269,6 +271,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider<PolicyConfigurationListBloc>(
           create: (context) => locator<PolicyConfigurationListBloc>(),
+        ),
+        BlocProvider<ReturnRequestTypeCodeBloc>(
+          create: (context) => locator<ReturnRequestTypeCodeBloc>(),
         ),
       ],
       child: MaterialApp.router(
