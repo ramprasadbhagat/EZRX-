@@ -714,6 +714,7 @@ void main() {
             itemType: CartItemType.material,
           ),
         ]),
+        poAttachent: [],
       );
 
       when(() => orderLocalDataSource.createDraftOrder(
@@ -778,6 +779,7 @@ void main() {
           username: Username('mock_user'),
           email: EmailAddress('user@gmail.com'),
           customerCode: CustomerCode('100007654'));
+
 
       final draftOrder = SavedOrder.empty().copyWith(
         deliveryDocument: mockShipToInfo.shipToName.name1,

@@ -272,6 +272,7 @@ class OrderRepository implements IOrderRepository {
           : user.fullName.toString(),
       referenceNotes: data.referenceNote.getValue(),
       items: _getItemList(cartItems),
+      poAttachent: data.poDocuments,
     );
   }
 
@@ -319,6 +320,7 @@ class OrderRepository implements IOrderRepository {
       blockOrder: false,
       //TODO: principle list from sales org config
       materials: _getMaterialInfoList(cartItems: cartItems),
+      poDocuments: data.poDocuments,
     );
   }
 }

@@ -45,6 +45,10 @@ _$_SavedOrderDto _$$_SavedOrderDtoFromJson(Map<String, dynamic> json) =>
       user: json['user'] as String? ?? '',
       contactPerson: json['contactPerson'] as String? ?? '',
       referenceNotes: json['referenceNote'] as String? ?? '',
+      poAttachent: json['POAttachent'] == null
+          ? []
+          : const _PoDocumentsListConverter()
+              .fromJson(json['POAttachent'] as String),
     );
 
 Map<String, dynamic> _$$_SavedOrderDtoToJson(_$_SavedOrderDto instance) =>
@@ -83,4 +87,6 @@ Map<String, dynamic> _$$_SavedOrderDtoToJson(_$_SavedOrderDto instance) =>
       'user': instance.user,
       'contactPerson': instance.contactPerson,
       'referenceNote': instance.referenceNotes,
+      'POAttachent':
+          const _PoDocumentsListConverter().toJson(instance.poAttachent),
     };

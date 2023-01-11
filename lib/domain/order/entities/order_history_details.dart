@@ -18,7 +18,7 @@ class OrderHistoryDetails with _$OrderHistoryDetails {
     required List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItem,
     required OrderHistoryDetailsPaymentTerm orderHistoryDetailsPaymentTerm,
     required String orderHistoryDetailsSpecialInstructions,
-    required List<OrderHistoryDetailsPODocuments>
+    required List<PoDocuments>
         orderHistoryDetailsPoDocuments,
     required List<OrderHistoryDetailsMessages> orderHistoryDetailsMessages,
   }) = _OrderHistoryDetails;
@@ -29,7 +29,7 @@ class OrderHistoryDetails with _$OrderHistoryDetails {
         orderHistoryDetailsOrderItem: <OrderHistoryDetailsOrderItem>[],
         orderHistoryDetailsPaymentTerm: OrderHistoryDetailsPaymentTerm.empty(),
         orderHistoryDetailsSpecialInstructions: '',
-        orderHistoryDetailsPoDocuments: <OrderHistoryDetailsPODocuments>[],
+        orderHistoryDetailsPoDocuments: <PoDocuments>[],
         orderHistoryDetailsMessages: <OrderHistoryDetailsMessages>[],
       );
 

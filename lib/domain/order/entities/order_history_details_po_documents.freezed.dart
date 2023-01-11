@@ -15,31 +15,28 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$OrderHistoryDetailsPODocuments {
+mixin _$PoDocuments {
   String get url => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $OrderHistoryDetailsPODocumentsCopyWith<OrderHistoryDetailsPODocuments>
-      get copyWith => throw _privateConstructorUsedError;
+  $PoDocumentsCopyWith<PoDocuments> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $OrderHistoryDetailsPODocumentsCopyWith<$Res> {
-  factory $OrderHistoryDetailsPODocumentsCopyWith(
-          OrderHistoryDetailsPODocuments value,
-          $Res Function(OrderHistoryDetailsPODocuments) then) =
-      _$OrderHistoryDetailsPODocumentsCopyWithImpl<$Res,
-          OrderHistoryDetailsPODocuments>;
+abstract class $PoDocumentsCopyWith<$Res> {
+  factory $PoDocumentsCopyWith(
+          PoDocuments value, $Res Function(PoDocuments) then) =
+      _$PoDocumentsCopyWithImpl<$Res, PoDocuments>;
   @useResult
   $Res call({String url, String name});
 }
 
 /// @nodoc
-class _$OrderHistoryDetailsPODocumentsCopyWithImpl<$Res,
-        $Val extends OrderHistoryDetailsPODocuments>
-    implements $OrderHistoryDetailsPODocumentsCopyWith<$Res> {
-  _$OrderHistoryDetailsPODocumentsCopyWithImpl(this._value, this._then);
+class _$PoDocumentsCopyWithImpl<$Res, $Val extends PoDocuments>
+    implements $PoDocumentsCopyWith<$Res> {
+  _$PoDocumentsCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -66,25 +63,22 @@ class _$OrderHistoryDetailsPODocumentsCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_OrderHistoryDetailsPODocumentsCopyWith<$Res>
-    implements $OrderHistoryDetailsPODocumentsCopyWith<$Res> {
-  factory _$$_OrderHistoryDetailsPODocumentsCopyWith(
-          _$_OrderHistoryDetailsPODocuments value,
-          $Res Function(_$_OrderHistoryDetailsPODocuments) then) =
-      __$$_OrderHistoryDetailsPODocumentsCopyWithImpl<$Res>;
+abstract class _$$_PoDocumentsCopyWith<$Res>
+    implements $PoDocumentsCopyWith<$Res> {
+  factory _$$_PoDocumentsCopyWith(
+          _$_PoDocuments value, $Res Function(_$_PoDocuments) then) =
+      __$$_PoDocumentsCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String url, String name});
 }
 
 /// @nodoc
-class __$$_OrderHistoryDetailsPODocumentsCopyWithImpl<$Res>
-    extends _$OrderHistoryDetailsPODocumentsCopyWithImpl<$Res,
-        _$_OrderHistoryDetailsPODocuments>
-    implements _$$_OrderHistoryDetailsPODocumentsCopyWith<$Res> {
-  __$$_OrderHistoryDetailsPODocumentsCopyWithImpl(
-      _$_OrderHistoryDetailsPODocuments _value,
-      $Res Function(_$_OrderHistoryDetailsPODocuments) _then)
+class __$$_PoDocumentsCopyWithImpl<$Res>
+    extends _$PoDocumentsCopyWithImpl<$Res, _$_PoDocuments>
+    implements _$$_PoDocumentsCopyWith<$Res> {
+  __$$_PoDocumentsCopyWithImpl(
+      _$_PoDocuments _value, $Res Function(_$_PoDocuments) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -93,7 +87,7 @@ class __$$_OrderHistoryDetailsPODocumentsCopyWithImpl<$Res>
     Object? url = null,
     Object? name = null,
   }) {
-    return _then(_$_OrderHistoryDetailsPODocuments(
+    return _then(_$_PoDocuments(
       url: null == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
@@ -108,10 +102,8 @@ class __$$_OrderHistoryDetailsPODocumentsCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_OrderHistoryDetailsPODocuments
-    extends _OrderHistoryDetailsPODocuments {
-  _$_OrderHistoryDetailsPODocuments({required this.url, required this.name})
-      : super._();
+class _$_PoDocuments extends _PoDocuments {
+  _$_PoDocuments({required this.url, required this.name}) : super._();
 
   @override
   final String url;
@@ -120,14 +112,14 @@ class _$_OrderHistoryDetailsPODocuments
 
   @override
   String toString() {
-    return 'OrderHistoryDetailsPODocuments(url: $url, name: $name)';
+    return 'PoDocuments(url: $url, name: $name)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OrderHistoryDetailsPODocuments &&
+            other is _$_PoDocuments &&
             (identical(other.url, url) || other.url == url) &&
             (identical(other.name, name) || other.name == name));
   }
@@ -138,17 +130,14 @@ class _$_OrderHistoryDetailsPODocuments
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OrderHistoryDetailsPODocumentsCopyWith<_$_OrderHistoryDetailsPODocuments>
-      get copyWith => __$$_OrderHistoryDetailsPODocumentsCopyWithImpl<
-          _$_OrderHistoryDetailsPODocuments>(this, _$identity);
+  _$$_PoDocumentsCopyWith<_$_PoDocuments> get copyWith =>
+      __$$_PoDocumentsCopyWithImpl<_$_PoDocuments>(this, _$identity);
 }
 
-abstract class _OrderHistoryDetailsPODocuments
-    extends OrderHistoryDetailsPODocuments {
-  factory _OrderHistoryDetailsPODocuments(
-      {required final String url,
-      required final String name}) = _$_OrderHistoryDetailsPODocuments;
-  _OrderHistoryDetailsPODocuments._() : super._();
+abstract class _PoDocuments extends PoDocuments {
+  factory _PoDocuments(
+      {required final String url, required final String name}) = _$_PoDocuments;
+  _PoDocuments._() : super._();
 
   @override
   String get url;
@@ -156,6 +145,6 @@ abstract class _OrderHistoryDetailsPODocuments
   String get name;
   @override
   @JsonKey(ignore: true)
-  _$$_OrderHistoryDetailsPODocumentsCopyWith<_$_OrderHistoryDetailsPODocuments>
-      get copyWith => throw _privateConstructorUsedError;
+  _$$_PoDocumentsCopyWith<_$_PoDocuments> get copyWith =>
+      throw _privateConstructorUsedError;
 }

@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -15,6 +16,7 @@ class AdditionalDetailsData with _$AdditionalDetailsData {
     required ContactNumber contactNumber,
     required PaymentTerm paymentTerm,
     required DeliveryDate deliveryDate,
+    required List<PoDocuments> poDocuments,
   }) = _AdditionalDetailsData;
 
   factory AdditionalDetailsData.empty() => AdditionalDetailsData(
@@ -26,5 +28,6 @@ class AdditionalDetailsData with _$AdditionalDetailsData {
         contactNumber: ContactNumber(''),
         paymentTerm: PaymentTerm(''),
         deliveryDate: DeliveryDate(''),
+        poDocuments: <PoDocuments>[],
       );
 }

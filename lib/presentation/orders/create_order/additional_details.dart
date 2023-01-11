@@ -5,6 +5,7 @@ import 'package:ezrxmobile/application/order/additional_details/additional_detai
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/order/entities/additional_details_data.dart';
+import 'package:ezrxmobile/presentation/orders/create_order/order_summary/addition_details/additional_attachment.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/order_type_selector.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -102,6 +103,10 @@ class AdditionalDetails extends StatelessWidget {
                   child: const OrderTypeSelector(),
                 )
               : const SizedBox.shrink(),
+          const SizedBox(height: 9),
+          if (context.read<EligibilityBloc>().state.isShowPOAttachmentEnable)
+            const AdditionPoAttachmentUpload(),
+
         ],
       ),
     );

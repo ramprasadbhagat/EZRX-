@@ -26,6 +26,7 @@ mixin _$AdditionalDetailsData {
   ContactNumber get contactNumber => throw _privateConstructorUsedError;
   PaymentTerm get paymentTerm => throw _privateConstructorUsedError;
   DeliveryDate get deliveryDate => throw _privateConstructorUsedError;
+  List<PoDocuments> get poDocuments => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AdditionalDetailsDataCopyWith<AdditionalDetailsData> get copyWith =>
@@ -46,7 +47,8 @@ abstract class $AdditionalDetailsDataCopyWith<$Res> {
       ContactPerson contactPerson,
       ContactNumber contactNumber,
       PaymentTerm paymentTerm,
-      DeliveryDate deliveryDate});
+      DeliveryDate deliveryDate,
+      List<PoDocuments> poDocuments});
 }
 
 /// @nodoc
@@ -71,6 +73,7 @@ class _$AdditionalDetailsDataCopyWithImpl<$Res,
     Object? contactNumber = null,
     Object? paymentTerm = null,
     Object? deliveryDate = null,
+    Object? poDocuments = null,
   }) {
     return _then(_value.copyWith(
       customerPoReference: null == customerPoReference
@@ -105,6 +108,10 @@ class _$AdditionalDetailsDataCopyWithImpl<$Res,
           ? _value.deliveryDate
           : deliveryDate // ignore: cast_nullable_to_non_nullable
               as DeliveryDate,
+      poDocuments: null == poDocuments
+          ? _value.poDocuments
+          : poDocuments // ignore: cast_nullable_to_non_nullable
+              as List<PoDocuments>,
     ) as $Val);
   }
 }
@@ -125,7 +132,8 @@ abstract class _$$_AdditionalDetailsDataCopyWith<$Res>
       ContactPerson contactPerson,
       ContactNumber contactNumber,
       PaymentTerm paymentTerm,
-      DeliveryDate deliveryDate});
+      DeliveryDate deliveryDate,
+      List<PoDocuments> poDocuments});
 }
 
 /// @nodoc
@@ -147,6 +155,7 @@ class __$$_AdditionalDetailsDataCopyWithImpl<$Res>
     Object? contactNumber = null,
     Object? paymentTerm = null,
     Object? deliveryDate = null,
+    Object? poDocuments = null,
   }) {
     return _then(_$_AdditionalDetailsData(
       customerPoReference: null == customerPoReference
@@ -181,6 +190,10 @@ class __$$_AdditionalDetailsDataCopyWithImpl<$Res>
           ? _value.deliveryDate
           : deliveryDate // ignore: cast_nullable_to_non_nullable
               as DeliveryDate,
+      poDocuments: null == poDocuments
+          ? _value._poDocuments
+          : poDocuments // ignore: cast_nullable_to_non_nullable
+              as List<PoDocuments>,
     ));
   }
 }
@@ -196,8 +209,10 @@ class _$_AdditionalDetailsData extends _AdditionalDetailsData {
       required this.contactPerson,
       required this.contactNumber,
       required this.paymentTerm,
-      required this.deliveryDate})
-      : super._();
+      required this.deliveryDate,
+      required final List<PoDocuments> poDocuments})
+      : _poDocuments = poDocuments,
+        super._();
 
   @override
   final CustomerPoReference customerPoReference;
@@ -215,10 +230,16 @@ class _$_AdditionalDetailsData extends _AdditionalDetailsData {
   final PaymentTerm paymentTerm;
   @override
   final DeliveryDate deliveryDate;
+  final List<PoDocuments> _poDocuments;
+  @override
+  List<PoDocuments> get poDocuments {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_poDocuments);
+  }
 
   @override
   String toString() {
-    return 'AdditionalDetailsData(customerPoReference: $customerPoReference, specialInstruction: $specialInstruction, referenceNote: $referenceNote, collectiveNumber: $collectiveNumber, contactPerson: $contactPerson, contactNumber: $contactNumber, paymentTerm: $paymentTerm, deliveryDate: $deliveryDate)';
+    return 'AdditionalDetailsData(customerPoReference: $customerPoReference, specialInstruction: $specialInstruction, referenceNote: $referenceNote, collectiveNumber: $collectiveNumber, contactPerson: $contactPerson, contactNumber: $contactNumber, paymentTerm: $paymentTerm, deliveryDate: $deliveryDate, poDocuments: $poDocuments)';
   }
 
   @override
@@ -241,7 +262,9 @@ class _$_AdditionalDetailsData extends _AdditionalDetailsData {
             (identical(other.paymentTerm, paymentTerm) ||
                 other.paymentTerm == paymentTerm) &&
             (identical(other.deliveryDate, deliveryDate) ||
-                other.deliveryDate == deliveryDate));
+                other.deliveryDate == deliveryDate) &&
+            const DeepCollectionEquality()
+                .equals(other._poDocuments, _poDocuments));
   }
 
   @override
@@ -254,7 +277,8 @@ class _$_AdditionalDetailsData extends _AdditionalDetailsData {
       contactPerson,
       contactNumber,
       paymentTerm,
-      deliveryDate);
+      deliveryDate,
+      const DeepCollectionEquality().hash(_poDocuments));
 
   @JsonKey(ignore: true)
   @override
@@ -273,7 +297,8 @@ abstract class _AdditionalDetailsData extends AdditionalDetailsData {
       required final ContactPerson contactPerson,
       required final ContactNumber contactNumber,
       required final PaymentTerm paymentTerm,
-      required final DeliveryDate deliveryDate}) = _$_AdditionalDetailsData;
+      required final DeliveryDate deliveryDate,
+      required final List<PoDocuments> poDocuments}) = _$_AdditionalDetailsData;
   const _AdditionalDetailsData._() : super._();
 
   @override
@@ -292,6 +317,8 @@ abstract class _AdditionalDetailsData extends AdditionalDetailsData {
   PaymentTerm get paymentTerm;
   @override
   DeliveryDate get deliveryDate;
+  @override
+  List<PoDocuments> get poDocuments;
   @override
   @JsonKey(ignore: true)
   _$$_AdditionalDetailsDataCopyWith<_$_AdditionalDetailsData> get copyWith =>

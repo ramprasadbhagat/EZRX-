@@ -15,8 +15,7 @@ void main() {
 
     test('Test fromDomain', () {
       final configsDto =
-          OrderHistoryDetailsPODocumentsDto.fromDomain(
-              OrderHistoryDetailsPODocumentsDto.fromJson(
+          PoDocumentsDto.fromDomain(PoDocumentsDto.fromJson(
                       data)
                   .toDomain());
       expect(configsDto.url, 'fake-url');
@@ -24,11 +23,10 @@ void main() {
 
     test('Test fromDomain', () {
       final configsDto =
-          OrderHistoryDetailsPODocumentsDto.fromDomain(
-              OrderHistoryDetailsPODocumentsDto.fromJson(
+          PoDocumentsDto.fromDomain(PoDocumentsDto.fromJson(
                       data)
                   .toDomain()).toJson();
-      expect(configsDto['Url'], 'fake-url');
+      expect(configsDto['url'], 'fake-url');
     });
   });
 }

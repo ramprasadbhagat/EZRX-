@@ -91,6 +91,7 @@ void main() {
         totalPrice: 0,
         unitPrice: 0,
         user: '',
+        poAttachent: [],
       );
 
       variables = {
@@ -223,7 +224,8 @@ void main() {
               collectiveNumber: '',
               subscribeStatusChange: false,
               trackingLevel: '',
-              blockOrder: false);
+              blockOrder: false,
+              poDocuments: []);
           final variables = {
             'order': submitOrder.toJson(),
           };

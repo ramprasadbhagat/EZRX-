@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/order/entities/additional_details_data.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -31,7 +32,7 @@ class AdditionalDetailsBloc
     AdditionalDetailsEvent event,
     Emitter<AdditionalDetailsState> emit,
   ) async {
-    await event.map(
+    event.map(
       initialized: (value) async => emit(
         AdditionalDetailsState.initial().copyWith(
           additionalDetailsData:
@@ -56,6 +57,30 @@ class AdditionalDetailsBloc
       validateForm: (value) async => _validateAdditionalDetails(
         emit: emit,
         config: value.config,
+      ),
+      addPoDocument: (value) async => emit(
+        state.copyWith(
+          additionalDetailsData: state.additionalDetailsData.copyWith(
+            poDocuments: List.from(state.additionalDetailsData.poDocuments)
+              ..addAll(value.poDocuments),
+          ),
+        ),
+      ),
+      removePoDocument: (value) async => emit(
+        state.copyWith(
+          additionalDetailsData: state.additionalDetailsData.copyWith(
+            poDocuments: List.from(state.additionalDetailsData.poDocuments)
+              ..removeWhere(
+                (PoDocuments element) => element == value.poDocument,
+              ),
+          ),
+        ),
+      ),
+      removeAllPoDocument: (value) => emit(
+        state.copyWith(
+          additionalDetailsData:
+              state.additionalDetailsData.copyWith(poDocuments: []),
+        ),
       ),
     );
   }

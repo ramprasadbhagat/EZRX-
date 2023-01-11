@@ -38,9 +38,8 @@ mixin _$OrderHistoryDetailsDto {
   @JsonKey(name: 'SpecialInstructions', defaultValue: '')
   String get orderHistoryDetailsSpecialInstructions =>
       throw _privateConstructorUsedError;
-  @JsonKey(
-      name: 'PODocuments', defaultValue: <OrderHistoryDetailsPODocumentsDto>[])
-  List<OrderHistoryDetailsPODocumentsDto> get orderHistoryDetailsPoDocuments =>
+  @JsonKey(name: 'PODocuments', defaultValue: <PoDocumentsDto>[])
+  List<PoDocumentsDto> get orderHistoryDetailsPoDocuments =>
       throw _privateConstructorUsedError;
   @JsonKey(name: 'Messages', defaultValue: <OrderHistoryDetailsMessagesDto>[])
   List<OrderHistoryDetailsMessagesDto> get orderHistoryDetailsMessages =>
@@ -69,8 +68,8 @@ abstract class $OrderHistoryDetailsDtoCopyWith<$Res> {
           OrderHistoryDetailsPaymentTermDto orderHistoryDetailsPaymentTerm,
       @JsonKey(name: 'SpecialInstructions', defaultValue: '')
           String orderHistoryDetailsSpecialInstructions,
-      @JsonKey(name: 'PODocuments', defaultValue: <OrderHistoryDetailsPODocumentsDto>[])
-          List<OrderHistoryDetailsPODocumentsDto> orderHistoryDetailsPoDocuments,
+      @JsonKey(name: 'PODocuments', defaultValue: <PoDocumentsDto>[])
+          List<PoDocumentsDto> orderHistoryDetailsPoDocuments,
       @JsonKey(name: 'Messages', defaultValue: <OrderHistoryDetailsMessagesDto>[])
           List<OrderHistoryDetailsMessagesDto> orderHistoryDetailsMessages});
 
@@ -130,7 +129,7 @@ class _$OrderHistoryDetailsDtoCopyWithImpl<$Res,
       orderHistoryDetailsPoDocuments: null == orderHistoryDetailsPoDocuments
           ? _value.orderHistoryDetailsPoDocuments
           : orderHistoryDetailsPoDocuments // ignore: cast_nullable_to_non_nullable
-              as List<OrderHistoryDetailsPODocumentsDto>,
+              as List<PoDocumentsDto>,
       orderHistoryDetailsMessages: null == orderHistoryDetailsMessages
           ? _value.orderHistoryDetailsMessages
           : orderHistoryDetailsMessages // ignore: cast_nullable_to_non_nullable
@@ -191,8 +190,8 @@ abstract class _$$_OrderHistoryDetailsDtoCopyWith<$Res>
           OrderHistoryDetailsPaymentTermDto orderHistoryDetailsPaymentTerm,
       @JsonKey(name: 'SpecialInstructions', defaultValue: '')
           String orderHistoryDetailsSpecialInstructions,
-      @JsonKey(name: 'PODocuments', defaultValue: <OrderHistoryDetailsPODocumentsDto>[])
-          List<OrderHistoryDetailsPODocumentsDto> orderHistoryDetailsPoDocuments,
+      @JsonKey(name: 'PODocuments', defaultValue: <PoDocumentsDto>[])
+          List<PoDocumentsDto> orderHistoryDetailsPoDocuments,
       @JsonKey(name: 'Messages', defaultValue: <OrderHistoryDetailsMessagesDto>[])
           List<OrderHistoryDetailsMessagesDto> orderHistoryDetailsMessages});
 
@@ -253,7 +252,7 @@ class __$$_OrderHistoryDetailsDtoCopyWithImpl<$Res>
       orderHistoryDetailsPoDocuments: null == orderHistoryDetailsPoDocuments
           ? _value._orderHistoryDetailsPoDocuments
           : orderHistoryDetailsPoDocuments // ignore: cast_nullable_to_non_nullable
-              as List<OrderHistoryDetailsPODocumentsDto>,
+              as List<PoDocumentsDto>,
       orderHistoryDetailsMessages: null == orderHistoryDetailsMessages
           ? _value._orderHistoryDetailsMessages
           : orderHistoryDetailsMessages // ignore: cast_nullable_to_non_nullable
@@ -276,8 +275,8 @@ class _$_OrderHistoryDetailsDto extends _OrderHistoryDetailsDto {
           required this.orderHistoryDetailsPaymentTerm,
       @JsonKey(name: 'SpecialInstructions', defaultValue: '')
           required this.orderHistoryDetailsSpecialInstructions,
-      @JsonKey(name: 'PODocuments', defaultValue: <OrderHistoryDetailsPODocumentsDto>[])
-          required final List<OrderHistoryDetailsPODocumentsDto> orderHistoryDetailsPoDocuments,
+      @JsonKey(name: 'PODocuments', defaultValue: <PoDocumentsDto>[])
+          required final List<PoDocumentsDto> orderHistoryDetailsPoDocuments,
       @JsonKey(name: 'Messages', defaultValue: <OrderHistoryDetailsMessagesDto>[])
           required final List<OrderHistoryDetailsMessagesDto> orderHistoryDetailsMessages})
       : _orderHistoryDetailsOrderItem = orderHistoryDetailsOrderItem,
@@ -310,11 +309,10 @@ class _$_OrderHistoryDetailsDto extends _OrderHistoryDetailsDto {
   @override
   @JsonKey(name: 'SpecialInstructions', defaultValue: '')
   final String orderHistoryDetailsSpecialInstructions;
-  final List<OrderHistoryDetailsPODocumentsDto> _orderHistoryDetailsPoDocuments;
+  final List<PoDocumentsDto> _orderHistoryDetailsPoDocuments;
   @override
-  @JsonKey(
-      name: 'PODocuments', defaultValue: <OrderHistoryDetailsPODocumentsDto>[])
-  List<OrderHistoryDetailsPODocumentsDto> get orderHistoryDetailsPoDocuments {
+  @JsonKey(name: 'PODocuments', defaultValue: <PoDocumentsDto>[])
+  List<PoDocumentsDto> get orderHistoryDetailsPoDocuments {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_orderHistoryDetailsPoDocuments);
   }
@@ -404,8 +402,8 @@ abstract class _OrderHistoryDetailsDto extends OrderHistoryDetailsDto {
           required final OrderHistoryDetailsPaymentTermDto orderHistoryDetailsPaymentTerm,
       @JsonKey(name: 'SpecialInstructions', defaultValue: '')
           required final String orderHistoryDetailsSpecialInstructions,
-      @JsonKey(name: 'PODocuments', defaultValue: <OrderHistoryDetailsPODocumentsDto>[])
-          required final List<OrderHistoryDetailsPODocumentsDto> orderHistoryDetailsPoDocuments,
+      @JsonKey(name: 'PODocuments', defaultValue: <PoDocumentsDto>[])
+          required final List<PoDocumentsDto> orderHistoryDetailsPoDocuments,
       @JsonKey(name: 'Messages', defaultValue: <OrderHistoryDetailsMessagesDto>[])
           required final List<OrderHistoryDetailsMessagesDto> orderHistoryDetailsMessages}) = _$_OrderHistoryDetailsDto;
   const _OrderHistoryDetailsDto._() : super._();
@@ -431,9 +429,8 @@ abstract class _OrderHistoryDetailsDto extends OrderHistoryDetailsDto {
   @JsonKey(name: 'SpecialInstructions', defaultValue: '')
   String get orderHistoryDetailsSpecialInstructions;
   @override
-  @JsonKey(
-      name: 'PODocuments', defaultValue: <OrderHistoryDetailsPODocumentsDto>[])
-  List<OrderHistoryDetailsPODocumentsDto> get orderHistoryDetailsPoDocuments;
+  @JsonKey(name: 'PODocuments', defaultValue: <PoDocumentsDto>[])
+  List<PoDocumentsDto> get orderHistoryDetailsPoDocuments;
   @override
   @JsonKey(name: 'Messages', defaultValue: <OrderHistoryDetailsMessagesDto>[])
   List<OrderHistoryDetailsMessagesDto> get orderHistoryDetailsMessages;

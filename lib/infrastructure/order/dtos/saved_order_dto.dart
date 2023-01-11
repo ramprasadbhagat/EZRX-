@@ -4,6 +4,7 @@ import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_item_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/order_history_details_po_documents_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'saved_order_dto.freezed.dart';
@@ -62,6 +63,12 @@ class SavedOrderDto with _$SavedOrderDto {
         required String contactPerson,
     @JsonKey(name: 'referenceNote', defaultValue: '')
         required String referenceNotes,
+    @_PoDocumentsListConverter()
+    @JsonKey(
+        name: 'POAttachent', defaultValue: <
+            PoDocumentsDto>[],
+    )
+        required List<PoDocumentsDto> poAttachent,
   }) = _SavedOrderDto;
 
   SavedOrder toDomain() {
@@ -103,6 +110,7 @@ class SavedOrderDto with _$SavedOrderDto {
       totalPrice: totalPrice,
       unitPrice: unitPrice,
       user: user,
+      poAttachent: poAttachent.map((e) => e.toDomain()).toList(),
     );
   }
 
@@ -142,6 +150,11 @@ class SavedOrderDto with _$SavedOrderDto {
       unitPrice: saveOrder.unitPrice,
       user: saveOrder.user,
       items: saveOrder.items.map((e) => MaterialItemDto.fromDomain(e)).toList(),
+      poAttachent: saveOrder.poAttachent
+          .map(
+            (e) => PoDocumentsDto.fromDomain(e),
+          )
+          .toList(),
     );
   }
 
@@ -165,5 +178,24 @@ class _OrderProductItemListConverter
     return jsonEncode({
       'value': object.map((e) => e.toJson()).toList(),
     }).toString();
+  }
+}
+
+class _PoDocumentsListConverter
+    extends JsonConverter<List<PoDocumentsDto>, String> {
+  const _PoDocumentsListConverter();
+
+  @override
+  List<PoDocumentsDto> fromJson(String json) {
+    return List.from(jsonDecode(json))
+        .map((e) => PoDocumentsDto.fromJson(e))
+        .toList();
+  }
+
+  @override
+  String toJson(List<PoDocumentsDto> object) {
+    return jsonEncode(
+      object.map((e) => e.toJson()).toList(),
+    ).toString();
   }
 }

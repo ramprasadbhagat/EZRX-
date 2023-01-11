@@ -11,10 +11,10 @@ import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.d
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
-import 'package:ezrxmobile/application/order/order_history_details/download_attachment/bloc/download_attachment_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_details/order_history_details_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_filter/order_history_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
+import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/bill_to_address.dart';
 import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
@@ -103,8 +103,8 @@ class MockMaterialPriceDetailBloc
     implements MaterialPriceDetailBloc {}
 
 class MockDownloadAttachmentBloc
-    extends MockBloc<DownloadAttachmentEvent, DownloadAttachmentState>
-    implements DownloadAttachmentBloc {}
+    extends MockBloc<PoAttachmentEvent, PoAttachmentState>
+    implements PoAttachmentBloc {}
 
 class MockOrderHistoryDetailsRepository extends Mock
     implements OrderHistoryDetailsRepository {}
@@ -143,7 +143,7 @@ void main() {
   late OrderHistoryDetails orderHistoryDetails;
   late EligibilityBlocMock eligibilityBlocMock;
   late MaterialPriceDetailBloc materialPriceDetailBlocMock;
-  late DownloadAttachmentBloc downloadAttachmentBlocMock;
+  late PoAttachmentBloc downloadAttachmentBlocMock;
   late OrderHistory orderHistory;
   late OrderHistoryDetailsRepository orderHistoryDetailsRepository;
   late MaterialPriceBlocMock materialPriceBlocMock;
@@ -223,7 +223,7 @@ void main() {
       when(() => materialPriceDetailBlocMock.state)
           .thenReturn(MaterialPriceDetailState.initial());
       when(() => downloadAttachmentBlocMock.state)
-          .thenReturn(DownloadAttachmentState.initial());
+          .thenReturn(PoAttachmentState.initial());
       when(() => materialPriceBlocMock.state)
           .thenReturn(MaterialPriceState.initial());
       when(() => addToCartBlocMock.state).thenReturn(AddToCartState.initial());
@@ -257,7 +257,7 @@ void main() {
           BlocProvider<MaterialPriceDetailBloc>(
             create: (context) => materialPriceDetailBlocMock,
           ),
-          BlocProvider<DownloadAttachmentBloc>(
+          BlocProvider<PoAttachmentBloc>(
             create: (context) => downloadAttachmentBlocMock,
           ),
           BlocProvider<MaterialPriceBloc>(
@@ -555,7 +555,7 @@ void main() {
                 .copyWith(showPOAttachment: true)),
       );
       when(() => downloadAttachmentBlocMock.state).thenReturn(
-        DownloadAttachmentState.initial()
+        PoAttachmentState.initial()
             .copyWith(fileFetchMode: FileFetchMode.view),
       );
       await tester.pumpWidget(getWUT());
@@ -568,8 +568,8 @@ void main() {
       when(() => mockOrderHistoryDetailsBloc.state).thenReturn(
         OrderHistoryDetailsState.initial().copyWith(
           orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
-              orderHistoryDetailsPoDocuments: <OrderHistoryDetailsPODocuments>[
-                OrderHistoryDetailsPODocuments.empty().copyWith(url: '')
+              orderHistoryDetailsPoDocuments: <PoDocuments>[
+                PoDocuments.empty().copyWith(url: '')
               ]),
         ),
       );
@@ -581,11 +581,11 @@ void main() {
       whenListen(
           downloadAttachmentBlocMock,
           Stream.fromIterable([
-            DownloadAttachmentState.initial().copyWith(
+            PoAttachmentState.initial().copyWith(
                 failureOrSuccessOption: optionOf(
               const Left(ApiFailure.other('fake-error')),
             )),
-            DownloadAttachmentState.initial(),
+            PoAttachmentState.initial(),
           ]));
       await tester.pumpWidget(getWUT());
       await tester.pump();
@@ -599,8 +599,8 @@ void main() {
       when(() => mockOrderHistoryDetailsBloc.state).thenReturn(
         OrderHistoryDetailsState.initial().copyWith(
           orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
-              orderHistoryDetailsPoDocuments: <OrderHistoryDetailsPODocuments>[
-                OrderHistoryDetailsPODocuments.empty().copyWith(url: '')
+              orderHistoryDetailsPoDocuments: <PoDocuments>[
+                PoDocuments.empty().copyWith(url: '')
               ]),
         ),
       );
@@ -612,15 +612,15 @@ void main() {
       whenListen(
           downloadAttachmentBlocMock,
           Stream.fromIterable([
-            DownloadAttachmentState.initial().copyWith(
+            PoAttachmentState.initial().copyWith(
                 fileFetchMode: FileFetchMode.none,
                 failureOrSuccessOption: none(),
                 fileData: [
-                  OrderHistoryDetailsPoDocumentsBuffer.empty().copyWith(
+                  PoDocumentsBuffer.empty().copyWith(
                     name: 'fake-name',
                   )
                 ]),
-            DownloadAttachmentState.initial(),
+            PoAttachmentState.initial(),
           ]));
       await tester.pumpWidget(getWUT());
       await tester.pump();
@@ -643,7 +643,7 @@ void main() {
         OrderHistoryDetailsState.initial().copyWith(
           orderHistoryDetails: orderHistoryDetails.copyWith(
             orderHistoryDetailsPoDocuments:
-                List<OrderHistoryDetailsPODocuments>.generate(
+                List<PoDocuments>.generate(
               5,
               (index) => mockPoDocuments.first,
             ),
@@ -663,15 +663,15 @@ void main() {
       whenListen(
           downloadAttachmentBlocMock,
           Stream.fromIterable([
-            DownloadAttachmentState.initial().copyWith(
+            PoAttachmentState.initial().copyWith(
                 fileFetchMode: FileFetchMode.download,
                 failureOrSuccessOption: optionOf(const Right('succes')),
                 fileData: [
-                  OrderHistoryDetailsPoDocumentsBuffer.empty().copyWith(
+                  PoDocumentsBuffer.empty().copyWith(
                     name: 'fake-name',
                   )
                 ]),
-            DownloadAttachmentState.initial(),
+            PoAttachmentState.initial(),
           ]));
 
       await tester.pumpWidget(getWUT());
@@ -694,7 +694,7 @@ void main() {
         OrderHistoryDetailsState.initial().copyWith(
           orderHistoryDetails: orderHistoryDetails.copyWith(
             orderHistoryDetailsPoDocuments:
-                List<OrderHistoryDetailsPODocuments>.generate(
+                List<PoDocuments>.generate(
               5,
               (index) => mockPoDocuments.first,
             ),
@@ -714,15 +714,15 @@ void main() {
       whenListen(
           downloadAttachmentBlocMock,
           Stream.fromIterable([
-            DownloadAttachmentState.initial().copyWith(
+            PoAttachmentState.initial().copyWith(
                 fileFetchMode: FileFetchMode.download,
                 failureOrSuccessOption: optionOf(const Right('succes')),
                 fileData: [
-                  OrderHistoryDetailsPoDocumentsBuffer.empty().copyWith(
+                  PoDocumentsBuffer.empty().copyWith(
                     name: 'fake-name',
                   )
                 ]),
-            DownloadAttachmentState.initial(),
+            PoAttachmentState.initial(),
           ]));
 
       await tester.pumpWidget(getWUT());
@@ -745,7 +745,7 @@ void main() {
         OrderHistoryDetailsState.initial().copyWith(
           orderHistoryDetails: orderHistoryDetails.copyWith(
             orderHistoryDetailsPoDocuments:
-                List<OrderHistoryDetailsPODocuments>.generate(
+                List<PoDocuments>.generate(
               5,
               (index) => mockPoDocuments.first,
             ),
@@ -765,15 +765,15 @@ void main() {
       whenListen(
           downloadAttachmentBlocMock,
           Stream.fromIterable([
-            DownloadAttachmentState.initial().copyWith(
+            PoAttachmentState.initial().copyWith(
                 fileFetchMode: FileFetchMode.view,
                 failureOrSuccessOption: optionOf(const Right('succes')),
                 fileData: [
-                  OrderHistoryDetailsPoDocumentsBuffer.empty().copyWith(
+                  PoDocumentsBuffer.empty().copyWith(
                     name: 'fake-name',
                   )
                 ]),
-            DownloadAttachmentState.initial(),
+            PoAttachmentState.initial(),
           ]));
       await tester.pumpWidget(getWUT());
       await tester.pump();

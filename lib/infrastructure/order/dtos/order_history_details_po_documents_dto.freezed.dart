@@ -14,42 +14,40 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-OrderHistoryDetailsPODocumentsDto _$OrderHistoryDetailsPODocumentsDtoFromJson(
-    Map<String, dynamic> json) {
-  return _OrderHistoryDetailsPODocumentsDto.fromJson(json);
+PoDocumentsDto _$PoDocumentsDtoFromJson(Map<String, dynamic> json) {
+  return _PoDocumentsDto.fromJson(json);
 }
 
 /// @nodoc
-mixin _$OrderHistoryDetailsPODocumentsDto {
-  @JsonKey(name: 'Url', defaultValue: '')
+mixin _$PoDocumentsDto {
+  @JsonKey(name: 'url', defaultValue: '', readValue: _readUrl)
   String get url => throw _privateConstructorUsedError;
-  @JsonKey(name: 'Name', defaultValue: '')
+  @JsonKey(name: 'name', defaultValue: '', readValue: _readName)
   String get name => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $OrderHistoryDetailsPODocumentsDtoCopyWith<OrderHistoryDetailsPODocumentsDto>
-      get copyWith => throw _privateConstructorUsedError;
+  $PoDocumentsDtoCopyWith<PoDocumentsDto> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $OrderHistoryDetailsPODocumentsDtoCopyWith<$Res> {
-  factory $OrderHistoryDetailsPODocumentsDtoCopyWith(
-          OrderHistoryDetailsPODocumentsDto value,
-          $Res Function(OrderHistoryDetailsPODocumentsDto) then) =
-      _$OrderHistoryDetailsPODocumentsDtoCopyWithImpl<$Res,
-          OrderHistoryDetailsPODocumentsDto>;
+abstract class $PoDocumentsDtoCopyWith<$Res> {
+  factory $PoDocumentsDtoCopyWith(
+          PoDocumentsDto value, $Res Function(PoDocumentsDto) then) =
+      _$PoDocumentsDtoCopyWithImpl<$Res, PoDocumentsDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'Url', defaultValue: '') String url,
-      @JsonKey(name: 'Name', defaultValue: '') String name});
+      {@JsonKey(name: 'url', defaultValue: '', readValue: _readUrl)
+          String url,
+      @JsonKey(name: 'name', defaultValue: '', readValue: _readName)
+          String name});
 }
 
 /// @nodoc
-class _$OrderHistoryDetailsPODocumentsDtoCopyWithImpl<$Res,
-        $Val extends OrderHistoryDetailsPODocumentsDto>
-    implements $OrderHistoryDetailsPODocumentsDtoCopyWith<$Res> {
-  _$OrderHistoryDetailsPODocumentsDtoCopyWithImpl(this._value, this._then);
+class _$PoDocumentsDtoCopyWithImpl<$Res, $Val extends PoDocumentsDto>
+    implements $PoDocumentsDtoCopyWith<$Res> {
+  _$PoDocumentsDtoCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -76,27 +74,26 @@ class _$OrderHistoryDetailsPODocumentsDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_OrderHistoryDetailsPODocumentsDtoCopyWith<$Res>
-    implements $OrderHistoryDetailsPODocumentsDtoCopyWith<$Res> {
-  factory _$$_OrderHistoryDetailsPODocumentsDtoCopyWith(
-          _$_OrderHistoryDetailsPODocumentsDto value,
-          $Res Function(_$_OrderHistoryDetailsPODocumentsDto) then) =
-      __$$_OrderHistoryDetailsPODocumentsDtoCopyWithImpl<$Res>;
+abstract class _$$_PoDocumentsDtoCopyWith<$Res>
+    implements $PoDocumentsDtoCopyWith<$Res> {
+  factory _$$_PoDocumentsDtoCopyWith(
+          _$_PoDocumentsDto value, $Res Function(_$_PoDocumentsDto) then) =
+      __$$_PoDocumentsDtoCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'Url', defaultValue: '') String url,
-      @JsonKey(name: 'Name', defaultValue: '') String name});
+      {@JsonKey(name: 'url', defaultValue: '', readValue: _readUrl)
+          String url,
+      @JsonKey(name: 'name', defaultValue: '', readValue: _readName)
+          String name});
 }
 
 /// @nodoc
-class __$$_OrderHistoryDetailsPODocumentsDtoCopyWithImpl<$Res>
-    extends _$OrderHistoryDetailsPODocumentsDtoCopyWithImpl<$Res,
-        _$_OrderHistoryDetailsPODocumentsDto>
-    implements _$$_OrderHistoryDetailsPODocumentsDtoCopyWith<$Res> {
-  __$$_OrderHistoryDetailsPODocumentsDtoCopyWithImpl(
-      _$_OrderHistoryDetailsPODocumentsDto _value,
-      $Res Function(_$_OrderHistoryDetailsPODocumentsDto) _then)
+class __$$_PoDocumentsDtoCopyWithImpl<$Res>
+    extends _$PoDocumentsDtoCopyWithImpl<$Res, _$_PoDocumentsDto>
+    implements _$$_PoDocumentsDtoCopyWith<$Res> {
+  __$$_PoDocumentsDtoCopyWithImpl(
+      _$_PoDocumentsDto _value, $Res Function(_$_PoDocumentsDto) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -105,7 +102,7 @@ class __$$_OrderHistoryDetailsPODocumentsDtoCopyWithImpl<$Res>
     Object? url = null,
     Object? name = null,
   }) {
-    return _then(_$_OrderHistoryDetailsPODocumentsDto(
+    return _then(_$_PoDocumentsDto(
       url: null == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
@@ -120,34 +117,34 @@ class __$$_OrderHistoryDetailsPODocumentsDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_OrderHistoryDetailsPODocumentsDto
-    extends _OrderHistoryDetailsPODocumentsDto {
-  const _$_OrderHistoryDetailsPODocumentsDto(
-      {@JsonKey(name: 'Url', defaultValue: '') required this.url,
-      @JsonKey(name: 'Name', defaultValue: '') required this.name})
+class _$_PoDocumentsDto extends _PoDocumentsDto {
+  const _$_PoDocumentsDto(
+      {@JsonKey(name: 'url', defaultValue: '', readValue: _readUrl)
+          required this.url,
+      @JsonKey(name: 'name', defaultValue: '', readValue: _readName)
+          required this.name})
       : super._();
 
-  factory _$_OrderHistoryDetailsPODocumentsDto.fromJson(
-          Map<String, dynamic> json) =>
-      _$$_OrderHistoryDetailsPODocumentsDtoFromJson(json);
+  factory _$_PoDocumentsDto.fromJson(Map<String, dynamic> json) =>
+      _$$_PoDocumentsDtoFromJson(json);
 
   @override
-  @JsonKey(name: 'Url', defaultValue: '')
+  @JsonKey(name: 'url', defaultValue: '', readValue: _readUrl)
   final String url;
   @override
-  @JsonKey(name: 'Name', defaultValue: '')
+  @JsonKey(name: 'name', defaultValue: '', readValue: _readName)
   final String name;
 
   @override
   String toString() {
-    return 'OrderHistoryDetailsPODocumentsDto(url: $url, name: $name)';
+    return 'PoDocumentsDto(url: $url, name: $name)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OrderHistoryDetailsPODocumentsDto &&
+            other is _$_PoDocumentsDto &&
             (identical(other.url, url) || other.url == url) &&
             (identical(other.name, name) || other.name == name));
   }
@@ -159,41 +156,36 @@ class _$_OrderHistoryDetailsPODocumentsDto
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OrderHistoryDetailsPODocumentsDtoCopyWith<
-          _$_OrderHistoryDetailsPODocumentsDto>
-      get copyWith => __$$_OrderHistoryDetailsPODocumentsDtoCopyWithImpl<
-          _$_OrderHistoryDetailsPODocumentsDto>(this, _$identity);
+  _$$_PoDocumentsDtoCopyWith<_$_PoDocumentsDto> get copyWith =>
+      __$$_PoDocumentsDtoCopyWithImpl<_$_PoDocumentsDto>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_OrderHistoryDetailsPODocumentsDtoToJson(
+    return _$$_PoDocumentsDtoToJson(
       this,
     );
   }
 }
 
-abstract class _OrderHistoryDetailsPODocumentsDto
-    extends OrderHistoryDetailsPODocumentsDto {
-  const factory _OrderHistoryDetailsPODocumentsDto(
-      {@JsonKey(name: 'Url', defaultValue: '')
+abstract class _PoDocumentsDto extends PoDocumentsDto {
+  const factory _PoDocumentsDto(
+      {@JsonKey(name: 'url', defaultValue: '', readValue: _readUrl)
           required final String url,
-      @JsonKey(name: 'Name', defaultValue: '')
-          required final String name}) = _$_OrderHistoryDetailsPODocumentsDto;
-  const _OrderHistoryDetailsPODocumentsDto._() : super._();
+      @JsonKey(name: 'name', defaultValue: '', readValue: _readName)
+          required final String name}) = _$_PoDocumentsDto;
+  const _PoDocumentsDto._() : super._();
 
-  factory _OrderHistoryDetailsPODocumentsDto.fromJson(
-          Map<String, dynamic> json) =
-      _$_OrderHistoryDetailsPODocumentsDto.fromJson;
+  factory _PoDocumentsDto.fromJson(Map<String, dynamic> json) =
+      _$_PoDocumentsDto.fromJson;
 
   @override
-  @JsonKey(name: 'Url', defaultValue: '')
+  @JsonKey(name: 'url', defaultValue: '', readValue: _readUrl)
   String get url;
   @override
-  @JsonKey(name: 'Name', defaultValue: '')
+  @JsonKey(name: 'name', defaultValue: '', readValue: _readName)
   String get name;
   @override
   @JsonKey(ignore: true)
-  _$$_OrderHistoryDetailsPODocumentsDtoCopyWith<
-          _$_OrderHistoryDetailsPODocumentsDto>
-      get copyWith => throw _privateConstructorUsedError;
+  _$$_PoDocumentsDtoCopyWith<_$_PoDocumentsDto> get copyWith =>
+      throw _privateConstructorUsedError;
 }

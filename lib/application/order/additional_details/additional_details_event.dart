@@ -12,6 +12,14 @@ class AdditionalDetailsEvent with _$AdditionalDetailsEvent {
   const factory AdditionalDetailsEvent.validateForm({
     required SalesOrganisationConfigs config,
   }) = _AdditionalDetailsValidateForm;
+  const factory AdditionalDetailsEvent.addPoDocument({
+    required List<PoDocuments> poDocuments,
+  }) = _AdditionalDetailsAddPoDocument;
+  const factory AdditionalDetailsEvent.removePoDocument({
+    required PoDocuments poDocument,
+  }) = _AdditionalDetailsRemovePoDocument;
+  const factory AdditionalDetailsEvent.removeAllPoDocument() =
+      _AdditionalDetailsRemoveAllPoDocument;
 }
 
 enum AdditionalDetailsLabel {

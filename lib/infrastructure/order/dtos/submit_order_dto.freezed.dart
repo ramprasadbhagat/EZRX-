@@ -59,6 +59,8 @@ mixin _$SubmitOrderDto {
   String get trackingLevel => throw _privateConstructorUsedError;
   @JsonKey(name: 'blockOrder', defaultValue: false)
   bool get blockOrder => throw _privateConstructorUsedError;
+  @JsonKey(name: 'poDocuments', defaultValue: <PoDocumentsDto>[])
+  List<PoDocumentsDto> get poDocuments => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -110,7 +112,9 @@ abstract class $SubmitOrderDtoCopyWith<$Res> {
       @JsonKey(name: 'trackingLevel', defaultValue: '')
           String trackingLevel,
       @JsonKey(name: 'blockOrder', defaultValue: false)
-          bool blockOrder});
+          bool blockOrder,
+      @JsonKey(name: 'poDocuments', defaultValue: <PoDocumentsDto>[])
+          List<PoDocumentsDto> poDocuments});
 
   $SubmitOrderCustomerDtoCopyWith<$Res> get customer;
 }
@@ -147,6 +151,7 @@ class _$SubmitOrderDtoCopyWithImpl<$Res, $Val extends SubmitOrderDto>
     Object? subscribeStatusChange = null,
     Object? trackingLevel = null,
     Object? blockOrder = null,
+    Object? poDocuments = null,
   }) {
     return _then(_value.copyWith(
       userName: null == userName
@@ -225,6 +230,10 @@ class _$SubmitOrderDtoCopyWithImpl<$Res, $Val extends SubmitOrderDto>
           ? _value.blockOrder
           : blockOrder // ignore: cast_nullable_to_non_nullable
               as bool,
+      poDocuments: null == poDocuments
+          ? _value.poDocuments
+          : poDocuments // ignore: cast_nullable_to_non_nullable
+              as List<PoDocumentsDto>,
     ) as $Val);
   }
 
@@ -283,7 +292,9 @@ abstract class _$$_SubmitOrderDtoCopyWith<$Res>
       @JsonKey(name: 'trackingLevel', defaultValue: '')
           String trackingLevel,
       @JsonKey(name: 'blockOrder', defaultValue: false)
-          bool blockOrder});
+          bool blockOrder,
+      @JsonKey(name: 'poDocuments', defaultValue: <PoDocumentsDto>[])
+          List<PoDocumentsDto> poDocuments});
 
   @override
   $SubmitOrderCustomerDtoCopyWith<$Res> get customer;
@@ -319,6 +330,7 @@ class __$$_SubmitOrderDtoCopyWithImpl<$Res>
     Object? subscribeStatusChange = null,
     Object? trackingLevel = null,
     Object? blockOrder = null,
+    Object? poDocuments = null,
   }) {
     return _then(_$_SubmitOrderDto(
       userName: null == userName
@@ -397,6 +409,10 @@ class __$$_SubmitOrderDtoCopyWithImpl<$Res>
           ? _value.blockOrder
           : blockOrder // ignore: cast_nullable_to_non_nullable
               as bool,
+      poDocuments: null == poDocuments
+          ? _value._poDocuments
+          : poDocuments // ignore: cast_nullable_to_non_nullable
+              as List<PoDocumentsDto>,
     ));
   }
 }
@@ -442,8 +458,11 @@ class _$_SubmitOrderDto extends _SubmitOrderDto {
       @JsonKey(name: 'trackingLevel', defaultValue: '')
           required this.trackingLevel,
       @JsonKey(name: 'blockOrder', defaultValue: false)
-          required this.blockOrder})
+          required this.blockOrder,
+      @JsonKey(name: 'poDocuments', defaultValue: <PoDocumentsDto>[])
+          required final List<PoDocumentsDto> poDocuments})
       : _materials = materials,
+        _poDocuments = poDocuments,
         super._();
 
   factory _$_SubmitOrderDto.fromJson(Map<String, dynamic> json) =>
@@ -511,10 +530,17 @@ class _$_SubmitOrderDto extends _SubmitOrderDto {
   @override
   @JsonKey(name: 'blockOrder', defaultValue: false)
   final bool blockOrder;
+  final List<PoDocumentsDto> _poDocuments;
+  @override
+  @JsonKey(name: 'poDocuments', defaultValue: <PoDocumentsDto>[])
+  List<PoDocumentsDto> get poDocuments {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_poDocuments);
+  }
 
   @override
   String toString() {
-    return 'SubmitOrderDto(userName: $userName, companyName: $companyName, customer: $customer, poReference: $poReference, materials: $materials, poDate: $poDate, requestedDeliveryDate: $requestedDeliveryDate, specialInstructions: $specialInstructions, purchaseOrderType: $purchaseOrderType, orderType: $orderType, orderReason: $orderReason, shippingCondition: $shippingCondition, telephone: $telephone, referenceNotes: $referenceNotes, paymentTerms: $paymentTerms, collectiveNumber: $collectiveNumber, subscribeStatusChange: $subscribeStatusChange, trackingLevel: $trackingLevel, blockOrder: $blockOrder)';
+    return 'SubmitOrderDto(userName: $userName, companyName: $companyName, customer: $customer, poReference: $poReference, materials: $materials, poDate: $poDate, requestedDeliveryDate: $requestedDeliveryDate, specialInstructions: $specialInstructions, purchaseOrderType: $purchaseOrderType, orderType: $orderType, orderReason: $orderReason, shippingCondition: $shippingCondition, telephone: $telephone, referenceNotes: $referenceNotes, paymentTerms: $paymentTerms, collectiveNumber: $collectiveNumber, subscribeStatusChange: $subscribeStatusChange, trackingLevel: $trackingLevel, blockOrder: $blockOrder, poDocuments: $poDocuments)';
   }
 
   @override
@@ -558,7 +584,9 @@ class _$_SubmitOrderDto extends _SubmitOrderDto {
             (identical(other.trackingLevel, trackingLevel) ||
                 other.trackingLevel == trackingLevel) &&
             (identical(other.blockOrder, blockOrder) ||
-                other.blockOrder == blockOrder));
+                other.blockOrder == blockOrder) &&
+            const DeepCollectionEquality()
+                .equals(other._poDocuments, _poDocuments));
   }
 
   @JsonKey(ignore: true)
@@ -583,7 +611,8 @@ class _$_SubmitOrderDto extends _SubmitOrderDto {
         collectiveNumber,
         subscribeStatusChange,
         trackingLevel,
-        blockOrder
+        blockOrder,
+        const DeepCollectionEquality().hash(_poDocuments)
       ]);
 
   @JsonKey(ignore: true)
@@ -639,7 +668,9 @@ abstract class _SubmitOrderDto extends SubmitOrderDto {
       @JsonKey(name: 'trackingLevel', defaultValue: '')
           required final String trackingLevel,
       @JsonKey(name: 'blockOrder', defaultValue: false)
-          required final bool blockOrder}) = _$_SubmitOrderDto;
+          required final bool blockOrder,
+      @JsonKey(name: 'poDocuments', defaultValue: <PoDocumentsDto>[])
+          required final List<PoDocumentsDto> poDocuments}) = _$_SubmitOrderDto;
   const _SubmitOrderDto._() : super._();
 
   factory _SubmitOrderDto.fromJson(Map<String, dynamic> json) =
@@ -702,6 +733,9 @@ abstract class _SubmitOrderDto extends SubmitOrderDto {
   @override
   @JsonKey(name: 'blockOrder', defaultValue: false)
   bool get blockOrder;
+  @override
+  @JsonKey(name: 'poDocuments', defaultValue: <PoDocumentsDto>[])
+  List<PoDocumentsDto> get poDocuments;
   @override
   @JsonKey(ignore: true)
   _$$_SubmitOrderDtoCopyWith<_$_SubmitOrderDto> get copyWith =>

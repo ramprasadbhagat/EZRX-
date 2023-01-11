@@ -89,6 +89,9 @@ mixin _$SavedOrderDto {
   String get contactPerson => throw _privateConstructorUsedError;
   @JsonKey(name: 'referenceNote', defaultValue: '')
   String get referenceNotes => throw _privateConstructorUsedError;
+  @_PoDocumentsListConverter()
+  @JsonKey(name: 'POAttachent', defaultValue: <PoDocumentsDto>[])
+  List<PoDocumentsDto> get poAttachent => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -171,7 +174,10 @@ abstract class $SavedOrderDtoCopyWith<$Res> {
       @JsonKey(name: 'contactPerson', defaultValue: '')
           String contactPerson,
       @JsonKey(name: 'referenceNote', defaultValue: '')
-          String referenceNotes});
+          String referenceNotes,
+      @_PoDocumentsListConverter()
+      @JsonKey(name: 'POAttachent', defaultValue: <PoDocumentsDto>[])
+          List<PoDocumentsDto> poAttachent});
 }
 
 /// @nodoc
@@ -221,6 +227,7 @@ class _$SavedOrderDtoCopyWithImpl<$Res, $Val extends SavedOrderDto>
     Object? user = null,
     Object? contactPerson = null,
     Object? referenceNotes = null,
+    Object? poAttachent = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -359,6 +366,10 @@ class _$SavedOrderDtoCopyWithImpl<$Res, $Val extends SavedOrderDto>
           ? _value.referenceNotes
           : referenceNotes // ignore: cast_nullable_to_non_nullable
               as String,
+      poAttachent: null == poAttachent
+          ? _value.poAttachent
+          : poAttachent // ignore: cast_nullable_to_non_nullable
+              as List<PoDocumentsDto>,
     ) as $Val);
   }
 }
@@ -440,7 +451,10 @@ abstract class _$$_SavedOrderDtoCopyWith<$Res>
       @JsonKey(name: 'contactPerson', defaultValue: '')
           String contactPerson,
       @JsonKey(name: 'referenceNote', defaultValue: '')
-          String referenceNotes});
+          String referenceNotes,
+      @_PoDocumentsListConverter()
+      @JsonKey(name: 'POAttachent', defaultValue: <PoDocumentsDto>[])
+          List<PoDocumentsDto> poAttachent});
 }
 
 /// @nodoc
@@ -488,6 +502,7 @@ class __$$_SavedOrderDtoCopyWithImpl<$Res>
     Object? user = null,
     Object? contactPerson = null,
     Object? referenceNotes = null,
+    Object? poAttachent = null,
   }) {
     return _then(_$_SavedOrderDto(
       id: null == id
@@ -626,6 +641,10 @@ class __$$_SavedOrderDtoCopyWithImpl<$Res>
           ? _value.referenceNotes
           : referenceNotes // ignore: cast_nullable_to_non_nullable
               as String,
+      poAttachent: null == poAttachent
+          ? _value._poAttachent
+          : poAttachent // ignore: cast_nullable_to_non_nullable
+              as List<PoDocumentsDto>,
     ));
   }
 }
@@ -702,8 +721,12 @@ class _$_SavedOrderDto extends _SavedOrderDto {
       @JsonKey(name: 'contactPerson', defaultValue: '')
           required this.contactPerson,
       @JsonKey(name: 'referenceNote', defaultValue: '')
-          required this.referenceNotes})
+          required this.referenceNotes,
+      @_PoDocumentsListConverter()
+      @JsonKey(name: 'POAttachent', defaultValue: <PoDocumentsDto>[])
+          required final List<PoDocumentsDto> poAttachent})
       : _items = items,
+        _poAttachent = poAttachent,
         super._();
 
   factory _$_SavedOrderDto.fromJson(Map<String, dynamic> json) =>
@@ -817,10 +840,18 @@ class _$_SavedOrderDto extends _SavedOrderDto {
   @override
   @JsonKey(name: 'referenceNote', defaultValue: '')
   final String referenceNotes;
+  final List<PoDocumentsDto> _poAttachent;
+  @override
+  @_PoDocumentsListConverter()
+  @JsonKey(name: 'POAttachent', defaultValue: <PoDocumentsDto>[])
+  List<PoDocumentsDto> get poAttachent {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_poAttachent);
+  }
 
   @override
   String toString() {
-    return 'SavedOrderDto(id: $id, items: $items, isDraftOrder: $isDraftOrder, billingDocument: $billingDocument, eZRxNumber: $eZRxNumber, soldToParty: $soldToParty, shipToParty: $shipToParty, companyName: $companyName, totalOrderValue: $totalOrderValue, requestedDeliveryDate: $requestedDeliveryDate, deliveryDocument: $deliveryDocument, salesOrganization: $salesOrganization, principal: $principal, processingStatus: $processingStatus, country: $country, postCode1: $postCode1, specialInstructions: $specialInstructions, poReference: $poReference, payTerm: $payTerm, collectiveNo: $collectiveNo, quantity: $quantity, unitPrice: $unitPrice, totalPrice: $totalPrice, address1: $address1, address2: $address2, city: $city, fax: $fax, phonenumber: $phonenumber, orderType: $orderType, orderReason: $orderReason, shippingCondition: $shippingCondition, user: $user, contactPerson: $contactPerson, referenceNotes: $referenceNotes)';
+    return 'SavedOrderDto(id: $id, items: $items, isDraftOrder: $isDraftOrder, billingDocument: $billingDocument, eZRxNumber: $eZRxNumber, soldToParty: $soldToParty, shipToParty: $shipToParty, companyName: $companyName, totalOrderValue: $totalOrderValue, requestedDeliveryDate: $requestedDeliveryDate, deliveryDocument: $deliveryDocument, salesOrganization: $salesOrganization, principal: $principal, processingStatus: $processingStatus, country: $country, postCode1: $postCode1, specialInstructions: $specialInstructions, poReference: $poReference, payTerm: $payTerm, collectiveNo: $collectiveNo, quantity: $quantity, unitPrice: $unitPrice, totalPrice: $totalPrice, address1: $address1, address2: $address2, city: $city, fax: $fax, phonenumber: $phonenumber, orderType: $orderType, orderReason: $orderReason, shippingCondition: $shippingCondition, user: $user, contactPerson: $contactPerson, referenceNotes: $referenceNotes, poAttachent: $poAttachent)';
   }
 
   @override
@@ -888,7 +919,9 @@ class _$_SavedOrderDto extends _SavedOrderDto {
             (identical(other.contactPerson, contactPerson) ||
                 other.contactPerson == contactPerson) &&
             (identical(other.referenceNotes, referenceNotes) ||
-                other.referenceNotes == referenceNotes));
+                other.referenceNotes == referenceNotes) &&
+            const DeepCollectionEquality()
+                .equals(other._poAttachent, _poAttachent));
   }
 
   @JsonKey(ignore: true)
@@ -928,7 +961,8 @@ class _$_SavedOrderDto extends _SavedOrderDto {
         shippingCondition,
         user,
         contactPerson,
-        referenceNotes
+        referenceNotes,
+        const DeepCollectionEquality().hash(_poAttachent)
       ]);
 
   @JsonKey(ignore: true)
@@ -1015,7 +1049,10 @@ abstract class _SavedOrderDto extends SavedOrderDto {
       @JsonKey(name: 'contactPerson', defaultValue: '')
           required final String contactPerson,
       @JsonKey(name: 'referenceNote', defaultValue: '')
-          required final String referenceNotes}) = _$_SavedOrderDto;
+          required final String referenceNotes,
+      @_PoDocumentsListConverter()
+      @JsonKey(name: 'POAttachent', defaultValue: <PoDocumentsDto>[])
+          required final List<PoDocumentsDto> poAttachent}) = _$_SavedOrderDto;
   const _SavedOrderDto._() : super._();
 
   factory _SavedOrderDto.fromJson(Map<String, dynamic> json) =
@@ -1124,6 +1161,10 @@ abstract class _SavedOrderDto extends SavedOrderDto {
   @override
   @JsonKey(name: 'referenceNote', defaultValue: '')
   String get referenceNotes;
+  @override
+  @_PoDocumentsListConverter()
+  @JsonKey(name: 'POAttachent', defaultValue: <PoDocumentsDto>[])
+  List<PoDocumentsDto> get poAttachent;
   @override
   @JsonKey(ignore: true)
   _$$_SavedOrderDtoCopyWith<_$_SavedOrderDto> get copyWith =>

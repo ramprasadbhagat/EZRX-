@@ -22,6 +22,9 @@ mixin _$AdditionalDetailsEvent {
     required TResult Function(AdditionalDetailsLabel label, String newValue)
         onTextChange,
     required TResult Function(SalesOrganisationConfigs config) validateForm,
+    required TResult Function(List<PoDocuments> poDocuments) addPoDocument,
+    required TResult Function(PoDocuments poDocument) removePoDocument,
+    required TResult Function() removeAllPoDocument,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -30,6 +33,9 @@ mixin _$AdditionalDetailsEvent {
     TResult? Function(AdditionalDetailsLabel label, String newValue)?
         onTextChange,
     TResult? Function(SalesOrganisationConfigs config)? validateForm,
+    TResult? Function(List<PoDocuments> poDocuments)? addPoDocument,
+    TResult? Function(PoDocuments poDocument)? removePoDocument,
+    TResult? Function()? removeAllPoDocument,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -38,6 +44,9 @@ mixin _$AdditionalDetailsEvent {
     TResult Function(AdditionalDetailsLabel label, String newValue)?
         onTextChange,
     TResult Function(SalesOrganisationConfigs config)? validateForm,
+    TResult Function(List<PoDocuments> poDocuments)? addPoDocument,
+    TResult Function(PoDocuments poDocument)? removePoDocument,
+    TResult Function()? removeAllPoDocument,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -48,6 +57,12 @@ mixin _$AdditionalDetailsEvent {
         onTextChange,
     required TResult Function(_AdditionalDetailsValidateForm value)
         validateForm,
+    required TResult Function(_AdditionalDetailsAddPoDocument value)
+        addPoDocument,
+    required TResult Function(_AdditionalDetailsRemovePoDocument value)
+        removePoDocument,
+    required TResult Function(_AdditionalDetailsRemoveAllPoDocument value)
+        removeAllPoDocument,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -55,6 +70,11 @@ mixin _$AdditionalDetailsEvent {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_AdditionalDetailsTextOnChange value)? onTextChange,
     TResult? Function(_AdditionalDetailsValidateForm value)? validateForm,
+    TResult? Function(_AdditionalDetailsAddPoDocument value)? addPoDocument,
+    TResult? Function(_AdditionalDetailsRemovePoDocument value)?
+        removePoDocument,
+    TResult? Function(_AdditionalDetailsRemoveAllPoDocument value)?
+        removeAllPoDocument,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -62,6 +82,11 @@ mixin _$AdditionalDetailsEvent {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_AdditionalDetailsTextOnChange value)? onTextChange,
     TResult Function(_AdditionalDetailsValidateForm value)? validateForm,
+    TResult Function(_AdditionalDetailsAddPoDocument value)? addPoDocument,
+    TResult Function(_AdditionalDetailsRemovePoDocument value)?
+        removePoDocument,
+    TResult Function(_AdditionalDetailsRemoveAllPoDocument value)?
+        removeAllPoDocument,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -164,6 +189,9 @@ class _$_Initialized implements _Initialized {
     required TResult Function(AdditionalDetailsLabel label, String newValue)
         onTextChange,
     required TResult Function(SalesOrganisationConfigs config) validateForm,
+    required TResult Function(List<PoDocuments> poDocuments) addPoDocument,
+    required TResult Function(PoDocuments poDocument) removePoDocument,
+    required TResult Function() removeAllPoDocument,
   }) {
     return initialized(config);
   }
@@ -175,6 +203,9 @@ class _$_Initialized implements _Initialized {
     TResult? Function(AdditionalDetailsLabel label, String newValue)?
         onTextChange,
     TResult? Function(SalesOrganisationConfigs config)? validateForm,
+    TResult? Function(List<PoDocuments> poDocuments)? addPoDocument,
+    TResult? Function(PoDocuments poDocument)? removePoDocument,
+    TResult? Function()? removeAllPoDocument,
   }) {
     return initialized?.call(config);
   }
@@ -186,6 +217,9 @@ class _$_Initialized implements _Initialized {
     TResult Function(AdditionalDetailsLabel label, String newValue)?
         onTextChange,
     TResult Function(SalesOrganisationConfigs config)? validateForm,
+    TResult Function(List<PoDocuments> poDocuments)? addPoDocument,
+    TResult Function(PoDocuments poDocument)? removePoDocument,
+    TResult Function()? removeAllPoDocument,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -202,6 +236,12 @@ class _$_Initialized implements _Initialized {
         onTextChange,
     required TResult Function(_AdditionalDetailsValidateForm value)
         validateForm,
+    required TResult Function(_AdditionalDetailsAddPoDocument value)
+        addPoDocument,
+    required TResult Function(_AdditionalDetailsRemovePoDocument value)
+        removePoDocument,
+    required TResult Function(_AdditionalDetailsRemoveAllPoDocument value)
+        removeAllPoDocument,
   }) {
     return initialized(this);
   }
@@ -212,6 +252,11 @@ class _$_Initialized implements _Initialized {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_AdditionalDetailsTextOnChange value)? onTextChange,
     TResult? Function(_AdditionalDetailsValidateForm value)? validateForm,
+    TResult? Function(_AdditionalDetailsAddPoDocument value)? addPoDocument,
+    TResult? Function(_AdditionalDetailsRemovePoDocument value)?
+        removePoDocument,
+    TResult? Function(_AdditionalDetailsRemoveAllPoDocument value)?
+        removeAllPoDocument,
   }) {
     return initialized?.call(this);
   }
@@ -222,6 +267,11 @@ class _$_Initialized implements _Initialized {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_AdditionalDetailsTextOnChange value)? onTextChange,
     TResult Function(_AdditionalDetailsValidateForm value)? validateForm,
+    TResult Function(_AdditionalDetailsAddPoDocument value)? addPoDocument,
+    TResult Function(_AdditionalDetailsRemovePoDocument value)?
+        removePoDocument,
+    TResult Function(_AdditionalDetailsRemoveAllPoDocument value)?
+        removeAllPoDocument,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -324,6 +374,9 @@ class _$_AdditionalDetailsTextOnChange
     required TResult Function(AdditionalDetailsLabel label, String newValue)
         onTextChange,
     required TResult Function(SalesOrganisationConfigs config) validateForm,
+    required TResult Function(List<PoDocuments> poDocuments) addPoDocument,
+    required TResult Function(PoDocuments poDocument) removePoDocument,
+    required TResult Function() removeAllPoDocument,
   }) {
     return onTextChange(label, newValue);
   }
@@ -335,6 +388,9 @@ class _$_AdditionalDetailsTextOnChange
     TResult? Function(AdditionalDetailsLabel label, String newValue)?
         onTextChange,
     TResult? Function(SalesOrganisationConfigs config)? validateForm,
+    TResult? Function(List<PoDocuments> poDocuments)? addPoDocument,
+    TResult? Function(PoDocuments poDocument)? removePoDocument,
+    TResult? Function()? removeAllPoDocument,
   }) {
     return onTextChange?.call(label, newValue);
   }
@@ -346,6 +402,9 @@ class _$_AdditionalDetailsTextOnChange
     TResult Function(AdditionalDetailsLabel label, String newValue)?
         onTextChange,
     TResult Function(SalesOrganisationConfigs config)? validateForm,
+    TResult Function(List<PoDocuments> poDocuments)? addPoDocument,
+    TResult Function(PoDocuments poDocument)? removePoDocument,
+    TResult Function()? removeAllPoDocument,
     required TResult orElse(),
   }) {
     if (onTextChange != null) {
@@ -362,6 +421,12 @@ class _$_AdditionalDetailsTextOnChange
         onTextChange,
     required TResult Function(_AdditionalDetailsValidateForm value)
         validateForm,
+    required TResult Function(_AdditionalDetailsAddPoDocument value)
+        addPoDocument,
+    required TResult Function(_AdditionalDetailsRemovePoDocument value)
+        removePoDocument,
+    required TResult Function(_AdditionalDetailsRemoveAllPoDocument value)
+        removeAllPoDocument,
   }) {
     return onTextChange(this);
   }
@@ -372,6 +437,11 @@ class _$_AdditionalDetailsTextOnChange
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_AdditionalDetailsTextOnChange value)? onTextChange,
     TResult? Function(_AdditionalDetailsValidateForm value)? validateForm,
+    TResult? Function(_AdditionalDetailsAddPoDocument value)? addPoDocument,
+    TResult? Function(_AdditionalDetailsRemovePoDocument value)?
+        removePoDocument,
+    TResult? Function(_AdditionalDetailsRemoveAllPoDocument value)?
+        removeAllPoDocument,
   }) {
     return onTextChange?.call(this);
   }
@@ -382,6 +452,11 @@ class _$_AdditionalDetailsTextOnChange
     TResult Function(_Initialized value)? initialized,
     TResult Function(_AdditionalDetailsTextOnChange value)? onTextChange,
     TResult Function(_AdditionalDetailsValidateForm value)? validateForm,
+    TResult Function(_AdditionalDetailsAddPoDocument value)? addPoDocument,
+    TResult Function(_AdditionalDetailsRemovePoDocument value)?
+        removePoDocument,
+    TResult Function(_AdditionalDetailsRemoveAllPoDocument value)?
+        removeAllPoDocument,
     required TResult orElse(),
   }) {
     if (onTextChange != null) {
@@ -487,6 +562,9 @@ class _$_AdditionalDetailsValidateForm
     required TResult Function(AdditionalDetailsLabel label, String newValue)
         onTextChange,
     required TResult Function(SalesOrganisationConfigs config) validateForm,
+    required TResult Function(List<PoDocuments> poDocuments) addPoDocument,
+    required TResult Function(PoDocuments poDocument) removePoDocument,
+    required TResult Function() removeAllPoDocument,
   }) {
     return validateForm(config);
   }
@@ -498,6 +576,9 @@ class _$_AdditionalDetailsValidateForm
     TResult? Function(AdditionalDetailsLabel label, String newValue)?
         onTextChange,
     TResult? Function(SalesOrganisationConfigs config)? validateForm,
+    TResult? Function(List<PoDocuments> poDocuments)? addPoDocument,
+    TResult? Function(PoDocuments poDocument)? removePoDocument,
+    TResult? Function()? removeAllPoDocument,
   }) {
     return validateForm?.call(config);
   }
@@ -509,6 +590,9 @@ class _$_AdditionalDetailsValidateForm
     TResult Function(AdditionalDetailsLabel label, String newValue)?
         onTextChange,
     TResult Function(SalesOrganisationConfigs config)? validateForm,
+    TResult Function(List<PoDocuments> poDocuments)? addPoDocument,
+    TResult Function(PoDocuments poDocument)? removePoDocument,
+    TResult Function()? removeAllPoDocument,
     required TResult orElse(),
   }) {
     if (validateForm != null) {
@@ -525,6 +609,12 @@ class _$_AdditionalDetailsValidateForm
         onTextChange,
     required TResult Function(_AdditionalDetailsValidateForm value)
         validateForm,
+    required TResult Function(_AdditionalDetailsAddPoDocument value)
+        addPoDocument,
+    required TResult Function(_AdditionalDetailsRemovePoDocument value)
+        removePoDocument,
+    required TResult Function(_AdditionalDetailsRemoveAllPoDocument value)
+        removeAllPoDocument,
   }) {
     return validateForm(this);
   }
@@ -535,6 +625,11 @@ class _$_AdditionalDetailsValidateForm
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_AdditionalDetailsTextOnChange value)? onTextChange,
     TResult? Function(_AdditionalDetailsValidateForm value)? validateForm,
+    TResult? Function(_AdditionalDetailsAddPoDocument value)? addPoDocument,
+    TResult? Function(_AdditionalDetailsRemovePoDocument value)?
+        removePoDocument,
+    TResult? Function(_AdditionalDetailsRemoveAllPoDocument value)?
+        removeAllPoDocument,
   }) {
     return validateForm?.call(this);
   }
@@ -545,6 +640,11 @@ class _$_AdditionalDetailsValidateForm
     TResult Function(_Initialized value)? initialized,
     TResult Function(_AdditionalDetailsTextOnChange value)? onTextChange,
     TResult Function(_AdditionalDetailsValidateForm value)? validateForm,
+    TResult Function(_AdditionalDetailsAddPoDocument value)? addPoDocument,
+    TResult Function(_AdditionalDetailsRemovePoDocument value)?
+        removePoDocument,
+    TResult Function(_AdditionalDetailsRemoveAllPoDocument value)?
+        removeAllPoDocument,
     required TResult orElse(),
   }) {
     if (validateForm != null) {
@@ -564,6 +664,526 @@ abstract class _AdditionalDetailsValidateForm
   @JsonKey(ignore: true)
   _$$_AdditionalDetailsValidateFormCopyWith<_$_AdditionalDetailsValidateForm>
       get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_AdditionalDetailsAddPoDocumentCopyWith<$Res> {
+  factory _$$_AdditionalDetailsAddPoDocumentCopyWith(
+          _$_AdditionalDetailsAddPoDocument value,
+          $Res Function(_$_AdditionalDetailsAddPoDocument) then) =
+      __$$_AdditionalDetailsAddPoDocumentCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<PoDocuments> poDocuments});
+}
+
+/// @nodoc
+class __$$_AdditionalDetailsAddPoDocumentCopyWithImpl<$Res>
+    extends _$AdditionalDetailsEventCopyWithImpl<$Res,
+        _$_AdditionalDetailsAddPoDocument>
+    implements _$$_AdditionalDetailsAddPoDocumentCopyWith<$Res> {
+  __$$_AdditionalDetailsAddPoDocumentCopyWithImpl(
+      _$_AdditionalDetailsAddPoDocument _value,
+      $Res Function(_$_AdditionalDetailsAddPoDocument) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? poDocuments = null,
+  }) {
+    return _then(_$_AdditionalDetailsAddPoDocument(
+      poDocuments: null == poDocuments
+          ? _value._poDocuments
+          : poDocuments // ignore: cast_nullable_to_non_nullable
+              as List<PoDocuments>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_AdditionalDetailsAddPoDocument
+    implements _AdditionalDetailsAddPoDocument {
+  const _$_AdditionalDetailsAddPoDocument(
+      {required final List<PoDocuments> poDocuments})
+      : _poDocuments = poDocuments;
+
+  final List<PoDocuments> _poDocuments;
+  @override
+  List<PoDocuments> get poDocuments {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_poDocuments);
+  }
+
+  @override
+  String toString() {
+    return 'AdditionalDetailsEvent.addPoDocument(poDocuments: $poDocuments)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_AdditionalDetailsAddPoDocument &&
+            const DeepCollectionEquality()
+                .equals(other._poDocuments, _poDocuments));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_poDocuments));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_AdditionalDetailsAddPoDocumentCopyWith<_$_AdditionalDetailsAddPoDocument>
+      get copyWith => __$$_AdditionalDetailsAddPoDocumentCopyWithImpl<
+          _$_AdditionalDetailsAddPoDocument>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(SalesOrganisationConfigs config) initialized,
+    required TResult Function(AdditionalDetailsLabel label, String newValue)
+        onTextChange,
+    required TResult Function(SalesOrganisationConfigs config) validateForm,
+    required TResult Function(List<PoDocuments> poDocuments) addPoDocument,
+    required TResult Function(PoDocuments poDocument) removePoDocument,
+    required TResult Function() removeAllPoDocument,
+  }) {
+    return addPoDocument(poDocuments);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(SalesOrganisationConfigs config)? initialized,
+    TResult? Function(AdditionalDetailsLabel label, String newValue)?
+        onTextChange,
+    TResult? Function(SalesOrganisationConfigs config)? validateForm,
+    TResult? Function(List<PoDocuments> poDocuments)? addPoDocument,
+    TResult? Function(PoDocuments poDocument)? removePoDocument,
+    TResult? Function()? removeAllPoDocument,
+  }) {
+    return addPoDocument?.call(poDocuments);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(SalesOrganisationConfigs config)? initialized,
+    TResult Function(AdditionalDetailsLabel label, String newValue)?
+        onTextChange,
+    TResult Function(SalesOrganisationConfigs config)? validateForm,
+    TResult Function(List<PoDocuments> poDocuments)? addPoDocument,
+    TResult Function(PoDocuments poDocument)? removePoDocument,
+    TResult Function()? removeAllPoDocument,
+    required TResult orElse(),
+  }) {
+    if (addPoDocument != null) {
+      return addPoDocument(poDocuments);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_AdditionalDetailsTextOnChange value)
+        onTextChange,
+    required TResult Function(_AdditionalDetailsValidateForm value)
+        validateForm,
+    required TResult Function(_AdditionalDetailsAddPoDocument value)
+        addPoDocument,
+    required TResult Function(_AdditionalDetailsRemovePoDocument value)
+        removePoDocument,
+    required TResult Function(_AdditionalDetailsRemoveAllPoDocument value)
+        removeAllPoDocument,
+  }) {
+    return addPoDocument(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_AdditionalDetailsTextOnChange value)? onTextChange,
+    TResult? Function(_AdditionalDetailsValidateForm value)? validateForm,
+    TResult? Function(_AdditionalDetailsAddPoDocument value)? addPoDocument,
+    TResult? Function(_AdditionalDetailsRemovePoDocument value)?
+        removePoDocument,
+    TResult? Function(_AdditionalDetailsRemoveAllPoDocument value)?
+        removeAllPoDocument,
+  }) {
+    return addPoDocument?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_AdditionalDetailsTextOnChange value)? onTextChange,
+    TResult Function(_AdditionalDetailsValidateForm value)? validateForm,
+    TResult Function(_AdditionalDetailsAddPoDocument value)? addPoDocument,
+    TResult Function(_AdditionalDetailsRemovePoDocument value)?
+        removePoDocument,
+    TResult Function(_AdditionalDetailsRemoveAllPoDocument value)?
+        removeAllPoDocument,
+    required TResult orElse(),
+  }) {
+    if (addPoDocument != null) {
+      return addPoDocument(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _AdditionalDetailsAddPoDocument
+    implements AdditionalDetailsEvent {
+  const factory _AdditionalDetailsAddPoDocument(
+          {required final List<PoDocuments> poDocuments}) =
+      _$_AdditionalDetailsAddPoDocument;
+
+  List<PoDocuments> get poDocuments;
+  @JsonKey(ignore: true)
+  _$$_AdditionalDetailsAddPoDocumentCopyWith<_$_AdditionalDetailsAddPoDocument>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_AdditionalDetailsRemovePoDocumentCopyWith<$Res> {
+  factory _$$_AdditionalDetailsRemovePoDocumentCopyWith(
+          _$_AdditionalDetailsRemovePoDocument value,
+          $Res Function(_$_AdditionalDetailsRemovePoDocument) then) =
+      __$$_AdditionalDetailsRemovePoDocumentCopyWithImpl<$Res>;
+  @useResult
+  $Res call({PoDocuments poDocument});
+
+  $PoDocumentsCopyWith<$Res> get poDocument;
+}
+
+/// @nodoc
+class __$$_AdditionalDetailsRemovePoDocumentCopyWithImpl<$Res>
+    extends _$AdditionalDetailsEventCopyWithImpl<$Res,
+        _$_AdditionalDetailsRemovePoDocument>
+    implements _$$_AdditionalDetailsRemovePoDocumentCopyWith<$Res> {
+  __$$_AdditionalDetailsRemovePoDocumentCopyWithImpl(
+      _$_AdditionalDetailsRemovePoDocument _value,
+      $Res Function(_$_AdditionalDetailsRemovePoDocument) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? poDocument = null,
+  }) {
+    return _then(_$_AdditionalDetailsRemovePoDocument(
+      poDocument: null == poDocument
+          ? _value.poDocument
+          : poDocument // ignore: cast_nullable_to_non_nullable
+              as PoDocuments,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PoDocumentsCopyWith<$Res> get poDocument {
+    return $PoDocumentsCopyWith<$Res>(_value.poDocument, (value) {
+      return _then(_value.copyWith(poDocument: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_AdditionalDetailsRemovePoDocument
+    implements _AdditionalDetailsRemovePoDocument {
+  const _$_AdditionalDetailsRemovePoDocument({required this.poDocument});
+
+  @override
+  final PoDocuments poDocument;
+
+  @override
+  String toString() {
+    return 'AdditionalDetailsEvent.removePoDocument(poDocument: $poDocument)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_AdditionalDetailsRemovePoDocument &&
+            (identical(other.poDocument, poDocument) ||
+                other.poDocument == poDocument));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, poDocument);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_AdditionalDetailsRemovePoDocumentCopyWith<
+          _$_AdditionalDetailsRemovePoDocument>
+      get copyWith => __$$_AdditionalDetailsRemovePoDocumentCopyWithImpl<
+          _$_AdditionalDetailsRemovePoDocument>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(SalesOrganisationConfigs config) initialized,
+    required TResult Function(AdditionalDetailsLabel label, String newValue)
+        onTextChange,
+    required TResult Function(SalesOrganisationConfigs config) validateForm,
+    required TResult Function(List<PoDocuments> poDocuments) addPoDocument,
+    required TResult Function(PoDocuments poDocument) removePoDocument,
+    required TResult Function() removeAllPoDocument,
+  }) {
+    return removePoDocument(poDocument);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(SalesOrganisationConfigs config)? initialized,
+    TResult? Function(AdditionalDetailsLabel label, String newValue)?
+        onTextChange,
+    TResult? Function(SalesOrganisationConfigs config)? validateForm,
+    TResult? Function(List<PoDocuments> poDocuments)? addPoDocument,
+    TResult? Function(PoDocuments poDocument)? removePoDocument,
+    TResult? Function()? removeAllPoDocument,
+  }) {
+    return removePoDocument?.call(poDocument);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(SalesOrganisationConfigs config)? initialized,
+    TResult Function(AdditionalDetailsLabel label, String newValue)?
+        onTextChange,
+    TResult Function(SalesOrganisationConfigs config)? validateForm,
+    TResult Function(List<PoDocuments> poDocuments)? addPoDocument,
+    TResult Function(PoDocuments poDocument)? removePoDocument,
+    TResult Function()? removeAllPoDocument,
+    required TResult orElse(),
+  }) {
+    if (removePoDocument != null) {
+      return removePoDocument(poDocument);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_AdditionalDetailsTextOnChange value)
+        onTextChange,
+    required TResult Function(_AdditionalDetailsValidateForm value)
+        validateForm,
+    required TResult Function(_AdditionalDetailsAddPoDocument value)
+        addPoDocument,
+    required TResult Function(_AdditionalDetailsRemovePoDocument value)
+        removePoDocument,
+    required TResult Function(_AdditionalDetailsRemoveAllPoDocument value)
+        removeAllPoDocument,
+  }) {
+    return removePoDocument(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_AdditionalDetailsTextOnChange value)? onTextChange,
+    TResult? Function(_AdditionalDetailsValidateForm value)? validateForm,
+    TResult? Function(_AdditionalDetailsAddPoDocument value)? addPoDocument,
+    TResult? Function(_AdditionalDetailsRemovePoDocument value)?
+        removePoDocument,
+    TResult? Function(_AdditionalDetailsRemoveAllPoDocument value)?
+        removeAllPoDocument,
+  }) {
+    return removePoDocument?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_AdditionalDetailsTextOnChange value)? onTextChange,
+    TResult Function(_AdditionalDetailsValidateForm value)? validateForm,
+    TResult Function(_AdditionalDetailsAddPoDocument value)? addPoDocument,
+    TResult Function(_AdditionalDetailsRemovePoDocument value)?
+        removePoDocument,
+    TResult Function(_AdditionalDetailsRemoveAllPoDocument value)?
+        removeAllPoDocument,
+    required TResult orElse(),
+  }) {
+    if (removePoDocument != null) {
+      return removePoDocument(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _AdditionalDetailsRemovePoDocument
+    implements AdditionalDetailsEvent {
+  const factory _AdditionalDetailsRemovePoDocument(
+          {required final PoDocuments poDocument}) =
+      _$_AdditionalDetailsRemovePoDocument;
+
+  PoDocuments get poDocument;
+  @JsonKey(ignore: true)
+  _$$_AdditionalDetailsRemovePoDocumentCopyWith<
+          _$_AdditionalDetailsRemovePoDocument>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_AdditionalDetailsRemoveAllPoDocumentCopyWith<$Res> {
+  factory _$$_AdditionalDetailsRemoveAllPoDocumentCopyWith(
+          _$_AdditionalDetailsRemoveAllPoDocument value,
+          $Res Function(_$_AdditionalDetailsRemoveAllPoDocument) then) =
+      __$$_AdditionalDetailsRemoveAllPoDocumentCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_AdditionalDetailsRemoveAllPoDocumentCopyWithImpl<$Res>
+    extends _$AdditionalDetailsEventCopyWithImpl<$Res,
+        _$_AdditionalDetailsRemoveAllPoDocument>
+    implements _$$_AdditionalDetailsRemoveAllPoDocumentCopyWith<$Res> {
+  __$$_AdditionalDetailsRemoveAllPoDocumentCopyWithImpl(
+      _$_AdditionalDetailsRemoveAllPoDocument _value,
+      $Res Function(_$_AdditionalDetailsRemoveAllPoDocument) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_AdditionalDetailsRemoveAllPoDocument
+    implements _AdditionalDetailsRemoveAllPoDocument {
+  const _$_AdditionalDetailsRemoveAllPoDocument();
+
+  @override
+  String toString() {
+    return 'AdditionalDetailsEvent.removeAllPoDocument()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_AdditionalDetailsRemoveAllPoDocument);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(SalesOrganisationConfigs config) initialized,
+    required TResult Function(AdditionalDetailsLabel label, String newValue)
+        onTextChange,
+    required TResult Function(SalesOrganisationConfigs config) validateForm,
+    required TResult Function(List<PoDocuments> poDocuments) addPoDocument,
+    required TResult Function(PoDocuments poDocument) removePoDocument,
+    required TResult Function() removeAllPoDocument,
+  }) {
+    return removeAllPoDocument();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(SalesOrganisationConfigs config)? initialized,
+    TResult? Function(AdditionalDetailsLabel label, String newValue)?
+        onTextChange,
+    TResult? Function(SalesOrganisationConfigs config)? validateForm,
+    TResult? Function(List<PoDocuments> poDocuments)? addPoDocument,
+    TResult? Function(PoDocuments poDocument)? removePoDocument,
+    TResult? Function()? removeAllPoDocument,
+  }) {
+    return removeAllPoDocument?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(SalesOrganisationConfigs config)? initialized,
+    TResult Function(AdditionalDetailsLabel label, String newValue)?
+        onTextChange,
+    TResult Function(SalesOrganisationConfigs config)? validateForm,
+    TResult Function(List<PoDocuments> poDocuments)? addPoDocument,
+    TResult Function(PoDocuments poDocument)? removePoDocument,
+    TResult Function()? removeAllPoDocument,
+    required TResult orElse(),
+  }) {
+    if (removeAllPoDocument != null) {
+      return removeAllPoDocument();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_AdditionalDetailsTextOnChange value)
+        onTextChange,
+    required TResult Function(_AdditionalDetailsValidateForm value)
+        validateForm,
+    required TResult Function(_AdditionalDetailsAddPoDocument value)
+        addPoDocument,
+    required TResult Function(_AdditionalDetailsRemovePoDocument value)
+        removePoDocument,
+    required TResult Function(_AdditionalDetailsRemoveAllPoDocument value)
+        removeAllPoDocument,
+  }) {
+    return removeAllPoDocument(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_AdditionalDetailsTextOnChange value)? onTextChange,
+    TResult? Function(_AdditionalDetailsValidateForm value)? validateForm,
+    TResult? Function(_AdditionalDetailsAddPoDocument value)? addPoDocument,
+    TResult? Function(_AdditionalDetailsRemovePoDocument value)?
+        removePoDocument,
+    TResult? Function(_AdditionalDetailsRemoveAllPoDocument value)?
+        removeAllPoDocument,
+  }) {
+    return removeAllPoDocument?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_AdditionalDetailsTextOnChange value)? onTextChange,
+    TResult Function(_AdditionalDetailsValidateForm value)? validateForm,
+    TResult Function(_AdditionalDetailsAddPoDocument value)? addPoDocument,
+    TResult Function(_AdditionalDetailsRemovePoDocument value)?
+        removePoDocument,
+    TResult Function(_AdditionalDetailsRemoveAllPoDocument value)?
+        removeAllPoDocument,
+    required TResult orElse(),
+  }) {
+    if (removeAllPoDocument != null) {
+      return removeAllPoDocument(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _AdditionalDetailsRemoveAllPoDocument
+    implements AdditionalDetailsEvent {
+  const factory _AdditionalDetailsRemoveAllPoDocument() =
+      _$_AdditionalDetailsRemoveAllPoDocument;
 }
 
 /// @nodoc

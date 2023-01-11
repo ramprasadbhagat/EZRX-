@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -46,6 +47,7 @@ class SavedOrder with _$SavedOrder {
     required String user,
     required String contactPerson,
     required String referenceNotes,
+    required List<PoDocuments> poAttachent,
   }) = _SavedOrder;
 
   factory SavedOrder.empty() => SavedOrder(
@@ -86,6 +88,7 @@ class SavedOrder with _$SavedOrder {
         totalPrice: 0.0,
         unitPrice: 0.0,
         user: '',
+        poAttachent: [],
       );
 
   List<MaterialQueryInfo> get allMaterialQueryInfo => items

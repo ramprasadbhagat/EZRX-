@@ -3,31 +3,31 @@ import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_document_buffer.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/order_history_details_po_document_local.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/order_history_details_po_document_remote.dart';
-import 'package:ezrxmobile/infrastructure/order/repository/order_history_details_po_document_download_repository.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/po_document_local.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/po_document_remote.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/po_attachment_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 class MockConfig extends Mock implements Config {}
 
 class OrderHistoryDetailsPoDocumentDownloadLocalMock extends Mock
-    implements OrderHistoryDetailsPoDocumentDownloadLocal {}
+    implements PoDocumentLocalDataSource {}
 
 class OrderHistoryDetailsPoDocumentDownloadRemoteMock extends Mock
-    implements OrderHistoryDetailsPoDocumentDownloadRemote {}
+    implements PoDocumentRemote {}
 
 
 void main() {
-  late OrderHistoryDetailsPoDocumentRepository
+  late PoAttachmentRepository
       orderHistoryDetailsPoDocumentRepository;
   late Config mockConfig;
-  late OrderHistoryDetailsPoDocumentDownloadLocal
+  late PoDocumentLocalDataSource
       orderHistoryDetailsPoDocumentDownloadLocal;
-  late OrderHistoryDetailsPoDocumentDownloadRemote
+  late PoDocumentRemote
       orderHistoryDetailsPoDocumentDownloadRemote;
   final emptyFile = OrderHistoryDetails.empty().getAllPoAsMap;
-  final emptyFileMap = OrderHistoryDetailsPODocuments.empty().getNameUrlAsMap;
+  final emptyFileMap = PoDocuments.empty().getNameUrlAsMap;
 
   setUpAll(() {
     mockConfig = MockConfig();
@@ -37,7 +37,7 @@ void main() {
         OrderHistoryDetailsPoDocumentDownloadRemoteMock();
 
     orderHistoryDetailsPoDocumentRepository =
-        OrderHistoryDetailsPoDocumentRepository(
+        PoAttachmentRepository(
       config: mockConfig,
       localDataSource: orderHistoryDetailsPoDocumentDownloadLocal,
       remoteDataSource: orderHistoryDetailsPoDocumentDownloadRemote,
@@ -50,7 +50,7 @@ void main() {
       when(() =>
               orderHistoryDetailsPoDocumentDownloadLocal.fileDownload('', ''))
           .thenAnswer((invocation) async =>
-              OrderHistoryDetailsPoDocumentsBuffer.empty());
+              PoDocumentsBuffer.empty());
 
       final result = await orderHistoryDetailsPoDocumentRepository
           .downloadFiles(emptyFile);
@@ -77,7 +77,7 @@ void main() {
       when(() =>
               orderHistoryDetailsPoDocumentDownloadRemote.fileDownload('', ''))
           .thenAnswer((invocation) async =>
-              OrderHistoryDetailsPoDocumentsBuffer.empty());
+              PoDocumentsBuffer.empty());
 
       final result = await orderHistoryDetailsPoDocumentRepository
           .downloadFiles(emptyFile);

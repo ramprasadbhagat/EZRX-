@@ -27,8 +27,7 @@ _$_OrderHistoryDetailsDto _$$_OrderHistoryDetailsDtoFromJson(
       orderHistoryDetailsSpecialInstructions:
           json['SpecialInstructions'] as String? ?? '',
       orderHistoryDetailsPoDocuments: (json['PODocuments'] as List<dynamic>?)
-              ?.map((e) => OrderHistoryDetailsPODocumentsDto.fromJson(
-                  e as Map<String, dynamic>))
+              ?.map((e) => PoDocumentsDto.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
       orderHistoryDetailsMessages: (json['Messages'] as List<dynamic>?)

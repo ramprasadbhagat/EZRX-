@@ -32,7 +32,6 @@ import 'package:ezrxmobile/application/order/material_price/material_price_bloc.
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
-import 'package:ezrxmobile/application/order/order_history_details/download_attachment/bloc/download_attachment_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_details/order_history_details_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_filter/order_history_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_filter_by_status/order_history_filter_by_status_bloc.dart';
@@ -71,6 +70,7 @@ import 'package:upgrader/upgrader.dart';
 import 'package:wakelock/wakelock.dart';
 
 import 'package:ezrxmobile/application/returns/return_request_type_code/return_request_type_code_bloc.dart';
+import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
 
 final _crashlytics = locator<FirebaseCrashlyticsService>().crashlytics;
 
@@ -254,8 +254,8 @@ class App extends StatelessWidget {
         BlocProvider<OrderHistoryDetailsBloc>(
           create: (context) => locator<OrderHistoryDetailsBloc>(),
         ),
-        BlocProvider<DownloadAttachmentBloc>(
-          create: (context) => locator<DownloadAttachmentBloc>(),
+        BlocProvider<PoAttachmentBloc>(
+          create: (context) => locator<PoAttachmentBloc>(),
         ),
         BlocProvider<OrderHistoryFilterByStatusBloc>(
           create: (context) => locator<OrderHistoryFilterByStatusBloc>(),

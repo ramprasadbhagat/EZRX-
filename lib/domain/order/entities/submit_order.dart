@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_order_customer.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -28,6 +29,7 @@ class SubmitOrder with _$SubmitOrder {
     required bool subscribeStatusChange,
     required String trackingLevel,
     required bool blockOrder,
+    required List<PoDocuments> poDocuments,
   }) = _SubmitOrderCustomer;
 
   factory SubmitOrder.empty() => SubmitOrder(
@@ -50,5 +52,6 @@ class SubmitOrder with _$SubmitOrder {
         subscribeStatusChange: false,
         trackingLevel: '',
         blockOrder: false,
+        poDocuments: [],
       );
 }

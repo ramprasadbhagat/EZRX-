@@ -6,16 +6,14 @@ part of 'order_history_details_po_documents_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_OrderHistoryDetailsPODocumentsDto
-    _$$_OrderHistoryDetailsPODocumentsDtoFromJson(Map<String, dynamic> json) =>
-        _$_OrderHistoryDetailsPODocumentsDto(
-          url: json['Url'] as String? ?? '',
-          name: json['Name'] as String? ?? '',
-        );
+_$_PoDocumentsDto _$$_PoDocumentsDtoFromJson(Map<String, dynamic> json) =>
+    _$_PoDocumentsDto(
+      url: _readUrl(json, 'url') as String? ?? '',
+      name: _readName(json, 'name') as String? ?? '',
+    );
 
-Map<String, dynamic> _$$_OrderHistoryDetailsPODocumentsDtoToJson(
-        _$_OrderHistoryDetailsPODocumentsDto instance) =>
+Map<String, dynamic> _$$_PoDocumentsDtoToJson(_$_PoDocumentsDto instance) =>
     <String, dynamic>{
-      'Url': instance.url,
-      'Name': instance.name,
+      'url': instance.url,
+      'name': instance.name,
     };

@@ -30,9 +30,9 @@ class OrderHistoryDetailsDto with _$OrderHistoryDetailsDto {
         required String orderHistoryDetailsSpecialInstructions,
     @JsonKey(
       name: 'PODocuments',
-      defaultValue: <OrderHistoryDetailsPODocumentsDto>[],
+      defaultValue: <PoDocumentsDto>[],
     )
-        required List<OrderHistoryDetailsPODocumentsDto>
+        required List<PoDocumentsDto>
             orderHistoryDetailsPoDocuments,
     @JsonKey(name: 'Messages', defaultValue: <OrderHistoryDetailsMessagesDto>[])
         required List<OrderHistoryDetailsMessagesDto>
@@ -62,7 +62,7 @@ class OrderHistoryDetailsDto with _$OrderHistoryDetailsDto {
           orderHistoryDetails.orderHistoryDetailsSpecialInstructions,
       orderHistoryDetailsPoDocuments:
           List.from(orderHistoryDetails.orderHistoryDetailsPoDocuments)
-              .map((e) => OrderHistoryDetailsPODocumentsDto.fromDomain(e))
+              .map((e) => PoDocumentsDto.fromDomain(e))
               .toList(),
       orderHistoryDetailsMessages:
           List.from(orderHistoryDetails.orderHistoryDetailsMessages)

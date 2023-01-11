@@ -15,32 +15,28 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$OrderHistoryDetailsPoDocumentsBuffer {
+mixin _$PoDocumentsBuffer {
   Uint8List get buffer => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $OrderHistoryDetailsPoDocumentsBufferCopyWith<
-          OrderHistoryDetailsPoDocumentsBuffer>
-      get copyWith => throw _privateConstructorUsedError;
+  $PoDocumentsBufferCopyWith<PoDocumentsBuffer> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $OrderHistoryDetailsPoDocumentsBufferCopyWith<$Res> {
-  factory $OrderHistoryDetailsPoDocumentsBufferCopyWith(
-          OrderHistoryDetailsPoDocumentsBuffer value,
-          $Res Function(OrderHistoryDetailsPoDocumentsBuffer) then) =
-      _$OrderHistoryDetailsPoDocumentsBufferCopyWithImpl<$Res,
-          OrderHistoryDetailsPoDocumentsBuffer>;
+abstract class $PoDocumentsBufferCopyWith<$Res> {
+  factory $PoDocumentsBufferCopyWith(
+          PoDocumentsBuffer value, $Res Function(PoDocumentsBuffer) then) =
+      _$PoDocumentsBufferCopyWithImpl<$Res, PoDocumentsBuffer>;
   @useResult
   $Res call({Uint8List buffer, String name});
 }
 
 /// @nodoc
-class _$OrderHistoryDetailsPoDocumentsBufferCopyWithImpl<$Res,
-        $Val extends OrderHistoryDetailsPoDocumentsBuffer>
-    implements $OrderHistoryDetailsPoDocumentsBufferCopyWith<$Res> {
-  _$OrderHistoryDetailsPoDocumentsBufferCopyWithImpl(this._value, this._then);
+class _$PoDocumentsBufferCopyWithImpl<$Res, $Val extends PoDocumentsBuffer>
+    implements $PoDocumentsBufferCopyWith<$Res> {
+  _$PoDocumentsBufferCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -67,25 +63,22 @@ class _$OrderHistoryDetailsPoDocumentsBufferCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_OrderHistoryDetailspoDocumentsBufferCopyWith<$Res>
-    implements $OrderHistoryDetailsPoDocumentsBufferCopyWith<$Res> {
-  factory _$$_OrderHistoryDetailspoDocumentsBufferCopyWith(
-          _$_OrderHistoryDetailspoDocumentsBuffer value,
-          $Res Function(_$_OrderHistoryDetailspoDocumentsBuffer) then) =
-      __$$_OrderHistoryDetailspoDocumentsBufferCopyWithImpl<$Res>;
+abstract class _$$_PoDocumentsBufferCopyWith<$Res>
+    implements $PoDocumentsBufferCopyWith<$Res> {
+  factory _$$_PoDocumentsBufferCopyWith(_$_PoDocumentsBuffer value,
+          $Res Function(_$_PoDocumentsBuffer) then) =
+      __$$_PoDocumentsBufferCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({Uint8List buffer, String name});
 }
 
 /// @nodoc
-class __$$_OrderHistoryDetailspoDocumentsBufferCopyWithImpl<$Res>
-    extends _$OrderHistoryDetailsPoDocumentsBufferCopyWithImpl<$Res,
-        _$_OrderHistoryDetailspoDocumentsBuffer>
-    implements _$$_OrderHistoryDetailspoDocumentsBufferCopyWith<$Res> {
-  __$$_OrderHistoryDetailspoDocumentsBufferCopyWithImpl(
-      _$_OrderHistoryDetailspoDocumentsBuffer _value,
-      $Res Function(_$_OrderHistoryDetailspoDocumentsBuffer) _then)
+class __$$_PoDocumentsBufferCopyWithImpl<$Res>
+    extends _$PoDocumentsBufferCopyWithImpl<$Res, _$_PoDocumentsBuffer>
+    implements _$$_PoDocumentsBufferCopyWith<$Res> {
+  __$$_PoDocumentsBufferCopyWithImpl(
+      _$_PoDocumentsBuffer _value, $Res Function(_$_PoDocumentsBuffer) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -94,7 +87,7 @@ class __$$_OrderHistoryDetailspoDocumentsBufferCopyWithImpl<$Res>
     Object? buffer = null,
     Object? name = null,
   }) {
-    return _then(_$_OrderHistoryDetailspoDocumentsBuffer(
+    return _then(_$_PoDocumentsBuffer(
       buffer: null == buffer
           ? _value.buffer
           : buffer // ignore: cast_nullable_to_non_nullable
@@ -109,11 +102,9 @@ class __$$_OrderHistoryDetailspoDocumentsBufferCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_OrderHistoryDetailspoDocumentsBuffer
-    extends _OrderHistoryDetailspoDocumentsBuffer with DiagnosticableTreeMixin {
-  _$_OrderHistoryDetailspoDocumentsBuffer(
-      {required this.buffer, required this.name})
-      : super._();
+class _$_PoDocumentsBuffer extends _PoDocumentsBuffer
+    with DiagnosticableTreeMixin {
+  _$_PoDocumentsBuffer({required this.buffer, required this.name}) : super._();
 
   @override
   final Uint8List buffer;
@@ -122,14 +113,14 @@ class _$_OrderHistoryDetailspoDocumentsBuffer
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'OrderHistoryDetailsPoDocumentsBuffer(buffer: $buffer, name: $name)';
+    return 'PoDocumentsBuffer(buffer: $buffer, name: $name)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'OrderHistoryDetailsPoDocumentsBuffer'))
+      ..add(DiagnosticsProperty('type', 'PoDocumentsBuffer'))
       ..add(DiagnosticsProperty('buffer', buffer))
       ..add(DiagnosticsProperty('name', name));
   }
@@ -138,7 +129,7 @@ class _$_OrderHistoryDetailspoDocumentsBuffer
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OrderHistoryDetailspoDocumentsBuffer &&
+            other is _$_PoDocumentsBuffer &&
             const DeepCollectionEquality().equals(other.buffer, buffer) &&
             (identical(other.name, name) || other.name == name));
   }
@@ -150,18 +141,16 @@ class _$_OrderHistoryDetailspoDocumentsBuffer
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OrderHistoryDetailspoDocumentsBufferCopyWith<
-          _$_OrderHistoryDetailspoDocumentsBuffer>
-      get copyWith => __$$_OrderHistoryDetailspoDocumentsBufferCopyWithImpl<
-          _$_OrderHistoryDetailspoDocumentsBuffer>(this, _$identity);
+  _$$_PoDocumentsBufferCopyWith<_$_PoDocumentsBuffer> get copyWith =>
+      __$$_PoDocumentsBufferCopyWithImpl<_$_PoDocumentsBuffer>(
+          this, _$identity);
 }
 
-abstract class _OrderHistoryDetailspoDocumentsBuffer
-    extends OrderHistoryDetailsPoDocumentsBuffer {
-  factory _OrderHistoryDetailspoDocumentsBuffer(
+abstract class _PoDocumentsBuffer extends PoDocumentsBuffer {
+  factory _PoDocumentsBuffer(
       {required final Uint8List buffer,
-      required final String name}) = _$_OrderHistoryDetailspoDocumentsBuffer;
-  _OrderHistoryDetailspoDocumentsBuffer._() : super._();
+      required final String name}) = _$_PoDocumentsBuffer;
+  _PoDocumentsBuffer._() : super._();
 
   @override
   Uint8List get buffer;
@@ -169,7 +158,6 @@ abstract class _OrderHistoryDetailspoDocumentsBuffer
   String get name;
   @override
   @JsonKey(ignore: true)
-  _$$_OrderHistoryDetailspoDocumentsBufferCopyWith<
-          _$_OrderHistoryDetailspoDocumentsBuffer>
-      get copyWith => throw _privateConstructorUsedError;
+  _$$_PoDocumentsBufferCopyWith<_$_PoDocumentsBuffer> get copyWith =>
+      throw _privateConstructorUsedError;
 }

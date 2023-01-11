@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/domain/order/entities/submit_order.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/order_history_details_po_documents_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/submit_material_info_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/submit_order_customer_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -55,6 +56,11 @@ class SubmitOrderDto with _$SubmitOrderDto {
         required String trackingLevel,
     @JsonKey(name: 'blockOrder', defaultValue: false)
         required bool blockOrder,
+    @JsonKey(
+      name: 'poDocuments',
+      defaultValue: <PoDocumentsDto>[],
+    )
+        required List<PoDocumentsDto> poDocuments,
   }) = _SubmitOrderDto;
 
   SubmitOrder toDomain() {
@@ -78,6 +84,7 @@ class SubmitOrderDto with _$SubmitOrderDto {
       subscribeStatusChange: subscribeStatusChange,
       trackingLevel: trackingLevel,
       blockOrder: blockOrder,
+      poDocuments: poDocuments.map((e) => e.toDomain()).toList(),
     );
   }
 
@@ -104,6 +111,11 @@ class SubmitOrderDto with _$SubmitOrderDto {
       subscribeStatusChange: submitOrder.subscribeStatusChange,
       trackingLevel: submitOrder.trackingLevel,
       blockOrder: submitOrder.blockOrder,
+      poDocuments: submitOrder.poDocuments
+          .map(
+            (e) => PoDocumentsDto.fromDomain(e),
+          )
+          .toList(),
     );
   }
 

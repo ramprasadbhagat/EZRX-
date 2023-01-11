@@ -32,6 +32,10 @@ _$_SubmitOrderDto _$$_SubmitOrderDtoFromJson(Map<String, dynamic> json) =>
       subscribeStatusChange: json['subscribeStatusChange'] as bool? ?? false,
       trackingLevel: json['trackingLevel'] as String? ?? '',
       blockOrder: json['blockOrder'] as bool? ?? false,
+      poDocuments: (json['poDocuments'] as List<dynamic>?)
+              ?.map((e) => PoDocumentsDto.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
     );
 
 Map<String, dynamic> _$$_SubmitOrderDtoToJson(_$_SubmitOrderDto instance) =>
@@ -55,4 +59,5 @@ Map<String, dynamic> _$$_SubmitOrderDtoToJson(_$_SubmitOrderDto instance) =>
       'subscribeStatusChange': instance.subscribeStatusChange,
       'trackingLevel': instance.trackingLevel,
       'blockOrder': instance.blockOrder,
+      'poDocuments': instance.poDocuments.map((e) => e.toJson()).toList(),
     };

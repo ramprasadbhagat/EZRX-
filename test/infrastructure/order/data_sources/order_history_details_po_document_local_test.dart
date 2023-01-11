@@ -1,7 +1,7 @@
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_document_buffer.dart';
 import 'package:ezrxmobile/domain/order/entities/order_template.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/order_history_details_po_document_local.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/po_document_local.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -11,13 +11,13 @@ import 'package:mocktail/mocktail.dart';
 class OrderTemplateMock extends Mock implements OrderTemplate {}
 
 void main() {
-  late OrderHistoryDetailsPoDocumentDownloadLocal localDataSource;
+  late PoDocumentLocalDataSource localDataSource;
   locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
 
   setUpAll(
     () {
       WidgetsFlutterBinding.ensureInitialized();
-      localDataSource = OrderHistoryDetailsPoDocumentDownloadLocal();
+      localDataSource = PoDocumentLocalDataSource();
     },
   );
 
@@ -34,7 +34,7 @@ void main() {
 
           expect(
             result,
-            OrderHistoryDetailsPoDocumentsBuffer(
+            PoDocumentsBuffer(
               name: 'fake-name',
               buffer: res.buffer.asUint8List(),
             ),

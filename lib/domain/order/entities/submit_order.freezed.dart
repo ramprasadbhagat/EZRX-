@@ -35,6 +35,7 @@ mixin _$SubmitOrder {
   bool get subscribeStatusChange => throw _privateConstructorUsedError;
   String get trackingLevel => throw _privateConstructorUsedError;
   bool get blockOrder => throw _privateConstructorUsedError;
+  List<PoDocuments> get poDocuments => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SubmitOrderCopyWith<SubmitOrder> get copyWith =>
@@ -66,7 +67,8 @@ abstract class $SubmitOrderCopyWith<$Res> {
       String collectiveNumber,
       bool subscribeStatusChange,
       String trackingLevel,
-      bool blockOrder});
+      bool blockOrder,
+      List<PoDocuments> poDocuments});
 
   $SubmitOrderCustomerCopyWith<$Res> get customer;
 }
@@ -103,6 +105,7 @@ class _$SubmitOrderCopyWithImpl<$Res, $Val extends SubmitOrder>
     Object? subscribeStatusChange = null,
     Object? trackingLevel = null,
     Object? blockOrder = null,
+    Object? poDocuments = null,
   }) {
     return _then(_value.copyWith(
       userName: null == userName
@@ -181,6 +184,10 @@ class _$SubmitOrderCopyWithImpl<$Res, $Val extends SubmitOrder>
           ? _value.blockOrder
           : blockOrder // ignore: cast_nullable_to_non_nullable
               as bool,
+      poDocuments: null == poDocuments
+          ? _value.poDocuments
+          : poDocuments // ignore: cast_nullable_to_non_nullable
+              as List<PoDocuments>,
     ) as $Val);
   }
 
@@ -220,7 +227,8 @@ abstract class _$$_SubmitOrderCustomerCopyWith<$Res>
       String collectiveNumber,
       bool subscribeStatusChange,
       String trackingLevel,
-      bool blockOrder});
+      bool blockOrder,
+      List<PoDocuments> poDocuments});
 
   @override
   $SubmitOrderCustomerCopyWith<$Res> get customer;
@@ -256,6 +264,7 @@ class __$$_SubmitOrderCustomerCopyWithImpl<$Res>
     Object? subscribeStatusChange = null,
     Object? trackingLevel = null,
     Object? blockOrder = null,
+    Object? poDocuments = null,
   }) {
     return _then(_$_SubmitOrderCustomer(
       userName: null == userName
@@ -334,6 +343,10 @@ class __$$_SubmitOrderCustomerCopyWithImpl<$Res>
           ? _value.blockOrder
           : blockOrder // ignore: cast_nullable_to_non_nullable
               as bool,
+      poDocuments: null == poDocuments
+          ? _value._poDocuments
+          : poDocuments // ignore: cast_nullable_to_non_nullable
+              as List<PoDocuments>,
     ));
   }
 }
@@ -360,8 +373,10 @@ class _$_SubmitOrderCustomer extends _SubmitOrderCustomer {
       required this.collectiveNumber,
       required this.subscribeStatusChange,
       required this.trackingLevel,
-      required this.blockOrder})
+      required this.blockOrder,
+      required final List<PoDocuments> poDocuments})
       : _materials = materials,
+        _poDocuments = poDocuments,
         super._();
 
   @override
@@ -407,10 +422,16 @@ class _$_SubmitOrderCustomer extends _SubmitOrderCustomer {
   final String trackingLevel;
   @override
   final bool blockOrder;
+  final List<PoDocuments> _poDocuments;
+  @override
+  List<PoDocuments> get poDocuments {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_poDocuments);
+  }
 
   @override
   String toString() {
-    return 'SubmitOrder(userName: $userName, companyName: $companyName, customer: $customer, poReference: $poReference, materials: $materials, poDate: $poDate, requestedDeliveryDate: $requestedDeliveryDate, specialInstructions: $specialInstructions, purchaseOrderType: $purchaseOrderType, orderType: $orderType, orderReason: $orderReason, shippingCondition: $shippingCondition, telephone: $telephone, referenceNotes: $referenceNotes, paymentTerms: $paymentTerms, collectiveNumber: $collectiveNumber, subscribeStatusChange: $subscribeStatusChange, trackingLevel: $trackingLevel, blockOrder: $blockOrder)';
+    return 'SubmitOrder(userName: $userName, companyName: $companyName, customer: $customer, poReference: $poReference, materials: $materials, poDate: $poDate, requestedDeliveryDate: $requestedDeliveryDate, specialInstructions: $specialInstructions, purchaseOrderType: $purchaseOrderType, orderType: $orderType, orderReason: $orderReason, shippingCondition: $shippingCondition, telephone: $telephone, referenceNotes: $referenceNotes, paymentTerms: $paymentTerms, collectiveNumber: $collectiveNumber, subscribeStatusChange: $subscribeStatusChange, trackingLevel: $trackingLevel, blockOrder: $blockOrder, poDocuments: $poDocuments)';
   }
 
   @override
@@ -454,7 +475,9 @@ class _$_SubmitOrderCustomer extends _SubmitOrderCustomer {
             (identical(other.trackingLevel, trackingLevel) ||
                 other.trackingLevel == trackingLevel) &&
             (identical(other.blockOrder, blockOrder) ||
-                other.blockOrder == blockOrder));
+                other.blockOrder == blockOrder) &&
+            const DeepCollectionEquality()
+                .equals(other._poDocuments, _poDocuments));
   }
 
   @override
@@ -478,7 +501,8 @@ class _$_SubmitOrderCustomer extends _SubmitOrderCustomer {
         collectiveNumber,
         subscribeStatusChange,
         trackingLevel,
-        blockOrder
+        blockOrder,
+        const DeepCollectionEquality().hash(_poDocuments)
       ]);
 
   @JsonKey(ignore: true)
@@ -509,7 +533,8 @@ abstract class _SubmitOrderCustomer extends SubmitOrder {
       required final String collectiveNumber,
       required final bool subscribeStatusChange,
       required final String trackingLevel,
-      required final bool blockOrder}) = _$_SubmitOrderCustomer;
+      required final bool blockOrder,
+      required final List<PoDocuments> poDocuments}) = _$_SubmitOrderCustomer;
   const _SubmitOrderCustomer._() : super._();
 
   @override
@@ -550,6 +575,8 @@ abstract class _SubmitOrderCustomer extends SubmitOrder {
   String get trackingLevel;
   @override
   bool get blockOrder;
+  @override
+  List<PoDocuments> get poDocuments;
   @override
   @JsonKey(ignore: true)
   _$$_SubmitOrderCustomerCopyWith<_$_SubmitOrderCustomer> get copyWith =>
