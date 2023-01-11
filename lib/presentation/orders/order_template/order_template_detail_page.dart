@@ -9,15 +9,22 @@ import 'package:ezrxmobile/application/order/material_price_detail/material_pric
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/entities/material_item.dart';
+import 'package:ezrxmobile/domain/order/entities/material_price_detail.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_template.dart';
+import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_action_button.dart';
+import 'package:ezrxmobile/presentation/orders/core/order_bundle_item.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_invalid_warning.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_material_item.dart';
+import 'package:ezrxmobile/presentation/orders/saved_order/saved_order_bouns_tile.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -52,7 +59,7 @@ class OrderTemplateDetailPage extends StatelessWidget {
                 salesOrganisationConfigs:
                     context.read<SalesOrgBloc>().state.configs,
                 shipToCode: context.read<ShipToCodeBloc>().state.shipToInfo,
-                materialInfoList: order.allMaterialQueryInfo,
+                materialInfoList: _getMaterialList(order.items),
                 pickAndPack:
                     context.read<EligibilityBloc>().state.getPNPValueMaterial,
               ),
@@ -79,14 +86,45 @@ class OrderTemplateDetailPage extends StatelessWidget {
             SliverList(
               delegate: SliverChildBuilderDelegate(
                 (context, index) {
-                  final material = order.items[index];
+                  var material = order.items[index];
+                  final materialPrice = context
+                          .read<MaterialPriceDetailBloc>()
+                          .state
+                          .materialDetails[material.queryInfo]
+                          ?.price ??
+                      Price.empty();
+                  material = material.copyWith(
+                    bonuses: List.from(material.bonuses)
+                      ..addAll(
+                        PriceAggregate.empty()
+                            .copyWith(
+                              quantity: material.qty,
+                              price: materialPrice,
+                            )
+                            .getMaterialItemBonus,
+                      ),
+                  );
 
-                  return OrderMaterialItem(
-                    materialQueryInfo: MaterialQueryInfo.fromOrderTemplate(
-                      orderMaterial: material,
-                    ),
-                    materialNumber: material.materialNumber.displayMatNo,
-                    qty: material.qty.toString(),
+                  return Column(
+                    children: [
+                      material.type.isBundle
+                          ? OrderBundleItem(
+                              material: material,
+                              materialNumber:
+                                  material.materialNumber.displayMatNo,
+                              qty: material.qty.toString(),
+                            )
+                          : OrderMaterialItem(
+                              materialQueryInfo: material.queryInfo,
+                              materialNumber:
+                                  material.materialNumber.displayMatNo,
+                              qty: material.qty.toString(),
+                            ),
+                      if (material.bonuses.isNotEmpty)
+                        SaveOrderBounsTile(
+                          item: material,
+                        ),
+                    ],
                   );
                 },
                 childCount: order.items.length,
@@ -126,33 +164,128 @@ class OrderTemplateDetailPage extends StatelessWidget {
     );
   }
 
-  void _addToCartPressed(BuildContext context, MaterialPriceDetailState state) {
-    final cartBloc = context.read<CartBloc>();
-    cartBloc.add(const CartEvent.clearCart());
-    final eligibilityState = context.read<EligibilityBloc>().state;
-    final items = order.allMaterialQueryInfo.map((queryInfo) {
-      final itemInfo = state.materialDetails[queryInfo];
-      if (itemInfo != null) {
-        final priceAggregate = PriceAggregate(
-          price: itemInfo.price,
-          materialInfo: itemInfo.info,
-          salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
-          quantity: queryInfo.qty.getOrCrash(),
-          discountedMaterialCount: cartBloc.state.zmgMaterialCount,
-          bundle: Bundle.empty(),
-          addedBonusList: [],
-          stockInfo: StockInfo.empty(),
-          tenderContract: TenderContract.empty(),
-        );
+  List<MaterialQueryInfo> _getMaterialList(List<MaterialItem> items) {
+    final materialList = <MaterialQueryInfo>[];
+    for (final item in items) {
+      item.type.isBundle
+          ? materialList.addAll(item.materials
+              .map((material) =>
+                  MaterialQueryInfo.fromBundles(materialInfo: material))
+              .toList())
+          : materialList
+              .add(MaterialQueryInfo.fromSavedOrder(orderMaterial: item));
+    }
 
-        return priceAggregate;
+    return materialList;
+  }
+
+  PriceAggregate _getCommercialTypeMaterial({
+    required MaterialPriceDetail itemInfo,
+    required MaterialItem material,
+    required BuildContext context,
+    required bool isBundle,
+    required MaterialInfo materialInfo,
+  }) {
+    final cartBloc = context.read<CartBloc>();
+    final priceAggregate = PriceAggregate(
+      price: isBundle
+          ? itemInfo.price
+          : itemInfo.price.copyWith(
+              isPriceOverride: material.overridenPrice.isValid(),
+              zdp8Override: material.zdp8Override,
+              priceOverride: material.overridenPrice,
+            ),
+      materialInfo: itemInfo.info,
+      salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+      quantity: isBundle ? materialInfo.quantity : material.qty,
+      discountedMaterialCount: cartBloc.state.zmgMaterialCount,
+      bundle: isBundle
+          ? Bundle(
+              bundleName: BundleName(material.bundleName),
+              bundleCode: material.bundleCode,
+              bundleInformation: material.bundleInformation,
+              materials: material.materials,
+            )
+          : Bundle.empty(),
+      addedBonusList: material.bonuses,
+      stockInfo: StockInfo.empty().copyWith(
+        materialNumber: itemInfo.info.materialNumber,
+      ),
+      tenderContract: TenderContract.empty(),
+    );
+
+    return priceAggregate.copyWith(
+      addedBonusList: List.from(priceAggregate.addedBonusList)
+        ..addAll(priceAggregate.getMaterialItemBonus),
+    );
+  }
+
+  List<PriceAggregate> _getBundleTypeMaterials({
+    required MaterialPriceDetailState state,
+    required MaterialItem material,
+    required BuildContext context,
+    required bool isBundle,
+  }) {
+    return material.materials.map((materialInfo) {
+      final itemInfo = state.materialDetails[materialInfo.queryInfo];
+      if (itemInfo != null) {
+        return _getCommercialTypeMaterial(
+          itemInfo: itemInfo,
+          material: material,
+          context: context,
+          isBundle: true,
+          materialInfo: materialInfo,
+        );
       }
 
       return PriceAggregate.empty();
     }).toList();
+  }
+
+  List<PriceAggregate> _buildPriceAggregateList({
+    required List<MaterialItem> items,
+    required MaterialPriceDetailState state,
+    required BuildContext context,
+  }) {
+    final priceAggregateList = <PriceAggregate>[];
+    for (final material in order.items) {
+      final itemInfo = state.materialDetails[material.queryInfo];
+      material.type.isBundle
+          ? priceAggregateList.addAll(
+              _getBundleTypeMaterials(
+                state: state,
+                material: material,
+                context: context,
+                isBundle: true,
+              ),
+            )
+          : itemInfo != null
+              ? priceAggregateList.add(
+                  _getCommercialTypeMaterial(
+                    itemInfo: itemInfo,
+                    material: material,
+                    context: context,
+                    isBundle: false,
+                    materialInfo: MaterialInfo.empty(),
+                  ),
+                )
+              : priceAggregateList.add(PriceAggregate.empty());
+    }
+
+    return priceAggregateList;
+  }
+
+  void _addToCartPressed(BuildContext context, MaterialPriceDetailState state) {
+    final cartBloc = context.read<CartBloc>();
+    cartBloc.add(const CartEvent.clearCart());
+    final eligibilityState = context.read<EligibilityBloc>().state;
 
     context.read<CartBloc>().add(CartEvent.addToCartFromList(
-          items: items,
+          items: _buildPriceAggregateList(
+            items: order.items,
+            state: state,
+            context: context,
+          ),
           customerCodeInfo: eligibilityState.customerCodeInfo,
           salesOrganisationConfigs: eligibilityState.salesOrgConfigs,
           salesOrganisation: eligibilityState.salesOrganisation,

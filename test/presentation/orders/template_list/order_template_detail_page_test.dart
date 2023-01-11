@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
+import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:bloc_test/bloc_test.dart';
@@ -13,7 +14,6 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/order/entities/material_price_detail.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_template.dart';
-import 'package:ezrxmobile/domain/order/entities/order_template_material.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_template_local_datasource.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_material_item.dart';
@@ -60,7 +60,7 @@ void main() {
   late MaterialPriceDetailBloc materialPriceDetailBlocMock;
   late CartBloc cartBlocMock;
   late OrderTemplate orderMock;
-  late List<OrderTemplateMaterial> orderMockItems;
+  late List<MaterialItem> orderMockItems;
   late EligibilityBlocMock eligibilityBlocMock;
   late AppRouter autoRouterMock;
   late OrderTemplateListBloc orderTemplateListBlocMock;
@@ -162,7 +162,7 @@ void main() {
           MaterialPriceDetailState.initial().copyWith(
             materialDetails: {
               for (final material in orderMockItems)
-                MaterialQueryInfo.fromOrderTemplate(orderMaterial: material):
+                MaterialQueryInfo.fromSavedOrder(orderMaterial: material):
                     MaterialPriceDetail.empty()
                         .copyWith
                         .price(isValidMaterial: false),
@@ -201,7 +201,7 @@ void main() {
           MaterialPriceDetailState.initial().copyWith(
             materialDetails: {
               for (final material in orderMockItems)
-                MaterialQueryInfo.fromOrderTemplate(orderMaterial: material):
+                MaterialQueryInfo.fromSavedOrder(orderMaterial: material):
                     MaterialPriceDetail.empty().copyWith.price(
                           isValidMaterial: true,
                           isFOC: true,
@@ -224,7 +224,7 @@ void main() {
           MaterialPriceDetailState.initial().copyWith(
             materialDetails: {
               for (final material in orderMockItems)
-                MaterialQueryInfo.fromOrderTemplate(orderMaterial: material):
+                MaterialQueryInfo.fromSavedOrder(orderMaterial: material):
                     MaterialPriceDetail.empty()
                         .copyWith
                         .price(finalPrice: MaterialPrice(10)),
@@ -244,7 +244,7 @@ void main() {
         MaterialPriceDetailState.initial().copyWith(
           materialDetails: {
             for (final material in orderMockItems)
-              MaterialQueryInfo.fromOrderTemplate(orderMaterial: material):
+              MaterialQueryInfo.fromSavedOrder(orderMaterial: material):
                   MaterialPriceDetail.empty()
                       .copyWith
                       .price(finalPrice: MaterialPrice(10)),
@@ -261,7 +261,7 @@ void main() {
         MaterialPriceDetailState.initial().copyWith(
           materialDetails: {
             for (final material in orderMockItems)
-              MaterialQueryInfo.fromOrderTemplate(orderMaterial: material):
+              MaterialQueryInfo.fromSavedOrder(orderMaterial: material):
                   MaterialPriceDetail.empty()
                       .copyWith
                       .price(finalPrice: MaterialPrice(10)),

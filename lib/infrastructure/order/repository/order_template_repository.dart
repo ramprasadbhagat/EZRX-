@@ -1,15 +1,16 @@
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/application/order/cart/cart_view_model.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
+import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/order_template.dart';
-import 'package:ezrxmobile/domain/order/entities/order_template_material.dart';
 import 'package:ezrxmobile/domain/order/repository/i_order_template_repository.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_template_local_datasource.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_template_remote_datasource.dart';
-import 'package:ezrxmobile/infrastructure/order/dtos/order_template_material_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/material_item_dto.dart';
 
 class OrderTemplateRepository implements IOrderTemplateRepository {
   final Config config;
@@ -85,13 +86,24 @@ class OrderTemplateRepository implements IOrderTemplateRepository {
     }
   }
 
+  List<MaterialItem> _getItemList(List<CartItem> cartItemList) {
+    final saveOrderItems = cartItemList
+        .map((cartItem) => cartItem.toSavedOrderMaterial())
+        .toList()
+        .expand((element) => element)
+        .toList();
+
+    return saveOrderItems;
+  }
+
   @override
   Future<Either<ApiFailure, List<OrderTemplate>>> saveOrderTemplate({
     required String templateName,
     required String userID,
-    required List<OrderTemplateMaterial> cartList,
+    required List<CartItem> cartList,
     required List<OrderTemplate> templateList,
   }) async {
+    final materialList = _getItemList(cartList);
     if (config.appFlavor == Flavor.mock) {
       try {
         final savedTemplate =
@@ -105,8 +117,8 @@ class OrderTemplateRepository implements IOrderTemplateRepository {
       }
     }
     try {
-      final cartListOfMap = List.from(cartList)
-          .map((e) => OrderTemplateMaterialDto.fromDomain(e).toJson())
+      final cartListOfMap = List.from(materialList)
+          .map((e) => MaterialItemDto.fromDomain(e).toJson())
           .toList();
 
       final savedTemplate =

@@ -27,9 +27,8 @@ mixin _$OrderTemplateDto {
   @JsonKey(name: 'user')
   UserDto get user => throw _privateConstructorUsedError;
   @_CartItemListConverter()
-  @JsonKey(name: 'cartList', defaultValue: <OrderTemplateMaterialDto>[])
-  List<OrderTemplateMaterialDto> get items =>
-      throw _privateConstructorUsedError;
+  @JsonKey(name: 'cartList', defaultValue: <MaterialItemDto>[])
+  List<MaterialItemDto> get items => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -51,8 +50,8 @@ abstract class $OrderTemplateDtoCopyWith<$Res> {
       @JsonKey(name: 'user')
           UserDto user,
       @_CartItemListConverter()
-      @JsonKey(name: 'cartList', defaultValue: <OrderTemplateMaterialDto>[])
-          List<OrderTemplateMaterialDto> items});
+      @JsonKey(name: 'cartList', defaultValue: <MaterialItemDto>[])
+          List<MaterialItemDto> items});
 
   $UserDtoCopyWith<$Res> get user;
 }
@@ -91,7 +90,7 @@ class _$OrderTemplateDtoCopyWithImpl<$Res, $Val extends OrderTemplateDto>
       items: null == items
           ? _value.items
           : items // ignore: cast_nullable_to_non_nullable
-              as List<OrderTemplateMaterialDto>,
+              as List<MaterialItemDto>,
     ) as $Val);
   }
 
@@ -120,8 +119,8 @@ abstract class _$$_OrderTemplateDtoCopyWith<$Res>
       @JsonKey(name: 'user')
           UserDto user,
       @_CartItemListConverter()
-      @JsonKey(name: 'cartList', defaultValue: <OrderTemplateMaterialDto>[])
-          List<OrderTemplateMaterialDto> items});
+      @JsonKey(name: 'cartList', defaultValue: <MaterialItemDto>[])
+          List<MaterialItemDto> items});
 
   @override
   $UserDtoCopyWith<$Res> get user;
@@ -159,7 +158,7 @@ class __$$_OrderTemplateDtoCopyWithImpl<$Res>
       items: null == items
           ? _value._items
           : items // ignore: cast_nullable_to_non_nullable
-              as List<OrderTemplateMaterialDto>,
+              as List<MaterialItemDto>,
     ));
   }
 }
@@ -175,8 +174,8 @@ class _$_OrderTemplateDto extends _OrderTemplateDto {
       @JsonKey(name: 'user')
           this.user = UserDto.emptyUserDto,
       @_CartItemListConverter()
-      @JsonKey(name: 'cartList', defaultValue: <OrderTemplateMaterialDto>[])
-          required final List<OrderTemplateMaterialDto> items})
+      @JsonKey(name: 'cartList', defaultValue: <MaterialItemDto>[])
+          required final List<MaterialItemDto> items})
       : _items = items,
         super._();
 
@@ -192,11 +191,11 @@ class _$_OrderTemplateDto extends _OrderTemplateDto {
   @override
   @JsonKey(name: 'user')
   final UserDto user;
-  final List<OrderTemplateMaterialDto> _items;
+  final List<MaterialItemDto> _items;
   @override
   @_CartItemListConverter()
-  @JsonKey(name: 'cartList', defaultValue: <OrderTemplateMaterialDto>[])
-  List<OrderTemplateMaterialDto> get items {
+  @JsonKey(name: 'cartList', defaultValue: <MaterialItemDto>[])
+  List<MaterialItemDto> get items {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_items);
   }
@@ -240,16 +239,15 @@ class _$_OrderTemplateDto extends _OrderTemplateDto {
 
 abstract class _OrderTemplateDto extends OrderTemplateDto {
   const factory _OrderTemplateDto(
-          {@JsonKey(name: 'id')
-              required final String templateId,
-          @JsonKey(name: 'name', defaultValue: '')
-              required final String templateName,
-          @JsonKey(name: 'user')
-              final UserDto user,
-          @_CartItemListConverter()
-          @JsonKey(name: 'cartList', defaultValue: <OrderTemplateMaterialDto>[])
-              required final List<OrderTemplateMaterialDto> items}) =
-      _$_OrderTemplateDto;
+      {@JsonKey(name: 'id')
+          required final String templateId,
+      @JsonKey(name: 'name', defaultValue: '')
+          required final String templateName,
+      @JsonKey(name: 'user')
+          final UserDto user,
+      @_CartItemListConverter()
+      @JsonKey(name: 'cartList', defaultValue: <MaterialItemDto>[])
+          required final List<MaterialItemDto> items}) = _$_OrderTemplateDto;
   const _OrderTemplateDto._() : super._();
 
   factory _OrderTemplateDto.fromJson(Map<String, dynamic> json) =
@@ -266,8 +264,8 @@ abstract class _OrderTemplateDto extends OrderTemplateDto {
   UserDto get user;
   @override
   @_CartItemListConverter()
-  @JsonKey(name: 'cartList', defaultValue: <OrderTemplateMaterialDto>[])
-  List<OrderTemplateMaterialDto> get items;
+  @JsonKey(name: 'cartList', defaultValue: <MaterialItemDto>[])
+  List<MaterialItemDto> get items;
   @override
   @JsonKey(ignore: true)
   _$$_OrderTemplateDtoCopyWith<_$_OrderTemplateDto> get copyWith =>

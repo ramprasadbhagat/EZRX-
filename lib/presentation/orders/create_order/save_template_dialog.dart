@@ -3,7 +3,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
-import 'package:ezrxmobile/domain/order/entities/order_template_material.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/save_template_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -64,17 +63,13 @@ class SaveTemplateDialog {
   static void saveButtonPressed(BuildContext context, templateName) {
     final templateList =
         context.read<OrderTemplateListBloc>().state.orderTemplateList;
-    final priceAggregateList = context.read<CartBloc>().state.cartItemList;
     final userID = context.read<UserBloc>().state.user.id;
-    final cartList = <OrderTemplateMaterial>[];
-    priceAggregateList
-        .map((cartItem) => cartList.add(cartItem.toOrderTemplateMaterial()))
-        .toList();
+    final displayCartItems = context.read<CartBloc>().state.displayCartItems;
     context.read<OrderTemplateListBloc>().add(
           OrderTemplateListEvent.save(
             templateName: templateName,
             userID: userID,
-            cartList: cartList,
+            cartList: displayCartItems,
             templateList: templateList,
           ),
         );

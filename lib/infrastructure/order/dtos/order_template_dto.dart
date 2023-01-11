@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:ezrxmobile/domain/order/entities/order_template.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/user_dto.dart';
-import 'package:ezrxmobile/infrastructure/order/dtos/order_template_material_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/material_item_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'order_template_dto.freezed.dart';
@@ -16,8 +16,8 @@ class OrderTemplateDto with _$OrderTemplateDto {
     @JsonKey(name: 'name', defaultValue: '') required String templateName,
     @Default(UserDto.emptyUserDto) @JsonKey(name: 'user') UserDto user,
     @_CartItemListConverter()
-    @JsonKey(name: 'cartList', defaultValue: <OrderTemplateMaterialDto>[])
-        required List<OrderTemplateMaterialDto> items,
+    @JsonKey(name: 'cartList', defaultValue: <MaterialItemDto>[])
+        required List<MaterialItemDto> items,
   }) = _OrderTemplateDto;
 
   factory OrderTemplateDto.fromDomain(OrderTemplate orderTemplate) {
@@ -26,7 +26,7 @@ class OrderTemplateDto with _$OrderTemplateDto {
       templateName: orderTemplate.templateName,
       user: UserDto.fromDomain(orderTemplate.user),
       items: orderTemplate.items
-          .map((e) => OrderTemplateMaterialDto.fromDomain(e))
+          .map((e) => MaterialItemDto.fromDomain(e))
           .toList(),
     );
   }
@@ -45,18 +45,18 @@ class OrderTemplateDto with _$OrderTemplateDto {
 }
 
 class _CartItemListConverter
-    extends JsonConverter<List<OrderTemplateMaterialDto>, String> {
+    extends JsonConverter<List<MaterialItemDto>, String> {
   const _CartItemListConverter();
 
   @override
-  List<OrderTemplateMaterialDto> fromJson(String json) {
+  List<MaterialItemDto> fromJson(String json) {
     return List.from(jsonDecode(json))
-        .map((e) => OrderTemplateMaterialDto.fromJson(e))
+        .map((e) => MaterialItemDto.fromJson(e))
         .toList();
   }
 
   @override
-  String toJson(List<OrderTemplateMaterialDto> object) {
+  String toJson(List<MaterialItemDto> object) {
     return object.map((e) => e.toJson()).toList().toString();
   }
 }

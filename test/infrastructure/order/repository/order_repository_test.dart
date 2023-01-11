@@ -36,6 +36,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
+List<MaterialItem> getItemList(List<CartItem> cartItemList) {
+  final saveOrderItems = cartItemList
+      .map((cartItem) => cartItem.toSavedOrderMaterial())
+      .toList()
+      .expand((element) => element)
+      .toList();
+
+  return saveOrderItems;
+}
+
 class MockConfig extends Mock implements Config {}
 
 class OrderLocalDataSourceMock extends Mock implements OrderLocalDataSource {}
@@ -637,6 +647,7 @@ void main() {
         true,
       );
     });
+
     test('createDraftOrder  successfully locally ', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
 
@@ -657,15 +668,6 @@ void main() {
           username: Username('mock_user'),
           email: EmailAddress('user@gmail.com'),
           customerCode: CustomerCode('100007654'));
-
-      List<MaterialItem> getItemList(List<CartItem> cartItemList) {
-        final saveOrderItems = <MaterialItem>[];
-        cartItemList.map(
-          (cartItem) => saveOrderItems.addAll(cartItem.toSavedOrderMaterial()),
-        );
-
-        return saveOrderItems;
-      }
 
       final draftOrder = SavedOrder.empty().copyWith(
         deliveryDocument: mockShipToInfo.shipToName.name1,
@@ -695,28 +697,36 @@ void main() {
             : user.fullName.toString(),
         referenceNotes: data.referenceNote.getValue(),
         items: getItemList([
-          CartItem(materials: [
-            PriceAggregate.empty().copyWith(
-              price: Price.empty().copyWith(
+          CartItem(
+            materials: [
+              PriceAggregate.empty().copyWith(
+                price: Price.empty().copyWith(
                   bundles: [],
                   materialNumber: MaterialNumber('234567'),
                   priceOverride: PriceOverrideValue(12.0),
-                  zdp8Override: Zdp8OverrideValue(2.0)),
-              materialInfo: MaterialInfo.empty().copyWith(
-                materialNumber: MaterialNumber('234567'),
+                  zdp8Override: Zdp8OverrideValue(2.0),
+                ),
+                materialInfo: MaterialInfo.empty().copyWith(
+                  materialNumber: MaterialNumber('234567'),
+                ),
               ),
-            ),
-          ], itemType: CartItemType.material),
+            ],
+            itemType: CartItemType.material,
+          ),
         ]),
       );
 
       when(() => orderLocalDataSource.createDraftOrder(
-              draftOrder: SavedOrderDto.fromDomain(draftOrder)))
-          .thenAnswer((invocation) async => SavedOrder.empty().copyWith(
-                draftorder: true,
-                isDraftOrder: true,
-                id: '12345678',
-              ));
+          draftOrder: SavedOrderDto.fromDomain(draftOrder))).thenAnswer(
+        (invocation) async {
+          await Future.delayed(const Duration(seconds: 1));
+          return SavedOrder.empty().copyWith(
+            draftorder: true,
+            isDraftOrder: true,
+            id: '12345678',
+          );
+        },
+      );
 
       final result = await orderRepository.createDraftOrder(
         shipToInfo: mockShipToInfo,
@@ -725,10 +735,11 @@ void main() {
           CartItem(materials: [
             PriceAggregate.empty().copyWith(
               price: Price.empty().copyWith(
-                  bundles: [],
-                  materialNumber: MaterialNumber('234567'),
-                  priceOverride: PriceOverrideValue(12.0),
-                  zdp8Override: Zdp8OverrideValue(2.0)),
+                bundles: [],
+                materialNumber: MaterialNumber('234567'),
+                priceOverride: PriceOverrideValue(12.0),
+                zdp8Override: Zdp8OverrideValue(2.0),
+              ),
               materialInfo: MaterialInfo.empty().copyWith(
                 materialNumber: MaterialNumber('234567'),
               ),
@@ -767,15 +778,6 @@ void main() {
           username: Username('mock_user'),
           email: EmailAddress('user@gmail.com'),
           customerCode: CustomerCode('100007654'));
-
-      List<MaterialItem> getItemList(List<CartItem> cartItemList) {
-        final saveOrderItems = <MaterialItem>[];
-        cartItemList.map(
-          (cartItem) => saveOrderItems.addAll(cartItem.toSavedOrderMaterial()),
-        );
-
-        return saveOrderItems;
-      }
 
       final draftOrder = SavedOrder.empty().copyWith(
         deliveryDocument: mockShipToInfo.shipToName.name1,
@@ -877,15 +879,6 @@ void main() {
           username: Username('mock_user'),
           email: EmailAddress('user@gmail.com'),
           customerCode: CustomerCode('100007654'));
-
-      List<MaterialItem> getItemList(List<CartItem> cartItemList) {
-        final saveOrderItems = <MaterialItem>[];
-        cartItemList.map(
-          (cartItem) => saveOrderItems.addAll(cartItem.toSavedOrderMaterial()),
-        );
-
-        return saveOrderItems;
-      }
 
       final draftOrder = SavedOrder.empty().copyWith(
         deliveryDocument: mockShipToInfo.shipToName.name1,
@@ -1028,15 +1021,6 @@ void main() {
           email: EmailAddress('user@gmail.com'),
           customerCode: CustomerCode('100007654'));
 
-      List<MaterialItem> getItemList(List<CartItem> cartItemList) {
-        final saveOrderItems = <MaterialItem>[];
-        cartItemList.map(
-          (cartItem) => saveOrderItems.addAll(cartItem.toSavedOrderMaterial()),
-        );
-
-        return saveOrderItems;
-      }
-
       final draftOrder = SavedOrder.empty().copyWith(
         deliveryDocument: mockShipToInfo.shipToName.name1,
         billingDocument: mockCustomerCodeInfo.customerName.name1,
@@ -1142,15 +1126,6 @@ void main() {
           email: EmailAddress('user@gmail.com'),
           customerCode: CustomerCode('100007654'));
 
-      List<MaterialItem> getItemList(List<CartItem> cartItemList) {
-        final saveOrderItems = <MaterialItem>[];
-        cartItemList.map(
-          (cartItem) => saveOrderItems.addAll(cartItem.toSavedOrderMaterial()),
-        );
-
-        return saveOrderItems;
-      }
-
       final draftOrder = SavedOrder.empty().copyWith(
         deliveryDocument: mockShipToInfo.shipToName.name1,
         billingDocument: mockCustomerCodeInfo.customerName.name1,
@@ -1255,15 +1230,6 @@ void main() {
           username: Username('mock_user'),
           email: EmailAddress('user@gmail.com'),
           customerCode: CustomerCode('100007654'));
-
-      List<MaterialItem> getItemList(List<CartItem> cartItemList) {
-        final saveOrderItems = <MaterialItem>[];
-        cartItemList.map(
-          (cartItem) => saveOrderItems.addAll(cartItem.toSavedOrderMaterial()),
-        );
-
-        return saveOrderItems;
-      }
 
       final draftOrder = SavedOrder.empty().copyWith(
         deliveryDocument: mockShipToInfo.shipToName.name1,

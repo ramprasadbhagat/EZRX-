@@ -1,18 +1,32 @@
+import 'package:ezrxmobile/application/order/cart/cart_view_model.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/order_template.dart';
-import 'package:ezrxmobile/domain/order/entities/order_template_material.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_template_local_datasource.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_template_remote_datasource.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/material_item_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/order_template_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+
+List<MaterialItem> getItemList(List<CartItem> cartItemList) {
+  final saveOrderItems = cartItemList
+      .map((cartItem) => cartItem.toSavedOrderMaterial())
+      .toList()
+      .expand((element) => element)
+      .toList();
+
+  return saveOrderItems;
+}
 
 class MockConfig extends Mock implements Config {}
 
@@ -33,7 +47,7 @@ void main() {
   late CountlyService countlyServiceMock;
 
   final mockOrderTemplate = OrderTemplate(
-    items: <OrderTemplateMaterial>[],
+    items: <MaterialItem>[],
     templateId: '1231',
     templateName: 'fake-name',
     user: mockUser.copyWith(
@@ -45,22 +59,35 @@ void main() {
   );
 
   final cartList = [
-    OrderTemplateMaterial(
+    MaterialItem.empty().copyWith(
       materialNumber: MaterialNumber('123'),
       materialGroup4: MaterialGroup.four('4'),
       qty: 1,
-      type: 'Comm',
-      principalName: 'Name',
+      type: MaterialItemType('Comm'),
       materialDescription: 'Description',
       hidePrice: false,
-      hasValidTenderContract: true,
-      taxClassification: MaterialTaxClassification('tax'),
+    ),
+  ];
+  final cartItemList = [
+    CartItem(
+      itemType: CartItemType.material,
+      materials: [
+        PriceAggregate.empty().copyWith(
+          quantity: 1,
+          materialInfo: MaterialInfo.empty().copyWith(
+            materialNumber: MaterialNumber('123'),
+            materialGroup4: MaterialGroup.four('4'),
+            materialDescription: 'Description',
+            hidePrice: false,
+          ),
+        ),
+      ],
     ),
   ];
   final tempObj = OrderTemplate(
     templateId: '1231',
     templateName: 'fake-name',
-    items: <OrderTemplateMaterial>[],
+    items: <MaterialItem>[],
     user: mockUser.copyWith(
         role: Role.empty().copyWith(type: RoleType('external_sales_rep')),
         id: '1',
@@ -145,7 +172,7 @@ void main() {
       final result = await orderTemplateRepository.saveOrderTemplate(
           templateList: <OrderTemplate>[],
           userID: mockUser.id,
-          cartList: <OrderTemplateMaterial>[],
+          cartList: <CartItem>[],
           templateName: '');
       expect(
         result.isRight(),
@@ -160,7 +187,7 @@ void main() {
       final result = await orderTemplateRepository.saveOrderTemplate(
           templateList: <OrderTemplate>[],
           userID: mockUser.id,
-          cartList: <OrderTemplateMaterial>[],
+          cartList: <CartItem>[],
           templateName: '');
       expect(
         result.isLeft(),
@@ -168,33 +195,26 @@ void main() {
       );
     });
     test('get save orderTemplate successfully remote', () async {
-      final mockcartList = {
-        'materialNumber': '123',
-        'materialGroup4': '4',
-        'qty': 1,
-        'type': 'Comm',
-        'principalName': 'Name',
-        'materialDescription': 'Description',
-        'hidePrice': false,
-        'hasValidTenderContract': true,
-        'taxClassification': 'tax'
-      };
+      final materialList = getItemList(cartItemList);
+      final cartListOfMap = List.from(materialList)
+          .map((e) => MaterialItemDto.fromDomain(e).toJson())
+          .toList();
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
-      when(() => orderTemplateRemoteDataSource.saveOrderTemplate(
+      when(
+        () => orderTemplateRemoteDataSource.saveOrderTemplate(
           templateName: 'fake-saved-template',
           userID: '1',
-          cartList: [mockcartList])).thenAnswer((invocation) async {
-        saveTemplateListMock.insert(
-          0,
-          OrderTemplate(
-            templateId: 'id',
-            templateName: 'fake-saved-template',
-            items: cartList,
-            user: mockUser,
-          ),
-        );
+          cartList: cartListOfMap,
+        ),
+      ).thenAnswer((invocation) async {
+        await Future.delayed(const Duration(seconds: 1));
         return mockOrderTemplate;
       });
+
+      saveTemplateListMock.insert(
+        0,
+        mockOrderTemplate,
+      );
 
       when(() => countlyServiceMock.addCountlyEvent(
             'save_as_template',
@@ -203,7 +223,7 @@ void main() {
       final result = await orderTemplateRepository.saveOrderTemplate(
         templateName: 'fake-saved-template',
         userID: '1',
-        cartList: cartList,
+        cartList: cartItemList,
         templateList: saveTemplateListMock,
       );
 
@@ -222,7 +242,7 @@ void main() {
       final result = await orderTemplateRepository.saveOrderTemplate(
         userID: mockUser.id,
         templateName: '',
-        cartList: cartList,
+        cartList: cartItemList,
         templateList: saveTemplateListMock,
       );
 

@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$OrderTemplate {
   String get templateId => throw _privateConstructorUsedError;
   String get templateName => throw _privateConstructorUsedError;
-  List<OrderTemplateMaterial> get items => throw _privateConstructorUsedError;
+  List<MaterialItem> get items => throw _privateConstructorUsedError;
   User get user => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -35,7 +35,7 @@ abstract class $OrderTemplateCopyWith<$Res> {
   $Res call(
       {String templateId,
       String templateName,
-      List<OrderTemplateMaterial> items,
+      List<MaterialItem> items,
       User user});
 
   $UserCopyWith<$Res> get user;
@@ -71,7 +71,7 @@ class _$OrderTemplateCopyWithImpl<$Res, $Val extends OrderTemplate>
       items: null == items
           ? _value.items
           : items // ignore: cast_nullable_to_non_nullable
-              as List<OrderTemplateMaterial>,
+              as List<MaterialItem>,
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -99,7 +99,7 @@ abstract class _$$_OrderTemplateCopyWith<$Res>
   $Res call(
       {String templateId,
       String templateName,
-      List<OrderTemplateMaterial> items,
+      List<MaterialItem> items,
       User user});
 
   @override
@@ -134,7 +134,7 @@ class __$$_OrderTemplateCopyWithImpl<$Res>
       items: null == items
           ? _value._items
           : items // ignore: cast_nullable_to_non_nullable
-              as List<OrderTemplateMaterial>,
+              as List<MaterialItem>,
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -149,7 +149,7 @@ class _$_OrderTemplate extends _OrderTemplate {
   const _$_OrderTemplate(
       {required this.templateId,
       required this.templateName,
-      required final List<OrderTemplateMaterial> items,
+      required final List<MaterialItem> items,
       required this.user})
       : _items = items,
         super._();
@@ -158,9 +158,9 @@ class _$_OrderTemplate extends _OrderTemplate {
   final String templateId;
   @override
   final String templateName;
-  final List<OrderTemplateMaterial> _items;
+  final List<MaterialItem> _items;
   @override
-  List<OrderTemplateMaterial> get items {
+  List<MaterialItem> get items {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_items);
   }
@@ -201,7 +201,7 @@ abstract class _OrderTemplate extends OrderTemplate {
   const factory _OrderTemplate(
       {required final String templateId,
       required final String templateName,
-      required final List<OrderTemplateMaterial> items,
+      required final List<MaterialItem> items,
       required final User user}) = _$_OrderTemplate;
   const _OrderTemplate._() : super._();
 
@@ -210,7 +210,7 @@ abstract class _OrderTemplate extends OrderTemplate {
   @override
   String get templateName;
   @override
-  List<OrderTemplateMaterial> get items;
+  List<MaterialItem> get items;
   @override
   User get user;
   @override

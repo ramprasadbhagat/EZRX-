@@ -169,10 +169,11 @@ class OrderRepository implements IOrderRepository {
   }
 
   List<MaterialItem> _getItemList(List<CartItem> cartItemList) {
-    final saveOrderItems = <MaterialItem>[];
-    cartItemList.map(
-      (cartItem) => saveOrderItems.addAll(cartItem.toSavedOrderMaterial()),
-    );
+    final saveOrderItems = cartItemList
+        .map((cartItem) => cartItem.toSavedOrderMaterial())
+        .toList()
+        .expand((element) => element)
+        .toList();
 
     return saveOrderItems;
   }
@@ -203,7 +204,9 @@ class OrderRepository implements IOrderRepository {
       try {
         final submitOrderResponse = await localDataSource.submitOrder(
           submitOrder: SubmitOrderDto.fromDomain(
-              submitOrder, configs.currency.getValue(),),
+            submitOrder,
+            configs.currency.getValue(),
+          ),
         );
 
         return Right(submitOrderResponse);

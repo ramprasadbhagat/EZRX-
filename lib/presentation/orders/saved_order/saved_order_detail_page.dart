@@ -62,13 +62,7 @@ class SavedOrderDetailPage extends StatelessWidget {
                 salesOrganisationConfigs:
                     context.read<SalesOrgBloc>().state.configs,
                 shipToCode: context.read<ShipToCodeBloc>().state.shipToInfo,
-                materialInfoList: order.items
-                    .map(
-                      (item) => MaterialQueryInfo.fromSavedOrder(
-                        orderMaterial: item,
-                      ),
-                    )
-                    .toList(),
+                materialInfoList: _getMaterialList(order.items),
                 pickAndPack:
                     context.read<EligibilityBloc>().state.getPNPValueMaterial,
               ),
@@ -174,6 +168,21 @@ class SavedOrderDetailPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  List<MaterialQueryInfo> _getMaterialList(List<MaterialItem> items) {
+    final materialList = items
+        .map((item) => item.type.isBundle
+            ? item.materials
+                .map((material) =>
+                    MaterialQueryInfo.fromBundles(materialInfo: material))
+                .toList()
+            : [MaterialQueryInfo.fromSavedOrder(orderMaterial: item)])
+        .toList()
+        .expand((element) => element)
+        .toList();
+
+    return materialList;
   }
 
   PriceAggregate _getCommercialTypeMaterial({

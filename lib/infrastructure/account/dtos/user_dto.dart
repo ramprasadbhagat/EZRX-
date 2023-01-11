@@ -122,7 +122,9 @@ class UserDto with _$UserDto {
       ),
       settingTc: SettingTc(
         acceptPrivacyPolicy: acceptPrivacyPolicy,
-        acceptPrivacyPolicyTime: DateTime.parse(acceptPrivacyPolicyTime),
+        acceptPrivacyPolicyTime: acceptPrivacyPolicyTime.isNotEmpty
+            ? DateTime.parse(acceptPrivacyPolicyTime)
+            : DateTime.now(),
         privacyPolicyAcceptedPlatform: privacyPolicyAcceptedPlatform,
       ),
       enableOrderType: enableOrderType,

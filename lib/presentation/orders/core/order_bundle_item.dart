@@ -139,32 +139,33 @@ class OrderBundleItem extends StatelessWidget {
                           color: ZPColors.darkerGreen,
                         ),
                       ),
-                      context
-                                  .read<MaterialPriceDetailBloc>()
-                                  .state
-                                  .isFetching ||
-                              context
-                                  .read<MaterialPriceDetailBloc>()
-                                  .state
-                                  .isValidating
-                          ? SizedBox(
-                              key: const Key(
-                                'material-description-key',
-                              ),
-                              width: 100,
-                              child: LoadingShimmer.tile(),
-                            )
-                          : Flexible(
-                              child: Text(
-                                material.materialDescription,
-                                overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600,
-                                  color: ZPColors.darkerGreen,
-                                ),
-                              ),
-                            ),
+                      BlocBuilder<MaterialPriceDetailBloc,
+                          MaterialPriceDetailState>(
+                        buildWhen: (previous, current) =>
+                            previous.isFetching != current.isFetching ||
+                            previous.isValidating != current.isValidating,
+                        builder: (context, state) {
+                          return state.isFetching || state.isValidating
+                              ? SizedBox(
+                                  key: const Key(
+                                    'material-description-key',
+                                  ),
+                                  width: 100,
+                                  child: LoadingShimmer.tile(),
+                                )
+                              : Flexible(
+                                  child: Text(
+                                    material.materialDescription,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600,
+                                      color: ZPColors.darkerGreen,
+                                    ),
+                                  ),
+                                );
+                        },
+                      ),
                     ],
                   ),
                   _MaterialItemInfo(

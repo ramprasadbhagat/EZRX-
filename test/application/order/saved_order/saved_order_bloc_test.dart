@@ -42,10 +42,12 @@ void main() {
   });
 
   List<MaterialItem> getItemList(List<CartItem> cartItemList) {
-    final saveOrderItems = <MaterialItem>[];
-    for (final cartItem in cartItemList) {
-      saveOrderItems.addAll(cartItem.toSavedOrderMaterial());
-    }
+    final saveOrderItems = cartItemList
+        .map((cartItem) => cartItem.toSavedOrderMaterial())
+        .toList()
+        .expand((element) => element)
+        .toList();
+
     return saveOrderItems;
   }
 

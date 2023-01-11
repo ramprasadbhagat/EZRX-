@@ -15,6 +15,8 @@ import 'package:ezrxmobile/application/order/material_bundle_list/material_bundl
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
+import 'package:ezrxmobile/application/returns/return_request_type_code/return_request_type_code_bloc.dart';
+import 'package:ezrxmobile/application/returns/usage_code/usage_code_bloc.dart';
 import 'package:ezrxmobile/application/returns/user_restriction/user_restriction_list_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
@@ -67,6 +69,9 @@ class AupTcBlocMock extends MockBloc<AupTcEvent, AupTcState>
 
 class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
 
+class UsageCodeBlocMock extends MockBloc<UsageCodeEvent, UsageCodeState>
+    implements UsageCodeBloc {}
+
 class PaymentCustomerInformationBlocMock extends MockBloc<
         PaymentCustomerInformationEvent, PaymentCustomerInformationState>
     implements PaymentCustomerInformationBloc {}
@@ -80,6 +85,7 @@ class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
 class UserRestrictionListBlocMock
     extends MockBloc<UserRestrictionListEvent, UserRestrictionListState>
     implements UserRestrictionListBloc {}
+
 class MaterialBundleListBlocMock
     extends MockBloc<MaterialBundleListEvent, MaterialBundleListState>
     implements MaterialBundleListBloc {}
@@ -91,6 +97,10 @@ class CovidMaterialListBlocMock
 class OrderDocumentTypeBlocMock
     extends MockBloc<OrderDocumentTypeEvent, OrderDocumentTypeState>
     implements OrderDocumentTypeBloc {}
+
+class ReturnRequestTypeCodeBlocMock
+    extends MockBloc<ReturnRequestTypeCodeEvent, ReturnRequestTypeCodeState>
+    implements ReturnRequestTypeCodeBloc {}
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -109,6 +119,8 @@ void main() {
   late AppRouter autoRouterMock;
   late ApproverBloc approverBlocMock;
   late UserRestrictionListBloc userRestrictionListBlocMock;
+  late UsageCodeBloc usageCodeBlocMock;
+  late ReturnRequestTypeCodeBloc returnRequestTypeCodeBlocMock;
 
   late MaterialBundleListBloc materialBundleListBlocMock;
   late CovidMaterialListBloc covidMaterialListBlocMock;
@@ -156,9 +168,14 @@ void main() {
       eligibilityBlocMock = EligibilityBlocMock();
       autoRouterMock = locator<AppRouter>();
       materialBundleListBlocMock = MaterialBundleListBlocMock();
+      usageCodeBlocMock = UsageCodeBlocMock();
+      returnRequestTypeCodeBlocMock = ReturnRequestTypeCodeBlocMock();
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
       when(() => authBlocMock.state).thenReturn(const AuthState.initial());
       when(() => userBlocMock.state).thenReturn(UserState.initial());
+      when(() => usageCodeBlocMock.state).thenReturn(UsageCodeState.initial());
+      when(() => returnRequestTypeCodeBlocMock.state)
+          .thenReturn(ReturnRequestTypeCodeState.initial());
       when(() => customerCodeBlocMock.state)
           .thenReturn(CustomerCodeState.initial());
       when(() => shipToCodeBLocMock.state)
@@ -208,6 +225,9 @@ void main() {
                 create: (context) => covidMaterialListBlocMock),
             BlocProvider<OrderDocumentTypeBloc>(
                 create: (context) => orderDocumentTypeMock),
+            BlocProvider<UsageCodeBloc>(create: (context) => usageCodeBlocMock),
+            BlocProvider<ReturnRequestTypeCodeBloc>(
+                create: (context) => returnRequestTypeCodeBlocMock),
           ],
           child: const SplashPage(),
         ),
@@ -394,12 +414,25 @@ void main() {
 
     test('testing UpgraderLocalizationMessage valid', () async {
       expect(UpgraderLocalizationMessage(), isNotNull);
-      expect(() => UpgraderLocalizationMessage().message(UpgraderMessage.body), isNotNull);
-      expect(() => UpgraderLocalizationMessage().message(UpgraderMessage.buttonTitleIgnore), isNotNull);
-      expect(() => UpgraderLocalizationMessage().message(UpgraderMessage.buttonTitleLater), isNotNull);
-      expect(() => UpgraderLocalizationMessage().message(UpgraderMessage.prompt), isNotNull);
-      expect(() => UpgraderLocalizationMessage().message(UpgraderMessage.releaseNotes), isNotNull);
-      expect(() => UpgraderLocalizationMessage().message(UpgraderMessage.title), isNotNull);
+      expect(() => UpgraderLocalizationMessage().message(UpgraderMessage.body),
+          isNotNull);
+      expect(
+          () => UpgraderLocalizationMessage()
+              .message(UpgraderMessage.buttonTitleIgnore),
+          isNotNull);
+      expect(
+          () => UpgraderLocalizationMessage()
+              .message(UpgraderMessage.buttonTitleLater),
+          isNotNull);
+      expect(
+          () => UpgraderLocalizationMessage().message(UpgraderMessage.prompt),
+          isNotNull);
+      expect(
+          () => UpgraderLocalizationMessage()
+              .message(UpgraderMessage.releaseNotes),
+          isNotNull);
+      expect(() => UpgraderLocalizationMessage().message(UpgraderMessage.title),
+          isNotNull);
     });
   });
 }

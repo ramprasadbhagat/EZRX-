@@ -7,12 +7,13 @@ class OrderTemplateListEvent with _$OrderTemplateListEvent {
   const factory OrderTemplateListEvent.delete(OrderTemplate tempItem) =
       _DeleteOrderTemplate;
 
-  const factory OrderTemplateListEvent.save(
-      {required String templateName,
-      required String userID,
-      required List<OrderTemplateMaterial> cartList,
-        required List<OrderTemplate> templateList,
-      }) = _SaveOrderTemplate;
-  const factory OrderTemplateListEvent.templateNameChanged(String templateNameStr) =
-  _TemplateNameChanged;
+  const factory OrderTemplateListEvent.save({
+    required String templateName,
+    required String userID,
+    required List<CartItem> cartList,
+    required List<OrderTemplate> templateList,
+  }) = _SaveOrderTemplate;
+  const factory OrderTemplateListEvent.templateNameChanged(
+    String templateNameStr,
+  ) = _TemplateNameChanged;
 }

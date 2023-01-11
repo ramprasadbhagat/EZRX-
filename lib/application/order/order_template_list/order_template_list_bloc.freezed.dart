@@ -21,11 +21,8 @@ mixin _$OrderTemplateListEvent {
     required TResult Function() initialized,
     required TResult Function(User user) fetch,
     required TResult Function(OrderTemplate tempItem) delete,
-    required TResult Function(
-            String templateName,
-            String userID,
-            List<OrderTemplateMaterial> cartList,
-            List<OrderTemplate> templateList)
+    required TResult Function(String templateName, String userID,
+            List<CartItem> cartList, List<OrderTemplate> templateList)
         save,
     required TResult Function(String templateNameStr) templateNameChanged,
   }) =>
@@ -35,11 +32,8 @@ mixin _$OrderTemplateListEvent {
     TResult? Function()? initialized,
     TResult? Function(User user)? fetch,
     TResult? Function(OrderTemplate tempItem)? delete,
-    TResult? Function(
-            String templateName,
-            String userID,
-            List<OrderTemplateMaterial> cartList,
-            List<OrderTemplate> templateList)?
+    TResult? Function(String templateName, String userID,
+            List<CartItem> cartList, List<OrderTemplate> templateList)?
         save,
     TResult? Function(String templateNameStr)? templateNameChanged,
   }) =>
@@ -49,11 +43,8 @@ mixin _$OrderTemplateListEvent {
     TResult Function()? initialized,
     TResult Function(User user)? fetch,
     TResult Function(OrderTemplate tempItem)? delete,
-    TResult Function(
-            String templateName,
-            String userID,
-            List<OrderTemplateMaterial> cartList,
-            List<OrderTemplate> templateList)?
+    TResult Function(String templateName, String userID,
+            List<CartItem> cartList, List<OrderTemplate> templateList)?
         save,
     TResult Function(String templateNameStr)? templateNameChanged,
     required TResult orElse(),
@@ -149,11 +140,8 @@ class _$_Initialized implements _Initialized {
     required TResult Function() initialized,
     required TResult Function(User user) fetch,
     required TResult Function(OrderTemplate tempItem) delete,
-    required TResult Function(
-            String templateName,
-            String userID,
-            List<OrderTemplateMaterial> cartList,
-            List<OrderTemplate> templateList)
+    required TResult Function(String templateName, String userID,
+            List<CartItem> cartList, List<OrderTemplate> templateList)
         save,
     required TResult Function(String templateNameStr) templateNameChanged,
   }) {
@@ -166,11 +154,8 @@ class _$_Initialized implements _Initialized {
     TResult? Function()? initialized,
     TResult? Function(User user)? fetch,
     TResult? Function(OrderTemplate tempItem)? delete,
-    TResult? Function(
-            String templateName,
-            String userID,
-            List<OrderTemplateMaterial> cartList,
-            List<OrderTemplate> templateList)?
+    TResult? Function(String templateName, String userID,
+            List<CartItem> cartList, List<OrderTemplate> templateList)?
         save,
     TResult? Function(String templateNameStr)? templateNameChanged,
   }) {
@@ -183,11 +168,8 @@ class _$_Initialized implements _Initialized {
     TResult Function()? initialized,
     TResult Function(User user)? fetch,
     TResult Function(OrderTemplate tempItem)? delete,
-    TResult Function(
-            String templateName,
-            String userID,
-            List<OrderTemplateMaterial> cartList,
-            List<OrderTemplate> templateList)?
+    TResult Function(String templateName, String userID,
+            List<CartItem> cartList, List<OrderTemplate> templateList)?
         save,
     TResult Function(String templateNameStr)? templateNameChanged,
     required TResult orElse(),
@@ -318,11 +300,8 @@ class _$_Fetch implements _Fetch {
     required TResult Function() initialized,
     required TResult Function(User user) fetch,
     required TResult Function(OrderTemplate tempItem) delete,
-    required TResult Function(
-            String templateName,
-            String userID,
-            List<OrderTemplateMaterial> cartList,
-            List<OrderTemplate> templateList)
+    required TResult Function(String templateName, String userID,
+            List<CartItem> cartList, List<OrderTemplate> templateList)
         save,
     required TResult Function(String templateNameStr) templateNameChanged,
   }) {
@@ -335,11 +314,8 @@ class _$_Fetch implements _Fetch {
     TResult? Function()? initialized,
     TResult? Function(User user)? fetch,
     TResult? Function(OrderTemplate tempItem)? delete,
-    TResult? Function(
-            String templateName,
-            String userID,
-            List<OrderTemplateMaterial> cartList,
-            List<OrderTemplate> templateList)?
+    TResult? Function(String templateName, String userID,
+            List<CartItem> cartList, List<OrderTemplate> templateList)?
         save,
     TResult? Function(String templateNameStr)? templateNameChanged,
   }) {
@@ -352,11 +328,8 @@ class _$_Fetch implements _Fetch {
     TResult Function()? initialized,
     TResult Function(User user)? fetch,
     TResult Function(OrderTemplate tempItem)? delete,
-    TResult Function(
-            String templateName,
-            String userID,
-            List<OrderTemplateMaterial> cartList,
-            List<OrderTemplate> templateList)?
+    TResult Function(String templateName, String userID,
+            List<CartItem> cartList, List<OrderTemplate> templateList)?
         save,
     TResult Function(String templateNameStr)? templateNameChanged,
     required TResult orElse(),
@@ -496,11 +469,8 @@ class _$_DeleteOrderTemplate implements _DeleteOrderTemplate {
     required TResult Function() initialized,
     required TResult Function(User user) fetch,
     required TResult Function(OrderTemplate tempItem) delete,
-    required TResult Function(
-            String templateName,
-            String userID,
-            List<OrderTemplateMaterial> cartList,
-            List<OrderTemplate> templateList)
+    required TResult Function(String templateName, String userID,
+            List<CartItem> cartList, List<OrderTemplate> templateList)
         save,
     required TResult Function(String templateNameStr) templateNameChanged,
   }) {
@@ -513,11 +483,8 @@ class _$_DeleteOrderTemplate implements _DeleteOrderTemplate {
     TResult? Function()? initialized,
     TResult? Function(User user)? fetch,
     TResult? Function(OrderTemplate tempItem)? delete,
-    TResult? Function(
-            String templateName,
-            String userID,
-            List<OrderTemplateMaterial> cartList,
-            List<OrderTemplate> templateList)?
+    TResult? Function(String templateName, String userID,
+            List<CartItem> cartList, List<OrderTemplate> templateList)?
         save,
     TResult? Function(String templateNameStr)? templateNameChanged,
   }) {
@@ -530,11 +497,8 @@ class _$_DeleteOrderTemplate implements _DeleteOrderTemplate {
     TResult Function()? initialized,
     TResult Function(User user)? fetch,
     TResult Function(OrderTemplate tempItem)? delete,
-    TResult Function(
-            String templateName,
-            String userID,
-            List<OrderTemplateMaterial> cartList,
-            List<OrderTemplate> templateList)?
+    TResult Function(String templateName, String userID,
+            List<CartItem> cartList, List<OrderTemplate> templateList)?
         save,
     TResult Function(String templateNameStr)? templateNameChanged,
     required TResult orElse(),
@@ -605,7 +569,7 @@ abstract class _$$_SaveOrderTemplateCopyWith<$Res> {
   $Res call(
       {String templateName,
       String userID,
-      List<OrderTemplateMaterial> cartList,
+      List<CartItem> cartList,
       List<OrderTemplate> templateList});
 }
 
@@ -637,7 +601,7 @@ class __$$_SaveOrderTemplateCopyWithImpl<$Res>
       cartList: null == cartList
           ? _value._cartList
           : cartList // ignore: cast_nullable_to_non_nullable
-              as List<OrderTemplateMaterial>,
+              as List<CartItem>,
       templateList: null == templateList
           ? _value._templateList
           : templateList // ignore: cast_nullable_to_non_nullable
@@ -652,7 +616,7 @@ class _$_SaveOrderTemplate implements _SaveOrderTemplate {
   const _$_SaveOrderTemplate(
       {required this.templateName,
       required this.userID,
-      required final List<OrderTemplateMaterial> cartList,
+      required final List<CartItem> cartList,
       required final List<OrderTemplate> templateList})
       : _cartList = cartList,
         _templateList = templateList;
@@ -661,9 +625,9 @@ class _$_SaveOrderTemplate implements _SaveOrderTemplate {
   final String templateName;
   @override
   final String userID;
-  final List<OrderTemplateMaterial> _cartList;
+  final List<CartItem> _cartList;
   @override
-  List<OrderTemplateMaterial> get cartList {
+  List<CartItem> get cartList {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_cartList);
   }
@@ -714,11 +678,8 @@ class _$_SaveOrderTemplate implements _SaveOrderTemplate {
     required TResult Function() initialized,
     required TResult Function(User user) fetch,
     required TResult Function(OrderTemplate tempItem) delete,
-    required TResult Function(
-            String templateName,
-            String userID,
-            List<OrderTemplateMaterial> cartList,
-            List<OrderTemplate> templateList)
+    required TResult Function(String templateName, String userID,
+            List<CartItem> cartList, List<OrderTemplate> templateList)
         save,
     required TResult Function(String templateNameStr) templateNameChanged,
   }) {
@@ -731,11 +692,8 @@ class _$_SaveOrderTemplate implements _SaveOrderTemplate {
     TResult? Function()? initialized,
     TResult? Function(User user)? fetch,
     TResult? Function(OrderTemplate tempItem)? delete,
-    TResult? Function(
-            String templateName,
-            String userID,
-            List<OrderTemplateMaterial> cartList,
-            List<OrderTemplate> templateList)?
+    TResult? Function(String templateName, String userID,
+            List<CartItem> cartList, List<OrderTemplate> templateList)?
         save,
     TResult? Function(String templateNameStr)? templateNameChanged,
   }) {
@@ -748,11 +706,8 @@ class _$_SaveOrderTemplate implements _SaveOrderTemplate {
     TResult Function()? initialized,
     TResult Function(User user)? fetch,
     TResult Function(OrderTemplate tempItem)? delete,
-    TResult Function(
-            String templateName,
-            String userID,
-            List<OrderTemplateMaterial> cartList,
-            List<OrderTemplate> templateList)?
+    TResult Function(String templateName, String userID,
+            List<CartItem> cartList, List<OrderTemplate> templateList)?
         save,
     TResult Function(String templateNameStr)? templateNameChanged,
     required TResult orElse(),
@@ -808,12 +763,12 @@ abstract class _SaveOrderTemplate implements OrderTemplateListEvent {
   const factory _SaveOrderTemplate(
       {required final String templateName,
       required final String userID,
-      required final List<OrderTemplateMaterial> cartList,
+      required final List<CartItem> cartList,
       required final List<OrderTemplate> templateList}) = _$_SaveOrderTemplate;
 
   String get templateName;
   String get userID;
-  List<OrderTemplateMaterial> get cartList;
+  List<CartItem> get cartList;
   List<OrderTemplate> get templateList;
   @JsonKey(ignore: true)
   _$$_SaveOrderTemplateCopyWith<_$_SaveOrderTemplate> get copyWith =>
@@ -889,11 +844,8 @@ class _$_TemplateNameChanged implements _TemplateNameChanged {
     required TResult Function() initialized,
     required TResult Function(User user) fetch,
     required TResult Function(OrderTemplate tempItem) delete,
-    required TResult Function(
-            String templateName,
-            String userID,
-            List<OrderTemplateMaterial> cartList,
-            List<OrderTemplate> templateList)
+    required TResult Function(String templateName, String userID,
+            List<CartItem> cartList, List<OrderTemplate> templateList)
         save,
     required TResult Function(String templateNameStr) templateNameChanged,
   }) {
@@ -906,11 +858,8 @@ class _$_TemplateNameChanged implements _TemplateNameChanged {
     TResult? Function()? initialized,
     TResult? Function(User user)? fetch,
     TResult? Function(OrderTemplate tempItem)? delete,
-    TResult? Function(
-            String templateName,
-            String userID,
-            List<OrderTemplateMaterial> cartList,
-            List<OrderTemplate> templateList)?
+    TResult? Function(String templateName, String userID,
+            List<CartItem> cartList, List<OrderTemplate> templateList)?
         save,
     TResult? Function(String templateNameStr)? templateNameChanged,
   }) {
@@ -923,11 +872,8 @@ class _$_TemplateNameChanged implements _TemplateNameChanged {
     TResult Function()? initialized,
     TResult Function(User user)? fetch,
     TResult Function(OrderTemplate tempItem)? delete,
-    TResult Function(
-            String templateName,
-            String userID,
-            List<OrderTemplateMaterial> cartList,
-            List<OrderTemplate> templateList)?
+    TResult Function(String templateName, String userID,
+            List<CartItem> cartList, List<OrderTemplate> templateList)?
         save,
     TResult Function(String templateNameStr)? templateNameChanged,
     required TResult orElse(),
