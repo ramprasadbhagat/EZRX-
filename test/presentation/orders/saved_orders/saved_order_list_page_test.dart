@@ -18,6 +18,7 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_local.dart';
 import 'package:ezrxmobile/presentation/orders/saved_order/saved_order_item.dart';
@@ -332,18 +333,32 @@ void main() {
       await tester.tap(orderTemplateItem);
       await tester.pump();
 
-      verify(() =>
-          materialPriceDetailBlocMock.add(MaterialPriceDetailEvent.fetch(
-            user: User.empty(),
-            customerCode: CustomerCodeInfo.empty(),
-            salesOrganisation: SalesOrganisation.empty(),
-            salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-            shipToCode: ShipToInfo.empty(),
-            materialInfoList: order.items
-                .map((e) => MaterialQueryInfo.fromSavedOrder(orderMaterial: e))
-                .toList(),
-            pickAndPack: '',
-          ))).called(1);
+      verify(
+          () => materialPriceDetailBlocMock.add(MaterialPriceDetailEvent.fetch(
+                user: User.empty(),
+                customerCode: CustomerCodeInfo.empty(),
+                salesOrganisation: SalesOrganisation.empty(),
+                salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+                shipToCode: ShipToInfo.empty(),
+                materialInfoList: [
+                  MaterialQueryInfo.empty().copyWith(
+                    value: MaterialNumber('000000000021247917'),
+                    materialGroup4: MaterialGroup.four('6GS'),
+                    description: '(E) Dostinex Tab 0.5mg  2\'s',
+                    principalName: 'NA',
+                    qty: MaterialQty(2),
+                  ),
+                  MaterialQueryInfo.empty().copyWith(
+                    value: MaterialNumber('000000000021016132'),
+                    materialGroup2: MaterialGroup.two('45'),
+                    materialGroup4: MaterialGroup.four('6GS'),
+                    description: 'Simple Hydrat Light  Moist  (NEW)',
+                    principalName: 'Unilever Ireland',
+                    qty: MaterialQty(1),
+                  ),
+                ],
+                pickAndPack: '',
+              ))).called(1);
       await tester.pump();
       expect(autoRouterMock.current.name,
           SavedOrderDetailPageRoute(order: order).routeName);

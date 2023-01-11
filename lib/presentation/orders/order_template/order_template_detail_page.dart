@@ -165,16 +165,16 @@ class OrderTemplateDetailPage extends StatelessWidget {
   }
 
   List<MaterialQueryInfo> _getMaterialList(List<MaterialItem> items) {
-    final materialList = <MaterialQueryInfo>[];
-    for (final item in items) {
-      item.type.isBundle
-          ? materialList.addAll(item.materials
-              .map((material) =>
-                  MaterialQueryInfo.fromBundles(materialInfo: material))
-              .toList())
-          : materialList
-              .add(MaterialQueryInfo.fromSavedOrder(orderMaterial: item));
-    }
+    final materialList = items
+        .map((item) => item.type.isBundle
+            ? item.materials
+                .map((material) =>
+                    MaterialQueryInfo.fromBundles(materialInfo: material))
+                .toList()
+            : [MaterialQueryInfo.fromSavedOrder(orderMaterial: item)])
+        .toList()
+        .expand((element) => element)
+        .toList();
 
     return materialList;
   }
@@ -226,20 +226,17 @@ class OrderTemplateDetailPage extends StatelessWidget {
     required BuildContext context,
     required bool isBundle,
   }) {
-    return material.materials.map((materialInfo) {
-      final itemInfo = state.materialDetails[materialInfo.queryInfo];
-      if (itemInfo != null) {
-        return _getCommercialTypeMaterial(
-          itemInfo: itemInfo,
-          material: material,
-          context: context,
-          isBundle: true,
-          materialInfo: materialInfo,
-        );
-      }
-
-      return PriceAggregate.empty();
-    }).toList();
+    return material.materials
+        .map(
+          (materialInfo) => _getCommercialTypeMaterial(
+            itemInfo: state.materialDetails[materialInfo.queryInfo]!,
+            material: material,
+            context: context,
+            isBundle: true,
+            materialInfo: materialInfo,
+          ),
+        )
+        .toList();
   }
 
   List<PriceAggregate> _buildPriceAggregateList({
@@ -247,30 +244,28 @@ class OrderTemplateDetailPage extends StatelessWidget {
     required MaterialPriceDetailState state,
     required BuildContext context,
   }) {
-    final priceAggregateList = <PriceAggregate>[];
-    for (final material in order.items) {
-      final itemInfo = state.materialDetails[material.queryInfo];
-      material.type.isBundle
-          ? priceAggregateList.addAll(
-              _getBundleTypeMaterials(
-                state: state,
-                material: material,
-                context: context,
-                isBundle: true,
-              ),
-            )
-          : itemInfo != null
-              ? priceAggregateList.add(
+    final priceAggregateList = order.items
+        .map(
+          (item) => item.type.isBundle
+              ? _getBundleTypeMaterials(
+                  state: state,
+                  material: item,
+                  context: context,
+                  isBundle: true,
+                )
+              : [
                   _getCommercialTypeMaterial(
-                    itemInfo: itemInfo,
-                    material: material,
+                    itemInfo: state.materialDetails[item.queryInfo]!,
+                    material: item,
                     context: context,
                     isBundle: false,
                     materialInfo: MaterialInfo.empty(),
                   ),
-                )
-              : priceAggregateList.add(PriceAggregate.empty());
-    }
+                ],
+        )
+        .toList()
+        .expand((element) => element)
+        .toList();
 
     return priceAggregateList;
   }

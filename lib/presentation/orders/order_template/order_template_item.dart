@@ -81,16 +81,16 @@ class OrderTemplateItem extends StatelessWidget {
   }
 
   List<MaterialQueryInfo> _getMaterialList(List<MaterialItem> items) {
-    final materialList = <MaterialQueryInfo>[];
-    for (final item in items) {
-      item.type.isBundle
-          ? materialList.addAll(item.materials
-              .map((material) =>
-                  MaterialQueryInfo.fromBundles(materialInfo: material))
-              .toList())
-          : materialList
-              .add(MaterialQueryInfo.fromSavedOrder(orderMaterial: item));
-    }
+    final materialList = items
+        .map((item) => item.type.isBundle
+            ? item.materials
+                .map((material) =>
+                    MaterialQueryInfo.fromBundles(materialInfo: material))
+                .toList()
+            : [MaterialQueryInfo.fromSavedOrder(orderMaterial: item)])
+        .toList()
+        .expand((element) => element)
+        .toList();
 
     return materialList;
   }

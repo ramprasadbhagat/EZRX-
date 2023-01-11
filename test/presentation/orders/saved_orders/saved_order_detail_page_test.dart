@@ -36,6 +36,21 @@ import 'package:mocktail/mocktail.dart';
 
 import '../../../utils/widget_utils.dart';
 
+List<MaterialQueryInfo> _getMaterialList(List<MaterialItem> items) {
+  final materialList = items
+      .map((item) => item.type.isBundle
+          ? item.materials
+              .map((material) =>
+                  MaterialQueryInfo.fromBundles(materialInfo: material))
+              .toList()
+          : [MaterialQueryInfo.fromSavedOrder(orderMaterial: item)])
+      .toList()
+      .expand((element) => element)
+      .toList();
+
+  return materialList;
+}
+
 class MockUserBloc extends MockBloc<UserEvent, UserState> implements UserBloc {}
 
 class MockSalesOrgBloc extends MockBloc<SalesOrgEvent, SalesOrgState>
@@ -235,7 +250,6 @@ void main() {
         expect(loadingShimmer, findsAtLeastNWidgets(2));
         await tester.tap(loadingShimmer.first);
         await tester.tap(loadingShimmer.last);
-
       },
     );
 
@@ -339,16 +353,16 @@ void main() {
     testWidgets(
       'Saved Order Detail when add to cart is pressed then navigate to cart page',
       (tester) async {
+        final materialInfoList = _getMaterialList(orderMockItems);
         when(() => materialPriceDetailBlocMock.state).thenReturn(
           MaterialPriceDetailState.initial().copyWith(
             isFetching: false,
             isValidating: false,
             materialDetails: {
-              for (final material in [orderMockItems[0]])
-                MaterialQueryInfo.fromSavedOrder(orderMaterial: material):
-                    MaterialPriceDetail.empty()
-                        .copyWith
-                        .price(finalPrice: MaterialPrice(10)),
+              for (final material in materialInfoList)
+                material: MaterialPriceDetail.empty()
+                    .copyWith
+                    .price(finalPrice: MaterialPrice(10)),
             },
           ),
         );
@@ -391,7 +405,7 @@ void main() {
               salesOrganisation: SalesOrganisation.empty(),
               salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
               shipToInfo: ShipToInfo.empty(),
-            )).called(5);
+            )).called(8);
       },
     );
 
