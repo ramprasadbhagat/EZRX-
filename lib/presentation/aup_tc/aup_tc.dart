@@ -37,8 +37,8 @@ class AupTCDialogState extends State<AupTCDialog> {
               key: const ValueKey('auptcappBar'),
               title: SvgPicture.asset(
                 'assets/svg/ezrxlogo.svg',
-                width: 80,
-                height: 80,
+                height: 30,
+                fit: BoxFit.scaleDown,
               ),
               automaticallyImplyLeading: widget.fromSetting,
             ),

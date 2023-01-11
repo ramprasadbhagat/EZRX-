@@ -23,8 +23,8 @@ class _WebViewPageState extends State<WebViewPage> {
       appBar: AppBar(
         title: SvgPicture.asset(
           'assets/svg/ezrxlogo.svg',
-          width: 80,
-          height: 80,
+          height: 30,
+          fit: BoxFit.scaleDown,
         ),
       ),
       body: errorLoadingUrl

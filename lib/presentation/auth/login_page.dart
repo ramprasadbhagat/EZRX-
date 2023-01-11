@@ -78,6 +78,7 @@ class _LoginPageState extends State<LoginPage> {
                       children: [
                         const Spacer(),
                         const _Logo(),
+                        const Spacer(),
                         const _SSOLoginButton(),
                         const Spacer(),
                         const _OrDivider(),
@@ -112,12 +113,10 @@ class _Logo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size.width * 0.35;
-
     return SvgPicture.asset(
       'assets/svg/ezrxlogo.svg',
-      width: size,
-      height: size,
+      height: 80,
+      fit: BoxFit.scaleDown,
     );
   }
 }

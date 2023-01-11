@@ -76,12 +76,10 @@ class Logo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size.width * 0.35;
-
     return SvgPicture.asset(
       'assets/svg/ezrxlogo.svg',
-      width: size,
-      height: size,
+      height: 80,
+      fit: BoxFit.scaleDown,
     );
   }
 }

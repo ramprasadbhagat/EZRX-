@@ -9,8 +9,8 @@ class _Logo extends StatelessWidget {
       enabled: true,
       child: SvgPicture.asset(
         'assets/svg/ezrxlogo.svg',
-        width: 80,
-        height: 80,
+        height: 30,
+        fit: BoxFit.scaleDown,
       ),
     );
   }
