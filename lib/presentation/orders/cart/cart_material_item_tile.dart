@@ -497,6 +497,8 @@ class _CartItemQuantityInputState extends State<_CartItemQuantityInput> {
       buildWhen: (previous, current) =>
           previous.isFetching != current.isFetching,
       builder: (context, state) {
+        controller.text = widget.cartItem.quantity.toString();
+
         return QuantityInput(
           isEnabled: widget.cartItem.tenderContract == TenderContract.empty() &&
               !state.isFetching,
