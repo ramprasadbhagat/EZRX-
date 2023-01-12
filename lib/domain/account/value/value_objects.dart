@@ -261,3 +261,16 @@ class LanguageValue extends ValueObject<String> {
 
   const LanguageValue._(this.value);
 }
+
+class FutureDeliveryDay extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory FutureDeliveryDay(String input) =>
+      FutureDeliveryDay._(validateStringNotEmpty(input));
+
+  const FutureDeliveryDay._(this.value);
+
+  String get validatedFutureDeliveryDate =>
+      removeDash(value.getOrElse(() => ''));
+}

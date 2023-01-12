@@ -900,7 +900,7 @@ void main() {
             disableOrderType: false,
             enableCollectiveNumber: true,
             enablePaymentTerms: true,
-            futureDeliveryDay: '2',
+            futureDeliveryDay: FutureDeliveryDay('2'),
             currency: Currency('sgd'),
           );
           final salesOrg = SalesOrganisation.empty().copyWith(

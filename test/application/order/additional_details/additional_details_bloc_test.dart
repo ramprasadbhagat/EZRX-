@@ -1,6 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/additional_details_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -20,7 +21,7 @@ void main() {
             ponRequired: true,
             enablePaymentTerms: true,
             enableFutureDeliveryDay: true,
-            futureDeliveryDay: '4',
+            futureDeliveryDay: FutureDeliveryDay('4'),
           );
           state = AdditionalDetailsState.initial();
           data = AdditionalDetailsData.empty();
@@ -37,8 +38,8 @@ void main() {
               deliveryDate: DeliveryDate(
                 DateFormat('yyyy-MM-dd').format(
                   DateTime.now().add(
-                    Duration(
-                      days: int.parse(config.futureDeliveryDay),
+                    const Duration(
+                      days: 1,
                     ),
                   ),
                 ),
@@ -54,7 +55,7 @@ void main() {
         'Load Bloc without futureDeliveryDay',
         build: () => AdditionalDetailsBloc(),
         act: (bloc) => bloc.add(AdditionalDetailsEvent.initialized(
-            config: config.copyWith(futureDeliveryDay: ''))),
+            config: config.copyWith(futureDeliveryDay: FutureDeliveryDay('')))),
         expect: () => [
           AdditionalDetailsState.initial().copyWith(
             additionalDetailsData: data.copyWith(

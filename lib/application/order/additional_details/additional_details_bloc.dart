@@ -20,11 +20,8 @@ class AdditionalDetailsBloc
     required String stateDate,
   }) {
     return stateDate.isEmpty
-        ? futureDeliveryDay.isEmpty
-            ? DateFormat('yyyy-MM-dd')
-                .format(DateTime.now().add(const Duration(days: 1)))
-            : DateFormat('yyyy-MM-dd').format(DateTime.now()
-                .add(Duration(days: int.parse(futureDeliveryDay))))
+        ? DateFormat('yyyy-MM-dd')
+            .format(DateTime.now().add(const Duration(days: 1)))
         : stateDate;
   }
 
@@ -39,7 +36,8 @@ class AdditionalDetailsBloc
               AdditionalDetailsState.initial().additionalDetailsData.copyWith(
                     deliveryDate: DeliveryDate(
                       _initialDate(
-                        futureDeliveryDay: value.config.futureDeliveryDay,
+                        futureDeliveryDay: value.config.futureDeliveryDay
+                            .validatedFutureDeliveryDate,
                         stateDate: AdditionalDetailsState.initial()
                             .additionalDetailsData
                             .deliveryDate

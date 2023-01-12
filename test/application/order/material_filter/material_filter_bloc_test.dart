@@ -73,7 +73,7 @@ void main() {
     enablePaymentTerms: false,
     enableReferenceNote: false,
     enableSpecialInstructions: false,
-    futureDeliveryDay: '',
+    futureDeliveryDay: FutureDeliveryDay(''),
     enableGMC: false,
     enableListPrice: false,
     priceOverride: false,

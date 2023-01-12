@@ -41,7 +41,7 @@ mixin _$SalesOrganisationConfigs {
   bool get enableMobileNumber => throw _privateConstructorUsedError;
   bool get enableFutureDeliveryDay => throw _privateConstructorUsedError;
   bool get enablePaymentTerms => throw _privateConstructorUsedError;
-  String get futureDeliveryDay => throw _privateConstructorUsedError;
+  FutureDeliveryDay get futureDeliveryDay => throw _privateConstructorUsedError;
   bool get enableGMC => throw _privateConstructorUsedError;
   bool get enableListPrice => throw _privateConstructorUsedError;
   bool get priceOverride => throw _privateConstructorUsedError;
@@ -103,7 +103,7 @@ abstract class $SalesOrganisationConfigsCopyWith<$Res> {
       bool enableMobileNumber,
       bool enableFutureDeliveryDay,
       bool enablePaymentTerms,
-      String futureDeliveryDay,
+      FutureDeliveryDay futureDeliveryDay,
       bool enableGMC,
       bool enableListPrice,
       bool priceOverride,
@@ -297,7 +297,7 @@ class _$SalesOrganisationConfigsCopyWithImpl<$Res,
       futureDeliveryDay: null == futureDeliveryDay
           ? _value.futureDeliveryDay
           : futureDeliveryDay // ignore: cast_nullable_to_non_nullable
-              as String,
+              as FutureDeliveryDay,
       enableGMC: null == enableGMC
           ? _value.enableGMC
           : enableGMC // ignore: cast_nullable_to_non_nullable
@@ -429,7 +429,7 @@ abstract class _$$_SalesOrganisationConfigsCopyWith<$Res>
       bool enableMobileNumber,
       bool enableFutureDeliveryDay,
       bool enablePaymentTerms,
-      String futureDeliveryDay,
+      FutureDeliveryDay futureDeliveryDay,
       bool enableGMC,
       bool enableListPrice,
       bool priceOverride,
@@ -621,7 +621,7 @@ class __$$_SalesOrganisationConfigsCopyWithImpl<$Res>
       futureDeliveryDay: null == futureDeliveryDay
           ? _value.futureDeliveryDay
           : futureDeliveryDay // ignore: cast_nullable_to_non_nullable
-              as String,
+              as FutureDeliveryDay,
       enableGMC: null == enableGMC
           ? _value.enableGMC
           : enableGMC // ignore: cast_nullable_to_non_nullable
@@ -830,7 +830,7 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
   @override
   final bool enablePaymentTerms;
   @override
-  final String futureDeliveryDay;
+  final FutureDeliveryDay futureDeliveryDay;
   @override
   final bool enableGMC;
   @override
@@ -1057,7 +1057,7 @@ abstract class _SalesOrganisationConfigs extends SalesOrganisationConfigs {
       required final bool enableMobileNumber,
       required final bool enableFutureDeliveryDay,
       required final bool enablePaymentTerms,
-      required final String futureDeliveryDay,
+      required final FutureDeliveryDay futureDeliveryDay,
       required final bool enableGMC,
       required final bool enableListPrice,
       required final bool priceOverride,
@@ -1134,7 +1134,7 @@ abstract class _SalesOrganisationConfigs extends SalesOrganisationConfigs {
   @override
   bool get enablePaymentTerms;
   @override
-  String get futureDeliveryDay;
+  FutureDeliveryDay get futureDeliveryDay;
   @override
   bool get enableGMC;
   @override

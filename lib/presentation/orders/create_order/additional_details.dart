@@ -88,6 +88,8 @@ class AdditionalDetails extends StatelessWidget {
               : const SizedBox.shrink(),
           config.enableFutureDeliveryDay
               ? _DatePickerField(
+                  futureDeliveryDay:
+                      config.futureDeliveryDay.validatedFutureDeliveryDate,
                   additionalDetails: state.additionalDetailsData,
                 )
               : const SizedBox.shrink(),
@@ -291,7 +293,9 @@ class _TextFormFieldState extends State<_TextFormField> {
 
 class _DatePickerField extends StatefulWidget {
   final AdditionalDetailsData additionalDetails;
+  final String futureDeliveryDay;
   const _DatePickerField({
+    required this.futureDeliveryDay,
     required this.additionalDetails,
     Key? key,
   }) : super(key: key);
@@ -325,8 +329,6 @@ class _DatePickerFieldState extends State<_DatePickerField> {
         InkWell(
           onTap: ([bool mounted = true]) async {
             final dateTime = await getDateFromDatePicker(
-              true,
-              widget.additionalDetails.deliveryDate.getValue(),
               context,
             );
             controller.text = DateFormat('yyyy-MM-dd').format(dateTime);
@@ -367,18 +369,19 @@ class _DatePickerFieldState extends State<_DatePickerField> {
   }
 
   Future<DateTime> getDateFromDatePicker(
-    enableFutureDevlieryDay,
-    futureDeliveryDay,
     BuildContext context,
   ) async {
+    final futureDeliveryDay = widget.futureDeliveryDay;
     final orderDate = await showPlatformDatePicker(
       context: context,
-      firstDate: DateTime.now().subtract(const Duration(days: 100)),
-      lastDate: DateTime.now().add(const Duration(days: 100)),
-      initialDate: DateTime.now(),
+      firstDate: DateTime.now().add(const Duration(days: 1)),
+      lastDate: futureDeliveryDay.isEmpty
+          ? DateTime.utc(275760, 09, 13)
+          : DateTime.now().add(Duration(days: int.parse(futureDeliveryDay))),
+      initialDate: DateTime.now().add(const Duration(days: 1)),
     );
 
-    return orderDate ?? DateTime.now();
+    return orderDate ?? DateTime.now().add(const Duration(days: 1));
   }
 }
 

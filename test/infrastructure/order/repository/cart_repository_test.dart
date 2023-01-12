@@ -123,7 +123,7 @@ void main() {
         enableMobileNumber: true,
         enableFutureDeliveryDay: true,
         enablePaymentTerms: false,
-        futureDeliveryDay: '5',
+        futureDeliveryDay: FutureDeliveryDay('5'),
         enableGMC: false,
         enableListPrice: true,
         priceOverride: true,

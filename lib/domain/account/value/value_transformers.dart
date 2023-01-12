@@ -351,3 +351,12 @@ String checkAllOrDash(String value) {
       return value;
   }
 }
+
+String removeDash(String value) {
+  switch (value) {
+    case '-':
+      return '';
+    default:
+      return value;
+  }
+}
