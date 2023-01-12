@@ -6,6 +6,7 @@ import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.da
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/application/order/material_bundle_list/material_bundle_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
@@ -51,6 +52,10 @@ class ShipToCodeBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState>
     implements ShipToCodeBloc {}
 
 class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
+
+class MaterialBundleListBlocMock
+    extends MockBloc<MaterialBundleListEvent, MaterialBundleListState>
+    implements MaterialBundleListBloc {}
 
 class SaveOrderListBlocMock
     extends MockBloc<SavedOrderListEvent, SavedOrderListState>
@@ -126,6 +131,7 @@ void main() {
   late EligibilityBlocMock mockEligibilityBloc;
   late ShipToCodeBlocMock mockShipToCodeBloc;
   late UserBlocMock mockUserBloc;
+  late MaterialBundleListBloc mockMaterialBundleListBloc;
   late SaveOrderListBlocMock mockSaveOrderListBloc;
   late MaterialListBlocMock mockMaterialListBloc;
   late OrderDocumentTypeBlocMock mockOrderDocumentTypeBloc;
@@ -153,6 +159,7 @@ void main() {
     mockEligibilityBloc = EligibilityBlocMock();
     mockShipToCodeBloc = ShipToCodeBlocMock();
     mockUserBloc = UserBlocMock();
+    mockMaterialBundleListBloc = MaterialBundleListBlocMock();
     mockSaveOrderListBloc = SaveOrderListBlocMock();
     mockMaterialListBloc = MaterialListBlocMock();
     mockOrderDocumentTypeBloc = OrderDocumentTypeBlocMock();
@@ -224,6 +231,8 @@ void main() {
             BlocProvider<ShipToCodeBloc>(
                 create: (context) => mockShipToCodeBloc),
             BlocProvider<UserBloc>(create: (context) => mockUserBloc),
+            BlocProvider<MaterialBundleListBloc>(
+                create: (context) => mockMaterialBundleListBloc),
             BlocProvider<SavedOrderListBloc>(
                 create: (context) => mockSaveOrderListBloc),
             BlocProvider<MaterialListBloc>(

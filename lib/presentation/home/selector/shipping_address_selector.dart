@@ -6,6 +6,7 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/application/order/material_bundle_list/material_bundle_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
@@ -69,6 +70,20 @@ class ShipCodeSelector extends StatelessWidget {
                           .state
                           .customerCodeInfo,
                       shipToInfo: state.shipToInfo,
+                    ),
+                  );
+
+              context.read<MaterialBundleListBloc>().add(
+                    MaterialBundleListEvent.fetch(
+                      user: context.read<UserBloc>().state.user,
+                      customerCode: context
+                          .read<CustomerCodeBloc>()
+                          .state
+                          .customerCodeInfo,
+                      salesOrganisation:
+                          context.read<SalesOrgBloc>().state.salesOrganisation,
+                      shipToCode:
+                          context.read<ShipToCodeBloc>().state.shipToInfo,
                     ),
                   );
 
