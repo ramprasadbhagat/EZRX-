@@ -25,7 +25,7 @@ class OrderHistoryFilterDrawer extends StatelessWidget {
                   previous.isSubmitting != current.isSubmitting,
               listener: (context, state) {
                 if (state.isSubmitting) {
-                  context.router.pop();
+                  context.router.popForced();
                 }
               },
               builder: (context, state) {
@@ -125,7 +125,7 @@ class _FilterHeader extends StatelessWidget {
                 Icons.close,
               ),
               onPressed: () {
-                context.router.pop();
+                context.router.popForced();
               },
             ),
           ),
@@ -624,7 +624,7 @@ class _ClearButton extends StatelessWidget {
         context.read<OrderHistoryFilterBloc>().add(
               const OrderHistoryFilterEvent.initialized(),
             );
-        context.router.pop();
+        context.router.popForced();
       },
       child: Text(
         'Clear'.tr(),

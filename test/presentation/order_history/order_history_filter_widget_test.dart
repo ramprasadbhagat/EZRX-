@@ -42,6 +42,7 @@ void main() {
       when(() => mockOrderHistoryFilterBloc.state)
           .thenReturn(OrderHistoryFilterState.initial());
       autoRouterMock = locator<MockAppRouter>();
+      when(() => autoRouterMock.popForced()).thenAnswer((invocation) async => true);
     });
 
     Widget getWUT() {
@@ -203,13 +204,11 @@ void main() {
       await tester.pumpAndSettle(const Duration(seconds: 2));
     });
     testWidgets(' test clear Order History Filter  ', (tester) async {
-      when(() => mockOrderHistoryFilterBloc.state)
-          .thenReturn(OrderHistoryFilterState.initial());
       when(() => mockOrderHistoryFilterBloc.state).thenReturn(
         OrderHistoryFilterState.initial()
             .copyWith(orderHistoryFilterList: mockOrderHistoryFilter),
       );
-      when(() => autoRouterMock.pop()).thenAnswer((invocation) async => true);
+     
 
       await tester.pumpWidget(getWUT());
 
@@ -217,7 +216,7 @@ void main() {
       expect(filterclearButton, findsOneWidget);
       await tester.tap(filterclearButton);
       await tester.pumpAndSettle(const Duration(seconds: 1));
-      verify(() => autoRouterMock.pop()).called(2);
+      verify(() => autoRouterMock.popForced()).called(2);
     });
 
     testWidgets(' test filtefromdateField date picker test ', (tester) async {
@@ -262,14 +261,13 @@ void main() {
       when(() => mockOrderHistoryFilterBloc.state).thenReturn(
         OrderHistoryFilterState.initial().copyWith(isSubmitting: true),
       );
-      when(() => autoRouterMock.pop()).thenAnswer((invocation) async => true);
 
       await tester.pumpWidget(getWUT());
       await tester.pump();
       final filtercrossButton = find.byKey(const Key('filterCrossButton'));
       await tester.tap(filtercrossButton);
       await tester.pumpAndSettle(const Duration(seconds: 3));
-      verify(() => autoRouterMock.pop()).called(1);
+      verify(() => autoRouterMock.popForced()).called(1);
     });
   });
 }
