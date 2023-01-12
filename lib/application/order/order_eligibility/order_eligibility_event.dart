@@ -11,10 +11,12 @@ class OrderEligibilityEvent with _$OrderEligibilityEvent {
     required ShipToInfo shipInfo,
     required String orderType,
     required double grandTotal,
+    required double subTotal,
   }) = _Initialized;
   const factory OrderEligibilityEvent.update({
     required List<PriceAggregate> cartItems,
     required String orderType,
     required double grandTotal,
+    required double subTotal,
   }) = _Update;
 }

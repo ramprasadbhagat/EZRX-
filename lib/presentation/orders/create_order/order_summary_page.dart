@@ -701,6 +701,7 @@ class _CartDetails extends StatelessWidget {
                 cartItems: readyToSubmitCartItem,
                 orderType: '',
                 grandTotal: state.grandTotal,
+                subTotal: state.subtotal,
               ),
             );
 

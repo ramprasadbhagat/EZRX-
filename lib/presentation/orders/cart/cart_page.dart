@@ -205,6 +205,7 @@ class CartPage extends StatelessWidget {
             salesOrg: context.read<SalesOrgBloc>().state.salesOrganisation,
             shipInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
             user: context.read<UserBloc>().state.user,
+            subTotal: context.read<CartBloc>().state.subtotal,
           ),
         );
     context.router.pushNamed('order_summary');

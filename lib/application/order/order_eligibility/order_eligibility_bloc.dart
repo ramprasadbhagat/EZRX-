@@ -32,10 +32,12 @@ class OrderEligibilityBloc
           salesOrg: e.salesOrg,
           shipInfo: e.shipInfo,
           user: e.user,
+          subTotal: e.subTotal,
         ),
       ),
       update: (e) => emit(
         state.copyWith(
+          subTotal: e.subTotal,
           grandTotal: e.grandTotal,
           cartItems: e.cartItems,
           orderType: e.orderType,

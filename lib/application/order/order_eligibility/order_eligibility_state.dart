@@ -13,6 +13,7 @@ class OrderEligibilityState with _$OrderEligibilityState {
     required ShipToInfo shipInfo,
     required String orderType,
     required User user,
+    required double subTotal,
   }) = _OrderEligibilityState;
 
   factory OrderEligibilityState.initial() => OrderEligibilityState(
@@ -24,6 +25,7 @@ class OrderEligibilityState with _$OrderEligibilityState {
         configs: SalesOrganisationConfigs.empty(),
         salesOrg: SalesOrganisation.empty(),
         user: User.empty(),
+        subTotal: 0.0,
       );
 
   bool get isMinOrderValuePassed {
@@ -39,12 +41,16 @@ class OrderEligibilityState with _$OrderEligibilityState {
 
     return isNotSuspended
         ? isCartContainsNonSampleMaterial
-            ? isGrandTotalIsGreaterThanMinOrderAmount
+            ? isTotalGreaterThanMinOrderAmount
             : true
         : false;
   }
 
-  bool get isGrandTotalIsGreaterThanMinOrderAmount {
+  bool get isTotalGreaterThanMinOrderAmount {
+    if (salesOrg.salesOrg.isTH) {
+      return subTotal >= double.parse(configs.minOrderAmount);
+    }
+    
     return grandTotal >= double.parse(configs.minOrderAmount);
   }
 
