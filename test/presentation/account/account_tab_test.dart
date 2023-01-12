@@ -12,6 +12,7 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/full_name.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -270,6 +271,66 @@ void main() {
       final settingsTile = find.byKey(const Key('settingsTile'));
       expect(settingsTile, findsOneWidget);
       await tester.tap(settingsTile);
+      await tester.pump();
+    });
+
+    testWidgets(
+        'SupportTile should not be visible when user salesOrg is not SG',
+        (tester) async {
+      final expectedUserStates = [
+        UserState.initial().copyWith(
+          user: User.empty().copyWith(
+            id: 'testId',
+            role: Role.empty().copyWith(type: RoleType('zp_admin')),
+          ),
+        ),
+      ];
+      final expectedSalesOrgState = [
+        SalesOrgState.initial().copyWith(
+          salesOrganisation: SalesOrganisation.empty().copyWith(
+            salesOrg: SalesOrg('1300'),
+          ),
+        ),
+      ];
+
+      whenListen(userBlocMock, Stream.fromIterable(expectedUserStates));
+      whenListen(salesOrgBlocMock, Stream.fromIterable(expectedSalesOrgState));
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      final supportTile = find.byKey(const Key('supportTile'));
+
+      expect(supportTile, findsNothing);
+    });
+
+    testWidgets('Tap supportTile when user salesOrg is from SG',
+        (tester) async {
+      final expectedUserStates = [
+        UserState.initial().copyWith(
+          user: User.empty().copyWith(
+            id: 'testId',
+            role: Role.empty().copyWith(type: RoleType('zp_admin')),
+          ),
+        ),
+      ];
+      final expectedSalesOrgState = [
+        SalesOrgState.initial().copyWith(
+          salesOrganisation: SalesOrganisation.empty().copyWith(
+            salesOrg: SalesOrg('2601'),
+          ),
+        ),
+      ];
+
+      whenListen(userBlocMock, Stream.fromIterable(expectedUserStates));
+      whenListen(salesOrgBlocMock, Stream.fromIterable(expectedSalesOrgState));
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      final supportTile = find.byKey(const Key('supportTile'));
+
+      expect(supportTile, findsOneWidget);
+
+      await tester.tap(supportTile);
       await tester.pump();
     });
   });

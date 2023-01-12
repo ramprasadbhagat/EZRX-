@@ -1,10 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/presentation/core/cart_button.dart';
 import 'package:ezrxmobile/presentation/core/profile_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class AccountTab extends StatelessWidget {
   const AccountTab({Key? key}) : super(key: key);
@@ -25,6 +27,7 @@ class AccountTab extends StatelessWidget {
               const ProfileTile(),
               const _LoginOnBehalfTile(),
               const _SettingsTile(),
+              const _SupportTile(),
             ],
           ).toList(),
         ),
@@ -71,6 +74,38 @@ class _SettingsTile extends StatelessWidget {
         locale: context.locale,
       ).tr(),
       onTap: () => context.router.pushNamed('settings'),
+    );
+  }
+}
+
+class _SupportTile extends StatelessWidget {
+  const _SupportTile({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<SalesOrgBloc, SalesOrgState>(
+      buildWhen: (previous, current) =>
+          previous.salesOrganisation.salesOrg !=
+          current.salesOrganisation.salesOrg,
+      builder: (context, state) {
+        if (!state.salesOrganisation.salesOrg.isSg) {
+          return const SizedBox.shrink();
+        }
+
+        return ListTile(
+          key: const Key('supportTile'),
+          leading: const Icon(Icons.chat),
+          title: Text(
+            'Support',
+            locale: context.locale,
+          ).tr(),
+          onTap: () {
+            launchUrlString(
+              'https://zuelligpharmacare.freshdesk.com/support/home',
+            );
+          },
+        );
+      },
     );
   }
 }
