@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'policy_configuration_list_dto.dart';
+part of 'policy_configuration_dto.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,13 +14,13 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-PolicyConfigurationListDto _$PolicyConfigurationListDtoFromJson(
+PolicyConfigurationDto _$PolicyConfigurationDtoFromJson(
     Map<String, dynamic> json) {
-  return _PolicyConfigurationListDto.fromJson(json);
+  return _PolicyConfigurationDto.fromJson(json);
 }
 
 /// @nodoc
-mixin _$PolicyConfigurationListDto {
+mixin _$PolicyConfigurationDto {
   @JsonKey(name: 'salesOrg', defaultValue: '')
   String get salesOrg => throw _privateConstructorUsedError;
   @JsonKey(name: 'principalCode', defaultValue: '')
@@ -35,19 +35,20 @@ mixin _$PolicyConfigurationListDto {
   bool get returnsAllowed => throw _privateConstructorUsedError;
   @JsonKey(name: 'principalName', defaultValue: '')
   String get principalName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'status', defaultValue: '')
+  String get status => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $PolicyConfigurationListDtoCopyWith<PolicyConfigurationListDto>
-      get copyWith => throw _privateConstructorUsedError;
+  $PolicyConfigurationDtoCopyWith<PolicyConfigurationDto> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $PolicyConfigurationListDtoCopyWith<$Res> {
-  factory $PolicyConfigurationListDtoCopyWith(PolicyConfigurationListDto value,
-          $Res Function(PolicyConfigurationListDto) then) =
-      _$PolicyConfigurationListDtoCopyWithImpl<$Res,
-          PolicyConfigurationListDto>;
+abstract class $PolicyConfigurationDtoCopyWith<$Res> {
+  factory $PolicyConfigurationDtoCopyWith(PolicyConfigurationDto value,
+          $Res Function(PolicyConfigurationDto) then) =
+      _$PolicyConfigurationDtoCopyWithImpl<$Res, PolicyConfigurationDto>;
   @useResult
   $Res call(
       {@JsonKey(name: 'salesOrg', defaultValue: '')
@@ -63,14 +64,16 @@ abstract class $PolicyConfigurationListDtoCopyWith<$Res> {
       @JsonKey(name: 'returnsAllowed', defaultValue: false)
           bool returnsAllowed,
       @JsonKey(name: 'principalName', defaultValue: '')
-          String principalName});
+          String principalName,
+      @JsonKey(name: 'status', defaultValue: '')
+          String status});
 }
 
 /// @nodoc
-class _$PolicyConfigurationListDtoCopyWithImpl<$Res,
-        $Val extends PolicyConfigurationListDto>
-    implements $PolicyConfigurationListDtoCopyWith<$Res> {
-  _$PolicyConfigurationListDtoCopyWithImpl(this._value, this._then);
+class _$PolicyConfigurationDtoCopyWithImpl<$Res,
+        $Val extends PolicyConfigurationDto>
+    implements $PolicyConfigurationDtoCopyWith<$Res> {
+  _$PolicyConfigurationDtoCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -87,6 +90,7 @@ class _$PolicyConfigurationListDtoCopyWithImpl<$Res,
     Object? uuid = null,
     Object? returnsAllowed = null,
     Object? principalName = null,
+    Object? status = null,
   }) {
     return _then(_value.copyWith(
       salesOrg: null == salesOrg
@@ -117,17 +121,20 @@ class _$PolicyConfigurationListDtoCopyWithImpl<$Res,
           ? _value.principalName
           : principalName // ignore: cast_nullable_to_non_nullable
               as String,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_PolicyConfigurationListDtoCopyWith<$Res>
-    implements $PolicyConfigurationListDtoCopyWith<$Res> {
-  factory _$$_PolicyConfigurationListDtoCopyWith(
-          _$_PolicyConfigurationListDto value,
-          $Res Function(_$_PolicyConfigurationListDto) then) =
-      __$$_PolicyConfigurationListDtoCopyWithImpl<$Res>;
+abstract class _$$_PolicyConfigurationDtoCopyWith<$Res>
+    implements $PolicyConfigurationDtoCopyWith<$Res> {
+  factory _$$_PolicyConfigurationDtoCopyWith(_$_PolicyConfigurationDto value,
+          $Res Function(_$_PolicyConfigurationDto) then) =
+      __$$_PolicyConfigurationDtoCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -144,17 +151,18 @@ abstract class _$$_PolicyConfigurationListDtoCopyWith<$Res>
       @JsonKey(name: 'returnsAllowed', defaultValue: false)
           bool returnsAllowed,
       @JsonKey(name: 'principalName', defaultValue: '')
-          String principalName});
+          String principalName,
+      @JsonKey(name: 'status', defaultValue: '')
+          String status});
 }
 
 /// @nodoc
-class __$$_PolicyConfigurationListDtoCopyWithImpl<$Res>
-    extends _$PolicyConfigurationListDtoCopyWithImpl<$Res,
-        _$_PolicyConfigurationListDto>
-    implements _$$_PolicyConfigurationListDtoCopyWith<$Res> {
-  __$$_PolicyConfigurationListDtoCopyWithImpl(
-      _$_PolicyConfigurationListDto _value,
-      $Res Function(_$_PolicyConfigurationListDto) _then)
+class __$$_PolicyConfigurationDtoCopyWithImpl<$Res>
+    extends _$PolicyConfigurationDtoCopyWithImpl<$Res,
+        _$_PolicyConfigurationDto>
+    implements _$$_PolicyConfigurationDtoCopyWith<$Res> {
+  __$$_PolicyConfigurationDtoCopyWithImpl(_$_PolicyConfigurationDto _value,
+      $Res Function(_$_PolicyConfigurationDto) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -167,8 +175,9 @@ class __$$_PolicyConfigurationListDtoCopyWithImpl<$Res>
     Object? uuid = null,
     Object? returnsAllowed = null,
     Object? principalName = null,
+    Object? status = null,
   }) {
-    return _then(_$_PolicyConfigurationListDto(
+    return _then(_$_PolicyConfigurationDto(
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
@@ -197,14 +206,18 @@ class __$$_PolicyConfigurationListDtoCopyWithImpl<$Res>
           ? _value.principalName
           : principalName // ignore: cast_nullable_to_non_nullable
               as String,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_PolicyConfigurationListDto extends _PolicyConfigurationListDto {
-  const _$_PolicyConfigurationListDto(
+class _$_PolicyConfigurationDto extends _PolicyConfigurationDto {
+  const _$_PolicyConfigurationDto(
       {@JsonKey(name: 'salesOrg', defaultValue: '')
           required this.salesOrg,
       @JsonKey(name: 'principalCode', defaultValue: '')
@@ -218,11 +231,13 @@ class _$_PolicyConfigurationListDto extends _PolicyConfigurationListDto {
       @JsonKey(name: 'returnsAllowed', defaultValue: false)
           required this.returnsAllowed,
       @JsonKey(name: 'principalName', defaultValue: '')
-          required this.principalName})
+          required this.principalName,
+      @JsonKey(name: 'status', defaultValue: '')
+          required this.status})
       : super._();
 
-  factory _$_PolicyConfigurationListDto.fromJson(Map<String, dynamic> json) =>
-      _$$_PolicyConfigurationListDtoFromJson(json);
+  factory _$_PolicyConfigurationDto.fromJson(Map<String, dynamic> json) =>
+      _$$_PolicyConfigurationDtoFromJson(json);
 
   @override
   @JsonKey(name: 'salesOrg', defaultValue: '')
@@ -245,17 +260,20 @@ class _$_PolicyConfigurationListDto extends _PolicyConfigurationListDto {
   @override
   @JsonKey(name: 'principalName', defaultValue: '')
   final String principalName;
+  @override
+  @JsonKey(name: 'status', defaultValue: '')
+  final String status;
 
   @override
   String toString() {
-    return 'PolicyConfigurationListDto(salesOrg: $salesOrg, principalCode: $principalCode, monthsBeforeExpiry: $monthsBeforeExpiry, monthsAfterExpiry: $monthsAfterExpiry, uuid: $uuid, returnsAllowed: $returnsAllowed, principalName: $principalName)';
+    return 'PolicyConfigurationDto(salesOrg: $salesOrg, principalCode: $principalCode, monthsBeforeExpiry: $monthsBeforeExpiry, monthsAfterExpiry: $monthsAfterExpiry, uuid: $uuid, returnsAllowed: $returnsAllowed, principalName: $principalName, status: $status)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PolicyConfigurationListDto &&
+            other is _$_PolicyConfigurationDto &&
             (identical(other.salesOrg, salesOrg) ||
                 other.salesOrg == salesOrg) &&
             (identical(other.principalCode, principalCode) ||
@@ -268,7 +286,8 @@ class _$_PolicyConfigurationListDto extends _PolicyConfigurationListDto {
             (identical(other.returnsAllowed, returnsAllowed) ||
                 other.returnsAllowed == returnsAllowed) &&
             (identical(other.principalName, principalName) ||
-                other.principalName == principalName));
+                other.principalName == principalName) &&
+            (identical(other.status, status) || other.status == status));
   }
 
   @JsonKey(ignore: true)
@@ -281,25 +300,26 @@ class _$_PolicyConfigurationListDto extends _PolicyConfigurationListDto {
       monthsAfterExpiry,
       uuid,
       returnsAllowed,
-      principalName);
+      principalName,
+      status);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PolicyConfigurationListDtoCopyWith<_$_PolicyConfigurationListDto>
-      get copyWith => __$$_PolicyConfigurationListDtoCopyWithImpl<
-          _$_PolicyConfigurationListDto>(this, _$identity);
+  _$$_PolicyConfigurationDtoCopyWith<_$_PolicyConfigurationDto> get copyWith =>
+      __$$_PolicyConfigurationDtoCopyWithImpl<_$_PolicyConfigurationDto>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PolicyConfigurationListDtoToJson(
+    return _$$_PolicyConfigurationDtoToJson(
       this,
     );
   }
 }
 
-abstract class _PolicyConfigurationListDto extends PolicyConfigurationListDto {
-  const factory _PolicyConfigurationListDto(
+abstract class _PolicyConfigurationDto extends PolicyConfigurationDto {
+  const factory _PolicyConfigurationDto(
       {@JsonKey(name: 'salesOrg', defaultValue: '')
           required final String salesOrg,
       @JsonKey(name: 'principalCode', defaultValue: '')
@@ -313,11 +333,13 @@ abstract class _PolicyConfigurationListDto extends PolicyConfigurationListDto {
       @JsonKey(name: 'returnsAllowed', defaultValue: false)
           required final bool returnsAllowed,
       @JsonKey(name: 'principalName', defaultValue: '')
-          required final String principalName}) = _$_PolicyConfigurationListDto;
-  const _PolicyConfigurationListDto._() : super._();
+          required final String principalName,
+      @JsonKey(name: 'status', defaultValue: '')
+          required final String status}) = _$_PolicyConfigurationDto;
+  const _PolicyConfigurationDto._() : super._();
 
-  factory _PolicyConfigurationListDto.fromJson(Map<String, dynamic> json) =
-      _$_PolicyConfigurationListDto.fromJson;
+  factory _PolicyConfigurationDto.fromJson(Map<String, dynamic> json) =
+      _$_PolicyConfigurationDto.fromJson;
 
   @override
   @JsonKey(name: 'salesOrg', defaultValue: '')
@@ -341,7 +363,10 @@ abstract class _PolicyConfigurationListDto extends PolicyConfigurationListDto {
   @JsonKey(name: 'principalName', defaultValue: '')
   String get principalName;
   @override
+  @JsonKey(name: 'status', defaultValue: '')
+  String get status;
+  @override
   @JsonKey(ignore: true)
-  _$$_PolicyConfigurationListDtoCopyWith<_$_PolicyConfigurationListDto>
-      get copyWith => throw _privateConstructorUsedError;
+  _$$_PolicyConfigurationDtoCopyWith<_$_PolicyConfigurationDto> get copyWith =>
+      throw _privateConstructorUsedError;
 }

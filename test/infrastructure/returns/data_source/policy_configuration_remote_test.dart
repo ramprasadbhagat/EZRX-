@@ -6,9 +6,9 @@ import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/returns/entities/policy_configuration.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
-import 'package:ezrxmobile/infrastructure/returns/datasource/policy_configuration_list_query_mutation.dart';
-import 'package:ezrxmobile/infrastructure/returns/datasource/policy_configuration_list_remote.dart';
-import 'package:ezrxmobile/infrastructure/returns/dtos/policy_configuration_list_dto.dart';
+import 'package:ezrxmobile/infrastructure/returns/datasource/policy_configuration_query_mutation.dart';
+import 'package:ezrxmobile/infrastructure/returns/datasource/policy_configuration_remote.dart';
+import 'package:ezrxmobile/infrastructure/returns/dtos/policy_configuration_dto.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -17,7 +17,7 @@ import 'package:http_mock_adapter/http_mock_adapter.dart';
 import 'package:mocktail/mocktail.dart';
 
 class PolicyConfigurationListMock extends Mock
-    implements PolicyConfigurationList {}
+    implements PolicyConfiguration {}
 
 void main() {
   late PolicyConfigurationRemoteDataSource remoteDataSource;
@@ -39,7 +39,7 @@ void main() {
       remoteDataSource = PolicyConfigurationRemoteDataSource(
         httpService: service,
         policyConfigurationQueryMutation:
-            PolicyConfigurationListQueryMutation(),
+            PolicyConfigurationQueryMutation(),
         dataSourceExceptionHandler: DataSourceExceptionHandler(),
         config: locator.get<Config>(),
       );
@@ -75,18 +75,18 @@ void main() {
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
               'query': remoteDataSource.policyConfigurationQueryMutation
-                  .getPolicyConfigurationList(),
+                  .getPolicyConfiguration(),
               'variables': getPolicyConfigurationListVariables,
             }),
           );
 
-          final result = await remoteDataSource.getPolicyConfigurationList(
+          final result = await remoteDataSource.getPolicyConfiguration(
               salesOrg: salesOrg);
 
           expect(
             result.length,
             List.from(res['data']['policies'])
-                .map((e) => PolicyConfigurationListDto.fromJson(e).toDomain())
+                .map((e) => PolicyConfigurationDto.fromJson(e).toDomain())
                 .toList()
                 .length,
           );
@@ -98,7 +98,7 @@ void main() {
     'Policy Configuration Remote FAILURE',
     () {
       test(
-        '=> getPolicyConfigurationList StatusCode is not 200',
+        '=> getPolicyConfiguration StatusCode is not 200',
         () async {
           dioAdapter.onPost(
             '/api/ereturn',
@@ -110,13 +110,13 @@ void main() {
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
               'query': remoteDataSource.policyConfigurationQueryMutation
-                  .getPolicyConfigurationList(),
+                  .getPolicyConfiguration(),
               'variables': getPolicyConfigurationListVariables,
             }),
           );
 
           await remoteDataSource
-              .getPolicyConfigurationList(salesOrg: salesOrg)
+              .getPolicyConfiguration(salesOrg: salesOrg)
               .onError((error, _) async {
             expect(error, isA<ServerException>());
             return Future.value(<PolicyConfigurationListMock>[]);
@@ -142,13 +142,13 @@ void main() {
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
               'query': remoteDataSource.policyConfigurationQueryMutation
-                  .getPolicyConfigurationList(),
+                  .getPolicyConfiguration(),
               'variables': getPolicyConfigurationListVariables,
             }),
           );
 
           await remoteDataSource
-              .getPolicyConfigurationList(salesOrg: salesOrg)
+              .getPolicyConfiguration(salesOrg: salesOrg)
               .onError((error, _) async {
             expect(error, isA<ServerException>());
             return Future.value(<PolicyConfigurationListMock>[]);

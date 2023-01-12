@@ -15,7 +15,7 @@ import 'package:ezrxmobile/application/order/material_bundle_list/material_bundl
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
-import 'package:ezrxmobile/application/returns/policy_configuration_list/policy_configuration_list_bloc.dart';
+import 'package:ezrxmobile/application/returns/policy_configuration/policy_configuration_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_request_type_code/return_request_type_code_bloc.dart';
 import 'package:ezrxmobile/application/returns/usage_code/usage_code_bloc.dart';
 import 'package:ezrxmobile/application/returns/user_restriction/user_restriction_list_bloc.dart';
@@ -88,8 +88,8 @@ class UsageCodeBlocMock extends MockBloc<UsageCodeEvent, UsageCodeState> impleme
 class ReturnRequestTypeCodeBlocMock extends MockBloc<ReturnRequestTypeCodeEvent, ReturnRequestTypeCodeState>
     implements ReturnRequestTypeCodeBloc {}
 
-class PolicyConfigurationListBlocMock extends MockBloc<PolicyConfigurationListEvent, PolicyConfigurationListState>
-    implements PolicyConfigurationListBloc {}
+class PolicyConfigurationListBlocMock extends MockBloc<PolicyConfigurationEvent, PolicyConfigurationState>
+    implements PolicyConfigurationBloc {}
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -110,7 +110,7 @@ void main() {
   late UserRestrictionListBloc userRestrictionListBlocMock;
   late UsageCodeBloc usageCodeBlocMock;
   late ReturnRequestTypeCodeBloc returnRequestTypeCodeBlocMock;
-  late PolicyConfigurationListBloc policyConfigurationListBlocMock;
+  late PolicyConfigurationBloc policyConfigurationListBlocMock;
 
   late MaterialBundleListBloc materialBundleListBlocMock;
   late CovidMaterialListBloc covidMaterialListBlocMock;
@@ -175,7 +175,7 @@ void main() {
       when(() => userRestrictionListBlocMock.state).thenReturn(UserRestrictionListState.initial());
       when(() => usageCodeBlocMock.state).thenReturn(UsageCodeState.initial());
       when(() => returnRequestTypeCodeBlocMock.state).thenReturn(ReturnRequestTypeCodeState.initial());
-      when(() => policyConfigurationListBlocMock.state).thenReturn(PolicyConfigurationListState.initial());
+      when(() => policyConfigurationListBlocMock.state).thenReturn(PolicyConfigurationState.initial());
     });
 
     Future getWidget(tester) async {
@@ -203,7 +203,7 @@ void main() {
             BlocProvider<OrderDocumentTypeBloc>(create: (context) => orderDocumentTypeMock),
             BlocProvider<UsageCodeBloc>(create: (context) => usageCodeBlocMock),
             BlocProvider<ReturnRequestTypeCodeBloc>(create: (context) => returnRequestTypeCodeBlocMock),
-            BlocProvider<PolicyConfigurationListBloc>(create: (context) => policyConfigurationListBlocMock),
+            BlocProvider<PolicyConfigurationBloc>(create: (context) => policyConfigurationListBlocMock),
 
           ],
           child: const SplashPage(),
@@ -409,7 +409,7 @@ void main() {
             salesOrg: eligibilityBlocMock.state.salesOrganisation.salesOrg,
           ))).called(2);
 
-      verify(() => policyConfigurationListBlocMock.add(PolicyConfigurationListEvent.fetch(
+      verify(() => policyConfigurationListBlocMock.add(PolicyConfigurationEvent.fetch(
             salesOrganisation: salesOrgBlocMock.state.salesOrganisation,
           ))).called(2);
       expect(find.byType(UpgradeAlert), findsOneWidget);

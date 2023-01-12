@@ -16,7 +16,7 @@ import 'package:ezrxmobile/application/order/material_bundle_list/material_bundl
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
-import 'package:ezrxmobile/application/returns/policy_configuration_list/policy_configuration_list_bloc.dart';
+import 'package:ezrxmobile/application/returns/policy_configuration/policy_configuration_bloc.dart';
 import 'package:ezrxmobile/application/returns/usage_code/usage_code_bloc.dart';
 import 'package:ezrxmobile/application/returns/user_restriction/user_restriction_list_bloc.dart';
 import 'package:ezrxmobile/config.dart';
@@ -238,8 +238,8 @@ class SplashPage extends StatelessWidget {
                   ),
                 );
             // Policy Configuration fetch event
-            context.read<PolicyConfigurationListBloc>().add(
-                  PolicyConfigurationListEvent.fetch(
+            context.read<PolicyConfigurationBloc>().add(
+                  PolicyConfigurationEvent.fetch(
                     salesOrganisation:
                         context.read<SalesOrgBloc>().state.salesOrganisation,
                   ),

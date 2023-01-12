@@ -1,13 +1,13 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/returns/policy_configuration_list/policy_configuration_list_bloc.dart';
+import 'package:ezrxmobile/application/returns/policy_configuration/policy_configuration_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/returns/entities/policy_configuration.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
-import 'package:ezrxmobile/infrastructure/returns/datasource/policy_configuration_list_local.dart';
-import 'package:ezrxmobile/presentation/returns/policy_configuration_list.dart';
+import 'package:ezrxmobile/infrastructure/returns/datasource/policy_configuration_local.dart';
+import 'package:ezrxmobile/presentation/returns/policy_configuration.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,17 +19,17 @@ import 'package:mocktail/mocktail.dart';
 import '../../utils/widget_utils.dart';
 
 class MockPolicyConfigurationListBloc
-    extends MockBloc<PolicyConfigurationListEvent, PolicyConfigurationListState>
-    implements PolicyConfigurationListBloc {}
+    extends MockBloc<PolicyConfigurationEvent, PolicyConfigurationState>
+    implements PolicyConfigurationBloc {}
 
 class MockSalesOrgBloc extends MockBloc<SalesOrgEvent, SalesOrgState>
     implements SalesOrgBloc {}
 
 void main() {
-  late PolicyConfigurationListBloc policyConfigurationListBlocMock;
+  late PolicyConfigurationBloc policyConfigurationListBlocMock;
   late SalesOrgBloc salesOrgBlocMock;
   late AppRouter autoRouterMock;
-  var policyConfigurationListMock = <PolicyConfigurationList>[];
+  var policyConfigurationListMock = <PolicyConfiguration>[];
   final locator = GetIt.instance;
 
   setUpAll(() async {
@@ -38,7 +38,7 @@ void main() {
     locator
         .registerLazySingleton(() => CountlyService(config: locator<Config>()));
     policyConfigurationListMock =
-        await PolicyConfigurationLocalDataSource().getPolicyConfigurationList();
+        await PolicyConfigurationLocalDataSource().getPolicyConfiguration();
     autoRouterMock = locator<AppRouter>();
   });
 
@@ -47,7 +47,7 @@ void main() {
     policyConfigurationListBlocMock = MockPolicyConfigurationListBloc();
     salesOrgBlocMock = MockSalesOrgBloc();
     when(() => policyConfigurationListBlocMock.state)
-        .thenReturn(PolicyConfigurationListState.initial());
+        .thenReturn(PolicyConfigurationState.initial());
 
     when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
   });
@@ -57,14 +57,14 @@ void main() {
       WidgetUtils.getScopedWidget(
         autoRouterMock: autoRouterMock,
         providers: [
-          BlocProvider<PolicyConfigurationListBloc>(
+          BlocProvider<PolicyConfigurationBloc>(
             create: (context) => policyConfigurationListBlocMock,
           ),
           BlocProvider<SalesOrgBloc>(
             create: (context) => salesOrgBlocMock,
           ),
         ],
-        child: const PolicyConfiguration(),
+        child: const PolicyConfigurationPage(),
       ),
     );
   }
@@ -80,7 +80,7 @@ void main() {
       await tester.pumpAndSettle(const Duration(seconds: 2));
       verify(
         () => policyConfigurationListBlocMock.add(
-          PolicyConfigurationListEvent.fetch(
+          PolicyConfigurationEvent.fetch(
               salesOrganisation: salesOrgBlocMock.state.salesOrganisation),
         ),
       ).called(1);
@@ -88,7 +88,7 @@ void main() {
 
     testWidgets('=> Test while state is fetching', (tester) async {
       when(() => policyConfigurationListBlocMock.state).thenReturn(
-        PolicyConfigurationListState.initial().copyWith(
+        PolicyConfigurationState.initial().copyWith(
           isLoading: true,
         ),
       );
@@ -104,7 +104,7 @@ void main() {
 
     testWidgets('=> Test when policy configuration is fetched', (tester) async {
       when(() => policyConfigurationListBlocMock.state)
-          .thenReturn(PolicyConfigurationListState.initial().copyWith(
+          .thenReturn(PolicyConfigurationState.initial().copyWith(
         isLoading: false,
         policyConfigurationList: policyConfigurationListMock,
       ));
@@ -117,7 +117,7 @@ void main() {
 
     testWidgets('Test fetch fail', (tester) async {
       when(() => policyConfigurationListBlocMock.state).thenReturn(
-        PolicyConfigurationListState.initial().copyWith(
+        PolicyConfigurationState.initial().copyWith(
           isLoading: false,
           failureOrSuccessOption: none(),
         ),
@@ -125,7 +125,7 @@ void main() {
       whenListen(
           policyConfigurationListBlocMock,
           Stream.fromIterable([
-            PolicyConfigurationListState.initial().copyWith(
+            PolicyConfigurationState.initial().copyWith(
               isLoading: false,
               failureOrSuccessOption: optionOf(
                 const Left(

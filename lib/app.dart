@@ -42,7 +42,7 @@ import 'package:ezrxmobile/application/order/payment_customer_information/paymen
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
-import 'package:ezrxmobile/application/returns/policy_configuration_list/policy_configuration_list_bloc.dart';
+import 'package:ezrxmobile/application/returns/policy_configuration/policy_configuration_bloc.dart';
 import 'package:ezrxmobile/application/returns/usage_code/usage_code_bloc.dart';
 import 'package:ezrxmobile/application/returns/user_restriction/user_restriction_list_bloc.dart';
 import 'package:ezrxmobile/config.dart';
@@ -269,8 +269,8 @@ class App extends StatelessWidget {
         BlocProvider<UsageCodeBloc>(
           create: (context) => locator<UsageCodeBloc>(),
         ),
-        BlocProvider<PolicyConfigurationListBloc>(
-          create: (context) => locator<PolicyConfigurationListBloc>(),
+        BlocProvider<PolicyConfigurationBloc>(
+          create: (context) => locator<PolicyConfigurationBloc>(),
         ),
         BlocProvider<ReturnRequestTypeCodeBloc>(
           create: (context) => locator<ReturnRequestTypeCodeBloc>(),

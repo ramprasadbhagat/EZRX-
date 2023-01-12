@@ -6,12 +6,12 @@ import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/returns/entities/policy_configuration.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
-import 'package:ezrxmobile/infrastructure/returns/datasource/policy_configuration_list_query_mutation.dart';
-import 'package:ezrxmobile/infrastructure/returns/dtos/policy_configuration_list_dto.dart';
+import 'package:ezrxmobile/infrastructure/returns/datasource/policy_configuration_query_mutation.dart';
+import 'package:ezrxmobile/infrastructure/returns/dtos/policy_configuration_dto.dart';
 
 class PolicyConfigurationRemoteDataSource {
   HttpService httpService;
-  PolicyConfigurationListQueryMutation policyConfigurationQueryMutation;
+  PolicyConfigurationQueryMutation policyConfigurationQueryMutation;
   DataSourceExceptionHandler dataSourceExceptionHandler;
   Config config;
 
@@ -22,7 +22,7 @@ class PolicyConfigurationRemoteDataSource {
     required this.policyConfigurationQueryMutation,
   });
 
-  Future<List<PolicyConfigurationList>> getPolicyConfigurationList({
+  Future<List<PolicyConfiguration>> getPolicyConfiguration({
     required String salesOrg,
   }) async {
     return await dataSourceExceptionHandler.handle(
@@ -33,7 +33,7 @@ class PolicyConfigurationRemoteDataSource {
           data: jsonEncode(
             {
               'query':
-                  policyConfigurationQueryMutation.getPolicyConfigurationList(),
+                  policyConfigurationQueryMutation.getPolicyConfiguration(),
               'variables': {
                 'request': {
                   'salesOrg': salesOrg,
@@ -46,8 +46,35 @@ class PolicyConfigurationRemoteDataSource {
         _policyConfigExceptionChecker(res: response);
 
         return List.from(response.data['data']['policies'])
-            .map((e) => PolicyConfigurationListDto.fromJson(e).toDomain())
+            .map((e) => PolicyConfigurationDto.fromJson(e).toDomain())
             .toList();
+      },
+    );
+  }
+
+  Future<PolicyConfiguration> getDeletePolicyConfiguration({
+    required PolicyConfiguration policyConfiguration,
+  }) async {
+    return await dataSourceExceptionHandler.handle(
+      () async {
+        final response = await httpService.request(
+          method: 'POST',
+          url: '${config.urlConstants}ereturn',
+          data: jsonEncode(
+            {
+              'query':
+                  policyConfigurationQueryMutation.deletePolicyConfiguration(),
+              'variables': {
+                'input': {'uuid': policyConfiguration.uuid},
+              },
+            },
+          ),
+        );
+        _policyConfigExceptionChecker(res: response);
+
+        return PolicyConfigurationDto.fromJson(
+          response.data['data']['deletePolicy'],
+        ).toDomain();
       },
     );
   }
@@ -60,6 +87,17 @@ class PolicyConfigurationRemoteDataSource {
       );
     } else if (res.data['errors'] != null && res.data['errors'].isNotEmpty) {
       throw ServerException(message: res.data['errors'][0]['message']);
+    } else if (res.data['data']['deletePolicy'] != null) {
+      if (res.data['data']['deletePolicy']['status'] != null) {
+        if (res.data['data']['deletePolicy']['status'] !=
+            'data deleted successfully') {
+          throw ServerException(
+            message: res.data['data']['deletePolicy']['status'],
+          );
+        }
+      } else {
+        throw ServerException(message: 'data not deleted');
+      }
     }
   }
 }

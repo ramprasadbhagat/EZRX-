@@ -1,14 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'policy_configuration_list_dto.dart';
+part of 'policy_configuration_dto.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_PolicyConfigurationListDto _$$_PolicyConfigurationListDtoFromJson(
+_$_PolicyConfigurationDto _$$_PolicyConfigurationDtoFromJson(
         Map<String, dynamic> json) =>
-    _$_PolicyConfigurationListDto(
+    _$_PolicyConfigurationDto(
       salesOrg: json['salesOrg'] as String? ?? '',
       principalCode: json['principalCode'] as String? ?? '',
       monthsBeforeExpiry: json['monthsBeforeExpiry'] as String? ?? '',
@@ -16,10 +16,11 @@ _$_PolicyConfigurationListDto _$$_PolicyConfigurationListDtoFromJson(
       uuid: json['uuid'] as String? ?? '',
       returnsAllowed: json['returnsAllowed'] as bool? ?? false,
       principalName: json['principalName'] as String? ?? '',
+      status: json['status'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_PolicyConfigurationListDtoToJson(
-        _$_PolicyConfigurationListDto instance) =>
+Map<String, dynamic> _$$_PolicyConfigurationDtoToJson(
+        _$_PolicyConfigurationDto instance) =>
     <String, dynamic>{
       'salesOrg': instance.salesOrg,
       'principalCode': instance.principalCode,
@@ -28,4 +29,5 @@ Map<String, dynamic> _$$_PolicyConfigurationListDtoToJson(
       'uuid': instance.uuid,
       'returnsAllowed': instance.returnsAllowed,
       'principalName': instance.principalName,
+      'status': instance.status,
     };

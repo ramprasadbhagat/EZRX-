@@ -3,14 +3,14 @@ import 'package:ezrxmobile/domain/returns/entities/policy_configuration.dart';
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'policy_configuration_list_dto.freezed.dart';
-part 'policy_configuration_list_dto.g.dart';
+part 'policy_configuration_dto.freezed.dart';
+part 'policy_configuration_dto.g.dart';
 
 @freezed
-class PolicyConfigurationListDto with _$PolicyConfigurationListDto {
-  const PolicyConfigurationListDto._();
+class PolicyConfigurationDto with _$PolicyConfigurationDto {
+  const PolicyConfigurationDto._();
 
-  const factory PolicyConfigurationListDto({
+  const factory PolicyConfigurationDto({
     @JsonKey(name: 'salesOrg', defaultValue: '') required String salesOrg,
     @JsonKey(name: 'principalCode', defaultValue: '')
         required String principalCode,
@@ -23,12 +23,15 @@ class PolicyConfigurationListDto with _$PolicyConfigurationListDto {
         required bool returnsAllowed,
     @JsonKey(name: 'principalName', defaultValue: '')
         required String principalName,
-  }) = _PolicyConfigurationListDto;
+    @JsonKey(name: 'status', defaultValue: '') required String status,
 
-  factory PolicyConfigurationListDto.fromDomain(
-    PolicyConfigurationList policy,
+
+  }) = _PolicyConfigurationDto;
+
+  factory PolicyConfigurationDto.fromDomain(
+    PolicyConfiguration policy,
   ) {
-    return PolicyConfigurationListDto(
+    return PolicyConfigurationDto(
       salesOrg: policy.salesOrg,
       principalCode: policy.principalCode.getOrCrash(),
       monthsBeforeExpiry: policy.monthsBeforeExpiry,
@@ -36,11 +39,12 @@ class PolicyConfigurationListDto with _$PolicyConfigurationListDto {
       principalName: policy.principalName.name,
       returnsAllowed: policy.returnsAllowed.getOrCrash(),
       uuid: policy.uuid,
+      status: policy.status,
     );
   }
 
-  PolicyConfigurationList toDomain() {
-    return PolicyConfigurationList(
+  PolicyConfiguration toDomain() {
+    return PolicyConfiguration(
       salesOrg: salesOrg,
       uuid: uuid,
       monthsAfterExpiry: monthsAfterExpiry,
@@ -48,9 +52,10 @@ class PolicyConfigurationListDto with _$PolicyConfigurationListDto {
       principalCode: PrincipalCode(principalCode),
       principalName: PrincipalName(principalName),
       returnsAllowed: ReturnsAllowed(returnsAllowed),
+      status: status,
     );
   }
 
-  factory PolicyConfigurationListDto.fromJson(Map<String, dynamic> json) =>
-      _$PolicyConfigurationListDtoFromJson(json);
+  factory PolicyConfigurationDto.fromJson(Map<String, dynamic> json) =>
+      _$PolicyConfigurationDtoFromJson(json);
 }

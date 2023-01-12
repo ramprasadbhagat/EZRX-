@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$PolicyConfigurationList {
+mixin _$PolicyConfiguration {
   String get salesOrg => throw _privateConstructorUsedError;
   PrincipalCode get principalCode => throw _privateConstructorUsedError;
   String get monthsBeforeExpiry => throw _privateConstructorUsedError;
@@ -23,17 +23,18 @@ mixin _$PolicyConfigurationList {
   String get uuid => throw _privateConstructorUsedError;
   ReturnsAllowed get returnsAllowed => throw _privateConstructorUsedError;
   PrincipalName get principalName => throw _privateConstructorUsedError;
+  String get status => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $PolicyConfigurationListCopyWith<PolicyConfigurationList> get copyWith =>
+  $PolicyConfigurationCopyWith<PolicyConfiguration> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $PolicyConfigurationListCopyWith<$Res> {
-  factory $PolicyConfigurationListCopyWith(PolicyConfigurationList value,
-          $Res Function(PolicyConfigurationList) then) =
-      _$PolicyConfigurationListCopyWithImpl<$Res, PolicyConfigurationList>;
+abstract class $PolicyConfigurationCopyWith<$Res> {
+  factory $PolicyConfigurationCopyWith(
+          PolicyConfiguration value, $Res Function(PolicyConfiguration) then) =
+      _$PolicyConfigurationCopyWithImpl<$Res, PolicyConfiguration>;
   @useResult
   $Res call(
       {String salesOrg,
@@ -42,14 +43,14 @@ abstract class $PolicyConfigurationListCopyWith<$Res> {
       String monthsAfterExpiry,
       String uuid,
       ReturnsAllowed returnsAllowed,
-      PrincipalName principalName});
+      PrincipalName principalName,
+      String status});
 }
 
 /// @nodoc
-class _$PolicyConfigurationListCopyWithImpl<$Res,
-        $Val extends PolicyConfigurationList>
-    implements $PolicyConfigurationListCopyWith<$Res> {
-  _$PolicyConfigurationListCopyWithImpl(this._value, this._then);
+class _$PolicyConfigurationCopyWithImpl<$Res, $Val extends PolicyConfiguration>
+    implements $PolicyConfigurationCopyWith<$Res> {
+  _$PolicyConfigurationCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -66,6 +67,7 @@ class _$PolicyConfigurationListCopyWithImpl<$Res,
     Object? uuid = null,
     Object? returnsAllowed = null,
     Object? principalName = null,
+    Object? status = null,
   }) {
     return _then(_value.copyWith(
       salesOrg: null == salesOrg
@@ -96,16 +98,20 @@ class _$PolicyConfigurationListCopyWithImpl<$Res,
           ? _value.principalName
           : principalName // ignore: cast_nullable_to_non_nullable
               as PrincipalName,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_PolicyConfigurationListCopyWith<$Res>
-    implements $PolicyConfigurationListCopyWith<$Res> {
-  factory _$$_PolicyConfigurationListCopyWith(_$_PolicyConfigurationList value,
-          $Res Function(_$_PolicyConfigurationList) then) =
-      __$$_PolicyConfigurationListCopyWithImpl<$Res>;
+abstract class _$$_PolicyConfigurationCopyWith<$Res>
+    implements $PolicyConfigurationCopyWith<$Res> {
+  factory _$$_PolicyConfigurationCopyWith(_$_PolicyConfiguration value,
+          $Res Function(_$_PolicyConfiguration) then) =
+      __$$_PolicyConfigurationCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -115,16 +121,16 @@ abstract class _$$_PolicyConfigurationListCopyWith<$Res>
       String monthsAfterExpiry,
       String uuid,
       ReturnsAllowed returnsAllowed,
-      PrincipalName principalName});
+      PrincipalName principalName,
+      String status});
 }
 
 /// @nodoc
-class __$$_PolicyConfigurationListCopyWithImpl<$Res>
-    extends _$PolicyConfigurationListCopyWithImpl<$Res,
-        _$_PolicyConfigurationList>
-    implements _$$_PolicyConfigurationListCopyWith<$Res> {
-  __$$_PolicyConfigurationListCopyWithImpl(_$_PolicyConfigurationList _value,
-      $Res Function(_$_PolicyConfigurationList) _then)
+class __$$_PolicyConfigurationCopyWithImpl<$Res>
+    extends _$PolicyConfigurationCopyWithImpl<$Res, _$_PolicyConfiguration>
+    implements _$$_PolicyConfigurationCopyWith<$Res> {
+  __$$_PolicyConfigurationCopyWithImpl(_$_PolicyConfiguration _value,
+      $Res Function(_$_PolicyConfiguration) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -137,8 +143,9 @@ class __$$_PolicyConfigurationListCopyWithImpl<$Res>
     Object? uuid = null,
     Object? returnsAllowed = null,
     Object? principalName = null,
+    Object? status = null,
   }) {
-    return _then(_$_PolicyConfigurationList(
+    return _then(_$_PolicyConfiguration(
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
@@ -167,21 +174,26 @@ class __$$_PolicyConfigurationListCopyWithImpl<$Res>
           ? _value.principalName
           : principalName // ignore: cast_nullable_to_non_nullable
               as PrincipalName,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_PolicyConfigurationList extends _PolicyConfigurationList {
-  const _$_PolicyConfigurationList(
+class _$_PolicyConfiguration extends _PolicyConfiguration {
+  const _$_PolicyConfiguration(
       {required this.salesOrg,
       required this.principalCode,
       required this.monthsBeforeExpiry,
       required this.monthsAfterExpiry,
       required this.uuid,
       required this.returnsAllowed,
-      required this.principalName})
+      required this.principalName,
+      required this.status})
       : super._();
 
   @override
@@ -198,17 +210,19 @@ class _$_PolicyConfigurationList extends _PolicyConfigurationList {
   final ReturnsAllowed returnsAllowed;
   @override
   final PrincipalName principalName;
+  @override
+  final String status;
 
   @override
   String toString() {
-    return 'PolicyConfigurationList(salesOrg: $salesOrg, principalCode: $principalCode, monthsBeforeExpiry: $monthsBeforeExpiry, monthsAfterExpiry: $monthsAfterExpiry, uuid: $uuid, returnsAllowed: $returnsAllowed, principalName: $principalName)';
+    return 'PolicyConfiguration(salesOrg: $salesOrg, principalCode: $principalCode, monthsBeforeExpiry: $monthsBeforeExpiry, monthsAfterExpiry: $monthsAfterExpiry, uuid: $uuid, returnsAllowed: $returnsAllowed, principalName: $principalName, status: $status)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PolicyConfigurationList &&
+            other is _$_PolicyConfiguration &&
             (identical(other.salesOrg, salesOrg) ||
                 other.salesOrg == salesOrg) &&
             (identical(other.principalCode, principalCode) ||
@@ -221,7 +235,8 @@ class _$_PolicyConfigurationList extends _PolicyConfigurationList {
             (identical(other.returnsAllowed, returnsAllowed) ||
                 other.returnsAllowed == returnsAllowed) &&
             (identical(other.principalName, principalName) ||
-                other.principalName == principalName));
+                other.principalName == principalName) &&
+            (identical(other.status, status) || other.status == status));
   }
 
   @override
@@ -233,27 +248,28 @@ class _$_PolicyConfigurationList extends _PolicyConfigurationList {
       monthsAfterExpiry,
       uuid,
       returnsAllowed,
-      principalName);
+      principalName,
+      status);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PolicyConfigurationListCopyWith<_$_PolicyConfigurationList>
-      get copyWith =>
-          __$$_PolicyConfigurationListCopyWithImpl<_$_PolicyConfigurationList>(
-              this, _$identity);
+  _$$_PolicyConfigurationCopyWith<_$_PolicyConfiguration> get copyWith =>
+      __$$_PolicyConfigurationCopyWithImpl<_$_PolicyConfiguration>(
+          this, _$identity);
 }
 
-abstract class _PolicyConfigurationList extends PolicyConfigurationList {
-  const factory _PolicyConfigurationList(
+abstract class _PolicyConfiguration extends PolicyConfiguration {
+  const factory _PolicyConfiguration(
       {required final String salesOrg,
       required final PrincipalCode principalCode,
       required final String monthsBeforeExpiry,
       required final String monthsAfterExpiry,
       required final String uuid,
       required final ReturnsAllowed returnsAllowed,
-      required final PrincipalName principalName}) = _$_PolicyConfigurationList;
-  const _PolicyConfigurationList._() : super._();
+      required final PrincipalName principalName,
+      required final String status}) = _$_PolicyConfiguration;
+  const _PolicyConfiguration._() : super._();
 
   @override
   String get salesOrg;
@@ -270,7 +286,9 @@ abstract class _PolicyConfigurationList extends PolicyConfigurationList {
   @override
   PrincipalName get principalName;
   @override
+  String get status;
+  @override
   @JsonKey(ignore: true)
-  _$$_PolicyConfigurationListCopyWith<_$_PolicyConfigurationList>
-      get copyWith => throw _privateConstructorUsedError;
+  _$$_PolicyConfigurationCopyWith<_$_PolicyConfiguration> get copyWith =>
+      throw _privateConstructorUsedError;
 }

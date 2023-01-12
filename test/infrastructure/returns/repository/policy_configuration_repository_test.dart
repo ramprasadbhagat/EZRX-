@@ -7,9 +7,9 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/policy_configuration.dart';
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
-import 'package:ezrxmobile/infrastructure/returns/datasource/policy_configuration_list_local.dart';
-import 'package:ezrxmobile/infrastructure/returns/datasource/policy_configuration_list_remote.dart';
-import 'package:ezrxmobile/infrastructure/returns/repository/policy_configuration_list_repository.dart';
+import 'package:ezrxmobile/infrastructure/returns/datasource/policy_configuration_local.dart';
+import 'package:ezrxmobile/infrastructure/returns/datasource/policy_configuration_remote.dart';
+import 'package:ezrxmobile/infrastructure/returns/repository/policy_configuration_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -34,7 +34,7 @@ void main() {
   late PolicyConfigurationRemoteDataSource policyConfigurationRemoteSource;
   late CountlyService countlyService;
   final policyConfigurationListMock = [
-    PolicyConfigurationList(
+    PolicyConfiguration(
       salesOrg: '2601',
       principalCode: PrincipalCode('2601'),
       monthsBeforeExpiry: '"0',
@@ -42,6 +42,7 @@ void main() {
       uuid: 'cfe3d45d-9812-49d7-8b83-ad028b9ae383',
       returnsAllowed: ReturnsAllowed(true),
       principalName: PrincipalName(''),
+      status: ''
     ),
   ];
 
@@ -59,12 +60,12 @@ void main() {
   });
 
   group('PolicyConfigurationRepository Test', () {
-    test('=> getPolicyConfigurationList Locally SUCCESS', () async {
+    test('=> getPolicyConfiguration Locally SUCCESS', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
-      when(() => policyConfigurationLocalSource.getPolicyConfigurationList())
+      when(() => policyConfigurationLocalSource.getPolicyConfiguration())
           .thenAnswer((invocation) async => policyConfigurationListMock);
 
-      final result = await policyConfigurationRepo.getPolicyConfigurationList(
+      final result = await policyConfigurationRepo.getPolicyConfiguration(
         salesOrganisation: mockSalesOrg,
       );
       expect(
@@ -73,12 +74,12 @@ void main() {
       );
     });
 
-    test('=> getPolicyConfigurationList Locally FAILED', () async {
+    test('=> getPolicyConfiguration Locally FAILED', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
-      when(() => policyConfigurationLocalSource.getPolicyConfigurationList())
+      when(() => policyConfigurationLocalSource.getPolicyConfiguration())
           .thenThrow(const ApiFailure.serverTimeout());
 
-      final result = await policyConfigurationRepo.getPolicyConfigurationList(
+      final result = await policyConfigurationRepo.getPolicyConfiguration(
         salesOrganisation: mockSalesOrg,
       );
       expect(
@@ -87,13 +88,13 @@ void main() {
       );
     });
 
-    test('=> getPolicyConfigurationList Remote SUCCESS', () async {
+    test('=> getPolicyConfiguration Remote SUCCESS', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
-      when(() => policyConfigurationRemoteSource.getPolicyConfigurationList(
+      when(() => policyConfigurationRemoteSource.getPolicyConfiguration(
               salesOrg: mockSalesOrg.salesOrg.getOrCrash()))
           .thenAnswer((invocation) async => policyConfigurationListMock);
 
-      final result = await policyConfigurationRepo.getPolicyConfigurationList(
+      final result = await policyConfigurationRepo.getPolicyConfiguration(
         salesOrganisation: mockSalesOrg,
       );
       expect(
@@ -102,14 +103,14 @@ void main() {
       );
     });
 
-    test('=> getPolicyConfigurationList Remote FAILED', () async {
+    test('=> getPolicyConfiguration Remote FAILED', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
       when(
-        () => policyConfigurationRemoteSource.getPolicyConfigurationList(
+        () => policyConfigurationRemoteSource.getPolicyConfiguration(
             salesOrg: mockSalesOrg.salesOrg.getOrDefaultValue('')),
       ).thenThrow(const ApiFailure.serverTimeout());
 
-      final result = await policyConfigurationRepo.getPolicyConfigurationList(
+      final result = await policyConfigurationRepo.getPolicyConfiguration(
         salesOrganisation: mockSalesOrg,
       );
       expect(

@@ -1,11 +1,11 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
-import 'package:ezrxmobile/application/returns/policy_configuration_list/policy_configuration_list_bloc.dart';
+import 'package:ezrxmobile/application/returns/policy_configuration/policy_configuration_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/returns/entities/policy_configuration.dart';
-import 'package:ezrxmobile/infrastructure/returns/datasource/policy_configuration_list_local.dart';
-import 'package:ezrxmobile/infrastructure/returns/repository/policy_configuration_list_repository.dart';
+import 'package:ezrxmobile/infrastructure/returns/datasource/policy_configuration_local.dart';
+import 'package:ezrxmobile/infrastructure/returns/repository/policy_configuration_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -16,45 +16,44 @@ class PolicyConfigurationRepositoryMock extends Mock
 void main() {
   final repository = PolicyConfigurationRepositoryMock();
   final mockSalesOrg = SalesOrganisation.empty();
-  late final List<PolicyConfigurationList> policyConfigurationListMock;
+  late final List<PolicyConfiguration> policyConfigurationListMock;
 
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
     policyConfigurationListMock =
-        await PolicyConfigurationLocalDataSource().getPolicyConfigurationList();
+        await PolicyConfigurationLocalDataSource().getPolicyConfiguration();
   });
 
   group(
     'Policy Configuration Bloc',
     () {
       blocTest('Initialize',
-          build: () => PolicyConfigurationListBloc(
+          build: () => PolicyConfigurationBloc(
               policyConfigurationRepository: repository),
-          act: (PolicyConfigurationListBloc bloc) =>
-              bloc.add(const PolicyConfigurationListEvent.initialized()),
-          expect: () => [PolicyConfigurationListState.initial()]);
+          act: (PolicyConfigurationBloc bloc) =>
+              bloc.add(const PolicyConfigurationEvent.initialized()),
+          expect: () => [PolicyConfigurationState.initial()]);
 
       blocTest(
         'Get policy configuration list failure',
-        build: () => PolicyConfigurationListBloc(
-            policyConfigurationRepository: repository),
+        build: () =>
+            PolicyConfigurationBloc(policyConfigurationRepository: repository),
         setUp: () {
-          when(() => repository.getPolicyConfigurationList(
+          when(() => repository.getPolicyConfiguration(
               salesOrganisation: mockSalesOrg)).thenAnswer(
             (invocation) async => const Left(
               ApiFailure.other('fake-error'),
             ),
           );
         },
-        act: (PolicyConfigurationListBloc bloc) => bloc.add(
-            PolicyConfigurationListEvent.fetch(
-                salesOrganisation: mockSalesOrg)),
+        act: (PolicyConfigurationBloc bloc) => bloc.add(
+            PolicyConfigurationEvent.fetch(salesOrganisation: mockSalesOrg)),
         expect: () => [
-          PolicyConfigurationListState.initial().copyWith(
+          PolicyConfigurationState.initial().copyWith(
             isLoading: true,
             failureOrSuccessOption: none(),
           ),
-          PolicyConfigurationListState.initial().copyWith(
+          PolicyConfigurationState.initial().copyWith(
             isLoading: false,
             policyConfigurationList: [],
             failureOrSuccessOption:
@@ -65,23 +64,22 @@ void main() {
 
       blocTest(
         'Get policy configuration list success',
-        build: () => PolicyConfigurationListBloc(
-            policyConfigurationRepository: repository),
+        build: () =>
+            PolicyConfigurationBloc(policyConfigurationRepository: repository),
         setUp: () {
-          when(() => repository.getPolicyConfigurationList(
+          when(() => repository.getPolicyConfiguration(
               salesOrganisation: mockSalesOrg)).thenAnswer(
             (invocation) async => Right(policyConfigurationListMock),
           );
         },
-        act: (PolicyConfigurationListBloc bloc) => bloc.add(
-            PolicyConfigurationListEvent.fetch(
-                salesOrganisation: mockSalesOrg)),
+        act: (PolicyConfigurationBloc bloc) => bloc.add(
+            PolicyConfigurationEvent.fetch(salesOrganisation: mockSalesOrg)),
         expect: () => [
-          PolicyConfigurationListState.initial().copyWith(
+          PolicyConfigurationState.initial().copyWith(
             isLoading: true,
             failureOrSuccessOption: none(),
           ),
-          PolicyConfigurationListState.initial().copyWith(
+          PolicyConfigurationState.initial().copyWith(
             isLoading: false,
             policyConfigurationList: policyConfigurationListMock,
             failureOrSuccessOption: none(),

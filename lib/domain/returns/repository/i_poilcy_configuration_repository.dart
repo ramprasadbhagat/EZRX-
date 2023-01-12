@@ -4,8 +4,13 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/returns/entities/policy_configuration.dart';
 
 abstract class IPolicyConfigurationRepository {
-  Future<Either<ApiFailure, List<PolicyConfigurationList>>>
-      getPolicyConfigurationList({
+  Future<Either<ApiFailure, List<PolicyConfiguration>>>
+      getPolicyConfiguration({
     required SalesOrganisation salesOrganisation,
+  });
+  Future<Either<ApiFailure, List<PolicyConfiguration>>> getDeletePolicy({
+       required PolicyConfiguration policyConfigurationItem,
+
+    required List<PolicyConfiguration> policyConfigurationList,
   });
 }

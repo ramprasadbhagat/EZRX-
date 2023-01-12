@@ -5,10 +5,10 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'policy_configuration.freezed.dart';
 
 @freezed
-class PolicyConfigurationList with _$PolicyConfigurationList {
-  const PolicyConfigurationList._();
+class PolicyConfiguration with _$PolicyConfiguration {
+  const PolicyConfiguration._();
 
-  const factory PolicyConfigurationList({
+  const factory PolicyConfiguration({
     required String salesOrg,
     required PrincipalCode principalCode,
     required String monthsBeforeExpiry,
@@ -16,8 +16,10 @@ class PolicyConfigurationList with _$PolicyConfigurationList {
     required String uuid,
     required ReturnsAllowed returnsAllowed,
     required PrincipalName principalName,
-  }) = _PolicyConfigurationList;
-  factory PolicyConfigurationList.empty() => PolicyConfigurationList(
+    required String status,
+
+  }) = _PolicyConfiguration;
+  factory PolicyConfiguration.empty() => PolicyConfiguration(
         salesOrg: '',
         principalCode: PrincipalCode(''),
         monthsBeforeExpiry: '',
@@ -25,5 +27,6 @@ class PolicyConfigurationList with _$PolicyConfigurationList {
         uuid: '',
         returnsAllowed: ReturnsAllowed(false),
         principalName: PrincipalName(''),
+        status: '',
       );
 }

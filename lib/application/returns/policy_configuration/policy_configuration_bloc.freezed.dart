@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'policy_configuration_list_bloc.dart';
+part of 'policy_configuration_bloc.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,23 +15,27 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$PolicyConfigurationListEvent {
+mixin _$PolicyConfigurationEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(SalesOrganisation salesOrganisation) fetch,
+    required TResult Function(PolicyConfiguration policyConfigurationItem)
+        delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(SalesOrganisation salesOrganisation)? fetch,
+    TResult? Function(PolicyConfiguration policyConfigurationItem)? delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(SalesOrganisation salesOrganisation)? fetch,
+    TResult Function(PolicyConfiguration policyConfigurationItem)? delete,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -39,37 +43,38 @@ mixin _$PolicyConfigurationListEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_Delete value) delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_Delete value)? delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_Delete value)? delete,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $PolicyConfigurationListEventCopyWith<$Res> {
-  factory $PolicyConfigurationListEventCopyWith(
-          PolicyConfigurationListEvent value,
-          $Res Function(PolicyConfigurationListEvent) then) =
-      _$PolicyConfigurationListEventCopyWithImpl<$Res,
-          PolicyConfigurationListEvent>;
+abstract class $PolicyConfigurationEventCopyWith<$Res> {
+  factory $PolicyConfigurationEventCopyWith(PolicyConfigurationEvent value,
+          $Res Function(PolicyConfigurationEvent) then) =
+      _$PolicyConfigurationEventCopyWithImpl<$Res, PolicyConfigurationEvent>;
 }
 
 /// @nodoc
-class _$PolicyConfigurationListEventCopyWithImpl<$Res,
-        $Val extends PolicyConfigurationListEvent>
-    implements $PolicyConfigurationListEventCopyWith<$Res> {
-  _$PolicyConfigurationListEventCopyWithImpl(this._value, this._then);
+class _$PolicyConfigurationEventCopyWithImpl<$Res,
+        $Val extends PolicyConfigurationEvent>
+    implements $PolicyConfigurationEventCopyWith<$Res> {
+  _$PolicyConfigurationEventCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -86,7 +91,7 @@ abstract class _$$_initializedCopyWith<$Res> {
 
 /// @nodoc
 class __$$_initializedCopyWithImpl<$Res>
-    extends _$PolicyConfigurationListEventCopyWithImpl<$Res, _$_initialized>
+    extends _$PolicyConfigurationEventCopyWithImpl<$Res, _$_initialized>
     implements _$$_initializedCopyWith<$Res> {
   __$$_initializedCopyWithImpl(
       _$_initialized _value, $Res Function(_$_initialized) _then)
@@ -100,7 +105,7 @@ class _$_initialized implements _initialized {
 
   @override
   String toString() {
-    return 'PolicyConfigurationListEvent.initialized()';
+    return 'PolicyConfigurationEvent.initialized()';
   }
 
   @override
@@ -117,6 +122,8 @@ class _$_initialized implements _initialized {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(SalesOrganisation salesOrganisation) fetch,
+    required TResult Function(PolicyConfiguration policyConfigurationItem)
+        delete,
   }) {
     return initialized();
   }
@@ -126,6 +133,7 @@ class _$_initialized implements _initialized {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(SalesOrganisation salesOrganisation)? fetch,
+    TResult? Function(PolicyConfiguration policyConfigurationItem)? delete,
   }) {
     return initialized?.call();
   }
@@ -135,6 +143,7 @@ class _$_initialized implements _initialized {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(SalesOrganisation salesOrganisation)? fetch,
+    TResult Function(PolicyConfiguration policyConfigurationItem)? delete,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -148,6 +157,7 @@ class _$_initialized implements _initialized {
   TResult map<TResult extends Object?>({
     required TResult Function(_initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_Delete value) delete,
   }) {
     return initialized(this);
   }
@@ -157,6 +167,7 @@ class _$_initialized implements _initialized {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_Delete value)? delete,
   }) {
     return initialized?.call(this);
   }
@@ -166,6 +177,7 @@ class _$_initialized implements _initialized {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_Delete value)? delete,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -175,7 +187,7 @@ class _$_initialized implements _initialized {
   }
 }
 
-abstract class _initialized implements PolicyConfigurationListEvent {
+abstract class _initialized implements PolicyConfigurationEvent {
   const factory _initialized() = _$_initialized;
 }
 
@@ -191,7 +203,7 @@ abstract class _$$_FetchCopyWith<$Res> {
 
 /// @nodoc
 class __$$_FetchCopyWithImpl<$Res>
-    extends _$PolicyConfigurationListEventCopyWithImpl<$Res, _$_Fetch>
+    extends _$PolicyConfigurationEventCopyWithImpl<$Res, _$_Fetch>
     implements _$$_FetchCopyWith<$Res> {
   __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
       : super(_value, _then);
@@ -228,7 +240,7 @@ class _$_Fetch implements _Fetch {
 
   @override
   String toString() {
-    return 'PolicyConfigurationListEvent.fetch(salesOrganisation: $salesOrganisation)';
+    return 'PolicyConfigurationEvent.fetch(salesOrganisation: $salesOrganisation)';
   }
 
   @override
@@ -254,6 +266,8 @@ class _$_Fetch implements _Fetch {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(SalesOrganisation salesOrganisation) fetch,
+    required TResult Function(PolicyConfiguration policyConfigurationItem)
+        delete,
   }) {
     return fetch(salesOrganisation);
   }
@@ -263,6 +277,7 @@ class _$_Fetch implements _Fetch {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(SalesOrganisation salesOrganisation)? fetch,
+    TResult? Function(PolicyConfiguration policyConfigurationItem)? delete,
   }) {
     return fetch?.call(salesOrganisation);
   }
@@ -272,6 +287,7 @@ class _$_Fetch implements _Fetch {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(SalesOrganisation salesOrganisation)? fetch,
+    TResult Function(PolicyConfiguration policyConfigurationItem)? delete,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -285,6 +301,7 @@ class _$_Fetch implements _Fetch {
   TResult map<TResult extends Object?>({
     required TResult Function(_initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_Delete value) delete,
   }) {
     return fetch(this);
   }
@@ -294,6 +311,7 @@ class _$_Fetch implements _Fetch {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_Delete value)? delete,
   }) {
     return fetch?.call(this);
   }
@@ -303,6 +321,7 @@ class _$_Fetch implements _Fetch {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_Delete value)? delete,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -312,7 +331,7 @@ class _$_Fetch implements _Fetch {
   }
 }
 
-abstract class _Fetch implements PolicyConfigurationListEvent {
+abstract class _Fetch implements PolicyConfigurationEvent {
   const factory _Fetch({required final SalesOrganisation salesOrganisation}) =
       _$_Fetch;
 
@@ -323,37 +342,187 @@ abstract class _Fetch implements PolicyConfigurationListEvent {
 }
 
 /// @nodoc
-mixin _$PolicyConfigurationListState {
-  List<PolicyConfigurationList> get policyConfigurationList =>
+abstract class _$$_DeleteCopyWith<$Res> {
+  factory _$$_DeleteCopyWith(_$_Delete value, $Res Function(_$_Delete) then) =
+      __$$_DeleteCopyWithImpl<$Res>;
+  @useResult
+  $Res call({PolicyConfiguration policyConfigurationItem});
+
+  $PolicyConfigurationCopyWith<$Res> get policyConfigurationItem;
+}
+
+/// @nodoc
+class __$$_DeleteCopyWithImpl<$Res>
+    extends _$PolicyConfigurationEventCopyWithImpl<$Res, _$_Delete>
+    implements _$$_DeleteCopyWith<$Res> {
+  __$$_DeleteCopyWithImpl(_$_Delete _value, $Res Function(_$_Delete) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? policyConfigurationItem = null,
+  }) {
+    return _then(_$_Delete(
+      policyConfigurationItem: null == policyConfigurationItem
+          ? _value.policyConfigurationItem
+          : policyConfigurationItem // ignore: cast_nullable_to_non_nullable
+              as PolicyConfiguration,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PolicyConfigurationCopyWith<$Res> get policyConfigurationItem {
+    return $PolicyConfigurationCopyWith<$Res>(_value.policyConfigurationItem,
+        (value) {
+      return _then(_value.copyWith(policyConfigurationItem: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_Delete implements _Delete {
+  const _$_Delete({required this.policyConfigurationItem});
+
+  @override
+  final PolicyConfiguration policyConfigurationItem;
+
+  @override
+  String toString() {
+    return 'PolicyConfigurationEvent.delete(policyConfigurationItem: $policyConfigurationItem)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_Delete &&
+            (identical(
+                    other.policyConfigurationItem, policyConfigurationItem) ||
+                other.policyConfigurationItem == policyConfigurationItem));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, policyConfigurationItem);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_DeleteCopyWith<_$_Delete> get copyWith =>
+      __$$_DeleteCopyWithImpl<_$_Delete>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(SalesOrganisation salesOrganisation) fetch,
+    required TResult Function(PolicyConfiguration policyConfigurationItem)
+        delete,
+  }) {
+    return delete(policyConfigurationItem);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(SalesOrganisation salesOrganisation)? fetch,
+    TResult? Function(PolicyConfiguration policyConfigurationItem)? delete,
+  }) {
+    return delete?.call(policyConfigurationItem);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(SalesOrganisation salesOrganisation)? fetch,
+    TResult Function(PolicyConfiguration policyConfigurationItem)? delete,
+    required TResult orElse(),
+  }) {
+    if (delete != null) {
+      return delete(policyConfigurationItem);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_Delete value) delete,
+  }) {
+    return delete(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_Delete value)? delete,
+  }) {
+    return delete?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_Delete value)? delete,
+    required TResult orElse(),
+  }) {
+    if (delete != null) {
+      return delete(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Delete implements PolicyConfigurationEvent {
+  const factory _Delete(
+      {required final PolicyConfiguration policyConfigurationItem}) = _$_Delete;
+
+  PolicyConfiguration get policyConfigurationItem;
+  @JsonKey(ignore: true)
+  _$$_DeleteCopyWith<_$_Delete> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+mixin _$PolicyConfigurationState {
+  List<PolicyConfiguration> get policyConfigurationList =>
       throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption =>
       throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $PolicyConfigurationListStateCopyWith<PolicyConfigurationListState>
-      get copyWith => throw _privateConstructorUsedError;
+  $PolicyConfigurationStateCopyWith<PolicyConfigurationState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $PolicyConfigurationListStateCopyWith<$Res> {
-  factory $PolicyConfigurationListStateCopyWith(
-          PolicyConfigurationListState value,
-          $Res Function(PolicyConfigurationListState) then) =
-      _$PolicyConfigurationListStateCopyWithImpl<$Res,
-          PolicyConfigurationListState>;
+abstract class $PolicyConfigurationStateCopyWith<$Res> {
+  factory $PolicyConfigurationStateCopyWith(PolicyConfigurationState value,
+          $Res Function(PolicyConfigurationState) then) =
+      _$PolicyConfigurationStateCopyWithImpl<$Res, PolicyConfigurationState>;
   @useResult
   $Res call(
-      {List<PolicyConfigurationList> policyConfigurationList,
+      {List<PolicyConfiguration> policyConfigurationList,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       bool isLoading});
 }
 
 /// @nodoc
-class _$PolicyConfigurationListStateCopyWithImpl<$Res,
-        $Val extends PolicyConfigurationListState>
-    implements $PolicyConfigurationListStateCopyWith<$Res> {
-  _$PolicyConfigurationListStateCopyWithImpl(this._value, this._then);
+class _$PolicyConfigurationStateCopyWithImpl<$Res,
+        $Val extends PolicyConfigurationState>
+    implements $PolicyConfigurationStateCopyWith<$Res> {
+  _$PolicyConfigurationStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -371,7 +540,7 @@ class _$PolicyConfigurationListStateCopyWithImpl<$Res,
       policyConfigurationList: null == policyConfigurationList
           ? _value.policyConfigurationList
           : policyConfigurationList // ignore: cast_nullable_to_non_nullable
-              as List<PolicyConfigurationList>,
+              as List<PolicyConfiguration>,
       failureOrSuccessOption: null == failureOrSuccessOption
           ? _value.failureOrSuccessOption
           : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
@@ -385,28 +554,27 @@ class _$PolicyConfigurationListStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_PolicyConfigurationListStateCopyWith<$Res>
-    implements $PolicyConfigurationListStateCopyWith<$Res> {
-  factory _$$_PolicyConfigurationListStateCopyWith(
-          _$_PolicyConfigurationListState value,
-          $Res Function(_$_PolicyConfigurationListState) then) =
-      __$$_PolicyConfigurationListStateCopyWithImpl<$Res>;
+abstract class _$$_PolicyConfigurationStateCopyWith<$Res>
+    implements $PolicyConfigurationStateCopyWith<$Res> {
+  factory _$$_PolicyConfigurationStateCopyWith(
+          _$_PolicyConfigurationState value,
+          $Res Function(_$_PolicyConfigurationState) then) =
+      __$$_PolicyConfigurationStateCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {List<PolicyConfigurationList> policyConfigurationList,
+      {List<PolicyConfiguration> policyConfigurationList,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       bool isLoading});
 }
 
 /// @nodoc
-class __$$_PolicyConfigurationListStateCopyWithImpl<$Res>
-    extends _$PolicyConfigurationListStateCopyWithImpl<$Res,
-        _$_PolicyConfigurationListState>
-    implements _$$_PolicyConfigurationListStateCopyWith<$Res> {
-  __$$_PolicyConfigurationListStateCopyWithImpl(
-      _$_PolicyConfigurationListState _value,
-      $Res Function(_$_PolicyConfigurationListState) _then)
+class __$$_PolicyConfigurationStateCopyWithImpl<$Res>
+    extends _$PolicyConfigurationStateCopyWithImpl<$Res,
+        _$_PolicyConfigurationState>
+    implements _$$_PolicyConfigurationStateCopyWith<$Res> {
+  __$$_PolicyConfigurationStateCopyWithImpl(_$_PolicyConfigurationState _value,
+      $Res Function(_$_PolicyConfigurationState) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -416,11 +584,11 @@ class __$$_PolicyConfigurationListStateCopyWithImpl<$Res>
     Object? failureOrSuccessOption = null,
     Object? isLoading = null,
   }) {
-    return _then(_$_PolicyConfigurationListState(
+    return _then(_$_PolicyConfigurationState(
       policyConfigurationList: null == policyConfigurationList
           ? _value._policyConfigurationList
           : policyConfigurationList // ignore: cast_nullable_to_non_nullable
-              as List<PolicyConfigurationList>,
+              as List<PolicyConfiguration>,
       failureOrSuccessOption: null == failureOrSuccessOption
           ? _value.failureOrSuccessOption
           : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
@@ -435,16 +603,16 @@ class __$$_PolicyConfigurationListStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_PolicyConfigurationListState implements _PolicyConfigurationListState {
-  const _$_PolicyConfigurationListState(
-      {required final List<PolicyConfigurationList> policyConfigurationList,
+class _$_PolicyConfigurationState implements _PolicyConfigurationState {
+  const _$_PolicyConfigurationState(
+      {required final List<PolicyConfiguration> policyConfigurationList,
       required this.failureOrSuccessOption,
       required this.isLoading})
       : _policyConfigurationList = policyConfigurationList;
 
-  final List<PolicyConfigurationList> _policyConfigurationList;
+  final List<PolicyConfiguration> _policyConfigurationList;
   @override
-  List<PolicyConfigurationList> get policyConfigurationList {
+  List<PolicyConfiguration> get policyConfigurationList {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_policyConfigurationList);
   }
@@ -456,14 +624,14 @@ class _$_PolicyConfigurationListState implements _PolicyConfigurationListState {
 
   @override
   String toString() {
-    return 'PolicyConfigurationListState(policyConfigurationList: $policyConfigurationList, failureOrSuccessOption: $failureOrSuccessOption, isLoading: $isLoading)';
+    return 'PolicyConfigurationState(policyConfigurationList: $policyConfigurationList, failureOrSuccessOption: $failureOrSuccessOption, isLoading: $isLoading)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PolicyConfigurationListState &&
+            other is _$_PolicyConfigurationState &&
             const DeepCollectionEquality().equals(
                 other._policyConfigurationList, _policyConfigurationList) &&
             (identical(other.failureOrSuccessOption, failureOrSuccessOption) ||
@@ -482,26 +650,25 @@ class _$_PolicyConfigurationListState implements _PolicyConfigurationListState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PolicyConfigurationListStateCopyWith<_$_PolicyConfigurationListState>
-      get copyWith => __$$_PolicyConfigurationListStateCopyWithImpl<
-          _$_PolicyConfigurationListState>(this, _$identity);
+  _$$_PolicyConfigurationStateCopyWith<_$_PolicyConfigurationState>
+      get copyWith => __$$_PolicyConfigurationStateCopyWithImpl<
+          _$_PolicyConfigurationState>(this, _$identity);
 }
 
-abstract class _PolicyConfigurationListState
-    implements PolicyConfigurationListState {
-  const factory _PolicyConfigurationListState(
-      {required final List<PolicyConfigurationList> policyConfigurationList,
+abstract class _PolicyConfigurationState implements PolicyConfigurationState {
+  const factory _PolicyConfigurationState(
+      {required final List<PolicyConfiguration> policyConfigurationList,
       required final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
-      required final bool isLoading}) = _$_PolicyConfigurationListState;
+      required final bool isLoading}) = _$_PolicyConfigurationState;
 
   @override
-  List<PolicyConfigurationList> get policyConfigurationList;
+  List<PolicyConfiguration> get policyConfigurationList;
   @override
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption;
   @override
   bool get isLoading;
   @override
   @JsonKey(ignore: true)
-  _$$_PolicyConfigurationListStateCopyWith<_$_PolicyConfigurationListState>
+  _$$_PolicyConfigurationStateCopyWith<_$_PolicyConfigurationState>
       get copyWith => throw _privateConstructorUsedError;
 }

@@ -1,4 +1,4 @@
-import 'package:ezrxmobile/infrastructure/returns/datasource/policy_configuration_list_local.dart';
+import 'package:ezrxmobile/infrastructure/returns/datasource/policy_configuration_local.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -17,7 +17,7 @@ void main() {
       test(
         '=> getPolicyConfigurationList',
         () async {
-          final result = await localDataSource.getPolicyConfigurationList();
+          final result = await localDataSource.getPolicyConfiguration();
 
           expect(
             result.length,
