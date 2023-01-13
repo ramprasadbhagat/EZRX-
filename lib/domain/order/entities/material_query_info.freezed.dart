@@ -24,6 +24,7 @@ mixin _$MaterialQueryInfo {
   MaterialQty get qty => throw _privateConstructorUsedError;
   double get priceOverride => throw _privateConstructorUsedError;
   double get zdp8Override => throw _privateConstructorUsedError;
+  TenderContract get tenderContract => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MaterialQueryInfoCopyWith<MaterialQueryInfo> get copyWith =>
@@ -44,7 +45,10 @@ abstract class $MaterialQueryInfoCopyWith<$Res> {
       String principalName,
       MaterialQty qty,
       double priceOverride,
-      double zdp8Override});
+      double zdp8Override,
+      TenderContract tenderContract});
+
+  $TenderContractCopyWith<$Res> get tenderContract;
 }
 
 /// @nodoc
@@ -68,6 +72,7 @@ class _$MaterialQueryInfoCopyWithImpl<$Res, $Val extends MaterialQueryInfo>
     Object? qty = null,
     Object? priceOverride = null,
     Object? zdp8Override = null,
+    Object? tenderContract = null,
   }) {
     return _then(_value.copyWith(
       value: null == value
@@ -102,7 +107,19 @@ class _$MaterialQueryInfoCopyWithImpl<$Res, $Val extends MaterialQueryInfo>
           ? _value.zdp8Override
           : zdp8Override // ignore: cast_nullable_to_non_nullable
               as double,
+      tenderContract: null == tenderContract
+          ? _value.tenderContract
+          : tenderContract // ignore: cast_nullable_to_non_nullable
+              as TenderContract,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $TenderContractCopyWith<$Res> get tenderContract {
+    return $TenderContractCopyWith<$Res>(_value.tenderContract, (value) {
+      return _then(_value.copyWith(tenderContract: value) as $Val);
+    });
   }
 }
 
@@ -122,7 +139,11 @@ abstract class _$$_MaterialQueryInfoCopyWith<$Res>
       String principalName,
       MaterialQty qty,
       double priceOverride,
-      double zdp8Override});
+      double zdp8Override,
+      TenderContract tenderContract});
+
+  @override
+  $TenderContractCopyWith<$Res> get tenderContract;
 }
 
 /// @nodoc
@@ -144,6 +165,7 @@ class __$$_MaterialQueryInfoCopyWithImpl<$Res>
     Object? qty = null,
     Object? priceOverride = null,
     Object? zdp8Override = null,
+    Object? tenderContract = null,
   }) {
     return _then(_$_MaterialQueryInfo(
       value: null == value
@@ -178,6 +200,10 @@ class __$$_MaterialQueryInfoCopyWithImpl<$Res>
           ? _value.zdp8Override
           : zdp8Override // ignore: cast_nullable_to_non_nullable
               as double,
+      tenderContract: null == tenderContract
+          ? _value.tenderContract
+          : tenderContract // ignore: cast_nullable_to_non_nullable
+              as TenderContract,
     ));
   }
 }
@@ -193,7 +219,8 @@ class _$_MaterialQueryInfo extends _MaterialQueryInfo {
       required this.principalName,
       required this.qty,
       this.priceOverride = 0,
-      this.zdp8Override = 0})
+      this.zdp8Override = 0,
+      required this.tenderContract})
       : super._();
 
   @override
@@ -214,10 +241,12 @@ class _$_MaterialQueryInfo extends _MaterialQueryInfo {
   @override
   @JsonKey()
   final double zdp8Override;
+  @override
+  final TenderContract tenderContract;
 
   @override
   String toString() {
-    return 'MaterialQueryInfo(value: $value, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, description: $description, principalName: $principalName, qty: $qty, priceOverride: $priceOverride, zdp8Override: $zdp8Override)';
+    return 'MaterialQueryInfo(value: $value, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, description: $description, principalName: $principalName, qty: $qty, priceOverride: $priceOverride, zdp8Override: $zdp8Override, tenderContract: $tenderContract)';
   }
 
   @override
@@ -238,7 +267,9 @@ class _$_MaterialQueryInfo extends _MaterialQueryInfo {
             (identical(other.priceOverride, priceOverride) ||
                 other.priceOverride == priceOverride) &&
             (identical(other.zdp8Override, zdp8Override) ||
-                other.zdp8Override == zdp8Override));
+                other.zdp8Override == zdp8Override) &&
+            (identical(other.tenderContract, tenderContract) ||
+                other.tenderContract == tenderContract));
   }
 
   @override
@@ -251,7 +282,8 @@ class _$_MaterialQueryInfo extends _MaterialQueryInfo {
       principalName,
       qty,
       priceOverride,
-      zdp8Override);
+      zdp8Override,
+      tenderContract);
 
   @JsonKey(ignore: true)
   @override
@@ -270,7 +302,8 @@ abstract class _MaterialQueryInfo extends MaterialQueryInfo {
       required final String principalName,
       required final MaterialQty qty,
       final double priceOverride,
-      final double zdp8Override}) = _$_MaterialQueryInfo;
+      final double zdp8Override,
+      required final TenderContract tenderContract}) = _$_MaterialQueryInfo;
   const _MaterialQueryInfo._() : super._();
 
   @override
@@ -289,6 +322,8 @@ abstract class _MaterialQueryInfo extends MaterialQueryInfo {
   double get priceOverride;
   @override
   double get zdp8Override;
+  @override
+  TenderContract get tenderContract;
   @override
   @JsonKey(ignore: true)
   _$$_MaterialQueryInfoCopyWith<_$_MaterialQueryInfo> get copyWith =>

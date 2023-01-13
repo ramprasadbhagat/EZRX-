@@ -87,6 +87,7 @@ class PriceAggregate with _$PriceAggregate {
       hidePrice: materialInfo.hidePrice,
       materialGroup2: materialInfo.materialGroup2,
       materialGroup4: materialInfo.materialGroup4,
+      tenderContract: tenderContract,
     );
   }
 

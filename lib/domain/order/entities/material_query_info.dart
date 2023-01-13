@@ -4,6 +4,7 @@ import 'package:ezrxmobile/domain/order/entities/order_history_details_order_ite
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/domain/order/entities/order_template_material.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item.dart';
+import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -21,6 +22,7 @@ class MaterialQueryInfo with _$MaterialQueryInfo {
     required MaterialQty qty,
     @Default(0) double priceOverride,
     @Default(0) double zdp8Override,
+    required TenderContract tenderContract,
   }) = _MaterialQueryInfo;
 
   factory MaterialQueryInfo.fromSavedOrder({
@@ -35,6 +37,7 @@ class MaterialQueryInfo with _$MaterialQueryInfo {
         principalName: 'NA',
         priceOverride: orderMaterial.overridenPrice.getOrDefaultValue(0),
         zdp8Override: orderMaterial.zdp8Override.getOrDefaultValue(0),
+        tenderContract: orderMaterial.tenderContract,
       );
 
   factory MaterialQueryInfo.fromOrderTemplate({
@@ -47,6 +50,7 @@ class MaterialQueryInfo with _$MaterialQueryInfo {
         materialGroup4: orderMaterial.materialGroup4,
         description: orderMaterial.materialDescription,
         principalName: orderMaterial.principalName,
+        tenderContract: TenderContract.empty(),
       );
 
   factory MaterialQueryInfo.fromFavorite({
@@ -60,6 +64,7 @@ class MaterialQueryInfo with _$MaterialQueryInfo {
             material.isFOC ? MaterialGroup.four('6A1') : MaterialGroup.four(''),
         description: material.materialDescription,
         principalName: 'NA',
+        tenderContract: TenderContract.empty(),
       );
 
   factory MaterialQueryInfo.fromBundles({
@@ -72,6 +77,7 @@ class MaterialQueryInfo with _$MaterialQueryInfo {
         materialGroup4: materialInfo.materialGroup4,
         description: materialInfo.displayDescription,
         principalName: materialInfo.principalData.principalName,
+        tenderContract: TenderContract.empty(),
       );
 
   factory MaterialQueryInfo.fromOrderHistory({
@@ -86,6 +92,7 @@ class MaterialQueryInfo with _$MaterialQueryInfo {
         ),
         description: orderHistoryItem.materialDescription,
         principalName: 'NA',
+        tenderContract: TenderContract.empty(),
       );
 
   factory MaterialQueryInfo.empty() => MaterialQueryInfo(
@@ -95,6 +102,7 @@ class MaterialQueryInfo with _$MaterialQueryInfo {
         materialGroup4: MaterialGroup.four(''),
         description: 'NA',
         principalName: 'NA',
+        tenderContract: TenderContract.empty(),
       );
 
   factory MaterialQueryInfo.fromOrderHistoryDetails({
@@ -109,6 +117,7 @@ class MaterialQueryInfo with _$MaterialQueryInfo {
         ),
         description: orderHistoryDetailsOrderItem.materialDescription,
         principalName: 'NA',
+        tenderContract: TenderContract.empty(),
       );
 
   Map<String, dynamic> get priceQuery {

@@ -3,7 +3,10 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/bundle_info_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_item_bonus_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/tender_contract_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 
 part 'material_item_dto.freezed.dart';
 part 'material_item_dto.g.dart';
@@ -30,7 +33,9 @@ class MaterialItemDto with _$MaterialItemDto {
     @JsonKey(name: 'materialGroup4', defaultValue: '')
         required String materialGroup4,
     @JsonKey(name: 'materialNumber', defaultValue: '')
-        required String materialNumber,
+    required String materialNumber,
+    @JsonKey(name: 'tenderContract', readValue: tenderContractOverride)
+    required TenderContractDto tenderContractDto,
     @JsonKey(
       name: 'priceOverride',
       defaultValue: 0,
@@ -90,6 +95,7 @@ class MaterialItemDto with _$MaterialItemDto {
       bundleInformation: bundleInformation.map((e) => e.toDomain()).toList(),
       materials: materials.map((e) => e.toDomain()).toList(),
       totalQuantity: totalQuantity,
+      tenderContract: tenderContractDto.toDomain(),
     );
   }
 
@@ -121,6 +127,7 @@ class MaterialItemDto with _$MaterialItemDto {
           .map((e) => BundleInfoDto.fromDomain(e))
           .toList(),
       totalQuantity: materialItem.totalQuantity,
+      tenderContractDto: TenderContractDto.fromDomain(materialItem.tenderContract),
     );
   }
 
@@ -133,6 +140,9 @@ bool boolStringFormatCheck(Map json, String key) =>
 
 Map<String, dynamic> materialItemOverride(Map json, String key) =>
     json[key] ?? {};
+
+Map<String, dynamic> tenderContractOverride(Map json, String key) =>
+    json[key] ?? TenderContractDto.fromDomain(TenderContract.empty()).toJson();
 
 int intFormatCheck(Map json, String key) => json[key] is int ? json[key] : 0;
 double doubleFormatCheck(Map json, String key) =>

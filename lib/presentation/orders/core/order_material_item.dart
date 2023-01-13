@@ -8,15 +8,16 @@ import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/tender_contract_details_tile.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OrderMaterialItem extends StatelessWidget {
   final MaterialQueryInfo materialQueryInfo;
-
   final String materialNumber;
   final String qty;
+
   const OrderMaterialItem({
     Key? key,
     required this.materialQueryInfo,
@@ -169,6 +170,10 @@ class OrderMaterialItem extends StatelessWidget {
                 priceType: PriceType.unitPrice,
               ),
             ),
+            if (materialQueryInfo.tenderContract != TenderContract.empty())
+              TenderContractDetailsTile(
+                tenderContract: materialQueryInfo.tenderContract,
+              ),
             const SizedBox(height: 5),
           ],
         ),
@@ -180,6 +185,7 @@ class OrderMaterialItem extends StatelessWidget {
 class _MaterialItemInfo extends StatelessWidget {
   final String title;
   final Widget info;
+
   const _MaterialItemInfo({
     Key? key,
     required this.title,
@@ -225,6 +231,7 @@ class _MaterialItemInfo extends StatelessWidget {
 class _MaterialPriceInfo extends StatelessWidget {
   final MaterialQueryInfo materialQueryInfo;
   final PriceType priceType;
+
   const _MaterialPriceInfo({
     Key? key,
     required this.materialQueryInfo,

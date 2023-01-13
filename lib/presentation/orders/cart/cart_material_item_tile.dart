@@ -14,6 +14,7 @@ import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/cart_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
 import 'package:ezrxmobile/presentation/core/remarks_tile.dart';
+import 'package:ezrxmobile/presentation/core/tender_contract_details_tile.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_remark_dialog.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_remarks_button.dart';
 import 'package:ezrxmobile/presentation/orders/cart/bonus_tile.dart';
@@ -119,7 +120,7 @@ class CartMaterialItemTile extends StatelessWidget {
                   ),
                   if (isOrderSummaryView &&
                       cartItem.tenderContract != TenderContract.empty())
-                    _TenderContractDetails(cartItem: cartItem),
+                    TenderContractDetailsTile(tenderContract: cartItem.tenderContract),
                   if (cartItem.materialInfo.remarks.isNotEmpty &&
                       context.read<SalesOrgBloc>().state.configs.enableRemarks)
                     RemarksMessage(
@@ -368,94 +369,6 @@ class CartMaterialItemTileDetails extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-}
-
-class _TenderContractDetails extends StatelessWidget {
-  final PriceAggregate cartItem;
-
-  const _TenderContractDetails({Key? key, required this.cartItem})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const Divider(
-          height: 20,
-        ),
-        ListTile(
-          contentPadding: EdgeInsets.zero,
-          title: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Contract:  ${cartItem.tenderContract.contractNumber.displayTenderContractNumber}',
-                style: Theme.of(context).textTheme.titleSmall?.apply(
-                      color: ZPColors.black,
-                    ),
-              ),
-              !cartItem.tenderContract.tenderOrderReason.isEmpty
-                  ? Text(
-                      '${cartItem.tenderContract.tenderOrderReason.displayTenderContractReason} : Tender with Contract',
-                      style: Theme.of(context).textTheme.subtitle2?.apply(
-                            color: ZPColors.lightGray,
-                          ),
-                    )
-                  : const SizedBox.shrink(),
-              Text(
-                'Tender Price: ${cartItem.tenderContract.tenderPrice.tenderPriceByPricingUnit(cartItem.tenderContract.pricingUnit)}',
-                style: Theme.of(context).textTheme.subtitle2?.apply(
-                      color: ZPColors.lightGray,
-                    ),
-              ),
-            ],
-          ),
-        ),
-        Row(
-          children: [
-            Expanded(
-              child: Text(
-                'Contact Reference',
-                style: Theme.of(context).textTheme.subtitle2?.apply(
-                      color: ZPColors.lightGray,
-                    ),
-              ),
-            ),
-            Expanded(
-              child: Text(
-                cartItem
-                    .tenderContract.contractReference.displayContractReference,
-                style: Theme.of(context).textTheme.subtitle2?.apply(
-                      color: ZPColors.black,
-                    ),
-              ),
-            ),
-          ],
-        ),
-        Row(
-          children: [
-            Expanded(
-              child: Text(
-                'Package Description',
-                style: Theme.of(context).textTheme.subtitle2?.apply(
-                      color: ZPColors.lightGray,
-                    ),
-              ),
-            ),
-            Expanded(
-              child: Text(
-                cartItem.tenderContract.tenderPackageDescription
-                    .displayTenderPackageDescription,
-                style: Theme.of(context).textTheme.subtitle2?.apply(
-                      color: ZPColors.black,
-                    ),
-              ),
-            ),
-          ],
-        ),
-      ],
     );
   }
 }

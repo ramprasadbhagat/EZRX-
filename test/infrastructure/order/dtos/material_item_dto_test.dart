@@ -1,6 +1,8 @@
 import 'package:ezrxmobile/domain/order/entities/material_item.dart';
+import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_item_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/tender_contract_dto.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -17,6 +19,7 @@ void main() {
       mapObject = {
         'batchNumber': '12345',
         'materialNumber': '12345',
+        'tenderContract': TenderContractDto.fromDomain(TenderContract.empty()).toJson(),
       };
     });
     test('Test toDomain', () {

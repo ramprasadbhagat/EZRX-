@@ -37,6 +37,7 @@ mixin _$MaterialItem {
   Zdp8OverrideValue get zdp8Override => throw _privateConstructorUsedError;
   List<BundleInfo> get bundleInformation => throw _privateConstructorUsedError;
   int get totalQuantity => throw _privateConstructorUsedError;
+  TenderContract get tenderContract => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MaterialItemCopyWith<MaterialItem> get copyWith =>
@@ -70,7 +71,10 @@ abstract class $MaterialItemCopyWith<$Res> {
       String remarks,
       Zdp8OverrideValue zdp8Override,
       List<BundleInfo> bundleInformation,
-      int totalQuantity});
+      int totalQuantity,
+      TenderContract tenderContract});
+
+  $TenderContractCopyWith<$Res> get tenderContract;
 }
 
 /// @nodoc
@@ -107,6 +111,7 @@ class _$MaterialItemCopyWithImpl<$Res, $Val extends MaterialItem>
     Object? zdp8Override = null,
     Object? bundleInformation = null,
     Object? totalQuantity = null,
+    Object? tenderContract = null,
   }) {
     return _then(_value.copyWith(
       bundleName: null == bundleName
@@ -193,7 +198,19 @@ class _$MaterialItemCopyWithImpl<$Res, $Val extends MaterialItem>
           ? _value.totalQuantity
           : totalQuantity // ignore: cast_nullable_to_non_nullable
               as int,
+      tenderContract: null == tenderContract
+          ? _value.tenderContract
+          : tenderContract // ignore: cast_nullable_to_non_nullable
+              as TenderContract,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $TenderContractCopyWith<$Res> get tenderContract {
+    return $TenderContractCopyWith<$Res>(_value.tenderContract, (value) {
+      return _then(_value.copyWith(tenderContract: value) as $Val);
+    });
   }
 }
 
@@ -226,7 +243,11 @@ abstract class _$$_MaterialItemCopyWith<$Res>
       String remarks,
       Zdp8OverrideValue zdp8Override,
       List<BundleInfo> bundleInformation,
-      int totalQuantity});
+      int totalQuantity,
+      TenderContract tenderContract});
+
+  @override
+  $TenderContractCopyWith<$Res> get tenderContract;
 }
 
 /// @nodoc
@@ -261,6 +282,7 @@ class __$$_MaterialItemCopyWithImpl<$Res>
     Object? zdp8Override = null,
     Object? bundleInformation = null,
     Object? totalQuantity = null,
+    Object? tenderContract = null,
   }) {
     return _then(_$_MaterialItem(
       bundleName: null == bundleName
@@ -347,6 +369,10 @@ class __$$_MaterialItemCopyWithImpl<$Res>
           ? _value.totalQuantity
           : totalQuantity // ignore: cast_nullable_to_non_nullable
               as int,
+      tenderContract: null == tenderContract
+          ? _value.tenderContract
+          : tenderContract // ignore: cast_nullable_to_non_nullable
+              as TenderContract,
     ));
   }
 }
@@ -375,7 +401,8 @@ class _$_MaterialItem extends _MaterialItem {
       required this.remarks,
       required this.zdp8Override,
       required final List<BundleInfo> bundleInformation,
-      required this.totalQuantity})
+      required this.totalQuantity,
+      required this.tenderContract})
       : _materials = materials,
         _bonuses = bonuses,
         _bundleInformation = bundleInformation,
@@ -438,10 +465,12 @@ class _$_MaterialItem extends _MaterialItem {
 
   @override
   final int totalQuantity;
+  @override
+  final TenderContract tenderContract;
 
   @override
   String toString() {
-    return 'MaterialItem(bundleName: $bundleName, bundleCode: $bundleCode, materials: $materials, qty: $qty, type: $type, comment: $comment, hidePrice: $hidePrice, batchNumber: $batchNumber, bonuses: $bonuses, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, materialNumber: $materialNumber, defaultMaterialDescription: $defaultMaterialDescription, overridenPrice: $overridenPrice, unitOfMeasurement: $unitOfMeasurement, itemRegistrationNumber: $itemRegistrationNumber, materialDescription: $materialDescription, remarks: $remarks, zdp8Override: $zdp8Override, bundleInformation: $bundleInformation, totalQuantity: $totalQuantity)';
+    return 'MaterialItem(bundleName: $bundleName, bundleCode: $bundleCode, materials: $materials, qty: $qty, type: $type, comment: $comment, hidePrice: $hidePrice, batchNumber: $batchNumber, bonuses: $bonuses, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, materialNumber: $materialNumber, defaultMaterialDescription: $defaultMaterialDescription, overridenPrice: $overridenPrice, unitOfMeasurement: $unitOfMeasurement, itemRegistrationNumber: $itemRegistrationNumber, materialDescription: $materialDescription, remarks: $remarks, zdp8Override: $zdp8Override, bundleInformation: $bundleInformation, totalQuantity: $totalQuantity, tenderContract: $tenderContract)';
   }
 
   @override
@@ -487,7 +516,9 @@ class _$_MaterialItem extends _MaterialItem {
             const DeepCollectionEquality()
                 .equals(other._bundleInformation, _bundleInformation) &&
             (identical(other.totalQuantity, totalQuantity) ||
-                other.totalQuantity == totalQuantity));
+                other.totalQuantity == totalQuantity) &&
+            (identical(other.tenderContract, tenderContract) ||
+                other.tenderContract == tenderContract));
   }
 
   @override
@@ -513,7 +544,8 @@ class _$_MaterialItem extends _MaterialItem {
         remarks,
         zdp8Override,
         const DeepCollectionEquality().hash(_bundleInformation),
-        totalQuantity
+        totalQuantity,
+        tenderContract
       ]);
 
   @JsonKey(ignore: true)
@@ -545,7 +577,8 @@ abstract class _MaterialItem extends MaterialItem {
       required final String remarks,
       required final Zdp8OverrideValue zdp8Override,
       required final List<BundleInfo> bundleInformation,
-      required final int totalQuantity}) = _$_MaterialItem;
+      required final int totalQuantity,
+      required final TenderContract tenderContract}) = _$_MaterialItem;
   const _MaterialItem._() : super._();
 
   @override
@@ -590,6 +623,8 @@ abstract class _MaterialItem extends MaterialItem {
   List<BundleInfo> get bundleInformation;
   @override
   int get totalQuantity;
+  @override
+  TenderContract get tenderContract;
   @override
   @JsonKey(ignore: true)
   _$$_MaterialItemCopyWith<_$_MaterialItem> get copyWith =>

@@ -24,6 +24,9 @@ _$_MaterialItemDto _$$_MaterialItemDtoFromJson(Map<String, dynamic> json) =>
       materialGroup2: json['materialGroup2'] as String? ?? '',
       materialGroup4: json['materialGroup4'] as String? ?? '',
       materialNumber: json['materialNumber'] as String? ?? '',
+      tenderContractDto: TenderContractDto.fromJson(
+          tenderContractOverride(json, 'tenderContract')
+              as Map<String, dynamic>),
       overridenPrice:
           (doubleFormatCheck(json, 'priceOverride') as num?)?.toDouble() ?? 0,
       unitOfMeasurement: json['unitOfMeasurement'] as String? ?? '',
@@ -55,6 +58,7 @@ Map<String, dynamic> _$$_MaterialItemDtoToJson(_$_MaterialItemDto instance) {
     'materialGroup2': instance.materialGroup2,
     'materialGroup4': instance.materialGroup4,
     'materialNumber': instance.materialNumber,
+    'tenderContract': instance.tenderContractDto.toJson(),
   };
 
   void writeNotNull(String key, dynamic value) {
