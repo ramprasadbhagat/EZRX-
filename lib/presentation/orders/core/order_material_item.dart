@@ -174,6 +174,28 @@ class OrderMaterialItem extends StatelessWidget {
               TenderContractDetailsTile(
                 tenderContract: materialQueryInfo.tenderContract,
               ),
+            const SizedBox(height: 10),
+            BlocBuilder<MaterialPriceDetailBloc, MaterialPriceDetailState>(
+              buildWhen: (previous, current) =>
+                  previous.isFetching != current.isFetching,
+              builder: (context, state) {
+                final itemInfo = state.materialDetails[materialQueryInfo];
+                final hasValidTenderContract =
+                    itemInfo?.info.hasValidTenderContract ?? true;
+
+                return !hasValidTenderContract &&
+                        materialQueryInfo.tenderContract !=
+                            TenderContract.empty() &&
+                        !state.isFetching
+                    ? Text(
+                        'This Tender Contract is no more available and will not be added to the cart',
+                        style: Theme.of(context).textTheme.subtitle2?.apply(
+                              color: ZPColors.red,
+                            ),
+                      )
+                    : const SizedBox.shrink();
+              },
+            ),
             const SizedBox(height: 5),
           ],
         ),
