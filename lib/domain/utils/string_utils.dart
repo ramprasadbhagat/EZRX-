@@ -9,6 +9,10 @@ class StringUtils {
       return '${price.toStringAsFixed(2)} ${salesOrgConfig.currency.code}';
     }
 
+    if (price.isNegative) {
+      return '- ${salesOrgConfig.currency.code} ${(price * -1).toStringAsFixed(2)}';
+    }
+
     return '${salesOrgConfig.currency.code} ${price.toStringAsFixed(2)}';
   }
 }

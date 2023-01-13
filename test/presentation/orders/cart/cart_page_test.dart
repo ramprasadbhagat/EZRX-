@@ -29,6 +29,7 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
+import 'package:ezrxmobile/domain/order/entities/bundle_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
@@ -131,6 +132,7 @@ void main() {
   late List<PriceAggregate> mockCartItemWithDataList;
   late List<PriceAggregate> mockCartItemWithDataList2;
   late List<PriceAggregate> mockCartItemBundles;
+  late List<PriceAggregate> mockCartItemDiscountBundles;
   late MaterialListBloc materialListBlocMock;
   late TenderContractBloc tenderContractBlocMock;
   late OrderDocumentTypeBloc orderDocumentTypeBlocMock;
@@ -232,6 +234,77 @@ void main() {
           ],
           quantity: 1,
           bundle: Bundle.empty(),
+          materialInfo: MaterialInfo.empty().copyWith(
+            materialNumber: MaterialNumber('000000000023168441'),
+            materialDescription: ' Triglyceride Mosys D',
+            principalData: PrincipalData.empty().copyWith(
+              principalName: 'å�°ç�£æ‹œè€³è‚¡ä»½æœ‰é™�å…¬å�¸',
+            ),
+            remarks: '',
+          ),
+          stockInfo: StockInfo.empty().copyWith(
+            inStock: MaterialInStock('Yes'),
+          ),
+        ),
+      ];
+
+      mockCartItemDiscountBundles = [
+        PriceAggregate.empty().copyWith(
+          addedBonusList: [
+            MaterialItemBonus.empty().copyWith(
+                materialInfo: MaterialInfo.empty().copyWith(
+              materialNumber: MaterialNumber('0000000000111111'),
+              materialDescription: ' Mosys D',
+              principalData: PrincipalData.empty().copyWith(
+                principalName: 'å�°ç�£æ‹œè€³è‚¡ä»½æœ‰é™�å…¬å�¸',
+              ),
+            )),
+          ],
+          quantity: 1,
+          price: Price.empty().copyWith(
+            finalPrice: MaterialPrice(
+              100.0,
+            ),
+          ),
+          bundle: Bundle(
+            materials: <MaterialInfo>[],
+            bundleInformation: [],
+            bundleCode: '123',
+            bundleName: BundleName('test'),
+          ),
+          materialInfo: MaterialInfo.empty().copyWith(
+            materialNumber: MaterialNumber('000000000023168451'),
+            materialDescription: ' Triglyceride Mosys D',
+            principalData: PrincipalData.empty().copyWith(
+              principalName: 'å�°ç�£æ‹œè€³è‚¡ä»½æœ‰é™�å…¬å�¸',
+            ),
+            remarks: '',
+          ),
+          stockInfo: StockInfo.empty().copyWith(
+            inStock: MaterialInStock('Yes'),
+          ),
+        ),
+        PriceAggregate.empty().copyWith(
+          addedBonusList: [
+            MaterialItemBonus.empty().copyWith(
+              materialInfo: MaterialInfo.empty().copyWith(
+                materialNumber: MaterialNumber('0000000000111111'),
+                materialDescription: ' Mosys D',
+                principalData: PrincipalData.empty().copyWith(
+                  principalName: 'å�°ç�£æ‹œè€³è‚¡ä»½æœ‰é™�å…¬å�¸',
+                ),
+              ),
+            )
+          ],
+          quantity: 1,
+          bundle: Bundle.empty().copyWith(
+            bundleCode: '124',
+            bundleInformation: [
+              BundleInfo.empty().copyWith(
+                rate: -10,
+              ),
+            ],
+          ),
           materialInfo: MaterialInfo.empty().copyWith(
             materialNumber: MaterialNumber('000000000023168441'),
             materialDescription: ' Triglyceride Mosys D',
@@ -1083,6 +1156,26 @@ void main() {
         await tester.pump();
         expect(find.byKey(const Key('updateCartBottomSheet')), findsOneWidget);
         expect(find.byKey(const Key('priceTierLable')), findsWidgets);
+      });
+
+      testWidgets('Test have Bundle Discount cart item', (tester) async {
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartItemList: mockCartItemDiscountBundles,
+            isFetching: false,
+          ),
+        );
+
+        await tester.pumpWidget(Material(child: getWidget()));
+        await tester.pump();
+
+        final cartBundleItemTile = find.byType(CartBundleItemTile);
+        expect(cartBundleItemTile, findsNWidgets(2));
+
+        expect(find.byKey(const Key('cartBundleItemTotal')), findsNWidgets(2));
+
+        expect(find.textContaining('Total Discount: '), findsOneWidget);
+        expect(find.textContaining('Total Amount: '), findsOneWidget);
       });
 
       testWidgets('Test have cart item list add delete a bonus item',

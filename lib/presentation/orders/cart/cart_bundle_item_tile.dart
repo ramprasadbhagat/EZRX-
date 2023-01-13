@@ -172,6 +172,17 @@ class CartBundleItemTile extends StatelessWidget {
                                         decoration: TextDecoration.underline,
                                       ),
                                 ),
+                                Text(
+                                  '${cartItem.subTotalPrice.isNegative ? 'Total Discount: '.tr() : 'Total Amount: '.tr()}${StringUtils.displayPrice(materialCommonInfo.salesOrgConfig, cartItem.subTotalPrice)}',
+                                  key: const Key('cartBundleItemTotal'),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyText1
+                                      ?.apply(
+                                        color: ZPColors.black,
+                                        decoration: TextDecoration.underline,
+                                      ),
+                                ),
                               ],
                             ),
                           ],
