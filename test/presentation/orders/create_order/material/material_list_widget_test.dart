@@ -112,9 +112,12 @@ void main() {
   final fakeMaterialPrice = MaterialPrice(10.0);
 
   final fakeOrderDocumentTypeList = [
-    OrderDocumentType.empty().copyWith(documentType: 'ZPOR'),
-    OrderDocumentType.empty().copyWith(documentType: 'ZPFB'),
-    OrderDocumentType.empty().copyWith(documentType: 'ZPFC'),
+    OrderDocumentType.empty()
+        .copyWith(documentType: DocumentType('ZPOR (ZPOR)')),
+    OrderDocumentType.empty()
+        .copyWith(documentType: DocumentType('ZPFB (ZPFB)')),
+    OrderDocumentType.empty()
+        .copyWith(documentType: DocumentType('ZPFC (ZPFC)')),
   ];
 
   final fakematerialInfo = MaterialInfo(
@@ -429,7 +432,8 @@ void main() {
       final orderTypeSelector = find.byKey(const Key('orderTypeSelector'));
       expect(orderTypeSelector, findsOneWidget);
 
-      final isZPOR = orderDocumentTypeBlocMock.state.selectedOrderType.isZPOR;
+      final isZPOR =
+          orderDocumentTypeBlocMock.state.selectedOrderType.documentType.isZPOR;
       final isReasonFieldEnable =
           orderDocumentTypeBlocMock.state.isOrderTypeSelected &&
               !isZPOR &&
@@ -485,8 +489,8 @@ void main() {
       final displayItemTextWidget = find.text(displayItemText);
       expect(displayItemTextWidget, findsNothing);
 
-      final documentType =
-          find.byKey(Key(fakeOrderDocumentTypeList.last.documentType));
+      final documentType = find
+          .byKey(Key(fakeOrderDocumentTypeList.last.documentType.getOrCrash()));
       expect(documentType, findsOneWidget);
       await tester.tap(documentType);
       await tester.pumpAndSettle(const Duration(seconds: 1));
@@ -539,8 +543,8 @@ void main() {
 
       await tester.pumpAndSettle(const Duration(seconds: 2));
 
-      final documentType2 =
-          find.byKey(Key(fakeOrderDocumentTypeList.last.documentType));
+      final documentType2 = find
+          .byKey(Key(fakeOrderDocumentTypeList.last.documentType.getOrCrash()));
       expect(documentType2, findsOneWidget);
       await tester.tap(documentType2);
       await tester.pumpAndSettle(const Duration(seconds: 1));
@@ -596,8 +600,8 @@ void main() {
 
       await tester.pumpAndSettle(const Duration(seconds: 2));
 
-      final documentType2 =
-          find.byKey(Key(fakeOrderDocumentTypeList.last.documentType));
+      final documentType2 = find
+          .byKey(Key(fakeOrderDocumentTypeList.last.documentType.getOrCrash()));
       expect(documentType2, findsOneWidget);
       await tester.tap(documentType2);
       await tester.pumpAndSettle(const Duration(seconds: 1));

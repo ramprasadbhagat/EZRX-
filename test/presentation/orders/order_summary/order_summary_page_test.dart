@@ -37,6 +37,7 @@ import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/additional_details_data.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/entities/payment_term.dart' as pt;
 import 'package:ezrxmobile/domain/order/entities/submit_order_response.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -207,8 +208,10 @@ void main() {
           .thenReturn(AdditionalDetailsState.initial());
       when(() => paymentTermBlocMock.state)
           .thenReturn(PaymentTermState.initial());
-      when(() => orderDocumentTypeBlocMock.state)
-          .thenReturn(OrderDocumentTypeState.initial());
+      when(() => orderDocumentTypeBlocMock.state).thenReturn(
+          OrderDocumentTypeState.initial().copyWith(
+              selectedOrderType: OrderDocumentType.empty()
+                  .copyWith(documentType: DocumentType('ZPOR Test (ZPOR)'))));
       when(() => materialPriceBlocMock.state)
           .thenReturn(MaterialPriceState.initial());
       when(() => customerCodeBlocMock.state)

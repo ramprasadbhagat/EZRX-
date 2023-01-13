@@ -165,7 +165,7 @@ class _OrderTypeSelectorField extends StatelessWidget {
           ? orderDocumentTypeState.selectedReason.displayReasonText
           : intialDropdownText
       : orderDocumentTypeState.isOrderTypeSelected
-          ? orderDocumentTypeState.selectedOrderType.documentType
+          ? orderDocumentTypeState.selectedOrderType.documentType.getOrCrash()
           : intialDropdownText;
 
   Future<void> showOrderDocumentTypedialog({
@@ -177,7 +177,8 @@ class _OrderTypeSelectorField extends StatelessWidget {
         return PlatformAlertDialog(
           title: Text(dropDownTitle),
           actions: itemList.map<CupertinoActionSheetAction>((i) {
-            final displayText = isReason ? i.displayReasonText : i.documentType;
+            final displayText =
+                isReason ? i.displayReasonText : i.documentType.getOrCrash();
 
             return CupertinoActionSheetAction(
               key: Key(displayText),

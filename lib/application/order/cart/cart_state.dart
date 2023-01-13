@@ -69,11 +69,11 @@ class CartState with _$CartState {
               : '';
 
   bool showDialog(OrderDocumentType orderType) {
-    return orderType.isZPFB
+    return orderType.documentType.isZPFB
         ? containNonSampleMaterial
-        : orderType.isZPFC
+        : orderType.documentType.isZPFC
             ? containNonFocMaterialOT
-            : orderType.isZPOR
+            : orderType.documentType.isZPOR
                 ? containNonRegularMaterial
                 : false;
   }

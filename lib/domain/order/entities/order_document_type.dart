@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'order_document_type.freezed.dart';
@@ -9,7 +10,7 @@ class OrderDocumentType with _$OrderDocumentType {
 
   const factory OrderDocumentType({
     required SalesOrg salesOrg,
-    required String documentType,
+    required DocumentType documentType,
     required String description,
     required String shippingCondition,
     required String orderReason,
@@ -17,19 +18,18 @@ class OrderDocumentType with _$OrderDocumentType {
 
   factory OrderDocumentType.empty() => OrderDocumentType(
         salesOrg: SalesOrg(''),
-        documentType: '',
+        documentType: DocumentType(''),
         description: '',
         shippingCondition: '',
         orderReason: '',
       );
 
+  factory OrderDocumentType.defaultSelected({required SalesOrg salesOrg}) =>
+      OrderDocumentType.empty().copyWith(
+        description: 'ZP Regular Order',
+        documentType: DocumentType('ZP Regular Order (ZPOR)'),
+        salesOrg: salesOrg,
+      );
+
   String get displayReasonText => '$orderReason: $description';
-
-  bool get isZPFB => documentType.contains('ZPFB');
-
-  bool get isZPFC => documentType.contains('ZPFC');
-
-  bool get isZPOR => documentType.contains('ZPOR');
-
-  bool get isSpecialOrderType => isZPFB || isZPFC;
 }

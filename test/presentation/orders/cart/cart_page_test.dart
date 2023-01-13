@@ -428,7 +428,7 @@ void main() {
       when(() => orderDocumentTypeBlocMock.state).thenReturn(
         OrderDocumentTypeState.initial().copyWith(
           selectedOrderType: OrderDocumentType.empty().copyWith(
-            documentType: 'ZPOR',
+            documentType: DocumentType('Test (ZPOR)'),
           ),
         ),
       );

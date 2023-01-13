@@ -21,6 +21,7 @@ import 'package:ezrxmobile/application/returns/usage_code/usage_code_bloc.dart';
 import 'package:ezrxmobile/application/returns/user_restriction/user_restriction_list_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -205,6 +206,15 @@ class SplashPage extends StatelessWidget {
                       isEDI: state.customerCodeInfo.status.isEDI,
                     ),
                   );
+            } else {
+              context.read<OrderDocumentTypeBloc>().add(
+                    OrderDocumentTypeEvent.selectedOrderType(
+                      isReasonSelected: false,
+                      selectedOrderType: OrderDocumentType.defaultSelected(
+                        salesOrg: context.read<SalesOrgBloc>().state.salesOrg,
+                      ),
+                    ),
+                  );
             }
           },
         ),
@@ -292,5 +302,3 @@ class SplashPage extends StatelessWidget {
     );
   }
 }
-
-

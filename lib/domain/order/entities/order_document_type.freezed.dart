@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$OrderDocumentType {
   SalesOrg get salesOrg => throw _privateConstructorUsedError;
-  String get documentType => throw _privateConstructorUsedError;
+  DocumentType get documentType => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   String get shippingCondition => throw _privateConstructorUsedError;
   String get orderReason => throw _privateConstructorUsedError;
@@ -35,7 +35,7 @@ abstract class $OrderDocumentTypeCopyWith<$Res> {
   @useResult
   $Res call(
       {SalesOrg salesOrg,
-      String documentType,
+      DocumentType documentType,
       String description,
       String shippingCondition,
       String orderReason});
@@ -68,7 +68,7 @@ class _$OrderDocumentTypeCopyWithImpl<$Res, $Val extends OrderDocumentType>
       documentType: null == documentType
           ? _value.documentType
           : documentType // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DocumentType,
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -95,7 +95,7 @@ abstract class _$$_OrderDocumentTypeCopyWith<$Res>
   @useResult
   $Res call(
       {SalesOrg salesOrg,
-      String documentType,
+      DocumentType documentType,
       String description,
       String shippingCondition,
       String orderReason});
@@ -126,7 +126,7 @@ class __$$_OrderDocumentTypeCopyWithImpl<$Res>
       documentType: null == documentType
           ? _value.documentType
           : documentType // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DocumentType,
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -157,7 +157,7 @@ class _$_OrderDocumentType extends _OrderDocumentType {
   @override
   final SalesOrg salesOrg;
   @override
-  final String documentType;
+  final DocumentType documentType;
   @override
   final String description;
   @override
@@ -202,7 +202,7 @@ class _$_OrderDocumentType extends _OrderDocumentType {
 abstract class _OrderDocumentType extends OrderDocumentType {
   const factory _OrderDocumentType(
       {required final SalesOrg salesOrg,
-      required final String documentType,
+      required final DocumentType documentType,
       required final String description,
       required final String shippingCondition,
       required final String orderReason}) = _$_OrderDocumentType;
@@ -211,7 +211,7 @@ abstract class _OrderDocumentType extends OrderDocumentType {
   @override
   SalesOrg get salesOrg;
   @override
-  String get documentType;
+  DocumentType get documentType;
   @override
   String get description;
   @override

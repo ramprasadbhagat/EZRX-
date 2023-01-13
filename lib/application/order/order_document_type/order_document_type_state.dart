@@ -34,14 +34,15 @@ class OrderDocumentTypeState with _$OrderDocumentTypeState {
     final uniqueSet = <String>{};
 
     return orderDocumentTypeList
-        .where((e) => uniqueSet.add(e.documentType))
+        .where((e) => uniqueSet.add(e.documentType.getOrCrash()))
         .toList();
   }
 
-  bool get isSpecialOrderType => selectedOrderType.isSpecialOrderType;
+  bool get isSpecialOrderType =>
+      selectedOrderType.documentType.isSpecialOrderType;
 
   bool get isReasonFieldEnable =>
       isOrderTypeSelected &&
-      selectedOrderType.isSpecialOrderType &&
+      selectedOrderType.documentType.isSpecialOrderType &&
       reasonList.isNotEmpty;
 }

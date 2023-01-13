@@ -55,8 +55,8 @@ void main() {
           principalList: ['123', '234', '345'],
           currency: Currency('SG'),
           salesOrg: SalesOrg('2601'));
-  final mockOrderDocumentType = OrderDocumentType.empty()
-      .copyWith(documentType: 'ZPFB', salesOrg: SalesOrg('2601'));
+  final mockOrderDocumentType = OrderDocumentType.empty().copyWith(
+      documentType: DocumentType('Sample (ZPFB)'), salesOrg: SalesOrg('2601'));
   final mockMaterialFilter = MaterialFilter.empty().copyWith(uniqueItemBrand: [
     'Ribena RTD Blueberry',
   ], uniqueTherapeuticClass: [
@@ -247,7 +247,7 @@ void main() {
               principalNameList: ['GSK Consumer Healthcare'],
               therapeuticClassList: ['Other multivitamins with minerals'],
               itemBrandList: ['Ribena RTD Blueberry'],
-              isSample: mockOrderDocumentType.documentType.contains('ZPFB'),
+              isSample: mockOrderDocumentType.documentType.isZPFB,
               isForFOC: false)).thenAnswer((invocation) async => <MaterialInfo>[
             MaterialInfo.empty().copyWith(
               materialNumber: MaterialNumber('123456'),
@@ -409,7 +409,7 @@ void main() {
                 'Sensodyne Repair N P',
                 'Sensodyne Freshmint',
               ],
-              isForFOC: mockOrderDocumentType.documentType.contains('ZPFC')))
+              isForFOC: mockOrderDocumentType.documentType.isZPFC))
           .thenThrow((invocation) async => MockException());
 
       final result = await materialListRepository.getMaterialList(
@@ -429,7 +429,7 @@ void main() {
             username: Username('user'),
             email: EmailAddress('user@gmail.com'),
             customerCode: CustomerCode('100007654')),
-        isForFoc: mockOrderDocumentType.documentType.contains('ZPFC'),
+        isForFoc: mockOrderDocumentType.documentType.isZPFC,
       );
       expect(
         result.isLeft(),
@@ -471,7 +471,7 @@ void main() {
             'Sensodyne Repair N P',
             'Sensodyne Freshmint',
           ],
-          isSample: mockOrderDocumentType.documentType.contains('ZPFB'),
+          isSample: mockOrderDocumentType.documentType.isZPFB,
           isForFOC: true)).thenThrow((invocation) async => MockException());
 
       final result = await materialListRepository.getMaterialList(

@@ -21,10 +21,13 @@ class OrderDocumentTypeBloc
     await event.map(
       initialized: (_) => emit(OrderDocumentTypeState.initial()),
       fetch: (e) async {
-        emit(state.copyWith(isSubmitting: true,));
+        emit(state.copyWith(
+          isSubmitting: true,
+        ));
         final failureOrSuccess =
             await orderDocumentTypeRepository.getOrderDocumentTypList(
-          salesOrganisation: e.salesOrganisation,);
+          salesOrganisation: e.salesOrganisation,
+        );
         failureOrSuccess.fold(
           (failure) => emit(state.copyWith(
             orderDocumentTypeListFailureOrSuccessOption:
@@ -33,8 +36,15 @@ class OrderDocumentTypeBloc
           )),
           (orderDocumentTypeList) {
             if (e.isEDI) {
-              orderDocumentTypeList.removeWhere((item) => item.documentType.contains('ZPOR'));
+              orderDocumentTypeList
+                  .removeWhere((item) => item.documentType.isZPOR);
             }
+            add(
+              OrderDocumentTypeEvent.selectedOrderType(
+                selectedOrderType: orderDocumentTypeList.first,
+                isReasonSelected: false,
+              ),
+            );
             emit(state.copyWith(
               orderDocumentTypeListFailureOrSuccessOption:
                   optionOf(failureOrSuccess),
@@ -45,12 +55,12 @@ class OrderDocumentTypeBloc
         );
       },
       selectedOrderType: (e) {
-        if(e.isReasonSelected){
+        if (e.isReasonSelected) {
           emit(state.copyWith(
             isReasonSelected: true,
             selectedReason: e.selectedOrderType,
           ));
-        }else{
+        } else {
           emit(state.copyWith(
             isOrderTypeSelected: true,
             selectedOrderType: e.selectedOrderType,

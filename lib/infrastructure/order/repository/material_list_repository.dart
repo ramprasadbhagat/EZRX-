@@ -75,8 +75,8 @@ class MaterialListRepository implements IMaterialListRepository {
                   selectedMaterialFilter.uniqueTherapeuticClass,
               principalNameList: selectedMaterialFilter.uniquePrincipalName,
               pickAndPack: pickAndPack,
-              isSample: orderDocumentType.isZPFB,
-              isForFOC: orderDocumentType.isZPFC,
+              isSample: orderDocumentType.documentType.isZPFB,
+              isForFOC: orderDocumentType.documentType.isZPFC,
             )
           : await materialListRemoteDataSource.getMaterialList(
               salesOrgCode: salesOrganisation.salesOrg.getOrCrash(),

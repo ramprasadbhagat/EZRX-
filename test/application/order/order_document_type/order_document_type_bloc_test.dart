@@ -4,6 +4,7 @@ import 'package:ezrxmobile/application/order/order_document_type/order_document_
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_document_type_local.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/order_document_type_repository.dart';
 import 'package:flutter/cupertino.dart';
@@ -17,13 +18,13 @@ void main() {
   final orderDocumentTypeRepository = OrderDocumentTypeRepositoryMock();
 
   final mockSalesOrganisation = SalesOrganisation.empty();
-  final selectedOrderDocumentType =
-      OrderDocumentType.empty().copyWith(documentType: 'ZPOR');
+  final selectedOrderDocumentType = OrderDocumentType.empty()
+      .copyWith(documentType: DocumentType('ZP Regular Order (ZPOR)'));
   late final List<OrderDocumentType> orderDocumentTypeListMock;
   late final List<OrderDocumentType> orderDocumentTypeListEDICustomerMock;
   final fakeOrderDocumentTypeList = [
     OrderDocumentType.empty().copyWith(
-      documentType: 'fake-document-type',
+      documentType: DocumentType('fake-document-type (ZPOR)'),
       orderReason: 'fake-reason',
     ),
   ];
@@ -35,7 +36,7 @@ void main() {
     orderDocumentTypeListEDICustomerMock =
         await OrderDocumentTypeLocalDataSource().getOrderDocumentTypList();
     orderDocumentTypeListEDICustomerMock
-        .removeWhere((element) => element.documentType.contains('ZPOR'));
+        .removeWhere((element) => element.documentType.isZPOR);
   });
 
   group('Order DocumentType List BLOC', () {
@@ -99,6 +100,14 @@ void main() {
                 optionOf(Right(orderDocumentTypeListMock)),
             isSubmitting: false,
             orderDocumentTypeList: orderDocumentTypeListMock),
+        OrderDocumentTypeState.initial().copyWith(
+          orderDocumentTypeListFailureOrSuccessOption:
+              optionOf(Right(orderDocumentTypeListMock)),
+          isSubmitting: false,
+          isOrderTypeSelected: true,
+          selectedOrderType: orderDocumentTypeListMock.first,
+          orderDocumentTypeList: orderDocumentTypeListMock,
+        ),
       ],
     );
 
@@ -124,6 +133,13 @@ void main() {
             orderDocumentTypeListFailureOrSuccessOption:
                 optionOf(Right(orderDocumentTypeListEDICustomerMock)),
             isSubmitting: false,
+            orderDocumentTypeList: orderDocumentTypeListEDICustomerMock),
+        OrderDocumentTypeState.initial().copyWith(
+            orderDocumentTypeListFailureOrSuccessOption:
+                optionOf(Right(orderDocumentTypeListEDICustomerMock)),
+            isSubmitting: false,
+            isOrderTypeSelected: true,
+            selectedOrderType: orderDocumentTypeListEDICustomerMock.first,
             orderDocumentTypeList: orderDocumentTypeListEDICustomerMock),
       ],
     );
@@ -183,7 +199,7 @@ void main() {
             .copyWith(
               orderDocumentTypeList: fakeOrderDocumentTypeList,
               selectedOrderType: fakeOrderDocumentTypeList.first.copyWith(
-                documentType: 'ZPFB',
+                documentType: DocumentType('Test Ordertype (ZPFB)'),
               ),
               isOrderTypeSelected: true,
             )

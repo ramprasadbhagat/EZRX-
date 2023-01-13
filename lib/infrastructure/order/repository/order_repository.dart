@@ -349,24 +349,11 @@ String getOrderType({
   required List<PriceAggregate> cartItems,
   required User user,
 }) {
-  if (cartItems
+  return cartItems
           .where((element) => element.materialInfo.materialGroup4.isFOC)
-          .length >
-      1) {
-    return 'ZPFC';
-  } else if (user.role.type.isSalesRep && orderType.isEmpty) {
-    return 'ZPOR';
-  } else if (user.role.type.isSalesRep && orderType.isNotEmpty) {
-    if (orderType.contains('ZPFB')) {
-      return 'ZPFB';
-    } else if (orderType.contains('ZPFC')) {
-      return 'ZPFC';
-    } else {
-      return 'ZPOR';
-    }
-  } else if (user.role.type.isClient) {
-    return 'ZPOR';
-  }
-
-  return 'ZPOR';
+          .isNotEmpty
+      ? 'ZPFC'
+      : orderType.isEmpty
+          ? 'ZPOR'
+          : orderType;
 }

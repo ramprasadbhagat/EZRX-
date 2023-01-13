@@ -609,3 +609,29 @@ class StatusType extends ValueObject<String> {
       getStatusLabelColor(value.getOrElse(() => ''));
   const StatusType._(this.value);
 }
+
+class DocumentType extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  bool get isZPFB => value.getOrElse(() => '').contains('ZPFB');
+
+  bool get isZPFC => value.getOrElse(() => '').contains('ZPFC');
+
+  bool get isZPOR => value.getOrElse(() => '').contains('ZPOR');
+
+  bool get isSpecialOrderType => isZPFB || isZPFC;
+
+  factory DocumentType(String input) =>
+      DocumentType._(validateStringNotEmpty(input));
+
+  String get documentTypeCode {
+    if (isZPFB) return 'ZPFB';
+    if (isZPFC) return 'ZPFC';
+    if (isZPOR) return 'ZPOR';
+
+    return '';
+  }
+
+  const DocumentType._(this.value);
+}

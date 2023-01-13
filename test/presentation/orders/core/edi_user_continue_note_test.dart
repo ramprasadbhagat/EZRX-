@@ -8,6 +8,7 @@ import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/orders/core/edi_user_continue_note.dart';
@@ -102,7 +103,7 @@ void main() {
           final expectedStates = [
             OrderDocumentTypeState.initial().copyWith(
               selectedOrderType: OrderDocumentType.empty().copyWith(
-                documentType: 'ZPFB',
+                documentType: DocumentType('ZPFB (ZPFB)'),
               ),
             ),
             OrderDocumentTypeState.initial(),

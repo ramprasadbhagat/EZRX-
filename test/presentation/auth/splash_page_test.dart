@@ -31,7 +31,9 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/entities/payment_customer_information.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/splash/splash_page.dart';
@@ -49,46 +51,62 @@ class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 
 class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
 
-class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState> implements SalesOrgBloc {}
+class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
+    implements SalesOrgBloc {}
 
-class CustomerCodeBlocMock extends MockBloc<CustomerCodeEvent, CustomerCodeState> implements CustomerCodeBloc {}
+class CustomerCodeBlocMock
+    extends MockBloc<CustomerCodeEvent, CustomerCodeState>
+    implements CustomerCodeBloc {}
 
-class ApproverBlocMock extends MockBloc<ApproverEvent, ApproverState> implements ApproverBloc {}
+class ApproverBlocMock extends MockBloc<ApproverEvent, ApproverState>
+    implements ApproverBloc {}
 
-class ShipToCodeBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState> implements ShipToCodeBloc {}
+class ShipToCodeBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState>
+    implements ShipToCodeBloc {}
 
-class SalesRepBlocMock extends MockBloc<SalesRepEvent, SalesRepState> implements SalesRepBloc {}
+class SalesRepBlocMock extends MockBloc<SalesRepEvent, SalesRepState>
+    implements SalesRepBloc {}
 
-class AupTcBlocMock extends MockBloc<AupTcEvent, AupTcState> implements AupTcBloc {}
+class AupTcBlocMock extends MockBloc<AupTcEvent, AupTcState>
+    implements AupTcBloc {}
 
 class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
 
-class PaymentCustomerInformationBlocMock
-    extends MockBloc<PaymentCustomerInformationEvent, PaymentCustomerInformationState>
+class PaymentCustomerInformationBlocMock extends MockBloc<
+        PaymentCustomerInformationEvent, PaymentCustomerInformationState>
     implements PaymentCustomerInformationBloc {}
 
-class PaymentTermBlocMock extends MockBloc<PaymentTermEvent, PaymentTermState> implements PaymentTermBloc {}
+class PaymentTermBlocMock extends MockBloc<PaymentTermEvent, PaymentTermState>
+    implements PaymentTermBloc {}
 
-class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState> implements EligibilityBloc {}
+class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
+    implements EligibilityBloc {}
 
-class UserRestrictionListBlocMock extends MockBloc<UserRestrictionListEvent, UserRestrictionListState>
+class UserRestrictionListBlocMock
+    extends MockBloc<UserRestrictionListEvent, UserRestrictionListState>
     implements UserRestrictionListBloc {}
 
-class MaterialBundleListBlocMock extends MockBloc<MaterialBundleListEvent, MaterialBundleListState>
+class MaterialBundleListBlocMock
+    extends MockBloc<MaterialBundleListEvent, MaterialBundleListState>
     implements MaterialBundleListBloc {}
 
-class CovidMaterialListBlocMock extends MockBloc<CovidMaterialListEvent, CovidMaterialListState>
+class CovidMaterialListBlocMock
+    extends MockBloc<CovidMaterialListEvent, CovidMaterialListState>
     implements CovidMaterialListBloc {}
 
-class OrderDocumentTypeBlocMock extends MockBloc<OrderDocumentTypeEvent, OrderDocumentTypeState>
+class OrderDocumentTypeBlocMock
+    extends MockBloc<OrderDocumentTypeEvent, OrderDocumentTypeState>
     implements OrderDocumentTypeBloc {}
 
-class UsageCodeBlocMock extends MockBloc<UsageCodeEvent, UsageCodeState> implements UsageCodeBloc {}
+class UsageCodeBlocMock extends MockBloc<UsageCodeEvent, UsageCodeState>
+    implements UsageCodeBloc {}
 
-class ReturnRequestTypeCodeBlocMock extends MockBloc<ReturnRequestTypeCodeEvent, ReturnRequestTypeCodeState>
+class ReturnRequestTypeCodeBlocMock
+    extends MockBloc<ReturnRequestTypeCodeEvent, ReturnRequestTypeCodeState>
     implements ReturnRequestTypeCodeBloc {}
 
-class PolicyConfigurationListBlocMock extends MockBloc<PolicyConfigurationEvent, PolicyConfigurationState>
+class PolicyConfigurationListBlocMock
+    extends MockBloc<PolicyConfigurationEvent, PolicyConfigurationState>
     implements PolicyConfigurationBloc {}
 
 void main() {
@@ -115,7 +133,8 @@ void main() {
   late MaterialBundleListBloc materialBundleListBlocMock;
   late CovidMaterialListBloc covidMaterialListBlocMock;
   late OrderDocumentTypeBloc orderDocumentTypeMock;
-  final fakeSalesOrganisation = SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601'));
+  final fakeSalesOrganisation =
+      SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601'));
 
   final fakeUser = User.empty().copyWith(
       id: 'fake-id',
@@ -161,21 +180,35 @@ void main() {
       returnRequestTypeCodeBlocMock = ReturnRequestTypeCodeBlocMock();
       policyConfigurationListBlocMock = PolicyConfigurationListBlocMock();
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
+      when(() => orderDocumentTypeMock.state).thenReturn(
+        OrderDocumentTypeState.initial().copyWith(
+          selectedOrderType: OrderDocumentType.empty()
+              .copyWith(documentType: DocumentType('ZPOR Test (ZPOR)')),
+        ),
+      );
       when(() => authBlocMock.state).thenReturn(const AuthState.initial());
       when(() => userBlocMock.state).thenReturn(UserState.initial());
-      when(() => customerCodeBlocMock.state).thenReturn(CustomerCodeState.initial());
-      when(() => shipToCodeBLocMock.state).thenReturn(ShipToCodeState.initial());
+      when(() => customerCodeBlocMock.state)
+          .thenReturn(CustomerCodeState.initial());
+      when(() => shipToCodeBLocMock.state)
+          .thenReturn(ShipToCodeState.initial());
       when(() => salesRepBlocMock.state).thenReturn(SalesRepState.initial());
       when(() => aupTcBlocMock.state).thenReturn(AupTcState.initial());
       when(() => cartBlocMock.state).thenReturn(CartState.initial());
-      when(() => paymentCustomerInformationBlocMock.state).thenReturn(PaymentCustomerInformationState.initial());
-      when(() => paymentTermBlocMock.state).thenReturn(PaymentTermState.initial());
+      when(() => paymentCustomerInformationBlocMock.state)
+          .thenReturn(PaymentCustomerInformationState.initial());
+      when(() => paymentTermBlocMock.state)
+          .thenReturn(PaymentTermState.initial());
       when(() => approverBlocMock.state).thenReturn(ApproverState.initial());
-      when(() => eligibilityBlocMock.state).thenReturn(EligibilityState.initial());
-      when(() => userRestrictionListBlocMock.state).thenReturn(UserRestrictionListState.initial());
+      when(() => eligibilityBlocMock.state)
+          .thenReturn(EligibilityState.initial());
+      when(() => userRestrictionListBlocMock.state)
+          .thenReturn(UserRestrictionListState.initial());
       when(() => usageCodeBlocMock.state).thenReturn(UsageCodeState.initial());
-      when(() => returnRequestTypeCodeBlocMock.state).thenReturn(ReturnRequestTypeCodeState.initial());
-      when(() => policyConfigurationListBlocMock.state).thenReturn(PolicyConfigurationState.initial());
+      when(() => returnRequestTypeCodeBlocMock.state)
+          .thenReturn(ReturnRequestTypeCodeState.initial());
+      when(() => policyConfigurationListBlocMock.state)
+          .thenReturn(PolicyConfigurationState.initial());
     });
 
     Future getWidget(tester) async {
@@ -183,7 +216,8 @@ void main() {
         WidgetUtils.getScopedWidget(
           autoRouterMock: autoRouterMock,
           providers: [
-            BlocProvider<CustomerCodeBloc>(create: (context) => customerCodeBlocMock),
+            BlocProvider<CustomerCodeBloc>(
+                create: (context) => customerCodeBlocMock),
             BlocProvider<AuthBloc>(create: (context) => authBlocMock),
             BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBlocMock),
             BlocProvider<UserBloc>(create: (context) => userBlocMock),
@@ -191,20 +225,28 @@ void main() {
             BlocProvider<UserRestrictionListBloc>(
               create: (context) => userRestrictionListBlocMock,
             ),
-            BlocProvider<ShipToCodeBloc>(create: (context) => shipToCodeBLocMock),
+            BlocProvider<ShipToCodeBloc>(
+                create: (context) => shipToCodeBLocMock),
             BlocProvider<SalesRepBloc>(create: (context) => salesRepBlocMock),
             BlocProvider<AupTcBloc>(create: (context) => aupTcBlocMock),
             BlocProvider<CartBloc>(create: (context) => cartBlocMock),
-            BlocProvider<PaymentCustomerInformationBloc>(create: (context) => paymentCustomerInformationBlocMock),
-            BlocProvider<PaymentTermBloc>(create: (context) => paymentTermBlocMock),
-            BlocProvider<MaterialBundleListBloc>(create: (context) => materialBundleListBlocMock),
-            BlocProvider<EligibilityBloc>(create: (context) => eligibilityBlocMock),
-            BlocProvider<CovidMaterialListBloc>(create: (context) => covidMaterialListBlocMock),
-            BlocProvider<OrderDocumentTypeBloc>(create: (context) => orderDocumentTypeMock),
+            BlocProvider<PaymentCustomerInformationBloc>(
+                create: (context) => paymentCustomerInformationBlocMock),
+            BlocProvider<PaymentTermBloc>(
+                create: (context) => paymentTermBlocMock),
+            BlocProvider<MaterialBundleListBloc>(
+                create: (context) => materialBundleListBlocMock),
+            BlocProvider<EligibilityBloc>(
+                create: (context) => eligibilityBlocMock),
+            BlocProvider<CovidMaterialListBloc>(
+                create: (context) => covidMaterialListBlocMock),
+            BlocProvider<OrderDocumentTypeBloc>(
+                create: (context) => orderDocumentTypeMock),
             BlocProvider<UsageCodeBloc>(create: (context) => usageCodeBlocMock),
-            BlocProvider<ReturnRequestTypeCodeBloc>(create: (context) => returnRequestTypeCodeBlocMock),
-            BlocProvider<PolicyConfigurationBloc>(create: (context) => policyConfigurationListBlocMock),
-
+            BlocProvider<ReturnRequestTypeCodeBloc>(
+                create: (context) => returnRequestTypeCodeBlocMock),
+            BlocProvider<PolicyConfigurationBloc>(
+                create: (context) => policyConfigurationListBlocMock),
           ],
           child: const SplashPage(),
         ),
@@ -220,15 +262,20 @@ void main() {
 
       await getWidget(tester);
       await tester.pump();
-      final splashLoadingIndicator = find.byKey(const Key('splashLoadingIndicator'), skipOffstage: false);
+      final splashLoadingIndicator =
+          find.byKey(const Key('splashLoadingIndicator'), skipOffstage: false);
       expect(splashLoadingIndicator, findsNWidgets(2));
     });
     testWidgets('When Auth State is un-authenticated', (tester) async {
-      final expectedAuthListStates = [const AuthState.loading(), const AuthState.unauthenticated()];
+      final expectedAuthListStates = [
+        const AuthState.loading(),
+        const AuthState.unauthenticated()
+      ];
       whenListen(authBlocMock, Stream.fromIterable(expectedAuthListStates));
       await getWidget(tester);
       await tester.pump();
-      final splashLoadingIndicator = find.byKey(const Key('splashLoadingIndicator'), skipOffstage: false);
+      final splashLoadingIndicator =
+          find.byKey(const Key('splashLoadingIndicator'), skipOffstage: false);
       expect(splashLoadingIndicator, findsNWidgets(1));
       verify(() => userBlocMock.add(const UserEvent.initialized())).called(1);
       expect(autoRouterMock.current.name, LoginPageRoute.name);
@@ -271,17 +318,19 @@ void main() {
       await getWidget(tester);
       await tester.pump();
 
-      verify(() =>
-              salesOrgBlocMock.add(SalesOrgEvent.loadSavedOrganisation(salesOrganisations: [fakeSalesOrganisation])))
+      verify(() => salesOrgBlocMock.add(SalesOrgEvent.loadSavedOrganisation(
+          salesOrganisations: [fakeSalesOrganisation]))).called(1);
+      verify(() => salesRepBlocMock.add(SalesRepEvent.fetch(user: fakeUser)))
           .called(1);
-      verify(() => salesRepBlocMock.add(SalesRepEvent.fetch(user: fakeUser))).called(1);
 
-      verify(() => aupTcBlocMock.add(AupTcEvent.show(fakeUser, salesOrg))).called(1);
+      verify(() => aupTcBlocMock.add(AupTcEvent.show(fakeUser, salesOrg)))
+          .called(1);
 
       verify(() => cartBlocMock.add(const CartEvent.initialized())).called(1);
     });
 
-    testWidgets('When PaymentCustomerInformation bloc is listening', (tester) async {
+    testWidgets('When PaymentCustomerInformation bloc is listening',
+        (tester) async {
       final expectedPaymentStates = [
         PaymentCustomerInformationState.initial(),
         PaymentCustomerInformationState.initial().copyWith(
@@ -292,7 +341,8 @@ void main() {
         )
       ];
 
-      whenListen(paymentCustomerInformationBlocMock, Stream.fromIterable(expectedPaymentStates));
+      whenListen(paymentCustomerInformationBlocMock,
+          Stream.fromIterable(expectedPaymentStates));
       await getWidget(tester);
       await tester.pump();
 
@@ -301,7 +351,8 @@ void main() {
             salesOrganisation: salesOrgBlocMock.state.salesOrganisation,
             salesOrganisationConfigs: salesOrgBlocMock.state.configs,
             salesRepresentativeInfo: salesRepBlocMock.state.salesRepInfo,
-            paymentCustomerInformation: PaymentCustomerInformation.empty().copyWith(
+            paymentCustomerInformation:
+                PaymentCustomerInformation.empty().copyWith(
               paymentTerm: 'paymentTerm',
               shipToInfoList: <ShipToInfo>[],
             ),
@@ -334,9 +385,12 @@ void main() {
             salesOrgConfigs: SalesOrganisationConfigs.empty(),
             user: fakeUser),
         EligibilityState.initial().copyWith(
-          salesOrganisation: SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601')),
-          customerCodeInfo: CustomerCodeInfo.empty().copyWith(customerGrp4: CustomerGrp4('VR')),
-          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(disableBundles: false, salesOrg: SalesOrg('2601')),
+          salesOrganisation:
+              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601')),
+          customerCodeInfo: CustomerCodeInfo.empty()
+              .copyWith(customerGrp4: CustomerGrp4('VR')),
+          salesOrgConfigs: SalesOrganisationConfigs.empty()
+              .copyWith(disableBundles: false, salesOrg: SalesOrg('2601')),
           user: fakeUser.copyWith(
             role: Role.empty().copyWith(
               type: RoleType('internal_sales_rep'),
@@ -345,7 +399,8 @@ void main() {
         ),
       ];
 
-      whenListen(eligibilityBlocMock, Stream.fromIterable(expectedEligibilityStates));
+      whenListen(
+          eligibilityBlocMock, Stream.fromIterable(expectedEligibilityStates));
       final expectedStates = [
         CartState.initial().copyWith(apiFailureOrSuccessOption: none()),
         CartState.initial().copyWith(
@@ -367,7 +422,9 @@ void main() {
       await getWidget(tester);
       await tester.pump();
 
-      verify(() => aupTcBlocMock.add(AupTcEvent.show(fakeUser, salesOrgBlocMock.state.salesOrg))).called(1);
+      verify(() => aupTcBlocMock
+              .add(AupTcEvent.show(fakeUser, salesOrgBlocMock.state.salesOrg)))
+          .called(1);
 
       verify(() => cartBlocMock.add(const CartEvent.initialized())).called(1);
       expect(find.byType(UpgradeAlert), findsOneWidget);
@@ -381,9 +438,12 @@ void main() {
             salesOrgConfigs: SalesOrganisationConfigs.empty(),
             user: fakeUser),
         EligibilityState.initial().copyWith(
-          salesOrganisation: SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601')),
-          customerCodeInfo: CustomerCodeInfo.empty().copyWith(customerGrp4: CustomerGrp4('VR')),
-          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(disableBundles: false, salesOrg: SalesOrg('2601')),
+          salesOrganisation:
+              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601')),
+          customerCodeInfo: CustomerCodeInfo.empty()
+              .copyWith(customerGrp4: CustomerGrp4('VR')),
+          salesOrgConfigs: SalesOrganisationConfigs.empty()
+              .copyWith(disableBundles: false, salesOrg: SalesOrg('2601')),
           user: fakeUser.copyWith(
             role: Role.empty().copyWith(
               type: RoleType('root_admin'),
@@ -392,7 +452,8 @@ void main() {
         ),
       ];
 
-      whenListen(eligibilityBlocMock, Stream.fromIterable(expectedEligibilityStates));
+      whenListen(
+          eligibilityBlocMock, Stream.fromIterable(expectedEligibilityStates));
 
       final expectedUserListStates = [
         UserState.initial(),
@@ -405,13 +466,15 @@ void main() {
       await getWidget(tester);
       await tester.pump();
 
-      verify(() => userRestrictionListBlocMock.add(UserRestrictionListEvent.fetch(
-            salesOrg: eligibilityBlocMock.state.salesOrganisation.salesOrg,
-          ))).called(2);
+      verify(
+          () => userRestrictionListBlocMock.add(UserRestrictionListEvent.fetch(
+                salesOrg: eligibilityBlocMock.state.salesOrganisation.salesOrg,
+              ))).called(2);
 
-      verify(() => policyConfigurationListBlocMock.add(PolicyConfigurationEvent.fetch(
+      verify(() =>
+          policyConfigurationListBlocMock.add(PolicyConfigurationEvent.fetch(
             salesOrganisation: salesOrgBlocMock.state.salesOrganisation,
-          ))).called(2);
+          ))).called(3);
       expect(find.byType(UpgradeAlert), findsOneWidget);
     });
 

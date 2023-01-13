@@ -176,16 +176,16 @@ class _SubmitContinueButton extends StatelessWidget {
     required BuildContext context,
   }) {
     final orderSummaryBloc = context.read<OrderSummaryBloc>();
-    if(context.read<AdditionalDetailsBloc>().state.isValidated){
+    if (context.read<AdditionalDetailsBloc>().state.isValidated) {
       orderSummaryState.step == orderSummaryState.additionalDetailsStep
-              ? orderSummaryBloc.add(const OrderSummaryEvent.stepContinue())
-              : _submitOrder(context);
-    }else{
+          ? orderSummaryBloc.add(const OrderSummaryEvent.stepContinue())
+          : _submitOrder(context);
+    } else {
       context.read<AdditionalDetailsBloc>().add(
-          AdditionalDetailsEvent.validateForm(
-            config: context.read<SalesOrgBloc>().state.configs,
-          ),
-        );
+            AdditionalDetailsEvent.validateForm(
+              config: context.read<SalesOrgBloc>().state.configs,
+            ),
+          );
     }
   }
 
@@ -215,7 +215,12 @@ class _SubmitContinueButton extends StatelessWidget {
           user: context.read<UserBloc>().state.user,
           cartItems: context.read<CartBloc>().state.cartItemList,
           grandTotal: context.read<CartBloc>().state.grandTotal,
-          orderType: '',
+          orderType: context
+              .read<OrderDocumentTypeBloc>()
+              .state
+              .selectedOrderType
+              .documentType
+              .documentTypeCode,
           data:
               context.read<AdditionalDetailsBloc>().state.additionalDetailsData,
         ));
@@ -654,7 +659,7 @@ class _MarketMessage extends StatelessWidget {
     final orderType =
         context.read<OrderDocumentTypeBloc>().state.selectedOrderType;
 
-    return !(orderType.isZPFB || orderType.isZPFC)
+    return !orderType.documentType.isSpecialOrderType
         ? RichText(
             text: TextSpan(
               children: <TextSpan>[
