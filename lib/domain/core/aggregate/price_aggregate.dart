@@ -4,6 +4,7 @@ import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
 import 'package:ezrxmobile/domain/order/entities/price_bonus.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
+import 'package:ezrxmobile/domain/utils/num_utils.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
@@ -110,25 +111,31 @@ class PriceAggregate with _$PriceAggregate {
   }
 
   double get listPrice {
-    return vatCalculation(price.lastPrice.getOrCrash());
+    return NumUtils.roundToPlaces(vatCalculation(price.lastPrice.getOrCrash()));
   }
 
   double get finalPrice {
+    var finalPrice = 0.0;
+
     if (price.isDiscountEligible) {
-      return tenderContract.tenderPrice.tenderPrice != 0
+      finalPrice = tenderContract.tenderPrice.tenderPrice != 0
           ? tenderContract.tenderPrice
               .tenderPriceByPricingUnit(tenderContract.pricingUnit)
           : discountedListPrice;
     }
 
-    return tenderContract.tenderPrice.tenderPrice != 0
-        ? tenderContract.tenderPrice
-            .tenderPriceByPricingUnit(tenderContract.pricingUnit)
-        : price.finalPrice.getOrDefaultValue(0);
+    if (!price.isDiscountEligible){
+      finalPrice = tenderContract.tenderPrice.tenderPrice != 0
+          ? tenderContract.tenderPrice
+          .tenderPriceByPricingUnit(tenderContract.pricingUnit)
+          : price.finalPrice.getOrDefaultValue(0);
+    }
+
+    return NumUtils.roundToPlaces(finalPrice);
   }
 
   double get unitPrice {
-    return vatCalculation(finalPrice);
+    return NumUtils.roundToPlaces(vatCalculation(finalPrice));
   }
 
   double get unitPriceForTotal {
