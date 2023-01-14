@@ -334,7 +334,8 @@ void main() {
             TenderContractState.initial(),
             TenderContractState.initial().copyWith(
               isFetching: true,
-              selectedTenderContract: TenderContract.empty(),),
+              selectedTenderContract: TenderContract.empty(),
+            ),
           ]));
 
       await tester.pumpWidget(
@@ -452,7 +453,43 @@ void main() {
 
       expect(billToAddress, findsOneWidget);
     });
+    testWidgets(
+        'Bill to address not visiable test when billToCustomerCode is empty',
+        (tester) async {
+      when(() => mockOrderHistoryDetailsBloc.state).thenReturn(
+        OrderHistoryDetailsState.initial().copyWith(
+          orderHistoryDetails: orderHistoryDetails,
+          failureOrSuccessOption: none(),
+          isLoading: false,
+          showErrorMessage: false,
+        ),
+      );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+            billToInfos: <BillToInfo>[
+              BillToInfo.empty().copyWith(
+                billToCustomerCode: '',
+                billToAddress: BillToAddress.empty().copyWith(
+                  city1: 'city1',
+                  city2: 'city2',
+                  street: 'street',
+                ),
+              ),
+            ],
+            customerCodeSoldTo: '987654321',
+          ),
+          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+            enableBillTo: true,
+          ),
+        ),
+      );
 
+      await tester.pumpWidget(getWUT());
+      final billToAddress = find.byKey(const Key('billToAddress'));
+
+      expect(billToAddress, findsNothing);
+    });
     testWidgets('PaymentTerm text visiable test ', (tester) async {
       when(() => mockOrderHistoryDetailsBloc.state).thenReturn(
         OrderHistoryDetailsState.initial().copyWith(
@@ -555,8 +592,7 @@ void main() {
                 .copyWith(showPOAttachment: true)),
       );
       when(() => downloadAttachmentBlocMock.state).thenReturn(
-        PoAttachmentState.initial()
-            .copyWith(fileFetchMode: FileFetchMode.view),
+        PoAttachmentState.initial().copyWith(fileFetchMode: FileFetchMode.view),
       );
       await tester.pumpWidget(getWUT());
       await tester.pump();
@@ -642,8 +678,7 @@ void main() {
       when(() => mockOrderHistoryDetailsBloc.state).thenReturn(
         OrderHistoryDetailsState.initial().copyWith(
           orderHistoryDetails: orderHistoryDetails.copyWith(
-            orderHistoryDetailsPoDocuments:
-                List<PoDocuments>.generate(
+            orderHistoryDetailsPoDocuments: List<PoDocuments>.generate(
               5,
               (index) => mockPoDocuments.first,
             ),
@@ -693,8 +728,7 @@ void main() {
       when(() => mockOrderHistoryDetailsBloc.state).thenReturn(
         OrderHistoryDetailsState.initial().copyWith(
           orderHistoryDetails: orderHistoryDetails.copyWith(
-            orderHistoryDetailsPoDocuments:
-                List<PoDocuments>.generate(
+            orderHistoryDetailsPoDocuments: List<PoDocuments>.generate(
               5,
               (index) => mockPoDocuments.first,
             ),
@@ -744,8 +778,7 @@ void main() {
       when(() => mockOrderHistoryDetailsBloc.state).thenReturn(
         OrderHistoryDetailsState.initial().copyWith(
           orderHistoryDetails: orderHistoryDetails.copyWith(
-            orderHistoryDetailsPoDocuments:
-                List<PoDocuments>.generate(
+            orderHistoryDetailsPoDocuments: List<PoDocuments>.generate(
               5,
               (index) => mockPoDocuments.first,
             ),

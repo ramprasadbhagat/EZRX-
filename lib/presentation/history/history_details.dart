@@ -1,4 +1,3 @@
-
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
@@ -175,13 +174,7 @@ class HistoryDetails extends StatelessWidget {
                       const _ShipToAddress(
                         key: Key('shipToAddressWidget'),
                       ),
-                      if (context
-                              .read<EligibilityBloc>()
-                              .state
-                              .isBillToEnable &&
-                          customerCodeInfo.billToInfos.isNotEmpty &&
-                          customerCodeInfo.customerCodeSoldTo !=
-                              billToInfo.billToCustomerCode)
+                      if (context.read<EligibilityBloc>().state.isBillToInfo)
                         _BillToAddress(
                           billToInfo: billToInfo,
                         ),
@@ -655,7 +648,7 @@ class _ReOrder extends StatelessWidget {
       ),
       tenderContract: tenderContract,
     );
-    
+
     return priceAggregate;
   }
 
