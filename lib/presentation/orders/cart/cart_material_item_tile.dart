@@ -174,13 +174,15 @@ class CartMaterialItemTileDetails extends StatelessWidget {
     final enablePriceOverRide = context.read<EligibilityBloc>().state;
     final disablePriceOverRide = context.read<OrderEligibilityBloc>().state;
 
-    return enablePriceOverRide.isPriceOverrideEnable ||
-        !disablePriceOverRide.isDisablePriceOverRide;
+    if (disablePriceOverRide.isDisablePriceOverRide) return false;
+
+    return enablePriceOverRide.isPriceOverrideEnable;
   }
 
   @override
   Widget build(BuildContext context) {
     final isPriceOverride = cartItem.price.isPriceOverride;
+
     final enableListPrice =
         context.read<SalesOrgBloc>().state.configs.enableListPrice;
     final enableVat = context.read<SalesOrgBloc>().state.configs.enableVat;

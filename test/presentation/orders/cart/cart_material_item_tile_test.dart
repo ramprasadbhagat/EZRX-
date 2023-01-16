@@ -3,16 +3,21 @@ import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
+import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
@@ -43,8 +48,14 @@ class TenderContractBlocMock
 class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
     implements SalesOrgBloc {}
 
+class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
+
 class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
     implements EligibilityBloc {}
+
+class OrderDocumentTypeBlocMock
+    extends MockBloc<OrderDocumentTypeEvent, OrderDocumentTypeState>
+    implements OrderDocumentTypeBloc {}
 
 class CustomerCodeBlocMock
     extends MockBloc<CustomerCodeEvent, CustomerCodeState>
@@ -74,6 +85,8 @@ class PriceOverrideMockBloc
 
 void main() {
   late TenderContractBloc tenderContractBlocMock;
+  late UserBloc userBlockMock;
+  late OrderDocumentTypeBloc orderDocumentTypeBlocMock;
   late SalesOrgBloc salesOrgBloc;
   late EligibilityBloc eligibilityBloc;
   late CustomerCodeBloc customerCodeBloc;
@@ -87,7 +100,8 @@ void main() {
   late AddToCartBloc addToCartBlocMock;
   late PriceOverrideBloc priceOverrideMockBloc;
   late AppRouter autoRouter;
-
+  final mockUser = User.empty();
+  final mockRole = Role.empty();
 
   setUpAll(() {
     countlyService = CountlyServiceMock();
@@ -95,12 +109,14 @@ void main() {
     locator.registerFactory(() => AppRouter());
     autoRouter = locator<AppRouter>();
   });
-  
+
   setUp(
     () {
       WidgetsFlutterBinding.ensureInitialized();
       tenderContractBlocMock = TenderContractBlocMock();
+      userBlockMock = UserBlocMock();
       salesOrgBloc = SalesOrgBlocMock();
+      orderDocumentTypeBlocMock = OrderDocumentTypeBlocMock();
       eligibilityBloc = EligibilityBlocMock();
       customerCodeBloc = CustomerCodeBlocMock();
       shipToCodeBloc = ShipToBlocMock();
@@ -116,6 +132,8 @@ void main() {
       };
       addToCartBlocMock = AddToCartBlocMock();
       when(() => salesOrgBloc.state).thenReturn(SalesOrgState.initial());
+      when(() => orderDocumentTypeBlocMock.state)
+          .thenReturn(OrderDocumentTypeState.initial());
       when(() => eligibilityBloc.state).thenReturn(EligibilityState.initial());
       when(() => customerCodeBloc.state).thenReturn(
         CustomerCodeState.initial(),
@@ -159,6 +177,9 @@ void main() {
         providers: [
           BlocProvider<TenderContractBloc>(
               create: (context) => tenderContractBlocMock),
+          BlocProvider<OrderDocumentTypeBloc>(
+              create: (context) => orderDocumentTypeBlocMock),
+          BlocProvider<UserBloc>(create: (context) => userBlockMock),
           BlocProvider<EligibilityBloc>(create: (context) => eligibilityBloc),
           BlocProvider<ShipToCodeBloc>(create: (context) => shipToCodeBloc),
           BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBloc),
@@ -398,16 +419,14 @@ void main() {
         priceAggregates = priceAggregates
             .map(
               (e) => e.copyWith(
-                price: e.price.copyWith(
-                  tiers: [
-                    PriceTier.empty().copyWith(
-                      items: [
-                        PriceTierItem.empty().copyWith(rate: 1),
-                        PriceTierItem.empty().copyWith(rate: 2)
-                      ],
-                    )
-                  ],
-                  bonuses: [
+                price: e.price.copyWith(tiers: [
+                  PriceTier.empty().copyWith(
+                    items: [
+                      PriceTierItem.empty().copyWith(rate: 1),
+                      PriceTierItem.empty().copyWith(rate: 2)
+                    ],
+                  )
+                ], bonuses: [
                   PriceBonus.empty().copyWith(
                     items: [
                       PriceBonusItem.empty().copyWith(bonusMaterials: [
@@ -417,8 +436,7 @@ void main() {
                       ])
                     ],
                   )
-                ]
-                ),
+                ]),
               ),
             )
             .toList();
@@ -468,18 +486,41 @@ void main() {
     );
 
     testWidgets(
-      'Cart item Price override test',
+      '=> PriceOverRide(True) Cart item Price override test\n salesRep:True, \npriceOverride:True, \ndisableOrderType: True, \nhasPriceOverride: True, \nOrderType: ZPFC ',
       (tester) async {
+        when(() => userBlockMock.state).thenReturn(
+          UserState.initial().copyWith(
+            user: mockUser.copyWith(
+                role: mockRole.copyWith(
+                  type: RoleType('internal_sales_rep'),
+                ),
+                hasPriceOverride: true),
+          ),
+        );
+
+        when(() => salesOrgBloc.state).thenReturn(SalesOrgState.initial()
+            .copyWith(
+                configs: SalesOrganisationConfigs.empty()
+                    .copyWith(priceOverride: true, disableOrderType: true)));
+
+        when(() => eligibilityBloc.state).thenReturn(EligibilityState.initial()
+            .copyWith(
+                salesOrgConfigs: salesOrgBloc.state.configs,
+                user: userBlockMock.state.user));
+        when(() => orderEligibilityBlocMock.state).thenReturn(
+            OrderEligibilityState.initial().copyWith(
+                configs: salesOrgBloc.state.configs,
+                cartItems: priceAggregates,
+                user: userBlockMock.state.user,
+                orderType: 'ZPFC'));
         priceAggregates = priceAggregates
             .map(
               (e) => e.copyWith(
-                salesOrgConfig: SalesOrganisationConfigs.empty().copyWith(
-                  priceOverride: true,
-                ),
+                salesOrgConfig: SalesOrganisationConfigs.empty()
+                    .copyWith(priceOverride: true),
               ),
             )
             .toList();
-
         await tester.pumpWidget(getWidget());
         final priceOverride = find.byKey(const ValueKey('priceOverride'));
         expect(priceOverride, findsOneWidget);
@@ -497,16 +538,484 @@ void main() {
           () => priceOverrideMockBloc.add(
             PriceOverrideEvent.fetch(
               customerCodeInfo: CustomerCodeInfo.empty(),
-              item: priceAggregates.first.copyWith(
-                salesOrgConfig: SalesOrganisationConfigs.empty().copyWith(
-                  priceOverride: true,
-                ),
-              ),
+              item: priceAggregates.first,
               newPrice: 0,
               salesOrganisation: SalesOrganisation.empty(),
             ),
           ),
         ).called(1);
+      },
+    );
+
+    testWidgets(
+      '=> PriceOverRide(True) Cart item Price override test\n salesRep:False, \npriceOverride:True, \ndisableOrderType: False, \nhasPriceOverride: True, \nOrderType: InEligible ',
+      (tester) async {
+        when(() => userBlockMock.state).thenReturn(
+          UserState.initial().copyWith(
+            user: mockUser.copyWith(
+                role: mockRole.copyWith(
+                  type: RoleType('fake_role'),
+                ),
+                hasPriceOverride: true),
+          ),
+        );
+
+        when(() => salesOrgBloc.state).thenReturn(SalesOrgState.initial()
+            .copyWith(
+                configs: SalesOrganisationConfigs.empty()
+                    .copyWith(priceOverride: true, disableOrderType: false)));
+
+        when(() => eligibilityBloc.state).thenReturn(EligibilityState.initial()
+            .copyWith(
+                salesOrgConfigs: salesOrgBloc.state.configs,
+                user: userBlockMock.state.user));
+        when(() => orderEligibilityBlocMock.state).thenReturn(
+            OrderEligibilityState.initial().copyWith(
+                configs: salesOrgBloc.state.configs,
+                cartItems: priceAggregates,
+                user: userBlockMock.state.user,
+                orderType: 'fake_order_type'));
+        priceAggregates = priceAggregates
+            .map(
+              (e) => e.copyWith(
+                salesOrgConfig: SalesOrganisationConfigs.empty()
+                    .copyWith(priceOverride: true),
+              ),
+            )
+            .toList();
+        await tester.pumpWidget(getWidget());
+        final priceOverride = find.byKey(const ValueKey('priceOverride'));
+        expect(priceOverride, findsOneWidget);
+        await tester.tap(priceOverride);
+        await tester.pump();
+        final priceSheet = find.byKey(const ValueKey('priceSheet'));
+        expect(priceSheet, findsOneWidget);
+        final priceOverrideSubmitButton =
+            find.byKey(const ValueKey('priceOverrideSubmitButton'));
+        expect(priceOverrideSubmitButton, findsOneWidget);
+        await tester.ensureVisible(priceOverrideSubmitButton.first);
+        await tester.pumpAndSettle();
+        await tester.tap(priceOverrideSubmitButton.first);
+        verify(
+          () => priceOverrideMockBloc.add(
+            PriceOverrideEvent.fetch(
+              customerCodeInfo: CustomerCodeInfo.empty(),
+              item: priceAggregates.first,
+              newPrice: 0,
+              salesOrganisation: SalesOrganisation.empty(),
+            ),
+          ),
+        ).called(1);
+      },
+    );
+    testWidgets(
+      '=> PriceOverRide(True) Cart item Price override test\n salesRep:True, \npriceOverride:True, \ndisableOrderType: True, \nhasPriceOverride: True, \nOrderType: InEligible ',
+      (tester) async {
+        when(() => userBlockMock.state).thenReturn(
+          UserState.initial().copyWith(
+            user: mockUser.copyWith(
+                role: mockRole.copyWith(
+                  type: RoleType('internal_sales_rep'),
+                ),
+                hasPriceOverride: true),
+          ),
+        );
+
+        when(() => salesOrgBloc.state).thenReturn(SalesOrgState.initial()
+            .copyWith(
+                configs: SalesOrganisationConfigs.empty()
+                    .copyWith(priceOverride: true, disableOrderType: true)));
+
+        when(() => eligibilityBloc.state).thenReturn(EligibilityState.initial()
+            .copyWith(
+                salesOrgConfigs: salesOrgBloc.state.configs,
+                user: userBlockMock.state.user));
+        when(() => orderEligibilityBlocMock.state).thenReturn(
+            OrderEligibilityState.initial().copyWith(
+                configs: salesOrgBloc.state.configs,
+                cartItems: priceAggregates,
+                user: userBlockMock.state.user,
+                orderType: 'fake_order_type'));
+        priceAggregates = priceAggregates
+            .map(
+              (e) => e.copyWith(
+                salesOrgConfig: SalesOrganisationConfigs.empty()
+                    .copyWith(priceOverride: true),
+              ),
+            )
+            .toList();
+        await tester.pumpWidget(getWidget());
+        final priceOverride = find.byKey(const ValueKey('priceOverride'));
+        expect(priceOverride, findsOneWidget);
+        await tester.tap(priceOverride);
+        await tester.pump();
+        final priceSheet = find.byKey(const ValueKey('priceSheet'));
+        expect(priceSheet, findsOneWidget);
+        final priceOverrideSubmitButton =
+            find.byKey(const ValueKey('priceOverrideSubmitButton'));
+        expect(priceOverrideSubmitButton, findsOneWidget);
+        await tester.ensureVisible(priceOverrideSubmitButton.first);
+        await tester.pumpAndSettle();
+        await tester.tap(priceOverrideSubmitButton.first);
+        verify(
+          () => priceOverrideMockBloc.add(
+            PriceOverrideEvent.fetch(
+              customerCodeInfo: CustomerCodeInfo.empty(),
+              item: priceAggregates.first,
+              newPrice: 0,
+              salesOrganisation: SalesOrganisation.empty(),
+            ),
+          ),
+        ).called(1);
+      },
+    );
+    testWidgets(
+      '=> PriceOverRide(True) Cart item Price override test\n salesRep:True, \npriceOverride:False, \ndisableOrderType: True, \nhasPriceOverride: True, \nOrderType: ZPFC ',
+      (tester) async {
+        when(() => userBlockMock.state).thenReturn(
+          UserState.initial().copyWith(
+            user: mockUser.copyWith(
+                role: mockRole.copyWith(
+                  type: RoleType('internal_sales_rep'),
+                ),
+                hasPriceOverride: true),
+          ),
+        );
+
+        when(() => salesOrgBloc.state).thenReturn(SalesOrgState.initial()
+            .copyWith(
+                configs: SalesOrganisationConfigs.empty()
+                    .copyWith(priceOverride: false, disableOrderType: true)));
+
+        when(() => eligibilityBloc.state).thenReturn(EligibilityState.initial()
+            .copyWith(
+                salesOrgConfigs: salesOrgBloc.state.configs,
+                user: userBlockMock.state.user));
+        when(() => orderEligibilityBlocMock.state).thenReturn(
+            OrderEligibilityState.initial().copyWith(
+                configs: salesOrgBloc.state.configs,
+                cartItems: priceAggregates,
+                user: userBlockMock.state.user,
+                orderType: 'ZPFC'));
+        priceAggregates = priceAggregates
+            .map(
+              (e) => e.copyWith(
+                salesOrgConfig: SalesOrganisationConfigs.empty()
+                    .copyWith(priceOverride: true),
+              ),
+            )
+            .toList();
+        await tester.pumpWidget(getWidget());
+        final priceOverride = find.byKey(const ValueKey('priceOverride'));
+        expect(priceOverride, findsOneWidget);
+        await tester.tap(priceOverride);
+        await tester.pump();
+        final priceSheet = find.byKey(const ValueKey('priceSheet'));
+        expect(priceSheet, findsOneWidget);
+        final priceOverrideSubmitButton =
+            find.byKey(const ValueKey('priceOverrideSubmitButton'));
+        expect(priceOverrideSubmitButton, findsOneWidget);
+        await tester.ensureVisible(priceOverrideSubmitButton.first);
+        await tester.pumpAndSettle();
+        await tester.tap(priceOverrideSubmitButton.first);
+        verify(
+          () => priceOverrideMockBloc.add(
+            PriceOverrideEvent.fetch(
+              customerCodeInfo: CustomerCodeInfo.empty(),
+              item: priceAggregates.first,
+              newPrice: 0,
+              salesOrganisation: SalesOrganisation.empty(),
+            ),
+          ),
+        ).called(1);
+      },
+    );
+    testWidgets(
+      '=> PriceOverRide(False) Cart item Price override test\n salesRep:True,, \ndisableOrderType: False,, \nOrderType: Eligible, \npriceOverride:True, \nhasPriceOverride: True ',
+      (tester) async {
+        when(() => userBlockMock.state).thenReturn(
+          UserState.initial().copyWith(
+            user: mockUser.copyWith(
+                role: mockRole.copyWith(
+                  type: RoleType('internal_sales_rep'),
+                ),
+                hasPriceOverride: true),
+          ),
+        );
+
+        when(() => salesOrgBloc.state).thenReturn(SalesOrgState.initial()
+            .copyWith(
+                configs: SalesOrganisationConfigs.empty()
+                    .copyWith(priceOverride: true, disableOrderType: false)));
+
+        when(() => eligibilityBloc.state).thenReturn(EligibilityState.initial()
+            .copyWith(
+                salesOrgConfigs: salesOrgBloc.state.configs,
+                user: userBlockMock.state.user));
+        when(() => orderEligibilityBlocMock.state).thenReturn(
+            OrderEligibilityState.initial().copyWith(
+                configs: salesOrgBloc.state.configs,
+                cartItems: priceAggregates,
+                user: userBlockMock.state.user,
+                orderType: 'ZPFC'));
+        await tester.pumpWidget(getWidget());
+        final priceOverride = find.byKey(const ValueKey('priceOverride'));
+        expect(priceOverride, findsOneWidget);
+        await tester.tap(priceOverride);
+        await tester.pump();
+        final priceSheet = find.byKey(const ValueKey('priceSheet'));
+        expect(priceSheet, findsNothing);
+        final priceOverrideSubmitButton =
+            find.byKey(const ValueKey('priceOverrideSubmitButton'));
+        expect(priceOverrideSubmitButton, findsNothing);
+      },
+    );
+    testWidgets(
+      '=> PriceOverRide(False) Cart item Price override test\n salesRep:True,, \ndisableOrderType: False,, \nOrderType: Eligible, \npriceOverride:False, \nhasPriceOverride: False ',
+      (tester) async {
+        when(() => userBlockMock.state).thenReturn(
+          UserState.initial().copyWith(
+            user: mockUser.copyWith(
+                role: mockRole.copyWith(
+                  type: RoleType('internal_sales_rep'),
+                ),
+                hasPriceOverride: false),
+          ),
+        );
+
+        when(() => salesOrgBloc.state).thenReturn(SalesOrgState.initial()
+            .copyWith(
+                configs: SalesOrganisationConfigs.empty()
+                    .copyWith(priceOverride: false, disableOrderType: false)));
+
+        when(() => eligibilityBloc.state).thenReturn(EligibilityState.initial()
+            .copyWith(
+                salesOrgConfigs: salesOrgBloc.state.configs,
+                user: userBlockMock.state.user));
+        when(() => orderEligibilityBlocMock.state).thenReturn(
+            OrderEligibilityState.initial().copyWith(
+                configs: salesOrgBloc.state.configs,
+                cartItems: priceAggregates,
+                user: userBlockMock.state.user,
+                orderType: 'ZPFC'));
+
+        await tester.pumpWidget(getWidget());
+        final priceOverride = find.byKey(const ValueKey('priceOverride'));
+        expect(priceOverride, findsOneWidget);
+        await tester.tap(priceOverride);
+        await tester.pump();
+        final priceSheet = find.byKey(const ValueKey('priceSheet'));
+        expect(priceSheet, findsNothing);
+        final priceOverrideSubmitButton =
+            find.byKey(const ValueKey('priceOverrideSubmitButton'));
+        expect(priceOverrideSubmitButton, findsNothing);
+      },
+    );
+
+    testWidgets(
+      '=> PriceOverRide(False) Cart item Price override test\n salesRep:True,, \ndisableOrderType: False,, \nOrderType: Eligible, \npriceOverride:False, \nhasPriceOverride: True ',
+      (tester) async {
+        when(() => userBlockMock.state).thenReturn(
+          UserState.initial().copyWith(
+            user: mockUser.copyWith(
+                role: mockRole.copyWith(
+                  type: RoleType('internal_sales_rep'),
+                ),
+                hasPriceOverride: true),
+          ),
+        );
+
+        when(() => salesOrgBloc.state).thenReturn(SalesOrgState.initial()
+            .copyWith(
+                configs: SalesOrganisationConfigs.empty()
+                    .copyWith(priceOverride: false, disableOrderType: false)));
+
+        when(() => eligibilityBloc.state).thenReturn(EligibilityState.initial()
+            .copyWith(
+                salesOrgConfigs: salesOrgBloc.state.configs,
+                user: userBlockMock.state.user));
+        when(() => orderEligibilityBlocMock.state).thenReturn(
+            OrderEligibilityState.initial().copyWith(
+                configs: salesOrgBloc.state.configs,
+                cartItems: priceAggregates,
+                user: userBlockMock.state.user,
+                orderType: 'ZPFC'));
+
+        await tester.pumpWidget(getWidget());
+        final priceOverride = find.byKey(const ValueKey('priceOverride'));
+        expect(priceOverride, findsOneWidget);
+        await tester.tap(priceOverride);
+        await tester.pump();
+        final priceSheet = find.byKey(const ValueKey('priceSheet'));
+        expect(priceSheet, findsNothing);
+        final priceOverrideSubmitButton =
+            find.byKey(const ValueKey('priceOverrideSubmitButton'));
+        expect(priceOverrideSubmitButton, findsNothing);
+      },
+    );
+    testWidgets(
+      '=> PriceOverRide(False) Cart item Price override test\n salesRep:True,, \ndisableOrderType: False,, \nOrderType: Eligible, \npriceOverride:True, \nhasPriceOverride: False ',
+      (tester) async {
+        when(() => userBlockMock.state).thenReturn(
+          UserState.initial().copyWith(
+            user: mockUser.copyWith(
+                role: mockRole.copyWith(
+                  type: RoleType('internal_sales_rep'),
+                ),
+                hasPriceOverride: false),
+          ),
+        );
+
+        when(() => salesOrgBloc.state).thenReturn(SalesOrgState.initial()
+            .copyWith(
+                configs: SalesOrganisationConfigs.empty()
+                    .copyWith(priceOverride: true, disableOrderType: false)));
+
+        when(() => eligibilityBloc.state).thenReturn(EligibilityState.initial()
+            .copyWith(
+                salesOrgConfigs: salesOrgBloc.state.configs,
+                user: userBlockMock.state.user));
+        when(() => orderEligibilityBlocMock.state).thenReturn(
+            OrderEligibilityState.initial().copyWith(
+                configs: salesOrgBloc.state.configs,
+                cartItems: priceAggregates,
+                user: userBlockMock.state.user,
+                orderType: 'ZPFC'));
+
+        await tester.pumpWidget(getWidget());
+        final priceOverride = find.byKey(const ValueKey('priceOverride'));
+        expect(priceOverride, findsOneWidget);
+        await tester.tap(priceOverride);
+        await tester.pump();
+        final priceSheet = find.byKey(const ValueKey('priceSheet'));
+        expect(priceSheet, findsNothing);
+        final priceOverrideSubmitButton =
+            find.byKey(const ValueKey('priceOverrideSubmitButton'));
+        expect(priceOverrideSubmitButton, findsNothing);
+      },
+    );
+    testWidgets(
+      '=> PriceOverRide(False) Cart item Price override test\n salesRep:False,, \ndisableOrderType: False,, \nOrderType: InEligible, \npriceOverride:False, \nhasPriceOverride: False ',
+      (tester) async {
+        when(() => userBlockMock.state).thenReturn(
+          UserState.initial().copyWith(
+            user: mockUser.copyWith(
+                role: mockRole.copyWith(
+                  type: RoleType('fake_sales_rep'),
+                ),
+                hasPriceOverride: false),
+          ),
+        );
+
+        when(() => salesOrgBloc.state).thenReturn(SalesOrgState.initial()
+            .copyWith(
+                configs: SalesOrganisationConfigs.empty()
+                    .copyWith(priceOverride: false, disableOrderType: false)));
+
+        when(() => eligibilityBloc.state).thenReturn(EligibilityState.initial()
+            .copyWith(
+                salesOrgConfigs: salesOrgBloc.state.configs,
+                user: userBlockMock.state.user));
+        when(() => orderEligibilityBlocMock.state).thenReturn(
+            OrderEligibilityState.initial().copyWith(
+                configs: salesOrgBloc.state.configs,
+                cartItems: priceAggregates,
+                user: userBlockMock.state.user,
+                orderType: 'fake_order_type'));
+
+        await tester.pumpWidget(getWidget());
+        final priceOverride = find.byKey(const ValueKey('priceOverride'));
+        expect(priceOverride, findsOneWidget);
+        await tester.tap(priceOverride);
+        await tester.pump();
+        final priceSheet = find.byKey(const ValueKey('priceSheet'));
+        expect(priceSheet, findsNothing);
+        final priceOverrideSubmitButton =
+            find.byKey(const ValueKey('priceOverrideSubmitButton'));
+        expect(priceOverrideSubmitButton, findsNothing);
+      },
+    );
+    testWidgets(
+      '=> PriceOverRide(False) Cart item Price override test\n salesRep:True,, \ndisableOrderType: True, \nOrderType: Eligible, \npriceOverride:False, \nhasPriceOverride: False ',
+      (tester) async {
+        when(() => userBlockMock.state).thenReturn(
+          UserState.initial().copyWith(
+            user: mockUser.copyWith(
+                role: mockRole.copyWith(
+                  type: RoleType('internal_sales_rep'),
+                ),
+                hasPriceOverride: false),
+          ),
+        );
+
+        when(() => salesOrgBloc.state).thenReturn(SalesOrgState.initial()
+            .copyWith(
+                configs: SalesOrganisationConfigs.empty()
+                    .copyWith(priceOverride: false, disableOrderType: true)));
+
+        when(() => eligibilityBloc.state).thenReturn(EligibilityState.initial()
+            .copyWith(
+                salesOrgConfigs: salesOrgBloc.state.configs,
+                user: userBlockMock.state.user));
+        when(() => orderEligibilityBlocMock.state).thenReturn(
+            OrderEligibilityState.initial().copyWith(
+                configs: salesOrgBloc.state.configs,
+                cartItems: priceAggregates,
+                user: userBlockMock.state.user,
+                orderType: 'ZPFC'));
+
+        await tester.pumpWidget(getWidget());
+        final priceOverride = find.byKey(const ValueKey('priceOverride'));
+        expect(priceOverride, findsOneWidget);
+        await tester.tap(priceOverride);
+        await tester.pump();
+        final priceSheet = find.byKey(const ValueKey('priceSheet'));
+        expect(priceSheet, findsNothing);
+        final priceOverrideSubmitButton =
+            find.byKey(const ValueKey('priceOverrideSubmitButton'));
+        expect(priceOverrideSubmitButton, findsNothing);
+      },
+    );
+
+    testWidgets(
+      '=> PriceOverRide(False) Cart item Price override test\n salesRep:True,, \ndisableOrderType: False, \nOrderType: InEligible, \npriceOverride:False, \nhasPriceOverride: False ',
+      (tester) async {
+        when(() => userBlockMock.state).thenReturn(
+          UserState.initial().copyWith(
+            user: mockUser.copyWith(
+                role: mockRole.copyWith(
+                  type: RoleType('internal_sales_rep'),
+                ),
+                hasPriceOverride: false),
+          ),
+        );
+
+        when(() => salesOrgBloc.state).thenReturn(SalesOrgState.initial()
+            .copyWith(
+                configs: SalesOrganisationConfigs.empty()
+                    .copyWith(priceOverride: false, disableOrderType: false)));
+
+        when(() => eligibilityBloc.state).thenReturn(EligibilityState.initial()
+            .copyWith(
+                salesOrgConfigs: salesOrgBloc.state.configs,
+                user: userBlockMock.state.user));
+        when(() => orderEligibilityBlocMock.state).thenReturn(
+            OrderEligibilityState.initial().copyWith(
+                configs: salesOrgBloc.state.configs,
+                cartItems: priceAggregates,
+                user: userBlockMock.state.user,
+                orderType: 'fake_order_type'));
+
+        await tester.pumpWidget(getWidget());
+        final priceOverride = find.byKey(const ValueKey('priceOverride'));
+        expect(priceOverride, findsOneWidget);
+        await tester.tap(priceOverride);
+        await tester.pump();
+        final priceSheet = find.byKey(const ValueKey('priceSheet'));
+        expect(priceSheet, findsNothing);
+        final priceOverrideSubmitButton =
+            find.byKey(const ValueKey('priceOverrideSubmitButton'));
+        expect(priceOverrideSubmitButton, findsNothing);
       },
     );
     testWidgets(
@@ -623,7 +1132,6 @@ void main() {
         await tester.pump();
         expect(cancelDddRemark, findsOneWidget);
         await tester.tap(cancelDddRemark);
-
       },
     );
   });
