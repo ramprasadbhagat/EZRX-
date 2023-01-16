@@ -15,7 +15,8 @@ class SavedOrderDto with _$SavedOrderDto {
   const SavedOrderDto._();
 
   const factory SavedOrderDto({
-    @JsonKey(name: 'id', defaultValue: '') required String id,
+    @JsonKey(name: 'id', defaultValue: '')
+        required String id,
     @_OrderProductItemListConverter()
     @JsonKey(name: 'itemlist', defaultValue: <MaterialItemDto>[])
         required List<MaterialItemDto> items,
@@ -23,10 +24,14 @@ class SavedOrderDto with _$SavedOrderDto {
         required bool isDraftOrder,
     @JsonKey(name: 'BillingDocument', defaultValue: '')
         required String billingDocument,
-    @JsonKey(name: 'eZRxNumber', defaultValue: '') required String eZRxNumber,
-    @JsonKey(name: 'SoldToParty', defaultValue: '') required String soldToParty,
-    @JsonKey(name: 'ShipToParty', defaultValue: '') required String shipToParty,
-    @JsonKey(name: 'CompanyName', defaultValue: '') required String companyName,
+    @JsonKey(name: 'eZRxNumber', defaultValue: '')
+        required String eZRxNumber,
+    @JsonKey(name: 'SoldToParty', defaultValue: '')
+        required String soldToParty,
+    @JsonKey(name: 'ShipToParty', defaultValue: '')
+        required String shipToParty,
+    @JsonKey(name: 'CompanyName', defaultValue: '')
+        required String companyName,
     @JsonKey(name: 'TotalOrderValue', defaultValue: 0)
         required double totalOrderValue,
     @JsonKey(name: 'requestedDeliveryDate', defaultValue: '')
@@ -35,38 +40,54 @@ class SavedOrderDto with _$SavedOrderDto {
         required String deliveryDocument,
     @JsonKey(name: 'SalesOrganization', defaultValue: '')
         required String salesOrganization,
-    @JsonKey(name: 'Principal', defaultValue: '') required String principal,
+    @JsonKey(name: 'Principal', defaultValue: '')
+        required String principal,
     @JsonKey(name: 'ProcessingStatus', defaultValue: '')
         required String processingStatus,
-    @JsonKey(name: 'country', defaultValue: '') required String country,
-    @JsonKey(name: 'post_code1', defaultValue: '') required String postCode1,
+    @JsonKey(name: 'country', defaultValue: '')
+        required String country,
+    @JsonKey(name: 'post_code1', defaultValue: '')
+        required String postCode1,
     @JsonKey(name: 'orderRequest', defaultValue: '')
         required String specialInstructions,
-    @JsonKey(name: 'POReference', defaultValue: '') required String poReference,
-    @JsonKey(name: 'paymentTerm', defaultValue: '') required String payTerm,
+    @JsonKey(name: 'POReference', defaultValue: '')
+        required String poReference,
+    @JsonKey(name: 'paymentTerm', defaultValue: '')
+        required String payTerm,
     @JsonKey(name: 'collectiveNumber', defaultValue: '')
         required String collectiveNo,
-    @JsonKey(name: 'Quantity', defaultValue: 0) required int quantity,
-    @JsonKey(name: 'UnitPrice', defaultValue: 0.0) required double unitPrice,
-    @JsonKey(name: 'TotalPrice', defaultValue: 0.0) required double totalPrice,
-    @JsonKey(name: 'address1', defaultValue: '') required String address1,
-    @JsonKey(name: 'address2', defaultValue: '') required String address2,
-    @JsonKey(name: 'city', defaultValue: '') required String city,
-    @JsonKey(name: 'fax', defaultValue: '') required String fax,
-    @JsonKey(name: 'phonenumber', defaultValue: '') required String phonenumber,
-    @JsonKey(name: 'orderType', defaultValue: '') required String orderType,
-    @JsonKey(name: 'orderReason', defaultValue: '') required String orderReason,
+    @JsonKey(name: 'Quantity', defaultValue: 0)
+        required int quantity,
+    @JsonKey(name: 'UnitPrice', defaultValue: 0.0)
+        required double unitPrice,
+    @JsonKey(name: 'TotalPrice', defaultValue: 0.0)
+        required double totalPrice,
+    @JsonKey(name: 'address1', defaultValue: '')
+        required String address1,
+    @JsonKey(name: 'address2', defaultValue: '')
+        required String address2,
+    @JsonKey(name: 'city', defaultValue: '')
+        required String city,
+    @JsonKey(name: 'fax', defaultValue: '')
+        required String fax,
+    @JsonKey(name: 'phonenumber', defaultValue: '')
+        required String phonenumber,
+    @JsonKey(name: 'orderType', defaultValue: '')
+        required String orderType,
+    @JsonKey(name: 'orderReason', defaultValue: '')
+        required String orderReason,
     @JsonKey(name: 'shippingCondition', defaultValue: '')
         required String shippingCondition,
-    @JsonKey(name: 'user', defaultValue: '') required String user,
+    @JsonKey(name: 'user', defaultValue: '')
+        required String user,
     @JsonKey(name: 'contactPerson', defaultValue: '')
         required String contactPerson,
     @JsonKey(name: 'referenceNote', defaultValue: '')
         required String referenceNotes,
     @_PoDocumentsListConverter()
     @JsonKey(
-        name: 'POAttachent', defaultValue: <
-            PoDocumentsDto>[],
+      name: 'POAttachent',
+      defaultValue: <PoDocumentsDto>[],
     )
         required List<PoDocumentsDto> poAttachent,
   }) = _SavedOrderDto;
@@ -168,7 +189,8 @@ class _OrderProductItemListConverter
 
   @override
   List<MaterialItemDto> fromJson(String json) {
-    final data = makeResponseCamelCase(json)['value'];
+    // TODO: this is not a correct approach, technically if the data is valid, we won't neeed this kind of transformation,don't do this on other places
+    final data = makeResponseCamelCase(json)['value'] ?? [];
 
     return List.from(data).map((e) => MaterialItemDto.fromJson(e)).toList();
   }
