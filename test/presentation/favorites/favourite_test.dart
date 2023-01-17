@@ -163,7 +163,7 @@ void main() {
                 BlocProvider<AddToCartBloc>(
                     create: (context) => addToCartBlocMock),
               ],
-              child: const WrappedRoute(child: FavouritesTab()),
+              child: const FavouritesTab(),
             ),
           ),
         );
