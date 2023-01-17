@@ -16,7 +16,6 @@ import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_template.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
-import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -211,7 +210,7 @@ class OrderTemplateDetailPage extends StatelessWidget {
       stockInfo: StockInfo.empty().copyWith(
         materialNumber: itemInfo.info.materialNumber,
       ),
-      tenderContract: TenderContract.empty(),
+      tenderContract: material.tenderContract,
     );
 
     return priceAggregate.copyWith(
