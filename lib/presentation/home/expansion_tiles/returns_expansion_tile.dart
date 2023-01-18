@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:ezrxmobile/presentation/core/custom_expansion_tile.dart'
     as custom;
 import 'package:flutter_bloc/flutter_bloc.dart';
-// ignore: depend_on_referenced_packages
 import 'package:collection/collection.dart';
 
 class ReturnsExpansionTile extends StatelessWidget {

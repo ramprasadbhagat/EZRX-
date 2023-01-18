@@ -8,15 +8,11 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
-import 'package:ezrxmobile/domain/order/entities/bundle.dart';
-import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item.dart';
-import 'package:ezrxmobile/domain/order/entities/material_price_detail.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
-import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
-import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_action_button.dart';
@@ -185,114 +181,29 @@ class SavedOrderDetailPage extends StatelessWidget {
     return materialList;
   }
 
-  PriceAggregate _getCommercialTypeMaterial({
-    required MaterialPriceDetail itemInfo,
-    required MaterialItem material,
-    required BuildContext context,
-    required bool isBundle,
-    required MaterialInfo materialInfo,
-  }) {
-    final cartBloc = context.read<CartBloc>();
-    final priceAggregate = PriceAggregate(
-      price: isBundle
-          ? itemInfo.price
-          : itemInfo.price.copyWith(
-              isPriceOverride: material.overridenPrice.isValid(),
-              zdp8Override: material.zdp8Override,
-              priceOverride: material.overridenPrice,
-            ),
-      materialInfo: itemInfo.info,
-      salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
-      quantity: isBundle ? materialInfo.quantity : material.qty,
-      discountedMaterialCount: cartBloc.state.zmgMaterialCount,
-      bundle: isBundle
-          ? Bundle(
-              bundleName: BundleName(material.bundleName),
-              bundleCode: material.bundleCode,
-              bundleInformation: material.bundleInformation,
-              materials: material.materials,
-            )
-          : Bundle.empty(),
-      addedBonusList: material.bonuses,
-      stockInfo: StockInfo.empty().copyWith(
-        materialNumber: itemInfo.info.materialNumber,
-      ),
-      tenderContract: material.tenderContract,
-    );
-
-    return priceAggregate.copyWith(
-      addedBonusList: List.from(priceAggregate.addedBonusList)
-        ..addAll(priceAggregate.getMaterialItemBonus),
-    );
-  }
-
-  List<PriceAggregate> _getBundleTypeMaterials({
-    required MaterialPriceDetailState state,
-    required MaterialItem material,
-    required BuildContext context,
-    required bool isBundle,
-  }) {
-    return material.materials
-        .map(
-          (materialInfo) => _getCommercialTypeMaterial(
-            itemInfo: state.materialDetails[materialInfo.queryInfo]!,
-            material: material,
-            context: context,
-            isBundle: true,
-            materialInfo: materialInfo,
-          ),
-        )
-        .toList();
-  }
-
-  List<PriceAggregate> _buildPriceAggregateList({
-    required List<MaterialItem> items,
-    required MaterialPriceDetailState state,
-    required BuildContext context,
-  }) {
-    final priceAggregateList = order.items
-        .map(
-          (item) => item.type.isBundle
-              ? _getBundleTypeMaterials(
-                  state: state,
-                  material: item,
-                  context: context,
-                  isBundle: true,
-                )
-              : [
-                  _getCommercialTypeMaterial(
-                    itemInfo: state.materialDetails[item.queryInfo]!,
-                    material: item,
-                    context: context,
-                    isBundle: false,
-                    materialInfo: MaterialInfo.empty(),
-                  ),
-                ],
-        )
-        .toList()
-        .expand((element) => element)
-        .toList();
-
-    return priceAggregateList;
-  }
-
   void _addToCartPressed(BuildContext context, MaterialPriceDetailState state) {
     final cartBloc = context.read<CartBloc>();
-    cartBloc.add(const CartEvent.clearCart());
-
-    cartBloc.add(CartEvent.addToCartFromList(
-      items: _buildPriceAggregateList(
-        items: order.items,
-        state: state,
-        context: context,
-      ),
+    final salesConfigs = context.read<EligibilityBloc>().state.salesOrgConfigs;
+    cartBloc.add(CartEvent.replaceWithOrderItems(
+      items: order.items
+          .map((item) => item.type.isBundle
+              ? CartItem.bundleFromOrder(
+                  priceDetailMap: state.materialDetails,
+                  savedItem: item,
+                  salesConfigs: salesConfigs,
+                )
+              : CartItem.materialFromOrder(
+                  priceDetailMap: state.materialDetails,
+                  material: item,
+                  salesConfigs: salesConfigs,
+                ))
+          .toList(),
       customerCodeInfo: context.read<EligibilityBloc>().state.customerCodeInfo,
       salesOrganisation:
           context.read<EligibilityBloc>().state.salesOrganisation,
-      salesOrganisationConfigs:
-          context.read<EligibilityBloc>().state.salesOrgConfigs,
+      salesOrganisationConfigs: salesConfigs,
       shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
-      doNotAllowOutOfStockMaterials:
+      doNotallowOutOfStockMaterial:
           context.read<EligibilityBloc>().state.doNotAllowOutOfStockMaterials,
     ));
 

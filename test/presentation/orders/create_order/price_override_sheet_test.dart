@@ -7,7 +7,7 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/presentation/orders/create_order/price_override_bottomsheet.dart';
+import 'package:ezrxmobile/presentation/orders/cart/override/price_override_bottomsheet.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -44,9 +44,9 @@ void main() {
         ),
       ];
 
-      when(() => cartMockBloc.state).thenReturn(CartState.initial().copyWith(
-        cartItemList: mockPriceAggregates,
-      ));
+      // when(() => cartMockBloc.state).thenReturn(CartState.initial().copyWith(
+      //   cartItemList: mockPriceAggregates,
+      // ));
       when(() => priceOverrideMockBloc.state).thenReturn(
         PriceOverrideState.initial(),
       );
@@ -73,7 +73,6 @@ void main() {
     testWidgets('Initialisation Test', (tester) async {
       await tester.pumpWidget(getScopedWidget(PriceSheet(
         item: mockPriceAggregates.first,
-        onTap: (_) {},
       )));
 
       final priceSheetWidget = find.byKey(const Key('priceSheetKey'));
@@ -93,7 +92,6 @@ void main() {
     testWidgets('Change Price Test', (tester) async {
       await tester.pumpWidget(getScopedWidget(PriceSheet(
         item: mockPriceAggregates.first,
-        onTap: (_) {},
       )));
 
       final overridePriceButton =
@@ -131,7 +129,6 @@ void main() {
 
       await tester.pumpWidget(getScopedWidget(PriceSheet(
         item: mockPriceAggregates.first,
-        onTap: (_) {},
       )));
 
       await tester.pump();
@@ -159,7 +156,6 @@ void main() {
 
       await tester.pumpWidget(getScopedWidget(PriceSheet(
         item: mockPriceAggregates.first,
-        onTap: (_) {},
       )));
 
       await tester.pump();

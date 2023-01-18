@@ -4,75 +4,86 @@ part of 'cart_bloc.dart';
 class CartEvent with _$CartEvent {
   const factory CartEvent.initialized() = _Initialized;
   const factory CartEvent.fetch({
-    required CustomerCodeInfo customerCodeInfo,
     required SalesOrganisationConfigs salesOrganisationConfigs,
     required SalesOrganisation salesOrganisation,
+    required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
     required bool doNotAllowOutOfStockMaterials,
   }) = _Fetch;
-  const factory CartEvent.addToCart({
+  const factory CartEvent.addMaterialToCart({
     required PriceAggregate item,
+    @Default(false) bool overrideQty,
+    required SalesOrganisationConfigs salesOrganisationConfigs,
+    required SalesOrganisation salesOrganisation,
+    required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToInfo,
     required bool doNotallowOutOfStockMaterial,
-    required CustomerCodeInfo customerCodeInfo,
+  }) = _AddMaterialToCart;
+  const factory CartEvent.addBundleToCart({
+    required List<PriceAggregate> bundleItems,
     required SalesOrganisationConfigs salesOrganisationConfigs,
     required SalesOrganisation salesOrganisation,
-    required ShipToInfo shipToInfo,
-  }) = _AddToCart;
-  const factory CartEvent.addToCartFromList({
-    required List<PriceAggregate> items,
     required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToInfo,
+    required bool doNotallowOutOfStockMaterial,
+  }) = _AddBundleToCart;
+  const factory CartEvent.updateBundleItemQty({
+    required CartItem currentBundle,
+    required PriceAggregate updatedQtyItem,
     required SalesOrganisationConfigs salesOrganisationConfigs,
     required SalesOrganisation salesOrganisation,
+    required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
-    required bool doNotAllowOutOfStockMaterials,
-  }) = _AddToCartFromList;
-  const factory CartEvent.updateCartItem({
+    required bool doNotallowOutOfStockMaterial,
+  }) = _UpdateBundleItemQty;
+  const factory CartEvent.verifyMaterialDealBonus({
     required PriceAggregate item,
-    required bool doNotallowOutOfStockMaterial,
-    required CustomerCodeInfo customerCodeInfo,
     required SalesOrganisationConfigs salesOrganisationConfigs,
     required SalesOrganisation salesOrganisation,
-    required ShipToInfo shipToInfo,
-  }) = _UpdateCartItem;
-  const factory CartEvent.updateCart({
-    required List<Price> item,
-    required String materialNumber,
-  }) = _UpdateCart;
-  const factory CartEvent.updateStockInfo({
-    required User user,
     required CustomerCodeInfo customerCodeInfo,
-    required SalesOrganisationConfigs salesOrganisationConfigs,
-    required SalesOrganisation salesOrganisation,
     required ShipToInfo shipToInfo,
-  }) = _UpdateStockInfo;
+  }) = _VerifyMaterialDealBonus;
   const factory CartEvent.removeFromCart({
-    required PriceAggregate item,
+    required CartItem item,
   }) = _RemoveFromCart;
+  const factory CartEvent.addRemarkToCartItem({
+    required CartItem item,
+    required String message,
+  }) = _AddRemarkToCartItem;
+  const factory CartEvent.addBonusToCartItem({
+    required CartItem item,
+    required MaterialItemBonus bonusItem,
+    @Default(false) bool overrideQty,
+    required SalesOrganisationConfigs salesOrganisationConfigs,
+    required SalesOrganisation salesOrganisation,
+    required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToInfo,
+    required bool doNotallowOutOfStockMaterial,
+  }) = _AddBonusToCartItem;
+  const factory CartEvent.removeBonusFromCartItem({
+    required CartItem item,
+    required MaterialItemBonus bonusItem,
+  }) = _RemoveBonusFromCartItem;
+  const factory CartEvent.addRemarkToBonusItem({
+    required CartItem item,
+    required MaterialItemBonus bonusItem,
+    required String message,
+  }) = _AddRemarkToBonusItem;
+  const factory CartEvent.overrideCartItemPrice({
+    required List<Price> overridenPrice,
+    required CartItem cartItem,
+  }) = _OverrideCartItemPrice;
+  const factory CartEvent.selectButtonTapped({
+    required CartItem cartItem,
+  }) = _SelectButtonTapped;
+  const factory CartEvent.selectAllButtonTapped() = _SelectAllButtonTapped;
   const factory CartEvent.clearCart() = _ClearCart;
-  const factory CartEvent.updateSelectedItem({
-    required PriceAggregate item,
-  }) = _updateSelectedItem;
-  const factory CartEvent.updateSelectAllItems() = _updateSelectAllItems;
-  const factory CartEvent.updateBonusItem({
-    required int bonusItemCount,
-    required PriceAggregate cartItem,
-    required MaterialItemBonus bonusItem,
-    required bool isUpdateFromCart,
-  }) = _updateBonusItem;
-  const factory CartEvent.deleteBonusItem({
-    required PriceAggregate cartItem,
-    required MaterialItemBonus bonusItem,
-    required bool isUpdateFromCart,
-  }) = _deleteBonusItem;
-
-  const factory CartEvent.remarksChanged(String remarks) = _RemarksChanged;
-  const factory CartEvent.addRemarksToCartItem({
-    required PriceAggregate item,
-    required bool isDelete,
-  }) = _AddRemarksToCartItem;
-  const factory CartEvent.addRemarksToBonusItem({
-    required PriceAggregate item,
-    required MaterialInfo bonusItem,
-    required bool isDelete,
-  }) = _AddRemarksToBonusItem;
+    const factory CartEvent.replaceWithOrderItems({
+    required List<CartItem> items,
+    required SalesOrganisationConfigs salesOrganisationConfigs,
+    required SalesOrganisation salesOrganisation,
+    required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToInfo,
+    required bool doNotallowOutOfStockMaterial,
+  }) = _ReplaceWithOrderItems;
 }

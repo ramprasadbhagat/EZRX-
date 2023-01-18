@@ -23,7 +23,8 @@ class SubmitMaterialInfoDto with _$SubmitMaterialInfoDto {
     @JsonKey(name: 'bonuses', defaultValue: <MaterialItemBonusDto>[])
         required List<MaterialItemBonusDto> bonuses,
     @JsonKey(name: 'comment', defaultValue: '') required String comment,
-    @JsonKey(name: 'batch', defaultValue: '', toJson: overrideBatchJson, includeIfNull: false) required String batch,
+    @JsonKey(name: 'batch', defaultValue: '', toJson: overrideBatchJson, includeIfNull: false)
+        required String batch,
     @JsonKey(name: 'salesDistrict', defaultValue: '')
         required String salesDistrict,
     @JsonKey(name: 'override', toJson: overrideTojson, readValue: materialItemOverrideread, includeIfNull: false)
@@ -45,19 +46,24 @@ class SubmitMaterialInfoDto with _$SubmitMaterialInfoDto {
 
   factory SubmitMaterialInfoDto.fromDomain(
     SubmitMaterialInfo submitMaterialInfo,
-      String currency,
+    String currency,
   ) {
     return SubmitMaterialInfoDto(
       materialNumber: submitMaterialInfo.materialNumber.getOrCrash(),
       qty: submitMaterialInfo.quantity,
-      tenderContract:
-          SubmitTenderContractDto.fromDomain(submitMaterialInfo.tenderContract, currency),
+      tenderContract: SubmitTenderContractDto.fromDomain(
+        submitMaterialInfo.tenderContract,
+        currency,
+      ),
       bonuses: submitMaterialInfo.bonuses
-          .map((e) => MaterialItemBonusDto.fromDomain(e))
+          .map(
+            (e) => MaterialItemBonusDto.fromDomain(e),
+          )
           .toList(),
       comment: submitMaterialInfo.comment,
       batch: submitMaterialInfo.batch,
-      salesDistrict: submitMaterialInfo.tenderContract.salesDistrict.getOrCrash(),
+      salesDistrict:
+          submitMaterialInfo.tenderContract.salesDistrict.getOrCrash(),
       materialItemOverride: MaterialItemOverrideDto.fromDomain(
         submitMaterialInfo.materialItemOverride,
       ),
@@ -71,15 +77,17 @@ class SubmitMaterialInfoDto with _$SubmitMaterialInfoDto {
 Map materialItemOverrideread(Map json, String key) => json[key] ?? {};
 
 dynamic overrideTojson(MaterialItemOverrideDto value) {
-  if (value.percentageOverride.isEmpty && value.valueOverride.isEmpty && value.reference.isEmpty) {
+  if (value.percentageOverride.isEmpty &&
+      value.valueOverride.isEmpty &&
+      value.reference.isEmpty) {
     return null;
   }
 
   return value.toJson();
 }
 
-overrideBatchJson(String batch){
-  if(batch.isEmpty) {
+String? overrideBatchJson(String batch) {
+  if (batch.isEmpty) {
     return null;
   }
 

@@ -17,6 +17,7 @@ import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_blo
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/cart_repository.dart';
 import 'package:ezrxmobile/application/order/cart/discount_override/discount_override_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
 import 'package:ezrxmobile/application/order/covid_material_list/covid_material_list_bloc.dart';
@@ -160,7 +161,6 @@ import 'package:ezrxmobile/infrastructure/order/datasource/valid_customer_materi
 import 'package:ezrxmobile/infrastructure/order/datasource/valid_customer_material_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/valid_customer_materials_query.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/bonus_material_repository.dart';
-import 'package:ezrxmobile/infrastructure/order/repository/cart_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/discount_override_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/material_bundle_list_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/material_filter_repository.dart';
@@ -1406,7 +1406,7 @@ void setupLocator() {
   );
 
   locator.registerLazySingleton(
-    () => CartBloc(cartRepository: locator<CartRepository>()),
+    () => CartBloc(locator<CartRepository>()),
   );
 
   //============================================================

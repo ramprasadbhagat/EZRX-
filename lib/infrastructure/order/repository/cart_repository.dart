@@ -4,11 +4,10 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
-import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
+import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
@@ -19,10 +18,8 @@ import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/cart_storage.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_remote.dart';
-import 'package:ezrxmobile/infrastructure/order/dtos/material_item_bonus_dto.dart';
-import 'package:ezrxmobile/infrastructure/order/dtos/price_aggregate_dto.dart';
-import 'package:ezrxmobile/infrastructure/order/dtos/price_dto.dart';
-import 'package:ezrxmobile/infrastructure/order/dtos/stock_info_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/cart_item_dto.dart';
+import 'package:collection/collection.dart';
 
 class CartRepository implements ICartRepository {
   final CartStorage cartStorage;
@@ -51,131 +48,19 @@ class CartRepository implements ICartRepository {
   }
 
   @override
-  Future<Either<ApiFailure, List<PriceAggregate>>> addToCart({
-    required PriceAggregate cartItem,
-  }) async {
+  Either<ApiFailure, List<CartItem>> fetchCart() {
     try {
-      await cartStorage.add(PriceAggregateDto.fromDomain(cartItem));
-      await countlyService
-          .addCountlyEvent('Add materials to cart', segmentation: {
-        'materialNum': cartItem.getMaterialNumber.getOrCrash(),
-        'listPrice': cartItem.listPrice,
-        'price': cartItem.price.finalPrice.getOrCrash(),
-        'numItemInCart': cartStorage.cartBoxSize,
-        'materialType':
-            cartItem.materialInfo.materialGroup4.getMaterialGroup4Type,
-      });
+      final items = cartStorage.getAll();
+      final cart = items.map((e) => e.toDomain).toList();
 
-      return fetchCartItems();
+      return Right(cart);
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
     }
   }
 
   @override
-  Future<Either<ApiFailure, List<PriceAggregate>>> updateCartItem({
-    required PriceAggregate cartItem,
-  }) async {
-    try {
-      await cartStorage.updateItem(PriceAggregateDto.fromDomain(cartItem));
-
-      return fetchCartItems();
-    } catch (e) {
-      return Left(FailureHandler.handleFailure(e));
-    }
-  }
-
-  @override
-  Future<Either<ApiFailure, List<PriceAggregate>>> updateStockInfo({
-    required User user,
-    required CustomerCodeInfo customerCodeInfo,
-    required SalesOrganisationConfigs salesOrganisationConfigs,
-    required SalesOrganisation salesOrganisation,
-    required ShipToInfo shipToInfo,
-  }) async {
-    try {
-      final cartItemDtoList = await cartStorage.get();
-      final cartItemList = cartItemDtoList.map((e) => e.toDomain()).toList();
-      for (final element in cartItemList) {
-        final updatedStockInfo = await getStockInfo(
-          material: element.materialInfo,
-          customerCodeInfo: customerCodeInfo,
-          salesOrganisationConfigs: salesOrganisationConfigs,
-          salesOrganisation: salesOrganisation,
-          shipToInfo: shipToInfo,
-        );
-        final stockInfo = updatedStockInfo.fold(
-          (faliure) {
-            throw OtherException(message: faliure.failureMessage);
-          },
-          (stockInfo) => stockInfo,
-        );
-        await cartStorage.updateStockInfo(StockInfoDto.fromDomain(stockInfo));
-      }
-
-      return fetchCartItems();
-    } catch (e) {
-      return Left(FailureHandler.handleFailure(e));
-    }
-  }
-
-//updating when user select price override
-  @override
-  Future<Either<ApiFailure, List<PriceAggregate>>> updateCart({
-    required List<Price> cartItem,
-    required String materialNumber,
-  }) async {
-    try {
-      Price item;
-
-      for (var i = 0; i < cartItem.length; i++) {
-        if (cartItem[i].materialNumber.getOrCrash() == materialNumber) {
-          item = cartItem[i];
-          await cartStorage.update(
-            cartDto: PriceDto.fromDomain(item),
-            materialNumber: materialNumber,
-            isMock: config.appFlavor == Flavor.mock,
-          );
-          // break;
-        }
-      }
-
-      return fetchCartItems();
-    } catch (e) {
-      return Left(FailureHandler.handleFailure(e));
-    }
-  }
-
-  @override
-  Future<Either<ApiFailure, List<PriceAggregate>>> deleteFromCart({
-    required PriceAggregate cartItem,
-  }) async {
-    try {
-      await cartStorage.delete(
-        cartItem.materialInfo.materialNumber.getOrCrash(),
-      );
-      await countlyService.addCountlyEvent('Delete from Cart');
-
-      return fetchCartItems();
-    } catch (e) {
-      return Left(FailureHandler.handleFailure(e));
-    }
-  }
-
-  @override
-  Future<Either<ApiFailure, List<PriceAggregate>>> fetchCartItems() async {
-    try {
-      final cartItemDtoList = await cartStorage.get();
-      final cartItemList = cartItemDtoList.map((e) => e.toDomain()).toList();
-
-      return Right(cartItemList);
-    } catch (e) {
-      return Left(FailureHandler.handleFailure(e));
-    }
-  }
-
-  @override
-  Future<Either<ApiFailure, Unit>> clear() async {
+  Future<Either<ApiFailure, Unit>> clearCart() async {
     try {
       await cartStorage.clear();
 
@@ -186,148 +71,467 @@ class CartRepository implements ICartRepository {
   }
 
   @override
-  Future<Either<ApiFailure, List<PriceAggregate>>> addToCartList({
-    required List<PriceAggregate> items,
+  Future<Either<ApiFailure, List<CartItem>>> addItemToCart({
+    required CartItem cartItem,
+    required bool override,
+  }) async {
+    //TODO: Implement countly event for both adding material and bundle to cart
+    //    await countlyService
+    //     .addCountlyEvent('Add materials to cart', segmentation: {
+    //   'materialNum': cartItem.getMaterialNumber.getOrCrash(),
+    //   'listPrice': cartItem.listPrice,
+    //   'price': cartItem.price.finalPrice.getOrCrash(),
+    //   'numItemInCart': cartStorage.cartBoxSize,
+    //   'materialType':
+    //       cartItem.materialInfo.materialGroup4.getMaterialGroup4Type,
+    // });
+
+    try {
+      final inCartItem = cartStorage.get(id: cartItem.id)?.toDomain;
+      final savedCartItem = (inCartItem != null && !override)
+          ? inCartItem.copyWith(
+              materials: inCartItem.materials.map(
+                (material) {
+                  final qty = cartItem.materials
+                          .firstWhereOrNull((item) =>
+                              item.getMaterialNumber ==
+                              material.getMaterialNumber)
+                          ?.quantity ??
+                      0;
+
+                  return material.copyWithIncreasedQty(qty: qty);
+                },
+              ).toList(),
+            )
+          : cartItem;
+
+      await cartStorage.put(
+        id: savedCartItem.id,
+        item: CartItemDto.fromDomain(savedCartItem),
+      );
+
+      return fetchCart();
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, List<CartItem>>> deleteFromCart({
+    required CartItem item,
   }) async {
     try {
-      final apiSuccessOrFailure = await fetchCartItems();
+      await countlyService.addCountlyEvent('Delete from Cart');
+      await cartStorage.delete(id: item.id);
 
-      return apiSuccessOrFailure.fold(
-        (apiFailure) => Left(
-          FailureHandler.handleFailure(apiFailure),
-        ),
-        (storedList) async {
-          final storedItemsMap = {
-            for (final storedItem in storedList)
-              storedItem.materialInfo.materialNumber.displayMatNo: storedItem,
-          };
+      return fetchCart();
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
 
-          for (final item in items) {
-            final materialNumber =
-                item.materialInfo.materialNumber.displayMatNo;
-            if (storedItemsMap[materialNumber] != null) {
-              final storedItemToUpdate = storedItemsMap[materialNumber];
-              final itemToUpdate = storedItemToUpdate!.copyWith(
-                quantity: storedItemToUpdate.quantity + item.quantity,
-              );
-              await cartStorage.updateItem(PriceAggregateDto.fromDomain(
-                itemToUpdate,
-              ));
-            } else {
-              await cartStorage.add(PriceAggregateDto.fromDomain(item));
+  @override
+  Future<Either<ApiFailure, List<CartItem>>> addRemarkToCartItem({
+    required CartItem item,
+    required String remarkMessage,
+  }) async {
+    try {
+      final inCartItem = cartStorage.get(id: item.id)?.toDomain;
+      if (inCartItem != null) {
+        switch (inCartItem.itemType) {
+          case CartItemType.material:
+            final material = inCartItem.materials.first;
+            final itemWithRemark = inCartItem.copyWith(materials: [
+              material.copyWith.materialInfo(
+                remarks: remarkMessage,
+              ),
+            ]);
+            await cartStorage.put(
+              id: itemWithRemark.id,
+              item: CartItemDto.fromDomain(itemWithRemark),
+            );
+            break;
+          case CartItemType.bundle:
+            // TODO: Handle this case.
+            break;
+        }
+      }
+
+      return fetchCart();
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, List<CartItem>>> addBonusToCartItem({
+    required CartItem item,
+    required MaterialItemBonus newBonus,
+    required bool overrideQty,
+  }) async {
+    try {
+      final inCartItem = cartStorage.get(id: item.id)?.toDomain;
+      if (inCartItem != null) {
+        switch (inCartItem.itemType) {
+          case CartItemType.material:
+            final material = inCartItem.materials.first;
+            var bonusExisting = false;
+            final updatedBonuses = material.addedBonusList.map((bonus) {
+              if (bonus.materialNumber == newBonus.materialNumber &&
+                  bonus.additionalBonusFlag == newBonus.additionalBonusFlag) {
+                bonusExisting = true;
+                if (overrideQty) {
+                  return newBonus;
+                }
+
+                return bonus.copyWith(qty: bonus.qty + newBonus.qty);
+              }
+
+              return bonus;
+            }).toList();
+            if (!bonusExisting) {
+              updatedBonuses.add(newBonus);
             }
-          }
+            final itemWithNewBonus = inCartItem.copyWith(
+              materials: [material.copyWith(addedBonusList: updatedBonuses)],
+            );
+            await cartStorage.put(
+              id: itemWithNewBonus.id,
+              item: CartItemDto.fromDomain(itemWithNewBonus),
+            );
+            break;
+          case CartItemType.bundle:
+            // TODO: Handle this case.
+            break;
+        }
+      }
 
-          return fetchCartItems();
+      return fetchCart();
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, List<CartItem>>> deleteBonusFromCartItem({
+    required CartItem item,
+    required MaterialItemBonus deletedBonus,
+  }) async {
+    try {
+      final inCartItem = cartStorage.get(id: item.id)?.toDomain;
+      if (inCartItem != null) {
+        switch (inCartItem.itemType) {
+          case CartItemType.material:
+            final material = inCartItem.materials.first;
+            final updatedBonuses =
+                List<MaterialItemBonus>.from(material.addedBonusList)
+                  ..removeWhere(
+                    (bonus) =>
+                        bonus.materialNumber == deletedBonus.materialNumber &&
+                        bonus.additionalBonusFlag ==
+                            deletedBonus.additionalBonusFlag,
+                  );
+            final itemWithNewBonus = inCartItem.copyWith(
+              materials: [material.copyWith(addedBonusList: updatedBonuses)],
+            );
+            await cartStorage.put(
+              id: itemWithNewBonus.id,
+              item: CartItemDto.fromDomain(itemWithNewBonus),
+            );
+            break;
+          case CartItemType.bundle:
+            // TODO: Handle this case.
+            break;
+        }
+      }
+      await countlyService.addCountlyEvent('Remove bonus');
+
+      return fetchCart();
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, List<CartItem>>> updateMaterialDealBonus({
+    required PriceAggregate material,
+    required CustomerCodeInfo customerCodeInfo,
+    required SalesOrganisationConfigs salesOrganisationConfigs,
+    required SalesOrganisation salesOrganisation,
+    required ShipToInfo shipToInfo,
+  }) async {
+    try {
+      final failureOrSuccess = await getStockInfoList(
+        items: material.getMaterialItemBonus
+            .map((bonus) => bonus.materialInfo)
+            .toList(),
+        customerCodeInfo: customerCodeInfo,
+        salesOrganisationConfigs: salesOrganisationConfigs,
+        salesOrganisation: salesOrganisation,
+        shipToInfo: shipToInfo,
+      );
+      final bonusStockInfoMap = failureOrSuccess.getOrElse(() => {});
+      final dealBonusWithStockInfo = material.getMaterialItemBonus.map((bonus) {
+        final stockInfo = bonusStockInfoMap[bonus.materialNumber];
+        if (stockInfo != null) {
+          return bonus.copyWith(
+            inStock: stockInfo.inStock.getOrCrash(),
+          );
+        }
+
+        return bonus;
+      }).toList();
+      final newMaterialBonus = [...material.addedBonusList]
+        ..removeWhere(
+          (bonus) => !bonus.additionalBonusFlag,
+        )
+        ..addAll(dealBonusWithStockInfo);
+
+      final newCartItemWithBonus = CartItem.material(
+        material.copyWith(
+          addedBonusList: newMaterialBonus,
+        ),
+      );
+      await cartStorage.put(
+        id: newCartItemWithBonus.id,
+        item: CartItemDto.fromDomain(newCartItemWithBonus),
+      );
+
+      return fetchCart();
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, List<CartItem>>> addRemarkToBonusItem({
+    required CartItem item,
+    required MaterialItemBonus bonus,
+    required String remarkMessage,
+  }) async {
+    try {
+      final inCartItem = cartStorage.get(id: item.id)?.toDomain;
+      if (inCartItem != null) {
+        switch (inCartItem.itemType) {
+          case CartItemType.material:
+            final material = inCartItem.materials.first;
+            final updatedBonuses = material.addedBonusList.map((item) {
+              if (item.materialNumber == bonus.materialNumber &&
+                  item.additionalBonusFlag == bonus.additionalBonusFlag) {
+                return item.copyWith(comment: remarkMessage);
+              }
+
+              return item;
+            }).toList();
+            final itemWithNewBonus = inCartItem.copyWith(
+              materials: [material.copyWith(addedBonusList: updatedBonuses)],
+            );
+            await cartStorage.put(
+              id: itemWithNewBonus.id,
+              item: CartItemDto.fromDomain(itemWithNewBonus),
+            );
+            break;
+          case CartItemType.bundle:
+            // TODO: Handle this case.
+            break;
+        }
+      }
+
+      return fetchCart();
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, List<CartItem>>> overrideCartItemPrice({
+    required CartItem item,
+    required List<Price> overridePriceList,
+  }) async {
+    try {
+      final inCartItem = cartStorage.get(id: item.id)?.toDomain;
+      if (inCartItem != null) {
+        switch (inCartItem.itemType) {
+          case CartItemType.material:
+            final updatedMaterials = inCartItem.materials.map((material) {
+              final overridePrice = overridePriceList.firstWhereOrNull(
+                (price) => price.materialNumber == material.getMaterialNumber,
+              );
+
+              return overridePrice == null
+                  ? material
+                  : material.copyWith(
+                      price: overridePrice.copyWith(isPriceOverride: true),
+                    );
+            }).toList();
+
+            await cartStorage.put(
+              id: inCartItem.id,
+              item: CartItemDto.fromDomain(
+                inCartItem.copyWith(
+                  materials: updatedMaterials,
+                ),
+              ),
+            );
+            break;
+          case CartItemType.bundle:
+            // TODO: Handle this case.
+            break;
+        }
+      }
+
+      return fetchCart();
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  List<CartItem> updateDiscountQty({
+    required List<CartItem> items,
+  }) {
+    final zmgDiscountQty = items.allZmgMaterialsQty;
+    final updatedCart = items.map((item) {
+      switch (item.itemType) {
+        case CartItemType.material:
+          final material = item.materials.first;
+          var updatedMaterial = material.copyWith(discountedMaterialCount: 0);
+          if (material.price.zmgDiscount) {
+            updatedMaterial = material.copyWith(
+              discountedMaterialCount: zmgDiscountQty,
+            );
+          } else if (material.price.isTireDiscountEligible) {
+            updatedMaterial = material.copyWith(
+              discountedMaterialCount: material.quantity,
+            );
+          }
+          return item.copyWith(
+            materials: [updatedMaterial],
+          );
+
+        case CartItemType.bundle:
+          return item;
+      }
+    }).toList();
+
+    return updatedCart;
+  }
+
+  @override
+  Future<Either<ApiFailure, List<CartItem>>> updateSelectionInCart({
+    required CartItem updatedItem,
+  }) async {
+    try {
+      await cartStorage.put(
+        id: updatedItem.id,
+        item: CartItemDto.fromDomain(updatedItem.copyWithSelectSwitched),
+      );
+
+      return fetchCart();
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, List<CartItem>>> updateAllSelectionInCart({
+    required List<CartItem> currentCart,
+  }) async {
+    try {
+      final newCart = <CartItem>[];
+      if (currentCart.every((item) => item.isSelected)) {
+        newCart.addAll(
+          currentCart.map(
+            (item) => item.copyWith(isSelected: false),
+          ),
+        );
+      } else {
+        newCart.addAll(
+          currentCart.map(
+            (item) => item.copyWith(isSelected: true),
+          ),
+        );
+      }
+
+      await cartStorage.putAll(
+        items: {
+          for (final item in newCart) item.id: CartItemDto.fromDomain(item),
+        },
+      );
+
+      return fetchCart();
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, List<CartItem>>> saveToCartWithUpdatedStockInfo({
+    required List<CartItem> cartItem,
+    required CustomerCodeInfo customerCodeInfo,
+    required SalesOrganisationConfigs salesOrganisationConfigs,
+    required SalesOrganisation salesOrganisation,
+    required ShipToInfo shipToInfo,
+  }) async {
+    try {
+      final stockInfoList = await getStockInfoList(
+        items: cartItem.allMaterials.map((e) => e.materialInfo).toList(),
+        customerCodeInfo: customerCodeInfo,
+        salesOrganisationConfigs: salesOrganisationConfigs,
+        salesOrganisation: salesOrganisation,
+        shipToInfo: shipToInfo,
+      );
+
+      return stockInfoList.fold(
+        (failure) => Left(failure),
+        (stockInfoMap) async {
+          final cartItemWithStockInfo = cartItem
+              .map((item) => item.copyWithStockInfo(stockInfoMap: stockInfoMap))
+              .toList();
+
+          await cartStorage.putAll(items: {
+            for (final item in cartItemWithStockInfo)
+              item.id: CartItemDto.fromDomain(item),
+          });
+
+          return fetchCart();
         },
       );
     } catch (e) {
-      await countlyService.addCountlyEvent('add_to_cart_failed');
-
       return Left(FailureHandler.handleFailure(e));
     }
   }
 
   @override
-  List<MaterialNumber> updateSelectedItem({
-    required PriceAggregate cartItem,
-    required List<MaterialNumber> selectedMaterialList,
-  }) {
-    if (selectedMaterialList.contains(cartItem.materialInfo.materialNumber)) {
-      return List.from(selectedMaterialList)
-        ..remove(cartItem.materialInfo.materialNumber);
-    }
-
-    return List.from(selectedMaterialList)
-      ..add(cartItem.materialInfo.materialNumber);
-  }
-
-  @override
-  List<MaterialNumber> removeFromSelectedMaterialList({
-    required PriceAggregate cartItem,
-    required List<MaterialNumber> selectedMaterialList,
-  }) {
-    if (selectedMaterialList.contains(cartItem.materialInfo.materialNumber)) {
-      return List.from(selectedMaterialList)
-        ..remove(cartItem.materialInfo.materialNumber);
-    }
-
-    return selectedMaterialList;
-  }
-
-  @override
-  List<MaterialNumber> updateSelectAll({
-    required List<PriceAggregate> cartItemList,
-  }) {
-    final newMaterialNumberList = <MaterialNumber>[];
-    for (final element in cartItemList) {
-      newMaterialNumberList.add(element.materialInfo.materialNumber);
-    }
-
-    return newMaterialNumberList;
-  }
-
-  @override
-  List<MaterialNumber> getUpdatedMaterialList({
-    required List<PriceAggregate> cartItemList,
-    required List<MaterialNumber> selectedItemsMaterialNumber,
-    required List<PriceAggregate> items,
-  }) {
-    final selectedItems =
-        List<MaterialNumber>.from(selectedItemsMaterialNumber);
-    for (final item in items) {
-      final materialNumberIsEmpty =
-          item.materialInfo.materialNumber.getOrDefaultValue('').isEmpty;
-
-      final itemExist = cartItemList.any((e) =>
-          e.materialInfo.materialNumber == item.materialInfo.materialNumber);
-
-      if (itemExist || materialNumberIsEmpty) {
-        continue;
-      } else {
-        selectedItems.add(item.materialInfo.materialNumber);
+  Future<Either<ApiFailure, Map<MaterialNumber, StockInfo>>> getStockInfoList({
+    required List<MaterialInfo> items,
+    required CustomerCodeInfo customerCodeInfo,
+    required SalesOrganisationConfigs salesOrganisationConfigs,
+    required SalesOrganisation salesOrganisation,
+    required ShipToInfo shipToInfo,
+  }) async {
+    try {
+      final stockInfoMap = <MaterialNumber, StockInfo>{};
+      for (final item in items) {
+        final response = await getStockInfo(
+          customerCodeInfo: customerCodeInfo,
+          material: item,
+          salesOrganisation: salesOrganisation,
+          salesOrganisationConfigs: salesOrganisationConfigs,
+          shipToInfo: shipToInfo,
+        );
+        final stockInfo = response.fold(
+          (failure) => StockInfo.empty().copyWith(
+            materialNumber: item.materialNumber,
+          ),
+          (stockInfo) => stockInfo,
+        );
+        stockInfoMap.addAll(
+          {item.materialNumber: stockInfo},
+        );
       }
-    }
 
-    return selectedItems;
-  }
-
-  @override
-  Future<Either<ApiFailure, List<PriceAggregate>>> updateBonusItem({
-    required PriceAggregate cartItem,
-    required int quantity,
-    required MaterialItemBonus bonusItem,
-    required bool isUpdatedFromCart,
-  }) async {
-    try {
-      await cartStorage.updateBonus(
-        cartDto: PriceAggregateDto.fromDomain(cartItem),
-        bonusItem: bonusItem,
-        isUpdateFromCart: isUpdatedFromCart,
-        quantity: quantity,
-      );
-
-      return fetchCartItems();
-    } catch (e) {
-      return Left(FailureHandler.handleFailure(e));
-    }
-  }
-
-  @override
-  Future<Either<ApiFailure, List<PriceAggregate>>> deleteBonusItem({
-    required PriceAggregate cartItem,
-    required MaterialItemBonus bonusItem,
-    required bool isUpdateFromCart,
-  }) async {
-    try {
-      await cartStorage.deleteBonus(
-        cartDto: PriceAggregateDto.fromDomain(cartItem),
-        bonusItem: bonusItem,
-        isUpdateFromCart: isUpdateFromCart,
-      );
-      await countlyService.addCountlyEvent('Remove bonus');
-
-      return fetchCartItems();
+      return Right(stockInfoMap);
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
     }
@@ -385,89 +589,19 @@ class CartRepository implements ICartRepository {
   }
 
   @override
-  Future<Either<ApiFailure, List<PriceAggregate>>> getStockInfoMaterialList({
-    required List<PriceAggregate> materialList,
-    required CustomerCodeInfo customerCodeInfo,
-    required SalesOrganisationConfigs salesOrganisationConfigs,
-    required SalesOrganisation salesOrganisation,
-    required ShipToInfo shipToInfo,
+  Future<Either<ApiFailure, List<CartItem>>> replaceCartWithItems({
+    required List<CartItem> items,
   }) async {
     try {
-      final stockInfoList = <PriceAggregate>[];
-      for (final element in materialList) {
-        final stockInfo = await getStockInfo(
-          customerCodeInfo: customerCodeInfo,
-          material: element.materialInfo,
-          salesOrganisation: salesOrganisation,
-          salesOrganisationConfigs: salesOrganisationConfigs,
-          shipToInfo: shipToInfo,
-        );
-        final stockInformation = stockInfo.fold(
-          (failure) {
-            throw (OtherException(message: failure.failureMessage));
-          },
-          (stockInfo) => stockInfo,
-        );
-        stockInfoList.add(element.copyWith(stockInfo: stockInformation));
-      }
-
-      return Right(stockInfoList);
-    } catch (e) {
-      return Left(FailureHandler.handleFailure(e));
-    }
-  }
-
-  @override
-  Future<Either<ApiFailure, List<PriceAggregate>>> updateDealBonusItem({
-    required PriceAggregate cartItem,
-    required List<MaterialItemBonus> bonusItem,
-  }) async {
-    try {
-      await cartStorage.updateDealBonus(
-        cartDto: PriceAggregateDto.fromDomain(cartItem),
-        bonusItemsDto: bonusItem
-            .map(
-              (MaterialItemBonus element) =>
-                  MaterialItemBonusDto.fromDomain(element),
-            )
-            .toList(),
+      await clearCart();
+      await cartStorage.putAll(
+        items: {
+          for (final item in items) item.id: CartItemDto.fromDomain(item),
+        },
       );
 
-      return fetchCartItems();
+      return fetchCart();
     } catch (e) {
-      return Left(FailureHandler.handleFailure(e));
-    }
-  }
-
-  @override
-  Future<Either<ApiFailure, List<StockInfo>>> getStockInfoList({
-    required List<MaterialInfo> materialInfoList,
-    required CustomerCodeInfo customerCodeInfo,
-    required SalesOrganisationConfigs salesOrganisationConfigs,
-    required SalesOrganisation salesOrganisation,
-    required ShipToInfo shipToInfo,
-  }) async {
-    try {
-      final stockList = <StockInfo>[];
-      for (final element in materialInfoList) {
-        final stockInfo = await getStockInfo(
-          customerCodeInfo: customerCodeInfo,
-          material: element,
-          salesOrganisation: salesOrganisation,
-          salesOrganisationConfigs: salesOrganisationConfigs,
-          shipToInfo: shipToInfo,
-        );
-        stockInfo.fold(
-          (failure) => stockList.add(
-            StockInfo.empty().copyWith(materialNumber: element.materialNumber),
-          ),
-          (stockInfo) => stockList.add(stockInfo),
-        );
-      }
-
-      return Right(stockList);
-    } catch (e) {
-      
       return Left(FailureHandler.handleFailure(e));
     }
   }

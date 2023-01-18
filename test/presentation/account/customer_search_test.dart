@@ -9,15 +9,16 @@ import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_representative_info.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_representative_info.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/sales_org_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/sales_rep_local.dart';
@@ -212,9 +213,11 @@ void main() {
       'Test when cart item is not empty',
       (tester) async {
         when(() => cartBlocMock.state)
-            .thenReturn(CartState.initial().copyWith(cartItemList: [
-          PriceAggregate.empty().copyWith(
-            materialInfo: fakematerialInfo,
+            .thenReturn(CartState.initial().copyWith(cartItems: [
+          CartItem.material(
+            PriceAggregate.empty().copyWith(
+              materialInfo: fakematerialInfo,
+            ),
           ),
         ]));
 

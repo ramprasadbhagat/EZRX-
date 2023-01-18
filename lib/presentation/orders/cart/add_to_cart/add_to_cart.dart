@@ -2,10 +2,11 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/presentation/orders/create_order/add_to_cart_button.dart';
+import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/add_to_cart_button.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/cart_item_detail_widget.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/favorite_button.dart';
 import 'package:flutter/material.dart';
@@ -41,9 +42,7 @@ class _AddToCartState extends State<AddToCart> {
     addToCartBloc.add(
       AddToCartEvent.updateQuantity(
         1,
-        cartItem.price.zmgDiscount
-            ? cartBloc.state.zmgMaterialCount
-            : cartBloc.state.onAddCartDiscountMaterialCount(cartItem),
+        cartBloc.state.zmgMaterialWithoutMaterial(cartItem),
       ),
     );
     tenderContractBloc.add(const TenderContractEvent.unselected());
@@ -97,11 +96,8 @@ class _AddToCartState extends State<AddToCart> {
                           cartItem: state.cartItem,
                           onQuantityChanged: (int value) {
                             final cartItem = addToCartBloc.state.cartItem;
-                            final discountedMaterialCount = cartItem
-                                    .price.zmgDiscount
-                                ? cartBloc.state.zmgMaterialCount
-                                : cartBloc.state
-                                    .onAddCartDiscountMaterialCount(cartItem);
+                            final discountedMaterialCount = cartBloc.state
+                                .zmgMaterialWithoutMaterial(cartItem);
                             addToCartBloc.add(
                               AddToCartEvent.updateQuantity(
                                 value,

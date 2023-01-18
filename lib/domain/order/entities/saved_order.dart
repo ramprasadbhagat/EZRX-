@@ -3,6 +3,7 @@ import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:collection/collection.dart';
 
 part 'saved_order.freezed.dart';
 
@@ -93,7 +94,14 @@ class SavedOrder with _$SavedOrder {
 
   List<MaterialQueryInfo> get allMaterialQueryInfo => items
       .map(
-        (item) => item.queryInfo,
+        (item) {
+          if (item.type.isBundle) {
+            return item.materials.map((item) => item.queryInfo).toList();
+          }
+
+          return [item.queryInfo];
+        },
       )
+      .flattened
       .toList();
 }

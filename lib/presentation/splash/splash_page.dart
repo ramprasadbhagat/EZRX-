@@ -250,8 +250,23 @@ class SplashPage extends StatelessWidget {
             // Policy Configuration fetch event
             context.read<PolicyConfigurationBloc>().add(
                   PolicyConfigurationEvent.fetch(
-                    salesOrganisation:
-                        context.read<SalesOrgBloc>().state.salesOrganisation,
+                    salesOrganisation: state.salesOrganisation,
+                  ),
+                );
+          },
+        ),
+        BlocListener<EligibilityBloc, EligibilityState>(
+          listenWhen: (previous, current) =>
+              previous.shipToInfo != current.shipToInfo,
+          listener: (context, state) {
+            context.read<CartBloc>().add(
+                  CartEvent.fetch(
+                    doNotAllowOutOfStockMaterials:
+                        state.doNotAllowOutOfStockMaterials,
+                    customerCodeInfo: state.customerCodeInfo,
+                    salesOrganisationConfigs: state.salesOrgConfigs,
+                    salesOrganisation: state.salesOrganisation,
+                    shipToInfo: state.shipToInfo,
                   ),
                 );
           },

@@ -3,9 +3,9 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
-import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
@@ -14,45 +14,80 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 
 abstract class ICartRepository {
   Future<Either<ApiFailure, Unit>> initCartStorage();
-  Future<Either<ApiFailure, List<PriceAggregate>>> fetchCartItems();
-  Future<Either<ApiFailure, List<PriceAggregate>>> addToCart({
-    required PriceAggregate cartItem,
-  });
-  Future<Either<ApiFailure, List<PriceAggregate>>> updateCartItem({
-    required PriceAggregate cartItem,
-  });
-  Future<Either<ApiFailure, List<PriceAggregate>>> updateCart({
-    required List<Price> cartItem,
-    required String materialNumber,
+
+  Either<ApiFailure, List<CartItem>> fetchCart();
+
+  Future<Either<ApiFailure, Unit>> clearCart();
+
+  Future<Either<ApiFailure, List<CartItem>>> addItemToCart({
+    required CartItem cartItem,
+    required bool override,
   });
 
-  Future<Either<ApiFailure, List<PriceAggregate>>> deleteFromCart({
-    required PriceAggregate cartItem,
-  });
-  Future<Either<ApiFailure, Unit>> clear();
-
-  Future<Either<ApiFailure, List<PriceAggregate>>> addToCartList({
-    required List<PriceAggregate> items,
+  Future<Either<ApiFailure, List<CartItem>>> deleteFromCart({
+    required CartItem item,
   });
 
-  Future<Either<ApiFailure, List<PriceAggregate>>> updateStockInfo({
-    required User user,
+  Future<Either<ApiFailure, List<CartItem>>> addRemarkToCartItem({
+    required CartItem item,
+    required String remarkMessage,
+  });
+
+  Future<Either<ApiFailure, List<CartItem>>> addBonusToCartItem({
+    required CartItem item,
+    required MaterialItemBonus newBonus,
+    required bool overrideQty,
+  });
+
+  Future<Either<ApiFailure, List<CartItem>>> deleteBonusFromCartItem({
+    required CartItem item,
+    required MaterialItemBonus deletedBonus,
+  });
+  Future<Either<ApiFailure, List<CartItem>>> updateMaterialDealBonus({
+    required PriceAggregate material,
     required CustomerCodeInfo customerCodeInfo,
     required SalesOrganisationConfigs salesOrganisationConfigs,
     required SalesOrganisation salesOrganisation,
     required ShipToInfo shipToInfo,
   });
 
-  List<MaterialNumber> updateSelectedItem({
-    required PriceAggregate cartItem,
-    required List<MaterialNumber> selectedMaterialList,
+  Future<Either<ApiFailure, List<CartItem>>> addRemarkToBonusItem({
+    required CartItem item,
+    required MaterialItemBonus bonus,
+    required String remarkMessage,
   });
-  List<MaterialNumber> removeFromSelectedMaterialList({
-    required PriceAggregate cartItem,
-    required List<MaterialNumber> selectedMaterialList,
+
+  Future<Either<ApiFailure, List<CartItem>>> overrideCartItemPrice({
+    required CartItem item,
+    required List<Price> overridePriceList,
   });
-  List<MaterialNumber> updateSelectAll({
-    required List<PriceAggregate> cartItemList,
+
+  List<CartItem> updateDiscountQty({
+    required List<CartItem> items,
+  });
+
+  Future<Either<ApiFailure, List<CartItem>>> updateSelectionInCart({
+    required CartItem updatedItem,
+  });
+
+  Future<Either<ApiFailure, List<CartItem>>> updateAllSelectionInCart({
+    required List<CartItem> currentCart,
+  });
+
+  Future<Either<ApiFailure, List<CartItem>>> saveToCartWithUpdatedStockInfo({
+    required List<CartItem> cartItem,
+    required CustomerCodeInfo customerCodeInfo,
+    required SalesOrganisationConfigs salesOrganisationConfigs,
+    required SalesOrganisation salesOrganisation,
+    required ShipToInfo shipToInfo,
+  });
+
+  Future<Either<ApiFailure, Map<MaterialNumber, StockInfo>>> getStockInfoList({
+    required List<MaterialInfo> items,
+    required CustomerCodeInfo customerCodeInfo,
+    required SalesOrganisationConfigs salesOrganisationConfigs,
+    required SalesOrganisation salesOrganisation,
+    required ShipToInfo shipToInfo,
   });
 
   Future<Either<ApiFailure, StockInfo>> getStockInfo({
@@ -63,43 +98,7 @@ abstract class ICartRepository {
     required ShipToInfo shipToInfo,
   });
 
-  Future<Either<ApiFailure, List<PriceAggregate>>> getStockInfoMaterialList({
-    required List<PriceAggregate> materialList,
-    required CustomerCodeInfo customerCodeInfo,
-    required SalesOrganisationConfigs salesOrganisationConfigs,
-    required SalesOrganisation salesOrganisation,
-    required ShipToInfo shipToInfo,
-  });
-
-  List<MaterialNumber> getUpdatedMaterialList({
-    required List<PriceAggregate> cartItemList,
-    required List<MaterialNumber> selectedItemsMaterialNumber,
-    required List<PriceAggregate> items,
-  });
-
-  Future<Either<ApiFailure, List<PriceAggregate>>> updateBonusItem({
-    required PriceAggregate cartItem,
-    required int quantity,
-    required MaterialItemBonus bonusItem,
-    required bool isUpdatedFromCart,
-  });
-
-  Future<Either<ApiFailure, List<PriceAggregate>>> deleteBonusItem({
-    required PriceAggregate cartItem,
-    required MaterialItemBonus bonusItem,
-    required bool isUpdateFromCart,
-  });
-
-  Future<Either<ApiFailure, List<PriceAggregate>>> updateDealBonusItem({
-    required PriceAggregate cartItem,
-    required List<MaterialItemBonus> bonusItem,
-  });
-
-  Future<Either<ApiFailure, List<StockInfo>>> getStockInfoList({
-    required List<MaterialInfo> materialInfoList,
-    required CustomerCodeInfo customerCodeInfo,
-    required SalesOrganisationConfigs salesOrganisationConfigs,
-    required SalesOrganisation salesOrganisation,
-    required ShipToInfo shipToInfo,
+  Future<Either<ApiFailure, List<CartItem>>> replaceCartWithItems({
+    required List<CartItem> items,
   });
 }

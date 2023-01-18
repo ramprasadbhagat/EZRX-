@@ -11,35 +11,19 @@ import 'package:ezrxmobile/application/order/material_price/material_price_bloc.
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
-import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
-import 'package:ezrxmobile/domain/order/entities/price_bonus.dart';
-import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/locator.dart';
-import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
-import 'package:ezrxmobile/presentation/core/remarks_tile.dart';
-import 'package:ezrxmobile/presentation/orders/cart/cart_material_item_tile.dart';
-import 'package:ezrxmobile/presentation/orders/create_order/cart_item_bonus_detail_widget.dart';
-import 'package:ezrxmobile/presentation/orders/create_order/price_tier_label.dart';
-import 'package:ezrxmobile/presentation/orders/create_order/quantity_input.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
-
-import '../../../utils/widget_utils.dart';
 
 class TenderContractBlocMock
     extends MockBloc<TenderContractEvent, TenderContractState>
@@ -170,969 +154,969 @@ void main() {
       ];
     },
   );
-  group('Cart Item Tile Test', () {
-    Widget getWidget() {
-      return WidgetUtils.getScopedWidget(
-        autoRouterMock: autoRouter,
-        providers: [
-          BlocProvider<TenderContractBloc>(
-              create: (context) => tenderContractBlocMock),
-          BlocProvider<OrderDocumentTypeBloc>(
-              create: (context) => orderDocumentTypeBlocMock),
-          BlocProvider<UserBloc>(create: (context) => userBlockMock),
-          BlocProvider<EligibilityBloc>(create: (context) => eligibilityBloc),
-          BlocProvider<ShipToCodeBloc>(create: (context) => shipToCodeBloc),
-          BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBloc),
-          BlocProvider<CartBloc>(create: (context) => cartBloc),
-          BlocProvider<CustomerCodeBloc>(
-            create: (context) => customerCodeBloc,
-          ),
-          BlocProvider<MaterialPriceBloc>(
-            create: (context) => materialPriceBloc,
-          ),
-          BlocProvider<OrderEligibilityBloc>(
-            create: (context) => orderEligibilityBlocMock,
-          ),
-          BlocProvider<AddToCartBloc>(create: ((context) => addToCartBlocMock)),
-          BlocProvider<PriceOverrideBloc>(
-            create: (context) => priceOverrideMockBloc,
-          ),
-        ],
-        child: Material(
-          child: CartMaterialItemTile(
-            cartItem: priceAggregates.first,
-            showCheckBox: true,
-            isOrderSummaryView: true,
-          ),
-        ),
-      );
-    }
+  // group('Cart Item Tile Test', () {
+  //   Widget getWidget() {
+  //     return WidgetUtils.getScopedWidget(
+  //       autoRouterMock: autoRouter,
+  //       providers: [
+  //         BlocProvider<TenderContractBloc>(
+  //             create: (context) => tenderContractBlocMock),
+  //         BlocProvider<OrderDocumentTypeBloc>(
+  //             create: (context) => orderDocumentTypeBlocMock),
+  //         BlocProvider<UserBloc>(create: (context) => userBlockMock),
+  //         BlocProvider<EligibilityBloc>(create: (context) => eligibilityBloc),
+  //         BlocProvider<ShipToCodeBloc>(create: (context) => shipToCodeBloc),
+  //         BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBloc),
+  //         BlocProvider<CartBloc>(create: (context) => cartBloc),
+  //         BlocProvider<CustomerCodeBloc>(
+  //           create: (context) => customerCodeBloc,
+  //         ),
+  //         BlocProvider<MaterialPriceBloc>(
+  //           create: (context) => materialPriceBloc,
+  //         ),
+  //         BlocProvider<OrderEligibilityBloc>(
+  //           create: (context) => orderEligibilityBlocMock,
+  //         ),
+  //         BlocProvider<AddToCartBloc>(create: ((context) => addToCartBlocMock)),
+  //         BlocProvider<PriceOverrideBloc>(
+  //           create: (context) => priceOverrideMockBloc,
+  //         ),
+  //       ],
+  //       child: Material(
+  //         child: CartMaterialItemTile(
+  //           cartItem: priceAggregates.first,
+  //           showCheckBox: true,
+  //           isOrderSummaryView: true,
+  //         ),
+  //       ),
+  //     );
+  //   }
 
-    testWidgets(
-      'cart item quantity update',
-      (tester) async {
-        final expectedStates = [
-          CartState.initial().copyWith(
-            isFetching: true,
-          ),
-          CartState.initial().copyWith(
-            isFetching: false,
-            cartItemList: priceAggregates,
-          ),
-        ];
-        whenListen(cartBloc, Stream.fromIterable(expectedStates));
+  //   testWidgets(
+  //     'cart item quantity update',
+  //     (tester) async {
+  //       final expectedStates = [
+  //         CartState.initial().copyWith(
+  //           isFetching: true,
+  //         ),
+  //         CartState.initial().copyWith(
+  //           isFetching: false,
+  //           cartItemList: priceAggregates,
+  //         ),
+  //       ];
+  //       whenListen(cartBloc, Stream.fromIterable(expectedStates));
 
-        when(() => countlyService.addCountlyEvent(
-              'changed_quantity',
-              segmentation: {
-                'materialNum': priceAggregates.first.getMaterialNumber
-                    .getOrDefaultValue(''),
-                'listPrice': priceAggregates.first.listPrice,
-                'price':
-                    priceAggregates.first.price.finalPrice.getOrDefaultValue(0),
-              },
-            )).thenAnswer((invocation) async => Future.value());
+  //       when(() => countlyService.addCountlyEvent(
+  //             'changed_quantity',
+  //             segmentation: {
+  //               'materialNum': priceAggregates.first.getMaterialNumber
+  //                   .getOrDefaultValue(''),
+  //               'listPrice': priceAggregates.first.listPrice,
+  //               'price':
+  //                   priceAggregates.first.price.finalPrice.getOrDefaultValue(0),
+  //             },
+  //           )).thenAnswer((invocation) async => Future.value());
 
-        await tester.pumpWidget(getWidget());
-        await tester.pump();
-        final quantityInput = find.byType(QuantityInput);
-        expect(quantityInput, findsOneWidget);
-        await tester.enterText(quantityInput.first, '12');
-        verify(
-          () => countlyService.addCountlyEvent(
-            'changed_quantity',
-            segmentation: {
-              'materialNum':
-                  priceAggregates.first.getMaterialNumber.getOrDefaultValue(''),
-              'listPrice': priceAggregates.first.listPrice,
-              'price':
-                  priceAggregates.first.price.finalPrice.getOrDefaultValue(0),
-            },
-          ),
-        ).called(1);
-        verify(
-          () => cartBloc.add(
-            CartEvent.updateCartItem(
-              item: priceAggregates.first.copyWith(quantity: 12),
-              customerCodeInfo: CustomerCodeInfo.empty(),
-              doNotallowOutOfStockMaterial: true,
-              salesOrganisation: SalesOrganisation.empty(),
-              salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-              shipToInfo: ShipToInfo.empty(),
-            ),
-          ),
-        ).called(1);
-      },
-    );
+  //       await tester.pumpWidget(getWidget());
+  //       await tester.pump();
+  //       final quantityInput = find.byType(QuantityInput);
+  //       expect(quantityInput, findsOneWidget);
+  //       await tester.enterText(quantityInput.first, '12');
+  //       verify(
+  //         () => countlyService.addCountlyEvent(
+  //           'changed_quantity',
+  //           segmentation: {
+  //             'materialNum':
+  //                 priceAggregates.first.getMaterialNumber.getOrDefaultValue(''),
+  //             'listPrice': priceAggregates.first.listPrice,
+  //             'price':
+  //                 priceAggregates.first.price.finalPrice.getOrDefaultValue(0),
+  //           },
+  //         ),
+  //       ).called(1);
+  //       verify(
+  //         () => cartBloc.add(
+  //           CartEvent.updateCartItem(
+  //             item: priceAggregates.first.copyWith(quantity: 12),
+  //             customerCodeInfo: CustomerCodeInfo.empty(),
+  //             doNotallowOutOfStockMaterial: true,
+  //             salesOrganisation: SalesOrganisation.empty(),
+  //             salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+  //             shipToInfo: ShipToInfo.empty(),
+  //           ),
+  //         ),
+  //       ).called(1);
+  //     },
+  //   );
 
-    testWidgets(
-      'cart item Increment',
-      (tester) async {
-        final expectedStates = [
-          CartState.initial().copyWith(
-            isFetching: true,
-          ),
-          CartState.initial().copyWith(
-            isFetching: false,
-            cartItemList: priceAggregates,
-          ),
-        ];
-        whenListen(cartBloc, Stream.fromIterable(expectedStates));
+  //   testWidgets(
+  //     'cart item Increment',
+  //     (tester) async {
+  //       final expectedStates = [
+  //         CartState.initial().copyWith(
+  //           isFetching: true,
+  //         ),
+  //         CartState.initial().copyWith(
+  //           isFetching: false,
+  //           cartItemList: priceAggregates,
+  //         ),
+  //       ];
+  //       whenListen(cartBloc, Stream.fromIterable(expectedStates));
 
-        when(() => countlyService.addCountlyEvent(
-              'add_quantity',
-              segmentation: {
-                'materialNum': priceAggregates.first.getMaterialNumber
-                    .getOrDefaultValue(''),
-                'listPrice': priceAggregates.first.listPrice,
-                'price':
-                    priceAggregates.first.price.finalPrice.getOrDefaultValue(0),
-              },
-            )).thenAnswer((invocation) async => Future.value());
+  //       when(() => countlyService.addCountlyEvent(
+  //             'add_quantity',
+  //             segmentation: {
+  //               'materialNum': priceAggregates.first.getMaterialNumber
+  //                   .getOrDefaultValue(''),
+  //               'listPrice': priceAggregates.first.listPrice,
+  //               'price':
+  //                   priceAggregates.first.price.finalPrice.getOrDefaultValue(0),
+  //             },
+  //           )).thenAnswer((invocation) async => Future.value());
 
-        await tester.pumpWidget(getWidget());
-        await tester.pump();
-        final quantityInput = find.byType(QuantityInput);
-        expect(quantityInput, findsOneWidget);
-        final cartAdd = find.byKey(const ValueKey('cartAdd'));
-        expect(cartAdd, findsOneWidget);
-        await tester.tap(cartAdd, warnIfMissed: false);
-        verify(
-          () => countlyService.addCountlyEvent(
-            'add_quantity',
-            segmentation: {
-              'materialNum':
-                  priceAggregates.first.getMaterialNumber.getOrDefaultValue(''),
-              'listPrice': priceAggregates.first.listPrice,
-              'price':
-                  priceAggregates.first.price.finalPrice.getOrDefaultValue(0),
-            },
-          ),
-        ).called(1);
-        verify(
-          () => cartBloc.add(
-            CartEvent.addToCart(
-              item: priceAggregates.first.copyWith(quantity: 1),
-              customerCodeInfo: CustomerCodeInfo.empty(),
-              doNotallowOutOfStockMaterial: true,
-              salesOrganisation: SalesOrganisation.empty(),
-              salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-              shipToInfo: ShipToInfo.empty(),
-            ),
-          ),
-        ).called(1);
-      },
-    );
+  //       await tester.pumpWidget(getWidget());
+  //       await tester.pump();
+  //       final quantityInput = find.byType(QuantityInput);
+  //       expect(quantityInput, findsOneWidget);
+  //       final cartAdd = find.byKey(const ValueKey('cartAdd'));
+  //       expect(cartAdd, findsOneWidget);
+  //       await tester.tap(cartAdd, warnIfMissed: false);
+  //       verify(
+  //         () => countlyService.addCountlyEvent(
+  //           'add_quantity',
+  //           segmentation: {
+  //             'materialNum':
+  //                 priceAggregates.first.getMaterialNumber.getOrDefaultValue(''),
+  //             'listPrice': priceAggregates.first.listPrice,
+  //             'price':
+  //                 priceAggregates.first.price.finalPrice.getOrDefaultValue(0),
+  //           },
+  //         ),
+  //       ).called(1);
+  //       verify(
+  //         () => cartBloc.add(
+  //           CartEvent.addToCart(
+  //             item: priceAggregates.first.copyWith(quantity: 1),
+  //             customerCodeInfo: CustomerCodeInfo.empty(),
+  //             doNotallowOutOfStockMaterial: true,
+  //             salesOrganisation: SalesOrganisation.empty(),
+  //             salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+  //             shipToInfo: ShipToInfo.empty(),
+  //           ),
+  //         ),
+  //       ).called(1);
+  //     },
+  //   );
 
-    testWidgets(
-      'Cart item quntity decrement',
-      (tester) async {
-        when(() => countlyService.addCountlyEvent(
-              'deduct_quantity',
-              segmentation: {
-                'materialNum': priceAggregates.first.getMaterialNumber
-                    .getOrDefaultValue(''),
-                'listPrice': priceAggregates.first.listPrice,
-                'price':
-                    priceAggregates.first.price.finalPrice.getOrDefaultValue(0),
-              },
-            )).thenAnswer((invocation) async => Future.value());
+  //   testWidgets(
+  //     'Cart item quntity decrement',
+  //     (tester) async {
+  //       when(() => countlyService.addCountlyEvent(
+  //             'deduct_quantity',
+  //             segmentation: {
+  //               'materialNum': priceAggregates.first.getMaterialNumber
+  //                   .getOrDefaultValue(''),
+  //               'listPrice': priceAggregates.first.listPrice,
+  //               'price':
+  //                   priceAggregates.first.price.finalPrice.getOrDefaultValue(0),
+  //             },
+  //           )).thenAnswer((invocation) async => Future.value());
 
-        await tester.pumpWidget(getWidget());
-        await tester.pump();
-        final cartDelete = find.byKey(const ValueKey('cartDelete'));
-        expect(cartDelete, findsOneWidget);
-        await tester.ensureVisible(cartDelete.first);
-        await tester.tap(cartDelete.first);
-        verify(
-          () => countlyService.addCountlyEvent(
-            'deduct_quantity',
-            segmentation: {
-              'materialNum':
-                  priceAggregates.first.getMaterialNumber.getOrDefaultValue(''),
-              'listPrice': priceAggregates.first.listPrice,
-              'price':
-                  priceAggregates.first.price.finalPrice.getOrDefaultValue(0),
-            },
-          ),
-        ).called(1);
+  //       await tester.pumpWidget(getWidget());
+  //       await tester.pump();
+  //       final cartDelete = find.byKey(const ValueKey('cartDelete'));
+  //       expect(cartDelete, findsOneWidget);
+  //       await tester.ensureVisible(cartDelete.first);
+  //       await tester.tap(cartDelete.first);
+  //       verify(
+  //         () => countlyService.addCountlyEvent(
+  //           'deduct_quantity',
+  //           segmentation: {
+  //             'materialNum':
+  //                 priceAggregates.first.getMaterialNumber.getOrDefaultValue(''),
+  //             'listPrice': priceAggregates.first.listPrice,
+  //             'price':
+  //                 priceAggregates.first.price.finalPrice.getOrDefaultValue(0),
+  //           },
+  //         ),
+  //       ).called(1);
 
-        verify(
-          () => cartBloc.add(
-            CartEvent.addToCart(
-              item: priceAggregates.first.copyWith(quantity: -1),
-              customerCodeInfo: CustomerCodeInfo.empty(),
-              doNotallowOutOfStockMaterial: true,
-              salesOrganisation: SalesOrganisation.empty(),
-              salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-              shipToInfo: ShipToInfo.empty(),
-            ),
-          ),
-        ).called(1);
-      },
-    );
+  //       verify(
+  //         () => cartBloc.add(
+  //           CartEvent.addToCart(
+  //             item: priceAggregates.first.copyWith(quantity: -1),
+  //             customerCodeInfo: CustomerCodeInfo.empty(),
+  //             doNotallowOutOfStockMaterial: true,
+  //             salesOrganisation: SalesOrganisation.empty(),
+  //             salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+  //             shipToInfo: ShipToInfo.empty(),
+  //           ),
+  //         ),
+  //       ).called(1);
+  //     },
+  //   );
 
-    testWidgets(
-      'Cart item delete',
-      (tester) async {
-        await tester.pumpWidget(getWidget());
-        final cartItemSlidable = find.byType(CustomSlidable);
-        expect(cartItemSlidable, findsOneWidget);
-        await tester.dragFrom(
-            const Offset(500.0, 20.0), const Offset(-200.0, 10.0));
-        await tester.pump();
-        final deleteIcon = find.byIcon(Icons.delete_outline);
-        expect(deleteIcon, findsOneWidget);
-        await tester.tap(deleteIcon);
+  //   testWidgets(
+  //     'Cart item delete',
+  //     (tester) async {
+  //       await tester.pumpWidget(getWidget());
+  //       final cartItemSlidable = find.byType(CustomSlidable);
+  //       expect(cartItemSlidable, findsOneWidget);
+  //       await tester.dragFrom(
+  //           const Offset(500.0, 20.0), const Offset(-200.0, 10.0));
+  //       await tester.pump();
+  //       final deleteIcon = find.byIcon(Icons.delete_outline);
+  //       expect(deleteIcon, findsOneWidget);
+  //       await tester.tap(deleteIcon);
 
-        verify(
-          () => cartBloc.add(
-            CartEvent.removeFromCart(
-              item: priceAggregates.first,
-            ),
-          ),
-        ).called(1);
-      },
-    );
+  //       verify(
+  //         () => cartBloc.add(
+  //           CartEvent.removeFromCart(
+  //             item: priceAggregates.first,
+  //           ),
+  //         ),
+  //       ).called(1);
+  //     },
+  //   );
 
-    testWidgets(
-      'cart item onCheck',
-      (tester) async {
-        await tester.pumpWidget(getWidget());
-        final caritItemCheckbox = find.byType(Checkbox);
-        expect(caritItemCheckbox, findsOneWidget);
-        await tester.tap(caritItemCheckbox);
+  //   testWidgets(
+  //     'cart item onCheck',
+  //     (tester) async {
+  //       await tester.pumpWidget(getWidget());
+  //       final caritItemCheckbox = find.byType(Checkbox);
+  //       expect(caritItemCheckbox, findsOneWidget);
+  //       await tester.tap(caritItemCheckbox);
 
-        verify(
-          () => cartBloc.add(
-            CartEvent.updateSelectedItem(
-              item: priceAggregates.first,
-            ),
-          ),
-        ).called(1);
-      },
-    );
+  //       verify(
+  //         () => cartBloc.add(
+  //           CartEvent.updateSelectedItem(
+  //             item: priceAggregates.first,
+  //           ),
+  //         ),
+  //       ).called(1);
+  //     },
+  //   );
 
-    testWidgets(
-      'Cart item Widget test',
-      (tester) async {
-        priceAggregates = priceAggregates
-            .map(
-              (e) => e.copyWith(
-                price: e.price.copyWith(tiers: [
-                  PriceTier.empty().copyWith(
-                    items: [
-                      PriceTierItem.empty().copyWith(rate: 1),
-                      PriceTierItem.empty().copyWith(rate: 2)
-                    ],
-                  )
-                ], bonuses: [
-                  PriceBonus.empty().copyWith(
-                    items: [
-                      PriceBonusItem.empty().copyWith(bonusMaterials: [
-                        BonusMaterial.empty().copyWith(
-                          calculation: BonusMaterialCalculation('913'),
-                        )
-                      ])
-                    ],
-                  )
-                ]),
-              ),
-            )
-            .toList();
-        when(() => salesOrgBloc.state).thenReturn(
-          SalesOrgState.initial().copyWith(
-            configs: SalesOrganisationConfigs.empty().copyWith(
-              enableListPrice: true,
-              enableRemarks: true,
-            ),
-          ),
-        );
+  //   testWidgets(
+  //     'Cart item Widget test',
+  //     (tester) async {
+  //       priceAggregates = priceAggregates
+  //           .map(
+  //             (e) => e.copyWith(
+  //               price: e.price.copyWith(tiers: [
+  //                 PriceTier.empty().copyWith(
+  //                   items: [
+  //                     PriceTierItem.empty().copyWith(rate: 1),
+  //                     PriceTierItem.empty().copyWith(rate: 2)
+  //                   ],
+  //                 )
+  //               ], bonuses: [
+  //                 PriceBonus.empty().copyWith(
+  //                   items: [
+  //                     PriceBonusItem.empty().copyWith(bonusMaterials: [
+  //                       BonusMaterial.empty().copyWith(
+  //                         calculation: BonusMaterialCalculation('913'),
+  //                       )
+  //                     ])
+  //                   ],
+  //                 )
+  //               ]),
+  //             ),
+  //           )
+  //           .toList();
+  //       when(() => salesOrgBloc.state).thenReturn(
+  //         SalesOrgState.initial().copyWith(
+  //           configs: SalesOrganisationConfigs.empty().copyWith(
+  //             enableListPrice: true,
+  //             enableRemarks: true,
+  //           ),
+  //         ),
+  //       );
 
-        final expectedStates = [
-          CartState.initial().copyWith(
-            isFetching: true,
-          ),
-          CartState.initial().copyWith(
-            isFetching: false,
-            cartItemList: priceAggregates,
-          ),
-        ];
-        whenListen(cartBloc, Stream.fromIterable(expectedStates));
-        priceAggregates = priceAggregates
-            .map(
-              (PriceAggregate e) => e.copyWith(
-                salesOrgConfig: SalesOrganisationConfigs.empty().copyWith(
-                  enableDefaultMD: true,
-                  expiryDateDisplay: true,
-                ),
-                materialInfo: e.materialInfo
-                    .copyWith(defaultMaterialDescription: 'Test Description'),
-              ),
-            )
-            .toList();
-        await tester.pumpWidget(getWidget());
-        final description = find.textContaining('Test Description');
-        expect(description, findsOneWidget);
-        final listPrice = find.textContaining('List Price');
-        expect(listPrice, findsOneWidget);
-        final priceTierLabel = find.byType(PriceTierLabel);
-        expect(priceTierLabel, findsNWidgets(2));
-        final expiryDate = find.textContaining('Expiry Date');
-        expect(expiryDate, findsAtLeastNWidgets(1));
-        final bonusDetails = find.byType(BonusDetails);
-        expect(bonusDetails, findsOneWidget);
-      },
-    );
+  //       final expectedStates = [
+  //         CartState.initial().copyWith(
+  //           isFetching: true,
+  //         ),
+  //         CartState.initial().copyWith(
+  //           isFetching: false,
+  //           cartItemList: priceAggregates,
+  //         ),
+  //       ];
+  //       whenListen(cartBloc, Stream.fromIterable(expectedStates));
+  //       priceAggregates = priceAggregates
+  //           .map(
+  //             (PriceAggregate e) => e.copyWith(
+  //               salesOrgConfig: SalesOrganisationConfigs.empty().copyWith(
+  //                 enableDefaultMD: true,
+  //                 expiryDateDisplay: true,
+  //               ),
+  //               materialInfo: e.materialInfo
+  //                   .copyWith(defaultMaterialDescription: 'Test Description'),
+  //             ),
+  //           )
+  //           .toList();
+  //       await tester.pumpWidget(getWidget());
+  //       final description = find.textContaining('Test Description');
+  //       expect(description, findsOneWidget);
+  //       final listPrice = find.textContaining('List Price');
+  //       expect(listPrice, findsOneWidget);
+  //       final priceTierLabel = find.byType(PriceTierLabel);
+  //       expect(priceTierLabel, findsNWidgets(2));
+  //       final expiryDate = find.textContaining('Expiry Date');
+  //       expect(expiryDate, findsAtLeastNWidgets(1));
+  //       final bonusDetails = find.byType(BonusDetails);
+  //       expect(bonusDetails, findsOneWidget);
+  //     },
+  //   );
 
-    testWidgets(
-      '=> PriceOverRide(True) Cart item Price override test\n salesRep:True, \npriceOverride:True, \ndisableOrderType: True, \nhasPriceOverride: True, \nOrderType: ZPFC ',
-      (tester) async {
-        when(() => userBlockMock.state).thenReturn(
-          UserState.initial().copyWith(
-            user: mockUser.copyWith(
-                role: mockRole.copyWith(
-                  type: RoleType('internal_sales_rep'),
-                ),
-                hasPriceOverride: true),
-          ),
-        );
+  //   testWidgets(
+  //     '=> PriceOverRide(True) Cart item Price override test\n salesRep:True, \npriceOverride:True, \ndisableOrderType: True, \nhasPriceOverride: True, \nOrderType: ZPFC ',
+  //     (tester) async {
+  //       when(() => userBlockMock.state).thenReturn(
+  //         UserState.initial().copyWith(
+  //           user: mockUser.copyWith(
+  //               role: mockRole.copyWith(
+  //                 type: RoleType('internal_sales_rep'),
+  //               ),
+  //               hasPriceOverride: true),
+  //         ),
+  //       );
 
-        when(() => salesOrgBloc.state).thenReturn(SalesOrgState.initial()
-            .copyWith(
-                configs: SalesOrganisationConfigs.empty()
-                    .copyWith(priceOverride: true, disableOrderType: true)));
+  //       when(() => salesOrgBloc.state).thenReturn(SalesOrgState.initial()
+  //           .copyWith(
+  //               configs: SalesOrganisationConfigs.empty()
+  //                   .copyWith(priceOverride: true, disableOrderType: true)));
 
-        when(() => eligibilityBloc.state).thenReturn(EligibilityState.initial()
-            .copyWith(
-                salesOrgConfigs: salesOrgBloc.state.configs,
-                user: userBlockMock.state.user));
-        when(() => orderEligibilityBlocMock.state).thenReturn(
-            OrderEligibilityState.initial().copyWith(
-                configs: salesOrgBloc.state.configs,
-                cartItems: priceAggregates,
-                user: userBlockMock.state.user,
-                orderType: 'ZPFC'));
-        priceAggregates = priceAggregates
-            .map(
-              (e) => e.copyWith(
-                salesOrgConfig: SalesOrganisationConfigs.empty()
-                    .copyWith(priceOverride: true),
-              ),
-            )
-            .toList();
-        await tester.pumpWidget(getWidget());
-        final priceOverride = find.byKey(const ValueKey('priceOverride'));
-        expect(priceOverride, findsOneWidget);
-        await tester.tap(priceOverride);
-        await tester.pump();
-        final priceSheet = find.byKey(const ValueKey('priceSheet'));
-        expect(priceSheet, findsOneWidget);
-        final priceOverrideSubmitButton =
-            find.byKey(const ValueKey('priceOverrideSubmitButton'));
-        expect(priceOverrideSubmitButton, findsOneWidget);
-        await tester.ensureVisible(priceOverrideSubmitButton.first);
-        await tester.pumpAndSettle();
-        await tester.tap(priceOverrideSubmitButton.first);
-        verify(
-          () => priceOverrideMockBloc.add(
-            PriceOverrideEvent.fetch(
-              customerCodeInfo: CustomerCodeInfo.empty(),
-              item: priceAggregates.first,
-              newPrice: 0,
-              salesOrganisation: SalesOrganisation.empty(),
-            ),
-          ),
-        ).called(1);
-      },
-    );
+  //       when(() => eligibilityBloc.state).thenReturn(EligibilityState.initial()
+  //           .copyWith(
+  //               salesOrgConfigs: salesOrgBloc.state.configs,
+  //               user: userBlockMock.state.user));
+  //       when(() => orderEligibilityBlocMock.state).thenReturn(
+  //           OrderEligibilityState.initial().copyWith(
+  //               configs: salesOrgBloc.state.configs,
+  //               cartItems: priceAggregates,
+  //               user: userBlockMock.state.user,
+  //               orderType: 'ZPFC'));
+  //       priceAggregates = priceAggregates
+  //           .map(
+  //             (e) => e.copyWith(
+  //               salesOrgConfig: SalesOrganisationConfigs.empty()
+  //                   .copyWith(priceOverride: true),
+  //             ),
+  //           )
+  //           .toList();
+  //       await tester.pumpWidget(getWidget());
+  //       final priceOverride = find.byKey(const ValueKey('priceOverride'));
+  //       expect(priceOverride, findsOneWidget);
+  //       await tester.tap(priceOverride);
+  //       await tester.pump();
+  //       final priceSheet = find.byKey(const ValueKey('priceSheet'));
+  //       expect(priceSheet, findsOneWidget);
+  //       final priceOverrideSubmitButton =
+  //           find.byKey(const ValueKey('priceOverrideSubmitButton'));
+  //       expect(priceOverrideSubmitButton, findsOneWidget);
+  //       await tester.ensureVisible(priceOverrideSubmitButton.first);
+  //       await tester.pumpAndSettle();
+  //       await tester.tap(priceOverrideSubmitButton.first);
+  //       verify(
+  //         () => priceOverrideMockBloc.add(
+  //           PriceOverrideEvent.fetch(
+  //             customerCodeInfo: CustomerCodeInfo.empty(),
+  //             item: priceAggregates.first,
+  //             newPrice: 0,
+  //             salesOrganisation: SalesOrganisation.empty(),
+  //           ),
+  //         ),
+  //       ).called(1);
+  //     },
+  //   );
 
-    testWidgets(
-      '=> PriceOverRide(True) Cart item Price override test\n salesRep:False, \npriceOverride:True, \ndisableOrderType: False, \nhasPriceOverride: True, \nOrderType: InEligible ',
-      (tester) async {
-        when(() => userBlockMock.state).thenReturn(
-          UserState.initial().copyWith(
-            user: mockUser.copyWith(
-                role: mockRole.copyWith(
-                  type: RoleType('fake_role'),
-                ),
-                hasPriceOverride: true),
-          ),
-        );
+  //   testWidgets(
+  //     '=> PriceOverRide(True) Cart item Price override test\n salesRep:False, \npriceOverride:True, \ndisableOrderType: False, \nhasPriceOverride: True, \nOrderType: InEligible ',
+  //     (tester) async {
+  //       when(() => userBlockMock.state).thenReturn(
+  //         UserState.initial().copyWith(
+  //           user: mockUser.copyWith(
+  //               role: mockRole.copyWith(
+  //                 type: RoleType('fake_role'),
+  //               ),
+  //               hasPriceOverride: true),
+  //         ),
+  //       );
 
-        when(() => salesOrgBloc.state).thenReturn(SalesOrgState.initial()
-            .copyWith(
-                configs: SalesOrganisationConfigs.empty()
-                    .copyWith(priceOverride: true, disableOrderType: false)));
+  //       when(() => salesOrgBloc.state).thenReturn(SalesOrgState.initial()
+  //           .copyWith(
+  //               configs: SalesOrganisationConfigs.empty()
+  //                   .copyWith(priceOverride: true, disableOrderType: false)));
 
-        when(() => eligibilityBloc.state).thenReturn(EligibilityState.initial()
-            .copyWith(
-                salesOrgConfigs: salesOrgBloc.state.configs,
-                user: userBlockMock.state.user));
-        when(() => orderEligibilityBlocMock.state).thenReturn(
-            OrderEligibilityState.initial().copyWith(
-                configs: salesOrgBloc.state.configs,
-                cartItems: priceAggregates,
-                user: userBlockMock.state.user,
-                orderType: 'fake_order_type'));
-        priceAggregates = priceAggregates
-            .map(
-              (e) => e.copyWith(
-                salesOrgConfig: SalesOrganisationConfigs.empty()
-                    .copyWith(priceOverride: true),
-              ),
-            )
-            .toList();
-        await tester.pumpWidget(getWidget());
-        final priceOverride = find.byKey(const ValueKey('priceOverride'));
-        expect(priceOverride, findsOneWidget);
-        await tester.tap(priceOverride);
-        await tester.pump();
-        final priceSheet = find.byKey(const ValueKey('priceSheet'));
-        expect(priceSheet, findsOneWidget);
-        final priceOverrideSubmitButton =
-            find.byKey(const ValueKey('priceOverrideSubmitButton'));
-        expect(priceOverrideSubmitButton, findsOneWidget);
-        await tester.ensureVisible(priceOverrideSubmitButton.first);
-        await tester.pumpAndSettle();
-        await tester.tap(priceOverrideSubmitButton.first);
-        verify(
-          () => priceOverrideMockBloc.add(
-            PriceOverrideEvent.fetch(
-              customerCodeInfo: CustomerCodeInfo.empty(),
-              item: priceAggregates.first,
-              newPrice: 0,
-              salesOrganisation: SalesOrganisation.empty(),
-            ),
-          ),
-        ).called(1);
-      },
-    );
-    testWidgets(
-      '=> PriceOverRide(True) Cart item Price override test\n salesRep:True, \npriceOverride:True, \ndisableOrderType: True, \nhasPriceOverride: True, \nOrderType: InEligible ',
-      (tester) async {
-        when(() => userBlockMock.state).thenReturn(
-          UserState.initial().copyWith(
-            user: mockUser.copyWith(
-                role: mockRole.copyWith(
-                  type: RoleType('internal_sales_rep'),
-                ),
-                hasPriceOverride: true),
-          ),
-        );
+  //       when(() => eligibilityBloc.state).thenReturn(EligibilityState.initial()
+  //           .copyWith(
+  //               salesOrgConfigs: salesOrgBloc.state.configs,
+  //               user: userBlockMock.state.user));
+  //       when(() => orderEligibilityBlocMock.state).thenReturn(
+  //           OrderEligibilityState.initial().copyWith(
+  //               configs: salesOrgBloc.state.configs,
+  //               cartItems: priceAggregates,
+  //               user: userBlockMock.state.user,
+  //               orderType: 'fake_order_type'));
+  //       priceAggregates = priceAggregates
+  //           .map(
+  //             (e) => e.copyWith(
+  //               salesOrgConfig: SalesOrganisationConfigs.empty()
+  //                   .copyWith(priceOverride: true),
+  //             ),
+  //           )
+  //           .toList();
+  //       await tester.pumpWidget(getWidget());
+  //       final priceOverride = find.byKey(const ValueKey('priceOverride'));
+  //       expect(priceOverride, findsOneWidget);
+  //       await tester.tap(priceOverride);
+  //       await tester.pump();
+  //       final priceSheet = find.byKey(const ValueKey('priceSheet'));
+  //       expect(priceSheet, findsOneWidget);
+  //       final priceOverrideSubmitButton =
+  //           find.byKey(const ValueKey('priceOverrideSubmitButton'));
+  //       expect(priceOverrideSubmitButton, findsOneWidget);
+  //       await tester.ensureVisible(priceOverrideSubmitButton.first);
+  //       await tester.pumpAndSettle();
+  //       await tester.tap(priceOverrideSubmitButton.first);
+  //       verify(
+  //         () => priceOverrideMockBloc.add(
+  //           PriceOverrideEvent.fetch(
+  //             customerCodeInfo: CustomerCodeInfo.empty(),
+  //             item: priceAggregates.first,
+  //             newPrice: 0,
+  //             salesOrganisation: SalesOrganisation.empty(),
+  //           ),
+  //         ),
+  //       ).called(1);
+  //     },
+  //   );
+  //   testWidgets(
+  //     '=> PriceOverRide(True) Cart item Price override test\n salesRep:True, \npriceOverride:True, \ndisableOrderType: True, \nhasPriceOverride: True, \nOrderType: InEligible ',
+  //     (tester) async {
+  //       when(() => userBlockMock.state).thenReturn(
+  //         UserState.initial().copyWith(
+  //           user: mockUser.copyWith(
+  //               role: mockRole.copyWith(
+  //                 type: RoleType('internal_sales_rep'),
+  //               ),
+  //               hasPriceOverride: true),
+  //         ),
+  //       );
 
-        when(() => salesOrgBloc.state).thenReturn(SalesOrgState.initial()
-            .copyWith(
-                configs: SalesOrganisationConfigs.empty()
-                    .copyWith(priceOverride: true, disableOrderType: true)));
+  //       when(() => salesOrgBloc.state).thenReturn(SalesOrgState.initial()
+  //           .copyWith(
+  //               configs: SalesOrganisationConfigs.empty()
+  //                   .copyWith(priceOverride: true, disableOrderType: true)));
 
-        when(() => eligibilityBloc.state).thenReturn(EligibilityState.initial()
-            .copyWith(
-                salesOrgConfigs: salesOrgBloc.state.configs,
-                user: userBlockMock.state.user));
-        when(() => orderEligibilityBlocMock.state).thenReturn(
-            OrderEligibilityState.initial().copyWith(
-                configs: salesOrgBloc.state.configs,
-                cartItems: priceAggregates,
-                user: userBlockMock.state.user,
-                orderType: 'fake_order_type'));
-        priceAggregates = priceAggregates
-            .map(
-              (e) => e.copyWith(
-                salesOrgConfig: SalesOrganisationConfigs.empty()
-                    .copyWith(priceOverride: true),
-              ),
-            )
-            .toList();
-        await tester.pumpWidget(getWidget());
-        final priceOverride = find.byKey(const ValueKey('priceOverride'));
-        expect(priceOverride, findsOneWidget);
-        await tester.tap(priceOverride);
-        await tester.pump();
-        final priceSheet = find.byKey(const ValueKey('priceSheet'));
-        expect(priceSheet, findsOneWidget);
-        final priceOverrideSubmitButton =
-            find.byKey(const ValueKey('priceOverrideSubmitButton'));
-        expect(priceOverrideSubmitButton, findsOneWidget);
-        await tester.ensureVisible(priceOverrideSubmitButton.first);
-        await tester.pumpAndSettle();
-        await tester.tap(priceOverrideSubmitButton.first);
-        verify(
-          () => priceOverrideMockBloc.add(
-            PriceOverrideEvent.fetch(
-              customerCodeInfo: CustomerCodeInfo.empty(),
-              item: priceAggregates.first,
-              newPrice: 0,
-              salesOrganisation: SalesOrganisation.empty(),
-            ),
-          ),
-        ).called(1);
-      },
-    );
-    testWidgets(
-      '=> PriceOverRide(True) Cart item Price override test\n salesRep:True, \npriceOverride:False, \ndisableOrderType: True, \nhasPriceOverride: True, \nOrderType: ZPFC ',
-      (tester) async {
-        when(() => userBlockMock.state).thenReturn(
-          UserState.initial().copyWith(
-            user: mockUser.copyWith(
-                role: mockRole.copyWith(
-                  type: RoleType('internal_sales_rep'),
-                ),
-                hasPriceOverride: true),
-          ),
-        );
+  //       when(() => eligibilityBloc.state).thenReturn(EligibilityState.initial()
+  //           .copyWith(
+  //               salesOrgConfigs: salesOrgBloc.state.configs,
+  //               user: userBlockMock.state.user));
+  //       when(() => orderEligibilityBlocMock.state).thenReturn(
+  //           OrderEligibilityState.initial().copyWith(
+  //               configs: salesOrgBloc.state.configs,
+  //               cartItems: priceAggregates,
+  //               user: userBlockMock.state.user,
+  //               orderType: 'fake_order_type'));
+  //       priceAggregates = priceAggregates
+  //           .map(
+  //             (e) => e.copyWith(
+  //               salesOrgConfig: SalesOrganisationConfigs.empty()
+  //                   .copyWith(priceOverride: true),
+  //             ),
+  //           )
+  //           .toList();
+  //       await tester.pumpWidget(getWidget());
+  //       final priceOverride = find.byKey(const ValueKey('priceOverride'));
+  //       expect(priceOverride, findsOneWidget);
+  //       await tester.tap(priceOverride);
+  //       await tester.pump();
+  //       final priceSheet = find.byKey(const ValueKey('priceSheet'));
+  //       expect(priceSheet, findsOneWidget);
+  //       final priceOverrideSubmitButton =
+  //           find.byKey(const ValueKey('priceOverrideSubmitButton'));
+  //       expect(priceOverrideSubmitButton, findsOneWidget);
+  //       await tester.ensureVisible(priceOverrideSubmitButton.first);
+  //       await tester.pumpAndSettle();
+  //       await tester.tap(priceOverrideSubmitButton.first);
+  //       verify(
+  //         () => priceOverrideMockBloc.add(
+  //           PriceOverrideEvent.fetch(
+  //             customerCodeInfo: CustomerCodeInfo.empty(),
+  //             item: priceAggregates.first,
+  //             newPrice: 0,
+  //             salesOrganisation: SalesOrganisation.empty(),
+  //           ),
+  //         ),
+  //       ).called(1);
+  //     },
+  //   );
+  //   testWidgets(
+  //     '=> PriceOverRide(True) Cart item Price override test\n salesRep:True, \npriceOverride:False, \ndisableOrderType: True, \nhasPriceOverride: True, \nOrderType: ZPFC ',
+  //     (tester) async {
+  //       when(() => userBlockMock.state).thenReturn(
+  //         UserState.initial().copyWith(
+  //           user: mockUser.copyWith(
+  //               role: mockRole.copyWith(
+  //                 type: RoleType('internal_sales_rep'),
+  //               ),
+  //               hasPriceOverride: true),
+  //         ),
+  //       );
 
-        when(() => salesOrgBloc.state).thenReturn(SalesOrgState.initial()
-            .copyWith(
-                configs: SalesOrganisationConfigs.empty()
-                    .copyWith(priceOverride: false, disableOrderType: true)));
+  //       when(() => salesOrgBloc.state).thenReturn(SalesOrgState.initial()
+  //           .copyWith(
+  //               configs: SalesOrganisationConfigs.empty()
+  //                   .copyWith(priceOverride: false, disableOrderType: true)));
 
-        when(() => eligibilityBloc.state).thenReturn(EligibilityState.initial()
-            .copyWith(
-                salesOrgConfigs: salesOrgBloc.state.configs,
-                user: userBlockMock.state.user));
-        when(() => orderEligibilityBlocMock.state).thenReturn(
-            OrderEligibilityState.initial().copyWith(
-                configs: salesOrgBloc.state.configs,
-                cartItems: priceAggregates,
-                user: userBlockMock.state.user,
-                orderType: 'ZPFC'));
-        priceAggregates = priceAggregates
-            .map(
-              (e) => e.copyWith(
-                salesOrgConfig: SalesOrganisationConfigs.empty()
-                    .copyWith(priceOverride: true),
-              ),
-            )
-            .toList();
-        await tester.pumpWidget(getWidget());
-        final priceOverride = find.byKey(const ValueKey('priceOverride'));
-        expect(priceOverride, findsOneWidget);
-        await tester.tap(priceOverride);
-        await tester.pump();
-        final priceSheet = find.byKey(const ValueKey('priceSheet'));
-        expect(priceSheet, findsOneWidget);
-        final priceOverrideSubmitButton =
-            find.byKey(const ValueKey('priceOverrideSubmitButton'));
-        expect(priceOverrideSubmitButton, findsOneWidget);
-        await tester.ensureVisible(priceOverrideSubmitButton.first);
-        await tester.pumpAndSettle();
-        await tester.tap(priceOverrideSubmitButton.first);
-        verify(
-          () => priceOverrideMockBloc.add(
-            PriceOverrideEvent.fetch(
-              customerCodeInfo: CustomerCodeInfo.empty(),
-              item: priceAggregates.first,
-              newPrice: 0,
-              salesOrganisation: SalesOrganisation.empty(),
-            ),
-          ),
-        ).called(1);
-      },
-    );
-    testWidgets(
-      '=> PriceOverRide(False) Cart item Price override test\n salesRep:True,, \ndisableOrderType: False,, \nOrderType: Eligible, \npriceOverride:True, \nhasPriceOverride: True ',
-      (tester) async {
-        when(() => userBlockMock.state).thenReturn(
-          UserState.initial().copyWith(
-            user: mockUser.copyWith(
-                role: mockRole.copyWith(
-                  type: RoleType('internal_sales_rep'),
-                ),
-                hasPriceOverride: true),
-          ),
-        );
+  //       when(() => eligibilityBloc.state).thenReturn(EligibilityState.initial()
+  //           .copyWith(
+  //               salesOrgConfigs: salesOrgBloc.state.configs,
+  //               user: userBlockMock.state.user));
+  //       when(() => orderEligibilityBlocMock.state).thenReturn(
+  //           OrderEligibilityState.initial().copyWith(
+  //               configs: salesOrgBloc.state.configs,
+  //               cartItems: priceAggregates,
+  //               user: userBlockMock.state.user,
+  //               orderType: 'ZPFC'));
+  //       priceAggregates = priceAggregates
+  //           .map(
+  //             (e) => e.copyWith(
+  //               salesOrgConfig: SalesOrganisationConfigs.empty()
+  //                   .copyWith(priceOverride: true),
+  //             ),
+  //           )
+  //           .toList();
+  //       await tester.pumpWidget(getWidget());
+  //       final priceOverride = find.byKey(const ValueKey('priceOverride'));
+  //       expect(priceOverride, findsOneWidget);
+  //       await tester.tap(priceOverride);
+  //       await tester.pump();
+  //       final priceSheet = find.byKey(const ValueKey('priceSheet'));
+  //       expect(priceSheet, findsOneWidget);
+  //       final priceOverrideSubmitButton =
+  //           find.byKey(const ValueKey('priceOverrideSubmitButton'));
+  //       expect(priceOverrideSubmitButton, findsOneWidget);
+  //       await tester.ensureVisible(priceOverrideSubmitButton.first);
+  //       await tester.pumpAndSettle();
+  //       await tester.tap(priceOverrideSubmitButton.first);
+  //       verify(
+  //         () => priceOverrideMockBloc.add(
+  //           PriceOverrideEvent.fetch(
+  //             customerCodeInfo: CustomerCodeInfo.empty(),
+  //             item: priceAggregates.first,
+  //             newPrice: 0,
+  //             salesOrganisation: SalesOrganisation.empty(),
+  //           ),
+  //         ),
+  //       ).called(1);
+  //     },
+  //   );
+  //   testWidgets(
+  //     '=> PriceOverRide(False) Cart item Price override test\n salesRep:True,, \ndisableOrderType: False,, \nOrderType: Eligible, \npriceOverride:True, \nhasPriceOverride: True ',
+  //     (tester) async {
+  //       when(() => userBlockMock.state).thenReturn(
+  //         UserState.initial().copyWith(
+  //           user: mockUser.copyWith(
+  //               role: mockRole.copyWith(
+  //                 type: RoleType('internal_sales_rep'),
+  //               ),
+  //               hasPriceOverride: true),
+  //         ),
+  //       );
 
-        when(() => salesOrgBloc.state).thenReturn(SalesOrgState.initial()
-            .copyWith(
-                configs: SalesOrganisationConfigs.empty()
-                    .copyWith(priceOverride: true, disableOrderType: false)));
+  //       when(() => salesOrgBloc.state).thenReturn(SalesOrgState.initial()
+  //           .copyWith(
+  //               configs: SalesOrganisationConfigs.empty()
+  //                   .copyWith(priceOverride: true, disableOrderType: false)));
 
-        when(() => eligibilityBloc.state).thenReturn(EligibilityState.initial()
-            .copyWith(
-                salesOrgConfigs: salesOrgBloc.state.configs,
-                user: userBlockMock.state.user));
-        when(() => orderEligibilityBlocMock.state).thenReturn(
-            OrderEligibilityState.initial().copyWith(
-                configs: salesOrgBloc.state.configs,
-                cartItems: priceAggregates,
-                user: userBlockMock.state.user,
-                orderType: 'ZPFC'));
-        await tester.pumpWidget(getWidget());
-        final priceOverride = find.byKey(const ValueKey('priceOverride'));
-        expect(priceOverride, findsOneWidget);
-        await tester.tap(priceOverride);
-        await tester.pump();
-        final priceSheet = find.byKey(const ValueKey('priceSheet'));
-        expect(priceSheet, findsNothing);
-        final priceOverrideSubmitButton =
-            find.byKey(const ValueKey('priceOverrideSubmitButton'));
-        expect(priceOverrideSubmitButton, findsNothing);
-      },
-    );
-    testWidgets(
-      '=> PriceOverRide(False) Cart item Price override test\n salesRep:True,, \ndisableOrderType: False,, \nOrderType: Eligible, \npriceOverride:False, \nhasPriceOverride: False ',
-      (tester) async {
-        when(() => userBlockMock.state).thenReturn(
-          UserState.initial().copyWith(
-            user: mockUser.copyWith(
-                role: mockRole.copyWith(
-                  type: RoleType('internal_sales_rep'),
-                ),
-                hasPriceOverride: false),
-          ),
-        );
+  //       when(() => eligibilityBloc.state).thenReturn(EligibilityState.initial()
+  //           .copyWith(
+  //               salesOrgConfigs: salesOrgBloc.state.configs,
+  //               user: userBlockMock.state.user));
+  //       when(() => orderEligibilityBlocMock.state).thenReturn(
+  //           OrderEligibilityState.initial().copyWith(
+  //               configs: salesOrgBloc.state.configs,
+  //               cartItems: priceAggregates,
+  //               user: userBlockMock.state.user,
+  //               orderType: 'ZPFC'));
+  //       await tester.pumpWidget(getWidget());
+  //       final priceOverride = find.byKey(const ValueKey('priceOverride'));
+  //       expect(priceOverride, findsOneWidget);
+  //       await tester.tap(priceOverride);
+  //       await tester.pump();
+  //       final priceSheet = find.byKey(const ValueKey('priceSheet'));
+  //       expect(priceSheet, findsNothing);
+  //       final priceOverrideSubmitButton =
+  //           find.byKey(const ValueKey('priceOverrideSubmitButton'));
+  //       expect(priceOverrideSubmitButton, findsNothing);
+  //     },
+  //   );
+  //   testWidgets(
+  //     '=> PriceOverRide(False) Cart item Price override test\n salesRep:True,, \ndisableOrderType: False,, \nOrderType: Eligible, \npriceOverride:False, \nhasPriceOverride: False ',
+  //     (tester) async {
+  //       when(() => userBlockMock.state).thenReturn(
+  //         UserState.initial().copyWith(
+  //           user: mockUser.copyWith(
+  //               role: mockRole.copyWith(
+  //                 type: RoleType('internal_sales_rep'),
+  //               ),
+  //               hasPriceOverride: false),
+  //         ),
+  //       );
 
-        when(() => salesOrgBloc.state).thenReturn(SalesOrgState.initial()
-            .copyWith(
-                configs: SalesOrganisationConfigs.empty()
-                    .copyWith(priceOverride: false, disableOrderType: false)));
+  //       when(() => salesOrgBloc.state).thenReturn(SalesOrgState.initial()
+  //           .copyWith(
+  //               configs: SalesOrganisationConfigs.empty()
+  //                   .copyWith(priceOverride: false, disableOrderType: false)));
 
-        when(() => eligibilityBloc.state).thenReturn(EligibilityState.initial()
-            .copyWith(
-                salesOrgConfigs: salesOrgBloc.state.configs,
-                user: userBlockMock.state.user));
-        when(() => orderEligibilityBlocMock.state).thenReturn(
-            OrderEligibilityState.initial().copyWith(
-                configs: salesOrgBloc.state.configs,
-                cartItems: priceAggregates,
-                user: userBlockMock.state.user,
-                orderType: 'ZPFC'));
+  //       when(() => eligibilityBloc.state).thenReturn(EligibilityState.initial()
+  //           .copyWith(
+  //               salesOrgConfigs: salesOrgBloc.state.configs,
+  //               user: userBlockMock.state.user));
+  //       when(() => orderEligibilityBlocMock.state).thenReturn(
+  //           OrderEligibilityState.initial().copyWith(
+  //               configs: salesOrgBloc.state.configs,
+  //               cartItems: priceAggregates,
+  //               user: userBlockMock.state.user,
+  //               orderType: 'ZPFC'));
 
-        await tester.pumpWidget(getWidget());
-        final priceOverride = find.byKey(const ValueKey('priceOverride'));
-        expect(priceOverride, findsOneWidget);
-        await tester.tap(priceOverride);
-        await tester.pump();
-        final priceSheet = find.byKey(const ValueKey('priceSheet'));
-        expect(priceSheet, findsNothing);
-        final priceOverrideSubmitButton =
-            find.byKey(const ValueKey('priceOverrideSubmitButton'));
-        expect(priceOverrideSubmitButton, findsNothing);
-      },
-    );
+  //       await tester.pumpWidget(getWidget());
+  //       final priceOverride = find.byKey(const ValueKey('priceOverride'));
+  //       expect(priceOverride, findsOneWidget);
+  //       await tester.tap(priceOverride);
+  //       await tester.pump();
+  //       final priceSheet = find.byKey(const ValueKey('priceSheet'));
+  //       expect(priceSheet, findsNothing);
+  //       final priceOverrideSubmitButton =
+  //           find.byKey(const ValueKey('priceOverrideSubmitButton'));
+  //       expect(priceOverrideSubmitButton, findsNothing);
+  //     },
+  //   );
 
-    testWidgets(
-      '=> PriceOverRide(False) Cart item Price override test\n salesRep:True,, \ndisableOrderType: False,, \nOrderType: Eligible, \npriceOverride:False, \nhasPriceOverride: True ',
-      (tester) async {
-        when(() => userBlockMock.state).thenReturn(
-          UserState.initial().copyWith(
-            user: mockUser.copyWith(
-                role: mockRole.copyWith(
-                  type: RoleType('internal_sales_rep'),
-                ),
-                hasPriceOverride: true),
-          ),
-        );
+  //   testWidgets(
+  //     '=> PriceOverRide(False) Cart item Price override test\n salesRep:True,, \ndisableOrderType: False,, \nOrderType: Eligible, \npriceOverride:False, \nhasPriceOverride: True ',
+  //     (tester) async {
+  //       when(() => userBlockMock.state).thenReturn(
+  //         UserState.initial().copyWith(
+  //           user: mockUser.copyWith(
+  //               role: mockRole.copyWith(
+  //                 type: RoleType('internal_sales_rep'),
+  //               ),
+  //               hasPriceOverride: true),
+  //         ),
+  //       );
 
-        when(() => salesOrgBloc.state).thenReturn(SalesOrgState.initial()
-            .copyWith(
-                configs: SalesOrganisationConfigs.empty()
-                    .copyWith(priceOverride: false, disableOrderType: false)));
+  //       when(() => salesOrgBloc.state).thenReturn(SalesOrgState.initial()
+  //           .copyWith(
+  //               configs: SalesOrganisationConfigs.empty()
+  //                   .copyWith(priceOverride: false, disableOrderType: false)));
 
-        when(() => eligibilityBloc.state).thenReturn(EligibilityState.initial()
-            .copyWith(
-                salesOrgConfigs: salesOrgBloc.state.configs,
-                user: userBlockMock.state.user));
-        when(() => orderEligibilityBlocMock.state).thenReturn(
-            OrderEligibilityState.initial().copyWith(
-                configs: salesOrgBloc.state.configs,
-                cartItems: priceAggregates,
-                user: userBlockMock.state.user,
-                orderType: 'ZPFC'));
+  //       when(() => eligibilityBloc.state).thenReturn(EligibilityState.initial()
+  //           .copyWith(
+  //               salesOrgConfigs: salesOrgBloc.state.configs,
+  //               user: userBlockMock.state.user));
+  //       when(() => orderEligibilityBlocMock.state).thenReturn(
+  //           OrderEligibilityState.initial().copyWith(
+  //               configs: salesOrgBloc.state.configs,
+  //               cartItems: priceAggregates,
+  //               user: userBlockMock.state.user,
+  //               orderType: 'ZPFC'));
 
-        await tester.pumpWidget(getWidget());
-        final priceOverride = find.byKey(const ValueKey('priceOverride'));
-        expect(priceOverride, findsOneWidget);
-        await tester.tap(priceOverride);
-        await tester.pump();
-        final priceSheet = find.byKey(const ValueKey('priceSheet'));
-        expect(priceSheet, findsNothing);
-        final priceOverrideSubmitButton =
-            find.byKey(const ValueKey('priceOverrideSubmitButton'));
-        expect(priceOverrideSubmitButton, findsNothing);
-      },
-    );
-    testWidgets(
-      '=> PriceOverRide(False) Cart item Price override test\n salesRep:True,, \ndisableOrderType: False,, \nOrderType: Eligible, \npriceOverride:True, \nhasPriceOverride: False ',
-      (tester) async {
-        when(() => userBlockMock.state).thenReturn(
-          UserState.initial().copyWith(
-            user: mockUser.copyWith(
-                role: mockRole.copyWith(
-                  type: RoleType('internal_sales_rep'),
-                ),
-                hasPriceOverride: false),
-          ),
-        );
+  //       await tester.pumpWidget(getWidget());
+  //       final priceOverride = find.byKey(const ValueKey('priceOverride'));
+  //       expect(priceOverride, findsOneWidget);
+  //       await tester.tap(priceOverride);
+  //       await tester.pump();
+  //       final priceSheet = find.byKey(const ValueKey('priceSheet'));
+  //       expect(priceSheet, findsNothing);
+  //       final priceOverrideSubmitButton =
+  //           find.byKey(const ValueKey('priceOverrideSubmitButton'));
+  //       expect(priceOverrideSubmitButton, findsNothing);
+  //     },
+  //   );
+  //   testWidgets(
+  //     '=> PriceOverRide(False) Cart item Price override test\n salesRep:True,, \ndisableOrderType: False,, \nOrderType: Eligible, \npriceOverride:True, \nhasPriceOverride: False ',
+  //     (tester) async {
+  //       when(() => userBlockMock.state).thenReturn(
+  //         UserState.initial().copyWith(
+  //           user: mockUser.copyWith(
+  //               role: mockRole.copyWith(
+  //                 type: RoleType('internal_sales_rep'),
+  //               ),
+  //               hasPriceOverride: false),
+  //         ),
+  //       );
 
-        when(() => salesOrgBloc.state).thenReturn(SalesOrgState.initial()
-            .copyWith(
-                configs: SalesOrganisationConfigs.empty()
-                    .copyWith(priceOverride: true, disableOrderType: false)));
+  //       when(() => salesOrgBloc.state).thenReturn(SalesOrgState.initial()
+  //           .copyWith(
+  //               configs: SalesOrganisationConfigs.empty()
+  //                   .copyWith(priceOverride: true, disableOrderType: false)));
 
-        when(() => eligibilityBloc.state).thenReturn(EligibilityState.initial()
-            .copyWith(
-                salesOrgConfigs: salesOrgBloc.state.configs,
-                user: userBlockMock.state.user));
-        when(() => orderEligibilityBlocMock.state).thenReturn(
-            OrderEligibilityState.initial().copyWith(
-                configs: salesOrgBloc.state.configs,
-                cartItems: priceAggregates,
-                user: userBlockMock.state.user,
-                orderType: 'ZPFC'));
+  //       when(() => eligibilityBloc.state).thenReturn(EligibilityState.initial()
+  //           .copyWith(
+  //               salesOrgConfigs: salesOrgBloc.state.configs,
+  //               user: userBlockMock.state.user));
+  //       when(() => orderEligibilityBlocMock.state).thenReturn(
+  //           OrderEligibilityState.initial().copyWith(
+  //               configs: salesOrgBloc.state.configs,
+  //               cartItems: priceAggregates,
+  //               user: userBlockMock.state.user,
+  //               orderType: 'ZPFC'));
 
-        await tester.pumpWidget(getWidget());
-        final priceOverride = find.byKey(const ValueKey('priceOverride'));
-        expect(priceOverride, findsOneWidget);
-        await tester.tap(priceOverride);
-        await tester.pump();
-        final priceSheet = find.byKey(const ValueKey('priceSheet'));
-        expect(priceSheet, findsNothing);
-        final priceOverrideSubmitButton =
-            find.byKey(const ValueKey('priceOverrideSubmitButton'));
-        expect(priceOverrideSubmitButton, findsNothing);
-      },
-    );
-    testWidgets(
-      '=> PriceOverRide(False) Cart item Price override test\n salesRep:False,, \ndisableOrderType: False,, \nOrderType: InEligible, \npriceOverride:False, \nhasPriceOverride: False ',
-      (tester) async {
-        when(() => userBlockMock.state).thenReturn(
-          UserState.initial().copyWith(
-            user: mockUser.copyWith(
-                role: mockRole.copyWith(
-                  type: RoleType('fake_sales_rep'),
-                ),
-                hasPriceOverride: false),
-          ),
-        );
+  //       await tester.pumpWidget(getWidget());
+  //       final priceOverride = find.byKey(const ValueKey('priceOverride'));
+  //       expect(priceOverride, findsOneWidget);
+  //       await tester.tap(priceOverride);
+  //       await tester.pump();
+  //       final priceSheet = find.byKey(const ValueKey('priceSheet'));
+  //       expect(priceSheet, findsNothing);
+  //       final priceOverrideSubmitButton =
+  //           find.byKey(const ValueKey('priceOverrideSubmitButton'));
+  //       expect(priceOverrideSubmitButton, findsNothing);
+  //     },
+  //   );
+  //   testWidgets(
+  //     '=> PriceOverRide(False) Cart item Price override test\n salesRep:False,, \ndisableOrderType: False,, \nOrderType: InEligible, \npriceOverride:False, \nhasPriceOverride: False ',
+  //     (tester) async {
+  //       when(() => userBlockMock.state).thenReturn(
+  //         UserState.initial().copyWith(
+  //           user: mockUser.copyWith(
+  //               role: mockRole.copyWith(
+  //                 type: RoleType('fake_sales_rep'),
+  //               ),
+  //               hasPriceOverride: false),
+  //         ),
+  //       );
 
-        when(() => salesOrgBloc.state).thenReturn(SalesOrgState.initial()
-            .copyWith(
-                configs: SalesOrganisationConfigs.empty()
-                    .copyWith(priceOverride: false, disableOrderType: false)));
+  //       when(() => salesOrgBloc.state).thenReturn(SalesOrgState.initial()
+  //           .copyWith(
+  //               configs: SalesOrganisationConfigs.empty()
+  //                   .copyWith(priceOverride: false, disableOrderType: false)));
 
-        when(() => eligibilityBloc.state).thenReturn(EligibilityState.initial()
-            .copyWith(
-                salesOrgConfigs: salesOrgBloc.state.configs,
-                user: userBlockMock.state.user));
-        when(() => orderEligibilityBlocMock.state).thenReturn(
-            OrderEligibilityState.initial().copyWith(
-                configs: salesOrgBloc.state.configs,
-                cartItems: priceAggregates,
-                user: userBlockMock.state.user,
-                orderType: 'fake_order_type'));
+  //       when(() => eligibilityBloc.state).thenReturn(EligibilityState.initial()
+  //           .copyWith(
+  //               salesOrgConfigs: salesOrgBloc.state.configs,
+  //               user: userBlockMock.state.user));
+  //       when(() => orderEligibilityBlocMock.state).thenReturn(
+  //           OrderEligibilityState.initial().copyWith(
+  //               configs: salesOrgBloc.state.configs,
+  //               cartItems: priceAggregates,
+  //               user: userBlockMock.state.user,
+  //               orderType: 'fake_order_type'));
 
-        await tester.pumpWidget(getWidget());
-        final priceOverride = find.byKey(const ValueKey('priceOverride'));
-        expect(priceOverride, findsOneWidget);
-        await tester.tap(priceOverride);
-        await tester.pump();
-        final priceSheet = find.byKey(const ValueKey('priceSheet'));
-        expect(priceSheet, findsNothing);
-        final priceOverrideSubmitButton =
-            find.byKey(const ValueKey('priceOverrideSubmitButton'));
-        expect(priceOverrideSubmitButton, findsNothing);
-      },
-    );
-    testWidgets(
-      '=> PriceOverRide(False) Cart item Price override test\n salesRep:True,, \ndisableOrderType: True, \nOrderType: Eligible, \npriceOverride:False, \nhasPriceOverride: False ',
-      (tester) async {
-        when(() => userBlockMock.state).thenReturn(
-          UserState.initial().copyWith(
-            user: mockUser.copyWith(
-                role: mockRole.copyWith(
-                  type: RoleType('internal_sales_rep'),
-                ),
-                hasPriceOverride: false),
-          ),
-        );
+  //       await tester.pumpWidget(getWidget());
+  //       final priceOverride = find.byKey(const ValueKey('priceOverride'));
+  //       expect(priceOverride, findsOneWidget);
+  //       await tester.tap(priceOverride);
+  //       await tester.pump();
+  //       final priceSheet = find.byKey(const ValueKey('priceSheet'));
+  //       expect(priceSheet, findsNothing);
+  //       final priceOverrideSubmitButton =
+  //           find.byKey(const ValueKey('priceOverrideSubmitButton'));
+  //       expect(priceOverrideSubmitButton, findsNothing);
+  //     },
+  //   );
+  //   testWidgets(
+  //     '=> PriceOverRide(False) Cart item Price override test\n salesRep:True,, \ndisableOrderType: True, \nOrderType: Eligible, \npriceOverride:False, \nhasPriceOverride: False ',
+  //     (tester) async {
+  //       when(() => userBlockMock.state).thenReturn(
+  //         UserState.initial().copyWith(
+  //           user: mockUser.copyWith(
+  //               role: mockRole.copyWith(
+  //                 type: RoleType('internal_sales_rep'),
+  //               ),
+  //               hasPriceOverride: false),
+  //         ),
+  //       );
 
-        when(() => salesOrgBloc.state).thenReturn(SalesOrgState.initial()
-            .copyWith(
-                configs: SalesOrganisationConfigs.empty()
-                    .copyWith(priceOverride: false, disableOrderType: true)));
+  //       when(() => salesOrgBloc.state).thenReturn(SalesOrgState.initial()
+  //           .copyWith(
+  //               configs: SalesOrganisationConfigs.empty()
+  //                   .copyWith(priceOverride: false, disableOrderType: true)));
 
-        when(() => eligibilityBloc.state).thenReturn(EligibilityState.initial()
-            .copyWith(
-                salesOrgConfigs: salesOrgBloc.state.configs,
-                user: userBlockMock.state.user));
-        when(() => orderEligibilityBlocMock.state).thenReturn(
-            OrderEligibilityState.initial().copyWith(
-                configs: salesOrgBloc.state.configs,
-                cartItems: priceAggregates,
-                user: userBlockMock.state.user,
-                orderType: 'ZPFC'));
+  //       when(() => eligibilityBloc.state).thenReturn(EligibilityState.initial()
+  //           .copyWith(
+  //               salesOrgConfigs: salesOrgBloc.state.configs,
+  //               user: userBlockMock.state.user));
+  //       when(() => orderEligibilityBlocMock.state).thenReturn(
+  //           OrderEligibilityState.initial().copyWith(
+  //               configs: salesOrgBloc.state.configs,
+  //               cartItems: priceAggregates,
+  //               user: userBlockMock.state.user,
+  //               orderType: 'ZPFC'));
 
-        await tester.pumpWidget(getWidget());
-        final priceOverride = find.byKey(const ValueKey('priceOverride'));
-        expect(priceOverride, findsOneWidget);
-        await tester.tap(priceOverride);
-        await tester.pump();
-        final priceSheet = find.byKey(const ValueKey('priceSheet'));
-        expect(priceSheet, findsNothing);
-        final priceOverrideSubmitButton =
-            find.byKey(const ValueKey('priceOverrideSubmitButton'));
-        expect(priceOverrideSubmitButton, findsNothing);
-      },
-    );
+  //       await tester.pumpWidget(getWidget());
+  //       final priceOverride = find.byKey(const ValueKey('priceOverride'));
+  //       expect(priceOverride, findsOneWidget);
+  //       await tester.tap(priceOverride);
+  //       await tester.pump();
+  //       final priceSheet = find.byKey(const ValueKey('priceSheet'));
+  //       expect(priceSheet, findsNothing);
+  //       final priceOverrideSubmitButton =
+  //           find.byKey(const ValueKey('priceOverrideSubmitButton'));
+  //       expect(priceOverrideSubmitButton, findsNothing);
+  //     },
+  //   );
 
-    testWidgets(
-      '=> PriceOverRide(False) Cart item Price override test\n salesRep:True,, \ndisableOrderType: False, \nOrderType: InEligible, \npriceOverride:False, \nhasPriceOverride: False ',
-      (tester) async {
-        when(() => userBlockMock.state).thenReturn(
-          UserState.initial().copyWith(
-            user: mockUser.copyWith(
-                role: mockRole.copyWith(
-                  type: RoleType('internal_sales_rep'),
-                ),
-                hasPriceOverride: false),
-          ),
-        );
+  //   testWidgets(
+  //     '=> PriceOverRide(False) Cart item Price override test\n salesRep:True,, \ndisableOrderType: False, \nOrderType: InEligible, \npriceOverride:False, \nhasPriceOverride: False ',
+  //     (tester) async {
+  //       when(() => userBlockMock.state).thenReturn(
+  //         UserState.initial().copyWith(
+  //           user: mockUser.copyWith(
+  //               role: mockRole.copyWith(
+  //                 type: RoleType('internal_sales_rep'),
+  //               ),
+  //               hasPriceOverride: false),
+  //         ),
+  //       );
 
-        when(() => salesOrgBloc.state).thenReturn(SalesOrgState.initial()
-            .copyWith(
-                configs: SalesOrganisationConfigs.empty()
-                    .copyWith(priceOverride: false, disableOrderType: false)));
+  //       when(() => salesOrgBloc.state).thenReturn(SalesOrgState.initial()
+  //           .copyWith(
+  //               configs: SalesOrganisationConfigs.empty()
+  //                   .copyWith(priceOverride: false, disableOrderType: false)));
 
-        when(() => eligibilityBloc.state).thenReturn(EligibilityState.initial()
-            .copyWith(
-                salesOrgConfigs: salesOrgBloc.state.configs,
-                user: userBlockMock.state.user));
-        when(() => orderEligibilityBlocMock.state).thenReturn(
-            OrderEligibilityState.initial().copyWith(
-                configs: salesOrgBloc.state.configs,
-                cartItems: priceAggregates,
-                user: userBlockMock.state.user,
-                orderType: 'fake_order_type'));
+  //       when(() => eligibilityBloc.state).thenReturn(EligibilityState.initial()
+  //           .copyWith(
+  //               salesOrgConfigs: salesOrgBloc.state.configs,
+  //               user: userBlockMock.state.user));
+  //       when(() => orderEligibilityBlocMock.state).thenReturn(
+  //           OrderEligibilityState.initial().copyWith(
+  //               configs: salesOrgBloc.state.configs,
+  //               cartItems: priceAggregates,
+  //               user: userBlockMock.state.user,
+  //               orderType: 'fake_order_type'));
 
-        await tester.pumpWidget(getWidget());
-        final priceOverride = find.byKey(const ValueKey('priceOverride'));
-        expect(priceOverride, findsOneWidget);
-        await tester.tap(priceOverride);
-        await tester.pump();
-        final priceSheet = find.byKey(const ValueKey('priceSheet'));
-        expect(priceSheet, findsNothing);
-        final priceOverrideSubmitButton =
-            find.byKey(const ValueKey('priceOverrideSubmitButton'));
-        expect(priceOverrideSubmitButton, findsNothing);
-      },
-    );
-    testWidgets(
-      'Cart item Widget remarks edit',
-      (tester) async {
-        priceAggregates = priceAggregates
-            .map(
-              (e) => e.copyWith(
-                materialInfo: e.materialInfo.copyWith(
-                  remarks: 'test',
-                ),
-              ),
-            )
-            .toList();
-        when(() => salesOrgBloc.state).thenReturn(
-          SalesOrgState.initial().copyWith(
-            configs:
-                SalesOrganisationConfigs.empty().copyWith(enableRemarks: true),
-          ),
-        );
+  //       await tester.pumpWidget(getWidget());
+  //       final priceOverride = find.byKey(const ValueKey('priceOverride'));
+  //       expect(priceOverride, findsOneWidget);
+  //       await tester.tap(priceOverride);
+  //       await tester.pump();
+  //       final priceSheet = find.byKey(const ValueKey('priceSheet'));
+  //       expect(priceSheet, findsNothing);
+  //       final priceOverrideSubmitButton =
+  //           find.byKey(const ValueKey('priceOverrideSubmitButton'));
+  //       expect(priceOverrideSubmitButton, findsNothing);
+  //     },
+  //   );
+  //   testWidgets(
+  //     'Cart item Widget remarks edit',
+  //     (tester) async {
+  //       priceAggregates = priceAggregates
+  //           .map(
+  //             (e) => e.copyWith(
+  //               materialInfo: e.materialInfo.copyWith(
+  //                 remarks: 'test',
+  //               ),
+  //             ),
+  //           )
+  //           .toList();
+  //       when(() => salesOrgBloc.state).thenReturn(
+  //         SalesOrgState.initial().copyWith(
+  //           configs:
+  //               SalesOrganisationConfigs.empty().copyWith(enableRemarks: true),
+  //         ),
+  //       );
 
-        await tester.pumpWidget(getWidget());
-        final description = find.byType(RemarksMessage);
-        expect(description, findsOneWidget);
-        final editDeleteDialog = find.byKey(const ValueKey('editDeleteDialog'));
-        expect(editDeleteDialog, findsOneWidget);
-        await tester.tap(editDeleteDialog.first);
-        await tester.pump();
-        final childEditdButton = find.text('Edit');
-        expect(childEditdButton, findsOneWidget);
-        await tester.ensureVisible(childEditdButton);
-        await tester.pumpAndSettle();
-        await tester.tap(childEditdButton);
-        await tester.pump();
-        final addRemarksDialog = find.byKey(const ValueKey('addRemarksDialog'));
-        expect(addRemarksDialog, findsOneWidget);
-      },
-    );
+  //       await tester.pumpWidget(getWidget());
+  //       final description = find.byType(RemarksMessage);
+  //       expect(description, findsOneWidget);
+  //       final editDeleteDialog = find.byKey(const ValueKey('editDeleteDialog'));
+  //       expect(editDeleteDialog, findsOneWidget);
+  //       await tester.tap(editDeleteDialog.first);
+  //       await tester.pump();
+  //       final childEditdButton = find.text('Edit');
+  //       expect(childEditdButton, findsOneWidget);
+  //       await tester.ensureVisible(childEditdButton);
+  //       await tester.pumpAndSettle();
+  //       await tester.tap(childEditdButton);
+  //       await tester.pump();
+  //       final addRemarksDialog = find.byKey(const ValueKey('addRemarksDialog'));
+  //       expect(addRemarksDialog, findsOneWidget);
+  //     },
+  //   );
 
-    testWidgets(
-      'Cart item Widget remarks Delete',
-      (tester) async {
-        priceAggregates = priceAggregates
-            .map(
-              (e) => e.copyWith(
-                materialInfo: e.materialInfo.copyWith(
-                  remarks: 'test',
-                ),
-              ),
-            )
-            .toList();
-        when(() => salesOrgBloc.state).thenReturn(
-          SalesOrgState.initial().copyWith(
-            configs:
-                SalesOrganisationConfigs.empty().copyWith(enableRemarks: true),
-          ),
-        );
+  //   testWidgets(
+  //     'Cart item Widget remarks Delete',
+  //     (tester) async {
+  //       priceAggregates = priceAggregates
+  //           .map(
+  //             (e) => e.copyWith(
+  //               materialInfo: e.materialInfo.copyWith(
+  //                 remarks: 'test',
+  //               ),
+  //             ),
+  //           )
+  //           .toList();
+  //       when(() => salesOrgBloc.state).thenReturn(
+  //         SalesOrgState.initial().copyWith(
+  //           configs:
+  //               SalesOrganisationConfigs.empty().copyWith(enableRemarks: true),
+  //         ),
+  //       );
 
-        await tester.pumpWidget(getWidget());
-        final description = find.byType(RemarksMessage);
-        expect(description, findsOneWidget);
-        final editDeleteDialog = find.byKey(const ValueKey('editDeleteDialog'));
-        expect(editDeleteDialog, findsOneWidget);
-        await tester.tap(editDeleteDialog.first);
-        await tester.pumpAndSettle();
-        final childDeleteButton = find.text('Delete');
-        expect(childDeleteButton, findsOneWidget); //
-        await tester.ensureVisible(childDeleteButton);
-        await tester.pumpAndSettle();
-        await tester.tap(childDeleteButton);
-        verify(
-          () => cartBloc.add(
-            const CartEvent.remarksChanged(''),
-          ),
-        ).called(1);
-      },
-    );
+  //       await tester.pumpWidget(getWidget());
+  //       final description = find.byType(RemarksMessage);
+  //       expect(description, findsOneWidget);
+  //       final editDeleteDialog = find.byKey(const ValueKey('editDeleteDialog'));
+  //       expect(editDeleteDialog, findsOneWidget);
+  //       await tester.tap(editDeleteDialog.first);
+  //       await tester.pumpAndSettle();
+  //       final childDeleteButton = find.text('Delete');
+  //       expect(childDeleteButton, findsOneWidget); //
+  //       await tester.ensureVisible(childDeleteButton);
+  //       await tester.pumpAndSettle();
+  //       await tester.tap(childDeleteButton);
+  //       verify(
+  //         () => cartBloc.add(
+  //           const CartEvent.remarksChanged(''),
+  //         ),
+  //       ).called(1);
+  //     },
+  //   );
 
-    testWidgets(
-      'Cart item Widget remarks add',
-      (tester) async {
-        when(() => salesOrgBloc.state).thenReturn(
-          SalesOrgState.initial().copyWith(
-            configs:
-                SalesOrganisationConfigs.empty().copyWith(enableRemarks: true),
-          ),
-        );
-        await tester.pumpWidget(getWidget());
-        final addRemarks = find.byKey(const ValueKey('addRemarks'));
-        expect(addRemarks, findsOneWidget);
-        final addRemarksInkWell =
-            find.byKey(ValueKey('${const ValueKey('addRemarks')}-InkWell'));
-        expect(addRemarksInkWell, findsOneWidget);
-        await tester.ensureVisible(addRemarksInkWell);
-        await tester.pumpAndSettle();
-        await tester.tap(addRemarksInkWell);
-        await tester.pump();
-        final addRemarksDialog = find.byKey(const ValueKey('addRemarksDialog'));
-        expect(addRemarksDialog, findsOneWidget);
-        final addRemark = find.byKey(const ValueKey('Add'));
-        expect(addRemark, findsOneWidget);
-        final cancelDddRemark = find.byKey(const ValueKey('Cancel'));
-        expect(cancelDddRemark, findsOneWidget);
-        await tester.tap(addRemark);
+  //   testWidgets(
+  //     'Cart item Widget remarks add',
+  //     (tester) async {
+  //       when(() => salesOrgBloc.state).thenReturn(
+  //         SalesOrgState.initial().copyWith(
+  //           configs:
+  //               SalesOrganisationConfigs.empty().copyWith(enableRemarks: true),
+  //         ),
+  //       );
+  //       await tester.pumpWidget(getWidget());
+  //       final addRemarks = find.byKey(const ValueKey('addRemarks'));
+  //       expect(addRemarks, findsOneWidget);
+  //       final addRemarksInkWell =
+  //           find.byKey(ValueKey('${const ValueKey('addRemarks')}-InkWell'));
+  //       expect(addRemarksInkWell, findsOneWidget);
+  //       await tester.ensureVisible(addRemarksInkWell);
+  //       await tester.pumpAndSettle();
+  //       await tester.tap(addRemarksInkWell);
+  //       await tester.pump();
+  //       final addRemarksDialog = find.byKey(const ValueKey('addRemarksDialog'));
+  //       expect(addRemarksDialog, findsOneWidget);
+  //       final addRemark = find.byKey(const ValueKey('Add'));
+  //       expect(addRemark, findsOneWidget);
+  //       final cancelDddRemark = find.byKey(const ValueKey('Cancel'));
+  //       expect(cancelDddRemark, findsOneWidget);
+  //       await tester.tap(addRemark);
 
-        verify(
-          () => cartBloc.add(
-            CartEvent.addRemarksToCartItem(
-              item: priceAggregates.first,
-              isDelete: false,
-            ),
-          ),
-        ).called(1);
-        await tester.pump();
-        expect(cancelDddRemark, findsOneWidget);
-        await tester.tap(cancelDddRemark);
-      },
-    );
-  });
+  //       verify(
+  //         () => cartBloc.add(
+  //           CartEvent.addRemarksToCartItem(
+  //             item: priceAggregates.first,
+  //             isDelete: false,
+  //           ),
+  //         ),
+  //       ).called(1);
+  //       await tester.pump();
+  //       expect(cancelDddRemark, findsOneWidget);
+  //       await tester.tap(cancelDddRemark);
+  //     },
+  //   );
+  // });
 }

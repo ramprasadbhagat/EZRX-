@@ -22,17 +22,34 @@ class AddToCartBloc extends Bloc<AddToCartEvent, AddToCartState> {
         emit(state.copyWith(cartItem: e.cartItem));
       },
       updateQuantity: (e) async {
+        final newDiscountedMaterialCount = _calculateDiscountedMaterialCount(
+          state: state,
+          event: e,
+        );
+
         emit(
           state.copyWith(
             cartItem: state.cartItem.copyWith(
               quantity: e.quantity,
-              discountedMaterialCount:
-                  e.discountMaterialCountOnCart + e.quantity,
+              discountedMaterialCount: newDiscountedMaterialCount,
             ),
             quantity: e.quantity,
           ),
         );
       },
     );
+  }
+
+  int _calculateDiscountedMaterialCount({
+    required AddToCartState state,
+    required _UpdateQuantity event,
+  }) {
+    if (state.cartItem.price.zmgDiscount) {
+      return event.quantity + event.cartZmgQtyExcludeCurrent;
+    } else if (state.cartItem.price.isTireDiscountEligible) {
+      return event.quantity;
+    }
+
+    return 0;
   }
 }

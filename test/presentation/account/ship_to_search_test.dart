@@ -7,6 +7,7 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -174,12 +175,12 @@ void main() {
             ],
           ),
         ];
-        when(() => cartBlocMock.state)
-            .thenReturn(CartState.initial().copyWith(cartItemList: [
-          PriceAggregate.empty().copyWith(
-            materialInfo: fakematerialInfo,
-          ),
-        ]));
+        // when(() => cartBlocMock.state)
+        //     .thenReturn(CartState.initial().copyWith(cartItemList: [
+        //   PriceAggregate.empty().copyWith(
+        //     materialInfo: fakematerialInfo,
+        //   ),
+        // ]));
 
         whenListen(shipToCodeBlocMock,
             Stream.fromIterable(expectedShipToCodeListStates));
@@ -200,9 +201,11 @@ void main() {
       'Test when cart item is not empty',
       (tester) async {
         when(() => cartBlocMock.state)
-            .thenReturn(CartState.initial().copyWith(cartItemList: [
-          PriceAggregate.empty().copyWith(
-            materialInfo: fakematerialInfo,
+            .thenReturn(CartState.initial().copyWith(cartItems: [
+          CartItem.material(
+            PriceAggregate.empty().copyWith(
+              materialInfo: fakematerialInfo,
+            ),
           ),
         ]));
 

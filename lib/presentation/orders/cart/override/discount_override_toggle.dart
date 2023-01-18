@@ -8,10 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
-import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
-import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/discount_override/discount_override_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -39,24 +36,26 @@ class DiscountOverrideToggle extends StatelessWidget {
             (_) {},
           ),
         );
-        context.read<CartBloc>().add(
-              CartEvent.updateCartItem(
-                item: cartItem.copyWith(
-                  price: state.materialPrice,
-                ),
-                customerCodeInfo:
-                    context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                doNotallowOutOfStockMaterial: context
-                    .read<EligibilityBloc>()
-                    .state
-                    .doNotAllowOutOfStockMaterials,
-                salesOrganisation:
-                    context.read<SalesOrgBloc>().state.salesOrganisation,
-                salesOrganisationConfigs:
-                    context.read<SalesOrgBloc>().state.configs,
-                shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
-              ),
-            );
+
+        //TODO: add missing event handler for cart bloc
+        // context.read<CartBloc>().add(
+        //       CartEvent.updateCartItem(
+        //         item: cartItem.copyWith(
+        //           price: state.materialPrice,
+        //         ),
+        //         customerCodeInfo:
+        //             context.read<CustomerCodeBloc>().state.customerCodeInfo,
+        //         doNotallowOutOfStockMaterial: context
+        //             .read<EligibilityBloc>()
+        //             .state
+        //             .doNotAllowOutOfStockMaterials,
+        //         salesOrganisation:
+        //             context.read<SalesOrgBloc>().state.salesOrganisation,
+        //         salesOrganisationConfigs:
+        //             context.read<SalesOrgBloc>().state.configs,
+        //         shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+        //       ),
+        //     );
       },
       builder: ((context, state) {
         return Column(

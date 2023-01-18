@@ -20,33 +20,34 @@ class CartButton extends StatelessWidget {
         ? const SizedBox.shrink()
         : BlocBuilder<CartBloc, CartState>(
             buildWhen: (previous, current) =>
-                previous.cartItemList.length != current.cartItemList.length,
+                previous.cartItems.length != current.cartItems.length,
             builder: (context, state) {
               return Badge(
                 badgeContent: Text(
-                  state.cartItemList.length.toString(),
+                  state.cartItems.length.toString(),
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         color: ZPColors.white,
                       ),
                 ),
                 badgeColor: ZPColors.red,
-                showBadge: state.cartItemList.isNotEmpty,
+                showBadge: state.cartItems.isNotEmpty,
                 elevation: 0,
                 position: BadgePosition.topEnd(top: 0, end: 3),
                 animationType: BadgeAnimationType.fade,
                 child: IconButton(
-                    key: const Key('CartButton'),
-                    icon: const Icon(Icons.shopping_cart_outlined),
-                    onPressed: () {
-                      final cartState = context.read<CartBloc>().state;
-                      locator<CountlyService>()
-                          .addCountlyEvent('Cart Window', segmentation: {
-                        'numItemInCart': cartState.cartItemList.length,
-                        'subTotal': cartState.subtotal,
-                        'grandTotal': cartState.grandTotal,
-                      });
-                      context.router.pushNamed('cart_page');
-                    },),
+                  key: const Key('CartButton'),
+                  icon: const Icon(Icons.shopping_cart_outlined),
+                  onPressed: () {
+                    final cartState = context.read<CartBloc>().state;
+                    locator<CountlyService>()
+                        .addCountlyEvent('Cart Window', segmentation: {
+                      'numItemInCart': cartState.cartItems.length,
+                      'subTotal': cartState.subtotal,
+                      'grandTotal': cartState.grandTotal,
+                    });
+                    context.router.pushNamed('cart_page');
+                  },
+                ),
               );
             },
           );

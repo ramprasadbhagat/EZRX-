@@ -63,13 +63,13 @@ class SaveTemplateDialog {
   static void saveButtonPressed(BuildContext context, templateName) {
     final templateList =
         context.read<OrderTemplateListBloc>().state.orderTemplateList;
+    final cartItem = context.read<CartBloc>().state.cartItems;
     final userID = context.read<UserBloc>().state.user.id;
-    final displayCartItems = context.read<CartBloc>().state.displayCartItems;
     context.read<OrderTemplateListBloc>().add(
           OrderTemplateListEvent.save(
             templateName: templateName,
             userID: userID,
-            cartList: displayCartItems,
+            cartList: cartItem,
             templateList: templateList,
           ),
         );

@@ -1,5 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/application/order/cart/remarks_form/remarks_form_bloc.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,7 +14,7 @@ class RemarksForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CartBloc, CartState>(
+    return BlocBuilder<RemarksFormBloc, RemarksFormState>(
       buildWhen: (previous, current) =>
           previous.showErrorMessages != current.showErrorMessages,
       builder: (context, state) {
@@ -45,8 +45,8 @@ class RemarksForm extends StatelessWidget {
                   ),
                 ),
               ),
-              onChanged: (value) => context.read<CartBloc>().add(
-                    CartEvent.remarksChanged(value),
+              onChanged: (value) => context.read<RemarksFormBloc>().add(
+                    RemarksFormEvent.remarksChanged(value),
                   ),
               validator: (_) => state.remarks.value.fold(
                 (f) => f.maybeMap(

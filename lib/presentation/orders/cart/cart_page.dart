@@ -7,7 +7,7 @@ import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.da
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
-import 'package:ezrxmobile/application/order/cart/cart_view_model.dart';
+import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
@@ -17,8 +17,8 @@ import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
-import 'package:ezrxmobile/presentation/orders/cart/cart_bundle_item_tile.dart';
-import 'package:ezrxmobile/presentation/orders/cart/cart_material_item_tile.dart';
+import 'package:ezrxmobile/presentation/orders/cart/item/cart_bundle_item_tile.dart';
+import 'package:ezrxmobile/presentation/orders/cart/item/cart_material_item_tile.dart';
 import 'package:ezrxmobile/presentation/orders/core/account_suspended_warning.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -35,9 +35,9 @@ class CartPage extends StatelessWidget {
       listenWhen: (previous, current) =>
           previous.apiFailureOrSuccessOption !=
               current.apiFailureOrSuccessOption ||
-          previous.cartItemList != current.cartItemList,
+          previous.cartItems != current.cartItems,
       listener: (context, state) {
-        if (state.cartItemList.isEmpty) {
+        if (state.cartItems.isEmpty) {
           context
               .read<AdditionalDetailsBloc>()
               .add(AdditionalDetailsEvent.initialized(
@@ -62,7 +62,7 @@ class CartPage extends StatelessWidget {
           key: const Key('cartpage'),
           appBar: AppBar(
             title: Text(
-              '${'My Cart'.tr()} (${state.cartItemList.length})',
+              '${'My Cart'.tr()} (${state.cartItems.length})',
             ),
           ),
           body: Column(
@@ -72,34 +72,36 @@ class CartPage extends StatelessWidget {
                 child: ScrollList<CartItem>(
                   emptyMessage: 'Cart is Empty'.tr(),
                   onRefresh: () {
-                    context.read<CartBloc>().add(CartEvent.fetch(
-                          customerCodeInfo: context
-                              .read<CustomerCodeBloc>()
-                              .state
-                              .customerCodeInfo,
-                          salesOrganisationConfigs:
-                              context.read<SalesOrgBloc>().state.configs,
-                          shipToInfo:
-                              context.read<ShipToCodeBloc>().state.shipToInfo,
-                          doNotAllowOutOfStockMaterials: context
-                              .read<EligibilityBloc>()
-                              .state
-                              .doNotAllowOutOfStockMaterials,
-                          salesOrganisation: context
-                              .read<SalesOrgBloc>()
-                              .state
-                              .salesOrganisation,
-                        ));
+                    context.read<CartBloc>().add(
+                          CartEvent.fetch(
+                            customerCodeInfo: context
+                                .read<CustomerCodeBloc>()
+                                .state
+                                .customerCodeInfo,
+                            salesOrganisationConfigs:
+                                context.read<SalesOrgBloc>().state.configs,
+                            shipToInfo:
+                                context.read<ShipToCodeBloc>().state.shipToInfo,
+                            doNotAllowOutOfStockMaterials: context
+                                .read<EligibilityBloc>()
+                                .state
+                                .doNotAllowOutOfStockMaterials,
+                            salesOrganisation: context
+                                .read<SalesOrgBloc>()
+                                .state
+                                .salesOrganisation,
+                          ),
+                        );
                   },
-                  isLoading: state.isFetching && state.cartItemList.isEmpty,
+                  isLoading: state.isFetching && state.cartItems.isEmpty,
                   itemBuilder: (context, index, item) {
                     switch (item.itemType) {
                       case CartItemType.material:
                         return CartMaterialItemTile(
+                          cartItem: item,
                           key: ValueKey(
                             '${item.materials.first.materialInfo.materialNumber.getValue()}${item.materials.first.quantity}',
                           ),
-                          cartItem: item.materials.first,
                           taxCode: taxCode,
                           showCheckBox: true,
                         );
@@ -111,10 +113,10 @@ class CartPage extends StatelessWidget {
                         );
                     }
                   },
-                  items: state.displayCartItems,
+                  items: state.cartItems,
                 ),
               ),
-              state.cartItemList.isEmpty
+              state.cartItems.isEmpty
                   ? const SizedBox.shrink()
                   : Container(
                       width: double.infinity,
@@ -140,14 +142,13 @@ class CartPage extends StatelessWidget {
                           ),
                           ElevatedButton(
                             key: const ValueKey('orderSummaryButton'),
-                            onPressed: state.selectedItemList.isEmpty
+                            onPressed: state.selectedCartItems.isEmpty
                                 ? null
                                 : () {
                                     locator<CountlyService>().addCountlyEvent(
                                       'Checkout',
                                       segmentation: {
-                                        'numItemInCart':
-                                            state.cartItemList.length,
+                                        'numItemInCart': state.cartItems.length,
                                         'subTotal': state.subtotal,
                                         'grandTotal': state.grandTotal,
                                       },
@@ -187,17 +188,11 @@ class CartPage extends StatelessWidget {
           step: 0,
           config: config,
         ));
-    final selectedMaterialList =
-        context.read<CartBloc>().state.selectedItemsMaterialNumber;
+
     context.read<OrderEligibilityBloc>().add(
           OrderEligibilityEvent.initialized(
-            cartItems: context
-                .read<CartBloc>()
-                .state
-                .cartItemList
-                .where((element) =>
-                    selectedMaterialList.contains(element.getMaterialNumber))
-                .toList(),
+            cartItems:
+                context.read<CartBloc>().state.selectedCartItems.allMaterials,
             configs: config,
             customerCodeInfo: customerCodeInfo,
             grandTotal: context.read<CartBloc>().state.grandTotal,
@@ -228,22 +223,22 @@ class _SelectAllButton extends StatelessWidget {
             children: [
               Radio(
                 key: const Key('selectAllRadioButton'),
-                value: state.selectedItemList.length,
-                groupValue: state.cartItemList.length,
+                value: state.selectedCartItems.length,
+                groupValue: state.cartItems.length,
                 toggleable: true,
                 onChanged: (value) {
                   context.read<CartBloc>().add(
-                        const CartEvent.updateSelectAllItems(),
+                        const CartEvent.selectAllButtonTapped(),
                       );
                 },
               ),
               Text(
                 'Select All'.tr(),
                 style: TextStyle(
-                  color: state.selectedItemsMaterialNumber.length ==
-                          state.cartItemList.length
-                      ? ZPColors.primary
-                      : ZPColors.black,
+                  color:
+                      state.selectedCartItems.length == state.cartItems.length
+                          ? ZPColors.primary
+                          : ZPColors.black,
                 ),
               ),
             ],

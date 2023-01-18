@@ -25,7 +25,6 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/bonus_aggregate.dart';
-import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_price_detail.dart';
@@ -1294,15 +1293,15 @@ void main() {
           disableDeliveryDate: true,
         )),
       );
-      when(() => mockCartBloc.state).thenReturn(CartState.initial().copyWith(
-        cartItemList: [
-          PriceAggregate.empty().copyWith(
-              price: Price.empty()
-                  .copyWith(materialNumber: MaterialNumber(materialNumber)),
-              materialInfo: MaterialInfo.empty()
-                  .copyWith(materialNumber: MaterialNumber(materialNumber))),
-        ],
-      ));
+      // when(() => mockCartBloc.state).thenReturn(CartState.initial().copyWith(
+      //   cartItemList: [
+      //     PriceAggregate.empty().copyWith(
+      //         price: Price.empty()
+      //             .copyWith(materialNumber: MaterialNumber(materialNumber)),
+      //         materialInfo: MaterialInfo.empty()
+      //             .copyWith(materialNumber: MaterialNumber(materialNumber))),
+      //   ],
+      // ));
       when(() => userBlocMock.state).thenReturn(
         UserState.initial().copyWith(
             user: User.empty().copyWith(

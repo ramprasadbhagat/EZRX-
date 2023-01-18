@@ -20,7 +20,7 @@ import '../../domain/account/entities/bill_to_info.dart' as _i42;
 import '../../domain/account/entities/customer_code_info.dart' as _i43;
 import '../../domain/account/entities/sales_organisation_configs.dart' as _i45;
 import '../../domain/core/aggregate/bundle_aggregate.dart' as _i47;
-import '../../domain/core/aggregate/price_aggregate.dart' as _i46;
+import '../../domain/order/entities/cart_item.dart' as _i46;
 import '../../domain/order/entities/order_history_basic_info.dart' as _i44;
 import '../../domain/order/entities/order_history_item.dart' as _i41;
 import '../../domain/order/entities/order_template.dart' as _i39;
@@ -42,7 +42,7 @@ import '../history/history_details.dart' as _i29;
 import '../history/history_tab.dart' as _i33;
 import '../home/home_tab.dart' as _i32;
 import '../home_tab.dart' as _i26;
-import '../orders/cart/add_bonus.dart' as _i30;
+import '../orders/cart/bonus/search_bonus_page.dart' as _i30;
 import '../orders/cart/cart_page.dart' as _i22;
 import '../orders/create_order/bundle_item_detail_page.dart' as _i31;
 import '../orders/create_order/material_filter.dart' as _i19;
@@ -1040,7 +1040,7 @@ class HistoryDetailsRouteArgs {
 class BonusAddPageRoute extends _i36.PageRouteInfo<BonusAddPageRouteArgs> {
   BonusAddPageRoute({
     _i37.Key? key,
-    required _i46.PriceAggregate cartItem,
+    required _i46.CartItem cartItem,
   }) : super(
           BonusAddPageRoute.name,
           path: 'add_bonus',
@@ -1061,7 +1061,7 @@ class BonusAddPageRouteArgs {
 
   final _i37.Key? key;
 
-  final _i46.PriceAggregate cartItem;
+  final _i46.CartItem cartItem;
 
   @override
   String toString() {

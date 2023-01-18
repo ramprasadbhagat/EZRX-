@@ -71,7 +71,7 @@ class MaterialQueryInfo with _$MaterialQueryInfo {
     required MaterialInfo materialInfo,
   }) =>
       MaterialQueryInfo(
-        qty: MaterialQty(1),
+        qty: MaterialQty(materialInfo.quantity),
         value: materialInfo.materialNumber,
         materialGroup2: materialInfo.materialGroup2,
         materialGroup4: materialInfo.materialGroup4,

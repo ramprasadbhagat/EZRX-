@@ -21,7 +21,7 @@ mixin _$AddToCartEvent {
     required TResult Function() initialized,
     required TResult Function() fetch,
     required TResult Function(PriceAggregate cartItem) setCartItem,
-    required TResult Function(int quantity, int discountMaterialCountOnCart)
+    required TResult Function(int quantity, int cartZmgQtyExcludeCurrent)
         updateQuantity,
   }) =>
       throw _privateConstructorUsedError;
@@ -30,7 +30,7 @@ mixin _$AddToCartEvent {
     TResult? Function()? initialized,
     TResult? Function()? fetch,
     TResult? Function(PriceAggregate cartItem)? setCartItem,
-    TResult? Function(int quantity, int discountMaterialCountOnCart)?
+    TResult? Function(int quantity, int cartZmgQtyExcludeCurrent)?
         updateQuantity,
   }) =>
       throw _privateConstructorUsedError;
@@ -39,7 +39,7 @@ mixin _$AddToCartEvent {
     TResult Function()? initialized,
     TResult Function()? fetch,
     TResult Function(PriceAggregate cartItem)? setCartItem,
-    TResult Function(int quantity, int discountMaterialCountOnCart)?
+    TResult Function(int quantity, int cartZmgQtyExcludeCurrent)?
         updateQuantity,
     required TResult orElse(),
   }) =>
@@ -130,7 +130,7 @@ class _$_Initialized implements _Initialized {
     required TResult Function() initialized,
     required TResult Function() fetch,
     required TResult Function(PriceAggregate cartItem) setCartItem,
-    required TResult Function(int quantity, int discountMaterialCountOnCart)
+    required TResult Function(int quantity, int cartZmgQtyExcludeCurrent)
         updateQuantity,
   }) {
     return initialized();
@@ -142,7 +142,7 @@ class _$_Initialized implements _Initialized {
     TResult? Function()? initialized,
     TResult? Function()? fetch,
     TResult? Function(PriceAggregate cartItem)? setCartItem,
-    TResult? Function(int quantity, int discountMaterialCountOnCart)?
+    TResult? Function(int quantity, int cartZmgQtyExcludeCurrent)?
         updateQuantity,
   }) {
     return initialized?.call();
@@ -154,7 +154,7 @@ class _$_Initialized implements _Initialized {
     TResult Function()? initialized,
     TResult Function()? fetch,
     TResult Function(PriceAggregate cartItem)? setCartItem,
-    TResult Function(int quantity, int discountMaterialCountOnCart)?
+    TResult Function(int quantity, int cartZmgQtyExcludeCurrent)?
         updateQuantity,
     required TResult orElse(),
   }) {
@@ -245,7 +245,7 @@ class _$_Fetch implements _Fetch {
     required TResult Function() initialized,
     required TResult Function() fetch,
     required TResult Function(PriceAggregate cartItem) setCartItem,
-    required TResult Function(int quantity, int discountMaterialCountOnCart)
+    required TResult Function(int quantity, int cartZmgQtyExcludeCurrent)
         updateQuantity,
   }) {
     return fetch();
@@ -257,7 +257,7 @@ class _$_Fetch implements _Fetch {
     TResult? Function()? initialized,
     TResult? Function()? fetch,
     TResult? Function(PriceAggregate cartItem)? setCartItem,
-    TResult? Function(int quantity, int discountMaterialCountOnCart)?
+    TResult? Function(int quantity, int cartZmgQtyExcludeCurrent)?
         updateQuantity,
   }) {
     return fetch?.call();
@@ -269,7 +269,7 @@ class _$_Fetch implements _Fetch {
     TResult Function()? initialized,
     TResult Function()? fetch,
     TResult Function(PriceAggregate cartItem)? setCartItem,
-    TResult Function(int quantity, int discountMaterialCountOnCart)?
+    TResult Function(int quantity, int cartZmgQtyExcludeCurrent)?
         updateQuantity,
     required TResult orElse(),
   }) {
@@ -399,7 +399,7 @@ class _$_SetCartItem implements _SetCartItem {
     required TResult Function() initialized,
     required TResult Function() fetch,
     required TResult Function(PriceAggregate cartItem) setCartItem,
-    required TResult Function(int quantity, int discountMaterialCountOnCart)
+    required TResult Function(int quantity, int cartZmgQtyExcludeCurrent)
         updateQuantity,
   }) {
     return setCartItem(cartItem);
@@ -411,7 +411,7 @@ class _$_SetCartItem implements _SetCartItem {
     TResult? Function()? initialized,
     TResult? Function()? fetch,
     TResult? Function(PriceAggregate cartItem)? setCartItem,
-    TResult? Function(int quantity, int discountMaterialCountOnCart)?
+    TResult? Function(int quantity, int cartZmgQtyExcludeCurrent)?
         updateQuantity,
   }) {
     return setCartItem?.call(cartItem);
@@ -423,7 +423,7 @@ class _$_SetCartItem implements _SetCartItem {
     TResult Function()? initialized,
     TResult Function()? fetch,
     TResult Function(PriceAggregate cartItem)? setCartItem,
-    TResult Function(int quantity, int discountMaterialCountOnCart)?
+    TResult Function(int quantity, int cartZmgQtyExcludeCurrent)?
         updateQuantity,
     required TResult orElse(),
   }) {
@@ -486,7 +486,7 @@ abstract class _$$_UpdateQuantityCopyWith<$Res> {
           _$_UpdateQuantity value, $Res Function(_$_UpdateQuantity) then) =
       __$$_UpdateQuantityCopyWithImpl<$Res>;
   @useResult
-  $Res call({int quantity, int discountMaterialCountOnCart});
+  $Res call({int quantity, int cartZmgQtyExcludeCurrent});
 }
 
 /// @nodoc
@@ -501,16 +501,16 @@ class __$$_UpdateQuantityCopyWithImpl<$Res>
   @override
   $Res call({
     Object? quantity = null,
-    Object? discountMaterialCountOnCart = null,
+    Object? cartZmgQtyExcludeCurrent = null,
   }) {
     return _then(_$_UpdateQuantity(
       null == quantity
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
               as int,
-      null == discountMaterialCountOnCart
-          ? _value.discountMaterialCountOnCart
-          : discountMaterialCountOnCart // ignore: cast_nullable_to_non_nullable
+      null == cartZmgQtyExcludeCurrent
+          ? _value.cartZmgQtyExcludeCurrent
+          : cartZmgQtyExcludeCurrent // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -519,16 +519,16 @@ class __$$_UpdateQuantityCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_UpdateQuantity implements _UpdateQuantity {
-  const _$_UpdateQuantity(this.quantity, this.discountMaterialCountOnCart);
+  const _$_UpdateQuantity(this.quantity, this.cartZmgQtyExcludeCurrent);
 
   @override
   final int quantity;
   @override
-  final int discountMaterialCountOnCart;
+  final int cartZmgQtyExcludeCurrent;
 
   @override
   String toString() {
-    return 'AddToCartEvent.updateQuantity(quantity: $quantity, discountMaterialCountOnCart: $discountMaterialCountOnCart)';
+    return 'AddToCartEvent.updateQuantity(quantity: $quantity, cartZmgQtyExcludeCurrent: $cartZmgQtyExcludeCurrent)';
   }
 
   @override
@@ -538,15 +538,14 @@ class _$_UpdateQuantity implements _UpdateQuantity {
             other is _$_UpdateQuantity &&
             (identical(other.quantity, quantity) ||
                 other.quantity == quantity) &&
-            (identical(other.discountMaterialCountOnCart,
-                    discountMaterialCountOnCart) ||
-                other.discountMaterialCountOnCart ==
-                    discountMaterialCountOnCart));
+            (identical(
+                    other.cartZmgQtyExcludeCurrent, cartZmgQtyExcludeCurrent) ||
+                other.cartZmgQtyExcludeCurrent == cartZmgQtyExcludeCurrent));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, quantity, discountMaterialCountOnCart);
+      Object.hash(runtimeType, quantity, cartZmgQtyExcludeCurrent);
 
   @JsonKey(ignore: true)
   @override
@@ -560,10 +559,10 @@ class _$_UpdateQuantity implements _UpdateQuantity {
     required TResult Function() initialized,
     required TResult Function() fetch,
     required TResult Function(PriceAggregate cartItem) setCartItem,
-    required TResult Function(int quantity, int discountMaterialCountOnCart)
+    required TResult Function(int quantity, int cartZmgQtyExcludeCurrent)
         updateQuantity,
   }) {
-    return updateQuantity(quantity, discountMaterialCountOnCart);
+    return updateQuantity(quantity, cartZmgQtyExcludeCurrent);
   }
 
   @override
@@ -572,10 +571,10 @@ class _$_UpdateQuantity implements _UpdateQuantity {
     TResult? Function()? initialized,
     TResult? Function()? fetch,
     TResult? Function(PriceAggregate cartItem)? setCartItem,
-    TResult? Function(int quantity, int discountMaterialCountOnCart)?
+    TResult? Function(int quantity, int cartZmgQtyExcludeCurrent)?
         updateQuantity,
   }) {
-    return updateQuantity?.call(quantity, discountMaterialCountOnCart);
+    return updateQuantity?.call(quantity, cartZmgQtyExcludeCurrent);
   }
 
   @override
@@ -584,12 +583,12 @@ class _$_UpdateQuantity implements _UpdateQuantity {
     TResult Function()? initialized,
     TResult Function()? fetch,
     TResult Function(PriceAggregate cartItem)? setCartItem,
-    TResult Function(int quantity, int discountMaterialCountOnCart)?
+    TResult Function(int quantity, int cartZmgQtyExcludeCurrent)?
         updateQuantity,
     required TResult orElse(),
   }) {
     if (updateQuantity != null) {
-      return updateQuantity(quantity, discountMaterialCountOnCart);
+      return updateQuantity(quantity, cartZmgQtyExcludeCurrent);
     }
     return orElse();
   }
@@ -634,11 +633,11 @@ class _$_UpdateQuantity implements _UpdateQuantity {
 
 abstract class _UpdateQuantity implements AddToCartEvent {
   const factory _UpdateQuantity(
-          final int quantity, final int discountMaterialCountOnCart) =
+          final int quantity, final int cartZmgQtyExcludeCurrent) =
       _$_UpdateQuantity;
 
   int get quantity;
-  int get discountMaterialCountOnCart;
+  int get cartZmgQtyExcludeCurrent;
   @JsonKey(ignore: true)
   _$$_UpdateQuantityCopyWith<_$_UpdateQuantity> get copyWith =>
       throw _privateConstructorUsedError;

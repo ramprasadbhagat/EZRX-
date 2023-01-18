@@ -1,10 +1,11 @@
 import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-import 'package:ezrxmobile/presentation/orders/cart/update_bonus.dart';
-import 'package:ezrxmobile/presentation/orders/create_order/add_to_cart.dart';
-import 'package:ezrxmobile/presentation/orders/create_order/update_cart.dart';
+import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/update_cart.dart';
+import 'package:ezrxmobile/presentation/orders/cart/bonus/choose_bonus_sheet.dart';
+import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/add_to_cart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -14,22 +15,18 @@ class CartBottomSheet {
     required PriceAggregate priceAggregate,
     bool isCovid19Tab = false,
   }) {
-    final isPresentInCart = context.read<CartBloc>().state.cartItemList.any(
-          (cartItem) =>
-      cartItem.materialNumberString ==
-          priceAggregate.materialNumberString,
-    );
-    final currentItem = context.read<CartBloc>().state.cartItemList.firstWhere(
-          (cartItem) =>
-      cartItem.materialNumberString ==
-          priceAggregate.materialNumberString,
-      orElse: () => priceAggregate,
-    );
+    final currentItem = context
+        .read<CartBloc>()
+        .state
+        .getMaterialCartItem(material: priceAggregate)
+        .materials
+        .first;
+    final isPresentInCart = currentItem != PriceAggregate.empty();
     context.read<AddToCartBloc>().add(
-      AddToCartEvent.setCartItem(
-        currentItem,
-      ),
-    );
+          AddToCartEvent.setCartItem(
+            isPresentInCart ? currentItem : priceAggregate,
+          ),
+        );
     showModalBottomSheet(
       barrierColor: Colors.transparent,
       context: context,
@@ -38,8 +35,8 @@ class CartBottomSheet {
       builder: (_) {
         return !isPresentInCart
             ? AddToCart(
-          isCovid19Tab: isCovid19Tab,
-        )
+                isCovid19Tab: isCovid19Tab,
+              )
             : const UpdateCart();
       },
     );
@@ -50,10 +47,10 @@ class CartBottomSheet {
     required PriceAggregate cartItem,
   }) {
     context.read<AddToCartBloc>().add(
-      AddToCartEvent.setCartItem(
-        cartItem,
-      ),
-    );
+          AddToCartEvent.setCartItem(
+            cartItem,
+          ),
+        );
     showModalBottomSheet(
       barrierColor: Colors.transparent,
       context: context,
@@ -68,7 +65,7 @@ class CartBottomSheet {
   static void showUpdateCartBonusBottomSheet({
     required BuildContext context,
     required MaterialInfo item,
-    required PriceAggregate cartItem,
+    required CartItem cartItem,
     required bool isUpdateFromCart,
   }) {
     showModalBottomSheet(

@@ -10,13 +10,14 @@ import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_blo
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/bonus_material_repository.dart';
 import 'package:ezrxmobile/locator.dart';
-import 'package:ezrxmobile/presentation/orders/cart/update_bonus.dart';
+import 'package:ezrxmobile/presentation/orders/cart/bonus/choose_bonus_sheet.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/quantity_input.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
@@ -152,7 +153,7 @@ void main() {
         ],
         child: UpdateBonus(
           materialInfo: cartItem.materialInfo,
-          cartItem: cartItem,
+          cartItem: CartItem.material(cartItem),
           isUpdateFromCart: true,
         ),
       );

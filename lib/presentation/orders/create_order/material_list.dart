@@ -307,9 +307,19 @@ class _ListContent extends StatelessWidget {
                         color: ZPColors.kPrimaryColor,
                       ),
                 ),
-                BonusDiscountLabel(
-                  materialInfo: materialInfo,
-                  tenderContractNumber: 'Tender Contract',
+                BlocBuilder<MaterialPriceBloc, MaterialPriceState>(
+                  buildWhen: (previous, current) =>
+                      previous.isFetching != current.isFetching,
+                  builder: (context, state) {
+                    final price =
+                        state.getPriceForMaterial(materialInfo.materialNumber);
+
+                    return BonusDiscountLabel(
+                      materialInfo: materialInfo,
+                      price: price,
+                      tenderContractNumber: 'Tender Contract',
+                    );
+                  },
                 ),
               ],
             ),

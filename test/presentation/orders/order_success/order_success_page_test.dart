@@ -15,10 +15,12 @@ import 'package:mocktail/mocktail.dart';
 import '../../../utils/widget_utils.dart';
 
 class AutoRouterMock extends Mock implements AppRouter {}
+
 class MockSalesOrgBloc extends MockBloc<SalesOrgEvent, SalesOrgState>
     implements SalesOrgBloc {}
+
 class ShipToCodeBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState>
-    implements ShipToCodeBloc {}    
+    implements ShipToCodeBloc {}
 
 class CustomerCodeBlocMock
     extends MockBloc<CustomerCodeEvent, CustomerCodeState>
@@ -32,8 +34,8 @@ void main() {
   setUpAll(
     () {
       locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
-      locator
-        .registerLazySingleton(() => CountlyService(config: locator<Config>()));
+      locator.registerLazySingleton(
+          () => CountlyService(config: locator<Config>()));
       locator.registerLazySingleton(() => AppRouter());
     },
   );
@@ -49,7 +51,7 @@ void main() {
       when(() => customerCodeBlocMock.state)
           .thenReturn(CustomerCodeState.initial());
       when(() => shipToCodeBlocMock.state)
-          .thenReturn(ShipToCodeState.initial()); 
+          .thenReturn(ShipToCodeState.initial());
     },
   );
   group(
@@ -62,9 +64,9 @@ void main() {
           providers: [
             BlocProvider<SalesOrgBloc>(create: (context) => mockSalesOrgBloc),
             BlocProvider<CustomerCodeBloc>(
-              create: (context) => customerCodeBlocMock),
+                create: (context) => customerCodeBlocMock),
             BlocProvider<ShipToCodeBloc>(
-              create: (context) => shipToCodeBlocMock),  
+                create: (context) => shipToCodeBlocMock),
           ],
         );
       }

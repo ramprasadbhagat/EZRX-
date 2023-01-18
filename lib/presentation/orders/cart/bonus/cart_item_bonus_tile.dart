@@ -3,7 +3,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
-import 'package:ezrxmobile/presentation/orders/cart/bonus_item_tile.dart';
+import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
+import 'package:ezrxmobile/presentation/orders/cart/bonus/cart_item_bonus_item.dart';
 import 'package:ezrxmobile/presentation/core/custom_expansion_tile.dart'
     as custom;
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -12,9 +13,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BounsTile extends StatelessWidget {
-  final PriceAggregate cartItem;
+  final CartItem cartItem;
+  final PriceAggregate material;
 
-  const BounsTile({Key? key, required this.cartItem}) : super(key: key);
+  const BounsTile({
+    Key? key,
+    required this.material,
+    required this.cartItem,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,8 +29,8 @@ class BounsTile extends StatelessWidget {
     final isBonusOverrideEnable =
         context.read<EligibilityBloc>().state.isBonusOverrideEnable &&
             !context.read<OrderDocumentTypeBloc>().state.isSpecialOrderType;
-    final bonusList = cartItem.getAddedBonusList;
-    final isEligibleAddAdditionBonus = cartItem.isEligibleAddAdditionBonus;
+    final bonusList = material.getAddedBonusList;
+    final isEligibleAddAdditionBonus = material.isEligibleAddAdditionBonus;
 
     return Column(
       key: const Key('bonusTile'),
@@ -49,8 +55,11 @@ class BounsTile extends StatelessWidget {
                         children: <Widget>[
                           SizedBox(
                             child: TextButton(
-                              onPressed: () => context.router
-                                  .push(BonusAddPageRoute(cartItem: cartItem)),
+                              onPressed: () => context.router.push(
+                                BonusAddPageRoute(
+                                  cartItem: cartItem,
+                                ),
+                              ),
                               child: Row(
                                 children: <Widget>[
                                   const Icon(
@@ -89,8 +98,9 @@ class BounsTile extends StatelessWidget {
                           key: ValueKey(
                             '${bonusItem.materialInfo.materialNumber}${bonusItem.additionalBonusFlag}${bonusItem.qty}',
                           ),
-                          bonusItem: bonusItem,
                           cartItem: cartItem,
+                          bonusItem: bonusItem,
+                          material: material,
                           isBonusOverrideEnable: isBonusOverrideEnable,
                         );
                       },

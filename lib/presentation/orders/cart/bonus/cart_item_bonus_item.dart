@@ -1,14 +1,18 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/locator.dart';
-import 'package:ezrxmobile/presentation/core/remarks_tile.dart';
-import 'package:ezrxmobile/presentation/orders/cart/add_remark_dialog.dart';
-import 'package:ezrxmobile/presentation/orders/cart/add_remarks_button.dart';
-import 'package:ezrxmobile/presentation/orders/cart/edit_delete_dialog.dart';
+import 'package:ezrxmobile/presentation/orders/cart/remark/add_remark_button.dart';
+import 'package:ezrxmobile/presentation/orders/cart/remark/add_remark_dialog.dart';
+import 'package:ezrxmobile/presentation/orders/cart/remark/cart_item_remark.dart';
+import 'package:ezrxmobile/presentation/orders/cart/remark/update_remark_dialog.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/quantity_input.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -17,13 +21,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class BonusItemTile extends StatefulWidget {
   const BonusItemTile({
     Key? key,
-    required this.cartItem,
+    required this.material,
     required this.bonusItem,
     required this.isBonusOverrideEnable,
+    required this.cartItem,
   }) : super(key: key);
 
   final bool isBonusOverrideEnable;
-  final PriceAggregate cartItem;
+  final PriceAggregate material;
+  final CartItem cartItem;
   final MaterialItemBonus bonusItem;
 
   @override
@@ -92,14 +98,14 @@ class _BonusItemTileState extends State<BonusItemTile> {
                       //         color: ZPColors.lightGray,
                       //       ),
                       // ),
-                      if (widget.cartItem.salesOrgConfig.expiryDateDisplay)
+                      if (widget.material.salesOrgConfig.expiryDateDisplay)
                         Text(
                           '${'Expiry Date : '.tr()}${widget.bonusItem.expiryDate.getExpiryDate}',
                           style: Theme.of(context).textTheme.bodyText1?.apply(
                                 color: ZPColors.lightGray,
                               ),
                         ),
-                      if (!widget.cartItem.salesOrgConfig.hideStockDisplay)
+                      if (!widget.material.salesOrgConfig.hideStockDisplay)
                         Text(
                           '${'In Stock : '.tr()}${widget.bonusItem.inStock}',
                           style: Theme.of(context).textTheme.bodyText1?.apply(
@@ -116,20 +122,32 @@ class _BonusItemTileState extends State<BonusItemTile> {
                                 message:
                                     '${'Remarks: '.tr()}${widget.bonusItem.materialInfo.remarks}',
                                 showEditDeleteDialog: EditDeleteDialog(
-                                  cartItem: widget.cartItem,
-                                  bonusItem: widget.bonusItem.materialInfo,
-                                  isBonus: true,
+                                  onDelete: () {
+                                    context.read<CartBloc>().add(
+                                          CartEvent.addRemarkToBonusItem(
+                                            bonusItem: widget.bonusItem,
+                                            item: widget.cartItem,
+                                            message: '',
+                                          ),
+                                        );
+                                  },
+                                  onEdit: () {
+                                    AddRemarkDialog.bonusItem(
+                                      context: context,
+                                      cartItem: widget.cartItem,
+                                      bonusItem: widget.bonusItem,
+                                      isEdit: true,
+                                    );
+                                  },
                                 ),
                               )
                             : AddRemarksButton(
                                 key: const Key('addRemarksBonus'),
                                 onPressed: () {
-                                  AddRemarkDialog.show(
+                                  AddRemarkDialog.bonusItem(
                                     context: context,
                                     cartItem: widget.cartItem,
-                                    isEdit: false,
-                                    isBonus: true,
-                                    bonusItem: widget.bonusItem.materialInfo,
+                                    bonusItem: widget.bonusItem,
                                   );
                                 },
                               ),
@@ -157,11 +175,26 @@ class _BonusItemTileState extends State<BonusItemTile> {
                       },
                     );
                     context.read<CartBloc>().add(
-                          CartEvent.updateBonusItem(
-                            bonusItemCount: value,
-                            cartItem: widget.cartItem,
-                            bonusItem: widget.bonusItem,
-                            isUpdateFromCart: true,
+                          CartEvent.addBonusToCartItem(
+                            item: widget.cartItem,
+                            overrideQty: true,
+                            bonusItem: widget.bonusItem.copyWith(qty: value),
+                            customerCodeInfo: context
+                                .read<CustomerCodeBloc>()
+                                .state
+                                .customerCodeInfo,
+                            doNotallowOutOfStockMaterial: context
+                                .read<EligibilityBloc>()
+                                .state
+                                .doNotAllowOutOfStockMaterials,
+                            salesOrganisation: context
+                                .read<SalesOrgBloc>()
+                                .state
+                                .salesOrganisation,
+                            salesOrganisationConfigs:
+                                context.read<SalesOrgBloc>().state.configs,
+                            shipToInfo:
+                                context.read<ShipToCodeBloc>().state.shipToInfo,
                           ),
                         );
                   },
@@ -170,17 +203,31 @@ class _BonusItemTileState extends State<BonusItemTile> {
                       'deduct_quantity',
                       segmentation: {
                         'materialNum':
-                            widget.cartItem.getMaterialNumber.getOrCrash(),
-                        'listPrice': widget.cartItem.listPrice,
-                        'price': widget.cartItem.price.finalPrice.getOrCrash(),
+                            widget.material.getMaterialNumber.getOrCrash(),
+                        'listPrice': widget.material.listPrice,
+                        'price': widget.material.price.finalPrice.getOrCrash(),
                       },
                     );
                     context.read<CartBloc>().add(
-                          CartEvent.updateBonusItem(
-                            bonusItemCount: value,
-                            cartItem: widget.cartItem,
-                            bonusItem: widget.bonusItem,
-                            isUpdateFromCart: true,
+                          CartEvent.addBonusToCartItem(
+                            item: widget.cartItem,
+                            bonusItem: widget.bonusItem.copyWith(qty: -1),
+                            customerCodeInfo: context
+                                .read<CustomerCodeBloc>()
+                                .state
+                                .customerCodeInfo,
+                            doNotallowOutOfStockMaterial: context
+                                .read<EligibilityBloc>()
+                                .state
+                                .doNotAllowOutOfStockMaterials,
+                            salesOrganisation: context
+                                .read<SalesOrgBloc>()
+                                .state
+                                .salesOrganisation,
+                            salesOrganisationConfigs:
+                                context.read<SalesOrgBloc>().state.configs,
+                            shipToInfo:
+                                context.read<ShipToCodeBloc>().state.shipToInfo,
                           ),
                         );
                   },
@@ -189,17 +236,32 @@ class _BonusItemTileState extends State<BonusItemTile> {
                       'add_quantity',
                       segmentation: {
                         'materialNum':
-                            widget.cartItem.getMaterialNumber.getOrCrash(),
-                        'listPrice': widget.cartItem.listPrice,
-                        'price': widget.cartItem.price.finalPrice.getOrCrash(),
+                            widget.material.getMaterialNumber.getOrCrash(),
+                        'listPrice': widget.material.listPrice,
+                        'price': widget.material.price.finalPrice.getOrCrash(),
                       },
                     );
+
                     context.read<CartBloc>().add(
-                          CartEvent.updateBonusItem(
-                            bonusItemCount: value,
-                            cartItem: widget.cartItem,
-                            bonusItem: widget.bonusItem,
-                            isUpdateFromCart: true,
+                          CartEvent.addBonusToCartItem(
+                            item: widget.cartItem,
+                            bonusItem: widget.bonusItem.copyWith(qty: 1),
+                            customerCodeInfo: context
+                                .read<CustomerCodeBloc>()
+                                .state
+                                .customerCodeInfo,
+                            doNotallowOutOfStockMaterial: context
+                                .read<EligibilityBloc>()
+                                .state
+                                .doNotAllowOutOfStockMaterials,
+                            salesOrganisation: context
+                                .read<SalesOrgBloc>()
+                                .state
+                                .salesOrganisation,
+                            salesOrganisationConfigs:
+                                context.read<SalesOrgBloc>().state.configs,
+                            shipToInfo:
+                                context.read<ShipToCodeBloc>().state.shipToInfo,
                           ),
                         );
                   },
@@ -216,10 +278,9 @@ class _BonusItemTileState extends State<BonusItemTile> {
               key: const Key('deleteBonusFromCart'),
               onPressed: () {
                 context.read<CartBloc>().add(
-                      CartEvent.deleteBonusItem(
-                        cartItem: widget.cartItem,
+                      CartEvent.removeBonusFromCartItem(
+                        item: widget.cartItem,
                         bonusItem: widget.bonusItem,
-                        isUpdateFromCart: true,
                       ),
                     );
               },

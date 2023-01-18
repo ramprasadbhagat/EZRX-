@@ -5,24 +5,25 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/discount_override/discount_override_bloc.dart';
-import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
 import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
+import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/locator.dart';
-import 'package:ezrxmobile/presentation/core/cart_bottom_sheet.dart';
+import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/cart_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
-import 'package:ezrxmobile/presentation/core/remarks_tile.dart';
+import 'package:ezrxmobile/presentation/orders/cart/remark/cart_item_remark.dart';
+import 'package:ezrxmobile/presentation/orders/cart/remark/add_remark_dialog.dart';
+import 'package:ezrxmobile/presentation/orders/cart/remark/add_remark_button.dart';
+import 'package:ezrxmobile/presentation/orders/cart/bonus/cart_item_bonus_tile.dart';
+import 'package:ezrxmobile/presentation/orders/cart/override/discount_override_toggle.dart';
+import 'package:ezrxmobile/presentation/orders/cart/remark/update_remark_dialog.dart';
 import 'package:ezrxmobile/presentation/core/tender_contract_details_tile.dart';
-import 'package:ezrxmobile/presentation/orders/cart/add_remark_dialog.dart';
-import 'package:ezrxmobile/presentation/orders/cart/add_remarks_button.dart';
-import 'package:ezrxmobile/presentation/orders/cart/bonus_tile.dart';
-import 'package:ezrxmobile/presentation/orders/cart/discount_override_toggle.dart';
-import 'package:ezrxmobile/presentation/orders/cart/edit_delete_dialog.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/bonus_discount_label.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/cart_item_bonus_detail_widget.dart';
-import 'package:ezrxmobile/presentation/orders/create_order/price_override_bottomsheet.dart';
+import 'package:ezrxmobile/presentation/orders/cart/override/price_override_bottomsheet.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/price_tier_label.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/quantity_input.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -30,10 +31,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CartMaterialItemTile extends StatelessWidget {
-  final PriceAggregate cartItem;
+  final CartItem cartItem;
+
   final String taxCode;
   final bool showCheckBox;
   final bool isOrderSummaryView;
+
+  PriceAggregate get material => cartItem.materials.first;
 
   const CartMaterialItemTile({
     Key? key,
@@ -53,19 +57,19 @@ class CartMaterialItemTile extends StatelessWidget {
               CustomSlidableAction(
                 label: 'Delete',
                 icon: Icons.delete_outline,
-                onPressed: (context) => context
-                    .read<CartBloc>()
-                    .add(CartEvent.removeFromCart(item: cartItem)),
+                onPressed: (context) => context.read<CartBloc>().add(
+                      CartEvent.removeFromCart(item: cartItem),
+                    ),
               ),
             ],
             borderRadius: 8,
             child: ListTile(
               contentPadding: showCheckBox ? EdgeInsets.zero : null,
-              key: Key('cartItem${cartItem.materialInfo.materialNumber}'),
+              key: Key('cartItem${material.materialInfo.materialNumber}'),
               onTap: () {
                 CartBottomSheet.showUpdateCartBottomSheet(
                   context: context,
-                  cartItem: cartItem,
+                  cartItem: material,
                 );
               },
               title: Column(
@@ -74,29 +78,25 @@ class CartMaterialItemTile extends StatelessWidget {
                     children: [
                       if (showCheckBox)
                         Checkbox(
-                          onChanged: ((v) => {
-                                context
-                                    .read<CartBloc>()
-                                    .add(CartEvent.updateSelectedItem(
-                                      item: cartItem,
-                                    )),
-                              }),
-                          value: context
-                              .read<CartBloc>()
-                              .state
-                              .selectedItemsMaterialNumber
-                              .contains(
-                                cartItem.materialInfo.materialNumber,
-                              ),
+                          onChanged: (value) {
+                            if (value == null) return;
+                            context.read<CartBloc>().add(
+                                  CartEvent.selectButtonTapped(
+                                    cartItem: cartItem,
+                                  ),
+                                );
+                          },
+                          value: cartItem.isSelected,
                         ),
                       CartMaterialItemTileDetails(
-                        cartItem: cartItem,
+                        material: material,
                         taxCode: taxCode,
                         isOrderSummaryView: isOrderSummaryView,
+                        cartItem: cartItem,
                       ),
                       Column(
                         children: [
-                          _CartItemQuantityInput(cartItem: cartItem),
+                          _CartItemQuantityInput(cartItem: material),
                           if (context
                               .read<EligibilityBloc>()
                               .state
@@ -106,12 +106,12 @@ class CartMaterialItemTile extends StatelessWidget {
                                   locator<DiscountOverrideBloc>()
                                     ..add(
                                       DiscountOverrideEvent.update(
-                                        price: cartItem.price,
+                                        price: material.price,
                                         showErrorMessages: false,
                                       ),
                                     ),
                               child: DiscountOverrideToggle(
-                                cartItem: cartItem,
+                                cartItem: material,
                               ),
                             ),
                         ],
@@ -119,39 +119,53 @@ class CartMaterialItemTile extends StatelessWidget {
                     ],
                   ),
                   if (isOrderSummaryView &&
-                      cartItem.tenderContract != TenderContract.empty())
-                    TenderContractDetailsTile(tenderContract: cartItem.tenderContract),
-                  if (cartItem.materialInfo.remarks.isNotEmpty &&
+                      material.tenderContract != TenderContract.empty())
+                    TenderContractDetailsTile(
+                      tenderContract: material.tenderContract,
+                    ),
+                  if (material.materialInfo.remarks.isNotEmpty &&
                       context.read<SalesOrgBloc>().state.configs.enableRemarks)
                     RemarksMessage(
-                      key: Key('remarks${cartItem.materialInfo.remarks}'),
+                      key: Key('remarks${material.materialInfo.remarks}'),
                       message:
-                          '${'Remarks: '.tr()}${cartItem.materialInfo.remarks}',
+                          '${'Remarks: '.tr()}${material.materialInfo.remarks}',
                       showEditDeleteDialog: EditDeleteDialog(
-                        cartItem: cartItem,
-                        bonusItem: cartItem.materialInfo,
-                        isBonus: false,
+                        onDelete: () {
+                          context.read<CartBloc>().add(
+                                CartEvent.addRemarkToCartItem(
+                                  item: cartItem,
+                                  message: '',
+                                ),
+                              );
+                        },
+                        onEdit: () {
+                          AddRemarkDialog.cartItem(
+                            context: context,
+                            cartItem: cartItem,
+                            isEdit: true,
+                          );
+                        },
                       ),
                     ),
                 ],
               ),
             ),
           ),
-          if (cartItem.materialInfo.remarks.isEmpty &&
+          if (material.materialInfo.remarks.isEmpty &&
               context.read<SalesOrgBloc>().state.configs.enableRemarks)
             AddRemarksButton(
               key: const Key('addRemarks'),
               onPressed: () {
-                AddRemarkDialog.show(
+                AddRemarkDialog.cartItem(
                   context: context,
                   cartItem: cartItem,
-                  isEdit: false,
-                  bonusItem: cartItem.materialInfo,
-                  isBonus: false,
                 );
               },
             ),
-          BounsTile(cartItem: cartItem),
+          BounsTile(
+            material: material,
+            cartItem: cartItem,
+          ),
         ],
       ),
     );
@@ -159,15 +173,17 @@ class CartMaterialItemTile extends StatelessWidget {
 }
 
 class CartMaterialItemTileDetails extends StatelessWidget {
-  final PriceAggregate cartItem;
+  final PriceAggregate material;
+  final CartItem cartItem;
   final String taxCode;
   final bool isOrderSummaryView;
 
   const CartMaterialItemTileDetails({
     Key? key,
-    required this.cartItem,
+    required this.material,
     required this.taxCode,
     required this.isOrderSummaryView,
+    required this.cartItem,
   }) : super(key: key);
 
   bool _isPriceOverRideVisible(BuildContext context) {
@@ -181,8 +197,7 @@ class CartMaterialItemTileDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isPriceOverride = cartItem.price.isPriceOverride;
-
+    final isPriceOverride = material.price.isPriceOverride;
     final enableListPrice =
         context.read<SalesOrgBloc>().state.configs.enableListPrice;
     final enableVat = context.read<SalesOrgBloc>().state.configs.enableVat;
@@ -196,50 +211,51 @@ class CartMaterialItemTileDetails extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                cartItem.materialInfo.materialNumber.displayMatNo,
+                material.materialInfo.materialNumber.displayMatNo,
                 style: Theme.of(context).textTheme.subtitle2?.apply(
                       color: ZPColors.kPrimaryColor,
                     ),
               ),
               BonusDiscountLabel(
-                materialInfo: cartItem.materialInfo,
-                tenderContractNumber: cartItem.tenderContract.contractNumber
+                price: material.price,
+                materialInfo: material.materialInfo,
+                tenderContractNumber: material.tenderContract.contractNumber
                     .displayTenderContractNumberInCart,
               ),
             ],
           ),
           Text(
-            cartItem.materialInfo.materialDescription,
+            material.materialInfo.materialDescription,
             style: Theme.of(context).textTheme.bodyText1,
           ),
-          if (cartItem.isDefaultMDEnabled)
+          if (material.isDefaultMDEnabled)
             Text(
-              cartItem.materialInfo.defaultMaterialDescription,
+              material.materialInfo.defaultMaterialDescription,
               style: Theme.of(context).textTheme.subtitle2?.apply(
                     color: ZPColors.lightGray,
                   ),
             ),
           Text(
-            cartItem.materialInfo.principalData.principalName,
+            material.materialInfo.principalData.principalName,
             style: Theme.of(context).textTheme.subtitle2?.apply(
                   color: ZPColors.lightGray,
                 ),
           ),
           if (isOrderSummaryView)
             Text(
-              '${'Material type : '.tr()}${cartItem.toSavedOrderMaterial().type}',
+              '${'Material type : '.tr()}${material.toSavedOrderMaterial().type}',
               style: Theme.of(context).textTheme.bodyText1?.apply(
                     color: ZPColors.lightGray,
                   ),
             ),
           if (isOrderSummaryView)
             Text(
-              '${'Unit of Measurement : '.tr()}${cartItem.materialInfo.unitOfMeasurement}',
+              '${'Unit of Measurement : '.tr()}${material.materialInfo.unitOfMeasurement}',
               style: Theme.of(context).textTheme.bodyText1?.apply(
                     color: ZPColors.lightGray,
                   ),
             ),
-          if (!cartItem.materialInfo.hidePrice && isOrderSummaryView)
+          if (!material.materialInfo.hidePrice && isOrderSummaryView)
             Wrap(
               spacing: 8.0,
               runSpacing: 4.0,
@@ -257,28 +273,28 @@ class CartMaterialItemTileDetails extends StatelessWidget {
                 ),
               ],
             ),
-          if (cartItem.price.tiers.isNotEmpty && isOrderSummaryView)
+          if (material.price.tiers.isNotEmpty && isOrderSummaryView)
             Wrap(
               spacing: 8.0,
               runSpacing: 4.0,
-              children: cartItem.price.priceTireItem
+              children: material.price.priceTireItem
                   .map<Widget>(
                     (e) => PriceTierLabel(priceTierItem: e),
                   )
                   .toList(),
             ),
-          if (cartItem.price.isBonusDealEligible && isOrderSummaryView)
-            BonusDetails(cartItem: cartItem),
-          if (cartItem.salesOrgConfig.expiryDateDisplay)
+          if (material.price.isBonusDealEligible && isOrderSummaryView)
+            BonusDetails(cartItem: material),
+          if (material.salesOrgConfig.expiryDateDisplay)
             Text(
-              '${'Expiry Date : '.tr()}${cartItem.stockInfo.expiryDate.getExpiryDate}',
+              '${'Expiry Date : '.tr()}${material.stockInfo.expiryDate.getExpiryDate}',
               style: Theme.of(context).textTheme.bodyText1?.apply(
                     color: ZPColors.lightGray,
                   ),
             ),
-          if (!cartItem.salesOrgConfig.hideStockDisplay)
+          if (!material.salesOrgConfig.hideStockDisplay)
             Text(
-              '${'In Stock : '.tr()}${cartItem.stockInfo.inStock.getOrDefaultValue('')}',
+              '${'In Stock : '.tr()}${material.stockInfo.inStock.getOrDefaultValue('')}',
               style: Theme.of(context).textTheme.bodyText1?.apply(
                     color: ZPColors.lightGray,
                   ),
@@ -287,35 +303,26 @@ class CartMaterialItemTileDetails extends StatelessWidget {
             key: const Key('priceOverride'),
             onTap: () async {
               if (_isPriceOverRideVisible(context)) {
-                await showModalBottomSheet<void>(
+                final cartBloc = context.read<CartBloc>();
+                final result = await showModalBottomSheet(
                   isScrollControlled: true,
                   backgroundColor: Colors.transparent,
                   context: context,
                   builder: (BuildContext context) {
                     return PriceSheet(
                       key: const Key('priceSheet'),
-                      item: cartItem,
-                      onTap: (double newPrice) {
-                        if (cartItem.salesOrgConfig.priceOverride) {
-                          context.read<PriceOverrideBloc>().add(
-                                PriceOverrideEvent.fetch(
-                                  item: cartItem,
-                                  newPrice: newPrice,
-                                  salesOrganisation: context
-                                      .read<SalesOrgBloc>()
-                                      .state
-                                      .salesOrganisation,
-                                  customerCodeInfo: context
-                                      .read<CustomerCodeBloc>()
-                                      .state
-                                      .customerCodeInfo,
-                                ),
-                              );
-                        }
-                      },
+                      item: material,
                     );
                   },
                 );
+                if (result is List<Price>) {
+                  cartBloc.add(
+                    CartEvent.overrideCartItemPrice(
+                      overridenPrice: result,
+                      cartItem: cartItem,
+                    ),
+                  );
+                }
               }
             },
             child: Column(
@@ -324,7 +331,7 @@ class CartMaterialItemTileDetails extends StatelessWidget {
               children: [
                 if (enableVat)
                   Text(
-                    '${'Price before $taxCode: '.tr()}${cartItem.display(PriceType.finalPrice)}',
+                    '${'Price before $taxCode: '.tr()}${material.display(PriceType.finalPrice)}',
                     style: Theme.of(context).textTheme.bodyText1?.apply(
                           color:
                               isPriceOverride ? ZPColors.red : ZPColors.black,
@@ -335,7 +342,7 @@ class CartMaterialItemTileDetails extends StatelessWidget {
                   ),
                 if (enableListPrice)
                   Text(
-                    '${'List Price: '.tr()}${cartItem.display(PriceType.listPrice)}',
+                    '${'List Price: '.tr()}${material.display(PriceType.listPrice)}',
                     key: const Key('listPrice'),
                     style: Theme.of(context).textTheme.bodyText1?.apply(
                           color:
@@ -346,7 +353,7 @@ class CartMaterialItemTileDetails extends StatelessWidget {
                         ),
                   ),
                 Text(
-                  '${'Unit Price: '.tr()}${cartItem.display(PriceType.unitPrice)}',
+                  '${'Unit Price: '.tr()}${material.display(PriceType.unitPrice)}',
                   key: const Key('unitPrice'),
                   style: Theme.of(context).textTheme.bodyText1?.apply(
                         color: isPriceOverride ? ZPColors.red : ZPColors.black,
@@ -357,7 +364,7 @@ class CartMaterialItemTileDetails extends StatelessWidget {
                 ),
                 if (isOrderSummaryView)
                   Text(
-                    '${'Total Price: '.tr()}${cartItem.display(PriceType.unitPriceTotal)}',
+                    '${'Total Price: '.tr()}${material.display(PriceType.unitPriceTotal)}',
                     style: Theme.of(context).textTheme.bodyText1?.apply(
                           color:
                               isPriceOverride ? ZPColors.red : ZPColors.black,
@@ -396,7 +403,6 @@ class _CartItemQuantityInputState extends State<_CartItemQuantityInput> {
         offset: controller.selection.base.offset,
       ),
     );
-
     super.initState();
   }
 
@@ -431,8 +437,9 @@ class _CartItemQuantityInputState extends State<_CartItemQuantityInput> {
               },
             );
             context.read<CartBloc>().add(
-                  CartEvent.updateCartItem(
+                  CartEvent.addMaterialToCart(
                     item: widget.cartItem.copyWith(quantity: value),
+                    overrideQty: true,
                     customerCodeInfo:
                         context.read<CustomerCodeBloc>().state.customerCodeInfo,
                     doNotallowOutOfStockMaterial: context
@@ -448,41 +455,30 @@ class _CartItemQuantityInputState extends State<_CartItemQuantityInput> {
                 );
           },
           minusPressed: (k) {
-            if (widget.cartItem.quantity > 1) {
-              locator<CountlyService>().addCountlyEvent(
-                'deduct_quantity',
-                segmentation: {
-                  'materialNum': widget.cartItem.getMaterialNumber.getOrCrash(),
-                  'listPrice': widget.cartItem.listPrice,
-                  'price': widget.cartItem.price.finalPrice.getOrCrash(),
-                },
-              );
-              context.read<CartBloc>().add(
-                    CartEvent.addToCart(
-                      item: widget.cartItem.copyWith(quantity: -1),
-                      customerCodeInfo: context
-                          .read<CustomerCodeBloc>()
-                          .state
-                          .customerCodeInfo,
-                      doNotallowOutOfStockMaterial: context
-                          .read<EligibilityBloc>()
-                          .state
-                          .doNotAllowOutOfStockMaterials,
-                      salesOrganisation:
-                          context.read<SalesOrgBloc>().state.salesOrganisation,
-                      salesOrganisationConfigs:
-                          context.read<SalesOrgBloc>().state.configs,
-                      shipToInfo:
-                          context.read<ShipToCodeBloc>().state.shipToInfo,
-                    ),
-                  );
-            } else {
-              context.read<CartBloc>().add(
-                    CartEvent.removeFromCart(
-                      item: widget.cartItem,
-                    ),
-                  );
-            }
+            locator<CountlyService>().addCountlyEvent(
+              'deduct_quantity',
+              segmentation: {
+                'materialNum': widget.cartItem.getMaterialNumber.getOrCrash(),
+                'listPrice': widget.cartItem.listPrice,
+                'price': widget.cartItem.price.finalPrice.getOrCrash(),
+              },
+            );
+            context.read<CartBloc>().add(
+                  CartEvent.addMaterialToCart(
+                    item: widget.cartItem.copyWith(quantity: -1),
+                    customerCodeInfo:
+                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                    doNotallowOutOfStockMaterial: context
+                        .read<EligibilityBloc>()
+                        .state
+                        .doNotAllowOutOfStockMaterials,
+                    salesOrganisation:
+                        context.read<SalesOrgBloc>().state.salesOrganisation,
+                    salesOrganisationConfigs:
+                        context.read<SalesOrgBloc>().state.configs,
+                    shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+                  ),
+                );
           },
           addPressed: (k) {
             locator<CountlyService>().addCountlyEvent(
@@ -494,7 +490,7 @@ class _CartItemQuantityInputState extends State<_CartItemQuantityInput> {
               },
             );
             context.read<CartBloc>().add(
-                  CartEvent.addToCart(
+                  CartEvent.addMaterialToCart(
                     item: widget.cartItem.copyWith(quantity: 1),
                     customerCodeInfo:
                         context.read<CustomerCodeBloc>().state.customerCodeInfo,

@@ -17,6 +17,7 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
@@ -107,31 +108,33 @@ void main() {
   );
 
   final fakeCartItemList = [
-    PriceAggregate.empty().copyWith(
-      quantity: 1,
-      materialInfo: MaterialInfo.empty().copyWith(
-        materialNumber: MaterialNumber('000000000023168451'),
-        materialDescription: ' Triglyceride Mosys D',
-        principalData: PrincipalData.empty().copyWith(
-          principalName: '台灣拜耳股份有限公司',
+    CartItem.material(
+      PriceAggregate.empty().copyWith(
+        quantity: 1,
+        materialInfo: MaterialInfo.empty().copyWith(
+          materialNumber: MaterialNumber('000000000023168451'),
+          materialDescription: ' Triglyceride Mosys D',
+          principalData: PrincipalData.empty().copyWith(
+            principalName: '台灣拜耳股份有限公司',
+          ),
+        ),
+        price: Price.empty().copyWith(
+          materialNumber: MaterialNumber('000000000023168451'),
+          tiers: [
+            PriceTier.empty().copyWith(
+              tier: '',
+              items: [
+                priceTierItem1,
+                priceTierItem2,
+                priceTierItem3,
+              ],
+            )
+          ],
+          zmgDiscount: false,
+          finalPrice: MaterialPrice(5200),
         ),
       ),
-      price: Price.empty().copyWith(
-        materialNumber: MaterialNumber('000000000023168451'),
-        tiers: [
-          PriceTier.empty().copyWith(
-            tier: '',
-            items: [
-              priceTierItem1,
-              priceTierItem2,
-              priceTierItem3,
-            ],
-          )
-        ],
-        zmgDiscount: false,
-        finalPrice: MaterialPrice(5200),
-      ),
-    ),
+    )
   ];
 
   setUpAll(() async {
@@ -301,7 +304,7 @@ void main() {
         userSalesOrganisations: [fakeSalesOrg2],
       )));
       when(() => cartBlocMock.state).thenReturn(
-          CartState.initial().copyWith(cartItemList: fakeCartItemList));
+          CartState.initial().copyWith(cartItems: fakeCartItemList));
 
       await getScopedWidget(tester);
 

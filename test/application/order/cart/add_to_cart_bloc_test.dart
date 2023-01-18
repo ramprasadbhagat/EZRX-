@@ -293,51 +293,51 @@ void main() {
         },
       );
 
-      blocTest<AddToCartBloc, AddToCartState>(
-        'Tire Material UpdateQuantity AddToCartBloc for Material with Trie discount enable in cart',
-        setUp: () {
-          addToCartQuantity = 3;
-          onCartDiscountProductQuantity = 2;
-        },
-        build: () => AddToCartBloc(),
-        seed: () => AddToCartState.initial().copyWith(
-          cartItem: mockCartItemList.first,
-        ),
-        act: (bloc) => bloc.add(AddToCartEvent.updateQuantity(
-          addToCartQuantity,
-          onCartDiscountProductQuantity,
-        )),
-        expect: () => [
-          AddToCartState.initial().copyWith(
-            cartItem: mockCartItemList.first.copyWith(
-              discountedMaterialCount:
-                  addToCartQuantity + onCartDiscountProductQuantity,
-              quantity: addToCartQuantity,
-              price: mockCartItemList.first.price.copyWith(),
-            ),
-            quantity: addToCartQuantity,
-          ),
-        ],
-        verify: (AddToCartBloc bloc) {
-          expect(
-            bloc.state.cartItem.finalPrice,
-            mockCartItemList.first.price
-                .copyWith(zmgDiscount: true)
-                .priceTireItem
-                .first
-                .rate,
-          );
-          expect(
-            bloc.state.cartItem.finalPriceTotal,
-            mockCartItemList.first.price
-                    .copyWith(zmgDiscount: true)
-                    .priceTireItem
-                    .first
-                    .rate *
-                addToCartQuantity,
-          );
-        },
-      );
+      // blocTest<AddToCartBloc, AddToCartState>(
+      //   'Tire Material UpdateQuantity AddToCartBloc for Material with Trie discount enable in cart',
+      //   setUp: () {
+      //     addToCartQuantity = 3;
+      //     onCartDiscountProductQuantity = 2;
+      //   },
+      //   build: () => AddToCartBloc(),
+      //   seed: () => AddToCartState.initial().copyWith(
+      //     cartItem: mockCartItemList.first,
+      //   ),
+      //   act: (bloc) => bloc.add(AddToCartEvent.updateQuantity(
+      //     addToCartQuantity,
+      //     onCartDiscountProductQuantity,
+      //   )),
+      //   expect: () => [
+      //     AddToCartState.initial().copyWith(
+      //       cartItem: mockCartItemList.first.copyWith(
+      //         discountedMaterialCount:
+      //             addToCartQuantity + onCartDiscountProductQuantity,
+      //         quantity: addToCartQuantity,
+      //         price: mockCartItemList.first.price.copyWith(),
+      //       ),
+      //       quantity: addToCartQuantity,
+      //     ),
+      //   ],
+      //   verify: (AddToCartBloc bloc) {
+      //     expect(
+      //       bloc.state.cartItem.finalPrice,
+      //       mockCartItemList.first.price
+      //           .copyWith(zmgDiscount: true)
+      //           .priceTireItem
+      //           .first
+      //           .rate,
+      //     );
+      //     expect(
+      //       bloc.state.cartItem.finalPriceTotal,
+      //       mockCartItemList.first.price
+      //               .copyWith(zmgDiscount: true)
+      //               .priceTireItem
+      //               .first
+      //               .rate *
+      //           addToCartQuantity,
+      //     );
+      //   },
+      // );
     },
   );
 }

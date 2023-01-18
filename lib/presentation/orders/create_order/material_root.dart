@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/presentation/core/cart_bottom_sheet.dart';
-import 'package:ezrxmobile/presentation/core/cart_button.dart';
+import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/cart_bottom_sheet.dart';
+import 'package:ezrxmobile/presentation/orders/cart/cart_button.dart';
 import 'package:ezrxmobile/presentation/core/tab_view.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/covid_material_list.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/material_bundle_list.dart';

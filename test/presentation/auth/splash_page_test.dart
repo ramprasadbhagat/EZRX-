@@ -465,16 +465,16 @@ void main() {
 
       await getWidget(tester);
       await tester.pump();
-
+      final salesOrganisation = eligibilityBlocMock.state.salesOrganisation;
       verify(
           () => userRestrictionListBlocMock.add(UserRestrictionListEvent.fetch(
-                salesOrg: eligibilityBlocMock.state.salesOrganisation.salesOrg,
-              ))).called(2);
+                salesOrg: salesOrganisation.salesOrg,
+              ))).called(1);
 
       verify(() =>
           policyConfigurationListBlocMock.add(PolicyConfigurationEvent.fetch(
-            salesOrganisation: salesOrgBlocMock.state.salesOrganisation,
-          ))).called(3);
+            salesOrganisation: salesOrganisation,
+          ))).called(1);
       expect(find.byType(UpgradeAlert), findsOneWidget);
     });
 

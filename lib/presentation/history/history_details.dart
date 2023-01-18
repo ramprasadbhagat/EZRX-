@@ -730,15 +730,17 @@ class _ReOrder extends StatelessWidget {
       return PriceAggregate.empty();
     }).toList();
 
-    context.read<CartBloc>().add(CartEvent.addToCartFromList(
-          items: items,
-          customerCodeInfo: eligibilityState.customerCodeInfo,
-          salesOrganisationConfigs: eligibilityState.salesOrgConfigs,
-          salesOrganisation: eligibilityState.salesOrganisation,
-          shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
-          doNotAllowOutOfStockMaterials:
-              eligibilityState.doNotAllowOutOfStockMaterials,
-        ));
+    //TODO: Implement add all to cart
+
+    // context.read<CartBloc>().add(CartEvent.addToCartFromList(
+    //       items: items,
+    //       customerCodeInfo: eligibilityState.customerCodeInfo,
+    //       salesOrganisationConfigs: eligibilityState.salesOrgConfigs,
+    //       salesOrganisation: eligibilityState.salesOrganisation,
+    //       shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+    //       doNotAllowOutOfStockMaterials:
+    //           eligibilityState.doNotAllowOutOfStockMaterials,
+    //     ));
 
     context.router.pushNamed('cart_page');
   }

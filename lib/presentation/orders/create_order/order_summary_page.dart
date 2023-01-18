@@ -7,7 +7,7 @@ import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.da
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
-import 'package:ezrxmobile/application/order/cart/cart_view_model.dart';
+import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_filter/order_history_filter_bloc.dart';
@@ -26,8 +26,8 @@ import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/core/widget_helper.dart';
-import 'package:ezrxmobile/presentation/orders/cart/cart_bundle_item_tile.dart';
-import 'package:ezrxmobile/presentation/orders/cart/cart_material_item_tile.dart';
+import 'package:ezrxmobile/presentation/orders/cart/item/cart_bundle_item_tile.dart';
+import 'package:ezrxmobile/presentation/orders/cart/item/cart_material_item_tile.dart';
 import 'package:ezrxmobile/presentation/orders/core/account_suspended_warning.dart';
 import 'package:ezrxmobile/presentation/orders/core/edi_user_banner.dart';
 import 'package:ezrxmobile/presentation/orders/core/edi_user_continue_note.dart';
@@ -213,7 +213,7 @@ class _SubmitContinueButton extends StatelessWidget {
           salesOrganisation:
               context.read<SalesOrgBloc>().state.salesOrganisation,
           user: context.read<UserBloc>().state.user,
-          cartItems: context.read<CartBloc>().state.cartItemList,
+          cartItems: context.read<CartBloc>().state.cartItems.allMaterials,
           grandTotal: context.read<CartBloc>().state.grandTotal,
           orderType: context
               .read<OrderDocumentTypeBloc>()
@@ -304,7 +304,7 @@ class _Stepper extends StatelessWidget {
             salesOrganisation:
                 context.read<SalesOrgBloc>().state.salesOrganisation,
             user: context.read<UserBloc>().state.user,
-            cartItems: context.read<CartBloc>().state.displayCartItems,
+            cartItems: context.read<CartBloc>().state.selectedCartItems,
             grandTotal: context.read<CartBloc>().state.grandTotal,
             data: context
                 .read<AdditionalDetailsBloc>()
@@ -681,26 +681,22 @@ class _CartDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<CartBloc, CartState>(
       key: const Key('_cartDetailsKey'),
-      listenWhen: (previous, current) =>
-          previous.cartItemList != current.cartItemList,
+      listenWhen: (previosus, current) =>
+          previosus.cartItems.isEmpty != current.cartItems.isEmpty,
       listener: (context, state) {
-        if (state.cartItemList.isEmpty) {
-          // context.router.pop();
+        if (state.cartItems.isEmpty) {
+          context.router.pop();
         }
       },
-      buildWhen: (previous, current) =>
-          previous.cartItemList != current.cartItemList,
+      buildWhen: (previous, current) => previous.cartItems != current.cartItems,
       builder: (context, state) {
         final salesOrgConfig = context.read<SalesOrgBloc>().state.configs;
         final taxCode = context.read<SalesOrgBloc>().state.salesOrg.taxCode;
-        final selectedMaterialList =
-            context.read<CartBloc>().state.selectedItemsMaterialNumber;
-        final readyToSubmitCartItem = state.displayCartItems
+
+        final readyToSubmitCartItem = state.selectedCartItems
             .where((e) => e.itemType == CartItemType.material)
-            .where((e) => selectedMaterialList
-                .contains(e.materials.first.getMaterialNumber))
-            .map((e) => e.materials.first)
-            .toList();
+            .toList()
+            .allMaterials;
         context.read<OrderEligibilityBloc>().add(
               OrderEligibilityEvent.update(
                 cartItems: readyToSubmitCartItem,
@@ -753,17 +749,15 @@ class _CartDetails extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-            ...state.displayCartItems.map((item) {
+            ...state.selectedCartItems.map((item) {
               switch (item.itemType) {
                 case CartItemType.material:
-                  return selectedMaterialList
-                          .contains(item.materials.first.getMaterialNumber)
-                      ? CartMaterialItemTile(
-                          cartItem: item.materials.first,
-                          taxCode: taxCode,
-                          isOrderSummaryView: true,
-                        )
-                      : const SizedBox.shrink();
+                  return CartMaterialItemTile(
+                    cartItem: item,
+                    taxCode: taxCode,
+                    isOrderSummaryView: true,
+                  );
+
                 case CartItemType.bundle:
                   return CartBundleItemTile(
                     cartItem: item,

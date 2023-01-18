@@ -153,19 +153,6 @@ class ShipCodeSelector extends StatelessWidget {
                     ),
                   );
 
-              context.read<CartBloc>().add(CartEvent.fetch(
-                    customerCodeInfo:
-                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                    salesOrganisationConfigs:
-                        context.read<SalesOrgBloc>().state.configs,
-                    shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
-                    doNotAllowOutOfStockMaterials: context
-                        .read<EligibilityBloc>()
-                        .state
-                        .doNotAllowOutOfStockMaterials,
-                    salesOrganisation:
-                        context.read<SalesOrgBloc>().state.salesOrganisation,
-                  ));
               context.read<MaterialFilterBloc>().add(MaterialFilterEvent.fetch(
                     salesOrganisation:
                         context.read<SalesOrgBloc>().state.salesOrganisation,
@@ -192,16 +179,6 @@ class ShipCodeSelector extends StatelessWidget {
                         .state
                         .shipToInfo
                         .shipToCustomerCode,
-                  ));
-              context.read<CartBloc>().add(CartEvent.updateStockInfo(
-                    user: context.read<UserBloc>().state.user,
-                    customerCodeInfo:
-                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                    salesOrganisationConfigs:
-                        context.read<SalesOrgBloc>().state.configs,
-                    salesOrganisation:
-                        context.read<SalesOrgBloc>().state.salesOrganisation,
-                    shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
                   ));
             } else {
               context

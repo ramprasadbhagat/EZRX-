@@ -124,10 +124,10 @@ class PriceAggregate with _$PriceAggregate {
           : discountedListPrice;
     }
 
-    if (!price.isDiscountEligible){
+    if (!price.isDiscountEligible) {
       finalPrice = tenderContract.tenderPrice.tenderPrice != 0
           ? tenderContract.tenderPrice
-          .tenderPriceByPricingUnit(tenderContract.pricingUnit)
+              .tenderPriceByPricingUnit(tenderContract.pricingUnit)
           : price.finalPrice.getOrDefaultValue(0);
     }
 
@@ -386,6 +386,10 @@ class PriceAggregate with _$PriceAggregate {
                   ? 1
                   : 0.compareTo(b.additionalBonusFlag ? 0 : 1),
         );
+
+  PriceAggregate copyWithIncreasedQty({required int qty}) => copyWith(
+        quantity: quantity + qty,
+      );
 }
 
 enum PriceType {

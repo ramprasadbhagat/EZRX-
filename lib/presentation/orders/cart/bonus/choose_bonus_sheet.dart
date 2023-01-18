@@ -1,7 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
-import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
@@ -21,7 +25,7 @@ class UpdateBonus extends StatelessWidget {
   }) : super(key: key);
 
   final MaterialInfo materialInfo;
-  final PriceAggregate cartItem;
+  final CartItem cartItem;
   final bool isUpdateFromCart;
 
   @override
@@ -81,9 +85,10 @@ class UpdateBonus extends StatelessWidget {
                           locator<CountlyService>().addCountlyEvent(
                             'changed_quantity',
                             segmentation: {
-                              'materialNum': materialInfo.materialNumber.getOrCrash(),
+                              'materialNum':
+                                  materialInfo.materialNumber.getOrCrash(),
                               'listPrice': cartItem.listPrice,
-                              'price': cartItem.price.finalPrice.getOrCrash(),
+                              'price': cartItem.unitPrice,
                             },
                           );
                         },
@@ -91,21 +96,23 @@ class UpdateBonus extends StatelessWidget {
                           locator<CountlyService>().addCountlyEvent(
                             'deduct_quantity',
                             segmentation: {
-                              'materialNum': materialInfo.materialNumber.getOrCrash(),
+                              'materialNum':
+                                  materialInfo.materialNumber.getOrCrash(),
                               'listPrice': cartItem.listPrice,
-                              'price': cartItem.price.finalPrice.getOrCrash(),
+                              'price': cartItem.unitPrice,
                             },
                           );
                         },
                         addPressed: (p0) {
                           locator<CountlyService>().addCountlyEvent(
-                          'add_quantity',
-                          segmentation: {
-                            'materialNum': materialInfo.materialNumber.getOrCrash(),
-                            'listPrice': cartItem.listPrice,
-                            'price': cartItem.price.finalPrice.getOrCrash(),
-                          },
-                        );
+                            'add_quantity',
+                            segmentation: {
+                              'materialNum':
+                                  materialInfo.materialNumber.getOrCrash(),
+                              'listPrice': cartItem.listPrice,
+                              'price': cartItem.unitPrice,
+                            },
+                          );
                         },
                       ),
                     ],
@@ -116,22 +123,34 @@ class UpdateBonus extends StatelessWidget {
               ElevatedButton(
                 key: const Key('addButton'),
                 onPressed: () {
-                  // final updatedCartItem = cartItem.copyWith(
-                  //   quantity: int.tryParse(controller.text) ?? 1,
-                  // );
                   locator<CountlyService>().addCountlyEvent('Add to bonus');
                   context.read<CartBloc>().add(
-                        CartEvent.updateBonusItem(
+                        CartEvent.addBonusToCartItem(
+                          item: cartItem,
                           bonusItem: MaterialItemBonus.empty().copyWith(
                             materialInfo: materialInfo,
                             materialDescription:
                                 materialInfo.materialDescription,
                             additionalBonusFlag: true,
                             bonusOverrideFlag: true,
+                            qty: int.tryParse(controller.text) ?? 1,
                           ),
-                          bonusItemCount: int.tryParse(controller.text) ?? 1,
-                          cartItem: cartItem,
-                          isUpdateFromCart: isUpdateFromCart,
+                          customerCodeInfo: context
+                              .read<CustomerCodeBloc>()
+                              .state
+                              .customerCodeInfo,
+                          doNotallowOutOfStockMaterial: context
+                              .read<EligibilityBloc>()
+                              .state
+                              .doNotAllowOutOfStockMaterials,
+                          salesOrganisation: context
+                              .read<SalesOrgBloc>()
+                              .state
+                              .salesOrganisation,
+                          salesOrganisationConfigs:
+                              context.read<SalesOrgBloc>().state.configs,
+                          shipToInfo:
+                              context.read<ShipToCodeBloc>().state.shipToInfo,
                         ),
                       );
 

@@ -280,7 +280,7 @@ class _ListContent extends StatelessWidget {
           ),
           onTap: () {
             if (customerCodeInfo != customerBloc.state.customerCodeInfo &&
-                cartBloc.state.cartItemList.isNotEmpty) {
+                cartBloc.state.cartItems.isNotEmpty) {
               ConfirmClearDialog.show(
                 context: context,
                 onCancel: () {
@@ -291,7 +291,6 @@ class _ListContent extends StatelessWidget {
                     'The progress on your cart is going to be lost. Do you want to proceed?'
                         .tr(),
                 onConfirmed: () {
-                  context.read<CartBloc>().add(const CartEvent.clearCart());
                   context.router
                       .popUntilRouteWithName(HomeNavigationTabbarRoute.name);
                   context.read<CustomerCodeBloc>().add(

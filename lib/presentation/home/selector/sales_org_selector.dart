@@ -95,7 +95,7 @@ class SalesOrgSelector extends StatelessWidget {
                       child: Text(e.salesOrg.fullName),
                       onPressed: () {
                         if (e != salesOrgBloc.state.salesOrganisation &&
-                            cartBloc.state.cartItemList.isNotEmpty) {
+                            cartBloc.state.cartItems.isNotEmpty) {
                           ConfirmClearDialog.show(
                             context: context,
                             title: 'Change sales organization'.tr(),
@@ -106,7 +106,6 @@ class SalesOrgSelector extends StatelessWidget {
                               context.router.pop();
                             },
                             onConfirmed: () {
-                              cartBloc.add(const CartEvent.clearCart());
                               context.router.popUntilRouteWithName(
                                 HomeNavigationTabbarRoute.name,
                               );

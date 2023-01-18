@@ -5,9 +5,9 @@ import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.da
 import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
+import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/update_cart_button.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/cart_item_detail_widget.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/select_contract.dart';
-import 'package:ezrxmobile/presentation/orders/create_order/update_cart_button.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,7 +29,7 @@ class _UpdateCartState extends State<UpdateCart> {
 
     final cartItem = addToCartBloc.state.cartItem;
     final discountedMaterialCount =
-        cartBloc.state.onUpdateDiscountMaterialCount(cartItem);
+        cartBloc.state.zmgMaterialWithoutMaterial(cartItem);
     addToCartBloc.add(
       AddToCartEvent.updateQuantity(
         cartItem.quantity,
@@ -87,7 +87,7 @@ class _UpdateCartState extends State<UpdateCart> {
                           cartItem: state.cartItem,
                           onQuantityChanged: (int value) {
                             final discountedMaterialCount =
-                                cartBloc.state.onUpdateDiscountMaterialCount(
+                                cartBloc.state.zmgMaterialWithoutMaterial(
                               addToCartBloc.state.cartItem,
                             );
                             context.read<AddToCartBloc>().add(

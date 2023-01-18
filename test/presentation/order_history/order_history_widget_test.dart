@@ -21,7 +21,6 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
-import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_basic_info.dart';
@@ -215,12 +214,12 @@ void main() {
             ),
           ]);
         });
-        final mockCartBloc = locator<CartMocBloc>();
-        when(() => mockCartBloc.stream).thenAnswer((invocation) {
-          return Stream.fromIterable([
-            CartState.initial().copyWith(cartItemList: <PriceAggregate>[]),
-          ]);
-        });
+        // final mockCartBloc = locator<CartMocBloc>();
+        // when(() => mockCartBloc.stream).thenAnswer((invocation) {
+        //   return Stream.fromIterable([
+        //     CartState.initial().copyWith(cartItemList: <PriceAggregate>[]),
+        //   ]);
+        // });
         await tester.pumpWidget(getWUT());
         await tester.pumpAndSettle(const Duration(seconds: 1));
         final orderList = find.byKey(const Key('scrollList'));

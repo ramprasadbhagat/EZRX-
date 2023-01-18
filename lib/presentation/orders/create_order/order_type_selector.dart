@@ -198,7 +198,7 @@ class _OrderTypeSelectorField extends StatelessWidget {
                   i,
                   context.read<CartBloc>().state,
                 );
-                if ((context.read<CartBloc>().state.cartItemList.isEmpty ||
+                if ((context.read<CartBloc>().state.cartItems.isEmpty ||
                     validationText.isEmpty)) {
                   context.read<OrderDocumentTypeBloc>().add(
                         OrderDocumentTypeEvent.selectedOrderType(
@@ -215,7 +215,6 @@ class _OrderTypeSelectorField extends StatelessWidget {
                       context.router.pop();
                     },
                     onConfirmed: () {
-                      context.read<CartBloc>().add(const CartEvent.clearCart());
                       context.router
                           .popUntilRouteWithName(MaterialRootRoute.name);
                       context.read<OrderDocumentTypeBloc>().add(

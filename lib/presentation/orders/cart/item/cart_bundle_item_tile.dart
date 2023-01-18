@@ -4,7 +4,7 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
-import 'package:ezrxmobile/application/order/cart/cart_view_model.dart';
+import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
@@ -12,8 +12,6 @@ import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/custom_label.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
-import 'package:ezrxmobile/presentation/orders/cart/bonus_tile.dart';
-import 'package:ezrxmobile/presentation/orders/create_order/bonus_discount_label.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/quantity_input.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -48,11 +46,9 @@ class CartBundleItemTile extends StatelessWidget {
                 label: 'Delete',
                 icon: Icons.delete_outline,
                 onPressed: (context) {
-                  for (final material in cartItem.materials) {
-                    context.read<CartBloc>().add(
-                          CartEvent.removeFromCart(item: material),
-                        );
-                  }
+                  context.read<CartBloc>().add(
+                        CartEvent.removeFromCart(item: cartItem),
+                      );
                 },
               ),
             ],
@@ -65,20 +61,13 @@ class CartBundleItemTile extends StatelessWidget {
                     showCheckBox
                         ? Checkbox(
                             onChanged: (v) {
-                              for (final cartItem in cartItem.materials) {
-                                context.read<CartBloc>().add(
-                                      CartEvent.updateSelectedItem(
-                                        item: cartItem,
-                                      ),
-                                    );
-                              }
+                              context.read<CartBloc>().add(
+                                    CartEvent.selectButtonTapped(
+                                      cartItem: cartItem,
+                                    ),
+                                  );
                             },
-                            value: context
-                                .read<CartBloc>()
-                                .state
-                                .selectedItemsMaterialNumber
-                                .contains(materialCommonInfo
-                                    .materialInfo.materialNumber),
+                            value: cartItem.isSelected,
                           )
                         : const SizedBox.shrink(),
                     Expanded(
@@ -199,12 +188,13 @@ class CartBundleItemTile extends StatelessWidget {
                 ),
                 ...cartItem.materials
                     .map(
-                      (cartItem) => ListTile(
+                      (material) => ListTile(
                         contentPadding: showCheckBox ? EdgeInsets.zero : null,
                         title: Padding(
                           padding: EdgeInsets.only(left: showCheckBox ? 40 : 0),
                           child: _BundleMaterialItem(
                             cartItem: cartItem,
+                            material: material,
                           ),
                         ),
                       ),
@@ -212,9 +202,6 @@ class CartBundleItemTile extends StatelessWidget {
                     .toList(),
               ],
             ),
-          ),
-          BounsTile(
-            cartItem: materialCommonInfo,
           ),
         ],
       ),
@@ -225,10 +212,12 @@ class CartBundleItemTile extends StatelessWidget {
 class _BundleMaterialItem extends StatefulWidget {
   const _BundleMaterialItem({
     Key? key,
+    required this.material,
     required this.cartItem,
   }) : super(key: key);
 
-  final PriceAggregate cartItem;
+  final PriceAggregate material;
+  final CartItem cartItem;
 
   @override
   State<_BundleMaterialItem> createState() => _BundleMaterialItemState();
@@ -240,7 +229,7 @@ class _BundleMaterialItemState extends State<_BundleMaterialItem> {
   @override
   void initState() {
     controller =
-        TextEditingController(text: widget.cartItem.quantity.toString());
+        TextEditingController(text: widget.material.quantity.toString());
     super.initState();
   }
 
@@ -263,32 +252,27 @@ class _BundleMaterialItemState extends State<_BundleMaterialItem> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    widget.cartItem.materialInfo.materialNumber.displayMatNo,
+                    widget.material.materialInfo.materialNumber.displayMatNo,
                     style: Theme.of(context).textTheme.subtitle2?.apply(
                           color: ZPColors.kPrimaryColor,
                         ),
                   ),
-                  BonusDiscountLabel(
-                    materialInfo: widget.cartItem.materialInfo,
-                    tenderContractNumber: widget.cartItem.tenderContract
-                        .contractNumber.displayTenderContractNumberInCart,
-                  ),
                 ],
               ),
               Text(
-                widget.cartItem.materialInfo.materialDescription,
+                widget.material.materialInfo.materialDescription,
                 style: Theme.of(context).textTheme.bodyText1,
               ),
-              widget.cartItem.isDefaultMDEnabled
+              widget.material.isDefaultMDEnabled
                   ? Text(
-                      widget.cartItem.materialInfo.defaultMaterialDescription,
+                      widget.material.materialInfo.defaultMaterialDescription,
                       style: Theme.of(context).textTheme.subtitle2?.apply(
                             color: ZPColors.lightGray,
                           ),
                     )
                   : const SizedBox.shrink(),
               Text(
-                widget.cartItem.materialInfo.principalData.principalName,
+                widget.material.materialInfo.principalData.principalName,
                 style: Theme.of(context).textTheme.subtitle2?.apply(
                       color: ZPColors.lightGray,
                     ),
@@ -300,16 +284,9 @@ class _BundleMaterialItemState extends State<_BundleMaterialItem> {
           buildWhen: (previous, current) =>
               previous.isFetching != current.isFetching,
           builder: (context, state) {
-            controller.text = state.cartItemList
-                .firstWhere((element) =>
-                    element.materialInfo.materialNumber ==
-                    widget.cartItem.materialInfo.materialNumber)
-                .quantity
-                .toString();
-
             return QuantityInput(
               isEnabled:
-                  widget.cartItem.tenderContract == TenderContract.empty() &&
+                  widget.material.tenderContract == TenderContract.empty() &&
                       !state.isFetching,
               quantityTextKey: const Key('cartItem'),
               controller: controller,
@@ -318,14 +295,16 @@ class _BundleMaterialItemState extends State<_BundleMaterialItem> {
                   'changed_quantity',
                   segmentation: {
                     'materialNum':
-                        widget.cartItem.getMaterialNumber.getOrCrash(),
+                        widget.material.getMaterialNumber.getOrCrash(),
                     'listPrice': widget.cartItem.listPrice,
-                    'price': widget.cartItem.price.finalPrice.getOrCrash(),
+                    'price': widget.material.price.finalPrice.getOrCrash(),
                   },
                 );
                 context.read<CartBloc>().add(
-                      CartEvent.updateCartItem(
-                        item: widget.cartItem.copyWith(quantity: value),
+                      CartEvent.updateBundleItemQty(
+                        currentBundle: widget.cartItem,
+                        updatedQtyItem:
+                            widget.material.copyWith(quantity: value),
                         customerCodeInfo: context
                             .read<CustomerCodeBloc>()
                             .state
@@ -346,56 +325,52 @@ class _BundleMaterialItemState extends State<_BundleMaterialItem> {
                     );
               },
               minusPressed: (k) {
-                if (widget.cartItem.quantity > 1) {
-                  locator<CountlyService>().addCountlyEvent(
-                    'deduct_quantity',
-                    segmentation: {
-                      'materialNum':
-                          widget.cartItem.getMaterialNumber.getOrCrash(),
-                      'listPrice': widget.cartItem.listPrice,
-                      'price': widget.cartItem.price.finalPrice.getOrCrash(),
-                    },
-                  );
-                  context.read<CartBloc>().add(
-                        CartEvent.addToCart(
-                          item: widget.cartItem.copyWith(quantity: -1),
-                          customerCodeInfo: context
-                              .read<CustomerCodeBloc>()
-                              .state
-                              .customerCodeInfo,
-                          doNotallowOutOfStockMaterial: context
-                              .read<EligibilityBloc>()
-                              .state
-                              .doNotAllowOutOfStockMaterials,
-                          salesOrganisation: context
-                              .read<SalesOrgBloc>()
-                              .state
-                              .salesOrganisation,
-                          salesOrganisationConfigs:
-                              context.read<SalesOrgBloc>().state.configs,
-                          shipToInfo:
-                              context.read<ShipToCodeBloc>().state.shipToInfo,
-                        ),
-                      );
-                } else {
-                  context.read<CartBloc>().add(
-                        CartEvent.removeFromCart(item: widget.cartItem),
-                      );
-                }
+                locator<CountlyService>().addCountlyEvent(
+                  'deduct_quantity',
+                  segmentation: {
+                    'materialNum':
+                        widget.material.getMaterialNumber.getOrCrash(),
+                    'listPrice': widget.cartItem.listPrice,
+                    'price': widget.material.price.finalPrice.getOrCrash(),
+                  },
+                );
+                context.read<CartBloc>().add(
+                      CartEvent.updateBundleItemQty(
+                        currentBundle: widget.cartItem,
+                        updatedQtyItem: widget.material.copyWith(quantity: k),
+                        customerCodeInfo: context
+                            .read<CustomerCodeBloc>()
+                            .state
+                            .customerCodeInfo,
+                        doNotallowOutOfStockMaterial: context
+                            .read<EligibilityBloc>()
+                            .state
+                            .doNotAllowOutOfStockMaterials,
+                        salesOrganisation: context
+                            .read<SalesOrgBloc>()
+                            .state
+                            .salesOrganisation,
+                        salesOrganisationConfigs:
+                            context.read<SalesOrgBloc>().state.configs,
+                        shipToInfo:
+                            context.read<ShipToCodeBloc>().state.shipToInfo,
+                      ),
+                    );
               },
               addPressed: (k) {
                 locator<CountlyService>().addCountlyEvent(
                   'add_quantity',
                   segmentation: {
                     'materialNum':
-                        widget.cartItem.getMaterialNumber.getOrCrash(),
+                        widget.material.getMaterialNumber.getOrCrash(),
                     'listPrice': widget.cartItem.listPrice,
-                    'price': widget.cartItem.price.finalPrice.getOrCrash(),
+                    'price': widget.material.price.finalPrice.getOrCrash(),
                   },
                 );
                 context.read<CartBloc>().add(
-                      CartEvent.addToCart(
-                        item: widget.cartItem.copyWith(quantity: 1),
+                      CartEvent.updateBundleItemQty(
+                        currentBundle: widget.cartItem,
+                        updatedQtyItem: widget.material.copyWith(quantity: k),
                         customerCodeInfo: context
                             .read<CustomerCodeBloc>()
                             .state

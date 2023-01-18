@@ -7,6 +7,7 @@ import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.da
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +22,7 @@ class UpdateCartButton extends StatelessWidget {
   }) : super(key: key);
 
   bool isSelectedTenderContractValid(BuildContext context) {
-    final cartItems = context.read<CartBloc>().state.cartItemList;
+    final cartItems = context.read<CartBloc>().state.cartItems.allMaterials;
     final tenderContractInCart = cartItems.isEmpty
         ? TenderContract.empty()
         : cartItems
@@ -95,11 +96,13 @@ class UpdateCartButton extends StatelessWidget {
   void _updateCart(BuildContext context, PriceAggregate selectedCartItem) {
     final selectedTenderContract =
         context.read<TenderContractBloc>().state.selectedTenderContract;
+
     context.read<CartBloc>().add(
-          CartEvent.updateCartItem(
+          CartEvent.addMaterialToCart(
             item: cartItem.copyWith(tenderContract: selectedTenderContract),
             customerCodeInfo:
                 context.read<CustomerCodeBloc>().state.customerCodeInfo,
+            overrideQty: true,
             doNotallowOutOfStockMaterial: context
                 .read<EligibilityBloc>()
                 .state

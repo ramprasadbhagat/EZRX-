@@ -1,11 +1,11 @@
 import 'package:dartz/dartz.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
-import 'package:ezrxmobile/domain/returns/entities/usage.dart';
-import 'package:ezrxmobile/domain/returns/repository/i_usage_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/returns/entities/usage.dart';
+import 'package:ezrxmobile/domain/returns/repository/i_usage_repository.dart';
 
 part 'usage_code_bloc.freezed.dart';
 part 'usage_code_event.dart';

@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
@@ -11,14 +12,17 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PriceSheet extends StatefulWidget {
-  const PriceSheet({Key? key, required this.item, required this.onTap})
-      : super(key: key);
+  const PriceSheet({
+    Key? key,
+    required this.item,
+
+  }) : super(key: key);
 
   @override
   State<PriceSheet> createState() => _PriceSheetState();
 
   final PriceAggregate item;
-  final Function onTap;
+
 }
 
 class _PriceSheetState extends State<PriceSheet> {
@@ -122,15 +126,15 @@ class _PriceSheetState extends State<PriceSheet> {
                     state.apiFailureOrSuccessOption.fold(
                       () {
                         if (!state.isFetching) {
-                          context.read<CartBloc>().add(
-                                CartEvent.updateCart(
-                                  item: state.cartItemList,
-                                  materialNumber: widget
-                                      .item.materialInfo.materialNumber
-                                      .getOrCrash(),
-                                ),
-                              );
-                          context.router.pop();
+                          // context.read<CartBloc>().add(
+                          //       CartEvent.updateCart(
+                          //         item: state.cartItemList,
+                          //         materialNumber: widget
+                          //             .item.materialInfo.materialNumber
+                          //             .getOrCrash(),
+                          //       ),
+                          //     );
+                          context.router.pop(state.cartItemList);
                         }
                       },
                       (either) => either.fold(
@@ -150,7 +154,23 @@ class _PriceSheetState extends State<PriceSheet> {
                           ? null
                           : () {
                               FocusScope.of(context).unfocus();
-                              widget.onTap(newPrice);
+                              if (widget.item.salesOrgConfig.priceOverride) {
+                                context.read<PriceOverrideBloc>().add(
+                                      PriceOverrideEvent.fetch(
+                                        item: widget.item,
+                                        newPrice: newPrice,
+                                        salesOrganisation: context
+                                            .read<SalesOrgBloc>()
+                                            .state
+                                            .salesOrganisation,
+                                        customerCodeInfo: context
+                                            .read<CustomerCodeBloc>()
+                                            .state
+                                            .customerCodeInfo,
+                                      ),
+                                    );
+                              }
+                       
                             },
                       child: LoadingShimmer.withChild(
                         enabled: state.isFetching,

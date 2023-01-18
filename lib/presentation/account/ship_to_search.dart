@@ -250,9 +250,8 @@ class _ListContent extends StatelessWidget {
           ),
           onTap: () {
             if (shipToInfo != shipToBloc.state.shipToInfo &&
-                cartBloc.state.cartItemList.isNotEmpty) {
+                cartBloc.state.cartItems.isNotEmpty) {
               ConfirmClearDialog.show(
-                
                 context: context,
                 title: 'Change Shipping Address'.tr(),
                 description:
@@ -262,7 +261,6 @@ class _ListContent extends StatelessWidget {
                   context.router.pop();
                 },
                 onConfirmed: () {
-                  cartBloc.add(const CartEvent.clearCart());
                   context.router
                       .popUntilRouteWithName(HomeNavigationTabbarRoute.name);
                   shipToBloc.add(

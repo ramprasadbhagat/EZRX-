@@ -5,58 +5,49 @@ class CartState with _$CartState {
   const CartState._();
 
   const factory CartState({
-    required List<PriceAggregate> cartItemList,
-    required List<MaterialNumber> selectedItemsMaterialNumber,
+    required List<CartItem> cartItems,
     required Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
     required bool isFetching,
-    required Remarks remarks,
-    required bool showErrorMessages,
-    required bool isRemarksAdding,
+    required bool isClearing,
   }) = _CartState;
 
   factory CartState.initial() => CartState(
-        cartItemList: <PriceAggregate>[],
-        selectedItemsMaterialNumber: <MaterialNumber>[],
+        cartItems: <CartItem>[],
         apiFailureOrSuccessOption: none(),
-        isFetching: true,
-        remarks: Remarks(''),
-        showErrorMessages: false,
-        isRemarksAdding: false,
+        isFetching: false,
+        isClearing: false,
       );
 
-  double get subtotal => selectedDisplayCartItems.fold<double>(
+  double get subtotal => selectedCartItems.fold<double>(
         0,
         (sum, item) => sum + item.subTotalPrice,
       );
 
-  double get grandTotal => selectedDisplayCartItems.fold<double>(
+  double get grandTotal => selectedCartItems.fold<double>(
         0,
         (sum, item) => sum + item.grandTotalPrice,
       );
 
   double get vatTotal => grandTotal - subtotal;
 
-  int get zmgMaterialCount => cartItemList.fold<int>(
-        0,
-        (sum, item) => sum + (item.price.zmgDiscount ? item.quantity : 0),
-      );
+  int get zmgMaterialCount => cartItems.allZmgMaterialsQty;
 
   bool get containFocMaterial =>
-      cartItemList.any((e) => e.materialInfo.materialGroup4.isFOC);
+      cartItems.allMaterials.any((e) => e.materialInfo.materialGroup4.isFOC);
 
   bool get containNonFocMaterial =>
-      cartItemList.any((e) => !e.materialInfo.materialGroup4.isFOC);
+      cartItems.allMaterials.any((e) => !e.materialInfo.materialGroup4.isFOC);
 
   bool get containNonFocMaterialOT =>
-      cartItemList.any((e) => !e.materialInfo.isFOCMaterial);
+      cartItems.allMaterials.any((e) => !e.materialInfo.isFOCMaterial);
 
   bool get containSampleMaterial =>
-      cartItemList.any((e) => e.materialInfo.isSampleMaterial);
+      cartItems.allMaterials.any((e) => e.materialInfo.isSampleMaterial);
 
-  bool get containNonSampleMaterial =>
-      cartItemList.any((element) => !element.materialInfo.isSampleMaterial);
+  bool get containNonSampleMaterial => cartItems.allMaterials
+      .any((element) => !element.materialInfo.isSampleMaterial);
 
-  bool get containNonRegularMaterial => cartItemList.any((element) =>
+  bool get containNonRegularMaterial => cartItems.allMaterials.any((element) =>
       !element.materialInfo.isFOCMaterial ||
       !element.materialInfo.isSampleMaterial);
 
@@ -78,83 +69,27 @@ class CartState with _$CartState {
                 : false;
   }
 
-  List<PriceAggregate> get selectedItemList => cartItemList
-      .where((element) => selectedItemsMaterialNumber
-          .contains(element.materialInfo.materialNumber))
-      .toList();
+  List<CartItem> get selectedCartItems =>
+      cartItems.where((item) => item.isSelected).toList();
 
-  List<CartItem> get selectedDisplayCartItems {
-    final selectedItemList = displayCartItems
-        .map(
-          (cartItem) => cartItem.copyWith(
-            materials: cartItem.materials
-                .where((material) => selectedItemsMaterialNumber
-                    .contains(material.materialInfo.materialNumber))
-                .toList(),
-          ),
-        )
-        .toList();
+  int zmgMaterialWithoutMaterial(PriceAggregate material) {
+    final cartMaterial = getMaterialCartItem(material: material);
+    final itemQty =
+        cartMaterial == CartItem.materialEmpty() ? 0 : cartMaterial.totalQty;
 
-    return selectedItemList;
+    return zmgMaterialCount - itemQty;
   }
 
-  List<CartItem> get displayCartItems {
-    final displayCartItems = <String, CartItem>{};
-    for (final material in cartItemList) {
-      if (material.isFromBundle) {
-        final bundleCode = material.bundle.bundleCode;
-        if (displayCartItems[bundleCode] == null) {
-          displayCartItems.addAll(
-            {
-              bundleCode: CartItem(
-                materials: [material],
-                itemType: CartItemType.bundle,
-              ),
-            },
-          );
-        } else {
-          displayCartItems[bundleCode] =
-              displayCartItems[bundleCode]!.copyWithNewItem(material);
-        }
-      } else {
-        final materialCode = material.materialNumberString;
-        displayCartItems.addAll(
-          {
-            materialCode: CartItem(
-              materials: [material],
-              itemType: CartItemType.material,
-            ),
-          },
-        );
-      }
-    }
-
-    return displayCartItems.values.toList();
+  CartItem getMaterialCartItem({
+    required PriceAggregate material,
+  }) {
+    return cartItems.firstWhere(
+      (item) =>
+          item.itemType == CartItemType.material &&
+          item.materials
+              .map((e) => e.getMaterialNumber)
+              .contains(material.getMaterialNumber),
+      orElse: () => CartItem.materialEmpty(),
+    );
   }
-
-  int onAddCartDiscountMaterialCount(PriceAggregate addedCartItem) =>
-      cartItemList.fold<int>(
-        0,
-        (sum, item) =>
-            sum +
-            ((item.price.zmgDiscount && addedCartItem.price.zmgDiscount) ||
-                    (addedCartItem.price.isTireDiscountEligible &&
-                        item.price.isTireDiscountEligible &&
-                        item.getMaterialNumber ==
-                            addedCartItem.getMaterialNumber)
-                ? item.quantity
-                : 0),
-      );
-
-  int onUpdateDiscountMaterialCount(PriceAggregate ubdatedCartItem) =>
-      cartItemList.fold<int>(
-        0,
-        (sum, item) =>
-            sum +
-            ((item.price.zmgDiscount &&
-                    ubdatedCartItem.price.zmgDiscount &&
-                    item.getMaterialNumber != ubdatedCartItem.getMaterialNumber)
-                ? item.quantity
-                : 0),
-      );
 }
