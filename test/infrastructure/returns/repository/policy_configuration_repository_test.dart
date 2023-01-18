@@ -35,15 +35,14 @@ void main() {
   late CountlyService countlyService;
   final policyConfigurationListMock = [
     PolicyConfiguration(
-      salesOrg: '2601',
-      principalCode: PrincipalCode('2601'),
-      monthsBeforeExpiry: '"0',
-      monthsAfterExpiry: '"0',
-      uuid: 'cfe3d45d-9812-49d7-8b83-ad028b9ae383',
-      returnsAllowed: ReturnsAllowed(true),
-      principalName: PrincipalName(''),
-      status: ''
-    ),
+        salesOrg: SalesOrg('2601'),
+        principalCode: PrincipalCode('2601'),
+        monthsBeforeExpiry: MonthsBeforeExpiry.change('0'),
+        monthsAfterExpiry: MonthsAfterExpiry.change('0'),
+        uuid: 'cfe3d45d-9812-49d7-8b83-ad028b9ae383',
+        returnsAllowed: ReturnsAllowed(true),
+        principalName: PrincipalName(''),
+        status: ''),
   ];
 
   setUpAll(() {

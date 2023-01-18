@@ -79,6 +79,56 @@ class PolicyConfigurationRemoteDataSource {
     );
   }
 
+  Future<PolicyConfiguration> geAddPolicyConfiguration({
+    required PolicyConfiguration policyConfiguration,
+  }) async {
+    return await dataSourceExceptionHandler.handle(
+      () async {
+        Map<String, Object> variables;
+        variables = {
+          'salesOrg': policyConfiguration.salesOrg.getOrCrash(),
+          'principalCode':
+              policyConfiguration.principalCode.getOrDefaultValue(''),
+          'returnsAllowed':
+              policyConfiguration.returnsAllowed.getOrDefaultValue(false),
+        };
+
+        if (policyConfiguration.returnsAllowed.getOrDefaultValue(false)) {
+          variables.addEntries({
+            MapEntry(
+              'monthsBeforeExpiry',
+              policyConfiguration.monthsBeforeExpiry.displayMonthsBeforeExpiry,
+            ),
+            MapEntry(
+              'monthsAfterExpiry',
+              policyConfiguration.monthsAfterExpiry.displayMonthsAfterExpiry,
+            ),
+          });
+        }
+
+        final response = await httpService.request(
+          method: 'POST',
+          url: '${config.urlConstants}ereturn',
+          data: jsonEncode(
+            {
+              'query':
+                  policyConfigurationQueryMutation.addPolicyConfiguration(),
+              'variables': {
+                'input': variables,
+              },
+            },
+          ),
+        );
+
+        _policyConfigExceptionChecker(res: response);
+
+        return PolicyConfigurationDto.fromJson(
+          response.data['data']['addPolicy'],
+        ).toDomain();
+      },
+    );
+  }
+
   void _policyConfigExceptionChecker({required Response<dynamic> res}) {
     if (res.statusCode != 200) {
       throw ServerException(
@@ -97,6 +147,20 @@ class PolicyConfigurationRemoteDataSource {
         }
       } else {
         throw ServerException(message: 'data not deleted');
+      }
+    } else if (res.data['data']['addPolicy'] != null) {
+      if (res.data['data']['addPolicy']['status'] != null) {
+        if (res.data['data']['addPolicy']['status'] !=
+            'Successfully added the Policy Configuration') {
+          throw ServerException(
+            message: res.data['data']['addPolicy']['status'],
+          );
+        }
+      } else {
+        throw ServerException(
+          message:
+              'Policy Configuration is already there for the given Principal Code',
+        );
       }
     }
   }

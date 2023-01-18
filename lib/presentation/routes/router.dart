@@ -26,6 +26,7 @@ import 'package:ezrxmobile/presentation/orders/order_template/order_template_det
 import 'package:ezrxmobile/presentation/orders/order_template/order_template_list_page.dart';
 import 'package:ezrxmobile/presentation/orders/saved_order/saved_order_detail_page.dart';
 import 'package:ezrxmobile/presentation/orders/saved_order/saved_order_list_page.dart';
+import 'package:ezrxmobile/presentation/returns/add_policy_configuration.dart';
 import 'package:ezrxmobile/presentation/returns/approver_actions.dart';
 import 'package:ezrxmobile/presentation/returns/policy_configuration.dart';
 import 'package:ezrxmobile/presentation/returns/request_return.dart';
@@ -49,6 +50,7 @@ import 'package:ezrxmobile/presentation/history/history_details.dart';
     AutoRoute(path: 'return_summary', page: ReturnSummary),
     AutoRoute(path: 'user_restriction', page: UserRestrictionListPage),
     AutoRoute(path: 'policy_configuration', page: PolicyConfigurationPage),
+    AutoRoute(path: 'add_policy_config', page: AddPolicyConfiguration),
     AutoRoute(path: 'web_view_page', page: WebViewPage),
     AutoRoute(path: 'change_password_page', page: ChangePasswordPage),
     AutoRoute(path: 'contact_us_page', page: ContactUsPage),

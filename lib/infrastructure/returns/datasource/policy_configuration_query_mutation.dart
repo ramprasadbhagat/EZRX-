@@ -22,4 +22,14 @@ class PolicyConfigurationQueryMutation {
                }}
     ''';
   }
+
+  String addPolicyConfiguration() {
+    return ''' 
+    mutation addPolicy(\$input: addPolicyInput!) {
+        addPolicy(input: \$input) {
+             status 
+           
+               }}
+    ''';
+  }
 }

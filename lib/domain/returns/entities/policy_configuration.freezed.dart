@@ -16,10 +16,11 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$PolicyConfiguration {
-  String get salesOrg => throw _privateConstructorUsedError;
+  SalesOrg get salesOrg => throw _privateConstructorUsedError;
   PrincipalCode get principalCode => throw _privateConstructorUsedError;
-  String get monthsBeforeExpiry => throw _privateConstructorUsedError;
-  String get monthsAfterExpiry => throw _privateConstructorUsedError;
+  MonthsBeforeExpiry get monthsBeforeExpiry =>
+      throw _privateConstructorUsedError;
+  MonthsAfterExpiry get monthsAfterExpiry => throw _privateConstructorUsedError;
   String get uuid => throw _privateConstructorUsedError;
   ReturnsAllowed get returnsAllowed => throw _privateConstructorUsedError;
   PrincipalName get principalName => throw _privateConstructorUsedError;
@@ -37,10 +38,10 @@ abstract class $PolicyConfigurationCopyWith<$Res> {
       _$PolicyConfigurationCopyWithImpl<$Res, PolicyConfiguration>;
   @useResult
   $Res call(
-      {String salesOrg,
+      {SalesOrg salesOrg,
       PrincipalCode principalCode,
-      String monthsBeforeExpiry,
-      String monthsAfterExpiry,
+      MonthsBeforeExpiry monthsBeforeExpiry,
+      MonthsAfterExpiry monthsAfterExpiry,
       String uuid,
       ReturnsAllowed returnsAllowed,
       PrincipalName principalName,
@@ -73,7 +74,7 @@ class _$PolicyConfigurationCopyWithImpl<$Res, $Val extends PolicyConfiguration>
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
-              as String,
+              as SalesOrg,
       principalCode: null == principalCode
           ? _value.principalCode
           : principalCode // ignore: cast_nullable_to_non_nullable
@@ -81,11 +82,11 @@ class _$PolicyConfigurationCopyWithImpl<$Res, $Val extends PolicyConfiguration>
       monthsBeforeExpiry: null == monthsBeforeExpiry
           ? _value.monthsBeforeExpiry
           : monthsBeforeExpiry // ignore: cast_nullable_to_non_nullable
-              as String,
+              as MonthsBeforeExpiry,
       monthsAfterExpiry: null == monthsAfterExpiry
           ? _value.monthsAfterExpiry
           : monthsAfterExpiry // ignore: cast_nullable_to_non_nullable
-              as String,
+              as MonthsAfterExpiry,
       uuid: null == uuid
           ? _value.uuid
           : uuid // ignore: cast_nullable_to_non_nullable
@@ -115,10 +116,10 @@ abstract class _$$_PolicyConfigurationCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String salesOrg,
+      {SalesOrg salesOrg,
       PrincipalCode principalCode,
-      String monthsBeforeExpiry,
-      String monthsAfterExpiry,
+      MonthsBeforeExpiry monthsBeforeExpiry,
+      MonthsAfterExpiry monthsAfterExpiry,
       String uuid,
       ReturnsAllowed returnsAllowed,
       PrincipalName principalName,
@@ -149,7 +150,7 @@ class __$$_PolicyConfigurationCopyWithImpl<$Res>
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
-              as String,
+              as SalesOrg,
       principalCode: null == principalCode
           ? _value.principalCode
           : principalCode // ignore: cast_nullable_to_non_nullable
@@ -157,11 +158,11 @@ class __$$_PolicyConfigurationCopyWithImpl<$Res>
       monthsBeforeExpiry: null == monthsBeforeExpiry
           ? _value.monthsBeforeExpiry
           : monthsBeforeExpiry // ignore: cast_nullable_to_non_nullable
-              as String,
+              as MonthsBeforeExpiry,
       monthsAfterExpiry: null == monthsAfterExpiry
           ? _value.monthsAfterExpiry
           : monthsAfterExpiry // ignore: cast_nullable_to_non_nullable
-              as String,
+              as MonthsAfterExpiry,
       uuid: null == uuid
           ? _value.uuid
           : uuid // ignore: cast_nullable_to_non_nullable
@@ -197,13 +198,13 @@ class _$_PolicyConfiguration extends _PolicyConfiguration {
       : super._();
 
   @override
-  final String salesOrg;
+  final SalesOrg salesOrg;
   @override
   final PrincipalCode principalCode;
   @override
-  final String monthsBeforeExpiry;
+  final MonthsBeforeExpiry monthsBeforeExpiry;
   @override
-  final String monthsAfterExpiry;
+  final MonthsAfterExpiry monthsAfterExpiry;
   @override
   final String uuid;
   @override
@@ -261,10 +262,10 @@ class _$_PolicyConfiguration extends _PolicyConfiguration {
 
 abstract class _PolicyConfiguration extends PolicyConfiguration {
   const factory _PolicyConfiguration(
-      {required final String salesOrg,
+      {required final SalesOrg salesOrg,
       required final PrincipalCode principalCode,
-      required final String monthsBeforeExpiry,
-      required final String monthsAfterExpiry,
+      required final MonthsBeforeExpiry monthsBeforeExpiry,
+      required final MonthsAfterExpiry monthsAfterExpiry,
       required final String uuid,
       required final ReturnsAllowed returnsAllowed,
       required final PrincipalName principalName,
@@ -272,13 +273,13 @@ abstract class _PolicyConfiguration extends PolicyConfiguration {
   const _PolicyConfiguration._() : super._();
 
   @override
-  String get salesOrg;
+  SalesOrg get salesOrg;
   @override
   PrincipalCode get principalCode;
   @override
-  String get monthsBeforeExpiry;
+  MonthsBeforeExpiry get monthsBeforeExpiry;
   @override
-  String get monthsAfterExpiry;
+  MonthsAfterExpiry get monthsAfterExpiry;
   @override
   String get uuid;
   @override

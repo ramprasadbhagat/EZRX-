@@ -57,4 +57,7 @@ class ValueFailure<T> with _$ValueFailure<T> {
   const factory ValueFailure.numberMustBiggerThanZero({
     required T failedValue,
   }) = numberMustBiggerThanZero<T>;
+  const factory ValueFailure.exceedingMaxValue({
+    required T failedValue,
+  }) = validateExceedsMaxValue<T>;
 }

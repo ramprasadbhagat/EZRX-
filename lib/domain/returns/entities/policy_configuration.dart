@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -9,24 +10,32 @@ class PolicyConfiguration with _$PolicyConfiguration {
   const PolicyConfiguration._();
 
   const factory PolicyConfiguration({
-    required String salesOrg,
+    required SalesOrg salesOrg,
     required PrincipalCode principalCode,
-    required String monthsBeforeExpiry,
-    required String monthsAfterExpiry,
+    required MonthsBeforeExpiry monthsBeforeExpiry,
+    required MonthsAfterExpiry monthsAfterExpiry,
     required String uuid,
     required ReturnsAllowed returnsAllowed,
     required PrincipalName principalName,
     required String status,
-
   }) = _PolicyConfiguration;
   factory PolicyConfiguration.empty() => PolicyConfiguration(
-        salesOrg: '',
+        salesOrg: SalesOrg(''),
         principalCode: PrincipalCode(''),
-        monthsBeforeExpiry: '',
-        monthsAfterExpiry: '',
+        monthsBeforeExpiry: MonthsBeforeExpiry.change(''),
+        monthsAfterExpiry: MonthsAfterExpiry.change(''),
         uuid: '',
         returnsAllowed: ReturnsAllowed(false),
         principalName: PrincipalName(''),
         status: '',
       );
+
+  String get getmonthsBeforeExpiryValue =>
+      returnsAllowed.getOrDefaultValue(false)
+          ? monthsBeforeExpiry.displayMonthsBeforeExpiry
+          : '-';
+  String get getmonthsAfterExpiryExpiryValue =>
+      returnsAllowed.getOrDefaultValue(false)
+          ? monthsAfterExpiry.displayMonthsAfterExpiry
+          : '-';
 }

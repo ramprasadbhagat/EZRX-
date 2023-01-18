@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/returns/policy_configuration/policy_configuration_bloc.dart';
@@ -8,6 +9,7 @@ import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -21,8 +23,7 @@ class PolicyConfigurationPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(title: const Text('Policy Configuration').tr()),
-      body: BlocConsumer<PolicyConfigurationBloc,
-          PolicyConfigurationState>(
+      body: BlocConsumer<PolicyConfigurationBloc, PolicyConfigurationState>(
         listenWhen: (previous, current) {
           return previous.failureOrSuccessOption !=
                   current.failureOrSuccessOption ||
@@ -76,6 +77,17 @@ class PolicyConfigurationPage extends StatelessWidget {
           );
         },
       ),
+      floatingActionButton: FloatingActionButton(
+        elevation: 0.0,
+        backgroundColor: ZPColors.darkBlue,
+        onPressed: () {
+          context.router.push(const AddPolicyConfigurationRoute());
+        },
+        child: const Icon(
+          Icons.add,
+          color: ZPColors.white,
+        ),
+      ),
     );
   }
 }
@@ -117,7 +129,7 @@ class PolicyConfigurationListItem extends StatelessWidget {
                   Expanded(
                     flex: 1,
                     child: Text(
-                      '${'Sales Org'.tr()}: ${policyConfigurationItem.salesOrg}',
+                      '${'Sales Org'.tr()}: ${policyConfigurationItem.salesOrg.getOrCrash()}',
                       style: Theme.of(context).textTheme.subtitle2?.apply(
                             color: ZPColors.black,
                           ),
@@ -162,13 +174,13 @@ class PolicyConfigurationListItem extends StatelessWidget {
                     ),
               ),
               Text(
-                '${'Months Before Expiry'.tr()}: ${policyConfigurationItem.monthsBeforeExpiry}',
+                '${'Months Before Expiry'.tr()}: ${policyConfigurationItem.getmonthsBeforeExpiryValue}',
                 style: Theme.of(context).textTheme.bodyText1?.apply(
                       color: ZPColors.lightGray,
                     ),
               ),
               Text(
-                '${'Months After Expiry'.tr()}: ${policyConfigurationItem.monthsAfterExpiry}',
+                '${'Months After Expiry'.tr()}: ${policyConfigurationItem.getmonthsAfterExpiryExpiryValue}',
                 style: Theme.of(context).textTheme.bodyText1?.apply(
                       color: ZPColors.lightGray,
                     ),

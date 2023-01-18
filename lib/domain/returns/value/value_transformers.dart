@@ -8,3 +8,7 @@ String makeBoolYesNo(bool isReturnsAllowed) {
 Color getReturnsAllowedLabelColor(bool isReturnsAllowed) {
   return isReturnsAllowed ? ZPColors.lightSecondary : ZPColors.lightRed;
 }
+
+String zeroIfEmpty(String text) {
+  return text.isEmpty ? '0' : text;
+}

@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/policy_configuration.dart';
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
@@ -24,18 +25,16 @@ class PolicyConfigurationDto with _$PolicyConfigurationDto {
     @JsonKey(name: 'principalName', defaultValue: '')
         required String principalName,
     @JsonKey(name: 'status', defaultValue: '') required String status,
-
-
   }) = _PolicyConfigurationDto;
 
   factory PolicyConfigurationDto.fromDomain(
     PolicyConfiguration policy,
   ) {
     return PolicyConfigurationDto(
-      salesOrg: policy.salesOrg,
+      salesOrg: policy.salesOrg.getOrCrash(),
       principalCode: policy.principalCode.getOrCrash(),
-      monthsBeforeExpiry: policy.monthsBeforeExpiry,
-      monthsAfterExpiry: policy.monthsAfterExpiry,
+      monthsBeforeExpiry: policy.monthsBeforeExpiry.getOrCrash(),
+      monthsAfterExpiry: policy.monthsAfterExpiry.getOrCrash(),
       principalName: policy.principalName.name,
       returnsAllowed: policy.returnsAllowed.getOrCrash(),
       uuid: policy.uuid,
@@ -45,10 +44,10 @@ class PolicyConfigurationDto with _$PolicyConfigurationDto {
 
   PolicyConfiguration toDomain() {
     return PolicyConfiguration(
-      salesOrg: salesOrg,
+      salesOrg: SalesOrg(salesOrg),
       uuid: uuid,
-      monthsAfterExpiry: monthsAfterExpiry,
-      monthsBeforeExpiry: monthsBeforeExpiry,
+      monthsAfterExpiry: MonthsAfterExpiry.change(monthsAfterExpiry),
+      monthsBeforeExpiry: MonthsBeforeExpiry.change(monthsBeforeExpiry),
       principalCode: PrincipalCode(principalCode),
       principalName: PrincipalName(principalName),
       returnsAllowed: ReturnsAllowed(returnsAllowed),

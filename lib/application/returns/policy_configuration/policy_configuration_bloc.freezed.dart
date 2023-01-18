@@ -22,6 +22,8 @@ mixin _$PolicyConfigurationEvent {
     required TResult Function(SalesOrganisation salesOrganisation) fetch,
     required TResult Function(PolicyConfiguration policyConfigurationItem)
         delete,
+    required TResult Function(PolicyConfiguration policyConfigurationItems) add,
+    required TResult Function() returnsAllowedSwitch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -29,6 +31,8 @@ mixin _$PolicyConfigurationEvent {
     TResult? Function()? initialized,
     TResult? Function(SalesOrganisation salesOrganisation)? fetch,
     TResult? Function(PolicyConfiguration policyConfigurationItem)? delete,
+    TResult? Function(PolicyConfiguration policyConfigurationItems)? add,
+    TResult? Function()? returnsAllowedSwitch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -36,6 +40,8 @@ mixin _$PolicyConfigurationEvent {
     TResult Function()? initialized,
     TResult Function(SalesOrganisation salesOrganisation)? fetch,
     TResult Function(PolicyConfiguration policyConfigurationItem)? delete,
+    TResult Function(PolicyConfiguration policyConfigurationItems)? add,
+    TResult Function()? returnsAllowedSwitch,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -44,6 +50,8 @@ mixin _$PolicyConfigurationEvent {
     required TResult Function(_initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_Delete value) delete,
+    required TResult Function(_Add value) add,
+    required TResult Function(_ReturnsAllowedSwitch value) returnsAllowedSwitch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -51,6 +59,8 @@ mixin _$PolicyConfigurationEvent {
     TResult? Function(_initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_Delete value)? delete,
+    TResult? Function(_Add value)? add,
+    TResult? Function(_ReturnsAllowedSwitch value)? returnsAllowedSwitch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -58,6 +68,8 @@ mixin _$PolicyConfigurationEvent {
     TResult Function(_initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_Delete value)? delete,
+    TResult Function(_Add value)? add,
+    TResult Function(_ReturnsAllowedSwitch value)? returnsAllowedSwitch,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -124,6 +136,8 @@ class _$_initialized implements _initialized {
     required TResult Function(SalesOrganisation salesOrganisation) fetch,
     required TResult Function(PolicyConfiguration policyConfigurationItem)
         delete,
+    required TResult Function(PolicyConfiguration policyConfigurationItems) add,
+    required TResult Function() returnsAllowedSwitch,
   }) {
     return initialized();
   }
@@ -134,6 +148,8 @@ class _$_initialized implements _initialized {
     TResult? Function()? initialized,
     TResult? Function(SalesOrganisation salesOrganisation)? fetch,
     TResult? Function(PolicyConfiguration policyConfigurationItem)? delete,
+    TResult? Function(PolicyConfiguration policyConfigurationItems)? add,
+    TResult? Function()? returnsAllowedSwitch,
   }) {
     return initialized?.call();
   }
@@ -144,6 +160,8 @@ class _$_initialized implements _initialized {
     TResult Function()? initialized,
     TResult Function(SalesOrganisation salesOrganisation)? fetch,
     TResult Function(PolicyConfiguration policyConfigurationItem)? delete,
+    TResult Function(PolicyConfiguration policyConfigurationItems)? add,
+    TResult Function()? returnsAllowedSwitch,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -158,6 +176,8 @@ class _$_initialized implements _initialized {
     required TResult Function(_initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_Delete value) delete,
+    required TResult Function(_Add value) add,
+    required TResult Function(_ReturnsAllowedSwitch value) returnsAllowedSwitch,
   }) {
     return initialized(this);
   }
@@ -168,6 +188,8 @@ class _$_initialized implements _initialized {
     TResult? Function(_initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_Delete value)? delete,
+    TResult? Function(_Add value)? add,
+    TResult? Function(_ReturnsAllowedSwitch value)? returnsAllowedSwitch,
   }) {
     return initialized?.call(this);
   }
@@ -178,6 +200,8 @@ class _$_initialized implements _initialized {
     TResult Function(_initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_Delete value)? delete,
+    TResult Function(_Add value)? add,
+    TResult Function(_ReturnsAllowedSwitch value)? returnsAllowedSwitch,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -268,6 +292,8 @@ class _$_Fetch implements _Fetch {
     required TResult Function(SalesOrganisation salesOrganisation) fetch,
     required TResult Function(PolicyConfiguration policyConfigurationItem)
         delete,
+    required TResult Function(PolicyConfiguration policyConfigurationItems) add,
+    required TResult Function() returnsAllowedSwitch,
   }) {
     return fetch(salesOrganisation);
   }
@@ -278,6 +304,8 @@ class _$_Fetch implements _Fetch {
     TResult? Function()? initialized,
     TResult? Function(SalesOrganisation salesOrganisation)? fetch,
     TResult? Function(PolicyConfiguration policyConfigurationItem)? delete,
+    TResult? Function(PolicyConfiguration policyConfigurationItems)? add,
+    TResult? Function()? returnsAllowedSwitch,
   }) {
     return fetch?.call(salesOrganisation);
   }
@@ -288,6 +316,8 @@ class _$_Fetch implements _Fetch {
     TResult Function()? initialized,
     TResult Function(SalesOrganisation salesOrganisation)? fetch,
     TResult Function(PolicyConfiguration policyConfigurationItem)? delete,
+    TResult Function(PolicyConfiguration policyConfigurationItems)? add,
+    TResult Function()? returnsAllowedSwitch,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -302,6 +332,8 @@ class _$_Fetch implements _Fetch {
     required TResult Function(_initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_Delete value) delete,
+    required TResult Function(_Add value) add,
+    required TResult Function(_ReturnsAllowedSwitch value) returnsAllowedSwitch,
   }) {
     return fetch(this);
   }
@@ -312,6 +344,8 @@ class _$_Fetch implements _Fetch {
     TResult? Function(_initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_Delete value)? delete,
+    TResult? Function(_Add value)? add,
+    TResult? Function(_ReturnsAllowedSwitch value)? returnsAllowedSwitch,
   }) {
     return fetch?.call(this);
   }
@@ -322,6 +356,8 @@ class _$_Fetch implements _Fetch {
     TResult Function(_initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_Delete value)? delete,
+    TResult Function(_Add value)? add,
+    TResult Function(_ReturnsAllowedSwitch value)? returnsAllowedSwitch,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -420,6 +456,8 @@ class _$_Delete implements _Delete {
     required TResult Function(SalesOrganisation salesOrganisation) fetch,
     required TResult Function(PolicyConfiguration policyConfigurationItem)
         delete,
+    required TResult Function(PolicyConfiguration policyConfigurationItems) add,
+    required TResult Function() returnsAllowedSwitch,
   }) {
     return delete(policyConfigurationItem);
   }
@@ -430,6 +468,8 @@ class _$_Delete implements _Delete {
     TResult? Function()? initialized,
     TResult? Function(SalesOrganisation salesOrganisation)? fetch,
     TResult? Function(PolicyConfiguration policyConfigurationItem)? delete,
+    TResult? Function(PolicyConfiguration policyConfigurationItems)? add,
+    TResult? Function()? returnsAllowedSwitch,
   }) {
     return delete?.call(policyConfigurationItem);
   }
@@ -440,6 +480,8 @@ class _$_Delete implements _Delete {
     TResult Function()? initialized,
     TResult Function(SalesOrganisation salesOrganisation)? fetch,
     TResult Function(PolicyConfiguration policyConfigurationItem)? delete,
+    TResult Function(PolicyConfiguration policyConfigurationItems)? add,
+    TResult Function()? returnsAllowedSwitch,
     required TResult orElse(),
   }) {
     if (delete != null) {
@@ -454,6 +496,8 @@ class _$_Delete implements _Delete {
     required TResult Function(_initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_Delete value) delete,
+    required TResult Function(_Add value) add,
+    required TResult Function(_ReturnsAllowedSwitch value) returnsAllowedSwitch,
   }) {
     return delete(this);
   }
@@ -464,6 +508,8 @@ class _$_Delete implements _Delete {
     TResult? Function(_initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_Delete value)? delete,
+    TResult? Function(_Add value)? add,
+    TResult? Function(_ReturnsAllowedSwitch value)? returnsAllowedSwitch,
   }) {
     return delete?.call(this);
   }
@@ -474,6 +520,8 @@ class _$_Delete implements _Delete {
     TResult Function(_initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_Delete value)? delete,
+    TResult Function(_Add value)? add,
+    TResult Function(_ReturnsAllowedSwitch value)? returnsAllowedSwitch,
     required TResult orElse(),
   }) {
     if (delete != null) {
@@ -494,12 +542,298 @@ abstract class _Delete implements PolicyConfigurationEvent {
 }
 
 /// @nodoc
+abstract class _$$_AddCopyWith<$Res> {
+  factory _$$_AddCopyWith(_$_Add value, $Res Function(_$_Add) then) =
+      __$$_AddCopyWithImpl<$Res>;
+  @useResult
+  $Res call({PolicyConfiguration policyConfigurationItems});
+
+  $PolicyConfigurationCopyWith<$Res> get policyConfigurationItems;
+}
+
+/// @nodoc
+class __$$_AddCopyWithImpl<$Res>
+    extends _$PolicyConfigurationEventCopyWithImpl<$Res, _$_Add>
+    implements _$$_AddCopyWith<$Res> {
+  __$$_AddCopyWithImpl(_$_Add _value, $Res Function(_$_Add) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? policyConfigurationItems = null,
+  }) {
+    return _then(_$_Add(
+      policyConfigurationItems: null == policyConfigurationItems
+          ? _value.policyConfigurationItems
+          : policyConfigurationItems // ignore: cast_nullable_to_non_nullable
+              as PolicyConfiguration,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PolicyConfigurationCopyWith<$Res> get policyConfigurationItems {
+    return $PolicyConfigurationCopyWith<$Res>(_value.policyConfigurationItems,
+        (value) {
+      return _then(_value.copyWith(policyConfigurationItems: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_Add implements _Add {
+  const _$_Add({required this.policyConfigurationItems});
+
+  @override
+  final PolicyConfiguration policyConfigurationItems;
+
+  @override
+  String toString() {
+    return 'PolicyConfigurationEvent.add(policyConfigurationItems: $policyConfigurationItems)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_Add &&
+            (identical(
+                    other.policyConfigurationItems, policyConfigurationItems) ||
+                other.policyConfigurationItems == policyConfigurationItems));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, policyConfigurationItems);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_AddCopyWith<_$_Add> get copyWith =>
+      __$$_AddCopyWithImpl<_$_Add>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(SalesOrganisation salesOrganisation) fetch,
+    required TResult Function(PolicyConfiguration policyConfigurationItem)
+        delete,
+    required TResult Function(PolicyConfiguration policyConfigurationItems) add,
+    required TResult Function() returnsAllowedSwitch,
+  }) {
+    return add(policyConfigurationItems);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(SalesOrganisation salesOrganisation)? fetch,
+    TResult? Function(PolicyConfiguration policyConfigurationItem)? delete,
+    TResult? Function(PolicyConfiguration policyConfigurationItems)? add,
+    TResult? Function()? returnsAllowedSwitch,
+  }) {
+    return add?.call(policyConfigurationItems);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(SalesOrganisation salesOrganisation)? fetch,
+    TResult Function(PolicyConfiguration policyConfigurationItem)? delete,
+    TResult Function(PolicyConfiguration policyConfigurationItems)? add,
+    TResult Function()? returnsAllowedSwitch,
+    required TResult orElse(),
+  }) {
+    if (add != null) {
+      return add(policyConfigurationItems);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_Delete value) delete,
+    required TResult Function(_Add value) add,
+    required TResult Function(_ReturnsAllowedSwitch value) returnsAllowedSwitch,
+  }) {
+    return add(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_Delete value)? delete,
+    TResult? Function(_Add value)? add,
+    TResult? Function(_ReturnsAllowedSwitch value)? returnsAllowedSwitch,
+  }) {
+    return add?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_Delete value)? delete,
+    TResult Function(_Add value)? add,
+    TResult Function(_ReturnsAllowedSwitch value)? returnsAllowedSwitch,
+    required TResult orElse(),
+  }) {
+    if (add != null) {
+      return add(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Add implements PolicyConfigurationEvent {
+  const factory _Add(
+      {required final PolicyConfiguration policyConfigurationItems}) = _$_Add;
+
+  PolicyConfiguration get policyConfigurationItems;
+  @JsonKey(ignore: true)
+  _$$_AddCopyWith<_$_Add> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_ReturnsAllowedSwitchCopyWith<$Res> {
+  factory _$$_ReturnsAllowedSwitchCopyWith(_$_ReturnsAllowedSwitch value,
+          $Res Function(_$_ReturnsAllowedSwitch) then) =
+      __$$_ReturnsAllowedSwitchCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_ReturnsAllowedSwitchCopyWithImpl<$Res>
+    extends _$PolicyConfigurationEventCopyWithImpl<$Res,
+        _$_ReturnsAllowedSwitch>
+    implements _$$_ReturnsAllowedSwitchCopyWith<$Res> {
+  __$$_ReturnsAllowedSwitchCopyWithImpl(_$_ReturnsAllowedSwitch _value,
+      $Res Function(_$_ReturnsAllowedSwitch) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_ReturnsAllowedSwitch implements _ReturnsAllowedSwitch {
+  const _$_ReturnsAllowedSwitch();
+
+  @override
+  String toString() {
+    return 'PolicyConfigurationEvent.returnsAllowedSwitch()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_ReturnsAllowedSwitch);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(SalesOrganisation salesOrganisation) fetch,
+    required TResult Function(PolicyConfiguration policyConfigurationItem)
+        delete,
+    required TResult Function(PolicyConfiguration policyConfigurationItems) add,
+    required TResult Function() returnsAllowedSwitch,
+  }) {
+    return returnsAllowedSwitch();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(SalesOrganisation salesOrganisation)? fetch,
+    TResult? Function(PolicyConfiguration policyConfigurationItem)? delete,
+    TResult? Function(PolicyConfiguration policyConfigurationItems)? add,
+    TResult? Function()? returnsAllowedSwitch,
+  }) {
+    return returnsAllowedSwitch?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(SalesOrganisation salesOrganisation)? fetch,
+    TResult Function(PolicyConfiguration policyConfigurationItem)? delete,
+    TResult Function(PolicyConfiguration policyConfigurationItems)? add,
+    TResult Function()? returnsAllowedSwitch,
+    required TResult orElse(),
+  }) {
+    if (returnsAllowedSwitch != null) {
+      return returnsAllowedSwitch();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_Delete value) delete,
+    required TResult Function(_Add value) add,
+    required TResult Function(_ReturnsAllowedSwitch value) returnsAllowedSwitch,
+  }) {
+    return returnsAllowedSwitch(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_Delete value)? delete,
+    TResult? Function(_Add value)? add,
+    TResult? Function(_ReturnsAllowedSwitch value)? returnsAllowedSwitch,
+  }) {
+    return returnsAllowedSwitch?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_Delete value)? delete,
+    TResult Function(_Add value)? add,
+    TResult Function(_ReturnsAllowedSwitch value)? returnsAllowedSwitch,
+    required TResult orElse(),
+  }) {
+    if (returnsAllowedSwitch != null) {
+      return returnsAllowedSwitch(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ReturnsAllowedSwitch implements PolicyConfigurationEvent {
+  const factory _ReturnsAllowedSwitch() = _$_ReturnsAllowedSwitch;
+}
+
+/// @nodoc
 mixin _$PolicyConfigurationState {
   List<PolicyConfiguration> get policyConfigurationList =>
       throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption =>
       throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
+  ReturnsAllowed get returnsAllowed => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PolicyConfigurationStateCopyWith<PolicyConfigurationState> get copyWith =>
@@ -515,7 +849,8 @@ abstract class $PolicyConfigurationStateCopyWith<$Res> {
   $Res call(
       {List<PolicyConfiguration> policyConfigurationList,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
-      bool isLoading});
+      bool isLoading,
+      ReturnsAllowed returnsAllowed});
 }
 
 /// @nodoc
@@ -535,6 +870,7 @@ class _$PolicyConfigurationStateCopyWithImpl<$Res,
     Object? policyConfigurationList = null,
     Object? failureOrSuccessOption = null,
     Object? isLoading = null,
+    Object? returnsAllowed = null,
   }) {
     return _then(_value.copyWith(
       policyConfigurationList: null == policyConfigurationList
@@ -549,6 +885,10 @@ class _$PolicyConfigurationStateCopyWithImpl<$Res,
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      returnsAllowed: null == returnsAllowed
+          ? _value.returnsAllowed
+          : returnsAllowed // ignore: cast_nullable_to_non_nullable
+              as ReturnsAllowed,
     ) as $Val);
   }
 }
@@ -565,7 +905,8 @@ abstract class _$$_PolicyConfigurationStateCopyWith<$Res>
   $Res call(
       {List<PolicyConfiguration> policyConfigurationList,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
-      bool isLoading});
+      bool isLoading,
+      ReturnsAllowed returnsAllowed});
 }
 
 /// @nodoc
@@ -583,6 +924,7 @@ class __$$_PolicyConfigurationStateCopyWithImpl<$Res>
     Object? policyConfigurationList = null,
     Object? failureOrSuccessOption = null,
     Object? isLoading = null,
+    Object? returnsAllowed = null,
   }) {
     return _then(_$_PolicyConfigurationState(
       policyConfigurationList: null == policyConfigurationList
@@ -597,6 +939,10 @@ class __$$_PolicyConfigurationStateCopyWithImpl<$Res>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      returnsAllowed: null == returnsAllowed
+          ? _value.returnsAllowed
+          : returnsAllowed // ignore: cast_nullable_to_non_nullable
+              as ReturnsAllowed,
     ));
   }
 }
@@ -607,7 +953,8 @@ class _$_PolicyConfigurationState implements _PolicyConfigurationState {
   const _$_PolicyConfigurationState(
       {required final List<PolicyConfiguration> policyConfigurationList,
       required this.failureOrSuccessOption,
-      required this.isLoading})
+      required this.isLoading,
+      required this.returnsAllowed})
       : _policyConfigurationList = policyConfigurationList;
 
   final List<PolicyConfiguration> _policyConfigurationList;
@@ -621,10 +968,12 @@ class _$_PolicyConfigurationState implements _PolicyConfigurationState {
   final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption;
   @override
   final bool isLoading;
+  @override
+  final ReturnsAllowed returnsAllowed;
 
   @override
   String toString() {
-    return 'PolicyConfigurationState(policyConfigurationList: $policyConfigurationList, failureOrSuccessOption: $failureOrSuccessOption, isLoading: $isLoading)';
+    return 'PolicyConfigurationState(policyConfigurationList: $policyConfigurationList, failureOrSuccessOption: $failureOrSuccessOption, isLoading: $isLoading, returnsAllowed: $returnsAllowed)';
   }
 
   @override
@@ -637,7 +986,9 @@ class _$_PolicyConfigurationState implements _PolicyConfigurationState {
             (identical(other.failureOrSuccessOption, failureOrSuccessOption) ||
                 other.failureOrSuccessOption == failureOrSuccessOption) &&
             (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading));
+                other.isLoading == isLoading) &&
+            (identical(other.returnsAllowed, returnsAllowed) ||
+                other.returnsAllowed == returnsAllowed));
   }
 
   @override
@@ -645,7 +996,8 @@ class _$_PolicyConfigurationState implements _PolicyConfigurationState {
       runtimeType,
       const DeepCollectionEquality().hash(_policyConfigurationList),
       failureOrSuccessOption,
-      isLoading);
+      isLoading,
+      returnsAllowed);
 
   @JsonKey(ignore: true)
   @override
@@ -659,7 +1011,9 @@ abstract class _PolicyConfigurationState implements PolicyConfigurationState {
   const factory _PolicyConfigurationState(
       {required final List<PolicyConfiguration> policyConfigurationList,
       required final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
-      required final bool isLoading}) = _$_PolicyConfigurationState;
+      required final bool isLoading,
+      required final ReturnsAllowed
+          returnsAllowed}) = _$_PolicyConfigurationState;
 
   @override
   List<PolicyConfiguration> get policyConfigurationList;
@@ -667,6 +1021,8 @@ abstract class _PolicyConfigurationState implements PolicyConfigurationState {
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption;
   @override
   bool get isLoading;
+  @override
+  ReturnsAllowed get returnsAllowed;
   @override
   @JsonKey(ignore: true)
   _$$_PolicyConfigurationStateCopyWith<_$_PolicyConfigurationState>
