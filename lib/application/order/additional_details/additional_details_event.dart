@@ -20,6 +20,8 @@ class AdditionalDetailsEvent with _$AdditionalDetailsEvent {
   }) = _AdditionalDetailsRemovePoDocument;
   const factory AdditionalDetailsEvent.removeAllPoDocument() =
       _AdditionalDetailsRemoveAllPoDocument;
+  const factory AdditionalDetailsEvent.toggleGreenDelivery(bool value) =
+      _AdditionalDetailsToggleGreenDelivery;
 }
 
 enum AdditionalDetailsLabel {

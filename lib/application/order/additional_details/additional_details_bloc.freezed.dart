@@ -25,6 +25,7 @@ mixin _$AdditionalDetailsEvent {
     required TResult Function(List<PoDocuments> poDocuments) addPoDocument,
     required TResult Function(PoDocuments poDocument) removePoDocument,
     required TResult Function() removeAllPoDocument,
+    required TResult Function(bool value) toggleGreenDelivery,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -36,6 +37,7 @@ mixin _$AdditionalDetailsEvent {
     TResult? Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult? Function(PoDocuments poDocument)? removePoDocument,
     TResult? Function()? removeAllPoDocument,
+    TResult? Function(bool value)? toggleGreenDelivery,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -47,6 +49,7 @@ mixin _$AdditionalDetailsEvent {
     TResult Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult Function(PoDocuments poDocument)? removePoDocument,
     TResult Function()? removeAllPoDocument,
+    TResult Function(bool value)? toggleGreenDelivery,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -63,6 +66,8 @@ mixin _$AdditionalDetailsEvent {
         removePoDocument,
     required TResult Function(_AdditionalDetailsRemoveAllPoDocument value)
         removeAllPoDocument,
+    required TResult Function(_AdditionalDetailsToggleGreenDelivery value)
+        toggleGreenDelivery,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -75,6 +80,8 @@ mixin _$AdditionalDetailsEvent {
         removePoDocument,
     TResult? Function(_AdditionalDetailsRemoveAllPoDocument value)?
         removeAllPoDocument,
+    TResult? Function(_AdditionalDetailsToggleGreenDelivery value)?
+        toggleGreenDelivery,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -87,6 +94,8 @@ mixin _$AdditionalDetailsEvent {
         removePoDocument,
     TResult Function(_AdditionalDetailsRemoveAllPoDocument value)?
         removeAllPoDocument,
+    TResult Function(_AdditionalDetailsToggleGreenDelivery value)?
+        toggleGreenDelivery,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -192,6 +201,7 @@ class _$_Initialized implements _Initialized {
     required TResult Function(List<PoDocuments> poDocuments) addPoDocument,
     required TResult Function(PoDocuments poDocument) removePoDocument,
     required TResult Function() removeAllPoDocument,
+    required TResult Function(bool value) toggleGreenDelivery,
   }) {
     return initialized(config);
   }
@@ -206,6 +216,7 @@ class _$_Initialized implements _Initialized {
     TResult? Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult? Function(PoDocuments poDocument)? removePoDocument,
     TResult? Function()? removeAllPoDocument,
+    TResult? Function(bool value)? toggleGreenDelivery,
   }) {
     return initialized?.call(config);
   }
@@ -220,6 +231,7 @@ class _$_Initialized implements _Initialized {
     TResult Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult Function(PoDocuments poDocument)? removePoDocument,
     TResult Function()? removeAllPoDocument,
+    TResult Function(bool value)? toggleGreenDelivery,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -242,6 +254,8 @@ class _$_Initialized implements _Initialized {
         removePoDocument,
     required TResult Function(_AdditionalDetailsRemoveAllPoDocument value)
         removeAllPoDocument,
+    required TResult Function(_AdditionalDetailsToggleGreenDelivery value)
+        toggleGreenDelivery,
   }) {
     return initialized(this);
   }
@@ -257,6 +271,8 @@ class _$_Initialized implements _Initialized {
         removePoDocument,
     TResult? Function(_AdditionalDetailsRemoveAllPoDocument value)?
         removeAllPoDocument,
+    TResult? Function(_AdditionalDetailsToggleGreenDelivery value)?
+        toggleGreenDelivery,
   }) {
     return initialized?.call(this);
   }
@@ -272,6 +288,8 @@ class _$_Initialized implements _Initialized {
         removePoDocument,
     TResult Function(_AdditionalDetailsRemoveAllPoDocument value)?
         removeAllPoDocument,
+    TResult Function(_AdditionalDetailsToggleGreenDelivery value)?
+        toggleGreenDelivery,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -377,6 +395,7 @@ class _$_AdditionalDetailsTextOnChange
     required TResult Function(List<PoDocuments> poDocuments) addPoDocument,
     required TResult Function(PoDocuments poDocument) removePoDocument,
     required TResult Function() removeAllPoDocument,
+    required TResult Function(bool value) toggleGreenDelivery,
   }) {
     return onTextChange(label, newValue);
   }
@@ -391,6 +410,7 @@ class _$_AdditionalDetailsTextOnChange
     TResult? Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult? Function(PoDocuments poDocument)? removePoDocument,
     TResult? Function()? removeAllPoDocument,
+    TResult? Function(bool value)? toggleGreenDelivery,
   }) {
     return onTextChange?.call(label, newValue);
   }
@@ -405,6 +425,7 @@ class _$_AdditionalDetailsTextOnChange
     TResult Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult Function(PoDocuments poDocument)? removePoDocument,
     TResult Function()? removeAllPoDocument,
+    TResult Function(bool value)? toggleGreenDelivery,
     required TResult orElse(),
   }) {
     if (onTextChange != null) {
@@ -427,6 +448,8 @@ class _$_AdditionalDetailsTextOnChange
         removePoDocument,
     required TResult Function(_AdditionalDetailsRemoveAllPoDocument value)
         removeAllPoDocument,
+    required TResult Function(_AdditionalDetailsToggleGreenDelivery value)
+        toggleGreenDelivery,
   }) {
     return onTextChange(this);
   }
@@ -442,6 +465,8 @@ class _$_AdditionalDetailsTextOnChange
         removePoDocument,
     TResult? Function(_AdditionalDetailsRemoveAllPoDocument value)?
         removeAllPoDocument,
+    TResult? Function(_AdditionalDetailsToggleGreenDelivery value)?
+        toggleGreenDelivery,
   }) {
     return onTextChange?.call(this);
   }
@@ -457,6 +482,8 @@ class _$_AdditionalDetailsTextOnChange
         removePoDocument,
     TResult Function(_AdditionalDetailsRemoveAllPoDocument value)?
         removeAllPoDocument,
+    TResult Function(_AdditionalDetailsToggleGreenDelivery value)?
+        toggleGreenDelivery,
     required TResult orElse(),
   }) {
     if (onTextChange != null) {
@@ -565,6 +592,7 @@ class _$_AdditionalDetailsValidateForm
     required TResult Function(List<PoDocuments> poDocuments) addPoDocument,
     required TResult Function(PoDocuments poDocument) removePoDocument,
     required TResult Function() removeAllPoDocument,
+    required TResult Function(bool value) toggleGreenDelivery,
   }) {
     return validateForm(config);
   }
@@ -579,6 +607,7 @@ class _$_AdditionalDetailsValidateForm
     TResult? Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult? Function(PoDocuments poDocument)? removePoDocument,
     TResult? Function()? removeAllPoDocument,
+    TResult? Function(bool value)? toggleGreenDelivery,
   }) {
     return validateForm?.call(config);
   }
@@ -593,6 +622,7 @@ class _$_AdditionalDetailsValidateForm
     TResult Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult Function(PoDocuments poDocument)? removePoDocument,
     TResult Function()? removeAllPoDocument,
+    TResult Function(bool value)? toggleGreenDelivery,
     required TResult orElse(),
   }) {
     if (validateForm != null) {
@@ -615,6 +645,8 @@ class _$_AdditionalDetailsValidateForm
         removePoDocument,
     required TResult Function(_AdditionalDetailsRemoveAllPoDocument value)
         removeAllPoDocument,
+    required TResult Function(_AdditionalDetailsToggleGreenDelivery value)
+        toggleGreenDelivery,
   }) {
     return validateForm(this);
   }
@@ -630,6 +662,8 @@ class _$_AdditionalDetailsValidateForm
         removePoDocument,
     TResult? Function(_AdditionalDetailsRemoveAllPoDocument value)?
         removeAllPoDocument,
+    TResult? Function(_AdditionalDetailsToggleGreenDelivery value)?
+        toggleGreenDelivery,
   }) {
     return validateForm?.call(this);
   }
@@ -645,6 +679,8 @@ class _$_AdditionalDetailsValidateForm
         removePoDocument,
     TResult Function(_AdditionalDetailsRemoveAllPoDocument value)?
         removeAllPoDocument,
+    TResult Function(_AdditionalDetailsToggleGreenDelivery value)?
+        toggleGreenDelivery,
     required TResult orElse(),
   }) {
     if (validateForm != null) {
@@ -750,6 +786,7 @@ class _$_AdditionalDetailsAddPoDocument
     required TResult Function(List<PoDocuments> poDocuments) addPoDocument,
     required TResult Function(PoDocuments poDocument) removePoDocument,
     required TResult Function() removeAllPoDocument,
+    required TResult Function(bool value) toggleGreenDelivery,
   }) {
     return addPoDocument(poDocuments);
   }
@@ -764,6 +801,7 @@ class _$_AdditionalDetailsAddPoDocument
     TResult? Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult? Function(PoDocuments poDocument)? removePoDocument,
     TResult? Function()? removeAllPoDocument,
+    TResult? Function(bool value)? toggleGreenDelivery,
   }) {
     return addPoDocument?.call(poDocuments);
   }
@@ -778,6 +816,7 @@ class _$_AdditionalDetailsAddPoDocument
     TResult Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult Function(PoDocuments poDocument)? removePoDocument,
     TResult Function()? removeAllPoDocument,
+    TResult Function(bool value)? toggleGreenDelivery,
     required TResult orElse(),
   }) {
     if (addPoDocument != null) {
@@ -800,6 +839,8 @@ class _$_AdditionalDetailsAddPoDocument
         removePoDocument,
     required TResult Function(_AdditionalDetailsRemoveAllPoDocument value)
         removeAllPoDocument,
+    required TResult Function(_AdditionalDetailsToggleGreenDelivery value)
+        toggleGreenDelivery,
   }) {
     return addPoDocument(this);
   }
@@ -815,6 +856,8 @@ class _$_AdditionalDetailsAddPoDocument
         removePoDocument,
     TResult? Function(_AdditionalDetailsRemoveAllPoDocument value)?
         removeAllPoDocument,
+    TResult? Function(_AdditionalDetailsToggleGreenDelivery value)?
+        toggleGreenDelivery,
   }) {
     return addPoDocument?.call(this);
   }
@@ -830,6 +873,8 @@ class _$_AdditionalDetailsAddPoDocument
         removePoDocument,
     TResult Function(_AdditionalDetailsRemoveAllPoDocument value)?
         removeAllPoDocument,
+    TResult Function(_AdditionalDetailsToggleGreenDelivery value)?
+        toggleGreenDelivery,
     required TResult orElse(),
   }) {
     if (addPoDocument != null) {
@@ -939,6 +984,7 @@ class _$_AdditionalDetailsRemovePoDocument
     required TResult Function(List<PoDocuments> poDocuments) addPoDocument,
     required TResult Function(PoDocuments poDocument) removePoDocument,
     required TResult Function() removeAllPoDocument,
+    required TResult Function(bool value) toggleGreenDelivery,
   }) {
     return removePoDocument(poDocument);
   }
@@ -953,6 +999,7 @@ class _$_AdditionalDetailsRemovePoDocument
     TResult? Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult? Function(PoDocuments poDocument)? removePoDocument,
     TResult? Function()? removeAllPoDocument,
+    TResult? Function(bool value)? toggleGreenDelivery,
   }) {
     return removePoDocument?.call(poDocument);
   }
@@ -967,6 +1014,7 @@ class _$_AdditionalDetailsRemovePoDocument
     TResult Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult Function(PoDocuments poDocument)? removePoDocument,
     TResult Function()? removeAllPoDocument,
+    TResult Function(bool value)? toggleGreenDelivery,
     required TResult orElse(),
   }) {
     if (removePoDocument != null) {
@@ -989,6 +1037,8 @@ class _$_AdditionalDetailsRemovePoDocument
         removePoDocument,
     required TResult Function(_AdditionalDetailsRemoveAllPoDocument value)
         removeAllPoDocument,
+    required TResult Function(_AdditionalDetailsToggleGreenDelivery value)
+        toggleGreenDelivery,
   }) {
     return removePoDocument(this);
   }
@@ -1004,6 +1054,8 @@ class _$_AdditionalDetailsRemovePoDocument
         removePoDocument,
     TResult? Function(_AdditionalDetailsRemoveAllPoDocument value)?
         removeAllPoDocument,
+    TResult? Function(_AdditionalDetailsToggleGreenDelivery value)?
+        toggleGreenDelivery,
   }) {
     return removePoDocument?.call(this);
   }
@@ -1019,6 +1071,8 @@ class _$_AdditionalDetailsRemovePoDocument
         removePoDocument,
     TResult Function(_AdditionalDetailsRemoveAllPoDocument value)?
         removeAllPoDocument,
+    TResult Function(_AdditionalDetailsToggleGreenDelivery value)?
+        toggleGreenDelivery,
     required TResult orElse(),
   }) {
     if (removePoDocument != null) {
@@ -1091,6 +1145,7 @@ class _$_AdditionalDetailsRemoveAllPoDocument
     required TResult Function(List<PoDocuments> poDocuments) addPoDocument,
     required TResult Function(PoDocuments poDocument) removePoDocument,
     required TResult Function() removeAllPoDocument,
+    required TResult Function(bool value) toggleGreenDelivery,
   }) {
     return removeAllPoDocument();
   }
@@ -1105,6 +1160,7 @@ class _$_AdditionalDetailsRemoveAllPoDocument
     TResult? Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult? Function(PoDocuments poDocument)? removePoDocument,
     TResult? Function()? removeAllPoDocument,
+    TResult? Function(bool value)? toggleGreenDelivery,
   }) {
     return removeAllPoDocument?.call();
   }
@@ -1119,6 +1175,7 @@ class _$_AdditionalDetailsRemoveAllPoDocument
     TResult Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult Function(PoDocuments poDocument)? removePoDocument,
     TResult Function()? removeAllPoDocument,
+    TResult Function(bool value)? toggleGreenDelivery,
     required TResult orElse(),
   }) {
     if (removeAllPoDocument != null) {
@@ -1141,6 +1198,8 @@ class _$_AdditionalDetailsRemoveAllPoDocument
         removePoDocument,
     required TResult Function(_AdditionalDetailsRemoveAllPoDocument value)
         removeAllPoDocument,
+    required TResult Function(_AdditionalDetailsToggleGreenDelivery value)
+        toggleGreenDelivery,
   }) {
     return removeAllPoDocument(this);
   }
@@ -1156,6 +1215,8 @@ class _$_AdditionalDetailsRemoveAllPoDocument
         removePoDocument,
     TResult? Function(_AdditionalDetailsRemoveAllPoDocument value)?
         removeAllPoDocument,
+    TResult? Function(_AdditionalDetailsToggleGreenDelivery value)?
+        toggleGreenDelivery,
   }) {
     return removeAllPoDocument?.call(this);
   }
@@ -1171,6 +1232,8 @@ class _$_AdditionalDetailsRemoveAllPoDocument
         removePoDocument,
     TResult Function(_AdditionalDetailsRemoveAllPoDocument value)?
         removeAllPoDocument,
+    TResult Function(_AdditionalDetailsToggleGreenDelivery value)?
+        toggleGreenDelivery,
     required TResult orElse(),
   }) {
     if (removeAllPoDocument != null) {
@@ -1184,6 +1247,193 @@ abstract class _AdditionalDetailsRemoveAllPoDocument
     implements AdditionalDetailsEvent {
   const factory _AdditionalDetailsRemoveAllPoDocument() =
       _$_AdditionalDetailsRemoveAllPoDocument;
+}
+
+/// @nodoc
+abstract class _$$_AdditionalDetailsToggleGreenDeliveryCopyWith<$Res> {
+  factory _$$_AdditionalDetailsToggleGreenDeliveryCopyWith(
+          _$_AdditionalDetailsToggleGreenDelivery value,
+          $Res Function(_$_AdditionalDetailsToggleGreenDelivery) then) =
+      __$$_AdditionalDetailsToggleGreenDeliveryCopyWithImpl<$Res>;
+  @useResult
+  $Res call({bool value});
+}
+
+/// @nodoc
+class __$$_AdditionalDetailsToggleGreenDeliveryCopyWithImpl<$Res>
+    extends _$AdditionalDetailsEventCopyWithImpl<$Res,
+        _$_AdditionalDetailsToggleGreenDelivery>
+    implements _$$_AdditionalDetailsToggleGreenDeliveryCopyWith<$Res> {
+  __$$_AdditionalDetailsToggleGreenDeliveryCopyWithImpl(
+      _$_AdditionalDetailsToggleGreenDelivery _value,
+      $Res Function(_$_AdditionalDetailsToggleGreenDelivery) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? value = null,
+  }) {
+    return _then(_$_AdditionalDetailsToggleGreenDelivery(
+      null == value
+          ? _value.value
+          : value // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_AdditionalDetailsToggleGreenDelivery
+    implements _AdditionalDetailsToggleGreenDelivery {
+  const _$_AdditionalDetailsToggleGreenDelivery(this.value);
+
+  @override
+  final bool value;
+
+  @override
+  String toString() {
+    return 'AdditionalDetailsEvent.toggleGreenDelivery(value: $value)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_AdditionalDetailsToggleGreenDelivery &&
+            (identical(other.value, value) || other.value == value));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, value);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_AdditionalDetailsToggleGreenDeliveryCopyWith<
+          _$_AdditionalDetailsToggleGreenDelivery>
+      get copyWith => __$$_AdditionalDetailsToggleGreenDeliveryCopyWithImpl<
+          _$_AdditionalDetailsToggleGreenDelivery>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(SalesOrganisationConfigs config) initialized,
+    required TResult Function(AdditionalDetailsLabel label, String newValue)
+        onTextChange,
+    required TResult Function(SalesOrganisationConfigs config) validateForm,
+    required TResult Function(List<PoDocuments> poDocuments) addPoDocument,
+    required TResult Function(PoDocuments poDocument) removePoDocument,
+    required TResult Function() removeAllPoDocument,
+    required TResult Function(bool value) toggleGreenDelivery,
+  }) {
+    return toggleGreenDelivery(value);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(SalesOrganisationConfigs config)? initialized,
+    TResult? Function(AdditionalDetailsLabel label, String newValue)?
+        onTextChange,
+    TResult? Function(SalesOrganisationConfigs config)? validateForm,
+    TResult? Function(List<PoDocuments> poDocuments)? addPoDocument,
+    TResult? Function(PoDocuments poDocument)? removePoDocument,
+    TResult? Function()? removeAllPoDocument,
+    TResult? Function(bool value)? toggleGreenDelivery,
+  }) {
+    return toggleGreenDelivery?.call(value);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(SalesOrganisationConfigs config)? initialized,
+    TResult Function(AdditionalDetailsLabel label, String newValue)?
+        onTextChange,
+    TResult Function(SalesOrganisationConfigs config)? validateForm,
+    TResult Function(List<PoDocuments> poDocuments)? addPoDocument,
+    TResult Function(PoDocuments poDocument)? removePoDocument,
+    TResult Function()? removeAllPoDocument,
+    TResult Function(bool value)? toggleGreenDelivery,
+    required TResult orElse(),
+  }) {
+    if (toggleGreenDelivery != null) {
+      return toggleGreenDelivery(value);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_AdditionalDetailsTextOnChange value)
+        onTextChange,
+    required TResult Function(_AdditionalDetailsValidateForm value)
+        validateForm,
+    required TResult Function(_AdditionalDetailsAddPoDocument value)
+        addPoDocument,
+    required TResult Function(_AdditionalDetailsRemovePoDocument value)
+        removePoDocument,
+    required TResult Function(_AdditionalDetailsRemoveAllPoDocument value)
+        removeAllPoDocument,
+    required TResult Function(_AdditionalDetailsToggleGreenDelivery value)
+        toggleGreenDelivery,
+  }) {
+    return toggleGreenDelivery(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_AdditionalDetailsTextOnChange value)? onTextChange,
+    TResult? Function(_AdditionalDetailsValidateForm value)? validateForm,
+    TResult? Function(_AdditionalDetailsAddPoDocument value)? addPoDocument,
+    TResult? Function(_AdditionalDetailsRemovePoDocument value)?
+        removePoDocument,
+    TResult? Function(_AdditionalDetailsRemoveAllPoDocument value)?
+        removeAllPoDocument,
+    TResult? Function(_AdditionalDetailsToggleGreenDelivery value)?
+        toggleGreenDelivery,
+  }) {
+    return toggleGreenDelivery?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_AdditionalDetailsTextOnChange value)? onTextChange,
+    TResult Function(_AdditionalDetailsValidateForm value)? validateForm,
+    TResult Function(_AdditionalDetailsAddPoDocument value)? addPoDocument,
+    TResult Function(_AdditionalDetailsRemovePoDocument value)?
+        removePoDocument,
+    TResult Function(_AdditionalDetailsRemoveAllPoDocument value)?
+        removeAllPoDocument,
+    TResult Function(_AdditionalDetailsToggleGreenDelivery value)?
+        toggleGreenDelivery,
+    required TResult orElse(),
+  }) {
+    if (toggleGreenDelivery != null) {
+      return toggleGreenDelivery(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _AdditionalDetailsToggleGreenDelivery
+    implements AdditionalDetailsEvent {
+  const factory _AdditionalDetailsToggleGreenDelivery(final bool value) =
+      _$_AdditionalDetailsToggleGreenDelivery;
+
+  bool get value;
+  @JsonKey(ignore: true)
+  _$$_AdditionalDetailsToggleGreenDeliveryCopyWith<
+          _$_AdditionalDetailsToggleGreenDelivery>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc

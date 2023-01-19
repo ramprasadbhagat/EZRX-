@@ -113,7 +113,9 @@ class PriceAggregateDtoAdapter extends TypeAdapter<PriceAggregateDto> {
               minOrderAmount: '0',
               enableZDP8Override: false,
               disableReturnsAccessSR: false,
-              disableReturnsAccess: false)
+              disableReturnsAccess: false,
+              enableGreenDelivery: false,
+              greenDeliveryDelayInDays: 0)
           : fields[3] as SalesOrganisationConfigsDto,
       zmgMaterialCountOnCart: fields[4] == null ? 0 : fields[4] as int,
       bundleDto: fields[5] == null

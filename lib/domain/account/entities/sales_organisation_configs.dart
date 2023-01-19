@@ -40,6 +40,8 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
     required bool disablePaymentTermsDisplay,
     required bool disableDeliveryDate,
     required bool enableBillTo,
+    required bool enableGreenDelivery,
+    required int greenDeliveryDelayInDays,
     required bool showPOAttachment,
     required bool hideStockDisplay,
     required bool expiryDateDisplay,
@@ -109,6 +111,8 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
         enableZDP8Override: false,
         disableReturnsAccessSR: false,
         disableReturnsAccess: false,
+        enableGreenDelivery: false,
+        greenDeliveryDelayInDays: 0,
       );
 
   String get getConfigLangauge {

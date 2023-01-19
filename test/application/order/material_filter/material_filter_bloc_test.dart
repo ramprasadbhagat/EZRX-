@@ -96,6 +96,8 @@ void main() {
     enableZDP8Override: false,
     disableReturnsAccessSR: false,
     disableReturnsAccess: false,
+    enableGreenDelivery: false,
+    greenDeliveryDelayInDays: 0,
   );
 
   const fakeSelectedPrincipalFilterCategory = MaterialFilterType.principal;

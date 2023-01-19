@@ -310,7 +310,7 @@ class OrderRepository implements IOrderRepository {
           ? '730'
           : '',
       purchaseOrderType: user.role.type.purchaseOrderType,
-      shippingCondition: '',
+      shippingCondition: data.greenDeliveryEnabled ? 'GD' : '',
       paymentTerms:
           cartItems.first.tenderContract.contractPaymentTerm.getValue(),
       customer: _getSubmitOrderCustomer(

@@ -11,6 +11,7 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+import 'package:flutter_svg/svg.dart';
 
 class AdditionalDetails extends StatelessWidget {
   final AdditionalDetailsState state;
@@ -106,9 +107,19 @@ class AdditionalDetails extends StatelessWidget {
                 )
               : const SizedBox.shrink(),
           const SizedBox(height: 9),
+          config.enableGreenDelivery
+              ? _GreenDeliveryBox(
+                  greenDeliveryDelayInDays:
+                      config.greenDeliveryDelayInDays.toString(),
+                  onCheckBoxChanged: (bool value) {
+                    context
+                        .read<AdditionalDetailsBloc>()
+                        .add(AdditionalDetailsEvent.toggleGreenDelivery(value));
+                  },
+                )
+              : const SizedBox.shrink(),
           if (context.read<EligibilityBloc>().state.isShowPOAttachmentEnable)
             const AdditionPoAttachmentUpload(),
-
         ],
       ),
     );
@@ -326,40 +337,53 @@ class _DatePickerFieldState extends State<_DatePickerField> {
     return Column(
       key: const Key('_DatePickerFieldKey'),
       children: [
-        InkWell(
-          onTap: ([bool mounted = true]) async {
-            final dateTime = await getDateFromDatePicker(
-              context,
-            );
-            controller.text = DateFormat('yyyy-MM-dd').format(dateTime);
-            if (!mounted) return;
-            context.read<AdditionalDetailsBloc>().add(
-                  AdditionalDetailsEvent.onTextChange(
-                    label: AdditionalDetailsLabel.deliveryDate,
-                    newValue: DateFormat('yyyy-MM-dd').format(dateTime),
-                  ),
-                );
-          },
-          child: IgnorePointer(
-            child: TextFormField(
-              controller: controller,
-              decoration: InputDecoration(
-                labelText: 'Requested Delivery Date'.tr(),
-                focusedBorder: const OutlineInputBorder(
-                  borderSide: BorderSide(color: ZPColors.primary, width: 1.0),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(8),
-                  ),
+        BlocBuilder<AdditionalDetailsBloc, AdditionalDetailsState>(
+            builder: (context, state) {
+          return InkWell(
+            onTap: state.additionalDetailsData.greenDeliveryEnabled
+                ? null
+                : ([bool mounted = true]) async {
+                    final dateTime = await getDateFromDatePicker(
+                      context,
+                    );
+                    controller.text = DateFormat('yyyy-MM-dd').format(dateTime);
+                    if (!mounted) return;
+                    context.read<AdditionalDetailsBloc>().add(
+                          AdditionalDetailsEvent.onTextChange(
+                            label: AdditionalDetailsLabel.deliveryDate,
+                            newValue: DateFormat('yyyy-MM-dd').format(dateTime),
+                          ),
+                        );
+                  },
+            child: IgnorePointer(
+              child: TextFormField(
+                enabled: !state.additionalDetailsData.greenDeliveryEnabled,
+                controller: controller,
+                style: TextStyle(
+                  color: state.additionalDetailsData.greenDeliveryEnabled
+                      ? Colors.grey
+                      : Colors.black,
                 ),
-                border: const OutlineInputBorder(
-                  borderSide: BorderSide(width: 1.0),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(8.0),
+                decoration: InputDecoration(
+                  enabled: !state.additionalDetailsData.greenDeliveryEnabled,
+                  labelText: 'Requested Delivery Date'.tr(),
+                  focusedBorder: const OutlineInputBorder(
+                    borderSide: BorderSide(color: ZPColors.primary, width: 1.0),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(8),
+                    ),
+                  ),
+                  border: const OutlineInputBorder(
+                    borderSide: BorderSide(width: 1.0),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(8.0),
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
+          );
+          },
         ),
         const SizedBox(
           height: 30,
@@ -452,6 +476,106 @@ class _PaymentTerm extends StatelessWidget {
           },
         );
       },
+    );
+  }
+}
+
+class _GreenDeliveryBox extends StatefulWidget {
+  final String greenDeliveryDelayInDays;
+  final void Function(bool) onCheckBoxChanged;
+
+  const _GreenDeliveryBox({
+    required this.greenDeliveryDelayInDays,
+    required this.onCheckBoxChanged,
+  });
+  @override
+  State<_GreenDeliveryBox> createState() => _GreenDeliveryBoxState();
+}
+
+class _GreenDeliveryBoxState extends State<_GreenDeliveryBox> {
+  bool checkBoxValue = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 16.0),
+      child: GestureDetector(
+        onTap: () {
+          setState(() {
+            checkBoxValue = !checkBoxValue;
+          });
+          widget.onCheckBoxChanged(checkBoxValue);
+        },
+        child: Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+              color: ZPColors.lightGreen,
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Row(children: [
+            SvgPicture.asset('assets/svg/green_delivery.svg', height: 40),
+            const SizedBox(
+              width: 16,
+            ),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      SizedBox(
+                        height: 24,
+                        width: 24,
+                        child: Checkbox(
+                            side: const BorderSide(
+                              color: ZPColors.primary,
+                              width: 2,
+                            ),
+                            value: checkBoxValue,
+                            onChanged: (bool? value) {
+                              setState(() {
+                                checkBoxValue = value!;
+                              },
+                            );
+                            widget.onCheckBoxChanged(value!);
+                          },
+                        ),
+                      ),
+                        const SizedBox(width: 8),
+                      Text(
+                        'Green Delivery'.tr(),
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w700,
+                          color: ZPColors.primary,
+                        ),
+                        ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  Text(
+                    'Help reduce the carbon footprint of your order.'.tr(),
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w700,
+                      color: ZPColors.primary,
+                    ),
+                  ),
+                  Text(
+                      'Your order will be consolidated and delivered via the most optimal route to you within ${widget.greenDeliveryDelayInDays} working days.'
+                          .tr(),
+                      style: const TextStyle(
+                        fontSize: 12,
+                        color: ZPColors.primary,
+                    ),
+                  ),
+                ],
+              ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

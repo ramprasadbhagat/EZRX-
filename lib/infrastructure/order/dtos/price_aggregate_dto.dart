@@ -176,6 +176,8 @@ const SalesOrganisationConfigsDto _emptySalesOrganisationConfigsDto =
   enableZDP8Override: false,
   disableReturnsAccessSR: false,
   disableReturnsAccess: false,
+  enableGreenDelivery: false,
+  greenDeliveryDelayInDays: 0,
 );
 
 const BundleDto _emptyBundleDto = BundleDto(

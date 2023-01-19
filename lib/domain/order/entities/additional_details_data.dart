@@ -17,6 +17,7 @@ class AdditionalDetailsData with _$AdditionalDetailsData {
     required PaymentTerm paymentTerm,
     required DeliveryDate deliveryDate,
     required List<PoDocuments> poDocuments,
+    required bool greenDeliveryEnabled,
   }) = _AdditionalDetailsData;
 
   factory AdditionalDetailsData.empty() => AdditionalDetailsData(
@@ -29,5 +30,6 @@ class AdditionalDetailsData with _$AdditionalDetailsData {
         paymentTerm: PaymentTerm(''),
         deliveryDate: DeliveryDate(''),
         poDocuments: <PoDocuments>[],
+        greenDeliveryEnabled: false,
       );
 }

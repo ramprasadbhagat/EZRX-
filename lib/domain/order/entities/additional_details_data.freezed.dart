@@ -27,6 +27,7 @@ mixin _$AdditionalDetailsData {
   PaymentTerm get paymentTerm => throw _privateConstructorUsedError;
   DeliveryDate get deliveryDate => throw _privateConstructorUsedError;
   List<PoDocuments> get poDocuments => throw _privateConstructorUsedError;
+  bool get greenDeliveryEnabled => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AdditionalDetailsDataCopyWith<AdditionalDetailsData> get copyWith =>
@@ -48,7 +49,8 @@ abstract class $AdditionalDetailsDataCopyWith<$Res> {
       ContactNumber contactNumber,
       PaymentTerm paymentTerm,
       DeliveryDate deliveryDate,
-      List<PoDocuments> poDocuments});
+      List<PoDocuments> poDocuments,
+      bool greenDeliveryEnabled});
 }
 
 /// @nodoc
@@ -74,6 +76,7 @@ class _$AdditionalDetailsDataCopyWithImpl<$Res,
     Object? paymentTerm = null,
     Object? deliveryDate = null,
     Object? poDocuments = null,
+    Object? greenDeliveryEnabled = null,
   }) {
     return _then(_value.copyWith(
       customerPoReference: null == customerPoReference
@@ -112,6 +115,10 @@ class _$AdditionalDetailsDataCopyWithImpl<$Res,
           ? _value.poDocuments
           : poDocuments // ignore: cast_nullable_to_non_nullable
               as List<PoDocuments>,
+      greenDeliveryEnabled: null == greenDeliveryEnabled
+          ? _value.greenDeliveryEnabled
+          : greenDeliveryEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -133,7 +140,8 @@ abstract class _$$_AdditionalDetailsDataCopyWith<$Res>
       ContactNumber contactNumber,
       PaymentTerm paymentTerm,
       DeliveryDate deliveryDate,
-      List<PoDocuments> poDocuments});
+      List<PoDocuments> poDocuments,
+      bool greenDeliveryEnabled});
 }
 
 /// @nodoc
@@ -156,6 +164,7 @@ class __$$_AdditionalDetailsDataCopyWithImpl<$Res>
     Object? paymentTerm = null,
     Object? deliveryDate = null,
     Object? poDocuments = null,
+    Object? greenDeliveryEnabled = null,
   }) {
     return _then(_$_AdditionalDetailsData(
       customerPoReference: null == customerPoReference
@@ -194,6 +203,10 @@ class __$$_AdditionalDetailsDataCopyWithImpl<$Res>
           ? _value._poDocuments
           : poDocuments // ignore: cast_nullable_to_non_nullable
               as List<PoDocuments>,
+      greenDeliveryEnabled: null == greenDeliveryEnabled
+          ? _value.greenDeliveryEnabled
+          : greenDeliveryEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -210,7 +223,8 @@ class _$_AdditionalDetailsData extends _AdditionalDetailsData {
       required this.contactNumber,
       required this.paymentTerm,
       required this.deliveryDate,
-      required final List<PoDocuments> poDocuments})
+      required final List<PoDocuments> poDocuments,
+      required this.greenDeliveryEnabled})
       : _poDocuments = poDocuments,
         super._();
 
@@ -238,8 +252,11 @@ class _$_AdditionalDetailsData extends _AdditionalDetailsData {
   }
 
   @override
+  final bool greenDeliveryEnabled;
+
+  @override
   String toString() {
-    return 'AdditionalDetailsData(customerPoReference: $customerPoReference, specialInstruction: $specialInstruction, referenceNote: $referenceNote, collectiveNumber: $collectiveNumber, contactPerson: $contactPerson, contactNumber: $contactNumber, paymentTerm: $paymentTerm, deliveryDate: $deliveryDate, poDocuments: $poDocuments)';
+    return 'AdditionalDetailsData(customerPoReference: $customerPoReference, specialInstruction: $specialInstruction, referenceNote: $referenceNote, collectiveNumber: $collectiveNumber, contactPerson: $contactPerson, contactNumber: $contactNumber, paymentTerm: $paymentTerm, deliveryDate: $deliveryDate, poDocuments: $poDocuments, greenDeliveryEnabled: $greenDeliveryEnabled)';
   }
 
   @override
@@ -264,7 +281,9 @@ class _$_AdditionalDetailsData extends _AdditionalDetailsData {
             (identical(other.deliveryDate, deliveryDate) ||
                 other.deliveryDate == deliveryDate) &&
             const DeepCollectionEquality()
-                .equals(other._poDocuments, _poDocuments));
+                .equals(other._poDocuments, _poDocuments) &&
+            (identical(other.greenDeliveryEnabled, greenDeliveryEnabled) ||
+                other.greenDeliveryEnabled == greenDeliveryEnabled));
   }
 
   @override
@@ -278,7 +297,8 @@ class _$_AdditionalDetailsData extends _AdditionalDetailsData {
       contactNumber,
       paymentTerm,
       deliveryDate,
-      const DeepCollectionEquality().hash(_poDocuments));
+      const DeepCollectionEquality().hash(_poDocuments),
+      greenDeliveryEnabled);
 
   @JsonKey(ignore: true)
   @override
@@ -298,7 +318,8 @@ abstract class _AdditionalDetailsData extends AdditionalDetailsData {
       required final ContactNumber contactNumber,
       required final PaymentTerm paymentTerm,
       required final DeliveryDate deliveryDate,
-      required final List<PoDocuments> poDocuments}) = _$_AdditionalDetailsData;
+      required final List<PoDocuments> poDocuments,
+      required final bool greenDeliveryEnabled}) = _$_AdditionalDetailsData;
   const _AdditionalDetailsData._() : super._();
 
   @override
@@ -319,6 +340,8 @@ abstract class _AdditionalDetailsData extends AdditionalDetailsData {
   DeliveryDate get deliveryDate;
   @override
   List<PoDocuments> get poDocuments;
+  @override
+  bool get greenDeliveryEnabled;
   @override
   @JsonKey(ignore: true)
   _$$_AdditionalDetailsDataCopyWith<_$_AdditionalDetailsData> get copyWith =>

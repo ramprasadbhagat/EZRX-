@@ -25,6 +25,8 @@ class SalesOrgQueryMutation {
           enableZDP5
           enableZDP8Override
           enableGMC
+          enableGreenDelivery
+          greenDeliveryDelayInDays
           supportURL
           minOrderAmount
           netPriceOverride

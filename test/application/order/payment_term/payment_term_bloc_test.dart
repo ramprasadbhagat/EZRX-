@@ -87,6 +87,8 @@ void main() {
     enableZDP8Override: false,
     disableReturnsAccessSR: false,
     disableReturnsAccess: false,
+    enableGreenDelivery: false,
+    greenDeliveryDelayInDays: 0,
   );
 
   final fakeCustomerCode = CustomerCodeInfo.empty().copyWith(

@@ -259,6 +259,62 @@ void main() {
           ),
         ],
       );
+
+      blocTest<AdditionalDetailsBloc, AdditionalDetailsState>(
+        'Additional Details toggleGreenDelivery test enableGreenDelivery true',
+        build: () => AdditionalDetailsBloc(),
+        seed: () => AdditionalDetailsState.initial().copyWith(
+          additionalDetailsData: AdditionalDetailsData.empty().copyWith(
+            customerPoReference: CustomerPoReference('CO REF'),
+            contactPerson: ContactPerson(''),
+            contactNumber: ContactNumber('123456'),
+            paymentTerm: PaymentTerm('0001-TEST'),
+            greenDeliveryEnabled: false,
+          ),
+        ),
+        act: (AdditionalDetailsBloc bloc) {
+          bloc.add(const AdditionalDetailsEvent.toggleGreenDelivery(true));
+        },
+        expect: () => [
+          AdditionalDetailsState.initial().copyWith(
+            additionalDetailsData: AdditionalDetailsData.empty().copyWith(
+              customerPoReference: CustomerPoReference('CO REF'),
+              contactPerson: ContactPerson(''),
+              contactNumber: ContactNumber('123456'),
+              paymentTerm: PaymentTerm('0001-TEST'),
+              greenDeliveryEnabled: true,
+            ),
+          ),
+        ],
+      );
+
+      blocTest<AdditionalDetailsBloc, AdditionalDetailsState>(
+        'Additional Details toggleGreenDelivery test enableGreenDelivery false',
+        build: () => AdditionalDetailsBloc(),
+        seed: () => AdditionalDetailsState.initial().copyWith(
+          additionalDetailsData: AdditionalDetailsData.empty().copyWith(
+            customerPoReference: CustomerPoReference('CO REF'),
+            contactPerson: ContactPerson(''),
+            contactNumber: ContactNumber('123456'),
+            paymentTerm: PaymentTerm('0001-TEST'),
+            greenDeliveryEnabled: true,
+          ),
+        ),
+        act: (AdditionalDetailsBloc bloc) {
+          bloc.add(const AdditionalDetailsEvent.toggleGreenDelivery(false));
+        },
+        expect: () => [
+          AdditionalDetailsState.initial().copyWith(
+            additionalDetailsData: AdditionalDetailsData.empty().copyWith(
+              customerPoReference: CustomerPoReference('CO REF'),
+              contactPerson: ContactPerson(''),
+              contactNumber: ContactNumber('123456'),
+              paymentTerm: PaymentTerm('0001-TEST'),
+              greenDeliveryEnabled: false,
+            ),
+          ),
+        ],
+      );
     },
   );
 }

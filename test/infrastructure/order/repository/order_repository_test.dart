@@ -543,6 +543,142 @@ void main() {
         true,
       );
     });
+
+    test(
+        'get submit order successfully remote when additional data greenDeliveryEnabled true',
+        () async {
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
+
+      final data = AdditionalDetailsData.empty().copyWith(
+        customerPoReference: CustomerPoReference('CO REF'),
+        contactPerson: ContactPerson('PERSON'),
+        contactNumber: ContactNumber('123456'),
+        paymentTerm: PaymentTerm('0001-TEST'),
+        deliveryDate: DeliveryDate('01/02/2023'),
+        specialInstruction: SpecialInstruction('test'),
+        collectiveNumber: CollectiveNumber('543678909'),
+        referenceNote: ReferenceNote('note'),
+        greenDeliveryEnabled: true,
+      );
+
+      final user = mockUser.copyWith(
+        id: '123456',
+        role: Role.empty().copyWith(type: RoleType('external_sales_rep')),
+        fullName: const FullName(firstName: 'john', lastName: 'doe'),
+        username: Username('mock_user'),
+        email: EmailAddress('user@gmail.com'),
+        customerCode: CustomerCode('100007654'),
+      );
+
+      final submitOrder = SubmitOrder.empty().copyWith(
+        userName: data.contactPerson.getValue().isNotEmpty
+            ? data.contactPerson.getValue()
+            : user.fullName.toString(),
+        poReference: data.customerPoReference.getValue(),
+        referenceNotes: data.referenceNote.getValue(),
+        specialInstructions: data.specialInstruction.getValue(),
+        companyName: CompanyName(mockShipToInfo.shipToName.toString()),
+        requestedDeliveryDate: data.deliveryDate.getValue(),
+        poDate: data.deliveryDate.getValue(),
+        telephone: data.contactNumber.getTelephone,
+        trackingLevel: 'items',
+        collectiveNumber: '',
+        subscribeStatusChange: true,
+        orderType: 'ZPOR',
+        orderReason: <PriceAggregate>[
+          PriceAggregate.empty().copyWith(
+            quantity: 2,
+            materialInfo: MaterialInfo.empty().copyWith(
+              materialNumber: MaterialNumber('000000000023001758'),
+            ),
+            tenderContract: TenderContract.empty().copyWith(
+              contractPaymentTerm:
+                  TenderContractInfo.contractPaymentTerm('term'),
+              tenderOrderReason: TenderContractReason('reas'),
+            ),
+          )
+        ]
+                .map((cartItem) =>
+                    cartItem.tenderContract.tenderOrderReason.getValue())
+                .contains('730')
+            ? '730'
+            : '',
+        purchaseOrderType: 'MRXC', //user.role.type.purchaseOrderType,
+        shippingCondition: 'GD',
+        paymentTerms: <PriceAggregate>[
+          PriceAggregate.empty().copyWith(
+            quantity: 2,
+            materialInfo: MaterialInfo.empty().copyWith(
+              materialNumber: MaterialNumber('000000000023001758'),
+            ),
+            tenderContract: TenderContract.empty().copyWith(
+              contractPaymentTerm:
+                  TenderContractInfo.contractPaymentTerm('term'),
+              tenderOrderReason: TenderContractReason('reas'),
+            ),
+          )
+        ].first.tenderContract.contractPaymentTerm.getValue(),
+        customer: SubmitOrderCustomer.empty().copyWith(
+          customerNumber: mockCustomerCodeInfo.customerCodeSoldTo,
+          customerNumberShipTo: mockShipToInfo.shipToCustomerCode,
+          division: mockCustomerCodeInfo.division,
+          salesOrganisation: mockSalesOrganisation.salesOrg.getOrCrash(),
+        ),
+        blockOrder: false,
+        materials: <PriceAggregate>[
+          PriceAggregate.empty().copyWith(
+            quantity: 2,
+            materialInfo: MaterialInfo.empty().copyWith(
+              materialNumber: MaterialNumber('000000000023001758'),
+            ),
+            tenderContract: TenderContract.empty().copyWith(
+              contractPaymentTerm:
+                  TenderContractInfo.contractPaymentTerm('term'),
+              tenderOrderReason: TenderContractReason('reas'),
+            ),
+          )
+        ].map((e) => e.toSubmitMaterialInfo()).toList(),
+      );
+
+      when(() => orderRemoteDataSource.submitOrder(
+              submitOrder: SubmitOrderDto.fromDomain(submitOrder, 'PHP')))
+          .thenAnswer((invocation) async => SubmitOrderResponse.empty()
+                  .copyWith(salesDocument: 'fake-sales-document', messages: [
+                SubmitOrderResponseMessage.empty().copyWith(
+                  message: 'EZRX-b628ca8',
+                  type: 'S',
+                ),
+              ]));
+
+      final result = await orderRepository.submitOrder(
+        shipToInfo: mockShipToInfo,
+        user: mockUser,
+        cartItems: <PriceAggregate>[
+          PriceAggregate.empty().copyWith(
+            quantity: 2,
+            materialInfo: MaterialInfo.empty().copyWith(
+              materialNumber: MaterialNumber('000000000023001758'),
+            ),
+            tenderContract: TenderContract.empty().copyWith(
+              contractPaymentTerm:
+                  TenderContractInfo.contractPaymentTerm('term'),
+              tenderOrderReason: TenderContractReason('reas'),
+            ),
+          )
+        ],
+        grandTotal: 100.0,
+        customerCodeInfo: mockCustomerCodeInfo,
+        salesOrganisation: mockSalesOrganisation,
+        data: data,
+        orderType: 'ZPOR',
+        configs: SalesOrganisationConfigs.empty()
+            .copyWith(currency: Currency('PHP')),
+      );
+      expect(
+        result.isRight(),
+        true,
+      );
+    });
     test('get submit order fail remote ', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
 

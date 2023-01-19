@@ -74,13 +74,15 @@ class SalesOrganisationConfigsDtoAdapter
       enableZDP8Override: fields[146] == null ? false : fields[146] as bool,
       disableReturnsAccessSR: fields[147] == null ? false : fields[147] as bool,
       disableReturnsAccess: fields[148] == null ? false : fields[148] as bool,
+      enableGreenDelivery: fields[149] == null ? false : fields[149] as bool,
+      greenDeliveryDelayInDays: fields[150] == null ? 2 : fields[150] as int,
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_SalesOrganisationConfigsDto obj) {
     writer
-      ..writeByte(49)
+      ..writeByte(51)
       ..writeByte(100)
       ..write(obj.disableProcessingStatus)
       ..writeByte(101)
@@ -177,6 +179,10 @@ class SalesOrganisationConfigsDtoAdapter
       ..write(obj.disableReturnsAccessSR)
       ..writeByte(148)
       ..write(obj.disableReturnsAccess)
+      ..writeByte(149)
+      ..write(obj.enableGreenDelivery)
+      ..writeByte(150)
+      ..write(obj.greenDeliveryDelayInDays)
       ..writeByte(7)
       ..write(obj.principalList);
   }
@@ -254,6 +260,8 @@ _$_SalesOrganisationConfigsDto _$$_SalesOrganisationConfigsDtoFromJson(
       enableZDP8Override: json['enableZDP8Override'] as bool? ?? false,
       disableReturnsAccessSR: json['disableReturnsAccessSR'] as bool? ?? false,
       disableReturnsAccess: json['disableReturnsAccess'] as bool? ?? false,
+      enableGreenDelivery: json['enableGreenDelivery'] as bool? ?? false,
+      greenDeliveryDelayInDays: json['greenDeliveryDelayInDays'] as int? ?? 2,
     );
 
 Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
@@ -309,4 +317,6 @@ Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
       'enableZDP8Override': instance.enableZDP8Override,
       'disableReturnsAccessSR': instance.disableReturnsAccessSR,
       'disableReturnsAccess': instance.disableReturnsAccess,
+      'enableGreenDelivery': instance.enableGreenDelivery,
+      'greenDeliveryDelayInDays': instance.greenDeliveryDelayInDays,
     };

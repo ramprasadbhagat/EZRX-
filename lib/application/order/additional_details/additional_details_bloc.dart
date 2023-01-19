@@ -80,6 +80,12 @@ class AdditionalDetailsBloc
               state.additionalDetailsData.copyWith(poDocuments: []),
         ),
       ),
+      toggleGreenDelivery: (value) => emit(
+        state.copyWith(
+          additionalDetailsData: state.additionalDetailsData
+              .copyWith(greenDeliveryEnabled: value.value),
+        ),
+      ),
     );
   }
 

@@ -160,6 +160,12 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
     @JsonKey(name: 'disableReturnsAccess', defaultValue: false)
     @HiveField(148, defaultValue: false)
         required bool disableReturnsAccess,
+    @JsonKey(name: 'enableGreenDelivery', defaultValue: false)
+    @HiveField(149, defaultValue: false)
+        required bool enableGreenDelivery,
+    @JsonKey(name: 'greenDeliveryDelayInDays', defaultValue: 2)
+    @HiveField(150, defaultValue: 2)
+        required int greenDeliveryDelayInDays,
   }) = _SalesOrganisationConfigsDto;
 
   factory SalesOrganisationConfigsDto.fromDomain(
@@ -196,6 +202,8 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       futureDeliveryDay: configs.futureDeliveryDay.getOrDefaultValue(''),
       enableGMC: configs.enableGMC,
       enableListPrice: configs.enableListPrice,
+      enableGreenDelivery: configs.enableGreenDelivery,
+      greenDeliveryDelayInDays: configs.greenDeliveryDelayInDays,
       disablePaymentTermsDisplay: configs.disablePaymentTermsDisplay,
       disableDeliveryDate: configs.disableDeliveryDate,
       enableBillTo: configs.enableBillTo,
@@ -249,6 +257,8 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       futureDeliveryDay: FutureDeliveryDay(futureDeliveryDay),
       enableGMC: enableGMC,
       enableListPrice: enableListPrice,
+      enableGreenDelivery: enableGreenDelivery,
+      greenDeliveryDelayInDays: greenDeliveryDelayInDays,
       priceOverride: priceOverride,
       disablePaymentTermsDisplay: disablePaymentTermsDisplay,
       disableDeliveryDate: disableDeliveryDate,
