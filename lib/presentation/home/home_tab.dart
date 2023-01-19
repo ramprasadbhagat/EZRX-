@@ -1,15 +1,14 @@
-import 'package:ezrxmobile/presentation/orders/cart/cart_button.dart';
-import 'package:ezrxmobile/presentation/home/expansion_tiles/returns_expansion_tile.dart';
-import 'package:ezrxmobile/presentation/orders/core/edi_user_banner.dart';
 import 'package:ezrxmobile/presentation/home/banners/banner.dart';
+import 'package:ezrxmobile/presentation/home/expansion_tiles/orders_expansion_tile.dart';
+import 'package:ezrxmobile/presentation/home/expansion_tiles/returns_expansion_tile.dart';
 import 'package:ezrxmobile/presentation/home/selector/customer_code_selector.dart';
 import 'package:ezrxmobile/presentation/home/selector/sales_org_selector.dart';
 import 'package:ezrxmobile/presentation/home/selector/shipping_address_selector.dart';
+import 'package:ezrxmobile/presentation/orders/cart/cart_button.dart';
 import 'package:ezrxmobile/presentation/orders/core/account_suspended_warning.dart';
+import 'package:ezrxmobile/presentation/orders/core/edi_user_banner.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
-import 'package:ezrxmobile/presentation/home/expansion_tiles/orders_expansion_tile.dart';
 
 class HomeTab extends StatelessWidget {
   const HomeTab({Key? key}) : super(key: key);
@@ -45,7 +44,7 @@ class HomeTab extends StatelessWidget {
             key: ValueKey('HomeBanner'),
           ),
           OrdersExpansionTile(),
-          ReturnsExpansionTile(),
+          const ReturnsExpansionTile(),
         ],
       ),
     );
@@ -63,7 +62,6 @@ class HomePageTile {
   final IconData icon;
   final String routeName;
 }
-
 
 // class _WelcomeUser extends StatelessWidget {
 //   const _WelcomeUser({Key? key}) : super(key: key);

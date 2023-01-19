@@ -145,6 +145,38 @@ class RoleType extends ValueObject<String> {
     return roleCanLoginOnBehalfByZPAdmin(value.getOrElse(() => ''));
   }
 
+  bool get isReturnAdmin {
+    return value.getOrElse(() => '') == 'return_admin';
+  }
+
+  bool get isClientAdmin {
+    return value.getOrElse(() => '') == 'client_admin';
+  }
+
+  bool get isZpAdminAttachments {
+    return value.getOrElse(() => '') == 'zp_admin_attachments';
+  }
+
+  bool get isClientUser {
+    return value.getOrElse(() => '') == 'client_user';
+  }
+
+  bool get isInternalSalesRep {
+    return value.getOrElse(() => '') == 'internal_sales_rep';
+  }
+
+  bool get isExternalSalesRep {
+    return value.getOrElse(() => '') == 'external_sales_rep';
+  }
+
+  bool get isReturnRequestor {
+    return value.getOrElse(() => '') == 'return_requestor';
+  }
+
+  bool get isReturnApprover {
+    return value.getOrElse(() => '') == 'return_approver';
+  }
+
   const RoleType._(this.value);
 }
 

@@ -1,52 +1,17 @@
+import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/presentation/core/custom_expansion_tile.dart'
+    as custom;
 import 'package:ezrxmobile/presentation/home/expansion_tiles/tile_card.dart';
 import 'package:ezrxmobile/presentation/home/home_tab.dart';
 import 'package:flutter/material.dart';
-import 'package:ezrxmobile/presentation/core/custom_expansion_tile.dart'
-    as custom;
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:collection/collection.dart';
 
 class ReturnsExpansionTile extends StatelessWidget {
-  ReturnsExpansionTile({Key? key}) : super(key: key);
-
-  final List<HomePageTile> _returnsPageTiles = <HomePageTile>[
-    const HomePageTile(
-      title: 'Overview',
-      icon: Icons.space_dashboard_outlined,
-      routeName: 'returns_overview',
-    ),
-    const HomePageTile(
-      title: 'Request return',
-      icon: Icons.pending_actions_outlined,
-      routeName: 'request_return',
-    ),
-    const HomePageTile(
-      title: 'Approver actions',
-      icon: Icons.rule_outlined,
-      routeName: 'approver_actions',
-    ),
-    const HomePageTile(
-      title: 'Return Summary',
-      icon: Icons.summarize_outlined,
-      routeName: 'return_summary',
-    ),
-  ];
-
-  final List<HomePageTile> _adminTiles = <HomePageTile>[
-    const HomePageTile(
-      title: 'User Restriction',
-      icon: Icons.admin_panel_settings_outlined,
-      routeName: 'user_restriction',
-    ),
-    const HomePageTile(
-      title: 'Policy Configuration',
-      icon: Icons.policy_outlined,
-      routeName: 'policy_configuration',
-    ),
-  ];
+  const ReturnsExpansionTile({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -59,9 +24,9 @@ class ReturnsExpansionTile extends StatelessWidget {
           return const SizedBox.shrink();
         }
 
-        final tiles = context.read<UserBloc>().state.userHasReturnsAdminAccess
-            ? [..._returnsPageTiles, ..._adminTiles]
-            : _returnsPageTiles;
+        final tiles = loadReturnsPageTiles(
+          context.read<UserBloc>().state.user.role.type,
+        );
 
         return custom.ExpansionTile(
           initiallyExpanded: true,
@@ -96,5 +61,78 @@ class ReturnsExpansionTile extends StatelessWidget {
         );
       },
     );
+  }
+
+  List<HomePageTile> loadReturnsPageTiles(RoleType roleType) {
+    const overviewTile = HomePageTile(
+      title: 'Overview',
+      icon: Icons.space_dashboard_outlined,
+      routeName: 'returns_overview',
+    );
+    const requestReturnTile = HomePageTile(
+      title: 'Request return',
+      icon: Icons.pending_actions_outlined,
+      routeName: 'request_return',
+    );
+    const approverActionsTile = HomePageTile(
+      title: 'Approver actions',
+      icon: Icons.rule_outlined,
+      routeName: 'approver_actions',
+    );
+    const returnSummaryTile = HomePageTile(
+      title: 'Return Summary',
+      icon: Icons.summarize_outlined,
+      routeName: 'return_summary',
+    );
+    const userRestrictionTile = HomePageTile(
+      title: 'User Restriction',
+      icon: Icons.admin_panel_settings_outlined,
+      routeName: 'user_restriction',
+    );
+    const policyConfigurationTile = HomePageTile(
+      title: 'Policy Configuration',
+      icon: Icons.policy_outlined,
+      routeName: 'policy_configuration',
+    );
+
+    if (roleType.isRootAdmin || roleType.isReturnAdmin) {
+      return [
+        overviewTile,
+        requestReturnTile,
+        approverActionsTile,
+        returnSummaryTile,
+        userRestrictionTile,
+        policyConfigurationTile,
+      ];
+    } else if (roleType.isZPAdmin) {
+      return [
+        overviewTile,
+        requestReturnTile,
+        returnSummaryTile,
+        userRestrictionTile,
+        policyConfigurationTile,
+      ];
+    } else if (roleType.isClientAdmin || roleType.isZpAdminAttachments) {
+      return [
+        requestReturnTile,
+        returnSummaryTile,
+      ];
+    } else if (roleType.isClientUser ||
+        roleType.isSalesRep ||
+        roleType.isReturnRequestor) {
+      return [
+        overviewTile,
+        requestReturnTile,
+        returnSummaryTile,
+      ];
+    } else if (roleType.isReturnApprover) {
+      return [
+        requestReturnTile,
+        approverActionsTile,
+        returnSummaryTile,
+      ];
+    }
+
+    return [];
   }
 }
