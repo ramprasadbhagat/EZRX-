@@ -53,11 +53,13 @@ class HomeTab extends StatelessWidget {
 
 class HomePageTile {
   const HomePageTile({
+    this.key,
     required this.title,
     required this.icon,
     required this.routeName,
   });
 
+  final Key? key;
   final String title;
   final IconData icon;
   final String routeName;
