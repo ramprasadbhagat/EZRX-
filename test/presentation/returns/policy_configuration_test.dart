@@ -89,9 +89,16 @@ void main() {
     testWidgets('=> Test while state is fetching', (tester) async {
       when(() => policyConfigurationListBlocMock.state).thenReturn(
         PolicyConfigurationState.initial().copyWith(
-          isLoading: true,
+          isLoading: false,
         ),
       );
+      final expectedState = [
+        PolicyConfigurationState.initial().copyWith(
+          isLoading: true,
+        ),
+      ];
+      whenListen(
+          policyConfigurationListBlocMock, Stream.fromIterable(expectedState));
       await getWidget(tester);
       await tester.pump(const Duration(milliseconds: 100));
       final loaderImage = find.byKey(const Key('LoaderImage'));
@@ -105,14 +112,35 @@ void main() {
     testWidgets('=> Test when policy configuration is fetched', (tester) async {
       when(() => policyConfigurationListBlocMock.state)
           .thenReturn(PolicyConfigurationState.initial().copyWith(
-        isLoading: false,
-        policyConfigurationList: policyConfigurationListMock,
+        isLoading: true,
       ));
-
+      final expectedState = [
+        PolicyConfigurationState.initial().copyWith(
+          isLoading: false,
+          policyConfigurationList: policyConfigurationListMock,
+          failureOrSuccessOption: optionOf(const Right('success')),
+        )
+      ];
+      whenListen(
+          policyConfigurationListBlocMock, Stream.fromIterable(expectedState));
       await getWidget(tester);
       await tester.pump(const Duration(milliseconds: 100));
       final orderTemplateItem = find.byType(PolicyConfigurationListItem);
       expect(orderTemplateItem, findsAtLeastNWidgets(1));
+      final findFloatingActionButton = find.byType(FloatingActionButton);
+      expect(findFloatingActionButton, findsOneWidget);
+      await tester.tap(findFloatingActionButton);
+      final findListTile = find
+          .ancestor(of: find.byType(Column), matching: find.byType(ListTile))
+          .first;
+      expect(findListTile, findsOneWidget);
+      await tester.tap(findListTile);
+      await tester.drag(
+          find.byKey(const Key('slidable')).first, const Offset(-300, 0.0));
+      await tester.pump();
+      final removeWidget = tester.widget(find.byIcon(Icons.delete_outline));
+      await tester.tap(find.byWidget(removeWidget));
+      await tester.pump();
     });
 
     testWidgets('Test fetch fail', (tester) async {

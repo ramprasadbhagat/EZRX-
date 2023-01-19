@@ -112,7 +112,6 @@ class _SalesOrganizationField extends StatelessWidget {
           .salesOrganisation
           .salesOrg
           .getOrCrash(),
-      onChanged: (value) {},
       enabled: false,
       keyboardType: TextInputType.none,
       style: const TextStyle(

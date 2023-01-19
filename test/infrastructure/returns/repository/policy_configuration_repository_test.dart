@@ -44,6 +44,15 @@ void main() {
         principalName: PrincipalName(''),
         status: ''),
   ];
+  final policyConfigurationMock = PolicyConfiguration(
+      salesOrg: SalesOrg('2601'),
+      principalCode: PrincipalCode('2601'),
+      monthsBeforeExpiry: MonthsBeforeExpiry.change('0'),
+      monthsAfterExpiry: MonthsAfterExpiry.change('0'),
+      uuid: 'cfe3d45d-9812-49d7-8b83-ad028b9ae383',
+      returnsAllowed: ReturnsAllowed(true),
+      principalName: PrincipalName(''),
+      status: '');
 
   setUpAll(() {
     mockConfig = MockConfig();
@@ -112,6 +121,114 @@ void main() {
       final result = await policyConfigurationRepo.getPolicyConfiguration(
         salesOrganisation: mockSalesOrg,
       );
+      expect(
+        result.isLeft(),
+        true,
+      );
+    });
+
+    test('=> getDeletePolicy Locally SUCCESS', () async {
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
+
+      final result = await policyConfigurationRepo.getDeletePolicy(
+        policyConfigurationItem: policyConfigurationMock,
+        policyConfigurationList: policyConfigurationListMock,
+      );
+      expect(
+        result.isRight(),
+        true,
+      );
+    });
+
+    test('=> getDeletePolicy Remote SUCCESS', () async {
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+      when(() => policyConfigurationRemoteSource.getDeletePolicyConfiguration(
+              policyConfiguration: policyConfigurationMock))
+          .thenAnswer((invocation) async => policyConfigurationMock);
+
+      final result = await policyConfigurationRepo.getDeletePolicy(
+        policyConfigurationItem: policyConfigurationMock,
+        policyConfigurationList: policyConfigurationListMock,
+      );
+      expect(
+        result.isRight(),
+        true,
+      );
+    });
+
+    test('=> getDeletePolicy Remote FAILED', () async {
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+      when(
+        () => policyConfigurationRemoteSource.getDeletePolicyConfiguration(
+            policyConfiguration: policyConfigurationMock),
+      ).thenThrow(const ApiFailure.serverTimeout());
+
+      final result = await policyConfigurationRepo.getDeletePolicy(
+        policyConfigurationItem: policyConfigurationMock,
+        policyConfigurationList: policyConfigurationListMock,
+      );
+      expect(
+        result.isLeft(),
+        true,
+      );
+    });
+
+    test('=> getAddPolicy Locally SUCCESS', () async {
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
+
+      final result = await policyConfigurationRepo.getAddPolicy(
+          policyConfigurationItems: policyConfigurationMock,
+          policyConfigurationList: policyConfigurationListMock);
+      expect(
+        result.isRight(),
+        true,
+      );
+    });
+
+    test('=> getAddPolicy Remote SUCCESS', () async {
+      final policyConfiguration = PolicyConfiguration.empty().copyWith(
+        salesOrg: SalesOrg(policyConfigurationMock.salesOrg.getOrCrash()),
+        principalCode: policyConfigurationMock.principalCode,
+        monthsBeforeExpiry: policyConfigurationMock.monthsBeforeExpiry,
+        monthsAfterExpiry: policyConfigurationMock.monthsAfterExpiry,
+        returnsAllowed:
+            ReturnsAllowed(policyConfigurationMock.returnsAllowed.getOrCrash()),
+      );
+
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+      when(() => policyConfigurationRemoteSource.geAddPolicyConfiguration(
+              policyConfiguration: policyConfiguration))
+          .thenAnswer((invocation) async => policyConfigurationMock);
+
+      final result = await policyConfigurationRepo.getAddPolicy(
+          policyConfigurationItems: policyConfiguration,
+          policyConfigurationList: policyConfigurationListMock);
+
+      expect(
+        result.isRight(),
+        true,
+      );
+    });
+
+    test('=> getAddPolicy Remote FAILED', () async {
+      final policyConfiguration = PolicyConfiguration.empty().copyWith(
+        salesOrg: SalesOrg(policyConfigurationMock.salesOrg.getOrCrash()),
+        principalCode: policyConfigurationMock.principalCode,
+        monthsBeforeExpiry: policyConfigurationMock.monthsBeforeExpiry,
+        monthsAfterExpiry: policyConfigurationMock.monthsAfterExpiry,
+        returnsAllowed:
+            ReturnsAllowed(policyConfigurationMock.returnsAllowed.getOrCrash()),
+      );
+
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+      when(() => policyConfigurationRemoteSource.geAddPolicyConfiguration(
+              policyConfiguration: policyConfiguration))
+          .thenThrow(const ApiFailure.serverTimeout());
+
+      final result = await policyConfigurationRepo.getAddPolicy(
+          policyConfigurationItems: policyConfiguration,
+          policyConfigurationList: policyConfigurationListMock);
+
       expect(
         result.isLeft(),
         true,
