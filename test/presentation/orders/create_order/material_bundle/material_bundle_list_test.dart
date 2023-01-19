@@ -124,7 +124,11 @@ void main() {
           bundleCode: '0010276811',
           bundleInformation: mockBundleInfoList,
         ),
-        materialInfos: <MaterialInfo>[],
+        materialInfos: <MaterialInfo>[
+          MaterialInfo.empty().copyWith(bundles: [
+            Bundle.empty().copyWith(bundleName: BundleName('fake-bundle'))
+          ])
+        ],
       ),
       BundleAggregate(
           bundle: Bundle(
@@ -179,6 +183,8 @@ void main() {
     when(() => customerCodeBlocMock.state)
         .thenReturn(CustomerCodeState.initial());
     when(() => shipToCodeBLocMock.state).thenReturn(ShipToCodeState.initial());
+    when(() => materialPriceDetailMockBloc.state)
+        .thenReturn(MaterialPriceDetailState.initial());
     when(() => salesOrgBlocMock.state).thenReturn(
       SalesOrgState.initial().copyWith(
         salesOrganisation: SalesOrganisation.empty().copyWith(
@@ -220,6 +226,9 @@ void main() {
           ),
           BlocProvider<MaterialBundleListBloc>(
             create: (context) => materialBundleListBloc,
+          ),
+          BlocProvider<MaterialPriceDetailBloc>(
+            create: (context) => materialPriceDetailMockBloc,
           ),
           if (additionalProviders.isNotEmpty) ...additionalProviders,
         ],
@@ -275,13 +284,53 @@ void main() {
           bundleList: mockBundleItems,
           nextPageIndex: 1,
           canLoadMore: true,
+          apiFailureOrSuccessOption: optionOf(
+            const Right(
+              'No Error',
+            ),
+          ),
+        ),
+      );
+      whenListen(
+          materialBundleListBloc,
+          Stream.fromIterable([
+            materialBundleListBloc.state,
+            materialBundleListBloc.state.copyWith(
+              apiFailureOrSuccessOption: none()
+            )
+          ]));
+      final handle = tester.ensureSemantics();
+
+      await tester.pumpWidget(getScopedWidget(const MaterialBundleListPage()));
+      final scrollWidget = find.byWidgetPredicate((w) => w is ScrollList);
+      expect(scrollWidget, findsOneWidget);
+      await tester.pump(const Duration(seconds: 1));
+
+      final materialBundleOption = find.byKey(Key(
+          'materialBundleOption${mockBundleItems.first.bundle.bundleCode}'));
+      expect(materialBundleOption, findsOneWidget);
+
+      await tester.drag(
+        materialBundleOption,
+        const Offset(0.0, 1000.0),
+      );
+      await tester.pump(const Duration(seconds: 1));
+
+      expect(
+        tester.getSemantics(find.byType(RefreshProgressIndicator)),
+        matchesSemantics(
+          label: 'Refresh',
         ),
       );
 
-      await tester.pumpWidget(getScopedWidget(const MaterialBundleListPage()));
-      await tester.pump();
-      final scrollWidget = find.byWidgetPredicate((w) => w is ScrollList);
-      expect(scrollWidget, findsOneWidget);
+      await tester
+          .pump(const Duration(seconds: 1)); // finish the scroll animation
+      await tester.pump(
+          const Duration(seconds: 1)); // finish the indicator settle animation
+      await tester.pump(
+          const Duration(seconds: 1)); // finish the indicator hide animation
+
+      handle.dispose();
     });
 
     testWidgets(

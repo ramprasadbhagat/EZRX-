@@ -78,6 +78,7 @@ class _PriceSheetState extends State<PriceSheet> {
                     SizedBox(
                       width: 150.0,
                       child: TextFormField(
+                        key: const Key('priceOverrideTextFormField'),
                         decoration: InputDecoration(
                           prefixText: isVN
                               ? null

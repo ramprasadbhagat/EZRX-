@@ -2,8 +2,16 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_localization_loader/easy_localization_loader.dart';
+import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
+import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
+import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/material_filter.dart';
@@ -21,10 +29,40 @@ class MockMaterialFilterBloc
     extends MockBloc<MaterialFilterEvent, MaterialFilterState>
     implements MaterialFilterBloc {}
 
+class MockMaterialListBloc
+    extends MockBloc<MaterialListEvent, MaterialListState>
+    implements MaterialListBloc {}
+
+class MockUserBloc extends MockBloc<UserEvent, UserState> implements UserBloc {}
+
+class MockSalesOrgBloc extends MockBloc<SalesOrgEvent, SalesOrgState>
+    implements SalesOrgBloc {}
+
+class MockCustomerCodeBloc
+    extends MockBloc<CustomerCodeEvent, CustomerCodeState>
+    implements CustomerCodeBloc {}
+
+class MockShipToCodeBloc extends MockBloc<ShipToCodeEvent, ShipToCodeState>
+    implements ShipToCodeBloc {}
+
+class MockEligibilityBloc extends MockBloc<EligibilityEvent, EligibilityState>
+    implements EligibilityBloc {}
+
+class MockOrderDocumentTypeBloc
+    extends MockBloc<OrderDocumentTypeEvent, OrderDocumentTypeState>
+    implements OrderDocumentTypeBloc {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late MaterialFilterBloc materialfilterBlocMock;
   late AppRouter autoRouterMock;
+  late MockMaterialListBloc materialListBloc;
+  late MockCustomerCodeBloc customerCodeBloc;
+  late MockEligibilityBloc eligibilityBloc;
+  late MockSalesOrgBloc salesOrgBloc;
+  late MockShipToCodeBloc shipToCodeBloc;
+  late MockUserBloc userBloc;
+  late MockOrderDocumentTypeBloc orderDocumentTypeBloc;
 
   setUpAll(() async {
     setupLocator();
@@ -34,6 +72,26 @@ void main() {
     setUp(() {
       materialfilterBlocMock = MockMaterialFilterBloc();
       autoRouterMock = locator<AppRouter>();
+      materialListBloc = MockMaterialListBloc();
+      salesOrgBloc = MockSalesOrgBloc();
+      shipToCodeBloc = MockShipToCodeBloc();
+      userBloc = MockUserBloc();
+      eligibilityBloc = MockEligibilityBloc();
+      customerCodeBloc = MockCustomerCodeBloc();
+      orderDocumentTypeBloc = MockOrderDocumentTypeBloc();
+
+      when(() => materialfilterBlocMock.state)
+          .thenReturn(MaterialFilterState.initial());
+      when(() => salesOrgBloc.state).thenReturn(SalesOrgState.initial());
+      when(() => materialListBloc.state)
+          .thenReturn(MaterialListState.initial());
+      when(() => shipToCodeBloc.state).thenReturn(ShipToCodeState.initial());
+      when(() => userBloc.state).thenReturn(UserState.initial());
+      when(() => eligibilityBloc.state).thenReturn(EligibilityState.initial());
+      when(() => customerCodeBloc.state)
+          .thenReturn(CustomerCodeState.initial());
+      when(() => orderDocumentTypeBloc.state)
+          .thenReturn(OrderDocumentTypeState.initial());
     });
 
     Widget getScopedWidget(Widget child) {
@@ -52,6 +110,17 @@ void main() {
           providers: [
             BlocProvider<MaterialFilterBloc>(
                 create: ((context) => materialfilterBlocMock)),
+            BlocProvider<MaterialListBloc>(
+                create: ((context) => materialListBloc)),
+            BlocProvider<CustomerCodeBloc>(
+                create: ((context) => customerCodeBloc)),
+            BlocProvider<UserBloc>(create: ((context) => userBloc)),
+            BlocProvider<SalesOrgBloc>(create: ((context) => salesOrgBloc)),
+            BlocProvider<ShipToCodeBloc>(create: ((context) => shipToCodeBloc)),
+            BlocProvider<EligibilityBloc>(
+                create: ((context) => eligibilityBloc)),
+            BlocProvider<OrderDocumentTypeBloc>(
+                create: ((context) => orderDocumentTypeBloc)),
           ],
           child: child,
         ),
@@ -73,10 +142,11 @@ void main() {
       )));
     });
 
-    testWidgets('Material Filter Page Body Content', (tester) async {
+    testWidgets('Material Filter Page Body Content with valid search input',
+        (tester) async {
       final expectedState = [
         MaterialFilterState.initial().copyWith(
-          apiFailureOrSuccessOption: none(),
+          apiFailureOrSuccessOption: optionOf(const Right('success')),
           materialFilter: const MaterialFilter(
               uniqueItemBrand: [],
               uniquePrincipalName: [
@@ -86,8 +156,8 @@ void main() {
               uniqueTherapeuticClass: []),
         )
       ];
-      when(() => materialfilterBlocMock.state)
-          .thenReturn(MaterialFilterState.initial());
+      when(() => materialListBloc.state).thenReturn(MaterialListState.initial()
+          .copyWith(searchKey: SearchKey.search('mat')));
       whenListen(materialfilterBlocMock, Stream.fromIterable(expectedState));
       await tester.pumpWidget(getScopedWidget(const MaterialFilterPage(
         filterType: MaterialFilterType.principal,
@@ -95,6 +165,72 @@ void main() {
       await tester.pump();
       final materialFilterList = find.byKey(const Key('materialFilterPage'));
       expect(materialFilterList, findsOneWidget);
+
+      final dynamic widgetsAppState = tester.state(find.byType(WidgetsApp));
+      final willPopCalled = await widgetsAppState.didPopRoute();
+      await tester.pump();
+
+      expect(willPopCalled, false);
+    });
+
+    testWidgets(
+        'Material Filter Page Body Content with invalid search input but selected and filter material are same',
+        (tester) async {
+      final expectedState = [
+        MaterialFilterState.initial().copyWith(
+          apiFailureOrSuccessOption:
+              optionOf(const Left(ApiFailure.other('Fake-error'))),
+        ),
+        MaterialFilterState.initial().copyWith(
+          apiFailureOrSuccessOption: none(),
+        ),
+      ];
+      when(() => materialListBloc.state).thenReturn(MaterialListState.initial()
+          .copyWith(searchKey: SearchKey.search('at')));
+      whenListen(materialfilterBlocMock, Stream.fromIterable(expectedState));
+      await tester.pumpWidget(getScopedWidget(const MaterialFilterPage(
+        filterType: MaterialFilterType.principal,
+      )));
+      await tester.pump();
+      final materialFilterList = find.byKey(const Key('materialFilterPage'));
+      expect(materialFilterList, findsOneWidget);
+
+      final dynamic widgetsAppState = tester.state(find.byType(WidgetsApp));
+      final willPopCalled = await widgetsAppState.didPopRoute();
+      await tester.pump();
+
+      expect(willPopCalled, false);
+    });
+
+    testWidgets(
+        'Material Filter Page Body Content with invalid search input but selected and filter material are different',
+        (tester) async {
+      final expectedState = [
+        MaterialFilterState.initial().copyWith(
+            selectedMaterialFilter: MaterialFilter.empty().copyWith(
+          uniquePrincipalName: [
+            'GSK Consumer Healthcare',
+            'Pfizer PFE Private Limited test'
+          ],
+        )),
+      ];
+      when(() => materialListBloc.state).thenReturn(MaterialListState.initial()
+          .copyWith(
+              searchKey: SearchKey.search('at'),
+              selectedFilters: MaterialFilter.empty()));
+      whenListen(materialfilterBlocMock, Stream.fromIterable(expectedState));
+      await tester.pumpWidget(getScopedWidget(const MaterialFilterPage(
+        filterType: MaterialFilterType.principal,
+      )));
+      await tester.pump();
+      final materialFilterList = find.byKey(const Key('materialFilterPage'));
+      expect(materialFilterList, findsOneWidget);
+
+      final dynamic widgetsAppState = tester.state(find.byType(WidgetsApp));
+      final willPopCalled = await widgetsAppState.didPopRoute();
+      await tester.pump();
+
+      expect(willPopCalled, false);
     });
 
     testWidgets('Material Filter Page Select Filter Options', (tester) async {
@@ -276,6 +412,23 @@ void main() {
           find.byKey(const Key('materialFilterSearchField')), 'RandomKey');
       await tester.pump();
       expect(find.text('RandomKey'), findsOneWidget);
+    });
+
+    testWidgets('Material Filter Page loading test', (tester) async {
+      whenListen(
+          materialfilterBlocMock,
+          Stream.fromIterable([
+            MaterialFilterState.initial().copyWith(
+              isFetching: true,
+            )
+          ]));
+      await tester.pumpWidget(getScopedWidget(const MaterialFilterPage(
+        filterType: MaterialFilterType.principal,
+      )));
+      await tester.pump();
+
+      final loaderImage = find.byKey(const Key('loaderImage'));
+      expect(loaderImage, findsOneWidget);
     });
   });
 }

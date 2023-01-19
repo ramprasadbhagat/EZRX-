@@ -17,10 +17,12 @@ import 'package:ezrxmobile/application/order/order_document_type/order_document_
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
@@ -290,6 +292,14 @@ void main() {
               isFetching: false,
               apiFailureOrSuccessOption:
                   optionOf(const Left(ApiFailure.other('Fake-error')))));
+      whenListen(
+          covidMaterialListBlocMock,
+          Stream.fromIterable([
+            CovidMaterialListState.initial().copyWith(
+              apiFailureOrSuccessOption: none(),
+            ),
+            covidMaterialListBlocMock.state,
+          ]));
       await tester.pumpWidget(getScopedWidget(const MaterialRoot()));
 
       await tester.tap(find.text('COVID-19'));
@@ -321,15 +331,20 @@ void main() {
     });
 
     testWidgets('Covid Material List Body Content IsNotEmpty', (tester) async {
-      when(() => covidMaterialListBlocMock.state)
-          .thenReturn(CovidMaterialListState.initial().copyWith(
-        apiFailureOrSuccessOption: none(),
-        isFetching: false,
-        nextPageIndex: 2,
-        materialList: <MaterialInfo>[
-          fakeMaterialInfo,
-        ],
-      ));
+      whenListen(
+        covidMaterialListBlocMock,
+        Stream.fromIterable([
+          CovidMaterialListState.initial().copyWith(
+            apiFailureOrSuccessOption: none(),
+          ),
+          CovidMaterialListState.initial().copyWith(
+              isFetching: false,
+              nextPageIndex: 2,
+              materialList: <MaterialInfo>[
+                fakeMaterialInfo,
+              ],
+              apiFailureOrSuccessOption: optionOf(const Right('success')))
+        ]));
       await tester.pumpWidget(getScopedWidget(const MaterialRoot()));
       await tester.tap(find.text('COVID-19'));
       await tester.pump();
@@ -526,6 +541,14 @@ void main() {
           ],
         ),
       );
+      whenListen(
+          covidMaterialListBlocMock,
+          Stream.fromIterable([
+            CovidMaterialListState.initial().copyWith(
+              apiFailureOrSuccessOption: optionOf(const Right('success')),
+            ),
+            covidMaterialListBlocMock.state
+          ]));
 
       final handle = tester.ensureSemantics();
 
@@ -670,6 +693,189 @@ void main() {
       verify(
         () => mockAddToCartStub.addToCart(),
       ).called(1);
+    });
+
+    testWidgets('Test enableDefaultMD true and enableIRN true enableGMC true',
+        (tester) async {
+      when(() => covidMaterialListBlocMock.state).thenReturn(
+        CovidMaterialListState.initial().copyWith(
+          isFetching: false,
+          nextPageIndex: 2,
+          materialList: [
+            fakeMaterialInfo.copyWith(
+              hasValidTenderContract: true,
+              defaultMaterialDescription: 'test',
+              itemRegistrationNumber: 'test',
+              governmentMaterialCode: 'test',
+            ),
+          ],
+        ),
+      );
+
+      when(() => salesOrgBlocMock.state).thenReturn(
+        SalesOrgState.initial().copyWith(
+          configs: SalesOrganisationConfigs.empty().copyWith(
+            enableDefaultMD: true,
+            enableIRN: true,
+            enableGMC: true,
+          ),
+        ),
+      );
+      await tester.pumpWidget(
+        getScopedWidget(
+          CovidMaterialListPage(addToCart: ({
+            required BuildContext context,
+            required PriceAggregate priceAggregate,
+            required bool isCovid19Tab,
+          }) {
+            mockAddToCartStub.addToCart();
+          }),
+        ),
+      );
+      await tester.pump();
+    });
+
+    testWidgets('Test Show Material Price Label', (tester) async {
+      when(() => covidMaterialListBlocMock.state).thenReturn(
+        CovidMaterialListState.initial().copyWith(
+          isFetching: false,
+          nextPageIndex: 2,
+          materialList: [
+            fakeMaterialInfo,
+          ],
+        ),
+      );
+      when(() => materialPriceBlocMock.state).thenReturn(
+        MaterialPriceState.initial().copyWith(
+          isFetching: true,
+          materialPrice: {},
+        ),
+      );
+      final expectedState = [
+        MaterialPriceState.initial().copyWith(
+          isFetching: false,
+          materialPrice: {
+            fakeMaterialInfo.materialNumber: Price.empty().copyWith(
+              materialNumber: fakeMaterialInfo.materialNumber,
+              lastPrice: fakeMaterialPrice,
+              finalPrice: fakeMaterialPrice,
+            ),
+          },
+        ),
+      ];
+
+      when(() => salesOrgBlocMock.state).thenReturn(
+        SalesOrgState.initial().copyWith(
+          configs: SalesOrganisationConfigs.empty().copyWith(
+            enableDefaultMD: true,
+            enableIRN: true,
+            enableGMC: true,
+            enableVat: true,
+            enableListPrice: true,
+            currency: Currency('vnd'),
+            enableTaxDisplay: true,
+          ),
+        ),
+      );
+      whenListen(materialPriceBlocMock, Stream.fromIterable(expectedState));
+
+      await tester.pumpWidget(
+        getScopedWidget(
+          CovidMaterialListPage(addToCart: ({
+            required BuildContext context,
+            required PriceAggregate priceAggregate,
+            required bool isCovid19Tab,
+          }) {
+            mockAddToCartStub.addToCart();
+          }),
+        ),
+      );
+      await tester.pump();
+    });
+
+    testWidgets('Test SearchBar onFieldSumitted test', (tester) async {
+      when(() => covidMaterialListBlocMock.state).thenReturn(
+        CovidMaterialListState.initial().copyWith(
+          nextPageIndex: 2,
+          isFetching: false,
+          searchKey: SearchKey('23168452'),
+          materialList: [
+            fakeMaterialInfo,
+            fakeMaterialInfo.copyWith(
+              materialNumber: MaterialNumber('000000000023168452'),
+            ),
+          ],
+        ),
+      );
+      when(() => salesOrgBlocMock.state).thenReturn(
+        SalesOrgState.initial().copyWith(
+          salesOrganisation: SalesOrganisation.empty().copyWith(
+            salesOrg: SalesOrg('2601'),
+          ),
+        ),
+      );
+      whenListen(
+          covidMaterialListBlocMock,
+          Stream.fromIterable([
+            CovidMaterialListState.initial(),
+            covidMaterialListBlocMock.state,
+          ]));
+      await tester.pumpWidget(
+        getScopedWidget(
+          CovidMaterialListPage(addToCart: ({
+            required BuildContext context,
+            required PriceAggregate priceAggregate,
+            required bool isCovid19Tab,
+          }) {
+            mockAddToCartStub.addToCart();
+          }),
+        ),
+      );
+      await tester.pump();
+
+      final findTextField = find.byKey(const Key('materialSearchField'));
+      await tester.enterText(findTextField, '23168452');
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      await tester.pump(const Duration(seconds: 3));
+      expect(find.text('23168452'), findsNWidgets(2));
+    });
+
+    testWidgets(
+      'Search input must be greater than 2 characters. with clear icon tapped',
+        (WidgetTester tester) async {
+      final expectedCustomerCodeListStates = [
+        CovidMaterialListState.initial().copyWith(isFetching: true),
+        CovidMaterialListState.initial()
+            .copyWith(isFetching: false, searchKey: SearchKey.search('')),
+      ];
+
+      whenListen(covidMaterialListBlocMock,
+          Stream.fromIterable(expectedCustomerCodeListStates));
+      await tester.pumpWidget(
+        getScopedWidget(
+          CovidMaterialListPage(addToCart: ({
+            required BuildContext context,
+            required PriceAggregate priceAggregate,
+            required bool isCovid19Tab,
+          }) {
+            mockAddToCartStub.addToCart();
+          }),
+        ),
+      );
+      await tester.pumpAndSettle(const Duration(seconds: 3));
+
+      final textField = find.byType(TextFormField);
+
+      await tester.enterText(textField, '12');
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      expect(textField, findsOneWidget);
+      await tester.pump(const Duration(seconds: 2));
+
+      expect(find.text('Search input must be greater than 2 characters.'),
+          findsOneWidget);
+      final iconsClear = find.byIcon(Icons.clear);
+      expect(iconsClear, findsOneWidget);
+      await tester.tap(iconsClear);
     });
   });
 }

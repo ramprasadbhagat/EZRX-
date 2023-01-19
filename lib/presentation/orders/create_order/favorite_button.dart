@@ -14,9 +14,7 @@ class FavoriteButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<FavouriteBloc, FavouriteState>(
-      listenWhen: (previous, current) => previous != current,
-      listener: (context, state) {},
+    return BlocBuilder<FavouriteBloc, FavouriteState>(
       buildWhen: (previous, current) => previous != current,
       builder: (context, state) {
         final favourite = state.favouriteItems.firstWhere(

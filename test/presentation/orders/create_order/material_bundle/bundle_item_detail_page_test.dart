@@ -13,6 +13,7 @@ import 'package:ezrxmobile/application/order/material_bundle_list/material_bundl
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/core/aggregate/bundle_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle_info.dart';
@@ -93,6 +94,7 @@ void main() {
 
   final mockMaterialInfo = MaterialInfo.empty().copyWith(
     materialNumber: MaterialNumber('mock_material_number'),
+    defaultMaterialDescription: 'testing',
   );
 
   final mockBundleAggregate = BundleAggregate(
@@ -191,6 +193,43 @@ void main() {
       );
     }
 
+    testWidgets('Page Loading', (tester) async {
+      when((() => materialPriceDetailMockBloc.state))
+          .thenReturn(MaterialPriceDetailState.initial().copyWith(
+        isFetching: true,
+      ));
+      whenListen(
+          materialPriceDetailMockBloc,
+          Stream.fromIterable([
+            MaterialPriceDetailState.initial().copyWith(
+              isFetching: true,
+            ),
+            MaterialPriceDetailState.initial().copyWith(
+              isFetching: false,
+            )
+          ]));
+      await tester.pumpWidget(
+        getScopedWidget(
+          BundleItemDetailPage(
+            bundleAggregate: mockBundleAggregate,
+          ),
+        ),
+      );
+      final pageTitle = mockBundleAggregate.bundle.bundleCode;
+      final pageTitleWidget = find.text('#$pageTitle');
+
+      final bundleItemDetailPage =
+          find.byKey(const Key('BundleItemDetailPage'));
+
+      expect(pageTitleWidget, findsOneWidget);
+      expect(bundleItemDetailPage, findsOneWidget);
+      final itemLoading = find.byKey(const Key('itemLoading'));
+      expect(itemLoading, findsOneWidget);
+      final buttonLoading = find.byKey(const Key('buttonLoading'));
+      expect(buttonLoading, findsOneWidget);
+      await tester.tap(buttonLoading);
+    });
+
     testWidgets('Page Initialized', (tester) async {
       await tester.pumpWidget(
         getScopedWidget(
@@ -216,6 +255,11 @@ void main() {
 
     testWidgets('Clicking on + button increases bundle quantity',
         (tester) async {
+      when(() => salesOrgMockBloc.state)
+          .thenReturn(SalesOrgState.initial().copyWith(
+              configs: SalesOrganisationConfigs.empty().copyWith(
+        enableDefaultMD: true,
+      )));
       await tester.pumpWidget(
         getScopedWidget(
           BundleItemDetailPage(
@@ -293,6 +337,23 @@ void main() {
 
       await tester.tap(addToCartButton);
       await tester.pump(const Duration(seconds: 2));
+    });
+
+    testWidgets('Test text field changed', (tester) async {
+      await tester.pumpWidget(
+        getScopedWidget(
+          BundleItemDetailPage(
+            bundleAggregate: mockBundleAggregate,
+          ),
+        ),
+      );
+
+      final quantityTextWidget = find.byKey(Key(
+          '${mockBundleAggregate.bundle.bundleCode}${mockMaterialInfo.materialNumber.getValue()}'));
+
+      await tester.enterText(quantityTextWidget, '5');
+      await tester.pump();
+      expect(find.text('5'), findsAtLeastNWidgets(1));
     });
 
     // testWidgets(

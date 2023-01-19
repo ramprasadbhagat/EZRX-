@@ -70,7 +70,6 @@ class _UpdateCartState extends State<UpdateCart> {
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: BlocBuilder<AddToCartBloc, AddToCartState>(
-            buildWhen: (previous, current) => previous != current,
             builder: (context, state) {
               if (!state.cartItem.materialInfo.hasValidTenderContract) {
                 context.read<TenderContractBloc>().add(

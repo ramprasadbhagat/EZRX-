@@ -113,6 +113,7 @@ class _ExpandedBonusLabelState extends State<ExpandedBonusLabel> {
                 ),
               ),
               InkWell(
+                key: const Key('Expandable'),
                 onTap: () => setState(() => isExpanded = !isExpanded),
                 child: Icon(
                   isExpanded ? Icons.remove : Icons.add,

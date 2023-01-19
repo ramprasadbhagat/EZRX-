@@ -15,10 +15,12 @@ class TenderContractItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return custom.ExpansionTile(
+      key: Key(tenderContract.contractNumber.displayTenderContractNumber),
       threeLineTitle: true,
       leading: BlocBuilder<TenderContractBloc, TenderContractState>(
         builder: (context, state) {
           return GestureDetector(
+            key: Key('tenderContractIcon${tenderContract.contractNumber.displayTenderContractNumber}'),
             onTap: () => selectTenderContract(context),
             child: Container(
               height: 35,
@@ -47,7 +49,10 @@ class TenderContractItem extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 10),
-          child: TenderContractBody(tenderContract: tenderContract),
+          child: TenderContractBody(
+            tenderContract: tenderContract,
+            key: Key('tenderContractBody${tenderContract.contractNumber.displayTenderContractNumber}'),
+          ),
         ),
       ],
     );

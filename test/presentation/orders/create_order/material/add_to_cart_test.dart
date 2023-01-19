@@ -1,9 +1,11 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
+import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
@@ -12,12 +14,17 @@ import 'package:ezrxmobile/application/order/tender_contract/tender_contract_blo
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
+import 'package:ezrxmobile/domain/order/entities/price_bonus.dart';
 import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
+import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/orders/create_order/cart_item_bonus_detail_widget.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/add_to_cart.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
@@ -56,6 +63,9 @@ class TenderContractBlocMock
 class FavoriteMockBloc extends MockBloc<FavouriteEvent, FavouriteState>
     implements FavouriteBloc {}
 
+class AuthBlocBlocMock extends MockBloc<AuthEvent, AuthState>
+    implements AuthBloc {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late SalesOrgBloc salesOrgBlocMock;
@@ -67,6 +77,7 @@ void main() {
   final AddToCartBloc addToCartBlocMock = AddToCartBlocMock();
   late TenderContractBloc tenderContractBlocMock;
   late FavouriteBloc favouriteMockBloc;
+  late AuthBlocBlocMock authBlocBlocMock;
 
   final materialInfo = MaterialInfo.empty().copyWith(
     materialNumber: MaterialNumber('000000000023168451'),
@@ -106,6 +117,7 @@ void main() {
       shipToCodeMockBloc = ShipToCodeMockBloc();
       tenderContractBlocMock = TenderContractBlocMock();
       favouriteMockBloc = FavoriteMockBloc();
+      authBlocBlocMock = AuthBlocBlocMock();
 
       autoRouterMock = locator<AppRouter>();
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
@@ -119,6 +131,7 @@ void main() {
       when(() => tenderContractBlocMock.state)
           .thenReturn(TenderContractState.initial());
       when(() => favouriteMockBloc.state).thenReturn(FavouriteState.initial());
+      when(() => authBlocBlocMock.state).thenReturn(const AuthState.initial());
     });
 
     Widget getScopedWidget(Widget child) {
@@ -148,6 +161,7 @@ void main() {
             BlocProvider<TenderContractBloc>(
                 create: (context) => tenderContractBlocMock),
             BlocProvider<FavouriteBloc>(create: (context) => favouriteMockBloc),
+            BlocProvider<AuthBloc>(create: (context) => authBlocBlocMock),
           ],
           child: child,
         ),
@@ -164,6 +178,11 @@ void main() {
           ),
         ),
       );
+      whenListen(
+          addToCartBlocMock,
+          Stream.fromIterable([
+            addToCartBlocMock.state,
+          ]));
 
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial()
           .copyWith(
@@ -181,6 +200,140 @@ void main() {
           priceAggregate.price.tiers.first.items.length,
         ),
       );
+    });
+
+    testWidgets(
+        'Add to Cart zmg Discount Material quantity change one quantity added',
+        (tester) async {
+      when(() => addToCartBlocMock.state).thenReturn(
+        AddToCartState.initial().copyWith(
+          cartItem: priceAggregate.copyWith(
+              price: priceAggregate.price.copyWith(
+                zmgDiscount: true,
+              ),
+              materialInfo: MaterialInfo.empty().copyWith(
+                  hasValidTenderContract: true,
+                  materialNumber: MaterialNumber('0000001234'))),
+        ),
+      );
+
+      when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial()
+          .copyWith(
+              salesOrganisation: SalesOrganisation.empty()
+                  .copyWith(salesOrg: SalesOrg('SG'))));
+      await tester.pumpWidget(getScopedWidget(const AddToCart(
+        isCovid19Tab: false,
+      )));
+      await tester.pump();
+
+      final cartItemAdd = find.byKey(const Key('cartItemAdd'));
+      expect(cartItemAdd, findsOneWidget);
+      await tester.tap(cartItemAdd);
+      await tester.pump();
+      expect(find.text('2'), findsAtLeastNWidgets(1));
+    });
+
+    testWidgets(
+        'Add to Cart zmg Discount Material quantity change quantity changed and one quantity removed',
+        (tester) async {
+      when(() => addToCartBlocMock.state).thenReturn(
+        AddToCartState.initial().copyWith(
+          cartItem: priceAggregate.copyWith(
+              price: priceAggregate.price.copyWith(
+                zmgDiscount: false,
+              ),
+              materialInfo: MaterialInfo.empty().copyWith(
+                  hasValidTenderContract: true,
+                  materialNumber: MaterialNumber('0000001234'))),
+        ),
+      );
+
+      when(() => tenderContractBlocMock.state).thenReturn(
+          TenderContractState.initial().copyWith(
+              selectedTenderContract: TenderContract.empty().copyWith(
+                  contractNumber: TenderContractNumber.tenderContractItemNumber(
+                      '0000123'))));
+      whenListen(
+          tenderContractBlocMock,
+          Stream.fromIterable([
+            tenderContractBlocMock.state,
+          ]));
+
+      when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial()
+          .copyWith(
+              salesOrganisation: SalesOrganisation.empty()
+                  .copyWith(salesOrg: SalesOrg('SG'))));
+      await tester.pumpWidget(getScopedWidget(const AddToCart(
+        isCovid19Tab: false,
+      )));
+      await tester.pump();
+
+      final cartItemText = find.byKey(const Key('item'));
+      expect(cartItemText, findsOneWidget);
+      await tester.enterText(cartItemText, '12');
+      await tester.pump();
+      expect(find.text('12'), findsAtLeastNWidgets(1));
+
+      final cartItemDelete = find.byKey(const Key('cartItemDelete'));
+      expect(cartItemDelete, findsOneWidget);
+      await tester.tap(cartItemDelete);
+      await tester.pump();
+      expect(find.text('11'), findsAtLeastNWidgets(1));
+    });
+
+    testWidgets('Add to Cart bonus material', (tester) async {
+      when(() => addToCartBlocMock.state).thenReturn(
+        AddToCartState.initial().copyWith(
+          cartItem: priceAggregate.copyWith(
+            materialInfo: MaterialInfo.empty().copyWith(
+                hasValidTenderContract: true,
+                materialNumber: MaterialNumber('0000001234')),
+            price: priceAggregate.price.copyWith(zmgDiscount: true, bonuses: [
+              PriceBonus.empty().copyWith(items: [
+                PriceBonusItem.empty()
+                    .copyWith(qualifyingQuantity: 2, bonusMaterials: [
+                  BonusMaterial.empty().copyWith(
+                      bonusQuantity: 2,
+                      materialNumber: MaterialNumber('000001256')),
+                ]),
+                PriceBonusItem.empty()
+                    .copyWith(qualifyingQuantity: 4, bonusMaterials: [
+                  BonusMaterial.empty().copyWith(
+                      bonusQuantity: 4,
+                      materialNumber: MaterialNumber('000001257')),
+                ]),
+              ])
+            ]),
+          ),
+        ),
+      );
+      whenListen(
+          addToCartBlocMock,
+          Stream.fromIterable([
+            addToCartBlocMock.state,
+          ]));
+
+      when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial()
+          .copyWith(
+              salesOrganisation: SalesOrganisation.empty()
+                  .copyWith(salesOrg: SalesOrg('SG'))));
+      await tester.pumpWidget(getScopedWidget(const AddToCart(
+        isCovid19Tab: false,
+      )));
+      await tester.pump();
+
+      final bonusDetailsWidget = find.byType(BonusDetails);
+      expect(bonusDetailsWidget, findsOneWidget);
+      await tester.pump();
+
+      final bonusLable = find.byKey(const Key('bonusLable'));
+      expect(bonusLable, findsAtLeastNWidgets(1));
+
+      final expandable = find.byKey(const Key('Expandable'));
+      expect(expandable, findsAtLeastNWidgets(1));
+      await tester.tap(expandable.first);
+      await tester.pump();
+      expect(find.text('1256'), findsOneWidget);
     });
 
     testWidgets('Add to Cart Tire Discount Material', (tester) async {
@@ -319,5 +472,135 @@ void main() {
     //   await tester.tap(button);
     //   await tester.pump(const Duration(seconds: 1));
     // });
+
+    testWidgets('Add to Cart select tender contract fail to fetch',
+        (tester) async {
+      final newList = 
+          priceAggregate.copyWith(
+            tenderContract: TenderContract.empty().copyWith(
+              contractNumber:
+                  TenderContractNumber.tenderContractItemNumber('0000001234'),
+              tenderOrderReason: TenderContractReason('730'),
+            ),
+          );
+        when(() => cartBlocMock.state).thenReturn(
+          CartState.initial().copyWith(
+            cartItems: [CartItem.material(newList)],
+            isFetching: false,
+          ),
+        );
+      when(() => addToCartBlocMock.state).thenReturn(
+        AddToCartState.initial().copyWith(
+          cartItem: priceAggregate.copyWith(
+            price: priceAggregate.price.copyWith(
+              zmgDiscount: true,
+            ),
+            materialInfo: MaterialInfo.empty().copyWith(
+                hasValidTenderContract: true,
+                materialNumber: MaterialNumber('0000001234')),
+          ),
+        ),
+      );
+      when(() => tenderContractBlocMock.state)
+          .thenReturn(TenderContractState.initial().copyWith(
+        selectedTenderContract: TenderContract.empty().copyWith(
+            contractNumber:
+                TenderContractNumber.tenderContractItemNumber('0000123'),
+            tenderOrderReason: TenderContractReason('750')
+        ),
+        apiFailureOrSuccessOption:
+            optionOf(const Left(ApiFailure.other('authentication failed'))),
+        isFetching: true,
+        
+      ));
+      whenListen(
+          tenderContractBlocMock,
+          Stream.fromIterable([
+            tenderContractBlocMock.state,
+          ]));
+
+      when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial()
+          .copyWith(
+              salesOrganisation: SalesOrganisation.empty()
+                  .copyWith(salesOrg: SalesOrg('SG'))));
+      await tester.pumpWidget(getScopedWidget(const AddToCart(
+        isCovid19Tab: false,
+      )));
+      await tester.pump();
+      final tirePriceLable = find.byKey(const Key('priceTierLable'));
+
+      expect(
+        tirePriceLable,
+        findsNWidgets(
+          priceAggregate.price.tiers.first.items.length,
+        ),
+      );
+    });
+
+    testWidgets('Add to Cart select tender contract success to fetch',
+        (tester) async {
+      when(() => addToCartBlocMock.state).thenReturn(
+        AddToCartState.initial().copyWith(
+          cartItem: priceAggregate.copyWith(
+            price: priceAggregate.price.copyWith(
+              zmgDiscount: true,
+            ),
+            materialInfo: MaterialInfo.empty().copyWith(
+                hasValidTenderContract: true,
+                materialNumber: MaterialNumber('0000001234')),
+          ),
+        ),
+      );
+      when(() => tenderContractBlocMock.state).thenReturn(
+          TenderContractState.initial().copyWith(
+              selectedTenderContract: TenderContract.empty().copyWith(
+                  contractNumber:
+                      TenderContractNumber.tenderContractItemNumber('0000123')),
+              apiFailureOrSuccessOption: optionOf(const Right('success')),
+              isFetching: false,
+              tenderContractList: [
+            TenderContract.empty().copyWith(
+              contractNumber:
+                  TenderContractNumber.tenderContractItemNumber('0000123'),
+            ),
+            TenderContract.empty().copyWith(
+                contractNumber:
+                    TenderContractNumber.tenderContractItemNumber('0000125'),
+                tenderOrderReason: TenderContractReason('730'))
+          ]));
+      whenListen(
+          tenderContractBlocMock,
+          Stream.fromIterable([
+            tenderContractBlocMock.state,
+          ]));
+
+      when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial()
+          .copyWith(
+              salesOrganisation: SalesOrganisation.empty()
+                  .copyWith(salesOrg: SalesOrg('SG'))));
+      await tester.pumpWidget(getScopedWidget(const AddToCart(
+        isCovid19Tab: false,
+      )));
+
+      final tenderContract = find.byKey(Key(tenderContractBlocMock
+          .state
+          .tenderContractList
+          .first
+          .contractNumber
+          .displayTenderContractNumber));
+      expect(tenderContract, findsOneWidget);
+      await tester.tap(tenderContract);
+      await tester.pump(const Duration(seconds: 1));
+
+      final tenderContractBody = find.byKey(Key(
+          'tenderContractBody${tenderContractBlocMock.state.tenderContractList.first.contractNumber.displayTenderContractNumber}'));
+      expect(tenderContractBody, findsOneWidget);
+
+      final tenderContractItem = find.byKey(Key(
+          'tenderContractIcon${tenderContractBlocMock.state.tenderContractList.last.contractNumber.displayTenderContractNumber}'));
+      expect(tenderContractItem, findsOneWidget);
+      await tester.tap(tenderContractItem);
+      await tester.pump();
+    });
   });
 }

@@ -2,6 +2,8 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
@@ -91,17 +93,17 @@ void main() {
 
     testWidgets('Change Price Test', (tester) async {
       await tester.pumpWidget(getScopedWidget(PriceSheet(
-        item: mockPriceAggregates.first,
+        item: mockPriceAggregates.first.copyWith(
+          salesOrgConfig: SalesOrganisationConfigs.empty().copyWith(
+            currency: Currency('vnd')
+          )
+        ),
       )));
 
-      final overridePriceButton =
-          find.byKey(const Key('priceOverrideSubmitButton'));
-      final formField = find.byType(TextFormField);
-      final formFieldWidget = tester.widget<TextFormField>(formField);
-
-      formFieldWidget.controller?.text = '0.11';
-
-      await tester.tap(overridePriceButton);
+      final priceOverrideTextFormField =
+          find.byKey(const Key('priceOverrideTextFormField'));
+      expect(priceOverrideTextFormField, findsOneWidget);
+      await tester.enterText(priceOverrideTextFormField, '0.11');
     });
 
     testWidgets('Update cart test success', (tester) async {
@@ -164,6 +166,39 @@ void main() {
       final snackbarWidget = find.text(snackbarText);
 
       expect(snackbarWidget, findsOneWidget);
+    });
+
+    testWidgets('Update cart test right success', (tester) async {
+      when(() => priceOverrideMockBloc.state).thenReturn(
+        PriceOverrideState.initial().copyWith(
+          isFetching: true,
+        ),
+      );
+
+      final expectedState = [
+        PriceOverrideState.initial().copyWith(
+          isFetching: false,
+          cartItemList: [
+            Price.empty().copyWith(
+              materialNumber: MaterialNumber('1'),
+              finalPrice: MaterialPrice(1),
+              finalTotalPrice: MaterialPrice(1),
+              lastPrice: MaterialPrice(0.5),
+            ),
+          ],
+          apiFailureOrSuccessOption: optionOf(const Right('success'))
+        ),
+      ];
+
+      whenListen(priceOverrideMockBloc, Stream.fromIterable(expectedState));
+
+      await tester.pumpWidget(getScopedWidget(PriceSheet(
+        item: mockPriceAggregates.first,
+      )));
+
+      await tester.pump();
+
+      expect(autoRouterMock.current.name, 'Root');
     });
   });
 }

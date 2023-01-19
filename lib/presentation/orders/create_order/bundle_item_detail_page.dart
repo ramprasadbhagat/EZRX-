@@ -75,6 +75,7 @@ class BundleItemDetailPage extends StatelessWidget {
                         return LoadingShimmer.withChild(
                           child: const Card(
                             child: SizedBox(
+                              key: Key('itemLoading'),
                               height: 60,
                               width: double.infinity,
                             ),
@@ -120,9 +121,10 @@ class BundleItemDetailPage extends StatelessWidget {
                     previous.isValidating != current.isValidating ||
                     previous.isFetching != current.isFetching,
                 builder: (context, state) {
-                  if (state.isFetching || state.isValidating) {
+                  if (state.isValidating || state.isFetching) {
                     return LoadingShimmer.withChild(
                       child: ElevatedButton(
+                        key: const Key('buttonLoading'),
                         onPressed: () {},
                         child: const SizedBox(),
                       ),
