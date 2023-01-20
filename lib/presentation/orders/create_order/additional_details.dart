@@ -8,6 +8,7 @@ import 'package:ezrxmobile/domain/order/entities/additional_details_data.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/order_summary/addition_details/additional_attachment.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/order_type_selector.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:ezrxmobile/presentation/utils/runes_length_limiting_text_input_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -16,6 +17,7 @@ import 'package:flutter_svg/svg.dart';
 class AdditionalDetails extends StatelessWidget {
   final AdditionalDetailsState state;
   final SalesOrganisationConfigs config;
+
   const AdditionalDetails({
     Key? key,
     required this.state,
@@ -133,6 +135,7 @@ class _TextFormField extends StatefulWidget {
   final int maxLength;
   final TextInputType keyboardType;
   final AdditionalDetailsData additionalDetails;
+
   const _TextFormField({
     required this.labelText,
     required this.keyText,
@@ -213,7 +216,21 @@ class _TextFormFieldState extends State<_TextFormField> {
           controller: _controller,
           keyboardType: widget.keyboardType,
           maxLength: widget.maxLength,
+          inputFormatters: [
+            RunesLengthLimitingTextInputFormatter(widget.maxLength),
+          ],
           maxLines: widget.keyboardType == TextInputType.multiline ? null : 1,
+          buildCounter: (
+            context, {
+            required int currentLength,
+            required int? maxLength,
+            required bool isFocused,
+          }) {
+            return Text(
+              '${_controller.text.runes.length}/${widget.maxLength}',
+              style: Theme.of(context).textTheme.caption,
+            );
+          },
           onChanged: (value) {
             context.read<AdditionalDetailsBloc>().add(
                   AdditionalDetailsEvent.onTextChange(
@@ -305,6 +322,7 @@ class _TextFormFieldState extends State<_TextFormField> {
 class _DatePickerField extends StatefulWidget {
   final AdditionalDetailsData additionalDetails;
   final String futureDeliveryDay;
+
   const _DatePickerField({
     required this.futureDeliveryDay,
     required this.additionalDetails,
@@ -411,6 +429,7 @@ class _DatePickerFieldState extends State<_DatePickerField> {
 
 class _PaymentTerm extends StatelessWidget {
   final AdditionalDetailsData additionalDetails;
+
   const _PaymentTerm({
     required this.additionalDetails,
   });
