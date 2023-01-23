@@ -72,14 +72,20 @@ class CartItem with _$CartItem {
     required MaterialItem savedItem,
     required SalesOrganisationConfigs salesConfigs,
   }) {
+    final validMaterials = savedItem.materials.where((item) {
+      final itemDetails = priceDetailMap[item.queryInfo];
+
+      return itemDetails != null && itemDetails.price.isValidMaterial;
+    }).toList();
+
     final bundle = Bundle(
       bundleName: BundleName(savedItem.bundleName),
       bundleCode: savedItem.bundleCode,
       bundleInformation: savedItem.bundleInformation,
-      materials: savedItem.materials,
+      materials: validMaterials,
     );
 
-    return CartItem.bundle(savedItem.materials.map(
+    return CartItem.bundle(validMaterials.map(
       (material) {
         final priceDetail =
             priceDetailMap[material.queryInfo] ?? MaterialPriceDetail.empty();

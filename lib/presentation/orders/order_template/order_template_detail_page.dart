@@ -26,6 +26,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OrderTemplateDetailPage extends StatelessWidget {
   final OrderTemplate order;
+
   const OrderTemplateDetailPage({Key? key, required this.order})
       : super(key: key);
 
@@ -176,22 +177,40 @@ class OrderTemplateDetailPage extends StatelessWidget {
 
   void _addToCartPressed(BuildContext context, MaterialPriceDetailState state) {
     final cartBloc = context.read<CartBloc>();
-
     final salesConfigs = context.read<EligibilityBloc>().state.salesOrgConfigs;
+
+    final finalOrderItems = order.items
+        .map((item) {
+          if (item.type.isBundle) {
+            final hasAnyValidMaterial = item.materials.any(
+              (material) =>
+                  state.materialDetails[material.queryInfo]?.price
+                      .isValidMaterial ==
+                  true,
+            );
+
+            if (hasAnyValidMaterial) {
+              return CartItem.bundleFromOrder(
+                priceDetailMap: state.materialDetails,
+                savedItem: item,
+                salesConfigs: salesConfigs,
+              );
+            }
+
+            return null;
+          }
+
+          return CartItem.materialFromOrder(
+            priceDetailMap: state.materialDetails,
+            material: item,
+            salesConfigs: salesConfigs,
+          );
+        })
+        .whereType<CartItem>()
+        .toList();
+
     cartBloc.add(CartEvent.replaceWithOrderItems(
-      items: order.items
-          .map((item) => item.type.isBundle
-              ? CartItem.bundleFromOrder(
-                  priceDetailMap: state.materialDetails,
-                  savedItem: item,
-                  salesConfigs: salesConfigs,
-                )
-              : CartItem.materialFromOrder(
-                  priceDetailMap: state.materialDetails,
-                  material: item,
-                  salesConfigs: salesConfigs,
-                ))
-          .toList(),
+      items: finalOrderItems,
       customerCodeInfo: context.read<EligibilityBloc>().state.customerCodeInfo,
       salesOrganisation:
           context.read<EligibilityBloc>().state.salesOrganisation,

@@ -1,8 +1,5 @@
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
-import 'package:ezrxmobile/domain/account/entities/user.dart';
+import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -223,7 +220,6 @@ void main() {
       //     pickAndPack: '',
       //   )),
       // ).called(1);
-   
     });
 
     testWidgets(
@@ -331,6 +327,127 @@ void main() {
         expect(find.text('$currency 10.00'), findsAtLeastNWidgets(1));
       },
     );
+
+    testWidgets('Order Template Detail with all bundle materials invalid',
+        (tester) async {
+      final materialInfoList = _getMaterialList(orderMockItems);
+      final bundleItems = orderMockItems.where((item) => item.type.isBundle);
+      final bundleMaterials = bundleItems
+          .map((item) => item.materials
+              .map((material) =>
+                  MaterialQueryInfo.fromBundles(materialInfo: material))
+              .toList())
+          .toList()
+          .expand((element) => element)
+          .toList();
+
+      final materialDetails = {
+        for (final materialInfo in materialInfoList)
+          materialInfo: MaterialPriceDetail.empty().copyWith.price(
+                isValidMaterial: !bundleMaterials.contains(materialInfo),
+              )
+      };
+
+      final customerCodeInfo = eligibilityBlocMock.state.customerCodeInfo;
+      final salesOrgConfigs = eligibilityBlocMock.state.salesOrgConfigs;
+      final salesOrganisation = eligibilityBlocMock.state.salesOrganisation;
+      final doNotAllowOutOfStockMaterials =
+          eligibilityBlocMock.state.doNotAllowOutOfStockMaterials;
+      final shipToInfo = shipToCodeBLocMock.state.shipToInfo;
+
+      final orderMockItemsWithoutBundle =
+          orderMockItems.where((item) => !item.type.isBundle).toList();
+      final withoutBundleCartItemList = orderMockItemsWithoutBundle
+          .map(
+            (item) => CartItem.materialFromOrder(
+              priceDetailMap: materialDetails,
+              material: item,
+              salesConfigs: eligibilityBlocMock.state.salesOrgConfigs,
+            ),
+          )
+          .toList();
+
+      tester.binding.window.physicalSizeTestValue = const Size(1080, 1920);
+      tester.binding.window.devicePixelRatioTestValue = 1.0;
+
+      when(() => materialPriceDetailBlocMock.state).thenReturn(
+        MaterialPriceDetailState.initial().copyWith(
+          materialDetails: materialDetails,
+        ),
+      );
+
+      await tester.pumpWidget(orderTemplateDetailPage());
+
+      final addToCartButton = find.byKey(const Key('onAddToCartPressed'));
+      await tester.tap(addToCartButton);
+
+      verify(() => cartBlocMock.add(CartEvent.replaceWithOrderItems(
+            items: withoutBundleCartItemList,
+            customerCodeInfo: customerCodeInfo,
+            salesOrganisation: salesOrganisation,
+            salesOrganisationConfigs: salesOrgConfigs,
+            shipToInfo: shipToInfo,
+            doNotallowOutOfStockMaterial: doNotAllowOutOfStockMaterials,
+          ))).called(1);
+    });
+
+    testWidgets('Order Template Detail with all bundle materials valid',
+        (tester) async {
+      final materialInfoList = _getMaterialList(orderMockItems);
+
+      final materialDetails = {
+        for (final materialInfo in materialInfoList)
+          materialInfo: MaterialPriceDetail.empty().copyWith.price(
+                isValidMaterial: true,
+              ),
+      };
+
+      final customerCodeInfo = eligibilityBlocMock.state.customerCodeInfo;
+      final salesOrgConfigs = eligibilityBlocMock.state.salesOrgConfigs;
+      final salesOrganisation = eligibilityBlocMock.state.salesOrganisation;
+      final doNotAllowOutOfStockMaterials =
+          eligibilityBlocMock.state.doNotAllowOutOfStockMaterials;
+      final shipToInfo = shipToCodeBLocMock.state.shipToInfo;
+
+      final cartItemList = orderMockItems
+          .map(
+            (item) => item.type.isBundle
+                ? CartItem.bundleFromOrder(
+                    priceDetailMap: materialDetails,
+                    savedItem: item,
+                    salesConfigs: eligibilityBlocMock.state.salesOrgConfigs,
+                  )
+                : CartItem.materialFromOrder(
+                    priceDetailMap: materialDetails,
+                    material: item,
+                    salesConfigs: eligibilityBlocMock.state.salesOrgConfigs,
+                  ),
+          )
+          .toList();
+
+      tester.binding.window.physicalSizeTestValue = const Size(1080, 1920);
+      tester.binding.window.devicePixelRatioTestValue = 1.0;
+
+      when(() => materialPriceDetailBlocMock.state).thenReturn(
+        MaterialPriceDetailState.initial().copyWith(
+          materialDetails: materialDetails,
+        ),
+      );
+
+      await tester.pumpWidget(orderTemplateDetailPage());
+
+      final addToCartButton = find.byKey(const Key('onAddToCartPressed'));
+      await tester.tap(addToCartButton);
+
+      verify(() => cartBlocMock.add(CartEvent.replaceWithOrderItems(
+            items: cartItemList,
+            customerCodeInfo: customerCodeInfo,
+            salesOrganisation: salesOrganisation,
+            salesOrganisationConfigs: salesOrgConfigs,
+            shipToInfo: shipToInfo,
+            doNotallowOutOfStockMaterial: doNotAllowOutOfStockMaterials,
+          ))).called(1);
+    });
 
     testWidgets('Reload order template OrderInvalidWarning', (tester) async {
       final materialInfoList = _getMaterialList(orderMockItems);
