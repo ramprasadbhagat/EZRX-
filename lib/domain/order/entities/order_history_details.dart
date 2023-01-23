@@ -33,11 +33,6 @@ class OrderHistoryDetails with _$OrderHistoryDetails {
         orderHistoryDetailsMessages: <OrderHistoryDetailsMessages>[],
       );
 
-  Map<String, String> get getAllPoAsMap => <String, String>{}..addEntries(
-      orderHistoryDetailsPoDocuments
-          .map((e) => MapEntry(e.name, e.url))
-          .toList(),
-    );
 
   bool get poDocumentsAvailable => orderHistoryDetailsPoDocuments.isNotEmpty;
 

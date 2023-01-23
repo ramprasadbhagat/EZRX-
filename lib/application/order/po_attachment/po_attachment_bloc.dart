@@ -33,7 +33,11 @@ class PoAttachmentBloc extends Bloc<PoAttachmentEvent, PoAttachmentState> {
       initialized: (e) async => emit(PoAttachmentState.initial()),
       downloadFile: (_DownloadFile e) async {
         emit(
-          PoAttachmentState.initial().copyWith(fileFetchMode: e.fetchMode),
+          PoAttachmentState.initial().copyWith(
+            fileOperationhMode: e.fetchMode,
+            isFetching: true,
+            fileUrl: e.files,
+          ),
         );
         final failureOrSuccess =
             await downloadAttachmentRepository.downloadFiles(e.files);
@@ -41,23 +45,50 @@ class PoAttachmentBloc extends Bloc<PoAttachmentEvent, PoAttachmentState> {
           (l) => emit(
             state.copyWith(
               failureOrSuccessOption: optionOf(failureOrSuccess),
+              isFetching: false,
+              fileUrl: [],
             ),
           ),
           (r) => emit(
             state.copyWith(
               failureOrSuccessOption: optionOf(failureOrSuccess),
               fileData: r,
+              fileUrl: [],
+              isFetching: false,
             ),
           ),
         );
       },
       uploadFile: (_UpLoadFile e) async {
+        final renamedFiles = e.files
+            .map(
+              (element) => PlatformFile(
+                path: element.path,
+                name:
+                    '${e.user.username.getOrCrash()}_${e.customerCodeInfo.customerCodeSoldTo}_${e.shipToInfo.shipToCustomerCode}_${DateTime.now().toUtc().millisecondsSinceEpoch}_${element.name}',
+                size: element.size,
+                bytes: element.bytes,
+                readStream: element.readStream,
+                identifier: element.identifier,
+              ),
+            )
+            .toList();
         emit(
-          PoAttachmentState.initial().copyWith(isFetching: true),
+          PoAttachmentState.initial().copyWith(
+            isFetching: true,
+            fileOperationhMode: FileOperationhMode.upload,
+            fileUrl: renamedFiles
+                .map(
+                  (element) => PoDocuments.empty().copyWith(
+                    name: element.name,
+                  ),
+                )
+                .toList(),
+          ),
         );
         final failureOrSuccess = await downloadAttachmentRepository.uploadFiles(
           salesOrg: e.salesOrg,
-          files: e.files,
+          files: renamedFiles,
           shipToInfo: e.shipToInfo,
           customerCodeInfo: e.customerCodeInfo,
           user: e.user,
@@ -68,6 +99,7 @@ class PoAttachmentBloc extends Bloc<PoAttachmentEvent, PoAttachmentState> {
             state.copyWith(
               failureOrSuccessOption: optionOf(failureOrSuccess),
               isFetching: false,
+              fileUrl: [],
             ),
           ),
           (r) => emit(

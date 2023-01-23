@@ -173,6 +173,7 @@ void main() {
   late TenderContractBloc tenderContractBlocMock;
   late AddToCartBloc addToCartBlocMock;
   late PoAttachmentBloc poAttachmentBlocMock;
+
   setUpAll(
     () {
       locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);

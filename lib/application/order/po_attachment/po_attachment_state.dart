@@ -7,22 +7,40 @@ class PoAttachmentState with _$PoAttachmentState {
     required bool isFetching,
     required List<PoDocumentsBuffer> fileData,
     required List<PoDocuments> fileUrl,
-    required FileFetchMode fileFetchMode,
+    required FileOperationhMode fileOperationhMode,
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
   }) = _PoAttachmentState;
   factory PoAttachmentState.initial() => const PoAttachmentState(
         isFetching: false,
         fileData: <PoDocumentsBuffer>[],
         fileUrl: <PoDocuments>[],
-        fileFetchMode: FileFetchMode.none,
+        fileOperationhMode: FileOperationhMode.none,
         failureOrSuccessOption: None(),
       );
 
   bool get moreThanOneUploaded => fileUrl.length > 1;
+
+  List<PoDocuments> get fileInOperation => isFetching ? fileUrl : [];
+
+  bool get fileUploading =>
+      fileInOperation.isNotEmpty &&
+      fileOperationhMode == FileOperationhMode.upload &&
+      isFetching;
+
+  bool get fileUploaded =>
+      fileOperationhMode == FileOperationhMode.upload && !isFetching;
+
+  List<PoDocuments> get uploadInProgressPoDocument =>
+      fileOperationhMode == FileOperationhMode.upload ? fileInOperation : [];
+
+  bool get fileDownloaing =>
+      fileOperationhMode == FileOperationhMode.download ||
+      fileOperationhMode == FileOperationhMode.view;
 }
 
-enum FileFetchMode {
+enum FileOperationhMode {
   view,
   download,
+  upload,
   none,
 }

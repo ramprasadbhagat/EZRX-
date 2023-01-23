@@ -14,6 +14,7 @@ import 'package:ezrxmobile/application/order/order_history_filter/order_history_
 import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
+import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
@@ -407,7 +408,8 @@ class _Stepper extends StatelessWidget {
                     children: [
                       _SubmitContinueButton(
                         details: details,
-                        eligibleForOrderSubmit: eligibleForOrderSubmit,
+                        eligibleForOrderSubmit: eligibleForOrderSubmit &&
+                            !context.read<PoAttachmentBloc>().state.isFetching,
                         isAccountSuspended: isAccountSuspended,
                         orderSummaryState: state,
                       ),

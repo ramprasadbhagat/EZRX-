@@ -26,8 +26,8 @@ void main() {
       orderHistoryDetailsPoDocumentDownloadLocal;
   late PoDocumentRemote
       orderHistoryDetailsPoDocumentDownloadRemote;
-  final emptyFile = OrderHistoryDetails.empty().getAllPoAsMap;
-  final emptyFileMap = PoDocuments.empty().getNameUrlAsMap;
+  final emptyFile = OrderHistoryDetails.empty().orderHistoryDetailsPoDocuments;
+  final emptyFileMap = PoDocuments.empty();
 
   setUpAll(() {
     mockConfig = MockConfig();
@@ -66,7 +66,7 @@ void main() {
           .thenThrow((invocation) async => MockException());
 
       final result = await orderHistoryDetailsPoDocumentRepository
-          .downloadFiles(emptyFileMap);
+          .downloadFiles([emptyFileMap]);
       expect(
         result.isLeft(),
         true,
@@ -93,7 +93,7 @@ void main() {
           .thenThrow((invocation) async => MockException());
 
       final result = await orderHistoryDetailsPoDocumentRepository
-          .downloadFiles(emptyFileMap);
+          .downloadFiles([emptyFileMap]);
       expect(
         result.isLeft(),
         true,

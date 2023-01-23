@@ -4,8 +4,8 @@ part of 'po_attachment_bloc.dart';
 class PoAttachmentEvent with _$PoAttachmentEvent {
   const factory PoAttachmentEvent.initialized() = _Initialized;
   const factory PoAttachmentEvent.downloadFile({
-    required Map<String, String> files,
-    required FileFetchMode fetchMode,
+    required List<PoDocuments> files,
+    required FileOperationhMode fetchMode,
   }) = _DownloadFile;
   const factory PoAttachmentEvent.uploadFile({
     required List<PlatformFile> files,

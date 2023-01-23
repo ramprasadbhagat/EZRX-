@@ -32,13 +32,13 @@ class PoAttachmentRepository implements IpoAttachmentRepository {
 
   @override
   Future<Either<ApiFailure, List<PoDocumentsBuffer>>> downloadFiles(
-    Map<String, String> files,
+    List<PoDocuments> files,
   ) async {
     if (config.appFlavor == Flavor.mock) {
       try {
-        final localFile = Future.wait(files.entries
+        final localFile = Future.wait(files
             .map(
-              (e) async => await localDataSource.fileDownload(e.key, e.value),
+              (e) async => await localDataSource.fileDownload(e.name, e.url),
             )
             .toList());
 
@@ -48,9 +48,9 @@ class PoAttachmentRepository implements IpoAttachmentRepository {
       }
     }
     try {
-      final localFile = Future.wait(files.entries
+      final localFile = Future.wait(files
           .map(
-            (e) async => await remoteDataSource.fileDownload(e.key, e.value),
+            (e) async => await remoteDataSource.fileDownload(e.name, e.url),
           )
           .toList());
 
@@ -100,8 +100,7 @@ class PoAttachmentRepository implements IpoAttachmentRepository {
             currentYear: DateTime.now().year.toString(),
             file: MultipartFile.fromFileSync(
               e.path ?? '',
-              filename:
-                  '${user.username.getOrCrash()}_${customerCodeInfo.customerCodeSoldTo}_${shipToInfo.shipToCustomerCode}_${DateTime.now().toUtc().millisecondsSinceEpoch}_${e.name}',
+              filename: e.name,
             ),
             userName: user.username.getOrCrash(),
           ),

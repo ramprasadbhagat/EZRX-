@@ -15,6 +15,7 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/material_price_detail.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -187,6 +188,7 @@ class HistoryDetails extends StatelessWidget {
                           poDocuments:
                               orderDetails.orderHistoryDetailsPoDocuments,
                           poattachMentRenderMode: PoAttachMentRenderMode.view,
+                          uploadingPocDocument: const <PoDocuments>[],
                         ),
                       _Invoices(
                         orderDetails: orderDetails,

@@ -12,5 +12,4 @@ class PoDocuments with _$PoDocuments {
         url: '',
         name: '',
       );
-  Map<String, String> get getNameUrlAsMap => <String, String>{name: url};
 }

@@ -16,10 +16,11 @@ void main() {
   group('OrderHistoryDetailsBloc should - ', () {
     late PoAttachmentBloc downloadAttachmentBloc;
     late PoAttachmentRepository downloadAttachmentRepository;
-    final emptyFile = OrderHistoryDetails.empty().getAllPoAsMap;
-    final emptyFileMap = PoDocuments.empty().getNameUrlAsMap;
+    final emptyFile =
+        OrderHistoryDetails.empty().orderHistoryDetailsPoDocuments;
+    final emptyFileMap = PoDocuments.empty();
     final emptyResponseData = [PoDocumentsBuffer.empty()];
-    const emptyFetchMode = FileFetchMode.none;
+    const emptyFetchMode = FileOperationhMode.none;
     const apiServerTimeOut = ApiFailure.serverTimeout();
     PoAttachmentBloc getDownloadAttachmentBloc() {
       return PoAttachmentBloc(
@@ -62,7 +63,8 @@ void main() {
       ),
       expect: () => [
         PoAttachmentState.initial().copyWith(
-          fileFetchMode: emptyFetchMode,
+          isFetching: true,
+          fileOperationhMode: emptyFetchMode,
         ),
         PoAttachmentState.initial().copyWith(
           failureOrSuccessOption: optionOf(Right(emptyResponseData)),
@@ -74,17 +76,19 @@ void main() {
       'emit correct data on unsuccessful downloadFile() event',
       setUp: () {
         when(
-          () => downloadAttachmentRepository.downloadFiles(emptyFileMap),
+          () => downloadAttachmentRepository.downloadFiles([emptyFileMap]),
         ).thenAnswer((invocation) async => const Left(apiServerTimeOut));
       },
       build: () => getDownloadAttachmentBloc(),
       act: (bloc) => bloc.add(
         PoAttachmentEvent.downloadFile(
-            files: emptyFileMap, fetchMode: emptyFetchMode),
+            files: [emptyFileMap], fetchMode: emptyFetchMode),
       ),
       expect: () => [
         PoAttachmentState.initial().copyWith(
-          fileFetchMode: emptyFetchMode,
+          isFetching: true,
+          fileUrl: [PoDocuments.empty()],
+          fileOperationhMode: emptyFetchMode,
         ),
         PoAttachmentState.initial().copyWith(
           failureOrSuccessOption: optionOf(const Left(apiServerTimeOut)),

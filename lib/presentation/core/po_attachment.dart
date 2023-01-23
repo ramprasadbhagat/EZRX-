@@ -8,7 +8,6 @@ import 'package:ezrxmobile/domain/order/entities/order_history_details_po_docume
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
-import 'package:ezrxmobile/presentation/history/history_details.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,14 +15,17 @@ import 'package:open_file_safe/open_file_safe.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:ezrxmobile/presentation/core/custom_expansion_tile.dart'
     as custom;
+import 'package:permission_handler/permission_handler.dart';
 
 class PoAttachment extends StatefulWidget {
   final PoAttachMentRenderMode poattachMentRenderMode;
   final List<PoDocuments> poDocuments;
+  final List<PoDocuments> uploadingPocDocument;
   const PoAttachment({
     Key? key,
     required this.poDocuments,
     required this.poattachMentRenderMode,
+    required this.uploadingPocDocument,
   }) : super(key: key);
 
   @override
@@ -35,13 +37,13 @@ class _PoAttachmentState extends State<PoAttachment> {
 
   @override
   Widget build(BuildContext context) {
-    final overlay = LoadingOverlay.of(context);
     final edit = widget.poattachMentRenderMode == PoAttachMentRenderMode.edit;
 
-    if (widget.poDocuments.isEmpty) {
+    if (widget.poDocuments.isEmpty &&
+        !context.read<PoAttachmentBloc>().state.fileUploading) {
       return Container();
     }
-    
+
     return custom.ExpansionTile(
       initiallyExpanded: true,
       key: const ValueKey('additionalComment'),
@@ -55,7 +57,8 @@ class _PoAttachmentState extends State<PoAttachment> {
       ),
       children: [
         BlocListener<PoAttachmentBloc, PoAttachmentState>(
-          listenWhen: (previous, current) => previous != current,
+          listenWhen: (previous, current) =>
+              previous != current && current.fileDownloaing,
           listener: (context, state) async {
             state.failureOrSuccessOption.fold(
               () => {},
@@ -64,14 +67,12 @@ class _PoAttachmentState extends State<PoAttachment> {
                   ErrorUtils.handleApiFailure(context, failure);
                 },
                 (r) async {
-                  if (state.fileFetchMode == FileFetchMode.view) {
+                  if (state.fileOperationhMode == FileOperationhMode.view) {
                     await openFile(
                       state.fileData.first,
                     );
-                    overlay.hide();
                   } else {
                     await downloadAllFile(state.fileData);
-                    overlay.hide();
                     showSnackBar(
                       context: context,
                       message: 'All attachments downloaded successfully.'.tr(),
@@ -103,13 +104,12 @@ class _PoAttachmentState extends State<PoAttachment> {
                   flex: 2,
                   child: Column(
                     children: [
-                      Column(
-                        children: widget.poDocuments
+                      Column(children: [
+                        ...widget.poDocuments
                             .sublist(0, listLength)
                             .map((poDocuments) {
                           return poDocuments.url.isEmpty
                               ? SizedBox(
-                                  key: const ValueKey('pODocumentsUrl'),
                                   width: 40,
                                   child: LoadingShimmer.tile(),
                                 )
@@ -121,62 +121,32 @@ class _PoAttachmentState extends State<PoAttachment> {
                                       onTap: () async {
                                         context
                                             .read<PoAttachmentBloc>()
-                                            .add(PoAttachmentEvent
-                                                .downloadFile(
-                                              files:
-                                                  poDocuments.getNameUrlAsMap,
-                                              fetchMode: FileFetchMode.view,
+                                            .add(PoAttachmentEvent.downloadFile(
+                                              files: [poDocuments],
+                                              fetchMode:
+                                                  FileOperationhMode.view,
                                             ));
-                                        overlay.show();
                                       },
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(
-                                          bottom: 10.0,
-                                          top: 2.0,
-                                        ),
-                                        child: Column(
-                                          children: [
-                                            RichText(
-                                              text: TextSpan(
-                                                children: [
-                                                  WidgetSpan(
-                                                    child: Transform.rotate(
-                                                      angle: -45,
-                                                      child: const Icon(
-                                                        Icons
-                                                            .attachment_outlined,
-                                                        size: 14,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  TextSpan(
-                                                    text: poDocuments.name,
-                                                    style: const TextStyle(
-                                                      color:
-                                                          ZPColors.darkerGreen,
-                                                      fontSize: 14.0,
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                    ),
-                                                  ),
-                                                  if (edit)
-                                                    WidgetSpan(
-                                                      child:
-                                                          _PoUploadDeleteIcon(
-                                                        poDocument: poDocuments,
-                                                      ),
-                                                    ),
-                                                ],
-                                              ),
-                                            ),
-                                          ],
-                                        ),
+                                      child: _PoAttachmentWidget(
+                                        poDocuments: poDocuments,
+                                        edit: edit,
                                       ),
                                     ),
                                   ],
                                 );
                         }).toList(),
-                      ),
+                        ...context
+                            .read<PoAttachmentBloc>()
+                            .state
+                            .uploadInProgressPoDocument
+                            .map(
+                              (e) => _PoAttachmentWidget(
+                                poDocuments: e,
+                                edit: false,
+                              ),
+                            )
+                            .toList(),
+                      ]),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -196,47 +166,56 @@ class _PoAttachmentState extends State<PoAttachment> {
                                     });
                                   },
                                 )
-                              : const SizedBox(),
-                          Column(
-                            children: [
-                              InkWell(
-                                key: const Key('downloadAll'),
-                                onTap: () {
-                                  context.read<PoAttachmentBloc>().add(
-                                        PoAttachmentEvent.downloadFile(
-                                          files: <String, String>{}..addEntries(
-                                              widget.poDocuments
-                                                  .map((e) =>
-                                                      MapEntry(e.name, e.url))
-                                                  .toList(),
-                                            ),
-                                          fetchMode: FileFetchMode.download,
-                                        ),
+                              : const SizedBox.shrink(),
+                          if (widget.poDocuments.isNotEmpty)
+                            Column(
+                              children: [
+                                InkWell(
+                                  key: const Key('downloadAll'),
+                                  onTap: () async {
+                                    if (Platform.isAndroid &&
+                                        !(await Permission.storage
+                                            .request()
+                                            .isGranted)) {
+                                      showSnackBar(
+                                        context: context,
+                                        message:
+                                            'Allow apps to access the storage'
+                                                .tr(),
                                       );
-                                  overlay.show();
-                                },
-                                child: Row(
-                                  children: [
-                                    const Icon(
-                                      Icons.download,
-                                    ),
-                                    const SizedBox(
-                                      width: 5,
-                                    ),
-                                    Text(
-                                      'Download All'.tr(),
-                                      style: const TextStyle(
-                                        color: ZPColors.darkerGreen,
-                                        decoration: TextDecoration.underline,
+
+                                      return;
+                                    }
+                                    if (!mounted) return;
+                                    context.read<PoAttachmentBloc>().add(
+                                          PoAttachmentEvent.downloadFile(
+                                            files: widget.poDocuments,
+                                            fetchMode:
+                                                FileOperationhMode.download,
+                                          ),
+                                        );
+                                  },
+                                  child: Row(
+                                    children: [
+                                      const Icon(
+                                        Icons.download,
                                       ),
-                                    ),
-                                  ],
+                                      const SizedBox(
+                                        width: 5,
+                                      ),
+                                      Text(
+                                        'Download All'.tr(),
+                                        style: const TextStyle(
+                                          color: ZPColors.darkerGreen,
+                                          decoration: TextDecoration.underline,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                              if (edit)
-                                const _PoUploadDeleteAll(),
-                            ],
-                          ),
+                                if (edit) const _PoUploadDeleteAll(),
+                              ],
+                            ),
                         ],
                       ),
                     ],
@@ -266,16 +245,28 @@ class _PoAttachmentState extends State<PoAttachment> {
     }
   }
 
+  Future<String> getFilePath() async {
+    if (Platform.isAndroid) {
+      final directory = await getExternalStorageDirectory();
+
+      return '${directory?.path.split('Android').first}Download';
+    } else {
+      final directory = await getApplicationDocumentsDirectory();
+      
+      return await directory.exists()
+          ? directory.path
+          : (await directory.create(recursive: true)).path;
+    }
+  }
+
   Future<void> downloadAllFile(
-    List<PoDocumentsBuffer>
-        orderHistoryDetailsPoDocumentsBuffers,
+    List<PoDocumentsBuffer> orderHistoryDetailsPoDocumentsBuffers,
   ) async {
     try {
       for (final orderHistoryDetailsPoDocumentsBuffer
           in orderHistoryDetailsPoDocumentsBuffers) {
-        final appStorage = await getTemporaryDirectory();
         final file = File(
-          '${appStorage.path}/${orderHistoryDetailsPoDocumentsBuffer.name}',
+          '${await getFilePath()}/${orderHistoryDetailsPoDocumentsBuffer.name}',
         );
         await file.writeAsBytes(orderHistoryDetailsPoDocumentsBuffer.buffer);
       }
@@ -300,8 +291,6 @@ class _PoAttachmentState extends State<PoAttachment> {
             : listLen;
   }
 }
-
-
 
 class _PoUploadDeleteIcon extends StatelessWidget {
   final PoDocuments poDocument;
@@ -361,3 +350,98 @@ class _PoUploadDeleteAll extends StatelessWidget {
 }
 
 enum PoAttachMentRenderMode { edit, view }
+
+class PoAttachmentDownloadIndicator extends StatelessWidget {
+  final PoDocuments poDocuments;
+
+  const PoAttachmentDownloadIndicator({
+    Key? key,
+    required this.poDocuments,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<PoAttachmentBloc, PoAttachmentState>(
+      buildWhen: (previous, current) =>
+          previous.isFetching != current.isFetching,
+      builder: (context, state) {
+        if (state.fileInOperation.any(
+          (element) => element.name == poDocuments.name,
+        )) {
+          return Container(
+            height: 8,
+            width: 8,
+            margin: const EdgeInsets.symmetric(
+              horizontal: 6,
+              vertical: 2,
+            ),
+            child: const CircularProgressIndicator(
+              strokeWidth: 1,
+            ),
+          );
+        }
+
+        return Container(
+          height: 8,
+          width: 8,
+          margin: const EdgeInsets.symmetric(
+            horizontal: 6,
+            vertical: 2,
+          ),
+          child: Transform.rotate(
+            angle: -45,
+            child: const Icon(
+              Icons.attachment_outlined,
+              size: 14,
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _PoAttachmentWidget extends StatelessWidget {
+  final PoDocuments poDocuments;
+  final bool edit;
+  const _PoAttachmentWidget({
+    Key? key,
+    required this.poDocuments,
+    required this.edit,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(
+        bottom: 10.0,
+        top: 2.0,
+      ),
+      child: RichText(
+        text: TextSpan(
+          children: [
+            WidgetSpan(
+              child: PoAttachmentDownloadIndicator(
+                poDocuments: poDocuments,
+              ),
+            ),
+            TextSpan(
+              text: poDocuments.name,
+              style: const TextStyle(
+                color: ZPColors.darkerGreen,
+                fontSize: 14.0,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+            if (edit)
+              WidgetSpan(
+                child: _PoUploadDeleteIcon(
+                  poDocument: poDocuments,
+                ),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+}
