@@ -1,15 +1,35 @@
+import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/core/error/exception.dart';
+import 'package:ezrxmobile/domain/order/entities/bundle.dart';
+import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
+import 'package:ezrxmobile/domain/order/entities/price.dart';
+import 'package:ezrxmobile/domain/order/entities/price_bonus.dart';
+import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
+import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/cart_storage.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_remote.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/cart_item_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/cart_repository.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 class MockConfig extends Mock implements Config {}
 
 class MockCartStorage extends Mock implements CartStorage {}
 
-class MockCountlyService extends Mock implements CountlyService {}
+class CountlyServiceMock extends Mock implements CountlyService {}
 
 class StockInfoRemoteDataSourceMock extends Mock
     implements StockInfoRemoteDataSource {}
@@ -18,400 +38,1535 @@ class StockInfoLocalDataSourceMock extends Mock
     implements StockInfoLocalDataSource {}
 
 void main() {
-  // late Config mockConfig;
-  // late CartStorage cartStorageMock;
-  // late StockInfoLocalDataSourceMock stockInfoLocalDataSource;
-  // late StockInfoRemoteDataSourceMock stockInfoRemoteDataSource;
-  // late CountlyService countlyServiceMock;
-  // late CartRepository cartRepositoryMock;
-  // final fakeCart = PriceAggregate(
-  //   price: Price(
-  //       materialNumber: MaterialNumber('0'),
-  //       rules: [],
-  //       tiers: [],
-  //       bonuses: [],
-  //       bundles: [],
-  //       overrideRulePresent: false,
-  //       zdp5MaxQuota: '',
-  //       zdp5RemainingQuota: '',
-  //       zmgDiscount: false,
-  //       lastPrice: MaterialPrice(0.0),
-  //       finalPrice: MaterialPrice(0.0),
-  //       finalTotalPrice: MaterialPrice(0.0),
-  //       additionalBonusEligible: false,
-  //       isValid: true,
-  //       isValidMaterial: true,
-  //       isFOC: false,
-  //       isPriceOverride: false,
-  //       zdp8Override: Zdp8OverrideValue(0.0),
-  //       priceOverride: PriceOverrideValue(0.0)),
-  //   materialInfo: MaterialInfo(
-  //       materialNumber: MaterialNumber('21211474'),
-  //       materialDescription: '?Genotropin GQ 5.3MG SFDPO 1xPTCC DEMO',
-  //       defaultMaterialDescription: '?Genotropin GQ 5.3MG SFDPO 1xPTCC DEMO',
-  //       governmentMaterialCode: '',
-  //       therapeuticClass: 'Growth hormones',
-  //       itemBrand: 'Genotropin GQ 5.3MG',
-  //       principalData: PrincipalData(
-  //         principalName: 'Pfizer PFE Private Limited test',
-  //         principalCode: PrincipalCode('0000103892'),
-  //       ),
-  //       itemRegistrationNumber: 'NA',
-  //       unitOfMeasurement: 'EA',
-  //       materialGroup2: MaterialGroup.two(''),
-  //       materialGroup4: MaterialGroup.four('6GS'),
-  //       isSampleMaterial: false,
-  //       hidePrice: false,
-  //       hasValidTenderContract: false,
-  //       hasMandatoryTenderContract: false,
-  //       taxClassification: MaterialTaxClassification(''),
-  //       taxes: ['0'],
-  //       bundles: [],
-  //       isFOCMaterial: false,
-  //       quantity: 0,
-  //       remarks: ''),
-  //   bundle: Bundle(
-  //       materials: [],
-  //       bundleName: BundleName('0'),
-  //       bundleCode: '',
-  //       bundleInformation: []),
-  //   salesOrgConfig: SalesOrganisationConfigs(
-  //       enableIRN: true,
-  //       enableDefaultMD: false,
-  //       disableProcessingStatus: false,
-  //       currency: Currency('sgd'),
-  //       hideCustomer: true,
-  //       enableGimmickMaterial: true,
-  //       languageFilter: false,
-  //       languageValue: LanguageValue('M'),
-  //       disablePrincipals: false,
-  //       principalList: [],
-  //       disableOrderType: false,
-  //       enableBatchNumber: false,
-  //       disableBundles: false,
-  //       enableZDP5: false,
-  //       enableVat: false,
-  //       enableTaxAtTotalLevelOnly: true,
-  //       enableTaxClassification: false,
-  //       vatValue: 8,
-  //       materialWithoutPrice: true,
-  //       enableSpecialInstructions: true,
-  //       enableReferenceNote: true,
-  //       enableCollectiveNumber: true,
-  //       enableMobileNumber: true,
-  //       enableFutureDeliveryDay: true,
-  //       enablePaymentTerms: false,
-  //       futureDeliveryDay: FutureDeliveryDay('5'),
-  //       enableGMC: false,
-  //       enableListPrice: true,
-  //       priceOverride: true,
-  //       disablePaymentTermsDisplay: false,
-  //       disableDeliveryDate: false,
-  //       enableBillTo: true,
-  //       showPOAttachment: true,
-  //       hideStockDisplay: false,
-  //       expiryDateDisplay: true,
-  //       batchNumDisplay: false,
-  //       addOosMaterials: true,
-  //       oosValue: OosValue(1),
-  //       enableRemarks: true,
-  //       enableOHPrice: true,
-  //       ponRequired: true,
-  //       enableTaxDisplay: false,
-  //       netPriceOverride: true,
-  //       displayOrderDiscount: true,
-  //       minOrderAmount: '50',
-  //       salesOrg: SalesOrg('2601'),
-  //       enableZDP8Override: true,
-  //       disableReturnsAccessSR: false,
-  //       disableReturnsAccess: false),
-  //   quantity: 1,
-  //   discountedMaterialCount: 1,
-  //   addedBonusList: [],
-  //   stockInfo: StockInfo(
-  //       materialNumber: MaterialNumber('21211474'),
-  //       expiryDate: ExpiryDate('-'),
-  //       batch: '-',
-  //       inStock: MaterialInStock('No'),
-  //       salesDistrict: ''),
-  //   tenderContract: TenderContract(
-  //     contractNumber: TenderContractNumber.tenderContractNumber(''),
-  //     contractItemNumber: TenderContractNumber.tenderContractItemNumber(''),
-  //     contractReference: TenderContractInfo.tenderContractReference(''),
-  //     tenderOrderReason: TenderContractReason(''),
-  //     tenderVisaNumber: TenderContractNumber.tenderVisaNumber(''),
-  //     salesDistrict:
-  //         TenderContractInfo.salesDistrict(''), // Value(const Right()),
-  //     tenderPackageDescription: TenderContractInfo.packageDescription(
-  //         'input'), // Value(const Right()),
-  //     tenderPrice: TenderPrice(''), // Value(const Right(0)),
-  //     pricingUnit: 0,
-  //     remainingTenderQuantity: 0,
-  //     contractQuantity: 0,
-  //     contractExpiryDate:
-  //         TenderContractInfo.contractExpiryDate(''), // Value(const Right()),
-  //     announcementLetterNumber: TenderContractNumber.announcementLetterNumber(
-  //         ''), // Value(const Right()),
-  //     isNearToExpire: false,
-  //     contractPaymentTerm: TenderContractInfo.contractPaymentTerm(''),
-  //   ),
-  // );
+  late Config mockConfig;
+  late CartStorage cartStorageMock;
+  late StockInfoLocalDataSourceMock stockInfoLocalDataSource;
+  late StockInfoRemoteDataSourceMock stockInfoRemoteDataSource;
+  late CountlyService countlyServiceMock;
+  late CartRepository cartRepository;
+  late CartItem fakeCartItem;
+  late SalesOrganisationConfigs mockSalesOrganisationConfigs;
+  late SalesOrg mockSalesOrg;
+  late SalesOrganisation mockSalesOrganisation;
 
-  // const emptyConstMaterialDto = MaterialDto(
-  //   bundles: [],
-  //   governmentMaterialCode: '',
-  //   defaultMaterialDescription: '',
-  //   hasMandatoryTenderContract: false,
-  //   hasValidTenderContract: false,
-  //   hidePrice: false,
-  //   isSampleMaterial: false,
-  //   itemBrand: '',
-  //   itemRegistrationNumber: '',
-  //   materialGroup2: '',
-  //   materialDescription: '',
-  //   materialGroup4: '6A1',
-  //   principalCode: '',
-  //   materialNumber: '',
-  //   principalName: '',
-  //   taxClassification: '',
-  //   taxes: [],
-  //   therapeuticClass: '',
-  //   unitOfMeasurement: '',
-  //   isFOCMaterial: true,
-  //   quantity: 0,
-  //   remarks: '',
-  // );
+  final fakeShipToInfo = ShipToInfo.empty().copyWith(
+    shipToCustomerCode: '1234567',
+    status: Status('fake_status'),
+  );
+  final fakeCustomerCodeInfo = CustomerCodeInfo.empty().copyWith(
+    customerCodeSoldTo: '100000345',
+    customerAttr7: CustomerAttr7('ZEV'),
+    customerGrp4: CustomerGrp4('VR'),
+    status: Status('fake_status'),
+  );
 
-  // const emptyPriceDto = PriceDto(
-  //   additionalBonusEligible: false,
-  //   bonuses: [],
-  //   bundles: [],
-  //   finalIndividualPrice: 0,
-  //   finalTotalPrice: 0,
-  //   isValid: false,
-  //   listPrice: 0,
-  //   materialNumber: '',
-  //   overrideRulePresent: false,
-  //   rules: [],
-  //   tiers: [],
-  //   zdp5MaxQuota: '',
-  //   zdp5RemainingQuota: '',
-  //   zmgDiscount: false,
-  //   isPriceOverride: false,
-  //   zdp8Override: 0,
-  //   priceOverride: 0,
-  // );
+  setUpAll(() {
+    mockConfig = MockConfig();
+    when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
+    stockInfoLocalDataSource = StockInfoLocalDataSourceMock();
+    stockInfoRemoteDataSource = StockInfoRemoteDataSourceMock();
+    cartStorageMock = MockCartStorage();
+    countlyServiceMock = CountlyServiceMock();
+    cartRepository = CartRepository(
+      config: mockConfig,
+      cartStorage: cartStorageMock,
+      countlyService: countlyServiceMock,
+      stockInfoLocalDataSource: stockInfoLocalDataSource,
+      stockInfoRemoteDataSource: stockInfoRemoteDataSource,
+    );
+    mockSalesOrg = SalesOrg('2601');
+    mockSalesOrganisation = SalesOrganisation.empty().copyWith(
+      salesOrg: mockSalesOrg,
+    );
+    mockSalesOrganisationConfigs = SalesOrganisationConfigs.empty().copyWith(
+      languageFilter: true,
+      languageValue: LanguageValue('EN'),
+      disablePrincipals: false,
+      enableGimmickMaterial: true,
+      principalList: ['123', '234', '345'],
+      currency: Currency('SG'),
+      salesOrg: mockSalesOrg,
+    );
 
-  // const emptySalesOrganisationConfigsDto = SalesOrganisationConfigsDto(
-  //   salesOrg: '',
-  //   enableIRN: false,
-  //   currency: '',
-  //   disableBundles: false,
-  //   disableOrderType: false,
-  //   disablePrincipals: false,
-  //   disableProcessingStatus: false,
-  //   enableBatchNumber: false,
-  //   enableCollectiveNumber: false,
-  //   enableDefaultMD: false,
-  //   enableFutureDeliveryDay: false,
-  //   enableGMC: false,
-  //   enableGimmickMaterial: false,
-  //   enableListPrice: false,
-  //   enableMobileNumber: false,
-  //   enablePaymentTerms: false,
-  //   enableReferenceNote: false,
-  //   enableSpecialInstructions: false,
-  //   enableTaxClassification: false,
-  //   enableVat: false,
-  //   enableTaxAtTotalLevelOnly: false,
-  //   enableZDP5: false,
-  //   futureDeliveryDay: '',
-  //   hideCustomer: false,
-  //   languageValue: '',
-  //   languageFilter: false,
-  //   materialWithoutPrice: false,
-  //   principalList: [],
-  //   vatValue: 0,
-  //   priceOverride: false,
-  //   disablePaymentTermsDisplay: false,
-  //   disableDeliveryDate: false,
-  //   enableBillTo: false,
-  //   showPOAttachment: false,
-  //   hideStockDisplay: false,
-  //   expiryDateDisplay: false,
-  //   addOosMaterials: false,
-  //   oosValue: 0,
-  //   enableRemarks: false,
-  //   enableOHPrice: true,
-  //   ponRequired: false,
-  //   enableTaxDisplay: false,
-  //   netPriceOverride: false,
-  //   batchNumDisplay: false,
-  //   displayOrderDiscount: false,
-  //   minOrderAmount: '0',
-  //   enableZDP8Override: false,
-  //   disableReturnsAccessSR: false,
-  //   disableReturnsAccess: false,
-  // );
+    fakeCartItem = CartItem(
+      itemType: CartItemType.material,
+      materials: [
+        PriceAggregate.empty().copyWith(
+          salesOrgConfig: mockSalesOrganisationConfigs,
+          materialInfo: MaterialInfo.empty().copyWith(
+            materialNumber: MaterialNumber('1'),
+          ),
+        ),
+      ],
+      isSelected: true,
+    );
 
-  // const emptyBundleDto = BundleDto(
-  //     bundleName: '', bundleCode: '', bundleInformation: [], materials: []);
+    when(
+      () => stockInfoLocalDataSource.getStockInfo(),
+    ).thenAnswer(
+      (invocation) async => StockInfo.empty(),
+    );
 
-  // const emptyStockInfoDto = StockInfoDto(
-  //   batch: '',
-  //   expiryDate: '',
-  //   inStock: '',
-  //   materialNumber: '',
-  //   salesDistrict: '',
-  // );
+    when(
+      () => stockInfoLocalDataSource.getStockInfoList(),
+    ).thenAnswer(
+      (invocation) async => [
+        StockInfo.empty().copyWith(
+          materialNumber: MaterialNumber('1234'),
+          inStock: MaterialInStock('Yes'),
+        ),
+      ],
+    );
 
-  // const emptyTenderContractDto = TenderContractDto(
-  //   contractNumber: '',
-  //   contractItemNumber: '',
-  //   contractReference: '',
-  //   tenderOrderReason: '',
-  //   tenderVisaNumber: '',
-  //   salesDistrict: '',
-  //   tenderPackageDescription: '',
-  //   tenderPrice: '',
-  //   pricingUnit: 0,
-  //   remainingTenderQuantity: 0,
-  //   contractQuantity: 0,
-  //   contractExpiryDate: '',
-  //   announcementLetterNumber: '',
-  //   isNearToExpire: false,
-  //   contractPaymentTerm: '',
-  // );
+    when(
+      () => stockInfoRemoteDataSource.getStockInfo(
+        materialNumber: fakeCartItem.materials.first.materialNumberString,
+        salesOrg: mockSalesOrganisation.salesOrg.getOrCrash(),
+        selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+        plant: fakeShipToInfo.plant,
+      ),
+    ).thenAnswer(
+      (invocation) async => StockInfo.empty(),
+    );
 
-  // final priceAggregateDtoList = [
-  //   PriceAggregateDto(
-  //       bonusItem: [],
-  //       bundleDto: emptyBundleDto,
-  //       materialDto: emptyConstMaterialDto,
-  //       salesOrganisationConfigsDto: emptySalesOrganisationConfigsDto,
-  //       priceDto: emptyPriceDto,
-  //       quantity: 4,
-  //       stockInfoDto: emptyStockInfoDto,
-  //       tenderContractDto: emptyTenderContractDto,
-  //       zmgMaterialCountOnCart: 4)
-  // ];
-  // final mockPriceAggregate = PriceAggregate.empty().copyWith(
-  //   salesOrgConfig: SalesOrganisationConfigs.empty().copyWith(
-  //     salesOrg: SalesOrg('2601'),
-  //     batchNumDisplay: true,
-  //     enableTaxDisplay: true,
-  //     enableRemarks: true,
-  //     displayOrderDiscount: true,
-  //     disableDeliveryDate: true,
-  //     currency: Currency('vnd'),
-  //   ),
-  //   price: Price.empty(),
-  //   materialInfo: MaterialInfo.empty().copyWith(
-  //     materialNumber: MaterialNumber('1'),
-  //   ),
-  // );
-  // setUpAll(() {
-  //   mockConfig = MockConfig();
-  //   stockInfoLocalDataSource = StockInfoLocalDataSourceMock();
-  //   stockInfoRemoteDataSource = StockInfoRemoteDataSourceMock();
-  //   cartStorageMock = MockCartStorage();
-  //   countlyServiceMock = CountlyServiceMock();
-  //   cartRepositoryMock = CartRepository(
-  //     config: mockConfig,
-  //     cartStorage: cartStorageMock,
-  //     countlyService: countlyServiceMock,
-  //     stockInfoLocalDataSource: stockInfoLocalDataSource,
-  //     stockInfoRemoteDataSource: stockInfoRemoteDataSource,
-  //   );
-  // });
+    when(
+      () => stockInfoRemoteDataSource.getStockInfoList(
+        materialNumber: fakeCartItem.materials.first.materialNumberString,
+        salesOrg: mockSalesOrganisation.salesOrg.getOrCrash(),
+        selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+        plant: fakeShipToInfo.plant,
+      ),
+    ).thenAnswer(
+      (invocation) async => [StockInfo.empty()],
+    );
 
-  // group('CartRepository should - ', () {
-  //   test('int cart storage successfully', () async {
-  //     when(() => cartStorageMock.init()).thenAnswer((invocation) async {
-  //       return;
-  //     });
-  //     final result = await cartRepositoryMock.initCartStorage();
+    when(
+      () => cartStorageMock.get(
+        id: fakeCartItem.id,
+      ),
+    ).thenAnswer(
+      (invocation) => CartItemDto.fromDomain(fakeCartItem),
+    );
 
-  //     expect(
-  //       result.isRight(),
-  //       true,
-  //     );
-  //   });
-  //   test('init cart storage failed', () async {
-  //     when(() => cartStorageMock.init())
-  //         .thenThrow((invocation) async => MockException());
+    when(
+      () => cartStorageMock.put(
+        id: fakeCartItem.id,
+        item: CartItemDto.fromDomain(fakeCartItem),
+      ),
+    ).thenAnswer(
+      (invocation) async => const Right(unit),
+    );
 
-  //     final result = await cartRepositoryMock.initCartStorage();
+    when(
+      () => cartStorageMock.put(
+        id: fakeCartItem.id,
+        item: CartItemDto.fromDomain(fakeCartItem),
+      ),
+    ).thenAnswer(
+      (invocation) async => const Right(unit),
+    );
 
-  //     expect(
-  //       result.isLeft(),
-  //       true,
-  //     );
-  //   });
-  // });
+    when(
+      () => cartStorageMock.putAll(
+        items: {'1': CartItemDto.fromDomain(fakeCartItem)},
+      ),
+    ).thenAnswer(
+      (invocation) async => const Right(unit),
+    );
 
-  // test('add to cart successfully', () async {
-  //   when(() => cartStorageMock.add(
-  //         PriceAggregateDto.fromDomain(fakeCart),
-  //       )).thenAnswer((invocation) async {
-  //     return Future.value();
-  //   });
-  //   await cartRepositoryMock.addToCart(cartItem: fakeCart);
-  //   when(
-  //     () => countlyServiceMock
-  //         .addCountlyEvent('Add materials to cart', segmentation: {
-  //       'materialNum': mockPriceAggregate.getMaterialNumber.getOrCrash(),
-  //       'listPrice': mockPriceAggregate.listPrice,
-  //       'price': mockPriceAggregate.price.finalPrice.getOrCrash(),
-  //       'numItemInCart': 1, // cartStorageMock.cartBoxSize,
-  //       'materialType': priceAggregateDtoList[0]
-  //           .toDomain()
-  //           .materialInfo
-  //           .materialGroup4
-  //           .getMaterialGroup4Type,
-  //     }),
-  //   ).thenAnswer((invocation) => Future.value());
+    when(
+      () => cartStorageMock.getAll(),
+    ).thenAnswer(
+      (invocation) => <CartItemDto>[],
+    );
 
-  //   await cartRepositoryMock.fetchCartItems();
-  //   verify(
-  //     () => cartRepositoryMock.fetchCartItems(),
-  //   ).called(1);
-  // });
-  // test('add to cart failed', () async {
-  //   when(() => cartStorageMock.add(priceAggregateDtoList[0]))
-  //       .thenThrow((invocation) async => MockException());
+    when(
+      () => cartStorageMock.clear(),
+    ).thenAnswer(
+      (invocation) async => const Right(unit),
+    );
 
-  //   verifyNever(
-  //     () => cartRepositoryMock.fetchCartItems(),
-  //   );
-  // });
+    when(
+      () => cartStorageMock.delete(
+        id: fakeCartItem.id,
+      ),
+    ).thenAnswer(
+      (invocation) async => const Right(unit),
+    );
 
-  // test('update cart storage successfully', () async {
-  //   when(() => cartStorageMock
-  //           .updateItem(PriceAggregateDto.fromDomain(mockPriceAggregate)))
-  //       .thenAnswer((invocation) async {
-  //     return;
-  //   });
-  //   await cartRepositoryMock.updateCartItem(cartItem: mockPriceAggregate);
-  //   // final result =
-  //   await cartRepositoryMock.fetchCartItems();
-  //   // expect(
-  //   //   result.isRight(),
-  //   //   true,
-  //   // );
-  //   verify(
-  //     () => cartRepositoryMock.fetchCartItems(),
-  //   ).called(1);
-  // });
-  // test('update cart storage failed', () async {
-  //   when(() => cartStorageMock.init())
-  //       .thenThrow((invocation) async => MockException());
+    when(
+      () => countlyServiceMock.addCountlyEvent(
+        'Delete from Cart',
+      ),
+    ).thenAnswer(
+      (invocation) async => const Right(unit),
+    );
 
-  //   final result = await cartRepositoryMock.initCartStorage();
+    when(
+      () => countlyServiceMock.addCountlyEvent(
+        'Remove bonus',
+      ),
+    ).thenAnswer(
+      (invocation) async => const Right(unit),
+    );
+  });
 
-  //   expect(
-  //     result.isLeft(),
-  //     true,
-  //   );
-  // });
+  test('Test Fetch Cart - Success', () async {
+    final result = cartRepository.fetchCart();
+    expect(result.isRight(), true);
+  });
+
+  test('Test Fetch Cart - Failure', () async {
+    when(
+      () => cartStorageMock.getAll(),
+    ).thenThrow(
+      (invocation) async => MockException(),
+    );
+
+    final result = cartRepository.fetchCart();
+    expect(result.isLeft(), true);
+  });
+
+  test('Test Clear Cart - Success', () async {
+    final result = await cartRepository.clearCart();
+    expect(result.isRight(), true);
+  });
+
+  test('Test Clear Cart - Failure', () async {
+    when(
+      () => cartStorageMock.clear(),
+    ).thenThrow(
+      (invocation) async => MockException(),
+    );
+
+    final result = await cartRepository.clearCart();
+    expect(result.isLeft(), true);
+  });
+
+  test('Test Add Item To Cart - Success', () async {
+    final result = await cartRepository.addItemToCart(
+      cartItem: fakeCartItem,
+      override: true,
+    );
+    expect(result.isRight(), false);
+  });
+
+  test('Test Add Item To Cart Override False - Success', () async {
+    final result = await cartRepository.addItemToCart(
+      cartItem: fakeCartItem,
+      override: false,
+    );
+    expect(result.isRight(), false);
+  });
+
+  test('Test Add Item To Cart - Failure', () async {
+    when(
+      () => cartStorageMock.put(
+        id: fakeCartItem.id,
+        item: CartItemDto.fromDomain(fakeCartItem),
+      ),
+    ).thenThrow(
+      (invocation) async => MockException(),
+    );
+
+    final result = await cartRepository.addItemToCart(
+      cartItem: fakeCartItem,
+      override: true,
+    );
+    expect(result.isLeft(), true);
+  });
+
+  test('Test Delete From Cart - Success', () async {
+    when(
+      () => cartStorageMock.getAll(),
+    ).thenAnswer(
+      (invocation) => <CartItemDto>[],
+    );
+    final result = await cartRepository.deleteFromCart(
+      item: fakeCartItem,
+    );
+    expect(result.isRight(), true);
+  });
+
+  test('Test Delete From Cart - Failure', () async {
+    when(
+      () => cartStorageMock.delete(
+        id: fakeCartItem.id,
+      ),
+    ).thenThrow(
+      (invocation) async => MockException(),
+    );
+
+    final result = await cartRepository.deleteFromCart(
+      item: fakeCartItem,
+    );
+    expect(result.isLeft(), true);
+  });
+
+  test('Test Add Remark To Cart Item - Success', () async {
+    final material = fakeCartItem.materials.first;
+    final itemWithRemark = fakeCartItem.copyWith(materials: [
+      material.copyWith.materialInfo(
+        remarks: 'FakeRemark',
+      ),
+    ]);
+
+    when(
+      () => cartStorageMock.put(
+        id: itemWithRemark.id,
+        item: CartItemDto.fromDomain(itemWithRemark),
+      ),
+    ).thenAnswer(
+      (invocation) async => const Right(unit),
+    );
+
+    final result = await cartRepository.addRemarkToCartItem(
+      item: fakeCartItem,
+      remarkMessage: 'FakeRemark',
+    );
+    expect(result.isRight(), false);
+  });
+
+  test('Test Add Remark To Cart Item - Bundle - Success', () async {
+    when(
+      () => cartStorageMock.get(
+        id: fakeCartItem.id,
+      ),
+    ).thenAnswer(
+      (invocation) => CartItemDto.fromDomain(
+        fakeCartItem.copyWith(
+          itemType: CartItemType.bundle,
+          materials: [
+            fakeCartItem.materials.first.copyWith(
+              bundle: Bundle.empty().copyWith(bundleCode: '1'),
+            ),
+          ],
+        ),
+      ),
+    );
+
+    final material = fakeCartItem.materials.first;
+    final itemWithRemark = fakeCartItem.copyWith(
+      itemType: CartItemType.bundle,
+      materials: [
+        fakeCartItem.materials.first.copyWith(
+          bundle: Bundle.empty().copyWith(bundleCode: '1'),
+          materialInfo: material.materialInfo.copyWith(
+            remarks: 'FakeRemark',
+          ),
+        ),
+      ],
+    );
+
+    when(
+      () => cartStorageMock.put(
+        id: itemWithRemark.id,
+        item: CartItemDto.fromDomain(itemWithRemark),
+      ),
+    ).thenAnswer(
+      (invocation) async => const Right(unit),
+    );
+
+    final result = await cartRepository.addRemarkToCartItem(
+      item: fakeCartItem.copyWith(
+        materials: [
+          fakeCartItem.materials.first.copyWith(
+            bundle: Bundle.empty().copyWith(bundleCode: '1'),
+          ),
+        ],
+      ),
+      remarkMessage: 'FakeRemark',
+    );
+    expect(result.isRight(), true);
+  });
+
+  test('Test Add Remark To Cart Item - Failure', () async {
+    final material = fakeCartItem.materials.first;
+    final itemWithRemark = fakeCartItem.copyWith(materials: [
+      material.copyWith.materialInfo(
+        remarks: 'FakeRemark',
+      ),
+    ]);
+
+    when(
+      () => cartStorageMock.get(
+        id: fakeCartItem.id,
+      ),
+    ).thenThrow(
+      (invocation) async => MockException(),
+    );
+
+    when(
+      () => cartStorageMock.put(
+        id: itemWithRemark.id,
+        item: CartItemDto.fromDomain(itemWithRemark),
+      ),
+    ).thenThrow(
+      (invocation) async => MockException(),
+    );
+
+    final result = await cartRepository.addRemarkToCartItem(
+      item: fakeCartItem,
+      remarkMessage: 'FakeRemark',
+    );
+    expect(result.isLeft(), true);
+  });
+
+  test('Test Add Bonus To Cart Item - Success', () async {
+    when(
+      () => cartStorageMock.get(
+        id: fakeCartItem.id,
+      ),
+    ).thenAnswer(
+      (invocation) => CartItemDto.fromDomain(
+        fakeCartItem.copyWith(
+          materials: [
+            fakeCartItem.materials.first.copyWith(
+              addedBonusList: [
+                MaterialItemBonus.empty().copyWith(
+                  additionalBonusFlag: true,
+                  materialInfo: MaterialInfo.empty().copyWith(
+                    materialNumber: MaterialNumber('123'),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+
+    when(
+      () => cartStorageMock.put(
+        id: fakeCartItem.id,
+        item: CartItemDto.fromDomain(
+          fakeCartItem.copyWith(
+            materials: [
+              fakeCartItem.materials.first.copyWith(
+                addedBonusList: [
+                  MaterialItemBonus.empty().copyWith(
+                    additionalBonusFlag: true,
+                    materialInfo: MaterialInfo.empty().copyWith(
+                      materialNumber: MaterialNumber('123'),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    ).thenAnswer(
+      (invocation) async => const Right(unit),
+    );
+
+    final result = await cartRepository.addBonusToCartItem(
+      item: fakeCartItem.copyWith(
+        materials: [
+          fakeCartItem.materials.first.copyWith(
+            addedBonusList: [
+              MaterialItemBonus.empty().copyWith(
+                additionalBonusFlag: true,
+                materialInfo: MaterialInfo.empty().copyWith(
+                  materialNumber: MaterialNumber('123'),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+      newBonus: MaterialItemBonus.empty().copyWith(
+        additionalBonusFlag: true,
+        materialInfo: MaterialInfo.empty().copyWith(
+          materialNumber: MaterialNumber('123'),
+        ),
+      ),
+      overrideQty: true,
+    );
+    expect(result.isRight(), false);
+  });
+
+  test('Test Add Bonus To Cart Item - Bundle - Success', () async {
+    when(
+      () => cartStorageMock.get(
+        id: fakeCartItem.id,
+      ),
+    ).thenAnswer(
+      (invocation) => CartItemDto.fromDomain(
+        fakeCartItem.copyWith(
+          itemType: CartItemType.bundle,
+          materials: [
+            fakeCartItem.materials.first.copyWith(
+              bundle: Bundle.empty().copyWith(bundleCode: '1'),
+              addedBonusList: [
+                MaterialItemBonus.empty().copyWith(
+                  additionalBonusFlag: true,
+                  materialInfo: MaterialInfo.empty().copyWith(
+                    materialNumber: MaterialNumber('123'),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+
+    when(
+      () => cartStorageMock.put(
+        id: fakeCartItem.id,
+        item: CartItemDto.fromDomain(
+          fakeCartItem.copyWith(
+            itemType: CartItemType.bundle,
+            materials: [
+              fakeCartItem.materials.first.copyWith(
+                bundle: Bundle.empty().copyWith(bundleCode: '1'),
+                addedBonusList: [
+                  MaterialItemBonus.empty().copyWith(
+                    additionalBonusFlag: true,
+                    materialInfo: MaterialInfo.empty().copyWith(
+                      materialNumber: MaterialNumber('123'),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    ).thenAnswer(
+      (invocation) async => const Right(unit),
+    );
+
+    final result = await cartRepository.addBonusToCartItem(
+      item: fakeCartItem.copyWith(
+        itemType: CartItemType.bundle,
+        materials: [
+          fakeCartItem.materials.first.copyWith(
+            bundle: Bundle.empty().copyWith(bundleCode: '1'),
+            addedBonusList: [
+              MaterialItemBonus.empty().copyWith(
+                additionalBonusFlag: true,
+                materialInfo: MaterialInfo.empty().copyWith(
+                  materialNumber: MaterialNumber('123'),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+      newBonus: MaterialItemBonus.empty().copyWith(
+        additionalBonusFlag: true,
+        materialInfo: MaterialInfo.empty().copyWith(
+          materialNumber: MaterialNumber('123'),
+        ),
+      ),
+      overrideQty: true,
+    );
+    expect(result.isRight(), true);
+  });
+
+  test('Test Add Bonus To Cart Item - Override False - Success', () async {
+    when(
+      () => cartStorageMock.get(
+        id: fakeCartItem.id,
+      ),
+    ).thenAnswer(
+      (invocation) => CartItemDto.fromDomain(
+        fakeCartItem.copyWith(
+          materials: [
+            fakeCartItem.materials.first.copyWith(
+              addedBonusList: [
+                MaterialItemBonus.empty().copyWith(
+                  additionalBonusFlag: true,
+                  materialInfo: MaterialInfo.empty().copyWith(
+                    materialNumber: MaterialNumber('123'),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+
+    when(
+      () => cartStorageMock.put(
+        id: fakeCartItem.id,
+        item: CartItemDto.fromDomain(
+          fakeCartItem.copyWith(
+            materials: [
+              fakeCartItem.materials.first.copyWith(
+                addedBonusList: [
+                  MaterialItemBonus.empty().copyWith(
+                    additionalBonusFlag: true,
+                    materialInfo: MaterialInfo.empty().copyWith(
+                      materialNumber: MaterialNumber('123'),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    ).thenAnswer(
+      (invocation) async => const Right(unit),
+    );
+    final result = await cartRepository.addBonusToCartItem(
+      item: fakeCartItem.copyWith(
+        materials: [
+          fakeCartItem.materials.first.copyWith(
+            addedBonusList: [
+              MaterialItemBonus.empty().copyWith(
+                additionalBonusFlag: true,
+                materialInfo: MaterialInfo.empty().copyWith(
+                  materialNumber: MaterialNumber('123'),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+      newBonus: MaterialItemBonus.empty().copyWith(
+        additionalBonusFlag: true,
+        materialInfo: MaterialInfo.empty().copyWith(
+          materialNumber: MaterialNumber('123'),
+        ),
+      ),
+      overrideQty: false,
+    );
+    expect(result.isRight(), false);
+  });
+
+  test('Test Add Bonus To Cart Item - additionalBonusFlag False - Success',
+      () async {
+    when(
+      () => cartStorageMock.get(
+        id: fakeCartItem.id,
+      ),
+    ).thenAnswer(
+      (invocation) => CartItemDto.fromDomain(
+        fakeCartItem.copyWith(
+          materials: [
+            fakeCartItem.materials.first.copyWith(
+              addedBonusList: [
+                MaterialItemBonus.empty().copyWith(
+                  additionalBonusFlag: false,
+                  materialInfo: MaterialInfo.empty().copyWith(
+                    materialNumber: MaterialNumber('1234'),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+
+    when(
+      () => cartStorageMock.put(
+        id: fakeCartItem.id,
+        item: CartItemDto.fromDomain(
+          fakeCartItem.copyWith(
+            materials: [
+              fakeCartItem.materials.first.copyWith(
+                addedBonusList: [
+                  MaterialItemBonus.empty().copyWith(
+                    additionalBonusFlag: false,
+                    materialInfo: MaterialInfo.empty().copyWith(
+                      materialNumber: MaterialNumber('123'),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    ).thenAnswer(
+      (invocation) async => const Right(unit),
+    );
+    final result = await cartRepository.addBonusToCartItem(
+      item: fakeCartItem.copyWith(
+        materials: [
+          fakeCartItem.materials.first.copyWith(
+            addedBonusList: [
+              MaterialItemBonus.empty().copyWith(
+                additionalBonusFlag: true,
+                materialInfo: MaterialInfo.empty().copyWith(
+                  materialNumber: MaterialNumber('123'),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+      newBonus: MaterialItemBonus.empty().copyWith(
+        additionalBonusFlag: true,
+        materialInfo: MaterialInfo.empty().copyWith(
+          materialNumber: MaterialNumber('123'),
+        ),
+      ),
+      overrideQty: false,
+    );
+    expect(result.isRight(), false);
+  });
+
+  test('Test Add Bonus To Cart Item - Failure', () async {
+    when(
+      () => cartStorageMock.put(
+        id: fakeCartItem.id,
+        item: CartItemDto.fromDomain(fakeCartItem.copyWith(materials: [
+          fakeCartItem.materials.first.copyWith(
+            addedBonusList: [MaterialItemBonus.empty()],
+          )
+        ])),
+      ),
+    ).thenThrow(
+      (invocation) async => MockException(),
+    );
+
+    final result = await cartRepository.addBonusToCartItem(
+      item: fakeCartItem,
+      newBonus: MaterialItemBonus.empty(),
+      overrideQty: true,
+    );
+    expect(result.isLeft(), true);
+  });
+
+  test('Test Delete Bonus From Cart Item - Success', () async {
+    when(
+      () => cartStorageMock.get(
+        id: fakeCartItem.id,
+      ),
+    ).thenAnswer(
+      (invocation) => CartItemDto.fromDomain(
+        fakeCartItem.copyWith(
+          materials: [
+            fakeCartItem.materials.first.copyWith(
+              addedBonusList: [
+                MaterialItemBonus.empty().copyWith(
+                  additionalBonusFlag: true,
+                  materialInfo: MaterialInfo.empty().copyWith(
+                    materialNumber: MaterialNumber('123'),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+
+    final result = await cartRepository.deleteBonusFromCartItem(
+      item: fakeCartItem,
+      deletedBonus: MaterialItemBonus.empty().copyWith(
+        additionalBonusFlag: true,
+        materialInfo: MaterialInfo.empty().copyWith(
+          materialNumber: MaterialNumber('123'),
+        ),
+      ),
+    );
+    expect(result.isRight(), false);
+  });
+
+  test('Test Delete Bonus From Cart Item - Bundle - Success', () async {
+    when(
+      () => cartStorageMock.get(
+        id: fakeCartItem.id,
+      ),
+    ).thenAnswer(
+      (invocation) => CartItemDto.fromDomain(
+        fakeCartItem.copyWith(
+          itemType: CartItemType.bundle,
+          materials: [
+            fakeCartItem.materials.first.copyWith(
+              bundle: Bundle.empty().copyWith(bundleCode: '1'),
+              addedBonusList: [
+                MaterialItemBonus.empty().copyWith(
+                  additionalBonusFlag: true,
+                  materialInfo: MaterialInfo.empty().copyWith(
+                    materialNumber: MaterialNumber('123'),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+
+    final result = await cartRepository.deleteBonusFromCartItem(
+      item: fakeCartItem.copyWith(
+        itemType: CartItemType.bundle,
+        materials: [
+          fakeCartItem.materials.first.copyWith(
+            bundle: Bundle.empty().copyWith(bundleCode: '1'),
+          ),
+        ],
+      ),
+      deletedBonus: MaterialItemBonus.empty().copyWith(
+        additionalBonusFlag: true,
+        materialInfo: MaterialInfo.empty().copyWith(
+          materialNumber: MaterialNumber('123'),
+        ),
+      ),
+    );
+    expect(result.isRight(), true);
+  });
+
+  test('Test Delete Bonus From Cart Item - Failure', () async {
+    when(
+      () => cartStorageMock.get(
+        id: fakeCartItem.id,
+      ),
+    ).thenThrow(
+      (invocation) async => MockException(),
+    );
+
+    when(
+      () => cartStorageMock.put(
+        id: fakeCartItem.id,
+        item: CartItemDto.fromDomain(fakeCartItem),
+      ),
+    ).thenThrow(
+      (invocation) async => MockException(),
+    );
+
+    final result = await cartRepository.deleteBonusFromCartItem(
+      item: fakeCartItem,
+      deletedBonus: MaterialItemBonus.empty(),
+    );
+    expect(result.isLeft(), true);
+  });
+
+  test('Test Update Material Deal Bonus - Success', () async {
+    when(
+      () => stockInfoLocalDataSource.getStockInfo(),
+    ).thenAnswer(
+      (invocation) async => StockInfo.empty().copyWith(
+        materialNumber: MaterialNumber('1234'),
+        inStock: MaterialInStock('Yes'),
+      ),
+    );
+
+    final result = await cartRepository.updateMaterialDealBonus(
+      material: fakeCartItem.materials.first.copyWith(
+        materialInfo: MaterialInfo.empty().copyWith(
+          materialNumber: MaterialNumber('1234'),
+        ),
+        price: Price.empty().copyWith(
+          bonuses: [
+            PriceBonus.empty().copyWith(
+              items: [
+                PriceBonusItem.empty().copyWith(
+                  bonusMaterials: [
+                    BonusMaterial.empty().copyWith(
+                      bonusQuantity: 1,
+                      qualifyingQuantity: 1,
+                      materialNumber: MaterialNumber(
+                        '1234',
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
+        addedBonusList: [
+          MaterialItemBonus.empty().copyWith(
+            additionalBonusFlag: true,
+          ),
+        ],
+      ),
+      shipToInfo: fakeShipToInfo,
+      salesOrganisation: mockSalesOrganisation,
+      customerCodeInfo: fakeCustomerCodeInfo,
+      salesOrganisationConfigs: mockSalesOrganisationConfigs.copyWith(
+        enableBatchNumber: false,
+      ),
+    );
+    expect(result.isRight(), false);
+  });
+
+  test('Test Update Material Deal Bonus - getStockInfo - Failure', () async {
+    when(
+      () => stockInfoLocalDataSource.getStockInfo(),
+    ).thenThrow(
+      (invocation) async => MockException(),
+    );
+
+    final result = await cartRepository.updateMaterialDealBonus(
+      material: fakeCartItem.materials.first.copyWith(
+        materialInfo: MaterialInfo.empty().copyWith(
+          materialNumber: MaterialNumber('1234'),
+        ),
+        price: Price.empty().copyWith(
+          bonuses: [
+            PriceBonus.empty().copyWith(
+              items: [
+                PriceBonusItem.empty().copyWith(
+                  bonusMaterials: [
+                    BonusMaterial.empty().copyWith(
+                      bonusQuantity: 1,
+                      qualifyingQuantity: 1,
+                      materialNumber: MaterialNumber(
+                        '1234',
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
+        addedBonusList: [
+          MaterialItemBonus.empty().copyWith(
+            additionalBonusFlag: true,
+          ),
+        ],
+      ),
+      shipToInfo: fakeShipToInfo,
+      salesOrganisation: mockSalesOrganisation,
+      customerCodeInfo: fakeCustomerCodeInfo,
+      salesOrganisationConfigs: mockSalesOrganisationConfigs.copyWith(
+        enableBatchNumber: false,
+      ),
+    );
+    expect(result.isRight(), false);
+  });
+
+  test('Test Update Material Deal Bonus - Failure', () async {
+    when(
+      () => stockInfoLocalDataSource.getStockInfo(),
+    ).thenAnswer(
+      (invocation) async => StockInfo.empty().copyWith(
+        materialNumber: MaterialNumber('1234'),
+        inStock: MaterialInStock('Yes'),
+      ),
+    );
+    when(
+      () => cartStorageMock.put(
+        id: fakeCartItem.id,
+        item: CartItemDto.fromDomain(fakeCartItem),
+      ),
+    ).thenThrow(
+      (invocation) async => MockException(),
+    );
+
+    final result = await cartRepository.updateMaterialDealBonus(
+      material: fakeCartItem.materials.first,
+      shipToInfo: fakeShipToInfo,
+      salesOrganisation: mockSalesOrganisation,
+      customerCodeInfo: fakeCustomerCodeInfo,
+      salesOrganisationConfigs: mockSalesOrganisationConfigs,
+    );
+    expect(result.isLeft(), true);
+  });
+
+  test('Test Add Remark To Bonus Item - Success', () async {
+    when(
+      () => cartStorageMock.get(
+        id: fakeCartItem.id,
+      ),
+    ).thenAnswer(
+      (invocation) => CartItemDto.fromDomain(
+        fakeCartItem.copyWith(
+          materials: [
+            fakeCartItem.materials.first.copyWith(
+              addedBonusList: [
+                MaterialItemBonus.empty().copyWith(
+                  additionalBonusFlag: true,
+                  materialInfo: MaterialInfo.empty().copyWith(
+                    materialNumber: MaterialNumber('123'),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+
+    when(
+      () => cartStorageMock.put(
+        id: fakeCartItem.id,
+        item: CartItemDto.fromDomain(
+          fakeCartItem.copyWith(
+            materials: [
+              fakeCartItem.materials.first.copyWith(
+                addedBonusList: [
+                  MaterialItemBonus.empty().copyWith(
+                    additionalBonusFlag: true,
+                    materialInfo: MaterialInfo.empty().copyWith(
+                      materialNumber: MaterialNumber('123'),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    ).thenAnswer(
+      (invocation) async => const Right(unit),
+    );
+
+    final result = await cartRepository.addRemarkToBonusItem(
+      item: fakeCartItem,
+      bonus: MaterialItemBonus.empty().copyWith(
+        additionalBonusFlag: true,
+        materialInfo: MaterialInfo.empty().copyWith(
+          materialNumber: MaterialNumber('123'),
+        ),
+      ),
+      remarkMessage: 'FakeBonusRemarks',
+    );
+    expect(result.isRight(), false);
+  });
+
+  test('Test Add Remark To Bonus Item - Bundle - Success', () async {
+    when(
+      () => cartStorageMock.get(
+        id: fakeCartItem.id,
+      ),
+    ).thenAnswer(
+      (invocation) => CartItemDto.fromDomain(
+        fakeCartItem.copyWith(
+          itemType: CartItemType.bundle,
+          materials: [
+            fakeCartItem.materials.first.copyWith(
+              bundle: Bundle.empty().copyWith(bundleCode: '1'),
+              addedBonusList: [
+                MaterialItemBonus.empty().copyWith(
+                  additionalBonusFlag: true,
+                  materialInfo: MaterialInfo.empty().copyWith(
+                    materialNumber: MaterialNumber('123'),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+
+    when(
+      () => cartStorageMock.put(
+        id: fakeCartItem.id,
+        item: CartItemDto.fromDomain(
+          fakeCartItem.copyWith(
+            itemType: CartItemType.bundle,
+            materials: [
+              fakeCartItem.materials.first.copyWith(
+                bundle: Bundle.empty().copyWith(bundleCode: '1'),
+                addedBonusList: [
+                  MaterialItemBonus.empty().copyWith(
+                    additionalBonusFlag: true,
+                    materialInfo: MaterialInfo.empty().copyWith(
+                      materialNumber: MaterialNumber('123'),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    ).thenAnswer(
+      (invocation) async => const Right(unit),
+    );
+
+    final result = await cartRepository.addRemarkToBonusItem(
+      item: fakeCartItem.copyWith(
+        itemType: CartItemType.bundle,
+        materials: [
+          fakeCartItem.materials.first.copyWith(
+            bundle: Bundle.empty().copyWith(bundleCode: '1'),
+          ),
+        ],
+      ),
+      bonus: MaterialItemBonus.empty().copyWith(
+        additionalBonusFlag: true,
+        materialInfo: MaterialInfo.empty().copyWith(
+          materialNumber: MaterialNumber('123'),
+        ),
+      ),
+      remarkMessage: 'FakeBonusRemarks',
+    );
+    expect(result.isRight(), true);
+  });
+
+  test('Test Add Remark To Bonus Item - Failure', () async {
+    when(
+      () => cartStorageMock.get(
+        id: fakeCartItem.id,
+      ),
+    ).thenThrow(
+      (invocation) async => MockException(),
+    );
+
+    when(
+      () => cartStorageMock.put(
+        id: fakeCartItem.id,
+        item: CartItemDto.fromDomain(fakeCartItem),
+      ),
+    ).thenThrow(
+      (invocation) async => MockException(),
+    );
+
+    final result = await cartRepository.addRemarkToBonusItem(
+      item: fakeCartItem,
+      bonus: MaterialItemBonus.empty(),
+      remarkMessage: 'FakeBonusRemarks',
+    );
+    expect(result.isLeft(), true);
+  });
+
+  test('Test Override Cart Item Price - Bundle - Success', () async {
+    when(
+      () => cartStorageMock.get(
+        id: fakeCartItem.id,
+      ),
+    ).thenAnswer(
+      (invocation) => CartItemDto.fromDomain(
+        fakeCartItem.copyWith(
+          itemType: CartItemType.bundle,
+          materials: [
+            fakeCartItem.materials.first.copyWith(
+              bundle: Bundle.empty().copyWith(bundleCode: '1'),
+              addedBonusList: [
+                MaterialItemBonus.empty().copyWith(
+                  additionalBonusFlag: true,
+                  materialInfo: MaterialInfo.empty().copyWith(
+                    materialNumber: MaterialNumber('123'),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+
+    when(
+      () => cartStorageMock.put(
+        id: fakeCartItem.id,
+        item: CartItemDto.fromDomain(
+          fakeCartItem.copyWith(
+            materials: [
+              fakeCartItem.materials.first.copyWith(
+                price: Price.empty().copyWith(
+                  materialNumber:
+                      fakeCartItem.materials.first.materialInfo.materialNumber,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    ).thenAnswer(
+      (invocation) async => const Right(unit),
+    );
+
+    final result = await cartRepository.overrideCartItemPrice(
+      item: fakeCartItem,
+      overridePriceList: [
+        Price.empty().copyWith(
+          materialNumber:
+              fakeCartItem.materials.first.materialInfo.materialNumber,
+        ),
+      ],
+    );
+    expect(result.isRight(), true);
+  });
+
+  test('Test Override Cart Item Price - Success', () async {
+    when(
+      () => cartStorageMock.get(
+        id: fakeCartItem.id,
+      ),
+    ).thenAnswer(
+      (invocation) => CartItemDto.fromDomain(fakeCartItem),
+    );
+
+    when(
+      () => cartStorageMock.put(
+        id: fakeCartItem.id,
+        item: CartItemDto.fromDomain(
+          fakeCartItem.copyWith(
+            materials: [
+              fakeCartItem.materials.first.copyWith(
+                price: Price.empty().copyWith(
+                  materialNumber:
+                      fakeCartItem.materials.first.materialInfo.materialNumber,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    ).thenAnswer(
+      (invocation) async => const Right(unit),
+    );
+
+    final result = await cartRepository.overrideCartItemPrice(
+      item: fakeCartItem,
+      overridePriceList: [
+        Price.empty().copyWith(
+          materialNumber:
+              fakeCartItem.materials.first.materialInfo.materialNumber,
+        ),
+      ],
+    );
+    expect(result.isRight(), false);
+  });
+
+  test('Test Override Cart Item Price - Failure', () async {
+    when(
+      () => cartStorageMock.get(
+        id: fakeCartItem.id,
+      ),
+    ).thenThrow(
+      (invocation) async => MockException(),
+    );
+
+    when(
+      () => cartStorageMock.put(
+        id: fakeCartItem.id,
+        item: CartItemDto.fromDomain(
+          fakeCartItem.copyWith(
+            materials: [
+              fakeCartItem.materials.first.copyWith(
+                price: Price.empty().copyWith(
+                  materialNumber:
+                      fakeCartItem.materials.first.materialInfo.materialNumber,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    ).thenThrow(
+      (invocation) async => MockException(),
+    );
+
+    final result = await cartRepository.overrideCartItemPrice(
+      item: fakeCartItem,
+      overridePriceList: [
+        Price.empty().copyWith(
+          materialNumber:
+              fakeCartItem.materials.first.materialInfo.materialNumber,
+        ),
+      ],
+    );
+    expect(result.isLeft(), true);
+  });
+
+  test('Test Update Discount Qty Material - Success', () async {
+    final result = cartRepository.updateDiscountQty(
+      items: [fakeCartItem],
+    );
+    expect(result, [fakeCartItem]);
+  });
+
+  test('Test Update Discount Qty Material - zmgDiscount - true - Success',
+      () async {
+    final result = cartRepository.updateDiscountQty(
+      items: [
+        fakeCartItem.copyWith(
+          materials: [
+            fakeCartItem.materials.first.copyWith(
+              price: Price.empty().copyWith(
+                zmgDiscount: true,
+              ),
+            ),
+          ],
+        )
+      ],
+    );
+    expect(result, [
+      fakeCartItem.copyWith(
+        materials: [
+          fakeCartItem.materials.first.copyWith(
+            discountedMaterialCount: 1,
+            price: Price.empty().copyWith(
+              zmgDiscount: true,
+            ),
+          ),
+        ],
+      ),
+    ]);
+  });
+
+  test(
+      'Test Update Discount Qty Material - isTireDiscountEligible - true - Success',
+      () async {
+    final result = cartRepository.updateDiscountQty(
+      items: [
+        fakeCartItem.copyWith(
+          materials: [
+            fakeCartItem.materials.first.copyWith(
+              price: Price.empty().copyWith(
+                tiers: [
+                  PriceTier.empty(),
+                ],
+              ),
+            ),
+          ],
+        )
+      ],
+    );
+    expect(result, [
+      fakeCartItem.copyWith(
+        materials: [
+          fakeCartItem.materials.first.copyWith(
+            discountedMaterialCount: 1,
+            price: Price.empty().copyWith(
+              tiers: [
+                PriceTier.empty(),
+              ],
+            ),
+          ),
+        ],
+      ),
+    ]);
+  });
+
+  test('Test Update Discount Qty Bundle - Success', () async {
+    final result = cartRepository.updateDiscountQty(
+      items: [
+        fakeCartItem.copyWith(
+          itemType: CartItemType.bundle,
+          materials: [
+            fakeCartItem.materials.first.copyWith(
+              bundle: Bundle.empty().copyWith(bundleCode: '1'),
+            ),
+          ],
+        ),
+      ],
+    );
+    expect(result, [
+      fakeCartItem.copyWith(
+        itemType: CartItemType.bundle,
+        materials: [
+          fakeCartItem.materials.first.copyWith(
+            bundle: Bundle.empty().copyWith(bundleCode: '1'),
+          ),
+        ],
+      ),
+    ]);
+  });
+
+  test('Test Update Selection In Cart - Success', () async {
+    final result = await cartRepository.updateSelectionInCart(
+      updatedItem: fakeCartItem,
+    );
+    expect(result.isRight(), false);
+  });
+
+  test('Test Update Selection In Cart - Failure', () async {
+    when(
+      () => cartStorageMock.put(
+        id: fakeCartItem.id,
+        item: CartItemDto.fromDomain(fakeCartItem),
+      ),
+    ).thenThrow(
+      (invocation) async => MockException(),
+    );
+
+    final result = await cartRepository.updateSelectionInCart(
+      updatedItem: fakeCartItem,
+    );
+    expect(result.isLeft(), true);
+  });
+
+  test('Test Update All Selection In Cart - Selected - Success', () async {
+    final result = await cartRepository.updateAllSelectionInCart(
+      currentCart: [fakeCartItem],
+    );
+    expect(result.isRight(), false);
+  });
+
+  test('Test Update All Selection In Cart - Not Selected - Success', () async {
+    final result = await cartRepository.updateAllSelectionInCart(
+      currentCart: [
+        fakeCartItem.copyWith(
+          isSelected: false,
+        ),
+      ],
+    );
+    expect(result.isRight(), false);
+  });
+
+  test('Test Update All Selection In Cart - Failure', () async {
+    when(
+      () => cartStorageMock.put(
+        id: fakeCartItem.id,
+        item: CartItemDto.fromDomain(fakeCartItem),
+      ),
+    ).thenThrow(
+      (invocation) async => MockException(),
+    );
+
+    final result = await cartRepository.updateAllSelectionInCart(
+      currentCart: [fakeCartItem],
+    );
+    expect(result.isLeft(), true);
+  });
+
+  test('Test Save To Cart With Updated Stock Info - Success', () async {
+    final result = await cartRepository.saveToCartWithUpdatedStockInfo(
+      salesOrganisationConfigs: mockSalesOrganisationConfigs,
+      customerCodeInfo: fakeCustomerCodeInfo,
+      salesOrganisation: mockSalesOrganisation,
+      shipToInfo: fakeShipToInfo,
+      cartItem: [fakeCartItem],
+    );
+    expect(result.isRight(), false);
+  });
+
+  test('Test Save To Cart With Updated Stock Info - Failure', () async {
+    when(
+      () => cartStorageMock.putAll(
+        items: {'1': CartItemDto.fromDomain(fakeCartItem)},
+      ),
+    ).thenThrow(
+      (invocation) async => MockException(),
+    );
+
+    final result = await cartRepository.saveToCartWithUpdatedStockInfo(
+      salesOrganisationConfigs: mockSalesOrganisationConfigs,
+      customerCodeInfo: fakeCustomerCodeInfo,
+      salesOrganisation: mockSalesOrganisation,
+      shipToInfo: fakeShipToInfo,
+      cartItem: [fakeCartItem],
+    );
+    expect(result.isLeft(), true);
+  });
+
+  test('Test Get Stock Info - Success', () async {
+    final result = await cartRepository.getStockInfo(
+      salesOrganisationConfigs: mockSalesOrganisationConfigs,
+      customerCodeInfo: fakeCustomerCodeInfo,
+      salesOrganisation: mockSalesOrganisation,
+      shipToInfo: fakeShipToInfo,
+      material: fakeCartItem.materials.first.materialInfo,
+    );
+    expect(result.isRight(), true);
+  });
+
+  test('Test Get Stock Info - UAT - Success', () async {
+    when(
+      () => stockInfoLocalDataSource.getStockInfo(),
+    ).thenAnswer(
+      (invocation) async => StockInfo.empty(),
+    );
+
+    when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+
+    final result = await cartRepository.getStockInfo(
+      salesOrganisationConfigs: mockSalesOrganisationConfigs,
+      customerCodeInfo: fakeCustomerCodeInfo,
+      salesOrganisation: mockSalesOrganisation,
+      shipToInfo: fakeShipToInfo,
+      material: fakeCartItem.materials.first.materialInfo,
+    );
+    expect(result.isRight(), true);
+  });
+
+  test('Test Get Stock Info - UAT - Failure', () async {
+    when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+    when(
+      () => stockInfoRemoteDataSource.getStockInfo(
+        materialNumber: fakeCartItem.materials.first.materialNumberString,
+        salesOrg: mockSalesOrganisation.salesOrg.getOrCrash(),
+        selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+        plant: fakeShipToInfo.plant,
+      ),
+    ).thenThrow(
+      (invocation) async => MockException(),
+    );
+
+    final result = await cartRepository.getStockInfo(
+      salesOrganisationConfigs: mockSalesOrganisationConfigs,
+      customerCodeInfo: fakeCustomerCodeInfo,
+      salesOrganisation: mockSalesOrganisation,
+      shipToInfo: fakeShipToInfo,
+      material: fakeCartItem.materials.first.materialInfo,
+    );
+    expect(result.isLeft(), true);
+  });
+
+  test('Test Get Stock Info - Failure', () async {
+    when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
+    when(
+      () => stockInfoLocalDataSource.getStockInfo(),
+    ).thenThrow(
+      (invocation) async => MockException(),
+    );
+
+    final result = await cartRepository.getStockInfo(
+      salesOrganisationConfigs: mockSalesOrganisationConfigs,
+      customerCodeInfo: fakeCustomerCodeInfo,
+      salesOrganisation: mockSalesOrganisation,
+      shipToInfo: fakeShipToInfo,
+      material: fakeCartItem.materials.first.materialInfo,
+    );
+    expect(result.isLeft(), true);
+  });
+
+  test('Test Get Stock Info enableBatchNumber - Success', () async {
+    final result = await cartRepository.getStockInfo(
+      salesOrganisationConfigs: mockSalesOrganisationConfigs.copyWith(
+        enableBatchNumber: true,
+      ),
+      customerCodeInfo: fakeCustomerCodeInfo,
+      salesOrganisation: mockSalesOrganisation,
+      shipToInfo: fakeShipToInfo,
+      material: fakeCartItem.materials.first.materialInfo,
+    );
+    expect(result.isRight(), true);
+  });
+
+  test('Test Get Stock Info enableBatchNumber - UAT - Success', () async {
+    when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+
+    final result = await cartRepository.getStockInfo(
+      salesOrganisationConfigs: mockSalesOrganisationConfigs.copyWith(
+        enableBatchNumber: true,
+      ),
+      customerCodeInfo: fakeCustomerCodeInfo,
+      salesOrganisation: mockSalesOrganisation,
+      shipToInfo: fakeShipToInfo,
+      material: fakeCartItem.materials.first.materialInfo,
+    );
+    expect(result.isRight(), true);
+  });
+
+  test('Test Replace Cart With Items - Success', () async {
+    when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
+
+    final result = await cartRepository.replaceCartWithItems(
+      items: [fakeCartItem],
+    );
+    expect(result.isRight(), false);
+  });
+
+  test('Test Replace Cart With Items - Failure', () async {
+    when(
+      () => cartStorageMock.putAll(
+        items: {'1': CartItemDto.fromDomain(fakeCartItem)},
+      ),
+    ).thenThrow(
+      (invocation) async => MockException(),
+    );
+
+    final result = await cartRepository.replaceCartWithItems(
+      items: [fakeCartItem],
+    );
+    expect(result.isLeft(), true);
+  });
 }

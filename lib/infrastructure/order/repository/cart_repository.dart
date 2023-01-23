@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
@@ -19,7 +20,6 @@ import 'package:ezrxmobile/infrastructure/core/local_storage/cart_storage.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/cart_item_dto.dart';
-import 'package:collection/collection.dart';
 
 class CartRepository implements ICartRepository {
   final CartStorage cartStorage;
@@ -35,17 +35,6 @@ class CartRepository implements ICartRepository {
     required this.stockInfoRemoteDataSource,
     required this.countlyService,
   });
-
-  @override
-  Future<Either<ApiFailure, Unit>> initCartStorage() async {
-    try {
-      await cartStorage.init();
-
-      return const Right(unit);
-    } catch (e) {
-      return Left(FailureHandler.handleFailure(e));
-    }
-  }
 
   @override
   Either<ApiFailure, List<CartItem>> fetchCart() {
@@ -489,10 +478,14 @@ class CartRepository implements ICartRepository {
               .map((item) => item.copyWithStockInfo(stockInfoMap: stockInfoMap))
               .toList();
 
-          await cartStorage.putAll(items: {
-            for (final item in cartItemWithStockInfo)
-              item.id: CartItemDto.fromDomain(item),
-          });
+          try {
+            await cartStorage.putAll(items: {
+              for (final item in cartItemWithStockInfo)
+                item.id: CartItemDto.fromDomain(item),
+            });
+          } catch (e) {
+            return Left(FailureHandler.handleFailure(e));
+          }
 
           return fetchCart();
         },

@@ -13,8 +13,6 @@ import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 
 abstract class ICartRepository {
-  Future<Either<ApiFailure, Unit>> initCartStorage();
-
   Either<ApiFailure, List<CartItem>> fetchCart();
 
   Future<Either<ApiFailure, Unit>> clearCart();
