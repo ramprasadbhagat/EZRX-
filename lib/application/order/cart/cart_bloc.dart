@@ -22,6 +22,9 @@ part 'cart_state.dart';
 class CartBloc extends Bloc<CartEvent, CartState> {
   final CartRepository repository;
   CartBloc(this.repository) : super(CartState.initial()) {
+    on<_Initialized>((e, emit) async {
+      emit(CartState.initial());
+    });
     on<_Fetch>((e, emit) async {
       emit(state.copyWith(
         isFetching: true,
