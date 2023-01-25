@@ -21,7 +21,7 @@ class OrderDocumentTypeBloc
     await event.map(
       initialized: (_) => emit(OrderDocumentTypeState.initial()),
       fetch: (e) async {
-        emit(state.copyWith(
+        emit(OrderDocumentTypeState.initial().copyWith(
           isSubmitting: true,
         ));
         final failureOrSuccess =

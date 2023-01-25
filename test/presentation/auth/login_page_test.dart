@@ -9,6 +9,7 @@ import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/announcement/entities/announcement.dart';
@@ -58,6 +59,10 @@ class PaymentCustomerInformationBlocMock extends MockBloc<
         PaymentCustomerInformationEvent, PaymentCustomerInformationState>
     implements PaymentCustomerInformationBloc {}
 
+class OrderDocumentTypeMockBloc
+    extends MockBloc<OrderDocumentTypeEvent, OrderDocumentTypeState>
+    implements OrderDocumentTypeBloc {}
+
 void main() {
   late GetIt locator;
   late LoginFormBloc loginBlocMock;
@@ -72,6 +77,7 @@ void main() {
   final eligibilityBlocMock = EligibilityBlocMock();
   final PaymentCustomerInformationBloc paymentCustomerInformationBlocMock =
       PaymentCustomerInformationBlocMock();
+  late OrderDocumentTypeBloc orderDocumentTypeBlocMock;
 
   setUpAll(() async {
     locator = GetIt.instance;
@@ -87,6 +93,7 @@ void main() {
       loginBlocMock = LoginFormBlocMock();
       authBlocMock = AuthBlocMock();
       announcementBlocMock = AnnnouncementBlocMock();
+      orderDocumentTypeBlocMock = OrderDocumentTypeMockBloc();
 
       when(() => loginBlocMock.state).thenReturn(LoginFormState.initial());
       when(() => announcementBlocMock.state)
@@ -102,6 +109,8 @@ void main() {
       when(() => cartBlocMock.state).thenReturn(CartState.initial());
       when(() => eligibilityBlocMock.state)
           .thenReturn(EligibilityState.initial());
+      when(() => orderDocumentTypeBlocMock.state)
+          .thenReturn(OrderDocumentTypeState.initial());
     });
     testWidgets("Test don't have credential", (tester) async {
       await tester.pumpWidget(
@@ -122,6 +131,9 @@ void main() {
               ),
               BlocProvider<UserBloc>(
                 create: (context) => userBlocMock,
+              ),
+              BlocProvider<OrderDocumentTypeBloc>(
+                create: (context) => orderDocumentTypeBlocMock,
               ),
             ],
             child: const LoginPage(),
@@ -173,6 +185,9 @@ void main() {
               ),
               BlocProvider<UserBloc>(
                 create: (context) => userBlocMock,
+              ),
+              BlocProvider<OrderDocumentTypeBloc>(
+                create: (context) => orderDocumentTypeBlocMock,
               ),
             ],
             child: const LoginPage(),
@@ -227,6 +242,9 @@ void main() {
               BlocProvider<EligibilityBloc>(
                 create: (context) => eligibilityBlocMock,
               ),
+              BlocProvider<OrderDocumentTypeBloc>(
+                create: (context) => orderDocumentTypeBlocMock,
+              ),
             ],
             child: const LoginPage(),
           ),
@@ -268,6 +286,9 @@ void main() {
             ),
             BlocProvider<EligibilityBloc>(
               create: (context) => eligibilityBlocMock,
+            ),
+            BlocProvider<OrderDocumentTypeBloc>(
+              create: (context) => orderDocumentTypeBlocMock,
             ),
           ],
           child: const SplashPage(),

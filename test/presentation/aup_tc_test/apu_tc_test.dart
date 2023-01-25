@@ -9,6 +9,7 @@ import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -62,6 +63,10 @@ class ResetPasswordMockBloc
     extends MockBloc<ResetPasswordEvent, ResetPasswordState>
     implements ResetPasswordBloc {}
 
+class OrderDocumentTypeMockBloc
+    extends MockBloc<OrderDocumentTypeEvent, OrderDocumentTypeState>
+    implements OrderDocumentTypeBloc {}
+
 void main() {
   late GetIt locator;
   late SalesOrgBloc mockSalesOrgBloc;
@@ -73,6 +78,7 @@ void main() {
   late PaymentCustomerInformationBloc paymentCustomerInformationBlocMock;
   late EligibilityBloc eligibilityBlocMock;
   late ResetPasswordBloc resetPasswordBlocMock;
+  late OrderDocumentTypeBloc orderDocumentTypeBlocMock;
 
   setUpAll(() async {
     setupLocator();
@@ -111,6 +117,7 @@ void main() {
       paymentCustomerInformationBlocMock = PaymentCustomerInfoMockBloc();
       eligibilityBlocMock = EligibilityBlocMock();
       resetPasswordBlocMock = ResetPasswordMockBloc();
+      orderDocumentTypeBlocMock = OrderDocumentTypeMockBloc();
       when(() => userBlocMock.state).thenReturn(UserState.initial());
       when(() => mockAuthBloc.state).thenReturn(const AuthState.initial());
       when(() => cartBlocMock.state).thenReturn(CartState.initial());
@@ -120,6 +127,8 @@ void main() {
           .thenReturn(EligibilityState.initial());
       when(() => resetPasswordBlocMock.state)
           .thenReturn(ResetPasswordState.initial());
+      when(() => orderDocumentTypeBlocMock.state)
+          .thenReturn(OrderDocumentTypeState.initial());
       when(() => mockSalesOrgBloc.state).thenReturn(SalesOrgState.initial());
     });
     testWidgets(
@@ -204,6 +213,9 @@ void main() {
             ),
             BlocProvider<ResetPasswordBloc>(
               create: (context) => resetPasswordBlocMock,
+            ),
+            BlocProvider<OrderDocumentTypeBloc>(
+              create: (context) => orderDocumentTypeBlocMock,
             ),
           ],
           child: const SplashPage(),

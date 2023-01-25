@@ -77,36 +77,7 @@ class MaterialListPage extends StatelessWidget {
                       message: 'Unable to fetch Order Type',
                     );
                   },
-                  (_) {
-                    context.read<MaterialListBloc>().add(
-                          MaterialListEvent.fetch(
-                            user: context.read<UserBloc>().state.user,
-                            salesOrganisation: context
-                                .read<SalesOrgBloc>()
-                                .state
-                                .salesOrganisation,
-                            configs: context.read<SalesOrgBloc>().state.configs,
-                            customerCodeInfo: context
-                                .read<CustomerCodeBloc>()
-                                .state
-                                .customerCodeInfo,
-                            shipToInfo:
-                                context.read<ShipToCodeBloc>().state.shipToInfo,
-                            selectedMaterialFilter: context
-                                .read<MaterialFilterBloc>()
-                                .state
-                                .selectedMaterialFilter,
-                            orderDocumentType: context
-                                .read<OrderDocumentTypeBloc>()
-                                .state
-                                .selectedOrderType,
-                            pickAndPack: context
-                                .read<EligibilityBloc>()
-                                .state
-                                .getPNPValueMaterial,
-                          ),
-                        );
-                  },
+                  (_) {},
                 ),
               );
             },

@@ -12,6 +12,7 @@ import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/covid_material_list/covid_material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_bundle_list/material_bundle_list_bloc.dart';
+import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
@@ -31,6 +32,7 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/entities/payment_customer_information.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -109,6 +111,10 @@ class PolicyConfigurationListBlocMock
     extends MockBloc<PolicyConfigurationEvent, PolicyConfigurationState>
     implements PolicyConfigurationBloc {}
 
+class MaterialListBlocMock
+    extends MockBloc<MaterialListEvent, MaterialListState>
+    implements MaterialListBloc {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
@@ -129,6 +135,7 @@ void main() {
   late UsageCodeBloc usageCodeBlocMock;
   late ReturnRequestTypeCodeBloc returnRequestTypeCodeBlocMock;
   late PolicyConfigurationBloc policyConfigurationListBlocMock;
+  late MaterialListBloc materialListBlocMock;
 
   late MaterialBundleListBloc materialBundleListBlocMock;
   late CovidMaterialListBloc covidMaterialListBlocMock;
@@ -179,6 +186,7 @@ void main() {
       usageCodeBlocMock = UsageCodeBlocMock();
       returnRequestTypeCodeBlocMock = ReturnRequestTypeCodeBlocMock();
       policyConfigurationListBlocMock = PolicyConfigurationListBlocMock();
+      materialListBlocMock = MaterialListBlocMock();
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
       when(() => orderDocumentTypeMock.state).thenReturn(
         OrderDocumentTypeState.initial().copyWith(
@@ -209,6 +217,8 @@ void main() {
           .thenReturn(ReturnRequestTypeCodeState.initial());
       when(() => policyConfigurationListBlocMock.state)
           .thenReturn(PolicyConfigurationState.initial());
+      when(() => materialListBlocMock.state)
+          .thenReturn(MaterialListState.initial());
     });
 
     Future getWidget(tester) async {
@@ -247,6 +257,8 @@ void main() {
                 create: (context) => returnRequestTypeCodeBlocMock),
             BlocProvider<PolicyConfigurationBloc>(
                 create: (context) => policyConfigurationListBlocMock),
+            BlocProvider<MaterialListBloc>(
+                create: (context) => materialListBlocMock),
           ],
           child: const SplashPage(),
         ),
@@ -499,6 +511,53 @@ void main() {
           isNotNull);
       expect(() => UpgraderLocalizationMessage().message(UpgraderMessage.title),
           isNotNull);
+    });
+
+    testWidgets('OrderDocumentType change triggers MaterialList Fetch',
+        (tester) async {
+      final salesOrg = salesOrgBlocMock.state.salesOrg;
+
+      final expectedStates = [
+        OrderDocumentTypeState.initial().copyWith(
+          selectedOrderType: OrderDocumentType.empty().copyWith(
+            salesOrg: salesOrg,
+          ),
+        ),
+      ];
+      whenListen(orderDocumentTypeMock, Stream.fromIterable(expectedStates));
+
+      await getWidget(tester);
+      await tester.pump();
+
+      orderDocumentTypeMock.add(
+        OrderDocumentTypeEvent.selectedOrderType(
+          isReasonSelected: true,
+          selectedOrderType: OrderDocumentType.empty().copyWith(
+            salesOrg: salesOrg,
+          ),
+        ),
+      );
+
+      verify(
+        () => materialListBlocMock.add(
+          MaterialListEvent.fetch(
+            user: fakeUser,
+            salesOrganisation: salesOrgBlocMock.state.salesOrganisation,
+            configs: salesOrgBlocMock.state.configs,
+            customerCodeInfo: customerCodeBlocMock.state.customerCodeInfo,
+            shipToInfo: eligibilityBlocMock.state.shipToInfo,
+            selectedMaterialFilter: const MaterialFilter(
+              uniqueItemBrand: <String>[],
+              uniquePrincipalName: <String>[],
+              uniqueTherapeuticClass: <String>[],
+            ),
+            orderDocumentType: OrderDocumentType.empty().copyWith(
+              salesOrg: salesOrg,
+            ),
+            pickAndPack: eligibilityBlocMock.state.getPNPValueMaterial,
+          ),
+        ),
+      ).called(1);
     });
   });
 }

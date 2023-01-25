@@ -5,14 +5,14 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
-import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/application/order/material_bundle_list/material_bundle_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
-import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
-import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
+import 'package:ezrxmobile/application/order/order_history_filter/order_history_filter_bloc.dart';
+import 'package:ezrxmobile/application/order/order_history_filter_by_status/order_history_filter_by_status_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
@@ -24,8 +24,6 @@ import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dar
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ezrxmobile/application/order/order_history_filter/order_history_filter_bloc.dart';
-import 'package:ezrxmobile/application/order/order_history_filter_by_status/order_history_filter_by_status_bloc.dart';
 
 class ShipCodeSelector extends StatelessWidget {
   const ShipCodeSelector({Key? key}) : super(key: key);
@@ -100,32 +98,6 @@ class ShipCodeSelector extends StatelessWidget {
                     ),
                   );
 
-              context.read<MaterialListBloc>().add(
-                    MaterialListEvent.fetch(
-                      user: context.read<UserBloc>().state.user,
-                      salesOrganisation:
-                          context.read<SalesOrgBloc>().state.salesOrganisation,
-                      configs: context.read<SalesOrgBloc>().state.configs,
-                      customerCodeInfo: context
-                          .read<CustomerCodeBloc>()
-                          .state
-                          .customerCodeInfo,
-                      shipToInfo: state.shipToInfo,
-                      selectedMaterialFilter: context
-                          .read<MaterialFilterBloc>()
-                          .state
-                          .getEmptyMaterialFilter(),
-                      orderDocumentType: context
-                          .read<OrderDocumentTypeBloc>()
-                          .state
-                          .selectedOrderType,
-                      pickAndPack: context
-                          .read<EligibilityBloc>()
-                          .state
-                          .getPNPValueMaterial,
-                    ),
-                  );
-
               context.read<OrderHistoryListBloc>().add(
                     OrderHistoryListEvent.fetch(
                       salesOrgConfigs:
@@ -152,20 +124,6 @@ class ShipCodeSelector extends StatelessWidget {
                       user: context.read<UserBloc>().state.user,
                     ),
                   );
-
-              context.read<MaterialFilterBloc>().add(MaterialFilterEvent.fetch(
-                    salesOrganisation:
-                        context.read<SalesOrgBloc>().state.salesOrganisation,
-                    shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
-                    customerCodeInfo:
-                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                    user: context.read<UserBloc>().state.user,
-                    salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
-                    pickAndPack: context
-                        .read<EligibilityBloc>()
-                        .state
-                        .getPNPValueMaterial,
-                  ));
 
               context
                   .read<PaymentCustomerInformationBloc>()

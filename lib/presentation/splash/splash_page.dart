@@ -13,10 +13,13 @@ import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/covid_material_list/covid_material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_bundle_list/material_bundle_list_bloc.dart';
+import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
+import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
 import 'package:ezrxmobile/application/returns/policy_configuration/policy_configuration_bloc.dart';
+import 'package:ezrxmobile/application/returns/return_request_type_code/return_request_type_code_bloc.dart';
 import 'package:ezrxmobile/application/returns/usage_code/usage_code_bloc.dart';
 import 'package:ezrxmobile/application/returns/user_restriction/user_restriction_list_bloc.dart';
 import 'package:ezrxmobile/config.dart';
@@ -31,8 +34,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:upgrader/upgrader.dart';
-
-import 'package:ezrxmobile/application/returns/return_request_type_code/return_request_type_code_bloc.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -175,7 +176,8 @@ class SplashPage extends StatelessWidget {
               previous.isBundleMaterialEnable !=
                   current.isBundleMaterialEnable ||
               previous.isOrderTypeEnable != current.isOrderTypeEnable ||
-              previous.customerCodeInfo != current.customerCodeInfo,
+              previous.customerCodeInfo != current.customerCodeInfo ||
+              previous.shipToInfo != current.shipToInfo,
           listener: (context, state) {
             if (state.isCovidMaterialEnable) {
               context.read<CovidMaterialListBloc>().add(
@@ -207,6 +209,9 @@ class SplashPage extends StatelessWidget {
                     ),
                   );
             } else {
+              context
+                  .read<OrderDocumentTypeBloc>()
+                  .add(const OrderDocumentTypeEvent.initialized());
               context.read<OrderDocumentTypeBloc>().add(
                     OrderDocumentTypeEvent.selectedOrderType(
                       isReasonSelected: false,
@@ -267,6 +272,35 @@ class SplashPage extends StatelessWidget {
                     salesOrganisationConfigs: state.salesOrgConfigs,
                     salesOrganisation: state.salesOrganisation,
                     shipToInfo: state.shipToInfo,
+                  ),
+                );
+          },
+        ),
+        BlocListener<OrderDocumentTypeBloc, OrderDocumentTypeState>(
+          listenWhen: (previous, current) =>
+              context.read<UserBloc>().state.isNotEmpty &&
+              previous.selectedOrderType != current.selectedOrderType &&
+              current.selectedOrderType != OrderDocumentType.empty(),
+          listener: (context, state) {
+            context.read<MaterialListBloc>().add(
+                  MaterialListEvent.fetch(
+                    user: context.read<UserBloc>().state.user,
+                    salesOrganisation:
+                        context.read<SalesOrgBloc>().state.salesOrganisation,
+                    configs: context.read<SalesOrgBloc>().state.configs,
+                    customerCodeInfo:
+                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                    shipToInfo:
+                        context.read<EligibilityBloc>().state.shipToInfo,
+                    selectedMaterialFilter: context
+                        .read<MaterialFilterBloc>()
+                        .state
+                        .getEmptyMaterialFilter(),
+                    orderDocumentType: state.selectedOrderType,
+                    pickAndPack: context
+                        .read<EligibilityBloc>()
+                        .state
+                        .getPNPValueMaterial,
                   ),
                 );
           },
