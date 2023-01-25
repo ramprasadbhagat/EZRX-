@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'package:universal_io/io.dart';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';

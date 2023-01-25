@@ -1,9 +1,9 @@
-import 'dart:io';
 import 'package:ezrxmobile/app.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
+import 'package:universal_io/io.dart';
 
 void main() {
   final binding = IntegrationTestWidgetsFlutterBinding.ensureInitialized();

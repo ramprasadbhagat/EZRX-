@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'package:universal_io/io.dart';
 
 import 'package:integration_test/integration_test_driver.dart';
 // import 'package:flutter_driver/driver_extension.dart';

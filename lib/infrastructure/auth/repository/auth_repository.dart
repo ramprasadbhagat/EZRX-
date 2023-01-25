@@ -21,6 +21,7 @@ import 'package:ezrxmobile/infrastructure/core/local_storage/cart_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/cred_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/token_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/okta/okta_login.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:local_auth/local_auth.dart';
 // ignore: depend_on_referenced_packages
@@ -359,6 +360,9 @@ class AuthRepository implements IAuthRepository {
   @override
   Future<Either<ApiFailure, bool>> canBeAuthenticatedAndBioAvailable() async {
     try {
+      if (kIsWeb) {
+        return const Left(ApiFailure.deviceNotSupportBiometirc());
+      }
       if (!await localAuthentication.canCheckBiometrics) {
         return const Left(ApiFailure.cannotCheckBiometrics());
       }

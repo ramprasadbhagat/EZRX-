@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'dart:io';
+import 'package:universal_io/io.dart';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -77,7 +77,8 @@ final _crashlytics = locator<FirebaseCrashlyticsService>().crashlytics;
 Future<void> _firebaseMessagingBackgroundHandler(
   RemoteMessage message,
 ) async {
-  await Firebase.initializeApp();
+  final config = locator<Config>();
+  await Firebase.initializeApp(options: kIsWeb ? config.firebaseOptions : null);
   debugPrint(
     'AppPushs background: ${message.notification?.title} ${message.notification?.body} ${message.data}',
   );
@@ -86,10 +87,17 @@ Future<void> _firebaseMessagingBackgroundHandler(
 Future<void> initialSetup({required Flavor flavor}) async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
-  await Wakelock.enable();
-  await Firebase.initializeApp();
-  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   setupLocator();
+  final config = locator<Config>();
+  config.appFlavor = flavor;
+  if (!kIsWeb) {
+    await Wakelock.enable();
+  }
+
+  await Firebase.initializeApp(options: kIsWeb ? config.firebaseOptions : null);
+
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
   if (kDebugMode) {
     await Upgrader.clearSavedSettings();
     if (Platform.isAndroid) {
@@ -100,7 +108,6 @@ Future<void> initialSetup({required Flavor flavor}) async {
     FlutterError.onError = _crashlytics.recordFlutterError;
   }
 
-  locator<Config>().appFlavor = flavor;
   await locator<RemoteConfigService>().init();
   await locator<TokenStorage>().init();
   await locator<CredStorage>().init();
@@ -134,7 +141,11 @@ void runAppWithCrashlyticsAndLocalization() {
         ),
       ),
     ),
-    (error, stack) => _crashlytics.recordError(error, stack),
+    (error, stack) {
+      if (!kIsWeb) {
+        _crashlytics.recordError(error, stack);
+      }
+    },
   );
 }
 

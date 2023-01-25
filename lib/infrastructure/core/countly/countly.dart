@@ -8,6 +8,9 @@ class CountlyService {
   CountlyService({required this.config});
 
   Future<void> init() async {
+    if (kIsWeb) {
+      return;
+    }
     await Countly.isInitialized().then((bool isInitialized) {
       if (!isInitialized) {
         final countlyConfig = CountlyConfig(

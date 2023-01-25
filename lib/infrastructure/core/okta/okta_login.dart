@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/config.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:okta_oidc/okta_oidc.dart';
 
@@ -9,6 +10,10 @@ class OktaLoginServices {
   OktaLoginServices({required this.config});
 
   Future<bool?> init() async {
+    if (kIsWeb) {
+      return false;
+    }
+
     return _oktaOidcPlugin.initOkta(config.oktaConfig).then((value) {
       return value ?? (throw PlatformException(code: '0'));
     }).catchError((error) => throw error as PlatformException);

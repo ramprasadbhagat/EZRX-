@@ -9,8 +9,12 @@ import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/account/settings/language_tile.dart';
 import 'package:ezrxmobile/presentation/account/settings/notification_tile.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({Key? key}) : super(key: key);
@@ -18,7 +22,7 @@ class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     locator<CountlyService>().recordCountlyView('Settings Screen');
-    
+
     return Scaffold(
       appBar: AppBar(title: const Text('Settings').tr()),
       body: SafeArea(
@@ -53,21 +57,41 @@ class SettingsPage extends StatelessWidget {
                     key: const Key('tostile'),
                     leading: const Icon(Icons.policy_outlined),
                     title: Text('ToS'.tr()),
-                    onTap: () => context.router
-                        .push(AupTCDialogRoute(fromSetting: true)),
+                    onTap: () async {
+                      if (kIsWeb) {
+                        final privacyUrl = context.read<AupTcBloc>().state.url;
+                        if (await canLaunchUrl(
+                          Uri.tryParse(privacyUrl) ?? Uri(path: ''),
+                        )) {
+                          await launchUrl(Uri.parse(privacyUrl));
+                        }
+                      } else {
+                        await context.router
+                            .push(AupTCDialogRoute(fromSetting: true));
+                      }
+                    },
                   ),
                   ListTile(
                     key: const Key('Privacy_Policy'),
                     leading: const Icon(Icons.policy_outlined),
                     title: const Text('Privacy Policy').tr(),
-                    onTap: () {
+                    onTap: () async {
                       final config = locator<Config>();
-                      context.router.push(
-                        WebViewPageRoute(
-                          url: config.getPrivacyUrl,
-                          initialFile: config.getPrivacyInitialFile,
-                        ),
-                      );
+                      final privacyUrl = config.getPrivacyUrl;
+                      if (kIsWeb) {
+                        if (await canLaunchUrl(
+                          Uri.tryParse(privacyUrl) ?? Uri(path: ''),
+                        )) {
+                          await launchUrl(Uri.parse(privacyUrl));
+                        }
+                      } else {
+                        await context.router.push(
+                          WebViewPageRoute(
+                            url: privacyUrl,
+                            initialFile: config.getPrivacyInitialFile,
+                          ),
+                        );
+                      }
                     },
                   ),
                   ListTile(

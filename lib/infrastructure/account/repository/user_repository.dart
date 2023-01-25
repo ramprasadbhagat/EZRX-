@@ -13,6 +13,7 @@ import 'package:ezrxmobile/infrastructure/account/datasource/user_remote.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/analytics.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/crashlytics.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/token_storage.dart';
+import 'package:flutter/foundation.dart';
 
 class UserRepository implements IUserRepository {
   final Config config;
@@ -51,7 +52,9 @@ class UserRepository implements IUserRepository {
       //   name: user.username.getOrCrash(),
       //   value: user.email.getOrCrash(),
       // );
-      await firebaseCrashlyticsService.crashlytics.setUserIdentifier(user.id);
+      if (!kIsWeb) {
+        await firebaseCrashlyticsService.crashlytics.setUserIdentifier(user.id);
+      }
 
       return Right(user);
     } catch (e) {

@@ -1,3 +1,5 @@
+import 'package:firebase_core/firebase_core.dart';
+
 enum Flavor { mock, dev, uat, prod }
 
 class Config {
@@ -266,4 +268,61 @@ class Config {
   }
 
   String get getCountlyServerUrl => 'https://countly.azurefd.net';
+
+  FirebaseOptions get firebaseOptions {
+    switch (appFlavor) {
+      case Flavor.uat:
+        return const FirebaseOptions(
+          apiKey: 'AIzaSyBFE83eBuDFuABL6UwbFqqXNz8S4Cw4jrQ',
+          authDomain: 'ezrx-uat.firebaseapp.com',
+          projectId: 'ezrx-uat',
+          storageBucket: 'ezrx-uat.appspot.com',
+          messagingSenderId: '289365077122',
+          appId: '1:289365077122:web:106ee0316ccfe49af6589b',
+          measurementId: 'G-J7T2GYDSPJ',
+        );
+      case Flavor.dev:
+        return const FirebaseOptions(
+          apiKey: 'AIzaSyBFE83eBuDFuABL6UwbFqqXNz8S4Cw4jrQ',
+          authDomain: 'ezrx-uat.firebaseapp.com',
+          projectId: 'ezrx-uat',
+          storageBucket: 'ezrx-uat.appspot.com',
+          messagingSenderId: '289365077122',
+          appId: '1:289365077122:web:ae78e9bb951f7dfef6589b',
+          measurementId: 'G-7JT826JZC2',
+        );
+      case Flavor.mock:
+        return const FirebaseOptions(
+          apiKey: 'AIzaSyBFE83eBuDFuABL6UwbFqqXNz8S4Cw4jrQ',
+          authDomain: 'ezrx-uat.firebaseapp.com',
+          projectId: 'ezrx-uat',
+          storageBucket: 'ezrx-uat.appspot.com',
+          messagingSenderId: '289365077122',
+          appId: '1:289365077122:web:bab71bdd2bfbb1cbf6589b',
+          measurementId: 'G-Q6N13VZS21',
+        );
+      case Flavor.prod:
+        return const FirebaseOptions(
+          apiKey: 'AIzaSyChT_XgD8A5J8QLUtSRs5TKKD8NE0JjMOU',
+          authDomain: 'ezrx-6494b.firebaseapp.com',
+          databaseURL: 'https://ezrx-6494b.firebaseio.com',
+          projectId: 'ezrx-6494b',
+          storageBucket: 'ezrx-6494b.appspot.com',
+          messagingSenderId: '1064533093414',
+          appId: '1:1064533093414:web:08aa836641a8e189800ae7',
+          measurementId: 'G-ZJDKEZ52ET',
+        );
+      default:
+        return const FirebaseOptions(
+          apiKey: 'AIzaSyChT_XgD8A5J8QLUtSRs5TKKD8NE0JjMOU',
+          authDomain: 'ezrx-6494b.firebaseapp.com',
+          databaseURL: 'https://ezrx-6494b.firebaseio.com',
+          projectId: 'ezrx-6494b',
+          storageBucket: 'ezrx-6494b.appspot.com',
+          messagingSenderId: '1064533093414',
+          appId: '1:1064533093414:web:08aa836641a8e189800ae7',
+          measurementId: 'G-ZJDKEZ52ET',
+        );
+    }
+  }
 }

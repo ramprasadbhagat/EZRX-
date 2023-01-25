@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'package:universal_io/io.dart';
 
 import 'package:ezrxmobile/app.dart';
 import 'package:ezrxmobile/locator.dart';

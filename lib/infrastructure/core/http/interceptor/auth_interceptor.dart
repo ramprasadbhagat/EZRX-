@@ -72,7 +72,7 @@ class AuthInterceptor extends Interceptor {
         if (newJwt != null) {
           final newResponse = await _retry(response.requestOptions);
           await _callCountly(
-            newResponse, 
+            newResponse,
             response.requestOptions.headers['apiEndpoint'],
           );
 
@@ -106,7 +106,7 @@ class AuthInterceptor extends Interceptor {
         });
       }
     }
-    
+
     return super.onError(err, handler);
   }
 

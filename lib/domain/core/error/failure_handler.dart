@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'dart:io';
+import 'package:universal_io/io.dart';
 
 import 'package:ezrxmobile/domain/account/error/price_override_exception.dart';
 import 'package:ezrxmobile/domain/account/error/user_exception.dart';
