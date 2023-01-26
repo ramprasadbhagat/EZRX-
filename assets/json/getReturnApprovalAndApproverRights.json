@@ -1,0 +1,117 @@
+{
+    "data": {
+      "returnApprovalLimit": [
+        {
+          "username": "ananthkumar",
+          "salesOrg": "2601",
+          "valueLowerLimit": 0,
+          "valueUpperLimit": 100,
+          "uuid": "b582ea4a-3f58-4257-8bce-48e18ded7568",
+          "__typename": "returnApprovalLimitResponse"
+        }
+      ],
+      "approverRights": {
+        "rawMetaData" : {
+          "usernames" : ["ankitkumer"]
+        },
+        "approverRights": [
+          {
+            "salesOrg": "2601",
+            "principal": "123",
+            "industryCode1": "ids1",
+            "industryCode2": "ids2",
+            "industryCode3": "ids3",
+            "industryCode4": "ids4",
+            "industryCode5": "ids5",
+            "plant": "plant1",
+            "materialNumber": "123",
+            "uuid": "9450f376-f832-4489-a228-ef86e5f25312"
+          },
+          {
+            "salesOrg": "2601",
+            "principal": "456",
+            "industryCode1": "ids6",
+            "industryCode2": "ids7",
+            "industryCode3": "ids8",
+            "industryCode4": "ids9",
+            "industryCode5": "ids10",
+            "plant": "plant2",
+            "materialNumber": "456",
+            "uuid": "ce6574cd-930f-4ff2-b8a9-038889a0a6e0"
+          },
+          {
+            "salesOrg": "2601",
+            "principal": "789",
+            "industryCode1": "ids11",
+            "industryCode2": "ids12",
+            "industryCode3": "ids13",
+            "industryCode4": "ids14",
+            "industryCode5": "ids15",
+            "plant": "plant3",
+            "materialNumber": "789",
+            "uuid": "5e184ed2-9a17-4418-91f8-af0ac3221b27"
+          },
+          {
+            "salesOrg": "2601",
+            "principal": "101112",
+            "industryCode1": "ids16",
+            "industryCode2": "ids17",
+            "industryCode3": "ids18",
+            "industryCode4": "ids19",
+            "industryCode5": "1ds20",
+            "plant": "plant4",
+            "materialNumber": "101112",
+            "uuid": "6b325e0a-5806-48b4-a720-8d2af450cbd6"
+          },
+          {
+            "salesOrg": "2601",
+            "principal": "131415",
+            "industryCode1": "ids21",
+            "industryCode2": "ids22",
+            "industryCode3": "ids23",
+            "industryCode4": "ids24",
+            "industryCode5": "ids25",
+            "plant": "plant5",
+            "materialNumber": "121415",
+            "uuid": "96e78c2e-18f7-4f1d-8582-17891f698f5f"
+          },
+          {
+            "salesOrg": "2601",
+            "principal": "989",
+            "industryCode1": "",
+            "industryCode2": "",
+            "industryCode3": "",
+            "industryCode4": "",
+            "industryCode5": "",
+            "plant": "",
+            "materialNumber": "",
+            "uuid": "b58fcf5a-95f0-41de-af95-2a8087b66629"
+          },
+          {
+            "salesOrg": "2601",
+            "principal": "700",
+            "industryCode1": "",
+            "industryCode2": "",
+            "industryCode3": "",
+            "industryCode4": "",
+            "industryCode5": "",
+            "plant": "",
+            "materialNumber": "",
+            "uuid": "fd5abcfe-f5d0-479a-aec7-68485b794dd5"
+          },
+          {
+            "salesOrg": "2601",
+            "principal": "",
+            "industryCode1": "",
+            "industryCode2": "",
+            "industryCode3": "",
+            "industryCode4": "",
+            "industryCode5": "",
+            "plant": "",
+            "materialNumber": "",
+            "uuid": "4757643b-db62-431e-92b8-f8c265895807"
+          }
+        ]
+      }
+    }
+  }

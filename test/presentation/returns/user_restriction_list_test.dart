@@ -2,6 +2,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/returns/user_restriction/user_restriction_list_bloc.dart';
+import 'package:ezrxmobile/application/returns/user_restriction_details/user_restriction_details_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -19,6 +20,10 @@ class UserRestrictionListBlocMock
     extends MockBloc<UserRestrictionListEvent, UserRestrictionListState>
     implements UserRestrictionListBloc {}
 
+class UserRestrictionDetailsBlocMock
+    extends MockBloc<UserRestrictionDetailsEvent, UserRestrictionDetailsState>
+    implements UserRestrictionDetailsBloc {}
+
 class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
     implements SalesOrgBloc {}
 
@@ -29,6 +34,7 @@ void main() {
   late SalesOrg mockSalesOrg;
   late AppRouter autoRouterMock;
   late SalesOrgBloc salesOrgBlocMock;
+  late UserRestrictionDetailsBloc userRestrictiondetailsBlocMock;
   late List<String> mockUserNamesList;
   late UserRestrictionListBloc userRestrictionListBlocMock;
 
@@ -37,6 +43,7 @@ void main() {
     mockSearchKey = 'Person';
     mockSalesOrg = SalesOrg('2601');
     salesOrgBlocMock = SalesOrgBlocMock();
+    userRestrictiondetailsBlocMock = UserRestrictionDetailsBlocMock();
     autoRouterMock = locator<AppRouter>();
     userRestrictionListBlocMock = UserRestrictionListBlocMock();
     mockUserNamesList = [
@@ -45,6 +52,7 @@ void main() {
       'mockAgedPerson',
       'mockYoungPerson',
     ];
+    when(() => userRestrictiondetailsBlocMock.state).thenReturn(UserRestrictionDetailsState.initial());
   });
 
   Widget getScopedWidget(Widget child) {
@@ -55,6 +63,7 @@ void main() {
           create: (context) => userRestrictionListBlocMock,
         ),
         BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBlocMock),
+        BlocProvider<UserRestrictionDetailsBloc>(create: (context) => userRestrictiondetailsBlocMock),
       ],
       child: child,
     );

@@ -208,6 +208,8 @@ import 'package:ezrxmobile/infrastructure/returns/repository/return_request_type
 
 import 'package:ezrxmobile/application/returns/return_request_type_code/return_request_type_code_bloc.dart';
 
+import 'package:ezrxmobile/application/returns/user_restriction_details/user_restriction_details_bloc.dart';
+
 GetIt locator = GetIt.instance;
 
 void setupLocator() {
@@ -1443,6 +1445,17 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => PolicyConfigurationBloc(
       policyConfigurationRepository: locator<PolicyConfigurationRepository>(),
+    ),
+  );
+
+  //============================================================
+  //  User Restriction Deatils
+  //
+  //============================================================
+
+  locator.registerLazySingleton(
+    () => UserRestrictionDetailsBloc(
+      userRestrictionRepository: locator<UserRestrictionRepository>(),
     ),
   );
 

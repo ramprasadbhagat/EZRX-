@@ -52,3 +52,17 @@ class MonthsBeforeExpiry extends ValueObject<String> {
 
   const MonthsBeforeExpiry._(this.value);
 }
+class ApprovalLimit extends ValueObject<int> {
+  @override
+  final Either<ValueFailure<int>, int> value;
+
+  factory ApprovalLimit(int input) {
+    return ApprovalLimit._(Right(input));
+  }
+
+  String get parsedValue {
+    return value.getOrElse(() => 0).toString();
+  }
+
+  const ApprovalLimit._(this.value);
+}

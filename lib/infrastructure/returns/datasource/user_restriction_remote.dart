@@ -4,9 +4,16 @@ import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
+import 'package:ezrxmobile/domain/returns/entities/return_approval_and_approver_rights.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/user_restriction_mutation.dart';
 import 'package:ezrxmobile/infrastructure/returns/dtos/user_restriction_list_dto.dart';
+
+import 'package:ezrxmobile/infrastructure/returns/dtos/add_user_restrictions_dto.dart';
+
+import 'package:ezrxmobile/infrastructure/returns/dtos/user_restrictions_dto.dart';
+
+import 'package:ezrxmobile/domain/returns/entities/add_return_approval_limit.dart';
 
 class UserRestrictionRemoteDataSource {
   Config config;
@@ -47,6 +54,105 @@ class UserRestrictionRemoteDataSource {
       return UserRestrictionListDto.fromJson(
         res.data['data']['approverRights'],
       );
+    });
+  }
+
+  Future<UserRestrictions> getUserRestrictions({
+    required String salesOrg,
+    required String userName,
+  }) async {
+    return await dataSourceExceptionHandler.handle(() async {
+      final queryData =
+          userRestrictionMutation.getUserRestrictions();
+
+      final request = {
+        'request': {
+          'salesOrg': salesOrg,
+          'username': userName,
+        },
+        'approverRequest': {
+          'salesOrg': salesOrg,
+          'username': userName,
+        },
+      };
+
+      final res = await httpService.request(
+        method: 'POST',
+        url: '${config.urlConstants}ereturn',
+        data: jsonEncode({'query': queryData, 'variables': request}),
+      );
+
+      _userRestrictionExceptionChecker(res: res);
+
+      final finalData = res.data['data'];
+
+      return UserRestrictionsDto.fromJson(finalData).toDomain();
+    });
+  }
+
+  Future<AddConfigureUserRestrictionStatus> addApprovalLimit({
+    required String salesOrg,
+    required String userName,
+    required int valueUpperLimit,
+    required int valueLowerLimit,
+  }) async {
+    return await dataSourceExceptionHandler.handle(() async {
+      final queryData = userRestrictionMutation.addApprovalLimit();
+
+      final request = {
+        'request': {
+          'username': userName,
+          'salesOrg': salesOrg,
+          'valueLowerLimit': valueLowerLimit,
+          'valueUpperLimit': valueUpperLimit,
+        },
+      };
+
+      final res = await httpService.request(
+        method: 'POST',
+        url: '${config.urlConstants}ereturn',
+        data: jsonEncode({
+          'query': queryData,
+          'variables': request,
+        }),
+      );
+
+      _userRestrictionExceptionChecker(res: res);
+
+      final finalData = res.data['data'];
+
+      return AddConfigureUserRestrictionDto.fromJson(finalData).toDomain();
+    });
+  }
+
+  Future<AddConfigureUserRestrictionStatus> configureUserRestriction({
+    required String userName,
+    required List<Map<String, dynamic>> approverRightsList,
+  }) async {
+    return await dataSourceExceptionHandler.handle(() async {
+      final queryData = userRestrictionMutation.addRestriction();
+
+      final request = {
+        'username': userName,
+        'approverRights': approverRightsList,
+      };
+
+      final res = await httpService.request(
+        method: 'POST',
+        url: '${config.urlConstants}ereturn',
+        data: jsonEncode({
+          'query': queryData,
+          'variables': {
+            'input': request,
+          },
+        }),
+      );
+
+      _userRestrictionExceptionChecker(res: res);
+
+      final finalData = res.data['data'];
+
+      return AddConfigureUserRestrictionDto.fromJson(finalData).toDomain();
     });
   }
 

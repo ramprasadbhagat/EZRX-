@@ -1,4 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/returns/user_restriction/user_restriction_list_bloc.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
@@ -10,6 +12,13 @@ import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:ezrxmobile/application/returns/user_restriction_details/user_restriction_details_bloc.dart';
+
+import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
+
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+
 
 class UserRestrictionListPage extends StatelessWidget {
   const UserRestrictionListPage({Key? key}) : super(key: key);
@@ -73,6 +82,23 @@ class UserRestrictionListPage extends StatelessWidget {
           );
         },
       ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          final eligibilityState = context.read<EligibilityBloc>().state;
+          context
+              .read<UserRestrictionDetailsBloc>()
+              .add(UserRestrictionDetailsEvent.initialized(
+                salesOrganisation: eligibilityState.salesOrganisation,
+              ));
+          context.router.push(
+              AddEditUserRestrictionPageRoute(isEditing: false,),);
+        },
+        label: const Text(
+          'Add',
+        ),
+        icon: const Icon(Icons.add),
+        backgroundColor: ZPColors.secondary,
+      ),
     );
   }
 }
@@ -89,7 +115,13 @@ class _UserRestrictionItem extends StatelessWidget {
       child: ListTile(
         key: Key('userRestrictionTile-$username'),
         onTap: () {
-          //TODO: Implement it later on
+          final eligibilityState = context.read<EligibilityBloc>().state;
+          context.read<UserRestrictionDetailsBloc>().add(
+              UserRestrictionDetailsEvent.fetchUserRestrictionDetails(
+                  salesOrganisation: eligibilityState.salesOrganisation,
+                  userName: Username(username,),),);
+          context.router.push(
+              AddEditUserRestrictionPageRoute(isEditing: true,),);
         },
         title: Text(
           username,
