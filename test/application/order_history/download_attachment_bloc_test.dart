@@ -69,6 +69,7 @@ void main() {
         PoAttachmentState.initial().copyWith(
           failureOrSuccessOption: optionOf(Right(emptyResponseData)),
           fileData: emptyResponseData,
+          
         ),
       ],
     );

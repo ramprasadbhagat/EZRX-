@@ -1,15 +1,17 @@
-import 'dart:io';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/infrastructure/core/common/file_picker.dart';
+import 'package:ezrxmobile/infrastructure/core/common/permission.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/po_attachment.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -72,6 +74,7 @@ class AdditionPoAttachmentUpload extends StatelessWidget {
                 if (state.additionalDetailsData.poDocuments.isNotEmpty ||
                     poAttachmentState.fileUploading) {
                   return PoAttachment(
+                    key: const ValueKey('orderSummaryAdditionalPoAttachment'),
                     poDocuments: state.additionalDetailsData.poDocuments,
                     poattachMentRenderMode: PoAttachMentRenderMode.edit,
                     uploadingPocDocument:
@@ -97,6 +100,7 @@ class _PoUploadButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      key: const ValueKey('poAttachmentUploadButton'),
       onTap: () {
         if (context.read<PoAttachmentBloc>().state.isFetching) return;
         showPlatformDialog(
@@ -113,7 +117,7 @@ class _PoUploadButton extends StatelessWidget {
         height: 40,
         width: 40,
         color: ZPColors.secondary,
-        key: const ValueKey('po_attachment_upload_icon'),
+        key: const ValueKey('poAttachmentUploadIcon'),
       ),
       title: const Text('Click to upload').tr(),
       subtitle: Column(
@@ -144,6 +148,7 @@ class _PoUploadOptionPickerState extends State<_PoUploadOptionPicker> {
   @override
   Widget build(BuildContext context) {
     return PlatformAlertDialog(
+      key: const ValueKey('poAttachmentUploadDialog'),
       title: const Text(
         'Upload Attachment',
       ).tr(),
@@ -152,7 +157,7 @@ class _PoUploadOptionPickerState extends State<_PoUploadOptionPicker> {
       ).tr(),
       actions: [
         PlatformDialogAction(
-          key: const Key('po_photo_upload_button_button'),
+          key: const Key('poAttachmentPhotoUploadButton'),
           child: Column(
             children: [
               const Icon(
@@ -172,7 +177,7 @@ class _PoUploadOptionPickerState extends State<_PoUploadOptionPicker> {
           ),
         ),
         PlatformDialogAction(
-          key: const Key('po_attachment_file_upload_button'),
+          key: const Key('poAttachmentFileUploadButton'),
           child: Column(
             children: [
               const Icon(
@@ -196,14 +201,15 @@ class _PoUploadOptionPickerState extends State<_PoUploadOptionPicker> {
   Future<void> uploadFile({
     required UploadOptionType uploadOptionType,
   }) async {
-    if (!(uploadOptionType == UploadOptionType.file && Platform.isIOS)) {
-      final permission =
-          Platform.isIOS ? Permission.photos : Permission.storage;
-      final permissionStatus = await permission.request();
+    if (!(uploadOptionType == UploadOptionType.file &&
+        defaultTargetPlatform == TargetPlatform.iOS)) {
+      final permissionStatus = defaultTargetPlatform == TargetPlatform.iOS
+          ? await locator<PermissionService>().requestPhotoPermission()
+          : await locator<PermissionService>().requeststoragePermission();
       if (!permissionStatus.isGranted && !permissionStatus.isLimited) {
         showSnackBar(
           context: context,
-          message: Platform.isIOS
+          message: defaultTargetPlatform == TargetPlatform.iOS
               ? 'Please enable Photos permission from the app settings'.tr()
               : 'Please enable Storage permission from the app settings'.tr(),
         );
@@ -214,18 +220,19 @@ class _PoUploadOptionPickerState extends State<_PoUploadOptionPicker> {
     }
     FilePickerResult? result;
     try {
-      result = await FilePicker.platform.pickFiles(
+      result = await locator<FilePickerService>().pickFiles(
         allowMultiple: true,
-        type: uploadOptionType == UploadOptionType.file
+        fileType: uploadOptionType == UploadOptionType.file
             ? FileType.custom
             : FileType.image,
         allowedExtensions: uploadOptionType == UploadOptionType.file
-            ? _allowedExtensions
+            ? allowedExtensions
             : null,
       );
     } catch (e) {
-      const message =
-          'Unable to upload file as either file format not supported or something wrong with the file';
+      final message =
+          'Unable to upload file as either file format not supported or something wrong with the file'
+              .tr();
       showSnackBar(
         context: context,
         message: message,
@@ -263,7 +270,7 @@ class _PoUploadOptionPickerState extends State<_PoUploadOptionPicker> {
 
 enum UploadOptionType { file, gallery }
 
-const _allowedExtensions = [
+const allowedExtensions = [
   'jpg',
   'pdf',
   'doc',

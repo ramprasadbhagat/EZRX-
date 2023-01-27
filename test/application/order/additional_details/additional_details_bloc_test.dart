@@ -3,6 +3,7 @@ import 'package:ezrxmobile/application/order/additional_details/additional_detai
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/additional_details_data.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/intl.dart';
@@ -313,6 +314,66 @@ void main() {
               greenDeliveryEnabled: false,
             ),
           ),
+        ],
+      );
+
+      blocTest<AdditionalDetailsBloc, AdditionalDetailsState>(
+        'Additional Details Po Document Add',
+        build: () => AdditionalDetailsBloc(),
+        act: (AdditionalDetailsBloc bloc) {
+          bloc.add(
+            AdditionalDetailsEvent.addPoDocument(
+              poDocuments: [PoDocuments.empty()],
+            ),
+          );
+        },
+        expect: () => [
+          AdditionalDetailsState.initial().copyWith(
+            additionalDetailsData: AdditionalDetailsData.empty().copyWith(
+              poDocuments: [PoDocuments.empty()],
+            ),
+          ),
+        ],
+      );
+
+      blocTest<AdditionalDetailsBloc, AdditionalDetailsState>(
+        'Additional Details Po Document Remove',
+        build: () => AdditionalDetailsBloc(),
+        seed: () => AdditionalDetailsState.initial().copyWith(
+          additionalDetailsData: AdditionalDetailsData.empty().copyWith(
+            poDocuments: [PoDocuments.empty()],
+          ),
+        ),
+        act: (AdditionalDetailsBloc bloc) {
+          bloc.add(
+            AdditionalDetailsEvent.removePoDocument(
+              poDocument: PoDocuments.empty(),
+            ),
+          );
+        },
+        expect: () => [
+          AdditionalDetailsState.initial(),
+        ],
+      );
+
+      blocTest<AdditionalDetailsBloc, AdditionalDetailsState>(
+        'Additional Details Po Document Remove All',
+        build: () => AdditionalDetailsBloc(),
+        seed: () => AdditionalDetailsState.initial().copyWith(
+          additionalDetailsData: AdditionalDetailsData.empty().copyWith(
+            poDocuments: [
+              PoDocuments(name: 'fake-name1', url: 'fake-name1'),
+              PoDocuments(name: 'fake-name2', url: 'fake-name2'),
+            ],
+          ),
+        ),
+        act: (AdditionalDetailsBloc bloc) {
+          bloc.add(
+            const AdditionalDetailsEvent.removeAllPoDocument(),
+          );
+        },
+        expect: () => [
+          AdditionalDetailsState.initial(),
         ],
       );
     },

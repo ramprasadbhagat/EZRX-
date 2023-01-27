@@ -41,6 +41,7 @@ import 'package:ezrxmobile/domain/order/entities/order_history_details_po_docume
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/common/permission.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_history_details_local.dart';
@@ -54,6 +55,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import '../../utils/material_frame_wrapper.dart';
 import '../../utils/widget_utils.dart';
@@ -123,6 +125,9 @@ class TenderContractBlocMock
 
 class FavouriteBlocMock extends MockBloc<FavouriteEvent, FavouriteState>
     implements FavouriteBloc {}
+    
+class PermissionServiceMock extends Mock implements PermissionService {}
+
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -150,6 +155,9 @@ void main() {
   late TenderContractBlocMock tenderContractBlocMock;
   late FavouriteBlocMock favouriteBlocMock;
   late OrderHistory mockOrderHistoryItem;
+  late PermissionService permissionService;
+
+
 
   setUpAll(() async {
     orderHistoryDetailsRepository = MockOrderHistoryDetailsRepository();
@@ -158,6 +166,7 @@ void main() {
     orderHistoryDetails =
         await OrderHistoryDetailsLocalDataSource().getOrderHistoryDetails();
     orderHistory = await OrderHistoryLocalDataSource().getOrderHistory();
+    permissionService = PermissionServiceMock();
     locator.registerLazySingleton(() => MockAppRouter());
     locator.registerLazySingleton(() => locator<CountlyService>());
     locator.registerLazySingleton(() => mockOrderHistoryListBloc);
@@ -167,6 +176,7 @@ void main() {
     locator.registerLazySingleton(() => mockSalesOrgBloc);
     locator.registerLazySingleton(() => tenderContractMockBloc);
     locator.registerLazySingleton(() => orderHistoryDetailsRepository);
+    locator.registerLazySingleton(() => permissionService);
 
     autoRouterMock = locator<MockAppRouter>();
     mockHTTPService = MockHTTPService();
@@ -718,7 +728,8 @@ void main() {
       await tester.drag(find.byKey(const Key('scrollHistoryDetail')),
           const Offset(0.0, -700));
       await tester.pump();
-
+      when(() => permissionService.requeststoragePermission())
+          .thenAnswer((invocation) async => PermissionStatus.granted);
       final downloadAll = find.byKey(const Key('downloadAll'));
       await tester.tap(downloadAll, warnIfMissed: false);
       await tester.pump(const Duration(seconds: 5));

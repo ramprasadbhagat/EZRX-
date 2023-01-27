@@ -6,9 +6,12 @@ import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.da
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_document_buffer.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
+import 'package:ezrxmobile/infrastructure/core/common/permission.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:open_file_safe/open_file_safe.dart';
@@ -73,10 +76,7 @@ class _PoAttachmentState extends State<PoAttachment> {
                     );
                   } else {
                     await downloadAllFile(state.fileData);
-                    showSnackBar(
-                      context: context,
-                      message: 'All attachments downloaded successfully.'.tr(),
-                    );
+                    
                   }
                 },
               ),
@@ -128,6 +128,7 @@ class _PoAttachmentState extends State<PoAttachment> {
                                             ));
                                       },
                                       child: _PoAttachmentWidget(
+                                        key: ValueKey(poDocuments.name),
                                         poDocuments: poDocuments,
                                         edit: edit,
                                       ),
@@ -141,6 +142,9 @@ class _PoAttachmentState extends State<PoAttachment> {
                             .uploadInProgressPoDocument
                             .map(
                               (e) => _PoAttachmentWidget(
+                                key: ValueKey(
+                                  'poAttachmentUploadInProgress ${e.name}',
+                                ),
                                 poDocuments: e,
                                 edit: false,
                               ),
@@ -173,9 +177,10 @@ class _PoAttachmentState extends State<PoAttachment> {
                                 InkWell(
                                   key: const Key('downloadAll'),
                                   onTap: () async {
-                                    if (Platform.isAndroid &&
-                                        !(await Permission.storage
-                                            .request()
+                                    if (defaultTargetPlatform ==
+                                            TargetPlatform.android &&
+                                        !(await locator<PermissionService>()
+                                            .requeststoragePermission()
                                             .isGranted)) {
                                       showSnackBar(
                                         context: context,
@@ -213,7 +218,10 @@ class _PoAttachmentState extends State<PoAttachment> {
                                     ],
                                   ),
                                 ),
-                                if (edit) const _PoUploadDeleteAll(),
+                                if (edit)
+                                  const _PoUploadDeleteAll(
+                                    key: ValueKey('deleteAll'),
+                                  ),
                               ],
                             ),
                         ],
@@ -270,6 +278,10 @@ class _PoAttachmentState extends State<PoAttachment> {
         );
         await file.writeAsBytes(orderHistoryDetailsPoDocumentsBuffer.buffer);
       }
+      showSnackBar(
+        context: context,
+        message: 'All attachments downloaded successfully.'.tr(),
+      );
     } catch (e) {
       showSnackBar(
         context: context,
@@ -302,6 +314,7 @@ class _PoUploadDeleteIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      key: const ValueKey('poAttachementDeleteIcon'),
       onTap: () => context.read<AdditionalDetailsBloc>().add(
             AdditionalDetailsEvent.removePoDocument(
               poDocument: poDocument,
@@ -321,7 +334,6 @@ class _PoUploadDeleteAll extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      key: const Key('deleteAll'),
       onTap: () {
         context.read<AdditionalDetailsBloc>().add(
               const AdditionalDetailsEvent.removeAllPoDocument(),

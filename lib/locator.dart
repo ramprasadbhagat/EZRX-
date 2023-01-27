@@ -17,6 +17,8 @@ import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_blo
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/infrastructure/core/common/file_picker.dart';
+import 'package:ezrxmobile/infrastructure/core/common/permission.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/cart_repository.dart';
 import 'package:ezrxmobile/application/order/cart/discount_override/discount_override_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
@@ -1487,5 +1489,23 @@ void setupLocator() {
       usageLocalDataSource: locator<UsageCodeLocalDataSource>(),
       usageRemoteDataSource: locator<UsageCodeRemoteDataSource>(),
     ),
+  );
+
+  //============================================================
+  //  Permission
+  //
+  //============================================================
+
+  locator.registerLazySingleton(
+    () => PermissionService(),
+  );
+
+  //============================================================
+  //  File Picker
+  //
+  //============================================================
+
+  locator.registerLazySingleton(
+    () => FilePickerService(),
   );
 }
