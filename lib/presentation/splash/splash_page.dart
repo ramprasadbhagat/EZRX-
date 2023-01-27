@@ -225,11 +225,12 @@ class SplashPage extends StatelessWidget {
         ),
         BlocListener<EligibilityBloc, EligibilityState>(
           listenWhen: (previous, current) =>
-              previous.salesOrganisation.salesOrg !=
-                  current.salesOrganisation.salesOrg ||
-              previous.isReturnsEnable != current.isReturnsEnable ||
-              previous.user.role.type.hasReturnsAdminAccess !=
-                  current.user.role.type.hasReturnsAdminAccess,
+              current.salesOrganisation.salesOrg.isValid() &&
+              (previous.salesOrganisation.salesOrg !=
+                      current.salesOrganisation.salesOrg ||
+                  previous.isReturnsEnable != current.isReturnsEnable ||
+                  previous.user.role.type.hasReturnsAdminAccess !=
+                      current.user.role.type.hasReturnsAdminAccess),
           listener: (context, state) {
             if (!state.isReturnsEnable) return;
 

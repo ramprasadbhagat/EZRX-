@@ -559,5 +559,45 @@ void main() {
         ),
       ).called(1);
     });
+
+    testWidgets('Return Request Type fetch on Eligibility Change - Success',
+        (tester) async {
+      final expectedStates = [
+        EligibilityState.initial().copyWith(
+          salesOrganisation: salesOrgBlocMock.state.salesOrganisation.copyWith(
+            salesOrg: SalesOrg('123'),
+          ),
+        ),
+      ];
+      whenListen(eligibilityBlocMock, Stream.fromIterable(expectedStates));
+
+      await getWidget(tester);
+      await tester.pump();
+
+      verify(
+        () => returnRequestTypeCodeBlocMock.add(
+          ReturnRequestTypeCodeEvent.fetch(
+            salesOrganisation: salesOrgBlocMock.state.salesOrganisation,
+          ),
+        ),
+      ).called(1);
+    });
+
+    testWidgets('Return Request Type fetch on Eligibility Change - Failure',
+        (tester) async {
+      final expectedStates = [EligibilityState.initial()];
+      whenListen(eligibilityBlocMock, Stream.fromIterable(expectedStates));
+
+      await getWidget(tester);
+      await tester.pump();
+
+      verifyNever(
+        () => returnRequestTypeCodeBlocMock.add(
+          ReturnRequestTypeCodeEvent.fetch(
+            salesOrganisation: salesOrgBlocMock.state.salesOrganisation,
+          ),
+        ),
+      ).called(0);
+    });
   });
 }
