@@ -97,15 +97,12 @@ Let's assume that we test loading_more fuction for load a page 2
 4. `expect` section will be the same as when we test the `fetch` function, except that the `state` will have both page 1 and page 2 response
 
 ### How to trigger Azure Pipeline Automation Build
-1. Create a release branch release/2.0.0
+1. Create a release branch 
 2. Merge all related PR to release branch
-3. Make sure checkout to release/2.0.0 branch
-4. Use Uat build and upload command, this will build uat and upload to Google Play Internal Test and IOS testFlight
-- ```git tag -a uat.2.0.0-108 -m "uat 2.0.0(108)"```
-- ```git push origin uat.2.0.0-108```
-5. Use Prod build and upload command, this will build uat and upload to Google Play Internal Test and IOS testFlight
-- ```git tag -a prod.2.0.0-108 -m "prod 2.0.0(108)"```
-- ```git push origin prod.2.0.0-108```
+3. Make sure checkout to release branch
+4. Version bump on pubspec.yaml , then commit
+5. type command `make run_uat_cd` to deploy to UAT
+6. type command `make run_prod_cd` to deploy to PROD
 
 ### How to generate splash screen
 - [flutter_native_splash](https://pub.dev/packages/flutter_native_splash)
