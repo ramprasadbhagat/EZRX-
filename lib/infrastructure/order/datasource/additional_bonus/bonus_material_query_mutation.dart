@@ -45,7 +45,7 @@ class BonusMaterialQueryMutation {
   String getBonusItemforSalesRep() {
     return '''
    query customerMaterialsForSalesRep(
-                username: String!
+ \$username: String!
  \$customerSoldToCode : String!
  \$customerShipToCode : String!
  \$salesOrganisation : String!
@@ -56,9 +56,9 @@ class BonusMaterialQueryMutation {
    
    )
     {
-     customerMaterialsForSalesRep(username: "\$username", customerSoldToCode: "\$soldTo", 
-     customerShipToCode:"\$shipTo", salesOrganisation:"\$salesOrganisation",
-      gimmickMaterial: \$gimmickMaterial \$pickandpack, searchKey: "\$searchKey",){
+     customerMaterialsForSalesRep(username: \$username, customerSoldToCode: \$customerSoldToCode, 
+     customerShipToCode:\$customerShipToCode, salesOrganisation:\$salesOrganisation,
+      gimmickMaterial: \$gimmickMaterial, pickAndPack: \$pickAndPack, searchKey: \$searchKey,){
         processedMetaData{
           count
         }
