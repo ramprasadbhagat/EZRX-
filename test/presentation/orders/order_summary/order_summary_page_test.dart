@@ -980,7 +980,7 @@ void main() {
         await tester.ensureVisible(datePickerKey);
         await tester.tap(datePickerKey);
         await tester.pumpAndSettle();
-        expect(find.text(DateTime.now().day.toString()), findsWidgets);
+        expect(find.text(DateTime.now().add(const Duration(days: 1)).day.toString()), findsWidgets);
 
         await tester.tap(find.text('OK'));
         await tester.pump(const Duration(milliseconds: 500));

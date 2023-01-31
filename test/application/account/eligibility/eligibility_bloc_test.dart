@@ -262,7 +262,7 @@ void main() {
   );
 
   test(
-    'eligibility state doNotAllowOutOfStockMaterials should return true for sales rep user and addOosMaterials as true',
+    'eligibility state doNotAllowOutOfStockMaterials should return false for sales rep user and addOosMaterials as true',
     () {
       final eligibilityState = EligibilityState.initial().copyWith(
         user: fakeUser.copyWith(
@@ -280,7 +280,7 @@ void main() {
 
       final doNotAllowOutOfStockMaterials =
           eligibilityState.doNotAllowOutOfStockMaterials;
-      expect(doNotAllowOutOfStockMaterials, true);
+      expect(doNotAllowOutOfStockMaterials, false);
     },
   );
 

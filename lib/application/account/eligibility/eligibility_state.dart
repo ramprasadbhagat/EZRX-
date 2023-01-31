@@ -121,8 +121,8 @@ class EligibilityState with _$EligibilityState {
   }
 
   bool get doNotAllowOutOfStockMaterials {
-    return !salesOrgConfigs.addOosMaterials ||
-        (salesOrgConfigs.addOosMaterials && validateOutOfStockValue);
+    return !(salesOrgConfigs.addOosMaterials ||
+        (salesOrgConfigs.addOosMaterials && validateOutOfStockValue));
   }
 
   bool get isShowPOAttachmentEnable => salesOrgConfigs.showPOAttachment;
