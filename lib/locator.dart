@@ -19,6 +19,8 @@ import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.d
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/common/file_picker.dart';
 import 'package:ezrxmobile/infrastructure/core/common/permission.dart';
+import 'package:ezrxmobile/application/returns/request_return/request_return_bloc.dart';
+import 'package:ezrxmobile/application/returns/return_request_type_code/return_request_type_code_bloc.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/cart_repository.dart';
 import 'package:ezrxmobile/application/order/cart/discount_override/discount_override_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
@@ -183,6 +185,9 @@ import 'package:ezrxmobile/infrastructure/order/repository/valid_customer_materi
 import 'package:ezrxmobile/infrastructure/returns/datasource/policy_configuration_local.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/policy_configuration_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/policy_configuration_remote.dart';
+import 'package:ezrxmobile/infrastructure/returns/datasource/request_return_local.dart';
+import 'package:ezrxmobile/infrastructure/returns/datasource/request_return_remote.dart';
+import 'package:ezrxmobile/infrastructure/returns/datasource/return_request_list_query.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/usage_code_local.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/usage_code_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/usage_code_remote.dart';
@@ -190,6 +195,7 @@ import 'package:ezrxmobile/infrastructure/returns/datasource/user_restriction_lo
 import 'package:ezrxmobile/infrastructure/returns/datasource/user_restriction_mutation.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/user_restriction_remote.dart';
 import 'package:ezrxmobile/infrastructure/returns/repository/policy_configuration_repository.dart';
+import 'package:ezrxmobile/infrastructure/returns/repository/request_return_repository.dart';
 import 'package:ezrxmobile/infrastructure/returns/repository/usage_code_repository.dart';
 import 'package:ezrxmobile/infrastructure/returns/repository/user_restriction_repository.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -207,8 +213,6 @@ import 'package:ezrxmobile/infrastructure/returns/datasource/return_request_type
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_request_type_code_remote.dart';
 
 import 'package:ezrxmobile/infrastructure/returns/repository/return_request_type_code_repository.dart';
-
-import 'package:ezrxmobile/application/returns/return_request_type_code/return_request_type_code_bloc.dart';
 
 import 'package:ezrxmobile/application/returns/user_restriction_details/user_restriction_details_bloc.dart';
 
@@ -1374,7 +1378,40 @@ void setupLocator() {
 
   locator.registerFactory(
     () => ReturnRequestTypeCodeBloc(
-      returnRequestTypeCodeRepository: locator<ReturnRequestTypeCodeRepository>(),
+      returnRequestTypeCodeRepository:
+          locator<ReturnRequestTypeCodeRepository>(),
+    ),
+  );
+
+  //============================================================
+  //  Return Request List
+  //
+  //============================================================
+
+  locator.registerLazySingleton(() => RequestReturnLocalDatasource());
+
+  locator.registerLazySingleton(() => ReturnRequestListQuery());
+
+  locator.registerLazySingleton(
+    () => RequestReturnRemoteDatasource(
+      httpService: locator<HttpService>(),
+      query: locator<ReturnRequestListQuery>(),
+      config: locator<Config>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => RequestReturnRepository(
+      config: locator<Config>(),
+      localDataSource: locator<RequestReturnLocalDatasource>(),
+      remoteDataSource: locator<RequestReturnRemoteDatasource>(),
+    ),
+  );
+
+  locator.registerFactory(
+    () => RequestReturnBloc(
+      returnRequestRepository: locator<RequestReturnRepository>(),
     ),
   );
 

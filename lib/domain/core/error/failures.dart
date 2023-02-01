@@ -60,4 +60,7 @@ class ValueFailure<T> with _$ValueFailure<T> {
   const factory ValueFailure.exceedingMaxValue({
     required T failedValue,
   }) = validateExceedsMaxValue<T>;
+  const factory ValueFailure.invalidDateValue({
+    required T failedValue,
+  }) = InvalidDateValue<T>;
 }

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:ezrxmobile/application/returns/request_return/request_return_bloc.dart';
 import 'package:universal_io/io.dart';
 
 import 'package:auto_route/auto_route.dart';
@@ -293,6 +294,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider<UserRestrictionDetailsBloc>(
           create: (context) => locator<UserRestrictionDetailsBloc>(),
+        ),
+        BlocProvider<RequestReturnBloc>(
+          create: (context) => locator<RequestReturnBloc>(),
         ),
       ],
       child: MaterialApp.router(

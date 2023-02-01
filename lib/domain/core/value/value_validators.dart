@@ -18,6 +18,12 @@ Either<ValueFailure<String>, String> validateStringNotEmpty(String input) {
       : left(ValueFailure.empty(failedValue: input));
 }
 
+Either<ValueFailure<String>, String> validateDateString(String input) {
+  return input.isEmpty || input.length == 8
+      ? right(input)
+      : left(ValueFailure.invalidDateValue(failedValue: input));
+}
+
 Either<ValueFailure<String>, String> validateSingleLine(String input) {
   return input.contains('\n')
       ? left(ValueFailure.multiline(failedValue: input))

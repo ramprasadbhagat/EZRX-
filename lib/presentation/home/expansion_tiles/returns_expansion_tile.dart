@@ -65,43 +65,6 @@ class ReturnsExpansionTile extends StatelessWidget {
   }
 
   List<HomePageTile> loadReturnsPageTiles(RoleType roleType) {
-    const overviewTile = HomePageTile(
-      key: Key('overviewTile'),
-      title: 'Overview',
-      icon: Icons.space_dashboard_outlined,
-      routeName: 'returns_overview',
-    );
-    const requestReturnTile = HomePageTile(
-      key: Key('requestReturnTile'),
-      title: 'Request return',
-      icon: Icons.pending_actions_outlined,
-      routeName: 'request_return',
-    );
-    const approverActionsTile = HomePageTile(
-      key: Key('approverActionsTile'),
-      title: 'Approver actions',
-      icon: Icons.rule_outlined,
-      routeName: 'approver_actions',
-    );
-    const returnSummaryTile = HomePageTile(
-      key: Key('returnSummaryTile'),
-      title: 'Return Summary',
-      icon: Icons.summarize_outlined,
-      routeName: 'return_summary',
-    );
-    const userRestrictionTile = HomePageTile(
-      key: Key('userRestrictionTile'),
-      title: 'User Restriction',
-      icon: Icons.admin_panel_settings_outlined,
-      routeName: 'user_restriction',
-    );
-    const policyConfigurationTile = HomePageTile(
-      key: Key('policyConfigurationTile'),
-      title: 'Policy Configuration',
-      icon: Icons.policy_outlined,
-      routeName: 'policy_configuration',
-    );
-
     if (roleType.isRootAdmin || roleType.isReturnAdmin) {
       return [
         overviewTile,
@@ -143,3 +106,40 @@ class ReturnsExpansionTile extends StatelessWidget {
     return [];
   }
 }
+
+const overviewTile = HomePageTile(
+  key: Key('overviewTile'),
+  title: 'Overview',
+  icon: Icons.space_dashboard_outlined,
+  routeName: 'returns_overview',
+);
+const requestReturnTile = HomePageTile(
+  key: Key('requestReturnTile'),
+  title: 'Request return',
+  icon: Icons.pending_actions_outlined,
+  routeName: 'request_return',
+);
+const approverActionsTile = HomePageTile(
+  key: Key('approverActionsTile'),
+  title: 'Approver actions',
+  icon: Icons.rule_outlined,
+  routeName: 'approver_actions',
+);
+const returnSummaryTile = HomePageTile(
+  key: Key('returnSummaryTile'),
+  title: 'Return Summary',
+  icon: Icons.summarize_outlined,
+  routeName: 'return_summary',
+);
+const userRestrictionTile = HomePageTile(
+  key: Key('userRestrictionTile'),
+  title: 'User Restriction',
+  icon: Icons.admin_panel_settings_outlined,
+  routeName: 'user_restriction',
+);
+const policyConfigurationTile = HomePageTile(
+  key: Key('policyConfigurationTile'),
+  title: 'Policy Configuration',
+  icon: Icons.policy_outlined,
+  routeName: 'policy_configuration',
+);

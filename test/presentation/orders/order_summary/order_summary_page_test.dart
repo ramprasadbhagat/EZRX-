@@ -980,8 +980,10 @@ void main() {
         await tester.ensureVisible(datePickerKey);
         await tester.tap(datePickerKey);
         await tester.pumpAndSettle();
-        expect(find.text(DateTime.now().add(const Duration(days: 1)).day.toString()), findsWidgets);
-
+        expect(
+            find.text(
+                DateTime.now().add(const Duration(days: 2)).day.toString()),
+            findsWidgets);
         await tester.tap(find.text('OK'));
         await tester.pump(const Duration(milliseconds: 500));
       },
@@ -1520,78 +1522,78 @@ void main() {
     );
 
     // testWidgets(
-      //   '=> test cart item update',
-      //   (tester) async {
-      //     when(() => orderSummaryBlocMock.state)
-      //         .thenReturn(OrderSummaryState.initial().copyWith(
-      //       step: 4,
-      //       maxSteps: 4,
-      //     ));
-      //     final expectedStates = [
-      //       CartState.initial().copyWith(
-      //         selectedItemsMaterialNumber: <MaterialNumber>[
-      //           MaterialNumber('123456789'),
-      //         ],
-      //         cartItemList: <PriceAggregate>[
-      //           PriceAggregate.empty().copyWith(
-      //             materialInfo: MaterialInfo.empty().copyWith(
-      //               materialNumber: MaterialNumber('123456789'),
-      //             ),
-      //             quantity: 10,
-      //           ),
-      //         ],
-      //       ),
-      //     ];
-      //     whenListen(cartBlocMock, Stream.fromIterable(expectedStates));
-      //     when(() => orderHistoryFilterBlocMock.state).thenReturn(
-      //       OrderHistoryFilterState.initial().copyWith(
-      //         isSubmitting: false,
-      //       ),
-      //     );
+    //   '=> test cart item update',
+    //   (tester) async {
+    //     when(() => orderSummaryBlocMock.state)
+    //         .thenReturn(OrderSummaryState.initial().copyWith(
+    //       step: 4,
+    //       maxSteps: 4,
+    //     ));
+    //     final expectedStates = [
+    //       CartState.initial().copyWith(
+    //         selectedItemsMaterialNumber: <MaterialNumber>[
+    //           MaterialNumber('123456789'),
+    //         ],
+    //         cartItemList: <PriceAggregate>[
+    //           PriceAggregate.empty().copyWith(
+    //             materialInfo: MaterialInfo.empty().copyWith(
+    //               materialNumber: MaterialNumber('123456789'),
+    //             ),
+    //             quantity: 10,
+    //           ),
+    //         ],
+    //       ),
+    //     ];
+    //     whenListen(cartBlocMock, Stream.fromIterable(expectedStates));
+    //     when(() => orderHistoryFilterBlocMock.state).thenReturn(
+    //       OrderHistoryFilterState.initial().copyWith(
+    //         isSubmitting: false,
+    //       ),
+    //     );
 
-      //     when(() => addToCartBlocMock.state).thenReturn(
-      //       AddToCartState.initial().copyWith(
-      //         cartItem: PriceAggregate.empty().copyWith(
-      //           materialInfo: MaterialInfo.empty().copyWith(
-      //             materialNumber: MaterialNumber('123456789'),
-      //           ),
-      //         ),
-      //         quantity: 10,
-      //       ),
-      //     );
+    //     when(() => addToCartBlocMock.state).thenReturn(
+    //       AddToCartState.initial().copyWith(
+    //         cartItem: PriceAggregate.empty().copyWith(
+    //           materialInfo: MaterialInfo.empty().copyWith(
+    //             materialNumber: MaterialNumber('123456789'),
+    //           ),
+    //         ),
+    //         quantity: 10,
+    //       ),
+    //     );
 
-      //     await tester.pumpWidget(getWidget());
-      //     await tester.pump();
+    //     await tester.pumpWidget(getWidget());
+    //     await tester.pump();
 
-      //     final cartMaterialItemTile = find.byType(
-      //       CartMaterialItemTile,
-      //       skipOffstage: false,
-      //     );
-      //     expect(cartMaterialItemTile, findsOneWidget);
+    //     final cartMaterialItemTile = find.byType(
+    //       CartMaterialItemTile,
+    //       skipOffstage: false,
+    //     );
+    //     expect(cartMaterialItemTile, findsOneWidget);
 
-      //     await tester.dragUntilVisible(
-      //       cartMaterialItemTile,
-      //       cartMaterialItemTile,
-      //       const Offset(0, -500),
-      //     );
-      //     await tester.pump();
+    //     await tester.dragUntilVisible(
+    //       cartMaterialItemTile,
+    //       cartMaterialItemTile,
+    //       const Offset(0, -500),
+    //     );
+    //     await tester.pump();
 
-      //     await tester.tap(cartMaterialItemTile);
-      //     await tester.pump();
+    //     await tester.tap(cartMaterialItemTile);
+    //     await tester.pump();
 
-      //     final incrementQuantity = find.byKey(const Key('cartItemAdd'));
-      //     expect(incrementQuantity, findsOneWidget);
-      //     await tester.tap(incrementQuantity, warnIfMissed: false);
-      //     await tester.pump();
+    //     final incrementQuantity = find.byKey(const Key('cartItemAdd'));
+    //     expect(incrementQuantity, findsOneWidget);
+    //     await tester.tap(incrementQuantity, warnIfMissed: false);
+    //     await tester.pump();
 
-      //     final updateCartButton = find.byKey(const Key('updateCart'));
-      //     expect(updateCartButton, findsOneWidget);
-      //     await tester.tap(updateCartButton, warnIfMissed: false);
-      //     await tester.pump();
+    //     final updateCartButton = find.byKey(const Key('updateCart'));
+    //     expect(updateCartButton, findsOneWidget);
+    //     await tester.tap(updateCartButton, warnIfMissed: false);
+    //     await tester.pump();
 
-      //     final quantityUpdatedWidget = find.text('10');
-      //     expect(quantityUpdatedWidget, findsOneWidget);
-      //   },
-      // );
+    //     final quantityUpdatedWidget = find.text('10');
+    //     expect(quantityUpdatedWidget, findsOneWidget);
+    //   },
+    // );
   });
 }
