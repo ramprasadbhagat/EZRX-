@@ -221,7 +221,7 @@ class _BodyContent extends StatelessWidget {
                 CustomerCodeEvent.loadMore(
                   userInfo: userBloc.state.user,
                   selectedSalesOrg: salesOrgBloc.state.salesOrganisation,
-                  hidecustomer: false,
+                  hidecustomer: salesOrgBloc.state.configs.hideCustomer,
                 ),
               );
         },

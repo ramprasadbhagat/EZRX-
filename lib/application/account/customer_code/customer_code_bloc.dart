@@ -210,9 +210,8 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
           ? state.searchKey.getValue()
           : e.selectedSalesOrg.customerInfos.isNotEmpty
               ? e.selectedSalesOrg.customerInfos.first.customerCodeSoldTo
-                  .getOrCrash()
+                  .checkAllOrCustomerCode
               : '';
-      if (customerCodeInfo.isEmpty) return;
       final failureOrSuccess = await customerCodeRepository.getCustomerCode(
         salesOrganisation: e.selectedSalesOrg,
         customerCode: customerCodeInfo,
