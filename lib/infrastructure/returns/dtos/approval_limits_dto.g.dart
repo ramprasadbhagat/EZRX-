@@ -12,6 +12,7 @@ _$_ApprovalLimitsDto _$$_ApprovalLimitsDtoFromJson(Map<String, dynamic> json) =>
       valueLowerLimit: json['valueLowerLimit'] as int? ?? 0,
       valueUpperLimit: json['valueUpperLimit'] as int? ?? 0,
       username: json['username'] as String? ?? '',
+      uuid: json['uuid'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_ApprovalLimitsDtoToJson(
@@ -21,4 +22,5 @@ Map<String, dynamic> _$$_ApprovalLimitsDtoToJson(
       'valueLowerLimit': instance.valueLowerLimit,
       'valueUpperLimit': instance.valueUpperLimit,
       'username': instance.username,
+      'uuid': instance.uuid,
     };

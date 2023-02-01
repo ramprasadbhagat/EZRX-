@@ -9,11 +9,11 @@ import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/user_restriction_mutation.dart';
 import 'package:ezrxmobile/infrastructure/returns/dtos/user_restriction_list_dto.dart';
 
-import 'package:ezrxmobile/infrastructure/returns/dtos/add_user_restrictions_dto.dart';
+import 'package:ezrxmobile/infrastructure/returns/dtos/user_restriction_status_dto.dart';
 
 import 'package:ezrxmobile/infrastructure/returns/dtos/user_restrictions_dto.dart';
 
-import 'package:ezrxmobile/domain/returns/entities/add_return_approval_limit.dart';
+import 'package:ezrxmobile/domain/returns/entities/user_restriction_status.dart';
 
 class UserRestrictionRemoteDataSource {
   Config config;
@@ -90,7 +90,7 @@ class UserRestrictionRemoteDataSource {
     });
   }
 
-  Future<AddConfigureUserRestrictionStatus> addApprovalLimit({
+  Future<UserRestrictionStatus> addApprovalLimit({
     required String salesOrg,
     required String userName,
     required int valueUpperLimit,
@@ -121,11 +121,11 @@ class UserRestrictionRemoteDataSource {
 
       final finalData = res.data['data'];
 
-      return AddConfigureUserRestrictionDto.fromJson(finalData).toDomain();
+      return UserRestrictionStatusDto.fromJson(finalData).toDomain();
     });
   }
 
-  Future<AddConfigureUserRestrictionStatus> configureUserRestriction({
+  Future<UserRestrictionStatus> configureUserRestriction({
     required String userName,
     required List<Map<String, dynamic>> approverRightsList,
   }) async {
@@ -152,7 +152,67 @@ class UserRestrictionRemoteDataSource {
 
       final finalData = res.data['data'];
 
-      return AddConfigureUserRestrictionDto.fromJson(finalData).toDomain();
+      return UserRestrictionStatusDto.fromJson(finalData).toDomain();
+    });
+  }
+
+  Future<UserRestrictionStatus> deleteApprovalRight({
+    required String salesOrg,
+    required String uuid,
+  }) async {
+    return await dataSourceExceptionHandler.handle(() async {
+      final queryData = userRestrictionMutation.deleteApprovalRight();
+
+      final request = {
+        'uuid': uuid,
+        'salesOrg': salesOrg,
+      };
+
+      final res = await httpService.request(
+        method: 'POST',
+        url: '${config.urlConstants}ereturn',
+        data: jsonEncode({
+          'query': queryData,
+          'variables': {
+            'input': request,
+          },
+        }),
+      );
+
+      _userRestrictionExceptionChecker(res: res);
+
+      final finalData = res.data['data'];
+
+      return UserRestrictionStatusDto.fromJson(finalData).toDomain();
+    });
+  }
+
+  Future<UserRestrictionStatus> deleteApprovalLimit({
+    required String uuid,
+  }) async {
+    return await dataSourceExceptionHandler.handle(() async {
+      final queryData = userRestrictionMutation.deleteApprovalLimit();
+
+      final request = {
+        'uuid': uuid,
+      };
+
+      final res = await httpService.request(
+        method: 'POST',
+        url: '${config.urlConstants}ereturn',
+        data: jsonEncode({
+          'query': queryData,
+          'variables': {
+            'input': request,
+          },
+        }),
+      );
+
+      _userRestrictionExceptionChecker(res: res);
+
+      final finalData = res.data['data'];
+
+      return UserRestrictionStatusDto.fromJson(finalData).toDomain();
     });
   }
 

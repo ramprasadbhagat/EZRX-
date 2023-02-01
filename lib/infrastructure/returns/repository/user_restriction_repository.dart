@@ -13,7 +13,7 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 
-import 'package:ezrxmobile/domain/returns/entities/add_return_approval_limit.dart';
+import 'package:ezrxmobile/domain/returns/entities/user_restriction_status.dart';
 import 'package:ezrxmobile/infrastructure/returns/dtos/approver_rights_details_dto.dart';
 
 import 'package:ezrxmobile/domain/returns/entities/approver_rights.dart';
@@ -53,8 +53,7 @@ class UserRestrictionRepository extends IUserRestrictionRepository {
   }
 
   @override
-  Future<Either<ApiFailure, UserRestrictions>>
-      getUserRestrictions({
+  Future<Either<ApiFailure, UserRestrictions>> getUserRestrictions({
     required SalesOrganisation salesOrganisation,
     required Username userName,
   }) async {
@@ -62,8 +61,7 @@ class UserRestrictionRepository extends IUserRestrictionRepository {
     final username = userName.getOrCrash();
     if (config.appFlavor == Flavor.mock) {
       try {
-        final approverRightsList =
-            await localDataSource.getUserRestrictions();
+        final approverRightsList = await localDataSource.getUserRestrictions();
 
         return Right(approverRightsList);
       } catch (e) {
@@ -71,8 +69,7 @@ class UserRestrictionRepository extends IUserRestrictionRepository {
       }
     }
     try {
-      final approverRights =
-          await remoteDataSource.getUserRestrictions(
+      final approverRights = await remoteDataSource.getUserRestrictions(
         salesOrg: salesOrg,
         userName: username,
       );
@@ -84,16 +81,13 @@ class UserRestrictionRepository extends IUserRestrictionRepository {
   }
 
   @override
-  Future<Either<ApiFailure, AddConfigureUserRestrictionStatus>>
-      addApprovalLimit({
+  Future<Either<ApiFailure, UserRestrictionStatus>> addApprovalLimit({
     required ApprovalLimits approverLimits,
   }) async {
     final salesOrg = approverLimits.salesOrg.getOrCrash();
     final userName = approverLimits.userName.getOrCrash();
-    final valueUpperLimit =
-        approverLimits.valueUpperLimit.getValue();
-    final valueLowerLimit =
-        approverLimits.valueLowerLimit.getValue();
+    final valueUpperLimit = approverLimits.valueUpperLimit.getValue();
+    final valueLowerLimit = approverLimits.valueLowerLimit.getValue();
 
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -119,13 +113,12 @@ class UserRestrictionRepository extends IUserRestrictionRepository {
   }
 
   @override
-  Future<Either<ApiFailure, AddConfigureUserRestrictionStatus>>
-      configureUserRestriction({
+  Future<Either<ApiFailure, UserRestrictionStatus>> configureUserRestriction({
     required ApproverRights approverRights,
   }) async {
     final username = approverRights.userName.getOrCrash();
     final approverRightsList = approverRights.approverRightsList
-        .map((e) => ApproverRightsDetailsDto.fromDomain(e).toJson())
+        .map((e) => getConfigurableApproverRights(e))
         .toList();
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -145,6 +138,60 @@ class UserRestrictionRepository extends IUserRestrictionRepository {
       );
 
       return Right(configureUserRestriction);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, bool>> deleteApprovalRights({
+    required ApproverRights approverRights,
+  }) async {
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        await localDataSource.deleteApprovalRights();
+
+        return const Right(true);
+      } catch (e) {
+        return Left(FailureHandler.handleFailure(e));
+      }
+    }
+    try {
+      for (final approverRights in approverRights.approverRightsList) {
+        final salesOrgCode = approverRights.salesOrg.getOrCrash();
+        final uuid = approverRights.uuid;
+
+        await remoteDataSource.deleteApprovalRight(
+          salesOrg: salesOrgCode,
+          uuid: uuid,
+        );
+      }
+
+      return const Right(true);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, UserRestrictionStatus>> deleteApprovalLimit({
+    required ApprovalLimits approverLimits,
+  }) async {
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final deleteApprovalLimit = await localDataSource.deleteApprovalLimit();
+
+        return Right(deleteApprovalLimit);
+      } catch (e) {
+        return Left(FailureHandler.handleFailure(e));
+      }
+    }
+    try {
+      final deleteApprovalLimit = await remoteDataSource.deleteApprovalLimit(
+        uuid: approverLimits.uuid,
+      );
+
+      return Right(deleteApprovalLimit);
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
     }

@@ -20,6 +20,7 @@ mixin _$ApprovalLimits {
   Username get userName => throw _privateConstructorUsedError;
   ApprovalLimit get valueUpperLimit => throw _privateConstructorUsedError;
   ApprovalLimit get valueLowerLimit => throw _privateConstructorUsedError;
+  String get uuid => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ApprovalLimitsCopyWith<ApprovalLimits> get copyWith =>
@@ -36,7 +37,8 @@ abstract class $ApprovalLimitsCopyWith<$Res> {
       {SalesOrg salesOrg,
       Username userName,
       ApprovalLimit valueUpperLimit,
-      ApprovalLimit valueLowerLimit});
+      ApprovalLimit valueLowerLimit,
+      String uuid});
 }
 
 /// @nodoc
@@ -56,6 +58,7 @@ class _$ApprovalLimitsCopyWithImpl<$Res, $Val extends ApprovalLimits>
     Object? userName = null,
     Object? valueUpperLimit = null,
     Object? valueLowerLimit = null,
+    Object? uuid = null,
   }) {
     return _then(_value.copyWith(
       salesOrg: null == salesOrg
@@ -74,6 +77,10 @@ class _$ApprovalLimitsCopyWithImpl<$Res, $Val extends ApprovalLimits>
           ? _value.valueLowerLimit
           : valueLowerLimit // ignore: cast_nullable_to_non_nullable
               as ApprovalLimit,
+      uuid: null == uuid
+          ? _value.uuid
+          : uuid // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -90,7 +97,8 @@ abstract class _$$_ApprovalLimitsCopyWith<$Res>
       {SalesOrg salesOrg,
       Username userName,
       ApprovalLimit valueUpperLimit,
-      ApprovalLimit valueLowerLimit});
+      ApprovalLimit valueLowerLimit,
+      String uuid});
 }
 
 /// @nodoc
@@ -108,6 +116,7 @@ class __$$_ApprovalLimitsCopyWithImpl<$Res>
     Object? userName = null,
     Object? valueUpperLimit = null,
     Object? valueLowerLimit = null,
+    Object? uuid = null,
   }) {
     return _then(_$_ApprovalLimits(
       salesOrg: null == salesOrg
@@ -126,6 +135,10 @@ class __$$_ApprovalLimitsCopyWithImpl<$Res>
           ? _value.valueLowerLimit
           : valueLowerLimit // ignore: cast_nullable_to_non_nullable
               as ApprovalLimit,
+      uuid: null == uuid
+          ? _value.uuid
+          : uuid // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -137,7 +150,8 @@ class _$_ApprovalLimits extends _ApprovalLimits {
       {required this.salesOrg,
       required this.userName,
       required this.valueUpperLimit,
-      required this.valueLowerLimit})
+      required this.valueLowerLimit,
+      required this.uuid})
       : super._();
 
   @override
@@ -148,10 +162,12 @@ class _$_ApprovalLimits extends _ApprovalLimits {
   final ApprovalLimit valueUpperLimit;
   @override
   final ApprovalLimit valueLowerLimit;
+  @override
+  final String uuid;
 
   @override
   String toString() {
-    return 'ApprovalLimits(salesOrg: $salesOrg, userName: $userName, valueUpperLimit: $valueUpperLimit, valueLowerLimit: $valueLowerLimit)';
+    return 'ApprovalLimits(salesOrg: $salesOrg, userName: $userName, valueUpperLimit: $valueUpperLimit, valueLowerLimit: $valueLowerLimit, uuid: $uuid)';
   }
 
   @override
@@ -166,12 +182,13 @@ class _$_ApprovalLimits extends _ApprovalLimits {
             (identical(other.valueUpperLimit, valueUpperLimit) ||
                 other.valueUpperLimit == valueUpperLimit) &&
             (identical(other.valueLowerLimit, valueLowerLimit) ||
-                other.valueLowerLimit == valueLowerLimit));
+                other.valueLowerLimit == valueLowerLimit) &&
+            (identical(other.uuid, uuid) || other.uuid == uuid));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, salesOrg, userName, valueUpperLimit, valueLowerLimit);
+      runtimeType, salesOrg, userName, valueUpperLimit, valueLowerLimit, uuid);
 
   @JsonKey(ignore: true)
   @override
@@ -185,7 +202,8 @@ abstract class _ApprovalLimits extends ApprovalLimits {
       {required final SalesOrg salesOrg,
       required final Username userName,
       required final ApprovalLimit valueUpperLimit,
-      required final ApprovalLimit valueLowerLimit}) = _$_ApprovalLimits;
+      required final ApprovalLimit valueLowerLimit,
+      required final String uuid}) = _$_ApprovalLimits;
   const _ApprovalLimits._() : super._();
 
   @override
@@ -196,6 +214,8 @@ abstract class _ApprovalLimits extends ApprovalLimits {
   ApprovalLimit get valueUpperLimit;
   @override
   ApprovalLimit get valueLowerLimit;
+  @override
+  String get uuid;
   @override
   @JsonKey(ignore: true)
   _$$_ApprovalLimitsCopyWith<_$_ApprovalLimits> get copyWith =>

@@ -20,6 +20,7 @@ class UserRestrictionDetailsEvent with _$UserRestrictionDetailsEvent {
       {required ApproverRightsDetails approverRightsDetails,}) = _deleteApproverRights;
   const factory UserRestrictionDetailsEvent.addUserRestriction() = _addUserRestriction;
   const factory UserRestrictionDetailsEvent.configureUserRestriction() = _configureUserRestriction;
+  const factory UserRestrictionDetailsEvent.deleteUserRestriction() = _deleteUserRestriction;
 }
 
 enum UserRestrictionLabel {

@@ -39,6 +39,8 @@ mixin _$ApproverRightsDetailsDto {
   String get plant => throw _privateConstructorUsedError;
   @JsonKey(name: 'materialNumber', defaultValue: '')
   String get materialNumber => throw _privateConstructorUsedError;
+  @JsonKey(name: 'uuid', defaultValue: '')
+  String get uuid => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -53,24 +55,16 @@ abstract class $ApproverRightsDetailsDtoCopyWith<$Res> {
       _$ApproverRightsDetailsDtoCopyWithImpl<$Res, ApproverRightsDetailsDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'salesOrg', defaultValue: '')
-          String salesOrg,
-      @JsonKey(name: 'principal', defaultValue: '')
-          String principal,
-      @JsonKey(name: 'industryCode1', defaultValue: '')
-          String industryCode1,
-      @JsonKey(name: 'industryCode2', defaultValue: '')
-          String industryCode2,
-      @JsonKey(name: 'industryCode3', defaultValue: '')
-          String industryCode3,
-      @JsonKey(name: 'industryCode4', defaultValue: '')
-          String industryCode4,
-      @JsonKey(name: 'industryCode5', defaultValue: '')
-          String industryCode5,
-      @JsonKey(name: 'plant', defaultValue: '')
-          String plant,
-      @JsonKey(name: 'materialNumber', defaultValue: '')
-          String materialNumber});
+      {@JsonKey(name: 'salesOrg', defaultValue: '') String salesOrg,
+      @JsonKey(name: 'principal', defaultValue: '') String principal,
+      @JsonKey(name: 'industryCode1', defaultValue: '') String industryCode1,
+      @JsonKey(name: 'industryCode2', defaultValue: '') String industryCode2,
+      @JsonKey(name: 'industryCode3', defaultValue: '') String industryCode3,
+      @JsonKey(name: 'industryCode4', defaultValue: '') String industryCode4,
+      @JsonKey(name: 'industryCode5', defaultValue: '') String industryCode5,
+      @JsonKey(name: 'plant', defaultValue: '') String plant,
+      @JsonKey(name: 'materialNumber', defaultValue: '') String materialNumber,
+      @JsonKey(name: 'uuid', defaultValue: '') String uuid});
 }
 
 /// @nodoc
@@ -96,6 +90,7 @@ class _$ApproverRightsDetailsDtoCopyWithImpl<$Res,
     Object? industryCode5 = null,
     Object? plant = null,
     Object? materialNumber = null,
+    Object? uuid = null,
   }) {
     return _then(_value.copyWith(
       salesOrg: null == salesOrg
@@ -134,6 +129,10 @@ class _$ApproverRightsDetailsDtoCopyWithImpl<$Res,
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
               as String,
+      uuid: null == uuid
+          ? _value.uuid
+          : uuid // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -148,24 +147,16 @@ abstract class _$$_ApproverRightsDetailsDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'salesOrg', defaultValue: '')
-          String salesOrg,
-      @JsonKey(name: 'principal', defaultValue: '')
-          String principal,
-      @JsonKey(name: 'industryCode1', defaultValue: '')
-          String industryCode1,
-      @JsonKey(name: 'industryCode2', defaultValue: '')
-          String industryCode2,
-      @JsonKey(name: 'industryCode3', defaultValue: '')
-          String industryCode3,
-      @JsonKey(name: 'industryCode4', defaultValue: '')
-          String industryCode4,
-      @JsonKey(name: 'industryCode5', defaultValue: '')
-          String industryCode5,
-      @JsonKey(name: 'plant', defaultValue: '')
-          String plant,
-      @JsonKey(name: 'materialNumber', defaultValue: '')
-          String materialNumber});
+      {@JsonKey(name: 'salesOrg', defaultValue: '') String salesOrg,
+      @JsonKey(name: 'principal', defaultValue: '') String principal,
+      @JsonKey(name: 'industryCode1', defaultValue: '') String industryCode1,
+      @JsonKey(name: 'industryCode2', defaultValue: '') String industryCode2,
+      @JsonKey(name: 'industryCode3', defaultValue: '') String industryCode3,
+      @JsonKey(name: 'industryCode4', defaultValue: '') String industryCode4,
+      @JsonKey(name: 'industryCode5', defaultValue: '') String industryCode5,
+      @JsonKey(name: 'plant', defaultValue: '') String plant,
+      @JsonKey(name: 'materialNumber', defaultValue: '') String materialNumber,
+      @JsonKey(name: 'uuid', defaultValue: '') String uuid});
 }
 
 /// @nodoc
@@ -189,6 +180,7 @@ class __$$_ApproverRightsDetailsDtoCopyWithImpl<$Res>
     Object? industryCode5 = null,
     Object? plant = null,
     Object? materialNumber = null,
+    Object? uuid = null,
   }) {
     return _then(_$_ApproverRightsDetailsDto(
       salesOrg: null == salesOrg
@@ -227,6 +219,10 @@ class __$$_ApproverRightsDetailsDtoCopyWithImpl<$Res>
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
               as String,
+      uuid: null == uuid
+          ? _value.uuid
+          : uuid // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -252,7 +248,9 @@ class _$_ApproverRightsDetailsDto extends _ApproverRightsDetailsDto {
       @JsonKey(name: 'plant', defaultValue: '')
           required this.plant,
       @JsonKey(name: 'materialNumber', defaultValue: '')
-          required this.materialNumber})
+          required this.materialNumber,
+      @JsonKey(name: 'uuid', defaultValue: '')
+          required this.uuid})
       : super._();
 
   factory _$_ApproverRightsDetailsDto.fromJson(Map<String, dynamic> json) =>
@@ -285,10 +283,13 @@ class _$_ApproverRightsDetailsDto extends _ApproverRightsDetailsDto {
   @override
   @JsonKey(name: 'materialNumber', defaultValue: '')
   final String materialNumber;
+  @override
+  @JsonKey(name: 'uuid', defaultValue: '')
+  final String uuid;
 
   @override
   String toString() {
-    return 'ApproverRightsDetailsDto(salesOrg: $salesOrg, principal: $principal, industryCode1: $industryCode1, industryCode2: $industryCode2, industryCode3: $industryCode3, industryCode4: $industryCode4, industryCode5: $industryCode5, plant: $plant, materialNumber: $materialNumber)';
+    return 'ApproverRightsDetailsDto(salesOrg: $salesOrg, principal: $principal, industryCode1: $industryCode1, industryCode2: $industryCode2, industryCode3: $industryCode3, industryCode4: $industryCode4, industryCode5: $industryCode5, plant: $plant, materialNumber: $materialNumber, uuid: $uuid)';
   }
 
   @override
@@ -312,7 +313,8 @@ class _$_ApproverRightsDetailsDto extends _ApproverRightsDetailsDto {
                 other.industryCode5 == industryCode5) &&
             (identical(other.plant, plant) || other.plant == plant) &&
             (identical(other.materialNumber, materialNumber) ||
-                other.materialNumber == materialNumber));
+                other.materialNumber == materialNumber) &&
+            (identical(other.uuid, uuid) || other.uuid == uuid));
   }
 
   @JsonKey(ignore: true)
@@ -327,7 +329,8 @@ class _$_ApproverRightsDetailsDto extends _ApproverRightsDetailsDto {
       industryCode4,
       industryCode5,
       plant,
-      materialNumber);
+      materialNumber,
+      uuid);
 
   @JsonKey(ignore: true)
   @override
@@ -363,7 +366,9 @@ abstract class _ApproverRightsDetailsDto extends ApproverRightsDetailsDto {
       @JsonKey(name: 'plant', defaultValue: '')
           required final String plant,
       @JsonKey(name: 'materialNumber', defaultValue: '')
-          required final String materialNumber}) = _$_ApproverRightsDetailsDto;
+          required final String materialNumber,
+      @JsonKey(name: 'uuid', defaultValue: '')
+          required final String uuid}) = _$_ApproverRightsDetailsDto;
   const _ApproverRightsDetailsDto._() : super._();
 
   factory _ApproverRightsDetailsDto.fromJson(Map<String, dynamic> json) =
@@ -396,6 +401,9 @@ abstract class _ApproverRightsDetailsDto extends ApproverRightsDetailsDto {
   @override
   @JsonKey(name: 'materialNumber', defaultValue: '')
   String get materialNumber;
+  @override
+  @JsonKey(name: 'uuid', defaultValue: '')
+  String get uuid;
   @override
   @JsonKey(ignore: true)
   _$$_ApproverRightsDetailsDtoCopyWith<_$_ApproverRightsDetailsDto>

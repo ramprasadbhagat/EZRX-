@@ -3,7 +3,6 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/approver_rights_details.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-
 part 'approver_rights_details_dto.freezed.dart';
 part 'approver_rights_details_dto.g.dart';
 
@@ -21,8 +20,8 @@ class ApproverRightsDetailsDto with _$ApproverRightsDetailsDto {
     @JsonKey(name: 'industryCode5', defaultValue: '') required String industryCode5,
     @JsonKey(name: 'plant', defaultValue: '') required String plant,
     @JsonKey(name: 'materialNumber', defaultValue: '') required String materialNumber,
+    @JsonKey(name: 'uuid', defaultValue: '') required String uuid,
   }) = _ApproverRightsDetailsDto;
-
 
   ApproverRightsDetails toDomain() {
     return ApproverRightsDetails(
@@ -35,6 +34,7 @@ class ApproverRightsDetailsDto with _$ApproverRightsDetailsDto {
      plant: plant,
      principal: principal,
      salesOrg:  SalesOrg(salesOrg),
+     uuid: uuid,
     );
   }
 
@@ -51,9 +51,20 @@ class ApproverRightsDetailsDto with _$ApproverRightsDetailsDto {
       plant: approverRightsDetails.plant,
       principal: approverRightsDetails.principal,
       salesOrg: approverRightsDetails.salesOrg.getValue(),
+      uuid: approverRightsDetails.uuid,
     );
   }
 
   factory ApproverRightsDetailsDto.fromJson(Map<String, dynamic> json) =>
       _$ApproverRightsDetailsDtoFromJson(json);
+}
+
+Map<String, dynamic> getConfigurableApproverRights(
+  ApproverRightsDetails approverRightsDetails,
+) {
+  final approverRights =
+      ApproverRightsDetailsDto.fromDomain(approverRightsDetails).toJson();
+  approverRights.remove('uuid');
+  
+  return approverRights;
 }

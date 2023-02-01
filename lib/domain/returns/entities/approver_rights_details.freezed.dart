@@ -25,6 +25,7 @@ mixin _$ApproverRightsDetails {
   String get industryCode5 => throw _privateConstructorUsedError;
   String get plant => throw _privateConstructorUsedError;
   MaterialNumber get materialNumber => throw _privateConstructorUsedError;
+  String get uuid => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ApproverRightsDetailsCopyWith<ApproverRightsDetails> get copyWith =>
@@ -46,7 +47,8 @@ abstract class $ApproverRightsDetailsCopyWith<$Res> {
       String industryCode4,
       String industryCode5,
       String plant,
-      MaterialNumber materialNumber});
+      MaterialNumber materialNumber,
+      String uuid});
 }
 
 /// @nodoc
@@ -72,6 +74,7 @@ class _$ApproverRightsDetailsCopyWithImpl<$Res,
     Object? industryCode5 = null,
     Object? plant = null,
     Object? materialNumber = null,
+    Object? uuid = null,
   }) {
     return _then(_value.copyWith(
       salesOrg: null == salesOrg
@@ -110,6 +113,10 @@ class _$ApproverRightsDetailsCopyWithImpl<$Res,
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
               as MaterialNumber,
+      uuid: null == uuid
+          ? _value.uuid
+          : uuid // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -131,7 +138,8 @@ abstract class _$$_ApproverRightsDetailsCopyWith<$Res>
       String industryCode4,
       String industryCode5,
       String plant,
-      MaterialNumber materialNumber});
+      MaterialNumber materialNumber,
+      String uuid});
 }
 
 /// @nodoc
@@ -154,6 +162,7 @@ class __$$_ApproverRightsDetailsCopyWithImpl<$Res>
     Object? industryCode5 = null,
     Object? plant = null,
     Object? materialNumber = null,
+    Object? uuid = null,
   }) {
     return _then(_$_ApproverRightsDetails(
       salesOrg: null == salesOrg
@@ -192,6 +201,10 @@ class __$$_ApproverRightsDetailsCopyWithImpl<$Res>
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
               as MaterialNumber,
+      uuid: null == uuid
+          ? _value.uuid
+          : uuid // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -208,7 +221,8 @@ class _$_ApproverRightsDetails extends _ApproverRightsDetails {
       required this.industryCode4,
       required this.industryCode5,
       required this.plant,
-      required this.materialNumber})
+      required this.materialNumber,
+      required this.uuid})
       : super._();
 
   @override
@@ -229,10 +243,12 @@ class _$_ApproverRightsDetails extends _ApproverRightsDetails {
   final String plant;
   @override
   final MaterialNumber materialNumber;
+  @override
+  final String uuid;
 
   @override
   String toString() {
-    return 'ApproverRightsDetails(salesOrg: $salesOrg, principal: $principal, industryCode1: $industryCode1, industryCode2: $industryCode2, industryCode3: $industryCode3, industryCode4: $industryCode4, industryCode5: $industryCode5, plant: $plant, materialNumber: $materialNumber)';
+    return 'ApproverRightsDetails(salesOrg: $salesOrg, principal: $principal, industryCode1: $industryCode1, industryCode2: $industryCode2, industryCode3: $industryCode3, industryCode4: $industryCode4, industryCode5: $industryCode5, plant: $plant, materialNumber: $materialNumber, uuid: $uuid)';
   }
 
   @override
@@ -256,7 +272,8 @@ class _$_ApproverRightsDetails extends _ApproverRightsDetails {
                 other.industryCode5 == industryCode5) &&
             (identical(other.plant, plant) || other.plant == plant) &&
             (identical(other.materialNumber, materialNumber) ||
-                other.materialNumber == materialNumber));
+                other.materialNumber == materialNumber) &&
+            (identical(other.uuid, uuid) || other.uuid == uuid));
   }
 
   @override
@@ -270,7 +287,8 @@ class _$_ApproverRightsDetails extends _ApproverRightsDetails {
       industryCode4,
       industryCode5,
       plant,
-      materialNumber);
+      materialNumber,
+      uuid);
 
   @JsonKey(ignore: true)
   @override
@@ -290,7 +308,8 @@ abstract class _ApproverRightsDetails extends ApproverRightsDetails {
       required final String industryCode4,
       required final String industryCode5,
       required final String plant,
-      required final MaterialNumber materialNumber}) = _$_ApproverRightsDetails;
+      required final MaterialNumber materialNumber,
+      required final String uuid}) = _$_ApproverRightsDetails;
   const _ApproverRightsDetails._() : super._();
 
   @override
@@ -311,6 +330,8 @@ abstract class _ApproverRightsDetails extends ApproverRightsDetails {
   String get plant;
   @override
   MaterialNumber get materialNumber;
+  @override
+  String get uuid;
   @override
   @JsonKey(ignore: true)
   _$$_ApproverRightsDetailsCopyWith<_$_ApproverRightsDetails> get copyWith =>

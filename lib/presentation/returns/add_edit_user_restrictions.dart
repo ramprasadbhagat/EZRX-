@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/returns/entities/approver_rights_details.dart';
+import 'package:ezrxmobile/presentation/core/confirm_clear_cart_dialog.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:ezrxmobile/presentation/core/custom_expansion_tile.dart'
@@ -33,16 +34,16 @@ class AddEditUserRestrictionPage extends StatelessWidget {
       body:
           BlocConsumer<UserRestrictionDetailsBloc, UserRestrictionDetailsState>(
         listenWhen: (previous, current) =>
-            previous.addConfigureUserRestrictionStatus !=
-                current.addConfigureUserRestrictionStatus ||
+            previous.userRestrictionStatus !=
+                current.userRestrictionStatus ||
             previous.apiFailureOrSuccessOption !=
                 current.apiFailureOrSuccessOption,
         listener: (context, state) {
           state.apiFailureOrSuccessOption.fold(
             () {
-              if (state.addConfigureUserRestrictionStatus.ifUserAdded) {
+              if (state.userRestrictionStatus.ifUserAdded) {
                 if (state
-                    .addConfigureUserRestrictionStatus.ifUserNotConfigured) {
+                    .userRestrictionStatus.ifUserNotConfigured) {
                   showSnackBar(
                     context: context,
                     message: 'No New Records Added',
@@ -209,7 +210,24 @@ class _AddDeleteButton extends StatelessWidget {
           if (isEditing)
             ElevatedButton(
               key: const Key('onDeletePressed'),
-              onPressed: () {},
+              onPressed: () {
+                ConfirmClearDialog.show(
+                  context: context,
+                  onCancel: () {
+                    context.router.pop();
+                  },
+                  title: 'Confirm Delete'.tr(),
+                  description: 'User Restriction Will be deleted'.tr(),
+                  onConfirmed: () {
+                    context.read<UserRestrictionDetailsBloc>().add(
+                          const UserRestrictionDetailsEvent
+                              .deleteUserRestriction(),
+                        );
+                    context.router.pop();
+                  },
+                  confirmText: 'Confirm',
+                );
+              },
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.resolveWith(
                   (states) => ZPColors.white,

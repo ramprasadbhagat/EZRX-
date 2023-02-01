@@ -6,9 +6,9 @@ import 'package:ezrxmobile/infrastructure/returns/dtos/user_restriction_list_dto
 import 'package:flutter/services.dart';
 
 
-import 'package:ezrxmobile/infrastructure/returns/dtos/add_user_restrictions_dto.dart';
+import 'package:ezrxmobile/infrastructure/returns/dtos/user_restriction_status_dto.dart';
 
-import 'package:ezrxmobile/domain/returns/entities/add_return_approval_limit.dart';
+import 'package:ezrxmobile/domain/returns/entities/user_restriction_status.dart';
 
 
 
@@ -33,22 +33,40 @@ class UserRestrictionLocalDataSource {
     return UserRestrictionsDto.fromJson(finalData).toDomain();
   }
 
-  Future<AddConfigureUserRestrictionStatus> addApprovalLimit() async {
+  Future<UserRestrictionStatus> addApprovalLimit() async {
     final data = json.decode(
       await rootBundle
           .loadString('assets/json/getAddUserRestrictionDetails.json'),
     );
     final finalData = data['data'];
 
-    return AddConfigureUserRestrictionDto.fromJson(finalData).toDomain();
+    return UserRestrictionStatusDto.fromJson(finalData).toDomain();
   }
 
-  Future<AddConfigureUserRestrictionStatus> configureUserRestriction() async {
+  Future<UserRestrictionStatus> configureUserRestriction() async {
     final data = json.decode(
       await rootBundle.loadString('assets/json/getConfigureUserRestrictionDetails.json'),
     );
     final finalData = data['data'];
 
-    return AddConfigureUserRestrictionDto.fromJson(finalData).toDomain();
+    return UserRestrictionStatusDto.fromJson(finalData).toDomain();
+  }
+
+  Future<UserRestrictionStatus> deleteApprovalRights() async {
+    final data = json.decode(
+      await rootBundle.loadString('assets/json/getDeleteUserRestriction.json'),
+    );
+    final finalData = data['data'];
+
+    return UserRestrictionStatusDto.fromJson(finalData).toDomain();
+  }
+
+  Future<UserRestrictionStatus> deleteApprovalLimit() async {
+    final data = json.decode(
+      await rootBundle.loadString('assets/json/getDeleteReturnApprovalLimit.json'),
+    );
+    final finalData = data['data'];
+
+    return UserRestrictionStatusDto.fromJson(finalData).toDomain();
   }
 }

@@ -18,6 +18,7 @@ _$_ApproverRightsDetailsDto _$$_ApproverRightsDetailsDtoFromJson(
       industryCode5: json['industryCode5'] as String? ?? '',
       plant: json['plant'] as String? ?? '',
       materialNumber: json['materialNumber'] as String? ?? '',
+      uuid: json['uuid'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_ApproverRightsDetailsDtoToJson(
@@ -32,4 +33,5 @@ Map<String, dynamic> _$$_ApproverRightsDetailsDtoToJson(
       'industryCode5': instance.industryCode5,
       'plant': instance.plant,
       'materialNumber': instance.materialNumber,
+      'uuid': instance.uuid,
     };

@@ -7,7 +7,7 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_approval_and_approver_rights.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_approval_limit_details.dart';
 
-import 'package:ezrxmobile/domain/returns/entities/add_return_approval_limit.dart';
+import 'package:ezrxmobile/domain/returns/entities/user_restriction_status.dart';
 
 import 'package:ezrxmobile/domain/returns/entities/approver_rights.dart';
 
@@ -22,13 +22,23 @@ abstract class IUserRestrictionRepository {
     required Username userName,
   });
 
-  Future<Either<ApiFailure, AddConfigureUserRestrictionStatus>>
+  Future<Either<ApiFailure, UserRestrictionStatus>>
       addApprovalLimit({
     required ApprovalLimits approverLimits,
   });
 
-  Future<Either<ApiFailure, AddConfigureUserRestrictionStatus>>
+  Future<Either<ApiFailure, UserRestrictionStatus>>
       configureUserRestriction({
     required ApproverRights approverRights,
+  });
+
+  Future<Either<ApiFailure, bool>>
+      deleteApprovalRights({
+    required ApproverRights approverRights,
+  });
+
+  Future<Either<ApiFailure, UserRestrictionStatus>>
+      deleteApprovalLimit({
+    required ApprovalLimits approverLimits,
   });
 }

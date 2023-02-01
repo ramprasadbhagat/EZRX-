@@ -17,15 +17,20 @@ class ApprovalLimits with _$ApprovalLimits {
     required Username userName,
     required ApprovalLimit valueUpperLimit,
     required ApprovalLimit valueLowerLimit,
+    required String uuid,
   }) = _ApprovalLimits;
   factory ApprovalLimits.empty() => ApprovalLimits(
         userName: Username(''),
         valueLowerLimit: ApprovalLimit(0),
         valueUpperLimit: ApprovalLimit(0),
         salesOrg: SalesOrg(''),
+        uuid: '',
       );
 
   bool get isValidReturnLimitValue {
     return valueUpperLimit.getValue() > valueLowerLimit.getValue();
   }
+
+  bool get isNotValidApprovalLimit => !salesOrg.isValid();
+  
 }

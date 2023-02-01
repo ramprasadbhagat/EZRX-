@@ -90,4 +90,27 @@ class UserRestrictionMutation {
       }
     ''';
   }
+
+  String deleteApprovalRight() {
+    return '''
+       mutation deleteRestriction(\$input: deleteRestrictionInput!) 
+        {deleteRestriction(input: \$input) 
+          {
+            status
+          }
+        }
+      ''';
+  }
+
+  String deleteApprovalLimit() {
+    return '''
+       mutation deleteReturnApprovalLimit(\$input: deleteReturnApprovalLimitInput!) 
+          {
+            deleteReturnApprovalLimit(input: \$input) 
+            {
+              status
+            }
+          }
+      ''';
+  }
 }

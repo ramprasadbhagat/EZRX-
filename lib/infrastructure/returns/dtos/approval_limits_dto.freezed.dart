@@ -28,6 +28,8 @@ mixin _$ApprovalLimitsDto {
   int get valueUpperLimit => throw _privateConstructorUsedError;
   @JsonKey(name: 'username', defaultValue: '')
   String get username => throw _privateConstructorUsedError;
+  @JsonKey(name: 'uuid', defaultValue: '')
+  String get uuid => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -45,7 +47,8 @@ abstract class $ApprovalLimitsDtoCopyWith<$Res> {
       {@JsonKey(name: 'salesOrg', defaultValue: '') String salesOrg,
       @JsonKey(name: 'valueLowerLimit', defaultValue: 0) int valueLowerLimit,
       @JsonKey(name: 'valueUpperLimit', defaultValue: 0) int valueUpperLimit,
-      @JsonKey(name: 'username', defaultValue: '') String username});
+      @JsonKey(name: 'username', defaultValue: '') String username,
+      @JsonKey(name: 'uuid', defaultValue: '') String uuid});
 }
 
 /// @nodoc
@@ -65,6 +68,7 @@ class _$ApprovalLimitsDtoCopyWithImpl<$Res, $Val extends ApprovalLimitsDto>
     Object? valueLowerLimit = null,
     Object? valueUpperLimit = null,
     Object? username = null,
+    Object? uuid = null,
   }) {
     return _then(_value.copyWith(
       salesOrg: null == salesOrg
@@ -83,6 +87,10 @@ class _$ApprovalLimitsDtoCopyWithImpl<$Res, $Val extends ApprovalLimitsDto>
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
               as String,
+      uuid: null == uuid
+          ? _value.uuid
+          : uuid // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -99,7 +107,8 @@ abstract class _$$_ApprovalLimitsDtoCopyWith<$Res>
       {@JsonKey(name: 'salesOrg', defaultValue: '') String salesOrg,
       @JsonKey(name: 'valueLowerLimit', defaultValue: 0) int valueLowerLimit,
       @JsonKey(name: 'valueUpperLimit', defaultValue: 0) int valueUpperLimit,
-      @JsonKey(name: 'username', defaultValue: '') String username});
+      @JsonKey(name: 'username', defaultValue: '') String username,
+      @JsonKey(name: 'uuid', defaultValue: '') String uuid});
 }
 
 /// @nodoc
@@ -117,6 +126,7 @@ class __$$_ApprovalLimitsDtoCopyWithImpl<$Res>
     Object? valueLowerLimit = null,
     Object? valueUpperLimit = null,
     Object? username = null,
+    Object? uuid = null,
   }) {
     return _then(_$_ApprovalLimitsDto(
       salesOrg: null == salesOrg
@@ -135,6 +145,10 @@ class __$$_ApprovalLimitsDtoCopyWithImpl<$Res>
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
               as String,
+      uuid: null == uuid
+          ? _value.uuid
+          : uuid // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -150,7 +164,9 @@ class _$_ApprovalLimitsDto extends _ApprovalLimitsDto {
       @JsonKey(name: 'valueUpperLimit', defaultValue: 0)
           required this.valueUpperLimit,
       @JsonKey(name: 'username', defaultValue: '')
-          required this.username})
+          required this.username,
+      @JsonKey(name: 'uuid', defaultValue: '')
+          required this.uuid})
       : super._();
 
   factory _$_ApprovalLimitsDto.fromJson(Map<String, dynamic> json) =>
@@ -168,10 +184,13 @@ class _$_ApprovalLimitsDto extends _ApprovalLimitsDto {
   @override
   @JsonKey(name: 'username', defaultValue: '')
   final String username;
+  @override
+  @JsonKey(name: 'uuid', defaultValue: '')
+  final String uuid;
 
   @override
   String toString() {
-    return 'ApprovalLimitsDto(salesOrg: $salesOrg, valueLowerLimit: $valueLowerLimit, valueUpperLimit: $valueUpperLimit, username: $username)';
+    return 'ApprovalLimitsDto(salesOrg: $salesOrg, valueLowerLimit: $valueLowerLimit, valueUpperLimit: $valueUpperLimit, username: $username, uuid: $uuid)';
   }
 
   @override
@@ -186,13 +205,14 @@ class _$_ApprovalLimitsDto extends _ApprovalLimitsDto {
             (identical(other.valueUpperLimit, valueUpperLimit) ||
                 other.valueUpperLimit == valueUpperLimit) &&
             (identical(other.username, username) ||
-                other.username == username));
+                other.username == username) &&
+            (identical(other.uuid, uuid) || other.uuid == uuid));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, salesOrg, valueLowerLimit, valueUpperLimit, username);
+      runtimeType, salesOrg, valueLowerLimit, valueUpperLimit, username, uuid);
 
   @JsonKey(ignore: true)
   @override
@@ -218,7 +238,9 @@ abstract class _ApprovalLimitsDto extends ApprovalLimitsDto {
       @JsonKey(name: 'valueUpperLimit', defaultValue: 0)
           required final int valueUpperLimit,
       @JsonKey(name: 'username', defaultValue: '')
-          required final String username}) = _$_ApprovalLimitsDto;
+          required final String username,
+      @JsonKey(name: 'uuid', defaultValue: '')
+          required final String uuid}) = _$_ApprovalLimitsDto;
   const _ApprovalLimitsDto._() : super._();
 
   factory _ApprovalLimitsDto.fromJson(Map<String, dynamic> json) =
@@ -236,6 +258,9 @@ abstract class _ApprovalLimitsDto extends ApprovalLimitsDto {
   @override
   @JsonKey(name: 'username', defaultValue: '')
   String get username;
+  @override
+  @JsonKey(name: 'uuid', defaultValue: '')
+  String get uuid;
   @override
   @JsonKey(ignore: true)
   _$$_ApprovalLimitsDtoCopyWith<_$_ApprovalLimitsDto> get copyWith =>

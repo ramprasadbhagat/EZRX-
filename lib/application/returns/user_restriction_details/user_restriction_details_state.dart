@@ -8,7 +8,7 @@ class UserRestrictionDetailsState with _$UserRestrictionDetailsState {
     required ApprovalLimits approvalLimits,
     required List<ApproverRightsDetails> addedApproverRightsList,
     required ApproverRights approverRights,
-    required AddConfigureUserRestrictionStatus addConfigureUserRestrictionStatus,
+    required UserRestrictionStatus userRestrictionStatus,
     required Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
   }) = _UserRestrictionDetailsState;
 
@@ -16,7 +16,7 @@ class UserRestrictionDetailsState with _$UserRestrictionDetailsState {
         isFetching: false,
         approverRights: ApproverRights.empty(),
         addedApproverRightsList: <ApproverRightsDetails>[],
-        addConfigureUserRestrictionStatus: AddConfigureUserRestrictionStatus.empty(),
+        userRestrictionStatus: UserRestrictionStatus.empty(),
         approvalLimits: ApprovalLimits.empty(),
         apiFailureOrSuccessOption: none(),
       );

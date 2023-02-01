@@ -30,6 +30,7 @@ mixin _$UserRestrictionDetailsEvent {
         deleteApproverRights,
     required TResult Function() addUserRestriction,
     required TResult Function() configureUserRestriction,
+    required TResult Function() deleteUserRestriction,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -44,6 +45,7 @@ mixin _$UserRestrictionDetailsEvent {
         deleteApproverRights,
     TResult? Function()? addUserRestriction,
     TResult? Function()? configureUserRestriction,
+    TResult? Function()? deleteUserRestriction,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -58,6 +60,7 @@ mixin _$UserRestrictionDetailsEvent {
         deleteApproverRights,
     TResult Function()? addUserRestriction,
     TResult Function()? configureUserRestriction,
+    TResult Function()? deleteUserRestriction,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -72,6 +75,8 @@ mixin _$UserRestrictionDetailsEvent {
     required TResult Function(_addUserRestriction value) addUserRestriction,
     required TResult Function(_configureUserRestriction value)
         configureUserRestriction,
+    required TResult Function(_deleteUserRestriction value)
+        deleteUserRestriction,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -85,6 +90,7 @@ mixin _$UserRestrictionDetailsEvent {
     TResult? Function(_addUserRestriction value)? addUserRestriction,
     TResult? Function(_configureUserRestriction value)?
         configureUserRestriction,
+    TResult? Function(_deleteUserRestriction value)? deleteUserRestriction,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -97,6 +103,7 @@ mixin _$UserRestrictionDetailsEvent {
     TResult Function(_deleteApproverRights value)? deleteApproverRights,
     TResult Function(_addUserRestriction value)? addUserRestriction,
     TResult Function(_configureUserRestriction value)? configureUserRestriction,
+    TResult Function(_deleteUserRestriction value)? deleteUserRestriction,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -210,6 +217,7 @@ class _$_Initialized implements _Initialized {
         deleteApproverRights,
     required TResult Function() addUserRestriction,
     required TResult Function() configureUserRestriction,
+    required TResult Function() deleteUserRestriction,
   }) {
     return initialized(salesOrganisation);
   }
@@ -227,6 +235,7 @@ class _$_Initialized implements _Initialized {
         deleteApproverRights,
     TResult? Function()? addUserRestriction,
     TResult? Function()? configureUserRestriction,
+    TResult? Function()? deleteUserRestriction,
   }) {
     return initialized?.call(salesOrganisation);
   }
@@ -244,6 +253,7 @@ class _$_Initialized implements _Initialized {
         deleteApproverRights,
     TResult Function()? addUserRestriction,
     TResult Function()? configureUserRestriction,
+    TResult Function()? deleteUserRestriction,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -264,6 +274,8 @@ class _$_Initialized implements _Initialized {
     required TResult Function(_addUserRestriction value) addUserRestriction,
     required TResult Function(_configureUserRestriction value)
         configureUserRestriction,
+    required TResult Function(_deleteUserRestriction value)
+        deleteUserRestriction,
   }) {
     return initialized(this);
   }
@@ -280,6 +292,7 @@ class _$_Initialized implements _Initialized {
     TResult? Function(_addUserRestriction value)? addUserRestriction,
     TResult? Function(_configureUserRestriction value)?
         configureUserRestriction,
+    TResult? Function(_deleteUserRestriction value)? deleteUserRestriction,
   }) {
     return initialized?.call(this);
   }
@@ -295,6 +308,7 @@ class _$_Initialized implements _Initialized {
     TResult Function(_deleteApproverRights value)? deleteApproverRights,
     TResult Function(_addUserRestriction value)? addUserRestriction,
     TResult Function(_configureUserRestriction value)? configureUserRestriction,
+    TResult Function(_deleteUserRestriction value)? deleteUserRestriction,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -415,6 +429,7 @@ class _$_fetchUserRestrictionDetails implements _fetchUserRestrictionDetails {
         deleteApproverRights,
     required TResult Function() addUserRestriction,
     required TResult Function() configureUserRestriction,
+    required TResult Function() deleteUserRestriction,
   }) {
     return fetchUserRestrictionDetails(salesOrganisation, userName);
   }
@@ -432,6 +447,7 @@ class _$_fetchUserRestrictionDetails implements _fetchUserRestrictionDetails {
         deleteApproverRights,
     TResult? Function()? addUserRestriction,
     TResult? Function()? configureUserRestriction,
+    TResult? Function()? deleteUserRestriction,
   }) {
     return fetchUserRestrictionDetails?.call(salesOrganisation, userName);
   }
@@ -449,6 +465,7 @@ class _$_fetchUserRestrictionDetails implements _fetchUserRestrictionDetails {
         deleteApproverRights,
     TResult Function()? addUserRestriction,
     TResult Function()? configureUserRestriction,
+    TResult Function()? deleteUserRestriction,
     required TResult orElse(),
   }) {
     if (fetchUserRestrictionDetails != null) {
@@ -469,6 +486,8 @@ class _$_fetchUserRestrictionDetails implements _fetchUserRestrictionDetails {
     required TResult Function(_addUserRestriction value) addUserRestriction,
     required TResult Function(_configureUserRestriction value)
         configureUserRestriction,
+    required TResult Function(_deleteUserRestriction value)
+        deleteUserRestriction,
   }) {
     return fetchUserRestrictionDetails(this);
   }
@@ -485,6 +504,7 @@ class _$_fetchUserRestrictionDetails implements _fetchUserRestrictionDetails {
     TResult? Function(_addUserRestriction value)? addUserRestriction,
     TResult? Function(_configureUserRestriction value)?
         configureUserRestriction,
+    TResult? Function(_deleteUserRestriction value)? deleteUserRestriction,
   }) {
     return fetchUserRestrictionDetails?.call(this);
   }
@@ -500,6 +520,7 @@ class _$_fetchUserRestrictionDetails implements _fetchUserRestrictionDetails {
     TResult Function(_deleteApproverRights value)? deleteApproverRights,
     TResult Function(_addUserRestriction value)? addUserRestriction,
     TResult Function(_configureUserRestriction value)? configureUserRestriction,
+    TResult Function(_deleteUserRestriction value)? deleteUserRestriction,
     required TResult orElse(),
   }) {
     if (fetchUserRestrictionDetails != null) {
@@ -615,6 +636,7 @@ class _$_updateTextField implements _updateTextField {
         deleteApproverRights,
     required TResult Function() addUserRestriction,
     required TResult Function() configureUserRestriction,
+    required TResult Function() deleteUserRestriction,
   }) {
     return updateTextField(value, label, index);
   }
@@ -632,6 +654,7 @@ class _$_updateTextField implements _updateTextField {
         deleteApproverRights,
     TResult? Function()? addUserRestriction,
     TResult? Function()? configureUserRestriction,
+    TResult? Function()? deleteUserRestriction,
   }) {
     return updateTextField?.call(value, label, index);
   }
@@ -649,6 +672,7 @@ class _$_updateTextField implements _updateTextField {
         deleteApproverRights,
     TResult Function()? addUserRestriction,
     TResult Function()? configureUserRestriction,
+    TResult Function()? deleteUserRestriction,
     required TResult orElse(),
   }) {
     if (updateTextField != null) {
@@ -669,6 +693,8 @@ class _$_updateTextField implements _updateTextField {
     required TResult Function(_addUserRestriction value) addUserRestriction,
     required TResult Function(_configureUserRestriction value)
         configureUserRestriction,
+    required TResult Function(_deleteUserRestriction value)
+        deleteUserRestriction,
   }) {
     return updateTextField(this);
   }
@@ -685,6 +711,7 @@ class _$_updateTextField implements _updateTextField {
     TResult? Function(_addUserRestriction value)? addUserRestriction,
     TResult? Function(_configureUserRestriction value)?
         configureUserRestriction,
+    TResult? Function(_deleteUserRestriction value)? deleteUserRestriction,
   }) {
     return updateTextField?.call(this);
   }
@@ -700,6 +727,7 @@ class _$_updateTextField implements _updateTextField {
     TResult Function(_deleteApproverRights value)? deleteApproverRights,
     TResult Function(_addUserRestriction value)? addUserRestriction,
     TResult Function(_configureUserRestriction value)? configureUserRestriction,
+    TResult Function(_deleteUserRestriction value)? deleteUserRestriction,
     required TResult orElse(),
   }) {
     if (updateTextField != null) {
@@ -801,6 +829,7 @@ class _$_addApproverRights implements _addApproverRights {
         deleteApproverRights,
     required TResult Function() addUserRestriction,
     required TResult Function() configureUserRestriction,
+    required TResult Function() deleteUserRestriction,
   }) {
     return addApproverRights(salesOrg);
   }
@@ -818,6 +847,7 @@ class _$_addApproverRights implements _addApproverRights {
         deleteApproverRights,
     TResult? Function()? addUserRestriction,
     TResult? Function()? configureUserRestriction,
+    TResult? Function()? deleteUserRestriction,
   }) {
     return addApproverRights?.call(salesOrg);
   }
@@ -835,6 +865,7 @@ class _$_addApproverRights implements _addApproverRights {
         deleteApproverRights,
     TResult Function()? addUserRestriction,
     TResult Function()? configureUserRestriction,
+    TResult Function()? deleteUserRestriction,
     required TResult orElse(),
   }) {
     if (addApproverRights != null) {
@@ -855,6 +886,8 @@ class _$_addApproverRights implements _addApproverRights {
     required TResult Function(_addUserRestriction value) addUserRestriction,
     required TResult Function(_configureUserRestriction value)
         configureUserRestriction,
+    required TResult Function(_deleteUserRestriction value)
+        deleteUserRestriction,
   }) {
     return addApproverRights(this);
   }
@@ -871,6 +904,7 @@ class _$_addApproverRights implements _addApproverRights {
     TResult? Function(_addUserRestriction value)? addUserRestriction,
     TResult? Function(_configureUserRestriction value)?
         configureUserRestriction,
+    TResult? Function(_deleteUserRestriction value)? deleteUserRestriction,
   }) {
     return addApproverRights?.call(this);
   }
@@ -886,6 +920,7 @@ class _$_addApproverRights implements _addApproverRights {
     TResult Function(_deleteApproverRights value)? deleteApproverRights,
     TResult Function(_addUserRestriction value)? addUserRestriction,
     TResult Function(_configureUserRestriction value)? configureUserRestriction,
+    TResult Function(_deleteUserRestriction value)? deleteUserRestriction,
     required TResult orElse(),
   }) {
     if (addApproverRights != null) {
@@ -995,6 +1030,7 @@ class _$_deleteApproverRights implements _deleteApproverRights {
         deleteApproverRights,
     required TResult Function() addUserRestriction,
     required TResult Function() configureUserRestriction,
+    required TResult Function() deleteUserRestriction,
   }) {
     return deleteApproverRights(approverRightsDetails);
   }
@@ -1012,6 +1048,7 @@ class _$_deleteApproverRights implements _deleteApproverRights {
         deleteApproverRights,
     TResult? Function()? addUserRestriction,
     TResult? Function()? configureUserRestriction,
+    TResult? Function()? deleteUserRestriction,
   }) {
     return deleteApproverRights?.call(approverRightsDetails);
   }
@@ -1029,6 +1066,7 @@ class _$_deleteApproverRights implements _deleteApproverRights {
         deleteApproverRights,
     TResult Function()? addUserRestriction,
     TResult Function()? configureUserRestriction,
+    TResult Function()? deleteUserRestriction,
     required TResult orElse(),
   }) {
     if (deleteApproverRights != null) {
@@ -1049,6 +1087,8 @@ class _$_deleteApproverRights implements _deleteApproverRights {
     required TResult Function(_addUserRestriction value) addUserRestriction,
     required TResult Function(_configureUserRestriction value)
         configureUserRestriction,
+    required TResult Function(_deleteUserRestriction value)
+        deleteUserRestriction,
   }) {
     return deleteApproverRights(this);
   }
@@ -1065,6 +1105,7 @@ class _$_deleteApproverRights implements _deleteApproverRights {
     TResult? Function(_addUserRestriction value)? addUserRestriction,
     TResult? Function(_configureUserRestriction value)?
         configureUserRestriction,
+    TResult? Function(_deleteUserRestriction value)? deleteUserRestriction,
   }) {
     return deleteApproverRights?.call(this);
   }
@@ -1080,6 +1121,7 @@ class _$_deleteApproverRights implements _deleteApproverRights {
     TResult Function(_deleteApproverRights value)? deleteApproverRights,
     TResult Function(_addUserRestriction value)? addUserRestriction,
     TResult Function(_configureUserRestriction value)? configureUserRestriction,
+    TResult Function(_deleteUserRestriction value)? deleteUserRestriction,
     required TResult orElse(),
   }) {
     if (deleteApproverRights != null) {
@@ -1150,6 +1192,7 @@ class _$_addUserRestriction implements _addUserRestriction {
         deleteApproverRights,
     required TResult Function() addUserRestriction,
     required TResult Function() configureUserRestriction,
+    required TResult Function() deleteUserRestriction,
   }) {
     return addUserRestriction();
   }
@@ -1167,6 +1210,7 @@ class _$_addUserRestriction implements _addUserRestriction {
         deleteApproverRights,
     TResult? Function()? addUserRestriction,
     TResult? Function()? configureUserRestriction,
+    TResult? Function()? deleteUserRestriction,
   }) {
     return addUserRestriction?.call();
   }
@@ -1184,6 +1228,7 @@ class _$_addUserRestriction implements _addUserRestriction {
         deleteApproverRights,
     TResult Function()? addUserRestriction,
     TResult Function()? configureUserRestriction,
+    TResult Function()? deleteUserRestriction,
     required TResult orElse(),
   }) {
     if (addUserRestriction != null) {
@@ -1204,6 +1249,8 @@ class _$_addUserRestriction implements _addUserRestriction {
     required TResult Function(_addUserRestriction value) addUserRestriction,
     required TResult Function(_configureUserRestriction value)
         configureUserRestriction,
+    required TResult Function(_deleteUserRestriction value)
+        deleteUserRestriction,
   }) {
     return addUserRestriction(this);
   }
@@ -1220,6 +1267,7 @@ class _$_addUserRestriction implements _addUserRestriction {
     TResult? Function(_addUserRestriction value)? addUserRestriction,
     TResult? Function(_configureUserRestriction value)?
         configureUserRestriction,
+    TResult? Function(_deleteUserRestriction value)? deleteUserRestriction,
   }) {
     return addUserRestriction?.call(this);
   }
@@ -1235,6 +1283,7 @@ class _$_addUserRestriction implements _addUserRestriction {
     TResult Function(_deleteApproverRights value)? deleteApproverRights,
     TResult Function(_addUserRestriction value)? addUserRestriction,
     TResult Function(_configureUserRestriction value)? configureUserRestriction,
+    TResult Function(_deleteUserRestriction value)? deleteUserRestriction,
     required TResult orElse(),
   }) {
     if (addUserRestriction != null) {
@@ -1301,6 +1350,7 @@ class _$_configureUserRestriction implements _configureUserRestriction {
         deleteApproverRights,
     required TResult Function() addUserRestriction,
     required TResult Function() configureUserRestriction,
+    required TResult Function() deleteUserRestriction,
   }) {
     return configureUserRestriction();
   }
@@ -1318,6 +1368,7 @@ class _$_configureUserRestriction implements _configureUserRestriction {
         deleteApproverRights,
     TResult? Function()? addUserRestriction,
     TResult? Function()? configureUserRestriction,
+    TResult? Function()? deleteUserRestriction,
   }) {
     return configureUserRestriction?.call();
   }
@@ -1335,6 +1386,7 @@ class _$_configureUserRestriction implements _configureUserRestriction {
         deleteApproverRights,
     TResult Function()? addUserRestriction,
     TResult Function()? configureUserRestriction,
+    TResult Function()? deleteUserRestriction,
     required TResult orElse(),
   }) {
     if (configureUserRestriction != null) {
@@ -1355,6 +1407,8 @@ class _$_configureUserRestriction implements _configureUserRestriction {
     required TResult Function(_addUserRestriction value) addUserRestriction,
     required TResult Function(_configureUserRestriction value)
         configureUserRestriction,
+    required TResult Function(_deleteUserRestriction value)
+        deleteUserRestriction,
   }) {
     return configureUserRestriction(this);
   }
@@ -1371,6 +1425,7 @@ class _$_configureUserRestriction implements _configureUserRestriction {
     TResult? Function(_addUserRestriction value)? addUserRestriction,
     TResult? Function(_configureUserRestriction value)?
         configureUserRestriction,
+    TResult? Function(_deleteUserRestriction value)? deleteUserRestriction,
   }) {
     return configureUserRestriction?.call(this);
   }
@@ -1386,6 +1441,7 @@ class _$_configureUserRestriction implements _configureUserRestriction {
     TResult Function(_deleteApproverRights value)? deleteApproverRights,
     TResult Function(_addUserRestriction value)? addUserRestriction,
     TResult Function(_configureUserRestriction value)? configureUserRestriction,
+    TResult Function(_deleteUserRestriction value)? deleteUserRestriction,
     required TResult orElse(),
   }) {
     if (configureUserRestriction != null) {
@@ -1401,13 +1457,169 @@ abstract class _configureUserRestriction
 }
 
 /// @nodoc
+abstract class _$$_deleteUserRestrictionCopyWith<$Res> {
+  factory _$$_deleteUserRestrictionCopyWith(_$_deleteUserRestriction value,
+          $Res Function(_$_deleteUserRestriction) then) =
+      __$$_deleteUserRestrictionCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_deleteUserRestrictionCopyWithImpl<$Res>
+    extends _$UserRestrictionDetailsEventCopyWithImpl<$Res,
+        _$_deleteUserRestriction>
+    implements _$$_deleteUserRestrictionCopyWith<$Res> {
+  __$$_deleteUserRestrictionCopyWithImpl(_$_deleteUserRestriction _value,
+      $Res Function(_$_deleteUserRestriction) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_deleteUserRestriction implements _deleteUserRestriction {
+  const _$_deleteUserRestriction();
+
+  @override
+  String toString() {
+    return 'UserRestrictionDetailsEvent.deleteUserRestriction()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_deleteUserRestriction);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(SalesOrganisation salesOrganisation) initialized,
+    required TResult Function(
+            SalesOrganisation salesOrganisation, Username userName)
+        fetchUserRestrictionDetails,
+    required TResult Function(
+            String value, UserRestrictionLabel label, int index)
+        updateTextField,
+    required TResult Function(SalesOrg salesOrg) addApproverRights,
+    required TResult Function(ApproverRightsDetails approverRightsDetails)
+        deleteApproverRights,
+    required TResult Function() addUserRestriction,
+    required TResult Function() configureUserRestriction,
+    required TResult Function() deleteUserRestriction,
+  }) {
+    return deleteUserRestriction();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(SalesOrganisation salesOrganisation)? initialized,
+    TResult? Function(SalesOrganisation salesOrganisation, Username userName)?
+        fetchUserRestrictionDetails,
+    TResult? Function(String value, UserRestrictionLabel label, int index)?
+        updateTextField,
+    TResult? Function(SalesOrg salesOrg)? addApproverRights,
+    TResult? Function(ApproverRightsDetails approverRightsDetails)?
+        deleteApproverRights,
+    TResult? Function()? addUserRestriction,
+    TResult? Function()? configureUserRestriction,
+    TResult? Function()? deleteUserRestriction,
+  }) {
+    return deleteUserRestriction?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(SalesOrganisation salesOrganisation)? initialized,
+    TResult Function(SalesOrganisation salesOrganisation, Username userName)?
+        fetchUserRestrictionDetails,
+    TResult Function(String value, UserRestrictionLabel label, int index)?
+        updateTextField,
+    TResult Function(SalesOrg salesOrg)? addApproverRights,
+    TResult Function(ApproverRightsDetails approverRightsDetails)?
+        deleteApproverRights,
+    TResult Function()? addUserRestriction,
+    TResult Function()? configureUserRestriction,
+    TResult Function()? deleteUserRestriction,
+    required TResult orElse(),
+  }) {
+    if (deleteUserRestriction != null) {
+      return deleteUserRestriction();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_fetchUserRestrictionDetails value)
+        fetchUserRestrictionDetails,
+    required TResult Function(_updateTextField value) updateTextField,
+    required TResult Function(_addApproverRights value) addApproverRights,
+    required TResult Function(_deleteApproverRights value) deleteApproverRights,
+    required TResult Function(_addUserRestriction value) addUserRestriction,
+    required TResult Function(_configureUserRestriction value)
+        configureUserRestriction,
+    required TResult Function(_deleteUserRestriction value)
+        deleteUserRestriction,
+  }) {
+    return deleteUserRestriction(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_fetchUserRestrictionDetails value)?
+        fetchUserRestrictionDetails,
+    TResult? Function(_updateTextField value)? updateTextField,
+    TResult? Function(_addApproverRights value)? addApproverRights,
+    TResult? Function(_deleteApproverRights value)? deleteApproverRights,
+    TResult? Function(_addUserRestriction value)? addUserRestriction,
+    TResult? Function(_configureUserRestriction value)?
+        configureUserRestriction,
+    TResult? Function(_deleteUserRestriction value)? deleteUserRestriction,
+  }) {
+    return deleteUserRestriction?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_fetchUserRestrictionDetails value)?
+        fetchUserRestrictionDetails,
+    TResult Function(_updateTextField value)? updateTextField,
+    TResult Function(_addApproverRights value)? addApproverRights,
+    TResult Function(_deleteApproverRights value)? deleteApproverRights,
+    TResult Function(_addUserRestriction value)? addUserRestriction,
+    TResult Function(_configureUserRestriction value)? configureUserRestriction,
+    TResult Function(_deleteUserRestriction value)? deleteUserRestriction,
+    required TResult orElse(),
+  }) {
+    if (deleteUserRestriction != null) {
+      return deleteUserRestriction(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _deleteUserRestriction implements UserRestrictionDetailsEvent {
+  const factory _deleteUserRestriction() = _$_deleteUserRestriction;
+}
+
+/// @nodoc
 mixin _$UserRestrictionDetailsState {
   bool get isFetching => throw _privateConstructorUsedError;
   ApprovalLimits get approvalLimits => throw _privateConstructorUsedError;
   List<ApproverRightsDetails> get addedApproverRightsList =>
       throw _privateConstructorUsedError;
   ApproverRights get approverRights => throw _privateConstructorUsedError;
-  AddConfigureUserRestrictionStatus get addConfigureUserRestrictionStatus =>
+  UserRestrictionStatus get userRestrictionStatus =>
       throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption =>
       throw _privateConstructorUsedError;
@@ -1430,13 +1642,12 @@ abstract class $UserRestrictionDetailsStateCopyWith<$Res> {
       ApprovalLimits approvalLimits,
       List<ApproverRightsDetails> addedApproverRightsList,
       ApproverRights approverRights,
-      AddConfigureUserRestrictionStatus addConfigureUserRestrictionStatus,
+      UserRestrictionStatus userRestrictionStatus,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption});
 
   $ApprovalLimitsCopyWith<$Res> get approvalLimits;
   $ApproverRightsCopyWith<$Res> get approverRights;
-  $AddConfigureUserRestrictionStatusCopyWith<$Res>
-      get addConfigureUserRestrictionStatus;
+  $UserRestrictionStatusCopyWith<$Res> get userRestrictionStatus;
 }
 
 /// @nodoc
@@ -1457,7 +1668,7 @@ class _$UserRestrictionDetailsStateCopyWithImpl<$Res,
     Object? approvalLimits = null,
     Object? addedApproverRightsList = null,
     Object? approverRights = null,
-    Object? addConfigureUserRestrictionStatus = null,
+    Object? userRestrictionStatus = null,
     Object? apiFailureOrSuccessOption = null,
   }) {
     return _then(_value.copyWith(
@@ -1477,11 +1688,10 @@ class _$UserRestrictionDetailsStateCopyWithImpl<$Res,
           ? _value.approverRights
           : approverRights // ignore: cast_nullable_to_non_nullable
               as ApproverRights,
-      addConfigureUserRestrictionStatus: null ==
-              addConfigureUserRestrictionStatus
-          ? _value.addConfigureUserRestrictionStatus
-          : addConfigureUserRestrictionStatus // ignore: cast_nullable_to_non_nullable
-              as AddConfigureUserRestrictionStatus,
+      userRestrictionStatus: null == userRestrictionStatus
+          ? _value.userRestrictionStatus
+          : userRestrictionStatus // ignore: cast_nullable_to_non_nullable
+              as UserRestrictionStatus,
       apiFailureOrSuccessOption: null == apiFailureOrSuccessOption
           ? _value.apiFailureOrSuccessOption
           : apiFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
@@ -1507,12 +1717,10 @@ class _$UserRestrictionDetailsStateCopyWithImpl<$Res,
 
   @override
   @pragma('vm:prefer-inline')
-  $AddConfigureUserRestrictionStatusCopyWith<$Res>
-      get addConfigureUserRestrictionStatus {
-    return $AddConfigureUserRestrictionStatusCopyWith<$Res>(
-        _value.addConfigureUserRestrictionStatus, (value) {
-      return _then(
-          _value.copyWith(addConfigureUserRestrictionStatus: value) as $Val);
+  $UserRestrictionStatusCopyWith<$Res> get userRestrictionStatus {
+    return $UserRestrictionStatusCopyWith<$Res>(_value.userRestrictionStatus,
+        (value) {
+      return _then(_value.copyWith(userRestrictionStatus: value) as $Val);
     });
   }
 }
@@ -1531,7 +1739,7 @@ abstract class _$$_UserRestrictionDetailsStateCopyWith<$Res>
       ApprovalLimits approvalLimits,
       List<ApproverRightsDetails> addedApproverRightsList,
       ApproverRights approverRights,
-      AddConfigureUserRestrictionStatus addConfigureUserRestrictionStatus,
+      UserRestrictionStatus userRestrictionStatus,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption});
 
   @override
@@ -1539,8 +1747,7 @@ abstract class _$$_UserRestrictionDetailsStateCopyWith<$Res>
   @override
   $ApproverRightsCopyWith<$Res> get approverRights;
   @override
-  $AddConfigureUserRestrictionStatusCopyWith<$Res>
-      get addConfigureUserRestrictionStatus;
+  $UserRestrictionStatusCopyWith<$Res> get userRestrictionStatus;
 }
 
 /// @nodoc
@@ -1560,7 +1767,7 @@ class __$$_UserRestrictionDetailsStateCopyWithImpl<$Res>
     Object? approvalLimits = null,
     Object? addedApproverRightsList = null,
     Object? approverRights = null,
-    Object? addConfigureUserRestrictionStatus = null,
+    Object? userRestrictionStatus = null,
     Object? apiFailureOrSuccessOption = null,
   }) {
     return _then(_$_UserRestrictionDetailsState(
@@ -1580,11 +1787,10 @@ class __$$_UserRestrictionDetailsStateCopyWithImpl<$Res>
           ? _value.approverRights
           : approverRights // ignore: cast_nullable_to_non_nullable
               as ApproverRights,
-      addConfigureUserRestrictionStatus: null ==
-              addConfigureUserRestrictionStatus
-          ? _value.addConfigureUserRestrictionStatus
-          : addConfigureUserRestrictionStatus // ignore: cast_nullable_to_non_nullable
-              as AddConfigureUserRestrictionStatus,
+      userRestrictionStatus: null == userRestrictionStatus
+          ? _value.userRestrictionStatus
+          : userRestrictionStatus // ignore: cast_nullable_to_non_nullable
+              as UserRestrictionStatus,
       apiFailureOrSuccessOption: null == apiFailureOrSuccessOption
           ? _value.apiFailureOrSuccessOption
           : apiFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
@@ -1601,7 +1807,7 @@ class _$_UserRestrictionDetailsState extends _UserRestrictionDetailsState {
       required this.approvalLimits,
       required final List<ApproverRightsDetails> addedApproverRightsList,
       required this.approverRights,
-      required this.addConfigureUserRestrictionStatus,
+      required this.userRestrictionStatus,
       required this.apiFailureOrSuccessOption})
       : _addedApproverRightsList = addedApproverRightsList,
         super._();
@@ -1620,13 +1826,13 @@ class _$_UserRestrictionDetailsState extends _UserRestrictionDetailsState {
   @override
   final ApproverRights approverRights;
   @override
-  final AddConfigureUserRestrictionStatus addConfigureUserRestrictionStatus;
+  final UserRestrictionStatus userRestrictionStatus;
   @override
   final Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption;
 
   @override
   String toString() {
-    return 'UserRestrictionDetailsState(isFetching: $isFetching, approvalLimits: $approvalLimits, addedApproverRightsList: $addedApproverRightsList, approverRights: $approverRights, addConfigureUserRestrictionStatus: $addConfigureUserRestrictionStatus, apiFailureOrSuccessOption: $apiFailureOrSuccessOption)';
+    return 'UserRestrictionDetailsState(isFetching: $isFetching, approvalLimits: $approvalLimits, addedApproverRightsList: $addedApproverRightsList, approverRights: $approverRights, userRestrictionStatus: $userRestrictionStatus, apiFailureOrSuccessOption: $apiFailureOrSuccessOption)';
   }
 
   @override
@@ -1642,10 +1848,8 @@ class _$_UserRestrictionDetailsState extends _UserRestrictionDetailsState {
                 other._addedApproverRightsList, _addedApproverRightsList) &&
             (identical(other.approverRights, approverRights) ||
                 other.approverRights == approverRights) &&
-            (identical(other.addConfigureUserRestrictionStatus,
-                    addConfigureUserRestrictionStatus) ||
-                other.addConfigureUserRestrictionStatus ==
-                    addConfigureUserRestrictionStatus) &&
+            (identical(other.userRestrictionStatus, userRestrictionStatus) ||
+                other.userRestrictionStatus == userRestrictionStatus) &&
             (identical(other.apiFailureOrSuccessOption,
                     apiFailureOrSuccessOption) ||
                 other.apiFailureOrSuccessOption == apiFailureOrSuccessOption));
@@ -1658,7 +1862,7 @@ class _$_UserRestrictionDetailsState extends _UserRestrictionDetailsState {
       approvalLimits,
       const DeepCollectionEquality().hash(_addedApproverRightsList),
       approverRights,
-      addConfigureUserRestrictionStatus,
+      userRestrictionStatus,
       apiFailureOrSuccessOption);
 
   @JsonKey(ignore: true)
@@ -1676,8 +1880,7 @@ abstract class _UserRestrictionDetailsState
       required final ApprovalLimits approvalLimits,
       required final List<ApproverRightsDetails> addedApproverRightsList,
       required final ApproverRights approverRights,
-      required final AddConfigureUserRestrictionStatus
-          addConfigureUserRestrictionStatus,
+      required final UserRestrictionStatus userRestrictionStatus,
       required final Option<Either<ApiFailure, dynamic>>
           apiFailureOrSuccessOption}) = _$_UserRestrictionDetailsState;
   _UserRestrictionDetailsState._() : super._();
@@ -1691,7 +1894,7 @@ abstract class _UserRestrictionDetailsState
   @override
   ApproverRights get approverRights;
   @override
-  AddConfigureUserRestrictionStatus get addConfigureUserRestrictionStatus;
+  UserRestrictionStatus get userRestrictionStatus;
   @override
   Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption;
   @override

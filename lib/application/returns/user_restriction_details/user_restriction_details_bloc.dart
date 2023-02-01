@@ -22,7 +22,7 @@ import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 
 import 'package:ezrxmobile/domain/returns/entities/approver_rights.dart';
 
-import 'package:ezrxmobile/domain/returns/entities/add_return_approval_limit.dart';
+import 'package:ezrxmobile/domain/returns/entities/user_restriction_status.dart';
 
 part 'user_restriction_details_event.dart';
 part 'user_restriction_details_state.dart';
@@ -95,8 +95,8 @@ class UserRestrictionDetailsBloc
       addUserRestriction: (e) async {
         emit(
           state.copyWith(
-            addConfigureUserRestrictionStatus:
-                AddConfigureUserRestrictionStatus.empty(),
+            userRestrictionStatus:
+                UserRestrictionStatus.empty(),
             apiFailureOrSuccessOption: none(),
           ),
         );
@@ -123,8 +123,8 @@ class UserRestrictionDetailsBloc
       configureUserRestriction: (e) async {
         emit(
           state.copyWith(
-            addConfigureUserRestrictionStatus:
-                AddConfigureUserRestrictionStatus.empty(),
+            userRestrictionStatus:
+                UserRestrictionStatus.empty(),
             apiFailureOrSuccessOption: none(),
           ),
         );
@@ -151,9 +151,72 @@ class UserRestrictionDetailsBloc
           },
           (configureRestrictions) {
             emit(state.copyWith(
-              addConfigureUserRestrictionStatus: configureRestrictions,
+              userRestrictionStatus: configureRestrictions,
               apiFailureOrSuccessOption: none(),
             ));
+          },
+        );
+      },
+      deleteUserRestriction: (e) async {
+        emit(
+          state.copyWith(
+            userRestrictionStatus:
+                UserRestrictionStatus.empty(),
+            apiFailureOrSuccessOption: none(),
+          ),
+        );
+
+        final deleteApprovalRights =
+            await userRestrictionRepository.deleteApprovalRights(
+          approverRights: state.approverRights,
+        );
+
+        await deleteApprovalRights.fold(
+          (failure) {
+            emit(
+              state.copyWith(
+                apiFailureOrSuccessOption: optionOf(
+                  deleteApprovalRights,
+                ),
+              ),
+            );
+          },
+          (deleteUserRestriction) async {
+            if (state.approvalLimits.isNotValidApprovalLimit) {
+              emit(
+                state.copyWith(
+                  userRestrictionStatus:
+                      UserRestrictionStatus.empty().copyWith(
+                    approvalLimitStatus: deleteUserRestriction,
+                  ),
+                  apiFailureOrSuccessOption: none(),
+                ),
+              );
+
+              return;
+            }
+
+            final deleteApprovalLimit = await userRestrictionRepository
+                .deleteApprovalLimit(approverLimits: state.approvalLimits);
+
+            deleteApprovalLimit.fold(
+              (failure) {
+                emit(
+                  state.copyWith(
+                    isFetching: false,
+                    apiFailureOrSuccessOption: optionOf(
+                      deleteApprovalLimit,
+                    ),
+                  ),
+                );
+              },
+              (deleteApprovalLimit) {
+                emit(state.copyWith(
+                  userRestrictionStatus: deleteApprovalLimit,
+                  apiFailureOrSuccessOption: none(),
+                ));
+              },
+            );
           },
         );
       },

@@ -21,15 +21,17 @@ class ApprovalLimitsDto with _$ApprovalLimitsDto {
     @JsonKey(name: 'valueLowerLimit', defaultValue: 0) required int valueLowerLimit,
     @JsonKey(name: 'valueUpperLimit', defaultValue: 0) required int valueUpperLimit,
     @JsonKey(name: 'username', defaultValue: '') required String username,
+    @JsonKey(name: 'uuid', defaultValue: '') required String uuid,
   }) = _ApprovalLimitsDto;
 
 
   ApprovalLimits toDomain() {
     return ApprovalLimits(
-    userName: Username(username),
+     userName: Username(username),
      salesOrg:  SalesOrg(salesOrg),
      valueLowerLimit: ApprovalLimit(valueLowerLimit),
      valueUpperLimit: ApprovalLimit(valueUpperLimit),
+     uuid: uuid,
     );
   }
 
