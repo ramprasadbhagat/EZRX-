@@ -15,6 +15,7 @@ import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/core/dialogs/custom_dialogs.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_action_button.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_bundle_item.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_invalid_warning.dart';
@@ -141,15 +142,7 @@ class SavedOrderDetailPage extends StatelessWidget {
                 builder: (context, state) {
                   return OrderActionButton(
                     onAddToCartPressed: () => _addToCartPressed(context, state),
-                    onDeletePressed: () {
-                      context.read<SavedOrderListBloc>().add(
-                            SavedOrderListEvent.delete(
-                              order: order,
-                              user: context.read<UserBloc>().state.user,
-                            ),
-                          );
-                      context.router.pop();
-                    },
+                    onDeletePressed: () => _deletePressed(context),
                     enableAddToCart: order.allMaterialQueryInfo.any(
                       (item) => state.isValidMaterial(
                         query: item,
@@ -209,5 +202,24 @@ class SavedOrderDetailPage extends StatelessWidget {
 
     context.router.pushNamed('cart_page');
     locator<CountlyService>().recordCountlyView('Use saved order');
+  }
+
+  Future<void> _deletePressed(
+    BuildContext context,
+  ) async {
+    await CustomDialogs.confirmationDialog(
+      context: context,
+      title: 'Delete Order?',
+      message: 'Are you sure you want to delete this Order?',
+      onAcceptPressed: () async {
+        context.read<SavedOrderListBloc>().add(
+              SavedOrderListEvent.delete(
+                order: order,
+                user: context.read<UserBloc>().state.user,
+              ),
+            );
+        await context.router.pop();
+      },
+    );
   }
 }

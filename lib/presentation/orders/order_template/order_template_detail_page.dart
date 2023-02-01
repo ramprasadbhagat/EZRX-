@@ -15,6 +15,7 @@ import 'package:ezrxmobile/domain/order/entities/order_template.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/core/dialogs/custom_dialogs.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_action_button.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_bundle_item.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_invalid_warning.dart';
@@ -136,14 +137,7 @@ class OrderTemplateDetailPage extends StatelessWidget {
                 builder: (context, state) {
                   return OrderActionButton(
                     onAddToCartPressed: () => _addToCartPressed(context, state),
-                    onDeletePressed: () {
-                      context.read<OrderTemplateListBloc>().add(
-                            OrderTemplateListEvent.delete(
-                              order,
-                            ),
-                          );
-                      context.router.pop();
-                    },
+                    onDeletePressed: () => _deletePressed(context),
                     enableAddToCart: order.allMaterialQueryInfo.any(
                       (item) => state.isValidMaterial(
                         query: item,
@@ -222,5 +216,23 @@ class OrderTemplateDetailPage extends StatelessWidget {
 
     context.router.pushNamed('cart_page');
     locator<CountlyService>().addCountlyEvent('Use template');
+  }
+
+  Future<void> _deletePressed(
+    BuildContext context,
+  ) async {
+    await CustomDialogs.confirmationDialog(
+      context: context,
+      title: 'Delete Order Template?',
+      message: 'Are you sure you want to delete this Order Template?',
+      onAcceptPressed: () async{
+        context.read<OrderTemplateListBloc>().add(
+              OrderTemplateListEvent.delete(
+                order,
+              ),
+            );
+        await context.router.pop();
+      },
+    );
   }
 }
