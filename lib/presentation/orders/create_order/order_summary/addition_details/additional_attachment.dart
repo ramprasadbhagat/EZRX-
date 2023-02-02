@@ -73,12 +73,29 @@ class AdditionPoAttachmentUpload extends StatelessWidget {
               builder: (context, state) {
                 if (state.additionalDetailsData.poDocuments.isNotEmpty ||
                     poAttachmentState.fileUploading) {
-                  return PoAttachment(
-                    key: const ValueKey('orderSummaryAdditionalPoAttachment'),
-                    poDocuments: state.additionalDetailsData.poDocuments,
-                    poattachMentRenderMode: PoAttachMentRenderMode.edit,
-                    uploadingPocDocument:
-                        poAttachmentState.uploadInProgressPoDocument,
+                  return Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10.0,
+                          vertical: 10.0,
+                        ),
+                        child: PoAttachment(
+                          key: const ValueKey(
+                            'orderSummaryAdditionalPoAttachment',
+                          ),
+                          poDocuments: state.additionalDetailsData.poDocuments,
+                          poattachMentRenderMode: PoAttachMentRenderMode.edit,
+                          uploadingPocDocument:
+                              poAttachmentState.uploadInProgressPoDocument,
+                        ),
+                      ),
+                      const Divider(
+                        color: ZPColors.lightGray,
+                        endIndent: 0,
+                        indent: 0,
+                      ),
+                    ],
                   );
                 }
 
@@ -214,7 +231,7 @@ class _PoUploadOptionPickerState extends State<_PoUploadOptionPicker> {
               : 'Please enable Storage permission from the app settings'.tr(),
         );
         await context.router.pop();
-        
+
         return;
       }
     }

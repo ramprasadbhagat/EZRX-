@@ -184,11 +184,24 @@ class HistoryDetails extends StatelessWidget {
                               .state
                               .isShowPOAttachmentEnable &&
                           orderDetails.poDocumentsAvailable)
-                        PoAttachment(
-                          poDocuments:
-                              orderDetails.orderHistoryDetailsPoDocuments,
-                          poattachMentRenderMode: PoAttachMentRenderMode.view,
-                          uploadingPocDocument: const <PoDocuments>[],
+                        Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 10),
+                              child: PoAttachment(
+                                poDocuments:
+                                    orderDetails.orderHistoryDetailsPoDocuments,
+                                poattachMentRenderMode:
+                                    PoAttachMentRenderMode.view,
+                                uploadingPocDocument: const <PoDocuments>[],
+                              ),
+                            ),
+                            const Divider(
+                              color: ZPColors.lightGray,
+                              endIndent: 0,
+                              indent: 0,
+                            ),
+                          ],
                         ),
                       _Invoices(
                         orderDetails: orderDetails,

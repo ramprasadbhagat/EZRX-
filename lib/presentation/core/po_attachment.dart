@@ -1,3 +1,4 @@
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:universal_io/io.dart';
 
 import 'package:easy_localization/easy_localization.dart';
@@ -76,7 +77,6 @@ class _PoAttachmentState extends State<PoAttachment> {
                     );
                   } else {
                     await downloadAllFile(state.fileData);
-                    
                   }
                 },
               ),
@@ -151,78 +151,99 @@ class _PoAttachmentState extends State<PoAttachment> {
                             )
                             .toList(),
                       ]),
+                      const SizedBox(
+                        height: 10,
+                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          widget.poDocuments.length > 2 && !show && !edit
-                              ? InkWell(
-                                  key: const Key('viewAll'),
-                                  child: Text(
-                                    'View All'.tr(),
-                                    style: const TextStyle(
-                                      color: ZPColors.darkerGreen,
-                                      decoration: TextDecoration.underline,
+                          if (!edit)
+                            (widget.poDocuments.length > 2 && !show)
+                                ? InkWell(
+                                    key: const Key('viewAll'),
+                                    child: Text(
+                                      'View All'.tr(),
+                                      style: const TextStyle(
+                                        shadows: [
+                                          Shadow(
+                                              color: ZPColors.darkerGreen,
+                                            offset: Offset(0, -2),
+                                          ),
+                                        ],
+                                        color: Colors.transparent,
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 17.0,
+                                        decoration: TextDecoration.underline,
+                                        decorationColor: ZPColors.darkerGreen,
+                                      ),
+                                    ),
+                                    onTap: () {
+                                      setState(() {
+                                        show = !show;
+                                      });
+                                    },
+                                  )
+                                : const SizedBox.shrink(),
+                          if (edit && widget.poDocuments.isNotEmpty)
+                            const _PoUploadDeleteAll(
+                              key: ValueKey('deleteAll'),
+                            ),
+                          if (widget.poDocuments.isNotEmpty)
+                            InkWell(
+                              key: const Key('downloadAll'),
+                              onTap: () async {
+                                if (defaultTargetPlatform ==
+                                        TargetPlatform.android &&
+                                    !(await locator<PermissionService>()
+                                        .requeststoragePermission()
+                                        .isGranted)) {
+                                  showSnackBar(
+                                    context: context,
+                                    message:
+                                        'Allow apps to access the storage'.tr(),
+                                  );
+
+                                  return;
+                                }
+                                if (!mounted) return;
+                                context.read<PoAttachmentBloc>().add(
+                                      PoAttachmentEvent.downloadFile(
+                                        files: widget.poDocuments,
+                                        fetchMode: FileOperationhMode.download,
+                                      ),
+                                    );
+                              },
+                              child: Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(bottom: 5),
+                                    child: SvgPicture.asset(
+                                      'assets/svg/po_attachment_download.svg',
+                                      height: 16,
+                                      width: 16,
                                     ),
                                   ),
-                                  onTap: () {
-                                    setState(() {
-                                      show = !show;
-                                    });
-                                  },
-                                )
-                              : const SizedBox.shrink(),
-                          if (widget.poDocuments.isNotEmpty)
-                            Column(
-                              children: [
-                                InkWell(
-                                  key: const Key('downloadAll'),
-                                  onTap: () async {
-                                    if (defaultTargetPlatform ==
-                                            TargetPlatform.android &&
-                                        !(await locator<PermissionService>()
-                                            .requeststoragePermission()
-                                            .isGranted)) {
-                                      showSnackBar(
-                                        context: context,
-                                        message:
-                                            'Allow apps to access the storage'
-                                                .tr(),
-                                      );
-
-                                      return;
-                                    }
-                                    if (!mounted) return;
-                                    context.read<PoAttachmentBloc>().add(
-                                          PoAttachmentEvent.downloadFile(
-                                            files: widget.poDocuments,
-                                            fetchMode:
-                                                FileOperationhMode.download,
-                                          ),
-                                        );
-                                  },
-                                  child: Row(
-                                    children: [
-                                      const Icon(
-                                        Icons.download,
-                                      ),
-                                      const SizedBox(
-                                        width: 5,
-                                      ),
-                                      Text(
-                                        'Download All'.tr(),
-                                        style: const TextStyle(
-                                          color: ZPColors.darkerGreen,
-                                          decoration: TextDecoration.underline,
+                                  const SizedBox(
+                                    width: 6,
+                                  ),
+                                  Text(
+                                    'Download All'.tr(),
+                                    style: const TextStyle(
+                                      shadows: [
+                                        Shadow(
+                                            color: ZPColors.darkerGreen,
+                                          offset: Offset(0, -2),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                      color: Colors.transparent,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 17.0,
+                                      decoration: TextDecoration.underline,
+                                      decorationColor: ZPColors.darkerGreen,
+                                    ),
                                   ),
-                                ),
-                                if (edit)
-                                  const _PoUploadDeleteAll(
-                                    key: ValueKey('deleteAll'),
-                                  ),
-                              ],
+                                ],
+                              ),
                             ),
                         ],
                       ),
@@ -260,7 +281,7 @@ class _PoAttachmentState extends State<PoAttachment> {
       return '${directory?.path.split('Android').first}Download';
     } else {
       final directory = await getApplicationDocumentsDirectory();
-      
+
       return await directory.exists()
           ? directory.path
           : (await directory.create(recursive: true)).path;
@@ -341,18 +362,26 @@ class _PoUploadDeleteAll extends StatelessWidget {
       },
       child: Row(
         children: [
-          const Icon(
-            Icons.delete_outline,
-            color: ZPColors.red,
+          Padding(
+            padding: const EdgeInsets.only(bottom: 6),
+            child: SvgPicture.asset(
+              'assets/svg/po_attachment_delete.svg',
+              height: 16,
+              width: 16,
+            ),
           ),
           const SizedBox(
-            width: 5,
+            width: 7,
           ),
           Text(
             'Delete All'.tr(),
             style: const TextStyle(
-              color: ZPColors.red,
+              shadows: [Shadow(color: ZPColors.red, offset: Offset(0, -2))],
+              color: Colors.transparent,
+              fontWeight: FontWeight.w600,
+              fontSize: 17.0,
               decoration: TextDecoration.underline,
+              decorationColor: ZPColors.red,
             ),
           ),
         ],
