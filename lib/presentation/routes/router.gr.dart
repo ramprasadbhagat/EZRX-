@@ -56,7 +56,7 @@ import '../orders/saved_order/saved_order_detail_page.dart' as _i29;
 import '../orders/saved_order/saved_order_list_page.dart' as _i28;
 import '../returns/add_edit_user_restrictions.dart' as _i32;
 import '../returns/add_policy_configuration.dart' as _i11;
-import '../returns/approver_actions.dart' as _i7;
+import '../returns/approver_actions/approver_actions.dart' as _i7;
 import '../returns/policy_configuration.dart' as _i10;
 import '../returns/request_return.dart' as _i6;
 import '../returns/return_summary.dart' as _i8;

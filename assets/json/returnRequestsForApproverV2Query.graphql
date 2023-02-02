@@ -1,0 +1,16 @@
+query requestsForApproverV2($request: requestsForApproverRequest!) {
+  requestsForApproverV2(request: $request) {
+    requestID
+    __typename
+  }
+}
+
+
+variable:{
+  "request": {
+    "username": "ezrxtest05",
+    "first": 11,
+    "after": 0,
+    "status": "PENDING"
+  }
+}

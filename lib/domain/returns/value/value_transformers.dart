@@ -19,3 +19,7 @@ String displayDateOrEmpty(String text) {
       ? ''
       : DateFormat('dd MMM yyyy').format(DateTime.parse(text));
 }
+
+double refundTotalStringAsFixed(String value) {
+  return double.tryParse(value) ?? 0;
+}

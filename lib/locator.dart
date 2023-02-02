@@ -17,6 +17,7 @@ import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_blo
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/common/file_picker.dart';
 import 'package:ezrxmobile/infrastructure/core/common/permission.dart';
 import 'package:ezrxmobile/application/returns/request_return/request_return_bloc.dart';
@@ -182,6 +183,12 @@ import 'package:ezrxmobile/infrastructure/order/repository/payment_term_reposito
 import 'package:ezrxmobile/infrastructure/order/repository/price_override_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/tender_contract_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/valid_customer_material_repository.dart';
+import 'package:ezrxmobile/infrastructure/returns/datasource/approver_return_request_information_local.dart';
+import 'package:ezrxmobile/infrastructure/returns/datasource/approver_return_request_information_query.dart';
+import 'package:ezrxmobile/infrastructure/returns/datasource/approver_return_request_information_remote.dart';
+import 'package:ezrxmobile/infrastructure/returns/datasource/approver_return_request_query.dart';
+import 'package:ezrxmobile/infrastructure/returns/datasource/approver_return_requests_local.dart';
+import 'package:ezrxmobile/infrastructure/returns/datasource/approver_return_requests_remote.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/policy_configuration_local.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/policy_configuration_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/policy_configuration_remote.dart';
@@ -196,6 +203,7 @@ import 'package:ezrxmobile/infrastructure/returns/datasource/user_restriction_mu
 import 'package:ezrxmobile/infrastructure/returns/datasource/user_restriction_remote.dart';
 import 'package:ezrxmobile/infrastructure/returns/repository/policy_configuration_repository.dart';
 import 'package:ezrxmobile/infrastructure/returns/repository/request_return_repository.dart';
+import 'package:ezrxmobile/infrastructure/returns/repository/return_approver_repository.dart';
 import 'package:ezrxmobile/infrastructure/returns/repository/usage_code_repository.dart';
 import 'package:ezrxmobile/infrastructure/returns/repository/user_restriction_repository.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -1544,5 +1552,58 @@ void setupLocator() {
 
   locator.registerLazySingleton(
     () => FilePickerService(),
+  );
+
+  //============================================================
+  //  Return Approver Actions
+  //
+  //============================================================
+
+  locator.registerLazySingleton(
+    () => ApproverReturnRequestQuery(),
+  );
+  locator.registerLazySingleton(
+    () => ApproverReturnRequestInformationQuery(),
+  );
+  locator.registerLazySingleton(
+    () => ApproverReturnRequestsLocal(),
+  );
+  locator.registerLazySingleton(
+    () => ApproverReturnRequestsRemote(
+      approverReturnRequestQuery: locator<ApproverReturnRequestQuery>(),
+      config: locator<Config>(),
+      httpService: locator<HttpService>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+    ),
+  );
+  locator.registerLazySingleton(
+    () => ApproverReturnRequestInformationLocal(),
+  );
+  locator.registerLazySingleton(
+    () => ApproverReturnRequestInformationRemote(
+      config: locator<Config>(),
+      httpService: locator<HttpService>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+      approverReturnRequestInformationQuery:
+          locator<ApproverReturnRequestInformationQuery>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => ReturnApproverRepository(
+      config: locator<Config>(),
+      returnRequestLocalDataSource: locator<ApproverReturnRequestsLocal>(),
+      returnRequestRemoteDataSource: locator<ApproverReturnRequestsRemote>(),
+      returnRequestInformationLocalDataSource:
+          locator<ApproverReturnRequestInformationLocal>(),
+      returnRequestInformationRemoteDataSource:
+          locator<ApproverReturnRequestInformationRemote>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => ReturnApproverBloc(
+      returnApproverRepository: locator<ReturnApproverRepository>(),
+    ),
   );
 }

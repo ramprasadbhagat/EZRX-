@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
 import 'package:universal_io/io.dart';
 
 import 'package:auto_route/auto_route.dart';
@@ -232,6 +233,10 @@ class SplashPage extends StatelessWidget {
                   previous.user.role.type.hasReturnsAdminAccess !=
                       current.user.role.type.hasReturnsAdminAccess),
           listener: (context, state) {
+            if (state.isReturnApprover) {
+              context.read<ReturnApproverBloc>()
+                  .add(ReturnApproverEvent.fetch(user: state.user));
+            }
             if (!state.isReturnsEnable) return;
 
             context.read<UsageCodeBloc>().add(

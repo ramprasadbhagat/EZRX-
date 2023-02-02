@@ -160,4 +160,9 @@ class EligibilityState with _$EligibilityState {
   bool get shouldDisplayVATInPercentage =>
       salesOrgConfigs.enableVat && !salesOrgConfigs.currency.isVN ||
       salesOrgConfigs.enableTaxAtTotalLevelOnly;
+      
+  bool get isReturnApprover =>
+      user.role.type.isReturnApprover ||
+      user.role.type.isRootAdmin ||
+      user.role.type.isReturnAdmin;
 }

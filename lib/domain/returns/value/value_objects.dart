@@ -82,3 +82,18 @@ class SimpleDate extends ValueObject<String> {
 
   const SimpleDate._(this.value);
 }
+
+class RefundTotal extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory RefundTotal(String input) {
+    return RefundTotal._(validateStringNotEmpty(input));
+  }
+
+  double get refundTotal {
+    return refundTotalStringAsFixed(value.getOrElse(() => '0'));
+  }
+
+  const RefundTotal._(this.value);
+}
