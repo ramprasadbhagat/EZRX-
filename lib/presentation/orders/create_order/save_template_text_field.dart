@@ -28,7 +28,7 @@ class SaveTemplateTextField extends StatelessWidget {
               child: TextFormField(
                 key: const Key('saveTemplateInputField'),
                 initialValue: currentTemplateName,
-                maxLines: null,
+                maxLines: 1,
                 maxLength: 35,
                 decoration: InputDecoration(
                   labelText: 'Template name'.tr(),

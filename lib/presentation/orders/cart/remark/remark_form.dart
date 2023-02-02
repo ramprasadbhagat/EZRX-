@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/order/cart/remarks_form/remarks_form_bloc.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class RemarksForm extends StatelessWidget {
@@ -27,6 +28,11 @@ class RemarksForm extends StatelessWidget {
             child: TextFormField(
               key: const Key('remarkTextField'),
               keyboardType: TextInputType.multiline,
+              inputFormatters: [
+                FilteringTextInputFormatter.deny(
+                  RegExp(r'\n'),
+                ),
+              ],
               initialValue: currentRemarkData,
               maxLines: null,
               maxLength: 132,

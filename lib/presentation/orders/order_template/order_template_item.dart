@@ -73,6 +73,8 @@ class OrderTemplateItem extends StatelessWidget {
             title: Text(
               orderTemplate.templateName,
               style: Theme.of(context).textTheme.bodyText1,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
             ),
           ),
         ),
