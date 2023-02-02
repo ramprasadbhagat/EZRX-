@@ -107,15 +107,6 @@ class CartItem with _$CartItem {
     ).toList());
   }
 
-  CartItem copyWithNewItem(PriceAggregate material) {
-    final newMaterials = List<PriceAggregate>.from(materials)..add(material);
-
-    return CartItem(
-      materials: newMaterials,
-      itemType: itemType,
-    );
-  }
-
   CartItem copyWithStockInfo({
     required Map<MaterialNumber, StockInfo> stockInfoMap,
   }) =>

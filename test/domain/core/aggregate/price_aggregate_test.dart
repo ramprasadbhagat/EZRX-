@@ -1,417 +1,1204 @@
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
 import 'package:ezrxmobile/domain/order/entities/order_template_material.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
+import 'package:ezrxmobile/domain/order/entities/price_bonus.dart';
 import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
-import 'package:ezrxmobile/domain/order/entities/submit_material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/domain/utils/num_utils.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_item_override_dto.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  const priceTierItem1 = PriceTierItem(
-    type: '',
-    applyBonus: false,
-    sequence: 1,
-    quantity: 1,
-    rate: 800,
-  );
-  const priceTierItem2 = PriceTierItem(
-    type: '',
-    applyBonus: false,
-    sequence: 1,
-    quantity: 3,
-    rate: 850,
-  );
-  const priceTierItem3 = PriceTierItem(
-    type: '',
-    applyBonus: false,
-    sequence: 1,
-    quantity: 5,
-    rate: 900,
-  );
-  final mockPriceAggregateList = [
-    PriceAggregate.empty().copyWith(
-        quantity: 1,
-        materialInfo: MaterialInfo.empty().copyWith(
-          materialNumber: MaterialNumber('000000000023168451'),
-          materialDescription: ' Triglyceride Mosys D',
-          principalData: PrincipalData.empty().copyWith(
-            principalName: '台灣拜耳股份有限公司',
-          ),
-          remarks: '',
-        ),
-        price: Price.empty().copyWith(
-          finalPrice: MaterialPrice(750),
-        ),
-        stockInfo: StockInfo.empty().copyWith(
-          materialNumber: MaterialNumber('8949542'),
-          inStock: MaterialInStock('Yes'),
-          expiryDate: ExpiryDate('NA'),
-          salesDistrict: '',
-          batch: '',
-        )),
-    PriceAggregate.empty().copyWith(
-      quantity: 1,
-      materialInfo: MaterialInfo.empty().copyWith(
-        materialNumber: MaterialNumber('000000000023168459'),
-        materialDescription: ' Triglyceride Mosys D',
-        principalData: PrincipalData.empty().copyWith(
-          principalName: '台灣拜耳股份有限公司',
-        ),
-      ),
-      price: Price.empty().copyWith(
-        finalPrice: MaterialPrice(750),
-        materialNumber: MaterialNumber('000000000023168459'),
-        zmgDiscount: true,
-        tiers: [
-          PriceTier.empty().copyWith(
-            tier: 'c',
-            items: [
-              priceTierItem1,
-              priceTierItem2,
-              priceTierItem3,
-            ],
-          ),
-        ],
-      ),
-    ),
+  final emptyPrice = Price.empty();
+  final emptyMaterialInfo = MaterialInfo.empty();
+  final emptyBundle = Bundle.empty();
+  final emptySalesOrganisationConfigs = SalesOrganisationConfigs.empty();
+  const fakeQuantity = 7;
+  const fakeDiscountedMaterialCount = 10;
+  final fakeAddedBonusList = [
+    MaterialItemBonus.empty(),
+    MaterialItemBonus.empty(),
   ];
+  final emptyStockInfo = StockInfo.empty();
+  final emptyTenderContract = TenderContract.empty();
+  final emptyPriceAggregate = PriceAggregate.empty();
+
   group('Price Aggregate Test', () {
+    test('should return correct price aggregate object', () {
+      final priceAggregate = PriceAggregate(
+        price: emptyPrice,
+        materialInfo: emptyMaterialInfo,
+        bundle: emptyBundle,
+        salesOrgConfig: emptySalesOrganisationConfigs,
+        quantity: fakeQuantity,
+        discountedMaterialCount: fakeDiscountedMaterialCount,
+        addedBonusList: fakeAddedBonusList,
+        stockInfo: emptyStockInfo,
+        tenderContract: emptyTenderContract,
+      );
+
+      expect(priceAggregate.price, emptyPrice);
+      expect(priceAggregate.materialInfo, emptyMaterialInfo);
+      expect(priceAggregate.bundle, emptyBundle);
+      expect(priceAggregate.salesOrgConfig, emptySalesOrganisationConfigs);
+      expect(priceAggregate.quantity, fakeQuantity);
+      expect(
+        priceAggregate.discountedMaterialCount,
+        fakeDiscountedMaterialCount,
+      );
+      expect(priceAggregate.addedBonusList, fakeAddedBonusList);
+      expect(priceAggregate.stockInfo, emptyStockInfo);
+      expect(priceAggregate.tenderContract, emptyTenderContract);
+    });
+
+    test('Empty PriceAggregate', () {
+      final priceAggregate = PriceAggregate.empty();
+      expect(priceAggregate.price, emptyPrice);
+      expect(priceAggregate.materialInfo, emptyMaterialInfo);
+      expect(priceAggregate.bundle, emptyBundle);
+      expect(priceAggregate.salesOrgConfig, emptySalesOrganisationConfigs);
+      expect(priceAggregate.quantity, 1);
+      expect(priceAggregate.discountedMaterialCount, 0);
+      expect(priceAggregate.addedBonusList, []);
+      expect(priceAggregate.stockInfo, emptyStockInfo);
+      expect(priceAggregate.tenderContract, emptyTenderContract);
+    });
+
     test(
-      'OrderTemplate from PriceAggregate test ',
-      () async {
-        final priceAggregate = mockPriceAggregateList.first;
-        final priceAggregateMaterialInfo = priceAggregate.materialInfo;
+      'toOrderTemplateMaterial from PriceAggregate',
+      () {
         expect(
-          mockPriceAggregateList.first.toOrderTemplateMaterial(),
+          emptyPriceAggregate.toOrderTemplateMaterial(),
           OrderTemplateMaterial(
-            materialNumber: priceAggregate.getMaterialNumber,
-            materialGroup4: priceAggregateMaterialInfo.materialGroup4,
-            qty: priceAggregate.quantity,
+            materialNumber: emptyPriceAggregate.getMaterialNumber,
+            materialGroup4: emptyPriceAggregate.materialInfo.materialGroup4,
+            qty: emptyPriceAggregate.quantity,
             principalName:
-                priceAggregateMaterialInfo.principalData.principalName,
-            materialDescription: priceAggregateMaterialInfo.materialDescription,
-            hidePrice: priceAggregateMaterialInfo.hidePrice,
+                emptyPriceAggregate.materialInfo.principalData.principalName,
+            materialDescription:
+                emptyPriceAggregate.materialInfo.materialDescription,
+            hidePrice: emptyPriceAggregate.materialInfo.hidePrice,
             hasValidTenderContract:
-                priceAggregateMaterialInfo.hasValidTenderContract,
-            taxClassification: priceAggregateMaterialInfo.taxClassification,
+                emptyPriceAggregate.materialInfo.hasValidTenderContract,
+            taxClassification:
+                emptyPriceAggregate.materialInfo.taxClassification,
             type: '',
           ),
         );
       },
     );
 
+    test('toSubmitMaterialInfo from PriceAggregate', () {
+      final submitMaterialInfo = emptyPriceAggregate.toSubmitMaterialInfo();
+
+      expect(submitMaterialInfo.batch, emptyPriceAggregate.stockInfo.batch);
+      expect(submitMaterialInfo.bonuses, <MaterialItemBonus>[]);
+      expect(submitMaterialInfo.comment, '');
+      expect(submitMaterialInfo.materialNumber,
+          emptyPriceAggregate.materialInfo.materialNumber);
+      expect(submitMaterialInfo.quantity, emptyPriceAggregate.quantity);
+      expect(submitMaterialInfo.salesDistrict,
+          emptyPriceAggregate.stockInfo.salesDistrict);
+      expect(
+          submitMaterialInfo.materialItemOverride,
+          MaterialItemOverrideDto.fromPrice(emptyPriceAggregate.price)
+              .toDomain());
+      expect(submitMaterialInfo.tenderContract,
+          emptyPriceAggregate.tenderContract);
+    });
+
     test(
-      'OrderTemplate from PriceAggregate test ',
-      () async {
-        final priceAggregate = mockPriceAggregateList.first;
-        final stockInfo = priceAggregate.stockInfo;
+        'toSubmitMaterialInfo from PriceAggregate should return empty batch number',
+        () {
+      final customPriceAggregate = emptyPriceAggregate.copyWith(
+        salesOrgConfig:
+            emptySalesOrganisationConfigs.copyWith(enableBatchNumber: false),
+      );
+      final submitMaterialInfo = customPriceAggregate.toSubmitMaterialInfo();
+      expect(submitMaterialInfo.batch, '');
+      expect(submitMaterialInfo.bonuses, <MaterialItemBonus>[]);
+      expect(submitMaterialInfo.comment, '');
+      expect(submitMaterialInfo.materialNumber,
+          emptyPriceAggregate.materialInfo.materialNumber);
+      expect(submitMaterialInfo.quantity, emptyPriceAggregate.quantity);
+      expect(submitMaterialInfo.salesDistrict,
+          emptyPriceAggregate.stockInfo.salesDistrict);
+      expect(
+          submitMaterialInfo.materialItemOverride,
+          MaterialItemOverrideDto.fromPrice(emptyPriceAggregate.price)
+              .toDomain());
+      expect(submitMaterialInfo.tenderContract,
+          emptyPriceAggregate.tenderContract);
+    });
+
+    test(
+      'toSavedOrderMaterial from PriceAggregate',
+      () {
+        final expectedResult = MaterialItem(
+          materialNumber: emptyPriceAggregate.materialInfo.materialNumber,
+          qty: emptyPriceAggregate.quantity,
+          defaultMaterialDescription:
+              emptyPriceAggregate.materialInfo.materialDescription,
+          type: MaterialItemType('Comm'),
+          itemRegistrationNumber:
+              emptyPriceAggregate.materialInfo.itemRegistrationNumber,
+          unitOfMeasurement: emptyPriceAggregate.materialInfo.unitOfMeasurement,
+          bonuses: emptyPriceAggregate.addedBonusList
+              .where((element) => element.additionalBonusFlag)
+              .toList(),
+          zdp8Override: emptyPriceAggregate.price.zdp8Override,
+          overridenPrice: emptyPriceAggregate.price.priceOverride,
+          hidePrice: emptyPriceAggregate.materialInfo.hidePrice,
+          materialGroup2: emptyPriceAggregate.materialInfo.materialGroup2,
+          materialGroup4: emptyPriceAggregate.materialInfo.materialGroup4,
+          tenderContract: emptyPriceAggregate.tenderContract,
+          bundleName: '',
+          bundleCode: '',
+          materials: <MaterialInfo>[],
+          comment: '',
+          batchNumber: '',
+          materialDescription: '',
+          remarks: '',
+          bundleInformation: [],
+          totalQuantity: 0,
+        );
         expect(
-          priceAggregate.toSubmitMaterialInfo(),
-          SubmitMaterialInfo(
-            materialNumber: priceAggregate.getMaterialNumber,
-            batch: stockInfo.batch,
-            bonuses: <MaterialItemBonus>[],
-            comment: '',
-            materialItemOverride:
-                MaterialItemOverrideDto.fromPrice(priceAggregate.price)
-                    .toDomain(),
-            quantity: priceAggregate.quantity,
-            salesDistrict: stockInfo.salesDistrict,
-            tenderContract: priceAggregate.tenderContract,
-          ),
+          emptyPriceAggregate.toSavedOrderMaterial(),
+          expectedResult,
         );
       },
     );
 
     test(
-      'PriceAggregate test vatCalculation ',
-      () async {
-        final priceAggregate = mockPriceAggregateList.first;
-        expect(priceAggregate.vatCalculation(10), 10);
+      'vatCalculation from PriceAggregate',
+      () {
+        expect(emptyPriceAggregate.vatCalculation(100), 100);
       },
     );
+
     test(
-      'PriceAggregate test vatCalculation for vn',
-      () async {
-        final priceAggregate = mockPriceAggregateList.first.copyWith(
-          salesOrgConfig: mockPriceAggregateList.first.salesOrgConfig.copyWith(
+      'vatCalculation from PriceAggregate for vn',
+      () {
+        final customPriceAggregate = emptyPriceAggregate.copyWith(
+          salesOrgConfig: emptySalesOrganisationConfigs.copyWith(
             enableVat: true,
             enableTaxClassification: true,
             currency: Currency('vnd'),
           ),
-          materialInfo: mockPriceAggregateList.first.materialInfo.copyWith(
-            taxes: ['5'],
+          materialInfo: emptyPriceAggregate.materialInfo.copyWith(
+            taxes: ['15'],
           ),
         );
-        expect(priceAggregate.vatCalculation(10), 10.5);
+        expect(customPriceAggregate.vatCalculation(10), 11.5);
       },
     );
 
     test(
-      'PriceAggregate test vatCalculation for Non vn',
-      () async {
-        final priceAggregate = mockPriceAggregateList.first.copyWith(
-          salesOrgConfig: mockPriceAggregateList.first.salesOrgConfig.copyWith(
+      'vatCalculation from PriceAggregate for Non vn',
+      () {
+        final customPriceAggregate = emptyPriceAggregate.copyWith(
+          salesOrgConfig: emptySalesOrganisationConfigs.copyWith(
             enableVat: true,
             enableTaxClassification: true,
-            vatValue: 10,
+            vatValue: 5,
           ),
-          materialInfo: mockPriceAggregateList.first.materialInfo.copyWith(
+          materialInfo: emptyPriceAggregate.materialInfo.copyWith(
             taxClassification: MaterialTaxClassification('Product : Full Tax'),
           ),
         );
-        expect(priceAggregate.vatCalculation(10), 11);
+        expect(customPriceAggregate.vatCalculation(20), 21.0);
       },
     );
 
     test(
-      'PriceAggregate test final Price Discount Eligible',
-      () async {
-        final priceAggregate = mockPriceAggregateList.elementAt(1).copyWith(
-              quantity: 3,
-              discountedMaterialCount: 3,
-            );
+      'listPrice from PriceAggregate',
+      () {
         expect(
-          priceAggregate.finalPrice,
-          priceAggregate.price.priceTireItem.elementAt(1).rate,
-        );
+            emptyPriceAggregate.listPrice, emptyPrice.lastPrice.getOrCrash());
       },
     );
 
     test(
-      'PriceAggregate test final Price Discount Eligible & Tender Contract',
-      () async {
-        final priceAggregate = mockPriceAggregateList.elementAt(1).copyWith(
-              tenderContract: TenderContract.empty()
-                  .copyWith(tenderPrice: TenderPrice('10'), pricingUnit: 2),
-              quantity: 3,
-              discountedMaterialCount: 3,
-            );
-        expect(
-          priceAggregate.finalPrice,
-          5,
-        );
-      },
-    );
-
-    test(
-      'PriceAggregate test final Price Tender Contract',
-      () async {
-        final priceAggregate = mockPriceAggregateList.first.copyWith(
-          tenderContract: TenderContract.empty()
-              .copyWith(tenderPrice: TenderPrice('10'), pricingUnit: 2),
-          quantity: 3,
-          discountedMaterialCount: 3,
+      'finalPrice from PriceAggregate for Discount Eligible & tender price is 0',
+      () {
+        final customPriceAggregate = emptyPriceAggregate.copyWith(
+          price: emptyPrice.copyWith(
+            zmgDiscount: true,
+            tiers: [
+              PriceTier.empty().copyWith(items: [PriceTierItem.empty()])
+            ],
+          ),
         );
         expect(
-          priceAggregate.finalPrice,
-          5,
+          customPriceAggregate.finalPrice,
+          NumUtils.roundToPlaces(customPriceAggregate.discountedListPrice),
         );
       },
     );
 
     test(
-      'PriceAggregate UnitPriceForTotal VN tax test ',
-      () async {
-        final priceAggregate = mockPriceAggregateList.first.copyWith(
-          salesOrgConfig: mockPriceAggregateList.first.salesOrgConfig.copyWith(
+      'finalPrice from PriceAggregate for Discount Eligible & tender price is not 0',
+      () {
+        final customPriceAggregate = emptyPriceAggregate.copyWith(
+          tenderContract: TenderContract.empty().copyWith(
+            tenderPrice: TenderPrice('40'),
+            pricingUnit: 2,
+          ),
+          price: emptyPrice.copyWith(
+            zmgDiscount: true,
+            tiers: [
+              PriceTier.empty().copyWith(items: [PriceTierItem.empty()])
+            ],
+          ),
+        );
+        expect(
+          customPriceAggregate.finalPrice,
+          NumUtils.roundToPlaces(20),
+        );
+      },
+    );
+
+    test(
+      'finalPrice from PriceAggregate for Discount not Eligible & tender price is not 0',
+      () {
+        final customPriceAggregate = emptyPriceAggregate.copyWith(
+          tenderContract: TenderContract.empty().copyWith(
+            tenderPrice: TenderPrice('40'),
+            pricingUnit: 2,
+          ),
+        );
+        expect(
+          customPriceAggregate.finalPrice,
+          20.0,
+        );
+      },
+    );
+
+    test(
+      'finalPrice from PriceAggregate for Discount not Eligible & tender price is 0',
+      () {
+        expect(
+          emptyPriceAggregate.finalPrice,
+          NumUtils.roundToPlaces(emptyPrice.finalPrice.getOrDefaultValue(0)),
+        );
+      },
+    );
+
+    test(
+      'unitPrice from PriceAggregate',
+      () {
+        expect(
+          emptyPriceAggregate.unitPrice,
+          NumUtils.roundToPlaces(emptyPrice.finalPrice.getOrDefaultValue(0)),
+        );
+      },
+    );
+
+    test(
+      'unitPriceForTotal from PriceAggregate',
+      () {
+        expect(
+          emptyPriceAggregate.unitPriceForTotal,
+          NumUtils.roundToPlaces(emptyPrice.finalPrice.getOrDefaultValue(0)),
+        );
+      },
+    );
+
+    test(
+      'unitPriceForTotal from PriceAggregate for VN tax',
+      () {
+        final customPriceAggregate = emptyPriceAggregate.copyWith(
+          tenderContract: TenderContract.empty().copyWith(
+            tenderPrice: TenderPrice('40'),
+            pricingUnit: 2,
+          ),
+          price: emptyPrice.copyWith(
+            zmgDiscount: true,
+            tiers: [
+              PriceTier.empty().copyWith(items: [PriceTierItem.empty()])
+            ],
+          ),
+          salesOrgConfig: emptySalesOrganisationConfigs.copyWith(
             enableVat: true,
             enableTaxClassification: true,
             currency: Currency('vnd'),
           ),
-          materialInfo: mockPriceAggregateList.first.materialInfo.copyWith(
+          materialInfo: emptyMaterialInfo.copyWith(
             taxes: ['5'],
           ),
         );
-        expect(priceAggregate.unitPriceForTotal, 787.50);
+        expect(customPriceAggregate.unitPriceForTotal, 21.0);
       },
     );
 
     test(
-      'PriceAggregate UnitPriceForTotal VN tax total test ',
-      () async {
-        final priceAggregate = mockPriceAggregateList.first.copyWith(
-          salesOrgConfig: mockPriceAggregateList.first.salesOrgConfig.copyWith(
+      'unitPriceForTotal from PriceAggregate for VN tax total',
+      () {
+        final customPriceAggregate = emptyPriceAggregate.copyWith(
+          tenderContract: TenderContract.empty().copyWith(
+            tenderPrice: TenderPrice('40'),
+            pricingUnit: 2,
+          ),
+          price: emptyPrice.copyWith(
+            zmgDiscount: true,
+            tiers: [
+              PriceTier.empty().copyWith(items: [PriceTierItem.empty()])
+            ],
+          ),
+          salesOrgConfig: emptySalesOrganisationConfigs.copyWith(
             enableTaxAtTotalLevelOnly: true,
             currency: Currency('vnd'),
           ),
-          materialInfo: mockPriceAggregateList.first.materialInfo.copyWith(
+          materialInfo: emptyMaterialInfo.copyWith(
             taxes: ['5'],
           ),
         );
-        expect(priceAggregate.unitPriceForTotal, 787.50);
+        expect(customPriceAggregate.unitPriceForTotal, 21.0);
       },
     );
 
     test(
-      'PriceAggregate UnitPriceForTotal Non VN tax test ',
-      () async {
-        final priceAggregate = mockPriceAggregateList.first.copyWith(
-          salesOrgConfig: mockPriceAggregateList.first.salesOrgConfig.copyWith(
-            enableTaxAtTotalLevelOnly: true,
-            currency: Currency('none'),
-            vatValue: 10,
+      'unitPriceForTotal from PriceAggregate for Non VN tax',
+      () {
+        final customPriceAggregate = emptyPriceAggregate.copyWith(
+          tenderContract: TenderContract.empty().copyWith(
+            tenderPrice: TenderPrice('20'),
+            pricingUnit: 2,
           ),
-        );
-        expect(priceAggregate.unitPriceForTotal, 825);
-      },
-    );
-
-    test(
-      'PriceAggregate UnitPriceForTotal Non VN tax total test ',
-      () async {
-        final priceAggregate = mockPriceAggregateList.first.copyWith(
-          salesOrgConfig: mockPriceAggregateList.first.salesOrgConfig.copyWith(
+          price: emptyPrice.copyWith(
+            zmgDiscount: true,
+            tiers: [
+              PriceTier.empty().copyWith(items: [PriceTierItem.empty()])
+            ],
+          ),
+          salesOrgConfig: emptySalesOrganisationConfigs.copyWith(
             enableVat: true,
             enableTaxClassification: true,
-            currency: Currency('none'),
-            vatValue: 10,
+            vatValue: 5,
           ),
-          materialInfo: mockPriceAggregateList.first.materialInfo.copyWith(
+          materialInfo: emptyPriceAggregate.materialInfo.copyWith(
             taxClassification: MaterialTaxClassification('Product : Full Tax'),
           ),
         );
-        expect(priceAggregate.unitPriceForTotal, 825);
+        expect(customPriceAggregate.unitPriceForTotal, 10.5);
       },
     );
 
+    test('finalPriceTotal from PriceAggregate', () {
+      expect(
+        emptyPriceAggregate.finalPriceTotal,
+        emptyPriceAggregate.finalPrice * emptyPriceAggregate.quantity,
+      );
+    });
+
     test(
-      'PriceAggregate UnitPrice with enableTaxAtTotalLevelOnly',
-      () async {
-        final priceAggregate = mockPriceAggregateList.first.copyWith(
-          quantity: 3,
-          salesOrgConfig: mockPriceAggregateList.first.salesOrgConfig.copyWith(
+      'unitPriceTotal from PriceAggregate for enableTaxAtTotalLevelOnly',
+      () {
+        final customPriceAggregate = emptyPriceAggregate.copyWith(
+          salesOrgConfig: emptySalesOrganisationConfigs.copyWith(
             enableTaxAtTotalLevelOnly: true,
           ),
         );
         expect(
-          priceAggregate.unitPriceTotal,
-          priceAggregate.unitPriceForTotal * 3,
-        );
-      },
-    );
-    test(
-      'PriceAggregate UnitPrice ',
-      () async {
-        final priceAggregate = mockPriceAggregateList.first.copyWith(
-          quantity: 3,
-        );
-        expect(
-          priceAggregate.unitPriceTotal,
-          priceAggregate.unitPrice * 3,
+          customPriceAggregate.unitPriceTotal,
+          customPriceAggregate.unitPriceForTotal *
+              customPriceAggregate.quantity,
         );
       },
     );
 
     test(
-      'PriceAggregate display UnitPriceTotal ',
-      () async {
-        final priceAggregate = mockPriceAggregateList.first.copyWith(
-          quantity: 3,
-        );
-        expect(
-          priceAggregate.display(PriceType.unitPriceTotal),
-          StringUtils.displayPrice(mockPriceAggregateList.first.salesOrgConfig,
-              priceAggregate.unitPriceTotal),
-        );
-      },
-    );
-
-    test(
-      'PriceAggregate display UnitPriceTotal with enableTaxAtTotalLevelOnly',
-      () async {
-        final priceAggregate = mockPriceAggregateList.first.copyWith(
-          quantity: 3,
-          salesOrgConfig: mockPriceAggregateList.first.salesOrgConfig.copyWith(
+      'unitPriceTotal from PriceAggregate',
+      () {
+        final customPriceAggregate = emptyPriceAggregate.copyWith(
+          salesOrgConfig: emptySalesOrganisationConfigs.copyWith(
             enableTaxAtTotalLevelOnly: true,
           ),
         );
         expect(
-          priceAggregate.display(PriceType.unitPriceTotal),
+          customPriceAggregate.unitPriceTotal,
+          customPriceAggregate.unitPriceTotal * customPriceAggregate.quantity,
+        );
+      },
+    );
+
+    test(
+      'discountedListPrice from PriceAggregate',
+      () {
+        final customPriceAggregate = emptyPriceAggregate.copyWith(
+            price: emptyPrice.copyWith(
+          tiers: [
+            PriceTier.empty().copyWith(
+              items: [
+                PriceTierItem.empty(),
+              ],
+            ),
+          ],
+        ));
+        expect(
+          customPriceAggregate.discountedListPrice,
+          customPriceAggregate.price.priceTireItem.first.rate,
+        );
+      },
+    );
+
+    test(
+      'getNewPrice from PriceAggregate for isExempt',
+      () {
+        final customPriceAggregate = emptyPriceAggregate.copyWith(
+          price: emptyPrice.copyWith(finalPrice: MaterialPrice(20.0)),
+          materialInfo: emptyMaterialInfo.copyWith(
+            taxClassification: MaterialTaxClassification('Exempt'),
+          ),
+        );
+        expect(
+          customPriceAggregate.getNewPrice(),
+          customPriceAggregate.price.finalPrice.getOrCrash(),
+        );
+      },
+    );
+
+    test(
+      'getNewPrice from PriceAggregate for isNoTax',
+      () {
+        final customPriceAggregate = emptyPriceAggregate.copyWith(
+          price: emptyPrice.copyWith(finalPrice: MaterialPrice(20.0)),
+          materialInfo: emptyMaterialInfo.copyWith(
+            taxClassification: MaterialTaxClassification('noTax'),
+          ),
+          salesOrgConfig: emptySalesOrganisationConfigs.copyWith(
+            vatValue: 4,
+          ),
+        );
+        expect(
+          customPriceAggregate.getNewPrice(),
+          customPriceAggregate.price.finalPrice.getOrCrash() /
+              (1 + customPriceAggregate.salesOrgConfig.vatValue),
+        );
+      },
+    );
+
+    test(
+      'getNewPrice from PriceAggregate',
+      () {
+        final customPriceAggregate = emptyPriceAggregate.copyWith(
+          price: emptyPrice.copyWith(finalPrice: MaterialPrice(20.0)),
+        );
+        expect(
+          customPriceAggregate.getNewPrice(),
+          customPriceAggregate.price.finalPrice.getOrCrash() / 1,
+        );
+      },
+    );
+
+    test(
+      'display from PriceAggregate for isFOC',
+      () {
+        final customPriceAggregate = emptyPriceAggregate.copyWith(
+          price: emptyPrice.copyWith(
+            isFOC: true,
+          ),
+        );
+        expect(
+          customPriceAggregate.display(PriceType.unitPriceTotal),
+          'FOC',
+        );
+      },
+    );
+
+    test(
+      'display from PriceAggregate for finalPrice isUnavailable',
+      () {
+        final customPriceAggregate = emptyPriceAggregate.copyWith(
+          materialInfo: emptyMaterialInfo.copyWith(
+            hidePrice: false,
+          ),
+          price: emptyPrice.copyWith(
+            isValid: true,
+            isValidMaterial: true,
+            finalPrice: MaterialPrice.unavailable(),
+          ),
+        );
+        expect(
+          customPriceAggregate.display(PriceType.unitPriceTotal),
+          'NA',
+        );
+      },
+    );
+
+    test(
+      'display from PriceAggregate for materialInfo hidePrice',
+      () {
+        final customPriceAggregate = emptyPriceAggregate.copyWith(
+          materialInfo: emptyMaterialInfo.copyWith(
+            hidePrice: true,
+          ),
+        );
+        expect(
+          customPriceAggregate.display(PriceType.unitPriceTotal),
+          'NA',
+        );
+      },
+    );
+
+    test(
+      'display from PriceAggregate for price is not Valid',
+      () {
+        final customPriceAggregate = emptyPriceAggregate.copyWith(
+          price: emptyPrice.copyWith(
+            isValid: false,
+          ),
+        );
+        expect(
+          customPriceAggregate.display(PriceType.unitPriceTotal),
+          'NA',
+        );
+      },
+    );
+
+    test(
+      'display from PriceAggregate for price is not ValidMaterial',
+      () {
+        final customPriceAggregate = emptyPriceAggregate.copyWith(
+          price: emptyPrice.copyWith(
+            isValidMaterial: false,
+          ),
+        );
+        expect(
+          customPriceAggregate.display(PriceType.unitPriceTotal),
+          'NA',
+        );
+      },
+    );
+
+    test(
+      'display from PriceAggregate for PriceType.finalPrice',
+      () {
+        expect(
+          emptyPriceAggregate.display(PriceType.finalPrice),
           StringUtils.displayPrice(
-            mockPriceAggregateList.first.salesOrgConfig.copyWith(
+            emptyPriceAggregate.salesOrgConfig,
+            emptyPriceAggregate.finalPrice,
+          ),
+        );
+      },
+    );
+
+    test(
+      'display from PriceAggregate for PriceType.unitPrice with salesOrgConfig.enableTaxAtTotalLevelOnly',
+      () async {
+        final customPriceAggregate = emptyPriceAggregate.copyWith(
+          salesOrgConfig: emptySalesOrganisationConfigs.copyWith(
+            enableTaxAtTotalLevelOnly: true,
+          ),
+        );
+        expect(
+          customPriceAggregate.display(PriceType.unitPrice),
+          StringUtils.displayPrice(
+            emptySalesOrganisationConfigs.copyWith(
               enableTaxAtTotalLevelOnly: true,
             ),
-            priceAggregate.finalPriceTotal,
+            emptyPriceAggregate.finalPrice,
           ),
         );
       },
     );
 
     test(
-      'PriceAggregate display UnitPrice',
+      'display from PriceAggregate for PriceType.unitPrice',
       () async {
-        final priceAggregate = mockPriceAggregateList.first.copyWith(
-          quantity: 3,
-        );
         expect(
-          priceAggregate.display(PriceType.unitPrice),
-          StringUtils.displayPrice(mockPriceAggregateList.first.salesOrgConfig,
-              priceAggregate.finalPrice),
+          emptyPriceAggregate.display(PriceType.unitPrice),
+          StringUtils.displayPrice(
+            emptySalesOrganisationConfigs,
+            emptyPriceAggregate.unitPrice,
+          ),
         );
       },
     );
+
     test(
-      'PriceAggregate display UnitPrice with enableTaxAtTotalLevelOnly ',
-      () async {
-        final priceAggregate = mockPriceAggregateList.first.copyWith(
-          quantity: 3,
-          salesOrgConfig: mockPriceAggregateList.first.salesOrgConfig.copyWith(
+      'display from PriceAggregate for PriceType.finalPriceTotal',
+      () {
+        expect(
+          emptyPriceAggregate.display(PriceType.finalPriceTotal),
+          StringUtils.displayPrice(
+            emptyPriceAggregate.salesOrgConfig,
+            emptyPriceAggregate.finalPriceTotal,
+          ),
+        );
+      },
+    );
+
+    test(
+      'display from PriceAggregate for PriceType.unitPriceTotal with salesOrgConfig.enableTaxAtTotalLevelOnly',
+      () {
+        final customPriceAggregate = emptyPriceAggregate.copyWith(
+          salesOrgConfig: emptySalesOrganisationConfigs.copyWith(
             enableTaxAtTotalLevelOnly: true,
           ),
         );
         expect(
-          priceAggregate.display(PriceType.unitPrice),
+          customPriceAggregate.display(PriceType.unitPriceTotal),
           StringUtils.displayPrice(
-              mockPriceAggregateList.first.salesOrgConfig.copyWith(
-                enableTaxAtTotalLevelOnly: true,
-              ),
-              priceAggregate.unitPrice),
+            emptySalesOrganisationConfigs.copyWith(
+              enableTaxAtTotalLevelOnly: true,
+            ),
+            emptyPriceAggregate.finalPriceTotal,
+          ),
         );
       },
     );
 
     test(
-      'PriceAggregate display listPrice ',
-      () async {
-        final priceAggregate = mockPriceAggregateList.first.copyWith(
-          quantity: 3,
-          salesOrgConfig: mockPriceAggregateList.first.salesOrgConfig.copyWith(
-            enableTaxAtTotalLevelOnly: true,
+      'display from PriceAggregate for PriceType.unitPriceTotal',
+      () {
+        expect(
+          emptyPriceAggregate.display(PriceType.unitPriceTotal),
+          StringUtils.displayPrice(
+            emptySalesOrganisationConfigs,
+            emptyPriceAggregate.unitPriceTotal,
+          ),
+        );
+      },
+    );
+
+    test(
+      'display from PriceAggregate for PriceType.listPrice',
+      () {
+        expect(
+          emptyPriceAggregate.display(PriceType.listPrice),
+          StringUtils.displayPrice(
+            emptySalesOrganisationConfigs,
+            emptyPriceAggregate.listPrice,
+          ),
+        );
+      },
+    );
+
+    test(
+      'isDefaultMDEnabled from PriceAggregate',
+      () {
+        final customPriceAggregate = emptyPriceAggregate.copyWith(
+          salesOrgConfig: emptySalesOrganisationConfigs.copyWith(
+            enableDefaultMD: true,
+          ),
+          materialInfo: emptyMaterialInfo.copyWith(
+            defaultMaterialDescription: 'Mat Default Description',
           ),
         );
         expect(
-          priceAggregate.display(PriceType.listPrice),
-          StringUtils.displayPrice(
-              mockPriceAggregateList.first.salesOrgConfig.copyWith(
-                enableTaxAtTotalLevelOnly: true,
-              ),
-              priceAggregate.listPrice),
+          customPriceAggregate.isDefaultMDEnabled,
+          true,
         );
       },
     );
 
     test(
-      'PriceAggregate hasClientPrincipal ',
-      () async {
-        final priceAggregate = mockPriceAggregateList.first.copyWith(
-          materialInfo: MaterialInfo.empty().copyWith(
+      'isFromBundle from PriceAggregate',
+      () {
+        final customPriceAggregate = emptyPriceAggregate.copyWith(
+          bundle: emptyBundle.copyWith(
+            bundleCode: '123',
+          ),
+        );
+        expect(
+          customPriceAggregate.isFromBundle,
+          true,
+        );
+      },
+    );
+
+    test(
+      'materialNumberString from PriceAggregate for materialNumberFromPrice.isEmpty',
+      () {
+        final customPriceAggregate = emptyPriceAggregate.copyWith(
+          materialInfo: emptyMaterialInfo.copyWith(
+            materialNumber: MaterialNumber('10'),
+          ),
+        );
+        expect(
+          customPriceAggregate.materialNumberString,
+          '10',
+        );
+      },
+    );
+
+    test(
+      'materialNumberString from PriceAggregate',
+      () {
+        final customPriceAggregate = emptyPriceAggregate.copyWith(
+          price: emptyPrice.copyWith(
+            materialNumber: MaterialNumber('22'),
+          ),
+          materialInfo: emptyMaterialInfo.copyWith(
+            materialNumber: MaterialNumber('22'),
+          ),
+        );
+        expect(
+          customPriceAggregate.materialNumberString,
+          '22',
+        );
+      },
+    );
+
+    test(
+      'getMaterialNumber from PriceAggregate',
+      () {
+        expect(
+          emptyPriceAggregate.getMaterialNumber,
+          emptyPriceAggregate.materialInfo.materialNumber,
+        );
+      },
+    );
+
+    test(
+      'taxDetails from PriceAggregate for salesOrgConfig.currency.isVN',
+      () {
+        final customPriceAggregate = emptyPriceAggregate.copyWith(
+          salesOrgConfig: emptySalesOrganisationConfigs.copyWith(
+            currency: Currency('vnd'),
+          ),
+        );
+        expect(
+          customPriceAggregate.taxDetails,
+          customPriceAggregate.materialInfo.getTotalTax(
+            emptySalesOrganisationConfigs
+                .copyWith(
+                  currency: Currency('vnd'),
+                )
+                .enableTaxDisplay,
+          ),
+        );
+      },
+    );
+
+    test(
+      'taxDetails from PriceAggregate',
+      () {
+        expect(
+          emptyPriceAggregate.taxDetails,
+          emptyPriceAggregate.materialInfo.getTaxClassification(
+            emptySalesOrganisationConfigs.enableTaxDisplay,
+            emptySalesOrganisationConfigs.enableTaxClassification,
+          ),
+        );
+      },
+    );
+
+    test(
+      'refreshAddedBonus from PriceAggregate for equal length',
+      () {
+        expect(
+          emptyPriceAggregate.refreshAddedBonus,
+          false,
+        );
+      },
+    );
+
+    test(
+      'refreshAddedBonus from PriceAggregate for unEqual length',
+      () {
+        var customPriceAggregate = emptyPriceAggregate.copyWith(
+          addedBonusList: [
+            MaterialItemBonus.empty().copyWith(
+              additionalBonusFlag: false,
+              bonusOverrideFlag: true,
+            ),
+          ],
+          quantity: 10,
+          price: emptyPrice.copyWith(
+            bonuses: [
+              PriceBonus.empty().copyWith(
+                items: [
+                  PriceBonusItem.empty().copyWith(
+                    qualifyingQuantity: 10,
+                    bonusMaterials: [
+                      BonusMaterial.empty().copyWith(
+                        bonusQuantity: 5,
+                        qualifyingQuantity: 2,
+                      ),
+                    ],
+                    calculation: BonusMaterialCalculation('915'),
+                  ),
+                  PriceBonusItem.empty().copyWith(
+                    qualifyingQuantity: 8,
+                    calculation: BonusMaterialCalculation('914'),
+                    bonusMaterials: [
+                      BonusMaterial.empty().copyWith(
+                        bonusQuantity: 4,
+                        qualifyingQuantity: 3,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
+        );
+        expect(
+          customPriceAggregate.refreshAddedBonus,
+          true,
+        );
+
+        //for 914
+        customPriceAggregate = emptyPriceAggregate.copyWith(
+          addedBonusList: [
+            MaterialItemBonus.empty().copyWith(
+              additionalBonusFlag: false,
+              bonusOverrideFlag: true,
+            ),
+          ],
+          quantity: 10,
+          price: emptyPrice.copyWith(
+            bonuses: [
+              PriceBonus.empty().copyWith(
+                items: [
+                  PriceBonusItem.empty().copyWith(
+                    qualifyingQuantity: 10,
+                    bonusMaterials: [
+                      BonusMaterial.empty().copyWith(
+                        bonusQuantity: 5,
+                        qualifyingQuantity: 2,
+                      ),
+                    ],
+                    calculation: BonusMaterialCalculation('914'),
+                  ),
+                  PriceBonusItem.empty().copyWith(
+                    qualifyingQuantity: 8,
+                    calculation: BonusMaterialCalculation('913'),
+                    bonusMaterials: [
+                      BonusMaterial.empty().copyWith(
+                        bonusQuantity: 4,
+                        qualifyingQuantity: 3,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
+        );
+        expect(
+          customPriceAggregate.refreshAddedBonus,
+          true,
+        );
+
+        //for 913
+        customPriceAggregate = emptyPriceAggregate.copyWith(
+          addedBonusList: [
+            MaterialItemBonus.empty().copyWith(
+              additionalBonusFlag: false,
+              bonusOverrideFlag: true,
+            ),
+          ],
+          quantity: 10,
+          price: emptyPrice.copyWith(
+            bonuses: [
+              PriceBonus.empty().copyWith(
+                items: [
+                  PriceBonusItem.empty().copyWith(
+                    qualifyingQuantity: 10,
+                    bonusMaterials: [
+                      BonusMaterial.empty().copyWith(
+                        bonusQuantity: 5,
+                        qualifyingQuantity: 2,
+                        materialNumber: MaterialNumber('12'),
+                      ),
+                      BonusMaterial.empty().copyWith(
+                        bonusQuantity: 7,
+                        qualifyingQuantity: 3,
+                        materialNumber: MaterialNumber('12'),
+                      ),
+                    ],
+                    calculation: BonusMaterialCalculation('913'),
+                  ),
+                  PriceBonusItem.empty().copyWith(
+                    qualifyingQuantity: 10,
+                    calculation: BonusMaterialCalculation('913'),
+                    bonusMaterials: [
+                      BonusMaterial.empty().copyWith(
+                        bonusQuantity: 5,
+                        qualifyingQuantity: 2,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
+        );
+        expect(
+          customPriceAggregate.refreshAddedBonus,
+          true,
+        );
+
+        //for 911
+        customPriceAggregate = emptyPriceAggregate.copyWith(
+          addedBonusList: [
+            MaterialItemBonus.empty().copyWith(
+              additionalBonusFlag: false,
+              bonusOverrideFlag: true,
+            ),
+          ],
+          quantity: 10,
+          price: emptyPrice.copyWith(
+            bonuses: [
+              PriceBonus.empty().copyWith(
+                items: [
+                  PriceBonusItem.empty().copyWith(
+                    qualifyingQuantity: 10,
+                    bonusMaterials: [
+                      BonusMaterial.empty().copyWith(
+                        bonusQuantity: 5,
+                        qualifyingQuantity: 2,
+                        bonusRatio: 2,
+                      ),
+                    ],
+                    calculation: BonusMaterialCalculation('911'),
+                  ),
+                  PriceBonusItem.empty().copyWith(
+                    qualifyingQuantity: 8,
+                    calculation: BonusMaterialCalculation('912'),
+                    bonusMaterials: [
+                      BonusMaterial.empty().copyWith(
+                        bonusQuantity: 4,
+                        bonusRatio: 2,
+                        qualifyingQuantity: 3,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
+        );
+        expect(
+          customPriceAggregate.refreshAddedBonus,
+          true,
+        );
+
+        //for else
+        final customPriceAggregate2 = emptyPriceAggregate.copyWith(
+          addedBonusList: [
+            MaterialItemBonus.empty().copyWith(
+              additionalBonusFlag: false,
+              bonusOverrideFlag: true,
+            ),
+          ],
+          quantity: 10,
+          price: emptyPrice.copyWith(
+            bonuses: [
+              PriceBonus.empty().copyWith(
+                items: [
+                  PriceBonusItem.empty().copyWith(
+                    qualifyingQuantity: 10,
+                    bonusMaterials: [
+                      BonusMaterial.empty().copyWith(
+                        bonusQuantity: 5,
+                        qualifyingQuantity: 2,
+                        materialNumber: MaterialNumber('1'),
+                      ),
+                    ],
+                    calculation: BonusMaterialCalculation('914'),
+                  ),
+                  PriceBonusItem.empty().copyWith(
+                    qualifyingQuantity: 8,
+                    calculation: BonusMaterialCalculation('913'),
+                    bonusMaterials: [
+                      BonusMaterial.empty().copyWith(
+                        bonusQuantity: 4,
+                        qualifyingQuantity: 3,
+                        materialNumber: MaterialNumber('1'),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
+        );
+        expect(
+          customPriceAggregate2.refreshAddedBonus,
+          true,
+        );
+      },
+    );
+
+    test('getMaterialItemBonus from PriceAggregate', () {
+      final customPriceAggregate = emptyPriceAggregate.copyWith(
+        quantity: 10,
+        price: emptyPrice.copyWith(
+          bonuses: [
+            PriceBonus.empty().copyWith(
+              items: [
+                PriceBonusItem.empty().copyWith(
+                  bonusMaterials: [
+                    BonusMaterial.empty().copyWith(
+                      bonusQuantity: 5,
+                      qualifyingQuantity: 2,
+                    ),
+                  ],
+                ),
+                PriceBonusItem.empty().copyWith(
+                  bonusMaterials: [
+                    BonusMaterial.empty().copyWith(
+                      bonusQuantity: 4,
+                      qualifyingQuantity: 3,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
+      );
+      final materialItemBonuses = customPriceAggregate.getMaterialItemBonus;
+      expect(materialItemBonuses.length, 1);
+      expect(materialItemBonuses[0].remainingQty, 0);
+      expect(materialItemBonuses[0].additionalBonusFlag, false);
+      expect(materialItemBonuses[0].bonusOverrideFlag, true);
+    });
+
+    test(
+      'isEligibleAddAdditionBonus from PriceAggregate for materialInfo.materialGroup4.isFOC is true',
+      () {
+        final customPriceAggregate = emptyPriceAggregate.copyWith(
+          materialInfo: emptyMaterialInfo.copyWith(
+            materialGroup4: MaterialGroup.four('6A1'),
+          ),
+        );
+        expect(
+          customPriceAggregate.isEligibleAddAdditionBonus,
+          false,
+        );
+      },
+    );
+
+    test(
+      'isEligibleAddAdditionBonus from PriceAggregate for materialInfo.hidePrice is true',
+      () {
+        final customPriceAggregate = emptyPriceAggregate.copyWith(
+          materialInfo: emptyMaterialInfo.copyWith(
+            hidePrice: true,
+          ),
+        );
+        expect(
+          customPriceAggregate.isEligibleAddAdditionBonus,
+          false,
+        );
+      },
+    );
+
+    test(
+      'isEligibleAddAdditionBonus from PriceAggregate for salesOrgConfig.netPriceOverride & '
+      'price.additionalBonusEligible is false',
+      () {
+        final customPriceAggregate = emptyPriceAggregate.copyWith(
+          salesOrgConfig: emptySalesOrganisationConfigs.copyWith(
+            netPriceOverride: false,
+          ),
+          price: emptyPrice.copyWith(
+            additionalBonusEligible: false,
+          ),
+        );
+        expect(
+          customPriceAggregate.isEligibleAddAdditionBonus,
+          false,
+        );
+      },
+    );
+
+    test(
+      'isEligibleAddAdditionBonus from PriceAggregate',
+      () {
+        final customPriceAggregate = emptyPriceAggregate.copyWith(
+          salesOrgConfig: emptySalesOrganisationConfigs.copyWith(
+            netPriceOverride: true,
+          ),
+          materialInfo: emptyMaterialInfo.copyWith(
+            hidePrice: false,
+            materialGroup4: MaterialGroup.four(''),
+          ),
+          price: emptyPrice.copyWith(
+            additionalBonusEligible: true,
+          ),
+        );
+        expect(
+          customPriceAggregate.isEligibleAddAdditionBonus,
+          true,
+        );
+      },
+    );
+
+    test(
+      'hasSalesRepPrincipal from PriceAggregate',
+      () {
+        final customPriceAggregate = emptyPriceAggregate.copyWith(
+          materialInfo: emptyMaterialInfo.copyWith(
+            principalData: PrincipalData.empty().copyWith(
+              principalCode: PrincipalCode('100225'),
+            ),
+          ),
+        );
+        expect(
+          customPriceAggregate.hasSalesRepPrincipal,
+          true,
+        );
+      },
+    );
+
+    test(
+      'hasClientPrincipal from PriceAggregate',
+      () {
+        final customPriceAggregate = emptyPriceAggregate.copyWith(
+          materialInfo: emptyMaterialInfo.copyWith(
             principalData: PrincipalData.empty().copyWith(
               principalCode: PrincipalCode('100822'),
             ),
           ),
         );
         expect(
-          priceAggregate.hasClientPrincipal,
+          customPriceAggregate.hasClientPrincipal,
           true,
+        );
+      },
+    );
+
+    test(
+      'getAddedBonusList from PriceAggregate',
+      () {
+        final customPriceAggregate = emptyPriceAggregate.copyWith(
+          addedBonusList: [
+            MaterialItemBonus.empty().copyWith(additionalBonusFlag: true),
+            MaterialItemBonus.empty().copyWith(additionalBonusFlag: false),
+            MaterialItemBonus.empty().copyWith(additionalBonusFlag: true),
+          ],
+        );
+        final expectedList = customPriceAggregate.getAddedBonusList;
+        expect(expectedList[0].additionalBonusFlag, false);
+        expect(expectedList[1].additionalBonusFlag, true);
+        expect(expectedList[2].additionalBonusFlag, true);
+      },
+    );
+
+    test(
+      'copyWithIncreasedQty from PriceAggregate',
+      () {
+        final customPriceAggregate = emptyPriceAggregate.copyWith(quantity: 3);
+        expect(
+          emptyPriceAggregate.copyWithIncreasedQty(qty: 2),
+          customPriceAggregate,
         );
       },
     );
