@@ -25,8 +25,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-
-import '../../application/order/cart/cart_bloc_test.dart';
 import '../../utils/material_frame_wrapper.dart';
 import '../../utils/tester_utils.dart';
 import '../../utils/widget_utils.dart';
@@ -84,7 +82,7 @@ void main() {
     setupLocator();
 
     TestWidgetsFlutterBinding.ensureInitialized();
-    mockSalesOrgBloc = MockSalesOrgBloc();
+    mockSalesOrgBloc = SalesOrgBlocMock();
     mockAuthBloc = MockAuthBloc();
     mockAupTcBloc = MockAupTcBloc();
     eligibilityBlocMock = EligibilityBlocMock();

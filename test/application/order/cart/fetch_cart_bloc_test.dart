@@ -1,0 +1,115 @@
+import 'package:bloc_test/bloc_test.dart';
+import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
+import 'cart_bloc_variables.dart';
+
+void main() {
+  final cartRepositoryMock = CartRepositoryMock();
+
+  group('Testing Initialize and FetchCart', () {
+    blocTest<CartBloc, CartState>(
+      '=> Initialize CartBloc and fetch',
+      build: () => CartBloc(cartRepositoryMock),
+      setUp: () {
+        when(() => cartRepositoryMock.fetchCart())
+            .thenAnswer((invocation) => const Right(<CartItem>[]));
+        when(() => cartRepositoryMock.saveToCartWithUpdatedStockInfo(
+              cartItem: <CartItem>[],
+              customerCodeInfo: CustomerCodeInfo.empty(),
+              salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+              salesOrganisation: SalesOrganisation.empty(),
+              shipToInfo: ShipToInfo.empty(),
+            )).thenAnswer((invocation) async => const Right(<CartItem>[]));
+        when(() => cartRepositoryMock.updateDiscountQty(items: <CartItem>[]))
+            .thenAnswer((invocation) => const <CartItem>[]);
+      },
+      act: (bloc) => bloc
+        ..add(CartEvent.fetch(
+          customerCodeInfo: CustomerCodeInfo.empty(),
+          doNotAllowOutOfStockMaterials: true,
+          salesOrganisation: SalesOrganisation.empty(),
+          salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+          shipToInfo: ShipToInfo.empty(),
+        )),
+      expect: () => [
+        CartState.initial().copyWith(isFetching: true),
+        CartState.initial().copyWith(
+          apiFailureOrSuccessOption: none(),
+          cartItems: <CartItem>[],
+          isFetching: false,
+        ),
+      ],
+    );
+
+    blocTest<CartBloc, CartState>(
+      '=> Initialize CartBloc and fetch Stock Fail',
+      build: () => CartBloc(cartRepositoryMock),
+      setUp: () {
+        when(() => cartRepositoryMock.fetchCart())
+            .thenAnswer((invocation) => const Left(
+                  ApiFailure.other('Fake-Error'),
+                ));
+      },
+      act: (bloc) => bloc.add(CartEvent.fetch(
+        customerCodeInfo: CustomerCodeInfo.empty(),
+        doNotAllowOutOfStockMaterials: true,
+        salesOrganisation: SalesOrganisation.empty(),
+        salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+        shipToInfo: ShipToInfo.empty(),
+      )),
+      expect: () => [
+        CartState.initial().copyWith(isFetching: true),
+        CartState.initial().copyWith(
+          apiFailureOrSuccessOption: optionOf(
+            const Left(ApiFailure.other('Fake-Error')),
+          ),
+          cartItems: <CartItem>[],
+          isFetching: false,
+        ),
+      ],
+    );
+    blocTest<CartBloc, CartState>(
+      '=> CartBloc Fetch with Mock Data',
+      build: () => CartBloc(cartRepositoryMock),
+      setUp: () {
+        when(() => cartRepositoryMock.fetchCart())
+            .thenAnswer((invocation) => Right(mockMaterialCartItemList));
+        when(() => cartRepositoryMock.saveToCartWithUpdatedStockInfo(
+                  cartItem: mockMaterialCartItemList,
+                  customerCodeInfo: CustomerCodeInfo.empty(),
+                  salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+                  salesOrganisation: SalesOrganisation.empty(),
+                  shipToInfo: ShipToInfo.empty(),
+                ))
+            .thenAnswer((invocation) async => Right(mockMaterialCartItemList));
+        when(() => cartRepositoryMock.updateDiscountQty(
+                items: mockMaterialCartItemList))
+            .thenAnswer((invocation) => mockMaterialCartItemList);
+      },
+      act: (bloc) => bloc
+        ..add(CartEvent.fetch(
+          customerCodeInfo: CustomerCodeInfo.empty(),
+          doNotAllowOutOfStockMaterials: true,
+          salesOrganisation: SalesOrganisation.empty(),
+          salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+          shipToInfo: ShipToInfo.empty(),
+        )),
+      expect: () => [
+        CartState.initial().copyWith(isFetching: true, cartItems: <CartItem>[]),
+        CartState.initial().copyWith(
+          apiFailureOrSuccessOption: none(),
+          cartItems: mockMaterialCartItemList,
+          isFetching: false,
+        ),
+      ],
+    );
+  });
+}

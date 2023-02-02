@@ -474,7 +474,8 @@ void main() {
       expect(reasonField, findsNothing);
     });
 
-    testWidgets('Order Type Document type enable with selected order type',
+    testWidgets(
+        'Order Type Document type enable with selected order type as ZPFC',
         (tester) async {
       final eligibilityState = eligibilityBlocMock.state.copyWith(
           salesOrganisation:
@@ -522,6 +523,115 @@ void main() {
 
       final documentType = find
           .byKey(Key(fakeOrderDocumentTypeList.last.documentType.getOrCrash()));
+      expect(documentType, findsOneWidget);
+      await tester.tap(documentType);
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+    });
+
+    testWidgets(
+        'Order Type Document type enable with selected order type as ZPOR',
+        (tester) async {
+      final eligibilityState = eligibilityBlocMock.state.copyWith(
+          salesOrganisation:
+              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601')),
+          user: User.empty().copyWith(
+              role:
+                  Role.empty().copyWith(type: RoleType('internal_sales_rep'))),
+          salesOrgConfigs: SalesOrganisationConfigs.empty()
+              .copyWith(disableOrderType: false));
+      final isOrderTypeEnable = eligibilityState.isOrderTypeEnable;
+      expect(isOrderTypeEnable, true);
+
+      when(() => orderDocumentTypeBlocMock.state).thenReturn(
+        OrderDocumentTypeState.initial().copyWith(
+          isSubmitting: false,
+          orderDocumentTypeList: fakeOrderDocumentTypeList,
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget(const Material(
+          child: OrderTypeSelector(
+        hideReasonField: true,
+      ))));
+      await tester.pump();
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+      final orderTypeSelector = find.byKey(const Key('orderTypeSelector'));
+      expect(orderTypeSelector, findsOneWidget);
+
+      final orderDocumentTypedialog =
+          find.byKey(const Key('orderDocumentTypedialog'));
+      expect(orderDocumentTypedialog, findsOneWidget);
+      await tester.tap(orderDocumentTypedialog);
+
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+
+      final displayReasonText =
+          orderDocumentTypeBlocMock.state.selectedReason.displayReasonText;
+
+      final displayItemText = orderDocumentTypeBlocMock.state.isReasonSelected
+          ? displayReasonText
+          : '';
+
+      final displayItemTextWidget = find.text(displayItemText);
+      expect(displayItemTextWidget, findsNothing);
+
+      final documentType = find.byKey(
+          Key(fakeOrderDocumentTypeList.first.documentType.getOrCrash()));
+      expect(documentType, findsOneWidget);
+      await tester.tap(documentType);
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+    });
+
+    testWidgets(
+        'Order Type Document type enable with selected order type as ZPFB',
+        (tester) async {
+      final eligibilityState = eligibilityBlocMock.state.copyWith(
+          salesOrganisation:
+              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601')),
+          user: User.empty().copyWith(
+              role:
+                  Role.empty().copyWith(type: RoleType('internal_sales_rep'))),
+          salesOrgConfigs: SalesOrganisationConfigs.empty()
+              .copyWith(disableOrderType: false));
+      final isOrderTypeEnable = eligibilityState.isOrderTypeEnable;
+      expect(isOrderTypeEnable, true);
+
+      when(() => orderDocumentTypeBlocMock.state).thenReturn(
+        OrderDocumentTypeState.initial().copyWith(
+          isSubmitting: false,
+          orderDocumentTypeList: fakeOrderDocumentTypeList,
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget(const Material(
+          child: OrderTypeSelector(
+        hideReasonField: true,
+      ))));
+      await tester.pump();
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+      final orderTypeSelector = find.byKey(const Key('orderTypeSelector'));
+      expect(orderTypeSelector, findsOneWidget);
+
+      final orderDocumentTypedialog =
+          find.byKey(const Key('orderDocumentTypedialog'));
+      expect(orderDocumentTypedialog, findsOneWidget);
+      await tester.tap(orderDocumentTypedialog);
+
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+
+      final displayReasonText =
+          orderDocumentTypeBlocMock.state.selectedReason.displayReasonText;
+
+      final displayItemText = orderDocumentTypeBlocMock.state.isReasonSelected
+          ? displayReasonText
+          : '';
+
+      final displayItemTextWidget = find.text(displayItemText);
+      expect(displayItemTextWidget, findsNothing);
+
+      final documentType = find.byKey(Key(
+          fakeOrderDocumentTypeList.elementAt(1).documentType.getOrCrash()));
+
       expect(documentType, findsOneWidget);
       await tester.tap(documentType);
       await tester.pumpAndSettle(const Duration(seconds: 1));
