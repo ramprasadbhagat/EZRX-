@@ -392,13 +392,13 @@ void main() {
       ),
       expect: () => [
         SavedOrderListState.initial().copyWith(
-          isFetching: true,
+          isDeleting: true,
           isDraftOrderCreated: false,
           isCreating: false,
           apiFailureOrSuccessOption: none(),
         ),
         SavedOrderListState.initial().copyWith(
-          isFetching: false,
+          isDeleting: false,
           apiFailureOrSuccessOption: optionOf(
             const Left(
               ApiFailure.other('fake-error'),
@@ -460,13 +460,13 @@ void main() {
           nextPageIndex: 1,
         ),
         SavedOrderListState.initial().copyWith(
-          isFetching: true,
+          isDeleting: true,
           savedOrders: savedOrderListMock,
           canLoadMore: savedOrderListMock.length >= _defaultPageSize,
           nextPageIndex: 1,
         ),
         SavedOrderListState.initial().copyWith(
-          isFetching: false,
+          isDeleting: false,
           savedOrders: savedOrderListMock.sublist(1),
           canLoadMore: savedOrderListMock.length >= _defaultPageSize,
           nextPageIndex: 1,

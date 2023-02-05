@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:dartz/dartz.dart';
 
-
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
@@ -131,9 +130,7 @@ class SavedOrderListBloc
       delete: (e) async {
         emit(state.copyWith(
           apiFailureOrSuccessOption: none(),
-          isFetching: true,
-          isDraftOrderCreated: false,
-          isCreating: false,
+          isDeleting: true,
         ));
 
         final failureOrSuccess = await repository.deleteSavedOrder(
@@ -145,9 +142,7 @@ class SavedOrderListBloc
             emit(
               state.copyWith(
                 apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-                isFetching: false,
-                isDraftOrderCreated: false,
-                isCreating: false,
+                isDeleting: false,
               ),
             );
           },
@@ -156,9 +151,7 @@ class SavedOrderListBloc
               state.copyWith(
                 savedOrders: savedOrders,
                 apiFailureOrSuccessOption: none(),
-                isFetching: false,
-                isDraftOrderCreated: false,
-                isCreating: false,
+                isDeleting: false,
               ),
             );
           },

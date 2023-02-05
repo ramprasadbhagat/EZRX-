@@ -1488,6 +1488,7 @@ mixin _$SavedOrderListState {
   List<SavedOrder> get savedOrders => throw _privateConstructorUsedError;
   bool get canLoadMore => throw _privateConstructorUsedError;
   bool get isFetching => throw _privateConstructorUsedError;
+  bool get isDeleting => throw _privateConstructorUsedError;
   int get nextPageIndex => throw _privateConstructorUsedError;
   bool get isDraftOrderCreated => throw _privateConstructorUsedError;
   bool get isCreating => throw _privateConstructorUsedError;
@@ -1509,6 +1510,7 @@ abstract class $SavedOrderListStateCopyWith<$Res> {
       {List<SavedOrder> savedOrders,
       bool canLoadMore,
       bool isFetching,
+      bool isDeleting,
       int nextPageIndex,
       bool isDraftOrderCreated,
       bool isCreating,
@@ -1531,6 +1533,7 @@ class _$SavedOrderListStateCopyWithImpl<$Res, $Val extends SavedOrderListState>
     Object? savedOrders = null,
     Object? canLoadMore = null,
     Object? isFetching = null,
+    Object? isDeleting = null,
     Object? nextPageIndex = null,
     Object? isDraftOrderCreated = null,
     Object? isCreating = null,
@@ -1548,6 +1551,10 @@ class _$SavedOrderListStateCopyWithImpl<$Res, $Val extends SavedOrderListState>
       isFetching: null == isFetching
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isDeleting: null == isDeleting
+          ? _value.isDeleting
+          : isDeleting // ignore: cast_nullable_to_non_nullable
               as bool,
       nextPageIndex: null == nextPageIndex
           ? _value.nextPageIndex
@@ -1581,6 +1588,7 @@ abstract class _$$_SavedOrderListStateCopyWith<$Res>
       {List<SavedOrder> savedOrders,
       bool canLoadMore,
       bool isFetching,
+      bool isDeleting,
       int nextPageIndex,
       bool isDraftOrderCreated,
       bool isCreating,
@@ -1601,6 +1609,7 @@ class __$$_SavedOrderListStateCopyWithImpl<$Res>
     Object? savedOrders = null,
     Object? canLoadMore = null,
     Object? isFetching = null,
+    Object? isDeleting = null,
     Object? nextPageIndex = null,
     Object? isDraftOrderCreated = null,
     Object? isCreating = null,
@@ -1618,6 +1627,10 @@ class __$$_SavedOrderListStateCopyWithImpl<$Res>
       isFetching: null == isFetching
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isDeleting: null == isDeleting
+          ? _value.isDeleting
+          : isDeleting // ignore: cast_nullable_to_non_nullable
               as bool,
       nextPageIndex: null == nextPageIndex
           ? _value.nextPageIndex
@@ -1646,6 +1659,7 @@ class _$_SavedOrderListState extends _SavedOrderListState {
       {required final List<SavedOrder> savedOrders,
       required this.canLoadMore,
       required this.isFetching,
+      required this.isDeleting,
       required this.nextPageIndex,
       required this.isDraftOrderCreated,
       required this.isCreating,
@@ -1665,6 +1679,8 @@ class _$_SavedOrderListState extends _SavedOrderListState {
   @override
   final bool isFetching;
   @override
+  final bool isDeleting;
+  @override
   final int nextPageIndex;
   @override
   final bool isDraftOrderCreated;
@@ -1675,7 +1691,7 @@ class _$_SavedOrderListState extends _SavedOrderListState {
 
   @override
   String toString() {
-    return 'SavedOrderListState(savedOrders: $savedOrders, canLoadMore: $canLoadMore, isFetching: $isFetching, nextPageIndex: $nextPageIndex, isDraftOrderCreated: $isDraftOrderCreated, isCreating: $isCreating, apiFailureOrSuccessOption: $apiFailureOrSuccessOption)';
+    return 'SavedOrderListState(savedOrders: $savedOrders, canLoadMore: $canLoadMore, isFetching: $isFetching, isDeleting: $isDeleting, nextPageIndex: $nextPageIndex, isDraftOrderCreated: $isDraftOrderCreated, isCreating: $isCreating, apiFailureOrSuccessOption: $apiFailureOrSuccessOption)';
   }
 
   @override
@@ -1689,6 +1705,8 @@ class _$_SavedOrderListState extends _SavedOrderListState {
                 other.canLoadMore == canLoadMore) &&
             (identical(other.isFetching, isFetching) ||
                 other.isFetching == isFetching) &&
+            (identical(other.isDeleting, isDeleting) ||
+                other.isDeleting == isDeleting) &&
             (identical(other.nextPageIndex, nextPageIndex) ||
                 other.nextPageIndex == nextPageIndex) &&
             (identical(other.isDraftOrderCreated, isDraftOrderCreated) ||
@@ -1706,6 +1724,7 @@ class _$_SavedOrderListState extends _SavedOrderListState {
       const DeepCollectionEquality().hash(_savedOrders),
       canLoadMore,
       isFetching,
+      isDeleting,
       nextPageIndex,
       isDraftOrderCreated,
       isCreating,
@@ -1724,6 +1743,7 @@ abstract class _SavedOrderListState extends SavedOrderListState {
       {required final List<SavedOrder> savedOrders,
       required final bool canLoadMore,
       required final bool isFetching,
+      required final bool isDeleting,
       required final int nextPageIndex,
       required final bool isDraftOrderCreated,
       required final bool isCreating,
@@ -1737,6 +1757,8 @@ abstract class _SavedOrderListState extends SavedOrderListState {
   bool get canLoadMore;
   @override
   bool get isFetching;
+  @override
+  bool get isDeleting;
   @override
   int get nextPageIndex;
   @override

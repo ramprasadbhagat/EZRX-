@@ -44,6 +44,7 @@ class SavedOrderListPage extends StatelessWidget {
           );
         },
         buildWhen: (previous, current) =>
+            previous.isDeleting != current.isDeleting ||
             previous.isFetching != current.isFetching,
         builder: (context, state) {
           return Column(
@@ -88,8 +89,10 @@ class SavedOrderListPage extends StatelessWidget {
                         ),
                       ),
                   isLoading: state.isFetching,
-                  itemBuilder: (context, index, item) =>
-                      SavedOrderItem(order: item),
+                  itemBuilder: (context, index, item) => SavedOrderItem(
+                    order: item,
+                    isDeleting: state.isDeleting,
+                  ),
                   items: state.savedOrders,
                 ),
               ),

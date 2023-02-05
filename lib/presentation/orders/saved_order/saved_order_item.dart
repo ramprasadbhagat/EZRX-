@@ -12,6 +12,7 @@ import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
+import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -21,9 +22,11 @@ class SavedOrderItem extends StatelessWidget {
   const SavedOrderItem({
     Key? key,
     required this.order,
+    required this.isDeleting,
   }) : super(key: key);
 
   final SavedOrder order;
+  final bool isDeleting;
 
   @override
   Widget build(BuildContext context) {
@@ -33,12 +36,17 @@ class SavedOrderItem extends StatelessWidget {
           CustomSlidableAction(
             label: 'Delete'.tr(),
             icon: Icons.delete_outline,
-            onPressed: (context) => context.read<SavedOrderListBloc>().add(
-                  SavedOrderListEvent.delete(
-                    order: order,
-                    user: context.read<UserBloc>().state.user,
-                  ),
-                ),
+            onPressed: (context) => isDeleting
+                ? showSnackBar(
+                    context: context,
+                    message: 'Another Deletion in Progress'.tr(),
+                  )
+                : context.read<SavedOrderListBloc>().add(
+                      SavedOrderListEvent.delete(
+                        order: order,
+                        user: context.read<UserBloc>().state.user,
+                      ),
+                    ),
           ),
         ],
         borderRadius: 8,
