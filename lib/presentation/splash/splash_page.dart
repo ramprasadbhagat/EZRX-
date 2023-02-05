@@ -36,8 +36,50 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:upgrader/upgrader.dart';
 
-class SplashPage extends StatelessWidget {
+class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
+
+  @override
+  State<SplashPage> createState() => _SplashPageState();
+}
+
+class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
+  late DateTime dateTime;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    switch (state) {
+      case AppLifecycleState.resumed:
+        if (_checkIfRefreshIsNeeded()) {
+          context.read<AuthBloc>().add(const AuthEvent.init());
+        }
+        break;
+      case AppLifecycleState.inactive:
+        break;
+      case AppLifecycleState.paused:
+        _initialiseTimestamp();
+        break;
+      case AppLifecycleState.detached:
+        break;
+    }
+  }
+
+  void _initialiseTimestamp() => dateTime = DateTime.now();
+
+  bool _checkIfRefreshIsNeeded() =>
+      dateTime.difference(DateTime.now()).inMinutes >= 30;
 
   @override
   Widget build(BuildContext context) {
