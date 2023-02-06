@@ -104,7 +104,7 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   late UserBloc userBlocMock;
   late SalesOrgBloc salesOrgBlocMock;
-  late FavouriteRemoteDataSource favoriteRemoteSource;
+  //late FavouriteRemoteDataSource favoriteRemoteSource;
 
   late CustomerCodeBloc customerCodeBlocMock;
   late ShipToCodeBloc shipToCodeBlocMock;

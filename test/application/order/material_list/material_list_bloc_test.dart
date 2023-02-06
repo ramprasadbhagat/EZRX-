@@ -35,19 +35,12 @@ void main() {
   final mockSelectedMaterialFilter = MaterialFilter.empty();
   final mockSalesOrganisation = SalesOrganisation(
       salesOrg: salesOrg2601, customerInfos: <SalesOrgCustomerInfo>[]);
-  late List materialListExcludePrincipalMock;
-  late String getConfigLangaugeDefaultEnglishMock;
   late final List<MaterialInfo> materialListMock;
   final materialState = MaterialListState.initial();
   setUpAll(() async {
     materialListMockRepository = MockMaterialListRepository();
     materialListMock = await MaterialListLocalDataSource().getMaterialList();
-    materialListExcludePrincipalMock = mockSalesOrganisationConfigs
-        .copyWith(disablePrincipals: true)
-        .getExcludePrincipal;
-    getConfigLangaugeDefaultEnglishMock = mockSalesOrganisationConfigs
-        .copyWith(languageFilter: true)
-        .getConfigLangaugeDefaultEnglish;
+
   });
 
   group('Material List Bloc', () {

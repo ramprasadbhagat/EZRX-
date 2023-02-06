@@ -104,7 +104,7 @@ void main() {
     test(
       'Get the server exception',
       () async {
-        final data = {'userName': saleOrgName};
+        // final data = {'userName': saleOrgName};
 
         dioAdapter.onPost(
           '/api/strapiEngine',
@@ -136,7 +136,7 @@ void main() {
     test(
       'Status code != 200',
       () async {
-        final data = {'userName': saleOrgName};
+        // final data = {'userName': saleOrgName};
 
         dioAdapter.onPost(
           '/api/strapiEngine',

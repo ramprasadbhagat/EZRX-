@@ -11,12 +11,7 @@ import 'package:ezrxmobile/application/order/material_price/material_price_bloc.
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
-import 'package:ezrxmobile/domain/account/entities/role.dart';
-import 'package:ezrxmobile/domain/account/entities/user.dart';
-import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
-import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
-import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -69,7 +64,7 @@ class PriceOverrideMockBloc
 
 void main() {
   late TenderContractBloc tenderContractBlocMock;
-  late UserBloc userBlockMock;
+  // late UserBloc userBlockMock;
   late OrderDocumentTypeBloc orderDocumentTypeBlocMock;
   late SalesOrgBloc salesOrgBloc;
   late EligibilityBloc eligibilityBloc;
@@ -79,26 +74,26 @@ void main() {
   late CartBloc cartBloc;
   late MaterialPriceBloc materialPriceBloc;
   late Map<MaterialNumber, Price> mockPriceList;
-  late List<PriceAggregate> priceAggregates;
+  //late List<PriceAggregate> priceAggregates;
   late OrderEligibilityBloc orderEligibilityBlocMock;
   late AddToCartBloc addToCartBlocMock;
   late PriceOverrideBloc priceOverrideMockBloc;
-  late AppRouter autoRouter;
-  final mockUser = User.empty();
-  final mockRole = Role.empty();
+  //late AppRouter autoRouter;
+  // final mockUser = User.empty();
+  // final mockRole = Role.empty();
 
   setUpAll(() {
     countlyService = CountlyServiceMock();
     locator.registerLazySingleton(() => countlyService);
     locator.registerFactory(() => AppRouter());
-    autoRouter = locator<AppRouter>();
+    // autoRouter = locator<AppRouter>();
   });
 
   setUp(
     () {
       WidgetsFlutterBinding.ensureInitialized();
       tenderContractBlocMock = TenderContractBlocMock();
-      userBlockMock = UserBlocMock();
+      // userBlockMock = UserBlocMock();
       salesOrgBloc = SalesOrgBlocMock();
       orderDocumentTypeBlocMock = OrderDocumentTypeBlocMock();
       eligibilityBloc = EligibilityBlocMock();
@@ -140,18 +135,18 @@ void main() {
       when(() => priceOverrideMockBloc.state).thenReturn(
         PriceOverrideState.initial(),
       );
-      priceAggregates = <PriceAggregate>[
-        PriceAggregate.empty().copyWith(
-          quantity: 2,
-          materialInfo: MaterialInfo.empty().copyWith(
-            materialNumber: MaterialNumber('000000000023168451'),
-            materialDescription: ' Triglyceride Mosys D',
-            principalData: PrincipalData.empty().copyWith(
-              principalName: '台灣拜耳股份有限公司',
-            ),
-          ),
-        ),
-      ];
+      // priceAggregates = <PriceAggregate>[
+      //   PriceAggregate.empty().copyWith(
+      //     quantity: 2,
+      //     materialInfo: MaterialInfo.empty().copyWith(
+      //       materialNumber: MaterialNumber('000000000023168451'),
+      //       materialDescription: ' Triglyceride Mosys D',
+      //       principalData: PrincipalData.empty().copyWith(
+      //         principalName: '台灣拜耳股份有限公司',
+      //       ),
+      //     ),
+      //   ),
+      // ];
     },
   );
   // group('Cart Item Tile Test', () {

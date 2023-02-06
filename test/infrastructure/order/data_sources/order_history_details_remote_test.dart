@@ -133,10 +133,6 @@ void main() {
           'language': 'fake-language',
           'userName': 'fake-username',
         };
-        final res = json.decode(
-          await rootBundle
-              .loadString('assets/json/getorderDetailsForSalesRep.json'),
-        );
 
         dioAdapter.onPost(
           '/api/order',
@@ -174,10 +170,6 @@ void main() {
           'language': 'fake-language',
           'userName': 'fake-username',
         };
-        final res = json.decode(
-          await rootBundle
-              .loadString('assets/json/getorderDetailsForSalesRep.json'),
-        );
 
         dioAdapter.onPost(
           '/api/order',

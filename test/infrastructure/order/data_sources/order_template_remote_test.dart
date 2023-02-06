@@ -139,10 +139,6 @@ void main() {
             'user': '',
             'cartlist': jsonEncode([]),
           };
-          final res = json.decode(
-            await rootBundle
-                .loadString('assets/json/saveOrderTemplatesResponse.json'),
-          );
 
           dioAdapter.onPost(
             '/api/strapiEngine',
@@ -182,10 +178,6 @@ void main() {
             'user': '',
             'cartlist': jsonEncode([]),
           };
-          final res = json.decode(
-            await rootBundle
-                .loadString('assets/json/saveOrderTemplatesResponse.json'),
-          );
 
           dioAdapter.onPost(
             '/api/strapiEngine',

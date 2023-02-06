@@ -62,7 +62,7 @@ void main() {
   late List<MaterialInfo> mockbonusItemWithDataList;
   late PriceAggregate cartItem;
   late TenderContractBloc tenderContractBlocMock;
-  late BonusMaterialRepositoryMock bonusMaterialRepository;
+  //late BonusMaterialRepositoryMock bonusMaterialRepository;
   late UserBloc userBloc;
   late SalesOrgBloc salesOrgBloc;
   late EligibilityBloc eligibilityBloc;
@@ -83,7 +83,7 @@ void main() {
       WidgetsFlutterBinding.ensureInitialized();
       bonusMaterialBloc = BonusMaterialBlocMock();
       tenderContractBlocMock = TenderContractBlocMock();
-      bonusMaterialRepository = BonusMaterialRepositoryMock();
+      // bonusMaterialRepository = BonusMaterialRepositoryMock();
       userBloc = UserBlocMock();
       salesOrgBloc = SalesOrgBlocMock();
       eligibilityBloc = EligibilityBlocMock();

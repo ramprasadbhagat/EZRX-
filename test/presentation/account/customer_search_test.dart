@@ -9,8 +9,6 @@ import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_representative_info.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -20,8 +18,6 @@ import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_local.dart';
-import 'package:ezrxmobile/infrastructure/account/datasource/sales_org_local.dart';
-import 'package:ezrxmobile/infrastructure/account/datasource/sales_rep_local.dart';
 import 'package:ezrxmobile/presentation/account/customer_search.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
@@ -64,10 +60,10 @@ void main() {
   late SalesOrgBloc salesOrgBlocMock;
   late CustomerCodeBloc customerCodeBlocMock;
   late AppRouter autoRouterMock;
-  late List<CustomerCodeInfo> customerCodeListMock,
-      customerCodeListSalesrepMock;
-  late SalesOrganisationConfigs salesOrganisationConfigs;
-  late SalesRepresentativeInfo salesRepresentativeInfo;
+  late List<CustomerCodeInfo> customerCodeListMock;
+  //     customerCodeListSalesrepMock;
+  // late SalesOrganisationConfigs salesOrganisationConfigs;
+  // late SalesRepresentativeInfo salesRepresentativeInfo;
   late CartBloc cartBlocMock;
   final fakeCustomerCodeInfo =
       CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: '0000100730');
@@ -112,14 +108,14 @@ void main() {
       cartBlocMock = CartBlocMock();
       authBloc = AuthBlocMock();
       autoRouterMock = locator<AppRouter>();
-      salesOrganisationConfigs =
-          await SalesOrgLocalDataSource().getConfig(salesOrg: '');
-      salesRepresentativeInfo =
-          await SalesRepLocalDataSource().getSalesRepInfo(userName: '');
+      // salesOrganisationConfigs =
+      //     await SalesOrgLocalDataSource().getConfig(salesOrg: '');
+      // salesRepresentativeInfo =
+      //     await SalesRepLocalDataSource().getSalesRepInfo(userName: '');
       customerCodeListMock =
           await CustomerCodeLocalDataSource().getCustomerCodeList();
-      customerCodeListSalesrepMock =
-          await CustomerCodeLocalDataSource().getSalesRepCustomerCodeList();
+      // customerCodeListSalesrepMock =
+      //     await CustomerCodeLocalDataSource().getSalesRepCustomerCodeList();
       when(() => userBlocMock.state).thenReturn(UserState.initial());
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
       when(() => customerCodeBlocMock.state)

@@ -81,10 +81,6 @@ void main() {
 
       test('statuscode not equal to 200', () async {
         final variables = {'salesOrg': 'fake-sales-org'};
-        final res = json.decode(
-          await rootBundle
-              .loadString('assets/json/orderDocumentTypeResponse.json'),
-        );
 
         dioAdapter.onPost(
           '/api/order',
@@ -112,10 +108,6 @@ void main() {
 
       test('response with error', () async {
         final variables = {'salesOrg': 'fake-sales-org'};
-        final res = json.decode(
-          await rootBundle
-              .loadString('assets/json/orderDocumentTypeResponse.json'),
-        );
 
         dioAdapter.onPost(
           '/api/order',

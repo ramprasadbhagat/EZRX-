@@ -300,10 +300,6 @@ void main() {
       test(
         'statuscode not equla to 200',
         () async {
-          final res = json.decode(
-            await rootBundle
-                .loadString('assets/json/getSavedOrdersResponse.json'),
-          );
 
           dioAdapter.onPost(
             '/api/strapiEngine',
@@ -338,10 +334,6 @@ void main() {
       test(
         'response with error',
         () async {
-          final res = json.decode(
-            await rootBundle
-                .loadString('assets/json/getSavedOrdersResponse.json'),
-          );
 
           dioAdapter.onPost(
             '/api/strapiEngine',

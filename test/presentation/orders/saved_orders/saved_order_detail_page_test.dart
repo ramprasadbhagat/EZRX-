@@ -389,9 +389,9 @@ void main() {
 
         await tester.tap(find.text('Add to Cart'));
         await tester.pumpAndSettle(const Duration(seconds: 1));
-        final itemInfo = MaterialPriceDetail.empty()
-            .copyWith
-            .price(finalPrice: MaterialPrice(10));
+        // final itemInfo = MaterialPriceDetail.empty()
+        //     .copyWith
+        //     .price(finalPrice: MaterialPrice(10));
 
         // verify(() => CartEvent.addToCartFromList(
         //       items: [

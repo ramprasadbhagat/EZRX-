@@ -85,10 +85,6 @@ void main() {
           'customer': 'fake-customer-code',
           'salesOrganisation': 'fake-salesorg',
         };
-        final res = json.decode(
-          await rootBundle
-              .loadString('assets/json/getPaymentCustomerInfoResponse.json'),
-        );
 
         dioAdapter.onPost(
           '/api/license',
@@ -120,10 +116,6 @@ void main() {
           'customer': 'fake-customer-code',
           'salesOrganisation': 'fake-salesorg',
         };
-        final res = json.decode(
-          await rootBundle
-              .loadString('assets/json/getPaymentCustomerInfoResponse.json'),
-        );
 
         dioAdapter.onPost(
           '/api/license',

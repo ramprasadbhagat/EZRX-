@@ -156,10 +156,6 @@ void main() {
           'shipToCode': 'fake-shipto-code',
           'salesOrganisation': 'fake-sales-org',
         };
-        final res = json.decode(
-          await rootBundle.loadString(
-              'assets/json/getMaterialBundleListForSalesRepResponse.json'),
-        );
 
         dioAdapter.onPost(
           '/api/pricing',
@@ -196,10 +192,6 @@ void main() {
           'shipToCode': 'fake-shipto-code',
           'salesOrganisation': 'fake-sales-org',
         };
-        final res = json.decode(
-          await rootBundle.loadString(
-              'assets/json/getMaterialBundleListForSalesRepResponse.json'),
-        );
 
         dioAdapter.onPost(
           '/api/pricing',

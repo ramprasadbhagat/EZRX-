@@ -92,11 +92,7 @@ void main() {
         'salesOrganisation': 'fake-sales-org',
         'customer': 'fake-customer-code',
         'request': [],
-      };
-        final res = json.decode(
-          await rootBundle
-              .loadString('assets/json/getMaterialPriceResponse.json'),
-        );
+        };
 
         dioAdapter.onPost(
           '/api/pricing',
@@ -135,11 +131,7 @@ void main() {
         'salesOrganisation': 'fake-sales-org',
         'customer': 'fake-customer-code',
         'request': [],
-      };
-        final res = json.decode(
-          await rootBundle
-              .loadString('assets/json/getMaterialPriceResponse.json'),
-        );
+        };
 
         dioAdapter.onPost(
           '/api/pricing',

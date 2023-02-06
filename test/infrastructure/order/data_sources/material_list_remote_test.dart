@@ -332,10 +332,6 @@ void main() {
           'therapeuticClassList': [],
           'itemBrandList': [],
         };
-        final res = json.decode(
-          await rootBundle.loadString(
-              'assets/json/getCustomerMaterialsForSalesRepResponse.json'),
-        );
 
         dioAdapter.onPost(
           '/api/license',
@@ -398,10 +394,6 @@ void main() {
           'therapeuticClassList': [],
           'itemBrandList': [],
         };
-        final res = json.decode(
-          await rootBundle.loadString(
-              'assets/json/getCustomerMaterialsForSalesRepResponse.json'),
-        );
 
         dioAdapter.onPost(
           '/api/license',

@@ -24,7 +24,7 @@ void main() {
       final configs = OrderHistoryBasicInfoDto.fromJson(
         data,
       ).toDomain();
-      final res = OrderHistoryBasicInfoDto.fromDomain(configs);
+      // final res = OrderHistoryBasicInfoDto.fromDomain(configs);
       expect(configs.companyName.getOrCrash(), 'fake-companyname');
     });
   });

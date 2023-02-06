@@ -138,6 +138,7 @@ void main() {
   late List<PriceAggregate> mockCartItemWithDataList;
   late List<PriceAggregate> mockCartItemWithDataList2;
   late List<PriceAggregate> mockCartItemBundles;
+  // ignore: unused_local_variable
   late List<PriceAggregate> mockCartItemDiscountBundles;
   late MaterialListBloc materialListBlocMock;
   late TenderContractBloc tenderContractBlocMock;
@@ -154,10 +155,6 @@ void main() {
   late CountlyService countlyMockService;
   late AdditionalDetailsBloc additionalDetailsBlocMock;
 
-  final mockMaterialItemList = [
-    MaterialNumber('000000000023168451'),
-    MaterialNumber('000000000023168441')
-  ];
   setUpAll(() {
     countlyMockService = CountlyServiceMock();
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);

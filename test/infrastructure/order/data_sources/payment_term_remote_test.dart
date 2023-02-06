@@ -98,11 +98,6 @@ void main() {
           'principalCode': ['fake-principalcode'],
         };
 
-        final res = json.decode(
-          await rootBundle
-              .loadString('assets/json/getPaymentTermsResponse.json'),
-        );
-
         dioAdapter.onPost(
           '/api/order',
           (server) => server.reply(

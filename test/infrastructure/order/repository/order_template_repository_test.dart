@@ -58,16 +58,16 @@ void main() {
         customerCode: CustomerCode('100007654')),
   );
 
-  final cartList = [
-    MaterialItem.empty().copyWith(
-      materialNumber: MaterialNumber('123'),
-      materialGroup4: MaterialGroup.four('4'),
-      qty: 1,
-      type: MaterialItemType('Comm'),
-      materialDescription: 'Description',
-      hidePrice: false,
-    ),
-  ];
+  // final cartList = [
+  //   MaterialItem.empty().copyWith(
+  //     materialNumber: MaterialNumber('123'),
+  //     materialGroup4: MaterialGroup.four('4'),
+  //     qty: 1,
+  //     type: MaterialItemType('Comm'),
+  //     materialDescription: 'Description',
+  //     hidePrice: false,
+  //   ),
+  // ];
   final cartItemList = [
     CartItem(
       itemType: CartItemType.material,

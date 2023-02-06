@@ -139,10 +139,6 @@ void main() {
           'request': [],
           'language': 'fake-language'
         };
-        final res = json.decode(
-          await rootBundle.loadString(
-              'assets/json/getCustomerMaterialPriceDetailResponse.json'),
-        );
 
         dioAdapter.onPost(
           '/api/pricing',
@@ -180,10 +176,6 @@ void main() {
           'request': [],
           'language': 'fake-language'
         };
-        final res = json.decode(
-          await rootBundle.loadString(
-              'assets/json/getCustomerMaterialPriceDetailResponse.json'),
-        );
 
         dioAdapter.onPost(
           '/api/pricing',

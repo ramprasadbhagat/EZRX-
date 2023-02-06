@@ -91,10 +91,6 @@ void main() {
       });
 
       test('status not equal to 200', () async {
-        final res = json.decode(
-          await rootBundle
-              .loadString('assets/json/tenderContractsResponse.json'),
-        );
 
         dioAdapter.onPost(
           '/api//order',
@@ -132,10 +128,6 @@ void main() {
       });
 
       test('response with error', () async {
-        final res = json.decode(
-          await rootBundle
-              .loadString('assets/json/tenderContractsResponse.json'),
-        );
 
         dioAdapter.onPost(
           '/api//order',

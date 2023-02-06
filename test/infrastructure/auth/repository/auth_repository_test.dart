@@ -128,10 +128,10 @@ void main() {
       ).thenAnswer((invocation) async => null);
       when(
         () => accountSelectorStorageMock.delete(),
-      ).thenAnswer((invocation) async => null);
+      ).thenAnswer((invocation) async => '');
       when(
         () => cartStorageMock.clear(),
-      ).thenAnswer((invocation) async => null);
+      ).thenAnswer((invocation) async => '');
       when(
         () async => repository.initTokenStorage(),
       ).thenAnswer(
@@ -224,7 +224,7 @@ void main() {
 
         when(() => pushNotificationServiceMock.getFCMToken())
             .thenAnswer((invocation) async => fakeJWT.getValue());
-        final testMock = Future<dynamic>.delayed(const Duration(seconds: 1));
+        // final testMock = Future<dynamic>.delayed(const Duration(seconds: 1));
 
         when(() => remoteDataSourceMock.loginWithPassword(
                 password: 'old', username: 'old', fcmToken: fakeJWT.getValue()))
@@ -610,7 +610,7 @@ void main() {
           pushNotificationService: pushNotificationServiceMock,
         );
 
-        final result = await repository.tokenValid();
+        await repository.tokenValid();
         verify(() => tokenStorageMock.get()).called(1);
       },
     );

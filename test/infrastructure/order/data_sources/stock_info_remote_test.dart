@@ -121,10 +121,6 @@ void main() {
       });
 
       test('statuscode not equal to 200', () async {
-        final res = json.decode(
-          await rootBundle
-              .loadString('assets/json/stockInformationResponse.json'),
-        );
 
         dioAdapter.onPost(
           '/api//order',
@@ -159,10 +155,6 @@ void main() {
       });
 
       test('response with error', () async {
-        final res = json.decode(
-          await rootBundle
-              .loadString('assets/json/stockInformationResponse.json'),
-        );
 
         dioAdapter.onPost(
           '/api//order',

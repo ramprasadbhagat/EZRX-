@@ -136,10 +136,6 @@ void main() {
           'gimmickMaterial': false,
           'language': 'fake-language',
         };
-        final res = json.decode(
-          await rootBundle
-              .loadString('assets/json/getMaterialFilterResponseSalesRep.json'),
-        );
 
         dioAdapter.onPost(
           '/api/license',
@@ -181,10 +177,6 @@ void main() {
           'gimmickMaterial': false,
           'language': 'fake-language',
         };
-        final res = json.decode(
-          await rootBundle
-              .loadString('assets/json/getMaterialFilterResponseSalesRep.json'),
-        );
 
         dioAdapter.onPost(
           '/api/license',
