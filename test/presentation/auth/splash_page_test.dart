@@ -12,6 +12,7 @@ import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/covid_material_list/covid_material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_bundle_list/material_bundle_list_bloc.dart';
+import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
@@ -97,6 +98,9 @@ class MaterialBundleListBlocMock
 class CovidMaterialListBlocMock
     extends MockBloc<CovidMaterialListEvent, CovidMaterialListState>
     implements CovidMaterialListBloc {}
+class MaterialFilterBlocMock
+    extends MockBloc<MaterialFilterEvent, MaterialFilterState>
+    implements MaterialFilterBloc {}
 
 class OrderDocumentTypeBlocMock
     extends MockBloc<OrderDocumentTypeEvent, OrderDocumentTypeState>
@@ -147,6 +151,7 @@ void main() {
   late MaterialListBloc materialListBlocMock;
   late ReturnSummaryBloc returnSummaryBlocMock;
 
+  late MaterialFilterBloc materialFilterBlocMock;
 
   late MaterialBundleListBloc materialBundleListBlocMock;
   late CovidMaterialListBloc covidMaterialListBlocMock;
@@ -199,6 +204,7 @@ void main() {
       returnRequestTypeCodeBlocMock = ReturnRequestTypeCodeBlocMock();
       policyConfigurationListBlocMock = PolicyConfigurationListBlocMock();
       materialListBlocMock = MaterialListBlocMock();
+      materialFilterBlocMock = MaterialFilterBlocMock();
       returnApproverBlocMock = ReturnApproverBlocMock();
       returnSummaryBlocMock = ReturnSummaryBlocMock();
 
@@ -234,6 +240,8 @@ void main() {
           .thenReturn(PolicyConfigurationState.initial());
       when(() => materialListBlocMock.state)
           .thenReturn(MaterialListState.initial());
+      when(() => materialFilterBlocMock.state)
+          .thenReturn(MaterialFilterState.initial());
       when(() => returnApproverBlocMock.state)
           .thenReturn(ReturnApproverState.initial());
            when(() => returnSummaryBlocMock.state)
@@ -278,6 +286,8 @@ void main() {
                 create: (context) => policyConfigurationListBlocMock),
             BlocProvider<MaterialListBloc>(
                 create: (context) => materialListBlocMock),
+            BlocProvider<MaterialFilterBloc>(
+                create: (context) => materialFilterBlocMock),
             BlocProvider<ReturnApproverBloc>(
                 create: (context) => returnApproverBlocMock),
                  BlocProvider<ReturnSummaryBloc>(

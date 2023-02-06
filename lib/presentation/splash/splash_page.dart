@@ -278,7 +278,8 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                       current.user.role.type.hasReturnsAdminAccess),
           listener: (context, state) {
             if (state.isReturnApprover) {
-              context.read<ReturnApproverBloc>()
+              context
+                  .read<ReturnApproverBloc>()
                   .add(ReturnApproverEvent.fetch(user: state.user));
             }
             if (!state.isReturnsEnable) return;
@@ -339,6 +340,22 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               previous.selectedOrderType != current.selectedOrderType &&
               current.selectedOrderType != OrderDocumentType.empty(),
           listener: (context, state) {
+            context.read<MaterialFilterBloc>().add(
+                  MaterialFilterEvent.fetch(
+                    user: context.read<UserBloc>().state.user,
+                    salesOrganisation:
+                        context.read<SalesOrgBloc>().state.salesOrganisation,
+                    salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+                    customerCodeInfo:
+                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                    shipToInfo:
+                        context.read<EligibilityBloc>().state.shipToInfo,
+                    pickAndPack: context
+                        .read<EligibilityBloc>()
+                        .state
+                        .getPNPValueMaterial,
+                  ),
+                );
             context.read<MaterialListBloc>().add(
                   MaterialListEvent.fetch(
                     user: context.read<UserBloc>().state.user,
