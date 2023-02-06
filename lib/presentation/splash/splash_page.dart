@@ -1,4 +1,6 @@
+import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
+import 'package:ezrxmobile/application/returns/return_summary/return_summary_bloc.dart';
 import 'package:universal_io/io.dart';
 
 import 'package:auto_route/auto_route.dart';
@@ -280,7 +282,14 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                   .add(ReturnApproverEvent.fetch(user: state.user));
             }
             if (!state.isReturnsEnable) return;
-
+            context.read<ReturnSummaryBloc>().add(
+                  ReturnSummaryEvent.fetch(
+                    user: context.read<UserBloc>().state.user,
+                    customerCodeInfo:
+                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                    shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+                  ),
+                );
             context.read<UsageCodeBloc>().add(
                   UsageCodeEvent.fetch(
                     salesOrg: state.salesOrganisation.salesOrg,

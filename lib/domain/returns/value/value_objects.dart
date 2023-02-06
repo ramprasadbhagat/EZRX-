@@ -1,3 +1,5 @@
+import 'dart:core';
+
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/core/error/failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -96,4 +98,23 @@ class RefundTotal extends ValueObject<String> {
   }
 
   const RefundTotal._(this.value);
+}
+class ReturnSummaryStatus extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory ReturnSummaryStatus(String input) {
+    return ReturnSummaryStatus._(validateStringNotEmpty(input));
+  }
+  String get displayStatus => getReturnSummaryStatus(value.getOrElse(() => ''));
+
+  String get displayStatusInList =>
+      getReturnSummaryStatusInList(value.getOrElse(() => ''));
+  Color get displayStatusLabelColor =>
+      getStatusLabelColor(value.getOrElse(() => ''));
+
+  Color get displayStatusTextColor =>
+      getStatusTextColor(value.getOrElse(() => ''));
+
+  const ReturnSummaryStatus._(this.value);
 }

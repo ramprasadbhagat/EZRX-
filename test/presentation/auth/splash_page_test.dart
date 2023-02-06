@@ -19,6 +19,7 @@ import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
 import 'package:ezrxmobile/application/returns/policy_configuration/policy_configuration_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_request_type_code/return_request_type_code_bloc.dart';
+import 'package:ezrxmobile/application/returns/return_summary/return_summary_bloc.dart';
 import 'package:ezrxmobile/application/returns/usage_code/usage_code_bloc.dart';
 import 'package:ezrxmobile/application/returns/user_restriction/user_restriction_list_bloc.dart';
 import 'package:ezrxmobile/config.dart';
@@ -119,6 +120,9 @@ class MaterialListBlocMock
 class ReturnApproverBlocMock
     extends MockBloc<ReturnApproverEvent, ReturnApproverState>
     implements ReturnApproverBloc {}
+    class ReturnSummaryBlocMock
+    extends MockBloc<ReturnSummaryEvent, ReturnSummaryState>
+    implements ReturnSummaryBloc {}
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -141,6 +145,8 @@ void main() {
   late ReturnRequestTypeCodeBloc returnRequestTypeCodeBlocMock;
   late PolicyConfigurationBloc policyConfigurationListBlocMock;
   late MaterialListBloc materialListBlocMock;
+  late ReturnSummaryBloc returnSummaryBlocMock;
+
 
   late MaterialBundleListBloc materialBundleListBlocMock;
   late CovidMaterialListBloc covidMaterialListBlocMock;
@@ -194,6 +200,8 @@ void main() {
       policyConfigurationListBlocMock = PolicyConfigurationListBlocMock();
       materialListBlocMock = MaterialListBlocMock();
       returnApproverBlocMock = ReturnApproverBlocMock();
+      returnSummaryBlocMock = ReturnSummaryBlocMock();
+
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
       when(() => orderDocumentTypeMock.state).thenReturn(
         OrderDocumentTypeState.initial().copyWith(
@@ -228,6 +236,8 @@ void main() {
           .thenReturn(MaterialListState.initial());
       when(() => returnApproverBlocMock.state)
           .thenReturn(ReturnApproverState.initial());
+           when(() => returnSummaryBlocMock.state)
+          .thenReturn(ReturnSummaryState.initial());
     });
 
     Future getWidget(tester) async {
@@ -270,6 +280,8 @@ void main() {
                 create: (context) => materialListBlocMock),
             BlocProvider<ReturnApproverBloc>(
                 create: (context) => returnApproverBlocMock),
+                 BlocProvider<ReturnSummaryBloc>(
+                create: (context) => returnSummaryBlocMock),
           ],
           child: const SplashPage(),
         ),

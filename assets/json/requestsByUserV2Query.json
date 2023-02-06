@@ -1,0 +1,3 @@
+{
+    "query": "query requestsByUserV2($requestsByUserRequest: requestsByUserRequest!) {\n  requestsByUserV2(request: $requestsByUserRequest) {\n    requestID\n    __typename\n  }\n}\n"
+}
