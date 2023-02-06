@@ -1,8 +1,3 @@
-import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
-import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
-import 'package:ezrxmobile/domain/order/entities/material_item.dart';
-import 'package:ezrxmobile/locator.dart';
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
@@ -11,20 +6,30 @@ import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.da
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
+import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
+import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_price_detail.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_template.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_template_local_datasource.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_material_item.dart';
 import 'package:ezrxmobile/presentation/orders/order_template/order_template_detail_page.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../utils/widget_utils.dart';
+import '../../home/selectors/shipping_address_selector_test.dart';
 
 List<MaterialQueryInfo> _getMaterialList(List<MaterialItem> items) {
   final materialList = items
@@ -102,7 +107,11 @@ void main() {
     materialPriceDetailBlocMock = MockMaterialPriceDetailBloc();
     cartBlocMock = MockCartBloc();
     orderTemplateListBlocMock = OrderTemplateListBlocMock();
-    when(() => userBlocMock.state).thenReturn(UserState.initial());
+    when(() => userBlocMock.state).thenReturn(
+      UserState.initial().copyWith(
+        user: fakeUser,
+      ),
+    );
     when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
     when(() => customerCodeBlocMock.state)
         .thenReturn(CustomerCodeState.initial());
@@ -480,5 +489,152 @@ void main() {
       await tester.tap(find.byWidget(onDeletePressed));
       await tester.pump();
     });
+
+    testWidgets(
+      'Test Order Template Disable create order Add To Cart Button Hidden - Return Admin',
+      (tester) async {
+        final fakeUser = User.empty().copyWith(
+          username: Username('fakeUser'),
+          role: Role(
+            type: RoleType('return_admin'),
+            description: '',
+            id: '',
+            name: '',
+          ),
+        );
+
+        when(
+          () => userBlocMock.state,
+        ).thenReturn(
+          UserState.initial().copyWith(
+            user: fakeUser,
+          ),
+        );
+
+        await tester.pumpWidget(orderTemplateDetailPage());
+        await tester.pump();
+
+        final addToCartButton = find.byKey(const Key('onAddToCartPressed'));
+        expect(addToCartButton, findsNothing);
+      },
+    );
+
+    testWidgets(
+      'Test Order Template Disable create order Add To Cart Button Hidden - Return Requestor',
+      (tester) async {
+        final fakeUser = User.empty().copyWith(
+          username: Username('fakeUser'),
+          role: Role(
+            type: RoleType('return_requestor'),
+            description: '',
+            id: '',
+            name: '',
+          ),
+        );
+
+        when(
+          () => userBlocMock.state,
+        ).thenReturn(
+          UserState.initial().copyWith(
+            user: fakeUser,
+          ),
+        );
+
+        await tester.pumpWidget(orderTemplateDetailPage());
+        await tester.pump();
+
+        final addToCartButton = find.byKey(const Key('onAddToCartPressed'));
+        expect(addToCartButton, findsNothing);
+      },
+    );
+
+    testWidgets(
+      'Test Order Template Disable create order Add To Cart Button Hidden - Return Approver',
+      (tester) async {
+        final fakeUser = User.empty().copyWith(
+          username: Username('fakeUser'),
+          role: Role(
+            type: RoleType('return_approver'),
+            description: '',
+            id: '',
+            name: '',
+          ),
+        );
+
+        when(
+          () => userBlocMock.state,
+        ).thenReturn(
+          UserState.initial().copyWith(
+            user: fakeUser,
+          ),
+        );
+
+        await tester.pumpWidget(orderTemplateDetailPage());
+        await tester.pump();
+
+        final addToCartButton = find.byKey(const Key('onAddToCartPressed'));
+        expect(addToCartButton, findsNothing);
+      },
+    );
+
+    testWidgets(
+      'Test Order Template Disable create order Add To Cart Button Hidden - disableCreateOrder true',
+      (tester) async {
+        final fakeUser = User.empty().copyWith(
+          username: Username('fakeUser'),
+          disableCreateOrder: true,
+          role: Role(
+            type: RoleType('fakeRole'),
+            description: '',
+            id: '',
+            name: '',
+          ),
+        );
+
+        when(
+          () => userBlocMock.state,
+        ).thenReturn(
+          UserState.initial().copyWith(
+            user: fakeUser,
+          ),
+        );
+
+        await tester.pumpWidget(orderTemplateDetailPage());
+        await tester.pump();
+
+        final addToCartButton = find.byKey(const Key('onAddToCartPressed'));
+        expect(addToCartButton, findsNothing);
+      },
+    );
+
+    testWidgets(
+      'Test Order Template Disable create order Add To Cart Button Hidden - disableCreateOrder false',
+      (tester) async {
+        final fakeUser = User.empty().copyWith(
+          username: Username('fakeUser'),
+          disableCreateOrder: false,
+          role: Role(
+            type: RoleType('fakeRole'),
+            description: '',
+            id: '',
+            name: '',
+          ),
+        );
+
+        when(
+          () => userBlocMock.state,
+        ).thenReturn(
+          UserState.initial().copyWith(
+            user: fakeUser,
+          ),
+        );
+
+        await tester.pumpWidget(orderTemplateDetailPage());
+        await tester.pump();
+
+        final addToCartButton = find.byKey(const Key('onAddToCartPressed'));
+        expect(addToCartButton, findsOneWidget);
+      },
+    );
   });
 }

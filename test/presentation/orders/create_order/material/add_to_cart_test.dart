@@ -5,14 +5,18 @@ import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
@@ -24,8 +28,8 @@ import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/locator.dart';
-import 'package:ezrxmobile/presentation/orders/create_order/cart_item_bonus_detail_widget.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/add_to_cart.dart';
+import 'package:ezrxmobile/presentation/orders/create_order/cart_item_bonus_detail_widget.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -66,6 +70,8 @@ class FavoriteMockBloc extends MockBloc<FavouriteEvent, FavouriteState>
 class AuthBlocBlocMock extends MockBloc<AuthEvent, AuthState>
     implements AuthBloc {}
 
+class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late SalesOrgBloc salesOrgBlocMock;
@@ -78,6 +84,7 @@ void main() {
   late TenderContractBloc tenderContractBlocMock;
   late FavouriteBloc favouriteMockBloc;
   late AuthBlocBlocMock authBlocBlocMock;
+  late UserBlocMock userBlocMock;
 
   final materialInfo = MaterialInfo.empty().copyWith(
     materialNumber: MaterialNumber('000000000023168451'),
@@ -118,6 +125,7 @@ void main() {
       tenderContractBlocMock = TenderContractBlocMock();
       favouriteMockBloc = FavoriteMockBloc();
       authBlocBlocMock = AuthBlocBlocMock();
+      userBlocMock = UserBlocMock();
 
       autoRouterMock = locator<AppRouter>();
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
@@ -132,6 +140,7 @@ void main() {
           .thenReturn(TenderContractState.initial());
       when(() => favouriteMockBloc.state).thenReturn(FavouriteState.initial());
       when(() => authBlocBlocMock.state).thenReturn(const AuthState.initial());
+      when(() => userBlocMock.state).thenReturn(UserState.initial());
     });
 
     Widget getScopedWidget(Widget child) {
@@ -162,6 +171,7 @@ void main() {
                 create: (context) => tenderContractBlocMock),
             BlocProvider<FavouriteBloc>(create: (context) => favouriteMockBloc),
             BlocProvider<AuthBloc>(create: (context) => authBlocBlocMock),
+            BlocProvider<UserBloc>(create: (context) => userBlocMock),
           ],
           child: child,
         ),
@@ -475,20 +485,19 @@ void main() {
 
     testWidgets('Add to Cart select tender contract fail to fetch',
         (tester) async {
-      final newList = 
-          priceAggregate.copyWith(
-            tenderContract: TenderContract.empty().copyWith(
-              contractNumber:
-                  TenderContractNumber.tenderContractItemNumber('0000001234'),
-              tenderOrderReason: TenderContractReason('730'),
-            ),
-          );
-        when(() => cartBlocMock.state).thenReturn(
-          CartState.initial().copyWith(
-            cartItems: [CartItem.material(newList)],
-            isFetching: false,
-          ),
-        );
+      final newList = priceAggregate.copyWith(
+        tenderContract: TenderContract.empty().copyWith(
+          contractNumber:
+              TenderContractNumber.tenderContractItemNumber('0000001234'),
+          tenderOrderReason: TenderContractReason('730'),
+        ),
+      );
+      when(() => cartBlocMock.state).thenReturn(
+        CartState.initial().copyWith(
+          cartItems: [CartItem.material(newList)],
+          isFetching: false,
+        ),
+      );
       when(() => addToCartBlocMock.state).thenReturn(
         AddToCartState.initial().copyWith(
           cartItem: priceAggregate.copyWith(
@@ -506,12 +515,10 @@ void main() {
         selectedTenderContract: TenderContract.empty().copyWith(
             contractNumber:
                 TenderContractNumber.tenderContractItemNumber('0000123'),
-            tenderOrderReason: TenderContractReason('750')
-        ),
+            tenderOrderReason: TenderContractReason('750')),
         apiFailureOrSuccessOption:
             optionOf(const Left(ApiFailure.other('authentication failed'))),
         isFetching: true,
-        
       ));
       whenListen(
           tenderContractBlocMock,
@@ -602,5 +609,192 @@ void main() {
       await tester.tap(tenderContractItem);
       await tester.pump();
     });
+
+    testWidgets(
+      'Test Disable create order - Return Admin - Add To Cart Button Hidden',
+      (tester) async {
+        when(
+          () => addToCartBlocMock.state,
+        ).thenReturn(
+          AddToCartState.initial(),
+        );
+
+        final fakeUser = User.empty().copyWith(
+          username: Username('fakeUser'),
+          role: Role(
+            type: RoleType('return_admin'),
+            description: '',
+            id: '',
+            name: '',
+          ),
+        );
+
+        when(
+          () => userBlocMock.state,
+        ).thenReturn(
+          UserState.initial().copyWith(
+            user: fakeUser,
+          ),
+        );
+
+        await tester.pumpWidget(
+          getScopedWidget(const AddToCart(isCovid19Tab: false)),
+        );
+        await tester.pump();
+
+        final addToCartButton = find.text('Add to Cart');
+        expect(addToCartButton, findsNothing);
+      },
+    );
+
+    testWidgets(
+      'Test Disable create order - Return Requestor - Add To Cart Button Hidden',
+      (tester) async {
+        when(
+          () => addToCartBlocMock.state,
+        ).thenReturn(
+          AddToCartState.initial(),
+        );
+
+        final fakeUser = User.empty().copyWith(
+          username: Username('fakeUser'),
+          role: Role(
+            type: RoleType('return_requestor'),
+            description: '',
+            id: '',
+            name: '',
+          ),
+        );
+
+        when(
+          () => userBlocMock.state,
+        ).thenReturn(
+          UserState.initial().copyWith(
+            user: fakeUser,
+          ),
+        );
+
+        await tester.pumpWidget(
+          getScopedWidget(const AddToCart(isCovid19Tab: false)),
+        );
+        await tester.pump();
+
+        final addToCartButton = find.text('Add to Cart');
+        expect(addToCartButton, findsNothing);
+      },
+    );
+
+    testWidgets(
+      'Test Disable create order - Return Approver - Add To Cart Button Hidden',
+      (tester) async {
+        when(
+          () => addToCartBlocMock.state,
+        ).thenReturn(
+          AddToCartState.initial(),
+        );
+
+        final fakeUser = User.empty().copyWith(
+          username: Username('fakeUser'),
+          role: Role(
+            type: RoleType('return_approver'),
+            description: '',
+            id: '',
+            name: '',
+          ),
+        );
+
+        when(
+          () => userBlocMock.state,
+        ).thenReturn(
+          UserState.initial().copyWith(
+            user: fakeUser,
+          ),
+        );
+
+        await tester.pumpWidget(
+          getScopedWidget(const AddToCart(isCovid19Tab: false)),
+        );
+        await tester.pump();
+
+        final addToCartButton = find.text('Add to Cart');
+        expect(addToCartButton, findsNothing);
+      },
+    );
+
+    testWidgets(
+      'Test Disable create order - disableCreateOrder true - Add To Cart Button Hidden',
+      (tester) async {
+        when(
+          () => addToCartBlocMock.state,
+        ).thenReturn(
+          AddToCartState.initial(),
+        );
+
+        final fakeUser = User.empty().copyWith(
+          username: Username('fakeUser'),
+          disableCreateOrder: true,
+          role: Role(
+            type: RoleType('fakeRole'),
+            description: '',
+            id: '',
+            name: '',
+          ),
+        );
+
+        when(
+          () => userBlocMock.state,
+        ).thenReturn(
+          UserState.initial().copyWith(
+            user: fakeUser,
+          ),
+        );
+
+        await tester.pumpWidget(
+          getScopedWidget(const AddToCart(isCovid19Tab: false)),
+        );
+        await tester.pump();
+
+        final addToCartButton = find.text('Add to Cart');
+        expect(addToCartButton, findsNothing);
+      },
+    );
+
+    testWidgets(
+      'Test Disable create order - disableCreateOrder false - Add To Cart Button Hidden',
+      (tester) async {
+        when(
+          () => addToCartBlocMock.state,
+        ).thenReturn(
+          AddToCartState.initial(),
+        );
+
+        final fakeUser = User.empty().copyWith(
+          username: Username('fakeUser'),
+          disableCreateOrder: false,
+          role: Role(
+            type: RoleType('fakeRole'),
+            description: '',
+            id: '',
+            name: '',
+          ),
+        );
+
+        when(
+          () => userBlocMock.state,
+        ).thenReturn(
+          UserState.initial().copyWith(
+            user: fakeUser,
+          ),
+        );
+
+        await tester.pumpWidget(
+          getScopedWidget(const AddToCart(isCovid19Tab: false)),
+        );
+        await tester.pump();
+
+        final addToCartButton = find.text('Add to Cart');
+        expect(addToCartButton, findsOneWidget);
+      },
+    );
   });
 }

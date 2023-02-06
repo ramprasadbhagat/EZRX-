@@ -217,12 +217,14 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
         ),
         BlocListener<EligibilityBloc, EligibilityState>(
           listenWhen: (previous, current) =>
-              previous.isCovidMaterialEnable != current.isCovidMaterialEnable ||
-              previous.isBundleMaterialEnable !=
-                  current.isBundleMaterialEnable ||
-              previous.isOrderTypeEnable != current.isOrderTypeEnable ||
-              previous.customerCodeInfo != current.customerCodeInfo ||
-              previous.shipToInfo != current.shipToInfo,
+              context.read<UserBloc>().state.userCanCreateOrder &&
+              (previous.isCovidMaterialEnable !=
+                      current.isCovidMaterialEnable ||
+                  previous.isBundleMaterialEnable !=
+                      current.isBundleMaterialEnable ||
+                  previous.isOrderTypeEnable != current.isOrderTypeEnable ||
+                  previous.customerCodeInfo != current.customerCodeInfo ||
+                  previous.shipToInfo != current.shipToInfo),
           listener: (context, state) {
             if (state.isCovidMaterialEnable) {
               context.read<CovidMaterialListBloc>().add(
@@ -337,6 +339,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
         BlocListener<OrderDocumentTypeBloc, OrderDocumentTypeState>(
           listenWhen: (previous, current) =>
               context.read<UserBloc>().state.isNotEmpty &&
+              context.read<UserBloc>().state.userCanCreateOrder &&
               previous.selectedOrderType != current.selectedOrderType &&
               current.selectedOrderType != OrderDocumentType.empty(),
           listener: (context, state) {

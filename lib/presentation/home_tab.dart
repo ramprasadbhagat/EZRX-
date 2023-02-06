@@ -113,65 +113,63 @@ class HomeNavigationTabbar extends StatelessWidget {
 }
 
 List<RouteItem> _getTabs(BuildContext context) {
-  final isDisableCreateOrder =
-      context.read<UserBloc>().state.user.disableCreateOrder;
-  if (isDisableCreateOrder) {
-    return _routesItems
-        .where((element) => element.label != 'Favourites')
-        .toList();
+  if (!context.read<UserBloc>().state.userCanCreateOrder) {
+    return [
+      homeTabRouteItem,
+      accountTabRouteItem,
+    ];
   }
 
-  return _routesItems;
+  return [
+    homeTabRouteItem,
+    historyTabRouteItem,
+    favouritesTabRouteItem,
+    accountTabRouteItem,
+  ];
 }
 
-final _routesItems = [
-  RouteItem(
-    route: const HomeTabRoute(),
-    icon: const Icon(Icons.home_outlined, key: Key('homeTab')),
-    label: 'Home',
+const RouteItem homeTabRouteItem = RouteItem(
+  route: HomeTabRoute(),
+  icon: Icon(
+    Icons.home_outlined,
+    key: Key('homeTab'),
   ),
+  label: 'Home',
+);
 
-  RouteItem(
-    route: HistoryTabRoute(),
-    icon: const Icon(Icons.fact_check_outlined, key: Key('historyTab')),
-    label: 'History',
+RouteItem historyTabRouteItem = RouteItem(
+  route: HistoryTabRoute(),
+  icon: const Icon(
+    Icons.fact_check_outlined,
+    key: Key('historyTab'),
   ),
-  RouteItem(
-    route: const FavouritesTabRoute(),
-    icon: const Icon(Icons.favorite_border_outlined, key: Key('favoritesTab')),
-    label: 'Favourites',
+  label: 'History',
+);
+
+const RouteItem favouritesTabRouteItem = RouteItem(
+  route: FavouritesTabRoute(),
+  icon: Icon(
+    Icons.favorite_border_outlined,
+    key: Key('favoritesTab'),
   ),
-  // RouteItem(
-  //   route: const ProductsTabRoute(),
-  //   icon: const Icon(Icons.storefront_outlined, key: Key('productsTab')),
-  //   label: 'Products',
-  // ),
-  // RouteItem(
-  //   route: const OrdersTabRoute(),
-  //   icon: const Icon(Icons.shopping_basket_outlined, key: Key('ordersTab')),
-  //   label: 'Orders',
-  // ),
-  // RouteItem(
-  //   route: const NotificationsTabRoute(),
-  //   icon: const Icon(
-  //     Icons.notifications_outlined,
-  //     key: Key('notificationsTabbar'),
-  //   ),
-  //   label: 'Notifications',
-  // ),
-  RouteItem(
-    route: const AccountTabRoute(),
-    icon: const Icon(Icons.person_outline, key: Key('accountTabbar')),
-    label: 'Account',
+  label: 'Favourites',
+);
+
+const RouteItem accountTabRouteItem = RouteItem(
+  route: AccountTabRoute(),
+  icon: Icon(
+    Icons.person_outline,
+    key: Key('accountTabbar'),
   ),
-];
+  label: 'Account',
+);
 
 class RouteItem {
   final PageRouteInfo<dynamic> route;
   final Icon icon;
   final String label;
 
-  RouteItem({
+  const RouteItem({
     required this.route,
     required this.icon,
     required this.label,

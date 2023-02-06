@@ -13,7 +13,11 @@ import 'package:ezrxmobile/application/order/material_bundle_list/material_bundl
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/bundle_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle_info.dart';
@@ -108,6 +112,14 @@ void main() {
     info: mockMaterialInfo,
   );
 
+  final fakeUser = User.empty().copyWith(
+    username: Username('fake-user'),
+    role: Role.empty().copyWith(
+      type: RoleType('client'),
+    ),
+    enableOrderType: true,
+  );
+
   setUpAll(() {
     locator = GetIt.instance;
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
@@ -138,7 +150,11 @@ void main() {
       when(() => authMockBloc.state).thenReturn(const AuthState.initial());
       when(() => materialBundleListMockBloc.state)
           .thenReturn(MaterialBundleListState.initial());
-      when(() => userMockBloc.state).thenReturn(UserState.initial());
+      when(() => userMockBloc.state).thenReturn(
+        UserState.initial().copyWith(
+          user: fakeUser,
+        ),
+      );
       when(() => shipToCodeMockBloc.state)
           .thenReturn(ShipToCodeState.initial());
       when(() => eligibilityMockBloc.state)
@@ -376,5 +392,182 @@ void main() {
     //     expect(quantityTextInput.controller?.value.text, '');
     //   },
     // );
+
+    testWidgets(
+      'Test Bundle Detail Page Disable create order Add To Cart Button Hidden - Return Admin',
+      (tester) async {
+        final fakeUser = User.empty().copyWith(
+          username: Username('fakeUser'),
+          role: Role(
+            type: RoleType('return_admin'),
+            description: '',
+            id: '',
+            name: '',
+          ),
+        );
+
+        when(
+          () => userMockBloc.state,
+        ).thenReturn(
+          UserState.initial().copyWith(
+            user: fakeUser,
+          ),
+        );
+
+        await tester.pumpWidget(
+          getScopedWidget(
+            BundleItemDetailPage(
+              bundleAggregate: mockBundleAggregate,
+            ),
+          ),
+        );
+        await tester.pump();
+
+        final addToCartButton = find.text('Add to Cart');
+        expect(addToCartButton, findsNothing);
+      },
+    );
+
+    testWidgets(
+      'Test Bundle Detail Page Disable create order Add To Cart Button Hidden - Return Requestor',
+      (tester) async {
+        final fakeUser = User.empty().copyWith(
+          username: Username('fakeUser'),
+          role: Role(
+            type: RoleType('return_requestor'),
+            description: '',
+            id: '',
+            name: '',
+          ),
+        );
+
+        when(
+          () => userMockBloc.state,
+        ).thenReturn(
+          UserState.initial().copyWith(
+            user: fakeUser,
+          ),
+        );
+
+        await tester.pumpWidget(
+          getScopedWidget(
+            BundleItemDetailPage(
+              bundleAggregate: mockBundleAggregate,
+            ),
+          ),
+        );
+        await tester.pump();
+
+        final addToCartButton = find.text('Add to Cart');
+        expect(addToCartButton, findsNothing);
+      },
+    );
+
+    testWidgets(
+      'Test Bundle Detail Page Disable create order Add To Cart Button Hidden - Return Approver',
+      (tester) async {
+        final fakeUser = User.empty().copyWith(
+          username: Username('fakeUser'),
+          role: Role(
+            type: RoleType('return_approver'),
+            description: '',
+            id: '',
+            name: '',
+          ),
+        );
+
+        when(
+          () => userMockBloc.state,
+        ).thenReturn(
+          UserState.initial().copyWith(
+            user: fakeUser,
+          ),
+        );
+
+        await tester.pumpWidget(
+          getScopedWidget(
+            BundleItemDetailPage(
+              bundleAggregate: mockBundleAggregate,
+            ),
+          ),
+        );
+        await tester.pump();
+
+        final addToCartButton = find.text('Add to Cart');
+        expect(addToCartButton, findsNothing);
+      },
+    );
+
+    testWidgets(
+      'Test Bundle Detail Page Disable create order Add To Cart Button Hidden - disableCreateOrder true',
+      (tester) async {
+        final fakeUser = User.empty().copyWith(
+          username: Username('fakeUser'),
+          disableCreateOrder: true,
+          role: Role(
+            type: RoleType('fakeRole'),
+            description: '',
+            id: '',
+            name: '',
+          ),
+        );
+
+        when(
+          () => userMockBloc.state,
+        ).thenReturn(
+          UserState.initial().copyWith(
+            user: fakeUser,
+          ),
+        );
+
+        await tester.pumpWidget(
+          getScopedWidget(
+            BundleItemDetailPage(
+              bundleAggregate: mockBundleAggregate,
+            ),
+          ),
+        );
+        await tester.pump();
+
+        final addToCartButton = find.text('Add to Cart');
+        expect(addToCartButton, findsNothing);
+      },
+    );
+
+    testWidgets(
+      'Test Bundle Detail Page Disable create order Add To Cart Button Hidden - disableCreateOrder false',
+      (tester) async {
+        final fakeUser = User.empty().copyWith(
+          username: Username('fakeUser'),
+          disableCreateOrder: false,
+          role: Role(
+            type: RoleType('fakeRole'),
+            description: '',
+            id: '',
+            name: '',
+          ),
+        );
+
+        when(
+          () => userMockBloc.state,
+        ).thenReturn(
+          UserState.initial().copyWith(
+            user: fakeUser,
+          ),
+        );
+
+        await tester.pumpWidget(
+          getScopedWidget(
+            BundleItemDetailPage(
+              bundleAggregate: mockBundleAggregate,
+            ),
+          ),
+        );
+        await tester.pump();
+
+        final addToCartButton = find.text('Add to Cart');
+        expect(addToCartButton, findsOneWidget);
+      },
+    );
   });
 }

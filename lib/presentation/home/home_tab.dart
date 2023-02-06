@@ -37,14 +37,14 @@ class HomeTab extends StatelessWidget {
         ),
       ),
       body: ListView(
-        children: [
-          const EdiUserBanner(),
-          const AccountSuspendedBanner(),
-          const HomeBanner(
+        children: const [
+          EdiUserBanner(),
+          AccountSuspendedBanner(),
+          HomeBanner(
             key: ValueKey('HomeBanner'),
           ),
           OrdersExpansionTile(),
-          const ReturnsExpansionTile(),
+          ReturnsExpansionTile(),
         ],
       ),
     );

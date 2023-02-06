@@ -177,6 +177,10 @@ class RoleType extends ValueObject<String> {
     return value.getOrElse(() => '') == 'return_approver';
   }
 
+  bool get isReturnRole {
+    return isReturnApprover || isReturnAdmin || isReturnRequestor;
+  }
+
   const RoleType._(this.value);
 }
 

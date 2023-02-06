@@ -24,6 +24,7 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/bonus_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
@@ -125,9 +126,8 @@ class TenderContractBlocMock
 
 class FavouriteBlocMock extends MockBloc<FavouriteEvent, FavouriteState>
     implements FavouriteBloc {}
-    
-class PermissionServiceMock extends Mock implements PermissionService {}
 
+class PermissionServiceMock extends Mock implements PermissionService {}
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -157,7 +157,13 @@ void main() {
   late OrderHistory mockOrderHistoryItem;
   late PermissionService permissionService;
 
-
+  final fakeUser = User.empty().copyWith(
+    username: Username('fake-user'),
+    role: Role.empty().copyWith(
+      type: RoleType('client'),
+    ),
+    enableOrderType: true,
+  );
 
   setUpAll(() async {
     orderHistoryDetailsRepository = MockOrderHistoryDetailsRepository();
@@ -198,7 +204,11 @@ void main() {
       addToCartBlocMock = AddToCartBlocMock();
       tenderContractBlocMock = TenderContractBlocMock();
       favouriteBlocMock = FavouriteBlocMock();
-      when(() => userBlocMock.state).thenReturn(UserState.initial());
+      when(() => userBlocMock.state).thenReturn(
+        UserState.initial().copyWith(
+          user: fakeUser,
+        ),
+      );
       when(() => mockOrderHistoryListBloc.state)
           .thenReturn(OrderHistoryListState.initial());
       when(() => mockOrderHistoryFilterBloc.state)
@@ -628,7 +638,7 @@ void main() {
           downloadAttachmentBlocMock,
           Stream.fromIterable([
             PoAttachmentState.initial().copyWith(
-                failureOrSuccessOption: optionOf(
+              failureOrSuccessOption: optionOf(
                 const Left(
                   ApiFailure.other('fake-error'),
                 ),
@@ -1485,11 +1495,13 @@ void main() {
           userBlocMock,
           Stream.fromIterable([
             UserState.initial().copyWith(
-              user: User.empty().copyWith(
+              user: fakeUser.copyWith(
                 disableCreateOrder: true,
               ),
             ),
-            UserState.initial(),
+            UserState.initial().copyWith(
+              user: fakeUser,
+            ),
           ]));
       await tester.pumpWidget(getWUT());
       await tester.pump();
@@ -1501,5 +1513,152 @@ void main() {
       await tester.tap(reOrderButton, warnIfMissed: false);
       await tester.pumpAndSettle(const Duration(milliseconds: 50));
     });
+
+    testWidgets(
+      'Test Order History Detail Disable create order Reorder Button Hidden - Return Admin',
+      (tester) async {
+        final fakeUser = User.empty().copyWith(
+          username: Username('fakeUser'),
+          role: Role(
+            type: RoleType('return_admin'),
+            description: '',
+            id: '',
+            name: '',
+          ),
+        );
+
+        when(
+          () => userBlocMock.state,
+        ).thenReturn(
+          UserState.initial().copyWith(
+            user: fakeUser,
+          ),
+        );
+
+        await tester.pumpWidget(getWUT());
+        await tester.pump();
+
+        final reorderButton = find.text('Reorder');
+        expect(reorderButton, findsNothing);
+      },
+    );
+
+    testWidgets(
+      'Test Order History Detail Disable create order Reorder Button Hidden - Return Requestor',
+      (tester) async {
+        final fakeUser = User.empty().copyWith(
+          username: Username('fakeUser'),
+          role: Role(
+            type: RoleType('return_requestor'),
+            description: '',
+            id: '',
+            name: '',
+          ),
+        );
+
+        when(
+          () => userBlocMock.state,
+        ).thenReturn(
+          UserState.initial().copyWith(
+            user: fakeUser,
+          ),
+        );
+
+        await tester.pumpWidget(getWUT());
+        await tester.pump();
+
+        final reorderButton = find.text('Reorder');
+        expect(reorderButton, findsNothing);
+      },
+    );
+
+    testWidgets(
+      'Test Order History Detail Disable create order Reorder Button Hidden - Return Approver',
+      (tester) async {
+        final fakeUser = User.empty().copyWith(
+          username: Username('fakeUser'),
+          role: Role(
+            type: RoleType('return_approver'),
+            description: '',
+            id: '',
+            name: '',
+          ),
+        );
+
+        when(
+          () => userBlocMock.state,
+        ).thenReturn(
+          UserState.initial().copyWith(
+            user: fakeUser,
+          ),
+        );
+
+        await tester.pumpWidget(getWUT());
+        await tester.pump();
+
+        final reorderButton = find.text('Reorder');
+        expect(reorderButton, findsNothing);
+      },
+    );
+
+    testWidgets(
+      'Test Order History Detail Disable create order Reorder Button Hidden - disableCreateOrder true',
+      (tester) async {
+        final fakeUser = User.empty().copyWith(
+          username: Username('fakeUser'),
+          disableCreateOrder: true,
+          role: Role(
+            type: RoleType('fakeRole'),
+            description: '',
+            id: '',
+            name: '',
+          ),
+        );
+
+        when(
+          () => userBlocMock.state,
+        ).thenReturn(
+          UserState.initial().copyWith(
+            user: fakeUser,
+          ),
+        );
+
+        await tester.pumpWidget(getWUT());
+        await tester.pump();
+
+        final reorderButton = find.text('Reorder');
+        expect(reorderButton, findsNothing);
+      },
+    );
+
+    testWidgets(
+      'Test Order History Detail Disable create order Reorder Button Hidden - disableCreateOrder false',
+      (tester) async {
+        final fakeUser = User.empty().copyWith(
+          username: Username('fakeUser'),
+          disableCreateOrder: false,
+          role: Role(
+            type: RoleType('fakeRole'),
+            description: '',
+            id: '',
+            name: '',
+          ),
+        );
+
+        when(
+          () => userBlocMock.state,
+        ).thenReturn(
+          UserState.initial().copyWith(
+            user: fakeUser,
+          ),
+        );
+
+        await tester.pumpWidget(getWUT());
+        await tester.pump();
+
+        final reorderButton = find.text('Reorder');
+        expect(reorderButton, findsOneWidget);
+      },
+    );
   });
 }

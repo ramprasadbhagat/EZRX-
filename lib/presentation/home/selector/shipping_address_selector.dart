@@ -72,19 +72,23 @@ class ShipCodeSelector extends StatelessWidget {
                     ),
                   );
 
-              context.read<MaterialBundleListBloc>().add(
-                    MaterialBundleListEvent.fetch(
-                      user: context.read<UserBloc>().state.user,
-                      customerCode: context
-                          .read<CustomerCodeBloc>()
-                          .state
-                          .customerCodeInfo,
-                      salesOrganisation:
-                          context.read<SalesOrgBloc>().state.salesOrganisation,
-                      shipToCode:
-                          context.read<ShipToCodeBloc>().state.shipToInfo,
-                    ),
-                  );
+              if (context.read<UserBloc>().state.userCanCreateOrder) {
+                context.read<MaterialBundleListBloc>().add(
+                      MaterialBundleListEvent.fetch(
+                        user: context.read<UserBloc>().state.user,
+                        customerCode: context
+                            .read<CustomerCodeBloc>()
+                            .state
+                            .customerCodeInfo,
+                        salesOrganisation: context
+                            .read<SalesOrgBloc>()
+                            .state
+                            .salesOrganisation,
+                        shipToCode:
+                            context.read<ShipToCodeBloc>().state.shipToInfo,
+                      ),
+                    );
+              }
 
               context.read<SavedOrderListBloc>().add(
                     SavedOrderListEvent.fetch(
@@ -99,20 +103,22 @@ class ShipCodeSelector extends StatelessWidget {
                     ),
                   );
 
-              context.read<OrderHistoryListBloc>().add(
-                    OrderHistoryListEvent.fetch(
-                      salesOrgConfigs:
-                          context.read<SalesOrgBloc>().state.configs,
-                      shipToInfo: state.shipToInfo,
-                      user: context.read<UserBloc>().state.user,
-                      customerCodeInfo: context
-                          .read<CustomerCodeBloc>()
-                          .state
-                          .customerCodeInfo,
-                      orderHistoryFilter: OrderHistoryFilter.empty(),
-                      sortDirection: 'desc',
-                    ),
-                  );
+              if (context.read<UserBloc>().state.userCanCreateOrder) {
+                context.read<OrderHistoryListBloc>().add(
+                      OrderHistoryListEvent.fetch(
+                        salesOrgConfigs:
+                            context.read<SalesOrgBloc>().state.configs,
+                        shipToInfo: state.shipToInfo,
+                        user: context.read<UserBloc>().state.user,
+                        customerCodeInfo: context
+                            .read<CustomerCodeBloc>()
+                            .state
+                            .customerCodeInfo,
+                        orderHistoryFilter: OrderHistoryFilter.empty(),
+                        sortDirection: 'desc',
+                      ),
+                    );
+              }
 
               context.read<OrderTemplateListBloc>().add(
                     OrderTemplateListEvent.fetch(

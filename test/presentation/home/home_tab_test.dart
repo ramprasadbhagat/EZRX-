@@ -34,6 +34,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../utils/widget_utils.dart';
+import 'selectors/shipping_address_selector_test.dart';
 
 class MaterialListBlocMock
     extends MockBloc<MaterialListEvent, MaterialListState>
@@ -187,7 +188,11 @@ void main() {
         when(() => shipToCodeBlocMock.state)
             .thenReturn(ShipToCodeState.initial());
         when(() => authBlocMock.state).thenReturn(const AuthState.initial());
-        when(() => userBlocMock.state).thenReturn(UserState.initial());
+        when(() => userBlocMock.state).thenReturn(
+          UserState.initial().copyWith(
+            user: fakeUser,
+          ),
+        );
         when(() => approverBlocMock.state).thenReturn(ApproverState.initial());
       });
 
@@ -345,6 +350,24 @@ void main() {
 
         await getWidget(tester);
       });
+
+      testWidgets(
+        'Home Screen userCanCreateOrder test - History Disabled',
+        (WidgetTester tester) async {
+          when(() => userBlocMock.state).thenReturn(
+            UserState.initial().copyWith(
+              user: fakeUser.copyWith(
+                disableCreateOrder: true,
+              ),
+            ),
+          );
+
+          await getWidget(tester);
+
+          final historyTab = find.byKey(const Key('historyTab'));
+          expect(historyTab, findsNothing);
+        },
+      );
     });
   });
 }

@@ -1,18 +1,17 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
+import 'package:ezrxmobile/presentation/core/snackbar.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
-import 'package:ezrxmobile/presentation/core/snackbar.dart';
-
-import 'package:ezrxmobile/presentation/theme/colors.dart';
 
 class AddToCartButton extends StatelessWidget {
   final bool isAddToCartAllowed;
@@ -61,6 +60,9 @@ class AddToCartButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userCanCreateOrder =
+        context.read<UserBloc>().state.userCanCreateOrder;
+
     return BlocBuilder<TenderContractBloc, TenderContractState>(
       buildWhen: (previous, current) =>
           previous.selectedTenderContract != current.selectedTenderContract,
@@ -76,21 +78,22 @@ class AddToCartButton extends StatelessWidget {
                       color: ZPColors.red,
                     ),
                   ),
-            ElevatedButton(
-              style: isAddToCartAllowed &&
-                      isSelectedTenderContractValid(context) &&
-                      isValidQuantitySelected(context)
-                  ? null
-                  : ElevatedButton.styleFrom(
-                      backgroundColor: ZPColors.lightGray,
-                    ),
-              onPressed: () => isAddToCartAllowed &&
-                      isSelectedTenderContractValid(context) &&
-                      isValidQuantitySelected(context)
-                  ? _addToCart(context, cartItem)
-                  : null,
-              child: const Text('Add to Cart').tr(),
-            ),
+            if (userCanCreateOrder)
+              ElevatedButton(
+                style: isAddToCartAllowed &&
+                        isSelectedTenderContractValid(context) &&
+                        isValidQuantitySelected(context)
+                    ? null
+                    : ElevatedButton.styleFrom(
+                        backgroundColor: ZPColors.lightGray,
+                      ),
+                onPressed: () => isAddToCartAllowed &&
+                        isSelectedTenderContractValid(context) &&
+                        isValidQuantitySelected(context)
+                    ? _addToCart(context, cartItem)
+                    : null,
+                child: const Text('Add to Cart').tr(),
+              ),
           ],
         );
       },

@@ -1,7 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OrderActionButton extends StatelessWidget {
   final VoidCallback onAddToCartPressed;
@@ -22,19 +24,23 @@ class OrderActionButton extends StatelessWidget {
       return const _ActionButtonShimmer();
     }
 
+    final userCanCreateOrder =
+        context.read<UserBloc>().state.userCanCreateOrder;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        ElevatedButton(
-          key: const Key('onAddToCartPressed'),
-          onPressed: enableAddToCart ? onAddToCartPressed : () {},
-          style: enableAddToCart
-              ? null
-              : ElevatedButton.styleFrom(
-                  backgroundColor: ZPColors.darkGray,
-                ),
-          child: const Text('Add to Cart').tr(),
-        ),
+        if (userCanCreateOrder)
+          ElevatedButton(
+            key: const Key('onAddToCartPressed'),
+            onPressed: enableAddToCart ? onAddToCartPressed : () {},
+            style: enableAddToCart
+                ? null
+                : ElevatedButton.styleFrom(
+                    backgroundColor: ZPColors.darkGray,
+                  ),
+            child: const Text('Add to Cart').tr(),
+          ),
         ElevatedButton(
           key: const Key('onDeletePressed'),
           onPressed: onDeletePressed,

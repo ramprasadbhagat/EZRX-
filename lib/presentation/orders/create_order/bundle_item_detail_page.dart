@@ -4,6 +4,7 @@ import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
@@ -33,6 +34,8 @@ class BundleItemDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final quantityControllerList = <String, TextEditingController>{};
+    final userCanCreateOrder =
+        context.read<UserBloc>().state.userCanCreateOrder;
 
     return Scaffold(
       key: const Key('BundleItemDetailPage'),
@@ -114,38 +117,39 @@ class BundleItemDetailPage extends StatelessWidget {
                 },
               ),
             ),
-            Center(
-              child: BlocBuilder<MaterialPriceDetailBloc,
-                  MaterialPriceDetailState>(
-                buildWhen: (previous, current) =>
-                    previous.isValidating != current.isValidating ||
-                    previous.isFetching != current.isFetching,
-                builder: (context, state) {
-                  if (state.isValidating || state.isFetching) {
-                    return LoadingShimmer.withChild(
-                      child: ElevatedButton(
-                        key: const Key('buttonLoading'),
-                        onPressed: () {},
-                        child: const SizedBox(),
-                      ),
-                    );
-                  }
-
-                  return ElevatedButton(
-                    onPressed: () {
-                      locator<CountlyService>()
-                          .addCountlyEvent('Add bundles to cart');
-                      _addToCartPressed(
-                        context,
-                        bundleAggregate.bundle,
-                        quantityControllerList,
+            if (userCanCreateOrder)
+              Center(
+                child: BlocBuilder<MaterialPriceDetailBloc,
+                    MaterialPriceDetailState>(
+                  buildWhen: (previous, current) =>
+                      previous.isValidating != current.isValidating ||
+                      previous.isFetching != current.isFetching,
+                  builder: (context, state) {
+                    if (state.isValidating || state.isFetching) {
+                      return LoadingShimmer.withChild(
+                        child: ElevatedButton(
+                          key: const Key('buttonLoading'),
+                          onPressed: () {},
+                          child: const SizedBox(),
+                        ),
                       );
-                    },
-                    child: const Text('Add to Cart').tr(),
-                  );
-                },
+                    }
+
+                    return ElevatedButton(
+                      onPressed: () {
+                        locator<CountlyService>()
+                            .addCountlyEvent('Add bundles to cart');
+                        _addToCartPressed(
+                          context,
+                          bundleAggregate.bundle,
+                          quantityControllerList,
+                        );
+                      },
+                      child: const Text('Add to Cart').tr(),
+                    );
+                  },
+                ),
               ),
-            ),
           ],
         ),
       ),

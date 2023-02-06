@@ -7,7 +7,10 @@ import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.da
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
+import 'package:ezrxmobile/application/order/order_history_details/order_history_details_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/core/aggregate/bonus_aggregate.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
@@ -15,33 +18,30 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/material_price_detail.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_basic_info.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
+import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
+import 'package:ezrxmobile/presentation/core/custom_expansion_tile.dart'
+    as custom;
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/po_attachment.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/core/text_button_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/widget_helper.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ezrxmobile/application/order/order_history_details/order_history_details_bloc.dart';
-import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_basic_info.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
-import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
-import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
-import 'package:ezrxmobile/presentation/orders/core/order_ship_to_info.dart';
-import 'package:ezrxmobile/presentation/orders/core/order_sold_to_info.dart';
-import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:ezrxmobile/presentation/history/widgets/history_details_order_summary_order_bonus_card.dart';
 import 'package:ezrxmobile/presentation/history/widgets/history_details_order_summary_order_item_card.dart';
 import 'package:ezrxmobile/presentation/history/widgets/history_details_order_summary_order_tender_contract_card.dart';
-import 'package:ezrxmobile/presentation/core/custom_expansion_tile.dart'
-    as custom;
+import 'package:ezrxmobile/presentation/orders/core/order_ship_to_info.dart';
+import 'package:ezrxmobile/presentation/orders/core/order_sold_to_info.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HistoryDetails extends StatelessWidget {
   final OrderHistoryItem orderHistoryItem;
@@ -762,6 +762,10 @@ class _ReOrder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (!context.read<UserBloc>().state.userCanCreateOrder) {
+      return const SizedBox.shrink();
+    }
+
     return BlocConsumer<TenderContractBloc, TenderContractState>(
       listenWhen: (previous, current) =>
           previous.selectedTenderContract != current.selectedTenderContract &&

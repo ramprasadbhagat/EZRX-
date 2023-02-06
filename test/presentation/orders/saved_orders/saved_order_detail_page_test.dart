@@ -8,12 +8,16 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
 import 'package:ezrxmobile/domain/order/entities/material_price_detail.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
-import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_local.dart';
@@ -82,6 +86,14 @@ void main() {
   late AppRouter autoRouterMock;
   late SavedOrderListBlocMock savedOrderListBlocMock;
   final locator = GetIt.instance;
+  final fakeUser = User.empty().copyWith(
+    username: Username('fake-user'),
+    role: Role.empty().copyWith(
+      type: RoleType('client'),
+    ),
+    enableOrderType: true,
+  );
+
   setUpAll(() async {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
     locator.registerLazySingleton(() => AppRouter());
@@ -104,7 +116,11 @@ void main() {
     eligibilityBlocMock = MockEligibilityBloc();
     savedOrderListBlocMock = SavedOrderListBlocMock();
 
-    when(() => userBlocMock.state).thenReturn(UserState.initial());
+    when(() => userBlocMock.state).thenReturn(
+      UserState.initial().copyWith(
+        user: fakeUser,
+      ),
+    );
     when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
     when(() => customerCodeBlocMock.state)
         .thenReturn(CustomerCodeState.initial());
@@ -339,7 +355,7 @@ void main() {
                     )
                     .toList()),
           ),
-        ).called(1);
+        ).called(2);
       },
     );
 
@@ -430,7 +446,7 @@ void main() {
         verify(() => SavedOrderListEvent.delete(
               order: orderMock,
               user: userBlocMock.state.user,
-            )).called(1);
+            )).called(2);
         // expect(autoRouterMock.current.name, const CartPageRoute().routeName);
       },
     );

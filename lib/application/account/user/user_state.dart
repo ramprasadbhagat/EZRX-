@@ -25,4 +25,6 @@ class UserState with _$UserState {
   bool get emailNotifications => user.settings.emailNotifications;
   List<SalesOrganisation> get userSalesOrganisations =>
       user.userSalesOrganisations;
+  bool get userCanCreateOrder =>
+      isNotEmpty && !(user.disableCreateOrder || user.role.type.isReturnRole);
 }
