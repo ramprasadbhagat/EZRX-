@@ -19,6 +19,7 @@ import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.d
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_summary/return_summary_bloc.dart';
+import 'package:ezrxmobile/application/returns/request_return_filter/request_return_filter_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/common/file_picker.dart';
 import 'package:ezrxmobile/infrastructure/core/common/permission.dart';
 import 'package:ezrxmobile/application/returns/request_return/request_return_bloc.dart';
@@ -1428,6 +1429,10 @@ void setupLocator() {
     ),
   );
 
+  locator.registerFactory(
+    () => RequestReturnFilterBloc(),
+  );
+
   //============================================================
   //  Cart
   //
@@ -1612,14 +1617,15 @@ void setupLocator() {
     ),
   );
 
-    //============================================================
+  //============================================================
   //  Return Summary
   //
   //============================================================
 
   locator.registerLazySingleton(
     () => ReturnSummaryBloc(
-        returnSummaryRepository: locator<ReturnSummaryRepository>(),),
+      returnSummaryRepository: locator<ReturnSummaryRepository>(),
+    ),
   );
   locator.registerLazySingleton(
     () => ReturnSummaryLocalDataSource(),
@@ -1640,5 +1646,6 @@ void setupLocator() {
       config: locator<Config>(),
       returnSummaryLocalDataSource: locator<ReturnSummaryLocalDataSource>(),
       returnSummaryRemoteDataSource: locator<ReturnSummaryRemoteDataSource>(),
-    ),);
+    ),
+  );
 }

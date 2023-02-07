@@ -7,6 +7,7 @@ class RequestReturnState with _$RequestReturnState {
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
     required bool isLoading,
     required bool canLoadMore,
+    required String sortDirection,
   }) = _RequestReturnState;
 
   factory RequestReturnState.initial() => RequestReturnState(
@@ -14,5 +15,6 @@ class RequestReturnState with _$RequestReturnState {
         isLoading: false,
         canLoadMore: true,
         returnItemList: <ReturnItem>[],
+        sortDirection: 'desc',
       );
 }

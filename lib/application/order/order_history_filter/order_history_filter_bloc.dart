@@ -64,7 +64,7 @@ class OrderHistoryFilterBloc
       orderIdChanged: (e) => emit(
         state.copyWith(
           orderHistoryFilterList: state.orderHistoryFilterList.copyWith(
-            orderId: SearchKey.orderHistoryFilter(e.orderId),
+            orderId: SearchKey.searchFilter(e.orderId),
           ),
           isSubmitting: false,
           showErrorMessages: false,
@@ -74,7 +74,7 @@ class OrderHistoryFilterBloc
       poNumberChanged: (e) => emit(
         state.copyWith(
           orderHistoryFilterList: state.orderHistoryFilterList.copyWith(
-            poNumber: SearchKey.orderHistoryFilter(e.poNumber),
+            poNumber: SearchKey.searchFilter(e.poNumber),
           ),
           isSubmitting: false,
           showErrorMessages: false,
@@ -84,7 +84,7 @@ class OrderHistoryFilterBloc
       principalSearchChanged: (e) => emit(
         state.copyWith(
           orderHistoryFilterList: state.orderHistoryFilterList.copyWith(
-            principalSearch: SearchKey.orderHistoryFilter(e.principalSearch),
+            principalSearch: SearchKey.searchFilter(e.principalSearch),
           ),
           isSubmitting: false,
           showErrorMessages: false,
@@ -94,7 +94,7 @@ class OrderHistoryFilterBloc
       materialSearchChanged: (e) => emit(
         state.copyWith(
           orderHistoryFilterList: state.orderHistoryFilterList.copyWith(
-            materialSearch: SearchKey.orderHistoryFilter(e.materialSearch),
+            materialSearch: SearchKey.searchFilter(e.materialSearch),
           ),
           isSubmitting: false,
           showErrorMessages: false,

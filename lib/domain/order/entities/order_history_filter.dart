@@ -16,11 +16,11 @@ class OrderHistoryFilter with _$OrderHistoryFilter {
   }) = _OrderHistoryFilter;
 
   factory OrderHistoryFilter.empty() => OrderHistoryFilter(
-        orderId: SearchKey.orderHistoryFilter(''),
-        poNumber: SearchKey.orderHistoryFilter(''),
-        materialSearch: SearchKey.orderHistoryFilter(''),
-        principalSearch: SearchKey.orderHistoryFilter(''),
-        fromDate:DateTime.now().subtract(const Duration(days: 7)),
+        orderId: SearchKey.searchFilter(''),
+        poNumber: SearchKey.searchFilter(''),
+        materialSearch: SearchKey.searchFilter(''),
+        principalSearch: SearchKey.searchFilter(''),
+        fromDate: DateTime.now().subtract(const Duration(days: 7)),
         toDate: DateTime.now(),
       );
 }

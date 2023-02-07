@@ -19,34 +19,55 @@ mixin _$RequestReturnEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(SalesOrganisation salesOrg, ShipToInfo shipInfo,
-            CustomerCodeInfo customerCodeInfo)
+    required TResult Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)
         fetch,
-    required TResult Function(SalesOrganisation salesOrg, ShipToInfo shipInfo,
-            CustomerCodeInfo customerCodeInfo)
+    required TResult Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)
         loadMore,
+    required TResult Function(String sortDirection) sortByDate,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(SalesOrganisation salesOrg, ShipToInfo shipInfo,
-            CustomerCodeInfo customerCodeInfo)?
+    TResult? Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)?
         fetch,
-    TResult? Function(SalesOrganisation salesOrg, ShipToInfo shipInfo,
-            CustomerCodeInfo customerCodeInfo)?
+    TResult? Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)?
         loadMore,
+    TResult? Function(String sortDirection)? sortByDate,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(SalesOrganisation salesOrg, ShipToInfo shipInfo,
-            CustomerCodeInfo customerCodeInfo)?
+    TResult Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)?
         fetch,
-    TResult Function(SalesOrganisation salesOrg, ShipToInfo shipInfo,
-            CustomerCodeInfo customerCodeInfo)?
+    TResult Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)?
         loadMore,
+    TResult Function(String sortDirection)? sortByDate,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -55,6 +76,7 @@ mixin _$RequestReturnEvent {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_SortByDate value) sortByDate,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -62,6 +84,7 @@ mixin _$RequestReturnEvent {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_SortByDate value)? sortByDate,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -69,6 +92,7 @@ mixin _$RequestReturnEvent {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_SortByDate value)? sortByDate,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -131,12 +155,19 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(SalesOrganisation salesOrg, ShipToInfo shipInfo,
-            CustomerCodeInfo customerCodeInfo)
+    required TResult Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)
         fetch,
-    required TResult Function(SalesOrganisation salesOrg, ShipToInfo shipInfo,
-            CustomerCodeInfo customerCodeInfo)
+    required TResult Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)
         loadMore,
+    required TResult Function(String sortDirection) sortByDate,
   }) {
     return initialized();
   }
@@ -145,12 +176,19 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(SalesOrganisation salesOrg, ShipToInfo shipInfo,
-            CustomerCodeInfo customerCodeInfo)?
+    TResult? Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)?
         fetch,
-    TResult? Function(SalesOrganisation salesOrg, ShipToInfo shipInfo,
-            CustomerCodeInfo customerCodeInfo)?
+    TResult? Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)?
         loadMore,
+    TResult? Function(String sortDirection)? sortByDate,
   }) {
     return initialized?.call();
   }
@@ -159,12 +197,19 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(SalesOrganisation salesOrg, ShipToInfo shipInfo,
-            CustomerCodeInfo customerCodeInfo)?
+    TResult Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)?
         fetch,
-    TResult Function(SalesOrganisation salesOrg, ShipToInfo shipInfo,
-            CustomerCodeInfo customerCodeInfo)?
+    TResult Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)?
         loadMore,
+    TResult Function(String sortDirection)? sortByDate,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -179,6 +224,7 @@ class _$_Initialized implements _Initialized {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_SortByDate value) sortByDate,
   }) {
     return initialized(this);
   }
@@ -189,6 +235,7 @@ class _$_Initialized implements _Initialized {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_SortByDate value)? sortByDate,
   }) {
     return initialized?.call(this);
   }
@@ -199,6 +246,7 @@ class _$_Initialized implements _Initialized {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_SortByDate value)? sortByDate,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -220,11 +268,13 @@ abstract class _$$_FetchCopyWith<$Res> {
   $Res call(
       {SalesOrganisation salesOrg,
       ShipToInfo shipInfo,
-      CustomerCodeInfo customerCodeInfo});
+      CustomerCodeInfo customerCodeInfo,
+      RequestReturnFilter requestReturnFilter});
 
   $SalesOrganisationCopyWith<$Res> get salesOrg;
   $ShipToInfoCopyWith<$Res> get shipInfo;
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
+  $RequestReturnFilterCopyWith<$Res> get requestReturnFilter;
 }
 
 /// @nodoc
@@ -240,6 +290,7 @@ class __$$_FetchCopyWithImpl<$Res>
     Object? salesOrg = null,
     Object? shipInfo = null,
     Object? customerCodeInfo = null,
+    Object? requestReturnFilter = null,
   }) {
     return _then(_$_Fetch(
       salesOrg: null == salesOrg
@@ -254,6 +305,10 @@ class __$$_FetchCopyWithImpl<$Res>
           ? _value.customerCodeInfo
           : customerCodeInfo // ignore: cast_nullable_to_non_nullable
               as CustomerCodeInfo,
+      requestReturnFilter: null == requestReturnFilter
+          ? _value.requestReturnFilter
+          : requestReturnFilter // ignore: cast_nullable_to_non_nullable
+              as RequestReturnFilter,
     ));
   }
 
@@ -280,6 +335,15 @@ class __$$_FetchCopyWithImpl<$Res>
       return _then(_value.copyWith(customerCodeInfo: value));
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $RequestReturnFilterCopyWith<$Res> get requestReturnFilter {
+    return $RequestReturnFilterCopyWith<$Res>(_value.requestReturnFilter,
+        (value) {
+      return _then(_value.copyWith(requestReturnFilter: value));
+    });
+  }
 }
 
 /// @nodoc
@@ -288,7 +352,8 @@ class _$_Fetch implements _Fetch {
   const _$_Fetch(
       {required this.salesOrg,
       required this.shipInfo,
-      required this.customerCodeInfo});
+      required this.customerCodeInfo,
+      required this.requestReturnFilter});
 
   @override
   final SalesOrganisation salesOrg;
@@ -296,10 +361,12 @@ class _$_Fetch implements _Fetch {
   final ShipToInfo shipInfo;
   @override
   final CustomerCodeInfo customerCodeInfo;
+  @override
+  final RequestReturnFilter requestReturnFilter;
 
   @override
   String toString() {
-    return 'RequestReturnEvent.fetch(salesOrg: $salesOrg, shipInfo: $shipInfo, customerCodeInfo: $customerCodeInfo)';
+    return 'RequestReturnEvent.fetch(salesOrg: $salesOrg, shipInfo: $shipInfo, customerCodeInfo: $customerCodeInfo, requestReturnFilter: $requestReturnFilter)';
   }
 
   @override
@@ -312,12 +379,14 @@ class _$_Fetch implements _Fetch {
             (identical(other.shipInfo, shipInfo) ||
                 other.shipInfo == shipInfo) &&
             (identical(other.customerCodeInfo, customerCodeInfo) ||
-                other.customerCodeInfo == customerCodeInfo));
+                other.customerCodeInfo == customerCodeInfo) &&
+            (identical(other.requestReturnFilter, requestReturnFilter) ||
+                other.requestReturnFilter == requestReturnFilter));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, salesOrg, shipInfo, customerCodeInfo);
+  int get hashCode => Object.hash(
+      runtimeType, salesOrg, shipInfo, customerCodeInfo, requestReturnFilter);
 
   @JsonKey(ignore: true)
   @override
@@ -329,44 +398,66 @@ class _$_Fetch implements _Fetch {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(SalesOrganisation salesOrg, ShipToInfo shipInfo,
-            CustomerCodeInfo customerCodeInfo)
+    required TResult Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)
         fetch,
-    required TResult Function(SalesOrganisation salesOrg, ShipToInfo shipInfo,
-            CustomerCodeInfo customerCodeInfo)
+    required TResult Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)
         loadMore,
+    required TResult Function(String sortDirection) sortByDate,
   }) {
-    return fetch(salesOrg, shipInfo, customerCodeInfo);
+    return fetch(salesOrg, shipInfo, customerCodeInfo, requestReturnFilter);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(SalesOrganisation salesOrg, ShipToInfo shipInfo,
-            CustomerCodeInfo customerCodeInfo)?
+    TResult? Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)?
         fetch,
-    TResult? Function(SalesOrganisation salesOrg, ShipToInfo shipInfo,
-            CustomerCodeInfo customerCodeInfo)?
+    TResult? Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)?
         loadMore,
+    TResult? Function(String sortDirection)? sortByDate,
   }) {
-    return fetch?.call(salesOrg, shipInfo, customerCodeInfo);
+    return fetch?.call(
+        salesOrg, shipInfo, customerCodeInfo, requestReturnFilter);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(SalesOrganisation salesOrg, ShipToInfo shipInfo,
-            CustomerCodeInfo customerCodeInfo)?
+    TResult Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)?
         fetch,
-    TResult Function(SalesOrganisation salesOrg, ShipToInfo shipInfo,
-            CustomerCodeInfo customerCodeInfo)?
+    TResult Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)?
         loadMore,
+    TResult Function(String sortDirection)? sortByDate,
     required TResult orElse(),
   }) {
     if (fetch != null) {
-      return fetch(salesOrg, shipInfo, customerCodeInfo);
+      return fetch(salesOrg, shipInfo, customerCodeInfo, requestReturnFilter);
     }
     return orElse();
   }
@@ -377,6 +468,7 @@ class _$_Fetch implements _Fetch {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_SortByDate value) sortByDate,
   }) {
     return fetch(this);
   }
@@ -387,6 +479,7 @@ class _$_Fetch implements _Fetch {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_SortByDate value)? sortByDate,
   }) {
     return fetch?.call(this);
   }
@@ -397,6 +490,7 @@ class _$_Fetch implements _Fetch {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_SortByDate value)? sortByDate,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -410,11 +504,13 @@ abstract class _Fetch implements RequestReturnEvent {
   const factory _Fetch(
       {required final SalesOrganisation salesOrg,
       required final ShipToInfo shipInfo,
-      required final CustomerCodeInfo customerCodeInfo}) = _$_Fetch;
+      required final CustomerCodeInfo customerCodeInfo,
+      required final RequestReturnFilter requestReturnFilter}) = _$_Fetch;
 
   SalesOrganisation get salesOrg;
   ShipToInfo get shipInfo;
   CustomerCodeInfo get customerCodeInfo;
+  RequestReturnFilter get requestReturnFilter;
   @JsonKey(ignore: true)
   _$$_FetchCopyWith<_$_Fetch> get copyWith =>
       throw _privateConstructorUsedError;
@@ -429,11 +525,13 @@ abstract class _$$_LoadMoreCopyWith<$Res> {
   $Res call(
       {SalesOrganisation salesOrg,
       ShipToInfo shipInfo,
-      CustomerCodeInfo customerCodeInfo});
+      CustomerCodeInfo customerCodeInfo,
+      RequestReturnFilter requestReturnFilter});
 
   $SalesOrganisationCopyWith<$Res> get salesOrg;
   $ShipToInfoCopyWith<$Res> get shipInfo;
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
+  $RequestReturnFilterCopyWith<$Res> get requestReturnFilter;
 }
 
 /// @nodoc
@@ -450,6 +548,7 @@ class __$$_LoadMoreCopyWithImpl<$Res>
     Object? salesOrg = null,
     Object? shipInfo = null,
     Object? customerCodeInfo = null,
+    Object? requestReturnFilter = null,
   }) {
     return _then(_$_LoadMore(
       salesOrg: null == salesOrg
@@ -464,6 +563,10 @@ class __$$_LoadMoreCopyWithImpl<$Res>
           ? _value.customerCodeInfo
           : customerCodeInfo // ignore: cast_nullable_to_non_nullable
               as CustomerCodeInfo,
+      requestReturnFilter: null == requestReturnFilter
+          ? _value.requestReturnFilter
+          : requestReturnFilter // ignore: cast_nullable_to_non_nullable
+              as RequestReturnFilter,
     ));
   }
 
@@ -490,6 +593,15 @@ class __$$_LoadMoreCopyWithImpl<$Res>
       return _then(_value.copyWith(customerCodeInfo: value));
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $RequestReturnFilterCopyWith<$Res> get requestReturnFilter {
+    return $RequestReturnFilterCopyWith<$Res>(_value.requestReturnFilter,
+        (value) {
+      return _then(_value.copyWith(requestReturnFilter: value));
+    });
+  }
 }
 
 /// @nodoc
@@ -498,7 +610,8 @@ class _$_LoadMore implements _LoadMore {
   const _$_LoadMore(
       {required this.salesOrg,
       required this.shipInfo,
-      required this.customerCodeInfo});
+      required this.customerCodeInfo,
+      required this.requestReturnFilter});
 
   @override
   final SalesOrganisation salesOrg;
@@ -506,10 +619,12 @@ class _$_LoadMore implements _LoadMore {
   final ShipToInfo shipInfo;
   @override
   final CustomerCodeInfo customerCodeInfo;
+  @override
+  final RequestReturnFilter requestReturnFilter;
 
   @override
   String toString() {
-    return 'RequestReturnEvent.loadMore(salesOrg: $salesOrg, shipInfo: $shipInfo, customerCodeInfo: $customerCodeInfo)';
+    return 'RequestReturnEvent.loadMore(salesOrg: $salesOrg, shipInfo: $shipInfo, customerCodeInfo: $customerCodeInfo, requestReturnFilter: $requestReturnFilter)';
   }
 
   @override
@@ -522,12 +637,14 @@ class _$_LoadMore implements _LoadMore {
             (identical(other.shipInfo, shipInfo) ||
                 other.shipInfo == shipInfo) &&
             (identical(other.customerCodeInfo, customerCodeInfo) ||
-                other.customerCodeInfo == customerCodeInfo));
+                other.customerCodeInfo == customerCodeInfo) &&
+            (identical(other.requestReturnFilter, requestReturnFilter) ||
+                other.requestReturnFilter == requestReturnFilter));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, salesOrg, shipInfo, customerCodeInfo);
+  int get hashCode => Object.hash(
+      runtimeType, salesOrg, shipInfo, customerCodeInfo, requestReturnFilter);
 
   @JsonKey(ignore: true)
   @override
@@ -539,44 +656,67 @@ class _$_LoadMore implements _LoadMore {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(SalesOrganisation salesOrg, ShipToInfo shipInfo,
-            CustomerCodeInfo customerCodeInfo)
+    required TResult Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)
         fetch,
-    required TResult Function(SalesOrganisation salesOrg, ShipToInfo shipInfo,
-            CustomerCodeInfo customerCodeInfo)
+    required TResult Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)
         loadMore,
+    required TResult Function(String sortDirection) sortByDate,
   }) {
-    return loadMore(salesOrg, shipInfo, customerCodeInfo);
+    return loadMore(salesOrg, shipInfo, customerCodeInfo, requestReturnFilter);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(SalesOrganisation salesOrg, ShipToInfo shipInfo,
-            CustomerCodeInfo customerCodeInfo)?
+    TResult? Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)?
         fetch,
-    TResult? Function(SalesOrganisation salesOrg, ShipToInfo shipInfo,
-            CustomerCodeInfo customerCodeInfo)?
+    TResult? Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)?
         loadMore,
+    TResult? Function(String sortDirection)? sortByDate,
   }) {
-    return loadMore?.call(salesOrg, shipInfo, customerCodeInfo);
+    return loadMore?.call(
+        salesOrg, shipInfo, customerCodeInfo, requestReturnFilter);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(SalesOrganisation salesOrg, ShipToInfo shipInfo,
-            CustomerCodeInfo customerCodeInfo)?
+    TResult Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)?
         fetch,
-    TResult Function(SalesOrganisation salesOrg, ShipToInfo shipInfo,
-            CustomerCodeInfo customerCodeInfo)?
+    TResult Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)?
         loadMore,
+    TResult Function(String sortDirection)? sortByDate,
     required TResult orElse(),
   }) {
     if (loadMore != null) {
-      return loadMore(salesOrg, shipInfo, customerCodeInfo);
+      return loadMore(
+          salesOrg, shipInfo, customerCodeInfo, requestReturnFilter);
     }
     return orElse();
   }
@@ -587,6 +727,7 @@ class _$_LoadMore implements _LoadMore {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_SortByDate value) sortByDate,
   }) {
     return loadMore(this);
   }
@@ -597,6 +738,7 @@ class _$_LoadMore implements _LoadMore {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_SortByDate value)? sortByDate,
   }) {
     return loadMore?.call(this);
   }
@@ -607,6 +749,7 @@ class _$_LoadMore implements _LoadMore {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_SortByDate value)? sortByDate,
     required TResult orElse(),
   }) {
     if (loadMore != null) {
@@ -620,13 +763,192 @@ abstract class _LoadMore implements RequestReturnEvent {
   const factory _LoadMore(
       {required final SalesOrganisation salesOrg,
       required final ShipToInfo shipInfo,
-      required final CustomerCodeInfo customerCodeInfo}) = _$_LoadMore;
+      required final CustomerCodeInfo customerCodeInfo,
+      required final RequestReturnFilter requestReturnFilter}) = _$_LoadMore;
 
   SalesOrganisation get salesOrg;
   ShipToInfo get shipInfo;
   CustomerCodeInfo get customerCodeInfo;
+  RequestReturnFilter get requestReturnFilter;
   @JsonKey(ignore: true)
   _$$_LoadMoreCopyWith<_$_LoadMore> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_SortByDateCopyWith<$Res> {
+  factory _$$_SortByDateCopyWith(
+          _$_SortByDate value, $Res Function(_$_SortByDate) then) =
+      __$$_SortByDateCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String sortDirection});
+}
+
+/// @nodoc
+class __$$_SortByDateCopyWithImpl<$Res>
+    extends _$RequestReturnEventCopyWithImpl<$Res, _$_SortByDate>
+    implements _$$_SortByDateCopyWith<$Res> {
+  __$$_SortByDateCopyWithImpl(
+      _$_SortByDate _value, $Res Function(_$_SortByDate) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? sortDirection = null,
+  }) {
+    return _then(_$_SortByDate(
+      sortDirection: null == sortDirection
+          ? _value.sortDirection
+          : sortDirection // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_SortByDate implements _SortByDate {
+  const _$_SortByDate({required this.sortDirection});
+
+  @override
+  final String sortDirection;
+
+  @override
+  String toString() {
+    return 'RequestReturnEvent.sortByDate(sortDirection: $sortDirection)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_SortByDate &&
+            (identical(other.sortDirection, sortDirection) ||
+                other.sortDirection == sortDirection));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, sortDirection);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_SortByDateCopyWith<_$_SortByDate> get copyWith =>
+      __$$_SortByDateCopyWithImpl<_$_SortByDate>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)
+        fetch,
+    required TResult Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)
+        loadMore,
+    required TResult Function(String sortDirection) sortByDate,
+  }) {
+    return sortByDate(sortDirection);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)?
+        fetch,
+    TResult? Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)?
+        loadMore,
+    TResult? Function(String sortDirection)? sortByDate,
+  }) {
+    return sortByDate?.call(sortDirection);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)?
+        fetch,
+    TResult Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)?
+        loadMore,
+    TResult Function(String sortDirection)? sortByDate,
+    required TResult orElse(),
+  }) {
+    if (sortByDate != null) {
+      return sortByDate(sortDirection);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_SortByDate value) sortByDate,
+  }) {
+    return sortByDate(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_SortByDate value)? sortByDate,
+  }) {
+    return sortByDate?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_SortByDate value)? sortByDate,
+    required TResult orElse(),
+  }) {
+    if (sortByDate != null) {
+      return sortByDate(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SortByDate implements RequestReturnEvent {
+  const factory _SortByDate({required final String sortDirection}) =
+      _$_SortByDate;
+
+  String get sortDirection;
+  @JsonKey(ignore: true)
+  _$$_SortByDateCopyWith<_$_SortByDate> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -637,6 +959,7 @@ mixin _$RequestReturnState {
       throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   bool get canLoadMore => throw _privateConstructorUsedError;
+  String get sortDirection => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $RequestReturnStateCopyWith<RequestReturnState> get copyWith =>
@@ -653,7 +976,8 @@ abstract class $RequestReturnStateCopyWith<$Res> {
       {List<ReturnItem> returnItemList,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       bool isLoading,
-      bool canLoadMore});
+      bool canLoadMore,
+      String sortDirection});
 }
 
 /// @nodoc
@@ -673,6 +997,7 @@ class _$RequestReturnStateCopyWithImpl<$Res, $Val extends RequestReturnState>
     Object? failureOrSuccessOption = null,
     Object? isLoading = null,
     Object? canLoadMore = null,
+    Object? sortDirection = null,
   }) {
     return _then(_value.copyWith(
       returnItemList: null == returnItemList
@@ -691,6 +1016,10 @@ class _$RequestReturnStateCopyWithImpl<$Res, $Val extends RequestReturnState>
           ? _value.canLoadMore
           : canLoadMore // ignore: cast_nullable_to_non_nullable
               as bool,
+      sortDirection: null == sortDirection
+          ? _value.sortDirection
+          : sortDirection // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -707,7 +1036,8 @@ abstract class _$$_RequestReturnStateCopyWith<$Res>
       {List<ReturnItem> returnItemList,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       bool isLoading,
-      bool canLoadMore});
+      bool canLoadMore,
+      String sortDirection});
 }
 
 /// @nodoc
@@ -725,6 +1055,7 @@ class __$$_RequestReturnStateCopyWithImpl<$Res>
     Object? failureOrSuccessOption = null,
     Object? isLoading = null,
     Object? canLoadMore = null,
+    Object? sortDirection = null,
   }) {
     return _then(_$_RequestReturnState(
       returnItemList: null == returnItemList
@@ -743,6 +1074,10 @@ class __$$_RequestReturnStateCopyWithImpl<$Res>
           ? _value.canLoadMore
           : canLoadMore // ignore: cast_nullable_to_non_nullable
               as bool,
+      sortDirection: null == sortDirection
+          ? _value.sortDirection
+          : sortDirection // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -754,7 +1089,8 @@ class _$_RequestReturnState implements _RequestReturnState {
       {required final List<ReturnItem> returnItemList,
       required this.failureOrSuccessOption,
       required this.isLoading,
-      required this.canLoadMore})
+      required this.canLoadMore,
+      required this.sortDirection})
       : _returnItemList = returnItemList;
 
   final List<ReturnItem> _returnItemList;
@@ -770,10 +1106,12 @@ class _$_RequestReturnState implements _RequestReturnState {
   final bool isLoading;
   @override
   final bool canLoadMore;
+  @override
+  final String sortDirection;
 
   @override
   String toString() {
-    return 'RequestReturnState(returnItemList: $returnItemList, failureOrSuccessOption: $failureOrSuccessOption, isLoading: $isLoading, canLoadMore: $canLoadMore)';
+    return 'RequestReturnState(returnItemList: $returnItemList, failureOrSuccessOption: $failureOrSuccessOption, isLoading: $isLoading, canLoadMore: $canLoadMore, sortDirection: $sortDirection)';
   }
 
   @override
@@ -788,7 +1126,9 @@ class _$_RequestReturnState implements _RequestReturnState {
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.canLoadMore, canLoadMore) ||
-                other.canLoadMore == canLoadMore));
+                other.canLoadMore == canLoadMore) &&
+            (identical(other.sortDirection, sortDirection) ||
+                other.sortDirection == sortDirection));
   }
 
   @override
@@ -797,7 +1137,8 @@ class _$_RequestReturnState implements _RequestReturnState {
       const DeepCollectionEquality().hash(_returnItemList),
       failureOrSuccessOption,
       isLoading,
-      canLoadMore);
+      canLoadMore,
+      sortDirection);
 
   @JsonKey(ignore: true)
   @override
@@ -812,7 +1153,8 @@ abstract class _RequestReturnState implements RequestReturnState {
       {required final List<ReturnItem> returnItemList,
       required final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       required final bool isLoading,
-      required final bool canLoadMore}) = _$_RequestReturnState;
+      required final bool canLoadMore,
+      required final String sortDirection}) = _$_RequestReturnState;
 
   @override
   List<ReturnItem> get returnItemList;
@@ -822,6 +1164,8 @@ abstract class _RequestReturnState implements RequestReturnState {
   bool get isLoading;
   @override
   bool get canLoadMore;
+  @override
+  String get sortDirection;
   @override
   @JsonKey(ignore: true)
   _$$_RequestReturnStateCopyWith<_$_RequestReturnState> get copyWith =>

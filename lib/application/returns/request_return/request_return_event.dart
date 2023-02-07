@@ -8,11 +8,17 @@ class RequestReturnEvent with _$RequestReturnEvent {
     required SalesOrganisation salesOrg,
     required ShipToInfo shipInfo,
     required CustomerCodeInfo customerCodeInfo,
+    required RequestReturnFilter requestReturnFilter,
   }) = _Fetch;
 
   const factory RequestReturnEvent.loadMore({
     required SalesOrganisation salesOrg,
     required ShipToInfo shipInfo,
     required CustomerCodeInfo customerCodeInfo,
+    required RequestReturnFilter requestReturnFilter,
   }) = _LoadMore;
+
+  const factory RequestReturnEvent.sortByDate({
+    required String sortDirection,
+  }) = _SortByDate;
 }

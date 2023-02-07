@@ -3,8 +3,10 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/returns/entities/request_return_filter.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
 import 'package:ezrxmobile/domain/returns/repository/i_request_return_repository.dart';
+import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -44,6 +46,7 @@ class RequestReturnBloc extends Bloc<RequestReturnEvent, RequestReturnState> {
           customerCodeInfo: value.customerCodeInfo,
           pageSize: _defaultPageSize,
           offSet: 0,
+          requestReturnFilter: value.requestReturnFilter,
         );
 
         failureOrSuccess.fold(
@@ -84,6 +87,7 @@ class RequestReturnBloc extends Bloc<RequestReturnEvent, RequestReturnState> {
           customerCodeInfo: value.customerCodeInfo,
           pageSize: _defaultPageSize,
           offSet: state.returnItemList.length,
+          requestReturnFilter: value.requestReturnFilter,
         );
 
         failureOrSuccess.fold(
@@ -109,6 +113,39 @@ class RequestReturnBloc extends Bloc<RequestReturnEvent, RequestReturnState> {
           },
         );
       },
+      sortByDate: (value) {
+        final sortedItems = _getSortedList(
+          List<ReturnItem>.from(state.returnItemList),
+          value.sortDirection,
+        );
+        emit(
+          state.copyWith(
+            returnItemList: sortedItems,
+            canLoadMore: sortedItems.length >= _defaultPageSize,
+            failureOrSuccessOption: none(),
+            isLoading: false,
+            sortDirection: value.sortDirection,
+          ),
+        );
+      },
     );
+  }
+
+  List<ReturnItem> _getSortedList(List<ReturnItem> oldList, String direction) {
+    final newList = oldList
+      ..sort((a, b) => _compareTo(a.expiryDate, b.expiryDate, direction));
+
+    return newList;
+  }
+
+  int _compareTo(SimpleDate a, SimpleDate b, String direction) {
+    switch (direction) {
+      case 'asc':
+        return a.getOrDefaultValue('').compareTo(b.getOrDefaultValue(''));
+      case 'desc':
+        return b.getOrDefaultValue('').compareTo(a.getOrDefaultValue(''));
+      default:
+        return 1;
+    }
   }
 }

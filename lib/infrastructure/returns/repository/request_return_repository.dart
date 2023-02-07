@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
+import 'package:ezrxmobile/domain/returns/entities/request_return_filter.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
@@ -23,6 +25,7 @@ class RequestReturnRepository extends IReturnRequestRepository {
 
   @override
   Future<Either<ApiFailure, ReturnRequest>> searchReturnRequestList({
+    required RequestReturnFilter requestReturnFilter,
     required SalesOrganisation salesOrganisation,
     required ShipToInfo shipToInfo,
     required CustomerCodeInfo customerCodeInfo,
@@ -42,6 +45,20 @@ class RequestReturnRepository extends IReturnRequestRepository {
     }
     try {
       final returnRequest = await remoteDataSource.searchReturnMaterials(
+        batch: requestReturnFilter.batch.getOrDefaultValue(''),
+        dateFrom: requestReturnFilter.fromExpiryDate != null
+            ? DateFormat('yyyyMMdd').format(requestReturnFilter.fromExpiryDate!)
+            : '',
+        dateTo: requestReturnFilter.toExpiryDate != null
+            ? DateFormat('yyyyMMdd').format(requestReturnFilter.toExpiryDate!)
+            : '',
+        invoiceNo: requestReturnFilter.assignmentNumber.getOrDefaultValue(''),
+        materialDescription:
+            requestReturnFilter.materialDescription.getOrDefaultValue(''),
+        materialNumber:
+            requestReturnFilter.materialNumber.getOrDefaultValue(''),
+        principalSearch:
+            requestReturnFilter.principalSearch.getOrDefaultValue(''),
         salesOrg: salesOrganisation.salesOrg.getOrCrash(),
         shipTo: shipToInfo.shipToCustomerCode,
         soldTo: customerCodeInfo.customerCodeSoldTo,

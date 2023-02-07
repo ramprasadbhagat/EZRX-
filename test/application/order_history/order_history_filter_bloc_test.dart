@@ -78,14 +78,13 @@ void main() {
                 .copyWith(fromDate: fakeFromDate, toDate: fakeToDate)),
         act: (OrderHistoryFilterBloc bloc) => bloc.add(
             OrderHistoryFilterEvent.orderIdChanged(
-                SearchKey.orderHistoryFilter(fakeOrderId)
-                    .getOrDefaultValue(''))),
+                SearchKey.searchFilter(fakeOrderId).getOrDefaultValue(''))),
         expect: () => [
               OrderHistoryFilterState.initial().copyWith(
                   orderHistoryFilterList: OrderHistoryFilter.empty().copyWith(
                       fromDate: fakeFromDate,
                       toDate: fakeToDate,
-                      orderId: SearchKey.orderHistoryFilter(fakeOrderId)))
+                      orderId: SearchKey.searchFilter(fakeOrderId)))
             ]);
     blocTest('poNumberChanged',
         build: (() => OrderHistoryFilterBloc()),
@@ -94,14 +93,13 @@ void main() {
                 .copyWith(fromDate: fakeFromDate, toDate: fakeToDate)),
         act: (OrderHistoryFilterBloc bloc) => bloc.add(
             OrderHistoryFilterEvent.poNumberChanged(
-                SearchKey.orderHistoryFilter(fakePoNumber)
-                    .getOrDefaultValue(''))),
+                SearchKey.searchFilter(fakePoNumber).getOrDefaultValue(''))),
         expect: () => [
               OrderHistoryFilterState.initial().copyWith(
                   orderHistoryFilterList: OrderHistoryFilter.empty().copyWith(
                       fromDate: fakeFromDate,
                       toDate: fakeToDate,
-                      poNumber: SearchKey.orderHistoryFilter(fakePoNumber)))
+                      poNumber: SearchKey.searchFilter(fakePoNumber)))
             ]);
     blocTest('principalSearchChanged',
         build: (() => OrderHistoryFilterBloc()),
@@ -110,15 +108,14 @@ void main() {
                 .copyWith(fromDate: fakeFromDate, toDate: fakeToDate)),
         act: (OrderHistoryFilterBloc bloc) => bloc.add(
             OrderHistoryFilterEvent.principalSearchChanged(
-                SearchKey.orderHistoryFilter(fakePrincipalSearch)
-                    .getOrCrash())),
+                SearchKey.searchFilter(fakePrincipalSearch).getOrCrash())),
         expect: () => [
               OrderHistoryFilterState.initial().copyWith(
                   orderHistoryFilterList: OrderHistoryFilter.empty().copyWith(
                       fromDate: fakeFromDate,
                       toDate: fakeToDate,
                       principalSearch:
-                          SearchKey.orderHistoryFilter(fakePrincipalSearch)))
+                          SearchKey.searchFilter(fakePrincipalSearch)))
             ]);
     blocTest('materialSearchChanged',
         build: (() => OrderHistoryFilterBloc()),
@@ -127,7 +124,7 @@ void main() {
                 .copyWith(fromDate: fakeFromDate, toDate: fakeToDate)),
         act: (OrderHistoryFilterBloc bloc) => bloc.add(
             OrderHistoryFilterEvent.materialSearchChanged(
-                SearchKey.orderHistoryFilter(fakeMaterialSearch)
+                SearchKey.searchFilter(fakeMaterialSearch)
                     .getOrDefaultValue(''))),
         expect: () => [
               OrderHistoryFilterState.initial().copyWith(
@@ -135,7 +132,7 @@ void main() {
                       fromDate: fakeFromDate,
                       toDate: fakeToDate,
                       materialSearch:
-                          SearchKey.orderHistoryFilter(fakeMaterialSearch)))
+                          SearchKey.searchFilter(fakeMaterialSearch)))
             ]);
     blocTest(
       'filterOrderHistory',

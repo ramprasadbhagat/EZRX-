@@ -23,6 +23,13 @@ class RequestReturnRemoteDatasource {
   });
 
   Future<ReturnRequest> searchReturnMaterials({
+    required String batch,
+    required String dateFrom,
+    required String dateTo,
+    required String invoiceNo,
+    required String materialDescription,
+    required String materialNumber,
+    required String principalSearch,
     required String salesOrg,
     required String shipTo,
     required String soldTo,
@@ -33,6 +40,13 @@ class RequestReturnRemoteDatasource {
       final queryData = query.getReturnRequestList();
       final variables = {
         'searchReturnMaterialsRequest': {
+          'batch': batch,
+          'dateFrom': dateFrom,
+          'dateTo': dateTo,
+          'invoiceNo': invoiceNo,
+          'materialDescription': materialDescription,
+          'materialNumber': materialNumber,
+          'principalSearch': principalSearch,
           'salesOrg': salesOrg,
           'soldTo': soldTo,
           'shipTo': shipTo,
@@ -40,6 +54,9 @@ class RequestReturnRemoteDatasource {
           'after': offSet,
         },
       };
+
+      variables['searchReturnMaterialsRequest']!
+          .removeWhere((key, value) => value.toString().isEmpty);
 
       final res = await httpService.request(
         method: 'POST',

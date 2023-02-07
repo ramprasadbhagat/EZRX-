@@ -3,7 +3,9 @@ import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/returns/request_return/request_return_bloc.dart';
+import 'package:ezrxmobile/application/returns/request_return_filter/request_return_filter_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/returns/entities/request_return_filter.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
@@ -12,9 +14,12 @@ import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
+import 'package:ezrxmobile/presentation/returns/request_return_filter_drawer.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+final scaffoldKey = GlobalKey<ScaffoldState>();
 
 class RequestReturn extends StatelessWidget {
   const RequestReturn({Key? key}) : super(key: key);
@@ -22,86 +27,249 @@ class RequestReturn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     locator<CountlyService>().recordCountlyView('request_return');
+    const radius = 16.0;
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Request Return').tr()),
-      body: BlocConsumer<RequestReturnBloc, RequestReturnState>(
-        listenWhen: (previous, current) =>
-            previous.failureOrSuccessOption != current.failureOrSuccessOption,
-        listener: (context, state) {
-          state.failureOrSuccessOption.fold(
-            () {},
-            (either) => either.fold(
-              (failure) {
-                ErrorUtils.handleApiFailure(context, failure);
-              },
-              (_) {},
-            ),
-          );
-        },
-        buildWhen: (previous, current) =>
-            previous.isLoading != current.isLoading,
-        builder: (context, state) {
-          final configs = context.read<SalesOrgBloc>().state.configs;
-
-          return state.isLoading && state.returnItemList.isEmpty
-              ? LoadingShimmer.logo(
-                  key: const Key('LoaderImage'),
-                )
-              : Column(
-                  children: [
-                    Expanded(
-                      child: ScrollList<ReturnItem>(
-                        emptyMessage: 'No Request for Return found',
-                        onRefresh: () {
-                          context.read<RequestReturnBloc>().add(
-                                RequestReturnEvent.fetch(
-                                  salesOrg: context
-                                      .read<SalesOrgBloc>()
-                                      .state
-                                      .salesOrganisation,
-                                  shipInfo: context
-                                      .read<ShipToCodeBloc>()
-                                      .state
-                                      .shipToInfo,
-                                  customerCodeInfo: context
-                                      .read<CustomerCodeBloc>()
-                                      .state
-                                      .customerCodeInfo,
-                                ),
-                              );
-                        },
-                        onLoadingMore: () {
-                          context.read<RequestReturnBloc>().add(
-                                RequestReturnEvent.loadMore(
-                                  salesOrg: context
-                                      .read<SalesOrgBloc>()
-                                      .state
-                                      .salesOrganisation,
-                                  shipInfo: context
-                                      .read<ShipToCodeBloc>()
-                                      .state
-                                      .shipToInfo,
-                                  customerCodeInfo: context
-                                      .read<CustomerCodeBloc>()
-                                      .state
-                                      .customerCodeInfo,
-                                ),
-                              );
-                        },
-                        isLoading: state.isLoading,
-                        itemBuilder: (context, index, item) =>
-                            _RequestReturnListItem(
-                          returnItem: item,
-                          configs: configs,
-                        ),
-                        items: state.returnItemList,
+      key: scaffoldKey,
+      appBar: AppBar(
+        title: const Text('Request Return').tr(),
+        toolbarHeight: kToolbarHeight + 2.0,
+        actions: <Widget>[Container()],
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(30.0),
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                BlocBuilder<RequestReturnBloc, RequestReturnState>(
+                  buildWhen: (previous, current) =>
+                      previous.sortDirection != current.sortDirection,
+                  builder: (context, state) {
+                    return InkWell(
+                      key: const Key('orderDateFilter'),
+                      onTap: () {
+                        context.read<RequestReturnBloc>().add(
+                              RequestReturnEvent.sortByDate(
+                                sortDirection: state.sortDirection == 'desc'
+                                    ? 'asc'
+                                    : 'desc',
+                              ),
+                            );
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            'Expiry Date'.tr(),
+                            style: const TextStyle(
+                              fontSize: 14,
+                              color: ZPColors.kPrimaryColor,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          Icon(
+                            state.sortDirection == 'desc'
+                                ? Icons.arrow_drop_down_outlined
+                                : Icons.arrow_drop_up_outlined,
+                            color: ZPColors.darkGray,
+                          ),
+                        ],
                       ),
-                    ),
-                  ],
-                );
-        },
+                    );
+                  },
+                ),
+                InkWell(
+                  key: const Key('filterButton'),
+                  onTap: () {
+                    scaffoldKey.currentState!.openEndDrawer();
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Text(
+                        'Filter'.tr(),
+                        style: const TextStyle(
+                          fontSize: 14,
+                          color: ZPColors.kPrimaryColor,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ).tr(),
+                      Stack(
+                        children: <Widget>[
+                          const FittedBox(
+                            key: ValueKey('request_return_filter'),
+                            child: Icon(
+                              Icons.filter_alt,
+                            ),
+                          ),
+                          BlocBuilder<RequestReturnFilterBloc,
+                              RequestReturnFilterState>(
+                            buildWhen: (previous, current) =>
+                                previous.requestReturnFilter !=
+                                current.requestReturnFilter,
+                            builder: (context, state) {
+                              if (state.requestReturnFilter !=
+                                  RequestReturnFilter.empty()) {
+                                return Positioned(
+                                  key: const ValueKey(
+                                    'Filter_list_not_empty',
+                                  ),
+                                  right: 0,
+                                  child: Container(
+                                    decoration: const BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: ZPColors.kPrimaryColor,
+                                    ),
+                                    width: radius / 2,
+                                    height: radius / 2,
+                                  ),
+                                );
+                              }
+
+                              return const SizedBox.shrink();
+                            },
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
+      endDrawer: const RequestReturnFilterDrawer(),
+      body: const _WrapRequestReturnBody(),
+    );
+  }
+}
+
+class _WrapRequestReturnBody extends StatelessWidget {
+  const _WrapRequestReturnBody({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocListener<RequestReturnFilterBloc, RequestReturnFilterState>(
+      listenWhen: (previous, current) =>
+          previous.isSubmitting != current.isSubmitting &&
+              current.isSubmitting ||
+          !scaffoldKey.currentState!.isEndDrawerOpen,
+      listener: (context, state) {
+        final hasCustomerCodeInfo = context
+            .read<CustomerCodeBloc>()
+            .state
+            .customerCodeInfo
+            .customerCodeSoldTo
+            .isNotEmpty;
+        final hasShipToInfo = context
+            .read<ShipToCodeBloc>()
+            .state
+            .shipToInfo
+            .shipToCustomerCode
+            .isNotEmpty;
+        if (hasCustomerCodeInfo && hasShipToInfo) {
+          context.read<RequestReturnBloc>().add(
+                RequestReturnEvent.fetch(
+                  customerCodeInfo:
+                      context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                  salesOrg:
+                      context.read<SalesOrgBloc>().state.salesOrganisation,
+                  shipInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+                  requestReturnFilter: state.requestReturnFilter,
+                ),
+              );
+        }
+      },
+      child: const _RequestReturnList(),
+    );
+  }
+}
+
+class _RequestReturnList extends StatelessWidget {
+  const _RequestReturnList({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocConsumer<RequestReturnBloc, RequestReturnState>(
+      listenWhen: (previous, current) =>
+          previous.failureOrSuccessOption != current.failureOrSuccessOption,
+      listener: (context, state) {
+        state.failureOrSuccessOption.fold(
+          () {},
+          (either) => either.fold(
+            (failure) {
+              ErrorUtils.handleApiFailure(context, failure);
+            },
+            (_) {},
+          ),
+        );
+      },
+      buildWhen: (previous, current) =>
+          previous.isLoading != current.isLoading ||
+          previous.sortDirection != current.sortDirection,
+      builder: (context, state) {
+        final configs = context.read<SalesOrgBloc>().state.configs;
+
+        return state.isLoading && state.returnItemList.isEmpty
+            ? LoadingShimmer.logo(
+                key: const Key('LoaderImage'),
+              )
+            : ScrollList<ReturnItem>(
+                emptyMessage: 'No Request for Return found',
+                onRefresh: () {
+                  context.read<RequestReturnBloc>().add(
+                        RequestReturnEvent.fetch(
+                          salesOrg: context
+                              .read<SalesOrgBloc>()
+                              .state
+                              .salesOrganisation,
+                          shipInfo:
+                              context.read<ShipToCodeBloc>().state.shipToInfo,
+                          customerCodeInfo: context
+                              .read<CustomerCodeBloc>()
+                              .state
+                              .customerCodeInfo,
+                          requestReturnFilter: context
+                              .read<RequestReturnFilterBloc>()
+                              .state
+                              .requestReturnFilter,
+                        ),
+                      );
+                },
+                onLoadingMore: () {
+                  context.read<RequestReturnBloc>().add(
+                        RequestReturnEvent.loadMore(
+                          salesOrg: context
+                              .read<SalesOrgBloc>()
+                              .state
+                              .salesOrganisation,
+                          shipInfo:
+                              context.read<ShipToCodeBloc>().state.shipToInfo,
+                          customerCodeInfo: context
+                              .read<CustomerCodeBloc>()
+                              .state
+                              .customerCodeInfo,
+                          requestReturnFilter: context
+                              .read<RequestReturnFilterBloc>()
+                              .state
+                              .requestReturnFilter,
+                        ),
+                      );
+                },
+                isLoading: state.isLoading,
+                itemBuilder: (context, index, item) => _RequestReturnListItem(
+                  returnItem: item,
+                  configs: configs,
+                ),
+                items: state.returnItemList,
+              );
+      },
     );
   }
 }

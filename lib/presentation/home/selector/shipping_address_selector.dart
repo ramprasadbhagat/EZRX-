@@ -20,6 +20,7 @@ import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
 import 'package:ezrxmobile/application/returns/request_return/request_return_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_filter.dart';
+import 'package:ezrxmobile/domain/returns/entities/request_return_filter.dart';
 import 'package:ezrxmobile/presentation/core/custom_selector.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -165,6 +166,7 @@ class ShipCodeSelector extends StatelessWidget {
                             .customerCodeInfo,
                         shipInfo:
                             context.read<ShipToCodeBloc>().state.shipToInfo,
+                        requestReturnFilter: RequestReturnFilter.empty(),
                       ),
                     );
               }
