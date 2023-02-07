@@ -63,6 +63,17 @@ stages:
         script: |
           fvm flutter build ipa --flavor uat -t lib/main_uat.dart --release --export-options-plist=ios/config/uat/exportOptions.plist
 
+    - task: AppCenterDistribute@3
+      displayName: Upload to Microsoft Appcenter
+      inputs:
+        serverEndpoint: 'eZRx Uat Appcenter IOS'
+        appSlug: '$(APPCENTER_APP_SLUG_UAT_IOS)'
+        appFile: 'build/ios/ipa/*.ipa'
+        destinationType: 'groups'
+        destinationGroupIds: '$(APPCENTER_DESTINATION_GROUP_IDS_UAT)'
+        releaseNotesInput: 'uat release'
+        isSilent: true
+    
     - task: AppStoreRelease@1
       displayName: 'Upload to the App Store TestFlight track'
       inputs:
@@ -183,4 +194,54 @@ stages:
         track: 'internal'
         rolloutToUserFraction: true
 
+
+- stage: MSTeamsNotificationStage
+  dependsOn: [IOSUatStage,AndroidUatStage]
+  displayName: MSTeamsNotificationStage
+  jobs:
+  - job: MSTeamsNotificationUatJob
+    displayName: MSTeamsNotificationUatJob
+    steps:
+    - task: Bash@3
+      displayName: Extract build version and number then Share with the Microsoft team channel
+      inputs:
+        targetType: 'inline'
+        script: |
+          STR=$(yq '.version' pubspec.yaml)
+          VERSION=$( echo $STR | cut -d '+' -f 1 )
+          BUILD=$( echo $STR | cut -d '+' -f 2 )
+          TITLE="UAT eZRx mobile $( echo $VERSION )($( echo $BUILD ))"
+          curl --location --request POST '$(MICROSOFT_TEAMS_BUILD_CHANNEL)' \
+          --header 'Content-Type: text/plain' \
+          --data-raw '{
+            "@type": "MessageCard",
+            "@context": "http://schema.org/extensions",
+            "summary": "New eZRx mobile UAT build ready",
+            "sections": [{
+              "activityTitle": "'"$TITLE"'",
+                "markdown": true
+              }],
+            "potentialAction": [{
+              "@type": "ActionCard",
+              "name": "Build url",
+              "actions": [{
+                "@type": "OpenUri",
+                "name": "Android",
+                "targets": [
+                  { "os": "default", "uri": "$(APPCENTER_APP_URL_UAT_ANDROID)" }
+                ]
+              },
+              {
+                "@type": "OpenUri",
+                "name": "IOS",
+                "targets": [
+                  { "os": "default", "uri": "$(APPCENTER_APP_URL_UAT_IOS)" }
+                ]
+              }]
+            }]
+          }'
     
+      env:
+        APPCENTER_APP_URL_UAT_ANDROID: '$(APPCENTER_APP_URL_UAT_ANDROID)'
+        APPCENTER_APP_URL_UAT_IOS: '$(APPCENTER_APP_URL_UAT_IOS)'
+        MICROSOFT_TEAMS_BUILD_CHANNEL: '$(MICROSOFT_TEAMS_BUILD_CHANNEL)'

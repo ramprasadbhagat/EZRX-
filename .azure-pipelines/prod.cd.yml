@@ -63,6 +63,17 @@ stages:
         script: |
           fvm flutter build ipa --flavor prod -t lib/main_prod.dart --release --export-options-plist=ios/config/prod/exportOptions.plist
 
+    - task: AppCenterDistribute@3
+      displayName: Upload to Microsoft Appcenter
+      inputs:
+        serverEndpoint: 'eZRx Prod Appcenter IOS'
+        appSlug: '$(APPCENTER_APP_SLUG_PROD_IOS)'
+        appFile: 'build/ios/ipa/*.ipa'
+        destinationType: 'groups'
+        destinationGroupIds: '$(APPCENTER_DESTINATION_GROUP_IDS_UAT)'
+        releaseNotesInput: 'uat release'
+        isSilent: true
+
     - task: AppStoreRelease@1
       displayName: 'Upload to the App Store TestFlight track'
       inputs:
