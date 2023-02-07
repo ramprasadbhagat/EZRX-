@@ -140,6 +140,7 @@ class AddEditUserRestrictionPage extends StatelessWidget {
                                   style: TextStyle(fontWeight: FontWeight.bold),
                                 ),
                                 IconButton(
+                                  key: const Key('addApproverRightsButton'),
                                   onPressed: () {
                                     context
                                         .read<UserRestrictionDetailsBloc>()

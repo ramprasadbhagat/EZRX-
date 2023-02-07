@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'package:ezrxmobile/infrastructure/returns/dtos/user_restriction_status_dto.dart';
+import 'package:ezrxmobile/infrastructure/returns/dtos/user_restrictions_dto.dart';
 import 'package:universal_io/io.dart';
 
 import 'package:dio/dio.dart';
@@ -145,5 +147,185 @@ void main() {
       expect(error, isA<ServerException>());
       return Future.value(userRestrictionListDtoMock);
     });
+  });
+
+  test('get user restrictions', () async {
+    final res = json.decode(
+      await rootBundle
+          .loadString('assets/json/getReturnApprovalAndApproverRights.json'),
+    );
+
+    final request = {
+      'request': {
+        'salesOrg': salesOrg,
+        'username': 'fake-username',
+      },
+      'approverRequest': {
+        'salesOrg': salesOrg,
+        'username': 'fake-username',
+      }
+    };
+
+    dioAdapter.onPost(
+      '${mockConfig.urlConstants}ereturn',
+      (server) => server.reply(
+        HttpStatus.ok,
+        res,
+        delay: const Duration(seconds: 1),
+      ),
+      headers: {'Content-Type': 'application/json; charset=utf-8'},
+      data: jsonEncode({
+        'query': remoteDataSource.userRestrictionMutation.getUserRestrictions(),
+        'variables': request
+      }),
+    );
+
+    final result = await remoteDataSource.getUserRestrictions(
+        salesOrg: salesOrg, userName: 'fake-username');
+
+    expect(
+      result,
+      UserRestrictionsDto.fromJson(res['data']).toDomain(),
+    );
+  });
+
+  test('add approval limit', () async {
+    final res = json.decode(
+      await rootBundle
+          .loadString('assets/json/getAddUserRestrictionDetails.json'),
+    );
+
+    final request = {
+      'request': {
+        'username': 'fake-username',
+        'salesOrg': salesOrg,
+        'valueLowerLimit': 0,
+        'valueUpperLimit': 10,
+      },
+    };
+
+    dioAdapter.onPost(
+      '${mockConfig.urlConstants}ereturn',
+      (server) => server.reply(
+        HttpStatus.ok,
+        res,
+        delay: const Duration(seconds: 1),
+      ),
+      headers: {'Content-Type': 'application/json; charset=utf-8'},
+      data: jsonEncode({
+        'query': remoteDataSource.userRestrictionMutation.addApprovalLimit(),
+        'variables': request
+      }),
+    );
+
+    final result = await remoteDataSource.addApprovalLimit(
+        salesOrg: salesOrg,
+        userName: 'fake-username',
+        valueLowerLimit: 0,
+        valueUpperLimit: 10);
+
+    expect(
+      result,
+      UserRestrictionStatusDto.fromJson(res['data']).toDomain(),
+    );
+  });
+
+  test('add user restriction', () async {
+    final res = json.decode(
+      await rootBundle
+          .loadString('assets/json/getConfigureUserRestrictionDetails.json'),
+    );
+
+    final request = {
+      'username': 'fake-username',
+      'approverRights': [],
+    };
+
+    dioAdapter.onPost(
+      '${mockConfig.urlConstants}ereturn',
+      (server) => server.reply(
+        HttpStatus.ok,
+        res,
+        delay: const Duration(seconds: 1),
+      ),
+      headers: {'Content-Type': 'application/json; charset=utf-8'},
+      data: jsonEncode({
+        'query': remoteDataSource.userRestrictionMutation.addRestriction(),
+        'variables': {'input': request}
+      }),
+    );
+
+    final result = await remoteDataSource.configureUserRestriction(
+        userName: 'fake-username', approverRightsList: []);
+
+    expect(
+      result,
+      UserRestrictionStatusDto.fromJson(res['data']).toDomain(),
+    );
+  });
+
+  test('delete approver right', () async {
+    final res = json.decode(
+      await rootBundle.loadString('assets/json/getDeleteUserRestriction.json'),
+    );
+
+    final request = {
+      'uuid': 'uuid',
+      'salesOrg': salesOrg,
+    };
+
+    dioAdapter.onPost(
+      '${mockConfig.urlConstants}ereturn',
+      (server) => server.reply(
+        HttpStatus.ok,
+        res,
+        delay: const Duration(seconds: 1),
+      ),
+      headers: {'Content-Type': 'application/json; charset=utf-8'},
+      data: jsonEncode({
+        'query': remoteDataSource.userRestrictionMutation.deleteApprovalRight(),
+        'variables': {'input': request}
+      }),
+    );
+
+    final result = await remoteDataSource.deleteApprovalRight(
+        salesOrg: salesOrg, uuid: 'uuid');
+
+    expect(
+      result,
+      UserRestrictionStatusDto.fromJson(res['data']).toDomain(),
+    );
+  });
+
+  test('delete approval limit', () async {
+    final res = json.decode(
+      await rootBundle
+          .loadString('assets/json/getDeleteReturnApprovalLimit.json'),
+    );
+
+    final request = {
+      'uuid': 'uuid',
+    };
+
+    dioAdapter.onPost(
+      '${mockConfig.urlConstants}ereturn',
+      (server) => server.reply(
+        HttpStatus.ok,
+        res,
+        delay: const Duration(seconds: 1),
+      ),
+      headers: {'Content-Type': 'application/json; charset=utf-8'},
+      data: jsonEncode({
+        'query': remoteDataSource.userRestrictionMutation.deleteApprovalLimit(),
+        'variables': {'input': request}
+      }),
+    );
+
+    final result = await remoteDataSource.deleteApprovalLimit(uuid: 'uuid');
+
+    expect(
+      result,
+      UserRestrictionStatusDto.fromJson(res['data']).toDomain(),
+    );
   });
 }
