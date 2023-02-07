@@ -35,25 +35,19 @@ class ResetPasswordButton extends StatelessWidget {
         );
       },
       builder: ((context, state) {
-        return Visibility(
-          visible: true,
-          child: SizedBox(
-            width: MediaQuery.of(context).size.width * 0.8,
-            child: ElevatedButton(
-              key: const Key('changePasswordButton'),
-              onPressed: () {
-                FocusScope.of(context).unfocus();
-                context.read<ResetPasswordBloc>().add(
-                      ResetPasswordEvent.resetPasswordPressed(
-                        user: user,
-                      ),
-                    );
-              },
-              child: LoadingShimmer.withChild(
-                enabled: state.isSubmitting,
-                child: const Text('Change Password').tr(),
-              ),
-            ),
+        return ElevatedButton(
+          key: const Key('changePasswordButton'),
+          onPressed: () {
+            FocusScope.of(context).unfocus();
+            context.read<ResetPasswordBloc>().add(
+                  ResetPasswordEvent.resetPasswordPressed(
+                    user: user,
+                  ),
+                );
+          },
+          child: LoadingShimmer.withChild(
+            enabled: state.isSubmitting,
+            child: const Text('Change Password').tr(),
           ),
         );
       }),

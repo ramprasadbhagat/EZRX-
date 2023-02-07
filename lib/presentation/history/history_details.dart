@@ -146,74 +146,67 @@ class HistoryDetails extends StatelessWidget {
                 .state
                 .orderHistoryDetails;
 
-            return Container(
+            return SingleChildScrollView(
               padding: const EdgeInsets.only(
                 left: 15,
                 right: 15,
                 bottom: 20,
               ),
-              child: SingleChildScrollView(
-                key: const Key('scrollHistoryDetail'),
-                child: Theme(
-                  data: Theme.of(context)
-                      .copyWith(dividerColor: Colors.transparent),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      if (state.orderHistoryDetails.orderHistoryDetailsMessages
-                          .isNotEmpty)
-                        _SystemMessage(
-                          orderDetails: orderDetails,
-                        ),
-                      _OrderDetails(
-                        orderDetails: orderDetails,
-                        customerCodeInfo: customerCodeInfo,
-                      ),
-                      const _SoldToAddress(
-                        key: Key('soldToAddressWidget'),
-                      ),
-                      const _ShipToAddress(
-                        key: Key('shipToAddressWidget'),
-                      ),
-                      if (context.read<EligibilityBloc>().state.isBillToInfo)
-                        _BillToAddress(
-                          billToInfo: billToInfo,
-                        ),
-                      if (context
-                              .read<EligibilityBloc>()
-                              .state
-                              .isShowPOAttachmentEnable &&
-                          orderDetails.poDocumentsAvailable)
-                        Column(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 10),
-                              child: PoAttachment(
-                                poDocuments:
-                                    orderDetails.orderHistoryDetailsPoDocuments,
-                                poattachMentRenderMode:
-                                    PoAttachMentRenderMode.view,
-                                uploadingPocDocument: const <PoDocuments>[],
-                              ),
-                            ),
-                            const Divider(
-                              color: ZPColors.lightGray,
-                              endIndent: 0,
-                              indent: 0,
-                            ),
-                          ],
-                        ),
-                      _Invoices(
-                        orderDetails: orderDetails,
-                      ),
-                      _OrderSummary(
-                        orderDetails: orderDetails,
-                        salesOrgConfigs: salesOrgConfigs,
-                        orderHistoryItem: orderHistoryItem,
-                      ),
-                    ],
+              key: const Key('scrollHistoryDetail'),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (state.orderHistoryDetails.orderHistoryDetailsMessages
+                      .isNotEmpty)
+                    _SystemMessage(
+                      orderDetails: orderDetails,
+                    ),
+                  _OrderDetails(
+                    orderDetails: orderDetails,
+                    customerCodeInfo: customerCodeInfo,
                   ),
-                ),
+                  const _SoldToAddress(
+                    key: Key('soldToAddressWidget'),
+                  ),
+                  const _ShipToAddress(
+                    key: Key('shipToAddressWidget'),
+                  ),
+                  if (context.read<EligibilityBloc>().state.isBillToInfo)
+                    _BillToAddress(
+                      billToInfo: billToInfo,
+                    ),
+                  if (context
+                          .read<EligibilityBloc>()
+                          .state
+                          .isShowPOAttachmentEnable &&
+                      orderDetails.poDocumentsAvailable)
+                    Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          child: PoAttachment(
+                            poDocuments:
+                                orderDetails.orderHistoryDetailsPoDocuments,
+                            poattachMentRenderMode: PoAttachMentRenderMode.view,
+                            uploadingPocDocument: const <PoDocuments>[],
+                          ),
+                        ),
+                        const Divider(
+                          color: ZPColors.lightGray,
+                          endIndent: 0,
+                          indent: 0,
+                        ),
+                      ],
+                    ),
+                  _Invoices(
+                    orderDetails: orderDetails,
+                  ),
+                  _OrderSummary(
+                    orderDetails: orderDetails,
+                    salesOrgConfigs: salesOrgConfigs,
+                    orderHistoryItem: orderHistoryItem,
+                  ),
+                ],
               ),
             );
           },
@@ -234,10 +227,6 @@ class _SystemMessage extends StatelessWidget {
     return Container(
       key: const ValueKey('systemMessage'),
       color: ZPColors.systrmMessageColor,
-      margin: const EdgeInsets.only(
-        left: 5.0,
-        right: 5.0,
-      ),
       child: ListTile(
         leading: const Icon(
           Icons.error,
@@ -304,11 +293,7 @@ class _OrderDetails extends StatelessWidget {
           key: const ValueKey('orderDetails'),
           title: Text(
             'Order Details'.tr(),
-            style: const TextStyle(
-              fontSize: 16.0,
-              color: ZPColors.darkerGreen,
-              fontWeight: FontWeight.w600,
-            ),
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
           ),
           children: [
             if (enableOHPrice)
@@ -470,11 +455,7 @@ class _SoldToAddress extends StatelessWidget {
       key: const ValueKey('soldToAddress'),
       title: Text(
         'Sold to Address'.tr(),
-        style: const TextStyle(
-          fontSize: 16.0,
-          color: ZPColors.darkerGreen,
-          fontWeight: FontWeight.w600,
-        ),
+        style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
       ),
       children: const [
         SoldToAddressInfo(),
@@ -495,11 +476,7 @@ class _ShipToAddress extends StatelessWidget {
       key: const ValueKey('shipToAddress'),
       title: Text(
         'Ship to Address'.tr(),
-        style: const TextStyle(
-          fontSize: 16.0,
-          color: ZPColors.darkerGreen,
-          fontWeight: FontWeight.w600,
-        ),
+        style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
       ),
       children: const [
         ShipToAddressInfo(),
@@ -520,11 +497,7 @@ class _BillToAddress extends StatelessWidget {
       key: const ValueKey('billToAddress'),
       title: Text(
         'Bill to Address'.tr(),
-        style: const TextStyle(
-          fontSize: 16.0,
-          color: ZPColors.darkerGreen,
-          fontWeight: FontWeight.w600,
-        ),
+        style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
       ),
       children: WidgetHelper.getBillToCustomerDetails(billToInfo),
     );
@@ -546,65 +519,49 @@ class _Invoices extends StatelessWidget {
           key: const ValueKey('invoices'),
           title: Text(
             'Invoices'.tr(),
-            style: const TextStyle(
-              fontSize: 16.0,
-              color: ZPColors.darkerGreen,
-              fontWeight: FontWeight.w600,
-            ),
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
           ),
           children: [
-            Container(
-              padding: const EdgeInsets.only(
-                top: 0.0,
-              ),
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    flex: 1,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: orderDetails
+                  .orderHistoryDetailsShippingInformation.invoices
+                  .map((invoice) {
+                return Card(
+                  elevation: 0,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: orderDetails
-                          .orderHistoryDetailsShippingInformation.invoices
-                          .map((invoice) {
-                        return Card(
-                          elevation: 0,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              children: [
-                                BalanceTextRow(
-                                  keyText: 'Invoice Number'.tr(),
-                                  valueText: invoice.invoiceNumber,
-                                  valueTextLoading: state.isLoading,
-                                  keyFlex: 1,
-                                  valueFlex: 1,
-                                ),
-                                BalanceTextRow(
-                                  keyText: 'Invoice Date'.tr(),
-                                  valueText: invoice.invoiceDate,
-                                  valueTextLoading: state.isLoading,
-                                  keyFlex: 1,
-                                  valueFlex: 1,
-                                ),
-                                BalanceTextRow(
-                                  keyText: 'Invoice Price'.tr(),
-                                  valueText: invoice.invoicePrice,
-                                  valueTextLoading: state.isLoading,
-                                  keyFlex: 1,
-                                  valueFlex: 1,
-                                ),
-                                const SizedBox(
-                                  height: 5.0,
-                                ),
-                              ],
-                            ),
-                          ),
-                        );
-                      }).toList(),
+                      children: [
+                        BalanceTextRow(
+                          keyText: 'Invoice Number'.tr(),
+                          valueText: invoice.invoiceNumber,
+                          valueTextLoading: state.isLoading,
+                          keyFlex: 1,
+                          valueFlex: 1,
+                        ),
+                        BalanceTextRow(
+                          keyText: 'Invoice Date'.tr(),
+                          valueText: invoice.invoiceDate,
+                          valueTextLoading: state.isLoading,
+                          keyFlex: 1,
+                          valueFlex: 1,
+                        ),
+                        BalanceTextRow(
+                          keyText: 'Invoice Price'.tr(),
+                          valueText: invoice.invoicePrice,
+                          valueTextLoading: state.isLoading,
+                          keyFlex: 1,
+                          valueFlex: 1,
+                        ),
+                        const SizedBox(
+                          height: 5.0,
+                        ),
+                      ],
                     ),
                   ),
-                ],
-              ),
+                );
+              }).toList(),
             ),
           ],
         );
@@ -638,6 +595,7 @@ class LoadingOverlay {
 class _ReOrder extends StatelessWidget {
   final bool fromTopMenu;
   final OrderHistoryItem orderHistoryItem;
+
   const _ReOrder({
     Key? key,
     required this.fromTopMenu,
@@ -700,7 +658,6 @@ class _ReOrder extends StatelessWidget {
   ) {
     final cartBloc = context.read<CartBloc>();
     cartBloc.add(const CartEvent.clearCart());
-    final eligibilityState = context.read<EligibilityBloc>().state;
     final orderHistoryDetails =
         context.read<OrderHistoryDetailsBloc>().state.orderHistoryDetails;
 
@@ -808,24 +765,21 @@ class _ReOrder extends StatelessWidget {
                       ),
                     ),
                   )
-            : Center(
-                child: Container(
-                  width: 160,
-                  padding: const EdgeInsets.all(16.0),
-                  child: ElevatedButton(
-                    key: const ValueKey('reOrderButton'),
-                    onPressed: () => _addToCartPressed(
-                      context,
-                      context.read<MaterialPriceDetailBloc>().state,
-                      orderHistoryItem,
-                    ),
-                    child: LoadingShimmer.withChild(
-                      enabled: state.isFetching,
-                      child: const Text('Re-order').tr(),
-                    ),
-                  ),
+            : Padding(
+              padding: const EdgeInsets.symmetric(vertical: 16.0),
+              child: ElevatedButton(
+                key: const ValueKey('reOrderButton'),
+                onPressed: () => _addToCartPressed(
+                  context,
+                  context.read<MaterialPriceDetailBloc>().state,
+                  orderHistoryItem,
                 ),
-              );
+                child: LoadingShimmer.withChild(
+                  enabled: state.isFetching,
+                  child: const Text('Re-order').tr(),
+                ),
+              ),
+            );
       },
     );
   }
@@ -849,17 +803,14 @@ class _OrderSummary extends StatelessWidget {
       buildWhen: (previous, current) => previous.isLoading != current.isLoading,
       builder: (context, state) {
         return SingleChildScrollView(
+          padding: const EdgeInsets.only(top: 15),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Text(
                 'Order Summary'.tr(),
-                style: const TextStyle(
-                  fontSize: 16.0,
-                  color: ZPColors.darkerGreen,
-                  fontWeight: FontWeight.w600,
-                ),
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
               ),
               const SizedBox(
                 height: 10,

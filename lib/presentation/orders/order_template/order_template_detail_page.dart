@@ -38,11 +38,8 @@ class OrderTemplateDetailPage extends StatelessWidget {
     return Scaffold(
       key: const Key('OrderTemplateDetailPage'),
       backgroundColor: ZPColors.white,
-      appBar: PreferredSize(
-        preferredSize: const Size(double.infinity, 60),
-        child: AppBar(
-          title: Text(order.templateName),
-        ),
+      appBar: AppBar(
+        title: Text(order.templateName),
       ),
       body: RefreshIndicator(
         color: ZPColors.primary,

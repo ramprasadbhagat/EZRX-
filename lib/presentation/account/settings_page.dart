@@ -25,89 +25,87 @@ class SettingsPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(title: const Text('Settings').tr()),
-      body: SafeArea(
-        child: Stack(
-          children: [
-            ListView(
-              children: ListTile.divideTiles(
-                context: context,
-                tiles: [
-                  const NotificationTile(),
-                  ListTile(
-                    key: const Key('changePasswordTile'),
-                    leading: const Icon(
-                      Icons.vpn_key_outlined,
-                    ),
-                    title: const Text('Change Password').tr(),
-                    onTap: () {
-                      context
-                          .read<ResetPasswordBloc>()
-                          .add(const ResetPasswordEvent.onRestart());
-                      context.router.pushNamed('change_password_page');
-                    },
+      body: Stack(
+        children: [
+          ListView(
+            children: ListTile.divideTiles(
+              context: context,
+              tiles: [
+                const NotificationTile(),
+                ListTile(
+                  key: const Key('changePasswordTile'),
+                  leading: const Icon(
+                    Icons.vpn_key_outlined,
                   ),
-                  const LanguageTile(),
-                  ListTile(
-                    key: const Key('contactUsTile'),
-                    leading: const Icon(Icons.contact_support_outlined),
-                    title: const Text('Contact Us').tr(),
-                    onTap: () => context.router.pushNamed('contact_us_page'),
-                  ),
-                  ListTile(
-                    key: const Key('tostile'),
-                    leading: const Icon(Icons.policy_outlined),
-                    title: Text('ToS'.tr()),
-                    onTap: () async {
-                      if (kIsWeb) {
-                        final privacyUrl = context.read<AupTcBloc>().state.url;
-                        if (await canLaunchUrl(
-                          Uri.tryParse(privacyUrl) ?? Uri(path: ''),
-                        )) {
-                          await launchUrl(Uri.parse(privacyUrl));
-                        }
-                      } else {
-                        await context.router
-                            .push(AupTCDialogRoute(fromSetting: true));
+                  title: const Text('Change Password').tr(),
+                  onTap: () {
+                    context
+                        .read<ResetPasswordBloc>()
+                        .add(const ResetPasswordEvent.onRestart());
+                    context.router.pushNamed('change_password_page');
+                  },
+                ),
+                const LanguageTile(),
+                ListTile(
+                  key: const Key('contactUsTile'),
+                  leading: const Icon(Icons.contact_support_outlined),
+                  title: const Text('Contact Us').tr(),
+                  onTap: () => context.router.pushNamed('contact_us_page'),
+                ),
+                ListTile(
+                  key: const Key('tostile'),
+                  leading: const Icon(Icons.policy_outlined),
+                  title: Text('ToS'.tr()),
+                  onTap: () async {
+                    if (kIsWeb) {
+                      final privacyUrl = context.read<AupTcBloc>().state.url;
+                      if (await canLaunchUrl(
+                        Uri.tryParse(privacyUrl) ?? Uri(path: ''),
+                      )) {
+                        await launchUrl(Uri.parse(privacyUrl));
                       }
-                    },
-                  ),
-                  ListTile(
-                    key: const Key('Privacy_Policy'),
-                    leading: const Icon(Icons.policy_outlined),
-                    title: const Text('Privacy Policy').tr(),
-                    onTap: () async {
-                      final config = locator<Config>();
-                      final privacyUrl = config.getPrivacyUrl;
-                      if (kIsWeb) {
-                        if (await canLaunchUrl(
-                          Uri.tryParse(privacyUrl) ?? Uri(path: ''),
-                        )) {
-                          await launchUrl(Uri.parse(privacyUrl));
-                        }
-                      } else {
-                        await context.router.push(
-                          WebViewPageRoute(
-                            url: privacyUrl,
-                            initialFile: config.getPrivacyInitialFile,
-                          ),
-                        );
+                    } else {
+                      await context.router
+                          .push(AupTCDialogRoute(fromSetting: true));
+                    }
+                  },
+                ),
+                ListTile(
+                  key: const Key('Privacy_Policy'),
+                  leading: const Icon(Icons.policy_outlined),
+                  title: const Text('Privacy Policy').tr(),
+                  onTap: () async {
+                    final config = locator<Config>();
+                    final privacyUrl = config.getPrivacyUrl;
+                    if (kIsWeb) {
+                      if (await canLaunchUrl(
+                        Uri.tryParse(privacyUrl) ?? Uri(path: ''),
+                      )) {
+                        await launchUrl(Uri.parse(privacyUrl));
                       }
-                    },
-                  ),
-                  ListTile(
-                    key: const Key('logoutTile'),
-                    leading: const Icon(Icons.logout_outlined),
-                    title: const Text('Logout').tr(),
-                    onTap: () => context.read<AuthBloc>().add(
-                          const AuthEvent.logout(),
+                    } else {
+                      await context.router.push(
+                        WebViewPageRoute(
+                          url: privacyUrl,
+                          initialFile: config.getPrivacyInitialFile,
                         ),
-                  ),
-                ],
-              ).toList(),
-            ),
-            const _VersionString(),
-          ],
-        ),
+                      );
+                    }
+                  },
+                ),
+                ListTile(
+                  key: const Key('logoutTile'),
+                  leading: const Icon(Icons.logout_outlined),
+                  title: const Text('Logout').tr(),
+                  onTap: () => context.read<AuthBloc>().add(
+                        const AuthEvent.logout(),
+                      ),
+                ),
+              ],
+            ).toList(),
+          ),
+          const SafeArea(bottom: true, child: _VersionString()),
+        ],
       ),
     );
   }
@@ -123,9 +121,12 @@ class _VersionString extends StatelessWidget {
       child: FutureBuilder<String>(
         future: locator<PackageInfoService>().getString(),
         builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-          return Text(
-            snapshot.data ?? '',
-            style: Theme.of(context).textTheme.caption,
+          return Padding(
+            padding: const EdgeInsets.only(right: 15.0),
+            child: Text(
+              snapshot.data ?? '',
+              style: Theme.of(context).textTheme.titleSmall,
+            ),
           );
         },
       ),

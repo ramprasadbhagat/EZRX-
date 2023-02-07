@@ -15,12 +15,9 @@ class CustomAppBar extends StatelessWidget {
   @override
   AppBar build(BuildContext context) {
     return AppBar(
-      // backgroundColor: ZPColors.primary,
+      centerTitle: true,
       titleSpacing: actionWidget.isNotEmpty ? 0 : 10,
       automaticallyImplyLeading: automaticallyImplyLeading,
-      // iconTheme: const IconThemeData(
-      //   color: ZPColors.white,
-      // ),
       title: Container(
         width: double.infinity,
         height: 40,
@@ -28,7 +25,7 @@ class CustomAppBar extends StatelessWidget {
           color: ZPColors.extraLightGray,
           borderRadius: BorderRadius.circular(5),
         ),
-        child: Center(child: child),
+        child: child,
       ),
       actions: actionWidget,
     );

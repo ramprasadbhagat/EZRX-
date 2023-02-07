@@ -6,7 +6,6 @@ class CustomSlidable extends StatelessWidget {
   final Widget child;
   final bool enabled;
   final double borderRadius;
-  // final List<CustomSlidableAction> startActionPaneActions;
   final List<CustomSlidableAction> endActionPaneActions;
 
   const CustomSlidable({
@@ -14,7 +13,6 @@ class CustomSlidable extends StatelessWidget {
     required this.child,
     this.enabled = true,
     this.borderRadius = 0,
-    // this.startActionPaneActions = const <CustomSlidableAction>[],
     this.endActionPaneActions = const <CustomSlidableAction>[],
   }) : super(key: key);
 
@@ -24,27 +22,6 @@ class CustomSlidable extends StatelessWidget {
 
     return Slidable(
       key: const Key('slidable'),
-      //action of left to right slide may be for future use
-      // startActionPane: startActionPaneActions.isEmpty
-      //     ? null
-      //     : ActionPane(
-      //         motion: const ScrollMotion(),
-      //         children: endActionPaneActions
-      //             .map(
-      //               (e) => SlidableAction(
-      //                 onPressed: e.onPressed,
-      //                 backgroundColor: e.backgroundColor,
-      //                 foregroundColor: e.foregroundColor,
-      //                 icon: e.icon,
-      //                 label: e.label,
-      //                 borderRadius: BorderRadius.only(
-      //                   topRight: Radius.circular(borderRadius),
-      //                   bottomRight: Radius.circular(borderRadius),
-      //                 ),
-      //               ),
-      //             )
-      //             .toList(),
-      //       ),
       endActionPane: endActionPaneActions.isEmpty
           ? null
           : ActionPane(

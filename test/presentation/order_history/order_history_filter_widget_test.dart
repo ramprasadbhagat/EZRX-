@@ -74,7 +74,6 @@ void main() {
       );
 
       await tester.pumpWidget(getWUT());
-      final orderFilterList = find.byKey(const Key('orderHistoryFilter'));
       final orderIdTextField = find.byKey(const Key('filterOrderIdField'));
       final poNumberField = find.byKey(const Key('filterPoNumberField'));
       final princeplesearchField =
@@ -86,7 +85,6 @@ void main() {
       final filterclearButton = find.byKey(const Key('filterClearButton'));
       final filterapplyButton = find.byKey(const Key('filterApplyButton'));
       final filtercrossButton = find.byKey(const Key('filterCrossButton'));
-      expect(orderFilterList, findsOneWidget);
       expect(orderIdTextField, findsOneWidget);
       expect(poNumberField, findsOneWidget);
       expect(princeplesearchField, findsOneWidget);

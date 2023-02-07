@@ -16,20 +16,17 @@ class OrderSuccessPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     locator<CountlyService>().recordCountlyView('Thank you screen');
-    
+
     return Scaffold(
       key: const Key('orderSuccessKey'),
-      appBar: PreferredSize(
-        preferredSize: const Size(double.infinity, 60),
-        child: AppBar(
-          leading: IconButton(
-            onPressed: () {
-              context.router.popUntilRouteWithName('MaterialRootRoute');
-            },
-            icon: const Icon(Icons.arrow_back),
-          ),
-          title: const Text('Order Confirmation').tr(),
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            context.router.popUntilRouteWithName('MaterialRootRoute');
+          },
+          icon: const Icon(Icons.arrow_back),
         ),
+        title: const Text('Order Confirmation').tr(),
       ),
       body: const _BodyContent(),
     );
@@ -44,80 +41,72 @@ class _BodyContent extends StatelessWidget {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
             'Thank You',
-            style: Theme.of(context).textTheme.displaySmall,
+            style: Theme.of(context)
+                .textTheme
+                .headline4
+                ?.apply(color: ZPColors.green),
           ),
           const SizedBox(
             height: 10,
           ),
           Text(
             'Your order has been received successfully',
-            style: Theme.of(context).textTheme.bodyText1,
+            style: Theme.of(context)
+                .textTheme
+                .titleLarge
+                ?.apply(color: ZPColors.darkGray),
           ),
           const SizedBox(
             height: 15,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              ElevatedButton(
-                onPressed: () {
-                  locator<CountlyService>()
-                      .addCountlyEvent('thankyou_to_create');
-                  context.router.popUntilRouteWithName('MaterialRootRoute');
-                },
-                child: Text(
-                  'Create New Order',
-                  style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                        color: ZPColors.white,
-                      ),
+          ElevatedButton(
+            onPressed: () {
+              locator<CountlyService>().addCountlyEvent('thankyou_to_create');
+              context.router.popUntilRouteWithName('MaterialRootRoute');
+            },
+            child: const Text(
+              'Create New Order',
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              locator<CountlyService>()
+                  .addCountlyEvent('order_history', segmentation: {
+                'pageSource': 'Successful Order Page',
+                'selectedSalesOrg': context
+                    .read<SalesOrgBloc>()
+                    .state
+                    .salesOrganisation
+                    .salesOrg
+                    .getOrDefaultValue(''),
+                'selectedCustomerCode': context
+                    .read<CustomerCodeBloc>()
+                    .state
+                    .customerCodeInfo
+                    .customerCodeSoldTo,
+                'selectedShipToAddress': context
+                    .read<ShipToCodeBloc>()
+                    .state
+                    .shipToInfo
+                    .shipToCustomerCode,
+              });
+              context.router.pushAndPopUntil(
+                HomeNavigationTabbarRoute(
+                  children: [
+                    HistoryTabRoute(),
+                  ],
                 ),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  locator<CountlyService>()
-                      .addCountlyEvent('order_history', segmentation: {
-                    'pageSource': 'Successful Order Page',
-                    'selectedSalesOrg': context
-                        .read<SalesOrgBloc>()
-                        .state
-                        .salesOrganisation
-                        .salesOrg
-                        .getOrDefaultValue(''),
-                    'selectedCustomerCode': context
-                        .read<CustomerCodeBloc>()
-                        .state
-                        .customerCodeInfo
-                        .customerCodeSoldTo,
-                    'selectedShipToAddress': context
-                        .read<ShipToCodeBloc>()
-                        .state
-                        .shipToInfo
-                        .shipToCustomerCode,
-                  });
-                  context.router.pushAndPopUntil(
-                    HomeNavigationTabbarRoute(
-                      children: [
-                        HistoryTabRoute(),
-                      ],
-                    ),
-                    predicate: (route) =>
-                        route.settings.name == 'HomeNavigationTabbarRoute',
-                  );
-                  locator<CountlyService>()
-                      .addCountlyEvent('thankyou_to_history');
-                },
-                child: Text(
-                  'Go To Order History',
-                  style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                        color: ZPColors.white,
-                      ),
-                ),
-              ),
-            ],
+                predicate: (route) =>
+                    route.settings.name == 'HomeNavigationTabbarRoute',
+              );
+              locator<CountlyService>().addCountlyEvent('thankyou_to_history');
+            },
+            child: const Text(
+              'Go To Order History',
+            ),
           ),
         ],
       ),

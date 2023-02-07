@@ -14,6 +14,7 @@ class ShipToAddressInfo extends StatelessWidget {
   const ShipToAddressInfo({
     Key? key,
   }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ShipToCodeBloc, ShipToCodeState>(
@@ -25,82 +26,61 @@ class ShipToAddressInfo extends StatelessWidget {
               (e) {
                 return e.key != 'License'
                     ? BalanceTextRow(
-                      keyText: e.key,
-                      valueText: e.value,
-                      keyFlex: 1,
-                      valueFlex: 1,
-                    )
+                        keyText: e.key,
+                        valueText: e.value,
+                        keyFlex: 1,
+                        valueFlex: 1,
+                      )
                     : Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          flex: 1,
-                          child: Text(
-                            e.key,
-                            style: const TextStyle(
-                              color: ZPColors.darkGray,
-                              fontSize: 12.0,
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.w400,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              e.key,
+                              style:
+                                  Theme.of(context).textTheme.titleSmall?.apply(
+                                        color: ZPColors.darkGray,
+                                      ),
                             ),
                           ),
-                        ),
-                        Expanded(
-                          flex: 1,
-                          child: GestureDetector(
+                          Expanded(
+                            child: GestureDetector(
                               key: const ValueKey('shipToAddressInfo_license'),
-                            onTap: () {
-                              final paymentCustomerInformationState = context
-                                  .read<PaymentCustomerInformationBloc>()
-                                  .state;
-                              locator<CountlyService>().addCountlyEvent(
+                              onTap: () {
+                                final paymentCustomerInformationState = context
+                                    .read<PaymentCustomerInformationBloc>()
+                                    .state;
+                                locator<CountlyService>().addCountlyEvent(
                                   'view_license_info',
                                   segmentation: {
                                     'NumLicenseAttached':
-                                      paymentCustomerInformationState
-                                      .licenses.length,
+                                        paymentCustomerInformationState
+                                            .licenses.length,
                                     'LicenseType':
-                                      paymentCustomerInformationState
-                                      .getLicensesType,
-                                  },);
-                              showModalBottomSheet(
-                                context: context,
-                                builder: (_) {
-                                  return SizedBox(
-                                    height: MediaQuery.of(context)
-                                            .size
-                                            .height *
-                                        0.6,
-                                    child: const LicenseModel(),
-                                  );
-                                },
-                              );
-                            },
-                            child: Wrap(children: [
-                              const Text(
-                                ': ',
-                                style: TextStyle(
-                                  color: ZPColors.black,
-                                  fontSize: 12.0,
-                                  fontFamily: 'Poppins',
-                                  fontWeight: FontWeight.w600,
+                                        paymentCustomerInformationState
+                                            .getLicensesType,
+                                  },
+                                );
+                                showModalBottomSheet(
+                                  context: context,
+                                  builder: (_) {
+                                    return const LicenseModel();
+                                  },
+                                );
+                              },
+                              child: Wrap(children: [
+                                Text(
+                                  ': ',
+                                    style: Theme.of(context).textTheme.titleSmall,
                                 ),
-                              ),
-                              Text(
-                                e.value,
-                                style: const TextStyle(
-                                  color: ZPColors.secondary,
-                                  fontSize: 12.0,
-                                  fontFamily: 'Poppins',
-                                  fontWeight: FontWeight.w600,
-                                  decoration: TextDecoration.underline,
+                                Text(
+                                  e.value,
+                                  style: Theme.of(context).textTheme.titleSmall?.apply(color:ZPColors.secondary),
                                 ),
-                              ),
-                            ]),
+                              ]),
+                            ),
                           ),
-                        ),
-                      ],
-                    );
+                        ],
+                      );
               },
             ),
           ],
@@ -115,6 +95,7 @@ class ShipToDetails {
     required this.key,
     required this.value,
   });
+
   final String key;
   final String value;
 }

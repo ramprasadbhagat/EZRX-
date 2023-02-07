@@ -7,6 +7,7 @@ import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
+import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/tender_contract_details_tile.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -28,14 +29,13 @@ class OrderMaterialItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 1.0,
-      margin: const EdgeInsets.all(10.0),
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
+              margin: const EdgeInsets.only(bottom: 10),
               decoration: const BoxDecoration(
                 border: Border(
                   bottom: BorderSide(
@@ -56,10 +56,11 @@ class OrderMaterialItem extends StatelessWidget {
                   return Row(
                     children: [
                       Text(
-                        'Material Description:'.tr(),
-                        style: const TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
+                        'Material Description: '.tr(),
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleMedium
+                            ?.apply(
                           color: ZPColors.darkerGreen,
                         ),
                       ),
@@ -70,23 +71,25 @@ class OrderMaterialItem extends StatelessWidget {
                               child: LoadingShimmer.tile(),
                             )
                           : itemInfo == null
-                              ? const Text(
+                              ? Text(
                                   'NA',
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w600,
-                                    color: ZPColors.darkerGreen,
-                                  ),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleMedium
+                                      ?.apply(
+                                        color: ZPColors.darkerGreen,
+                                      ),
                                 )
                               : Flexible(
                                   child: Text(
                                     materialDescription,
                                     overflow: TextOverflow.ellipsis,
-                                    style: const TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w600,
-                                      color: ZPColors.darkerGreen,
-                                    ),
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleMedium
+                                        ?.apply(
+                                          color: ZPColors.darkerGreen,
+                                        ),
                                   ),
                                 ),
                     ],
@@ -95,16 +98,14 @@ class OrderMaterialItem extends StatelessWidget {
               ),
             ),
             _MaterialItemInfo(
-              title: 'Material Number:'.tr(),
+              title: 'Material Number'.tr(),
               info: Row(
                 children: [
                   Text(
-                    materialNumber,
-                    style: const TextStyle(
-                      color: ZPColors.darkerGreen,
-                      fontSize: 14.0,
-                      fontWeight: FontWeight.w400,
-                    ),
+                    ': $materialNumber',
+                    style: Theme.of(context).textTheme.titleSmall?.apply(
+                          color: ZPColors.darkerGreen,
+                        ),
                   ),
                   const SizedBox(
                     width: 30,
@@ -128,11 +129,10 @@ class OrderMaterialItem extends StatelessWidget {
                           ),
                           child: Text(
                             'Invalid'.tr(),
-                            style: const TextStyle(
-                              color: ZPColors.primary,
-                              fontSize: 14.0,
-                              fontWeight: FontWeight.w600,
-                            ),
+                            style:
+                                Theme.of(context).textTheme.titleSmall?.apply(
+                                      color: ZPColors.primary,
+                                    ),
                           ),
                         );
                       }
@@ -143,20 +143,15 @@ class OrderMaterialItem extends StatelessWidget {
                 ],
               ),
             ),
-            _MaterialItemInfo(
-              title: 'Material Qty:'.tr(),
-              info: Text(
-                qty,
-                style: const TextStyle(
-                  color: ZPColors.darkerGreen,
-                  fontSize: 14.0,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
+            BalanceTextRow(
+              keyText: 'Material Qty'.tr(),
+              valueText: qty,
+              keyFlex: 1,
+              valueFlex: 1,
             ),
             _MaterialItemInfo(
               title:
-                  'Price before ${context.read<SalesOrgBloc>().state.salesOrg.taxCode}: '
+                  'Price before ${context.read<SalesOrgBloc>().state.salesOrg.taxCode}'
                       .tr(),
               info: _MaterialPriceInfo(
                 materialQueryInfo: materialQueryInfo,
@@ -216,36 +211,25 @@ class _MaterialItemInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const SizedBox(height: 10),
-        Row(
-          children: [
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    title,
-                    style: const TextStyle(
-                      color: ZPColors.darkerGreen,
-                      fontSize: 14.0,
-                      fontWeight: FontWeight.w400,
-                    ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        vertical: 2.0,
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            child: Text(
+              title,
+              style: Theme.of(context).textTheme.titleSmall?.apply(
+                    color: ZPColors.darkGray,
                   ),
-                ],
-              ),
             ),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[info],
-              ),
-            ),
-          ],
-        ),
-      ],
+          ),
+          Expanded(
+            child: info,
+          ),
+        ],
+      ),
     );
   }
 }
@@ -290,22 +274,18 @@ class _MaterialPriceInfo extends StatelessWidget {
           );
 
           return Text(
-            priceAggregate.display(priceType),
-            style: const TextStyle(
-              color: ZPColors.darkerGreen,
-              fontSize: 14.0,
-              fontWeight: FontWeight.w400,
-            ),
+            ': ${priceAggregate.display(priceType)}',
+            style: Theme.of(context).textTheme.titleSmall?.apply(
+                  color: ZPColors.darkerGreen,
+                ),
           );
         }
 
-        return const Text(
+        return Text(
           'NA',
-          style: TextStyle(
-            color: ZPColors.darkerGreen,
-            fontSize: 14.0,
-            fontWeight: FontWeight.w400,
-          ),
+          style: Theme.of(context).textTheme.titleSmall?.apply(
+                color: ZPColors.darkerGreen,
+              ),
         );
       },
     );

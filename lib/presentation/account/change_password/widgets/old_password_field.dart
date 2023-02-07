@@ -16,61 +16,46 @@ class OldPasswordTextField extends StatelessWidget {
           previous.isOldPasswordObscure != current.isOldPasswordObscure ||
           previous.oldPassword != current.oldPassword,
       builder: (context, state) {
-        return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: TextFormField(
-            key: const Key('oldPasswordTextField'),
-            autocorrect: false,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            style: const TextStyle(
-              color: ZPColors.primary,
-            ),
-            onChanged: (text) {
-              context.read<ResetPasswordBloc>().add(
-                    ResetPasswordEvent.onTextChange(
-                      PasswordFieldType.oldPassword,
-                      text,
-                      user,
-                    ),
-                  );
-            },
-            obscureText: state.isOldPasswordObscure,
-            validator: (_) {
-              return state.oldPassword.value.fold(
-                (f) => f.maybeMap(
-                  empty: (_) => 'Old Password.'.tr(),
-                  orElse: () => null,
-                ),
-                (_) => null,
-              );
-            },
-            decoration: InputDecoration(
-              labelText: 'Old Password'.tr(),
-              suffixIcon: IconButton(
-                key: const Key('oldPasswordToggle'),
-                icon: Icon(
-                  state.isOldPasswordObscure
-                      ? Icons.visibility_off
-                      : Icons.visibility,
-                  color: ZPColors.primary,
-                ),
-                onPressed: () {
-                  context.read<ResetPasswordBloc>().add(
-                        ResetPasswordEvent.togglePasswordVisibility(
-                          PasswordFieldType.oldPassword,
-                          !state.isOldPasswordObscure,
-                        ),
-                      );
-                },
+        return TextFormField(
+          key: const Key('oldPasswordTextField'),
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          onChanged: (text) {
+            context.read<ResetPasswordBloc>().add(
+                  ResetPasswordEvent.onTextChange(
+                    PasswordFieldType.oldPassword,
+                    text,
+                    user,
+                  ),
+                );
+          },
+          obscureText: state.isOldPasswordObscure,
+          validator: (_) {
+            return state.oldPassword.value.fold(
+              (f) => f.maybeMap(
+                empty: (_) => 'Old Password.'.tr(),
+                orElse: () => null,
               ),
-              isDense: true,
-              errorMaxLines: 3,
-              border: const UnderlineInputBorder(),
-              hintStyle: const TextStyle(
-                color: ZPColors.lightGray,
-                fontSize: 14,
-                fontFamily: 'Roboto',
+              (_) => null,
+            );
+          },
+          decoration: InputDecoration(
+            labelText: 'Old Password'.tr(),
+            suffixIcon: IconButton(
+              key: const Key('oldPasswordToggle'),
+              icon: Icon(
+                state.isOldPasswordObscure
+                    ? Icons.visibility_off
+                    : Icons.visibility,
+                color: ZPColors.primary,
               ),
+              onPressed: () {
+                context.read<ResetPasswordBloc>().add(
+                      ResetPasswordEvent.togglePasswordVisibility(
+                        PasswordFieldType.oldPassword,
+                        !state.isOldPasswordObscure,
+                      ),
+                    );
+              },
             ),
           ),
         );

@@ -74,17 +74,11 @@ class FavouriteListTile extends StatelessWidget {
               title: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        favourite.materialNumber.displayMatNo,
-                        style: Theme.of(context).textTheme.subtitle2?.apply(
-                              color: ZPColors.kPrimaryColor,
-                            ),
-                      ),
-                      // BonusDiscountLabel(materialInfo: materialInfo),
-                    ],
+                  Text(
+                    favourite.materialNumber.displayMatNo,
+                    style: Theme.of(context).textTheme.subtitle2?.apply(
+                          color: ZPColors.kPrimaryColor,
+                        ),
                   ),
                   Text(
                     favourite.materialDescription,

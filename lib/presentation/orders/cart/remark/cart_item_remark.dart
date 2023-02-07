@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 class RemarksMessage extends StatelessWidget {
   final String message;
   final Widget showEditDeleteDialog;
+
   const RemarksMessage({
     Key? key,
     required this.message,
@@ -14,66 +15,41 @@ class RemarksMessage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final messageTextGroup = Flexible(
-      child: Padding(
-        padding: const EdgeInsets.only(left: 16.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Transform(
-              alignment: Alignment.center,
-              transform: Matrix4.rotationY(math.pi),
-              child: CustomPaint(
-                painter: Triangle(ZPColors.darkGray),
-              ),
-            ),
-            Flexible(
-              child: Container(
-                padding: const EdgeInsets.only(left: 8),
-                decoration: const BoxDecoration(
-                  color: ZPColors.darkGray,
-                  borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(18),
-                    bottomLeft: Radius.circular(18),
-                    bottomRight: Radius.circular(18),
-                  ),
-                ),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: ListTile(
-                        contentPadding: EdgeInsets.zero,
-                        dense: true,
-                        title: Text(
-                          message,
-                          style: const TextStyle(
-                            color: ZPColors.white,
-                            fontFamily: 'Monstserrat',
-                            fontSize: 14,
-                          ),
-                        ),
-                        trailing: showEditDeleteDialog,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-
     return Padding(
-      padding: const EdgeInsets.only(right: 10.0, left: 8, top: 5, bottom: 5),
+      padding: const EdgeInsets.only(left: 40, top: 5, right: 10),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: <Widget>[
-          const SizedBox(height: 30),
-          messageTextGroup,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Transform(
+            alignment: Alignment.center,
+            transform: Matrix4.rotationY(math.pi),
+            child: CustomPaint(
+              painter: Triangle(ZPColors.darkGray),
+            ),
+          ),
+          Flexible(
+            child: ListTile(
+              contentPadding: const EdgeInsets.only(left: 15),
+              tileColor: ZPColors.darkGray,
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(18),
+                  bottomLeft: Radius.circular(18),
+                  bottomRight: Radius.circular(18),
+                ),
+              ),
+              dense: true,
+              title: Text(
+                message,
+                style: Theme.of(context)
+                    .textTheme
+                    .titleSmall
+                    ?.apply(color: ZPColors.white),
+              ),
+              trailing: showEditDeleteDialog,
+            ),
+          ),
         ],
       ),
     );

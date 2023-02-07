@@ -82,152 +82,82 @@ class _PoAttachmentState extends State<PoAttachment> {
               ),
             );
           },
-          child: Container(
-            padding: const EdgeInsets.only(top: 8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                if (!edit)
-                  Expanded(
-                    flex: 1,
-                    child: Text(
-                      'Uploaded Attachments'.tr(),
-                      style: const TextStyle(
-                        color: ZPColors.darkerGreen,
-                        fontSize: 14.0,
-                        fontWeight: FontWeight.w600,
-                      ),
+          child: Row(
+            children: [
+              if (!edit)
+                Expanded(
+                  child: Text(
+                    'Uploaded Attachments'.tr(),
+                    style: const TextStyle(
+                      color: ZPColors.darkerGreen,
+                      fontSize: 14.0,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
-                Expanded(
-                  flex: 2,
-                  child: Column(
-                    children: [
-                      Column(children: [
-                        ...widget.poDocuments
-                            .sublist(0, listLength)
-                            .map((poDocuments) {
-                          return poDocuments.url.isEmpty
-                              ? SizedBox(
-                                  width: 40,
-                                  child: LoadingShimmer.tile(),
-                                )
-                              : Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    InkWell(
-                                      key: Key(poDocuments.url),
-                                      onTap: () async {
-                                        context
-                                            .read<PoAttachmentBloc>()
-                                            .add(PoAttachmentEvent.downloadFile(
-                                              files: [poDocuments],
-                                              fetchMode:
-                                                  FileOperationhMode.view,
-                                            ));
-                                      },
-                                      child: _PoAttachmentWidget(
-                                        key: ValueKey(poDocuments.name),
-                                        poDocuments: poDocuments,
-                                        edit: edit,
-                                      ),
-                                    ),
-                                  ],
-                                );
-                        }).toList(),
-                        ...context
-                            .read<PoAttachmentBloc>()
-                            .state
-                            .uploadInProgressPoDocument
-                            .map(
-                              (e) => _PoAttachmentWidget(
-                                key: ValueKey(
-                                  'poAttachmentUploadInProgress ${e.name}',
-                                ),
-                                poDocuments: e,
-                                edit: false,
-                              ),
-                            )
-                            .toList(),
-                      ]),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          if (!edit)
-                            (widget.poDocuments.length > 2 && !show)
-                                ? InkWell(
-                                    key: const Key('viewAll'),
-                                    child: Text(
-                                      'View All'.tr(),
-                                      style: const TextStyle(
-                                        shadows: [
-                                          Shadow(
-                                              color: ZPColors.darkerGreen,
-                                            offset: Offset(0, -2),
-                                          ),
-                                        ],
-                                        color: Colors.transparent,
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 17.0,
-                                        decoration: TextDecoration.underline,
-                                        decorationColor: ZPColors.darkerGreen,
-                                      ),
-                                    ),
-                                    onTap: () {
-                                      setState(() {
-                                        show = !show;
-                                      });
-                                    },
-                                  )
-                                : const SizedBox.shrink(),
-                          if (edit && widget.poDocuments.isNotEmpty)
-                            const _PoUploadDeleteAll(
-                              key: ValueKey('deleteAll'),
-                            ),
-                          if (widget.poDocuments.isNotEmpty)
-                            InkWell(
-                              key: const Key('downloadAll'),
-                              onTap: () async {
-                                if (defaultTargetPlatform ==
-                                        TargetPlatform.android &&
-                                    !(await locator<PermissionService>()
-                                        .requeststoragePermission()
-                                        .isGranted)) {
-                                  showSnackBar(
-                                    context: context,
-                                    message:
-                                        'Allow apps to access the storage'.tr(),
-                                  );
-
-                                  return;
-                                }
-                                if (!mounted) return;
-                                context.read<PoAttachmentBloc>().add(
-                                      PoAttachmentEvent.downloadFile(
-                                        files: widget.poDocuments,
-                                        fetchMode: FileOperationhMode.download,
-                                      ),
-                                    );
-                              },
-                              child: Row(
+                ),
+              Expanded(
+                flex: 2,
+                child: Column(
+                  children: [
+                    Column(children: [
+                      ...widget.poDocuments
+                          .sublist(0, listLength)
+                          .map((poDocuments) {
+                        return poDocuments.url.isEmpty
+                            ? SizedBox(
+                                width: 40,
+                                child: LoadingShimmer.tile(),
+                              )
+                            : Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(bottom: 5),
-                                    child: SvgPicture.asset(
-                                      'assets/svg/po_attachment_download.svg',
-                                      height: 16,
-                                      width: 16,
+                                  InkWell(
+                                    key: Key(poDocuments.url),
+                                    onTap: () async {
+                                      context
+                                          .read<PoAttachmentBloc>()
+                                          .add(PoAttachmentEvent.downloadFile(
+                                            files: [poDocuments],
+                                            fetchMode:
+                                                FileOperationhMode.view,
+                                          ));
+                                    },
+                                    child: _PoAttachmentWidget(
+                                      key: ValueKey(poDocuments.name),
+                                      poDocuments: poDocuments,
+                                      edit: edit,
                                     ),
                                   ),
-                                  const SizedBox(
-                                    width: 6,
-                                  ),
-                                  Text(
-                                    'Download All'.tr(),
+                                ],
+                              );
+                      }).toList(),
+                      ...context
+                          .read<PoAttachmentBloc>()
+                          .state
+                          .uploadInProgressPoDocument
+                          .map(
+                            (e) => _PoAttachmentWidget(
+                              key: ValueKey(
+                                'poAttachmentUploadInProgress ${e.name}',
+                              ),
+                              poDocuments: e,
+                              edit: false,
+                            ),
+                          )
+                          .toList(),
+                    ]),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        if (!edit)
+                          (widget.poDocuments.length > 2 && !show)
+                              ? InkWell(
+                                  key: const Key('viewAll'),
+                                  child: Text(
+                                    'View All'.tr(),
                                     style: const TextStyle(
                                       shadows: [
                                         Shadow(
@@ -242,16 +172,80 @@ class _PoAttachmentState extends State<PoAttachment> {
                                       decorationColor: ZPColors.darkerGreen,
                                     ),
                                   ),
-                                ],
-                              ),
+                                  onTap: () {
+                                    setState(() {
+                                      show = !show;
+                                    });
+                                  },
+                                )
+                              : const SizedBox.shrink(),
+                        if (edit && widget.poDocuments.isNotEmpty)
+                          const _PoUploadDeleteAll(
+                            key: ValueKey('deleteAll'),
+                          ),
+                        if (widget.poDocuments.isNotEmpty)
+                          InkWell(
+                            key: const Key('downloadAll'),
+                            onTap: () async {
+                              if (defaultTargetPlatform ==
+                                      TargetPlatform.android &&
+                                  !(await locator<PermissionService>()
+                                      .requeststoragePermission()
+                                      .isGranted)) {
+                                showSnackBar(
+                                  context: context,
+                                  message:
+                                      'Allow apps to access the storage'.tr(),
+                                );
+
+                                return;
+                              }
+                              if (!mounted) return;
+                              context.read<PoAttachmentBloc>().add(
+                                    PoAttachmentEvent.downloadFile(
+                                      files: widget.poDocuments,
+                                      fetchMode: FileOperationhMode.download,
+                                    ),
+                                  );
+                            },
+                            child: Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(bottom: 5),
+                                  child: SvgPicture.asset(
+                                    'assets/svg/po_attachment_download.svg',
+                                    height: 16,
+                                    width: 16,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 6,
+                                ),
+                                Text(
+                                  'Download All'.tr(),
+                                  style: const TextStyle(
+                                    shadows: [
+                                      Shadow(
+                                          color: ZPColors.darkerGreen,
+                                        offset: Offset(0, -2),
+                                      ),
+                                    ],
+                                    color: Colors.transparent,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 16.0,
+                                    decoration: TextDecoration.underline,
+                                    decorationColor: ZPColors.darkerGreen,
+                                  ),
+                                ),
+                              ],
                             ),
-                        ],
-                      ),
-                    ],
-                  ),
+                          ),
+                      ],
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ],
@@ -379,7 +373,7 @@ class _PoUploadDeleteAll extends StatelessWidget {
               shadows: [Shadow(color: ZPColors.red, offset: Offset(0, -2))],
               color: Colors.transparent,
               fontWeight: FontWeight.w600,
-              fontSize: 17.0,
+              fontSize: 16.0,
               decoration: TextDecoration.underline,
               decorationColor: ZPColors.red,
             ),

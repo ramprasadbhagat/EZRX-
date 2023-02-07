@@ -84,7 +84,10 @@ class AddRemarkDialog {
             child: Builder(builder: (context) {
               return PlatformAlertDialog(
                 key: const Key('addRemarksDialog'),
-                title: Text(isEdit ? 'Update Remarks' : 'Add Remarks').tr(),
+                title: Padding(
+                  padding: const EdgeInsets.only(bottom: 15),
+                  child: Text(isEdit ? 'Update Remarks' : 'Add Remarks').tr(),
+                ),
                 content: RemarksForm(currentRemarkData: remarks),
                 actions: [
                   PlatformDialogAction(

@@ -212,7 +212,7 @@ class CartMaterialItemTileDetails extends StatelessWidget {
             children: [
               Text(
                 material.materialInfo.materialNumber.displayMatNo,
-                style: Theme.of(context).textTheme.subtitle2?.apply(
+                style: Theme.of(context).textTheme.titleSmall?.apply(
                       color: ZPColors.kPrimaryColor,
                     ),
               ),
@@ -226,32 +226,32 @@ class CartMaterialItemTileDetails extends StatelessWidget {
           ),
           Text(
             material.materialInfo.materialDescription,
-            style: Theme.of(context).textTheme.bodyText1,
+            style: Theme.of(context).textTheme.titleSmall,
           ),
           if (material.isDefaultMDEnabled)
             Text(
               material.materialInfo.defaultMaterialDescription,
-              style: Theme.of(context).textTheme.subtitle2?.apply(
+              style: Theme.of(context).textTheme.titleSmall?.apply(
                     color: ZPColors.lightGray,
                   ),
             ),
           Text(
             material.materialInfo.principalData.principalName,
-            style: Theme.of(context).textTheme.subtitle2?.apply(
+            style: Theme.of(context).textTheme.titleSmall?.apply(
                   color: ZPColors.lightGray,
                 ),
           ),
           if (isOrderSummaryView)
             Text(
               '${'Material type : '.tr()}${material.toSavedOrderMaterial().type}',
-              style: Theme.of(context).textTheme.bodyText1?.apply(
+              style: Theme.of(context).textTheme.titleSmall?.apply(
                     color: ZPColors.lightGray,
                   ),
             ),
           if (isOrderSummaryView)
             Text(
               '${'Unit of Measurement : '.tr()}${material.materialInfo.unitOfMeasurement}',
-              style: Theme.of(context).textTheme.bodyText1?.apply(
+              style: Theme.of(context).textTheme.titleSmall?.apply(
                     color: ZPColors.lightGray,
                   ),
             ),
@@ -266,7 +266,7 @@ class CartMaterialItemTileDetails extends StatelessWidget {
                   ),
                   child: Text(
                     'Deals : '.tr(),
-                    style: Theme.of(context).textTheme.bodyText1?.apply(
+                    style: Theme.of(context).textTheme.titleSmall?.apply(
                           color: ZPColors.lightGray,
                         ),
                   ),
@@ -288,14 +288,14 @@ class CartMaterialItemTileDetails extends StatelessWidget {
           if (material.salesOrgConfig.expiryDateDisplay)
             Text(
               '${'Expiry Date : '.tr()}${material.stockInfo.expiryDate.getExpiryDate}',
-              style: Theme.of(context).textTheme.bodyText1?.apply(
+              style: Theme.of(context).textTheme.titleSmall?.apply(
                     color: ZPColors.lightGray,
                   ),
             ),
           if (!material.salesOrgConfig.hideStockDisplay)
             Text(
               '${'In Stock : '.tr()}${material.stockInfo.inStock.getOrDefaultValue('')}',
-              style: Theme.of(context).textTheme.bodyText1?.apply(
+              style: Theme.of(context).textTheme.titleSmall?.apply(
                     color: ZPColors.lightGray,
                   ),
             ),
@@ -332,7 +332,7 @@ class CartMaterialItemTileDetails extends StatelessWidget {
                 if (enableVat)
                   Text(
                     '${'Price before $taxCode: '.tr()}${material.display(PriceType.finalPrice)}',
-                    style: Theme.of(context).textTheme.bodyText1?.apply(
+                    style: Theme.of(context).textTheme.titleSmall?.apply(
                           color:
                               isPriceOverride ? ZPColors.red : ZPColors.black,
                           decoration: _isPriceOverRideVisible(context)
@@ -344,7 +344,7 @@ class CartMaterialItemTileDetails extends StatelessWidget {
                   Text(
                     '${'List Price: '.tr()}${material.display(PriceType.listPrice)}',
                     key: const Key('listPrice'),
-                    style: Theme.of(context).textTheme.bodyText1?.apply(
+                    style: Theme.of(context).textTheme.titleSmall?.apply(
                           color:
                               isPriceOverride ? ZPColors.red : ZPColors.black,
                           decoration: _isPriceOverRideVisible(context)
@@ -355,7 +355,7 @@ class CartMaterialItemTileDetails extends StatelessWidget {
                 Text(
                   '${'Unit Price: '.tr()}${material.display(PriceType.unitPrice)}',
                   key: const Key('unitPrice'),
-                  style: Theme.of(context).textTheme.bodyText1?.apply(
+                  style: Theme.of(context).textTheme.titleSmall?.apply(
                         color: isPriceOverride ? ZPColors.red : ZPColors.black,
                         decoration: _isPriceOverRideVisible(context)
                             ? TextDecoration.underline
@@ -365,7 +365,7 @@ class CartMaterialItemTileDetails extends StatelessWidget {
                 if (isOrderSummaryView)
                   Text(
                     '${'Total Price: '.tr()}${material.display(PriceType.unitPriceTotal)}',
-                    style: Theme.of(context).textTheme.bodyText1?.apply(
+                    style: Theme.of(context).textTheme.titleSmall?.apply(
                           color:
                               isPriceOverride ? ZPColors.red : ZPColors.black,
                           decoration: _isPriceOverRideVisible(context)

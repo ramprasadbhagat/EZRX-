@@ -48,7 +48,7 @@ class AddPolicyConfigurationState extends State<AddPolicyConfiguration> {
       backgroundColor: ZPColors.white,
       appBar: AppBar(title: const Text('Add Policy Configuration').tr()),
       body: Padding(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(15),
         child: Form(
           key: formKey,
           autovalidateMode: AutovalidateMode.disabled,
@@ -114,43 +114,8 @@ class _SalesOrganizationField extends StatelessWidget {
           .getOrCrash(),
       enabled: false,
       keyboardType: TextInputType.none,
-      style: const TextStyle(
-        fontSize: 14,
-        fontWeight: FontWeight.w400,
-      ),
       decoration: InputDecoration(
-        contentPadding: const EdgeInsets.symmetric(
-          vertical: 5.0,
-          horizontal: 10.0,
-        ),
         labelText: 'Sales Organization '.tr(),
-        labelStyle: const TextStyle(
-          fontSize: 12.0,
-        ),
-        focusedBorder: const OutlineInputBorder(
-          borderSide: BorderSide(
-            color: ZPColors.kPrimaryColor,
-            width: 1.0,
-          ),
-        ),
-        border: const OutlineInputBorder(
-          borderSide: BorderSide(width: 1.0),
-          borderRadius: BorderRadius.all(
-            Radius.circular(8.0),
-          ),
-        ),
-        errorBorder: const OutlineInputBorder(
-          borderSide: BorderSide(
-            width: 1,
-            color: ZPColors.kPrimaryColor,
-          ),
-        ),
-        focusedErrorBorder: const OutlineInputBorder(
-          borderSide: BorderSide(
-            width: 1,
-            color: ZPColors.kPrimaryColor,
-          ),
-        ),
       ),
     );
   }
@@ -174,15 +139,12 @@ class _ReturnsAllowedField extends StatelessWidget {
               children: [
                 Text(
                   'Return Allowed:'.tr(),
-                  style: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                  ),
+                  style: Theme.of(context).textTheme.titleSmall,
                 ),
                 const Spacer(),
                 PlatformSwitch(
                   key: const Key('flutterSwitch'),
-                  activeColor: ZPColors.darkBlue,
+                  activeColor: ZPColors.primary,
                   value: state.returnsAllowed.getOrCrash(),
                   onChanged: (bool value) {
                     context.read<PolicyConfigurationBloc>().add(
@@ -194,25 +156,22 @@ class _ReturnsAllowedField extends StatelessWidget {
             ),
             if (!state.returnsAllowed.getOrCrash())
               Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  Icon(
+                children: [
+                  const Icon(
                     Icons.warning_amber_outlined,
                     color: ZPColors.red,
                     size: 20,
                   ),
-                  SizedBox(
-                    width: 4,
+                  const SizedBox(
+                    width: 10,
                   ),
                   Flexible(
                     child: Text(
                       "This principal's materials will NOT be available for return via eZRX",
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                        color: ZPColors.red,
-                      ),
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleSmall
+                          ?.apply(color: ZPColors.red),
                     ),
                   ),
                 ],
@@ -240,43 +199,8 @@ class _PrincipalCodeField extends StatelessWidget {
             : null;
       },
       keyboardType: TextInputType.text,
-      style: const TextStyle(
-        fontSize: 14,
-        fontWeight: FontWeight.w400,
-      ),
       decoration: InputDecoration(
-        contentPadding: const EdgeInsets.symmetric(
-          vertical: 5.0,
-          horizontal: 10.0,
-        ),
         labelText: 'Please assign a valid sales principal code'.tr(),
-        labelStyle: const TextStyle(
-          fontSize: 12.0,
-        ),
-        focusedBorder: const OutlineInputBorder(
-          borderSide: BorderSide(
-            color: ZPColors.kPrimaryColor,
-            width: 1.0,
-          ),
-        ),
-        border: const OutlineInputBorder(
-          borderSide: BorderSide(width: 1.0),
-          borderRadius: BorderRadius.all(
-            Radius.circular(8.0),
-          ),
-        ),
-        errorBorder: const OutlineInputBorder(
-          borderSide: BorderSide(
-            width: 1,
-            color: ZPColors.kPrimaryColor,
-          ),
-        ),
-        focusedErrorBorder: const OutlineInputBorder(
-          borderSide: BorderSide(
-            width: 1,
-            color: ZPColors.kPrimaryColor,
-          ),
-        ),
       ),
     );
   }
@@ -302,43 +226,8 @@ class _MonthsBeforeExpiryField extends StatelessWidget {
         );
       },
       keyboardType: TextInputType.number,
-      style: const TextStyle(
-        fontSize: 14,
-        fontWeight: FontWeight.w400,
-      ),
       decoration: InputDecoration(
-        contentPadding: const EdgeInsets.symmetric(
-          vertical: 5.0,
-          horizontal: 10.0,
-        ),
         labelText: 'Months Before Expiry'.tr(),
-        labelStyle: const TextStyle(
-          fontSize: 12.0,
-        ),
-        focusedBorder: const OutlineInputBorder(
-          borderSide: BorderSide(
-            color: ZPColors.kPrimaryColor,
-            width: 1.0,
-          ),
-        ),
-        border: const OutlineInputBorder(
-          borderSide: BorderSide(width: 1.0),
-          borderRadius: BorderRadius.all(
-            Radius.circular(8.0),
-          ),
-        ),
-        errorBorder: const OutlineInputBorder(
-          borderSide: BorderSide(
-            width: 1,
-            color: ZPColors.kPrimaryColor,
-          ),
-        ),
-        focusedErrorBorder: const OutlineInputBorder(
-          borderSide: BorderSide(
-            width: 1,
-            color: ZPColors.kPrimaryColor,
-          ),
-        ),
       ),
     );
   }
@@ -364,43 +253,8 @@ class _MonthsAfterExpiryField extends StatelessWidget {
         );
       },
       keyboardType: TextInputType.number,
-      style: const TextStyle(
-        fontSize: 14,
-        fontWeight: FontWeight.w400,
-      ),
       decoration: InputDecoration(
-        contentPadding: const EdgeInsets.symmetric(
-          vertical: 5.0,
-          horizontal: 10.0,
-        ),
         labelText: 'Months After Expiry'.tr(),
-        labelStyle: const TextStyle(
-          fontSize: 12.0,
-        ),
-        focusedBorder: const OutlineInputBorder(
-          borderSide: BorderSide(
-            color: ZPColors.kPrimaryColor,
-            width: 1.0,
-          ),
-        ),
-        border: const OutlineInputBorder(
-          borderSide: BorderSide(width: 1.0),
-          borderRadius: BorderRadius.all(
-            Radius.circular(8.0),
-          ),
-        ),
-        errorBorder: const OutlineInputBorder(
-          borderSide: BorderSide(
-            width: 1,
-            color: ZPColors.kPrimaryColor,
-          ),
-        ),
-        focusedErrorBorder: const OutlineInputBorder(
-          borderSide: BorderSide(
-            width: 1,
-            color: ZPColors.kPrimaryColor,
-          ),
-        ),
       ),
     );
   }
@@ -447,9 +301,6 @@ class _SubmitButton extends StatelessWidget {
             context.router.pop();
           }
         },
-        style: ElevatedButton.styleFrom(
-          backgroundColor: ZPColors.darkBlue,
-        ),
         child: Text('Submit'.tr()),
       ),
     );

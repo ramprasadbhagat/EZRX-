@@ -54,29 +54,23 @@ class _CartItemDetailWidgetState extends State<CartItemDetailWidget> {
 
     return Column(
       children: [
-        Center(
-          child: Text(
-            widget.cartItem.materialInfo.materialDescription,
-            style: Theme.of(context).textTheme.headline6?.apply(
-                  color: ZPColors.black,
-                ),
-          ),
+        Text(
+          widget.cartItem.materialInfo.materialDescription,
+          style: Theme.of(context).textTheme.titleLarge?.apply(
+                color: ZPColors.black,
+              ),
         ),
-        Center(
-          child: Text(
-            widget.cartItem.materialInfo.principalData.principalName,
-            style: Theme.of(context).textTheme.subtitle2?.apply(
-                  color: ZPColors.lightGray,
-                ),
-          ),
+        Text(
+          widget.cartItem.materialInfo.principalData.principalName,
+          style: Theme.of(context).textTheme.titleMedium?.apply(
+                color: ZPColors.lightGray,
+              ),
         ),
-        Center(
-          child: Text(
-            widget.cartItem.materialInfo.materialNumber.displayMatNo,
-            style: Theme.of(context).textTheme.subtitle2?.apply(
-                  color: ZPColors.lightGray,
-                ),
-          ),
+        Text(
+          widget.cartItem.materialInfo.materialNumber.displayMatNo,
+          style: Theme.of(context).textTheme.titleMedium?.apply(
+                color: ZPColors.darkGray,
+              ),
         ),
         BonusDetails(
           cartItem: widget.cartItem,
@@ -94,46 +88,44 @@ class _CartItemDetailWidgetState extends State<CartItemDetailWidget> {
                   .toList(),
             ],
           ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            QuantityInput(
-              isEnabled: true,
-              quantityAddKey: const Key('cartItemAdd'),
-              quantityDeleteKey: const Key('cartItemDelete'),
-              quantityTextKey: const Key('item'),
-              controller: _controller,
-              onFieldChange: (val) {
-                locator<CountlyService>()
-                    .addCountlyEvent('changed_quantity', segmentation: {
-                  'materialNum': widget.cartItem.getMaterialNumber.getOrCrash(),
-                  'listPrice': widget.cartItem.listPrice,
-                  'price': widget.cartItem.price.finalPrice.getOrCrash(),
-                });
-                widget.onQuantityChanged.call(val);
-              },
-              minusPressed: (val) {
-                locator<CountlyService>()
-                    .addCountlyEvent('deduct_quantity', segmentation: {
-                  'materialNum': widget.cartItem.getMaterialNumber.getOrCrash(),
-                  'listPrice': widget.cartItem.listPrice,
-                  'price': widget.cartItem.price.finalPrice.getOrCrash(),
-                });
-                widget.onQuantityChanged.call(val);
-              },
-              addPressed: (val) {
-                locator<CountlyService>()
-                    .addCountlyEvent('add_quantity', segmentation: {
-                  'materialNum': widget.cartItem.getMaterialNumber.getOrCrash(),
-                  'listPrice': widget.cartItem.listPrice,
-                  'price': widget.cartItem.price.finalPrice.getOrCrash(),
-                });
-                widget.onQuantityChanged.call(val);
-              },
-            ),
-          ],
+
+        Padding(
+          padding: const EdgeInsets.all(15),
+          child: QuantityInput(
+            isEnabled: true,
+            quantityAddKey: const Key('cartItemAdd'),
+            quantityDeleteKey: const Key('cartItemDelete'),
+            quantityTextKey: const Key('item'),
+            controller: _controller,
+            onFieldChange: (val) {
+              locator<CountlyService>()
+                  .addCountlyEvent('changed_quantity', segmentation: {
+                'materialNum': widget.cartItem.getMaterialNumber.getOrCrash(),
+                'listPrice': widget.cartItem.listPrice,
+                'price': widget.cartItem.price.finalPrice.getOrCrash(),
+              });
+              widget.onQuantityChanged.call(val);
+            },
+            minusPressed: (val) {
+              locator<CountlyService>()
+                  .addCountlyEvent('deduct_quantity', segmentation: {
+                'materialNum': widget.cartItem.getMaterialNumber.getOrCrash(),
+                'listPrice': widget.cartItem.listPrice,
+                'price': widget.cartItem.price.finalPrice.getOrCrash(),
+              });
+              widget.onQuantityChanged.call(val);
+            },
+            addPressed: (val) {
+              locator<CountlyService>()
+                  .addCountlyEvent('add_quantity', segmentation: {
+                'materialNum': widget.cartItem.getMaterialNumber.getOrCrash(),
+                'listPrice': widget.cartItem.listPrice,
+                'price': widget.cartItem.price.finalPrice.getOrCrash(),
+              });
+              widget.onQuantityChanged.call(val);
+            },
+          ),
         ),
-        const SizedBox(height: 15),
         BlocBuilder<TenderContractBloc, TenderContractState>(
           buildWhen: (previous, current) =>
               previous.selectedTenderContract != current.selectedTenderContract,
@@ -154,53 +146,43 @@ class _CartItemDetailWidgetState extends State<CartItemDetailWidget> {
                     ),
                   );
 
-            return Column(
-              children: [
-                enableVat
-                    ? Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: BalanceTextRow(
-                          keyText: 'Unit price before $taxCode'.tr(),
-                          valueText: cartItem.display(PriceType.finalPrice),
-                          keyFlex: 1,
-                          valueFlex: 1,
-                        ),
+            return Padding(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                children: [
+                  enableVat
+                      ? BalanceTextRow(
+                        keyText: 'Unit price before $taxCode'.tr(),
+                        valueText: cartItem.display(PriceType.finalPrice),
+                        keyFlex: 1,
+                        valueFlex: 1,
                       )
-                    : const SizedBox.shrink(),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: BalanceTextRow(
+                      : const SizedBox.shrink(),
+                  BalanceTextRow(
                     keyText: 'Unit Price'.tr(),
                     valueText: cartItem.display(PriceType.unitPrice),
                     keyFlex: 1,
                     valueFlex: 1,
                   ),
-                ),
-                enableVat
-                    ? Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: BalanceTextRow(
-                          keyText: 'Total price before $taxCode'.tr(),
-                          valueText: cartItem.display(PriceType.finalPriceTotal),
-                          keyFlex: 1,
-                          valueFlex: 1,
-                        ),
+                  enableVat
+                      ? BalanceTextRow(
+                        keyText: 'Total price before $taxCode'.tr(),
+                        valueText: cartItem.display(PriceType.finalPriceTotal),
+                        keyFlex: 1,
+                        valueFlex: 1,
                       )
-                    : const SizedBox.shrink(),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: BalanceTextRow(
+                      : const SizedBox.shrink(),
+                  BalanceTextRow(
                     keyText: 'Total Price'.tr(),
                     valueText: cartItem.display(PriceType.unitPriceTotal),
                     keyFlex: 1,
                     valueFlex: 1,
                   ),
-                ),
-              ],
+                ],
+              ),
             );
           },
         ),
-        const SizedBox(height: 15),
       ],
     );
   }

@@ -90,14 +90,14 @@ class TenderContractHeader extends StatelessWidget {
         !tenderContract.tenderOrderReason.isEmpty
             ? Text(
                 '${tenderContract.tenderOrderReason.displayTenderContractReason} : Tender with Contract',
-                style: Theme.of(context).textTheme.subtitle2?.apply(
+                style: Theme.of(context).textTheme.titleSmall?.apply(
                       color: ZPColors.lightGray,
                     ),
               )
             : const SizedBox.shrink(),
         Text(
           'Tender Price: ${tenderContract.tenderPrice.tenderPriceByPricingUnit(tenderContract.pricingUnit)}',
-          style: Theme.of(context).textTheme.subtitle2?.apply(
+          style: Theme.of(context).textTheme.titleSmall?.apply(
                 color: ZPColors.lightGray,
               ),
         ),

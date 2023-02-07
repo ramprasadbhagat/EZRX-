@@ -11,7 +11,6 @@ class ContactUsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: ZPColors.white,
       appBar: AppBar(
         title: const Text('Contact Us').tr(),
       ),

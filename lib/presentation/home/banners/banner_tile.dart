@@ -34,65 +34,62 @@ class BannerTile extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(5),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(5),
-        child: FutureBuilder(
-          future: _fetchImageData(imgUrl: banner.url, config: config),
-          builder: (context, image) {
-            return image.data != null
-                ? GestureDetector(
-                    onTap: () async {
-                      await locator<CountlyService>().addCountlyEvent(
-                        'carousel_banner_clicked',
-                        segmentation: {
-                          'banner_id': banner.id,
-                          'landingPage': banner.urlLink,
-                          'selectedSalesOrg': banner.salesOrg,
-                          'selectedCustomerCode': context
-                              .read<CustomerCodeBloc>()
-                              .state
-                              .customerCodeInfo
-                              .customerCodeSoldTo,
-                          'selectedShipToAddress': context
-                              .read<ShipToCodeBloc>()
-                              .state
-                              .shipToInfo
-                              .shipToCustomerCode,
-                          'userRole': context
-                              .read<UserBloc>()
-                              .state
-                              .user
-                              .role
-                              .type
-                              .getOrDefaultValue(''),
-                        },
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: FutureBuilder(
+        future: _fetchImageData(imgUrl: banner.url, config: config),
+        builder: (context, image) {
+          return image.data != null
+              ? GestureDetector(
+                  onTap: () async {
+                    await locator<CountlyService>().addCountlyEvent(
+                      'carousel_banner_clicked',
+                      segmentation: {
+                        'banner_id': banner.id,
+                        'landingPage': banner.urlLink,
+                        'selectedSalesOrg': banner.salesOrg,
+                        'selectedCustomerCode': context
+                            .read<CustomerCodeBloc>()
+                            .state
+                            .customerCodeInfo
+                            .customerCodeSoldTo,
+                        'selectedShipToAddress': context
+                            .read<ShipToCodeBloc>()
+                            .state
+                            .shipToInfo
+                            .shipToCustomerCode,
+                        'userRole': context
+                            .read<UserBloc>()
+                            .state
+                            .user
+                            .role
+                            .type
+                            .getOrDefaultValue(''),
+                      },
+                    );
+                    if (banner.isKeyword && banner.keyword != '') {
+                      context.read<MaterialListBloc>().add(
+                            MaterialListEvent.updateSearchKey(
+                              searchKey: banner.keyword,
+                            ),
+                          );
+                      await context.router.pushNamed('material_list_page');
+                    } else if (banner.urlLink.isNotEmpty) {
+                      await context.router.push(
+                        WebViewPageRoute(
+                          url: banner.urlLink,
+                        ),
                       );
-                      if (banner.isKeyword && banner.keyword != '') {
-                        context.read<MaterialListBloc>().add(
-                              MaterialListEvent.updateSearchKey(
-                                searchKey: banner.keyword,
-                              ),
-                            );
-                        await context.router.pushNamed('material_list_page');
-                      } else if (banner.urlLink.isNotEmpty) {
-                        await context.router.push(
-                          WebViewPageRoute(
-                            url: banner.urlLink,
-                          ),
-                        );
-                      }
-                    },
-                    child: Image.memory(
-                      (image.data as Uint8List),
-                      fit: BoxFit.fitWidth,
-                      gaplessPlayback: true,
-                    ),
-                  )
-                : LoadingShimmer.logo();
-          },
-        ),
+                    }
+                  },
+                  child: Image.memory(
+                    (image.data as Uint8List),
+                    fit: BoxFit.fitWidth,
+                    gaplessPlayback: true,
+                  ),
+                )
+              : LoadingShimmer.logo();
+        },
       ),
     );
   }

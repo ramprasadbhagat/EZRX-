@@ -93,7 +93,7 @@ class AddEditUserRestrictionPage extends StatelessWidget {
                               child: Column(
                                 children: [
                                   const SizedBox(
-                                    height: 25,
+                                    height: 15,
                                   ),
                                   _TextFormField(
                                     label: UserRestrictionLabel.userName,

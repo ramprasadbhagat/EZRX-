@@ -24,17 +24,19 @@ class LanguageTile extends StatelessWidget {
       onTap: () => showPlatformDialog(
         context: context,
         barrierDismissible: true,
-        builder: (_) => LanguagePicker(onPressed: (Locale locale) {
-          locator<CountlyService>().addCountlyEvent(
-            'Language changed',
-            segmentation: {
-              'fromLanguage': context.locale.languageCode,
-              'toLanguage': locale.languageCode,
-            },
-          );
-          context.setLocale(locale);
-          context.router.pop();
-        }),
+        builder: (_) => LanguagePicker(
+          onPressed: (Locale locale) {
+            locator<CountlyService>().addCountlyEvent(
+              'Language changed',
+              segmentation: {
+                'fromLanguage': context.locale.languageCode,
+                'toLanguage': locale.languageCode,
+              },
+            );
+            context.setLocale(locale);
+            context.router.pop();
+          },
+        ),
       ),
     );
   }

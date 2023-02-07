@@ -36,14 +36,8 @@ class ApproverActions extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                   ),
                 ).tr(),
-                Stack(
-                  children: const <Widget>[
-                    FittedBox(
-                      child: Icon(
-                        Icons.filter_alt,
-                      ),
-                    ),
-                  ],
+                const Icon(
+                  Icons.filter_alt,
                 ),
               ],
             ),
@@ -67,37 +61,31 @@ class ApproverActions extends StatelessWidget {
         buildWhen: (previous, current) =>
             previous.isFetching != current.isFetching,
         builder: (context, state) {
-          return Column(
-            children: [
-              Expanded(
-                child: ScrollList<ApproverReturnRequest>(
-                  emptyMessage: 'No Return found'.tr(),
-                  onRefresh: () {
-                    context.read<ReturnApproverBloc>()
-                      ..add(
-                        const ReturnApproverEvent.initialized(),
-                      )
-                      ..add(ReturnApproverEvent.fetch(
-                        user: context.read<EligibilityBloc>().state.user,
-                      ));
-                  },
-                  onLoadingMore: () {
-                    context.read<ReturnApproverBloc>().add(
-                          ReturnApproverEvent.fetch(
-                            user: context.read<EligibilityBloc>().state.user,
-                          ),
-                        );
-                  },
-                  isLoading: state.isFetching,
-                  itemBuilder: (context, index, itemInfo) {
-                    return ApproverReturnRequestTile(
-                      approverReturnRequest: itemInfo,
-                    );
-                  },
-                  items: state.approverReturnRequests,
-                ),
-              ),
-            ],
+          return ScrollList<ApproverReturnRequest>(
+            emptyMessage: 'No Return found'.tr(),
+            onRefresh: () {
+              context.read<ReturnApproverBloc>()
+                ..add(
+                  const ReturnApproverEvent.initialized(),
+                )
+                ..add(ReturnApproverEvent.fetch(
+                  user: context.read<EligibilityBloc>().state.user,
+                ));
+            },
+            onLoadingMore: () {
+              context.read<ReturnApproverBloc>().add(
+                    ReturnApproverEvent.fetch(
+                      user: context.read<EligibilityBloc>().state.user,
+                    ),
+                  );
+            },
+            isLoading: state.isFetching,
+            itemBuilder: (context, index, itemInfo) {
+              return ApproverReturnRequestTile(
+                approverReturnRequest: itemInfo,
+              );
+            },
+            items: state.approverReturnRequests,
           );
         },
       ),

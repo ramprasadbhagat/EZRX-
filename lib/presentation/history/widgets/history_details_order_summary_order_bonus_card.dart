@@ -45,7 +45,7 @@ class OrderItemBonusCard extends StatelessWidget {
     return BlocBuilder<OrderHistoryDetailsBloc, OrderHistoryDetailsState>(
       buildWhen: (previous, current) => previous.isLoading != current.isLoading,
       builder: (context, state) {
-        return InkWell(
+        return GestureDetector(
           onTap: disableCreateOrder
               ? null
               : () {
@@ -217,100 +217,95 @@ class OrderItemBonusCard extends StatelessWidget {
                       ),
                     ),
                     children: [
-                      Container(
-                        padding: const EdgeInsets.only(
-                          top: 0.0,
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children:
-                              orderHistoryDetailsBonusAggregate.bonusList.map(
-                            (orderItem) {
-                              return Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    orderItem.materialDescription,
-                                    style: const TextStyle(
-                                      fontSize: 14.0,
-                                      fontWeight: FontWeight.w600,
-                                      color: ZPColors.darkerGreen,
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children:
+                            orderHistoryDetailsBonusAggregate.bonusList.map(
+                          (orderItem) {
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  orderItem.materialDescription,
+                                  style: const TextStyle(
+                                    fontSize: 14.0,
+                                    fontWeight: FontWeight.w600,
+                                    color: ZPColors.darkerGreen,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Column(
+                                  children: [
+                                    BalanceTextRow(
+                                      keyText: 'Type'.tr(),
+                                      valueText: orderItem.type.getOrCrash(),
+                                      valueTextLoading: state.isLoading,
+                                      keyFlex: 1,
+                                      valueFlex: 1,
                                     ),
-                                  ),
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                  Column(
-                                    children: [
+                                    eligibiltiyBlocState.isBatchNumberEnable
+                                        ? BalanceTextRow(
+                                            keyText:
+                                                'Batch Number & Expiry Date'
+                                                    .tr(),
+                                            valueText: orderItem
+                                                .materialNumber.displayMatNo,
+                                            valueTextLoading: state.isLoading,
+                                            keyFlex: 1,
+                                            valueFlex: 1,
+                                          )
+                                        : const SizedBox.shrink(),
+                                    BalanceTextRow(
+                                      keyText: 'Material ID'.tr(),
+                                      valueText: orderItem
+                                          .materialNumber.displayMatNo,
+                                      valueTextLoading: state.isLoading,
+                                      keyFlex: 1,
+                                      valueFlex: 1,
+                                    ),
+                                    eligibiltiyBlocState
+                                            .isDeliveryDateOrTimeEnable
+                                        ? BalanceTextRow(
+                                            keyText:
+                                                'Delivery Date/Time'.tr(),
+                                            valueText:
+                                                orderItem.plannedDeliveryDate,
+                                            valueTextLoading: state.isLoading,
+                                            keyFlex: 1,
+                                            valueFlex: 1,
+                                          )
+                                        : const SizedBox.shrink(),
+                                    BalanceTextRow(
+                                      keyText: 'Quantity:'.tr(),
+                                      valueText: orderItem.qty.toString(),
+                                      valueTextLoading: state.isLoading,
+                                      keyFlex: 1,
+                                      valueFlex: 1,
+                                    ),
+                                    BalanceTextRow(
+                                      keyText: 'Tax '.tr(),
+                                      valueText: orderItem.tax.toString(),
+                                      valueTextLoading: state.isLoading,
+                                      keyFlex: 1,
+                                      valueFlex: 1,
+                                    ),
+                                    if (enableRemark)
                                       BalanceTextRow(
-                                        keyText: 'Type'.tr(),
-                                        valueText: orderItem.type.getOrCrash(),
+                                        keyText: 'Remarks'.tr(),
+                                        valueText:
+                                            orderItem.lineReferenceNotes,
                                         valueTextLoading: state.isLoading,
                                         keyFlex: 1,
                                         valueFlex: 1,
                                       ),
-                                      eligibiltiyBlocState.isBatchNumberEnable
-                                          ? BalanceTextRow(
-                                              keyText:
-                                                  'Batch Number & Expiry Date'
-                                                      .tr(),
-                                              valueText: orderItem
-                                                  .materialNumber.displayMatNo,
-                                              valueTextLoading: state.isLoading,
-                                              keyFlex: 1,
-                                              valueFlex: 1,
-                                            )
-                                          : const SizedBox.shrink(),
-                                      BalanceTextRow(
-                                        keyText: 'Material ID'.tr(),
-                                        valueText: orderItem
-                                            .materialNumber.displayMatNo,
-                                        valueTextLoading: state.isLoading,
-                                        keyFlex: 1,
-                                        valueFlex: 1,
-                                      ),
-                                      eligibiltiyBlocState
-                                              .isDeliveryDateOrTimeEnable
-                                          ? BalanceTextRow(
-                                              keyText:
-                                                  'Delivery Date/Time'.tr(),
-                                              valueText:
-                                                  orderItem.plannedDeliveryDate,
-                                              valueTextLoading: state.isLoading,
-                                              keyFlex: 1,
-                                              valueFlex: 1,
-                                            )
-                                          : const SizedBox.shrink(),
-                                      BalanceTextRow(
-                                        keyText: 'Quantity:'.tr(),
-                                        valueText: orderItem.qty.toString(),
-                                        valueTextLoading: state.isLoading,
-                                        keyFlex: 1,
-                                        valueFlex: 1,
-                                      ),
-                                      BalanceTextRow(
-                                        keyText: 'Tax '.tr(),
-                                        valueText: orderItem.tax.toString(),
-                                        valueTextLoading: state.isLoading,
-                                        keyFlex: 1,
-                                        valueFlex: 1,
-                                      ),
-                                      if (enableRemark)
-                                        BalanceTextRow(
-                                          keyText: 'Remarks'.tr(),
-                                          valueText:
-                                              orderItem.lineReferenceNotes,
-                                          valueTextLoading: state.isLoading,
-                                          keyFlex: 1,
-                                          valueFlex: 1,
-                                        ),
-                                    ],
-                                  ),
-                                ],
-                              );
-                            },
-                          ).toList(),
-                        ),
+                                  ],
+                                ),
+                              ],
+                            );
+                          },
+                        ).toList(),
                       ),
                     ],
                   ),

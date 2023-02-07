@@ -25,12 +25,9 @@ class MaterialRoot extends StatelessWidget {
             (isCovidMaterialEnable ? 1 : 0);
 
         return Scaffold(
-          appBar: PreferredSize(
-            preferredSize: const Size(double.infinity, 60),
-            child: AppBar(
-              title: const Text('Create Order').tr(),
-              actions: const [CartButton()],
-            ),
+          appBar: AppBar(
+            title: const Text('Create Order').tr(),
+            actions: const [CartButton()],
           ),
           body: length == 1
               ? const MaterialListPage(

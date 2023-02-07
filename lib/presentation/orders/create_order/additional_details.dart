@@ -245,18 +245,6 @@ class _TextFormFieldState extends State<_TextFormField> {
           ),
           decoration: InputDecoration(
             labelText: widget.labelText.tr(),
-            focusedBorder: const OutlineInputBorder(
-              borderSide: BorderSide(color: ZPColors.primary, width: 1.0),
-              borderRadius: BorderRadius.all(
-                Radius.circular(8),
-              ),
-            ),
-            border: const OutlineInputBorder(
-              borderSide: BorderSide(width: 1.0),
-              borderRadius: BorderRadius.all(
-                Radius.circular(8.0),
-              ),
-            ),
           ),
         ),
         const SizedBox(
@@ -385,18 +373,7 @@ class _DatePickerFieldState extends State<_DatePickerField> {
                 decoration: InputDecoration(
                   enabled: !state.additionalDetailsData.greenDeliveryEnabled,
                   labelText: 'Requested Delivery Date'.tr(),
-                  focusedBorder: const OutlineInputBorder(
-                    borderSide: BorderSide(color: ZPColors.primary, width: 1.0),
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(8),
-                    ),
-                  ),
-                  border: const OutlineInputBorder(
-                    borderSide: BorderSide(width: 1.0),
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(8.0),
-                    ),
-                  ),
+
                 ),
               ),
             ),
@@ -446,18 +423,6 @@ class _PaymentTerm extends StatelessWidget {
           isExpanded: true,
           decoration: InputDecoration(
             labelText: 'Select Payment Term'.tr(),
-            focusedBorder: const OutlineInputBorder(
-              borderSide: BorderSide(color: ZPColors.primary, width: 1.0),
-              borderRadius: BorderRadius.all(
-                Radius.circular(8),
-              ),
-            ),
-            border: const OutlineInputBorder(
-              borderSide: BorderSide(width: 1.0),
-              borderRadius: BorderRadius.all(
-                Radius.circular(8.0),
-              ),
-            ),
           ),
           value: additionalDetails.paymentTerm.getOrDefaultValue('').isEmpty
               ? null

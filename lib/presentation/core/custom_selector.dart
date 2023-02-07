@@ -19,7 +19,7 @@ class CustomSelector extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       key: key,
-      child: InkWell(
+      child: GestureDetector(
         onTap: onTap,
         child: Container(
           color: ZPColors.white,

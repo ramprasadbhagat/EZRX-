@@ -51,6 +51,6 @@ class BonusDetails extends StatelessWidget {
       );
     }
     
-    return Container();
+    return const SizedBox.shrink();
   }
 }

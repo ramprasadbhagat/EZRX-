@@ -71,7 +71,7 @@ class SalesOrgSelector extends StatelessWidget {
               ? LoadingShimmer.tile()
               : Text(
                   state.salesOrg.fullName,
-                  style: Theme.of(context).textTheme.subtitle2?.apply(
+                  style: Theme.of(context).textTheme.titleSmall?.apply(
                         color: ZPColors.primary,
                       ),
                 );

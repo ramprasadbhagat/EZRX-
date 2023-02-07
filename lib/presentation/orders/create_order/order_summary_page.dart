@@ -49,14 +49,11 @@ class OrderSummaryPage extends StatelessWidget {
 
     return Scaffold(
       key: const Key('orderSummaryKey'),
-      appBar: PreferredSize(
-        preferredSize: const Size(double.infinity, 60),
-        child: AppBar(
-          title: const Text('Order Summary').tr(),
-          actions: const [
-            _SaveTemplateButton(),
-          ],
-        ),
+      appBar: AppBar(
+        title: const Text('Order Summary').tr(),
+        actions: const [
+          _SaveTemplateButton(),
+        ],
       ),
       body: const _BodyContent(),
     );

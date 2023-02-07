@@ -1,19 +1,21 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
+import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/custom_expansion_tile.dart'
     as custom;
 import 'package:flutter/material.dart';
 
 class SaveOrderBounsTile extends StatelessWidget {
   final MaterialItem item;
+
   const SaveOrderBounsTile({Key? key, required this.item}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       key: const Key('saveOrderBounsTile'),
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      padding: const EdgeInsets.symmetric(horizontal: 10.0),
       child: custom.ExpansionTile(
         keepHeaderBorder: true,
         initiallyExpanded: true,
@@ -44,54 +46,22 @@ class _BonusItemTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: const EdgeInsets.all(6),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
+      margin: const EdgeInsets.all(15),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Expanded(
-            child: Container(
-              padding: const EdgeInsets.all(6),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Expanded(
-                        child: Text(
-                          'Material Number'.tr(),
-                          style: Theme.of(context).textTheme.caption,
-                        ),
-                      ),
-                      Expanded(
-                        child: Text(
-                          bonusItem.materialInfo.materialNumber.displayMatNo,
-                          style: Theme.of(context).textTheme.bodyText1,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          'Material qty'.tr(),
-                          style: Theme.of(context).textTheme.caption,
-                        ),
-                      ),
-                      Expanded(
-                        child: Text(
-                          bonusItem.qty.toString(),
-                          style: Theme.of(context).textTheme.bodyText1,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
+          BalanceTextRow(
+            keyText: 'Material Number'.tr(),
+            valueText: bonusItem.materialInfo.materialNumber.displayMatNo,
+            keyFlex: 1,
+            valueFlex: 1,
+          ),
+          BalanceTextRow(
+            keyText: 'Material qty'.tr(),
+            valueText: bonusItem.qty.toString(),
+            keyFlex: 1,
+            valueFlex: 1,
           ),
         ],
       ),

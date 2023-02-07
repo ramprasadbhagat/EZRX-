@@ -1,6 +1,7 @@
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -29,7 +30,13 @@ class ProfileTile extends StatelessWidget {
       builder: (context, state) {
         return ListTile(
           key: const Key('profileTile'),
-          leading: CircleAvatar(child: Text(state.user.fullName.shortForm())),
+          leading: CircleAvatar(
+            backgroundColor: ZPColors.lightGreen,
+            child: Text(
+              state.user.fullName.shortForm(),
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+          ),
           title: state.isNotEmpty
               ? Text(
                   state.userFullName.toString(),

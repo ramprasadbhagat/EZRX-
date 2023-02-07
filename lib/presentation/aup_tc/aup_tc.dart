@@ -12,6 +12,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class AupTCDialog extends StatefulWidget {
   final bool fromSetting;
+
   const AupTCDialog({
     Key? key,
     this.fromSetting = false,
@@ -92,6 +93,7 @@ class AupTCDialogState extends State<AupTCDialog> {
 
 class AcceptButton extends StatelessWidget {
   final bool fromSetting;
+
   const AcceptButton({
     Key? key,
     required this.termsAndConditionReadtoEnd,
@@ -103,26 +105,19 @@ class AcceptButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return BottomAppBar(
       elevation: 10,
-      child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 24),
-        height: 97,
+      child: SizedBox(
+        height: 100,
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Container(
-              alignment: Alignment.center,
-              margin: const EdgeInsets.only(top: 10),
-              child: const Text(
-                'I acknowledge that I have read, and do hereby accept the \nterms of use & Regional Privacy Policy',
-                style: TextStyle(
-                  fontSize: 10,
-                  // color: zpDarkerGreenColor,
-                  fontWeight: FontWeight.w500,
-                ),
-                textAlign: TextAlign.center,
-              ),
+            Text(
+              'I acknowledge that I have read, and do hereby accept the \nterms of use & Regional Privacy Policy',
+              style: Theme.of(context).textTheme.titleSmall?.apply(
+                    color: ZPColors.black,
+                  ),
             ),
-            InkWell(
-              onTap: () {
+            ElevatedButton(
+              onPressed: () {
                 if (!termsAndConditionReadtoEnd) {
                   showSnackBar(
                     context: context,
@@ -141,29 +136,12 @@ class AcceptButton extends StatelessWidget {
                   }
                 }
               },
-              child: Container(
-                height: 40,
-                margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                decoration: BoxDecoration(
-                  color: termsAndConditionReadtoEnd
-                      ? ZPColors.secondary
-                      : ZPColors.lightGray,
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                child: Center(
-                  child: Text(
-                    'Accept',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: termsAndConditionReadtoEnd
-                          ? ZPColors.primary
-                          : ZPColors.darkGray,
-                      fontWeight: FontWeight.w700,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: termsAndConditionReadtoEnd
+                    ? ZPColors.primary
+                    : ZPColors.darkGray,
               ),
+              child: const Text('Accept'),
             ),
           ],
         ),

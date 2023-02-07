@@ -39,11 +39,8 @@ class SavedOrderDetailPage extends StatelessWidget {
     return Scaffold(
       key: const Key('savedOrderDetailPage'),
       backgroundColor: ZPColors.white,
-      appBar: PreferredSize(
-        preferredSize: const Size(double.infinity, 60),
-        child: AppBar(
-          title: Text('#${order.id}'),
-        ),
+      appBar: AppBar(
+        title: Text('#${order.id}'),
       ),
       body: RefreshIndicator(
         key: const ValueKey('savedDetailRefreshIndicator'),

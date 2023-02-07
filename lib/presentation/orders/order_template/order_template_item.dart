@@ -23,59 +23,58 @@ class OrderTemplateItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Card(
       key: Key(
         'materialOption${orderTemplate.templateId}',
       ),
-      child: Card(
-        child: CustomSlidable(
-          endActionPaneActions: [
-            CustomSlidableAction(
-              label: 'Delete'.tr(),
-              icon: Icons.delete_outline,
-              onPressed: (context) {
-                context.read<OrderTemplateListBloc>().add(
-                      OrderTemplateListEvent.delete(
-                        orderTemplate,
-                      ),
-                    );
-              },
-            ),
-          ],
-          borderRadius: 8,
-          child: ListTile(
-            key: Key('orderListTile${orderTemplate.templateId}'),
-            onTap: () {
-              context.read<MaterialPriceDetailBloc>().add(
-                    MaterialPriceDetailEvent.fetch(
-                      user: context.read<UserBloc>().state.user,
-                      customerCode: context
-                          .read<CustomerCodeBloc>()
-                          .state
-                          .customerCodeInfo,
-                      salesOrganisation:
-                          context.read<SalesOrgBloc>().state.salesOrganisation,
-                      salesOrganisationConfigs:
-                          context.read<SalesOrgBloc>().state.configs,
-                      shipToCode:
-                          context.read<ShipToCodeBloc>().state.shipToInfo,
-                      materialInfoList: _getMaterialList(orderTemplate.items),
-                      pickAndPack: context
-                          .read<EligibilityBloc>()
-                          .state
-                          .getPNPValueMaterial,
+      child: CustomSlidable(
+        endActionPaneActions: [
+          CustomSlidableAction(
+            label: 'Delete'.tr(),
+            icon: Icons.delete_outline,
+            onPressed: (context) {
+              context.read<OrderTemplateListBloc>().add(
+                    OrderTemplateListEvent.delete(
+                      orderTemplate,
                     ),
                   );
-              context.router.push(
-                OrderTemplateDetailPageRoute(order: orderTemplate),
-              );
             },
-            title: Text(
-              orderTemplate.templateName,
-              style: Theme.of(context).textTheme.bodyText1,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-            ),
+          ),
+        ],
+        borderRadius: 8,
+        child: ListTile(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          key: Key('orderListTile${orderTemplate.templateId}'),
+          onTap: () {
+            context.read<MaterialPriceDetailBloc>().add(
+                  MaterialPriceDetailEvent.fetch(
+                    user: context.read<UserBloc>().state.user,
+                    customerCode: context
+                        .read<CustomerCodeBloc>()
+                        .state
+                        .customerCodeInfo,
+                    salesOrganisation:
+                        context.read<SalesOrgBloc>().state.salesOrganisation,
+                    salesOrganisationConfigs:
+                        context.read<SalesOrgBloc>().state.configs,
+                    shipToCode:
+                        context.read<ShipToCodeBloc>().state.shipToInfo,
+                    materialInfoList: _getMaterialList(orderTemplate.items),
+                    pickAndPack: context
+                        .read<EligibilityBloc>()
+                        .state
+                        .getPNPValueMaterial,
+                  ),
+                );
+            context.router.push(
+              OrderTemplateDetailPageRoute(order: orderTemplate),
+            );
+          },
+          title: Text(
+            orderTemplate.templateName,
+            style: Theme.of(context).textTheme.bodyText1,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
           ),
         ),
       ),

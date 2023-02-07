@@ -36,24 +36,15 @@ class OrderTenderContractCard extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: [
-                  Row(
-                    children: <Widget>[
-                      const SizedBox(
-                        width: 8.0,
-                      ),
-                      Expanded(
-                        child: BalanceTextRow(
-                          keyText:
-                              'Contract - ${orderHistoryDetailsBonusAggregate.tenderContractDetails.tenderContractNumber}'
-                                  .tr(),
-                          valueText: orderHistoryDetailsBonusAggregate
-                              .orderItem.materialDescription,
-                          valueTextLoading: state.isLoading,
-                          keyFlex: 1,
-                          valueFlex: 1,
-                        ),
-                      ),
-                    ],
+                  BalanceTextRow(
+                    keyText:
+                        'Contract - ${orderHistoryDetailsBonusAggregate.tenderContractDetails.tenderContractNumber}'
+                            .tr(),
+                    valueText: orderHistoryDetailsBonusAggregate
+                        .orderItem.materialDescription,
+                    valueTextLoading: state.isLoading,
+                    keyFlex: 1,
+                    valueFlex: 1,
                   ),
                   const SizedBox(
                     height: 8.0,

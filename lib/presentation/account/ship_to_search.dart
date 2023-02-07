@@ -174,8 +174,10 @@ class _HeaderMessage extends StatelessWidget {
   Widget build(BuildContext context) {
     return !state.isSearching && state.shipToInfoList.isNotEmpty
         ? Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: const Text('Please select a shipping address').tr(),
+            padding: const EdgeInsets.all(15.0),
+            child:  Text('Please select a shipping address',
+              style: Theme.of(context).textTheme.subtitle2?.copyWith(color: ZPColors.red),
+            ).tr(),
           )
         : const SizedBox.shrink();
   }

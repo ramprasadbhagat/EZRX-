@@ -18,15 +18,12 @@ class ApproverReturnRequestTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
-        title: Padding(
-          padding: const EdgeInsets.only(top: 4),
-          child: Text(
-            approverReturnRequest.returnId,
-            style: Theme.of(context).textTheme.subtitle2?.copyWith(
-                  fontWeight: FontWeight.w600,
-                  color: ZPColors.kPrimaryColor,
-                ),
-          ),
+        title: Text(
+          approverReturnRequest.returnId,
+          style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                fontWeight: FontWeight.w600,
+                color: ZPColors.kPrimaryColor,
+              ),
         ),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

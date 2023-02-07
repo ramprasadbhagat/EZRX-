@@ -45,7 +45,6 @@ class HistoryTab extends StatelessWidget {
           locale: context.locale,
         ),
         automaticallyImplyLeading: false,
-        toolbarHeight: kToolbarHeight + 2.0,
         actions: const [CartButton()],
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(30.0),
@@ -62,7 +61,7 @@ class HistoryTab extends StatelessWidget {
                           BlocBuilder<OrderHistoryFilterBloc,
                               OrderHistoryFilterState>(
                             builder: (context, state) {
-                              return InkWell(
+                              return GestureDetector(
                                 key: const Key('orderDateFilter'),
                                 onTap: () {
                                   context.read<OrderHistoryFilterBloc>().add(
@@ -78,24 +77,25 @@ class HistoryTab extends StatelessWidget {
                                   children: <Widget>[
                                     Text(
                                       'Order Date'.tr(),
-                                      style: const TextStyle(
-                                        fontSize: 14,
-                                        color: ZPColors.kPrimaryColor,
-                                        fontWeight: FontWeight.w500,
-                                      ),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleSmall
+                                          ?.apply(
+                                            color: ZPColors.kPrimaryColor,
+                                          ),
                                     ),
                                     Icon(
                                       state.sortDirection == 'desc'
                                           ? Icons.arrow_drop_down_outlined
                                           : Icons.arrow_drop_up_outlined,
-                                      color: ZPColors.darkGray,
+                                      color: ZPColors.kPrimaryColor,
                                     ),
                                   ],
                                 ),
                               );
                             },
                           ),
-                          InkWell(
+                          GestureDetector(
                             key: const Key('statusFilterButton'),
                             onTap: () {
                               showModalBottomSheet(
@@ -111,11 +111,12 @@ class HistoryTab extends StatelessWidget {
                                 Text(
                                   'Status'.tr(),
                                   key: const ValueKey('status'),
-                                  style: const TextStyle(
-                                    fontSize: 14,
-                                    color: ZPColors.kPrimaryColor,
-                                    fontWeight: FontWeight.w500,
-                                  ),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleSmall
+                                      ?.apply(
+                                        color: ZPColors.kPrimaryColor,
+                                      ),
                                 ),
                                 BlocBuilder<OrderHistoryFilterByStatusBloc,
                                     OrderHistoryFilterByStatusState>(
@@ -143,7 +144,7 @@ class HistoryTab extends StatelessWidget {
                               ],
                             ),
                           ),
-                          InkWell(
+                          GestureDetector(
                             key: const Key('filterButton'),
                             onTap: () {
                               scaffoldKey.currentState!.openEndDrawer();
@@ -153,18 +154,21 @@ class HistoryTab extends StatelessWidget {
                               children: [
                                 Text(
                                   'Filter'.tr(),
-                                  style: const TextStyle(
-                                    fontSize: 14,
-                                    color: ZPColors.kPrimaryColor,
-                                    fontWeight: FontWeight.w500,
-                                  ),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleSmall
+                                      ?.apply(
+                                        color: ZPColors.kPrimaryColor,
+                                      ),
                                 ).tr(),
                                 Stack(
                                   children: <Widget>[
                                     const FittedBox(
                                       key: ValueKey('order_history_filter'),
                                       child: Icon(
-                                        Icons.filter_alt,
+                                        Icons.filter_alt_outlined,
+                                        color: ZPColors.kPrimaryColor,
+                                        size: 16,
                                       ),
                                     ),
                                     BlocBuilder<OrderHistoryFilterBloc,
@@ -207,7 +211,7 @@ class HistoryTab extends StatelessWidget {
           // : const SizedBox.shrink(),
         ),
       ),
-      endDrawer: const Drawer(child: OrderHistoryFilterDrawer()),
+      endDrawer: const OrderHistoryFilterDrawer(),
       body: BlocListener<OrderHistoryFilterBloc, OrderHistoryFilterState>(
         listenWhen: (previous, current) =>
             previous.isSubmitting != current.isSubmitting &&
@@ -271,6 +275,7 @@ class HistoryTab extends StatelessWidget {
                             .isEmpty
                     ? LoadingShimmer.logo(key: const Key('loaderImage'))
                     : Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const AccountSuspendedBanner(),
                           if (context
@@ -289,8 +294,6 @@ class HistoryTab extends StatelessWidget {
                                   child: Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
                                     children: [
                                       const Icon(
                                         Icons.info_outline_rounded,
@@ -298,18 +301,18 @@ class HistoryTab extends StatelessWidget {
                                         size: 18,
                                       ),
                                       const SizedBox(
-                                        width: 4,
+                                        width: 8,
                                       ),
                                       Expanded(
                                         child: Text(
                                           'Order dates pre-set for past 7 days. Change the date range from “Filter” for more data'
                                               .tr(),
-                                          style: const TextStyle(
-                                            color: ZPColors.darkGray,
-                                            fontSize: 12.0,
-                                            fontFamily: 'Poppins',
-                                            fontStyle: FontStyle.italic,
-                                          ),
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .titleSmall
+                                              ?.copyWith(
+                                                  fontSize: 12,
+                                                  fontStyle: FontStyle.italic,),
                                         ),
                                       ),
                                     ],
@@ -437,22 +440,21 @@ class _SelectedStatusChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
+      padding: const EdgeInsets.all(10),
       key: const Key('SelectedStatusChip'),
-      height: 80,
-      width: MediaQuery.of(context).size.width,
+      height: 100,
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Flexible(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                'Filtering on the basis of : '.tr(),
-                style: const TextStyle(
-                  fontSize: 14,
-                ),
-              ),
+            child: Text(
+              'Filtering on the basis of : '.tr(),
+              style: Theme.of(context)
+                  .textTheme
+                  .titleSmall
+                  ?.copyWith(fontSize: 12),
             ),
           ),
           SingleChildScrollView(
@@ -465,21 +467,16 @@ class _SelectedStatusChip extends StatelessWidget {
                   children: state.filterByStatusName
                       .map(
                         (e) => Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 5,
-                          ),
-                          child: Transform(
-                            transform: Matrix4.identity()..scale(0.9),
-                            child: Chip(
-                              backgroundColor: ZPColors.lightGray,
-                              label: Text(
-                                e.getValue(),
-                                style: const TextStyle(
-                                  color: ZPColors.black,
-                                  fontSize: 14.0,
-                                ),
-                              ).tr(),
-                            ),
+                          padding: const EdgeInsets.only(right: 8.0),
+                          child: Chip(
+                            backgroundColor: ZPColors.lightGray,
+                            label: Text(
+                              e.getValue(),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleSmall
+                                  ?.copyWith(fontSize: 12),
+                            ).tr(),
                           ),
                         ),
                       )

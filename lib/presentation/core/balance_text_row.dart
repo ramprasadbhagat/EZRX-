@@ -20,19 +20,6 @@ class BalanceTextRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const keyTextStyle = TextStyle(
-      color: ZPColors.darkGray,
-      fontSize: 15.0,
-      fontFamily: 'Poppins',
-      fontWeight: FontWeight.w400,
-    );
-    const valueTextStyle = TextStyle(
-      color: ZPColors.black,
-      fontSize: 15.0,
-      fontFamily: 'Poppins',
-      fontWeight: FontWeight.w600,
-    );
-
     return Padding(
       padding: const EdgeInsets.symmetric(
         vertical: 2.0,
@@ -44,10 +31,9 @@ class BalanceTextRow extends StatelessWidget {
             flex: keyFlex,
             child: Text(
               keyText,
-              style: keyTextStyle,
-              // style: Theme.of(context).textTheme.bodyText1?.apply(
-              //         color: ZPColors.darkGray,
-              //       ),
+              style: Theme.of(context).textTheme.titleSmall?.apply(
+                    color: ZPColors.darkGray,
+                  ),
             ),
           ),
           Expanded(
@@ -59,10 +45,7 @@ class BalanceTextRow extends StatelessWidget {
                   )
                 : Text(
                     ': $valueText',
-                    style: valueTextStyle,
-                    //    style: Theme.of(context).textTheme.bodyText1?.apply(
-                    //   color: ZPColors.black,
-                    // ),
+                    style: Theme.of(context).textTheme.titleSmall,
                   ),
           ),
         ],

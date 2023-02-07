@@ -19,7 +19,6 @@ import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 
-
 class UserRestrictionListPage extends StatelessWidget {
   const UserRestrictionListPage({Key? key}) : super(key: key);
 
@@ -91,11 +90,15 @@ class UserRestrictionListPage extends StatelessWidget {
                 salesOrganisation: eligibilityState.salesOrganisation,
               ));
           context.router.push(
-              AddEditUserRestrictionPageRoute(isEditing: false,),);
+            AddEditUserRestrictionPageRoute(
+              isEditing: false,
+            ),
+          );
         },
         label: const Text(
           'Add',
         ),
+        elevation: 0,
         icon: const Icon(Icons.add),
         backgroundColor: ZPColors.secondary,
       ),
@@ -117,11 +120,18 @@ class _UserRestrictionItem extends StatelessWidget {
         onTap: () {
           final eligibilityState = context.read<EligibilityBloc>().state;
           context.read<UserRestrictionDetailsBloc>().add(
-              UserRestrictionDetailsEvent.fetchUserRestrictionDetails(
+                UserRestrictionDetailsEvent.fetchUserRestrictionDetails(
                   salesOrganisation: eligibilityState.salesOrganisation,
-                  userName: Username(username,),),);
+                  userName: Username(
+                    username,
+                  ),
+                ),
+              );
           context.router.push(
-              AddEditUserRestrictionPageRoute(isEditing: true,),);
+            AddEditUserRestrictionPageRoute(
+              isEditing: true,
+            ),
+          );
         },
         title: Text(
           username,

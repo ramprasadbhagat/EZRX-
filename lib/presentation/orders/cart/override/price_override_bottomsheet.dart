@@ -43,8 +43,7 @@ class _PriceSheetState extends State<PriceSheet> {
       padding: EdgeInsets.only(
         bottom: MediaQuery.of(context).viewInsets.bottom,
       ),
-      child: Container(
-        color: Colors.transparent,
+      child: SizedBox(
         height: MediaQuery.of(context).size.height * 35 / 100,
         child: Material(
           elevation: 15.0,

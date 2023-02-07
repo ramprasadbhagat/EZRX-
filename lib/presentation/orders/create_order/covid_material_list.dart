@@ -442,16 +442,6 @@ class _SearchBarState extends State<_SearchBar> {
                 (_) => null,
               ),
               decoration: InputDecoration(
-                border: const OutlineInputBorder(
-                  borderSide: BorderSide(width: 1.0),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(8.0),
-                  ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: ZPColors.primary),
-                  borderRadius: BorderRadius.circular(8.0),
-                ),
                 isDense: true,
                 contentPadding: const EdgeInsets.all(0),
                 prefixIcon: const Icon(Icons.search),

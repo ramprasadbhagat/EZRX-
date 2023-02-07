@@ -9,6 +9,7 @@ import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -125,86 +126,64 @@ class _RequestReturnListItem extends StatelessWidget {
           children: [
             Text(
               returnItem.materialNumber.displayMatNo,
-              style: Theme.of(context).textTheme.subtitle2?.apply(
+              style: Theme.of(context).textTheme.titleSmall?.apply(
                     color: ZPColors.kPrimaryColor,
                   ),
             ),
             Text(
               returnItem.materialDescription,
-              style: Theme.of(context).textTheme.bodyText1,
+              style: Theme.of(context).textTheme.titleSmall,
             ),
             Text(
               '${returnItem.principalData.principalCode.getOrDefaultValue('')} - ${returnItem.principalData.principalName}',
-              style: Theme.of(context).textTheme.bodyText1,
+              style: Theme.of(context).textTheme.titleSmall?.apply(
+                    color: ZPColors.darkGray,
+                  ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  flex: 1,
-                  child: Text(
-                    '${'Invoice'.tr()}: ${returnItem.assignmentNumber}',
-                    style: Theme.of(context).textTheme.bodyText1?.apply(
-                          color: ZPColors.lightGray,
-                        ),
-                  ),
-                ),
-                Expanded(
-                  flex: 1,
-                  child: Text(
-                    '${'Batch'.tr()}: ${returnItem.batch}',
-                    style: Theme.of(context).textTheme.bodyText1?.apply(
-                          color: ZPColors.lightGray,
-                        ),
-                  ),
-                ),
-              ],
+            const Divider(
+              height: 15,
+              indent: 0,
+              endIndent: 0,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  flex: 1,
-                  child: Text(
-                    '${'Created Date'.tr()}: ${returnItem.createdDate.displayHumanReadableDate}',
-                    style: Theme.of(context).textTheme.bodyText1?.apply(
-                          color: ZPColors.lightGray,
-                        ),
-                  ),
-                ),
-                Expanded(
-                  flex: 1,
-                  child: Text(
-                    '${'Expiry Date'.tr()}: ${returnItem.expiryDate.displayHumanReadableDate}',
-                    style: Theme.of(context).textTheme.bodyText1?.apply(
-                          color: ZPColors.lightGray,
-                        ),
-                  ),
-                ),
-              ],
+            BalanceTextRow(
+              keyText: 'Invoice Number'.tr(),
+              valueText: returnItem.assignmentNumber,
+              keyFlex: 1,
+              valueFlex: 1,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  flex: 1,
-                  child: Text(
-                    '${'Unit Price'.tr()}: ${StringUtils.displayPrice(configs, returnItem.unitPrice)}',
-                    style: Theme.of(context).textTheme.bodyText1?.apply(
-                          color: ZPColors.lightGray,
-                        ),
-                  ),
-                ),
-                Expanded(
-                  flex: 1,
-                  child: Text(
-                    '${'Total Price'.tr()}: ${StringUtils.displayPrice(configs, returnItem.unitPrice * returnItem.targetQuantity)}',
-                    style: Theme.of(context).textTheme.bodyText1?.apply(
-                          color: ZPColors.lightGray,
-                        ),
-                  ),
-                ),
-              ],
+            BalanceTextRow(
+              keyText: 'Batch'.tr(),
+              valueText: returnItem.batch,
+              keyFlex: 1,
+              valueFlex: 1,
+            ),
+            BalanceTextRow(
+              keyText: 'Created Date'.tr(),
+              valueText: returnItem.createdDate.displayHumanReadableDate,
+              keyFlex: 1,
+              valueFlex: 1,
+            ),
+            BalanceTextRow(
+              keyText: 'Expiry Date'.tr(),
+              valueText: returnItem.expiryDate.displayHumanReadableDate,
+              keyFlex: 1,
+              valueFlex: 1,
+            ),
+            BalanceTextRow(
+              keyText: 'Unit Price'.tr(),
+              valueText:
+                  StringUtils.displayPrice(configs, returnItem.unitPrice),
+              keyFlex: 1,
+              valueFlex: 1,
+            ),
+            BalanceTextRow(
+              keyText: 'Total Price'.tr(),
+              valueText: StringUtils.displayPrice(
+                configs,
+                returnItem.unitPrice * returnItem.targetQuantity,
+              ),
+              keyFlex: 1,
+              valueFlex: 1,
             ),
           ],
         ),

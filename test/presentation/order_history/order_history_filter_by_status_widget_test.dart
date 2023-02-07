@@ -70,11 +70,11 @@ void main() {
       final filtercByStatus =
           find.byKey(const Key('order_history_filter_by_status'));
       final filterclearAllButton =
-          find.byKey(const Key('filterclearAllButton'));
+          find.byKey(const Key('closeButton'));
       expect(filtercByStatus, findsOneWidget);
       expect(filterclearAllButton, findsOneWidget);
 
-      final checkboxListTile = find.byKey(const Key('checkboxListTile'));
+      final checkboxListTile = find.byKey(const Key('checkboxListTile_Cancelled'));
       expect(checkboxListTile, findsWidgets);
 
       await tester.tap(checkboxListTile.first);

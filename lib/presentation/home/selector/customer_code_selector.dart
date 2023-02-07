@@ -59,7 +59,7 @@ class CustomerCodeSelector extends StatelessWidget {
                     state.customerCodeInfo == CustomerCodeInfo.empty()
                         ? 'NA'.tr()
                         : state.customerCodeInfo.customerCodeSoldTo,
-                    style: Theme.of(context).textTheme.subtitle2?.apply(
+                    style: Theme.of(context).textTheme.titleSmall?.apply(
                           color: ZPColors.primary,
                         ),
                   ).tr(),

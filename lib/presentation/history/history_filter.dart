@@ -8,85 +8,74 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class OrderHistoryFilterDrawer extends StatelessWidget {
   const OrderHistoryFilterDrawer({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      key: const Key('orderHistoryFilter'),
-      width: MediaQuery.of(context).size.width * 0.85,
-      height: MediaQuery.of(context).size.height,
+      width: MediaQuery.of(context).size.width * 0.8,
       child: Drawer(
         child: SingleChildScrollView(
-          child: Container(
-            padding: const EdgeInsets.all(16.0),
-            height: MediaQuery.of(context).size.height,
-            child:
-                BlocConsumer<OrderHistoryFilterBloc, OrderHistoryFilterState>(
-              listenWhen: (previous, current) =>
-                  previous.isSubmitting != current.isSubmitting,
-              listener: (context, state) {
-                if (state.isSubmitting) {
-                  context.router.popForced();
-                }
-              },
-              builder: (context, state) {
-                return Form(
-                  autovalidateMode: state.showErrorMessages
-                      ? AutovalidateMode.always
-                      : AutovalidateMode.disabled,
-                  child: Column(
-                    children: [
-                      Column(
-                        children: <Widget>[
-                          const _FilterHeader(),
-                          const SizedBox(
-                            height: 16,
-                          ),
-                          const _OrderIdByFilter(),
-                          const SizedBox(
-                            height: 16,
-                          ),
-                          const _PoNumberFilter(),
-                          const SizedBox(
-                            height: 16,
-                          ),
-                          const _MaterialSearchByFilter(),
-                          const SizedBox(
-                            height: 16,
-                          ),
-                          const _PrincipalSearchByFilter(),
-                          const SizedBox(
-                            height: 16,
-                          ),
-                          Row(children: const [
-                            _OrderFromDateByFilter(),
-                            Padding(
-                              padding: EdgeInsets.all(4.0),
-                              child: Text(
-                                'to',
-                                style: TextStyle(fontSize: 16),
-                              ),
-                            ),
-                            _OrderToDateByFilter(),
-                          ]),
-                          const SizedBox(
-                            height: 16,
-                          ),
-                          Row(
-                            children: const [
-                              _ClearButton(),
-                              SizedBox(
-                                width: 30,
-                              ),
-                              _ApplyButton(),
-                            ],
-                          ),
-                        ],
+          padding: const EdgeInsets.all(15.0),
+          child: BlocConsumer<OrderHistoryFilterBloc, OrderHistoryFilterState>(
+            listenWhen: (previous, current) =>
+                previous.isSubmitting != current.isSubmitting,
+            listener: (context, state) {
+              if (state.isSubmitting) {
+                context.router.popForced();
+              }
+            },
+            builder: (context, state) {
+              return Form(
+                autovalidateMode: state.showErrorMessages
+                    ? AutovalidateMode.always
+                    : AutovalidateMode.disabled,
+                child: Column(
+                  children: <Widget>[
+                    const _FilterHeader(),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const _OrderIdByFilter(),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const _PoNumberFilter(),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const _MaterialSearchByFilter(),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const _PrincipalSearchByFilter(),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Row(children: [
+                      const _OrderFromDateByFilter(),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Text(
+                          'to',
+                          style: Theme.of(context).textTheme.titleSmall,
+                        ),
                       ),
-                    ],
-                  ),
-                );
-              },
-            ),
+                      const _OrderToDateByFilter(),
+                    ]),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: const [
+                        _ClearButton(),
+                        _ApplyButton(),
+                      ],
+                    ),
+                  ],
+                ),
+              );
+            },
           ),
         ),
       ),
@@ -96,38 +85,25 @@ class OrderHistoryFilterDrawer extends StatelessWidget {
 
 class _FilterHeader extends StatelessWidget {
   const _FilterHeader({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-        top: MediaQuery.of(context).padding.top,
-        bottom: 0.0,
-        left: 20.0,
-      ),
+    return SafeArea(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Text(
             'Filter Order History'.tr(),
-            style: const TextStyle(
-              fontSize: 16,
-              color: ZPColors.black,
-              fontWeight: FontWeight.w700,
-            ),
+            style: Theme.of(context).textTheme.titleMedium,
           ),
-          Container(
-            padding: const EdgeInsets.only(
-              right: 20.0,
+          IconButton(
+            key: const Key('filterCrossButton'),
+            icon: const Icon(
+              Icons.close,
             ),
-            child: IconButton(
-              key: const Key('filterCrossButton'),
-              icon: const Icon(
-                Icons.close,
-              ),
-              onPressed: () {
-                context.router.popForced();
-              },
-            ),
+            onPressed: () {
+              context.router.popForced();
+            },
           ),
         ],
       ),
@@ -144,10 +120,7 @@ class _OrderIdByFilter extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.orderHistoryFilterList.orderId !=
           current.orderHistoryFilterList.orderId,
-      builder: (
-        context,
-        state,
-      ) {
+      builder: (context, state) {
         return TextFormField(
           key: const Key('filterOrderIdField'),
           initialValue:
@@ -165,45 +138,8 @@ class _OrderIdByFilter extends StatelessWidget {
             ),
             (_) => null,
           ),
-          keyboardType: TextInputType.text,
-          style: const TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.w400,
-          ),
           decoration: InputDecoration(
-            contentPadding: const EdgeInsets.symmetric(
-              vertical: 5.0,
-              horizontal: 10.0,
-            ),
-            // border: InputBorder.none,
             labelText: 'Order ID'.tr(),
-            labelStyle: const TextStyle(
-              fontSize: 12.0,
-            ),
-            focusedBorder: const OutlineInputBorder(
-              borderSide: BorderSide(
-                color: ZPColors.kPrimaryColor,
-                width: 1.0,
-              ),
-            ),
-            border: const OutlineInputBorder(
-              borderSide: BorderSide(width: 1.0),
-              borderRadius: BorderRadius.all(
-                Radius.circular(8.0),
-              ),
-            ),
-            errorBorder: const OutlineInputBorder(
-              borderSide: BorderSide(
-                width: 1,
-                color: ZPColors.kPrimaryColor,
-              ),
-            ),
-            focusedErrorBorder: const OutlineInputBorder(
-              borderSide: BorderSide(
-                width: 1,
-                color: ZPColors.kPrimaryColor,
-              ),
-            ),
           ),
         );
       },
@@ -213,6 +149,7 @@ class _OrderIdByFilter extends StatelessWidget {
 
 class _PoNumberFilter extends StatelessWidget {
   const _PoNumberFilter({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<OrderHistoryFilterBloc, OrderHistoryFilterState>(
@@ -240,32 +177,8 @@ class _PoNumberFilter extends StatelessWidget {
             ),
             (_) => null,
           ),
-          keyboardType: TextInputType.text,
-          style: const TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.w400,
-          ),
           decoration: InputDecoration(
-            contentPadding: const EdgeInsets.symmetric(
-              vertical: 5.0,
-              horizontal: 10.0,
-            ),
-            border: const OutlineInputBorder(
-              borderSide: BorderSide(width: 1.0),
-              borderRadius: BorderRadius.all(
-                Radius.circular(8.0),
-              ),
-            ),
             labelText: 'PO Number'.tr(),
-            labelStyle: const TextStyle(
-              fontSize: 12.0,
-            ),
-            focusedBorder: const OutlineInputBorder(
-              borderSide: BorderSide(
-                color: ZPColors.kPrimaryColor,
-                width: 1.0,
-              ),
-            ),
           ),
         );
       },
@@ -275,6 +188,7 @@ class _PoNumberFilter extends StatelessWidget {
 
 class _MaterialSearchByFilter extends StatelessWidget {
   const _MaterialSearchByFilter({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<OrderHistoryFilterBloc, OrderHistoryFilterState>(
@@ -303,44 +217,8 @@ class _MaterialSearchByFilter extends StatelessWidget {
             ),
             (_) => null,
           ),
-          keyboardType: TextInputType.text,
-          style: const TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.w400,
-          ),
           decoration: InputDecoration(
-            contentPadding: const EdgeInsets.symmetric(
-              vertical: 5.0,
-              horizontal: 10.0,
-            ),
-            border: const OutlineInputBorder(
-              borderSide: BorderSide(width: 1.0),
-              borderRadius: BorderRadius.all(
-                Radius.circular(8.0),
-              ),
-            ),
-            errorBorder: const OutlineInputBorder(
-              borderSide: BorderSide(
-                width: 1,
-                color: ZPColors.kPrimaryColor,
-              ),
-            ),
-            focusedErrorBorder: const OutlineInputBorder(
-              borderSide: BorderSide(
-                width: 1,
-                color: ZPColors.kPrimaryColor,
-              ),
-            ),
             labelText: 'Material ID/Name'.tr(),
-            labelStyle: const TextStyle(
-              fontSize: 12.0,
-            ),
-            focusedBorder: const OutlineInputBorder(
-              borderSide: BorderSide(
-                color: ZPColors.kPrimaryColor,
-                width: 1.0,
-              ),
-            ),
           ),
         );
       },
@@ -350,6 +228,7 @@ class _MaterialSearchByFilter extends StatelessWidget {
 
 class _PrincipalSearchByFilter extends StatelessWidget {
   const _PrincipalSearchByFilter({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<OrderHistoryFilterBloc, OrderHistoryFilterState>(
@@ -376,32 +255,8 @@ class _PrincipalSearchByFilter extends StatelessWidget {
             ),
             (_) => null,
           ),
-          keyboardType: TextInputType.text,
-          style: const TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.w400,
-          ),
           decoration: InputDecoration(
-            contentPadding: const EdgeInsets.symmetric(
-              vertical: 5.0,
-              horizontal: 10.0,
-            ),
-            border: const OutlineInputBorder(
-              borderSide: BorderSide(width: 1.0),
-              borderRadius: BorderRadius.all(
-                Radius.circular(8.0),
-              ),
-            ),
             labelText: 'Principal Code/Name'.tr(),
-            labelStyle: const TextStyle(
-              fontSize: 12.0,
-            ),
-            focusedBorder: const OutlineInputBorder(
-              borderSide: BorderSide(
-                color: ZPColors.kPrimaryColor,
-                width: 1.0,
-              ),
-            ),
           ),
         );
       },
@@ -411,6 +266,7 @@ class _PrincipalSearchByFilter extends StatelessWidget {
 
 class _OrderFromDateByFilter extends StatefulWidget {
   const _OrderFromDateByFilter({Key? key}) : super(key: key);
+
   @override
   State<_OrderFromDateByFilter> createState() => __OrderFromDateByFilterState();
 }
@@ -470,35 +326,17 @@ class __OrderFromDateByFilterState extends State<_OrderFromDateByFilter> {
           },
           readOnly: true,
           controller: txtfromDateController,
-          keyboardType: TextInputType.text,
-          style: const TextStyle(
-            fontSize: 13,
-            fontWeight: FontWeight.w400,
-          ),
           decoration: InputDecoration(
-            contentPadding: const EdgeInsets.symmetric(
-              vertical: 5.0,
-              horizontal: 4.0,
-            ),
+            contentPadding: const EdgeInsets.symmetric(horizontal: 8),
             labelText: 'From Date'.tr(),
-            labelStyle: const TextStyle(
-              fontSize: 12.0,
-            ),
-            focusedBorder: const OutlineInputBorder(
-              borderSide: BorderSide(
-                color: ZPColors.kPrimaryColor,
-                width: 1.0,
+            suffixIcon: const Padding(
+              padding: EdgeInsets.only(right: 8.0),
+              child: Icon(
+                Icons.calendar_month,
+                size: 20,
               ),
             ),
-            border: const OutlineInputBorder(
-              borderSide: BorderSide(width: 1.0),
-              borderRadius: BorderRadius.all(
-                Radius.circular(8.0),
-              ),
-            ),
-            suffixIcon: const Icon(
-              Icons.calendar_month,
-            ),
+            suffixIconConstraints: const BoxConstraints(maxWidth: 25),
           ),
         ),
       ),
@@ -508,6 +346,7 @@ class __OrderFromDateByFilterState extends State<_OrderFromDateByFilter> {
 
 class _OrderToDateByFilter extends StatefulWidget {
   const _OrderToDateByFilter({Key? key}) : super(key: key);
+
   @override
   State<_OrderToDateByFilter> createState() => __OrderToDateByFilterState();
 }
@@ -515,6 +354,7 @@ class _OrderToDateByFilter extends StatefulWidget {
 class __OrderToDateByFilterState extends State<_OrderToDateByFilter> {
   late TextEditingController txttoDateController;
   late OrderHistoryFilterBloc orderHistoryFilterBloc;
+
   @override
   void initState() {
     txttoDateController = TextEditingController();
@@ -569,35 +409,17 @@ class __OrderToDateByFilterState extends State<_OrderToDateByFilter> {
           },
           readOnly: true,
           controller: txttoDateController,
-          keyboardType: TextInputType.text,
-          style: const TextStyle(
-            fontSize: 13,
-            fontWeight: FontWeight.w400,
-          ),
           decoration: InputDecoration(
-            contentPadding: const EdgeInsets.symmetric(
-              vertical: 5.0,
-              horizontal: 4.0,
-            ),
+            contentPadding: const EdgeInsets.symmetric(horizontal: 8),
             labelText: 'To Date'.tr(),
-            labelStyle: const TextStyle(
-              fontSize: 12.0,
-            ),
-            focusedBorder: const OutlineInputBorder(
-              borderSide: BorderSide(
-                color: ZPColors.kPrimaryColor,
-                width: 1.0,
+            suffixIcon: const Padding(
+              padding: EdgeInsets.only(right: 8.0),
+              child: Icon(
+                Icons.calendar_month,
+                size: 20,
               ),
             ),
-            border: const OutlineInputBorder(
-              borderSide: BorderSide(width: 1.0),
-              borderRadius: BorderRadius.all(
-                Radius.circular(8.0),
-              ),
-            ),
-            suffixIcon: const Icon(
-              Icons.calendar_month,
-            ),
+            suffixIconConstraints: const BoxConstraints(maxWidth: 25),
           ),
         ),
       ),

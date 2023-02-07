@@ -6,14 +6,12 @@ class NoRecordFound {
     String message = 'No customer found',
     IconData iconData = Icons.search_off_outlined,
   }) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(iconData, size: 80),
-          Text(message).tr(),
-        ],
-      ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(iconData, size: 80),
+        Text(message).tr(),
+      ],
     );
   }
 }

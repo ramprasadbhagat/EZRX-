@@ -120,7 +120,7 @@ class CartPage extends StatelessWidget {
                   ? const SizedBox.shrink()
                   : Container(
                       width: double.infinity,
-                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      padding: const EdgeInsets.only(top: 10),
                       decoration: const BoxDecoration(
                         boxShadow: <BoxShadow>[
                           BoxShadow(
@@ -140,22 +140,25 @@ class CartPage extends StatelessWidget {
                               _TotalSection(),
                             ],
                           ),
-                          ElevatedButton(
-                            key: const ValueKey('orderSummaryButton'),
-                            onPressed: state.selectedCartItems.isEmpty
-                                ? null
-                                : () {
-                                    locator<CountlyService>().addCountlyEvent(
-                                      'Checkout',
-                                      segmentation: {
-                                        'numItemInCart': state.cartItems.length,
-                                        'subTotal': state.subtotal,
-                                        'grandTotal': state.grandTotal,
-                                      },
-                                    );
-                                    _goToOrderSummary(context);
-                                  },
-                            child: const Text('Order Summary').tr(),
+                          const SizedBox(height: 10),
+                          SafeArea(
+                            child: ElevatedButton(
+                              key: const ValueKey('orderSummaryButton'),
+                              onPressed: state.selectedCartItems.isEmpty
+                                  ? null
+                                  : () {
+                                      locator<CountlyService>().addCountlyEvent(
+                                        'Checkout',
+                                        segmentation: {
+                                          'numItemInCart': state.cartItems.length,
+                                          'subTotal': state.subtotal,
+                                          'grandTotal': state.grandTotal,
+                                        },
+                                      );
+                                      _goToOrderSummary(context);
+                                    },
+                              child: const Text('Order Summary').tr(),
+                            ),
                           ),
                         ],
                       ),
@@ -216,7 +219,6 @@ class _SelectAllButton extends StatelessWidget {
       buildWhen: (previous, current) => previous != current,
       builder: (context, state) {
         return Expanded(
-          flex: 1,
           key: const Key('selectAllButton'),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,

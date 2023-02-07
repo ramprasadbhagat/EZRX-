@@ -1,9 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 
 class OrderInvalidWarning extends StatelessWidget {
   final bool isLoading;
   final bool isInvalidOrder;
+
   const OrderInvalidWarning({
     Key? key,
     required this.isLoading,
@@ -19,31 +21,21 @@ class OrderInvalidWarning extends StatelessWidget {
     if (isInvalidOrder) {
       return Padding(
         key: const Key('invalidOrderWarning'),
-        padding: const EdgeInsets.only(
-          right: 10,
-          left: 10,
-          top: 5,
-        ),
+        padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
         child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Icon(
-              Icons.info_outlined,
+              Icons.warning_amber,
+              color: ZPColors.tender,
             ),
+            const SizedBox(width: 15),
             Expanded(
-              child: Column(
-                children: [
-                  const SizedBox(
-                    height: 2,
-                  ),
-                  Text(
-                    'All materials are invalid and can not be added to cart!'
-                        .tr(),
-                    style: const TextStyle(
+              child: Text(
+                'All materials are invalid and can not be added to cart!'.tr(),
+                style: Theme.of(context).textTheme.titleSmall?.apply(
+                      color: ZPColors.tender,
                       fontStyle: FontStyle.italic,
                     ),
-                  ),
-                ],
               ),
             ),
           ],

@@ -18,60 +18,45 @@ class ConfirmPasswordTextField extends StatelessWidget {
               current.isConfirmPasswordObscure ||
           previous.confirmPassword != current.confirmPassword,
       builder: (context, state) {
-        return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: TextFormField(
-            key: const Key('confirmPasswordTextField'),
-            autocorrect: false,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            style: const TextStyle(
-              color: ZPColors.primary,
-            ),
-            onChanged: (text) {
-              context.read<ResetPasswordBloc>().add(
-                    ResetPasswordEvent.onTextChange(
+        return TextFormField(
+          key: const Key('confirmPasswordTextField'),
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          onChanged: (text) {
+            context.read<ResetPasswordBloc>().add(
+                  ResetPasswordEvent.onTextChange(
+                    PasswordFieldType.confirmPassword,
+                    text,
+                    user,
+                  ),
+                );
+          },
+          obscureText: state.isConfirmPasswordObscure,
+          validator: (_) {
+            return state.confirmPassword.value.fold(
+              (f) => f.maybeMap(
+                empty: (_) => 'Confirm Password.'.tr(),
+                mustMatchNewPassword: (_) => 'Password mismatch'.tr(),
+                orElse: () => null,
+              ),
+              (_) => null,
+            );
+          },
+          decoration: InputDecoration(
+            labelText: 'Confirm Password'.tr(),
+            suffixIcon: IconButton(
+              key: const Key('confirmPasswordToggle'),
+              icon: Icon(
+                state.isConfirmPasswordObscure
+                    ? Icons.visibility_off
+                    : Icons.visibility,
+                color: ZPColors.primary,
+              ),
+              onPressed: () => context.read<ResetPasswordBloc>().add(
+                    ResetPasswordEvent.togglePasswordVisibility(
                       PasswordFieldType.confirmPassword,
-                      text,
-                      user,
+                      !state.isConfirmPasswordObscure,
                     ),
-                  );
-            },
-            obscureText: state.isConfirmPasswordObscure,
-            validator: (_) {
-              return state.confirmPassword.value.fold(
-                (f) => f.maybeMap(
-                  empty: (_) => 'Confirm Password.'.tr(),
-                  mustMatchNewPassword: (_) => 'Password mismatch'.tr(),
-                  orElse: () => null,
-                ),
-                (_) => null,
-              );
-            },
-            decoration: InputDecoration(
-              labelText: 'Confirm Password'.tr(),
-              suffixIcon: IconButton(
-                key: const Key('confirmPasswordToggle'),
-                icon: Icon(
-                  state.isConfirmPasswordObscure
-                      ? Icons.visibility_off
-                      : Icons.visibility,
-                  color: ZPColors.primary,
-                ),
-                onPressed: () => context.read<ResetPasswordBloc>().add(
-                      ResetPasswordEvent.togglePasswordVisibility(
-                        PasswordFieldType.confirmPassword,
-                        !state.isConfirmPasswordObscure,
-                      ),
-                    ),
-              ),
-              isDense: true,
-              errorMaxLines: 3,
-              border: const UnderlineInputBorder(),
-              hintStyle: const TextStyle(
-                color: ZPColors.lightGray,
-                fontSize: 14,
-                fontFamily: 'Roboto',
-              ),
+                  ),
             ),
           ),
         );

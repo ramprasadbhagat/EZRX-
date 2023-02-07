@@ -50,30 +50,21 @@ class PolicyConfigurationPage extends StatelessWidget {
             );
           }
 
-          return Column(
-            children: [
-              Expanded(
-                child: ScrollList<PolicyConfiguration>(
-                  emptyMessage: 'No Policy Configurations found',
-                  onRefresh: () {
-                    context.read<PolicyConfigurationBloc>().add(
-                          PolicyConfigurationEvent.fetch(
-                            salesOrganisation: context
-                                .read<SalesOrgBloc>()
-                                .state
-                                .salesOrganisation,
-                          ),
-                        );
-                  },
-                  isLoading: policyConfigurationState.isLoading,
-                  itemBuilder: (context, index, item) =>
-                      PolicyConfigurationListItem(
-                    policyConfigurationItem: item,
-                  ),
-                  items: policyConfigurationState.policyConfigurationList,
-                ),
-              ),
-            ],
+          return ScrollList<PolicyConfiguration>(
+            emptyMessage: 'No Policy Configurations found',
+            onRefresh: () {
+              context.read<PolicyConfigurationBloc>().add(
+                    PolicyConfigurationEvent.fetch(
+                      salesOrganisation:
+                          context.read<SalesOrgBloc>().state.salesOrganisation,
+                    ),
+                  );
+            },
+            isLoading: policyConfigurationState.isLoading,
+            itemBuilder: (context, index, item) => PolicyConfigurationListItem(
+              policyConfigurationItem: item,
+            ),
+            items: policyConfigurationState.policyConfigurationList,
           );
         },
       ),
@@ -126,62 +117,55 @@ class PolicyConfigurationListItem extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Expanded(
-                    flex: 1,
+                  Flexible(
                     child: Text(
                       '${'Sales Org'.tr()}: ${policyConfigurationItem.salesOrg.getOrCrash()}',
-                      style: Theme.of(context).textTheme.subtitle2?.apply(
+                      style: Theme.of(context).textTheme.titleSmall?.apply(
                             color: ZPColors.black,
                           ),
                     ),
                   ),
-                  Expanded(
-                    flex: 1,
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 6,
-                        vertical: 4,
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 4,
+                    ),
+                    decoration: BoxDecoration(
+                      color: policyConfigurationItem.returnsAllowed.labelColor,
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(15),
                       ),
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        color:
-                            policyConfigurationItem.returnsAllowed.labelColor,
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(12),
-                        ),
-                      ),
-                      child: Text(
-                        '${'Returns Alllowed'.tr()}: ${policyConfigurationItem.returnsAllowed.display.tr()}',
-                        style: const TextStyle(
-                          color: ZPColors.black,
-                          fontSize: 10,
-                          fontWeight: FontWeight.w600,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
+                    ),
+                    child: Text(
+                      '${'Returns Allowed'.tr()}: ${policyConfigurationItem.returnsAllowed.display.tr()}',
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleSmall
+                          ?.copyWith(fontSize: 12),
+                      textAlign: TextAlign.center,
                     ),
                   ),
                 ],
               ),
               Text(
                 '${'Principal Code'.tr()}: ${policyConfigurationItem.principalCode.getOrDefaultValue('')}',
-                style: Theme.of(context).textTheme.bodyText1,
+                style: Theme.of(context).textTheme.titleSmall,
               ),
               Text(
                 '${'Principal Name'.tr()}: ${policyConfigurationItem.principalName.name}',
-                style: Theme.of(context).textTheme.subtitle2?.apply(
+                style: Theme.of(context).textTheme.titleSmall?.apply(
                       color: ZPColors.lightGray,
                     ),
               ),
               Text(
                 '${'Months Before Expiry'.tr()}: ${policyConfigurationItem.getmonthsBeforeExpiryValue}',
-                style: Theme.of(context).textTheme.bodyText1?.apply(
+                style: Theme.of(context).textTheme.titleSmall?.apply(
                       color: ZPColors.lightGray,
                     ),
               ),
               Text(
                 '${'Months After Expiry'.tr()}: ${policyConfigurationItem.getmonthsAfterExpiryExpiryValue}',
-                style: Theme.of(context).textTheme.bodyText1?.apply(
+                style: Theme.of(context).textTheme.titleSmall?.apply(
                       color: ZPColors.lightGray,
                     ),
               ),

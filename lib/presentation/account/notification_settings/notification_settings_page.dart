@@ -20,177 +20,111 @@ class NotificationSettingsPage extends StatelessWidget {
           'Set Up Email Notifications'.tr(),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(18.0),
-        child: ListView(
-          children: ListTile.divideTiles(
-            color: Theme.of(context).iconTheme.color,
-            tiles: [
-              Padding(
-                padding: const EdgeInsets.only(bottom: 12.0),
-                child: ListTile(
-                  contentPadding: EdgeInsets.zero,
-                  title: Text(
-                    'Language Preferences'.tr(),
-                    style: const TextStyle(fontSize: 13),
-                  ),
-                  subtitle: Text(
-                    'Email will be sent in your language of choice'.tr(),
-                    style: TextStyle(
-                      color: Theme.of(context).iconTheme.color,
-                      fontSize: 11,
-                    ),
-                  ),
-                  trailing: BlocBuilder<UserBloc, UserState>(
-                    builder: (context, state) {
-                      return GestureDetector(
-                        key: const Key('gestureDetectorForLanguagePicker'),
-                        onTap: () => showPlatformDialog(
-                          context: context,
-                          barrierDismissible: true,
-                          builder: (_) => LanguagePicker(
-                            key: const Key(
-                              'notificationSettingsLanguagePicker',
-                            ),
-                            onPressed: (Locale locale) {
-                              locator<CountlyService>().addCountlyEvent(
-                                  'notification_language_changed',
-                                  segmentation: {
-                                    'fromLanguage': state
-                                        .languagePreference
-                                        .toUpperCase(),
-                                    'toLanguage':
-                                        locale.languageCode.toUpperCase(),
-                                  },);
-                              context.read<UserBloc>().add(
-                                    UserEvent.updateNotificationSettings(
-                                      languagePreference: locale.languageCode,
-                                      emailNotifications:
-                                          state.emailNotifications,
-                                    ),
-                                  );
-                              context.router.pop();
+      body: ListView(
+        children: ListTile.divideTiles(
+          color: Theme.of(context).iconTheme.color,
+          tiles: [
+            ListTile(
+              title: Text(
+                'Language Preferences'.tr(),
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              subtitle: Text(
+                'Email will be sent in your language of choice'.tr(),
+                style: Theme.of(context).textTheme.titleSmall?.apply(color: ZPColors.lightGray),
+              ),
+              trailing: BlocBuilder<UserBloc, UserState>(
+                builder: (context, state) {
+                  return GestureDetector(
+                    key: const Key('gestureDetectorForLanguagePicker'),
+                    onTap: () => showPlatformDialog(
+                      context: context,
+                      barrierDismissible: true,
+                      builder: (_) => LanguagePicker(
+                        key: const Key(
+                          'notificationSettingsLanguagePicker',
+                        ),
+                        onPressed: (Locale locale) {
+                          locator<CountlyService>().addCountlyEvent(
+                            'notification_language_changed',
+                            segmentation: {
+                              'fromLanguage':
+                                  state.languagePreference.toUpperCase(),
+                              'toLanguage': locale.languageCode.toUpperCase(),
                             },
-                          ),
-                        ),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: Theme.of(context).iconTheme.color ??
-                                  ZPColors.lightGray,
-                            ),
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(5)),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 8,
-                              vertical: 4,
-                            ),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Text(
-                                  state.languagePreference
-                                      .toLocale()
-                                      .languageString(),
-                                  style: const TextStyle(fontSize: 13),
+                          );
+                          context.read<UserBloc>().add(
+                                UserEvent.updateNotificationSettings(
+                                  languagePreference: locale.languageCode,
+                                  emailNotifications: state.emailNotifications,
                                 ),
-                                const SizedBox(
-                                  width: 4,
-                                ),
-                                Icon(
-                                  Icons.arrow_drop_down_outlined,
-                                  color: Theme.of(context).iconTheme.color,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 12.0),
-                child: ListTile(
-                  contentPadding: EdgeInsets.zero,
-                  title: Text(
-                    'Order Summary Update'.tr(),
-                    style: const TextStyle(fontSize: 13),
-                  ),
-                  subtitle: Text(
-                    'Receive a notification of your order summary after placing an order on eZRx'
-                        .tr(),
-                    style: TextStyle(
-                      color: Theme.of(context).iconTheme.color,
-                      fontSize: 11,
+                              );
+                          context.router.pop();
+                        },
+                      ),
                     ),
-                  ),
-                  trailing: Column(
-                    children: [
-                      // Row(
-                      //   mainAxisSize: MainAxisSize.min,
-                      //   children: [
-                      //     Text(
-                      //       'Email'.tr(),
-                      //       style: const TextStyle(fontSize: 12),
-                      //     ),
-                      //     const SizedBox(
-                      //       width: 4,
-                      //     ),
-                      //     GestureDetector(
-                      //       child: Icon(
-                      //         Icons.info_outline_rounded,
-                      //         size: 18.0,
-                      //         color: Theme.of(context).iconTheme.color,
-                      //       ),
-                      //       onTap: () {
-                      //         // if (overlayEntry.mounted) {
-                      //         //   overlayEntry.remove();
-                      //         // } else {
-                      //         //   Overlay.of(context).insert(overlayEntry);
-                      //         // }
-                      //       },
-                      //     ),
-                      //   ],
-                      // ),
-                      // const SizedBox(
-                      //   height: 5,
-                      // ),
-                      Row(mainAxisSize: MainAxisSize.min, children: [
-                        BlocBuilder<UserBloc, UserState>(
-                          buildWhen: (previous, current) =>
-                              (previous.emailNotifications !=
-                                  current.emailNotifications) ||
-                              (previous.languagePreference !=
-                                  current.languagePreference),
-                          builder: (context, state) {
-                            return PlatformSwitch(
-                              key: const Key('flutterSwitch'),
-                              activeColor: ZPColors.secondary,
-                              value: state.emailNotifications,
-                              onChanged: (bool value) {
-                                context.read<UserBloc>().add(
-                                      UserEvent.updateNotificationSettings(
-                                        languagePreference:
-                                            state.languagePreference,
-                                        emailNotifications: value,
-                                      ),
-                                    );
-                              },
-                            );
-                          },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: ZPColors.lightGray,
                         ),
-                      ]),
-                    ],
-                  ),
-                ),
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            state.languagePreference
+                                .toLocale()
+                                .languageString(),
+                          ),
+                          const Icon(
+                            Icons.arrow_drop_down_outlined,
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
               ),
-            ],
-          ).toList(),
-        ),
+            ),
+            ListTile(
+              title: Text(
+                'Order Summary Update'.tr(),
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              subtitle: Text(
+                'Receive a notification of your order summary after placing an order on eZRx'
+                    .tr(),
+                style: Theme.of(context).textTheme.titleSmall?.apply(color: ZPColors.lightGray),
+              ),
+              trailing: BlocBuilder<UserBloc, UserState>(
+                buildWhen: (previous, current) =>
+                    (previous.emailNotifications !=
+                        current.emailNotifications) ||
+                    (previous.languagePreference !=
+                        current.languagePreference),
+                builder: (context, state) {
+                  return PlatformSwitch(
+                    key: const Key('flutterSwitch'),
+                    activeColor: ZPColors.secondary,
+                    value: state.emailNotifications,
+                    onChanged: (bool value) {
+                      context.read<UserBloc>().add(
+                            UserEvent.updateNotificationSettings(
+                              languagePreference:
+                                  state.languagePreference,
+                              emailNotifications: value,
+                            ),
+                          );
+                    },
+                  );
+                },
+              ),
+            ),
+          ],
+        ).toList(),
       ),
     );
   }

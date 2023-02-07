@@ -69,32 +69,35 @@ class _LoginPageState extends State<LoginPage> {
             builder: (context, state) {
               return Stack(
                 children: [
-                  Form(
-                    autovalidateMode: state.showErrorMessages
-                        ? AutovalidateMode.always
-                        : AutovalidateMode.disabled,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Spacer(),
-                        const _Logo(),
-                        const Spacer(),
-                        const _SSOLoginButton(),
-                        const Spacer(),
-                        const _OrDivider(),
-                        const Spacer(),
-                        _UsernameField(
-                          controller: _usernameController,
-                        ),
-                        _PasswordField(
-                          controller: _passwordController,
-                        ),
-                        const _RememberPassword(),
-                        const Spacer(),
-                        const _LoginButton(),
-                        const Spacer(flex: 3),
-                        // _VersionString(),
-                      ],
+                  Padding(
+                    padding: const EdgeInsets.all(25.0),
+                    child: Form(
+                      autovalidateMode: state.showErrorMessages
+                          ? AutovalidateMode.always
+                          : AutovalidateMode.disabled,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Spacer(),
+                          const _Logo(),
+                          const Spacer(),
+                          const _SSOLoginButton(),
+                          const Spacer(),
+                          const _OrDivider(),
+                          const Spacer(),
+                          _UsernameField(
+                            controller: _usernameController,
+                          ),
+                          const SizedBox(height: 15),
+                          _PasswordField(
+                            controller: _passwordController,
+                          ),
+                          const _RememberPassword(),
+                          const SizedBox(height: 15),
+                          const _LoginButton(),
+                          const Spacer(flex: 3),
+                        ],
+                      ),
                     ),
                   ),
                   const AnnouncementWidget(),
@@ -130,24 +133,21 @@ class _SSOLoginButton extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.isSubmitting != current.isSubmitting,
       builder: (context, state) {
-        return SizedBox(
-          width: MediaQuery.of(context).size.width * 0.8,
-          child: ElevatedButton(
-            key: const Key('ssoLoginButton'),
-            onPressed: state.isSubmitting
-                ? null
-                : () {
-                    locator<CountlyService>()
-                        .addCountlyEvent('Okta Login Success');
-                    FocusScope.of(context).unfocus();
-                    context
-                        .read<LoginFormBloc>()
-                        .add(const LoginFormEvent.loginWithOktaButtonPressed());
-                  },
-            child: LoadingShimmer.withChild(
-              enabled: state.isSubmitting,
-              child: const Text('Login with SSO').tr(),
-            ),
+        return ElevatedButton(
+          key: const Key('ssoLoginButton'),
+          onPressed: state.isSubmitting
+              ? null
+              : () {
+                  locator<CountlyService>()
+                      .addCountlyEvent('Okta Login Success');
+                  FocusScope.of(context).unfocus();
+                  context
+                      .read<LoginFormBloc>()
+                      .add(const LoginFormEvent.loginWithOktaButtonPressed());
+                },
+          child: LoadingShimmer.withChild(
+            enabled: state.isSubmitting,
+            child: const Text('Login with SSO').tr(),
           ),
         );
       },
@@ -160,14 +160,11 @@ class _OrDivider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(top: 20),
-      child: Row(children: <Widget>[
-        const Expanded(child: Divider()),
-        Text('OR', style: Theme.of(context).textTheme.labelLarge),
-        const Expanded(child: Divider()),
-      ]),
-    );
+    return Row(children: <Widget>[
+      const Expanded(child: Divider()),
+      Text('OR', style: Theme.of(context).textTheme.labelLarge),
+      const Expanded(child: Divider()),
+    ]);
   }
 }
 
@@ -181,48 +178,41 @@ class _UsernameField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Visibility(
-      visible: true, //_config.appFlavor != Flavor.prod,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-        child: BlocConsumer<LoginFormBloc, LoginFormState>(
-          listenWhen: (previous, current) =>
-              previous.username != current.username &&
-              current.username.isValid(),
-          listener: (context, state) {
-            final username = state.username.getOrCrash();
-            controller.value = TextEditingValue(
-              text: username,
-              selection: TextSelection.collapsed(
-                offset: controller.selection.base.offset,
+    return BlocConsumer<LoginFormBloc, LoginFormState>(
+      listenWhen: (previous, current) =>
+          previous.username != current.username && current.username.isValid(),
+      listener: (context, state) {
+        final username = state.username.getOrCrash();
+        controller.value = TextEditingValue(
+          text: username,
+          selection: TextSelection.collapsed(
+            offset: controller.selection.base.offset,
+          ),
+        );
+      },
+      buildWhen: (previous, current) =>
+          previous.passwordVisible != current.passwordVisible ||
+          previous.isSubmitting != current.isSubmitting,
+      builder: (context, state) {
+        return TextFormField(
+          key: const Key('loginUsernameField'),
+          enabled: !state.isSubmitting,
+          controller: controller,
+          keyboardType: TextInputType.emailAddress,
+          autocorrect: false,
+          decoration: InputDecoration(labelText: 'Username'.tr()),
+          onChanged: (value) => context.read<LoginFormBloc>().add(
+                LoginFormEvent.usernameChanged(value),
               ),
-            );
-          },
-          buildWhen: (previous, current) =>
-              previous.passwordVisible != current.passwordVisible ||
-              previous.isSubmitting != current.isSubmitting,
-          builder: (context, state) {
-            return TextFormField(
-              key: const Key('loginUsernameField'),
-              enabled: !state.isSubmitting,
-              controller: controller,
-              keyboardType: TextInputType.emailAddress,
-              autocorrect: false,
-              decoration: InputDecoration(labelText: 'Username'.tr()),
-              onChanged: (value) => context.read<LoginFormBloc>().add(
-                    LoginFormEvent.usernameChanged(value),
-                  ),
-              validator: (_) => state.username.value.fold(
-                (f) => f.maybeMap(
-                  empty: (_) => 'Username cannot be empty.'.tr(),
-                  orElse: () => null,
-                ),
-                (_) => null,
-              ),
-            );
-          },
-        ),
-      ),
+          validator: (_) => state.username.value.fold(
+            (f) => f.maybeMap(
+              empty: (_) => 'Username cannot be empty.'.tr(),
+              orElse: () => null,
+            ),
+            (_) => null,
+          ),
+        );
+      },
     );
   }
 }
@@ -237,70 +227,61 @@ class _PasswordField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Visibility(
-      visible: true, //_config.appFlavor != Flavor.prod,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-        child: BlocConsumer<LoginFormBloc, LoginFormState>(
-          listenWhen: (previous, current) =>
-              previous.password != current.password &&
-              current.password.isValid(),
-          listener: (context, state) {
-            final password = state.password.getOrCrash();
-            controller.value = TextEditingValue(
-              text: password,
-              selection: TextSelection.collapsed(
-                offset: controller.selection.base.offset,
+    return BlocConsumer<LoginFormBloc, LoginFormState>(
+      listenWhen: (previous, current) =>
+          previous.password != current.password && current.password.isValid(),
+      listener: (context, state) {
+        final password = state.password.getOrCrash();
+        controller.value = TextEditingValue(
+          text: password,
+          selection: TextSelection.collapsed(
+            offset: controller.selection.base.offset,
+          ),
+        );
+      },
+      buildWhen: (previous, current) =>
+          previous.passwordVisible != current.passwordVisible ||
+          previous.isSubmitting != current.isSubmitting,
+      builder: (context, state) {
+        return TextFormField(
+          key: const Key('loginPasswordField'),
+          enabled: !state.isSubmitting,
+          controller: controller,
+          keyboardType: TextInputType.visiblePassword,
+          autocorrect: false,
+          decoration: InputDecoration(
+            labelText: 'Password'.tr(),
+            suffixIcon: IconButton(
+              key: const Key('loginPasswordFieldSuffixIcon'),
+              icon: Icon(
+                state.passwordVisible ? Icons.visibility : Icons.visibility_off,
               ),
-            );
-          },
-          buildWhen: (previous, current) =>
-              previous.passwordVisible != current.passwordVisible ||
-              previous.isSubmitting != current.isSubmitting,
-          builder: (context, state) {
-            return TextFormField(
-              key: const Key('loginPasswordField'),
-              enabled: !state.isSubmitting,
-              controller: controller,
-              keyboardType: TextInputType.visiblePassword,
-              autocorrect: false,
-              decoration: InputDecoration(
-                labelText: 'Password'.tr(),
-                suffixIcon: IconButton(
-                  key: const Key('loginPasswordFieldSuffixIcon'),
-                  icon: Icon(
-                    state.passwordVisible
-                        ? Icons.visibility
-                        : Icons.visibility_off,
+              onPressed: () => context.read<LoginFormBloc>().add(
+                    const LoginFormEvent.passwordVisibilityChanged(),
                   ),
-                  onPressed: () => context.read<LoginFormBloc>().add(
-                        const LoginFormEvent.passwordVisibilityChanged(),
-                      ),
-                ),
+            ),
+          ),
+          obscureText: !state.passwordVisible,
+          onChanged: (value) => context.read<LoginFormBloc>().add(
+                LoginFormEvent.passwordChanged(value),
               ),
-              obscureText: !state.passwordVisible,
-              onChanged: (value) => context.read<LoginFormBloc>().add(
-                    LoginFormEvent.passwordChanged(value),
-                  ),
-              validator: (_) => state.password.value.fold(
-                (f) => f.maybeMap(
-                  empty: (_) => 'Password cannot be empty.'.tr(),
-                  orElse: () => null,
-                ),
-                (_) => null,
-              ),
-              onFieldSubmitted: (value) {
-                if (!state.isSubmitting) {
-                  FocusScope.of(context).unfocus();
-                  context.read<LoginFormBloc>().add(
-                        const LoginFormEvent.loginWithEmailAndPasswordPressed(),
-                      );
-                }
-              },
-            );
+          validator: (_) => state.password.value.fold(
+            (f) => f.maybeMap(
+              empty: (_) => 'Password cannot be empty.'.tr(),
+              orElse: () => null,
+            ),
+            (_) => null,
+          ),
+          onFieldSubmitted: (value) {
+            if (!state.isSubmitting) {
+              FocusScope.of(context).unfocus();
+              context.read<LoginFormBloc>().add(
+                    const LoginFormEvent.loginWithEmailAndPasswordPressed(),
+                  );
+            }
           },
-        ),
-      ),
+        );
+      },
     );
   }
 }
@@ -310,32 +291,24 @@ class _RememberPassword extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Visibility(
-      visible: true, //_config.appFlavor != Flavor.prod,
-      child: BlocBuilder<LoginFormBloc, LoginFormState>(
-        buildWhen: (previous, current) =>
-            previous.rememberPassword != current.rememberPassword,
-        builder: (context, state) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-            child: Row(
-              children: <Widget>[
-                Checkbox(
-                  key: const Key('loginRememberPasswordCheckbox'),
-                  value: state.rememberPassword,
-                  onChanged: (value) {
-                    FocusScope.of(context).unfocus();
-                    context
-                        .read<LoginFormBloc>()
-                        .add(const LoginFormEvent.rememberCheckChanged());
-                  },
-                ),
-                const Text('Remember Password').tr(),
-              ],
-            ),
-          );
-        },
-      ),
+    return BlocBuilder<LoginFormBloc, LoginFormState>(
+      buildWhen: (previous, current) =>
+          previous.rememberPassword != current.rememberPassword,
+      builder: (context, state) {
+        return CheckboxListTile(
+          contentPadding: const EdgeInsets.only(top: 5),
+          title: const Text('Remember Password').tr(),
+          controlAffinity: ListTileControlAffinity.leading,
+          key: const Key('loginRememberPasswordCheckbox'),
+          value: state.rememberPassword,
+          onChanged: (value) {
+            FocusScope.of(context).unfocus();
+            context
+                .read<LoginFormBloc>()
+                .add(const LoginFormEvent.rememberCheckChanged());
+          },
+        );
+      },
     );
   }
 }
@@ -345,31 +318,26 @@ class _LoginButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Visibility(
-      visible: true, //_config.appFlavor != Flavor.prod,
-      child: BlocBuilder<LoginFormBloc, LoginFormState>(
-        buildWhen: (previous, current) =>
-            previous.isSubmitting != current.isSubmitting,
-        builder: (context, state) {
-          return SizedBox(
-            width: MediaQuery.of(context).size.width * 0.8,
-            child: ElevatedButton(
-              key: const Key('loginSubmitButton'),
-              onPressed: state.isSubmitting
-                  ? null
-                  : () {
-                      FocusScope.of(context).unfocus();
-                      context.read<LoginFormBloc>().add(const LoginFormEvent
-                          .loginWithEmailAndPasswordPressed());
-                    },
-              child: LoadingShimmer.withChild(
-                enabled: state.isSubmitting,
-                child: const Text('Login').tr(),
-              ),
-            ),
-          );
-        },
-      ),
+    return BlocBuilder<LoginFormBloc, LoginFormState>(
+      buildWhen: (previous, current) =>
+          previous.isSubmitting != current.isSubmitting,
+      builder: (context, state) {
+        return ElevatedButton(
+          key: const Key('loginSubmitButton'),
+          onPressed: state.isSubmitting
+              ? null
+              : () {
+                  FocusScope.of(context).unfocus();
+                  context.read<LoginFormBloc>().add(
+                        const LoginFormEvent.loginWithEmailAndPasswordPressed(),
+                      );
+                },
+          child: LoadingShimmer.withChild(
+            enabled: state.isSubmitting,
+            child: const Text('Login').tr(),
+          ),
+        );
+      },
     );
   }
 }

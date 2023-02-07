@@ -61,7 +61,7 @@ class QuantityInput extends StatelessWidget {
             decoration: InputDecoration(
               isDense: true,
               contentPadding: EdgeInsets.zero,
-              border: isEnabled ? null : InputBorder.none,
+              border: isEnabled ? const UnderlineInputBorder() : InputBorder.none,
             ),
             style: Theme.of(context).textTheme.headline5,
           ),
@@ -70,6 +70,7 @@ class QuantityInput extends StatelessWidget {
             ? const QuantityIconShimmer()
             : isEnabled
                 ? Row(
+          mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       QuantityIcon(
                         key: quantityDeleteKey,

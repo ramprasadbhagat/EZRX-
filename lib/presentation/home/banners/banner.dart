@@ -55,7 +55,7 @@ class _HomeBannerState extends State<HomeBanner> {
         return Column(
           children: [
             SizedBox(
-              height: MediaQuery.of(context).size.width * 0.375,
+              height: MediaQuery.of(context).size.width * 0.4,
               child: PageView.builder(
                 key: const Key('homeBanner'),
                 controller: _controller,

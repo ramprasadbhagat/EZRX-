@@ -17,36 +17,37 @@ class LoginOnBehalfPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Login on behalf').tr()),
-      body: SafeArea(
-        child: BlocConsumer<ProxyLoginFormBloc, ProxyLoginFormState>(
-          listenWhen: (previous, current) =>
-              previous.authFailureOrSuccessOption !=
-              current.authFailureOrSuccessOption,
-          listener: (context, state) {
-            state.authFailureOrSuccessOption.fold(
-              () {},
-              (either) => either.fold(
-                (failure) {
-                  final failureMessage = failure.failureMessage;
-                  showSnackBar(context: context, message: failureMessage.tr());
-                },
-                (_) {
-                  context
-                      .read<SalesOrgBloc>()
-                      .add(const SalesOrgEvent.initialized());
-                  context
-                      .read<EligibilityBloc>()
-                      .add(const EligibilityEvent.initialized());
-                  context.read<UserBloc>().add(const UserEvent.fetch());
-                  context.router.pop();
-                },
-              ),
-            );
-          },
-          buildWhen: (previous, current) =>
-              previous.showErrorMessages != current.showErrorMessages,
-          builder: (context, state) {
-            return Form(
+      body: BlocConsumer<ProxyLoginFormBloc, ProxyLoginFormState>(
+        listenWhen: (previous, current) =>
+            previous.authFailureOrSuccessOption !=
+            current.authFailureOrSuccessOption,
+        listener: (context, state) {
+          state.authFailureOrSuccessOption.fold(
+            () {},
+            (either) => either.fold(
+              (failure) {
+                final failureMessage = failure.failureMessage;
+                showSnackBar(context: context, message: failureMessage.tr());
+              },
+              (_) {
+                context
+                    .read<SalesOrgBloc>()
+                    .add(const SalesOrgEvent.initialized());
+                context
+                    .read<EligibilityBloc>()
+                    .add(const EligibilityEvent.initialized());
+                context.read<UserBloc>().add(const UserEvent.fetch());
+                context.router.pop();
+              },
+            ),
+          );
+        },
+        buildWhen: (previous, current) =>
+            previous.showErrorMessages != current.showErrorMessages,
+        builder: (context, state) {
+          return Padding(
+            padding: const EdgeInsets.all(25.0),
+            child: Form(
               autovalidateMode: state.showErrorMessages
                   ? AutovalidateMode.always
                   : AutovalidateMode.disabled,
@@ -57,15 +58,14 @@ class LoginOnBehalfPage extends StatelessWidget {
                   Logo(),
                   Spacer(),
                   UsernameField(),
-                  Spacer(),
+                   SizedBox(height: 15),
                   LoginButton(),
-                  Spacer(),
                   Spacer(flex: 3),
                 ],
               ),
-            );
-          },
-        ),
+            ),
+          );
+        },
       ),
     );
   }
@@ -100,38 +100,32 @@ class _UsernameFieldState extends State<UsernameField> {
       buildWhen: (previous, current) =>
           previous.isSubmitting != current.isSubmitting,
       builder: (context, state) {
-        return Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 20,
-            vertical: 8,
-          ),
-          child: TextFormField(
-            key: const Key('proxyLoginUsernameField'),
-            controller: _usernameController,
-            keyboardType: TextInputType.emailAddress,
-            autocorrect: false,
-            decoration: InputDecoration(labelText: 'Username'.tr()),
-            onChanged: (value) => context.read<ProxyLoginFormBloc>().add(
-                  ProxyLoginFormEvent.usernameChanged(value),
-                ),
-            validator: (_) => state.username.value.fold(
-              (f) => f.maybeMap(
-                empty: (_) => 'Username cannot be empty.'.tr(),
-                orElse: () => null,
+        return TextFormField(
+          key: const Key('proxyLoginUsernameField'),
+          controller: _usernameController,
+          keyboardType: TextInputType.emailAddress,
+          autocorrect: false,
+          decoration: InputDecoration(labelText: 'Username'.tr()),
+          onChanged: (value) => context.read<ProxyLoginFormBloc>().add(
+                ProxyLoginFormEvent.usernameChanged(value),
               ),
-              (_) => null,
+          validator: (_) => state.username.value.fold(
+            (f) => f.maybeMap(
+              empty: (_) => 'Username cannot be empty.'.tr(),
+              orElse: () => null,
             ),
-            onFieldSubmitted: (value) {
-              if (!state.isSubmitting) {
-                FocusScope.of(context).unfocus();
-                context.read<ProxyLoginFormBloc>().add(
-                      ProxyLoginFormEvent.loginWithADButtonPressed(
-                        context.read<UserBloc>().state.user,
-                      ),
-                    );
-              }
-            },
+            (_) => null,
           ),
+          onFieldSubmitted: (value) {
+            if (!state.isSubmitting) {
+              FocusScope.of(context).unfocus();
+              context.read<ProxyLoginFormBloc>().add(
+                    ProxyLoginFormEvent.loginWithADButtonPressed(
+                      context.read<UserBloc>().state.user,
+                    ),
+                  );
+            }
+          },
         );
       },
     );
@@ -154,7 +148,7 @@ class LoginButton extends StatelessWidget {
           previous.isSubmitting != current.isSubmitting,
       builder: (context, state) {
         return SizedBox(
-          width: MediaQuery.of(context).size.width * 0.8,
+          width: MediaQuery.of(context).size.width,
           child: ElevatedButton(
             key: const Key('proxyLoginSubmitButton'),
             onPressed: state.isSubmitting

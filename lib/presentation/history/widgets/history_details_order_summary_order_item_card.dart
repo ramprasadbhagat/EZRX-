@@ -74,11 +74,7 @@ class OrderItemCard extends StatelessWidget {
                   Text(
                     orderHistoryDetailsBonusAggregate
                         .orderItem.materialDescription,
-                    style: const TextStyle(
-                      fontSize: 14.0,
-                      fontWeight: FontWeight.w600,
-                      color: ZPColors.darkerGreen,
-                    ),
+                    style: Theme.of(context).textTheme.titleSmall,
                   ),
                   const SizedBox(
                     height: 10,

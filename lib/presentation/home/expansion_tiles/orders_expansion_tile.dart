@@ -7,7 +7,7 @@ import 'package:ezrxmobile/application/order/covid_material_list/covid_material_
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/presentation/core/custom_expansion_tile.dart'
-    as custom;
+as custom;
 import 'package:ezrxmobile/presentation/home/expansion_tiles/tile_card.dart';
 import 'package:ezrxmobile/presentation/home/home_tab.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +20,7 @@ class OrdersExpansionTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<UserBloc, UserState>(
       buildWhen: (previous, current) =>
-          previous.user != current.user ||
+      previous.user != current.user ||
           previous.user.disableCreateOrder != current.user.disableCreateOrder,
       builder: (context, state) {
         final homePageTiles = _getHomePageTiles(state.userCanCreateOrder);
@@ -28,83 +28,81 @@ class OrdersExpansionTile extends StatelessWidget {
         return state.user.disableCreateOrder
             ? const SizedBox.shrink()
             : custom.ExpansionTile(
-                initiallyExpanded: true,
-                title: Padding(
-                  padding: const EdgeInsets.only(left: 15),
-                  child: Text(
-                    'Orders'.tr(),
-                    style: Theme.of(context).textTheme.titleSmall,
-                  ),
+          initiallyExpanded: true,
+          title: Padding(
+            padding: const EdgeInsets.only(left: 15),
+            child: Text(
+              'Orders'.tr(),
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+          ),
+          children: <Widget>[
+            MultiBlocListener(
+              listeners: [
+                BlocListener<MaterialListBloc, MaterialListState>(
+                  listenWhen: (previous, current) =>
+                  previous.nextPageIndex != current.nextPageIndex,
+                  listener: (context, state) {
+                    if (state.materialList.isNotEmpty) {
+                      context.read<MaterialPriceBloc>().add(
+                        MaterialPriceEvent.fetch(
+                          salesOrganisation: context
+                              .read<SalesOrgBloc>()
+                              .state
+                              .salesOrganisation,
+                          customerCode: context
+                              .read<CustomerCodeBloc>()
+                              .state
+                              .customerCodeInfo,
+                          materials: state.materialList,
+                        ),
+                      );
+                    }
+                  },
                 ),
-                children: <Widget>[
-                  MultiBlocListener(
-                    listeners: [
-                      BlocListener<MaterialListBloc, MaterialListState>(
-                        listenWhen: (previous, current) =>
-                            previous.nextPageIndex != current.nextPageIndex,
-                        listener: (context, state) {
-                          if (state.materialList.isNotEmpty) {
-                            context.read<MaterialPriceBloc>().add(
-                                  MaterialPriceEvent.fetch(
-                                    salesOrganisation: context
-                                        .read<SalesOrgBloc>()
-                                        .state
-                                        .salesOrganisation,
-                                    customerCode: context
-                                        .read<CustomerCodeBloc>()
-                                        .state
-                                        .customerCodeInfo,
-                                    materials: state.materialList,
-                                  ),
-                                );
-                          }
-                        },
-                      ),
-                      BlocListener<CovidMaterialListBloc,
-                          CovidMaterialListState>(
-                        listenWhen: (previous, current) =>
-                            previous.nextPageIndex != current.nextPageIndex,
-                        listener: (context, state) {
-                          if (state.materialList.isNotEmpty) {
-                            context.read<MaterialPriceBloc>().add(
-                                  MaterialPriceEvent.fetch(
-                                    salesOrganisation: context
-                                        .read<SalesOrgBloc>()
-                                        .state
-                                        .salesOrganisation,
-                                    customerCode: context
-                                        .read<CustomerCodeBloc>()
-                                        .state
-                                        .customerCodeInfo,
-                                    materials: state.materialList,
-                                  ),
-                                );
-                          }
-                        },
-                      ),
-                    ],
-                    child: GridView.count(
-                      physics: const NeverScrollableScrollPhysics(),
-                      padding: const EdgeInsets.all(8.0),
-                      shrinkWrap: true,
-                      crossAxisCount: 3,
-                      crossAxisSpacing: 8.0,
-                      mainAxisSpacing: 8.0,
-                      childAspectRatio: (1 / .6),
-                      children: homePageTiles
-                          .mapIndexed(
-                            (index, e) => Center(
-                              child: TileCard(
-                                // key: const Key('HomeTileCard'),
-                                homePageTile: homePageTiles[index],
-                              ),
-                            ),
-                          )
-                          .toList(),
+                BlocListener<CovidMaterialListBloc,
+                    CovidMaterialListState>(
+                  listenWhen: (previous, current) =>
+                  previous.nextPageIndex != current.nextPageIndex,
+                  listener: (context, state) {
+                    if (state.materialList.isNotEmpty) {
+                      context.read<MaterialPriceBloc>().add(
+                        MaterialPriceEvent.fetch(
+                          salesOrganisation: context
+                              .read<SalesOrgBloc>()
+                              .state
+                              .salesOrganisation,
+                          customerCode: context
+                              .read<CustomerCodeBloc>()
+                              .state
+                              .customerCodeInfo,
+                          materials: state.materialList,
+                        ),
+                      );
+                    }
+                  },
+                ),
+              ],
+              child: GridView.count(
+                physics: const NeverScrollableScrollPhysics(),
+                padding: const EdgeInsets.all(8.0),
+                shrinkWrap: true,
+                crossAxisCount: 3,
+                childAspectRatio: (1 / .6),
+                children: homePageTiles
+                    .mapIndexed(
+                      (index, e) => Center(
+                    child: TileCard(
+                      // key: const Key('HomeTileCard'),
+                      homePageTile: homePageTiles[index],
                     ),
                   ),
-                ],
-              );
+                )
+                    .toList(),
+              ),
+            ),
+          ],
+        );
       },
     );
   }

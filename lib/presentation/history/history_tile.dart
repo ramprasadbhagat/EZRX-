@@ -30,6 +30,7 @@ class OrderHistoryListTile extends StatelessWidget {
   final OrderHistoryBasicInfo orderHistoryBasicInfo;
   final SalesOrganisationConfigs salesOrgConfigs;
   final BillToInfo billToInfo;
+
   const OrderHistoryListTile({
     Key? key,
     required this.orderHistoryItem,
@@ -49,7 +50,7 @@ class OrderHistoryListTile extends StatelessWidget {
     final isDeliveryDateOrTimeEnable =
         context.read<EligibilityBloc>().state.isDeliveryDateOrTimeEnable;
 
-    return InkWell(
+    return GestureDetector(
       onTap: () {
         locator<CountlyService>()
             .addCountlyEvent('view Order Details', segmentation: {
@@ -94,48 +95,37 @@ class OrderHistoryListTile extends StatelessWidget {
             children: <Widget>[
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  Expanded(
-                    flex: 2,
+                  Flexible(
                     child: Text(
                       '#${orderHistoryItem.orderNumber.getOrCrash()}',
                       softWrap: true,
-                      style: const TextStyle(
-                        fontSize: 14.0,
-                        color: ZPColors.kPrimaryColor,
-                        fontWeight: FontWeight.w600,
-                      ),
+                      style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                            color: ZPColors.kPrimaryColor,
+                            fontWeight: FontWeight.w600,
+                          ),
                     ),
                   ),
                   salesOrgConfigs.disableProcessingStatus
                       ? const SizedBox.shrink()
-                      : Expanded(
-                          flex: 1,
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 6,
-                              vertical: 4,
-                            ),
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                              color: orderHistoryItem
-                                  .status.displayStatusLabelColor,
-                              borderRadius: const BorderRadius.all(
-                                Radius.circular(12),
-                              ),
-                            ),
-                            child: Text(
-                              orderHistoryItem.status.getOrCrash(),
-                              style: const TextStyle(
-                                color: ZPColors.black,
-                                fontSize: 10,
-                                fontWeight: FontWeight.w600,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
+                      : Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 4,
+                        ),
+                        decoration: BoxDecoration(
+                          color: orderHistoryItem
+                              .status.displayStatusLabelColor,
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(15),
                           ),
                         ),
+                        child: Text(
+                          orderHistoryItem.status.getOrCrash(),
+                          style: Theme.of(context).textTheme.titleSmall?.copyWith(fontSize: 12),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
                 ],
               ),
               BalanceTextRow(

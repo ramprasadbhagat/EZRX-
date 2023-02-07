@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
-import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -32,16 +31,6 @@ class SaveTemplateTextField extends StatelessWidget {
                 maxLength: 35,
                 decoration: InputDecoration(
                   labelText: 'Template name'.tr(),
-                  border: const OutlineInputBorder(
-                    borderSide: BorderSide(width: 1.0),
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(8.0),
-                    ),
-                  ),
-                  focusedBorder: const OutlineInputBorder(
-                    borderSide: BorderSide(color: ZPColors.primary, width: 1.0),
-                    borderRadius: BorderRadius.all(Radius.circular(8)),
-                  ),
                 ),
                 onChanged: (value) => context.read<OrderTemplateListBloc>().add(
                       OrderTemplateListEvent.templateNameChanged(value),

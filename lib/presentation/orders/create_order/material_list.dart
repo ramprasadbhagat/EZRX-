@@ -274,7 +274,7 @@ class _ListContent extends StatelessWidget {
               children: [
                 Text(
                   materialInfo.materialNumber.displayMatNo,
-                  style: Theme.of(context).textTheme.subtitle2?.apply(
+                  style: Theme.of(context).textTheme.titleSmall?.apply(
                         color: ZPColors.kPrimaryColor,
                       ),
                 ),
@@ -302,7 +302,7 @@ class _ListContent extends StatelessWidget {
                     materialInfo.defaultMaterialDescription.isNotEmpty)
                 ? Text(
                     materialInfo.defaultMaterialDescription,
-                    style: Theme.of(context).textTheme.subtitle2?.apply(
+                    style: Theme.of(context).textTheme.titleSmall?.apply(
                           color: ZPColors.lightGray,
                         ),
                   )
@@ -311,14 +311,14 @@ class _ListContent extends StatelessWidget {
                     materialInfo.itemRegistrationNumber.isNotEmpty)
                 ? Text(
                     materialInfo.itemRegistrationNumber,
-                    style: Theme.of(context).textTheme.subtitle2?.apply(
+                    style: Theme.of(context).textTheme.titleSmall?.apply(
                           color: ZPColors.lightGray,
                         ),
                   )
                 : const SizedBox.shrink(),
             Text(
               materialInfo.principalData.principalName,
-              style: Theme.of(context).textTheme.subtitle2?.apply(
+              style: Theme.of(context).textTheme.titleSmall?.apply(
                     color: ZPColors.lightGray,
                   ),
             ),
@@ -353,7 +353,7 @@ class _GovermentMaterialCode extends StatelessWidget {
                 materialInfo.governmentMaterialCode.isNotEmpty
             ? Text(
                 '${'Government Material Code:'.tr()} ${materialInfo.governmentMaterialCode}',
-                style: Theme.of(context).textTheme.subtitle2?.apply(
+                style: Theme.of(context).textTheme.titleSmall?.apply(
                       color: ZPColors.lightGray,
                     ),
                 overflow: TextOverflow.ellipsis,
@@ -400,7 +400,7 @@ class _PriceLabel extends StatelessWidget {
               priceAggregate.taxDetails.isNotEmpty
                   ? Text(
                       priceAggregate.taxDetails,
-                      style: Theme.of(context).textTheme.bodyText1?.apply(
+                      style: Theme.of(context).textTheme.titleSmall?.apply(
                             color: ZPColors.lightGray,
                           ),
                     )
@@ -408,7 +408,7 @@ class _PriceLabel extends StatelessWidget {
               context.read<SalesOrgBloc>().state.configs.enableVat
                   ? Text(
                       '${'Price before ${context.read<SalesOrgBloc>().state.salesOrg.taxCode}: '.tr()}${priceAggregate.display(PriceType.finalPrice)}',
-                      style: Theme.of(context).textTheme.bodyText1?.apply(
+                      style: Theme.of(context).textTheme.titleSmall?.apply(
                             color: ZPColors.lightGray,
                           ),
                     )
@@ -416,14 +416,14 @@ class _PriceLabel extends StatelessWidget {
               context.read<SalesOrgBloc>().state.configs.enableListPrice
                   ? Text(
                       '${'List Price:'.tr()}${priceAggregate.display(PriceType.listPrice)}',
-                      style: Theme.of(context).textTheme.bodyText1?.apply(
+                      style: Theme.of(context).textTheme.titleSmall?.apply(
                             color: ZPColors.lightGray,
                           ),
                     )
                   : const SizedBox.shrink(),
               Text(
                 '${'Unit Price: '.tr()}${priceAggregate.display(PriceType.unitPrice)}',
-                style: Theme.of(context).textTheme.bodyText1?.apply(
+                style: Theme.of(context).textTheme.titleSmall?.apply(
                       color: ZPColors.black,
                     ),
               ),
@@ -440,7 +440,7 @@ class _PriceLabel extends StatelessWidget {
 
         return Text(
           '${'Unit Price: '.tr()}NA',
-          style: Theme.of(context).textTheme.bodyText1?.apply(
+          style: Theme.of(context).textTheme.titleSmall?.apply(
                 color: ZPColors.black,
               ),
         );
@@ -598,16 +598,7 @@ class _SearchBarState extends State<_SearchBar> {
                 (_) => null,
               ),
               decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderSide: const BorderSide(color: ZPColors.primary),
-                  borderRadius: BorderRadius.circular(8.0),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: ZPColors.primary),
-                  borderRadius: BorderRadius.circular(8.0),
-                ),
-                contentPadding: const EdgeInsets.all(0),
-                isDense: true,
+               isDense: true,
                 prefixIcon: const Icon(Icons.search),
                 suffixIcon: IconButton(
                   key: const Key('clearSearch'),
@@ -672,7 +663,8 @@ class _MaterialFilters extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<MaterialFilterBloc, MaterialFilterState>(
       builder: (context, state) {
-        return ColoredBox(
+        return Container(
+          padding: const EdgeInsets.symmetric(vertical: 5),
           color: ZPColors.white,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -682,7 +674,7 @@ class _MaterialFilters extends StatelessWidget {
                 child: Text(
                   state.getFilterLabel(MaterialFilterType.principal).tr(),
                   maxLines: 1,
-                  style: Theme.of(context).textTheme.subtitle2?.apply(
+                  style: Theme.of(context).textTheme.titleSmall?.apply(
                         color: ZPColors.primary,
                       ),
                 ),
@@ -699,7 +691,7 @@ class _MaterialFilters extends StatelessWidget {
                 child: Text(
                   state.getFilterLabel(MaterialFilterType.therapeutic).tr(),
                   maxLines: 1,
-                  style: Theme.of(context).textTheme.subtitle2?.apply(
+                  style: Theme.of(context).textTheme.titleSmall?.apply(
                         color: ZPColors.primary,
                       ),
                 ),
@@ -716,7 +708,7 @@ class _MaterialFilters extends StatelessWidget {
                 child: Text(
                   state.getFilterLabel(MaterialFilterType.brand).tr(),
                   maxLines: 1,
-                  style: Theme.of(context).textTheme.subtitle2?.apply(
+                  style: Theme.of(context).textTheme.titleSmall?.apply(
                         color: ZPColors.primary,
                       ),
                 ),

@@ -28,7 +28,7 @@ class _CustomerSearchPage extends State<CustomerSearchPage> {
   late CustomerCodeBloc customerCodeBloc;
   late SalesOrgBloc salesOrgBloc;
   late UserBloc userBloc;
-  // Timer? _debounce;
+
   @override
   void initState() {
     _searchController = TextEditingController();
@@ -108,20 +108,7 @@ class _CustomerSearchPage extends State<CustomerSearchPage> {
                       );
                     }
                   },
-                  // validator: (_) => customerCodeBloc.state.searchKey.value.fold(
-                  //   (f) => f.maybeMap(
-                  //     subceedLength: (f) =>
-                  //         'Search input must be greater than 4 characters.'
-                  //             .tr(),
-                  //     orElse: () => null,
-                  //   ),
-                  //   (_) => null,
-                  // ),
                   decoration: InputDecoration(
-                    focusedBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(color: ZPColors.primary),
-                    ),
-                    isDense: true,
                     prefixIcon: const Icon(Icons.search),
                     suffixIcon: IconButton(
                       key: const Key('clearCustomerCodeSearch'),
@@ -170,7 +157,6 @@ class _CustomerSearchPage extends State<CustomerSearchPage> {
 
   @override
   void dispose() {
-    // _debounce?.cancel();
     _searchController.dispose();
     super.dispose();
   }
@@ -178,14 +164,18 @@ class _CustomerSearchPage extends State<CustomerSearchPage> {
 
 class _HeaderMessage extends StatelessWidget {
   final CustomerCodeState state;
+
   const _HeaderMessage({Key? key, required this.state}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return !state.isFetching && state.customerCodeList.isNotEmpty
         ? Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: const Text('Please select a Customer Code').tr(),
+            padding: const EdgeInsets.all(15.0),
+            child: Text(
+              'Please select a Customer Code',
+              style: Theme.of(context).textTheme.subtitle2?.copyWith(color: ZPColors.red),
+            ).tr(),
           )
         : const SizedBox.shrink();
   }
@@ -193,6 +183,7 @@ class _HeaderMessage extends StatelessWidget {
 
 class _BodyContent extends StatelessWidget {
   final CustomerCodeState state;
+
   const _BodyContent({
     Key? key,
     required this.state,
@@ -236,6 +227,7 @@ class _BodyContent extends StatelessWidget {
 
 class _ListContent extends StatelessWidget {
   final CustomerCodeInfo customerCodeInfo;
+
   const _ListContent({Key? key, required this.customerCodeInfo})
       : super(key: key);
 
@@ -255,18 +247,18 @@ class _ListContent extends StatelessWidget {
             children: [
               Text(
                 customerCodeInfo.customerCodeSoldTo,
-                style: Theme.of(context).textTheme.subtitle2?.apply(
+                style: Theme.of(context).textTheme.titleSmall?.apply(
                       color: ZPColors.kPrimaryColor,
                     ),
               ),
               Text(
                 customerCodeInfo.customerName.toString(),
-                style: Theme.of(context).textTheme.bodyText1,
+                style: Theme.of(context).textTheme.titleSmall,
               ),
               RichText(
                 text: TextSpan(
                   text: customerCodeInfo.customerAddress.toString(),
-                  style: Theme.of(context).textTheme.subtitle2?.apply(
+                  style: Theme.of(context).textTheme.titleSmall?.apply(
                         color: ZPColors.lightGray,
                       ),
                   children: [

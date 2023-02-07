@@ -34,26 +34,22 @@ class ReturnsExpansionTile extends StatelessWidget {
             padding: const EdgeInsets.only(left: 15),
             child: Text(
               'Returns'.tr(),
-              style: Theme.of(context).textTheme.titleSmall,
+              style: Theme.of(context).textTheme.titleMedium,
             ),
           ),
           children: <Widget>[
             GridView.count(
               crossAxisCount: 3,
-              crossAxisSpacing: 8.0,
-              mainAxisSpacing: 8.0,
               childAspectRatio: (1 / .6),
               padding: const EdgeInsets.all(8.0),
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               children: tiles
                   .mapIndexed(
-                    (index, e) => Center(
-                      child: TileCard(
-                        key: tiles[index].key,
-                        // key: const Key('ReturnsTileCard'),
-                        homePageTile: tiles[index],
-                      ),
+                    (index, e) => TileCard(
+                      key: tiles[index].key,
+                      // key: const Key('ReturnsTileCard'),
+                      homePageTile: tiles[index],
                     ),
                   )
                   .toList(),

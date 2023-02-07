@@ -17,20 +17,20 @@ class AccountTab extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Account').tr(),
         automaticallyImplyLeading: false,
-        actions: const [CartButton()],
+        actions: const [
+          CartButton(),
+        ],
       ),
-      body: Center(
-        child: ListView(
-          children: ListTile.divideTiles(
-            context: context,
-            tiles: [
-              const ProfileTile(),
-              const _LoginOnBehalfTile(),
-              const _SettingsTile(),
-              const _SupportTile(),
-            ],
-          ).toList(),
-        ),
+      body: ListView(
+        children: ListTile.divideTiles(
+          context: context,
+          tiles: [
+            const ProfileTile(),
+            const _LoginOnBehalfTile(),
+            const _SettingsTile(),
+            const _SupportTile(),
+          ],
+        ).toList(),
       ),
     );
   }
@@ -44,18 +44,17 @@ class _LoginOnBehalfTile extends StatelessWidget {
     return BlocBuilder<UserBloc, UserState>(
       buildWhen: (previous, current) => previous.user != current.user,
       builder: (context, state) {
-        return Visibility(
-          visible: state.userCanLoginOnBehalf,
-          child: ListTile(
-            key: const Key('loginOnBehalfTile'),
-            leading: const Icon(Icons.person_outline),
-            title: Text(
-              'Login on behalf',
-              locale: context.locale,
-            ).tr(),
-            onTap: () => context.router.pushNamed('login_on_behalf'),
-          ),
-        );
+        return state.userCanLoginOnBehalf
+            ? ListTile(
+                key: const Key('loginOnBehalfTile'),
+                leading: const Icon(Icons.person_outline),
+                title: Text(
+                  'Login on behalf',
+                  locale: context.locale,
+                ).tr(),
+                onTap: () => context.router.pushNamed('login_on_behalf'),
+              )
+            : const SizedBox.shrink();
       },
     );
   }

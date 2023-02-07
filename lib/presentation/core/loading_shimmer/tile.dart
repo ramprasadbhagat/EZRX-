@@ -20,17 +20,11 @@ class _Tile extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: List<Widget>.filled(
             line,
-            Column(
-              children: [
-                Container(
-                  width: double.infinity,
-                  height: 8.0,
-                  color: ZPColors.white,
-                ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 2.0),
-                ),
-              ],
+            Container(
+              margin:  const EdgeInsets.symmetric(vertical: 2.0),
+              width: double.infinity,
+              height: 8.0,
+              color: ZPColors.white,
             ),
           ),
         ),

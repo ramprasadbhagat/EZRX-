@@ -22,45 +22,37 @@ class FavoriteButton extends StatelessWidget {
           orElse: () => Favourite.empty(),
         );
 
-        return favourite == Favourite.empty()
-            ? IconButton(
-                icon: const Icon(
-                  Icons.favorite_border_outlined,
-                  color: ZPColors.secondary,
-                  // size: 20,
-                ),
-                onPressed: () {
-                  context.read<FavouriteBloc>().add(
-                        FavouriteEvent.add(
-                          item: Favourite(
-                            id: '',
-                            materialNumber: materialInfo.materialNumber,
-                            isFOC: materialInfo.materialGroup4.isFOC,
-                            isTenderContract: false,
-                            materialDescription:
-                                materialInfo.materialDescription,
-                          ),
-                          isPackAndPick: false,
-                          user: context.read<UserBloc>().state.user,
+        return IconButton(
+          icon: Icon(
+            favourite == Favourite.empty()
+                ? Icons.favorite_border_outlined
+                : Icons.favorite,
+            color: ZPColors.secondary,
+            size: 20,
+          ),
+          onPressed: () {
+            favourite == Favourite.empty()
+                ? context.read<FavouriteBloc>().add(
+                      FavouriteEvent.add(
+                        item: Favourite(
+                          id: '',
+                          materialNumber: materialInfo.materialNumber,
+                          isFOC: materialInfo.materialGroup4.isFOC,
+                          isTenderContract: false,
+                          materialDescription: materialInfo.materialDescription,
                         ),
-                      );
-                },
-              )
-            : IconButton(
-                icon: const Icon(
-                  Icons.favorite,
-                  color: ZPColors.secondary,
-                  // size: 20,
-                ),
-                onPressed: () {
-                  context.read<FavouriteBloc>().add(
-                        FavouriteEvent.delete(
-                          item: favourite,
-                          user: context.read<UserBloc>().state.user,
-                        ),
-                      );
-                },
-              );
+                        isPackAndPick: false,
+                        user: context.read<UserBloc>().state.user,
+                      ),
+                    )
+                : context.read<FavouriteBloc>().add(
+                      FavouriteEvent.delete(
+                        item: favourite,
+                        user: context.read<UserBloc>().state.user,
+                      ),
+                    );
+          },
+        );
       },
     );
   }

@@ -9,7 +9,23 @@ enum AppTheme {
 
 final appThemeData = {
   AppTheme.light: ThemeData.light().copyWith(
-    textTheme: ThemeData.light().textTheme.apply(fontFamily: 'Poppins'),
+    textTheme: ThemeData.light().textTheme.copyWith(
+          titleLarge: const TextStyle(
+            fontSize: 18,
+            color: ZPColors.black,
+            fontFamily: 'Poppins',
+          ),
+          titleMedium: const TextStyle(
+            fontSize: 16,
+            color: ZPColors.black,
+            fontFamily: 'Poppins',
+          ),
+          titleSmall: const TextStyle(
+            fontSize: 14,
+            color: ZPColors.black,
+            fontFamily: 'Poppins',
+          ),
+        ),
     primaryTextTheme: ThemeData.light().textTheme.apply(fontFamily: 'Poppins'),
     scaffoldBackgroundColor: ZPColors.extraLightGray,
     primaryColor: ZPColors.primary,
@@ -19,8 +35,6 @@ final appThemeData = {
       background: ZPColors.white,
       secondary: ZPColors.secondary,
     ),
-    // primarySwatch: ZPColors.kPrimaryColor,
-    // fontFamily: 'Poppins',
     iconTheme: const IconThemeData(
       color: ZPColors.lightGray,
     ),
@@ -33,7 +47,11 @@ final appThemeData = {
     appBarTheme: const AppBarTheme(
       centerTitle: true,
       color: ZPColors.white,
-      titleTextStyle: TextStyle(color: ZPColors.darkGray),
+      titleTextStyle: TextStyle(
+        fontSize: 18,
+        color: ZPColors.black,
+        fontFamily: 'Poppins',
+      ),
       iconTheme: IconThemeData(
         color: ZPColors.lightGray,
       ),
@@ -49,8 +67,6 @@ final appThemeData = {
       ),
       labelColor: ZPColors.primary,
       unselectedLabelColor: ZPColors.lightGray,
-      // labelStyle: TextStyle(
-      //     fontSize: 15, fontWeight: FontWeight.w600),
     ),
     textSelectionTheme: const TextSelectionThemeData(
       cursorColor: ZPColors.primary,
@@ -59,30 +75,39 @@ final appThemeData = {
     ),
     inputDecorationTheme: InputDecorationTheme(
       contentPadding: const EdgeInsets.all(10),
+      labelStyle: const TextStyle(
+        fontSize: 14.0,
+      ),
       floatingLabelStyle: const TextStyle(
         color: ZPColors.primary,
       ),
-      // labelStyle: TextStyle(color: ZPColors.primary),
-      focusedBorder: UnderlineInputBorder(
+      focusedBorder: OutlineInputBorder(
         borderSide: const BorderSide(
           color: ZPColors.primary,
         ),
         borderRadius: BorderRadius.circular(8.0),
       ),
-      // enabledBorder: UnderlineInputBorder(
-      //   borderSide: BorderSide(color: ZPColors.primary),
-      // ),
-      // border: UnderlineInputBorder(
-      //   borderSide: BorderSide(color: ZPColors.primary),
-      // ),
-
+      border: const OutlineInputBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(8.0),
+        ),
+      ),
+      errorBorder: const OutlineInputBorder(
+        borderSide: BorderSide(
+          color: ZPColors.red,
+        ),
+      ),
+      focusedErrorBorder: const OutlineInputBorder(
+        borderSide: BorderSide(
+          color: ZPColors.kPrimaryColor,
+        ),
+      ),
       iconColor: ZPColors.primary,
       focusColor: ZPColors.primary,
       hoverColor: ZPColors.primary,
       prefixIconColor: ZPColors.primary,
       suffixIconColor: ZPColors.primary,
       fillColor: ZPColors.primary,
-      // contentPadding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
     ),
     checkboxTheme: CheckboxThemeData(
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
@@ -118,7 +143,8 @@ final appThemeData = {
         shape: const StadiumBorder(),
         // textStyle: ThemeData.light().textTheme.bodyText2,
         textStyle: const TextStyle(
-          // fontSize: 21.sp,
+           fontSize: 15,
+          fontFamily: 'Poppins',
           color: ZPColors.white,
           fontWeight: FontWeight.bold,
         ),

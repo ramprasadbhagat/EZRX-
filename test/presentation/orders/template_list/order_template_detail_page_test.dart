@@ -309,7 +309,7 @@ void main() {
         );
         await tester.pumpWidget(orderTemplateDetailPage());
         expect(find.byType(OrderMaterialItem), findsAtLeastNWidgets(1));
-        expect(find.text('FOC'), findsAtLeastNWidgets(1));
+        expect(find.text(': FOC'), findsAtLeastNWidgets(1));
         expect(find.text('Add to Cart'), findsOneWidget);
         expect(find.text('Delete'), findsOneWidget);
       },
@@ -333,7 +333,7 @@ void main() {
         expect(find.byType(OrderMaterialItem), findsAtLeastNWidgets(1));
 
         final currency = SalesOrganisationConfigs.empty().currency.code;
-        expect(find.text('$currency 10.00'), findsAtLeastNWidgets(1));
+        expect(find.text(': $currency 10.00'), findsAtLeastNWidgets(1));
       },
     );
 

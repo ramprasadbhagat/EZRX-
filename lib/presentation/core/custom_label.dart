@@ -10,7 +10,7 @@ class CustomLabel extends StatelessWidget {
   const CustomLabel({
     Key? key,
     this.radius = 10,
-    this.height = 15,
+    this.height = 16,
     this.mainColor = ZPColors.secondary,
     this.textColor = ZPColors.kPrimaryColor,
     required this.textValue,
@@ -28,7 +28,7 @@ class CustomLabel extends StatelessWidget {
       child: FittedBox(
         child: Text(
           textValue,
-          style: Theme.of(context).textTheme.subtitle2?.apply(
+          style: Theme.of(context).textTheme.titleSmall?.apply(
                 color: textColor,
               ),
         ),

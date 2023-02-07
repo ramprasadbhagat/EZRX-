@@ -31,108 +31,106 @@ class FavouritesTab extends StatelessWidget {
         automaticallyImplyLeading: false,
         actions: const [CartButton()],
       ),
-      body: SafeArea(
-        child: BlocConsumer<FavouriteBloc, FavouriteState>(
-          listenWhen: (previous, current) {
-            return previous.failureOrSuccessOption !=
-                    current.failureOrSuccessOption ||
-                (previous.isLoading != current.isLoading);
-          },
-          listener: (context, state) {
-            state.failureOrSuccessOption.fold(
-              () {},
-              (either) => either.fold(
-                (failure) {
-                  ErrorUtils.handleApiFailure(context, failure);
-                },
-                (_) {},
-              ),
-            );
-            if (state.favouriteItems.isNotEmpty && !state.isLoading) {
-              context.read<MaterialPriceDetailBloc>().add(
-                    MaterialPriceDetailEvent.fetch(
-                      user: context.read<UserBloc>().state.user,
-                      customerCode: context
-                          .read<CustomerCodeBloc>()
-                          .state
-                          .customerCodeInfo,
-                      salesOrganisation:
-                          context.read<SalesOrgBloc>().state.salesOrganisation,
-                      salesOrganisationConfigs:
-                          context.read<SalesOrgBloc>().state.configs,
-                      shipToCode:
-                          context.read<ShipToCodeBloc>().state.shipToInfo,
-                      materialInfoList: state.favouriteItems
-                          .map(
-                            (item) => MaterialQueryInfo.fromFavorite(
-                              material: item,
-                            ),
-                          )
-                          .toList(),
-                      pickAndPack: context
-                          .read<EligibilityBloc>()
-                          .state
-                          .getPNPValueMaterial,
-                    ),
-                  );
-            }
-          },
-          buildWhen: (previous, current) =>
-              previous.isLoading != current.isLoading ||
-              previous.favouriteItems != current.favouriteItems,
-          builder: (context, favoriteState) {
-            if (favoriteState.isLoading) {
-              return LoadingShimmer.logo(key: const Key('LoaderImage'));
-            }
-
-            return BlocBuilder<MaterialPriceDetailBloc,
-                MaterialPriceDetailState>(
-              buildWhen: (previous, current) =>
-                  previous.isValidating != current.isValidating,
-              builder: (context, priceState) {
-                if (priceState.isValidating) {
-                  return LoadingShimmer.logo(key: const Key('LoaderImage'));
-                }
-
-                final validFavoriteItems = favoriteState.favouriteItems
-                    .where(
-                      (item) => priceState.isValidMaterial(
-                        query: MaterialQueryInfo.fromFavorite(material: item),
-                      ),
-                    )
-                    .toList();
-
-                return Column(
-                  children: [
-                    const AccountSuspendedBanner(),
-                    Expanded(
-                      child: ScrollList<Favourite>(
-                        emptyMessage: 'No favorite found',
-                        onRefresh: () {
-                          context.read<MaterialPriceDetailBloc>().add(
-                                const MaterialPriceDetailEvent.initialized(),
-                              );
-                          context.read<FavouriteBloc>().add(
-                                FavouriteEvent.fetch(
-                                  user: context.read<UserBloc>().state.user,
-                                ),
-                              );
-                        },
-                        isLoading: false,
-                        itemBuilder: (context, index, itemInfo) {
-                          return FavouriteListTile(
-                            favourite: itemInfo,
-                          );
-                        },
-                        items: validFavoriteItems,
-                      ),
-                    ),
-                  ],
-                );
+      body: BlocConsumer<FavouriteBloc, FavouriteState>(
+        listenWhen: (previous, current) {
+          return previous.failureOrSuccessOption !=
+                  current.failureOrSuccessOption ||
+              (previous.isLoading != current.isLoading);
+        },
+        listener: (context, state) {
+          state.failureOrSuccessOption.fold(
+            () {},
+            (either) => either.fold(
+              (failure) {
+                ErrorUtils.handleApiFailure(context, failure);
               },
-            );
-          },
-        ),
+              (_) {},
+            ),
+          );
+          if (state.favouriteItems.isNotEmpty && !state.isLoading) {
+            context.read<MaterialPriceDetailBloc>().add(
+                  MaterialPriceDetailEvent.fetch(
+                    user: context.read<UserBloc>().state.user,
+                    customerCode: context
+                        .read<CustomerCodeBloc>()
+                        .state
+                        .customerCodeInfo,
+                    salesOrganisation:
+                        context.read<SalesOrgBloc>().state.salesOrganisation,
+                    salesOrganisationConfigs:
+                        context.read<SalesOrgBloc>().state.configs,
+                    shipToCode:
+                        context.read<ShipToCodeBloc>().state.shipToInfo,
+                    materialInfoList: state.favouriteItems
+                        .map(
+                          (item) => MaterialQueryInfo.fromFavorite(
+                            material: item,
+                          ),
+                        )
+                        .toList(),
+                    pickAndPack: context
+                        .read<EligibilityBloc>()
+                        .state
+                        .getPNPValueMaterial,
+                  ),
+                );
+          }
+        },
+        buildWhen: (previous, current) =>
+            previous.isLoading != current.isLoading ||
+            previous.favouriteItems != current.favouriteItems,
+        builder: (context, favoriteState) {
+          if (favoriteState.isLoading) {
+            return LoadingShimmer.logo(key: const Key('LoaderImage'));
+          }
+
+          return BlocBuilder<MaterialPriceDetailBloc,
+              MaterialPriceDetailState>(
+            buildWhen: (previous, current) =>
+                previous.isValidating != current.isValidating,
+            builder: (context, priceState) {
+              if (priceState.isValidating) {
+                return LoadingShimmer.logo(key: const Key('LoaderImage'));
+              }
+
+              final validFavoriteItems = favoriteState.favouriteItems
+                  .where(
+                    (item) => priceState.isValidMaterial(
+                      query: MaterialQueryInfo.fromFavorite(material: item),
+                    ),
+                  )
+                  .toList();
+
+              return Column(
+                children: [
+                  const AccountSuspendedBanner(),
+                  Expanded(
+                    child: ScrollList<Favourite>(
+                      emptyMessage: 'No favorite found',
+                      onRefresh: () {
+                        context.read<MaterialPriceDetailBloc>().add(
+                              const MaterialPriceDetailEvent.initialized(),
+                            );
+                        context.read<FavouriteBloc>().add(
+                              FavouriteEvent.fetch(
+                                user: context.read<UserBloc>().state.user,
+                              ),
+                            );
+                      },
+                      isLoading: false,
+                      itemBuilder: (context, index, itemInfo) {
+                        return FavouriteListTile(
+                          favourite: itemInfo,
+                        );
+                      },
+                      items: validFavoriteItems,
+                    ),
+                  ),
+                ],
+              );
+            },
+          );
+        },
       ),
     );
   }

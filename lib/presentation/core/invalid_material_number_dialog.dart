@@ -28,9 +28,7 @@ class InvalidMaterialNumberDialog {
                       invalidMaterialNumbers.length,
                       (index) => Text(
                         invalidMaterialNumbers.elementAt(index).substring(10),
-                        style: const TextStyle(
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.w600,
+                        style: Theme.of(context).textTheme.titleSmall?.apply(
                           color: ZPColors.darkGreen,
                         ),
                       ),

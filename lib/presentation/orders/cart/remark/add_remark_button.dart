@@ -12,36 +12,22 @@ class AddRemarksButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.only(top: 10.0),
-        child: InkWell(
-          key: Key('$key-InkWell'),
-          onTap: onPressed,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: 5.0,
-            ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Icon(
-                  Icons.add,
-                  color: ZPColors.kPrimaryColor,
-                ),
-                Flexible(
-                  child: Text(
-                    'Add Remarks',
-                    style: Theme.of(context).textTheme.bodyText1?.apply(
-                          color: ZPColors.kPrimaryColor,
-                        ),
-                  ).tr(),
-                ),
-              ],
-            ),
-          ),
-        ),
+    return TextButton.icon(
+      key: Key('$key-InkWell'),
+      onPressed: onPressed,
+      style: TextButton.styleFrom(
+        visualDensity: VisualDensity.compact,
       ),
+      icon: const Icon(
+        Icons.add,
+        color: ZPColors.kPrimaryColor,
+      ),
+      label: Text(
+        'Add Remarks',
+        style: Theme.of(context).textTheme.titleSmall?.apply(
+              color: ZPColors.kPrimaryColor,
+            ),
+      ).tr(),
     );
   }
 }

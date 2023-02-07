@@ -20,7 +20,7 @@ class AnnouncementWidget extends StatelessWidget {
           return Dismissible(
             key: const Key('dismissibleAnnouncement'),
             child: Card(
-              margin: const EdgeInsets.symmetric(horizontal: 24.0),
+              margin: const EdgeInsets.symmetric(horizontal: 15.0),
               color: ZPColors.announcementColor,
               child: Row(
                 children: [
@@ -53,14 +53,12 @@ class AnnouncementWidget extends StatelessWidget {
                   ),
                   Expanded(
                     child: Padding(
-                      padding: const EdgeInsets.all(8),
+                      padding: const EdgeInsets.all(8.0),
                       child: Text(
                         state.descriptionDisplay,
                         key: const Key('announcementDescription'),
                         textAlign: TextAlign.justify,
-                        style: const TextStyle(
-                          fontSize: 10,
-                          fontWeight: FontWeight.w500,
+                        style: Theme.of(context).textTheme.titleSmall?.apply(
                           color: ZPColors.white,
                         ),
                       ),

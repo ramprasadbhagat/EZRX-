@@ -11,7 +11,7 @@ class TileCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textStyle = Theme.of(context).textTheme.subtitle2;
+    final textStyle = Theme.of(context).textTheme.titleSmall;
 
     return GestureDetector(
       key: ValueKey(homePageTile.routeName),
@@ -52,25 +52,21 @@ class TileCard extends StatelessWidget {
         context.router.pushNamed(homePageTile.routeName);
       },
       child: Card(
-        child: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Expanded(
-                child: Icon(
-                  homePageTile.icon,
-                  size: 30.0,
-                  color: textStyle!.color,
-                ),
-              ),
-              FittedBox(
-                child: Text(
-                  homePageTile.title,
-                  style: textStyle,
-                ).tr(),
-              ),
-            ],
-          ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+            Icon(
+              homePageTile.icon,
+              size: 30.0,
+              color: textStyle!.color,
+            ),
+            FittedBox(
+              child: Text(
+                homePageTile.title,
+                style: textStyle,
+              ).tr(),
+            ),
+          ],
         ),
       ),
     );

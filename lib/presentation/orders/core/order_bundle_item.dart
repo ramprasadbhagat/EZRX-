@@ -29,8 +29,8 @@ class OrderBundleItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 10.0),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10.0),
       child: custom.ExpansionTile(
         initiallyExpanded: true,
         threeLineTitle: true,

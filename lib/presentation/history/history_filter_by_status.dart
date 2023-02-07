@@ -22,25 +22,20 @@ class HistoryFilterByStatus extends StatelessWidget {
             children: <Widget>[
               Stack(
                 children: [
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 10.0,
-                      vertical: 15.0,
-                    ),
-                    child: Text(
-                      'Select Status'.tr(),
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        color: ZPColors.black,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
+                  Center(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 15.0,
+                      ),
+                      child: Text(
+                        'Select Status'.tr(),
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.titleMedium,
                       ),
                     ),
                   ),
-                  Positioned(
-                    right: 10,
-                    top: 5,
+                  Align(
+                    alignment: Alignment.centerRight,
                     child: IconButton(
                       key: const Key('closeButton'),
                       onPressed: () => Navigator.of(context).pop(),
@@ -54,47 +49,30 @@ class HistoryFilterByStatus extends StatelessWidget {
               ),
               Column(
                 children: state.getAllStatusName.map((status) {
-                  return Container(
-                    padding: const EdgeInsets.only(
-                      left: 25.0,
-                      right: 25.0,
+                  return CheckboxListTile(
+                    key: Key('checkboxListTile_$status'),
+                    dense: true,
+                    checkColor: Colors.white,
+                    activeColor: ZPColors.kPrimaryColor,
+                    title: Text(
+                      status.tr(),
+                      style: Theme.of(context).textTheme.titleSmall,
                     ),
-                    child: Column(
-                      children: <Widget>[
-                        CheckboxListTile(
-                          key: const Key('checkboxListTile'),
-                          checkColor: Colors.white,
-                          activeColor: ZPColors.kPrimaryColor,
-                          title: Text(status.tr()),
-                          onChanged: (bool? value) {
-                            BlocProvider.of<OrderHistoryFilterByStatusBloc>(
-                              context,
-                            ).add(
-                              OrderHistoryFilterByStatusEvent
-                                  .checkedStatusFilter(
-                                isChecked: value!,
-                                statusName: StatusType(status),
-                              ),
-                            );
-                          },
-                          value: state.isChecked(status),
+                    onChanged: (bool? value) {
+                      BlocProvider.of<OrderHistoryFilterByStatusBloc>(
+                        context,
+                      ).add(
+                        OrderHistoryFilterByStatusEvent.checkedStatusFilter(
+                          isChecked: value!,
+                          statusName: StatusType(status),
                         ),
-                      ],
-                    ),
+                      );
+                    },
+                    value: state.isChecked(status),
                   );
                 }).toList(),
               ),
-              const Padding(
-                padding: EdgeInsets.only(
-                  left: 10,
-                  right: 10,
-                  top: 10,
-                ),
-                child: _ClearButtonForFilterByStatus(),
-              ),
-              const SizedBox(
-                height: 40,
-              ),
+              const _ClearButtonForFilterByStatus(),
             ],
           ),
         );
@@ -108,15 +86,7 @@ class _ClearButtonForFilterByStatus extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width * 60 / 100,
-      height: 35,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(18.0),
-        gradient: const LinearGradient(
-          colors: <Color>[ZPColors.kPrimaryColor, ZPColors.gradient],
-        ),
-      ),
+    return SafeArea(
       child: ElevatedButton(
         key: const ValueKey('filterclearAllButton'),
         onPressed: () async {
@@ -125,14 +95,8 @@ class _ClearButtonForFilterByStatus extends StatelessWidget {
               );
           await context.router.pop();
         },
-        child: Center(
-          child: Text(
-            'Clear All'.tr(),
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.bodyText1?.copyWith(
-                  color: ZPColors.white,
-                ),
-          ),
+        child: Text(
+          'Clear All'.tr(),
         ),
       ),
     );

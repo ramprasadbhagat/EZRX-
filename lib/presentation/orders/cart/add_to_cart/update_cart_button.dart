@@ -73,19 +73,21 @@ class UpdateCartButton extends StatelessWidget {
                       color: ZPColors.red,
                     ),
                   ),
-            ElevatedButton(
-              key: const Key('updateCart'),
-              style: isSelectedTenderContractValid(context) &&
-                      isValidQuantitySelected(context)
-                  ? null
-                  : ElevatedButton.styleFrom(
-                      backgroundColor: ZPColors.lightGray,
-                    ),
-              onPressed: () => isSelectedTenderContractValid(context) &&
-                      isValidQuantitySelected(context)
-                  ? _updateCart(context, cartItem)
-                  : null,
-              child: const Text('Update Cart').tr(),
+            SafeArea(
+              child: ElevatedButton(
+                key: const Key('updateCart'),
+                style: isSelectedTenderContractValid(context) &&
+                        isValidQuantitySelected(context)
+                    ? null
+                    : ElevatedButton.styleFrom(
+                        backgroundColor: ZPColors.lightGray,
+                      ),
+                onPressed: () => isSelectedTenderContractValid(context) &&
+                        isValidQuantitySelected(context)
+                    ? _updateCart(context, cartItem)
+                    : null,
+                child: const Text('Update Cart').tr(),
+              ),
             ),
           ],
         );
