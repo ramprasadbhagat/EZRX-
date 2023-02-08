@@ -243,7 +243,7 @@ class CartMaterialItemTileDetails extends StatelessWidget {
           ),
           if (isOrderSummaryView)
             Text(
-              '${'Material type : '.tr()}${material.toSavedOrderMaterial().type}',
+              '${'Material type : '.tr()}${material.toSavedOrderMaterial().type.getOrDefaultValue('')}',
               style: Theme.of(context).textTheme.titleSmall?.apply(
                     color: ZPColors.lightGray,
                   ),
