@@ -369,6 +369,80 @@ void main() {
           });
         },
       );
+
+      test(
+        'Get Saved order Detail with 200 success response',
+        () async {
+          final json = jsonDecode(
+            await rootBundle
+                .loadString('assets/json/getSavedOrderDetailResponse.json'),
+          );
+
+          final fakeResponse = SavedOrderDto.fromJson(
+            json['data']['draftOrder'],
+          ).toDomain();
+
+          dioAdapter.onPost(
+            '/api/strapiEngine',
+            (server) => server.reply(
+              200,
+              json,
+              delay: const Duration(seconds: 1),
+            ),
+            headers: {'Content-Type': 'application/json; charset=utf-8'},
+            data: jsonEncode({
+              'query': remoteDataSource.queryMutation.getSavedOrderDetail(),
+              'variables': {
+                'id': 'fake-id',
+              },
+            }),
+          );
+
+          final result = await remoteDataSource.getSavedOrderDetail(
+            orderId: 'fake-id',
+          );
+
+          expect(
+            result,
+            fakeResponse,
+          );
+        },
+      );
+
+      test(
+        'Get Saved order Detail with Error response',
+        () async {
+          dioAdapter.onPost(
+            '/api/strapiEngine',
+            (server) => server.reply(
+              200,
+              {
+                'data': null,
+                'errors': [
+                  {'message': 'fake-error'}
+                ],
+              },
+              delay: const Duration(seconds: 1),
+            ),
+            headers: {'Content-Type': 'application/json; charset=utf-8'},
+            data: jsonEncode({
+              'query': remoteDataSource.queryMutation.getSavedOrderDetail(),
+              'variables': {
+                'id': 'fake-id',
+              },
+            }),
+          );
+
+          await remoteDataSource
+              .getSavedOrderDetail(
+            orderId: 'fake-id',
+          )
+              .onError((error, _) {
+            expect(error, isA<ServerException>());
+            return SavedOrder.empty();
+          });
+        },
+      );
     },
   );
 }

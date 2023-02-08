@@ -4,6 +4,7 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
@@ -73,6 +74,10 @@ class SavedOrderListBlocMock
     extends MockBloc<SavedOrderListEvent, SavedOrderListState>
     implements SavedOrderListBloc {}
 
+class AdditionalDetailsBlocMock
+    extends MockBloc<AdditionalDetailsEvent, AdditionalDetailsState>
+    implements AdditionalDetailsBloc {}
+
 void main() {
   late UserBloc userBlocMock;
   late SalesOrgBloc salesOrgBlocMock;
@@ -85,6 +90,7 @@ void main() {
   late MockEligibilityBloc eligibilityBlocMock;
   late AppRouter autoRouterMock;
   late SavedOrderListBlocMock savedOrderListBlocMock;
+  late AdditionalDetailsBlocMock additionalDetailsMockBloc;
   final locator = GetIt.instance;
   final fakeUser = User.empty().copyWith(
     username: Username('fake-user'),
@@ -115,6 +121,7 @@ void main() {
     cartBlocMock = MockCartBloc();
     eligibilityBlocMock = MockEligibilityBloc();
     savedOrderListBlocMock = SavedOrderListBlocMock();
+    additionalDetailsMockBloc = AdditionalDetailsBlocMock();
 
     when(() => userBlocMock.state).thenReturn(
       UserState.initial().copyWith(
@@ -133,6 +140,8 @@ void main() {
         .thenReturn(EligibilityState.initial());
     when(() => savedOrderListBlocMock.state)
         .thenReturn(SavedOrderListState.initial());
+    when(() => additionalDetailsMockBloc.state)
+        .thenReturn(AdditionalDetailsState.initial());
   });
 
   Widget savedOrderDetailPage(Widget child) => WidgetUtils.getScopedWidget(
@@ -159,6 +168,9 @@ void main() {
         ),
         BlocProvider<SavedOrderListBloc>(
           create: (context) => savedOrderListBlocMock,
+        ),
+        BlocProvider<AdditionalDetailsBloc>(
+          create: (context) => additionalDetailsMockBloc,
         ),
       ],
       child: child);

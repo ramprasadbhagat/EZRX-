@@ -1448,5 +1448,59 @@ void main() {
         true,
       );
     });
+
+    test('get saved order detail success local', () async {
+      const fakeId = 'fake-id';
+      final fakeSavedOrder = SavedOrder.empty().copyWith(id: fakeId);
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
+
+      when(() => orderLocalDataSource.getSavedOrderDetail()).thenAnswer(
+        (invocation) async => fakeSavedOrder,
+      );
+
+      final result = await orderRepository.getSavedOrderDetail(orderId: fakeId);
+      expect(result.isRight(), true);
+      expect(result.getOrElse(() => SavedOrder.empty()), fakeSavedOrder);
+    });
+
+    test('get saved order detail failure local', () async {
+      const fakeId = 'fake-id';
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
+
+      when(() => orderLocalDataSource.getSavedOrderDetail()).thenThrow(
+        () => MockException(),
+      );
+
+      final result = await orderRepository.getSavedOrderDetail(orderId: fakeId);
+      expect(result.isLeft(), true);
+    });
+
+    test('get saved order detail success remote', () async {
+      const fakeId = 'fake-id';
+      final fakeSavedOrder = SavedOrder.empty().copyWith(id: fakeId);
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+
+      when(() => orderRemoteDataSource.getSavedOrderDetail(orderId: fakeId))
+          .thenAnswer(
+        (invocation) async => fakeSavedOrder,
+      );
+
+      final result = await orderRepository.getSavedOrderDetail(orderId: fakeId);
+      expect(result.isRight(), true);
+      expect(result.getOrElse(() => SavedOrder.empty()), fakeSavedOrder);
+    });
+
+    test('get saved order detail failure remote', () async {
+      const fakeId = 'fake-id';
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
+
+      when(() => orderRemoteDataSource.getSavedOrderDetail(orderId: fakeId))
+          .thenThrow(
+        () => MockException(),
+      );
+
+      final result = await orderRepository.getSavedOrderDetail(orderId: fakeId);
+      expect(result.isLeft(), true);
+    });
   });
 }

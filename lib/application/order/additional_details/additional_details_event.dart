@@ -4,7 +4,13 @@ part of 'additional_details_bloc.dart';
 class AdditionalDetailsEvent with _$AdditionalDetailsEvent {
   const factory AdditionalDetailsEvent.initialized({
     required SalesOrganisationConfigs config,
+    required CustomerCodeInfo customerCodeInfo,
   }) = _Initialized;
+  const factory AdditionalDetailsEvent.initFromSavedOrder({
+    required SalesOrganisationConfigs config,
+   required CustomerCodeInfo customerCodeInfo,
+    required String orderId,
+  }) = _InitFromSavedOrder;
   const factory AdditionalDetailsEvent.onTextChange({
     required AdditionalDetailsLabel label,
     required String newValue,

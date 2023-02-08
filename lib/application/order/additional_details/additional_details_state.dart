@@ -7,12 +7,14 @@ class AdditionalDetailsState with _$AdditionalDetailsState {
   const factory AdditionalDetailsState({
     required AdditionalDetailsData additionalDetailsData,
     required bool isValidated,
+    required bool isLoading,
     required bool showErrorMessages,
   }) = _AdditionalDetailsState;
 
   factory AdditionalDetailsState.initial() => AdditionalDetailsState(
         additionalDetailsData: AdditionalDetailsData.empty(),
         isValidated: false,
+        isLoading: false,
         showErrorMessages: false,
       );
 }

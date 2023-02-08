@@ -1,10 +1,11 @@
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/order/entities/additional_details_data.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
+import 'package:ezrxmobile/domain/order/repository/i_order_repository.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:intl/intl.dart';
 
 part 'additional_details_event.dart';
 part 'additional_details_state.dart';
@@ -12,40 +13,25 @@ part 'additional_details_bloc.freezed.dart';
 
 class AdditionalDetailsBloc
     extends Bloc<AdditionalDetailsEvent, AdditionalDetailsState> {
-  AdditionalDetailsBloc() : super(AdditionalDetailsState.initial()) {
+  final IOrderRepository savedOrderRepository;
+
+  AdditionalDetailsBloc({
+    required this.savedOrderRepository,
+  }) : super(AdditionalDetailsState.initial()) {
     on<AdditionalDetailsEvent>(_onEvent);
-  }
-  String _initialDate({
-    required String futureDeliveryDay,
-    required String stateDate,
-  }) {
-    return stateDate.isEmpty
-        ? DateFormat('yyyy-MM-dd')
-            .format(DateTime.now().add(const Duration(days: 1)))
-        : stateDate;
   }
 
   Future<void> _onEvent(
     AdditionalDetailsEvent event,
     Emitter<AdditionalDetailsState> emit,
   ) async {
-    event.map(
+    await event.map(
       initialized: (value) async => emit(
-        AdditionalDetailsState.initial().copyWith(
-          additionalDetailsData:
-              AdditionalDetailsState.initial().additionalDetailsData.copyWith(
-                    deliveryDate: DeliveryDate(
-                      _initialDate(
-                        futureDeliveryDay: value.config.futureDeliveryDay
-                            .validatedFutureDeliveryDate,
-                        stateDate: AdditionalDetailsState.initial()
-                            .additionalDetailsData
-                            .deliveryDate
-                            .getOrDefaultValue(''),
-                      ),
-                    ),
-                  ),
-        ),
+        AdditionalDetailsState.initial().copyWith.additionalDetailsData(
+              contactNumber: ContactNumber(
+                value.customerCodeInfo.telephoneNumber,
+              ),
+            ),
       ),
       onTextChange: (value) async => _onTextChange(
         label: value.label,
@@ -74,18 +60,49 @@ class AdditionalDetailsBloc
           ),
         ),
       ),
-      removeAllPoDocument: (value) => emit(
+      removeAllPoDocument: (value) async => emit(
         state.copyWith(
           additionalDetailsData:
               state.additionalDetailsData.copyWith(poDocuments: []),
         ),
       ),
-      toggleGreenDelivery: (value) => emit(
+      toggleGreenDelivery: (value) async => emit(
         state.copyWith(
           additionalDetailsData: state.additionalDetailsData
               .copyWith(greenDeliveryEnabled: value.value),
         ),
       ),
+      initFromSavedOrder: (value) async {
+        emit(
+          AdditionalDetailsState.initial().copyWith(isLoading: true),
+        );
+
+        final failureOrSuccess = await savedOrderRepository.getSavedOrderDetail(
+          orderId: value.orderId,
+        );
+
+        await failureOrSuccess.fold(
+          (failure) async {
+            add(
+              _Initialized(
+                config: value.config,
+                customerCodeInfo: value.customerCodeInfo,
+              ),
+            );
+          },
+          (orderDetail) async {
+            emit(
+              state.copyWith(
+                additionalDetailsData: AdditionalDetailsData.fromSavedOrder(
+                  orderDetail: orderDetail,
+                  customerCodeInfo: value.customerCodeInfo,
+                ),
+                isLoading: false,
+              ),
+            );
+          },
+        );
+      },
     );
   }
 

@@ -758,7 +758,9 @@ void setupLocator() {
   );
 
   locator.registerLazySingleton(
-    () => AdditionalDetailsBloc(),
+    () => AdditionalDetailsBloc(
+      savedOrderRepository: locator<OrderRepository>(),
+    ),
   );
 
   locator.registerLazySingleton(

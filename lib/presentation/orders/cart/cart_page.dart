@@ -38,11 +38,15 @@ class CartPage extends StatelessWidget {
           previous.cartItems != current.cartItems,
       listener: (context, state) {
         if (state.cartItems.isEmpty) {
-          context
-              .read<AdditionalDetailsBloc>()
-              .add(AdditionalDetailsEvent.initialized(
-                config: context.read<SalesOrgBloc>().state.configs,
-              ));
+          context.read<AdditionalDetailsBloc>().add(
+                AdditionalDetailsEvent.initialized(
+                  config: context.read<SalesOrgBloc>().state.configs,
+                   customerCodeInfo: context
+                          .read<CustomerCodeBloc>()
+                          .state
+                          .customerCodeInfo,
+                ),
+              );
         }
         state.apiFailureOrSuccessOption.fold(
           () {},

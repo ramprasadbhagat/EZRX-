@@ -180,4 +180,30 @@ class OrderRemoteDataSource {
       ).toDomain();
     });
   }
+
+  Future<SavedOrder> getSavedOrderDetail({
+    required String orderId,
+  }) async {
+    return await exceptionHandler.handle(() async {
+      final res = await httpService.request(
+        method: 'POST',
+        url: '/api/strapiEngine',
+        data: jsonEncode(
+          {
+            'query': queryMutation.getSavedOrderDetail(),
+            'variables': {
+              'id': orderId,
+            },
+          },
+        ),
+        apiEndpoint: 'draftOrder',
+      );
+
+      _orderExceptionChecker(res: res);
+
+      return SavedOrderDto.fromJson(
+        res.data['data']['draftOrder'],
+      ).toDomain();
+    });
+  }
 }

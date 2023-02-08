@@ -18,7 +18,12 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$AdditionalDetailsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(SalesOrganisationConfigs config) initialized,
+    required TResult Function(
+            SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)
+        initialized,
+    required TResult Function(SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo, String orderId)
+        initFromSavedOrder,
     required TResult Function(AdditionalDetailsLabel label, String newValue)
         onTextChange,
     required TResult Function(SalesOrganisationConfigs config) validateForm,
@@ -30,7 +35,12 @@ mixin _$AdditionalDetailsEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrganisationConfigs config)? initialized,
+    TResult? Function(
+            SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
+        initialized,
+    TResult? Function(SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo, String orderId)?
+        initFromSavedOrder,
     TResult? Function(AdditionalDetailsLabel label, String newValue)?
         onTextChange,
     TResult? Function(SalesOrganisationConfigs config)? validateForm,
@@ -42,7 +52,12 @@ mixin _$AdditionalDetailsEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrganisationConfigs config)? initialized,
+    TResult Function(
+            SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
+        initialized,
+    TResult Function(SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo, String orderId)?
+        initFromSavedOrder,
     TResult Function(AdditionalDetailsLabel label, String newValue)?
         onTextChange,
     TResult Function(SalesOrganisationConfigs config)? validateForm,
@@ -56,6 +71,7 @@ mixin _$AdditionalDetailsEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
+    required TResult Function(_InitFromSavedOrder value) initFromSavedOrder,
     required TResult Function(_AdditionalDetailsTextOnChange value)
         onTextChange,
     required TResult Function(_AdditionalDetailsValidateForm value)
@@ -73,6 +89,7 @@ mixin _$AdditionalDetailsEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_InitFromSavedOrder value)? initFromSavedOrder,
     TResult? Function(_AdditionalDetailsTextOnChange value)? onTextChange,
     TResult? Function(_AdditionalDetailsValidateForm value)? validateForm,
     TResult? Function(_AdditionalDetailsAddPoDocument value)? addPoDocument,
@@ -87,6 +104,7 @@ mixin _$AdditionalDetailsEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
+    TResult Function(_InitFromSavedOrder value)? initFromSavedOrder,
     TResult Function(_AdditionalDetailsTextOnChange value)? onTextChange,
     TResult Function(_AdditionalDetailsValidateForm value)? validateForm,
     TResult Function(_AdditionalDetailsAddPoDocument value)? addPoDocument,
@@ -126,9 +144,11 @@ abstract class _$$_InitializedCopyWith<$Res> {
           _$_Initialized value, $Res Function(_$_Initialized) then) =
       __$$_InitializedCopyWithImpl<$Res>;
   @useResult
-  $Res call({SalesOrganisationConfigs config});
+  $Res call(
+      {SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo});
 
   $SalesOrganisationConfigsCopyWith<$Res> get config;
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
 }
 
 /// @nodoc
@@ -143,12 +163,17 @@ class __$$_InitializedCopyWithImpl<$Res>
   @override
   $Res call({
     Object? config = null,
+    Object? customerCodeInfo = null,
   }) {
     return _then(_$_Initialized(
       config: null == config
           ? _value.config
           : config // ignore: cast_nullable_to_non_nullable
               as SalesOrganisationConfigs,
+      customerCodeInfo: null == customerCodeInfo
+          ? _value.customerCodeInfo
+          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
     ));
   }
 
@@ -159,19 +184,29 @@ class __$$_InitializedCopyWithImpl<$Res>
       return _then(_value.copyWith(config: value));
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
+    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
+      return _then(_value.copyWith(customerCodeInfo: value));
+    });
+  }
 }
 
 /// @nodoc
 
 class _$_Initialized implements _Initialized {
-  const _$_Initialized({required this.config});
+  const _$_Initialized({required this.config, required this.customerCodeInfo});
 
   @override
   final SalesOrganisationConfigs config;
+  @override
+  final CustomerCodeInfo customerCodeInfo;
 
   @override
   String toString() {
-    return 'AdditionalDetailsEvent.initialized(config: $config)';
+    return 'AdditionalDetailsEvent.initialized(config: $config, customerCodeInfo: $customerCodeInfo)';
   }
 
   @override
@@ -179,11 +214,13 @@ class _$_Initialized implements _Initialized {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Initialized &&
-            (identical(other.config, config) || other.config == config));
+            (identical(other.config, config) || other.config == config) &&
+            (identical(other.customerCodeInfo, customerCodeInfo) ||
+                other.customerCodeInfo == customerCodeInfo));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, config);
+  int get hashCode => Object.hash(runtimeType, config, customerCodeInfo);
 
   @JsonKey(ignore: true)
   @override
@@ -194,7 +231,12 @@ class _$_Initialized implements _Initialized {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(SalesOrganisationConfigs config) initialized,
+    required TResult Function(
+            SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)
+        initialized,
+    required TResult Function(SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo, String orderId)
+        initFromSavedOrder,
     required TResult Function(AdditionalDetailsLabel label, String newValue)
         onTextChange,
     required TResult Function(SalesOrganisationConfigs config) validateForm,
@@ -203,13 +245,18 @@ class _$_Initialized implements _Initialized {
     required TResult Function() removeAllPoDocument,
     required TResult Function(bool value) toggleGreenDelivery,
   }) {
-    return initialized(config);
+    return initialized(config, customerCodeInfo);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrganisationConfigs config)? initialized,
+    TResult? Function(
+            SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
+        initialized,
+    TResult? Function(SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo, String orderId)?
+        initFromSavedOrder,
     TResult? Function(AdditionalDetailsLabel label, String newValue)?
         onTextChange,
     TResult? Function(SalesOrganisationConfigs config)? validateForm,
@@ -218,13 +265,18 @@ class _$_Initialized implements _Initialized {
     TResult? Function()? removeAllPoDocument,
     TResult? Function(bool value)? toggleGreenDelivery,
   }) {
-    return initialized?.call(config);
+    return initialized?.call(config, customerCodeInfo);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrganisationConfigs config)? initialized,
+    TResult Function(
+            SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
+        initialized,
+    TResult Function(SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo, String orderId)?
+        initFromSavedOrder,
     TResult Function(AdditionalDetailsLabel label, String newValue)?
         onTextChange,
     TResult Function(SalesOrganisationConfigs config)? validateForm,
@@ -235,7 +287,7 @@ class _$_Initialized implements _Initialized {
     required TResult orElse(),
   }) {
     if (initialized != null) {
-      return initialized(config);
+      return initialized(config, customerCodeInfo);
     }
     return orElse();
   }
@@ -244,6 +296,7 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
+    required TResult Function(_InitFromSavedOrder value) initFromSavedOrder,
     required TResult Function(_AdditionalDetailsTextOnChange value)
         onTextChange,
     required TResult Function(_AdditionalDetailsValidateForm value)
@@ -264,6 +317,7 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_InitFromSavedOrder value)? initFromSavedOrder,
     TResult? Function(_AdditionalDetailsTextOnChange value)? onTextChange,
     TResult? Function(_AdditionalDetailsValidateForm value)? validateForm,
     TResult? Function(_AdditionalDetailsAddPoDocument value)? addPoDocument,
@@ -281,6 +335,7 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
+    TResult Function(_InitFromSavedOrder value)? initFromSavedOrder,
     TResult Function(_AdditionalDetailsTextOnChange value)? onTextChange,
     TResult Function(_AdditionalDetailsValidateForm value)? validateForm,
     TResult Function(_AdditionalDetailsAddPoDocument value)? addPoDocument,
@@ -300,12 +355,259 @@ class _$_Initialized implements _Initialized {
 }
 
 abstract class _Initialized implements AdditionalDetailsEvent {
-  const factory _Initialized({required final SalesOrganisationConfigs config}) =
-      _$_Initialized;
+  const factory _Initialized(
+      {required final SalesOrganisationConfigs config,
+      required final CustomerCodeInfo customerCodeInfo}) = _$_Initialized;
 
   SalesOrganisationConfigs get config;
+  CustomerCodeInfo get customerCodeInfo;
   @JsonKey(ignore: true)
   _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_InitFromSavedOrderCopyWith<$Res> {
+  factory _$$_InitFromSavedOrderCopyWith(_$_InitFromSavedOrder value,
+          $Res Function(_$_InitFromSavedOrder) then) =
+      __$$_InitFromSavedOrderCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {SalesOrganisationConfigs config,
+      CustomerCodeInfo customerCodeInfo,
+      String orderId});
+
+  $SalesOrganisationConfigsCopyWith<$Res> get config;
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
+}
+
+/// @nodoc
+class __$$_InitFromSavedOrderCopyWithImpl<$Res>
+    extends _$AdditionalDetailsEventCopyWithImpl<$Res, _$_InitFromSavedOrder>
+    implements _$$_InitFromSavedOrderCopyWith<$Res> {
+  __$$_InitFromSavedOrderCopyWithImpl(
+      _$_InitFromSavedOrder _value, $Res Function(_$_InitFromSavedOrder) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? config = null,
+    Object? customerCodeInfo = null,
+    Object? orderId = null,
+  }) {
+    return _then(_$_InitFromSavedOrder(
+      config: null == config
+          ? _value.config
+          : config // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisationConfigs,
+      customerCodeInfo: null == customerCodeInfo
+          ? _value.customerCodeInfo
+          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
+      orderId: null == orderId
+          ? _value.orderId
+          : orderId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationConfigsCopyWith<$Res> get config {
+    return $SalesOrganisationConfigsCopyWith<$Res>(_value.config, (value) {
+      return _then(_value.copyWith(config: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
+    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
+      return _then(_value.copyWith(customerCodeInfo: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_InitFromSavedOrder implements _InitFromSavedOrder {
+  const _$_InitFromSavedOrder(
+      {required this.config,
+      required this.customerCodeInfo,
+      required this.orderId});
+
+  @override
+  final SalesOrganisationConfigs config;
+  @override
+  final CustomerCodeInfo customerCodeInfo;
+  @override
+  final String orderId;
+
+  @override
+  String toString() {
+    return 'AdditionalDetailsEvent.initFromSavedOrder(config: $config, customerCodeInfo: $customerCodeInfo, orderId: $orderId)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_InitFromSavedOrder &&
+            (identical(other.config, config) || other.config == config) &&
+            (identical(other.customerCodeInfo, customerCodeInfo) ||
+                other.customerCodeInfo == customerCodeInfo) &&
+            (identical(other.orderId, orderId) || other.orderId == orderId));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, config, customerCodeInfo, orderId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_InitFromSavedOrderCopyWith<_$_InitFromSavedOrder> get copyWith =>
+      __$$_InitFromSavedOrderCopyWithImpl<_$_InitFromSavedOrder>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)
+        initialized,
+    required TResult Function(SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo, String orderId)
+        initFromSavedOrder,
+    required TResult Function(AdditionalDetailsLabel label, String newValue)
+        onTextChange,
+    required TResult Function(SalesOrganisationConfigs config) validateForm,
+    required TResult Function(List<PoDocuments> poDocuments) addPoDocument,
+    required TResult Function(PoDocuments poDocument) removePoDocument,
+    required TResult Function() removeAllPoDocument,
+    required TResult Function(bool value) toggleGreenDelivery,
+  }) {
+    return initFromSavedOrder(config, customerCodeInfo, orderId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
+        initialized,
+    TResult? Function(SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo, String orderId)?
+        initFromSavedOrder,
+    TResult? Function(AdditionalDetailsLabel label, String newValue)?
+        onTextChange,
+    TResult? Function(SalesOrganisationConfigs config)? validateForm,
+    TResult? Function(List<PoDocuments> poDocuments)? addPoDocument,
+    TResult? Function(PoDocuments poDocument)? removePoDocument,
+    TResult? Function()? removeAllPoDocument,
+    TResult? Function(bool value)? toggleGreenDelivery,
+  }) {
+    return initFromSavedOrder?.call(config, customerCodeInfo, orderId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
+        initialized,
+    TResult Function(SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo, String orderId)?
+        initFromSavedOrder,
+    TResult Function(AdditionalDetailsLabel label, String newValue)?
+        onTextChange,
+    TResult Function(SalesOrganisationConfigs config)? validateForm,
+    TResult Function(List<PoDocuments> poDocuments)? addPoDocument,
+    TResult Function(PoDocuments poDocument)? removePoDocument,
+    TResult Function()? removeAllPoDocument,
+    TResult Function(bool value)? toggleGreenDelivery,
+    required TResult orElse(),
+  }) {
+    if (initFromSavedOrder != null) {
+      return initFromSavedOrder(config, customerCodeInfo, orderId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_InitFromSavedOrder value) initFromSavedOrder,
+    required TResult Function(_AdditionalDetailsTextOnChange value)
+        onTextChange,
+    required TResult Function(_AdditionalDetailsValidateForm value)
+        validateForm,
+    required TResult Function(_AdditionalDetailsAddPoDocument value)
+        addPoDocument,
+    required TResult Function(_AdditionalDetailsRemovePoDocument value)
+        removePoDocument,
+    required TResult Function(_AdditionalDetailsRemoveAllPoDocument value)
+        removeAllPoDocument,
+    required TResult Function(_AdditionalDetailsToggleGreenDelivery value)
+        toggleGreenDelivery,
+  }) {
+    return initFromSavedOrder(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_InitFromSavedOrder value)? initFromSavedOrder,
+    TResult? Function(_AdditionalDetailsTextOnChange value)? onTextChange,
+    TResult? Function(_AdditionalDetailsValidateForm value)? validateForm,
+    TResult? Function(_AdditionalDetailsAddPoDocument value)? addPoDocument,
+    TResult? Function(_AdditionalDetailsRemovePoDocument value)?
+        removePoDocument,
+    TResult? Function(_AdditionalDetailsRemoveAllPoDocument value)?
+        removeAllPoDocument,
+    TResult? Function(_AdditionalDetailsToggleGreenDelivery value)?
+        toggleGreenDelivery,
+  }) {
+    return initFromSavedOrder?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_InitFromSavedOrder value)? initFromSavedOrder,
+    TResult Function(_AdditionalDetailsTextOnChange value)? onTextChange,
+    TResult Function(_AdditionalDetailsValidateForm value)? validateForm,
+    TResult Function(_AdditionalDetailsAddPoDocument value)? addPoDocument,
+    TResult Function(_AdditionalDetailsRemovePoDocument value)?
+        removePoDocument,
+    TResult Function(_AdditionalDetailsRemoveAllPoDocument value)?
+        removeAllPoDocument,
+    TResult Function(_AdditionalDetailsToggleGreenDelivery value)?
+        toggleGreenDelivery,
+    required TResult orElse(),
+  }) {
+    if (initFromSavedOrder != null) {
+      return initFromSavedOrder(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _InitFromSavedOrder implements AdditionalDetailsEvent {
+  const factory _InitFromSavedOrder(
+      {required final SalesOrganisationConfigs config,
+      required final CustomerCodeInfo customerCodeInfo,
+      required final String orderId}) = _$_InitFromSavedOrder;
+
+  SalesOrganisationConfigs get config;
+  CustomerCodeInfo get customerCodeInfo;
+  String get orderId;
+  @JsonKey(ignore: true)
+  _$$_InitFromSavedOrderCopyWith<_$_InitFromSavedOrder> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -388,7 +690,12 @@ class _$_AdditionalDetailsTextOnChange
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(SalesOrganisationConfigs config) initialized,
+    required TResult Function(
+            SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)
+        initialized,
+    required TResult Function(SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo, String orderId)
+        initFromSavedOrder,
     required TResult Function(AdditionalDetailsLabel label, String newValue)
         onTextChange,
     required TResult Function(SalesOrganisationConfigs config) validateForm,
@@ -403,7 +710,12 @@ class _$_AdditionalDetailsTextOnChange
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrganisationConfigs config)? initialized,
+    TResult? Function(
+            SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
+        initialized,
+    TResult? Function(SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo, String orderId)?
+        initFromSavedOrder,
     TResult? Function(AdditionalDetailsLabel label, String newValue)?
         onTextChange,
     TResult? Function(SalesOrganisationConfigs config)? validateForm,
@@ -418,7 +730,12 @@ class _$_AdditionalDetailsTextOnChange
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrganisationConfigs config)? initialized,
+    TResult Function(
+            SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
+        initialized,
+    TResult Function(SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo, String orderId)?
+        initFromSavedOrder,
     TResult Function(AdditionalDetailsLabel label, String newValue)?
         onTextChange,
     TResult Function(SalesOrganisationConfigs config)? validateForm,
@@ -438,6 +755,7 @@ class _$_AdditionalDetailsTextOnChange
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
+    required TResult Function(_InitFromSavedOrder value) initFromSavedOrder,
     required TResult Function(_AdditionalDetailsTextOnChange value)
         onTextChange,
     required TResult Function(_AdditionalDetailsValidateForm value)
@@ -458,6 +776,7 @@ class _$_AdditionalDetailsTextOnChange
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_InitFromSavedOrder value)? initFromSavedOrder,
     TResult? Function(_AdditionalDetailsTextOnChange value)? onTextChange,
     TResult? Function(_AdditionalDetailsValidateForm value)? validateForm,
     TResult? Function(_AdditionalDetailsAddPoDocument value)? addPoDocument,
@@ -475,6 +794,7 @@ class _$_AdditionalDetailsTextOnChange
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
+    TResult Function(_InitFromSavedOrder value)? initFromSavedOrder,
     TResult Function(_AdditionalDetailsTextOnChange value)? onTextChange,
     TResult Function(_AdditionalDetailsValidateForm value)? validateForm,
     TResult Function(_AdditionalDetailsAddPoDocument value)? addPoDocument,
@@ -585,7 +905,12 @@ class _$_AdditionalDetailsValidateForm
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(SalesOrganisationConfigs config) initialized,
+    required TResult Function(
+            SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)
+        initialized,
+    required TResult Function(SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo, String orderId)
+        initFromSavedOrder,
     required TResult Function(AdditionalDetailsLabel label, String newValue)
         onTextChange,
     required TResult Function(SalesOrganisationConfigs config) validateForm,
@@ -600,7 +925,12 @@ class _$_AdditionalDetailsValidateForm
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrganisationConfigs config)? initialized,
+    TResult? Function(
+            SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
+        initialized,
+    TResult? Function(SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo, String orderId)?
+        initFromSavedOrder,
     TResult? Function(AdditionalDetailsLabel label, String newValue)?
         onTextChange,
     TResult? Function(SalesOrganisationConfigs config)? validateForm,
@@ -615,7 +945,12 @@ class _$_AdditionalDetailsValidateForm
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrganisationConfigs config)? initialized,
+    TResult Function(
+            SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
+        initialized,
+    TResult Function(SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo, String orderId)?
+        initFromSavedOrder,
     TResult Function(AdditionalDetailsLabel label, String newValue)?
         onTextChange,
     TResult Function(SalesOrganisationConfigs config)? validateForm,
@@ -635,6 +970,7 @@ class _$_AdditionalDetailsValidateForm
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
+    required TResult Function(_InitFromSavedOrder value) initFromSavedOrder,
     required TResult Function(_AdditionalDetailsTextOnChange value)
         onTextChange,
     required TResult Function(_AdditionalDetailsValidateForm value)
@@ -655,6 +991,7 @@ class _$_AdditionalDetailsValidateForm
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_InitFromSavedOrder value)? initFromSavedOrder,
     TResult? Function(_AdditionalDetailsTextOnChange value)? onTextChange,
     TResult? Function(_AdditionalDetailsValidateForm value)? validateForm,
     TResult? Function(_AdditionalDetailsAddPoDocument value)? addPoDocument,
@@ -672,6 +1009,7 @@ class _$_AdditionalDetailsValidateForm
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
+    TResult Function(_InitFromSavedOrder value)? initFromSavedOrder,
     TResult Function(_AdditionalDetailsTextOnChange value)? onTextChange,
     TResult Function(_AdditionalDetailsValidateForm value)? validateForm,
     TResult Function(_AdditionalDetailsAddPoDocument value)? addPoDocument,
@@ -779,7 +1117,12 @@ class _$_AdditionalDetailsAddPoDocument
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(SalesOrganisationConfigs config) initialized,
+    required TResult Function(
+            SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)
+        initialized,
+    required TResult Function(SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo, String orderId)
+        initFromSavedOrder,
     required TResult Function(AdditionalDetailsLabel label, String newValue)
         onTextChange,
     required TResult Function(SalesOrganisationConfigs config) validateForm,
@@ -794,7 +1137,12 @@ class _$_AdditionalDetailsAddPoDocument
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrganisationConfigs config)? initialized,
+    TResult? Function(
+            SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
+        initialized,
+    TResult? Function(SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo, String orderId)?
+        initFromSavedOrder,
     TResult? Function(AdditionalDetailsLabel label, String newValue)?
         onTextChange,
     TResult? Function(SalesOrganisationConfigs config)? validateForm,
@@ -809,7 +1157,12 @@ class _$_AdditionalDetailsAddPoDocument
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrganisationConfigs config)? initialized,
+    TResult Function(
+            SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
+        initialized,
+    TResult Function(SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo, String orderId)?
+        initFromSavedOrder,
     TResult Function(AdditionalDetailsLabel label, String newValue)?
         onTextChange,
     TResult Function(SalesOrganisationConfigs config)? validateForm,
@@ -829,6 +1182,7 @@ class _$_AdditionalDetailsAddPoDocument
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
+    required TResult Function(_InitFromSavedOrder value) initFromSavedOrder,
     required TResult Function(_AdditionalDetailsTextOnChange value)
         onTextChange,
     required TResult Function(_AdditionalDetailsValidateForm value)
@@ -849,6 +1203,7 @@ class _$_AdditionalDetailsAddPoDocument
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_InitFromSavedOrder value)? initFromSavedOrder,
     TResult? Function(_AdditionalDetailsTextOnChange value)? onTextChange,
     TResult? Function(_AdditionalDetailsValidateForm value)? validateForm,
     TResult? Function(_AdditionalDetailsAddPoDocument value)? addPoDocument,
@@ -866,6 +1221,7 @@ class _$_AdditionalDetailsAddPoDocument
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
+    TResult Function(_InitFromSavedOrder value)? initFromSavedOrder,
     TResult Function(_AdditionalDetailsTextOnChange value)? onTextChange,
     TResult Function(_AdditionalDetailsValidateForm value)? validateForm,
     TResult Function(_AdditionalDetailsAddPoDocument value)? addPoDocument,
@@ -977,7 +1333,12 @@ class _$_AdditionalDetailsRemovePoDocument
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(SalesOrganisationConfigs config) initialized,
+    required TResult Function(
+            SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)
+        initialized,
+    required TResult Function(SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo, String orderId)
+        initFromSavedOrder,
     required TResult Function(AdditionalDetailsLabel label, String newValue)
         onTextChange,
     required TResult Function(SalesOrganisationConfigs config) validateForm,
@@ -992,7 +1353,12 @@ class _$_AdditionalDetailsRemovePoDocument
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrganisationConfigs config)? initialized,
+    TResult? Function(
+            SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
+        initialized,
+    TResult? Function(SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo, String orderId)?
+        initFromSavedOrder,
     TResult? Function(AdditionalDetailsLabel label, String newValue)?
         onTextChange,
     TResult? Function(SalesOrganisationConfigs config)? validateForm,
@@ -1007,7 +1373,12 @@ class _$_AdditionalDetailsRemovePoDocument
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrganisationConfigs config)? initialized,
+    TResult Function(
+            SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
+        initialized,
+    TResult Function(SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo, String orderId)?
+        initFromSavedOrder,
     TResult Function(AdditionalDetailsLabel label, String newValue)?
         onTextChange,
     TResult Function(SalesOrganisationConfigs config)? validateForm,
@@ -1027,6 +1398,7 @@ class _$_AdditionalDetailsRemovePoDocument
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
+    required TResult Function(_InitFromSavedOrder value) initFromSavedOrder,
     required TResult Function(_AdditionalDetailsTextOnChange value)
         onTextChange,
     required TResult Function(_AdditionalDetailsValidateForm value)
@@ -1047,6 +1419,7 @@ class _$_AdditionalDetailsRemovePoDocument
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_InitFromSavedOrder value)? initFromSavedOrder,
     TResult? Function(_AdditionalDetailsTextOnChange value)? onTextChange,
     TResult? Function(_AdditionalDetailsValidateForm value)? validateForm,
     TResult? Function(_AdditionalDetailsAddPoDocument value)? addPoDocument,
@@ -1064,6 +1437,7 @@ class _$_AdditionalDetailsRemovePoDocument
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
+    TResult Function(_InitFromSavedOrder value)? initFromSavedOrder,
     TResult Function(_AdditionalDetailsTextOnChange value)? onTextChange,
     TResult Function(_AdditionalDetailsValidateForm value)? validateForm,
     TResult Function(_AdditionalDetailsAddPoDocument value)? addPoDocument,
@@ -1138,7 +1512,12 @@ class _$_AdditionalDetailsRemoveAllPoDocument
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(SalesOrganisationConfigs config) initialized,
+    required TResult Function(
+            SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)
+        initialized,
+    required TResult Function(SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo, String orderId)
+        initFromSavedOrder,
     required TResult Function(AdditionalDetailsLabel label, String newValue)
         onTextChange,
     required TResult Function(SalesOrganisationConfigs config) validateForm,
@@ -1153,7 +1532,12 @@ class _$_AdditionalDetailsRemoveAllPoDocument
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrganisationConfigs config)? initialized,
+    TResult? Function(
+            SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
+        initialized,
+    TResult? Function(SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo, String orderId)?
+        initFromSavedOrder,
     TResult? Function(AdditionalDetailsLabel label, String newValue)?
         onTextChange,
     TResult? Function(SalesOrganisationConfigs config)? validateForm,
@@ -1168,7 +1552,12 @@ class _$_AdditionalDetailsRemoveAllPoDocument
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrganisationConfigs config)? initialized,
+    TResult Function(
+            SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
+        initialized,
+    TResult Function(SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo, String orderId)?
+        initFromSavedOrder,
     TResult Function(AdditionalDetailsLabel label, String newValue)?
         onTextChange,
     TResult Function(SalesOrganisationConfigs config)? validateForm,
@@ -1188,6 +1577,7 @@ class _$_AdditionalDetailsRemoveAllPoDocument
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
+    required TResult Function(_InitFromSavedOrder value) initFromSavedOrder,
     required TResult Function(_AdditionalDetailsTextOnChange value)
         onTextChange,
     required TResult Function(_AdditionalDetailsValidateForm value)
@@ -1208,6 +1598,7 @@ class _$_AdditionalDetailsRemoveAllPoDocument
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_InitFromSavedOrder value)? initFromSavedOrder,
     TResult? Function(_AdditionalDetailsTextOnChange value)? onTextChange,
     TResult? Function(_AdditionalDetailsValidateForm value)? validateForm,
     TResult? Function(_AdditionalDetailsAddPoDocument value)? addPoDocument,
@@ -1225,6 +1616,7 @@ class _$_AdditionalDetailsRemoveAllPoDocument
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
+    TResult Function(_InitFromSavedOrder value)? initFromSavedOrder,
     TResult Function(_AdditionalDetailsTextOnChange value)? onTextChange,
     TResult Function(_AdditionalDetailsValidateForm value)? validateForm,
     TResult Function(_AdditionalDetailsAddPoDocument value)? addPoDocument,
@@ -1319,7 +1711,12 @@ class _$_AdditionalDetailsToggleGreenDelivery
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(SalesOrganisationConfigs config) initialized,
+    required TResult Function(
+            SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)
+        initialized,
+    required TResult Function(SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo, String orderId)
+        initFromSavedOrder,
     required TResult Function(AdditionalDetailsLabel label, String newValue)
         onTextChange,
     required TResult Function(SalesOrganisationConfigs config) validateForm,
@@ -1334,7 +1731,12 @@ class _$_AdditionalDetailsToggleGreenDelivery
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrganisationConfigs config)? initialized,
+    TResult? Function(
+            SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
+        initialized,
+    TResult? Function(SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo, String orderId)?
+        initFromSavedOrder,
     TResult? Function(AdditionalDetailsLabel label, String newValue)?
         onTextChange,
     TResult? Function(SalesOrganisationConfigs config)? validateForm,
@@ -1349,7 +1751,12 @@ class _$_AdditionalDetailsToggleGreenDelivery
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrganisationConfigs config)? initialized,
+    TResult Function(
+            SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
+        initialized,
+    TResult Function(SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo, String orderId)?
+        initFromSavedOrder,
     TResult Function(AdditionalDetailsLabel label, String newValue)?
         onTextChange,
     TResult Function(SalesOrganisationConfigs config)? validateForm,
@@ -1369,6 +1776,7 @@ class _$_AdditionalDetailsToggleGreenDelivery
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
+    required TResult Function(_InitFromSavedOrder value) initFromSavedOrder,
     required TResult Function(_AdditionalDetailsTextOnChange value)
         onTextChange,
     required TResult Function(_AdditionalDetailsValidateForm value)
@@ -1389,6 +1797,7 @@ class _$_AdditionalDetailsToggleGreenDelivery
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_InitFromSavedOrder value)? initFromSavedOrder,
     TResult? Function(_AdditionalDetailsTextOnChange value)? onTextChange,
     TResult? Function(_AdditionalDetailsValidateForm value)? validateForm,
     TResult? Function(_AdditionalDetailsAddPoDocument value)? addPoDocument,
@@ -1406,6 +1815,7 @@ class _$_AdditionalDetailsToggleGreenDelivery
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
+    TResult Function(_InitFromSavedOrder value)? initFromSavedOrder,
     TResult Function(_AdditionalDetailsTextOnChange value)? onTextChange,
     TResult Function(_AdditionalDetailsValidateForm value)? validateForm,
     TResult Function(_AdditionalDetailsAddPoDocument value)? addPoDocument,
@@ -1441,6 +1851,7 @@ mixin _$AdditionalDetailsState {
   AdditionalDetailsData get additionalDetailsData =>
       throw _privateConstructorUsedError;
   bool get isValidated => throw _privateConstructorUsedError;
+  bool get isLoading => throw _privateConstructorUsedError;
   bool get showErrorMessages => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -1457,6 +1868,7 @@ abstract class $AdditionalDetailsStateCopyWith<$Res> {
   $Res call(
       {AdditionalDetailsData additionalDetailsData,
       bool isValidated,
+      bool isLoading,
       bool showErrorMessages});
 
   $AdditionalDetailsDataCopyWith<$Res> get additionalDetailsData;
@@ -1478,6 +1890,7 @@ class _$AdditionalDetailsStateCopyWithImpl<$Res,
   $Res call({
     Object? additionalDetailsData = null,
     Object? isValidated = null,
+    Object? isLoading = null,
     Object? showErrorMessages = null,
   }) {
     return _then(_value.copyWith(
@@ -1488,6 +1901,10 @@ class _$AdditionalDetailsStateCopyWithImpl<$Res,
       isValidated: null == isValidated
           ? _value.isValidated
           : isValidated // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
       showErrorMessages: null == showErrorMessages
           ? _value.showErrorMessages
@@ -1517,6 +1934,7 @@ abstract class _$$_AdditionalDetailsStateCopyWith<$Res>
   $Res call(
       {AdditionalDetailsData additionalDetailsData,
       bool isValidated,
+      bool isLoading,
       bool showErrorMessages});
 
   @override
@@ -1537,6 +1955,7 @@ class __$$_AdditionalDetailsStateCopyWithImpl<$Res>
   $Res call({
     Object? additionalDetailsData = null,
     Object? isValidated = null,
+    Object? isLoading = null,
     Object? showErrorMessages = null,
   }) {
     return _then(_$_AdditionalDetailsState(
@@ -1547,6 +1966,10 @@ class __$$_AdditionalDetailsStateCopyWithImpl<$Res>
       isValidated: null == isValidated
           ? _value.isValidated
           : isValidated // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
       showErrorMessages: null == showErrorMessages
           ? _value.showErrorMessages
@@ -1562,6 +1985,7 @@ class _$_AdditionalDetailsState extends _AdditionalDetailsState {
   const _$_AdditionalDetailsState(
       {required this.additionalDetailsData,
       required this.isValidated,
+      required this.isLoading,
       required this.showErrorMessages})
       : super._();
 
@@ -1570,11 +1994,13 @@ class _$_AdditionalDetailsState extends _AdditionalDetailsState {
   @override
   final bool isValidated;
   @override
+  final bool isLoading;
+  @override
   final bool showErrorMessages;
 
   @override
   String toString() {
-    return 'AdditionalDetailsState(additionalDetailsData: $additionalDetailsData, isValidated: $isValidated, showErrorMessages: $showErrorMessages)';
+    return 'AdditionalDetailsState(additionalDetailsData: $additionalDetailsData, isValidated: $isValidated, isLoading: $isLoading, showErrorMessages: $showErrorMessages)';
   }
 
   @override
@@ -1586,13 +2012,15 @@ class _$_AdditionalDetailsState extends _AdditionalDetailsState {
                 other.additionalDetailsData == additionalDetailsData) &&
             (identical(other.isValidated, isValidated) ||
                 other.isValidated == isValidated) &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading) &&
             (identical(other.showErrorMessages, showErrorMessages) ||
                 other.showErrorMessages == showErrorMessages));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, additionalDetailsData, isValidated, showErrorMessages);
+  int get hashCode => Object.hash(runtimeType, additionalDetailsData,
+      isValidated, isLoading, showErrorMessages);
 
   @JsonKey(ignore: true)
   @override
@@ -1606,6 +2034,7 @@ abstract class _AdditionalDetailsState extends AdditionalDetailsState {
   const factory _AdditionalDetailsState(
       {required final AdditionalDetailsData additionalDetailsData,
       required final bool isValidated,
+      required final bool isLoading,
       required final bool showErrorMessages}) = _$_AdditionalDetailsState;
   const _AdditionalDetailsState._() : super._();
 
@@ -1613,6 +2042,8 @@ abstract class _AdditionalDetailsState extends AdditionalDetailsState {
   AdditionalDetailsData get additionalDetailsData;
   @override
   bool get isValidated;
+  @override
+  bool get isLoading;
   @override
   bool get showErrorMessages;
   @override

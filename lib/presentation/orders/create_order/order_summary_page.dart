@@ -358,11 +358,15 @@ class _Stepper extends StatelessWidget {
 
   void _handleListner(BuildContext context, OrderSummaryState state) {
     if (state.isSubmitSuccess) {
-      context
-          .read<AdditionalDetailsBloc>()
-          .add(AdditionalDetailsEvent.initialized(
-            config: context.read<SalesOrgBloc>().state.configs,
-          ));
+      context.read<AdditionalDetailsBloc>().add(
+            AdditionalDetailsEvent.initialized(
+              config: context.read<SalesOrgBloc>().state.configs,
+             customerCodeInfo: context
+                          .read<CustomerCodeBloc>()
+                          .state
+                          .customerCodeInfo,
+            ),
+          );
       _moveToOrderHistory(context);
     }
     _handleError(context, state);

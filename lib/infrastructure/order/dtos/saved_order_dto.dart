@@ -209,9 +209,13 @@ class _PoDocumentsListConverter
 
   @override
   List<PoDocumentsDto> fromJson(String json) {
-    return List.from(jsonDecode(json))
-        .map((e) => PoDocumentsDto.fromJson(e))
-        .toList();
+    // Because API response return PODocmentList like this "POAttachent": ""[]""
+    // we will need to remove 2 characters " first and let jsonDecode do the rest
+    return List.from(
+      jsonDecode(
+        json.substring(1, json.length - 1),
+      ),
+    ).map((e) => PoDocumentsDto.fromJson(e)).toList();
   }
 
   @override

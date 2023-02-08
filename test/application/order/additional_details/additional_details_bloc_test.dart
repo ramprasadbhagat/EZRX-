@@ -1,20 +1,37 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/additional_details_data.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
+import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/order_local.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/order_repository.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/intl.dart';
+import 'package:mocktail/mocktail.dart';
+
+class SavedOrderRepositoryMock extends Mock implements OrderRepository {}
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   late SalesOrganisationConfigs config;
+  late CustomerCodeInfo customerCodeInfo;
   late AdditionalDetailsState state;
   late AdditionalDetailsData data;
+  late OrderRepository repository;
+  late SavedOrder orderDetail;
   group(
     'Additional Details Bloc Test',
     () {
+      setUpAll(() async {
+        orderDetail = await OrderLocalDataSource().getSavedOrderDetail();
+      });
       setUp(
         () {
           config = SalesOrganisationConfigs.empty().copyWith(
@@ -24,15 +41,21 @@ void main() {
             enableFutureDeliveryDay: true,
             futureDeliveryDay: FutureDeliveryDay('4'),
           );
+          customerCodeInfo = CustomerCodeInfo.empty();
+          repository = SavedOrderRepositoryMock();
           state = AdditionalDetailsState.initial();
           data = AdditionalDetailsData.empty();
         },
       );
       blocTest<AdditionalDetailsBloc, AdditionalDetailsState>(
         'Load Bloc with futureDeliveryDay',
-        build: () => AdditionalDetailsBloc(),
-        act: (bloc) =>
-            bloc.add(AdditionalDetailsEvent.initialized(config: config)),
+        build: () => AdditionalDetailsBloc(savedOrderRepository: repository),
+        act: (bloc) => bloc.add(
+          AdditionalDetailsEvent.initialized(
+            config: config,
+            customerCodeInfo: customerCodeInfo,
+          ),
+        ),
         expect: () => [
           AdditionalDetailsState.initial().copyWith(
             additionalDetailsData: data.copyWith(
@@ -54,9 +77,15 @@ void main() {
 
       blocTest<AdditionalDetailsBloc, AdditionalDetailsState>(
         'Load Bloc without futureDeliveryDay',
-        build: () => AdditionalDetailsBloc(),
-        act: (bloc) => bloc.add(AdditionalDetailsEvent.initialized(
-            config: config.copyWith(futureDeliveryDay: FutureDeliveryDay('')))),
+        build: () => AdditionalDetailsBloc(savedOrderRepository: repository),
+        act: (bloc) => bloc.add(
+          AdditionalDetailsEvent.initialized(
+            config: config.copyWith(
+              futureDeliveryDay: FutureDeliveryDay(''),
+            ),
+            customerCodeInfo: customerCodeInfo,
+          ),
+        ),
         expect: () => [
           AdditionalDetailsState.initial().copyWith(
             additionalDetailsData: data.copyWith(
@@ -78,7 +107,7 @@ void main() {
 
       blocTest<AdditionalDetailsBloc, AdditionalDetailsState>(
         'Additional Details AdditionalDetails Form OnTextChange',
-        build: () => AdditionalDetailsBloc(),
+        build: () => AdditionalDetailsBloc(savedOrderRepository: repository),
         seed: () => AdditionalDetailsState.initial(),
         act: (AdditionalDetailsBloc bloc) {
           bloc
@@ -205,7 +234,7 @@ void main() {
 
       blocTest<AdditionalDetailsBloc, AdditionalDetailsState>(
         'Additional Details Validate AdditionalDetails Form Success',
-        build: () => AdditionalDetailsBloc(),
+        build: () => AdditionalDetailsBloc(savedOrderRepository: repository),
         seed: () => AdditionalDetailsState.initial().copyWith(
             additionalDetailsData: AdditionalDetailsData.empty().copyWith(
           customerPoReference: CustomerPoReference('CO REF'),
@@ -234,7 +263,7 @@ void main() {
 
       blocTest<AdditionalDetailsBloc, AdditionalDetailsState>(
         'Additional Details Validate AdditionalDetails Form Failure',
-        build: () => AdditionalDetailsBloc(),
+        build: () => AdditionalDetailsBloc(savedOrderRepository: repository),
         seed: () => AdditionalDetailsState.initial().copyWith(
             additionalDetailsData: AdditionalDetailsData.empty().copyWith(
           customerPoReference: CustomerPoReference('CO REF'),
@@ -263,7 +292,7 @@ void main() {
 
       blocTest<AdditionalDetailsBloc, AdditionalDetailsState>(
         'Additional Details toggleGreenDelivery test enableGreenDelivery true',
-        build: () => AdditionalDetailsBloc(),
+        build: () => AdditionalDetailsBloc(savedOrderRepository: repository),
         seed: () => AdditionalDetailsState.initial().copyWith(
           additionalDetailsData: AdditionalDetailsData.empty().copyWith(
             customerPoReference: CustomerPoReference('CO REF'),
@@ -291,7 +320,7 @@ void main() {
 
       blocTest<AdditionalDetailsBloc, AdditionalDetailsState>(
         'Additional Details toggleGreenDelivery test enableGreenDelivery false',
-        build: () => AdditionalDetailsBloc(),
+        build: () => AdditionalDetailsBloc(savedOrderRepository: repository),
         seed: () => AdditionalDetailsState.initial().copyWith(
           additionalDetailsData: AdditionalDetailsData.empty().copyWith(
             customerPoReference: CustomerPoReference('CO REF'),
@@ -319,7 +348,7 @@ void main() {
 
       blocTest<AdditionalDetailsBloc, AdditionalDetailsState>(
         'Additional Details Po Document Add',
-        build: () => AdditionalDetailsBloc(),
+        build: () => AdditionalDetailsBloc(savedOrderRepository: repository),
         act: (AdditionalDetailsBloc bloc) {
           bloc.add(
             AdditionalDetailsEvent.addPoDocument(
@@ -338,7 +367,7 @@ void main() {
 
       blocTest<AdditionalDetailsBloc, AdditionalDetailsState>(
         'Additional Details Po Document Remove',
-        build: () => AdditionalDetailsBloc(),
+        build: () => AdditionalDetailsBloc(savedOrderRepository: repository),
         seed: () => AdditionalDetailsState.initial().copyWith(
           additionalDetailsData: AdditionalDetailsData.empty().copyWith(
             poDocuments: [PoDocuments.empty()],
@@ -358,7 +387,7 @@ void main() {
 
       blocTest<AdditionalDetailsBloc, AdditionalDetailsState>(
         'Additional Details Po Document Remove All',
-        build: () => AdditionalDetailsBloc(),
+        build: () => AdditionalDetailsBloc(savedOrderRepository: repository),
         seed: () => AdditionalDetailsState.initial().copyWith(
           additionalDetailsData: AdditionalDetailsData.empty().copyWith(
             poDocuments: [
@@ -374,6 +403,67 @@ void main() {
         },
         expect: () => [
           AdditionalDetailsState.initial(),
+        ],
+      );
+
+      blocTest<AdditionalDetailsBloc, AdditionalDetailsState>(
+        'Init from saved order when SavedOrderDetail API success',
+        build: () => AdditionalDetailsBloc(savedOrderRepository: repository),
+        setUp: () {
+          when(() => repository.getSavedOrderDetail(orderId: orderDetail.id))
+              .thenAnswer(
+            (invocation) async => Right(orderDetail),
+          );
+        },
+        act: (AdditionalDetailsBloc bloc) {
+          bloc.add(
+            AdditionalDetailsEvent.initFromSavedOrder(
+              config: config,
+              customerCodeInfo: customerCodeInfo,
+              orderId: orderDetail.id,
+            ),
+          );
+        },
+        expect: () => [
+          AdditionalDetailsState.initial().copyWith(isLoading: true),
+          AdditionalDetailsState.initial().copyWith(
+            isLoading: false,
+            additionalDetailsData: AdditionalDetailsData.fromSavedOrder(
+              orderDetail: orderDetail,
+              customerCodeInfo: customerCodeInfo,
+            ),
+          ),
+        ],
+      );
+
+      blocTest<AdditionalDetailsBloc, AdditionalDetailsState>(
+        'Init from saved order when SavedOrderDetail API Failure',
+        build: () => AdditionalDetailsBloc(savedOrderRepository: repository),
+        setUp: () {
+          when(() => repository.getSavedOrderDetail(orderId: orderDetail.id))
+              .thenAnswer(
+            (invocation) async => const Left(
+              ApiFailure.other('fake-error'),
+            ),
+          );
+        },
+        act: (AdditionalDetailsBloc bloc) {
+          bloc.add(
+            AdditionalDetailsEvent.initFromSavedOrder(
+              config: config,
+              customerCodeInfo: customerCodeInfo,
+              orderId: orderDetail.id,
+            ),
+          );
+        },
+        expect: () => [
+          AdditionalDetailsState.initial().copyWith(isLoading: true),
+          AdditionalDetailsState.initial().copyWith(
+            isLoading: false,
+            additionalDetailsData: AdditionalDetailsData.empty().copyWith(
+              contactNumber: ContactNumber(customerCodeInfo.telephoneNumber),
+            ),
+          ),
         ],
       );
     },

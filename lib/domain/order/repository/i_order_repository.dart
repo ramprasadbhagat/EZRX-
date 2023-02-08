@@ -47,4 +47,8 @@ abstract class IOrderRepository {
     required String orderType,
     required SalesOrganisationConfigs configs,
   });
+
+  Future<Either<ApiFailure, SavedOrder>> getSavedOrderDetail({
+    required String orderId,
+  });
 }

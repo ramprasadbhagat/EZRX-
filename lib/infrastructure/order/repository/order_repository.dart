@@ -233,6 +233,33 @@ class OrderRepository implements IOrderRepository {
     }
   }
 
+  @override
+  Future<Either<ApiFailure, SavedOrder>> getSavedOrderDetail({
+    required String orderId,
+  }) async {
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final savedOrder = await localDataSource.getSavedOrderDetail();
+
+        return Right(savedOrder);
+      } catch (e) {
+        return Left(
+          FailureHandler.handleFailure(e),
+        );
+      }
+    }
+    try {
+      final orderDetail =
+          await remoteDataSource.getSavedOrderDetail(orderId: orderId);
+
+      return Right(orderDetail);
+    } catch (e) {
+      return Left(
+        FailureHandler.handleFailure(e),
+      );
+    }
+  }
+
 //TODO : Will revisit
   SavedOrder _getCreateDraftOrderRequest({
     required ShipToInfo shipToInfo,

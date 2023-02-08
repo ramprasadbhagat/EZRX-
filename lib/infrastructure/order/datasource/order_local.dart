@@ -54,4 +54,16 @@ class OrderLocalDataSource {
     return SubmitOrderResponseDto.fromJson(data['data']['submitOrderTwo'])
         .toDomain();
   }
+
+  Future<SavedOrder> getSavedOrderDetail() async {
+    await Future.delayed(const Duration(seconds: 5));
+    final data = json.decode(
+      await rootBundle
+          .loadString('assets/json/getSavedOrderDetailResponse.json'),
+    );
+
+    return SavedOrderDto.fromJson(
+      data['data']['draftOrder'],
+    ).toDomain();
+  }
 }

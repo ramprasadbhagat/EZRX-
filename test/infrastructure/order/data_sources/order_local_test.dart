@@ -80,8 +80,10 @@ void main() {
           );
 
           final result = await localDataSource.submitOrder(
-              submitOrder: SubmitOrderDto.fromDomain(SubmitOrder.empty()
-                  .copyWith(companyName: CompanyName('fake-name')),'fake-currency'));
+              submitOrder: SubmitOrderDto.fromDomain(
+                  SubmitOrder.empty()
+                      .copyWith(companyName: CompanyName('fake-name')),
+                  'fake-currency'));
 
           expect(
             result,
@@ -108,6 +110,25 @@ void main() {
           expect(
             result,
             SavedOrderDto.fromJson(res['data']['createDraftOrder']).toDomain(),
+          );
+        },
+      );
+
+      test(
+        'Get saved Order Detail',
+        () async {
+          final res = json.decode(
+            await rootBundle
+                .loadString('assets/json/getSavedOrderDetailResponse.json'),
+          );
+
+          final result = await localDataSource.getSavedOrderDetail();
+
+          expect(
+            result,
+            SavedOrderDto.fromJson(
+              res['data']['draftOrder'],
+            ).toDomain(),
           );
         },
       );

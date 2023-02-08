@@ -151,12 +151,17 @@ class _TextFormField extends StatefulWidget {
 }
 
 class _TextFormFieldState extends State<_TextFormField> {
-  late TextEditingController _controller;
+  TextEditingController _controller = TextEditingController();
 
   TextEditingController _getController({required String text}) {
-    return TextEditingController.fromValue(TextEditingValue(
-      text: text,
-    ));
+    return TextEditingController.fromValue(
+      TextEditingValue(
+        text: text,
+        selection: TextSelection.collapsed(
+          offset: _controller.selection.base.offset,
+        ),
+      ),
+    );
   }
 
   void _initialValue() {
@@ -203,49 +208,107 @@ class _TextFormFieldState extends State<_TextFormField> {
 
   @override
   void initState() {
-    _initialValue();
     super.initState();
+    _initialValue();
+  }
+
+  @override
+  void didUpdateWidget(covariant _TextFormField oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    _initialValue();
   }
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        TextFormField(
-          key: Key(widget.keyText),
-          controller: _controller,
-          keyboardType: widget.keyboardType,
-          maxLength: widget.maxLength,
-          inputFormatters: [
-            RunesLengthLimitingTextInputFormatter(widget.maxLength),
-          ],
-          maxLines: widget.keyboardType == TextInputType.multiline ? null : 1,
-          buildCounter: (
-            context, {
-            required int currentLength,
-            required int? maxLength,
-            required bool isFocused,
-          }) {
-            return Text(
-              '${_controller.text.runes.length}/${widget.maxLength}',
-              style: Theme.of(context).textTheme.caption,
+        BlocBuilder<AdditionalDetailsBloc, AdditionalDetailsState>(
+          buildWhen: (previous, current) =>
+              previous.isLoading != current.isLoading,
+          builder: (context, state) {
+            return TextFormField(
+              key: Key(widget.keyText),
+              enabled: !state.isLoading,
+              controller: _controller,
+              keyboardType: widget.keyboardType,
+              maxLength: widget.maxLength,
+              inputFormatters: [
+                RunesLengthLimitingTextInputFormatter(widget.maxLength),
+              ],
+              maxLines:
+                  widget.keyboardType == TextInputType.multiline ? null : 1,
+              buildCounter: (
+                context, {
+                required int currentLength,
+                required int? maxLength,
+                required bool isFocused,
+              }) {
+                return Text(
+                  '${_controller.text.runes.length}/${widget.maxLength}',
+                  style: Theme.of(context).textTheme.caption,
+                );
+              },
+              onChanged: (value) {
+                context.read<AdditionalDetailsBloc>().add(
+                      AdditionalDetailsEvent.onTextChange(
+                        label: widget.label,
+                        newValue: value,
+                      ),
+                    );
+              },
+              validator: (_) => _validateForm(
+                label: widget.label,
+                context: context,
+              ),
+              decoration: InputDecoration(
+                suffixIcon: state.isLoading
+                    ? const Padding(
+                        padding: EdgeInsetsDirectional.only(end: 10),
+                        child: SizedBox(
+                          height: 15,
+                          width: 15,
+                          child: CircularProgressIndicator(strokeWidth: 2),
+                        ),
+                      )
+                    : null,
+                suffixIconConstraints: const BoxConstraints(
+                  minHeight: 0,
+                  minWidth: 0,
+                ),
+                labelText: widget.labelText.tr(),
+                disabledBorder: const OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(8.0),
+                  ),
+                ),
+                errorBorder: const OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.red, width: 1.0),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(8.0),
+                  ),
+                ),
+                focusedErrorBorder: const OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.red, width: 1.0),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(8.0),
+                  ),
+                ),
+                enabledBorder: const OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(8.0),
+                  ),
+                ),
+                focusedBorder: const OutlineInputBorder(
+                  borderSide: BorderSide(color: ZPColors.primary, width: 1.0),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(8),
+                  ),
+                ),
+              ),
             );
           },
-          onChanged: (value) {
-            context.read<AdditionalDetailsBloc>().add(
-                  AdditionalDetailsEvent.onTextChange(
-                    label: widget.label,
-                    newValue: value,
-                  ),
-                );
-          },
-          validator: (_) => _validateForm(
-            label: widget.label,
-            context: context,
-          ),
-          decoration: InputDecoration(
-            labelText: widget.labelText.tr(),
-          ),
         ),
         const SizedBox(
           height: 15,
@@ -344,40 +407,90 @@ class _DatePickerFieldState extends State<_DatePickerField> {
       key: const Key('_DatePickerFieldKey'),
       children: [
         BlocBuilder<AdditionalDetailsBloc, AdditionalDetailsState>(
-            builder: (context, state) {
-          return InkWell(
-            onTap: state.additionalDetailsData.greenDeliveryEnabled
-                ? null
-                : ([bool mounted = true]) async {
-                    final dateTime = await getDateFromDatePicker(
-                      context,
-                    );
-                    controller.text = DateFormat('yyyy-MM-dd').format(dateTime);
-                    if (!mounted) return;
-                    context.read<AdditionalDetailsBloc>().add(
-                          AdditionalDetailsEvent.onTextChange(
-                            label: AdditionalDetailsLabel.deliveryDate,
-                            newValue: DateFormat('yyyy-MM-dd').format(dateTime),
-                          ),
-                        );
-                  },
-            child: IgnorePointer(
-              child: TextFormField(
-                enabled: !state.additionalDetailsData.greenDeliveryEnabled,
-                controller: controller,
-                style: TextStyle(
-                  color: state.additionalDetailsData.greenDeliveryEnabled
-                      ? Colors.grey
-                      : Colors.black,
-                ),
-                decoration: InputDecoration(
+          buildWhen: (previous, current) =>
+              previous.additionalDetailsData.greenDeliveryEnabled !=
+                  current.additionalDetailsData.greenDeliveryEnabled ||
+              previous.isLoading != current.isLoading,
+          builder: (context, state) {
+            return InkWell(
+              onTap: state.additionalDetailsData.greenDeliveryEnabled ||
+                      state.isLoading
+                  ? null
+                  : ([bool mounted = true]) async {
+                      final dateTime = await getDateFromDatePicker(
+                        context,
+                      );
+                      controller.text =
+                          DateFormat('yyyy-MM-dd').format(dateTime);
+                      if (!mounted) return;
+                      context.read<AdditionalDetailsBloc>().add(
+                            AdditionalDetailsEvent.onTextChange(
+                              label: AdditionalDetailsLabel.deliveryDate,
+                              newValue:
+                                  DateFormat('yyyy-MM-dd').format(dateTime),
+                            ),
+                          );
+                    },
+              child: IgnorePointer(
+                child: TextFormField(
                   enabled: !state.additionalDetailsData.greenDeliveryEnabled,
-                  labelText: 'Requested Delivery Date'.tr(),
-
+                  controller: controller,
+                  style: TextStyle(
+                    color: state.additionalDetailsData.greenDeliveryEnabled
+                        ? Colors.grey
+                        : Colors.black,
+                  ),
+                  decoration: InputDecoration(
+                    suffixIcon: state.isLoading
+                        ? const Padding(
+                            padding: EdgeInsetsDirectional.only(end: 10),
+                            child: SizedBox(
+                              height: 15,
+                              width: 15,
+                              child: CircularProgressIndicator(strokeWidth: 2),
+                            ),
+                          )
+                        : null,
+                    suffixIconConstraints: const BoxConstraints(
+                      minHeight: 0,
+                      minWidth: 0,
+                    ),
+                    labelText: 'Requested Delivery Date'.tr(),
+                    disabledBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(8.0),
+                      ),
+                    ),
+                    enabledBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(8.0),
+                      ),
+                    ),
+                    focusedBorder: const OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: ZPColors.primary, width: 1.0),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(8),
+                      ),
+                    ),
+                    errorBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.red, width: 1.0),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(8.0),
+                      ),
+                    ),
+                    focusedErrorBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.red, width: 1.0),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(8.0),
+                      ),
+                    ),
+                  ),
                 ),
               ),
-            ),
-          );
+            );
           },
         ),
         const SizedBox(
@@ -413,50 +526,101 @@ class _PaymentTerm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PaymentTermBloc, PaymentTermState>(
-      key: const Key('_paymentTermKey'),
-      buildWhen: (previous, current) =>
-          previous.isFetching != current.isFetching,
-      builder: (context, state) {
-        return DropdownButtonFormField<String>(
-          key: const Key('_paymentTermTextKey'),
-          isExpanded: true,
-          decoration: InputDecoration(
-            labelText: 'Select Payment Term'.tr(),
-          ),
-          value: additionalDetails.paymentTerm.getOrDefaultValue('').isEmpty
-              ? null
-              : additionalDetails.paymentTerm.getValue(),
-          items: state.paymentTermsDisplayLevels.map(
-            (String val) {
-              return DropdownMenuItem<String>(
-                value: val,
-                child: Text(val),
-              );
-            },
-          ).toList(),
-          onChanged: (value) {
-            context.read<AdditionalDetailsBloc>().add(
-                  AdditionalDetailsEvent.onTextChange(
-                    label: AdditionalDetailsLabel.paymentTerm,
-                    newValue: value!,
+    return BlocBuilder<AdditionalDetailsBloc, AdditionalDetailsState>(
+      buildWhen: (previous, current) => previous.isLoading != current.isLoading,
+      builder: (context, additionalDetailsState) {
+        final isLoading = additionalDetailsState.isLoading;
+
+        return BlocBuilder<PaymentTermBloc, PaymentTermState>(
+          key: const Key('_paymentTermKey'),
+          buildWhen: (previous, current) =>
+              previous.isFetching != current.isFetching,
+          builder: (context, state) {
+            final paymentTerm = additionalDetails.paymentTerm;
+
+            return DropdownButtonFormField<String>(
+              key: const Key('_paymentTermTextKey'),
+              isExpanded: true,
+              decoration: InputDecoration(
+                labelText: 'Select Payment Term'.tr(),
+                disabledBorder: const OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(8.0),
                   ),
-                );
-          },
-          validator: (_) {
-            return context
-                .read<AdditionalDetailsBloc>()
-                .state
-                .additionalDetailsData
-                .paymentTerm
-                .value
-                .fold(
-                  (f) => f.maybeMap(
-                    empty: (_) => 'Please Select Payment Term.'.tr(),
-                    orElse: () => null,
+                ),
+                enabledBorder: const OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(8.0),
                   ),
-                  (_) => null,
-                );
+                ),
+                focusedBorder: const OutlineInputBorder(
+                  borderSide: BorderSide(color: ZPColors.primary, width: 1.0),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(8),
+                  ),
+                ),
+                errorBorder: const OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.red, width: 1.0),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(8.0),
+                  ),
+                ),
+                focusedErrorBorder: const OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.red, width: 1.0),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(8.0),
+                  ),
+                ),
+              ),
+              icon: isLoading
+                  ? const SizedBox(
+                      height: 15,
+                      width: 15,
+                      child: CircularProgressIndicator(strokeWidth: 2),
+                    )
+                  : null,
+              value: paymentTerm.getOrDefaultValue('').isEmpty ||
+                      !state.paymentTermsDisplayLevels
+                          .contains(paymentTerm.getValue())
+                  ? null
+                  : paymentTerm.getValue(),
+              items: state.paymentTermsDisplayLevels.map(
+                (String val) {
+                  return DropdownMenuItem<String>(
+                    value: val,
+                    child: Text(val),
+                  );
+                },
+              ).toList(),
+              // onChanged: null,
+              onChanged: isLoading
+                  ? null
+                  : (value) {
+                      context.read<AdditionalDetailsBloc>().add(
+                            AdditionalDetailsEvent.onTextChange(
+                              label: AdditionalDetailsLabel.paymentTerm,
+                              newValue: value!,
+                            ),
+                          );
+                    },
+              validator: (_) {
+                return context
+                    .read<AdditionalDetailsBloc>()
+                    .state
+                    .additionalDetailsData
+                    .paymentTerm
+                    .value
+                    .fold(
+                      (f) => f.maybeMap(
+                        empty: (_) => 'Please Select Payment Term.'.tr(),
+                        orElse: () => null,
+                      ),
+                      (_) => null,
+                    );
+              },
+            );
           },
         );
       },
@@ -493,68 +657,70 @@ class _GreenDeliveryBoxState extends State<_GreenDeliveryBox> {
         child: Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-              color: ZPColors.lightGreen,
+            color: ZPColors.lightGreen,
             borderRadius: BorderRadius.circular(20),
           ),
-          child: Row(children: [
-            SvgPicture.asset('assets/svg/green_delivery.svg', height: 40),
-            const SizedBox(
-              width: 16,
-            ),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      SizedBox(
-                        height: 24,
-                        width: 24,
-                        child: Checkbox(
+          child: Row(
+            children: [
+              SvgPicture.asset('assets/svg/green_delivery.svg', height: 40),
+              const SizedBox(
+                width: 16,
+              ),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        SizedBox(
+                          height: 24,
+                          width: 24,
+                          child: Checkbox(
                             side: const BorderSide(
                               color: ZPColors.primary,
                               width: 2,
                             ),
                             value: checkBoxValue,
                             onChanged: (bool? value) {
-                              setState(() {
-                                checkBoxValue = value!;
-                              },
-                            );
-                            widget.onCheckBoxChanged(value!);
-                          },
+                              setState(
+                                () {
+                                  checkBoxValue = value!;
+                                },
+                              );
+                              widget.onCheckBoxChanged(value!);
+                            },
+                          ),
                         ),
-                      ),
                         const SizedBox(width: 8),
-                      Text(
-                        'Green Delivery'.tr(),
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w700,
-                          color: ZPColors.primary,
+                        Text(
+                          'Green Delivery'.tr(),
+                          style: const TextStyle(
+                            fontWeight: FontWeight.w700,
+                            color: ZPColors.primary,
+                          ),
                         ),
-                        ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  Text(
-                    'Help reduce the carbon footprint of your order.'.tr(),
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w700,
-                      color: ZPColors.primary,
+                      ],
                     ),
-                  ),
-                  Text(
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    Text(
+                      'Help reduce the carbon footprint of your order.'.tr(),
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w700,
+                        color: ZPColors.primary,
+                      ),
+                    ),
+                    Text(
                       'Your order will be consolidated and delivered via the most optimal route to you within ${widget.greenDeliveryDelayInDays} working days.'
                           .tr(),
                       style: const TextStyle(
                         fontSize: 12,
                         color: ZPColors.primary,
+                      ),
                     ),
-                  ),
-                ],
-              ),
+                  ],
+                ),
               ),
             ],
           ),
