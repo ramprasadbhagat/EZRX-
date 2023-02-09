@@ -54,7 +54,7 @@ class AdditionalDetails extends StatelessWidget {
               ? _TextFormField(
                   labelText: 'Reference Note',
                   keyText: 'referenceNoteKey',
-                  maxLength: 50,
+                  maxLength: 132,
                   keyboardType: TextInputType.multiline,
                   label: AdditionalDetailsLabel.referenceNote,
                   additionalDetails: state.additionalDetailsData,
@@ -65,7 +65,7 @@ class AdditionalDetails extends StatelessWidget {
               ? _TextFormField(
                   labelText: 'Collective Number',
                   keyText: 'collectiveNumberKey',
-                  maxLength: 10,
+                  maxLength: 16,
                   label: AdditionalDetailsLabel.collectiveNumber,
                   additionalDetails: state.additionalDetailsData,
                 )
@@ -74,7 +74,7 @@ class AdditionalDetails extends StatelessWidget {
               ? _TextFormField(
                   labelText: 'Contact Person',
                   keyText: 'contactPersonKey',
-                  maxLength: 50,
+                  maxLength: 35,
                   label: AdditionalDetailsLabel.contactPerson,
                   additionalDetails: state.additionalDetailsData,
                 )
@@ -83,7 +83,7 @@ class AdditionalDetails extends StatelessWidget {
               ? _TextFormField(
                   labelText: 'Contact Number',
                   keyText: 'contactNumberKey',
-                  maxLength: 10,
+                  maxLength: 16,
                   keyboardType: TextInputType.phone,
                   label: AdditionalDetailsLabel.contactNumber,
                   additionalDetails: state.additionalDetailsData,
