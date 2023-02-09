@@ -5,6 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   const lightSecondary = Color.fromRGBO(227, 236, 147, 1.0);
   const lightRed = Color.fromRGBO(251, 208, 208, 1);
+  const displayDate = '11 Oct 2022';
   group('returnsAllowed display value object', () {
     test(
       '=> should return Yes when returnsAllowed is True',
@@ -42,6 +43,18 @@ void main() {
         final returnsAllowed = ReturnsAllowed(input);
         final result = returnsAllowed.labelColor;
         expect(result, lightRed);
+      },
+    );
+  });
+
+  group('SimpleDate value object', () {
+    test(
+      '=> should return human readable date',
+      () async {
+        const input = '20221011';
+        final simpleDate = SimpleDate(input);
+        final result = simpleDate.displayHumanReadableDate;
+        expect(result, displayDate);
       },
     );
   });

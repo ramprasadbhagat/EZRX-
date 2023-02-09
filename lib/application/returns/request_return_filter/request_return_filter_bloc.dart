@@ -29,8 +29,8 @@ class RequestReturnFilterBloc
             state.requestReturnFilter.materialDescription.isValid() &&
             state.requestReturnFilter.materialNumber.isValid() &&
             _doDateValidation(
-              state.requestReturnFilter.fromExpiryDate,
-              state.requestReturnFilter.toExpiryDate,
+              state.requestReturnFilter.fromInvoiceDate,
+              state.requestReturnFilter.toInvoiceDate,
             )) {
           emit(state.copyWith(
             isSubmitting: true,
@@ -86,7 +86,7 @@ class RequestReturnFilterBloc
       setInvoiceToDate: (value) => emit(
         state.copyWith(
           requestReturnFilter: state.requestReturnFilter.copyWith(
-            toExpiryDate: value.toExpiryDate,
+            toInvoiceDate: value.toInvoiceDate,
           ),
           showErrorMessages: false,
         ),
@@ -94,7 +94,7 @@ class RequestReturnFilterBloc
       setInvoicefromDate: (value) => emit(
         state.copyWith(
           requestReturnFilter: state.requestReturnFilter.copyWith(
-            fromExpiryDate: value.fromExpiryDate,
+            fromInvoiceDate: value.fromInvoiceDate,
           ),
           showErrorMessages: false,
         ),

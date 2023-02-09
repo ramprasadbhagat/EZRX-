@@ -12,8 +12,8 @@ class RequestReturnFilter with _$RequestReturnFilter {
     required SearchKey materialDescription,
     required SearchKey materialNumber,
     required SearchKey principalSearch,
-    required DateTime? toExpiryDate,
-    required DateTime? fromExpiryDate,
+    required DateTime? toInvoiceDate,
+    required DateTime? fromInvoiceDate,
   }) = _RequestReturnFilter;
 
   factory RequestReturnFilter.empty() => RequestReturnFilter(
@@ -22,7 +22,7 @@ class RequestReturnFilter with _$RequestReturnFilter {
         materialDescription: SearchKey.searchFilter(''),
         materialNumber: SearchKey.searchFilter(''),
         principalSearch: SearchKey.searchFilter(''),
-        fromExpiryDate: null,
-        toExpiryDate: null,
+        fromInvoiceDate: null,
+        toInvoiceDate: null,
       );
 }

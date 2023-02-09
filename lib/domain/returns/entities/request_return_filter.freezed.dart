@@ -21,8 +21,8 @@ mixin _$RequestReturnFilter {
   SearchKey get materialDescription => throw _privateConstructorUsedError;
   SearchKey get materialNumber => throw _privateConstructorUsedError;
   SearchKey get principalSearch => throw _privateConstructorUsedError;
-  DateTime? get toExpiryDate => throw _privateConstructorUsedError;
-  DateTime? get fromExpiryDate => throw _privateConstructorUsedError;
+  DateTime? get toInvoiceDate => throw _privateConstructorUsedError;
+  DateTime? get fromInvoiceDate => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $RequestReturnFilterCopyWith<RequestReturnFilter> get copyWith =>
@@ -41,8 +41,8 @@ abstract class $RequestReturnFilterCopyWith<$Res> {
       SearchKey materialDescription,
       SearchKey materialNumber,
       SearchKey principalSearch,
-      DateTime? toExpiryDate,
-      DateTime? fromExpiryDate});
+      DateTime? toInvoiceDate,
+      DateTime? fromInvoiceDate});
 }
 
 /// @nodoc
@@ -63,8 +63,8 @@ class _$RequestReturnFilterCopyWithImpl<$Res, $Val extends RequestReturnFilter>
     Object? materialDescription = null,
     Object? materialNumber = null,
     Object? principalSearch = null,
-    Object? toExpiryDate = freezed,
-    Object? fromExpiryDate = freezed,
+    Object? toInvoiceDate = freezed,
+    Object? fromInvoiceDate = freezed,
   }) {
     return _then(_value.copyWith(
       assignmentNumber: null == assignmentNumber
@@ -87,13 +87,13 @@ class _$RequestReturnFilterCopyWithImpl<$Res, $Val extends RequestReturnFilter>
           ? _value.principalSearch
           : principalSearch // ignore: cast_nullable_to_non_nullable
               as SearchKey,
-      toExpiryDate: freezed == toExpiryDate
-          ? _value.toExpiryDate
-          : toExpiryDate // ignore: cast_nullable_to_non_nullable
+      toInvoiceDate: freezed == toInvoiceDate
+          ? _value.toInvoiceDate
+          : toInvoiceDate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      fromExpiryDate: freezed == fromExpiryDate
-          ? _value.fromExpiryDate
-          : fromExpiryDate // ignore: cast_nullable_to_non_nullable
+      fromInvoiceDate: freezed == fromInvoiceDate
+          ? _value.fromInvoiceDate
+          : fromInvoiceDate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
     ) as $Val);
   }
@@ -113,8 +113,8 @@ abstract class _$$_RequestReturnFilterCopyWith<$Res>
       SearchKey materialDescription,
       SearchKey materialNumber,
       SearchKey principalSearch,
-      DateTime? toExpiryDate,
-      DateTime? fromExpiryDate});
+      DateTime? toInvoiceDate,
+      DateTime? fromInvoiceDate});
 }
 
 /// @nodoc
@@ -133,8 +133,8 @@ class __$$_RequestReturnFilterCopyWithImpl<$Res>
     Object? materialDescription = null,
     Object? materialNumber = null,
     Object? principalSearch = null,
-    Object? toExpiryDate = freezed,
-    Object? fromExpiryDate = freezed,
+    Object? toInvoiceDate = freezed,
+    Object? fromInvoiceDate = freezed,
   }) {
     return _then(_$_RequestReturnFilter(
       assignmentNumber: null == assignmentNumber
@@ -157,13 +157,13 @@ class __$$_RequestReturnFilterCopyWithImpl<$Res>
           ? _value.principalSearch
           : principalSearch // ignore: cast_nullable_to_non_nullable
               as SearchKey,
-      toExpiryDate: freezed == toExpiryDate
-          ? _value.toExpiryDate
-          : toExpiryDate // ignore: cast_nullable_to_non_nullable
+      toInvoiceDate: freezed == toInvoiceDate
+          ? _value.toInvoiceDate
+          : toInvoiceDate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      fromExpiryDate: freezed == fromExpiryDate
-          ? _value.fromExpiryDate
-          : fromExpiryDate // ignore: cast_nullable_to_non_nullable
+      fromInvoiceDate: freezed == fromInvoiceDate
+          ? _value.fromInvoiceDate
+          : fromInvoiceDate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
     ));
   }
@@ -178,8 +178,8 @@ class _$_RequestReturnFilter extends _RequestReturnFilter {
       required this.materialDescription,
       required this.materialNumber,
       required this.principalSearch,
-      required this.toExpiryDate,
-      required this.fromExpiryDate})
+      required this.toInvoiceDate,
+      required this.fromInvoiceDate})
       : super._();
 
   @override
@@ -193,13 +193,13 @@ class _$_RequestReturnFilter extends _RequestReturnFilter {
   @override
   final SearchKey principalSearch;
   @override
-  final DateTime? toExpiryDate;
+  final DateTime? toInvoiceDate;
   @override
-  final DateTime? fromExpiryDate;
+  final DateTime? fromInvoiceDate;
 
   @override
   String toString() {
-    return 'RequestReturnFilter(assignmentNumber: $assignmentNumber, batch: $batch, materialDescription: $materialDescription, materialNumber: $materialNumber, principalSearch: $principalSearch, toExpiryDate: $toExpiryDate, fromExpiryDate: $fromExpiryDate)';
+    return 'RequestReturnFilter(assignmentNumber: $assignmentNumber, batch: $batch, materialDescription: $materialDescription, materialNumber: $materialNumber, principalSearch: $principalSearch, toInvoiceDate: $toInvoiceDate, fromInvoiceDate: $fromInvoiceDate)';
   }
 
   @override
@@ -216,10 +216,10 @@ class _$_RequestReturnFilter extends _RequestReturnFilter {
                 other.materialNumber == materialNumber) &&
             (identical(other.principalSearch, principalSearch) ||
                 other.principalSearch == principalSearch) &&
-            (identical(other.toExpiryDate, toExpiryDate) ||
-                other.toExpiryDate == toExpiryDate) &&
-            (identical(other.fromExpiryDate, fromExpiryDate) ||
-                other.fromExpiryDate == fromExpiryDate));
+            (identical(other.toInvoiceDate, toInvoiceDate) ||
+                other.toInvoiceDate == toInvoiceDate) &&
+            (identical(other.fromInvoiceDate, fromInvoiceDate) ||
+                other.fromInvoiceDate == fromInvoiceDate));
   }
 
   @override
@@ -230,8 +230,8 @@ class _$_RequestReturnFilter extends _RequestReturnFilter {
       materialDescription,
       materialNumber,
       principalSearch,
-      toExpiryDate,
-      fromExpiryDate);
+      toInvoiceDate,
+      fromInvoiceDate);
 
   @JsonKey(ignore: true)
   @override
@@ -248,8 +248,8 @@ abstract class _RequestReturnFilter extends RequestReturnFilter {
       required final SearchKey materialDescription,
       required final SearchKey materialNumber,
       required final SearchKey principalSearch,
-      required final DateTime? toExpiryDate,
-      required final DateTime? fromExpiryDate}) = _$_RequestReturnFilter;
+      required final DateTime? toInvoiceDate,
+      required final DateTime? fromInvoiceDate}) = _$_RequestReturnFilter;
   _RequestReturnFilter._() : super._();
 
   @override
@@ -263,9 +263,9 @@ abstract class _RequestReturnFilter extends RequestReturnFilter {
   @override
   SearchKey get principalSearch;
   @override
-  DateTime? get toExpiryDate;
+  DateTime? get toInvoiceDate;
   @override
-  DateTime? get fromExpiryDate;
+  DateTime? get fromInvoiceDate;
   @override
   @JsonKey(ignore: true)
   _$$_RequestReturnFilterCopyWith<_$_RequestReturnFilter> get copyWith =>

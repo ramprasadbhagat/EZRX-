@@ -147,9 +147,7 @@ class RequestReturn extends StatelessWidget {
 }
 
 class _WrapRequestReturnBody extends StatelessWidget {
-  const _WrapRequestReturnBody({
-    Key? key,
-  }) : super(key: key);
+  const _WrapRequestReturnBody();
 
   @override
   Widget build(BuildContext context) {
@@ -190,9 +188,7 @@ class _WrapRequestReturnBody extends StatelessWidget {
 }
 
 class _RequestReturnList extends StatelessWidget {
-  const _RequestReturnList({
-    Key? key,
-  }) : super(key: key);
+  const _RequestReturnList();
 
   @override
   Widget build(BuildContext context) {

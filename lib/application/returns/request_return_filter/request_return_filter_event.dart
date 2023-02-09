@@ -8,11 +8,11 @@ class RequestReturnFilterEvent with _$RequestReturnFilterEvent {
       _FilterRequestReturn;
 
   const factory RequestReturnFilterEvent.setInvoicefromDate({
-    required DateTime fromExpiryDate,
+    required DateTime fromInvoiceDate,
   }) = _SetExpiryfromDate;
 
   const factory RequestReturnFilterEvent.setInvoiceToDate({
-    required DateTime toExpiryDate,
+    required DateTime toInvoiceDate,
   }) = _SetExpiryToDate;
 
   const factory RequestReturnFilterEvent.assignmentNumberChanged(

@@ -46,11 +46,12 @@ class RequestReturnRepository extends IReturnRequestRepository {
     try {
       final returnRequest = await remoteDataSource.searchReturnMaterials(
         batch: requestReturnFilter.batch.getOrDefaultValue(''),
-        dateFrom: requestReturnFilter.fromExpiryDate != null
-            ? DateFormat('yyyyMMdd').format(requestReturnFilter.fromExpiryDate!)
+        dateFrom: requestReturnFilter.fromInvoiceDate != null
+            ? DateFormat('yyyyMMdd')
+                .format(requestReturnFilter.fromInvoiceDate!)
             : '',
-        dateTo: requestReturnFilter.toExpiryDate != null
-            ? DateFormat('yyyyMMdd').format(requestReturnFilter.toExpiryDate!)
+        dateTo: requestReturnFilter.toInvoiceDate != null
+            ? DateFormat('yyyyMMdd').format(requestReturnFilter.toInvoiceDate!)
             : '',
         invoiceNo: requestReturnFilter.assignmentNumber.getOrDefaultValue(''),
         materialDescription:
