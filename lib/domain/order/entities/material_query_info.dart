@@ -117,7 +117,9 @@ class MaterialQueryInfo with _$MaterialQueryInfo {
         ),
         description: orderHistoryDetailsOrderItem.materialDescription,
         principalName: 'NA',
-        tenderContract: TenderContract.empty(),
+        tenderContract: TenderContract.fromOrderHistory(
+          orderHistoryDetailsOrderItem.tenderContractDetails,
+        ),
       );
 
   Map<String, dynamic> get priceQuery {

@@ -201,6 +201,7 @@ class CartMaterialItemTileDetails extends StatelessWidget {
     final enableListPrice =
         context.read<SalesOrgBloc>().state.configs.enableListPrice;
     final enableVat = context.read<SalesOrgBloc>().state.configs.enableVat;
+    final tenderContractNumber = material.tenderContract.contractNumber;
 
     return Expanded(
       child: Column(
@@ -219,8 +220,8 @@ class CartMaterialItemTileDetails extends StatelessWidget {
               BonusDiscountLabel(
                 price: material.price,
                 materialInfo: material.materialInfo,
-                tenderContractNumber: material.tenderContract.contractNumber
-                    .displayTenderContractNumberInCart,
+                tenderContractNumber:
+                    tenderContractNumber.displayTenderContractNumberInCart,
               ),
             ],
           ),

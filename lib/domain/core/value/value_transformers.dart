@@ -77,6 +77,8 @@ bool isMustNotContainUserNameOrName({
         !input.toLowerCase().contains(user.fullName.lastName.toLowerCase()));
 
 String getTenderContractNumber(String text) {
+  if (text.isEmpty) return text;
+
   return text == 'No contract (Price remains same)'
       ? 'Tender Contract available'
       : 'Contract: $text';

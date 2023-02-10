@@ -16,6 +16,7 @@ import 'package:ezrxmobile/domain/core/aggregate/bonus_aggregate.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
+import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_price_detail.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_basic_info.dart';
@@ -606,7 +607,6 @@ class _ReOrder extends StatelessWidget {
     required BuildContext context,
     required MaterialPriceDetail itemInfo,
     required MaterialQueryInfo queryInfo,
-    required TenderContract tenderContract,
   }) {
     final priceAggregate = PriceAggregate(
       price: itemInfo.price,
@@ -619,7 +619,7 @@ class _ReOrder extends StatelessWidget {
       stockInfo: StockInfo.empty().copyWith(
         materialNumber: itemInfo.info.materialNumber,
       ),
-      tenderContract: tenderContract,
+      tenderContract: queryInfo.tenderContract,
     );
 
     return priceAggregate;
@@ -656,8 +656,7 @@ class _ReOrder extends StatelessWidget {
     MaterialPriceDetailState state,
     OrderHistoryItem orderHistoryItem,
   ) {
-    final cartBloc = context.read<CartBloc>();
-    cartBloc.add(const CartEvent.clearCart());
+    final eligibilityState = context.read<EligibilityBloc>().state;
     final orderHistoryDetails =
         context.read<OrderHistoryDetailsBloc>().state.orderHistoryDetails;
 
@@ -695,24 +694,21 @@ class _ReOrder extends StatelessWidget {
           context: context,
           itemInfo: itemInfo,
           queryInfo: queryInfo,
-          tenderContract: TenderContract.noContract(),
         );
       }
 
       return PriceAggregate.empty();
     }).toList();
 
-    //TODO: Implement add all to cart
-
-    // context.read<CartBloc>().add(CartEvent.addToCartFromList(
-    //       items: items,
-    //       customerCodeInfo: eligibilityState.customerCodeInfo,
-    //       salesOrganisationConfigs: eligibilityState.salesOrgConfigs,
-    //       salesOrganisation: eligibilityState.salesOrganisation,
-    //       shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
-    //       doNotAllowOutOfStockMaterials:
-    //           eligibilityState.doNotAllowOutOfStockMaterials,
-    //     ));
+    context.read<CartBloc>().add(CartEvent.replaceWithOrderItems(
+          items: items.map((e) => CartItem.material(e)).toList(),
+          customerCodeInfo: eligibilityState.customerCodeInfo,
+          salesOrganisationConfigs: eligibilityState.salesOrgConfigs,
+          salesOrganisation: eligibilityState.salesOrganisation,
+          shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+          doNotallowOutOfStockMaterial:
+              eligibilityState.doNotAllowOutOfStockMaterials,
+        ));
 
     context.router.pushNamed('cart_page');
   }
@@ -723,26 +719,7 @@ class _ReOrder extends StatelessWidget {
       return const SizedBox.shrink();
     }
 
-    return BlocConsumer<TenderContractBloc, TenderContractState>(
-      listenWhen: (previous, current) =>
-          previous.selectedTenderContract != current.selectedTenderContract &&
-          current.selectedTenderContract != TenderContract.empty() &&
-          fromTopMenu,
-      listener: (context, state) {
-        final queryInfo = MaterialQueryInfo.fromOrderHistory(
-          orderHistoryItem: orderHistoryItem,
-        );
-        final itemInfo = context
-            .read<MaterialPriceDetailBloc>()
-            .state
-            .materialDetails[queryInfo];
-        _addToCart(
-          context: context,
-          itemInfo: itemInfo!,
-          queryInfo: queryInfo,
-          tenderContract: state.selectedTenderContract,
-        );
-      },
+    return BlocBuilder<TenderContractBloc, TenderContractState>(
       buildWhen: (previous, current) => previous != current,
       builder: (context, state) {
         return fromTopMenu

@@ -204,6 +204,20 @@ void main() {
     );
 
     test(
+      'vatCalculation from PriceAggregate for vn when taxes is empty',
+      () {
+        final customPriceAggregate = emptyPriceAggregate.copyWith(
+          salesOrgConfig: emptySalesOrganisationConfigs.copyWith(
+            enableVat: true,
+            enableTaxClassification: true,
+            currency: Currency('vnd'),
+          ),
+        );
+        expect(customPriceAggregate.vatCalculation(10), 10);
+      },
+    );
+
+    test(
       'vatCalculation from PriceAggregate for Non vn',
       () {
         final customPriceAggregate = emptyPriceAggregate.copyWith(
@@ -364,6 +378,29 @@ void main() {
           ),
         );
         expect(customPriceAggregate.unitPriceForTotal, 21.0);
+      },
+    );
+
+    test(
+      'unitPriceForTotal from PriceAggregate for VN tax total when taxes is empty',
+      () {
+        final customPriceAggregate = emptyPriceAggregate.copyWith(
+          tenderContract: TenderContract.empty().copyWith(
+            tenderPrice: TenderPrice('40'),
+            pricingUnit: 2,
+          ),
+          price: emptyPrice.copyWith(
+            zmgDiscount: true,
+            tiers: [
+              PriceTier.empty().copyWith(items: [PriceTierItem.empty()])
+            ],
+          ),
+          salesOrgConfig: emptySalesOrganisationConfigs.copyWith(
+            enableTaxAtTotalLevelOnly: true,
+            currency: Currency('vnd'),
+          ),
+        );
+        expect(customPriceAggregate.unitPriceForTotal, 20);
       },
     );
 

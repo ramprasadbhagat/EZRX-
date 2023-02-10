@@ -54,7 +54,7 @@ class MaterialInfo with _$MaterialInfo {
         hidePrice: false,
         hasValidTenderContract: false,
         hasMandatoryTenderContract: false,
-        taxes: [],
+        taxes: ['0'],
         defaultMaterialDescription: '',
         bundles: [],
         isFOCMaterial: false,

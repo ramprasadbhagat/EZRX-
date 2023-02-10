@@ -172,12 +172,12 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
     SalesOrganisationConfigs configs,
   ) {
     return SalesOrganisationConfigsDto(
-      salesOrg: configs.salesOrg.getOrCrash(),
+      salesOrg: configs.salesOrg.getOrDefaultValue(''),
       enableIRN: configs.enableIRN,
       enableDefaultMD: configs.enableDefaultMD,
       priceOverride: configs.priceOverride,
       disableProcessingStatus: configs.disableProcessingStatus,
-      currency: configs.currency.getOrCrash(),
+      currency: configs.currency.getOrDefaultValue(''),
       hideCustomer: configs.hideCustomer,
       enableGimmickMaterial: configs.enableGimmickMaterial,
       languageFilter: configs.languageFilter,
@@ -211,7 +211,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       hideStockDisplay: configs.hideStockDisplay,
       expiryDateDisplay: configs.expiryDateDisplay,
       addOosMaterials: configs.addOosMaterials,
-      oosValue: configs.oosValue.getOrCrash(),
+      oosValue: configs.oosValue.getOrDefaultValue(0),
       enableRemarks: configs.enableRemarks,
       enableOHPrice: configs.enableOHPrice,
       ponRequired: configs.ponRequired,
