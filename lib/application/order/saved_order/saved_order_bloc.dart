@@ -42,7 +42,6 @@ class SavedOrderListBloc
             isFetching: true,
             savedOrders: [],
             nextPageIndex: 0,
-            isDraftOrderCreated: false,
             isCreating: false,
             apiFailureOrSuccessOption: none(),
           ),
@@ -73,7 +72,6 @@ class SavedOrderListBloc
                 isFetching: false,
                 canLoadMore: savedOrders.length >= _defaultPageSize,
                 nextPageIndex: 1,
-                isDraftOrderCreated: false,
                 isCreating: false,
               ),
             );
@@ -85,7 +83,6 @@ class SavedOrderListBloc
         emit(
           state.copyWith(
             isFetching: true,
-            isDraftOrderCreated: false,
             isCreating: false,
             apiFailureOrSuccessOption: none(),
           ),
@@ -103,7 +100,6 @@ class SavedOrderListBloc
           (failure) async {
             emit(
               state.copyWith(
-                isDraftOrderCreated: false,
                 isCreating: false,
                 apiFailureOrSuccessOption: optionOf(failureOrSuccess),
                 isFetching: false,
@@ -120,7 +116,6 @@ class SavedOrderListBloc
                 isFetching: false,
                 canLoadMore: savedOrders.length >= _defaultPageSize,
                 nextPageIndex: state.nextPageIndex + 1,
-                isDraftOrderCreated: false,
                 isCreating: false,
               ),
             );
@@ -160,7 +155,6 @@ class SavedOrderListBloc
       createDraft: (e) async {
         emit(state.copyWith(
           apiFailureOrSuccessOption: none(),
-          isDraftOrderCreated: false,
           isCreating: true,
         ));
         final failureOrSuccess = await repository.createDraftOrder(
@@ -182,11 +176,50 @@ class SavedOrderListBloc
             );
           },
           (createDraftOrder) {
-            final newList = List<SavedOrder>.from(e.existingSavedOrderList)
+            final newList = List<SavedOrder>.from(state.savedOrders)
               ..insert(0, createDraftOrder);
             emit(
               state.copyWith(
-                isDraftOrderCreated: createDraftOrder.draftorder,
+                savedOrders: newList,
+                apiFailureOrSuccessOption: none(),
+                isCreating: false,
+              ),
+            );
+          },
+        );
+      },
+      updateDraft: (e) async {
+        emit(state.copyWith(
+          apiFailureOrSuccessOption: none(),
+          isCreating: true,
+        ));
+        final failureOrSuccess = await repository.updateDraftOrder(
+          shipToInfo: e.shipToInfo,
+          user: e.user,
+          cartItems: e.cartItems,
+          grandTotal: e.grandTotal,
+          customerCodeInfo: e.customerCodeInfo,
+          salesOrganisation: e.salesOrganisation,
+          data: e.data,
+          orderId: e.orderId,
+        );
+        failureOrSuccess.fold(
+          (failure) {
+            emit(
+              state.copyWith(
+                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+                isCreating: false,
+              ),
+            );
+          },
+          (updatedDraftOrder) {
+            final newList = state.savedOrders
+                .map(
+                  (order) => order.id == e.orderId ? updatedDraftOrder : order,
+                )
+                .toList();
+            emit(
+              state.copyWith(
                 savedOrders: newList,
                 apiFailureOrSuccessOption: none(),
                 isCreating: false,

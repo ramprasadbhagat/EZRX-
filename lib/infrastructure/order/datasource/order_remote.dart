@@ -96,6 +96,35 @@ class OrderRemoteDataSource {
     });
   }
 
+  Future<SavedOrder> updateDraftOrder({
+    required SavedOrderDto updatedOrder,
+  }) async {
+    return await exceptionHandler.handle(() async {
+      final variables = {
+        'input': {
+          'data': _removeUnnecessaryElement(updatedOrder.toJson()),
+          'where': {
+            'id': updatedOrder.id,
+          },
+        },
+      };
+
+      final res = await httpService.request(
+        method: 'POST',
+        url: '/api/strapiEngineMutation',
+        data: jsonEncode({
+          'query': queryMutation.updateSavedOrder(),
+          'variables': variables,
+        }),
+        apiEndpoint: 'updateDraftorder',
+      );
+      _orderExceptionChecker(res: res);
+
+      return SavedOrderDto.fromJson(res.data['data']['updateDraftOrder'])
+          .toDomain();
+    });
+  }
+
   Future<SubmitOrderResponse> submitOrder({
     required SubmitOrderDto submitOrder,
   }) async {

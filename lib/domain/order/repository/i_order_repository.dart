@@ -51,4 +51,15 @@ abstract class IOrderRepository {
   Future<Either<ApiFailure, SavedOrder>> getSavedOrderDetail({
     required String orderId,
   });
+
+  Future<Either<ApiFailure, SavedOrder>> updateDraftOrder({
+    required ShipToInfo shipToInfo,
+    required User user,
+    required List<CartItem> cartItems,
+    required double grandTotal,
+    required String orderId,
+    required CustomerCodeInfo customerCodeInfo,
+    required SalesOrganisation salesOrganisation,
+    required AdditionalDetailsData data,
+  });
 }

@@ -132,6 +132,25 @@ void main() {
           );
         },
       );
+
+      test(
+        'Update saved Order',
+        () async {
+          final res = json.decode(
+            await rootBundle
+                .loadString('assets/json/updateSavedOrderResponse.json'),
+          );
+
+          final result = await localDataSource.updateDraftOrder();
+
+          expect(
+            result,
+            SavedOrderDto.fromJson(
+              res['data']['updateDraftOrder'],
+            ).toDomain(),
+          );
+        },
+      );
     },
   );
 }

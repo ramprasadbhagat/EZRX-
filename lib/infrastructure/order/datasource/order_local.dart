@@ -66,4 +66,12 @@ class OrderLocalDataSource {
       data['data']['draftOrder'],
     ).toDomain();
   }
+
+  Future<SavedOrder> updateDraftOrder() async {
+    final data = json.decode(
+      await rootBundle.loadString('assets/json/updateSavedOrderResponse.json'),
+    );
+
+    return SavedOrderDto.fromJson(data['data']['updateDraftOrder']).toDomain();
+  }
 }

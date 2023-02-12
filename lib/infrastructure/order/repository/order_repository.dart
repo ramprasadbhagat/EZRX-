@@ -169,6 +169,54 @@ class OrderRepository implements IOrderRepository {
     }
   }
 
+  @override
+  Future<Either<ApiFailure, SavedOrder>> updateDraftOrder({
+    required List<CartItem> cartItems,
+    required AdditionalDetailsData data,
+    required double grandTotal,
+    required String orderId,
+    required User user,
+    required SalesOrganisation salesOrganisation,
+    required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToInfo,
+  }) async {
+    final draftOrder = _getCreateDraftOrderRequest(
+      shipToInfo: shipToInfo,
+      user: user,
+      cartItems: cartItems,
+      grandTotal: grandTotal,
+      customerCodeInfo: customerCodeInfo,
+      salesOrganisation: salesOrganisation,
+      data: data,
+    );
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final savedOrder = await localDataSource.updateDraftOrder();
+
+        return Right(savedOrder);
+      } catch (e) {
+        return Left(
+          FailureHandler.handleFailure(e),
+        );
+      }
+    }
+    try {
+      final savedOrder = await remoteDataSource.updateDraftOrder(
+        updatedOrder: SavedOrderDto.fromDomain(
+          draftOrder.copyWith(
+            id: orderId,
+          ),
+        ),
+      );
+
+      return Right(savedOrder);
+    } catch (e) {
+      return Left(
+        FailureHandler.handleFailure(e),
+      );
+    }
+  }
+
   List<MaterialItem> _getItemList(List<CartItem> cartItemList) {
     final saveOrderItems = cartItemList
         .map((cartItem) => cartItem.toSavedOrderMaterial())
@@ -273,6 +321,7 @@ class OrderRepository implements IOrderRepository {
     //bonus calculation
 
     return SavedOrder.empty().copyWith(
+      requestedDeliveryDate: data.deliveryDate.getValue(),
       deliveryDocument: shipToInfo.shipToName.name1,
       billingDocument: customerCodeInfo.customerName.name1,
       salesOrganization: salesOrganisation.salesOrg.getOrCrash(),

@@ -36,10 +36,11 @@ void main() {
   final mockSavedOrder = SavedOrder.empty();
 
   late final List<SavedOrder> savedOrderListMock;
-
+  late final SavedOrder updatedSavedOrderMock;
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
     savedOrderListMock = await OrderLocalDataSource().getSavedOrders();
+    updatedSavedOrderMock = await OrderLocalDataSource().updateDraftOrder();
   });
 
   List<MaterialItem> getItemList(List<CartItem> cartItemList) {
@@ -303,17 +304,14 @@ void main() {
           user: User.empty(),
           cartItems: fakeCartItemList,
           data: AdditionalDetailsData.empty(),
-          existingSavedOrderList: <SavedOrder>[],
         ),
       ),
       expect: () => [
         SavedOrderListState.initial().copyWith(
           apiFailureOrSuccessOption: none(),
-          isDraftOrderCreated: false,
           isCreating: true,
         ),
         SavedOrderListState.initial().copyWith(
-          isDraftOrderCreated: true,
           savedOrders: <SavedOrder>[
             SavedOrder.empty().copyWith(
               draftorder: true,
@@ -352,13 +350,11 @@ void main() {
           user: User.empty(),
           cartItems: <CartItem>[],
           data: AdditionalDetailsData.empty(),
-          existingSavedOrderList: <SavedOrder>[],
         ),
       ),
       expect: () => [
         SavedOrderListState.initial().copyWith(
           apiFailureOrSuccessOption: none(),
-          isDraftOrderCreated: false,
           isCreating: true,
         ),
         SavedOrderListState.initial().copyWith(
@@ -393,7 +389,6 @@ void main() {
       expect: () => [
         SavedOrderListState.initial().copyWith(
           isDeleting: true,
-          isDraftOrderCreated: false,
           isCreating: false,
           apiFailureOrSuccessOption: none(),
         ),
@@ -470,6 +465,107 @@ void main() {
           savedOrders: savedOrderListMock.sublist(1),
           canLoadMore: savedOrderListMock.length >= _defaultPageSize,
           nextPageIndex: 1,
+        ),
+      ],
+    );
+    blocTest<SavedOrderListBloc, SavedOrderListState>(
+      'Update Draft Order Success',
+      build: () => SavedOrderListBloc(repository: repository),
+      seed: () => SavedOrderListState.initial().copyWith(
+        savedOrders: [
+          SavedOrder.empty().copyWith(id: 'fake-id'),
+        ],
+      ),
+      setUp: () {
+        when(() => repository.updateDraftOrder(
+              orderId: 'fake-id',
+              shipToInfo: ShipToInfo.empty(),
+              customerCodeInfo: CustomerCodeInfo.empty(),
+              grandTotal: 0.0,
+              salesOrganisation: SalesOrganisation.empty(),
+              user: User.empty(),
+              cartItems: [],
+              data: AdditionalDetailsData.empty(),
+            )).thenAnswer(
+          (invocation) async => Right(updatedSavedOrderMock),
+        );
+      },
+      act: (bloc) => bloc.add(
+        SavedOrderListEvent.updateDraft(
+          orderId: 'fake-id',
+          shipToInfo: ShipToInfo.empty(),
+          customerCodeInfo: CustomerCodeInfo.empty(),
+          grandTotal: 0.0,
+          salesOrganisation: SalesOrganisation.empty(),
+          user: User.empty(),
+          cartItems: [],
+          data: AdditionalDetailsData.empty(),
+        ),
+      ),
+      expect: () => [
+        SavedOrderListState.initial().copyWith(
+          savedOrders: [SavedOrder.empty().copyWith(id: 'fake-id')],
+          apiFailureOrSuccessOption: none(),
+          isCreating: true,
+        ),
+        SavedOrderListState.initial().copyWith(
+          savedOrders: <SavedOrder>[updatedSavedOrderMock],
+          apiFailureOrSuccessOption: none(),
+          isCreating: false,
+        ),
+      ],
+    );
+
+    blocTest<SavedOrderListBloc, SavedOrderListState>(
+      'Update Draft Order Failure',
+      build: () => SavedOrderListBloc(repository: repository),
+      seed: () => SavedOrderListState.initial().copyWith(
+        savedOrders: [
+          SavedOrder.empty().copyWith(id: 'fake-id'),
+        ],
+      ),
+      setUp: () {
+        when(() => repository.updateDraftOrder(
+              orderId: 'fake-id',
+              shipToInfo: ShipToInfo.empty(),
+              customerCodeInfo: CustomerCodeInfo.empty(),
+              grandTotal: 0.0,
+              salesOrganisation: SalesOrganisation.empty(),
+              user: User.empty(),
+              cartItems: [],
+              data: AdditionalDetailsData.empty(),
+            )).thenAnswer(
+          (invocation) async => const Left(
+            ApiFailure.other('fake-error'),
+          ),
+        );
+      },
+      act: (bloc) => bloc.add(
+        SavedOrderListEvent.updateDraft(
+          orderId: 'fake-id',
+          shipToInfo: ShipToInfo.empty(),
+          customerCodeInfo: CustomerCodeInfo.empty(),
+          grandTotal: 0.0,
+          salesOrganisation: SalesOrganisation.empty(),
+          user: User.empty(),
+          cartItems: [],
+          data: AdditionalDetailsData.empty(),
+        ),
+      ),
+      expect: () => [
+        SavedOrderListState.initial().copyWith(
+          savedOrders: [SavedOrder.empty().copyWith(id: 'fake-id')],
+          apiFailureOrSuccessOption: none(),
+          isCreating: true,
+        ),
+        SavedOrderListState.initial().copyWith(
+          savedOrders: [SavedOrder.empty().copyWith(id: 'fake-id')],
+          apiFailureOrSuccessOption: optionOf(
+            const Left(
+              ApiFailure.other('fake-error'),
+            ),
+          ),
+          isCreating: false,
         ),
       ],
     );

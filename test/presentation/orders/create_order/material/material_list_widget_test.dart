@@ -8,6 +8,7 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
+import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
@@ -93,6 +94,10 @@ class TenderContractBlocMock
     extends MockBloc<TenderContractEvent, TenderContractState>
     implements TenderContractBloc {}
 
+class AdditionalDetailsBlocMock
+    extends MockBloc<AdditionalDetailsEvent, AdditionalDetailsState>
+    implements AdditionalDetailsBloc {}
+
 class AddToCartStub {
   void addToCart() {
     // Do nothing
@@ -117,6 +122,7 @@ void main() {
   late EligibilityBlocMock eligibilityBlocMock;
   late AddToCartStub mockAddToCartStub;
   late TenderContractBloc mockTenderContractBloc;
+  late AdditionalDetailsBloc mockAdditionalDetailsBloc;
 
   final fakeMaterialNumber = MaterialNumber('000000000023168451');
   final fakeMaterialPrice = MaterialPrice(10.0);
@@ -178,6 +184,7 @@ void main() {
       autoRouterMock = locator<AppRouter>();
       eligibilityBlocMock = EligibilityBlocMock();
       mockTenderContractBloc = TenderContractBlocMock();
+      mockAdditionalDetailsBloc = AdditionalDetailsBlocMock();
       when(() => userBlocMock.state).thenReturn(UserState.initial());
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
       when(() => customerCodeBlocMock.state)
@@ -207,6 +214,8 @@ void main() {
           .thenReturn(ShipToCodeState.initial());
       when(() => mockTenderContractBloc.state)
           .thenReturn(TenderContractState.initial());
+      when(() => mockAdditionalDetailsBloc.state)
+          .thenReturn(AdditionalDetailsState.initial());
     });
 
     Widget getScopedWidget(Widget child) {
@@ -246,6 +255,8 @@ void main() {
                 create: ((context) => eligibilityBlocMock)),
             BlocProvider<TenderContractBloc>(
                 create: ((context) => mockTenderContractBloc)),
+            BlocProvider<AdditionalDetailsBloc>(
+                create: ((context) => mockAdditionalDetailsBloc)),
           ],
           child: child,
         ),

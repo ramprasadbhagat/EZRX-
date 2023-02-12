@@ -74,7 +74,10 @@ class AdditionalDetailsBloc
       ),
       initFromSavedOrder: (value) async {
         emit(
-          AdditionalDetailsState.initial().copyWith(isLoading: true),
+          AdditionalDetailsState.initial().copyWith(
+            isLoading: true,
+            orderId: value.orderId,
+          ),
         );
 
         final failureOrSuccess = await savedOrderRepository.getSavedOrderDetail(
@@ -83,10 +86,14 @@ class AdditionalDetailsBloc
 
         await failureOrSuccess.fold(
           (failure) async {
-            add(
-              _Initialized(
-                config: value.config,
-                customerCodeInfo: value.customerCodeInfo,
+            emit(
+              state.copyWith(
+                additionalDetailsData: AdditionalDetailsData.empty().copyWith(
+                  contactNumber: ContactNumber(
+                    value.customerCodeInfo.telephoneNumber,
+                  ),
+                ),
+                isLoading: false,
               ),
             );
           },
@@ -101,6 +108,11 @@ class AdditionalDetailsBloc
               ),
             );
           },
+        );
+      },
+      clearSavedOrderId: (e) async {
+        emit(
+          state.copyWith(orderId: ''),
         );
       },
     );

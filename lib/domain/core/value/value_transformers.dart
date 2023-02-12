@@ -83,3 +83,14 @@ String getTenderContractNumber(String text) {
       ? 'Tender Contract available'
       : 'Contract: $text';
 }
+
+DateTime getDeliveryDateTime(String input) {
+  final deliveryDate = DateTime.tryParse(input);
+  final defaultDeliveryDate = DateTime.now().add(const Duration(days: 1));
+
+  if (deliveryDate == null || deliveryDate.isBefore(defaultDeliveryDate)) {
+    return defaultDeliveryDate;
+  }
+
+  return deliveryDate;
+}

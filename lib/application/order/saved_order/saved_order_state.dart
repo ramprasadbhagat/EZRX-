@@ -9,7 +9,6 @@ class SavedOrderListState with _$SavedOrderListState {
     required bool isFetching,
     required bool isDeleting,
     required int nextPageIndex,
-    required bool isDraftOrderCreated,
     required bool isCreating,
     required Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
   }) = _SavedOrderListState;
@@ -20,7 +19,6 @@ class SavedOrderListState with _$SavedOrderListState {
         isFetching: false,
         isDeleting: false,
         nextPageIndex: 0,
-        isDraftOrderCreated: false,
         isCreating: false,
         apiFailureOrSuccessOption: none(),
       );

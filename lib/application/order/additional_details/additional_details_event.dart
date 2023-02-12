@@ -8,7 +8,7 @@ class AdditionalDetailsEvent with _$AdditionalDetailsEvent {
   }) = _Initialized;
   const factory AdditionalDetailsEvent.initFromSavedOrder({
     required SalesOrganisationConfigs config,
-   required CustomerCodeInfo customerCodeInfo,
+    required CustomerCodeInfo customerCodeInfo,
     required String orderId,
   }) = _InitFromSavedOrder;
   const factory AdditionalDetailsEvent.onTextChange({
@@ -28,6 +28,8 @@ class AdditionalDetailsEvent with _$AdditionalDetailsEvent {
       _AdditionalDetailsRemoveAllPoDocument;
   const factory AdditionalDetailsEvent.toggleGreenDelivery(bool value) =
       _AdditionalDetailsToggleGreenDelivery;
+  const factory AdditionalDetailsEvent.clearSavedOrderId() =
+      _AdditionalDetailsClearSavedOrderId;
 }
 
 enum AdditionalDetailsLabel {

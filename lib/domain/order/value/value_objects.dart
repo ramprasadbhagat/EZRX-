@@ -535,6 +535,9 @@ class DeliveryDate extends ValueObject<String> {
     return DeliveryDate._(validateStringNotEmpty(input));
   }
 
+  DateTime get toDateTime => getDeliveryDateTime(
+        value.getOrElse(() => ''),
+      );
   const DeliveryDate._(this.value);
 }
 

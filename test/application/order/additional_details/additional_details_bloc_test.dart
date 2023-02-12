@@ -425,9 +425,13 @@ void main() {
           );
         },
         expect: () => [
-          AdditionalDetailsState.initial().copyWith(isLoading: true),
+          AdditionalDetailsState.initial().copyWith(
+            isLoading: true,
+            orderId: orderDetail.id,
+          ),
           AdditionalDetailsState.initial().copyWith(
             isLoading: false,
+            orderId: orderDetail.id,
             additionalDetailsData: AdditionalDetailsData.fromSavedOrder(
               orderDetail: orderDetail,
               customerCodeInfo: customerCodeInfo,
@@ -457,13 +461,32 @@ void main() {
           );
         },
         expect: () => [
-          AdditionalDetailsState.initial().copyWith(isLoading: true),
+          AdditionalDetailsState.initial().copyWith(
+            isLoading: true,
+            orderId: orderDetail.id,
+          ),
           AdditionalDetailsState.initial().copyWith(
             isLoading: false,
+            orderId: orderDetail.id,
             additionalDetailsData: AdditionalDetailsData.empty().copyWith(
               contactNumber: ContactNumber(customerCodeInfo.telephoneNumber),
             ),
           ),
+        ],
+      );
+
+      blocTest<AdditionalDetailsBloc, AdditionalDetailsState>(
+        'Clear saved order id',
+        build: () => AdditionalDetailsBloc(savedOrderRepository: repository),
+        seed: () =>
+            AdditionalDetailsState.initial().copyWith(orderId: 'fake-id'),
+        act: (AdditionalDetailsBloc bloc) {
+          bloc.add(
+            const AdditionalDetailsEvent.clearSavedOrderId(),
+          );
+        },
+        expect: () => [
+          AdditionalDetailsState.initial(),
         ],
       );
     },

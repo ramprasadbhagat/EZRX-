@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
@@ -104,9 +105,11 @@ class _BodyContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<SavedOrderListBloc, SavedOrderListState>(
-      listenWhen: (previous, current) => previous != current,
+      listenWhen: (previous, current) =>
+          previous.isCreating != current.isCreating,
       listener: (context, savedOrderState) {
-        if (savedOrderState.isDraftOrderCreated) {
+        if (!savedOrderState.isCreating &&
+            savedOrderState.apiFailureOrSuccessOption == none()) {
           context.router.pushNamed('saved_order_list');
         } else {
           savedOrderState.apiFailureOrSuccessOption.fold(
@@ -285,6 +288,103 @@ class _SubmitContinueButton extends StatelessWidget {
   }
 }
 
+class _UtilityButton extends StatelessWidget {
+  final ControlsDetails details;
+  final OrderSummaryState orderSummaryState;
+  final SavedOrderListState savedOrderState;
+  const _UtilityButton({
+    Key? key,
+    required this.details,
+    required this.orderSummaryState,
+    required this.savedOrderState,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<PoAttachmentBloc, PoAttachmentState>(
+      buildWhen: (previous, current) =>
+          previous.isFetching != current.isFetching,
+      builder: (context, poAttachmentState) {
+        return BlocBuilder<AdditionalDetailsBloc, AdditionalDetailsState>(
+          buildWhen: (previous, current) =>
+              previous.isLoading != current.isLoading,
+          builder: (context, additionalDetailsState) {
+            final isUpdateOrder = additionalDetailsState.orderId.isNotEmpty;
+            final isLoading = savedOrderState.isCreating ||
+                additionalDetailsState.isLoading ||
+                poAttachmentState.isFetching;
+
+            return ElevatedButton(
+              style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
+                    backgroundColor: MaterialStateProperty.all(
+                      ZPColors.darkGray,
+                    ),
+                  ),
+              onPressed: () async {
+                if (details.currentStep == orderSummaryState.maxSteps) {
+                  if (isLoading) return;
+                  isUpdateOrder
+                      ? _saveOrder(context, isUpdate: true)
+                      : _saveOrder(context);
+                } else {
+                  context.read<OrderSummaryBloc>().add(
+                        const OrderSummaryEvent.stepCancel(),
+                      );
+                }
+              },
+              child: details.currentStep == orderSummaryState.maxSteps
+                  ? LoadingShimmer.withChild(
+                      enabled: isLoading,
+                      child: Text(
+                        isUpdateOrder ? 'Update' : 'Save',
+                      ).tr(),
+                    )
+                  : const Text('Back').tr(),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  void _saveOrder(BuildContext context, {bool isUpdate = false}) {
+    isUpdate
+        ? context.read<SavedOrderListBloc>().add(
+              SavedOrderListEvent.updateDraft(
+                shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+                customerCodeInfo:
+                    context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                salesOrganisation:
+                    context.read<SalesOrgBloc>().state.salesOrganisation,
+                user: context.read<UserBloc>().state.user,
+                cartItems: context.read<CartBloc>().state.selectedCartItems,
+                grandTotal: context.read<CartBloc>().state.grandTotal,
+                data: context
+                    .read<AdditionalDetailsBloc>()
+                    .state
+                    .additionalDetailsData,
+                orderId: context.read<AdditionalDetailsBloc>().state.orderId,
+              ),
+            )
+        : context.read<SavedOrderListBloc>().add(
+              SavedOrderListEvent.createDraft(
+                shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+                customerCodeInfo:
+                    context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                salesOrganisation:
+                    context.read<SalesOrgBloc>().state.salesOrganisation,
+                user: context.read<UserBloc>().state.user,
+                cartItems: context.read<CartBloc>().state.selectedCartItems,
+                grandTotal: context.read<CartBloc>().state.grandTotal,
+                data: context
+                    .read<AdditionalDetailsBloc>()
+                    .state
+                    .additionalDetailsData,
+              ),
+            );
+  }
+}
+
 class _Stepper extends StatelessWidget {
   final SavedOrderListState savedOrderState;
 
@@ -292,26 +392,6 @@ class _Stepper extends StatelessWidget {
     required this.savedOrderState,
     Key? key,
   }) : super(key: key);
-
-  void _saveOrder(BuildContext context) {
-    context.read<SavedOrderListBloc>().add(
-          SavedOrderListEvent.createDraft(
-            shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
-            customerCodeInfo:
-                context.read<CustomerCodeBloc>().state.customerCodeInfo,
-            salesOrganisation:
-                context.read<SalesOrgBloc>().state.salesOrganisation,
-            user: context.read<UserBloc>().state.user,
-            cartItems: context.read<CartBloc>().state.selectedCartItems,
-            grandTotal: context.read<CartBloc>().state.grandTotal,
-            data: context
-                .read<AdditionalDetailsBloc>()
-                .state
-                .additionalDetailsData,
-            existingSavedOrderList: savedOrderState.savedOrders,
-          ),
-        );
-  }
 
   void _moveToOrderHistory(BuildContext context) {
     context.read<OrderHistoryListBloc>().add(
@@ -361,10 +441,8 @@ class _Stepper extends StatelessWidget {
       context.read<AdditionalDetailsBloc>().add(
             AdditionalDetailsEvent.initialized(
               config: context.read<SalesOrgBloc>().state.configs,
-             customerCodeInfo: context
-                          .read<CustomerCodeBloc>()
-                          .state
-                          .customerCodeInfo,
+              customerCodeInfo:
+                  context.read<CustomerCodeBloc>().state.customerCodeInfo,
             ),
           );
       _moveToOrderHistory(context);
@@ -414,30 +492,10 @@ class _Stepper extends StatelessWidget {
                         isAccountSuspended: isAccountSuspended,
                         orderSummaryState: state,
                       ),
-                      ElevatedButton(
-                        style: Theme.of(context)
-                            .elevatedButtonTheme
-                            .style!
-                            .copyWith(
-                              backgroundColor: MaterialStateProperty.all(
-                                ZPColors.darkGray,
-                              ),
-                            ),
-                        onPressed: () async {
-                          if (details.currentStep == state.maxSteps) {
-                            _saveOrder(context);
-                          } else {
-                            context
-                                .read<OrderSummaryBloc>()
-                                .add(const OrderSummaryEvent.stepCancel());
-                          }
-                        },
-                        child: details.currentStep == state.maxSteps
-                            ? LoadingShimmer.withChild(
-                                enabled: savedOrderState.isCreating,
-                                child: const Text('Save').tr(),
-                              )
-                            : const Text('Back').tr(),
+                      _UtilityButton(
+                        orderSummaryState: state,
+                        savedOrderState: savedOrderState,
+                        details: details,
                       ),
                     ],
                   ),

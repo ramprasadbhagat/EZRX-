@@ -87,4 +87,23 @@ class OrderQueryMutation {
     }
    ''';
   }
+
+  String updateSavedOrder() {
+    return '''
+    mutation updateDraftorder(\$input: UpdateDraftOrderInput!) {
+      updateDraftOrder(input: \$input) { 
+          id
+          itemlist
+          draftorder
+          BillingDocument
+          eZRxNumber
+          SoldToParty
+          ShipToParty
+          CompanyName
+          TotalOrderValue
+          requestedDeliveryDate
+      }
+    }
+    ''';
+  }
 }

@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:badges/badges.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -45,6 +46,9 @@ class CartButton extends StatelessWidget {
                       'subTotal': cartState.subtotal,
                       'grandTotal': cartState.grandTotal,
                     });
+                    context.read<AdditionalDetailsBloc>().add(
+                          const AdditionalDetailsEvent.clearSavedOrderId(),
+                        );
                     context.router.pushNamed('cart_page');
                   },
                 ),

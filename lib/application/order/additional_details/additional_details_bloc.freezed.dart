@@ -31,6 +31,7 @@ mixin _$AdditionalDetailsEvent {
     required TResult Function(PoDocuments poDocument) removePoDocument,
     required TResult Function() removeAllPoDocument,
     required TResult Function(bool value) toggleGreenDelivery,
+    required TResult Function() clearSavedOrderId,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -48,6 +49,7 @@ mixin _$AdditionalDetailsEvent {
     TResult? Function(PoDocuments poDocument)? removePoDocument,
     TResult? Function()? removeAllPoDocument,
     TResult? Function(bool value)? toggleGreenDelivery,
+    TResult? Function()? clearSavedOrderId,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -65,6 +67,7 @@ mixin _$AdditionalDetailsEvent {
     TResult Function(PoDocuments poDocument)? removePoDocument,
     TResult Function()? removeAllPoDocument,
     TResult Function(bool value)? toggleGreenDelivery,
+    TResult Function()? clearSavedOrderId,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -84,6 +87,8 @@ mixin _$AdditionalDetailsEvent {
         removeAllPoDocument,
     required TResult Function(_AdditionalDetailsToggleGreenDelivery value)
         toggleGreenDelivery,
+    required TResult Function(_AdditionalDetailsClearSavedOrderId value)
+        clearSavedOrderId,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -99,6 +104,8 @@ mixin _$AdditionalDetailsEvent {
         removeAllPoDocument,
     TResult? Function(_AdditionalDetailsToggleGreenDelivery value)?
         toggleGreenDelivery,
+    TResult? Function(_AdditionalDetailsClearSavedOrderId value)?
+        clearSavedOrderId,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -114,6 +121,8 @@ mixin _$AdditionalDetailsEvent {
         removeAllPoDocument,
     TResult Function(_AdditionalDetailsToggleGreenDelivery value)?
         toggleGreenDelivery,
+    TResult Function(_AdditionalDetailsClearSavedOrderId value)?
+        clearSavedOrderId,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -244,6 +253,7 @@ class _$_Initialized implements _Initialized {
     required TResult Function(PoDocuments poDocument) removePoDocument,
     required TResult Function() removeAllPoDocument,
     required TResult Function(bool value) toggleGreenDelivery,
+    required TResult Function() clearSavedOrderId,
   }) {
     return initialized(config, customerCodeInfo);
   }
@@ -264,6 +274,7 @@ class _$_Initialized implements _Initialized {
     TResult? Function(PoDocuments poDocument)? removePoDocument,
     TResult? Function()? removeAllPoDocument,
     TResult? Function(bool value)? toggleGreenDelivery,
+    TResult? Function()? clearSavedOrderId,
   }) {
     return initialized?.call(config, customerCodeInfo);
   }
@@ -284,6 +295,7 @@ class _$_Initialized implements _Initialized {
     TResult Function(PoDocuments poDocument)? removePoDocument,
     TResult Function()? removeAllPoDocument,
     TResult Function(bool value)? toggleGreenDelivery,
+    TResult Function()? clearSavedOrderId,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -309,6 +321,8 @@ class _$_Initialized implements _Initialized {
         removeAllPoDocument,
     required TResult Function(_AdditionalDetailsToggleGreenDelivery value)
         toggleGreenDelivery,
+    required TResult Function(_AdditionalDetailsClearSavedOrderId value)
+        clearSavedOrderId,
   }) {
     return initialized(this);
   }
@@ -327,6 +341,8 @@ class _$_Initialized implements _Initialized {
         removeAllPoDocument,
     TResult? Function(_AdditionalDetailsToggleGreenDelivery value)?
         toggleGreenDelivery,
+    TResult? Function(_AdditionalDetailsClearSavedOrderId value)?
+        clearSavedOrderId,
   }) {
     return initialized?.call(this);
   }
@@ -345,6 +361,8 @@ class _$_Initialized implements _Initialized {
         removeAllPoDocument,
     TResult Function(_AdditionalDetailsToggleGreenDelivery value)?
         toggleGreenDelivery,
+    TResult Function(_AdditionalDetailsClearSavedOrderId value)?
+        clearSavedOrderId,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -487,6 +505,7 @@ class _$_InitFromSavedOrder implements _InitFromSavedOrder {
     required TResult Function(PoDocuments poDocument) removePoDocument,
     required TResult Function() removeAllPoDocument,
     required TResult Function(bool value) toggleGreenDelivery,
+    required TResult Function() clearSavedOrderId,
   }) {
     return initFromSavedOrder(config, customerCodeInfo, orderId);
   }
@@ -507,6 +526,7 @@ class _$_InitFromSavedOrder implements _InitFromSavedOrder {
     TResult? Function(PoDocuments poDocument)? removePoDocument,
     TResult? Function()? removeAllPoDocument,
     TResult? Function(bool value)? toggleGreenDelivery,
+    TResult? Function()? clearSavedOrderId,
   }) {
     return initFromSavedOrder?.call(config, customerCodeInfo, orderId);
   }
@@ -527,6 +547,7 @@ class _$_InitFromSavedOrder implements _InitFromSavedOrder {
     TResult Function(PoDocuments poDocument)? removePoDocument,
     TResult Function()? removeAllPoDocument,
     TResult Function(bool value)? toggleGreenDelivery,
+    TResult Function()? clearSavedOrderId,
     required TResult orElse(),
   }) {
     if (initFromSavedOrder != null) {
@@ -552,6 +573,8 @@ class _$_InitFromSavedOrder implements _InitFromSavedOrder {
         removeAllPoDocument,
     required TResult Function(_AdditionalDetailsToggleGreenDelivery value)
         toggleGreenDelivery,
+    required TResult Function(_AdditionalDetailsClearSavedOrderId value)
+        clearSavedOrderId,
   }) {
     return initFromSavedOrder(this);
   }
@@ -570,6 +593,8 @@ class _$_InitFromSavedOrder implements _InitFromSavedOrder {
         removeAllPoDocument,
     TResult? Function(_AdditionalDetailsToggleGreenDelivery value)?
         toggleGreenDelivery,
+    TResult? Function(_AdditionalDetailsClearSavedOrderId value)?
+        clearSavedOrderId,
   }) {
     return initFromSavedOrder?.call(this);
   }
@@ -588,6 +613,8 @@ class _$_InitFromSavedOrder implements _InitFromSavedOrder {
         removeAllPoDocument,
     TResult Function(_AdditionalDetailsToggleGreenDelivery value)?
         toggleGreenDelivery,
+    TResult Function(_AdditionalDetailsClearSavedOrderId value)?
+        clearSavedOrderId,
     required TResult orElse(),
   }) {
     if (initFromSavedOrder != null) {
@@ -703,6 +730,7 @@ class _$_AdditionalDetailsTextOnChange
     required TResult Function(PoDocuments poDocument) removePoDocument,
     required TResult Function() removeAllPoDocument,
     required TResult Function(bool value) toggleGreenDelivery,
+    required TResult Function() clearSavedOrderId,
   }) {
     return onTextChange(label, newValue);
   }
@@ -723,6 +751,7 @@ class _$_AdditionalDetailsTextOnChange
     TResult? Function(PoDocuments poDocument)? removePoDocument,
     TResult? Function()? removeAllPoDocument,
     TResult? Function(bool value)? toggleGreenDelivery,
+    TResult? Function()? clearSavedOrderId,
   }) {
     return onTextChange?.call(label, newValue);
   }
@@ -743,6 +772,7 @@ class _$_AdditionalDetailsTextOnChange
     TResult Function(PoDocuments poDocument)? removePoDocument,
     TResult Function()? removeAllPoDocument,
     TResult Function(bool value)? toggleGreenDelivery,
+    TResult Function()? clearSavedOrderId,
     required TResult orElse(),
   }) {
     if (onTextChange != null) {
@@ -768,6 +798,8 @@ class _$_AdditionalDetailsTextOnChange
         removeAllPoDocument,
     required TResult Function(_AdditionalDetailsToggleGreenDelivery value)
         toggleGreenDelivery,
+    required TResult Function(_AdditionalDetailsClearSavedOrderId value)
+        clearSavedOrderId,
   }) {
     return onTextChange(this);
   }
@@ -786,6 +818,8 @@ class _$_AdditionalDetailsTextOnChange
         removeAllPoDocument,
     TResult? Function(_AdditionalDetailsToggleGreenDelivery value)?
         toggleGreenDelivery,
+    TResult? Function(_AdditionalDetailsClearSavedOrderId value)?
+        clearSavedOrderId,
   }) {
     return onTextChange?.call(this);
   }
@@ -804,6 +838,8 @@ class _$_AdditionalDetailsTextOnChange
         removeAllPoDocument,
     TResult Function(_AdditionalDetailsToggleGreenDelivery value)?
         toggleGreenDelivery,
+    TResult Function(_AdditionalDetailsClearSavedOrderId value)?
+        clearSavedOrderId,
     required TResult orElse(),
   }) {
     if (onTextChange != null) {
@@ -918,6 +954,7 @@ class _$_AdditionalDetailsValidateForm
     required TResult Function(PoDocuments poDocument) removePoDocument,
     required TResult Function() removeAllPoDocument,
     required TResult Function(bool value) toggleGreenDelivery,
+    required TResult Function() clearSavedOrderId,
   }) {
     return validateForm(config);
   }
@@ -938,6 +975,7 @@ class _$_AdditionalDetailsValidateForm
     TResult? Function(PoDocuments poDocument)? removePoDocument,
     TResult? Function()? removeAllPoDocument,
     TResult? Function(bool value)? toggleGreenDelivery,
+    TResult? Function()? clearSavedOrderId,
   }) {
     return validateForm?.call(config);
   }
@@ -958,6 +996,7 @@ class _$_AdditionalDetailsValidateForm
     TResult Function(PoDocuments poDocument)? removePoDocument,
     TResult Function()? removeAllPoDocument,
     TResult Function(bool value)? toggleGreenDelivery,
+    TResult Function()? clearSavedOrderId,
     required TResult orElse(),
   }) {
     if (validateForm != null) {
@@ -983,6 +1022,8 @@ class _$_AdditionalDetailsValidateForm
         removeAllPoDocument,
     required TResult Function(_AdditionalDetailsToggleGreenDelivery value)
         toggleGreenDelivery,
+    required TResult Function(_AdditionalDetailsClearSavedOrderId value)
+        clearSavedOrderId,
   }) {
     return validateForm(this);
   }
@@ -1001,6 +1042,8 @@ class _$_AdditionalDetailsValidateForm
         removeAllPoDocument,
     TResult? Function(_AdditionalDetailsToggleGreenDelivery value)?
         toggleGreenDelivery,
+    TResult? Function(_AdditionalDetailsClearSavedOrderId value)?
+        clearSavedOrderId,
   }) {
     return validateForm?.call(this);
   }
@@ -1019,6 +1062,8 @@ class _$_AdditionalDetailsValidateForm
         removeAllPoDocument,
     TResult Function(_AdditionalDetailsToggleGreenDelivery value)?
         toggleGreenDelivery,
+    TResult Function(_AdditionalDetailsClearSavedOrderId value)?
+        clearSavedOrderId,
     required TResult orElse(),
   }) {
     if (validateForm != null) {
@@ -1130,6 +1175,7 @@ class _$_AdditionalDetailsAddPoDocument
     required TResult Function(PoDocuments poDocument) removePoDocument,
     required TResult Function() removeAllPoDocument,
     required TResult Function(bool value) toggleGreenDelivery,
+    required TResult Function() clearSavedOrderId,
   }) {
     return addPoDocument(poDocuments);
   }
@@ -1150,6 +1196,7 @@ class _$_AdditionalDetailsAddPoDocument
     TResult? Function(PoDocuments poDocument)? removePoDocument,
     TResult? Function()? removeAllPoDocument,
     TResult? Function(bool value)? toggleGreenDelivery,
+    TResult? Function()? clearSavedOrderId,
   }) {
     return addPoDocument?.call(poDocuments);
   }
@@ -1170,6 +1217,7 @@ class _$_AdditionalDetailsAddPoDocument
     TResult Function(PoDocuments poDocument)? removePoDocument,
     TResult Function()? removeAllPoDocument,
     TResult Function(bool value)? toggleGreenDelivery,
+    TResult Function()? clearSavedOrderId,
     required TResult orElse(),
   }) {
     if (addPoDocument != null) {
@@ -1195,6 +1243,8 @@ class _$_AdditionalDetailsAddPoDocument
         removeAllPoDocument,
     required TResult Function(_AdditionalDetailsToggleGreenDelivery value)
         toggleGreenDelivery,
+    required TResult Function(_AdditionalDetailsClearSavedOrderId value)
+        clearSavedOrderId,
   }) {
     return addPoDocument(this);
   }
@@ -1213,6 +1263,8 @@ class _$_AdditionalDetailsAddPoDocument
         removeAllPoDocument,
     TResult? Function(_AdditionalDetailsToggleGreenDelivery value)?
         toggleGreenDelivery,
+    TResult? Function(_AdditionalDetailsClearSavedOrderId value)?
+        clearSavedOrderId,
   }) {
     return addPoDocument?.call(this);
   }
@@ -1231,6 +1283,8 @@ class _$_AdditionalDetailsAddPoDocument
         removeAllPoDocument,
     TResult Function(_AdditionalDetailsToggleGreenDelivery value)?
         toggleGreenDelivery,
+    TResult Function(_AdditionalDetailsClearSavedOrderId value)?
+        clearSavedOrderId,
     required TResult orElse(),
   }) {
     if (addPoDocument != null) {
@@ -1346,6 +1400,7 @@ class _$_AdditionalDetailsRemovePoDocument
     required TResult Function(PoDocuments poDocument) removePoDocument,
     required TResult Function() removeAllPoDocument,
     required TResult Function(bool value) toggleGreenDelivery,
+    required TResult Function() clearSavedOrderId,
   }) {
     return removePoDocument(poDocument);
   }
@@ -1366,6 +1421,7 @@ class _$_AdditionalDetailsRemovePoDocument
     TResult? Function(PoDocuments poDocument)? removePoDocument,
     TResult? Function()? removeAllPoDocument,
     TResult? Function(bool value)? toggleGreenDelivery,
+    TResult? Function()? clearSavedOrderId,
   }) {
     return removePoDocument?.call(poDocument);
   }
@@ -1386,6 +1442,7 @@ class _$_AdditionalDetailsRemovePoDocument
     TResult Function(PoDocuments poDocument)? removePoDocument,
     TResult Function()? removeAllPoDocument,
     TResult Function(bool value)? toggleGreenDelivery,
+    TResult Function()? clearSavedOrderId,
     required TResult orElse(),
   }) {
     if (removePoDocument != null) {
@@ -1411,6 +1468,8 @@ class _$_AdditionalDetailsRemovePoDocument
         removeAllPoDocument,
     required TResult Function(_AdditionalDetailsToggleGreenDelivery value)
         toggleGreenDelivery,
+    required TResult Function(_AdditionalDetailsClearSavedOrderId value)
+        clearSavedOrderId,
   }) {
     return removePoDocument(this);
   }
@@ -1429,6 +1488,8 @@ class _$_AdditionalDetailsRemovePoDocument
         removeAllPoDocument,
     TResult? Function(_AdditionalDetailsToggleGreenDelivery value)?
         toggleGreenDelivery,
+    TResult? Function(_AdditionalDetailsClearSavedOrderId value)?
+        clearSavedOrderId,
   }) {
     return removePoDocument?.call(this);
   }
@@ -1447,6 +1508,8 @@ class _$_AdditionalDetailsRemovePoDocument
         removeAllPoDocument,
     TResult Function(_AdditionalDetailsToggleGreenDelivery value)?
         toggleGreenDelivery,
+    TResult Function(_AdditionalDetailsClearSavedOrderId value)?
+        clearSavedOrderId,
     required TResult orElse(),
   }) {
     if (removePoDocument != null) {
@@ -1525,6 +1588,7 @@ class _$_AdditionalDetailsRemoveAllPoDocument
     required TResult Function(PoDocuments poDocument) removePoDocument,
     required TResult Function() removeAllPoDocument,
     required TResult Function(bool value) toggleGreenDelivery,
+    required TResult Function() clearSavedOrderId,
   }) {
     return removeAllPoDocument();
   }
@@ -1545,6 +1609,7 @@ class _$_AdditionalDetailsRemoveAllPoDocument
     TResult? Function(PoDocuments poDocument)? removePoDocument,
     TResult? Function()? removeAllPoDocument,
     TResult? Function(bool value)? toggleGreenDelivery,
+    TResult? Function()? clearSavedOrderId,
   }) {
     return removeAllPoDocument?.call();
   }
@@ -1565,6 +1630,7 @@ class _$_AdditionalDetailsRemoveAllPoDocument
     TResult Function(PoDocuments poDocument)? removePoDocument,
     TResult Function()? removeAllPoDocument,
     TResult Function(bool value)? toggleGreenDelivery,
+    TResult Function()? clearSavedOrderId,
     required TResult orElse(),
   }) {
     if (removeAllPoDocument != null) {
@@ -1590,6 +1656,8 @@ class _$_AdditionalDetailsRemoveAllPoDocument
         removeAllPoDocument,
     required TResult Function(_AdditionalDetailsToggleGreenDelivery value)
         toggleGreenDelivery,
+    required TResult Function(_AdditionalDetailsClearSavedOrderId value)
+        clearSavedOrderId,
   }) {
     return removeAllPoDocument(this);
   }
@@ -1608,6 +1676,8 @@ class _$_AdditionalDetailsRemoveAllPoDocument
         removeAllPoDocument,
     TResult? Function(_AdditionalDetailsToggleGreenDelivery value)?
         toggleGreenDelivery,
+    TResult? Function(_AdditionalDetailsClearSavedOrderId value)?
+        clearSavedOrderId,
   }) {
     return removeAllPoDocument?.call(this);
   }
@@ -1626,6 +1696,8 @@ class _$_AdditionalDetailsRemoveAllPoDocument
         removeAllPoDocument,
     TResult Function(_AdditionalDetailsToggleGreenDelivery value)?
         toggleGreenDelivery,
+    TResult Function(_AdditionalDetailsClearSavedOrderId value)?
+        clearSavedOrderId,
     required TResult orElse(),
   }) {
     if (removeAllPoDocument != null) {
@@ -1724,6 +1796,7 @@ class _$_AdditionalDetailsToggleGreenDelivery
     required TResult Function(PoDocuments poDocument) removePoDocument,
     required TResult Function() removeAllPoDocument,
     required TResult Function(bool value) toggleGreenDelivery,
+    required TResult Function() clearSavedOrderId,
   }) {
     return toggleGreenDelivery(value);
   }
@@ -1744,6 +1817,7 @@ class _$_AdditionalDetailsToggleGreenDelivery
     TResult? Function(PoDocuments poDocument)? removePoDocument,
     TResult? Function()? removeAllPoDocument,
     TResult? Function(bool value)? toggleGreenDelivery,
+    TResult? Function()? clearSavedOrderId,
   }) {
     return toggleGreenDelivery?.call(value);
   }
@@ -1764,6 +1838,7 @@ class _$_AdditionalDetailsToggleGreenDelivery
     TResult Function(PoDocuments poDocument)? removePoDocument,
     TResult Function()? removeAllPoDocument,
     TResult Function(bool value)? toggleGreenDelivery,
+    TResult Function()? clearSavedOrderId,
     required TResult orElse(),
   }) {
     if (toggleGreenDelivery != null) {
@@ -1789,6 +1864,8 @@ class _$_AdditionalDetailsToggleGreenDelivery
         removeAllPoDocument,
     required TResult Function(_AdditionalDetailsToggleGreenDelivery value)
         toggleGreenDelivery,
+    required TResult Function(_AdditionalDetailsClearSavedOrderId value)
+        clearSavedOrderId,
   }) {
     return toggleGreenDelivery(this);
   }
@@ -1807,6 +1884,8 @@ class _$_AdditionalDetailsToggleGreenDelivery
         removeAllPoDocument,
     TResult? Function(_AdditionalDetailsToggleGreenDelivery value)?
         toggleGreenDelivery,
+    TResult? Function(_AdditionalDetailsClearSavedOrderId value)?
+        clearSavedOrderId,
   }) {
     return toggleGreenDelivery?.call(this);
   }
@@ -1825,6 +1904,8 @@ class _$_AdditionalDetailsToggleGreenDelivery
         removeAllPoDocument,
     TResult Function(_AdditionalDetailsToggleGreenDelivery value)?
         toggleGreenDelivery,
+    TResult Function(_AdditionalDetailsClearSavedOrderId value)?
+        clearSavedOrderId,
     required TResult orElse(),
   }) {
     if (toggleGreenDelivery != null) {
@@ -1847,9 +1928,191 @@ abstract class _AdditionalDetailsToggleGreenDelivery
 }
 
 /// @nodoc
+abstract class _$$_AdditionalDetailsClearSavedOrderIdCopyWith<$Res> {
+  factory _$$_AdditionalDetailsClearSavedOrderIdCopyWith(
+          _$_AdditionalDetailsClearSavedOrderId value,
+          $Res Function(_$_AdditionalDetailsClearSavedOrderId) then) =
+      __$$_AdditionalDetailsClearSavedOrderIdCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_AdditionalDetailsClearSavedOrderIdCopyWithImpl<$Res>
+    extends _$AdditionalDetailsEventCopyWithImpl<$Res,
+        _$_AdditionalDetailsClearSavedOrderId>
+    implements _$$_AdditionalDetailsClearSavedOrderIdCopyWith<$Res> {
+  __$$_AdditionalDetailsClearSavedOrderIdCopyWithImpl(
+      _$_AdditionalDetailsClearSavedOrderId _value,
+      $Res Function(_$_AdditionalDetailsClearSavedOrderId) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_AdditionalDetailsClearSavedOrderId
+    implements _AdditionalDetailsClearSavedOrderId {
+  const _$_AdditionalDetailsClearSavedOrderId();
+
+  @override
+  String toString() {
+    return 'AdditionalDetailsEvent.clearSavedOrderId()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_AdditionalDetailsClearSavedOrderId);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)
+        initialized,
+    required TResult Function(SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo, String orderId)
+        initFromSavedOrder,
+    required TResult Function(AdditionalDetailsLabel label, String newValue)
+        onTextChange,
+    required TResult Function(SalesOrganisationConfigs config) validateForm,
+    required TResult Function(List<PoDocuments> poDocuments) addPoDocument,
+    required TResult Function(PoDocuments poDocument) removePoDocument,
+    required TResult Function() removeAllPoDocument,
+    required TResult Function(bool value) toggleGreenDelivery,
+    required TResult Function() clearSavedOrderId,
+  }) {
+    return clearSavedOrderId();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
+        initialized,
+    TResult? Function(SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo, String orderId)?
+        initFromSavedOrder,
+    TResult? Function(AdditionalDetailsLabel label, String newValue)?
+        onTextChange,
+    TResult? Function(SalesOrganisationConfigs config)? validateForm,
+    TResult? Function(List<PoDocuments> poDocuments)? addPoDocument,
+    TResult? Function(PoDocuments poDocument)? removePoDocument,
+    TResult? Function()? removeAllPoDocument,
+    TResult? Function(bool value)? toggleGreenDelivery,
+    TResult? Function()? clearSavedOrderId,
+  }) {
+    return clearSavedOrderId?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
+        initialized,
+    TResult Function(SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo, String orderId)?
+        initFromSavedOrder,
+    TResult Function(AdditionalDetailsLabel label, String newValue)?
+        onTextChange,
+    TResult Function(SalesOrganisationConfigs config)? validateForm,
+    TResult Function(List<PoDocuments> poDocuments)? addPoDocument,
+    TResult Function(PoDocuments poDocument)? removePoDocument,
+    TResult Function()? removeAllPoDocument,
+    TResult Function(bool value)? toggleGreenDelivery,
+    TResult Function()? clearSavedOrderId,
+    required TResult orElse(),
+  }) {
+    if (clearSavedOrderId != null) {
+      return clearSavedOrderId();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_InitFromSavedOrder value) initFromSavedOrder,
+    required TResult Function(_AdditionalDetailsTextOnChange value)
+        onTextChange,
+    required TResult Function(_AdditionalDetailsValidateForm value)
+        validateForm,
+    required TResult Function(_AdditionalDetailsAddPoDocument value)
+        addPoDocument,
+    required TResult Function(_AdditionalDetailsRemovePoDocument value)
+        removePoDocument,
+    required TResult Function(_AdditionalDetailsRemoveAllPoDocument value)
+        removeAllPoDocument,
+    required TResult Function(_AdditionalDetailsToggleGreenDelivery value)
+        toggleGreenDelivery,
+    required TResult Function(_AdditionalDetailsClearSavedOrderId value)
+        clearSavedOrderId,
+  }) {
+    return clearSavedOrderId(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_InitFromSavedOrder value)? initFromSavedOrder,
+    TResult? Function(_AdditionalDetailsTextOnChange value)? onTextChange,
+    TResult? Function(_AdditionalDetailsValidateForm value)? validateForm,
+    TResult? Function(_AdditionalDetailsAddPoDocument value)? addPoDocument,
+    TResult? Function(_AdditionalDetailsRemovePoDocument value)?
+        removePoDocument,
+    TResult? Function(_AdditionalDetailsRemoveAllPoDocument value)?
+        removeAllPoDocument,
+    TResult? Function(_AdditionalDetailsToggleGreenDelivery value)?
+        toggleGreenDelivery,
+    TResult? Function(_AdditionalDetailsClearSavedOrderId value)?
+        clearSavedOrderId,
+  }) {
+    return clearSavedOrderId?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_InitFromSavedOrder value)? initFromSavedOrder,
+    TResult Function(_AdditionalDetailsTextOnChange value)? onTextChange,
+    TResult Function(_AdditionalDetailsValidateForm value)? validateForm,
+    TResult Function(_AdditionalDetailsAddPoDocument value)? addPoDocument,
+    TResult Function(_AdditionalDetailsRemovePoDocument value)?
+        removePoDocument,
+    TResult Function(_AdditionalDetailsRemoveAllPoDocument value)?
+        removeAllPoDocument,
+    TResult Function(_AdditionalDetailsToggleGreenDelivery value)?
+        toggleGreenDelivery,
+    TResult Function(_AdditionalDetailsClearSavedOrderId value)?
+        clearSavedOrderId,
+    required TResult orElse(),
+  }) {
+    if (clearSavedOrderId != null) {
+      return clearSavedOrderId(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _AdditionalDetailsClearSavedOrderId
+    implements AdditionalDetailsEvent {
+  const factory _AdditionalDetailsClearSavedOrderId() =
+      _$_AdditionalDetailsClearSavedOrderId;
+}
+
+/// @nodoc
 mixin _$AdditionalDetailsState {
   AdditionalDetailsData get additionalDetailsData =>
       throw _privateConstructorUsedError;
+  String get orderId => throw _privateConstructorUsedError;
   bool get isValidated => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   bool get showErrorMessages => throw _privateConstructorUsedError;
@@ -1867,6 +2130,7 @@ abstract class $AdditionalDetailsStateCopyWith<$Res> {
   @useResult
   $Res call(
       {AdditionalDetailsData additionalDetailsData,
+      String orderId,
       bool isValidated,
       bool isLoading,
       bool showErrorMessages});
@@ -1889,6 +2153,7 @@ class _$AdditionalDetailsStateCopyWithImpl<$Res,
   @override
   $Res call({
     Object? additionalDetailsData = null,
+    Object? orderId = null,
     Object? isValidated = null,
     Object? isLoading = null,
     Object? showErrorMessages = null,
@@ -1898,6 +2163,10 @@ class _$AdditionalDetailsStateCopyWithImpl<$Res,
           ? _value.additionalDetailsData
           : additionalDetailsData // ignore: cast_nullable_to_non_nullable
               as AdditionalDetailsData,
+      orderId: null == orderId
+          ? _value.orderId
+          : orderId // ignore: cast_nullable_to_non_nullable
+              as String,
       isValidated: null == isValidated
           ? _value.isValidated
           : isValidated // ignore: cast_nullable_to_non_nullable
@@ -1933,6 +2202,7 @@ abstract class _$$_AdditionalDetailsStateCopyWith<$Res>
   @useResult
   $Res call(
       {AdditionalDetailsData additionalDetailsData,
+      String orderId,
       bool isValidated,
       bool isLoading,
       bool showErrorMessages});
@@ -1954,6 +2224,7 @@ class __$$_AdditionalDetailsStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? additionalDetailsData = null,
+    Object? orderId = null,
     Object? isValidated = null,
     Object? isLoading = null,
     Object? showErrorMessages = null,
@@ -1963,6 +2234,10 @@ class __$$_AdditionalDetailsStateCopyWithImpl<$Res>
           ? _value.additionalDetailsData
           : additionalDetailsData // ignore: cast_nullable_to_non_nullable
               as AdditionalDetailsData,
+      orderId: null == orderId
+          ? _value.orderId
+          : orderId // ignore: cast_nullable_to_non_nullable
+              as String,
       isValidated: null == isValidated
           ? _value.isValidated
           : isValidated // ignore: cast_nullable_to_non_nullable
@@ -1984,6 +2259,7 @@ class __$$_AdditionalDetailsStateCopyWithImpl<$Res>
 class _$_AdditionalDetailsState extends _AdditionalDetailsState {
   const _$_AdditionalDetailsState(
       {required this.additionalDetailsData,
+      required this.orderId,
       required this.isValidated,
       required this.isLoading,
       required this.showErrorMessages})
@@ -1991,6 +2267,8 @@ class _$_AdditionalDetailsState extends _AdditionalDetailsState {
 
   @override
   final AdditionalDetailsData additionalDetailsData;
+  @override
+  final String orderId;
   @override
   final bool isValidated;
   @override
@@ -2000,7 +2278,7 @@ class _$_AdditionalDetailsState extends _AdditionalDetailsState {
 
   @override
   String toString() {
-    return 'AdditionalDetailsState(additionalDetailsData: $additionalDetailsData, isValidated: $isValidated, isLoading: $isLoading, showErrorMessages: $showErrorMessages)';
+    return 'AdditionalDetailsState(additionalDetailsData: $additionalDetailsData, orderId: $orderId, isValidated: $isValidated, isLoading: $isLoading, showErrorMessages: $showErrorMessages)';
   }
 
   @override
@@ -2010,6 +2288,7 @@ class _$_AdditionalDetailsState extends _AdditionalDetailsState {
             other is _$_AdditionalDetailsState &&
             (identical(other.additionalDetailsData, additionalDetailsData) ||
                 other.additionalDetailsData == additionalDetailsData) &&
+            (identical(other.orderId, orderId) || other.orderId == orderId) &&
             (identical(other.isValidated, isValidated) ||
                 other.isValidated == isValidated) &&
             (identical(other.isLoading, isLoading) ||
@@ -2019,7 +2298,7 @@ class _$_AdditionalDetailsState extends _AdditionalDetailsState {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, additionalDetailsData,
+  int get hashCode => Object.hash(runtimeType, additionalDetailsData, orderId,
       isValidated, isLoading, showErrorMessages);
 
   @JsonKey(ignore: true)
@@ -2033,6 +2312,7 @@ class _$_AdditionalDetailsState extends _AdditionalDetailsState {
 abstract class _AdditionalDetailsState extends AdditionalDetailsState {
   const factory _AdditionalDetailsState(
       {required final AdditionalDetailsData additionalDetailsData,
+      required final String orderId,
       required final bool isValidated,
       required final bool isLoading,
       required final bool showErrorMessages}) = _$_AdditionalDetailsState;
@@ -2040,6 +2320,8 @@ abstract class _AdditionalDetailsState extends AdditionalDetailsState {
 
   @override
   AdditionalDetailsData get additionalDetailsData;
+  @override
+  String get orderId;
   @override
   bool get isValidated;
   @override

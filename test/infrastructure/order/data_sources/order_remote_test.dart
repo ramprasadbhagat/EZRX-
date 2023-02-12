@@ -300,7 +300,6 @@ void main() {
       test(
         'statuscode not equla to 200',
         () async {
-
           dioAdapter.onPost(
             '/api/strapiEngine',
             (server) => server.reply(
@@ -334,7 +333,6 @@ void main() {
       test(
         'response with error',
         () async {
-
           dioAdapter.onPost(
             '/api/strapiEngine',
             (server) => server.reply(
@@ -436,6 +434,99 @@ void main() {
           await remoteDataSource
               .getSavedOrderDetail(
             orderId: 'fake-id',
+          )
+              .onError((error, _) {
+            expect(error, isA<ServerException>());
+            return SavedOrder.empty();
+          });
+        },
+      );
+
+      test(
+        'Update Saved order with 200 success response',
+        () async {
+          final json = jsonDecode(
+            await rootBundle
+                .loadString('assets/json/updateSavedOrderResponse.json'),
+          );
+
+          final fakeResponse = SavedOrderDto.fromJson(
+            json['data']['updateDraftOrder'],
+          ).toDomain();
+
+          dioAdapter.onPost(
+            '/api/strapiEngineMutation',
+            (server) => server.reply(
+              200,
+              json,
+              delay: const Duration(seconds: 1),
+            ),
+            headers: {'Content-Type': 'application/json; charset=utf-8'},
+            data: jsonEncode({
+              'query': remoteDataSource.queryMutation.updateSavedOrder(),
+              'variables': {
+                'input': {
+                  'data': SavedOrderDto.fromDomain(fakeResponse).toJson()
+                    ..remove('id'),
+                  'where': {
+                    'id': fakeResponse.id,
+                  },
+                },
+              },
+            }),
+          );
+
+          final result = await remoteDataSource.updateDraftOrder(
+              updatedOrder: SavedOrderDto.fromDomain(fakeResponse));
+
+          expect(
+            result,
+            fakeResponse,
+          );
+        },
+      );
+
+      test(
+        'Update Saved order with error response',
+        () async {
+          final json = jsonDecode(
+            await rootBundle
+                .loadString('assets/json/updateSavedOrderResponse.json'),
+          );
+          final fakeRequest = SavedOrderDto.fromJson(
+            json['data']['updateDraftOrder'],
+          ).toDomain();
+
+          dioAdapter.onPost(
+            '/api/strapiEngineMutation',
+            (server) => server.reply(
+              200,
+              {
+                'data': null,
+                'errors': [
+                  {'message': 'fake-error'}
+                ],
+              },
+              delay: const Duration(seconds: 1),
+            ),
+            headers: {'Content-Type': 'application/json; charset=utf-8'},
+            data: jsonEncode({
+              'query': remoteDataSource.queryMutation.updateSavedOrder(),
+              'variables': {
+                'input': {
+                  'data': SavedOrderDto.fromDomain(fakeRequest).toJson()
+                    ..remove('id'),
+                  'where': {
+                    'id': fakeRequest.id,
+                  },
+                },
+              },
+            }),
+          );
+
+          await remoteDataSource
+              .updateDraftOrder(
+            updatedOrder: SavedOrderDto.fromDomain(fakeRequest),
           )
               .onError((error, _) {
             expect(error, isA<ServerException>());

@@ -27,6 +27,15 @@ class SavedOrderListEvent with _$SavedOrderListEvent {
     required CustomerCodeInfo customerCodeInfo,
     required SalesOrganisation salesOrganisation,
     required AdditionalDetailsData data,
-    required List<SavedOrder> existingSavedOrderList,
   }) = _CreateDraft;
+  const factory SavedOrderListEvent.updateDraft({
+    required ShipToInfo shipToInfo,
+    required User user,
+    required List<CartItem> cartItems,
+    required double grandTotal,
+    required CustomerCodeInfo customerCodeInfo,
+    required SalesOrganisation salesOrganisation,
+    required AdditionalDetailsData data,
+    required String orderId,
+  }) = _UpdateDraft;
 }

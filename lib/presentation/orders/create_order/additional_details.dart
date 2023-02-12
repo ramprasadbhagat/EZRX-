@@ -510,10 +510,10 @@ class _DatePickerFieldState extends State<_DatePickerField> {
       lastDate: futureDeliveryDay.isEmpty
           ? DateTime.utc(275760, 09, 13)
           : DateTime.now().add(Duration(days: int.parse(futureDeliveryDay))),
-      initialDate: DateTime.now().add(const Duration(days: 1)),
+      initialDate: widget.additionalDetails.deliveryDate.toDateTime,
     );
 
-    return orderDate ?? DateTime.now().add(const Duration(days: 1));
+    return orderDate ?? widget.additionalDetails.deliveryDate.toDateTime;
   }
 }
 

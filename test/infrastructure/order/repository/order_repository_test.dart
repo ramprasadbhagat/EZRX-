@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_name.dart';
@@ -82,6 +83,42 @@ void main() {
       status: Status('fake_status'),
       customerName: CustomerName.empty().copyWith(name1: 'cust1'),
       division: 'mock_div');
+  const fakeSavedOrderId = 'fake-id';
+
+  final fakeUpdatedSavedOrder = SavedOrder.empty().copyWith(
+    requestedDeliveryDate: DateFormat('yyyy-MM-dd').format(
+      DateTime.now().add(
+        const Duration(days: 1),
+      ),
+    ),
+    id: fakeSavedOrderId,
+    deliveryDocument: mockShipToInfo.shipToName.name1,
+    billingDocument: mockCustomerCodeInfo.customerName.name1,
+    salesOrganization: mockSalesOrganisation.salesOrg.getOrCrash(),
+    principal: '',
+    soldToParty: SoldToParty(mockCustomerCodeInfo.customerCodeSoldTo),
+    shipToParty: ShipToParty(mockShipToInfo.shipToCustomerCode),
+    processingStatus: 'Draft',
+    isDraftOrder: true,
+    companyName: CompanyName(mockShipToInfo.shipToName.toString()),
+    country: mockShipToInfo.region,
+    postCode1: mockShipToInfo.postalCode,
+    specialInstructions: '',
+    poReference: '',
+    payTerm: '',
+    collectiveNo: '',
+    totalOrderValue: 0,
+    draftorder: true,
+    address1: mockShipToInfo.shipToAddress.street,
+    address2: mockShipToInfo.shipToAddress.street2,
+    city: mockShipToInfo.city1,
+    phonenumber: '',
+    user: mockUser.id,
+    contactPerson: mockUser.fullName.toString(),
+    referenceNotes: '',
+    items: [],
+    poAttachent: [],
+  );
 
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
@@ -806,6 +843,7 @@ void main() {
           customerCode: CustomerCode('100007654'));
 
       final draftOrder = SavedOrder.empty().copyWith(
+        requestedDeliveryDate: '01/02/2023',
         deliveryDocument: mockShipToInfo.shipToName.name1,
         billingDocument: mockCustomerCodeInfo.customerName.name1,
         salesOrganization: mockSalesOrganisation.salesOrg.getOrCrash(),
@@ -916,8 +954,8 @@ void main() {
           email: EmailAddress('user@gmail.com'),
           customerCode: CustomerCode('100007654'));
 
-
       final draftOrder = SavedOrder.empty().copyWith(
+        requestedDeliveryDate: '01/02/2023',
         deliveryDocument: mockShipToInfo.shipToName.name1,
         billingDocument: mockCustomerCodeInfo.customerName.name1,
         salesOrganization: mockSalesOrganisation.salesOrg.getOrCrash(),
@@ -1019,6 +1057,7 @@ void main() {
           customerCode: CustomerCode('100007654'));
 
       final draftOrder = SavedOrder.empty().copyWith(
+        requestedDeliveryDate: '01/02/2023',
         deliveryDocument: mockShipToInfo.shipToName.name1,
         billingDocument: mockCustomerCodeInfo.customerName.name1,
         salesOrganization: mockSalesOrganisation.salesOrg.getOrCrash(),
@@ -1160,6 +1199,7 @@ void main() {
           customerCode: CustomerCode('100007654'));
 
       final draftOrder = SavedOrder.empty().copyWith(
+        requestedDeliveryDate: '01/02/2023',
         deliveryDocument: mockShipToInfo.shipToName.name1,
         billingDocument: mockCustomerCodeInfo.customerName.name1,
         salesOrganization: mockSalesOrganisation.salesOrg.getOrCrash(),
@@ -1265,6 +1305,7 @@ void main() {
           customerCode: CustomerCode('100007654'));
 
       final draftOrder = SavedOrder.empty().copyWith(
+        requestedDeliveryDate: '01/02/2023',
         deliveryDocument: mockShipToInfo.shipToName.name1,
         billingDocument: mockCustomerCodeInfo.customerName.name1,
         salesOrganization: mockSalesOrganisation.salesOrg.getOrCrash(),
@@ -1370,6 +1411,7 @@ void main() {
           customerCode: CustomerCode('100007654'));
 
       final draftOrder = SavedOrder.empty().copyWith(
+        requestedDeliveryDate: '01/02/2023',
         deliveryDocument: mockShipToInfo.shipToName.name1,
         billingDocument: mockCustomerCodeInfo.customerName.name1,
         salesOrganization: mockSalesOrganisation.salesOrg.getOrCrash(),
@@ -1450,56 +1492,155 @@ void main() {
     });
 
     test('get saved order detail success local', () async {
-      const fakeId = 'fake-id';
-      final fakeSavedOrder = SavedOrder.empty().copyWith(id: fakeId);
+      const fakeSavedOrderId = 'fake-id';
+      final fakeSavedOrder = SavedOrder.empty().copyWith(id: fakeSavedOrderId);
       when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
 
       when(() => orderLocalDataSource.getSavedOrderDetail()).thenAnswer(
         (invocation) async => fakeSavedOrder,
       );
 
-      final result = await orderRepository.getSavedOrderDetail(orderId: fakeId);
+      final result =
+          await orderRepository.getSavedOrderDetail(orderId: fakeSavedOrderId);
       expect(result.isRight(), true);
       expect(result.getOrElse(() => SavedOrder.empty()), fakeSavedOrder);
     });
 
     test('get saved order detail failure local', () async {
-      const fakeId = 'fake-id';
+      const fakeSavedOrderId = 'fake-id';
       when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
 
       when(() => orderLocalDataSource.getSavedOrderDetail()).thenThrow(
         () => MockException(),
       );
 
-      final result = await orderRepository.getSavedOrderDetail(orderId: fakeId);
+      final result =
+          await orderRepository.getSavedOrderDetail(orderId: fakeSavedOrderId);
       expect(result.isLeft(), true);
     });
 
     test('get saved order detail success remote', () async {
-      const fakeId = 'fake-id';
-      final fakeSavedOrder = SavedOrder.empty().copyWith(id: fakeId);
+      const fakeSavedOrderId = 'fake-id';
+      final fakeSavedOrder = SavedOrder.empty().copyWith(id: fakeSavedOrderId);
       when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
 
-      when(() => orderRemoteDataSource.getSavedOrderDetail(orderId: fakeId))
-          .thenAnswer(
+      when(() => orderRemoteDataSource.getSavedOrderDetail(
+          orderId: fakeSavedOrderId)).thenAnswer(
         (invocation) async => fakeSavedOrder,
       );
 
-      final result = await orderRepository.getSavedOrderDetail(orderId: fakeId);
+      final result =
+          await orderRepository.getSavedOrderDetail(orderId: fakeSavedOrderId);
       expect(result.isRight(), true);
       expect(result.getOrElse(() => SavedOrder.empty()), fakeSavedOrder);
     });
 
     test('get saved order detail failure remote', () async {
-      const fakeId = 'fake-id';
-      when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
+      const fakeSavedOrderId = 'fake-id';
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
 
-      when(() => orderRemoteDataSource.getSavedOrderDetail(orderId: fakeId))
-          .thenThrow(
+      when(() => orderRemoteDataSource.getSavedOrderDetail(
+          orderId: fakeSavedOrderId)).thenThrow(
         () => MockException(),
       );
 
-      final result = await orderRepository.getSavedOrderDetail(orderId: fakeId);
+      final result =
+          await orderRepository.getSavedOrderDetail(orderId: fakeSavedOrderId);
+      expect(result.isLeft(), true);
+    });
+
+    test('update saved order success local', () async {
+      final fakeSavedOrder = SavedOrder.empty().copyWith(id: fakeSavedOrderId);
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
+
+      when(() => orderLocalDataSource.updateDraftOrder()).thenAnswer(
+        (invocation) async => fakeSavedOrder,
+      );
+
+      final result = await orderRepository.updateDraftOrder(
+        user: mockUser,
+        salesOrganisation: mockSalesOrganisation,
+        customerCodeInfo: mockCustomerCodeInfo,
+        shipToInfo: mockShipToInfo,
+        data: AdditionalDetailsData.empty(),
+        grandTotal: 0,
+        orderId: fakeSavedOrderId,
+        cartItems: [],
+      );
+      expect(result.isRight(), true);
+      expect(result.getOrElse(() => SavedOrder.empty()), fakeSavedOrder);
+    });
+
+    test('Update saved order failure local', () async {
+      const fakeSavedOrderId = 'fake-id';
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
+
+      when(() => orderLocalDataSource.updateDraftOrder()).thenThrow(
+        () => MockException(),
+      );
+
+      final result = await orderRepository.updateDraftOrder(
+        user: mockUser,
+        salesOrganisation: mockSalesOrganisation,
+        customerCodeInfo: mockCustomerCodeInfo,
+        shipToInfo: mockShipToInfo,
+        data: AdditionalDetailsData.empty(),
+        grandTotal: 0,
+        orderId: fakeSavedOrderId,
+        cartItems: [],
+      );
+
+      expect(result.isLeft(), true);
+    });
+
+    test('Update saved order detail success remote', () async {
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+
+      when(
+        () => orderRemoteDataSource.updateDraftOrder(
+          updatedOrder: SavedOrderDto.fromDomain(fakeUpdatedSavedOrder),
+        ),
+      ).thenAnswer(
+        (invocation) async => fakeUpdatedSavedOrder,
+      );
+
+      final result = await orderRepository.updateDraftOrder(
+        user: mockUser,
+        salesOrganisation: mockSalesOrganisation,
+        customerCodeInfo: mockCustomerCodeInfo,
+        shipToInfo: mockShipToInfo,
+        data: AdditionalDetailsData.empty(),
+        grandTotal: 0,
+        orderId: fakeSavedOrderId,
+        cartItems: [],
+      );
+      expect(result.isRight(), true);
+      expect(result.getOrElse(() => SavedOrder.empty()), fakeUpdatedSavedOrder);
+    });
+
+    test('Update saved order failure remote', () async {
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+
+      when(
+        () => orderRemoteDataSource.updateDraftOrder(
+          updatedOrder: SavedOrderDto.fromDomain(
+            fakeUpdatedSavedOrder,
+          ),
+        ),
+      ).thenThrow(
+        () => MockException(),
+      );
+
+      final result = await orderRepository.updateDraftOrder(
+        user: mockUser,
+        salesOrganisation: mockSalesOrganisation,
+        customerCodeInfo: mockCustomerCodeInfo,
+        shipToInfo: mockShipToInfo,
+        data: AdditionalDetailsData.empty(),
+        grandTotal: 0,
+        orderId: fakeSavedOrderId,
+        cartItems: [],
+      );
       expect(result.isLeft(), true);
     });
   });

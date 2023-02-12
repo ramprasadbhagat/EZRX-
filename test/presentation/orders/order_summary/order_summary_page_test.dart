@@ -1308,15 +1308,12 @@ void main() {
         final expectedStates = [
           SavedOrderListState.initial().copyWith(
             isCreating: true,
-            isDraftOrderCreated: false,
           ),
           SavedOrderListState.initial().copyWith(
             isCreating: false,
-            isDraftOrderCreated: true,
           ),
           SavedOrderListState.initial().copyWith(
               isCreating: false,
-              isDraftOrderCreated: false,
               apiFailureOrSuccessOption:
                   optionOf(const Left(ApiFailure.other('FAKE-ERROR')))),
         ];
@@ -1595,5 +1592,53 @@ void main() {
     //     expect(quantityUpdatedWidget, findsOneWidget);
     //   },
     // );
+
+    testWidgets(
+      'Show Update Button when add to cart from Saved Order',
+      (tester) async {
+        when(() => orderSummaryBlocMock.state)
+            .thenReturn(OrderSummaryState.initial().copyWith(
+          step: 4,
+          maxSteps: 4,
+        ));
+
+        when(() => additionalDetailsBlocMock.state).thenReturn(
+          AdditionalDetailsState.initial().copyWith(
+            orderId: 'fake-id',
+          ),
+        );
+
+        when(() => userBlocMock.state).thenReturn(UserState.initial());
+
+        when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
+        tester.binding.window.physicalSizeTestValue = const Size(1080, 1920);
+        tester.binding.window.devicePixelRatioTestValue = 1.0;
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+
+        final updateButton = find.text('Update');
+        expect(updateButton, findsNWidgets(5));
+        await tester.tap(updateButton.at(4));
+
+        verify(
+          () => savedOrderListBlocMock.add(
+            SavedOrderListEvent.updateDraft(
+              shipToInfo: ShipToInfo.empty(),
+              user: User.empty(),
+              cartItems: [],
+              grandTotal: 0,
+              customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+                shipToInfos: <ShipToInfo>[
+                  ShipToInfo.empty().copyWith(),
+                ],
+              ),
+              salesOrganisation: SalesOrganisation.empty(),
+              data: AdditionalDetailsData.empty(),
+              orderId: 'fake-id',
+            ),
+          ),
+        ).called(1);
+      },
+    );
   });
 }
