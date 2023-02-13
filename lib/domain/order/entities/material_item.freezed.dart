@@ -38,6 +38,9 @@ mixin _$MaterialItem {
   List<BundleInfo> get bundleInformation => throw _privateConstructorUsedError;
   int get totalQuantity => throw _privateConstructorUsedError;
   TenderContract get tenderContract => throw _privateConstructorUsedError;
+  bool get hasValidTenderContract => throw _privateConstructorUsedError;
+  TenderContractReason get tenderOrderReason =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MaterialItemCopyWith<MaterialItem> get copyWith =>
@@ -72,7 +75,9 @@ abstract class $MaterialItemCopyWith<$Res> {
       Zdp8OverrideValue zdp8Override,
       List<BundleInfo> bundleInformation,
       int totalQuantity,
-      TenderContract tenderContract});
+      TenderContract tenderContract,
+      bool hasValidTenderContract,
+      TenderContractReason tenderOrderReason});
 
   $TenderContractCopyWith<$Res> get tenderContract;
 }
@@ -112,6 +117,8 @@ class _$MaterialItemCopyWithImpl<$Res, $Val extends MaterialItem>
     Object? bundleInformation = null,
     Object? totalQuantity = null,
     Object? tenderContract = null,
+    Object? hasValidTenderContract = null,
+    Object? tenderOrderReason = null,
   }) {
     return _then(_value.copyWith(
       bundleName: null == bundleName
@@ -202,6 +209,14 @@ class _$MaterialItemCopyWithImpl<$Res, $Val extends MaterialItem>
           ? _value.tenderContract
           : tenderContract // ignore: cast_nullable_to_non_nullable
               as TenderContract,
+      hasValidTenderContract: null == hasValidTenderContract
+          ? _value.hasValidTenderContract
+          : hasValidTenderContract // ignore: cast_nullable_to_non_nullable
+              as bool,
+      tenderOrderReason: null == tenderOrderReason
+          ? _value.tenderOrderReason
+          : tenderOrderReason // ignore: cast_nullable_to_non_nullable
+              as TenderContractReason,
     ) as $Val);
   }
 
@@ -244,7 +259,9 @@ abstract class _$$_MaterialItemCopyWith<$Res>
       Zdp8OverrideValue zdp8Override,
       List<BundleInfo> bundleInformation,
       int totalQuantity,
-      TenderContract tenderContract});
+      TenderContract tenderContract,
+      bool hasValidTenderContract,
+      TenderContractReason tenderOrderReason});
 
   @override
   $TenderContractCopyWith<$Res> get tenderContract;
@@ -283,6 +300,8 @@ class __$$_MaterialItemCopyWithImpl<$Res>
     Object? bundleInformation = null,
     Object? totalQuantity = null,
     Object? tenderContract = null,
+    Object? hasValidTenderContract = null,
+    Object? tenderOrderReason = null,
   }) {
     return _then(_$_MaterialItem(
       bundleName: null == bundleName
@@ -373,6 +392,14 @@ class __$$_MaterialItemCopyWithImpl<$Res>
           ? _value.tenderContract
           : tenderContract // ignore: cast_nullable_to_non_nullable
               as TenderContract,
+      hasValidTenderContract: null == hasValidTenderContract
+          ? _value.hasValidTenderContract
+          : hasValidTenderContract // ignore: cast_nullable_to_non_nullable
+              as bool,
+      tenderOrderReason: null == tenderOrderReason
+          ? _value.tenderOrderReason
+          : tenderOrderReason // ignore: cast_nullable_to_non_nullable
+              as TenderContractReason,
     ));
   }
 }
@@ -402,7 +429,9 @@ class _$_MaterialItem extends _MaterialItem {
       required this.zdp8Override,
       required final List<BundleInfo> bundleInformation,
       required this.totalQuantity,
-      required this.tenderContract})
+      required this.tenderContract,
+      required this.hasValidTenderContract,
+      required this.tenderOrderReason})
       : _materials = materials,
         _bonuses = bonuses,
         _bundleInformation = bundleInformation,
@@ -467,10 +496,14 @@ class _$_MaterialItem extends _MaterialItem {
   final int totalQuantity;
   @override
   final TenderContract tenderContract;
+  @override
+  final bool hasValidTenderContract;
+  @override
+  final TenderContractReason tenderOrderReason;
 
   @override
   String toString() {
-    return 'MaterialItem(bundleName: $bundleName, bundleCode: $bundleCode, materials: $materials, qty: $qty, type: $type, comment: $comment, hidePrice: $hidePrice, batchNumber: $batchNumber, bonuses: $bonuses, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, materialNumber: $materialNumber, defaultMaterialDescription: $defaultMaterialDescription, overridenPrice: $overridenPrice, unitOfMeasurement: $unitOfMeasurement, itemRegistrationNumber: $itemRegistrationNumber, materialDescription: $materialDescription, remarks: $remarks, zdp8Override: $zdp8Override, bundleInformation: $bundleInformation, totalQuantity: $totalQuantity, tenderContract: $tenderContract)';
+    return 'MaterialItem(bundleName: $bundleName, bundleCode: $bundleCode, materials: $materials, qty: $qty, type: $type, comment: $comment, hidePrice: $hidePrice, batchNumber: $batchNumber, bonuses: $bonuses, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, materialNumber: $materialNumber, defaultMaterialDescription: $defaultMaterialDescription, overridenPrice: $overridenPrice, unitOfMeasurement: $unitOfMeasurement, itemRegistrationNumber: $itemRegistrationNumber, materialDescription: $materialDescription, remarks: $remarks, zdp8Override: $zdp8Override, bundleInformation: $bundleInformation, totalQuantity: $totalQuantity, tenderContract: $tenderContract, hasValidTenderContract: $hasValidTenderContract, tenderOrderReason: $tenderOrderReason)';
   }
 
   @override
@@ -518,7 +551,11 @@ class _$_MaterialItem extends _MaterialItem {
             (identical(other.totalQuantity, totalQuantity) ||
                 other.totalQuantity == totalQuantity) &&
             (identical(other.tenderContract, tenderContract) ||
-                other.tenderContract == tenderContract));
+                other.tenderContract == tenderContract) &&
+            (identical(other.hasValidTenderContract, hasValidTenderContract) ||
+                other.hasValidTenderContract == hasValidTenderContract) &&
+            (identical(other.tenderOrderReason, tenderOrderReason) ||
+                other.tenderOrderReason == tenderOrderReason));
   }
 
   @override
@@ -545,7 +582,9 @@ class _$_MaterialItem extends _MaterialItem {
         zdp8Override,
         const DeepCollectionEquality().hash(_bundleInformation),
         totalQuantity,
-        tenderContract
+        tenderContract,
+        hasValidTenderContract,
+        tenderOrderReason
       ]);
 
   @JsonKey(ignore: true)
@@ -578,7 +617,9 @@ abstract class _MaterialItem extends MaterialItem {
       required final Zdp8OverrideValue zdp8Override,
       required final List<BundleInfo> bundleInformation,
       required final int totalQuantity,
-      required final TenderContract tenderContract}) = _$_MaterialItem;
+      required final TenderContract tenderContract,
+      required final bool hasValidTenderContract,
+      required final TenderContractReason tenderOrderReason}) = _$_MaterialItem;
   const _MaterialItem._() : super._();
 
   @override
@@ -625,6 +666,10 @@ abstract class _MaterialItem extends MaterialItem {
   int get totalQuantity;
   @override
   TenderContract get tenderContract;
+  @override
+  bool get hasValidTenderContract;
+  @override
+  TenderContractReason get tenderOrderReason;
   @override
   @JsonKey(ignore: true)
   _$$_MaterialItemCopyWith<_$_MaterialItem> get copyWith =>

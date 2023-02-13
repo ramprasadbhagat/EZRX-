@@ -171,6 +171,11 @@ void main() {
           remarks: '',
           bundleInformation: [],
           totalQuantity: 0,
+          hasValidTenderContract: emptyPriceAggregate.tenderContract !=
+                  TenderContract.empty() &&
+              emptyPriceAggregate.tenderContract != TenderContract.noContract(),
+          tenderOrderReason:
+              emptyPriceAggregate.tenderContract.tenderOrderReason,
         );
         expect(
           emptyPriceAggregate.toSavedOrderMaterial(),

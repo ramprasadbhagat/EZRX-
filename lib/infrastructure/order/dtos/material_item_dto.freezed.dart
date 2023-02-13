@@ -40,6 +40,10 @@ mixin _$MaterialItemDto {
   String get materialNumber => throw _privateConstructorUsedError;
   @JsonKey(name: 'tenderContract', readValue: tenderContractOverride)
   TenderContractDto get tenderContractDto => throw _privateConstructorUsedError;
+  @JsonKey(name: 'hasValidTenderContract', defaultValue: false)
+  bool get hasValidTenderContract => throw _privateConstructorUsedError;
+  @JsonKey(name: 'tenderOrderReason', defaultValue: '')
+  String get tenderOrderReason => throw _privateConstructorUsedError;
   @JsonKey(
       name: 'priceOverride',
       defaultValue: 0,
@@ -104,6 +108,10 @@ abstract class $MaterialItemDtoCopyWith<$Res> {
           String materialNumber,
       @JsonKey(name: 'tenderContract', readValue: tenderContractOverride)
           TenderContractDto tenderContractDto,
+      @JsonKey(name: 'hasValidTenderContract', defaultValue: false)
+          bool hasValidTenderContract,
+      @JsonKey(name: 'tenderOrderReason', defaultValue: '')
+          String tenderOrderReason,
       @JsonKey(name: 'priceOverride', defaultValue: 0, readValue: doubleFormatCheck, includeIfNull: false, toJson: overrideTojson)
           double overridenPrice,
       @JsonKey(name: 'unitOfMeasurement', defaultValue: '')
@@ -155,6 +163,8 @@ class _$MaterialItemDtoCopyWithImpl<$Res, $Val extends MaterialItemDto>
     Object? materialGroup4 = null,
     Object? materialNumber = null,
     Object? tenderContractDto = null,
+    Object? hasValidTenderContract = null,
+    Object? tenderOrderReason = null,
     Object? overridenPrice = null,
     Object? unitOfMeasurement = null,
     Object? itemRegistrationNumber = null,
@@ -209,6 +219,14 @@ class _$MaterialItemDtoCopyWithImpl<$Res, $Val extends MaterialItemDto>
           ? _value.tenderContractDto
           : tenderContractDto // ignore: cast_nullable_to_non_nullable
               as TenderContractDto,
+      hasValidTenderContract: null == hasValidTenderContract
+          ? _value.hasValidTenderContract
+          : hasValidTenderContract // ignore: cast_nullable_to_non_nullable
+              as bool,
+      tenderOrderReason: null == tenderOrderReason
+          ? _value.tenderOrderReason
+          : tenderOrderReason // ignore: cast_nullable_to_non_nullable
+              as String,
       overridenPrice: null == overridenPrice
           ? _value.overridenPrice
           : overridenPrice // ignore: cast_nullable_to_non_nullable
@@ -298,6 +316,10 @@ abstract class _$$_MaterialItemDtoCopyWith<$Res>
           String materialNumber,
       @JsonKey(name: 'tenderContract', readValue: tenderContractOverride)
           TenderContractDto tenderContractDto,
+      @JsonKey(name: 'hasValidTenderContract', defaultValue: false)
+          bool hasValidTenderContract,
+      @JsonKey(name: 'tenderOrderReason', defaultValue: '')
+          String tenderOrderReason,
       @JsonKey(name: 'priceOverride', defaultValue: 0, readValue: doubleFormatCheck, includeIfNull: false, toJson: overrideTojson)
           double overridenPrice,
       @JsonKey(name: 'unitOfMeasurement', defaultValue: '')
@@ -348,6 +370,8 @@ class __$$_MaterialItemDtoCopyWithImpl<$Res>
     Object? materialGroup4 = null,
     Object? materialNumber = null,
     Object? tenderContractDto = null,
+    Object? hasValidTenderContract = null,
+    Object? tenderOrderReason = null,
     Object? overridenPrice = null,
     Object? unitOfMeasurement = null,
     Object? itemRegistrationNumber = null,
@@ -402,6 +426,14 @@ class __$$_MaterialItemDtoCopyWithImpl<$Res>
           ? _value.tenderContractDto
           : tenderContractDto // ignore: cast_nullable_to_non_nullable
               as TenderContractDto,
+      hasValidTenderContract: null == hasValidTenderContract
+          ? _value.hasValidTenderContract
+          : hasValidTenderContract // ignore: cast_nullable_to_non_nullable
+              as bool,
+      tenderOrderReason: null == tenderOrderReason
+          ? _value.tenderOrderReason
+          : tenderOrderReason // ignore: cast_nullable_to_non_nullable
+              as String,
       overridenPrice: null == overridenPrice
           ? _value.overridenPrice
           : overridenPrice // ignore: cast_nullable_to_non_nullable
@@ -478,6 +510,10 @@ class _$_MaterialItemDto extends _MaterialItemDto {
           required this.materialNumber,
       @JsonKey(name: 'tenderContract', readValue: tenderContractOverride)
           required this.tenderContractDto,
+      @JsonKey(name: 'hasValidTenderContract', defaultValue: false)
+          required this.hasValidTenderContract,
+      @JsonKey(name: 'tenderOrderReason', defaultValue: '')
+          required this.tenderOrderReason,
       @JsonKey(name: 'priceOverride', defaultValue: 0, readValue: doubleFormatCheck, includeIfNull: false, toJson: overrideTojson)
           required this.overridenPrice,
       @JsonKey(name: 'unitOfMeasurement', defaultValue: '')
@@ -551,6 +587,12 @@ class _$_MaterialItemDto extends _MaterialItemDto {
   @JsonKey(name: 'tenderContract', readValue: tenderContractOverride)
   final TenderContractDto tenderContractDto;
   @override
+  @JsonKey(name: 'hasValidTenderContract', defaultValue: false)
+  final bool hasValidTenderContract;
+  @override
+  @JsonKey(name: 'tenderOrderReason', defaultValue: '')
+  final String tenderOrderReason;
+  @override
   @JsonKey(
       name: 'priceOverride',
       defaultValue: 0,
@@ -599,7 +641,7 @@ class _$_MaterialItemDto extends _MaterialItemDto {
 
   @override
   String toString() {
-    return 'MaterialItemDto(bundleName: $bundleName, bundleCode: $bundleCode, materials: $materials, qty: $qty, hidePrice: $hidePrice, bonuses: $bonuses, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, materialNumber: $materialNumber, tenderContractDto: $tenderContractDto, overridenPrice: $overridenPrice, unitOfMeasurement: $unitOfMeasurement, itemRegistrationNumber: $itemRegistrationNumber, defaultMaterialDescription: $defaultMaterialDescription, materialDescription: $materialDescription, type: $type, comment: $comment, batchNumber: $batchNumber, zdp8Override: $zdp8Override, remarks: $remarks, bundleInformation: $bundleInformation, totalQuantity: $totalQuantity)';
+    return 'MaterialItemDto(bundleName: $bundleName, bundleCode: $bundleCode, materials: $materials, qty: $qty, hidePrice: $hidePrice, bonuses: $bonuses, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, materialNumber: $materialNumber, tenderContractDto: $tenderContractDto, hasValidTenderContract: $hasValidTenderContract, tenderOrderReason: $tenderOrderReason, overridenPrice: $overridenPrice, unitOfMeasurement: $unitOfMeasurement, itemRegistrationNumber: $itemRegistrationNumber, defaultMaterialDescription: $defaultMaterialDescription, materialDescription: $materialDescription, type: $type, comment: $comment, batchNumber: $batchNumber, zdp8Override: $zdp8Override, remarks: $remarks, bundleInformation: $bundleInformation, totalQuantity: $totalQuantity)';
   }
 
   @override
@@ -625,6 +667,10 @@ class _$_MaterialItemDto extends _MaterialItemDto {
                 other.materialNumber == materialNumber) &&
             (identical(other.tenderContractDto, tenderContractDto) ||
                 other.tenderContractDto == tenderContractDto) &&
+            (identical(other.hasValidTenderContract, hasValidTenderContract) ||
+                other.hasValidTenderContract == hasValidTenderContract) &&
+            (identical(other.tenderOrderReason, tenderOrderReason) ||
+                other.tenderOrderReason == tenderOrderReason) &&
             (identical(other.overridenPrice, overridenPrice) ||
                 other.overridenPrice == overridenPrice) &&
             (identical(other.unitOfMeasurement, unitOfMeasurement) ||
@@ -664,6 +710,8 @@ class _$_MaterialItemDto extends _MaterialItemDto {
         materialGroup4,
         materialNumber,
         tenderContractDto,
+        hasValidTenderContract,
+        tenderOrderReason,
         overridenPrice,
         unitOfMeasurement,
         itemRegistrationNumber,
@@ -714,6 +762,10 @@ abstract class _MaterialItemDto extends MaterialItemDto {
           required final String materialNumber,
       @JsonKey(name: 'tenderContract', readValue: tenderContractOverride)
           required final TenderContractDto tenderContractDto,
+      @JsonKey(name: 'hasValidTenderContract', defaultValue: false)
+          required final bool hasValidTenderContract,
+      @JsonKey(name: 'tenderOrderReason', defaultValue: '')
+          required final String tenderOrderReason,
       @JsonKey(name: 'priceOverride', defaultValue: 0, readValue: doubleFormatCheck, includeIfNull: false, toJson: overrideTojson)
           required final double overridenPrice,
       @JsonKey(name: 'unitOfMeasurement', defaultValue: '')
@@ -773,6 +825,12 @@ abstract class _MaterialItemDto extends MaterialItemDto {
   @override
   @JsonKey(name: 'tenderContract', readValue: tenderContractOverride)
   TenderContractDto get tenderContractDto;
+  @override
+  @JsonKey(name: 'hasValidTenderContract', defaultValue: false)
+  bool get hasValidTenderContract;
+  @override
+  @JsonKey(name: 'tenderOrderReason', defaultValue: '')
+  String get tenderOrderReason;
   @override
   @JsonKey(
       name: 'priceOverride',

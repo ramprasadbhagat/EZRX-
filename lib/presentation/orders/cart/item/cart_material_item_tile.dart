@@ -162,10 +162,11 @@ class CartMaterialItemTile extends StatelessWidget {
                 );
               },
             ),
-          BounsTile(
-            material: material,
-            cartItem: cartItem,
-          ),
+          if (material.notHavingContract)
+            BounsTile(
+              material: material,
+              cartItem: cartItem,
+            ),
         ],
       ),
     );

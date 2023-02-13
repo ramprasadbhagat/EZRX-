@@ -119,7 +119,8 @@ class SavedOrderDetailPage extends StatelessWidget {
                                       material.materialNumber.displayMatNo,
                                   qty: material.qty.toString(),
                                 ),
-                          if (material.bonuses.isNotEmpty)
+                          if (material.bonuses.isNotEmpty &&
+                              !material.havingContract)
                             SaveOrderBounsTile(
                               item: material,
                             ),
@@ -201,10 +202,8 @@ class SavedOrderDetailPage extends StatelessWidget {
     context.read<AdditionalDetailsBloc>().add(
           AdditionalDetailsEvent.initFromSavedOrder(
             config: context.read<EligibilityBloc>().state.salesOrgConfigs,
-           customerCodeInfo: context
-                          .read<CustomerCodeBloc>()
-                          .state
-                          .customerCodeInfo,
+            customerCodeInfo:
+                context.read<CustomerCodeBloc>().state.customerCodeInfo,
             orderId: order.id,
           ),
         );

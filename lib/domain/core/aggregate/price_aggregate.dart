@@ -89,6 +89,8 @@ class PriceAggregate with _$PriceAggregate {
       materialGroup2: materialInfo.materialGroup2,
       materialGroup4: materialInfo.materialGroup4,
       tenderContract: tenderContract,
+      hasValidTenderContract: !notHavingContract,
+      tenderOrderReason: tenderContract.tenderOrderReason,
     );
   }
 
@@ -374,6 +376,10 @@ class PriceAggregate with _$PriceAggregate {
   bool get hasClientPrincipal {
     return materialInfo.principalData.principalCode.isSubmitAllowedForClient();
   }
+
+  bool get notHavingContract =>
+      tenderContract == TenderContract.empty() ||
+      tenderContract == TenderContract.noContract();
 
   List<MaterialItemBonus> get getAddedBonusList =>
       List<MaterialItemBonus>.from(addedBonusList)

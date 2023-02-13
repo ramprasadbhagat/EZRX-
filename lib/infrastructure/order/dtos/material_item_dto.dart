@@ -33,9 +33,13 @@ class MaterialItemDto with _$MaterialItemDto {
     @JsonKey(name: 'materialGroup4', defaultValue: '')
         required String materialGroup4,
     @JsonKey(name: 'materialNumber', defaultValue: '')
-    required String materialNumber,
+        required String materialNumber,
     @JsonKey(name: 'tenderContract', readValue: tenderContractOverride)
-    required TenderContractDto tenderContractDto,
+        required TenderContractDto tenderContractDto,
+    @JsonKey(name: 'hasValidTenderContract', defaultValue: false)
+        required bool hasValidTenderContract,
+    @JsonKey(name: 'tenderOrderReason', defaultValue: '')
+        required String tenderOrderReason,
     @JsonKey(
       name: 'priceOverride',
       defaultValue: 0,
@@ -96,6 +100,8 @@ class MaterialItemDto with _$MaterialItemDto {
       materials: materials.map((e) => e.toDomain()).toList(),
       totalQuantity: totalQuantity,
       tenderContract: tenderContractDto.toDomain(),
+      hasValidTenderContract: hasValidTenderContract,
+      tenderOrderReason: TenderContractReason(tenderOrderReason),
     );
   }
 
@@ -127,7 +133,10 @@ class MaterialItemDto with _$MaterialItemDto {
           .map((e) => BundleInfoDto.fromDomain(e))
           .toList(),
       totalQuantity: materialItem.totalQuantity,
-      tenderContractDto: TenderContractDto.fromDomain(materialItem.tenderContract),
+      tenderContractDto:
+          TenderContractDto.fromDomain(materialItem.tenderContract),
+      hasValidTenderContract: materialItem.hasValidTenderContract,
+      tenderOrderReason: materialItem.tenderOrderReason.getOrDefaultValue(''),
     );
   }
 

@@ -34,6 +34,8 @@ class MaterialItem with _$MaterialItem {
     required List<BundleInfo> bundleInformation,
     required int totalQuantity,
     required TenderContract tenderContract,
+    required bool hasValidTenderContract,
+    required TenderContractReason tenderOrderReason,
   }) = _MaterialItem;
 
   factory MaterialItem.empty() => MaterialItem(
@@ -59,6 +61,8 @@ class MaterialItem with _$MaterialItem {
         bundleInformation: [],
         totalQuantity: 0,
         tenderContract: TenderContract.empty(),
+        hasValidTenderContract: false,
+        tenderOrderReason: TenderContract.empty().tenderOrderReason,
       );
 
   MaterialQueryInfo get queryInfo => MaterialQueryInfo.fromSavedOrder(
@@ -68,4 +72,8 @@ class MaterialItem with _$MaterialItem {
   String get displayDescription => materialDescription.isEmpty
       ? defaultMaterialDescription
       : materialDescription;
+
+  bool get havingContract =>
+      tenderContract != TenderContract.empty() &&
+      tenderContract != TenderContract.noContract();
 }
