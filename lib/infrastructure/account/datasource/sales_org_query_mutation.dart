@@ -27,6 +27,7 @@ class SalesOrgQueryMutation {
           enableGMC
           enableGreenDelivery
           greenDeliveryDelayInDays
+          greenDeliveryUserRole
           supportURL
           minOrderAmount
           netPriceOverride

@@ -89,6 +89,7 @@ void main() {
     disableReturnsAccess: false,
     enableGreenDelivery: false,
     greenDeliveryDelayInDays: 0,
+    greenDeliveryUserRole: GreenDeliveryUserRole(0),
   );
 
   final fakeCustomerCode = CustomerCodeInfo.empty().copyWith(

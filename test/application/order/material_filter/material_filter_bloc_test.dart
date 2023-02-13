@@ -98,6 +98,7 @@ void main() {
     disableReturnsAccess: false,
     enableGreenDelivery: false,
     greenDeliveryDelayInDays: 0,
+    greenDeliveryUserRole: GreenDeliveryUserRole(0),
   );
 
   const fakeSelectedPrincipalFilterCategory = MaterialFilterType.principal;

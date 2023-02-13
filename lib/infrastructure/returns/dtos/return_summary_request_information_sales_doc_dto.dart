@@ -1,5 +1,4 @@
 import 'package:ezrxmobile/domain/returns/entities/return_summary_request_information_sales_doc.dart';
-import 'package:ezrxmobile/domain/returns/entities/return_summary_request_information_sales_doc_credit_notes.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:ezrxmobile/infrastructure/returns/dtos/return_summary_request_information_sales_doc_credit_notes_dto.dart';

@@ -1518,6 +1518,366 @@ void main() {
       },
     );
 
+    testWidgets(
+        'should show green delivery box if roleType is external_sales_rep',
+        (tester) async {
+      final config = SalesOrganisationConfigs.empty().copyWith(
+        enableReferenceNote: true,
+        enableVat: true,
+        enableFutureDeliveryDay: true,
+        enableMobileNumber: true,
+        enableSpecialInstructions: true,
+        disableOrderType: false,
+        enableCollectiveNumber: true,
+        enablePaymentTerms: true,
+        futureDeliveryDay: FutureDeliveryDay('2'),
+        currency: Currency('sgd'),
+        enableGreenDelivery: true,
+        greenDeliveryDelayInDays: 3,
+        greenDeliveryUserRole: GreenDeliveryUserRole(3),
+      );
+
+      when(() => orderSummaryBlocMock.state)
+          .thenReturn(OrderSummaryState.initial().copyWith(
+        step: 4,
+        maxSteps: 4,
+      ));
+      when(() => userBlocMock.state).thenReturn(UserState.initial().copyWith(
+          user: User.empty().copyWith(
+              role: Role.empty()
+                  .copyWith(type: RoleType('external_sales_rep')))));
+
+      when(() => salesOrgBlocMock.state)
+          .thenReturn(SalesOrgState.initial().copyWith(
+        configs: config,
+      ));
+
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+            salesOrganisation: SalesOrganisation.empty().copyWith(
+              salesOrg: SalesOrg('2601'),
+            ),
+            salesOrgConfigs: config,
+            user: User.empty().copyWith(
+                role: Role.empty()
+                    .copyWith(type: RoleType('external_sales_rep')))),
+      );
+
+      await tester.pumpWidget(getWidget());
+
+      final greeenDeliveryBox = find.byKey(const Key('greenDeliveryBox'));
+      expect(greeenDeliveryBox, findsOneWidget);
+    });
+
+    testWidgets(
+        'should show green delivery box if roleType is internal_sales_rep',
+        (tester) async {
+      final config = SalesOrganisationConfigs.empty().copyWith(
+        enableReferenceNote: true,
+        enableVat: true,
+        enableFutureDeliveryDay: true,
+        enableMobileNumber: true,
+        enableSpecialInstructions: true,
+        disableOrderType: false,
+        enableCollectiveNumber: true,
+        enablePaymentTerms: true,
+        futureDeliveryDay: FutureDeliveryDay('2'),
+        currency: Currency('sgd'),
+        enableGreenDelivery: true,
+        greenDeliveryDelayInDays: 3,
+        greenDeliveryUserRole: GreenDeliveryUserRole(3),
+      );
+
+      final user = User.empty().copyWith(
+          role: Role.empty().copyWith(type: RoleType('internal_sales_rep')));
+
+      when(() => orderSummaryBlocMock.state)
+          .thenReturn(OrderSummaryState.initial().copyWith(
+        step: 4,
+        maxSteps: 4,
+      ));
+      when(() => userBlocMock.state).thenReturn(UserState.initial().copyWith(
+        user: user,
+      ));
+
+      when(() => salesOrgBlocMock.state)
+          .thenReturn(SalesOrgState.initial().copyWith(
+        configs: config,
+      ));
+
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: SalesOrganisation.empty().copyWith(
+            salesOrg: SalesOrg('2601'),
+          ),
+          salesOrgConfigs: config,
+          user: user,
+        ),
+      );
+
+      await tester.pumpWidget(getWidget());
+
+      final greeenDeliveryBox = find.byKey(const Key('greenDeliveryBox'));
+      expect(greeenDeliveryBox, findsOneWidget);
+    });
+
+    testWidgets('should show green delivery box if roleType is client',
+        (tester) async {
+      final config = SalesOrganisationConfigs.empty().copyWith(
+        enableReferenceNote: true,
+        enableVat: true,
+        enableFutureDeliveryDay: true,
+        enableMobileNumber: true,
+        enableSpecialInstructions: true,
+        disableOrderType: false,
+        enableCollectiveNumber: true,
+        enablePaymentTerms: true,
+        futureDeliveryDay: FutureDeliveryDay('2'),
+        currency: Currency('sgd'),
+        enableGreenDelivery: true,
+        greenDeliveryDelayInDays: 3,
+        greenDeliveryUserRole: GreenDeliveryUserRole(1),
+      );
+
+      final user = User.empty()
+          .copyWith(role: Role.empty().copyWith(type: RoleType('client_user')));
+
+      when(() => orderSummaryBlocMock.state)
+          .thenReturn(OrderSummaryState.initial().copyWith(
+        step: 4,
+        maxSteps: 4,
+      ));
+      when(() => userBlocMock.state).thenReturn(UserState.initial().copyWith(
+        user: user,
+      ));
+
+      when(() => salesOrgBlocMock.state)
+          .thenReturn(SalesOrgState.initial().copyWith(
+        configs: config,
+      ));
+
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: SalesOrganisation.empty().copyWith(
+            salesOrg: SalesOrg('2601'),
+          ),
+          salesOrgConfigs: config,
+          user: user,
+        ),
+      );
+
+      await tester.pumpWidget(getWidget());
+
+      final greeenDeliveryBox = find.byKey(const Key('greenDeliveryBox'));
+      expect(greeenDeliveryBox, findsOneWidget);
+    });
+
+    testWidgets('should show green delivery box if roleType is client_user',
+        (tester) async {
+      final config = SalesOrganisationConfigs.empty().copyWith(
+        enableReferenceNote: true,
+        enableVat: true,
+        enableFutureDeliveryDay: true,
+        enableMobileNumber: true,
+        enableSpecialInstructions: true,
+        disableOrderType: false,
+        enableCollectiveNumber: true,
+        enablePaymentTerms: true,
+        futureDeliveryDay: FutureDeliveryDay('2'),
+        currency: Currency('sgd'),
+        enableGreenDelivery: true,
+        greenDeliveryDelayInDays: 3,
+        greenDeliveryUserRole: GreenDeliveryUserRole(2),
+      );
+
+      final user = User.empty()
+          .copyWith(role: Role.empty().copyWith(type: RoleType('client_user')));
+
+      when(() => orderSummaryBlocMock.state)
+          .thenReturn(OrderSummaryState.initial().copyWith(
+        step: 4,
+        maxSteps: 4,
+      ));
+      when(() => userBlocMock.state).thenReturn(UserState.initial().copyWith(
+        user: user,
+      ));
+
+      when(() => salesOrgBlocMock.state)
+          .thenReturn(SalesOrgState.initial().copyWith(
+        configs: config,
+      ));
+
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: SalesOrganisation.empty().copyWith(
+            salesOrg: SalesOrg('2601'),
+          ),
+          salesOrgConfigs: config,
+          user: user,
+        ),
+      );
+
+      await tester.pumpWidget(getWidget());
+
+      final greeenDeliveryBox = find.byKey(const Key('greenDeliveryBox'));
+      expect(greeenDeliveryBox, findsOneWidget);
+    });
+
+    testWidgets('should show green delivery box if roleType is client_admin',
+        (tester) async {
+      final config = SalesOrganisationConfigs.empty().copyWith(
+        enableReferenceNote: true,
+        enableVat: true,
+        enableFutureDeliveryDay: true,
+        enableMobileNumber: true,
+        enableSpecialInstructions: true,
+        disableOrderType: false,
+        enableCollectiveNumber: true,
+        enablePaymentTerms: true,
+        futureDeliveryDay: FutureDeliveryDay('2'),
+        currency: Currency('sgd'),
+        enableGreenDelivery: true,
+        greenDeliveryDelayInDays: 3,
+        greenDeliveryUserRole: GreenDeliveryUserRole(2),
+      );
+
+      final user = User.empty().copyWith(
+          role: Role.empty().copyWith(type: RoleType('client_admin')));
+
+      when(() => orderSummaryBlocMock.state)
+          .thenReturn(OrderSummaryState.initial().copyWith(
+        step: 4,
+        maxSteps: 4,
+      ));
+      when(() => userBlocMock.state).thenReturn(UserState.initial().copyWith(
+        user: user,
+      ));
+
+      when(() => salesOrgBlocMock.state)
+          .thenReturn(SalesOrgState.initial().copyWith(
+        configs: config,
+      ));
+
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: SalesOrganisation.empty().copyWith(
+            salesOrg: SalesOrg('2601'),
+          ),
+          salesOrgConfigs: config,
+          user: user,
+        ),
+      );
+
+      await tester.pumpWidget(getWidget());
+
+      final greeenDeliveryBox = find.byKey(const Key('greenDeliveryBox'));
+      expect(greeenDeliveryBox, findsOneWidget);
+    });
+
+    testWidgets(
+        'should not show green delivery box if greenDeliveryUserRole is 0',
+        (tester) async {
+      final config = SalesOrganisationConfigs.empty().copyWith(
+        enableReferenceNote: true,
+        enableVat: true,
+        enableFutureDeliveryDay: true,
+        enableMobileNumber: true,
+        enableSpecialInstructions: true,
+        disableOrderType: false,
+        enableCollectiveNumber: true,
+        enablePaymentTerms: true,
+        futureDeliveryDay: FutureDeliveryDay('2'),
+        currency: Currency('sgd'),
+        enableGreenDelivery: true,
+        greenDeliveryDelayInDays: 3,
+        greenDeliveryUserRole: GreenDeliveryUserRole(0),
+      );
+
+      final user = User.empty().copyWith(
+          role: Role.empty().copyWith(type: RoleType('client_admin')));
+
+      when(() => orderSummaryBlocMock.state)
+          .thenReturn(OrderSummaryState.initial().copyWith(
+        step: 4,
+        maxSteps: 4,
+      ));
+      when(() => userBlocMock.state).thenReturn(UserState.initial().copyWith(
+        user: user,
+      ));
+
+      when(() => salesOrgBlocMock.state)
+          .thenReturn(SalesOrgState.initial().copyWith(
+        configs: config,
+      ));
+
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: SalesOrganisation.empty().copyWith(
+            salesOrg: SalesOrg('2601'),
+          ),
+          salesOrgConfigs: config,
+          user: user,
+        ),
+      );
+
+      await tester.pumpWidget(getWidget());
+
+      final greeenDeliveryBox = find.byKey(const Key('greenDeliveryBox'));
+      expect(greeenDeliveryBox, findsNothing);
+    });
+
+    testWidgets(
+        'should not show green delivery box if greenDeliveryUserRole is 2 and userRole is root_admin',
+        (tester) async {
+      final config = SalesOrganisationConfigs.empty().copyWith(
+        enableReferenceNote: true,
+        enableVat: true,
+        enableFutureDeliveryDay: true,
+        enableMobileNumber: true,
+        enableSpecialInstructions: true,
+        disableOrderType: false,
+        enableCollectiveNumber: true,
+        enablePaymentTerms: true,
+        futureDeliveryDay: FutureDeliveryDay('2'),
+        currency: Currency('sgd'),
+        enableGreenDelivery: true,
+        greenDeliveryDelayInDays: 3,
+        greenDeliveryUserRole: GreenDeliveryUserRole(2),
+      );
+
+      final user = User.empty()
+          .copyWith(role: Role.empty().copyWith(type: RoleType('root_admin')));
+
+      when(() => orderSummaryBlocMock.state)
+          .thenReturn(OrderSummaryState.initial().copyWith(
+        step: 4,
+        maxSteps: 4,
+      ));
+      when(() => userBlocMock.state).thenReturn(UserState.initial().copyWith(
+        user: user,
+      ));
+
+      when(() => salesOrgBlocMock.state)
+          .thenReturn(SalesOrgState.initial().copyWith(
+        configs: config,
+      ));
+
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: SalesOrganisation.empty().copyWith(
+            salesOrg: SalesOrg('2601'),
+          ),
+          salesOrgConfigs: config,
+          user: user,
+        ),
+      );
+
+      await tester.pumpWidget(getWidget());
+
+      final greeenDeliveryBox = find.byKey(const Key('greenDeliveryBox'));
+      expect(greeenDeliveryBox, findsNothing);
+    });
+
     // testWidgets(
     //   '=> test cart item update',
     //   (tester) async {

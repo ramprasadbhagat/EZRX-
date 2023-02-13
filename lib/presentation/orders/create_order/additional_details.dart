@@ -24,6 +24,8 @@ class AdditionalDetails extends StatelessWidget {
     required this.config,
   }) : super(key: key);
 
+
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -109,8 +111,9 @@ class AdditionalDetails extends StatelessWidget {
                 )
               : const SizedBox.shrink(),
           const SizedBox(height: 9),
-          config.enableGreenDelivery
+          context.read<EligibilityBloc>().state.showGreenDeliveryBox
               ? _GreenDeliveryBox(
+                  key: const ValueKey('greenDeliveryBox'),
                   greenDeliveryDelayInDays:
                       config.greenDeliveryDelayInDays.toString(),
                   onCheckBoxChanged: (bool value) {
@@ -633,9 +636,10 @@ class _GreenDeliveryBox extends StatefulWidget {
   final void Function(bool) onCheckBoxChanged;
 
   const _GreenDeliveryBox({
+    Key? key,
     required this.greenDeliveryDelayInDays,
     required this.onCheckBoxChanged,
-  });
+  }) : super(key: key);
   @override
   State<_GreenDeliveryBox> createState() => _GreenDeliveryBoxState();
 }

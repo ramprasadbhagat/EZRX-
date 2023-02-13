@@ -166,6 +166,9 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
     @JsonKey(name: 'greenDeliveryDelayInDays', defaultValue: 2)
     @HiveField(150, defaultValue: 2)
         required int greenDeliveryDelayInDays,
+    @JsonKey(name: 'greenDeliveryUserRole', defaultValue: 0)
+    @HiveField(151, defaultValue: 0)
+        required int greenDeliveryUserRole,
   }) = _SalesOrganisationConfigsDto;
 
   factory SalesOrganisationConfigsDto.fromDomain(
@@ -204,6 +207,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       enableListPrice: configs.enableListPrice,
       enableGreenDelivery: configs.enableGreenDelivery,
       greenDeliveryDelayInDays: configs.greenDeliveryDelayInDays,
+      greenDeliveryUserRole: configs.greenDeliveryUserRole.getOrCrash(),
       disablePaymentTermsDisplay: configs.disablePaymentTermsDisplay,
       disableDeliveryDate: configs.disableDeliveryDate,
       enableBillTo: configs.enableBillTo,
@@ -259,6 +263,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       enableListPrice: enableListPrice,
       enableGreenDelivery: enableGreenDelivery,
       greenDeliveryDelayInDays: greenDeliveryDelayInDays,
+      greenDeliveryUserRole: GreenDeliveryUserRole(greenDeliveryUserRole),
       priceOverride: priceOverride,
       disablePaymentTermsDisplay: disablePaymentTermsDisplay,
       disableDeliveryDate: disableDeliveryDate,

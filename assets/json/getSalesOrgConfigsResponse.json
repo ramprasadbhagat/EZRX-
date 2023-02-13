@@ -21,6 +21,7 @@
             "enableGMC": false,
             "enableGreenDelivery": false,
             "greenDeliveryDelayInDays": 0,
+            "greenDeliveryUserRole": 0,
             "supportURL": "",
             "minOrderAmount": "100",
             "netPriceOverride": false,

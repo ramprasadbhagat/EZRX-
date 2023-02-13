@@ -181,6 +181,14 @@ class RoleType extends ValueObject<String> {
     return isReturnApprover || isReturnAdmin || isReturnRequestor;
   }
 
+  bool get isCustomer {
+    return isClientAdmin || isClientUser;
+  }
+
+  bool get isSalesRepRole {
+    return isInternalSalesRep || isExternalSalesRep;
+  }
+
   const RoleType._(this.value);
 }
 
@@ -309,4 +317,27 @@ class FutureDeliveryDay extends ValueObject<String> {
 
   String get validatedFutureDeliveryDate =>
       removeDash(value.getOrElse(() => ''));
+}
+
+class GreenDeliveryUserRole extends ValueObject<int> {
+  @override
+  final Either<ValueFailure<int>, int> value;
+
+  factory GreenDeliveryUserRole(int input) {
+    return GreenDeliveryUserRole._(Right(input));
+  }
+
+  bool get isAllUsers {
+    return value.getOrElse(() => 0) == 1;
+  }
+
+  bool get isCustomer {
+    return value.getOrElse(() => 0) == 2;
+  }
+
+  bool get isSalesReps {
+    return value.getOrElse(() => 0) == 3;
+  }
+
+  const GreenDeliveryUserRole._(this.value);
 }

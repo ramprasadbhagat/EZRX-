@@ -42,6 +42,7 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
     required bool enableBillTo,
     required bool enableGreenDelivery,
     required int greenDeliveryDelayInDays,
+    required GreenDeliveryUserRole greenDeliveryUserRole,
     required bool showPOAttachment,
     required bool hideStockDisplay,
     required bool expiryDateDisplay,
@@ -113,6 +114,7 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
         disableReturnsAccess: false,
         enableGreenDelivery: false,
         greenDeliveryDelayInDays: 0,
+        greenDeliveryUserRole: GreenDeliveryUserRole(0),
       );
 
   String get getConfigLangauge {

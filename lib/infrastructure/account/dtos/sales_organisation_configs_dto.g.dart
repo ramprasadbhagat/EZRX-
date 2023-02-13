@@ -76,13 +76,14 @@ class SalesOrganisationConfigsDtoAdapter
       disableReturnsAccess: fields[148] == null ? false : fields[148] as bool,
       enableGreenDelivery: fields[149] == null ? false : fields[149] as bool,
       greenDeliveryDelayInDays: fields[150] == null ? 2 : fields[150] as int,
+      greenDeliveryUserRole: fields[151] == null ? 0 : fields[151] as int,
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_SalesOrganisationConfigsDto obj) {
     writer
-      ..writeByte(51)
+      ..writeByte(52)
       ..writeByte(100)
       ..write(obj.disableProcessingStatus)
       ..writeByte(101)
@@ -183,6 +184,8 @@ class SalesOrganisationConfigsDtoAdapter
       ..write(obj.enableGreenDelivery)
       ..writeByte(150)
       ..write(obj.greenDeliveryDelayInDays)
+      ..writeByte(151)
+      ..write(obj.greenDeliveryUserRole)
       ..writeByte(7)
       ..write(obj.principalList);
   }
@@ -262,6 +265,7 @@ _$_SalesOrganisationConfigsDto _$$_SalesOrganisationConfigsDtoFromJson(
       disableReturnsAccess: json['disableReturnsAccess'] as bool? ?? false,
       enableGreenDelivery: json['enableGreenDelivery'] as bool? ?? false,
       greenDeliveryDelayInDays: json['greenDeliveryDelayInDays'] as int? ?? 2,
+      greenDeliveryUserRole: json['greenDeliveryUserRole'] as int? ?? 0,
     );
 
 Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
@@ -319,4 +323,5 @@ Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
       'disableReturnsAccess': instance.disableReturnsAccess,
       'enableGreenDelivery': instance.enableGreenDelivery,
       'greenDeliveryDelayInDays': instance.greenDeliveryDelayInDays,
+      'greenDeliveryUserRole': instance.greenDeliveryUserRole,
     };

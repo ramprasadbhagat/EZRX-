@@ -160,9 +160,33 @@ class EligibilityState with _$EligibilityState {
   bool get shouldDisplayVATInPercentage =>
       salesOrgConfigs.enableVat && !salesOrgConfigs.currency.isVN ||
       salesOrgConfigs.enableTaxAtTotalLevelOnly;
-      
+
   bool get isReturnApprover =>
       user.role.type.isReturnApprover ||
       user.role.type.isRootAdmin ||
       user.role.type.isReturnAdmin;
+
+  bool get showGreenDeliveryBox {
+    final gdEligibleRole = salesOrgConfigs.greenDeliveryUserRole;
+    final roleType = user.role.type;
+
+    if (!salesOrgConfigs.enableGreenDelivery) {
+      return false;
+    }
+
+    if (gdEligibleRole.isAllUsers) {
+      return true;
+    }
+
+    if (gdEligibleRole.isCustomer && roleType.isCustomer) {
+      return true;
+    }
+
+    if (gdEligibleRole.isSalesReps && roleType.isSalesRepRole) {
+      return true;
+    }
+
+    return false;
+  }
+
 }
