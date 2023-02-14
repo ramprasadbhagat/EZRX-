@@ -19,44 +19,47 @@ class BonusDiscountLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        if (materialInfo.hasValidTenderContract)
-          Padding(
-            padding: const EdgeInsets.fromLTRB(8, 8, 0, 8),
-            child: Text(
-              tenderContractNumber,
-              style: Theme.of(context).textTheme.bodyText1?.apply(
-                    color: ZPColors.tender,
-                  ),
+    return Padding(
+      padding: const EdgeInsets.only(right: 8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          if (materialInfo.hasValidTenderContract)
+            Padding(
+              padding: const EdgeInsets.fromLTRB(8, 8, 0, 8),
+              child: Text(
+                tenderContractNumber,
+                style: Theme.of(context).textTheme.bodyText1?.apply(
+                      color: ZPColors.tender,
+                    ),
+              ),
             ),
-          ),
-        if (!materialInfo.hidePrice && price.bonuses.isNotEmpty)
-          Padding(
-            padding: const EdgeInsets.fromLTRB(8, 8, 0, 8),
-            child: SvgPicture.asset(
-              'assets/svg/bonus.svg',
-              key: const ValueKey('bonusLogo'),
+          if (!materialInfo.hidePrice && price.bonuses.isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.fromLTRB(8, 8, 0, 8),
+              child: SvgPicture.asset(
+                'assets/svg/bonus.svg',
+                key: const ValueKey('bonusLogo'),
+              ),
             ),
-          ),
-        if (!materialInfo.hidePrice && price.tiers.isNotEmpty)
-          Padding(
-            padding: const EdgeInsets.fromLTRB(8, 8, 0, 8),
-            child: SvgPicture.asset(
-              'assets/svg/tieredPricing.svg',
-              key: const ValueKey('tieredPricingLogo'),
+          if (!materialInfo.hidePrice && price.tiers.isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.fromLTRB(8, 8, 0, 8),
+              child: SvgPicture.asset(
+                'assets/svg/tieredPricing.svg',
+                key: const ValueKey('tieredPricingLogo'),
+              ),
             ),
-          ),
-        if (price.zmgDiscount)
-          const Padding(
-            padding: EdgeInsets.only(left: 8),
-            child: CustomLabel(
-              key: ValueKey('zmgDiscountLable'),
-              textValue: 'ZMG',
+          if (price.zmgDiscount)
+            const Padding(
+              padding: EdgeInsets.only(left: 8),
+              child: CustomLabel(
+                key: ValueKey('zmgDiscountLable'),
+                textValue: 'ZMG',
+              ),
             ),
-          ),
-      ],
+        ],
+      ),
     );
   }
 }

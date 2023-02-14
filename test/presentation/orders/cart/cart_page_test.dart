@@ -1458,10 +1458,11 @@ void main() {
       testWidgets('Test have cart item update cart', (tester) async {
         final newList = [
           mockCartItemWithDataList.first.copyWith(
+            materialInfo: mockCartItemWithDataList.first.materialInfo.copyWith(hasValidTenderContract: true,),
             tenderContract: TenderContract.empty().copyWith(
               contractNumber:
-                  TenderContractNumber.tenderContractItemNumber('0000001234'),
-              tenderOrderReason: TenderContractReason('730'),
+                  TenderContractNumber.tenderContractItemNumber('0000123'),
+              tenderOrderReason: TenderContractReason('750'),
             ),
           )
         ];
@@ -1495,11 +1496,11 @@ void main() {
             cartItem: mockCartItemBundles.first.copyWith(
               materialInfo: MaterialInfo.empty().copyWith(
                   hasValidTenderContract: true,
-                  materialNumber: MaterialNumber('0000001234')),
+                  materialNumber: MaterialNumber('0000123')),
               tenderContract: TenderContract.empty().copyWith(
                 contractNumber:
-                    TenderContractNumber.tenderContractItemNumber('0000001234'),
-                tenderOrderReason: TenderContractReason('730'),
+                    TenderContractNumber.tenderContractItemNumber('0000123'),
+                tenderOrderReason: TenderContractReason('750'),
               ),
             ),
           ),
@@ -1514,7 +1515,7 @@ void main() {
         final item = find.byKey(Key(
             'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber}'));
         expect(item, findsOneWidget);
-        await tester.tap(item, warnIfMissed: false);
+        await tester.tap(item);
         await tester.pump();
         final updateCartBottomSheet = find.byType(UpdateCartButton);
         expect(updateCartBottomSheet, findsOneWidget);

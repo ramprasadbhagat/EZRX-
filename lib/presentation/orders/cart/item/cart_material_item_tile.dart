@@ -49,6 +49,8 @@ class CartMaterialItemTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final tenderContractNumber = material.tenderContract.contractNumber;
+
     return Card(
       child: Column(
         children: [
@@ -72,22 +74,40 @@ class CartMaterialItemTile extends StatelessWidget {
                   cartItem: material,
                 );
               },
+              leading: showCheckBox?
+              Checkbox(
+                onChanged: (value) {
+                  if (value == null) return;
+                  context.read<CartBloc>().add(
+                    CartEvent.selectButtonTapped(
+                      cartItem: cartItem,
+                    ),
+                  );
+                },
+                value: cartItem.isSelected,
+              ):const SizedBox.shrink(),
               title: Column(
                 children: [
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      if (showCheckBox)
-                        Checkbox(
-                          onChanged: (value) {
-                            if (value == null) return;
-                            context.read<CartBloc>().add(
-                                  CartEvent.selectButtonTapped(
-                                    cartItem: cartItem,
-                                  ),
-                                );
-                          },
-                          value: cartItem.isSelected,
+                      Expanded(
+                        child: Text(
+                          material.materialInfo.materialNumber.displayMatNo,
+                          style: Theme.of(context).textTheme.titleSmall?.apply(
+                            color: ZPColors.kPrimaryColor,
+                          ),
                         ),
+                      ),
+                      BonusDiscountLabel(
+                        price: material.price,
+                        materialInfo: material.materialInfo,
+                        tenderContractNumber:  tenderContractNumber.displayTenderContractNumberInCart,
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
                       CartMaterialItemTileDetails(
                         material: material,
                         taxCode: taxCode,
@@ -103,13 +123,13 @@ class CartMaterialItemTile extends StatelessWidget {
                               .isZDP8Override)
                             BlocProvider(
                               create: (context) =>
-                                  locator<DiscountOverrideBloc>()
-                                    ..add(
-                                      DiscountOverrideEvent.update(
-                                        price: material.price,
-                                        showErrorMessages: false,
-                                      ),
-                                    ),
+                              locator<DiscountOverrideBloc>()
+                                ..add(
+                                  DiscountOverrideEvent.update(
+                                    price: material.price,
+                                    showErrorMessages: false,
+                                  ),
+                                ),
                               child: DiscountOverrideToggle(
                                 cartItem: material,
                               ),
@@ -128,15 +148,15 @@ class CartMaterialItemTile extends StatelessWidget {
                     RemarksMessage(
                       key: Key('remarks${material.materialInfo.remarks}'),
                       message:
-                          '${'Remarks: '.tr()}${material.materialInfo.remarks}',
+                      '${'Remarks: '.tr()}${material.materialInfo.remarks}',
                       showEditDeleteDialog: EditDeleteDialog(
                         onDelete: () {
                           context.read<CartBloc>().add(
-                                CartEvent.addRemarkToCartItem(
-                                  item: cartItem,
-                                  message: '',
-                                ),
-                              );
+                            CartEvent.addRemarkToCartItem(
+                              item: cartItem,
+                              message: '',
+                            ),
+                          );
                         },
                         onEdit: () {
                           AddRemarkDialog.cartItem(
@@ -202,30 +222,12 @@ class CartMaterialItemTileDetails extends StatelessWidget {
     final enableListPrice =
         context.read<SalesOrgBloc>().state.configs.enableListPrice;
     final enableVat = context.read<SalesOrgBloc>().state.configs.enableVat;
-    final tenderContractNumber = material.tenderContract.contractNumber;
 
     return Expanded(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                material.materialInfo.materialNumber.displayMatNo,
-                style: Theme.of(context).textTheme.titleSmall?.apply(
-                      color: ZPColors.kPrimaryColor,
-                    ),
-              ),
-              BonusDiscountLabel(
-                price: material.price,
-                materialInfo: material.materialInfo,
-                tenderContractNumber:
-                    tenderContractNumber.displayTenderContractNumberInCart,
-              ),
-            ],
-          ),
           Text(
             material.materialInfo.materialDescription,
             style: Theme.of(context).textTheme.titleSmall,
@@ -423,7 +425,7 @@ class _CartItemQuantityInputState extends State<_CartItemQuantityInput> {
         controller.text = widget.cartItem.quantity.toString();
 
         return QuantityInput(
-          isEnabled: widget.cartItem.tenderContract == TenderContract.empty() &&
+          isEnabled: !widget.cartItem.materialInfo.hasValidTenderContract &&
               !state.isFetching,
           quantityAddKey: const Key('cartAdd'),
           quantityDeleteKey: const Key('cartDelete'),
