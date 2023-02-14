@@ -214,7 +214,6 @@ void _addToCartPressed(
   MaterialPriceDetailState state,
   OrderHistoryDetailsOrderItem orderHistoryDetailsOrderItem,
 ) {
-  final cartBloc = context.read<CartBloc>();
   final queryInfo = MaterialQueryInfo.fromOrderHistoryDetails(
     orderHistoryDetailsOrderItem: orderHistoryDetailsOrderItem,
   );
@@ -227,7 +226,6 @@ void _addToCartPressed(
         materialInfo: itemInfo.info,
         salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
         quantity: 1,
-        discountedMaterialCount: cartBloc.state.zmgMaterialCount,
         bundle: Bundle.empty(),
         addedBonusList: [],
         stockInfo: StockInfo.empty().copyWith(

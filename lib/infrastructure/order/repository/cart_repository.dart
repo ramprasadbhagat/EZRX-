@@ -379,7 +379,6 @@ class CartRepository implements ICartRepository {
   List<CartItem> updateDiscountQty({
     required List<CartItem> items,
   }) {
-    final zmgDiscountQty = items.allZmgMaterialsQty;
     final updatedCart = items.map((item) {
       switch (item.itemType) {
         case CartItemType.material:
@@ -387,7 +386,9 @@ class CartRepository implements ICartRepository {
           var updatedMaterial = material.copyWith(discountedMaterialCount: 0);
           if (material.price.zmgDiscount) {
             updatedMaterial = material.copyWith(
-              discountedMaterialCount: zmgDiscountQty,
+              discountedMaterialCount: items.zmgMaterialsQty(
+                material.materialInfo.materialGroup2,
+              ),
             );
           } else if (material.price.isTireDiscountEligible) {
             updatedMaterial = material.copyWith(

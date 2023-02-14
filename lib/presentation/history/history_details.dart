@@ -613,7 +613,6 @@ class _ReOrder extends StatelessWidget {
       materialInfo: itemInfo.info,
       salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
       quantity: queryInfo.qty.getOrCrash(),
-      discountedMaterialCount: context.read<CartBloc>().state.zmgMaterialCount,
       bundle: Bundle.empty(),
       addedBonusList: [],
       stockInfo: StockInfo.empty().copyWith(

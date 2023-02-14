@@ -28,6 +28,8 @@ class OrderMaterialItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final config = context.read<SalesOrgBloc>().state.configs;
+
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(10.0),
@@ -57,12 +59,9 @@ class OrderMaterialItem extends StatelessWidget {
                     children: [
                       Text(
                         'Material Description: '.tr(),
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleMedium
-                            ?.apply(
-                          color: ZPColors.darkerGreen,
-                        ),
+                        style: Theme.of(context).textTheme.titleMedium?.apply(
+                              color: ZPColors.darkerGreen,
+                            ),
                       ),
                       state.isFetching || state.isValidating
                           ? SizedBox(
@@ -149,15 +148,16 @@ class OrderMaterialItem extends StatelessWidget {
               keyFlex: 1,
               valueFlex: 1,
             ),
-            _MaterialItemInfo(
-              title:
-                  'Price before ${context.read<SalesOrgBloc>().state.salesOrg.taxCode}'
-                      .tr(),
-              info: _MaterialPriceInfo(
-                materialQueryInfo: materialQueryInfo,
-                priceType: PriceType.finalPrice,
+            if (config.shouldShowTax)
+              _MaterialItemInfo(
+                title:
+                    'Price before ${context.read<SalesOrgBloc>().state.salesOrg.taxCode}'
+                        .tr(),
+                info: _MaterialPriceInfo(
+                  materialQueryInfo: materialQueryInfo,
+                  priceType: PriceType.finalPrice,
+                ),
               ),
-            ),
             _MaterialItemInfo(
               title: 'Unit Price: '.tr(),
               info: _MaterialPriceInfo(
@@ -266,7 +266,9 @@ class _MaterialPriceInfo extends StatelessWidget {
             salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
             quantity: 1,
             discountedMaterialCount:
-                context.read<CartBloc>().state.zmgMaterialCount,
+                context.read<CartBloc>().state.zmgMaterialCount(
+                      itemMaterialGroup: itemInfo.info.materialGroup2,
+                    ),
             bundle: Bundle.empty(),
             addedBonusList: [],
             stockInfo: StockInfo.empty(),

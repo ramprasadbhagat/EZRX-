@@ -154,7 +154,8 @@ class CartPage extends StatelessWidget {
                                       locator<CountlyService>().addCountlyEvent(
                                         'Checkout',
                                         segmentation: {
-                                          'numItemInCart': state.cartItems.length,
+                                          'numItemInCart':
+                                              state.cartItems.length,
                                           'subTotal': state.subtotal,
                                           'grandTotal': state.grandTotal,
                                         },
@@ -286,17 +287,15 @@ class _TotalSection extends StatelessWidget {
                   valueText: '${salesOrgConfig.vatValue}%',
                   valueFlex: 1,
                 ),
-              salesOrgConfig.enableVat ||
-                      salesOrgConfig.enableTaxAtTotalLevelOnly
-                  ? BalanceTextRow(
-                      keyText: taxCode.tr(),
-                      valueText: StringUtils.displayPrice(
-                        salesOrgConfig,
-                        state.vatTotal,
-                      ),
-                      valueFlex: 1,
-                    )
-                  : const SizedBox.shrink(),
+              if (salesOrgConfig.shouldShowTax)
+                BalanceTextRow(
+                  keyText: taxCode.tr(),
+                  valueText: StringUtils.displayPrice(
+                    salesOrgConfig,
+                    state.vatTotal,
+                  ),
+                  valueFlex: 1,
+                ),
               BalanceTextRow(
                 keyText: 'Grand Total'.tr(),
                 valueText: StringUtils.displayPrice(

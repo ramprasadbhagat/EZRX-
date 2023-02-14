@@ -330,7 +330,9 @@ class _MaterialPriceInfo extends StatelessWidget {
             salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
             quantity: 1,
             discountedMaterialCount:
-                context.read<CartBloc>().state.zmgMaterialCount,
+                context.read<CartBloc>().state.zmgMaterialCount(
+                      itemMaterialGroup: itemInfo.info.materialGroup2,
+                    ),
             bundle: Bundle.empty(),
             addedBonusList: [],
             stockInfo: StockInfo.empty(),

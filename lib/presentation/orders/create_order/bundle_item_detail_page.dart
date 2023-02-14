@@ -5,7 +5,6 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
-import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/bundle_aggregate.dart';
@@ -90,12 +89,6 @@ class BundleItemDetailPage extends StatelessWidget {
                       );
                       final controller = TextEditingController();
                       controller.text = '0';
-                      context
-                          .read<AddToCartBloc>()
-                          .add(AddToCartEvent.updateQuantity(
-                            1,
-                            context.read<CartBloc>().state.zmgMaterialCount,
-                          ));
                       quantityControllerList[bundleAggregate
                           .materialInfos[index].materialNumber
                           .getOrCrash()] = controller;
@@ -161,7 +154,6 @@ class BundleItemDetailPage extends StatelessWidget {
     Bundle bundle,
     Map<String, TextEditingController> list,
   ) {
-    final cartBloc = context.read<CartBloc>();
     final materialPriceDetailBloc = context.read<MaterialPriceDetailBloc>();
     final priceAggregateList = bundleAggregate.materialInfos.map((material) {
       final itemInfo =
@@ -172,7 +164,6 @@ class BundleItemDetailPage extends StatelessWidget {
           materialInfo: itemInfo.info,
           salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
           quantity: int.parse(list[material.materialNumber.getOrCrash()]!.text),
-          discountedMaterialCount: cartBloc.state.zmgMaterialCount,
           bundle: bundle,
           addedBonusList: [],
           stockInfo: StockInfo.empty().copyWith(
@@ -273,12 +264,6 @@ class _ListContent extends StatelessWidget {
                   'materialNum': materialInfo.materialNumber.getOrCrash(),
                 },
               );
-              context.read<AddToCartBloc>().add(
-                    AddToCartEvent.updateQuantity(
-                      value,
-                      context.read<CartBloc>().state.zmgMaterialCount,
-                    ),
-                  );
             },
             minusPressed: (int value) {
               locator<CountlyService>().addCountlyEvent(
@@ -287,12 +272,6 @@ class _ListContent extends StatelessWidget {
                   'materialNum': materialInfo.materialNumber.getOrCrash(),
                 },
               );
-              context.read<AddToCartBloc>().add(
-                    AddToCartEvent.updateQuantity(
-                      value,
-                      context.read<CartBloc>().state.zmgMaterialCount,
-                    ),
-                  );
             },
             addPressed: (int value) {
               locator<CountlyService>().addCountlyEvent(
@@ -301,12 +280,6 @@ class _ListContent extends StatelessWidget {
                   'materialNum': materialInfo.materialNumber.getOrCrash(),
                 },
               );
-              context.read<AddToCartBloc>().add(
-                    AddToCartEvent.updateQuantity(
-                      value,
-                      context.read<CartBloc>().state.zmgMaterialCount,
-                    ),
-                  );
             },
             controller: controller,
           ),

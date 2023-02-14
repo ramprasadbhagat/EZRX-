@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
-import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_details/order_history_details_bloc.dart';
@@ -324,7 +323,6 @@ void _addToCartPressed(
   MaterialPriceDetailState state,
   OrderHistoryDetailsOrderItem orderHistoryDetailsOrderItem,
 ) {
-  final cartBloc = context.read<CartBloc>();
   final queryInfo = MaterialQueryInfo.fromOrderHistoryDetails(
     orderHistoryDetailsOrderItem: orderHistoryDetailsOrderItem,
   );
@@ -337,7 +335,6 @@ void _addToCartPressed(
         materialInfo: itemInfo.info,
         salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
         quantity: 1,
-        discountedMaterialCount: cartBloc.state.zmgMaterialCount,
         bundle: Bundle.empty(),
         addedBonusList: [],
         stockInfo: StockInfo.empty().copyWith(

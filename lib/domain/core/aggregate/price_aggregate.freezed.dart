@@ -275,7 +275,7 @@ class _$_PriceAggregate extends _PriceAggregate {
       required this.bundle,
       required this.salesOrgConfig,
       required this.quantity,
-      required this.discountedMaterialCount,
+      this.discountedMaterialCount = 0,
       required final List<MaterialItemBonus> addedBonusList,
       required this.stockInfo,
       required this.tenderContract})
@@ -293,6 +293,7 @@ class _$_PriceAggregate extends _PriceAggregate {
   @override
   final int quantity;
   @override
+  @JsonKey()
   final int discountedMaterialCount;
   final List<MaterialItemBonus> _addedBonusList;
   @override
@@ -362,7 +363,7 @@ abstract class _PriceAggregate extends PriceAggregate {
       required final Bundle bundle,
       required final SalesOrganisationConfigs salesOrgConfig,
       required final int quantity,
-      required final int discountedMaterialCount,
+      final int discountedMaterialCount,
       required final List<MaterialItemBonus> addedBonusList,
       required final StockInfo stockInfo,
       required final TenderContract tenderContract}) = _$_PriceAggregate;

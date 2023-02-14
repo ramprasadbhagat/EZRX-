@@ -30,7 +30,10 @@ class CartState with _$CartState {
 
   double get vatTotal => grandTotal - subtotal;
 
-  int get zmgMaterialCount => cartItems.allZmgMaterialsQty;
+  int zmgMaterialCount({required MaterialGroup itemMaterialGroup}) =>
+      cartItems.zmgMaterialsQty(
+        itemMaterialGroup,
+      );
 
   bool get containFocMaterial =>
       cartItems.allMaterials.any((e) => e.materialInfo.materialGroup4.isFOC);
@@ -77,7 +80,10 @@ class CartState with _$CartState {
     final itemQty =
         cartMaterial == CartItem.materialEmpty() ? 0 : cartMaterial.totalQty;
 
-    return zmgMaterialCount - itemQty;
+    return zmgMaterialCount(
+          itemMaterialGroup: material.materialInfo.materialGroup2,
+        ) -
+        itemQty;
   }
 
   CartItem getMaterialCartItem({

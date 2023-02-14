@@ -27,7 +27,7 @@ class PriceAggregate with _$PriceAggregate {
     required Bundle bundle,
     required SalesOrganisationConfigs salesOrgConfig,
     required int quantity,
-    required int discountedMaterialCount,
+    @Default(0) int discountedMaterialCount,
     required List<MaterialItemBonus> addedBonusList,
     required StockInfo stockInfo,
     required TenderContract tenderContract,

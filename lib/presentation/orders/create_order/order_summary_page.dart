@@ -784,15 +784,14 @@ class _CartDetails extends StatelessWidget {
                 keyText: '$taxCode in %'.tr(),
                 valueText: '${salesOrgConfig.vatValue}%',
               ),
-            salesOrgConfig.enableVat || salesOrgConfig.enableTaxAtTotalLevelOnly
-                ? BalanceTextRow(
-                    keyText: taxCode.tr(),
-                    valueText: StringUtils.displayPrice(
-                      salesOrgConfig,
-                      state.vatTotal,
-                    ),
-                  )
-                : const SizedBox.shrink(),
+            if (salesOrgConfig.shouldShowTax)
+              BalanceTextRow(
+                keyText: taxCode.tr(),
+                valueText: StringUtils.displayPrice(
+                  salesOrgConfig,
+                  state.vatTotal,
+                ),
+              ),
             BalanceTextRow(
               keyText: 'Min. Order Value'.tr(),
               valueText: StringUtils.displayPrice(

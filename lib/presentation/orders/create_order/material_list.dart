@@ -254,8 +254,6 @@ class _ListContent extends StatelessWidget {
                 materialInfo: materialInfo,
                 salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
                 quantity: 1,
-                discountedMaterialCount:
-                    context.read<CartBloc>().state.zmgMaterialCount,
                 bundle: Bundle.empty(),
                 addedBonusList: [],
                 stockInfo: StockInfo.empty().copyWith(
@@ -384,8 +382,12 @@ class _PriceLabel extends StatelessWidget {
             quantity: 1,
             // TODO: will revisit and enhance this
             discountedMaterialCount: itemPrice.zmgDiscount
-                ? context.watch<CartBloc>().state.zmgMaterialCount
-                : context.read<CartBloc>().state.zmgMaterialCount,
+                ? context.watch<CartBloc>().state.zmgMaterialCount(
+                      itemMaterialGroup: materialInfo.materialGroup2,
+                    )
+                : context.read<CartBloc>().state.zmgMaterialCount(
+                      itemMaterialGroup: materialInfo.materialGroup2,
+                    ),
             bundle: Bundle.empty(),
             addedBonusList: [],
             stockInfo: StockInfo.empty().copyWith(
@@ -598,7 +600,7 @@ class _SearchBarState extends State<_SearchBar> {
                 (_) => null,
               ),
               decoration: InputDecoration(
-               isDense: true,
+                isDense: true,
                 prefixIcon: const Icon(Icons.search),
                 suffixIcon: IconButton(
                   key: const Key('clearSearch'),

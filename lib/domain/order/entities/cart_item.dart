@@ -253,11 +253,12 @@ extension CartItemListExtension on List<CartItem> {
         ),
       ).toList();
 
-  int get allZmgMaterialsQty =>
+  int zmgMaterialsQty(MaterialGroup group2) =>
       where((e) => e.itemType == CartItemType.material)
           .toList()
           .allMaterials
-          .where((e) => e.price.zmgDiscount)
+          .where((e) =>
+              e.price.zmgDiscount && e.materialInfo.materialGroup2 == group2)
           .fold(0, (sum, e) => sum + e.quantity);
 
   List<PriceAggregate> get allMaterials =>

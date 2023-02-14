@@ -90,7 +90,8 @@ void main() {
         );
 
         expect(
-          bloc.state.zmgMaterialCount,
+          bloc.state
+              .zmgMaterialCount(itemMaterialGroup: MaterialGroup.two('004')),
           1,
         );
       },
@@ -187,8 +188,9 @@ void main() {
         );
 
         expect(
-          bloc.state.zmgMaterialCount,
-          1,
+          bloc.state
+              .zmgMaterialCount(itemMaterialGroup: MaterialGroup.two('004')),
+          0,
         );
         expect(bloc.state.containFocMaterial, true);
       },
@@ -285,8 +287,9 @@ void main() {
         );
 
         expect(
-          bloc.state.zmgMaterialCount,
-          1,
+          bloc.state
+              .zmgMaterialCount(itemMaterialGroup: MaterialGroup.two('004')),
+          0,
         );
         expect(bloc.state.containNonFocMaterial, true);
       },
@@ -383,8 +386,9 @@ void main() {
         );
 
         expect(
-          bloc.state.zmgMaterialCount,
-          1,
+          bloc.state
+              .zmgMaterialCount(itemMaterialGroup: MaterialGroup.two('004')),
+          0,
         );
         expect(bloc.state.containSampleMaterial, true);
       },
@@ -481,8 +485,9 @@ void main() {
         );
 
         expect(
-          bloc.state.zmgMaterialCount,
-          1,
+          bloc.state
+              .zmgMaterialCount(itemMaterialGroup: MaterialGroup.two('004')),
+          0,
         );
         expect(bloc.state.containNonRegularMaterial, true);
       },
@@ -579,8 +584,9 @@ void main() {
         );
 
         expect(
-          bloc.state.zmgMaterialCount,
-          1,
+          bloc.state
+              .zmgMaterialCount(itemMaterialGroup: MaterialGroup.two('004')),
+          0,
         );
         expect(bloc.state.containNonRegularMaterial, true);
       },
@@ -764,7 +770,10 @@ void main() {
           bloc.state.cartItems.first.materials.last.discountedMaterialCount,
           5,
         );
-        expect(bloc.state.zmgMaterialCount, 5);
+        expect(
+            bloc.state
+                .zmgMaterialCount(itemMaterialGroup: MaterialGroup.two('004')),
+            5);
       },
     );
 
@@ -844,7 +853,10 @@ void main() {
           bloc.state.cartItems.first.materials.last.discountedMaterialCount,
           2,
         );
-        expect(bloc.state.zmgMaterialCount, 2);
+        expect(
+            bloc.state
+                .zmgMaterialCount(itemMaterialGroup: MaterialGroup.two('004')),
+            2);
       },
     );
   });

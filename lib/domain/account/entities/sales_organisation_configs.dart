@@ -140,4 +140,7 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
         return '\u2022Prices shown are exclusive of tax\u2022\n\n\u2022Minimum order amount allowed is ${currency.code} $minOrderAmount';
     }
   }
+
+  bool get shouldShowTax =>
+      (enableVat && enableTaxClassification) || enableTaxAtTotalLevelOnly;
 }
