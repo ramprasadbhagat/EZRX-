@@ -1084,7 +1084,7 @@ void main() {
       await tester.pump();
 
       final deliveryDate = find.byKey(const Key('deliveryDateTime'));
-      expect(deliveryDate, findsNothing);
+      expect(deliveryDate, findsOneWidget);
 
       final discountRate = find.byKey(const Key('discountRateForBonusCard'));
 
@@ -1262,7 +1262,7 @@ void main() {
       await tester.pump();
 
       final deliveryDate = find.byKey(const Key('deliveryDateTime'));
-      expect(deliveryDate, findsNothing);
+      expect(deliveryDate, findsOneWidget);
 
       final sapStatusNotEmptyOrderItem =
           find.byKey(const Key('sapStatusNotEmpty'));

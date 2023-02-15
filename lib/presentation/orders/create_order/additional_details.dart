@@ -123,7 +123,11 @@ class AdditionalDetails extends StatelessWidget {
                   },
                 )
               : const SizedBox.shrink(),
-          if (context.read<EligibilityBloc>().state.isShowPOAttachmentEnable)
+          if (context
+              .read<EligibilityBloc>()
+              .state
+              .salesOrgConfigs
+              .showPOAttachment)
             const AdditionPoAttachmentUpload(),
         ],
       ),

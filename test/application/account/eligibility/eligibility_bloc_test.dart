@@ -286,7 +286,7 @@ void main() {
   );
 
   test(
-    'eligibility state isdisplayOrderDiscountEnable should return true',
+    'eligibility state displayOrderDiscount should return true',
     () {
       final eligibilityState = EligibilityState.initial().copyWith(
         user: fakeUser,
@@ -299,13 +299,13 @@ void main() {
       );
 
       final displayOrderDiscount =
-          eligibilityState.isdisplayOrderDiscountEnable;
+          eligibilityState.salesOrgConfigs.displayOrderDiscount;
       expect(displayOrderDiscount, true);
     },
   );
 
   test(
-    'eligibility state isRemarksEnable return true',
+    'eligibility state enableRemarks return true',
     () {
       final eligibilityState = EligibilityState.initial().copyWith(
         user: fakeUser,
@@ -317,8 +317,8 @@ void main() {
         shipToInfo: fakeShipToInfo,
       );
 
-      final isRemarksEnable = eligibilityState.isRemarksEnable;
-      expect(isRemarksEnable, true);
+      final enableRemarks = eligibilityState.salesOrgConfigs.enableRemarks;
+      expect(enableRemarks, true);
     },
   );
 

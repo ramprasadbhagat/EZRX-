@@ -107,7 +107,7 @@ class OrderItemBonusCard extends StatelessWidget {
                         keyFlex: 1,
                         valueFlex: 1,
                       ),
-                      eligibiltiyBlocState.isBatchNumberEnable
+                      eligibiltiyBlocState.salesOrgConfigs.batchNumDisplay
                           ? BalanceTextRow(
                               keyText: 'Batch Number & Expiry Date'.tr(),
                               valueText: orderHistoryDetailsBonusAggregate
@@ -125,7 +125,8 @@ class OrderItemBonusCard extends StatelessWidget {
                         keyFlex: 1,
                         valueFlex: 1,
                       ),
-                      eligibiltiyBlocState.isDeliveryDateOrTimeEnable &&
+                      eligibiltiyBlocState
+                                  .salesOrgConfigs.disableDeliveryDate &&
                               orderHistoryDetailsBonusAggregate
                                   .orderItem.plannedDeliveryDate.isNotEmpty
                           ? BalanceTextRow(
@@ -242,7 +243,8 @@ class OrderItemBonusCard extends StatelessWidget {
                                       keyFlex: 1,
                                       valueFlex: 1,
                                     ),
-                                    eligibiltiyBlocState.isBatchNumberEnable
+                                    eligibiltiyBlocState
+                                            .salesOrgConfigs.batchNumDisplay
                                         ? BalanceTextRow(
                                             keyText:
                                                 'Batch Number & Expiry Date'
@@ -262,8 +264,8 @@ class OrderItemBonusCard extends StatelessWidget {
                                       keyFlex: 1,
                                       valueFlex: 1,
                                     ),
-                                    eligibiltiyBlocState
-                                            .isDeliveryDateOrTimeEnable
+                                    eligibiltiyBlocState.salesOrgConfigs
+                                            .disableDeliveryDate
                                         ? BalanceTextRow(
                                             keyText: 'Delivery Date/Time'.tr(),
                                             valueText:

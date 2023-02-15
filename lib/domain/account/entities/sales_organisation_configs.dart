@@ -121,6 +121,9 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
     return languageFilter ? languageValue.getOrDefaultValue('') : '';
   }
 
+  bool get shouldDisplayVATInPercentage =>
+      enableVat && !currency.isVN || enableTaxAtTotalLevelOnly;
+
   String get getConfigLangaugeDefaultEnglish =>
       languageFilter ? languageValue.getOrDefaultValue('E') : 'E';
 

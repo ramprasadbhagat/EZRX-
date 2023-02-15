@@ -127,7 +127,7 @@ class OrderTenderContractCard extends StatelessWidget {
                         keyFlex: 1,
                         valueFlex: 1,
                       ),
-                      eligibiltiyBlocState.isBatchNumberEnable
+                      eligibiltiyBlocState.salesOrgConfigs.batchNumDisplay
                           ? BalanceTextRow(
                               keyText: 'Batch Number'.tr(),
                               valueText: orderHistoryDetailsBonusAggregate
@@ -137,7 +137,7 @@ class OrderTenderContractCard extends StatelessWidget {
                               valueFlex: 1,
                             )
                           : const SizedBox.shrink(),
-                      eligibiltiyBlocState.isBatchNumberEnable
+                      eligibiltiyBlocState.salesOrgConfigs.batchNumDisplay
                           ? BalanceTextRow(
                               keyText: 'Expiry Date'.tr(),
                               valueText: orderHistoryDetailsBonusAggregate

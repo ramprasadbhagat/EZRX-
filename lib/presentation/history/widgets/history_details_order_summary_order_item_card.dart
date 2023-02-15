@@ -98,7 +98,7 @@ class OrderItemCard extends StatelessWidget {
                         keyFlex: 1,
                         valueFlex: 1,
                       ),
-                      eligibiltiyBlocState.isBatchNumberEnable
+                      eligibiltiyBlocState.salesOrgConfigs.batchNumDisplay
                           ? BalanceTextRow(
                               keyText: 'Batch Number & Expiry Date'.tr(),
                               valueText: orderHistoryDetailsBonusAggregate
@@ -116,7 +116,8 @@ class OrderItemCard extends StatelessWidget {
                         keyFlex: 1,
                         valueFlex: 1,
                       ),
-                      eligibiltiyBlocState.isDeliveryDateOrTimeEnable &&
+                      eligibiltiyBlocState
+                                  .salesOrgConfigs.disableDeliveryDate &&
                               orderHistoryDetailsBonusAggregate
                                   .orderItem.plannedDeliveryDate.isNotEmpty
                           ? BalanceTextRow(

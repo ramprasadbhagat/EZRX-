@@ -64,6 +64,14 @@ class CustomerCodeInfo with _$CustomerCodeInfo {
         telephoneNumber: PhoneNumber(''),
       );
 
+  bool get hasBillToInfo {
+    final billToInfo =
+        billToInfos.isNotEmpty ? billToInfos.first : BillToInfo.empty();
+
+    return billToInfo.billToCustomerCode.isNotEmpty &&
+        billToInfo.billToCustomerCode != customerCodeSoldTo;
+  }
+
   String get customerEmailAddress {
     return emailAddresses.isNotEmpty
         ? emailAddresses.first.value.getOrElse(() => 'NA')

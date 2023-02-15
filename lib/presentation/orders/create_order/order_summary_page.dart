@@ -200,8 +200,9 @@ class _SubmitContinueButton extends StatelessWidget {
     final orderType = context.read<OrderDocumentTypeBloc>().state;
     final eligibiityState = context.read<EligibilityBloc>().state;
 
-    return eligibiityState.isEDI
-        ? eligibiityState.isSalesRep && orderType.isSpecialOrderType
+    return eligibiityState.customerCodeInfo.status.isEDI
+        ? eligibiityState.user.role.type.isSalesRep &&
+            orderType.isSpecialOrderType
         : true;
   }
 
@@ -779,7 +780,7 @@ class _CartDetails extends StatelessWidget {
                 state.subtotal,
               ),
             ),
-            if (vatInPercentage.shouldDisplayVATInPercentage)
+            if (vatInPercentage.salesOrgConfigs.shouldDisplayVATInPercentage)
               BalanceTextRow(
                 keyText: '$taxCode in %'.tr(),
                 valueText: '${salesOrgConfig.vatValue}%',

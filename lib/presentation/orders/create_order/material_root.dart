@@ -15,10 +15,10 @@ class MaterialRoot extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<EligibilityBloc, EligibilityState>(
       buildWhen: (previous, current) =>
-          previous.isBundleMaterialEnable != current.isBundleMaterialEnable ||
+          previous.salesOrgConfigs.disableBundles != current.salesOrgConfigs.disableBundles ||
           previous.isCovidMaterialEnable != current.isCovidMaterialEnable,
       builder: (context, state) {
-        final isBundleMaterialEnable = state.isBundleMaterialEnable;
+        final isBundleMaterialEnable = !state.salesOrgConfigs.disableBundles;
         final isCovidMaterialEnable = state.isCovidMaterialEnable;
         final length = 1 +
             (isBundleMaterialEnable ? 1 : 0) +

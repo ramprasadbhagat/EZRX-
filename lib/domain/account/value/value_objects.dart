@@ -189,6 +189,9 @@ class RoleType extends ValueObject<String> {
     return isInternalSalesRep || isExternalSalesRep;
   }
 
+  bool get isReturnApproverAccount =>
+      isReturnApprover || isRootAdmin || isReturnAdmin;
+
   const RoleType._(this.value);
 }
 

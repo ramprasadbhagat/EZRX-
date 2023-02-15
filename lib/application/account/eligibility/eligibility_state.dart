@@ -34,7 +34,6 @@ class EligibilityState with _$EligibilityState {
     return true;
   }
 
-  bool get isBundleMaterialEnable => !salesOrgConfigs.disableBundles;
   bool get isCovidMaterialEnable {
     // 1. SG Covid tab
     return (customerCodeInfo.customerAttr7.isZEV &&
@@ -77,9 +76,7 @@ class EligibilityState with _$EligibilityState {
 
   String get getPNPValueCovidMaterial {
     // Condition 1: For Covid Tab Materials and Non-SG user, pickAndPack = "only"
-    return user.role.type.isSalesRep && !salesOrganisation.salesOrg.isSg
-        ? 'only'
-        : '';
+    return user.role.type.isSalesRep && !salesOrganisation.salesOrg.isSg ? 'only' : '';
   }
 
   bool get isAccountSuspended {
@@ -96,24 +93,7 @@ class EligibilityState with _$EligibilityState {
   }
 
   bool get isPaymentTermDescriptionEnable {
-    return !user.role.type.isSalesRep &&
-        !salesOrgConfigs.disablePaymentTermsDisplay;
-  }
-
-  bool get isPaymentTermEnable {
-    return salesOrgConfigs.enablePaymentTerms;
-  }
-
-  bool get isSpecialInstructions {
-    return salesOrganisation.salesOrg.isVN;
-  }
-
-  bool get isRequestedDeliveryDate {
-    return salesOrgConfigs.disableDeliveryDate;
-  }
-
-  bool get isBillToEnable {
-    return salesOrgConfigs.enableBillTo;
+    return !user.role.type.isSalesRep && !salesOrgConfigs.disablePaymentTermsDisplay;
   }
 
   bool get validateOutOfStockValue {
@@ -125,46 +105,20 @@ class EligibilityState with _$EligibilityState {
         (salesOrgConfigs.addOosMaterials && validateOutOfStockValue));
   }
 
-  bool get isShowPOAttachmentEnable => salesOrgConfigs.showPOAttachment;
-  bool get enableOHPrice => salesOrgConfigs.enableOHPrice;
-  bool get isDeliveryDateOrTimeEnable => !salesOrgConfigs.disableDeliveryDate;
-  bool get isdisplayOrderDiscountEnable => salesOrgConfigs.displayOrderDiscount;
-  bool get isBonusOverrideEnable => user.role.type.isSalesRep
-      ? user.hasBonusOverride
-      : salesOrgConfigs.priceOverride;
-  bool get isBatchNumberEnable => salesOrgConfigs.batchNumDisplay;
-  bool get isRemarksEnable => salesOrgConfigs.enableRemarks;
+  bool get isBonusOverrideEnable =>
+      user.role.type.isSalesRep ? user.hasBonusOverride : salesOrgConfigs.priceOverride;
 
   bool get isOrderSummaryPPEDisclaimerEnable {
     return salesOrganisation.salesOrg.isSg && !user.role.type.isSalesRep;
   }
 
-  bool get isSalesRep => user.role.type.isSalesRep;
-  bool get isEDI => customerCodeInfo.status.isEDI;
-
-  bool get isBillToInfo {
-    final billToInfo = customerCodeInfo.billToInfos.isNotEmpty
-        ? customerCodeInfo.billToInfos.first
-        : BillToInfo.empty();
-
-    return salesOrgConfigs.enableBillTo &&
-        billToInfo.billToCustomerCode.isNotEmpty &&
-        billToInfo.billToCustomerCode != customerCodeInfo.customerCodeSoldTo;
-  }
+  bool get isBillToInfo =>
+      customerCodeInfo.hasBillToInfo && salesOrgConfigs.enableBillTo;
 
   bool get isZDP8Override =>
       user.role.type.isSalesRep && salesOrgConfigs.enableZDP8Override;
-  bool get isPriceOverrideEnable => user.role.type.isSalesRep
-      ? user.hasPriceOverride
-      : salesOrgConfigs.priceOverride;
-  bool get shouldDisplayVATInPercentage =>
-      salesOrgConfigs.enableVat && !salesOrgConfigs.currency.isVN ||
-      salesOrgConfigs.enableTaxAtTotalLevelOnly;
-
-  bool get isReturnApprover =>
-      user.role.type.isReturnApprover ||
-      user.role.type.isRootAdmin ||
-      user.role.type.isReturnAdmin;
+  bool get isPriceOverrideEnable =>
+      user.role.type.isSalesRep ? user.hasPriceOverride : salesOrgConfigs.priceOverride;
 
   bool get showGreenDeliveryBox {
     final gdEligibleRole = salesOrgConfigs.greenDeliveryUserRole;
@@ -188,5 +142,5 @@ class EligibilityState with _$EligibilityState {
 
     return false;
   }
-
+  
 }

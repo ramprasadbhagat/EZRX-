@@ -13,7 +13,6 @@ import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
-import 'package:ezrxmobile/presentation/history/status_label.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -45,11 +44,15 @@ class OrderHistoryListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final enableOHPrice = context.read<EligibilityBloc>().state.enableOHPrice;
+    final enableOHPrice =
+        context.read<EligibilityBloc>().state.salesOrgConfigs.enableOHPrice;
     final enableTaxDisplay =
         context.read<EligibilityBloc>().state.salesOrgConfigs.enableTaxDisplay;
-    final isDeliveryDateOrTimeEnable =
-        context.read<EligibilityBloc>().state.isDeliveryDateOrTimeEnable;
+    final disableDeliveryDate = context
+        .read<EligibilityBloc>()
+        .state
+        .salesOrgConfigs
+        .disableDeliveryDate;
 
     return GestureDetector(
       onTap: () {
@@ -109,8 +112,26 @@ class OrderHistoryListTile extends StatelessWidget {
                   ),
                   salesOrgConfigs.disableProcessingStatus
                       ? const SizedBox.shrink()
-                      : StatusLabel(
-                          status: orderHistoryItem.status,
+                      : Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 4,
+                          ),
+                          decoration: BoxDecoration(
+                            color:
+                                orderHistoryItem.status.displayStatusLabelColor,
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(15),
+                            ),
+                          ),
+                          child: Text(
+                            orderHistoryItem.status.getOrCrash(),
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleSmall
+                                ?.copyWith(fontSize: 12),
+                            textAlign: TextAlign.center,
+                          ),
                         ),
                 ],
               ),
@@ -131,7 +152,7 @@ class OrderHistoryListTile extends StatelessWidget {
                 keyText: 'Order Date'.tr(),
                 valueText: orderHistoryItem.createdDate,
               ),
-              isDeliveryDateOrTimeEnable &&
+              disableDeliveryDate &&
                       orderHistoryItem.deliveryDate.isNotEmpty
                   ? BalanceTextRow(
                       keyText: 'Delivery Date/Time'.tr(),

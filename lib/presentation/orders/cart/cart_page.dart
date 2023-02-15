@@ -41,10 +41,8 @@ class CartPage extends StatelessWidget {
           context.read<AdditionalDetailsBloc>().add(
                 AdditionalDetailsEvent.initialized(
                   config: context.read<SalesOrgBloc>().state.configs,
-                   customerCodeInfo: context
-                          .read<CustomerCodeBloc>()
-                          .state
-                          .customerCodeInfo,
+                  customerCodeInfo:
+                      context.read<CustomerCodeBloc>().state.customerCodeInfo,
                 ),
               );
         }
@@ -281,7 +279,7 @@ class _TotalSection extends StatelessWidget {
                     StringUtils.displayPrice(salesOrgConfig, state.subtotal),
                 valueFlex: 1,
               ),
-              if (vatInPercentage.shouldDisplayVATInPercentage)
+              if (vatInPercentage.salesOrgConfigs.shouldDisplayVATInPercentage)
                 BalanceTextRow(
                   keyText: '$taxCode in %'.tr(),
                   valueText: '${salesOrgConfig.vatValue}%',

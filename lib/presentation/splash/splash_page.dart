@@ -221,8 +221,8 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               context.read<UserBloc>().state.userCanCreateOrder &&
               (previous.isCovidMaterialEnable !=
                       current.isCovidMaterialEnable ||
-                  previous.isBundleMaterialEnable !=
-                      current.isBundleMaterialEnable ||
+                  previous.salesOrgConfigs.disableBundles !=
+                      current.salesOrgConfigs.disableBundles ||
                   previous.isOrderTypeEnable != current.isOrderTypeEnable ||
                   previous.customerCodeInfo != current.customerCodeInfo ||
                   previous.shipToInfo != current.shipToInfo),
@@ -239,7 +239,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                     ),
                   );
             }
-            if (state.isBundleMaterialEnable) {
+            if (!state.salesOrgConfigs.disableBundles) {
               context.read<MaterialBundleListBloc>().add(
                     MaterialBundleListEvent.fetch(
                       user: state.user,
@@ -280,7 +280,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                   previous.user.role.type.hasReturnsAdminAccess !=
                       current.user.role.type.hasReturnsAdminAccess),
           listener: (context, state) {
-            if (state.isReturnApprover) {
+            if (state.user.role.type.isReturnApproverAccount) {
               context.read<ReturnApproverBloc>()
                   .add(
                     ReturnApproverEvent.fetch(

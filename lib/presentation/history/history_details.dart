@@ -179,7 +179,8 @@ class HistoryDetails extends StatelessWidget {
                   if (context
                           .read<EligibilityBloc>()
                           .state
-                          .isShowPOAttachmentEnable &&
+                          .salesOrgConfigs
+                          .showPOAttachment &&
                       orderDetails.poDocumentsAvailable)
                     Column(
                       children: [
@@ -280,7 +281,8 @@ class _OrderDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final enableOHPrice = context.read<EligibilityBloc>().state.enableOHPrice;
+    final enableOHPrice =
+        context.read<EligibilityBloc>().state.salesOrgConfigs.enableOHPrice;
     final enableTaxDisplay =
         context.read<SalesOrgBloc>().state.configs.enableTaxDisplay;
     final enableTaxAtTotalLevelOnly =
@@ -365,7 +367,11 @@ class _OrderDetails extends StatelessWidget {
               keyFlex: 1,
               valueFlex: 1,
             ),
-            !context.read<EligibilityBloc>().state.isRequestedDeliveryDate
+            !context
+                    .read<EligibilityBloc>()
+                    .state
+                    .salesOrgConfigs
+                    .disableDeliveryDate
                 ? BalanceTextRow(
                     keyText: 'Requested Delivery Date'.tr(),
                     valueText: orderDetails
@@ -375,7 +381,11 @@ class _OrderDetails extends StatelessWidget {
                     valueFlex: 1,
                   )
                 : const SizedBox.shrink(),
-            !context.read<EligibilityBloc>().state.isSpecialInstructions
+            !context
+                    .read<EligibilityBloc>()
+                    .state
+                    .salesOrgConfigs
+                    .enableSpecialInstructions
                 ? BalanceTextRow(
                     keyText: 'Special Instructions'.tr(),
                     valueText: orderDetails
@@ -422,7 +432,11 @@ class _OrderDetails extends StatelessWidget {
               keyFlex: 1,
               valueFlex: 1,
             ),
-            context.read<EligibilityBloc>().state.isPaymentTermEnable
+            context
+                    .read<EligibilityBloc>()
+                    .state
+                    .salesOrgConfigs
+                    .enablePaymentTerms
                 ? BalanceTextRow(
                     key: const ValueKey('paymentTerm'),
                     keyText: 'Payment Term'.tr(),
