@@ -291,10 +291,14 @@ class _OrderDetails extends StatelessWidget {
       builder: (context, state) {
         return custom.ExpansionTile(
           initiallyExpanded: true,
+          keepHeaderBorder: true,
           key: const ValueKey('orderDetails'),
           title: Text(
             'Order Details'.tr(),
-            style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
+            style: Theme.of(context)
+                .textTheme
+                .titleMedium
+                ?.copyWith(fontWeight: FontWeight.w600),
           ),
           children: [
             if (enableOHPrice)
@@ -348,8 +352,8 @@ class _OrderDetails extends StatelessWidget {
             ),
             BalanceTextRow(
               keyText: 'Created Date'.tr(),
-              valueText:
-                  orderDetails.orderHistoryDetailsOrderHeader.createdDate,
+              valueText: orderDetails.orderHistoryDetailsOrderHeader.createdDate
+                  .displayHumanReadableDate,
               valueTextLoading: state.isLoading,
               keyFlex: 1,
               valueFlex: 1,
@@ -374,8 +378,9 @@ class _OrderDetails extends StatelessWidget {
             !context.read<EligibilityBloc>().state.isSpecialInstructions
                 ? BalanceTextRow(
                     keyText: 'Special Instructions'.tr(),
-                    valueText:
-                        orderDetails.orderHistoryDetailsSpecialInstructions,
+                    valueText: orderDetails
+                        .orderHistoryDetailsSpecialInstructions
+                        .displaySpecialInstructions,
                     valueTextLoading: state.isLoading,
                     keyFlex: 1,
                     valueFlex: 1,
@@ -383,8 +388,8 @@ class _OrderDetails extends StatelessWidget {
                 : const SizedBox.shrink(),
             BalanceTextRow(
               keyText: 'PO No.'.tr(),
-              valueText:
-                  orderDetails.orderHistoryDetailsOrderHeader.pOReference,
+              valueText: orderDetails.orderHistoryDetailsOrderHeader.pOReference
+                  .displayPOReference,
               valueTextLoading: state.isLoading,
               keyFlex: 1,
               valueFlex: 1,
@@ -398,15 +403,16 @@ class _OrderDetails extends StatelessWidget {
             ),
             BalanceTextRow(
               keyText: 'Contact Number'.tr(),
-              valueText:
-                  orderDetails.orderHistoryDetailsOrderHeader.telephoneNumber,
+              valueText: orderDetails.orderHistoryDetailsOrderHeader
+                  .telephoneNumber.displayTelephoneNumber,
               valueTextLoading: state.isLoading,
               keyFlex: 1,
               valueFlex: 1,
             ),
             BalanceTextRow(
               keyText: 'Customer Classification'.tr(),
-              valueText: customerCodeInfo.customerClassification,
+              valueText: customerCodeInfo
+                  .customerClassification.displayCustomerClassification,
               keyFlex: 1,
               valueFlex: 1,
             ),
@@ -420,8 +426,8 @@ class _OrderDetails extends StatelessWidget {
                 ? BalanceTextRow(
                     key: const ValueKey('paymentTerm'),
                     keyText: 'Payment Term'.tr(),
-                    valueText: orderDetails
-                        .orderHistoryDetailsPaymentTerm.paymentTermCode,
+                    valueText: orderDetails.orderHistoryDetailsPaymentTerm
+                        .paymentTermCode.displayPaymentTermCode,
                     valueTextLoading: state.isLoading,
                     keyFlex: 1,
                     valueFlex: 1,
@@ -430,8 +436,8 @@ class _OrderDetails extends StatelessWidget {
             context.read<EligibilityBloc>().state.isPaymentTermDescriptionEnable
                 ? BalanceTextRow(
                     keyText: 'Payment Term Description'.tr(),
-                    valueText: orderDetails
-                        .orderHistoryDetailsPaymentTerm.paymentTermDescription,
+                    valueText: orderDetails.orderHistoryDetailsPaymentTerm
+                        .paymentTermDescription.displayPaymentTermDescription,
                     valueTextLoading: state.isLoading,
                     keyFlex: 1,
                     valueFlex: 1,
@@ -453,10 +459,14 @@ class _SoldToAddress extends StatelessWidget {
   Widget build(BuildContext context) {
     return custom.ExpansionTile(
       initiallyExpanded: true,
+      keepHeaderBorder: true,
       key: const ValueKey('soldToAddress'),
       title: Text(
         'Sold to Address'.tr(),
-        style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
+        style: Theme.of(context)
+            .textTheme
+            .titleMedium
+            ?.copyWith(fontWeight: FontWeight.w600),
       ),
       children: const [
         SoldToAddressInfo(),
@@ -474,10 +484,14 @@ class _ShipToAddress extends StatelessWidget {
   Widget build(BuildContext context) {
     return custom.ExpansionTile(
       initiallyExpanded: true,
+      keepHeaderBorder: true,
       key: const ValueKey('shipToAddress'),
       title: Text(
         'Ship to Address'.tr(),
-        style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
+        style: Theme.of(context)
+            .textTheme
+            .titleMedium
+            ?.copyWith(fontWeight: FontWeight.w600),
       ),
       children: const [
         ShipToAddressInfo(),
@@ -495,10 +509,14 @@ class _BillToAddress extends StatelessWidget {
   Widget build(BuildContext context) {
     return custom.ExpansionTile(
       initiallyExpanded: true,
+      keepHeaderBorder: true,
       key: const ValueKey('billToAddress'),
       title: Text(
         'Bill to Address'.tr(),
-        style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
+        style: Theme.of(context)
+            .textTheme
+            .titleMedium
+            ?.copyWith(fontWeight: FontWeight.w600),
       ),
       children: WidgetHelper.getBillToCustomerDetails(billToInfo),
     );
@@ -517,10 +535,14 @@ class _Invoices extends StatelessWidget {
       builder: (context, state) {
         return custom.ExpansionTile(
           initiallyExpanded: true,
+          keepHeaderBorder: true,
           key: const ValueKey('invoices'),
           title: Text(
             'Invoices'.tr(),
-            style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
+            style: Theme.of(context)
+                .textTheme
+                .titleMedium
+                ?.copyWith(fontWeight: FontWeight.w600),
           ),
           children: [
             Column(
@@ -742,20 +764,20 @@ class _ReOrder extends StatelessWidget {
                     ),
                   )
             : Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16.0),
-              child: ElevatedButton(
-                key: const ValueKey('reOrderButton'),
-                onPressed: () => _addToCartPressed(
-                  context,
-                  context.read<MaterialPriceDetailBloc>().state,
-                  orderHistoryItem,
+                padding: const EdgeInsets.symmetric(vertical: 16.0),
+                child: ElevatedButton(
+                  key: const ValueKey('reOrderButton'),
+                  onPressed: () => _addToCartPressed(
+                    context,
+                    context.read<MaterialPriceDetailBloc>().state,
+                    orderHistoryItem,
+                  ),
+                  child: LoadingShimmer.withChild(
+                    enabled: state.isFetching,
+                    child: const Text('Re-order').tr(),
+                  ),
                 ),
-                child: LoadingShimmer.withChild(
-                  enabled: state.isFetching,
-                  child: const Text('Re-order').tr(),
-                ),
-              ),
-            );
+              );
       },
     );
   }
@@ -786,7 +808,10 @@ class _OrderSummary extends StatelessWidget {
             children: [
               Text(
                 'Order Summary'.tr(),
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
+                style: Theme.of(context)
+                    .textTheme
+                    .titleMedium
+                    ?.copyWith(fontWeight: FontWeight.w600),
               ),
               const SizedBox(
                 height: 10,

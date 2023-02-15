@@ -18,11 +18,11 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$OrderHistoryDetailsOrderHeader {
   double get totalTax => throw _privateConstructorUsedError;
   String get requestedDeliveryDate => throw _privateConstructorUsedError;
-  String get pOReference => throw _privateConstructorUsedError;
+  POReference get pOReference => throw _privateConstructorUsedError;
   String get type => throw _privateConstructorUsedError;
-  String get telephoneNumber => throw _privateConstructorUsedError;
+  PhoneNumber get telephoneNumber => throw _privateConstructorUsedError;
   double get orderValue => throw _privateConstructorUsedError;
-  String get createdDate => throw _privateConstructorUsedError;
+  CreatedDate get createdDate => throw _privateConstructorUsedError;
   String get eZRXNumber => throw _privateConstructorUsedError;
   String get orderBy => throw _privateConstructorUsedError;
 
@@ -42,11 +42,11 @@ abstract class $OrderHistoryDetailsOrderHeaderCopyWith<$Res> {
   $Res call(
       {double totalTax,
       String requestedDeliveryDate,
-      String pOReference,
+      POReference pOReference,
       String type,
-      String telephoneNumber,
+      PhoneNumber telephoneNumber,
       double orderValue,
-      String createdDate,
+      CreatedDate createdDate,
       String eZRXNumber,
       String orderBy});
 }
@@ -87,7 +87,7 @@ class _$OrderHistoryDetailsOrderHeaderCopyWithImpl<$Res,
       pOReference: null == pOReference
           ? _value.pOReference
           : pOReference // ignore: cast_nullable_to_non_nullable
-              as String,
+              as POReference,
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -95,7 +95,7 @@ class _$OrderHistoryDetailsOrderHeaderCopyWithImpl<$Res,
       telephoneNumber: null == telephoneNumber
           ? _value.telephoneNumber
           : telephoneNumber // ignore: cast_nullable_to_non_nullable
-              as String,
+              as PhoneNumber,
       orderValue: null == orderValue
           ? _value.orderValue
           : orderValue // ignore: cast_nullable_to_non_nullable
@@ -103,7 +103,7 @@ class _$OrderHistoryDetailsOrderHeaderCopyWithImpl<$Res,
       createdDate: null == createdDate
           ? _value.createdDate
           : createdDate // ignore: cast_nullable_to_non_nullable
-              as String,
+              as CreatedDate,
       eZRXNumber: null == eZRXNumber
           ? _value.eZRXNumber
           : eZRXNumber // ignore: cast_nullable_to_non_nullable
@@ -128,11 +128,11 @@ abstract class _$$_OrderHistoryDetailsOrderHeaderCopyWith<$Res>
   $Res call(
       {double totalTax,
       String requestedDeliveryDate,
-      String pOReference,
+      POReference pOReference,
       String type,
-      String telephoneNumber,
+      PhoneNumber telephoneNumber,
       double orderValue,
-      String createdDate,
+      CreatedDate createdDate,
       String eZRXNumber,
       String orderBy});
 }
@@ -172,7 +172,7 @@ class __$$_OrderHistoryDetailsOrderHeaderCopyWithImpl<$Res>
       pOReference: null == pOReference
           ? _value.pOReference
           : pOReference // ignore: cast_nullable_to_non_nullable
-              as String,
+              as POReference,
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -180,7 +180,7 @@ class __$$_OrderHistoryDetailsOrderHeaderCopyWithImpl<$Res>
       telephoneNumber: null == telephoneNumber
           ? _value.telephoneNumber
           : telephoneNumber // ignore: cast_nullable_to_non_nullable
-              as String,
+              as PhoneNumber,
       orderValue: null == orderValue
           ? _value.orderValue
           : orderValue // ignore: cast_nullable_to_non_nullable
@@ -188,7 +188,7 @@ class __$$_OrderHistoryDetailsOrderHeaderCopyWithImpl<$Res>
       createdDate: null == createdDate
           ? _value.createdDate
           : createdDate // ignore: cast_nullable_to_non_nullable
-              as String,
+              as CreatedDate,
       eZRXNumber: null == eZRXNumber
           ? _value.eZRXNumber
           : eZRXNumber // ignore: cast_nullable_to_non_nullable
@@ -222,15 +222,15 @@ class _$_OrderHistoryDetailsOrderHeader
   @override
   final String requestedDeliveryDate;
   @override
-  final String pOReference;
+  final POReference pOReference;
   @override
   final String type;
   @override
-  final String telephoneNumber;
+  final PhoneNumber telephoneNumber;
   @override
   final double orderValue;
   @override
-  final String createdDate;
+  final CreatedDate createdDate;
   @override
   final String eZRXNumber;
   @override
@@ -290,11 +290,11 @@ abstract class _OrderHistoryDetailsOrderHeader
   factory _OrderHistoryDetailsOrderHeader(
       {required final double totalTax,
       required final String requestedDeliveryDate,
-      required final String pOReference,
+      required final POReference pOReference,
       required final String type,
-      required final String telephoneNumber,
+      required final PhoneNumber telephoneNumber,
       required final double orderValue,
-      required final String createdDate,
+      required final CreatedDate createdDate,
       required final String eZRXNumber,
       required final String orderBy}) = _$_OrderHistoryDetailsOrderHeader;
   _OrderHistoryDetailsOrderHeader._() : super._();
@@ -304,15 +304,15 @@ abstract class _OrderHistoryDetailsOrderHeader
   @override
   String get requestedDeliveryDate;
   @override
-  String get pOReference;
+  POReference get pOReference;
   @override
   String get type;
   @override
-  String get telephoneNumber;
+  PhoneNumber get telephoneNumber;
   @override
   double get orderValue;
   @override
-  String get createdDate;
+  CreatedDate get createdDate;
   @override
   String get eZRXNumber;
   @override

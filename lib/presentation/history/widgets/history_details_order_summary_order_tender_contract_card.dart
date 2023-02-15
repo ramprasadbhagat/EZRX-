@@ -52,6 +52,16 @@ class OrderTenderContractCard extends StatelessWidget {
                   Column(
                     children: [
                       BalanceTextRow(
+                        key: const Key('sapStatusNotEmpty'),
+                        keyText: 'Status'.tr(),
+                        isStatus: true,
+                        valueText: orderHistoryDetailsBonusAggregate
+                            .orderItem.sAPStatus.displaySAPStatus,
+                        valueTextLoading: state.isLoading,
+                        keyFlex: 1,
+                        valueFlex: 1,
+                      ),
+                      BalanceTextRow(
                         keyText: 'Type'.tr(),
                         valueText: orderHistoryDetailsBonusAggregate
                             .orderItem.type
@@ -64,18 +74,6 @@ class OrderTenderContractCard extends StatelessWidget {
                         keyText: 'Mat No:'.tr(),
                         valueText: orderHistoryDetailsBonusAggregate
                             .orderItem.materialNumber.displayMatNo,
-                        valueTextLoading: state.isLoading,
-                        keyFlex: 1,
-                        valueFlex: 1,
-                      ),
-                      BalanceTextRow(
-                        key: const Key('sapStatusNotEmpty'),
-                        keyText: 'Status'.tr(),
-                        valueText: orderHistoryDetailsBonusAggregate
-                                .orderItem.sAPStatus.isNotEmpty
-                            ? orderHistoryDetailsBonusAggregate
-                                .orderItem.sAPStatus
-                            : 'Order Placed'.tr(),
                         valueTextLoading: state.isLoading,
                         keyFlex: 1,
                         valueFlex: 1,

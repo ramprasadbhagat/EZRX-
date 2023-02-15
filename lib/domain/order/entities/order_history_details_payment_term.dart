@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'order_history_details_payment_term.freezed.dart';
 
@@ -5,11 +6,12 @@ part 'order_history_details_payment_term.freezed.dart';
 class OrderHistoryDetailsPaymentTerm with _$OrderHistoryDetailsPaymentTerm {
   const OrderHistoryDetailsPaymentTerm._();
   factory OrderHistoryDetailsPaymentTerm({
-    required String paymentTermCode,
-    required String paymentTermDescription,
+    required PaymentTermCode paymentTermCode,
+    required PaymentTermDescription paymentTermDescription,
   }) = _OrderHistoryDetailsPaymentTerm;
-  factory OrderHistoryDetailsPaymentTerm.empty() => OrderHistoryDetailsPaymentTerm(
-       paymentTermCode: '',
-       paymentTermDescription: '',
+  factory OrderHistoryDetailsPaymentTerm.empty() =>
+      OrderHistoryDetailsPaymentTerm(
+        paymentTermCode: PaymentTermCode(''),
+        paymentTermDescription: PaymentTermDescription(''),
       );
 }

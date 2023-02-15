@@ -14,13 +14,13 @@ import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
-import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/cart_bottom_sheet.dart';
+import 'package:ezrxmobile/presentation/core/custom_expansion_tile.dart'
+    as custom;
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
+import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/cart_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ezrxmobile/presentation/core/custom_expansion_tile.dart'
-    as custom;
 
 class OrderItemBonusCard extends StatelessWidget {
   final OrderHistoryDetailsBonusAggregate orderHistoryDetailsBonusAggregate;
@@ -89,6 +89,16 @@ class OrderItemBonusCard extends StatelessWidget {
                   Column(
                     children: [
                       BalanceTextRow(
+                        key: const Key('sapStatusNotEmpty'),
+                        keyText: 'Status:'.tr(),
+                        isStatus: true,
+                        valueText: orderHistoryDetailsBonusAggregate
+                            .orderItem.sAPStatus.displaySAPStatus,
+                        valueTextLoading: state.isLoading,
+                        keyFlex: 1,
+                        valueFlex: 1,
+                      ),
+                      BalanceTextRow(
                         keyText: 'Type'.tr(),
                         valueText: orderHistoryDetailsBonusAggregate
                             .orderItem.type
@@ -128,18 +138,6 @@ class OrderItemBonusCard extends StatelessWidget {
                               valueFlex: 1,
                             )
                           : const SizedBox.shrink(),
-                      BalanceTextRow(
-                        key: const Key('sapStatusNotEmpty'),
-                        keyText: 'Status:'.tr(),
-                        valueText: orderHistoryDetailsBonusAggregate
-                                .orderItem.sAPStatus.isNotEmpty
-                            ? orderHistoryDetailsBonusAggregate
-                                .orderItem.sAPStatus
-                            : 'Order Placed'.tr(),
-                        valueTextLoading: state.isLoading,
-                        keyFlex: 1,
-                        valueFlex: 1,
-                      ),
                       BalanceTextRow(
                         keyText: 'Quantity'.tr(),
                         valueText: orderHistoryDetailsBonusAggregate
@@ -184,7 +182,7 @@ class OrderItemBonusCard extends StatelessWidget {
                       BalanceTextRow(
                         keyText: 'Remarks'.tr(),
                         valueText: orderHistoryDetailsBonusAggregate
-                            .orderItem.lineReferenceNotes,
+                            .orderItem.lineReferenceNotes.displayRemarks,
                         valueTextLoading: state.isLoading,
                         keyFlex: 1,
                         valueFlex: 1,
@@ -195,7 +193,7 @@ class OrderItemBonusCard extends StatelessWidget {
                           keyText: 'Discount'.tr(),
                           valueText:
                               orderHistoryDetailsBonusAggregate.details.isEmpty
-                                  ? ''
+                                  ? 'NA'
                                   : state.discountRate(
                                       orderHistoryDetailsBonusAggregate.details,
                                     ),
@@ -258,8 +256,8 @@ class OrderItemBonusCard extends StatelessWidget {
                                         : const SizedBox.shrink(),
                                     BalanceTextRow(
                                       keyText: 'Material ID'.tr(),
-                                      valueText: orderItem
-                                          .materialNumber.displayMatNo,
+                                      valueText:
+                                          orderItem.materialNumber.displayMatNo,
                                       valueTextLoading: state.isLoading,
                                       keyFlex: 1,
                                       valueFlex: 1,
@@ -267,8 +265,7 @@ class OrderItemBonusCard extends StatelessWidget {
                                     eligibiltiyBlocState
                                             .isDeliveryDateOrTimeEnable
                                         ? BalanceTextRow(
-                                            keyText:
-                                                'Delivery Date/Time'.tr(),
+                                            keyText: 'Delivery Date/Time'.tr(),
                                             valueText:
                                                 orderItem.plannedDeliveryDate,
                                             valueTextLoading: state.isLoading,
@@ -293,8 +290,8 @@ class OrderItemBonusCard extends StatelessWidget {
                                     if (enableRemark)
                                       BalanceTextRow(
                                         keyText: 'Remarks'.tr(),
-                                        valueText:
-                                            orderItem.lineReferenceNotes,
+                                        valueText: orderItem
+                                            .lineReferenceNotes.displayRemarks,
                                         valueTextLoading: state.isLoading,
                                         keyFlex: 1,
                                         valueFlex: 1,

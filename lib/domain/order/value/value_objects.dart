@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/core/error/failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
@@ -271,7 +272,101 @@ class Remarks extends ValueObject<String> {
     return Remarks._(validateStringNotEmpty(input));
   }
 
+  String get displayRemarks {
+    return naIfEmpty(value.getOrElse(() => ''));
+  }
+
   const Remarks._(this.value);
+}
+
+class SpecialInstructions extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory SpecialInstructions(String input) {
+    return SpecialInstructions._(validateStringNotEmpty(input));
+  }
+
+  String get displaySpecialInstructions {
+    return naIfEmpty(value.getOrElse(() => ''));
+  }
+
+  const SpecialInstructions._(this.value);
+}
+
+class POReference extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory POReference(String input) {
+    return POReference._(validateStringNotEmpty(input));
+  }
+
+  String get displayPOReference {
+    return naIfEmpty(value.getOrElse(() => ''));
+  }
+
+  const POReference._(this.value);
+}
+
+class PaymentTermCode extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory PaymentTermCode(String input) {
+    return PaymentTermCode._(validateStringNotEmpty(input));
+  }
+
+  String get displayPaymentTermCode {
+    return naIfEmpty(value.getOrElse(() => ''));
+  }
+
+  const PaymentTermCode._(this.value);
+}
+
+class PaymentTermDescription extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory PaymentTermDescription(String input) {
+    return PaymentTermDescription._(validateStringNotEmpty(input));
+  }
+
+  String get displayPaymentTermDescription {
+    return naIfEmpty(value.getOrElse(() => ''));
+  }
+
+  const PaymentTermDescription._(this.value);
+}
+
+class CustomerClassification extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory CustomerClassification(String input) {
+    return CustomerClassification._(validateStringNotEmpty(input));
+  }
+
+  String get displayCustomerClassification {
+    return naIfEmpty(value.getOrElse(() => ''));
+  }
+
+  const CustomerClassification._(this.value);
+}
+
+class PhoneNumber extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory PhoneNumber(String input) {
+    return PhoneNumber._(validateStringNotEmpty(input));
+  }
+
+  String get displayTelephoneNumber {
+    return naIfEmpty(value.getOrElse(() => ''));
+  }
+
+  const PhoneNumber._(this.value);
 }
 
 class TemplateName extends ValueObject<String> {
@@ -637,4 +732,36 @@ class DocumentType extends ValueObject<String> {
   }
 
   const DocumentType._(this.value);
+}
+
+class CreatedDate extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory CreatedDate(String input) {
+    return CreatedDate._(validateDateString(input));
+  }
+
+  String get displayHumanReadableDate {
+    return displayDateOrEmpty((value.getOrElse(() => '')));
+  }
+
+  const CreatedDate._(this.value);
+}
+
+class SAPStatus extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory SAPStatus(String input) {
+    return SAPStatus._(validateStringNotEmpty(input));
+  }
+
+  String get displaySAPStatus {
+    return value.getOrElse(() => '').isNotEmpty
+        ? value.getOrElse(() => '')
+        : 'Order Placed'.tr();
+  }
+
+  const SAPStatus._(this.value);
 }

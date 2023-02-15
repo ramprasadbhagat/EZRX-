@@ -68,6 +68,7 @@ void main() {
                   ),
                 ),
               ),
+              contactNumber: ContactNumber('NA'),
             ),
             isValidated: false,
             showErrorMessages: false,
@@ -98,6 +99,7 @@ void main() {
                   ),
                 ),
               ),
+              contactNumber: ContactNumber('NA'),
             ),
             isValidated: false,
             showErrorMessages: false,
@@ -469,7 +471,9 @@ void main() {
             isLoading: false,
             orderId: orderDetail.id,
             additionalDetailsData: AdditionalDetailsData.empty().copyWith(
-              contactNumber: ContactNumber(customerCodeInfo.telephoneNumber),
+              contactNumber: ContactNumber(
+                customerCodeInfo.telephoneNumber.displayTelephoneNumber,
+              ),
             ),
           ),
         ],

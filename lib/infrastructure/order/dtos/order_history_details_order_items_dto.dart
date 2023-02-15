@@ -4,6 +4,7 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/order_history_details_order_items_details_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/order_history_details_order_items_tender_contract_details_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
 part 'order_history_details_order_items_dto.freezed.dart';
 part 'order_history_details_order_items_dto.g.dart';
 
@@ -58,12 +59,13 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
       unitPrice: orderHistoryDetailsOrderItem.unitPrice.zpPrice,
       totalPrice: orderHistoryDetailsOrderItem.totalPrice.totalPrice,
       tax: orderHistoryDetailsOrderItem.tax,
-      sAPStatus: orderHistoryDetailsOrderItem.sAPStatus,
+      sAPStatus: orderHistoryDetailsOrderItem.sAPStatus.displaySAPStatus,
       plannedDeliveryDate: orderHistoryDetailsOrderItem.plannedDeliveryDate,
       pickedQuantity: orderHistoryDetailsOrderItem.pickedQuantity,
       batch: orderHistoryDetailsOrderItem.batch,
       expiryDate: orderHistoryDetailsOrderItem.expiryDate,
-      lineReferenceNotes: orderHistoryDetailsOrderItem.lineReferenceNotes,
+      lineReferenceNotes:
+          orderHistoryDetailsOrderItem.lineReferenceNotes.getValue(),
       isTenderContractMaterial:
           orderHistoryDetailsOrderItem.isTenderContractMaterial,
       details: List.from(
@@ -87,12 +89,12 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
       unitPrice: ZpPrice(unitPrice.toString()),
       totalPrice: TotalPrice(totalPrice.toString()),
       tax: tax,
-      sAPStatus: sAPStatus,
+      sAPStatus: SAPStatus(sAPStatus),
       plannedDeliveryDate: plannedDeliveryDate,
       pickedQuantity: pickedQuantity,
       batch: batch,
       expiryDate: expiryDate,
-      lineReferenceNotes: lineReferenceNotes,
+      lineReferenceNotes: Remarks(lineReferenceNotes),
       isTenderContractMaterial: isTenderContractMaterial,
       details: details.map((e) => e.toDomain()).toList(),
       tenderContractDetails: OrderHistoryDetailsOrderItemTenderContractDetails(
@@ -100,7 +102,6 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
         tenderContractReference: tenderContractDetails.tenderContractReference,
         tenderPackageDescription:
             tenderContractDetails.tenderPackageDescription,
-            
       ),
     );
   }

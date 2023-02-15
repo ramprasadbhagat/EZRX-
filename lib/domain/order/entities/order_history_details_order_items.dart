@@ -17,12 +17,12 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
     required ZpPrice unitPrice,
     required TotalPrice totalPrice,
     required double tax,
-    required String sAPStatus,
+    required SAPStatus sAPStatus,
     required String plannedDeliveryDate,
     required int pickedQuantity,
     required String batch,
     required String expiryDate,
-    required String lineReferenceNotes,
+    required Remarks lineReferenceNotes,
     required bool isTenderContractMaterial,
     required List<OrderHistoryDetailsOrderItemDetails> details,
     required OrderHistoryDetailsOrderItemTenderContractDetails
@@ -37,20 +37,19 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
         unitPrice: ZpPrice('0.0'),
         totalPrice: TotalPrice('0.0'),
         tax: 0.0,
-        sAPStatus: '',
+        sAPStatus: SAPStatus(''),
         plannedDeliveryDate: '',
         pickedQuantity: 0,
         batch: '',
         expiryDate: '',
-        lineReferenceNotes: '',
+        lineReferenceNotes: Remarks(''),
         isTenderContractMaterial: false,
         details: <OrderHistoryDetailsOrderItemDetails>[],
         tenderContractDetails:
             OrderHistoryDetailsOrderItemTenderContractDetails.empty(),
       );
-      
+
   MaterialQueryInfo get queryInfo => MaterialQueryInfo.fromOrderHistoryDetails(
         orderHistoryDetailsOrderItem: this,
       );
-
 }

@@ -13,10 +13,12 @@ import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
-import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/cart_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
+import 'package:ezrxmobile/presentation/history/status_label.dart';
+import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/cart_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -71,13 +73,19 @@ class OrderItemCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    orderHistoryDetailsBonusAggregate
-                        .orderItem.materialDescription,
-                    style: Theme.of(context).textTheme.titleSmall,
+                  StatusLabel(
+                    status: StatusType(
+                      orderHistoryDetailsBonusAggregate
+                          .orderItem.sAPStatus.displaySAPStatus,
+                    ),
                   ),
-                  const SizedBox(
-                    height: 10,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10.0),
+                    child: Text(
+                      orderHistoryDetailsBonusAggregate
+                          .orderItem.materialDescription,
+                      style: Theme.of(context).textTheme.titleSmall,
+                    ),
                   ),
                   Column(
                     children: [
@@ -121,18 +129,6 @@ class OrderItemCard extends StatelessWidget {
                               valueFlex: 1,
                             )
                           : const SizedBox.shrink(),
-                      BalanceTextRow(
-                        key: const Key('sapStatusNotEmpty'),
-                        keyText: 'Status:'.tr(),
-                        valueText: orderHistoryDetailsBonusAggregate
-                                .orderItem.sAPStatus.isNotEmpty
-                            ? orderHistoryDetailsBonusAggregate
-                                .orderItem.sAPStatus
-                            : 'Order Placed'.tr(),
-                        valueTextLoading: state.isLoading,
-                        keyFlex: 1,
-                        valueFlex: 1,
-                      ),
                       BalanceTextRow(
                         keyText: 'Quantity'.tr(),
                         valueText: orderHistoryDetailsBonusAggregate
@@ -178,7 +174,7 @@ class OrderItemCard extends StatelessWidget {
                         BalanceTextRow(
                           keyText: 'Remarks'.tr(),
                           valueText: orderHistoryDetailsBonusAggregate
-                              .orderItem.lineReferenceNotes,
+                              .orderItem.lineReferenceNotes.displayRemarks,
                           valueTextLoading: state.isLoading,
                           keyFlex: 1,
                           valueFlex: 1,
@@ -189,7 +185,7 @@ class OrderItemCard extends StatelessWidget {
                           keyText: 'Discount'.tr(),
                           valueText:
                               orderHistoryDetailsBonusAggregate.details.isEmpty
-                                  ? ''
+                                  ? 'NA'
                                   : state.discountRate(
                                       orderHistoryDetailsBonusAggregate.details,
                                     ),

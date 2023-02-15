@@ -16,8 +16,9 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$OrderHistoryDetailsPaymentTerm {
-  String get paymentTermCode => throw _privateConstructorUsedError;
-  String get paymentTermDescription => throw _privateConstructorUsedError;
+  PaymentTermCode get paymentTermCode => throw _privateConstructorUsedError;
+  PaymentTermDescription get paymentTermDescription =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $OrderHistoryDetailsPaymentTermCopyWith<OrderHistoryDetailsPaymentTerm>
@@ -32,7 +33,9 @@ abstract class $OrderHistoryDetailsPaymentTermCopyWith<$Res> {
       _$OrderHistoryDetailsPaymentTermCopyWithImpl<$Res,
           OrderHistoryDetailsPaymentTerm>;
   @useResult
-  $Res call({String paymentTermCode, String paymentTermDescription});
+  $Res call(
+      {PaymentTermCode paymentTermCode,
+      PaymentTermDescription paymentTermDescription});
 }
 
 /// @nodoc
@@ -56,11 +59,11 @@ class _$OrderHistoryDetailsPaymentTermCopyWithImpl<$Res,
       paymentTermCode: null == paymentTermCode
           ? _value.paymentTermCode
           : paymentTermCode // ignore: cast_nullable_to_non_nullable
-              as String,
+              as PaymentTermCode,
       paymentTermDescription: null == paymentTermDescription
           ? _value.paymentTermDescription
           : paymentTermDescription // ignore: cast_nullable_to_non_nullable
-              as String,
+              as PaymentTermDescription,
     ) as $Val);
   }
 }
@@ -74,7 +77,9 @@ abstract class _$$_OrderHistoryDetailsPaymentTermCopyWith<$Res>
       __$$_OrderHistoryDetailsPaymentTermCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String paymentTermCode, String paymentTermDescription});
+  $Res call(
+      {PaymentTermCode paymentTermCode,
+      PaymentTermDescription paymentTermDescription});
 }
 
 /// @nodoc
@@ -97,11 +102,11 @@ class __$$_OrderHistoryDetailsPaymentTermCopyWithImpl<$Res>
       paymentTermCode: null == paymentTermCode
           ? _value.paymentTermCode
           : paymentTermCode // ignore: cast_nullable_to_non_nullable
-              as String,
+              as PaymentTermCode,
       paymentTermDescription: null == paymentTermDescription
           ? _value.paymentTermDescription
           : paymentTermDescription // ignore: cast_nullable_to_non_nullable
-              as String,
+              as PaymentTermDescription,
     ));
   }
 }
@@ -115,9 +120,9 @@ class _$_OrderHistoryDetailsPaymentTerm
       : super._();
 
   @override
-  final String paymentTermCode;
+  final PaymentTermCode paymentTermCode;
   @override
-  final String paymentTermDescription;
+  final PaymentTermDescription paymentTermDescription;
 
   @override
   String toString() {
@@ -150,15 +155,15 @@ class _$_OrderHistoryDetailsPaymentTerm
 abstract class _OrderHistoryDetailsPaymentTerm
     extends OrderHistoryDetailsPaymentTerm {
   factory _OrderHistoryDetailsPaymentTerm(
-          {required final String paymentTermCode,
-          required final String paymentTermDescription}) =
+          {required final PaymentTermCode paymentTermCode,
+          required final PaymentTermDescription paymentTermDescription}) =
       _$_OrderHistoryDetailsPaymentTerm;
   _OrderHistoryDetailsPaymentTerm._() : super._();
 
   @override
-  String get paymentTermCode;
+  PaymentTermCode get paymentTermCode;
   @override
-  String get paymentTermDescription;
+  PaymentTermDescription get paymentTermDescription;
   @override
   @JsonKey(ignore: true)
   _$$_OrderHistoryDetailsPaymentTermCopyWith<_$_OrderHistoryDetailsPaymentTerm>

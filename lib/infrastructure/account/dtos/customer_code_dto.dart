@@ -3,6 +3,7 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_name.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/bill_to_dto.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/ship_to_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -65,7 +66,7 @@ class CustomerCodeDto with _$CustomerCodeDto {
       status: Status(status),
       division: division,
       postalCode: postalCode,
-      customerClassification: customerClassification,
+      customerClassification: CustomerClassification(customerClassification),
       customerLocalGroup: customerLocalGroup,
       paymentTermDescription: paymentTermDescription,
       shipToInfos: shipToInfos.map((e) => e.toDomain()).toList(),
@@ -74,7 +75,7 @@ class CustomerCodeDto with _$CustomerCodeDto {
       customerGrp4: CustomerGrp4(customerGrp4),
       region: region,
       emailAddresses: emailAddresses.map((e) => EmailAddress(e)).toList(),
-      telephoneNumber: telephoneNumber,
+      telephoneNumber: PhoneNumber(telephoneNumber),
     );
   }
 

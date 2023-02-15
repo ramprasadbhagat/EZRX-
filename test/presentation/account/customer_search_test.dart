@@ -220,7 +220,7 @@ void main() {
         when(() => customerCodeBlocMock.state).thenReturn(
           CustomerCodeState.initial().copyWith(customerCodeList: [
             CustomerCodeInfo.empty().copyWith(
-              telephoneNumber: '1234567890',
+              telephoneNumber: PhoneNumber('1234567890'),
               customerCodeSoldTo: '123456789',
               shipToInfos: <ShipToInfo>[
                 ShipToInfo.empty().copyWith(
@@ -265,7 +265,7 @@ void main() {
         when(() => customerCodeBlocMock.state).thenReturn(
           CustomerCodeState.initial().copyWith(customerCodeList: [
             CustomerCodeInfo.empty().copyWith(
-              telephoneNumber: '1234567890',
+              telephoneNumber: PhoneNumber('1234567890'),
               customerCodeSoldTo: '123456789',
               shipToInfos: <ShipToInfo>[
                 ShipToInfo.empty().copyWith(

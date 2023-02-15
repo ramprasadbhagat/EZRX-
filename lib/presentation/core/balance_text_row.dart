@@ -1,4 +1,6 @@
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/history/status_label.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -8,6 +10,7 @@ class BalanceTextRow extends StatelessWidget {
   final int keyFlex;
   final int valueFlex;
   final bool valueTextLoading;
+  final bool isStatus;
 
   const BalanceTextRow({
     Key? key,
@@ -16,6 +19,7 @@ class BalanceTextRow extends StatelessWidget {
     this.keyFlex = 1,
     this.valueFlex = 2,
     this.valueTextLoading = false,
+    this.isStatus = false,
   }) : super(key: key);
 
   @override
@@ -43,10 +47,24 @@ class BalanceTextRow extends StatelessWidget {
                     width: 40,
                     child: LoadingShimmer.tile(),
                   )
-                : Text(
-                    ': $valueText',
-                    style: Theme.of(context).textTheme.titleSmall,
-                  ),
+                : isStatus
+                    ? Row(
+                        children: [
+                          Text(
+                            ': ',
+                            style: Theme.of(context).textTheme.titleSmall,
+                          ),
+                          Flexible(
+                            child: StatusLabel(
+                              status: StatusType(valueText),
+                            ),
+                          ),
+                        ],
+                      )
+                    : Text(
+                        ': $valueText',
+                        style: Theme.of(context).textTheme.titleSmall,
+                      ),
           ),
         ],
       ),

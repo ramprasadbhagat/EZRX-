@@ -2,6 +2,7 @@ import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_header.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_payment_term.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_shipping_information.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/order_history_details_messages_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/order_history_details_order_header_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/order_history_details_order_items_dto.dart';
@@ -9,6 +10,7 @@ import 'package:ezrxmobile/infrastructure/order/dtos/order_history_details_payme
 import 'package:ezrxmobile/infrastructure/order/dtos/order_history_details_po_documents_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/order_history_details_shipping_information_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
 part 'order_history_details_dto.freezed.dart';
 part 'order_history_details_dto.g.dart';
 
@@ -32,8 +34,7 @@ class OrderHistoryDetailsDto with _$OrderHistoryDetailsDto {
       name: 'PODocuments',
       defaultValue: <PoDocumentsDto>[],
     )
-        required List<PoDocumentsDto>
-            orderHistoryDetailsPoDocuments,
+        required List<PoDocumentsDto> orderHistoryDetailsPoDocuments,
     @JsonKey(name: 'Messages', defaultValue: <OrderHistoryDetailsMessagesDto>[])
         required List<OrderHistoryDetailsMessagesDto>
             orderHistoryDetailsMessages,
@@ -58,8 +59,8 @@ class OrderHistoryDetailsDto with _$OrderHistoryDetailsDto {
           OrderHistoryDetailsPaymentTermDto.fromDomain(
         orderHistoryDetails.orderHistoryDetailsPaymentTerm,
       ),
-      orderHistoryDetailsSpecialInstructions:
-          orderHistoryDetails.orderHistoryDetailsSpecialInstructions,
+      orderHistoryDetailsSpecialInstructions: orderHistoryDetails
+          .orderHistoryDetailsSpecialInstructions.displaySpecialInstructions,
       orderHistoryDetailsPoDocuments:
           List.from(orderHistoryDetails.orderHistoryDetailsPoDocuments)
               .map((e) => PoDocumentsDto.fromDomain(e))
@@ -75,12 +76,13 @@ class OrderHistoryDetailsDto with _$OrderHistoryDetailsDto {
       orderHistoryDetailsOrderHeader: OrderHistoryDetailsOrderHeader(
         totalTax: orderHistoryDetailsOrderHeader.totalTax,
         orderValue: orderHistoryDetailsOrderHeader.orderValue,
-        pOReference: orderHistoryDetailsOrderHeader.pOReference,
+        pOReference: POReference(orderHistoryDetailsOrderHeader.pOReference),
         requestedDeliveryDate:
             orderHistoryDetailsOrderHeader.requestedDeliveryDate,
-        telephoneNumber: orderHistoryDetailsOrderHeader.telephoneNumber,
+        telephoneNumber:
+            PhoneNumber(orderHistoryDetailsOrderHeader.telephoneNumber),
         type: orderHistoryDetailsOrderHeader.type,
-        createdDate: orderHistoryDetailsOrderHeader.createdDate,
+        createdDate: CreatedDate(orderHistoryDetailsOrderHeader.createdDate),
         eZRXNumber: orderHistoryDetailsOrderHeader.eZRXNumber,
         orderBy: orderHistoryDetailsOrderHeader.orderBy,
       ),
@@ -100,15 +102,17 @@ class OrderHistoryDetailsDto with _$OrderHistoryDetailsDto {
       ),
       orderHistoryDetailsOrderItem:
           orderHistoryDetailsOrderItem.map((e) => e.toDomain()).toList(),
-    
       orderHistoryDetailsPaymentTerm: OrderHistoryDetailsPaymentTerm(
-        paymentTermCode: orderHistoryDetailsPaymentTerm.paymentTermCode,
-        paymentTermDescription:
-            orderHistoryDetailsPaymentTerm.paymentTermDescription,
+        paymentTermCode: PaymentTermCode(
+          orderHistoryDetailsPaymentTerm.paymentTermCode,
+        ),
+        paymentTermDescription: PaymentTermDescription(
+          orderHistoryDetailsPaymentTerm.paymentTermDescription,
+        ),
       ),
       orderHistoryDetailsPoDocuments:
           orderHistoryDetailsPoDocuments.map((e) => e.toDomain()).toList(),
-      orderHistoryDetailsSpecialInstructions: '',
+      orderHistoryDetailsSpecialInstructions: SpecialInstructions(''),
       orderHistoryDetailsMessages:
           orderHistoryDetailsMessages.map((e) => e.toDomain()).toList(),
     );

@@ -33,7 +33,7 @@ class AdditionalDetailsData with _$AdditionalDetailsData {
       contactPerson: ContactPerson(orderDetail.contactPerson),
       contactNumber: ContactNumber(
         orderDetail.phonenumber.isEmpty
-            ? customerCodeInfo.telephoneNumber
+            ? customerCodeInfo.telephoneNumber.displayTelephoneNumber
             : orderDetail.phonenumber,
       ),
       customerPoReference: CustomerPoReference(orderDetail.poReference),

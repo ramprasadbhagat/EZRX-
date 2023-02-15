@@ -23,12 +23,12 @@ mixin _$OrderHistoryDetailsOrderItem {
   ZpPrice get unitPrice => throw _privateConstructorUsedError;
   TotalPrice get totalPrice => throw _privateConstructorUsedError;
   double get tax => throw _privateConstructorUsedError;
-  String get sAPStatus => throw _privateConstructorUsedError;
+  SAPStatus get sAPStatus => throw _privateConstructorUsedError;
   String get plannedDeliveryDate => throw _privateConstructorUsedError;
   int get pickedQuantity => throw _privateConstructorUsedError;
   String get batch => throw _privateConstructorUsedError;
   String get expiryDate => throw _privateConstructorUsedError;
-  String get lineReferenceNotes => throw _privateConstructorUsedError;
+  Remarks get lineReferenceNotes => throw _privateConstructorUsedError;
   bool get isTenderContractMaterial => throw _privateConstructorUsedError;
   List<OrderHistoryDetailsOrderItemDetails> get details =>
       throw _privateConstructorUsedError;
@@ -56,12 +56,12 @@ abstract class $OrderHistoryDetailsOrderItemCopyWith<$Res> {
       ZpPrice unitPrice,
       TotalPrice totalPrice,
       double tax,
-      String sAPStatus,
+      SAPStatus sAPStatus,
       String plannedDeliveryDate,
       int pickedQuantity,
       String batch,
       String expiryDate,
-      String lineReferenceNotes,
+      Remarks lineReferenceNotes,
       bool isTenderContractMaterial,
       List<OrderHistoryDetailsOrderItemDetails> details,
       OrderHistoryDetailsOrderItemTenderContractDetails tenderContractDetails});
@@ -133,7 +133,7 @@ class _$OrderHistoryDetailsOrderItemCopyWithImpl<$Res,
       sAPStatus: null == sAPStatus
           ? _value.sAPStatus
           : sAPStatus // ignore: cast_nullable_to_non_nullable
-              as String,
+              as SAPStatus,
       plannedDeliveryDate: null == plannedDeliveryDate
           ? _value.plannedDeliveryDate
           : plannedDeliveryDate // ignore: cast_nullable_to_non_nullable
@@ -153,7 +153,7 @@ class _$OrderHistoryDetailsOrderItemCopyWithImpl<$Res,
       lineReferenceNotes: null == lineReferenceNotes
           ? _value.lineReferenceNotes
           : lineReferenceNotes // ignore: cast_nullable_to_non_nullable
-              as String,
+              as Remarks,
       isTenderContractMaterial: null == isTenderContractMaterial
           ? _value.isTenderContractMaterial
           : isTenderContractMaterial // ignore: cast_nullable_to_non_nullable
@@ -197,12 +197,12 @@ abstract class _$$_OrderHistoryDetailsOrderItemCopyWith<$Res>
       ZpPrice unitPrice,
       TotalPrice totalPrice,
       double tax,
-      String sAPStatus,
+      SAPStatus sAPStatus,
       String plannedDeliveryDate,
       int pickedQuantity,
       String batch,
       String expiryDate,
-      String lineReferenceNotes,
+      Remarks lineReferenceNotes,
       bool isTenderContractMaterial,
       List<OrderHistoryDetailsOrderItemDetails> details,
       OrderHistoryDetailsOrderItemTenderContractDetails tenderContractDetails});
@@ -274,7 +274,7 @@ class __$$_OrderHistoryDetailsOrderItemCopyWithImpl<$Res>
       sAPStatus: null == sAPStatus
           ? _value.sAPStatus
           : sAPStatus // ignore: cast_nullable_to_non_nullable
-              as String,
+              as SAPStatus,
       plannedDeliveryDate: null == plannedDeliveryDate
           ? _value.plannedDeliveryDate
           : plannedDeliveryDate // ignore: cast_nullable_to_non_nullable
@@ -294,7 +294,7 @@ class __$$_OrderHistoryDetailsOrderItemCopyWithImpl<$Res>
       lineReferenceNotes: null == lineReferenceNotes
           ? _value.lineReferenceNotes
           : lineReferenceNotes // ignore: cast_nullable_to_non_nullable
-              as String,
+              as Remarks,
       isTenderContractMaterial: null == isTenderContractMaterial
           ? _value.isTenderContractMaterial
           : isTenderContractMaterial // ignore: cast_nullable_to_non_nullable
@@ -349,7 +349,7 @@ class _$_OrderHistoryDetailsOrderItem extends _OrderHistoryDetailsOrderItem {
   @override
   final double tax;
   @override
-  final String sAPStatus;
+  final SAPStatus sAPStatus;
   @override
   final String plannedDeliveryDate;
   @override
@@ -359,7 +359,7 @@ class _$_OrderHistoryDetailsOrderItem extends _OrderHistoryDetailsOrderItem {
   @override
   final String expiryDate;
   @override
-  final String lineReferenceNotes;
+  final Remarks lineReferenceNotes;
   @override
   final bool isTenderContractMaterial;
   final List<OrderHistoryDetailsOrderItemDetails> _details;
@@ -450,12 +450,12 @@ abstract class _OrderHistoryDetailsOrderItem
       required final ZpPrice unitPrice,
       required final TotalPrice totalPrice,
       required final double tax,
-      required final String sAPStatus,
+      required final SAPStatus sAPStatus,
       required final String plannedDeliveryDate,
       required final int pickedQuantity,
       required final String batch,
       required final String expiryDate,
-      required final String lineReferenceNotes,
+      required final Remarks lineReferenceNotes,
       required final bool isTenderContractMaterial,
       required final List<OrderHistoryDetailsOrderItemDetails> details,
       required final OrderHistoryDetailsOrderItemTenderContractDetails
@@ -477,7 +477,7 @@ abstract class _OrderHistoryDetailsOrderItem
   @override
   double get tax;
   @override
-  String get sAPStatus;
+  SAPStatus get sAPStatus;
   @override
   String get plannedDeliveryDate;
   @override
@@ -487,7 +487,7 @@ abstract class _OrderHistoryDetailsOrderItem
   @override
   String get expiryDate;
   @override
-  String get lineReferenceNotes;
+  Remarks get lineReferenceNotes;
   @override
   bool get isTenderContractMaterial;
   @override

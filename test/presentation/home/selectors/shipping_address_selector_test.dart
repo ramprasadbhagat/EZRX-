@@ -27,6 +27,7 @@ import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/home/selector/shipping_address_selector.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -356,7 +357,7 @@ void main() {
         CustomerCodeState.initial(),
         CustomerCodeState.initial().copyWith(
           customerCodeInfo: CustomerCodeInfo.empty().copyWith(
-            telephoneNumber: '1234567890',
+            telephoneNumber: PhoneNumber('1234567890'),
           ),
         ),
       ];

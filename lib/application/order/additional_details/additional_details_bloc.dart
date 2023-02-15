@@ -7,9 +7,9 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+part 'additional_details_bloc.freezed.dart';
 part 'additional_details_event.dart';
 part 'additional_details_state.dart';
-part 'additional_details_bloc.freezed.dart';
 
 class AdditionalDetailsBloc
     extends Bloc<AdditionalDetailsEvent, AdditionalDetailsState> {
@@ -29,7 +29,7 @@ class AdditionalDetailsBloc
       initialized: (value) async => emit(
         AdditionalDetailsState.initial().copyWith.additionalDetailsData(
               contactNumber: ContactNumber(
-                value.customerCodeInfo.telephoneNumber,
+                value.customerCodeInfo.telephoneNumber.displayTelephoneNumber,
               ),
             ),
       ),
@@ -90,7 +90,8 @@ class AdditionalDetailsBloc
               state.copyWith(
                 additionalDetailsData: AdditionalDetailsData.empty().copyWith(
                   contactNumber: ContactNumber(
-                    value.customerCodeInfo.telephoneNumber,
+                    value.customerCodeInfo.telephoneNumber
+                        .displayTelephoneNumber,
                   ),
                 ),
                 isLoading: false,

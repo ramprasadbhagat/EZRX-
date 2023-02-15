@@ -25,7 +25,7 @@ mixin _$OrderHistoryDetails {
       throw _privateConstructorUsedError;
   OrderHistoryDetailsPaymentTerm get orderHistoryDetailsPaymentTerm =>
       throw _privateConstructorUsedError;
-  String get orderHistoryDetailsSpecialInstructions =>
+  SpecialInstructions get orderHistoryDetailsSpecialInstructions =>
       throw _privateConstructorUsedError;
   List<PoDocuments> get orderHistoryDetailsPoDocuments =>
       throw _privateConstructorUsedError;
@@ -49,7 +49,7 @@ abstract class $OrderHistoryDetailsCopyWith<$Res> {
           orderHistoryDetailsShippingInformation,
       List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItem,
       OrderHistoryDetailsPaymentTerm orderHistoryDetailsPaymentTerm,
-      String orderHistoryDetailsSpecialInstructions,
+      SpecialInstructions orderHistoryDetailsSpecialInstructions,
       List<PoDocuments> orderHistoryDetailsPoDocuments,
       List<OrderHistoryDetailsMessages> orderHistoryDetailsMessages});
 
@@ -104,7 +104,7 @@ class _$OrderHistoryDetailsCopyWithImpl<$Res, $Val extends OrderHistoryDetails>
               orderHistoryDetailsSpecialInstructions
           ? _value.orderHistoryDetailsSpecialInstructions
           : orderHistoryDetailsSpecialInstructions // ignore: cast_nullable_to_non_nullable
-              as String,
+              as SpecialInstructions,
       orderHistoryDetailsPoDocuments: null == orderHistoryDetailsPoDocuments
           ? _value.orderHistoryDetailsPoDocuments
           : orderHistoryDetailsPoDocuments // ignore: cast_nullable_to_non_nullable
@@ -164,7 +164,7 @@ abstract class _$$_OrderHistoryDetailsCopyWith<$Res>
           orderHistoryDetailsShippingInformation,
       List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItem,
       OrderHistoryDetailsPaymentTerm orderHistoryDetailsPaymentTerm,
-      String orderHistoryDetailsSpecialInstructions,
+      SpecialInstructions orderHistoryDetailsSpecialInstructions,
       List<PoDocuments> orderHistoryDetailsPoDocuments,
       List<OrderHistoryDetailsMessages> orderHistoryDetailsMessages});
 
@@ -220,7 +220,7 @@ class __$$_OrderHistoryDetailsCopyWithImpl<$Res>
               orderHistoryDetailsSpecialInstructions
           ? _value.orderHistoryDetailsSpecialInstructions
           : orderHistoryDetailsSpecialInstructions // ignore: cast_nullable_to_non_nullable
-              as String,
+              as SpecialInstructions,
       orderHistoryDetailsPoDocuments: null == orderHistoryDetailsPoDocuments
           ? _value._orderHistoryDetailsPoDocuments
           : orderHistoryDetailsPoDocuments // ignore: cast_nullable_to_non_nullable
@@ -266,7 +266,7 @@ class _$_OrderHistoryDetails extends _OrderHistoryDetails {
   @override
   final OrderHistoryDetailsPaymentTerm orderHistoryDetailsPaymentTerm;
   @override
-  final String orderHistoryDetailsSpecialInstructions;
+  final SpecialInstructions orderHistoryDetailsSpecialInstructions;
   final List<PoDocuments> _orderHistoryDetailsPoDocuments;
   @override
   List<PoDocuments> get orderHistoryDetailsPoDocuments {
@@ -347,7 +347,7 @@ abstract class _OrderHistoryDetails extends OrderHistoryDetails {
           orderHistoryDetailsOrderItem,
       required final OrderHistoryDetailsPaymentTerm
           orderHistoryDetailsPaymentTerm,
-      required final String orderHistoryDetailsSpecialInstructions,
+      required final SpecialInstructions orderHistoryDetailsSpecialInstructions,
       required final List<PoDocuments> orderHistoryDetailsPoDocuments,
       required final List<OrderHistoryDetailsMessages>
           orderHistoryDetailsMessages}) = _$_OrderHistoryDetails;
@@ -363,7 +363,7 @@ abstract class _OrderHistoryDetails extends OrderHistoryDetails {
   @override
   OrderHistoryDetailsPaymentTerm get orderHistoryDetailsPaymentTerm;
   @override
-  String get orderHistoryDetailsSpecialInstructions;
+  SpecialInstructions get orderHistoryDetailsSpecialInstructions;
   @override
   List<PoDocuments> get orderHistoryDetailsPoDocuments;
   @override

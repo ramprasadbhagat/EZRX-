@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/order/entities/price_bonus.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 
@@ -87,4 +88,13 @@ Color getStatusLabelColor(String statusType) {
     default:
       return ZPColors.lightYellow;
   }
+}
+
+String displayDateOrEmpty(String text) {
+  final parsedDate = DateTime.tryParse(text);
+  if (parsedDate == null) {
+    return '';
+  }
+
+  return DateFormat('dd MMM yyyy | hh:mm').format(parsedDate);
 }

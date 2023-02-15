@@ -22,7 +22,8 @@ mixin _$CustomerCodeInfo {
   Status get status => throw _privateConstructorUsedError;
   String get division => throw _privateConstructorUsedError;
   String get postalCode => throw _privateConstructorUsedError;
-  String get customerClassification => throw _privateConstructorUsedError;
+  CustomerClassification get customerClassification =>
+      throw _privateConstructorUsedError;
   String get customerLocalGroup => throw _privateConstructorUsedError;
   String get paymentTermDescription => throw _privateConstructorUsedError;
   List<ShipToInfo> get shipToInfos => throw _privateConstructorUsedError;
@@ -31,7 +32,7 @@ mixin _$CustomerCodeInfo {
   CustomerAttr7 get customerAttr7 => throw _privateConstructorUsedError;
   CustomerGrp4 get customerGrp4 => throw _privateConstructorUsedError;
   String get region => throw _privateConstructorUsedError;
-  String get telephoneNumber => throw _privateConstructorUsedError;
+  PhoneNumber get telephoneNumber => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CustomerCodeInfoCopyWith<CustomerCodeInfo> get copyWith =>
@@ -51,7 +52,7 @@ abstract class $CustomerCodeInfoCopyWith<$Res> {
       Status status,
       String division,
       String postalCode,
-      String customerClassification,
+      CustomerClassification customerClassification,
       String customerLocalGroup,
       String paymentTermDescription,
       List<ShipToInfo> shipToInfos,
@@ -60,7 +61,7 @@ abstract class $CustomerCodeInfoCopyWith<$Res> {
       CustomerAttr7 customerAttr7,
       CustomerGrp4 customerGrp4,
       String region,
-      String telephoneNumber});
+      PhoneNumber telephoneNumber});
 
   $CustomerNameCopyWith<$Res> get customerName;
   $CustomerAddressCopyWith<$Res> get customerAddress;
@@ -124,7 +125,7 @@ class _$CustomerCodeInfoCopyWithImpl<$Res, $Val extends CustomerCodeInfo>
       customerClassification: null == customerClassification
           ? _value.customerClassification
           : customerClassification // ignore: cast_nullable_to_non_nullable
-              as String,
+              as CustomerClassification,
       customerLocalGroup: null == customerLocalGroup
           ? _value.customerLocalGroup
           : customerLocalGroup // ignore: cast_nullable_to_non_nullable
@@ -160,7 +161,7 @@ class _$CustomerCodeInfoCopyWithImpl<$Res, $Val extends CustomerCodeInfo>
       telephoneNumber: null == telephoneNumber
           ? _value.telephoneNumber
           : telephoneNumber // ignore: cast_nullable_to_non_nullable
-              as String,
+              as PhoneNumber,
     ) as $Val);
   }
 
@@ -196,7 +197,7 @@ abstract class _$$_CustomerCodeInfoCopyWith<$Res>
       Status status,
       String division,
       String postalCode,
-      String customerClassification,
+      CustomerClassification customerClassification,
       String customerLocalGroup,
       String paymentTermDescription,
       List<ShipToInfo> shipToInfos,
@@ -205,7 +206,7 @@ abstract class _$$_CustomerCodeInfoCopyWith<$Res>
       CustomerAttr7 customerAttr7,
       CustomerGrp4 customerGrp4,
       String region,
-      String telephoneNumber});
+      PhoneNumber telephoneNumber});
 
   @override
   $CustomerNameCopyWith<$Res> get customerName;
@@ -269,7 +270,7 @@ class __$$_CustomerCodeInfoCopyWithImpl<$Res>
       customerClassification: null == customerClassification
           ? _value.customerClassification
           : customerClassification // ignore: cast_nullable_to_non_nullable
-              as String,
+              as CustomerClassification,
       customerLocalGroup: null == customerLocalGroup
           ? _value.customerLocalGroup
           : customerLocalGroup // ignore: cast_nullable_to_non_nullable
@@ -305,7 +306,7 @@ class __$$_CustomerCodeInfoCopyWithImpl<$Res>
       telephoneNumber: null == telephoneNumber
           ? _value.telephoneNumber
           : telephoneNumber // ignore: cast_nullable_to_non_nullable
-              as String,
+              as PhoneNumber,
     ));
   }
 }
@@ -348,7 +349,7 @@ class _$_CustomerCodeInfo extends _CustomerCodeInfo {
   @override
   final String postalCode;
   @override
-  final String customerClassification;
+  final CustomerClassification customerClassification;
   @override
   final String customerLocalGroup;
   @override
@@ -381,7 +382,7 @@ class _$_CustomerCodeInfo extends _CustomerCodeInfo {
   @override
   final String region;
   @override
-  final String telephoneNumber;
+  final PhoneNumber telephoneNumber;
 
   @override
   String toString() {
@@ -460,7 +461,7 @@ abstract class _CustomerCodeInfo extends CustomerCodeInfo {
       required final Status status,
       required final String division,
       required final String postalCode,
-      required final String customerClassification,
+      required final CustomerClassification customerClassification,
       required final String customerLocalGroup,
       required final String paymentTermDescription,
       required final List<ShipToInfo> shipToInfos,
@@ -469,7 +470,7 @@ abstract class _CustomerCodeInfo extends CustomerCodeInfo {
       required final CustomerAttr7 customerAttr7,
       required final CustomerGrp4 customerGrp4,
       required final String region,
-      required final String telephoneNumber}) = _$_CustomerCodeInfo;
+      required final PhoneNumber telephoneNumber}) = _$_CustomerCodeInfo;
   const _CustomerCodeInfo._() : super._();
 
   @override
@@ -485,7 +486,7 @@ abstract class _CustomerCodeInfo extends CustomerCodeInfo {
   @override
   String get postalCode;
   @override
-  String get customerClassification;
+  CustomerClassification get customerClassification;
   @override
   String get customerLocalGroup;
   @override
@@ -503,7 +504,7 @@ abstract class _CustomerCodeInfo extends CustomerCodeInfo {
   @override
   String get region;
   @override
-  String get telephoneNumber;
+  PhoneNumber get telephoneNumber;
   @override
   @JsonKey(ignore: true)
   _$$_CustomerCodeInfoCopyWith<_$_CustomerCodeInfo> get copyWith =>

@@ -1,4 +1,6 @@
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
 part 'order_history_details_order_header.freezed.dart';
 
 @freezed
@@ -7,11 +9,11 @@ class OrderHistoryDetailsOrderHeader with _$OrderHistoryDetailsOrderHeader {
   factory OrderHistoryDetailsOrderHeader({
     required double totalTax,
     required String requestedDeliveryDate,
-    required String pOReference,
+    required POReference pOReference,
     required String type,
-    required String telephoneNumber,
+    required PhoneNumber telephoneNumber,
     required double orderValue,
-    required String createdDate,
+    required CreatedDate createdDate,
     required String eZRXNumber,
     required String orderBy,
   }) = _OrderHistoryDetailsOrderHeader;
@@ -19,11 +21,11 @@ class OrderHistoryDetailsOrderHeader with _$OrderHistoryDetailsOrderHeader {
       OrderHistoryDetailsOrderHeader(
         totalTax: 0.0,
         requestedDeliveryDate: '',
-        pOReference: '',
+        pOReference: POReference(''),
         type: '',
-        telephoneNumber: '',
+        telephoneNumber: PhoneNumber(''),
         orderValue: 0.0,
-        createdDate: '',
+        createdDate: CreatedDate(''),
         eZRXNumber: '',
         orderBy: '',
       );

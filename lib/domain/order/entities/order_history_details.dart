@@ -5,6 +5,7 @@ import 'package:ezrxmobile/domain/order/entities/order_history_details_po_docume
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_header.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_shipping_information.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'order_history_details.freezed.dart';
 
@@ -17,9 +18,8 @@ class OrderHistoryDetails with _$OrderHistoryDetails {
         orderHistoryDetailsShippingInformation,
     required List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItem,
     required OrderHistoryDetailsPaymentTerm orderHistoryDetailsPaymentTerm,
-    required String orderHistoryDetailsSpecialInstructions,
-    required List<PoDocuments>
-        orderHistoryDetailsPoDocuments,
+    required SpecialInstructions orderHistoryDetailsSpecialInstructions,
+    required List<PoDocuments> orderHistoryDetailsPoDocuments,
     required List<OrderHistoryDetailsMessages> orderHistoryDetailsMessages,
   }) = _OrderHistoryDetails;
   factory OrderHistoryDetails.empty() => OrderHistoryDetails(
@@ -28,11 +28,10 @@ class OrderHistoryDetails with _$OrderHistoryDetails {
             OrderHistoryDetailsShippingInformation.empty(),
         orderHistoryDetailsOrderItem: <OrderHistoryDetailsOrderItem>[],
         orderHistoryDetailsPaymentTerm: OrderHistoryDetailsPaymentTerm.empty(),
-        orderHistoryDetailsSpecialInstructions: '',
+        orderHistoryDetailsSpecialInstructions: SpecialInstructions(''),
         orderHistoryDetailsPoDocuments: <PoDocuments>[],
         orderHistoryDetailsMessages: <OrderHistoryDetailsMessages>[],
       );
-
 
   bool get poDocumentsAvailable => orderHistoryDetailsPoDocuments.isNotEmpty;
 

@@ -13,6 +13,7 @@ import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
+import 'package:ezrxmobile/presentation/history/status_label.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -108,24 +109,9 @@ class OrderHistoryListTile extends StatelessWidget {
                   ),
                   salesOrgConfigs.disableProcessingStatus
                       ? const SizedBox.shrink()
-                      : Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 10,
-                          vertical: 4,
+                      : StatusLabel(
+                          status: orderHistoryItem.status,
                         ),
-                        decoration: BoxDecoration(
-                          color: orderHistoryItem
-                              .status.displayStatusLabelColor,
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(15),
-                          ),
-                        ),
-                        child: Text(
-                          orderHistoryItem.status.getOrCrash(),
-                          style: Theme.of(context).textTheme.titleSmall?.copyWith(fontSize: 12),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
                 ],
               ),
               BalanceTextRow(

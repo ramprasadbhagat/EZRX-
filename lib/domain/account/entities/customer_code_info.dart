@@ -4,6 +4,7 @@ import 'package:ezrxmobile/domain/account/entities/customer_name.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'customer_code_info.freezed.dart';
@@ -19,7 +20,7 @@ class CustomerCodeInfo with _$CustomerCodeInfo {
     required Status status,
     required String division,
     required String postalCode,
-    required String customerClassification,
+    required CustomerClassification customerClassification,
     required String customerLocalGroup,
     required String paymentTermDescription,
     required List<ShipToInfo> shipToInfos,
@@ -28,7 +29,7 @@ class CustomerCodeInfo with _$CustomerCodeInfo {
     required CustomerAttr7 customerAttr7,
     required CustomerGrp4 customerGrp4,
     required String region,
-    required String telephoneNumber,
+    required PhoneNumber telephoneNumber,
   }) = _CustomerCodeInfo;
 
   factory CustomerCodeInfo.empty() => CustomerCodeInfo(
@@ -51,7 +52,7 @@ class CustomerCodeInfo with _$CustomerCodeInfo {
         status: Status(''),
         division: '',
         postalCode: '',
-        customerClassification: '',
+        customerClassification: CustomerClassification(''),
         customerLocalGroup: '',
         paymentTermDescription: '',
         shipToInfos: <ShipToInfo>[],
@@ -60,7 +61,7 @@ class CustomerCodeInfo with _$CustomerCodeInfo {
         customerGrp4: CustomerGrp4(''),
         region: '',
         emailAddresses: <EmailAddress>[],
-        telephoneNumber: '',
+        telephoneNumber: PhoneNumber(''),
       );
 
   String get customerEmailAddress {

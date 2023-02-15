@@ -946,7 +946,7 @@ void main() {
           orderItem: orderHistoryDetails.orderHistoryDetailsOrderItem.first
               .copyWith(
                   isTenderContractMaterial: true,
-                  sAPStatus: 'Order Placed',
+                  sAPStatus: SAPStatus('Order Placed'),
                   materialNumber: MaterialNumber('000001234')),
           details:
               orderHistoryDetails.orderHistoryDetailsOrderItem.first.details,
@@ -1027,9 +1027,11 @@ void main() {
         (tester) async {
       final bonusItemList = [
         OrderHistoryDetailsBonusAggregate(
-          orderItem: orderHistoryDetails.orderHistoryDetailsOrderItem.first
-              .copyWith(
-                  plannedDeliveryDate: '12/01/22', sAPStatus: 'Order Placed'),
+          orderItem:
+              orderHistoryDetails.orderHistoryDetailsOrderItem.first.copyWith(
+            plannedDeliveryDate: '12/01/22',
+            sAPStatus: SAPStatus('Order Placed'),
+          ),
           details:
               orderHistoryDetails.orderHistoryDetailsOrderItem.first.details,
           tenderContractDetails:
@@ -1082,7 +1084,7 @@ void main() {
       await tester.pump();
 
       final deliveryDate = find.byKey(const Key('deliveryDateTime'));
-      expect(deliveryDate, findsOneWidget);
+      expect(deliveryDate, findsNothing);
 
       final discountRate = find.byKey(const Key('discountRateForBonusCard'));
 
@@ -1107,8 +1109,11 @@ void main() {
         (tester) async {
       final bonusItemList = [
         OrderHistoryDetailsBonusAggregate(
-          orderItem: orderHistoryDetails.orderHistoryDetailsOrderItem.first
-              .copyWith(plannedDeliveryDate: '12/01/22', sAPStatus: ''),
+          orderItem:
+              orderHistoryDetails.orderHistoryDetailsOrderItem.first.copyWith(
+            plannedDeliveryDate: '12/01/22',
+            sAPStatus: SAPStatus(''),
+          ),
           details:
               orderHistoryDetails.orderHistoryDetailsOrderItem.first.details,
           tenderContractDetails:
@@ -1191,9 +1196,11 @@ void main() {
         (tester) async {
       final bonusItemList = [
         OrderHistoryDetailsBonusAggregate(
-          orderItem: orderHistoryDetails.orderHistoryDetailsOrderItem.first
-              .copyWith(
-                  plannedDeliveryDate: '12/01/22', sAPStatus: 'Order Placed'),
+          orderItem:
+              orderHistoryDetails.orderHistoryDetailsOrderItem.first.copyWith(
+            plannedDeliveryDate: '12/01/22',
+            sAPStatus: SAPStatus('Order Placed'),
+          ),
           details:
               orderHistoryDetails.orderHistoryDetailsOrderItem.first.details,
           tenderContractDetails:
@@ -1255,12 +1262,12 @@ void main() {
       await tester.pump();
 
       final deliveryDate = find.byKey(const Key('deliveryDateTime'));
-      expect(deliveryDate, findsOneWidget);
+      expect(deliveryDate, findsNothing);
 
       final sapStatusNotEmptyOrderItem =
           find.byKey(const Key('sapStatusNotEmpty'));
 
-      expect(sapStatusNotEmptyOrderItem, findsOneWidget);
+      expect(sapStatusNotEmptyOrderItem, findsNothing);
       await tester.pump();
       final discountRateForOrderItem =
           find.byKey(const Key('discountRateForItemCard'));
@@ -1291,7 +1298,7 @@ void main() {
           orderItem:
               orderHistoryDetails.orderHistoryDetailsOrderItem.first.copyWith(
             plannedDeliveryDate: '12/01/22',
-            sAPStatus: '',
+            sAPStatus: SAPStatus(''),
           ),
           details:
               orderHistoryDetails.orderHistoryDetailsOrderItem.first.details,
@@ -1367,7 +1374,7 @@ void main() {
 
       final sapStatusNotEmptyOrderItem =
           find.byKey(const Key('sapStatusNotEmpty'));
-      expect(sapStatusNotEmptyOrderItem, findsOneWidget);
+      expect(sapStatusNotEmptyOrderItem, findsNothing);
       await tester.pump();
 
       await tester.drag(find.byKey(const Key('scrollHistoryDetail')),
@@ -1441,8 +1448,11 @@ void main() {
         (tester) async {
       final bonusItemList = [
         OrderHistoryDetailsBonusAggregate(
-          orderItem: orderHistoryDetails.orderHistoryDetailsOrderItem.first
-              .copyWith(isTenderContractMaterial: true, sAPStatus: ''),
+          orderItem:
+              orderHistoryDetails.orderHistoryDetailsOrderItem.first.copyWith(
+            isTenderContractMaterial: true,
+            sAPStatus: SAPStatus(''),
+          ),
           details: <OrderHistoryDetailsOrderItemDetails>[],
           tenderContractDetails:
               OrderHistoryDetailsOrderItemTenderContractDetails.empty(),

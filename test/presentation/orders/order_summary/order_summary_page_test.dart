@@ -46,7 +46,6 @@ import 'package:ezrxmobile/domain/order/entities/submit_order_response.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/locator.dart';
-
 import 'package:ezrxmobile/presentation/orders/create_order/order_summary_page.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
@@ -408,7 +407,7 @@ void main() {
         final expectedStates = [
           CustomerCodeState.initial().copyWith(
             customerCodeInfo: CustomerCodeInfo.empty().copyWith(
-              telephoneNumber: '1234567890',
+              telephoneNumber: PhoneNumber('1234567890'),
               customerCodeSoldTo: '123456789',
               shipToInfos: <ShipToInfo>[
                 ShipToInfo.empty().copyWith(
@@ -420,7 +419,7 @@ void main() {
           ),
           CustomerCodeState.initial().copyWith(
             customerCodeInfo: CustomerCodeInfo.empty().copyWith(
-              telephoneNumber: '1234567890',
+              telephoneNumber: PhoneNumber('1234567890'),
               customerCodeSoldTo: '987654321',
               shipToInfos: <ShipToInfo>[
                 ShipToInfo.empty().copyWith(
@@ -474,7 +473,7 @@ void main() {
         final expectedStates = [
           CustomerCodeState.initial().copyWith(
             customerCodeInfo: CustomerCodeInfo.empty().copyWith(
-              telephoneNumber: '1234567890',
+              telephoneNumber: PhoneNumber('1234567890'),
               customerCodeSoldTo: '123456789',
               shipToInfos: <ShipToInfo>[
                 ShipToInfo.empty().copyWith(
@@ -491,7 +490,7 @@ void main() {
           ),
           CustomerCodeState.initial().copyWith(
             customerCodeInfo: CustomerCodeInfo.empty().copyWith(
-              telephoneNumber: '1234567890',
+              telephoneNumber: PhoneNumber('1234567890'),
               customerCodeSoldTo: '987654321',
               shipToInfos: <ShipToInfo>[
                 ShipToInfo.empty().copyWith(
