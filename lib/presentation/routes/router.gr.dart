@@ -107,9 +107,11 @@ class AppRouter extends _i38.RootStackRouter {
       );
     },
     ApproverActionsRoute.name: (routeData) {
+      final args = routeData.argsAs<ApproverActionsRouteArgs>(
+          orElse: () => const ApproverActionsRouteArgs());
       return _i38.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i7.ApproverActions(),
+        child: _i7.ApproverActions(key: args.key),
       );
     },
     ReturnSummaryRoute.name: (routeData) {
@@ -588,14 +590,27 @@ class RequestReturnRoute extends _i38.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i7.ApproverActions]
-class ApproverActionsRoute extends _i38.PageRouteInfo<void> {
-  const ApproverActionsRoute()
+class ApproverActionsRoute
+    extends _i38.PageRouteInfo<ApproverActionsRouteArgs> {
+  ApproverActionsRoute({_i39.Key? key})
       : super(
           ApproverActionsRoute.name,
           path: 'approver_actions',
+          args: ApproverActionsRouteArgs(key: key),
         );
 
   static const String name = 'ApproverActionsRoute';
+}
+
+class ApproverActionsRouteArgs {
+  const ApproverActionsRouteArgs({this.key});
+
+  final _i39.Key? key;
+
+  @override
+  String toString() {
+    return 'ApproverActionsRouteArgs{key: $key}';
+  }
 }
 
 /// generated route for

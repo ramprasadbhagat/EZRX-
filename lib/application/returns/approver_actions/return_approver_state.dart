@@ -5,14 +5,16 @@ class ReturnApproverState with _$ReturnApproverState {
   const factory ReturnApproverState({
     required bool isFetching,
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
-    required List<ApproverReturnRequest> approverReturnRequests,
-    required int page,
+    required List<ApproverReturnRequest> approverReturnRequestList,
+    required int nextPageIndex,
+    required bool canLoadMore,
   }) = _ReturnApproverState;
 
   factory ReturnApproverState.initial() => ReturnApproverState(
         failureOrSuccessOption: none(),
         isFetching: false,
-        approverReturnRequests: <ApproverReturnRequest>[],
-        page: 1,
+        approverReturnRequestList: <ApproverReturnRequest>[],
+        nextPageIndex: 0,
+        canLoadMore: true,
       );
 }

@@ -8,7 +8,6 @@ import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/approver_return_request_query.dart';
 import 'package:ezrxmobile/infrastructure/returns/dtos/approver_return_requests_id_dto.dart';
 
-const _pageCount = 11;
 
 class ApproverReturnRequestsRemote {
   HttpService httpService;
@@ -24,7 +23,9 @@ class ApproverReturnRequestsRemote {
 
   Future<List<ApproverReturnRequestsId>> getReturns({
     required String username,
-    required int page,
+    required int offset,
+    required int pageSize,
+    required Map<String, dynamic> filterQuery,
   }) async {
     final response = await httpService.request(
       method: 'POST',
@@ -35,9 +36,9 @@ class ApproverReturnRequestsRemote {
           'variables': {
             'request': {
               'username': username,
-              'first': _pageCount,
-              'after': _pageCount * page,
-              'status': 'PENDING',
+              'first': pageSize,
+              'after': offset,
+              ...filterQuery,
             },
           },
         },

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/request_return/request_return_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_summary/return_summary_bloc.dart';
@@ -309,6 +310,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider<RequestReturnFilterBloc>(
           create: (context) => locator<RequestReturnFilterBloc>(),
+        ),
+        BlocProvider<ReturnApproverFilterBloc>(
+          create: (context) => locator<ReturnApproverFilterBloc>(),
         ),
       ],
       child: MaterialApp.router(

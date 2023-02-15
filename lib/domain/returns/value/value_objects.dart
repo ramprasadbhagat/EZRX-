@@ -93,12 +93,12 @@ class RefundTotal extends ValueObject<String> {
     return RefundTotal._(validateStringNotEmpty(input));
   }
 
-  double get refundTotal {
-    return refundTotalStringAsFixed(value.getOrElse(() => '0'));
-  }
+  double get refundTotal =>
+      refundTotalStringAsFixed(value.getOrElse(() => '0'));
 
   const RefundTotal._(this.value);
 }
+
 class ReturnSummaryStatus extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
@@ -117,4 +117,39 @@ class ReturnSummaryStatus extends ValueObject<String> {
       getStatusTextColor(value.getOrElse(() => ''));
 
   const ReturnSummaryStatus._(this.value);
+}
+
+class InvoiceDate extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory InvoiceDate(String input) {
+    return InvoiceDate._(validateStringNotEmpty(input));
+  }
+
+  DateTime get dateTimebyDateString =>
+      getDateTimebyDateString(value.getOrElse(() => ''));
+
+  String get apiParameterValueOrEmpty => covertDateStringToApiDateString(
+        value.getOrElse(() => ''),
+      );
+
+  const InvoiceDate._(this.value);
+}
+
+class FilterStatus extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory FilterStatus(String input) =>
+      FilterStatus._(validateStringNotEmpty(input));
+
+  String get label => filterLabel(value.getOrElse(() => ''));
+
+  String get apiSortValueOrEmpty => covertSortToApiDateString(
+        value.getOrElse(() => ''),
+      );
+
+
+  const FilterStatus._(this.value);
 }

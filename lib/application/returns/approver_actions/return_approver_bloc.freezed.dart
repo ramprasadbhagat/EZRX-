@@ -19,38 +19,52 @@ mixin _$ReturnApproverEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(User user) fetch,
+    required TResult Function(
+            User user, ReturnApproverFilter approverReturnFilter)
+        fetch,
+    required TResult Function(
+            User user, ReturnApproverFilter approverReturnFilter)
+        loadMore,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(User user)? fetch,
+    TResult? Function(User user, ReturnApproverFilter approverReturnFilter)?
+        fetch,
+    TResult? Function(User user, ReturnApproverFilter approverReturnFilter)?
+        loadMore,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(User user)? fetch,
+    TResult Function(User user, ReturnApproverFilter approverReturnFilter)?
+        fetch,
+    TResult Function(User user, ReturnApproverFilter approverReturnFilter)?
+        loadMore,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_initialized value) initialized,
-    required TResult Function(_fetch value) fetch,
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_LoadMore value) loadMore,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_initialized value)? initialized,
-    TResult? Function(_fetch value)? fetch,
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_LoadMore value)? loadMore,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_initialized value)? initialized,
-    TResult Function(_fetch value)? fetch,
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_LoadMore value)? loadMore,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -75,25 +89,25 @@ class _$ReturnApproverEventCopyWithImpl<$Res, $Val extends ReturnApproverEvent>
 }
 
 /// @nodoc
-abstract class _$$_initializedCopyWith<$Res> {
-  factory _$$_initializedCopyWith(
-          _$_initialized value, $Res Function(_$_initialized) then) =
-      __$$_initializedCopyWithImpl<$Res>;
+abstract class _$$_InitializedCopyWith<$Res> {
+  factory _$$_InitializedCopyWith(
+          _$_Initialized value, $Res Function(_$_Initialized) then) =
+      __$$_InitializedCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_initializedCopyWithImpl<$Res>
-    extends _$ReturnApproverEventCopyWithImpl<$Res, _$_initialized>
-    implements _$$_initializedCopyWith<$Res> {
-  __$$_initializedCopyWithImpl(
-      _$_initialized _value, $Res Function(_$_initialized) _then)
+class __$$_InitializedCopyWithImpl<$Res>
+    extends _$ReturnApproverEventCopyWithImpl<$Res, _$_Initialized>
+    implements _$$_InitializedCopyWith<$Res> {
+  __$$_InitializedCopyWithImpl(
+      _$_Initialized _value, $Res Function(_$_Initialized) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_initialized implements _initialized {
-  const _$_initialized();
+class _$_Initialized implements _Initialized {
+  const _$_Initialized();
 
   @override
   String toString() {
@@ -103,7 +117,7 @@ class _$_initialized implements _initialized {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_initialized);
+        (other.runtimeType == runtimeType && other is _$_Initialized);
   }
 
   @override
@@ -113,7 +127,12 @@ class _$_initialized implements _initialized {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(User user) fetch,
+    required TResult Function(
+            User user, ReturnApproverFilter approverReturnFilter)
+        fetch,
+    required TResult Function(
+            User user, ReturnApproverFilter approverReturnFilter)
+        loadMore,
   }) {
     return initialized();
   }
@@ -122,7 +141,10 @@ class _$_initialized implements _initialized {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(User user)? fetch,
+    TResult? Function(User user, ReturnApproverFilter approverReturnFilter)?
+        fetch,
+    TResult? Function(User user, ReturnApproverFilter approverReturnFilter)?
+        loadMore,
   }) {
     return initialized?.call();
   }
@@ -131,7 +153,10 @@ class _$_initialized implements _initialized {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(User user)? fetch,
+    TResult Function(User user, ReturnApproverFilter approverReturnFilter)?
+        fetch,
+    TResult Function(User user, ReturnApproverFilter approverReturnFilter)?
+        loadMore,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -143,8 +168,9 @@ class _$_initialized implements _initialized {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_initialized value) initialized,
-    required TResult Function(_fetch value) fetch,
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_LoadMore value) loadMore,
   }) {
     return initialized(this);
   }
@@ -152,8 +178,9 @@ class _$_initialized implements _initialized {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_initialized value)? initialized,
-    TResult? Function(_fetch value)? fetch,
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_LoadMore value)? loadMore,
   }) {
     return initialized?.call(this);
   }
@@ -161,8 +188,9 @@ class _$_initialized implements _initialized {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_initialized value)? initialized,
-    TResult Function(_fetch value)? fetch,
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_LoadMore value)? loadMore,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -172,37 +200,43 @@ class _$_initialized implements _initialized {
   }
 }
 
-abstract class _initialized implements ReturnApproverEvent {
-  const factory _initialized() = _$_initialized;
+abstract class _Initialized implements ReturnApproverEvent {
+  const factory _Initialized() = _$_Initialized;
 }
 
 /// @nodoc
-abstract class _$$_fetchCopyWith<$Res> {
-  factory _$$_fetchCopyWith(_$_fetch value, $Res Function(_$_fetch) then) =
-      __$$_fetchCopyWithImpl<$Res>;
+abstract class _$$_FetchCopyWith<$Res> {
+  factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
+      __$$_FetchCopyWithImpl<$Res>;
   @useResult
-  $Res call({User user});
+  $Res call({User user, ReturnApproverFilter approverReturnFilter});
 
   $UserCopyWith<$Res> get user;
+  $ReturnApproverFilterCopyWith<$Res> get approverReturnFilter;
 }
 
 /// @nodoc
-class __$$_fetchCopyWithImpl<$Res>
-    extends _$ReturnApproverEventCopyWithImpl<$Res, _$_fetch>
-    implements _$$_fetchCopyWith<$Res> {
-  __$$_fetchCopyWithImpl(_$_fetch _value, $Res Function(_$_fetch) _then)
+class __$$_FetchCopyWithImpl<$Res>
+    extends _$ReturnApproverEventCopyWithImpl<$Res, _$_Fetch>
+    implements _$$_FetchCopyWith<$Res> {
+  __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? user = null,
+    Object? approverReturnFilter = null,
   }) {
-    return _then(_$_fetch(
+    return _then(_$_Fetch(
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User,
+      approverReturnFilter: null == approverReturnFilter
+          ? _value.approverReturnFilter
+          : approverReturnFilter // ignore: cast_nullable_to_non_nullable
+              as ReturnApproverFilter,
     ));
   }
 
@@ -213,65 +247,89 @@ class __$$_fetchCopyWithImpl<$Res>
       return _then(_value.copyWith(user: value));
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ReturnApproverFilterCopyWith<$Res> get approverReturnFilter {
+    return $ReturnApproverFilterCopyWith<$Res>(_value.approverReturnFilter,
+        (value) {
+      return _then(_value.copyWith(approverReturnFilter: value));
+    });
+  }
 }
 
 /// @nodoc
 
-class _$_fetch implements _fetch {
-  const _$_fetch({required this.user});
+class _$_Fetch implements _Fetch {
+  const _$_Fetch({required this.user, required this.approverReturnFilter});
 
   @override
   final User user;
+  @override
+  final ReturnApproverFilter approverReturnFilter;
 
   @override
   String toString() {
-    return 'ReturnApproverEvent.fetch(user: $user)';
+    return 'ReturnApproverEvent.fetch(user: $user, approverReturnFilter: $approverReturnFilter)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_fetch &&
-            (identical(other.user, user) || other.user == user));
+            other is _$_Fetch &&
+            (identical(other.user, user) || other.user == user) &&
+            (identical(other.approverReturnFilter, approverReturnFilter) ||
+                other.approverReturnFilter == approverReturnFilter));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, user);
+  int get hashCode => Object.hash(runtimeType, user, approverReturnFilter);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_fetchCopyWith<_$_fetch> get copyWith =>
-      __$$_fetchCopyWithImpl<_$_fetch>(this, _$identity);
+  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
+      __$$_FetchCopyWithImpl<_$_Fetch>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(User user) fetch,
+    required TResult Function(
+            User user, ReturnApproverFilter approverReturnFilter)
+        fetch,
+    required TResult Function(
+            User user, ReturnApproverFilter approverReturnFilter)
+        loadMore,
   }) {
-    return fetch(user);
+    return fetch(user, approverReturnFilter);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(User user)? fetch,
+    TResult? Function(User user, ReturnApproverFilter approverReturnFilter)?
+        fetch,
+    TResult? Function(User user, ReturnApproverFilter approverReturnFilter)?
+        loadMore,
   }) {
-    return fetch?.call(user);
+    return fetch?.call(user, approverReturnFilter);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(User user)? fetch,
+    TResult Function(User user, ReturnApproverFilter approverReturnFilter)?
+        fetch,
+    TResult Function(User user, ReturnApproverFilter approverReturnFilter)?
+        loadMore,
     required TResult orElse(),
   }) {
     if (fetch != null) {
-      return fetch(user);
+      return fetch(user, approverReturnFilter);
     }
     return orElse();
   }
@@ -279,8 +337,9 @@ class _$_fetch implements _fetch {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_initialized value) initialized,
-    required TResult Function(_fetch value) fetch,
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_LoadMore value) loadMore,
   }) {
     return fetch(this);
   }
@@ -288,8 +347,9 @@ class _$_fetch implements _fetch {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_initialized value)? initialized,
-    TResult? Function(_fetch value)? fetch,
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_LoadMore value)? loadMore,
   }) {
     return fetch?.call(this);
   }
@@ -297,8 +357,9 @@ class _$_fetch implements _fetch {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_initialized value)? initialized,
-    TResult Function(_fetch value)? fetch,
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_LoadMore value)? loadMore,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -308,12 +369,194 @@ class _$_fetch implements _fetch {
   }
 }
 
-abstract class _fetch implements ReturnApproverEvent {
-  const factory _fetch({required final User user}) = _$_fetch;
+abstract class _Fetch implements ReturnApproverEvent {
+  const factory _Fetch(
+      {required final User user,
+      required final ReturnApproverFilter approverReturnFilter}) = _$_Fetch;
 
   User get user;
+  ReturnApproverFilter get approverReturnFilter;
   @JsonKey(ignore: true)
-  _$$_fetchCopyWith<_$_fetch> get copyWith =>
+  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_LoadMoreCopyWith<$Res> {
+  factory _$$_LoadMoreCopyWith(
+          _$_LoadMore value, $Res Function(_$_LoadMore) then) =
+      __$$_LoadMoreCopyWithImpl<$Res>;
+  @useResult
+  $Res call({User user, ReturnApproverFilter approverReturnFilter});
+
+  $UserCopyWith<$Res> get user;
+  $ReturnApproverFilterCopyWith<$Res> get approverReturnFilter;
+}
+
+/// @nodoc
+class __$$_LoadMoreCopyWithImpl<$Res>
+    extends _$ReturnApproverEventCopyWithImpl<$Res, _$_LoadMore>
+    implements _$$_LoadMoreCopyWith<$Res> {
+  __$$_LoadMoreCopyWithImpl(
+      _$_LoadMore _value, $Res Function(_$_LoadMore) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? user = null,
+    Object? approverReturnFilter = null,
+  }) {
+    return _then(_$_LoadMore(
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
+      approverReturnFilter: null == approverReturnFilter
+          ? _value.approverReturnFilter
+          : approverReturnFilter // ignore: cast_nullable_to_non_nullable
+              as ReturnApproverFilter,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ReturnApproverFilterCopyWith<$Res> get approverReturnFilter {
+    return $ReturnApproverFilterCopyWith<$Res>(_value.approverReturnFilter,
+        (value) {
+      return _then(_value.copyWith(approverReturnFilter: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_LoadMore implements _LoadMore {
+  const _$_LoadMore({required this.user, required this.approverReturnFilter});
+
+  @override
+  final User user;
+  @override
+  final ReturnApproverFilter approverReturnFilter;
+
+  @override
+  String toString() {
+    return 'ReturnApproverEvent.loadMore(user: $user, approverReturnFilter: $approverReturnFilter)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_LoadMore &&
+            (identical(other.user, user) || other.user == user) &&
+            (identical(other.approverReturnFilter, approverReturnFilter) ||
+                other.approverReturnFilter == approverReturnFilter));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, user, approverReturnFilter);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_LoadMoreCopyWith<_$_LoadMore> get copyWith =>
+      __$$_LoadMoreCopyWithImpl<_$_LoadMore>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(
+            User user, ReturnApproverFilter approverReturnFilter)
+        fetch,
+    required TResult Function(
+            User user, ReturnApproverFilter approverReturnFilter)
+        loadMore,
+  }) {
+    return loadMore(user, approverReturnFilter);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(User user, ReturnApproverFilter approverReturnFilter)?
+        fetch,
+    TResult? Function(User user, ReturnApproverFilter approverReturnFilter)?
+        loadMore,
+  }) {
+    return loadMore?.call(user, approverReturnFilter);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(User user, ReturnApproverFilter approverReturnFilter)?
+        fetch,
+    TResult Function(User user, ReturnApproverFilter approverReturnFilter)?
+        loadMore,
+    required TResult orElse(),
+  }) {
+    if (loadMore != null) {
+      return loadMore(user, approverReturnFilter);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_LoadMore value) loadMore,
+  }) {
+    return loadMore(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_LoadMore value)? loadMore,
+  }) {
+    return loadMore?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_LoadMore value)? loadMore,
+    required TResult orElse(),
+  }) {
+    if (loadMore != null) {
+      return loadMore(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _LoadMore implements ReturnApproverEvent {
+  const factory _LoadMore(
+      {required final User user,
+      required final ReturnApproverFilter approverReturnFilter}) = _$_LoadMore;
+
+  User get user;
+  ReturnApproverFilter get approverReturnFilter;
+  @JsonKey(ignore: true)
+  _$$_LoadMoreCopyWith<_$_LoadMore> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -322,9 +565,10 @@ mixin _$ReturnApproverState {
   bool get isFetching => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption =>
       throw _privateConstructorUsedError;
-  List<ApproverReturnRequest> get approverReturnRequests =>
+  List<ApproverReturnRequest> get approverReturnRequestList =>
       throw _privateConstructorUsedError;
-  int get page => throw _privateConstructorUsedError;
+  int get nextPageIndex => throw _privateConstructorUsedError;
+  bool get canLoadMore => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ReturnApproverStateCopyWith<ReturnApproverState> get copyWith =>
@@ -340,8 +584,9 @@ abstract class $ReturnApproverStateCopyWith<$Res> {
   $Res call(
       {bool isFetching,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
-      List<ApproverReturnRequest> approverReturnRequests,
-      int page});
+      List<ApproverReturnRequest> approverReturnRequestList,
+      int nextPageIndex,
+      bool canLoadMore});
 }
 
 /// @nodoc
@@ -359,8 +604,9 @@ class _$ReturnApproverStateCopyWithImpl<$Res, $Val extends ReturnApproverState>
   $Res call({
     Object? isFetching = null,
     Object? failureOrSuccessOption = null,
-    Object? approverReturnRequests = null,
-    Object? page = null,
+    Object? approverReturnRequestList = null,
+    Object? nextPageIndex = null,
+    Object? canLoadMore = null,
   }) {
     return _then(_value.copyWith(
       isFetching: null == isFetching
@@ -371,14 +617,18 @@ class _$ReturnApproverStateCopyWithImpl<$Res, $Val extends ReturnApproverState>
           ? _value.failureOrSuccessOption
           : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
-      approverReturnRequests: null == approverReturnRequests
-          ? _value.approverReturnRequests
-          : approverReturnRequests // ignore: cast_nullable_to_non_nullable
+      approverReturnRequestList: null == approverReturnRequestList
+          ? _value.approverReturnRequestList
+          : approverReturnRequestList // ignore: cast_nullable_to_non_nullable
               as List<ApproverReturnRequest>,
-      page: null == page
-          ? _value.page
-          : page // ignore: cast_nullable_to_non_nullable
+      nextPageIndex: null == nextPageIndex
+          ? _value.nextPageIndex
+          : nextPageIndex // ignore: cast_nullable_to_non_nullable
               as int,
+      canLoadMore: null == canLoadMore
+          ? _value.canLoadMore
+          : canLoadMore // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -394,8 +644,9 @@ abstract class _$$_ReturnApproverStateCopyWith<$Res>
   $Res call(
       {bool isFetching,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
-      List<ApproverReturnRequest> approverReturnRequests,
-      int page});
+      List<ApproverReturnRequest> approverReturnRequestList,
+      int nextPageIndex,
+      bool canLoadMore});
 }
 
 /// @nodoc
@@ -411,8 +662,9 @@ class __$$_ReturnApproverStateCopyWithImpl<$Res>
   $Res call({
     Object? isFetching = null,
     Object? failureOrSuccessOption = null,
-    Object? approverReturnRequests = null,
-    Object? page = null,
+    Object? approverReturnRequestList = null,
+    Object? nextPageIndex = null,
+    Object? canLoadMore = null,
   }) {
     return _then(_$_ReturnApproverState(
       isFetching: null == isFetching
@@ -423,14 +675,18 @@ class __$$_ReturnApproverStateCopyWithImpl<$Res>
           ? _value.failureOrSuccessOption
           : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
-      approverReturnRequests: null == approverReturnRequests
-          ? _value._approverReturnRequests
-          : approverReturnRequests // ignore: cast_nullable_to_non_nullable
+      approverReturnRequestList: null == approverReturnRequestList
+          ? _value._approverReturnRequestList
+          : approverReturnRequestList // ignore: cast_nullable_to_non_nullable
               as List<ApproverReturnRequest>,
-      page: null == page
-          ? _value.page
-          : page // ignore: cast_nullable_to_non_nullable
+      nextPageIndex: null == nextPageIndex
+          ? _value.nextPageIndex
+          : nextPageIndex // ignore: cast_nullable_to_non_nullable
               as int,
+      canLoadMore: null == canLoadMore
+          ? _value.canLoadMore
+          : canLoadMore // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -441,27 +697,30 @@ class _$_ReturnApproverState implements _ReturnApproverState {
   const _$_ReturnApproverState(
       {required this.isFetching,
       required this.failureOrSuccessOption,
-      required final List<ApproverReturnRequest> approverReturnRequests,
-      required this.page})
-      : _approverReturnRequests = approverReturnRequests;
+      required final List<ApproverReturnRequest> approverReturnRequestList,
+      required this.nextPageIndex,
+      required this.canLoadMore})
+      : _approverReturnRequestList = approverReturnRequestList;
 
   @override
   final bool isFetching;
   @override
   final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption;
-  final List<ApproverReturnRequest> _approverReturnRequests;
+  final List<ApproverReturnRequest> _approverReturnRequestList;
   @override
-  List<ApproverReturnRequest> get approverReturnRequests {
+  List<ApproverReturnRequest> get approverReturnRequestList {
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_approverReturnRequests);
+    return EqualUnmodifiableListView(_approverReturnRequestList);
   }
 
   @override
-  final int page;
+  final int nextPageIndex;
+  @override
+  final bool canLoadMore;
 
   @override
   String toString() {
-    return 'ReturnApproverState(isFetching: $isFetching, failureOrSuccessOption: $failureOrSuccessOption, approverReturnRequests: $approverReturnRequests, page: $page)';
+    return 'ReturnApproverState(isFetching: $isFetching, failureOrSuccessOption: $failureOrSuccessOption, approverReturnRequestList: $approverReturnRequestList, nextPageIndex: $nextPageIndex, canLoadMore: $canLoadMore)';
   }
 
   @override
@@ -474,8 +733,11 @@ class _$_ReturnApproverState implements _ReturnApproverState {
             (identical(other.failureOrSuccessOption, failureOrSuccessOption) ||
                 other.failureOrSuccessOption == failureOrSuccessOption) &&
             const DeepCollectionEquality().equals(
-                other._approverReturnRequests, _approverReturnRequests) &&
-            (identical(other.page, page) || other.page == page));
+                other._approverReturnRequestList, _approverReturnRequestList) &&
+            (identical(other.nextPageIndex, nextPageIndex) ||
+                other.nextPageIndex == nextPageIndex) &&
+            (identical(other.canLoadMore, canLoadMore) ||
+                other.canLoadMore == canLoadMore));
   }
 
   @override
@@ -483,8 +745,9 @@ class _$_ReturnApproverState implements _ReturnApproverState {
       runtimeType,
       isFetching,
       failureOrSuccessOption,
-      const DeepCollectionEquality().hash(_approverReturnRequests),
-      page);
+      const DeepCollectionEquality().hash(_approverReturnRequestList),
+      nextPageIndex,
+      canLoadMore);
 
   @JsonKey(ignore: true)
   @override
@@ -498,17 +761,20 @@ abstract class _ReturnApproverState implements ReturnApproverState {
   const factory _ReturnApproverState(
       {required final bool isFetching,
       required final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
-      required final List<ApproverReturnRequest> approverReturnRequests,
-      required final int page}) = _$_ReturnApproverState;
+      required final List<ApproverReturnRequest> approverReturnRequestList,
+      required final int nextPageIndex,
+      required final bool canLoadMore}) = _$_ReturnApproverState;
 
   @override
   bool get isFetching;
   @override
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption;
   @override
-  List<ApproverReturnRequest> get approverReturnRequests;
+  List<ApproverReturnRequest> get approverReturnRequestList;
   @override
-  int get page;
+  int get nextPageIndex;
+  @override
+  bool get canLoadMore;
   @override
   @JsonKey(ignore: true)
   _$$_ReturnApproverStateCopyWith<_$_ReturnApproverState> get copyWith =>

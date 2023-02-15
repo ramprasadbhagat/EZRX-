@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
+import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_summary/return_summary_bloc.dart';
 import 'package:universal_io/io.dart';
@@ -280,9 +281,16 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                       current.user.role.type.hasReturnsAdminAccess),
           listener: (context, state) {
             if (state.isReturnApprover) {
-              context
-                  .read<ReturnApproverBloc>()
-                  .add(ReturnApproverEvent.fetch(user: state.user));
+              context.read<ReturnApproverBloc>()
+                  .add(
+                    ReturnApproverEvent.fetch(
+                      user: state.user,
+                      approverReturnFilter: context
+                          .read<ReturnApproverFilterBloc>()
+                          .state
+                          .approverReturnFilter,
+                    ),
+                  );
             }
             if (!state.isReturnsEnable) return;
             context.read<ReturnSummaryBloc>().add(

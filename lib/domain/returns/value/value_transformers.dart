@@ -23,6 +23,7 @@ String displayDateOrEmpty(String text) {
 double refundTotalStringAsFixed(String value) {
   return double.tryParse(value) ?? 0;
 }
+
 String getReturnSummaryStatus(String status) {
   switch (status) {
     case 'PENDING':
@@ -79,3 +80,28 @@ Color getStatusTextColor(String statusType) {
       return ZPColors.white;
   }
 }
+
+DateTime getDateTimebyDateString(String value) {
+  return DateTime.tryParse(value) ?? DateTime.now();
+}
+
+String filterLabel(String sort) {
+  switch (sort) {
+    case 'COMPLETED':
+      return 'Completed';
+    case 'ALL':
+      return 'All';
+
+    default:
+      return 'Pending Review';
+  }
+}
+
+String covertDateStringToApiDateString(String value) {
+  if (DateTime.tryParse(value) == null) return '';
+
+  return DateFormat('yyyyMMdd').format(DateTime.parse(value));
+}
+
+String covertSortToApiDateString(String value) =>
+    value.isNotEmpty && value != 'ALL' ? value : '';

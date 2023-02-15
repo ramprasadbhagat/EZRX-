@@ -17,6 +17,7 @@ import 'package:ezrxmobile/application/order/material_list/material_list_bloc.da
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
+import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
 import 'package:ezrxmobile/application/returns/policy_configuration/policy_configuration_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_request_type_code/return_request_type_code_bloc.dart';
@@ -128,6 +129,11 @@ class ReturnApproverBlocMock
     extends MockBloc<ReturnSummaryEvent, ReturnSummaryState>
     implements ReturnSummaryBloc {}
 
+class ReturnApproverFilterBlocMock
+    extends MockBloc<ReturnApproverFilterEvent, ReturnApproverFilterState>
+    implements ReturnApproverFilterBloc {}
+
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
@@ -157,6 +163,7 @@ void main() {
   late CovidMaterialListBloc covidMaterialListBlocMock;
   late OrderDocumentTypeBloc orderDocumentTypeMock;
   late ReturnApproverBloc returnApproverBlocMock;
+  late ReturnApproverFilterBlocMock returnApproverFilterBlocMock;
   final fakeSalesOrganisation =
       SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601'));
 
@@ -207,7 +214,7 @@ void main() {
       materialFilterBlocMock = MaterialFilterBlocMock();
       returnApproverBlocMock = ReturnApproverBlocMock();
       returnSummaryBlocMock = ReturnSummaryBlocMock();
-
+      returnApproverFilterBlocMock = ReturnApproverFilterBlocMock();
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
       when(() => orderDocumentTypeMock.state).thenReturn(
         OrderDocumentTypeState.initial().copyWith(
@@ -246,6 +253,8 @@ void main() {
           .thenReturn(ReturnApproverState.initial());
            when(() => returnSummaryBlocMock.state)
           .thenReturn(ReturnSummaryState.initial());
+      when(() => returnApproverFilterBlocMock.state)
+          .thenReturn(ReturnApproverFilterState.initial());
     });
 
     Future getWidget(tester) async {
@@ -292,6 +301,8 @@ void main() {
                 create: (context) => returnApproverBlocMock),
                  BlocProvider<ReturnSummaryBloc>(
                 create: (context) => returnSummaryBlocMock),
+            BlocProvider<ReturnApproverFilterBloc>(
+                create: (context) => returnApproverFilterBlocMock),
           ],
           child: const SplashPage(),
         ),
