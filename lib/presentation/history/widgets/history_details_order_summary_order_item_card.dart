@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
-import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_details/order_history_details_bloc.dart';
@@ -11,6 +10,7 @@ import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items_details.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -184,12 +184,8 @@ class OrderItemCard extends StatelessWidget {
                         BalanceTextRow(
                           key: const Key('discountRateForItemCard'),
                           keyText: 'Discount'.tr(),
-                          valueText:
-                              orderHistoryDetailsBonusAggregate.details.isEmpty
-                                  ? 'NA'
-                                  : state.discountRate(
-                                      orderHistoryDetailsBonusAggregate.details,
-                                    ),
+                          valueText: orderHistoryDetailsBonusAggregate
+                              .details.discountRate,
                           valueTextLoading: state.isLoading,
                           keyFlex: 1,
                           valueFlex: 1,

@@ -10,6 +10,7 @@ import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items_details.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
@@ -192,12 +193,8 @@ class OrderItemBonusCard extends StatelessWidget {
                         BalanceTextRow(
                           key: const Key('discountRateForBonusCard'),
                           keyText: 'Discount'.tr(),
-                          valueText:
-                              orderHistoryDetailsBonusAggregate.details.isEmpty
-                                  ? 'NA'
-                                  : state.discountRate(
-                                      orderHistoryDetailsBonusAggregate.details,
-                                    ),
+                          valueText: orderHistoryDetailsBonusAggregate
+                              .details.discountRate,
                           valueTextLoading: state.isLoading,
                           keyFlex: 1,
                           valueFlex: 1,
@@ -264,8 +261,8 @@ class OrderItemBonusCard extends StatelessWidget {
                                       keyFlex: 1,
                                       valueFlex: 1,
                                     ),
-                                    eligibiltiyBlocState.salesOrgConfigs
-                                            .disableDeliveryDate
+                                    eligibiltiyBlocState
+                                            .salesOrgConfigs.disableDeliveryDate
                                         ? BalanceTextRow(
                                             keyText: 'Delivery Date/Time'.tr(),
                                             valueText:

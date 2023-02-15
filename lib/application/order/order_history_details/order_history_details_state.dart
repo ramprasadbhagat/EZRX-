@@ -18,10 +18,4 @@ class OrderHistoryDetailsState with _$OrderHistoryDetailsState {
         showErrorMessage: false,
         bonusItem: <OrderHistoryDetailsBonusAggregate>[],
       );
-
-  String discountRate(List<OrderHistoryDetailsOrderItemDetails> details) {
-    final discountRateList = details.map((e) => e.rate).toList();
-
-    return discountRateList.isEmpty ? '' : discountRateList.first;
-  }
 }
