@@ -252,13 +252,11 @@ String roleNameToRoleType(String roleName) {
 
 bool roleCanLoginOnBehalfByZPAdmin(String userRoleType) {
   switch (userRoleType) {
-    case 'client_admin':
-    case 'client_user':
-    case 'internal_sales_rep':
-    case 'external_sales_rep':
-      return true;
-    default:
+    case 'root_admin':
+    case 'zp_admin':
       return false;
+    default:
+      return true;
   }
 }
 
