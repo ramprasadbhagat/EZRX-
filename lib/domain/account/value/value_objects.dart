@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/domain/account/entities/bu_contact.dart';
 import 'package:ezrxmobile/domain/account/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/core/error/failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -43,7 +44,7 @@ class SalesOrg extends ValueObject<String> {
     return salesOrgEmail(value.getOrElse(() => ''));
   }
 
-  Contact get contact {
+  BuContact get contact {
     return salesOrgContact(value.getOrElse(() => ''));
   }
 

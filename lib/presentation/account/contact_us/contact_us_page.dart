@@ -35,9 +35,11 @@ class ContactUsPage extends StatelessWidget {
                 ...salesOrg.contact.phoneNumbers.map(
                   (e) => ListTile(
                     key: const Key('phoneNumberTile'),
-                    onTap: () async => await _makeCall('tel://$e'),
+                    onTap: () async => e.displayTelephoneNumber != 'NA'
+                        ? await _makeCall('tel://${e.displayTelephoneNumber}')
+                        : null,
                     title: Text(
-                      e,
+                      e.displayTelephoneNumber,
                       style: const TextStyle(color: ZPColors.primary),
                     ),
                     leading: const Icon(Icons.call, color: ZPColors.primary),

@@ -1,41 +1,47 @@
 import 'dart:core';
 
-Contact salesOrgContact(String salesOrg) {
+import 'package:ezrxmobile/domain/account/entities/bu_contact.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+
+BuContact salesOrgContact(String salesOrg) {
   switch (salesOrg) {
     case '2001':
-      return Contact(
+      return BuContact.salesOrgContact(
         instruction: 'Toll Free 1800 88 3711(Press 2)',
-        phoneNumbers: ['1800883711'],
+        phoneNumbers: getPhoneNumberList(phoneNumbers: ['1800883711']),
       );
     case '2200':
     case '2201':
     case '2203':
     case '2250':
-      return Contact(
+      return BuContact.salesOrgContact(
         instruction: '',
-        phoneNumbers: ['+9519345524', '+959797207000'],
+        phoneNumbers:
+            getPhoneNumberList(phoneNumbers: ['+9519345524', '+959797207000']),
       );
     case '2500':
-      return Contact(
+      return BuContact.salesOrgContact(
         instruction:
             'Telephone Number: +632 8236-6488\nFax number: +63 2 822-6979',
-        phoneNumbers: ['+63282366488'],
+        phoneNumbers: getPhoneNumberList(phoneNumbers: ['+63282366488']),
       );
     case '2501':
-      return Contact(
+      return BuContact.salesOrgContact(
         instruction:
             '(02) 84241228 (Manila Line)\n(049) 5598120 (Laguna Line)\nMobile: 09190560455',
-        phoneNumbers: ['0284241228', '0495598120', '09190560455'],
+        phoneNumbers: getPhoneNumberList(
+          phoneNumbers: ['0284241228', '0495598120', '09190560455'],
+        ),
       );
     case '2504':
-      return Contact(
+      return BuContact.salesOrgContact(
         instruction: 'Telephone Number: +632 9082222 (loc 253)',
-        phoneNumbers: ['+6329082222'],
+        phoneNumbers: getPhoneNumberList(phoneNumbers: ['+6329082222']),
       );
     case '2601':
-      return Contact(
+      return BuContact.salesOrgContact(
         instruction: '',
-        phoneNumbers: ['+6565483190'],
+        phoneNumbers: getPhoneNumberList(phoneNumbers: ['+6565483190']),
       );
     case '2800':
     case '2801':
@@ -43,15 +49,16 @@ Contact salesOrgContact(String salesOrg) {
     case '2803':
     case '2804':
     case '2805':
-      return Contact(
+      return BuContact.salesOrgContact(
         instruction: '',
-        phoneNumbers: ['0809090887'],
+        phoneNumbers: getPhoneNumberList(phoneNumbers: ['0809090887']),
       );
     case '2900':
     case '2902':
-      return Contact(
+      return BuContact.salesOrgContact(
         instruction: '',
-        phoneNumbers: ['+6621231000', '1800500000'],
+        phoneNumbers:
+            getPhoneNumberList(phoneNumbers: ['+6621231000', '1800500000']),
       );
     case '3070':
     case '3000':
@@ -59,15 +66,18 @@ Contact salesOrgContact(String salesOrg) {
     case '3050':
     case '3072':
     case '3090':
-      return Contact(
+      return BuContact.salesOrgContact(
         instruction:
             'Số điện thoại miễn cước 1800 5555 58 và bấm số 3 để được hỗ trợ',
-        phoneNumbers: ['1800555558'],
+        phoneNumbers: getPhoneNumberList(phoneNumbers: ['1800555558']),
       );
     default:
-      return Contact.empty();
+      return BuContact.empty();
   }
 }
+
+List<PhoneNumber> getPhoneNumberList({required List<String> phoneNumbers}) =>
+    phoneNumbers.map((e) => PhoneNumber(e)).toList();
 
 String salesOrgEmail(String value) {
   final contactEmailMap = {
@@ -333,13 +343,6 @@ bool countrySupportOrderType(country) {
     default:
       return false;
   }
-}
-
-class Contact {
-  String instruction;
-  List<String> phoneNumbers;
-  Contact({required this.instruction, required this.phoneNumbers});
-  factory Contact.empty() => Contact(instruction: '', phoneNumbers: <String>[]);
 }
 
 String checkAllOrDash(String value) {

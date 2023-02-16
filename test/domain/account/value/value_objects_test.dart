@@ -504,57 +504,57 @@ void main() {
         const input = '2001';
         final salesOrg = SalesOrg(input);
         final result = salesOrg.contact.phoneNumbers[0];
-        expect(result, '1800883711');
+        expect(result.getOrCrash(), '1800883711');
       });
       test('Should Return Phone +9519345524, when Sales org 2200', () {
         const input = '2200';
         final salesOrg = SalesOrg(input);
         final result = salesOrg.contact.phoneNumbers[0];
-        expect(result, '+9519345524');
+        expect(result.getOrCrash(), '+9519345524');
       });
       test('Should Return Phone +959797207000, when Sales org 2200', () {
         const input = '2200';
         final salesOrg = SalesOrg(input);
         final result = salesOrg.contact.phoneNumbers[1];
-        expect(result, '+959797207000');
+        expect(result.getOrCrash(), '+959797207000');
       });
       test('Should Return Phone +9519345524 when Sales org 2201', () {
         const input = '2201';
         final salesOrg = SalesOrg(input);
         final result = salesOrg.contact.phoneNumbers[0];
-        expect(result, '+9519345524');
+        expect(result.getOrCrash(), '+9519345524');
       });
       test('Should Return Phone +9519345524 when Sales org 2201', () {
         const input = '2201';
         final salesOrg = SalesOrg(input);
         final result = salesOrg.contact.phoneNumbers[1];
-        expect(result, '+959797207000');
+        expect(result.getOrCrash(), '+959797207000');
       });
 
       test('Should Return Phone +9519345524, when Sales org 2203', () {
         const input = '2203';
         final salesOrg = SalesOrg(input);
         final result = salesOrg.contact.phoneNumbers[0];
-        expect(result, '+9519345524');
+        expect(result.getOrCrash(), '+9519345524');
       });
       test('Should Return +959797207000, when Sales org 2203', () {
         const input = '2203';
         final salesOrg = SalesOrg(input);
         final result = salesOrg.contact.phoneNumbers[1];
-        expect(result, '+959797207000');
+        expect(result.getOrCrash(), '+959797207000');
       });
 
       test('Should Return +9519345524, when Sales org 2250', () {
         const input = '2250';
         final salesOrg = SalesOrg(input);
         final result = salesOrg.contact.phoneNumbers[0];
-        expect(result, '+9519345524');
+        expect(result.getOrCrash(), '+9519345524');
       });
       test('Should Return +959797207000, when Sales org 2250', () {
         const input = '2250';
         final salesOrg = SalesOrg(input);
         final result = salesOrg.contact.phoneNumbers[1];
-        expect(result, '+959797207000');
+        expect(result.getOrCrash(), '+959797207000');
       });
 
       test('Should Return Telephone Number: +63282366488 when Sales org 2500',
@@ -562,7 +562,7 @@ void main() {
         const input = '2500';
         final salesOrg = SalesOrg(input);
         final result = salesOrg.contact.phoneNumbers[0];
-        expect(result, '+63282366488');
+        expect(result.getOrCrash(), '+63282366488');
       });
 
       test('Should Return Telephone Number: +6329082222 when Sales org 2504',
@@ -570,143 +570,143 @@ void main() {
         const input = '2504';
         final salesOrg = SalesOrg(input);
         final result = salesOrg.contact.phoneNumbers[0];
-        expect(result, '+6329082222');
+        expect(result.getOrCrash(), '+6329082222');
       });
 
       test('Should Return 0284241228  when Sales org 2501', () {
         const input = '2501';
         final salesOrg = SalesOrg(input);
         final result = salesOrg.contact.phoneNumbers[0];
-        expect(result, '0284241228');
+        expect(result.getOrCrash(), '0284241228');
       });
       test('Should Return 0495598120 when Sales org 2501', () {
         const input = '2501';
         final salesOrg = SalesOrg(input);
         final result = salesOrg.contact.phoneNumbers[1];
-        expect(result, '0495598120');
+        expect(result.getOrCrash(), '0495598120');
       });
       test('09190560455 when Sales org 2501', () {
         const input = '2501';
         final salesOrg = SalesOrg(input);
         final result = salesOrg.contact.phoneNumbers[2];
-        expect(result, '09190560455');
+        expect(result.getOrCrash(), '09190560455');
       });
 
       test('Should Return +6565483190 when Sales org 2601', () {
         const input = '2601';
         final salesOrg = SalesOrg(input);
         final result = salesOrg.contact.phoneNumbers[0];
-        expect(result, '+6565483190');
+        expect(result.getOrCrash(), '+6565483190');
       });
 
       test('Should Return 0809090887 when Sales org 2800', () {
         const input = '2800';
         final salesOrg = SalesOrg(input);
         final result = salesOrg.contact.phoneNumbers[0];
-        expect(result, '0809090887');
+        expect(result.getOrCrash(), '0809090887');
       });
 
       test('Should Return 0809090887 when Sales org 2801', () {
         const input = '2801';
         final salesOrg = SalesOrg(input);
         final result = salesOrg.contact.phoneNumbers[0];
-        expect(result, '0809090887');
+        expect(result.getOrCrash(), '0809090887');
       });
 
       test('Should Return 0809090887 when Sales org 2802', () {
         const input = '2802';
         final salesOrg = SalesOrg(input);
         final result = salesOrg.contact.phoneNumbers[0];
-        expect(result, '0809090887');
+        expect(result.getOrCrash(), '0809090887');
       });
 
       test('Should Return 0809090887 when Sales org 2803', () {
         const input = '2803';
         final salesOrg = SalesOrg(input);
         final result = salesOrg.contact.phoneNumbers[0];
-        expect(result, '0809090887');
+        expect(result.getOrCrash(), '0809090887');
       });
 
       test('Should Return 0809090887 when Sales org 2804', () {
         const input = '2804';
         final salesOrg = SalesOrg(input);
         final result = salesOrg.contact.phoneNumbers[0];
-        expect(result, '0809090887');
+        expect(result.getOrCrash(), '0809090887');
       });
 
       test('Should Return 0809090887 when Sales org 2805', () {
         const input = '2805';
         final salesOrg = SalesOrg(input);
         final result = salesOrg.contact.phoneNumbers[0];
-        expect(result, '0809090887');
+        expect(result.getOrCrash(), '0809090887');
       });
 
       test('Should Return +6621231000 when Sales org 2900', () {
         const input = '2900';
         final salesOrg = SalesOrg(input);
         final result = salesOrg.contact.phoneNumbers[0];
-        expect(result, '+6621231000');
+        expect(result.getOrCrash(), '+6621231000');
       });
       test('Should Return 1800500000 when Sales org 2900', () {
         const input = '2900';
         final salesOrg = SalesOrg(input);
         final result = salesOrg.contact.phoneNumbers[1];
-        expect(result, '1800500000');
+        expect(result.getOrCrash(), '1800500000');
       });
 
       test('Should Return +6621231000 when Sales org 2902', () {
         const input = '2902';
         final salesOrg = SalesOrg(input);
         final result = salesOrg.contact.phoneNumbers[0];
-        expect(result, '+6621231000');
+        expect(result.getOrCrash(), '+6621231000');
       });
       test('Should Return 1800500000 when Sales org 2902', () {
         const input = '2902';
         final salesOrg = SalesOrg(input);
         final result = salesOrg.contact.phoneNumbers[1];
-        expect(result, '1800500000');
+        expect(result.getOrCrash(), '1800500000');
       });
 
       test('Should Return  1800555558  when Sales org 3070', () {
         const input = '3070';
         final salesOrg = SalesOrg(input);
         final result = salesOrg.contact.phoneNumbers[0];
-        expect(result, '1800555558');
+        expect(result.getOrCrash(), '1800555558');
       });
 
       test('Should Return 1800555558  when Sales org 3000', () {
         const input = '3000';
         final salesOrg = SalesOrg(input);
         final result = salesOrg.contact.phoneNumbers[0];
-        expect(result, '1800555558');
+        expect(result.getOrCrash(), '1800555558');
       });
 
       test('1800555558 when Sales org 3001', () {
         const input = '3001';
         final salesOrg = SalesOrg(input);
         final result = salesOrg.contact.phoneNumbers[0];
-        expect(result, '1800555558');
+        expect(result.getOrCrash(), '1800555558');
       });
 
       test('1800555558 when Sales org 3050', () {
         const input = '3050';
         final salesOrg = SalesOrg(input);
         final result = salesOrg.contact.phoneNumbers[0];
-        expect(result, '1800555558');
+        expect(result.getOrCrash(), '1800555558');
       });
 
       test('Should Return 1800555558 when Sales org 3072', () {
         const input = '3072';
         final salesOrg = SalesOrg(input);
         final result = salesOrg.contact.phoneNumbers[0];
-        expect(result, '1800555558');
+        expect(result.getOrCrash(), '1800555558');
       });
 
       test('Should Return 1800555558 when Sales org 3090', () {
         const input = '3090';
         final salesOrg = SalesOrg(input);
         final result = salesOrg.contact.phoneNumbers[0];
-        expect(result, '1800555558');
+        expect(result.getOrCrash(), '1800555558');
       });
     });
 
@@ -1043,57 +1043,57 @@ void main() {
       const input = '2001';
       final salesOrg = SalesOrg(input);
       final result = salesOrg.contact.phoneNumbers[0];
-      expect(result, '1800883711');
+      expect(result.getOrCrash(), '1800883711');
     });
     test('Should Return Phone +9519345524, when Sales org 2200', () {
       const input = '2200';
       final salesOrg = SalesOrg(input);
       final result = salesOrg.contact.phoneNumbers[0];
-      expect(result, '+9519345524');
+      expect(result.getOrCrash(), '+9519345524');
     });
     test('Should Return Phone +959797207000, when Sales org 2200', () {
       const input = '2200';
       final salesOrg = SalesOrg(input);
       final result = salesOrg.contact.phoneNumbers[1];
-      expect(result, '+959797207000');
+      expect(result.getOrCrash(), '+959797207000');
     });
     test('Should Return Phone +9519345524 when Sales org 2201', () {
       const input = '2201';
       final salesOrg = SalesOrg(input);
       final result = salesOrg.contact.phoneNumbers[0];
-      expect(result, '+9519345524');
+      expect(result.getOrCrash(), '+9519345524');
     });
     test('Should Return Phone +9519345524 when Sales org 2201', () {
       const input = '2201';
       final salesOrg = SalesOrg(input);
       final result = salesOrg.contact.phoneNumbers[1];
-      expect(result, '+959797207000');
+      expect(result.getOrCrash(), '+959797207000');
     });
 
     test('Should Return Phone +9519345524, when Sales org 2203', () {
       const input = '2203';
       final salesOrg = SalesOrg(input);
       final result = salesOrg.contact.phoneNumbers[0];
-      expect(result, '+9519345524');
+      expect(result.getOrCrash(), '+9519345524');
     });
     test('Should Return +959797207000, when Sales org 2203', () {
       const input = '2203';
       final salesOrg = SalesOrg(input);
       final result = salesOrg.contact.phoneNumbers[1];
-      expect(result, '+959797207000');
+      expect(result.getOrCrash(), '+959797207000');
     });
 
     test('Should Return +9519345524, when Sales org 2250', () {
       const input = '2250';
       final salesOrg = SalesOrg(input);
       final result = salesOrg.contact.phoneNumbers[0];
-      expect(result, '+9519345524');
+      expect(result.getOrCrash(), '+9519345524');
     });
     test('Should Return +959797207000, when Sales org 2250', () {
       const input = '2250';
       final salesOrg = SalesOrg(input);
       final result = salesOrg.contact.phoneNumbers[1];
-      expect(result, '+959797207000');
+      expect(result.getOrCrash(), '+959797207000');
     });
 
     test('Should Return Telephone Number: +63282366488 when Sales org 2500',
@@ -1101,150 +1101,150 @@ void main() {
       const input = '2500';
       final salesOrg = SalesOrg(input);
       final result = salesOrg.contact.phoneNumbers[0];
-      expect(result, '+63282366488');
+      expect(result.getOrCrash(), '+63282366488');
     });
 
     test('Should Return 0284241228  when Sales org 2501', () {
       const input = '2501';
       final salesOrg = SalesOrg(input);
       final result = salesOrg.contact.phoneNumbers[0];
-      expect(result, '0284241228');
+      expect(result.getOrCrash(), '0284241228');
     });
     test('Should Return 0495598120 when Sales org 2501', () {
       const input = '2501';
       final salesOrg = SalesOrg(input);
       final result = salesOrg.contact.phoneNumbers[1];
-      expect(result, '0495598120');
+      expect(result.getOrCrash(), '0495598120');
     });
     test('09190560455 when Sales org 2501', () {
       const input = '2501';
       final salesOrg = SalesOrg(input);
       final result = salesOrg.contact.phoneNumbers[2];
-      expect(result, '09190560455');
+      expect(result.getOrCrash(), '09190560455');
     });
 
     test('+6329082222 when Sales org 2504', () {
       const input = '2504';
       final salesOrg = SalesOrg(input);
       final result = salesOrg.contact.phoneNumbers[0];
-      expect(result, '+6329082222');
+      expect(result.getOrCrash(), '+6329082222');
     });
 
     test('Should Return +6565483190 when Sales org 2601', () {
       const input = '2601';
       final salesOrg = SalesOrg(input);
       final result = salesOrg.contact.phoneNumbers[0];
-      expect(result, '+6565483190');
+      expect(result.getOrCrash(), '+6565483190');
     });
 
     test('Should Return 0809090887 when Sales org 2800', () {
       const input = '2800';
       final salesOrg = SalesOrg(input);
       final result = salesOrg.contact.phoneNumbers[0];
-      expect(result, '0809090887');
+      expect(result.getOrCrash(), '0809090887');
     });
 
     test('Should Return 0809090887 when Sales org 2801', () {
       const input = '2801';
       final salesOrg = SalesOrg(input);
       final result = salesOrg.contact.phoneNumbers[0];
-      expect(result, '0809090887');
+      expect(result.getOrCrash(), '0809090887');
     });
 
     test('Should Return 0809090887 when Sales org 2802', () {
       const input = '2802';
       final salesOrg = SalesOrg(input);
       final result = salesOrg.contact.phoneNumbers[0];
-      expect(result, '0809090887');
+      expect(result.getOrCrash(), '0809090887');
     });
 
     test('Should Return 0809090887 when Sales org 2803', () {
       const input = '2803';
       final salesOrg = SalesOrg(input);
       final result = salesOrg.contact.phoneNumbers[0];
-      expect(result, '0809090887');
+      expect(result.getOrCrash(), '0809090887');
     });
 
     test('Should Return 0809090887 when Sales org 2804', () {
       const input = '2804';
       final salesOrg = SalesOrg(input);
       final result = salesOrg.contact.phoneNumbers[0];
-      expect(result, '0809090887');
+      expect(result.getOrCrash(), '0809090887');
     });
 
     test('Should Return 0809090887 when Sales org 2805', () {
       const input = '2805';
       final salesOrg = SalesOrg(input);
       final result = salesOrg.contact.phoneNumbers[0];
-      expect(result, '0809090887');
+      expect(result.getOrCrash(), '0809090887');
     });
 
     test('Should Return +6621231000 when Sales org 2900', () {
       const input = '2900';
       final salesOrg = SalesOrg(input);
       final result = salesOrg.contact.phoneNumbers[0];
-      expect(result, '+6621231000');
+      expect(result.getOrCrash(), '+6621231000');
     });
     test('Should Return 1800500000 when Sales org 2900', () {
       const input = '2900';
       final salesOrg = SalesOrg(input);
       final result = salesOrg.contact.phoneNumbers[1];
-      expect(result, '1800500000');
+      expect(result.getOrCrash(), '1800500000');
     });
 
     test('Should Return +6621231000 when Sales org 2902', () {
       const input = '2902';
       final salesOrg = SalesOrg(input);
       final result = salesOrg.contact.phoneNumbers[0];
-      expect(result, '+6621231000');
+      expect(result.getOrCrash(), '+6621231000');
     });
     test('Should Return 1800500000 when Sales org 2902', () {
       const input = '2902';
       final salesOrg = SalesOrg(input);
       final result = salesOrg.contact.phoneNumbers[1];
-      expect(result, '1800500000');
+      expect(result.getOrCrash(), '1800500000');
     });
 
     test('Should Return  1800555558  when Sales org 3070', () {
       const input = '3070';
       final salesOrg = SalesOrg(input);
       final result = salesOrg.contact.phoneNumbers[0];
-      expect(result, '1800555558');
+      expect(result.getOrCrash(), '1800555558');
     });
 
     test('Should Return 1800555558  when Sales org 3000', () {
       const input = '3000';
       final salesOrg = SalesOrg(input);
       final result = salesOrg.contact.phoneNumbers[0];
-      expect(result, '1800555558');
+      expect(result.getOrCrash(), '1800555558');
     });
 
     test('1800555558 when Sales org 3001', () {
       const input = '3001';
       final salesOrg = SalesOrg(input);
       final result = salesOrg.contact.phoneNumbers[0];
-      expect(result, '1800555558');
+      expect(result.getOrCrash(), '1800555558');
     });
 
     test('1800555558 when Sales org 3050', () {
       const input = '3050';
       final salesOrg = SalesOrg(input);
       final result = salesOrg.contact.phoneNumbers[0];
-      expect(result, '1800555558');
+      expect(result.getOrCrash(), '1800555558');
     });
 
     test('Should Return 1800555558 when Sales org 3072', () {
       const input = '3072';
       final salesOrg = SalesOrg(input);
       final result = salesOrg.contact.phoneNumbers[0];
-      expect(result, '1800555558');
+      expect(result.getOrCrash(), '1800555558');
     });
 
     test('Should Return 1800555558 when Sales org 3090', () {
       const input = '3090';
       final salesOrg = SalesOrg(input);
       final result = salesOrg.contact.phoneNumbers[0];
-      expect(result, '1800555558');
+      expect(result.getOrCrash(), '1800555558');
     });
   });
 
