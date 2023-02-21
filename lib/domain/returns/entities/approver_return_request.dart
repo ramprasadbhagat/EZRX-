@@ -23,4 +23,10 @@ class ApproverReturnRequest with _$ApproverReturnRequest {
   double get refundTotal => requestHeader.refundTotal.refundTotal;
   String get createdBy => requestHeader.createdBy;
   String get soldTo => requestHeader.soldTo;
+
+  factory ApproverReturnRequest.empty() => ApproverReturnRequest(
+        requestHeader: ApproverReturnRequestInformationHeader.empty(),
+        requestInformation: [],
+      );
+  
 }

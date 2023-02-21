@@ -33,6 +33,33 @@ class ApproverReturnRequestInformationHeader
     required List<ReturnInvoices> returnInvoices,
     required List<ReturnSalesDoc> salesDoc,
   }) = _ApproverReturnRequestInformationHeader;
+
+  factory ApproverReturnRequestInformationHeader.empty() =>
+      ApproverReturnRequestInformationHeader(
+        cName1: '',
+        cName2: '',
+        cName3: '',
+        cName4: '',
+        createdBy: '',
+        createdDate: '',
+        createdTime: '',
+        ppaHeld: false,
+        refundTotal: RefundTotal(''),
+        requestID: '',
+        returnInvoices: [],
+        returnType: '',
+        returnTypeDesc: '',
+        salesDoc: [],
+        salesOrg: SalesOrg(''),
+        shipTo: '',
+        soldTo: '',
+        status: '',
+        street1: '',
+        street2: '',
+        street3: '',
+        street4: '',
+        totalItemCount: '',
+      );
 }
 
 @freezed

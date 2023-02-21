@@ -30,6 +30,7 @@ class ApproverActions extends StatelessWidget {
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
+        key: const ValueKey('actionApproverAppBar'),
         title: const Text(
           'Approver Actions',
         ).tr(),

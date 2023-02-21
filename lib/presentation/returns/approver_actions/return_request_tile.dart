@@ -18,6 +18,7 @@ class ApproverReturnRequestTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
+        key: const ValueKey('approverReturnRequestTile'),
         title: Text(
           approverReturnRequest.returnId,
           style: Theme.of(context).textTheme.titleSmall?.copyWith(

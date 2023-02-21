@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -55,6 +56,79 @@ void main() {
         final simpleDate = SimpleDate(input);
         final result = simpleDate.displayHumanReadableDate;
         expect(result, displayDate);
+      },
+    );
+  });
+
+  group('InvoiceDate value object', () {
+    test(
+      'should return DateTime',
+      () async {
+        final input =
+            DateTime.parse(DateFormat('yyyyMMdd').format(DateTime.now()));
+        final simpleInvoiceDate = InvoiceDate(input.toIso8601String());
+        final dateTimebyDateString = simpleInvoiceDate.dateTimebyDateString;
+        expect(dateTimebyDateString, input);
+      },
+    );
+
+    test(
+      'should return Formated Date String (yyyyMMdd)',
+      () async {
+        final input =
+            DateTime.parse(DateFormat('yyyyMMdd').format(DateTime.now()));
+        final simpleInvoiceDate = InvoiceDate(input.toIso8601String());
+        final apiParameterValueOrEmpty =
+            simpleInvoiceDate.apiParameterValueOrEmpty;
+        expect(apiParameterValueOrEmpty, DateFormat('yyyyMMdd').format(input));
+      },
+    );
+  });
+
+  group('FilterStatus value object', () {
+    test(
+      'FilterStatus All lable test',
+      () async {
+        final filterStatus = FilterStatus('ALL');
+        expect(filterStatus.label, 'All');
+      },
+    );
+    test(
+      'FilterStatus pending lable test',
+      () async {
+        final filterStatus = FilterStatus('PENDING');
+        expect(filterStatus.label, 'Pending Review');
+      },
+    );
+    test(
+      'FilterStatus All lable test',
+      () async {
+        final filterStatus = FilterStatus('COMPLETED');
+        expect(filterStatus.label, 'Completed');
+      },
+    );
+
+    test(
+      'FilterStatus All apiSortValue test',
+      () async {
+        final filterStatus = FilterStatus('ALL');
+        expect(filterStatus.apiSortValueOrEmpty, '');
+      },
+    );
+    test(
+      'FilterStatus pending apiSortValue test',
+      () async {
+        const input = 'PENDING';
+        final filterStatus = FilterStatus(input);
+        expect(filterStatus.apiSortValueOrEmpty, input);
+      },
+    );
+    test(
+      'FilterStatus complete apiSortValue test',
+      () async {
+        const input = 'COMPLETED';
+        final filterStatus = FilterStatus(input);
+        expect(filterStatus.apiSortValueOrEmpty, input);
       },
     );
   });
