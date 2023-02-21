@@ -1079,7 +1079,7 @@ void main() {
           .orderHistoryDetailsOrderItem.first.materialNumber.displayMatNo;
 
       final orderItemBonusCardField =
-          find.byKey(Key('orderItemBonusCard-$materialNumber'));
+          find.byKey(Key('orderItemBonusCard-$materialNumber-0'));
 
       expect(orderItemBonusCardField, findsOneWidget);
       await tester.pump();
@@ -1173,7 +1173,7 @@ void main() {
           .orderHistoryDetailsOrderItem.first.materialNumber.displayMatNo;
 
       final orderItemBonusCardField =
-          find.byKey(Key('orderItemBonusCard-$materialNumber'));
+          find.byKey(Key('orderItemBonusCard-$materialNumber-0'));
 
       expect(orderItemBonusCardField, findsOneWidget);
       await tester.pump();
@@ -1257,7 +1257,7 @@ void main() {
           .orderHistoryDetailsOrderItem.first.materialNumber.displayMatNo;
 
       final orderItemCardField =
-          find.byKey(Key('orderItemCard-$materialNumber'));
+          find.byKey(Key('orderItemCard-$materialNumber-0'));
 
       expect(orderItemCardField, findsOneWidget);
       await tester.pump();
@@ -1369,7 +1369,7 @@ void main() {
       await tester.pump();
 
       final orderItemCardField =
-          find.byKey(Key('orderItemCard-$materialNumber'));
+          find.byKey(Key('orderItemCard-$materialNumber-0'));
 
       expect(orderItemCardField, findsOneWidget);
 
@@ -1434,7 +1434,7 @@ void main() {
           .orderHistoryDetailsOrderItem.first.materialNumber.displayMatNo;
 
       final orderTenderContractCardField =
-          find.byKey(Key('orderTenderContractCard-$materialNumber'));
+          find.byKey(Key('orderTenderContractCard-$materialNumber-0'));
 
       expect(orderTenderContractCardField, findsOneWidget);
       await tester.pump();
@@ -1483,7 +1483,7 @@ void main() {
           .orderHistoryDetailsOrderItem.first.materialNumber.displayMatNo;
 
       final orderTenderContractCardField =
-          find.byKey(Key('orderTenderContractCard-$materialNumber'));
+          find.byKey(Key('orderTenderContractCard-$materialNumber-0'));
 
       expect(orderTenderContractCardField, findsOneWidget);
       await tester.pump();
@@ -1491,6 +1491,44 @@ void main() {
           find.byKey(const Key('sapStatusNotEmpty'));
 
       expect(sapStatusNotEmptyOrderItem, findsOneWidget);
+    });
+
+    testWidgets('order summary  addToCartPressed test with duplicate order ',
+        (tester) async {
+      final item = orderHistoryDetails.orderHistoryDetailsOrderItem.first;
+      when(() => mockOrderHistoryDetailsBloc.state).thenReturn(
+        OrderHistoryDetailsState.initial().copyWith(
+          orderHistoryDetails:
+              orderHistoryDetails.copyWith(orderHistoryDetailsOrderItem: [
+            item,
+            item,
+          ]),
+          failureOrSuccessOption: none(),
+          isLoading: false,
+          showErrorMessage: false,
+        ),
+      );
+      whenListen(
+          userBlocMock,
+          Stream.fromIterable([
+            UserState.initial().copyWith(
+              user: fakeUser.copyWith(
+                disableCreateOrder: true,
+              ),
+            ),
+            UserState.initial().copyWith(
+              user: fakeUser,
+            ),
+          ]));
+      await tester.pumpWidget(getWUT());
+      await tester.pump();
+      await tester.drag(find.byKey(const Key('scrollHistoryDetail')),
+          const Offset(0.0, -700));
+      await tester.pump();
+      final reOrderButton = find.byKey(const Key('reOrderButton'));
+      expect(reOrderButton, findsOneWidget);
+      await tester.tap(reOrderButton, warnIfMissed: false);
+      await tester.pumpAndSettle(const Duration(milliseconds: 50));
     });
 
     testWidgets('order summary  addToCartPressed test ', (tester) async {

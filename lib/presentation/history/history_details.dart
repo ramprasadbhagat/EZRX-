@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
@@ -686,6 +687,21 @@ class _ReOrder extends StatelessWidget {
           );
   }
 
+  List<CartItem> _getUniqueItems({required List<PriceAggregate> items}) => items
+      .groupListsBy((item) => item.materialNumberString)
+      .entries
+      .map(
+        (entry) => entry.value.first.copyWith(
+          quantity: entry.value.fold<int>(
+            0,
+            (sum, item) => sum + item.quantity,
+          ),
+        ),
+      )
+      .toList()
+      .map((e) => CartItem.material(e))
+      .toList();
+
   void _addToCartPressed(
     BuildContext context,
     MaterialPriceDetailState state,
@@ -736,7 +752,7 @@ class _ReOrder extends StatelessWidget {
     }).toList();
 
     context.read<CartBloc>().add(CartEvent.replaceWithOrderItems(
-          items: items.map((e) => CartItem.material(e)).toList(),
+          items: _getUniqueItems(items: items),
           customerCodeInfo: eligibilityState.customerCodeInfo,
           salesOrganisationConfigs: eligibilityState.salesOrgConfigs,
           salesOrganisation: eligibilityState.salesOrganisation,
@@ -832,26 +848,26 @@ class _OrderSummary extends StatelessWidget {
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: state.bonusItem.map((orderItem) {
-                  return orderItem.bonusList.isNotEmpty
+                children: state.bonusItem.asMap().entries.map((orderItem) {
+                  return orderItem.value.bonusList.isNotEmpty
                       ? OrderItemBonusCard(
                           key: Key(
-                            'orderItemBonusCard-${orderItem.orderItem.materialNumber.displayMatNo}',
+                            'orderItemBonusCard-${orderItem.value.orderItem.materialNumber.displayMatNo}-${orderItem.key}',
                           ),
-                          orderHistoryDetailsBonusAggregate: orderItem,
+                          orderHistoryDetailsBonusAggregate: orderItem.value,
                         )
-                      : orderItem.orderItem.isTenderContractMaterial
+                      : orderItem.value.orderItem.isTenderContractMaterial
                           ? OrderTenderContractCard(
                               key: Key(
-                                'orderTenderContractCard-${orderItem.orderItem.materialNumber.displayMatNo}',
+                                'orderTenderContractCard-${orderItem.value.orderItem.materialNumber.displayMatNo}-${orderItem.key}',
                               ),
-                              orderHistoryDetailsBonusAggregate: orderItem,
+                              orderHistoryDetailsBonusAggregate: orderItem.value,
                             )
                           : OrderItemCard(
                               key: Key(
-                                'orderItemCard-${orderItem.orderItem.materialNumber.displayMatNo}',
+                                'orderItemCard-${orderItem.value.orderItem.materialNumber.displayMatNo}-${orderItem.key}',
                               ),
-                              orderHistoryDetailsBonusAggregate: orderItem,
+                              orderHistoryDetailsBonusAggregate: orderItem.value,
                             );
                 }).toList(),
               ),

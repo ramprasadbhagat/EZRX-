@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:collection/collection.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
@@ -8,6 +9,7 @@ import 'package:ezrxmobile/application/order/additional_details/additional_detai
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item.dart';
@@ -173,23 +175,51 @@ class SavedOrderDetailPage extends StatelessWidget {
     return materialList;
   }
 
+  List<CartItem> _getUniqueItems({
+    required List<MaterialItem> items,
+    required MaterialPriceDetailState state,
+    required SalesOrganisationConfigs salesConfigs,
+  }) {
+    final newList = List<MaterialItem>.from(items);
+    final groupByList = items
+        .where((item) => !item.type.isBundle)
+        .groupListsBy((item) => item.materialNumber);
+    newList.removeWhere((item) => !item.type.isBundle);
+    newList.addAll(groupByList.entries
+        .map(
+          (entry) => entry.value.first.copyWith(
+            qty: entry.value.fold<int>(
+              0,
+              (sum, item) => sum + item.qty,
+            ),
+          ),
+        )
+        .toList());
+
+    return newList
+        .map((item) => item.type.isBundle
+            ? CartItem.bundleFromOrder(
+                priceDetailMap: state.materialDetails,
+                savedItem: item,
+                salesConfigs: salesConfigs,
+              )
+            : CartItem.materialFromOrder(
+                priceDetailMap: state.materialDetails,
+                material: item,
+                salesConfigs: salesConfigs,
+              ))
+        .toList();
+  }
+
   void _addToCartPressed(BuildContext context, MaterialPriceDetailState state) {
     final cartBloc = context.read<CartBloc>();
     final salesConfigs = context.read<EligibilityBloc>().state.salesOrgConfigs;
     cartBloc.add(CartEvent.replaceWithOrderItems(
-      items: order.items
-          .map((item) => item.type.isBundle
-              ? CartItem.bundleFromOrder(
-                  priceDetailMap: state.materialDetails,
-                  savedItem: item,
-                  salesConfigs: salesConfigs,
-                )
-              : CartItem.materialFromOrder(
-                  priceDetailMap: state.materialDetails,
-                  material: item,
-                  salesConfigs: salesConfigs,
-                ))
-          .toList(),
+      items: _getUniqueItems(
+        items: order.items,
+        state: state,
+        salesConfigs: salesConfigs,
+      ),
       customerCodeInfo: context.read<EligibilityBloc>().state.customerCodeInfo,
       salesOrganisation:
           context.read<EligibilityBloc>().state.salesOrganisation,

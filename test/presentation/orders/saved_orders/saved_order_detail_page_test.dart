@@ -431,6 +431,43 @@ void main() {
     );
 
     testWidgets(
+      'Saved Order Detail when add to cart is pressed with duplicate order then navigate to cart page',
+      (tester) async {
+        final list = <MaterialItem>[];
+        list.addAll(orderMock.items);
+        list.add(orderMock.items.first);
+        final inReq = orderMock.copyWith(items: list);
+        final materialInfoList = _getMaterialList(orderMockItems);
+        when(() => materialPriceDetailBlocMock.state).thenReturn(
+          MaterialPriceDetailState.initial().copyWith(
+            isFetching: false,
+            isValidating: false,
+            materialDetails: {
+              for (final material in materialInfoList)
+                material: MaterialPriceDetail.empty()
+                    .copyWith
+                    .price(finalPrice: MaterialPrice(10)),
+            },
+          ),
+        );
+        final expectedStates = [
+          materialPriceDetailBlocMock.state
+              .copyWith(isValidating: false, isFetching: false),
+        ];
+        whenListen(
+            materialPriceDetailBlocMock, Stream.fromIterable(expectedStates));
+        await tester.pumpWidget(savedOrderDetailPage(
+          SavedOrderDetailPage(
+            order: inReq,
+          ),
+        ));
+
+        await tester.tap(find.text('Add to Cart'));
+        await tester.pumpAndSettle(const Duration(seconds: 1));
+      },
+    );
+
+    testWidgets(
       'Saved Order Detail when delete is pressed',
       (tester) async {
         when(() => materialPriceDetailBlocMock.state).thenReturn(
