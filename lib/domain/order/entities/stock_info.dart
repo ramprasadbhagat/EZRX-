@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -9,7 +10,7 @@ class StockInfo with _$StockInfo {
 
   const factory StockInfo({
     required MaterialNumber materialNumber,
-    required ExpiryDate expiryDate,
+    required DateTimeStringValue expiryDate,
     required String batch,
     required MaterialInStock inStock,
     required String salesDistrict,
@@ -17,7 +18,7 @@ class StockInfo with _$StockInfo {
 
   factory StockInfo.empty() => StockInfo(
         materialNumber: MaterialNumber(''),
-        expiryDate: ExpiryDate(''),
+        expiryDate: DateTimeStringValue(''),
         batch: '',
         inStock: MaterialInStock(''),
         salesDistrict: '',

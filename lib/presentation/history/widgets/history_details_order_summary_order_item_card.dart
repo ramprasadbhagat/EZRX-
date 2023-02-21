@@ -102,7 +102,7 @@ class OrderItemCard extends StatelessWidget {
                           ? BalanceTextRow(
                               keyText: 'Batch Number & Expiry Date'.tr(),
                               valueText: orderHistoryDetailsBonusAggregate
-                                  .orderItem.batch,
+                                  .orderItem.batchAndExpiryDate,
                               valueTextLoading: state.isLoading,
                               keyFlex: 1,
                               valueFlex: 1,
@@ -123,8 +123,8 @@ class OrderItemCard extends StatelessWidget {
                           ? BalanceTextRow(
                               key: const Key('deliveryDateTime'),
                               keyText: 'Delivery Date/Time'.tr(),
-                              valueText: orderHistoryDetailsBonusAggregate
-                                  .orderItem.plannedDeliveryDate,
+                              valueText:orderHistoryDetailsBonusAggregate
+                                    .orderItem.plannedDeliveryDate.toValidDateString,
                               valueTextLoading: state.isLoading,
                               keyFlex: 1,
                               valueFlex: 1,

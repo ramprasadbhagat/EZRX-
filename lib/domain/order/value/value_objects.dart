@@ -657,20 +657,6 @@ class OrderNumber extends ValueObject<String> {
   const OrderNumber._(this.value);
 }
 
-class ExpiryDate extends ValueObject<String> {
-  @override
-  final Either<ValueFailure<String>, String> value;
-
-  factory ExpiryDate(String input) {
-    return ExpiryDate._(validateStringNotEmpty(input));
-  }
-  String get getExpiryDate {
-    return naIfEmpty(value.getOrElse(() => ''));
-  }
-
-  const ExpiryDate._(this.value);
-}
-
 class PriceOverrideValue extends ValueObject<double> {
   @override
   final Either<ValueFailure<double>, double> value;
@@ -732,21 +718,6 @@ class DocumentType extends ValueObject<String> {
   }
 
   const DocumentType._(this.value);
-}
-
-class CreatedDate extends ValueObject<String> {
-  @override
-  final Either<ValueFailure<String>, String> value;
-
-  factory CreatedDate(String input) {
-    return CreatedDate._(validateDateString(input));
-  }
-
-  String get displayHumanReadableDate {
-    return displayDateOrEmpty((value.getOrElse(() => '')));
-  }
-
-  const CreatedDate._(this.value);
 }
 
 class SAPStatus extends ValueObject<String> {

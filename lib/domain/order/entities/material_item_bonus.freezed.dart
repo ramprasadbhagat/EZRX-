@@ -20,7 +20,7 @@ mixin _$MaterialItemBonus {
   int get qty => throw _privateConstructorUsedError;
   String get comment => throw _privateConstructorUsedError;
   String get materialDescription => throw _privateConstructorUsedError;
-  ExpiryDate get expiryDate => throw _privateConstructorUsedError;
+  DateTimeStringValue get expiryDate => throw _privateConstructorUsedError;
   String get inStock => throw _privateConstructorUsedError;
   int get remainingQty => throw _privateConstructorUsedError;
   bool get additionalBonusFlag => throw _privateConstructorUsedError;
@@ -42,7 +42,7 @@ abstract class $MaterialItemBonusCopyWith<$Res> {
       int qty,
       String comment,
       String materialDescription,
-      ExpiryDate expiryDate,
+      DateTimeStringValue expiryDate,
       String inStock,
       int remainingQty,
       bool additionalBonusFlag,
@@ -94,7 +94,7 @@ class _$MaterialItemBonusCopyWithImpl<$Res, $Val extends MaterialItemBonus>
       expiryDate: null == expiryDate
           ? _value.expiryDate
           : expiryDate // ignore: cast_nullable_to_non_nullable
-              as ExpiryDate,
+              as DateTimeStringValue,
       inStock: null == inStock
           ? _value.inStock
           : inStock // ignore: cast_nullable_to_non_nullable
@@ -136,7 +136,7 @@ abstract class _$$_MaterialItemBonusCopyWith<$Res>
       int qty,
       String comment,
       String materialDescription,
-      ExpiryDate expiryDate,
+      DateTimeStringValue expiryDate,
       String inStock,
       int remainingQty,
       bool additionalBonusFlag,
@@ -187,7 +187,7 @@ class __$$_MaterialItemBonusCopyWithImpl<$Res>
       expiryDate: null == expiryDate
           ? _value.expiryDate
           : expiryDate // ignore: cast_nullable_to_non_nullable
-              as ExpiryDate,
+              as DateTimeStringValue,
       inStock: null == inStock
           ? _value.inStock
           : inStock // ignore: cast_nullable_to_non_nullable
@@ -232,7 +232,7 @@ class _$_MaterialItemBonus extends _MaterialItemBonus {
   @override
   final String materialDescription;
   @override
-  final ExpiryDate expiryDate;
+  final DateTimeStringValue expiryDate;
   @override
   final String inStock;
   @override
@@ -296,7 +296,7 @@ abstract class _MaterialItemBonus extends MaterialItemBonus {
       required final int qty,
       required final String comment,
       required final String materialDescription,
-      required final ExpiryDate expiryDate,
+      required final DateTimeStringValue expiryDate,
       required final String inStock,
       required final int remainingQty,
       required final bool additionalBonusFlag,
@@ -312,7 +312,7 @@ abstract class _MaterialItemBonus extends MaterialItemBonus {
   @override
   String get materialDescription;
   @override
-  ExpiryDate get expiryDate;
+  DateTimeStringValue get expiryDate;
   @override
   String get inStock;
   @override

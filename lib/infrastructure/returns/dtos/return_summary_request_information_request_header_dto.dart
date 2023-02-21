@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_summary_request_information_request_header.dart';
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/returns/dtos/return_summary_request_information_return_invoice_dto.dart';
@@ -77,7 +78,7 @@ class RequestHeaderDto with _$RequestHeaderDto {
       createdBy: createdBy,
       returnType: returnType,
       status: ReturnSummaryStatus(status),
-      createdDate: SimpleDate(createdDate),
+      createdDate: DateTimeStringValue(createdDate),
       createdTime: createdTime,
       requestId: requestID,
       salesOrg: salesOrg,

@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_header.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_payment_term.dart';
@@ -77,12 +78,14 @@ class OrderHistoryDetailsDto with _$OrderHistoryDetailsDto {
         totalTax: orderHistoryDetailsOrderHeader.totalTax,
         orderValue: orderHistoryDetailsOrderHeader.orderValue,
         pOReference: POReference(orderHistoryDetailsOrderHeader.pOReference),
-        requestedDeliveryDate:
-            orderHistoryDetailsOrderHeader.requestedDeliveryDate,
+        requestedDeliveryDate: DateTimeStringValue(
+          orderHistoryDetailsOrderHeader.requestedDeliveryDate,
+        ),
         telephoneNumber:
             PhoneNumber(orderHistoryDetailsOrderHeader.telephoneNumber),
         type: orderHistoryDetailsOrderHeader.type,
-        createdDate: CreatedDate(orderHistoryDetailsOrderHeader.createdDate),
+        createdDate:
+            DateTimeStringValue(orderHistoryDetailsOrderHeader.createdDate),
         eZRXNumber: orderHistoryDetailsOrderHeader.eZRXNumber,
         orderBy: orderHistoryDetailsOrderHeader.orderBy,
       ),

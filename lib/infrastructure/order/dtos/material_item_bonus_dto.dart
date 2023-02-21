@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -50,7 +51,7 @@ class MaterialItemBonusDto with _$MaterialItemBonusDto {
       qty: qty,
       comment: comment,
       materialDescription: materialDescription,
-      expiryDate: ExpiryDate(expiryDate),
+      expiryDate: DateTimeStringValue(expiryDate),
       inStock: inStock,
       remainingQty: remainingQty,
       additionalBonusFlag: additionalBonusFlag,

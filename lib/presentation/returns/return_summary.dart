@@ -196,7 +196,7 @@ class ReturnSummaryListItem extends StatelessWidget {
             BalanceTextRow(
               keyText: 'Submitted Date'.tr(),
               valueText: returnSummaryRequestInformation
-                  .requestHeader.createdDate.displayHumanReadableDate,
+                  .requestHeader.createdDate.toValidDateString,
               keyFlex: 1,
               valueFlex: 1,
             ),

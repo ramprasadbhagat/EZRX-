@@ -112,7 +112,7 @@ class OrderItemBonusCard extends StatelessWidget {
                           ? BalanceTextRow(
                               keyText: 'Batch Number & Expiry Date'.tr(),
                               valueText: orderHistoryDetailsBonusAggregate
-                                  .orderItem.materialNumber.displayMatNo,
+                                  .orderItem.batchAndExpiryDate,
                               valueTextLoading: state.isLoading,
                               keyFlex: 1,
                               valueFlex: 1,
@@ -134,7 +134,9 @@ class OrderItemBonusCard extends StatelessWidget {
                               key: const Key('deliveryDateTime'),
                               keyText: 'Delivery Date/Time'.tr(),
                               valueText: orderHistoryDetailsBonusAggregate
-                                  .orderItem.plannedDeliveryDate,
+                                  .orderItem
+                                  .plannedDeliveryDate
+                                  .toValidDateString,
                               valueTextLoading: state.isLoading,
                               keyFlex: 1,
                               valueFlex: 1,
@@ -246,8 +248,8 @@ class OrderItemBonusCard extends StatelessWidget {
                                             keyText:
                                                 'Batch Number & Expiry Date'
                                                     .tr(),
-                                            valueText: orderItem
-                                                .materialNumber.displayMatNo,
+                                            valueText:
+                                                orderItem.batchAndExpiryDate,
                                             valueTextLoading: state.isLoading,
                                             keyFlex: 1,
                                             valueFlex: 1,
@@ -265,8 +267,9 @@ class OrderItemBonusCard extends StatelessWidget {
                                             .salesOrgConfigs.disableDeliveryDate
                                         ? BalanceTextRow(
                                             keyText: 'Delivery Date/Time'.tr(),
-                                            valueText:
-                                                orderItem.plannedDeliveryDate,
+                                            valueText: orderItem
+                                                .plannedDeliveryDate
+                                                .toValidDateString,
                                             valueTextLoading: state.isLoading,
                                             keyFlex: 1,
                                             valueFlex: 1,

@@ -141,7 +141,7 @@ class OrderTenderContractCard extends StatelessWidget {
                           ? BalanceTextRow(
                               keyText: 'Expiry Date'.tr(),
                               valueText: orderHistoryDetailsBonusAggregate
-                                  .orderItem.expiryDate,
+                                    .orderItem.expiryDate.toValidDateString,
                               valueTextLoading: state.isLoading,
                               keyFlex: 1,
                               valueFlex: 1,

@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$StockInfo {
   MaterialNumber get materialNumber => throw _privateConstructorUsedError;
-  ExpiryDate get expiryDate => throw _privateConstructorUsedError;
+  DateTimeStringValue get expiryDate => throw _privateConstructorUsedError;
   String get batch => throw _privateConstructorUsedError;
   MaterialInStock get inStock => throw _privateConstructorUsedError;
   String get salesDistrict => throw _privateConstructorUsedError;
@@ -34,7 +34,7 @@ abstract class $StockInfoCopyWith<$Res> {
   @useResult
   $Res call(
       {MaterialNumber materialNumber,
-      ExpiryDate expiryDate,
+      DateTimeStringValue expiryDate,
       String batch,
       MaterialInStock inStock,
       String salesDistrict});
@@ -67,7 +67,7 @@ class _$StockInfoCopyWithImpl<$Res, $Val extends StockInfo>
       expiryDate: null == expiryDate
           ? _value.expiryDate
           : expiryDate // ignore: cast_nullable_to_non_nullable
-              as ExpiryDate,
+              as DateTimeStringValue,
       batch: null == batch
           ? _value.batch
           : batch // ignore: cast_nullable_to_non_nullable
@@ -93,7 +93,7 @@ abstract class _$$_StockInfoCopyWith<$Res> implements $StockInfoCopyWith<$Res> {
   @useResult
   $Res call(
       {MaterialNumber materialNumber,
-      ExpiryDate expiryDate,
+      DateTimeStringValue expiryDate,
       String batch,
       MaterialInStock inStock,
       String salesDistrict});
@@ -124,7 +124,7 @@ class __$$_StockInfoCopyWithImpl<$Res>
       expiryDate: null == expiryDate
           ? _value.expiryDate
           : expiryDate // ignore: cast_nullable_to_non_nullable
-              as ExpiryDate,
+              as DateTimeStringValue,
       batch: null == batch
           ? _value.batch
           : batch // ignore: cast_nullable_to_non_nullable
@@ -155,7 +155,7 @@ class _$_StockInfo extends _StockInfo {
   @override
   final MaterialNumber materialNumber;
   @override
-  final ExpiryDate expiryDate;
+  final DateTimeStringValue expiryDate;
   @override
   final String batch;
   @override
@@ -197,7 +197,7 @@ class _$_StockInfo extends _StockInfo {
 abstract class _StockInfo extends StockInfo {
   const factory _StockInfo(
       {required final MaterialNumber materialNumber,
-      required final ExpiryDate expiryDate,
+      required final DateTimeStringValue expiryDate,
       required final String batch,
       required final MaterialInStock inStock,
       required final String salesDistrict}) = _$_StockInfo;
@@ -206,7 +206,7 @@ abstract class _StockInfo extends StockInfo {
   @override
   MaterialNumber get materialNumber;
   @override
-  ExpiryDate get expiryDate;
+  DateTimeStringValue get expiryDate;
   @override
   String get batch;
   @override

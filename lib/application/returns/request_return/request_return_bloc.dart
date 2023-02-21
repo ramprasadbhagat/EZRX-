@@ -3,10 +3,10 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/request_return_filter.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
 import 'package:ezrxmobile/domain/returns/repository/i_request_return_repository.dart';
-import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -138,7 +138,7 @@ class RequestReturnBloc extends Bloc<RequestReturnEvent, RequestReturnState> {
     return newList;
   }
 
-  int _compareTo(SimpleDate a, SimpleDate b, String direction) {
+  int _compareTo(DateTimeStringValue a, DateTimeStringValue b, String direction) {
     switch (direction) {
       case 'asc':
         return a.getOrDefaultValue('').compareTo(b.getOrDefaultValue(''));

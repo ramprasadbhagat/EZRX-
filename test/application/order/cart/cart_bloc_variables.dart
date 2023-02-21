@@ -1,6 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
@@ -19,7 +20,7 @@ class MockCartBloc extends MockBloc<CartEvent, CartState> implements CartBloc {}
 final mockStockInfo = StockInfo.empty().copyWith(
   materialNumber: MaterialNumber('8949542'),
   inStock: MaterialInStock('Yes'),
-  expiryDate: ExpiryDate('NA'),
+  expiryDate: DateTimeStringValue('NA'),
   salesDistrict: '',
   batch: '',
 );
@@ -201,7 +202,7 @@ final bonus913MockCartItem = PriceAggregate.empty().copyWith(
   stockInfo: StockInfo.empty().copyWith(
     materialNumber: bonusMaterialNumber,
     inStock: MaterialInStock('Yes'),
-    expiryDate: ExpiryDate('NA'),
+    expiryDate: DateTimeStringValue('NA'),
     salesDistrict: '',
     batch: '',
   ),
@@ -273,7 +274,7 @@ final bonus911MockCartItem = PriceAggregate.empty().copyWith(
   stockInfo: StockInfo.empty().copyWith(
     materialNumber: bonusMaterialNumber,
     inStock: MaterialInStock('Yes'),
-    expiryDate: ExpiryDate('NA'),
+    expiryDate: DateTimeStringValue('NA'),
     salesDistrict: '',
     batch: '',
   ),
@@ -344,7 +345,7 @@ final bonus914MockCartItem = PriceAggregate.empty().copyWith(
   stockInfo: StockInfo.empty().copyWith(
     materialNumber: bonusMaterialNumber,
     inStock: MaterialInStock('Yes'),
-    expiryDate: ExpiryDate('NA'),
+    expiryDate: DateTimeStringValue('NA'),
     salesDistrict: '',
     batch: '',
   ),
@@ -415,7 +416,7 @@ final bonus915MockCartItem = PriceAggregate.empty().copyWith(
   stockInfo: StockInfo.empty().copyWith(
     materialNumber: bonusMaterialNumber,
     inStock: MaterialInStock('Yes'),
-    expiryDate: ExpiryDate('NA'),
+    expiryDate: DateTimeStringValue('NA'),
     salesDistrict: '',
     batch: '',
   ),

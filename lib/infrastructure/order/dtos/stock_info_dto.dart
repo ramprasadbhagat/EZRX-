@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -43,7 +44,7 @@ class StockInfoDto with _$StockInfoDto {
     return StockInfo(
       materialNumber: MaterialNumber(materialNumber),
       batch: batch,
-      expiryDate: ExpiryDate(expiryDate),
+      expiryDate: DateTimeStringValue(expiryDate),
       inStock: MaterialInStock(inStock),
       salesDistrict: salesDistrict,
     );

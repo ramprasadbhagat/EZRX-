@@ -21,7 +21,7 @@ mixin _$RequestHeader {
   String get createdBy => throw _privateConstructorUsedError;
   String get returnType => throw _privateConstructorUsedError;
   ReturnSummaryStatus get status => throw _privateConstructorUsedError;
-  SimpleDate get createdDate => throw _privateConstructorUsedError;
+  DateTimeStringValue get createdDate => throw _privateConstructorUsedError;
   String get createdTime => throw _privateConstructorUsedError;
   String get requestId => throw _privateConstructorUsedError;
   String get salesOrg => throw _privateConstructorUsedError;
@@ -57,7 +57,7 @@ abstract class $RequestHeaderCopyWith<$Res> {
       String createdBy,
       String returnType,
       ReturnSummaryStatus status,
-      SimpleDate createdDate,
+      DateTimeStringValue createdDate,
       String createdTime,
       String requestId,
       String salesOrg,
@@ -138,7 +138,7 @@ class _$RequestHeaderCopyWithImpl<$Res, $Val extends RequestHeader>
       createdDate: null == createdDate
           ? _value.createdDate
           : createdDate // ignore: cast_nullable_to_non_nullable
-              as SimpleDate,
+              as DateTimeStringValue,
       createdTime: null == createdTime
           ? _value.createdTime
           : createdTime // ignore: cast_nullable_to_non_nullable
@@ -225,7 +225,7 @@ abstract class _$$_RequestHeaderCopyWith<$Res>
       String createdBy,
       String returnType,
       ReturnSummaryStatus status,
-      SimpleDate createdDate,
+      DateTimeStringValue createdDate,
       String createdTime,
       String requestId,
       String salesOrg,
@@ -304,7 +304,7 @@ class __$$_RequestHeaderCopyWithImpl<$Res>
       createdDate: null == createdDate
           ? _value.createdDate
           : createdDate // ignore: cast_nullable_to_non_nullable
-              as SimpleDate,
+              as DateTimeStringValue,
       createdTime: null == createdTime
           ? _value.createdTime
           : createdTime // ignore: cast_nullable_to_non_nullable
@@ -419,7 +419,7 @@ class _$_RequestHeader extends _RequestHeader {
   @override
   final ReturnSummaryStatus status;
   @override
-  final SimpleDate createdDate;
+  final DateTimeStringValue createdDate;
   @override
   final String createdTime;
   @override
@@ -552,7 +552,7 @@ abstract class _RequestHeader extends RequestHeader {
       required final String createdBy,
       required final String returnType,
       required final ReturnSummaryStatus status,
-      required final SimpleDate createdDate,
+      required final DateTimeStringValue createdDate,
       required final String createdTime,
       required final String requestId,
       required final String salesOrg,
@@ -583,7 +583,7 @@ abstract class _RequestHeader extends RequestHeader {
   @override
   ReturnSummaryStatus get status;
   @override
-  SimpleDate get createdDate;
+  DateTimeStringValue get createdDate;
   @override
   String get createdTime;
   @override

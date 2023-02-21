@@ -27,6 +27,7 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/bonus_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_price_detail.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
@@ -1029,7 +1030,7 @@ void main() {
         OrderHistoryDetailsBonusAggregate(
           orderItem:
               orderHistoryDetails.orderHistoryDetailsOrderItem.first.copyWith(
-            plannedDeliveryDate: '12/01/22',
+            plannedDeliveryDate: DateTimeStringValue('12/01/22'),
             sAPStatus: SAPStatus('Order Placed'),
           ),
           details:
@@ -1111,7 +1112,7 @@ void main() {
         OrderHistoryDetailsBonusAggregate(
           orderItem:
               orderHistoryDetails.orderHistoryDetailsOrderItem.first.copyWith(
-            plannedDeliveryDate: '12/01/22',
+            plannedDeliveryDate: DateTimeStringValue('12/01/22'),
             sAPStatus: SAPStatus(''),
           ),
           details:
@@ -1198,7 +1199,7 @@ void main() {
         OrderHistoryDetailsBonusAggregate(
           orderItem:
               orderHistoryDetails.orderHistoryDetailsOrderItem.first.copyWith(
-            plannedDeliveryDate: '12/01/22',
+            plannedDeliveryDate: DateTimeStringValue('12/01/22'),
             sAPStatus: SAPStatus('Order Placed'),
           ),
           details:
@@ -1297,7 +1298,7 @@ void main() {
         OrderHistoryDetailsBonusAggregate(
           orderItem:
               orderHistoryDetails.orderHistoryDetailsOrderItem.first.copyWith(
-            plannedDeliveryDate: '12/01/22',
+            plannedDeliveryDate: DateTimeStringValue('12/01/22'),
             sAPStatus: SAPStatus(''),
           ),
           details:

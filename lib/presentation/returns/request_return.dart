@@ -323,13 +323,13 @@ class _RequestReturnListItem extends StatelessWidget {
             ),
             BalanceTextRow(
               keyText: 'Created Date'.tr(),
-              valueText: returnItem.createdDate.displayHumanReadableDate,
+              valueText: returnItem.createdDate.toValidDateString,
               keyFlex: 1,
               valueFlex: 1,
             ),
             BalanceTextRow(
               keyText: 'Expiry Date'.tr(),
-              valueText: returnItem.expiryDate.displayHumanReadableDate,
+              valueText: returnItem.expiryDate.toValidDateString,
               keyFlex: 1,
               valueFlex: 1,
             ),

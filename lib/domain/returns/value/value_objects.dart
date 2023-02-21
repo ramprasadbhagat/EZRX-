@@ -70,20 +70,6 @@ class ApprovalLimit extends ValueObject<int> {
   const ApprovalLimit._(this.value);
 }
 
-class SimpleDate extends ValueObject<String> {
-  @override
-  final Either<ValueFailure<String>, String> value;
-
-  factory SimpleDate(String input) {
-    return SimpleDate._(validateDateString(input));
-  }
-
-  String get displayHumanReadableDate {
-    return displayDateOrEmpty((value.getOrElse(() => '')));
-  }
-
-  const SimpleDate._(this.value);
-}
 
 class RefundTotal extends ValueObject<String> {
   @override

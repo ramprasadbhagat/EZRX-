@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_summary_request_information_sales_doc.dart';
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -15,7 +16,7 @@ class RequestHeader with _$RequestHeader {
     required String createdBy,
     required String returnType,
     required ReturnSummaryStatus status,
-    required SimpleDate createdDate,
+    required DateTimeStringValue createdDate,
     required String createdTime,
     required String requestId,
     required String salesOrg,
@@ -41,7 +42,7 @@ class RequestHeader with _$RequestHeader {
         createdBy: '',
         returnType: '',
         status: ReturnSummaryStatus(''),
-        createdDate: SimpleDate(''),
+        createdDate: DateTimeStringValue(''),
         createdTime: '',
         requestId: '',
         salesOrg: '',

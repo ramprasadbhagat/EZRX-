@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -507,15 +508,15 @@ void main() {
   group('Expiry Date value object', () {
     test('should return value when Expiry Date having valid date', () async {
       const input = '12042028';
-      final tenderContractInfo = ExpiryDate(input);
-      final result = tenderContractInfo.getExpiryDate;
+      final tenderContractInfo = DateTimeStringValue(input);
+      final result = tenderContractInfo.naIfEmptyDateTime;
       expect(result, '12042028');
     });
 
     test('should return NA when Expiry Date having empty value', () async {
       const input = '';
-      final tenderContractInfo = ExpiryDate(input);
-      final result = tenderContractInfo.getExpiryDate;
+      final tenderContractInfo = DateTimeStringValue(input);
+      final result = tenderContractInfo.naIfEmptyDateTime;
       expect(result, 'NA');
     });
   });

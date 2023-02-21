@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_schedule.dart';
@@ -15,7 +16,7 @@ class ReturnItem with _$ReturnItem {
     required String referenceDocument,
     required String purchaseNumberC,
     required String poMethod,
-    required SimpleDate createdDate,
+    required DateTimeStringValue createdDate,
     required String currency,
     required String plant,
     required MaterialNumber materialNumber,
@@ -26,11 +27,11 @@ class ReturnItem with _$ReturnItem {
     required String batch,
     required String highLevelItemCode,
     required String orderReason,
-    required SimpleDate priceDate,
+    required DateTimeStringValue priceDate,
     required double unitPrice,
     required double totalPrice,
     required PrincipalData principalData,
-    required SimpleDate expiryDate,
+    required DateTimeStringValue expiryDate,
     required bool eligibleForReturn,
     required List<ReturnSchedule> schedules,
     required String suggestedPriceOverride,
@@ -44,7 +45,7 @@ class ReturnItem with _$ReturnItem {
         referenceDocument: '',
         purchaseNumberC: '',
         poMethod: '',
-        createdDate: SimpleDate(''),
+        createdDate: DateTimeStringValue(''),
         currency: '',
         plant: '',
         materialNumber: MaterialNumber(''),
@@ -55,14 +56,14 @@ class ReturnItem with _$ReturnItem {
         batch: '',
         highLevelItemCode: '',
         orderReason: '',
-        priceDate: SimpleDate(''),
+        priceDate: DateTimeStringValue(''),
         unitPrice: 0.0,
         totalPrice: 0.0,
         principalData: PrincipalData(
           principalName: '',
           principalCode: PrincipalCode(''),
         ),
-        expiryDate: SimpleDate(''),
+        expiryDate: DateTimeStringValue(''),
         eligibleForReturn: false,
         schedules: <ReturnSchedule>[],
         suggestedPriceOverride: '',

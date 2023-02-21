@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -48,13 +49,13 @@ void main() {
     );
   });
 
-  group('SimpleDate value object', () {
+  group('DateTimeStringValue value object', () {
     test(
       '=> should return human readable date',
       () async {
         const input = '20221011';
-        final simpleDate = SimpleDate(input);
-        final result = simpleDate.displayHumanReadableDate;
+        final simpleDate = DateTimeStringValue(input);
+        final result = simpleDate.toValidDateString;
         expect(result, displayDate);
       },
     );

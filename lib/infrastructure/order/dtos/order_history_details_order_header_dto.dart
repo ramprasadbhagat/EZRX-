@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_header.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -27,8 +28,8 @@ class OrderHistoryDetailsOrderHeadersDto
   ) {
     return OrderHistoryDetailsOrderHeadersDto(
       totalTax: orderHistoryDetailsOrderHeader.totalTax,
-      requestedDeliveryDate:
-          orderHistoryDetailsOrderHeader.requestedDeliveryDate,
+      requestedDeliveryDate: orderHistoryDetailsOrderHeader
+          .requestedDeliveryDate.toValidDateString,
       pOReference:
           orderHistoryDetailsOrderHeader.pOReference.displayPOReference,
       type: orderHistoryDetailsOrderHeader.type,
@@ -44,12 +45,12 @@ class OrderHistoryDetailsOrderHeadersDto
   OrderHistoryDetailsOrderHeader toDomain() {
     return OrderHistoryDetailsOrderHeader(
       totalTax: totalTax,
-      requestedDeliveryDate: requestedDeliveryDate,
+      requestedDeliveryDate: DateTimeStringValue(requestedDeliveryDate),
       pOReference: POReference(pOReference),
       type: type,
       telephoneNumber: PhoneNumber(telephoneNumber),
       orderValue: orderValue,
-      createdDate: CreatedDate(createdDate),
+      createdDate: DateTimeStringValue(createdDate),
       eZRXNumber: eZRXNumber,
       orderBy: orderBy,
     );

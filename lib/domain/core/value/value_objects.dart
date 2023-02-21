@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/core/error/errors.dart';
 import 'package:ezrxmobile/domain/core/error/failures.dart';
+import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/core/value/value_validators.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -73,4 +74,29 @@ class SearchKey extends ValueObject<String> {
   String get searchValueOrEmpty => value.getOrElse(() => '');
 
   const SearchKey._(this.value);
+}
+
+class DateTimeStringValue extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory DateTimeStringValue(String input) {
+    return DateTimeStringValue._(validateDateString(input));
+  }
+
+  String get naIfEmptyDateTime {
+    return naIfEmpty(value.getOrElse(() => ''));
+  }
+
+  String get toValidDateString {
+    return displayDateStringOrEmpty((value.getOrElse(() => '')));
+  }
+
+  bool get isNotEmpty {
+    final isEmpty = (value.getOrElse(() => '')).isEmpty;
+
+    return !isEmpty;
+  }
+
+  const DateTimeStringValue._(this.value);
 }

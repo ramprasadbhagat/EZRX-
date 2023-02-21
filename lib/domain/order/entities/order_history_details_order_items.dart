@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items_details.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items_tender_contract_details.dart';
@@ -18,10 +19,10 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
     required TotalPrice totalPrice,
     required double tax,
     required SAPStatus sAPStatus,
-    required String plannedDeliveryDate,
+    required DateTimeStringValue plannedDeliveryDate,
     required int pickedQuantity,
     required String batch,
-    required String expiryDate,
+    required DateTimeStringValue expiryDate,
     required Remarks lineReferenceNotes,
     required bool isTenderContractMaterial,
     required List<OrderHistoryDetailsOrderItemDetails> details,
@@ -38,10 +39,10 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
         totalPrice: TotalPrice('0.0'),
         tax: 0.0,
         sAPStatus: SAPStatus(''),
-        plannedDeliveryDate: '',
+        plannedDeliveryDate: DateTimeStringValue(''),
         pickedQuantity: 0,
         batch: '',
-        expiryDate: '',
+        expiryDate: DateTimeStringValue(''),
         lineReferenceNotes: Remarks(''),
         isTenderContractMaterial: false,
         details: <OrderHistoryDetailsOrderItemDetails>[],
@@ -52,4 +53,6 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
   MaterialQueryInfo get queryInfo => MaterialQueryInfo.fromOrderHistoryDetails(
         orderHistoryDetailsOrderItem: this,
       );
+
+  String get batchAndExpiryDate => '$batch:${expiryDate.toValidDateString}';
 }

@@ -20,7 +20,7 @@ mixin _$ReturnItem {
   String get referenceDocument => throw _privateConstructorUsedError;
   String get purchaseNumberC => throw _privateConstructorUsedError;
   String get poMethod => throw _privateConstructorUsedError;
-  SimpleDate get createdDate => throw _privateConstructorUsedError;
+  DateTimeStringValue get createdDate => throw _privateConstructorUsedError;
   String get currency => throw _privateConstructorUsedError;
   String get plant => throw _privateConstructorUsedError;
   MaterialNumber get materialNumber => throw _privateConstructorUsedError;
@@ -31,11 +31,11 @@ mixin _$ReturnItem {
   String get batch => throw _privateConstructorUsedError;
   String get highLevelItemCode => throw _privateConstructorUsedError;
   String get orderReason => throw _privateConstructorUsedError;
-  SimpleDate get priceDate => throw _privateConstructorUsedError;
+  DateTimeStringValue get priceDate => throw _privateConstructorUsedError;
   double get unitPrice => throw _privateConstructorUsedError;
   double get totalPrice => throw _privateConstructorUsedError;
   PrincipalData get principalData => throw _privateConstructorUsedError;
-  SimpleDate get expiryDate => throw _privateConstructorUsedError;
+  DateTimeStringValue get expiryDate => throw _privateConstructorUsedError;
   bool get eligibleForReturn => throw _privateConstructorUsedError;
   List<ReturnSchedule> get schedules => throw _privateConstructorUsedError;
   String get suggestedPriceOverride => throw _privateConstructorUsedError;
@@ -59,7 +59,7 @@ abstract class $ReturnItemCopyWith<$Res> {
       String referenceDocument,
       String purchaseNumberC,
       String poMethod,
-      SimpleDate createdDate,
+      DateTimeStringValue createdDate,
       String currency,
       String plant,
       MaterialNumber materialNumber,
@@ -70,11 +70,11 @@ abstract class $ReturnItemCopyWith<$Res> {
       String batch,
       String highLevelItemCode,
       String orderReason,
-      SimpleDate priceDate,
+      DateTimeStringValue priceDate,
       double unitPrice,
       double totalPrice,
       PrincipalData principalData,
-      SimpleDate expiryDate,
+      DateTimeStringValue expiryDate,
       bool eligibleForReturn,
       List<ReturnSchedule> schedules,
       String suggestedPriceOverride,
@@ -145,7 +145,7 @@ class _$ReturnItemCopyWithImpl<$Res, $Val extends ReturnItem>
       createdDate: null == createdDate
           ? _value.createdDate
           : createdDate // ignore: cast_nullable_to_non_nullable
-              as SimpleDate,
+              as DateTimeStringValue,
       currency: null == currency
           ? _value.currency
           : currency // ignore: cast_nullable_to_non_nullable
@@ -189,7 +189,7 @@ class _$ReturnItemCopyWithImpl<$Res, $Val extends ReturnItem>
       priceDate: null == priceDate
           ? _value.priceDate
           : priceDate // ignore: cast_nullable_to_non_nullable
-              as SimpleDate,
+              as DateTimeStringValue,
       unitPrice: null == unitPrice
           ? _value.unitPrice
           : unitPrice // ignore: cast_nullable_to_non_nullable
@@ -205,7 +205,7 @@ class _$ReturnItemCopyWithImpl<$Res, $Val extends ReturnItem>
       expiryDate: null == expiryDate
           ? _value.expiryDate
           : expiryDate // ignore: cast_nullable_to_non_nullable
-              as SimpleDate,
+              as DateTimeStringValue,
       eligibleForReturn: null == eligibleForReturn
           ? _value.eligibleForReturn
           : eligibleForReturn // ignore: cast_nullable_to_non_nullable
@@ -255,7 +255,7 @@ abstract class _$$_ReturnItemCopyWith<$Res>
       String referenceDocument,
       String purchaseNumberC,
       String poMethod,
-      SimpleDate createdDate,
+      DateTimeStringValue createdDate,
       String currency,
       String plant,
       MaterialNumber materialNumber,
@@ -266,11 +266,11 @@ abstract class _$$_ReturnItemCopyWith<$Res>
       String batch,
       String highLevelItemCode,
       String orderReason,
-      SimpleDate priceDate,
+      DateTimeStringValue priceDate,
       double unitPrice,
       double totalPrice,
       PrincipalData principalData,
-      SimpleDate expiryDate,
+      DateTimeStringValue expiryDate,
       bool eligibleForReturn,
       List<ReturnSchedule> schedules,
       String suggestedPriceOverride,
@@ -340,7 +340,7 @@ class __$$_ReturnItemCopyWithImpl<$Res>
       createdDate: null == createdDate
           ? _value.createdDate
           : createdDate // ignore: cast_nullable_to_non_nullable
-              as SimpleDate,
+              as DateTimeStringValue,
       currency: null == currency
           ? _value.currency
           : currency // ignore: cast_nullable_to_non_nullable
@@ -384,7 +384,7 @@ class __$$_ReturnItemCopyWithImpl<$Res>
       priceDate: null == priceDate
           ? _value.priceDate
           : priceDate // ignore: cast_nullable_to_non_nullable
-              as SimpleDate,
+              as DateTimeStringValue,
       unitPrice: null == unitPrice
           ? _value.unitPrice
           : unitPrice // ignore: cast_nullable_to_non_nullable
@@ -400,7 +400,7 @@ class __$$_ReturnItemCopyWithImpl<$Res>
       expiryDate: null == expiryDate
           ? _value.expiryDate
           : expiryDate // ignore: cast_nullable_to_non_nullable
-              as SimpleDate,
+              as DateTimeStringValue,
       eligibleForReturn: null == eligibleForReturn
           ? _value.eligibleForReturn
           : eligibleForReturn // ignore: cast_nullable_to_non_nullable
@@ -471,7 +471,7 @@ class _$_ReturnItem extends _ReturnItem {
   @override
   final String poMethod;
   @override
-  final SimpleDate createdDate;
+  final DateTimeStringValue createdDate;
   @override
   final String currency;
   @override
@@ -493,7 +493,7 @@ class _$_ReturnItem extends _ReturnItem {
   @override
   final String orderReason;
   @override
-  final SimpleDate priceDate;
+  final DateTimeStringValue priceDate;
   @override
   final double unitPrice;
   @override
@@ -501,7 +501,7 @@ class _$_ReturnItem extends _ReturnItem {
   @override
   final PrincipalData principalData;
   @override
-  final SimpleDate expiryDate;
+  final DateTimeStringValue expiryDate;
   @override
   final bool eligibleForReturn;
   final List<ReturnSchedule> _schedules;
@@ -626,7 +626,7 @@ abstract class _ReturnItem extends ReturnItem {
       required final String referenceDocument,
       required final String purchaseNumberC,
       required final String poMethod,
-      required final SimpleDate createdDate,
+      required final DateTimeStringValue createdDate,
       required final String currency,
       required final String plant,
       required final MaterialNumber materialNumber,
@@ -637,11 +637,11 @@ abstract class _ReturnItem extends ReturnItem {
       required final String batch,
       required final String highLevelItemCode,
       required final String orderReason,
-      required final SimpleDate priceDate,
+      required final DateTimeStringValue priceDate,
       required final double unitPrice,
       required final double totalPrice,
       required final PrincipalData principalData,
-      required final SimpleDate expiryDate,
+      required final DateTimeStringValue expiryDate,
       required final bool eligibleForReturn,
       required final List<ReturnSchedule> schedules,
       required final String suggestedPriceOverride,
@@ -659,7 +659,7 @@ abstract class _ReturnItem extends ReturnItem {
   @override
   String get poMethod;
   @override
-  SimpleDate get createdDate;
+  DateTimeStringValue get createdDate;
   @override
   String get currency;
   @override
@@ -681,7 +681,7 @@ abstract class _ReturnItem extends ReturnItem {
   @override
   String get orderReason;
   @override
-  SimpleDate get priceDate;
+  DateTimeStringValue get priceDate;
   @override
   double get unitPrice;
   @override
@@ -689,7 +689,7 @@ abstract class _ReturnItem extends ReturnItem {
   @override
   PrincipalData get principalData;
   @override
-  SimpleDate get expiryDate;
+  DateTimeStringValue get expiryDate;
   @override
   bool get eligibleForReturn;
   @override

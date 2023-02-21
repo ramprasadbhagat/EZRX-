@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price_bonus.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -14,7 +15,7 @@ class MaterialItemBonus with _$MaterialItemBonus {
     required int qty,
     required String comment,
     required String materialDescription,
-    required ExpiryDate expiryDate,
+    required DateTimeStringValue expiryDate,
     required String inStock,
     required int remainingQty,
     required bool additionalBonusFlag,
@@ -27,7 +28,7 @@ class MaterialItemBonus with _$MaterialItemBonus {
         qty: 0,
         comment: '',
         materialDescription: '',
-        expiryDate: ExpiryDate(''),
+        expiryDate: DateTimeStringValue(''),
         inStock: '',
         remainingQty: 0,
         additionalBonusFlag: false,

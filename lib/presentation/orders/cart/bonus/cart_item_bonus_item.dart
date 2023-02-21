@@ -100,7 +100,7 @@ class _BonusItemTileState extends State<BonusItemTile> {
                       // ),
                       if (widget.material.salesOrgConfig.expiryDateDisplay)
                         Text(
-                          '${'Expiry Date : '.tr()}${widget.bonusItem.expiryDate.getExpiryDate}',
+                          '${'Expiry Date : '.tr()}${widget.bonusItem.expiryDate.naIfEmptyDateTime}',
                           style: Theme.of(context).textTheme.bodyText1?.apply(
                                 color: ZPColors.lightGray,
                               ),

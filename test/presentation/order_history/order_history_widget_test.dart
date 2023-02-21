@@ -22,6 +22,7 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_basic_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
@@ -577,7 +578,7 @@ void main() {
         final orderHistoryBloc = locator<OrderHistoryListBlocMock>();
         final fakeOrderHistoryItem =
             orderHistoryItem.orderHistoryItems[0].copyWith(
-          deliveryDate: '2022/10/11',
+          deliveryDate: DateTimeStringValue('2022/10/11'),
         );
 
         orderHistoryItem = orderHistoryItem.copyWith(

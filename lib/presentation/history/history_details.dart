@@ -354,8 +354,8 @@ class _OrderDetails extends StatelessWidget {
             ),
             BalanceTextRow(
               keyText: 'Created Date'.tr(),
-              valueText: orderDetails.orderHistoryDetailsOrderHeader.createdDate
-                  .displayHumanReadableDate,
+              valueText: orderDetails
+                  .orderHistoryDetailsOrderHeader.createdDate.toValidDateString,
               valueTextLoading: state.isLoading,
               keyFlex: 1,
               valueFlex: 1,
@@ -374,8 +374,8 @@ class _OrderDetails extends StatelessWidget {
                     .disableDeliveryDate
                 ? BalanceTextRow(
                     keyText: 'Requested Delivery Date'.tr(),
-                    valueText: orderDetails
-                        .orderHistoryDetailsOrderHeader.requestedDeliveryDate,
+                    valueText: orderDetails.orderHistoryDetailsOrderHeader
+                        .requestedDeliveryDate.toValidDateString,
                     valueTextLoading: state.isLoading,
                     keyFlex: 1,
                     valueFlex: 1,
@@ -579,7 +579,7 @@ class _Invoices extends StatelessWidget {
                         ),
                         BalanceTextRow(
                           keyText: 'Invoice Date'.tr(),
-                          valueText: invoice.invoiceDate,
+                          valueText: invoice.invoiceDate.toValidDateString,
                           valueTextLoading: state.isLoading,
                           keyFlex: 1,
                           valueFlex: 1,

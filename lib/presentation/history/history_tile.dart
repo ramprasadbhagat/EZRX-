@@ -150,13 +150,13 @@ class OrderHistoryListTile extends StatelessWidget {
               ),
               BalanceTextRow(
                 keyText: 'Order Date'.tr(),
-                valueText: orderHistoryItem.createdDate,
+                valueText: orderHistoryItem.createdDate.toValidDateString,
               ),
-              disableDeliveryDate &&
-                      orderHistoryItem.deliveryDate.isNotEmpty
+              disableDeliveryDate && orderHistoryItem.deliveryDate.isNotEmpty
                   ? BalanceTextRow(
                       keyText: 'Delivery Date/Time'.tr(),
-                      valueText: orderHistoryItem.deliveryDate,
+                      valueText:
+                          orderHistoryItem.deliveryDate.toValidDateString,
                     )
                   : const SizedBox.shrink(),
               BalanceTextRow(

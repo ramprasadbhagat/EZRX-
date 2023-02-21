@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$ReturnSchedule {
   String get scheduledLine => throw _privateConstructorUsedError;
-  SimpleDate get requestDate => throw _privateConstructorUsedError;
+  DateTimeStringValue get requestDate => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ReturnScheduleCopyWith<ReturnSchedule> get copyWith =>
@@ -30,7 +30,7 @@ abstract class $ReturnScheduleCopyWith<$Res> {
           ReturnSchedule value, $Res Function(ReturnSchedule) then) =
       _$ReturnScheduleCopyWithImpl<$Res, ReturnSchedule>;
   @useResult
-  $Res call({String scheduledLine, SimpleDate requestDate});
+  $Res call({String scheduledLine, DateTimeStringValue requestDate});
 }
 
 /// @nodoc
@@ -57,7 +57,7 @@ class _$ReturnScheduleCopyWithImpl<$Res, $Val extends ReturnSchedule>
       requestDate: null == requestDate
           ? _value.requestDate
           : requestDate // ignore: cast_nullable_to_non_nullable
-              as SimpleDate,
+              as DateTimeStringValue,
     ) as $Val);
   }
 }
@@ -70,7 +70,7 @@ abstract class _$$_ReturnScheduleCopyWith<$Res>
       __$$_ReturnScheduleCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String scheduledLine, SimpleDate requestDate});
+  $Res call({String scheduledLine, DateTimeStringValue requestDate});
 }
 
 /// @nodoc
@@ -95,7 +95,7 @@ class __$$_ReturnScheduleCopyWithImpl<$Res>
       requestDate: null == requestDate
           ? _value.requestDate
           : requestDate // ignore: cast_nullable_to_non_nullable
-              as SimpleDate,
+              as DateTimeStringValue,
     ));
   }
 }
@@ -110,7 +110,7 @@ class _$_ReturnSchedule extends _ReturnSchedule {
   @override
   final String scheduledLine;
   @override
-  final SimpleDate requestDate;
+  final DateTimeStringValue requestDate;
 
   @override
   String toString() {
@@ -141,13 +141,13 @@ class _$_ReturnSchedule extends _ReturnSchedule {
 abstract class _ReturnSchedule extends ReturnSchedule {
   const factory _ReturnSchedule(
       {required final String scheduledLine,
-      required final SimpleDate requestDate}) = _$_ReturnSchedule;
+      required final DateTimeStringValue requestDate}) = _$_ReturnSchedule;
   const _ReturnSchedule._() : super._();
 
   @override
   String get scheduledLine;
   @override
-  SimpleDate get requestDate;
+  DateTimeStringValue get requestDate;
   @override
   @JsonKey(ignore: true)
   _$$_ReturnScheduleCopyWith<_$_ReturnSchedule> get copyWith =>

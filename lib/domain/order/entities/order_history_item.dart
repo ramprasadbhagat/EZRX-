@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -13,14 +14,14 @@ class OrderHistoryItem with _$OrderHistoryItem {
     required ZpPrice unitPrice,
     required TotalPrice totalPrice,
     required StatusType status,
-    required String deliveryDate,
+    required DateTimeStringValue deliveryDate,
     required String deliveryTime,
     required String lineNumber,
     required double tax,
     required String orderType,
     required OrderNumber orderNumber,
     required String ezrxNumber,
-    required String createdDate,
+    required DateTimeStringValue createdDate,
     required String createdTime,
     required String orderBy,
     required String purchaseOrderType,
@@ -33,14 +34,14 @@ class OrderHistoryItem with _$OrderHistoryItem {
         unitPrice: ZpPrice('0.0'),
         totalPrice: TotalPrice('0.0'),
         status: StatusType(''),
-        deliveryDate: '',
+        deliveryDate: DateTimeStringValue(''),
         deliveryTime: '',
         lineNumber: '',
         tax: 0.0,
         orderType: '',
         orderNumber: OrderNumber(''),
         ezrxNumber: '',
-        createdDate: '',
+        createdDate: DateTimeStringValue(''),
         createdTime: '',
         orderBy: '',
         purchaseOrderType: '',

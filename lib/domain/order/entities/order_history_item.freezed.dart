@@ -22,14 +22,14 @@ mixin _$OrderHistoryItem {
   ZpPrice get unitPrice => throw _privateConstructorUsedError;
   TotalPrice get totalPrice => throw _privateConstructorUsedError;
   StatusType get status => throw _privateConstructorUsedError;
-  String get deliveryDate => throw _privateConstructorUsedError;
+  DateTimeStringValue get deliveryDate => throw _privateConstructorUsedError;
   String get deliveryTime => throw _privateConstructorUsedError;
   String get lineNumber => throw _privateConstructorUsedError;
   double get tax => throw _privateConstructorUsedError;
   String get orderType => throw _privateConstructorUsedError;
   OrderNumber get orderNumber => throw _privateConstructorUsedError;
   String get ezrxNumber => throw _privateConstructorUsedError;
-  String get createdDate => throw _privateConstructorUsedError;
+  DateTimeStringValue get createdDate => throw _privateConstructorUsedError;
   String get createdTime => throw _privateConstructorUsedError;
   String get orderBy => throw _privateConstructorUsedError;
   String get purchaseOrderType => throw _privateConstructorUsedError;
@@ -52,14 +52,14 @@ abstract class $OrderHistoryItemCopyWith<$Res> {
       ZpPrice unitPrice,
       TotalPrice totalPrice,
       StatusType status,
-      String deliveryDate,
+      DateTimeStringValue deliveryDate,
       String deliveryTime,
       String lineNumber,
       double tax,
       String orderType,
       OrderNumber orderNumber,
       String ezrxNumber,
-      String createdDate,
+      DateTimeStringValue createdDate,
       String createdTime,
       String orderBy,
       String purchaseOrderType});
@@ -124,7 +124,7 @@ class _$OrderHistoryItemCopyWithImpl<$Res, $Val extends OrderHistoryItem>
       deliveryDate: null == deliveryDate
           ? _value.deliveryDate
           : deliveryDate // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DateTimeStringValue,
       deliveryTime: null == deliveryTime
           ? _value.deliveryTime
           : deliveryTime // ignore: cast_nullable_to_non_nullable
@@ -152,7 +152,7 @@ class _$OrderHistoryItemCopyWithImpl<$Res, $Val extends OrderHistoryItem>
       createdDate: null == createdDate
           ? _value.createdDate
           : createdDate // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DateTimeStringValue,
       createdTime: null == createdTime
           ? _value.createdTime
           : createdTime // ignore: cast_nullable_to_non_nullable
@@ -184,14 +184,14 @@ abstract class _$$_OrderHistoryItemCopyWith<$Res>
       ZpPrice unitPrice,
       TotalPrice totalPrice,
       StatusType status,
-      String deliveryDate,
+      DateTimeStringValue deliveryDate,
       String deliveryTime,
       String lineNumber,
       double tax,
       String orderType,
       OrderNumber orderNumber,
       String ezrxNumber,
-      String createdDate,
+      DateTimeStringValue createdDate,
       String createdTime,
       String orderBy,
       String purchaseOrderType});
@@ -254,7 +254,7 @@ class __$$_OrderHistoryItemCopyWithImpl<$Res>
       deliveryDate: null == deliveryDate
           ? _value.deliveryDate
           : deliveryDate // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DateTimeStringValue,
       deliveryTime: null == deliveryTime
           ? _value.deliveryTime
           : deliveryTime // ignore: cast_nullable_to_non_nullable
@@ -282,7 +282,7 @@ class __$$_OrderHistoryItemCopyWithImpl<$Res>
       createdDate: null == createdDate
           ? _value.createdDate
           : createdDate // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DateTimeStringValue,
       createdTime: null == createdTime
           ? _value.createdTime
           : createdTime // ignore: cast_nullable_to_non_nullable
@@ -335,7 +335,7 @@ class _$_OrderHistoryItem extends _OrderHistoryItem {
   @override
   final StatusType status;
   @override
-  final String deliveryDate;
+  final DateTimeStringValue deliveryDate;
   @override
   final String deliveryTime;
   @override
@@ -349,7 +349,7 @@ class _$_OrderHistoryItem extends _OrderHistoryItem {
   @override
   final String ezrxNumber;
   @override
-  final String createdDate;
+  final DateTimeStringValue createdDate;
   @override
   final String createdTime;
   @override
@@ -435,14 +435,14 @@ abstract class _OrderHistoryItem extends OrderHistoryItem {
       required final ZpPrice unitPrice,
       required final TotalPrice totalPrice,
       required final StatusType status,
-      required final String deliveryDate,
+      required final DateTimeStringValue deliveryDate,
       required final String deliveryTime,
       required final String lineNumber,
       required final double tax,
       required final String orderType,
       required final OrderNumber orderNumber,
       required final String ezrxNumber,
-      required final String createdDate,
+      required final DateTimeStringValue createdDate,
       required final String createdTime,
       required final String orderBy,
       required final String purchaseOrderType}) = _$_OrderHistoryItem;
@@ -461,7 +461,7 @@ abstract class _OrderHistoryItem extends OrderHistoryItem {
   @override
   StatusType get status;
   @override
-  String get deliveryDate;
+  DateTimeStringValue get deliveryDate;
   @override
   String get deliveryTime;
   @override
@@ -475,7 +475,7 @@ abstract class _OrderHistoryItem extends OrderHistoryItem {
   @override
   String get ezrxNumber;
   @override
-  String get createdDate;
+  DateTimeStringValue get createdDate;
   @override
   String get createdTime;
   @override

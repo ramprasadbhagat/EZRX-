@@ -1,7 +1,7 @@
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
-import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/returns/dtos/return_schedule_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -99,7 +99,7 @@ class ReturnItemDto with _$ReturnItemDto {
       referenceDocument: referenceDocument,
       purchaseNumberC: purchaseNumberC,
       poMethod: poMethod,
-      createdDate: SimpleDate(createdDate),
+      createdDate: DateTimeStringValue(createdDate),
       currency: currency,
       plant: plant,
       materialNumber: MaterialNumber(materialNumber),
@@ -110,14 +110,14 @@ class ReturnItemDto with _$ReturnItemDto {
       batch: batch,
       highLevelItemCode: highLevelItemCode,
       orderReason: orderReason,
-      priceDate: SimpleDate(priceDate),
+      priceDate: DateTimeStringValue(priceDate),
       unitPrice: double.parse(unitPrice),
       totalPrice: double.parse(totalPrice),
       principalData: PrincipalData.empty().copyWith(
         principalName: principalName,
         principalCode: PrincipalCode(principalCode),
       ),
-      expiryDate: SimpleDate(expiryDate),
+      expiryDate: DateTimeStringValue(expiryDate),
       eligibleForReturn: eligibleForReturn,
       schedules: schedules.map((e) => e.toDomain()).toList(),
       suggestedPriceOverride: suggestedPriceOverride,

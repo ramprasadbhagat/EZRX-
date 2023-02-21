@@ -1,4 +1,4 @@
-import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'return_schedule.freezed.dart';
@@ -9,11 +9,11 @@ class ReturnSchedule with _$ReturnSchedule {
 
   const factory ReturnSchedule({
     required String scheduledLine,
-    required SimpleDate requestDate,
+    required DateTimeStringValue requestDate,
   }) = _ReturnSchedule;
 
   factory ReturnSchedule.empty() => ReturnSchedule(
         scheduledLine: '',
-        requestDate: SimpleDate(''),
+        requestDate: DateTimeStringValue(''),
       );
 }

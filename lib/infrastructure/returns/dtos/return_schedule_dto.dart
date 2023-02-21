@@ -1,5 +1,5 @@
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_schedule.dart';
-import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'return_schedule_dto.freezed.dart';
@@ -31,7 +31,7 @@ class ReturnScheduleDto with _$ReturnScheduleDto {
   ReturnSchedule toDomain() {
     return ReturnSchedule(
       scheduledLine: scheduledLine,
-      requestDate: SimpleDate(requestDate),
+      requestDate: DateTimeStringValue(requestDate),
     );
   }
 

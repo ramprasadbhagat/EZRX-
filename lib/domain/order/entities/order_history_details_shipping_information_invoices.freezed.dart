@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$OrderHistoryDetailsShippingInformationInvoices {
   String get invoiceNumber => throw _privateConstructorUsedError;
-  String get invoiceDate => throw _privateConstructorUsedError;
+  DateTimeStringValue get invoiceDate => throw _privateConstructorUsedError;
   String get invoicePrice => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -34,7 +34,10 @@ abstract class $OrderHistoryDetailsShippingInformationInvoicesCopyWith<$Res> {
       _$OrderHistoryDetailsShippingInformationInvoicesCopyWithImpl<$Res,
           OrderHistoryDetailsShippingInformationInvoices>;
   @useResult
-  $Res call({String invoiceNumber, String invoiceDate, String invoicePrice});
+  $Res call(
+      {String invoiceNumber,
+      DateTimeStringValue invoiceDate,
+      String invoicePrice});
 }
 
 /// @nodoc
@@ -64,7 +67,7 @@ class _$OrderHistoryDetailsShippingInformationInvoicesCopyWithImpl<$Res,
       invoiceDate: null == invoiceDate
           ? _value.invoiceDate
           : invoiceDate // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DateTimeStringValue,
       invoicePrice: null == invoicePrice
           ? _value.invoicePrice
           : invoicePrice // ignore: cast_nullable_to_non_nullable
@@ -83,7 +86,10 @@ abstract class _$$_OrderHistoryDetailsShippingInformationInvoicesCopyWith<$Res>
       __$$_OrderHistoryDetailsShippingInformationInvoicesCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String invoiceNumber, String invoiceDate, String invoicePrice});
+  $Res call(
+      {String invoiceNumber,
+      DateTimeStringValue invoiceDate,
+      String invoicePrice});
 }
 
 /// @nodoc
@@ -112,7 +118,7 @@ class __$$_OrderHistoryDetailsShippingInformationInvoicesCopyWithImpl<$Res>
       invoiceDate: null == invoiceDate
           ? _value.invoiceDate
           : invoiceDate // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DateTimeStringValue,
       invoicePrice: null == invoicePrice
           ? _value.invoicePrice
           : invoicePrice // ignore: cast_nullable_to_non_nullable
@@ -134,7 +140,7 @@ class _$_OrderHistoryDetailsShippingInformationInvoices
   @override
   final String invoiceNumber;
   @override
-  final String invoiceDate;
+  final DateTimeStringValue invoiceDate;
   @override
   final String invoicePrice;
 
@@ -175,7 +181,7 @@ abstract class _OrderHistoryDetailsShippingInformationInvoices
     extends OrderHistoryDetailsShippingInformationInvoices {
   factory _OrderHistoryDetailsShippingInformationInvoices(
           {required final String invoiceNumber,
-          required final String invoiceDate,
+          required final DateTimeStringValue invoiceDate,
           required final String invoicePrice}) =
       _$_OrderHistoryDetailsShippingInformationInvoices;
   _OrderHistoryDetailsShippingInformationInvoices._() : super._();
@@ -183,7 +189,7 @@ abstract class _OrderHistoryDetailsShippingInformationInvoices
   @override
   String get invoiceNumber;
   @override
-  String get invoiceDate;
+  DateTimeStringValue get invoiceDate;
   @override
   String get invoicePrice;
   @override

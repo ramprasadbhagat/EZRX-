@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_shipping_information_invoices.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'order_history_details_shipping_information_invoices_dto.freezed.dart';
@@ -14,7 +15,7 @@ class OrderHistoryDetailsInvoicesDto with _$OrderHistoryDetailsInvoicesDto {
   factory OrderHistoryDetailsInvoicesDto.fromDomain(OrderHistoryDetailsShippingInformationInvoices invoices) {
     return OrderHistoryDetailsInvoicesDto(
       invoiceNumber: invoices.invoiceNumber,
-      invoiceDate: invoices.invoiceDate,
+      invoiceDate: invoices.invoiceDate.toValidDateString,
       invoicePrice: invoices.invoicePrice,
        );
   }
@@ -22,7 +23,7 @@ class OrderHistoryDetailsInvoicesDto with _$OrderHistoryDetailsInvoicesDto {
   OrderHistoryDetailsShippingInformationInvoices toDomain() {
     return OrderHistoryDetailsShippingInformationInvoices(
       invoiceNumber:invoiceNumber,
-      invoiceDate: invoiceDate,
+      invoiceDate: DateTimeStringValue(invoiceDate) ,
       invoicePrice: invoicePrice,
     );
   }

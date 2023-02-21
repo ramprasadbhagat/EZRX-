@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 
 String stringCapitalize(String text) {
@@ -93,4 +94,13 @@ DateTime getDeliveryDateTime(String input) {
   }
 
   return deliveryDate;
+}
+
+String displayDateStringOrEmpty(String text) {
+  final parsedDate = DateTime.tryParse(text);
+  if (parsedDate == null) {
+    return '';
+  }
+
+  return DateFormat('dd MMM yyyy').format(parsedDate);
 }

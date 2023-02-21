@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items_tender_contract_details.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -60,10 +61,11 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
       totalPrice: orderHistoryDetailsOrderItem.totalPrice.totalPrice,
       tax: orderHistoryDetailsOrderItem.tax,
       sAPStatus: orderHistoryDetailsOrderItem.sAPStatus.displaySAPStatus,
-      plannedDeliveryDate: orderHistoryDetailsOrderItem.plannedDeliveryDate,
+      plannedDeliveryDate:
+          orderHistoryDetailsOrderItem.plannedDeliveryDate.toValidDateString,
       pickedQuantity: orderHistoryDetailsOrderItem.pickedQuantity,
       batch: orderHistoryDetailsOrderItem.batch,
-      expiryDate: orderHistoryDetailsOrderItem.expiryDate,
+      expiryDate: orderHistoryDetailsOrderItem.expiryDate.toValidDateString,
       lineReferenceNotes:
           orderHistoryDetailsOrderItem.lineReferenceNotes.getValue(),
       isTenderContractMaterial:
@@ -90,10 +92,10 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
       totalPrice: TotalPrice(totalPrice.toString()),
       tax: tax,
       sAPStatus: SAPStatus(sAPStatus),
-      plannedDeliveryDate: plannedDeliveryDate,
+      plannedDeliveryDate: DateTimeStringValue(plannedDeliveryDate),
       pickedQuantity: pickedQuantity,
       batch: batch,
-      expiryDate: expiryDate,
+      expiryDate: DateTimeStringValue(expiryDate),
       lineReferenceNotes: Remarks(lineReferenceNotes),
       isTenderContractMaterial: isTenderContractMaterial,
       details: details.map((e) => e.toDomain()).toList(),
