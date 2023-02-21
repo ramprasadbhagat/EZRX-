@@ -240,7 +240,8 @@ class CartMaterialItemTileDetails extends StatelessWidget {
                   ),
             ),
           Text(
-            material.materialInfo.principalData.principalName,
+            material.materialInfo.principalData.principalName
+                .getOrDefaultValue(''),
             style: Theme.of(context).textTheme.titleSmall?.apply(
                   color: ZPColors.lightGray,
                 ),

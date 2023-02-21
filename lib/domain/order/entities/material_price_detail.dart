@@ -2,6 +2,7 @@ import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'material_price_detail.freezed.dart';
@@ -27,7 +28,7 @@ class MaterialPriceDetail with _$MaterialPriceDetail {
           materialGroup2: query.materialGroup2,
           materialGroup4: query.materialGroup4,
           principalData: PrincipalData.empty().copyWith(
-            principalName: query.principalName,
+            principalName: PrincipalName(query.principalName),
           ),
         ),
         price: price.copyWith(

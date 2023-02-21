@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$PrincipalData {
-  String get principalName => throw _privateConstructorUsedError;
+  PrincipalName get principalName => throw _privateConstructorUsedError;
   PrincipalCode get principalCode => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -30,7 +30,7 @@ abstract class $PrincipalDataCopyWith<$Res> {
           PrincipalData value, $Res Function(PrincipalData) then) =
       _$PrincipalDataCopyWithImpl<$Res, PrincipalData>;
   @useResult
-  $Res call({String principalName, PrincipalCode principalCode});
+  $Res call({PrincipalName principalName, PrincipalCode principalCode});
 }
 
 /// @nodoc
@@ -53,7 +53,7 @@ class _$PrincipalDataCopyWithImpl<$Res, $Val extends PrincipalData>
       principalName: null == principalName
           ? _value.principalName
           : principalName // ignore: cast_nullable_to_non_nullable
-              as String,
+              as PrincipalName,
       principalCode: null == principalCode
           ? _value.principalCode
           : principalCode // ignore: cast_nullable_to_non_nullable
@@ -70,7 +70,7 @@ abstract class _$$_PrincipalDataCopyWith<$Res>
       __$$_PrincipalDataCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String principalName, PrincipalCode principalCode});
+  $Res call({PrincipalName principalName, PrincipalCode principalCode});
 }
 
 /// @nodoc
@@ -91,7 +91,7 @@ class __$$_PrincipalDataCopyWithImpl<$Res>
       principalName: null == principalName
           ? _value.principalName
           : principalName // ignore: cast_nullable_to_non_nullable
-              as String,
+              as PrincipalName,
       principalCode: null == principalCode
           ? _value.principalCode
           : principalCode // ignore: cast_nullable_to_non_nullable
@@ -108,7 +108,7 @@ class _$_PrincipalData extends _PrincipalData {
       : super._();
 
   @override
-  final String principalName;
+  final PrincipalName principalName;
   @override
   final PrincipalCode principalCode;
 
@@ -140,12 +140,12 @@ class _$_PrincipalData extends _PrincipalData {
 
 abstract class _PrincipalData extends PrincipalData {
   const factory _PrincipalData(
-      {required final String principalName,
+      {required final PrincipalName principalName,
       required final PrincipalCode principalCode}) = _$_PrincipalData;
   const _PrincipalData._() : super._();
 
   @override
-  String get principalName;
+  PrincipalName get principalName;
   @override
   PrincipalCode get principalCode;
   @override

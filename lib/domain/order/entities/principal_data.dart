@@ -8,12 +8,12 @@ class PrincipalData with _$PrincipalData {
   const PrincipalData._();
 
   const factory PrincipalData({
-    required String principalName,
+    required PrincipalName principalName,
     required PrincipalCode principalCode,
   }) = _PrincipalData;
 
   factory PrincipalData.empty() => PrincipalData(
-        principalName: '',
+        principalName: PrincipalName(''),
         principalCode: PrincipalCode(''),
       );
 }

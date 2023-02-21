@@ -228,7 +228,7 @@ class _ListContent extends StatelessWidget {
                   )
                 : const SizedBox.shrink(),
             Text(
-              materialInfo.principalData.principalName,
+              materialInfo.principalData.principalName.getOrDefaultValue(''),
               style: Theme.of(context).textTheme.subtitle2?.apply(
                     color: ZPColors.lightGray,
                   ),
@@ -285,7 +285,7 @@ class _PriceLabel extends StatelessWidget {
             materialInfo: materialInfo,
             salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
             quantity: 1,
-             discountedMaterialCount:
+            discountedMaterialCount:
                 context.read<CartBloc>().state.zmgMaterialCount(
                       itemMaterialGroup: materialInfo.materialGroup2,
                     ),

@@ -79,7 +79,8 @@ class ReturnItemDto with _$ReturnItemDto {
       priceDate: returnItem.priceDate.getOrCrash(),
       unitPrice: returnItem.unitPrice.toString(),
       totalPrice: returnItem.totalPrice.toString(),
-      principalName: returnItem.principalData.principalName,
+      principalName:
+          returnItem.principalData.principalName.getOrDefaultValue(''),
       principalCode: returnItem.principalData.principalCode.getOrCrash(),
       expiryDate: returnItem.expiryDate.getOrCrash(),
       eligibleForReturn: returnItem.eligibleForReturn,
@@ -114,7 +115,7 @@ class ReturnItemDto with _$ReturnItemDto {
       unitPrice: double.parse(unitPrice),
       totalPrice: double.parse(totalPrice),
       principalData: PrincipalData.empty().copyWith(
-        principalName: principalName,
+        principalName: PrincipalName(principalName),
         principalCode: PrincipalCode(principalCode),
       ),
       expiryDate: DateTimeStringValue(expiryDate),

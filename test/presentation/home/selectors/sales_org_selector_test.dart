@@ -109,7 +109,7 @@ void main() {
           materialNumber: MaterialNumber('000000000023168451'),
           materialDescription: ' Triglyceride Mosys D',
           principalData: PrincipalData.empty().copyWith(
-            principalName: '台灣拜耳股份有限公司',
+            principalName: PrincipalName('台灣拜耳股份有限公司'),
           ),
         ),
         price: Price.empty().copyWith(

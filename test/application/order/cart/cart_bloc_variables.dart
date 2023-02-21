@@ -31,7 +31,7 @@ final mockMaterialList = [
         materialNumber: MaterialNumber('000000000023168451'),
         materialDescription: ' Triglyceride Mosys D',
         principalData: PrincipalData.empty().copyWith(
-          principalName: '台灣拜耳股份有限公司',
+          principalName: PrincipalName('台灣拜耳股份有限公司'),
         ),
         remarks: '',
       ),
@@ -42,7 +42,7 @@ final mockMaterialList = [
         materialNumber: MaterialNumber('000000000023168452'),
         materialDescription: ' Triglyceride Mosys D',
         principalData: PrincipalData.empty().copyWith(
-          principalName: '台灣拜耳股份有限公司',
+          principalName: PrincipalName('台灣拜耳股份有限公司'),
         ),
         remarks: '',
       ),
@@ -62,7 +62,7 @@ final mockItemWithRemarks = PriceAggregate.empty().copyWith(
     materialNumber: MaterialNumber('000000000023168451'),
     materialDescription: ' Triglyceride Mosys D',
     principalData: PrincipalData.empty().copyWith(
-      principalName: '台灣拜耳股份有限公司',
+      principalName: PrincipalName('台灣拜耳股份有限公司'),
     ),
     remarks: remarkText,
   ),
@@ -120,7 +120,7 @@ final mockZmgCartItemList = <PriceAggregate>[
       materialDescription: ' Triglyceride Mosys D',
       materialGroup2: MaterialGroup.two('004'),
       principalData: PrincipalData.empty().copyWith(
-        principalName: '台灣拜耳股份有限公司',
+        principalName: PrincipalName('台灣拜耳股份有限公司'),
       ),
     ),
     price: Price.empty().copyWith(
@@ -145,7 +145,7 @@ final mockZmgCartItemList = <PriceAggregate>[
       materialDescription: ' Triglyceride Mosys D',
       materialGroup2: MaterialGroup.two('004'),
       principalData: PrincipalData.empty().copyWith(
-        principalName: '台灣拜耳股份有限公司',
+        principalName: PrincipalName('台灣拜耳股份有限公司'),
       ),
     ),
     price: Price.empty().copyWith(
@@ -195,7 +195,7 @@ final bonus913MockCartItem = PriceAggregate.empty().copyWith(
     materialNumber: bonusMaterialNumber,
     materialDescription: ' Triglyceride Mosys D',
     principalData: PrincipalData.empty().copyWith(
-      principalName: '台灣拜耳股份有限公司',
+      principalName: PrincipalName('台灣拜耳股份有限公司'),
     ),
     remarks: '',
   ),
@@ -267,7 +267,7 @@ final bonus911MockCartItem = PriceAggregate.empty().copyWith(
     materialNumber: bonusMaterialNumber,
     materialDescription: ' Triglyceride Mosys D',
     principalData: PrincipalData.empty().copyWith(
-      principalName: '台灣拜耳股份有限公司',
+      principalName: PrincipalName('台灣拜耳股份有限公司'),
     ),
     remarks: '',
   ),
@@ -338,7 +338,7 @@ final bonus914MockCartItem = PriceAggregate.empty().copyWith(
     materialNumber: bonusMaterialNumber,
     materialDescription: ' Triglyceride Mosys D',
     principalData: PrincipalData.empty().copyWith(
-      principalName: '台灣拜耳股份有限公司',
+      principalName: PrincipalName('台灣拜耳股份有限公司'),
     ),
     remarks: '',
   ),
@@ -409,7 +409,7 @@ final bonus915MockCartItem = PriceAggregate.empty().copyWith(
     materialNumber: bonusMaterialNumber,
     materialDescription: ' Triglyceride Mosys D',
     principalData: PrincipalData.empty().copyWith(
-      principalName: '台灣拜耳股份有限公司',
+      principalName: PrincipalName('台灣拜耳股份有限公司'),
     ),
     remarks: '',
   ),

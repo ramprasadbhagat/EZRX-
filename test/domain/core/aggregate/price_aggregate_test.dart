@@ -83,8 +83,9 @@ void main() {
             materialNumber: emptyPriceAggregate.getMaterialNumber,
             materialGroup4: emptyPriceAggregate.materialInfo.materialGroup4,
             qty: emptyPriceAggregate.quantity,
-            principalName:
-                emptyPriceAggregate.materialInfo.principalData.principalName,
+            principalName: emptyPriceAggregate
+                .materialInfo.principalData.principalName
+                .getOrDefaultValue(''),
             materialDescription:
                 emptyPriceAggregate.materialInfo.materialDescription,
             hidePrice: emptyPriceAggregate.materialInfo.hidePrice,

@@ -200,7 +200,7 @@ void main() {
               materialNumber: MaterialNumber('0000000000111111'),
               materialDescription: ' Mosys D',
               principalData: PrincipalData.empty().copyWith(
-                principalName: 'å�°ç�£æ‹œè€³è‚¡ä»½æœ‰é™�å…¬å�¸',
+                principalName: PrincipalName('å�°ç�£æ‹œè€³è‚¡ä»½æœ‰é™�å…¬å�¸'),
               ),
             )),
           ],
@@ -215,7 +215,7 @@ void main() {
             materialNumber: MaterialNumber('000000000023168451'),
             materialDescription: ' Triglyceride Mosys D',
             principalData: PrincipalData.empty().copyWith(
-              principalName: 'å�°ç�£æ‹œè€³è‚¡ä»½æœ‰é™�å…¬å�¸',
+              principalName: PrincipalName('å�°ç�£æ‹œè€³è‚¡ä»½æœ‰é™�å…¬å�¸'),
             ),
             remarks: '',
           ),
@@ -230,7 +230,8 @@ void main() {
                 materialNumber: MaterialNumber('0000000000111111'),
                 materialDescription: ' Mosys D',
                 principalData: PrincipalData.empty().copyWith(
-                  principalName: 'å�°ç�£æ‹œè€³è‚¡ä»½æœ‰é™�å…¬å�¸',
+                  principalName:
+                      PrincipalName('å�°ç�£æ‹œè€³è‚¡ä»½æœ‰é™�å…¬å�¸'),
                 ),
               ),
             )
@@ -241,7 +242,7 @@ void main() {
             materialNumber: MaterialNumber('000000000023168441'),
             materialDescription: ' Triglyceride Mosys D',
             principalData: PrincipalData.empty().copyWith(
-              principalName: 'å�°ç�£æ‹œè€³è‚¡ä»½æœ‰é™�å…¬å�¸',
+              principalName: PrincipalName('å�°ç�£æ‹œè€³è‚¡ä»½æœ‰é™�å…¬å�¸'),
             ),
             remarks: '',
           ),
@@ -259,7 +260,7 @@ void main() {
               materialNumber: MaterialNumber('0000000000111111'),
               materialDescription: ' Mosys D',
               principalData: PrincipalData.empty().copyWith(
-                principalName: 'å�°ç�£æ‹œè€³è‚¡ä»½æœ‰é™�å…¬å�¸',
+                principalName: PrincipalName('å�°ç�£æ‹œè€³è‚¡ä»½æœ‰é™�å…¬å�¸'),
               ),
             )),
           ],
@@ -279,7 +280,7 @@ void main() {
             materialNumber: MaterialNumber('000000000023168451'),
             materialDescription: ' Triglyceride Mosys D',
             principalData: PrincipalData.empty().copyWith(
-              principalName: 'å�°ç�£æ‹œè€³è‚¡ä»½æœ‰é™�å…¬å�¸',
+              principalName: PrincipalName('å�°ç�£æ‹œè€³è‚¡ä»½æœ‰é™�å…¬å�¸'),
             ),
             remarks: '',
           ),
@@ -294,7 +295,8 @@ void main() {
                 materialNumber: MaterialNumber('0000000000111111'),
                 materialDescription: ' Mosys D',
                 principalData: PrincipalData.empty().copyWith(
-                  principalName: 'å�°ç�£æ‹œè€³è‚¡ä»½æœ‰é™�å…¬å�¸',
+                  principalName:
+                      PrincipalName('å�°ç�£æ‹œè€³è‚¡ä»½æœ‰é™�å…¬å�¸'),
                 ),
               ),
             )
@@ -312,7 +314,7 @@ void main() {
             materialNumber: MaterialNumber('000000000023168441'),
             materialDescription: ' Triglyceride Mosys D',
             principalData: PrincipalData.empty().copyWith(
-              principalName: 'å�°ç�£æ‹œè€³è‚¡ä»½æœ‰é™�å…¬å�¸',
+              principalName: PrincipalName('å�°ç�£æ‹œè€³è‚¡ä»½æœ‰é™�å…¬å�¸'),
             ),
             remarks: '',
           ),
@@ -337,7 +339,7 @@ void main() {
             materialNumber: MaterialNumber('000000000023168451'),
             materialDescription: ' Triglyceride Mosys D',
             principalData: PrincipalData.empty().copyWith(
-              principalName: 'å�°ç�£æ‹œè€³è‚¡ä»½æœ‰é™�å…¬å�¸',
+              principalName: PrincipalName('å�°ç�£æ‹œè€³è‚¡ä»½æœ‰é™�å…¬å�¸'),
             ),
             remarks: '',
           ),
@@ -354,7 +356,7 @@ void main() {
             materialNumber: MaterialNumber('000000000023168451'),
             materialDescription: ' Triglyceride Mosys D',
             principalData: PrincipalData.empty().copyWith(
-              principalName: 'å�°ç�£æ‹œè€³è‚¡ä»½æœ‰é™�å…¬å�¸',
+              principalName: PrincipalName('å�°ç�£æ‹œè€³è‚¡ä»½æœ‰é™�å…¬å�¸'),
             ),
           ),
           stockInfo: StockInfo.empty().copyWith(
@@ -372,7 +374,7 @@ void main() {
             materialNumber: MaterialNumber('000000000023168451'),
             materialDescription: ' Triglyceride Mosys D',
             principalData: PrincipalData.empty().copyWith(
-              principalName: 'å�°ç�£æ‹œè€³è‚¡ä»½æœ‰é™�å…¬å�¸',
+              principalName: PrincipalName('å�°ç�£æ‹œè€³è‚¡ä»½æœ‰é™�å…¬å�¸'),
             ),
           ),
           stockInfo: StockInfo.empty().copyWith(

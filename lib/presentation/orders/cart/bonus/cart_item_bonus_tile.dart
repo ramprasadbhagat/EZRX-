@@ -26,6 +26,8 @@ class BounsTile extends StatelessWidget {
   Widget build(BuildContext context) {
     // 1. isSalesRep => userdata.hasBonusOverride , isClient => salesOrgConfig.priceOverride
     // 2. ZPFB and ZPFC cannot override bonus
+    final isBonusEligibleForPnG = material.isPnGPrinciple &&
+        context.read<EligibilityBloc>().state.isSalesRepAndBonusEligible;
     final isBonusOverrideEnable =
         context.read<EligibilityBloc>().state.isBonusOverrideEnable &&
             !context.read<OrderDocumentTypeBloc>().state.isSpecialOrderType;
@@ -37,7 +39,8 @@ class BounsTile extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: (isEligibleAddAdditionBonus && isBonusOverrideEnable) ||
+          child: isBonusEligibleForPnG ||
+                  (isEligibleAddAdditionBonus && isBonusOverrideEnable) ||
                   (!isBonusOverrideEnable && bonusList.isNotEmpty)
               ? custom.ExpansionTile(
                   initiallyExpanded: true,

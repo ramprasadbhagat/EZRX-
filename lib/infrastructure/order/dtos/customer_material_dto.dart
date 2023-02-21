@@ -58,7 +58,7 @@ class CustomerMaterialDto with _$CustomerMaterialDto {
         itemBrand: itemBrand,
         principalData: PrincipalData(
           principalCode: PrincipalCode(principalCode),
-          principalName: principalName,
+          principalName: PrincipalName(principalName),
         ),
         itemRegistrationNumber: itemRegistrationNumber,
         unitOfMeasurement: unitOfMeasurement,

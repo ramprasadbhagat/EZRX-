@@ -70,6 +70,15 @@ bool havingSubmitPrincipalForClient(String principalCode) {
   return principalCode == '100822';
 }
 
+bool havingPnGPrincipalCode(String principalCode) {
+  return principalCode == '105307' || principalCode == '101308';
+}
+
+bool havingPnGPrincipalName(String principalName) {
+  return principalName.contains('PROCTER AND GAMBLE') ||
+      principalName.contains('PROCTER & GAMBLE');
+}
+
 bool havingSubmitPrincipalForSalesRep(String principalCode) {
   return principalCode == '100225';
 }

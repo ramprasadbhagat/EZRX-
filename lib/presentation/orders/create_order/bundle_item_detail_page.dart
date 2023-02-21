@@ -243,7 +243,8 @@ class _ListContent extends StatelessWidget {
                       )
                     : const SizedBox.shrink(),
                 Text(
-                  materialInfo.principalData.principalName,
+                  materialInfo.principalData.principalName
+                      .getOrDefaultValue(''),
                   style: Theme.of(context).textTheme.subtitle2?.apply(
                         color: ZPColors.lightGray,
                       ),

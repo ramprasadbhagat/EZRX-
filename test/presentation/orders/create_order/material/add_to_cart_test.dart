@@ -90,8 +90,8 @@ void main() {
     materialNumber: MaterialNumber('000000000023168451'),
     materialDescription: ' Triglyceride Mosys D',
     principalData: PrincipalData.empty().copyWith(
-      principalName:
-          'Ã¥ï¿½Â°Ã§ï¿½Â£Ã¦â€¹Å“Ã¨â‚¬Â³Ã¨â€šÂ¡Ã¤Â»Â½Ã¦Å“â€°Ã©â„¢ï¿½Ã¥â€¦Â¬Ã¥ï¿½Â¸',
+      principalName: PrincipalName(
+          'Ã¥ï¿½Â°Ã§ï¿½Â£Ã¦â€¹Å“Ã¨â‚¬Â³Ã¨â€šÂ¡Ã¤Â»Â½Ã¦Å“â€°Ã©â„¢ï¿½Ã¥â€¦Â¬Ã¥ï¿½Â¸'),
     ),
   );
 

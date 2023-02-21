@@ -76,7 +76,8 @@ class MaterialQueryInfo with _$MaterialQueryInfo {
         materialGroup2: materialInfo.materialGroup2,
         materialGroup4: materialInfo.materialGroup4,
         description: materialInfo.displayDescription,
-        principalName: materialInfo.principalData.principalName,
+        principalName:
+            materialInfo.principalData.principalName.getOrDefaultValue(''),
         tenderContract: TenderContract.empty(),
       );
 

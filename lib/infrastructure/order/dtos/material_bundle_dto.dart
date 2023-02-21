@@ -35,7 +35,7 @@ class MaterialBundleDto with _$MaterialBundleDto {
       therapeuticClass: '',
       itemBrand: '',
       principalData: PrincipalData(
-        principalName: '',
+        principalName: PrincipalName(''),
         principalCode: PrincipalCode(''),
       ),
       taxClassification: MaterialTaxClassification(''),

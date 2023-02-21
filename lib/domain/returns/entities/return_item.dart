@@ -60,7 +60,7 @@ class ReturnItem with _$ReturnItem {
         unitPrice: 0.0,
         totalPrice: 0.0,
         principalData: PrincipalData(
-          principalName: '',
+          principalName: PrincipalName(''),
           principalCode: PrincipalCode(''),
         ),
         expiryDate: DateTimeStringValue(''),

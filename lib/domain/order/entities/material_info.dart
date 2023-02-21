@@ -42,7 +42,7 @@ class MaterialInfo with _$MaterialInfo {
         therapeuticClass: '',
         itemBrand: '',
         principalData: PrincipalData(
-          principalName: '',
+          principalName: PrincipalName(''),
           principalCode: PrincipalCode(''),
         ),
         taxClassification: MaterialTaxClassification(''),

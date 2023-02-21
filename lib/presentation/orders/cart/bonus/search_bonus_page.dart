@@ -202,7 +202,8 @@ class _BonusAddPageState extends State<BonusAddPage> {
                                       ),
                                       Text(
                                         state.bonus[i].principalData
-                                            .principalName,
+                                            .principalName
+                                            .getOrDefaultValue(''),
                                         style: Theme.of(context)
                                             .textTheme
                                             .subtitle2

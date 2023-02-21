@@ -119,7 +119,7 @@ void main() {
     therapeuticClass: 'All other non-therapeutic products',
     itemBrand: 'Item not listed in I',
     principalData: PrincipalData(
-      principalName: '台灣羅氏醫療診斷設備(股)公司',
+      principalName: PrincipalName('台灣羅氏醫療診斷設備(股)公司'),
       principalCode: PrincipalCode('0000102004'),
     ),
     taxClassification: MaterialTaxClassification('Product : Full Tax'),
@@ -405,7 +405,7 @@ void main() {
             therapeuticClass: 'All other non-therapeutic products',
             itemBrand: 'Item not listed in I',
             principalData: PrincipalData(
-              principalName: '台灣羅氏醫療診斷設備(股)公司',
+              principalName: PrincipalName('台灣羅氏醫療診斷設備(股)公司'),
               principalCode: PrincipalCode('0000102004'),
             ),
             taxClassification: MaterialTaxClassification('Product : Full Tax'),
@@ -451,11 +451,13 @@ void main() {
           findsOneWidget);
       expect(
           find.text(covidMaterialListBlocMock
-              .state.materialList.first.principalData.principalName),
+              .state.materialList.first.principalData.principalName
+              .getOrCrash()),
           findsOneWidget);
       expect(
           find.textContaining(covidMaterialListBlocMock
-              .state.materialList.first.principalData.principalName),
+              .state.materialList.first.principalData.principalName
+              .getOrCrash()),
           findsOneWidget);
 
       if (salesOrgBlocMock.state.configs.enableListPrice) {

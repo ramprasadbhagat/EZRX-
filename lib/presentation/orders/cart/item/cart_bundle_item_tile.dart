@@ -272,7 +272,8 @@ class _BundleMaterialItemState extends State<_BundleMaterialItem> {
                     )
                   : const SizedBox.shrink(),
               Text(
-                widget.material.materialInfo.principalData.principalName,
+                widget.material.materialInfo.principalData.principalName
+                    .getOrDefaultValue(''),
                 style: Theme.of(context).textTheme.subtitle2?.apply(
                       color: ZPColors.lightGray,
                     ),

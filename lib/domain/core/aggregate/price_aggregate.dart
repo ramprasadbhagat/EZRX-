@@ -50,7 +50,8 @@ class PriceAggregate with _$PriceAggregate {
       materialNumber: materialInfo.materialNumber,
       materialGroup4: materialInfo.materialGroup4,
       qty: quantity,
-      principalName: materialInfo.principalData.principalName,
+      principalName:
+          materialInfo.principalData.principalName.getOrDefaultValue(''),
       materialDescription: materialInfo.materialDescription,
       hidePrice: materialInfo.hidePrice,
       hasValidTenderContract: materialInfo.hasValidTenderContract,
@@ -369,8 +370,7 @@ class PriceAggregate with _$PriceAggregate {
       (salesOrgConfig.netPriceOverride || price.additionalBonusEligible);
 
   bool get hasSalesRepPrincipal {
-    return materialInfo.principalData.principalCode
-        .isSubmitAllowedForSalesRep();
+    return materialInfo.principalData.principalCode.isSubmitAllowedForSalesRep;
   }
 
   bool get hasClientPrincipal {
@@ -380,6 +380,10 @@ class PriceAggregate with _$PriceAggregate {
   bool get notHavingContract =>
       tenderContract == TenderContract.empty() ||
       tenderContract == TenderContract.noContract();
+
+  bool get isPnGPrinciple =>
+      materialInfo.principalData.principalCode.isPnGPrinciple ||
+      materialInfo.principalData.principalName.isPnGPrinciple;
 
   List<MaterialItemBonus> get getAddedBonusList =>
       List<MaterialItemBonus>.from(addedBonusList)

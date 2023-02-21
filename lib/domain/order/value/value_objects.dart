@@ -110,6 +110,10 @@ class PrincipalName extends ValueObject<String> {
     return naIfEmpty(value.getOrElse(() => ''));
   }
 
+  bool get isPnGPrinciple => havingPnGPrincipalName(
+        value.getOrElse(() => ''),
+      );
+
   const PrincipalName._(this.value);
 }
 
@@ -131,13 +135,17 @@ class PrincipalCode extends ValueObject<String> {
     );
   }
 
-  bool isSubmitAllowedForSalesRep() {
-    return havingSubmitPrincipalForSalesRep(
-      removeLeadingZero(
-        value.getOrElse(() => ''),
-      ),
-    );
-  }
+  bool get isPnGPrinciple => havingPnGPrincipalCode(
+        removeLeadingZero(
+          value.getOrElse(() => ''),
+        ),
+      );
+
+  bool get isSubmitAllowedForSalesRep => havingSubmitPrincipalForSalesRep(
+        removeLeadingZero(
+          value.getOrElse(() => ''),
+        ),
+      );
 }
 
 class MaterialNumber extends ValueObject<String> {

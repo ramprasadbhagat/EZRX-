@@ -61,7 +61,8 @@ class _CartItemDetailWidgetState extends State<CartItemDetailWidget> {
               ),
         ),
         Text(
-          widget.cartItem.materialInfo.principalData.principalName,
+          widget.cartItem.materialInfo.principalData.principalName
+              .getOrDefaultValue(''),
           style: Theme.of(context).textTheme.titleMedium?.apply(
                 color: ZPColors.lightGray,
               ),
