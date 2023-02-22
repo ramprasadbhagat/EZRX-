@@ -176,18 +176,11 @@ class _SubmitContinueButton extends StatelessWidget {
   void _validateForm({
     required BuildContext context,
   }) {
-    final orderSummaryBloc = context.read<OrderSummaryBloc>();
-    if (context.read<AdditionalDetailsBloc>().state.isValidated) {
-      orderSummaryState.step == orderSummaryState.additionalDetailsStep
-          ? orderSummaryBloc.add(const OrderSummaryEvent.stepContinue())
-          : _submitOrder(context);
-    } else {
-      context.read<AdditionalDetailsBloc>().add(
-            AdditionalDetailsEvent.validateForm(
-              config: context.read<SalesOrgBloc>().state.configs,
-            ),
-          );
-    }
+    context.read<AdditionalDetailsBloc>().add(
+          AdditionalDetailsEvent.validateForm(
+            config: context.read<SalesOrgBloc>().state.configs,
+          ),
+        );
   }
 
   void _stepContinue(BuildContext context) {
@@ -231,7 +224,9 @@ class _SubmitContinueButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AdditionalDetailsBloc, AdditionalDetailsState>(
-      listenWhen: (previous, current) => previous != current,
+      listenWhen: (previous, current) =>
+          previous.isValidated != current.isValidated ||
+          previous.showErrorMessages != current.showErrorMessages,
       listener: (context, state) {
         final orderSummaryBloc = context.read<OrderSummaryBloc>();
         final orderSummaryState = orderSummaryBloc.state;
@@ -746,7 +741,8 @@ class _CartDetails extends StatelessWidget {
       listenWhen: (previosus, current) =>
           previosus.cartItems.isEmpty != current.cartItems.isEmpty,
       listener: (context, state) {
-        if (state.cartItems.isEmpty) {
+        if (state.cartItems.isEmpty &&
+            !context.read<OrderSummaryBloc>().state.isSubmitSuccess) {
           context.router.pop();
         }
       },

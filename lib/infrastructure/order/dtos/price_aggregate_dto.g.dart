@@ -105,7 +105,7 @@ class PriceAggregateDtoAdapter extends TypeAdapter<PriceAggregateDto> {
               oosValue: 0,
               enableRemarks: false,
               enableOHPrice: true,
-              ponRequired: false,
+              poNumberRequired: false,
               enableTaxDisplay: false,
               netPriceOverride: false,
               batchNumDisplay: false,

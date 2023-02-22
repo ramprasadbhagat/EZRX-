@@ -123,7 +123,13 @@ class AdditionalDetailsBloc
     required Emitter<AdditionalDetailsState> emit,
     required SalesOrganisationConfigs config,
   }) {
-    final isCustomerPoReferenceValid = config.ponRequired
+    emit(
+      state.copyWith(
+        isValidated: false,
+        showErrorMessages: false,
+      ),
+    );
+    final isCustomerPoReferenceValid = config.poNumberRequired
         ? state.additionalDetailsData.customerPoReference.isValid()
         : true;
     final isContactPersonValid = config.enableMobileNumber

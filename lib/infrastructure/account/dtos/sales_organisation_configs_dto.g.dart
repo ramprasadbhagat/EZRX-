@@ -61,7 +61,7 @@ class SalesOrganisationConfigsDtoAdapter
       oosValue: fields[134] == null ? 0 : fields[134] as int,
       enableRemarks: fields[135] == null ? false : fields[135] as bool,
       enableOHPrice: fields[136] == null ? true : fields[136] as bool,
-      ponRequired: fields[137] == null ? false : fields[137] as bool,
+      poNumberRequired: fields[137] == null ? false : fields[137] as bool,
       enableIRN: fields[138] == null ? false : fields[138] as bool,
       enableTaxDisplay: fields[139] == null ? false : fields[139] as bool,
       enableTaxAtTotalLevelOnly:
@@ -157,7 +157,7 @@ class SalesOrganisationConfigsDtoAdapter
       ..writeByte(136)
       ..write(obj.enableOHPrice)
       ..writeByte(137)
-      ..write(obj.ponRequired)
+      ..write(obj.poNumberRequired)
       ..writeByte(138)
       ..write(obj.enableIRN)
       ..writeByte(139)
@@ -250,7 +250,7 @@ _$_SalesOrganisationConfigsDto _$$_SalesOrganisationConfigsDtoFromJson(
       oosValue: json['oosValue'] as int? ?? 0,
       enableRemarks: json['enableRemarks'] as bool? ?? false,
       enableOHPrice: json['enableOHPrice'] as bool? ?? true,
-      ponRequired: json['ponRequired'] as bool? ?? false,
+      poNumberRequired: json['ponRequired'] as bool? ?? false,
       enableIRN: json['enableIRN'] as bool? ?? false,
       enableTaxDisplay: json['enableTaxDisplay'] as bool? ?? false,
       enableTaxAtTotalLevelOnly:
@@ -309,7 +309,7 @@ Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
       'oosValue': instance.oosValue,
       'enableRemarks': instance.enableRemarks,
       'enableOHPrice': instance.enableOHPrice,
-      'ponRequired': instance.ponRequired,
+      'ponRequired': instance.poNumberRequired,
       'enableIRN': instance.enableIRN,
       'enableTaxDisplay': instance.enableTaxDisplay,
       'enableTaxAtTotalLevelOnly': instance.enableTaxAtTotalLevelOnly,

@@ -244,7 +244,7 @@ void main() {
           disableOrderType: false,
           enableCollectiveNumber: true,
           enablePaymentTerms: true,
-          ponRequired: true,
+          poNumberRequired: true,
         ),
         salesOrganisation: SalesOrganisation.empty().copyWith(
           salesOrg: SalesOrg('2601'),
@@ -336,7 +336,7 @@ void main() {
             disableOrderType: false,
             enableCollectiveNumber: true,
             enablePaymentTerms: true,
-            ponRequired: true,
+            poNumberRequired: true,
           ),
           salesOrganisation: SalesOrganisation.empty().copyWith(
             salesOrg: SalesOrg('2601'),
@@ -393,7 +393,7 @@ void main() {
             disableOrderType: false,
             enableCollectiveNumber: true,
             enablePaymentTerms: true,
-            ponRequired: true,
+            poNumberRequired: true,
           ),
           salesOrganisation: SalesOrganisation.empty().copyWith(
             salesOrg: SalesOrg('2601'),
@@ -459,7 +459,7 @@ void main() {
             disableOrderType: false,
             enableCollectiveNumber: true,
             enablePaymentTerms: true,
-            ponRequired: true,
+            poNumberRequired: true,
           ),
           salesOrganisation: SalesOrganisation.empty().copyWith(
             salesOrg: SalesOrg('2601'),
@@ -799,7 +799,7 @@ void main() {
             disableOrderType: false,
             enableCollectiveNumber: true,
             enablePaymentTerms: true,
-            ponRequired: true,
+            poNumberRequired: true,
           ),
           salesOrganisation: SalesOrganisation.empty().copyWith(
             salesOrg: SalesOrg('2601'),

@@ -126,7 +126,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
         required bool enableOHPrice,
     @JsonKey(name: 'ponRequired', defaultValue: false)
     @HiveField(137, defaultValue: false)
-        required bool ponRequired,
+        required bool poNumberRequired,
     @JsonKey(name: 'enableIRN', defaultValue: false)
     @HiveField(138, defaultValue: false)
         required bool enableIRN,
@@ -218,7 +218,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       oosValue: configs.oosValue.getOrDefaultValue(0),
       enableRemarks: configs.enableRemarks,
       enableOHPrice: configs.enableOHPrice,
-      ponRequired: configs.ponRequired,
+      poNumberRequired: configs.poNumberRequired,
       enableTaxDisplay: configs.enableTaxDisplay,
       netPriceOverride: configs.netPriceOverride,
       batchNumDisplay: configs.batchNumDisplay,
@@ -275,7 +275,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       oosValue: OosValue(oosValue),
       enableRemarks: enableRemarks,
       enableOHPrice: enableOHPrice,
-      ponRequired: ponRequired,
+      poNumberRequired: poNumberRequired,
       enableTaxDisplay: enableTaxDisplay,
       netPriceOverride: netPriceOverride,
       batchNumDisplay: batchNumDisplay,
