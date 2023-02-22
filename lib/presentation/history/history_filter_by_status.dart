@@ -87,7 +87,7 @@ class _ClearButtonForFilterByStatus extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: ElevatedButton(
+      child: OutlinedButton(
         key: const ValueKey('filterclearAllButton'),
         onPressed: () async {
           context.read<OrderHistoryFilterByStatusBloc>().add(

@@ -143,7 +143,7 @@ final appThemeData = {
         shape: const StadiumBorder(),
         // textStyle: ThemeData.light().textTheme.bodyText2,
         textStyle: const TextStyle(
-           fontSize: 15,
+          fontSize: 15,
           fontFamily: 'Poppins',
           color: ZPColors.white,
           fontWeight: FontWeight.bold,
@@ -151,6 +151,21 @@ final appThemeData = {
         // RoundedRectangleBorder(
         //   borderRadius: BorderRadius.circular(8),
         // ),
+        elevation: 0,
+        minimumSize: const Size(120, 40),
+      ),
+    ),
+    outlinedButtonTheme: OutlinedButtonThemeData(
+      style: OutlinedButton.styleFrom(
+        backgroundColor: ZPColors.white,
+        side: const BorderSide(color: ZPColors.primary),
+        shape: const StadiumBorder(),
+        textStyle: const TextStyle(
+          fontSize: 15,
+          fontFamily: 'Poppins',
+          color: ZPColors.white,
+          fontWeight: FontWeight.bold,
+        ),
         elevation: 0,
         minimumSize: const Size(120, 40),
       ),

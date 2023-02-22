@@ -500,16 +500,8 @@ class _ClearButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
+    return OutlinedButton(
       key: const Key('filterClearButton'),
-      style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.resolveWith(
-          (states) => ZPColors.white,
-        ),
-        side: MaterialStateProperty.resolveWith(
-          (states) => const BorderSide(color: ZPColors.primary),
-        ),
-      ),
       onPressed: () {
         context.read<RequestReturnFilterBloc>().add(
               const RequestReturnFilterEvent.initialized(),

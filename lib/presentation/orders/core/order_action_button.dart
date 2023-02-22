@@ -41,17 +41,9 @@ class OrderActionButton extends StatelessWidget {
                   ),
             child: const Text('Add to Cart').tr(),
           ),
-        ElevatedButton(
+        OutlinedButton(
           key: const Key('onDeletePressed'),
           onPressed: onDeletePressed,
-          style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.resolveWith(
-              (states) => ZPColors.white,
-            ),
-            side: MaterialStateProperty.resolveWith(
-              (states) => const BorderSide(color: ZPColors.primary),
-            ),
-          ),
           child: const Text(
             'Delete',
             style: TextStyle(color: ZPColors.primary),

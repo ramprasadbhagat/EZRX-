@@ -209,7 +209,7 @@ class _AddDeleteButton extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           if (isEditing)
-            ElevatedButton(
+            OutlinedButton(
               key: const Key('onDeletePressed'),
               onPressed: () {
                 ConfirmClearDialog.show(
@@ -229,14 +229,6 @@ class _AddDeleteButton extends StatelessWidget {
                   confirmText: 'Confirm',
                 );
               },
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.resolveWith(
-                  (states) => ZPColors.white,
-                ),
-                side: MaterialStateProperty.resolveWith(
-                  (states) => const BorderSide(color: ZPColors.primary),
-                ),
-              ),
               child: const Text(
                 'Delete',
                 style: TextStyle(color: ZPColors.primary),
