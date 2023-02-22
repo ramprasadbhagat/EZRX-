@@ -17,7 +17,6 @@ class OrderDocumentTypeLocalDataSourceMock extends Mock
 class OrderDocumentTypeRemoteDataSourceMock extends Mock
     implements OrderDocumentTypeRemoteDataSource {}
 
-
 void main() {
   late OrderDocumentTypeRepository orderDocumentTypeRepository;
   late Config mockConfig;
@@ -80,8 +79,7 @@ void main() {
     test('get orderDocumentType fail remote', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
       when(() => orderDocumentTypeRemoteDataSource.getOrderDocumentTypList(
-              salesOrgCode: ''))
-          .thenThrow((invocation) async => MockException());
+          salesOrgCode: '')).thenThrow((invocation) async => MockException());
 
       final result = await orderDocumentTypeRepository.getOrderDocumentTypList(
           salesOrganisation:

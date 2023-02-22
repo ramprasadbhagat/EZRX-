@@ -7,6 +7,7 @@ import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
+import 'package:ezrxmobile/application/order/tender_contract/tender_contract_list_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
@@ -73,6 +74,10 @@ class OrderTemplateListBlocMock
     extends MockBloc<OrderTemplateListEvent, OrderTemplateListState>
     implements OrderTemplateListBloc {}
 
+class TenderContractListBlocMock
+    extends MockBloc<TenderContractListEvent, TenderContractListState>
+    implements TenderContractListBloc {}
+
 void main() {
   late UserBloc userBlocMock;
   late SalesOrgBloc salesOrgBlocMock;
@@ -85,6 +90,7 @@ void main() {
   late EligibilityBlocMock eligibilityBlocMock;
   late AppRouter autoRouterMock;
   late OrderTemplateListBloc orderTemplateListBlocMock;
+  late TenderContractListBloc tenderContractListBlocMock;
 
   setUpAll(() async {
     setupLocator();
@@ -107,6 +113,7 @@ void main() {
     materialPriceDetailBlocMock = MockMaterialPriceDetailBloc();
     cartBlocMock = MockCartBloc();
     orderTemplateListBlocMock = OrderTemplateListBlocMock();
+    tenderContractListBlocMock = TenderContractListBlocMock();
     when(() => userBlocMock.state).thenReturn(
       UserState.initial().copyWith(
         user: fakeUser,
@@ -123,6 +130,8 @@ void main() {
         .thenReturn(EligibilityState.initial());
     when(() => orderTemplateListBlocMock.state)
         .thenReturn(OrderTemplateListState.initial());
+    when(() => tenderContractListBlocMock.state)
+        .thenReturn(TenderContractListState.initial());
   });
 
   group('Order Template Detail Screen', () {
@@ -154,6 +163,9 @@ void main() {
               create: (context) => eligibilityBlocMock),
           BlocProvider<OrderTemplateListBloc>(
               create: (context) => orderTemplateListBlocMock),
+          BlocProvider<TenderContractListBloc>(
+            create: (context) => tenderContractListBlocMock,
+          ),
         ],
         child: OrderTemplateDetailPage(order: orderMock),
       );
@@ -372,6 +384,7 @@ void main() {
               priceDetailMap: materialDetails,
               material: item,
               salesConfigs: eligibilityBlocMock.state.salesOrgConfigs,
+              tenderContractMap: {},
             ),
           )
           .toList();
@@ -430,6 +443,7 @@ void main() {
                     priceDetailMap: materialDetails,
                     material: item,
                     salesConfigs: eligibilityBlocMock.state.salesOrgConfigs,
+                    tenderContractMap: {},
                   ),
           )
           .toList();

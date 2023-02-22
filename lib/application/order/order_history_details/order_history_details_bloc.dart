@@ -1,11 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
-import 'package:ezrxmobile/domain/core/aggregate/bonus_aggregate.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items_details.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
+import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/repository/i_order_history_details_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -30,10 +30,8 @@ class OrderHistoryDetailsBloc
       initialized: (e) async => emit(OrderHistoryDetailsState.initial()),
       fetch: (e) async {
         emit(
-          state.copyWith(
+          OrderHistoryDetailsState.initial().copyWith(
             isLoading: true,
-            showErrorMessage: false,
-            failureOrSuccessOption: none(),
           ),
         );
 
@@ -59,45 +57,49 @@ class OrderHistoryDetailsBloc
                 orderHistoryDetails: orderHistoryDetails,
                 failureOrSuccessOption: none(),
                 isLoading: false,
-                bonusItem: getOrderBonusAggregateList(
-                  orderHistoryDetails,
-                ),
+                materials: {
+                  for (final item in orderHistoryDetails.items)
+                    item.orderItem.queryInfo: item.toPriceAggregate,
+                },
+                isLoadingTenderContract: {
+                  for (final item in orderHistoryDetails.items)
+                    if (item.orderItem.isTenderContractMaterial)
+                      item.orderItem.queryInfo: true,
+                },
               ),
             );
           },
         );
       },
-    );
-  }
+      updateMaterialTenderContract: (e) async {
+        final materialsWithUpdatedTenderContract = state.materials.map(
+          (queryInfo, material) {
+            if (queryInfo == e.queryInfo) {
+              return MapEntry(
+                queryInfo,
+                material.copyWith(tenderContract: e.selectedTenderContract),
+              );
+            }
 
-  List<OrderHistoryDetailsBonusAggregate> getOrderBonusAggregateList(
-    OrderHistoryDetails orderItems,
-  ) {
-    final orderHistoryDetailsOrderItemsList =
-        <OrderHistoryDetailsBonusAggregate>[];
-
-    for (final items in orderItems.orderHistoryDetailsOrderItem) {
-      if (items.type.isMaterialTypeComm) {
-        final orderHistoryDetailsOrderItem = OrderHistoryDetailsBonusAggregate(
-          orderItem: items,
-          details: items.details,
-          tenderContractDetails: items.tenderContractDetails,
-          bonusList: <OrderHistoryDetailsOrderItem>[],
+            return MapEntry(queryInfo, material);
+          },
         );
 
-        orderHistoryDetailsOrderItemsList.add(orderHistoryDetailsOrderItem);
-      } else {
-        if (orderHistoryDetailsOrderItemsList.isNotEmpty) {
-          orderHistoryDetailsOrderItemsList.last =
-              orderHistoryDetailsOrderItemsList.last.copyWith(
-            bonusList: List<OrderHistoryDetailsOrderItem>.from(
-              orderHistoryDetailsOrderItemsList.last.bonusList,
-            )..add(items),
-          );
-        }
-      }
-    }
+        final loadingTenderContractStatus = state.isLoadingTenderContract.map(
+          (queryInfo, isLoading) {
+            if (queryInfo == e.queryInfo) return MapEntry(queryInfo, false);
 
-    return orderHistoryDetailsOrderItemsList;
+            return MapEntry(queryInfo, isLoading);
+          },
+        );
+
+        emit(
+          state.copyWith(
+            materials: materialsWithUpdatedTenderContract,
+            isLoadingTenderContract: loadingTenderContractStatus,
+          ),
+        );
+      },
+    );
   }
 }

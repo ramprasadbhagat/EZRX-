@@ -5,6 +5,7 @@ import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_price_detail.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
+import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -39,11 +40,13 @@ class CartItem with _$CartItem {
 
   factory CartItem.materialFromOrder({
     required Map<MaterialQueryInfo, MaterialPriceDetail> priceDetailMap,
+    required Map<MaterialNumber, List<TenderContract>> tenderContractMap,
     required MaterialItem material,
     required SalesOrganisationConfigs salesConfigs,
   }) {
     final itemInfo =
         priceDetailMap[material.queryInfo] ?? MaterialPriceDetail.empty();
+    final tenderContractList = tenderContractMap[material.materialNumber] ?? [];
 
     return CartItem.material(
       PriceAggregate(
@@ -61,7 +64,11 @@ class CartItem with _$CartItem {
         stockInfo: StockInfo.empty().copyWith(
           materialNumber: itemInfo.info.materialNumber,
         ),
-        tenderContract: material.tenderContract,
+        tenderContract: itemInfo.info.hasValidTenderContract
+            ? tenderContractList.withNoContractItem.getDefaultSelected(
+                currentTenderContract: material.tenderContract,
+              )
+            : TenderContract.empty(),
       ),
     );
   }

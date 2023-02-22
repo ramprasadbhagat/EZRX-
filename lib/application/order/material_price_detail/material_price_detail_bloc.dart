@@ -52,17 +52,22 @@ class MaterialPriceDetailBloc
           );
         },
         fetch: (e) async {
+          emit(
+            state.copyWith(isValidating: true),
+          );
           final queryMaterials = _getMissingPriceDetailMaterials(
             materials: e.materialInfoList,
           );
 
           var nonFocValidMaterials = queryMaterials;
 
-          if (queryMaterials.isEmpty) return;
+          if (queryMaterials.isEmpty) {
+            emit(
+              state.copyWith(isValidating: false),
+            );
 
-          emit(
-            state.copyWith(isValidating: true),
-          );
+            return;
+          }
 
           final validMaterials = await _getValidMaterials(
             materials: queryMaterials,
@@ -73,6 +78,8 @@ class MaterialPriceDetailBloc
             materials: queryMaterials,
             validMaterials: validMaterials,
           );
+
+          nonFocValidMaterials = validMaterials;
 
           _setPriceForMaterials(
             materials: validMaterials,

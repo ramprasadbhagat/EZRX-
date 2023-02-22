@@ -38,7 +38,7 @@ import '../auth/login_page.dart' as _i2;
 import '../auth/proxy_login_page.dart' as _i3;
 import '../core/webview_page.dart' as _i12;
 import '../favourites/favourite_tab.dart' as _i36;
-import '../history/history_details.dart' as _i30;
+import '../history/detail/history_details.dart' as _i30;
 import '../history/history_tab.dart' as _i35;
 import '../home/home_tab.dart' as _i34;
 import '../home_tab.dart' as _i27;

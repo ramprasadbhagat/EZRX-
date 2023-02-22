@@ -66,3 +66,33 @@ class TenderContract with _$TenderContract {
         ),
       );
 }
+
+extension TenderContractListExtension on List<TenderContract> {
+  List<TenderContract> get withNoContractItem {
+    //If no 730 contract is present in the list, the first item must be a no contract item
+    final notContainReason730 =
+        !any((element) => element.tenderOrderReason.is730);
+
+    return notContainReason730
+        ? (List.from(this)..insert(0, TenderContract.noContract()))
+        : this;
+  }
+
+  TenderContract getDefaultSelected({
+    required TenderContract currentTenderContract,
+  }) {
+    final defaultSelectedContract = withNoContractItem.firstWhere(
+      (contract) =>
+          contract.contractNumber == currentTenderContract.contractNumber,
+      orElse: () => TenderContract.empty(),
+    );
+
+    //Select default if present else Select 730 contract if present, else select first item
+    return defaultSelectedContract != TenderContract.empty()
+        ? defaultSelectedContract
+        : withNoContractItem.firstWhere(
+            (e) => e.tenderOrderReason.is730,
+            orElse: () => withNoContractItem.first,
+          );
+  }
+}

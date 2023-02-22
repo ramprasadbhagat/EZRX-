@@ -21,7 +21,6 @@ class TenderContractLocalDataSourceMock extends Mock
 class TenderContractRemoteDataSourceMock extends Mock
     implements TenderContractRemoteDataSource {}
 
-
 void main() {
   late TenderContractRepository tenderContractRepository;
   late Config mockConfig;
@@ -56,7 +55,7 @@ void main() {
           .thenAnswer((invocation) async => <TenderContract>[]);
 
       final result = await tenderContractRepository.getTenderContractDetails(
-          material: mockMaterialInfo,
+          materialNumber: mockMaterialInfo.materialNumber,
           customerCodeInfo: mockCustomerCodeInfo,
           salesOrganisation: mockSalesOrganisation,
           shipToInfo: mockShipToInfo);
@@ -71,7 +70,7 @@ void main() {
           .thenThrow((invocation) async => MockException());
 
       final result = await tenderContractRepository.getTenderContractDetails(
-          material: mockMaterialInfo,
+          materialNumber: mockMaterialInfo.materialNumber,
           customerCodeInfo: mockCustomerCodeInfo,
           salesOrganisation: mockSalesOrganisation,
           shipToInfo: mockShipToInfo);
@@ -89,9 +88,15 @@ void main() {
           shipTo: '')).thenAnswer((invocation) async => <TenderContract>[]);
 
       final result = await tenderContractRepository.getTenderContractDetails(
-          material: mockMaterialInfo.copyWith(materialNumber: MaterialNumber('') ),
-          customerCodeInfo: mockCustomerCodeInfo.copyWith(customerCodeSoldTo: ''),
-          salesOrganisation: mockSalesOrganisation.copyWith(salesOrg: SalesOrg('3050') ),
+          materialNumber: mockMaterialInfo
+              .copyWith(
+                materialNumber: MaterialNumber(''),
+              )
+              .materialNumber,
+          customerCodeInfo:
+              mockCustomerCodeInfo.copyWith(customerCodeSoldTo: ''),
+          salesOrganisation:
+              mockSalesOrganisation.copyWith(salesOrg: SalesOrg('3050')),
           shipToInfo: mockShipToInfo.copyWith(shipToCustomerCode: ''));
       expect(
         result.isRight(),
@@ -107,7 +112,7 @@ void main() {
           shipTo: '')).thenThrow((invocation) async => MockException());
 
       final result = await tenderContractRepository.getTenderContractDetails(
-          material: mockMaterialInfo,
+          materialNumber: mockMaterialInfo.materialNumber,
           customerCodeInfo: mockCustomerCodeInfo,
           salesOrganisation: mockSalesOrganisation,
           shipToInfo: mockShipToInfo);

@@ -18,6 +18,7 @@ import 'package:ezrxmobile/application/order/additional_details/additional_detai
 import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
+import 'package:ezrxmobile/application/order/tender_contract/tender_contract_list_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_summary/return_summary_bloc.dart';
 import 'package:ezrxmobile/application/returns/request_return_filter/request_return_filter_bloc.dart';
@@ -1337,6 +1338,12 @@ void setupLocator() {
     ),
   );
 
+  locator.registerLazySingleton(
+    () => TenderContractListBloc(
+      tenderContractRepository: locator<TenderContractRepository>(),
+    ),
+  );
+
   //============================================================
   //  Discount Override
   //
@@ -1624,8 +1631,7 @@ void setupLocator() {
     () => ReturnApproverFilterBloc(),
   );
 
-
-    //============================================================
+  //============================================================
   //  Return Summary
   //
   //============================================================
@@ -1656,6 +1662,4 @@ void setupLocator() {
       returnSummaryRemoteDataSource: locator<ReturnSummaryRemoteDataSource>(),
     ),
   );
-  
- 
 }

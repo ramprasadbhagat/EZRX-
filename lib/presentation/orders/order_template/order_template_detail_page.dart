@@ -1,12 +1,9 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
+import 'package:ezrxmobile/application/order/tender_contract/tender_contract_list_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item.dart';
@@ -25,39 +22,68 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class OrderTemplateDetailPage extends StatelessWidget {
+class OrderTemplateDetailPage extends StatefulWidget {
   final OrderTemplate order;
 
   const OrderTemplateDetailPage({Key? key, required this.order})
       : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    locator<CountlyService>().recordCountlyView('Template Detail Screen');
+  State<OrderTemplateDetailPage> createState() =>
+      _OrderTemplateDetailPageState();
+}
 
+class _OrderTemplateDetailPageState extends State<OrderTemplateDetailPage> {
+  late EligibilityBloc elibilityBloc;
+
+  @override
+  void initState() {
+    super.initState();
+    locator<CountlyService>().recordCountlyView('Template Detail Screen');
+    elibilityBloc = context.read<EligibilityBloc>();
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) {
+        context.read<MaterialPriceDetailBloc>().add(
+              MaterialPriceDetailEvent.fetch(
+                user: elibilityBloc.state.user,
+                customerCode: elibilityBloc.state.customerCodeInfo,
+                salesOrganisation: elibilityBloc.state.salesOrganisation,
+                salesOrganisationConfigs: elibilityBloc.state.salesOrgConfigs,
+                shipToCode: elibilityBloc.state.shipToInfo,
+                materialInfoList: _getMaterialList(widget.order.items),
+                pickAndPack: elibilityBloc.state.getPNPValueMaterial,
+              ),
+            );
+      },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       key: const Key('OrderTemplateDetailPage'),
       backgroundColor: ZPColors.white,
       appBar: AppBar(
-        title: Text(order.templateName),
+        title: Text(widget.order.templateName),
       ),
       body: RefreshIndicator(
         color: ZPColors.primary,
-        onRefresh: () async => context.read<MaterialPriceDetailBloc>().add(
-              MaterialPriceDetailEvent.refresh(
-                user: context.read<UserBloc>().state.user,
-                customerCode:
-                    context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                salesOrganisation:
-                    context.read<SalesOrgBloc>().state.salesOrganisation,
-                salesOrganisationConfigs:
-                    context.read<SalesOrgBloc>().state.configs,
-                shipToCode: context.read<ShipToCodeBloc>().state.shipToInfo,
-                materialInfoList: _getMaterialList(order.items),
-                pickAndPack:
-                    context.read<EligibilityBloc>().state.getPNPValueMaterial,
-              ),
-            ),
+        onRefresh: () async {
+          context.read<TenderContractListBloc>().add(
+                const TenderContractListEvent.initialize(),
+              );
+          context.read<MaterialPriceDetailBloc>().add(
+                MaterialPriceDetailEvent.refresh(
+                  user: elibilityBloc.state.user,
+                  customerCode: elibilityBloc.state.customerCodeInfo,
+                  salesOrganisation: elibilityBloc.state.salesOrganisation,
+                  salesOrganisationConfigs: elibilityBloc.state.salesOrgConfigs,
+                  shipToCode: elibilityBloc.state.shipToInfo,
+                  materialInfoList: _getMaterialList(widget.order.items),
+                  pickAndPack: elibilityBloc.state.getPNPValueMaterial,
+                ),
+              );
+        },
         child: CustomScrollView(
           slivers: [
             SliverToBoxAdapter(
@@ -68,7 +94,7 @@ class OrderTemplateDetailPage extends StatelessWidget {
                 builder: (context, state) {
                   return OrderInvalidWarning(
                     isLoading: state.isValidating,
-                    isInvalidOrder: order.allMaterialQueryInfo.every(
+                    isInvalidOrder: widget.order.allMaterialQueryInfo.every(
                       (item) => !state.isValidMaterial(
                         query: item,
                       ),
@@ -80,7 +106,7 @@ class OrderTemplateDetailPage extends StatelessWidget {
             SliverList(
               delegate: SliverChildBuilderDelegate(
                 (context, index) {
-                  var material = order.items[index];
+                  var material = widget.order.items[index];
                   final materialPrice = context
                           .read<MaterialPriceDetailBloc>()
                           .state
@@ -121,26 +147,67 @@ class OrderTemplateDetailPage extends StatelessWidget {
                     ],
                   );
                 },
-                childCount: order.items.length,
+                childCount: widget.order.items.length,
               ),
             ),
             SliverToBoxAdapter(
               key: const Key('orderAction'),
-              child: BlocBuilder<MaterialPriceDetailBloc,
+              child: BlocConsumer<MaterialPriceDetailBloc,
                   MaterialPriceDetailState>(
+                listenWhen: (previous, current) =>
+                    previous.isValidating != current.isValidating ||
+                    previous.isFetching != current.isFetching,
+                listener: (context, state) {
+                  if (!state.isFetching && !state.isValidating) {
+                    final materialNumberWithTenderContract = widget.order.items
+                        .where(
+                          (item) =>
+                              !item.type.isBundle &&
+                              state.materialDetails[item.queryInfo]?.info
+                                      .hasValidTenderContract ==
+                                  true,
+                        )
+                        .map((item) => item.materialNumber)
+                        .toList();
+
+                    context.read<TenderContractListBloc>().add(
+                          TenderContractListEvent.fetch(
+                            salesOrganisation:
+                                elibilityBloc.state.salesOrganisation,
+                            customerCodeInfo:
+                                elibilityBloc.state.customerCodeInfo,
+                            shipToInfo: elibilityBloc.state.shipToInfo,
+                            materialNumbers: materialNumberWithTenderContract,
+                          ),
+                        );
+                  }
+                },
                 buildWhen: (previous, current) =>
                     previous.isValidating != current.isValidating ||
                     previous.isFetching != current.isFetching,
                 builder: (context, state) {
-                  return OrderActionButton(
-                    onAddToCartPressed: () => _addToCartPressed(context, state),
-                    onDeletePressed: () => _deletePressed(context),
-                    enableAddToCart: order.allMaterialQueryInfo.any(
-                      (item) => state.isValidMaterial(
-                        query: item,
-                      ),
-                    ),
-                    isLoading: state.isValidating,
+                  return BlocBuilder<TenderContractListBloc,
+                      TenderContractListState>(
+                    buildWhen: (previous, current) =>
+                        previous.isFetching != current.isFetching,
+                    builder: (context, tenderState) {
+                      return OrderActionButton(
+                        onAddToCartPressed: () => _addToCartPressed(
+                          context,
+                          state,
+                          tenderState,
+                        ),
+                        onDeletePressed: () => _deletePressed(context),
+                        enableAddToCart: widget.order.allMaterialQueryInfo.any(
+                          (item) => state.isValidMaterial(
+                            query: item,
+                          ),
+                        ),
+                        isLoading: state.isFetching ||
+                            state.isValidating ||
+                            tenderState.isFetching,
+                      );
+                    },
                   );
                 },
               ),
@@ -166,23 +233,27 @@ class OrderTemplateDetailPage extends StatelessWidget {
     return materialList;
   }
 
-  void _addToCartPressed(BuildContext context, MaterialPriceDetailState state) {
+  void _addToCartPressed(
+    BuildContext context,
+    MaterialPriceDetailState priceState,
+    TenderContractListState tenderContractState,
+  ) {
     final cartBloc = context.read<CartBloc>();
-    final salesConfigs = context.read<EligibilityBloc>().state.salesOrgConfigs;
+    final salesConfigs = elibilityBloc.state.salesOrgConfigs;
 
-    final finalOrderItems = order.items
+    final finalOrderItems = widget.order.items
         .map((item) {
           if (item.type.isBundle) {
             final hasAnyValidMaterial = item.materials.any(
               (material) =>
-                  state.materialDetails[material.queryInfo]?.price
+                  priceState.materialDetails[material.queryInfo]?.price
                       .isValidMaterial ==
                   true,
             );
 
             if (hasAnyValidMaterial) {
               return CartItem.bundleFromOrder(
-                priceDetailMap: state.materialDetails,
+                priceDetailMap: priceState.materialDetails,
                 savedItem: item,
                 salesConfigs: salesConfigs,
               );
@@ -192,7 +263,8 @@ class OrderTemplateDetailPage extends StatelessWidget {
           }
 
           return CartItem.materialFromOrder(
-            priceDetailMap: state.materialDetails,
+            priceDetailMap: priceState.materialDetails,
+            tenderContractMap: tenderContractState.tenderContracts,
             material: item,
             salesConfigs: salesConfigs,
           );
@@ -200,16 +272,17 @@ class OrderTemplateDetailPage extends StatelessWidget {
         .whereType<CartItem>()
         .toList();
 
-    cartBloc.add(CartEvent.replaceWithOrderItems(
-      items: finalOrderItems,
-      customerCodeInfo: context.read<EligibilityBloc>().state.customerCodeInfo,
-      salesOrganisation:
-          context.read<EligibilityBloc>().state.salesOrganisation,
-      salesOrganisationConfigs: salesConfigs,
-      shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
-      doNotallowOutOfStockMaterial:
-          context.read<EligibilityBloc>().state.doNotAllowOutOfStockMaterials,
-    ));
+    cartBloc.add(
+      CartEvent.replaceWithOrderItems(
+        items: finalOrderItems,
+        customerCodeInfo: elibilityBloc.state.customerCodeInfo,
+        salesOrganisation: elibilityBloc.state.salesOrganisation,
+        salesOrganisationConfigs: salesConfigs,
+        shipToInfo: elibilityBloc.state.shipToInfo,
+        doNotallowOutOfStockMaterial:
+            elibilityBloc.state.doNotAllowOutOfStockMaterials,
+      ),
+    );
 
     context.router.pushNamed('cart_page');
     locator<CountlyService>().addCountlyEvent('Use template');
@@ -222,10 +295,10 @@ class OrderTemplateDetailPage extends StatelessWidget {
       context: context,
       title: 'Delete Order Template?',
       message: 'Are you sure you want to delete this Order Template?',
-      onAcceptPressed: () async{
+      onAcceptPressed: () async {
         context.read<OrderTemplateListBloc>().add(
               OrderTemplateListEvent.delete(
-                order,
+                widget.order,
               ),
             );
         await context.router.pop();

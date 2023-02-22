@@ -22,10 +22,10 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
-import 'package:ezrxmobile/domain/core/aggregate/bonus_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
@@ -35,27 +35,23 @@ import 'package:ezrxmobile/domain/order/entities/order_history.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_basic_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_messages.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items_details.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items_tender_contract_details.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_document_buffer.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
-import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/common/permission.dart';
-import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_history_details_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_history_local.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/order_history_details_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/order_history_repository.dart';
-import 'package:ezrxmobile/presentation/history/history_details.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/tender_contract_repository.dart';
+import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/history/detail/history_details.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -130,9 +126,12 @@ class FavouriteBlocMock extends MockBloc<FavouriteEvent, FavouriteState>
 
 class PermissionServiceMock extends Mock implements PermissionService {}
 
+class TenderContractRepositoryMock extends Mock
+    implements TenderContractRepository {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
-  late GetIt locator;
+  WidgetsFlutterBinding.ensureInitialized();
   final mockOrderHistoryListBloc = OrderHistoryListBlocMock();
   final mockOrderHistoryFilterBloc = OrderHistoryFilterMockBloc();
   final mockOrderHistoryDetailsBloc = OrderHistoryDetailsMockBloc();
@@ -142,7 +141,6 @@ void main() {
   final userBlocMock = UserBlocMock();
   final tenderContractMockBloc = TenderContractMockBloc();
   late CustomerCodeBloc customerCodeBlocMock;
-  late MockHTTPService mockHTTPService;
   late MockAppRouter autoRouterMock;
 
   late OrderHistoryDetails orderHistoryDetails;
@@ -150,12 +148,10 @@ void main() {
   late MaterialPriceDetailBloc materialPriceDetailBlocMock;
   late PoAttachmentBloc downloadAttachmentBlocMock;
   late OrderHistory orderHistory;
-  late OrderHistoryDetailsRepository orderHistoryDetailsRepository;
   late MaterialPriceBlocMock materialPriceBlocMock;
   late AddToCartBlocMock addToCartBlocMock;
   late TenderContractBlocMock tenderContractBlocMock;
   late FavouriteBlocMock favouriteBlocMock;
-  late OrderHistory mockOrderHistoryItem;
   late PermissionService permissionService;
 
   final fakeUser = User.empty().copyWith(
@@ -167,37 +163,32 @@ void main() {
   );
 
   setUpAll(() async {
-    orderHistoryDetailsRepository = MockOrderHistoryDetailsRepository();
-    TestWidgetsFlutterBinding.ensureInitialized();
-    locator = GetIt.instance;
+    final tenderRepositoryMock = TenderContractRepositoryMock();
+    registerFallbackValue(MaterialNumber('fake-number'));
+    registerFallbackValue(CustomerCodeInfo.empty());
+    registerFallbackValue(SalesOrganisation.empty());
+    registerFallbackValue(ShipToInfo.empty());
+    when(
+      () => tenderRepositoryMock.getTenderContractDetails(
+        materialNumber: any(named: 'materialNumber'),
+        customerCodeInfo: any(named: 'customerCodeInfo'),
+        salesOrganisation: any(named: 'salesOrganisation'),
+        shipToInfo: any(named: 'shipToInfo'),
+      ),
+    ).thenAnswer((_) async => const Right([]));
+    locator
+        .registerFactory<TenderContractRepository>(() => tenderRepositoryMock);
+
+    locator.registerLazySingleton(() => permissionService);
     orderHistoryDetails =
         await OrderHistoryDetailsLocalDataSource().getOrderHistoryDetails();
     orderHistory = await OrderHistoryLocalDataSource().getOrderHistory();
     permissionService = PermissionServiceMock();
-    locator.registerLazySingleton(() => MockAppRouter());
-    locator.registerLazySingleton(() => locator<CountlyService>());
-    locator.registerLazySingleton(() => mockOrderHistoryListBloc);
-    locator.registerLazySingleton(() => mockOrderHistoryDetailsBloc);
-    locator.registerLazySingleton(() => mockShipToCodeBloc);
-    locator.registerLazySingleton(() => mockCartBloc);
-    locator.registerLazySingleton(() => mockSalesOrgBloc);
-    locator.registerLazySingleton(() => tenderContractMockBloc);
-    locator.registerLazySingleton(() => orderHistoryDetailsRepository);
-    locator.registerLazySingleton(() => permissionService);
-
-    autoRouterMock = locator<MockAppRouter>();
-    mockHTTPService = MockHTTPService();
-    customerCodeBlocMock = CustomerCodeBlocMock();
-
-    locator.registerLazySingleton<HttpService>(
-      () => mockHTTPService,
-    );
-
-    mockOrderHistoryItem =
-        await OrderHistoryLocalDataSource().getOrderHistory();
+    autoRouterMock = MockAppRouter();
   });
   group('Order History Details', () {
     setUp(() {
+      customerCodeBlocMock = CustomerCodeBlocMock();
       eligibilityBlocMock = EligibilityBlocMock();
       materialPriceDetailBlocMock = MockMaterialPriceDetailBloc();
       downloadAttachmentBlocMock = MockDownloadAttachmentBloc();
@@ -299,7 +290,7 @@ void main() {
           customerCodeInfo: CustomerCodeInfo.empty(),
           orderHistoryBasicInfo:
               OrderHistoryBasicInfo.empty().copyWith(soldTo: 'slkfjdl'),
-          orderHistoryItem: mockOrderHistoryItem.orderHistoryItems[0],
+          orderHistoryItem: orderHistory.orderHistoryItems[0],
           salesOrgConfigs: SalesOrganisationConfigs.empty(),
         )),
       );
@@ -348,13 +339,13 @@ void main() {
               ),
             ],
           ));
+
       whenListen(
-          tenderContractBlocMock,
+          materialPriceDetailBlocMock,
           Stream.fromIterable([
-            TenderContractState.initial(),
-            TenderContractState.initial().copyWith(
+            MaterialPriceDetailState.initial(),
+            MaterialPriceDetailState.initial().copyWith(
               isFetching: true,
-              selectedTenderContract: TenderContract.empty(),
             ),
           ]));
 
@@ -366,6 +357,7 @@ void main() {
           ),
         ),
       );
+      await tester.pump();
       await tester.pump();
       final reorder = find.byKey(const Key('reorder'));
       expect(reorder, findsOneWidget);
@@ -864,10 +856,10 @@ void main() {
           isFetching: false,
           materialDetails: {
             MaterialQueryInfo.fromOrderHistory(
-                orderHistoryItem: mockOrderHistoryItem
-                    .orderHistoryItems[0]): MaterialPriceDetail.empty()
-                .copyWith
-                .price(isValidMaterial: false),
+                    orderHistoryItem: orderHistory.orderHistoryItems[0]):
+                MaterialPriceDetail.empty()
+                    .copyWith
+                    .price(isValidMaterial: false),
           },
         ),
       );
@@ -909,14 +901,14 @@ void main() {
           isFetching: false,
           materialDetails: {
             MaterialQueryInfo.fromOrderHistory(
-                orderHistoryItem: mockOrderHistoryItem
-                    .orderHistoryItems[0]): MaterialPriceDetail.empty()
-                .copyWith
-                .price(
-                  isValidMaterial: false,
-                )
-                .copyWith
-                .info(hasValidTenderContract: true),
+                    orderHistoryItem: orderHistory.orderHistoryItems[0]):
+                MaterialPriceDetail.empty()
+                    .copyWith
+                    .price(
+                      isValidMaterial: false,
+                    )
+                    .copyWith
+                    .info(hasValidTenderContract: true),
           },
         ),
       );
@@ -942,29 +934,23 @@ void main() {
 
     testWidgets('fetch tender contract test with valid tender contract',
         (tester) async {
-      final bonusItemList = [
-        OrderHistoryDetailsBonusAggregate(
-          orderItem: orderHistoryDetails.orderHistoryDetailsOrderItem.first
-              .copyWith(
-                  isTenderContractMaterial: true,
-                  sAPStatus: SAPStatus('Order Placed'),
-                  materialNumber: MaterialNumber('000001234')),
-          details:
-              orderHistoryDetails.orderHistoryDetailsOrderItem.first.details,
-          tenderContractDetails:
-              OrderHistoryDetailsOrderItemTenderContractDetails.empty(),
-          bonusList: <OrderHistoryDetailsOrderItem>[],
+      final items = [
+        orderHistoryDetails.orderHistoryDetailsOrderItem.first.copyWith(
+          isTenderContractMaterial: true,
+          sAPStatus: SAPStatus('Order Placed'),
+          materialNumber: MaterialNumber('000001234'),
         ),
       ];
       when(() => autoRouterMock.pushNamed('cart_page'))
           .thenAnswer((invocation) async => true);
       when(() => mockOrderHistoryDetailsBloc.state).thenReturn(
         OrderHistoryDetailsState.initial().copyWith(
-          orderHistoryDetails: OrderHistoryDetails.empty(),
+          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+            orderHistoryDetailsOrderItem: items,
+          ),
           failureOrSuccessOption: none(),
           isLoading: false,
           showErrorMessage: false,
-          bonusItem: bonusItemList,
         ),
       );
       when(() => materialPriceDetailBlocMock.state).thenReturn(
@@ -973,16 +959,16 @@ void main() {
           isFetching: false,
           materialDetails: {
             MaterialQueryInfo.fromOrderHistory(
-                orderHistoryItem: mockOrderHistoryItem
-                    .orderHistoryItems[0]): MaterialPriceDetail.empty()
-                .copyWith
-                .price(
-                  isValidMaterial: false,
-                )
-                .copyWith
-                .info(hasValidTenderContract: true)
-                .copyWith
-                .info(materialNumber: MaterialNumber('000001234')),
+                    orderHistoryItem: orderHistory.orderHistoryItems[0]):
+                MaterialPriceDetail.empty()
+                    .copyWith
+                    .price(
+                      isValidMaterial: false,
+                    )
+                    .copyWith
+                    .info(hasValidTenderContract: true)
+                    .copyWith
+                    .info(materialNumber: MaterialNumber('000001234')),
           },
         ),
       );
@@ -1003,7 +989,6 @@ void main() {
       final addToCartPressed = find.byKey(const Key('addToCartPressed'));
       expect(addToCartPressed, findsOneWidget);
       await tester.tap(addToCartPressed);
-      await tester.pumpAndSettle(const Duration(milliseconds: 50));
     });
 
     testWidgets('dispalyPrice test ', (tester) async {
@@ -1026,27 +1011,25 @@ void main() {
 
     testWidgets('order summary bonus details  test When Product Not Available',
         (tester) async {
-      final bonusItemList = [
-        OrderHistoryDetailsBonusAggregate(
-          orderItem:
-              orderHistoryDetails.orderHistoryDetailsOrderItem.first.copyWith(
-            plannedDeliveryDate: DateTimeStringValue('12/01/22'),
-            sAPStatus: SAPStatus('Order Placed'),
+      final items = [
+        orderHistoryDetails.orderHistoryDetailsOrderItem.first.copyWith(
+          plannedDeliveryDate: DateTimeStringValue('12/01/22'),
+          sAPStatus: SAPStatus('Order Placed'),
+        ),
+        ...orderHistoryDetails.orderHistoryDetailsOrderItem.map(
+          (e) => e.copyWith(
+            type: OrderItemType('non-com'),
           ),
-          details:
-              orderHistoryDetails.orderHistoryDetailsOrderItem.first.details,
-          tenderContractDetails:
-              OrderHistoryDetailsOrderItemTenderContractDetails.empty(),
-          bonusList: orderHistoryDetails.orderHistoryDetailsOrderItem,
         ),
       ];
       when(() => mockOrderHistoryDetailsBloc.state).thenReturn(
         OrderHistoryDetailsState.initial().copyWith(
-          orderHistoryDetails: orderHistoryDetails,
+          orderHistoryDetails: orderHistoryDetails.copyWith(
+            orderHistoryDetailsOrderItem: items,
+          ),
           failureOrSuccessOption: none(),
           showErrorMessage: false,
           isLoading: true,
-          bonusItem: bonusItemList,
         ),
       );
       final expectedStates = [
@@ -1108,27 +1091,25 @@ void main() {
 
     testWidgets('order summary bonus details  test When Product is Available',
         (tester) async {
-      final bonusItemList = [
-        OrderHistoryDetailsBonusAggregate(
-          orderItem:
-              orderHistoryDetails.orderHistoryDetailsOrderItem.first.copyWith(
-            plannedDeliveryDate: DateTimeStringValue('12/01/22'),
-            sAPStatus: SAPStatus(''),
+      final items = [
+        orderHistoryDetails.orderHistoryDetailsOrderItem.first.copyWith(
+          plannedDeliveryDate: DateTimeStringValue('12/01/22'),
+          sAPStatus: SAPStatus(''),
+        ),
+        ...orderHistoryDetails.orderHistoryDetailsOrderItem.map(
+          (e) => e.copyWith(
+            type: OrderItemType('non-com'),
           ),
-          details:
-              orderHistoryDetails.orderHistoryDetailsOrderItem.first.details,
-          tenderContractDetails:
-              OrderHistoryDetailsOrderItemTenderContractDetails.empty(),
-          bonusList: orderHistoryDetails.orderHistoryDetailsOrderItem,
         ),
       ];
       when(() => mockOrderHistoryDetailsBloc.state).thenReturn(
         OrderHistoryDetailsState.initial().copyWith(
-          orderHistoryDetails: orderHistoryDetails,
+          orderHistoryDetails: orderHistoryDetails.copyWith(
+            orderHistoryDetailsOrderItem: items,
+          ),
           failureOrSuccessOption: none(),
           showErrorMessage: false,
           isLoading: false,
-          bonusItem: bonusItemList,
         ),
       );
       when(() => eligibilityBlocMock.state).thenReturn(
@@ -1148,7 +1129,7 @@ void main() {
         )),
       );
       final materialPriceVal = <MaterialNumber, Price>{
-        bonusItemList.first.orderItem.materialNumber: Price.empty()
+        items.first.materialNumber: Price.empty()
       };
       when(() => materialPriceBlocMock.state).thenReturn(
         MaterialPriceState.initial().copyWith(
@@ -1195,27 +1176,20 @@ void main() {
 
     testWidgets('order summary item details test When Product Not Available',
         (tester) async {
-      final bonusItemList = [
-        OrderHistoryDetailsBonusAggregate(
-          orderItem:
-              orderHistoryDetails.orderHistoryDetailsOrderItem.first.copyWith(
-            plannedDeliveryDate: DateTimeStringValue('12/01/22'),
-            sAPStatus: SAPStatus('Order Placed'),
-          ),
-          details:
-              orderHistoryDetails.orderHistoryDetailsOrderItem.first.details,
-          tenderContractDetails:
-              OrderHistoryDetailsOrderItemTenderContractDetails.empty(),
-          bonusList: <OrderHistoryDetailsOrderItem>[],
+      final items = [
+        orderHistoryDetails.orderHistoryDetailsOrderItem.first.copyWith(
+          plannedDeliveryDate: DateTimeStringValue('12/01/22'),
+          sAPStatus: SAPStatus('Order Placed'),
         ),
       ];
       when(() => mockOrderHistoryDetailsBloc.state).thenReturn(
         OrderHistoryDetailsState.initial().copyWith(
-          orderHistoryDetails: orderHistoryDetails,
+          orderHistoryDetails: orderHistoryDetails.copyWith(
+            orderHistoryDetailsOrderItem: items,
+          ),
           failureOrSuccessOption: none(),
           isLoading: true,
           showErrorMessage: false,
-          bonusItem: bonusItemList,
         ),
       );
       final expectedStates = [
@@ -1294,27 +1268,20 @@ void main() {
         (tester) async {
       final materialNumber = orderHistoryDetails
           .orderHistoryDetailsOrderItem.first.materialNumber.displayMatNo;
-      final bonusItemList = [
-        OrderHistoryDetailsBonusAggregate(
-          orderItem:
-              orderHistoryDetails.orderHistoryDetailsOrderItem.first.copyWith(
-            plannedDeliveryDate: DateTimeStringValue('12/01/22'),
-            sAPStatus: SAPStatus(''),
-          ),
-          details:
-              orderHistoryDetails.orderHistoryDetailsOrderItem.first.details,
-          tenderContractDetails:
-              OrderHistoryDetailsOrderItemTenderContractDetails.empty(),
-          bonusList: <OrderHistoryDetailsOrderItem>[],
+      final items = [
+        orderHistoryDetails.orderHistoryDetailsOrderItem.first.copyWith(
+          plannedDeliveryDate: DateTimeStringValue('12/01/22'),
+          sAPStatus: SAPStatus(''),
         ),
       ];
       when(() => mockOrderHistoryDetailsBloc.state).thenReturn(
         OrderHistoryDetailsState.initial().copyWith(
-          orderHistoryDetails: orderHistoryDetails,
+          orderHistoryDetails: orderHistoryDetails.copyWith(
+            orderHistoryDetailsOrderItem: items,
+          ),
           failureOrSuccessOption: none(),
           isLoading: false,
           showErrorMessage: false,
-          bonusItem: bonusItemList,
         ),
       );
       when(() => eligibilityBlocMock.state).thenReturn(
@@ -1343,7 +1310,7 @@ void main() {
         )),
       );
       final materialPriceVal = <MaterialNumber, Price>{
-        bonusItemList.first.orderItem.materialNumber: Price.empty()
+        items.first.materialNumber: Price.empty()
             .copyWith(materialNumber: MaterialNumber(materialNumber)),
       };
       when(() => materialPriceBlocMock.state).thenReturn(
@@ -1391,25 +1358,20 @@ void main() {
     testWidgets(
         'order summary TenderContract details test When sapStatus is not empty',
         (tester) async {
-      final bonusItemList = [
-        OrderHistoryDetailsBonusAggregate(
-          orderItem: orderHistoryDetails.orderHistoryDetailsOrderItem.first
-              .copyWith(isTenderContractMaterial: true),
-          details: <OrderHistoryDetailsOrderItemDetails>[],
-          tenderContractDetails:
-              OrderHistoryDetailsOrderItemTenderContractDetails.empty(),
-          bonusList: <OrderHistoryDetailsOrderItem>[],
-        ),
+      final items = [
+        orderHistoryDetails.orderHistoryDetailsOrderItem.first
+            .copyWith(isTenderContractMaterial: true),
       ];
       when(() => mockOrderHistoryDetailsBloc.state).thenReturn(
         OrderHistoryDetailsState.initial().copyWith(
-          orderHistoryDetails: orderHistoryDetails,
+          orderHistoryDetails: orderHistoryDetails.copyWith(
+            orderHistoryDetailsOrderItem: items,
+          ),
           failureOrSuccessOption: optionOf(
             const Left(ApiFailure.other('Fake Error')),
           ),
           isLoading: true,
           showErrorMessage: false,
-          bonusItem: bonusItemList,
         ),
       );
       final expectedStates = [
@@ -1447,26 +1409,20 @@ void main() {
     testWidgets(
         'order summary TenderContract details test When sapStatus is empty',
         (tester) async {
-      final bonusItemList = [
-        OrderHistoryDetailsBonusAggregate(
-          orderItem:
-              orderHistoryDetails.orderHistoryDetailsOrderItem.first.copyWith(
-            isTenderContractMaterial: true,
-            sAPStatus: SAPStatus(''),
-          ),
-          details: <OrderHistoryDetailsOrderItemDetails>[],
-          tenderContractDetails:
-              OrderHistoryDetailsOrderItemTenderContractDetails.empty(),
-          bonusList: <OrderHistoryDetailsOrderItem>[],
+      final items = [
+        orderHistoryDetails.orderHistoryDetailsOrderItem.first.copyWith(
+          isTenderContractMaterial: true,
+          sAPStatus: SAPStatus(','),
         ),
       ];
       when(() => mockOrderHistoryDetailsBloc.state).thenReturn(
         OrderHistoryDetailsState.initial().copyWith(
-          orderHistoryDetails: orderHistoryDetails,
+          orderHistoryDetails: orderHistoryDetails.copyWith(
+            orderHistoryDetailsOrderItem: items,
+          ),
           failureOrSuccessOption: none(),
           isLoading: false,
           showErrorMessage: false,
-          bonusItem: bonusItemList,
         ),
       );
       when(() => eligibilityBlocMock.state).thenReturn(

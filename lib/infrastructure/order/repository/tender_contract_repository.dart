@@ -5,9 +5,9 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
-import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/repository/i_tender_contract_repository.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/tender_contract_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/tender_contract_remote.dart';
 
@@ -24,7 +24,7 @@ class TenderContractRepository implements ITenderContractRepository {
 
   @override
   Future<Either<ApiFailure, List<TenderContract>>> getTenderContractDetails({
-    required MaterialInfo material,
+    required MaterialNumber materialNumber,
     required CustomerCodeInfo customerCodeInfo,
     required SalesOrganisation salesOrganisation,
     required ShipToInfo shipToInfo,
@@ -42,7 +42,7 @@ class TenderContractRepository implements ITenderContractRepository {
       try {
         final tenderContractDetails =
             await tenderContractRemoteDataSource.getTenderContractDetails(
-          materialNumber: material.materialNumber.getValue(),
+          materialNumber: materialNumber.getValue(),
           salesOrg: salesOrganisation.salesOrg.getValue(),
           selectedCustomerCode: customerCodeInfo.customerCodeSoldTo,
           shipTo: shipToInfo.shipToCustomerCode,

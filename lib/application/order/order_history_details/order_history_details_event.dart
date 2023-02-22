@@ -1,4 +1,3 @@
-
 part of 'order_history_details_bloc.dart';
 
 @freezed
@@ -8,5 +7,8 @@ class OrderHistoryDetailsEvent with _$OrderHistoryDetailsEvent {
     required User user,
     required OrderHistoryItem orderHistoryItem,
   }) = _Fetch;
+  const factory OrderHistoryDetailsEvent.updateMaterialTenderContract({
+    required TenderContract selectedTenderContract,
+    required MaterialQueryInfo queryInfo,
+  }) = _UpdateMaterialTenderContract;
 }
-

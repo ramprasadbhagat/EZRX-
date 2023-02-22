@@ -3,6 +3,7 @@ import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_filter/order_history_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_filter_by_status/order_history_filter_by_status_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
@@ -311,8 +312,9 @@ class HistoryTab extends StatelessWidget {
                                               .textTheme
                                               .titleSmall
                                               ?.copyWith(
-                                                  fontSize: 12,
-                                                  fontStyle: FontStyle.italic,),
+                                                fontSize: 12,
+                                                fontStyle: FontStyle.italic,
+                                              ),
                                         ),
                                       ),
                                     ],
@@ -335,6 +337,10 @@ class HistoryTab extends StatelessWidget {
                                       .read<OrderHistoryFilterByStatusBloc>()
                                       .add(
                                         const OrderHistoryFilterByStatusEvent
+                                            .initialized(),
+                                      );
+                                  context.read<MaterialPriceDetailBloc>().add(
+                                        const MaterialPriceDetailEvent
                                             .initialized(),
                                       );
                                   context.read<OrderHistoryListBloc>().add(

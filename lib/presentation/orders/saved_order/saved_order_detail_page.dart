@@ -1,14 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:collection/collection.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
+import 'package:ezrxmobile/application/order/tender_contract/tender_contract_list_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
@@ -28,7 +25,7 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SavedOrderDetailPage extends StatelessWidget {
+class SavedOrderDetailPage extends StatefulWidget {
   final SavedOrder order;
   const SavedOrderDetailPage({
     Key? key,
@@ -36,33 +33,61 @@ class SavedOrderDetailPage extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    locator<CountlyService>().recordCountlyView('Saved Order Details Screen');
+  State<SavedOrderDetailPage> createState() => _SavedOrderDetailPageState();
+}
 
+class _SavedOrderDetailPageState extends State<SavedOrderDetailPage> {
+  late EligibilityBloc eligibilityBloc;
+  @override
+  void initState() {
+    super.initState();
+    eligibilityBloc = context.read<EligibilityBloc>();
+    locator<CountlyService>().recordCountlyView('Saved Order Details Screen');
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) {
+        context.read<MaterialPriceDetailBloc>().add(
+              MaterialPriceDetailEvent.fetch(
+                user: eligibilityBloc.state.user,
+                customerCode: eligibilityBloc.state.customerCodeInfo,
+                salesOrganisation: eligibilityBloc.state.salesOrganisation,
+                salesOrganisationConfigs: eligibilityBloc.state.salesOrgConfigs,
+                shipToCode: eligibilityBloc.state.shipToInfo,
+                materialInfoList: _getMaterialList(widget.order.items),
+                pickAndPack: eligibilityBloc.state.getPNPValueMaterial,
+              ),
+            );
+      },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       key: const Key('savedOrderDetailPage'),
       backgroundColor: ZPColors.white,
       appBar: AppBar(
-        title: Text('#${order.id}'),
+        title: Text('#${widget.order.id}'),
       ),
       body: RefreshIndicator(
         key: const ValueKey('savedDetailRefreshIndicator'),
         color: ZPColors.primary,
-        onRefresh: () async => context.read<MaterialPriceDetailBloc>().add(
-              MaterialPriceDetailEvent.refresh(
-                user: context.read<UserBloc>().state.user,
-                customerCode:
-                    context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                salesOrganisation:
-                    context.read<SalesOrgBloc>().state.salesOrganisation,
-                salesOrganisationConfigs:
-                    context.read<SalesOrgBloc>().state.configs,
-                shipToCode: context.read<ShipToCodeBloc>().state.shipToInfo,
-                materialInfoList: _getMaterialList(order.items),
-                pickAndPack:
-                    context.read<EligibilityBloc>().state.getPNPValueMaterial,
-              ),
-            ),
+        onRefresh: () async {
+          context.read<TenderContractListBloc>().add(
+                const TenderContractListEvent.initialize(),
+              );
+          context.read<MaterialPriceDetailBloc>().add(
+                MaterialPriceDetailEvent.refresh(
+                  user: eligibilityBloc.state.user,
+                  customerCode: eligibilityBloc.state.customerCodeInfo,
+                  salesOrganisation: eligibilityBloc.state.salesOrganisation,
+                  salesOrganisationConfigs:
+                      eligibilityBloc.state.salesOrgConfigs,
+                  shipToCode: eligibilityBloc.state.shipToInfo,
+                  materialInfoList: _getMaterialList(widget.order.items),
+                  pickAndPack: eligibilityBloc.state.getPNPValueMaterial,
+                ),
+              );
+        },
         child: CustomScrollView(
           slivers: [
             SliverToBoxAdapter(
@@ -73,7 +98,7 @@ class SavedOrderDetailPage extends StatelessWidget {
                 builder: (context, state) {
                   return OrderInvalidWarning(
                     isLoading: state.isValidating,
-                    isInvalidOrder: order.allMaterialQueryInfo.every(
+                    isInvalidOrder: widget.order.allMaterialQueryInfo.every(
                       (item) => !state.isValidMaterial(
                         query: item,
                       ),
@@ -89,7 +114,7 @@ class SavedOrderDetailPage extends StatelessWidget {
                 return SliverList(
                   delegate: SliverChildBuilderDelegate(
                     (context, index) {
-                      var material = order.items[index];
+                      var material = widget.order.items[index];
                       final materialPrice =
                           state.materialDetails[material.queryInfo]?.price ??
                               Price.empty();
@@ -129,27 +154,67 @@ class SavedOrderDetailPage extends StatelessWidget {
                         ],
                       );
                     },
-                    childCount: order.items.length,
+                    childCount: widget.order.items.length,
                   ),
                 );
               },
             ),
             SliverToBoxAdapter(
-              child: BlocBuilder<MaterialPriceDetailBloc,
+              child: BlocConsumer<MaterialPriceDetailBloc,
                   MaterialPriceDetailState>(
+                listenWhen: (previous, current) =>
+                    previous.isValidating != current.isValidating ||
+                    previous.isFetching != current.isFetching,
+                listener: (context, state) {
+                  if (!state.isFetching && !state.isValidating) {
+                    final materialNumberWithTenderContract = widget.order.items
+                        .where(
+                          (item) =>
+                              !item.type.isBundle &&
+                              state.materialDetails[item.queryInfo]?.info
+                                      .hasValidTenderContract ==
+                                  true,
+                        )
+                        .map((item) => item.materialNumber)
+                        .toList();
+                    context.read<TenderContractListBloc>().add(
+                          TenderContractListEvent.fetch(
+                            salesOrganisation:
+                                eligibilityBloc.state.salesOrganisation,
+                            customerCodeInfo:
+                                eligibilityBloc.state.customerCodeInfo,
+                            shipToInfo: eligibilityBloc.state.shipToInfo,
+                            materialNumbers: materialNumberWithTenderContract,
+                          ),
+                        );
+                  }
+                },
                 buildWhen: (previous, current) =>
                     previous.isValidating != current.isValidating ||
                     previous.isFetching != current.isFetching,
                 builder: (context, state) {
-                  return OrderActionButton(
-                    onAddToCartPressed: () => _addToCartPressed(context, state),
-                    onDeletePressed: () => _deletePressed(context),
-                    enableAddToCart: order.allMaterialQueryInfo.any(
-                      (item) => state.isValidMaterial(
-                        query: item,
-                      ),
-                    ),
-                    isLoading: state.isFetching || state.isValidating,
+                  return BlocBuilder<TenderContractListBloc,
+                      TenderContractListState>(
+                    buildWhen: (previous, current) =>
+                        previous.isFetching != current.isFetching,
+                    builder: (context, tenderState) {
+                      return OrderActionButton(
+                        onAddToCartPressed: () => _addToCartPressed(
+                          context,
+                          state,
+                          tenderState,
+                        ),
+                        onDeletePressed: () => _deletePressed(context),
+                        enableAddToCart: widget.order.allMaterialQueryInfo.any(
+                          (item) => state.isValidMaterial(
+                            query: item,
+                          ),
+                        ),
+                        isLoading: state.isFetching ||
+                            state.isValidating ||
+                            tenderState.isFetching,
+                      );
+                    },
                   );
                 },
               ),
@@ -177,8 +242,9 @@ class SavedOrderDetailPage extends StatelessWidget {
 
   List<CartItem> _getUniqueItems({
     required List<MaterialItem> items,
-    required MaterialPriceDetailState state,
+    required MaterialPriceDetailState priceState,
     required SalesOrganisationConfigs salesConfigs,
+    required TenderContractListState tenderContractState,
   }) {
     final newList = List<MaterialItem>.from(items);
     final groupByList = items
@@ -199,42 +265,48 @@ class SavedOrderDetailPage extends StatelessWidget {
     return newList
         .map((item) => item.type.isBundle
             ? CartItem.bundleFromOrder(
-                priceDetailMap: state.materialDetails,
+                priceDetailMap: priceState.materialDetails,
                 savedItem: item,
                 salesConfigs: salesConfigs,
               )
             : CartItem.materialFromOrder(
-                priceDetailMap: state.materialDetails,
+                priceDetailMap: priceState.materialDetails,
                 material: item,
                 salesConfigs: salesConfigs,
+                tenderContractMap: tenderContractState.tenderContracts,
               ))
         .toList();
   }
 
-  void _addToCartPressed(BuildContext context, MaterialPriceDetailState state) {
+  void _addToCartPressed(
+    BuildContext context,
+    MaterialPriceDetailState priceState,
+    TenderContractListState tenderContractState,
+  ) {
     final cartBloc = context.read<CartBloc>();
-    final salesConfigs = context.read<EligibilityBloc>().state.salesOrgConfigs;
-    cartBloc.add(CartEvent.replaceWithOrderItems(
-      items: _getUniqueItems(
-        items: order.items,
-        state: state,
-        salesConfigs: salesConfigs,
+    final salesConfigs = eligibilityBloc.state.salesOrgConfigs;
+    cartBloc.add(
+      CartEvent.replaceWithOrderItems(
+        items: _getUniqueItems(
+          items: widget.order.items,
+          priceState: priceState,
+          salesConfigs: salesConfigs,
+          tenderContractState: tenderContractState,
+        ),
+        customerCodeInfo: eligibilityBloc.state.customerCodeInfo,
+        salesOrganisation: eligibilityBloc.state.salesOrganisation,
+        salesOrganisationConfigs: salesConfigs,
+        shipToInfo: eligibilityBloc.state.shipToInfo,
+        doNotallowOutOfStockMaterial:
+            eligibilityBloc.state.doNotAllowOutOfStockMaterials,
       ),
-      customerCodeInfo: context.read<EligibilityBloc>().state.customerCodeInfo,
-      salesOrganisation:
-          context.read<EligibilityBloc>().state.salesOrganisation,
-      salesOrganisationConfigs: salesConfigs,
-      shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
-      doNotallowOutOfStockMaterial:
-          context.read<EligibilityBloc>().state.doNotAllowOutOfStockMaterials,
-    ));
+    );
 
     context.read<AdditionalDetailsBloc>().add(
           AdditionalDetailsEvent.initFromSavedOrder(
-            config: context.read<EligibilityBloc>().state.salesOrgConfigs,
-            customerCodeInfo:
-                context.read<CustomerCodeBloc>().state.customerCodeInfo,
-            orderId: order.id,
+            config: salesConfigs,
+            customerCodeInfo: eligibilityBloc.state.customerCodeInfo,
+            orderId: widget.order.id,
           ),
         );
     context.router.pushNamed('cart_page');
@@ -251,8 +323,8 @@ class SavedOrderDetailPage extends StatelessWidget {
       onAcceptPressed: () async {
         context.read<SavedOrderListBloc>().add(
               SavedOrderListEvent.delete(
-                order: order,
-                user: context.read<UserBloc>().state.user,
+                order: widget.order,
+                user: eligibilityBloc.state.user,
               ),
             );
         await context.router.pop();

@@ -8,6 +8,7 @@ import 'package:ezrxmobile/application/order/additional_details/additional_detai
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
+import 'package:ezrxmobile/application/order/tender_contract/tender_contract_list_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
@@ -78,6 +79,10 @@ class AdditionalDetailsBlocMock
     extends MockBloc<AdditionalDetailsEvent, AdditionalDetailsState>
     implements AdditionalDetailsBloc {}
 
+class TenderContractListBlocMock
+    extends MockBloc<TenderContractListEvent, TenderContractListState>
+    implements TenderContractListBloc {}
+
 void main() {
   late UserBloc userBlocMock;
   late SalesOrgBloc salesOrgBlocMock;
@@ -91,6 +96,7 @@ void main() {
   late AppRouter autoRouterMock;
   late SavedOrderListBlocMock savedOrderListBlocMock;
   late AdditionalDetailsBlocMock additionalDetailsMockBloc;
+  late TenderContractListBloc tenderContractListBlocMock;
   final locator = GetIt.instance;
   final fakeUser = User.empty().copyWith(
     username: Username('fake-user'),
@@ -122,6 +128,7 @@ void main() {
     eligibilityBlocMock = MockEligibilityBloc();
     savedOrderListBlocMock = SavedOrderListBlocMock();
     additionalDetailsMockBloc = AdditionalDetailsBlocMock();
+    tenderContractListBlocMock = TenderContractListBlocMock();
 
     when(() => userBlocMock.state).thenReturn(
       UserState.initial().copyWith(
@@ -142,6 +149,8 @@ void main() {
         .thenReturn(SavedOrderListState.initial());
     when(() => additionalDetailsMockBloc.state)
         .thenReturn(AdditionalDetailsState.initial());
+    when(() => tenderContractListBlocMock.state)
+        .thenReturn(TenderContractListState.initial());
   });
 
   Widget savedOrderDetailPage(Widget child) => WidgetUtils.getScopedWidget(
@@ -171,6 +180,9 @@ void main() {
         ),
         BlocProvider<AdditionalDetailsBloc>(
           create: (context) => additionalDetailsMockBloc,
+        ),
+        BlocProvider<TenderContractListBloc>(
+          create: (context) => tenderContractListBlocMock,
         ),
       ],
       child: child);
@@ -367,7 +379,7 @@ void main() {
                     )
                     .toList()),
           ),
-        ).called(2);
+        ).called(1);
       },
     );
 
@@ -495,7 +507,7 @@ void main() {
         verify(() => SavedOrderListEvent.delete(
               order: orderMock,
               user: userBlocMock.state.user,
-            )).called(2);
+            )).called(1);
         // expect(autoRouterMock.current.name, const CartPageRoute().routeName);
       },
     );

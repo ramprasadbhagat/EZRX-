@@ -32,9 +32,11 @@ class UserRestrictionDetailsBlocMock
 class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
     implements EligibilityBloc {}
 
-class UserRestrictionListBlocMock extends MockBloc<UserRestrictionListEvent,UserRestrictionListState> implements UserRestrictionListBloc {}
+class UserRestrictionListBlocMock
+    extends MockBloc<UserRestrictionListEvent, UserRestrictionListState>
+    implements UserRestrictionListBloc {}
 
-class CartBlocMock extends MockBloc<CartEvent,CartState> implements CartBloc{}
+class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
 
 void main() {
   late UserRestrictionDetailsBloc userRestrictionDetailsMockBloc;
@@ -42,7 +44,6 @@ void main() {
   late UserRestrictionListBloc userRestrictionListBlocMock;
   late CartBloc cartBlocMock;
   late AppRouter autoRouterMock;
-  final returnApprovalLimitFormKey = GlobalKey<FormState>();
 
   setUpAll(
     () {
@@ -88,8 +89,7 @@ void main() {
           .thenReturn(EligibilityState.initial());
       when(() => userRestrictionListBlocMock.state)
           .thenReturn(UserRestrictionListState.initial());
-      when(() => cartBlocMock.state)
-          .thenReturn(CartState.initial());
+      when(() => cartBlocMock.state).thenReturn(CartState.initial());
     },
   );
   group('Test Add Edit User Restriction Page', () {
@@ -172,11 +172,17 @@ void main() {
         ),
         UserRestrictionDetailsState.initial().copyWith(
           apiFailureOrSuccessOption: none(),
-          userRestrictionStatus: UserRestrictionStatus.empty().copyWith(approvalLimitStatus: true,approverRightsStatus: 'status',),
+          userRestrictionStatus: UserRestrictionStatus.empty().copyWith(
+            approvalLimitStatus: true,
+            approverRightsStatus: 'status',
+          ),
         ),
         UserRestrictionDetailsState.initial().copyWith(
           apiFailureOrSuccessOption: none(),
-          userRestrictionStatus: UserRestrictionStatus.empty().copyWith(approvalLimitStatus: true,approverRightsStatus: '0 rows inserted',),
+          userRestrictionStatus: UserRestrictionStatus.empty().copyWith(
+            approvalLimitStatus: true,
+            approverRightsStatus: '0 rows inserted',
+          ),
         ),
       ];
 
@@ -194,24 +200,27 @@ void main() {
       expect(find.byKey(const Key('snackBarMessage')), findsOneWidget);
     });
 
-    testWidgets('_ApproverRights test cases ', (tester) async {
-      when(() => userRestrictionDetailsMockBloc.state).thenReturn(UserRestrictionDetailsState.initial().copyWith(
-        approverRights: ApproverRights.empty().copyWith(
-          approverRightsList: [
+    testWidgets(
+      '_ApproverRights test cases ',
+      (tester) async {
+        when(() => userRestrictionDetailsMockBloc.state)
+            .thenReturn(UserRestrictionDetailsState.initial().copyWith(
+          approverRights: ApproverRights.empty().copyWith(
+            approverRightsList: [
+              ApproverRightsDetails.empty().copyWith(
+                salesOrg: SalesOrg('2602'),
+              ),
+            ],
+          ),
+          addedApproverRightsList: <ApproverRightsDetails>[
             ApproverRightsDetails.empty().copyWith(
               salesOrg: SalesOrg('2602'),
             ),
+            ApproverRightsDetails.empty().copyWith(
+              salesOrg: SalesOrg('2601'),
+            ),
           ],
-        ),
-        addedApproverRightsList: <ApproverRightsDetails>[
-          ApproverRightsDetails.empty().copyWith(
-            salesOrg: SalesOrg('2602'),
-          ),
-          ApproverRightsDetails.empty().copyWith(
-            salesOrg: SalesOrg('2601'),
-          ),
-        ],
-      ));
+        ));
 
         await tester.pumpWidget(getWidget());
         await tester.pump();
@@ -230,121 +239,128 @@ void main() {
         expect(findIndustryCode1Key, findsOneWidget);
         await tester.enterText(findIndustryCode1Key, 'mock-industry-code');
         await tester.pump();
-
       },
     );
 
-    testWidgets('_AddDeleteButton cancel tap', (tester) async {
-      await tester.pumpWidget(getScopedWidget(AddEditUserRestrictionPage(
-        isEditing: true,
-      )));
-      await tester.pump();
+    testWidgets(
+      '_AddDeleteButton cancel tap',
+      (tester) async {
+        await tester.pumpWidget(getScopedWidget(AddEditUserRestrictionPage(
+          isEditing: true,
+        )));
+        await tester.pump();
 
-      final findOnDeletePress = find.byKey(const Key('onDeletePressed'));
-      expect(findOnDeletePress, findsOneWidget);
-      await tester.tap(findOnDeletePress);
-      await tester.pump();
+        final findOnDeletePress = find.byKey(const Key('onDeletePressed'));
+        expect(findOnDeletePress, findsOneWidget);
+        await tester.tap(findOnDeletePress);
+        await tester.pump();
 
-      expect(find.text('Confirm Delete'.tr()), findsOneWidget);
-      expect(find.text('User Restriction Will be deleted'.tr()), findsOneWidget);
+        expect(find.text('Confirm Delete'.tr()), findsOneWidget);
+        expect(
+            find.text('User Restriction Will be deleted'.tr()), findsOneWidget);
 
-      final findCancelButton = find.text('Cancel');
-      expect(findCancelButton, findsOneWidget);
-      await tester.tap(findCancelButton);
-      await tester.pump();
+        final findCancelButton = find.text('Cancel');
+        expect(findCancelButton, findsOneWidget);
+        await tester.tap(findCancelButton);
+        await tester.pump();
       },
     );
 
-    testWidgets('_AddDeleteButton confirm condition', (tester) async {
-      final expectedState = [
-        CartState.initial(),
-      ];
+    testWidgets(
+      '_AddDeleteButton confirm condition',
+      (tester) async {
+        final expectedState = [
+          CartState.initial(),
+        ];
 
-      whenListen(
-        cartBlocMock,
-        Stream.fromIterable(expectedState),
-        initialState: CartState.initial().copyWith(isClearing: true),
-      );
+        whenListen(
+          cartBlocMock,
+          Stream.fromIterable(expectedState),
+          initialState: CartState.initial().copyWith(isClearing: true),
+        );
 
-      await tester.pumpWidget(getScopedWidget(AddEditUserRestrictionPage(
-        isEditing: true,
-      )));
-      await tester.pump();
+        await tester.pumpWidget(getScopedWidget(AddEditUserRestrictionPage(
+          isEditing: true,
+        )));
+        await tester.pump();
 
-      final findOnDeletePress = find.byKey(const Key('onDeletePressed'));
-      expect(findOnDeletePress, findsOneWidget);
-      await tester.tap(findOnDeletePress);
-      await tester.pump();
-      await tester.pumpAndSettle(const Duration(seconds: 1));
-
+        final findOnDeletePress = find.byKey(const Key('onDeletePressed'));
+        expect(findOnDeletePress, findsOneWidget);
+        await tester.tap(findOnDeletePress);
+        await tester.pump();
+        await tester.pumpAndSettle(const Duration(seconds: 1));
       },
     );
 
+    testWidgets(
+      '_AddDeleteButton Submit tap when User Restriction Not Added',
+      (tester) async {
+        await tester.pumpWidget(getScopedWidget(AddEditUserRestrictionPage(
+          isEditing: true,
+        )));
+        await tester.pump();
 
-    testWidgets('_AddDeleteButton Submit tap when User Restriction Not Added', (tester) async {
-      await tester.pumpWidget(getScopedWidget(AddEditUserRestrictionPage(
-        isEditing: true,
-      )));
-      await tester.pump();
-
-      final findOnAddPressed = find.byKey(const Key('onAddPressed'));
-      expect(findOnAddPressed, findsOneWidget);
-      await tester.tap(findOnAddPressed);
-      await tester.pumpAndSettle(const Duration(seconds: 1));
-      expect(find.text('User Restriction Not Added'.tr()), findsOneWidget);
+        final findOnAddPressed = find.byKey(const Key('onAddPressed'));
+        expect(findOnAddPressed, findsOneWidget);
+        await tester.tap(findOnAddPressed);
+        await tester.pumpAndSettle(const Duration(seconds: 1));
+        expect(find.text('User Restriction Not Added'.tr()), findsOneWidget);
       },
     );
 
-    testWidgets('_AddDeleteButton Submit tap when Form is valid', (tester) async {
-      final expectedState = [
-        UserRestrictionDetailsState.initial().copyWith(
-          apiFailureOrSuccessOption: none(),
-          approverRights: ApproverRights.empty().copyWith(
-            approverRightsList: [
+    testWidgets(
+      '_AddDeleteButton Submit tap when Form is valid',
+      (tester) async {
+        final expectedState = [
+          UserRestrictionDetailsState.initial().copyWith(
+            apiFailureOrSuccessOption: none(),
+            approverRights: ApproverRights.empty().copyWith(
+              approverRightsList: [
+                ApproverRightsDetails.empty().copyWith(
+                  salesOrg: SalesOrg('2602'),
+                ),
+              ],
+            ),
+            addedApproverRightsList: [
+              ApproverRightsDetails.empty().copyWith(
+                salesOrg: SalesOrg('2602'),
+              ),
               ApproverRightsDetails.empty().copyWith(
                 salesOrg: SalesOrg('2602'),
               ),
             ],
+            approvalLimits: ApprovalLimits.empty().copyWith(
+                valueLowerLimit: ApprovalLimit(5),
+                valueUpperLimit: ApprovalLimit(1000)),
           ),
-          addedApproverRightsList: [
-            ApproverRightsDetails.empty().copyWith(
-              salesOrg: SalesOrg('2602'),
-            ),
-            ApproverRightsDetails.empty().copyWith(
-              salesOrg: SalesOrg('2602'),
-            ),
-          ],
-          approvalLimits: ApprovalLimits.empty().copyWith(valueLowerLimit: ApprovalLimit(5),valueUpperLimit: ApprovalLimit(1000)),
-        ),
-      ];
+        ];
 
-      whenListen(
-        userRestrictionDetailsMockBloc,
-        Stream.fromIterable(expectedState),
-        initialState: UserRestrictionDetailsState.initial(),
-      );
+        whenListen(
+          userRestrictionDetailsMockBloc,
+          Stream.fromIterable(expectedState),
+          initialState: UserRestrictionDetailsState.initial(),
+        );
 
-      await tester.pumpWidget(getScopedWidget(AddEditUserRestrictionPage(
-        isEditing: true,
-      )));
-      await tester.pump();
+        await tester.pumpWidget(getScopedWidget(AddEditUserRestrictionPage(
+          isEditing: true,
+        )));
+        await tester.pump();
 
-      final findUserNameKey = find.byKey(const Key('userNameKey'));
-      final findReturnLowerLimit = find.byKey(const Key('returnLowerLimit'));
-      final findReturnUpperLimit = find.byKey(const Key('returnUpperLimit'));
-      
-      await tester.enterText(findUserNameKey, 'user');
-      await tester.enterText(findReturnLowerLimit, '5');
-      await tester.enterText(findReturnUpperLimit, '100');
+        final findUserNameKey = find.byKey(const Key('userNameKey'));
+        final findReturnLowerLimit = find.byKey(const Key('returnLowerLimit'));
+        final findReturnUpperLimit = find.byKey(const Key('returnUpperLimit'));
 
-      await tester.pump();
+        await tester.enterText(findUserNameKey, 'user');
+        await tester.enterText(findReturnLowerLimit, '5');
+        await tester.enterText(findReturnUpperLimit, '100');
 
-      final findOnAddPressed = find.byKey(const Key('onAddPressed'));
-      expect(findOnAddPressed, findsOneWidget);
-      await tester.tap(findOnAddPressed);
-      await tester.pump();
+        await tester.pump();
+
+        final findOnAddPressed = find.byKey(const Key('onAddPressed'));
+        expect(findOnAddPressed, findsOneWidget);
+        await tester.tap(findOnAddPressed);
+        await tester.pump();
       },
     );
-
   });
 }

@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/core/aggregate/bonus_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_messages.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_payment_term.dart';
@@ -35,10 +36,38 @@ class OrderHistoryDetails with _$OrderHistoryDetails {
 
   bool get poDocumentsAvailable => orderHistoryDetailsPoDocuments.isNotEmpty;
 
-  List<MaterialQueryInfo> get allOrderHistoryDetailsOrderItemQueryInfo =>
-      orderHistoryDetailsOrderItem
-          .map(
-            (item) => item.queryInfo,
-          )
-          .toList();
+  List<MaterialQueryInfo> get allItemQueryInfo => items
+      .map(
+        (item) => item.orderItem.queryInfo,
+      )
+      .toList();
+
+  List<OrderHistoryDetailsBonusAggregate> get items {
+    final orderHistoryDetailsOrderItemsList =
+        <OrderHistoryDetailsBonusAggregate>[];
+
+    for (final items in orderHistoryDetailsOrderItem) {
+      if (items.type.isMaterialTypeComm) {
+        final orderHistoryDetailsOrderItem = OrderHistoryDetailsBonusAggregate(
+          orderItem: items,
+          details: items.details,
+          tenderContractDetails: items.tenderContractDetails,
+          bonusList: <OrderHistoryDetailsOrderItem>[],
+        );
+
+        orderHistoryDetailsOrderItemsList.add(orderHistoryDetailsOrderItem);
+      } else {
+        if (orderHistoryDetailsOrderItemsList.isNotEmpty) {
+          orderHistoryDetailsOrderItemsList.last =
+              orderHistoryDetailsOrderItemsList.last.copyWith(
+            bonusList: List<OrderHistoryDetailsOrderItem>.from(
+              orderHistoryDetailsOrderItemsList.last.bonusList,
+            )..add(items),
+          );
+        }
+      }
+    }
+
+    return orderHistoryDetailsOrderItemsList;
+  }
 }

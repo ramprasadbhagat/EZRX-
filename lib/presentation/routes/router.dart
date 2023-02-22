@@ -36,7 +36,7 @@ import 'package:ezrxmobile/presentation/returns/returns_overview.dart';
 import 'package:ezrxmobile/presentation/returns/user_restriction_list.dart';
 import 'package:ezrxmobile/presentation/splash/splash_page.dart';
 
-import 'package:ezrxmobile/presentation/history/history_details.dart';
+import 'package:ezrxmobile/presentation/history/detail/history_details.dart';
 
 @MaterialAutoRouter(
   replaceInRouteName: 'Page,Route,Tab',

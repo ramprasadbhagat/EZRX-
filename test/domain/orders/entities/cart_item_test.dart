@@ -79,6 +79,7 @@ void main() {
         priceDetailMap: priceDetailMap,
         material: emptyMaterial,
         salesConfigs: emptySalesConfigs,
+        tenderContractMap: {},
       );
       expect(cartItem.materials.length, 1);
       expect(cartItem.itemType, CartItemType.material);

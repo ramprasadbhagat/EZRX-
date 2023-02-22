@@ -1,14 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
-import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
-import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
-import 'package:ezrxmobile/domain/order/entities/material_item.dart';
-import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
@@ -52,23 +46,6 @@ class SavedOrderItem extends StatelessWidget {
         borderRadius: 8,
         child: ListTile(
           onTap: () {
-            context.read<MaterialPriceDetailBloc>().add(
-                  MaterialPriceDetailEvent.fetch(
-                    user: context.read<UserBloc>().state.user,
-                    customerCode:
-                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                    salesOrganisation:
-                        context.read<SalesOrgBloc>().state.salesOrganisation,
-                    salesOrganisationConfigs:
-                        context.read<SalesOrgBloc>().state.configs,
-                    shipToCode: context.read<ShipToCodeBloc>().state.shipToInfo,
-                    materialInfoList: _getMaterialList(order.items),
-                    pickAndPack: context
-                        .read<EligibilityBloc>()
-                        .state
-                        .getPNPValueMaterial,
-                  ),
-                );
             context.router.push(SavedOrderDetailPageRoute(order: order));
           },
           title: Column(
@@ -107,22 +84,5 @@ class SavedOrderItem extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  List<MaterialQueryInfo> _getMaterialList(List<MaterialItem> items) {
-    final materialList = items
-        .map(
-          (item) => item.type.isBundle
-              ? item.materials
-                  .map((material) =>
-                      MaterialQueryInfo.fromBundles(materialInfo: material))
-                  .toList()
-              : [MaterialQueryInfo.fromSavedOrder(orderMaterial: item)],
-        )
-        .toList()
-        .expand((element) => element)
-        .toList();
-
-    return materialList;
   }
 }

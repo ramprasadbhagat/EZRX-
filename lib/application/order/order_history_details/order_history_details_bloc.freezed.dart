@@ -21,18 +21,27 @@ mixin _$OrderHistoryDetailsEvent {
     required TResult Function() initialized,
     required TResult Function(User user, OrderHistoryItem orderHistoryItem)
         fetch,
+    required TResult Function(
+            TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)
+        updateMaterialTenderContract,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(User user, OrderHistoryItem orderHistoryItem)? fetch,
+    TResult? Function(
+            TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)?
+        updateMaterialTenderContract,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(User user, OrderHistoryItem orderHistoryItem)? fetch,
+    TResult Function(
+            TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)?
+        updateMaterialTenderContract,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -40,18 +49,24 @@ mixin _$OrderHistoryDetailsEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_UpdateMaterialTenderContract value)
+        updateMaterialTenderContract,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_UpdateMaterialTenderContract value)?
+        updateMaterialTenderContract,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_UpdateMaterialTenderContract value)?
+        updateMaterialTenderContract,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -117,6 +132,9 @@ class _$_Initialized implements _Initialized {
     required TResult Function() initialized,
     required TResult Function(User user, OrderHistoryItem orderHistoryItem)
         fetch,
+    required TResult Function(
+            TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)
+        updateMaterialTenderContract,
   }) {
     return initialized();
   }
@@ -126,6 +144,9 @@ class _$_Initialized implements _Initialized {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(User user, OrderHistoryItem orderHistoryItem)? fetch,
+    TResult? Function(
+            TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)?
+        updateMaterialTenderContract,
   }) {
     return initialized?.call();
   }
@@ -135,6 +156,9 @@ class _$_Initialized implements _Initialized {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(User user, OrderHistoryItem orderHistoryItem)? fetch,
+    TResult Function(
+            TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)?
+        updateMaterialTenderContract,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -148,6 +172,8 @@ class _$_Initialized implements _Initialized {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_UpdateMaterialTenderContract value)
+        updateMaterialTenderContract,
   }) {
     return initialized(this);
   }
@@ -157,6 +183,8 @@ class _$_Initialized implements _Initialized {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_UpdateMaterialTenderContract value)?
+        updateMaterialTenderContract,
   }) {
     return initialized?.call(this);
   }
@@ -166,6 +194,8 @@ class _$_Initialized implements _Initialized {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_UpdateMaterialTenderContract value)?
+        updateMaterialTenderContract,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -272,6 +302,9 @@ class _$_Fetch implements _Fetch {
     required TResult Function() initialized,
     required TResult Function(User user, OrderHistoryItem orderHistoryItem)
         fetch,
+    required TResult Function(
+            TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)
+        updateMaterialTenderContract,
   }) {
     return fetch(user, orderHistoryItem);
   }
@@ -281,6 +314,9 @@ class _$_Fetch implements _Fetch {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(User user, OrderHistoryItem orderHistoryItem)? fetch,
+    TResult? Function(
+            TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)?
+        updateMaterialTenderContract,
   }) {
     return fetch?.call(user, orderHistoryItem);
   }
@@ -290,6 +326,9 @@ class _$_Fetch implements _Fetch {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(User user, OrderHistoryItem orderHistoryItem)? fetch,
+    TResult Function(
+            TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)?
+        updateMaterialTenderContract,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -303,6 +342,8 @@ class _$_Fetch implements _Fetch {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_UpdateMaterialTenderContract value)
+        updateMaterialTenderContract,
   }) {
     return fetch(this);
   }
@@ -312,6 +353,8 @@ class _$_Fetch implements _Fetch {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_UpdateMaterialTenderContract value)?
+        updateMaterialTenderContract,
   }) {
     return fetch?.call(this);
   }
@@ -321,6 +364,8 @@ class _$_Fetch implements _Fetch {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_UpdateMaterialTenderContract value)?
+        updateMaterialTenderContract,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -343,14 +388,208 @@ abstract class _Fetch implements OrderHistoryDetailsEvent {
 }
 
 /// @nodoc
+abstract class _$$_UpdateMaterialTenderContractCopyWith<$Res> {
+  factory _$$_UpdateMaterialTenderContractCopyWith(
+          _$_UpdateMaterialTenderContract value,
+          $Res Function(_$_UpdateMaterialTenderContract) then) =
+      __$$_UpdateMaterialTenderContractCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {TenderContract selectedTenderContract, MaterialQueryInfo queryInfo});
+
+  $TenderContractCopyWith<$Res> get selectedTenderContract;
+  $MaterialQueryInfoCopyWith<$Res> get queryInfo;
+}
+
+/// @nodoc
+class __$$_UpdateMaterialTenderContractCopyWithImpl<$Res>
+    extends _$OrderHistoryDetailsEventCopyWithImpl<$Res,
+        _$_UpdateMaterialTenderContract>
+    implements _$$_UpdateMaterialTenderContractCopyWith<$Res> {
+  __$$_UpdateMaterialTenderContractCopyWithImpl(
+      _$_UpdateMaterialTenderContract _value,
+      $Res Function(_$_UpdateMaterialTenderContract) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? selectedTenderContract = null,
+    Object? queryInfo = null,
+  }) {
+    return _then(_$_UpdateMaterialTenderContract(
+      selectedTenderContract: null == selectedTenderContract
+          ? _value.selectedTenderContract
+          : selectedTenderContract // ignore: cast_nullable_to_non_nullable
+              as TenderContract,
+      queryInfo: null == queryInfo
+          ? _value.queryInfo
+          : queryInfo // ignore: cast_nullable_to_non_nullable
+              as MaterialQueryInfo,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $TenderContractCopyWith<$Res> get selectedTenderContract {
+    return $TenderContractCopyWith<$Res>(_value.selectedTenderContract,
+        (value) {
+      return _then(_value.copyWith(selectedTenderContract: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $MaterialQueryInfoCopyWith<$Res> get queryInfo {
+    return $MaterialQueryInfoCopyWith<$Res>(_value.queryInfo, (value) {
+      return _then(_value.copyWith(queryInfo: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_UpdateMaterialTenderContract implements _UpdateMaterialTenderContract {
+  const _$_UpdateMaterialTenderContract(
+      {required this.selectedTenderContract, required this.queryInfo});
+
+  @override
+  final TenderContract selectedTenderContract;
+  @override
+  final MaterialQueryInfo queryInfo;
+
+  @override
+  String toString() {
+    return 'OrderHistoryDetailsEvent.updateMaterialTenderContract(selectedTenderContract: $selectedTenderContract, queryInfo: $queryInfo)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_UpdateMaterialTenderContract &&
+            (identical(other.selectedTenderContract, selectedTenderContract) ||
+                other.selectedTenderContract == selectedTenderContract) &&
+            (identical(other.queryInfo, queryInfo) ||
+                other.queryInfo == queryInfo));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, selectedTenderContract, queryInfo);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_UpdateMaterialTenderContractCopyWith<_$_UpdateMaterialTenderContract>
+      get copyWith => __$$_UpdateMaterialTenderContractCopyWithImpl<
+          _$_UpdateMaterialTenderContract>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(User user, OrderHistoryItem orderHistoryItem)
+        fetch,
+    required TResult Function(
+            TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)
+        updateMaterialTenderContract,
+  }) {
+    return updateMaterialTenderContract(selectedTenderContract, queryInfo);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(User user, OrderHistoryItem orderHistoryItem)? fetch,
+    TResult? Function(
+            TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)?
+        updateMaterialTenderContract,
+  }) {
+    return updateMaterialTenderContract?.call(
+        selectedTenderContract, queryInfo);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(User user, OrderHistoryItem orderHistoryItem)? fetch,
+    TResult Function(
+            TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)?
+        updateMaterialTenderContract,
+    required TResult orElse(),
+  }) {
+    if (updateMaterialTenderContract != null) {
+      return updateMaterialTenderContract(selectedTenderContract, queryInfo);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_UpdateMaterialTenderContract value)
+        updateMaterialTenderContract,
+  }) {
+    return updateMaterialTenderContract(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_UpdateMaterialTenderContract value)?
+        updateMaterialTenderContract,
+  }) {
+    return updateMaterialTenderContract?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_UpdateMaterialTenderContract value)?
+        updateMaterialTenderContract,
+    required TResult orElse(),
+  }) {
+    if (updateMaterialTenderContract != null) {
+      return updateMaterialTenderContract(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UpdateMaterialTenderContract
+    implements OrderHistoryDetailsEvent {
+  const factory _UpdateMaterialTenderContract(
+          {required final TenderContract selectedTenderContract,
+          required final MaterialQueryInfo queryInfo}) =
+      _$_UpdateMaterialTenderContract;
+
+  TenderContract get selectedTenderContract;
+  MaterialQueryInfo get queryInfo;
+  @JsonKey(ignore: true)
+  _$$_UpdateMaterialTenderContractCopyWith<_$_UpdateMaterialTenderContract>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$OrderHistoryDetailsState {
   OrderHistoryDetails get orderHistoryDetails =>
       throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
+  Map<MaterialQueryInfo, bool> get isLoadingTenderContract =>
+      throw _privateConstructorUsedError;
   bool get showErrorMessage => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption =>
       throw _privateConstructorUsedError;
-  List<OrderHistoryDetailsBonusAggregate> get bonusItem =>
+  Map<MaterialQueryInfo, PriceAggregate> get materials =>
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -367,9 +606,10 @@ abstract class $OrderHistoryDetailsStateCopyWith<$Res> {
   $Res call(
       {OrderHistoryDetails orderHistoryDetails,
       bool isLoading,
+      Map<MaterialQueryInfo, bool> isLoadingTenderContract,
       bool showErrorMessage,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
-      List<OrderHistoryDetailsBonusAggregate> bonusItem});
+      Map<MaterialQueryInfo, PriceAggregate> materials});
 
   $OrderHistoryDetailsCopyWith<$Res> get orderHistoryDetails;
 }
@@ -390,9 +630,10 @@ class _$OrderHistoryDetailsStateCopyWithImpl<$Res,
   $Res call({
     Object? orderHistoryDetails = null,
     Object? isLoading = null,
+    Object? isLoadingTenderContract = null,
     Object? showErrorMessage = null,
     Object? failureOrSuccessOption = null,
-    Object? bonusItem = null,
+    Object? materials = null,
   }) {
     return _then(_value.copyWith(
       orderHistoryDetails: null == orderHistoryDetails
@@ -403,6 +644,10 @@ class _$OrderHistoryDetailsStateCopyWithImpl<$Res,
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      isLoadingTenderContract: null == isLoadingTenderContract
+          ? _value.isLoadingTenderContract
+          : isLoadingTenderContract // ignore: cast_nullable_to_non_nullable
+              as Map<MaterialQueryInfo, bool>,
       showErrorMessage: null == showErrorMessage
           ? _value.showErrorMessage
           : showErrorMessage // ignore: cast_nullable_to_non_nullable
@@ -411,10 +656,10 @@ class _$OrderHistoryDetailsStateCopyWithImpl<$Res,
           ? _value.failureOrSuccessOption
           : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
-      bonusItem: null == bonusItem
-          ? _value.bonusItem
-          : bonusItem // ignore: cast_nullable_to_non_nullable
-              as List<OrderHistoryDetailsBonusAggregate>,
+      materials: null == materials
+          ? _value.materials
+          : materials // ignore: cast_nullable_to_non_nullable
+              as Map<MaterialQueryInfo, PriceAggregate>,
     ) as $Val);
   }
 
@@ -440,9 +685,10 @@ abstract class _$$_OrderHistoryDetailsStateCopyWith<$Res>
   $Res call(
       {OrderHistoryDetails orderHistoryDetails,
       bool isLoading,
+      Map<MaterialQueryInfo, bool> isLoadingTenderContract,
       bool showErrorMessage,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
-      List<OrderHistoryDetailsBonusAggregate> bonusItem});
+      Map<MaterialQueryInfo, PriceAggregate> materials});
 
   @override
   $OrderHistoryDetailsCopyWith<$Res> get orderHistoryDetails;
@@ -462,9 +708,10 @@ class __$$_OrderHistoryDetailsStateCopyWithImpl<$Res>
   $Res call({
     Object? orderHistoryDetails = null,
     Object? isLoading = null,
+    Object? isLoadingTenderContract = null,
     Object? showErrorMessage = null,
     Object? failureOrSuccessOption = null,
-    Object? bonusItem = null,
+    Object? materials = null,
   }) {
     return _then(_$_OrderHistoryDetailsState(
       orderHistoryDetails: null == orderHistoryDetails
@@ -475,6 +722,10 @@ class __$$_OrderHistoryDetailsStateCopyWithImpl<$Res>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      isLoadingTenderContract: null == isLoadingTenderContract
+          ? _value._isLoadingTenderContract
+          : isLoadingTenderContract // ignore: cast_nullable_to_non_nullable
+              as Map<MaterialQueryInfo, bool>,
       showErrorMessage: null == showErrorMessage
           ? _value.showErrorMessage
           : showErrorMessage // ignore: cast_nullable_to_non_nullable
@@ -483,10 +734,10 @@ class __$$_OrderHistoryDetailsStateCopyWithImpl<$Res>
           ? _value.failureOrSuccessOption
           : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
-      bonusItem: null == bonusItem
-          ? _value._bonusItem
-          : bonusItem // ignore: cast_nullable_to_non_nullable
-              as List<OrderHistoryDetailsBonusAggregate>,
+      materials: null == materials
+          ? _value._materials
+          : materials // ignore: cast_nullable_to_non_nullable
+              as Map<MaterialQueryInfo, PriceAggregate>,
     ));
   }
 }
@@ -497,30 +748,39 @@ class _$_OrderHistoryDetailsState extends _OrderHistoryDetailsState {
   const _$_OrderHistoryDetailsState(
       {required this.orderHistoryDetails,
       required this.isLoading,
+      required final Map<MaterialQueryInfo, bool> isLoadingTenderContract,
       required this.showErrorMessage,
       required this.failureOrSuccessOption,
-      required final List<OrderHistoryDetailsBonusAggregate> bonusItem})
-      : _bonusItem = bonusItem,
+      required final Map<MaterialQueryInfo, PriceAggregate> materials})
+      : _isLoadingTenderContract = isLoadingTenderContract,
+        _materials = materials,
         super._();
 
   @override
   final OrderHistoryDetails orderHistoryDetails;
   @override
   final bool isLoading;
+  final Map<MaterialQueryInfo, bool> _isLoadingTenderContract;
+  @override
+  Map<MaterialQueryInfo, bool> get isLoadingTenderContract {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_isLoadingTenderContract);
+  }
+
   @override
   final bool showErrorMessage;
   @override
   final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption;
-  final List<OrderHistoryDetailsBonusAggregate> _bonusItem;
+  final Map<MaterialQueryInfo, PriceAggregate> _materials;
   @override
-  List<OrderHistoryDetailsBonusAggregate> get bonusItem {
+  Map<MaterialQueryInfo, PriceAggregate> get materials {
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_bonusItem);
+    return EqualUnmodifiableMapView(_materials);
   }
 
   @override
   String toString() {
-    return 'OrderHistoryDetailsState(orderHistoryDetails: $orderHistoryDetails, isLoading: $isLoading, showErrorMessage: $showErrorMessage, failureOrSuccessOption: $failureOrSuccessOption, bonusItem: $bonusItem)';
+    return 'OrderHistoryDetailsState(orderHistoryDetails: $orderHistoryDetails, isLoading: $isLoading, isLoadingTenderContract: $isLoadingTenderContract, showErrorMessage: $showErrorMessage, failureOrSuccessOption: $failureOrSuccessOption, materials: $materials)';
   }
 
   @override
@@ -532,12 +792,14 @@ class _$_OrderHistoryDetailsState extends _OrderHistoryDetailsState {
                 other.orderHistoryDetails == orderHistoryDetails) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
+            const DeepCollectionEquality().equals(
+                other._isLoadingTenderContract, _isLoadingTenderContract) &&
             (identical(other.showErrorMessage, showErrorMessage) ||
                 other.showErrorMessage == showErrorMessage) &&
             (identical(other.failureOrSuccessOption, failureOrSuccessOption) ||
                 other.failureOrSuccessOption == failureOrSuccessOption) &&
             const DeepCollectionEquality()
-                .equals(other._bonusItem, _bonusItem));
+                .equals(other._materials, _materials));
   }
 
   @override
@@ -545,9 +807,10 @@ class _$_OrderHistoryDetailsState extends _OrderHistoryDetailsState {
       runtimeType,
       orderHistoryDetails,
       isLoading,
+      const DeepCollectionEquality().hash(_isLoadingTenderContract),
       showErrorMessage,
       failureOrSuccessOption,
-      const DeepCollectionEquality().hash(_bonusItem));
+      const DeepCollectionEquality().hash(_materials));
 
   @JsonKey(ignore: true)
   @override
@@ -561,10 +824,11 @@ abstract class _OrderHistoryDetailsState extends OrderHistoryDetailsState {
   const factory _OrderHistoryDetailsState(
       {required final OrderHistoryDetails orderHistoryDetails,
       required final bool isLoading,
+      required final Map<MaterialQueryInfo, bool> isLoadingTenderContract,
       required final bool showErrorMessage,
       required final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
-      required final List<OrderHistoryDetailsBonusAggregate>
-          bonusItem}) = _$_OrderHistoryDetailsState;
+      required final Map<MaterialQueryInfo, PriceAggregate>
+          materials}) = _$_OrderHistoryDetailsState;
   const _OrderHistoryDetailsState._() : super._();
 
   @override
@@ -572,11 +836,13 @@ abstract class _OrderHistoryDetailsState extends OrderHistoryDetailsState {
   @override
   bool get isLoading;
   @override
+  Map<MaterialQueryInfo, bool> get isLoadingTenderContract;
+  @override
   bool get showErrorMessage;
   @override
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption;
   @override
-  List<OrderHistoryDetailsBonusAggregate> get bonusItem;
+  Map<MaterialQueryInfo, PriceAggregate> get materials;
   @override
   @JsonKey(ignore: true)
   _$$_OrderHistoryDetailsStateCopyWith<_$_OrderHistoryDetailsState>

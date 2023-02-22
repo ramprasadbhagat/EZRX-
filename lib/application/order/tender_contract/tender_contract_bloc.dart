@@ -30,7 +30,7 @@ class TenderContractBloc
   Future<void> _onEvent(event, emit) async {
     await event.map(
       initialized: (_) async => emit(TenderContractState.initial()),
-      fetch: (e) async {
+      fetch: (_Fetch e) async {
         emit(state.copyWith(
           isFetching: true,
           tenderContractList: [],
@@ -39,7 +39,7 @@ class TenderContractBloc
 
         final failureOrSuccess =
             await tenderContractRepository.getTenderContractDetails(
-          material: e.materialInfo,
+          materialNumber: e.materialInfo.materialNumber,
           customerCodeInfo: e.customerCodeInfo,
           salesOrganisation: e.salesOrganisation,
           shipToInfo: e.shipToInfo,
@@ -51,39 +51,18 @@ class TenderContractBloc
             isFetching: false,
           )),
           (tenderContractList) {
-            //If no 730 contract is present in the list, the first item must be a no contract item
-            final notContainReason730 = !tenderContractList
-                .any((element) => element.tenderOrderReason.is730);
-
-            final newTenderContractList = notContainReason730
-                ? (List<TenderContract>.from(tenderContractList)
-                  ..insert(0, TenderContract.noContract()))
-                : tenderContractList;
-
-            final defaultSelectedContract = newTenderContractList.firstWhere(
-              (contract) =>
-                  contract.contractNumber ==
-                  e.defaultSelectedTenderContract.contractNumber,
-              orElse: () => TenderContract.empty(),
-            );
-
-            //Select default if present else Select 730 contract if present, else select first item
             add(
               TenderContractEvent.selected(
-                tenderContract:
-                    defaultSelectedContract != TenderContract.empty()
-                        ? defaultSelectedContract
-                        : newTenderContractList.firstWhere(
-                            (e) => e.tenderOrderReason.is730,
-                            orElse: () => newTenderContractList.first,
-                          ),
+                tenderContract: tenderContractList.getDefaultSelected(
+                  currentTenderContract: e.defaultSelectedTenderContract,
+                ),
               ),
             );
 
             emit(state.copyWith(
               apiFailureOrSuccessOption: optionOf(failureOrSuccess),
               isFetching: false,
-              tenderContractList: newTenderContractList,
+              tenderContractList: tenderContractList.withNoContractItem,
             ));
           },
         );

@@ -154,6 +154,8 @@ void main() {
         when(() => mockSalesOrgBloc.state).thenReturn(SalesOrgState.initial());
         when(() => eligibilityBlocMock.state)
             .thenReturn(EligibilityState.initial());
+        when(() => mockMaterialPriceDetailBloc.state)
+            .thenReturn(MaterialPriceDetailState.initial());
       });
       Widget getWUT() {
         return EasyLocalization(
@@ -184,6 +186,8 @@ void main() {
               BlocProvider<SalesOrgBloc>(create: (context) => mockSalesOrgBloc),
               BlocProvider<EligibilityBloc>(
                   create: (context) => eligibilityBlocMock),
+              BlocProvider<MaterialPriceDetailBloc>(
+                  create: (context) => mockMaterialPriceDetailBloc),
             ],
             child: Material(child: HistoryTab()),
           ),

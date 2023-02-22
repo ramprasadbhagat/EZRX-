@@ -2,7 +2,6 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_schedule.dart';
-import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'return_item.freezed.dart';

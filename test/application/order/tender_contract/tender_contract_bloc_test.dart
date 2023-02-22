@@ -28,7 +28,6 @@ void main() {
   final mockMaterialInfo = MaterialInfo.empty();
   final mockTenderContract = TenderContract.empty();
   late final List<TenderContract> mockTenderContractList;
-  var newMockTenderContractList = <TenderContract>[];
   final materialState = TenderContractState.initial();
   setUpAll(() async {
     tenderContractMockRepository = MockTenderContractRepository();
@@ -58,7 +57,7 @@ void main() {
               salesOrganisation: mockSalesOrganisation,
               customerCodeInfo: mockCustomerCodeInfo,
               shipToInfo: mockShipToInfo,
-              material: mockMaterialInfo,
+              materialNumber: mockMaterialInfo.materialNumber,
             )).thenAnswer(
           (invocation) async => Right(mockTenderContractList),
         );
@@ -71,14 +70,6 @@ void main() {
           materialInfo: mockMaterialInfo,
           defaultSelectedTenderContract: TenderContract.empty(),
         ));
-
-        final notContainReason730 = !mockTenderContractList
-            .any((element) => element.tenderOrderReason.is730);
-
-        newMockTenderContractList = notContainReason730
-            ? (List<TenderContract>.from(mockTenderContractList)
-              ..insert(0, TenderContract.noContract()))
-            : mockTenderContractList;
       },
       expect: () => [
         materialState.copyWith(
@@ -88,11 +79,11 @@ void main() {
         ),
         materialState.copyWith(
           isFetching: false,
-          tenderContractList: newMockTenderContractList,
+          tenderContractList: mockTenderContractList.withNoContractItem,
           apiFailureOrSuccessOption: optionOf(Right(mockTenderContractList)),
         ),
         materialState.copyWith(
-          tenderContractList: newMockTenderContractList,
+          tenderContractList: mockTenderContractList.withNoContractItem,
           selectedTenderContract: TenderContract.noContract(),
           apiFailureOrSuccessOption: optionOf(Right(mockTenderContractList)),
         ),
@@ -108,7 +99,7 @@ void main() {
               salesOrganisation: mockSalesOrganisation,
               customerCodeInfo: mockCustomerCodeInfo,
               shipToInfo: mockShipToInfo,
-              material: mockMaterialInfo,
+              materialNumber: mockMaterialInfo.materialNumber,
             )).thenAnswer(
           (invocation) async => Right(mockTenderContractList),
         );
@@ -121,14 +112,6 @@ void main() {
           materialInfo: mockMaterialInfo,
           defaultSelectedTenderContract: mockTenderContractList.first,
         ));
-
-        final notContainReason730 = !mockTenderContractList
-            .any((element) => element.tenderOrderReason.is730);
-
-        newMockTenderContractList = notContainReason730
-            ? (List<TenderContract>.from(mockTenderContractList)
-              ..insert(0, TenderContract.noContract()))
-            : mockTenderContractList;
       },
       expect: () => [
         materialState.copyWith(
@@ -138,11 +121,11 @@ void main() {
         ),
         materialState.copyWith(
           isFetching: false,
-          tenderContractList: newMockTenderContractList,
+          tenderContractList: mockTenderContractList.withNoContractItem,
           apiFailureOrSuccessOption: optionOf(Right(mockTenderContractList)),
         ),
         materialState.copyWith(
-          tenderContractList: newMockTenderContractList,
+          tenderContractList: mockTenderContractList.withNoContractItem,
           selectedTenderContract: mockTenderContractList.first,
           apiFailureOrSuccessOption: optionOf(Right(mockTenderContractList)),
         ),
@@ -158,7 +141,7 @@ void main() {
               salesOrganisation: mockSalesOrganisation,
               customerCodeInfo: mockCustomerCodeInfo,
               shipToInfo: mockShipToInfo,
-              material: mockMaterialInfo,
+              materialNumber: mockMaterialInfo.materialNumber,
             )).thenAnswer(
           (invocation) async => const Left(
             ApiFailure.other('fake-error'),
@@ -198,7 +181,7 @@ void main() {
               salesOrganisation: mockSalesOrganisation,
               customerCodeInfo: mockCustomerCodeInfo,
               shipToInfo: mockShipToInfo,
-              material: mockMaterialInfo,
+              materialNumber: mockMaterialInfo.materialNumber,
             )).thenAnswer(
           (invocation) async => Right(mockTenderContractList),
         );
@@ -225,7 +208,7 @@ void main() {
               salesOrganisation: mockSalesOrganisation,
               customerCodeInfo: mockCustomerCodeInfo,
               shipToInfo: mockShipToInfo,
-              material: mockMaterialInfo,
+              materialNumber: mockMaterialInfo.materialNumber,
             )).thenAnswer(
           (invocation) async => Right(mockTenderContractList),
         );
