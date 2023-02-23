@@ -22,6 +22,8 @@ class OrderHistoryDetailsOrderHeadersDto
     @JsonKey(name: 'CreatedDate', defaultValue: '') required String createdDate,
     @JsonKey(name: 'EZRXNumber', defaultValue: '') required String eZRXNumber,
     @JsonKey(name: 'OrderBy', defaultValue: '') required String orderBy,
+    @JsonKey(name: 'ReferenceNotes', defaultValue: '')
+        required String referenceNotes,
   }) = _OrderHistoryDetailsOrderHeadersDto;
   factory OrderHistoryDetailsOrderHeadersDto.fromDomain(
     OrderHistoryDetailsOrderHeader orderHistoryDetailsOrderHeader,
@@ -39,6 +41,7 @@ class OrderHistoryDetailsOrderHeadersDto
       createdDate: orderHistoryDetailsOrderHeader.createdDate.getValue(),
       eZRXNumber: orderHistoryDetailsOrderHeader.eZRXNumber,
       orderBy: orderHistoryDetailsOrderHeader.orderBy,
+      referenceNotes: orderHistoryDetailsOrderHeader.referenceNotes,
     );
   }
 
@@ -53,6 +56,7 @@ class OrderHistoryDetailsOrderHeadersDto
       createdDate: DateTimeStringValue(createdDate),
       eZRXNumber: eZRXNumber,
       orderBy: orderBy,
+      referenceNotes: referenceNotes,
     );
   }
 

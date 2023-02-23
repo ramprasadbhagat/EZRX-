@@ -1,92 +1,93 @@
 {
-    "data": {
+  "data": {
       "orderDetails": {
-        "OrderHeader": {
-          "TotalTax": 0.0,
-          "RequestedDeliveryDate": "2022-10-31",
-          "POReference": "Test1",
-          "OrderBy": "Siddique Md Faizan",
-          "Type": "ZPOR",
-          "TelephoneNumber": "",
-          "EZRXNumber": "EZRX-dc70b03",
-          "OrderValue": 0.0,
-          "CreatedDate":"2022-10-30"
-        },
-        "ShippingInformation": {
-          "Address": "",
-          "POReference": "Test1",
-          "InvoiceNumber": "",
-          "InvoiceDate": "",
-          "Invoices": [
+          "OrderHeader": {
+            "TotalTax": 0.0,
+            "RequestedDeliveryDate": "2022-10-31",
+            "POReference": "Test1",
+            "OrderBy": "Siddique Md Faizan",
+            "Type": "ZPOR",
+            "TelephoneNumber": "",
+            "EZRXNumber": "EZRX-dc70b03",
+            "OrderValue": 0.0,
+            "CreatedDate":"2022-10-30",
+              "ReferenceNotes": ""
+          },
+          "ShippingInformation": {
+            "Address": "",
+            "POReference": "Test1",
+            "InvoiceNumber": "",
+            "InvoiceDate": "",
+            "Invoices": [
+              {
+                "InvoiceNumber":"123",
+                "InvoiceDate":"2022-10-30",
+                "InvoicePrice":"0.0"
+              },
+              {
+                "InvoiceNumber":"124",
+                "InvoiceDate":"2022-10-30",
+                "InvoicePrice":"1.0"
+              }
+            ],
+  
+            "PostalCode":"117406",
+            "Country":"",
+            "Phone":"",
+            "Fax":""
+  
+          },
+          "OrderItems": [
             {
-              "InvoiceNumber":"123",
-              "InvoiceDate":"2022-10-30",
-              "InvoicePrice":"0.0"
-            },
-            {
-              "InvoiceNumber":"124",
-              "InvoiceDate":"2022-10-30",
-              "InvoicePrice":"1.0"
+              "MaterialCode": "000000000021211474",
+              "MaterialDescription": "?Genotropin GQ 5.3MG SFDPO 1xPTCC DEMO",
+              "TotalPrice": 0.0,
+              "Tax": 0,
+              "SAPStatus": "testOrderStatus",
+              "PlannedDeliveryDate": "",
+              "Qty": 1,
+              "PickedQuantity": 0,
+              "UnitPrice": 0,
+              "Type": "Comm",
+              "LineNumber": "000010",
+              "Batch": "",
+              "ExpiryDate": "",
+              "LineReferenceNotes": "",
+              "Details": [
+               { "DiscountCode":"100",
+               "DiscountDescription":"test",
+               "Rate":"100"
+              }
+              ],
+              "IsTenderContractMaterial": false,
+              "TenderContractDetails": {
+                "TenderContractNumber":"",
+          "TenderContractReference":"",
+          "TenderPackageDescription":""
+              }
             }
           ],
-
-          "PostalCode":"117406",
-          "Country":"",
-          "Phone":"",
-          "Fax":""
-
-        },
-        "OrderItems": [
-          {
-            "MaterialCode": "000000000021211474",
-            "MaterialDescription": "?Genotropin GQ 5.3MG SFDPO 1xPTCC DEMO",
-            "TotalPrice": 0.0,
-            "Tax": 0,
-            "SAPStatus": "testOrderStatus",
-            "PlannedDeliveryDate": "",
-            "Qty": 1,
-            "PickedQuantity": 0,
-            "UnitPrice": 0,
-            "Type": "Comm",
-            "LineNumber": "000010",
-            "Batch": "",
-            "ExpiryDate": "",
-            "LineReferenceNotes": "",
-            "Details": [
-             { "DiscountCode":"100",
-             "DiscountDescription":"test",
-             "Rate":"100"
-            }
-            ],
-            "IsTenderContractMaterial": false,
-            "TenderContractDetails": {
-              "TenderContractNumber":"",
-        "TenderContractReference":"",
-        "TenderPackageDescription":""
-            }
-          }
-        ],
-        "PaymentTerm": {
-          "PaymentTermCode": "100",
-          "PaymentTermDescription": "testing"
-        },
-        "SpecialInstructions": "",
-        "PODocuments": [
-          {
-            "Url":" https://ezrxpostorage.blob.core.windows.net/ezrx-sg/po-bucket/2022/ezrxtest05_0000100728_0070048890_1668437253_Screenshot from 2022-11-10 22-07-20.png", 
-            "Name": "2022-11-10 22-07-20.png"
-          }
-        ],
-        "Messages": [
-          {
-            "Type": "E",
-            "Message": "No pricing procedure could be determined"
+          "PaymentTerm": {
+            "PaymentTermCode": "100",
+            "PaymentTermDescription": "testing"
           },
-          {
-            "Type": "E",
-            "Message": "Sales document  was not changed"
-          }
-        ]
+          "SpecialInstructions": "",
+          "PODocuments": [
+            {
+              "Url":" https://ezrxpostorage.blob.core.windows.net/ezrx-sg/po-bucket/2022/ezrxtest05_0000100728_0070048890_1668437253_Screenshot from 2022-11-10 22-07-20.png", 
+              "Name": "2022-11-10 22-07-20.png"
+            }
+          ],
+          "Messages": [
+            {
+              "Type": "E",
+              "Message": "No pricing procedure could be determined"
+            },
+            {
+              "Type": "E",
+              "Message": "Sales document  was not changed"
+            }
+          ]
       }
-    }
   }
+}

@@ -7,6 +7,7 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
+import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
@@ -97,6 +98,10 @@ class OrderHistoryDetailsMockBloc
 class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
     implements EligibilityBloc {}
 
+class AdditionalDetailsBlocMock
+    extends MockBloc<AdditionalDetailsEvent, AdditionalDetailsState>
+    implements AdditionalDetailsBloc {}
+
 class MockMaterialPriceDetailBloc
     extends MockBloc<MaterialPriceDetailEvent, MaterialPriceDetailState>
     implements MaterialPriceDetailBloc {}
@@ -152,6 +157,7 @@ void main() {
   late AddToCartBlocMock addToCartBlocMock;
   late TenderContractBlocMock tenderContractBlocMock;
   late FavouriteBlocMock favouriteBlocMock;
+  late AdditionalDetailsBlocMock additionalDetailsBlocMock;
   late PermissionService permissionService;
 
   final fakeUser = User.empty().copyWith(
@@ -196,6 +202,7 @@ void main() {
       addToCartBlocMock = AddToCartBlocMock();
       tenderContractBlocMock = TenderContractBlocMock();
       favouriteBlocMock = FavouriteBlocMock();
+      additionalDetailsBlocMock = AdditionalDetailsBlocMock();
       when(() => userBlocMock.state).thenReturn(
         UserState.initial().copyWith(
           user: fakeUser,
@@ -282,6 +289,9 @@ void main() {
           ),
           BlocProvider<FavouriteBloc>(
             create: (context) => favouriteBlocMock,
+          ),
+          BlocProvider<AdditionalDetailsBloc>(
+            create: (context) => additionalDetailsBlocMock,
           ),
         ],
         child: Material(

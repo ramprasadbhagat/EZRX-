@@ -26,6 +26,7 @@ mixin _$OrderHistoryDetailsOrderHeader {
   DateTimeStringValue get createdDate => throw _privateConstructorUsedError;
   String get eZRXNumber => throw _privateConstructorUsedError;
   String get orderBy => throw _privateConstructorUsedError;
+  String get referenceNotes => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $OrderHistoryDetailsOrderHeaderCopyWith<OrderHistoryDetailsOrderHeader>
@@ -49,7 +50,8 @@ abstract class $OrderHistoryDetailsOrderHeaderCopyWith<$Res> {
       double orderValue,
       DateTimeStringValue createdDate,
       String eZRXNumber,
-      String orderBy});
+      String orderBy,
+      String referenceNotes});
 }
 
 /// @nodoc
@@ -75,6 +77,7 @@ class _$OrderHistoryDetailsOrderHeaderCopyWithImpl<$Res,
     Object? createdDate = null,
     Object? eZRXNumber = null,
     Object? orderBy = null,
+    Object? referenceNotes = null,
   }) {
     return _then(_value.copyWith(
       totalTax: null == totalTax
@@ -113,6 +116,10 @@ class _$OrderHistoryDetailsOrderHeaderCopyWithImpl<$Res,
           ? _value.orderBy
           : orderBy // ignore: cast_nullable_to_non_nullable
               as String,
+      referenceNotes: null == referenceNotes
+          ? _value.referenceNotes
+          : referenceNotes // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -135,7 +142,8 @@ abstract class _$$_OrderHistoryDetailsOrderHeaderCopyWith<$Res>
       double orderValue,
       DateTimeStringValue createdDate,
       String eZRXNumber,
-      String orderBy});
+      String orderBy,
+      String referenceNotes});
 }
 
 /// @nodoc
@@ -160,6 +168,7 @@ class __$$_OrderHistoryDetailsOrderHeaderCopyWithImpl<$Res>
     Object? createdDate = null,
     Object? eZRXNumber = null,
     Object? orderBy = null,
+    Object? referenceNotes = null,
   }) {
     return _then(_$_OrderHistoryDetailsOrderHeader(
       totalTax: null == totalTax
@@ -198,6 +207,10 @@ class __$$_OrderHistoryDetailsOrderHeaderCopyWithImpl<$Res>
           ? _value.orderBy
           : orderBy // ignore: cast_nullable_to_non_nullable
               as String,
+      referenceNotes: null == referenceNotes
+          ? _value.referenceNotes
+          : referenceNotes // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -215,7 +228,8 @@ class _$_OrderHistoryDetailsOrderHeader
       required this.orderValue,
       required this.createdDate,
       required this.eZRXNumber,
-      required this.orderBy})
+      required this.orderBy,
+      required this.referenceNotes})
       : super._();
 
   @override
@@ -236,10 +250,12 @@ class _$_OrderHistoryDetailsOrderHeader
   final String eZRXNumber;
   @override
   final String orderBy;
+  @override
+  final String referenceNotes;
 
   @override
   String toString() {
-    return 'OrderHistoryDetailsOrderHeader(totalTax: $totalTax, requestedDeliveryDate: $requestedDeliveryDate, pOReference: $pOReference, type: $type, telephoneNumber: $telephoneNumber, orderValue: $orderValue, createdDate: $createdDate, eZRXNumber: $eZRXNumber, orderBy: $orderBy)';
+    return 'OrderHistoryDetailsOrderHeader(totalTax: $totalTax, requestedDeliveryDate: $requestedDeliveryDate, pOReference: $pOReference, type: $type, telephoneNumber: $telephoneNumber, orderValue: $orderValue, createdDate: $createdDate, eZRXNumber: $eZRXNumber, orderBy: $orderBy, referenceNotes: $referenceNotes)';
   }
 
   @override
@@ -262,7 +278,9 @@ class _$_OrderHistoryDetailsOrderHeader
                 other.createdDate == createdDate) &&
             (identical(other.eZRXNumber, eZRXNumber) ||
                 other.eZRXNumber == eZRXNumber) &&
-            (identical(other.orderBy, orderBy) || other.orderBy == orderBy));
+            (identical(other.orderBy, orderBy) || other.orderBy == orderBy) &&
+            (identical(other.referenceNotes, referenceNotes) ||
+                other.referenceNotes == referenceNotes));
   }
 
   @override
@@ -276,7 +294,8 @@ class _$_OrderHistoryDetailsOrderHeader
       orderValue,
       createdDate,
       eZRXNumber,
-      orderBy);
+      orderBy,
+      referenceNotes);
 
   @JsonKey(ignore: true)
   @override
@@ -289,15 +308,17 @@ class _$_OrderHistoryDetailsOrderHeader
 abstract class _OrderHistoryDetailsOrderHeader
     extends OrderHistoryDetailsOrderHeader {
   factory _OrderHistoryDetailsOrderHeader(
-      {required final double totalTax,
-      required final DateTimeStringValue requestedDeliveryDate,
-      required final POReference pOReference,
-      required final String type,
-      required final PhoneNumber telephoneNumber,
-      required final double orderValue,
-      required final DateTimeStringValue createdDate,
-      required final String eZRXNumber,
-      required final String orderBy}) = _$_OrderHistoryDetailsOrderHeader;
+          {required final double totalTax,
+          required final DateTimeStringValue requestedDeliveryDate,
+          required final POReference pOReference,
+          required final String type,
+          required final PhoneNumber telephoneNumber,
+          required final double orderValue,
+          required final DateTimeStringValue createdDate,
+          required final String eZRXNumber,
+          required final String orderBy,
+          required final String referenceNotes}) =
+      _$_OrderHistoryDetailsOrderHeader;
   _OrderHistoryDetailsOrderHeader._() : super._();
 
   @override
@@ -318,6 +339,8 @@ abstract class _OrderHistoryDetailsOrderHeader
   String get eZRXNumber;
   @override
   String get orderBy;
+  @override
+  String get referenceNotes;
   @override
   @JsonKey(ignore: true)
   _$$_OrderHistoryDetailsOrderHeaderCopyWith<_$_OrderHistoryDetailsOrderHeader>

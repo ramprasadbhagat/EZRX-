@@ -49,7 +49,6 @@ void main() {
         final variables = {
           'salesDocument': 'fake-order',
           'companyName': 'fake-companyname',
-          'language': 'fake-language',
         };
         final res = json.decode(
           await rootBundle

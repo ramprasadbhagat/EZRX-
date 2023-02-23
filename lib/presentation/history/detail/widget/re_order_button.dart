@@ -4,10 +4,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_details/order_history_details_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/order/entities/additional_details_data.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/text_button_shimmer.dart';
@@ -119,10 +121,19 @@ class ReOrderButton extends StatelessWidget {
               eligibilityState.doNotAllowOutOfStockMaterials,
         ));
 
+    context.read<AdditionalDetailsBloc>().add(
+          AdditionalDetailsEvent.initiateFromHistory(
+            data: AdditionalDetailsData.fromOrderHistory(
+              orderHistoryDetails: orderHistoryDetails,
+            ),
+            customerCodeInfo: eligibilityState.customerCodeInfo,
+          ),
+        );
+
     context.router.pushNamed('cart_page');
   }
 
-    List<CartItem> _getUniqueItems({required List<PriceAggregate> items}) => items
+  List<CartItem> _getUniqueItems({required List<PriceAggregate> items}) => items
       .groupListsBy((item) => item.materialNumberString)
       .entries
       .map(
@@ -136,5 +147,4 @@ class ReOrderButton extends StatelessWidget {
       .toList()
       .map((e) => CartItem.material(e))
       .toList();
-
 }

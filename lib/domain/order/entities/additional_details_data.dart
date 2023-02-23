@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -45,6 +46,35 @@ class AdditionalDetailsData with _$AdditionalDetailsData {
       deliveryDate: orderDeliveryDate.isEmpty
           ? defaultDeliveryDate
           : DeliveryDate(orderDeliveryDate),
+    );
+  }
+
+  factory AdditionalDetailsData.fromOrderHistory({
+    required OrderHistoryDetails orderHistoryDetails,
+  }) {
+    return AdditionalDetailsData.empty().copyWith(
+      customerPoReference: CustomerPoReference(
+        orderHistoryDetails.orderHistoryDetailsShippingInformation.pOReference,
+      ),
+      contactPerson: ContactPerson(
+        orderHistoryDetails.orderHistoryDetailsOrderHeader.orderBy,
+      ),
+      contactNumber: ContactNumber(
+        orderHistoryDetails.orderHistoryDetailsOrderHeader.telephoneNumber
+            .getOrDefaultValue(''),
+      ),
+      specialInstruction: SpecialInstruction(
+        orderHistoryDetails.orderHistoryDetailsSpecialInstructions
+            .getOrDefaultValue(''),
+      ),
+      referenceNote: ReferenceNote(
+        orderHistoryDetails.orderHistoryDetailsOrderHeader.referenceNotes,
+      ),
+      collectiveNumber: CollectiveNumber(''),
+      paymentTerm: PaymentTerm(
+        '${orderHistoryDetails.orderHistoryDetailsPaymentTerm.paymentTermCode.getOrDefaultValue('')}-${orderHistoryDetails.orderHistoryDetailsPaymentTerm.paymentTermDescription.getOrDefaultValue('')}',
+      ),
+      poDocuments: orderHistoryDetails.orderHistoryDetailsPoDocuments,
     );
   }
 

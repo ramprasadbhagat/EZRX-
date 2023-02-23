@@ -17,6 +17,7 @@ class OrderHistoryDetailsOrderHeader with _$OrderHistoryDetailsOrderHeader {
     required DateTimeStringValue createdDate,
     required String eZRXNumber,
     required String orderBy,
+    required String referenceNotes,
   }) = _OrderHistoryDetailsOrderHeader;
   factory OrderHistoryDetailsOrderHeader.empty() =>
       OrderHistoryDetailsOrderHeader(
@@ -29,6 +30,7 @@ class OrderHistoryDetailsOrderHeader with _$OrderHistoryDetailsOrderHeader {
         createdDate: DateTimeStringValue(''),
         eZRXNumber: '',
         orderBy: '',
+        referenceNotes: '',
       );
 
   double get grandTotal => orderValue + totalTax;

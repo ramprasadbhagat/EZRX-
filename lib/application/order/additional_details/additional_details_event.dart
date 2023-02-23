@@ -30,6 +30,10 @@ class AdditionalDetailsEvent with _$AdditionalDetailsEvent {
       _AdditionalDetailsToggleGreenDelivery;
   const factory AdditionalDetailsEvent.clearSavedOrderId() =
       _AdditionalDetailsClearSavedOrderId;
+  const factory AdditionalDetailsEvent.initiateFromHistory({
+    required AdditionalDetailsData data,
+    required CustomerCodeInfo customerCodeInfo,
+  }) = _AdditionalDetailsInitiateFromHistory;
 }
 
 enum AdditionalDetailsLabel {

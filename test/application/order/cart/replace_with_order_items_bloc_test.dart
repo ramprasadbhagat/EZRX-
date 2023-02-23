@@ -32,8 +32,8 @@ void main() {
             )).thenAnswer((invocation) async => Right(mockStockInfoMapEmpty));
 
         when(() => cartRepositoryMock.replaceCartWithItems(
-                items: mockCartBundleList))
-            .thenAnswer((invocation) async => Right(mockCartBundleList));
+              items: mockCartBundleList,
+            )).thenAnswer((invocation) async => Right(mockCartBundleList));
 
         when(() =>
                 cartRepositoryMock.updateDiscountQty(items: mockCartBundleList))
@@ -75,10 +75,11 @@ void main() {
               shipToInfo: ShipToInfo.empty(),
             )).thenAnswer((invocation) async => Right(mockStockInfoMapEmpty));
 
-        when(() =>
-            cartRepositoryMock.replaceCartWithItems(
-                items: mockCartBundleList)).thenAnswer(
-            (invocation) async => const Left(ApiFailure.other('fake-Error')));
+        when(() => cartRepositoryMock.replaceCartWithItems(
+                  items: mockCartBundleList,
+                ))
+            .thenAnswer((invocation) async =>
+                const Left(ApiFailure.other('fake-Error')));
       },
       act: (bloc) => bloc.add(CartEvent.replaceWithOrderItems(
         items: mockCartBundleList,

@@ -24,8 +24,6 @@ class AdditionalDetails extends StatelessWidget {
     required this.config,
   }) : super(key: key);
 
-
-
   @override
   Widget build(BuildContext context) {
     return Form(

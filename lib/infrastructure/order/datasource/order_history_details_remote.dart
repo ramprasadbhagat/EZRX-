@@ -34,7 +34,6 @@ class OrderHistoryDetailsRemoteDataSource {
       final variables = {
         'salesDocument': orderId,
         'companyName': companyName,
-        'language': language,
       };
 
       final res = await httpService.request(

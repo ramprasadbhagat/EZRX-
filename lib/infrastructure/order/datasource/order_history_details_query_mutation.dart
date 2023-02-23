@@ -1,18 +1,8 @@
 class OrderHistoryDetailsQueryMutation {
   String getOrderHistoryDetails() {
     return '''
-      query orderDetails(
-  \$salesDocument: String!
-  \$companyName: String!
-  \$language: String!
-
-) {
-  orderDetails(
-    salesDocument: \$salesDocument
-    companyName: \$companyName
-    language: \$language
-   
-  ) {
+      query orderDetails(\$salesDocument: String!, \$language: String, \$companyName: String) {
+  orderDetails(salesDocument: \$salesDocument, language: \$language, companyName: \$companyName) {
     OrderHeader {
       TotalTax
       RequestedDeliveryDate
@@ -24,6 +14,7 @@ class OrderHistoryDetailsQueryMutation {
       OrderBy
       OrderValue
       CreatedDate
+      ReferenceNotes
     }
     ShippingInformation {
       Address

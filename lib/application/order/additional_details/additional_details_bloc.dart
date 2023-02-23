@@ -111,6 +111,17 @@ class AdditionalDetailsBloc
           },
         );
       },
+      initiateFromHistory: (value) async {
+        emit(
+          AdditionalDetailsState.initial().copyWith(
+            additionalDetailsData: value.data.copyWith(
+              contactNumber: ContactNumber(
+                value.customerCodeInfo.telephoneNumber.displayTelephoneNumber,
+              ),
+            ),
+          ),
+        );
+      },
       clearSavedOrderId: (e) async {
         emit(
           state.copyWith(orderId: ''),

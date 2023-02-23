@@ -18,6 +18,7 @@ _$_OrderHistoryDetailsOrderHeadersDto
           createdDate: json['CreatedDate'] as String? ?? '',
           eZRXNumber: json['EZRXNumber'] as String? ?? '',
           orderBy: json['OrderBy'] as String? ?? '',
+          referenceNotes: json['ReferenceNotes'] as String? ?? '',
         );
 
 Map<String, dynamic> _$$_OrderHistoryDetailsOrderHeadersDtoToJson(
@@ -32,4 +33,5 @@ Map<String, dynamic> _$$_OrderHistoryDetailsOrderHeadersDtoToJson(
       'CreatedDate': instance.createdDate,
       'EZRXNumber': instance.eZRXNumber,
       'OrderBy': instance.orderBy,
+      'ReferenceNotes': instance.referenceNotes,
     };

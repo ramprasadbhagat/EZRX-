@@ -88,6 +88,7 @@ class OrderHistoryDetailsDto with _$OrderHistoryDetailsDto {
             DateTimeStringValue(orderHistoryDetailsOrderHeader.createdDate),
         eZRXNumber: orderHistoryDetailsOrderHeader.eZRXNumber,
         orderBy: orderHistoryDetailsOrderHeader.orderBy,
+        referenceNotes: orderHistoryDetailsOrderHeader.referenceNotes,
       ),
       orderHistoryDetailsShippingInformation:
           OrderHistoryDetailsShippingInformation(

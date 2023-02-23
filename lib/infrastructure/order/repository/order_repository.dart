@@ -17,6 +17,7 @@ import 'package:ezrxmobile/domain/order/entities/submit_material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_order.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_order_customer.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_order_response.dart';
+import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/repository/i_order_repository.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
@@ -387,8 +388,7 @@ class OrderRepository implements IOrderRepository {
           : '',
       purchaseOrderType: user.role.type.purchaseOrderType,
       shippingCondition: data.greenDeliveryEnabled ? 'GD' : '',
-      paymentTerms:
-          cartItems.first.tenderContract.contractPaymentTerm.getValue(),
+      paymentTerms: _getPaymentTerms(cartItems: cartItems, data: data),
       customer: _getSubmitOrderCustomer(
         customerCodeInfo: customerCodeInfo,
         salesOrganisation: salesOrganisation,
@@ -400,6 +400,26 @@ class OrderRepository implements IOrderRepository {
       poDocuments: data.poDocuments,
     );
   }
+}
+
+String _getPaymentTerms({
+  required List<PriceAggregate> cartItems,
+  required AdditionalDetailsData data,
+}) {
+  final priceAggregate = cartItems.firstWhere(
+    (element) =>
+        element.tenderContract != TenderContract.empty() &&
+        element.tenderContract != TenderContract.noContract(),
+    orElse: () => PriceAggregate.empty(),
+  );
+
+  final paymentTerm = data.paymentTerm.getOrDefaultValue('');
+
+  return priceAggregate != PriceAggregate.empty()
+      ? priceAggregate.tenderContract.contractPaymentTerm.getValue()
+      : paymentTerm.isEmpty
+          ? paymentTerm
+          : paymentTerm.substring(0, paymentTerm.indexOf('-'));
 }
 
 SubmitOrderCustomer _getSubmitOrderCustomer({
