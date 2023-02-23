@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_approver_filter.dart';
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -16,7 +17,8 @@ class ReturnApproverFilterBloc
     on<ReturnApproverFilterEvent>(_onEvent);
   }
 
-  FutureOr<void> _onEvent(ReturnApproverFilterEvent event,
+  FutureOr<void> _onEvent(
+    ReturnApproverFilterEvent event,
     Emitter<ReturnApproverFilterState> emit,
   ) {
     event.map(
@@ -32,13 +34,15 @@ class ReturnApproverFilterBloc
             isSubmitting: false,
           ),
         );
-        if (state.anyFilterApplied && state.allFilterValid) {
-          emit(state.copyWith(
+        if (state.areFiltersValid) {
+          emit(
+            state.copyWith(
               isSubmitting: true,
             ),
           );
         } else {
-          emit(state.copyWith(
+          emit(
+            state.copyWith(
               showErrorMessages: true,
             ),
           );
@@ -56,22 +60,6 @@ class ReturnApproverFilterBloc
         state.copyWith(
           approverReturnFilter: state.approverReturnFilter.copyWith(
             returnId: SearchKey.searchFilter(e.returnId),
-          ),
-          showErrorMessages: false,
-        ),
-      ),
-      setToInvoiceDate: (_SetToInvoiceDate e) => emit(
-        state.copyWith(
-          approverReturnFilter: state.approverReturnFilter.copyWith(
-            toInvoiceDate: InvoiceDate(e.toDate.toIso8601String()),
-          ),
-          showErrorMessages: false,
-        ),
-      ),
-      setfromInvoiceDate: (_SetfromInvoiceDate e) => emit(
-        state.copyWith(
-          approverReturnFilter: state.approverReturnFilter.copyWith(
-            fromInvoiceDate: InvoiceDate(e.fromDate.toIso8601String()),
           ),
           showErrorMessages: false,
         ),
@@ -97,6 +85,19 @@ class ReturnApproverFilterBloc
           approverReturnFilter: state.approverReturnFilter.copyWith(
             sortBy: e.sortBy,
           ),
+        ),
+      ),
+      setInvoiceDate: (_SetInvoiceDate e) => emit(
+        state.copyWith(
+          approverReturnFilter: state.approverReturnFilter.copyWith(
+            fromInvoiceDate: InvoiceDate(
+              e.invoiceDateRange.start.toIso8601String(),
+            ),
+            toInvoiceDate: InvoiceDate(
+              e.invoiceDateRange.end.toIso8601String(),
+            ),
+          ),
+          showErrorMessages: false,
         ),
       ),
     );

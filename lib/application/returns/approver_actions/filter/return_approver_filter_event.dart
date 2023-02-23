@@ -6,14 +6,6 @@ class ReturnApproverFilterEvent with _$ReturnApproverFilterEvent {
 
   const factory ReturnApproverFilterEvent.applyFilters() = _ApplyFilters;
 
-  const factory ReturnApproverFilterEvent.setfromInvoiceDate({
-    required DateTime fromDate,
-  }) = _SetfromInvoiceDate;
-
-  const factory ReturnApproverFilterEvent.setToInvoiceDate({
-    required DateTime toDate,
-  }) = _SetToInvoiceDate;
-
   const factory ReturnApproverFilterEvent.returnIdChanged(String returnId) =
       _ReturnIdChanged;
 
@@ -31,4 +23,8 @@ class ReturnApproverFilterEvent with _$ReturnApproverFilterEvent {
   const factory ReturnApproverFilterEvent.sortByChanged(
     FilterStatus sortBy,
   ) = _SortByChanged;
+
+  const factory ReturnApproverFilterEvent.setInvoiceDate(
+    DateTimeRange invoiceDateRange,
+  ) = _SetInvoiceDate;
 }

@@ -19,18 +19,12 @@ class ReturnApproverFilterState with _$ReturnApproverFilterState {
       approverReturnFilter.fromInvoiceDate.isValid() &&
       approverReturnFilter.toInvoiceDate.isValid();
 
-  bool get _dateFilterNotApplied =>
-      !approverReturnFilter.fromInvoiceDate.isValid() &&
-      !approverReturnFilter.toInvoiceDate.isValid();
 
-  bool get _validDateFilter => _dateFilterNotApplied || _dateFilterApplied;
-
-  bool get allFilterValid {
+  bool get areFiltersValid {
     return approverReturnFilter.returnId.isValid() &&
         approverReturnFilter.createdBy.isValid() &&
         approverReturnFilter.shipTo.isValid() &&
-        approverReturnFilter.soldTo.isValid() &&
-        _validDateFilter;
+        approverReturnFilter.soldTo.isValid();
   }
 
   bool get anyFilterApplied =>
@@ -44,6 +38,9 @@ class ReturnApproverFilterState with _$ReturnApproverFilterState {
       approverReturnStatus.map((e) => FilterStatus(e)).toList();
 
   FilterStatus get activeSort => approverReturnFilter.sortBy;
+
+  bool get approverReturnFilterIsEmpty =>
+      approverReturnFilter == ReturnApproverFilter.empty();
 }
 
 const List<String> approverReturnStatus = [

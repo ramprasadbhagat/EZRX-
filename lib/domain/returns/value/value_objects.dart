@@ -3,6 +3,7 @@ import 'dart:core';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/core/error/failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/core/value/value_validators.dart';
 import 'package:ezrxmobile/domain/returns/value/value_transformers.dart';
 import 'package:flutter/animation.dart';
@@ -110,15 +111,19 @@ class InvoiceDate extends ValueObject<String> {
   final Either<ValueFailure<String>, String> value;
 
   factory InvoiceDate(String input) {
-    return InvoiceDate._(validateStringNotEmpty(input));
+    return InvoiceDate._(Right(input));
   }
 
   DateTime get dateTimebyDateString =>
       getDateTimebyDateString(value.getOrElse(() => ''));
 
-  String get apiParameterValueOrEmpty => covertDateStringToApiDateString(
+  String get apiParameterValue => covertDateStringToApiDateString(
         value.getOrElse(() => ''),
       );
+
+  String get getFormattedDate {
+    return displayDateStringOrEmpty((value.getOrElse(() => '')));
+  }
 
   const InvoiceDate._(this.value);
 }

@@ -13,7 +13,7 @@ void main() {
   group('Approver return request information header dto ', () {
     setUp(() async {
       data = json.decode(await rootBundle.loadString(
-          'assets/json/returnRequestequestInformationV2Response.json'));
+          'assets/json/returnRequestInformationV2Response.json'));
     });
     test('=> Approver return request information header', () {
       final approverReturnRequestInformationHeader =

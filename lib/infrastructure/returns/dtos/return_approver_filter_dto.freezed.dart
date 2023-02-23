@@ -45,17 +45,9 @@ mixin _$ReturnApproverFilterDto {
       includeIfNull: false,
       toJson: valueTojson)
   String get createdBy => throw _privateConstructorUsedError;
-  @JsonKey(
-      name: 'dateTo',
-      defaultValue: '',
-      includeIfNull: false,
-      toJson: valueTojson)
+  @JsonKey(name: 'dateTo', defaultValue: '')
   String get dateTo => throw _privateConstructorUsedError;
-  @JsonKey(
-      name: 'dateFrom',
-      defaultValue: '',
-      includeIfNull: false,
-      toJson: valueTojson)
+  @JsonKey(name: 'dateFrom', defaultValue: '')
   String get dateFrom => throw _privateConstructorUsedError;
   @JsonKey(
       name: 'status',
@@ -85,9 +77,9 @@ abstract class $ReturnApproverFilterDtoCopyWith<$Res> {
           String shipTo,
       @JsonKey(name: 'createdBy', defaultValue: '', includeIfNull: false, toJson: valueTojson)
           String createdBy,
-      @JsonKey(name: 'dateTo', defaultValue: '', includeIfNull: false, toJson: valueTojson)
+      @JsonKey(name: 'dateTo', defaultValue: '')
           String dateTo,
-      @JsonKey(name: 'dateFrom', defaultValue: '', includeIfNull: false, toJson: valueTojson)
+      @JsonKey(name: 'dateFrom', defaultValue: '')
           String dateFrom,
       @JsonKey(name: 'status', defaultValue: '', includeIfNull: false, toJson: valueTojson)
           String status});
@@ -165,9 +157,9 @@ abstract class _$$_ReturnApproverFilterDtoCopyWith<$Res>
           String shipTo,
       @JsonKey(name: 'createdBy', defaultValue: '', includeIfNull: false, toJson: valueTojson)
           String createdBy,
-      @JsonKey(name: 'dateTo', defaultValue: '', includeIfNull: false, toJson: valueTojson)
+      @JsonKey(name: 'dateTo', defaultValue: '')
           String dateTo,
-      @JsonKey(name: 'dateFrom', defaultValue: '', includeIfNull: false, toJson: valueTojson)
+      @JsonKey(name: 'dateFrom', defaultValue: '')
           String dateFrom,
       @JsonKey(name: 'status', defaultValue: '', includeIfNull: false, toJson: valueTojson)
           String status});
@@ -238,9 +230,9 @@ class _$_ReturnApproverFilterDto implements _ReturnApproverFilterDto {
           required this.shipTo,
       @JsonKey(name: 'createdBy', defaultValue: '', includeIfNull: false, toJson: valueTojson)
           required this.createdBy,
-      @JsonKey(name: 'dateTo', defaultValue: '', includeIfNull: false, toJson: valueTojson)
+      @JsonKey(name: 'dateTo', defaultValue: '')
           required this.dateTo,
-      @JsonKey(name: 'dateFrom', defaultValue: '', includeIfNull: false, toJson: valueTojson)
+      @JsonKey(name: 'dateFrom', defaultValue: '')
           required this.dateFrom,
       @JsonKey(name: 'status', defaultValue: '', includeIfNull: false, toJson: valueTojson)
           required this.status});
@@ -277,18 +269,10 @@ class _$_ReturnApproverFilterDto implements _ReturnApproverFilterDto {
       toJson: valueTojson)
   final String createdBy;
   @override
-  @JsonKey(
-      name: 'dateTo',
-      defaultValue: '',
-      includeIfNull: false,
-      toJson: valueTojson)
+  @JsonKey(name: 'dateTo', defaultValue: '')
   final String dateTo;
   @override
-  @JsonKey(
-      name: 'dateFrom',
-      defaultValue: '',
-      includeIfNull: false,
-      toJson: valueTojson)
+  @JsonKey(name: 'dateFrom', defaultValue: '')
   final String dateFrom;
   @override
   @JsonKey(
@@ -351,9 +335,9 @@ abstract class _ReturnApproverFilterDto implements ReturnApproverFilterDto {
           required final String shipTo,
       @JsonKey(name: 'createdBy', defaultValue: '', includeIfNull: false, toJson: valueTojson)
           required final String createdBy,
-      @JsonKey(name: 'dateTo', defaultValue: '', includeIfNull: false, toJson: valueTojson)
+      @JsonKey(name: 'dateTo', defaultValue: '')
           required final String dateTo,
-      @JsonKey(name: 'dateFrom', defaultValue: '', includeIfNull: false, toJson: valueTojson)
+      @JsonKey(name: 'dateFrom', defaultValue: '')
           required final String dateFrom,
       @JsonKey(name: 'status', defaultValue: '', includeIfNull: false, toJson: valueTojson)
           required final String status}) = _$_ReturnApproverFilterDto;
@@ -390,18 +374,10 @@ abstract class _ReturnApproverFilterDto implements ReturnApproverFilterDto {
       toJson: valueTojson)
   String get createdBy;
   @override
-  @JsonKey(
-      name: 'dateTo',
-      defaultValue: '',
-      includeIfNull: false,
-      toJson: valueTojson)
+  @JsonKey(name: 'dateTo', defaultValue: '')
   String get dateTo;
   @override
-  @JsonKey(
-      name: 'dateFrom',
-      defaultValue: '',
-      includeIfNull: false,
-      toJson: valueTojson)
+  @JsonKey(name: 'dateFrom', defaultValue: '')
   String get dateFrom;
   @override
   @JsonKey(

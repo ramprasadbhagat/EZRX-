@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
@@ -5,7 +6,7 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/returns/entities/approver_return_request.dart';
 import 'package:ezrxmobile/domain/returns/entities/approver_return_requests_id.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_approver_filter.dart';
-import 'package:ezrxmobile/domain/returns/entities/return_request.dart';
+import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/approver_return_request_information_local.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/approver_return_request_information_remote.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/approver_return_requests_local.dart';
@@ -39,7 +40,20 @@ void main() {
   late ApproverReturnRequestInformationRemote
       approverReturnRequestInformationRemoteMock;
 
-  final requestReturnResponse = ReturnRequest.empty();
+  late ReturnApproverFilter returnApproverFilter;
+  final fakeToDate = DateTime.parse(
+    DateFormat('yyyyMMdd').format(
+      DateTime.now(),
+    ),
+  );
+
+  final fakeFormDate = DateTime.parse(
+    DateFormat('yyyyMMdd').format(
+      DateTime.now().subtract(
+        const Duration(days: 7),
+      ),
+    ),
+  );
 
   setUpAll(() {
     mockConfig = MockConfig();
@@ -58,6 +72,14 @@ void main() {
           approverReturnRequestInformationRemoteMock,
       returnRequestLocalDataSource: approverReturnRequestsLocalMock,
       returnRequestRemoteDataSource: approverReturnRequestsRemoteMock,
+    );
+    returnApproverFilter = ReturnApproverFilter.empty().copyWith(
+      toInvoiceDate: InvoiceDate(
+        fakeToDate.toIso8601String(),
+      ),
+      fromInvoiceDate: InvoiceDate(
+        fakeFormDate.toIso8601String(),
+      ),
     );
   });
 
@@ -115,7 +137,13 @@ void main() {
         () async {
           when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
           when(() => approverReturnRequestsRemoteMock.getReturns(
-              filterQuery: {'status': 'PENDING'},
+              filterQuery: {
+                    'status': 'PENDING',
+                    'dateTo': InvoiceDate(fakeToDate.toIso8601String())
+                        .apiParameterValue,
+                    'dateFrom': InvoiceDate(fakeFormDate.toIso8601String())
+                        .apiParameterValue,
+                  },
               offset: 0,
               pageSize: 11,
               username: 'Fake-username')).thenAnswer(
@@ -125,7 +153,7 @@ void main() {
           );
 
           final result = await returnApproverRepository.getReturnRequests(
-            approverReturnFilter: ReturnApproverFilter.empty(),
+            approverReturnFilter: returnApproverFilter,
             offset: 0,
             pageSize: 11,
             user: User.empty().copyWith(
@@ -144,7 +172,13 @@ void main() {
         () async {
           when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
           when(() => approverReturnRequestsRemoteMock.getReturns(
-                  filterQuery: {'status': 'PENDING'},
+                  filterQuery: {
+                    'status': 'PENDING',
+                    'dateTo': InvoiceDate(fakeToDate.toIso8601String())
+                        .apiParameterValue,
+                    'dateFrom': InvoiceDate(fakeFormDate.toIso8601String())
+                        .apiParameterValue,
+                  },
                   offset: 0,
                   pageSize: 11,
                   username: 'Fake-username'))

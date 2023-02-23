@@ -32,8 +32,8 @@ Map<String, dynamic> _$$_ReturnApproverFilterDtoToJson(
   writeNotNull('soldTo', valueTojson(instance.soldTo));
   writeNotNull('shipTo', valueTojson(instance.shipTo));
   writeNotNull('createdBy', valueTojson(instance.createdBy));
-  writeNotNull('dateTo', valueTojson(instance.dateTo));
-  writeNotNull('dateFrom', valueTojson(instance.dateFrom));
+  val['dateTo'] = instance.dateTo;
+  val['dateFrom'] = instance.dateFrom;
   writeNotNull('status', valueTojson(instance.status));
   return val;
 }

@@ -20,39 +20,36 @@ mixin _$ReturnApproverFilterEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function() applyFilters,
-    required TResult Function(DateTime fromDate) setfromInvoiceDate,
-    required TResult Function(DateTime toDate) setToInvoiceDate,
     required TResult Function(String returnId) returnIdChanged,
     required TResult Function(String soldTo) soldToChanged,
     required TResult Function(String shitTo) shipToChanged,
     required TResult Function(String createdBy) createdByChanged,
     required TResult Function(FilterStatus sortBy) sortByChanged,
+    required TResult Function(DateTimeRange invoiceDateRange) setInvoiceDate,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function()? applyFilters,
-    TResult? Function(DateTime fromDate)? setfromInvoiceDate,
-    TResult? Function(DateTime toDate)? setToInvoiceDate,
     TResult? Function(String returnId)? returnIdChanged,
     TResult? Function(String soldTo)? soldToChanged,
     TResult? Function(String shitTo)? shipToChanged,
     TResult? Function(String createdBy)? createdByChanged,
     TResult? Function(FilterStatus sortBy)? sortByChanged,
+    TResult? Function(DateTimeRange invoiceDateRange)? setInvoiceDate,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function()? applyFilters,
-    TResult Function(DateTime fromDate)? setfromInvoiceDate,
-    TResult Function(DateTime toDate)? setToInvoiceDate,
     TResult Function(String returnId)? returnIdChanged,
     TResult Function(String soldTo)? soldToChanged,
     TResult Function(String shitTo)? shipToChanged,
     TResult Function(String createdBy)? createdByChanged,
     TResult Function(FilterStatus sortBy)? sortByChanged,
+    TResult Function(DateTimeRange invoiceDateRange)? setInvoiceDate,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -60,39 +57,36 @@ mixin _$ReturnApproverFilterEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_ApplyFilters value) applyFilters,
-    required TResult Function(_SetfromInvoiceDate value) setfromInvoiceDate,
-    required TResult Function(_SetToInvoiceDate value) setToInvoiceDate,
     required TResult Function(_ReturnIdChanged value) returnIdChanged,
     required TResult Function(_SoldToChanged value) soldToChanged,
     required TResult Function(_ShipToChanged value) shipToChanged,
     required TResult Function(_CreatedByChanged value) createdByChanged,
     required TResult Function(_SortByChanged value) sortByChanged,
+    required TResult Function(_SetInvoiceDate value) setInvoiceDate,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_ApplyFilters value)? applyFilters,
-    TResult? Function(_SetfromInvoiceDate value)? setfromInvoiceDate,
-    TResult? Function(_SetToInvoiceDate value)? setToInvoiceDate,
     TResult? Function(_ReturnIdChanged value)? returnIdChanged,
     TResult? Function(_SoldToChanged value)? soldToChanged,
     TResult? Function(_ShipToChanged value)? shipToChanged,
     TResult? Function(_CreatedByChanged value)? createdByChanged,
     TResult? Function(_SortByChanged value)? sortByChanged,
+    TResult? Function(_SetInvoiceDate value)? setInvoiceDate,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_ApplyFilters value)? applyFilters,
-    TResult Function(_SetfromInvoiceDate value)? setfromInvoiceDate,
-    TResult Function(_SetToInvoiceDate value)? setToInvoiceDate,
     TResult Function(_ReturnIdChanged value)? returnIdChanged,
     TResult Function(_SoldToChanged value)? soldToChanged,
     TResult Function(_ShipToChanged value)? shipToChanged,
     TResult Function(_CreatedByChanged value)? createdByChanged,
     TResult Function(_SortByChanged value)? sortByChanged,
+    TResult Function(_SetInvoiceDate value)? setInvoiceDate,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -157,13 +151,12 @@ class _$_Initialized implements _Initialized {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function() applyFilters,
-    required TResult Function(DateTime fromDate) setfromInvoiceDate,
-    required TResult Function(DateTime toDate) setToInvoiceDate,
     required TResult Function(String returnId) returnIdChanged,
     required TResult Function(String soldTo) soldToChanged,
     required TResult Function(String shitTo) shipToChanged,
     required TResult Function(String createdBy) createdByChanged,
     required TResult Function(FilterStatus sortBy) sortByChanged,
+    required TResult Function(DateTimeRange invoiceDateRange) setInvoiceDate,
   }) {
     return initialized();
   }
@@ -173,13 +166,12 @@ class _$_Initialized implements _Initialized {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function()? applyFilters,
-    TResult? Function(DateTime fromDate)? setfromInvoiceDate,
-    TResult? Function(DateTime toDate)? setToInvoiceDate,
     TResult? Function(String returnId)? returnIdChanged,
     TResult? Function(String soldTo)? soldToChanged,
     TResult? Function(String shitTo)? shipToChanged,
     TResult? Function(String createdBy)? createdByChanged,
     TResult? Function(FilterStatus sortBy)? sortByChanged,
+    TResult? Function(DateTimeRange invoiceDateRange)? setInvoiceDate,
   }) {
     return initialized?.call();
   }
@@ -189,13 +181,12 @@ class _$_Initialized implements _Initialized {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function()? applyFilters,
-    TResult Function(DateTime fromDate)? setfromInvoiceDate,
-    TResult Function(DateTime toDate)? setToInvoiceDate,
     TResult Function(String returnId)? returnIdChanged,
     TResult Function(String soldTo)? soldToChanged,
     TResult Function(String shitTo)? shipToChanged,
     TResult Function(String createdBy)? createdByChanged,
     TResult Function(FilterStatus sortBy)? sortByChanged,
+    TResult Function(DateTimeRange invoiceDateRange)? setInvoiceDate,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -209,13 +200,12 @@ class _$_Initialized implements _Initialized {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_ApplyFilters value) applyFilters,
-    required TResult Function(_SetfromInvoiceDate value) setfromInvoiceDate,
-    required TResult Function(_SetToInvoiceDate value) setToInvoiceDate,
     required TResult Function(_ReturnIdChanged value) returnIdChanged,
     required TResult Function(_SoldToChanged value) soldToChanged,
     required TResult Function(_ShipToChanged value) shipToChanged,
     required TResult Function(_CreatedByChanged value) createdByChanged,
     required TResult Function(_SortByChanged value) sortByChanged,
+    required TResult Function(_SetInvoiceDate value) setInvoiceDate,
   }) {
     return initialized(this);
   }
@@ -225,13 +215,12 @@ class _$_Initialized implements _Initialized {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_ApplyFilters value)? applyFilters,
-    TResult? Function(_SetfromInvoiceDate value)? setfromInvoiceDate,
-    TResult? Function(_SetToInvoiceDate value)? setToInvoiceDate,
     TResult? Function(_ReturnIdChanged value)? returnIdChanged,
     TResult? Function(_SoldToChanged value)? soldToChanged,
     TResult? Function(_ShipToChanged value)? shipToChanged,
     TResult? Function(_CreatedByChanged value)? createdByChanged,
     TResult? Function(_SortByChanged value)? sortByChanged,
+    TResult? Function(_SetInvoiceDate value)? setInvoiceDate,
   }) {
     return initialized?.call(this);
   }
@@ -241,13 +230,12 @@ class _$_Initialized implements _Initialized {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_ApplyFilters value)? applyFilters,
-    TResult Function(_SetfromInvoiceDate value)? setfromInvoiceDate,
-    TResult Function(_SetToInvoiceDate value)? setToInvoiceDate,
     TResult Function(_ReturnIdChanged value)? returnIdChanged,
     TResult Function(_SoldToChanged value)? soldToChanged,
     TResult Function(_ShipToChanged value)? shipToChanged,
     TResult Function(_CreatedByChanged value)? createdByChanged,
     TResult Function(_SortByChanged value)? sortByChanged,
+    TResult Function(_SetInvoiceDate value)? setInvoiceDate,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -301,13 +289,12 @@ class _$_ApplyFilters implements _ApplyFilters {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function() applyFilters,
-    required TResult Function(DateTime fromDate) setfromInvoiceDate,
-    required TResult Function(DateTime toDate) setToInvoiceDate,
     required TResult Function(String returnId) returnIdChanged,
     required TResult Function(String soldTo) soldToChanged,
     required TResult Function(String shitTo) shipToChanged,
     required TResult Function(String createdBy) createdByChanged,
     required TResult Function(FilterStatus sortBy) sortByChanged,
+    required TResult Function(DateTimeRange invoiceDateRange) setInvoiceDate,
   }) {
     return applyFilters();
   }
@@ -317,13 +304,12 @@ class _$_ApplyFilters implements _ApplyFilters {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function()? applyFilters,
-    TResult? Function(DateTime fromDate)? setfromInvoiceDate,
-    TResult? Function(DateTime toDate)? setToInvoiceDate,
     TResult? Function(String returnId)? returnIdChanged,
     TResult? Function(String soldTo)? soldToChanged,
     TResult? Function(String shitTo)? shipToChanged,
     TResult? Function(String createdBy)? createdByChanged,
     TResult? Function(FilterStatus sortBy)? sortByChanged,
+    TResult? Function(DateTimeRange invoiceDateRange)? setInvoiceDate,
   }) {
     return applyFilters?.call();
   }
@@ -333,13 +319,12 @@ class _$_ApplyFilters implements _ApplyFilters {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function()? applyFilters,
-    TResult Function(DateTime fromDate)? setfromInvoiceDate,
-    TResult Function(DateTime toDate)? setToInvoiceDate,
     TResult Function(String returnId)? returnIdChanged,
     TResult Function(String soldTo)? soldToChanged,
     TResult Function(String shitTo)? shipToChanged,
     TResult Function(String createdBy)? createdByChanged,
     TResult Function(FilterStatus sortBy)? sortByChanged,
+    TResult Function(DateTimeRange invoiceDateRange)? setInvoiceDate,
     required TResult orElse(),
   }) {
     if (applyFilters != null) {
@@ -353,13 +338,12 @@ class _$_ApplyFilters implements _ApplyFilters {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_ApplyFilters value) applyFilters,
-    required TResult Function(_SetfromInvoiceDate value) setfromInvoiceDate,
-    required TResult Function(_SetToInvoiceDate value) setToInvoiceDate,
     required TResult Function(_ReturnIdChanged value) returnIdChanged,
     required TResult Function(_SoldToChanged value) soldToChanged,
     required TResult Function(_ShipToChanged value) shipToChanged,
     required TResult Function(_CreatedByChanged value) createdByChanged,
     required TResult Function(_SortByChanged value) sortByChanged,
+    required TResult Function(_SetInvoiceDate value) setInvoiceDate,
   }) {
     return applyFilters(this);
   }
@@ -369,13 +353,12 @@ class _$_ApplyFilters implements _ApplyFilters {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_ApplyFilters value)? applyFilters,
-    TResult? Function(_SetfromInvoiceDate value)? setfromInvoiceDate,
-    TResult? Function(_SetToInvoiceDate value)? setToInvoiceDate,
     TResult? Function(_ReturnIdChanged value)? returnIdChanged,
     TResult? Function(_SoldToChanged value)? soldToChanged,
     TResult? Function(_ShipToChanged value)? shipToChanged,
     TResult? Function(_CreatedByChanged value)? createdByChanged,
     TResult? Function(_SortByChanged value)? sortByChanged,
+    TResult? Function(_SetInvoiceDate value)? setInvoiceDate,
   }) {
     return applyFilters?.call(this);
   }
@@ -385,13 +368,12 @@ class _$_ApplyFilters implements _ApplyFilters {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_ApplyFilters value)? applyFilters,
-    TResult Function(_SetfromInvoiceDate value)? setfromInvoiceDate,
-    TResult Function(_SetToInvoiceDate value)? setToInvoiceDate,
     TResult Function(_ReturnIdChanged value)? returnIdChanged,
     TResult Function(_SoldToChanged value)? soldToChanged,
     TResult Function(_ShipToChanged value)? shipToChanged,
     TResult Function(_CreatedByChanged value)? createdByChanged,
     TResult Function(_SortByChanged value)? sortByChanged,
+    TResult Function(_SetInvoiceDate value)? setInvoiceDate,
     required TResult orElse(),
   }) {
     if (applyFilters != null) {
@@ -403,360 +385,6 @@ class _$_ApplyFilters implements _ApplyFilters {
 
 abstract class _ApplyFilters implements ReturnApproverFilterEvent {
   const factory _ApplyFilters() = _$_ApplyFilters;
-}
-
-/// @nodoc
-abstract class _$$_SetfromInvoiceDateCopyWith<$Res> {
-  factory _$$_SetfromInvoiceDateCopyWith(_$_SetfromInvoiceDate value,
-          $Res Function(_$_SetfromInvoiceDate) then) =
-      __$$_SetfromInvoiceDateCopyWithImpl<$Res>;
-  @useResult
-  $Res call({DateTime fromDate});
-}
-
-/// @nodoc
-class __$$_SetfromInvoiceDateCopyWithImpl<$Res>
-    extends _$ReturnApproverFilterEventCopyWithImpl<$Res, _$_SetfromInvoiceDate>
-    implements _$$_SetfromInvoiceDateCopyWith<$Res> {
-  __$$_SetfromInvoiceDateCopyWithImpl(
-      _$_SetfromInvoiceDate _value, $Res Function(_$_SetfromInvoiceDate) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? fromDate = null,
-  }) {
-    return _then(_$_SetfromInvoiceDate(
-      fromDate: null == fromDate
-          ? _value.fromDate
-          : fromDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$_SetfromInvoiceDate implements _SetfromInvoiceDate {
-  const _$_SetfromInvoiceDate({required this.fromDate});
-
-  @override
-  final DateTime fromDate;
-
-  @override
-  String toString() {
-    return 'ReturnApproverFilterEvent.setfromInvoiceDate(fromDate: $fromDate)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_SetfromInvoiceDate &&
-            (identical(other.fromDate, fromDate) ||
-                other.fromDate == fromDate));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, fromDate);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_SetfromInvoiceDateCopyWith<_$_SetfromInvoiceDate> get copyWith =>
-      __$$_SetfromInvoiceDateCopyWithImpl<_$_SetfromInvoiceDate>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function() applyFilters,
-    required TResult Function(DateTime fromDate) setfromInvoiceDate,
-    required TResult Function(DateTime toDate) setToInvoiceDate,
-    required TResult Function(String returnId) returnIdChanged,
-    required TResult Function(String soldTo) soldToChanged,
-    required TResult Function(String shitTo) shipToChanged,
-    required TResult Function(String createdBy) createdByChanged,
-    required TResult Function(FilterStatus sortBy) sortByChanged,
-  }) {
-    return setfromInvoiceDate(fromDate);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function()? applyFilters,
-    TResult? Function(DateTime fromDate)? setfromInvoiceDate,
-    TResult? Function(DateTime toDate)? setToInvoiceDate,
-    TResult? Function(String returnId)? returnIdChanged,
-    TResult? Function(String soldTo)? soldToChanged,
-    TResult? Function(String shitTo)? shipToChanged,
-    TResult? Function(String createdBy)? createdByChanged,
-    TResult? Function(FilterStatus sortBy)? sortByChanged,
-  }) {
-    return setfromInvoiceDate?.call(fromDate);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function()? applyFilters,
-    TResult Function(DateTime fromDate)? setfromInvoiceDate,
-    TResult Function(DateTime toDate)? setToInvoiceDate,
-    TResult Function(String returnId)? returnIdChanged,
-    TResult Function(String soldTo)? soldToChanged,
-    TResult Function(String shitTo)? shipToChanged,
-    TResult Function(String createdBy)? createdByChanged,
-    TResult Function(FilterStatus sortBy)? sortByChanged,
-    required TResult orElse(),
-  }) {
-    if (setfromInvoiceDate != null) {
-      return setfromInvoiceDate(fromDate);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initialized value) initialized,
-    required TResult Function(_ApplyFilters value) applyFilters,
-    required TResult Function(_SetfromInvoiceDate value) setfromInvoiceDate,
-    required TResult Function(_SetToInvoiceDate value) setToInvoiceDate,
-    required TResult Function(_ReturnIdChanged value) returnIdChanged,
-    required TResult Function(_SoldToChanged value) soldToChanged,
-    required TResult Function(_ShipToChanged value) shipToChanged,
-    required TResult Function(_CreatedByChanged value) createdByChanged,
-    required TResult Function(_SortByChanged value) sortByChanged,
-  }) {
-    return setfromInvoiceDate(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_ApplyFilters value)? applyFilters,
-    TResult? Function(_SetfromInvoiceDate value)? setfromInvoiceDate,
-    TResult? Function(_SetToInvoiceDate value)? setToInvoiceDate,
-    TResult? Function(_ReturnIdChanged value)? returnIdChanged,
-    TResult? Function(_SoldToChanged value)? soldToChanged,
-    TResult? Function(_ShipToChanged value)? shipToChanged,
-    TResult? Function(_CreatedByChanged value)? createdByChanged,
-    TResult? Function(_SortByChanged value)? sortByChanged,
-  }) {
-    return setfromInvoiceDate?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_ApplyFilters value)? applyFilters,
-    TResult Function(_SetfromInvoiceDate value)? setfromInvoiceDate,
-    TResult Function(_SetToInvoiceDate value)? setToInvoiceDate,
-    TResult Function(_ReturnIdChanged value)? returnIdChanged,
-    TResult Function(_SoldToChanged value)? soldToChanged,
-    TResult Function(_ShipToChanged value)? shipToChanged,
-    TResult Function(_CreatedByChanged value)? createdByChanged,
-    TResult Function(_SortByChanged value)? sortByChanged,
-    required TResult orElse(),
-  }) {
-    if (setfromInvoiceDate != null) {
-      return setfromInvoiceDate(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _SetfromInvoiceDate implements ReturnApproverFilterEvent {
-  const factory _SetfromInvoiceDate({required final DateTime fromDate}) =
-      _$_SetfromInvoiceDate;
-
-  DateTime get fromDate;
-  @JsonKey(ignore: true)
-  _$$_SetfromInvoiceDateCopyWith<_$_SetfromInvoiceDate> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$_SetToInvoiceDateCopyWith<$Res> {
-  factory _$$_SetToInvoiceDateCopyWith(
-          _$_SetToInvoiceDate value, $Res Function(_$_SetToInvoiceDate) then) =
-      __$$_SetToInvoiceDateCopyWithImpl<$Res>;
-  @useResult
-  $Res call({DateTime toDate});
-}
-
-/// @nodoc
-class __$$_SetToInvoiceDateCopyWithImpl<$Res>
-    extends _$ReturnApproverFilterEventCopyWithImpl<$Res, _$_SetToInvoiceDate>
-    implements _$$_SetToInvoiceDateCopyWith<$Res> {
-  __$$_SetToInvoiceDateCopyWithImpl(
-      _$_SetToInvoiceDate _value, $Res Function(_$_SetToInvoiceDate) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? toDate = null,
-  }) {
-    return _then(_$_SetToInvoiceDate(
-      toDate: null == toDate
-          ? _value.toDate
-          : toDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$_SetToInvoiceDate implements _SetToInvoiceDate {
-  const _$_SetToInvoiceDate({required this.toDate});
-
-  @override
-  final DateTime toDate;
-
-  @override
-  String toString() {
-    return 'ReturnApproverFilterEvent.setToInvoiceDate(toDate: $toDate)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_SetToInvoiceDate &&
-            (identical(other.toDate, toDate) || other.toDate == toDate));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, toDate);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_SetToInvoiceDateCopyWith<_$_SetToInvoiceDate> get copyWith =>
-      __$$_SetToInvoiceDateCopyWithImpl<_$_SetToInvoiceDate>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function() applyFilters,
-    required TResult Function(DateTime fromDate) setfromInvoiceDate,
-    required TResult Function(DateTime toDate) setToInvoiceDate,
-    required TResult Function(String returnId) returnIdChanged,
-    required TResult Function(String soldTo) soldToChanged,
-    required TResult Function(String shitTo) shipToChanged,
-    required TResult Function(String createdBy) createdByChanged,
-    required TResult Function(FilterStatus sortBy) sortByChanged,
-  }) {
-    return setToInvoiceDate(toDate);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function()? applyFilters,
-    TResult? Function(DateTime fromDate)? setfromInvoiceDate,
-    TResult? Function(DateTime toDate)? setToInvoiceDate,
-    TResult? Function(String returnId)? returnIdChanged,
-    TResult? Function(String soldTo)? soldToChanged,
-    TResult? Function(String shitTo)? shipToChanged,
-    TResult? Function(String createdBy)? createdByChanged,
-    TResult? Function(FilterStatus sortBy)? sortByChanged,
-  }) {
-    return setToInvoiceDate?.call(toDate);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function()? applyFilters,
-    TResult Function(DateTime fromDate)? setfromInvoiceDate,
-    TResult Function(DateTime toDate)? setToInvoiceDate,
-    TResult Function(String returnId)? returnIdChanged,
-    TResult Function(String soldTo)? soldToChanged,
-    TResult Function(String shitTo)? shipToChanged,
-    TResult Function(String createdBy)? createdByChanged,
-    TResult Function(FilterStatus sortBy)? sortByChanged,
-    required TResult orElse(),
-  }) {
-    if (setToInvoiceDate != null) {
-      return setToInvoiceDate(toDate);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initialized value) initialized,
-    required TResult Function(_ApplyFilters value) applyFilters,
-    required TResult Function(_SetfromInvoiceDate value) setfromInvoiceDate,
-    required TResult Function(_SetToInvoiceDate value) setToInvoiceDate,
-    required TResult Function(_ReturnIdChanged value) returnIdChanged,
-    required TResult Function(_SoldToChanged value) soldToChanged,
-    required TResult Function(_ShipToChanged value) shipToChanged,
-    required TResult Function(_CreatedByChanged value) createdByChanged,
-    required TResult Function(_SortByChanged value) sortByChanged,
-  }) {
-    return setToInvoiceDate(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_ApplyFilters value)? applyFilters,
-    TResult? Function(_SetfromInvoiceDate value)? setfromInvoiceDate,
-    TResult? Function(_SetToInvoiceDate value)? setToInvoiceDate,
-    TResult? Function(_ReturnIdChanged value)? returnIdChanged,
-    TResult? Function(_SoldToChanged value)? soldToChanged,
-    TResult? Function(_ShipToChanged value)? shipToChanged,
-    TResult? Function(_CreatedByChanged value)? createdByChanged,
-    TResult? Function(_SortByChanged value)? sortByChanged,
-  }) {
-    return setToInvoiceDate?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_ApplyFilters value)? applyFilters,
-    TResult Function(_SetfromInvoiceDate value)? setfromInvoiceDate,
-    TResult Function(_SetToInvoiceDate value)? setToInvoiceDate,
-    TResult Function(_ReturnIdChanged value)? returnIdChanged,
-    TResult Function(_SoldToChanged value)? soldToChanged,
-    TResult Function(_ShipToChanged value)? shipToChanged,
-    TResult Function(_CreatedByChanged value)? createdByChanged,
-    TResult Function(_SortByChanged value)? sortByChanged,
-    required TResult orElse(),
-  }) {
-    if (setToInvoiceDate != null) {
-      return setToInvoiceDate(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _SetToInvoiceDate implements ReturnApproverFilterEvent {
-  const factory _SetToInvoiceDate({required final DateTime toDate}) =
-      _$_SetToInvoiceDate;
-
-  DateTime get toDate;
-  @JsonKey(ignore: true)
-  _$$_SetToInvoiceDateCopyWith<_$_SetToInvoiceDate> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -826,13 +454,12 @@ class _$_ReturnIdChanged implements _ReturnIdChanged {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function() applyFilters,
-    required TResult Function(DateTime fromDate) setfromInvoiceDate,
-    required TResult Function(DateTime toDate) setToInvoiceDate,
     required TResult Function(String returnId) returnIdChanged,
     required TResult Function(String soldTo) soldToChanged,
     required TResult Function(String shitTo) shipToChanged,
     required TResult Function(String createdBy) createdByChanged,
     required TResult Function(FilterStatus sortBy) sortByChanged,
+    required TResult Function(DateTimeRange invoiceDateRange) setInvoiceDate,
   }) {
     return returnIdChanged(returnId);
   }
@@ -842,13 +469,12 @@ class _$_ReturnIdChanged implements _ReturnIdChanged {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function()? applyFilters,
-    TResult? Function(DateTime fromDate)? setfromInvoiceDate,
-    TResult? Function(DateTime toDate)? setToInvoiceDate,
     TResult? Function(String returnId)? returnIdChanged,
     TResult? Function(String soldTo)? soldToChanged,
     TResult? Function(String shitTo)? shipToChanged,
     TResult? Function(String createdBy)? createdByChanged,
     TResult? Function(FilterStatus sortBy)? sortByChanged,
+    TResult? Function(DateTimeRange invoiceDateRange)? setInvoiceDate,
   }) {
     return returnIdChanged?.call(returnId);
   }
@@ -858,13 +484,12 @@ class _$_ReturnIdChanged implements _ReturnIdChanged {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function()? applyFilters,
-    TResult Function(DateTime fromDate)? setfromInvoiceDate,
-    TResult Function(DateTime toDate)? setToInvoiceDate,
     TResult Function(String returnId)? returnIdChanged,
     TResult Function(String soldTo)? soldToChanged,
     TResult Function(String shitTo)? shipToChanged,
     TResult Function(String createdBy)? createdByChanged,
     TResult Function(FilterStatus sortBy)? sortByChanged,
+    TResult Function(DateTimeRange invoiceDateRange)? setInvoiceDate,
     required TResult orElse(),
   }) {
     if (returnIdChanged != null) {
@@ -878,13 +503,12 @@ class _$_ReturnIdChanged implements _ReturnIdChanged {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_ApplyFilters value) applyFilters,
-    required TResult Function(_SetfromInvoiceDate value) setfromInvoiceDate,
-    required TResult Function(_SetToInvoiceDate value) setToInvoiceDate,
     required TResult Function(_ReturnIdChanged value) returnIdChanged,
     required TResult Function(_SoldToChanged value) soldToChanged,
     required TResult Function(_ShipToChanged value) shipToChanged,
     required TResult Function(_CreatedByChanged value) createdByChanged,
     required TResult Function(_SortByChanged value) sortByChanged,
+    required TResult Function(_SetInvoiceDate value) setInvoiceDate,
   }) {
     return returnIdChanged(this);
   }
@@ -894,13 +518,12 @@ class _$_ReturnIdChanged implements _ReturnIdChanged {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_ApplyFilters value)? applyFilters,
-    TResult? Function(_SetfromInvoiceDate value)? setfromInvoiceDate,
-    TResult? Function(_SetToInvoiceDate value)? setToInvoiceDate,
     TResult? Function(_ReturnIdChanged value)? returnIdChanged,
     TResult? Function(_SoldToChanged value)? soldToChanged,
     TResult? Function(_ShipToChanged value)? shipToChanged,
     TResult? Function(_CreatedByChanged value)? createdByChanged,
     TResult? Function(_SortByChanged value)? sortByChanged,
+    TResult? Function(_SetInvoiceDate value)? setInvoiceDate,
   }) {
     return returnIdChanged?.call(this);
   }
@@ -910,13 +533,12 @@ class _$_ReturnIdChanged implements _ReturnIdChanged {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_ApplyFilters value)? applyFilters,
-    TResult Function(_SetfromInvoiceDate value)? setfromInvoiceDate,
-    TResult Function(_SetToInvoiceDate value)? setToInvoiceDate,
     TResult Function(_ReturnIdChanged value)? returnIdChanged,
     TResult Function(_SoldToChanged value)? soldToChanged,
     TResult Function(_ShipToChanged value)? shipToChanged,
     TResult Function(_CreatedByChanged value)? createdByChanged,
     TResult Function(_SortByChanged value)? sortByChanged,
+    TResult Function(_SetInvoiceDate value)? setInvoiceDate,
     required TResult orElse(),
   }) {
     if (returnIdChanged != null) {
@@ -1001,13 +623,12 @@ class _$_SoldToChanged implements _SoldToChanged {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function() applyFilters,
-    required TResult Function(DateTime fromDate) setfromInvoiceDate,
-    required TResult Function(DateTime toDate) setToInvoiceDate,
     required TResult Function(String returnId) returnIdChanged,
     required TResult Function(String soldTo) soldToChanged,
     required TResult Function(String shitTo) shipToChanged,
     required TResult Function(String createdBy) createdByChanged,
     required TResult Function(FilterStatus sortBy) sortByChanged,
+    required TResult Function(DateTimeRange invoiceDateRange) setInvoiceDate,
   }) {
     return soldToChanged(soldTo);
   }
@@ -1017,13 +638,12 @@ class _$_SoldToChanged implements _SoldToChanged {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function()? applyFilters,
-    TResult? Function(DateTime fromDate)? setfromInvoiceDate,
-    TResult? Function(DateTime toDate)? setToInvoiceDate,
     TResult? Function(String returnId)? returnIdChanged,
     TResult? Function(String soldTo)? soldToChanged,
     TResult? Function(String shitTo)? shipToChanged,
     TResult? Function(String createdBy)? createdByChanged,
     TResult? Function(FilterStatus sortBy)? sortByChanged,
+    TResult? Function(DateTimeRange invoiceDateRange)? setInvoiceDate,
   }) {
     return soldToChanged?.call(soldTo);
   }
@@ -1033,13 +653,12 @@ class _$_SoldToChanged implements _SoldToChanged {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function()? applyFilters,
-    TResult Function(DateTime fromDate)? setfromInvoiceDate,
-    TResult Function(DateTime toDate)? setToInvoiceDate,
     TResult Function(String returnId)? returnIdChanged,
     TResult Function(String soldTo)? soldToChanged,
     TResult Function(String shitTo)? shipToChanged,
     TResult Function(String createdBy)? createdByChanged,
     TResult Function(FilterStatus sortBy)? sortByChanged,
+    TResult Function(DateTimeRange invoiceDateRange)? setInvoiceDate,
     required TResult orElse(),
   }) {
     if (soldToChanged != null) {
@@ -1053,13 +672,12 @@ class _$_SoldToChanged implements _SoldToChanged {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_ApplyFilters value) applyFilters,
-    required TResult Function(_SetfromInvoiceDate value) setfromInvoiceDate,
-    required TResult Function(_SetToInvoiceDate value) setToInvoiceDate,
     required TResult Function(_ReturnIdChanged value) returnIdChanged,
     required TResult Function(_SoldToChanged value) soldToChanged,
     required TResult Function(_ShipToChanged value) shipToChanged,
     required TResult Function(_CreatedByChanged value) createdByChanged,
     required TResult Function(_SortByChanged value) sortByChanged,
+    required TResult Function(_SetInvoiceDate value) setInvoiceDate,
   }) {
     return soldToChanged(this);
   }
@@ -1069,13 +687,12 @@ class _$_SoldToChanged implements _SoldToChanged {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_ApplyFilters value)? applyFilters,
-    TResult? Function(_SetfromInvoiceDate value)? setfromInvoiceDate,
-    TResult? Function(_SetToInvoiceDate value)? setToInvoiceDate,
     TResult? Function(_ReturnIdChanged value)? returnIdChanged,
     TResult? Function(_SoldToChanged value)? soldToChanged,
     TResult? Function(_ShipToChanged value)? shipToChanged,
     TResult? Function(_CreatedByChanged value)? createdByChanged,
     TResult? Function(_SortByChanged value)? sortByChanged,
+    TResult? Function(_SetInvoiceDate value)? setInvoiceDate,
   }) {
     return soldToChanged?.call(this);
   }
@@ -1085,13 +702,12 @@ class _$_SoldToChanged implements _SoldToChanged {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_ApplyFilters value)? applyFilters,
-    TResult Function(_SetfromInvoiceDate value)? setfromInvoiceDate,
-    TResult Function(_SetToInvoiceDate value)? setToInvoiceDate,
     TResult Function(_ReturnIdChanged value)? returnIdChanged,
     TResult Function(_SoldToChanged value)? soldToChanged,
     TResult Function(_ShipToChanged value)? shipToChanged,
     TResult Function(_CreatedByChanged value)? createdByChanged,
     TResult Function(_SortByChanged value)? sortByChanged,
+    TResult Function(_SetInvoiceDate value)? setInvoiceDate,
     required TResult orElse(),
   }) {
     if (soldToChanged != null) {
@@ -1176,13 +792,12 @@ class _$_ShipToChanged implements _ShipToChanged {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function() applyFilters,
-    required TResult Function(DateTime fromDate) setfromInvoiceDate,
-    required TResult Function(DateTime toDate) setToInvoiceDate,
     required TResult Function(String returnId) returnIdChanged,
     required TResult Function(String soldTo) soldToChanged,
     required TResult Function(String shitTo) shipToChanged,
     required TResult Function(String createdBy) createdByChanged,
     required TResult Function(FilterStatus sortBy) sortByChanged,
+    required TResult Function(DateTimeRange invoiceDateRange) setInvoiceDate,
   }) {
     return shipToChanged(shitTo);
   }
@@ -1192,13 +807,12 @@ class _$_ShipToChanged implements _ShipToChanged {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function()? applyFilters,
-    TResult? Function(DateTime fromDate)? setfromInvoiceDate,
-    TResult? Function(DateTime toDate)? setToInvoiceDate,
     TResult? Function(String returnId)? returnIdChanged,
     TResult? Function(String soldTo)? soldToChanged,
     TResult? Function(String shitTo)? shipToChanged,
     TResult? Function(String createdBy)? createdByChanged,
     TResult? Function(FilterStatus sortBy)? sortByChanged,
+    TResult? Function(DateTimeRange invoiceDateRange)? setInvoiceDate,
   }) {
     return shipToChanged?.call(shitTo);
   }
@@ -1208,13 +822,12 @@ class _$_ShipToChanged implements _ShipToChanged {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function()? applyFilters,
-    TResult Function(DateTime fromDate)? setfromInvoiceDate,
-    TResult Function(DateTime toDate)? setToInvoiceDate,
     TResult Function(String returnId)? returnIdChanged,
     TResult Function(String soldTo)? soldToChanged,
     TResult Function(String shitTo)? shipToChanged,
     TResult Function(String createdBy)? createdByChanged,
     TResult Function(FilterStatus sortBy)? sortByChanged,
+    TResult Function(DateTimeRange invoiceDateRange)? setInvoiceDate,
     required TResult orElse(),
   }) {
     if (shipToChanged != null) {
@@ -1228,13 +841,12 @@ class _$_ShipToChanged implements _ShipToChanged {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_ApplyFilters value) applyFilters,
-    required TResult Function(_SetfromInvoiceDate value) setfromInvoiceDate,
-    required TResult Function(_SetToInvoiceDate value) setToInvoiceDate,
     required TResult Function(_ReturnIdChanged value) returnIdChanged,
     required TResult Function(_SoldToChanged value) soldToChanged,
     required TResult Function(_ShipToChanged value) shipToChanged,
     required TResult Function(_CreatedByChanged value) createdByChanged,
     required TResult Function(_SortByChanged value) sortByChanged,
+    required TResult Function(_SetInvoiceDate value) setInvoiceDate,
   }) {
     return shipToChanged(this);
   }
@@ -1244,13 +856,12 @@ class _$_ShipToChanged implements _ShipToChanged {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_ApplyFilters value)? applyFilters,
-    TResult? Function(_SetfromInvoiceDate value)? setfromInvoiceDate,
-    TResult? Function(_SetToInvoiceDate value)? setToInvoiceDate,
     TResult? Function(_ReturnIdChanged value)? returnIdChanged,
     TResult? Function(_SoldToChanged value)? soldToChanged,
     TResult? Function(_ShipToChanged value)? shipToChanged,
     TResult? Function(_CreatedByChanged value)? createdByChanged,
     TResult? Function(_SortByChanged value)? sortByChanged,
+    TResult? Function(_SetInvoiceDate value)? setInvoiceDate,
   }) {
     return shipToChanged?.call(this);
   }
@@ -1260,13 +871,12 @@ class _$_ShipToChanged implements _ShipToChanged {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_ApplyFilters value)? applyFilters,
-    TResult Function(_SetfromInvoiceDate value)? setfromInvoiceDate,
-    TResult Function(_SetToInvoiceDate value)? setToInvoiceDate,
     TResult Function(_ReturnIdChanged value)? returnIdChanged,
     TResult Function(_SoldToChanged value)? soldToChanged,
     TResult Function(_ShipToChanged value)? shipToChanged,
     TResult Function(_CreatedByChanged value)? createdByChanged,
     TResult Function(_SortByChanged value)? sortByChanged,
+    TResult Function(_SetInvoiceDate value)? setInvoiceDate,
     required TResult orElse(),
   }) {
     if (shipToChanged != null) {
@@ -1352,13 +962,12 @@ class _$_CreatedByChanged implements _CreatedByChanged {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function() applyFilters,
-    required TResult Function(DateTime fromDate) setfromInvoiceDate,
-    required TResult Function(DateTime toDate) setToInvoiceDate,
     required TResult Function(String returnId) returnIdChanged,
     required TResult Function(String soldTo) soldToChanged,
     required TResult Function(String shitTo) shipToChanged,
     required TResult Function(String createdBy) createdByChanged,
     required TResult Function(FilterStatus sortBy) sortByChanged,
+    required TResult Function(DateTimeRange invoiceDateRange) setInvoiceDate,
   }) {
     return createdByChanged(createdBy);
   }
@@ -1368,13 +977,12 @@ class _$_CreatedByChanged implements _CreatedByChanged {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function()? applyFilters,
-    TResult? Function(DateTime fromDate)? setfromInvoiceDate,
-    TResult? Function(DateTime toDate)? setToInvoiceDate,
     TResult? Function(String returnId)? returnIdChanged,
     TResult? Function(String soldTo)? soldToChanged,
     TResult? Function(String shitTo)? shipToChanged,
     TResult? Function(String createdBy)? createdByChanged,
     TResult? Function(FilterStatus sortBy)? sortByChanged,
+    TResult? Function(DateTimeRange invoiceDateRange)? setInvoiceDate,
   }) {
     return createdByChanged?.call(createdBy);
   }
@@ -1384,13 +992,12 @@ class _$_CreatedByChanged implements _CreatedByChanged {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function()? applyFilters,
-    TResult Function(DateTime fromDate)? setfromInvoiceDate,
-    TResult Function(DateTime toDate)? setToInvoiceDate,
     TResult Function(String returnId)? returnIdChanged,
     TResult Function(String soldTo)? soldToChanged,
     TResult Function(String shitTo)? shipToChanged,
     TResult Function(String createdBy)? createdByChanged,
     TResult Function(FilterStatus sortBy)? sortByChanged,
+    TResult Function(DateTimeRange invoiceDateRange)? setInvoiceDate,
     required TResult orElse(),
   }) {
     if (createdByChanged != null) {
@@ -1404,13 +1011,12 @@ class _$_CreatedByChanged implements _CreatedByChanged {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_ApplyFilters value) applyFilters,
-    required TResult Function(_SetfromInvoiceDate value) setfromInvoiceDate,
-    required TResult Function(_SetToInvoiceDate value) setToInvoiceDate,
     required TResult Function(_ReturnIdChanged value) returnIdChanged,
     required TResult Function(_SoldToChanged value) soldToChanged,
     required TResult Function(_ShipToChanged value) shipToChanged,
     required TResult Function(_CreatedByChanged value) createdByChanged,
     required TResult Function(_SortByChanged value) sortByChanged,
+    required TResult Function(_SetInvoiceDate value) setInvoiceDate,
   }) {
     return createdByChanged(this);
   }
@@ -1420,13 +1026,12 @@ class _$_CreatedByChanged implements _CreatedByChanged {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_ApplyFilters value)? applyFilters,
-    TResult? Function(_SetfromInvoiceDate value)? setfromInvoiceDate,
-    TResult? Function(_SetToInvoiceDate value)? setToInvoiceDate,
     TResult? Function(_ReturnIdChanged value)? returnIdChanged,
     TResult? Function(_SoldToChanged value)? soldToChanged,
     TResult? Function(_ShipToChanged value)? shipToChanged,
     TResult? Function(_CreatedByChanged value)? createdByChanged,
     TResult? Function(_SortByChanged value)? sortByChanged,
+    TResult? Function(_SetInvoiceDate value)? setInvoiceDate,
   }) {
     return createdByChanged?.call(this);
   }
@@ -1436,13 +1041,12 @@ class _$_CreatedByChanged implements _CreatedByChanged {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_ApplyFilters value)? applyFilters,
-    TResult Function(_SetfromInvoiceDate value)? setfromInvoiceDate,
-    TResult Function(_SetToInvoiceDate value)? setToInvoiceDate,
     TResult Function(_ReturnIdChanged value)? returnIdChanged,
     TResult Function(_SoldToChanged value)? soldToChanged,
     TResult Function(_ShipToChanged value)? shipToChanged,
     TResult Function(_CreatedByChanged value)? createdByChanged,
     TResult Function(_SortByChanged value)? sortByChanged,
+    TResult Function(_SetInvoiceDate value)? setInvoiceDate,
     required TResult orElse(),
   }) {
     if (createdByChanged != null) {
@@ -1527,13 +1131,12 @@ class _$_SortByChanged implements _SortByChanged {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function() applyFilters,
-    required TResult Function(DateTime fromDate) setfromInvoiceDate,
-    required TResult Function(DateTime toDate) setToInvoiceDate,
     required TResult Function(String returnId) returnIdChanged,
     required TResult Function(String soldTo) soldToChanged,
     required TResult Function(String shitTo) shipToChanged,
     required TResult Function(String createdBy) createdByChanged,
     required TResult Function(FilterStatus sortBy) sortByChanged,
+    required TResult Function(DateTimeRange invoiceDateRange) setInvoiceDate,
   }) {
     return sortByChanged(sortBy);
   }
@@ -1543,13 +1146,12 @@ class _$_SortByChanged implements _SortByChanged {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function()? applyFilters,
-    TResult? Function(DateTime fromDate)? setfromInvoiceDate,
-    TResult? Function(DateTime toDate)? setToInvoiceDate,
     TResult? Function(String returnId)? returnIdChanged,
     TResult? Function(String soldTo)? soldToChanged,
     TResult? Function(String shitTo)? shipToChanged,
     TResult? Function(String createdBy)? createdByChanged,
     TResult? Function(FilterStatus sortBy)? sortByChanged,
+    TResult? Function(DateTimeRange invoiceDateRange)? setInvoiceDate,
   }) {
     return sortByChanged?.call(sortBy);
   }
@@ -1559,13 +1161,12 @@ class _$_SortByChanged implements _SortByChanged {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function()? applyFilters,
-    TResult Function(DateTime fromDate)? setfromInvoiceDate,
-    TResult Function(DateTime toDate)? setToInvoiceDate,
     TResult Function(String returnId)? returnIdChanged,
     TResult Function(String soldTo)? soldToChanged,
     TResult Function(String shitTo)? shipToChanged,
     TResult Function(String createdBy)? createdByChanged,
     TResult Function(FilterStatus sortBy)? sortByChanged,
+    TResult Function(DateTimeRange invoiceDateRange)? setInvoiceDate,
     required TResult orElse(),
   }) {
     if (sortByChanged != null) {
@@ -1579,13 +1180,12 @@ class _$_SortByChanged implements _SortByChanged {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_ApplyFilters value) applyFilters,
-    required TResult Function(_SetfromInvoiceDate value) setfromInvoiceDate,
-    required TResult Function(_SetToInvoiceDate value) setToInvoiceDate,
     required TResult Function(_ReturnIdChanged value) returnIdChanged,
     required TResult Function(_SoldToChanged value) soldToChanged,
     required TResult Function(_ShipToChanged value) shipToChanged,
     required TResult Function(_CreatedByChanged value) createdByChanged,
     required TResult Function(_SortByChanged value) sortByChanged,
+    required TResult Function(_SetInvoiceDate value) setInvoiceDate,
   }) {
     return sortByChanged(this);
   }
@@ -1595,13 +1195,12 @@ class _$_SortByChanged implements _SortByChanged {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_ApplyFilters value)? applyFilters,
-    TResult? Function(_SetfromInvoiceDate value)? setfromInvoiceDate,
-    TResult? Function(_SetToInvoiceDate value)? setToInvoiceDate,
     TResult? Function(_ReturnIdChanged value)? returnIdChanged,
     TResult? Function(_SoldToChanged value)? soldToChanged,
     TResult? Function(_ShipToChanged value)? shipToChanged,
     TResult? Function(_CreatedByChanged value)? createdByChanged,
     TResult? Function(_SortByChanged value)? sortByChanged,
+    TResult? Function(_SetInvoiceDate value)? setInvoiceDate,
   }) {
     return sortByChanged?.call(this);
   }
@@ -1611,13 +1210,12 @@ class _$_SortByChanged implements _SortByChanged {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_ApplyFilters value)? applyFilters,
-    TResult Function(_SetfromInvoiceDate value)? setfromInvoiceDate,
-    TResult Function(_SetToInvoiceDate value)? setToInvoiceDate,
     TResult Function(_ReturnIdChanged value)? returnIdChanged,
     TResult Function(_SoldToChanged value)? soldToChanged,
     TResult Function(_ShipToChanged value)? shipToChanged,
     TResult Function(_CreatedByChanged value)? createdByChanged,
     TResult Function(_SortByChanged value)? sortByChanged,
+    TResult Function(_SetInvoiceDate value)? setInvoiceDate,
     required TResult orElse(),
   }) {
     if (sortByChanged != null) {
@@ -1633,6 +1231,177 @@ abstract class _SortByChanged implements ReturnApproverFilterEvent {
   FilterStatus get sortBy;
   @JsonKey(ignore: true)
   _$$_SortByChangedCopyWith<_$_SortByChanged> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_SetInvoiceDateCopyWith<$Res> {
+  factory _$$_SetInvoiceDateCopyWith(
+          _$_SetInvoiceDate value, $Res Function(_$_SetInvoiceDate) then) =
+      __$$_SetInvoiceDateCopyWithImpl<$Res>;
+  @useResult
+  $Res call({DateTimeRange invoiceDateRange});
+}
+
+/// @nodoc
+class __$$_SetInvoiceDateCopyWithImpl<$Res>
+    extends _$ReturnApproverFilterEventCopyWithImpl<$Res, _$_SetInvoiceDate>
+    implements _$$_SetInvoiceDateCopyWith<$Res> {
+  __$$_SetInvoiceDateCopyWithImpl(
+      _$_SetInvoiceDate _value, $Res Function(_$_SetInvoiceDate) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? invoiceDateRange = null,
+  }) {
+    return _then(_$_SetInvoiceDate(
+      null == invoiceDateRange
+          ? _value.invoiceDateRange
+          : invoiceDateRange // ignore: cast_nullable_to_non_nullable
+              as DateTimeRange,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_SetInvoiceDate implements _SetInvoiceDate {
+  const _$_SetInvoiceDate(this.invoiceDateRange);
+
+  @override
+  final DateTimeRange invoiceDateRange;
+
+  @override
+  String toString() {
+    return 'ReturnApproverFilterEvent.setInvoiceDate(invoiceDateRange: $invoiceDateRange)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_SetInvoiceDate &&
+            (identical(other.invoiceDateRange, invoiceDateRange) ||
+                other.invoiceDateRange == invoiceDateRange));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, invoiceDateRange);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_SetInvoiceDateCopyWith<_$_SetInvoiceDate> get copyWith =>
+      __$$_SetInvoiceDateCopyWithImpl<_$_SetInvoiceDate>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function() applyFilters,
+    required TResult Function(String returnId) returnIdChanged,
+    required TResult Function(String soldTo) soldToChanged,
+    required TResult Function(String shitTo) shipToChanged,
+    required TResult Function(String createdBy) createdByChanged,
+    required TResult Function(FilterStatus sortBy) sortByChanged,
+    required TResult Function(DateTimeRange invoiceDateRange) setInvoiceDate,
+  }) {
+    return setInvoiceDate(invoiceDateRange);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function()? applyFilters,
+    TResult? Function(String returnId)? returnIdChanged,
+    TResult? Function(String soldTo)? soldToChanged,
+    TResult? Function(String shitTo)? shipToChanged,
+    TResult? Function(String createdBy)? createdByChanged,
+    TResult? Function(FilterStatus sortBy)? sortByChanged,
+    TResult? Function(DateTimeRange invoiceDateRange)? setInvoiceDate,
+  }) {
+    return setInvoiceDate?.call(invoiceDateRange);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function()? applyFilters,
+    TResult Function(String returnId)? returnIdChanged,
+    TResult Function(String soldTo)? soldToChanged,
+    TResult Function(String shitTo)? shipToChanged,
+    TResult Function(String createdBy)? createdByChanged,
+    TResult Function(FilterStatus sortBy)? sortByChanged,
+    TResult Function(DateTimeRange invoiceDateRange)? setInvoiceDate,
+    required TResult orElse(),
+  }) {
+    if (setInvoiceDate != null) {
+      return setInvoiceDate(invoiceDateRange);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_ApplyFilters value) applyFilters,
+    required TResult Function(_ReturnIdChanged value) returnIdChanged,
+    required TResult Function(_SoldToChanged value) soldToChanged,
+    required TResult Function(_ShipToChanged value) shipToChanged,
+    required TResult Function(_CreatedByChanged value) createdByChanged,
+    required TResult Function(_SortByChanged value) sortByChanged,
+    required TResult Function(_SetInvoiceDate value) setInvoiceDate,
+  }) {
+    return setInvoiceDate(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_ApplyFilters value)? applyFilters,
+    TResult? Function(_ReturnIdChanged value)? returnIdChanged,
+    TResult? Function(_SoldToChanged value)? soldToChanged,
+    TResult? Function(_ShipToChanged value)? shipToChanged,
+    TResult? Function(_CreatedByChanged value)? createdByChanged,
+    TResult? Function(_SortByChanged value)? sortByChanged,
+    TResult? Function(_SetInvoiceDate value)? setInvoiceDate,
+  }) {
+    return setInvoiceDate?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_ApplyFilters value)? applyFilters,
+    TResult Function(_ReturnIdChanged value)? returnIdChanged,
+    TResult Function(_SoldToChanged value)? soldToChanged,
+    TResult Function(_ShipToChanged value)? shipToChanged,
+    TResult Function(_CreatedByChanged value)? createdByChanged,
+    TResult Function(_SortByChanged value)? sortByChanged,
+    TResult Function(_SetInvoiceDate value)? setInvoiceDate,
+    required TResult orElse(),
+  }) {
+    if (setInvoiceDate != null) {
+      return setInvoiceDate(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SetInvoiceDate implements ReturnApproverFilterEvent {
+  const factory _SetInvoiceDate(final DateTimeRange invoiceDateRange) =
+      _$_SetInvoiceDate;
+
+  DateTimeRange get invoiceDateRange;
+  @JsonKey(ignore: true)
+  _$$_SetInvoiceDateCopyWith<_$_SetInvoiceDate> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

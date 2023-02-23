@@ -1,11 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
-import 'package:ezrxmobile/domain/returns/entities/return_approver_filter.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class ApproverReturnFilterDrawer extends StatelessWidget {
   const ApproverReturnFilterDrawer({Key? key}) : super(key: key);
@@ -53,19 +51,7 @@ class ApproverReturnFilterDrawer extends StatelessWidget {
                       const SizedBox(
                         height: 20,
                       ),
-                      Row(
-                        children: [
-                          const _FromInvoiceDateFilter(),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 15),
-                            child: Text(
-                              'to',
-                              style: Theme.of(context).textTheme.titleSmall,
-                            ).tr(),
-                          ),
-                          const _ToInvoiceDateFilter(),
-                        ],
-                      ),
+                      const _InvoiceDateFilter(),
                       const SizedBox(
                         height: 20,
                       ),
@@ -263,237 +249,6 @@ class _SoldToFilter extends StatelessWidget {
   }
 }
 
-class _FromInvoiceDateFilter extends StatefulWidget {
-  const _FromInvoiceDateFilter({Key? key}) : super(key: key);
-
-  @override
-  State<_FromInvoiceDateFilter> createState() => __FromInvoiceDateFilterState();
-}
-
-class __FromInvoiceDateFilterState extends State<_FromInvoiceDateFilter> {
-  late TextEditingController fromDateTextController;
-  late ReturnApproverFilterBloc returnApproverFilterBloc;
-
-  @override
-  void initState() {
-    fromDateTextController = TextEditingController();
-    returnApproverFilterBloc = context.read<ReturnApproverFilterBloc>();
-    final fromInvoiceDate =
-        returnApproverFilterBloc.state.approverReturnFilter.fromInvoiceDate;
-    final toInvoiceDate =
-        returnApproverFilterBloc.state.approverReturnFilter.toInvoiceDate;
-    if (fromInvoiceDate.isValid() && toInvoiceDate.isValid()) {
-      fromDateTextController.text = DateFormat('dd/MM/yyyy').format(
-        fromInvoiceDate.dateTimebyDateString,
-      );
-    }
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    fromDateTextController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocListener<ReturnApproverFilterBloc, ReturnApproverFilterState>(
-      listenWhen: (previous, current) =>
-          previous.approverReturnFilter.fromInvoiceDate !=
-              current.approverReturnFilter.fromInvoiceDate ||
-          previous.approverReturnFilter.toInvoiceDate !=
-              current.approverReturnFilter.toInvoiceDate,
-      listener: (context, state) {
-        final fromInvoiceDate = state.approverReturnFilter.fromInvoiceDate;
-        if (fromInvoiceDate.isValid()) {
-          fromDateTextController.text = DateFormat('dd/MM/yyyy').format(
-            state.approverReturnFilter.fromInvoiceDate.dateTimebyDateString,
-          );
-        }
-      },
-      child: Expanded(
-        child: TextFormField(
-          key: const Key('filterFromDateField'),
-          onTap: () async {
-            final toInvoiceDate = returnApproverFilterBloc
-                .state.approverReturnFilter.toInvoiceDate;
-
-            final fromInvoiceDate = returnApproverFilterBloc
-                .state.approverReturnFilter.fromInvoiceDate;
-
-            final initialDate = fromInvoiceDate.isValid()
-                ? fromInvoiceDate.dateTimebyDateString
-                : toInvoiceDate.dateTimebyDateString;
-                
-            final orderDate = await showPlatformDatePicker(
-              context: context,
-              initialDate: initialDate,
-              firstDate: toInvoiceDate.dateTimebyDateString
-                  .subtract(const Duration(days: 365)),
-              lastDate: toInvoiceDate.dateTimebyDateString,
-            );
-            if (orderDate == null) return;
-            returnApproverFilterBloc.add(
-              ReturnApproverFilterEvent.setfromInvoiceDate(
-                fromDate: orderDate,
-              ),
-            );
-          },
-          validator: (_) {
-            final approverReturnFilterList = context
-                .read<ReturnApproverFilterBloc>()
-                .state
-                .approverReturnFilter;
-
-            return approverReturnFilterList.toInvoiceDate.value.fold(
-              (l) => null,
-              (r) {
-                return approverReturnFilterList.fromInvoiceDate.value.fold(
-                  (l) => 'Invalid Date'.tr(),
-                  (r) => null,
-                );
-              },
-            );
-          },
-          readOnly: true,
-          controller: fromDateTextController,
-          decoration: InputDecoration(
-            labelText: 'From Date'.tr(),
-            suffixIcon: const Padding(
-              padding: EdgeInsets.only(right: 8.0),
-              child: Icon(
-                Icons.calendar_month,
-                size: 20,
-              ),
-            ),
-            suffixIconConstraints: const BoxConstraints(maxWidth: 25),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _ToInvoiceDateFilter extends StatefulWidget {
-  const _ToInvoiceDateFilter({Key? key}) : super(key: key);
-
-  @override
-  State<_ToInvoiceDateFilter> createState() => _ToInvoiceDateFilterState();
-}
-
-class _ToInvoiceDateFilterState extends State<_ToInvoiceDateFilter> {
-  late TextEditingController toDateTextController;
-  late ReturnApproverFilterBloc returnApproverFilterBloc;
-
-  @override
-  void initState() {
-    toDateTextController = TextEditingController();
-    returnApproverFilterBloc = context.read<ReturnApproverFilterBloc>();
-    final toInvoiceDate =
-        returnApproverFilterBloc.state.approverReturnFilter.toInvoiceDate;
-    final fromInvoiceDate =
-        returnApproverFilterBloc.state.approverReturnFilter.fromInvoiceDate;
-    if (toInvoiceDate.isValid() && fromInvoiceDate.isValid()) {
-      toDateTextController.text = DateFormat('dd/MM/yyyy').format(
-        returnApproverFilterBloc
-            .state.approverReturnFilter.toInvoiceDate.dateTimebyDateString,
-      );
-    }
-
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    toDateTextController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocListener<ReturnApproverFilterBloc, ReturnApproverFilterState>(
-      listenWhen: (previous, current) =>
-          previous.approverReturnFilter.toInvoiceDate !=
-              current.approverReturnFilter.toInvoiceDate ||
-          previous.approverReturnFilter.fromInvoiceDate !=
-              current.approverReturnFilter.fromInvoiceDate,
-      listener: (
-        context,
-        state,
-      ) {
-        if (!state.approverReturnFilter.toInvoiceDate.isValid()) return;
-        toDateTextController.text = DateFormat('dd/MM/yyyy').format(
-          state.approverReturnFilter.toInvoiceDate.dateTimebyDateString,
-        );
-      },
-      child: Expanded(
-        child: TextFormField(
-          key: const Key('filterToDateField'),
-          onTap: () async {
-            final toInvoiceDate = returnApproverFilterBloc
-                .state.approverReturnFilter.toInvoiceDate;
-
-            final fromInvoiceDate = returnApproverFilterBloc
-                .state.approverReturnFilter.fromInvoiceDate;
-
-            final initialDate = toInvoiceDate.isValid()
-                ? toInvoiceDate.dateTimebyDateString
-                : DateTime.now();
-
-            final firstDate = fromInvoiceDate
-                    .isValid()
-                ? fromInvoiceDate.dateTimebyDateString
-                : DateTime.now().subtract(const Duration(days: 360));
-
-            final orderDate = await showPlatformDatePicker(
-              context: context,
-              initialDate: initialDate,
-              firstDate: firstDate,
-              lastDate: DateTime.now(),
-            );
-            if (orderDate == null) return;
-            returnApproverFilterBloc.add(
-              ReturnApproverFilterEvent.setToInvoiceDate(
-                toDate: orderDate,
-              ),
-            );
-          },
-          validator: (_) {
-            final approverReturnFilterList = context
-                .read<ReturnApproverFilterBloc>()
-                .state
-                .approverReturnFilter;
-
-            return approverReturnFilterList.fromInvoiceDate.value.fold(
-              (l) => null,
-              (r) {
-                return approverReturnFilterList.toInvoiceDate.value.fold(
-                  (l) => 'Invalid Date'.tr(),
-                  (r) => null,
-                );
-              },
-            );
-          },
-          readOnly: true,
-          controller: toDateTextController,
-          decoration: InputDecoration(
-            labelText: 'To Date'.tr(),
-            suffixIcon: const Padding(
-              padding: EdgeInsets.only(right: 8.0),
-              child: Icon(
-                Icons.calendar_month,
-                size: 20,
-              ),
-            ),
-            suffixIconConstraints: const BoxConstraints(maxWidth: 25),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
 class _ClearButton extends StatelessWidget {
   const _ClearButton({Key? key}) : super(key: key);
 
@@ -504,8 +259,7 @@ class _ClearButton extends StatelessWidget {
       onPressed: () {
         final returnApproverFilterBloc =
             context.read<ReturnApproverFilterBloc>();
-        if (returnApproverFilterBloc.state.approverReturnFilter !=
-            ReturnApproverFilter.empty()) {
+        if (!returnApproverFilterBloc.state.approverReturnFilterIsEmpty) {
           returnApproverFilterBloc.add(
             const ReturnApproverFilterEvent.initialized(),
           );
@@ -535,6 +289,82 @@ class _ApplyButton extends StatelessWidget {
       child: Text(
         'Apply'.tr(),
         style: const TextStyle(color: ZPColors.white),
+      ),
+    );
+  }
+}
+
+class _InvoiceDateFilter extends StatefulWidget {
+  const _InvoiceDateFilter({Key? key}) : super(key: key);
+
+  @override
+  State<_InvoiceDateFilter> createState() => _InvoiceDateFilterState();
+}
+
+class _InvoiceDateFilterState extends State<_InvoiceDateFilter> {
+  late TextEditingController invoiceDateTextController;
+
+  @override
+  void initState() {
+    invoiceDateTextController = TextEditingController()
+      ..text = context
+          .read<ReturnApproverFilterBloc>()
+          .state
+          .approverReturnFilter
+          .getFilteredInvoiceDate;
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    invoiceDateTextController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocListener<ReturnApproverFilterBloc, ReturnApproverFilterState>(
+      listenWhen: (previous, current) =>
+          previous.approverReturnFilter.getInvoiceFilterDateRange !=
+          current.approverReturnFilter.getInvoiceFilterDateRange,
+      listener: (
+        context,
+        state,
+      ) {
+        invoiceDateTextController.text =
+            state.approverReturnFilter.getFilteredInvoiceDate;
+      },
+      child: TextFormField(
+        key: const Key('filterInvoiceDateField'),
+        onTap: () async {
+          final invoiceDateRange = await showDateRangePicker(
+              context: context,
+              firstDate: DateTime.now().subtract(const Duration(days: 365)),
+              lastDate: DateTime.now(),
+              initialDateRange: context
+                  .read<ReturnApproverFilterBloc>()
+                  .state
+                  .approverReturnFilter
+                .getInvoiceFilterDateRange,
+          );
+          if (invoiceDateRange == null || !mounted) return;
+          context.read<ReturnApproverFilterBloc>().add(
+                ReturnApproverFilterEvent.setInvoiceDate(invoiceDateRange),
+              );
+        },
+        readOnly: true,
+        controller: invoiceDateTextController,
+        decoration: InputDecoration(
+          labelText: 'Invoice Date'.tr(),
+          suffixIcon: const Padding(
+            padding: EdgeInsets.only(right: 8.0),
+            child: Icon(
+              Icons.calendar_month,
+              size: 20,
+            ),
+          ),
+          suffixIconConstraints: const BoxConstraints(maxWidth: 25),
+        ),
       ),
     );
   }

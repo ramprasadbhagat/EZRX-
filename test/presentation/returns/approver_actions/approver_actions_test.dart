@@ -61,6 +61,20 @@ void main() {
   late List<ApproverReturnRequest> approverReturnRequestList;
   late SalesOrgBloc salesOrgBlocMock;
   late EligibilityBloc eligibilityBlocMock;
+  late ReturnApproverFilter returnApproverFilter;
+  final fakeToDate = DateTime.parse(
+    DateFormat('yyyyMMdd').format(
+      DateTime.now(),
+    ),
+  );
+
+  final fakeFormDate = DateTime.parse(
+    DateFormat('yyyyMMdd').format(
+      DateTime.now().subtract(
+        const Duration(days: 7),
+      ),
+    ),
+  );
 
   setUpAll(
     () {
@@ -84,6 +98,14 @@ void main() {
       eligibilityBlocMock = EligibilityBlocMock();
 
       customerCodeBlocMock = CustomerCodeMockBloc();
+      returnApproverFilter = ReturnApproverFilter.empty().copyWith(
+        toInvoiceDate: InvoiceDate(
+          fakeToDate.toIso8601String(),
+        ),
+        fromInvoiceDate: InvoiceDate(
+          fakeFormDate.toIso8601String(),
+        ),
+      );
 
       autoRouterMock = locator<AppRouter>();
       when(() => returnApproverBlocMock.state)
@@ -266,6 +288,19 @@ void main() {
           shipToCodeBlocMock,
           Stream.fromIterable(expectedShipToCodeState),
         );
+        final expectedStates = [
+          ReturnApproverState.initial().copyWith(
+            isFetching: true,
+            failureOrSuccessOption: optionOf(
+              const Right(
+                ApiFailure.other('Fake-Object'),
+              ),
+            ),
+          ),
+          ReturnApproverState.initial()
+              .copyWith(approverReturnRequestList: approverReturnRequestList)
+        ];
+        whenListen(returnApproverBlocMock, Stream.fromIterable(expectedStates));
         await tester.pumpWidget(getWidget());
         await tester.pump();
 
@@ -300,6 +335,7 @@ void main() {
             ),
           ),
         ];
+        
         whenListen(
           shipToCodeBlocMock,
           Stream.fromIterable(expectedShipToCodeState),
@@ -336,7 +372,7 @@ void main() {
         );
         final expectedreturnApproverFilterState = [
           ReturnApproverFilterState.initial().copyWith(
-              approverReturnFilter: ReturnApproverFilter.empty().copyWith(
+              approverReturnFilter: returnApproverFilter.copyWith(
                 returnId: SearchKey.searchFilter('test'),
               ),
               isSubmitting: true),
@@ -362,7 +398,7 @@ void main() {
           () => returnApproverBlocMock.add(
             ReturnApproverEvent.fetch(
               user: User.empty(),
-              approverReturnFilter: ReturnApproverFilter.empty().copyWith(
+              approverReturnFilter: returnApproverFilter.copyWith(
                 returnId: SearchKey.searchFilter('test'),
               ),
             ),
@@ -484,14 +520,6 @@ void main() {
             const ReturnApproverFilterEvent.initialized(),
           ),
         ).called(1);
-        verify(
-          () => returnApproverBlocMock.add(
-            ReturnApproverEvent.fetch(
-              approverReturnFilter: ReturnApproverFilter.empty(),
-              user: User.empty(),
-            ),
-          ),
-        ).called(1);
       },
     );
 
@@ -513,6 +541,11 @@ void main() {
             ),
           ),
         );
+        when(() => returnApproverFilterBlocMock.state).thenReturn(
+          ReturnApproverFilterState.initial().copyWith(
+            approverReturnFilter: returnApproverFilter,
+          ),
+        );
         await tester.pumpWidget(getWidget());
         await tester.pump();
         expect(find.byKey(const Key('actionApproverAppBar')), findsOneWidget);
@@ -532,7 +565,7 @@ void main() {
         verify(
           () => returnApproverBlocMock.add(
             ReturnApproverEvent.loadMore(
-              approverReturnFilter: ReturnApproverFilter.empty(),
+              approverReturnFilter: returnApproverFilter,
               user: User.empty(),
             ),
           ),

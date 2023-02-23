@@ -38,15 +38,11 @@ class ReturnApproverFilterDto with _$ReturnApproverFilterDto {
     @JsonKey(
       name: 'dateTo',
       defaultValue: '',
-      includeIfNull: false,
-      toJson: valueTojson,
     )
         required String dateTo,
     @JsonKey(
       name: 'dateFrom',
       defaultValue: '',
-      includeIfNull: false,
-      toJson: valueTojson,
     )
         required String dateFrom,
     @JsonKey(
@@ -67,9 +63,9 @@ class ReturnApproverFilterDto with _$ReturnApproverFilterDto {
       soldTo: returnApproverFilter.soldTo.searchValueOrEmpty,
       shipTo: returnApproverFilter.shipTo.searchValueOrEmpty,
       dateTo:
-          returnApproverFilter.toInvoiceDate.apiParameterValueOrEmpty,
+          returnApproverFilter.toInvoiceDate.apiParameterValue,
       dateFrom:
-          returnApproverFilter.fromInvoiceDate.apiParameterValueOrEmpty,
+          returnApproverFilter.fromInvoiceDate.apiParameterValue,
       status: returnApproverFilter.sortBy.apiSortValueOrEmpty,
     );
   }

@@ -20,7 +20,6 @@ import 'package:mocktail/mocktail.dart';
 
 import '../../../utils/widget_utils.dart';
 
-
 class ReturnApproverBlocMock
     extends MockBloc<ReturnApproverEvent, ReturnApproverState>
     implements ReturnApproverBloc {}
@@ -45,11 +44,19 @@ void main() {
   late ShipToCodeBloc shipToCodeBlocMock;
   late SalesOrgBloc salesOrgBlocMock;
 
-  final fakeToDate = DateTime.parse(DateFormat('yyyyMMdd')
-      .format(DateTime.now().add(const Duration(days: 1))));
+  final fakeToDate = DateTime.parse(
+    DateFormat('yyyyMMdd').format(
+      DateTime.now(),
+    ),
+  );
 
-  final fakeFormDate =
-      DateTime.parse(DateFormat('yyyyMMdd').format(DateTime.now()));
+  final fakeFormDate = DateTime.parse(
+    DateFormat('yyyyMMdd').format(
+      DateTime.now().subtract(
+        const Duration(days: 7),
+      ),
+    ),
+  );
 
   setUpAll(
     () {
@@ -114,10 +121,43 @@ void main() {
         expect(find.byKey(const Key('filterCreatedBy')), findsOneWidget);
         expect(find.byKey(const Key('shipToSearchField')), findsOneWidget);
         expect(find.byKey(const Key('soldToSearchField')), findsOneWidget);
-        expect(find.byKey(const Key('filterFromDateField')), findsOneWidget);
-        expect(find.byKey(const Key('filterToDateField')), findsOneWidget);
+        expect(find.byKey(const Key('filterInvoiceDateField')), findsOneWidget);
         expect(find.byKey(const Key('filterApplyButton')), findsOneWidget);
         expect(find.byKey(const Key('filterClearButton')), findsOneWidget);
+      },
+    );
+
+    testWidgets(
+      'Approver Return Filter Drawer Clear Button Test',
+      (tester) async {
+        final expectedStates = [
+          ReturnApproverFilterState.initial().copyWith(
+            showErrorMessages: true,
+            approverReturnFilter: ReturnApproverFilter.empty(),
+          ),
+          ReturnApproverFilterState.initial().copyWith(
+            showErrorMessages: true,
+            approverReturnFilter: ReturnApproverFilter.empty().copyWith(
+              returnId: SearchKey.searchFilter('1'),
+            ),
+          ),
+        ];
+        whenListen(
+          returnApproverFilterBlocMock,
+          Stream.fromIterable(expectedStates),
+        );
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+
+        expect(find.byKey(const Key('approverReturnFilter')), findsOneWidget);
+        final clearButton = find.byKey(const Key('filterClearButton'));
+        expect(clearButton, findsOneWidget);
+        await tester.tap(clearButton);
+        verify(
+          () => returnApproverFilterBlocMock.add(
+            const ReturnApproverFilterEvent.initialized(),
+          ),
+        ).called(1);
       },
     );
   });
@@ -365,9 +405,9 @@ void main() {
     );
   });
 
-  group('Test Action Approver Page FromInvoiceDateFilter field', () {
+  group('Test Action Approver Page InvoiceDateFilter field', () {
     testWidgets(
-      'Approver Return Filter Drawer FromInvoiceDateFilter valid toInvoiceDateFilter notvalid',
+      'Approver Return Filter Drawer InvoiceDateFilter test',
       (tester) async {
         final expectedStates = [
           ReturnApproverFilterState.initial().copyWith(
@@ -376,8 +416,8 @@ void main() {
           ReturnApproverFilterState.initial().copyWith(
             showErrorMessages: true,
             approverReturnFilter: ReturnApproverFilter.empty().copyWith(
-              fromInvoiceDate: InvoiceDate(fakeFormDate.toIso8601String()),
-            ),
+                fromInvoiceDate: InvoiceDate(fakeFormDate.toIso8601String()),
+                toInvoiceDate: InvoiceDate(fakeToDate.toIso8601String())),
           ),
         ];
         whenListen(
@@ -389,208 +429,25 @@ void main() {
         await tester.pumpAndSettle();
 
         final filterFromDateField =
-            find.byKey(const Key('filterFromDateField'));
-        expect(filterFromDateField, findsOneWidget);
-        expect(
-            (tester.firstWidget(filterFromDateField) as TextFormField)
-                .controller
-                ?.text,
-            DateFormat('dd/MM/yyyy').format(fakeFormDate));
-        expect(find.text('Invalid Date'.tr()), findsOneWidget);
-      },
-    );
-
-    testWidgets(
-      'Approver Return Filter Drawer FromInvoiceDateFilter valid toInvoiceDateFilter valid',
-      (tester) async {
-        when(() => returnApproverFilterBlocMock.state).thenReturn(
-          ReturnApproverFilterState.initial().copyWith(
-            showErrorMessages: true,
-            approverReturnFilter: ReturnApproverFilter.empty().copyWith(
-              fromInvoiceDate: InvoiceDate(fakeFormDate.toIso8601String()),
-              toInvoiceDate: InvoiceDate(fakeToDate.toIso8601String()),
-            ),
-          ),
-        );
-
-        await tester.pumpWidget(getWidget());
-        await tester.pumpAndSettle();
-
-        final filterFromDateField =
-            find.byKey(const Key('filterFromDateField'));
-        expect(filterFromDateField, findsOneWidget);
-
-        expect(find.text('Invalid Date'.tr()), findsNothing);
-        expect(
-            ReturnApproverFilterState.initial()
-                .copyWith(
-                  approverReturnFilter: ReturnApproverFilter.empty().copyWith(
-                    fromInvoiceDate: InvoiceDate(
-                      fakeFormDate.toIso8601String(),
-                    ),
-                    toInvoiceDate: InvoiceDate(
-                      fakeToDate.toIso8601String(),
-                    ),
-                  ),
-                )
-                .anyFilterApplied,
-            true);
-      },
-    );
-
-    testWidgets(
-      'Approver Return Filter Drawer fromInvoiceDateFilter Date Enter',
-      (tester) async {
-        final expectedStates = [
-          ReturnApproverFilterState.initial().copyWith(
-            showErrorMessages: true,
-          ),
-          ReturnApproverFilterState.initial().copyWith(
-            showErrorMessages: true,
-            approverReturnFilter: ReturnApproverFilter.empty().copyWith(
-              fromInvoiceDate: InvoiceDate(fakeFormDate.toIso8601String()),
-              toInvoiceDate: InvoiceDate(fakeToDate.toIso8601String()),
-            ),
-          ),
-        ];
-        whenListen(
-          returnApproverFilterBlocMock,
-          Stream.fromIterable(expectedStates),
-        );
-
-        await tester.pumpWidget(getWidget());
-        await tester.pumpAndSettle();
-
-        final filterFromDateField =
-            find.byKey(const Key('filterFromDateField'));
+            find.byKey(const Key('filterInvoiceDateField'));
         expect(filterFromDateField, findsOneWidget);
         await tester.tap(filterFromDateField);
         await tester.pumpAndSettle();
+        final saveButton = find.text('SAVE');
+        expect(saveButton, findsOneWidget);
+        await tester.tap(saveButton);
+        await tester.pumpAndSettle();
+        expect(saveButton, findsNothing);
 
-        expect(find.text('OK'.tr()), findsOneWidget);
-        await tester.tap(find.text('OK'.tr()));
         verify(
           () => returnApproverFilterBlocMock.add(
-            ReturnApproverFilterEvent.setfromInvoiceDate(
-                fromDate: fakeFormDate),
+            ReturnApproverFilterEvent.setInvoiceDate(
+                DateTimeRange(start: fakeFormDate, end: fakeToDate)),
           ),
         ).called(1);
       },
     );
+
   });
 
-  group('Test Action Approver Page ToInvoiceDateFilter field', () {
-    testWidgets(
-      'Approver Return Filter Drawer ToInvoiceDateFilter valid FromInvoiceDateFilter notvalid ',
-      (tester) async {
-        final expectedStates = [
-          ReturnApproverFilterState.initial().copyWith(
-            showErrorMessages: true,
-          ),
-          ReturnApproverFilterState.initial().copyWith(
-            showErrorMessages: true,
-            approverReturnFilter: ReturnApproverFilter.empty().copyWith(
-              toInvoiceDate: InvoiceDate(fakeToDate.toIso8601String()),
-            ),
-          ),
-        ];
-        whenListen(
-          returnApproverFilterBlocMock,
-          Stream.fromIterable(expectedStates),
-        );
-
-        await tester.pumpWidget(getWidget());
-        await tester.pumpAndSettle();
-
-        final filterToDateField = find.byKey(const Key('filterToDateField'));
-        expect(filterToDateField, findsOneWidget);
-        expect(
-          (tester.firstWidget(filterToDateField) as TextFormField)
-              .controller
-              ?.text,
-          DateFormat('dd/MM/yyyy').format(fakeToDate),
-        );
-        expect(find.text('Invalid Date'.tr()), findsOneWidget);
-      },
-    );
-
-    testWidgets(
-      'Approver Return Filter Drawer ToInvoiceDateFilter valid FromInvoiceDateFilter valid ',
-      (tester) async {
-        when(() => returnApproverFilterBlocMock.state).thenReturn(
-          ReturnApproverFilterState.initial().copyWith(
-            showErrorMessages: true,
-            approverReturnFilter: ReturnApproverFilter.empty().copyWith(
-              fromInvoiceDate: InvoiceDate(fakeFormDate.toIso8601String()),
-              toInvoiceDate: InvoiceDate(fakeToDate.toIso8601String()),
-            ),
-          ),
-        );
-
-        await tester.pumpWidget(getWidget());
-        await tester.pumpAndSettle();
-
-        final filterToDateField = find.byKey(const Key('filterToDateField'));
-        expect(filterToDateField, findsOneWidget);
-        expect(
-          (tester.firstWidget(filterToDateField) as TextFormField)
-              .controller
-              ?.text,
-          DateFormat('dd/MM/yyyy').format(fakeToDate),
-        );
-        expect(find.text('Invalid Date'.tr()), findsNothing);
-        expect(find.byKey(const Key('filterClearButton')), findsOneWidget);
-        await tester.tap(find.byKey(const Key('filterClearButton')));
-        await tester.pump();
-        verify(
-          () => returnApproverFilterBlocMock.add(
-            const ReturnApproverFilterEvent.initialized(),
-          ),
-        ).called(1);
-      },
-    );
-
-    testWidgets(
-      'Approver Return Filter Drawer toInvoiceDateFilter Date Enter',
-      (tester) async {
-        final expectedStates = [
-          ReturnApproverFilterState.initial().copyWith(
-            showErrorMessages: true,
-          ),
-          ReturnApproverFilterState.initial().copyWith(
-            showErrorMessages: true,
-            approverReturnFilter: ReturnApproverFilter.empty().copyWith(
-              fromInvoiceDate: InvoiceDate(fakeFormDate
-                  .subtract(const Duration(days: 3))
-                  .toIso8601String()),
-              toInvoiceDate: InvoiceDate(fakeToDate
-                  .subtract(const Duration(days: 2))
-                  .toIso8601String()),
-            ),
-          ),
-        ];
-        whenListen(
-          returnApproverFilterBlocMock,
-          Stream.fromIterable(expectedStates),
-        );
-
-        await tester.pumpWidget(getWidget());
-        await tester.pumpAndSettle();
-
-        final filterToDateField = find.byKey(const Key('filterToDateField'));
-        expect(filterToDateField, findsOneWidget);
-        await tester.tap(filterToDateField);
-        await tester.pumpAndSettle();
-
-        expect(find.text('OK'.tr()), findsOneWidget);
-        await tester.tap(find.text('OK'.tr()));
-        verify(
-          () => returnApproverFilterBlocMock.add(
-            ReturnApproverFilterEvent.setToInvoiceDate(
-                toDate: fakeToDate.subtract(const Duration(days: 2))),
-          ),
-        ).called(1);
-      },
-    );
-  });
 }

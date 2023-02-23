@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'return_approver_filter.freezed.dart';
@@ -22,9 +23,18 @@ class ReturnApproverFilter with _$ReturnApproverFilter {
         createdBy: SearchKey.searchFilter(''),
         soldTo: SearchKey.searchFilter(''),
         shipTo: SearchKey.searchFilter(''),
-        toInvoiceDate: InvoiceDate(''),
-        fromInvoiceDate: InvoiceDate(''),
+        toInvoiceDate: InvoiceDate(DateTime.now().toIso8601String()),
+        fromInvoiceDate: InvoiceDate(
+          DateTime.now().subtract(const Duration(days: 7)).toIso8601String(),
+        ),
         sortBy: FilterStatus('PENDING'),
       );
 
+  String get getFilteredInvoiceDate =>
+      '${fromInvoiceDate.getFormattedDate} to ${toInvoiceDate.getFormattedDate} ';
+
+  DateTimeRange get getInvoiceFilterDateRange => DateTimeRange(
+        start: fromInvoiceDate.dateTimebyDateString,
+        end: toInvoiceDate.dateTimebyDateString,
+      );
 }

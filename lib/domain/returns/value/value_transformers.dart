@@ -97,11 +97,9 @@ String filterLabel(String sort) {
   }
 }
 
-String covertDateStringToApiDateString(String value) {
-  if (DateTime.tryParse(value) == null) return '';
-
-  return DateFormat('yyyyMMdd').format(DateTime.parse(value));
-}
+String covertDateStringToApiDateString(String value) =>
+    DateFormat('yyyyMMdd').format(DateTime.parse(value));
 
 String covertSortToApiDateString(String value) =>
     value.isNotEmpty && value != 'ALL' ? value : '';
+

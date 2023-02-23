@@ -31,9 +31,10 @@ final appThemeData = {
     primaryColor: ZPColors.primary,
     canvasColor: ZPColors.white,
     colorScheme: const ColorScheme.light().copyWith(
-      primary: ZPColors.primary,
+      primary: ZPColors.gradient,
       background: ZPColors.white,
       secondary: ZPColors.secondary,
+      onPrimary: ZPColors.black,
     ),
     iconTheme: const IconThemeData(
       color: ZPColors.lightGray,
@@ -132,6 +133,7 @@ final appThemeData = {
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         backgroundColor: ZPColors.primary,
+        foregroundColor: ZPColors.white,
         // onPrimary: AppColors.black80,
         // shape: const RoundedRectangleBorder(
         //   borderRadius: BorderRadius.all(

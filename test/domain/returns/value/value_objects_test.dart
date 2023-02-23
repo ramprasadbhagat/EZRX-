@@ -80,7 +80,7 @@ void main() {
             DateTime.parse(DateFormat('yyyyMMdd').format(DateTime.now()));
         final simpleInvoiceDate = InvoiceDate(input.toIso8601String());
         final apiParameterValueOrEmpty =
-            simpleInvoiceDate.apiParameterValueOrEmpty;
+            simpleInvoiceDate.apiParameterValue;
         expect(apiParameterValueOrEmpty, DateFormat('yyyyMMdd').format(input));
       },
     );

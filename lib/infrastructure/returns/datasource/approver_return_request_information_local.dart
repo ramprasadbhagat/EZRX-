@@ -13,7 +13,7 @@ class ApproverReturnRequestInformationLocal {
   }) async {
     final data = json.decode(
       await rootBundle.loadString(
-        'assets/json/returnRequestequestInformationV2Response.json',
+        'assets/json/returnRequestInformationV2Response.json',
       ),
     );
     final res = data['data']['requestInformationV2'];
