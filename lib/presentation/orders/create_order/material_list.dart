@@ -10,6 +10,7 @@ import 'package:ezrxmobile/application/order/material_filter/material_filter_blo
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
+import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
@@ -34,6 +35,9 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/cart_bottom_sheet.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+
 class MaterialListPage extends StatelessWidget {
   final Function addToCart;
 
@@ -41,61 +45,116 @@ class MaterialListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: const Key('materialListPage'),
-      body: BlocConsumer<MaterialListBloc, MaterialListState>(
-        listenWhen: (previous, current) =>
-            previous.apiFailureOrSuccessOption !=
-            current.apiFailureOrSuccessOption,
-        listener: (context, state) {
-          state.apiFailureOrSuccessOption.fold(
-            () {},
-            (either) => either.fold(
-              (failure) {
-                ErrorUtils.handleApiFailure(context, failure);
-              },
-              (_) {},
-            ),
-          );
-        },
-        buildWhen: (previous, current) =>
-            previous.isFetching != current.isFetching ||
-            previous.materialList != current.materialList,
-        builder: (context, state) {
-          return BlocListener<OrderDocumentTypeBloc, OrderDocumentTypeState>(
-            listenWhen: (previous, current) =>
-                previous.selectedOrderType != current.selectedOrderType ||
-                previous.isSubmitting != current.isSubmitting,
-            listener: (context, orderDocumentTypeState) {
-              orderDocumentTypeState.orderDocumentTypeListFailureOrSuccessOption
-                  .fold(
-                () {},
-                (either) => either.fold(
-                  (failure) {
-                    showSnackBar(
-                      context: context,
-                      message: 'Unable to fetch Order Type',
-                    );
-                  },
-                  (_) {},
+    return BlocListener<ScanMaterialInfoBloc, ScanMaterialInfoState>(
+      listenWhen: (previous, current) => previous.scannedData!=current.scannedData,
+      listener: (context, state) {
+        if(state.scannedData.isEmpty) return;
+
+        context.read<MaterialListBloc>().add(
+                MaterialListEvent.updateSearchKey(searchKey: state.scannedData),
+              );
+          context.read<MaterialListBloc>().add(
+                MaterialListEvent.searchMaterialList(
+                  user: context.read<UserBloc>().state.user,
+                  salesOrganisation:
+                      context.read<SalesOrgBloc>().state.salesOrganisation,
+                  configs: context.read<SalesOrgBloc>().state.configs,
+                  customerCodeInfo:
+                      context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                  shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+                  selectedMaterialFilter: context
+                      .read<MaterialFilterBloc>()
+                      .state
+                      .selectedMaterialFilter,
+                  pickAndPack:
+                      context.read<EligibilityBloc>().state.getPNPValueMaterial,
                 ),
               );
-            },
-            child: Column(
-              children: [
-                const _SearchBar(),
-                const AccountSuspendedBanner(),
-                if (context.read<EligibilityBloc>().state.isOrderTypeEnable)
-                  const OrderTypeSelector(hideReasonField: true),
-                const _MaterialFilters(),
-                _BodyContent(
-                  materialListState: state,
-                  addToCart: addToCart,
-                ),
-              ],
-            ),
-          );
-        },
+      },
+      child: Scaffold(
+        key: const Key('materialListPage'),
+        body: BlocConsumer<MaterialListBloc, MaterialListState>(
+          listenWhen: (previous, current) =>
+              previous.apiFailureOrSuccessOption !=
+                  current.apiFailureOrSuccessOption ||
+              previous.isFetching != current.isFetching,
+          listener: (context, state) {
+            state.apiFailureOrSuccessOption.fold(
+              () {
+                if (state.isSingularMaterialFetched) {
+                  _openAddToCartBottomSheet(context);
+                }
+              },
+              (either) => either.fold(
+                (failure) {
+                  ErrorUtils.handleApiFailure(context, failure);
+                },
+                (_) {},
+              ),
+            );
+          },
+          buildWhen: (previous, current) =>
+              previous.isFetching != current.isFetching ||
+              previous.materialList != current.materialList,
+          builder: (context, state) {
+            return BlocListener<OrderDocumentTypeBloc, OrderDocumentTypeState>(
+              listenWhen: (previous, current) =>
+                  previous.selectedOrderType != current.selectedOrderType ||
+                  previous.isSubmitting != current.isSubmitting,
+              listener: (context, orderDocumentTypeState) {
+                orderDocumentTypeState
+                    .orderDocumentTypeListFailureOrSuccessOption
+                    .fold(
+                  () {},
+                  (either) => either.fold(
+                    (failure) {
+                      showSnackBar(
+                        context: context,
+                        message: 'Unable to fetch Order Type',
+                      );
+                    },
+                    (_) {},
+                  ),
+                );
+              },
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Row(
+                    children: [
+                      const Expanded(child: _SearchBar()),
+                      Container(
+                        color: ZPColors.white,
+                        child: IconButton(
+                          padding: const EdgeInsets.only(right: 10),
+                          onPressed: () {
+                            showPlatformDialog(
+                              context: context,
+                              barrierDismissible: true,
+                              useRootNavigator: true,
+                              builder: (BuildContext context) {
+                                return const ScanMaterialInfoOptionPicker();
+                              },
+                            );
+                          },
+                          icon: const Icon(Icons.qr_code_scanner_outlined),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const AccountSuspendedBanner(),
+                  if (context.read<EligibilityBloc>().state.isOrderTypeEnable)
+                    const OrderTypeSelector(hideReasonField: true),
+                  const _MaterialFilters(),
+                  _BodyContent(
+                    materialListState: state,
+                    addToCart: addToCart,
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
       ),
     );
   }
@@ -726,6 +785,116 @@ class _MaterialFilters extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+}
+
+void _openAddToCartBottomSheet(BuildContext context) {
+  final materialInfo =
+      context.read<MaterialListBloc>().state.materialList.first;
+  final materialPrice = context
+      .read<MaterialPriceBloc>()
+      .state
+      .materialPrice[materialInfo.materialNumber];
+  if (materialInfo.hasValidTenderContract) {
+    context.read<TenderContractBloc>().add(
+          TenderContractEvent.fetch(
+            customerCodeInfo:
+                context.read<CustomerCodeBloc>().state.customerCodeInfo,
+            salesOrganisation:
+                context.read<SalesOrgBloc>().state.salesOrganisation,
+            shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+            materialInfo: materialInfo,
+            defaultSelectedTenderContract: TenderContract.empty(),
+          ),
+        );
+  }
+  CartBottomSheet.showAddToCartBottomSheet(
+    priceAggregate: PriceAggregate(
+      price: materialPrice ?? Price.empty(),
+      materialInfo: materialInfo,
+      salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+      quantity: 1,
+      bundle: Bundle.empty(),
+      addedBonusList: [],
+      stockInfo: StockInfo.empty().copyWith(
+        materialNumber: materialInfo.materialNumber,
+      ),
+      tenderContract: TenderContract.empty(),
+    ),
+    context: context,
+  );
+}
+
+class ScanMaterialInfoOptionPicker extends StatefulWidget {
+  const ScanMaterialInfoOptionPicker({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  State<ScanMaterialInfoOptionPicker> createState() =>
+      _ScanMaterialInfoOptionPicker();
+}
+
+class _ScanMaterialInfoOptionPicker
+    extends State<ScanMaterialInfoOptionPicker> {
+  @override
+  Widget build(BuildContext context) {
+    return PlatformAlertDialog(
+      key: const ValueKey('scanMaterialInfoDialog'),
+      title: const Text(
+        'Scan Material Code',
+      ).tr(),
+      content: const Text(
+        'Scan From Camera Or Device Storage',
+      ).tr(),
+      actions: [
+        PlatformDialogAction(
+          key: const Key('scanFromCamera'),
+          child: Column(
+            children: [
+              const Icon(
+                Icons.photo_camera,
+                color: ZPColors.kPrimaryColor,
+              ),
+              const Text('Camera').tr(),
+            ],
+          ),
+          onPressed: () {
+            context.router.pushNamed('scan_material_info');
+            context
+                .read<ScanMaterialInfoBloc>()
+                .add(const ScanMaterialInfoEvent.scanMaterialNumberFromCamera());
+            context.router.pop();
+          },
+          cupertino: (_, __) => CupertinoDialogActionData(
+            textStyle: const TextStyle(
+              color: ZPColors.kPrimaryColor,
+            ),
+          ),
+        ),
+        PlatformDialogAction(
+          key: const Key('scanFromGallery'),
+          child: Column(
+            children: [
+              const Icon(
+                Icons.image,
+                color: ZPColors.kPrimaryColor,
+              ),
+              const Text('Gallery').tr(),
+            ],
+          ),
+          onPressed: () {
+            context
+                .read<ScanMaterialInfoBloc>()
+                .add(const ScanMaterialInfoEvent.scanImageFromDeviceStorage());
+            context.router.pop();
+          },
+          cupertino: (_, __) => CupertinoDialogActionData(
+            textStyle: const TextStyle(color: ZPColors.kPrimaryColor),
+          ),
+        ),
+      ],
     );
   }
 }

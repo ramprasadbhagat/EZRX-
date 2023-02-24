@@ -2,6 +2,7 @@ part of 'material_list_bloc.dart';
 
 @freezed
 class MaterialListState with _$MaterialListState {
+  const MaterialListState._();
   const factory MaterialListState({
     required List<MaterialInfo> materialList,
     required Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
@@ -21,4 +22,8 @@ class MaterialListState with _$MaterialListState {
         searchKey: SearchKey(''),
         selectedFilters: MaterialFilter.empty(),
       );
+
+  bool get isSingularMaterialFetched {
+    return materialList.length == 1;
+  }
 }

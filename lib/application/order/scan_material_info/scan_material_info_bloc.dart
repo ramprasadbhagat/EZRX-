@@ -1,0 +1,85 @@
+import 'dart:async';
+
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:dartz/dartz.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:scandit_flutter_datacapture_barcode/scandit_flutter_datacapture_barcode_capture.dart';
+import 'package:scandit_flutter_datacapture_core/scandit_flutter_datacapture_core.dart';
+
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+
+import 'package:ezrxmobile/domain/order/repository/i_scan_material_info_repository.dart';
+
+part 'scan_material_info_event.dart';
+part 'scan_material_info_state.dart';
+part 'scan_material_info_bloc.freezed.dart';
+
+class ScanMaterialInfoBloc
+    extends Bloc<ScanMaterialInfoEvent, ScanMaterialInfoState>
+    implements BarcodeCaptureListener {
+  final IScanMaterialInfoRepository scanInfoRepository;
+  late StreamController scanResultController;
+  ScanMaterialInfoBloc({required this.scanInfoRepository})
+      : super(ScanMaterialInfoState.initial()) {
+    scanInfoRepository.fetchBarcodeCapture().addListener(this);
+    on<ScanMaterialInfoEvent>(_onEvent);
+    scanResultController = StreamController<String>();
+    scanResultController.stream.listen((scannedData) {
+      add(ScanMaterialInfoEvent.emitScannedData(scannedRes: scannedData));
+    });
+  }
+
+  Future<void> _onEvent(
+    ScanMaterialInfoEvent event,
+    Emitter<ScanMaterialInfoState> emit,
+  ) async {
+    await event.map(
+      initialized: (e) async {
+        emit(ScanMaterialInfoState.initial());
+      },
+      scanMaterialNumberFromCamera: (e) async {
+        emit(ScanMaterialInfoState.initial());
+        final permissionsResult = await Permission.camera.request();
+        if (permissionsResult.isGranted) {
+          await scanInfoRepository.scanMaterialNumberFromdeviceCamera();
+        }
+      },
+      scanImageFromDeviceStorage: (e) async {
+        emit(ScanMaterialInfoState.initial());
+        await scanInfoRepository.scanImageFromDeviceStorage();
+      },
+      disableScan: (e) async {
+        await scanInfoRepository.disableMaterialScan();
+      },
+      emitScannedData: (e) async {
+        emit(state.copyWith(scannedData: e.scannedRes));
+        await scanInfoRepository.disableMaterialScan();
+      },
+    );
+  }
+
+  @override
+  void didScan(BarcodeCapture barcodeCapture, BarcodeCaptureSession session) {
+    scanInfoRepository.disableMaterialScan();
+
+    final barcode = session.newlyRecognizedBarcodes[0];
+    final scannedMessage = barcode.data ?? '';
+
+    scanResultController.sink.add(scannedMessage);
+  }
+
+  DataCaptureView get dataCaptureView {
+    return scanInfoRepository.dataCaptureView();
+  }
+
+  @override
+  void didUpdateSession(
+    BarcodeCapture barcodeCapture,
+    BarcodeCaptureSession session,
+  ) {}
+  @override
+  void dispose() {
+    scanResultController.close();
+  }
+}

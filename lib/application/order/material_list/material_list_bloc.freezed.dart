@@ -1936,7 +1936,7 @@ class __$$_MaterialListStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_MaterialListState implements _MaterialListState {
+class _$_MaterialListState extends _MaterialListState {
   const _$_MaterialListState(
       {required final List<MaterialInfo> materialList,
       required this.apiFailureOrSuccessOption,
@@ -1945,7 +1945,8 @@ class _$_MaterialListState implements _MaterialListState {
       required this.nextPageIndex,
       required this.searchKey,
       required this.selectedFilters})
-      : _materialList = materialList;
+      : _materialList = materialList,
+        super._();
 
   final List<MaterialInfo> _materialList;
   @override
@@ -2013,7 +2014,7 @@ class _$_MaterialListState implements _MaterialListState {
           this, _$identity);
 }
 
-abstract class _MaterialListState implements MaterialListState {
+abstract class _MaterialListState extends MaterialListState {
   const factory _MaterialListState(
       {required final List<MaterialInfo> materialList,
       required final Option<Either<ApiFailure, dynamic>>
@@ -2023,6 +2024,7 @@ abstract class _MaterialListState implements MaterialListState {
       required final int nextPageIndex,
       required final SearchKey searchKey,
       required final MaterialFilter selectedFilters}) = _$_MaterialListState;
+  const _MaterialListState._() : super._();
 
   @override
   List<MaterialInfo> get materialList;

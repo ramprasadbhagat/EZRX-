@@ -9,11 +9,13 @@ import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.da
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
+import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
+import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
@@ -98,6 +100,13 @@ class AdditionalDetailsBlocMock
     extends MockBloc<AdditionalDetailsEvent, AdditionalDetailsState>
     implements AdditionalDetailsBloc {}
 
+class ScanMaterialinfoBlocMock
+    extends MockBloc<ScanMaterialInfoEvent, ScanMaterialInfoState>
+    implements ScanMaterialInfoBloc {}
+
+class AddToCartBlocMock extends MockBloc<AddToCartEvent, AddToCartState>
+    implements AddToCartBloc {}
+
 class AddToCartStub {
   void addToCart() {
     // Do nothing
@@ -123,6 +132,8 @@ void main() {
   late AddToCartStub mockAddToCartStub;
   late TenderContractBloc mockTenderContractBloc;
   late AdditionalDetailsBloc mockAdditionalDetailsBloc;
+  late ScanMaterialInfoBloc mockScanMaterialInfoBloc;
+  late AddToCartBloc mockAddToCartBloc;
 
   final fakeMaterialNumber = MaterialNumber('000000000023168451');
   final fakeMaterialPrice = MaterialPrice(10.0);
@@ -185,6 +196,8 @@ void main() {
       eligibilityBlocMock = EligibilityBlocMock();
       mockTenderContractBloc = TenderContractBlocMock();
       mockAdditionalDetailsBloc = AdditionalDetailsBlocMock();
+      mockScanMaterialInfoBloc = ScanMaterialinfoBlocMock();
+      mockAddToCartBloc = AddToCartBlocMock();
       when(() => userBlocMock.state).thenReturn(UserState.initial());
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
       when(() => customerCodeBlocMock.state)
@@ -193,6 +206,7 @@ void main() {
       when(() => materialPriceBlocMock.state)
           .thenReturn(MaterialPriceState.initial());
       when(() => cartBlocMock.state).thenReturn(CartState.initial());
+      when(() => mockAddToCartBloc.state).thenReturn(AddToCartState.initial());
       when(() => mockMaterialFilterBloc.state).thenReturn(
         MaterialFilterState.initial().copyWith(
           selectedMaterialFilter:
@@ -214,6 +228,8 @@ void main() {
           .thenReturn(ShipToCodeState.initial());
       when(() => mockTenderContractBloc.state)
           .thenReturn(TenderContractState.initial());
+      when(() => mockScanMaterialInfoBloc.state)
+          .thenReturn(ScanMaterialInfoState.initial());
       when(() => mockAdditionalDetailsBloc.state)
           .thenReturn(AdditionalDetailsState.initial());
     });
@@ -255,8 +271,12 @@ void main() {
                 create: ((context) => eligibilityBlocMock)),
             BlocProvider<TenderContractBloc>(
                 create: ((context) => mockTenderContractBloc)),
+            BlocProvider<ScanMaterialInfoBloc>(
+                create: ((context) => mockScanMaterialInfoBloc)),
             BlocProvider<AdditionalDetailsBloc>(
                 create: ((context) => mockAdditionalDetailsBloc)),
+            BlocProvider<AddToCartBloc>(
+                create: ((context) => mockAddToCartBloc)),
           ],
           child: child,
         ),
@@ -282,15 +302,12 @@ void main() {
               optionOf(const Left(ApiFailure.other('Fake-error'))),
         )
       ];
-      when(() => eligibilityBlocMock.state)
-          .thenReturn(EligibilityState.initial().copyWith(
-                customerCodeInfo: CustomerCodeInfo.empty()
-                    .copyWith(customerGrp4: CustomerGrp4('VR'))));
-      whenListen(
-          eligibilityBlocMock,
-          Stream.fromIterable([
-            eligibilityBlocMock.state
-          ]));
+      when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+              customerCodeInfo: CustomerCodeInfo.empty()
+                  .copyWith(customerGrp4: CustomerGrp4('VR'))));
+      whenListen(eligibilityBlocMock,
+          Stream.fromIterable([eligibilityBlocMock.state]));
       when(() => materialListBlocMock.state)
           .thenReturn(MaterialListState.initial());
       whenListen(materialListBlocMock, Stream.fromIterable(expectedState));
@@ -457,13 +474,14 @@ void main() {
           orderDocumentTypeList: fakeOrderDocumentTypeList,
         ),
       );
-      whenListen(orderDocumentTypeBlocMock, Stream.fromIterable([
-        orderDocumentTypeBlocMock.state.copyWith(
-          selectedReason: OrderDocumentType.empty().copyWith(
-            orderReason: 'testing'
-          ),
-        )
-      ]));
+      whenListen(
+          orderDocumentTypeBlocMock,
+          Stream.fromIterable([
+            orderDocumentTypeBlocMock.state.copyWith(
+              selectedReason:
+                  OrderDocumentType.empty().copyWith(orderReason: 'testing'),
+            )
+          ]));
 
       await tester.pumpWidget(getScopedWidget(const Material(
           child: OrderTypeSelector(

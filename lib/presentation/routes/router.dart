@@ -38,6 +38,8 @@ import 'package:ezrxmobile/presentation/splash/splash_page.dart';
 
 import 'package:ezrxmobile/presentation/history/detail/history_details.dart';
 
+import 'package:ezrxmobile/presentation/orders/create_order/scan_material_info.dart';
+
 @MaterialAutoRouter(
   replaceInRouteName: 'Page,Route,Tab',
   routes: <AutoRoute>[
@@ -88,6 +90,7 @@ import 'package:ezrxmobile/presentation/history/detail/history_details.dart';
     AutoRoute(path: 'history_details', page: HistoryDetails),
     AutoRoute(path: 'add_bonus', page: BonusAddPage),
     AutoRoute(path: 'add_edit_user_restriction', page: AddEditUserRestrictionPage),
+    AutoRoute(path: 'scan_material_info', page: ScanMaterialInfo),
     CustomRoute(
       path: 'bundle_item_detail',
       page: BundleItemDetailPage,

@@ -1216,6 +1216,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.27.7"
+  scandit_flutter_datacapture_barcode:
+    dependency: "direct main"
+    description:
+      name: scandit_flutter_datacapture_barcode
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "6.16.1"
+  scandit_flutter_datacapture_core:
+    dependency: transitive
+    description:
+      name: scandit_flutter_datacapture_core
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "6.16.1"
   shared_preferences:
     dependency: "direct main"
     description:

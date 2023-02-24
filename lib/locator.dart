@@ -17,6 +17,7 @@ import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_blo
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_list_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
@@ -232,6 +233,10 @@ import 'package:ezrxmobile/infrastructure/returns/repository/return_request_type
 
 import 'package:ezrxmobile/application/returns/user_restriction_details/user_restriction_details_bloc.dart';
 
+import 'package:ezrxmobile/infrastructure/order/repository/scan_material_info_repository.dart';
+
+import 'package:ezrxmobile/infrastructure/core/material_info_scanner/material_info_scanner.dart';
+
 GetIt locator = GetIt.instance;
 
 void setupLocator() {
@@ -284,6 +289,10 @@ void setupLocator() {
     () => CredStorage(secureStorage: locator<SecureStorage>()),
   );
   locator.registerLazySingleton(() => CartStorage());
+  locator.registerLazySingleton(
+    () => MaterialInfoScanner(config: locator<Config>()),
+  );
+
   locator.registerLazySingleton(
     () => AuthInterceptor(
       tokenStorage: locator<TokenStorage>(),
@@ -1660,6 +1669,21 @@ void setupLocator() {
       config: locator<Config>(),
       returnSummaryLocalDataSource: locator<ReturnSummaryLocalDataSource>(),
       returnSummaryRemoteDataSource: locator<ReturnSummaryRemoteDataSource>(),
+    ),
+  );
+
+  //============================================================
+  //  Scan Material Information
+  //
+  //============================================================
+  locator.registerLazySingleton(
+    () => ScanMaterialInfoRepository(
+      materialInfoScanner: locator<MaterialInfoScanner>(),
+    ),
+  );
+  locator.registerLazySingleton(
+    () => ScanMaterialInfoBloc(
+      scanInfoRepository: locator<ScanMaterialInfoRepository>(),
     ),
   );
 }

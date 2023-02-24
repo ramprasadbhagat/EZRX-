@@ -14,6 +14,7 @@ import 'package:ezrxmobile/application/order/material_filter/material_filter_blo
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
+import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
@@ -85,6 +86,10 @@ class OrderDocumentTypeBlocMock
 class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
     implements EligibilityBloc {}
 
+class ScanMaterialInfoBlocMock
+    extends MockBloc<ScanMaterialInfoEvent, ScanMaterialInfoState>
+    implements ScanMaterialInfoBloc {}
+
 class AddToCartStub {
   void addToCart() {
     // Do nothing
@@ -111,6 +116,7 @@ void main() {
   late OrderDocumentTypeBloc orderDocumentTypeBlocMock;
   late EligibilityBlocMock eligibilityBlocMock;
   late AddToCartStub mockAddToCartStub;
+  late ScanMaterialInfoBlocMock scanMaterialInfoBlocMock;
 
   final fakeMaterialInfo = MaterialInfo(
     materialNumber: fakeMaterialNumber,
@@ -158,6 +164,7 @@ void main() {
       covidMaterialListBlocMock = CovidMaterialListBlocMock();
       orderDocumentTypeBlocMock = OrderDocumentTypeBlocMock();
       eligibilityBlocMock = EligibilityBlocMock();
+      scanMaterialInfoBlocMock = ScanMaterialInfoBlocMock();
       mockAddToCartStub = MockAddToCartStub();
       when(() => userBlocMock.state).thenReturn(UserState.initial().copyWith(
           user: User.empty().copyWith(
@@ -195,6 +202,8 @@ void main() {
           .thenReturn(OrderDocumentTypeState.initial());
       when(() => shipToCodeBlocMock.state)
           .thenReturn(ShipToCodeState.initial());
+       when(() => scanMaterialInfoBlocMock.state)
+          .thenReturn(ScanMaterialInfoState.initial());
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
             user: User.empty().copyWith(
@@ -250,6 +259,8 @@ void main() {
                 create: ((context) => orderDocumentTypeBlocMock)),
             BlocProvider<EligibilityBloc>(
                 create: ((context) => eligibilityBlocMock)),
+            BlocProvider<ScanMaterialInfoBloc>(
+                create: ((context) => scanMaterialInfoBlocMock)),
           ],
           child: child,
         ),
@@ -332,19 +343,19 @@ void main() {
 
     testWidgets('Covid Material List Body Content IsNotEmpty', (tester) async {
       whenListen(
-        covidMaterialListBlocMock,
-        Stream.fromIterable([
-          CovidMaterialListState.initial().copyWith(
-            apiFailureOrSuccessOption: none(),
-          ),
-          CovidMaterialListState.initial().copyWith(
-              isFetching: false,
-              nextPageIndex: 2,
-              materialList: <MaterialInfo>[
-                fakeMaterialInfo,
-              ],
-              apiFailureOrSuccessOption: optionOf(const Right('success')))
-        ]));
+          covidMaterialListBlocMock,
+          Stream.fromIterable([
+            CovidMaterialListState.initial().copyWith(
+              apiFailureOrSuccessOption: none(),
+            ),
+            CovidMaterialListState.initial().copyWith(
+                isFetching: false,
+                nextPageIndex: 2,
+                materialList: <MaterialInfo>[
+                  fakeMaterialInfo,
+                ],
+                apiFailureOrSuccessOption: optionOf(const Right('success')))
+          ]));
       await tester.pumpWidget(getScopedWidget(const MaterialRoot()));
       await tester.tap(find.text('COVID-19'));
       await tester.pump();
@@ -843,7 +854,7 @@ void main() {
     });
 
     testWidgets(
-      'Search input must be greater than 2 characters. with clear icon tapped',
+        'Search input must be greater than 2 characters. with clear icon tapped',
         (WidgetTester tester) async {
       final expectedCustomerCodeListStates = [
         CovidMaterialListState.initial().copyWith(isFetching: true),

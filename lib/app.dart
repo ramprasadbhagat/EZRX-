@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_list_bloc.dart';
 import 'package:ezrxmobile/application/returns/request_return/request_return_bloc.dart';
@@ -79,6 +80,9 @@ import 'package:ezrxmobile/application/returns/return_request_type_code/return_r
 import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
 
 import 'package:ezrxmobile/application/returns/user_restriction_details/user_restriction_details_bloc.dart';
+import 'package:scandit_flutter_datacapture_barcode/scandit_flutter_datacapture_barcode.dart';
+
+import 'package:ezrxmobile/infrastructure/core/material_info_scanner/material_info_scanner.dart';
 
 final _crashlytics = locator<FirebaseCrashlyticsService>().crashlytics;
 
@@ -94,6 +98,7 @@ Future<void> _firebaseMessagingBackgroundHandler(
 
 Future<void> initialSetup({required Flavor flavor}) async {
   WidgetsFlutterBinding.ensureInitialized();
+  await ScanditFlutterDataCaptureBarcode.initialize();
   await EasyLocalization.ensureInitialized();
   setupLocator();
   final config = locator<Config>();
@@ -123,6 +128,7 @@ Future<void> initialSetup({required Flavor flavor}) async {
   await locator<AccountSelectorStorage>().init();
   await locator<CartStorage>().init();
   await locator<CountlyService>().init();
+  await locator<MaterialInfoScanner>().init();
 }
 
 void runAppWithCrashlyticsAndLocalization() {
@@ -314,6 +320,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider<ReturnApproverFilterBloc>(
           create: (context) => locator<ReturnApproverFilterBloc>(),
+        ),
+        BlocProvider<ScanMaterialInfoBloc>(
+          create: (context) => locator<ScanMaterialInfoBloc>(),
         ),
         BlocProvider<TenderContractListBloc>(
           create: (context) => locator<TenderContractListBloc>(),
