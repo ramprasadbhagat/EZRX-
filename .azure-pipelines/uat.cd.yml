@@ -90,13 +90,13 @@ stages:
         shouldSkipSubmission: true
 
 
-- stage: AndroidStage
+- stage: AndroidUatStage
   dependsOn: []
-  displayName: AndroidStage
+  displayName: AndroidUatStage
   jobs:
 
-  - job: AndroidJob
-    displayName: AndroidJob
+  - job: AndroidUatJob
+    displayName: AndroidUatJob
     steps: 
 
     - task: DownloadSecureFile@1
