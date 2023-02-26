@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:badges/badges.dart';
+import 'package:badges/badges.dart' as bd;
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
@@ -23,7 +23,7 @@ class CartButton extends StatelessWidget {
             buildWhen: (previous, current) =>
                 previous.cartItems.length != current.cartItems.length,
             builder: (context, state) {
-              return Badge(
+              return bd.Badge(
                 badgeContent: Text(
                   state.cartItems.length.toString(),
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
@@ -33,8 +33,8 @@ class CartButton extends StatelessWidget {
                 badgeColor: ZPColors.red,
                 showBadge: state.cartItems.isNotEmpty,
                 elevation: 0,
-                position: BadgePosition.topEnd(top: 0, end: 3),
-                animationType: BadgeAnimationType.fade,
+                position: bd.BadgePosition.topEnd(top: 0, end: 3),
+                animationType: bd.BadgeAnimationType.fade,
                 child: IconButton(
                   key: const Key('CartButton'),
                   icon: const Icon(Icons.shopping_cart_outlined),

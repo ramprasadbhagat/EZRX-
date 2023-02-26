@@ -72,7 +72,7 @@ dependencies:
   scandit_flutter_datacapture_barcode: ^6.16.1
   countly_flutter: ^22.2.0
   loading_indicator: ^3.1.0
-  file: 6.1.2
+  file: ^6.1.4
   badges: ^2.0.3
   flutter_slidable: ^2.0.0
   #We need to change this later when web is supported
