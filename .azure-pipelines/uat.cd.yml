@@ -164,7 +164,7 @@ stages:
     - task: AppCenterDistribute@3
       displayName: Upload to Microsoft Appcenter eZRx Uat
       inputs:
-        serverEndpoint: 'eZRx Uat Appcenter'
+        serverEndpoint: 'eZRx Uat Appcenter Android'
         appSlug: '$(APPCENTER_APP_SLUG_UAT)'
         appFile: 'build/app/outputs/bundle/uatRelease/*.aab'
         destinationType: 'groups'
