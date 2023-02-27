@@ -61,7 +61,8 @@ class PriceAggregateDtoAdapter extends TypeAdapter<PriceAggregateDto> {
               zmgDiscount: false,
               isPriceOverride: false,
               zdp8Override: 0.0,
-              priceOverride: 0.0)
+              priceOverride: 0.0,
+              comboDeal: PriceComboDealDto.empty)
           : fields[2] as PriceDto,
       salesOrganisationConfigsDto: fields[3] == null
           ? const SalesOrganisationConfigsDto(
@@ -116,6 +117,7 @@ class PriceAggregateDtoAdapter extends TypeAdapter<PriceAggregateDto> {
               disableReturnsAccess: false,
               enableGreenDelivery: false,
               greenDeliveryDelayInDays: 0,
+              enableComboDeals: false,
               greenDeliveryUserRole: 0)
           : fields[3] as SalesOrganisationConfigsDto,
       zmgMaterialCountOnCart: fields[4] == null ? 0 : fields[4] as int,
@@ -155,13 +157,15 @@ class PriceAggregateDtoAdapter extends TypeAdapter<PriceAggregateDto> {
               isNearToExpire: false,
               contractPaymentTerm: '')
           : fields[8] as TenderContractDto,
+      comboDealDto:
+          fields[9] == null ? ComboDealDto.empty : fields[9] as ComboDealDto,
     );
   }
 
   @override
   void write(BinaryWriter writer, PriceAggregateDto obj) {
     writer
-      ..writeByte(9)
+      ..writeByte(10)
       ..writeByte(0)
       ..write(obj.materialDto)
       ..writeByte(1)
@@ -179,7 +183,9 @@ class PriceAggregateDtoAdapter extends TypeAdapter<PriceAggregateDto> {
       ..writeByte(7)
       ..write(obj.stockInfoDto)
       ..writeByte(8)
-      ..write(obj.tenderContractDto);
+      ..write(obj.tenderContractDto)
+      ..writeByte(9)
+      ..write(obj.comboDealDto);
   }
 
   @override

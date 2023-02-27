@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 
 class StringUtils {
   static String displayPrice(
@@ -14,5 +15,14 @@ class StringUtils {
     }
 
     return '${salesOrgConfig.currency.code} ${price.toStringAsFixed(2)}';
+  }
+
+  static String displayDiscount(
+    double rate,
+    DiscountType type,
+  ) {
+    return type.isPercent()
+        ? '$rate ${type.getOrCrash()}'
+        : '${type.getOrCrash()} $rate';
   }
 }

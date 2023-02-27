@@ -17,16 +17,21 @@ import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_blo
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/application/order/combo_deal/combo_deal_detail_bloc.dart';
+import 'package:ezrxmobile/application/order/combo_deal/combo_deal_list_bloc.dart';
 import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_list_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_summary/return_summary_bloc.dart';
 import 'package:ezrxmobile/application/returns/request_return_filter/request_return_filter_bloc.dart';
+import 'package:ezrxmobile/domain/order/repository/i_combo_deal_repository.dart';
 import 'package:ezrxmobile/infrastructure/core/common/file_picker.dart';
 import 'package:ezrxmobile/infrastructure/core/common/permission.dart';
 import 'package:ezrxmobile/application/returns/request_return/request_return_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_request_type_code/return_request_type_code_bloc.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/combo_deal_query_mutation.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/combo_deal_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/cart_repository.dart';
 import 'package:ezrxmobile/application/order/cart/discount_override/discount_override_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
@@ -171,6 +176,7 @@ import 'package:ezrxmobile/infrastructure/order/datasource/valid_customer_materi
 import 'package:ezrxmobile/infrastructure/order/datasource/valid_customer_material_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/valid_customer_materials_query.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/bonus_material_repository.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/combo_deal_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/discount_override_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/material_bundle_list_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/material_filter_repository.dart';
@@ -1670,6 +1676,40 @@ void setupLocator() {
       returnSummaryLocalDataSource: locator<ReturnSummaryLocalDataSource>(),
       returnSummaryRemoteDataSource: locator<ReturnSummaryRemoteDataSource>(),
     ),
+  );
+
+  //============================================================
+  //  Combo Deals
+  //
+  //============================================================
+  locator.registerLazySingleton(
+    () => ComboDealQueryMutation(),
+  );
+
+  locator.registerLazySingleton(
+    () => ComboDealRemoteDataSource(
+      config: locator<Config>(),
+      httpService: locator<HttpService>(),
+      queryMutation: locator<ComboDealQueryMutation>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+    ),
+  );
+
+  locator.registerLazySingleton<IComboDealRepository>(
+    () => ComboDealRepository(
+      config: locator<Config>(),
+      remoteDataSource: locator<ComboDealRemoteDataSource>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => ComboDealListBloc(
+      repository: locator<IComboDealRepository>(),
+    ),
+  );
+
+  locator.registerFactory(
+    () => ComboDealDetailBloc(),
   );
 
   //============================================================

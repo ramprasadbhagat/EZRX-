@@ -90,6 +90,7 @@ void main() {
     disableReturnsAccess: false,
     enableGreenDelivery: false,
     greenDeliveryDelayInDays: 0,
+    enableComboDeals: false,
     greenDeliveryUserRole: GreenDeliveryUserRole(0),
   );
 

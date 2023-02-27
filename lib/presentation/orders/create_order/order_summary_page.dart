@@ -29,6 +29,7 @@ import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dar
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/core/widget_helper.dart';
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_bundle_item_tile.dart';
+import 'package:ezrxmobile/presentation/orders/cart/item/cart_combo_deal_item_tile.dart';
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_material_item_tile.dart';
 import 'package:ezrxmobile/presentation/orders/core/account_suspended_warning.dart';
 import 'package:ezrxmobile/presentation/orders/core/edi_user_banner.dart';
@@ -819,6 +820,11 @@ class _CartDetails extends StatelessWidget {
                   return CartBundleItemTile(
                     cartItem: item,
                     taxCode: taxCode,
+                  );
+
+                case CartItemType.comboDeal:
+                  return CartComboDealItem(
+                    cartItem: item,
                   );
               }
             }),

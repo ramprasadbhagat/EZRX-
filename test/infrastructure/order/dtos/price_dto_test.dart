@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/infrastructure/order/dtos/price_combo_deal_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_dto.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -9,23 +10,25 @@ void main() {
   group('Test pricedto ', () {
     setUp(() async {
       data = const PriceDto(
-          materialNumber: '1234',
-          rules: [],
-          tiers: [],
-          bonuses: [],
-          bundles: [],
-          overrideRulePresent: false,
-          zdp5MaxQuota: '',
-          zdp5RemainingQuota: '',
-          zmgDiscount: false,
-          listPrice: 12,
-          finalIndividualPrice: 12,
-          finalTotalPrice: 12,
-          additionalBonusEligible: false,
-          isValid: false,
-          isPriceOverride: true,
-          zdp8Override: 12,
-          priceOverride: 12);
+        materialNumber: '1234',
+        rules: [],
+        tiers: [],
+        bonuses: [],
+        bundles: [],
+        overrideRulePresent: false,
+        zdp5MaxQuota: '',
+        zdp5RemainingQuota: '',
+        zmgDiscount: false,
+        listPrice: 12,
+        finalIndividualPrice: 12,
+        finalTotalPrice: 12,
+        additionalBonusEligible: false,
+        isValid: false,
+        isPriceOverride: true,
+        zdp8Override: 12,
+        priceOverride: 12,
+        comboDeal: PriceComboDealDto.empty,
+      );
     });
     test('Test get overridequery', () {
       final configs = data.overrideQuery;

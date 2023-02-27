@@ -17,6 +17,8 @@ class CartItemTypeAdapter extends TypeAdapter<CartItemType> {
         return CartItemType.material;
       case 1:
         return CartItemType.bundle;
+      case 3:
+        return CartItemType.comboDeal;
       default:
         return CartItemType.material;
     }
@@ -30,6 +32,9 @@ class CartItemTypeAdapter extends TypeAdapter<CartItemType> {
         break;
       case CartItemType.bundle:
         writer.writeByte(1);
+        break;
+      case CartItemType.comboDeal:
+        writer.writeByte(3);
         break;
     }
   }

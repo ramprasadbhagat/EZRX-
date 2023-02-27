@@ -5,6 +5,7 @@ import 'package:ezrxmobile/application/order/material_price_detail/material_pric
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
+import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
@@ -337,6 +338,7 @@ class _MaterialPriceInfo extends StatelessWidget {
             addedBonusList: [],
             stockInfo: StockInfo.empty(),
             tenderContract: TenderContract.empty(),
+            comboDeal: ComboDeal.empty(),
           );
 
           return Text(

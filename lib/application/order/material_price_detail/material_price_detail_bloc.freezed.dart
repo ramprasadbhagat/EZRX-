@@ -39,6 +39,14 @@ mixin _$MaterialPriceDetailEvent {
             String pickAndPack,
             bool skipFOCCheck)
         fetch,
+    required TResult Function(
+            User user,
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            ShipToInfo shipToCode,
+            List<MaterialNumber> materialInfoList)
+        comboDealFetch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -64,6 +72,14 @@ mixin _$MaterialPriceDetailEvent {
             String pickAndPack,
             bool skipFOCCheck)?
         fetch,
+    TResult? Function(
+            User user,
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            ShipToInfo shipToCode,
+            List<MaterialNumber> materialInfoList)?
+        comboDealFetch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -89,6 +105,14 @@ mixin _$MaterialPriceDetailEvent {
             String pickAndPack,
             bool skipFOCCheck)?
         fetch,
+    TResult Function(
+            User user,
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            ShipToInfo shipToCode,
+            List<MaterialNumber> materialInfoList)?
+        comboDealFetch,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -97,6 +121,7 @@ mixin _$MaterialPriceDetailEvent {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Refresh value) refresh,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_ComboDealFetch value) comboDealFetch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -104,6 +129,7 @@ mixin _$MaterialPriceDetailEvent {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Refresh value)? refresh,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_ComboDealFetch value)? comboDealFetch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -111,6 +137,7 @@ mixin _$MaterialPriceDetailEvent {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Refresh value)? refresh,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_ComboDealFetch value)? comboDealFetch,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -194,6 +221,14 @@ class _$_Initialized implements _Initialized {
             String pickAndPack,
             bool skipFOCCheck)
         fetch,
+    required TResult Function(
+            User user,
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            ShipToInfo shipToCode,
+            List<MaterialNumber> materialInfoList)
+        comboDealFetch,
   }) {
     return initialized();
   }
@@ -222,6 +257,14 @@ class _$_Initialized implements _Initialized {
             String pickAndPack,
             bool skipFOCCheck)?
         fetch,
+    TResult? Function(
+            User user,
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            ShipToInfo shipToCode,
+            List<MaterialNumber> materialInfoList)?
+        comboDealFetch,
   }) {
     return initialized?.call();
   }
@@ -250,6 +293,14 @@ class _$_Initialized implements _Initialized {
             String pickAndPack,
             bool skipFOCCheck)?
         fetch,
+    TResult Function(
+            User user,
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            ShipToInfo shipToCode,
+            List<MaterialNumber> materialInfoList)?
+        comboDealFetch,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -264,6 +315,7 @@ class _$_Initialized implements _Initialized {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Refresh value) refresh,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_ComboDealFetch value) comboDealFetch,
   }) {
     return initialized(this);
   }
@@ -274,6 +326,7 @@ class _$_Initialized implements _Initialized {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Refresh value)? refresh,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_ComboDealFetch value)? comboDealFetch,
   }) {
     return initialized?.call(this);
   }
@@ -284,6 +337,7 @@ class _$_Initialized implements _Initialized {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Refresh value)? refresh,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_ComboDealFetch value)? comboDealFetch,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -524,6 +578,14 @@ class _$_Refresh implements _Refresh {
             String pickAndPack,
             bool skipFOCCheck)
         fetch,
+    required TResult Function(
+            User user,
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            ShipToInfo shipToCode,
+            List<MaterialNumber> materialInfoList)
+        comboDealFetch,
   }) {
     return refresh(
         user,
@@ -560,6 +622,14 @@ class _$_Refresh implements _Refresh {
             String pickAndPack,
             bool skipFOCCheck)?
         fetch,
+    TResult? Function(
+            User user,
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            ShipToInfo shipToCode,
+            List<MaterialNumber> materialInfoList)?
+        comboDealFetch,
   }) {
     return refresh?.call(
         user,
@@ -596,6 +666,14 @@ class _$_Refresh implements _Refresh {
             String pickAndPack,
             bool skipFOCCheck)?
         fetch,
+    TResult Function(
+            User user,
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            ShipToInfo shipToCode,
+            List<MaterialNumber> materialInfoList)?
+        comboDealFetch,
     required TResult orElse(),
   }) {
     if (refresh != null) {
@@ -618,6 +696,7 @@ class _$_Refresh implements _Refresh {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Refresh value) refresh,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_ComboDealFetch value) comboDealFetch,
   }) {
     return refresh(this);
   }
@@ -628,6 +707,7 @@ class _$_Refresh implements _Refresh {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Refresh value)? refresh,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_ComboDealFetch value)? comboDealFetch,
   }) {
     return refresh?.call(this);
   }
@@ -638,6 +718,7 @@ class _$_Refresh implements _Refresh {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Refresh value)? refresh,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_ComboDealFetch value)? comboDealFetch,
     required TResult orElse(),
   }) {
     if (refresh != null) {
@@ -897,6 +978,14 @@ class _$_Fetch implements _Fetch {
             String pickAndPack,
             bool skipFOCCheck)
         fetch,
+    required TResult Function(
+            User user,
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            ShipToInfo shipToCode,
+            List<MaterialNumber> materialInfoList)
+        comboDealFetch,
   }) {
     return fetch(
         user,
@@ -933,6 +1022,14 @@ class _$_Fetch implements _Fetch {
             String pickAndPack,
             bool skipFOCCheck)?
         fetch,
+    TResult? Function(
+            User user,
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            ShipToInfo shipToCode,
+            List<MaterialNumber> materialInfoList)?
+        comboDealFetch,
   }) {
     return fetch?.call(
         user,
@@ -969,6 +1066,14 @@ class _$_Fetch implements _Fetch {
             String pickAndPack,
             bool skipFOCCheck)?
         fetch,
+    TResult Function(
+            User user,
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            ShipToInfo shipToCode,
+            List<MaterialNumber> materialInfoList)?
+        comboDealFetch,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -991,6 +1096,7 @@ class _$_Fetch implements _Fetch {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Refresh value) refresh,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_ComboDealFetch value) comboDealFetch,
   }) {
     return fetch(this);
   }
@@ -1001,6 +1107,7 @@ class _$_Fetch implements _Fetch {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Refresh value)? refresh,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_ComboDealFetch value)? comboDealFetch,
   }) {
     return fetch?.call(this);
   }
@@ -1011,6 +1118,7 @@ class _$_Fetch implements _Fetch {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Refresh value)? refresh,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_ComboDealFetch value)? comboDealFetch,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -1041,6 +1149,358 @@ abstract class _Fetch implements MaterialPriceDetailEvent {
   bool get skipFOCCheck;
   @JsonKey(ignore: true)
   _$$_FetchCopyWith<_$_Fetch> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_ComboDealFetchCopyWith<$Res> {
+  factory _$$_ComboDealFetchCopyWith(
+          _$_ComboDealFetch value, $Res Function(_$_ComboDealFetch) then) =
+      __$$_ComboDealFetchCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {User user,
+      CustomerCodeInfo customerCode,
+      SalesOrganisation salesOrganisation,
+      SalesOrganisationConfigs salesOrganisationConfigs,
+      ShipToInfo shipToCode,
+      List<MaterialNumber> materialInfoList});
+
+  $UserCopyWith<$Res> get user;
+  $CustomerCodeInfoCopyWith<$Res> get customerCode;
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
+  $SalesOrganisationConfigsCopyWith<$Res> get salesOrganisationConfigs;
+  $ShipToInfoCopyWith<$Res> get shipToCode;
+}
+
+/// @nodoc
+class __$$_ComboDealFetchCopyWithImpl<$Res>
+    extends _$MaterialPriceDetailEventCopyWithImpl<$Res, _$_ComboDealFetch>
+    implements _$$_ComboDealFetchCopyWith<$Res> {
+  __$$_ComboDealFetchCopyWithImpl(
+      _$_ComboDealFetch _value, $Res Function(_$_ComboDealFetch) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? user = null,
+    Object? customerCode = null,
+    Object? salesOrganisation = null,
+    Object? salesOrganisationConfigs = null,
+    Object? shipToCode = null,
+    Object? materialInfoList = null,
+  }) {
+    return _then(_$_ComboDealFetch(
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
+      customerCode: null == customerCode
+          ? _value.customerCode
+          : customerCode // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
+      salesOrganisation: null == salesOrganisation
+          ? _value.salesOrganisation
+          : salesOrganisation // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
+      salesOrganisationConfigs: null == salesOrganisationConfigs
+          ? _value.salesOrganisationConfigs
+          : salesOrganisationConfigs // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisationConfigs,
+      shipToCode: null == shipToCode
+          ? _value.shipToCode
+          : shipToCode // ignore: cast_nullable_to_non_nullable
+              as ShipToInfo,
+      materialInfoList: null == materialInfoList
+          ? _value._materialInfoList
+          : materialInfoList // ignore: cast_nullable_to_non_nullable
+              as List<MaterialNumber>,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CustomerCodeInfoCopyWith<$Res> get customerCode {
+    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCode, (value) {
+      return _then(_value.copyWith(customerCode: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
+    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
+      return _then(_value.copyWith(salesOrganisation: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationConfigsCopyWith<$Res> get salesOrganisationConfigs {
+    return $SalesOrganisationConfigsCopyWith<$Res>(
+        _value.salesOrganisationConfigs, (value) {
+      return _then(_value.copyWith(salesOrganisationConfigs: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ShipToInfoCopyWith<$Res> get shipToCode {
+    return $ShipToInfoCopyWith<$Res>(_value.shipToCode, (value) {
+      return _then(_value.copyWith(shipToCode: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_ComboDealFetch implements _ComboDealFetch {
+  const _$_ComboDealFetch(
+      {required this.user,
+      required this.customerCode,
+      required this.salesOrganisation,
+      required this.salesOrganisationConfigs,
+      required this.shipToCode,
+      required final List<MaterialNumber> materialInfoList})
+      : _materialInfoList = materialInfoList;
+
+  @override
+  final User user;
+  @override
+  final CustomerCodeInfo customerCode;
+  @override
+  final SalesOrganisation salesOrganisation;
+  @override
+  final SalesOrganisationConfigs salesOrganisationConfigs;
+  @override
+  final ShipToInfo shipToCode;
+  final List<MaterialNumber> _materialInfoList;
+  @override
+  List<MaterialNumber> get materialInfoList {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_materialInfoList);
+  }
+
+  @override
+  String toString() {
+    return 'MaterialPriceDetailEvent.comboDealFetch(user: $user, customerCode: $customerCode, salesOrganisation: $salesOrganisation, salesOrganisationConfigs: $salesOrganisationConfigs, shipToCode: $shipToCode, materialInfoList: $materialInfoList)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_ComboDealFetch &&
+            (identical(other.user, user) || other.user == user) &&
+            (identical(other.customerCode, customerCode) ||
+                other.customerCode == customerCode) &&
+            (identical(other.salesOrganisation, salesOrganisation) ||
+                other.salesOrganisation == salesOrganisation) &&
+            (identical(
+                    other.salesOrganisationConfigs, salesOrganisationConfigs) ||
+                other.salesOrganisationConfigs == salesOrganisationConfigs) &&
+            (identical(other.shipToCode, shipToCode) ||
+                other.shipToCode == shipToCode) &&
+            const DeepCollectionEquality()
+                .equals(other._materialInfoList, _materialInfoList));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      user,
+      customerCode,
+      salesOrganisation,
+      salesOrganisationConfigs,
+      shipToCode,
+      const DeepCollectionEquality().hash(_materialInfoList));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_ComboDealFetchCopyWith<_$_ComboDealFetch> get copyWith =>
+      __$$_ComboDealFetchCopyWithImpl<_$_ComboDealFetch>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(
+            User user,
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            ShipToInfo shipToCode,
+            List<MaterialQueryInfo> materialInfoList,
+            String pickAndPack,
+            bool skipFOCCheck)
+        refresh,
+    required TResult Function(
+            User user,
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            ShipToInfo shipToCode,
+            List<MaterialQueryInfo> materialInfoList,
+            String pickAndPack,
+            bool skipFOCCheck)
+        fetch,
+    required TResult Function(
+            User user,
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            ShipToInfo shipToCode,
+            List<MaterialNumber> materialInfoList)
+        comboDealFetch,
+  }) {
+    return comboDealFetch(user, customerCode, salesOrganisation,
+        salesOrganisationConfigs, shipToCode, materialInfoList);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(
+            User user,
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            ShipToInfo shipToCode,
+            List<MaterialQueryInfo> materialInfoList,
+            String pickAndPack,
+            bool skipFOCCheck)?
+        refresh,
+    TResult? Function(
+            User user,
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            ShipToInfo shipToCode,
+            List<MaterialQueryInfo> materialInfoList,
+            String pickAndPack,
+            bool skipFOCCheck)?
+        fetch,
+    TResult? Function(
+            User user,
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            ShipToInfo shipToCode,
+            List<MaterialNumber> materialInfoList)?
+        comboDealFetch,
+  }) {
+    return comboDealFetch?.call(user, customerCode, salesOrganisation,
+        salesOrganisationConfigs, shipToCode, materialInfoList);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(
+            User user,
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            ShipToInfo shipToCode,
+            List<MaterialQueryInfo> materialInfoList,
+            String pickAndPack,
+            bool skipFOCCheck)?
+        refresh,
+    TResult Function(
+            User user,
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            ShipToInfo shipToCode,
+            List<MaterialQueryInfo> materialInfoList,
+            String pickAndPack,
+            bool skipFOCCheck)?
+        fetch,
+    TResult Function(
+            User user,
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            ShipToInfo shipToCode,
+            List<MaterialNumber> materialInfoList)?
+        comboDealFetch,
+    required TResult orElse(),
+  }) {
+    if (comboDealFetch != null) {
+      return comboDealFetch(user, customerCode, salesOrganisation,
+          salesOrganisationConfigs, shipToCode, materialInfoList);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Refresh value) refresh,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_ComboDealFetch value) comboDealFetch,
+  }) {
+    return comboDealFetch(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Refresh value)? refresh,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_ComboDealFetch value)? comboDealFetch,
+  }) {
+    return comboDealFetch?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Refresh value)? refresh,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_ComboDealFetch value)? comboDealFetch,
+    required TResult orElse(),
+  }) {
+    if (comboDealFetch != null) {
+      return comboDealFetch(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ComboDealFetch implements MaterialPriceDetailEvent {
+  const factory _ComboDealFetch(
+          {required final User user,
+          required final CustomerCodeInfo customerCode,
+          required final SalesOrganisation salesOrganisation,
+          required final SalesOrganisationConfigs salesOrganisationConfigs,
+          required final ShipToInfo shipToCode,
+          required final List<MaterialNumber> materialInfoList}) =
+      _$_ComboDealFetch;
+
+  User get user;
+  CustomerCodeInfo get customerCode;
+  SalesOrganisation get salesOrganisation;
+  SalesOrganisationConfigs get salesOrganisationConfigs;
+  ShipToInfo get shipToCode;
+  List<MaterialNumber> get materialInfoList;
+  @JsonKey(ignore: true)
+  _$$_ComboDealFetchCopyWith<_$_ComboDealFetch> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

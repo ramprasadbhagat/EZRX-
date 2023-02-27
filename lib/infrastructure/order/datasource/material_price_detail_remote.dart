@@ -28,6 +28,7 @@ class MaterialPriceDetailRemoteDataSource {
     required String shipToCode,
     required String language,
     required List<Map<String, dynamic>> queryString,
+    required bool listPriceOnly ,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
       final queryData = queryMutation.getMaterialDetail();
@@ -37,6 +38,7 @@ class MaterialPriceDetailRemoteDataSource {
         'customerCode': customerCode,
         'shipToCode': shipToCode,
         'request': queryString,
+        'listPriceOnly': listPriceOnly,
       };
 
       if (language.isNotEmpty) variables.addAll({'language': language});

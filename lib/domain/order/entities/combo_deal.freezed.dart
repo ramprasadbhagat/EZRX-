@@ -1,0 +1,266 @@
+// coverage:ignore-file
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+
+part of 'combo_deal.dart';
+
+// **************************************************************************
+// FreezedGenerator
+// **************************************************************************
+
+T _$identity<T>(T value) => value;
+
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
+/// @nodoc
+mixin _$ComboDeal {
+  ComboDealGroupDeal get groupDeal => throw _privateConstructorUsedError;
+  List<ComboDealSKUTier> get flexiSKUTier => throw _privateConstructorUsedError;
+  List<ComboDealQtyTier> get flexiQtyTier => throw _privateConstructorUsedError;
+  List<ComboDealAmountTier> get flexiAmountTier =>
+      throw _privateConstructorUsedError;
+  List<ComboDealMaterialSet> get materialComboDeals =>
+      throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $ComboDealCopyWith<ComboDeal> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ComboDealCopyWith<$Res> {
+  factory $ComboDealCopyWith(ComboDeal value, $Res Function(ComboDeal) then) =
+      _$ComboDealCopyWithImpl<$Res, ComboDeal>;
+  @useResult
+  $Res call(
+      {ComboDealGroupDeal groupDeal,
+      List<ComboDealSKUTier> flexiSKUTier,
+      List<ComboDealQtyTier> flexiQtyTier,
+      List<ComboDealAmountTier> flexiAmountTier,
+      List<ComboDealMaterialSet> materialComboDeals});
+
+  $ComboDealGroupDealCopyWith<$Res> get groupDeal;
+}
+
+/// @nodoc
+class _$ComboDealCopyWithImpl<$Res, $Val extends ComboDeal>
+    implements $ComboDealCopyWith<$Res> {
+  _$ComboDealCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? groupDeal = null,
+    Object? flexiSKUTier = null,
+    Object? flexiQtyTier = null,
+    Object? flexiAmountTier = null,
+    Object? materialComboDeals = null,
+  }) {
+    return _then(_value.copyWith(
+      groupDeal: null == groupDeal
+          ? _value.groupDeal
+          : groupDeal // ignore: cast_nullable_to_non_nullable
+              as ComboDealGroupDeal,
+      flexiSKUTier: null == flexiSKUTier
+          ? _value.flexiSKUTier
+          : flexiSKUTier // ignore: cast_nullable_to_non_nullable
+              as List<ComboDealSKUTier>,
+      flexiQtyTier: null == flexiQtyTier
+          ? _value.flexiQtyTier
+          : flexiQtyTier // ignore: cast_nullable_to_non_nullable
+              as List<ComboDealQtyTier>,
+      flexiAmountTier: null == flexiAmountTier
+          ? _value.flexiAmountTier
+          : flexiAmountTier // ignore: cast_nullable_to_non_nullable
+              as List<ComboDealAmountTier>,
+      materialComboDeals: null == materialComboDeals
+          ? _value.materialComboDeals
+          : materialComboDeals // ignore: cast_nullable_to_non_nullable
+              as List<ComboDealMaterialSet>,
+    ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ComboDealGroupDealCopyWith<$Res> get groupDeal {
+    return $ComboDealGroupDealCopyWith<$Res>(_value.groupDeal, (value) {
+      return _then(_value.copyWith(groupDeal: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$_ComboDealCopyWith<$Res> implements $ComboDealCopyWith<$Res> {
+  factory _$$_ComboDealCopyWith(
+          _$_ComboDeal value, $Res Function(_$_ComboDeal) then) =
+      __$$_ComboDealCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {ComboDealGroupDeal groupDeal,
+      List<ComboDealSKUTier> flexiSKUTier,
+      List<ComboDealQtyTier> flexiQtyTier,
+      List<ComboDealAmountTier> flexiAmountTier,
+      List<ComboDealMaterialSet> materialComboDeals});
+
+  @override
+  $ComboDealGroupDealCopyWith<$Res> get groupDeal;
+}
+
+/// @nodoc
+class __$$_ComboDealCopyWithImpl<$Res>
+    extends _$ComboDealCopyWithImpl<$Res, _$_ComboDeal>
+    implements _$$_ComboDealCopyWith<$Res> {
+  __$$_ComboDealCopyWithImpl(
+      _$_ComboDeal _value, $Res Function(_$_ComboDeal) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? groupDeal = null,
+    Object? flexiSKUTier = null,
+    Object? flexiQtyTier = null,
+    Object? flexiAmountTier = null,
+    Object? materialComboDeals = null,
+  }) {
+    return _then(_$_ComboDeal(
+      groupDeal: null == groupDeal
+          ? _value.groupDeal
+          : groupDeal // ignore: cast_nullable_to_non_nullable
+              as ComboDealGroupDeal,
+      flexiSKUTier: null == flexiSKUTier
+          ? _value._flexiSKUTier
+          : flexiSKUTier // ignore: cast_nullable_to_non_nullable
+              as List<ComboDealSKUTier>,
+      flexiQtyTier: null == flexiQtyTier
+          ? _value._flexiQtyTier
+          : flexiQtyTier // ignore: cast_nullable_to_non_nullable
+              as List<ComboDealQtyTier>,
+      flexiAmountTier: null == flexiAmountTier
+          ? _value._flexiAmountTier
+          : flexiAmountTier // ignore: cast_nullable_to_non_nullable
+              as List<ComboDealAmountTier>,
+      materialComboDeals: null == materialComboDeals
+          ? _value._materialComboDeals
+          : materialComboDeals // ignore: cast_nullable_to_non_nullable
+              as List<ComboDealMaterialSet>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_ComboDeal extends _ComboDeal {
+  const _$_ComboDeal(
+      {required this.groupDeal,
+      required final List<ComboDealSKUTier> flexiSKUTier,
+      required final List<ComboDealQtyTier> flexiQtyTier,
+      required final List<ComboDealAmountTier> flexiAmountTier,
+      required final List<ComboDealMaterialSet> materialComboDeals})
+      : _flexiSKUTier = flexiSKUTier,
+        _flexiQtyTier = flexiQtyTier,
+        _flexiAmountTier = flexiAmountTier,
+        _materialComboDeals = materialComboDeals,
+        super._();
+
+  @override
+  final ComboDealGroupDeal groupDeal;
+  final List<ComboDealSKUTier> _flexiSKUTier;
+  @override
+  List<ComboDealSKUTier> get flexiSKUTier {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_flexiSKUTier);
+  }
+
+  final List<ComboDealQtyTier> _flexiQtyTier;
+  @override
+  List<ComboDealQtyTier> get flexiQtyTier {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_flexiQtyTier);
+  }
+
+  final List<ComboDealAmountTier> _flexiAmountTier;
+  @override
+  List<ComboDealAmountTier> get flexiAmountTier {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_flexiAmountTier);
+  }
+
+  final List<ComboDealMaterialSet> _materialComboDeals;
+  @override
+  List<ComboDealMaterialSet> get materialComboDeals {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_materialComboDeals);
+  }
+
+  @override
+  String toString() {
+    return 'ComboDeal(groupDeal: $groupDeal, flexiSKUTier: $flexiSKUTier, flexiQtyTier: $flexiQtyTier, flexiAmountTier: $flexiAmountTier, materialComboDeals: $materialComboDeals)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_ComboDeal &&
+            (identical(other.groupDeal, groupDeal) ||
+                other.groupDeal == groupDeal) &&
+            const DeepCollectionEquality()
+                .equals(other._flexiSKUTier, _flexiSKUTier) &&
+            const DeepCollectionEquality()
+                .equals(other._flexiQtyTier, _flexiQtyTier) &&
+            const DeepCollectionEquality()
+                .equals(other._flexiAmountTier, _flexiAmountTier) &&
+            const DeepCollectionEquality()
+                .equals(other._materialComboDeals, _materialComboDeals));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      groupDeal,
+      const DeepCollectionEquality().hash(_flexiSKUTier),
+      const DeepCollectionEquality().hash(_flexiQtyTier),
+      const DeepCollectionEquality().hash(_flexiAmountTier),
+      const DeepCollectionEquality().hash(_materialComboDeals));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_ComboDealCopyWith<_$_ComboDeal> get copyWith =>
+      __$$_ComboDealCopyWithImpl<_$_ComboDeal>(this, _$identity);
+}
+
+abstract class _ComboDeal extends ComboDeal {
+  const factory _ComboDeal(
+          {required final ComboDealGroupDeal groupDeal,
+          required final List<ComboDealSKUTier> flexiSKUTier,
+          required final List<ComboDealQtyTier> flexiQtyTier,
+          required final List<ComboDealAmountTier> flexiAmountTier,
+          required final List<ComboDealMaterialSet> materialComboDeals}) =
+      _$_ComboDeal;
+  const _ComboDeal._() : super._();
+
+  @override
+  ComboDealGroupDeal get groupDeal;
+  @override
+  List<ComboDealSKUTier> get flexiSKUTier;
+  @override
+  List<ComboDealQtyTier> get flexiQtyTier;
+  @override
+  List<ComboDealAmountTier> get flexiAmountTier;
+  @override
+  List<ComboDealMaterialSet> get materialComboDeals;
+  @override
+  @JsonKey(ignore: true)
+  _$$_ComboDealCopyWith<_$_ComboDeal> get copyWith =>
+      throw _privateConstructorUsedError;
+}

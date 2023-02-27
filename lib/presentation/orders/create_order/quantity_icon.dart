@@ -23,12 +23,12 @@ class QuantityIcon extends StatelessWidget {
           padding: EdgeInsets.zero,
           backgroundColor: isEnabled ? ZPColors.primary : ZPColors.lightGray,
         ),
+        onPressed: isEnabled ? () => pressed() : () {},
         child: Icon(
           icon,
           color: ZPColors.white,
           size: 15,
         ),
-        onPressed: () => pressed(),
       ),
     );
   }

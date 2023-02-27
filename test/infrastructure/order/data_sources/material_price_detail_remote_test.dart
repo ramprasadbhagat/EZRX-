@@ -51,7 +51,8 @@ void main() {
           'customerCode': 'fake-customer-code',
           'shipToCode': 'fake-shipto-code',
           'request': [],
-          'language': 'fake-language'
+          'listPriceOnly': false,
+          'language': 'fake-language',
         };
         final res = json.decode(
           await rootBundle.loadString(
@@ -78,6 +79,7 @@ void main() {
           queryString: [],
           salesOrgCode: 'fake-sales-org',
           shipToCode: 'fake-shipto-code',
+          listPriceOnly: false,
         );
         final materialDetailData = res['data']['customerMaterialPriceDetails'];
 
@@ -137,7 +139,8 @@ void main() {
           'customerCode': 'fake-customer-code',
           'shipToCode': 'fake-shipto-code',
           'request': [],
-          'language': 'fake-language'
+          'listPriceOnly': false,
+          'language': 'fake-language',
         };
 
         dioAdapter.onPost(
@@ -161,6 +164,7 @@ void main() {
           queryString: [],
           salesOrgCode: 'fake-sales-org',
           shipToCode: 'fake-shipto-code',
+          listPriceOnly: false,
         )
             .onError((error, _) async {
           expect(error, isA<ServerException>());
@@ -174,7 +178,8 @@ void main() {
           'customerCode': 'fake-customer-code',
           'shipToCode': 'fake-shipto-code',
           'request': [],
-          'language': 'fake-language'
+          'listPriceOnly': false,
+          'language': 'fake-language',
         };
 
         dioAdapter.onPost(
@@ -203,6 +208,7 @@ void main() {
           queryString: [],
           salesOrgCode: 'fake-sales-org',
           shipToCode: 'fake-shipto-code',
+          listPriceOnly: false,
         )
             .onError((error, _) async {
           expect(error, isA<ServerException>());

@@ -8,6 +8,7 @@ class MaterialPriceDetailQueryMutation {
           \$salesOrganisation: String!
           \$request: [PriceRequest!]!
           \$language: String
+          \$listPriceOnly: Boolean!
         ) {
             customerMaterialPriceDetails(
               customerCode: \$customerCode
@@ -15,6 +16,7 @@ class MaterialPriceDetailQueryMutation {
               salesOrganisation: \$salesOrganisation
               request: \$request
               language: \$language
+              listPriceOnly: \$listPriceOnly
             ) {
               Price {
                 MaterialNumber

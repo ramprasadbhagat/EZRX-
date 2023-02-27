@@ -36,6 +36,8 @@ class CustomerCodeQueryMutation {
             customerGrp4
             paymentTermDescription
             emailAddresses
+            comboEligible
+            salesDeals
             shipTo {
               defaultShipToAddress
               shipToCustomerCode
@@ -143,6 +145,8 @@ class CustomerCodeQueryMutation {
               distributionChannel
               district
               paymentTermDescription
+              comboEligible
+              salesDeals
               shipTo {
                   defaultShipToAddress
                   shipToCustomerCode

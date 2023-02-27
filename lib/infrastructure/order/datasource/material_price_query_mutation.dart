@@ -2,11 +2,17 @@ class MaterialPriceQueryMutation {
   /* For fetching material price  */
   String getMaterialPrice() {
     return '''
-      query price(\$customer: String!, \$salesOrganisation: String!, \$request: [PriceRequest!]!) {
+      query price(
+        \$customer: String!
+        \$salesOrganisation: String!
+        \$shipToCode: String!
+        \$request: [PriceRequest!]!
+        ) {
          price(
            customer: \$customer
            salesOrganisation: \$salesOrganisation
            request: \$request
+           shipToCode: \$shipToCode
          ) {
            MaterialNumber
            OverridenRulePresent
@@ -24,6 +30,15 @@ class MaterialPriceQueryMutation {
              BonusEligible
              ConditionNumber
            }
+            ComboDeals {
+              Eligible
+              FlexibleGroup
+              SalesDeal
+              Category {
+                Type
+                Value
+              }
+            }
            Bonuses {
              BonusTiers {
                BonusMaterial {

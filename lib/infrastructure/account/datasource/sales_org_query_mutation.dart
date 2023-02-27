@@ -83,6 +83,7 @@ class SalesOrgQueryMutation {
           enableLoyaltyScheme
           disableProcessingStatus
           enableIRN
+          enableComboDeals
        }
       }
     ''';

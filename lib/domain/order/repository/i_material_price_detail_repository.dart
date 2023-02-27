@@ -15,6 +15,7 @@ abstract class IMaterialPriceDetailRepository {
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToCodeInfo,
     required List<MaterialQueryInfo> materialQueryList,
+    bool isComboDealMaterials = false,
   });
 
   Future<Either<ApiFailure, List<MaterialPriceDetail>>>

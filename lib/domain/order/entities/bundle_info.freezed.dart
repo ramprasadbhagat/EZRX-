@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$BundleInfo {
   int get sequence => throw _privateConstructorUsedError;
   int get quantity => throw _privateConstructorUsedError;
-  MaterialBundleType get type => throw _privateConstructorUsedError;
+  DiscountType get type => throw _privateConstructorUsedError;
   double get rate => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -32,7 +32,7 @@ abstract class $BundleInfoCopyWith<$Res> {
           BundleInfo value, $Res Function(BundleInfo) then) =
       _$BundleInfoCopyWithImpl<$Res, BundleInfo>;
   @useResult
-  $Res call({int sequence, int quantity, MaterialBundleType type, double rate});
+  $Res call({int sequence, int quantity, DiscountType type, double rate});
 }
 
 /// @nodoc
@@ -65,7 +65,7 @@ class _$BundleInfoCopyWithImpl<$Res, $Val extends BundleInfo>
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as MaterialBundleType,
+              as DiscountType,
       rate: null == rate
           ? _value.rate
           : rate // ignore: cast_nullable_to_non_nullable
@@ -82,7 +82,7 @@ abstract class _$$_BundleInfoCopyWith<$Res>
       __$$_BundleInfoCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int sequence, int quantity, MaterialBundleType type, double rate});
+  $Res call({int sequence, int quantity, DiscountType type, double rate});
 }
 
 /// @nodoc
@@ -113,7 +113,7 @@ class __$$_BundleInfoCopyWithImpl<$Res>
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as MaterialBundleType,
+              as DiscountType,
       rate: null == rate
           ? _value.rate
           : rate // ignore: cast_nullable_to_non_nullable
@@ -137,7 +137,7 @@ class _$_BundleInfo extends _BundleInfo {
   @override
   final int quantity;
   @override
-  final MaterialBundleType type;
+  final DiscountType type;
   @override
   final double rate;
 
@@ -173,7 +173,7 @@ abstract class _BundleInfo extends BundleInfo {
   const factory _BundleInfo(
       {required final int sequence,
       required final int quantity,
-      required final MaterialBundleType type,
+      required final DiscountType type,
       required final double rate}) = _$_BundleInfo;
   const _BundleInfo._() : super._();
 
@@ -182,7 +182,7 @@ abstract class _BundleInfo extends BundleInfo {
   @override
   int get quantity;
   @override
-  MaterialBundleType get type;
+  DiscountType get type;
   @override
   double get rate;
   @override

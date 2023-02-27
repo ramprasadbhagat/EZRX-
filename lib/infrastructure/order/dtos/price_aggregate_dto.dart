@@ -1,8 +1,10 @@
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/sales_organisation_configs_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/bundle_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/combo_deal_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_item_bonus_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/price_combo_deal_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/stock_info_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/tender_contract_dto.dart';
@@ -22,6 +24,7 @@ class PriceAggregateDto {
     required this.bonusItem,
     required this.stockInfoDto,
     required this.tenderContractDto,
+    required this.comboDealDto,
   });
 
   @HiveField(0, defaultValue: _emptyConstMaterialDto)
@@ -42,6 +45,8 @@ class PriceAggregateDto {
   StockInfoDto stockInfoDto;
   @HiveField(8, defaultValue: _emptyTenderContractDto)
   TenderContractDto tenderContractDto;
+  @HiveField(9, defaultValue: ComboDealDto.empty)
+  ComboDealDto comboDealDto;
 
   factory PriceAggregateDto.fromDomain(PriceAggregate cart) {
     return PriceAggregateDto(
@@ -60,6 +65,7 @@ class PriceAggregateDto {
             (e) => MaterialItemBonusDto.fromDomain(e),
           )
           .toList(),
+      comboDealDto: ComboDealDto.fromDomain(cart.comboDeal),
     );
   }
 
@@ -76,6 +82,7 @@ class PriceAggregateDto {
       addedBonusList: bonusItem.map((e) => e.toDomain()).toList(),
       stockInfo: stockInfoDto.toDomain(),
       tenderContract: tenderContractDto.toDomain(),
+      comboDeal: comboDealDto.toDomain,
     );
   }
 }
@@ -123,6 +130,7 @@ const PriceDto _emptyPriceDto = PriceDto(
   isPriceOverride: false,
   zdp8Override: 0,
   priceOverride: 0,
+  comboDeal: PriceComboDealDto.empty,
 );
 
 const SalesOrganisationConfigsDto _emptySalesOrganisationConfigsDto =
@@ -178,6 +186,7 @@ const SalesOrganisationConfigsDto _emptySalesOrganisationConfigsDto =
   disableReturnsAccess: false,
   enableGreenDelivery: false,
   greenDeliveryDelayInDays: 0,
+  enableComboDeals: false,
   greenDeliveryUserRole: 0,
 );
 

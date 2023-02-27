@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:ezrxmobile/presentation/orders/cart/bonus/search_bonus_page.dart';
+import 'package:ezrxmobile/presentation/orders/combo_deal/combo_deal_detail_page.dart';
 import 'package:ezrxmobile/presentation/orders/order_success/order_success_page.dart';
 import 'package:ezrxmobile/presentation/account/account_tab.dart';
 import 'package:ezrxmobile/presentation/account/change_password/change_password_page.dart';
@@ -97,6 +98,7 @@ import 'package:ezrxmobile/presentation/orders/create_order/scan_material_info.d
       transitionsBuilder: TransitionsBuilders.slideBottom,
       fullscreenDialog: true,
     ),
+    AutoRoute(path: 'combo_deal_detail', page: ComboDealDetailPage),
   ],
 )
 class $AppRouter {}

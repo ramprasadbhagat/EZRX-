@@ -2,6 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/covid_material_list/covid_material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
@@ -50,10 +51,18 @@ class OrdersExpansionTile extends StatelessWidget {
                                         .read<SalesOrgBloc>()
                                         .state
                                         .salesOrganisation,
-                                    customerCode: context
+                                    salesConfigs: context
+                                        .read<SalesOrgBloc>()
+                                        .state
+                                        .configs,
+                                    customerCodeInfo: context
                                         .read<CustomerCodeBloc>()
                                         .state
                                         .customerCodeInfo,
+                                    shipToInfo: context
+                                        .read<ShipToCodeBloc>()
+                                        .state
+                                        .shipToInfo,
                                     materials: state.materialList,
                                   ),
                                 );
@@ -72,10 +81,18 @@ class OrdersExpansionTile extends StatelessWidget {
                                         .read<SalesOrgBloc>()
                                         .state
                                         .salesOrganisation,
-                                    customerCode: context
+                                    salesConfigs: context
+                                        .read<SalesOrgBloc>()
+                                        .state
+                                        .configs,
+                                    customerCodeInfo: context
                                         .read<CustomerCodeBloc>()
                                         .state
                                         .customerCodeInfo,
+                                    shipToInfo: context
+                                        .read<ShipToCodeBloc>()
+                                        .state
+                                        .shipToInfo,
                                     materials: state.materialList,
                                   ),
                                 );

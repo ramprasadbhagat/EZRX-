@@ -1,6 +1,7 @@
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
+import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_price_detail.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
@@ -38,6 +39,11 @@ class CartItem with _$CartItem {
         itemType: CartItemType.bundle,
       );
 
+  factory CartItem.comboDeal(List<PriceAggregate> materials) => CartItem(
+        materials: materials,
+        itemType: CartItemType.comboDeal,
+      );
+
   factory CartItem.materialFromOrder({
     required Map<MaterialQueryInfo, MaterialPriceDetail> priceDetailMap,
     required Map<MaterialNumber, List<TenderContract>> tenderContractMap,
@@ -64,6 +70,7 @@ class CartItem with _$CartItem {
         stockInfo: StockInfo.empty().copyWith(
           materialNumber: itemInfo.info.materialNumber,
         ),
+        comboDeal: ComboDeal.empty(),
         tenderContract: itemInfo.info.hasValidTenderContract
             ? tenderContractList.withNoContractItem.getDefaultSelected(
                 currentTenderContract: material.tenderContract,
@@ -108,6 +115,7 @@ class CartItem with _$CartItem {
             materialNumber: priceDetail.info.materialNumber,
           ),
           tenderContract: savedItem.tenderContract,
+          comboDeal: ComboDeal.empty(),
         );
       },
     ).toList());
@@ -146,6 +154,8 @@ class CartItem with _$CartItem {
         return materials.first.materialNumberString;
       case CartItemType.bundle:
         return materials.first.bundle.bundleCode;
+      case CartItemType.comboDeal:
+        return materials.first.comboDealId;
     }
   }
 
@@ -156,13 +166,20 @@ class CartItem with _$CartItem {
         return materials.first.unitPrice;
       case CartItemType.bundle:
         return _bundleRate;
+      case CartItemType.comboDeal:
+        return _comboDealDiscountTotal;
     }
   }
 
   double get listPrice {
     if (materials.isEmpty) return 0;
-
-    return materials.first.listPrice;
+    switch (itemType) {
+      case CartItemType.material:
+      case CartItemType.bundle:
+        return materials.first.unitPrice;
+      case CartItemType.comboDeal:
+        return _comboDealTotal;
+    }
   }
 
   double get subTotalPrice {
@@ -172,6 +189,8 @@ class CartItem with _$CartItem {
         return materials.first.finalPriceTotal;
       case CartItemType.bundle:
         return _bundleRate * totalQty;
+      case CartItemType.comboDeal:
+        return _comboDealDiscountTotal;
     }
   }
 
@@ -182,6 +201,8 @@ class CartItem with _$CartItem {
         return materials.first.unitPriceTotal;
       case CartItemType.bundle:
         return _bundleRate * totalQty;
+      case CartItemType.comboDeal:
+        return _comboDealDiscountTotal;
     }
   }
 
@@ -197,6 +218,44 @@ class CartItem with _$CartItem {
     }
 
     return bundleRate;
+  }
+
+  double get _comboDealTotal {
+    switch (materials.first.comboDeal.scheme) {
+      case ComboDealScheme.k1:
+        return materials.fold<double>(
+          0,
+          (sum, item) => sum + item.comboDealTotalListPrice,
+        );
+      //TODO: Implement another cases
+      case ComboDealScheme.k2:
+      case ComboDealScheme.k3:
+      case ComboDealScheme.k4:
+      case ComboDealScheme.k5:
+        return materials.fold<double>(
+          0,
+          (sum, item) => sum + item.comboDealTotalListPrice,
+        );
+    }
+  }
+
+  double get _comboDealDiscountTotal {
+    switch (materials.first.comboDeal.scheme) {
+      case ComboDealScheme.k1:
+        return materials.fold<double>(
+          0,
+          (sum, item) => sum + item.comboDealTotalUnitPrice,
+        );
+      //TODO: Implement another cases
+      case ComboDealScheme.k2:
+      case ComboDealScheme.k3:
+      case ComboDealScheme.k4:
+      case ComboDealScheme.k5:
+        return materials.fold<double>(
+          0,
+          (sum, item) => sum + item.comboDealTotalUnitPrice,
+        );
+    }
   }
 
   List<MaterialItem> toSavedOrderMaterial() {
@@ -241,6 +300,8 @@ enum CartItemType {
   material,
   @HiveField(1)
   bundle,
+  @HiveField(3)
+  comboDeal,
 }
 
 extension CartItemListExtension on List<CartItem> {

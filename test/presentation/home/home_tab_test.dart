@@ -18,6 +18,8 @@ import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
@@ -300,8 +302,10 @@ void main() {
         expect(find.text('Saved Orders'), findsOneWidget);
         expect(find.text('Order Template'), findsOneWidget);
         verify(() => materialPriceBlocMock.add(MaterialPriceEvent.fetch(
-            customerCode: fakeCustomerCodeInfo,
+            customerCodeInfo: fakeCustomerCodeInfo,
             materials: [fakematerialInfo1],
+            salesConfigs: SalesOrganisationConfigs.empty(),
+            shipToInfo: ShipToInfo.empty(),
             salesOrganisation: fakeSalesOrganisation))).called(2);
       });
 

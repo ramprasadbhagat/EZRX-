@@ -323,6 +323,17 @@ class FutureDeliveryDay extends ValueObject<String> {
       removeDash(value.getOrElse(() => ''));
 }
 
+class SalesDealNumber extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory SalesDealNumber(String input) {
+    return SalesDealNumber._(validateStringNotEmpty(input));
+  }
+
+  const SalesDealNumber._(this.value);
+}
+
 class GreenDeliveryUserRole extends ValueObject<int> {
   @override
   final Either<ValueFailure<int>, int> value;

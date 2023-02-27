@@ -29,7 +29,7 @@ class BundleInfoDto with _$BundleInfoDto {
     return BundleInfo(
       sequence: sequence,
       quantity: quantity,
-      type: MaterialBundleType(type),
+      type: DiscountType(type),
       rate: rate,
     );
   }

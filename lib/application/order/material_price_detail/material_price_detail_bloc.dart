@@ -145,18 +145,74 @@ class MaterialPriceDetailBloc
             return;
           }
 
-          final newMaterialPriceDetails = await _getMaterialPriceDetails(
-            event: e,
-            materials: nonFocValidMaterials,
+          final failureOrSuccess = await priceRepository.getMaterialDetail(
+            salesOrganisation: e.salesOrganisation,
+            salesOrganisationConfigs: e.salesOrganisationConfigs,
+            customerCodeInfo: e.customerCode,
+            shipToCodeInfo: e.shipToCode,
+            materialQueryList: nonFocValidMaterials,
           );
 
-          if (newMaterialPriceDetails.isEmpty) {
+          final newMaterialPriceDetails = failureOrSuccess.fold(
+            (_) => <MaterialQueryInfo, MaterialPriceDetail>{},
+            (newDetailsFetched) => newDetailsFetched,
+          );
+
+          emit(
+            state.copyWith(
+              isFetching: false,
+              materialDetails: Map.from(state.materialDetails)
+                ..addAll(newMaterialPriceDetails),
+            ),
+          );
+        },
+        comboDealFetch: (e) async {
+          emit(
+            state.copyWith(isFetching: true),
+          );
+          final queryInfoList = e.materialInfoList
+              .map(
+                (e) =>
+                    MaterialQueryInfo.fromComboDealMaterial(materialNumber: e),
+              )
+              .toList();
+
+          final queryMaterials = _getMissingPriceDetailMaterials(
+            materials: queryInfoList,
+          );
+
+          if (queryMaterials.isEmpty) {
             emit(
-              state.copyWith(
-                isFetching: false,
-              ),
+              state.copyWith(isFetching: false),
             );
+
+            return;
           }
+
+          _setPriceForMaterials(
+            materials: queryMaterials,
+            value: Price.empty().copyWith(
+              isValidMaterial: true,
+              isFOC: false,
+              finalPrice: MaterialPrice.unavailable(),
+            ),
+            emit: emit,
+          );
+
+          final failureOrSuccess = await priceRepository.getMaterialDetail(
+            salesOrganisation: e.salesOrganisation,
+            salesOrganisationConfigs: e.salesOrganisationConfigs,
+            customerCodeInfo: e.customerCode,
+            shipToCodeInfo: e.shipToCode,
+            materialQueryList: queryMaterials,
+            isComboDealMaterials: true,
+          );
+
+          final newMaterialPriceDetails = failureOrSuccess.fold(
+            (_) => <MaterialQueryInfo, MaterialPriceDetail>{},
+            (newDetailsFetched) => newDetailsFetched,
+          );
+
           emit(
             state.copyWith(
               isFetching: false,
@@ -276,23 +332,5 @@ class MaterialPriceDetailBloc
         ),
       );
     }
-  }
-
-  Future<Map<MaterialQueryInfo, MaterialPriceDetail>> _getMaterialPriceDetails({
-    required _Fetch event,
-    required List<MaterialQueryInfo> materials,
-  }) async {
-    final failureOrSuccess = await priceRepository.getMaterialDetail(
-      salesOrganisation: event.salesOrganisation,
-      salesOrganisationConfigs: event.salesOrganisationConfigs,
-      customerCodeInfo: event.customerCode,
-      shipToCodeInfo: event.shipToCode,
-      materialQueryList: materials,
-    );
-
-    return failureOrSuccess.fold(
-      (_) => {},
-      (newDetailsFetched) => newDetailsFetched,
-    );
   }
 }

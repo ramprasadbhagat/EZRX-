@@ -25,7 +25,9 @@ class MaterialPriceRemoteDataSource {
   Future<List<Price>> getMaterialList({
     required String salesOrgCode,
     required String customerCode,
+    required String shipToCode,
     required List<String> materialNumbers,
+    required List<String> salesDeal,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
       final queryData = queryMutation.getMaterialPrice();
@@ -33,7 +35,15 @@ class MaterialPriceRemoteDataSource {
       final variables = {
         'salesOrganisation': salesOrgCode,
         'customer': customerCode,
-        'request': materialNumbers.map((e) => {'MaterialNumber': e}).toList(),
+        'shipToCode': shipToCode,
+        'request': materialNumbers
+            .map(
+              (e) => {
+                'MaterialNumber': e,
+                'salesDeal': salesDeal,
+              },
+            )
+            .toList(),
       };
       final res = await httpService.request(
         method: 'POST',

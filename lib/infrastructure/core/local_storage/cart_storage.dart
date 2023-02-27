@@ -4,11 +4,18 @@ import 'package:ezrxmobile/infrastructure/account/dtos/sales_organisation_config
 import 'package:ezrxmobile/infrastructure/order/dtos/bundle_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/bundle_info_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/cart_item_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/combo_deal_amount_tier_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/combo_deal_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/combo_deal_group_deal_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/combo_deal_material_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/combo_deal_qty_tier_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/combo_deal_sku_tier_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_item_bonus_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_aggregate_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_bonus_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_bundle_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/price_combo_deal_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_rule_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_tier_dto.dart';
@@ -40,7 +47,16 @@ class CartStorage {
         ..registerAdapter(PriceBonusDtoAdapter())
         ..registerAdapter(PriceBundleItemDtoAdapter())
         ..registerAdapter(PriceBundleDtoAdapter())
+        ..registerAdapter(PriceComboDealDtoAdapter())
+        ..registerAdapter(PriceComboDealCategoryDtoAdapter())
         ..registerAdapter(PriceDtoAdapter())
+        ..registerAdapter(ComboDealDtoAdapter())
+        ..registerAdapter(ComboDealSKUTierDtoAdapter())
+        ..registerAdapter(ComboDealAmountTierDtoAdapter())
+        ..registerAdapter(ComboDealQtyTierDtoAdapter())
+        ..registerAdapter(ComboDealGroupDealDtoAdapter())
+        ..registerAdapter(ComboDealMaterialSetDtoAdapter())
+        ..registerAdapter(ComboDealMaterialDtoAdapter())
         ..registerAdapter(SalesOrganisationConfigsDtoAdapter())
         ..registerAdapter(PriceAggregateDtoAdapter())
         ..registerAdapter(TenderContractDtoAdapter())

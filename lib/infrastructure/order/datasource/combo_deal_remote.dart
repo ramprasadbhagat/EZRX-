@@ -1,0 +1,70 @@
+import 'dart:convert';
+
+import 'package:dio/dio.dart';
+import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/core/error/exception.dart';
+import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
+import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
+import 'package:ezrxmobile/infrastructure/core/http/http.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/combo_deal_query_mutation.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/combo_deal_dto.dart';
+
+class ComboDealRemoteDataSource {
+  HttpService httpService;
+  ComboDealQueryMutation queryMutation;
+  DataSourceExceptionHandler dataSourceExceptionHandler;
+  Config config;
+
+  ComboDealRemoteDataSource({
+    required this.httpService,
+    required this.queryMutation,
+    required this.dataSourceExceptionHandler,
+    required this.config,
+  });
+
+  Future<List<ComboDeal>> getComboDealList({
+    required String salesOrgCode,
+    required String customerCode,
+    required String salesDeal,
+    required String flexibleGroup,
+    required List<String> materialNumbers,
+  }) async {
+    return await dataSourceExceptionHandler.handle(() async {
+      final queryData = queryMutation.getComboDealList();
+
+      final variables = {
+        'salesOrg': salesOrgCode,
+        'customerCode': customerCode,
+        'salesDeal': salesDeal,
+        'flexibleGroup': flexibleGroup,
+        'materialNumbers': materialNumbers,
+      };
+      final res = await httpService.request(
+        method: 'POST',
+        url: '${config.urlConstants}pricing',
+        data: jsonEncode({
+          'query': queryData,
+          'variables': variables,
+        }),
+        apiEndpoint: 'price',
+      );
+      _comboDealExceptionChecker(res: res);
+      final combos = res.data['data']['comboDealForMaterials'];
+
+      return List.from(combos)
+          .map((e) => ComboDealDto.fromJson(e).toDomain)
+          .toList();
+    });
+  }
+
+  void _comboDealExceptionChecker({required Response<dynamic> res}) {
+    if (res.data['errors'] != null && res.data['errors'].isNotEmpty) {
+      throw ServerException(message: res.data['errors'][0]['message']);
+    } else if (res.statusCode != 200) {
+      throw ServerException(
+        code: res.statusCode ?? 0,
+        message: res.statusMessage ?? '',
+      );
+    }
+  }
+}

@@ -234,15 +234,15 @@ class MaterialQty extends ValueObject<int> {
       materialQtyConformZDP5Rule(value.getOrElse(() => 0), zdp5Value);
 }
 
-class MaterialBundleType extends ValueObject<String> {
+class DiscountType extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
 
-  factory MaterialBundleType(String input) {
-    return MaterialBundleType._(Right(input));
+  factory DiscountType(String input) {
+    return DiscountType._(Right(input));
   }
 
-  const MaterialBundleType._(this.value);
+  const DiscountType._(this.value);
 
   bool isPercent() {
     return materialBundleTypeIsPercent(value.getOrElse(() => ''));
@@ -743,4 +743,26 @@ class SAPStatus extends ValueObject<String> {
   }
 
   const SAPStatus._(this.value);
+}
+
+class FlexibleGroup extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory FlexibleGroup(String input) {
+    return FlexibleGroup._(validateStringNotEmpty(input));
+  }
+
+  const FlexibleGroup._(this.value);
+}
+
+class ComboDealType extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory ComboDealType(String input) {
+    return ComboDealType._(validateStringNotEmpty(input));
+  }
+
+  const ComboDealType._(this.value);
 }

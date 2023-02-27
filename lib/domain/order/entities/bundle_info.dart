@@ -10,14 +10,14 @@ class BundleInfo with _$BundleInfo {
   const factory BundleInfo({
     required int sequence,
     required int quantity,
-    required MaterialBundleType type,
+    required DiscountType type,
     required double rate,
   }) = _BundleInfo;
 
   factory BundleInfo.empty() => BundleInfo(
         sequence: 1,
         quantity: 1,
-        type: MaterialBundleType('%'),
+        type: DiscountType('%'),
         rate: -10,
       );
 }

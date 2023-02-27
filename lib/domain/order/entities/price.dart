@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/domain/order/entities/price_bonus.dart';
 import 'package:ezrxmobile/domain/order/entities/price_bundle.dart';
+import 'package:ezrxmobile/domain/order/entities/price_combo_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/price_rule.dart';
 import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -30,6 +31,7 @@ class Price with _$Price {
     @Default(false) bool isPriceOverride,
     required Zdp8OverrideValue zdp8Override,
     required PriceOverrideValue priceOverride,
+    required PriceComboDeal comboDeal,
   }) = _Price;
 
   factory Price.empty() => Price(
@@ -49,6 +51,7 @@ class Price with _$Price {
         isValid: true,
         zdp8Override: Zdp8OverrideValue(0),
         priceOverride: PriceOverrideValue(0),
+        comboDeal: PriceComboDeal.empty(),
       );
 
   List<PriceTierItem> get priceTireItem =>

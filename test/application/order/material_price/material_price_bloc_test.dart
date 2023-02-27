@@ -3,6 +3,8 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
@@ -28,9 +30,14 @@ void main() {
   final fakeSalesOrg = SalesOrganisation.empty().copyWith(
     salesOrg: SalesOrg('fake-name'),
   );
-  final fakeCustomerCode = CustomerCodeInfo.empty().copyWith(
+  final fakeCustomerCodeInfo = CustomerCodeInfo.empty().copyWith(
     customerCodeSoldTo: 'fake-code',
   );
+  final fakeShipToInfo = ShipToInfo.empty().copyWith(
+    shipToCustomerCode: 'fake-code',
+  );
+
+  final fakeSalesConfigs = SalesOrganisationConfigs.empty();
 
   final fakeFOCMaterialQuery = [
     MaterialInfo.empty().copyWith(
@@ -84,8 +91,10 @@ void main() {
       ),
       act: (MaterialPriceBloc bloc) => bloc.add(
         MaterialPriceEvent.fetch(
-          customerCode: fakeCustomerCode,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeShipToInfo,
           salesOrganisation: fakeSalesOrg,
+          salesConfigs: fakeSalesConfigs,
           materials: fakeMaterialQuery,
         ),
       ),
@@ -97,8 +106,10 @@ void main() {
       build: () => MaterialPriceBloc(repository: repository),
       act: (MaterialPriceBloc bloc) => bloc.add(
         MaterialPriceEvent.fetch(
-          customerCode: fakeCustomerCode,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeShipToInfo,
           salesOrganisation: fakeSalesOrg,
+          salesConfigs: fakeSalesConfigs,
           materials: fakeFOCMaterialQuery,
         ),
       ),
@@ -117,8 +128,10 @@ void main() {
       setUp: () {
         when(
           () => repository.getMaterialPrice(
-            customerCodeInfo: fakeCustomerCode,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: fakeShipToInfo,
             salesOrganisation: fakeSalesOrg,
+            salesConfigs: fakeSalesConfigs,
             materialNumberList: fakeMaterialNumberQuery,
           ),
         ).thenAnswer(
@@ -127,8 +140,10 @@ void main() {
       },
       act: (MaterialPriceBloc bloc) => bloc.add(
         MaterialPriceEvent.fetch(
-          customerCode: fakeCustomerCode,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeShipToInfo,
           salesOrganisation: fakeSalesOrg,
+          salesConfigs: fakeSalesConfigs,
           materials: fakeMaterialQuery,
         ),
       ),
@@ -149,8 +164,10 @@ void main() {
       setUp: () {
         when(
           () => repository.getMaterialPrice(
-            customerCodeInfo: fakeCustomerCode,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: fakeShipToInfo,
             salesOrganisation: fakeSalesOrg,
+            salesConfigs: fakeSalesConfigs,
             materialNumberList: fakeMaterialNumberQuery,
           ),
         ).thenAnswer(
@@ -159,8 +176,10 @@ void main() {
       },
       act: (MaterialPriceBloc bloc) => bloc.add(
         MaterialPriceEvent.fetch(
-          customerCode: fakeCustomerCode,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeShipToInfo,
           salesOrganisation: fakeSalesOrg,
+          salesConfigs: fakeSalesConfigs,
           materials: fakeMaterialQuery,
         ),
       ),

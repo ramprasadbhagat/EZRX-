@@ -6,15 +6,18 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/application/order/combo_deal/combo_deal_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
+import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
+import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
@@ -26,6 +29,7 @@ import 'package:ezrxmobile/presentation/core/custom_selector.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
+import 'package:ezrxmobile/presentation/orders/combo_deal/widgets/combo_deal_label.dart';
 import 'package:ezrxmobile/presentation/orders/core/account_suspended_warning.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/bonus_discount_label.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/favorite_button.dart';
@@ -46,30 +50,31 @@ class MaterialListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocListener<ScanMaterialInfoBloc, ScanMaterialInfoState>(
-      listenWhen: (previous, current) => previous.scannedData!=current.scannedData,
+      listenWhen: (previous, current) =>
+          previous.scannedData != current.scannedData,
       listener: (context, state) {
-        if(state.scannedData.isEmpty) return;
+        if (state.scannedData.isEmpty) return;
 
         context.read<MaterialListBloc>().add(
-                MaterialListEvent.updateSearchKey(searchKey: state.scannedData),
-              );
-          context.read<MaterialListBloc>().add(
-                MaterialListEvent.searchMaterialList(
-                  user: context.read<UserBloc>().state.user,
-                  salesOrganisation:
-                      context.read<SalesOrgBloc>().state.salesOrganisation,
-                  configs: context.read<SalesOrgBloc>().state.configs,
-                  customerCodeInfo:
-                      context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                  shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
-                  selectedMaterialFilter: context
-                      .read<MaterialFilterBloc>()
-                      .state
-                      .selectedMaterialFilter,
-                  pickAndPack:
-                      context.read<EligibilityBloc>().state.getPNPValueMaterial,
-                ),
-              );
+              MaterialListEvent.updateSearchKey(searchKey: state.scannedData),
+            );
+        context.read<MaterialListBloc>().add(
+              MaterialListEvent.searchMaterialList(
+                user: context.read<UserBloc>().state.user,
+                salesOrganisation:
+                    context.read<SalesOrgBloc>().state.salesOrganisation,
+                configs: context.read<SalesOrgBloc>().state.configs,
+                customerCodeInfo:
+                    context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+                selectedMaterialFilter: context
+                    .read<MaterialFilterBloc>()
+                    .state
+                    .selectedMaterialFilter,
+                pickAndPack:
+                    context.read<EligibilityBloc>().state.getPNPValueMaterial,
+              ),
+            );
       },
       child: Scaffold(
         key: const Key('materialListPage'),
@@ -182,7 +187,13 @@ class _BodyContent extends StatelessWidget {
                 context.read<MaterialPriceBloc>().add(
                       const MaterialPriceEvent.initialized(),
                     );
+                context.read<MaterialPriceDetailBloc>().add(
+                      const MaterialPriceDetailEvent.initialized(),
+                    );
 
+                context.read<ComboDealListBloc>().add(
+                      const ComboDealListEvent.initialize(),
+                    );
                 context.read<MaterialFilterBloc>().add(
                       const MaterialFilterEvent.clearSelected(),
                     );
@@ -319,6 +330,7 @@ class _ListContent extends StatelessWidget {
                   materialNumber: materialInfo.materialNumber,
                 ),
                 tenderContract: TenderContract.empty(),
+                comboDeal: ComboDeal.empty(),
               ),
             );
           }
@@ -353,7 +365,7 @@ class _ListContent extends StatelessWidget {
             ),
             Text(
               materialInfo.materialDescription,
-              style: Theme.of(context).textTheme.bodyText1,
+              style: Theme.of(context).textTheme.bodyLarge,
             ),
             (salesOrgConfigs.enableDefaultMD &&
                     materialInfo.defaultMaterialDescription.isNotEmpty)
@@ -388,6 +400,45 @@ class _ListContent extends StatelessWidget {
                 _PriceLabel(materialInfo: materialInfo),
                 FavoriteButton(materialInfo: materialInfo),
               ],
+            ),
+            BlocBuilder<MaterialPriceBloc, MaterialPriceState>(
+              buildWhen: (previous, current) =>
+                  previous.isFetching != current.isFetching,
+              builder: (context, state) {
+                final price =
+                    state.getPriceForMaterial(materialInfo.materialNumber);
+
+                return price.comboDeal.isAvailable
+                    ? GestureDetector(
+                        onTap: () {
+                          final salesConfig =
+                              context.read<SalesOrgBloc>().state.configs;
+                          final materials = price
+                              .comboDeal.category.comboMaterialNumbers
+                              .map(
+                                (item) => PriceAggregate.empty().copyWith(
+                                  salesOrgConfig: salesConfig,
+                                  materialInfo: MaterialInfo.empty().copyWith(
+                                    materialNumber: item,
+                                  ),
+                                  price: Price.empty().copyWith(
+                                    materialNumber: item,
+                                    comboDeal: price.comboDeal,
+                                  ),
+                                ),
+                              )
+                              .toList();
+
+                          context.router.push(
+                            ComboDealDetailPageRoute(
+                              comboItems: materials,
+                            ),
+                          );
+                        },
+                        child: const ComboDealLabel(),
+                      )
+                    : const SizedBox();
+              },
             ),
           ],
         ),
@@ -453,6 +504,7 @@ class _PriceLabel extends StatelessWidget {
               materialNumber: materialInfo.materialNumber,
             ),
             tenderContract: TenderContract.empty(),
+            comboDeal: ComboDeal.empty(),
           );
 
           return Column(
@@ -821,6 +873,7 @@ void _openAddToCartBottomSheet(BuildContext context) {
         materialNumber: materialInfo.materialNumber,
       ),
       tenderContract: TenderContract.empty(),
+      comboDeal: ComboDeal.empty(),
     ),
     context: context,
   );
@@ -862,9 +915,9 @@ class _ScanMaterialInfoOptionPicker
           ),
           onPressed: () {
             context.router.pushNamed('scan_material_info');
-            context
-                .read<ScanMaterialInfoBloc>()
-                .add(const ScanMaterialInfoEvent.scanMaterialNumberFromCamera());
+            context.read<ScanMaterialInfoBloc>().add(
+                  const ScanMaterialInfoEvent.scanMaterialNumberFromCamera(),
+                );
             context.router.pop();
           },
           cupertino: (_, __) => CupertinoDialogActionData(

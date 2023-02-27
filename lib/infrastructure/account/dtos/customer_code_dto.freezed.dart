@@ -70,6 +70,10 @@ mixin _$CustomerCodeDto {
   String get region => throw _privateConstructorUsedError;
   @JsonKey(name: 'emailAddresses', defaultValue: [])
   List<String> get emailAddresses => throw _privateConstructorUsedError;
+  @JsonKey(name: 'comboEligible', defaultValue: false)
+  bool get comboEligible => throw _privateConstructorUsedError;
+  @JsonKey(name: 'salesDeals', defaultValue: [])
+  List<String> get salesDeals => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -133,7 +137,11 @@ abstract class $CustomerCodeDtoCopyWith<$Res> {
       @JsonKey(name: 'region')
           String region,
       @JsonKey(name: 'emailAddresses', defaultValue: [])
-          List<String> emailAddresses});
+          List<String> emailAddresses,
+      @JsonKey(name: 'comboEligible', defaultValue: false)
+          bool comboEligible,
+      @JsonKey(name: 'salesDeals', defaultValue: [])
+          List<String> salesDeals});
 }
 
 /// @nodoc
@@ -174,6 +182,8 @@ class _$CustomerCodeDtoCopyWithImpl<$Res, $Val extends CustomerCodeDto>
     Object? customerGrp4 = null,
     Object? region = null,
     Object? emailAddresses = null,
+    Object? comboEligible = null,
+    Object? salesDeals = null,
   }) {
     return _then(_value.copyWith(
       customerCodeSoldTo: null == customerCodeSoldTo
@@ -276,6 +286,14 @@ class _$CustomerCodeDtoCopyWithImpl<$Res, $Val extends CustomerCodeDto>
           ? _value.emailAddresses
           : emailAddresses // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      comboEligible: null == comboEligible
+          ? _value.comboEligible
+          : comboEligible // ignore: cast_nullable_to_non_nullable
+              as bool,
+      salesDeals: null == salesDeals
+          ? _value.salesDeals
+          : salesDeals // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ) as $Val);
   }
 }
@@ -338,7 +356,11 @@ abstract class _$$_CustomerCodeDtoCopyWith<$Res>
       @JsonKey(name: 'region')
           String region,
       @JsonKey(name: 'emailAddresses', defaultValue: [])
-          List<String> emailAddresses});
+          List<String> emailAddresses,
+      @JsonKey(name: 'comboEligible', defaultValue: false)
+          bool comboEligible,
+      @JsonKey(name: 'salesDeals', defaultValue: [])
+          List<String> salesDeals});
 }
 
 /// @nodoc
@@ -377,6 +399,8 @@ class __$$_CustomerCodeDtoCopyWithImpl<$Res>
     Object? customerGrp4 = null,
     Object? region = null,
     Object? emailAddresses = null,
+    Object? comboEligible = null,
+    Object? salesDeals = null,
   }) {
     return _then(_$_CustomerCodeDto(
       customerCodeSoldTo: null == customerCodeSoldTo
@@ -479,6 +503,14 @@ class __$$_CustomerCodeDtoCopyWithImpl<$Res>
           ? _value._emailAddresses
           : emailAddresses // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      comboEligible: null == comboEligible
+          ? _value.comboEligible
+          : comboEligible // ignore: cast_nullable_to_non_nullable
+              as bool,
+      salesDeals: null == salesDeals
+          ? _value._salesDeals
+          : salesDeals // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ));
   }
 }
@@ -536,10 +568,15 @@ class _$_CustomerCodeDto extends _CustomerCodeDto {
       @JsonKey(name: 'region')
           required this.region,
       @JsonKey(name: 'emailAddresses', defaultValue: [])
-          required final List<String> emailAddresses})
+          required final List<String> emailAddresses,
+      @JsonKey(name: 'comboEligible', defaultValue: false)
+          required this.comboEligible,
+      @JsonKey(name: 'salesDeals', defaultValue: [])
+          required final List<String> salesDeals})
       : _shipToInfos = shipToInfos,
         _billToInfos = billToInfos,
         _emailAddresses = emailAddresses,
+        _salesDeals = salesDeals,
         super._();
 
   factory _$_CustomerCodeDto.fromJson(Map<String, dynamic> json) =>
@@ -636,8 +673,19 @@ class _$_CustomerCodeDto extends _CustomerCodeDto {
   }
 
   @override
+  @JsonKey(name: 'comboEligible', defaultValue: false)
+  final bool comboEligible;
+  final List<String> _salesDeals;
+  @override
+  @JsonKey(name: 'salesDeals', defaultValue: [])
+  List<String> get salesDeals {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_salesDeals);
+  }
+
+  @override
   String toString() {
-    return 'CustomerCodeDto(customerCodeSoldTo: $customerCodeSoldTo, name1: $name1, name2: $name2, name3: $name3, name4: $name4, status: $status, street1: $street1, street2: $street2, street3: $street3, street4: $street4, street5: $street5, city1: $city1, city2: $city2, telephoneNumber: $telephoneNumber, postalCode: $postalCode, division: $division, customerClassification: $customerClassification, customerLocalGroup: $customerLocalGroup, paymentTermDescription: $paymentTermDescription, shipToInfos: $shipToInfos, billToInfos: $billToInfos, customerAttr7: $customerAttr7, customerGrp4: $customerGrp4, region: $region, emailAddresses: $emailAddresses)';
+    return 'CustomerCodeDto(customerCodeSoldTo: $customerCodeSoldTo, name1: $name1, name2: $name2, name3: $name3, name4: $name4, status: $status, street1: $street1, street2: $street2, street3: $street3, street4: $street4, street5: $street5, city1: $city1, city2: $city2, telephoneNumber: $telephoneNumber, postalCode: $postalCode, division: $division, customerClassification: $customerClassification, customerLocalGroup: $customerLocalGroup, paymentTermDescription: $paymentTermDescription, shipToInfos: $shipToInfos, billToInfos: $billToInfos, customerAttr7: $customerAttr7, customerGrp4: $customerGrp4, region: $region, emailAddresses: $emailAddresses, comboEligible: $comboEligible, salesDeals: $salesDeals)';
   }
 
   @override
@@ -681,7 +729,11 @@ class _$_CustomerCodeDto extends _CustomerCodeDto {
                 other.customerGrp4 == customerGrp4) &&
             (identical(other.region, region) || other.region == region) &&
             const DeepCollectionEquality()
-                .equals(other._emailAddresses, _emailAddresses));
+                .equals(other._emailAddresses, _emailAddresses) &&
+            (identical(other.comboEligible, comboEligible) ||
+                other.comboEligible == comboEligible) &&
+            const DeepCollectionEquality()
+                .equals(other._salesDeals, _salesDeals));
   }
 
   @JsonKey(ignore: true)
@@ -712,7 +764,9 @@ class _$_CustomerCodeDto extends _CustomerCodeDto {
         customerAttr7,
         customerGrp4,
         region,
-        const DeepCollectionEquality().hash(_emailAddresses)
+        const DeepCollectionEquality().hash(_emailAddresses),
+        comboEligible,
+        const DeepCollectionEquality().hash(_salesDeals)
       ]);
 
   @JsonKey(ignore: true)
@@ -780,7 +834,11 @@ abstract class _CustomerCodeDto extends CustomerCodeDto {
       @JsonKey(name: 'region')
           required final String region,
       @JsonKey(name: 'emailAddresses', defaultValue: [])
-          required final List<String> emailAddresses}) = _$_CustomerCodeDto;
+          required final List<String> emailAddresses,
+      @JsonKey(name: 'comboEligible', defaultValue: false)
+          required final bool comboEligible,
+      @JsonKey(name: 'salesDeals', defaultValue: [])
+          required final List<String> salesDeals}) = _$_CustomerCodeDto;
   const _CustomerCodeDto._() : super._();
 
   factory _CustomerCodeDto.fromJson(Map<String, dynamic> json) =
@@ -861,6 +919,12 @@ abstract class _CustomerCodeDto extends CustomerCodeDto {
   @override
   @JsonKey(name: 'emailAddresses', defaultValue: [])
   List<String> get emailAddresses;
+  @override
+  @JsonKey(name: 'comboEligible', defaultValue: false)
+  bool get comboEligible;
+  @override
+  @JsonKey(name: 'salesDeals', defaultValue: [])
+  List<String> get salesDeals;
   @override
   @JsonKey(ignore: true)
   _$$_CustomerCodeDtoCopyWith<_$_CustomerCodeDto> get copyWith =>

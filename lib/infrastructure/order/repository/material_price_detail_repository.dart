@@ -31,6 +31,7 @@ class MaterialPriceDetailRepository implements IMaterialPriceDetailRepository {
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToCodeInfo,
     required List<MaterialQueryInfo> materialQueryList,
+    bool isComboDealMaterials = false,
   }) async {
     var materialDetailData = <MaterialPriceDetail>[];
     final materialDetails = <MaterialQueryInfo, MaterialPriceDetail>{};
@@ -68,6 +69,7 @@ class MaterialPriceDetailRepository implements IMaterialPriceDetailRepository {
           shipToCode: shipToCode,
           language: language,
           queryString: queryMaterialNumbers,
+          listPriceOnly: isComboDealMaterials,
         );
       } catch (e) {
         return Left(FailureHandler.handleFailure(e));
@@ -82,15 +84,17 @@ class MaterialPriceDetailRepository implements IMaterialPriceDetailRepository {
         },
       );
     }
-    await _getMaterialDetailsWithZDP5(
-      materialDetailData,
-      salesOrganisationConfigs,
-      materialQueryList,
-      salesOrganisation,
-      customerCodeInfo,
-      shipToCodeInfo,
-      materialDetails,
-    );
+    if (salesOrganisationConfigs.enableZDP5 && !isComboDealMaterials) {
+      await _getMaterialDetailsWithZDP5(
+        materialDetailData,
+        salesOrganisationConfigs,
+        materialQueryList,
+        salesOrganisation,
+        customerCodeInfo,
+        shipToCodeInfo,
+        materialDetails,
+      );
+    }
 
     return Right(materialDetails);
   }
@@ -111,8 +115,7 @@ class MaterialPriceDetailRepository implements IMaterialPriceDetailRepository {
               element.price.zdp5RemainingQuota.isNotEmpty,
         )
         .toList();
-    if (salesOrganisationConfigs.enableZDP5 &&
-        materialDetailWithZDP5Data.isNotEmpty) {
+    if (materialDetailWithZDP5Data.isNotEmpty) {
       final materialZDP5EnabledQueryList = {
         for (final data in materialDetailWithZDP5Data)
           materialQueryList.firstWhere(

@@ -60,6 +60,7 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
     required bool enableZDP8Override,
     required bool disableReturnsAccessSR,
     required bool disableReturnsAccess,
+    required bool enableComboDeals,
   }) = _SalesOrganisationConfigs;
 
   factory SalesOrganisationConfigs.empty() => SalesOrganisationConfigs(
@@ -114,6 +115,7 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
         disableReturnsAccess: false,
         enableGreenDelivery: false,
         greenDeliveryDelayInDays: 0,
+        enableComboDeals: false,
         greenDeliveryUserRole: GreenDeliveryUserRole(0),
       );
 

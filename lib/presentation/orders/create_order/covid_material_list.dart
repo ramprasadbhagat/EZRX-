@@ -11,6 +11,7 @@ import 'package:ezrxmobile/application/order/material_price/material_price_bloc.
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
+import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
@@ -191,6 +192,7 @@ class _ListContent extends StatelessWidget {
                   materialNumber: materialInfo.materialNumber,
                 ),
                 tenderContract: TenderContract.empty(),
+                comboDeal: ComboDeal.empty(),
               ),
               isCovid19Tab: true,
             );
@@ -295,6 +297,7 @@ class _PriceLabel extends StatelessWidget {
               materialNumber: materialInfo.materialNumber,
             ),
             tenderContract: TenderContract.empty(),
+            comboDeal: ComboDeal.empty(),
           );
 
           return Column(

@@ -29,6 +29,8 @@ class CustomerCodeInfo with _$CustomerCodeInfo {
     required CustomerAttr7 customerAttr7,
     required CustomerGrp4 customerGrp4,
     required String region,
+    required bool comboEligible,
+    required List<SalesDealNumber> salesDeals,
     required PhoneNumber telephoneNumber,
   }) = _CustomerCodeInfo;
 
@@ -61,6 +63,8 @@ class CustomerCodeInfo with _$CustomerCodeInfo {
         customerGrp4: CustomerGrp4(''),
         region: '',
         emailAddresses: <EmailAddress>[],
+        comboEligible: false,
+        salesDeals: [],
         telephoneNumber: PhoneNumber(''),
       );
 

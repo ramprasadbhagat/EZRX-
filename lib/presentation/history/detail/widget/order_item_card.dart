@@ -8,6 +8,7 @@ import 'package:ezrxmobile/application/order/order_history_details/order_history
 import 'package:ezrxmobile/domain/core/aggregate/bonus_aggregate.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
+import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items_details.dart';
@@ -225,6 +226,7 @@ void _addToCartPressed(
           materialNumber: itemInfo.info.materialNumber,
         ),
         tenderContract: TenderContract.empty(),
+        comboDeal: ComboDeal.empty(),
       ),
     );
   }

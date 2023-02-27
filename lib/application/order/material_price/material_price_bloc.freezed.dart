@@ -19,24 +19,36 @@ mixin _$MaterialPriceEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(CustomerCodeInfo customerCode,
-            SalesOrganisation salesOrganisation, List<MaterialInfo> materials)
+    required TResult Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesConfigs,
+            ShipToInfo shipToInfo,
+            List<MaterialInfo> materials)
         fetch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(CustomerCodeInfo customerCode,
-            SalesOrganisation salesOrganisation, List<MaterialInfo> materials)?
+    TResult? Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesConfigs,
+            ShipToInfo shipToInfo,
+            List<MaterialInfo> materials)?
         fetch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(CustomerCodeInfo customerCode,
-            SalesOrganisation salesOrganisation, List<MaterialInfo> materials)?
+    TResult Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesConfigs,
+            ShipToInfo shipToInfo,
+            List<MaterialInfo> materials)?
         fetch,
     required TResult orElse(),
   }) =>
@@ -119,8 +131,12 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(CustomerCodeInfo customerCode,
-            SalesOrganisation salesOrganisation, List<MaterialInfo> materials)
+    required TResult Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesConfigs,
+            ShipToInfo shipToInfo,
+            List<MaterialInfo> materials)
         fetch,
   }) {
     return initialized();
@@ -130,8 +146,12 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(CustomerCodeInfo customerCode,
-            SalesOrganisation salesOrganisation, List<MaterialInfo> materials)?
+    TResult? Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesConfigs,
+            ShipToInfo shipToInfo,
+            List<MaterialInfo> materials)?
         fetch,
   }) {
     return initialized?.call();
@@ -141,8 +161,12 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(CustomerCodeInfo customerCode,
-            SalesOrganisation salesOrganisation, List<MaterialInfo> materials)?
+    TResult Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesConfigs,
+            ShipToInfo shipToInfo,
+            List<MaterialInfo> materials)?
         fetch,
     required TResult orElse(),
   }) {
@@ -194,12 +218,16 @@ abstract class _$$_FetchCopyWith<$Res> {
       __$$_FetchCopyWithImpl<$Res>;
   @useResult
   $Res call(
-      {CustomerCodeInfo customerCode,
+      {CustomerCodeInfo customerCodeInfo,
       SalesOrganisation salesOrganisation,
+      SalesOrganisationConfigs salesConfigs,
+      ShipToInfo shipToInfo,
       List<MaterialInfo> materials});
 
-  $CustomerCodeInfoCopyWith<$Res> get customerCode;
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
+  $SalesOrganisationConfigsCopyWith<$Res> get salesConfigs;
+  $ShipToInfoCopyWith<$Res> get shipToInfo;
 }
 
 /// @nodoc
@@ -212,19 +240,29 @@ class __$$_FetchCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? customerCode = null,
+    Object? customerCodeInfo = null,
     Object? salesOrganisation = null,
+    Object? salesConfigs = null,
+    Object? shipToInfo = null,
     Object? materials = null,
   }) {
     return _then(_$_Fetch(
-      customerCode: null == customerCode
-          ? _value.customerCode
-          : customerCode // ignore: cast_nullable_to_non_nullable
+      customerCodeInfo: null == customerCodeInfo
+          ? _value.customerCodeInfo
+          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
               as CustomerCodeInfo,
       salesOrganisation: null == salesOrganisation
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
               as SalesOrganisation,
+      salesConfigs: null == salesConfigs
+          ? _value.salesConfigs
+          : salesConfigs // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisationConfigs,
+      shipToInfo: null == shipToInfo
+          ? _value.shipToInfo
+          : shipToInfo // ignore: cast_nullable_to_non_nullable
+              as ShipToInfo,
       materials: null == materials
           ? _value._materials
           : materials // ignore: cast_nullable_to_non_nullable
@@ -234,9 +272,9 @@ class __$$_FetchCopyWithImpl<$Res>
 
   @override
   @pragma('vm:prefer-inline')
-  $CustomerCodeInfoCopyWith<$Res> get customerCode {
-    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCode, (value) {
-      return _then(_value.copyWith(customerCode: value));
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
+    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
+      return _then(_value.copyWith(customerCodeInfo: value));
     });
   }
 
@@ -247,21 +285,44 @@ class __$$_FetchCopyWithImpl<$Res>
       return _then(_value.copyWith(salesOrganisation: value));
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationConfigsCopyWith<$Res> get salesConfigs {
+    return $SalesOrganisationConfigsCopyWith<$Res>(_value.salesConfigs,
+        (value) {
+      return _then(_value.copyWith(salesConfigs: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ShipToInfoCopyWith<$Res> get shipToInfo {
+    return $ShipToInfoCopyWith<$Res>(_value.shipToInfo, (value) {
+      return _then(_value.copyWith(shipToInfo: value));
+    });
+  }
 }
 
 /// @nodoc
 
 class _$_Fetch implements _Fetch {
   const _$_Fetch(
-      {required this.customerCode,
+      {required this.customerCodeInfo,
       required this.salesOrganisation,
+      required this.salesConfigs,
+      required this.shipToInfo,
       required final List<MaterialInfo> materials})
       : _materials = materials;
 
   @override
-  final CustomerCodeInfo customerCode;
+  final CustomerCodeInfo customerCodeInfo;
   @override
   final SalesOrganisation salesOrganisation;
+  @override
+  final SalesOrganisationConfigs salesConfigs;
+  @override
+  final ShipToInfo shipToInfo;
   final List<MaterialInfo> _materials;
   @override
   List<MaterialInfo> get materials {
@@ -271,7 +332,7 @@ class _$_Fetch implements _Fetch {
 
   @override
   String toString() {
-    return 'MaterialPriceEvent.fetch(customerCode: $customerCode, salesOrganisation: $salesOrganisation, materials: $materials)';
+    return 'MaterialPriceEvent.fetch(customerCodeInfo: $customerCodeInfo, salesOrganisation: $salesOrganisation, salesConfigs: $salesConfigs, shipToInfo: $shipToInfo, materials: $materials)';
   }
 
   @override
@@ -279,16 +340,25 @@ class _$_Fetch implements _Fetch {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Fetch &&
-            (identical(other.customerCode, customerCode) ||
-                other.customerCode == customerCode) &&
+            (identical(other.customerCodeInfo, customerCodeInfo) ||
+                other.customerCodeInfo == customerCodeInfo) &&
             (identical(other.salesOrganisation, salesOrganisation) ||
                 other.salesOrganisation == salesOrganisation) &&
+            (identical(other.salesConfigs, salesConfigs) ||
+                other.salesConfigs == salesConfigs) &&
+            (identical(other.shipToInfo, shipToInfo) ||
+                other.shipToInfo == shipToInfo) &&
             const DeepCollectionEquality()
                 .equals(other._materials, _materials));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, customerCode, salesOrganisation,
+  int get hashCode => Object.hash(
+      runtimeType,
+      customerCodeInfo,
+      salesOrganisation,
+      salesConfigs,
+      shipToInfo,
       const DeepCollectionEquality().hash(_materials));
 
   @JsonKey(ignore: true)
@@ -301,35 +371,50 @@ class _$_Fetch implements _Fetch {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(CustomerCodeInfo customerCode,
-            SalesOrganisation salesOrganisation, List<MaterialInfo> materials)
+    required TResult Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesConfigs,
+            ShipToInfo shipToInfo,
+            List<MaterialInfo> materials)
         fetch,
   }) {
-    return fetch(customerCode, salesOrganisation, materials);
+    return fetch(customerCodeInfo, salesOrganisation, salesConfigs, shipToInfo,
+        materials);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(CustomerCodeInfo customerCode,
-            SalesOrganisation salesOrganisation, List<MaterialInfo> materials)?
+    TResult? Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesConfigs,
+            ShipToInfo shipToInfo,
+            List<MaterialInfo> materials)?
         fetch,
   }) {
-    return fetch?.call(customerCode, salesOrganisation, materials);
+    return fetch?.call(customerCodeInfo, salesOrganisation, salesConfigs,
+        shipToInfo, materials);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(CustomerCodeInfo customerCode,
-            SalesOrganisation salesOrganisation, List<MaterialInfo> materials)?
+    TResult Function(
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesConfigs,
+            ShipToInfo shipToInfo,
+            List<MaterialInfo> materials)?
         fetch,
     required TResult orElse(),
   }) {
     if (fetch != null) {
-      return fetch(customerCode, salesOrganisation, materials);
+      return fetch(customerCodeInfo, salesOrganisation, salesConfigs,
+          shipToInfo, materials);
     }
     return orElse();
   }
@@ -368,12 +453,16 @@ class _$_Fetch implements _Fetch {
 
 abstract class _Fetch implements MaterialPriceEvent {
   const factory _Fetch(
-      {required final CustomerCodeInfo customerCode,
+      {required final CustomerCodeInfo customerCodeInfo,
       required final SalesOrganisation salesOrganisation,
+      required final SalesOrganisationConfigs salesConfigs,
+      required final ShipToInfo shipToInfo,
       required final List<MaterialInfo> materials}) = _$_Fetch;
 
-  CustomerCodeInfo get customerCode;
+  CustomerCodeInfo get customerCodeInfo;
   SalesOrganisation get salesOrganisation;
+  SalesOrganisationConfigs get salesConfigs;
+  ShipToInfo get shipToInfo;
   List<MaterialInfo> get materials;
   @JsonKey(ignore: true)
   _$$_FetchCopyWith<_$_Fetch> get copyWith =>

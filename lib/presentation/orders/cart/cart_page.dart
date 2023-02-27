@@ -18,6 +18,7 @@ import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_bundle_item_tile.dart';
+import 'package:ezrxmobile/presentation/orders/cart/item/cart_combo_deal_item_tile.dart';
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_material_item_tile.dart';
 import 'package:ezrxmobile/presentation/orders/core/account_suspended_warning.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -111,6 +112,11 @@ class CartPage extends StatelessWidget {
                         return CartBundleItemTile(
                           cartItem: item,
                           taxCode: taxCode,
+                          showCheckBox: true,
+                        );
+                      case CartItemType.comboDeal:
+                        return CartComboDealItem(
+                          cartItem: item,
                           showCheckBox: true,
                         );
                     }

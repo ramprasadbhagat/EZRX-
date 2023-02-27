@@ -1,21 +1,24 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/order/entities/bundle.dart';
+import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
+import 'package:ezrxmobile/domain/order/entities/combo_deal_material.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
-import 'package:ezrxmobile/domain/order/entities/price_bonus.dart';
-import 'package:ezrxmobile/domain/order/entities/submit_material_info.dart';
-import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
-import 'package:ezrxmobile/domain/utils/num_utils.dart';
-import 'package:ezrxmobile/domain/utils/string_utils.dart';
-import 'package:ezrxmobile/domain/order/entities/bundle.dart';
-import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_template_material.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
+import 'package:ezrxmobile/domain/order/entities/price_bonus.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
+import 'package:ezrxmobile/domain/order/entities/submit_material_info.dart';
+import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/domain/utils/num_utils.dart';
+import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_item_override_dto.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'price_aggregate.freezed.dart';
+part 'price_aggregate_extension.dart';
 
 @freezed
 class PriceAggregate with _$PriceAggregate {
@@ -31,6 +34,7 @@ class PriceAggregate with _$PriceAggregate {
     required List<MaterialItemBonus> addedBonusList,
     required StockInfo stockInfo,
     required TenderContract tenderContract,
+    required ComboDeal comboDeal,
   }) = _PriceAggregate;
 
   factory PriceAggregate.empty() => PriceAggregate(
@@ -43,6 +47,7 @@ class PriceAggregate with _$PriceAggregate {
         addedBonusList: [],
         stockInfo: StockInfo.empty(),
         tenderContract: TenderContract.empty(),
+        comboDeal: ComboDeal.empty(),
       );
 
   OrderTemplateMaterial toOrderTemplateMaterial() {
@@ -227,6 +232,18 @@ class PriceAggregate with _$PriceAggregate {
             ? finalPriceTotal
             : unitPriceTotal;
         break;
+      case PriceType.comboDealListPrice:
+        result = NumUtils.roundToPlaces(comboDealListPrice);
+        break;
+      case PriceType.comboDealTotalListPrice:
+        result = NumUtils.roundToPlaces(comboDealTotalListPrice);
+        break;
+      case PriceType.comboDealUnitPrice:
+        result = NumUtils.roundToPlaces(comboDealUnitPrice);
+        break;
+      case PriceType.comboDealTotalUnitPrice:
+        result = NumUtils.roundToPlaces(comboDealTotalUnitPrice);
+        break;
       case PriceType.listPrice:
       default:
         result = listPrice;
@@ -408,4 +425,8 @@ enum PriceType {
   finalPrice,
   finalPriceTotal,
   unitPriceTotal,
+  comboDealListPrice,
+  comboDealTotalListPrice,
+  comboDealUnitPrice,
+  comboDealTotalUnitPrice,
 }

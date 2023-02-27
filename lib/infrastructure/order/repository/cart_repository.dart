@@ -141,6 +141,7 @@ class CartRepository implements ICartRepository {
             );
             break;
           case CartItemType.bundle:
+          case CartItemType.comboDeal:
             // TODO: Handle this case.
             break;
         }
@@ -190,6 +191,7 @@ class CartRepository implements ICartRepository {
             );
             break;
           case CartItemType.bundle:
+          case CartItemType.comboDeal:
             // TODO: Handle this case.
             break;
         }
@@ -229,6 +231,7 @@ class CartRepository implements ICartRepository {
             );
             break;
           case CartItemType.bundle:
+          case CartItemType.comboDeal:
             // TODO: Handle this case.
             break;
         }
@@ -321,6 +324,7 @@ class CartRepository implements ICartRepository {
             );
             break;
           case CartItemType.bundle:
+          case CartItemType.comboDeal:
             // TODO: Handle this case.
             break;
         }
@@ -364,6 +368,7 @@ class CartRepository implements ICartRepository {
             );
             break;
           case CartItemType.bundle:
+          case CartItemType.comboDeal:
             // TODO: Handle this case.
             break;
         }
@@ -400,6 +405,7 @@ class CartRepository implements ICartRepository {
           );
 
         case CartItemType.bundle:
+        case CartItemType.comboDeal:
           return item;
       }
     }).toList();

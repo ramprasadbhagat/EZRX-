@@ -166,8 +166,11 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
     @JsonKey(name: 'greenDeliveryDelayInDays', defaultValue: 2)
     @HiveField(150, defaultValue: 2)
         required int greenDeliveryDelayInDays,
+    @JsonKey(name: 'enableComboDeals', defaultValue: false)
+    @HiveField(151, defaultValue: false)
+        required bool enableComboDeals,
     @JsonKey(name: 'greenDeliveryUserRole', defaultValue: 0)
-    @HiveField(151, defaultValue: 0)
+    @HiveField(152, defaultValue: 0)
         required int greenDeliveryUserRole,
   }) = _SalesOrganisationConfigsDto;
 
@@ -227,6 +230,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       enableZDP8Override: configs.enableZDP8Override,
       disableReturnsAccessSR: configs.disableReturnsAccessSR,
       disableReturnsAccess: configs.disableReturnsAccess,
+      enableComboDeals: configs.enableComboDeals,
     );
   }
 
@@ -284,6 +288,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       enableZDP8Override: enableZDP8Override,
       disableReturnsAccessSR: disableReturnsAccessSR,
       disableReturnsAccess: disableReturnsAccess,
+      enableComboDeals: enableComboDeals,
     );
   }
 

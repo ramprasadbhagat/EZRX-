@@ -27,6 +27,15 @@ class CartEvent with _$CartEvent {
     required ShipToInfo shipToInfo,
     required bool doNotallowOutOfStockMaterial,
   }) = _AddBundleToCart;
+  const factory CartEvent.addComboDealToCart({
+    required List<PriceAggregate> comboDealItems,
+    required SalesOrganisationConfigs salesOrganisationConfigs,
+    required SalesOrganisation salesOrganisation,
+    required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToInfo,
+    required bool doNotallowOutOfStockMaterial,
+    @Default(false) bool overrideQty,
+  }) = _AddComboDealToCart;
   const factory CartEvent.updateBundleItemQty({
     required CartItem currentBundle,
     required PriceAggregate updatedQtyItem,
@@ -78,7 +87,7 @@ class CartEvent with _$CartEvent {
   }) = _SelectButtonTapped;
   const factory CartEvent.selectAllButtonTapped() = _SelectAllButtonTapped;
   const factory CartEvent.clearCart() = _ClearCart;
-    const factory CartEvent.replaceWithOrderItems({
+  const factory CartEvent.replaceWithOrderItems({
     required List<CartItem> items,
     required SalesOrganisationConfigs salesOrganisationConfigs,
     required SalesOrganisation salesOrganisation,
@@ -86,4 +95,13 @@ class CartEvent with _$CartEvent {
     required ShipToInfo shipToInfo,
     required bool doNotallowOutOfStockMaterial,
   }) = _ReplaceWithOrderItems;
+  const factory CartEvent.updateComboDealItemQty({
+    required PriceAggregate updatedItem,
+    required CartItem currentCombo,
+    required SalesOrganisationConfigs salesOrganisationConfigs,
+    required SalesOrganisation salesOrganisation,
+    required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToInfo,
+    required bool doNotallowOutOfStockMaterial, 
+  }) = _UpdateComboDealItemQty;
 }

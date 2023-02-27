@@ -35,6 +35,7 @@ mixin _$Price {
   bool get isPriceOverride => throw _privateConstructorUsedError;
   Zdp8OverrideValue get zdp8Override => throw _privateConstructorUsedError;
   PriceOverrideValue get priceOverride => throw _privateConstructorUsedError;
+  PriceComboDeal get comboDeal => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PriceCopyWith<Price> get copyWith => throw _privateConstructorUsedError;
@@ -64,7 +65,10 @@ abstract class $PriceCopyWith<$Res> {
       bool isFOC,
       bool isPriceOverride,
       Zdp8OverrideValue zdp8Override,
-      PriceOverrideValue priceOverride});
+      PriceOverrideValue priceOverride,
+      PriceComboDeal comboDeal});
+
+  $PriceComboDealCopyWith<$Res> get comboDeal;
 }
 
 /// @nodoc
@@ -99,6 +103,7 @@ class _$PriceCopyWithImpl<$Res, $Val extends Price>
     Object? isPriceOverride = null,
     Object? zdp8Override = null,
     Object? priceOverride = null,
+    Object? comboDeal = null,
   }) {
     return _then(_value.copyWith(
       materialNumber: null == materialNumber
@@ -177,7 +182,19 @@ class _$PriceCopyWithImpl<$Res, $Val extends Price>
           ? _value.priceOverride
           : priceOverride // ignore: cast_nullable_to_non_nullable
               as PriceOverrideValue,
+      comboDeal: null == comboDeal
+          ? _value.comboDeal
+          : comboDeal // ignore: cast_nullable_to_non_nullable
+              as PriceComboDeal,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PriceComboDealCopyWith<$Res> get comboDeal {
+    return $PriceComboDealCopyWith<$Res>(_value.comboDeal, (value) {
+      return _then(_value.copyWith(comboDeal: value) as $Val);
+    });
   }
 }
 
@@ -206,7 +223,11 @@ abstract class _$$_PriceCopyWith<$Res> implements $PriceCopyWith<$Res> {
       bool isFOC,
       bool isPriceOverride,
       Zdp8OverrideValue zdp8Override,
-      PriceOverrideValue priceOverride});
+      PriceOverrideValue priceOverride,
+      PriceComboDeal comboDeal});
+
+  @override
+  $PriceComboDealCopyWith<$Res> get comboDeal;
 }
 
 /// @nodoc
@@ -237,6 +258,7 @@ class __$$_PriceCopyWithImpl<$Res> extends _$PriceCopyWithImpl<$Res, _$_Price>
     Object? isPriceOverride = null,
     Object? zdp8Override = null,
     Object? priceOverride = null,
+    Object? comboDeal = null,
   }) {
     return _then(_$_Price(
       materialNumber: null == materialNumber
@@ -315,6 +337,10 @@ class __$$_PriceCopyWithImpl<$Res> extends _$PriceCopyWithImpl<$Res, _$_Price>
           ? _value.priceOverride
           : priceOverride // ignore: cast_nullable_to_non_nullable
               as PriceOverrideValue,
+      comboDeal: null == comboDeal
+          ? _value.comboDeal
+          : comboDeal // ignore: cast_nullable_to_non_nullable
+              as PriceComboDeal,
     ));
   }
 }
@@ -341,7 +367,8 @@ class _$_Price extends _Price {
       this.isFOC = false,
       this.isPriceOverride = false,
       required this.zdp8Override,
-      required this.priceOverride})
+      required this.priceOverride,
+      required this.comboDeal})
       : _rules = rules,
         _tiers = tiers,
         _bonuses = bonuses,
@@ -409,10 +436,12 @@ class _$_Price extends _Price {
   final Zdp8OverrideValue zdp8Override;
   @override
   final PriceOverrideValue priceOverride;
+  @override
+  final PriceComboDeal comboDeal;
 
   @override
   String toString() {
-    return 'Price(materialNumber: $materialNumber, rules: $rules, tiers: $tiers, bonuses: $bonuses, bundles: $bundles, overrideRulePresent: $overrideRulePresent, zdp5MaxQuota: $zdp5MaxQuota, zdp5RemainingQuota: $zdp5RemainingQuota, zmgDiscount: $zmgDiscount, lastPrice: $lastPrice, finalPrice: $finalPrice, finalTotalPrice: $finalTotalPrice, additionalBonusEligible: $additionalBonusEligible, isValid: $isValid, isValidMaterial: $isValidMaterial, isFOC: $isFOC, isPriceOverride: $isPriceOverride, zdp8Override: $zdp8Override, priceOverride: $priceOverride)';
+    return 'Price(materialNumber: $materialNumber, rules: $rules, tiers: $tiers, bonuses: $bonuses, bundles: $bundles, overrideRulePresent: $overrideRulePresent, zdp5MaxQuota: $zdp5MaxQuota, zdp5RemainingQuota: $zdp5RemainingQuota, zmgDiscount: $zmgDiscount, lastPrice: $lastPrice, finalPrice: $finalPrice, finalTotalPrice: $finalTotalPrice, additionalBonusEligible: $additionalBonusEligible, isValid: $isValid, isValidMaterial: $isValidMaterial, isFOC: $isFOC, isPriceOverride: $isPriceOverride, zdp8Override: $zdp8Override, priceOverride: $priceOverride, comboDeal: $comboDeal)';
   }
 
   @override
@@ -452,7 +481,9 @@ class _$_Price extends _Price {
             (identical(other.zdp8Override, zdp8Override) ||
                 other.zdp8Override == zdp8Override) &&
             (identical(other.priceOverride, priceOverride) ||
-                other.priceOverride == priceOverride));
+                other.priceOverride == priceOverride) &&
+            (identical(other.comboDeal, comboDeal) ||
+                other.comboDeal == comboDeal));
   }
 
   @override
@@ -476,7 +507,8 @@ class _$_Price extends _Price {
         isFOC,
         isPriceOverride,
         zdp8Override,
-        priceOverride
+        priceOverride,
+        comboDeal
       ]);
 
   @JsonKey(ignore: true)
@@ -506,7 +538,8 @@ abstract class _Price extends Price {
       final bool isFOC,
       final bool isPriceOverride,
       required final Zdp8OverrideValue zdp8Override,
-      required final PriceOverrideValue priceOverride}) = _$_Price;
+      required final PriceOverrideValue priceOverride,
+      required final PriceComboDeal comboDeal}) = _$_Price;
   const _Price._() : super._();
 
   @override
@@ -547,6 +580,8 @@ abstract class _Price extends Price {
   Zdp8OverrideValue get zdp8Override;
   @override
   PriceOverrideValue get priceOverride;
+  @override
+  PriceComboDeal get comboDeal;
   @override
   @JsonKey(ignore: true)
   _$$_PriceCopyWith<_$_Price> get copyWith =>

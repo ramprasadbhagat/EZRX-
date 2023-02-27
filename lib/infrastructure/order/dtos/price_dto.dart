@@ -2,6 +2,7 @@ import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_bonus_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_bundle_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/price_combo_deal_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_rule_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_tier_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -67,6 +68,10 @@ class PriceDto with _$PriceDto {
     @HiveField(16, defaultValue: 0)
     @JsonKey(name: 'priceOverride', defaultValue: 0)
         required double priceOverride,
+    @HiveField(17, defaultValue: PriceComboDealDto.empty)
+    @Default(PriceComboDealDto.empty)
+    @JsonKey(name: 'ComboDeals')
+        PriceComboDealDto comboDeal,
   }) = _PriceDto;
 
   Price toDomain() => Price(
@@ -87,6 +92,7 @@ class PriceDto with _$PriceDto {
         isPriceOverride: isPriceOverride,
         zdp8Override: Zdp8OverrideValue(zdp8Override),
         priceOverride: PriceOverrideValue(priceOverride),
+        comboDeal: comboDeal.toDomain,
       );
 
   factory PriceDto.fromDomain(Price price) {
@@ -108,6 +114,7 @@ class PriceDto with _$PriceDto {
       isPriceOverride: price.isPriceOverride,
       zdp8Override: price.zdp8Override.getOrDefaultValue(0),
       priceOverride: price.priceOverride.getOrDefaultValue(0),
+      comboDeal: PriceComboDealDto.fromDomain(price.comboDeal),
     );
   }
 

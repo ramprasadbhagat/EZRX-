@@ -2,6 +2,7 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
+import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
@@ -32,6 +33,7 @@ void main() {
   final emptyStockInfo = StockInfo.empty();
   final emptyTenderContract = TenderContract.empty();
   final emptyPriceAggregate = PriceAggregate.empty();
+  final emptyComboDeal = ComboDeal.empty();
 
   group('Price Aggregate Test', () {
     test('should return correct price aggregate object', () {
@@ -45,6 +47,7 @@ void main() {
         addedBonusList: fakeAddedBonusList,
         stockInfo: emptyStockInfo,
         tenderContract: emptyTenderContract,
+        comboDeal: emptyComboDeal,
       );
 
       expect(priceAggregate.price, emptyPrice);

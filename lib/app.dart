@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'package:ezrxmobile/application/order/combo_deal/combo_deal_detail_bloc.dart';
+import 'package:ezrxmobile/application/order/combo_deal/combo_deal_list_bloc.dart';
 import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_list_bloc.dart';
@@ -320,6 +322,12 @@ class App extends StatelessWidget {
         ),
         BlocProvider<ReturnApproverFilterBloc>(
           create: (context) => locator<ReturnApproverFilterBloc>(),
+        ),
+        BlocProvider<ComboDealListBloc>(
+          create: (context) => locator<ComboDealListBloc>(),
+        ),
+        BlocProvider<ComboDealDetailBloc>(
+          create: (context) => locator<ComboDealDetailBloc>(),
         ),
         BlocProvider<ScanMaterialInfoBloc>(
           create: (context) => locator<ScanMaterialInfoBloc>(),

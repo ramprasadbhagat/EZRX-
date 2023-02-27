@@ -36,13 +36,16 @@ class PriceDtoAdapter extends TypeAdapter<_$_PriceDto> {
       isPriceOverride: fields[14] == null ? false : fields[14] as bool,
       zdp8Override: fields[15] == null ? 0 : fields[15] as double,
       priceOverride: fields[16] == null ? 0 : fields[16] as double,
+      comboDeal: fields[17] == null
+          ? PriceComboDealDto.empty
+          : fields[17] as PriceComboDealDto,
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_PriceDto obj) {
     writer
-      ..writeByte(17)
+      ..writeByte(18)
       ..writeByte(0)
       ..write(obj.materialNumber)
       ..writeByte(5)
@@ -69,6 +72,8 @@ class PriceDtoAdapter extends TypeAdapter<_$_PriceDto> {
       ..write(obj.zdp8Override)
       ..writeByte(16)
       ..write(obj.priceOverride)
+      ..writeByte(17)
+      ..write(obj.comboDeal)
       ..writeByte(1)
       ..write(obj.rules)
       ..writeByte(2)
@@ -126,6 +131,10 @@ _$_PriceDto _$$_PriceDtoFromJson(Map<String, dynamic> json) => _$_PriceDto(
       isPriceOverride: json['isPriceOverride'] as bool? ?? false,
       zdp8Override: (json['zdp8Override'] as num?)?.toDouble() ?? 0,
       priceOverride: (json['priceOverride'] as num?)?.toDouble() ?? 0,
+      comboDeal: json['ComboDeals'] == null
+          ? PriceComboDealDto.empty
+          : PriceComboDealDto.fromJson(
+              json['ComboDeals'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_PriceDtoToJson(_$_PriceDto instance) =>
@@ -147,4 +156,5 @@ Map<String, dynamic> _$$_PriceDtoToJson(_$_PriceDto instance) =>
       'isPriceOverride': instance.isPriceOverride,
       'zdp8Override': instance.zdp8Override,
       'priceOverride': instance.priceOverride,
+      'ComboDeals': instance.comboDeal.toJson(),
     };

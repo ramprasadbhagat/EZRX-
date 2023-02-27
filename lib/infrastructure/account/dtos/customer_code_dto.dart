@@ -43,6 +43,10 @@ class CustomerCodeDto with _$CustomerCodeDto {
     @JsonKey(name: 'region') required String region,
     @JsonKey(name: 'emailAddresses', defaultValue: [])
         required List<String> emailAddresses,
+    @JsonKey(name: 'comboEligible', defaultValue: false)
+        required bool comboEligible,
+    @JsonKey(name: 'salesDeals', defaultValue: [])
+        required List<String> salesDeals,
   }) = _CustomerCodeDto;
 
   CustomerCodeInfo toDomain() {
@@ -75,6 +79,8 @@ class CustomerCodeDto with _$CustomerCodeDto {
       customerGrp4: CustomerGrp4(customerGrp4),
       region: region,
       emailAddresses: emailAddresses.map((e) => EmailAddress(e)).toList(),
+      comboEligible: comboEligible,
+      salesDeals: salesDeals.map((e) => SalesDealNumber(e)).toList(),
       telephoneNumber: PhoneNumber(telephoneNumber),
     );
   }

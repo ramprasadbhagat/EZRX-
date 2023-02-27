@@ -175,6 +175,7 @@ void main() {
           customerCode: 'fake-customer-code',
           shipToCode: 'fake-ship-to-code',
           language: '',
+          listPriceOnly: false,
           queryString: [
             {
               'MaterialNumber': 'fake-material-1',
@@ -220,6 +221,7 @@ void main() {
           salesOrgCode: 'fake-saleOrg',
           customerCode: 'fake-customer-code',
           shipToCode: 'fake-ship-to-code',
+          listPriceOnly: false,
           language: '',
           queryString: [
             {
@@ -292,6 +294,7 @@ void main() {
           salesOrgCode: 'fake-saleOrg',
           customerCode: 'fake-customer-code',
           shipToCode: 'fake-ship-to-code',
+          listPriceOnly: false,
           language: '',
           queryString: [
             {
@@ -361,6 +364,7 @@ void main() {
           salesOrgCode: 'fake-saleOrg',
           customerCode: 'fake-customer-code',
           shipToCode: 'fake-ship-to-code',
+          listPriceOnly: false,
           language: '',
           queryString: [
             {
@@ -416,6 +420,7 @@ void main() {
           salesOrgCode: 'fake-saleOrg',
           customerCode: 'fake-customer-code',
           shipToCode: 'fake-ship-to-code',
+          listPriceOnly: false,
           language: '',
           queryString: [
             {

@@ -11,9 +11,11 @@ import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/application/order/combo_deal/combo_deal_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
+import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
@@ -100,6 +102,13 @@ class AdditionalDetailsBlocMock
     extends MockBloc<AdditionalDetailsEvent, AdditionalDetailsState>
     implements AdditionalDetailsBloc {}
 
+class MaterialPriceDetailBlocMock
+    extends MockBloc<MaterialPriceDetailEvent, MaterialPriceDetailState>
+    implements MaterialPriceDetailBloc {}
+
+class ComboDealListBlocMock
+    extends MockBloc<ComboDealListEvent, ComboDealListState>
+    implements ComboDealListBloc {}
 class ScanMaterialinfoBlocMock
     extends MockBloc<ScanMaterialInfoEvent, ScanMaterialInfoState>
     implements ScanMaterialInfoBloc {}
@@ -132,6 +141,8 @@ void main() {
   late AddToCartStub mockAddToCartStub;
   late TenderContractBloc mockTenderContractBloc;
   late AdditionalDetailsBloc mockAdditionalDetailsBloc;
+  late ComboDealListBloc mockComboDealListBloc;
+  late MaterialPriceDetailBloc mockMaterialPriceDetailBloc;
   late ScanMaterialInfoBloc mockScanMaterialInfoBloc;
   late AddToCartBloc mockAddToCartBloc;
 
@@ -196,6 +207,8 @@ void main() {
       eligibilityBlocMock = EligibilityBlocMock();
       mockTenderContractBloc = TenderContractBlocMock();
       mockAdditionalDetailsBloc = AdditionalDetailsBlocMock();
+      mockComboDealListBloc = ComboDealListBlocMock();
+      mockMaterialPriceDetailBloc = MaterialPriceDetailBlocMock();
       mockScanMaterialInfoBloc = ScanMaterialinfoBlocMock();
       mockAddToCartBloc = AddToCartBlocMock();
       when(() => userBlocMock.state).thenReturn(UserState.initial());
@@ -232,6 +245,10 @@ void main() {
           .thenReturn(ScanMaterialInfoState.initial());
       when(() => mockAdditionalDetailsBloc.state)
           .thenReturn(AdditionalDetailsState.initial());
+      when(() => mockMaterialPriceDetailBloc.state)
+          .thenReturn(MaterialPriceDetailState.initial());
+      when(() => mockComboDealListBloc.state)
+          .thenReturn(ComboDealListState.initial());
     });
 
     Widget getScopedWidget(Widget child) {
@@ -275,6 +292,10 @@ void main() {
                 create: ((context) => mockScanMaterialInfoBloc)),
             BlocProvider<AdditionalDetailsBloc>(
                 create: ((context) => mockAdditionalDetailsBloc)),
+            BlocProvider<MaterialPriceDetailBloc>(
+                create: ((context) => mockMaterialPriceDetailBloc)),
+            BlocProvider<ComboDealListBloc>(
+                create: ((context) => mockComboDealListBloc)),
             BlocProvider<AddToCartBloc>(
                 create: ((context) => mockAddToCartBloc)),
           ],

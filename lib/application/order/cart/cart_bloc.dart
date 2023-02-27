@@ -1,20 +1,20 @@
+import 'package:collection/collection.dart';
 import 'package:dartz/dartz.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
-
 import 'package:ezrxmobile/infrastructure/order/repository/cart_repository.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
-import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
-import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 
 part 'cart_bloc.freezed.dart';
 part 'cart_event.dart';
@@ -77,6 +77,27 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       );
     });
     on<_AddMaterialToCart>((e, emit) async {
+      final comboDealId = e.item.price.comboDeal.id;
+      //TODO: Currently, since each ComboDeal will have its id defined as {salesDeal}-{flexibleGroup}-{scheme}
+      // so I use startWith() to check if the added material already had its combo deal in cart
+      final inCartComboDeal = state.cartItems.firstWhereOrNull(
+        (item) => item.id.startsWith(comboDealId),
+      );
+      if (inCartComboDeal != null) {
+        add(
+          _UpdateComboDealItemQty(
+            updatedItem: e.item,
+            currentCombo: inCartComboDeal,
+            salesOrganisationConfigs: e.salesOrganisationConfigs,
+            salesOrganisation: e.salesOrganisation,
+            customerCodeInfo: e.customerCodeInfo,
+            shipToInfo: e.shipToInfo,
+            doNotallowOutOfStockMaterial: e.doNotallowOutOfStockMaterial,
+          ),
+        );
+
+        return;
+      }
       emit(
         state.copyWith(
           apiFailureOrSuccessOption: none(),
@@ -107,6 +128,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
 
         return;
       }
+
       final failureOrSuccess = await repository.addItemToCart(
         cartItem: CartItem.material(
           e.item.copyWith(
@@ -678,6 +700,137 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           emit(
             state.copyWith(
               cartItems: repository.updateDiscountQty(items: cartItemList),
+              apiFailureOrSuccessOption: none(),
+              isFetching: false,
+            ),
+          );
+        },
+      );
+    });
+    on<_AddComboDealToCart>((e, emit) async {
+      emit(
+        state.copyWith(
+          apiFailureOrSuccessOption: none(),
+          isFetching: true,
+        ),
+      );
+
+      final result = await repository.getStockInfoList(
+        items: e.comboDealItems.map((e) => e.materialInfo).toList(),
+        customerCodeInfo: e.customerCodeInfo,
+        salesOrganisationConfigs: e.salesOrganisationConfigs,
+        salesOrganisation: e.salesOrganisation,
+        shipToInfo: e.shipToInfo,
+      );
+      final stockInfoMap = result.getOrElse(() => {});
+      final comboWithStock =
+          CartItem.comboDeal(e.comboDealItems).copyWithStockInfo(
+        stockInfoMap: stockInfoMap,
+      );
+      if ([comboWithStock].allOutOfStock(
+            allowOutOfStock: !e.doNotallowOutOfStockMaterial,
+          ) ||
+          stockInfoMap.isEmpty) {
+        emit(
+          state.copyWith(
+            apiFailureOrSuccessOption: optionOf(
+              const Left(
+                ApiFailure.other('Product Not Available'),
+              ),
+            ),
+            isFetching: false,
+          ),
+        );
+
+        return;
+      }
+
+      final failureOrSuccess = await repository.addItemToCart(
+        cartItem: comboWithStock,
+        override: e.overrideQty,
+      );
+
+      await failureOrSuccess.fold(
+        (failure) {
+          emit(
+            state.copyWith(
+              apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+              isFetching: false,
+            ),
+          );
+        },
+        (cartItemList) async {
+          emit(
+            state.copyWith(
+              cartItems: cartItemList,
+              apiFailureOrSuccessOption: none(),
+              isFetching: false,
+            ),
+          );
+        },
+      );
+    });
+    on<_UpdateComboDealItemQty>((e, emit) async {
+      emit(
+        state.copyWith(
+          apiFailureOrSuccessOption: none(),
+          isFetching: true,
+        ),
+      );
+
+      final result = await repository.getStockInfo(
+        material: e.updatedItem.materialInfo,
+        customerCodeInfo: e.customerCodeInfo,
+        salesOrganisationConfigs: e.salesOrganisationConfigs,
+        salesOrganisation: e.salesOrganisation,
+        shipToInfo: e.shipToInfo,
+      );
+      final stockInfo = result.getOrElse(() => StockInfo.empty());
+      if (!stockInfo.inStock.isMaterialInStock &&
+          e.doNotallowOutOfStockMaterial) {
+        emit(
+          state.copyWith(
+            apiFailureOrSuccessOption: optionOf(
+              const Left(
+                ApiFailure.other('Product Not Available'),
+              ),
+            ),
+            isFetching: false,
+          ),
+        );
+
+        return;
+      }
+      final updatedBundle = e.currentCombo.copyWith(
+        materials: e.currentCombo.materials.map((item) {
+          if (item.getMaterialNumber == e.updatedItem.getMaterialNumber) {
+            return item
+                .copyWithIncreasedQty(qty: e.updatedItem.quantity)
+                .copyWith(stockInfo: stockInfo);
+          }
+
+          return item;
+        }).toList(),
+      );
+
+      final failureOrSuccess = await repository.addItemToCart(
+        cartItem: updatedBundle,
+        override: true,
+      );
+
+      await failureOrSuccess.fold(
+        (failure) {
+          emit(
+            state.copyWith(
+              apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+              isFetching: false,
+            ),
+          );
+        },
+        (cartItemList) async {
+          emit(
+            state.copyWith(
+              cartItems: cartItemList,
               apiFailureOrSuccessOption: none(),
               isFetching: false,
             ),

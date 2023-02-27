@@ -87,31 +87,31 @@ void main() {
       BundleInfo(
         sequence: 1,
         quantity: 1,
-        type: MaterialBundleType('%'),
+        type: DiscountType('%'),
         rate: -10,
       ),
       BundleInfo(
         sequence: 4,
         quantity: 10,
-        type: MaterialBundleType('%'),
+        type: DiscountType('%'),
         rate: -15,
       ),
       BundleInfo(
         sequence: 7,
         quantity: 15,
-        type: MaterialBundleType('%'),
+        type: DiscountType('%'),
         rate: -20,
       ),
       BundleInfo(
         sequence: 13,
         quantity: 50,
-        type: MaterialBundleType('%'),
+        type: DiscountType('%'),
         rate: -30,
       ),
       BundleInfo(
         sequence: 10,
         quantity: 20,
-        type: MaterialBundleType('%'),
+        type: DiscountType('%'),
         rate: -25,
       ),
     ];
@@ -296,7 +296,7 @@ void main() {
           Stream.fromIterable([
             materialBundleListBloc.state,
             materialBundleListBloc.state.copyWith(
-              apiFailureOrSuccessOption: none()
+              apiFailureOrSuccessOption: none(),
             )
           ]));
       final handle = tester.ensureSemantics();

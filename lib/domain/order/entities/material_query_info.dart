@@ -22,6 +22,7 @@ class MaterialQueryInfo with _$MaterialQueryInfo {
     required MaterialQty qty,
     @Default(0) double priceOverride,
     @Default(0) double zdp8Override,
+    @Default(false) bool isComboDealMaterial,
     required TenderContract tenderContract,
   }) = _MaterialQueryInfo;
 
@@ -121,6 +122,14 @@ class MaterialQueryInfo with _$MaterialQueryInfo {
         tenderContract: TenderContract.fromOrderHistory(
           orderHistoryDetailsOrderItem.tenderContractDetails,
         ),
+      );
+
+  factory MaterialQueryInfo.fromComboDealMaterial({
+    required MaterialNumber materialNumber,
+  }) =>
+      MaterialQueryInfo.empty().copyWith(
+        value: materialNumber,
+        isComboDealMaterial: true,
       );
 
   Map<String, dynamic> get priceQuery {

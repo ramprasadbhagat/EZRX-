@@ -15,6 +15,15 @@ class MaterialPriceDetailState with _$MaterialPriceDetailState {
         materialDetails: {},
       );
 
+  Map<MaterialNumber, MaterialPriceDetail> get comboDealMaterialDetails {
+    final comboDealMaterialDetails = {...materialDetails}
+      ..removeWhere((key, value) => !key.isComboDealMaterial);
+
+    return comboDealMaterialDetails.map(
+      (key, value) => MapEntry(key.value, value),
+    );
+  }
+
   bool isValidMaterial({required MaterialQueryInfo query}) {
     final itemDetail = materialDetails[query];
     if (itemDetail != null && itemDetail.price.isValidMaterial) {

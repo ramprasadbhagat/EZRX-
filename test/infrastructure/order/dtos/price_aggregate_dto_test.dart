@@ -2,9 +2,11 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/sales_organisation_configs_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/bundle_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/combo_deal_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_item_bonus_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_aggregate_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/price_combo_deal_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/stock_info_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/tender_contract_dto.dart';
@@ -58,23 +60,25 @@ void main() {
             therapeuticClass: '',
             unitOfMeasurement: ''),
         priceDto: const PriceDto(
-            additionalBonusEligible: false,
-            bonuses: [],
-            bundles: [],
-            finalIndividualPrice: 0,
-            finalTotalPrice: 0,
-            isPriceOverride: false,
-            isValid: true,
-            listPrice: 10,
-            materialNumber: '',
-            overrideRulePresent: true,
-            priceOverride: 10,
-            rules: [],
-            tiers: [],
-            zdp5MaxQuota: '',
-            zdp5RemainingQuota: '',
-            zdp8Override: 0,
-            zmgDiscount: false),
+          additionalBonusEligible: false,
+          bonuses: [],
+          bundles: [],
+          finalIndividualPrice: 0,
+          finalTotalPrice: 0,
+          isPriceOverride: false,
+          isValid: true,
+          listPrice: 10,
+          materialNumber: '',
+          overrideRulePresent: true,
+          priceOverride: 10,
+          rules: [],
+          tiers: [],
+          zdp5MaxQuota: '',
+          zdp5RemainingQuota: '',
+          zdp8Override: 0,
+          zmgDiscount: false,
+          comboDeal: PriceComboDealDto.empty,
+        ),
         quantity: 10,
         salesOrganisationConfigsDto: SalesOrganisationConfigsDto.fromDomain(
             SalesOrganisationConfigs.empty().copyWith(
@@ -104,6 +108,7 @@ void main() {
             isNearToExpire: false,
             contractPaymentTerm: 'contractPaymentTerm'),
         zmgMaterialCountOnCart: 10,
+        comboDealDto: ComboDealDto.empty,
       );
     });
     test('Test toDomain', () {
