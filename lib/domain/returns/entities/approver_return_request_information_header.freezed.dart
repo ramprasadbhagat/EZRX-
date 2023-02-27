@@ -21,7 +21,7 @@ mixin _$ApproverReturnRequestInformationHeader {
   String get createdBy => throw _privateConstructorUsedError;
   String get returnType => throw _privateConstructorUsedError;
   String get status => throw _privateConstructorUsedError;
-  String get createdDate => throw _privateConstructorUsedError;
+  DateTimeStringValue get createdDate => throw _privateConstructorUsedError;
   String get createdTime => throw _privateConstructorUsedError;
   String get requestID => throw _privateConstructorUsedError;
   SalesOrg get salesOrg => throw _privateConstructorUsedError;
@@ -60,7 +60,7 @@ abstract class $ApproverReturnRequestInformationHeaderCopyWith<$Res> {
       String createdBy,
       String returnType,
       String status,
-      String createdDate,
+      DateTimeStringValue createdDate,
       String createdTime,
       String requestID,
       SalesOrg salesOrg,
@@ -142,7 +142,7 @@ class _$ApproverReturnRequestInformationHeaderCopyWithImpl<$Res,
       createdDate: null == createdDate
           ? _value.createdDate
           : createdDate // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DateTimeStringValue,
       createdTime: null == createdTime
           ? _value.createdTime
           : createdTime // ignore: cast_nullable_to_non_nullable
@@ -230,7 +230,7 @@ abstract class _$$_ApproverReturnRequestInformationHeaderCopyWith<$Res>
       String createdBy,
       String returnType,
       String status,
-      String createdDate,
+      DateTimeStringValue createdDate,
       String createdTime,
       String requestID,
       SalesOrg salesOrg,
@@ -311,7 +311,7 @@ class __$$_ApproverReturnRequestInformationHeaderCopyWithImpl<$Res>
       createdDate: null == createdDate
           ? _value.createdDate
           : createdDate // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DateTimeStringValue,
       createdTime: null == createdTime
           ? _value.createdTime
           : createdTime // ignore: cast_nullable_to_non_nullable
@@ -426,7 +426,7 @@ class _$_ApproverReturnRequestInformationHeader
   @override
   final String status;
   @override
-  final String createdDate;
+  final DateTimeStringValue createdDate;
   @override
   final String createdTime;
   @override
@@ -561,7 +561,7 @@ abstract class _ApproverReturnRequestInformationHeader
           required final String createdBy,
           required final String returnType,
           required final String status,
-          required final String createdDate,
+          required final DateTimeStringValue createdDate,
           required final String createdTime,
           required final String requestID,
           required final SalesOrg salesOrg,
@@ -592,7 +592,7 @@ abstract class _ApproverReturnRequestInformationHeader
   @override
   String get status;
   @override
-  String get createdDate;
+  DateTimeStringValue get createdDate;
   @override
   String get createdTime;
   @override

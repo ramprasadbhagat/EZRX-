@@ -1,5 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/domain/core/value/constants.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -63,25 +65,23 @@ void main() {
 
   group('InvoiceDate value object', () {
     test(
-      'should return DateTime',
+      'should return DateTimeStringValue',
       () async {
-        final input =
-            DateTime.parse(DateFormat('yyyyMMdd').format(DateTime.now()));
-        final simpleInvoiceDate = InvoiceDate(input.toIso8601String());
-        final dateTimebyDateString = simpleInvoiceDate.dateTimebyDateString;
-        expect(dateTimebyDateString, input);
+        final input =getDateStringByDateTime( DateTime.now());
+        final simpleInvoiceDate = DateTimeStringValue(input);
+        final dateTimeByDateString = simpleInvoiceDate.apiDateTimeFormat;
+        expect(dateTimeByDateString, input);
       },
     );
 
     test(
       'should return Formated Date String (yyyyMMdd)',
       () async {
-        final input =
-            DateTime.parse(DateFormat('yyyyMMdd').format(DateTime.now()));
-        final simpleInvoiceDate = InvoiceDate(input.toIso8601String());
-        final apiParameterValueOrEmpty =
-            simpleInvoiceDate.apiParameterValue;
-        expect(apiParameterValueOrEmpty, DateFormat('yyyyMMdd').format(input));
+        final input = DateTime.now();
+        final simpleInvoiceDate = DateTimeStringValue(getDateStringByDateTime(input));
+        final apiParameterValueOrEmpty = simpleInvoiceDate.apiDateTimeFormat;
+        expect(apiParameterValueOrEmpty,
+            DateFormat(DateTimeFormatString.apiFormat).format(input));
       },
     );
   });

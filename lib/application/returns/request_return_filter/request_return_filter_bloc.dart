@@ -29,8 +29,8 @@ class RequestReturnFilterBloc
             state.requestReturnFilter.materialDescription.isValid() &&
             state.requestReturnFilter.materialNumber.isValid() &&
             _doDateValidation(
-              state.requestReturnFilter.fromInvoiceDate,
-              state.requestReturnFilter.toInvoiceDate,
+              state.requestReturnFilter.fromInvoiceDate.dateTimeByDateString,
+              state.requestReturnFilter.toInvoiceDate.dateTimeByDateString,
             )) {
           emit(state.copyWith(
             isSubmitting: true,

@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/approver_return_request_information_header.dart';
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
@@ -48,7 +49,7 @@ class ApproverReturnRequestInformationHeaderDto
       cName3: cName3,
       cName4: cName4,
       createdBy: createdBy,
-      createdDate: createdDate,
+      createdDate: DateTimeStringValue(createdDate) ,
       createdTime: createdTime,
       ppaHeld: ppaHeld,
       refundTotal: RefundTotal(refundTotal),

@@ -2,6 +2,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_approver_filter.dart';
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,7 @@ void main() {
     ),
   );
 
-  final fakeFormDate = DateTime.parse(
+  final fakeFromDate = DateTime.parse(
     DateFormat('yyyyMMdd').format(
       DateTime.now().subtract(
         const Duration(days: 7),
@@ -23,7 +24,7 @@ void main() {
   );
 
   final dateTimeRange = DateTimeRange(
-    start: fakeFormDate,
+    start: fakeFromDate,
     end: fakeToDate,
   );
 
@@ -44,11 +45,11 @@ void main() {
       'createdBy Changed',
       seed: () => ReturnApproverFilterState.initial().copyWith(
         approverReturnFilter: ReturnApproverFilter.empty().copyWith(
-          toInvoiceDate: InvoiceDate(
-            fakeToDate.toIso8601String(),
+          toInvoiceDate: DateTimeStringValue(
+           getDateStringByDateTime(fakeToDate),
           ),
-          fromInvoiceDate: InvoiceDate(
-            fakeFormDate.toIso8601String(),
+          fromInvoiceDate: DateTimeStringValue(
+            getDateStringByDateTime(fakeFromDate),
           ),
         ),
       ),
@@ -64,11 +65,11 @@ void main() {
         ReturnApproverFilterState.initial().copyWith(
           approverReturnFilter: ReturnApproverFilter.empty().copyWith(
             createdBy: SearchKey.searchFilter('test-user'),
-            toInvoiceDate: InvoiceDate(
-              fakeToDate.toIso8601String(),
+            toInvoiceDate: DateTimeStringValue(
+              getDateStringByDateTime(fakeToDate),
             ),
-            fromInvoiceDate: InvoiceDate(
-              fakeFormDate.toIso8601String(),
+            fromInvoiceDate: DateTimeStringValue(
+              getDateStringByDateTime(fakeFromDate),
             ),
           ),
         ),
@@ -80,11 +81,11 @@ void main() {
       build: (() => ReturnApproverFilterBloc()),
       seed: () => ReturnApproverFilterState.initial().copyWith(
         approverReturnFilter: ReturnApproverFilter.empty().copyWith(
-          toInvoiceDate: InvoiceDate(
-            fakeToDate.toIso8601String(),
+          toInvoiceDate: DateTimeStringValue(
+            getDateStringByDateTime(fakeToDate),
           ),
-          fromInvoiceDate: InvoiceDate(
-            fakeFormDate.toIso8601String(),
+          fromInvoiceDate: DateTimeStringValue(
+            getDateStringByDateTime(fakeFromDate),
           ),
         ),
       ),
@@ -99,11 +100,11 @@ void main() {
         ReturnApproverFilterState.initial().copyWith(
           approverReturnFilter: ReturnApproverFilter.empty().copyWith(
             returnId: SearchKey.searchFilter('fake-id'),
-            toInvoiceDate: InvoiceDate(
-              fakeToDate.toIso8601String(),
+            toInvoiceDate: DateTimeStringValue(
+              getDateStringByDateTime(fakeToDate),
             ),
-            fromInvoiceDate: InvoiceDate(
-              fakeFormDate.toIso8601String(),
+            fromInvoiceDate: DateTimeStringValue(
+              getDateStringByDateTime(fakeFromDate),
             ),
           ),
         ),
@@ -115,11 +116,11 @@ void main() {
       build: (() => ReturnApproverFilterBloc()),
       seed: () => ReturnApproverFilterState.initial().copyWith(
         approverReturnFilter: ReturnApproverFilter.empty().copyWith(
-          toInvoiceDate: InvoiceDate(
-            fakeToDate.toIso8601String(),
+          toInvoiceDate: DateTimeStringValue(
+            getDateStringByDateTime(fakeToDate),
           ),
-          fromInvoiceDate: InvoiceDate(
-            fakeFormDate.toIso8601String(),
+          fromInvoiceDate: DateTimeStringValue(
+            getDateStringByDateTime(fakeFromDate),
           ),
         ),
       ),
@@ -134,11 +135,11 @@ void main() {
         ReturnApproverFilterState.initial().copyWith(
           approverReturnFilter: ReturnApproverFilter.empty().copyWith(
             shipTo: SearchKey.searchFilter('fake-shipTo'),
-            toInvoiceDate: InvoiceDate(
-              fakeToDate.toIso8601String(),
+            toInvoiceDate: DateTimeStringValue(
+              getDateStringByDateTime(fakeToDate),
             ),
-            fromInvoiceDate: InvoiceDate(
-              fakeFormDate.toIso8601String(),
+            fromInvoiceDate: DateTimeStringValue(
+              getDateStringByDateTime(fakeFromDate),
             ),
           ),
         ),
@@ -150,11 +151,11 @@ void main() {
       build: (() => ReturnApproverFilterBloc()),
       seed: () => ReturnApproverFilterState.initial().copyWith(
         approverReturnFilter: ReturnApproverFilter.empty().copyWith(
-          toInvoiceDate: InvoiceDate(
-            fakeToDate.toIso8601String(),
+          toInvoiceDate: DateTimeStringValue(
+            getDateStringByDateTime(fakeToDate),
           ),
-          fromInvoiceDate: InvoiceDate(
-            fakeFormDate.toIso8601String(),
+          fromInvoiceDate: DateTimeStringValue(
+            getDateStringByDateTime(fakeFromDate),
           ),
         ),
       ),
@@ -169,11 +170,11 @@ void main() {
         ReturnApproverFilterState.initial().copyWith(
           approverReturnFilter: ReturnApproverFilter.empty().copyWith(
             soldTo: SearchKey.searchFilter('fake-soldTo'),
-            toInvoiceDate: InvoiceDate(
-              fakeToDate.toIso8601String(),
+            toInvoiceDate: DateTimeStringValue(
+              getDateStringByDateTime(fakeToDate),
             ),
-            fromInvoiceDate: InvoiceDate(
-              fakeFormDate.toIso8601String(),
+            fromInvoiceDate: DateTimeStringValue(
+              getDateStringByDateTime(fakeFromDate),
             ),
           ),
         ),
@@ -193,11 +194,11 @@ void main() {
       expect: () => [
         ReturnApproverFilterState.initial().copyWith(
           approverReturnFilter: ReturnApproverFilter.empty().copyWith(
-            toInvoiceDate: InvoiceDate(
-              fakeToDate.toIso8601String(),
+            toInvoiceDate: DateTimeStringValue(
+              getDateStringByDateTime(fakeToDate),
             ),
-            fromInvoiceDate: InvoiceDate(
-              fakeFormDate.toIso8601String(),
+            fromInvoiceDate: DateTimeStringValue(
+              getDateStringByDateTime(fakeFromDate),
             ),
           ),
         ),
@@ -210,11 +211,11 @@ void main() {
       build: (() => ReturnApproverFilterBloc()),
       seed: () => ReturnApproverFilterState.initial().copyWith(
         approverReturnFilter: ReturnApproverFilter.empty().copyWith(
-          toInvoiceDate: InvoiceDate(
-            fakeToDate.toIso8601String(),
+          toInvoiceDate: DateTimeStringValue(
+            getDateStringByDateTime(fakeToDate),
           ),
-          fromInvoiceDate: InvoiceDate(
-            fakeFormDate.toIso8601String(),
+          fromInvoiceDate: DateTimeStringValue(
+            getDateStringByDateTime(fakeFromDate),
           ),
         ),
       ),
@@ -229,11 +230,11 @@ void main() {
         ReturnApproverFilterState.initial().copyWith(
           approverReturnFilter: ReturnApproverFilter.empty().copyWith(
             sortBy: FilterStatus('ALL'),
-            toInvoiceDate: InvoiceDate(
-              fakeToDate.toIso8601String(),
+            toInvoiceDate: DateTimeStringValue(
+              getDateStringByDateTime(fakeToDate),
             ),
-            fromInvoiceDate: InvoiceDate(
-              fakeFormDate.toIso8601String(),
+            fromInvoiceDate: DateTimeStringValue(
+              getDateStringByDateTime(fakeFromDate),
             ),
           ),
         ),
@@ -246,11 +247,11 @@ void main() {
       seed: () => ReturnApproverFilterState.initial().copyWith(
         approverReturnFilter: ReturnApproverFilter.empty().copyWith(
           returnId: SearchKey.searchFilter('searchtext'),
-          toInvoiceDate: InvoiceDate(
-            fakeToDate.toIso8601String(),
+          toInvoiceDate: DateTimeStringValue(
+            getDateStringByDateTime(fakeToDate),
           ),
-          fromInvoiceDate: InvoiceDate(
-            fakeFormDate.toIso8601String(),
+          fromInvoiceDate: DateTimeStringValue(
+            getDateStringByDateTime(fakeFromDate),
           ),
         ),
       ),
@@ -264,11 +265,11 @@ void main() {
           isSubmitting: true,
           approverReturnFilter: ReturnApproverFilter.empty().copyWith(
             returnId: SearchKey.searchFilter('searchtext'),
-            toInvoiceDate: InvoiceDate(
-              fakeToDate.toIso8601String(),
+            toInvoiceDate: DateTimeStringValue(
+              getDateStringByDateTime(fakeToDate),
             ),
-            fromInvoiceDate: InvoiceDate(
-              fakeFormDate.toIso8601String(),
+            fromInvoiceDate: DateTimeStringValue(
+              getDateStringByDateTime(fakeFromDate),
             ),
           ),
         ),
@@ -281,11 +282,11 @@ void main() {
       seed: () => ReturnApproverFilterState.initial().copyWith(
         approverReturnFilter: ReturnApproverFilter.empty().copyWith(
           returnId: SearchKey.searchFilter('12'),
-          toInvoiceDate: InvoiceDate(
-            fakeToDate.toIso8601String(),
+          toInvoiceDate: DateTimeStringValue(
+            getDateStringByDateTime(fakeToDate),
           ),
-          fromInvoiceDate: InvoiceDate(
-            fakeFormDate.toIso8601String(),
+          fromInvoiceDate: DateTimeStringValue(
+            getDateStringByDateTime(fakeFromDate),
           ),
         ),
       ),
@@ -299,11 +300,11 @@ void main() {
           showErrorMessages: true,
           approverReturnFilter: ReturnApproverFilter.empty().copyWith(
             returnId: SearchKey.searchFilter('12'),
-            toInvoiceDate: InvoiceDate(
-              fakeToDate.toIso8601String(),
+            toInvoiceDate: DateTimeStringValue(
+              getDateStringByDateTime(fakeToDate),
             ),
-            fromInvoiceDate: InvoiceDate(
-              fakeFormDate.toIso8601String(),
+            fromInvoiceDate: DateTimeStringValue(
+              getDateStringByDateTime(fakeFromDate),
             ),
           ),
         ),

@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -13,8 +14,8 @@ class ReturnApproverFilter with _$ReturnApproverFilter {
     required SearchKey createdBy,
     required SearchKey soldTo,
     required SearchKey shipTo,
-    required InvoiceDate toInvoiceDate,
-    required InvoiceDate fromInvoiceDate,
+    required DateTimeStringValue fromInvoiceDate,
+    required DateTimeStringValue toInvoiceDate,
     required FilterStatus sortBy,
   }) = _ReturnApproverFilter;
 
@@ -23,18 +24,22 @@ class ReturnApproverFilter with _$ReturnApproverFilter {
         createdBy: SearchKey.searchFilter(''),
         soldTo: SearchKey.searchFilter(''),
         shipTo: SearchKey.searchFilter(''),
-        toInvoiceDate: InvoiceDate(DateTime.now().toIso8601String()),
-        fromInvoiceDate: InvoiceDate(
-          DateTime.now().subtract(const Duration(days: 7)).toIso8601String(),
+        fromInvoiceDate: DateTimeStringValue(
+          getDateStringByDateTime(
+            DateTime.now().subtract(const Duration(days: 7)),
+          ),
+        ),
+        toInvoiceDate: DateTimeStringValue(
+          getDateStringByDateTime(DateTime.now()),
         ),
         sortBy: FilterStatus('PENDING'),
       );
 
   String get getFilteredInvoiceDate =>
-      '${fromInvoiceDate.getFormattedDate} to ${toInvoiceDate.getFormattedDate} ';
+      '${fromInvoiceDate.toValidDateString} to ${toInvoiceDate.toValidDateString}';
 
   DateTimeRange get getInvoiceFilterDateRange => DateTimeRange(
-        start: fromInvoiceDate.dateTimebyDateString,
-        end: toInvoiceDate.dateTimebyDateString,
+        start: fromInvoiceDate.dateTimeByDateString,
+        end: toInvoiceDate.dateTimeByDateString,
       );
 }

@@ -62,10 +62,8 @@ class ReturnApproverFilterDto with _$ReturnApproverFilterDto {
       createdBy: returnApproverFilter.createdBy.searchValueOrEmpty,
       soldTo: returnApproverFilter.soldTo.searchValueOrEmpty,
       shipTo: returnApproverFilter.shipTo.searchValueOrEmpty,
-      dateTo:
-          returnApproverFilter.toInvoiceDate.apiParameterValue,
-      dateFrom:
-          returnApproverFilter.fromInvoiceDate.apiParameterValue,
+      dateTo: returnApproverFilter.toInvoiceDate.apiDateTimeFormat,
+      dateFrom: returnApproverFilter.fromInvoiceDate.apiDateTimeFormat,
       status: returnApproverFilter.sortBy.apiSortValueOrEmpty,
     );
   }
@@ -74,6 +72,4 @@ class ReturnApproverFilterDto with _$ReturnApproverFilterDto {
       _$ReturnApproverFilterDtoFromJson(json);
 }
 
-dynamic valueTojson(String value) =>
-    value.isNotEmpty ? value : null;
-
+dynamic valueTojson(String value) => value.isNotEmpty ? value : null;

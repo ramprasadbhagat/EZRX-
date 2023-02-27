@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
@@ -46,13 +45,8 @@ class RequestReturnRepository extends IReturnRequestRepository {
     try {
       final returnRequest = await remoteDataSource.searchReturnMaterials(
         batch: requestReturnFilter.batch.getOrDefaultValue(''),
-        dateFrom: requestReturnFilter.fromInvoiceDate != null
-            ? DateFormat('yyyyMMdd')
-                .format(requestReturnFilter.fromInvoiceDate!)
-            : '',
-        dateTo: requestReturnFilter.toInvoiceDate != null
-            ? DateFormat('yyyyMMdd').format(requestReturnFilter.toInvoiceDate!)
-            : '',
+        dateFrom: requestReturnFilter.fromInvoiceDate.apiDateTimeFormat,
+        dateTo: requestReturnFilter.toInvoiceDate.apiDateTimeFormat,
         invoiceNo: requestReturnFilter.assignmentNumber.getOrDefaultValue(''),
         materialDescription:
             requestReturnFilter.materialDescription.getOrDefaultValue(''),

@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -14,7 +15,7 @@ class ApproverReturnRequestInformationHeader
     required String createdBy,
     required String returnType,
     required String status,
-    required String createdDate,
+    required DateTimeStringValue createdDate,
     required String createdTime,
     required String requestID,
     required SalesOrg salesOrg,
@@ -41,7 +42,7 @@ class ApproverReturnRequestInformationHeader
         cName3: '',
         cName4: '',
         createdBy: '',
-        createdDate: '',
+        createdDate: DateTimeStringValue(''),
         createdTime: '',
         ppaHeld: false,
         refundTotal: RefundTotal(''),

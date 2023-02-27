@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/returns/request_return_filter/request_return_filter_bloc.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -327,12 +329,7 @@ class __InvoiceFromDateByFilterState extends State<_InvoiceFromDateByFilter> {
     txtfromDateController = TextEditingController();
     requestReturnFilterBloc = context.read<RequestReturnFilterBloc>();
     txtfromDateController.text = requestReturnFilterBloc
-                .state.requestReturnFilter.fromInvoiceDate !=
-            null
-        ? DateFormat('dd/MM/yyyy').format(
-            requestReturnFilterBloc.state.requestReturnFilter.fromInvoiceDate!,
-          )
-        : '';
+        .state.requestReturnFilter.fromInvoiceDate.toValidDateString;
 
     super.initState();
   }
@@ -354,25 +351,17 @@ class __InvoiceFromDateByFilterState extends State<_InvoiceFromDateByFilter> {
               current.requestReturnFilter.toInvoiceDate,
       listener: (context, state) {
         txtfromDateController.text =
-            state.requestReturnFilter.fromInvoiceDate != null
-                ? DateFormat('dd/MM/yyyy')
-                    .format(state.requestReturnFilter.fromInvoiceDate!)
-                : '';
+            state.requestReturnFilter.fromInvoiceDate.toValidDateString;
       },
       child: Expanded(
         child: TextFormField(
           key: const Key('filteInvoiceFromdateField'),
           onTap: () async {
             final state = context.read<RequestReturnFilterBloc>().state;
-            final fromDateTime = state.requestReturnFilter.fromInvoiceDate ??
-                (state.requestReturnFilter.toInvoiceDate == null
-                    ? DateTime.now()
-                    : state.requestReturnFilter.toInvoiceDate!
-                        .subtract(const Duration(
-                        days: 1,
-                      )));
+            final fromDateTime =
+                state.requestReturnFilter.fromInvoiceDate.dateTimeByDateString;
             final toDateTime =
-                state.requestReturnFilter.toInvoiceDate ?? DateTime.now();
+                state.requestReturnFilter.toInvoiceDate.dateTimeByDateString;
             final orderDate = await showPlatformDatePicker(
               context: context,
               initialDate: fromDateTime,
@@ -381,7 +370,9 @@ class __InvoiceFromDateByFilterState extends State<_InvoiceFromDateByFilter> {
             );
             requestReturnFilterBloc.add(
               RequestReturnFilterEvent.setInvoicefromDate(
-                fromInvoiceDate: orderDate!,
+                fromInvoiceDate: DateTimeStringValue(
+                  getDateStringByDateTime(orderDate!),
+                ),
               ),
             );
           },
@@ -418,13 +409,8 @@ class __InvoiceToDateByFilterState extends State<_InvoiceToDateByFilter> {
   void initState() {
     txttoDateController = TextEditingController();
     requestReturnFilterBloc = context.read<RequestReturnFilterBloc>();
-    txttoDateController.text =
-        requestReturnFilterBloc.state.requestReturnFilter.toInvoiceDate != null
-            ? DateFormat('dd/MM/yyyy').format(
-                requestReturnFilterBloc
-                    .state.requestReturnFilter.toInvoiceDate!,
-              )
-            : '';
+    txttoDateController.text = requestReturnFilterBloc
+        .state.requestReturnFilter.toInvoiceDate.toValidDateString;
 
     super.initState();
   }
@@ -448,10 +434,7 @@ class __InvoiceToDateByFilterState extends State<_InvoiceToDateByFilter> {
         state,
       ) {
         txttoDateController.text =
-            state.requestReturnFilter.toInvoiceDate != null
-                ? DateFormat('dd/MM/yyyy')
-                    .format(state.requestReturnFilter.toInvoiceDate!)
-                : '';
+            state.requestReturnFilter.toInvoiceDate.toValidDateString;
       },
       child: Expanded(
         child: TextFormField(
@@ -459,9 +442,9 @@ class __InvoiceToDateByFilterState extends State<_InvoiceToDateByFilter> {
           onTap: () async {
             final state = context.read<RequestReturnFilterBloc>().state;
             final toExpiryDate =
-                state.requestReturnFilter.toInvoiceDate ?? DateTime.now();
-            final fromExpiryDate = state.requestReturnFilter.fromInvoiceDate ??
-                DateTime.now().subtract(const Duration(days: 1460));
+                state.requestReturnFilter.toInvoiceDate.dateTimeByDateString;
+            final fromExpiryDate =
+                state.requestReturnFilter.fromInvoiceDate.dateTimeByDateString;
             final orderDate = await showPlatformDatePicker(
               context: context,
               initialDate: toExpiryDate,
@@ -471,7 +454,9 @@ class __InvoiceToDateByFilterState extends State<_InvoiceToDateByFilter> {
 
             requestReturnFilterBloc.add(
               RequestReturnFilterEvent.setInvoiceToDate(
-                toInvoiceDate: orderDate!,
+                toInvoiceDate: DateTimeStringValue(
+                  getDateStringByDateTime(orderDate!),
+                ),
               ),
             );
           },

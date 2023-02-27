@@ -19,7 +19,7 @@ Either<ValueFailure<String>, String> validateStringNotEmpty(String input) {
 }
 
 Either<ValueFailure<String>, String> validateDateString(String input) {
-  return input.isEmpty || input.length == 8
+  return DateTime.tryParse(input) != null
       ? right(input)
       : left(ValueFailure.invalidDateValue(failedValue: input));
 }

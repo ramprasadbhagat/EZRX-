@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
+import 'package:ezrxmobile/domain/core/value/constants.dart';
 
 String stringCapitalize(String text) {
   if (text.isEmpty) return '';
@@ -102,5 +103,20 @@ String displayDateStringOrEmpty(String text) {
     return '';
   }
 
-  return DateFormat('dd MMM yyyy').format(parsedDate);
+  return DateFormat(DateTimeFormatString.displayFormat).format(parsedDate);
 }
+
+String formattedDateTimeForAPI(String text) {
+  final parsedDate = DateTime.tryParse(text);
+  if (parsedDate == null) {
+    return '';
+  }
+
+  return DateFormat(DateTimeFormatString.apiFormat).format(parsedDate);
+}
+
+DateTime getDateTimeByDateString(String value) =>
+    DateTime.tryParse(value) ?? DateTime.now();
+
+String getDateStringByDateTime(DateTime dateTime) =>
+    DateFormat(DateTimeFormatString.apiFormat).format(dateTime);

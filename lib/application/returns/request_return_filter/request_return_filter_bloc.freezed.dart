@@ -20,8 +20,10 @@ mixin _$RequestReturnFilterEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function() filterRequestReturn,
-    required TResult Function(DateTime fromInvoiceDate) setInvoicefromDate,
-    required TResult Function(DateTime toInvoiceDate) setInvoiceToDate,
+    required TResult Function(DateTimeStringValue fromInvoiceDate)
+        setInvoicefromDate,
+    required TResult Function(DateTimeStringValue toInvoiceDate)
+        setInvoiceToDate,
     required TResult Function(String assignmentNumber) assignmentNumberChanged,
     required TResult Function(String batchNumber) batchChanged,
     required TResult Function(String principalSearch) principalSearchChanged,
@@ -35,8 +37,8 @@ mixin _$RequestReturnFilterEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function()? filterRequestReturn,
-    TResult? Function(DateTime fromInvoiceDate)? setInvoicefromDate,
-    TResult? Function(DateTime toInvoiceDate)? setInvoiceToDate,
+    TResult? Function(DateTimeStringValue fromInvoiceDate)? setInvoicefromDate,
+    TResult? Function(DateTimeStringValue toInvoiceDate)? setInvoiceToDate,
     TResult? Function(String assignmentNumber)? assignmentNumberChanged,
     TResult? Function(String batchNumber)? batchChanged,
     TResult? Function(String principalSearch)? principalSearchChanged,
@@ -49,8 +51,8 @@ mixin _$RequestReturnFilterEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function()? filterRequestReturn,
-    TResult Function(DateTime fromInvoiceDate)? setInvoicefromDate,
-    TResult Function(DateTime toInvoiceDate)? setInvoiceToDate,
+    TResult Function(DateTimeStringValue fromInvoiceDate)? setInvoicefromDate,
+    TResult Function(DateTimeStringValue toInvoiceDate)? setInvoiceToDate,
     TResult Function(String assignmentNumber)? assignmentNumberChanged,
     TResult Function(String batchNumber)? batchChanged,
     TResult Function(String principalSearch)? principalSearchChanged,
@@ -169,8 +171,10 @@ class _$_Initialized implements _Initialized {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function() filterRequestReturn,
-    required TResult Function(DateTime fromInvoiceDate) setInvoicefromDate,
-    required TResult Function(DateTime toInvoiceDate) setInvoiceToDate,
+    required TResult Function(DateTimeStringValue fromInvoiceDate)
+        setInvoicefromDate,
+    required TResult Function(DateTimeStringValue toInvoiceDate)
+        setInvoiceToDate,
     required TResult Function(String assignmentNumber) assignmentNumberChanged,
     required TResult Function(String batchNumber) batchChanged,
     required TResult Function(String principalSearch) principalSearchChanged,
@@ -187,8 +191,8 @@ class _$_Initialized implements _Initialized {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function()? filterRequestReturn,
-    TResult? Function(DateTime fromInvoiceDate)? setInvoicefromDate,
-    TResult? Function(DateTime toInvoiceDate)? setInvoiceToDate,
+    TResult? Function(DateTimeStringValue fromInvoiceDate)? setInvoicefromDate,
+    TResult? Function(DateTimeStringValue toInvoiceDate)? setInvoiceToDate,
     TResult? Function(String assignmentNumber)? assignmentNumberChanged,
     TResult? Function(String batchNumber)? batchChanged,
     TResult? Function(String principalSearch)? principalSearchChanged,
@@ -204,8 +208,8 @@ class _$_Initialized implements _Initialized {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function()? filterRequestReturn,
-    TResult Function(DateTime fromInvoiceDate)? setInvoicefromDate,
-    TResult Function(DateTime toInvoiceDate)? setInvoiceToDate,
+    TResult Function(DateTimeStringValue fromInvoiceDate)? setInvoicefromDate,
+    TResult Function(DateTimeStringValue toInvoiceDate)? setInvoiceToDate,
     TResult Function(String assignmentNumber)? assignmentNumberChanged,
     TResult Function(String batchNumber)? batchChanged,
     TResult Function(String principalSearch)? principalSearchChanged,
@@ -325,8 +329,10 @@ class _$_FilterRequestReturn implements _FilterRequestReturn {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function() filterRequestReturn,
-    required TResult Function(DateTime fromInvoiceDate) setInvoicefromDate,
-    required TResult Function(DateTime toInvoiceDate) setInvoiceToDate,
+    required TResult Function(DateTimeStringValue fromInvoiceDate)
+        setInvoicefromDate,
+    required TResult Function(DateTimeStringValue toInvoiceDate)
+        setInvoiceToDate,
     required TResult Function(String assignmentNumber) assignmentNumberChanged,
     required TResult Function(String batchNumber) batchChanged,
     required TResult Function(String principalSearch) principalSearchChanged,
@@ -343,8 +349,8 @@ class _$_FilterRequestReturn implements _FilterRequestReturn {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function()? filterRequestReturn,
-    TResult? Function(DateTime fromInvoiceDate)? setInvoicefromDate,
-    TResult? Function(DateTime toInvoiceDate)? setInvoiceToDate,
+    TResult? Function(DateTimeStringValue fromInvoiceDate)? setInvoicefromDate,
+    TResult? Function(DateTimeStringValue toInvoiceDate)? setInvoiceToDate,
     TResult? Function(String assignmentNumber)? assignmentNumberChanged,
     TResult? Function(String batchNumber)? batchChanged,
     TResult? Function(String principalSearch)? principalSearchChanged,
@@ -360,8 +366,8 @@ class _$_FilterRequestReturn implements _FilterRequestReturn {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function()? filterRequestReturn,
-    TResult Function(DateTime fromInvoiceDate)? setInvoicefromDate,
-    TResult Function(DateTime toInvoiceDate)? setInvoiceToDate,
+    TResult Function(DateTimeStringValue fromInvoiceDate)? setInvoicefromDate,
+    TResult Function(DateTimeStringValue toInvoiceDate)? setInvoiceToDate,
     TResult Function(String assignmentNumber)? assignmentNumberChanged,
     TResult Function(String batchNumber)? batchChanged,
     TResult Function(String principalSearch)? principalSearchChanged,
@@ -447,7 +453,7 @@ abstract class _$$_SetExpiryfromDateCopyWith<$Res> {
           $Res Function(_$_SetExpiryfromDate) then) =
       __$$_SetExpiryfromDateCopyWithImpl<$Res>;
   @useResult
-  $Res call({DateTime fromInvoiceDate});
+  $Res call({DateTimeStringValue fromInvoiceDate});
 }
 
 /// @nodoc
@@ -467,7 +473,7 @@ class __$$_SetExpiryfromDateCopyWithImpl<$Res>
       fromInvoiceDate: null == fromInvoiceDate
           ? _value.fromInvoiceDate
           : fromInvoiceDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTimeStringValue,
     ));
   }
 }
@@ -478,7 +484,7 @@ class _$_SetExpiryfromDate implements _SetExpiryfromDate {
   const _$_SetExpiryfromDate({required this.fromInvoiceDate});
 
   @override
-  final DateTime fromInvoiceDate;
+  final DateTimeStringValue fromInvoiceDate;
 
   @override
   String toString() {
@@ -509,8 +515,10 @@ class _$_SetExpiryfromDate implements _SetExpiryfromDate {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function() filterRequestReturn,
-    required TResult Function(DateTime fromInvoiceDate) setInvoicefromDate,
-    required TResult Function(DateTime toInvoiceDate) setInvoiceToDate,
+    required TResult Function(DateTimeStringValue fromInvoiceDate)
+        setInvoicefromDate,
+    required TResult Function(DateTimeStringValue toInvoiceDate)
+        setInvoiceToDate,
     required TResult Function(String assignmentNumber) assignmentNumberChanged,
     required TResult Function(String batchNumber) batchChanged,
     required TResult Function(String principalSearch) principalSearchChanged,
@@ -527,8 +535,8 @@ class _$_SetExpiryfromDate implements _SetExpiryfromDate {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function()? filterRequestReturn,
-    TResult? Function(DateTime fromInvoiceDate)? setInvoicefromDate,
-    TResult? Function(DateTime toInvoiceDate)? setInvoiceToDate,
+    TResult? Function(DateTimeStringValue fromInvoiceDate)? setInvoicefromDate,
+    TResult? Function(DateTimeStringValue toInvoiceDate)? setInvoiceToDate,
     TResult? Function(String assignmentNumber)? assignmentNumberChanged,
     TResult? Function(String batchNumber)? batchChanged,
     TResult? Function(String principalSearch)? principalSearchChanged,
@@ -544,8 +552,8 @@ class _$_SetExpiryfromDate implements _SetExpiryfromDate {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function()? filterRequestReturn,
-    TResult Function(DateTime fromInvoiceDate)? setInvoicefromDate,
-    TResult Function(DateTime toInvoiceDate)? setInvoiceToDate,
+    TResult Function(DateTimeStringValue fromInvoiceDate)? setInvoicefromDate,
+    TResult Function(DateTimeStringValue toInvoiceDate)? setInvoiceToDate,
     TResult Function(String assignmentNumber)? assignmentNumberChanged,
     TResult Function(String batchNumber)? batchChanged,
     TResult Function(String principalSearch)? principalSearchChanged,
@@ -622,10 +630,11 @@ class _$_SetExpiryfromDate implements _SetExpiryfromDate {
 }
 
 abstract class _SetExpiryfromDate implements RequestReturnFilterEvent {
-  const factory _SetExpiryfromDate({required final DateTime fromInvoiceDate}) =
+  const factory _SetExpiryfromDate(
+          {required final DateTimeStringValue fromInvoiceDate}) =
       _$_SetExpiryfromDate;
 
-  DateTime get fromInvoiceDate;
+  DateTimeStringValue get fromInvoiceDate;
   @JsonKey(ignore: true)
   _$$_SetExpiryfromDateCopyWith<_$_SetExpiryfromDate> get copyWith =>
       throw _privateConstructorUsedError;
@@ -637,7 +646,7 @@ abstract class _$$_SetExpiryToDateCopyWith<$Res> {
           _$_SetExpiryToDate value, $Res Function(_$_SetExpiryToDate) then) =
       __$$_SetExpiryToDateCopyWithImpl<$Res>;
   @useResult
-  $Res call({DateTime toInvoiceDate});
+  $Res call({DateTimeStringValue toInvoiceDate});
 }
 
 /// @nodoc
@@ -657,7 +666,7 @@ class __$$_SetExpiryToDateCopyWithImpl<$Res>
       toInvoiceDate: null == toInvoiceDate
           ? _value.toInvoiceDate
           : toInvoiceDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTimeStringValue,
     ));
   }
 }
@@ -668,7 +677,7 @@ class _$_SetExpiryToDate implements _SetExpiryToDate {
   const _$_SetExpiryToDate({required this.toInvoiceDate});
 
   @override
-  final DateTime toInvoiceDate;
+  final DateTimeStringValue toInvoiceDate;
 
   @override
   String toString() {
@@ -698,8 +707,10 @@ class _$_SetExpiryToDate implements _SetExpiryToDate {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function() filterRequestReturn,
-    required TResult Function(DateTime fromInvoiceDate) setInvoicefromDate,
-    required TResult Function(DateTime toInvoiceDate) setInvoiceToDate,
+    required TResult Function(DateTimeStringValue fromInvoiceDate)
+        setInvoicefromDate,
+    required TResult Function(DateTimeStringValue toInvoiceDate)
+        setInvoiceToDate,
     required TResult Function(String assignmentNumber) assignmentNumberChanged,
     required TResult Function(String batchNumber) batchChanged,
     required TResult Function(String principalSearch) principalSearchChanged,
@@ -716,8 +727,8 @@ class _$_SetExpiryToDate implements _SetExpiryToDate {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function()? filterRequestReturn,
-    TResult? Function(DateTime fromInvoiceDate)? setInvoicefromDate,
-    TResult? Function(DateTime toInvoiceDate)? setInvoiceToDate,
+    TResult? Function(DateTimeStringValue fromInvoiceDate)? setInvoicefromDate,
+    TResult? Function(DateTimeStringValue toInvoiceDate)? setInvoiceToDate,
     TResult? Function(String assignmentNumber)? assignmentNumberChanged,
     TResult? Function(String batchNumber)? batchChanged,
     TResult? Function(String principalSearch)? principalSearchChanged,
@@ -733,8 +744,8 @@ class _$_SetExpiryToDate implements _SetExpiryToDate {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function()? filterRequestReturn,
-    TResult Function(DateTime fromInvoiceDate)? setInvoicefromDate,
-    TResult Function(DateTime toInvoiceDate)? setInvoiceToDate,
+    TResult Function(DateTimeStringValue fromInvoiceDate)? setInvoicefromDate,
+    TResult Function(DateTimeStringValue toInvoiceDate)? setInvoiceToDate,
     TResult Function(String assignmentNumber)? assignmentNumberChanged,
     TResult Function(String batchNumber)? batchChanged,
     TResult Function(String principalSearch)? principalSearchChanged,
@@ -811,10 +822,10 @@ class _$_SetExpiryToDate implements _SetExpiryToDate {
 }
 
 abstract class _SetExpiryToDate implements RequestReturnFilterEvent {
-  const factory _SetExpiryToDate({required final DateTime toInvoiceDate}) =
-      _$_SetExpiryToDate;
+  const factory _SetExpiryToDate(
+      {required final DateTimeStringValue toInvoiceDate}) = _$_SetExpiryToDate;
 
-  DateTime get toInvoiceDate;
+  DateTimeStringValue get toInvoiceDate;
   @JsonKey(ignore: true)
   _$$_SetExpiryToDateCopyWith<_$_SetExpiryToDate> get copyWith =>
       throw _privateConstructorUsedError;
@@ -890,8 +901,10 @@ class _$_AssignmentNumberChanged implements _AssignmentNumberChanged {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function() filterRequestReturn,
-    required TResult Function(DateTime fromInvoiceDate) setInvoicefromDate,
-    required TResult Function(DateTime toInvoiceDate) setInvoiceToDate,
+    required TResult Function(DateTimeStringValue fromInvoiceDate)
+        setInvoicefromDate,
+    required TResult Function(DateTimeStringValue toInvoiceDate)
+        setInvoiceToDate,
     required TResult Function(String assignmentNumber) assignmentNumberChanged,
     required TResult Function(String batchNumber) batchChanged,
     required TResult Function(String principalSearch) principalSearchChanged,
@@ -908,8 +921,8 @@ class _$_AssignmentNumberChanged implements _AssignmentNumberChanged {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function()? filterRequestReturn,
-    TResult? Function(DateTime fromInvoiceDate)? setInvoicefromDate,
-    TResult? Function(DateTime toInvoiceDate)? setInvoiceToDate,
+    TResult? Function(DateTimeStringValue fromInvoiceDate)? setInvoicefromDate,
+    TResult? Function(DateTimeStringValue toInvoiceDate)? setInvoiceToDate,
     TResult? Function(String assignmentNumber)? assignmentNumberChanged,
     TResult? Function(String batchNumber)? batchChanged,
     TResult? Function(String principalSearch)? principalSearchChanged,
@@ -925,8 +938,8 @@ class _$_AssignmentNumberChanged implements _AssignmentNumberChanged {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function()? filterRequestReturn,
-    TResult Function(DateTime fromInvoiceDate)? setInvoicefromDate,
-    TResult Function(DateTime toInvoiceDate)? setInvoiceToDate,
+    TResult Function(DateTimeStringValue fromInvoiceDate)? setInvoicefromDate,
+    TResult Function(DateTimeStringValue toInvoiceDate)? setInvoiceToDate,
     TResult Function(String assignmentNumber)? assignmentNumberChanged,
     TResult Function(String batchNumber)? batchChanged,
     TResult Function(String principalSearch)? principalSearchChanged,
@@ -1079,8 +1092,10 @@ class _$_BatchChanged implements _BatchChanged {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function() filterRequestReturn,
-    required TResult Function(DateTime fromInvoiceDate) setInvoicefromDate,
-    required TResult Function(DateTime toInvoiceDate) setInvoiceToDate,
+    required TResult Function(DateTimeStringValue fromInvoiceDate)
+        setInvoicefromDate,
+    required TResult Function(DateTimeStringValue toInvoiceDate)
+        setInvoiceToDate,
     required TResult Function(String assignmentNumber) assignmentNumberChanged,
     required TResult Function(String batchNumber) batchChanged,
     required TResult Function(String principalSearch) principalSearchChanged,
@@ -1097,8 +1112,8 @@ class _$_BatchChanged implements _BatchChanged {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function()? filterRequestReturn,
-    TResult? Function(DateTime fromInvoiceDate)? setInvoicefromDate,
-    TResult? Function(DateTime toInvoiceDate)? setInvoiceToDate,
+    TResult? Function(DateTimeStringValue fromInvoiceDate)? setInvoicefromDate,
+    TResult? Function(DateTimeStringValue toInvoiceDate)? setInvoiceToDate,
     TResult? Function(String assignmentNumber)? assignmentNumberChanged,
     TResult? Function(String batchNumber)? batchChanged,
     TResult? Function(String principalSearch)? principalSearchChanged,
@@ -1114,8 +1129,8 @@ class _$_BatchChanged implements _BatchChanged {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function()? filterRequestReturn,
-    TResult Function(DateTime fromInvoiceDate)? setInvoicefromDate,
-    TResult Function(DateTime toInvoiceDate)? setInvoiceToDate,
+    TResult Function(DateTimeStringValue fromInvoiceDate)? setInvoicefromDate,
+    TResult Function(DateTimeStringValue toInvoiceDate)? setInvoiceToDate,
     TResult Function(String assignmentNumber)? assignmentNumberChanged,
     TResult Function(String batchNumber)? batchChanged,
     TResult Function(String principalSearch)? principalSearchChanged,
@@ -1269,8 +1284,10 @@ class _$_PrincipalSearchChanged implements _PrincipalSearchChanged {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function() filterRequestReturn,
-    required TResult Function(DateTime fromInvoiceDate) setInvoicefromDate,
-    required TResult Function(DateTime toInvoiceDate) setInvoiceToDate,
+    required TResult Function(DateTimeStringValue fromInvoiceDate)
+        setInvoicefromDate,
+    required TResult Function(DateTimeStringValue toInvoiceDate)
+        setInvoiceToDate,
     required TResult Function(String assignmentNumber) assignmentNumberChanged,
     required TResult Function(String batchNumber) batchChanged,
     required TResult Function(String principalSearch) principalSearchChanged,
@@ -1287,8 +1304,8 @@ class _$_PrincipalSearchChanged implements _PrincipalSearchChanged {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function()? filterRequestReturn,
-    TResult? Function(DateTime fromInvoiceDate)? setInvoicefromDate,
-    TResult? Function(DateTime toInvoiceDate)? setInvoiceToDate,
+    TResult? Function(DateTimeStringValue fromInvoiceDate)? setInvoicefromDate,
+    TResult? Function(DateTimeStringValue toInvoiceDate)? setInvoiceToDate,
     TResult? Function(String assignmentNumber)? assignmentNumberChanged,
     TResult? Function(String batchNumber)? batchChanged,
     TResult? Function(String principalSearch)? principalSearchChanged,
@@ -1304,8 +1321,8 @@ class _$_PrincipalSearchChanged implements _PrincipalSearchChanged {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function()? filterRequestReturn,
-    TResult Function(DateTime fromInvoiceDate)? setInvoicefromDate,
-    TResult Function(DateTime toInvoiceDate)? setInvoiceToDate,
+    TResult Function(DateTimeStringValue fromInvoiceDate)? setInvoicefromDate,
+    TResult Function(DateTimeStringValue toInvoiceDate)? setInvoiceToDate,
     TResult Function(String assignmentNumber)? assignmentNumberChanged,
     TResult Function(String batchNumber)? batchChanged,
     TResult Function(String principalSearch)? principalSearchChanged,
@@ -1465,8 +1482,10 @@ class _$_MaterialDescriptionSearchChanged
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function() filterRequestReturn,
-    required TResult Function(DateTime fromInvoiceDate) setInvoicefromDate,
-    required TResult Function(DateTime toInvoiceDate) setInvoiceToDate,
+    required TResult Function(DateTimeStringValue fromInvoiceDate)
+        setInvoicefromDate,
+    required TResult Function(DateTimeStringValue toInvoiceDate)
+        setInvoiceToDate,
     required TResult Function(String assignmentNumber) assignmentNumberChanged,
     required TResult Function(String batchNumber) batchChanged,
     required TResult Function(String principalSearch) principalSearchChanged,
@@ -1483,8 +1502,8 @@ class _$_MaterialDescriptionSearchChanged
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function()? filterRequestReturn,
-    TResult? Function(DateTime fromInvoiceDate)? setInvoicefromDate,
-    TResult? Function(DateTime toInvoiceDate)? setInvoiceToDate,
+    TResult? Function(DateTimeStringValue fromInvoiceDate)? setInvoicefromDate,
+    TResult? Function(DateTimeStringValue toInvoiceDate)? setInvoiceToDate,
     TResult? Function(String assignmentNumber)? assignmentNumberChanged,
     TResult? Function(String batchNumber)? batchChanged,
     TResult? Function(String principalSearch)? principalSearchChanged,
@@ -1500,8 +1519,8 @@ class _$_MaterialDescriptionSearchChanged
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function()? filterRequestReturn,
-    TResult Function(DateTime fromInvoiceDate)? setInvoicefromDate,
-    TResult Function(DateTime toInvoiceDate)? setInvoiceToDate,
+    TResult Function(DateTimeStringValue fromInvoiceDate)? setInvoicefromDate,
+    TResult Function(DateTimeStringValue toInvoiceDate)? setInvoiceToDate,
     TResult Function(String assignmentNumber)? assignmentNumberChanged,
     TResult Function(String batchNumber)? batchChanged,
     TResult Function(String principalSearch)? principalSearchChanged,
@@ -1661,8 +1680,10 @@ class _$_MaterialNumberSearchChanged implements _MaterialNumberSearchChanged {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function() filterRequestReturn,
-    required TResult Function(DateTime fromInvoiceDate) setInvoicefromDate,
-    required TResult Function(DateTime toInvoiceDate) setInvoiceToDate,
+    required TResult Function(DateTimeStringValue fromInvoiceDate)
+        setInvoicefromDate,
+    required TResult Function(DateTimeStringValue toInvoiceDate)
+        setInvoiceToDate,
     required TResult Function(String assignmentNumber) assignmentNumberChanged,
     required TResult Function(String batchNumber) batchChanged,
     required TResult Function(String principalSearch) principalSearchChanged,
@@ -1679,8 +1700,8 @@ class _$_MaterialNumberSearchChanged implements _MaterialNumberSearchChanged {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function()? filterRequestReturn,
-    TResult? Function(DateTime fromInvoiceDate)? setInvoicefromDate,
-    TResult? Function(DateTime toInvoiceDate)? setInvoiceToDate,
+    TResult? Function(DateTimeStringValue fromInvoiceDate)? setInvoicefromDate,
+    TResult? Function(DateTimeStringValue toInvoiceDate)? setInvoiceToDate,
     TResult? Function(String assignmentNumber)? assignmentNumberChanged,
     TResult? Function(String batchNumber)? batchChanged,
     TResult? Function(String principalSearch)? principalSearchChanged,
@@ -1696,8 +1717,8 @@ class _$_MaterialNumberSearchChanged implements _MaterialNumberSearchChanged {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function()? filterRequestReturn,
-    TResult Function(DateTime fromInvoiceDate)? setInvoicefromDate,
-    TResult Function(DateTime toInvoiceDate)? setInvoiceToDate,
+    TResult Function(DateTimeStringValue fromInvoiceDate)? setInvoicefromDate,
+    TResult Function(DateTimeStringValue toInvoiceDate)? setInvoiceToDate,
     TResult Function(String assignmentNumber)? assignmentNumberChanged,
     TResult Function(String batchNumber)? batchChanged,
     TResult Function(String principalSearch)? principalSearchChanged,

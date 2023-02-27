@@ -12,7 +12,6 @@ import 'package:ezrxmobile/domain/order/repository/i_order_history_repository.da
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_history_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_history_remote.dart';
-import 'package:intl/intl.dart';
 
 class OrderHistoryRepository implements IOrderHistoryRepository {
   final Config config;
@@ -57,9 +56,8 @@ class OrderHistoryRepository implements IOrderHistoryRepository {
               loginUserType: user.role.type.loginUserType,
               shipTo: shipTo.shipToCustomerCode,
               soldTo: soldTo.customerCodeSoldTo,
-              fromDate:
-                  DateFormat('yyyyMMdd').format(orderHistoryFilter.fromDate),
-              toDate: DateFormat('yyyyMMdd').format(orderHistoryFilter.toDate),
+              fromDate:orderHistoryFilter.fromDate.apiDateTimeFormat,
+              toDate: orderHistoryFilter.toDate.apiDateTimeFormat,
               pageSize: pageSize,
               offset: offset,
               language: salesOrgConfig.getConfigLangauge,
@@ -77,9 +75,8 @@ class OrderHistoryRepository implements IOrderHistoryRepository {
               loginUserType: user.role.type.loginUserType,
               shipTo: shipTo.shipToCustomerCode,
               soldTo: soldTo.customerCodeSoldTo,
-              fromDate:
-                  DateFormat('yyyyMMdd').format(orderHistoryFilter.fromDate),
-              toDate: DateFormat('yyyyMMdd').format(orderHistoryFilter.toDate),
+              fromDate:orderHistoryFilter.fromDate.apiDateTimeFormat,
+              toDate: orderHistoryFilter.toDate.apiDateTimeFormat,
               pageSize: pageSize,
               offset: offset,
               companyName: '',

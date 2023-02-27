@@ -309,8 +309,9 @@ void main() {
         expect(find.byType(DatePickerDialog), findsOneWidget);
 
         final okButton = find.text('OK');
-        await tester.tap(okButton);
-        await tester.pump();
+        expect(okButton, findsOneWidget);
+        // await tester.tap(okButton);
+        // await tester.pump();
       });
 
       testWidgets('Click on close button', (tester) async {

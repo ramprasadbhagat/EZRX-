@@ -20,8 +20,8 @@ mixin _$ReturnApproverFilter {
   SearchKey get createdBy => throw _privateConstructorUsedError;
   SearchKey get soldTo => throw _privateConstructorUsedError;
   SearchKey get shipTo => throw _privateConstructorUsedError;
-  InvoiceDate get toInvoiceDate => throw _privateConstructorUsedError;
-  InvoiceDate get fromInvoiceDate => throw _privateConstructorUsedError;
+  DateTimeStringValue get fromInvoiceDate => throw _privateConstructorUsedError;
+  DateTimeStringValue get toInvoiceDate => throw _privateConstructorUsedError;
   FilterStatus get sortBy => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -40,8 +40,8 @@ abstract class $ReturnApproverFilterCopyWith<$Res> {
       SearchKey createdBy,
       SearchKey soldTo,
       SearchKey shipTo,
-      InvoiceDate toInvoiceDate,
-      InvoiceDate fromInvoiceDate,
+      DateTimeStringValue fromInvoiceDate,
+      DateTimeStringValue toInvoiceDate,
       FilterStatus sortBy});
 }
 
@@ -63,8 +63,8 @@ class _$ReturnApproverFilterCopyWithImpl<$Res,
     Object? createdBy = null,
     Object? soldTo = null,
     Object? shipTo = null,
-    Object? toInvoiceDate = null,
     Object? fromInvoiceDate = null,
+    Object? toInvoiceDate = null,
     Object? sortBy = null,
   }) {
     return _then(_value.copyWith(
@@ -84,14 +84,14 @@ class _$ReturnApproverFilterCopyWithImpl<$Res,
           ? _value.shipTo
           : shipTo // ignore: cast_nullable_to_non_nullable
               as SearchKey,
-      toInvoiceDate: null == toInvoiceDate
-          ? _value.toInvoiceDate
-          : toInvoiceDate // ignore: cast_nullable_to_non_nullable
-              as InvoiceDate,
       fromInvoiceDate: null == fromInvoiceDate
           ? _value.fromInvoiceDate
           : fromInvoiceDate // ignore: cast_nullable_to_non_nullable
-              as InvoiceDate,
+              as DateTimeStringValue,
+      toInvoiceDate: null == toInvoiceDate
+          ? _value.toInvoiceDate
+          : toInvoiceDate // ignore: cast_nullable_to_non_nullable
+              as DateTimeStringValue,
       sortBy: null == sortBy
           ? _value.sortBy
           : sortBy // ignore: cast_nullable_to_non_nullable
@@ -113,8 +113,8 @@ abstract class _$$_ReturnApproverFilterCopyWith<$Res>
       SearchKey createdBy,
       SearchKey soldTo,
       SearchKey shipTo,
-      InvoiceDate toInvoiceDate,
-      InvoiceDate fromInvoiceDate,
+      DateTimeStringValue fromInvoiceDate,
+      DateTimeStringValue toInvoiceDate,
       FilterStatus sortBy});
 }
 
@@ -133,8 +133,8 @@ class __$$_ReturnApproverFilterCopyWithImpl<$Res>
     Object? createdBy = null,
     Object? soldTo = null,
     Object? shipTo = null,
-    Object? toInvoiceDate = null,
     Object? fromInvoiceDate = null,
+    Object? toInvoiceDate = null,
     Object? sortBy = null,
   }) {
     return _then(_$_ReturnApproverFilter(
@@ -154,14 +154,14 @@ class __$$_ReturnApproverFilterCopyWithImpl<$Res>
           ? _value.shipTo
           : shipTo // ignore: cast_nullable_to_non_nullable
               as SearchKey,
-      toInvoiceDate: null == toInvoiceDate
-          ? _value.toInvoiceDate
-          : toInvoiceDate // ignore: cast_nullable_to_non_nullable
-              as InvoiceDate,
       fromInvoiceDate: null == fromInvoiceDate
           ? _value.fromInvoiceDate
           : fromInvoiceDate // ignore: cast_nullable_to_non_nullable
-              as InvoiceDate,
+              as DateTimeStringValue,
+      toInvoiceDate: null == toInvoiceDate
+          ? _value.toInvoiceDate
+          : toInvoiceDate // ignore: cast_nullable_to_non_nullable
+              as DateTimeStringValue,
       sortBy: null == sortBy
           ? _value.sortBy
           : sortBy // ignore: cast_nullable_to_non_nullable
@@ -178,8 +178,8 @@ class _$_ReturnApproverFilter extends _ReturnApproverFilter {
       required this.createdBy,
       required this.soldTo,
       required this.shipTo,
-      required this.toInvoiceDate,
       required this.fromInvoiceDate,
+      required this.toInvoiceDate,
       required this.sortBy})
       : super._();
 
@@ -192,15 +192,15 @@ class _$_ReturnApproverFilter extends _ReturnApproverFilter {
   @override
   final SearchKey shipTo;
   @override
-  final InvoiceDate toInvoiceDate;
+  final DateTimeStringValue fromInvoiceDate;
   @override
-  final InvoiceDate fromInvoiceDate;
+  final DateTimeStringValue toInvoiceDate;
   @override
   final FilterStatus sortBy;
 
   @override
   String toString() {
-    return 'ReturnApproverFilter(returnId: $returnId, createdBy: $createdBy, soldTo: $soldTo, shipTo: $shipTo, toInvoiceDate: $toInvoiceDate, fromInvoiceDate: $fromInvoiceDate, sortBy: $sortBy)';
+    return 'ReturnApproverFilter(returnId: $returnId, createdBy: $createdBy, soldTo: $soldTo, shipTo: $shipTo, fromInvoiceDate: $fromInvoiceDate, toInvoiceDate: $toInvoiceDate, sortBy: $sortBy)';
   }
 
   @override
@@ -214,16 +214,16 @@ class _$_ReturnApproverFilter extends _ReturnApproverFilter {
                 other.createdBy == createdBy) &&
             (identical(other.soldTo, soldTo) || other.soldTo == soldTo) &&
             (identical(other.shipTo, shipTo) || other.shipTo == shipTo) &&
-            (identical(other.toInvoiceDate, toInvoiceDate) ||
-                other.toInvoiceDate == toInvoiceDate) &&
             (identical(other.fromInvoiceDate, fromInvoiceDate) ||
                 other.fromInvoiceDate == fromInvoiceDate) &&
+            (identical(other.toInvoiceDate, toInvoiceDate) ||
+                other.toInvoiceDate == toInvoiceDate) &&
             (identical(other.sortBy, sortBy) || other.sortBy == sortBy));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, returnId, createdBy, soldTo,
-      shipTo, toInvoiceDate, fromInvoiceDate, sortBy);
+      shipTo, fromInvoiceDate, toInvoiceDate, sortBy);
 
   @JsonKey(ignore: true)
   @override
@@ -239,8 +239,8 @@ abstract class _ReturnApproverFilter extends ReturnApproverFilter {
       required final SearchKey createdBy,
       required final SearchKey soldTo,
       required final SearchKey shipTo,
-      required final InvoiceDate toInvoiceDate,
-      required final InvoiceDate fromInvoiceDate,
+      required final DateTimeStringValue fromInvoiceDate,
+      required final DateTimeStringValue toInvoiceDate,
       required final FilterStatus sortBy}) = _$_ReturnApproverFilter;
   _ReturnApproverFilter._() : super._();
 
@@ -253,9 +253,9 @@ abstract class _ReturnApproverFilter extends ReturnApproverFilter {
   @override
   SearchKey get shipTo;
   @override
-  InvoiceDate get toInvoiceDate;
+  DateTimeStringValue get fromInvoiceDate;
   @override
-  InvoiceDate get fromInvoiceDate;
+  DateTimeStringValue get toInvoiceDate;
   @override
   FilterStatus get sortBy;
   @override

@@ -1023,7 +1023,7 @@ void main() {
         (tester) async {
       final items = [
         orderHistoryDetails.orderHistoryDetailsOrderItem.first.copyWith(
-          plannedDeliveryDate: DateTimeStringValue('12/01/22'),
+          plannedDeliveryDate: DateTimeStringValue('20220112'),
           sAPStatus: SAPStatus('Order Placed'),
         ),
         ...orderHistoryDetails.orderHistoryDetailsOrderItem.map(
@@ -1103,7 +1103,7 @@ void main() {
         (tester) async {
       final items = [
         orderHistoryDetails.orderHistoryDetailsOrderItem.first.copyWith(
-          plannedDeliveryDate: DateTimeStringValue('12/01/22'),
+          plannedDeliveryDate: DateTimeStringValue('20220112'),
           sAPStatus: SAPStatus(''),
         ),
         ...orderHistoryDetails.orderHistoryDetailsOrderItem.map(
@@ -1188,7 +1188,7 @@ void main() {
         (tester) async {
       final items = [
         orderHistoryDetails.orderHistoryDetailsOrderItem.first.copyWith(
-          plannedDeliveryDate: DateTimeStringValue('12/01/22'),
+          plannedDeliveryDate: DateTimeStringValue('20220112'),
           sAPStatus: SAPStatus('Order Placed'),
         ),
       ];
@@ -1280,7 +1280,7 @@ void main() {
           .orderHistoryDetailsOrderItem.first.materialNumber.displayMatNo;
       final items = [
         orderHistoryDetails.orderHistoryDetailsOrderItem.first.copyWith(
-          plannedDeliveryDate: DateTimeStringValue('12/01/22'),
+          plannedDeliveryDate: DateTimeStringValue('20220112'),
           sAPStatus: SAPStatus(''),
         ),
       ];

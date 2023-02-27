@@ -3,6 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/returns/request_return_filter/request_return_filter_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/returns/entities/request_return_filter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -122,13 +123,17 @@ void main() {
         build: (() => RequestReturnFilterBloc()),
         act: (bloc) => bloc.add(
           RequestReturnFilterEvent.setInvoiceToDate(
-            toInvoiceDate: toInvoiceDate,
+            toInvoiceDate: DateTimeStringValue(
+              getDateStringByDateTime(toInvoiceDate),
+            ),
           ),
         ),
         expect: () => [
           RequestReturnFilterState.initial().copyWith(
             requestReturnFilter: RequestReturnFilter.empty().copyWith(
-              toInvoiceDate: toInvoiceDate,
+              toInvoiceDate: DateTimeStringValue(
+                getDateStringByDateTime(toInvoiceDate),
+              ),
             ),
           ),
         ],
@@ -139,13 +144,17 @@ void main() {
         build: (() => RequestReturnFilterBloc()),
         act: (bloc) => bloc.add(
           RequestReturnFilterEvent.setInvoicefromDate(
-            fromInvoiceDate: fromInvoiceDate,
+            fromInvoiceDate: DateTimeStringValue(
+              getDateStringByDateTime(fromInvoiceDate),
+            ),
           ),
         ),
         expect: () => [
           RequestReturnFilterState.initial().copyWith(
             requestReturnFilter: RequestReturnFilter.empty().copyWith(
-              fromInvoiceDate: fromInvoiceDate,
+              fromInvoiceDate: DateTimeStringValue(
+                getDateStringByDateTime(fromInvoiceDate),
+              ),
             ),
           ),
         ],
@@ -157,31 +166,35 @@ void main() {
         act: (bloc) => bloc
           ..add(
             RequestReturnFilterEvent.setInvoicefromDate(
-              fromInvoiceDate: fromInvoiceDate,
+              fromInvoiceDate: DateTimeStringValue(
+                getDateStringByDateTime(fromInvoiceDate),
+              ),
             ),
           )
           ..add(
             RequestReturnFilterEvent.setInvoiceToDate(
-              toInvoiceDate: toInvoiceDate,
+              toInvoiceDate: DateTimeStringValue(
+                getDateStringByDateTime(toInvoiceDate),
+              ),
             ),
           )
           ..add(const RequestReturnFilterEvent.filterRequestReturn()),
         expect: () => [
           RequestReturnFilterState.initial().copyWith(
             requestReturnFilter: RequestReturnFilter.empty().copyWith(
-              fromInvoiceDate: fromInvoiceDate,
+              fromInvoiceDate: DateTimeStringValue(
+                getDateStringByDateTime(fromInvoiceDate),
+              ),
             ),
           ),
           RequestReturnFilterState.initial().copyWith(
             requestReturnFilter: RequestReturnFilter.empty().copyWith(
-              fromInvoiceDate: fromInvoiceDate,
-              toInvoiceDate: toInvoiceDate,
-            ),
-          ),
-          RequestReturnFilterState.initial().copyWith(
-            requestReturnFilter: RequestReturnFilter.empty().copyWith(
-              fromInvoiceDate: fromInvoiceDate,
-              toInvoiceDate: toInvoiceDate,
+              fromInvoiceDate: DateTimeStringValue(
+                getDateStringByDateTime(fromInvoiceDate),
+              ),
+              toInvoiceDate: DateTimeStringValue(
+                getDateStringByDateTime(toInvoiceDate),
+              ),
             ),
             isSubmitting: true,
             showErrorMessages: false,
@@ -195,31 +208,35 @@ void main() {
         act: (bloc) => bloc
           ..add(
             RequestReturnFilterEvent.setInvoicefromDate(
-              fromInvoiceDate: toInvoiceDate,
+              fromInvoiceDate: DateTimeStringValue(
+                getDateStringByDateTime(toInvoiceDate),
+              ),
             ),
           )
           ..add(
             RequestReturnFilterEvent.setInvoiceToDate(
-              toInvoiceDate: toInvoiceDate,
+              toInvoiceDate: DateTimeStringValue(
+                getDateStringByDateTime(toInvoiceDate),
+              ),
             ),
           )
           ..add(const RequestReturnFilterEvent.filterRequestReturn()),
         expect: () => [
           RequestReturnFilterState.initial().copyWith(
             requestReturnFilter: RequestReturnFilter.empty().copyWith(
-              fromInvoiceDate: toInvoiceDate,
+              fromInvoiceDate: DateTimeStringValue(
+                getDateStringByDateTime(toInvoiceDate),
+              ),
             ),
           ),
           RequestReturnFilterState.initial().copyWith(
             requestReturnFilter: RequestReturnFilter.empty().copyWith(
-              fromInvoiceDate: toInvoiceDate,
-              toInvoiceDate: toInvoiceDate,
-            ),
-          ),
-          RequestReturnFilterState.initial().copyWith(
-            requestReturnFilter: RequestReturnFilter.empty().copyWith(
-              fromInvoiceDate: toInvoiceDate,
-              toInvoiceDate: toInvoiceDate,
+              fromInvoiceDate: DateTimeStringValue(
+                getDateStringByDateTime(toInvoiceDate),
+              ),
+              toInvoiceDate: DateTimeStringValue(
+                getDateStringByDateTime(toInvoiceDate),
+              ),
             ),
             isSubmitting: true,
             showErrorMessages: false,

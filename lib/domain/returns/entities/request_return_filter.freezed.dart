@@ -21,8 +21,8 @@ mixin _$RequestReturnFilter {
   SearchKey get materialDescription => throw _privateConstructorUsedError;
   SearchKey get materialNumber => throw _privateConstructorUsedError;
   SearchKey get principalSearch => throw _privateConstructorUsedError;
-  DateTime? get toInvoiceDate => throw _privateConstructorUsedError;
-  DateTime? get fromInvoiceDate => throw _privateConstructorUsedError;
+  DateTimeStringValue get toInvoiceDate => throw _privateConstructorUsedError;
+  DateTimeStringValue get fromInvoiceDate => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $RequestReturnFilterCopyWith<RequestReturnFilter> get copyWith =>
@@ -41,8 +41,8 @@ abstract class $RequestReturnFilterCopyWith<$Res> {
       SearchKey materialDescription,
       SearchKey materialNumber,
       SearchKey principalSearch,
-      DateTime? toInvoiceDate,
-      DateTime? fromInvoiceDate});
+      DateTimeStringValue toInvoiceDate,
+      DateTimeStringValue fromInvoiceDate});
 }
 
 /// @nodoc
@@ -63,8 +63,8 @@ class _$RequestReturnFilterCopyWithImpl<$Res, $Val extends RequestReturnFilter>
     Object? materialDescription = null,
     Object? materialNumber = null,
     Object? principalSearch = null,
-    Object? toInvoiceDate = freezed,
-    Object? fromInvoiceDate = freezed,
+    Object? toInvoiceDate = null,
+    Object? fromInvoiceDate = null,
   }) {
     return _then(_value.copyWith(
       assignmentNumber: null == assignmentNumber
@@ -87,14 +87,14 @@ class _$RequestReturnFilterCopyWithImpl<$Res, $Val extends RequestReturnFilter>
           ? _value.principalSearch
           : principalSearch // ignore: cast_nullable_to_non_nullable
               as SearchKey,
-      toInvoiceDate: freezed == toInvoiceDate
+      toInvoiceDate: null == toInvoiceDate
           ? _value.toInvoiceDate
           : toInvoiceDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      fromInvoiceDate: freezed == fromInvoiceDate
+              as DateTimeStringValue,
+      fromInvoiceDate: null == fromInvoiceDate
           ? _value.fromInvoiceDate
           : fromInvoiceDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as DateTimeStringValue,
     ) as $Val);
   }
 }
@@ -113,8 +113,8 @@ abstract class _$$_RequestReturnFilterCopyWith<$Res>
       SearchKey materialDescription,
       SearchKey materialNumber,
       SearchKey principalSearch,
-      DateTime? toInvoiceDate,
-      DateTime? fromInvoiceDate});
+      DateTimeStringValue toInvoiceDate,
+      DateTimeStringValue fromInvoiceDate});
 }
 
 /// @nodoc
@@ -133,8 +133,8 @@ class __$$_RequestReturnFilterCopyWithImpl<$Res>
     Object? materialDescription = null,
     Object? materialNumber = null,
     Object? principalSearch = null,
-    Object? toInvoiceDate = freezed,
-    Object? fromInvoiceDate = freezed,
+    Object? toInvoiceDate = null,
+    Object? fromInvoiceDate = null,
   }) {
     return _then(_$_RequestReturnFilter(
       assignmentNumber: null == assignmentNumber
@@ -157,14 +157,14 @@ class __$$_RequestReturnFilterCopyWithImpl<$Res>
           ? _value.principalSearch
           : principalSearch // ignore: cast_nullable_to_non_nullable
               as SearchKey,
-      toInvoiceDate: freezed == toInvoiceDate
+      toInvoiceDate: null == toInvoiceDate
           ? _value.toInvoiceDate
           : toInvoiceDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      fromInvoiceDate: freezed == fromInvoiceDate
+              as DateTimeStringValue,
+      fromInvoiceDate: null == fromInvoiceDate
           ? _value.fromInvoiceDate
           : fromInvoiceDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as DateTimeStringValue,
     ));
   }
 }
@@ -193,9 +193,9 @@ class _$_RequestReturnFilter extends _RequestReturnFilter {
   @override
   final SearchKey principalSearch;
   @override
-  final DateTime? toInvoiceDate;
+  final DateTimeStringValue toInvoiceDate;
   @override
-  final DateTime? fromInvoiceDate;
+  final DateTimeStringValue fromInvoiceDate;
 
   @override
   String toString() {
@@ -243,13 +243,14 @@ class _$_RequestReturnFilter extends _RequestReturnFilter {
 
 abstract class _RequestReturnFilter extends RequestReturnFilter {
   factory _RequestReturnFilter(
-      {required final SearchKey assignmentNumber,
-      required final SearchKey batch,
-      required final SearchKey materialDescription,
-      required final SearchKey materialNumber,
-      required final SearchKey principalSearch,
-      required final DateTime? toInvoiceDate,
-      required final DateTime? fromInvoiceDate}) = _$_RequestReturnFilter;
+          {required final SearchKey assignmentNumber,
+          required final SearchKey batch,
+          required final SearchKey materialDescription,
+          required final SearchKey materialNumber,
+          required final SearchKey principalSearch,
+          required final DateTimeStringValue toInvoiceDate,
+          required final DateTimeStringValue fromInvoiceDate}) =
+      _$_RequestReturnFilter;
   _RequestReturnFilter._() : super._();
 
   @override
@@ -263,9 +264,9 @@ abstract class _RequestReturnFilter extends RequestReturnFilter {
   @override
   SearchKey get principalSearch;
   @override
-  DateTime? get toInvoiceDate;
+  DateTimeStringValue get toInvoiceDate;
   @override
-  DateTime? get fromInvoiceDate;
+  DateTimeStringValue get fromInvoiceDate;
   @override
   @JsonKey(ignore: true)
   _$$_RequestReturnFilterCopyWith<_$_RequestReturnFilter> get copyWith =>

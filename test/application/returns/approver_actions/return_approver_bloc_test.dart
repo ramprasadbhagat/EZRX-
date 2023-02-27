@@ -1,13 +1,13 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/returns/entities/approver_return_request.dart';
 import 'package:ezrxmobile/domain/returns/entities/approver_return_requests_id.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_approver_filter.dart';
-import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/returns/repository/return_approver_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -20,18 +20,10 @@ void main() {
   late ReturnApproverRepository repository;
   late List<ApproverReturnRequestsId> approverReturnRequestsIdList;
   late ReturnApproverFilter returnApproverFilter;
-  final fakeToDate = DateTime.parse(
-    DateFormat('yyyyMMdd').format(
-      DateTime.now(),
-    ),
-  );
+  final fakeToDate = DateTime.now();
 
-  final fakeFormDate = DateTime.parse(
-    DateFormat('yyyyMMdd').format(
-      DateTime.now().subtract(
-        const Duration(days: 7),
-      ),
-    ),
+  final fakeFromDate = DateTime.now().subtract(
+    const Duration(days: 7),
   );
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
@@ -43,11 +35,11 @@ void main() {
       ApproverReturnRequestsId(requestId: 'fakeApproverReturnRequestId'),
     ];
     returnApproverFilter = ReturnApproverFilter.empty().copyWith(
-      toInvoiceDate: InvoiceDate(
-        fakeToDate.toIso8601String(),
+      toInvoiceDate: DateTimeStringValue(
+        getDateStringByDateTime(fakeToDate),
       ),
-      fromInvoiceDate: InvoiceDate(
-        fakeFormDate.toIso8601String(),
+      fromInvoiceDate: DateTimeStringValue(
+        getDateStringByDateTime(fakeFromDate),
       ),
     );
   });

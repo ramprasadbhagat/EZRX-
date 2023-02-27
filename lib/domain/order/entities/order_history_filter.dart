@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -11,8 +12,8 @@ class OrderHistoryFilter with _$OrderHistoryFilter {
     required SearchKey poNumber,
     required SearchKey materialSearch,
     required SearchKey principalSearch,
-    required DateTime toDate,
-    required DateTime fromDate,
+    required DateTimeStringValue toDate,
+    required DateTimeStringValue fromDate,
   }) = _OrderHistoryFilter;
 
   factory OrderHistoryFilter.empty() => OrderHistoryFilter(
@@ -20,7 +21,13 @@ class OrderHistoryFilter with _$OrderHistoryFilter {
         poNumber: SearchKey.searchFilter(''),
         materialSearch: SearchKey.searchFilter(''),
         principalSearch: SearchKey.searchFilter(''),
-        fromDate: DateTime.now().subtract(const Duration(days: 7)),
-        toDate: DateTime.now(),
+        fromDate: DateTimeStringValue(
+          getDateStringByDateTime(
+            DateTime.now().subtract(const Duration(days: 7)),
+          ),
+        ),
+        toDate: DateTimeStringValue(
+          getDateStringByDateTime(DateTime.now()),
+        ),
       );
 }

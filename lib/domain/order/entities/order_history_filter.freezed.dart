@@ -20,8 +20,8 @@ mixin _$OrderHistoryFilter {
   SearchKey get poNumber => throw _privateConstructorUsedError;
   SearchKey get materialSearch => throw _privateConstructorUsedError;
   SearchKey get principalSearch => throw _privateConstructorUsedError;
-  DateTime get toDate => throw _privateConstructorUsedError;
-  DateTime get fromDate => throw _privateConstructorUsedError;
+  DateTimeStringValue get toDate => throw _privateConstructorUsedError;
+  DateTimeStringValue get fromDate => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $OrderHistoryFilterCopyWith<OrderHistoryFilter> get copyWith =>
@@ -39,8 +39,8 @@ abstract class $OrderHistoryFilterCopyWith<$Res> {
       SearchKey poNumber,
       SearchKey materialSearch,
       SearchKey principalSearch,
-      DateTime toDate,
-      DateTime fromDate});
+      DateTimeStringValue toDate,
+      DateTimeStringValue fromDate});
 }
 
 /// @nodoc
@@ -83,11 +83,11 @@ class _$OrderHistoryFilterCopyWithImpl<$Res, $Val extends OrderHistoryFilter>
       toDate: null == toDate
           ? _value.toDate
           : toDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTimeStringValue,
       fromDate: null == fromDate
           ? _value.fromDate
           : fromDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTimeStringValue,
     ) as $Val);
   }
 }
@@ -105,8 +105,8 @@ abstract class _$$_OrderHistoryFilterCopyWith<$Res>
       SearchKey poNumber,
       SearchKey materialSearch,
       SearchKey principalSearch,
-      DateTime toDate,
-      DateTime fromDate});
+      DateTimeStringValue toDate,
+      DateTimeStringValue fromDate});
 }
 
 /// @nodoc
@@ -147,11 +147,11 @@ class __$$_OrderHistoryFilterCopyWithImpl<$Res>
       toDate: null == toDate
           ? _value.toDate
           : toDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTimeStringValue,
       fromDate: null == fromDate
           ? _value.fromDate
           : fromDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTimeStringValue,
     ));
   }
 }
@@ -177,9 +177,9 @@ class _$_OrderHistoryFilter extends _OrderHistoryFilter {
   @override
   final SearchKey principalSearch;
   @override
-  final DateTime toDate;
+  final DateTimeStringValue toDate;
   @override
-  final DateTime fromDate;
+  final DateTimeStringValue fromDate;
 
   @override
   String toString() {
@@ -221,8 +221,8 @@ abstract class _OrderHistoryFilter extends OrderHistoryFilter {
       required final SearchKey poNumber,
       required final SearchKey materialSearch,
       required final SearchKey principalSearch,
-      required final DateTime toDate,
-      required final DateTime fromDate}) = _$_OrderHistoryFilter;
+      required final DateTimeStringValue toDate,
+      required final DateTimeStringValue fromDate}) = _$_OrderHistoryFilter;
   _OrderHistoryFilter._() : super._();
 
   @override
@@ -234,9 +234,9 @@ abstract class _OrderHistoryFilter extends OrderHistoryFilter {
   @override
   SearchKey get principalSearch;
   @override
-  DateTime get toDate;
+  DateTimeStringValue get toDate;
   @override
-  DateTime get fromDate;
+  DateTimeStringValue get fromDate;
   @override
   @JsonKey(ignore: true)
   _$$_OrderHistoryFilterCopyWith<_$_OrderHistoryFilter> get copyWith =>

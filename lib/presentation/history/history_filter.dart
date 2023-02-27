@@ -1,5 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -279,8 +281,8 @@ class __OrderFromDateByFilterState extends State<_OrderFromDateByFilter> {
   void initState() {
     txtfromDateController = TextEditingController();
     orderHistoryFilterBloc = context.read<OrderHistoryFilterBloc>();
-    txtfromDateController.text = DateFormat('dd/MM/yyyy')
-        .format(orderHistoryFilterBloc.state.orderHistoryFilterList.fromDate);
+    txtfromDateController.text = orderHistoryFilterBloc
+        .state.orderHistoryFilterList.fromDate.toValidDateString;
 
     super.initState();
   }
@@ -301,8 +303,8 @@ class __OrderFromDateByFilterState extends State<_OrderFromDateByFilter> {
           previous.orderHistoryFilterList.toDate !=
               current.orderHistoryFilterList.toDate,
       listener: (context, state) {
-        txtfromDateController.text = DateFormat('dd/MM/yyyy')
-            .format(state.orderHistoryFilterList.fromDate);
+        txtfromDateController.text =
+            state.orderHistoryFilterList.fromDate.toValidDateString;
       },
       child: Expanded(
         child: TextFormField(
@@ -310,17 +312,18 @@ class __OrderFromDateByFilterState extends State<_OrderFromDateByFilter> {
           onTap: () async {
             final orderDate = await showPlatformDatePicker(
               context: context,
-              initialDate:
-                  orderHistoryFilterBloc.state.orderHistoryFilterList.fromDate,
+              initialDate: orderHistoryFilterBloc
+                  .state.orderHistoryFilterList.fromDate.dateTimeByDateString,
               firstDate: orderHistoryFilterBloc
-                  .state.orderHistoryFilterList.toDate
+                  .state.orderHistoryFilterList.toDate.dateTimeByDateString
                   .subtract(const Duration(days: 365)),
-              lastDate:
-                  orderHistoryFilterBloc.state.orderHistoryFilterList.toDate,
+              lastDate: orderHistoryFilterBloc
+                  .state.orderHistoryFilterList.toDate.dateTimeByDateString,
             );
             orderHistoryFilterBloc.add(
               OrderHistoryFilterEvent.setfromDate(
-                fromDate: orderDate!,
+                fromDate:
+                    DateTimeStringValue(getDateStringByDateTime(orderDate!)),
               ),
             );
           },
@@ -359,8 +362,8 @@ class __OrderToDateByFilterState extends State<_OrderToDateByFilter> {
   void initState() {
     txttoDateController = TextEditingController();
     orderHistoryFilterBloc = context.read<OrderHistoryFilterBloc>();
-    txttoDateController.text = DateFormat('dd/MM/yyyy')
-        .format(orderHistoryFilterBloc.state.orderHistoryFilterList.toDate);
+    txttoDateController.text = orderHistoryFilterBloc
+        .state.orderHistoryFilterList.toDate.toValidDateString;
 
     super.initState();
   }
@@ -383,8 +386,8 @@ class __OrderToDateByFilterState extends State<_OrderToDateByFilter> {
         context,
         state,
       ) {
-        txttoDateController.text = DateFormat('dd/MM/yyyy')
-            .format(state.orderHistoryFilterList.toDate);
+        txttoDateController.text =
+            state.orderHistoryFilterList.toDate.toValidDateString;
       },
       child: Expanded(
         child: TextFormField(
@@ -392,18 +395,19 @@ class __OrderToDateByFilterState extends State<_OrderToDateByFilter> {
           onTap: () async {
             final orderDate = await showPlatformDatePicker(
               context: context,
-              initialDate:
-                  orderHistoryFilterBloc.state.orderHistoryFilterList.toDate,
-              firstDate:
-                  orderHistoryFilterBloc.state.orderHistoryFilterList.fromDate,
+              initialDate: orderHistoryFilterBloc
+                  .state.orderHistoryFilterList.toDate.dateTimeByDateString,
+              firstDate: orderHistoryFilterBloc
+                  .state.orderHistoryFilterList.fromDate.dateTimeByDateString,
               lastDate: orderHistoryFilterBloc
-                  .state.orderHistoryFilterList.fromDate
+                  .state.orderHistoryFilterList.fromDate.dateTimeByDateString
                   .add(const Duration(days: 365)),
             );
 
             orderHistoryFilterBloc.add(
               OrderHistoryFilterEvent.setToDate(
-                toDate: orderDate!,
+                toDate:
+                    DateTimeStringValue(getDateStringByDateTime(orderDate!)),
               ),
             );
           },

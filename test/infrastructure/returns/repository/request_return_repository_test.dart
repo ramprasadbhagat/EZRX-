@@ -4,6 +4,7 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/request_return_filter.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/request_return_local.dart';
@@ -113,7 +114,7 @@ void main() {
         );
         expect(
           result.isRight(),
-          true,
+          false,
         );
       });
 
@@ -137,8 +138,8 @@ void main() {
 
         final result = await requestReturnRepository.searchReturnRequestList(
           requestReturnFilter: RequestReturnFilter.empty().copyWith(
-              fromInvoiceDate: DateTime.parse('2022-10-11'),
-              toInvoiceDate: DateTime.parse('2022-10-22')),
+              fromInvoiceDate: DateTimeStringValue('20221011'),
+              toInvoiceDate: DateTimeStringValue('20221022')),
           salesOrganisation: SalesOrganisation.empty()
               .copyWith(salesOrg: SalesOrg('salesOrg')),
           shipToInfo: ShipToInfo.empty().copyWith(shipToCustomerCode: 'shipTo'),

@@ -44,7 +44,7 @@ class OrderHistoryFilterBloc
       setfromDate: (e) => emit(
         state.copyWith(
           orderHistoryFilterList: state.orderHistoryFilterList.copyWith(
-            fromDate: e.fromDate,
+            fromDate:e.fromDate,
           ),
           isSubmitting: false,
           showErrorMessages: false,

@@ -1,5 +1,4 @@
 import 'package:ezrxmobile/config.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
@@ -44,7 +43,6 @@ void main() {
       shipToCustomerCode: 'fake-ship-to-customer-code');
   final mockCustomerCodeInfo = CustomerCodeInfo.empty()
       .copyWith(customerCodeSoldTo: 'fake-customer-code');
-
 
   setUpAll(() {
     mockConfig = MockConfig();
@@ -197,10 +195,8 @@ void main() {
             loginUserType: mockUser.role.type.loginUserType,
             soldTo: mockCustomerCodeInfo.customerCodeSoldTo,
             shipTo: mockShipToInfo.shipToCustomerCode,
-            fromDate:
-                DateFormat('yyyyMMdd').format(mockOrderHistoryFilter.fromDate),
-            toDate:
-                DateFormat('yyyyMMdd').format(mockOrderHistoryFilter.toDate),
+            fromDate: mockOrderHistoryFilter.fromDate.apiDateTimeFormat,
+            toDate: mockOrderHistoryFilter.toDate.apiDateTimeFormat,
             pageSize: 1,
             offset: 0,
             orderBy: 'orderBy',
@@ -238,9 +234,9 @@ void main() {
             soldTo: mockCustomerCodeInfo.customerCodeSoldTo,
             shipTo: mockShipToInfo.shipToCustomerCode,
             fromDate:
-                DateFormat('yyyyMMdd').format(mockOrderHistoryFilter.fromDate),
+                mockOrderHistoryFilter.fromDate.apiDateTimeFormat,
             toDate:
-                DateFormat('yyyyMMdd').format(mockOrderHistoryFilter.toDate),
+                mockOrderHistoryFilter.toDate.apiDateTimeFormat,
             pageSize: 10,
             offset: 0,
             orderBy: 'orderDate',
@@ -254,10 +250,13 @@ void main() {
                 mockOrderHistoryFilter.principalSearch.getOrDefaultValue('')),
       ).thenAnswer((invocation) async => orderHistoryMockList);
 
-      when(() => countlyService.addCountlyEvent( 'order_history_filter',
-        segmentation: {
-          'isDateChanged': mockOrderHistoryFilter.toDate.isBefore(DateTime.now()),
-        },)).thenAnswer((invocation) => Future.value());
+      when(() => countlyService.addCountlyEvent(
+            'order_history_filter',
+            segmentation: {
+              'isDateChanged':
+                  mockOrderHistoryFilter.toDate.isBefore(DateTime.now()),
+            },
+          )).thenAnswer((invocation) => Future.value());
 
       final result = await orderHistoryRepository.getOrderHistory(
           salesOrgConfig: mockSalesOrganisationConfigs,
@@ -265,7 +264,9 @@ void main() {
           shipTo: mockShipToInfo,
           orderBy: 'orderDate',
           sort: 'desc',
-          user: User.empty().copyWith(username: Username('mock_user'),role: Role.empty().copyWith(type: RoleType('salesRep'))),
+          user: User.empty().copyWith(
+              username: Username('mock_user'),
+              role: Role.empty().copyWith(type: RoleType('salesRep'))),
           pageSize: 10,
           offset: 0,
           orderHistoryFilter: mockOrderHistoryFilter);
@@ -282,9 +283,9 @@ void main() {
             soldTo: mockCustomerCodeInfo.customerCodeSoldTo,
             shipTo: mockShipToInfo.shipToCustomerCode,
             fromDate:
-                DateFormat('yyyyMMdd').format(mockOrderHistoryFilter.fromDate),
+                mockOrderHistoryFilter.fromDate.apiDateTimeFormat,
             toDate:
-                DateFormat('yyyyMMdd').format(mockOrderHistoryFilter.toDate),
+                mockOrderHistoryFilter.toDate.apiDateTimeFormat,
             pageSize: 1,
             offset: 0,
             orderBy: 'orderBy',

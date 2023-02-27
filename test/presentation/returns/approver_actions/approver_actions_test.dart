@@ -13,6 +13,7 @@ import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/returns/entities/approver_return_request.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_approver_filter.dart';
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
@@ -68,7 +69,7 @@ void main() {
     ),
   );
 
-  final fakeFormDate = DateTime.parse(
+  final fakeFromDate = DateTime.parse(
     DateFormat('yyyyMMdd').format(
       DateTime.now().subtract(
         const Duration(days: 7),
@@ -99,11 +100,11 @@ void main() {
 
       customerCodeBlocMock = CustomerCodeMockBloc();
       returnApproverFilter = ReturnApproverFilter.empty().copyWith(
-        toInvoiceDate: InvoiceDate(
-          fakeToDate.toIso8601String(),
+        toInvoiceDate: DateTimeStringValue(
+          getDateStringByDateTime(fakeToDate),
         ),
-        fromInvoiceDate: InvoiceDate(
-          fakeFormDate.toIso8601String(),
+        fromInvoiceDate: DateTimeStringValue(
+          getDateStringByDateTime(fakeFromDate),
         ),
       );
 

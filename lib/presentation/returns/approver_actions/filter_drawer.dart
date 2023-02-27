@@ -338,13 +338,13 @@ class _InvoiceDateFilterState extends State<_InvoiceDateFilter> {
         key: const Key('filterInvoiceDateField'),
         onTap: () async {
           final invoiceDateRange = await showDateRangePicker(
-              context: context,
-              firstDate: DateTime.now().subtract(const Duration(days: 365)),
-              lastDate: DateTime.now(),
-              initialDateRange: context
-                  .read<ReturnApproverFilterBloc>()
-                  .state
-                  .approverReturnFilter
+            context: context,
+            firstDate: DateTime.now().subtract(const Duration(days: 365)),
+            lastDate: DateTime.now(),
+            initialDateRange: context
+                .read<ReturnApproverFilterBloc>()
+                .state
+                .approverReturnFilter
                 .getInvoiceFilterDateRange,
           );
           if (invoiceDateRange == null || !mounted) return;

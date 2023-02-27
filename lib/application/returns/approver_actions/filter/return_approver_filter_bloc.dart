@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_approver_filter.dart';
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:flutter/material.dart';
@@ -90,11 +91,11 @@ class ReturnApproverFilterBloc
       setInvoiceDate: (_SetInvoiceDate e) => emit(
         state.copyWith(
           approverReturnFilter: state.approverReturnFilter.copyWith(
-            fromInvoiceDate: InvoiceDate(
-              e.invoiceDateRange.start.toIso8601String(),
+            fromInvoiceDate: DateTimeStringValue(
+              getDateStringByDateTime(e.invoiceDateRange.start),
             ),
-            toInvoiceDate: InvoiceDate(
-              e.invoiceDateRange.end.toIso8601String(),
+            toInvoiceDate: DateTimeStringValue(
+              getDateStringByDateTime(e.invoiceDateRange.end),
             ),
           ),
           showErrorMessages: false,

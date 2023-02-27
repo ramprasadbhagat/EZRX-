@@ -3,6 +3,7 @@ import 'package:ezrxmobile/domain/core/error/errors.dart';
 import 'package:ezrxmobile/domain/core/error/failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/core/value/value_validators.dart';
+import 'package:ezrxmobile/domain/returns/value/value_transformers.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -84,18 +85,23 @@ class DateTimeStringValue extends ValueObject<String> {
     return DateTimeStringValue._(validateDateString(input));
   }
 
-  String get naIfEmptyDateTime {
-    return naIfEmpty(value.getOrElse(() => ''));
-  }
+  String get naIfEmptyDateTime => naIfEmpty(value.getOrElse(() => ''));
 
-  String get toValidDateString {
-    return displayDateStringOrEmpty((value.getOrElse(() => '')));
-  }
+  String get toValidDateString =>
+      displayDateStringOrEmpty(value.getOrElse(() => ''));
 
-  bool get isNotEmpty {
-    final isEmpty = (value.getOrElse(() => '')).isEmpty;
+  bool get isNotEmpty => value.getOrElse(() => '').isNotEmpty;
 
-    return !isEmpty;
+  String get apiDateTimeFormat =>
+      formattedDateTimeForAPI(value.getOrElse(() => ''));
+
+  DateTime get dateTimeByDateString =>
+      getDateTimeByDateString(value.getOrElse(() => ''));
+
+  bool isBefore(DateTime dateTime) {
+    final currentDate = getDateTimebyDateString(value.getOrElse(() => ''));
+
+    return currentDate.isBefore(dateTime);
   }
 
   const DateTimeStringValue._(this.value);

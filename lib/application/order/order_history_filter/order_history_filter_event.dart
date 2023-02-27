@@ -8,11 +8,11 @@ class OrderHistoryFilterEvent with _$OrderHistoryFilterEvent {
       _FilterOrderHistory;
 
   const factory OrderHistoryFilterEvent.setfromDate({
-    required DateTime fromDate,
+    required DateTimeStringValue fromDate,
   }) = _SetfromDate;
 
   const factory OrderHistoryFilterEvent.setToDate({
-    required DateTime toDate,
+    required DateTimeStringValue toDate,
   }) = _SetToDate;
 
   const factory OrderHistoryFilterEvent.orderIdChanged(String orderId) =

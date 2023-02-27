@@ -6,8 +6,8 @@ import 'package:ezrxmobile/application/returns/approver_actions/filter/return_ap
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_approver_filter.dart';
-import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/returns/approver_actions/filter_drawer.dart';
@@ -50,7 +50,7 @@ void main() {
     ),
   );
 
-  final fakeFormDate = DateTime.parse(
+  final fakeFromDate = DateTime.parse(
     DateFormat('yyyyMMdd').format(
       DateTime.now().subtract(
         const Duration(days: 7),
@@ -416,8 +416,10 @@ void main() {
           ReturnApproverFilterState.initial().copyWith(
             showErrorMessages: true,
             approverReturnFilter: ReturnApproverFilter.empty().copyWith(
-                fromInvoiceDate: InvoiceDate(fakeFormDate.toIso8601String()),
-                toInvoiceDate: InvoiceDate(fakeToDate.toIso8601String())),
+                fromInvoiceDate:
+                    DateTimeStringValue(getDateStringByDateTime(fakeFromDate)),
+                toInvoiceDate:
+                    DateTimeStringValue(getDateStringByDateTime(fakeToDate))),
           ),
         ];
         whenListen(
@@ -442,12 +444,10 @@ void main() {
         verify(
           () => returnApproverFilterBlocMock.add(
             ReturnApproverFilterEvent.setInvoiceDate(
-                DateTimeRange(start: fakeFormDate, end: fakeToDate)),
+                DateTimeRange(start: fakeFromDate, end: fakeToDate)),
           ),
         ).called(1);
       },
     );
-
   });
-
 }

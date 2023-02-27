@@ -3,7 +3,6 @@ import 'dart:core';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/core/error/failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/core/value/value_validators.dart';
 import 'package:ezrxmobile/domain/returns/value/value_transformers.dart';
 import 'package:flutter/animation.dart';
@@ -104,28 +103,6 @@ class ReturnSummaryStatus extends ValueObject<String> {
       getStatusTextColor(value.getOrElse(() => ''));
 
   const ReturnSummaryStatus._(this.value);
-}
-
-class InvoiceDate extends ValueObject<String> {
-  @override
-  final Either<ValueFailure<String>, String> value;
-
-  factory InvoiceDate(String input) {
-    return InvoiceDate._(Right(input));
-  }
-
-  DateTime get dateTimebyDateString =>
-      getDateTimebyDateString(value.getOrElse(() => ''));
-
-  String get apiParameterValue => covertDateStringToApiDateString(
-        value.getOrElse(() => ''),
-      );
-
-  String get getFormattedDate {
-    return displayDateStringOrEmpty((value.getOrElse(() => '')));
-  }
-
-  const InvoiceDate._(this.value);
 }
 
 class FilterStatus extends ValueObject<String> {

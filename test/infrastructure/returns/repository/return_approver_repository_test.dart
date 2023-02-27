@@ -3,10 +3,11 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/returns/entities/approver_return_request.dart';
 import 'package:ezrxmobile/domain/returns/entities/approver_return_requests_id.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_approver_filter.dart';
-import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/approver_return_request_information_local.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/approver_return_request_information_remote.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/approver_return_requests_local.dart';
@@ -47,7 +48,7 @@ void main() {
     ),
   );
 
-  final fakeFormDate = DateTime.parse(
+  final fakeFromDate = DateTime.parse(
     DateFormat('yyyyMMdd').format(
       DateTime.now().subtract(
         const Duration(days: 7),
@@ -74,11 +75,11 @@ void main() {
       returnRequestRemoteDataSource: approverReturnRequestsRemoteMock,
     );
     returnApproverFilter = ReturnApproverFilter.empty().copyWith(
-      toInvoiceDate: InvoiceDate(
-        fakeToDate.toIso8601String(),
+      toInvoiceDate: DateTimeStringValue(
+        getDateStringByDateTime(fakeToDate),
       ),
-      fromInvoiceDate: InvoiceDate(
-        fakeFormDate.toIso8601String(),
+      fromInvoiceDate: DateTimeStringValue(
+        getDateStringByDateTime(fakeFromDate),
       ),
     );
   });
@@ -139,10 +140,10 @@ void main() {
           when(() => approverReturnRequestsRemoteMock.getReturns(
               filterQuery: {
                     'status': 'PENDING',
-                    'dateTo': InvoiceDate(fakeToDate.toIso8601String())
-                        .apiParameterValue,
-                    'dateFrom': InvoiceDate(fakeFormDate.toIso8601String())
-                        .apiParameterValue,
+                    'dateTo': DateTimeStringValue(getDateStringByDateTime(fakeToDate))
+                        .apiDateTimeFormat,
+                    'dateFrom': DateTimeStringValue(getDateStringByDateTime(fakeFromDate))
+                        .apiDateTimeFormat,
                   },
               offset: 0,
               pageSize: 11,
@@ -174,10 +175,10 @@ void main() {
           when(() => approverReturnRequestsRemoteMock.getReturns(
                   filterQuery: {
                     'status': 'PENDING',
-                    'dateTo': InvoiceDate(fakeToDate.toIso8601String())
-                        .apiParameterValue,
-                    'dateFrom': InvoiceDate(fakeFormDate.toIso8601String())
-                        .apiParameterValue,
+                    'dateTo': DateTimeStringValue(getDateStringByDateTime(fakeToDate))
+                        .apiDateTimeFormat,
+                    'dateFrom': DateTimeStringValue(getDateStringByDateTime(fakeFromDate))
+                        .apiDateTimeFormat,
                   },
                   offset: 0,
                   pageSize: 11,
