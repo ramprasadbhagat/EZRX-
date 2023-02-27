@@ -36,15 +36,16 @@ class CartEvent with _$CartEvent {
     required bool doNotallowOutOfStockMaterial,
     @Default(false) bool overrideQty,
   }) = _AddComboDealToCart;
-  const factory CartEvent.updateBundleItemQty({
-    required CartItem currentBundle,
+  const factory CartEvent.updateMaterialQtyInCartItem({
+    required CartItem currentItem,
     required PriceAggregate updatedQtyItem,
+    @Default(true) bool overrideQty,
     required SalesOrganisationConfigs salesOrganisationConfigs,
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
     required bool doNotallowOutOfStockMaterial,
-  }) = _UpdateBundleItemQty;
+  }) = _UpdateMaterialQtyInCartItem;
   const factory CartEvent.verifyMaterialDealBonus({
     required PriceAggregate item,
     required SalesOrganisationConfigs salesOrganisationConfigs,
@@ -95,13 +96,4 @@ class CartEvent with _$CartEvent {
     required ShipToInfo shipToInfo,
     required bool doNotallowOutOfStockMaterial,
   }) = _ReplaceWithOrderItems;
-  const factory CartEvent.updateComboDealItemQty({
-    required PriceAggregate updatedItem,
-    required CartItem currentCombo,
-    required SalesOrganisationConfigs salesOrganisationConfigs,
-    required SalesOrganisation salesOrganisation,
-    required CustomerCodeInfo customerCodeInfo,
-    required ShipToInfo shipToInfo,
-    required bool doNotallowOutOfStockMaterial, 
-  }) = _UpdateComboDealItemQty;
 }

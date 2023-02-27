@@ -63,6 +63,11 @@ class CartRepository implements ICartRepository {
   Future<Either<ApiFailure, List<CartItem>>> addItemToCart({
     required CartItem cartItem,
     required bool override,
+    required CustomerCodeInfo customerCodeInfo,
+    required SalesOrganisationConfigs salesOrganisationConfigs,
+    required SalesOrganisation salesOrganisation,
+    required ShipToInfo shipToInfo,
+    required bool doNotAllowOutOfStockMaterials,
   }) async {
     //TODO: Implement countly event for both adding material and bundle to cart
     //    await countlyService
@@ -76,12 +81,36 @@ class CartRepository implements ICartRepository {
     // });
 
     try {
-      final inCartItem = cartStorage.get(id: cartItem.id)?.toDomain;
+      final stockInfo = await getStockInfoList(
+        items: cartItem.materials.map((e) => e.materialInfo).toList(),
+        customerCodeInfo: customerCodeInfo,
+        salesOrganisationConfigs: salesOrganisationConfigs,
+        salesOrganisation: salesOrganisation,
+        shipToInfo: shipToInfo,
+      );
+
+      final cartItemWithStock = cartItem.copyWithStockInfo(
+        stockInfoMap: stockInfo.getOrElse(() => {}),
+      );
+
+      final isOutOfStockItem = cartItemWithStock
+          .copyWithInStockOnly(
+            allowOutOfStock: !doNotAllowOutOfStockMaterials,
+          )
+          .materials
+          .isEmpty;
+      if (isOutOfStockItem) {
+        return const Left(
+          ApiFailure.productOutOfStock(),
+        );
+      }
+
+      final inCartItem = cartStorage.get(id: cartItemWithStock.id)?.toDomain;
       final savedCartItem = (inCartItem != null && !override)
           ? inCartItem.copyWith(
               materials: inCartItem.materials.map(
                 (material) {
-                  final qty = cartItem.materials
+                  final qty = cartItemWithStock.materials
                           .firstWhereOrNull((item) =>
                               item.getMaterialNumber ==
                               material.getMaterialNumber)
@@ -92,12 +121,69 @@ class CartRepository implements ICartRepository {
                 },
               ).toList(),
             )
-          : cartItem;
+          : cartItemWithStock;
 
       await cartStorage.put(
         id: savedCartItem.id,
         item: CartItemDto.fromDomain(savedCartItem),
       );
+
+      return fetchCart();
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, List<CartItem>>> updateMaterialQtyInCartItem({
+    required CartItem cartItem,
+    required PriceAggregate updatedQtyItem,
+    required bool override,
+    required CustomerCodeInfo customerCodeInfo,
+    required SalesOrganisationConfigs salesOrganisationConfigs,
+    required SalesOrganisation salesOrganisation,
+    required ShipToInfo shipToInfo,
+    required bool doNotAllowOutOfStockMaterials,
+  }) async {
+    try {
+      final result = await getStockInfo(
+        material: updatedQtyItem.materialInfo,
+        customerCodeInfo: customerCodeInfo,
+        salesOrganisationConfigs: salesOrganisationConfigs,
+        salesOrganisation: salesOrganisation,
+        shipToInfo: shipToInfo,
+      );
+      final stockInfo = result.getOrElse(() => StockInfo.empty());
+      if (!stockInfo.inStock.isMaterialInStock &&
+          doNotAllowOutOfStockMaterials) {
+        return const Left(
+          ApiFailure.productOutOfStock(),
+        );
+      }
+
+      final inCartItem = cartStorage.get(id: cartItem.id)?.toDomain;
+      if (inCartItem != null) {
+        final updatedCartItem = inCartItem.copyWith(
+          materials: inCartItem.materials.map((item) {
+            if (item.getMaterialNumber == updatedQtyItem.getMaterialNumber) {
+              return override
+                  ? item.copyWith(
+                      quantity: updatedQtyItem.quantity,
+                    )
+                  : item.copyWithIncreasedQty(
+                      qty: updatedQtyItem.quantity,
+                    );
+            }
+
+            return item;
+          }).toList(),
+        );
+
+        await cartStorage.put(
+          id: updatedCartItem.id,
+          item: CartItemDto.fromDomain(updatedCartItem),
+        );
+      }
 
       return fetchCart();
     } catch (e) {
@@ -158,8 +244,32 @@ class CartRepository implements ICartRepository {
     required CartItem item,
     required MaterialItemBonus newBonus,
     required bool overrideQty,
+    required CustomerCodeInfo customerCodeInfo,
+    required SalesOrganisationConfigs salesOrganisationConfigs,
+    required SalesOrganisation salesOrganisation,
+    required ShipToInfo shipToInfo,
+    required bool doNotAllowOutOfStockMaterials,
   }) async {
     try {
+      final result = await getStockInfo(
+        material: newBonus.materialInfo,
+        customerCodeInfo: customerCodeInfo,
+        salesOrganisationConfigs: salesOrganisationConfigs,
+        salesOrganisation: salesOrganisation,
+        shipToInfo: shipToInfo,
+      );
+      final stockInfo = result.getOrElse(() => StockInfo.empty());
+      if (!stockInfo.inStock.isMaterialInStock &&
+          doNotAllowOutOfStockMaterials) {
+        return const Left(
+          ApiFailure.productOutOfStock(),
+        );
+      }
+
+      final newBonusWithStock = newBonus.copyWith(
+        inStock: stockInfo.inStock.getOrCrash(),
+      );
+
       final inCartItem = cartStorage.get(id: item.id)?.toDomain;
       if (inCartItem != null) {
         switch (inCartItem.itemType) {
@@ -167,20 +277,21 @@ class CartRepository implements ICartRepository {
             final material = inCartItem.materials.first;
             var bonusExisting = false;
             final updatedBonuses = material.addedBonusList.map((bonus) {
-              if (bonus.materialNumber == newBonus.materialNumber &&
-                  bonus.additionalBonusFlag == newBonus.additionalBonusFlag) {
+              if (bonus.materialNumber == newBonusWithStock.materialNumber &&
+                  bonus.additionalBonusFlag ==
+                      newBonusWithStock.additionalBonusFlag) {
                 bonusExisting = true;
                 if (overrideQty) {
-                  return newBonus;
+                  return newBonusWithStock;
                 }
 
-                return bonus.copyWith(qty: bonus.qty + newBonus.qty);
+                return bonus.copyWith(qty: bonus.qty + newBonusWithStock.qty);
               }
 
               return bonus;
             }).toList();
             if (!bonusExisting) {
-              updatedBonuses.add(newBonus);
+              updatedBonuses.add(newBonusWithStock);
             }
             final itemWithNewBonus = inCartItem.copyWith(
               materials: [material.copyWith(addedBonusList: updatedBonuses)],
@@ -503,6 +614,56 @@ class CartRepository implements ICartRepository {
   }
 
   @override
+  Future<Either<ApiFailure, List<CartItem>>> replaceCartWithItems({
+    required List<CartItem> items,
+    required CustomerCodeInfo customerCodeInfo,
+    required SalesOrganisationConfigs salesOrganisationConfigs,
+    required SalesOrganisation salesOrganisation,
+    required ShipToInfo shipToInfo,
+    required bool doNotAllowOutOfStockMaterials,
+  }) async {
+    try {
+      final stockInfoMap = await getStockInfoList(
+        items: items.allMaterials.map((e) => e.materialInfo).toList(),
+        customerCodeInfo: customerCodeInfo,
+        salesOrganisationConfigs: salesOrganisationConfigs,
+        salesOrganisation: salesOrganisation,
+        shipToInfo: shipToInfo,
+      );
+
+      final itemsWithStockInfo = items
+          .map(
+            (item) => item.copyWithStockInfo(
+              stockInfoMap: stockInfoMap.getOrElse(
+                () => {},
+              ),
+            ),
+          )
+          .toList();
+
+      if (itemsWithStockInfo.allOutOfStock(
+        allowOutOfStock: !doNotAllowOutOfStockMaterials,
+      )) {
+        return const Left(
+          ApiFailure.productOutOfStock(),
+        );
+      }
+
+      await clearCart();
+      await cartStorage.putAll(
+        items: {
+          for (final item in itemsWithStockInfo)
+            item.id: CartItemDto.fromDomain(item),
+        },
+      );
+
+      return fetchCart();
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
   Future<Either<ApiFailure, Map<MaterialNumber, StockInfo>>> getStockInfoList({
     required List<MaterialInfo> items,
     required CustomerCodeInfo customerCodeInfo,
@@ -585,24 +746,6 @@ class CartRepository implements ICartRepository {
       } catch (e) {
         return Left(FailureHandler.handleFailure(e));
       }
-    }
-  }
-
-  @override
-  Future<Either<ApiFailure, List<CartItem>>> replaceCartWithItems({
-    required List<CartItem> items,
-  }) async {
-    try {
-      await clearCart();
-      await cartStorage.putAll(
-        items: {
-          for (final item in items) item.id: CartItemDto.fromDomain(item),
-        },
-      );
-
-      return fetchCart();
-    } catch (e) {
-      return Left(FailureHandler.handleFailure(e));
     }
   }
 }

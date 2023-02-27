@@ -21,20 +21,16 @@ void main() {
       'zmgMaterial 1 add to cart with empty cart',
       build: () => CartBloc(cartRepositoryMock),
       setUp: () {
-        when(() => cartRepositoryMock.getStockInfo(
-              material: mockZmgCartItemList.first.materialInfo,
+        when(() => cartRepositoryMock.addItemToCart(
+              cartItem: mockZmgMaterialCartItemFirst
+                  .copyWith(materials: [mockZmgCartItemList.first]),
+              override: false,
               customerCodeInfo: CustomerCodeInfo.empty(),
-              salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
               salesOrganisation: SalesOrganisation.empty(),
               shipToInfo: ShipToInfo.empty(),
-            )).thenAnswer((invocation) async => Right(mockStockInfo));
-        when(() =>
-            cartRepositoryMock.addItemToCart(
-                cartItem: mockZmgMaterialCartItemFirst.copyWith(materials: [
-                  mockZmgCartItemList.first.copyWith(stockInfo: mockStockInfo)
-                ]),
-                override:
-                    false)).thenAnswer((invocation) async => Right(<CartItem>[
+              doNotAllowOutOfStockMaterials: true,
+              salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+            )).thenAnswer((invocation) async => Right(<CartItem>[
               mockZmgMaterialCartItemFirst
                   .copyWith(materials: [mockZmgCartItemList.first])
             ]));
@@ -100,26 +96,19 @@ void main() {
       'zmgMaterial 1 add to cart with empty cart and MaterialGroup4 is FOC',
       build: () => CartBloc(cartRepositoryMock),
       setUp: () {
-        when(() => cartRepositoryMock.getStockInfo(
-              material: mockZmgCartItemList.first
-                  .copyWith(
-                      stockInfo: mockStockInfo,
-                      materialInfo: MaterialInfo.empty()
-                          .copyWith(materialGroup4: MaterialGroup.four('6A1')))
-                  .materialInfo,
+        when(() => cartRepositoryMock.addItemToCart(
+              cartItem: mockZmgMaterialCartItemFirst.copyWith(materials: [
+                mockZmgCartItemList.first.copyWith(
+                    materialInfo: MaterialInfo.empty()
+                        .copyWith(materialGroup4: MaterialGroup.four('6A1')))
+              ]),
+              override: false,
               customerCodeInfo: CustomerCodeInfo.empty(),
-              salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
               salesOrganisation: SalesOrganisation.empty(),
               shipToInfo: ShipToInfo.empty(),
-            )).thenAnswer((invocation) async => Right(mockStockInfo));
-        when(() => cartRepositoryMock.addItemToCart(
-            cartItem: mockZmgMaterialCartItemFirst.copyWith(materials: [
-              mockZmgCartItemList.first.copyWith(
-                  stockInfo: mockStockInfo,
-                  materialInfo: MaterialInfo.empty()
-                      .copyWith(materialGroup4: MaterialGroup.four('6A1')))
-            ]),
-            override: false)).thenAnswer((invocation) async => Right(<CartItem>[
+              doNotAllowOutOfStockMaterials: true,
+              salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+            )).thenAnswer((invocation) async => Right(<CartItem>[
               mockZmgMaterialCartItemFirst.copyWith(materials: [
                 mockZmgCartItemList.first.copyWith(
                     materialInfo: MaterialInfo.empty()
@@ -199,26 +188,19 @@ void main() {
       'zmgMaterial 1 add to cart with empty cart and MaterialGroup4 is not FOC',
       build: () => CartBloc(cartRepositoryMock),
       setUp: () {
-        when(() => cartRepositoryMock.getStockInfo(
-              material: mockZmgCartItemList.first
-                  .copyWith(
-                      stockInfo: mockStockInfo,
-                      materialInfo: MaterialInfo.empty()
-                          .copyWith(materialGroup4: MaterialGroup.four('OTH')))
-                  .materialInfo,
+        when(() => cartRepositoryMock.addItemToCart(
+              cartItem: mockZmgMaterialCartItemFirst.copyWith(materials: [
+                mockZmgCartItemList.first.copyWith(
+                    materialInfo: MaterialInfo.empty()
+                        .copyWith(materialGroup4: MaterialGroup.four('OTH')))
+              ]),
+              override: false,
               customerCodeInfo: CustomerCodeInfo.empty(),
-              salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
               salesOrganisation: SalesOrganisation.empty(),
               shipToInfo: ShipToInfo.empty(),
-            )).thenAnswer((invocation) async => Right(mockStockInfo));
-        when(() => cartRepositoryMock.addItemToCart(
-            cartItem: mockZmgMaterialCartItemFirst.copyWith(materials: [
-              mockZmgCartItemList.first.copyWith(
-                  stockInfo: mockStockInfo,
-                  materialInfo: MaterialInfo.empty()
-                      .copyWith(materialGroup4: MaterialGroup.four('OTH')))
-            ]),
-            override: false)).thenAnswer((invocation) async => Right(<CartItem>[
+              doNotAllowOutOfStockMaterials: true,
+              salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+            )).thenAnswer((invocation) async => Right(<CartItem>[
               mockZmgMaterialCartItemFirst.copyWith(materials: [
                 mockZmgCartItemList.first.copyWith(
                     materialInfo: MaterialInfo.empty()
@@ -298,26 +280,19 @@ void main() {
       'zmgMaterial 1 add to cart with empty cart and MaterialInfo is SampleMaterial',
       build: () => CartBloc(cartRepositoryMock),
       setUp: () {
-        when(() => cartRepositoryMock.getStockInfo(
-              material: mockZmgCartItemList.first
-                  .copyWith(
-                      stockInfo: mockStockInfo,
-                      materialInfo:
-                          MaterialInfo.empty().copyWith(isSampleMaterial: true))
-                  .materialInfo,
+        when(() => cartRepositoryMock.addItemToCart(
+              cartItem: mockZmgMaterialCartItemFirst.copyWith(materials: [
+                mockZmgCartItemList.first.copyWith(
+                    materialInfo:
+                        MaterialInfo.empty().copyWith(isSampleMaterial: true))
+              ]),
+              override: false,
               customerCodeInfo: CustomerCodeInfo.empty(),
-              salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
               salesOrganisation: SalesOrganisation.empty(),
               shipToInfo: ShipToInfo.empty(),
-            )).thenAnswer((invocation) async => Right(mockStockInfo));
-        when(() => cartRepositoryMock.addItemToCart(
-            cartItem: mockZmgMaterialCartItemFirst.copyWith(materials: [
-              mockZmgCartItemList.first.copyWith(
-                  stockInfo: mockStockInfo,
-                  materialInfo:
-                      MaterialInfo.empty().copyWith(isSampleMaterial: true))
-            ]),
-            override: false)).thenAnswer((invocation) async => Right(<CartItem>[
+              doNotAllowOutOfStockMaterials: true,
+              salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+            )).thenAnswer((invocation) async => Right(<CartItem>[
               mockZmgMaterialCartItemFirst.copyWith(materials: [
                 mockZmgCartItemList.first.copyWith(
                     materialInfo:
@@ -397,26 +372,19 @@ void main() {
       'zmgMaterial 1 add to cart with empty cart and MaterialInfo is FOC and not SampleMaterial',
       build: () => CartBloc(cartRepositoryMock),
       setUp: () {
-        when(() => cartRepositoryMock.getStockInfo(
-              material: mockZmgCartItemList.first
-                  .copyWith(
-                      stockInfo: mockStockInfo,
-                      materialInfo: MaterialInfo.empty().copyWith(
-                          isSampleMaterial: false, isFOCMaterial: true))
-                  .materialInfo,
+        when(() => cartRepositoryMock.addItemToCart(
+              cartItem: mockZmgMaterialCartItemFirst.copyWith(materials: [
+                mockZmgCartItemList.first.copyWith(
+                    materialInfo: MaterialInfo.empty()
+                        .copyWith(isSampleMaterial: false, isFOCMaterial: true))
+              ]),
+              override: false,
               customerCodeInfo: CustomerCodeInfo.empty(),
-              salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
               salesOrganisation: SalesOrganisation.empty(),
               shipToInfo: ShipToInfo.empty(),
-            )).thenAnswer((invocation) async => Right(mockStockInfo));
-        when(() => cartRepositoryMock.addItemToCart(
-            cartItem: mockZmgMaterialCartItemFirst.copyWith(materials: [
-              mockZmgCartItemList.first.copyWith(
-                  stockInfo: mockStockInfo,
-                  materialInfo: MaterialInfo.empty()
-                      .copyWith(isSampleMaterial: false, isFOCMaterial: true))
-            ]),
-            override: false)).thenAnswer((invocation) async => Right(<CartItem>[
+              doNotAllowOutOfStockMaterials: true,
+              salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+            )).thenAnswer((invocation) async => Right(<CartItem>[
               mockZmgMaterialCartItemFirst.copyWith(materials: [
                 mockZmgCartItemList.first.copyWith(
                     materialInfo: MaterialInfo.empty()
@@ -496,26 +464,19 @@ void main() {
       'zmgMaterial 1 add to cart with empty cart and MaterialInfo is not FOC',
       build: () => CartBloc(cartRepositoryMock),
       setUp: () {
-        when(() => cartRepositoryMock.getStockInfo(
-              material: mockZmgCartItemList.first
-                  .copyWith(
-                      stockInfo: mockStockInfo,
-                      materialInfo:
-                          MaterialInfo.empty().copyWith(isFOCMaterial: false))
-                  .materialInfo,
+        when(() => cartRepositoryMock.addItemToCart(
+              cartItem: mockZmgMaterialCartItemFirst.copyWith(materials: [
+                mockZmgCartItemList.first.copyWith(
+                    materialInfo:
+                        MaterialInfo.empty().copyWith(isFOCMaterial: false))
+              ]),
+              override: false,
               customerCodeInfo: CustomerCodeInfo.empty(),
-              salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
               salesOrganisation: SalesOrganisation.empty(),
               shipToInfo: ShipToInfo.empty(),
-            )).thenAnswer((invocation) async => Right(mockStockInfo));
-        when(() => cartRepositoryMock.addItemToCart(
-            cartItem: mockZmgMaterialCartItemFirst.copyWith(materials: [
-              mockZmgCartItemList.first.copyWith(
-                  stockInfo: mockStockInfo,
-                  materialInfo:
-                      MaterialInfo.empty().copyWith(isFOCMaterial: false))
-            ]),
-            override: false)).thenAnswer((invocation) async => Right(<CartItem>[
+              doNotAllowOutOfStockMaterials: true,
+              salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+            )).thenAnswer((invocation) async => Right(<CartItem>[
               mockZmgMaterialCartItemFirst.copyWith(materials: [
                 mockZmgCartItemList.first.copyWith(
                     materialInfo:
@@ -601,21 +562,17 @@ void main() {
       ),
       build: () => CartBloc(cartRepositoryMock),
       setUp: () {
-        when(() => cartRepositoryMock.getStockInfo(
-              material: mockZmgCartItemList.last.materialInfo,
-              customerCodeInfo: CustomerCodeInfo.empty(),
-              salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-              salesOrganisation: SalesOrganisation.empty(),
-              shipToInfo: ShipToInfo.empty(),
-            )).thenAnswer((invocation) async => Right(mockStockInfo));
         when(
           () => cartRepositoryMock.addItemToCart(
-              cartItem: mockZmgMaterialCartItemFirst.copyWith(materials: [
-                mockZmgCartItemList.last.copyWith(quantity: 3).copyWith(
-                      stockInfo: mockStockInfo,
-                    ),
-              ]),
-              override: false),
+            cartItem: mockZmgMaterialCartItemFirst.copyWith(
+                materials: [mockZmgCartItemList.last.copyWith(quantity: 3)]),
+            override: false,
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            salesOrganisation: SalesOrganisation.empty(),
+            shipToInfo: ShipToInfo.empty(),
+            doNotAllowOutOfStockMaterials: true,
+            salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+          ),
         ).thenAnswer(
           (invocation) async => Right(
             [
@@ -705,20 +662,19 @@ void main() {
       ),
       build: () => CartBloc(cartRepositoryMock),
       setUp: () {
-        when(() => cartRepositoryMock.getStockInfo(
-              material: mockZmgCartItemList.last.materialInfo,
-              customerCodeInfo: CustomerCodeInfo.empty(),
-              salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-              salesOrganisation: SalesOrganisation.empty(),
-              shipToInfo: ShipToInfo.empty(),
-            )).thenAnswer((invocation) async => Right(mockStockInfo));
         when(
-          () => cartRepositoryMock.addItemToCart(
-              cartItem: mockZmgMaterialCartItemFirst.copyWith(materials: [
-                mockZmgCartItemList.last
-                    .copyWith(quantity: 5, stockInfo: mockStockInfo)
-              ]),
-              override: true),
+          () => cartRepositoryMock.updateMaterialQtyInCartItem(
+            cartItem: mockZmgMaterialCartItemFirst.copyWith(
+              materials: [mockZmgCartItemList.last.copyWith(quantity: 1)],
+            ),
+            updatedQtyItem: mockZmgCartItemList.last.copyWith(quantity: 5),
+            override: true,
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            salesOrganisation: SalesOrganisation.empty(),
+            shipToInfo: ShipToInfo.empty(),
+            doNotAllowOutOfStockMaterials: true,
+            salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+          ),
         ).thenAnswer(
           (invocation) async => Right([
             mockZmgMaterialCartItemFirst.copyWith(materials: [
@@ -728,8 +684,8 @@ void main() {
           ]),
         );
       },
-      act: (bloc) => bloc.add(CartEvent.updateBundleItemQty(
-        currentBundle: mockZmgMaterialCartItemFirst.copyWith(
+      act: (bloc) => bloc.add(CartEvent.updateMaterialQtyInCartItem(
+        currentItem: mockZmgMaterialCartItemFirst.copyWith(
           materials: [mockZmgCartItemList.last.copyWith(quantity: 1)],
         ),
         updatedQtyItem: mockZmgCartItemList.last.copyWith(quantity: 5),
@@ -788,20 +744,19 @@ void main() {
       ),
       build: () => CartBloc(cartRepositoryMock),
       setUp: () {
-        when(() => cartRepositoryMock.getStockInfo(
-              material: mockZmgCartItemList.last.materialInfo,
-              customerCodeInfo: CustomerCodeInfo.empty(),
-              salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-              salesOrganisation: SalesOrganisation.empty(),
-              shipToInfo: ShipToInfo.empty(),
-            )).thenAnswer((invocation) async => Right(mockStockInfo));
         when(
-          () => cartRepositoryMock.addItemToCart(
-              cartItem: mockZmgMaterialCartItemFirst.copyWith(materials: [
-                mockZmgCartItemList.last
-                    .copyWith(quantity: 2, stockInfo: mockStockInfo)
-              ]),
-              override: true),
+          () => cartRepositoryMock.updateMaterialQtyInCartItem(
+            cartItem: mockZmgMaterialCartItemFirst.copyWith(
+              materials: [mockZmgCartItemList.last.copyWith(quantity: 5)],
+            ),
+            updatedQtyItem: mockZmgCartItemList.last.copyWith(quantity: 2),
+            override: true,
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            salesOrganisation: SalesOrganisation.empty(),
+            shipToInfo: ShipToInfo.empty(),
+            doNotAllowOutOfStockMaterials: true,
+            salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+          ),
         ).thenAnswer(
           (invocation) async => Right([
             mockZmgMaterialCartItemFirst.copyWith(materials: [
@@ -811,8 +766,8 @@ void main() {
           ]),
         );
       },
-      act: (bloc) => bloc.add(CartEvent.updateBundleItemQty(
-        currentBundle: mockZmgMaterialCartItemFirst.copyWith(
+      act: (bloc) => bloc.add(CartEvent.updateMaterialQtyInCartItem(
+        currentItem: mockZmgMaterialCartItemFirst.copyWith(
           materials: [mockZmgCartItemList.last.copyWith(quantity: 5)],
         ),
         updatedQtyItem: mockZmgCartItemList.last.copyWith(quantity: 2),

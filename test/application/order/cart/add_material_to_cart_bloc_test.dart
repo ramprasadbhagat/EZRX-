@@ -8,8 +8,6 @@ import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
-import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'cart_bloc_variables.dart';
@@ -27,23 +25,18 @@ void main() {
       'Add Material to Cart Success CartBloc',
       build: () => CartBloc(cartRepositoryMock),
       setUp: () {
-        when(() => cartRepositoryMock.getStockInfo(
-              material: MaterialInfo.empty(),
-              customerCodeInfo: CustomerCodeInfo.empty(),
-              salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-              salesOrganisation: SalesOrganisation.empty(),
-              shipToInfo: ShipToInfo.empty(),
-            )).thenAnswer((invocation) async => Right(mockStockInfo));
-
-        when(() => cartRepositoryMock.addItemToCart(
-                cartItem: CartItem(materials: [
-                  PriceAggregate.empty().copyWith(
-                    stockInfo: mockStockInfo,
-                  ),
-                ], itemType: CartItemType.material),
-                override: false))
-            .thenAnswer((invocation) async =>
-                Right(<CartItem>[mockMaterialCartItemFirst]));
+        when(
+          () => cartRepositoryMock.addItemToCart(
+            cartItem: CartItem.material(PriceAggregate.empty()),
+            override: false,
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            salesOrganisation: SalesOrganisation.empty(),
+            shipToInfo: ShipToInfo.empty(),
+            doNotAllowOutOfStockMaterials: true,
+            salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+          ),
+        ).thenAnswer(
+            (invocation) async => Right(<CartItem>[mockMaterialCartItemFirst]));
 
         when(() => cartRepositoryMock.updateDiscountQty(
                 items: mockMaterialCartItemList))
@@ -82,20 +75,15 @@ void main() {
       'Add Material to Cart Failure CartBloc',
       build: () => CartBloc(cartRepositoryMock),
       setUp: () {
-        when(() => cartRepositoryMock.getStockInfo(
-              material: MaterialInfo.empty(),
-              customerCodeInfo: CustomerCodeInfo.empty(),
-              salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-              salesOrganisation: SalesOrganisation.empty(),
-              shipToInfo: ShipToInfo.empty(),
-            )).thenAnswer((invocation) async => Right(mockStockInfo));
         when(() => cartRepositoryMock.addItemToCart(
-                cartItem: CartItem(materials: [
-                  PriceAggregate.empty().copyWith(
-                    stockInfo: mockStockInfo,
-                  ),
-                ], itemType: CartItemType.material),
-                override: false))
+                  cartItem: CartItem.material(PriceAggregate.empty()),
+                  override: false,
+                  customerCodeInfo: CustomerCodeInfo.empty(),
+                  salesOrganisation: SalesOrganisation.empty(),
+                  shipToInfo: ShipToInfo.empty(),
+                  doNotAllowOutOfStockMaterials: true,
+                  salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+                ))
             .thenAnswer((invocation) async =>
                 const Left(ApiFailure.other('Fake-Error')));
       },
@@ -124,75 +112,22 @@ void main() {
         ),
       ],
     );
-    blocTest<CartBloc, CartState>(
-      'Add to Cart Successful With No Stock',
-      build: () => CartBloc(cartRepositoryMock),
-      setUp: () {
-        when(() => cartRepositoryMock.getStockInfo(
-              material: MaterialInfo.empty(),
-              customerCodeInfo: CustomerCodeInfo.empty(),
-              salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-              salesOrganisation: SalesOrganisation.empty(),
-              shipToInfo: ShipToInfo.empty(),
-            )).thenAnswer(
-          (invocation) async => const Left(ApiFailure.other('Fake-Error')),
-        );
-        when(() => cartRepositoryMock.addItemToCart(
-                cartItem: CartItem(materials: [
-                  PriceAggregate.empty().copyWith(
-                    stockInfo: StockInfo.empty(),
-                  ),
-                ], itemType: CartItemType.material),
-                override: false))
-            .thenAnswer((invocation) async => Right(mockMaterialCartItemList));
-
-        when(() => cartRepositoryMock.updateDiscountQty(
-                items: mockMaterialCartItemList))
-            .thenAnswer((invocation) => mockMaterialCartItemList);
-
-        when(() => cartRepositoryMock.updateMaterialDealBonus(
-                  material: PriceAggregate.empty(),
-                  customerCodeInfo: CustomerCodeInfo.empty(),
-                  salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-                  salesOrganisation: SalesOrganisation.empty(),
-                  shipToInfo: ShipToInfo.empty(),
-                ))
-            .thenAnswer((invocation) async => Right(mockMaterialCartItemList));
-      },
-      act: (bloc) => bloc.add(CartEvent.addMaterialToCart(
-        item: PriceAggregate.empty(),
-        customerCodeInfo: CustomerCodeInfo.empty(),
-        salesOrganisation: SalesOrganisation.empty(),
-        shipToInfo: ShipToInfo.empty(),
-        doNotallowOutOfStockMaterial: false,
-        salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-      )),
-      expect: () => [
-        CartState.initial().copyWith(
-          apiFailureOrSuccessOption: none(),
-          isFetching: true,
-        ),
-        CartState.initial().copyWith(
-          apiFailureOrSuccessOption: none(),
-          cartItems: mockMaterialCartItemList,
-          isFetching: false,
-        ),
-      ],
-    );
 
     blocTest<CartBloc, CartState>(
       'Add to Cart fail for No Stock CartBloc',
       build: () => CartBloc(cartRepositoryMock),
       setUp: () {
-        when(() => cartRepositoryMock.getStockInfo(
-              material: MaterialInfo.empty(),
-              customerCodeInfo: CustomerCodeInfo.empty(),
-              salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-              salesOrganisation: SalesOrganisation.empty(),
-              shipToInfo: ShipToInfo.empty(),
-            )).thenAnswer(
-          (invocation) async => const Left(ApiFailure.other('Fake-Error')),
-        );
+        when(() => cartRepositoryMock.addItemToCart(
+                  cartItem: CartItem.material(PriceAggregate.empty()),
+                  override: false,
+                  customerCodeInfo: CustomerCodeInfo.empty(),
+                  salesOrganisation: SalesOrganisation.empty(),
+                  shipToInfo: ShipToInfo.empty(),
+                  doNotAllowOutOfStockMaterials: true,
+                  salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+                ))
+            .thenAnswer((invocation) async =>
+                const Left(ApiFailure.productOutOfStock()));
       },
       act: (bloc) => bloc.add(CartEvent.addMaterialToCart(
         item: PriceAggregate.empty(),
@@ -209,7 +144,7 @@ void main() {
         ),
         CartState.initial().copyWith(
           apiFailureOrSuccessOption:
-              optionOf(const Left(ApiFailure.other('Product Not Available'))),
+              optionOf(const Left(ApiFailure.productOutOfStock())),
           isFetching: false,
         ),
       ],
@@ -228,13 +163,6 @@ void main() {
       ),
       build: () => CartBloc(cartRepositoryMock),
       setUp: () {
-        when(() => cartRepositoryMock.getStockInfo(
-              material: mockZmgCartItemList.first.materialInfo,
-              customerCodeInfo: CustomerCodeInfo.empty(),
-              salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-              salesOrganisation: SalesOrganisation.empty(),
-              shipToInfo: ShipToInfo.empty(),
-            )).thenAnswer((invocation) async => Right(mockStockInfo));
         when(
           () => cartRepositoryMock.addItemToCart(
             cartItem: mockZmgMaterialCartItemFirst.copyWith(materials: [
@@ -242,10 +170,14 @@ void main() {
                 quantity: 4,
                 price: mockZmgCartItemList.first.price
                     .copyWith(zmgDiscount: false),
-                stockInfo: mockStockInfo,
               ),
             ]),
             override: false,
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            salesOrganisation: SalesOrganisation.empty(),
+            shipToInfo: ShipToInfo.empty(),
+            doNotAllowOutOfStockMaterials: true,
+            salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
           ),
         ).thenAnswer(
           (invocation) async => Right(

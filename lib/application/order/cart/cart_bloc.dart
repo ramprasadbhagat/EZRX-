@@ -12,7 +12,6 @@ import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
-import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/cart_repository.dart';
 
@@ -85,14 +84,15 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       );
       if (inCartComboDeal != null) {
         add(
-          _UpdateComboDealItemQty(
-            updatedItem: e.item,
-            currentCombo: inCartComboDeal,
+          _UpdateMaterialQtyInCartItem(
+            updatedQtyItem: e.item,
+            currentItem: inCartComboDeal,
             salesOrganisationConfigs: e.salesOrganisationConfigs,
             salesOrganisation: e.salesOrganisation,
             customerCodeInfo: e.customerCodeInfo,
             shipToInfo: e.shipToInfo,
             doNotallowOutOfStockMaterial: e.doNotallowOutOfStockMaterial,
+            overrideQty: false,
           ),
         );
 
@@ -105,37 +105,14 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         ),
       );
 
-      final result = await repository.getStockInfo(
-        material: e.item.materialInfo,
+      final failureOrSuccess = await repository.addItemToCart(
+        cartItem: CartItem.material(e.item),
+        override: e.overrideQty,
         customerCodeInfo: e.customerCodeInfo,
         salesOrganisationConfigs: e.salesOrganisationConfigs,
         salesOrganisation: e.salesOrganisation,
         shipToInfo: e.shipToInfo,
-      );
-      final stockInfo = result.getOrElse(() => StockInfo.empty());
-      if (!stockInfo.inStock.isMaterialInStock &&
-          e.doNotallowOutOfStockMaterial) {
-        emit(
-          state.copyWith(
-            apiFailureOrSuccessOption: optionOf(
-              const Left(
-                ApiFailure.other('Product Not Available'),
-              ),
-            ),
-            isFetching: false,
-          ),
-        );
-
-        return;
-      }
-
-      final failureOrSuccess = await repository.addItemToCart(
-        cartItem: CartItem.material(
-          e.item.copyWith(
-            stockInfo: stockInfo,
-          ),
-        ),
-        override: e.overrideQty,
+        doNotAllowOutOfStockMaterials: e.doNotallowOutOfStockMaterial,
       );
 
       await failureOrSuccess.fold(
@@ -218,38 +195,14 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         ),
       );
 
-      final result = await repository.getStockInfoList(
-        items: e.bundleItems.map((e) => e.materialInfo).toList(),
+      final failureOrSuccess = await repository.addItemToCart(
+        cartItem: CartItem.bundle(e.bundleItems),
+        override: false,
         customerCodeInfo: e.customerCodeInfo,
         salesOrganisationConfigs: e.salesOrganisationConfigs,
         salesOrganisation: e.salesOrganisation,
         shipToInfo: e.shipToInfo,
-      );
-      final stockInfoMap = result.getOrElse(() => {});
-      final bundleWithStock = CartItem.bundle(e.bundleItems).copyWithStockInfo(
-        stockInfoMap: stockInfoMap,
-      );
-      if ([bundleWithStock].allOutOfStock(
-            allowOutOfStock: !e.doNotallowOutOfStockMaterial,
-          ) ||
-          stockInfoMap.isEmpty) {
-        emit(
-          state.copyWith(
-            apiFailureOrSuccessOption: optionOf(
-              const Left(
-                ApiFailure.other('Product Not Available'),
-              ),
-            ),
-            isFetching: false,
-          ),
-        );
-
-        return;
-      }
-
-      final failureOrSuccess = await repository.addItemToCart(
-        cartItem: bundleWithStock,
-        override: false,
+        doNotAllowOutOfStockMaterials: e.doNotallowOutOfStockMaterial,
       );
 
       await failureOrSuccess.fold(
@@ -272,7 +225,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         },
       );
     });
-    on<_UpdateBundleItemQty>((e, emit) async {
+    on<_UpdateMaterialQtyInCartItem>((e, emit) async {
       emit(
         state.copyWith(
           apiFailureOrSuccessOption: none(),
@@ -280,45 +233,15 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         ),
       );
 
-      final result = await repository.getStockInfo(
-        material: e.updatedQtyItem.materialInfo,
+      final failureOrSuccess = await repository.updateMaterialQtyInCartItem(
+        cartItem: e.currentItem,
+        updatedQtyItem: e.updatedQtyItem,
         customerCodeInfo: e.customerCodeInfo,
         salesOrganisationConfigs: e.salesOrganisationConfigs,
         salesOrganisation: e.salesOrganisation,
         shipToInfo: e.shipToInfo,
-      );
-      final stockInfo = result.getOrElse(() => StockInfo.empty());
-      if (!stockInfo.inStock.isMaterialInStock &&
-          e.doNotallowOutOfStockMaterial) {
-        emit(
-          state.copyWith(
-            apiFailureOrSuccessOption: optionOf(
-              const Left(
-                ApiFailure.other('Product Not Available'),
-              ),
-            ),
-            isFetching: false,
-          ),
-        );
-
-        return;
-      }
-      final updatedBundle = e.currentBundle.copyWith(
-        materials: e.currentBundle.materials.map((item) {
-          if (item.getMaterialNumber == e.updatedQtyItem.getMaterialNumber) {
-            return item.copyWith(
-              quantity: e.updatedQtyItem.quantity,
-              stockInfo: stockInfo,
-            );
-          }
-
-          return item;
-        }).toList(),
-      );
-
-      final failureOrSuccess = await repository.addItemToCart(
-        cartItem: updatedBundle,
-        override: true,
+        doNotAllowOutOfStockMaterials: e.doNotallowOutOfStockMaterial,
+        override: e.overrideQty,
       );
 
       await failureOrSuccess.fold(
@@ -410,35 +333,15 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         ),
       );
 
-      final result = await repository.getStockInfo(
-        material: e.bonusItem.materialInfo,
+      final failureOrSuccess = await repository.addBonusToCartItem(
+        item: e.item,
+        newBonus: e.bonusItem,
+        overrideQty: e.overrideQty,
         customerCodeInfo: e.customerCodeInfo,
         salesOrganisationConfigs: e.salesOrganisationConfigs,
         salesOrganisation: e.salesOrganisation,
         shipToInfo: e.shipToInfo,
-      );
-      final stockInfo = result.getOrElse(() => StockInfo.empty());
-      if (!stockInfo.inStock.isMaterialInStock &&
-          e.doNotallowOutOfStockMaterial) {
-        emit(
-          state.copyWith(
-            apiFailureOrSuccessOption: optionOf(
-              const Left(
-                ApiFailure.other('Product Not Available'),
-              ),
-            ),
-            isFetching: false,
-          ),
-        );
-
-        return;
-      }
-      final failureOrSuccess = await repository.addBonusToCartItem(
-        item: e.item,
-        newBonus: e.bonusItem.copyWith(
-          inStock: stockInfo.inStock.getOrCrash(),
-        ),
-        overrideQty: e.overrideQty,
+        doNotAllowOutOfStockMaterials: e.doNotallowOutOfStockMaterial,
       );
 
       await failureOrSuccess.fold(
@@ -648,43 +551,13 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         ),
       );
 
-      final result = await repository.getStockInfoList(
-        items: e.items.allMaterials.map((e) => e.materialInfo).toList(),
+      final failureOrSuccess = await repository.replaceCartWithItems(
+        items: e.items,
         customerCodeInfo: e.customerCodeInfo,
         salesOrganisationConfigs: e.salesOrganisationConfigs,
         salesOrganisation: e.salesOrganisation,
         shipToInfo: e.shipToInfo,
-      );
-      final stockInfoMap = result.getOrElse(
-        () => {},
-      );
-      final itemsWithStockInfo = e.items
-          .map(
-            (item) => item.copyWithStockInfo(
-              stockInfoMap: stockInfoMap,
-            ),
-          )
-          .toList();
-
-      if (itemsWithStockInfo.allOutOfStock(
-        allowOutOfStock: !e.doNotallowOutOfStockMaterial,
-      )) {
-        emit(
-          state.copyWith(
-            apiFailureOrSuccessOption: optionOf(
-              const Left(
-                ApiFailure.other('Product Not Available'),
-              ),
-            ),
-            isFetching: false,
-          ),
-        );
-
-        return;
-      }
-
-      final failureOrSuccess = await repository.replaceCartWithItems(
-        items: itemsWithStockInfo,
+        doNotAllowOutOfStockMaterials: e.doNotallowOutOfStockMaterial,
       );
 
       await failureOrSuccess.fold(
@@ -715,107 +588,14 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         ),
       );
 
-      final result = await repository.getStockInfoList(
-        items: e.comboDealItems.map((e) => e.materialInfo).toList(),
-        customerCodeInfo: e.customerCodeInfo,
-        salesOrganisationConfigs: e.salesOrganisationConfigs,
-        salesOrganisation: e.salesOrganisation,
-        shipToInfo: e.shipToInfo,
-      );
-      final stockInfoMap = result.getOrElse(() => {});
-      final comboWithStock =
-          CartItem.comboDeal(e.comboDealItems).copyWithStockInfo(
-        stockInfoMap: stockInfoMap,
-      );
-      if ([comboWithStock].allOutOfStock(
-            allowOutOfStock: !e.doNotallowOutOfStockMaterial,
-          ) ||
-          stockInfoMap.isEmpty) {
-        emit(
-          state.copyWith(
-            apiFailureOrSuccessOption: optionOf(
-              const Left(
-                ApiFailure.other('Product Not Available'),
-              ),
-            ),
-            isFetching: false,
-          ),
-        );
-
-        return;
-      }
-
       final failureOrSuccess = await repository.addItemToCart(
-        cartItem: comboWithStock,
+        cartItem: CartItem.comboDeal(e.comboDealItems),
         override: e.overrideQty,
-      );
-
-      await failureOrSuccess.fold(
-        (failure) {
-          emit(
-            state.copyWith(
-              apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-              isFetching: false,
-            ),
-          );
-        },
-        (cartItemList) async {
-          emit(
-            state.copyWith(
-              cartItems: cartItemList,
-              apiFailureOrSuccessOption: none(),
-              isFetching: false,
-            ),
-          );
-        },
-      );
-    });
-    on<_UpdateComboDealItemQty>((e, emit) async {
-      emit(
-        state.copyWith(
-          apiFailureOrSuccessOption: none(),
-          isFetching: true,
-        ),
-      );
-
-      final result = await repository.getStockInfo(
-        material: e.updatedItem.materialInfo,
         customerCodeInfo: e.customerCodeInfo,
-        salesOrganisationConfigs: e.salesOrganisationConfigs,
         salesOrganisation: e.salesOrganisation,
+        salesOrganisationConfigs: e.salesOrganisationConfigs,
         shipToInfo: e.shipToInfo,
-      );
-      final stockInfo = result.getOrElse(() => StockInfo.empty());
-      if (!stockInfo.inStock.isMaterialInStock &&
-          e.doNotallowOutOfStockMaterial) {
-        emit(
-          state.copyWith(
-            apiFailureOrSuccessOption: optionOf(
-              const Left(
-                ApiFailure.other('Product Not Available'),
-              ),
-            ),
-            isFetching: false,
-          ),
-        );
-
-        return;
-      }
-      final updatedBundle = e.currentCombo.copyWith(
-        materials: e.currentCombo.materials.map((item) {
-          if (item.getMaterialNumber == e.updatedItem.getMaterialNumber) {
-            return item
-                .copyWithIncreasedQty(qty: e.updatedItem.quantity)
-                .copyWith(stockInfo: stockInfo);
-          }
-
-          return item;
-        }).toList(),
-      );
-
-      final failureOrSuccess = await repository.addItemToCart(
-        cartItem: updatedBundle,
-        override: true,
+        doNotAllowOutOfStockMaterials: e.doNotallowOutOfStockMaterial,
       );
 
       await failureOrSuccess.fold(

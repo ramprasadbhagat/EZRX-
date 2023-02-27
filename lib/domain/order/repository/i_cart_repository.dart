@@ -20,6 +20,22 @@ abstract class ICartRepository {
   Future<Either<ApiFailure, List<CartItem>>> addItemToCart({
     required CartItem cartItem,
     required bool override,
+    required CustomerCodeInfo customerCodeInfo,
+    required SalesOrganisationConfigs salesOrganisationConfigs,
+    required SalesOrganisation salesOrganisation,
+    required ShipToInfo shipToInfo,
+    required bool doNotAllowOutOfStockMaterials,
+  });
+
+  Future<Either<ApiFailure, List<CartItem>>> updateMaterialQtyInCartItem({
+    required CartItem cartItem,
+    required PriceAggregate updatedQtyItem,
+    required bool override,
+    required CustomerCodeInfo customerCodeInfo,
+    required SalesOrganisationConfigs salesOrganisationConfigs,
+    required SalesOrganisation salesOrganisation,
+    required ShipToInfo shipToInfo,
+    required bool doNotAllowOutOfStockMaterials,
   });
 
   Future<Either<ApiFailure, List<CartItem>>> deleteFromCart({
@@ -35,6 +51,11 @@ abstract class ICartRepository {
     required CartItem item,
     required MaterialItemBonus newBonus,
     required bool overrideQty,
+    required CustomerCodeInfo customerCodeInfo,
+    required SalesOrganisationConfigs salesOrganisationConfigs,
+    required SalesOrganisation salesOrganisation,
+    required ShipToInfo shipToInfo,
+    required bool doNotAllowOutOfStockMaterials,
   });
 
   Future<Either<ApiFailure, List<CartItem>>> deleteBonusFromCartItem({
@@ -98,5 +119,10 @@ abstract class ICartRepository {
 
   Future<Either<ApiFailure, List<CartItem>>> replaceCartWithItems({
     required List<CartItem> items,
+    required CustomerCodeInfo customerCodeInfo,
+    required SalesOrganisationConfigs salesOrganisationConfigs,
+    required SalesOrganisation salesOrganisation,
+    required ShipToInfo shipToInfo,
+    required bool doNotAllowOutOfStockMaterials,
   });
 }

@@ -36,6 +36,7 @@ mixin _$ApiFailure {
     required TResult Function() noSupportedBiometrics,
     required TResult Function() invalidBiometirc,
     required TResult Function() priceOverrideNotFound,
+    required TResult Function() productOutOfStock,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -58,6 +59,7 @@ mixin _$ApiFailure {
     TResult? Function()? noSupportedBiometrics,
     TResult? Function()? invalidBiometirc,
     TResult? Function()? priceOverrideNotFound,
+    TResult? Function()? productOutOfStock,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -80,6 +82,7 @@ mixin _$ApiFailure {
     TResult Function()? noSupportedBiometrics,
     TResult Function()? invalidBiometirc,
     TResult Function()? priceOverrideNotFound,
+    TResult Function()? productOutOfStock,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -111,6 +114,7 @@ mixin _$ApiFailure {
     required TResult Function(_InvalidBiometirc value) invalidBiometirc,
     required TResult Function(_PriceOverrideNotFound value)
         priceOverrideNotFound,
+    required TResult Function(_ProductOutOfStock value) productOutOfStock,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -138,6 +142,7 @@ mixin _$ApiFailure {
     TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
     TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult? Function(_ProductOutOfStock value)? productOutOfStock,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -165,6 +170,7 @@ mixin _$ApiFailure {
     TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult Function(_InvalidBiometirc value)? invalidBiometirc,
     TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult Function(_ProductOutOfStock value)? productOutOfStock,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -268,6 +274,7 @@ class _$_Other implements _Other {
     required TResult Function() noSupportedBiometrics,
     required TResult Function() invalidBiometirc,
     required TResult Function() priceOverrideNotFound,
+    required TResult Function() productOutOfStock,
   }) {
     return other(message);
   }
@@ -293,6 +300,7 @@ class _$_Other implements _Other {
     TResult? Function()? noSupportedBiometrics,
     TResult? Function()? invalidBiometirc,
     TResult? Function()? priceOverrideNotFound,
+    TResult? Function()? productOutOfStock,
   }) {
     return other?.call(message);
   }
@@ -318,6 +326,7 @@ class _$_Other implements _Other {
     TResult Function()? noSupportedBiometrics,
     TResult Function()? invalidBiometirc,
     TResult Function()? priceOverrideNotFound,
+    TResult Function()? productOutOfStock,
     required TResult orElse(),
   }) {
     if (other != null) {
@@ -355,6 +364,7 @@ class _$_Other implements _Other {
     required TResult Function(_InvalidBiometirc value) invalidBiometirc,
     required TResult Function(_PriceOverrideNotFound value)
         priceOverrideNotFound,
+    required TResult Function(_ProductOutOfStock value) productOutOfStock,
   }) {
     return other(this);
   }
@@ -385,6 +395,7 @@ class _$_Other implements _Other {
     TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
     TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult? Function(_ProductOutOfStock value)? productOutOfStock,
   }) {
     return other?.call(this);
   }
@@ -415,6 +426,7 @@ class _$_Other implements _Other {
     TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult Function(_InvalidBiometirc value)? invalidBiometirc,
     TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult Function(_ProductOutOfStock value)? productOutOfStock,
     required TResult orElse(),
   }) {
     if (other != null) {
@@ -515,6 +527,7 @@ class _$_ServerError implements _ServerError {
     required TResult Function() noSupportedBiometrics,
     required TResult Function() invalidBiometirc,
     required TResult Function() priceOverrideNotFound,
+    required TResult Function() productOutOfStock,
   }) {
     return serverError(message);
   }
@@ -540,6 +553,7 @@ class _$_ServerError implements _ServerError {
     TResult? Function()? noSupportedBiometrics,
     TResult? Function()? invalidBiometirc,
     TResult? Function()? priceOverrideNotFound,
+    TResult? Function()? productOutOfStock,
   }) {
     return serverError?.call(message);
   }
@@ -565,6 +579,7 @@ class _$_ServerError implements _ServerError {
     TResult Function()? noSupportedBiometrics,
     TResult Function()? invalidBiometirc,
     TResult Function()? priceOverrideNotFound,
+    TResult Function()? productOutOfStock,
     required TResult orElse(),
   }) {
     if (serverError != null) {
@@ -602,6 +617,7 @@ class _$_ServerError implements _ServerError {
     required TResult Function(_InvalidBiometirc value) invalidBiometirc,
     required TResult Function(_PriceOverrideNotFound value)
         priceOverrideNotFound,
+    required TResult Function(_ProductOutOfStock value) productOutOfStock,
   }) {
     return serverError(this);
   }
@@ -632,6 +648,7 @@ class _$_ServerError implements _ServerError {
     TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
     TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult? Function(_ProductOutOfStock value)? productOutOfStock,
   }) {
     return serverError?.call(this);
   }
@@ -662,6 +679,7 @@ class _$_ServerError implements _ServerError {
     TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult Function(_InvalidBiometirc value)? invalidBiometirc,
     TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult Function(_ProductOutOfStock value)? productOutOfStock,
     required TResult orElse(),
   }) {
     if (serverError != null) {
@@ -736,6 +754,7 @@ class _$_PoorConnection implements _PoorConnection {
     required TResult Function() noSupportedBiometrics,
     required TResult Function() invalidBiometirc,
     required TResult Function() priceOverrideNotFound,
+    required TResult Function() productOutOfStock,
   }) {
     return poorConnection();
   }
@@ -761,6 +780,7 @@ class _$_PoorConnection implements _PoorConnection {
     TResult? Function()? noSupportedBiometrics,
     TResult? Function()? invalidBiometirc,
     TResult? Function()? priceOverrideNotFound,
+    TResult? Function()? productOutOfStock,
   }) {
     return poorConnection?.call();
   }
@@ -786,6 +806,7 @@ class _$_PoorConnection implements _PoorConnection {
     TResult Function()? noSupportedBiometrics,
     TResult Function()? invalidBiometirc,
     TResult Function()? priceOverrideNotFound,
+    TResult Function()? productOutOfStock,
     required TResult orElse(),
   }) {
     if (poorConnection != null) {
@@ -823,6 +844,7 @@ class _$_PoorConnection implements _PoorConnection {
     required TResult Function(_InvalidBiometirc value) invalidBiometirc,
     required TResult Function(_PriceOverrideNotFound value)
         priceOverrideNotFound,
+    required TResult Function(_ProductOutOfStock value) productOutOfStock,
   }) {
     return poorConnection(this);
   }
@@ -853,6 +875,7 @@ class _$_PoorConnection implements _PoorConnection {
     TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
     TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult? Function(_ProductOutOfStock value)? productOutOfStock,
   }) {
     return poorConnection?.call(this);
   }
@@ -883,6 +906,7 @@ class _$_PoorConnection implements _PoorConnection {
     TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult Function(_InvalidBiometirc value)? invalidBiometirc,
     TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult Function(_ProductOutOfStock value)? productOutOfStock,
     required TResult orElse(),
   }) {
     if (poorConnection != null) {
@@ -952,6 +976,7 @@ class _$_ServerTimeout implements _ServerTimeout {
     required TResult Function() noSupportedBiometrics,
     required TResult Function() invalidBiometirc,
     required TResult Function() priceOverrideNotFound,
+    required TResult Function() productOutOfStock,
   }) {
     return serverTimeout();
   }
@@ -977,6 +1002,7 @@ class _$_ServerTimeout implements _ServerTimeout {
     TResult? Function()? noSupportedBiometrics,
     TResult? Function()? invalidBiometirc,
     TResult? Function()? priceOverrideNotFound,
+    TResult? Function()? productOutOfStock,
   }) {
     return serverTimeout?.call();
   }
@@ -1002,6 +1028,7 @@ class _$_ServerTimeout implements _ServerTimeout {
     TResult Function()? noSupportedBiometrics,
     TResult Function()? invalidBiometirc,
     TResult Function()? priceOverrideNotFound,
+    TResult Function()? productOutOfStock,
     required TResult orElse(),
   }) {
     if (serverTimeout != null) {
@@ -1039,6 +1066,7 @@ class _$_ServerTimeout implements _ServerTimeout {
     required TResult Function(_InvalidBiometirc value) invalidBiometirc,
     required TResult Function(_PriceOverrideNotFound value)
         priceOverrideNotFound,
+    required TResult Function(_ProductOutOfStock value) productOutOfStock,
   }) {
     return serverTimeout(this);
   }
@@ -1069,6 +1097,7 @@ class _$_ServerTimeout implements _ServerTimeout {
     TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
     TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult? Function(_ProductOutOfStock value)? productOutOfStock,
   }) {
     return serverTimeout?.call(this);
   }
@@ -1099,6 +1128,7 @@ class _$_ServerTimeout implements _ServerTimeout {
     TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult Function(_InvalidBiometirc value)? invalidBiometirc,
     TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult Function(_ProductOutOfStock value)? productOutOfStock,
     required TResult orElse(),
   }) {
     if (serverTimeout != null) {
@@ -1168,6 +1198,7 @@ class _$_UserNotFound implements _UserNotFound {
     required TResult Function() noSupportedBiometrics,
     required TResult Function() invalidBiometirc,
     required TResult Function() priceOverrideNotFound,
+    required TResult Function() productOutOfStock,
   }) {
     return userNotFound();
   }
@@ -1193,6 +1224,7 @@ class _$_UserNotFound implements _UserNotFound {
     TResult? Function()? noSupportedBiometrics,
     TResult? Function()? invalidBiometirc,
     TResult? Function()? priceOverrideNotFound,
+    TResult? Function()? productOutOfStock,
   }) {
     return userNotFound?.call();
   }
@@ -1218,6 +1250,7 @@ class _$_UserNotFound implements _UserNotFound {
     TResult Function()? noSupportedBiometrics,
     TResult Function()? invalidBiometirc,
     TResult Function()? priceOverrideNotFound,
+    TResult Function()? productOutOfStock,
     required TResult orElse(),
   }) {
     if (userNotFound != null) {
@@ -1255,6 +1288,7 @@ class _$_UserNotFound implements _UserNotFound {
     required TResult Function(_InvalidBiometirc value) invalidBiometirc,
     required TResult Function(_PriceOverrideNotFound value)
         priceOverrideNotFound,
+    required TResult Function(_ProductOutOfStock value) productOutOfStock,
   }) {
     return userNotFound(this);
   }
@@ -1285,6 +1319,7 @@ class _$_UserNotFound implements _UserNotFound {
     TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
     TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult? Function(_ProductOutOfStock value)? productOutOfStock,
   }) {
     return userNotFound?.call(this);
   }
@@ -1315,6 +1350,7 @@ class _$_UserNotFound implements _UserNotFound {
     TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult Function(_InvalidBiometirc value)? invalidBiometirc,
     TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult Function(_ProductOutOfStock value)? productOutOfStock,
     required TResult orElse(),
   }) {
     if (userNotFound != null) {
@@ -1389,6 +1425,7 @@ class _$_InvalidEmailAndPasswordCombination
     required TResult Function() noSupportedBiometrics,
     required TResult Function() invalidBiometirc,
     required TResult Function() priceOverrideNotFound,
+    required TResult Function() productOutOfStock,
   }) {
     return invalidEmailAndPasswordCombination();
   }
@@ -1414,6 +1451,7 @@ class _$_InvalidEmailAndPasswordCombination
     TResult? Function()? noSupportedBiometrics,
     TResult? Function()? invalidBiometirc,
     TResult? Function()? priceOverrideNotFound,
+    TResult? Function()? productOutOfStock,
   }) {
     return invalidEmailAndPasswordCombination?.call();
   }
@@ -1439,6 +1477,7 @@ class _$_InvalidEmailAndPasswordCombination
     TResult Function()? noSupportedBiometrics,
     TResult Function()? invalidBiometirc,
     TResult Function()? priceOverrideNotFound,
+    TResult Function()? productOutOfStock,
     required TResult orElse(),
   }) {
     if (invalidEmailAndPasswordCombination != null) {
@@ -1476,6 +1515,7 @@ class _$_InvalidEmailAndPasswordCombination
     required TResult Function(_InvalidBiometirc value) invalidBiometirc,
     required TResult Function(_PriceOverrideNotFound value)
         priceOverrideNotFound,
+    required TResult Function(_ProductOutOfStock value) productOutOfStock,
   }) {
     return invalidEmailAndPasswordCombination(this);
   }
@@ -1506,6 +1546,7 @@ class _$_InvalidEmailAndPasswordCombination
     TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
     TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult? Function(_ProductOutOfStock value)? productOutOfStock,
   }) {
     return invalidEmailAndPasswordCombination?.call(this);
   }
@@ -1536,6 +1577,7 @@ class _$_InvalidEmailAndPasswordCombination
     TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult Function(_InvalidBiometirc value)? invalidBiometirc,
     TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult Function(_ProductOutOfStock value)? productOutOfStock,
     required TResult orElse(),
   }) {
     if (invalidEmailAndPasswordCombination != null) {
@@ -1606,6 +1648,7 @@ class _$_AccountLocked implements _AccountLocked {
     required TResult Function() noSupportedBiometrics,
     required TResult Function() invalidBiometirc,
     required TResult Function() priceOverrideNotFound,
+    required TResult Function() productOutOfStock,
   }) {
     return accountLocked();
   }
@@ -1631,6 +1674,7 @@ class _$_AccountLocked implements _AccountLocked {
     TResult? Function()? noSupportedBiometrics,
     TResult? Function()? invalidBiometirc,
     TResult? Function()? priceOverrideNotFound,
+    TResult? Function()? productOutOfStock,
   }) {
     return accountLocked?.call();
   }
@@ -1656,6 +1700,7 @@ class _$_AccountLocked implements _AccountLocked {
     TResult Function()? noSupportedBiometrics,
     TResult Function()? invalidBiometirc,
     TResult Function()? priceOverrideNotFound,
+    TResult Function()? productOutOfStock,
     required TResult orElse(),
   }) {
     if (accountLocked != null) {
@@ -1693,6 +1738,7 @@ class _$_AccountLocked implements _AccountLocked {
     required TResult Function(_InvalidBiometirc value) invalidBiometirc,
     required TResult Function(_PriceOverrideNotFound value)
         priceOverrideNotFound,
+    required TResult Function(_ProductOutOfStock value) productOutOfStock,
   }) {
     return accountLocked(this);
   }
@@ -1723,6 +1769,7 @@ class _$_AccountLocked implements _AccountLocked {
     TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
     TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult? Function(_ProductOutOfStock value)? productOutOfStock,
   }) {
     return accountLocked?.call(this);
   }
@@ -1753,6 +1800,7 @@ class _$_AccountLocked implements _AccountLocked {
     TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult Function(_InvalidBiometirc value)? invalidBiometirc,
     TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult Function(_ProductOutOfStock value)? productOutOfStock,
     required TResult orElse(),
   }) {
     if (accountLocked != null) {
@@ -1822,6 +1870,7 @@ class _$_AccountExpired implements _AccountExpired {
     required TResult Function() noSupportedBiometrics,
     required TResult Function() invalidBiometirc,
     required TResult Function() priceOverrideNotFound,
+    required TResult Function() productOutOfStock,
   }) {
     return accountExpired();
   }
@@ -1847,6 +1896,7 @@ class _$_AccountExpired implements _AccountExpired {
     TResult? Function()? noSupportedBiometrics,
     TResult? Function()? invalidBiometirc,
     TResult? Function()? priceOverrideNotFound,
+    TResult? Function()? productOutOfStock,
   }) {
     return accountExpired?.call();
   }
@@ -1872,6 +1922,7 @@ class _$_AccountExpired implements _AccountExpired {
     TResult Function()? noSupportedBiometrics,
     TResult Function()? invalidBiometirc,
     TResult Function()? priceOverrideNotFound,
+    TResult Function()? productOutOfStock,
     required TResult orElse(),
   }) {
     if (accountExpired != null) {
@@ -1909,6 +1960,7 @@ class _$_AccountExpired implements _AccountExpired {
     required TResult Function(_InvalidBiometirc value) invalidBiometirc,
     required TResult Function(_PriceOverrideNotFound value)
         priceOverrideNotFound,
+    required TResult Function(_ProductOutOfStock value) productOutOfStock,
   }) {
     return accountExpired(this);
   }
@@ -1939,6 +1991,7 @@ class _$_AccountExpired implements _AccountExpired {
     TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
     TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult? Function(_ProductOutOfStock value)? productOutOfStock,
   }) {
     return accountExpired?.call(this);
   }
@@ -1969,6 +2022,7 @@ class _$_AccountExpired implements _AccountExpired {
     TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult Function(_InvalidBiometirc value)? invalidBiometirc,
     TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult Function(_ProductOutOfStock value)? productOutOfStock,
     required TResult orElse(),
   }) {
     if (accountExpired != null) {
@@ -2038,6 +2092,7 @@ class _$_TokenExpired implements _TokenExpired {
     required TResult Function() noSupportedBiometrics,
     required TResult Function() invalidBiometirc,
     required TResult Function() priceOverrideNotFound,
+    required TResult Function() productOutOfStock,
   }) {
     return tokenExpired();
   }
@@ -2063,6 +2118,7 @@ class _$_TokenExpired implements _TokenExpired {
     TResult? Function()? noSupportedBiometrics,
     TResult? Function()? invalidBiometirc,
     TResult? Function()? priceOverrideNotFound,
+    TResult? Function()? productOutOfStock,
   }) {
     return tokenExpired?.call();
   }
@@ -2088,6 +2144,7 @@ class _$_TokenExpired implements _TokenExpired {
     TResult Function()? noSupportedBiometrics,
     TResult Function()? invalidBiometirc,
     TResult Function()? priceOverrideNotFound,
+    TResult Function()? productOutOfStock,
     required TResult orElse(),
   }) {
     if (tokenExpired != null) {
@@ -2125,6 +2182,7 @@ class _$_TokenExpired implements _TokenExpired {
     required TResult Function(_InvalidBiometirc value) invalidBiometirc,
     required TResult Function(_PriceOverrideNotFound value)
         priceOverrideNotFound,
+    required TResult Function(_ProductOutOfStock value) productOutOfStock,
   }) {
     return tokenExpired(this);
   }
@@ -2155,6 +2213,7 @@ class _$_TokenExpired implements _TokenExpired {
     TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
     TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult? Function(_ProductOutOfStock value)? productOutOfStock,
   }) {
     return tokenExpired?.call(this);
   }
@@ -2185,6 +2244,7 @@ class _$_TokenExpired implements _TokenExpired {
     TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult Function(_InvalidBiometirc value)? invalidBiometirc,
     TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult Function(_ProductOutOfStock value)? productOutOfStock,
     required TResult orElse(),
   }) {
     if (tokenExpired != null) {
@@ -2254,6 +2314,7 @@ class _$_AuthenticationFailed implements _AuthenticationFailed {
     required TResult Function() noSupportedBiometrics,
     required TResult Function() invalidBiometirc,
     required TResult Function() priceOverrideNotFound,
+    required TResult Function() productOutOfStock,
   }) {
     return authenticationFailed();
   }
@@ -2279,6 +2340,7 @@ class _$_AuthenticationFailed implements _AuthenticationFailed {
     TResult? Function()? noSupportedBiometrics,
     TResult? Function()? invalidBiometirc,
     TResult? Function()? priceOverrideNotFound,
+    TResult? Function()? productOutOfStock,
   }) {
     return authenticationFailed?.call();
   }
@@ -2304,6 +2366,7 @@ class _$_AuthenticationFailed implements _AuthenticationFailed {
     TResult Function()? noSupportedBiometrics,
     TResult Function()? invalidBiometirc,
     TResult Function()? priceOverrideNotFound,
+    TResult Function()? productOutOfStock,
     required TResult orElse(),
   }) {
     if (authenticationFailed != null) {
@@ -2341,6 +2404,7 @@ class _$_AuthenticationFailed implements _AuthenticationFailed {
     required TResult Function(_InvalidBiometirc value) invalidBiometirc,
     required TResult Function(_PriceOverrideNotFound value)
         priceOverrideNotFound,
+    required TResult Function(_ProductOutOfStock value) productOutOfStock,
   }) {
     return authenticationFailed(this);
   }
@@ -2371,6 +2435,7 @@ class _$_AuthenticationFailed implements _AuthenticationFailed {
     TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
     TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult? Function(_ProductOutOfStock value)? productOutOfStock,
   }) {
     return authenticationFailed?.call(this);
   }
@@ -2401,6 +2466,7 @@ class _$_AuthenticationFailed implements _AuthenticationFailed {
     TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult Function(_InvalidBiometirc value)? invalidBiometirc,
     TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult Function(_ProductOutOfStock value)? productOutOfStock,
     required TResult orElse(),
   }) {
     if (authenticationFailed != null) {
@@ -2474,6 +2540,7 @@ class _$_ProxyLoginRolePermissionNotMatch
     required TResult Function() noSupportedBiometrics,
     required TResult Function() invalidBiometirc,
     required TResult Function() priceOverrideNotFound,
+    required TResult Function() productOutOfStock,
   }) {
     return proxyLoginRolePermissionNotMatch();
   }
@@ -2499,6 +2566,7 @@ class _$_ProxyLoginRolePermissionNotMatch
     TResult? Function()? noSupportedBiometrics,
     TResult? Function()? invalidBiometirc,
     TResult? Function()? priceOverrideNotFound,
+    TResult? Function()? productOutOfStock,
   }) {
     return proxyLoginRolePermissionNotMatch?.call();
   }
@@ -2524,6 +2592,7 @@ class _$_ProxyLoginRolePermissionNotMatch
     TResult Function()? noSupportedBiometrics,
     TResult Function()? invalidBiometirc,
     TResult Function()? priceOverrideNotFound,
+    TResult Function()? productOutOfStock,
     required TResult orElse(),
   }) {
     if (proxyLoginRolePermissionNotMatch != null) {
@@ -2561,6 +2630,7 @@ class _$_ProxyLoginRolePermissionNotMatch
     required TResult Function(_InvalidBiometirc value) invalidBiometirc,
     required TResult Function(_PriceOverrideNotFound value)
         priceOverrideNotFound,
+    required TResult Function(_ProductOutOfStock value) productOutOfStock,
   }) {
     return proxyLoginRolePermissionNotMatch(this);
   }
@@ -2591,6 +2661,7 @@ class _$_ProxyLoginRolePermissionNotMatch
     TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
     TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult? Function(_ProductOutOfStock value)? productOutOfStock,
   }) {
     return proxyLoginRolePermissionNotMatch?.call(this);
   }
@@ -2621,6 +2692,7 @@ class _$_ProxyLoginRolePermissionNotMatch
     TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult Function(_InvalidBiometirc value)? invalidBiometirc,
     TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult Function(_ProductOutOfStock value)? productOutOfStock,
     required TResult orElse(),
   }) {
     if (proxyLoginRolePermissionNotMatch != null) {
@@ -2695,6 +2767,7 @@ class _$_ProxyLoginZPTargetRoleNotMatch
     required TResult Function() noSupportedBiometrics,
     required TResult Function() invalidBiometirc,
     required TResult Function() priceOverrideNotFound,
+    required TResult Function() productOutOfStock,
   }) {
     return proxyLoginZPTargetRoleNotMatch();
   }
@@ -2720,6 +2793,7 @@ class _$_ProxyLoginZPTargetRoleNotMatch
     TResult? Function()? noSupportedBiometrics,
     TResult? Function()? invalidBiometirc,
     TResult? Function()? priceOverrideNotFound,
+    TResult? Function()? productOutOfStock,
   }) {
     return proxyLoginZPTargetRoleNotMatch?.call();
   }
@@ -2745,6 +2819,7 @@ class _$_ProxyLoginZPTargetRoleNotMatch
     TResult Function()? noSupportedBiometrics,
     TResult Function()? invalidBiometirc,
     TResult Function()? priceOverrideNotFound,
+    TResult Function()? productOutOfStock,
     required TResult orElse(),
   }) {
     if (proxyLoginZPTargetRoleNotMatch != null) {
@@ -2782,6 +2857,7 @@ class _$_ProxyLoginZPTargetRoleNotMatch
     required TResult Function(_InvalidBiometirc value) invalidBiometirc,
     required TResult Function(_PriceOverrideNotFound value)
         priceOverrideNotFound,
+    required TResult Function(_ProductOutOfStock value) productOutOfStock,
   }) {
     return proxyLoginZPTargetRoleNotMatch(this);
   }
@@ -2812,6 +2888,7 @@ class _$_ProxyLoginZPTargetRoleNotMatch
     TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
     TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult? Function(_ProductOutOfStock value)? productOutOfStock,
   }) {
     return proxyLoginZPTargetRoleNotMatch?.call(this);
   }
@@ -2842,6 +2919,7 @@ class _$_ProxyLoginZPTargetRoleNotMatch
     TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult Function(_InvalidBiometirc value)? invalidBiometirc,
     TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult Function(_ProductOutOfStock value)? productOutOfStock,
     required TResult orElse(),
   }) {
     if (proxyLoginZPTargetRoleNotMatch != null) {
@@ -2915,6 +2993,7 @@ class _$_ProxyLoginZPSalesOrgNotMatch implements _ProxyLoginZPSalesOrgNotMatch {
     required TResult Function() noSupportedBiometrics,
     required TResult Function() invalidBiometirc,
     required TResult Function() priceOverrideNotFound,
+    required TResult Function() productOutOfStock,
   }) {
     return proxyLoginZPSalesOrgNotMatch();
   }
@@ -2940,6 +3019,7 @@ class _$_ProxyLoginZPSalesOrgNotMatch implements _ProxyLoginZPSalesOrgNotMatch {
     TResult? Function()? noSupportedBiometrics,
     TResult? Function()? invalidBiometirc,
     TResult? Function()? priceOverrideNotFound,
+    TResult? Function()? productOutOfStock,
   }) {
     return proxyLoginZPSalesOrgNotMatch?.call();
   }
@@ -2965,6 +3045,7 @@ class _$_ProxyLoginZPSalesOrgNotMatch implements _ProxyLoginZPSalesOrgNotMatch {
     TResult Function()? noSupportedBiometrics,
     TResult Function()? invalidBiometirc,
     TResult Function()? priceOverrideNotFound,
+    TResult Function()? productOutOfStock,
     required TResult orElse(),
   }) {
     if (proxyLoginZPSalesOrgNotMatch != null) {
@@ -3002,6 +3083,7 @@ class _$_ProxyLoginZPSalesOrgNotMatch implements _ProxyLoginZPSalesOrgNotMatch {
     required TResult Function(_InvalidBiometirc value) invalidBiometirc,
     required TResult Function(_PriceOverrideNotFound value)
         priceOverrideNotFound,
+    required TResult Function(_ProductOutOfStock value) productOutOfStock,
   }) {
     return proxyLoginZPSalesOrgNotMatch(this);
   }
@@ -3032,6 +3114,7 @@ class _$_ProxyLoginZPSalesOrgNotMatch implements _ProxyLoginZPSalesOrgNotMatch {
     TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
     TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult? Function(_ProductOutOfStock value)? productOutOfStock,
   }) {
     return proxyLoginZPSalesOrgNotMatch?.call(this);
   }
@@ -3062,6 +3145,7 @@ class _$_ProxyLoginZPSalesOrgNotMatch implements _ProxyLoginZPSalesOrgNotMatch {
     TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult Function(_InvalidBiometirc value)? invalidBiometirc,
     TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult Function(_ProductOutOfStock value)? productOutOfStock,
     required TResult orElse(),
   }) {
     if (proxyLoginZPSalesOrgNotMatch != null) {
@@ -3135,6 +3219,7 @@ class _$_DeviceNotSupportBiometirc implements _DeviceNotSupportBiometirc {
     required TResult Function() noSupportedBiometrics,
     required TResult Function() invalidBiometirc,
     required TResult Function() priceOverrideNotFound,
+    required TResult Function() productOutOfStock,
   }) {
     return deviceNotSupportBiometirc();
   }
@@ -3160,6 +3245,7 @@ class _$_DeviceNotSupportBiometirc implements _DeviceNotSupportBiometirc {
     TResult? Function()? noSupportedBiometrics,
     TResult? Function()? invalidBiometirc,
     TResult? Function()? priceOverrideNotFound,
+    TResult? Function()? productOutOfStock,
   }) {
     return deviceNotSupportBiometirc?.call();
   }
@@ -3185,6 +3271,7 @@ class _$_DeviceNotSupportBiometirc implements _DeviceNotSupportBiometirc {
     TResult Function()? noSupportedBiometrics,
     TResult Function()? invalidBiometirc,
     TResult Function()? priceOverrideNotFound,
+    TResult Function()? productOutOfStock,
     required TResult orElse(),
   }) {
     if (deviceNotSupportBiometirc != null) {
@@ -3222,6 +3309,7 @@ class _$_DeviceNotSupportBiometirc implements _DeviceNotSupportBiometirc {
     required TResult Function(_InvalidBiometirc value) invalidBiometirc,
     required TResult Function(_PriceOverrideNotFound value)
         priceOverrideNotFound,
+    required TResult Function(_ProductOutOfStock value) productOutOfStock,
   }) {
     return deviceNotSupportBiometirc(this);
   }
@@ -3252,6 +3340,7 @@ class _$_DeviceNotSupportBiometirc implements _DeviceNotSupportBiometirc {
     TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
     TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult? Function(_ProductOutOfStock value)? productOutOfStock,
   }) {
     return deviceNotSupportBiometirc?.call(this);
   }
@@ -3282,6 +3371,7 @@ class _$_DeviceNotSupportBiometirc implements _DeviceNotSupportBiometirc {
     TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult Function(_InvalidBiometirc value)? invalidBiometirc,
     TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult Function(_ProductOutOfStock value)? productOutOfStock,
     required TResult orElse(),
   }) {
     if (deviceNotSupportBiometirc != null) {
@@ -3351,6 +3441,7 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
     required TResult Function() noSupportedBiometrics,
     required TResult Function() invalidBiometirc,
     required TResult Function() priceOverrideNotFound,
+    required TResult Function() productOutOfStock,
   }) {
     return cannotCheckBiometrics();
   }
@@ -3376,6 +3467,7 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
     TResult? Function()? noSupportedBiometrics,
     TResult? Function()? invalidBiometirc,
     TResult? Function()? priceOverrideNotFound,
+    TResult? Function()? productOutOfStock,
   }) {
     return cannotCheckBiometrics?.call();
   }
@@ -3401,6 +3493,7 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
     TResult Function()? noSupportedBiometrics,
     TResult Function()? invalidBiometirc,
     TResult Function()? priceOverrideNotFound,
+    TResult Function()? productOutOfStock,
     required TResult orElse(),
   }) {
     if (cannotCheckBiometrics != null) {
@@ -3438,6 +3531,7 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
     required TResult Function(_InvalidBiometirc value) invalidBiometirc,
     required TResult Function(_PriceOverrideNotFound value)
         priceOverrideNotFound,
+    required TResult Function(_ProductOutOfStock value) productOutOfStock,
   }) {
     return cannotCheckBiometrics(this);
   }
@@ -3468,6 +3562,7 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
     TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
     TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult? Function(_ProductOutOfStock value)? productOutOfStock,
   }) {
     return cannotCheckBiometrics?.call(this);
   }
@@ -3498,6 +3593,7 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
     TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult Function(_InvalidBiometirc value)? invalidBiometirc,
     TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult Function(_ProductOutOfStock value)? productOutOfStock,
     required TResult orElse(),
   }) {
     if (cannotCheckBiometrics != null) {
@@ -3567,6 +3663,7 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
     required TResult Function() noSupportedBiometrics,
     required TResult Function() invalidBiometirc,
     required TResult Function() priceOverrideNotFound,
+    required TResult Function() productOutOfStock,
   }) {
     return noSupportedBiometrics();
   }
@@ -3592,6 +3689,7 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
     TResult? Function()? noSupportedBiometrics,
     TResult? Function()? invalidBiometirc,
     TResult? Function()? priceOverrideNotFound,
+    TResult? Function()? productOutOfStock,
   }) {
     return noSupportedBiometrics?.call();
   }
@@ -3617,6 +3715,7 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
     TResult Function()? noSupportedBiometrics,
     TResult Function()? invalidBiometirc,
     TResult Function()? priceOverrideNotFound,
+    TResult Function()? productOutOfStock,
     required TResult orElse(),
   }) {
     if (noSupportedBiometrics != null) {
@@ -3654,6 +3753,7 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
     required TResult Function(_InvalidBiometirc value) invalidBiometirc,
     required TResult Function(_PriceOverrideNotFound value)
         priceOverrideNotFound,
+    required TResult Function(_ProductOutOfStock value) productOutOfStock,
   }) {
     return noSupportedBiometrics(this);
   }
@@ -3684,6 +3784,7 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
     TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
     TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult? Function(_ProductOutOfStock value)? productOutOfStock,
   }) {
     return noSupportedBiometrics?.call(this);
   }
@@ -3714,6 +3815,7 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
     TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult Function(_InvalidBiometirc value)? invalidBiometirc,
     TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult Function(_ProductOutOfStock value)? productOutOfStock,
     required TResult orElse(),
   }) {
     if (noSupportedBiometrics != null) {
@@ -3783,6 +3885,7 @@ class _$_InvalidBiometirc implements _InvalidBiometirc {
     required TResult Function() noSupportedBiometrics,
     required TResult Function() invalidBiometirc,
     required TResult Function() priceOverrideNotFound,
+    required TResult Function() productOutOfStock,
   }) {
     return invalidBiometirc();
   }
@@ -3808,6 +3911,7 @@ class _$_InvalidBiometirc implements _InvalidBiometirc {
     TResult? Function()? noSupportedBiometrics,
     TResult? Function()? invalidBiometirc,
     TResult? Function()? priceOverrideNotFound,
+    TResult? Function()? productOutOfStock,
   }) {
     return invalidBiometirc?.call();
   }
@@ -3833,6 +3937,7 @@ class _$_InvalidBiometirc implements _InvalidBiometirc {
     TResult Function()? noSupportedBiometrics,
     TResult Function()? invalidBiometirc,
     TResult Function()? priceOverrideNotFound,
+    TResult Function()? productOutOfStock,
     required TResult orElse(),
   }) {
     if (invalidBiometirc != null) {
@@ -3870,6 +3975,7 @@ class _$_InvalidBiometirc implements _InvalidBiometirc {
     required TResult Function(_InvalidBiometirc value) invalidBiometirc,
     required TResult Function(_PriceOverrideNotFound value)
         priceOverrideNotFound,
+    required TResult Function(_ProductOutOfStock value) productOutOfStock,
   }) {
     return invalidBiometirc(this);
   }
@@ -3900,6 +4006,7 @@ class _$_InvalidBiometirc implements _InvalidBiometirc {
     TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
     TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult? Function(_ProductOutOfStock value)? productOutOfStock,
   }) {
     return invalidBiometirc?.call(this);
   }
@@ -3930,6 +4037,7 @@ class _$_InvalidBiometirc implements _InvalidBiometirc {
     TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult Function(_InvalidBiometirc value)? invalidBiometirc,
     TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult Function(_ProductOutOfStock value)? productOutOfStock,
     required TResult orElse(),
   }) {
     if (invalidBiometirc != null) {
@@ -3999,6 +4107,7 @@ class _$_PriceOverrideNotFound implements _PriceOverrideNotFound {
     required TResult Function() noSupportedBiometrics,
     required TResult Function() invalidBiometirc,
     required TResult Function() priceOverrideNotFound,
+    required TResult Function() productOutOfStock,
   }) {
     return priceOverrideNotFound();
   }
@@ -4024,6 +4133,7 @@ class _$_PriceOverrideNotFound implements _PriceOverrideNotFound {
     TResult? Function()? noSupportedBiometrics,
     TResult? Function()? invalidBiometirc,
     TResult? Function()? priceOverrideNotFound,
+    TResult? Function()? productOutOfStock,
   }) {
     return priceOverrideNotFound?.call();
   }
@@ -4049,6 +4159,7 @@ class _$_PriceOverrideNotFound implements _PriceOverrideNotFound {
     TResult Function()? noSupportedBiometrics,
     TResult Function()? invalidBiometirc,
     TResult Function()? priceOverrideNotFound,
+    TResult Function()? productOutOfStock,
     required TResult orElse(),
   }) {
     if (priceOverrideNotFound != null) {
@@ -4086,6 +4197,7 @@ class _$_PriceOverrideNotFound implements _PriceOverrideNotFound {
     required TResult Function(_InvalidBiometirc value) invalidBiometirc,
     required TResult Function(_PriceOverrideNotFound value)
         priceOverrideNotFound,
+    required TResult Function(_ProductOutOfStock value) productOutOfStock,
   }) {
     return priceOverrideNotFound(this);
   }
@@ -4116,6 +4228,7 @@ class _$_PriceOverrideNotFound implements _PriceOverrideNotFound {
     TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
     TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult? Function(_ProductOutOfStock value)? productOutOfStock,
   }) {
     return priceOverrideNotFound?.call(this);
   }
@@ -4146,6 +4259,7 @@ class _$_PriceOverrideNotFound implements _PriceOverrideNotFound {
     TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
     TResult Function(_InvalidBiometirc value)? invalidBiometirc,
     TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult Function(_ProductOutOfStock value)? productOutOfStock,
     required TResult orElse(),
   }) {
     if (priceOverrideNotFound != null) {
@@ -4157,4 +4271,226 @@ class _$_PriceOverrideNotFound implements _PriceOverrideNotFound {
 
 abstract class _PriceOverrideNotFound implements ApiFailure {
   const factory _PriceOverrideNotFound() = _$_PriceOverrideNotFound;
+}
+
+/// @nodoc
+abstract class _$$_ProductOutOfStockCopyWith<$Res> {
+  factory _$$_ProductOutOfStockCopyWith(_$_ProductOutOfStock value,
+          $Res Function(_$_ProductOutOfStock) then) =
+      __$$_ProductOutOfStockCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_ProductOutOfStockCopyWithImpl<$Res>
+    extends _$ApiFailureCopyWithImpl<$Res, _$_ProductOutOfStock>
+    implements _$$_ProductOutOfStockCopyWith<$Res> {
+  __$$_ProductOutOfStockCopyWithImpl(
+      _$_ProductOutOfStock _value, $Res Function(_$_ProductOutOfStock) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_ProductOutOfStock implements _ProductOutOfStock {
+  const _$_ProductOutOfStock();
+
+  @override
+  String toString() {
+    return 'ApiFailure.productOutOfStock()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_ProductOutOfStock);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String message) other,
+    required TResult Function(String message) serverError,
+    required TResult Function() poorConnection,
+    required TResult Function() serverTimeout,
+    required TResult Function() userNotFound,
+    required TResult Function() invalidEmailAndPasswordCombination,
+    required TResult Function() accountLocked,
+    required TResult Function() accountExpired,
+    required TResult Function() tokenExpired,
+    required TResult Function() authenticationFailed,
+    required TResult Function() proxyLoginRolePermissionNotMatch,
+    required TResult Function() proxyLoginZPTargetRoleNotMatch,
+    required TResult Function() proxyLoginZPSalesOrgNotMatch,
+    required TResult Function() deviceNotSupportBiometirc,
+    required TResult Function() cannotCheckBiometrics,
+    required TResult Function() noSupportedBiometrics,
+    required TResult Function() invalidBiometirc,
+    required TResult Function() priceOverrideNotFound,
+    required TResult Function() productOutOfStock,
+  }) {
+    return productOutOfStock();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String message)? other,
+    TResult? Function(String message)? serverError,
+    TResult? Function()? poorConnection,
+    TResult? Function()? serverTimeout,
+    TResult? Function()? userNotFound,
+    TResult? Function()? invalidEmailAndPasswordCombination,
+    TResult? Function()? accountLocked,
+    TResult? Function()? accountExpired,
+    TResult? Function()? tokenExpired,
+    TResult? Function()? authenticationFailed,
+    TResult? Function()? proxyLoginRolePermissionNotMatch,
+    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
+    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult? Function()? deviceNotSupportBiometirc,
+    TResult? Function()? cannotCheckBiometrics,
+    TResult? Function()? noSupportedBiometrics,
+    TResult? Function()? invalidBiometirc,
+    TResult? Function()? priceOverrideNotFound,
+    TResult? Function()? productOutOfStock,
+  }) {
+    return productOutOfStock?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String message)? other,
+    TResult Function(String message)? serverError,
+    TResult Function()? poorConnection,
+    TResult Function()? serverTimeout,
+    TResult Function()? userNotFound,
+    TResult Function()? invalidEmailAndPasswordCombination,
+    TResult Function()? accountLocked,
+    TResult Function()? accountExpired,
+    TResult Function()? tokenExpired,
+    TResult Function()? authenticationFailed,
+    TResult Function()? proxyLoginRolePermissionNotMatch,
+    TResult Function()? proxyLoginZPTargetRoleNotMatch,
+    TResult Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? cannotCheckBiometrics,
+    TResult Function()? noSupportedBiometrics,
+    TResult Function()? invalidBiometirc,
+    TResult Function()? priceOverrideNotFound,
+    TResult Function()? productOutOfStock,
+    required TResult orElse(),
+  }) {
+    if (productOutOfStock != null) {
+      return productOutOfStock();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Other value) other,
+    required TResult Function(_ServerError value) serverError,
+    required TResult Function(_PoorConnection value) poorConnection,
+    required TResult Function(_ServerTimeout value) serverTimeout,
+    required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_InvalidEmailAndPasswordCombination value)
+        invalidEmailAndPasswordCombination,
+    required TResult Function(_AccountLocked value) accountLocked,
+    required TResult Function(_AccountExpired value) accountExpired,
+    required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_AuthenticationFailed value) authenticationFailed,
+    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
+        proxyLoginRolePermissionNotMatch,
+    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
+        proxyLoginZPTargetRoleNotMatch,
+    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
+        proxyLoginZPSalesOrgNotMatch,
+    required TResult Function(_DeviceNotSupportBiometirc value)
+        deviceNotSupportBiometirc,
+    required TResult Function(_CannotCheckBiometrics value)
+        cannotCheckBiometrics,
+    required TResult Function(_NoSupportedBiometrics value)
+        noSupportedBiometrics,
+    required TResult Function(_InvalidBiometirc value) invalidBiometirc,
+    required TResult Function(_PriceOverrideNotFound value)
+        priceOverrideNotFound,
+    required TResult Function(_ProductOutOfStock value) productOutOfStock,
+  }) {
+    return productOutOfStock(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Other value)? other,
+    TResult? Function(_ServerError value)? serverError,
+    TResult? Function(_PoorConnection value)? poorConnection,
+    TResult? Function(_ServerTimeout value)? serverTimeout,
+    TResult? Function(_UserNotFound value)? userNotFound,
+    TResult? Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult? Function(_AccountLocked value)? accountLocked,
+    TResult? Function(_AccountExpired value)? accountExpired,
+    TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_AuthenticationFailed value)? authenticationFailed,
+    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
+        proxyLoginRolePermissionNotMatch,
+    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
+        proxyLoginZPTargetRoleNotMatch,
+    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
+        proxyLoginZPSalesOrgNotMatch,
+    TResult? Function(_DeviceNotSupportBiometirc value)?
+        deviceNotSupportBiometirc,
+    TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult? Function(_ProductOutOfStock value)? productOutOfStock,
+  }) {
+    return productOutOfStock?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Other value)? other,
+    TResult Function(_ServerError value)? serverError,
+    TResult Function(_PoorConnection value)? poorConnection,
+    TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult Function(_AccountLocked value)? accountLocked,
+    TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_AuthenticationFailed value)? authenticationFailed,
+    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
+        proxyLoginRolePermissionNotMatch,
+    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
+        proxyLoginZPTargetRoleNotMatch,
+    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
+        proxyLoginZPSalesOrgNotMatch,
+    TResult Function(_DeviceNotSupportBiometirc value)?
+        deviceNotSupportBiometirc,
+    TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult Function(_ProductOutOfStock value)? productOutOfStock,
+    required TResult orElse(),
+  }) {
+    if (productOutOfStock != null) {
+      return productOutOfStock(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ProductOutOfStock implements ApiFailure {
+  const factory _ProductOutOfStock() = _$_ProductOutOfStock;
 }

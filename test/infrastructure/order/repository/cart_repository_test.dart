@@ -247,6 +247,11 @@ void main() {
     final result = await cartRepository.addItemToCart(
       cartItem: fakeCartItem,
       override: true,
+      salesOrganisationConfigs: mockSalesOrganisationConfigs,
+      customerCodeInfo: fakeCustomerCodeInfo,
+      salesOrganisation: mockSalesOrganisation,
+      shipToInfo: fakeShipToInfo,
+      doNotAllowOutOfStockMaterials: false,
     );
     expect(result.isRight(), false);
   });
@@ -255,6 +260,11 @@ void main() {
     final result = await cartRepository.addItemToCart(
       cartItem: fakeCartItem,
       override: false,
+      salesOrganisationConfigs: mockSalesOrganisationConfigs,
+      customerCodeInfo: fakeCustomerCodeInfo,
+      salesOrganisation: mockSalesOrganisation,
+      shipToInfo: fakeShipToInfo,
+      doNotAllowOutOfStockMaterials: false,
     );
     expect(result.isRight(), false);
   });
@@ -272,6 +282,11 @@ void main() {
     final result = await cartRepository.addItemToCart(
       cartItem: fakeCartItem,
       override: true,
+      salesOrganisationConfigs: mockSalesOrganisationConfigs,
+      customerCodeInfo: fakeCustomerCodeInfo,
+      salesOrganisation: mockSalesOrganisation,
+      shipToInfo: fakeShipToInfo,
+      doNotAllowOutOfStockMaterials: false,
     );
     expect(result.isLeft(), true);
   });
@@ -482,6 +497,11 @@ void main() {
         ),
       ),
       overrideQty: true,
+      salesOrganisationConfigs: mockSalesOrganisationConfigs,
+      customerCodeInfo: fakeCustomerCodeInfo,
+      salesOrganisation: mockSalesOrganisation,
+      shipToInfo: fakeShipToInfo,
+      doNotAllowOutOfStockMaterials: false,
     );
     expect(result.isRight(), false);
   });
@@ -527,6 +547,7 @@ void main() {
                     materialInfo: MaterialInfo.empty().copyWith(
                       materialNumber: MaterialNumber('123'),
                     ),
+                    inStock: 'Yes',
                   ),
                 ],
               ),
@@ -536,6 +557,15 @@ void main() {
       ),
     ).thenAnswer(
       (invocation) async => const Right(unit),
+    );
+
+    when(
+      () => stockInfoLocalDataSource.getStockInfo(),
+    ).thenAnswer(
+      (invocation) async => StockInfo.empty().copyWith(
+        inStock: MaterialInStock('Yes'),
+        materialNumber: MaterialNumber('123'),
+      ),
     );
 
     final result = await cartRepository.addBonusToCartItem(
@@ -562,6 +592,11 @@ void main() {
         ),
       ),
       overrideQty: true,
+      salesOrganisationConfigs: mockSalesOrganisationConfigs,
+      customerCodeInfo: fakeCustomerCodeInfo,
+      salesOrganisation: mockSalesOrganisation,
+      shipToInfo: fakeShipToInfo,
+      doNotAllowOutOfStockMaterials: false,
     );
     expect(result.isRight(), true);
   });
@@ -635,6 +670,11 @@ void main() {
         ),
       ),
       overrideQty: false,
+      salesOrganisationConfigs: mockSalesOrganisationConfigs,
+      customerCodeInfo: fakeCustomerCodeInfo,
+      salesOrganisation: mockSalesOrganisation,
+      shipToInfo: fakeShipToInfo,
+      doNotAllowOutOfStockMaterials: false,
     );
     expect(result.isRight(), false);
   });
@@ -709,6 +749,11 @@ void main() {
         ),
       ),
       overrideQty: false,
+      salesOrganisationConfigs: mockSalesOrganisationConfigs,
+      customerCodeInfo: fakeCustomerCodeInfo,
+      salesOrganisation: mockSalesOrganisation,
+      shipToInfo: fakeShipToInfo,
+      doNotAllowOutOfStockMaterials: false,
     );
     expect(result.isRight(), false);
   });
@@ -731,6 +776,11 @@ void main() {
       item: fakeCartItem,
       newBonus: MaterialItemBonus.empty(),
       overrideQty: true,
+      salesOrganisationConfigs: mockSalesOrganisationConfigs,
+      customerCodeInfo: fakeCustomerCodeInfo,
+      salesOrganisation: mockSalesOrganisation,
+      shipToInfo: fakeShipToInfo,
+      doNotAllowOutOfStockMaterials: false,
     );
     expect(result.isLeft(), true);
   });
@@ -1551,6 +1601,11 @@ void main() {
 
     final result = await cartRepository.replaceCartWithItems(
       items: [fakeCartItem],
+      salesOrganisationConfigs: mockSalesOrganisationConfigs,
+      customerCodeInfo: fakeCustomerCodeInfo,
+      salesOrganisation: mockSalesOrganisation,
+      shipToInfo: fakeShipToInfo,
+      doNotAllowOutOfStockMaterials: false,
     );
     expect(result.isRight(), false);
   });
@@ -1566,6 +1621,11 @@ void main() {
 
     final result = await cartRepository.replaceCartWithItems(
       items: [fakeCartItem],
+      salesOrganisationConfigs: mockSalesOrganisationConfigs,
+      customerCodeInfo: fakeCustomerCodeInfo,
+      salesOrganisation: mockSalesOrganisation,
+      shipToInfo: fakeShipToInfo,
+      doNotAllowOutOfStockMaterials: false,
     );
     expect(result.isLeft(), true);
   });

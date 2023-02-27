@@ -34,6 +34,9 @@ class ApiFailure with _$ApiFailure {
   const factory ApiFailure.noSupportedBiometrics() = _NoSupportedBiometrics;
   const factory ApiFailure.invalidBiometirc() = _InvalidBiometirc;
   const factory ApiFailure.priceOverrideNotFound() = _PriceOverrideNotFound;
+
+  // Cart failure
+  const factory ApiFailure.productOutOfStock() = _ProductOutOfStock;
 }
 
 extension ApiFailureExt on ApiFailure {
@@ -61,6 +64,7 @@ extension ApiFailureExt on ApiFailure {
           'ZP Admin can only login on behalf of users from the same Sales Org',
       proxyLoginZPTargetRoleNotMatch: (_) =>
           'ZP Admin can only login on behalf of Sales Rep and Customer users',
+      productOutOfStock: (_) => 'Product Not Available',
     );
 
     return failureMessage;

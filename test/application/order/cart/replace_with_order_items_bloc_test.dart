@@ -7,7 +7,6 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'cart_bloc_variables.dart';
@@ -20,19 +19,13 @@ void main() {
       'Replace with orderItems Success',
       build: () => CartBloc(cartRepositoryMock),
       setUp: () {
-        when(() => cartRepositoryMock.getStockInfoList(
-              items: [
-                mockMaterialList.first.materialInfo,
-                mockMaterialList.last.materialInfo
-              ],
-              customerCodeInfo: CustomerCodeInfo.empty(),
-              salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-              salesOrganisation: SalesOrganisation.empty(),
-              shipToInfo: ShipToInfo.empty(),
-            )).thenAnswer((invocation) async => Right(mockStockInfoMapEmpty));
-
         when(() => cartRepositoryMock.replaceCartWithItems(
               items: mockCartBundleList,
+              customerCodeInfo: CustomerCodeInfo.empty(),
+              salesOrganisation: SalesOrganisation.empty(),
+              shipToInfo: ShipToInfo.empty(),
+              doNotAllowOutOfStockMaterials: true,
+              salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
             )).thenAnswer((invocation) async => Right(mockCartBundleList));
 
         when(() =>
@@ -64,19 +57,13 @@ void main() {
       'Replace with orderItems Fail',
       build: () => CartBloc(cartRepositoryMock),
       setUp: () {
-        when(() => cartRepositoryMock.getStockInfoList(
-              items: [
-                mockMaterialList.first.materialInfo,
-                mockMaterialList.last.materialInfo
-              ],
-              customerCodeInfo: CustomerCodeInfo.empty(),
-              salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-              salesOrganisation: SalesOrganisation.empty(),
-              shipToInfo: ShipToInfo.empty(),
-            )).thenAnswer((invocation) async => Right(mockStockInfoMapEmpty));
-
         when(() => cartRepositoryMock.replaceCartWithItems(
                   items: mockCartBundleList,
+                  customerCodeInfo: CustomerCodeInfo.empty(),
+                  salesOrganisation: SalesOrganisation.empty(),
+                  shipToInfo: ShipToInfo.empty(),
+                  doNotAllowOutOfStockMaterials: true,
+                  salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
                 ))
             .thenAnswer((invocation) async =>
                 const Left(ApiFailure.other('fake-Error')));
@@ -105,15 +92,19 @@ void main() {
       'Replace with orderItems no Stock',
       build: () => CartBloc(cartRepositoryMock),
       setUp: () {
-        when(() => cartRepositoryMock.getStockInfoList(
-                  items: [MaterialInfo.empty()],
+        when(() => cartRepositoryMock.replaceCartWithItems(
+                  items: [
+                    mockCartBundleList.first
+                        .copyWith(materials: [PriceAggregate.empty()])
+                  ],
                   customerCodeInfo: CustomerCodeInfo.empty(),
-                  salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
                   salesOrganisation: SalesOrganisation.empty(),
                   shipToInfo: ShipToInfo.empty(),
+                  doNotAllowOutOfStockMaterials: true,
+                  salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
                 ))
             .thenAnswer((invocation) async =>
-                const Left(ApiFailure.other('Product Not Available')));
+                const Left(ApiFailure.productOutOfStock()));
       },
       act: (bloc) => bloc.add(CartEvent.replaceWithOrderItems(
         items: [
@@ -132,7 +123,7 @@ void main() {
         ),
         CartState.initial().copyWith(
           apiFailureOrSuccessOption:
-              optionOf(const Left(ApiFailure.other('Product Not Available'))),
+              optionOf(const Left(ApiFailure.productOutOfStock())),
           cartItems: [],
           isFetching: false,
         ),

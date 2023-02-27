@@ -7,7 +7,6 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -38,19 +37,9 @@ void main() {
       ),
       build: () => CartBloc(cartRepositoryMock),
       setUp: () {
-        when(
-          () => cartRepositoryMock.getStockInfo(
-            material: mockMaterialList.first.materialInfo,
-            customerCodeInfo: CustomerCodeInfo.empty(),
-            salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-            salesOrganisation: SalesOrganisation.empty(),
-            shipToInfo: ShipToInfo.empty(),
-          ),
-        ).thenAnswer((invocation) async => Right(mockStockInfo));
         when(() => cartRepositoryMock.addBonusToCartItem(
               newBonus: MaterialItemBonus.empty().copyWith(
                 qty: 2,
-                inStock: mockStockInfo.inStock.getOrCrash(),
                 materialInfo: mockMaterialList.first.materialInfo,
               ),
               item: mockMaterialCartItemFirst.copyWith(
@@ -67,6 +56,11 @@ void main() {
                 ],
               ),
               overrideQty: true,
+              customerCodeInfo: CustomerCodeInfo.empty(),
+              doNotAllowOutOfStockMaterials: true,
+              salesOrganisation: SalesOrganisation.empty(),
+              salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+              shipToInfo: ShipToInfo.empty(),
             )).thenAnswer(
           (invocation) async => Right(
             [
@@ -168,19 +162,9 @@ void main() {
       ),
       build: () => CartBloc(cartRepositoryMock),
       setUp: () {
-        when(
-          () => cartRepositoryMock.getStockInfo(
-            material: mockMaterialList.first.materialInfo,
-            customerCodeInfo: CustomerCodeInfo.empty(),
-            salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-            salesOrganisation: SalesOrganisation.empty(),
-            shipToInfo: ShipToInfo.empty(),
-          ),
-        ).thenAnswer((invocation) async => Right(mockStockInfo));
         when(() => cartRepositoryMock.addBonusToCartItem(
                   newBonus: MaterialItemBonus.empty().copyWith(
                     qty: 2,
-                    inStock: mockStockInfo.inStock.getOrCrash(),
                     materialInfo: mockMaterialList.first.materialInfo,
                   ),
                   item: mockMaterialCartItemFirst.copyWith(
@@ -197,6 +181,11 @@ void main() {
                     ],
                   ),
                   overrideQty: true,
+                  customerCodeInfo: CustomerCodeInfo.empty(),
+                  doNotAllowOutOfStockMaterials: true,
+                  salesOrganisation: SalesOrganisation.empty(),
+                  salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+                  shipToInfo: ShipToInfo.empty(),
                 ))
             .thenAnswer((invocation) async =>
                 const Left(ApiFailure.other('fake-Error')));
@@ -270,15 +259,20 @@ void main() {
       ),
       build: () => CartBloc(cartRepositoryMock),
       setUp: () {
-        when(() => cartRepositoryMock.getStockInfo(
-                  material: MaterialInfo.empty(),
-                  customerCodeInfo: CustomerCodeInfo.empty(),
-                  salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-                  salesOrganisation: SalesOrganisation.empty(),
-                  shipToInfo: ShipToInfo.empty(),
-                ))
-            .thenAnswer((invocation) async =>
-                const Left(ApiFailure.other('Product Not Available')));
+        when(
+          () => cartRepositoryMock.addBonusToCartItem(
+            item: mockMaterialCartItemFirst
+                .copyWith(materials: [PriceAggregate.empty()]),
+            newBonus: MaterialItemBonus.empty(),
+            overrideQty: true,
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            doNotAllowOutOfStockMaterials: true,
+            salesOrganisation: SalesOrganisation.empty(),
+            salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+            shipToInfo: ShipToInfo.empty(),
+          ),
+        ).thenAnswer(
+            (invocation) async => const Left(ApiFailure.productOutOfStock()));
       },
       act: (bloc) => bloc.add(
         CartEvent.addBonusToCartItem(
@@ -303,7 +297,7 @@ void main() {
         ),
         CartState.initial().copyWith(
           apiFailureOrSuccessOption: optionOf(const Left(
-            ApiFailure.other('Product Not Available'),
+            ApiFailure.productOutOfStock(),
           )),
           cartItems: [
             mockMaterialCartItemFirst
@@ -321,31 +315,22 @@ void main() {
       build: () => CartBloc(cartRepositoryMock),
       setUp: () {
         when(
-          () => cartRepositoryMock.getStockInfo(
-            material: bonus913MockCartItem.materialInfo,
+          () => cartRepositoryMock.addItemToCart(
+            cartItem: bonus913mockMaterialList.first.copyWith(materials: [
+              bonus913MockCartItem.copyWith(
+                quantity: 2,
+                stockInfo: mockStockInfo.copyWith(
+                  materialNumber: bonusMaterialNumber,
+                ),
+              ),
+            ]),
+            override: false,
             customerCodeInfo: CustomerCodeInfo.empty(),
-            salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+            doNotAllowOutOfStockMaterials: true,
             salesOrganisation: SalesOrganisation.empty(),
+            salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
             shipToInfo: ShipToInfo.empty(),
           ),
-        ).thenAnswer(
-          (invocation) async => Right(
-            mockStockInfo.copyWith(
-              materialNumber: bonusMaterialNumber,
-            ),
-          ),
-        );
-        when(
-          () => cartRepositoryMock.addItemToCart(
-              cartItem: bonus913mockMaterialList.first.copyWith(materials: [
-                bonus913MockCartItem.copyWith(
-                  quantity: 2,
-                  stockInfo: mockStockInfo.copyWith(
-                    materialNumber: bonusMaterialNumber,
-                  ),
-                ),
-              ]),
-              override: false),
         ).thenAnswer(
           (invocation) async => Right(
             [
@@ -443,32 +428,23 @@ void main() {
       build: () => CartBloc(cartRepositoryMock),
       setUp: () {
         when(
-          () => cartRepositoryMock.getStockInfo(
-            material: bonus913MockCartItem.materialInfo,
+          () => cartRepositoryMock.addItemToCart(
+            cartItem: bonus913mockMaterialList.first.copyWith(materials: [
+              bonus913MockCartItem.copyWith(
+                quantity: bonus913MockCartItem
+                    .price.priceBonusItem.last.qualifyingQuantity,
+                stockInfo: mockStockInfo.copyWith(
+                  materialNumber: bonusMaterialNumber,
+                ),
+              ),
+            ]),
+            override: false,
             customerCodeInfo: CustomerCodeInfo.empty(),
-            salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+            doNotAllowOutOfStockMaterials: true,
             salesOrganisation: SalesOrganisation.empty(),
+            salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
             shipToInfo: ShipToInfo.empty(),
           ),
-        ).thenAnswer(
-          (invocation) async => Right(
-            mockStockInfo.copyWith(
-              materialNumber: bonusMaterialNumber,
-            ),
-          ),
-        );
-        when(
-          () => cartRepositoryMock.addItemToCart(
-              cartItem: bonus913mockMaterialList.first.copyWith(materials: [
-                bonus913MockCartItem.copyWith(
-                  quantity: bonus913MockCartItem
-                      .price.priceBonusItem.last.qualifyingQuantity,
-                  stockInfo: mockStockInfo.copyWith(
-                    materialNumber: bonusMaterialNumber,
-                  ),
-                ),
-              ]),
-              override: false),
         ).thenAnswer(
           (invocation) async => Right(
             [
@@ -607,32 +583,23 @@ void main() {
       build: () => CartBloc(cartRepositoryMock),
       setUp: () {
         when(
-          () => cartRepositoryMock.getStockInfo(
-            material: bonus911MockCartItem.materialInfo,
+          () => cartRepositoryMock.addItemToCart(
+            cartItem: bonus911mockMaterialList.first.copyWith(materials: [
+              bonus911MockCartItem.copyWith(
+                quantity: bonus911MockCartItem
+                    .price.priceBonusItem.last.qualifyingQuantity,
+                stockInfo: mockStockInfo.copyWith(
+                  materialNumber: bonusMaterialNumber,
+                ),
+              ),
+            ]),
+            override: false,
             customerCodeInfo: CustomerCodeInfo.empty(),
-            salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+            doNotAllowOutOfStockMaterials: true,
             salesOrganisation: SalesOrganisation.empty(),
+            salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
             shipToInfo: ShipToInfo.empty(),
           ),
-        ).thenAnswer(
-          (invocation) async => Right(
-            mockStockInfo.copyWith(
-              materialNumber: bonusMaterialNumber,
-            ),
-          ),
-        );
-        when(
-          () => cartRepositoryMock.addItemToCart(
-              cartItem: bonus911mockMaterialList.first.copyWith(materials: [
-                bonus911MockCartItem.copyWith(
-                  quantity: bonus911MockCartItem
-                      .price.priceBonusItem.last.qualifyingQuantity,
-                  stockInfo: mockStockInfo.copyWith(
-                    materialNumber: bonusMaterialNumber,
-                  ),
-                ),
-              ]),
-              override: false),
         ).thenAnswer(
           (invocation) async => Right(
             [
@@ -791,32 +758,23 @@ void main() {
       build: () => CartBloc(cartRepositoryMock),
       setUp: () {
         when(
-          () => cartRepositoryMock.getStockInfo(
-            material: bonus914MockCartItem.materialInfo,
+          () => cartRepositoryMock.addItemToCart(
+            cartItem: bonus914mockMaterialList.first.copyWith(materials: [
+              bonus914MockCartItem.copyWith(
+                quantity: bonus914MockCartItem
+                    .price.priceBonusItem.last.qualifyingQuantity,
+                stockInfo: mockStockInfo.copyWith(
+                  materialNumber: bonusMaterialNumber,
+                ),
+              ),
+            ]),
+            override: false,
             customerCodeInfo: CustomerCodeInfo.empty(),
-            salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+            doNotAllowOutOfStockMaterials: true,
             salesOrganisation: SalesOrganisation.empty(),
+            salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
             shipToInfo: ShipToInfo.empty(),
           ),
-        ).thenAnswer(
-          (invocation) async => Right(
-            mockStockInfo.copyWith(
-              materialNumber: bonusMaterialNumber,
-            ),
-          ),
-        );
-        when(
-          () => cartRepositoryMock.addItemToCart(
-              cartItem: bonus914mockMaterialList.first.copyWith(materials: [
-                bonus914MockCartItem.copyWith(
-                  quantity: bonus914MockCartItem
-                      .price.priceBonusItem.last.qualifyingQuantity,
-                  stockInfo: mockStockInfo.copyWith(
-                    materialNumber: bonusMaterialNumber,
-                  ),
-                ),
-              ]),
-              override: false),
         ).thenAnswer(
           (invocation) async => Right(
             [
@@ -974,32 +932,23 @@ void main() {
       build: () => CartBloc(cartRepositoryMock),
       setUp: () {
         when(
-          () => cartRepositoryMock.getStockInfo(
-            material: bonus915MockCartItem.materialInfo,
+          () => cartRepositoryMock.addItemToCart(
+            cartItem: bonus915mockMaterialList.first.copyWith(materials: [
+              bonus915MockCartItem.copyWith(
+                quantity: bonus915MockCartItem
+                    .price.priceBonusItem.last.qualifyingQuantity,
+                stockInfo: mockStockInfo.copyWith(
+                  materialNumber: bonusMaterialNumber,
+                ),
+              ),
+            ]),
+            override: false,
             customerCodeInfo: CustomerCodeInfo.empty(),
-            salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+            doNotAllowOutOfStockMaterials: true,
             salesOrganisation: SalesOrganisation.empty(),
+            salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
             shipToInfo: ShipToInfo.empty(),
           ),
-        ).thenAnswer(
-          (invocation) async => Right(
-            mockStockInfo.copyWith(
-              materialNumber: bonusMaterialNumber,
-            ),
-          ),
-        );
-        when(
-          () => cartRepositoryMock.addItemToCart(
-              cartItem: bonus915mockMaterialList.first.copyWith(materials: [
-                bonus915MockCartItem.copyWith(
-                  quantity: bonus915MockCartItem
-                      .price.priceBonusItem.last.qualifyingQuantity,
-                  stockInfo: mockStockInfo.copyWith(
-                    materialNumber: bonusMaterialNumber,
-                  ),
-                ),
-              ]),
-              override: false),
         ).thenAnswer(
           (invocation) async => Right(
             [
@@ -1157,32 +1106,23 @@ void main() {
       build: () => CartBloc(cartRepositoryMock),
       setUp: () {
         when(
-          () => cartRepositoryMock.getStockInfo(
-            material: bonus913MockCartItem.materialInfo,
+          () => cartRepositoryMock.addItemToCart(
+            cartItem: bonus913mockMaterialList.first.copyWith(materials: [
+              bonus913MockCartItem.copyWith(
+                quantity: bonus913MockCartItem
+                    .price.priceBonusItem.last.qualifyingQuantity,
+                stockInfo: mockStockInfo.copyWith(
+                  materialNumber: bonusMaterialNumber,
+                ),
+              ),
+            ]),
+            override: false,
             customerCodeInfo: CustomerCodeInfo.empty(),
-            salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+            doNotAllowOutOfStockMaterials: true,
             salesOrganisation: SalesOrganisation.empty(),
+            salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
             shipToInfo: ShipToInfo.empty(),
           ),
-        ).thenAnswer(
-          (invocation) async => Right(
-            mockStockInfo.copyWith(
-              materialNumber: bonusMaterialNumber,
-            ),
-          ),
-        );
-        when(
-          () => cartRepositoryMock.addItemToCart(
-              cartItem: bonus913mockMaterialList.first.copyWith(materials: [
-                bonus913MockCartItem.copyWith(
-                  quantity: bonus913MockCartItem
-                      .price.priceBonusItem.last.qualifyingQuantity,
-                  stockInfo: mockStockInfo.copyWith(
-                    materialNumber: bonusMaterialNumber,
-                  ),
-                ),
-              ]),
-              override: false),
         ).thenAnswer(
           (invocation) async => Right(
             [
@@ -1341,34 +1281,24 @@ void main() {
       build: () => CartBloc(cartRepositoryMock),
       setUp: () {
         when(
-          () => cartRepositoryMock.getStockInfo(
-            material: bonus913MockCartItem.materialInfo,
+          () => cartRepositoryMock.addItemToCart(
+            cartItem: bonus913mockMaterialList.first.copyWith(materials: [
+              bonus913MockCartItem.copyWith(
+                quantity: bonus913MockCartItem.price.priceBonusItem
+                    .elementAt(1)
+                    .qualifyingQuantity,
+                stockInfo: mockStockInfo.copyWith(
+                  materialNumber: bonusMaterialNumber,
+                ),
+              ),
+            ]),
+            override: false,
             customerCodeInfo: CustomerCodeInfo.empty(),
-            salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+            doNotAllowOutOfStockMaterials: true,
             salesOrganisation: SalesOrganisation.empty(),
+            salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
             shipToInfo: ShipToInfo.empty(),
           ),
-        ).thenAnswer(
-          (invocation) async => Right(
-            mockStockInfo.copyWith(
-              materialNumber: bonusMaterialNumber,
-            ),
-          ),
-        );
-
-        when(
-          () => cartRepositoryMock.addItemToCart(
-              cartItem: bonus913mockMaterialList.first.copyWith(materials: [
-                bonus913MockCartItem.copyWith(
-                  quantity: bonus913MockCartItem.price.priceBonusItem
-                      .elementAt(1)
-                      .qualifyingQuantity,
-                  stockInfo: mockStockInfo.copyWith(
-                    materialNumber: bonusMaterialNumber,
-                  ),
-                ),
-              ]),
-              override: false),
         ).thenAnswer(
           (invocation) async => Right(
             [
@@ -1537,33 +1467,23 @@ void main() {
       build: () => CartBloc(cartRepositoryMock),
       setUp: () {
         when(
-          () => cartRepositoryMock.getStockInfo(
-            material: bonus913MockCartItem.materialInfo,
+          () => cartRepositoryMock.addItemToCart(
+            cartItem: bonus913mockMaterialList.first.copyWith(materials: [
+              bonus913MockCartItem.copyWith(
+                quantity: bonus913MockCartItem
+                    .price.priceBonusItem.first.qualifyingQuantity,
+                stockInfo: mockStockInfo.copyWith(
+                  materialNumber: bonusMaterialNumber,
+                ),
+              ),
+            ]),
+            override: false,
             customerCodeInfo: CustomerCodeInfo.empty(),
-            salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+            doNotAllowOutOfStockMaterials: true,
             salesOrganisation: SalesOrganisation.empty(),
+            salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
             shipToInfo: ShipToInfo.empty(),
           ),
-        ).thenAnswer(
-          (invocation) async => Right(
-            mockStockInfo.copyWith(
-              materialNumber: bonusMaterialNumber,
-            ),
-          ),
-        );
-
-        when(
-          () => cartRepositoryMock.addItemToCart(
-              cartItem: bonus913mockMaterialList.first.copyWith(materials: [
-                bonus913MockCartItem.copyWith(
-                  quantity: bonus913MockCartItem
-                      .price.priceBonusItem.first.qualifyingQuantity,
-                  stockInfo: mockStockInfo.copyWith(
-                    materialNumber: bonusMaterialNumber,
-                  ),
-                ),
-              ]),
-              override: false),
         ).thenAnswer(
           (invocation) async => Right(
             [
@@ -1723,32 +1643,22 @@ void main() {
       build: () => CartBloc(cartRepositoryMock),
       setUp: () {
         when(
-          () => cartRepositoryMock.getStockInfo(
-            material: bonus913MockCartItem.materialInfo,
+          () => cartRepositoryMock.addItemToCart(
+            cartItem: bonus913mockMaterialList.first.copyWith(materials: [
+              bonus913MockCartItem.copyWith(
+                quantity: 8,
+                stockInfo: mockStockInfo.copyWith(
+                  materialNumber: bonusMaterialNumber,
+                ),
+              ),
+            ]),
+            override: false,
             customerCodeInfo: CustomerCodeInfo.empty(),
-            salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+            doNotAllowOutOfStockMaterials: true,
             salesOrganisation: SalesOrganisation.empty(),
+            salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
             shipToInfo: ShipToInfo.empty(),
           ),
-        ).thenAnswer(
-          (invocation) async => Right(
-            mockStockInfo.copyWith(
-              materialNumber: bonusMaterialNumber,
-            ),
-          ),
-        );
-
-        when(
-          () => cartRepositoryMock.addItemToCart(
-              cartItem: bonus913mockMaterialList.first.copyWith(materials: [
-                bonus913MockCartItem.copyWith(
-                  quantity: 8,
-                  stockInfo: mockStockInfo.copyWith(
-                    materialNumber: bonusMaterialNumber,
-                  ),
-                ),
-              ]),
-              override: false),
         ).thenAnswer(
           (invocation) async => Right(
             [
@@ -1898,32 +1808,22 @@ void main() {
       build: () => CartBloc(cartRepositoryMock),
       setUp: () {
         when(
-          () => cartRepositoryMock.getStockInfo(
-            material: bonus913MockCartItem.materialInfo,
+          () => cartRepositoryMock.addItemToCart(
+            cartItem: bonus913mockMaterialList.first.copyWith(materials: [
+              bonus913MockCartItem.copyWith(
+                quantity: 13,
+                stockInfo: mockStockInfo.copyWith(
+                  materialNumber: bonusMaterialNumber,
+                ),
+              ),
+            ]),
+            override: false,
             customerCodeInfo: CustomerCodeInfo.empty(),
-            salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+            doNotAllowOutOfStockMaterials: true,
             salesOrganisation: SalesOrganisation.empty(),
+            salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
             shipToInfo: ShipToInfo.empty(),
           ),
-        ).thenAnswer(
-          (invocation) async => Right(
-            mockStockInfo.copyWith(
-              materialNumber: bonusMaterialNumber,
-            ),
-          ),
-        );
-
-        when(
-          () => cartRepositoryMock.addItemToCart(
-              cartItem: bonus913mockMaterialList.first.copyWith(materials: [
-                bonus913MockCartItem.copyWith(
-                  quantity: 13,
-                  stockInfo: mockStockInfo.copyWith(
-                    materialNumber: bonusMaterialNumber,
-                  ),
-                ),
-              ]),
-              override: false),
         ).thenAnswer(
           (invocation) async => Right(
             [
@@ -2074,32 +1974,22 @@ void main() {
       build: () => CartBloc(cartRepositoryMock),
       setUp: () {
         when(
-          () => cartRepositoryMock.getStockInfo(
-            material: bonus913MockCartItem.materialInfo,
+          () => cartRepositoryMock.addItemToCart(
+            cartItem: bonus913mockMaterialList.first.copyWith(materials: [
+              bonus913MockCartItem.copyWith(
+                quantity: 15,
+                stockInfo: mockStockInfo.copyWith(
+                  materialNumber: bonusMaterialNumber,
+                ),
+              ),
+            ]),
+            override: false,
             customerCodeInfo: CustomerCodeInfo.empty(),
-            salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+            doNotAllowOutOfStockMaterials: true,
             salesOrganisation: SalesOrganisation.empty(),
+            salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
             shipToInfo: ShipToInfo.empty(),
           ),
-        ).thenAnswer(
-          (invocation) async => Right(
-            mockStockInfo.copyWith(
-              materialNumber: bonusMaterialNumber,
-            ),
-          ),
-        );
-
-        when(
-          () => cartRepositoryMock.addItemToCart(
-              cartItem: bonus913mockMaterialList.first.copyWith(materials: [
-                bonus913MockCartItem.copyWith(
-                  quantity: 15,
-                  stockInfo: mockStockInfo.copyWith(
-                    materialNumber: bonusMaterialNumber,
-                  ),
-                ),
-              ]),
-              override: false),
         ).thenAnswer(
           (invocation) async => Right(
             [
@@ -2250,32 +2140,22 @@ void main() {
       build: () => CartBloc(cartRepositoryMock),
       setUp: () {
         when(
-          () => cartRepositoryMock.getStockInfo(
-            material: bonus913MockCartItem.materialInfo,
+          () => cartRepositoryMock.addItemToCart(
+            cartItem: bonus913mockMaterialList.first.copyWith(materials: [
+              bonus913MockCartItem.copyWith(
+                quantity: 18,
+                stockInfo: mockStockInfo.copyWith(
+                  materialNumber: bonusMaterialNumber,
+                ),
+              ),
+            ]),
+            override: false,
             customerCodeInfo: CustomerCodeInfo.empty(),
-            salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+            doNotAllowOutOfStockMaterials: true,
             salesOrganisation: SalesOrganisation.empty(),
+            salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
             shipToInfo: ShipToInfo.empty(),
           ),
-        ).thenAnswer(
-          (invocation) async => Right(
-            mockStockInfo.copyWith(
-              materialNumber: bonusMaterialNumber,
-            ),
-          ),
-        );
-
-        when(
-          () => cartRepositoryMock.addItemToCart(
-              cartItem: bonus913mockMaterialList.first.copyWith(materials: [
-                bonus913MockCartItem.copyWith(
-                  quantity: 18,
-                  stockInfo: mockStockInfo.copyWith(
-                    materialNumber: bonusMaterialNumber,
-                  ),
-                ),
-              ]),
-              override: false),
         ).thenAnswer(
           (invocation) async => Right(
             [

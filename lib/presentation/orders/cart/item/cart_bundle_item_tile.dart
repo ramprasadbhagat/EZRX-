@@ -302,8 +302,8 @@ class _BundleMaterialItemState extends State<_BundleMaterialItem> {
                   },
                 );
                 context.read<CartBloc>().add(
-                      CartEvent.updateBundleItemQty(
-                        currentBundle: widget.cartItem,
+                      CartEvent.updateMaterialQtyInCartItem(
+                        currentItem: widget.cartItem,
                         updatedQtyItem:
                             widget.material.copyWith(quantity: value),
                         customerCodeInfo: context
@@ -336,8 +336,8 @@ class _BundleMaterialItemState extends State<_BundleMaterialItem> {
                   },
                 );
                 context.read<CartBloc>().add(
-                      CartEvent.updateBundleItemQty(
-                        currentBundle: widget.cartItem,
+                      CartEvent.updateMaterialQtyInCartItem(
+                        currentItem: widget.cartItem,
                         updatedQtyItem: widget.material.copyWith(quantity: k),
                         customerCodeInfo: context
                             .read<CustomerCodeBloc>()
@@ -369,8 +369,8 @@ class _BundleMaterialItemState extends State<_BundleMaterialItem> {
                   },
                 );
                 context.read<CartBloc>().add(
-                      CartEvent.updateBundleItemQty(
-                        currentBundle: widget.cartItem,
+                      CartEvent.updateMaterialQtyInCartItem(
+                        currentItem: widget.cartItem,
                         updatedQtyItem: widget.material.copyWith(quantity: k),
                         customerCodeInfo: context
                             .read<CustomerCodeBloc>()
