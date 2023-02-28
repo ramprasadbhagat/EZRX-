@@ -109,6 +109,8 @@
 		</array>
 		<key>NSFaceIDUsageDescription</key>
 		<string>App wants to access faceid to secure account access for logged in user.</string>
+        <key>NSCameraUsageDescription</key>
+        <string>App wants to access camera to scan the barcode</string>
 		<key>UIStatusBarHidden</key>
 		<true/>
 		<key>NSPhotoLibraryUsageDescription</key>
