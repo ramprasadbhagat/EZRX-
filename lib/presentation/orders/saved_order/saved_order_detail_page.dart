@@ -324,6 +324,8 @@ class _SavedOrderDetailPageState extends State<SavedOrderDetailPage> {
       context: context,
       title: 'Delete Order?',
       message: 'Are you sure you want to delete this Order?',
+      confirmText: 'Yes',
+      cancelText: 'No',
       onAcceptPressed: () async {
         context.read<SavedOrderListBloc>().add(
               SavedOrderListEvent.delete(

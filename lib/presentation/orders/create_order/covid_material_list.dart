@@ -19,6 +19,7 @@ import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
+import 'package:ezrxmobile/presentation/core/custom_small_button.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/favorite_button.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -161,6 +162,37 @@ class _ListContent extends StatelessWidget {
     required this.salesOrgConfigs,
   }) : super(key: key);
 
+  void _showMaterialDetail(BuildContext context) {
+    final materialPrice = context
+        .read<MaterialPriceBloc>()
+        .state
+        .materialPrice[materialInfo.materialNumber];
+    if (materialPrice == null) {
+      showSnackBar(
+        context: context,
+        message: 'Product Not Available'.tr(),
+      );
+    } else {
+      addToCart(
+        context: context,
+        priceAggregate: PriceAggregate(
+          price: materialPrice,
+          materialInfo: materialInfo,
+          salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+          quantity: 1,
+          bundle: Bundle.empty(),
+          addedBonusList: [],
+          stockInfo: StockInfo.empty().copyWith(
+            materialNumber: materialInfo.materialNumber,
+          ),
+          tenderContract: TenderContract.empty(),
+          comboDeal: ComboDeal.empty(),
+        ),
+        isCovid19Tab: true,
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -168,54 +200,27 @@ class _ListContent extends StatelessWidget {
         key: Key(
           'covidMaterialOption${materialInfo.materialNumber.getOrCrash()}',
         ),
-        onTap: () {
-          final materialPrice = context
-              .read<MaterialPriceBloc>()
-              .state
-              .materialPrice[materialInfo.materialNumber];
-          if (materialPrice == null) {
-            showSnackBar(
-              context: context,
-              message: 'Product Not Available'.tr(),
-            );
-          } else {
-            addToCart(
-              context: context,
-              priceAggregate: PriceAggregate(
-                price: materialPrice,
-                materialInfo: materialInfo,
-                salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
-                quantity: 1,
-                bundle: Bundle.empty(),
-                addedBonusList: [],
-                stockInfo: StockInfo.empty().copyWith(
-                  materialNumber: materialInfo.materialNumber,
-                ),
-                tenderContract: TenderContract.empty(),
-                comboDeal: ComboDeal.empty(),
-              ),
-              isCovid19Tab: true,
-            );
-          }
-        },
+        onTap: () => _showMaterialDetail(context),
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              materialInfo.materialNumber.displayMatNo,
-              style: Theme.of(context).textTheme.subtitle2?.apply(
+              materialInfo.materialDescription,
+              style: Theme.of(context).textTheme.titleSmall?.apply(
                     color: ZPColors.kPrimaryColor,
                   ),
             ),
             Text(
-              materialInfo.materialDescription,
-              style: Theme.of(context).textTheme.bodyText1,
+              materialInfo.materialNumber.displayMatNo,
+              style: Theme.of(context).textTheme.titleSmall?.apply(
+                          color: ZPColors.lightGray,
+                        ),
             ),
             (salesOrgConfigs.enableDefaultMD &&
                     materialInfo.defaultMaterialDescription.isNotEmpty)
                 ? Text(
                     materialInfo.defaultMaterialDescription,
-                    style: Theme.of(context).textTheme.subtitle2?.apply(
+                    style: Theme.of(context).textTheme.titleSmall?.apply(
                           color: ZPColors.lightGray,
                         ),
                   )
@@ -224,22 +229,35 @@ class _ListContent extends StatelessWidget {
                     materialInfo.itemRegistrationNumber.isNotEmpty)
                 ? Text(
                     materialInfo.itemRegistrationNumber,
-                    style: Theme.of(context).textTheme.subtitle2?.apply(
+                    style: Theme.of(context).textTheme.titleSmall?.apply(
                           color: ZPColors.lightGray,
                         ),
                   )
                 : const SizedBox.shrink(),
             Text(
               materialInfo.principalData.principalName.getOrDefaultValue(''),
-              style: Theme.of(context).textTheme.subtitle2?.apply(
+              style: Theme.of(context).textTheme.titleSmall?.apply(
                     color: ZPColors.lightGray,
                   ),
             ),
             _GovermentMaterialCode(materialInfo: materialInfo),
-            _PriceLabel(materialInfo: materialInfo),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                _PriceLabel(materialInfo: materialInfo),
+                Row(
+                  children: [
+                    FavoriteButton(materialInfo: materialInfo),
+                    CustomSmallButton(
+                      onPressed: () => _showMaterialDetail(context),
+                      text: 'Add'.tr(),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ],
         ),
-        trailing: FavoriteButton(materialInfo: materialInfo),
       ),
     );
   }
@@ -259,7 +277,7 @@ class _GovermentMaterialCode extends StatelessWidget {
                 materialInfo.governmentMaterialCode.isNotEmpty
             ? Text(
                 '${'Government Material Code:'.tr()} ${materialInfo.governmentMaterialCode}',
-                style: Theme.of(context).textTheme.subtitle2?.apply(
+                style: Theme.of(context).textTheme.titleSmall?.apply(
                       color: ZPColors.lightGray,
                     ),
                 overflow: TextOverflow.ellipsis,
@@ -306,7 +324,7 @@ class _PriceLabel extends StatelessWidget {
               context.read<SalesOrgBloc>().state.configs.enableVat
                   ? Text(
                       '${'Price before ${context.read<SalesOrgBloc>().state.salesOrg.taxCode}: '.tr()}${priceAggregate.display(PriceType.finalPrice)}',
-                      style: Theme.of(context).textTheme.bodyText1?.apply(
+                      style: Theme.of(context).textTheme.titleSmall?.apply(
                             color: ZPColors.lightGray,
                           ),
                     )
@@ -314,14 +332,14 @@ class _PriceLabel extends StatelessWidget {
               context.read<SalesOrgBloc>().state.configs.enableListPrice
                   ? Text(
                       '${'List Price:'.tr()}${priceAggregate.display(PriceType.listPrice)}',
-                      style: Theme.of(context).textTheme.bodyText1?.apply(
+                      style: Theme.of(context).textTheme.titleSmall?.apply(
                             color: ZPColors.lightGray,
                           ),
                     )
                   : const SizedBox.shrink(),
               Text(
                 '${'Unit Price: '.tr()}${priceAggregate.display(PriceType.unitPrice)}',
-                style: Theme.of(context).textTheme.bodyText1?.apply(
+                style: Theme.of(context).textTheme.titleSmall?.apply(
                       color: ZPColors.black,
                     ),
               ),
@@ -338,7 +356,7 @@ class _PriceLabel extends StatelessWidget {
 
         return Text(
           '${'Unit Price: '.tr()}NA',
-          style: Theme.of(context).textTheme.bodyText1?.apply(
+          style: Theme.of(context).textTheme.titleSmall?.apply(
                 color: ZPColors.black,
               ),
         );

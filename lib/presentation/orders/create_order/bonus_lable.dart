@@ -130,15 +130,15 @@ class _ExpandedBonusLabelState extends State<ExpandedBonusLabel> {
             children: [
               Text(
                 widget.bonus.materialDescription,
-                style: Theme.of(context).textTheme.bodySmall,
+                style: Theme.of(context).textTheme.titleSmall,
               ).tr(),
               Text(
                 widget.bonus.materialNumber.displayMatNo,
-                style: Theme.of(context).textTheme.bodySmall,
+                style: Theme.of(context).textTheme.titleSmall,
               ).tr(),
               Text(
                 'Bonus Qty: ${widget.bonus.bonusQuantity}',
-                style: Theme.of(context).textTheme.bodySmall,
+                style: Theme.of(context).textTheme.titleSmall,
               ).tr(),
             ],
           ),

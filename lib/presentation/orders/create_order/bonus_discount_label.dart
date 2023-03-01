@@ -29,7 +29,7 @@ class BonusDiscountLabel extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(8, 8, 0, 8),
               child: Text(
                 tenderContractNumber,
-                style: Theme.of(context).textTheme.bodyText1?.apply(
+                style: Theme.of(context).textTheme.titleSmall?.apply(
                       color: ZPColors.tender,
                     ),
               ),

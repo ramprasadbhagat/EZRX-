@@ -30,12 +30,6 @@ final appThemeData = {
     scaffoldBackgroundColor: ZPColors.extraLightGray,
     primaryColor: ZPColors.primary,
     canvasColor: ZPColors.white,
-    colorScheme: const ColorScheme.light().copyWith(
-      primary: ZPColors.gradient,
-      background: ZPColors.white,
-      secondary: ZPColors.secondary,
-      onPrimary: ZPColors.black,
-    ),
     iconTheme: const IconThemeData(
       color: ZPColors.lightGray,
     ),
@@ -143,7 +137,7 @@ final appThemeData = {
         //   ),
         // ),
         shape: const StadiumBorder(),
-        // textStyle: ThemeData.light().textTheme.bodyText2,
+        // textStyle: ThemeData.light().textTheme.titleSmall,
         textStyle: const TextStyle(
           fontSize: 15,
           fontFamily: 'Poppins',
@@ -231,8 +225,12 @@ final appThemeData = {
       labelPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 0),
       padding: EdgeInsets.zero,
       shape: const StadiumBorder(),
-    ),
-    errorColor: ZPColors.error,
+    ), colorScheme: const ColorScheme.light().copyWith(
+      primary: ZPColors.gradient,
+      background: ZPColors.white,
+      secondary: ZPColors.secondary,
+      onPrimary: ZPColors.black,
+    ).copyWith(error: ZPColors.error),
   ),
   AppTheme.dark: ThemeData.dark().copyWith(),
 };

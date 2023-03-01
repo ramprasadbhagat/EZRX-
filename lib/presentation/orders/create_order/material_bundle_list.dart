@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
@@ -11,6 +12,7 @@ import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
+import 'package:ezrxmobile/presentation/core/custom_small_button.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -99,6 +101,36 @@ class _ListContent extends StatelessWidget {
   final BundleAggregate bundleAggregate;
   const _ListContent({Key? key, required this.bundleAggregate})
       : super(key: key);
+  void _showMaterialDetailList(BuildContext context) {
+    final materialQueryInfo = bundleAggregate.materialInfos
+        .map(
+          (item) => MaterialQueryInfo.fromBundles(
+            materialInfo: item,
+          ),
+        )
+        .toList();
+    context.read<MaterialPriceDetailBloc>().add(
+          MaterialPriceDetailEvent.fetch(
+            user: context.read<UserBloc>().state.user,
+            customerCode:
+                context.read<CustomerCodeBloc>().state.customerCodeInfo,
+            salesOrganisation:
+                context.read<SalesOrgBloc>().state.salesOrganisation,
+            salesOrganisationConfigs:
+                context.read<SalesOrgBloc>().state.configs,
+            shipToCode: context.read<ShipToCodeBloc>().state.shipToInfo,
+            materialInfoList: materialQueryInfo,
+            pickAndPack:
+                context.read<EligibilityBloc>().state.getPNPValueMaterial,
+            skipFOCCheck: true,
+          ),
+        );
+    context.router.push(
+      BundleItemDetailPageRoute(
+        bundleAggregate: bundleAggregate,
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -107,36 +139,7 @@ class _ListContent extends StatelessWidget {
         key: Key(
           'materialBundleOption${bundleAggregate.bundle.bundleCode}',
         ),
-        onTap: () {
-          final materialQueryInfo = bundleAggregate.materialInfos
-              .map(
-                (item) => MaterialQueryInfo.fromBundles(
-                  materialInfo: item,
-                ),
-              )
-              .toList();
-          context.read<MaterialPriceDetailBloc>().add(
-                MaterialPriceDetailEvent.fetch(
-                  user: context.read<UserBloc>().state.user,
-                  customerCode:
-                      context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                  salesOrganisation:
-                      context.read<SalesOrgBloc>().state.salesOrganisation,
-                  salesOrganisationConfigs:
-                      context.read<SalesOrgBloc>().state.configs,
-                  shipToCode: context.read<ShipToCodeBloc>().state.shipToInfo,
-                  materialInfoList: materialQueryInfo,
-                  pickAndPack:
-                      context.read<EligibilityBloc>().state.getPNPValueMaterial,
-                  skipFOCCheck: true,
-                ),
-              );
-          context.router.push(
-            BundleItemDetailPageRoute(
-              bundleAggregate: bundleAggregate,
-            ),
-          );
-        },
+        onTap: () => _showMaterialDetailList(context),
         // leading: ClipRRect(
         //   borderRadius: const BorderRadius.all(
         //     Radius.circular(8),
@@ -150,25 +153,36 @@ class _ListContent extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              bundleAggregate.bundle.bundleCode.toUpperCase(),
-              style: Theme.of(context).textTheme.subtitle2?.apply(
+              bundleAggregate.bundle.bundleName.name.toUpperCase(),
+              style: Theme.of(context).textTheme.titleSmall?.apply(
                     color: ZPColors.kPrimaryColor,
                   ),
             ),
             Text(
-              bundleAggregate.bundle.bundleName.name.toUpperCase(),
-              style: Theme.of(context).textTheme.bodyText2,
+              bundleAggregate.bundle.bundleCode.toUpperCase(),
+              style: Theme.of(context).textTheme.titleSmall?.apply(
+                    color: ZPColors.lightGray,
+                  ),
             ),
             ...bundleAggregate.bundle.bundleInfoMessage
                 .map(
                   (e) => Text(
                     e,
-                    style: Theme.of(context).textTheme.subtitle2?.apply(
+                    style: Theme.of(context).textTheme.titleSmall?.apply(
                           color: ZPColors.lightGray,
                         ),
                   ),
                 )
                 .toList(),
+            Row(
+              children: [
+                const Spacer(),
+                CustomSmallButton(
+                  onPressed: () => _showMaterialDetailList(context),
+                  text: 'Add'.tr(),
+                ),
+              ],
+            ),
             // ...bundle.bundleInformation
             //     .map(
             //       (e) => Text(
@@ -179,7 +193,7 @@ class _ListContent extends StatelessWidget {
             //           rate: e.rate,
             //           type: e.type,
             //         ),
-            //         style: Theme.of(context).textTheme.bodySmall,
+            //         style: Theme.of(context).textTheme.titleSmall,
             //       ),
             //     )
             //     .toList(),

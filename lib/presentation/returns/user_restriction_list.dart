@@ -135,7 +135,7 @@ class _UserRestrictionItem extends StatelessWidget {
         },
         title: Text(
           username,
-          style: Theme.of(context).textTheme.bodyText1,
+          style: Theme.of(context).textTheme.titleSmall,
         ),
       ),
     );

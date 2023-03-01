@@ -32,6 +32,7 @@ import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/orders/combo_deal/widgets/combo_deal_label.dart';
 import 'package:ezrxmobile/presentation/orders/core/account_suspended_warning.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/bonus_discount_label.dart';
+import 'package:ezrxmobile/presentation/core/custom_small_button.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/favorite_button.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/order_type_selector.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -285,66 +286,71 @@ class _ListContent extends StatelessWidget {
     required this.salesOrgConfigs,
   }) : super(key: key);
 
+  void _showMaterialDetail(BuildContext context) {
+    final materialPrice = context
+        .read<MaterialPriceBloc>()
+        .state
+        .materialPrice[materialInfo.materialNumber];
+    if (materialPrice == null && !salesOrgConfigs.materialWithoutPrice) {
+      showSnackBar(
+        context: context,
+        message: 'Product Not Available'.tr(),
+      );
+    } else {
+      if (materialInfo.hasValidTenderContract) {
+        context.read<TenderContractBloc>().add(
+              TenderContractEvent.fetch(
+                customerCodeInfo:
+                    context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                salesOrganisation:
+                    context.read<SalesOrgBloc>().state.salesOrganisation,
+                shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+                materialInfo: materialInfo,
+                defaultSelectedTenderContract: TenderContract.empty(),
+              ),
+            );
+      }
+      addToCart(
+        context: context,
+        priceAggregate: PriceAggregate(
+          price: materialPrice ?? Price.empty(),
+          materialInfo: materialInfo,
+          salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+          quantity: 1,
+          bundle: Bundle.empty(),
+          addedBonusList: [],
+          stockInfo: StockInfo.empty().copyWith(
+            materialNumber: materialInfo.materialNumber,
+          ),
+          tenderContract: TenderContract.empty(),
+          comboDeal: ComboDeal.empty(),
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
         key: Key('materialOption${materialInfo.materialNumber.getOrCrash()}'),
-        onTap: () {
-          final materialPrice = context
-              .read<MaterialPriceBloc>()
-              .state
-              .materialPrice[materialInfo.materialNumber];
-          if (materialPrice == null && !salesOrgConfigs.materialWithoutPrice) {
-            showSnackBar(
-              context: context,
-              message: 'Product Not Available'.tr(),
-            );
-          } else {
-            if (materialInfo.hasValidTenderContract) {
-              context.read<TenderContractBloc>().add(
-                    TenderContractEvent.fetch(
-                      customerCodeInfo: context
-                          .read<CustomerCodeBloc>()
-                          .state
-                          .customerCodeInfo,
-                      salesOrganisation:
-                          context.read<SalesOrgBloc>().state.salesOrganisation,
-                      shipToInfo:
-                          context.read<ShipToCodeBloc>().state.shipToInfo,
-                      materialInfo: materialInfo,
-                      defaultSelectedTenderContract: TenderContract.empty(),
-                    ),
-                  );
-            }
-            addToCart(
-              context: context,
-              priceAggregate: PriceAggregate(
-                price: materialPrice ?? Price.empty(),
-                materialInfo: materialInfo,
-                salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
-                quantity: 1,
-                bundle: Bundle.empty(),
-                addedBonusList: [],
-                stockInfo: StockInfo.empty().copyWith(
-                  materialNumber: materialInfo.materialNumber,
-                ),
-                tenderContract: TenderContract.empty(),
-                comboDeal: ComboDeal.empty(),
-              ),
-            );
-          }
-        },
+        onTap: () => _showMaterialDetail(context),
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Text(
+              materialInfo.materialDescription,
+              style: Theme.of(context).textTheme.titleSmall?.apply(
+                    color: ZPColors.kPrimaryColor,
+                  ),
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   materialInfo.materialNumber.displayMatNo,
                   style: Theme.of(context).textTheme.titleSmall?.apply(
-                        color: ZPColors.kPrimaryColor,
+                        color: ZPColors.lightGray,
                       ),
                 ),
                 BlocBuilder<MaterialPriceBloc, MaterialPriceState>(
@@ -362,10 +368,6 @@ class _ListContent extends StatelessWidget {
                   },
                 ),
               ],
-            ),
-            Text(
-              materialInfo.materialDescription,
-              style: Theme.of(context).textTheme.bodyLarge,
             ),
             (salesOrgConfigs.enableDefaultMD &&
                     materialInfo.defaultMaterialDescription.isNotEmpty)
@@ -398,7 +400,15 @@ class _ListContent extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 _PriceLabel(materialInfo: materialInfo),
-                FavoriteButton(materialInfo: materialInfo),
+                Row(
+                  children: [
+                    FavoriteButton(materialInfo: materialInfo),
+                    CustomSmallButton(
+                      onPressed: () => _showMaterialDetail(context),
+                      text: 'Add'.tr(),
+                    ),
+                  ],
+                ),
               ],
             ),
             BlocBuilder<MaterialPriceBloc, MaterialPriceState>(

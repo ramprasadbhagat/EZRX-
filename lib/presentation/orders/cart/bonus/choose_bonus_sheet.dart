@@ -50,7 +50,7 @@ class UpdateBonus extends StatelessWidget {
                   Center(
                     child: Text(
                       materialInfo.materialDescription,
-                      style: Theme.of(context).textTheme.headline6?.apply(
+                      style: Theme.of(context).textTheme.titleLarge?.apply(
                             color: ZPColors.black, // ZPColors.black,
                           ),
                     ),
@@ -59,7 +59,7 @@ class UpdateBonus extends StatelessWidget {
                     child: Text(
                       materialInfo.principalData.principalName
                           .getOrDefaultValue(''),
-                      style: Theme.of(context).textTheme.subtitle2?.apply(
+                      style: Theme.of(context).textTheme.titleSmall?.apply(
                             color: ZPColors.lightGray,
                           ),
                     ),
@@ -67,7 +67,7 @@ class UpdateBonus extends StatelessWidget {
                   Center(
                     child: Text(
                       materialInfo.materialNumber.displayMatNo,
-                      style: Theme.of(context).textTheme.subtitle2?.apply(
+                      style: Theme.of(context).textTheme.titleSmall?.apply(
                             color: ZPColors.lightGray,
                           ),
                     ),

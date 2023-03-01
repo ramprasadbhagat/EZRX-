@@ -22,7 +22,7 @@ class BonusDetails extends StatelessWidget {
               children: [
                 Text(
                   'Bonuses',
-                  style: Theme.of(context).textTheme.subtitle2,
+                  style: Theme.of(context).textTheme.titleSmall,
                 ).tr(),
                 ...cartItem.price.sameMaterialBonus
                     .toList()
@@ -38,7 +38,7 @@ class BonusDetails extends StatelessWidget {
               children: [
                 Text(
                   'Click the + in the label to have the bonus details',
-                  style: Theme.of(context).textTheme.subtitle2,
+                  style: Theme.of(context).textTheme.titleSmall,
                 ).tr(),
                 ...cartItem.price.otherMaterialBonus
                     .toList()

@@ -78,7 +78,7 @@ class BounsTile extends StatelessWidget {
                                               text: 'Add Bonus'.tr(),
                                               style: Theme.of(context)
                                                   .textTheme
-                                                  .bodyText1
+                                                  .titleSmall
                                                   ?.apply(
                                                     color:
                                                         ZPColors.kPrimaryColor,

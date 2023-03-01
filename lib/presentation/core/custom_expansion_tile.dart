@@ -123,7 +123,7 @@ class _ExpansionTileState extends State<ExpansionTile>
         _controller.drive(_backgroundColorTween.chain(_easeOutTween));
 
     _isExpanded =
-        PageStorage.of(context)?.readState(context) ?? widget.initiallyExpanded;
+        PageStorage.of(context).readState(context) ?? widget.initiallyExpanded;
     if (_isExpanded) _controller.value = 1.0;
   }
 
@@ -146,7 +146,7 @@ class _ExpansionTileState extends State<ExpansionTile>
           });
         });
       }
-      PageStorage.of(context)?.writeState(context, _isExpanded);
+      PageStorage.of(context).writeState(context, _isExpanded);
     });
     //TODO: Need to revisit later
     if (widget.onExpansionChanged != null) {
@@ -188,7 +188,7 @@ class _ExpansionTileState extends State<ExpansionTile>
                   title: DefaultTextStyle(
                     style: Theme.of(context)
                         .textTheme
-                        .bodyText2!
+                        .titleSmall!
                         .copyWith(color: titleColor),
                     child: widget.title,
                   ),
@@ -220,7 +220,7 @@ class _ExpansionTileState extends State<ExpansionTile>
     final theme = Theme.of(context);
     _borderColorTween.end = theme.dividerColor;
     _headerColorTween
-      ..begin = theme.textTheme.bodyText2!.color
+      ..begin = theme.textTheme.titleSmall!.color
       ..end = theme.colorScheme.secondary;
     _iconColorTween
       ..begin = theme.unselectedWidgetColor

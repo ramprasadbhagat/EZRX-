@@ -185,7 +185,7 @@ class OrderMaterialItem extends StatelessWidget {
                         !state.isFetching
                     ? Text(
                         'This Tender Contract is no more available and will not be added to the cart',
-                        style: Theme.of(context).textTheme.subtitle2?.apply(
+                        style: Theme.of(context).textTheme.titleSmall?.apply(
                               color: ZPColors.red,
                             ),
                       )

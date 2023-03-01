@@ -51,6 +51,13 @@ class _BonusItemTile extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          if (bonusItem.materialInfo.materialDescription.isNotEmpty)
+            BalanceTextRow(
+              keyText: 'Material Description'.tr(),
+              valueText: bonusItem.materialInfo.materialDescription,
+              keyFlex: 1,
+              valueFlex: 1,
+            ),
           BalanceTextRow(
             keyText: 'Material Number'.tr(),
             valueText: bonusItem.materialInfo.materialNumber.displayMatNo,

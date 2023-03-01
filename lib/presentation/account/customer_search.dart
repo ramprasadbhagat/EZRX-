@@ -174,7 +174,7 @@ class _HeaderMessage extends StatelessWidget {
             padding: const EdgeInsets.all(15.0),
             child: Text(
               'Please select a Customer Code',
-              style: Theme.of(context).textTheme.subtitle2?.copyWith(color: ZPColors.red),
+              style: Theme.of(context).textTheme.titleSmall?.copyWith(color: ZPColors.red),
             ).tr(),
           )
         : const SizedBox.shrink();

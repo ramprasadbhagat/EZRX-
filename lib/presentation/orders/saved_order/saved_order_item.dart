@@ -6,6 +6,7 @@ import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
+import 'package:ezrxmobile/presentation/core/dialogs/custom_dialogs.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -48,36 +49,67 @@ class SavedOrderItem extends StatelessWidget {
           onTap: () {
             context.router.push(SavedOrderDetailPageRoute(order: order));
           },
-          title: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          title: Row(
             children: [
-              Text(
-                '#${order.id}',
-                style: Theme.of(context).textTheme.titleSmall?.apply(
-                      color: ZPColors.kPrimaryColor,
-                    ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '#${order.id}',
+                    style: Theme.of(context).textTheme.titleSmall?.apply(
+                          color: ZPColors.kPrimaryColor,
+                        ),
+                  ),
+                  Text(
+                    order.companyName.name,
+                    style: Theme.of(context).textTheme.titleSmall,
+                  ),
+                  Text(
+                    'Sold To IDs: ${order.soldToParty.name}',
+                    style: Theme.of(context).textTheme.titleSmall?.apply(
+                          color: ZPColors.lightGray,
+                        ),
+                  ),
+                  Text(
+                    'Ship To IDs: ${order.shipToParty.name}',
+                    style: Theme.of(context).textTheme.titleSmall?.apply(
+                          color: ZPColors.lightGray,
+                        ),
+                  ),
+                  Text(
+                    'Order Value: ${StringUtils.displayPrice(context.read<SalesOrgBloc>().state.configs, order.totalOrderValue)}',
+                    style: Theme.of(context).textTheme.titleSmall?.apply(
+                          color: ZPColors.black,
+                        ),
+                  ),
+                ],
               ),
-              Text(
-                order.companyName.name,
-                style: Theme.of(context).textTheme.titleSmall,
-              ),
-              Text(
-                'Sold To IDs: ${order.soldToParty.name}',
-                style: Theme.of(context).textTheme.titleSmall?.apply(
-                      color: ZPColors.lightGray,
-                    ),
-              ),
-              Text(
-                'Ship To IDs: ${order.shipToParty.name}',
-                style: Theme.of(context).textTheme.titleSmall?.apply(
-                      color: ZPColors.lightGray,
-                    ),
-              ),
-              Text(
-                'Order Value: ${StringUtils.displayPrice(context.read<SalesOrgBloc>().state.configs, order.totalOrderValue)}',
-                style: Theme.of(context).textTheme.titleSmall?.apply(
-                      color: ZPColors.black,
-                    ),
+              const Spacer(),
+              IconButton(
+                key: const Key('deleteFromList'),
+                onPressed: () async {
+                  await CustomDialogs.confirmationDialog(
+                    context: context,
+                    title: 'Delete Order?',
+                    message: 'Are you sure you want to delete this Order?',
+                    confirmText: 'Yes',
+                    cancelText: 'No',
+                    onAcceptPressed: () async {
+                      isDeleting
+                          ? showSnackBar(
+                              context: context,
+                              message: 'Another Deletion in Progress'.tr(),
+                            )
+                          : context.read<SavedOrderListBloc>().add(
+                                SavedOrderListEvent.delete(
+                                  order: order,
+                                  user: context.read<UserBloc>().state.user,
+                                ),
+                              );
+                    },
+                  );
+                },
+                icon: const Icon(Icons.delete),
               ),
             ],
           ),

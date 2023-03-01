@@ -189,7 +189,7 @@ class _BonusAddPageState extends State<BonusAddPage> {
                                             .displayMatNo,
                                         style: Theme.of(context)
                                             .textTheme
-                                            .subtitle2
+                                            .titleSmall
                                             ?.apply(
                                               color: ZPColors.kPrimaryColor,
                                             ),
@@ -198,7 +198,7 @@ class _BonusAddPageState extends State<BonusAddPage> {
                                         state.bonus[i].materialDescription,
                                         style: Theme.of(context)
                                             .textTheme
-                                            .bodyText1,
+                                            .titleSmall,
                                       ),
                                       Text(
                                         state.bonus[i].principalData
@@ -206,7 +206,7 @@ class _BonusAddPageState extends State<BonusAddPage> {
                                             .getOrDefaultValue(''),
                                         style: Theme.of(context)
                                             .textTheme
-                                            .subtitle2
+                                            .titleSmall
                                             ?.apply(
                                               color: ZPColors.lightGray,
                                             ),

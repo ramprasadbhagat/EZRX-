@@ -699,7 +699,7 @@ class _Disclaimer extends StatelessWidget {
                     TextSpan(
                       text:
                           'To avoid delays to your PPE Orders, please\n\n\u2022 Order the quantity as stated in the MOH Order template\n\n\u2022 Do not place NON PPE items in the same Order\nNote: Minimum Order value is waived for MOH PPE Orders only\n',
-                      style: Theme.of(context).textTheme.bodySmall,
+                      style: Theme.of(context).textTheme.titleSmall,
                     ),
                   ],
                 ),
@@ -731,7 +731,7 @@ class _MarketMessage extends StatelessWidget {
               children: <TextSpan>[
                 TextSpan(
                   text: orderMarketMessage,
-                  style: Theme.of(context).textTheme.bodySmall,
+                  style: Theme.of(context).textTheme.titleSmall,
                 ),
               ],
             ),

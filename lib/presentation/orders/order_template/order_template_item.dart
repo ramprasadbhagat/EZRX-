@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/order_template.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
+import 'package:ezrxmobile/presentation/core/dialogs/custom_dialogs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -42,11 +43,37 @@ class OrderTemplateItem extends StatelessWidget {
               OrderTemplateDetailPageRoute(order: orderTemplate),
             );
           },
-          title: Text(
-            orderTemplate.templateName,
-            style: Theme.of(context).textTheme.bodyText1,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
+          title: Row(
+            children: [
+              Text(
+                orderTemplate.templateName,
+                style: Theme.of(context).textTheme.titleSmall,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+              const Spacer(),
+              IconButton(
+                key: const Key('deleteFromList'),
+                onPressed: () async {
+                  await CustomDialogs.confirmationDialog(
+                    context: context,
+                    title: 'Delete Order Template?',
+                    message:
+                        'Are you sure you want to delete this Order Template?',
+                    confirmText: 'Yes',
+                    cancelText: 'No',
+                    onAcceptPressed: () async {
+                      context.read<OrderTemplateListBloc>().add(
+                            OrderTemplateListEvent.delete(
+                              orderTemplate,
+                            ),
+                          );
+                    },
+                  );
+                },
+                icon: const Icon(Icons.delete),
+              ),
+            ],
           ),
         ),
       ),

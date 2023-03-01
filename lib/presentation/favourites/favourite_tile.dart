@@ -13,6 +13,7 @@ import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/cart_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/custom_small_button.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,7 +24,6 @@ class FavouriteListTile extends StatelessWidget {
     Key? key,
     required this.favourite,
   }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -77,21 +77,23 @@ class FavouriteListTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    favourite.materialNumber.displayMatNo,
-                    style: Theme.of(context).textTheme.subtitle2?.apply(
+                    favourite.materialDescription,
+                    style: Theme.of(context).textTheme.titleSmall?.apply(
                           color: ZPColors.kPrimaryColor,
                         ),
                   ),
                   Text(
-                    favourite.materialDescription,
-                    style: Theme.of(context).textTheme.bodyText1,
+                    favourite.materialNumber.displayMatNo,
+                    style: Theme.of(context).textTheme.titleSmall?.apply(
+                          color: ZPColors.lightGray,
+                        ),
                   ),
                   priceAggregate.isDefaultMDEnabled
                       ? Text(
                           "${'Mat Default Description: '.tr()}${priceAggregate.materialInfo.defaultMaterialDescription}",
                           style: Theme.of(context)
                               .textTheme
-                              .subtitle2
+                              .titleSmall
                               ?.apply(color: ZPColors.lightGray),
                         )
                       : const SizedBox.shrink(),
@@ -117,7 +119,7 @@ class FavouriteListTile extends StatelessWidget {
                                         key: const Key('priceBefore'),
                                         style: Theme.of(context)
                                             .textTheme
-                                            .bodyText1
+                                            .titleSmall
                                             ?.apply(
                                               color: ZPColors.lightGray,
                                             ),
@@ -127,39 +129,56 @@ class FavouriteListTile extends StatelessWidget {
                                   '${'Unit Price: '.tr()}${priceAggregate.display(PriceType.unitPrice)}',
                                   style: Theme.of(context)
                                       .textTheme
-                                      .bodyText1
+                                      .titleSmall
                                       ?.apply(
                                         color: ZPColors.black,
                                       ),
                                 ),
                               ],
                             ),
-                      favourite.isWaitingStatusUpdate
-                          ? LoadingShimmer.withChild(
-                              child: IconButton(
-                                key: const Key('statusUpdate'),
-                                icon: const Icon(
-                                  Icons.favorite,
-                                  color: ZPColors.secondary,
-                                ),
-                                onPressed: () {},
-                              ),
-                            )
-                          : IconButton(
-                              key: const Key('deleteFavouriteFavPage'),
-                              icon: const Icon(
-                                Icons.favorite,
-                                color: ZPColors.secondary,
-                              ),
-                              onPressed: () async => context
-                                  .read<FavouriteBloc>()
-                                  .add(
-                                    FavouriteEvent.delete(
-                                      item: favourite,
-                                      user: context.read<UserBloc>().state.user,
+                      Row(
+                        children: [
+                          favourite.isWaitingStatusUpdate
+                              ? LoadingShimmer.withChild(
+                                  child: IconButton(
+                                    key: const Key('statusUpdate'),
+                                    icon: const Icon(
+                                      Icons.favorite,
+                                      color: ZPColors.secondary,
                                     ),
+                                    onPressed: () {},
                                   ),
-                            ),
+                                )
+                              : IconButton(
+                                  key: const Key('deleteFavouriteFavPage'),
+                                  icon: const Icon(
+                                    Icons.favorite,
+                                    color: ZPColors.secondary,
+                                  ),
+                                  onPressed: () async =>
+                                      context.read<FavouriteBloc>().add(
+                                            FavouriteEvent.delete(
+                                              item: favourite,
+                                              user: context
+                                                  .read<UserBloc>()
+                                                  .state
+                                                  .user,
+                                            ),
+                                          ),
+                                ),
+                          CustomSmallButton(
+                            text: 'Add'.tr(),
+                            onPressed: state.isFetching
+                                ? null
+                                : () {
+                                    CartBottomSheet.showAddToCartBottomSheet(
+                                      context: context,
+                                      priceAggregate: priceAggregate,
+                                    );
+                                  },
+                          ),
+                        ],
+                      ),
                     ],
                   ),
                 ],

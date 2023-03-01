@@ -79,21 +79,36 @@ class CartBundleItemTile extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
-                                  materialCommonInfo.bundle.bundleCode,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .subtitle2
-                                      ?.apply(
-                                        color: ZPColors.kPrimaryColor,
-                                      ),
+                                Flexible(
+                                  child: Text(
+                                    materialCommonInfo.bundle.bundleName.name,
+                                    style:
+                                        Theme.of(context).textTheme.titleSmall,
+                                  ),
+                                ),
+                                IconButton(
+                                  padding: const EdgeInsets.only(right: 8),
+                                  constraints: const BoxConstraints(),
+                                  key: const Key('deleteFromCart'),
+                                  onPressed: () {
+                                    context.read<CartBloc>().add(
+                                          CartEvent.removeFromCart(
+                                            item: cartItem,
+                                          ),
+                                        );
+                                  },
+                                  icon: const Icon(Icons.delete),
                                 ),
                               ],
                             ),
                             Text(
-                              materialCommonInfo.bundle.bundleName.name,
-                              style: Theme.of(context).textTheme.bodyText1,
+                              materialCommonInfo.bundle.bundleCode,
+                              style:
+                                  Theme.of(context).textTheme.titleSmall?.apply(
+                                        color: ZPColors.kPrimaryColor,
+                                      ),
                             ),
                             const Padding(
                               padding: EdgeInsets.symmetric(vertical: 2),
@@ -108,7 +123,7 @@ class CartBundleItemTile extends StatelessWidget {
                                     // key: const ValueKey(e),
                                     style: Theme.of(context)
                                         .textTheme
-                                        .subtitle2
+                                        .titleSmall
                                         ?.apply(
                                           color: ZPColors.lightGray,
                                         ),
@@ -124,7 +139,7 @@ class CartBundleItemTile extends StatelessWidget {
                                         '${'Price before $taxCode: '.tr()}${materialCommonInfo.display(PriceType.finalPrice)}',
                                         style: Theme.of(context)
                                             .textTheme
-                                            .bodyText1
+                                            .titleSmall
                                             ?.apply(
                                               color: materialCommonInfo
                                                       .price.isPriceOverride
@@ -143,7 +158,7 @@ class CartBundleItemTile extends StatelessWidget {
                                         '${'List Price: '.tr()}${StringUtils.displayPrice(materialCommonInfo.salesOrgConfig, cartItem.listPrice)}',
                                         style: Theme.of(context)
                                             .textTheme
-                                            .bodyText1
+                                            .titleSmall
                                             ?.apply(
                                               color: ZPColors.black,
                                               decoration:
@@ -155,7 +170,7 @@ class CartBundleItemTile extends StatelessWidget {
                                   '${'Unit Price: '.tr()}${StringUtils.displayPrice(materialCommonInfo.salesOrgConfig, cartItem.unitPrice)}',
                                   style: Theme.of(context)
                                       .textTheme
-                                      .bodyText1
+                                      .titleSmall
                                       ?.apply(
                                         color: ZPColors.black,
                                         decoration: TextDecoration.underline,
@@ -166,7 +181,7 @@ class CartBundleItemTile extends StatelessWidget {
                                   key: const Key('cartBundleItemTotal'),
                                   style: Theme.of(context)
                                       .textTheme
-                                      .bodyText1
+                                      .titleSmall
                                       ?.apply(
                                         color: ZPColors.black,
                                         decoration: TextDecoration.underline,
@@ -253,7 +268,7 @@ class _BundleMaterialItemState extends State<_BundleMaterialItem> {
                 children: [
                   Text(
                     widget.material.materialInfo.materialNumber.displayMatNo,
-                    style: Theme.of(context).textTheme.subtitle2?.apply(
+                    style: Theme.of(context).textTheme.titleSmall?.apply(
                           color: ZPColors.kPrimaryColor,
                         ),
                   ),
@@ -261,12 +276,12 @@ class _BundleMaterialItemState extends State<_BundleMaterialItem> {
               ),
               Text(
                 widget.material.materialInfo.materialDescription,
-                style: Theme.of(context).textTheme.bodyText1,
+                style: Theme.of(context).textTheme.titleSmall,
               ),
               widget.material.isDefaultMDEnabled
                   ? Text(
                       widget.material.materialInfo.defaultMaterialDescription,
-                      style: Theme.of(context).textTheme.subtitle2?.apply(
+                      style: Theme.of(context).textTheme.titleSmall?.apply(
                             color: ZPColors.lightGray,
                           ),
                     )
@@ -274,7 +289,7 @@ class _BundleMaterialItemState extends State<_BundleMaterialItem> {
               Text(
                 widget.material.materialInfo.principalData.principalName
                     .getOrDefaultValue(''),
-                style: Theme.of(context).textTheme.subtitle2?.apply(
+                style: Theme.of(context).textTheme.titleSmall?.apply(
                       color: ZPColors.lightGray,
                     ),
               ),

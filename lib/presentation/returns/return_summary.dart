@@ -153,7 +153,7 @@ class ReturnSummaryListItem extends StatelessWidget {
                   flex: 1,
                   child: Text(
                     returnSummaryRequestInformation.requestHeader.requestId,
-                    style: Theme.of(context).textTheme.subtitle2?.apply(
+                    style: Theme.of(context).textTheme.titleSmall?.apply(
                           color: ZPColors.kPrimaryColor,
                         ),
                   ),

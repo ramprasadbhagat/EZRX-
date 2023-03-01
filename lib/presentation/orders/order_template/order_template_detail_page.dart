@@ -298,6 +298,8 @@ class _OrderTemplateDetailPageState extends State<OrderTemplateDetailPage> {
       context: context,
       title: 'Delete Order Template?',
       message: 'Are you sure you want to delete this Order Template?',
+      confirmText: 'Yes',
+      cancelText: 'No',
       onAcceptPressed: () async {
         context.read<OrderTemplateListBloc>().add(
               OrderTemplateListEvent.delete(

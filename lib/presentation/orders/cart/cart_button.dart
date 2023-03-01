@@ -26,7 +26,7 @@ class CartButton extends StatelessWidget {
               return bd.Badge(
                 badgeContent: Text(
                   state.cartItems.length.toString(),
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
                         color: ZPColors.white,
                       ),
                 ),

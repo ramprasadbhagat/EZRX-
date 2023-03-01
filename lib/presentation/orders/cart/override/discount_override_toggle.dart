@@ -67,7 +67,7 @@ class DiscountOverrideToggle extends StatelessWidget {
             Text(
               'Discount Override',
               style:
-                  Theme.of(context).textTheme.bodyText1?.copyWith(fontSize: 8),
+                  Theme.of(context).textTheme.titleSmall?.copyWith(fontSize: 8),
             ).tr(),
             CupertinoSwitch(
               value: state.isDiscountOverride,

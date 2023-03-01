@@ -82,7 +82,7 @@ class _CartItemDetailWidgetState extends State<CartItemDetailWidget> {
             children: [
               Text(
                 '${'Tiered Pricing'.tr()} :',
-                style: Theme.of(context).textTheme.subtitle2,
+                style: Theme.of(context).textTheme.titleSmall,
               ).tr(),
               ...widget.cartItem.price.tiers.first.items
                   .map((e) => PriceTierLabel(priceTierItem: e))

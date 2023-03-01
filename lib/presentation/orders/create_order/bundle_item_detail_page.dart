@@ -58,7 +58,7 @@ class BundleItemDetailPage extends StatelessWidget {
                 .map(
                   (e) => Text(
                     e,
-                    style: Theme.of(context).textTheme.subtitle2?.apply(
+                    style: Theme.of(context).textTheme.titleSmall?.apply(
                           color: ZPColors.lightGray,
                         ),
                   ),
@@ -226,20 +226,22 @@ class _ListContent extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  materialInfo.materialNumber.displayMatNo,
-                  style: Theme.of(context).textTheme.subtitle2?.apply(
+                  materialInfo.materialDescription,
+                  style: Theme.of(context).textTheme.titleSmall?.apply(
                         color: ZPColors.kPrimaryColor,
                       ),
                 ),
                 Text(
-                  materialInfo.materialDescription,
-                  style: Theme.of(context).textTheme.bodyText1,
+                  materialInfo.materialNumber.displayMatNo,
+                  style: Theme.of(context).textTheme.titleSmall?.apply(
+                        color: ZPColors.lightGray,
+                      ),
                 ),
                 (enableDefaultMD &&
                         materialInfo.defaultMaterialDescription.isNotEmpty)
                     ? Text(
                         materialInfo.defaultMaterialDescription,
-                        style: Theme.of(context).textTheme.subtitle2?.apply(
+                        style: Theme.of(context).textTheme.titleSmall?.apply(
                               color: ZPColors.lightGray,
                             ),
                       )
@@ -247,7 +249,7 @@ class _ListContent extends StatelessWidget {
                 Text(
                   materialInfo.principalData.principalName
                       .getOrDefaultValue(''),
-                  style: Theme.of(context).textTheme.subtitle2?.apply(
+                  style: Theme.of(context).textTheme.titleSmall?.apply(
                         color: ZPColors.lightGray,
                       ),
                 ),

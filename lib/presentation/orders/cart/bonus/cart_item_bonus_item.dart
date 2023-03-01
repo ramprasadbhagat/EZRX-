@@ -75,40 +75,40 @@ class _BonusItemTileState extends State<BonusItemTile> {
                           Flexible(
                             child: Text(
                               widget.bonusItem.materialDescription,
-                              style: Theme.of(context).textTheme.bodyText1,
+                              style: Theme.of(context).textTheme.titleSmall,
                             ),
                           ),
                         ],
                       ),
                       // Text(
                       //   '${'Material type : '.tr()}Bonus',
-                      //   style: Theme.of(context).textTheme.bodyText1?.apply(
+                      //   style: Theme.of(context).textTheme.titleSmall?.apply(
                       //         color: ZPColors.lightGray,
                       //       ),
                       // ),
                       Text(
                         '${'Mat No : '.tr()}${widget.bonusItem.materialInfo.materialNumber.displayMatNo}',
-                        style: Theme.of(context).textTheme.bodyText1?.apply(
+                        style: Theme.of(context).textTheme.titleSmall?.apply(
                               color: ZPColors.lightGray,
                             ),
                       ),
                       // Text(
                       //   '${'Quantity: '.tr()}${widget.bonusItem.qty}',
-                      //   style: Theme.of(context).textTheme.bodyText1?.apply(
+                      //   style: Theme.of(context).textTheme.titleSmall?.apply(
                       //         color: ZPColors.lightGray,
                       //       ),
                       // ),
                       if (widget.material.salesOrgConfig.expiryDateDisplay)
                         Text(
                           '${'Expiry Date : '.tr()}${widget.bonusItem.expiryDate.naIfEmptyDateTime}',
-                          style: Theme.of(context).textTheme.bodyText1?.apply(
+                          style: Theme.of(context).textTheme.titleSmall?.apply(
                                 color: ZPColors.lightGray,
                               ),
                         ),
                       if (!widget.material.salesOrgConfig.hideStockDisplay)
                         Text(
                           '${'In Stock : '.tr()}${widget.bonusItem.inStock}',
-                          style: Theme.of(context).textTheme.bodyText1?.apply(
+                          style: Theme.of(context).textTheme.titleSmall?.apply(
                                 color: ZPColors.lightGray,
                               ),
                         ),

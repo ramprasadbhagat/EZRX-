@@ -74,39 +74,67 @@ class CartMaterialItemTile extends StatelessWidget {
                   cartItem: material,
                 );
               },
-              leading: showCheckBox?
-              Checkbox(
-                onChanged: (value) {
-                  if (value == null) return;
-                  context.read<CartBloc>().add(
-                    CartEvent.selectButtonTapped(
-                      cartItem: cartItem,
-                    ),
-                  );
-                },
-                value: cartItem.isSelected,
-              ):const SizedBox.shrink(),
+              leading: showCheckBox
+                  ? Checkbox(
+                      onChanged: (value) {
+                        if (value == null) return;
+                        context.read<CartBloc>().add(
+                              CartEvent.selectButtonTapped(
+                                cartItem: cartItem,
+                              ),
+                            );
+                      },
+                      value: cartItem.isSelected,
+                    )
+                  : const SizedBox.shrink(),
               title: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Expanded(
+                      Flexible(
                         child: Text(
-                          material.materialInfo.materialNumber.displayMatNo,
+                          material.materialInfo.materialDescription,
                           style: Theme.of(context).textTheme.titleSmall?.apply(
-                            color: ZPColors.kPrimaryColor,
-                          ),
+                                color: ZPColors.kPrimaryColor,
+                              ),
                         ),
                       ),
-                      BonusDiscountLabel(
-                        price: material.price,
-                        materialInfo: material.materialInfo,
-                        tenderContractNumber:  tenderContractNumber.displayTenderContractNumberInCart,
+                      IconButton(
+                        padding: const EdgeInsets.only(right: 8),
+                        constraints: const BoxConstraints(),
+                        key: const Key('deleteFromCart'),
+                        onPressed: () {
+                          context.read<CartBloc>().add(
+                                CartEvent.removeFromCart(
+                                  item: cartItem,
+                                ),
+                              );
+                        },
+                        icon: const Icon(Icons.delete),
                       ),
                     ],
                   ),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        material.materialInfo.materialNumber.displayMatNo,
+                        style: Theme.of(context).textTheme.titleSmall?.apply(
+                              color: ZPColors.lightGray,
+                            ),
+                      ),
+                      BonusDiscountLabel(
+                        price: material.price,
+                        materialInfo: material.materialInfo,
+                        tenderContractNumber: tenderContractNumber
+                            .displayTenderContractNumberInCart,
+                      ),
+                    ],
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       CartMaterialItemTileDetails(
                         material: material,
@@ -123,13 +151,13 @@ class CartMaterialItemTile extends StatelessWidget {
                               .isZDP8Override)
                             BlocProvider(
                               create: (context) =>
-                              locator<DiscountOverrideBloc>()
-                                ..add(
-                                  DiscountOverrideEvent.update(
-                                    price: material.price,
-                                    showErrorMessages: false,
-                                  ),
-                                ),
+                                  locator<DiscountOverrideBloc>()
+                                    ..add(
+                                      DiscountOverrideEvent.update(
+                                        price: material.price,
+                                        showErrorMessages: false,
+                                      ),
+                                    ),
                               child: DiscountOverrideToggle(
                                 cartItem: material,
                               ),
@@ -148,15 +176,15 @@ class CartMaterialItemTile extends StatelessWidget {
                     RemarksMessage(
                       key: Key('remarks${material.materialInfo.remarks}'),
                       message:
-                      '${'Remarks: '.tr()}${material.materialInfo.remarks}',
+                          '${'Remarks: '.tr()}${material.materialInfo.remarks}',
                       showEditDeleteDialog: EditDeleteDialog(
                         onDelete: () {
                           context.read<CartBloc>().add(
-                            CartEvent.addRemarkToCartItem(
-                              item: cartItem,
-                              message: '',
-                            ),
-                          );
+                                CartEvent.addRemarkToCartItem(
+                                  item: cartItem,
+                                  message: '',
+                                ),
+                              );
                         },
                         onEdit: () {
                           AddRemarkDialog.cartItem(
@@ -228,10 +256,6 @@ class CartMaterialItemTileDetails extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            material.materialInfo.materialDescription,
-            style: Theme.of(context).textTheme.titleSmall,
-          ),
           if (material.isDefaultMDEnabled)
             Text(
               material.materialInfo.defaultMaterialDescription,

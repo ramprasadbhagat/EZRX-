@@ -176,7 +176,7 @@ class _HeaderMessage extends StatelessWidget {
         ? Padding(
             padding: const EdgeInsets.all(15.0),
             child:  Text('Please select a shipping address',
-              style: Theme.of(context).textTheme.subtitle2?.copyWith(color: ZPColors.red),
+              style: Theme.of(context).textTheme.titleSmall?.copyWith(color: ZPColors.red),
             ).tr(),
           )
         : const SizedBox.shrink();
@@ -227,18 +227,18 @@ class _ListContent extends StatelessWidget {
             children: [
               Text(
                 shipToInfo.shipToCustomerCode,
-                style: Theme.of(context).textTheme.subtitle2?.apply(
+                style: Theme.of(context).textTheme.titleSmall?.apply(
                       color: ZPColors.kPrimaryColor,
                     ),
               ),
               Text(
                 shipToInfo.shipToName.toString(),
-                style: Theme.of(context).textTheme.bodyText1,
+                style: Theme.of(context).textTheme.titleSmall,
               ),
               RichText(
                 text: TextSpan(
                   text: shipToInfo.shipToAddress.toString(),
-                  style: Theme.of(context).textTheme.subtitle2?.apply(
+                  style: Theme.of(context).textTheme.titleSmall?.apply(
                         color: ZPColors.lightGray,
                       ),
                   children: [

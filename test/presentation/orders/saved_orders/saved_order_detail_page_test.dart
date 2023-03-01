@@ -502,7 +502,7 @@ void main() {
         ));
         await tester.tap(find.text('Delete'));
         await tester.pumpAndSettle(const Duration(seconds: 1));
-        await tester.tap(find.byKey(const ValueKey('OK')));
+        await tester.tap(find.byKey(const ValueKey('Yes')));
         await tester.pumpAndSettle(const Duration(seconds: 1));
         verify(() => SavedOrderListEvent.delete(
               order: orderMock,
