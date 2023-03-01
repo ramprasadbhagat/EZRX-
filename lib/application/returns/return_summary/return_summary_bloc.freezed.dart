@@ -20,10 +20,16 @@ mixin _$ReturnSummaryEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            ReturnSummaryFilter returnSummaryFilter)
         fetch,
     required TResult Function(
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            ReturnSummaryFilter returnSummaryFilter)
         loadMore,
   }) =>
       throw _privateConstructorUsedError;
@@ -31,10 +37,10 @@ mixin _$ReturnSummaryEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo,
-            User user)?
+            User user, ReturnSummaryFilter returnSummaryFilter)?
         fetch,
     TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo,
-            User user)?
+            User user, ReturnSummaryFilter returnSummaryFilter)?
         loadMore,
   }) =>
       throw _privateConstructorUsedError;
@@ -42,10 +48,10 @@ mixin _$ReturnSummaryEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo,
-            User user)?
+            User user, ReturnSummaryFilter returnSummaryFilter)?
         fetch,
     TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo,
-            User user)?
+            User user, ReturnSummaryFilter returnSummaryFilter)?
         loadMore,
     required TResult orElse(),
   }) =>
@@ -132,10 +138,16 @@ class _$_initialized implements _initialized {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            ReturnSummaryFilter returnSummaryFilter)
         fetch,
     required TResult Function(
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            ReturnSummaryFilter returnSummaryFilter)
         loadMore,
   }) {
     return initialized();
@@ -146,10 +158,10 @@ class _$_initialized implements _initialized {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo,
-            User user)?
+            User user, ReturnSummaryFilter returnSummaryFilter)?
         fetch,
     TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo,
-            User user)?
+            User user, ReturnSummaryFilter returnSummaryFilter)?
         loadMore,
   }) {
     return initialized?.call();
@@ -160,10 +172,10 @@ class _$_initialized implements _initialized {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo,
-            User user)?
+            User user, ReturnSummaryFilter returnSummaryFilter)?
         fetch,
     TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo,
-            User user)?
+            User user, ReturnSummaryFilter returnSummaryFilter)?
         loadMore,
     required TResult orElse(),
   }) {
@@ -218,11 +230,15 @@ abstract class _$$_FetchCopyWith<$Res> {
       __$$_FetchCopyWithImpl<$Res>;
   @useResult
   $Res call(
-      {CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user});
+      {CustomerCodeInfo customerCodeInfo,
+      ShipToInfo shipToInfo,
+      User user,
+      ReturnSummaryFilter returnSummaryFilter});
 
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
   $ShipToInfoCopyWith<$Res> get shipToInfo;
   $UserCopyWith<$Res> get user;
+  $ReturnSummaryFilterCopyWith<$Res> get returnSummaryFilter;
 }
 
 /// @nodoc
@@ -238,6 +254,7 @@ class __$$_FetchCopyWithImpl<$Res>
     Object? customerCodeInfo = null,
     Object? shipToInfo = null,
     Object? user = null,
+    Object? returnSummaryFilter = null,
   }) {
     return _then(_$_Fetch(
       customerCodeInfo: null == customerCodeInfo
@@ -252,6 +269,10 @@ class __$$_FetchCopyWithImpl<$Res>
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User,
+      returnSummaryFilter: null == returnSummaryFilter
+          ? _value.returnSummaryFilter
+          : returnSummaryFilter // ignore: cast_nullable_to_non_nullable
+              as ReturnSummaryFilter,
     ));
   }
 
@@ -278,6 +299,15 @@ class __$$_FetchCopyWithImpl<$Res>
       return _then(_value.copyWith(user: value));
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ReturnSummaryFilterCopyWith<$Res> get returnSummaryFilter {
+    return $ReturnSummaryFilterCopyWith<$Res>(_value.returnSummaryFilter,
+        (value) {
+      return _then(_value.copyWith(returnSummaryFilter: value));
+    });
+  }
 }
 
 /// @nodoc
@@ -286,7 +316,8 @@ class _$_Fetch implements _Fetch {
   const _$_Fetch(
       {required this.customerCodeInfo,
       required this.shipToInfo,
-      required this.user});
+      required this.user,
+      required this.returnSummaryFilter});
 
   @override
   final CustomerCodeInfo customerCodeInfo;
@@ -294,10 +325,12 @@ class _$_Fetch implements _Fetch {
   final ShipToInfo shipToInfo;
   @override
   final User user;
+  @override
+  final ReturnSummaryFilter returnSummaryFilter;
 
   @override
   String toString() {
-    return 'ReturnSummaryEvent.fetch(customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, user: $user)';
+    return 'ReturnSummaryEvent.fetch(customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, user: $user, returnSummaryFilter: $returnSummaryFilter)';
   }
 
   @override
@@ -309,12 +342,14 @@ class _$_Fetch implements _Fetch {
                 other.customerCodeInfo == customerCodeInfo) &&
             (identical(other.shipToInfo, shipToInfo) ||
                 other.shipToInfo == shipToInfo) &&
-            (identical(other.user, user) || other.user == user));
+            (identical(other.user, user) || other.user == user) &&
+            (identical(other.returnSummaryFilter, returnSummaryFilter) ||
+                other.returnSummaryFilter == returnSummaryFilter));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, customerCodeInfo, shipToInfo, user);
+  int get hashCode => Object.hash(
+      runtimeType, customerCodeInfo, shipToInfo, user, returnSummaryFilter);
 
   @JsonKey(ignore: true)
   @override
@@ -327,13 +362,19 @@ class _$_Fetch implements _Fetch {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            ReturnSummaryFilter returnSummaryFilter)
         fetch,
     required TResult Function(
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            ReturnSummaryFilter returnSummaryFilter)
         loadMore,
   }) {
-    return fetch(customerCodeInfo, shipToInfo, user);
+    return fetch(customerCodeInfo, shipToInfo, user, returnSummaryFilter);
   }
 
   @override
@@ -341,13 +382,13 @@ class _$_Fetch implements _Fetch {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo,
-            User user)?
+            User user, ReturnSummaryFilter returnSummaryFilter)?
         fetch,
     TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo,
-            User user)?
+            User user, ReturnSummaryFilter returnSummaryFilter)?
         loadMore,
   }) {
-    return fetch?.call(customerCodeInfo, shipToInfo, user);
+    return fetch?.call(customerCodeInfo, shipToInfo, user, returnSummaryFilter);
   }
 
   @override
@@ -355,15 +396,15 @@ class _$_Fetch implements _Fetch {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo,
-            User user)?
+            User user, ReturnSummaryFilter returnSummaryFilter)?
         fetch,
     TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo,
-            User user)?
+            User user, ReturnSummaryFilter returnSummaryFilter)?
         loadMore,
     required TResult orElse(),
   }) {
     if (fetch != null) {
-      return fetch(customerCodeInfo, shipToInfo, user);
+      return fetch(customerCodeInfo, shipToInfo, user, returnSummaryFilter);
     }
     return orElse();
   }
@@ -407,11 +448,13 @@ abstract class _Fetch implements ReturnSummaryEvent {
   const factory _Fetch(
       {required final CustomerCodeInfo customerCodeInfo,
       required final ShipToInfo shipToInfo,
-      required final User user}) = _$_Fetch;
+      required final User user,
+      required final ReturnSummaryFilter returnSummaryFilter}) = _$_Fetch;
 
   CustomerCodeInfo get customerCodeInfo;
   ShipToInfo get shipToInfo;
   User get user;
+  ReturnSummaryFilter get returnSummaryFilter;
   @JsonKey(ignore: true)
   _$$_FetchCopyWith<_$_Fetch> get copyWith =>
       throw _privateConstructorUsedError;
@@ -424,11 +467,15 @@ abstract class _$$_LoadMoreCopyWith<$Res> {
       __$$_LoadMoreCopyWithImpl<$Res>;
   @useResult
   $Res call(
-      {CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user});
+      {CustomerCodeInfo customerCodeInfo,
+      ShipToInfo shipToInfo,
+      User user,
+      ReturnSummaryFilter returnSummaryFilter});
 
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
   $ShipToInfoCopyWith<$Res> get shipToInfo;
   $UserCopyWith<$Res> get user;
+  $ReturnSummaryFilterCopyWith<$Res> get returnSummaryFilter;
 }
 
 /// @nodoc
@@ -445,6 +492,7 @@ class __$$_LoadMoreCopyWithImpl<$Res>
     Object? customerCodeInfo = null,
     Object? shipToInfo = null,
     Object? user = null,
+    Object? returnSummaryFilter = null,
   }) {
     return _then(_$_LoadMore(
       customerCodeInfo: null == customerCodeInfo
@@ -459,6 +507,10 @@ class __$$_LoadMoreCopyWithImpl<$Res>
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User,
+      returnSummaryFilter: null == returnSummaryFilter
+          ? _value.returnSummaryFilter
+          : returnSummaryFilter // ignore: cast_nullable_to_non_nullable
+              as ReturnSummaryFilter,
     ));
   }
 
@@ -485,6 +537,15 @@ class __$$_LoadMoreCopyWithImpl<$Res>
       return _then(_value.copyWith(user: value));
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ReturnSummaryFilterCopyWith<$Res> get returnSummaryFilter {
+    return $ReturnSummaryFilterCopyWith<$Res>(_value.returnSummaryFilter,
+        (value) {
+      return _then(_value.copyWith(returnSummaryFilter: value));
+    });
+  }
 }
 
 /// @nodoc
@@ -493,7 +554,8 @@ class _$_LoadMore implements _LoadMore {
   const _$_LoadMore(
       {required this.customerCodeInfo,
       required this.shipToInfo,
-      required this.user});
+      required this.user,
+      required this.returnSummaryFilter});
 
   @override
   final CustomerCodeInfo customerCodeInfo;
@@ -501,10 +563,12 @@ class _$_LoadMore implements _LoadMore {
   final ShipToInfo shipToInfo;
   @override
   final User user;
+  @override
+  final ReturnSummaryFilter returnSummaryFilter;
 
   @override
   String toString() {
-    return 'ReturnSummaryEvent.loadMore(customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, user: $user)';
+    return 'ReturnSummaryEvent.loadMore(customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, user: $user, returnSummaryFilter: $returnSummaryFilter)';
   }
 
   @override
@@ -516,12 +580,14 @@ class _$_LoadMore implements _LoadMore {
                 other.customerCodeInfo == customerCodeInfo) &&
             (identical(other.shipToInfo, shipToInfo) ||
                 other.shipToInfo == shipToInfo) &&
-            (identical(other.user, user) || other.user == user));
+            (identical(other.user, user) || other.user == user) &&
+            (identical(other.returnSummaryFilter, returnSummaryFilter) ||
+                other.returnSummaryFilter == returnSummaryFilter));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, customerCodeInfo, shipToInfo, user);
+  int get hashCode => Object.hash(
+      runtimeType, customerCodeInfo, shipToInfo, user, returnSummaryFilter);
 
   @JsonKey(ignore: true)
   @override
@@ -534,13 +600,19 @@ class _$_LoadMore implements _LoadMore {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            ReturnSummaryFilter returnSummaryFilter)
         fetch,
     required TResult Function(
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            ReturnSummaryFilter returnSummaryFilter)
         loadMore,
   }) {
-    return loadMore(customerCodeInfo, shipToInfo, user);
+    return loadMore(customerCodeInfo, shipToInfo, user, returnSummaryFilter);
   }
 
   @override
@@ -548,13 +620,14 @@ class _$_LoadMore implements _LoadMore {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo,
-            User user)?
+            User user, ReturnSummaryFilter returnSummaryFilter)?
         fetch,
     TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo,
-            User user)?
+            User user, ReturnSummaryFilter returnSummaryFilter)?
         loadMore,
   }) {
-    return loadMore?.call(customerCodeInfo, shipToInfo, user);
+    return loadMore?.call(
+        customerCodeInfo, shipToInfo, user, returnSummaryFilter);
   }
 
   @override
@@ -562,15 +635,15 @@ class _$_LoadMore implements _LoadMore {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo,
-            User user)?
+            User user, ReturnSummaryFilter returnSummaryFilter)?
         fetch,
     TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo,
-            User user)?
+            User user, ReturnSummaryFilter returnSummaryFilter)?
         loadMore,
     required TResult orElse(),
   }) {
     if (loadMore != null) {
-      return loadMore(customerCodeInfo, shipToInfo, user);
+      return loadMore(customerCodeInfo, shipToInfo, user, returnSummaryFilter);
     }
     return orElse();
   }
@@ -614,11 +687,13 @@ abstract class _LoadMore implements ReturnSummaryEvent {
   const factory _LoadMore(
       {required final CustomerCodeInfo customerCodeInfo,
       required final ShipToInfo shipToInfo,
-      required final User user}) = _$_LoadMore;
+      required final User user,
+      required final ReturnSummaryFilter returnSummaryFilter}) = _$_LoadMore;
 
   CustomerCodeInfo get customerCodeInfo;
   ShipToInfo get shipToInfo;
   User get user;
+  ReturnSummaryFilter get returnSummaryFilter;
   @JsonKey(ignore: true)
   _$$_LoadMoreCopyWith<_$_LoadMore> get copyWith =>
       throw _privateConstructorUsedError;
@@ -626,7 +701,7 @@ abstract class _LoadMore implements ReturnSummaryEvent {
 
 /// @nodoc
 mixin _$ReturnSummaryState {
-  List<ReturnSummaryRequestInformation> get returnSummaryList =>
+  List<ReturnSummaryRequest> get returnSummaryList =>
       throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption =>
       throw _privateConstructorUsedError;
@@ -645,7 +720,7 @@ abstract class $ReturnSummaryStateCopyWith<$Res> {
       _$ReturnSummaryStateCopyWithImpl<$Res, ReturnSummaryState>;
   @useResult
   $Res call(
-      {List<ReturnSummaryRequestInformation> returnSummaryList,
+      {List<ReturnSummaryRequest> returnSummaryList,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       bool isLoading,
       bool canLoadMore});
@@ -673,7 +748,7 @@ class _$ReturnSummaryStateCopyWithImpl<$Res, $Val extends ReturnSummaryState>
       returnSummaryList: null == returnSummaryList
           ? _value.returnSummaryList
           : returnSummaryList // ignore: cast_nullable_to_non_nullable
-              as List<ReturnSummaryRequestInformation>,
+              as List<ReturnSummaryRequest>,
       failureOrSuccessOption: null == failureOrSuccessOption
           ? _value.failureOrSuccessOption
           : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
@@ -699,7 +774,7 @@ abstract class _$$_ReturnSummaryStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {List<ReturnSummaryRequestInformation> returnSummaryList,
+      {List<ReturnSummaryRequest> returnSummaryList,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       bool isLoading,
       bool canLoadMore});
@@ -725,7 +800,7 @@ class __$$_ReturnSummaryStateCopyWithImpl<$Res>
       returnSummaryList: null == returnSummaryList
           ? _value._returnSummaryList
           : returnSummaryList // ignore: cast_nullable_to_non_nullable
-              as List<ReturnSummaryRequestInformation>,
+              as List<ReturnSummaryRequest>,
       failureOrSuccessOption: null == failureOrSuccessOption
           ? _value.failureOrSuccessOption
           : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
@@ -744,17 +819,18 @@ class __$$_ReturnSummaryStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ReturnSummaryState implements _ReturnSummaryState {
+class _$_ReturnSummaryState extends _ReturnSummaryState {
   const _$_ReturnSummaryState(
-      {required final List<ReturnSummaryRequestInformation> returnSummaryList,
+      {required final List<ReturnSummaryRequest> returnSummaryList,
       required this.failureOrSuccessOption,
       required this.isLoading,
       required this.canLoadMore})
-      : _returnSummaryList = returnSummaryList;
+      : _returnSummaryList = returnSummaryList,
+        super._();
 
-  final List<ReturnSummaryRequestInformation> _returnSummaryList;
+  final List<ReturnSummaryRequest> _returnSummaryList;
   @override
-  List<ReturnSummaryRequestInformation> get returnSummaryList {
+  List<ReturnSummaryRequest> get returnSummaryList {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_returnSummaryList);
   }
@@ -802,15 +878,16 @@ class _$_ReturnSummaryState implements _ReturnSummaryState {
           this, _$identity);
 }
 
-abstract class _ReturnSummaryState implements ReturnSummaryState {
+abstract class _ReturnSummaryState extends ReturnSummaryState {
   const factory _ReturnSummaryState(
-      {required final List<ReturnSummaryRequestInformation> returnSummaryList,
+      {required final List<ReturnSummaryRequest> returnSummaryList,
       required final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       required final bool isLoading,
       required final bool canLoadMore}) = _$_ReturnSummaryState;
+  const _ReturnSummaryState._() : super._();
 
   @override
-  List<ReturnSummaryRequestInformation> get returnSummaryList;
+  List<ReturnSummaryRequest> get returnSummaryList;
   @override
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption;
   @override

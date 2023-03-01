@@ -32,7 +32,7 @@ import 'package:ezrxmobile/presentation/returns/add_policy_configuration.dart';
 import 'package:ezrxmobile/presentation/returns/approver_actions/approver_actions.dart';
 import 'package:ezrxmobile/presentation/returns/policy_configuration.dart';
 import 'package:ezrxmobile/presentation/returns/request_return.dart';
-import 'package:ezrxmobile/presentation/returns/return_summary.dart';
+import 'package:ezrxmobile/presentation/returns/return_summary/return_summary.dart';
 import 'package:ezrxmobile/presentation/returns/returns_overview.dart';
 import 'package:ezrxmobile/presentation/returns/user_restriction_list.dart';
 import 'package:ezrxmobile/presentation/splash/splash_page.dart';

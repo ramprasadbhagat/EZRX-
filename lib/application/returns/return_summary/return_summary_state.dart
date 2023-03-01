@@ -2,8 +2,9 @@ part of 'return_summary_bloc.dart';
 
 @freezed
 class ReturnSummaryState with _$ReturnSummaryState {
+  const ReturnSummaryState._();
   const factory ReturnSummaryState({
-    required List<ReturnSummaryRequestInformation> returnSummaryList,
+    required List<ReturnSummaryRequest> returnSummaryList,
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
     required bool isLoading,
     required bool canLoadMore,
@@ -13,6 +14,6 @@ class ReturnSummaryState with _$ReturnSummaryState {
         failureOrSuccessOption: none(),
         isLoading: false,
         canLoadMore: true,
-        returnSummaryList: <ReturnSummaryRequestInformation>[],
+        returnSummaryList: <ReturnSummaryRequest>[],
       );
 }

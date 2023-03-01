@@ -63,4 +63,7 @@ class ValueFailure<T> with _$ValueFailure<T> {
   const factory ValueFailure.invalidDateValue({
     required T failedValue,
   }) = InvalidDateValue<T>;
+  const factory ValueFailure.invalidDoubleValue({
+    required T failedValue,
+  }) = InvalidDoubleValue<T>;
 }

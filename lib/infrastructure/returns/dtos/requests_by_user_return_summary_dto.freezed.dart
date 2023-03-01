@@ -21,8 +21,11 @@ ReturnSummaryRequestByUserDto _$ReturnSummaryRequestByUserDtoFromJson(
 
 /// @nodoc
 mixin _$ReturnSummaryRequestByUserDto {
-  @JsonKey(name: 'requestID', defaultValue: '')
-  String get requestID => throw _privateConstructorUsedError;
+  @JsonKey(name: 'requestIds', defaultValue: [])
+  List<String> get requestIds => throw _privateConstructorUsedError;
+  @JsonKey(name: 'requests', defaultValue: [])
+  List<ReturnSummaryRequestDto> get requests =>
+      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -38,7 +41,11 @@ abstract class $ReturnSummaryRequestByUserDtoCopyWith<$Res> {
       _$ReturnSummaryRequestByUserDtoCopyWithImpl<$Res,
           ReturnSummaryRequestByUserDto>;
   @useResult
-  $Res call({@JsonKey(name: 'requestID', defaultValue: '') String requestID});
+  $Res call(
+      {@JsonKey(name: 'requestIds', defaultValue: [])
+          List<String> requestIds,
+      @JsonKey(name: 'requests', defaultValue: [])
+          List<ReturnSummaryRequestDto> requests});
 }
 
 /// @nodoc
@@ -55,13 +62,18 @@ class _$ReturnSummaryRequestByUserDtoCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? requestID = null,
+    Object? requestIds = null,
+    Object? requests = null,
   }) {
     return _then(_value.copyWith(
-      requestID: null == requestID
-          ? _value.requestID
-          : requestID // ignore: cast_nullable_to_non_nullable
-              as String,
+      requestIds: null == requestIds
+          ? _value.requestIds
+          : requestIds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      requests: null == requests
+          ? _value.requests
+          : requests // ignore: cast_nullable_to_non_nullable
+              as List<ReturnSummaryRequestDto>,
     ) as $Val);
   }
 }
@@ -75,7 +87,11 @@ abstract class _$$_ReturnSummaryRequestByUserDtoCopyWith<$Res>
       __$$_ReturnSummaryRequestByUserDtoCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({@JsonKey(name: 'requestID', defaultValue: '') String requestID});
+  $Res call(
+      {@JsonKey(name: 'requestIds', defaultValue: [])
+          List<String> requestIds,
+      @JsonKey(name: 'requests', defaultValue: [])
+          List<ReturnSummaryRequestDto> requests});
 }
 
 /// @nodoc
@@ -91,13 +107,18 @@ class __$$_ReturnSummaryRequestByUserDtoCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? requestID = null,
+    Object? requestIds = null,
+    Object? requests = null,
   }) {
     return _then(_$_ReturnSummaryRequestByUserDto(
-      requestID: null == requestID
-          ? _value.requestID
-          : requestID // ignore: cast_nullable_to_non_nullable
-              as String,
+      requestIds: null == requestIds
+          ? _value._requestIds
+          : requestIds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      requests: null == requests
+          ? _value._requests
+          : requests // ignore: cast_nullable_to_non_nullable
+              as List<ReturnSummaryRequestDto>,
     ));
   }
 }
@@ -106,20 +127,37 @@ class __$$_ReturnSummaryRequestByUserDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_ReturnSummaryRequestByUserDto extends _ReturnSummaryRequestByUserDto {
   const _$_ReturnSummaryRequestByUserDto(
-      {@JsonKey(name: 'requestID', defaultValue: '') required this.requestID})
-      : super._();
+      {@JsonKey(name: 'requestIds', defaultValue: [])
+          required final List<String> requestIds,
+      @JsonKey(name: 'requests', defaultValue: [])
+          required final List<ReturnSummaryRequestDto> requests})
+      : _requestIds = requestIds,
+        _requests = requests,
+        super._();
 
   factory _$_ReturnSummaryRequestByUserDto.fromJson(
           Map<String, dynamic> json) =>
       _$$_ReturnSummaryRequestByUserDtoFromJson(json);
 
+  final List<String> _requestIds;
   @override
-  @JsonKey(name: 'requestID', defaultValue: '')
-  final String requestID;
+  @JsonKey(name: 'requestIds', defaultValue: [])
+  List<String> get requestIds {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_requestIds);
+  }
+
+  final List<ReturnSummaryRequestDto> _requests;
+  @override
+  @JsonKey(name: 'requests', defaultValue: [])
+  List<ReturnSummaryRequestDto> get requests {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_requests);
+  }
 
   @override
   String toString() {
-    return 'ReturnSummaryRequestByUserDto(requestID: $requestID)';
+    return 'ReturnSummaryRequestByUserDto(requestIds: $requestIds, requests: $requests)';
   }
 
   @override
@@ -127,13 +165,17 @@ class _$_ReturnSummaryRequestByUserDto extends _ReturnSummaryRequestByUserDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ReturnSummaryRequestByUserDto &&
-            (identical(other.requestID, requestID) ||
-                other.requestID == requestID));
+            const DeepCollectionEquality()
+                .equals(other._requestIds, _requestIds) &&
+            const DeepCollectionEquality().equals(other._requests, _requests));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, requestID);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_requestIds),
+      const DeepCollectionEquality().hash(_requests));
 
   @JsonKey(ignore: true)
   @override
@@ -153,16 +195,22 @@ class _$_ReturnSummaryRequestByUserDto extends _ReturnSummaryRequestByUserDto {
 abstract class _ReturnSummaryRequestByUserDto
     extends ReturnSummaryRequestByUserDto {
   const factory _ReturnSummaryRequestByUserDto(
-      {@JsonKey(name: 'requestID', defaultValue: '')
-          required final String requestID}) = _$_ReturnSummaryRequestByUserDto;
+          {@JsonKey(name: 'requestIds', defaultValue: [])
+              required final List<String> requestIds,
+          @JsonKey(name: 'requests', defaultValue: [])
+              required final List<ReturnSummaryRequestDto> requests}) =
+      _$_ReturnSummaryRequestByUserDto;
   const _ReturnSummaryRequestByUserDto._() : super._();
 
   factory _ReturnSummaryRequestByUserDto.fromJson(Map<String, dynamic> json) =
       _$_ReturnSummaryRequestByUserDto.fromJson;
 
   @override
-  @JsonKey(name: 'requestID', defaultValue: '')
-  String get requestID;
+  @JsonKey(name: 'requestIds', defaultValue: [])
+  List<String> get requestIds;
+  @override
+  @JsonKey(name: 'requests', defaultValue: [])
+  List<ReturnSummaryRequestDto> get requests;
   @override
   @JsonKey(ignore: true)
   _$$_ReturnSummaryRequestByUserDtoCopyWith<_$_ReturnSummaryRequestByUserDto>

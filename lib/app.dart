@@ -8,6 +8,7 @@ import 'package:ezrxmobile/application/returns/request_return/request_return_blo
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_summary/return_summary_bloc.dart';
 import 'package:ezrxmobile/application/returns/request_return_filter/request_return_filter_bloc.dart';
+import 'package:ezrxmobile/application/returns/return_summary_filter/return_summary_filter_bloc.dart';
 import 'package:universal_io/io.dart';
 
 import 'package:auto_route/auto_route.dart';
@@ -335,6 +336,10 @@ class App extends StatelessWidget {
         BlocProvider<TenderContractListBloc>(
           create: (context) => locator<TenderContractListBloc>(),
         ),
+        BlocProvider<ReturnSummaryFilterBloc>(
+          create: (context) => locator<ReturnSummaryFilterBloc>(),
+        ),
+      
       ],
       child: MaterialApp.router(
         localizationsDelegates: context.localizationDelegates,

@@ -62,10 +62,10 @@ class SearchKey extends ValueObject<String> {
 
   factory SearchKey.searchFilter(String searchText) {
     return SearchKey._(
-      validateStringIsEmpty(searchText).fold(
+      (validateStringIsEmpty(searchText).fold(
         (l) => validateMinStringLength(l.failedValue, 3),
         (r) => Right(r),
-      ),
+      )),
     );
   }
 
@@ -104,5 +104,8 @@ class DateTimeStringValue extends ValueObject<String> {
     return currentDate.isBefore(dateTime);
   }
 
+
+
+      
   const DateTimeStringValue._(this.value);
 }

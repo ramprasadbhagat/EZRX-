@@ -4,11 +4,13 @@ import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
-import 'package:ezrxmobile/domain/returns/entities/return_summary_request_information.dart';
+import 'package:ezrxmobile/domain/returns/entities/requests_by_user_return_summary.dart';
+import 'package:ezrxmobile/domain/returns/entities/return_summary_filter.dart';
 import 'package:ezrxmobile/domain/returns/repository/i_return_summary_repository.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_summary_local.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_summary_remote.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/infrastructure/returns/dtos/return_summary_filter_dto.dart';
 
 class ReturnSummaryRepository implements IReturnSummaryRepository {
   final Config config;
@@ -21,35 +23,21 @@ class ReturnSummaryRepository implements IReturnSummaryRepository {
     required this.returnSummaryRemoteDataSource,
   });
   @override
-  Future<Either<ApiFailure, List<ReturnSummaryRequestInformation>>>
+  Future<Either<ApiFailure, ReturnSummaryRequestByUser>>
       getReturnSummaryRequestByUser({
     required CustomerCodeInfo soldTo,
     required ShipToInfo shipTo,
     required User user,
     required int pageSize,
     required int offSet,
+    required ReturnSummaryFilter returnSummaryFilter,
   }) async {
-    final returnSummaryInformationItems = <ReturnSummaryRequestInformation>[];
     if (config.appFlavor == Flavor.mock) {
       try {
         final returnSummaryList =
             await returnSummaryLocalDataSource.getReturnSummaryRequestByUser();
-        await Future.wait(returnSummaryList.map((returnSummaryItem) async {
-          final returnSummaryInformatinListItem =
-              await getReturnSummaryInformation(
-            requestID: returnSummaryItem.requestID,
-          );
-          returnSummaryInformatinListItem.fold(
-            (failure) {
-              return Left(FailureHandler.handleFailure(failure));
-            },
-            (returnSummaryList) {
-              returnSummaryInformationItems.add(returnSummaryList);
-            },
-          );
-        }).toList());
 
-        return Right(returnSummaryInformationItems);
+        return Right(returnSummaryList);
       } catch (e) {
         return Left(
           FailureHandler.handleFailure(e),
@@ -64,50 +52,9 @@ class ReturnSummaryRepository implements IReturnSummaryRepository {
         username: user.username.getOrCrash(),
         pageSize: pageSize,
         offSet: offSet,
-      );
+        filterQuery:
+            ReturnSummaryFilterDto.fromDomain(returnSummaryFilter).toJson(),
 
-      await Future.wait(returnSummaryList.map((returnSummaryItem) async {
-        final returnSummaryInformatinListItem =
-            await getReturnSummaryInformation(
-          requestID: returnSummaryItem.requestID,
-        );
-        returnSummaryInformatinListItem.fold(
-          (failure) {
-            return Left(FailureHandler.handleFailure(failure));
-          },
-          (returnSummaryList) {
-            returnSummaryInformationItems.add(returnSummaryList);
-          },
-        );
-      }).toList());
-
-      return Right(returnSummaryInformationItems);
-    } catch (e) {
-      return Left(FailureHandler.handleFailure(e));
-    }
-  }
-
-  @override
-  Future<Either<ApiFailure, ReturnSummaryRequestInformation>>
-      getReturnSummaryInformation({
-    required String requestID,
-  }) async {
-    if (config.appFlavor == Flavor.mock) {
-      try {
-        final returnSummaryInformationList =
-            await returnSummaryLocalDataSource.getReturnSummaryInformation();
-
-        return Right(returnSummaryInformationList);
-      } catch (e) {
-        return Left(
-          FailureHandler.handleFailure(e),
-        );
-      }
-    }
-    try {
-      final returnSummaryList =
-          await returnSummaryRemoteDataSource.getReturnSummaryInformation(
-        requestID: requestID,
       );
 
       return Right(returnSummaryList);

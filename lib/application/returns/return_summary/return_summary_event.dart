@@ -8,10 +8,13 @@ class ReturnSummaryEvent with _$ReturnSummaryEvent {
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
     required User user,
+    required ReturnSummaryFilter returnSummaryFilter,
   }) = _Fetch;
   const factory ReturnSummaryEvent.loadMore({
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
     required User user,
+    required ReturnSummaryFilter returnSummaryFilter,
   }) = _LoadMore;
+  
 }

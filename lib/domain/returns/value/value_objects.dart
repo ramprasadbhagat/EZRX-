@@ -3,8 +3,10 @@ import 'dart:core';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/core/error/failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/core/value/value_validators.dart';
 import 'package:ezrxmobile/domain/returns/value/value_transformers.dart';
+import 'package:ezrxmobile/domain/returns/value/value_validators.dart';
 import 'package:flutter/animation.dart';
 
 class ReturnsAllowed extends ValueObject<bool> {
@@ -70,7 +72,6 @@ class ApprovalLimit extends ValueObject<int> {
   const ApprovalLimit._(this.value);
 }
 
-
 class RefundTotal extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
@@ -102,6 +103,7 @@ class ReturnSummaryStatus extends ValueObject<String> {
   Color get displayStatusTextColor =>
       getStatusTextColor(value.getOrElse(() => ''));
 
+  String get label => getReturnSummaryFilterByStatus(value.getOrElse(() => ''));
   const ReturnSummaryStatus._(this.value);
 }
 
@@ -118,6 +120,18 @@ class FilterStatus extends ValueObject<String> {
         value.getOrElse(() => ''),
       );
 
-
   const FilterStatus._(this.value);
+}
+
+class PriceRange extends ValueObject<double> {
+  @override
+  final Either<ValueFailure<double>, double> value;
+
+  factory PriceRange(String input) => PriceRange._(validateDoubleValue(input));
+
+  String get apiParameterValue => emptyIfZero(value.getOrElse(() => 0));
+
+  String get doubleToString => emptyIfZero(value.getOrElse(() => 0));
+
+  const PriceRange._(this.value);
 }

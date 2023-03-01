@@ -19,9 +19,11 @@ import 'package:ezrxmobile/application/order/order_template_list/order_template_
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
 import 'package:ezrxmobile/application/returns/request_return/request_return_bloc.dart';
+import 'package:ezrxmobile/application/returns/return_summary/return_summary_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_filter.dart';
 import 'package:ezrxmobile/domain/returns/entities/request_return_filter.dart';
+import 'package:ezrxmobile/domain/returns/entities/return_summary_filter.dart';
 import 'package:ezrxmobile/presentation/core/custom_selector.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -73,7 +75,18 @@ class ShipCodeSelector extends StatelessWidget {
                       shipToInfo: state.shipToInfo,
                     ),
                   );
-
+              context.read<ReturnSummaryBloc>().add(
+                    ReturnSummaryEvent.fetch(
+                      user: context.read<UserBloc>().state.user,
+                      customerCodeInfo: context
+                          .read<CustomerCodeBloc>()
+                          .state
+                          .customerCodeInfo,
+                      shipToInfo:
+                          context.read<ShipToCodeBloc>().state.shipToInfo,
+                      returnSummaryFilter: ReturnSummaryFilter.empty(),
+                    ),
+                  );
               if (context.read<UserBloc>().state.userCanCreateOrder) {
                 context.read<MaterialBundleListBloc>().add(
                       MaterialBundleListEvent.fetch(

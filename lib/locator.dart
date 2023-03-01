@@ -25,6 +25,7 @@ import 'package:ezrxmobile/application/order/tender_contract/tender_contract_lis
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_summary/return_summary_bloc.dart';
 import 'package:ezrxmobile/application/returns/request_return_filter/request_return_filter_bloc.dart';
+import 'package:ezrxmobile/application/returns/return_summary_filter/return_summary_filter_bloc.dart';
 import 'package:ezrxmobile/domain/order/repository/i_combo_deal_repository.dart';
 import 'package:ezrxmobile/infrastructure/core/common/file_picker.dart';
 import 'package:ezrxmobile/infrastructure/core/common/permission.dart';
@@ -1676,6 +1677,14 @@ void setupLocator() {
       returnSummaryLocalDataSource: locator<ReturnSummaryLocalDataSource>(),
       returnSummaryRemoteDataSource: locator<ReturnSummaryRemoteDataSource>(),
     ),
+  );
+    //============================================================
+  //  Return Summary Filter
+  //
+  //============================================================
+
+  locator.registerLazySingleton(
+    () => ReturnSummaryFilterBloc(),
   );
 
   //============================================================

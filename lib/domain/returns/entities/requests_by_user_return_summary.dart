@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/returns/entities/return_summary_requests.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'requests_by_user_return_summary.freezed.dart';
 
@@ -6,10 +7,12 @@ class ReturnSummaryRequestByUser with _$ReturnSummaryRequestByUser {
   const ReturnSummaryRequestByUser._();
 
   const factory ReturnSummaryRequestByUser({
-    required String requestID,
+    required List<String> requestIds,
+    required List<ReturnSummaryRequest> requests,
   }) = _ReturnSummaryRequestByUser;
   factory ReturnSummaryRequestByUser.empty() =>
       const ReturnSummaryRequestByUser(
-        requestID: '',
+        requestIds: [],
+        requests: <ReturnSummaryRequest>[],
       );
 }

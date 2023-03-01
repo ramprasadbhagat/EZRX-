@@ -1,7 +1,7 @@
 import 'package:ezrxmobile/domain/returns/entities/requests_by_user_return_summary.dart';
+import 'package:ezrxmobile/infrastructure/returns/dtos/return_summary_request_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'requests_by_user_return_summary_dto.freezed.dart';
-
 part 'requests_by_user_return_summary_dto.g.dart';
 
 @freezed
@@ -9,19 +9,27 @@ class ReturnSummaryRequestByUserDto with _$ReturnSummaryRequestByUserDto {
   const ReturnSummaryRequestByUserDto._();
 
   const factory ReturnSummaryRequestByUserDto({
-    @JsonKey(name: 'requestID', defaultValue: '') required String requestID,
+    @JsonKey(name: 'requestIds', defaultValue: [])
+        required List<String> requestIds,
+    @JsonKey(name: 'requests', defaultValue: [])
+        required List<ReturnSummaryRequestDto> requests,
   }) = _ReturnSummaryRequestByUserDto;
 
   factory ReturnSummaryRequestByUserDto.fromDomain(
-      ReturnSummaryRequestByUser returnSummaryRequestByUser,) {
+    ReturnSummaryRequestByUser returnSummaryRequestByUser,
+  ) {
     return ReturnSummaryRequestByUserDto(
-      requestID: returnSummaryRequestByUser.requestID,
+      requestIds: returnSummaryRequestByUser.requestIds,
+      requests: List.from(returnSummaryRequestByUser.requests)
+          .map((e) => ReturnSummaryRequestDto.fromDomain(e))
+          .toList(),
     );
   }
 
   ReturnSummaryRequestByUser toDomain() {
     return ReturnSummaryRequestByUser(
-      requestID: requestID,
+      requestIds: requestIds,
+      requests: requests.map((e) => e.toDomain()).toList(),
     );
   }
 

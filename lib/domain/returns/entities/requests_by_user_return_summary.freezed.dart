@@ -16,7 +16,8 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$ReturnSummaryRequestByUser {
-  String get requestID => throw _privateConstructorUsedError;
+  List<String> get requestIds => throw _privateConstructorUsedError;
+  List<ReturnSummaryRequest> get requests => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ReturnSummaryRequestByUserCopyWith<ReturnSummaryRequestByUser>
@@ -30,7 +31,7 @@ abstract class $ReturnSummaryRequestByUserCopyWith<$Res> {
       _$ReturnSummaryRequestByUserCopyWithImpl<$Res,
           ReturnSummaryRequestByUser>;
   @useResult
-  $Res call({String requestID});
+  $Res call({List<String> requestIds, List<ReturnSummaryRequest> requests});
 }
 
 /// @nodoc
@@ -47,13 +48,18 @@ class _$ReturnSummaryRequestByUserCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? requestID = null,
+    Object? requestIds = null,
+    Object? requests = null,
   }) {
     return _then(_value.copyWith(
-      requestID: null == requestID
-          ? _value.requestID
-          : requestID // ignore: cast_nullable_to_non_nullable
-              as String,
+      requestIds: null == requestIds
+          ? _value.requestIds
+          : requestIds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      requests: null == requests
+          ? _value.requests
+          : requests // ignore: cast_nullable_to_non_nullable
+              as List<ReturnSummaryRequest>,
     ) as $Val);
   }
 }
@@ -67,7 +73,7 @@ abstract class _$$_ReturnSummaryRequestByUserCopyWith<$Res>
       __$$_ReturnSummaryRequestByUserCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String requestID});
+  $Res call({List<String> requestIds, List<ReturnSummaryRequest> requests});
 }
 
 /// @nodoc
@@ -83,13 +89,18 @@ class __$$_ReturnSummaryRequestByUserCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? requestID = null,
+    Object? requestIds = null,
+    Object? requests = null,
   }) {
     return _then(_$_ReturnSummaryRequestByUser(
-      requestID: null == requestID
-          ? _value.requestID
-          : requestID // ignore: cast_nullable_to_non_nullable
-              as String,
+      requestIds: null == requestIds
+          ? _value._requestIds
+          : requestIds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      requests: null == requests
+          ? _value._requests
+          : requests // ignore: cast_nullable_to_non_nullable
+              as List<ReturnSummaryRequest>,
     ));
   }
 }
@@ -97,14 +108,30 @@ class __$$_ReturnSummaryRequestByUserCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_ReturnSummaryRequestByUser extends _ReturnSummaryRequestByUser {
-  const _$_ReturnSummaryRequestByUser({required this.requestID}) : super._();
+  const _$_ReturnSummaryRequestByUser(
+      {required final List<String> requestIds,
+      required final List<ReturnSummaryRequest> requests})
+      : _requestIds = requestIds,
+        _requests = requests,
+        super._();
 
+  final List<String> _requestIds;
   @override
-  final String requestID;
+  List<String> get requestIds {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_requestIds);
+  }
+
+  final List<ReturnSummaryRequest> _requests;
+  @override
+  List<ReturnSummaryRequest> get requests {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_requests);
+  }
 
   @override
   String toString() {
-    return 'ReturnSummaryRequestByUser(requestID: $requestID)';
+    return 'ReturnSummaryRequestByUser(requestIds: $requestIds, requests: $requests)';
   }
 
   @override
@@ -112,12 +139,16 @@ class _$_ReturnSummaryRequestByUser extends _ReturnSummaryRequestByUser {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ReturnSummaryRequestByUser &&
-            (identical(other.requestID, requestID) ||
-                other.requestID == requestID));
+            const DeepCollectionEquality()
+                .equals(other._requestIds, _requestIds) &&
+            const DeepCollectionEquality().equals(other._requests, _requests));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, requestID);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_requestIds),
+      const DeepCollectionEquality().hash(_requests));
 
   @JsonKey(ignore: true)
   @override
@@ -128,12 +159,16 @@ class _$_ReturnSummaryRequestByUser extends _ReturnSummaryRequestByUser {
 }
 
 abstract class _ReturnSummaryRequestByUser extends ReturnSummaryRequestByUser {
-  const factory _ReturnSummaryRequestByUser({required final String requestID}) =
+  const factory _ReturnSummaryRequestByUser(
+          {required final List<String> requestIds,
+          required final List<ReturnSummaryRequest> requests}) =
       _$_ReturnSummaryRequestByUser;
   const _ReturnSummaryRequestByUser._() : super._();
 
   @override
-  String get requestID;
+  List<String> get requestIds;
+  @override
+  List<ReturnSummaryRequest> get requests;
   @override
   @JsonKey(ignore: true)
   _$$_ReturnSummaryRequestByUserCopyWith<_$_ReturnSummaryRequestByUser>

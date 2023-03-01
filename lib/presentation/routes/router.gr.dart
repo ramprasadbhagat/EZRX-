@@ -62,7 +62,7 @@ import '../returns/add_policy_configuration.dart' as _i11;
 import '../returns/approver_actions/approver_actions.dart' as _i7;
 import '../returns/policy_configuration.dart' as _i10;
 import '../returns/request_return.dart' as _i6;
-import '../returns/return_summary.dart' as _i8;
+import '../returns/return_summary/return_summary.dart' as _i8;
 import '../returns/returns_overview.dart' as _i5;
 import '../returns/user_restriction_list.dart' as _i9;
 import '../splash/splash_page.dart' as _i1;
@@ -118,9 +118,11 @@ class AppRouter extends _i40.RootStackRouter {
       );
     },
     ReturnSummaryRoute.name: (routeData) {
+      final args = routeData.argsAs<ReturnSummaryRouteArgs>(
+          orElse: () => const ReturnSummaryRouteArgs());
       return _i40.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i8.ReturnSummary(),
+        child: _i8.ReturnSummary(key: args.key),
       );
     },
     UserRestrictionListPageRoute.name: (routeData) {
@@ -644,14 +646,26 @@ class ApproverActionsRouteArgs {
 
 /// generated route for
 /// [_i8.ReturnSummary]
-class ReturnSummaryRoute extends _i40.PageRouteInfo<void> {
-  const ReturnSummaryRoute()
+class ReturnSummaryRoute extends _i40.PageRouteInfo<ReturnSummaryRouteArgs> {
+  ReturnSummaryRoute({_i41.Key? key})
       : super(
           ReturnSummaryRoute.name,
           path: 'return_summary',
+          args: ReturnSummaryRouteArgs(key: key),
         );
 
   static const String name = 'ReturnSummaryRoute';
+}
+
+class ReturnSummaryRouteArgs {
+  const ReturnSummaryRouteArgs({this.key});
+
+  final _i41.Key? key;
+
+  @override
+  String toString() {
+    return 'ReturnSummaryRouteArgs{key: $key}';
+  }
 }
 
 /// generated route for

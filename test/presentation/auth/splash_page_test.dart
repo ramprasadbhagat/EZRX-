@@ -125,9 +125,7 @@ class MaterialListBlocMock
 class ReturnApproverBlocMock
     extends MockBloc<ReturnApproverEvent, ReturnApproverState>
     implements ReturnApproverBloc {}
-    class ReturnSummaryBlocMock
-    extends MockBloc<ReturnSummaryEvent, ReturnSummaryState>
-    implements ReturnSummaryBloc {}
+   
 
 class ReturnApproverFilterBlocMock
     extends MockBloc<ReturnApproverFilterEvent, ReturnApproverFilterState>
@@ -155,7 +153,6 @@ void main() {
   late ReturnRequestTypeCodeBloc returnRequestTypeCodeBlocMock;
   late PolicyConfigurationBloc policyConfigurationListBlocMock;
   late MaterialListBloc materialListBlocMock;
-  late ReturnSummaryBloc returnSummaryBlocMock;
 
   late MaterialFilterBloc materialFilterBlocMock;
 
@@ -213,7 +210,6 @@ void main() {
       materialListBlocMock = MaterialListBlocMock();
       materialFilterBlocMock = MaterialFilterBlocMock();
       returnApproverBlocMock = ReturnApproverBlocMock();
-      returnSummaryBlocMock = ReturnSummaryBlocMock();
       returnApproverFilterBlocMock = ReturnApproverFilterBlocMock();
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
       when(() => orderDocumentTypeMock.state).thenReturn(
@@ -251,8 +247,7 @@ void main() {
           .thenReturn(MaterialFilterState.initial());
       when(() => returnApproverBlocMock.state)
           .thenReturn(ReturnApproverState.initial());
-           when(() => returnSummaryBlocMock.state)
-          .thenReturn(ReturnSummaryState.initial());
+           
       when(() => returnApproverFilterBlocMock.state)
           .thenReturn(ReturnApproverFilterState.initial());
     });
@@ -299,8 +294,7 @@ void main() {
                 create: (context) => materialFilterBlocMock),
             BlocProvider<ReturnApproverBloc>(
                 create: (context) => returnApproverBlocMock),
-                 BlocProvider<ReturnSummaryBloc>(
-                create: (context) => returnSummaryBlocMock),
+                
             BlocProvider<ReturnApproverFilterBloc>(
                 create: (context) => returnApproverFilterBlocMock),
           ],

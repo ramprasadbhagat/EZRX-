@@ -19,6 +19,7 @@ import 'package:ezrxmobile/application/order/order_history_list/order_history_li
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
+import 'package:ezrxmobile/application/returns/return_summary/return_summary_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
@@ -112,6 +113,10 @@ class MaterialPriceDetailBlocMock
     extends MockBloc<MaterialPriceDetailEvent, MaterialPriceDetailState>
     implements MaterialPriceDetailBloc {}
 
+class ReturnSummaryBlocMock
+    extends MockBloc<ReturnSummaryEvent, ReturnSummaryState>
+    implements ReturnSummaryBloc {}
+
 final fakeShipToInfo =
     ShipToInfo.empty().copyWith(shipToCustomerCode: '00001234');
 
@@ -152,6 +157,7 @@ void main() {
   late MaterialPriceBlocMock mockMaterialPriceBloc;
   late MaterialPriceDetailBlocMock mockMaterialPriceDetailBloc;
   late AdditionalDetailsBlocMock mockAdditionalDetailsBloc;
+  late ReturnSummaryBloc returnSummaryBlocMock;
 
   final fakeSalesOrg = SalesOrganisation(
     salesOrg: SalesOrg('2601'),
@@ -181,6 +187,7 @@ void main() {
     mockMaterialPriceBloc = MaterialPriceBlocMock();
     mockMaterialPriceDetailBloc = MaterialPriceDetailBlocMock();
     mockAdditionalDetailsBloc = AdditionalDetailsBlocMock();
+    returnSummaryBlocMock = ReturnSummaryBlocMock();
   });
 
   setUp(() async {
@@ -225,6 +232,8 @@ void main() {
         .thenReturn(MaterialPriceDetailState.initial());
     when(() => mockAdditionalDetailsBloc.state)
         .thenReturn(AdditionalDetailsState.initial());
+    when(() => returnSummaryBlocMock.state)
+        .thenReturn(ReturnSummaryState.initial());
   });
 
   group('Ship Code selector Test ', () {
@@ -269,6 +278,8 @@ void main() {
                 create: (context) => mockMaterialPriceDetailBloc),
             BlocProvider<AdditionalDetailsBloc>(
                 create: (context) => mockAdditionalDetailsBloc),
+            BlocProvider<ReturnSummaryBloc>(
+                create: (context) => returnSummaryBlocMock),
           ],
           child: Material(
             child: Scaffold(

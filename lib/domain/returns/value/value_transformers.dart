@@ -93,3 +93,11 @@ String filterLabel(String sort) {
 String covertSortToApiDateString(String value) =>
     value.isNotEmpty && value != 'ALL' ? value : '';
 
+String getReturnSummaryFilterByStatus(String filter) => filter == 'Active'
+    ? 'PENDING'
+    : filter != 'All'
+        ? 'COMPLETED'
+        : '';
+
+
+

@@ -1,6 +1,6 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/value/constants.dart';
+import 'package:intl/intl.dart';
 
 String stringCapitalize(String text) {
   if (text.isEmpty) return '';
@@ -120,3 +120,7 @@ DateTime getDateTimeByDateString(String value) =>
 
 String getDateStringByDateTime(DateTime dateTime) =>
     DateFormat(DateTimeFormatString.apiFormat).format(dateTime);
+
+String emptyIfZero(double value) {
+  return value == 0 ? '' : value.toString();
+}
