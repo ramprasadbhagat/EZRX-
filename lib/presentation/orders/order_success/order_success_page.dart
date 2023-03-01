@@ -46,18 +46,21 @@ class _BodyContent extends StatelessWidget {
             'Thank You',
             style: Theme.of(context)
                 .textTheme
-                .headline4
+                .headlineMedium
                 ?.apply(color: ZPColors.green),
           ),
           const SizedBox(
             height: 10,
           ),
-          Text(
-            'Your order has been received successfully',
-            style: Theme.of(context)
-                .textTheme
-                .titleLarge
-                ?.apply(color: ZPColors.darkGray),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 15),
+            child: Text(
+              'Your order has been received successfully',
+              style: Theme.of(context)
+                  .textTheme
+                  .titleLarge
+                  ?.apply(color: ZPColors.darkGray),
+            ),
           ),
           const SizedBox(
             height: 15,

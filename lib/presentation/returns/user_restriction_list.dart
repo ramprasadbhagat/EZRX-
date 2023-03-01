@@ -81,7 +81,7 @@ class UserRestrictionListPage extends StatelessWidget {
           );
         },
       ),
-      floatingActionButton: FloatingActionButton.extended(
+      floatingActionButton: FloatingActionButton(
         onPressed: () {
           final eligibilityState = context.read<EligibilityBloc>().state;
           context
@@ -95,12 +95,7 @@ class UserRestrictionListPage extends StatelessWidget {
             ),
           );
         },
-        label: const Text(
-          'Add',
-        ),
-        elevation: 0,
-        icon: const Icon(Icons.add),
-        backgroundColor: ZPColors.secondary,
+        child: const Icon(Icons.add),
       ),
     );
   }

@@ -69,15 +69,10 @@ class PolicyConfigurationPage extends StatelessWidget {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        elevation: 0.0,
-        backgroundColor: ZPColors.darkBlue,
         onPressed: () {
           context.router.push(const AddPolicyConfigurationRoute());
         },
-        child: const Icon(
-          Icons.add,
-          color: ZPColors.white,
-        ),
+        child: const Icon(Icons.add),
       ),
     );
   }

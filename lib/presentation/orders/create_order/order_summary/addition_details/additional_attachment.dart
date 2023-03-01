@@ -26,8 +26,6 @@ class AdditionPoAttachmentUpload extends StatelessWidget {
     return Column(
       children: [
         Card(
-          elevation: 5,
-          color: Theme.of(context).scaffoldBackgroundColor,
           child: BlocListener<PoAttachmentBloc, PoAttachmentState>(
             listenWhen: (previous, current) =>
                 previous != current && current.fileUploaded,

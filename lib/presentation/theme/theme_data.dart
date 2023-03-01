@@ -124,6 +124,11 @@ final appThemeData = {
         ZPColors.primary,
       ),
     ),
+    floatingActionButtonTheme: const FloatingActionButtonThemeData(
+      elevation: 0,
+      backgroundColor: ZPColors.primary,
+      foregroundColor: ZPColors.white,
+    ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         backgroundColor: ZPColors.primary,
@@ -225,12 +230,15 @@ final appThemeData = {
       labelPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 0),
       padding: EdgeInsets.zero,
       shape: const StadiumBorder(),
-    ), colorScheme: const ColorScheme.light().copyWith(
-      primary: ZPColors.gradient,
-      background: ZPColors.white,
-      secondary: ZPColors.secondary,
-      onPrimary: ZPColors.black,
-    ).copyWith(error: ZPColors.error),
+    ),
+    colorScheme: const ColorScheme.light()
+        .copyWith(
+          primary: ZPColors.gradient,
+          background: ZPColors.white,
+          secondary: ZPColors.secondary,
+          onPrimary: ZPColors.black,
+        )
+        .copyWith(error: ZPColors.error),
   ),
   AppTheme.dark: ThemeData.dark().copyWith(),
 };

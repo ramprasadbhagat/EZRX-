@@ -133,7 +133,7 @@ class CartPage extends StatelessWidget {
                         boxShadow: <BoxShadow>[
                           BoxShadow(
                             color: Colors.black54,
-                            blurRadius: 15.0,
+                            blurRadius: 2.0,
                             offset: Offset(0.0, 0.75),
                           ),
                         ],

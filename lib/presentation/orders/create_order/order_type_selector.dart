@@ -24,9 +24,6 @@ class OrderTypeSelector extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       key: const Key('orderTypeSelector'),
-      decoration: const BoxDecoration(
-        color: ZPColors.secondaryBGColor,
-      ),
       child: BlocBuilder<OrderDocumentTypeBloc, OrderDocumentTypeState>(
         buildWhen: (previous, current) =>
             previous.selectedOrderType != current.selectedOrderType ||
@@ -101,7 +98,7 @@ class _OrderTypeSelectorField extends StatelessWidget {
               padding: const EdgeInsets.only(left: 10),
               child: Text(
                 leadingText,
-                style: Theme.of(context).textTheme.caption,
+                style: Theme.of(context).textTheme.bodySmall,
               ),
             ),
           ),
