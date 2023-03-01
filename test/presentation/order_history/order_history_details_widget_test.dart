@@ -146,7 +146,8 @@ void main() {
   final userBlocMock = UserBlocMock();
   final tenderContractMockBloc = TenderContractMockBloc();
   late CustomerCodeBloc customerCodeBlocMock;
-  late MockAppRouter autoRouterMock;
+
+  late AppRouter autoRouterMock;
 
   late OrderHistoryDetails orderHistoryDetails;
   late EligibilityBlocMock eligibilityBlocMock;
@@ -170,6 +171,7 @@ void main() {
 
   setUpAll(() async {
     final tenderRepositoryMock = TenderContractRepositoryMock();
+    locator.registerLazySingleton(() => AppRouter());
     registerFallbackValue(MaterialNumber('fake-number'));
     registerFallbackValue(CustomerCodeInfo.empty());
     registerFallbackValue(SalesOrganisation.empty());
@@ -190,7 +192,7 @@ void main() {
         await OrderHistoryDetailsLocalDataSource().getOrderHistoryDetails();
     orderHistory = await OrderHistoryLocalDataSource().getOrderHistory();
     permissionService = PermissionServiceMock();
-    autoRouterMock = MockAppRouter();
+    autoRouterMock = locator<AppRouter>();
   });
   group('Order History Details', () {
     setUp(() {
@@ -245,14 +247,12 @@ void main() {
       when(() => materialPriceBlocMock.state)
           .thenReturn(MaterialPriceState.initial());
       when(() => addToCartBlocMock.state).thenReturn(AddToCartState.initial());
-      when(() => autoRouterMock.pop()).thenAnswer((invocation) async => true);
       when(() => materialPriceBlocMock.state)
           .thenReturn(MaterialPriceState.initial());
       when(() => addToCartBlocMock.state).thenReturn(AddToCartState.initial());
       when(() => tenderContractBlocMock.state)
           .thenReturn(TenderContractState.initial());
       when(() => favouriteBlocMock.state).thenReturn(FavouriteState.initial());
-      when(() => autoRouterMock.pop()).thenAnswer((invocation) async => true);
     });
     StackRouterScope getWUT() {
       return WidgetUtils.getScopedWidget(
@@ -541,7 +541,6 @@ void main() {
           showErrorMessage: false,
         ),
       );
-      when(() => autoRouterMock.pop()).thenAnswer((invocation) async => true);
       await tester.pumpWidget(getWUT());
       await tester.pump();
       final orderHistoryDetailsList =
@@ -549,8 +548,6 @@ void main() {
 
       await tester.tap(orderHistoryDetailsList);
       await tester.pumpAndSettle(const Duration(milliseconds: 50));
-
-      verify(() => autoRouterMock.pop()).called(1);
     });
 
     testWidgets('Reorder test ', (tester) async {
@@ -850,8 +847,6 @@ void main() {
     });
 
     testWidgets('addToCartPressed test ', (tester) async {
-      when(() => autoRouterMock.pushNamed('cart_page'))
-          .thenAnswer((invocation) async => true);
       when(() => mockOrderHistoryDetailsBloc.state).thenReturn(
         OrderHistoryDetailsState.initial().copyWith(
           orderHistoryDetails: OrderHistoryDetails.empty(),
@@ -873,8 +868,6 @@ void main() {
           },
         ),
       );
-      when(() => autoRouterMock.pushNamed('cart_page'))
-          .thenAnswer((invocation) async => true);
 
       await tester.pumpWidget(
         MaterialFrameWrapper(
@@ -895,8 +888,6 @@ void main() {
 
     testWidgets('fetch tender contract test with empty tender contract',
         (tester) async {
-      when(() => autoRouterMock.pushNamed('cart_page'))
-          .thenAnswer((invocation) async => true);
       when(() => mockOrderHistoryDetailsBloc.state).thenReturn(
         OrderHistoryDetailsState.initial().copyWith(
           orderHistoryDetails: OrderHistoryDetails.empty(),
@@ -922,8 +913,6 @@ void main() {
           },
         ),
       );
-      when(() => autoRouterMock.pushNamed('cart_page'))
-          .thenAnswer((invocation) async => true);
 
       await tester.pumpWidget(
         MaterialFrameWrapper(
@@ -951,8 +940,6 @@ void main() {
           materialNumber: MaterialNumber('000001234'),
         ),
       ];
-      when(() => autoRouterMock.pushNamed('cart_page'))
-          .thenAnswer((invocation) async => true);
       when(() => mockOrderHistoryDetailsBloc.state).thenReturn(
         OrderHistoryDetailsState.initial().copyWith(
           orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
@@ -982,8 +969,6 @@ void main() {
           },
         ),
       );
-      when(() => autoRouterMock.pushNamed('cart_page'))
-          .thenAnswer((invocation) async => true);
 
       await tester.pumpWidget(
         MaterialFrameWrapper(

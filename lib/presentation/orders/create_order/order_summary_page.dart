@@ -38,6 +38,7 @@ import 'package:ezrxmobile/presentation/orders/core/order_ship_to_info.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_sold_to_info.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/additional_details.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/save_template_dialog.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -111,7 +112,11 @@ class _BodyContent extends StatelessWidget {
       listener: (context, savedOrderState) {
         if (!savedOrderState.isCreating &&
             savedOrderState.apiFailureOrSuccessOption == none()) {
-          context.router.pushNamed('saved_order_list');
+          context.router.pushAndPopUntil(
+            const SavedOrderListPageRoute(),
+            predicate: (route) =>
+                route.settings.name == 'HomeNavigationTabbarRoute',
+          );
         } else {
           savedOrderState.apiFailureOrSuccessOption.fold(
             () {},
@@ -406,7 +411,10 @@ class _Stepper extends StatelessWidget {
           ),
         );
     context.read<CartBloc>().add(const CartEvent.clearCart());
-    context.router.pushNamed('order_confirmation');
+    context.router.pushAndPopUntil(
+      const OrderSuccessPageRoute(),
+      predicate: (route) => route.settings.name == 'MaterialRootRoute',
+    );
   }
 
   void _stepTapped(BuildContext context, int step) {

@@ -13,6 +13,7 @@ import 'package:ezrxmobile/domain/order/entities/additional_details_data.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/text_button_shimmer.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -129,8 +130,10 @@ class ReOrderButton extends StatelessWidget {
             customerCodeInfo: eligibilityState.customerCodeInfo,
           ),
         );
-
-    context.router.pushNamed('cart_page');
+    context.router.pushAndPopUntil(
+      const CartPageRoute(),
+      predicate: (route) => route.settings.name == 'HomeNavigationTabbarRoute',
+    );
   }
 
   List<CartItem> _getUniqueItems({required List<PriceAggregate> items}) => items

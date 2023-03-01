@@ -18,6 +18,7 @@ import 'package:ezrxmobile/presentation/orders/core/order_bundle_item.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_invalid_warning.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_material_item.dart';
 import 'package:ezrxmobile/presentation/orders/saved_order/saved_order_bouns_tile.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -283,8 +284,10 @@ class _OrderTemplateDetailPageState extends State<OrderTemplateDetailPage> {
             elibilityBloc.state.doNotAllowOutOfStockMaterials,
       ),
     );
-
-    context.router.pushNamed('cart_page');
+    context.router.pushAndPopUntil(
+      const CartPageRoute(),
+      predicate: (route) => route.settings.name == 'HomeNavigationTabbarRoute',
+    );
     locator<CountlyService>().addCountlyEvent('Use template');
   }
 
