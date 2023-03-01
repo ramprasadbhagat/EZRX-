@@ -119,7 +119,8 @@ class _PoUploadButton extends StatelessWidget {
     return ListTile(
       key: const ValueKey('poAttachmentUploadButton'),
       onTap: () {
-        if (context.read<PoAttachmentBloc>().state.isFetching) return;
+        if (context.read<PoAttachmentBloc>().state.isFetching ||
+            context.read<AdditionalDetailsBloc>().state.isLoading) return;
         showPlatformDialog(
           context: context,
           barrierDismissible: true,

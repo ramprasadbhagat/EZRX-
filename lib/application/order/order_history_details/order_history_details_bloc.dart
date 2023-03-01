@@ -9,6 +9,7 @@ import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/repository/i_order_history_details_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
 part 'order_history_details_event.dart';
 part 'order_history_details_state.dart';
 part 'order_history_details_bloc.freezed.dart';

@@ -66,12 +66,17 @@ class AdditionalDetailsBloc
               state.additionalDetailsData.copyWith(poDocuments: []),
         ),
       ),
-      toggleGreenDelivery: (value) async => emit(
-        state.copyWith(
-          additionalDetailsData: state.additionalDetailsData
-              .copyWith(greenDeliveryEnabled: value.value),
-        ),
-      ),
+      toggleGreenDelivery: (value) async {
+        final currentValue = state.additionalDetailsData.greenDeliveryEnabled;
+
+        emit(
+          state.copyWith(
+            additionalDetailsData: state.additionalDetailsData.copyWith(
+              greenDeliveryEnabled: !currentValue,
+            ),
+          ),
+        );
+      },
       initFromSavedOrder: (value) async {
         emit(
           AdditionalDetailsState.initial().copyWith(

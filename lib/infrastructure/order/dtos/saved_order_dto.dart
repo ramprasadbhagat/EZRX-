@@ -126,7 +126,7 @@ class SavedOrderDto with _$SavedOrderDto {
       processingStatus: processingStatus,
       quantity: quantity,
       salesOrganization: salesOrganization,
-      shippingCondition: shippingCondition,
+      shippingCondition: ShippingCondition(shippingCondition),
       specialInstructions: specialInstructions,
       totalPrice: totalPrice,
       unitPrice: unitPrice,
@@ -142,7 +142,7 @@ class SavedOrderDto with _$SavedOrderDto {
       billingDocument: saveOrder.billingDocument,
       city: saveOrder.city,
       collectiveNo: saveOrder.collectiveNo,
-      companyName: saveOrder.companyName.getOrCrash(),
+      companyName: saveOrder.companyName.getOrDefaultValue(''),
       contactPerson: saveOrder.contactPerson,
       country: saveOrder.country,
       deliveryDocument: saveOrder.deliveryDocument,
@@ -162,9 +162,9 @@ class SavedOrderDto with _$SavedOrderDto {
       referenceNotes: saveOrder.referenceNotes,
       requestedDeliveryDate: saveOrder.requestedDeliveryDate,
       salesOrganization: saveOrder.salesOrganization,
-      shipToParty: saveOrder.shipToParty.getOrCrash(),
-      shippingCondition: saveOrder.shippingCondition,
-      soldToParty: saveOrder.soldToParty.getOrCrash(),
+      shipToParty: saveOrder.shipToParty.getOrDefaultValue(''),
+      shippingCondition: saveOrder.shippingCondition.getOrDefaultValue(''),
+      soldToParty: saveOrder.soldToParty.getOrDefaultValue(''),
       specialInstructions: saveOrder.specialInstructions,
       totalOrderValue: saveOrder.totalOrderValue,
       totalPrice: saveOrder.totalPrice,
@@ -213,7 +213,7 @@ class _PoDocumentsListConverter
     // we will need to remove 2 characters " first and let jsonDecode do the rest
     return List.from(
       jsonDecode(
-        json.substring(1, json.length - 1),
+        json.substring(1, json.length - 1).replaceAll('\\"', '"'),
       ),
     ).map((e) => PoDocumentsDto.fromJson(e)).toList();
   }

@@ -49,7 +49,7 @@ mixin _$SavedOrder {
   String get phonenumber => throw _privateConstructorUsedError;
   String get orderType => throw _privateConstructorUsedError;
   String get orderReason => throw _privateConstructorUsedError;
-  String get shippingCondition => throw _privateConstructorUsedError;
+  ShippingCondition get shippingCondition => throw _privateConstructorUsedError;
   String get user => throw _privateConstructorUsedError;
   String get contactPerson => throw _privateConstructorUsedError;
   String get referenceNotes => throw _privateConstructorUsedError;
@@ -100,7 +100,7 @@ abstract class $SavedOrderCopyWith<$Res> {
       String phonenumber,
       String orderType,
       String orderReason,
-      String shippingCondition,
+      ShippingCondition shippingCondition,
       String user,
       String contactPerson,
       String referenceNotes,
@@ -295,7 +295,7 @@ class _$SavedOrderCopyWithImpl<$Res, $Val extends SavedOrder>
       shippingCondition: null == shippingCondition
           ? _value.shippingCondition
           : shippingCondition // ignore: cast_nullable_to_non_nullable
-              as String,
+              as ShippingCondition,
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -358,7 +358,7 @@ abstract class _$$_SavedOrderCopyWith<$Res>
       String phonenumber,
       String orderType,
       String orderReason,
-      String shippingCondition,
+      ShippingCondition shippingCondition,
       String user,
       String contactPerson,
       String referenceNotes,
@@ -551,7 +551,7 @@ class __$$_SavedOrderCopyWithImpl<$Res>
       shippingCondition: null == shippingCondition
           ? _value.shippingCondition
           : shippingCondition // ignore: cast_nullable_to_non_nullable
-              as String,
+              as ShippingCondition,
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -690,7 +690,7 @@ class _$_SavedOrder extends _SavedOrder {
   @override
   final String orderReason;
   @override
-  final String shippingCondition;
+  final ShippingCondition shippingCondition;
   @override
   final String user;
   @override
@@ -870,7 +870,7 @@ abstract class _SavedOrder extends SavedOrder {
       required final String phonenumber,
       required final String orderType,
       required final String orderReason,
-      required final String shippingCondition,
+      required final ShippingCondition shippingCondition,
       required final String user,
       required final String contactPerson,
       required final String referenceNotes,
@@ -944,7 +944,7 @@ abstract class _SavedOrder extends SavedOrder {
   @override
   String get orderReason;
   @override
-  String get shippingCondition;
+  ShippingCondition get shippingCondition;
   @override
   String get user;
   @override

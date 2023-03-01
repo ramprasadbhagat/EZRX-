@@ -266,4 +266,17 @@ void main() {
       },
     );
   });
+
+  group('ShippingCondition Value Object', () {
+    test(
+      'isGreenDelivery is true when value is GD ',
+      () {
+        final valObj = ShippingCondition('GD');
+        expect(
+          valObj.isGreenDelivery,
+          true,
+        );
+      },
+    );
+  });
 }

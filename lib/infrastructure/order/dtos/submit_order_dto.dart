@@ -76,7 +76,7 @@ class SubmitOrderDto with _$SubmitOrderDto {
       purchaseOrderType: purchaseOrderType,
       orderType: orderType,
       orderReason: orderReason,
-      shippingCondition: shippingCondition,
+      shippingCondition: ShippingCondition(shippingCondition),
       telephone: telephone,
       referenceNotes: referenceNotes,
       paymentTerms: paymentTerms,
@@ -91,7 +91,7 @@ class SubmitOrderDto with _$SubmitOrderDto {
   factory SubmitOrderDto.fromDomain(SubmitOrder submitOrder, String currency) {
     return SubmitOrderDto(
       userName: submitOrder.userName,
-      companyName: submitOrder.companyName.getOrCrash(),
+      companyName: submitOrder.companyName.getOrDefaultValue(''),
       customer: SubmitOrderCustomerDto.fromDomain(submitOrder.customer),
       poReference: submitOrder.poReference,
       materials: submitOrder.materials
@@ -103,7 +103,7 @@ class SubmitOrderDto with _$SubmitOrderDto {
       purchaseOrderType: submitOrder.purchaseOrderType,
       orderType: submitOrder.orderType,
       orderReason: submitOrder.orderReason,
-      shippingCondition: submitOrder.shippingCondition,
+      shippingCondition: submitOrder.shippingCondition.getOrDefaultValue(''),
       telephone: submitOrder.telephone,
       referenceNotes: submitOrder.referenceNotes,
       paymentTerms: submitOrder.paymentTerms,

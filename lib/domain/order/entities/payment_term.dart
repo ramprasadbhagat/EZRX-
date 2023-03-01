@@ -1,4 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart'
+    as value_object;
+import 'package:collection/collection.dart';
 
 part 'payment_term.freezed.dart';
 
@@ -19,4 +22,28 @@ class PaymentTerm with _$PaymentTerm {
         paymentTermDescription: '',
         paymentTermSubranking: 0,
       );
+
+  String get displayValue => '$paymentTermCode-$paymentTermDescription';
+}
+
+extension PaymentTermListExtension on List<PaymentTerm> {
+  List<String> get display =>
+      where((element) => element.paymentTermCode.isNotEmpty)
+          .map((e) => e.displayValue)
+          .toSet()
+          .toList();
+
+  String? displaySelected(value_object.PaymentTerm paymentTerm) {
+    if (paymentTerm.getOrDefaultValue('').isEmpty) return null;
+
+    final selectedTerm = paymentTerm.getValue();
+    final exactMatchTerm = display.firstWhereOrNull(
+      (term) => term == selectedTerm,
+    );
+    final relativeMatchTerm = display.firstWhereOrNull(
+      (term) => term.contains(selectedTerm),
+    );
+
+    return exactMatchTerm ?? relativeMatchTerm;
+  }
 }

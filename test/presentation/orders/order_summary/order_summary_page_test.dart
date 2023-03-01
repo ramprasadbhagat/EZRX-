@@ -805,9 +805,15 @@ void main() {
             salesOrg: SalesOrg('2601'),
           ),
         ));
+
         when(() => paymentTermBlocMock.state)
             .thenReturn(PaymentTermState.initial().copyWith(
-          paymentTermsDisplayLevels: ['0001-Test'],
+          paymentTerms: [
+            pt.PaymentTerm.empty().copyWith(
+              paymentTermCode: '0001',
+              paymentTermDescription: 'Test',
+            ),
+          ],
         ));
         when(
           () => orderEligibilityBlocMock.state,

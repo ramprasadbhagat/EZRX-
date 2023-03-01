@@ -17,6 +17,8 @@ import 'package:ezrxmobile/infrastructure/order/repository/payment_term_reposito
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart'
+    as value_object;
 
 class PaymentTermsRepoMock extends Mock implements PaymentTermsRepository {}
 
@@ -31,7 +33,6 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late PaymentTermsRepository paymentTermsRepositoryMock;
   late List<PaymentTerm> paymentTermMockData;
-  late List<String> paymentTermDisplayLevelMockData;
 
   final fakeSaleOrganisation = SalesOrganisation.empty().copyWith(
     salesOrg: SalesOrg('fake-1234'),
@@ -114,13 +115,6 @@ void main() {
       paymentTermsRepositoryMock = PaymentTermsRepoMock();
       paymentTermMockData =
           await PaymentTermLocalDataSource().getPaymentTerms();
-      paymentTermDisplayLevelMockData = paymentTermMockData
-          .where((element) => element.paymentTermCode.isNotEmpty)
-          .map((e) {
-            return '${e.paymentTermCode}-${e.paymentTermDescription}';
-          })
-          .toSet()
-          .toList();
       WidgetsFlutterBinding.ensureInitialized();
     });
     blocTest<PaymentTermBloc, PaymentTermState>(
@@ -197,61 +191,40 @@ void main() {
       expect: () => [
         PaymentTermState.initial().copyWith(
           paymentTerms: paymentTermMockData,
-          paymentTermsDisplayLevels: paymentTermDisplayLevelMockData,
           paymentTermsFailureOrSuccessOption: none(),
         )
       ],
     );
 
-    // blocTest<PaymentTermBloc, PaymentTermState>(
-    //   'Payment Terms Fetch Success',
-    //   build: () => PaymentTermBloc(
-    //     customerCodeBloc: customerCodeMockBloc,
-    //     salesOrgBloc: salesOrgMockBloc,
-    //     paymentCustomerInformationBloc: paymentCustomerInformationMockBloc,
-    //     salesRepBloc: salesRepMockBloc,
-    //     userBloc: userMockBloc,
-    //     paymentTermRepository: paymentTermsRepositoryMock,
-    //   ),
-    //   setUp: () {
-    //     when(() => salesOrgMockBloc.state).thenAnswer((invocation) {
-    //       return SalesOrgState.initial().copyWith().copyWith(
-    //           configs: fakeSaleOrgConfig, salesOrganisation: fakeSaleOrg);
-    //     });
-    //     when(() => customerCodeMockBloc.state).thenAnswer((invocation) {
-    //       return CustomerCodeState.initial()
-    //           .copyWith(customeCodeInfo: customerCode);
-    //     });
-    //     when(() => salesRepMockBloc.state).thenAnswer((invocation) {
-    //       return SalesRepState.initial().copyWith(salesRepInfo: salesRepInfo);
-    //     });
-    //     when(() => paymentCustomerInformationMockBloc.state)
-    //         .thenAnswer((invocation) {
-    //       return PaymentCustomerInformationState.initial()
-    //           .copyWith(paymentCustomerInformation: paymentCustomerInformation);
-    //     });
-    //     when(() => userMockBloc.state).thenAnswer((invocation) {
-    //       return UserState.initial();
-    //     });
-    //     when(() => paymentTermsRepositoryMock.getPaymentTerms(
-    //           customerCodeInfo: customerCode,
-    //           salesOrg: fakeSaleOrg.salesOrg,
-    //           salesOrgConfig: fakeSaleOrgConfig,
-    //           paymentCustomerInfo: paymentCustomerInformation,
-    //           salesRepInfo: salesRepInfo,
-    //         )).thenAnswer(
-    //       (invocation) async => Right(
-    //         paymentTermMockData,
-    //       ),
-    //     );
-    //   },
-    //   act: (bloc) => bloc.add(const PaymentTermEvent.fetch()),
-    //   expect: () => [
-    //     PaymentTermState.initial().copyWith(
-    //       paymentTerms: paymentTermMockData,
-    //       paymentTermsFailureOrSuccessOption: none(),
-    //     )
-    //   ],
-    // );
+    blocTest<PaymentTermBloc, PaymentTermState>(
+      'Payment Terms Extension Test',
+      build: () => PaymentTermBloc(
+        paymentTermRepository: paymentTermsRepositoryMock,
+      ),
+      seed: () => PaymentTermState.initial().copyWith(
+        paymentTerms: paymentTermMockData,
+      ),
+      verify: (bloc) {
+        expect(
+          bloc.state.paymentTerms.displaySelected(value_object.PaymentTerm('')),
+          null,
+        );
+        expect(
+          bloc.state.paymentTerms
+              .displaySelected(value_object.PaymentTerm('0001')),
+          '0001-',
+        );
+        expect(
+          bloc.state.paymentTerms.displaySelected(
+              value_object.PaymentTerm('0001-Pay immediately (Standard SAP)')),
+          '0001-Pay immediately (Standard SAP)',
+        );
+        expect(
+          bloc.state.paymentTerms
+              .displaySelected(value_object.PaymentTerm('0002')),
+          null,
+        );
+      },
+    );
   });
 }

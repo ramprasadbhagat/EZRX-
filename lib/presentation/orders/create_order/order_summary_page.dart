@@ -112,6 +112,11 @@ class _BodyContent extends StatelessWidget {
       listener: (context, savedOrderState) {
         if (!savedOrderState.isCreating &&
             savedOrderState.apiFailureOrSuccessOption == none()) {
+          showSnackBar(
+            context: context,
+            message: 'Saved order updated successfully'.tr(),
+          );
+
           context.router.pushAndPopUntil(
             const SavedOrderListPageRoute(),
             predicate: (route) =>
@@ -214,7 +219,8 @@ class _SubmitContinueButton extends StatelessWidget {
           salesOrganisation:
               context.read<SalesOrgBloc>().state.salesOrganisation,
           user: context.read<UserBloc>().state.user,
-          cartItems: context.read<CartBloc>().state.selectedCartItems.allMaterials,
+          cartItems:
+              context.read<CartBloc>().state.selectedCartItems.allMaterials,
           grandTotal: context.read<CartBloc>().state.grandTotal,
           orderType: context
               .read<OrderDocumentTypeBloc>()

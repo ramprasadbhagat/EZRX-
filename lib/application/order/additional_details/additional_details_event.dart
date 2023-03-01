@@ -26,7 +26,7 @@ class AdditionalDetailsEvent with _$AdditionalDetailsEvent {
   }) = _AdditionalDetailsRemovePoDocument;
   const factory AdditionalDetailsEvent.removeAllPoDocument() =
       _AdditionalDetailsRemoveAllPoDocument;
-  const factory AdditionalDetailsEvent.toggleGreenDelivery(bool value) =
+  const factory AdditionalDetailsEvent.toggleGreenDelivery() =
       _AdditionalDetailsToggleGreenDelivery;
   const factory AdditionalDetailsEvent.clearSavedOrderId() =
       _AdditionalDetailsClearSavedOrderId;

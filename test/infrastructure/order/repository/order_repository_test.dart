@@ -325,7 +325,7 @@ void main() {
             ? '730'
             : '',
         purchaseOrderType: 'MRXC', //user.role.type.purchaseOrderType,
-        shippingCondition: '',
+        shippingCondition: ShippingCondition(''),
         paymentTerms: <PriceAggregate>[
           PriceAggregate.empty().copyWith(
             quantity: 2,
@@ -505,7 +505,7 @@ void main() {
             ? '730'
             : '',
         purchaseOrderType: 'MRXC', //user.role.type.purchaseOrderType,
-        shippingCondition: '',
+        shippingCondition: ShippingCondition(''),
         paymentTerms: <PriceAggregate>[
           PriceAggregate.empty().copyWith(
             quantity: 2,
@@ -641,7 +641,7 @@ void main() {
             ? '730'
             : '',
         purchaseOrderType: 'MRXC', //user.role.type.purchaseOrderType,
-        shippingCondition: 'GD',
+        shippingCondition: ShippingCondition.greenDelivery(),
         paymentTerms: <PriceAggregate>[
           PriceAggregate.empty().copyWith(
             quantity: 2,

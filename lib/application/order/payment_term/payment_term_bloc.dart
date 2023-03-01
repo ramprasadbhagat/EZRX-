@@ -45,18 +45,10 @@ class PaymentTermBloc extends Bloc<PaymentTermEvent, PaymentTermState> {
             ),
           ),
           (paymentTerms) {
-            final paymentTermsDisplayLevels = paymentTerms
-                .where((element) => element.paymentTermCode.isNotEmpty)
-                .map((e) {
-                  return '${e.paymentTermCode}-${e.paymentTermDescription}';
-                })
-                .toSet()
-                .toList();
             emit(
               state.copyWith(
                 paymentTermsFailureOrSuccessOption: none(),
                 paymentTerms: paymentTerms,
-                paymentTermsDisplayLevels: paymentTermsDisplayLevels,
               ),
             );
           },

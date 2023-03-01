@@ -46,6 +46,7 @@ class AdditionalDetailsData with _$AdditionalDetailsData {
       deliveryDate: orderDeliveryDate.isEmpty
           ? defaultDeliveryDate
           : DeliveryDate(orderDeliveryDate),
+      greenDeliveryEnabled: orderDetail.shippingCondition.isGreenDelivery,
     );
   }
 

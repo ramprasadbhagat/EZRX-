@@ -322,7 +322,7 @@ void main() {
           ),
         ),
         act: (AdditionalDetailsBloc bloc) {
-          bloc.add(const AdditionalDetailsEvent.toggleGreenDelivery(true));
+          bloc.add(const AdditionalDetailsEvent.toggleGreenDelivery());
         },
         expect: () => [
           AdditionalDetailsState.initial().copyWith(
@@ -352,7 +352,7 @@ void main() {
           ),
         ),
         act: (AdditionalDetailsBloc bloc) {
-          bloc.add(const AdditionalDetailsEvent.toggleGreenDelivery(false));
+          bloc.add(const AdditionalDetailsEvent.toggleGreenDelivery());
         },
         expect: () => [
           AdditionalDetailsState.initial().copyWith(

@@ -487,8 +487,6 @@ abstract class _Fetch implements PaymentTermEvent {
 /// @nodoc
 mixin _$PaymentTermState {
   List<PaymentTerm> get paymentTerms => throw _privateConstructorUsedError;
-  List<String> get paymentTermsDisplayLevels =>
-      throw _privateConstructorUsedError;
   bool get isFetching => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get paymentTermsFailureOrSuccessOption =>
       throw _privateConstructorUsedError;
@@ -506,7 +504,6 @@ abstract class $PaymentTermStateCopyWith<$Res> {
   @useResult
   $Res call(
       {List<PaymentTerm> paymentTerms,
-      List<String> paymentTermsDisplayLevels,
       bool isFetching,
       Option<Either<ApiFailure, dynamic>> paymentTermsFailureOrSuccessOption});
 }
@@ -525,7 +522,6 @@ class _$PaymentTermStateCopyWithImpl<$Res, $Val extends PaymentTermState>
   @override
   $Res call({
     Object? paymentTerms = null,
-    Object? paymentTermsDisplayLevels = null,
     Object? isFetching = null,
     Object? paymentTermsFailureOrSuccessOption = null,
   }) {
@@ -534,10 +530,6 @@ class _$PaymentTermStateCopyWithImpl<$Res, $Val extends PaymentTermState>
           ? _value.paymentTerms
           : paymentTerms // ignore: cast_nullable_to_non_nullable
               as List<PaymentTerm>,
-      paymentTermsDisplayLevels: null == paymentTermsDisplayLevels
-          ? _value.paymentTermsDisplayLevels
-          : paymentTermsDisplayLevels // ignore: cast_nullable_to_non_nullable
-              as List<String>,
       isFetching: null == isFetching
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
@@ -561,7 +553,6 @@ abstract class _$$_PaymentTermStateCopyWith<$Res>
   @useResult
   $Res call(
       {List<PaymentTerm> paymentTerms,
-      List<String> paymentTermsDisplayLevels,
       bool isFetching,
       Option<Either<ApiFailure, dynamic>> paymentTermsFailureOrSuccessOption});
 }
@@ -578,7 +569,6 @@ class __$$_PaymentTermStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? paymentTerms = null,
-    Object? paymentTermsDisplayLevels = null,
     Object? isFetching = null,
     Object? paymentTermsFailureOrSuccessOption = null,
   }) {
@@ -587,10 +577,6 @@ class __$$_PaymentTermStateCopyWithImpl<$Res>
           ? _value._paymentTerms
           : paymentTerms // ignore: cast_nullable_to_non_nullable
               as List<PaymentTerm>,
-      paymentTermsDisplayLevels: null == paymentTermsDisplayLevels
-          ? _value._paymentTermsDisplayLevels
-          : paymentTermsDisplayLevels // ignore: cast_nullable_to_non_nullable
-              as List<String>,
       isFetching: null == isFetching
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
@@ -606,27 +592,19 @@ class __$$_PaymentTermStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_PaymentTermState implements _PaymentTermState {
+class _$_PaymentTermState extends _PaymentTermState {
   const _$_PaymentTermState(
       {required final List<PaymentTerm> paymentTerms,
-      required final List<String> paymentTermsDisplayLevels,
       required this.isFetching,
       required this.paymentTermsFailureOrSuccessOption})
       : _paymentTerms = paymentTerms,
-        _paymentTermsDisplayLevels = paymentTermsDisplayLevels;
+        super._();
 
   final List<PaymentTerm> _paymentTerms;
   @override
   List<PaymentTerm> get paymentTerms {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_paymentTerms);
-  }
-
-  final List<String> _paymentTermsDisplayLevels;
-  @override
-  List<String> get paymentTermsDisplayLevels {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_paymentTermsDisplayLevels);
   }
 
   @override
@@ -636,7 +614,7 @@ class _$_PaymentTermState implements _PaymentTermState {
 
   @override
   String toString() {
-    return 'PaymentTermState(paymentTerms: $paymentTerms, paymentTermsDisplayLevels: $paymentTermsDisplayLevels, isFetching: $isFetching, paymentTermsFailureOrSuccessOption: $paymentTermsFailureOrSuccessOption)';
+    return 'PaymentTermState(paymentTerms: $paymentTerms, isFetching: $isFetching, paymentTermsFailureOrSuccessOption: $paymentTermsFailureOrSuccessOption)';
   }
 
   @override
@@ -646,8 +624,6 @@ class _$_PaymentTermState implements _PaymentTermState {
             other is _$_PaymentTermState &&
             const DeepCollectionEquality()
                 .equals(other._paymentTerms, _paymentTerms) &&
-            const DeepCollectionEquality().equals(
-                other._paymentTermsDisplayLevels, _paymentTermsDisplayLevels) &&
             (identical(other.isFetching, isFetching) ||
                 other.isFetching == isFetching) &&
             (identical(other.paymentTermsFailureOrSuccessOption,
@@ -660,7 +636,6 @@ class _$_PaymentTermState implements _PaymentTermState {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(_paymentTerms),
-      const DeepCollectionEquality().hash(_paymentTermsDisplayLevels),
       isFetching,
       paymentTermsFailureOrSuccessOption);
 
@@ -671,18 +646,16 @@ class _$_PaymentTermState implements _PaymentTermState {
       __$$_PaymentTermStateCopyWithImpl<_$_PaymentTermState>(this, _$identity);
 }
 
-abstract class _PaymentTermState implements PaymentTermState {
+abstract class _PaymentTermState extends PaymentTermState {
   const factory _PaymentTermState(
       {required final List<PaymentTerm> paymentTerms,
-      required final List<String> paymentTermsDisplayLevels,
       required final bool isFetching,
       required final Option<Either<ApiFailure, dynamic>>
           paymentTermsFailureOrSuccessOption}) = _$_PaymentTermState;
+  const _PaymentTermState._() : super._();
 
   @override
   List<PaymentTerm> get paymentTerms;
-  @override
-  List<String> get paymentTermsDisplayLevels;
   @override
   bool get isFetching;
   @override

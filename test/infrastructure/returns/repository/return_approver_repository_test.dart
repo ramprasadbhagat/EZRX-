@@ -137,17 +137,16 @@ void main() {
         'Remote Success getReturnRequests',
         () async {
           when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
-          when(() => approverReturnRequestsRemoteMock.getReturns(
-              filterQuery: {
+          when(() => approverReturnRequestsRemoteMock.getReturns(filterQuery: {
                     'status': 'PENDING',
-                    'dateTo': DateTimeStringValue(getDateStringByDateTime(fakeToDate))
+                    'dateTo':
+                        DateTimeStringValue(getDateStringByDateTime(fakeToDate))
+                            .apiDateTimeFormat,
+                    'dateFrom': DateTimeStringValue(
+                            getDateStringByDateTime(fakeFromDate))
                         .apiDateTimeFormat,
-                    'dateFrom': DateTimeStringValue(getDateStringByDateTime(fakeFromDate))
-                        .apiDateTimeFormat,
-                  },
-              offset: 0,
-              pageSize: 11,
-              username: 'Fake-username')).thenAnswer(
+                  }, offset: 0, pageSize: 11, username: 'Fake-username'))
+              .thenAnswer(
             (invocation) async => [
               ApproverReturnRequestsId(requestId: 'fake-requestId'),
             ],
@@ -172,17 +171,15 @@ void main() {
         'Remote fail getReturnRequests',
         () async {
           when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
-          when(() => approverReturnRequestsRemoteMock.getReturns(
-                  filterQuery: {
+          when(() => approverReturnRequestsRemoteMock.getReturns(filterQuery: {
                     'status': 'PENDING',
-                    'dateTo': DateTimeStringValue(getDateStringByDateTime(fakeToDate))
+                    'dateTo':
+                        DateTimeStringValue(getDateStringByDateTime(fakeToDate))
+                            .apiDateTimeFormat,
+                    'dateFrom': DateTimeStringValue(
+                            getDateStringByDateTime(fakeFromDate))
                         .apiDateTimeFormat,
-                    'dateFrom': DateTimeStringValue(getDateStringByDateTime(fakeFromDate))
-                        .apiDateTimeFormat,
-                  },
-                  offset: 0,
-                  pageSize: 11,
-                  username: 'Fake-username'))
+                  }, offset: 0, pageSize: 11, username: 'Fake-username'))
               .thenThrow(const ApiFailure.serverTimeout());
 
           final result = await returnApproverRepository.getReturnRequests(

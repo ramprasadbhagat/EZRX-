@@ -59,6 +59,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
                 isFetching: false,
               ),
             );
+            add(const _ClearCart());
 
             return;
           }

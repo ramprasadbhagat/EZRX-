@@ -27,7 +27,7 @@ mixin _$SubmitOrder {
   String get purchaseOrderType => throw _privateConstructorUsedError;
   String get orderType => throw _privateConstructorUsedError;
   String get orderReason => throw _privateConstructorUsedError;
-  String get shippingCondition => throw _privateConstructorUsedError;
+  ShippingCondition get shippingCondition => throw _privateConstructorUsedError;
   String get telephone => throw _privateConstructorUsedError;
   String get referenceNotes => throw _privateConstructorUsedError;
   String get paymentTerms => throw _privateConstructorUsedError;
@@ -60,7 +60,7 @@ abstract class $SubmitOrderCopyWith<$Res> {
       String purchaseOrderType,
       String orderType,
       String orderReason,
-      String shippingCondition,
+      ShippingCondition shippingCondition,
       String telephone,
       String referenceNotes,
       String paymentTerms,
@@ -155,7 +155,7 @@ class _$SubmitOrderCopyWithImpl<$Res, $Val extends SubmitOrder>
       shippingCondition: null == shippingCondition
           ? _value.shippingCondition
           : shippingCondition // ignore: cast_nullable_to_non_nullable
-              as String,
+              as ShippingCondition,
       telephone: null == telephone
           ? _value.telephone
           : telephone // ignore: cast_nullable_to_non_nullable
@@ -220,7 +220,7 @@ abstract class _$$_SubmitOrderCustomerCopyWith<$Res>
       String purchaseOrderType,
       String orderType,
       String orderReason,
-      String shippingCondition,
+      ShippingCondition shippingCondition,
       String telephone,
       String referenceNotes,
       String paymentTerms,
@@ -314,7 +314,7 @@ class __$$_SubmitOrderCustomerCopyWithImpl<$Res>
       shippingCondition: null == shippingCondition
           ? _value.shippingCondition
           : shippingCondition // ignore: cast_nullable_to_non_nullable
-              as String,
+              as ShippingCondition,
       telephone: null == telephone
           ? _value.telephone
           : telephone // ignore: cast_nullable_to_non_nullable
@@ -407,7 +407,7 @@ class _$_SubmitOrderCustomer extends _SubmitOrderCustomer {
   @override
   final String orderReason;
   @override
-  final String shippingCondition;
+  final ShippingCondition shippingCondition;
   @override
   final String telephone;
   @override
@@ -526,7 +526,7 @@ abstract class _SubmitOrderCustomer extends SubmitOrder {
       required final String purchaseOrderType,
       required final String orderType,
       required final String orderReason,
-      required final String shippingCondition,
+      required final ShippingCondition shippingCondition,
       required final String telephone,
       required final String referenceNotes,
       required final String paymentTerms,
@@ -560,7 +560,7 @@ abstract class _SubmitOrderCustomer extends SubmitOrder {
   @override
   String get orderReason;
   @override
-  String get shippingCondition;
+  ShippingCondition get shippingCondition;
   @override
   String get telephone;
   @override

@@ -322,6 +322,9 @@ class OrderRepository implements IOrderRepository {
     //bonus calculation
 
     return SavedOrder.empty().copyWith(
+      shippingCondition: data.greenDeliveryEnabled
+          ? ShippingCondition.greenDelivery()
+          : ShippingCondition(''),
       requestedDeliveryDate: data.deliveryDate.getValue(),
       deliveryDocument: shipToInfo.shipToName.name1,
       billingDocument: customerCodeInfo.customerName.name1,
@@ -387,7 +390,9 @@ class OrderRepository implements IOrderRepository {
           ? '730'
           : '',
       purchaseOrderType: user.role.type.purchaseOrderType,
-      shippingCondition: data.greenDeliveryEnabled ? 'GD' : '',
+      shippingCondition: data.greenDeliveryEnabled
+          ? ShippingCondition.greenDelivery()
+          : ShippingCondition(''),
       paymentTerms: _getPaymentTerms(cartItems: cartItems, data: data),
       customer: _getSubmitOrderCustomer(
         customerCodeInfo: customerCodeInfo,

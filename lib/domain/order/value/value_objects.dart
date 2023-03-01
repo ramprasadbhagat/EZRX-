@@ -745,6 +745,23 @@ class SAPStatus extends ValueObject<String> {
   const SAPStatus._(this.value);
 }
 
+class ShippingCondition extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory ShippingCondition(String input) {
+    return ShippingCondition._(Right(input));
+  }
+
+  factory ShippingCondition.greenDelivery() => ShippingCondition('GD');
+
+  bool get isGreenDelivery {
+    return value.getOrElse(() => '') == 'GD';
+  }
+
+  const ShippingCondition._(this.value);
+}
+
 class FlexibleGroup extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;

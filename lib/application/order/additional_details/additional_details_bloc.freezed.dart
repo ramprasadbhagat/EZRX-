@@ -30,7 +30,7 @@ mixin _$AdditionalDetailsEvent {
     required TResult Function(List<PoDocuments> poDocuments) addPoDocument,
     required TResult Function(PoDocuments poDocument) removePoDocument,
     required TResult Function() removeAllPoDocument,
-    required TResult Function(bool value) toggleGreenDelivery,
+    required TResult Function() toggleGreenDelivery,
     required TResult Function() clearSavedOrderId,
     required TResult Function(
             AdditionalDetailsData data, CustomerCodeInfo customerCodeInfo)
@@ -51,7 +51,7 @@ mixin _$AdditionalDetailsEvent {
     TResult? Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult? Function(PoDocuments poDocument)? removePoDocument,
     TResult? Function()? removeAllPoDocument,
-    TResult? Function(bool value)? toggleGreenDelivery,
+    TResult? Function()? toggleGreenDelivery,
     TResult? Function()? clearSavedOrderId,
     TResult? Function(
             AdditionalDetailsData data, CustomerCodeInfo customerCodeInfo)?
@@ -72,7 +72,7 @@ mixin _$AdditionalDetailsEvent {
     TResult Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult Function(PoDocuments poDocument)? removePoDocument,
     TResult Function()? removeAllPoDocument,
-    TResult Function(bool value)? toggleGreenDelivery,
+    TResult Function()? toggleGreenDelivery,
     TResult Function()? clearSavedOrderId,
     TResult Function(
             AdditionalDetailsData data, CustomerCodeInfo customerCodeInfo)?
@@ -267,7 +267,7 @@ class _$_Initialized implements _Initialized {
     required TResult Function(List<PoDocuments> poDocuments) addPoDocument,
     required TResult Function(PoDocuments poDocument) removePoDocument,
     required TResult Function() removeAllPoDocument,
-    required TResult Function(bool value) toggleGreenDelivery,
+    required TResult Function() toggleGreenDelivery,
     required TResult Function() clearSavedOrderId,
     required TResult Function(
             AdditionalDetailsData data, CustomerCodeInfo customerCodeInfo)
@@ -291,7 +291,7 @@ class _$_Initialized implements _Initialized {
     TResult? Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult? Function(PoDocuments poDocument)? removePoDocument,
     TResult? Function()? removeAllPoDocument,
-    TResult? Function(bool value)? toggleGreenDelivery,
+    TResult? Function()? toggleGreenDelivery,
     TResult? Function()? clearSavedOrderId,
     TResult? Function(
             AdditionalDetailsData data, CustomerCodeInfo customerCodeInfo)?
@@ -315,7 +315,7 @@ class _$_Initialized implements _Initialized {
     TResult Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult Function(PoDocuments poDocument)? removePoDocument,
     TResult Function()? removeAllPoDocument,
-    TResult Function(bool value)? toggleGreenDelivery,
+    TResult Function()? toggleGreenDelivery,
     TResult Function()? clearSavedOrderId,
     TResult Function(
             AdditionalDetailsData data, CustomerCodeInfo customerCodeInfo)?
@@ -534,7 +534,7 @@ class _$_InitFromSavedOrder implements _InitFromSavedOrder {
     required TResult Function(List<PoDocuments> poDocuments) addPoDocument,
     required TResult Function(PoDocuments poDocument) removePoDocument,
     required TResult Function() removeAllPoDocument,
-    required TResult Function(bool value) toggleGreenDelivery,
+    required TResult Function() toggleGreenDelivery,
     required TResult Function() clearSavedOrderId,
     required TResult Function(
             AdditionalDetailsData data, CustomerCodeInfo customerCodeInfo)
@@ -558,7 +558,7 @@ class _$_InitFromSavedOrder implements _InitFromSavedOrder {
     TResult? Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult? Function(PoDocuments poDocument)? removePoDocument,
     TResult? Function()? removeAllPoDocument,
-    TResult? Function(bool value)? toggleGreenDelivery,
+    TResult? Function()? toggleGreenDelivery,
     TResult? Function()? clearSavedOrderId,
     TResult? Function(
             AdditionalDetailsData data, CustomerCodeInfo customerCodeInfo)?
@@ -582,7 +582,7 @@ class _$_InitFromSavedOrder implements _InitFromSavedOrder {
     TResult Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult Function(PoDocuments poDocument)? removePoDocument,
     TResult Function()? removeAllPoDocument,
-    TResult Function(bool value)? toggleGreenDelivery,
+    TResult Function()? toggleGreenDelivery,
     TResult Function()? clearSavedOrderId,
     TResult Function(
             AdditionalDetailsData data, CustomerCodeInfo customerCodeInfo)?
@@ -774,7 +774,7 @@ class _$_AdditionalDetailsTextOnChange
     required TResult Function(List<PoDocuments> poDocuments) addPoDocument,
     required TResult Function(PoDocuments poDocument) removePoDocument,
     required TResult Function() removeAllPoDocument,
-    required TResult Function(bool value) toggleGreenDelivery,
+    required TResult Function() toggleGreenDelivery,
     required TResult Function() clearSavedOrderId,
     required TResult Function(
             AdditionalDetailsData data, CustomerCodeInfo customerCodeInfo)
@@ -798,7 +798,7 @@ class _$_AdditionalDetailsTextOnChange
     TResult? Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult? Function(PoDocuments poDocument)? removePoDocument,
     TResult? Function()? removeAllPoDocument,
-    TResult? Function(bool value)? toggleGreenDelivery,
+    TResult? Function()? toggleGreenDelivery,
     TResult? Function()? clearSavedOrderId,
     TResult? Function(
             AdditionalDetailsData data, CustomerCodeInfo customerCodeInfo)?
@@ -822,7 +822,7 @@ class _$_AdditionalDetailsTextOnChange
     TResult Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult Function(PoDocuments poDocument)? removePoDocument,
     TResult Function()? removeAllPoDocument,
-    TResult Function(bool value)? toggleGreenDelivery,
+    TResult Function()? toggleGreenDelivery,
     TResult Function()? clearSavedOrderId,
     TResult Function(
             AdditionalDetailsData data, CustomerCodeInfo customerCodeInfo)?
@@ -1013,7 +1013,7 @@ class _$_AdditionalDetailsValidateForm
     required TResult Function(List<PoDocuments> poDocuments) addPoDocument,
     required TResult Function(PoDocuments poDocument) removePoDocument,
     required TResult Function() removeAllPoDocument,
-    required TResult Function(bool value) toggleGreenDelivery,
+    required TResult Function() toggleGreenDelivery,
     required TResult Function() clearSavedOrderId,
     required TResult Function(
             AdditionalDetailsData data, CustomerCodeInfo customerCodeInfo)
@@ -1037,7 +1037,7 @@ class _$_AdditionalDetailsValidateForm
     TResult? Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult? Function(PoDocuments poDocument)? removePoDocument,
     TResult? Function()? removeAllPoDocument,
-    TResult? Function(bool value)? toggleGreenDelivery,
+    TResult? Function()? toggleGreenDelivery,
     TResult? Function()? clearSavedOrderId,
     TResult? Function(
             AdditionalDetailsData data, CustomerCodeInfo customerCodeInfo)?
@@ -1061,7 +1061,7 @@ class _$_AdditionalDetailsValidateForm
     TResult Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult Function(PoDocuments poDocument)? removePoDocument,
     TResult Function()? removeAllPoDocument,
-    TResult Function(bool value)? toggleGreenDelivery,
+    TResult Function()? toggleGreenDelivery,
     TResult Function()? clearSavedOrderId,
     TResult Function(
             AdditionalDetailsData data, CustomerCodeInfo customerCodeInfo)?
@@ -1249,7 +1249,7 @@ class _$_AdditionalDetailsAddPoDocument
     required TResult Function(List<PoDocuments> poDocuments) addPoDocument,
     required TResult Function(PoDocuments poDocument) removePoDocument,
     required TResult Function() removeAllPoDocument,
-    required TResult Function(bool value) toggleGreenDelivery,
+    required TResult Function() toggleGreenDelivery,
     required TResult Function() clearSavedOrderId,
     required TResult Function(
             AdditionalDetailsData data, CustomerCodeInfo customerCodeInfo)
@@ -1273,7 +1273,7 @@ class _$_AdditionalDetailsAddPoDocument
     TResult? Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult? Function(PoDocuments poDocument)? removePoDocument,
     TResult? Function()? removeAllPoDocument,
-    TResult? Function(bool value)? toggleGreenDelivery,
+    TResult? Function()? toggleGreenDelivery,
     TResult? Function()? clearSavedOrderId,
     TResult? Function(
             AdditionalDetailsData data, CustomerCodeInfo customerCodeInfo)?
@@ -1297,7 +1297,7 @@ class _$_AdditionalDetailsAddPoDocument
     TResult Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult Function(PoDocuments poDocument)? removePoDocument,
     TResult Function()? removeAllPoDocument,
-    TResult Function(bool value)? toggleGreenDelivery,
+    TResult Function()? toggleGreenDelivery,
     TResult Function()? clearSavedOrderId,
     TResult Function(
             AdditionalDetailsData data, CustomerCodeInfo customerCodeInfo)?
@@ -1489,7 +1489,7 @@ class _$_AdditionalDetailsRemovePoDocument
     required TResult Function(List<PoDocuments> poDocuments) addPoDocument,
     required TResult Function(PoDocuments poDocument) removePoDocument,
     required TResult Function() removeAllPoDocument,
-    required TResult Function(bool value) toggleGreenDelivery,
+    required TResult Function() toggleGreenDelivery,
     required TResult Function() clearSavedOrderId,
     required TResult Function(
             AdditionalDetailsData data, CustomerCodeInfo customerCodeInfo)
@@ -1513,7 +1513,7 @@ class _$_AdditionalDetailsRemovePoDocument
     TResult? Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult? Function(PoDocuments poDocument)? removePoDocument,
     TResult? Function()? removeAllPoDocument,
-    TResult? Function(bool value)? toggleGreenDelivery,
+    TResult? Function()? toggleGreenDelivery,
     TResult? Function()? clearSavedOrderId,
     TResult? Function(
             AdditionalDetailsData data, CustomerCodeInfo customerCodeInfo)?
@@ -1537,7 +1537,7 @@ class _$_AdditionalDetailsRemovePoDocument
     TResult Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult Function(PoDocuments poDocument)? removePoDocument,
     TResult Function()? removeAllPoDocument,
-    TResult Function(bool value)? toggleGreenDelivery,
+    TResult Function()? toggleGreenDelivery,
     TResult Function()? clearSavedOrderId,
     TResult Function(
             AdditionalDetailsData data, CustomerCodeInfo customerCodeInfo)?
@@ -1692,7 +1692,7 @@ class _$_AdditionalDetailsRemoveAllPoDocument
     required TResult Function(List<PoDocuments> poDocuments) addPoDocument,
     required TResult Function(PoDocuments poDocument) removePoDocument,
     required TResult Function() removeAllPoDocument,
-    required TResult Function(bool value) toggleGreenDelivery,
+    required TResult Function() toggleGreenDelivery,
     required TResult Function() clearSavedOrderId,
     required TResult Function(
             AdditionalDetailsData data, CustomerCodeInfo customerCodeInfo)
@@ -1716,7 +1716,7 @@ class _$_AdditionalDetailsRemoveAllPoDocument
     TResult? Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult? Function(PoDocuments poDocument)? removePoDocument,
     TResult? Function()? removeAllPoDocument,
-    TResult? Function(bool value)? toggleGreenDelivery,
+    TResult? Function()? toggleGreenDelivery,
     TResult? Function()? clearSavedOrderId,
     TResult? Function(
             AdditionalDetailsData data, CustomerCodeInfo customerCodeInfo)?
@@ -1740,7 +1740,7 @@ class _$_AdditionalDetailsRemoveAllPoDocument
     TResult Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult Function(PoDocuments poDocument)? removePoDocument,
     TResult Function()? removeAllPoDocument,
-    TResult Function(bool value)? toggleGreenDelivery,
+    TResult Function()? toggleGreenDelivery,
     TResult Function()? clearSavedOrderId,
     TResult Function(
             AdditionalDetailsData data, CustomerCodeInfo customerCodeInfo)?
@@ -1839,8 +1839,6 @@ abstract class _$$_AdditionalDetailsToggleGreenDeliveryCopyWith<$Res> {
           _$_AdditionalDetailsToggleGreenDelivery value,
           $Res Function(_$_AdditionalDetailsToggleGreenDelivery) then) =
       __$$_AdditionalDetailsToggleGreenDeliveryCopyWithImpl<$Res>;
-  @useResult
-  $Res call({bool value});
 }
 
 /// @nodoc
@@ -1852,53 +1850,28 @@ class __$$_AdditionalDetailsToggleGreenDeliveryCopyWithImpl<$Res>
       _$_AdditionalDetailsToggleGreenDelivery _value,
       $Res Function(_$_AdditionalDetailsToggleGreenDelivery) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? value = null,
-  }) {
-    return _then(_$_AdditionalDetailsToggleGreenDelivery(
-      null == value
-          ? _value.value
-          : value // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$_AdditionalDetailsToggleGreenDelivery
     implements _AdditionalDetailsToggleGreenDelivery {
-  const _$_AdditionalDetailsToggleGreenDelivery(this.value);
-
-  @override
-  final bool value;
+  const _$_AdditionalDetailsToggleGreenDelivery();
 
   @override
   String toString() {
-    return 'AdditionalDetailsEvent.toggleGreenDelivery(value: $value)';
+    return 'AdditionalDetailsEvent.toggleGreenDelivery()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AdditionalDetailsToggleGreenDelivery &&
-            (identical(other.value, value) || other.value == value));
+            other is _$_AdditionalDetailsToggleGreenDelivery);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, value);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_AdditionalDetailsToggleGreenDeliveryCopyWith<
-          _$_AdditionalDetailsToggleGreenDelivery>
-      get copyWith => __$$_AdditionalDetailsToggleGreenDeliveryCopyWithImpl<
-          _$_AdditionalDetailsToggleGreenDelivery>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
@@ -1915,13 +1888,13 @@ class _$_AdditionalDetailsToggleGreenDelivery
     required TResult Function(List<PoDocuments> poDocuments) addPoDocument,
     required TResult Function(PoDocuments poDocument) removePoDocument,
     required TResult Function() removeAllPoDocument,
-    required TResult Function(bool value) toggleGreenDelivery,
+    required TResult Function() toggleGreenDelivery,
     required TResult Function() clearSavedOrderId,
     required TResult Function(
             AdditionalDetailsData data, CustomerCodeInfo customerCodeInfo)
         initiateFromHistory,
   }) {
-    return toggleGreenDelivery(value);
+    return toggleGreenDelivery();
   }
 
   @override
@@ -1939,13 +1912,13 @@ class _$_AdditionalDetailsToggleGreenDelivery
     TResult? Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult? Function(PoDocuments poDocument)? removePoDocument,
     TResult? Function()? removeAllPoDocument,
-    TResult? Function(bool value)? toggleGreenDelivery,
+    TResult? Function()? toggleGreenDelivery,
     TResult? Function()? clearSavedOrderId,
     TResult? Function(
             AdditionalDetailsData data, CustomerCodeInfo customerCodeInfo)?
         initiateFromHistory,
   }) {
-    return toggleGreenDelivery?.call(value);
+    return toggleGreenDelivery?.call();
   }
 
   @override
@@ -1963,7 +1936,7 @@ class _$_AdditionalDetailsToggleGreenDelivery
     TResult Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult Function(PoDocuments poDocument)? removePoDocument,
     TResult Function()? removeAllPoDocument,
-    TResult Function(bool value)? toggleGreenDelivery,
+    TResult Function()? toggleGreenDelivery,
     TResult Function()? clearSavedOrderId,
     TResult Function(
             AdditionalDetailsData data, CustomerCodeInfo customerCodeInfo)?
@@ -1971,7 +1944,7 @@ class _$_AdditionalDetailsToggleGreenDelivery
     required TResult orElse(),
   }) {
     if (toggleGreenDelivery != null) {
-      return toggleGreenDelivery(value);
+      return toggleGreenDelivery();
     }
     return orElse();
   }
@@ -2052,14 +2025,8 @@ class _$_AdditionalDetailsToggleGreenDelivery
 
 abstract class _AdditionalDetailsToggleGreenDelivery
     implements AdditionalDetailsEvent {
-  const factory _AdditionalDetailsToggleGreenDelivery(final bool value) =
+  const factory _AdditionalDetailsToggleGreenDelivery() =
       _$_AdditionalDetailsToggleGreenDelivery;
-
-  bool get value;
-  @JsonKey(ignore: true)
-  _$$_AdditionalDetailsToggleGreenDeliveryCopyWith<
-          _$_AdditionalDetailsToggleGreenDelivery>
-      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -2117,7 +2084,7 @@ class _$_AdditionalDetailsClearSavedOrderId
     required TResult Function(List<PoDocuments> poDocuments) addPoDocument,
     required TResult Function(PoDocuments poDocument) removePoDocument,
     required TResult Function() removeAllPoDocument,
-    required TResult Function(bool value) toggleGreenDelivery,
+    required TResult Function() toggleGreenDelivery,
     required TResult Function() clearSavedOrderId,
     required TResult Function(
             AdditionalDetailsData data, CustomerCodeInfo customerCodeInfo)
@@ -2141,7 +2108,7 @@ class _$_AdditionalDetailsClearSavedOrderId
     TResult? Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult? Function(PoDocuments poDocument)? removePoDocument,
     TResult? Function()? removeAllPoDocument,
-    TResult? Function(bool value)? toggleGreenDelivery,
+    TResult? Function()? toggleGreenDelivery,
     TResult? Function()? clearSavedOrderId,
     TResult? Function(
             AdditionalDetailsData data, CustomerCodeInfo customerCodeInfo)?
@@ -2165,7 +2132,7 @@ class _$_AdditionalDetailsClearSavedOrderId
     TResult Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult Function(PoDocuments poDocument)? removePoDocument,
     TResult Function()? removeAllPoDocument,
-    TResult Function(bool value)? toggleGreenDelivery,
+    TResult Function()? toggleGreenDelivery,
     TResult Function()? clearSavedOrderId,
     TResult Function(
             AdditionalDetailsData data, CustomerCodeInfo customerCodeInfo)?
@@ -2369,7 +2336,7 @@ class _$_AdditionalDetailsInitiateFromHistory
     required TResult Function(List<PoDocuments> poDocuments) addPoDocument,
     required TResult Function(PoDocuments poDocument) removePoDocument,
     required TResult Function() removeAllPoDocument,
-    required TResult Function(bool value) toggleGreenDelivery,
+    required TResult Function() toggleGreenDelivery,
     required TResult Function() clearSavedOrderId,
     required TResult Function(
             AdditionalDetailsData data, CustomerCodeInfo customerCodeInfo)
@@ -2393,7 +2360,7 @@ class _$_AdditionalDetailsInitiateFromHistory
     TResult? Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult? Function(PoDocuments poDocument)? removePoDocument,
     TResult? Function()? removeAllPoDocument,
-    TResult? Function(bool value)? toggleGreenDelivery,
+    TResult? Function()? toggleGreenDelivery,
     TResult? Function()? clearSavedOrderId,
     TResult? Function(
             AdditionalDetailsData data, CustomerCodeInfo customerCodeInfo)?
@@ -2417,7 +2384,7 @@ class _$_AdditionalDetailsInitiateFromHistory
     TResult Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult Function(PoDocuments poDocument)? removePoDocument,
     TResult Function()? removeAllPoDocument,
-    TResult Function(bool value)? toggleGreenDelivery,
+    TResult Function()? toggleGreenDelivery,
     TResult Function()? clearSavedOrderId,
     TResult Function(
             AdditionalDetailsData data, CustomerCodeInfo customerCodeInfo)?

@@ -5,6 +5,7 @@ import 'package:ezrxmobile/application/order/additional_details/additional_detai
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/order/entities/additional_details_data.dart';
+import 'package:ezrxmobile/domain/order/entities/payment_term.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/order_summary/addition_details/additional_attachment.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/order_type_selector.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -112,12 +113,14 @@ class AdditionalDetails extends StatelessWidget {
           context.read<EligibilityBloc>().state.showGreenDeliveryBox
               ? _GreenDeliveryBox(
                   key: const ValueKey('greenDeliveryBox'),
+                  isLoading: state.isLoading,
+                  isEnable: state.additionalDetailsData.greenDeliveryEnabled,
                   greenDeliveryDelayInDays:
                       config.greenDeliveryDelayInDays.toString(),
-                  onCheckBoxChanged: (bool value) {
-                    context
-                        .read<AdditionalDetailsBloc>()
-                        .add(AdditionalDetailsEvent.toggleGreenDelivery(value));
+                  onTap: () {
+                    context.read<AdditionalDetailsBloc>().add(
+                          const AdditionalDetailsEvent.toggleGreenDelivery(),
+                        );
                   },
                 )
               : const SizedBox.shrink(),
@@ -586,12 +589,8 @@ class _PaymentTerm extends StatelessWidget {
                       child: CircularProgressIndicator(strokeWidth: 2),
                     )
                   : null,
-              value: paymentTerm.getOrDefaultValue('').isEmpty ||
-                      !state.paymentTermsDisplayLevels
-                          .contains(paymentTerm.getValue())
-                  ? null
-                  : paymentTerm.getValue(),
-              items: state.paymentTermsDisplayLevels.map(
+              value: state.paymentTerms.displaySelected(paymentTerm),
+              items: state.paymentTerms.display.map(
                 (String val) {
                   return DropdownMenuItem<String>(
                     value: val,
@@ -633,21 +632,19 @@ class _PaymentTerm extends StatelessWidget {
   }
 }
 
-class _GreenDeliveryBox extends StatefulWidget {
+class _GreenDeliveryBox extends StatelessWidget {
   final String greenDeliveryDelayInDays;
-  final void Function(bool) onCheckBoxChanged;
+  final bool isEnable;
+  final bool isLoading;
+  final VoidCallback onTap;
 
   const _GreenDeliveryBox({
     Key? key,
     required this.greenDeliveryDelayInDays,
-    required this.onCheckBoxChanged,
+    required this.onTap,
+    required this.isEnable,
+    required this.isLoading,
   }) : super(key: key);
-  @override
-  State<_GreenDeliveryBox> createState() => _GreenDeliveryBoxState();
-}
-
-class _GreenDeliveryBoxState extends State<_GreenDeliveryBox> {
-  bool checkBoxValue = false;
 
   @override
   Widget build(BuildContext context) {
@@ -655,10 +652,9 @@ class _GreenDeliveryBoxState extends State<_GreenDeliveryBox> {
       padding: const EdgeInsets.symmetric(vertical: 16.0),
       child: GestureDetector(
         onTap: () {
-          setState(() {
-            checkBoxValue = !checkBoxValue;
-          });
-          widget.onCheckBoxChanged(checkBoxValue);
+          if (isLoading) return;
+
+          onTap.call();
         },
         child: Container(
           padding: const EdgeInsets.all(16),
@@ -678,25 +674,30 @@ class _GreenDeliveryBoxState extends State<_GreenDeliveryBox> {
                   children: [
                     Row(
                       children: [
-                        SizedBox(
-                          height: 24,
-                          width: 24,
-                          child: Checkbox(
-                            side: const BorderSide(
-                              color: ZPColors.primary,
-                              width: 2,
-                            ),
-                            value: checkBoxValue,
-                            onChanged: (bool? value) {
-                              setState(
-                                () {
-                                  checkBoxValue = value!;
-                                },
-                              );
-                              widget.onCheckBoxChanged(value!);
-                            },
-                          ),
-                        ),
+                        isLoading
+                            ? const SizedBox(
+                                height: 15,
+                                width: 15,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                ),
+                              )
+                            : SizedBox(
+                                height: 24,
+                                width: 24,
+                                child: Checkbox(
+                                  side: const BorderSide(
+                                    color: ZPColors.primary,
+                                    width: 2,
+                                  ),
+                                  value: isEnable,
+                                  onChanged: (bool? value) {
+                                    if (isLoading) return;
+
+                                    onTap.call();
+                                  },
+                                ),
+                              ),
                         const SizedBox(width: 8),
                         Text(
                           'Green Delivery'.tr(),
@@ -718,7 +719,7 @@ class _GreenDeliveryBoxState extends State<_GreenDeliveryBox> {
                       ),
                     ),
                     Text(
-                      'Your order will be consolidated and delivered via the most optimal route to you within ${widget.greenDeliveryDelayInDays} working days.'
+                      'Your order will be consolidated and delivered via the most optimal route to you within $greenDeliveryDelayInDays working days.'
                           .tr(),
                       style: const TextStyle(
                         fontSize: 12,

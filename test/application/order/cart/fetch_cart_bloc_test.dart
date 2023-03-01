@@ -20,16 +20,18 @@ void main() {
       build: () => CartBloc(cartRepositoryMock),
       setUp: () {
         when(() => cartRepositoryMock.fetchCart())
-            .thenAnswer((invocation) => const Right(<CartItem>[]));
+            .thenAnswer((invocation) => Right(mockMaterialCartItemList));
         when(() => cartRepositoryMock.saveToCartWithUpdatedStockInfo(
-              cartItem: <CartItem>[],
-              customerCodeInfo: CustomerCodeInfo.empty(),
-              salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-              salesOrganisation: SalesOrganisation.empty(),
-              shipToInfo: ShipToInfo.empty(),
-            )).thenAnswer((invocation) async => const Right(<CartItem>[]));
-        when(() => cartRepositoryMock.updateDiscountQty(items: <CartItem>[]))
-            .thenAnswer((invocation) => const <CartItem>[]);
+                  cartItem: mockMaterialCartItemList,
+                  customerCodeInfo: CustomerCodeInfo.empty(),
+                  salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+                  salesOrganisation: SalesOrganisation.empty(),
+                  shipToInfo: ShipToInfo.empty(),
+                ))
+            .thenAnswer((invocation) async => Right(mockMaterialCartItemList));
+        when(() => cartRepositoryMock.updateDiscountQty(
+                items: mockMaterialCartItemList))
+            .thenAnswer((invocation) => mockMaterialCartItemList);
       },
       act: (bloc) => bloc
         ..add(CartEvent.fetch(
@@ -43,7 +45,54 @@ void main() {
         CartState.initial().copyWith(isFetching: true),
         CartState.initial().copyWith(
           apiFailureOrSuccessOption: none(),
-          cartItems: <CartItem>[],
+          cartItems: mockMaterialCartItemList,
+          isFetching: false,
+        ),
+      ],
+    );
+
+    blocTest<CartBloc, CartState>(
+      '=> Fetch and receive all item out of stock',
+      build: () => CartBloc(cartRepositoryMock),
+      setUp: () {
+        when(() => cartRepositoryMock.fetchCart())
+            .thenAnswer((invocation) => const Right(<CartItem>[]));
+        when(() => cartRepositoryMock.clearCart()).thenAnswer(
+          (invocation) async => const Right(unit),
+        );
+        when(() => cartRepositoryMock.saveToCartWithUpdatedStockInfo(
+              cartItem: <CartItem>[],
+              customerCodeInfo: CustomerCodeInfo.empty(),
+              salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+              salesOrganisation: SalesOrganisation.empty(),
+              shipToInfo: ShipToInfo.empty(),
+            )).thenAnswer((invocation) async => const Right(<CartItem>[]));
+      },
+      act: (bloc) => bloc
+        ..add(CartEvent.fetch(
+          customerCodeInfo: CustomerCodeInfo.empty(),
+          doNotAllowOutOfStockMaterials: true,
+          salesOrganisation: SalesOrganisation.empty(),
+          salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+          shipToInfo: ShipToInfo.empty(),
+        )),
+      expect: () => [
+        CartState.initial().copyWith(isFetching: true),
+        CartState.initial().copyWith(
+          apiFailureOrSuccessOption: none(),
+          cartItems: [],
+          isFetching: false,
+        ),
+        CartState.initial().copyWith(
+          apiFailureOrSuccessOption: none(),
+          cartItems: [],
+          isClearing: true,
+          isFetching: false,
+        ),
+        CartState.initial().copyWith(
+          apiFailureOrSuccessOption: none(),
+          cartItems: [],
+          isClearing: false,
           isFetching: false,
         ),
       ],
