@@ -3,6 +3,7 @@ import 'package:ezrxmobile/domain/account/entities/sales_org_customer_info.dart'
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/policy_configuration.dart';
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
@@ -75,6 +76,9 @@ void main() {
 
       final result = await policyConfigurationRepo.getPolicyConfiguration(
         salesOrganisation: mockSalesOrg,
+        offSet: 0,
+        pageSize: 10,
+        searchKey: SearchKey(''),
       );
       expect(
         result.isRight(),
@@ -89,6 +93,9 @@ void main() {
 
       final result = await policyConfigurationRepo.getPolicyConfiguration(
         salesOrganisation: mockSalesOrg,
+        offSet: 0,
+        pageSize: 10,
+        searchKey: SearchKey(''),
       );
       expect(
         result.isLeft(),
@@ -99,11 +106,17 @@ void main() {
     test('=> getPolicyConfiguration Remote SUCCESS', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
       when(() => policyConfigurationRemoteSource.getPolicyConfiguration(
-              salesOrg: mockSalesOrg.salesOrg.getOrCrash()))
+              salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
+              offSet: 0,
+              pageSize: 10,
+              searchKey: '',))
           .thenAnswer((invocation) async => policyConfigurationListMock);
 
       final result = await policyConfigurationRepo.getPolicyConfiguration(
         salesOrganisation: mockSalesOrg,
+        offSet: 0,
+        pageSize: 10,
+        searchKey: SearchKey(''),
       );
       expect(
         result.isRight(),
@@ -115,11 +128,17 @@ void main() {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
       when(
         () => policyConfigurationRemoteSource.getPolicyConfiguration(
-            salesOrg: mockSalesOrg.salesOrg.getOrDefaultValue('')),
+            salesOrg: mockSalesOrg.salesOrg.getOrDefaultValue(''),
+            offSet: 0,
+            pageSize: 10,
+            searchKey: '',),
       ).thenThrow(const ApiFailure.serverTimeout());
 
       final result = await policyConfigurationRepo.getPolicyConfiguration(
         salesOrganisation: mockSalesOrg,
+        offSet: 0,
+        pageSize: 10,
+        searchKey: SearchKey(''),
       );
       expect(
         result.isLeft(),

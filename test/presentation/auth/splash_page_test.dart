@@ -524,6 +524,7 @@ void main() {
       verify(() =>
           policyConfigurationListBlocMock.add(PolicyConfigurationEvent.fetch(
             salesOrganisation: salesOrganisation,
+            searchKey: '',
           ))).called(1);
       expect(find.byType(UpgradeAlert), findsOneWidget);
     });

@@ -7,7 +7,7 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/returns/entities/policy_configuration.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/policy_configuration_local.dart';
-import 'package:ezrxmobile/presentation/returns/policy_configuration.dart';
+import 'package:ezrxmobile/presentation/returns/policy_configuration/policy_configuration.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -72,7 +72,6 @@ void main() {
   group('Policy Configuration List Screen', () {
     testWidgets('=> Test when refresh page', (tester) async {
       await getWidget(tester);
-      expect(find.text('Policy Configuration'), findsOneWidget);
       expect(find.text('No Policy Configurations found'), findsOneWidget);
       expect(find.byType(PolicyConfigurationListItem), findsNothing);
       await tester.fling(
@@ -81,7 +80,8 @@ void main() {
       verify(
         () => policyConfigurationListBlocMock.add(
           PolicyConfigurationEvent.fetch(
-              salesOrganisation: salesOrgBlocMock.state.salesOrganisation),
+              salesOrganisation: salesOrgBlocMock.state.salesOrganisation,
+              searchKey: '',),
         ),
       ).called(1);
     });

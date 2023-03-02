@@ -6,7 +6,11 @@ class PolicyConfigurationEvent with _$PolicyConfigurationEvent {
 
   const factory PolicyConfigurationEvent.fetch({
     required SalesOrganisation salesOrganisation,
+    required String searchKey,
   }) = _Fetch;
+  const factory PolicyConfigurationEvent.loadMorePolicyConfigurations({
+    required SalesOrganisation salesOrganisation,
+  }) = _LoadMorePolicyConfigurations;
   const factory PolicyConfigurationEvent.delete({
     required PolicyConfiguration policyConfigurationItem,
   }) = _Delete;

@@ -14,6 +14,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 
+import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
+
 class PolicyConfigurationPage extends StatelessWidget {
   const PolicyConfigurationPage({Key? key}) : super(key: key);
 
@@ -22,13 +24,13 @@ class PolicyConfigurationPage extends StatelessWidget {
     locator<CountlyService>().recordCountlyView('policy_configuration');
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Policy Configuration').tr()),
+      appBar: const PreferredSize(
+        preferredSize: Size(double.infinity, 60),
+        child: CustomAppBar(child: _PolicyConfigurationSearch()),
+      ),
       body: BlocConsumer<PolicyConfigurationBloc, PolicyConfigurationState>(
-        listenWhen: (previous, current) {
-          return previous.failureOrSuccessOption !=
-                  current.failureOrSuccessOption ||
-              (previous.isLoading != current.isLoading);
-        },
+        listenWhen: (previous, current) =>
+            previous.failureOrSuccessOption != current.failureOrSuccessOption,
         listener: (context, state) {
           state.failureOrSuccessOption.fold(
             () {},
@@ -41,10 +43,10 @@ class PolicyConfigurationPage extends StatelessWidget {
           );
         },
         buildWhen: (previous, current) =>
-            previous.isLoading != current.isLoading ||
-            previous.policyConfigurationList != current.policyConfigurationList,
+            previous.isLoading != current.isLoading,
         builder: (context, policyConfigurationState) {
-          if (policyConfigurationState.isLoading) {
+          if (policyConfigurationState.isLoading &&
+              policyConfigurationState.policyConfigurationList.isEmpty) {
             return LoadingShimmer.logo(
               key: const Key('LoaderImage'),
             );
@@ -57,9 +59,16 @@ class PolicyConfigurationPage extends StatelessWidget {
                     PolicyConfigurationEvent.fetch(
                       salesOrganisation:
                           context.read<SalesOrgBloc>().state.salesOrganisation,
+                      searchKey: '',
                     ),
                   );
             },
+            onLoadingMore: () => context.read<PolicyConfigurationBloc>().add(
+                  PolicyConfigurationEvent.loadMorePolicyConfigurations(
+                    salesOrganisation:
+                        context.read<SalesOrgBloc>().state.salesOrganisation,
+                  ),
+                ),
             isLoading: policyConfigurationState.isLoading,
             itemBuilder: (context, index, item) => PolicyConfigurationListItem(
               policyConfigurationItem: item,
@@ -168,6 +177,72 @@ class PolicyConfigurationListItem extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class _PolicyConfigurationSearch extends StatefulWidget {
+  const _PolicyConfigurationSearch({Key? key}) : super(key: key);
+  @override
+  State<_PolicyConfigurationSearch> createState() =>
+      _PolicyConfigurationSearchState();
+}
+
+class _PolicyConfigurationSearchState
+    extends State<_PolicyConfigurationSearch> {
+  final _policyConfigSearchController = TextEditingController();
+
+  @override
+  void dispose() {
+    _policyConfigSearchController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<PolicyConfigurationBloc, PolicyConfigurationState>(
+      key: const Key('policyConfigSearchBuilder'),
+      buildWhen: (previous, current) => previous.searchKey != current.searchKey,
+      builder: (context, state) {
+        _policyConfigSearchController.text =
+            state.searchKey.getOrDefaultValue('');
+
+        return TextFormField(
+          controller: _policyConfigSearchController,
+          key: Key(
+            'policyConfigurationSearch${state.searchKey.getOrDefaultValue('')}',
+          ),
+          onFieldSubmitted: (value) {
+            context
+                .read<PolicyConfigurationBloc>()
+                .add(PolicyConfigurationEvent.fetch(
+                  salesOrganisation:
+                      context.read<SalesOrgBloc>().state.salesOrganisation,
+                  searchKey: value,
+                ));
+          },
+          decoration: InputDecoration(
+            prefixIcon: const Icon(Icons.search),
+            suffixIcon: IconButton(
+              key: const Key('clearPolicyConfigurationSearch'),
+              icon: const Icon(Icons.clear),
+              onPressed: () {
+                if (_policyConfigSearchController.text.isEmpty) return;
+                _policyConfigSearchController.clear();
+                context
+                    .read<PolicyConfigurationBloc>()
+                    .add(PolicyConfigurationEvent.fetch(
+                      salesOrganisation:
+                          context.read<SalesOrgBloc>().state.salesOrganisation,
+                      searchKey: '',
+                    ));
+              },
+            ),
+            hintText: 'Search...'.tr(),
+            border: InputBorder.none,
+          ),
+        );
+      },
     );
   }
 }

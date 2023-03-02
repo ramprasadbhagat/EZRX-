@@ -4,6 +4,7 @@ import 'package:ezrxmobile/application/returns/policy_configuration/policy_confi
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/policy_configuration.dart';
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
@@ -67,14 +68,17 @@ void main() {
             PolicyConfigurationBloc(policyConfigurationRepository: repository),
         setUp: () {
           when(() => repository.getPolicyConfiguration(
-              salesOrganisation: mockSalesOrg)).thenAnswer(
+              salesOrganisation: mockSalesOrg,
+              offSet: 0,
+              pageSize: 10,
+              searchKey: SearchKey(''))).thenAnswer(
             (invocation) async => const Left(
               ApiFailure.other('fake-error'),
             ),
           );
         },
         act: (PolicyConfigurationBloc bloc) => bloc.add(
-            PolicyConfigurationEvent.fetch(salesOrganisation: mockSalesOrg)),
+            PolicyConfigurationEvent.fetch(salesOrganisation: mockSalesOrg,searchKey: '',)),
         expect: () => [
           PolicyConfigurationState.initial().copyWith(
             isLoading: true,
@@ -95,12 +99,15 @@ void main() {
             PolicyConfigurationBloc(policyConfigurationRepository: repository),
         setUp: () {
           when(() => repository.getPolicyConfiguration(
-              salesOrganisation: mockSalesOrg)).thenAnswer(
+              salesOrganisation: mockSalesOrg,
+              offSet: 0,
+              pageSize: 10,
+              searchKey: SearchKey(''),)).thenAnswer(
             (invocation) async => Right(policyConfigurationListMock),
           );
         },
         act: (PolicyConfigurationBloc bloc) => bloc.add(
-            PolicyConfigurationEvent.fetch(salesOrganisation: mockSalesOrg)),
+            PolicyConfigurationEvent.fetch(salesOrganisation: mockSalesOrg, searchKey: '',)),
         expect: () => [
           PolicyConfigurationState.initial().copyWith(
             isLoading: true,
@@ -119,7 +126,10 @@ void main() {
             PolicyConfigurationBloc(policyConfigurationRepository: repository),
         setUp: () {
           when(() => repository.getPolicyConfiguration(
-              salesOrganisation: mockSalesOrg)).thenAnswer(
+              salesOrganisation: mockSalesOrg,
+              offSet: 0,
+              pageSize: 10,
+              searchKey: SearchKey(''),)).thenAnswer(
             (invocation) async => Right(policyConfigurationListMock),
           );
         },

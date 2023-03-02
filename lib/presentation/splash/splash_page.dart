@@ -315,6 +315,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
             context.read<PolicyConfigurationBloc>().add(
                   PolicyConfigurationEvent.fetch(
                     salesOrganisation: state.salesOrganisation,
+                    searchKey: '',
                   ),
                 );
           },

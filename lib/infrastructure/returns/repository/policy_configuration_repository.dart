@@ -7,11 +7,13 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/returns/entities/policy_configuration.dart';
-import 'package:ezrxmobile/domain/returns/repository/i_poilcy_configuration_repository.dart';
+import 'package:ezrxmobile/domain/returns/repository/i_policy_configuration_repository.dart';
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/policy_configuration_local.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/policy_configuration_remote.dart';
+
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 
 class PolicyConfigurationRepository implements IPolicyConfigurationRepository {
   final Config config;
@@ -29,7 +31,11 @@ class PolicyConfigurationRepository implements IPolicyConfigurationRepository {
   @override
   Future<Either<ApiFailure, List<PolicyConfiguration>>> getPolicyConfiguration({
     required SalesOrganisation salesOrganisation,
+    required SearchKey searchKey,
+    required int offSet,
+    required int pageSize,
   }) async {
+    final searchValue = searchKey.getValue();
     if (config.appFlavor == Flavor.mock) {
       try {
         final policyConfigurationList =
@@ -46,6 +52,9 @@ class PolicyConfigurationRepository implements IPolicyConfigurationRepository {
       final policyConfigurationList =
           await remoteDataSource.getPolicyConfiguration(
         salesOrg: salesOrganisation.salesOrg.getOrCrash(),
+        offSet: offSet,
+        pageSize: pageSize,
+        searchKey: searchValue,
       );
 
       return Right(policyConfigurationList);
