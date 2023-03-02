@@ -110,10 +110,6 @@ class PrincipalName extends ValueObject<String> {
     return naIfEmpty(value.getOrElse(() => ''));
   }
 
-  bool get isPnGPrinciple => havingPnGPrincipalName(
-        value.getOrElse(() => ''),
-      );
-
   const PrincipalName._(this.value);
 }
 

@@ -399,8 +399,7 @@ class PriceAggregate with _$PriceAggregate {
       tenderContract == TenderContract.noContract();
 
   bool get isPnGPrinciple =>
-      materialInfo.principalData.principalCode.isPnGPrinciple ||
-      materialInfo.principalData.principalName.isPnGPrinciple;
+      materialInfo.principalData.principalCode.isPnGPrinciple;
 
   List<MaterialItemBonus> get getAddedBonusList =>
       List<MaterialItemBonus>.from(addedBonusList)
