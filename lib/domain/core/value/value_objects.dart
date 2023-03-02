@@ -74,6 +74,8 @@ class SearchKey extends ValueObject<String> {
 
   String get searchValueOrEmpty => value.getOrElse(() => '');
 
+  int get countWhenValid => validFilterSearchKey ? 1 : 0;
+
   const SearchKey._(this.value);
 }
 

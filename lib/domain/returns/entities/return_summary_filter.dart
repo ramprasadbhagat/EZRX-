@@ -73,6 +73,14 @@ class ReturnSummaryFilter with _$ReturnSummaryFilter {
   bool get areFiltersValid =>
       requestId.isValid() &&
       (_refundTotalValueRangeEmpty || checkIfTotalRangeIsValid);
+
+  int get appliedFilterCount {
+    var count = 1 + requestId.countWhenValid;
+
+    count += refundTotalTo.isValid() && refundTotalFrom.isValid() ? 1 : 0;
+
+    return count;
+  }
 }
 
 const List<String> returnSummaryStatus = [

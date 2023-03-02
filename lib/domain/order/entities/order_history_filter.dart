@@ -30,4 +30,15 @@ class OrderHistoryFilter with _$OrderHistoryFilter {
           getDateStringByDateTime(DateTime.now()),
         ),
       );
+
+  int get appliedFilterCount {
+    var count = 1;
+
+    count += orderId.countWhenValid +
+        poNumber.countWhenValid +
+        materialSearch.countWhenValid +
+        principalSearch.countWhenValid;
+
+    return count;
+  }
 }

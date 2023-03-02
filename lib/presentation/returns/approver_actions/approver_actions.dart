@@ -9,6 +9,7 @@ import 'package:ezrxmobile/domain/returns/entities/return_approver_filter.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/core/filter_icon.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/returns/approver_actions/filter_drawer.dart';
 import 'package:ezrxmobile/presentation/returns/approver_actions/filter_status.dart';
@@ -25,7 +26,6 @@ class ApproverActions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     locator<CountlyService>().recordCountlyView('approver_actions');
-    const radius = 8.0;
 
     return Scaffold(
       key: scaffoldKey,
@@ -87,64 +87,25 @@ class ApproverActions extends StatelessWidget {
                               },
                             ),
                           ),
-                          GestureDetector(
-                            key: const Key('filterButton'),
-                            onTap: () {
-                              if (context
-                                  .read<ReturnApproverBloc>()
-                                  .state
-                                  .isFetching) return;
-                              scaffoldKey.currentState!.openEndDrawer();
+                          BlocBuilder<ReturnApproverFilterBloc,
+                              ReturnApproverFilterState>(
+                            buildWhen: (previous, current) =>
+                                previous
+                                    .approverReturnFilter.appliedFilterCount !=
+                                current.approverReturnFilter.appliedFilterCount,
+                            builder: (context, state) {
+                              return FilterCountButton(
+                                filterCount: state
+                                    .approverReturnFilter.appliedFilterCount,
+                                onTap: () {
+                                  if (context
+                                      .read<ReturnApproverBloc>()
+                                      .state
+                                      .isFetching) return;
+                                  scaffoldKey.currentState!.openEndDrawer();
+                                },
+                              );
                             },
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: <Widget>[
-                                Text(
-                                  'Filter'.tr(),
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .titleSmall
-                                      ?.apply(
-                                        color: ZPColors.kPrimaryColor,
-                                      ),
-                                ).tr(),
-                                Stack(
-                                  children: <Widget>[
-                                    const Icon(
-                                      Icons.filter_alt_outlined,
-                                      color: ZPColors.kPrimaryColor,
-                                      size: 16,
-                                    ),
-                                    BlocBuilder<ReturnApproverFilterBloc,
-                                        ReturnApproverFilterState>(
-                                      buildWhen: (previous, current) =>
-                                          previous.approverReturnFilter !=
-                                          current.approverReturnFilter,
-                                      builder: (context, state) {
-                                        if (state.anyFilterApplied) {
-                                          return Positioned(
-                                            key: const ValueKey(
-                                              'Filter_list_not_empty',
-                                            ),
-                                            right: 0,
-                                            child: Container(
-                                              decoration: const BoxDecoration(
-                                                shape: BoxShape.circle,
-                                                color: ZPColors.kPrimaryColor,
-                                              ),
-                                              width: radius,
-                                              height: radius,
-                                            ),
-                                          );
-                                        }
-
-                                        return const SizedBox.shrink();
-                                      },
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
                           ),
                         ],
                       )

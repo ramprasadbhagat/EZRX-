@@ -31,6 +31,7 @@ import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_history_local.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/order_history_repository.dart';
+import 'package:ezrxmobile/presentation/core/filter_icon.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/history/history_tab.dart';
 import 'package:ezrxmobile/presentation/history/history_tile.dart';
@@ -443,9 +444,9 @@ void main() {
         await tester.pumpWidget(getWUT());
         await tester.pump();
 
-        expect(find.byKey(const Key('Filter_list_not_empty')), findsOneWidget);
+        expect(find.byKey(const Key('filterCount')), findsOneWidget);
       });
-//
+
       testWidgets('Filter button test 1', (tester) async {
         when(() => mockOrderHistoryListBloc.state)
             .thenReturn(OrderHistoryListState.initial());
@@ -460,7 +461,7 @@ void main() {
                     ShipToInfo.empty().copyWith(defaultShipToAddress: true)));
         await tester.pumpWidget(getWUT());
         await tester.pump();
-        final filterButton = find.byKey(const Key('filterButton'));
+        final filterButton = find.byType(FilterCountButton);
         expect(filterButton, findsOneWidget);
         await tester.tap(filterButton);
         final orderDateFilter = find.byKey(const Key('orderDateFilter'));
@@ -483,7 +484,7 @@ void main() {
                     ShipToInfo.empty().copyWith(defaultShipToAddress: true)));
         await tester.pumpWidget(getWUT());
         await tester.pump();
-        final filterButton = find.byKey(const Key('filterButton'));
+        final filterButton = find.byType(FilterCountButton);
         expect(filterButton, findsOneWidget);
         await tester.tap(filterButton);
         final orderDateFilter = find.byKey(const Key('orderDateFilter'));

@@ -13,6 +13,7 @@ import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/core/filter_icon.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_button.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
@@ -145,63 +146,22 @@ class HistoryTab extends StatelessWidget {
                               ],
                             ),
                           ),
-                          GestureDetector(
-                            key: const Key('filterButton'),
-                            onTap: () {
-                              scaffoldKey.currentState!.openEndDrawer();
+                          BlocBuilder<OrderHistoryFilterBloc,
+                              OrderHistoryFilterState>(
+                            buildWhen: (previous, current) =>
+                                previous.orderHistoryFilterList
+                                    .appliedFilterCount !=
+                                current
+                                    .orderHistoryFilterList.appliedFilterCount,
+                            builder: (context, state) {
+                              return FilterCountButton(
+                                filterCount: state
+                                    .orderHistoryFilterList.appliedFilterCount,
+                                onTap: () {
+                                  scaffoldKey.currentState!.openEndDrawer();
+                                },
+                              );
                             },
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Text(
-                                  'Filter'.tr(),
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .titleSmall
-                                      ?.apply(
-                                        color: ZPColors.kPrimaryColor,
-                                      ),
-                                ).tr(),
-                                Stack(
-                                  children: <Widget>[
-                                    const FittedBox(
-                                      key: ValueKey('order_history_filter'),
-                                      child: Icon(
-                                        Icons.filter_alt_outlined,
-                                        color: ZPColors.kPrimaryColor,
-                                        size: 16,
-                                      ),
-                                    ),
-                                    BlocBuilder<OrderHistoryFilterBloc,
-                                        OrderHistoryFilterState>(
-                                      buildWhen: (previous, current) =>
-                                          previous.isAppliedFilter !=
-                                          current.isAppliedFilter,
-                                      builder: (context, state) {
-                                        if (state.isAppliedFilter) {
-                                          return Positioned(
-                                            key: const ValueKey(
-                                              'Filter_list_not_empty',
-                                            ),
-                                            right: 0,
-                                            child: Container(
-                                              decoration: const BoxDecoration(
-                                                shape: BoxShape.circle,
-                                                color: ZPColors.kPrimaryColor,
-                                              ),
-                                              width: radius / 2,
-                                              height: radius / 2,
-                                            ),
-                                          );
-                                        }
-
-                                        return const SizedBox.shrink();
-                                      },
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
                           ),
                         ],
                       )
@@ -209,7 +169,6 @@ class HistoryTab extends StatelessWidget {
               },
             ),
           ),
-          // : const SizedBox.shrink(),
         ),
       ),
       endDrawer: const OrderHistoryFilterDrawer(),

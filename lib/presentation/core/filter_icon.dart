@@ -1,0 +1,46 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:flutter/material.dart';
+
+class FilterCountButton extends StatelessWidget {
+  final int filterCount;
+  final VoidCallback onTap;
+  const FilterCountButton({
+    Key? key,
+    required this.filterCount,
+    required this.onTap,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: <Widget>[
+          Text(
+            'Filter'.tr(),
+            style: Theme.of(context).textTheme.titleSmall?.apply(
+                  color: ZPColors.kPrimaryColor,
+                ),
+          ).tr(),
+          if (filterisNotEmpty)
+            Text(
+              ' ($filterCount) '.tr(),
+              key: const ValueKey('filterCount'),
+              style: Theme.of(context).textTheme.titleSmall?.apply(
+                    color: ZPColors.kPrimaryColor,
+                  ),
+            ).tr(),
+          const Icon(
+            Icons.filter_alt_outlined,
+            color: ZPColors.kPrimaryColor,
+            size: 16,
+          ),
+        ],
+      ),
+    );
+  }
+
+  bool get filterisNotEmpty => filterCount != 0;
+}

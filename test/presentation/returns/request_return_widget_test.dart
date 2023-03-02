@@ -16,6 +16,7 @@ import 'package:ezrxmobile/domain/returns/entities/request_return_filter.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/request_return_local.dart';
+import 'package:ezrxmobile/presentation/core/filter_icon.dart';
 import 'package:ezrxmobile/presentation/returns/request_return.dart';
 import 'package:ezrxmobile/presentation/returns/request_return_filter_drawer.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -345,7 +346,7 @@ void main() {
         await tester.runAsync(() async {
           await getWidget(tester);
         });
-        final filterButton = find.byKey(const Key('filterButton'));
+        final filterButton = find.byType(FilterCountButton);
         await tester.tap(filterButton);
         await tester.pumpAndSettle(const Duration(seconds: 4));
         final drawer = find.byType(RequestReturnFilterDrawer);

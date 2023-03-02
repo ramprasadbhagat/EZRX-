@@ -5,13 +5,13 @@ import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.da
 import 'package:ezrxmobile/application/returns/request_return/request_return_bloc.dart';
 import 'package:ezrxmobile/application/returns/request_return_filter/request_return_filter_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
-import 'package:ezrxmobile/domain/returns/entities/request_return_filter.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
+import 'package:ezrxmobile/presentation/core/filter_icon.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/returns/request_return_filter_drawer.dart';
@@ -79,61 +79,18 @@ class RequestReturn extends StatelessWidget {
                     );
                   },
                 ),
-                InkWell(
-                  key: const Key('filterButton'),
-                  onTap: () {
-                    scaffoldKey.currentState!.openEndDrawer();
+                BlocBuilder<RequestReturnFilterBloc, RequestReturnFilterState>(
+                  buildWhen: (previous, current) =>
+                      previous.requestReturnFilter.appliedFilterCount !=
+                      current.requestReturnFilter.appliedFilterCount,
+                  builder: (context, state) {
+                    return FilterCountButton(
+                      filterCount: state.requestReturnFilter.appliedFilterCount,
+                      onTap: () {
+                        scaffoldKey.currentState!.openEndDrawer();
+                      },
+                    );
                   },
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Text(
-                        'Filter'.tr(),
-                        style: const TextStyle(
-                          fontSize: 14,
-                          color: ZPColors.kPrimaryColor,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ).tr(),
-                      Stack(
-                        children: <Widget>[
-                          const FittedBox(
-                            key: ValueKey('request_return_filter'),
-                            child: Icon(
-                              Icons.filter_alt,
-                            ),
-                          ),
-                          BlocBuilder<RequestReturnFilterBloc,
-                              RequestReturnFilterState>(
-                            buildWhen: (previous, current) =>
-                                previous.requestReturnFilter !=
-                                current.requestReturnFilter,
-                            builder: (context, state) {
-                              if (state.requestReturnFilter !=
-                                  RequestReturnFilter.empty()) {
-                                return Positioned(
-                                  key: const ValueKey(
-                                    'Filter_list_not_empty',
-                                  ),
-                                  right: 0,
-                                  child: Container(
-                                    decoration: const BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: ZPColors.kPrimaryColor,
-                                    ),
-                                    width: radius / 2,
-                                    height: radius / 2,
-                                  ),
-                                );
-                              }
-
-                              return const SizedBox.shrink();
-                            },
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
                 ),
               ],
             ),

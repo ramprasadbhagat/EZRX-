@@ -19,6 +19,7 @@ import 'package:ezrxmobile/domain/returns/entities/return_approver_filter.dart';
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/core/filter_icon.dart';
 import 'package:ezrxmobile/presentation/returns/approver_actions/approver_actions.dart';
 
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -173,7 +174,7 @@ void main() {
         expect(find.byKey(const Key('actionApproverAppBar')), findsOneWidget);
         expect(find.byKey(const Key('status')), findsOneWidget);
         expect(find.byIcon(Icons.arrow_drop_down_outlined), findsOneWidget);
-        expect(find.byKey(const Key('filterButton')), findsOneWidget);
+        expect(find.byType(FilterCountButton), findsOneWidget);
         expect(find.text('No Return found'.tr()), findsOneWidget);
 
         final statusFilterButton = find.byKey(const Key('statusFilterButton'));
@@ -234,7 +235,7 @@ void main() {
 
         expect(find.byKey(const Key('status')), findsOneWidget);
         expect(find.byIcon(Icons.arrow_drop_down_outlined), findsOneWidget);
-        expect(find.byKey(const Key('filterButton')), findsOneWidget);
+        expect(find.byType(FilterCountButton), findsOneWidget);
         expect(find.text('No Return found'.tr()), findsNothing);
 
         final approverReturnRequestTile =
@@ -305,7 +306,7 @@ void main() {
         await tester.pumpWidget(getWidget());
         await tester.pump();
 
-        final filterButton = find.byKey(const Key('filterButton'));
+        final filterButton = find.byType(FilterCountButton);
         expect(filterButton, findsOneWidget);
         await tester.tap(filterButton);
         await tester.pumpAndSettle();
@@ -344,7 +345,7 @@ void main() {
         await tester.pumpWidget(getWidget());
         await tester.pump();
 
-        final filterButton = find.byKey(const Key('filterButton'));
+        final filterButton = find.byType(FilterCountButton);
         expect(filterButton, findsOneWidget);
         await tester.tap(filterButton);
         await tester.pumpAndSettle();
@@ -405,8 +406,8 @@ void main() {
             ),
           ),
         ).called(1);
-        expect(find.byKey(const Key('filterButton')), findsOneWidget);
-        expect(find.byKey(const Key('Filter_list_not_empty')), findsOneWidget);
+        expect(find.byType(FilterCountButton), findsOneWidget);
+        expect(find.byKey(const Key('filterCount')), findsOneWidget);
       },
     );
 

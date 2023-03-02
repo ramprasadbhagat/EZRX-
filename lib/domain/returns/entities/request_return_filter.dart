@@ -32,4 +32,16 @@ class RequestReturnFilter with _$RequestReturnFilter {
           getDateStringByDateTime(DateTime.now()),
         ),
       );
+
+  int get appliedFilterCount {
+    var count = fromInvoiceDate != null && toInvoiceDate != null ? 1 : 0;
+
+    count += assignmentNumber.countWhenValid +
+        batch.countWhenValid +
+        materialNumber.countWhenValid +
+        principalSearch.countWhenValid +
+        materialDescription.countWhenValid;
+
+    return count;
+  }
 }

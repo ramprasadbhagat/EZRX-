@@ -13,6 +13,7 @@ import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
+import 'package:ezrxmobile/presentation/core/filter_icon.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/returns/return_summary/return_summary_filter.dart';
@@ -81,48 +82,20 @@ class ReturnSummary extends StatelessWidget {
                         ],
                       ),
                     ),
-                    InkWell(
-                      key: const Key('filterButton'),
-                      onTap: () {
-                        scaffoldKey.currentState!.openEndDrawer();
+                    BlocBuilder<ReturnSummaryFilterBloc,
+                        ReturnSummaryFilterState>(
+                      buildWhen: (previous, current) =>
+                          previous.returnSummaryFilter.appliedFilterCount !=
+                          current.returnSummaryFilter.appliedFilterCount,
+                      builder: (context, state) {
+                        return FilterCountButton(
+                          filterCount:
+                              state.returnSummaryFilter.appliedFilterCount,
+                          onTap: () {
+                            scaffoldKey.currentState!.openEndDrawer();
+                          },
+                        );
                       },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Text(
-                            'Filter'.tr(),
-                            style: Theme.of(context).textTheme.subtitle2?.apply(
-                                  color: ZPColors.kPrimaryColor,
-                                  fontStyle: FontStyle.normal,
-                                ),
-                          ).tr(),
-                          Stack(
-                            children: <Widget>[
-                              const FittedBox(
-                                key: ValueKey('return_summary_filter'),
-                                child: Icon(
-                                  Icons.filter_alt,
-                                ),
-                              ),
-                              if (state.returnSummaryFilter.areFiltersValid)
-                                Positioned(
-                                  key: const ValueKey(
-                                    'Filter_list_not_empty',
-                                  ),
-                                  right: 0,
-                                  child: Container(
-                                    decoration: const BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: ZPColors.kPrimaryColor,
-                                    ),
-                                    width: radius / 2,
-                                    height: radius / 2,
-                                  ),
-                                ),
-                            ],
-                          ),
-                        ],
-                      ),
                     ),
                   ],
                 );
