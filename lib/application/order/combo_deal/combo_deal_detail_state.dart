@@ -31,7 +31,7 @@ class ComboDealDetailState with _$ComboDealDetailState {
       return false;
     }
 
-    if (items.values.any((item) => !item.comboDealQtyEligible)) {
+    if (items.values.any((item) => !item.selfComboDealEligible)) {
       return false;
     }
 

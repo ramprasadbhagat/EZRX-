@@ -3,6 +3,7 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
+import 'package:ezrxmobile/domain/order/entities/combo_deal_material.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
@@ -1245,6 +1246,84 @@ void main() {
         expect(
           emptyPriceAggregate.copyWithIncreasedQty(qty: 2),
           customPriceAggregate,
+        );
+      },
+    );
+  });
+
+  group('Combo Deal K1', () {
+    final fakeMaterialNumber = MaterialNumber('fake-material');
+    final fakeMaterialDeal = ComboDealMaterial.empty().copyWith(
+      minQty: 4,
+      materialNumber: fakeMaterialNumber,
+      rate: -10,
+    );
+    final fakeComboDealDetail = ComboDeal.empty().copyWith(
+      materialComboDeals: [
+        ComboDealMaterialSet(
+          materials: [fakeMaterialDeal],
+          setNo: 'fake-set',
+        )
+      ],
+    );
+    final fakePriceAggregate = emptyPriceAggregate.copyWith(
+      materialInfo:
+          MaterialInfo.empty().copyWith(materialNumber: fakeMaterialNumber),
+      price: Price.empty().copyWith(lastPrice: MaterialPrice(100)),
+      quantity: 3,
+    );
+    test(
+      'get self deal',
+      () {
+        final priceAggregate =
+            fakePriceAggregate.copyWith(comboDeal: fakeComboDealDetail);
+        expect(priceAggregate.selfComboDeal, fakeMaterialDeal);
+        expect(priceAggregate.selfComboDeal.minQty, 4);
+      },
+    );
+
+    test(
+      'get price',
+      () {
+        final priceAggregate =
+            fakePriceAggregate.copyWith(comboDeal: fakeComboDealDetail);
+        expect(priceAggregate.comboDealListPrice, 100);
+        expect(priceAggregate.comboDealTotalListPrice, 300);
+        expect(priceAggregate.comboDealUnitPrice, 90);
+        expect(priceAggregate.comboDealTotalUnitPrice, 270);
+        expect(
+          priceAggregate.display(PriceType.comboDealUnitPrice),
+          'NA 90.00',
+        );
+        expect(
+          priceAggregate.display(PriceType.comboDealTotalListPrice),
+          'NA 300.00',
+        );
+        expect(
+          priceAggregate.display(PriceType.comboDealTotalUnitPrice),
+          'NA 270.00',
+        );
+        expect(
+          priceAggregate.display(PriceType.listPrice),
+          'NA 100.00',
+        );
+      },
+    );
+
+    test(
+      'get qty eligible',
+      () {
+        final priceAggregate = fakePriceAggregate.copyWith(
+          comboDeal: fakeComboDealDetail,
+        );
+
+        expect(
+          priceAggregate.selfComboDealEligible,
+          false,
+        );
+        expect(
+          priceAggregate.copyWith(quantity: 4).selfComboDealEligible,
+          true,
         );
       },
     );

@@ -34,11 +34,13 @@ import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/price_bonus.dart';
+import 'package:ezrxmobile/domain/order/entities/price_combo_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/custom_selector.dart';
+import 'package:ezrxmobile/presentation/orders/combo_deal/widgets/combo_deal_label.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/favorite_button.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/material_list.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/material_root.dart';
@@ -109,6 +111,7 @@ class MaterialPriceDetailBlocMock
 class ComboDealListBlocMock
     extends MockBloc<ComboDealListEvent, ComboDealListState>
     implements ComboDealListBloc {}
+
 class ScanMaterialinfoBlocMock
     extends MockBloc<ScanMaterialInfoEvent, ScanMaterialInfoState>
     implements ScanMaterialInfoBloc {}
@@ -1817,6 +1820,34 @@ void main() {
       await tester.tap(customSelectorBrand);
 
       await tester.pump();
+    });
+
+    testWidgets('Test Combo Deal Material', (tester) async {
+      when(() => materialListBlocMock.state).thenReturn(
+        MaterialListState.initial().copyWith(
+          materialList: [
+            fakematerialInfo,
+          ],
+        ),
+      );
+      when(() => materialPriceBlocMock.state).thenReturn(
+        MaterialPriceState.initial().copyWith(
+          materialPrice: {
+            fakeMaterialNumber: Price.empty().copyWith(
+              comboDeal: PriceComboDeal.empty().copyWith(
+                isEligible: true,
+                category: PriceComboDealCategory(
+                  type: ComboDealType('fake-type'),
+                  comboMaterialNumbers: [fakeMaterialNumber],
+                ),
+              ),
+            )
+          },
+        ),
+      );
+      await tester
+          .pumpWidget(getScopedWidget(MaterialListPage(addToCart: () {})));
+      expect(find.byType(ComboDealLabel), findsOneWidget);
     });
   });
 }

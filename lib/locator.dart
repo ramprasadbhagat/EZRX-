@@ -31,6 +31,7 @@ import 'package:ezrxmobile/infrastructure/core/common/file_picker.dart';
 import 'package:ezrxmobile/infrastructure/core/common/permission.dart';
 import 'package:ezrxmobile/application/returns/request_return/request_return_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_request_type_code/return_request_type_code_bloc.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/combo_deal_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/combo_deal_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/combo_deal_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/cart_repository.dart';
@@ -1696,6 +1697,10 @@ void setupLocator() {
   );
 
   locator.registerLazySingleton(
+    () => ComboDealLocalDataSource(),
+  );
+
+  locator.registerLazySingleton(
     () => ComboDealRemoteDataSource(
       config: locator<Config>(),
       httpService: locator<HttpService>(),
@@ -1707,6 +1712,7 @@ void setupLocator() {
   locator.registerLazySingleton<IComboDealRepository>(
     () => ComboDealRepository(
       config: locator<Config>(),
+      localDataSource: locator<ComboDealLocalDataSource>(),
       remoteDataSource: locator<ComboDealRemoteDataSource>(),
     ),
   );

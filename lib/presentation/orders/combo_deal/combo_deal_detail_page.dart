@@ -46,7 +46,9 @@ class _ComboDealDetailPageState extends State<ComboDealDetailPage> {
   void initState() {
     super.initState();
     eligibilityBloc = context.read<EligibilityBloc>();
-    priceComboDeal = widget.comboItems.first.price.comboDeal;
+    priceComboDeal = widget.comboItems.isEmpty
+        ? PriceComboDeal.empty()
+        : widget.comboItems.first.price.comboDeal;
     context.read<ComboDealDetailBloc>().add(
           ComboDealDetailEvent.initMaterialItems(
             items: widget.comboItems,
@@ -162,6 +164,9 @@ class _ComboDealDetailPageState extends State<ComboDealDetailPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         PriceLabel(
+                          key: Key(
+                            'Total label ${CartItem.comboDeal(state.allSelectedItems).unitPrice}',
+                          ),
                           label: 'Total Value'.tr(),
                           discountPrice: StringUtils.displayPrice(
                             eligibilityBloc.state.salesOrgConfigs,
@@ -175,7 +180,7 @@ class _ComboDealDetailPageState extends State<ComboDealDetailPage> {
                         SizedBox(
                           width: double.infinity,
                           child: ElevatedButton(
-                            key: const ValueKey('orderSummaryButton'),
+                            key: const ValueKey('addToCartButton'),
                             onPressed: state.isEnableAddToCart
                                 ? () => onAddToCartPressed(
                                       context: context,

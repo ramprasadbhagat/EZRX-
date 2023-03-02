@@ -7,10 +7,6 @@ extension ComboDealExtension on PriceAggregate {
         materialNumber: getMaterialNumber,
       );
 
-  double get comboDealDiscount => comboDeal.groupDealEnabled
-      ? comboDeal.groupDeal.rate
-      : selfComboDeal.rate;
-
   double get comboDealListPrice => price.lastPrice.getOrDefaultValue(0);
 
   double get comboDealTotalListPrice => comboDealListPrice * quantity;
@@ -21,13 +17,13 @@ extension ComboDealExtension on PriceAggregate {
     switch (comboDeal.scheme) {
       case ComboDealScheme.k1:
         return NumUtils.roundToPlaces(
-          comboDealListPrice * (100 + comboDealDiscount) / 100,
+          comboDealListPrice * (100 + selfComboDeal.rate) / 100,
         );
       case ComboDealScheme.k2:
       case ComboDealScheme.k3:
       case ComboDealScheme.k4:
       case ComboDealScheme.k5:
-        return comboDealListPrice * (100 + comboDealDiscount) / 100;
+        return comboDealListPrice * (100 + selfComboDeal.rate) / 100;
     }
   }
 
@@ -44,5 +40,5 @@ extension ComboDealExtension on PriceAggregate {
     }
   }
 
-  bool get comboDealQtyEligible => quantity >= selfComboDeal.minQty;
+  bool get selfComboDealEligible => quantity >= selfComboDeal.minQty;
 }

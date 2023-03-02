@@ -9,15 +9,18 @@ import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/price_combo_deal.dart';
 import 'package:ezrxmobile/domain/order/repository/i_combo_deal_repository.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/combo_deal_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/combo_deal_remote.dart';
 
 class ComboDealRepository implements IComboDealRepository {
   final Config config;
   final ComboDealRemoteDataSource remoteDataSource;
+  final ComboDealLocalDataSource localDataSource;
 
   ComboDealRepository({
     required this.config,
     required this.remoteDataSource,
+    required this.localDataSource,
   });
 
   @override
@@ -28,7 +31,9 @@ class ComboDealRepository implements IComboDealRepository {
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
-        //TODO: Implement local data source
+        final comboDeals = await localDataSource.getComboDealList();
+
+        return Right(comboDeals);
       } catch (e) {
         return Left(FailureHandler.handleFailure(e));
       }

@@ -1,4 +1,6 @@
 import 'package:ezrxmobile/domain/order/entities/bundle_info.dart';
+import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
+import 'package:ezrxmobile/domain/order/entities/combo_deal_material.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
@@ -515,6 +517,36 @@ void main() {
       ];
 
       expect(cartList.allOutOfStock(allowOutOfStock: true), false);
+    });
+  });
+
+  group('Combo Deal', () {
+    test('K1 case', () {
+      final fakePriceAggregate = PriceAggregate.empty().copyWith(
+        materialInfo: MaterialInfo.empty()
+            .copyWith(materialNumber: MaterialNumber('fake-material')),
+        price: Price.empty().copyWith(lastPrice: MaterialPrice(100)),
+        quantity: 3,
+        comboDeal: ComboDeal.empty().copyWith(
+          materialComboDeals: [
+            ComboDealMaterialSet(
+              materials: [
+                ComboDealMaterial.empty().copyWith(
+                  minQty: 4,
+                  materialNumber: MaterialNumber('fake-material'),
+                  rate: -10,
+                )
+              ],
+              setNo: 'fake-set',
+            )
+          ],
+        ),
+      );
+      final cartItem = CartItem.comboDeal([fakePriceAggregate]);
+      expect(cartItem.listPrice, 300);
+      expect(cartItem.unitPrice, 270);
+      expect(cartItem.grandTotalPrice, 270);
+      expect(cartItem.subTotalPrice, 270);
     });
   });
 }

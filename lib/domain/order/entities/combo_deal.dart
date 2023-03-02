@@ -44,8 +44,6 @@ class ComboDeal with _$ComboDeal {
         orElse: () => ComboDealMaterial.empty(),
       );
 
-  bool get groupDealEnabled => groupDeal != ComboDealGroupDeal.empty();
-
   ComboDealScheme get scheme {
     if (materialComboDeals.isNotEmpty &&
         allMaterials.every((item) => item.mandatory)) {

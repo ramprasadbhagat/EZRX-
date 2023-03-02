@@ -20,6 +20,19 @@
             "ConditionNumber": "0070471303"
           }
         ],
+        "ComboDeals": {
+          "Eligible": true,
+          "FlexibleGroup": "5000000018",
+          "SalesDeal": "0040000020",
+          "Category": {
+            "Type": "MATNR",
+            "Value": [
+              "000000000021130726",
+              "000000000021130718",
+              "000000000021222875"
+            ]
+          }
+        },
         "Bonuses": [
         ],
         "TieredPricing": [

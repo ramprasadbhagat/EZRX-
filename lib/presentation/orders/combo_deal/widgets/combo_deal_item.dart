@@ -107,7 +107,7 @@ class ComboDealItem extends StatelessWidget {
                               price: material.comboDealTotalListPrice
                                   .toStringAsFixed(2),
                             ),
-                            if (!material.comboDealQtyEligible)
+                            if (!material.selfComboDealEligible)
                               Text(
                                 'Minimun Quantity should be ${material.selfComboDeal.minQty}',
                                 style: Theme.of(context)
@@ -134,7 +134,7 @@ class ComboDealItem extends StatelessWidget {
                                 ),
                               );
                         },
-                        minusPressed: material.comboDealQtyEligible &&
+                        minusPressed: material.selfComboDealEligible &&
                                 material.quantity !=
                                     material.selfComboDeal.minQty
                             ? (value) {
