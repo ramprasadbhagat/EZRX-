@@ -137,8 +137,8 @@ class HistoryOrderDetailSection extends StatelessWidget {
                 : const SizedBox.shrink(),
             BalanceTextRow(
               keyText: 'PO No.'.tr(),
-              valueText: orderDetails.orderHistoryDetailsOrderHeader.pOReference
-                  .displayPOReference,
+              valueText: orderDetails.orderHistoryDetailsShippingInformation
+                  .pOReference.displayPOReference,
               valueTextLoading: state.isLoading,
               keyFlex: 1,
               valueFlex: 1,

@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$OrderHistoryDetailsShippingInformation {
   String get address => throw _privateConstructorUsedError;
-  String get pOReference => throw _privateConstructorUsedError;
+  POReference get pOReference => throw _privateConstructorUsedError;
   String get invoiceNumber => throw _privateConstructorUsedError;
   String get invoiceDate => throw _privateConstructorUsedError;
   String get postalCode => throw _privateConstructorUsedError;
@@ -43,7 +43,7 @@ abstract class $OrderHistoryDetailsShippingInformationCopyWith<$Res> {
   @useResult
   $Res call(
       {String address,
-      String pOReference,
+      POReference pOReference,
       String invoiceNumber,
       String invoiceDate,
       String postalCode,
@@ -85,7 +85,7 @@ class _$OrderHistoryDetailsShippingInformationCopyWithImpl<$Res,
       pOReference: null == pOReference
           ? _value.pOReference
           : pOReference // ignore: cast_nullable_to_non_nullable
-              as String,
+              as POReference,
       invoiceNumber: null == invoiceNumber
           ? _value.invoiceNumber
           : invoiceNumber // ignore: cast_nullable_to_non_nullable
@@ -129,7 +129,7 @@ abstract class _$$_OrderHistoryDetailsShippingInformationCopyWith<$Res>
   @useResult
   $Res call(
       {String address,
-      String pOReference,
+      POReference pOReference,
       String invoiceNumber,
       String invoiceDate,
       String postalCode,
@@ -170,7 +170,7 @@ class __$$_OrderHistoryDetailsShippingInformationCopyWithImpl<$Res>
       pOReference: null == pOReference
           ? _value.pOReference
           : pOReference // ignore: cast_nullable_to_non_nullable
-              as String,
+              as POReference,
       invoiceNumber: null == invoiceNumber
           ? _value.invoiceNumber
           : invoiceNumber // ignore: cast_nullable_to_non_nullable
@@ -224,7 +224,7 @@ class _$_OrderHistoryDetailsShippingInformation
   @override
   final String address;
   @override
-  final String pOReference;
+  final POReference pOReference;
   @override
   final String invoiceNumber;
   @override
@@ -295,7 +295,7 @@ abstract class _OrderHistoryDetailsShippingInformation
     extends OrderHistoryDetailsShippingInformation {
   factory _OrderHistoryDetailsShippingInformation(
       {required final String address,
-      required final String pOReference,
+      required final POReference pOReference,
       required final String invoiceNumber,
       required final String invoiceDate,
       required final String postalCode,
@@ -309,7 +309,7 @@ abstract class _OrderHistoryDetailsShippingInformation
   @override
   String get address;
   @override
-  String get pOReference;
+  POReference get pOReference;
   @override
   String get invoiceNumber;
   @override

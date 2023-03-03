@@ -24,9 +24,8 @@ mixin _$OrderHistoryDetailsOrderHeadersDto {
   @JsonKey(name: 'TotalTax', defaultValue: 0.0)
   double get totalTax => throw _privateConstructorUsedError;
   @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
-  String get requestedDeliveryDate => throw _privateConstructorUsedError;
-  @JsonKey(name: 'POReference', defaultValue: '')
-  String get pOReference => throw _privateConstructorUsedError;
+  String get requestedDeliveryDate =>
+      throw _privateConstructorUsedError; // @JsonKey(name: 'POReference', defaultValue: '') required String pOReference,
   @JsonKey(name: 'Type', defaultValue: '')
   String get type => throw _privateConstructorUsedError;
   @JsonKey(name: 'TelephoneNumber', defaultValue: '')
@@ -62,8 +61,6 @@ abstract class $OrderHistoryDetailsOrderHeadersDtoCopyWith<$Res> {
           double totalTax,
       @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
           String requestedDeliveryDate,
-      @JsonKey(name: 'POReference', defaultValue: '')
-          String pOReference,
       @JsonKey(name: 'Type', defaultValue: '')
           String type,
       @JsonKey(name: 'TelephoneNumber', defaultValue: '')
@@ -96,7 +93,6 @@ class _$OrderHistoryDetailsOrderHeadersDtoCopyWithImpl<$Res,
   $Res call({
     Object? totalTax = null,
     Object? requestedDeliveryDate = null,
-    Object? pOReference = null,
     Object? type = null,
     Object? telephoneNumber = null,
     Object? orderValue = null,
@@ -113,10 +109,6 @@ class _$OrderHistoryDetailsOrderHeadersDtoCopyWithImpl<$Res,
       requestedDeliveryDate: null == requestedDeliveryDate
           ? _value.requestedDeliveryDate
           : requestedDeliveryDate // ignore: cast_nullable_to_non_nullable
-              as String,
-      pOReference: null == pOReference
-          ? _value.pOReference
-          : pOReference // ignore: cast_nullable_to_non_nullable
               as String,
       type: null == type
           ? _value.type
@@ -164,8 +156,6 @@ abstract class _$$_OrderHistoryDetailsOrderHeadersDtoCopyWith<$Res>
           double totalTax,
       @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
           String requestedDeliveryDate,
-      @JsonKey(name: 'POReference', defaultValue: '')
-          String pOReference,
       @JsonKey(name: 'Type', defaultValue: '')
           String type,
       @JsonKey(name: 'TelephoneNumber', defaultValue: '')
@@ -197,7 +187,6 @@ class __$$_OrderHistoryDetailsOrderHeadersDtoCopyWithImpl<$Res>
   $Res call({
     Object? totalTax = null,
     Object? requestedDeliveryDate = null,
-    Object? pOReference = null,
     Object? type = null,
     Object? telephoneNumber = null,
     Object? orderValue = null,
@@ -214,10 +203,6 @@ class __$$_OrderHistoryDetailsOrderHeadersDtoCopyWithImpl<$Res>
       requestedDeliveryDate: null == requestedDeliveryDate
           ? _value.requestedDeliveryDate
           : requestedDeliveryDate // ignore: cast_nullable_to_non_nullable
-              as String,
-      pOReference: null == pOReference
-          ? _value.pOReference
-          : pOReference // ignore: cast_nullable_to_non_nullable
               as String,
       type: null == type
           ? _value.type
@@ -260,8 +245,6 @@ class _$_OrderHistoryDetailsOrderHeadersDto
           required this.totalTax,
       @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
           required this.requestedDeliveryDate,
-      @JsonKey(name: 'POReference', defaultValue: '')
-          required this.pOReference,
       @JsonKey(name: 'Type', defaultValue: '')
           required this.type,
       @JsonKey(name: 'TelephoneNumber', defaultValue: '')
@@ -288,9 +271,7 @@ class _$_OrderHistoryDetailsOrderHeadersDto
   @override
   @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
   final String requestedDeliveryDate;
-  @override
-  @JsonKey(name: 'POReference', defaultValue: '')
-  final String pOReference;
+// @JsonKey(name: 'POReference', defaultValue: '') required String pOReference,
   @override
   @JsonKey(name: 'Type', defaultValue: '')
   final String type;
@@ -315,7 +296,7 @@ class _$_OrderHistoryDetailsOrderHeadersDto
 
   @override
   String toString() {
-    return 'OrderHistoryDetailsOrderHeadersDto(totalTax: $totalTax, requestedDeliveryDate: $requestedDeliveryDate, pOReference: $pOReference, type: $type, telephoneNumber: $telephoneNumber, orderValue: $orderValue, createdDate: $createdDate, eZRXNumber: $eZRXNumber, orderBy: $orderBy, referenceNotes: $referenceNotes)';
+    return 'OrderHistoryDetailsOrderHeadersDto(totalTax: $totalTax, requestedDeliveryDate: $requestedDeliveryDate, type: $type, telephoneNumber: $telephoneNumber, orderValue: $orderValue, createdDate: $createdDate, eZRXNumber: $eZRXNumber, orderBy: $orderBy, referenceNotes: $referenceNotes)';
   }
 
   @override
@@ -327,8 +308,6 @@ class _$_OrderHistoryDetailsOrderHeadersDto
                 other.totalTax == totalTax) &&
             (identical(other.requestedDeliveryDate, requestedDeliveryDate) ||
                 other.requestedDeliveryDate == requestedDeliveryDate) &&
-            (identical(other.pOReference, pOReference) ||
-                other.pOReference == pOReference) &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.telephoneNumber, telephoneNumber) ||
                 other.telephoneNumber == telephoneNumber) &&
@@ -349,7 +328,6 @@ class _$_OrderHistoryDetailsOrderHeadersDto
       runtimeType,
       totalTax,
       requestedDeliveryDate,
-      pOReference,
       type,
       telephoneNumber,
       orderValue,
@@ -381,8 +359,6 @@ abstract class _OrderHistoryDetailsOrderHeadersDto
               required final double totalTax,
           @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
               required final String requestedDeliveryDate,
-          @JsonKey(name: 'POReference', defaultValue: '')
-              required final String pOReference,
           @JsonKey(name: 'Type', defaultValue: '')
               required final String type,
           @JsonKey(name: 'TelephoneNumber', defaultValue: '')
@@ -410,10 +386,7 @@ abstract class _OrderHistoryDetailsOrderHeadersDto
   @override
   @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
   String get requestedDeliveryDate;
-  @override
-  @JsonKey(name: 'POReference', defaultValue: '')
-  String get pOReference;
-  @override
+  @override // @JsonKey(name: 'POReference', defaultValue: '') required String pOReference,
   @JsonKey(name: 'Type', defaultValue: '')
   String get type;
   @override

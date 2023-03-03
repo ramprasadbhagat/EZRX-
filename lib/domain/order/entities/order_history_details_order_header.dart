@@ -10,7 +10,6 @@ class OrderHistoryDetailsOrderHeader with _$OrderHistoryDetailsOrderHeader {
   factory OrderHistoryDetailsOrderHeader({
     required double totalTax,
     required DateTimeStringValue requestedDeliveryDate,
-    required POReference pOReference,
     required String type,
     required PhoneNumber telephoneNumber,
     required double orderValue,
@@ -23,7 +22,6 @@ class OrderHistoryDetailsOrderHeader with _$OrderHistoryDetailsOrderHeader {
       OrderHistoryDetailsOrderHeader(
         totalTax: 0.0,
         requestedDeliveryDate: DateTimeStringValue(''),
-        pOReference: POReference(''),
         type: '',
         telephoneNumber: PhoneNumber(''),
         orderValue: 0.0,

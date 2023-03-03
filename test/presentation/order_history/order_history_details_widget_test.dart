@@ -38,6 +38,7 @@ import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_messages.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_document_buffer.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details_shipping_information.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/common/permission.dart';
@@ -306,10 +307,15 @@ void main() {
       );
     }
 
-    testWidgets('Order History Details page test ', (tester) async {
+    testWidgets('Order History Details page test poNo suceed', (tester) async {
       when(() => mockOrderHistoryDetailsBloc.state).thenReturn(
         OrderHistoryDetailsState.initial().copyWith(
-          orderHistoryDetails: OrderHistoryDetails.empty(),
+          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+            orderHistoryDetailsShippingInformation: 
+              OrderHistoryDetailsShippingInformation.empty().copyWith(
+                pOReference: POReference('test')
+              ),        
+          ),
           failureOrSuccessOption: none(),
           isLoading: false,
           showErrorMessage: false,
@@ -331,6 +337,9 @@ void main() {
       expect(shiptoAddressField, findsOneWidget);
 
       expect(invoicesField, findsOneWidget);
+
+      final pOReferenceCheck = find.textContaining('test');
+      expect(pOReferenceCheck, findsAtLeastNWidgets(1));
     });
 
     testWidgets('Show Error Message test with reorder button loading',

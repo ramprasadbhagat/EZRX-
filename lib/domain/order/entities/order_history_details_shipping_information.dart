@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/order/entities/order_history_details_shipping_information_invoices.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'order_history_details_shipping_information.freezed.dart';
 
@@ -7,7 +8,7 @@ class OrderHistoryDetailsShippingInformation with _$OrderHistoryDetailsShippingI
   const OrderHistoryDetailsShippingInformation._();
   factory OrderHistoryDetailsShippingInformation({
     required String address,
-    required String pOReference ,
+    required POReference pOReference,
     required String invoiceNumber,
     required String invoiceDate,
     required  String postalCode,
@@ -18,7 +19,7 @@ class OrderHistoryDetailsShippingInformation with _$OrderHistoryDetailsShippingI
   })=_OrderHistoryDetailsShippingInformation;
   factory OrderHistoryDetailsShippingInformation.empty() => OrderHistoryDetailsShippingInformation(
         address: '',
-        pOReference: '',
+        pOReference: POReference(''),
         invoiceNumber: '',
         invoiceDate: '',
         postalCode: '',

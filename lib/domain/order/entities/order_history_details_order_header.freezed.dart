@@ -18,8 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$OrderHistoryDetailsOrderHeader {
   double get totalTax => throw _privateConstructorUsedError;
   DateTimeStringValue get requestedDeliveryDate =>
-      throw _privateConstructorUsedError;
-  POReference get pOReference => throw _privateConstructorUsedError;
+      throw _privateConstructorUsedError; // required POReference pOReference,
   String get type => throw _privateConstructorUsedError;
   PhoneNumber get telephoneNumber => throw _privateConstructorUsedError;
   double get orderValue => throw _privateConstructorUsedError;
@@ -44,7 +43,6 @@ abstract class $OrderHistoryDetailsOrderHeaderCopyWith<$Res> {
   $Res call(
       {double totalTax,
       DateTimeStringValue requestedDeliveryDate,
-      POReference pOReference,
       String type,
       PhoneNumber telephoneNumber,
       double orderValue,
@@ -70,7 +68,6 @@ class _$OrderHistoryDetailsOrderHeaderCopyWithImpl<$Res,
   $Res call({
     Object? totalTax = null,
     Object? requestedDeliveryDate = null,
-    Object? pOReference = null,
     Object? type = null,
     Object? telephoneNumber = null,
     Object? orderValue = null,
@@ -88,10 +85,6 @@ class _$OrderHistoryDetailsOrderHeaderCopyWithImpl<$Res,
           ? _value.requestedDeliveryDate
           : requestedDeliveryDate // ignore: cast_nullable_to_non_nullable
               as DateTimeStringValue,
-      pOReference: null == pOReference
-          ? _value.pOReference
-          : pOReference // ignore: cast_nullable_to_non_nullable
-              as POReference,
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -136,7 +129,6 @@ abstract class _$$_OrderHistoryDetailsOrderHeaderCopyWith<$Res>
   $Res call(
       {double totalTax,
       DateTimeStringValue requestedDeliveryDate,
-      POReference pOReference,
       String type,
       PhoneNumber telephoneNumber,
       double orderValue,
@@ -161,7 +153,6 @@ class __$$_OrderHistoryDetailsOrderHeaderCopyWithImpl<$Res>
   $Res call({
     Object? totalTax = null,
     Object? requestedDeliveryDate = null,
-    Object? pOReference = null,
     Object? type = null,
     Object? telephoneNumber = null,
     Object? orderValue = null,
@@ -179,10 +170,6 @@ class __$$_OrderHistoryDetailsOrderHeaderCopyWithImpl<$Res>
           ? _value.requestedDeliveryDate
           : requestedDeliveryDate // ignore: cast_nullable_to_non_nullable
               as DateTimeStringValue,
-      pOReference: null == pOReference
-          ? _value.pOReference
-          : pOReference // ignore: cast_nullable_to_non_nullable
-              as POReference,
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -222,7 +209,6 @@ class _$_OrderHistoryDetailsOrderHeader
   _$_OrderHistoryDetailsOrderHeader(
       {required this.totalTax,
       required this.requestedDeliveryDate,
-      required this.pOReference,
       required this.type,
       required this.telephoneNumber,
       required this.orderValue,
@@ -236,8 +222,7 @@ class _$_OrderHistoryDetailsOrderHeader
   final double totalTax;
   @override
   final DateTimeStringValue requestedDeliveryDate;
-  @override
-  final POReference pOReference;
+// required POReference pOReference,
   @override
   final String type;
   @override
@@ -255,7 +240,7 @@ class _$_OrderHistoryDetailsOrderHeader
 
   @override
   String toString() {
-    return 'OrderHistoryDetailsOrderHeader(totalTax: $totalTax, requestedDeliveryDate: $requestedDeliveryDate, pOReference: $pOReference, type: $type, telephoneNumber: $telephoneNumber, orderValue: $orderValue, createdDate: $createdDate, eZRXNumber: $eZRXNumber, orderBy: $orderBy, referenceNotes: $referenceNotes)';
+    return 'OrderHistoryDetailsOrderHeader(totalTax: $totalTax, requestedDeliveryDate: $requestedDeliveryDate, type: $type, telephoneNumber: $telephoneNumber, orderValue: $orderValue, createdDate: $createdDate, eZRXNumber: $eZRXNumber, orderBy: $orderBy, referenceNotes: $referenceNotes)';
   }
 
   @override
@@ -267,8 +252,6 @@ class _$_OrderHistoryDetailsOrderHeader
                 other.totalTax == totalTax) &&
             (identical(other.requestedDeliveryDate, requestedDeliveryDate) ||
                 other.requestedDeliveryDate == requestedDeliveryDate) &&
-            (identical(other.pOReference, pOReference) ||
-                other.pOReference == pOReference) &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.telephoneNumber, telephoneNumber) ||
                 other.telephoneNumber == telephoneNumber) &&
@@ -288,7 +271,6 @@ class _$_OrderHistoryDetailsOrderHeader
       runtimeType,
       totalTax,
       requestedDeliveryDate,
-      pOReference,
       type,
       telephoneNumber,
       orderValue,
@@ -310,7 +292,6 @@ abstract class _OrderHistoryDetailsOrderHeader
   factory _OrderHistoryDetailsOrderHeader(
           {required final double totalTax,
           required final DateTimeStringValue requestedDeliveryDate,
-          required final POReference pOReference,
           required final String type,
           required final PhoneNumber telephoneNumber,
           required final double orderValue,
@@ -325,9 +306,7 @@ abstract class _OrderHistoryDetailsOrderHeader
   double get totalTax;
   @override
   DateTimeStringValue get requestedDeliveryDate;
-  @override
-  POReference get pOReference;
-  @override
+  @override // required POReference pOReference,
   String get type;
   @override
   PhoneNumber get telephoneNumber;

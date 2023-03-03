@@ -55,7 +55,7 @@ class AdditionalDetailsData with _$AdditionalDetailsData {
   }) {
     return AdditionalDetailsData.empty().copyWith(
       customerPoReference: CustomerPoReference(
-        orderHistoryDetails.orderHistoryDetailsShippingInformation.pOReference,
+        orderHistoryDetails.orderHistoryDetailsShippingInformation.pOReference.displayPOReference,
       ),
       contactPerson: ContactPerson(
         orderHistoryDetails.orderHistoryDetailsOrderHeader.orderBy,

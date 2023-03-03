@@ -11,7 +11,6 @@ _$_OrderHistoryDetailsOrderHeadersDto
         _$_OrderHistoryDetailsOrderHeadersDto(
           totalTax: (json['TotalTax'] as num?)?.toDouble() ?? 0.0,
           requestedDeliveryDate: json['RequestedDeliveryDate'] as String? ?? '',
-          pOReference: json['POReference'] as String? ?? '',
           type: json['Type'] as String? ?? '',
           telephoneNumber: json['TelephoneNumber'] as String? ?? '',
           orderValue: (json['OrderValue'] as num?)?.toDouble() ?? 0.0,
@@ -26,7 +25,6 @@ Map<String, dynamic> _$$_OrderHistoryDetailsOrderHeadersDtoToJson(
     <String, dynamic>{
       'TotalTax': instance.totalTax,
       'RequestedDeliveryDate': instance.requestedDeliveryDate,
-      'POReference': instance.pOReference,
       'Type': instance.type,
       'TelephoneNumber': instance.telephoneNumber,
       'OrderValue': instance.orderValue,

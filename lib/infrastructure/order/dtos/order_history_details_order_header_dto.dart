@@ -14,7 +14,6 @@ class OrderHistoryDetailsOrderHeadersDto
     @JsonKey(name: 'TotalTax', defaultValue: 0.0) required double totalTax,
     @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
         required String requestedDeliveryDate,
-    @JsonKey(name: 'POReference', defaultValue: '') required String pOReference,
     @JsonKey(name: 'Type', defaultValue: '') required String type,
     @JsonKey(name: 'TelephoneNumber', defaultValue: '')
         required String telephoneNumber,
@@ -32,8 +31,6 @@ class OrderHistoryDetailsOrderHeadersDto
       totalTax: orderHistoryDetailsOrderHeader.totalTax,
       requestedDeliveryDate: orderHistoryDetailsOrderHeader
           .requestedDeliveryDate.toValidDateString,
-      pOReference:
-          orderHistoryDetailsOrderHeader.pOReference.displayPOReference,
       type: orderHistoryDetailsOrderHeader.type,
       telephoneNumber:
           orderHistoryDetailsOrderHeader.telephoneNumber.displayTelephoneNumber,
@@ -49,7 +46,6 @@ class OrderHistoryDetailsOrderHeadersDto
     return OrderHistoryDetailsOrderHeader(
       totalTax: totalTax,
       requestedDeliveryDate: DateTimeStringValue(requestedDeliveryDate),
-      pOReference: POReference(pOReference),
       type: type,
       telephoneNumber: PhoneNumber(telephoneNumber),
       orderValue: orderValue,

@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/order_history_details_shipping_information_invoices_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -25,7 +26,7 @@ class OrderHistoryDetailsShippingInformationDto
       OrderHistoryDetailsShippingInformation orderHistoryDetailsShippingInformation,) {
     return OrderHistoryDetailsShippingInformationDto(
         address: orderHistoryDetailsShippingInformation.address,
-        pOReference: orderHistoryDetailsShippingInformation.pOReference,
+        pOReference: orderHistoryDetailsShippingInformation.pOReference.displayPOReference,
         invoiceNumber: orderHistoryDetailsShippingInformation.invoiceNumber,
         invoiceDate: orderHistoryDetailsShippingInformation.invoiceDate,
         postalCode: orderHistoryDetailsShippingInformation.postalCode,
@@ -41,7 +42,7 @@ class OrderHistoryDetailsShippingInformationDto
   OrderHistoryDetailsShippingInformation toDomain() {
     return OrderHistoryDetailsShippingInformation(
       address: address,
-      pOReference: pOReference,
+      pOReference: POReference(pOReference),
       invoiceNumber: invoiceNumber,
       invoiceDate: invoiceDate,
       postalCode: postalCode,

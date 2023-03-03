@@ -77,7 +77,6 @@ class OrderHistoryDetailsDto with _$OrderHistoryDetailsDto {
       orderHistoryDetailsOrderHeader: OrderHistoryDetailsOrderHeader(
         totalTax: orderHistoryDetailsOrderHeader.totalTax,
         orderValue: orderHistoryDetailsOrderHeader.orderValue,
-        pOReference: POReference(orderHistoryDetailsOrderHeader.pOReference),
         requestedDeliveryDate: DateTimeStringValue(
           orderHistoryDetailsOrderHeader.requestedDeliveryDate,
         ),
@@ -100,7 +99,7 @@ class OrderHistoryDetailsDto with _$OrderHistoryDetailsDto {
         invoices: orderHistoryDetailsShippingInformation.invoices
             .map((e) => e.toDomain())
             .toList(),
-        pOReference: orderHistoryDetailsShippingInformation.pOReference,
+        pOReference: POReference(orderHistoryDetailsShippingInformation.pOReference),
         phone: orderHistoryDetailsShippingInformation.phone,
         postalCode: orderHistoryDetailsShippingInformation.postalCode,
       ),
