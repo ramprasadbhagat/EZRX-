@@ -12,6 +12,7 @@ import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/custom_label.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
+import 'package:ezrxmobile/presentation/orders/cart/item/cart_delete_item_button.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/quantity_input.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -88,19 +89,7 @@ class CartBundleItemTile extends StatelessWidget {
                                         Theme.of(context).textTheme.titleSmall,
                                   ),
                                 ),
-                                IconButton(
-                                  padding: const EdgeInsets.only(right: 8),
-                                  constraints: const BoxConstraints(),
-                                  key: const Key('deleteFromCart'),
-                                  onPressed: () {
-                                    context.read<CartBloc>().add(
-                                          CartEvent.removeFromCart(
-                                            item: cartItem,
-                                          ),
-                                        );
-                                  },
-                                  icon: const Icon(Icons.delete),
-                                ),
+                                CartDeleteItemButton(item: cartItem),
                               ],
                             ),
                             Text(

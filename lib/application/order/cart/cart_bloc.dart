@@ -1,5 +1,5 @@
-import 'package:collection/collection.dart';
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/domain/order/entities/price_combo_deal.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
@@ -77,13 +77,11 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       );
     });
     on<_AddMaterialToCart>((e, emit) async {
-      final comboDealId = e.item.price.comboDeal.id;
-      //TODO: Currently, since each ComboDeal will have its id defined as {salesDeal}-{flexibleGroup}-{scheme}
-      // so I use startWith() to check if the added material already had its combo deal in cart
-      final inCartComboDeal = state.cartItems.firstWhereOrNull(
-        (item) => item.id.startsWith(comboDealId),
+      final comboDeal = e.item.price.comboDeal;
+      final inCartComboDeal = state.getComboDealCartItem(
+        comboDealQuery: comboDeal,
       );
-      if (inCartComboDeal != null) {
+      if (inCartComboDeal.materials.isNotEmpty) {
         add(
           _UpdateMaterialQtyInCartItem(
             updatedQtyItem: e.item,
@@ -589,8 +587,24 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         ),
       );
 
+      final comboDealItems = e.comboDealItems.map((item) {
+        final currentMaterialInCart = state.getMaterialCartItem(material: item);
+
+        return currentMaterialInCart == CartItem.materialEmpty()
+            ? item
+            : item.copyWithIncreasedQty(qty: currentMaterialInCart.totalQty);
+      }).toList();
+
+      await Future.wait(
+        comboDealItems.map(
+          (item) => repository.deleteFromCart(
+            item: CartItem.material(item),
+          ),
+        ),
+      );
+
       final failureOrSuccess = await repository.addItemToCart(
-        cartItem: CartItem.comboDeal(e.comboDealItems),
+        cartItem: CartItem.comboDeal(comboDealItems),
         override: e.overrideQty,
         customerCodeInfo: e.customerCodeInfo,
         salesOrganisation: e.salesOrganisation,

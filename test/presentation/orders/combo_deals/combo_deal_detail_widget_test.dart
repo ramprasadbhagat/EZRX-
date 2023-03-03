@@ -133,7 +133,6 @@ void main() {
       );
 
       expect(find.text('Combo Bundle Details'), findsOneWidget);
-      expect(find.byType(CartButton), findsOneWidget);
       expect(find.byType(ComboDealItem), findsNothing);
       expect(find.byKey(const Key('addToCartButton')), findsOneWidget);
       expect(find.text('Add To Cart'), findsOneWidget);

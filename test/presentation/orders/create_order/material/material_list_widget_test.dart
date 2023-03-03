@@ -1,7 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
@@ -42,7 +41,8 @@ import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/custom_selector.dart';
 import 'package:ezrxmobile/presentation/orders/combo_deal/widgets/combo_deal_label.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/favorite_button.dart';
-import 'package:ezrxmobile/presentation/orders/create_order/material_list.dart';
+import 'package:ezrxmobile/presentation/orders/create_order/material_list/material_list.dart';
+import 'package:ezrxmobile/presentation/orders/create_order/material_list/material_list_item.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/material_root.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/order_type_selector.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -119,14 +119,6 @@ class ScanMaterialinfoBlocMock
 class AddToCartBlocMock extends MockBloc<AddToCartEvent, AddToCartState>
     implements AddToCartBloc {}
 
-class AddToCartStub {
-  void addToCart() {
-    // Do nothing
-  }
-}
-
-class MockAddToCartStub extends Mock implements AddToCartStub {}
-
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late MaterialListBloc materialListBlocMock;
@@ -141,7 +133,6 @@ void main() {
   // late MaterialListBloc materialListBloc;
   late OrderDocumentTypeBloc orderDocumentTypeBlocMock;
   late EligibilityBlocMock eligibilityBlocMock;
-  late AddToCartStub mockAddToCartStub;
   late TenderContractBloc mockTenderContractBloc;
   late AdditionalDetailsBloc mockAdditionalDetailsBloc;
   late ComboDealListBloc mockComboDealListBloc;
@@ -193,120 +184,104 @@ void main() {
     setupLocator();
   });
 
-  group('Material List Test', () {
-    setUp(() {
-      materialListBlocMock = MaterialMockBloc();
-      salesOrgBlocMock = SalesOrgMockBloc();
-      customerCodeBlocMock = CustomerCodeMockBloc();
-      shipToCodeBlocMock = ShipToCodeMockBloc();
-      userBlocMock = UserMockBloc();
-      mockFavouriteBloc = MockFavouriteBloc();
-      materialPriceBlocMock = MaterialPriceBlocMock();
-      cartBlocMock = CartBlocMock();
-      mockMaterialFilterBloc = MockMaterialFilterBloc();
-      orderDocumentTypeBlocMock = OrderDocumentTypeBlocMock();
-      mockAddToCartStub = MockAddToCartStub();
-      autoRouterMock = locator<AppRouter>();
-      eligibilityBlocMock = EligibilityBlocMock();
-      mockTenderContractBloc = TenderContractBlocMock();
-      mockAdditionalDetailsBloc = AdditionalDetailsBlocMock();
-      mockComboDealListBloc = ComboDealListBlocMock();
-      mockMaterialPriceDetailBloc = MaterialPriceDetailBlocMock();
-      mockScanMaterialInfoBloc = ScanMaterialinfoBlocMock();
-      mockAddToCartBloc = AddToCartBlocMock();
-      when(() => userBlocMock.state).thenReturn(UserState.initial());
-      when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
-      when(() => customerCodeBlocMock.state)
-          .thenReturn(CustomerCodeState.initial());
-      when(() => mockFavouriteBloc.state).thenReturn(FavouriteState.initial());
-      when(() => materialPriceBlocMock.state)
-          .thenReturn(MaterialPriceState.initial());
-      when(() => cartBlocMock.state).thenReturn(CartState.initial());
-      when(() => mockAddToCartBloc.state).thenReturn(AddToCartState.initial());
-      when(() => mockMaterialFilterBloc.state).thenReturn(
-        MaterialFilterState.initial().copyWith(
-          selectedMaterialFilter:
-              MaterialFilterState.initial().selectedMaterialFilter.copyWith(
-            uniqueTherapeuticClass: [
-              'GSK Consumer Healthcare',
-              'All other non-therapeutic products',
-            ],
-          ),
-        ),
-      );
-      when(() => materialListBlocMock.state)
-          .thenReturn(MaterialListState.initial());
-      when(() => orderDocumentTypeBlocMock.state)
-          .thenReturn(OrderDocumentTypeState.initial());
-      when(() => eligibilityBlocMock.state)
-          .thenReturn(EligibilityState.initial());
-      when(() => shipToCodeBlocMock.state)
-          .thenReturn(ShipToCodeState.initial());
-      when(() => mockTenderContractBloc.state)
-          .thenReturn(TenderContractState.initial());
-      when(() => mockScanMaterialInfoBloc.state)
-          .thenReturn(ScanMaterialInfoState.initial());
-      when(() => mockAdditionalDetailsBloc.state)
-          .thenReturn(AdditionalDetailsState.initial());
-      when(() => mockMaterialPriceDetailBloc.state)
-          .thenReturn(MaterialPriceDetailState.initial());
-      when(() => mockComboDealListBloc.state)
-          .thenReturn(ComboDealListState.initial());
-    });
+  Widget getScopedWidget(Widget child) {
+    return WidgetUtils.getScopedWidget(
+      autoRouterMock: autoRouterMock,
+      providers: [
+        BlocProvider<UserBloc>(create: ((context) => userBlocMock)),
+        BlocProvider<SalesOrgBloc>(create: ((context) => salesOrgBlocMock)),
+        BlocProvider<CustomerCodeBloc>(
+            create: ((context) => customerCodeBlocMock)),
+        BlocProvider<ShipToCodeBloc>(create: ((context) => shipToCodeBlocMock)),
+        BlocProvider<MaterialListBloc>(
+            create: ((context) => materialListBlocMock)),
+        BlocProvider<FavouriteBloc>(create: ((context) => mockFavouriteBloc)),
+        BlocProvider<MaterialPriceBloc>(
+            create: ((context) => materialPriceBlocMock)),
+        BlocProvider<CartBloc>(create: ((context) => cartBlocMock)),
+        BlocProvider<MaterialFilterBloc>(
+            create: ((context) => mockMaterialFilterBloc)),
+        BlocProvider<MaterialListBloc>(
+            create: ((context) => materialListBlocMock)),
+        BlocProvider<OrderDocumentTypeBloc>(
+            create: ((context) => orderDocumentTypeBlocMock)),
+        BlocProvider<EligibilityBloc>(
+            create: ((context) => eligibilityBlocMock)),
+        BlocProvider<TenderContractBloc>(
+            create: ((context) => mockTenderContractBloc)),
+        BlocProvider<ScanMaterialInfoBloc>(
+            create: ((context) => mockScanMaterialInfoBloc)),
+        BlocProvider<AdditionalDetailsBloc>(
+            create: ((context) => mockAdditionalDetailsBloc)),
+        BlocProvider<MaterialPriceDetailBloc>(
+            create: ((context) => mockMaterialPriceDetailBloc)),
+        BlocProvider<ComboDealListBloc>(
+            create: ((context) => mockComboDealListBloc)),
+        BlocProvider<AddToCartBloc>(create: ((context) => mockAddToCartBloc)),
+      ],
+      child: child,
+    );
+  }
 
-    Widget getScopedWidget(Widget child) {
-      return EasyLocalization(
-        supportedLocales: const [
-          Locale('en', 'SG'),
-        ],
-        path: 'assets/langs/langs.csv',
-        startLocale: const Locale('en', 'SG'),
-        fallbackLocale: const Locale('en', 'SG'),
-        saveLocale: true,
-        useOnlyLangCode: false,
-        assetLoader: CsvAssetLoader(),
-        child: WidgetUtils.getScopedWidget(
-          autoRouterMock: autoRouterMock,
-          providers: [
-            BlocProvider<UserBloc>(create: ((context) => userBlocMock)),
-            BlocProvider<SalesOrgBloc>(create: ((context) => salesOrgBlocMock)),
-            BlocProvider<CustomerCodeBloc>(
-                create: ((context) => customerCodeBlocMock)),
-            BlocProvider<ShipToCodeBloc>(
-                create: ((context) => shipToCodeBlocMock)),
-            BlocProvider<MaterialListBloc>(
-                create: ((context) => materialListBlocMock)),
-            BlocProvider<FavouriteBloc>(
-                create: ((context) => mockFavouriteBloc)),
-            BlocProvider<MaterialPriceBloc>(
-                create: ((context) => materialPriceBlocMock)),
-            BlocProvider<CartBloc>(create: ((context) => cartBlocMock)),
-            BlocProvider<MaterialFilterBloc>(
-                create: ((context) => mockMaterialFilterBloc)),
-            BlocProvider<MaterialListBloc>(
-                create: ((context) => materialListBlocMock)),
-            BlocProvider<OrderDocumentTypeBloc>(
-                create: ((context) => orderDocumentTypeBlocMock)),
-            BlocProvider<EligibilityBloc>(
-                create: ((context) => eligibilityBlocMock)),
-            BlocProvider<TenderContractBloc>(
-                create: ((context) => mockTenderContractBloc)),
-            BlocProvider<ScanMaterialInfoBloc>(
-                create: ((context) => mockScanMaterialInfoBloc)),
-            BlocProvider<AdditionalDetailsBloc>(
-                create: ((context) => mockAdditionalDetailsBloc)),
-            BlocProvider<MaterialPriceDetailBloc>(
-                create: ((context) => mockMaterialPriceDetailBloc)),
-            BlocProvider<ComboDealListBloc>(
-                create: ((context) => mockComboDealListBloc)),
-            BlocProvider<AddToCartBloc>(
-                create: ((context) => mockAddToCartBloc)),
+  setUp(() {
+    materialListBlocMock = MaterialMockBloc();
+    salesOrgBlocMock = SalesOrgMockBloc();
+    customerCodeBlocMock = CustomerCodeMockBloc();
+    shipToCodeBlocMock = ShipToCodeMockBloc();
+    userBlocMock = UserMockBloc();
+    mockFavouriteBloc = MockFavouriteBloc();
+    materialPriceBlocMock = MaterialPriceBlocMock();
+    cartBlocMock = CartBlocMock();
+    mockMaterialFilterBloc = MockMaterialFilterBloc();
+    orderDocumentTypeBlocMock = OrderDocumentTypeBlocMock();
+    autoRouterMock = locator<AppRouter>();
+    eligibilityBlocMock = EligibilityBlocMock();
+    mockTenderContractBloc = TenderContractBlocMock();
+    mockAdditionalDetailsBloc = AdditionalDetailsBlocMock();
+    mockComboDealListBloc = ComboDealListBlocMock();
+    mockMaterialPriceDetailBloc = MaterialPriceDetailBlocMock();
+    mockScanMaterialInfoBloc = ScanMaterialinfoBlocMock();
+    mockAddToCartBloc = AddToCartBlocMock();
+    when(() => userBlocMock.state).thenReturn(UserState.initial());
+    when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
+    when(() => customerCodeBlocMock.state)
+        .thenReturn(CustomerCodeState.initial());
+    when(() => mockFavouriteBloc.state).thenReturn(FavouriteState.initial());
+    when(() => materialPriceBlocMock.state)
+        .thenReturn(MaterialPriceState.initial());
+    when(() => cartBlocMock.state).thenReturn(CartState.initial());
+    when(() => mockAddToCartBloc.state).thenReturn(AddToCartState.initial());
+    when(() => mockMaterialFilterBloc.state).thenReturn(
+      MaterialFilterState.initial().copyWith(
+        selectedMaterialFilter:
+            MaterialFilterState.initial().selectedMaterialFilter.copyWith(
+          uniqueTherapeuticClass: [
+            'GSK Consumer Healthcare',
+            'All other non-therapeutic products',
           ],
-          child: child,
         ),
-      );
-    }
+      ),
+    );
+    when(() => materialListBlocMock.state)
+        .thenReturn(MaterialListState.initial());
+    when(() => orderDocumentTypeBlocMock.state)
+        .thenReturn(OrderDocumentTypeState.initial());
+    when(() => eligibilityBlocMock.state)
+        .thenReturn(EligibilityState.initial());
+    when(() => shipToCodeBlocMock.state).thenReturn(ShipToCodeState.initial());
+    when(() => mockTenderContractBloc.state)
+        .thenReturn(TenderContractState.initial());
+    when(() => mockScanMaterialInfoBloc.state)
+        .thenReturn(ScanMaterialInfoState.initial());
+    when(() => mockAdditionalDetailsBloc.state)
+        .thenReturn(AdditionalDetailsState.initial());
+    when(() => mockMaterialPriceDetailBloc.state)
+        .thenReturn(MaterialPriceDetailState.initial());
+    when(() => mockComboDealListBloc.state)
+        .thenReturn(ComboDealListState.initial());
+  });
 
+  group('Material List Test', () {
     testWidgets('Matrials List Page Initialized', (tester) async {
       when(() => materialListBlocMock.state)
           .thenReturn(MaterialListState.initial());
@@ -434,7 +409,7 @@ void main() {
       'Test material list search',
       (tester) async {
         await tester.pumpWidget(getScopedWidget(
-          MaterialListPage(addToCart: () {}),
+          const MaterialListPage(),
         ));
 
         await tester.pumpAndSettle(const Duration(seconds: 3));
@@ -456,7 +431,7 @@ void main() {
       whenListen(materialListBlocMock,
           Stream.fromIterable(expectedCustomerCodeListStates));
       await tester.pumpWidget(getScopedWidget(
-        MaterialListPage(addToCart: () {}),
+        const MaterialListPage(),
       ));
       await tester.pumpAndSettle(const Duration(seconds: 3));
 
@@ -994,8 +969,7 @@ void main() {
           },
         ),
       );
-      await tester
-          .pumpWidget(getScopedWidget(MaterialListPage(addToCart: () {})));
+      await tester.pumpWidget(getScopedWidget(const MaterialListPage()));
       await tester.pump();
 
       final materialList = find.byKey(const Key('scrollList'));
@@ -1076,8 +1050,7 @@ void main() {
           },
         ),
       );
-      await tester
-          .pumpWidget(getScopedWidget(MaterialListPage(addToCart: () {})));
+      await tester.pumpWidget(getScopedWidget(const MaterialListPage()));
       await tester.pump();
       final listContent = find.byKey(Key(
           'materialOption${materialListBlocMock.state.materialList.first.materialNumber.getOrCrash()}'));
@@ -1119,8 +1092,7 @@ void main() {
           },
         ),
       );
-      await tester
-          .pumpWidget(getScopedWidget(MaterialListPage(addToCart: () {})));
+      await tester.pumpWidget(getScopedWidget(const MaterialListPage()));
       await tester.pump();
       final listContent = find.byKey(Key(
           'materialOption${materialListBlocMock.state.materialList.first.materialNumber.getOrCrash()}'));
@@ -1158,8 +1130,7 @@ void main() {
           },
         ),
       );
-      await tester
-          .pumpWidget(getScopedWidget(MaterialListPage(addToCart: () {})));
+      await tester.pumpWidget(getScopedWidget(const MaterialListPage()));
       await tester.pump();
       final listContent = find.byKey(Key(
           'materialOption${materialListBlocMock.state.materialList.first.materialNumber.getOrCrash()}'));
@@ -1203,8 +1174,7 @@ void main() {
         ),
       );
 
-      await tester
-          .pumpWidget(getScopedWidget(MaterialListPage(addToCart: () {})));
+      await tester.pumpWidget(getScopedWidget(const MaterialListPage()));
 
       final thirdListItem = find.text('23168453');
 
@@ -1255,8 +1225,7 @@ void main() {
 
       final handle = tester.ensureSemantics();
 
-      await tester
-          .pumpWidget(getScopedWidget(MaterialListPage(addToCart: () {})));
+      await tester.pumpWidget(getScopedWidget(const MaterialListPage()));
 
       // debugDumpApp();
 
@@ -1430,12 +1399,7 @@ void main() {
 
       await tester.pumpWidget(
         getScopedWidget(
-          MaterialListPage(addToCart: ({
-            required BuildContext context,
-            required PriceAggregate priceAggregate,
-          }) {
-            mockAddToCartStub.addToCart();
-          }),
+          const MaterialListPage(),
         ),
       );
 
@@ -1443,10 +1407,6 @@ void main() {
 
       await tester.tap(firstListItem);
       await tester.pump(const Duration(seconds: 1));
-
-      verify(
-        () => mockAddToCartStub.addToCart(),
-      ).called(1);
     });
 
     testWidgets('Material List Item favorite button tap', (tester) async {
@@ -1479,11 +1439,7 @@ void main() {
 
       await tester.pumpWidget(
         getScopedWidget(
-          MaterialListPage(addToCart: (
-              {required BuildContext context,
-              required PriceAggregate priceAggregate}) {
-            mockAddToCartStub.addToCart();
-          }),
+          const MaterialListPage(),
         ),
       );
 
@@ -1517,11 +1473,7 @@ void main() {
 
       await tester.pumpWidget(
         getScopedWidget(
-          MaterialListPage(addToCart: (
-              {required BuildContext context,
-              required PriceAggregate priceAggregate}) {
-            mockAddToCartStub.addToCart();
-          }),
+          const MaterialListPage(),
         ),
       );
 
@@ -1563,8 +1515,7 @@ void main() {
 
       whenListen(
           materialListBlocMock, Stream.fromIterable(expectedStatesSuccess));
-      await tester
-          .pumpWidget(getScopedWidget(MaterialListPage(addToCart: () {})));
+      await tester.pumpWidget(getScopedWidget(const MaterialListPage()));
     });
 
     testWidgets('Test orderDocumentType List success', (tester) async {
@@ -1598,8 +1549,7 @@ void main() {
 
       whenListen(orderDocumentTypeBlocMock,
           Stream.fromIterable(expectedStatesSuccess));
-      await tester
-          .pumpWidget(getScopedWidget(MaterialListPage(addToCart: () {})));
+      await tester.pumpWidget(getScopedWidget(const MaterialListPage()));
     });
 
     testWidgets('Test EligibilityBloc OrderTypeEnable true', (tester) async {
@@ -1624,8 +1574,7 @@ void main() {
         salesOrgConfigs:
             SalesOrganisationConfigs.empty().copyWith(disableOrderType: false),
       ));
-      await tester
-          .pumpWidget(getScopedWidget(MaterialListPage(addToCart: () {})));
+      await tester.pumpWidget(getScopedWidget(const MaterialListPage()));
     });
     testWidgets('Test hasValidTenderContract is true with empty price',
         (tester) async {
@@ -1647,12 +1596,7 @@ void main() {
 
       await tester.pumpWidget(
         getScopedWidget(
-          MaterialListPage(addToCart: ({
-            required BuildContext context,
-            required PriceAggregate priceAggregate,
-          }) {
-            mockAddToCartStub.addToCart();
-          }),
+          const MaterialListPage(),
         ),
       );
 
@@ -1662,10 +1606,6 @@ void main() {
       final firstListItem = find.text('23168451');
       await tester.tap(firstListItem);
       await tester.pump(const Duration(seconds: 1));
-
-      verify(
-        () => mockAddToCartStub.addToCart(),
-      ).called(1);
     });
 
     testWidgets('Test enableDefaultMD true and enableIRN true enableGMC true',
@@ -1693,8 +1633,7 @@ void main() {
           ),
         ),
       );
-      await tester
-          .pumpWidget(getScopedWidget(MaterialListPage(addToCart: () {})));
+      await tester.pumpWidget(getScopedWidget(const MaterialListPage()));
       await tester.pump();
     });
     testWidgets('Test Show Material Price Label', (tester) async {
@@ -1740,8 +1679,7 @@ void main() {
       );
       whenListen(materialPriceBlocMock, Stream.fromIterable(expectedState));
 
-      await tester
-          .pumpWidget(getScopedWidget(MaterialListPage(addToCart: () {})));
+      await tester.pumpWidget(getScopedWidget(const MaterialListPage()));
       await tester.pump();
     });
 
@@ -1771,8 +1709,7 @@ void main() {
             MaterialListState.initial(),
             materialListBlocMock.state,
           ]));
-      await tester
-          .pumpWidget(getScopedWidget(MaterialListPage(addToCart: () {})));
+      await tester.pumpWidget(getScopedWidget(const MaterialListPage()));
       await tester.pump();
 
       final findTextField = find.byKey(const Key('materialSearchField'));
@@ -1797,8 +1734,7 @@ void main() {
           ],
         ),
       );
-      await tester
-          .pumpWidget(getScopedWidget(MaterialListPage(addToCart: () {})));
+      await tester.pumpWidget(getScopedWidget(const MaterialListPage()));
 
       final findPrincipal = find.text('Principal'.tr());
       expect(findPrincipal, findsOneWidget);
@@ -1821,33 +1757,163 @@ void main() {
 
       await tester.pump();
     });
+  });
 
-    testWidgets('Test Combo Deal Material', (tester) async {
-      when(() => materialListBlocMock.state).thenReturn(
-        MaterialListState.initial().copyWith(
-          materialList: [
-            fakematerialInfo,
-          ],
+  group('Material List Item Test', () {
+    final fakeComboDealQuery = PriceComboDeal.empty().copyWith(
+      isEligible: true,
+      flexibleGroup: FlexibleGroup('fake-flexible-group'),
+      salesDeal: SalesDealNumber('fake-sales-deal'),
+      category: PriceComboDealCategory(
+        type: ComboDealType('fake-type'),
+        comboMaterialNumbers: [fakeMaterialNumber],
+      ),
+    );
+
+    testWidgets('Combo Deal label pressed when combo is in cart',
+        (tester) async {
+      final comboMaterial = PriceAggregate.empty().copyWith(
+        materialInfo: MaterialInfo.empty().copyWith(
+          materialNumber: fakeMaterialNumber,
         ),
+        price: Price.empty().copyWith(
+          comboDeal: fakeComboDealQuery,
+        ),
+      );
+      when(() => cartBlocMock.state).thenReturn(
+        CartState.initial().copyWith(cartItems: [
+          CartItem.comboDeal([comboMaterial])
+        ]),
       );
       when(() => materialPriceBlocMock.state).thenReturn(
         MaterialPriceState.initial().copyWith(
           materialPrice: {
             fakeMaterialNumber: Price.empty().copyWith(
-              comboDeal: PriceComboDeal.empty().copyWith(
-                isEligible: true,
-                category: PriceComboDealCategory(
-                  type: ComboDealType('fake-type'),
-                  comboMaterialNumbers: [fakeMaterialNumber],
-                ),
-              ),
+              comboDeal: fakeComboDealQuery,
             )
           },
         ),
       );
-      await tester
-          .pumpWidget(getScopedWidget(MaterialListPage(addToCart: () {})));
-      expect(find.byType(ComboDealLabel), findsOneWidget);
+      await tester.pumpWidget(
+        getScopedWidget(
+          MaterialListItem(
+            materialInfo: fakematerialInfo,
+            salesOrgConfigs: salesOrgBlocMock.state.configs,
+          ),
+        ),
+      );
+      final comboLabel = find.byType(ComboDealLabel);
+      expect(comboLabel, findsOneWidget);
+      await tester.tap(comboLabel);
+      await tester.pump();
+
+      expect(
+        (autoRouterMock.current.args as ComboDealDetailPageRouteArgs).isEdit,
+        true,
+      );
+    });
+
+    testWidgets('Combo Deal label pressed when cart empty', (tester) async {
+      when(() => materialPriceBlocMock.state).thenReturn(
+        MaterialPriceState.initial().copyWith(
+          materialPrice: {
+            fakeMaterialNumber: Price.empty().copyWith(
+              comboDeal: fakeComboDealQuery,
+            )
+          },
+        ),
+      );
+      await tester.pumpWidget(
+        getScopedWidget(
+          MaterialListItem(
+            materialInfo: fakematerialInfo,
+            salesOrgConfigs: salesOrgBlocMock.state.configs,
+          ),
+        ),
+      );
+      final comboLabel = find.byType(ComboDealLabel);
+      expect(comboLabel, findsOneWidget);
+      await tester.tap(comboLabel);
+      await tester.pump();
+
+      expect(
+        (autoRouterMock.current.args as ComboDealDetailPageRouteArgs).isEdit,
+        false,
+      );
+    });
+
+    testWidgets('Add button pressed when combo is in cart', (tester) async {
+      final comboMaterial = PriceAggregate.empty().copyWith(
+        materialInfo: MaterialInfo.empty().copyWith(
+          materialNumber: fakeMaterialNumber,
+        ),
+        price: Price.empty().copyWith(
+          comboDeal: fakeComboDealQuery,
+        ),
+      );
+      when(() => cartBlocMock.state).thenReturn(
+        CartState.initial().copyWith(cartItems: [
+          CartItem.comboDeal([comboMaterial])
+        ]),
+      );
+      when(() => materialPriceBlocMock.state).thenReturn(
+        MaterialPriceState.initial().copyWith(
+          materialPrice: {
+            fakeMaterialNumber: Price.empty().copyWith(
+              comboDeal: fakeComboDealQuery,
+            )
+          },
+        ),
+      );
+      await tester.pumpWidget(
+        getScopedWidget(
+          MaterialListItem(
+            materialInfo: fakematerialInfo,
+            salesOrgConfigs: salesOrgBlocMock.state.configs,
+          ),
+        ),
+      );
+      final addButton = find.text('Add');
+      expect(addButton, findsOneWidget);
+      await tester.tap(addButton);
+      await tester.pump();
+
+      expect(
+        (autoRouterMock.current.args as ComboDealDetailPageRouteArgs).isEdit,
+        true,
+      );
+    });
+
+    testWidgets('Material default description', (tester) async {
+      await tester.pumpWidget(
+        getScopedWidget(
+          MaterialListItem(
+            materialInfo: fakematerialInfo.copyWith(
+              defaultMaterialDescription: 'Fake-description',
+            ),
+            salesOrgConfigs: salesOrgBlocMock.state.configs.copyWith(
+              enableDefaultMD: true,
+            ),
+          ),
+        ),
+      );
+      expect(find.text('Fake-description'), findsOneWidget);
+    });
+
+    testWidgets('Material registration number', (tester) async {
+      await tester.pumpWidget(
+        getScopedWidget(
+          MaterialListItem(
+            materialInfo: fakematerialInfo.copyWith(
+              itemRegistrationNumber: 'Fake-resgistration-number',
+            ),
+            salesOrgConfigs: salesOrgBlocMock.state.configs.copyWith(
+              enableIRN: true,
+            ),
+          ),
+        ),
+      );
+      expect(find.text('Fake-resgistration-number'), findsOneWidget);
     });
   });
 }

@@ -14,6 +14,7 @@ import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/cart_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
+import 'package:ezrxmobile/presentation/orders/cart/item/cart_delete_item_button.dart';
 import 'package:ezrxmobile/presentation/orders/cart/remark/cart_item_remark.dart';
 import 'package:ezrxmobile/presentation/orders/cart/remark/add_remark_dialog.dart';
 import 'package:ezrxmobile/presentation/orders/cart/remark/add_remark_button.dart';
@@ -101,19 +102,7 @@ class CartMaterialItemTile extends StatelessWidget {
                               ),
                         ),
                       ),
-                      IconButton(
-                        padding: const EdgeInsets.only(right: 8),
-                        constraints: const BoxConstraints(),
-                        key: const Key('deleteFromCart'),
-                        onPressed: () {
-                          context.read<CartBloc>().add(
-                                CartEvent.removeFromCart(
-                                  item: cartItem,
-                                ),
-                              );
-                        },
-                        icon: const Icon(Icons.delete),
-                      ),
+                      CartDeleteItemButton(item: cartItem),
                     ],
                   ),
                   Row(

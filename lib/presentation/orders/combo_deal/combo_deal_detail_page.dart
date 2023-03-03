@@ -11,8 +11,8 @@ import 'package:ezrxmobile/domain/order/entities/price_combo_deal.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
-import 'package:ezrxmobile/presentation/orders/cart/cart_button.dart';
 import 'package:ezrxmobile/presentation/orders/combo_deal/widgets/combo_deal_item.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -83,7 +83,6 @@ class _ComboDealDetailPageState extends State<ComboDealDetailPage> {
       key: const Key('ComboDealDetailPage'),
       appBar: AppBar(
         title: const Text('Combo Bundle Details').tr(),
-        actions: const [CartButton()],
       ),
       body: MultiBlocListener(
         listeners: [
@@ -226,7 +225,7 @@ class _ComboDealDetailPageState extends State<ComboDealDetailPage> {
     if (widget.isEdit) {
       context.router.pop();
     } else {
-      context.router.pushNamed('cart_page');
+      context.router.popAndPush(const CartPageRoute());
     }
   }
 }

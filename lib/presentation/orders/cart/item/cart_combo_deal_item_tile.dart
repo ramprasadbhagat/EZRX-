@@ -5,6 +5,7 @@ import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/orders/cart/item/cart_delete_item_button.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -71,13 +72,29 @@ class CartComboDealItem extends StatelessWidget {
                               : const EdgeInsets.symmetric(
                                   horizontal: 16,
                                 ),
-                          child: Text(
-                            'Combo Deals - ${cartItem.materials.first.comboDeal.scheme.name.toUpperCase()}',
-                            style:
-                                Theme.of(context).textTheme.titleMedium?.apply(
-                                      color: ZPColors.kPrimaryColor,
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Combo Deals - ${cartItem.materials.first.comboDeal.scheme.name.toUpperCase()}',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleMedium
+                                          ?.apply(
+                                            color: ZPColors.kPrimaryColor,
+                                          ),
+                                      // overflow: TextOverflow.ellipsis,
                                     ),
-                            overflow: TextOverflow.ellipsis,
+                                  ],
+                                ),
+                              ),
+                              CartDeleteItemButton(item: cartItem),
+                            ],
                           ),
                         ),
                         ...List.generate(

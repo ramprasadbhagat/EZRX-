@@ -5,7 +5,7 @@ import 'package:ezrxmobile/presentation/orders/cart/cart_button.dart';
 import 'package:ezrxmobile/presentation/core/tab_view.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/covid_material_list.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/material_bundle_list.dart';
-import 'package:ezrxmobile/presentation/orders/create_order/material_list.dart';
+import 'package:ezrxmobile/presentation/orders/create_order/material_list/material_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,7 +15,8 @@ class MaterialRoot extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<EligibilityBloc, EligibilityState>(
       buildWhen: (previous, current) =>
-          previous.salesOrgConfigs.disableBundles != current.salesOrgConfigs.disableBundles ||
+          previous.salesOrgConfigs.disableBundles !=
+              current.salesOrgConfigs.disableBundles ||
           previous.isCovidMaterialEnable != current.isCovidMaterialEnable,
       builder: (context, state) {
         final isBundleMaterialEnable = !state.salesOrgConfigs.disableBundles;
@@ -30,9 +31,7 @@ class MaterialRoot extends StatelessWidget {
             actions: const [CartButton()],
           ),
           body: length == 1
-              ? const MaterialListPage(
-                  addToCart: CartBottomSheet.showAddToCartBottomSheet,
-                )
+              ? const MaterialListPage()
               : TabViewPage(
                   length: length,
                   tabHeaderText: [
@@ -41,9 +40,7 @@ class MaterialRoot extends StatelessWidget {
                     if (isCovidMaterialEnable) 'COVID-19'.tr(),
                   ],
                   tabWidgets: [
-                    const MaterialListPage(
-                      addToCart: CartBottomSheet.showAddToCartBottomSheet,
-                    ),
+                    const MaterialListPage(),
                     if (isBundleMaterialEnable) const MaterialBundleListPage(),
                     if (isCovidMaterialEnable)
                       const CovidMaterialListPage(

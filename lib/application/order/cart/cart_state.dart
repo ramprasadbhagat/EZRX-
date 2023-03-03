@@ -98,4 +98,17 @@ class CartState with _$CartState {
       orElse: () => CartItem.materialEmpty(),
     );
   }
+
+  CartItem getComboDealCartItem({
+    required PriceComboDeal comboDealQuery,
+  }) {
+    //TODO: Currently, since each ComboDeal will have its id defined as {salesDeal}-{flexibleGroup}-{scheme}
+    // so I use startWith() to check if the added material already had its combo deal in cart
+    return cartItems.firstWhere(
+      (item) =>
+          item.itemType == CartItemType.comboDeal &&
+          item.materials.first.comboDealId.startsWith(comboDealQuery.id),
+      orElse: () => CartItem.comboDeal([]),
+    );
+  }
 }

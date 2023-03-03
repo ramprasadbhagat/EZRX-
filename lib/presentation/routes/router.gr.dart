@@ -48,7 +48,7 @@ import '../orders/cart/cart_page.dart' as _i23;
 import '../orders/combo_deal/combo_deal_detail_page.dart' as _i35;
 import '../orders/create_order/bundle_item_detail_page.dart' as _i34;
 import '../orders/create_order/material_filter.dart' as _i20;
-import '../orders/create_order/material_list.dart' as _i19;
+import '../orders/create_order/material_list/material_list.dart' as _i19;
 import '../orders/create_order/material_root.dart' as _i18;
 import '../orders/create_order/order_summary_page.dart' as _i24;
 import '../orders/create_order/scan_material_info.dart' as _i33;
@@ -192,13 +192,9 @@ class AppRouter extends _i40.RootStackRouter {
       );
     },
     MaterialListPageRoute.name: (routeData) {
-      final args = routeData.argsAs<MaterialListPageRouteArgs>();
       return _i40.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i19.MaterialListPage(
-          key: args.key,
-          addToCart: args.addToCart,
-        ),
+        child: const _i19.MaterialListPage(),
       );
     },
     MaterialFilterPageRoute.name: (routeData) {
@@ -817,37 +813,14 @@ class MaterialRootRoute extends _i40.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i19.MaterialListPage]
-class MaterialListPageRoute
-    extends _i40.PageRouteInfo<MaterialListPageRouteArgs> {
-  MaterialListPageRoute({
-    _i41.Key? key,
-    required Function addToCart,
-  }) : super(
+class MaterialListPageRoute extends _i40.PageRouteInfo<void> {
+  const MaterialListPageRoute()
+      : super(
           MaterialListPageRoute.name,
           path: 'material_list_page',
-          args: MaterialListPageRouteArgs(
-            key: key,
-            addToCart: addToCart,
-          ),
         );
 
   static const String name = 'MaterialListPageRoute';
-}
-
-class MaterialListPageRouteArgs {
-  const MaterialListPageRouteArgs({
-    this.key,
-    required this.addToCart,
-  });
-
-  final _i41.Key? key;
-
-  final Function addToCart;
-
-  @override
-  String toString() {
-    return 'MaterialListPageRouteArgs{key: $key, addToCart: $addToCart}';
-  }
 }
 
 /// generated route for

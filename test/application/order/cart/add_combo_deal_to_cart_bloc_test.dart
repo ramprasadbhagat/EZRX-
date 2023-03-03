@@ -51,56 +51,75 @@ void main() {
     cartRepositoryMock = CartRepositoryMock();
   });
 
-  blocTest<CartBloc, CartState>(
-    'Add ComboDeal to cart success',
-    build: () => CartBloc(cartRepositoryMock),
-    setUp: () {
-      when(
-        () => cartRepositoryMock.addItemToCart(
-          cartItem: CartItem.comboDeal([fakeMaterialWithComboDeal]),
-          override: false,
-          customerCodeInfo: CustomerCodeInfo.empty(),
-          salesOrganisation: SalesOrganisation.empty(),
-          shipToInfo: ShipToInfo.empty(),
-          doNotAllowOutOfStockMaterials: true,
-          salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-        ),
-      ).thenAnswer((invocation) async => Right(
-            <CartItem>[
-              CartItem.comboDeal([fakeMaterialWithComboDeal])
-            ],
-          ));
-    },
-    act: (bloc) => bloc.add(
-      CartEvent.addComboDealToCart(
-        comboDealItems: [fakeMaterialWithComboDeal],
-        overrideQty: false,
-        customerCodeInfo: CustomerCodeInfo.empty(),
-        salesOrganisation: SalesOrganisation.empty(),
-        shipToInfo: ShipToInfo.empty(),
-        doNotallowOutOfStockMaterial: true,
-        salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-      ),
-    ),
-    expect: () => [
-      CartState.initial().copyWith(
-        apiFailureOrSuccessOption: none(),
-        isFetching: true,
-      ),
-      CartState.initial().copyWith(
-        apiFailureOrSuccessOption: none(),
-        cartItems: [
-          CartItem.comboDeal([fakeMaterialWithComboDeal])
-        ],
-        isFetching: false,
-      ),
-    ],
-  );
+  blocTest<CartBloc, CartState>('Add ComboDeal to cart success',
+      build: () => CartBloc(cartRepositoryMock),
+      setUp: () {
+        when(
+          () => cartRepositoryMock.deleteFromCart(
+            item: CartItem.material(fakeMaterialWithComboDeal),
+          ),
+        ).thenAnswer((invocation) async => const Right([]));
+        when(
+          () => cartRepositoryMock.addItemToCart(
+            cartItem: CartItem.comboDeal([fakeMaterialWithComboDeal]),
+            override: false,
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            salesOrganisation: SalesOrganisation.empty(),
+            shipToInfo: ShipToInfo.empty(),
+            doNotAllowOutOfStockMaterials: true,
+            salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+          ),
+        ).thenAnswer((invocation) async => Right(
+              <CartItem>[
+                CartItem.comboDeal([fakeMaterialWithComboDeal])
+              ],
+            ));
+      },
+      act: (bloc) => bloc.add(
+            CartEvent.addComboDealToCart(
+              comboDealItems: [fakeMaterialWithComboDeal],
+              overrideQty: false,
+              customerCodeInfo: CustomerCodeInfo.empty(),
+              salesOrganisation: SalesOrganisation.empty(),
+              shipToInfo: ShipToInfo.empty(),
+              doNotallowOutOfStockMaterial: true,
+              salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+            ),
+          ),
+      expect: () => [
+            CartState.initial().copyWith(
+              apiFailureOrSuccessOption: none(),
+              isFetching: true,
+            ),
+            CartState.initial().copyWith(
+              apiFailureOrSuccessOption: none(),
+              cartItems: [
+                CartItem.comboDeal([fakeMaterialWithComboDeal])
+              ],
+              isFetching: false,
+            ),
+          ],
+      verify: (bloc) {
+        expect(
+          bloc.state.getComboDealCartItem(comboDealQuery: fakeComboDealQuery),
+          CartItem.comboDeal([fakeMaterialWithComboDeal]),
+        );
+        expect(
+          bloc.state
+              .getComboDealCartItem(comboDealQuery: PriceComboDeal.empty()),
+          CartItem.comboDeal([]),
+        );
+      });
 
   blocTest<CartBloc, CartState>(
     'Add ComboDeal to cart failure',
     build: () => CartBloc(cartRepositoryMock),
     setUp: () {
+      when(
+        () => cartRepositoryMock.deleteFromCart(
+          item: CartItem.material(fakeMaterialWithComboDeal),
+        ),
+      ).thenAnswer((invocation) async => const Right([]));
       when(
         () => cartRepositoryMock.addItemToCart(
           cartItem: CartItem.comboDeal([fakeMaterialWithComboDeal]),
@@ -210,4 +229,71 @@ void main() {
       ),
     ],
   );
+
+  blocTest<CartBloc, CartState>(
+      'Add ComboDeal when have material that stays in combo in cart',
+      build: () => CartBloc(cartRepositoryMock),
+      seed: () => CartState.initial().copyWith(cartItems: [
+            CartItem.material(
+              fakeMaterial.copyWith(quantity: 4),
+            ),
+          ]),
+      setUp: () {
+        when(
+          () => cartRepositoryMock.deleteFromCart(
+            item: CartItem.material(
+                fakeMaterialWithComboDeal.copyWith(quantity: 5)),
+          ),
+        ).thenAnswer((invocation) async => const Right([]));
+        when(
+          () => cartRepositoryMock.addItemToCart(
+            cartItem: CartItem.comboDeal(
+              [
+                fakeMaterialWithComboDeal.copyWith(quantity: 5),
+              ],
+            ),
+            override: false,
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            salesOrganisation: SalesOrganisation.empty(),
+            shipToInfo: ShipToInfo.empty(),
+            doNotAllowOutOfStockMaterials: true,
+            salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+          ),
+        ).thenAnswer(
+            (invocation) async => Right(<CartItem>[mockMaterialCartItemFirst]));
+      },
+      act: (bloc) => bloc.add(
+            CartEvent.addComboDealToCart(
+              comboDealItems: [fakeMaterialWithComboDeal],
+              overrideQty: false,
+              customerCodeInfo: CustomerCodeInfo.empty(),
+              salesOrganisation: SalesOrganisation.empty(),
+              shipToInfo: ShipToInfo.empty(),
+              doNotallowOutOfStockMaterial: true,
+              salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+            ),
+          ),
+      expect: () => [
+            CartState.initial().copyWith(
+              apiFailureOrSuccessOption: none(),
+              isFetching: true,
+              cartItems: [
+                CartItem.material(fakeMaterial.copyWith(quantity: 4)),
+              ],
+            ),
+            CartState.initial().copyWith(
+              apiFailureOrSuccessOption: none(),
+              cartItems: mockMaterialCartItemList,
+              isFetching: false,
+            ),
+          ],
+      verify: (bloc) {
+        verify(
+          () => cartRepositoryMock.deleteFromCart(
+            item: CartItem.material(
+              fakeMaterialWithComboDeal.copyWith(quantity: 5),
+            ),
+          ),
+        ).called(1);
+      });
 }

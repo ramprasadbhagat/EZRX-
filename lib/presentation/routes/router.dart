@@ -20,7 +20,7 @@ import 'package:ezrxmobile/presentation/home_tab.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_page.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/bundle_item_detail_page.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/material_filter.dart';
-import 'package:ezrxmobile/presentation/orders/create_order/material_list.dart';
+import 'package:ezrxmobile/presentation/orders/create_order/material_list/material_list.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/material_root.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/order_summary_page.dart';
 import 'package:ezrxmobile/presentation/orders/order_template/order_template_detail_page.dart';
