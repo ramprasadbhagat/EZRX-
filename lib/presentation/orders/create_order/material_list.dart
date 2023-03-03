@@ -52,30 +52,41 @@ class MaterialListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<ScanMaterialInfoBloc, ScanMaterialInfoState>(
       listenWhen: (previous, current) =>
-          previous.scannedData != current.scannedData,
+          previous.scannedData != current.scannedData ||
+          previous.apiFailureOrSuccessOption !=
+              current.apiFailureOrSuccessOption,
       listener: (context, state) {
+        state.apiFailureOrSuccessOption.fold(
+          () {},
+          (either) => either.fold(
+            (failure) {
+              ErrorUtils.handleApiFailure(context, failure);
+            },
+            (_) {},
+          ),
+        );
         if (state.scannedData.isEmpty) return;
 
-        context.read<MaterialListBloc>().add(
-              MaterialListEvent.updateSearchKey(searchKey: state.scannedData),
-            );
-        context.read<MaterialListBloc>().add(
-              MaterialListEvent.searchMaterialList(
-                user: context.read<UserBloc>().state.user,
-                salesOrganisation:
-                    context.read<SalesOrgBloc>().state.salesOrganisation,
-                configs: context.read<SalesOrgBloc>().state.configs,
-                customerCodeInfo:
-                    context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
-                selectedMaterialFilter: context
-                    .read<MaterialFilterBloc>()
-                    .state
-                    .selectedMaterialFilter,
-                pickAndPack:
-                    context.read<EligibilityBloc>().state.getPNPValueMaterial,
-              ),
-            );
+            context.read<MaterialListBloc>().add(
+                  MaterialListEvent.updateSearchKey(searchKey: state.scannedData),
+                );
+            context.read<MaterialListBloc>().add(
+                  MaterialListEvent.searchMaterialList(
+                    user: context.read<UserBloc>().state.user,
+                    salesOrganisation:
+                      context.read<SalesOrgBloc>().state.salesOrganisation,
+                    configs: context.read<SalesOrgBloc>().state.configs,
+                    customerCodeInfo:
+                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                    shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+                    selectedMaterialFilter: context
+                        .read<MaterialFilterBloc>()
+                        .state
+                        .selectedMaterialFilter,
+                    pickAndPack: 
+                      context.read<EligibilityBloc>().state.getPNPValueMaterial,
+                  ),
+                );
       },
       child: Scaffold(
         key: const Key('materialListPage'),

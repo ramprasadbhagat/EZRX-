@@ -42,15 +42,53 @@ class ScanMaterialInfoBloc
         emit(ScanMaterialInfoState.initial());
         final permissionsResult = await Permission.camera.request();
         if (permissionsResult.isGranted) {
-          await scanInfoRepository.scanMaterialNumberFromdeviceCamera();
+          final failureOrSuccess =
+              await scanInfoRepository.scanMaterialNumberFromdeviceCamera();
+          failureOrSuccess.fold(
+            (failure) {
+              emit(
+                state.copyWith(
+                  apiFailureOrSuccessOption:
+                      optionOf(failureOrSuccess),
+                ),
+              );
+            },
+            (scanMaterialNumberFromCamera) {},
+          );
         }
       },
       scanImageFromDeviceStorage: (e) async {
         emit(ScanMaterialInfoState.initial());
-        await scanInfoRepository.scanImageFromDeviceStorage();
+        final failureOrSuccess =
+            await scanInfoRepository.scanImageFromDeviceStorage();
+        failureOrSuccess.fold(
+          (failure) {
+            emit(
+              state.copyWith(
+                apiFailureOrSuccessOption: optionOf(
+                  failureOrSuccess,
+                ),
+              ),
+            );
+          },
+          (scanImageFromDeviceStorage) {},
+        );
       },
       disableScan: (e) async {
-        await scanInfoRepository.disableMaterialScan();
+        final failureOrSuccess =
+            await scanInfoRepository.disableMaterialScan();
+        failureOrSuccess.fold(
+          (failure) {
+            emit(
+              state.copyWith(
+                apiFailureOrSuccessOption: optionOf(
+                  failureOrSuccess,
+                ),
+              ),
+            );
+          },
+          (disableMaterialScan) {},
+        );
       },
       emitScannedData: (e) async {
         emit(state.copyWith(scannedData: e.scannedRes));
