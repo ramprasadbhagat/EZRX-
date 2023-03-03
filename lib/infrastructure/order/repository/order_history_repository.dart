@@ -12,6 +12,7 @@ import 'package:ezrxmobile/domain/order/repository/i_order_history_repository.da
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_history_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_history_remote.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/order_history_filter_dto.dart';
 
 class OrderHistoryRepository implements IOrderHistoryRepository {
   final Config config;
@@ -56,38 +57,26 @@ class OrderHistoryRepository implements IOrderHistoryRepository {
               loginUserType: user.role.type.loginUserType,
               shipTo: shipTo.shipToCustomerCode,
               soldTo: soldTo.customerCodeSoldTo,
-              fromDate:orderHistoryFilter.fromDate.apiDateTimeFormat,
-              toDate: orderHistoryFilter.toDate.apiDateTimeFormat,
               pageSize: pageSize,
               offset: offset,
               language: salesOrgConfig.getConfigLangauge,
               userName: user.username.getOrCrash(),
               orderBy: orderBy,
               sort: sort,
-              materialSearch:
-                  orderHistoryFilter.materialSearch.getOrDefaultValue(''),
-              orderId: orderHistoryFilter.orderId.getOrDefaultValue(''),
-              poNumber: orderHistoryFilter.poNumber.getOrDefaultValue(''),
-              principalSearch:
-                  orderHistoryFilter.principalSearch.getOrDefaultValue(''),
+              filterQuery:
+                  OrderHistoryFilterDto.fromDomain(orderHistoryFilter).toJson(),
             )
           : await orderHistoryRemoteDataSource.getOrderHistory(
               loginUserType: user.role.type.loginUserType,
               shipTo: shipTo.shipToCustomerCode,
               soldTo: soldTo.customerCodeSoldTo,
-              fromDate:orderHistoryFilter.fromDate.apiDateTimeFormat,
-              toDate: orderHistoryFilter.toDate.apiDateTimeFormat,
               pageSize: pageSize,
               offset: offset,
               companyName: '',
               orderBy: orderBy,
               sort: sort,
-              materialSearch:
-                  orderHistoryFilter.materialSearch.getOrDefaultValue(''),
-              orderId: orderHistoryFilter.orderId.getOrDefaultValue(''),
-              poNumber: orderHistoryFilter.poNumber.getOrDefaultValue(''),
-              principalSearch:
-                  orderHistoryFilter.principalSearch.getOrDefaultValue(''),
+              filterQuery:
+                  OrderHistoryFilterDto.fromDomain(orderHistoryFilter).toJson(),
             );
       await countlyService.addCountlyEvent(
         'order_history_filter',

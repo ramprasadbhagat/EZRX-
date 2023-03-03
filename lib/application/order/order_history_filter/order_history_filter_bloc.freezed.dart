@@ -19,7 +19,7 @@ mixin _$OrderHistoryFilterEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() filterOrderHistory,
+    required TResult Function() applyFilters,
     required TResult Function(DateTimeStringValue fromDate) setfromDate,
     required TResult Function(DateTimeStringValue toDate) setToDate,
     required TResult Function(String orderId) orderIdChanged,
@@ -32,7 +32,7 @@ mixin _$OrderHistoryFilterEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function()? filterOrderHistory,
+    TResult? Function()? applyFilters,
     TResult? Function(DateTimeStringValue fromDate)? setfromDate,
     TResult? Function(DateTimeStringValue toDate)? setToDate,
     TResult? Function(String orderId)? orderIdChanged,
@@ -45,7 +45,7 @@ mixin _$OrderHistoryFilterEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? filterOrderHistory,
+    TResult Function()? applyFilters,
     TResult Function(DateTimeStringValue fromDate)? setfromDate,
     TResult Function(DateTimeStringValue toDate)? setToDate,
     TResult Function(String orderId)? orderIdChanged,
@@ -59,7 +59,7 @@ mixin _$OrderHistoryFilterEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_FilterOrderHistory value) filterOrderHistory,
+    required TResult Function(_ApplyFilters value) applyFilters,
     required TResult Function(_SetfromDate value) setfromDate,
     required TResult Function(_SetToDate value) setToDate,
     required TResult Function(_OrderIdChanged value) orderIdChanged,
@@ -74,7 +74,7 @@ mixin _$OrderHistoryFilterEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_FilterOrderHistory value)? filterOrderHistory,
+    TResult? Function(_ApplyFilters value)? applyFilters,
     TResult? Function(_SetfromDate value)? setfromDate,
     TResult? Function(_SetToDate value)? setToDate,
     TResult? Function(_OrderIdChanged value)? orderIdChanged,
@@ -87,7 +87,7 @@ mixin _$OrderHistoryFilterEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_FilterOrderHistory value)? filterOrderHistory,
+    TResult Function(_ApplyFilters value)? applyFilters,
     TResult Function(_SetfromDate value)? setfromDate,
     TResult Function(_SetToDate value)? setToDate,
     TResult Function(_OrderIdChanged value)? orderIdChanged,
@@ -158,7 +158,7 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() filterOrderHistory,
+    required TResult Function() applyFilters,
     required TResult Function(DateTimeStringValue fromDate) setfromDate,
     required TResult Function(DateTimeStringValue toDate) setToDate,
     required TResult Function(String orderId) orderIdChanged,
@@ -174,7 +174,7 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function()? filterOrderHistory,
+    TResult? Function()? applyFilters,
     TResult? Function(DateTimeStringValue fromDate)? setfromDate,
     TResult? Function(DateTimeStringValue toDate)? setToDate,
     TResult? Function(String orderId)? orderIdChanged,
@@ -190,7 +190,7 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? filterOrderHistory,
+    TResult Function()? applyFilters,
     TResult Function(DateTimeStringValue fromDate)? setfromDate,
     TResult Function(DateTimeStringValue toDate)? setToDate,
     TResult Function(String orderId)? orderIdChanged,
@@ -210,7 +210,7 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_FilterOrderHistory value) filterOrderHistory,
+    required TResult Function(_ApplyFilters value) applyFilters,
     required TResult Function(_SetfromDate value) setfromDate,
     required TResult Function(_SetToDate value) setToDate,
     required TResult Function(_OrderIdChanged value) orderIdChanged,
@@ -228,7 +228,7 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_FilterOrderHistory value)? filterOrderHistory,
+    TResult? Function(_ApplyFilters value)? applyFilters,
     TResult? Function(_SetfromDate value)? setfromDate,
     TResult? Function(_SetToDate value)? setToDate,
     TResult? Function(_OrderIdChanged value)? orderIdChanged,
@@ -244,7 +244,7 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_FilterOrderHistory value)? filterOrderHistory,
+    TResult Function(_ApplyFilters value)? applyFilters,
     TResult Function(_SetfromDate value)? setfromDate,
     TResult Function(_SetToDate value)? setToDate,
     TResult Function(_OrderIdChanged value)? orderIdChanged,
@@ -266,35 +266,35 @@ abstract class _Initialized implements OrderHistoryFilterEvent {
 }
 
 /// @nodoc
-abstract class _$$_FilterOrderHistoryCopyWith<$Res> {
-  factory _$$_FilterOrderHistoryCopyWith(_$_FilterOrderHistory value,
-          $Res Function(_$_FilterOrderHistory) then) =
-      __$$_FilterOrderHistoryCopyWithImpl<$Res>;
+abstract class _$$_ApplyFiltersCopyWith<$Res> {
+  factory _$$_ApplyFiltersCopyWith(
+          _$_ApplyFilters value, $Res Function(_$_ApplyFilters) then) =
+      __$$_ApplyFiltersCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_FilterOrderHistoryCopyWithImpl<$Res>
-    extends _$OrderHistoryFilterEventCopyWithImpl<$Res, _$_FilterOrderHistory>
-    implements _$$_FilterOrderHistoryCopyWith<$Res> {
-  __$$_FilterOrderHistoryCopyWithImpl(
-      _$_FilterOrderHistory _value, $Res Function(_$_FilterOrderHistory) _then)
+class __$$_ApplyFiltersCopyWithImpl<$Res>
+    extends _$OrderHistoryFilterEventCopyWithImpl<$Res, _$_ApplyFilters>
+    implements _$$_ApplyFiltersCopyWith<$Res> {
+  __$$_ApplyFiltersCopyWithImpl(
+      _$_ApplyFilters _value, $Res Function(_$_ApplyFilters) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_FilterOrderHistory implements _FilterOrderHistory {
-  const _$_FilterOrderHistory();
+class _$_ApplyFilters implements _ApplyFilters {
+  const _$_ApplyFilters();
 
   @override
   String toString() {
-    return 'OrderHistoryFilterEvent.filterOrderHistory()';
+    return 'OrderHistoryFilterEvent.applyFilters()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_FilterOrderHistory);
+        (other.runtimeType == runtimeType && other is _$_ApplyFilters);
   }
 
   @override
@@ -304,7 +304,7 @@ class _$_FilterOrderHistory implements _FilterOrderHistory {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() filterOrderHistory,
+    required TResult Function() applyFilters,
     required TResult Function(DateTimeStringValue fromDate) setfromDate,
     required TResult Function(DateTimeStringValue toDate) setToDate,
     required TResult Function(String orderId) orderIdChanged,
@@ -313,14 +313,14 @@ class _$_FilterOrderHistory implements _FilterOrderHistory {
     required TResult Function(String materialSearch) materialSearchChanged,
     required TResult Function(String sortDirection) sortByDate,
   }) {
-    return filterOrderHistory();
+    return applyFilters();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function()? filterOrderHistory,
+    TResult? Function()? applyFilters,
     TResult? Function(DateTimeStringValue fromDate)? setfromDate,
     TResult? Function(DateTimeStringValue toDate)? setToDate,
     TResult? Function(String orderId)? orderIdChanged,
@@ -329,14 +329,14 @@ class _$_FilterOrderHistory implements _FilterOrderHistory {
     TResult? Function(String materialSearch)? materialSearchChanged,
     TResult? Function(String sortDirection)? sortByDate,
   }) {
-    return filterOrderHistory?.call();
+    return applyFilters?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? filterOrderHistory,
+    TResult Function()? applyFilters,
     TResult Function(DateTimeStringValue fromDate)? setfromDate,
     TResult Function(DateTimeStringValue toDate)? setToDate,
     TResult Function(String orderId)? orderIdChanged,
@@ -346,8 +346,8 @@ class _$_FilterOrderHistory implements _FilterOrderHistory {
     TResult Function(String sortDirection)? sortByDate,
     required TResult orElse(),
   }) {
-    if (filterOrderHistory != null) {
-      return filterOrderHistory();
+    if (applyFilters != null) {
+      return applyFilters();
     }
     return orElse();
   }
@@ -356,7 +356,7 @@ class _$_FilterOrderHistory implements _FilterOrderHistory {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_FilterOrderHistory value) filterOrderHistory,
+    required TResult Function(_ApplyFilters value) applyFilters,
     required TResult Function(_SetfromDate value) setfromDate,
     required TResult Function(_SetToDate value) setToDate,
     required TResult Function(_OrderIdChanged value) orderIdChanged,
@@ -367,14 +367,14 @@ class _$_FilterOrderHistory implements _FilterOrderHistory {
         materialSearchChanged,
     required TResult Function(_SortByDate value) sortByDate,
   }) {
-    return filterOrderHistory(this);
+    return applyFilters(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_FilterOrderHistory value)? filterOrderHistory,
+    TResult? Function(_ApplyFilters value)? applyFilters,
     TResult? Function(_SetfromDate value)? setfromDate,
     TResult? Function(_SetToDate value)? setToDate,
     TResult? Function(_OrderIdChanged value)? orderIdChanged,
@@ -383,14 +383,14 @@ class _$_FilterOrderHistory implements _FilterOrderHistory {
     TResult? Function(_MaterialSearchChanged value)? materialSearchChanged,
     TResult? Function(_SortByDate value)? sortByDate,
   }) {
-    return filterOrderHistory?.call(this);
+    return applyFilters?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_FilterOrderHistory value)? filterOrderHistory,
+    TResult Function(_ApplyFilters value)? applyFilters,
     TResult Function(_SetfromDate value)? setfromDate,
     TResult Function(_SetToDate value)? setToDate,
     TResult Function(_OrderIdChanged value)? orderIdChanged,
@@ -400,15 +400,15 @@ class _$_FilterOrderHistory implements _FilterOrderHistory {
     TResult Function(_SortByDate value)? sortByDate,
     required TResult orElse(),
   }) {
-    if (filterOrderHistory != null) {
-      return filterOrderHistory(this);
+    if (applyFilters != null) {
+      return applyFilters(this);
     }
     return orElse();
   }
 }
 
-abstract class _FilterOrderHistory implements OrderHistoryFilterEvent {
-  const factory _FilterOrderHistory() = _$_FilterOrderHistory;
+abstract class _ApplyFilters implements OrderHistoryFilterEvent {
+  const factory _ApplyFilters() = _$_ApplyFilters;
 }
 
 /// @nodoc
@@ -477,7 +477,7 @@ class _$_SetfromDate implements _SetfromDate {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() filterOrderHistory,
+    required TResult Function() applyFilters,
     required TResult Function(DateTimeStringValue fromDate) setfromDate,
     required TResult Function(DateTimeStringValue toDate) setToDate,
     required TResult Function(String orderId) orderIdChanged,
@@ -493,7 +493,7 @@ class _$_SetfromDate implements _SetfromDate {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function()? filterOrderHistory,
+    TResult? Function()? applyFilters,
     TResult? Function(DateTimeStringValue fromDate)? setfromDate,
     TResult? Function(DateTimeStringValue toDate)? setToDate,
     TResult? Function(String orderId)? orderIdChanged,
@@ -509,7 +509,7 @@ class _$_SetfromDate implements _SetfromDate {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? filterOrderHistory,
+    TResult Function()? applyFilters,
     TResult Function(DateTimeStringValue fromDate)? setfromDate,
     TResult Function(DateTimeStringValue toDate)? setToDate,
     TResult Function(String orderId)? orderIdChanged,
@@ -529,7 +529,7 @@ class _$_SetfromDate implements _SetfromDate {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_FilterOrderHistory value) filterOrderHistory,
+    required TResult Function(_ApplyFilters value) applyFilters,
     required TResult Function(_SetfromDate value) setfromDate,
     required TResult Function(_SetToDate value) setToDate,
     required TResult Function(_OrderIdChanged value) orderIdChanged,
@@ -547,7 +547,7 @@ class _$_SetfromDate implements _SetfromDate {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_FilterOrderHistory value)? filterOrderHistory,
+    TResult? Function(_ApplyFilters value)? applyFilters,
     TResult? Function(_SetfromDate value)? setfromDate,
     TResult? Function(_SetToDate value)? setToDate,
     TResult? Function(_OrderIdChanged value)? orderIdChanged,
@@ -563,7 +563,7 @@ class _$_SetfromDate implements _SetfromDate {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_FilterOrderHistory value)? filterOrderHistory,
+    TResult Function(_ApplyFilters value)? applyFilters,
     TResult Function(_SetfromDate value)? setfromDate,
     TResult Function(_SetToDate value)? setToDate,
     TResult Function(_OrderIdChanged value)? orderIdChanged,
@@ -655,7 +655,7 @@ class _$_SetToDate implements _SetToDate {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() filterOrderHistory,
+    required TResult Function() applyFilters,
     required TResult Function(DateTimeStringValue fromDate) setfromDate,
     required TResult Function(DateTimeStringValue toDate) setToDate,
     required TResult Function(String orderId) orderIdChanged,
@@ -671,7 +671,7 @@ class _$_SetToDate implements _SetToDate {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function()? filterOrderHistory,
+    TResult? Function()? applyFilters,
     TResult? Function(DateTimeStringValue fromDate)? setfromDate,
     TResult? Function(DateTimeStringValue toDate)? setToDate,
     TResult? Function(String orderId)? orderIdChanged,
@@ -687,7 +687,7 @@ class _$_SetToDate implements _SetToDate {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? filterOrderHistory,
+    TResult Function()? applyFilters,
     TResult Function(DateTimeStringValue fromDate)? setfromDate,
     TResult Function(DateTimeStringValue toDate)? setToDate,
     TResult Function(String orderId)? orderIdChanged,
@@ -707,7 +707,7 @@ class _$_SetToDate implements _SetToDate {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_FilterOrderHistory value) filterOrderHistory,
+    required TResult Function(_ApplyFilters value) applyFilters,
     required TResult Function(_SetfromDate value) setfromDate,
     required TResult Function(_SetToDate value) setToDate,
     required TResult Function(_OrderIdChanged value) orderIdChanged,
@@ -725,7 +725,7 @@ class _$_SetToDate implements _SetToDate {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_FilterOrderHistory value)? filterOrderHistory,
+    TResult? Function(_ApplyFilters value)? applyFilters,
     TResult? Function(_SetfromDate value)? setfromDate,
     TResult? Function(_SetToDate value)? setToDate,
     TResult? Function(_OrderIdChanged value)? orderIdChanged,
@@ -741,7 +741,7 @@ class _$_SetToDate implements _SetToDate {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_FilterOrderHistory value)? filterOrderHistory,
+    TResult Function(_ApplyFilters value)? applyFilters,
     TResult Function(_SetfromDate value)? setfromDate,
     TResult Function(_SetToDate value)? setToDate,
     TResult Function(_OrderIdChanged value)? orderIdChanged,
@@ -833,7 +833,7 @@ class _$_OrderIdChanged implements _OrderIdChanged {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() filterOrderHistory,
+    required TResult Function() applyFilters,
     required TResult Function(DateTimeStringValue fromDate) setfromDate,
     required TResult Function(DateTimeStringValue toDate) setToDate,
     required TResult Function(String orderId) orderIdChanged,
@@ -849,7 +849,7 @@ class _$_OrderIdChanged implements _OrderIdChanged {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function()? filterOrderHistory,
+    TResult? Function()? applyFilters,
     TResult? Function(DateTimeStringValue fromDate)? setfromDate,
     TResult? Function(DateTimeStringValue toDate)? setToDate,
     TResult? Function(String orderId)? orderIdChanged,
@@ -865,7 +865,7 @@ class _$_OrderIdChanged implements _OrderIdChanged {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? filterOrderHistory,
+    TResult Function()? applyFilters,
     TResult Function(DateTimeStringValue fromDate)? setfromDate,
     TResult Function(DateTimeStringValue toDate)? setToDate,
     TResult Function(String orderId)? orderIdChanged,
@@ -885,7 +885,7 @@ class _$_OrderIdChanged implements _OrderIdChanged {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_FilterOrderHistory value) filterOrderHistory,
+    required TResult Function(_ApplyFilters value) applyFilters,
     required TResult Function(_SetfromDate value) setfromDate,
     required TResult Function(_SetToDate value) setToDate,
     required TResult Function(_OrderIdChanged value) orderIdChanged,
@@ -903,7 +903,7 @@ class _$_OrderIdChanged implements _OrderIdChanged {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_FilterOrderHistory value)? filterOrderHistory,
+    TResult? Function(_ApplyFilters value)? applyFilters,
     TResult? Function(_SetfromDate value)? setfromDate,
     TResult? Function(_SetToDate value)? setToDate,
     TResult? Function(_OrderIdChanged value)? orderIdChanged,
@@ -919,7 +919,7 @@ class _$_OrderIdChanged implements _OrderIdChanged {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_FilterOrderHistory value)? filterOrderHistory,
+    TResult Function(_ApplyFilters value)? applyFilters,
     TResult Function(_SetfromDate value)? setfromDate,
     TResult Function(_SetToDate value)? setToDate,
     TResult Function(_OrderIdChanged value)? orderIdChanged,
@@ -1011,7 +1011,7 @@ class _$_PoNumberChanged implements _PoNumberChanged {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() filterOrderHistory,
+    required TResult Function() applyFilters,
     required TResult Function(DateTimeStringValue fromDate) setfromDate,
     required TResult Function(DateTimeStringValue toDate) setToDate,
     required TResult Function(String orderId) orderIdChanged,
@@ -1027,7 +1027,7 @@ class _$_PoNumberChanged implements _PoNumberChanged {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function()? filterOrderHistory,
+    TResult? Function()? applyFilters,
     TResult? Function(DateTimeStringValue fromDate)? setfromDate,
     TResult? Function(DateTimeStringValue toDate)? setToDate,
     TResult? Function(String orderId)? orderIdChanged,
@@ -1043,7 +1043,7 @@ class _$_PoNumberChanged implements _PoNumberChanged {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? filterOrderHistory,
+    TResult Function()? applyFilters,
     TResult Function(DateTimeStringValue fromDate)? setfromDate,
     TResult Function(DateTimeStringValue toDate)? setToDate,
     TResult Function(String orderId)? orderIdChanged,
@@ -1063,7 +1063,7 @@ class _$_PoNumberChanged implements _PoNumberChanged {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_FilterOrderHistory value) filterOrderHistory,
+    required TResult Function(_ApplyFilters value) applyFilters,
     required TResult Function(_SetfromDate value) setfromDate,
     required TResult Function(_SetToDate value) setToDate,
     required TResult Function(_OrderIdChanged value) orderIdChanged,
@@ -1081,7 +1081,7 @@ class _$_PoNumberChanged implements _PoNumberChanged {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_FilterOrderHistory value)? filterOrderHistory,
+    TResult? Function(_ApplyFilters value)? applyFilters,
     TResult? Function(_SetfromDate value)? setfromDate,
     TResult? Function(_SetToDate value)? setToDate,
     TResult? Function(_OrderIdChanged value)? orderIdChanged,
@@ -1097,7 +1097,7 @@ class _$_PoNumberChanged implements _PoNumberChanged {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_FilterOrderHistory value)? filterOrderHistory,
+    TResult Function(_ApplyFilters value)? applyFilters,
     TResult Function(_SetfromDate value)? setfromDate,
     TResult Function(_SetToDate value)? setToDate,
     TResult Function(_OrderIdChanged value)? orderIdChanged,
@@ -1191,7 +1191,7 @@ class _$_PrincipalSearchChanged implements _PrincipalSearchChanged {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() filterOrderHistory,
+    required TResult Function() applyFilters,
     required TResult Function(DateTimeStringValue fromDate) setfromDate,
     required TResult Function(DateTimeStringValue toDate) setToDate,
     required TResult Function(String orderId) orderIdChanged,
@@ -1207,7 +1207,7 @@ class _$_PrincipalSearchChanged implements _PrincipalSearchChanged {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function()? filterOrderHistory,
+    TResult? Function()? applyFilters,
     TResult? Function(DateTimeStringValue fromDate)? setfromDate,
     TResult? Function(DateTimeStringValue toDate)? setToDate,
     TResult? Function(String orderId)? orderIdChanged,
@@ -1223,7 +1223,7 @@ class _$_PrincipalSearchChanged implements _PrincipalSearchChanged {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? filterOrderHistory,
+    TResult Function()? applyFilters,
     TResult Function(DateTimeStringValue fromDate)? setfromDate,
     TResult Function(DateTimeStringValue toDate)? setToDate,
     TResult Function(String orderId)? orderIdChanged,
@@ -1243,7 +1243,7 @@ class _$_PrincipalSearchChanged implements _PrincipalSearchChanged {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_FilterOrderHistory value) filterOrderHistory,
+    required TResult Function(_ApplyFilters value) applyFilters,
     required TResult Function(_SetfromDate value) setfromDate,
     required TResult Function(_SetToDate value) setToDate,
     required TResult Function(_OrderIdChanged value) orderIdChanged,
@@ -1261,7 +1261,7 @@ class _$_PrincipalSearchChanged implements _PrincipalSearchChanged {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_FilterOrderHistory value)? filterOrderHistory,
+    TResult? Function(_ApplyFilters value)? applyFilters,
     TResult? Function(_SetfromDate value)? setfromDate,
     TResult? Function(_SetToDate value)? setToDate,
     TResult? Function(_OrderIdChanged value)? orderIdChanged,
@@ -1277,7 +1277,7 @@ class _$_PrincipalSearchChanged implements _PrincipalSearchChanged {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_FilterOrderHistory value)? filterOrderHistory,
+    TResult Function(_ApplyFilters value)? applyFilters,
     TResult Function(_SetfromDate value)? setfromDate,
     TResult Function(_SetToDate value)? setToDate,
     TResult Function(_OrderIdChanged value)? orderIdChanged,
@@ -1372,7 +1372,7 @@ class _$_MaterialSearchChanged implements _MaterialSearchChanged {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() filterOrderHistory,
+    required TResult Function() applyFilters,
     required TResult Function(DateTimeStringValue fromDate) setfromDate,
     required TResult Function(DateTimeStringValue toDate) setToDate,
     required TResult Function(String orderId) orderIdChanged,
@@ -1388,7 +1388,7 @@ class _$_MaterialSearchChanged implements _MaterialSearchChanged {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function()? filterOrderHistory,
+    TResult? Function()? applyFilters,
     TResult? Function(DateTimeStringValue fromDate)? setfromDate,
     TResult? Function(DateTimeStringValue toDate)? setToDate,
     TResult? Function(String orderId)? orderIdChanged,
@@ -1404,7 +1404,7 @@ class _$_MaterialSearchChanged implements _MaterialSearchChanged {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? filterOrderHistory,
+    TResult Function()? applyFilters,
     TResult Function(DateTimeStringValue fromDate)? setfromDate,
     TResult Function(DateTimeStringValue toDate)? setToDate,
     TResult Function(String orderId)? orderIdChanged,
@@ -1424,7 +1424,7 @@ class _$_MaterialSearchChanged implements _MaterialSearchChanged {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_FilterOrderHistory value) filterOrderHistory,
+    required TResult Function(_ApplyFilters value) applyFilters,
     required TResult Function(_SetfromDate value) setfromDate,
     required TResult Function(_SetToDate value) setToDate,
     required TResult Function(_OrderIdChanged value) orderIdChanged,
@@ -1442,7 +1442,7 @@ class _$_MaterialSearchChanged implements _MaterialSearchChanged {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_FilterOrderHistory value)? filterOrderHistory,
+    TResult? Function(_ApplyFilters value)? applyFilters,
     TResult? Function(_SetfromDate value)? setfromDate,
     TResult? Function(_SetToDate value)? setToDate,
     TResult? Function(_OrderIdChanged value)? orderIdChanged,
@@ -1458,7 +1458,7 @@ class _$_MaterialSearchChanged implements _MaterialSearchChanged {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_FilterOrderHistory value)? filterOrderHistory,
+    TResult Function(_ApplyFilters value)? applyFilters,
     TResult Function(_SetfromDate value)? setfromDate,
     TResult Function(_SetToDate value)? setToDate,
     TResult Function(_OrderIdChanged value)? orderIdChanged,
@@ -1551,7 +1551,7 @@ class _$_SortByDate implements _SortByDate {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() filterOrderHistory,
+    required TResult Function() applyFilters,
     required TResult Function(DateTimeStringValue fromDate) setfromDate,
     required TResult Function(DateTimeStringValue toDate) setToDate,
     required TResult Function(String orderId) orderIdChanged,
@@ -1567,7 +1567,7 @@ class _$_SortByDate implements _SortByDate {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function()? filterOrderHistory,
+    TResult? Function()? applyFilters,
     TResult? Function(DateTimeStringValue fromDate)? setfromDate,
     TResult? Function(DateTimeStringValue toDate)? setToDate,
     TResult? Function(String orderId)? orderIdChanged,
@@ -1583,7 +1583,7 @@ class _$_SortByDate implements _SortByDate {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? filterOrderHistory,
+    TResult Function()? applyFilters,
     TResult Function(DateTimeStringValue fromDate)? setfromDate,
     TResult Function(DateTimeStringValue toDate)? setToDate,
     TResult Function(String orderId)? orderIdChanged,
@@ -1603,7 +1603,7 @@ class _$_SortByDate implements _SortByDate {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_FilterOrderHistory value) filterOrderHistory,
+    required TResult Function(_ApplyFilters value) applyFilters,
     required TResult Function(_SetfromDate value) setfromDate,
     required TResult Function(_SetToDate value) setToDate,
     required TResult Function(_OrderIdChanged value) orderIdChanged,
@@ -1621,7 +1621,7 @@ class _$_SortByDate implements _SortByDate {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_FilterOrderHistory value)? filterOrderHistory,
+    TResult? Function(_ApplyFilters value)? applyFilters,
     TResult? Function(_SetfromDate value)? setfromDate,
     TResult? Function(_SetToDate value)? setToDate,
     TResult? Function(_OrderIdChanged value)? orderIdChanged,
@@ -1637,7 +1637,7 @@ class _$_SortByDate implements _SortByDate {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_FilterOrderHistory value)? filterOrderHistory,
+    TResult Function(_ApplyFilters value)? applyFilters,
     TResult Function(_SetfromDate value)? setfromDate,
     TResult Function(_SetToDate value)? setToDate,
     TResult Function(_OrderIdChanged value)? orderIdChanged,
@@ -1665,11 +1665,10 @@ abstract class _SortByDate implements OrderHistoryFilterEvent {
 
 /// @nodoc
 mixin _$OrderHistoryFilterState {
-  OrderHistoryFilter get orderHistoryFilterList =>
+  OrderHistoryFilter get orderHistoryFilter =>
       throw _privateConstructorUsedError;
   bool get isSubmitting => throw _privateConstructorUsedError;
   bool get showErrorMessages => throw _privateConstructorUsedError;
-  bool get isAppliedFilter => throw _privateConstructorUsedError;
   String get sortDirection => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -1684,13 +1683,12 @@ abstract class $OrderHistoryFilterStateCopyWith<$Res> {
       _$OrderHistoryFilterStateCopyWithImpl<$Res, OrderHistoryFilterState>;
   @useResult
   $Res call(
-      {OrderHistoryFilter orderHistoryFilterList,
+      {OrderHistoryFilter orderHistoryFilter,
       bool isSubmitting,
       bool showErrorMessages,
-      bool isAppliedFilter,
       String sortDirection});
 
-  $OrderHistoryFilterCopyWith<$Res> get orderHistoryFilterList;
+  $OrderHistoryFilterCopyWith<$Res> get orderHistoryFilter;
 }
 
 /// @nodoc
@@ -1707,16 +1705,15 @@ class _$OrderHistoryFilterStateCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? orderHistoryFilterList = null,
+    Object? orderHistoryFilter = null,
     Object? isSubmitting = null,
     Object? showErrorMessages = null,
-    Object? isAppliedFilter = null,
     Object? sortDirection = null,
   }) {
     return _then(_value.copyWith(
-      orderHistoryFilterList: null == orderHistoryFilterList
-          ? _value.orderHistoryFilterList
-          : orderHistoryFilterList // ignore: cast_nullable_to_non_nullable
+      orderHistoryFilter: null == orderHistoryFilter
+          ? _value.orderHistoryFilter
+          : orderHistoryFilter // ignore: cast_nullable_to_non_nullable
               as OrderHistoryFilter,
       isSubmitting: null == isSubmitting
           ? _value.isSubmitting
@@ -1725,10 +1722,6 @@ class _$OrderHistoryFilterStateCopyWithImpl<$Res,
       showErrorMessages: null == showErrorMessages
           ? _value.showErrorMessages
           : showErrorMessages // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isAppliedFilter: null == isAppliedFilter
-          ? _value.isAppliedFilter
-          : isAppliedFilter // ignore: cast_nullable_to_non_nullable
               as bool,
       sortDirection: null == sortDirection
           ? _value.sortDirection
@@ -1739,10 +1732,10 @@ class _$OrderHistoryFilterStateCopyWithImpl<$Res,
 
   @override
   @pragma('vm:prefer-inline')
-  $OrderHistoryFilterCopyWith<$Res> get orderHistoryFilterList {
-    return $OrderHistoryFilterCopyWith<$Res>(_value.orderHistoryFilterList,
+  $OrderHistoryFilterCopyWith<$Res> get orderHistoryFilter {
+    return $OrderHistoryFilterCopyWith<$Res>(_value.orderHistoryFilter,
         (value) {
-      return _then(_value.copyWith(orderHistoryFilterList: value) as $Val);
+      return _then(_value.copyWith(orderHistoryFilter: value) as $Val);
     });
   }
 }
@@ -1756,14 +1749,13 @@ abstract class _$$_OrderHistoryFilterStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {OrderHistoryFilter orderHistoryFilterList,
+      {OrderHistoryFilter orderHistoryFilter,
       bool isSubmitting,
       bool showErrorMessages,
-      bool isAppliedFilter,
       String sortDirection});
 
   @override
-  $OrderHistoryFilterCopyWith<$Res> get orderHistoryFilterList;
+  $OrderHistoryFilterCopyWith<$Res> get orderHistoryFilter;
 }
 
 /// @nodoc
@@ -1778,16 +1770,15 @@ class __$$_OrderHistoryFilterStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? orderHistoryFilterList = null,
+    Object? orderHistoryFilter = null,
     Object? isSubmitting = null,
     Object? showErrorMessages = null,
-    Object? isAppliedFilter = null,
     Object? sortDirection = null,
   }) {
     return _then(_$_OrderHistoryFilterState(
-      orderHistoryFilterList: null == orderHistoryFilterList
-          ? _value.orderHistoryFilterList
-          : orderHistoryFilterList // ignore: cast_nullable_to_non_nullable
+      orderHistoryFilter: null == orderHistoryFilter
+          ? _value.orderHistoryFilter
+          : orderHistoryFilter // ignore: cast_nullable_to_non_nullable
               as OrderHistoryFilter,
       isSubmitting: null == isSubmitting
           ? _value.isSubmitting
@@ -1796,10 +1787,6 @@ class __$$_OrderHistoryFilterStateCopyWithImpl<$Res>
       showErrorMessages: null == showErrorMessages
           ? _value.showErrorMessages
           : showErrorMessages // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isAppliedFilter: null == isAppliedFilter
-          ? _value.isAppliedFilter
-          : isAppliedFilter // ignore: cast_nullable_to_non_nullable
               as bool,
       sortDirection: null == sortDirection
           ? _value.sortDirection
@@ -1813,27 +1800,24 @@ class __$$_OrderHistoryFilterStateCopyWithImpl<$Res>
 
 class _$_OrderHistoryFilterState extends _OrderHistoryFilterState {
   const _$_OrderHistoryFilterState(
-      {required this.orderHistoryFilterList,
+      {required this.orderHistoryFilter,
       required this.isSubmitting,
       required this.showErrorMessages,
-      required this.isAppliedFilter,
       required this.sortDirection})
       : super._();
 
   @override
-  final OrderHistoryFilter orderHistoryFilterList;
+  final OrderHistoryFilter orderHistoryFilter;
   @override
   final bool isSubmitting;
   @override
   final bool showErrorMessages;
   @override
-  final bool isAppliedFilter;
-  @override
   final String sortDirection;
 
   @override
   String toString() {
-    return 'OrderHistoryFilterState(orderHistoryFilterList: $orderHistoryFilterList, isSubmitting: $isSubmitting, showErrorMessages: $showErrorMessages, isAppliedFilter: $isAppliedFilter, sortDirection: $sortDirection)';
+    return 'OrderHistoryFilterState(orderHistoryFilter: $orderHistoryFilter, isSubmitting: $isSubmitting, showErrorMessages: $showErrorMessages, sortDirection: $sortDirection)';
   }
 
   @override
@@ -1841,21 +1825,19 @@ class _$_OrderHistoryFilterState extends _OrderHistoryFilterState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_OrderHistoryFilterState &&
-            (identical(other.orderHistoryFilterList, orderHistoryFilterList) ||
-                other.orderHistoryFilterList == orderHistoryFilterList) &&
+            (identical(other.orderHistoryFilter, orderHistoryFilter) ||
+                other.orderHistoryFilter == orderHistoryFilter) &&
             (identical(other.isSubmitting, isSubmitting) ||
                 other.isSubmitting == isSubmitting) &&
             (identical(other.showErrorMessages, showErrorMessages) ||
                 other.showErrorMessages == showErrorMessages) &&
-            (identical(other.isAppliedFilter, isAppliedFilter) ||
-                other.isAppliedFilter == isAppliedFilter) &&
             (identical(other.sortDirection, sortDirection) ||
                 other.sortDirection == sortDirection));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, orderHistoryFilterList,
-      isSubmitting, showErrorMessages, isAppliedFilter, sortDirection);
+  int get hashCode => Object.hash(runtimeType, orderHistoryFilter, isSubmitting,
+      showErrorMessages, sortDirection);
 
   @JsonKey(ignore: true)
   @override
@@ -1868,21 +1850,18 @@ class _$_OrderHistoryFilterState extends _OrderHistoryFilterState {
 
 abstract class _OrderHistoryFilterState extends OrderHistoryFilterState {
   const factory _OrderHistoryFilterState(
-      {required final OrderHistoryFilter orderHistoryFilterList,
+      {required final OrderHistoryFilter orderHistoryFilter,
       required final bool isSubmitting,
       required final bool showErrorMessages,
-      required final bool isAppliedFilter,
       required final String sortDirection}) = _$_OrderHistoryFilterState;
   const _OrderHistoryFilterState._() : super._();
 
   @override
-  OrderHistoryFilter get orderHistoryFilterList;
+  OrderHistoryFilter get orderHistoryFilter;
   @override
   bool get isSubmitting;
   @override
   bool get showErrorMessages;
-  @override
-  bool get isAppliedFilter;
   @override
   String get sortDirection;
   @override

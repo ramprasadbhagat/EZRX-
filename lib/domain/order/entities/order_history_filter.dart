@@ -41,4 +41,15 @@ class OrderHistoryFilter with _$OrderHistoryFilter {
 
     return count;
   }
+
+  // to check if any filter applied
+  bool get anyFilterApplied => this != OrderHistoryFilter.empty();
+
+// to check the filter validation
+
+  bool get areFiltersValid =>
+      orderId.isValid() &&
+      poNumber.isValid() &&
+      materialSearch.isValid() &&
+      principalSearch.isValid();
 }

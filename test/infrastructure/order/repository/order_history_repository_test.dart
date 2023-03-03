@@ -8,6 +8,7 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_filter.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
@@ -15,6 +16,7 @@ import 'package:ezrxmobile/infrastructure/order/datasource/order_history_local.d
 import 'package:ezrxmobile/infrastructure/order/datasource/order_history_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/order_history_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:intl/intl.dart';
 import 'package:mocktail/mocktail.dart';
 
 class MockConfig extends Mock implements Config {}
@@ -43,6 +45,19 @@ void main() {
       shipToCustomerCode: 'fake-ship-to-customer-code');
   final mockCustomerCodeInfo = CustomerCodeInfo.empty()
       .copyWith(customerCodeSoldTo: 'fake-customer-code');
+  final fakeToDate = DateTime.parse(
+    DateFormat('yyyyMMdd').format(
+      DateTime.now(),
+    ),
+  );
+
+  final fakeFromDate = DateTime.parse(
+    DateFormat('yyyyMMdd').format(
+      DateTime.now().subtract(
+        const Duration(days: 7),
+      ),
+    ),
+  );
 
   setUpAll(() {
     mockConfig = MockConfig();
@@ -146,31 +161,50 @@ void main() {
     });
     test('get OrderHistory successfully remotely for salesrep', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
+
       when(
         () => orderHistoryRemoteDataSource.getOrderHistorySalesRep(
-            loginUserType: 'salesRep',
-            soldTo: '1000004567',
-            shipTo: '2678999',
-            fromDate: '20221223',
-            toDate: '20221230',
-            pageSize: 10,
-            offset: 0,
-            orderBy: 'orderDate',
-            sort: 'desc',
-            userName: 'mock_user',
-            orderId: '234567',
-            poNumber: '23333',
-            materialSearch: '299999',
-            principalSearch: '32222',
-            language: 'E'),
+          loginUserType: mockUser
+              .copyWith(
+                role:
+                    Role.empty().copyWith(type: RoleType('external_sales_rep')),
+              )
+              .role
+              .type
+              .loginUserType,
+          shipTo: mockShipToInfo.shipToCustomerCode,
+          soldTo: mockCustomerCodeInfo.customerCodeSoldTo,
+          pageSize: 10,
+          offset: 0,
+          language: 'E',
+          userName: 'mock_user',
+          orderBy: 'orderDate',
+          sort: 'desc',
+          filterQuery: {
+            'orderNumber': 'fake_orderNumber',
+            'poReference': 'fake_poReference',
+            'materialSearch': 'fake_materialSearch',
+            'principalSearch': 'fake_principalSearch',
+            'toDate': DateTimeStringValue(getDateStringByDateTime(fakeToDate))
+                .apiDateTimeFormat,
+            'fromDate':
+                DateTimeStringValue(getDateStringByDateTime(fakeFromDate))
+                    .apiDateTimeFormat,
+          },
+        ),
       ).thenAnswer((invocation) async => orderHistoryMockList);
-
+      when(() => countlyService.addCountlyEvent(
+            'order_history_filter',
+            segmentation: {
+              'isDateChanged':
+                  mockOrderHistoryFilter.toDate.isBefore(DateTime.now()),
+            },
+          )).thenAnswer((invocation) => Future.value());
       final result = await orderHistoryRepository.getOrderHistory(
           salesOrgConfig: mockSalesOrganisationConfigs.copyWith(
               languageValue: LanguageValue('E'), languageFilter: true),
-          soldTo:
-              mockCustomerCodeInfo.copyWith(customerCodeSoldTo: '1000004567'),
-          shipTo: mockShipToInfo.copyWith(shipToCustomerCode: '2678999'),
+          soldTo: mockCustomerCodeInfo,
+          shipTo: mockShipToInfo,
           orderBy: 'orderDate',
           sort: 'desc',
           user: mockUser.copyWith(
@@ -179,35 +213,36 @@ void main() {
           pageSize: 10,
           offset: 0,
           orderHistoryFilter: mockOrderHistoryFilter.copyWith(
-              orderId: SearchKey('234567'),
-              materialSearch: SearchKey('299999'),
-              poNumber: SearchKey('23333'),
-              principalSearch: SearchKey('32222')));
+              materialSearch: SearchKey('fake_materialSearch'),
+              principalSearch: SearchKey('fake_principalSearch'),
+              poNumber: SearchKey('fake_poReference'),
+              orderId: SearchKey(
+                'fake_orderNumber',
+              )));
       expect(
         result.isRight(),
-        false,
+        true,
       );
     });
     test('get OrderHistory fail remotely for salesrep', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
       when(
         () => orderHistoryRemoteDataSource.getOrderHistorySalesRep(
+            filterQuery: {
+              'toDate': DateTimeStringValue(getDateStringByDateTime(fakeToDate))
+                  .apiDateTimeFormat,
+              'fromDate':
+                  DateTimeStringValue(getDateStringByDateTime(fakeFromDate))
+                      .apiDateTimeFormat,
+            },
             loginUserType: mockUser.role.type.loginUserType,
             soldTo: mockCustomerCodeInfo.customerCodeSoldTo,
             shipTo: mockShipToInfo.shipToCustomerCode,
-            fromDate: mockOrderHistoryFilter.fromDate.apiDateTimeFormat,
-            toDate: mockOrderHistoryFilter.toDate.apiDateTimeFormat,
             pageSize: 1,
             offset: 0,
             orderBy: 'orderBy',
             sort: 'sort',
             userName: '',
-            orderId: mockOrderHistoryFilter.orderId.getOrDefaultValue(''),
-            poNumber: mockOrderHistoryFilter.poNumber.getOrDefaultValue(''),
-            materialSearch:
-                mockOrderHistoryFilter.materialSearch.getOrDefaultValue(''),
-            principalSearch:
-                mockOrderHistoryFilter.principalSearch.getOrDefaultValue(''),
             language: ''),
       ).thenThrow((invocation) async => MockException());
 
@@ -230,24 +265,26 @@ void main() {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
       when(
         () => orderHistoryRemoteDataSource.getOrderHistory(
-            loginUserType: mockUser.role.type.loginUserType,
-            soldTo: mockCustomerCodeInfo.customerCodeSoldTo,
-            shipTo: mockShipToInfo.shipToCustomerCode,
-            fromDate:
-                mockOrderHistoryFilter.fromDate.apiDateTimeFormat,
-            toDate:
-                mockOrderHistoryFilter.toDate.apiDateTimeFormat,
-            pageSize: 10,
-            offset: 0,
-            orderBy: 'orderDate',
-            sort: 'desc',
-            companyName: '',
-            orderId: mockOrderHistoryFilter.orderId.getOrDefaultValue(''),
-            poNumber: mockOrderHistoryFilter.poNumber.getOrDefaultValue(''),
-            materialSearch:
-                mockOrderHistoryFilter.materialSearch.getOrDefaultValue(''),
-            principalSearch:
-                mockOrderHistoryFilter.principalSearch.getOrDefaultValue('')),
+          filterQuery: {
+            'toDate': DateTimeStringValue(getDateStringByDateTime(fakeToDate))
+                .apiDateTimeFormat,
+            'fromDate':
+                DateTimeStringValue(getDateStringByDateTime(fakeFromDate))
+                    .apiDateTimeFormat,
+            'orderNumber': 'fake_orderNumber',
+            'poReference': 'fake_poReference',
+            'materialSearch': 'fake_materialSearch',
+            'principalSearch': 'fake_principalSearch',
+          },
+          loginUserType: mockUser.role.type.loginUserType,
+          soldTo: mockCustomerCodeInfo.customerCodeSoldTo,
+          shipTo: mockShipToInfo.shipToCustomerCode,
+          pageSize: 10,
+          offset: 0,
+          orderBy: 'orderDate',
+          sort: 'desc',
+          companyName: '',
+        ),
       ).thenAnswer((invocation) async => orderHistoryMockList);
 
       when(() => countlyService.addCountlyEvent(
@@ -269,7 +306,13 @@ void main() {
               role: Role.empty().copyWith(type: RoleType('salesRep'))),
           pageSize: 10,
           offset: 0,
-          orderHistoryFilter: mockOrderHistoryFilter);
+          orderHistoryFilter: mockOrderHistoryFilter.copyWith(
+              materialSearch: SearchKey('fake_materialSearch'),
+              principalSearch: SearchKey('fake_principalSearch'),
+              poNumber: SearchKey('fake_poReference'),
+              orderId: SearchKey(
+                'fake_orderNumber',
+              )));
       expect(
         result.isRight(),
         true,
@@ -279,24 +322,22 @@ void main() {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
       when(
         () => orderHistoryRemoteDataSource.getOrderHistory(
-            loginUserType: mockUser.role.type.loginUserType,
-            soldTo: mockCustomerCodeInfo.customerCodeSoldTo,
-            shipTo: mockShipToInfo.shipToCustomerCode,
-            fromDate:
-                mockOrderHistoryFilter.fromDate.apiDateTimeFormat,
-            toDate:
-                mockOrderHistoryFilter.toDate.apiDateTimeFormat,
-            pageSize: 1,
-            offset: 0,
-            orderBy: 'orderBy',
-            sort: 'sort',
-            companyName: '',
-            orderId: mockOrderHistoryFilter.orderId.getOrDefaultValue(''),
-            poNumber: mockOrderHistoryFilter.poNumber.getOrDefaultValue(''),
-            materialSearch:
-                mockOrderHistoryFilter.materialSearch.getOrDefaultValue(''),
-            principalSearch:
-                mockOrderHistoryFilter.principalSearch.getOrDefaultValue('')),
+          filterQuery: {
+            'toDate': DateTimeStringValue(getDateStringByDateTime(fakeToDate))
+                .apiDateTimeFormat,
+            'fromDate':
+                DateTimeStringValue(getDateStringByDateTime(fakeFromDate))
+                    .apiDateTimeFormat,
+          },
+          loginUserType: mockUser.role.type.loginUserType,
+          soldTo: mockCustomerCodeInfo.customerCodeSoldTo,
+          shipTo: mockShipToInfo.shipToCustomerCode,
+          pageSize: 1,
+          offset: 0,
+          orderBy: 'orderBy',
+          sort: 'sort',
+          companyName: '',
+        ),
       ).thenThrow((invocation) async => MockException());
 
       final result = await orderHistoryRepository.getOrderHistory(

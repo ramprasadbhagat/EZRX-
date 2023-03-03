@@ -149,14 +149,13 @@ class HistoryTab extends StatelessWidget {
                           BlocBuilder<OrderHistoryFilterBloc,
                               OrderHistoryFilterState>(
                             buildWhen: (previous, current) =>
-                                previous.orderHistoryFilterList
-                                    .appliedFilterCount !=
-                                current
-                                    .orderHistoryFilterList.appliedFilterCount,
+                                previous
+                                    .orderHistoryFilter.appliedFilterCount !=
+                                current.orderHistoryFilter.appliedFilterCount,
                             builder: (context, state) {
                               return FilterCountButton(
-                                filterCount: state
-                                    .orderHistoryFilterList.appliedFilterCount,
+                                filterCount:
+                                    state.orderHistoryFilter.appliedFilterCount,
                                 onTap: () {
                                   scaffoldKey.currentState!.openEndDrawer();
                                 },
@@ -199,7 +198,7 @@ class HistoryTab extends StatelessWidget {
                     salesOrgConfigs: context.read<SalesOrgBloc>().state.configs,
                     shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
                     user: context.read<UserBloc>().state.user,
-                    orderHistoryFilter: state.orderHistoryFilterList,
+                    orderHistoryFilter: state.orderHistoryFilter,
                     sortDirection: state.sortDirection,
                   ),
                 );
@@ -247,7 +246,8 @@ class HistoryTab extends StatelessWidget {
                           context
                                   .read<OrderHistoryFilterBloc>()
                                   .state
-                                  .isAppliedFilter
+                                  .orderHistoryFilter
+                                  .anyFilterApplied
                               ? const SizedBox.shrink()
                               : Padding(
                                   padding: const EdgeInsets.all(8.0),

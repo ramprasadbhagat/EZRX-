@@ -27,17 +27,12 @@ class OrderHistoryRemoteDataSource {
     required String loginUserType,
     required String soldTo,
     required String shipTo,
-    required String fromDate,
-    required String toDate,
     required int pageSize,
     required int offset,
     required String orderBy, // = 'orderDate',
     required String sort, // = 'desc',
     required String companyName,
-    required String orderId,
-    required String poNumber,
-    required String materialSearch,
-    required String principalSearch,
+    required Map<String, dynamic> filterQuery,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
       final queryData = orderHistoryQueryMutation.getOrderHistoryRep();
@@ -48,14 +43,9 @@ class OrderHistoryRemoteDataSource {
         'first': pageSize,
         'after': offset,
         'orderBy': orderBy,
-        'fromDate': fromDate, //'20220906',
-        'toDate': toDate, //'20221008',
         'sort': sort,
-        'orderNumber': orderId.isEmpty ? null : orderId,
-        'poReference': poNumber.isEmpty ? null : poNumber,
-        'materialSearch': materialSearch.isEmpty ? null : materialSearch,
-        'principalSearch': principalSearch.isEmpty ? null : principalSearch,
         'companyName': companyName,
+        ...filterQuery,
       };
 
       final res = await httpService.request(
@@ -84,18 +74,13 @@ class OrderHistoryRemoteDataSource {
     required String loginUserType,
     required String soldTo,
     required String shipTo,
-    required String fromDate,
-    required String toDate,
     required int pageSize,
     required int offset,
     required String orderBy, // = 'orderDate',
     required String sort, // = 'desc',
     required String userName, // = '',
     required String language, // = 'E',
-    required String orderId,
-    required String poNumber,
-    required String materialSearch,
-    required String principalSearch,
+    required Map<String, dynamic> filterQuery,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
       final queryData = orderHistoryQueryMutation.getOrderHistoryForSalesRep();
@@ -105,15 +90,10 @@ class OrderHistoryRemoteDataSource {
         'first': pageSize,
         'after': offset,
         'orderBy': orderBy,
-        'fromDate': fromDate,
-        'toDate': toDate,
         'sort': sort,
-        'orderNumber': orderId.isEmpty ? null : orderId,
-        'poReference': poNumber.isEmpty ? null : poNumber,
-        'materialSearch': materialSearch.isEmpty ? null : materialSearch,
-        'principalSearch': principalSearch.isEmpty ? null : principalSearch,
         'userName': userName,
         'language': language,
+        ...filterQuery,
       };
 
       final res = await httpService.request(

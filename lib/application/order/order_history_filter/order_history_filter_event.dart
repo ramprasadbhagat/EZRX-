@@ -4,8 +4,8 @@ part of 'order_history_filter_bloc.dart';
 class OrderHistoryFilterEvent with _$OrderHistoryFilterEvent {
   const factory OrderHistoryFilterEvent.initialized() = _Initialized;
 
-  const factory OrderHistoryFilterEvent.filterOrderHistory() =
-      _FilterOrderHistory;
+  const factory OrderHistoryFilterEvent.applyFilters() =
+      _ApplyFilters;
 
   const factory OrderHistoryFilterEvent.setfromDate({
     required DateTimeStringValue fromDate,

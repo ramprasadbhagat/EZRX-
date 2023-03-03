@@ -69,7 +69,7 @@ void main() {
         OrderHistoryFilterState.initial().copyWith(
           isSubmitting: true,
           showErrorMessages: true,
-          orderHistoryFilterList: mockOrderHistoryFilter,
+          orderHistoryFilter: mockOrderHistoryFilter,
         ),
       );
 
@@ -123,7 +123,7 @@ void main() {
 
       when(() => mockOrderHistoryFilterBloc.state).thenReturn(
         OrderHistoryFilterState.initial().copyWith(
-            isSubmitting: true, orderHistoryFilterList: mockOrderHistoryFilter),
+            isSubmitting: true, orderHistoryFilter: mockOrderHistoryFilter),
       );
       when(() => autoRouterMock.pop()).thenAnswer((invocation) async => true);
 
@@ -204,7 +204,7 @@ void main() {
     testWidgets(' test clear Order History Filter  ', (tester) async {
       when(() => mockOrderHistoryFilterBloc.state).thenReturn(
         OrderHistoryFilterState.initial()
-            .copyWith(orderHistoryFilterList: mockOrderHistoryFilter),
+            .copyWith(orderHistoryFilter: mockOrderHistoryFilter),
       );
      
 
@@ -220,7 +220,7 @@ void main() {
     testWidgets(' test filtefromdateField date picker test ', (tester) async {
       when(() => mockOrderHistoryFilterBloc.state).thenReturn(
         OrderHistoryFilterState.initial()
-            .copyWith(orderHistoryFilterList: mockOrderHistoryFilter),
+            .copyWith(orderHistoryFilter: mockOrderHistoryFilter),
       );
       await tester.pumpWidget(getWUT());
       await tester.pump();
@@ -238,7 +238,7 @@ void main() {
     testWidgets(' test filtertodateField date picker test ', (tester) async {
       when(() => mockOrderHistoryFilterBloc.state).thenReturn(
         OrderHistoryFilterState.initial()
-            .copyWith(orderHistoryFilterList: mockOrderHistoryFilter),
+            .copyWith(orderHistoryFilter: mockOrderHistoryFilter),
       );
       await tester.pumpWidget(getWUT());
       await tester.pump();

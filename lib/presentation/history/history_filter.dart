@@ -87,28 +87,22 @@ class OrderHistoryFilterDrawer extends StatelessWidget {
 
 class _FilterHeader extends StatelessWidget {
   const _FilterHeader({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Text(
-            'Filter Order History'.tr(),
-            style: Theme.of(context).textTheme.titleMedium,
+    return AppBar(
+      automaticallyImplyLeading: false,
+      title: const Text('Apply Order History Filters').tr(),
+      actions: [
+        IconButton(
+          key: const Key('filterCrossButton'),
+          icon: const Icon(
+            Icons.close,
           ),
-          IconButton(
-            key: const Key('filterCrossButton'),
-            icon: const Icon(
-              Icons.close,
-            ),
-            onPressed: () {
-              context.router.popForced();
-            },
-          ),
-        ],
-      ),
+          onPressed: () {
+            context.router.popForced();
+          },
+        ),
+      ],
     );
   }
 }
@@ -120,19 +114,18 @@ class _OrderIdByFilter extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<OrderHistoryFilterBloc, OrderHistoryFilterState>(
       buildWhen: (previous, current) =>
-          previous.orderHistoryFilterList.orderId !=
-          current.orderHistoryFilterList.orderId,
+          previous.orderHistoryFilter.orderId !=
+          current.orderHistoryFilter.orderId,
       builder: (context, state) {
         return TextFormField(
           key: const Key('filterOrderIdField'),
-          initialValue:
-              state.orderHistoryFilterList.orderId.getOrDefaultValue(''),
+          initialValue: state.orderHistoryFilter.orderId.getOrDefaultValue(''),
           onChanged: (value) => context.read<OrderHistoryFilterBloc>().add(
                 OrderHistoryFilterEvent.orderIdChanged(
                   value,
                 ),
               ),
-          validator: (_) => state.orderHistoryFilterList.orderId.value.fold(
+          validator: (_) => state.orderHistoryFilter.orderId.value.fold(
             (f) => f.maybeMap(
               subceedLength: (f) =>
                   'Search input must be greater than 2 characters.'.tr(),
@@ -156,22 +149,21 @@ class _PoNumberFilter extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<OrderHistoryFilterBloc, OrderHistoryFilterState>(
       buildWhen: (previous, current) =>
-          previous.orderHistoryFilterList.poNumber !=
-          current.orderHistoryFilterList.poNumber,
+          previous.orderHistoryFilter.poNumber !=
+          current.orderHistoryFilter.poNumber,
       builder: (
         context,
         state,
       ) {
         return TextFormField(
           key: const Key('filterPoNumberField'),
-          initialValue:
-              state.orderHistoryFilterList.poNumber.getOrDefaultValue(''),
+          initialValue: state.orderHistoryFilter.poNumber.getOrDefaultValue(''),
           onChanged: (value) => context.read<OrderHistoryFilterBloc>().add(
                 OrderHistoryFilterEvent.poNumberChanged(
                   value,
                 ),
               ),
-          validator: (_) => state.orderHistoryFilterList.poNumber.value.fold(
+          validator: (_) => state.orderHistoryFilter.poNumber.value.fold(
             (f) => f.maybeMap(
               subceedLength: (f) =>
                   'Search input must be greater than 2 characters.'.tr(),
@@ -195,8 +187,8 @@ class _MaterialSearchByFilter extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<OrderHistoryFilterBloc, OrderHistoryFilterState>(
       buildWhen: (previous, current) =>
-          previous.orderHistoryFilterList.materialSearch !=
-          current.orderHistoryFilterList.materialSearch,
+          previous.orderHistoryFilter.materialSearch !=
+          current.orderHistoryFilter.materialSearch,
       builder: (
         context,
         state,
@@ -204,14 +196,13 @@ class _MaterialSearchByFilter extends StatelessWidget {
         return TextFormField(
           key: const Key('filterMaterialSearchField'),
           initialValue:
-              state.orderHistoryFilterList.materialSearch.getOrDefaultValue(''),
+              state.orderHistoryFilter.materialSearch.getOrDefaultValue(''),
           onChanged: (value) => context.read<OrderHistoryFilterBloc>().add(
                 OrderHistoryFilterEvent.materialSearchChanged(
                   value,
                 ),
               ),
-          validator: (_) =>
-              state.orderHistoryFilterList.materialSearch.value.fold(
+          validator: (_) => state.orderHistoryFilter.materialSearch.value.fold(
             (f) => f.maybeMap(
               subceedLength: (f) =>
                   'Search input must be greater than 2 characters.'.tr(),
@@ -235,21 +226,20 @@ class _PrincipalSearchByFilter extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<OrderHistoryFilterBloc, OrderHistoryFilterState>(
       buildWhen: (previous, current) =>
-          previous.orderHistoryFilterList.principalSearch !=
-          current.orderHistoryFilterList.principalSearch,
+          previous.orderHistoryFilter.principalSearch !=
+          current.orderHistoryFilter.principalSearch,
       builder: (
         context,
         state,
       ) {
         return TextFormField(
           key: const Key('filterPrincipalSearchField'),
-          initialValue: state.orderHistoryFilterList.principalSearch
-              .getOrDefaultValue(''),
+          initialValue:
+              state.orderHistoryFilter.principalSearch.getOrDefaultValue(''),
           onChanged: (value) => context.read<OrderHistoryFilterBloc>().add(
                 OrderHistoryFilterEvent.principalSearchChanged(value),
               ),
-          validator: (_) =>
-              state.orderHistoryFilterList.principalSearch.value.fold(
+          validator: (_) => state.orderHistoryFilter.principalSearch.value.fold(
             (f) => f.maybeMap(
               subceedLength: (f) =>
                   'Search input must be greater than 2 characters.'.tr(),
@@ -282,7 +272,7 @@ class __OrderFromDateByFilterState extends State<_OrderFromDateByFilter> {
     txtfromDateController = TextEditingController();
     orderHistoryFilterBloc = context.read<OrderHistoryFilterBloc>();
     txtfromDateController.text = orderHistoryFilterBloc
-        .state.orderHistoryFilterList.fromDate.toValidDateString;
+        .state.orderHistoryFilter.fromDate.toValidDateString;
 
     super.initState();
   }
@@ -298,13 +288,13 @@ class __OrderFromDateByFilterState extends State<_OrderFromDateByFilter> {
   Widget build(BuildContext context) {
     return BlocListener<OrderHistoryFilterBloc, OrderHistoryFilterState>(
       listenWhen: (previous, current) =>
-          previous.orderHistoryFilterList.fromDate !=
-              current.orderHistoryFilterList.fromDate ||
-          previous.orderHistoryFilterList.toDate !=
-              current.orderHistoryFilterList.toDate,
+          previous.orderHistoryFilter.fromDate !=
+              current.orderHistoryFilter.fromDate ||
+          previous.orderHistoryFilter.toDate !=
+              current.orderHistoryFilter.toDate,
       listener: (context, state) {
         txtfromDateController.text =
-            state.orderHistoryFilterList.fromDate.toValidDateString;
+            state.orderHistoryFilter.fromDate.toValidDateString;
       },
       child: Expanded(
         child: TextFormField(
@@ -313,12 +303,12 @@ class __OrderFromDateByFilterState extends State<_OrderFromDateByFilter> {
             final orderDate = await showPlatformDatePicker(
               context: context,
               initialDate: orderHistoryFilterBloc
-                  .state.orderHistoryFilterList.fromDate.dateTimeByDateString,
+                  .state.orderHistoryFilter.fromDate.dateTimeByDateString,
               firstDate: orderHistoryFilterBloc
-                  .state.orderHistoryFilterList.toDate.dateTimeByDateString
+                  .state.orderHistoryFilter.toDate.dateTimeByDateString
                   .subtract(const Duration(days: 365)),
               lastDate: orderHistoryFilterBloc
-                  .state.orderHistoryFilterList.toDate.dateTimeByDateString,
+                  .state.orderHistoryFilter.toDate.dateTimeByDateString,
             );
             orderHistoryFilterBloc.add(
               OrderHistoryFilterEvent.setfromDate(
@@ -363,7 +353,7 @@ class __OrderToDateByFilterState extends State<_OrderToDateByFilter> {
     txttoDateController = TextEditingController();
     orderHistoryFilterBloc = context.read<OrderHistoryFilterBloc>();
     txttoDateController.text = orderHistoryFilterBloc
-        .state.orderHistoryFilterList.toDate.toValidDateString;
+        .state.orderHistoryFilter.toDate.toValidDateString;
 
     super.initState();
   }
@@ -378,16 +368,16 @@ class __OrderToDateByFilterState extends State<_OrderToDateByFilter> {
   Widget build(BuildContext context) {
     return BlocListener<OrderHistoryFilterBloc, OrderHistoryFilterState>(
       listenWhen: (previous, current) =>
-          previous.orderHistoryFilterList.toDate !=
-              current.orderHistoryFilterList.toDate ||
-          previous.orderHistoryFilterList.fromDate !=
-              current.orderHistoryFilterList.fromDate,
+          previous.orderHistoryFilter.toDate !=
+              current.orderHistoryFilter.toDate ||
+          previous.orderHistoryFilter.fromDate !=
+              current.orderHistoryFilter.fromDate,
       listener: (
         context,
         state,
       ) {
         txttoDateController.text =
-            state.orderHistoryFilterList.toDate.toValidDateString;
+            state.orderHistoryFilter.toDate.toValidDateString;
       },
       child: Expanded(
         child: TextFormField(
@@ -396,11 +386,11 @@ class __OrderToDateByFilterState extends State<_OrderToDateByFilter> {
             final orderDate = await showPlatformDatePicker(
               context: context,
               initialDate: orderHistoryFilterBloc
-                  .state.orderHistoryFilterList.toDate.dateTimeByDateString,
+                  .state.orderHistoryFilter.toDate.dateTimeByDateString,
               firstDate: orderHistoryFilterBloc
-                  .state.orderHistoryFilterList.fromDate.dateTimeByDateString,
+                  .state.orderHistoryFilter.fromDate.dateTimeByDateString,
               lastDate: orderHistoryFilterBloc
-                  .state.orderHistoryFilterList.fromDate.dateTimeByDateString
+                  .state.orderHistoryFilter.fromDate.dateTimeByDateString
                   .add(const Duration(days: 365)),
             );
 
@@ -439,9 +429,13 @@ class _ClearButton extends StatelessWidget {
     return OutlinedButton(
       key: const Key('filterClearButton'),
       onPressed: () {
-        context.read<OrderHistoryFilterBloc>().add(
-              const OrderHistoryFilterEvent.initialized(),
-            );
+        final orderHistoryFilterBloc = context.read<OrderHistoryFilterBloc>();
+
+        if (orderHistoryFilterBloc.state.orderHistoryFilter.anyFilterApplied) {
+          orderHistoryFilterBloc.add(
+            const OrderHistoryFilterEvent.initialized(),
+          );
+        }
         context.router.popForced();
       },
       child: Text(
@@ -459,9 +453,9 @@ class _ApplyButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       key: const Key('filterApplyButton'),
-      onPressed: () async {
+      onPressed: () {
         context.read<OrderHistoryFilterBloc>().add(
-              const OrderHistoryFilterEvent.filterOrderHistory(),
+              const OrderHistoryFilterEvent.applyFilters(),
             );
       },
       child: Text(

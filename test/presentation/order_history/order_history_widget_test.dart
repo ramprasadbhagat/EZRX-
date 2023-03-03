@@ -438,9 +438,7 @@ void main() {
             ShipToCodeState.initial().copyWith(
                 shipToInfo:
                     ShipToInfo.empty().copyWith(defaultShipToAddress: true)));
-        when(() => mockOrderHistoryFilterBloc.state).thenReturn(
-          OrderHistoryFilterState.initial().copyWith(isAppliedFilter: true),
-        );
+        
         await tester.pumpWidget(getWUT());
         await tester.pump();
 

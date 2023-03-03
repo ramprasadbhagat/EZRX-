@@ -52,13 +52,7 @@ void main() {
           'first': 10,
           'after': 0,
           'orderBy': 'fake-order',
-          'fromDate': '20220906',
-          'toDate': '20221008',
           'sort': 'ASC',
-          'orderNumber': 'fake-orderid',
-          'poReference': 'fake-poreference',
-          'materialSearch': 'fake-material',
-          'principalSearch': 'fake-material',
           'companyName': 'fake-companyname',
         };
         final res = json.decode(
@@ -82,20 +76,16 @@ void main() {
         );
 
         final result = await remoteDataSource.getOrderHistory(
-            companyName: 'fake-companyname',
-            fromDate: '20220906',
-            materialSearch: 'fake-material',
-            offset: 0,
-            orderBy: 'fake-order',
-            pageSize: 10,
-            poNumber: 'fake-poreference',
-            principalSearch: 'fake-material',
-            shipTo: 'fake-shipto',
-            soldTo: 'fake-soldto',
-            sort: 'ASC',
-            toDate: '20221008',
-            loginUserType: 'fake-loginusertype',
-            orderId: 'fake-orderid');
+          companyName: 'fake-companyname',
+          offset: 0,
+          orderBy: 'fake-order',
+          pageSize: 10,
+          shipTo: 'fake-shipto',
+          soldTo: 'fake-soldto',
+          sort: 'ASC',
+          loginUserType: 'fake-loginusertype',
+          filterQuery: {},
+        );
 
         expect(
             result,
@@ -111,13 +101,7 @@ void main() {
           'first': 10,
           'after': 0,
           'orderBy': 'fake-order',
-          'fromDate': '20220906',
-          'toDate': '20221008',
           'sort': 'ASC',
-          'orderNumber': 'fake-orderid',
-          'poReference': 'fake-poreference',
-          'materialSearch': 'fake-material',
-          'principalSearch': 'fake-material',
           'userName': 'fake-userName',
           'language': 'fake-language',
         };
@@ -142,21 +126,17 @@ void main() {
         );
 
         final result = await remoteDataSource.getOrderHistorySalesRep(
-            userName: 'fake-userName',
-            language: 'fake-language',
-            fromDate: '20220906',
-            materialSearch: 'fake-material',
-            offset: 0,
-            orderBy: 'fake-order',
-            pageSize: 10,
-            poNumber: 'fake-poreference',
-            principalSearch: 'fake-material',
-            shipTo: 'fake-shipto',
-            soldTo: 'fake-soldto',
-            sort: 'ASC',
-            toDate: '20221008',
-            loginUserType: 'fake-loginusertype',
-            orderId: 'fake-orderid');
+          userName: 'fake-userName',
+          language: 'fake-language',
+          offset: 0,
+          orderBy: 'fake-order',
+          pageSize: 10,
+          shipTo: 'fake-shipto',
+          soldTo: 'fake-soldto',
+          sort: 'ASC',
+          loginUserType: 'fake-loginusertype',
+          filterQuery: {},
+        );
 
         expect(
             result,
@@ -172,13 +152,7 @@ void main() {
           'first': 10,
           'after': 0,
           'orderBy': 'fake-order',
-          'fromDate': '20220906',
-          'toDate': '20221008',
           'sort': 'ASC',
-          'orderNumber': 'fake-orderid',
-          'poReference': 'fake-poreference',
-          'materialSearch': 'fake-material',
-          'principalSearch': 'fake-material',
           'companyName': 'fake-companyname',
         };
         dioAdapter.onPost(
@@ -196,23 +170,17 @@ void main() {
           }),
         );
 
-        await remoteDataSource
-            .getOrderHistory(
-                companyName: 'fake-companyname',
-                fromDate: '20220906',
-                materialSearch: 'fake-material',
-                offset: 0,
-                orderBy: 'fake-order',
-                pageSize: 10,
-                poNumber: 'fake-poreference',
-                principalSearch: 'fake-material',
-                shipTo: 'fake-shipto',
-                soldTo: 'fake-soldto',
-                sort: 'ASC',
-                toDate: '20221008',
-                loginUserType: 'fake-loginusertype',
-                orderId: 'fake-orderid')
-            .onError((error, _) async {
+        await remoteDataSource.getOrderHistory(
+          companyName: 'fake-companyname',
+          offset: 0,
+          orderBy: 'fake-order',
+          pageSize: 10,
+          shipTo: 'fake-shipto',
+          soldTo: 'fake-soldto',
+          sort: 'ASC',
+          loginUserType: 'fake-loginusertype',
+          filterQuery: {},
+        ).onError((error, _) async {
           expect(error, isA<ServerException>());
           return Future.value(OrderHistoryMock());
         });
@@ -225,13 +193,7 @@ void main() {
           'first': 10,
           'after': 0,
           'orderBy': 'fake-order',
-          'fromDate': '20220906',
-          'toDate': '20221008',
           'sort': 'ASC',
-          'orderNumber': 'fake-orderid',
-          'poReference': 'fake-poreference',
-          'materialSearch': 'fake-material',
-          'principalSearch': 'fake-material',
           'companyName': 'fake-companyname',
         };
         dioAdapter.onPost(
@@ -254,23 +216,17 @@ void main() {
           }),
         );
 
-        await remoteDataSource
-            .getOrderHistory(
-                companyName: 'fake-companyname',
-                fromDate: '20220906',
-                materialSearch: 'fake-material',
-                offset: 0,
-                orderBy: 'fake-order',
-                pageSize: 10,
-                poNumber: 'fake-poreference',
-                principalSearch: 'fake-material',
-                shipTo: 'fake-shipto',
-                soldTo: 'fake-soldto',
-                sort: 'ASC',
-                toDate: '20221008',
-                loginUserType: 'fake-loginusertype',
-                orderId: 'fake-orderid')
-            .onError((error, _) async {
+        await remoteDataSource.getOrderHistory(
+          companyName: 'fake-companyname',
+          offset: 0,
+          orderBy: 'fake-order',
+          pageSize: 10,
+          shipTo: 'fake-shipto',
+          soldTo: 'fake-soldto',
+          sort: 'ASC',
+          loginUserType: 'fake-loginusertype',
+          filterQuery: {},
+        ).onError((error, _) async {
           expect(error, isA<ServerException>());
           return Future.value(OrderHistoryMock());
         });

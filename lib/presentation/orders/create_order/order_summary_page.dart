@@ -412,7 +412,7 @@ class _Stepper extends StatelessWidget {
             orderHistoryFilter: context
                 .read<OrderHistoryFilterBloc>()
                 .state
-                .orderHistoryFilterList,
+                .orderHistoryFilter,
             sortDirection: 'desc',
           ),
         );

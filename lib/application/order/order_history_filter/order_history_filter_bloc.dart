@@ -21,91 +21,71 @@ class OrderHistoryFilterBloc
   ) async {
     event.map(
       initialized: (_) async => emit(OrderHistoryFilterState.initial()),
-      filterOrderHistory: (_) async {
+      applyFilters: (_) async {
         emit(state.copyWith(
           isSubmitting: false,
         ));
-        if (state.orderHistoryFilterList.orderId.isValid() &&
-            state.orderHistoryFilterList.poNumber.isValid() &&
-            state.orderHistoryFilterList.principalSearch.isValid() &&
-            state.orderHistoryFilterList.materialSearch.isValid()) {
+        if (state.orderHistoryFilter.areFiltersValid) {
           emit(state.copyWith(
             isSubmitting: true,
-            isAppliedFilter: true,
           ));
         } else {
           emit(state.copyWith(
             showErrorMessages: true,
-            isSubmitting: false,
-            isAppliedFilter: false,
           ));
         }
       },
       setfromDate: (e) => emit(
         state.copyWith(
-          orderHistoryFilterList: state.orderHistoryFilterList.copyWith(
-            fromDate:e.fromDate,
+          orderHistoryFilter: state.orderHistoryFilter.copyWith(
+            fromDate: e.fromDate,
           ),
-          isSubmitting: false,
           showErrorMessages: false,
-          isAppliedFilter: false,
         ),
       ),
       setToDate: (e) => emit(
         state.copyWith(
-          orderHistoryFilterList: state.orderHistoryFilterList.copyWith(
+          orderHistoryFilter: state.orderHistoryFilter.copyWith(
             toDate: e.toDate,
           ),
-          isSubmitting: false,
           showErrorMessages: false,
-          isAppliedFilter: false,
         ),
       ),
       orderIdChanged: (e) => emit(
         state.copyWith(
-          orderHistoryFilterList: state.orderHistoryFilterList.copyWith(
+          orderHistoryFilter: state.orderHistoryFilter.copyWith(
             orderId: SearchKey.searchFilter(e.orderId),
           ),
-          isSubmitting: false,
           showErrorMessages: false,
-          isAppliedFilter: false,
         ),
       ),
       poNumberChanged: (e) => emit(
         state.copyWith(
-          orderHistoryFilterList: state.orderHistoryFilterList.copyWith(
+          orderHistoryFilter: state.orderHistoryFilter.copyWith(
             poNumber: SearchKey.searchFilter(e.poNumber),
           ),
-          isSubmitting: false,
           showErrorMessages: false,
-          isAppliedFilter: false,
         ),
       ),
       principalSearchChanged: (e) => emit(
         state.copyWith(
-          orderHistoryFilterList: state.orderHistoryFilterList.copyWith(
+          orderHistoryFilter: state.orderHistoryFilter.copyWith(
             principalSearch: SearchKey.searchFilter(e.principalSearch),
           ),
-          isSubmitting: false,
           showErrorMessages: false,
-          isAppliedFilter: false,
         ),
       ),
       materialSearchChanged: (e) => emit(
         state.copyWith(
-          orderHistoryFilterList: state.orderHistoryFilterList.copyWith(
+          orderHistoryFilter: state.orderHistoryFilter.copyWith(
             materialSearch: SearchKey.searchFilter(e.materialSearch),
           ),
-          isSubmitting: false,
           showErrorMessages: false,
-          isAppliedFilter: false,
         ),
       ),
       sortByDate: (event) => emit(
         state.copyWith(
-          isSubmitting: false,
           showErrorMessages: false,
-          isAppliedFilter: false,
           sortDirection: event.sortDirection,
         ),
       ),
