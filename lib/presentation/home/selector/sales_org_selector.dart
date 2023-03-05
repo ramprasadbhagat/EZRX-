@@ -84,7 +84,12 @@ class SalesOrgSelector extends StatelessWidget {
               title: FittedBox(
                 child: const Text('Please select a Sales Org').tr(),
               ),
-              actions: state.userSalesOrganisations
+              material: (context, platform) => MaterialAlertDialogData(
+                scrollable: true,
+              ),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: state.userSalesOrganisations
                   .map(
                     (e) => PlatformDialogAction(
                       key: Key('salesOrgOption${e.salesOrg.getOrCrash()}'),
@@ -126,6 +131,7 @@ class SalesOrgSelector extends StatelessWidget {
                     ),
                   )
                   .toList(),
+              ),
             );
           },
         ),
