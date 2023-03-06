@@ -30,58 +30,65 @@ class RequestReturnFilterDrawer extends StatelessWidget {
               autovalidateMode: state.showErrorMessages
                   ? AutovalidateMode.always
                   : AutovalidateMode.disabled,
-              child: ListView(
-                padding: const EdgeInsets.all(16.0),
-                children: <Widget>[
+              child: Column(
+                children: [
                   const _FilterHeader(),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  const _AssignmentNumberByFilter(),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  const _BatchNumberFilter(),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  const _MaterialDescriptionSearchByFilter(),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  const _MaterialNumberSearchByFilter(),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  const _PrincipalSearchByFilter(),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  Row(
-                    children: [
-                      const _InvoiceFromDateByFilter(),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: Text(
-                          'to',
-                          style: Theme.of(context).textTheme.titleSmall,
+                  Expanded(
+                    child: ListView(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 15,
+                        vertical: 30,
+                      ),
+                      children: <Widget>[
+                        const _AssignmentNumberByFilter(),
+                        const SizedBox(
+                          height: 16,
                         ),
-                      ),
-                      const _InvoiceToDateByFilter(),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: const [
-                      _ClearButton(),
-                      SizedBox(
-                        width: 30,
-                      ),
-                      _ApplyButton(),
-                    ],
+                        const _BatchNumberFilter(),
+                        const SizedBox(
+                          height: 16,
+                        ),
+                        const _MaterialDescriptionSearchByFilter(),
+                        const SizedBox(
+                          height: 16,
+                        ),
+                        const _MaterialNumberSearchByFilter(),
+                        const SizedBox(
+                          height: 16,
+                        ),
+                        const _PrincipalSearchByFilter(),
+                        const SizedBox(
+                          height: 16,
+                        ),
+                        Row(
+                          children: [
+                            const _InvoiceFromDateByFilter(),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 20),
+                              child: Text(
+                                'to',
+                                style: Theme.of(context).textTheme.titleSmall,
+                              ),
+                            ),
+                            const _InvoiceToDateByFilter(),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: const [
+                            _ClearButton(),
+                            SizedBox(
+                              width: 30,
+                            ),
+                            _ApplyButton(),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -97,32 +104,20 @@ class _FilterHeader extends StatelessWidget {
   const _FilterHeader({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-        top: MediaQuery.of(context).padding.top,
-        bottom: 0.0,
-        left: 20.0,
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Expanded(
-            child: Text(
-              'Filter Request Return'.tr(),
-              style: Theme.of(context).textTheme.titleMedium,
-            ),
+    return AppBar(
+      automaticallyImplyLeading: false,
+      title: Text('Filter Request Return'.tr()),
+      actions: [
+        IconButton(
+          key: const Key('filterCrossButton'),
+          icon: const Icon(
+            Icons.close,
           ),
-          IconButton(
-            key: const Key('filterCrossButton'),
-            icon: const Icon(
-              Icons.close,
-            ),
-            onPressed: () {
-              context.router.popForced();
-            },
-          ),
-        ],
-      ),
+          onPressed: () {
+            context.router.popForced();
+          },
+        ),
+      ],
     );
   }
 }

@@ -68,10 +68,12 @@ class _AddToCartState extends State<AddToCart> {
     final cartBloc = context.read<CartBloc>();
     final addToCartBloc = context.read<AddToCartBloc>();
 
-    return SizedBox(
-      height: MediaQuery.of(context).size.height -
-          AppBar().preferredSize.height -
-          MediaQuery.of(context).padding.top,
+    return WillPopScope(
+      onWillPop: () {
+        tenderContractBloc.add(const TenderContractEvent.unselected());
+        
+        return Future.value(true);
+      },
       child: Scaffold(
         backgroundColor: ZPColors.white,
         appBar: AppBar(
@@ -116,19 +118,20 @@ class _AddToCartState extends State<AddToCart> {
                   ),
                   AddToCartButton(
                     isAddToCartAllowed: _isAddToCartAllowed,
-                    cartItem: selectedTenderContract ==
-                                TenderContract.empty() ||
-                            selectedTenderContract ==
-                                TenderContract.noContract()
-                        ? state.cartItem
-                        : state.cartItem.copyWith(
-                            tenderContract: selectedTenderContract,
-                            price: state.cartItem.price.copyWith(
-                              finalPrice: MaterialPrice(
-                                selectedTenderContract.tenderPrice.tenderPrice,
+                    cartItem:
+                        selectedTenderContract == TenderContract.empty() ||
+                                selectedTenderContract ==
+                                    TenderContract.noContract()
+                            ? state.cartItem
+                            : state.cartItem.copyWith(
+                                tenderContract: selectedTenderContract,
+                                price: state.cartItem.price.copyWith(
+                                  finalPrice: MaterialPrice(
+                                    selectedTenderContract
+                                        .tenderPrice.tenderPrice,
+                                  ),
+                                ),
                               ),
-                            ),
-                          ),
                   ),
                 ],
               );

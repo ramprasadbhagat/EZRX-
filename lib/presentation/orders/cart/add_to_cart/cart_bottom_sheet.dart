@@ -32,6 +32,7 @@ class CartBottomSheet {
       context: context,
       enableDrag: false,
       isScrollControlled: true,
+      useSafeArea: true,
       builder: (_) {
         return !isPresentInCart
             ? AddToCart(
@@ -56,6 +57,7 @@ class CartBottomSheet {
       context: context,
       enableDrag: false,
       isScrollControlled: true,
+      useSafeArea: true,
       builder: (_) {
         return const UpdateCart();
       },
@@ -76,6 +78,7 @@ class CartBottomSheet {
         ),
       ),
       context: context,
+      useSafeArea: true,
       builder: (_) {
         return UpdateBonus(
           materialInfo: item,

@@ -57,59 +57,54 @@ class _UpdateCartState extends State<UpdateCart> {
     final cartBloc = context.read<CartBloc>();
     final addToCartBloc = context.read<AddToCartBloc>();
 
-    return SizedBox(
-      height: MediaQuery.of(context).size.height -
-          AppBar().preferredSize.height -
-          MediaQuery.of(context).padding.top,
-      child: Scaffold(
-        backgroundColor: ZPColors.white,
-        appBar: AppBar(
-          title: const Text('Material Detail').tr(),
-        ),
-        key: const ValueKey('updateCartBottomSheet'),
-        body: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: BlocBuilder<AddToCartBloc, AddToCartState>(
-            builder: (context, state) {
-              if (!state.cartItem.materialInfo.hasValidTenderContract) {
-                context.read<TenderContractBloc>().add(
-                      const TenderContractEvent.unselected(),
-                    );
-              }
+    return Scaffold(
+      backgroundColor: ZPColors.white,
+      appBar: AppBar(
+        title: const Text('Material Detail').tr(),
+      ),
+      key: const ValueKey('updateCartBottomSheet'),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: BlocBuilder<AddToCartBloc, AddToCartState>(
+          builder: (context, state) {
+            if (!state.cartItem.materialInfo.hasValidTenderContract) {
+              context.read<TenderContractBloc>().add(
+                    const TenderContractEvent.unselected(),
+                  );
+            }
 
-              return Column(
-                children: [
-                  Expanded(
-                    child: ListView(
-                      children: [
-                        CartItemDetailWidget(
-                          cartItem: state.cartItem,
-                          onQuantityChanged: (int value) {
-                            final discountedMaterialCount =
-                                cartBloc.state.zmgMaterialWithoutMaterial(
-                              addToCartBloc.state.cartItem,
-                            );
-                            context.read<AddToCartBloc>().add(
-                                  AddToCartEvent.updateQuantity(
-                                    value,
-                                    discountedMaterialCount,
-                                  ),
-                                );
-                          },
-                        ),
-                        state.cartItem.materialInfo.hasValidTenderContract
-                            ? SelectContract(
-                                materialInfo: state.cartItem.materialInfo,
-                              )
-                            : const SizedBox.shrink(),
-                      ],
-                    ),
+            return Column(
+              children: [
+                Expanded(
+                  child: ListView(
+                    children: [
+                      CartItemDetailWidget(
+                        cartItem: state.cartItem,
+                        onQuantityChanged: (int value) {
+                          final discountedMaterialCount =
+                              cartBloc.state.zmgMaterialWithoutMaterial(
+                            addToCartBloc.state.cartItem,
+                          );
+                          context.read<AddToCartBloc>().add(
+                                AddToCartEvent.updateQuantity(
+                                  value,
+                                  discountedMaterialCount,
+                                ),
+                              );
+                        },
+                      ),
+                      state.cartItem.materialInfo.hasValidTenderContract
+                          ? SelectContract(
+                              materialInfo: state.cartItem.materialInfo,
+                            )
+                          : const SizedBox.shrink(),
+                    ],
                   ),
-                  UpdateCartButton(cartItem: state.cartItem),
-                ],
-              );
-            },
-          ),
+                ),
+                UpdateCartButton(cartItem: state.cartItem),
+              ],
+            );
+          },
         ),
       ),
     );

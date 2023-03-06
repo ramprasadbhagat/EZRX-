@@ -34,137 +34,134 @@ class UpdateBonus extends StatelessWidget {
       text: '${materialInfo.quantity == 0 ? "1" : materialInfo.quantity}',
     );
 
-    return SizedBox(
+    return Scaffold(
       key: const Key('updateBonus'),
-      height: MediaQuery.of(context).size.height * 0.7,
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        body: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: ListView(
-            children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Center(
-                    child: Text(
-                      materialInfo.materialDescription,
-                      style: Theme.of(context).textTheme.titleLarge?.apply(
-                            color: ZPColors.black, // ZPColors.black,
-                          ),
-                    ),
-                  ),
-                  Center(
-                    child: Text(
-                      materialInfo.principalData.principalName
-                          .getOrDefaultValue(''),
-                      style: Theme.of(context).textTheme.titleSmall?.apply(
-                            color: ZPColors.lightGray,
-                          ),
-                    ),
-                  ),
-                  Center(
-                    child: Text(
-                      materialInfo.materialNumber.displayMatNo,
-                      style: Theme.of(context).textTheme.titleSmall?.apply(
-                            color: ZPColors.lightGray,
-                          ),
-                    ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      QuantityInput(
-                        isEnabled: true,
-                        quantityAddKey: const Key('bounsAdd'),
-                        quantityDeleteKey: const Key('bonusDelete'),
-                        quantityTextKey: const Key('bonusItem'),
-                        controller: controller,
-                        onFieldChange: (p0) {
-                          locator<CountlyService>().addCountlyEvent(
-                            'changed_quantity',
-                            segmentation: {
-                              'materialNum':
-                                  materialInfo.materialNumber.getOrCrash(),
-                              'listPrice': cartItem.listPrice,
-                              'price': cartItem.unitPrice,
-                            },
-                          );
-                        },
-                        minusPressed: (p0) {
-                          locator<CountlyService>().addCountlyEvent(
-                            'deduct_quantity',
-                            segmentation: {
-                              'materialNum':
-                                  materialInfo.materialNumber.getOrCrash(),
-                              'listPrice': cartItem.listPrice,
-                              'price': cartItem.unitPrice,
-                            },
-                          );
-                        },
-                        addPressed: (p0) {
-                          locator<CountlyService>().addCountlyEvent(
-                            'add_quantity',
-                            segmentation: {
-                              'materialNum':
-                                  materialInfo.materialNumber.getOrCrash(),
-                              'listPrice': cartItem.listPrice,
-                              'price': cartItem.unitPrice,
-                            },
-                          );
-                        },
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 15),
-                ],
-              ),
-              ElevatedButton(
-                key: const Key('addButton'),
-                onPressed: () {
-                  locator<CountlyService>().addCountlyEvent('Add to bonus');
-                  context.read<CartBloc>().add(
-                        CartEvent.addBonusToCartItem(
-                          item: cartItem,
-                          bonusItem: MaterialItemBonus.empty().copyWith(
-                            materialInfo: materialInfo,
-                            materialDescription:
-                                materialInfo.materialDescription,
-                            additionalBonusFlag: true,
-                            bonusOverrideFlag: true,
-                            qty: int.tryParse(controller.text) ?? 1,
-                          ),
-                          customerCodeInfo: context
-                              .read<CustomerCodeBloc>()
-                              .state
-                              .customerCodeInfo,
-                          doNotallowOutOfStockMaterial: context
-                              .read<EligibilityBloc>()
-                              .state
-                              .doNotAllowOutOfStockMaterials,
-                          salesOrganisation: context
-                              .read<SalesOrgBloc>()
-                              .state
-                              .salesOrganisation,
-                          salesOrganisationConfigs:
-                              context.read<SalesOrgBloc>().state.configs,
-                          shipToInfo:
-                              context.read<ShipToCodeBloc>().state.shipToInfo,
+      backgroundColor: Colors.transparent,
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: ListView(
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Center(
+                  child: Text(
+                    materialInfo.materialDescription,
+                    style: Theme.of(context).textTheme.titleLarge?.apply(
+                          color: ZPColors.black, // ZPColors.black,
                         ),
-                      );
+                  ),
+                ),
+                Center(
+                  child: Text(
+                    materialInfo.principalData.principalName
+                        .getOrDefaultValue(''),
+                    style: Theme.of(context).textTheme.titleSmall?.apply(
+                          color: ZPColors.lightGray,
+                        ),
+                  ),
+                ),
+                Center(
+                  child: Text(
+                    materialInfo.materialNumber.displayMatNo,
+                    style: Theme.of(context).textTheme.titleSmall?.apply(
+                          color: ZPColors.lightGray,
+                        ),
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    QuantityInput(
+                      isEnabled: true,
+                      quantityAddKey: const Key('bounsAdd'),
+                      quantityDeleteKey: const Key('bonusDelete'),
+                      quantityTextKey: const Key('bonusItem'),
+                      controller: controller,
+                      onFieldChange: (p0) {
+                        locator<CountlyService>().addCountlyEvent(
+                          'changed_quantity',
+                          segmentation: {
+                            'materialNum':
+                                materialInfo.materialNumber.getOrCrash(),
+                            'listPrice': cartItem.listPrice,
+                            'price': cartItem.unitPrice,
+                          },
+                        );
+                      },
+                      minusPressed: (p0) {
+                        locator<CountlyService>().addCountlyEvent(
+                          'deduct_quantity',
+                          segmentation: {
+                            'materialNum':
+                                materialInfo.materialNumber.getOrCrash(),
+                            'listPrice': cartItem.listPrice,
+                            'price': cartItem.unitPrice,
+                          },
+                        );
+                      },
+                      addPressed: (p0) {
+                        locator<CountlyService>().addCountlyEvent(
+                          'add_quantity',
+                          segmentation: {
+                            'materialNum':
+                                materialInfo.materialNumber.getOrCrash(),
+                            'listPrice': cartItem.listPrice,
+                            'price': cartItem.unitPrice,
+                          },
+                        );
+                      },
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 15),
+              ],
+            ),
+            ElevatedButton(
+              key: const Key('addButton'),
+              onPressed: () {
+                locator<CountlyService>().addCountlyEvent('Add to bonus');
+                context.read<CartBloc>().add(
+                      CartEvent.addBonusToCartItem(
+                        item: cartItem,
+                        bonusItem: MaterialItemBonus.empty().copyWith(
+                          materialInfo: materialInfo,
+                          materialDescription:
+                              materialInfo.materialDescription,
+                          additionalBonusFlag: true,
+                          bonusOverrideFlag: true,
+                          qty: int.tryParse(controller.text) ?? 1,
+                        ),
+                        customerCodeInfo: context
+                            .read<CustomerCodeBloc>()
+                            .state
+                            .customerCodeInfo,
+                        doNotallowOutOfStockMaterial: context
+                            .read<EligibilityBloc>()
+                            .state
+                            .doNotAllowOutOfStockMaterials,
+                        salesOrganisation: context
+                            .read<SalesOrgBloc>()
+                            .state
+                            .salesOrganisation,
+                        salesOrganisationConfigs:
+                            context.read<SalesOrgBloc>().state.configs,
+                        shipToInfo:
+                            context.read<ShipToCodeBloc>().state.shipToInfo,
+                      ),
+                    );
 
-                  context.router.pop();
-                  showSnackBar(
-                    context: context,
-                    message: 'Bonus item added to the cart'.tr(),
-                  );
-                },
-                child: const Text('Add To Bonus').tr(),
-              ),
-            ],
-          ),
+                context.router.pop();
+                showSnackBar(
+                  context: context,
+                  message: 'Bonus item added to the cart'.tr(),
+                );
+              },
+              child: const Text('Add To Bonus').tr(),
+            ),
+          ],
         ),
       ),
     );
