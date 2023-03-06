@@ -22,7 +22,7 @@ class OrderSuccessPage extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
-            context.router.popUntilRouteWithName('MaterialRootRoute');
+            context.router.pop();
           },
           icon: const Icon(Icons.arrow_back),
         ),
@@ -68,7 +68,11 @@ class _BodyContent extends StatelessWidget {
           ElevatedButton(
             onPressed: () {
               locator<CountlyService>().addCountlyEvent('thankyou_to_create');
-              context.router.popUntilRouteWithName('MaterialRootRoute');
+              context.router.pushAndPopUntil(
+                const MaterialRootRoute(),
+                predicate: (route) =>
+                    route.settings.name == 'HomeNavigationTabbarRoute',
+              );
             },
             child: const Text(
               'Create New Order',

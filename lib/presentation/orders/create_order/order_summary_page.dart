@@ -419,7 +419,7 @@ class _Stepper extends StatelessWidget {
     context.read<CartBloc>().add(const CartEvent.clearCart());
     context.router.pushAndPopUntil(
       const OrderSuccessPageRoute(),
-      predicate: (route) => route.settings.name == 'MaterialRootRoute',
+      predicate: (route) => route.settings.name == 'HomeNavigationTabbarRoute',
     );
   }
 
