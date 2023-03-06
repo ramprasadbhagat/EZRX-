@@ -111,3 +111,9 @@ Let's assume that we test loading_more function for load a page 2
 ### How to generate app icon
 - [flutter_launcher_icons](https://pub.dev/packages/flutter_launcher_icons)
 - Run command ```fvm flutter pub run flutter_launcher_icons```
+
+### Android SDK Version
+Make the below changes to your /eZRx Mobile/android/local.properties
+- flutter.minSdkVersion=24
+- flutter.targetSdkVersion=33
+- flutter.compileSdkVersion=33

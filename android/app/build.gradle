@@ -121,6 +121,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-crashlytics-ktx'
     implementation 'com.google.firebase:firebase-messaging-ktx'
+    implementation 'com.android.support:appcompat-v7:28.0.0'
 }
 
 // This must appear at the bottom of the file
