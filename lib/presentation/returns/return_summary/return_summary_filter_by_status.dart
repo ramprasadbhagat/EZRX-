@@ -7,18 +7,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ReturnSummaryFilterByStatus extends StatelessWidget {
-  const ReturnSummaryFilterByStatus({
-    Key? key,
-  }) : super(key: key);
+  const ReturnSummaryFilterByStatus({Key? key,}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ReturnSummaryFilterBloc, ReturnSummaryFilterState>(
-      buildWhen: (previous, current) =>
-          previous.returnSummaryFilter.
-          activeStatus != current.returnSummaryFilter.activeStatus,
-      listenWhen: (previous, current) =>
-          previous.returnSummaryFilter.activeStatus != current.returnSummaryFilter.activeStatus,
+      buildWhen: (previous, current) => previous.returnSummaryFilter.activeStatus != current.returnSummaryFilter.activeStatus,
+      listenWhen: (previous, current) => previous.returnSummaryFilter.activeStatus != current.returnSummaryFilter.activeStatus,
       listener: (context, state) {
         context.router.popForced();
       },
