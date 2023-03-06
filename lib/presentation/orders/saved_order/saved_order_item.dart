@@ -49,69 +49,65 @@ class SavedOrderItem extends StatelessWidget {
           onTap: () {
             context.router.push(SavedOrderDetailPageRoute(order: order));
           },
-          title: Row(
+          title: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    '#${order.id}',
-                    style: Theme.of(context).textTheme.titleSmall?.apply(
-                          color: ZPColors.kPrimaryColor,
-                        ),
-                  ),
-                  Text(
-                    order.companyName.name,
-                    style: Theme.of(context).textTheme.titleSmall,
-                  ),
-                  Text(
-                    'Sold To IDs: ${order.soldToParty.name}',
-                    style: Theme.of(context).textTheme.titleSmall?.apply(
-                          color: ZPColors.lightGray,
-                        ),
-                  ),
-                  Text(
-                    'Ship To IDs: ${order.shipToParty.name}',
-                    style: Theme.of(context).textTheme.titleSmall?.apply(
-                          color: ZPColors.lightGray,
-                        ),
-                  ),
-                  Text(
-                    'Order Value: ${StringUtils.displayPrice(context.read<SalesOrgBloc>().state.configs, order.totalOrderValue)}',
-                    style: Theme.of(context).textTheme.titleSmall?.apply(
-                          color: ZPColors.black,
-                        ),
-                  ),
-                ],
+              Text(
+                '#${order.id}',
+                style: Theme.of(context).textTheme.titleSmall?.apply(
+                      color: ZPColors.kPrimaryColor,
+                    ),
               ),
-              const Spacer(),
-              IconButton(
-                key: const Key('deleteFromList'),
-                onPressed: () async {
-                  await CustomDialogs.confirmationDialog(
-                    context: context,
-                    title: 'Delete Order?',
-                    message: 'Are you sure you want to delete this Order?',
-                    confirmText: 'Yes',
-                    cancelText: 'No',
-                    onAcceptPressed: () async {
-                      isDeleting
-                          ? showSnackBar(
-                              context: context,
-                              message: 'Another Deletion in Progress'.tr(),
-                            )
-                          : context.read<SavedOrderListBloc>().add(
-                                SavedOrderListEvent.delete(
-                                  order: order,
-                                  user: context.read<UserBloc>().state.user,
-                                ),
-                              );
-                    },
-                  );
-                },
-                icon: const Icon(Icons.delete),
+              Text(
+                order.companyName.name,
+                style: Theme.of(context).textTheme.titleSmall,
+              ),
+              Text(
+                'Sold To IDs: ${order.soldToParty.name}',
+                style: Theme.of(context).textTheme.titleSmall?.apply(
+                      color: ZPColors.lightGray,
+                    ),
+              ),
+              Text(
+                'Ship To IDs: ${order.shipToParty.name}',
+                style: Theme.of(context).textTheme.titleSmall?.apply(
+                      color: ZPColors.lightGray,
+                    ),
+              ),
+              Text(
+                'Order Value: ${StringUtils.displayPrice(context.read<SalesOrgBloc>().state.configs, order.totalOrderValue)}',
+                style: Theme.of(context).textTheme.titleSmall?.apply(
+                      color: ZPColors.black,
+                    ),
               ),
             ],
+          ),
+          trailing: IconButton(
+            key: const Key('deleteFromList'),
+            constraints: const BoxConstraints(),
+            onPressed: () async {
+              await CustomDialogs.confirmationDialog(
+                context: context,
+                title: 'Delete Order?',
+                message: 'Are you sure you want to delete this Order?',
+                confirmText: 'Yes',
+                cancelText: 'No',
+                onAcceptPressed: () async {
+                  isDeleting
+                      ? showSnackBar(
+                          context: context,
+                          message: 'Another Deletion in Progress'.tr(),
+                        )
+                      : context.read<SavedOrderListBloc>().add(
+                            SavedOrderListEvent.delete(
+                              order: order,
+                              user: context.read<UserBloc>().state.user,
+                            ),
+                          );
+                },
+              );
+            },
+            icon: const Icon(Icons.delete),
           ),
         ),
       ),

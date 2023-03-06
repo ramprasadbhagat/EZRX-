@@ -12,6 +12,9 @@ import 'package:ezrxmobile/presentation/history/detail/widget/order_tender_contr
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:ezrxmobile/presentation/core/custom_expansion_tile.dart'
+    as custom;
+
 class HistoryOrderSummarySection extends StatelessWidget {
   final SalesOrganisationConfigs salesOrgConfigs;
 
@@ -27,19 +30,18 @@ class HistoryOrderSummarySection extends StatelessWidget {
       builder: (context, state) {
         final elibilityBloc = context.read<EligibilityBloc>();
 
-        return Padding(
-          padding: const EdgeInsets.only(top: 15),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
+        return custom.ExpansionTile(
+            initiallyExpanded: true,
+            keepHeaderBorder: true,
+            key: const ValueKey('Order Summary'),
+            title: Text(
+              'Order Summary'.tr(),
+              style: Theme.of(context)
+                  .textTheme
+                  .titleMedium
+                  ?.copyWith(fontWeight: FontWeight.w600),
+            ),
             children: [
-              Text(
-                'Order Summary'.tr(),
-                style: Theme.of(context)
-                    .textTheme
-                    .titleMedium
-                    ?.copyWith(fontWeight: FontWeight.w600),
-              ),
               const SizedBox(
                 height: 10,
               ),
@@ -48,7 +50,8 @@ class HistoryOrderSummarySection extends StatelessWidget {
                 children: List.generate(
                   state.orderHistoryDetails.items.length,
                   (index) {
-                    final orderItem = state.orderHistoryDetails.items[index];
+                    final orderItem =
+                        state.orderHistoryDetails.items[index];
                     final priceAggregate =
                         state.materials[orderItem.orderItem.queryInfo] ??
                             PriceAggregate.empty();
@@ -68,13 +71,14 @@ class HistoryOrderSummarySection extends StatelessWidget {
                                       locator<TenderContractRepository>(),
                                 )..add(
                                     TenderContractEvent.fetch(
-                                      customerCodeInfo:
-                                          elibilityBloc.state.customerCodeInfo,
-                                      salesOrganisation:
-                                          elibilityBloc.state.salesOrganisation,
+                                      customerCodeInfo: elibilityBloc
+                                          .state.customerCodeInfo,
+                                      salesOrganisation: elibilityBloc
+                                          .state.salesOrganisation,
                                       shipToInfo:
                                           elibilityBloc.state.shipToInfo,
-                                      materialInfo: priceAggregate.materialInfo,
+                                      materialInfo:
+                                          priceAggregate.materialInfo,
                                       defaultSelectedTenderContract:
                                           priceAggregate.tenderContract,
                                     ),
@@ -83,7 +87,8 @@ class HistoryOrderSummarySection extends StatelessWidget {
                                   key: Key(
                                     'orderTenderContractCard-${orderItem.orderItem.materialNumber.displayMatNo}-$index',
                                   ),
-                                  orderHistoryDetailsBonusAggregate: orderItem,
+                                  orderHistoryDetailsBonusAggregate:
+                                      orderItem,
                                   isLoading: state.isLoading,
                                 ),
                               )
@@ -91,14 +96,13 @@ class HistoryOrderSummarySection extends StatelessWidget {
                                 key: Key(
                                   'orderItemCard-${orderItem.orderItem.materialNumber.displayMatNo}-$index',
                                 ),
-                                orderHistoryDetailsBonusAggregate: orderItem,
+                                orderHistoryDetailsBonusAggregate:
+                                    orderItem,
                               );
                   },
                 ),
               ),
-            ],
-          ),
-        );
+            ],);
       },
     );
   }
