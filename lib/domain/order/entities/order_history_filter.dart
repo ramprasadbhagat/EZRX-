@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -52,4 +53,12 @@ class OrderHistoryFilter with _$OrderHistoryFilter {
       poNumber.isValid() &&
       materialSearch.isValid() &&
       principalSearch.isValid();
+
+  String get getOrderDateFiltered =>
+      '${fromDate.toValidDateString}  to ${toDate.toValidDateString} ';
+
+  DateTimeRange get getOrderFilterDateRange => DateTimeRange(
+        start: fromDate.dateTimeByDateString,
+        end: toDate.dateTimeByDateString,
+      );
 }

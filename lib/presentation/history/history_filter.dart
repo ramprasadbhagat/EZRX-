@@ -1,85 +1,74 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_filter/order_history_filter_bloc.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class OrderHistoryFilterDrawer extends StatelessWidget {
   const OrderHistoryFilterDrawer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Drawer(
       width: MediaQuery.of(context).size.width * 0.8,
-      child: Drawer(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(15.0),
-          child: BlocConsumer<OrderHistoryFilterBloc, OrderHistoryFilterState>(
-            listenWhen: (previous, current) =>
-                previous.isSubmitting != current.isSubmitting,
-            listener: (context, state) {
-              if (state.isSubmitting) {
-                context.router.popForced();
-              }
-            },
-            builder: (context, state) {
-              return Form(
-                autovalidateMode: state.showErrorMessages
-                    ? AutovalidateMode.always
-                    : AutovalidateMode.disabled,
-                child: Column(
-                  children: <Widget>[
-                    const _FilterHeader(),
-                    const SizedBox(
-                      height: 20,
+      child: BlocConsumer<OrderHistoryFilterBloc, OrderHistoryFilterState>(
+        listenWhen: (previous, current) =>
+            previous.isSubmitting != current.isSubmitting,
+        listener: (context, state) {
+          if (state.isSubmitting) {
+            context.router.popForced();
+          }
+        },
+        builder: (context, state) {
+          return Form(
+            autovalidateMode: state.showErrorMessages
+                ? AutovalidateMode.always
+                : AutovalidateMode.disabled,
+            child: Column(
+              children: <Widget>[
+                const _FilterHeader(),
+                Expanded(
+                  child: ListView(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 15,
+                      vertical: 30,
                     ),
-                    const _OrderIdByFilter(),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    const _PoNumberFilter(),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    const _MaterialSearchByFilter(),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    const _PrincipalSearchByFilter(),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Row(children: [
-                      const _OrderFromDateByFilter(),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: Text(
-                          'to',
-                          style: Theme.of(context).textTheme.titleSmall,
-                        ),
+                    children: <Widget>[
+                      const _OrderIdByFilter(),
+                      const SizedBox(
+                        height: 20,
                       ),
-                      const _OrderToDateByFilter(),
-                    ]),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: const [
-                        _ClearButton(),
-                        _ApplyButton(),
-                      ],
-                    ),
-                  ],
+                      const _PoNumberFilter(),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      const _MaterialSearchByFilter(),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      const _PrincipalSearchByFilter(),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      _OrderDateFilter(),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: const [
+                          _ClearButton(),
+                          _ApplyButton(),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-              );
-            },
-          ),
-        ),
+              ],
+            ),
+          );
+        },
       ),
     );
   }
@@ -256,171 +245,6 @@ class _PrincipalSearchByFilter extends StatelessWidget {
   }
 }
 
-class _OrderFromDateByFilter extends StatefulWidget {
-  const _OrderFromDateByFilter({Key? key}) : super(key: key);
-
-  @override
-  State<_OrderFromDateByFilter> createState() => __OrderFromDateByFilterState();
-}
-
-class __OrderFromDateByFilterState extends State<_OrderFromDateByFilter> {
-  late TextEditingController txtfromDateController;
-  late OrderHistoryFilterBloc orderHistoryFilterBloc;
-
-  @override
-  void initState() {
-    txtfromDateController = TextEditingController();
-    orderHistoryFilterBloc = context.read<OrderHistoryFilterBloc>();
-    txtfromDateController.text = orderHistoryFilterBloc
-        .state.orderHistoryFilter.fromDate.toValidDateString;
-
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    txtfromDateController.dispose();
-
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocListener<OrderHistoryFilterBloc, OrderHistoryFilterState>(
-      listenWhen: (previous, current) =>
-          previous.orderHistoryFilter.fromDate !=
-              current.orderHistoryFilter.fromDate ||
-          previous.orderHistoryFilter.toDate !=
-              current.orderHistoryFilter.toDate,
-      listener: (context, state) {
-        txtfromDateController.text =
-            state.orderHistoryFilter.fromDate.toValidDateString;
-      },
-      child: Expanded(
-        child: TextFormField(
-          key: const Key('filteFromdateField'),
-          onTap: () async {
-            final orderDate = await showPlatformDatePicker(
-              context: context,
-              initialDate: orderHistoryFilterBloc
-                  .state.orderHistoryFilter.fromDate.dateTimeByDateString,
-              firstDate: orderHistoryFilterBloc
-                  .state.orderHistoryFilter.toDate.dateTimeByDateString
-                  .subtract(const Duration(days: 365)),
-              lastDate: orderHistoryFilterBloc
-                  .state.orderHistoryFilter.toDate.dateTimeByDateString,
-            );
-            orderHistoryFilterBloc.add(
-              OrderHistoryFilterEvent.setfromDate(
-                fromDate:
-                    DateTimeStringValue(getDateStringByDateTime(orderDate!)),
-              ),
-            );
-          },
-          readOnly: true,
-          controller: txtfromDateController,
-          decoration: InputDecoration(
-            contentPadding: const EdgeInsets.symmetric(horizontal: 8),
-            labelText: 'From Date'.tr(),
-            suffixIcon: const Padding(
-              padding: EdgeInsets.only(right: 8.0),
-              child: Icon(
-                Icons.calendar_month,
-                size: 20,
-              ),
-            ),
-            suffixIconConstraints: const BoxConstraints(maxWidth: 25),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _OrderToDateByFilter extends StatefulWidget {
-  const _OrderToDateByFilter({Key? key}) : super(key: key);
-
-  @override
-  State<_OrderToDateByFilter> createState() => __OrderToDateByFilterState();
-}
-
-class __OrderToDateByFilterState extends State<_OrderToDateByFilter> {
-  late TextEditingController txttoDateController;
-  late OrderHistoryFilterBloc orderHistoryFilterBloc;
-
-  @override
-  void initState() {
-    txttoDateController = TextEditingController();
-    orderHistoryFilterBloc = context.read<OrderHistoryFilterBloc>();
-    txttoDateController.text = orderHistoryFilterBloc
-        .state.orderHistoryFilter.toDate.toValidDateString;
-
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    txttoDateController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocListener<OrderHistoryFilterBloc, OrderHistoryFilterState>(
-      listenWhen: (previous, current) =>
-          previous.orderHistoryFilter.toDate !=
-              current.orderHistoryFilter.toDate ||
-          previous.orderHistoryFilter.fromDate !=
-              current.orderHistoryFilter.fromDate,
-      listener: (
-        context,
-        state,
-      ) {
-        txttoDateController.text =
-            state.orderHistoryFilter.toDate.toValidDateString;
-      },
-      child: Expanded(
-        child: TextFormField(
-          key: const Key('filterTodateField'),
-          onTap: () async {
-            final orderDate = await showPlatformDatePicker(
-              context: context,
-              initialDate: orderHistoryFilterBloc
-                  .state.orderHistoryFilter.toDate.dateTimeByDateString,
-              firstDate: orderHistoryFilterBloc
-                  .state.orderHistoryFilter.fromDate.dateTimeByDateString,
-              lastDate: orderHistoryFilterBloc
-                  .state.orderHistoryFilter.fromDate.dateTimeByDateString
-                  .add(const Duration(days: 365)),
-            );
-
-            orderHistoryFilterBloc.add(
-              OrderHistoryFilterEvent.setToDate(
-                toDate:
-                    DateTimeStringValue(getDateStringByDateTime(orderDate!)),
-              ),
-            );
-          },
-          readOnly: true,
-          controller: txttoDateController,
-          decoration: InputDecoration(
-            contentPadding: const EdgeInsets.symmetric(horizontal: 8),
-            labelText: 'To Date'.tr(),
-            suffixIcon: const Padding(
-              padding: EdgeInsets.only(right: 8.0),
-              child: Icon(
-                Icons.calendar_month,
-                size: 20,
-              ),
-            ),
-            suffixIconConstraints: const BoxConstraints(maxWidth: 25),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
 class _ClearButton extends StatelessWidget {
   const _ClearButton({Key? key}) : super(key: key);
 
@@ -462,6 +286,53 @@ class _ApplyButton extends StatelessWidget {
         'Apply'.tr(),
         style: const TextStyle(color: ZPColors.white),
       ),
+    );
+  }
+}
+
+class _OrderDateFilter extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<OrderHistoryFilterBloc, OrderHistoryFilterState>(
+      buildWhen: (previous, current) =>
+          previous.orderHistoryFilter.getOrderDateFiltered !=
+          current.orderHistoryFilter.getOrderDateFiltered,
+      builder: (context, state) {
+
+        return TextFormField(
+          key:  Key('filterOrderDateField+${state.orderHistoryFilter.getOrderDateFiltered}'),
+          onTap: () async {
+            final orderHistoryFilterBloc = context.read<OrderHistoryFilterBloc>();
+            final orderDateRange = await showDateRangePicker(
+              context: context,
+              firstDate: DateTime.now().subtract(const Duration(days: 365)),
+              lastDate: DateTime.now(),
+              initialDateRange:
+                  state.orderHistoryFilter.getOrderFilterDateRange,
+            );
+            if (orderDateRange == null) return;
+            orderHistoryFilterBloc.add(
+                  OrderHistoryFilterEvent.setOrderDate(
+                    orderDateRange: orderDateRange,
+                  ),
+                );
+          },
+          readOnly: true,
+          initialValue: state.orderHistoryFilter.getOrderDateFiltered,
+          decoration: InputDecoration(
+            labelText: 'Order Date'.tr(),
+            suffixIcon: const Padding(
+              padding: EdgeInsets.only(right: 8.0),
+              child: Icon(
+                Icons.calendar_month,
+                size: 20,
+              ),
+            ),
+            suffixIconConstraints: const BoxConstraints(maxWidth: 25),
+          ),
+        );
+      },
     );
   }
 }

@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$OrderHistoryDetailsOrderHeader {
   double get totalTax => throw _privateConstructorUsedError;
   DateTimeStringValue get requestedDeliveryDate =>
-      throw _privateConstructorUsedError; // required POReference pOReference,
+      throw _privateConstructorUsedError;
   String get type => throw _privateConstructorUsedError;
   PhoneNumber get telephoneNumber => throw _privateConstructorUsedError;
   double get orderValue => throw _privateConstructorUsedError;
@@ -222,7 +222,6 @@ class _$_OrderHistoryDetailsOrderHeader
   final double totalTax;
   @override
   final DateTimeStringValue requestedDeliveryDate;
-// required POReference pOReference,
   @override
   final String type;
   @override
@@ -306,7 +305,7 @@ abstract class _OrderHistoryDetailsOrderHeader
   double get totalTax;
   @override
   DateTimeStringValue get requestedDeliveryDate;
-  @override // required POReference pOReference,
+  @override
   String get type;
   @override
   PhoneNumber get telephoneNumber;

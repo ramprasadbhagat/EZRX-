@@ -24,8 +24,7 @@ mixin _$OrderHistoryDetailsOrderHeadersDto {
   @JsonKey(name: 'TotalTax', defaultValue: 0.0)
   double get totalTax => throw _privateConstructorUsedError;
   @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
-  String get requestedDeliveryDate =>
-      throw _privateConstructorUsedError; // @JsonKey(name: 'POReference', defaultValue: '') required String pOReference,
+  String get requestedDeliveryDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'Type', defaultValue: '')
   String get type => throw _privateConstructorUsedError;
   @JsonKey(name: 'TelephoneNumber', defaultValue: '')
@@ -271,7 +270,6 @@ class _$_OrderHistoryDetailsOrderHeadersDto
   @override
   @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
   final String requestedDeliveryDate;
-// @JsonKey(name: 'POReference', defaultValue: '') required String pOReference,
   @override
   @JsonKey(name: 'Type', defaultValue: '')
   final String type;
@@ -386,7 +384,7 @@ abstract class _OrderHistoryDetailsOrderHeadersDto
   @override
   @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
   String get requestedDeliveryDate;
-  @override // @JsonKey(name: 'POReference', defaultValue: '') required String pOReference,
+  @override
   @JsonKey(name: 'Type', defaultValue: '')
   String get type;
   @override

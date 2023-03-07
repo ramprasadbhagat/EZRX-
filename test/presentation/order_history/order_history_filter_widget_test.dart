@@ -1,6 +1,8 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/order/order_history_filter/order_history_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 
 import 'package:ezrxmobile/domain/order/entities/order_history_filter.dart';
 import 'package:ezrxmobile/presentation/history/history_filter.dart';
@@ -9,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
+import 'package:intl/intl.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../utils/widget_utils.dart';
@@ -29,6 +32,19 @@ void main() {
   final mockOrderHistoryFilter = OrderHistoryFilter.empty();
 
   late MockAppRouter autoRouterMock;
+  final fakeToDate = DateTime.parse(
+    DateFormat('yyyyMMdd').format(
+      DateTime.now(),
+    ),
+  );
+
+  final fakeFromDate = DateTime.parse(
+    DateFormat('yyyyMMdd').format(
+      DateTime.now().subtract(
+        const Duration(days: 7),
+      ),
+    ),
+  );
 
   setUpAll(() {
     locator = GetIt.instance;
@@ -42,7 +58,8 @@ void main() {
       when(() => mockOrderHistoryFilterBloc.state)
           .thenReturn(OrderHistoryFilterState.initial());
       autoRouterMock = locator<MockAppRouter>();
-      when(() => autoRouterMock.popForced()).thenAnswer((invocation) async => true);
+      when(() => autoRouterMock.popForced())
+          .thenAnswer((invocation) async => true);
     });
 
     Widget getWUT() {
@@ -80,8 +97,7 @@ void main() {
           find.byKey(const Key('filterPrincipalSearchField'));
       final materialsearchField =
           find.byKey(const Key('filterMaterialSearchField'));
-      final fromdateField = find.byKey(const Key('filteFromdateField'));
-      final todateField = find.byKey(const Key('filterTodateField'));
+
       final filterclearButton = find.byKey(const Key('filterClearButton'));
       final filterapplyButton = find.byKey(const Key('filterApplyButton'));
       final filtercrossButton = find.byKey(const Key('filterCrossButton'));
@@ -90,8 +106,10 @@ void main() {
       expect(princeplesearchField, findsOneWidget);
       expect(poNumberField, findsOneWidget);
       expect(materialsearchField, findsOneWidget);
-      expect(fromdateField, findsOneWidget);
-      expect(todateField, findsOneWidget);
+      expect(
+          find.byKey(Key(
+              'filterOrderDateField+${mockOrderHistoryFilter.getOrderDateFiltered}')),
+          findsOneWidget);
       expect(filterclearButton, findsOneWidget);
       expect(filterapplyButton, findsOneWidget);
       expect(filtercrossButton, findsOneWidget);
@@ -206,7 +224,6 @@ void main() {
         OrderHistoryFilterState.initial()
             .copyWith(orderHistoryFilter: mockOrderHistoryFilter),
       );
-     
 
       await tester.pumpWidget(getWUT());
 
@@ -215,42 +232,6 @@ void main() {
       await tester.tap(filterclearButton);
       await tester.pumpAndSettle(const Duration(seconds: 1));
       verify(() => autoRouterMock.popForced()).called(2);
-    });
-
-    testWidgets(' test filtefromdateField date picker test ', (tester) async {
-      when(() => mockOrderHistoryFilterBloc.state).thenReturn(
-        OrderHistoryFilterState.initial()
-            .copyWith(orderHistoryFilter: mockOrderHistoryFilter),
-      );
-      await tester.pumpWidget(getWUT());
-      await tester.pump();
-      final fromdateField = find.byKey(const Key('filteFromdateField'));
-      expect(fromdateField, findsOneWidget);
-      await tester.tap(fromdateField);
-      await tester.pumpAndSettle(const Duration(seconds: 2));
-      expect(find.byType(DatePickerDialog), findsOneWidget);
-
-      final okButton = find.text('OK');
-      await tester.tap(okButton);
-      await tester.pump();
-    });
-
-    testWidgets(' test filtertodateField date picker test ', (tester) async {
-      when(() => mockOrderHistoryFilterBloc.state).thenReturn(
-        OrderHistoryFilterState.initial()
-            .copyWith(orderHistoryFilter: mockOrderHistoryFilter),
-      );
-      await tester.pumpWidget(getWUT());
-      await tester.pump();
-      final fromdateField = find.byKey(const Key('filterTodateField'));
-      expect(fromdateField, findsOneWidget);
-      await tester.tap(fromdateField);
-      await tester.pump();
-      expect(find.byType(DatePickerDialog), findsOneWidget);
-
-      final okButton = find.text('OK');
-      await tester.tap(okButton);
-      await tester.pump();
     });
 
     testWidgets(' test close button History Filter  ', (tester) async {
@@ -267,5 +248,50 @@ void main() {
       await tester.pumpAndSettle(const Duration(seconds: 3));
       verify(() => autoRouterMock.popForced()).called(1);
     });
+
+    testWidgets(
+      'Test OrderDateFilter field',
+      (tester) async {
+        final expectedStates = [
+          OrderHistoryFilterState.initial().copyWith(
+            showErrorMessages: true,
+          ),
+          OrderHistoryFilterState.initial().copyWith(
+            showErrorMessages: true,
+            orderHistoryFilter: OrderHistoryFilter.empty().copyWith(
+                fromDate:
+                    DateTimeStringValue(getDateStringByDateTime(fakeFromDate)),
+                toDate:
+                    DateTimeStringValue(getDateStringByDateTime(fakeToDate))),
+          ),
+        ];
+        whenListen(
+          mockOrderHistoryFilterBloc,
+          Stream.fromIterable(expectedStates),
+        );
+        await tester.pumpWidget(getWUT());
+
+        await tester.pumpAndSettle();
+
+        final filterFromDateField = find.byKey(Key(
+            'filterOrderDateField+${mockOrderHistoryFilter.getOrderDateFiltered}'));
+        expect(filterFromDateField, findsOneWidget);
+        await tester.tap(filterFromDateField);
+        await tester.pumpAndSettle();
+        final saveButton = find.text('SAVE');
+        expect(saveButton, findsOneWidget);
+        await tester.tap(saveButton);
+        await tester.pumpAndSettle();
+        expect(saveButton, findsNothing);
+
+        verify(
+          () => mockOrderHistoryFilterBloc.add(
+            OrderHistoryFilterEvent.setOrderDate(
+                orderDateRange:
+                    DateTimeRange(start: fakeFromDate, end: fakeToDate)),
+          ),
+        ).called(1);
+      },
+    );
   });
 }

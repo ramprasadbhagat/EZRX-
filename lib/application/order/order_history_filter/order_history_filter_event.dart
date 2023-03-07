@@ -4,16 +4,7 @@ part of 'order_history_filter_bloc.dart';
 class OrderHistoryFilterEvent with _$OrderHistoryFilterEvent {
   const factory OrderHistoryFilterEvent.initialized() = _Initialized;
 
-  const factory OrderHistoryFilterEvent.applyFilters() =
-      _ApplyFilters;
-
-  const factory OrderHistoryFilterEvent.setfromDate({
-    required DateTimeStringValue fromDate,
-  }) = _SetfromDate;
-
-  const factory OrderHistoryFilterEvent.setToDate({
-    required DateTimeStringValue toDate,
-  }) = _SetToDate;
+  const factory OrderHistoryFilterEvent.applyFilters() = _ApplyFilters;
 
   const factory OrderHistoryFilterEvent.orderIdChanged(String orderId) =
       _OrderIdChanged;
@@ -31,4 +22,7 @@ class OrderHistoryFilterEvent with _$OrderHistoryFilterEvent {
 
   const factory OrderHistoryFilterEvent.sortByDate(String sortDirection) =
       _SortByDate;
+  const factory OrderHistoryFilterEvent.setOrderDate({
+    required DateTimeRange orderDateRange,
+  }) = _SetOrderDate;
 }

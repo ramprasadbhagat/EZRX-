@@ -1,3 +1,5 @@
+import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_filter.dart';
@@ -35,22 +37,6 @@ class OrderHistoryFilterBloc
           ));
         }
       },
-      setfromDate: (e) => emit(
-        state.copyWith(
-          orderHistoryFilter: state.orderHistoryFilter.copyWith(
-            fromDate: e.fromDate,
-          ),
-          showErrorMessages: false,
-        ),
-      ),
-      setToDate: (e) => emit(
-        state.copyWith(
-          orderHistoryFilter: state.orderHistoryFilter.copyWith(
-            toDate: e.toDate,
-          ),
-          showErrorMessages: false,
-        ),
-      ),
       orderIdChanged: (e) => emit(
         state.copyWith(
           orderHistoryFilter: state.orderHistoryFilter.copyWith(
@@ -87,6 +73,19 @@ class OrderHistoryFilterBloc
         state.copyWith(
           showErrorMessages: false,
           sortDirection: event.sortDirection,
+        ),
+      ),
+      setOrderDate: (e) => emit(
+        state.copyWith(
+          orderHistoryFilter: state.orderHistoryFilter.copyWith(
+            fromDate: DateTimeStringValue(
+              getDateStringByDateTime(e.orderDateRange.start),
+            ),
+            toDate: DateTimeStringValue(
+              getDateStringByDateTime(e.orderDateRange.end),
+            ),
+          ),
+          showErrorMessages: false,
         ),
       ),
     );

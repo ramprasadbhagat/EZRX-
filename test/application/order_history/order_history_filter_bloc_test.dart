@@ -5,16 +5,28 @@ import 'package:ezrxmobile/domain/core/error/failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_filter.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:intl/intl.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   var mockOrderHistoryFilter = OrderHistoryFilter.empty();
   var orderHistoryFilterState = OrderHistoryFilterState.initial();
-  final fakeFromDate = DateTime.now().subtract(const Duration(days: 7));
 
-  final fakeToDate = DateTime.now();
+  final fakeToDate = DateTime.parse(
+    DateFormat('yyyyMMdd').format(
+      DateTime.now(),
+    ),
+  );
 
+  final fakeFromDate = DateTime.parse(
+    DateFormat('yyyyMMdd').format(
+      DateTime.now().subtract(
+        const Duration(days: 7),
+      ),
+    ),
+  );
   const fakeOrderId = '0200190077';
   const fakePoNumber = '1000';
   const fakeMaterialSearch = '1990';
@@ -27,34 +39,15 @@ void main() {
       getDateStringByDateTime(fakeToDate),
     ),
   );
+
+  final dateTimeRange = DateTimeRange(
+    start: fakeFromDate,
+    end: fakeToDate,
+  );
   orderHistoryFilterState = orderHistoryFilterState.copyWith(
       orderHistoryFilter: mockOrderHistoryFilter);
 
   group(' Order History Filter Bloc', () {
-    blocTest('setFromDate',
-        build: (() => OrderHistoryFilterBloc()),
-        seed: () => OrderHistoryFilterState.initial().copyWith(
-                orderHistoryFilter: OrderHistoryFilter.empty().copyWith(
-              toDate: DateTimeStringValue(
-                getDateStringByDateTime(fakeToDate),
-              ),
-            )),
-        act: (OrderHistoryFilterBloc bloc) {
-          bloc.add(OrderHistoryFilterEvent.setfromDate(
-            fromDate: DateTimeStringValue(
-              getDateStringByDateTime(fakeFromDate),
-            ),
-          ));
-        },
-        expect: () => [
-              // OrderHistoryFilterState.initial().copyWith(
-              //     orderHistoryFilterList: mockOrderHistoryFilter.copyWith(
-              //   fromDate: DateTimeStringValue(
-              //     getDateStringByDateTime(fakeFromDate),
-              //   ),
-              // )),
-            ]);
-
     blocTest(
       'initialized',
       build: (() => OrderHistoryFilterBloc()),
@@ -67,29 +60,6 @@ void main() {
         isA<OrderHistoryFilterState>(),
       ],
     );
-
-    blocTest('setToDate',
-        build: (() => OrderHistoryFilterBloc()),
-        seed: () => OrderHistoryFilterState.initial().copyWith(
-                orderHistoryFilter: OrderHistoryFilter.empty().copyWith(
-              fromDate: DateTimeStringValue(
-                getDateStringByDateTime(fakeFromDate),
-              ),
-            )),
-        act: (OrderHistoryFilterBloc bloc) =>
-            bloc.add(OrderHistoryFilterEvent.setToDate(
-              toDate: DateTimeStringValue(
-                getDateStringByDateTime(fakeToDate),
-              ),
-            )),
-        expect: () => [
-              // orderHistoryFilterState.copyWith(
-              //     orderHistoryFilterList: mockOrderHistoryFilter.copyWith(
-              //   toDate: DateTimeStringValue(
-              //     getDateStringByDateTime(fakeToDate),
-              //   ),
-              // ))
-            ]);
 
     blocTest('orderIdChanged',
         build: (() => OrderHistoryFilterBloc()),
@@ -259,6 +229,30 @@ void main() {
         ..add(const OrderHistoryFilterEvent.initialized())
         ..add(const OrderHistoryFilterEvent.sortByDate('desc')),
       expect: () => [isA<OrderHistoryFilterState>()],
+    );
+
+    blocTest(
+      'orderDate Changed',
+      build: (() => OrderHistoryFilterBloc()),
+      act: (OrderHistoryFilterBloc bloc) {
+        bloc.add(
+          OrderHistoryFilterEvent.setOrderDate(
+            orderDateRange: dateTimeRange,
+          ),
+        );
+      },
+      expect: () => [
+        OrderHistoryFilterState.initial().copyWith(
+          orderHistoryFilter: OrderHistoryFilter.empty().copyWith(
+            toDate: DateTimeStringValue(
+              getDateStringByDateTime(fakeToDate),
+            ),
+            fromDate: DateTimeStringValue(
+              getDateStringByDateTime(fakeFromDate),
+            ),
+          ),
+        ),
+      ],
     );
   });
 }
