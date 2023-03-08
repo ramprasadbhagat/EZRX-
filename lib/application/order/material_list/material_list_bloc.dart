@@ -140,6 +140,7 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
         emit(
           state.copyWith(
             isFetching: true,
+            searchKey: e.searchKey,
             materialList: <MaterialInfo>[],
             nextPageIndex: 0,
             apiFailureOrSuccessOption: none(),
@@ -155,7 +156,7 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
           pageSize: _pageSize,
           offset: 0, //state.materialList.length,
           orderBy: 'materialDescription_asc',
-          searchKey: state.searchKey.getValue(),
+          searchKey: state.searchKey.getOrDefaultValue(''),
           selectedMaterialFilter: e.selectedMaterialFilter,
           pickAndPack: e.pickAndPack,
         );

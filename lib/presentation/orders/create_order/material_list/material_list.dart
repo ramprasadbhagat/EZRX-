@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -54,12 +55,6 @@ class MaterialListPage extends StatelessWidget {
               ),
             );
             if (state.scannedData.isEmpty) return;
-
-            context.read<MaterialListBloc>().add(
-                  MaterialListEvent.updateSearchKey(
-                    searchKey: state.scannedData,
-                  ),
-                );
             context.read<MaterialListBloc>().add(
                   MaterialListEvent.searchMaterialList(
                     user: eligibilityBloc.state.user,
@@ -72,6 +67,7 @@ class MaterialListPage extends StatelessWidget {
                         .state
                         .selectedMaterialFilter,
                     pickAndPack: eligibilityBloc.state.getPNPValueMaterial,
+                    searchKey: SearchKey(state.scannedData),
                   ),
                 );
           },

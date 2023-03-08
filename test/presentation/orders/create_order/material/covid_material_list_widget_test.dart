@@ -29,7 +29,7 @@ import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/locator.dart';
-import 'package:ezrxmobile/presentation/orders/create_order/covid_material_list.dart';
+import 'package:ezrxmobile/presentation/orders/create_order/covid_material_list/covid_material_list.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/material_root.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
@@ -202,7 +202,7 @@ void main() {
           .thenReturn(OrderDocumentTypeState.initial());
       when(() => shipToCodeBlocMock.state)
           .thenReturn(ShipToCodeState.initial());
-       when(() => scanMaterialInfoBlocMock.state)
+      when(() => scanMaterialInfoBlocMock.state)
           .thenReturn(ScanMaterialInfoState.initial());
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
@@ -277,7 +277,7 @@ void main() {
       final laoder = find.byKey(const Key('loaderImage'));
       final covidMaterialsListPage =
           find.byKey(const Key('covidmaterialListPage'));
-      final searchField = find.byKey(const Key('materialSearchField'));
+      final searchField = find.byKey(const Key('covidMaterialSearchField'));
       final cartButton = find.byKey(const Key('CartButton'));
       expect(laoder, findsOneWidget);
       expect(covidMaterialsListPage, findsOneWidget);
@@ -292,9 +292,16 @@ void main() {
       expect(covidTabTitle, findsOneWidget);
       await tester.tap(covidTabTitle);
       await tester.pump(const Duration(seconds: 4));
-      final txtForm = find.byType(TextFormField);
-      await tester.enterText(txtForm, '99');
-      expect(find.text('999'), findsNothing);
+      final textField = find.byType(TextFormField);
+      expect(textField, findsOneWidget);
+
+      await tester.enterText(textField, '1234');
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      await tester.pump();
+      expect(
+          find.text('12'), findsNothing); // 2 characters shouldn't be allowed
+
+      expect(find.text('1234'), findsOneWidget);
     });
 
     testWidgets('Covid Material List Failed To Load', (tester) async {
@@ -807,11 +814,11 @@ void main() {
     });
 
     testWidgets('Test SearchBar onFieldSumitted test', (tester) async {
+      const fakeKey = '23168452';
       when(() => covidMaterialListBlocMock.state).thenReturn(
         CovidMaterialListState.initial().copyWith(
           nextPageIndex: 2,
-          isFetching: false,
-          searchKey: SearchKey('23168452'),
+          searchKey: SearchKey(fakeKey),
           materialList: [
             fakeMaterialInfo,
             fakeMaterialInfo.copyWith(
@@ -828,10 +835,10 @@ void main() {
         ),
       );
       whenListen(
-          covidMaterialListBlocMock,
+          materialListBlocMock,
           Stream.fromIterable([
             CovidMaterialListState.initial(),
-            covidMaterialListBlocMock.state,
+            materialListBlocMock.state,
           ]));
       await tester.pumpWidget(
         getScopedWidget(
@@ -846,11 +853,11 @@ void main() {
       );
       await tester.pump();
 
-      final findTextField = find.byKey(const Key('materialSearchField'));
-      await tester.enterText(findTextField, '23168452');
+      final findTextField = find.byKey(const Key('covidMaterialSearchField$fakeKey'));
+      await tester.enterText(findTextField, fakeKey);
       await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pump(const Duration(seconds: 3));
-      expect(find.text('23168452'), findsNWidgets(2));
+      expect(find.text(fakeKey), findsNWidgets(2));
     });
 
     testWidgets(

@@ -435,13 +435,14 @@ void main() {
       ));
       await tester.pumpAndSettle(const Duration(seconds: 3));
 
-      final textField = find.byType(TextField);
+      final textField = find.byType(TextFormField);
+      expect(textField, findsOneWidget);
 
       await tester.enterText(textField, '1234');
       await tester.testTextInput.receiveAction(TextInputAction.done);
-      expect(textField, findsOneWidget);
+      await tester.pump();
       expect(
-          find.text('123'), findsNothing); // 3 characters shouldn't be allowed
+          find.text('12'), findsNothing); // 2 characters shouldn't be allowed
 
       expect(find.text('1234'), findsOneWidget);
     });
@@ -1684,10 +1685,11 @@ void main() {
     });
 
     testWidgets('Test SearchBar onFieldSumitted test', (tester) async {
+      const fakeKeyword = '23168452';
       when(() => materialListBlocMock.state).thenReturn(
         MaterialListState.initial().copyWith(
           nextPageIndex: 2,
-          searchKey: SearchKey('23168452'),
+          searchKey: SearchKey(fakeKeyword),
           materialList: [
             fakematerialInfo,
             fakematerialInfo.copyWith(
@@ -1712,11 +1714,11 @@ void main() {
       await tester.pumpWidget(getScopedWidget(const MaterialListPage()));
       await tester.pump();
 
-      final findTextField = find.byKey(const Key('materialSearchField'));
-      await tester.enterText(findTextField, '23168452');
+      final findTextField = find.byKey(const Key('materialSearchField$fakeKeyword'));
+      await tester.enterText(findTextField, fakeKeyword);
       await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pump(const Duration(seconds: 3));
-      expect(find.text('23168452'), findsNWidgets(2));
+      expect(find.text(fakeKeyword), findsNWidgets(2));
     });
 
     testWidgets('Test MaterialFilters test', (tester) async {

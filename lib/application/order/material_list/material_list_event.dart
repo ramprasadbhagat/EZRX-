@@ -22,6 +22,7 @@ class MaterialListEvent with _$MaterialListEvent {
     required ShipToInfo shipToInfo,
     required MaterialFilter selectedMaterialFilter,
     required String pickAndPack,
+    required SearchKey searchKey,
   }) = _SearchMagerialList;
   const factory MaterialListEvent.updateSearchKey({required String searchKey}) =
       _UpdateSearchKey;

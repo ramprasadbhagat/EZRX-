@@ -4,10 +4,8 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/order/covid_material_list/covid_material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
-import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
-import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
@@ -15,14 +13,16 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class MaterialListSearchBar extends StatefulWidget {
-  const MaterialListSearchBar({Key? key}) : super(key: key);
+class CovidMaterialListSearchBar extends StatefulWidget {
+  const CovidMaterialListSearchBar({Key? key}) : super(key: key);
 
   @override
-  State<MaterialListSearchBar> createState() => MaterialListSearchBarState();
+  State<CovidMaterialListSearchBar> createState() =>
+      CovidMaterialListSearchBarState();
 }
 
-class MaterialListSearchBarState extends State<MaterialListSearchBar> {
+class CovidMaterialListSearchBarState
+    extends State<CovidMaterialListSearchBar> {
   late TextEditingController _searchController;
 
   @override
@@ -43,7 +43,7 @@ class MaterialListSearchBarState extends State<MaterialListSearchBar> {
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       height: 50,
       color: ZPColors.white,
-      child: BlocBuilder<MaterialListBloc, MaterialListState>(
+      child: BlocBuilder<CovidMaterialListBloc, CovidMaterialListState>(
         buildWhen: (previous, current) =>
             previous.searchKey != current.searchKey ||
             previous.isFetching != current.isFetching,
@@ -52,15 +52,15 @@ class MaterialListSearchBarState extends State<MaterialListSearchBar> {
 
           return Form(
             child: TextFormField(
-              key: Key('materialSearchField${_searchController.text}'),
+              key: Key('covidMaterialSearchField${_searchController.text}'),
               autocorrect: false,
               controller: _searchController,
               enabled: !state.isFetching,
               onFieldSubmitted: (value) {
                 if (value.length > 2) {
                   // search code goes here
-                  context.read<MaterialListBloc>().add(
-                        MaterialListEvent.searchMaterialList(
+                  context.read<CovidMaterialListBloc>().add(
+                        CovidMaterialListEvent.searchMaterialList(
                           user: context.read<UserBloc>().state.user,
                           salesOrganisation: context
                               .read<SalesOrgBloc>()
@@ -81,7 +81,6 @@ class MaterialListSearchBarState extends State<MaterialListSearchBar> {
                               .read<EligibilityBloc>()
                               .state
                               .getPNPValueMaterial,
-                          searchKey: SearchKey(value),
                         ),
                       );
                   locator<CountlyService>().addCountlyEvent(
@@ -127,44 +126,35 @@ class MaterialListSearchBarState extends State<MaterialListSearchBar> {
                           const MaterialFilterEvent.clearSelected(),
                         );
 
-                    context.read<MaterialListBloc>().add(
-                          const MaterialListEvent.updateSearchKey(
+                    context.read<CovidMaterialListBloc>().add(
+                          const CovidMaterialListEvent.updateSearchKey(
                             searchKey: '',
                           ),
                         );
                     // fetch code goes here
-                    context
-                        .read<MaterialListBloc>()
-                        .add(MaterialListEvent.fetch(
-                          user: context.read<UserBloc>().state.user,
-                          salesOrganisation: context
-                              .read<SalesOrgBloc>()
-                              .state
-                              .salesOrganisation,
-                          configs: context.read<SalesOrgBloc>().state.configs,
-                          customerCodeInfo: context
-                              .read<CustomerCodeBloc>()
-                              .state
-                              .customerCodeInfo,
-                          shipToInfo:
-                              context.read<ShipToCodeBloc>().state.shipToInfo,
-                          selectedMaterialFilter: context
-                              .read<MaterialFilterBloc>()
-                              .state
-                              .getEmptyMaterialFilter(),
-                          orderDocumentType: context
-                              .read<OrderDocumentTypeBloc>()
-                              .state
-                              .selectedOrderType,
-                          pickAndPack: context
-                              .read<EligibilityBloc>()
-                              .state
-                              .getPNPValueMaterial,
-                        ));
+                    context.read<CovidMaterialListBloc>().add(
+                          CovidMaterialListEvent.fetch(
+                            user: context.read<UserBloc>().state.user,
+                            salesOrganisation: context
+                                .read<SalesOrgBloc>()
+                                .state
+                                .salesOrganisation,
+                            configs: context.read<SalesOrgBloc>().state.configs,
+                            customerCodeInfo: context
+                                .read<CustomerCodeBloc>()
+                                .state
+                                .customerCodeInfo,
+                            shipToInfo:
+                                context.read<ShipToCodeBloc>().state.shipToInfo,
+                            pickAndPack: context
+                                .read<EligibilityBloc>()
+                                .state
+                                .getPNPValueMaterial,
+                          ),
+                        );
                   },
                 ),
                 hintText: 'Search...'.tr(),
-                // border: InputBorder.none,
               ),
             ),
           );

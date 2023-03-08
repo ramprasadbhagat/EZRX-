@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/presentation/core/confirm_clear_cart_dialog.dart';
@@ -24,6 +25,9 @@ class OrderTypeSelector extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       key: const Key('orderTypeSelector'),
+      decoration: const BoxDecoration(
+        color: ZPColors.secondaryBGColor,
+      ),
       child: BlocBuilder<OrderDocumentTypeBloc, OrderDocumentTypeState>(
         buildWhen: (previous, current) =>
             previous.selectedOrderType != current.selectedOrderType ||
@@ -98,7 +102,10 @@ class _OrderTypeSelectorField extends StatelessWidget {
               padding: const EdgeInsets.only(left: 10),
               child: Text(
                 leadingText,
-                style: Theme.of(context).textTheme.bodySmall,
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                  fontSize: 12,
+                  fontWeight: FontWeight.normal,
+                ),
               ),
             ),
           ),
@@ -165,6 +172,52 @@ class _OrderTypeSelectorField extends StatelessWidget {
           ? orderDocumentTypeState.selectedOrderType.documentType.getOrCrash()
           : intialDropdownText;
 
+  void onOrderTypeSelected(
+    BuildContext context,
+    BuildContext childContext,
+    OrderDocumentType type,
+  ) {
+    childContext.router.pop();
+    final validationText = getValidationText(
+      orderDocumentTypeState.selectedOrderType,
+      type,
+      context.read<CartBloc>().state,
+    );
+    if (orderDocumentTypeState.selectedOrderType.description !=
+        type.description) {
+      context.read<MaterialListBloc>().add(
+            const MaterialListEvent.updateSearchKey(searchKey: ''),
+          );
+    }
+    if ((context.read<CartBloc>().state.cartItems.isEmpty ||
+        validationText.isEmpty)) {
+      context.read<OrderDocumentTypeBloc>().add(
+            OrderDocumentTypeEvent.selectedOrderType(
+              selectedOrderType: type,
+              isReasonSelected: isReason,
+            ),
+          );
+    } else {
+      ConfirmClearDialog.show(
+        context: context,
+        title: validationText.first,
+        description: validationText.last,
+        onCancel: () {
+          context.router.pop();
+        },
+        onConfirmed: () {
+          context.router.popUntilRouteWithName(MaterialRootRoute.name);
+          context.read<OrderDocumentTypeBloc>().add(
+                OrderDocumentTypeEvent.selectedOrderType(
+                  selectedOrderType: type,
+                  isReasonSelected: isReason,
+                ),
+              );
+        },
+      );
+    }
+  }
+
   Future<void> showOrderDocumentTypedialog({
     required BuildContext context,
   }) async {
@@ -181,49 +234,12 @@ class _OrderTypeSelectorField extends StatelessWidget {
               key: Key(displayText),
               child: Text(
                 displayText,
-                style: const TextStyle(
-                  color: ZPColors.primary,
-                  fontFamily: 'Poppins',
-                  fontWeight: FontWeight.w500,
+                style:Theme.of(context).textTheme.titleSmall?.copyWith(
                   fontSize: 14,
-                ),
+                  fontWeight: FontWeight.w500,
+                ), 
               ),
-              onPressed: () {
-                ctx.router.pop();
-                final validationText = getValidationText(
-                  orderDocumentTypeState.selectedOrderType,
-                  i,
-                  context.read<CartBloc>().state,
-                );
-                if ((context.read<CartBloc>().state.cartItems.isEmpty ||
-                    validationText.isEmpty)) {
-                  context.read<OrderDocumentTypeBloc>().add(
-                        OrderDocumentTypeEvent.selectedOrderType(
-                          selectedOrderType: i,
-                          isReasonSelected: isReason,
-                        ),
-                      );
-                } else {
-                  ConfirmClearDialog.show(
-                    context: context,
-                    title: validationText.first,
-                    description: validationText.last,
-                    onCancel: () {
-                      context.router.pop();
-                    },
-                    onConfirmed: () {
-                      context.router
-                          .popUntilRouteWithName(MaterialRootRoute.name);
-                      context.read<OrderDocumentTypeBloc>().add(
-                            OrderDocumentTypeEvent.selectedOrderType(
-                              selectedOrderType: i,
-                              isReasonSelected: isReason,
-                            ),
-                          );
-                    },
-                  );
-                }
-              },
+              onPressed: () => onOrderTypeSelected(context, ctx, i),
             );
           }).toList(),
         );

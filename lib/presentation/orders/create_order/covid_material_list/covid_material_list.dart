@@ -6,7 +6,6 @@ import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.da
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/covid_material_list/covid_material_list_bloc.dart';
-import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
@@ -20,6 +19,7 @@ import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dar
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/core/custom_small_button.dart';
+import 'package:ezrxmobile/presentation/orders/create_order/covid_material_list/covid_material_list_search_bar.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/favorite_button.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -58,7 +58,7 @@ class CovidMaterialListPage extends StatelessWidget {
         builder: (context, state) {
           return Column(
             children: [
-              const _SearchBar(),
+              const CovidMaterialListSearchBar(),
               _BodyContent(
                 covidMaterialListState: state,
                 addToCart: addToCart,
@@ -213,8 +213,8 @@ class _ListContent extends StatelessWidget {
             Text(
               materialInfo.materialNumber.displayMatNo,
               style: Theme.of(context).textTheme.titleSmall?.apply(
-                          color: ZPColors.lightGray,
-                        ),
+                    color: ZPColors.lightGray,
+                  ),
             ),
             (salesOrgConfigs.enableDefaultMD &&
                     materialInfo.defaultMaterialDescription.isNotEmpty)
@@ -361,148 +361,6 @@ class _PriceLabel extends StatelessWidget {
               ),
         );
       },
-    );
-  }
-}
-
-class _SearchBar extends StatefulWidget {
-  const _SearchBar({Key? key}) : super(key: key);
-
-  @override
-  State<_SearchBar> createState() => _SearchBarState();
-}
-
-class _SearchBarState extends State<_SearchBar> {
-  late TextEditingController _searchController;
-
-  @override
-  void initState() {
-    _searchController = TextEditingController();
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _searchController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(8),
-      color: ZPColors.white,
-      child: BlocConsumer<CovidMaterialListBloc, CovidMaterialListState>(
-        listenWhen: (previous, current) =>
-            previous.searchKey != current.searchKey,
-        listener: (context, state) {
-          final searchText = state.searchKey.getValue();
-          _searchController.value = TextEditingValue(
-            text: searchText,
-            selection: TextSelection.collapsed(
-              offset: _searchController.selection.base.offset,
-            ),
-          );
-        },
-        buildWhen: (previous, current) =>
-            previous.searchKey != current.searchKey ||
-            previous.isFetching != current.isFetching,
-        builder: (context, state) {
-          return Form(
-            child: TextFormField(
-              key: const Key('materialSearchField'),
-              autocorrect: false,
-              controller: _searchController,
-              enabled: !state.isFetching,
-              onChanged: (value) {
-                context.read<CovidMaterialListBloc>().add(
-                      CovidMaterialListEvent.updateSearchKey(searchKey: value),
-                    );
-              },
-              onFieldSubmitted: (value) {
-                if (state.searchKey.isValid()) {
-                  // search code goes here
-                  context.read<CovidMaterialListBloc>().add(
-                        CovidMaterialListEvent.searchMaterialList(
-                          user: context.read<UserBloc>().state.user,
-                          salesOrganisation: context
-                              .read<SalesOrgBloc>()
-                              .state
-                              .salesOrganisation,
-                          configs: context.read<SalesOrgBloc>().state.configs,
-                          customerCodeInfo: context
-                              .read<CustomerCodeBloc>()
-                              .state
-                              .customerCodeInfo,
-                          shipToInfo:
-                              context.read<ShipToCodeBloc>().state.shipToInfo,
-                          selectedMaterialFilter: context
-                              .read<MaterialFilterBloc>()
-                              .state
-                              .selectedMaterialFilter,
-                          pickAndPack: context
-                              .read<EligibilityBloc>()
-                              .state
-                              .getPNPValueCovidMaterial,
-                        ),
-                      );
-                } else {
-                  showSnackBar(
-                    context: context,
-                    message:
-                        'Search input must be greater than 2 characters.'.tr(),
-                  );
-                }
-              },
-              validator: (_) => state.searchKey.value.fold(
-                (f) => f.maybeMap(
-                  subceedLength: (f) =>
-                      'Search input must be greater than 2 characters.'.tr(),
-                  orElse: () => null,
-                ),
-                (_) => null,
-              ),
-              decoration: InputDecoration(
-                isDense: true,
-                contentPadding: const EdgeInsets.all(0),
-                prefixIcon: const Icon(Icons.search),
-                suffixIcon: IconButton(
-                  icon: const Icon(Icons.clear),
-                  onPressed: () {
-                    context.read<CovidMaterialListBloc>().add(
-                          const CovidMaterialListEvent.updateSearchKey(
-                            searchKey: '',
-                          ),
-                        );
-                    // fetch code goes here
-                    context.read<CovidMaterialListBloc>().add(
-                          CovidMaterialListEvent.fetch(
-                            user: context.read<UserBloc>().state.user,
-                            salesOrganisation: context
-                                .read<SalesOrgBloc>()
-                                .state
-                                .salesOrganisation,
-                            configs: context.read<SalesOrgBloc>().state.configs,
-                            customerCodeInfo: context
-                                .read<CustomerCodeBloc>()
-                                .state
-                                .customerCodeInfo,
-                            shipToInfo:
-                                context.read<ShipToCodeBloc>().state.shipToInfo,
-                            pickAndPack: context
-                                .read<EligibilityBloc>()
-                                .state
-                                .getPNPValueCovidMaterial,
-                          ),
-                        );
-                  },
-                ),
-                hintText: 'Search...'.tr(),
-              ),
-            ),
-          );
-        },
-      ),
     );
   }
 }

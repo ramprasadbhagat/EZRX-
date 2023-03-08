@@ -36,7 +36,8 @@ mixin _$MaterialListEvent {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             MaterialFilter selectedMaterialFilter,
-            String pickAndPack)
+            String pickAndPack,
+            SearchKey searchKey)
         searchMaterialList,
     required TResult Function(String searchKey) updateSearchKey,
     required TResult Function(
@@ -71,7 +72,8 @@ mixin _$MaterialListEvent {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             MaterialFilter selectedMaterialFilter,
-            String pickAndPack)?
+            String pickAndPack,
+            SearchKey searchKey)?
         searchMaterialList,
     TResult? Function(String searchKey)? updateSearchKey,
     TResult? Function(
@@ -106,7 +108,8 @@ mixin _$MaterialListEvent {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             MaterialFilter selectedMaterialFilter,
-            String pickAndPack)?
+            String pickAndPack,
+            SearchKey searchKey)?
         searchMaterialList,
     TResult Function(String searchKey)? updateSearchKey,
     TResult Function(
@@ -226,7 +229,8 @@ class _$_Initialized implements _Initialized {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             MaterialFilter selectedMaterialFilter,
-            String pickAndPack)
+            String pickAndPack,
+            SearchKey searchKey)
         searchMaterialList,
     required TResult Function(String searchKey) updateSearchKey,
     required TResult Function(
@@ -264,7 +268,8 @@ class _$_Initialized implements _Initialized {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             MaterialFilter selectedMaterialFilter,
-            String pickAndPack)?
+            String pickAndPack,
+            SearchKey searchKey)?
         searchMaterialList,
     TResult? Function(String searchKey)? updateSearchKey,
     TResult? Function(
@@ -302,7 +307,8 @@ class _$_Initialized implements _Initialized {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             MaterialFilter selectedMaterialFilter,
-            String pickAndPack)?
+            String pickAndPack,
+            SearchKey searchKey)?
         searchMaterialList,
     TResult Function(String searchKey)? updateSearchKey,
     TResult Function(
@@ -600,7 +606,8 @@ class _$_Fetch implements _Fetch {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             MaterialFilter selectedMaterialFilter,
-            String pickAndPack)
+            String pickAndPack,
+            SearchKey searchKey)
         searchMaterialList,
     required TResult Function(String searchKey) updateSearchKey,
     required TResult Function(
@@ -639,7 +646,8 @@ class _$_Fetch implements _Fetch {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             MaterialFilter selectedMaterialFilter,
-            String pickAndPack)?
+            String pickAndPack,
+            SearchKey searchKey)?
         searchMaterialList,
     TResult? Function(String searchKey)? updateSearchKey,
     TResult? Function(
@@ -678,7 +686,8 @@ class _$_Fetch implements _Fetch {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             MaterialFilter selectedMaterialFilter,
-            String pickAndPack)?
+            String pickAndPack,
+            SearchKey searchKey)?
         searchMaterialList,
     TResult Function(String searchKey)? updateSearchKey,
     TResult Function(
@@ -778,7 +787,8 @@ abstract class _$$_SearchMagerialListCopyWith<$Res> {
       CustomerCodeInfo customerCodeInfo,
       ShipToInfo shipToInfo,
       MaterialFilter selectedMaterialFilter,
-      String pickAndPack});
+      String pickAndPack,
+      SearchKey searchKey});
 
   $UserCopyWith<$Res> get user;
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
@@ -806,6 +816,7 @@ class __$$_SearchMagerialListCopyWithImpl<$Res>
     Object? shipToInfo = null,
     Object? selectedMaterialFilter = null,
     Object? pickAndPack = null,
+    Object? searchKey = null,
   }) {
     return _then(_$_SearchMagerialList(
       user: null == user
@@ -836,6 +847,10 @@ class __$$_SearchMagerialListCopyWithImpl<$Res>
           ? _value.pickAndPack
           : pickAndPack // ignore: cast_nullable_to_non_nullable
               as String,
+      searchKey: null == searchKey
+          ? _value.searchKey
+          : searchKey // ignore: cast_nullable_to_non_nullable
+              as SearchKey,
     ));
   }
 
@@ -899,7 +914,8 @@ class _$_SearchMagerialList implements _SearchMagerialList {
       required this.customerCodeInfo,
       required this.shipToInfo,
       required this.selectedMaterialFilter,
-      required this.pickAndPack});
+      required this.pickAndPack,
+      required this.searchKey});
 
   @override
   final User user;
@@ -915,10 +931,12 @@ class _$_SearchMagerialList implements _SearchMagerialList {
   final MaterialFilter selectedMaterialFilter;
   @override
   final String pickAndPack;
+  @override
+  final SearchKey searchKey;
 
   @override
   String toString() {
-    return 'MaterialListEvent.searchMaterialList(user: $user, salesOrganisation: $salesOrganisation, configs: $configs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, selectedMaterialFilter: $selectedMaterialFilter, pickAndPack: $pickAndPack)';
+    return 'MaterialListEvent.searchMaterialList(user: $user, salesOrganisation: $salesOrganisation, configs: $configs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, selectedMaterialFilter: $selectedMaterialFilter, pickAndPack: $pickAndPack, searchKey: $searchKey)';
   }
 
   @override
@@ -937,12 +955,22 @@ class _$_SearchMagerialList implements _SearchMagerialList {
             (identical(other.selectedMaterialFilter, selectedMaterialFilter) ||
                 other.selectedMaterialFilter == selectedMaterialFilter) &&
             (identical(other.pickAndPack, pickAndPack) ||
-                other.pickAndPack == pickAndPack));
+                other.pickAndPack == pickAndPack) &&
+            (identical(other.searchKey, searchKey) ||
+                other.searchKey == searchKey));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, user, salesOrganisation, configs,
-      customerCodeInfo, shipToInfo, selectedMaterialFilter, pickAndPack);
+  int get hashCode => Object.hash(
+      runtimeType,
+      user,
+      salesOrganisation,
+      configs,
+      customerCodeInfo,
+      shipToInfo,
+      selectedMaterialFilter,
+      pickAndPack,
+      searchKey);
 
   @JsonKey(ignore: true)
   @override
@@ -972,7 +1000,8 @@ class _$_SearchMagerialList implements _SearchMagerialList {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             MaterialFilter selectedMaterialFilter,
-            String pickAndPack)
+            String pickAndPack,
+            SearchKey searchKey)
         searchMaterialList,
     required TResult Function(String searchKey) updateSearchKey,
     required TResult Function(
@@ -986,8 +1015,15 @@ class _$_SearchMagerialList implements _SearchMagerialList {
             String pickAndPack)
         loadMore,
   }) {
-    return searchMaterialList(user, salesOrganisation, configs,
-        customerCodeInfo, shipToInfo, selectedMaterialFilter, pickAndPack);
+    return searchMaterialList(
+        user,
+        salesOrganisation,
+        configs,
+        customerCodeInfo,
+        shipToInfo,
+        selectedMaterialFilter,
+        pickAndPack,
+        searchKey);
   }
 
   @override
@@ -1011,7 +1047,8 @@ class _$_SearchMagerialList implements _SearchMagerialList {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             MaterialFilter selectedMaterialFilter,
-            String pickAndPack)?
+            String pickAndPack,
+            SearchKey searchKey)?
         searchMaterialList,
     TResult? Function(String searchKey)? updateSearchKey,
     TResult? Function(
@@ -1025,8 +1062,15 @@ class _$_SearchMagerialList implements _SearchMagerialList {
             String pickAndPack)?
         loadMore,
   }) {
-    return searchMaterialList?.call(user, salesOrganisation, configs,
-        customerCodeInfo, shipToInfo, selectedMaterialFilter, pickAndPack);
+    return searchMaterialList?.call(
+        user,
+        salesOrganisation,
+        configs,
+        customerCodeInfo,
+        shipToInfo,
+        selectedMaterialFilter,
+        pickAndPack,
+        searchKey);
   }
 
   @override
@@ -1050,7 +1094,8 @@ class _$_SearchMagerialList implements _SearchMagerialList {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             MaterialFilter selectedMaterialFilter,
-            String pickAndPack)?
+            String pickAndPack,
+            SearchKey searchKey)?
         searchMaterialList,
     TResult Function(String searchKey)? updateSearchKey,
     TResult Function(
@@ -1066,8 +1111,15 @@ class _$_SearchMagerialList implements _SearchMagerialList {
     required TResult orElse(),
   }) {
     if (searchMaterialList != null) {
-      return searchMaterialList(user, salesOrganisation, configs,
-          customerCodeInfo, shipToInfo, selectedMaterialFilter, pickAndPack);
+      return searchMaterialList(
+          user,
+          salesOrganisation,
+          configs,
+          customerCodeInfo,
+          shipToInfo,
+          selectedMaterialFilter,
+          pickAndPack,
+          searchKey);
     }
     return orElse();
   }
@@ -1121,7 +1173,8 @@ abstract class _SearchMagerialList implements MaterialListEvent {
       required final CustomerCodeInfo customerCodeInfo,
       required final ShipToInfo shipToInfo,
       required final MaterialFilter selectedMaterialFilter,
-      required final String pickAndPack}) = _$_SearchMagerialList;
+      required final String pickAndPack,
+      required final SearchKey searchKey}) = _$_SearchMagerialList;
 
   User get user;
   SalesOrganisation get salesOrganisation;
@@ -1130,6 +1183,7 @@ abstract class _SearchMagerialList implements MaterialListEvent {
   ShipToInfo get shipToInfo;
   MaterialFilter get selectedMaterialFilter;
   String get pickAndPack;
+  SearchKey get searchKey;
   @JsonKey(ignore: true)
   _$$_SearchMagerialListCopyWith<_$_SearchMagerialList> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1218,7 +1272,8 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             MaterialFilter selectedMaterialFilter,
-            String pickAndPack)
+            String pickAndPack,
+            SearchKey searchKey)
         searchMaterialList,
     required TResult Function(String searchKey) updateSearchKey,
     required TResult Function(
@@ -1256,7 +1311,8 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             MaterialFilter selectedMaterialFilter,
-            String pickAndPack)?
+            String pickAndPack,
+            SearchKey searchKey)?
         searchMaterialList,
     TResult? Function(String searchKey)? updateSearchKey,
     TResult? Function(
@@ -1294,7 +1350,8 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             MaterialFilter selectedMaterialFilter,
-            String pickAndPack)?
+            String pickAndPack,
+            SearchKey searchKey)?
         searchMaterialList,
     TResult Function(String searchKey)? updateSearchKey,
     TResult Function(
@@ -1600,7 +1657,8 @@ class _$_LoadMore implements _LoadMore {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             MaterialFilter selectedMaterialFilter,
-            String pickAndPack)
+            String pickAndPack,
+            SearchKey searchKey)
         searchMaterialList,
     required TResult Function(String searchKey) updateSearchKey,
     required TResult Function(
@@ -1639,7 +1697,8 @@ class _$_LoadMore implements _LoadMore {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             MaterialFilter selectedMaterialFilter,
-            String pickAndPack)?
+            String pickAndPack,
+            SearchKey searchKey)?
         searchMaterialList,
     TResult? Function(String searchKey)? updateSearchKey,
     TResult? Function(
@@ -1678,7 +1737,8 @@ class _$_LoadMore implements _LoadMore {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             MaterialFilter selectedMaterialFilter,
-            String pickAndPack)?
+            String pickAndPack,
+            SearchKey searchKey)?
         searchMaterialList,
     TResult Function(String searchKey)? updateSearchKey,
     TResult Function(
