@@ -650,5 +650,45 @@ void main() {
         expect(addToCartButton, findsOneWidget);
       },
     );
+
+    testWidgets(
+      'Test Order Template Invalid material message stick to top',
+      (tester) async {
+        final fakeUser = User.empty().copyWith(
+          username: Username('fakeUser'),
+          disableCreateOrder: false,
+          role: Role(
+            type: RoleType('fakeRole'),
+            description: '',
+            id: '',
+            name: '',
+          ),
+        );
+
+        when(
+          () => userBlocMock.state,
+        ).thenReturn(
+          UserState.initial().copyWith(
+            user: fakeUser,
+          ),
+        );
+
+        await tester.pumpWidget(orderTemplateDetailPage());
+        await tester.pump();
+
+        final invalidWarningMessageKey =
+            find.byKey(const Key('invalidWarningMessage'));
+        expect(invalidWarningMessageKey, findsOneWidget);
+
+        final scrollWidget =
+            find.byWidgetPredicate((w) => w is CustomScrollView);
+        expect(scrollWidget, findsOneWidget);
+        await tester.fling(scrollWidget, const Offset(0.0, -300.0), 1000.0);
+        await tester.pump();
+        final invalidWarningMessageKeyAfterScroll =
+            find.byKey(const Key('invalidWarningMessage'));
+        expect(invalidWarningMessageKeyAfterScroll, findsOneWidget);
+      },
+    );
   });
 }

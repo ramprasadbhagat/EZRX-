@@ -87,22 +87,33 @@ class _OrderTemplateDetailPageState extends State<OrderTemplateDetailPage> {
         },
         child: CustomScrollView(
           slivers: [
-            SliverToBoxAdapter(
-              child: BlocBuilder<MaterialPriceDetailBloc,
-                  MaterialPriceDetailState>(
-                buildWhen: (previous, current) =>
-                    previous.isValidating != current.isValidating,
-                builder: (context, state) {
-                  return OrderInvalidWarning(
-                    isLoading: state.isValidating,
-                    isInvalidOrder: widget.order.allMaterialQueryInfo.every(
-                      (item) => !state.isValidMaterial(
-                        query: item,
-                      ),
+            BlocBuilder<MaterialPriceDetailBloc, MaterialPriceDetailState>(
+              buildWhen: (previous, current) =>
+                  previous.isValidating != current.isValidating,
+              builder: (context, state) {
+                final isInvalidOrder = widget.order.allMaterialQueryInfo.every(
+                  (item) => !state.isValidMaterial(
+                    query: item,
+                  ),
+                );
+
+                return SliverAppBar(
+                  pinned: true,
+                  toolbarHeight:
+                      !state.isValidating && isInvalidOrder ? 50.0 : 0,
+                  automaticallyImplyLeading: false,
+                  flexibleSpace: FlexibleSpaceBar.createSettings(
+                    currentExtent: double.infinity,
+                    minExtent: 0,
+                    maxExtent: double.infinity,
+                    child: OrderInvalidWarning(
+                      key: const Key('invalidWarningMessage'),
+                      isLoading: state.isValidating,
+                      isInvalidOrder: isInvalidOrder,
                     ),
-                  );
-                },
-              ),
+                  ),
+                );
+              },
             ),
             SliverList(
               delegate: SliverChildBuilderDelegate(
