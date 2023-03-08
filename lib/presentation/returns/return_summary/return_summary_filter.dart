@@ -41,7 +41,7 @@ class ReturnSummaryFilterDrawer extends StatelessWidget {
                       const SizedBox(
                         height: 20,
                       ),
-                      const _SubmittedDateFilter(),
+                      _SubmittedDateFilter(),
                       const SizedBox(
                         height: 20,
                       ),
@@ -59,7 +59,11 @@ class ReturnSummaryFilterDrawer extends StatelessWidget {
                       const SizedBox(
                         height: 20,
                       ),
-                      state.showErrorMessages
+                      (state.showErrorMessages &&
+                              (!state.returnSummaryFilter
+                                      .checkIfTotalRangeIsValid ||
+                                  state.returnSummaryFilter
+                                      .checkIfAnyRefundTotalIsEmpty))
                           ? const PriceRangeError()
                           : const SizedBox.shrink(),
                       Row(
@@ -259,79 +263,50 @@ class _ApplyButton extends StatelessWidget {
   }
 }
 
-class _SubmittedDateFilter extends StatefulWidget {
-  const _SubmittedDateFilter({Key? key}) : super(key: key);
-
-  @override
-  State<_SubmittedDateFilter> createState() => _SubmittedDateFilterState();
-}
-
-class _SubmittedDateFilterState extends State<_SubmittedDateFilter> {
-  late TextEditingController submittedDateTextController;
-  late ReturnSummaryFilterBloc returnSummaryFilterBloc;
-
-  @override
-  void initState() {
-    submittedDateTextController = TextEditingController();
-    returnSummaryFilterBloc = context.read<ReturnSummaryFilterBloc>();
-
-    submittedDateTextController = TextEditingController()
-      ..text = returnSummaryFilterBloc
-          .state.returnSummaryFilter.getSubmittedDateFiltered;
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    submittedDateTextController.dispose();
-    super.dispose();
-  }
-
+class _SubmittedDateFilter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocListener<ReturnSummaryFilterBloc, ReturnSummaryFilterState>(
-      listenWhen: (previous, current) =>
+    return BlocBuilder<ReturnSummaryFilterBloc, ReturnSummaryFilterState>(
+      buildWhen: (previous, current) =>
           previous.returnSummaryFilter.getSubmittedDateFiltered !=
           current.returnSummaryFilter.getSubmittedDateFiltered,
-      listener: (
-        context,
-        state,
-      ) {
-        submittedDateTextController.text =
-            state.returnSummaryFilter.getSubmittedDateFiltered;
-      },
-      child: TextFormField(
-        onTap: () async {
-          final state = context.read<ReturnSummaryFilterBloc>().state;
-
-          final submiteDateRange = await showDateRangePicker(
-            context: context,
-            firstDate: DateTime.now().subtract(const Duration(days: 365)),
-            lastDate: DateTime.now(),
-            initialDateRange:
-                state.returnSummaryFilter.getSubmittedFilterDateRange,
-          );
-          if (submiteDateRange == null || !mounted) return;
-          context.read<ReturnSummaryFilterBloc>().add(
-                ReturnSummaryFilterEvent.setSubmittedDate(
-                  submittedDateRange: submiteDateRange,
-                ),
-              );
-        },
-        readOnly: true,
-        controller: submittedDateTextController,
-        decoration: InputDecoration(
-          labelText: 'Submitted Date'.tr(),
-          suffixIcon: const Padding(
-            padding: EdgeInsets.only(right: 8.0),
-            child: Icon(
-              Icons.calendar_month,
-              size: 20,
-            ),
+      builder: (context, state) {
+        return TextFormField(
+          key: Key(
+            'filterSubmittedDateField+${state.returnSummaryFilter.getSubmittedDateFiltered}',
           ),
-          suffixIconConstraints: const BoxConstraints(maxWidth: 25),
-        ),
-      ),
+          onTap: () async {
+            final returnSummaryFilterBloc =
+                context.read<ReturnSummaryFilterBloc>();
+            final submiteDateRange = await showDateRangePicker(
+              context: context,
+              firstDate: DateTime.now().subtract(const Duration(days: 365)),
+              lastDate: DateTime.now(),
+              initialDateRange:
+                  state.returnSummaryFilter.getSubmittedFilterDateRange,
+            );
+            if (submiteDateRange == null) return;
+            returnSummaryFilterBloc.add(
+              ReturnSummaryFilterEvent.setSubmittedDate(
+                submittedDateRange: submiteDateRange,
+              ),
+            );
+          },
+          readOnly: true,
+          initialValue: state.returnSummaryFilter.getSubmittedDateFiltered,
+          decoration: InputDecoration(
+            labelText: 'Submitted Date'.tr(),
+            suffixIcon: const Padding(
+              padding: EdgeInsets.only(right: 8.0),
+              child: Icon(
+                Icons.calendar_month,
+                size: 20,
+              ),
+            ),
+            suffixIconConstraints: const BoxConstraints(maxWidth: 25),
+          ),
+        );
+      },
     );
   }
 }
@@ -341,21 +316,21 @@ class PriceRangeError extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ReturnSummaryFilterBloc, ReturnSummaryFilterState>(
-      builder: (context, state) {
-        return Padding(
-          padding: const EdgeInsets.only(bottom: 8.0),
-          child: Text(
-            state.returnSummaryFilter.refundTotalValueRangeAnyEmpty
-                ? 'Enter ${state.returnSummaryFilter.refundTotalFrom.isValid() ? 'Second' : 'First'} Refund Total!'
-                : 'Invalid Refund Total Range!',
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.titleSmall?.apply(
-                  color: ZPColors.error,
-                ),
-          ).tr(),
-        );
-      },
+    final state = context.read<ReturnSummaryFilterBloc>().state;
+
+    return Padding(
+      padding: const EdgeInsets.only(
+        bottom: 16.0,
+      ),
+      child: Text(
+        state.returnSummaryFilter.checkIfAnyRefundTotalIsEmpty
+            ? 'Enter ${state.returnSummaryFilter.refundTotalFrom.isValid() ? 'Second' : 'First'} Refund Total!'
+            : 'Invalid Refund Total Range!',
+        textAlign: TextAlign.center,
+        style: Theme.of(context).textTheme.titleSmall?.apply(
+              color: ZPColors.error,
+            ),
+      ).tr(),
     );
   }
 }

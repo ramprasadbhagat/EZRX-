@@ -59,12 +59,12 @@ class ReturnSummaryFilter with _$ReturnSummaryFilter {
       this != ReturnSummaryFilter.empty();
 
 //to check if both the TotalValue fields are empty
-  bool get _refundTotalValueRangeEmpty =>
+  bool get _checkIfRefundTotalIsEmpty =>
       !refundTotalFrom.isValid() &&
       !refundTotalTo.isValid();
 
 //to check if any TotalValue fields are empty
-  bool get refundTotalValueRangeAnyEmpty =>
+  bool get checkIfAnyRefundTotalIsEmpty =>
       !refundTotalFrom.isValid() ||
       !refundTotalTo.isValid();
 
@@ -72,7 +72,7 @@ class ReturnSummaryFilter with _$ReturnSummaryFilter {
 
   bool get areFiltersValid =>
       requestId.isValid() &&
-      (_refundTotalValueRangeEmpty || checkIfTotalRangeIsValid);
+      (_checkIfRefundTotalIsEmpty || checkIfTotalRangeIsValid);
 
   int get appliedFilterCount {
     var count = 1 + requestId.countWhenValid;

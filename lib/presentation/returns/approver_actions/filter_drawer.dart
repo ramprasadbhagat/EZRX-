@@ -51,7 +51,7 @@ class ApproverReturnFilterDrawer extends StatelessWidget {
                       const SizedBox(
                         height: 20,
                       ),
-                      const _InvoiceDateFilter(),
+                      _InvoiceDateFilter(),
                       const SizedBox(
                         height: 20,
                       ),
@@ -294,78 +294,49 @@ class _ApplyButton extends StatelessWidget {
   }
 }
 
-class _InvoiceDateFilter extends StatefulWidget {
-  const _InvoiceDateFilter({Key? key}) : super(key: key);
-
-  @override
-  State<_InvoiceDateFilter> createState() => _InvoiceDateFilterState();
-}
-
-class _InvoiceDateFilterState extends State<_InvoiceDateFilter> {
-  late TextEditingController invoiceDateTextController;
-
-  @override
-  void initState() {
-    invoiceDateTextController = TextEditingController()
-      ..text = context
-          .read<ReturnApproverFilterBloc>()
-          .state
-          .approverReturnFilter
-          .getFilteredInvoiceDate;
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    invoiceDateTextController.dispose();
-    super.dispose();
-  }
-
+class _InvoiceDateFilter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocListener<ReturnApproverFilterBloc, ReturnApproverFilterState>(
-      listenWhen: (previous, current) =>
+    return BlocBuilder<ReturnApproverFilterBloc, ReturnApproverFilterState>(
+      buildWhen: (previous, current) =>
           previous.approverReturnFilter.getInvoiceFilterDateRange !=
           current.approverReturnFilter.getInvoiceFilterDateRange,
-      listener: (
-        context,
-        state,
-      ) {
-        invoiceDateTextController.text =
-            state.approverReturnFilter.getFilteredInvoiceDate;
-      },
-      child: TextFormField(
-        key: const Key('filterInvoiceDateField'),
-        onTap: () async {
-          final invoiceDateRange = await showDateRangePicker(
-            context: context,
-            firstDate: DateTime.now().subtract(const Duration(days: 365)),
-            lastDate: DateTime.now(),
-            initialDateRange: context
-                .read<ReturnApproverFilterBloc>()
-                .state
-                .approverReturnFilter
-                .getInvoiceFilterDateRange,
-          );
-          if (invoiceDateRange == null || !mounted) return;
-          context.read<ReturnApproverFilterBloc>().add(
-                ReturnApproverFilterEvent.setInvoiceDate(invoiceDateRange),
-              );
-        },
-        readOnly: true,
-        controller: invoiceDateTextController,
-        decoration: InputDecoration(
-          labelText: 'Invoice Date'.tr(),
-          suffixIcon: const Padding(
-            padding: EdgeInsets.only(right: 8.0),
-            child: Icon(
-              Icons.calendar_month,
-              size: 20,
+      builder: (context, state) {
+        return TextFormField(
+          key: Key(
+              'filterInvoiceDateField+${state.approverReturnFilter.getFilteredInvoiceDate}',),
+          onTap: () async {
+            final returnApproverFilterBloc =
+                context.read<ReturnApproverFilterBloc>();
+            final invoiceDateRange = await showDateRangePicker(
+              context: context,
+              firstDate: DateTime.now().subtract(const Duration(days: 365)),
+              lastDate: DateTime.now(),
+              initialDateRange:
+                  state.approverReturnFilter.getInvoiceFilterDateRange,
+            );
+            if (invoiceDateRange == null) return;
+            returnApproverFilterBloc.add(
+              ReturnApproverFilterEvent.setInvoiceDate(
+                invoiceDateRange,
+              ),
+            );
+          },
+          readOnly: true,
+          initialValue: state.approverReturnFilter.getFilteredInvoiceDate,
+          decoration: InputDecoration(
+            labelText: 'Invoice Date'.tr(),
+            suffixIcon: const Padding(
+              padding: EdgeInsets.only(right: 8.0),
+              child: Icon(
+                Icons.calendar_month,
+                size: 20,
+              ),
             ),
+            suffixIconConstraints: const BoxConstraints(maxWidth: 25),
           ),
-          suffixIconConstraints: const BoxConstraints(maxWidth: 25),
-        ),
-      ),
+        );
+      },
     );
   }
 }

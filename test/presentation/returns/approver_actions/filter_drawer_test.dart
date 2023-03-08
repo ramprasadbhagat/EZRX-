@@ -43,6 +43,8 @@ void main() {
   late CountlyService countlyService;
   late ShipToCodeBloc shipToCodeBlocMock;
   late SalesOrgBloc salesOrgBlocMock;
+  final mockReturnApproverFilter = ReturnApproverFilter.empty();
+
 
   final fakeToDate = DateTime.parse(
     DateFormat('yyyyMMdd').format(
@@ -121,7 +123,7 @@ void main() {
         expect(find.byKey(const Key('filterCreatedBy')), findsOneWidget);
         expect(find.byKey(const Key('shipToSearchField')), findsOneWidget);
         expect(find.byKey(const Key('soldToSearchField')), findsOneWidget);
-        expect(find.byKey(const Key('filterInvoiceDateField')), findsOneWidget);
+        expect(find.byKey( Key('filterInvoiceDateField+${mockReturnApproverFilter.getFilteredInvoiceDate}')), findsOneWidget);
         expect(find.byKey(const Key('filterApplyButton')), findsOneWidget);
         expect(find.byKey(const Key('filterClearButton')), findsOneWidget);
       },
@@ -431,7 +433,8 @@ void main() {
         await tester.pumpAndSettle();
 
         final filterFromDateField =
-            find.byKey(const Key('filterInvoiceDateField'));
+            find.byKey( Key('filterInvoiceDateField+${mockReturnApproverFilter.getFilteredInvoiceDate}'
+            ));
         expect(filterFromDateField, findsOneWidget);
         await tester.tap(filterFromDateField);
         await tester.pumpAndSettle();
