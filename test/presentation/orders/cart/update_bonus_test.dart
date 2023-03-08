@@ -286,6 +286,8 @@ void main() {
         final addBonusSnackBar =
             find.textContaining('Bonus item added to the cart'.tr());
         expect(addBonusSnackBar, findsOneWidget);
+        final errorEmptyMessage = find.byKey(const Key('snackBarMessage'));
+        expect(errorEmptyMessage, findsOneWidget);
       },
     );
   });

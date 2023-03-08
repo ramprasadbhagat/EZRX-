@@ -5,7 +5,6 @@ import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/cart_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
@@ -27,22 +26,20 @@ class BonusAddPage extends StatefulWidget {
 }
 
 class _BonusAddPageState extends State<BonusAddPage> {
-  late TextEditingController _searchController;
+  final TextEditingController _searchController = TextEditingController();
+  late BonusMaterialBloc bonusMaterialBloc;
 
   @override
   void initState() {
-    _searchController = TextEditingController();
-    final searchText = context.read<BonusMaterialBloc>().state.searchKey;
-    if (searchText.isValid()) {
-      _searchController.value = TextEditingValue(
-        text: searchText.getOrCrash(),
-        selection: TextSelection.collapsed(
-          offset: _searchController.selection.base.offset,
-        ),
-      );
-    }
-
+    bonusMaterialBloc = context.read<BonusMaterialBloc>();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    bonusMaterialBloc.add(const BonusMaterialEvent.initialized());
+    super.dispose();
   }
 
   @override
@@ -52,49 +49,23 @@ class _BonusAddPageState extends State<BonusAddPage> {
       appBar: PreferredSize(
         preferredSize: const Size(double.infinity, 60),
         child: CustomAppBar(
-          child: BlocConsumer<BonusMaterialBloc, BonusMaterialState>(
-            listenWhen: (previous, current) =>
-                previous.searchKey != current.searchKey ||
-                previous.isFetching != current.isFetching,
-            listener: (context, state) {
-              state.failureOrSuccessOption.fold(
-                () {
-                  final searchText = state.searchKey.getValue();
-                  _searchController.value = TextEditingValue(
-                    text: searchText,
-                    selection: TextSelection.collapsed(
-                      offset: _searchController.selection.base.offset,
-                    ),
-                  );
-                },
-                (either) => either.fold(
-                  (failure) {
-                    ErrorUtils.handleApiFailure(context, failure);
-                  },
-                  (_) {},
-                ),
-              );
-            },
+          child: BlocBuilder<BonusMaterialBloc, BonusMaterialState>(
             buildWhen: (previous, current) =>
                 previous.searchKey != current.searchKey ||
                 previous.isFetching != current.isFetching,
             builder: (context, state) {
+              _searchController.text = state.searchKey.getOrDefaultValue('');
+
               return Form(
                 child: TextFormField(
-                  key: const Key('addBonusTextField'),
+                  key: Key(
+                      'addBonusTextField${state.searchKey.getOrDefaultValue('')}',),
                   controller: _searchController,
                   autocorrect: false,
                   enabled: !state.isFetching,
-                  onChanged: (value) {
-                    context.read<BonusMaterialBloc>().add(
-                          BonusMaterialEvent.updateSearchKey(
-                            searchKey: value,
-                          ),
-                        );
-                  },
                   onFieldSubmitted: (value) {
-                    if (state.searchKey.isValid()) {
-                      context.read<BonusMaterialBloc>().add(
+                    if (value.length > 2) {
+                      bonusMaterialBloc.add(
                             BonusMaterialEvent.fetch(
                               user: context.read<UserBloc>().state.user,
                               salesOrganisation: context
@@ -137,7 +108,9 @@ class _BonusAddPageState extends State<BonusAddPage> {
                       key: const ValueKey('addBonusTextFieldClear'),
                       icon: const Icon(Icons.clear),
                       onPressed: () {
-                        context.read<BonusMaterialBloc>().add(
+                        if (_searchController.text.isEmpty) return;
+                        _searchController.clear();
+                        bonusMaterialBloc.add(
                               const BonusMaterialEvent.reset(),
                             );
                       },

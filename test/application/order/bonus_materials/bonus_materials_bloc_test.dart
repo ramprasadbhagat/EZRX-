@@ -215,22 +215,6 @@ void main() {
         ],
       );
       blocTest<BonusMaterialBloc, BonusMaterialState>(
-        'update the search key',
-        build: () {
-          return BonusMaterialBloc(
-              bonusMaterialRepository: mockBonusMaterialRepository);
-        },
-        setUp: () {},
-        act: (BonusMaterialBloc bloc) => bloc.add(
-          const BonusMaterialEvent.updateSearchKey(
-            searchKey: '1234',
-          ),
-        ),
-        expect: () => [
-          BonusMaterialState.initial().copyWith(searchKey: SearchKey('1234')),
-        ],
-      );
-      blocTest<BonusMaterialBloc, BonusMaterialState>(
         'reset bloc',
         build: () {
           return BonusMaterialBloc(

@@ -28,7 +28,6 @@ mixin _$BonusMaterialEvent {
             SalesOrganisation salesOrganisation,
             String pickAndPack)
         fetch,
-    required TResult Function(String searchKey) updateSearchKey,
     required TResult Function() reset,
   }) =>
       throw _privateConstructorUsedError;
@@ -44,7 +43,6 @@ mixin _$BonusMaterialEvent {
             SalesOrganisation salesOrganisation,
             String pickAndPack)?
         fetch,
-    TResult? Function(String searchKey)? updateSearchKey,
     TResult? Function()? reset,
   }) =>
       throw _privateConstructorUsedError;
@@ -60,7 +58,6 @@ mixin _$BonusMaterialEvent {
             SalesOrganisation salesOrganisation,
             String pickAndPack)?
         fetch,
-    TResult Function(String searchKey)? updateSearchKey,
     TResult Function()? reset,
     required TResult orElse(),
   }) =>
@@ -69,7 +66,6 @@ mixin _$BonusMaterialEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
-    required TResult Function(_UpdateSearchKey value) updateSearchKey,
     required TResult Function(_Reset value) reset,
   }) =>
       throw _privateConstructorUsedError;
@@ -77,7 +73,6 @@ mixin _$BonusMaterialEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_UpdateSearchKey value)? updateSearchKey,
     TResult? Function(_Reset value)? reset,
   }) =>
       throw _privateConstructorUsedError;
@@ -85,7 +80,6 @@ mixin _$BonusMaterialEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
-    TResult Function(_UpdateSearchKey value)? updateSearchKey,
     TResult Function(_Reset value)? reset,
     required TResult orElse(),
   }) =>
@@ -158,7 +152,6 @@ class _$_Initialized implements _Initialized {
             SalesOrganisation salesOrganisation,
             String pickAndPack)
         fetch,
-    required TResult Function(String searchKey) updateSearchKey,
     required TResult Function() reset,
   }) {
     return initialized();
@@ -177,7 +170,6 @@ class _$_Initialized implements _Initialized {
             SalesOrganisation salesOrganisation,
             String pickAndPack)?
         fetch,
-    TResult? Function(String searchKey)? updateSearchKey,
     TResult? Function()? reset,
   }) {
     return initialized?.call();
@@ -196,7 +188,6 @@ class _$_Initialized implements _Initialized {
             SalesOrganisation salesOrganisation,
             String pickAndPack)?
         fetch,
-    TResult Function(String searchKey)? updateSearchKey,
     TResult Function()? reset,
     required TResult orElse(),
   }) {
@@ -211,7 +202,6 @@ class _$_Initialized implements _Initialized {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
-    required TResult Function(_UpdateSearchKey value) updateSearchKey,
     required TResult Function(_Reset value) reset,
   }) {
     return initialized(this);
@@ -222,7 +212,6 @@ class _$_Initialized implements _Initialized {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_UpdateSearchKey value)? updateSearchKey,
     TResult? Function(_Reset value)? reset,
   }) {
     return initialized?.call(this);
@@ -233,7 +222,6 @@ class _$_Initialized implements _Initialized {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
-    TResult Function(_UpdateSearchKey value)? updateSearchKey,
     TResult Function(_Reset value)? reset,
     required TResult orElse(),
   }) {
@@ -434,7 +422,6 @@ class _$_Fetch implements _Fetch {
             SalesOrganisation salesOrganisation,
             String pickAndPack)
         fetch,
-    required TResult Function(String searchKey) updateSearchKey,
     required TResult Function() reset,
   }) {
     return fetch(user, configs, searchKey, customerInfo, shipInfo,
@@ -454,7 +441,6 @@ class _$_Fetch implements _Fetch {
             SalesOrganisation salesOrganisation,
             String pickAndPack)?
         fetch,
-    TResult? Function(String searchKey)? updateSearchKey,
     TResult? Function()? reset,
   }) {
     return fetch?.call(user, configs, searchKey, customerInfo, shipInfo,
@@ -474,7 +460,6 @@ class _$_Fetch implements _Fetch {
             SalesOrganisation salesOrganisation,
             String pickAndPack)?
         fetch,
-    TResult Function(String searchKey)? updateSearchKey,
     TResult Function()? reset,
     required TResult orElse(),
   }) {
@@ -490,7 +475,6 @@ class _$_Fetch implements _Fetch {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
-    required TResult Function(_UpdateSearchKey value) updateSearchKey,
     required TResult Function(_Reset value) reset,
   }) {
     return fetch(this);
@@ -501,7 +485,6 @@ class _$_Fetch implements _Fetch {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_UpdateSearchKey value)? updateSearchKey,
     TResult? Function(_Reset value)? reset,
   }) {
     return fetch?.call(this);
@@ -512,7 +495,6 @@ class _$_Fetch implements _Fetch {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
-    TResult Function(_UpdateSearchKey value)? updateSearchKey,
     TResult Function(_Reset value)? reset,
     required TResult orElse(),
   }) {
@@ -542,177 +524,6 @@ abstract class _Fetch implements BonusMaterialEvent {
   String get pickAndPack;
   @JsonKey(ignore: true)
   _$$_FetchCopyWith<_$_Fetch> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$_UpdateSearchKeyCopyWith<$Res> {
-  factory _$$_UpdateSearchKeyCopyWith(
-          _$_UpdateSearchKey value, $Res Function(_$_UpdateSearchKey) then) =
-      __$$_UpdateSearchKeyCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String searchKey});
-}
-
-/// @nodoc
-class __$$_UpdateSearchKeyCopyWithImpl<$Res>
-    extends _$BonusMaterialEventCopyWithImpl<$Res, _$_UpdateSearchKey>
-    implements _$$_UpdateSearchKeyCopyWith<$Res> {
-  __$$_UpdateSearchKeyCopyWithImpl(
-      _$_UpdateSearchKey _value, $Res Function(_$_UpdateSearchKey) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? searchKey = null,
-  }) {
-    return _then(_$_UpdateSearchKey(
-      searchKey: null == searchKey
-          ? _value.searchKey
-          : searchKey // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$_UpdateSearchKey implements _UpdateSearchKey {
-  const _$_UpdateSearchKey({required this.searchKey});
-
-  @override
-  final String searchKey;
-
-  @override
-  String toString() {
-    return 'BonusMaterialEvent.updateSearchKey(searchKey: $searchKey)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_UpdateSearchKey &&
-            (identical(other.searchKey, searchKey) ||
-                other.searchKey == searchKey));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, searchKey);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_UpdateSearchKeyCopyWith<_$_UpdateSearchKey> get copyWith =>
-      __$$_UpdateSearchKeyCopyWithImpl<_$_UpdateSearchKey>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function(
-            User user,
-            SalesOrganisationConfigs configs,
-            String searchKey,
-            CustomerCodeInfo customerInfo,
-            ShipToInfo shipInfo,
-            SalesOrganisation salesOrganisation,
-            String pickAndPack)
-        fetch,
-    required TResult Function(String searchKey) updateSearchKey,
-    required TResult Function() reset,
-  }) {
-    return updateSearchKey(searchKey);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(
-            User user,
-            SalesOrganisationConfigs configs,
-            String searchKey,
-            CustomerCodeInfo customerInfo,
-            ShipToInfo shipInfo,
-            SalesOrganisation salesOrganisation,
-            String pickAndPack)?
-        fetch,
-    TResult? Function(String searchKey)? updateSearchKey,
-    TResult? Function()? reset,
-  }) {
-    return updateSearchKey?.call(searchKey);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(
-            User user,
-            SalesOrganisationConfigs configs,
-            String searchKey,
-            CustomerCodeInfo customerInfo,
-            ShipToInfo shipInfo,
-            SalesOrganisation salesOrganisation,
-            String pickAndPack)?
-        fetch,
-    TResult Function(String searchKey)? updateSearchKey,
-    TResult Function()? reset,
-    required TResult orElse(),
-  }) {
-    if (updateSearchKey != null) {
-      return updateSearchKey(searchKey);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initialized value) initialized,
-    required TResult Function(_Fetch value) fetch,
-    required TResult Function(_UpdateSearchKey value) updateSearchKey,
-    required TResult Function(_Reset value) reset,
-  }) {
-    return updateSearchKey(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_UpdateSearchKey value)? updateSearchKey,
-    TResult? Function(_Reset value)? reset,
-  }) {
-    return updateSearchKey?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_UpdateSearchKey value)? updateSearchKey,
-    TResult Function(_Reset value)? reset,
-    required TResult orElse(),
-  }) {
-    if (updateSearchKey != null) {
-      return updateSearchKey(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _UpdateSearchKey implements BonusMaterialEvent {
-  const factory _UpdateSearchKey({required final String searchKey}) =
-      _$_UpdateSearchKey;
-
-  String get searchKey;
-  @JsonKey(ignore: true)
-  _$$_UpdateSearchKeyCopyWith<_$_UpdateSearchKey> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -762,7 +573,6 @@ class _$_Reset implements _Reset {
             SalesOrganisation salesOrganisation,
             String pickAndPack)
         fetch,
-    required TResult Function(String searchKey) updateSearchKey,
     required TResult Function() reset,
   }) {
     return reset();
@@ -781,7 +591,6 @@ class _$_Reset implements _Reset {
             SalesOrganisation salesOrganisation,
             String pickAndPack)?
         fetch,
-    TResult? Function(String searchKey)? updateSearchKey,
     TResult? Function()? reset,
   }) {
     return reset?.call();
@@ -800,7 +609,6 @@ class _$_Reset implements _Reset {
             SalesOrganisation salesOrganisation,
             String pickAndPack)?
         fetch,
-    TResult Function(String searchKey)? updateSearchKey,
     TResult Function()? reset,
     required TResult orElse(),
   }) {
@@ -815,7 +623,6 @@ class _$_Reset implements _Reset {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
-    required TResult Function(_UpdateSearchKey value) updateSearchKey,
     required TResult Function(_Reset value) reset,
   }) {
     return reset(this);
@@ -826,7 +633,6 @@ class _$_Reset implements _Reset {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_UpdateSearchKey value)? updateSearchKey,
     TResult? Function(_Reset value)? reset,
   }) {
     return reset?.call(this);
@@ -837,7 +643,6 @@ class _$_Reset implements _Reset {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
-    TResult Function(_UpdateSearchKey value)? updateSearchKey,
     TResult Function(_Reset value)? reset,
     required TResult orElse(),
   }) {

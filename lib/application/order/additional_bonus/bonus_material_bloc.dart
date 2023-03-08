@@ -38,6 +38,7 @@ class BonusMaterialBloc extends Bloc<BonusMaterialEvent, BonusMaterialState> {
             failureOrSuccessOption: none(),
             isFetching: true,
             isStarting: false,
+            searchKey: SearchKey(e.searchKey),
           ),
         );
 
@@ -65,16 +66,10 @@ class BonusMaterialBloc extends Bloc<BonusMaterialEvent, BonusMaterialState> {
                 failureOrSuccessOption: none(),
                 bonus: bonus,
                 isFetching: false,
+                searchKey: SearchKey(e.searchKey),
               ),
             );
           },
-        );
-      },
-      updateSearchKey: (_UpdateSearchKey e) {
-        emit(
-          state.copyWith(
-            searchKey: SearchKey.search(e.searchKey),
-          ),
         );
       },
       reset: (_Reset value) {

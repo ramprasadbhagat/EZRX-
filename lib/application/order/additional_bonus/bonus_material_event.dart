@@ -13,8 +13,5 @@ class BonusMaterialEvent with _$BonusMaterialEvent {
     required String pickAndPack,
   }) = _Fetch;
 
-  const factory BonusMaterialEvent.updateSearchKey({
-    required String searchKey,
-  }) = _UpdateSearchKey;
   const factory BonusMaterialEvent.reset() = _Reset;
 }

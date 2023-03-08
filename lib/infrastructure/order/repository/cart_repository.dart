@@ -267,7 +267,7 @@ class CartRepository implements ICartRepository {
       }
 
       final newBonusWithStock = newBonus.copyWith(
-        inStock: stockInfo.inStock.getOrCrash(),
+        inStock: stockInfo.inStock.getOrDefaultValue(''),
       );
 
       final inCartItem = cartStorage.get(id: item.id)?.toDomain;

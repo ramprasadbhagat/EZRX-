@@ -247,28 +247,6 @@ when(() => userBlocMock.state).thenReturn(UserState.initial());
       expect(bonusItemList, findsOneWidget);
     });
 
-    testWidgets('Test have bonus item list fetch failed.', (tester) async {
-      final expectedStates = <BonusMaterialState>[
-        BonusMaterialState.initial().copyWith(
-          isFetching: true,
-          isStarting: false,
-        ),
-        BonusMaterialState.initial().copyWith(
-          failureOrSuccessOption: optionOf(const Left(ApiFailure.other('Fake-error'))),
-          isFetching: false,
-          isStarting: false,
-        ),
-      ];
-
-      whenListen(bonusMaterialBloc, Stream.fromIterable(expectedStates));
-
-      await tester.pumpWidget(getWidget());
-      await tester.pumpAndSettle(const Duration(seconds: 3));
-      const snackBarText = 'Fake-error';
-      final snackBar = find.text(snackBarText);
-
-      expect(snackBar, findsOneWidget);
-    });
 
     testWidgets('Test have bonus item list fetched when search text is initially valid.', (tester) async {
       when(() => bonusMaterialBloc.state).thenReturn(BonusMaterialState.initial().copyWith(
@@ -286,7 +264,7 @@ when(() => userBlocMock.state).thenReturn(UserState.initial());
       final cartPage = find.byKey(const Key('addBonus'));
       expect(cartPage, findsOneWidget);
       // await tester.pump();
-      final addBonusTextField = find.byKey(const Key('addBonusTextField'));
+      final addBonusTextField = find.byKey(const Key('addBonusTextField000'));
       expect(addBonusTextField, findsOneWidget);
       final bonusItemList = find.byKey(const Key('bonusItemList'));
       expect(bonusItemList, findsOneWidget);
@@ -318,7 +296,7 @@ when(() => userBlocMock.state).thenReturn(UserState.initial());
       final cartPage = find.byKey(const Key('addBonus'));
       expect(cartPage, findsOneWidget);
       // await tester.pump();
-      final addBonusTextField = find.byKey(const Key('addBonusTextField'));
+      final addBonusTextField = find.byKey(const Key('addBonusTextField000'));
       expect(addBonusTextField, findsOneWidget);
       final bonusItemList = find.byKey(const Key('bonusItemList'));
       expect(bonusItemList, findsOneWidget);
@@ -365,7 +343,8 @@ when(() => userBlocMock.state).thenReturn(UserState.initial());
 
       await tester.pumpWidget(getWidget());
       await tester.pump();
-      final addBonusSearchField = find.byKey(const Key('addBonusTextField'));
+      final addBonusSearchField =
+          find.byKey(const Key('addBonusTextFieldtest'));
       final addBonusSearchFieldWidget =
           tester.widget<TextFormField>(addBonusSearchField);
       expect(addBonusSearchFieldWidget.controller?.text ?? '', 'test');
@@ -472,7 +451,8 @@ when(() => userBlocMock.state).thenReturn(UserState.initial());
       whenListen(bonusMaterialBloc,
           Stream.fromIterable(expectedCustomerCodeListStates));
       await tester.pumpWidget(getWidget());
-      final addBonusSearchField = find.byKey(const Key('addBonusTextField'));
+      await tester.pump();
+      final addBonusSearchField = find.byKey(const Key('addBonusTextFieldTest'));
       await tester.tap(addBonusSearchField);
       await tester.sendKeyDownEvent(LogicalKeyboardKey.enter);
       await tester.testTextInput.receiveAction(TextInputAction.done);
@@ -480,7 +460,7 @@ when(() => userBlocMock.state).thenReturn(UserState.initial());
       final addBonusSearchFieldWidget =
           tester.widget<TextFormField>(addBonusSearchField);
       await tester.pump();
-      expect(addBonusSearchFieldWidget.controller?.text ?? '', '');
+      expect(addBonusSearchFieldWidget.controller?.text ?? '', 'Test');
     });
 
     testWidgets('Test add bonus search fail With unKnownError', (tester) async {
@@ -499,7 +479,8 @@ when(() => userBlocMock.state).thenReturn(UserState.initial());
       whenListen(bonusMaterialBloc,
           Stream.fromIterable(expectedCustomerCodeListStates));
       await tester.pumpWidget(getWidget());
-      final addBonusSearchField = find.byKey(const Key('addBonusTextField'));
+      await tester.pump();
+      final addBonusSearchField = find.byKey(const Key('addBonusTextFieldTest'));
       await tester.tap(addBonusSearchField);
       await tester.sendKeyDownEvent(LogicalKeyboardKey.enter);
       await tester.testTextInput.receiveAction(TextInputAction.done);
@@ -507,7 +488,7 @@ when(() => userBlocMock.state).thenReturn(UserState.initial());
       final addBonusSearchFieldWidget =
           tester.widget<TextFormField>(addBonusSearchField);
       await tester.pump();
-      expect(addBonusSearchFieldWidget.controller?.text ?? '', '');
+      expect(addBonusSearchFieldWidget.controller?.text ?? '', 'Test');
     });
 
   });
