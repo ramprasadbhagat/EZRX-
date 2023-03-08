@@ -30,6 +30,14 @@ class OrderActionButton extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
+        OutlinedButton(
+          key: const Key('onDeletePressed'),
+          onPressed: onDeletePressed,
+          child: const Text(
+            'Delete',
+            style: TextStyle(color: ZPColors.primary),
+          ).tr(),
+        ),
         if (userCanCreateOrder)
           ElevatedButton(
             key: const Key('onAddToCartPressed'),
@@ -41,14 +49,6 @@ class OrderActionButton extends StatelessWidget {
                   ),
             child: const Text('Add to Cart').tr(),
           ),
-        OutlinedButton(
-          key: const Key('onDeletePressed'),
-          onPressed: onDeletePressed,
-          child: const Text(
-            'Delete',
-            style: TextStyle(color: ZPColors.primary),
-          ).tr(),
-        ),
       ],
     );
   }

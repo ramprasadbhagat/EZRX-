@@ -21,19 +21,23 @@ class OrderInvalidWarning extends StatelessWidget {
     if (isInvalidOrder) {
       return Padding(
         key: const Key('invalidOrderWarning'),
-        padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+        padding: const EdgeInsets.all(8.0),
         child: Row(
           children: [
             const Icon(
-              Icons.warning_amber,
-              color: ZPColors.tender,
+              Icons.info_outline_rounded,
+              color: ZPColors.darkerGreen,
+              size: 18,
             ),
-            const SizedBox(width: 15),
+            const SizedBox(
+              width: 8,
+            ),
             Expanded(
               child: Text(
-                'All materials are invalid and can not be added to cart!'.tr(),
-                style: Theme.of(context).textTheme.titleSmall?.apply(
-                      color: ZPColors.tender,
+                'All Material Items are invalid and cannot be added to cart.'
+                    .tr(),
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                      fontSize: 12,
                       fontStyle: FontStyle.italic,
                     ),
               ),

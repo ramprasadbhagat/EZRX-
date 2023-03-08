@@ -203,11 +203,13 @@ class OrderBundleItem extends StatelessWidget {
                                 ),
                                 child: Text(
                                   'Invalid'.tr(),
-                                  style: const TextStyle(
-                                    color: ZPColors.primary,
-                                    fontSize: 14.0,
-                                    fontWeight: FontWeight.w600,
-                                  ),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleSmall
+                                      ?.copyWith(
+                                        fontWeight: FontWeight.w600,
+                                        color: ZPColors.primary,
+                                      ),
                                 ),
                               );
                             }

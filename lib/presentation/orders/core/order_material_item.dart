@@ -129,10 +129,13 @@ class OrderMaterialItem extends StatelessWidget {
                           ),
                           child: Text(
                             'Invalid'.tr(),
-                            style:
-                                Theme.of(context).textTheme.titleSmall?.apply(
-                                      color: ZPColors.primary,
-                                    ),
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleSmall
+                                ?.copyWith(
+                                  fontWeight: FontWeight.w600,
+                                  color: ZPColors.primary,
+                                ),
                           ),
                         );
                       }
