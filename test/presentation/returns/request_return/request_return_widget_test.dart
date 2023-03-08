@@ -17,8 +17,8 @@ import 'package:ezrxmobile/domain/returns/entities/return_request.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/request_return_local.dart';
 import 'package:ezrxmobile/presentation/core/filter_icon.dart';
-import 'package:ezrxmobile/presentation/returns/request_return.dart';
-import 'package:ezrxmobile/presentation/returns/request_return_filter_drawer.dart';
+import 'package:ezrxmobile/presentation/returns/request_return/request_return.dart';
+import 'package:ezrxmobile/presentation/returns/request_return/request_return_filter_drawer.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,7 +26,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../utils/widget_utils.dart';
+import '../../../utils/widget_utils.dart';
 
 class RequestReturnMockBloc
     extends MockBloc<RequestReturnEvent, RequestReturnState>

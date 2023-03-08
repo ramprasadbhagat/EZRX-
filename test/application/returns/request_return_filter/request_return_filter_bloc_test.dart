@@ -119,63 +119,13 @@ void main() {
       );
 
       blocTest<RequestReturnFilterBloc, RequestReturnFilterState>(
-        'setInvoiceToDate',
-        build: (() => RequestReturnFilterBloc()),
-        act: (bloc) => bloc.add(
-          RequestReturnFilterEvent.setInvoiceToDate(
-            toInvoiceDate: DateTimeStringValue(
-              getDateStringByDateTime(toInvoiceDate),
-            ),
-          ),
-        ),
-        expect: () => [
-          RequestReturnFilterState.initial().copyWith(
-            requestReturnFilter: RequestReturnFilter.empty().copyWith(
-              toInvoiceDate: DateTimeStringValue(
-                getDateStringByDateTime(toInvoiceDate),
-              ),
-            ),
-          ),
-        ],
-      );
-
-      blocTest<RequestReturnFilterBloc, RequestReturnFilterState>(
-        'setInvoicefromDate',
-        build: (() => RequestReturnFilterBloc()),
-        act: (bloc) => bloc.add(
-          RequestReturnFilterEvent.setInvoicefromDate(
-            fromInvoiceDate: DateTimeStringValue(
-              getDateStringByDateTime(fromInvoiceDate),
-            ),
-          ),
-        ),
-        expect: () => [
-          RequestReturnFilterState.initial().copyWith(
-            requestReturnFilter: RequestReturnFilter.empty().copyWith(
-              fromInvoiceDate: DateTimeStringValue(
-                getDateStringByDateTime(fromInvoiceDate),
-              ),
-            ),
-          ),
-        ],
-      );
-
-      blocTest<RequestReturnFilterBloc, RequestReturnFilterState>(
         'Date Filter',
         build: (() => RequestReturnFilterBloc()),
         act: (bloc) => bloc
           ..add(
-            RequestReturnFilterEvent.setInvoicefromDate(
-              fromInvoiceDate: DateTimeStringValue(
-                getDateStringByDateTime(fromInvoiceDate),
-              ),
-            ),
-          )
-          ..add(
-            RequestReturnFilterEvent.setInvoiceToDate(
-              toInvoiceDate: DateTimeStringValue(
-                getDateStringByDateTime(toInvoiceDate),
-              ),
+            RequestReturnFilterEvent.setInvoiceDate(
+              invoiceDateRange:
+                  DateTimeRange(start: fromInvoiceDate, end: toInvoiceDate),
             ),
           )
           ..add(const RequestReturnFilterEvent.filterRequestReturn()),
@@ -207,16 +157,10 @@ void main() {
         build: (() => RequestReturnFilterBloc()),
         act: (bloc) => bloc
           ..add(
-            RequestReturnFilterEvent.setInvoicefromDate(
-              fromInvoiceDate: DateTimeStringValue(
-                getDateStringByDateTime(toInvoiceDate),
-              ),
-            ),
-          )
-          ..add(
-            RequestReturnFilterEvent.setInvoiceToDate(
-              toInvoiceDate: DateTimeStringValue(
-                getDateStringByDateTime(toInvoiceDate),
+            RequestReturnFilterEvent.setInvoiceDate(
+              invoiceDateRange: DateTimeRange(
+                start: toInvoiceDate,
+                end: toInvoiceDate,
               ),
             ),
           )

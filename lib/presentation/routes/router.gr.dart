@@ -61,7 +61,7 @@ import '../returns/add_edit_user_restrictions.dart' as _i32;
 import '../returns/approver_actions/approver_actions.dart' as _i7;
 import '../returns/policy_configuration/add_policy_configuration.dart' as _i11;
 import '../returns/policy_configuration/policy_configuration.dart' as _i10;
-import '../returns/request_return.dart' as _i6;
+import '../returns/request_return/request_return.dart' as _i6;
 import '../returns/return_summary/return_summary.dart' as _i8;
 import '../returns/returns_overview.dart' as _i5;
 import '../returns/user_restriction_list.dart' as _i9;

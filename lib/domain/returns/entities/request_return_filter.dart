@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'request_return_filter.freezed.dart';
@@ -33,15 +34,26 @@ class RequestReturnFilter with _$RequestReturnFilter {
         ),
       );
 
-  int get appliedFilterCount {
-    var count = fromInvoiceDate != null && toInvoiceDate != null ? 1 : 0;
+  bool get areFiltersValid =>
+      assignmentNumber.isValid() &&
+      batch.isValid() &&
+      principalSearch.isValid() &&
+      materialDescription.isValid() &&
+      materialNumber.isValid();
 
-    count += assignmentNumber.countWhenValid +
-        batch.countWhenValid +
-        materialNumber.countWhenValid +
-        principalSearch.countWhenValid +
-        materialDescription.countWhenValid;
+  int get appliedFilterCount =>
+      assignmentNumber.countWhenValid +
+      batch.countWhenValid +
+      materialNumber.countWhenValid +
+      principalSearch.countWhenValid +
+      materialDescription.countWhenValid +
+      1;
 
-    return count;
-  }
+  String get getInvoiceDateFiltered =>
+      '${fromInvoiceDate.toValidDateString}  to ${toInvoiceDate.toValidDateString} ';
+
+  DateTimeRange get getInvoiceFilterDateRange => DateTimeRange(
+        start: fromInvoiceDate.dateTimeByDateString,
+        end: toInvoiceDate.dateTimeByDateString,
+      );
 }

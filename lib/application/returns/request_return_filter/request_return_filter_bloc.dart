@@ -1,5 +1,7 @@
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/returns/entities/request_return_filter.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -23,15 +25,7 @@ class RequestReturnFilterBloc
         emit(state.copyWith(
           isSubmitting: false,
         ));
-        if (state.requestReturnFilter.assignmentNumber.isValid() &&
-            state.requestReturnFilter.batch.isValid() &&
-            state.requestReturnFilter.principalSearch.isValid() &&
-            state.requestReturnFilter.materialDescription.isValid() &&
-            state.requestReturnFilter.materialNumber.isValid() &&
-            _doDateValidation(
-              state.requestReturnFilter.fromInvoiceDate.dateTimeByDateString,
-              state.requestReturnFilter.toInvoiceDate.dateTimeByDateString,
-            )) {
+        if (state.requestReturnFilter.areFiltersValid) {
           emit(state.copyWith(
             isSubmitting: true,
           ));
@@ -83,39 +77,19 @@ class RequestReturnFilterBloc
           showErrorMessages: false,
         ),
       ),
-      setInvoiceToDate: (value) => emit(
+      setInvoiceDate: (e) => emit(
         state.copyWith(
           requestReturnFilter: state.requestReturnFilter.copyWith(
-            toInvoiceDate: value.toInvoiceDate,
-          ),
-          showErrorMessages: false,
-        ),
-      ),
-      setInvoicefromDate: (value) => emit(
-        state.copyWith(
-          requestReturnFilter: state.requestReturnFilter.copyWith(
-            fromInvoiceDate: value.fromInvoiceDate,
+            fromInvoiceDate: DateTimeStringValue(
+              getDateStringByDateTime(e.invoiceDateRange.start),
+            ),
+            toInvoiceDate: DateTimeStringValue(
+              getDateStringByDateTime(e.invoiceDateRange.end),
+            ),
           ),
           showErrorMessages: false,
         ),
       ),
     );
-  }
-
-  bool _doDateValidation(DateTime? fromDate, DateTime? toDate) {
-    if (fromDate == null && toDate == null) return true;
-    if ((fromDate == null && toDate != null) ||
-        (fromDate != null && toDate == null)) return false;
-
-    return (toDate != null &&
-            toDate.isBefore(DateTime.now().add(const Duration(
-              days: 1,
-            ))))
-        ? (fromDate != null &&
-                (fromDate.isBefore(toDate) ||
-                    fromDate.isAtSameMomentAs(toDate)))
-            ? true
-            : false
-        : false;
   }
 }

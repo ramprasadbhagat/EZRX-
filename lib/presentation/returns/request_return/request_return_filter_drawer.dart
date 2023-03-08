@@ -1,100 +1,79 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/returns/request_return_filter/request_return_filter_bloc.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class RequestReturnFilterDrawer extends StatelessWidget {
   const RequestReturnFilterDrawer({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Drawer(
+      key: const Key('requestReturnFilter'),
       width: MediaQuery.of(context).size.width * 0.8,
-      child: Drawer(
-        key: const Key('requestReturnFilter'),
-        child: BlocConsumer<RequestReturnFilterBloc, RequestReturnFilterState>(
-          listenWhen: (previous, current) =>
-              previous.isSubmitting != current.isSubmitting,
-          listener: (context, state) {
-            if (state.isSubmitting) {
-              context.router.popForced();
-            }
-          },
-          buildWhen: (previous, current) => previous != current,
-          builder: (context, state) {
-            return Form(
-              autovalidateMode: state.showErrorMessages
-                  ? AutovalidateMode.always
-                  : AutovalidateMode.disabled,
-              child: Column(
-                children: [
-                  const _FilterHeader(),
-                  Expanded(
-                    child: ListView(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 15,
-                        vertical: 30,
-                      ),
-                      children: <Widget>[
-                        const _AssignmentNumberByFilter(),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                        const _BatchNumberFilter(),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                        const _MaterialDescriptionSearchByFilter(),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                        const _MaterialNumberSearchByFilter(),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                        const _PrincipalSearchByFilter(),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                        Row(
-                          children: [
-                            const _InvoiceFromDateByFilter(),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 20),
-                              child: Text(
-                                'to',
-                                style: Theme.of(context).textTheme.titleSmall,
-                              ),
-                            ),
-                            const _InvoiceToDateByFilter(),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: const [
-                            _ClearButton(),
-                            SizedBox(
-                              width: 30,
-                            ),
-                            _ApplyButton(),
-                          ],
-                        ),
-                      ],
+      child: BlocConsumer<RequestReturnFilterBloc, RequestReturnFilterState>(
+        listenWhen: (previous, current) =>
+            previous.isSubmitting != current.isSubmitting,
+        listener: (context, state) {
+          if (state.isSubmitting) {
+            context.router.popForced();
+          }
+        },
+        buildWhen: (previous, current) => previous != current,
+        builder: (context, state) {
+          return Form(
+            autovalidateMode: state.showErrorMessages
+                ? AutovalidateMode.always
+                : AutovalidateMode.disabled,
+            child: Column(
+              children: <Widget>[
+                const _FilterHeader(),
+                Expanded(
+                  child: ListView(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 15,
+                      vertical: 30,
                     ),
+                    children: [
+                      const _AssignmentNumberByFilter(),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      const _BatchNumberFilter(),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      const _MaterialDescriptionSearchByFilter(),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      const _MaterialNumberSearchByFilter(),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      const _PrincipalSearchByFilter(),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      _InvoiceDateFilter(),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: const [
+                          _ClearButton(),
+                          _ApplyButton(),
+                        ],
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            );
-          },
-        ),
+                ),
+              ],
+            ),
+          );
+        },
       ),
     );
   }
@@ -308,158 +287,39 @@ class _PrincipalSearchByFilter extends StatelessWidget {
   }
 }
 
-class _InvoiceFromDateByFilter extends StatefulWidget {
-  const _InvoiceFromDateByFilter({Key? key}) : super(key: key);
-  @override
-  State<_InvoiceFromDateByFilter> createState() =>
-      __InvoiceFromDateByFilterState();
-}
-
-class __InvoiceFromDateByFilterState extends State<_InvoiceFromDateByFilter> {
-  late TextEditingController txtfromDateController;
-  late RequestReturnFilterBloc requestReturnFilterBloc;
-
-  @override
-  void initState() {
-    txtfromDateController = TextEditingController();
-    requestReturnFilterBloc = context.read<RequestReturnFilterBloc>();
-    txtfromDateController.text = requestReturnFilterBloc
-        .state.requestReturnFilter.fromInvoiceDate.toValidDateString;
-
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    txtfromDateController.dispose();
-
-    super.dispose();
-  }
-
+class _InvoiceDateFilter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocListener<RequestReturnFilterBloc, RequestReturnFilterState>(
-      listenWhen: (previous, current) =>
-          previous.requestReturnFilter.fromInvoiceDate !=
-              current.requestReturnFilter.fromInvoiceDate ||
-          previous.requestReturnFilter.toInvoiceDate !=
-              current.requestReturnFilter.toInvoiceDate,
-      listener: (context, state) {
-        txtfromDateController.text =
-            state.requestReturnFilter.fromInvoiceDate.toValidDateString;
-      },
-      child: Expanded(
-        child: TextFormField(
-          key: const Key('filteInvoiceFromdateField'),
+    return BlocBuilder<RequestReturnFilterBloc, RequestReturnFilterState>(
+      key: const Key('invoiceDateRange'),
+      buildWhen: (previous, current) =>
+          previous.requestReturnFilter.getInvoiceDateFiltered !=
+          current.requestReturnFilter.getInvoiceDateFiltered,
+      builder: (context, state) {
+        return TextFormField(
+          key: UniqueKey(),
           onTap: () async {
-            final state = context.read<RequestReturnFilterBloc>().state;
-            final fromDateTime =
-                state.requestReturnFilter.fromInvoiceDate.dateTimeByDateString;
-            final toDateTime =
-                state.requestReturnFilter.toInvoiceDate.dateTimeByDateString;
-            final orderDate = await showPlatformDatePicker(
+            final requestReturnFilterBloc =
+                context.read<RequestReturnFilterBloc>();
+
+            final invoiceDateRange = await showDateRangePicker(
               context: context,
-              initialDate: fromDateTime,
-              firstDate: fromDateTime.subtract(const Duration(days: 1460)),
-              lastDate: toDateTime,
-            );
-            requestReturnFilterBloc.add(
-              RequestReturnFilterEvent.setInvoicefromDate(
-                fromInvoiceDate: DateTimeStringValue(
-                  getDateStringByDateTime(orderDate!),
-                ),
-              ),
-            );
-          },
-          readOnly: true,
-          controller: txtfromDateController,
-          decoration: InputDecoration(
-            contentPadding: const EdgeInsets.symmetric(horizontal: 8),
-            labelText: 'Invoice From Date'.tr(),
-            suffixIcon: const Padding(
-              padding: EdgeInsets.only(right: 8.0),
-              child: Icon(
-                Icons.calendar_month,
-                size: 20,
-              ),
-            ),
-            suffixIconConstraints: const BoxConstraints(maxWidth: 25),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _InvoiceToDateByFilter extends StatefulWidget {
-  const _InvoiceToDateByFilter({Key? key}) : super(key: key);
-  @override
-  State<_InvoiceToDateByFilter> createState() => __InvoiceToDateByFilterState();
-}
-
-class __InvoiceToDateByFilterState extends State<_InvoiceToDateByFilter> {
-  late TextEditingController txttoDateController;
-  late RequestReturnFilterBloc requestReturnFilterBloc;
-  @override
-  void initState() {
-    txttoDateController = TextEditingController();
-    requestReturnFilterBloc = context.read<RequestReturnFilterBloc>();
-    txttoDateController.text = requestReturnFilterBloc
-        .state.requestReturnFilter.toInvoiceDate.toValidDateString;
-
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    txttoDateController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocListener<RequestReturnFilterBloc, RequestReturnFilterState>(
-      listenWhen: (previous, current) =>
-          previous.requestReturnFilter.toInvoiceDate !=
-              current.requestReturnFilter.toInvoiceDate ||
-          previous.requestReturnFilter.fromInvoiceDate !=
-              current.requestReturnFilter.fromInvoiceDate,
-      listener: (
-        context,
-        state,
-      ) {
-        txttoDateController.text =
-            state.requestReturnFilter.toInvoiceDate.toValidDateString;
-      },
-      child: Expanded(
-        child: TextFormField(
-          key: const Key('filterInvoiceTodateField'),
-          onTap: () async {
-            final state = context.read<RequestReturnFilterBloc>().state;
-            final toExpiryDate =
-                state.requestReturnFilter.toInvoiceDate.dateTimeByDateString;
-            final fromExpiryDate =
-                state.requestReturnFilter.fromInvoiceDate.dateTimeByDateString;
-            final orderDate = await showPlatformDatePicker(
-              context: context,
-              initialDate: toExpiryDate,
-              firstDate: fromExpiryDate,
+              firstDate: DateTime.now().subtract(const Duration(days: 365)),
               lastDate: DateTime.now(),
+              initialDateRange:
+                  state.requestReturnFilter.getInvoiceFilterDateRange,
             );
-
+            if (invoiceDateRange == null) return;
             requestReturnFilterBloc.add(
-              RequestReturnFilterEvent.setInvoiceToDate(
-                toInvoiceDate: DateTimeStringValue(
-                  getDateStringByDateTime(orderDate!),
-                ),
+              RequestReturnFilterEvent.setInvoiceDate(
+                invoiceDateRange: invoiceDateRange,
               ),
             );
           },
           readOnly: true,
-          controller: txttoDateController,
+          initialValue: state.requestReturnFilter.getInvoiceDateFiltered,
           decoration: InputDecoration(
-            contentPadding: const EdgeInsets.symmetric(horizontal: 8),
-            labelText: 'Invoice To Date'.tr(),
+            labelText: 'Invoice Date'.tr(),
             suffixIcon: const Padding(
               padding: EdgeInsets.only(right: 8.0),
               child: Icon(
@@ -469,8 +329,8 @@ class __InvoiceToDateByFilterState extends State<_InvoiceToDateByFilter> {
             ),
             suffixIconConstraints: const BoxConstraints(maxWidth: 25),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }

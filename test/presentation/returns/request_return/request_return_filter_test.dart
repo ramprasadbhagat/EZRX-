@@ -2,7 +2,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/returns/request_return/request_return_bloc.dart';
 import 'package:ezrxmobile/application/returns/request_return_filter/request_return_filter_bloc.dart';
 import 'package:ezrxmobile/domain/returns/entities/request_return_filter.dart';
-import 'package:ezrxmobile/presentation/returns/request_return_filter_drawer.dart';
+import 'package:ezrxmobile/presentation/returns/request_return/request_return_filter_drawer.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,7 +10,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../utils/widget_utils.dart';
+import '../../../utils/widget_utils.dart';
 
 class RequestReturnFilterMockBloc
     extends MockBloc<RequestReturnFilterEvent, RequestReturnFilterState>
@@ -88,10 +88,7 @@ void main() {
             find.byKey(const Key('filterMaterialDescriptionField'));
         final filterPrincipalSearchField =
             find.byKey(const Key('filterPrincipalSearchField'));
-        final filteInvoiceFromdateField =
-            find.byKey(const Key('filteInvoiceFromdateField'));
-        final filterInvoiceTodateField =
-            find.byKey(const Key('filterInvoiceTodateField'));
+        final filteInvoicedateField = find.byKey(const Key('invoiceDateRange'));
         final filterclearButton = find.byKey(const Key('filterClearButton'));
         final filterapplyButton = find.byKey(const Key('filterApplyButton'));
         final filtercrossButton = find.byKey(const Key('filterCrossButton'));
@@ -101,8 +98,7 @@ void main() {
         expect(filterMaterialNumberSearchField, findsOneWidget);
         expect(filterMaterialDescriptionField, findsOneWidget);
         expect(filterPrincipalSearchField, findsOneWidget);
-        expect(filteInvoiceFromdateField, findsOneWidget);
-        expect(filterInvoiceTodateField, findsOneWidget);
+        expect(filteInvoicedateField, findsOneWidget);
         expect(filterclearButton, findsOneWidget);
         expect(filterapplyButton, findsOneWidget);
         expect(filtercrossButton, findsOneWidget);
@@ -283,35 +279,18 @@ void main() {
         );
         await tester.pumpWidget(getWUT());
         await tester.pump();
-        final fromdateField =
-            find.byKey(const Key('filteInvoiceFromdateField'));
-        expect(fromdateField, findsOneWidget);
-        await tester.tap(fromdateField);
+        final invoiceDateRange = find.byKey(const Key('invoiceDateRange'));
+        expect(invoiceDateRange, findsOneWidget);
+        await tester.tap(invoiceDateRange);
         await tester.pumpAndSettle(const Duration(seconds: 2));
-        expect(find.byType(DatePickerDialog), findsOneWidget);
+        expect(find.byType(DateRangePickerDialog), findsOneWidget);
 
-        final okButton = find.text('OK');
-        await tester.tap(okButton);
+        final startDate = find.text('1').at(0);
+        await tester.tap(startDate);
         await tester.pump();
-      });
-
-      testWidgets('fill invoiceToDate', (tester) async {
-        when(() => mockRequestReturnFilterBloc.state).thenReturn(
-          RequestReturnFilterState.initial()
-              .copyWith(requestReturnFilter: mockRequestReturnFilter),
-        );
-        await tester.pumpWidget(getWUT());
+        final endDate = find.text('10').at(0);
+        await tester.tap(endDate);
         await tester.pump();
-        final fromdateField = find.byKey(const Key('filterInvoiceTodateField'));
-        expect(fromdateField, findsOneWidget);
-        await tester.tap(fromdateField);
-        await tester.pump();
-        expect(find.byType(DatePickerDialog), findsOneWidget);
-
-        final okButton = find.text('OK');
-        expect(okButton, findsOneWidget);
-        // await tester.tap(okButton);
-        // await tester.pump();
       });
 
       testWidgets('Click on close button', (tester) async {

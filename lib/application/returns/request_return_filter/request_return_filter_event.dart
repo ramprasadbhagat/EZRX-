@@ -7,13 +7,9 @@ class RequestReturnFilterEvent with _$RequestReturnFilterEvent {
   const factory RequestReturnFilterEvent.filterRequestReturn() =
       _FilterRequestReturn;
 
-  const factory RequestReturnFilterEvent.setInvoicefromDate({
-    required DateTimeStringValue fromInvoiceDate,
-  }) = _SetExpiryfromDate;
-
-  const factory RequestReturnFilterEvent.setInvoiceToDate({
-    required DateTimeStringValue toInvoiceDate,
-  }) = _SetExpiryToDate;
+  const factory RequestReturnFilterEvent.setInvoiceDate({
+    required DateTimeRange invoiceDateRange,
+  }) = _setInvoiceDate;
 
   const factory RequestReturnFilterEvent.assignmentNumberChanged(
     String assignmentNumber,

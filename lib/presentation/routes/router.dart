@@ -31,7 +31,7 @@ import 'package:ezrxmobile/presentation/returns/add_edit_user_restrictions.dart'
 import 'package:ezrxmobile/presentation/returns/policy_configuration/add_policy_configuration.dart';
 import 'package:ezrxmobile/presentation/returns/approver_actions/approver_actions.dart';
 import 'package:ezrxmobile/presentation/returns/policy_configuration/policy_configuration.dart';
-import 'package:ezrxmobile/presentation/returns/request_return.dart';
+import 'package:ezrxmobile/presentation/returns/request_return/request_return.dart';
 import 'package:ezrxmobile/presentation/returns/return_summary/return_summary.dart';
 import 'package:ezrxmobile/presentation/returns/returns_overview.dart';
 import 'package:ezrxmobile/presentation/returns/user_restriction_list.dart';
@@ -90,7 +90,10 @@ import 'package:ezrxmobile/presentation/orders/create_order/scan_material_info.d
     AutoRoute(path: 'saved_order_detail', page: SavedOrderDetailPage),
     AutoRoute(path: 'history_details', page: HistoryDetails),
     AutoRoute(path: 'add_bonus', page: BonusAddPage),
-    AutoRoute(path: 'add_edit_user_restriction', page: AddEditUserRestrictionPage),
+    AutoRoute(
+      path: 'add_edit_user_restriction',
+      page: AddEditUserRestrictionPage,
+    ),
     AutoRoute(path: 'scan_material_info', page: ScanMaterialInfo),
     CustomRoute(
       path: 'bundle_item_detail',
