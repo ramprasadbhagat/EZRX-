@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'combo_deal_qty_tier.freezed.dart';
@@ -7,9 +8,16 @@ class ComboDealQtyTier with _$ComboDealQtyTier {
   const ComboDealQtyTier._();
 
   const factory ComboDealQtyTier({
-    required String rate,
+    required double rate,
     required String conditionNumber,
-    required String minQty,
-    required String type,
+    required int minQty,
+    required DiscountType type,
   }) = _ComboDealQtyTier;
+
+  factory ComboDealQtyTier.empty() => ComboDealQtyTier(
+        rate: 0,
+        conditionNumber: '',
+        minQty: 0,
+        type: DiscountType(''),
+      );
 }

@@ -49,14 +49,21 @@ class _ComboDealDetailPageState extends State<ComboDealDetailPage> {
     priceComboDeal = widget.comboItems.isEmpty
         ? PriceComboDeal.empty()
         : widget.comboItems.first.price.comboDeal;
-    context.read<ComboDealDetailBloc>().add(
-          ComboDealDetailEvent.initMaterialItems(
-            items: widget.comboItems,
-            requireFetchInfo: !widget.isEdit,
-          ),
-        );
+
+    widget.isEdit
+        ? context.read<ComboDealDetailBloc>().add(
+              ComboDealDetailEvent.initFromCartComboDealItems(
+                salesConfigs: eligibilityBloc.state.salesOrgConfigs,
+                items: widget.comboItems,
+              ),
+            )
+        : context.read<ComboDealDetailBloc>().add(
+              ComboDealDetailEvent.initComboDealItems(
+                salesConfigs: eligibilityBloc.state.salesOrgConfigs,
+                items: widget.comboItems,
+              ),
+            );
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (widget.isEdit) return;
       context.read<MaterialPriceDetailBloc>().add(
             MaterialPriceDetailEvent.comboDealFetch(
               user: eligibilityBloc.state.user,
@@ -67,13 +74,15 @@ class _ComboDealDetailPageState extends State<ComboDealDetailPage> {
               materialInfoList: priceComboDeal.category.comboMaterialNumbers,
             ),
           );
-      context.read<ComboDealListBloc>().add(
-            ComboDealListEvent.fetch(
-              customerCodeInfo: eligibilityBloc.state.customerCodeInfo,
-              salesOrganisation: eligibilityBloc.state.salesOrganisation,
-              comboDeals: priceComboDeal,
-            ),
-          );
+      if (!widget.isEdit) {
+        context.read<ComboDealListBloc>().add(
+              ComboDealListEvent.fetch(
+                customerCodeInfo: eligibilityBloc.state.customerCodeInfo,
+                salesOrganisation: eligibilityBloc.state.salesOrganisation,
+                comboDeals: priceComboDeal,
+              ),
+            );
+      }
     });
   }
 
@@ -134,7 +143,7 @@ class _ComboDealDetailPageState extends State<ComboDealDetailPage> {
                       isSelected:
                           state.selectedItems[item.getMaterialNumber] ?? false,
                     ),
-                    items: state.items.values.toList(),
+                    items: state.sortedItems,
                     emptyMessage: 'Combo bundle is empty'.tr(),
                   );
                 },

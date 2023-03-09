@@ -19,8 +19,12 @@ mixin _$ComboDealDetailEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
-    required TResult Function(List<PriceAggregate> items, bool requireFetchInfo)
-        initMaterialItems,
+    required TResult Function(
+            List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)
+        initComboDealItems,
+    required TResult Function(
+            List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)
+        initFromCartComboDealItems,
     required TResult Function(Map<MaterialNumber, MaterialPriceDetail> priceMap,
             PriceComboDeal comboDeal)
         setPriceInfo,
@@ -32,8 +36,12 @@ mixin _$ComboDealDetailEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialize,
-    TResult? Function(List<PriceAggregate> items, bool requireFetchInfo)?
-        initMaterialItems,
+    TResult? Function(
+            List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)?
+        initComboDealItems,
+    TResult? Function(
+            List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)?
+        initFromCartComboDealItems,
     TResult? Function(Map<MaterialNumber, MaterialPriceDetail> priceMap,
             PriceComboDeal comboDeal)?
         setPriceInfo,
@@ -45,8 +53,12 @@ mixin _$ComboDealDetailEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
-    TResult Function(List<PriceAggregate> items, bool requireFetchInfo)?
-        initMaterialItems,
+    TResult Function(
+            List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)?
+        initComboDealItems,
+    TResult Function(
+            List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)?
+        initFromCartComboDealItems,
     TResult Function(Map<MaterialNumber, MaterialPriceDetail> priceMap,
             PriceComboDeal comboDeal)?
         setPriceInfo,
@@ -59,7 +71,9 @@ mixin _$ComboDealDetailEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
-    required TResult Function(_InitMaterialItems value) initMaterialItems,
+    required TResult Function(_InitComboDealItems value) initComboDealItems,
+    required TResult Function(_InitFromCartComboDealItems value)
+        initFromCartComboDealItems,
     required TResult Function(_SetPriceInfo value) setPriceInfo,
     required TResult Function(_SetComboDealInfo value) setComboDealInfo,
     required TResult Function(_UpdateItemQuantity value) updateItemQuantity,
@@ -69,7 +83,9 @@ mixin _$ComboDealDetailEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
-    TResult? Function(_InitMaterialItems value)? initMaterialItems,
+    TResult? Function(_InitComboDealItems value)? initComboDealItems,
+    TResult? Function(_InitFromCartComboDealItems value)?
+        initFromCartComboDealItems,
     TResult? Function(_SetPriceInfo value)? setPriceInfo,
     TResult? Function(_SetComboDealInfo value)? setComboDealInfo,
     TResult? Function(_UpdateItemQuantity value)? updateItemQuantity,
@@ -79,7 +95,9 @@ mixin _$ComboDealDetailEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
-    TResult Function(_InitMaterialItems value)? initMaterialItems,
+    TResult Function(_InitComboDealItems value)? initComboDealItems,
+    TResult Function(_InitFromCartComboDealItems value)?
+        initFromCartComboDealItems,
     TResult Function(_SetPriceInfo value)? setPriceInfo,
     TResult Function(_SetComboDealInfo value)? setComboDealInfo,
     TResult Function(_UpdateItemQuantity value)? updateItemQuantity,
@@ -147,8 +165,12 @@ class _$_Initialize implements _Initialize {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
-    required TResult Function(List<PriceAggregate> items, bool requireFetchInfo)
-        initMaterialItems,
+    required TResult Function(
+            List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)
+        initComboDealItems,
+    required TResult Function(
+            List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)
+        initFromCartComboDealItems,
     required TResult Function(Map<MaterialNumber, MaterialPriceDetail> priceMap,
             PriceComboDeal comboDeal)
         setPriceInfo,
@@ -163,8 +185,12 @@ class _$_Initialize implements _Initialize {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialize,
-    TResult? Function(List<PriceAggregate> items, bool requireFetchInfo)?
-        initMaterialItems,
+    TResult? Function(
+            List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)?
+        initComboDealItems,
+    TResult? Function(
+            List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)?
+        initFromCartComboDealItems,
     TResult? Function(Map<MaterialNumber, MaterialPriceDetail> priceMap,
             PriceComboDeal comboDeal)?
         setPriceInfo,
@@ -179,8 +205,12 @@ class _$_Initialize implements _Initialize {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
-    TResult Function(List<PriceAggregate> items, bool requireFetchInfo)?
-        initMaterialItems,
+    TResult Function(
+            List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)?
+        initComboDealItems,
+    TResult Function(
+            List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)?
+        initFromCartComboDealItems,
     TResult Function(Map<MaterialNumber, MaterialPriceDetail> priceMap,
             PriceComboDeal comboDeal)?
         setPriceInfo,
@@ -199,7 +229,9 @@ class _$_Initialize implements _Initialize {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
-    required TResult Function(_InitMaterialItems value) initMaterialItems,
+    required TResult Function(_InitComboDealItems value) initComboDealItems,
+    required TResult Function(_InitFromCartComboDealItems value)
+        initFromCartComboDealItems,
     required TResult Function(_SetPriceInfo value) setPriceInfo,
     required TResult Function(_SetComboDealInfo value) setComboDealInfo,
     required TResult Function(_UpdateItemQuantity value) updateItemQuantity,
@@ -212,7 +244,9 @@ class _$_Initialize implements _Initialize {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
-    TResult? Function(_InitMaterialItems value)? initMaterialItems,
+    TResult? Function(_InitComboDealItems value)? initComboDealItems,
+    TResult? Function(_InitFromCartComboDealItems value)?
+        initFromCartComboDealItems,
     TResult? Function(_SetPriceInfo value)? setPriceInfo,
     TResult? Function(_SetComboDealInfo value)? setComboDealInfo,
     TResult? Function(_UpdateItemQuantity value)? updateItemQuantity,
@@ -225,7 +259,9 @@ class _$_Initialize implements _Initialize {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
-    TResult Function(_InitMaterialItems value)? initMaterialItems,
+    TResult Function(_InitComboDealItems value)? initComboDealItems,
+    TResult Function(_InitFromCartComboDealItems value)?
+        initFromCartComboDealItems,
     TResult Function(_SetPriceInfo value)? setPriceInfo,
     TResult Function(_SetComboDealInfo value)? setComboDealInfo,
     TResult Function(_UpdateItemQuantity value)? updateItemQuantity,
@@ -244,47 +280,58 @@ abstract class _Initialize implements ComboDealDetailEvent {
 }
 
 /// @nodoc
-abstract class _$$_InitMaterialItemsCopyWith<$Res> {
-  factory _$$_InitMaterialItemsCopyWith(_$_InitMaterialItems value,
-          $Res Function(_$_InitMaterialItems) then) =
-      __$$_InitMaterialItemsCopyWithImpl<$Res>;
+abstract class _$$_InitComboDealItemsCopyWith<$Res> {
+  factory _$$_InitComboDealItemsCopyWith(_$_InitComboDealItems value,
+          $Res Function(_$_InitComboDealItems) then) =
+      __$$_InitComboDealItemsCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<PriceAggregate> items, bool requireFetchInfo});
+  $Res call(
+      {List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs});
+
+  $SalesOrganisationConfigsCopyWith<$Res> get salesConfigs;
 }
 
 /// @nodoc
-class __$$_InitMaterialItemsCopyWithImpl<$Res>
-    extends _$ComboDealDetailEventCopyWithImpl<$Res, _$_InitMaterialItems>
-    implements _$$_InitMaterialItemsCopyWith<$Res> {
-  __$$_InitMaterialItemsCopyWithImpl(
-      _$_InitMaterialItems _value, $Res Function(_$_InitMaterialItems) _then)
+class __$$_InitComboDealItemsCopyWithImpl<$Res>
+    extends _$ComboDealDetailEventCopyWithImpl<$Res, _$_InitComboDealItems>
+    implements _$$_InitComboDealItemsCopyWith<$Res> {
+  __$$_InitComboDealItemsCopyWithImpl(
+      _$_InitComboDealItems _value, $Res Function(_$_InitComboDealItems) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? items = null,
-    Object? requireFetchInfo = null,
+    Object? salesConfigs = null,
   }) {
-    return _then(_$_InitMaterialItems(
+    return _then(_$_InitComboDealItems(
       items: null == items
           ? _value._items
           : items // ignore: cast_nullable_to_non_nullable
               as List<PriceAggregate>,
-      requireFetchInfo: null == requireFetchInfo
-          ? _value.requireFetchInfo
-          : requireFetchInfo // ignore: cast_nullable_to_non_nullable
-              as bool,
+      salesConfigs: null == salesConfigs
+          ? _value.salesConfigs
+          : salesConfigs // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisationConfigs,
     ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationConfigsCopyWith<$Res> get salesConfigs {
+    return $SalesOrganisationConfigsCopyWith<$Res>(_value.salesConfigs,
+        (value) {
+      return _then(_value.copyWith(salesConfigs: value));
+    });
   }
 }
 
 /// @nodoc
 
-class _$_InitMaterialItems implements _InitMaterialItems {
-  const _$_InitMaterialItems(
-      {required final List<PriceAggregate> items,
-      required this.requireFetchInfo})
+class _$_InitComboDealItems implements _InitComboDealItems {
+  const _$_InitComboDealItems(
+      {required final List<PriceAggregate> items, required this.salesConfigs})
       : _items = items;
 
   final List<PriceAggregate> _items;
@@ -295,40 +342,44 @@ class _$_InitMaterialItems implements _InitMaterialItems {
   }
 
   @override
-  final bool requireFetchInfo;
+  final SalesOrganisationConfigs salesConfigs;
 
   @override
   String toString() {
-    return 'ComboDealDetailEvent.initMaterialItems(items: $items, requireFetchInfo: $requireFetchInfo)';
+    return 'ComboDealDetailEvent.initComboDealItems(items: $items, salesConfigs: $salesConfigs)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_InitMaterialItems &&
+            other is _$_InitComboDealItems &&
             const DeepCollectionEquality().equals(other._items, _items) &&
-            (identical(other.requireFetchInfo, requireFetchInfo) ||
-                other.requireFetchInfo == requireFetchInfo));
+            (identical(other.salesConfigs, salesConfigs) ||
+                other.salesConfigs == salesConfigs));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(_items), requireFetchInfo);
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_items), salesConfigs);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_InitMaterialItemsCopyWith<_$_InitMaterialItems> get copyWith =>
-      __$$_InitMaterialItemsCopyWithImpl<_$_InitMaterialItems>(
+  _$$_InitComboDealItemsCopyWith<_$_InitComboDealItems> get copyWith =>
+      __$$_InitComboDealItemsCopyWithImpl<_$_InitComboDealItems>(
           this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
-    required TResult Function(List<PriceAggregate> items, bool requireFetchInfo)
-        initMaterialItems,
+    required TResult Function(
+            List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)
+        initComboDealItems,
+    required TResult Function(
+            List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)
+        initFromCartComboDealItems,
     required TResult Function(Map<MaterialNumber, MaterialPriceDetail> priceMap,
             PriceComboDeal comboDeal)
         setPriceInfo,
@@ -336,15 +387,19 @@ class _$_InitMaterialItems implements _InitMaterialItems {
     required TResult Function(MaterialNumber item, int qty) updateItemQuantity,
     required TResult Function(MaterialNumber item) updateItemSelection,
   }) {
-    return initMaterialItems(items, requireFetchInfo);
+    return initComboDealItems(items, salesConfigs);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialize,
-    TResult? Function(List<PriceAggregate> items, bool requireFetchInfo)?
-        initMaterialItems,
+    TResult? Function(
+            List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)?
+        initComboDealItems,
+    TResult? Function(
+            List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)?
+        initFromCartComboDealItems,
     TResult? Function(Map<MaterialNumber, MaterialPriceDetail> priceMap,
             PriceComboDeal comboDeal)?
         setPriceInfo,
@@ -352,15 +407,19 @@ class _$_InitMaterialItems implements _InitMaterialItems {
     TResult? Function(MaterialNumber item, int qty)? updateItemQuantity,
     TResult? Function(MaterialNumber item)? updateItemSelection,
   }) {
-    return initMaterialItems?.call(items, requireFetchInfo);
+    return initComboDealItems?.call(items, salesConfigs);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
-    TResult Function(List<PriceAggregate> items, bool requireFetchInfo)?
-        initMaterialItems,
+    TResult Function(
+            List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)?
+        initComboDealItems,
+    TResult Function(
+            List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)?
+        initFromCartComboDealItems,
     TResult Function(Map<MaterialNumber, MaterialPriceDetail> priceMap,
             PriceComboDeal comboDeal)?
         setPriceInfo,
@@ -369,8 +428,8 @@ class _$_InitMaterialItems implements _InitMaterialItems {
     TResult Function(MaterialNumber item)? updateItemSelection,
     required TResult orElse(),
   }) {
-    if (initMaterialItems != null) {
-      return initMaterialItems(items, requireFetchInfo);
+    if (initComboDealItems != null) {
+      return initComboDealItems(items, salesConfigs);
     }
     return orElse();
   }
@@ -379,56 +438,284 @@ class _$_InitMaterialItems implements _InitMaterialItems {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
-    required TResult Function(_InitMaterialItems value) initMaterialItems,
+    required TResult Function(_InitComboDealItems value) initComboDealItems,
+    required TResult Function(_InitFromCartComboDealItems value)
+        initFromCartComboDealItems,
     required TResult Function(_SetPriceInfo value) setPriceInfo,
     required TResult Function(_SetComboDealInfo value) setComboDealInfo,
     required TResult Function(_UpdateItemQuantity value) updateItemQuantity,
     required TResult Function(_UpdateItemSelection value) updateItemSelection,
   }) {
-    return initMaterialItems(this);
+    return initComboDealItems(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
-    TResult? Function(_InitMaterialItems value)? initMaterialItems,
+    TResult? Function(_InitComboDealItems value)? initComboDealItems,
+    TResult? Function(_InitFromCartComboDealItems value)?
+        initFromCartComboDealItems,
     TResult? Function(_SetPriceInfo value)? setPriceInfo,
     TResult? Function(_SetComboDealInfo value)? setComboDealInfo,
     TResult? Function(_UpdateItemQuantity value)? updateItemQuantity,
     TResult? Function(_UpdateItemSelection value)? updateItemSelection,
   }) {
-    return initMaterialItems?.call(this);
+    return initComboDealItems?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
-    TResult Function(_InitMaterialItems value)? initMaterialItems,
+    TResult Function(_InitComboDealItems value)? initComboDealItems,
+    TResult Function(_InitFromCartComboDealItems value)?
+        initFromCartComboDealItems,
     TResult Function(_SetPriceInfo value)? setPriceInfo,
     TResult Function(_SetComboDealInfo value)? setComboDealInfo,
     TResult Function(_UpdateItemQuantity value)? updateItemQuantity,
     TResult Function(_UpdateItemSelection value)? updateItemSelection,
     required TResult orElse(),
   }) {
-    if (initMaterialItems != null) {
-      return initMaterialItems(this);
+    if (initComboDealItems != null) {
+      return initComboDealItems(this);
     }
     return orElse();
   }
 }
 
-abstract class _InitMaterialItems implements ComboDealDetailEvent {
-  const factory _InitMaterialItems(
-      {required final List<PriceAggregate> items,
-      required final bool requireFetchInfo}) = _$_InitMaterialItems;
+abstract class _InitComboDealItems implements ComboDealDetailEvent {
+  const factory _InitComboDealItems(
+          {required final List<PriceAggregate> items,
+          required final SalesOrganisationConfigs salesConfigs}) =
+      _$_InitComboDealItems;
 
   List<PriceAggregate> get items;
-  bool get requireFetchInfo;
+  SalesOrganisationConfigs get salesConfigs;
   @JsonKey(ignore: true)
-  _$$_InitMaterialItemsCopyWith<_$_InitMaterialItems> get copyWith =>
+  _$$_InitComboDealItemsCopyWith<_$_InitComboDealItems> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_InitFromCartComboDealItemsCopyWith<$Res> {
+  factory _$$_InitFromCartComboDealItemsCopyWith(
+          _$_InitFromCartComboDealItems value,
+          $Res Function(_$_InitFromCartComboDealItems) then) =
+      __$$_InitFromCartComboDealItemsCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs});
+
+  $SalesOrganisationConfigsCopyWith<$Res> get salesConfigs;
+}
+
+/// @nodoc
+class __$$_InitFromCartComboDealItemsCopyWithImpl<$Res>
+    extends _$ComboDealDetailEventCopyWithImpl<$Res,
+        _$_InitFromCartComboDealItems>
+    implements _$$_InitFromCartComboDealItemsCopyWith<$Res> {
+  __$$_InitFromCartComboDealItemsCopyWithImpl(
+      _$_InitFromCartComboDealItems _value,
+      $Res Function(_$_InitFromCartComboDealItems) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? items = null,
+    Object? salesConfigs = null,
+  }) {
+    return _then(_$_InitFromCartComboDealItems(
+      items: null == items
+          ? _value._items
+          : items // ignore: cast_nullable_to_non_nullable
+              as List<PriceAggregate>,
+      salesConfigs: null == salesConfigs
+          ? _value.salesConfigs
+          : salesConfigs // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisationConfigs,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationConfigsCopyWith<$Res> get salesConfigs {
+    return $SalesOrganisationConfigsCopyWith<$Res>(_value.salesConfigs,
+        (value) {
+      return _then(_value.copyWith(salesConfigs: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_InitFromCartComboDealItems implements _InitFromCartComboDealItems {
+  const _$_InitFromCartComboDealItems(
+      {required final List<PriceAggregate> items, required this.salesConfigs})
+      : _items = items;
+
+  final List<PriceAggregate> _items;
+  @override
+  List<PriceAggregate> get items {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_items);
+  }
+
+  @override
+  final SalesOrganisationConfigs salesConfigs;
+
+  @override
+  String toString() {
+    return 'ComboDealDetailEvent.initFromCartComboDealItems(items: $items, salesConfigs: $salesConfigs)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_InitFromCartComboDealItems &&
+            const DeepCollectionEquality().equals(other._items, _items) &&
+            (identical(other.salesConfigs, salesConfigs) ||
+                other.salesConfigs == salesConfigs));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_items), salesConfigs);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_InitFromCartComboDealItemsCopyWith<_$_InitFromCartComboDealItems>
+      get copyWith => __$$_InitFromCartComboDealItemsCopyWithImpl<
+          _$_InitFromCartComboDealItems>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialize,
+    required TResult Function(
+            List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)
+        initComboDealItems,
+    required TResult Function(
+            List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)
+        initFromCartComboDealItems,
+    required TResult Function(Map<MaterialNumber, MaterialPriceDetail> priceMap,
+            PriceComboDeal comboDeal)
+        setPriceInfo,
+    required TResult Function(ComboDeal comboDealInfo) setComboDealInfo,
+    required TResult Function(MaterialNumber item, int qty) updateItemQuantity,
+    required TResult Function(MaterialNumber item) updateItemSelection,
+  }) {
+    return initFromCartComboDealItems(items, salesConfigs);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialize,
+    TResult? Function(
+            List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)?
+        initComboDealItems,
+    TResult? Function(
+            List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)?
+        initFromCartComboDealItems,
+    TResult? Function(Map<MaterialNumber, MaterialPriceDetail> priceMap,
+            PriceComboDeal comboDeal)?
+        setPriceInfo,
+    TResult? Function(ComboDeal comboDealInfo)? setComboDealInfo,
+    TResult? Function(MaterialNumber item, int qty)? updateItemQuantity,
+    TResult? Function(MaterialNumber item)? updateItemSelection,
+  }) {
+    return initFromCartComboDealItems?.call(items, salesConfigs);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialize,
+    TResult Function(
+            List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)?
+        initComboDealItems,
+    TResult Function(
+            List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)?
+        initFromCartComboDealItems,
+    TResult Function(Map<MaterialNumber, MaterialPriceDetail> priceMap,
+            PriceComboDeal comboDeal)?
+        setPriceInfo,
+    TResult Function(ComboDeal comboDealInfo)? setComboDealInfo,
+    TResult Function(MaterialNumber item, int qty)? updateItemQuantity,
+    TResult Function(MaterialNumber item)? updateItemSelection,
+    required TResult orElse(),
+  }) {
+    if (initFromCartComboDealItems != null) {
+      return initFromCartComboDealItems(items, salesConfigs);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialize value) initialize,
+    required TResult Function(_InitComboDealItems value) initComboDealItems,
+    required TResult Function(_InitFromCartComboDealItems value)
+        initFromCartComboDealItems,
+    required TResult Function(_SetPriceInfo value) setPriceInfo,
+    required TResult Function(_SetComboDealInfo value) setComboDealInfo,
+    required TResult Function(_UpdateItemQuantity value) updateItemQuantity,
+    required TResult Function(_UpdateItemSelection value) updateItemSelection,
+  }) {
+    return initFromCartComboDealItems(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialize value)? initialize,
+    TResult? Function(_InitComboDealItems value)? initComboDealItems,
+    TResult? Function(_InitFromCartComboDealItems value)?
+        initFromCartComboDealItems,
+    TResult? Function(_SetPriceInfo value)? setPriceInfo,
+    TResult? Function(_SetComboDealInfo value)? setComboDealInfo,
+    TResult? Function(_UpdateItemQuantity value)? updateItemQuantity,
+    TResult? Function(_UpdateItemSelection value)? updateItemSelection,
+  }) {
+    return initFromCartComboDealItems?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialize value)? initialize,
+    TResult Function(_InitComboDealItems value)? initComboDealItems,
+    TResult Function(_InitFromCartComboDealItems value)?
+        initFromCartComboDealItems,
+    TResult Function(_SetPriceInfo value)? setPriceInfo,
+    TResult Function(_SetComboDealInfo value)? setComboDealInfo,
+    TResult Function(_UpdateItemQuantity value)? updateItemQuantity,
+    TResult Function(_UpdateItemSelection value)? updateItemSelection,
+    required TResult orElse(),
+  }) {
+    if (initFromCartComboDealItems != null) {
+      return initFromCartComboDealItems(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _InitFromCartComboDealItems implements ComboDealDetailEvent {
+  const factory _InitFromCartComboDealItems(
+          {required final List<PriceAggregate> items,
+          required final SalesOrganisationConfigs salesConfigs}) =
+      _$_InitFromCartComboDealItems;
+
+  List<PriceAggregate> get items;
+  SalesOrganisationConfigs get salesConfigs;
+  @JsonKey(ignore: true)
+  _$$_InitFromCartComboDealItemsCopyWith<_$_InitFromCartComboDealItems>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -526,8 +813,12 @@ class _$_SetPriceInfo implements _SetPriceInfo {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
-    required TResult Function(List<PriceAggregate> items, bool requireFetchInfo)
-        initMaterialItems,
+    required TResult Function(
+            List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)
+        initComboDealItems,
+    required TResult Function(
+            List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)
+        initFromCartComboDealItems,
     required TResult Function(Map<MaterialNumber, MaterialPriceDetail> priceMap,
             PriceComboDeal comboDeal)
         setPriceInfo,
@@ -542,8 +833,12 @@ class _$_SetPriceInfo implements _SetPriceInfo {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialize,
-    TResult? Function(List<PriceAggregate> items, bool requireFetchInfo)?
-        initMaterialItems,
+    TResult? Function(
+            List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)?
+        initComboDealItems,
+    TResult? Function(
+            List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)?
+        initFromCartComboDealItems,
     TResult? Function(Map<MaterialNumber, MaterialPriceDetail> priceMap,
             PriceComboDeal comboDeal)?
         setPriceInfo,
@@ -558,8 +853,12 @@ class _$_SetPriceInfo implements _SetPriceInfo {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
-    TResult Function(List<PriceAggregate> items, bool requireFetchInfo)?
-        initMaterialItems,
+    TResult Function(
+            List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)?
+        initComboDealItems,
+    TResult Function(
+            List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)?
+        initFromCartComboDealItems,
     TResult Function(Map<MaterialNumber, MaterialPriceDetail> priceMap,
             PriceComboDeal comboDeal)?
         setPriceInfo,
@@ -578,7 +877,9 @@ class _$_SetPriceInfo implements _SetPriceInfo {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
-    required TResult Function(_InitMaterialItems value) initMaterialItems,
+    required TResult Function(_InitComboDealItems value) initComboDealItems,
+    required TResult Function(_InitFromCartComboDealItems value)
+        initFromCartComboDealItems,
     required TResult Function(_SetPriceInfo value) setPriceInfo,
     required TResult Function(_SetComboDealInfo value) setComboDealInfo,
     required TResult Function(_UpdateItemQuantity value) updateItemQuantity,
@@ -591,7 +892,9 @@ class _$_SetPriceInfo implements _SetPriceInfo {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
-    TResult? Function(_InitMaterialItems value)? initMaterialItems,
+    TResult? Function(_InitComboDealItems value)? initComboDealItems,
+    TResult? Function(_InitFromCartComboDealItems value)?
+        initFromCartComboDealItems,
     TResult? Function(_SetPriceInfo value)? setPriceInfo,
     TResult? Function(_SetComboDealInfo value)? setComboDealInfo,
     TResult? Function(_UpdateItemQuantity value)? updateItemQuantity,
@@ -604,7 +907,9 @@ class _$_SetPriceInfo implements _SetPriceInfo {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
-    TResult Function(_InitMaterialItems value)? initMaterialItems,
+    TResult Function(_InitComboDealItems value)? initComboDealItems,
+    TResult Function(_InitFromCartComboDealItems value)?
+        initFromCartComboDealItems,
     TResult Function(_SetPriceInfo value)? setPriceInfo,
     TResult Function(_SetComboDealInfo value)? setComboDealInfo,
     TResult Function(_UpdateItemQuantity value)? updateItemQuantity,
@@ -706,8 +1011,12 @@ class _$_SetComboDealInfo implements _SetComboDealInfo {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
-    required TResult Function(List<PriceAggregate> items, bool requireFetchInfo)
-        initMaterialItems,
+    required TResult Function(
+            List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)
+        initComboDealItems,
+    required TResult Function(
+            List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)
+        initFromCartComboDealItems,
     required TResult Function(Map<MaterialNumber, MaterialPriceDetail> priceMap,
             PriceComboDeal comboDeal)
         setPriceInfo,
@@ -722,8 +1031,12 @@ class _$_SetComboDealInfo implements _SetComboDealInfo {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialize,
-    TResult? Function(List<PriceAggregate> items, bool requireFetchInfo)?
-        initMaterialItems,
+    TResult? Function(
+            List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)?
+        initComboDealItems,
+    TResult? Function(
+            List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)?
+        initFromCartComboDealItems,
     TResult? Function(Map<MaterialNumber, MaterialPriceDetail> priceMap,
             PriceComboDeal comboDeal)?
         setPriceInfo,
@@ -738,8 +1051,12 @@ class _$_SetComboDealInfo implements _SetComboDealInfo {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
-    TResult Function(List<PriceAggregate> items, bool requireFetchInfo)?
-        initMaterialItems,
+    TResult Function(
+            List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)?
+        initComboDealItems,
+    TResult Function(
+            List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)?
+        initFromCartComboDealItems,
     TResult Function(Map<MaterialNumber, MaterialPriceDetail> priceMap,
             PriceComboDeal comboDeal)?
         setPriceInfo,
@@ -758,7 +1075,9 @@ class _$_SetComboDealInfo implements _SetComboDealInfo {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
-    required TResult Function(_InitMaterialItems value) initMaterialItems,
+    required TResult Function(_InitComboDealItems value) initComboDealItems,
+    required TResult Function(_InitFromCartComboDealItems value)
+        initFromCartComboDealItems,
     required TResult Function(_SetPriceInfo value) setPriceInfo,
     required TResult Function(_SetComboDealInfo value) setComboDealInfo,
     required TResult Function(_UpdateItemQuantity value) updateItemQuantity,
@@ -771,7 +1090,9 @@ class _$_SetComboDealInfo implements _SetComboDealInfo {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
-    TResult? Function(_InitMaterialItems value)? initMaterialItems,
+    TResult? Function(_InitComboDealItems value)? initComboDealItems,
+    TResult? Function(_InitFromCartComboDealItems value)?
+        initFromCartComboDealItems,
     TResult? Function(_SetPriceInfo value)? setPriceInfo,
     TResult? Function(_SetComboDealInfo value)? setComboDealInfo,
     TResult? Function(_UpdateItemQuantity value)? updateItemQuantity,
@@ -784,7 +1105,9 @@ class _$_SetComboDealInfo implements _SetComboDealInfo {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
-    TResult Function(_InitMaterialItems value)? initMaterialItems,
+    TResult Function(_InitComboDealItems value)? initComboDealItems,
+    TResult Function(_InitFromCartComboDealItems value)?
+        initFromCartComboDealItems,
     TResult Function(_SetPriceInfo value)? setPriceInfo,
     TResult Function(_SetComboDealInfo value)? setComboDealInfo,
     TResult Function(_UpdateItemQuantity value)? updateItemQuantity,
@@ -882,8 +1205,12 @@ class _$_UpdateItemQuantity implements _UpdateItemQuantity {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
-    required TResult Function(List<PriceAggregate> items, bool requireFetchInfo)
-        initMaterialItems,
+    required TResult Function(
+            List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)
+        initComboDealItems,
+    required TResult Function(
+            List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)
+        initFromCartComboDealItems,
     required TResult Function(Map<MaterialNumber, MaterialPriceDetail> priceMap,
             PriceComboDeal comboDeal)
         setPriceInfo,
@@ -898,8 +1225,12 @@ class _$_UpdateItemQuantity implements _UpdateItemQuantity {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialize,
-    TResult? Function(List<PriceAggregate> items, bool requireFetchInfo)?
-        initMaterialItems,
+    TResult? Function(
+            List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)?
+        initComboDealItems,
+    TResult? Function(
+            List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)?
+        initFromCartComboDealItems,
     TResult? Function(Map<MaterialNumber, MaterialPriceDetail> priceMap,
             PriceComboDeal comboDeal)?
         setPriceInfo,
@@ -914,8 +1245,12 @@ class _$_UpdateItemQuantity implements _UpdateItemQuantity {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
-    TResult Function(List<PriceAggregate> items, bool requireFetchInfo)?
-        initMaterialItems,
+    TResult Function(
+            List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)?
+        initComboDealItems,
+    TResult Function(
+            List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)?
+        initFromCartComboDealItems,
     TResult Function(Map<MaterialNumber, MaterialPriceDetail> priceMap,
             PriceComboDeal comboDeal)?
         setPriceInfo,
@@ -934,7 +1269,9 @@ class _$_UpdateItemQuantity implements _UpdateItemQuantity {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
-    required TResult Function(_InitMaterialItems value) initMaterialItems,
+    required TResult Function(_InitComboDealItems value) initComboDealItems,
+    required TResult Function(_InitFromCartComboDealItems value)
+        initFromCartComboDealItems,
     required TResult Function(_SetPriceInfo value) setPriceInfo,
     required TResult Function(_SetComboDealInfo value) setComboDealInfo,
     required TResult Function(_UpdateItemQuantity value) updateItemQuantity,
@@ -947,7 +1284,9 @@ class _$_UpdateItemQuantity implements _UpdateItemQuantity {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
-    TResult? Function(_InitMaterialItems value)? initMaterialItems,
+    TResult? Function(_InitComboDealItems value)? initComboDealItems,
+    TResult? Function(_InitFromCartComboDealItems value)?
+        initFromCartComboDealItems,
     TResult? Function(_SetPriceInfo value)? setPriceInfo,
     TResult? Function(_SetComboDealInfo value)? setComboDealInfo,
     TResult? Function(_UpdateItemQuantity value)? updateItemQuantity,
@@ -960,7 +1299,9 @@ class _$_UpdateItemQuantity implements _UpdateItemQuantity {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
-    TResult Function(_InitMaterialItems value)? initMaterialItems,
+    TResult Function(_InitComboDealItems value)? initComboDealItems,
+    TResult Function(_InitFromCartComboDealItems value)?
+        initFromCartComboDealItems,
     TResult Function(_SetPriceInfo value)? setPriceInfo,
     TResult Function(_SetComboDealInfo value)? setComboDealInfo,
     TResult Function(_UpdateItemQuantity value)? updateItemQuantity,
@@ -1052,8 +1393,12 @@ class _$_UpdateItemSelection implements _UpdateItemSelection {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
-    required TResult Function(List<PriceAggregate> items, bool requireFetchInfo)
-        initMaterialItems,
+    required TResult Function(
+            List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)
+        initComboDealItems,
+    required TResult Function(
+            List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)
+        initFromCartComboDealItems,
     required TResult Function(Map<MaterialNumber, MaterialPriceDetail> priceMap,
             PriceComboDeal comboDeal)
         setPriceInfo,
@@ -1068,8 +1413,12 @@ class _$_UpdateItemSelection implements _UpdateItemSelection {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialize,
-    TResult? Function(List<PriceAggregate> items, bool requireFetchInfo)?
-        initMaterialItems,
+    TResult? Function(
+            List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)?
+        initComboDealItems,
+    TResult? Function(
+            List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)?
+        initFromCartComboDealItems,
     TResult? Function(Map<MaterialNumber, MaterialPriceDetail> priceMap,
             PriceComboDeal comboDeal)?
         setPriceInfo,
@@ -1084,8 +1433,12 @@ class _$_UpdateItemSelection implements _UpdateItemSelection {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
-    TResult Function(List<PriceAggregate> items, bool requireFetchInfo)?
-        initMaterialItems,
+    TResult Function(
+            List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)?
+        initComboDealItems,
+    TResult Function(
+            List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)?
+        initFromCartComboDealItems,
     TResult Function(Map<MaterialNumber, MaterialPriceDetail> priceMap,
             PriceComboDeal comboDeal)?
         setPriceInfo,
@@ -1104,7 +1457,9 @@ class _$_UpdateItemSelection implements _UpdateItemSelection {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
-    required TResult Function(_InitMaterialItems value) initMaterialItems,
+    required TResult Function(_InitComboDealItems value) initComboDealItems,
+    required TResult Function(_InitFromCartComboDealItems value)
+        initFromCartComboDealItems,
     required TResult Function(_SetPriceInfo value) setPriceInfo,
     required TResult Function(_SetComboDealInfo value) setComboDealInfo,
     required TResult Function(_UpdateItemQuantity value) updateItemQuantity,
@@ -1117,7 +1472,9 @@ class _$_UpdateItemSelection implements _UpdateItemSelection {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
-    TResult? Function(_InitMaterialItems value)? initMaterialItems,
+    TResult? Function(_InitComboDealItems value)? initComboDealItems,
+    TResult? Function(_InitFromCartComboDealItems value)?
+        initFromCartComboDealItems,
     TResult? Function(_SetPriceInfo value)? setPriceInfo,
     TResult? Function(_SetComboDealInfo value)? setComboDealInfo,
     TResult? Function(_UpdateItemQuantity value)? updateItemQuantity,
@@ -1130,7 +1487,9 @@ class _$_UpdateItemSelection implements _UpdateItemSelection {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
-    TResult Function(_InitMaterialItems value)? initMaterialItems,
+    TResult Function(_InitComboDealItems value)? initComboDealItems,
+    TResult Function(_InitFromCartComboDealItems value)?
+        initFromCartComboDealItems,
     TResult Function(_SetPriceInfo value)? setPriceInfo,
     TResult Function(_SetComboDealInfo value)? setComboDealInfo,
     TResult Function(_UpdateItemQuantity value)? updateItemQuantity,

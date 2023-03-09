@@ -17,10 +17,15 @@ class ComboDealDetailState with _$ComboDealDetailState {
         isFetchingComboInfo: false,
       );
 
+  List<PriceAggregate> get sortedItems => items.values.toList()
+    ..sort(
+      (first, second) => first.selfComboDeal.mandatory ? 0 : 1,
+    );
+
   List<PriceAggregate> get allSelectedItems {
     final selectedMaterials = Map<MaterialNumber, PriceAggregate>.from(items)
       ..removeWhere(
-        (key, value) => selectedItems[value] == false,
+        (key, value) => selectedItems[key] == false,
       );
 
     return selectedMaterials.values.toList();

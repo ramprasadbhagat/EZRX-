@@ -20,15 +20,17 @@ ComboDealQtyTierDto _$ComboDealQtyTierDtoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ComboDealQtyTierDto {
-  @JsonKey(name: 'rate', defaultValue: '')
-  @HiveField(0, defaultValue: '')
-  String get rate => throw _privateConstructorUsedError;
+  @StringToDoubleConverter()
+  @JsonKey(name: 'rate', defaultValue: 0)
+  @HiveField(0, defaultValue: 0)
+  double get rate => throw _privateConstructorUsedError;
   @JsonKey(name: 'conditionNumber', defaultValue: '')
   @HiveField(1, defaultValue: '')
   String get conditionNumber => throw _privateConstructorUsedError;
-  @JsonKey(name: 'minQty', defaultValue: '')
-  @HiveField(2, defaultValue: '')
-  String get minQty => throw _privateConstructorUsedError;
+  @StringToIntConverter()
+  @JsonKey(name: 'minQty', defaultValue: 0)
+  @HiveField(2, defaultValue: 0)
+  int get minQty => throw _privateConstructorUsedError;
   @JsonKey(name: 'type', defaultValue: '')
   @HiveField(3, defaultValue: '')
   String get type => throw _privateConstructorUsedError;
@@ -46,15 +48,17 @@ abstract class $ComboDealQtyTierDtoCopyWith<$Res> {
       _$ComboDealQtyTierDtoCopyWithImpl<$Res, ComboDealQtyTierDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'rate', defaultValue: '')
-      @HiveField(0, defaultValue: '')
-          String rate,
+      {@StringToDoubleConverter()
+      @JsonKey(name: 'rate', defaultValue: 0)
+      @HiveField(0, defaultValue: 0)
+          double rate,
       @JsonKey(name: 'conditionNumber', defaultValue: '')
       @HiveField(1, defaultValue: '')
           String conditionNumber,
-      @JsonKey(name: 'minQty', defaultValue: '')
-      @HiveField(2, defaultValue: '')
-          String minQty,
+      @StringToIntConverter()
+      @JsonKey(name: 'minQty', defaultValue: 0)
+      @HiveField(2, defaultValue: 0)
+          int minQty,
       @JsonKey(name: 'type', defaultValue: '')
       @HiveField(3, defaultValue: '')
           String type});
@@ -82,7 +86,7 @@ class _$ComboDealQtyTierDtoCopyWithImpl<$Res, $Val extends ComboDealQtyTierDto>
       rate: null == rate
           ? _value.rate
           : rate // ignore: cast_nullable_to_non_nullable
-              as String,
+              as double,
       conditionNumber: null == conditionNumber
           ? _value.conditionNumber
           : conditionNumber // ignore: cast_nullable_to_non_nullable
@@ -90,7 +94,7 @@ class _$ComboDealQtyTierDtoCopyWithImpl<$Res, $Val extends ComboDealQtyTierDto>
       minQty: null == minQty
           ? _value.minQty
           : minQty // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -108,15 +112,17 @@ abstract class _$$_ComboDealQtyTierDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'rate', defaultValue: '')
-      @HiveField(0, defaultValue: '')
-          String rate,
+      {@StringToDoubleConverter()
+      @JsonKey(name: 'rate', defaultValue: 0)
+      @HiveField(0, defaultValue: 0)
+          double rate,
       @JsonKey(name: 'conditionNumber', defaultValue: '')
       @HiveField(1, defaultValue: '')
           String conditionNumber,
-      @JsonKey(name: 'minQty', defaultValue: '')
-      @HiveField(2, defaultValue: '')
-          String minQty,
+      @StringToIntConverter()
+      @JsonKey(name: 'minQty', defaultValue: 0)
+      @HiveField(2, defaultValue: 0)
+          int minQty,
       @JsonKey(name: 'type', defaultValue: '')
       @HiveField(3, defaultValue: '')
           String type});
@@ -142,7 +148,7 @@ class __$$_ComboDealQtyTierDtoCopyWithImpl<$Res>
       rate: null == rate
           ? _value.rate
           : rate // ignore: cast_nullable_to_non_nullable
-              as String,
+              as double,
       conditionNumber: null == conditionNumber
           ? _value.conditionNumber
           : conditionNumber // ignore: cast_nullable_to_non_nullable
@@ -150,7 +156,7 @@ class __$$_ComboDealQtyTierDtoCopyWithImpl<$Res>
       minQty: null == minQty
           ? _value.minQty
           : minQty // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -164,14 +170,16 @@ class __$$_ComboDealQtyTierDtoCopyWithImpl<$Res>
 @HiveType(typeId: 29, adapterName: 'ComboDealQtyTierDtoAdapter')
 class _$_ComboDealQtyTierDto extends _ComboDealQtyTierDto {
   const _$_ComboDealQtyTierDto(
-      {@JsonKey(name: 'rate', defaultValue: '')
-      @HiveField(0, defaultValue: '')
+      {@StringToDoubleConverter()
+      @JsonKey(name: 'rate', defaultValue: 0)
+      @HiveField(0, defaultValue: 0)
           required this.rate,
       @JsonKey(name: 'conditionNumber', defaultValue: '')
       @HiveField(1, defaultValue: '')
           required this.conditionNumber,
-      @JsonKey(name: 'minQty', defaultValue: '')
-      @HiveField(2, defaultValue: '')
+      @StringToIntConverter()
+      @JsonKey(name: 'minQty', defaultValue: 0)
+      @HiveField(2, defaultValue: 0)
           required this.minQty,
       @JsonKey(name: 'type', defaultValue: '')
       @HiveField(3, defaultValue: '')
@@ -182,17 +190,19 @@ class _$_ComboDealQtyTierDto extends _ComboDealQtyTierDto {
       _$$_ComboDealQtyTierDtoFromJson(json);
 
   @override
-  @JsonKey(name: 'rate', defaultValue: '')
-  @HiveField(0, defaultValue: '')
-  final String rate;
+  @StringToDoubleConverter()
+  @JsonKey(name: 'rate', defaultValue: 0)
+  @HiveField(0, defaultValue: 0)
+  final double rate;
   @override
   @JsonKey(name: 'conditionNumber', defaultValue: '')
   @HiveField(1, defaultValue: '')
   final String conditionNumber;
   @override
-  @JsonKey(name: 'minQty', defaultValue: '')
-  @HiveField(2, defaultValue: '')
-  final String minQty;
+  @StringToIntConverter()
+  @JsonKey(name: 'minQty', defaultValue: 0)
+  @HiveField(2, defaultValue: 0)
+  final int minQty;
   @override
   @JsonKey(name: 'type', defaultValue: '')
   @HiveField(3, defaultValue: '')
@@ -237,15 +247,17 @@ class _$_ComboDealQtyTierDto extends _ComboDealQtyTierDto {
 
 abstract class _ComboDealQtyTierDto extends ComboDealQtyTierDto {
   const factory _ComboDealQtyTierDto(
-      {@JsonKey(name: 'rate', defaultValue: '')
-      @HiveField(0, defaultValue: '')
-          required final String rate,
+      {@StringToDoubleConverter()
+      @JsonKey(name: 'rate', defaultValue: 0)
+      @HiveField(0, defaultValue: 0)
+          required final double rate,
       @JsonKey(name: 'conditionNumber', defaultValue: '')
       @HiveField(1, defaultValue: '')
           required final String conditionNumber,
-      @JsonKey(name: 'minQty', defaultValue: '')
-      @HiveField(2, defaultValue: '')
-          required final String minQty,
+      @StringToIntConverter()
+      @JsonKey(name: 'minQty', defaultValue: 0)
+      @HiveField(2, defaultValue: 0)
+          required final int minQty,
       @JsonKey(name: 'type', defaultValue: '')
       @HiveField(3, defaultValue: '')
           required final String type}) = _$_ComboDealQtyTierDto;
@@ -255,17 +267,19 @@ abstract class _ComboDealQtyTierDto extends ComboDealQtyTierDto {
       _$_ComboDealQtyTierDto.fromJson;
 
   @override
-  @JsonKey(name: 'rate', defaultValue: '')
-  @HiveField(0, defaultValue: '')
-  String get rate;
+  @StringToDoubleConverter()
+  @JsonKey(name: 'rate', defaultValue: 0)
+  @HiveField(0, defaultValue: 0)
+  double get rate;
   @override
   @JsonKey(name: 'conditionNumber', defaultValue: '')
   @HiveField(1, defaultValue: '')
   String get conditionNumber;
   @override
-  @JsonKey(name: 'minQty', defaultValue: '')
-  @HiveField(2, defaultValue: '')
-  String get minQty;
+  @StringToIntConverter()
+  @JsonKey(name: 'minQty', defaultValue: 0)
+  @HiveField(2, defaultValue: 0)
+  int get minQty;
   @override
   @JsonKey(name: 'type', defaultValue: '')
   @HiveField(3, defaultValue: '')

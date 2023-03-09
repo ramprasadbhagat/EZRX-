@@ -17,9 +17,9 @@ class ComboDealQtyTierDtoAdapter extends TypeAdapter<_$_ComboDealQtyTierDto> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return _$_ComboDealQtyTierDto(
-      rate: fields[0] == null ? '' : fields[0] as String,
+      rate: fields[0] == null ? 0 : fields[0] as double,
       conditionNumber: fields[1] == null ? '' : fields[1] as String,
-      minQty: fields[2] == null ? '' : fields[2] as String,
+      minQty: fields[2] == null ? 0 : fields[2] as int,
       type: fields[3] == null ? '' : fields[3] as String,
     );
   }
@@ -56,17 +56,21 @@ class ComboDealQtyTierDtoAdapter extends TypeAdapter<_$_ComboDealQtyTierDto> {
 _$_ComboDealQtyTierDto _$$_ComboDealQtyTierDtoFromJson(
         Map<String, dynamic> json) =>
     _$_ComboDealQtyTierDto(
-      rate: json['rate'] as String? ?? '',
+      rate: json['rate'] == null
+          ? 0
+          : const StringToDoubleConverter().fromJson(json['rate'] as String),
       conditionNumber: json['conditionNumber'] as String? ?? '',
-      minQty: json['minQty'] as String? ?? '',
+      minQty: json['minQty'] == null
+          ? 0
+          : const StringToIntConverter().fromJson(json['minQty'] as String),
       type: json['type'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_ComboDealQtyTierDtoToJson(
         _$_ComboDealQtyTierDto instance) =>
     <String, dynamic>{
-      'rate': instance.rate,
+      'rate': const StringToDoubleConverter().toJson(instance.rate),
       'conditionNumber': instance.conditionNumber,
-      'minQty': instance.minQty,
+      'minQty': const StringToIntConverter().toJson(instance.minQty),
       'type': instance.type,
     };

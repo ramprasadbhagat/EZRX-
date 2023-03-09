@@ -19,7 +19,6 @@ import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/price_combo_deal.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/presentation/orders/cart/cart_button.dart';
 import 'package:ezrxmobile/presentation/orders/combo_deal/combo_deal_detail_page.dart';
 import 'package:ezrxmobile/presentation/orders/combo_deal/widgets/combo_deal_item.dart';
 import 'package:ezrxmobile/presentation/orders/combo_deal/widgets/combo_deal_label.dart';
@@ -137,9 +136,9 @@ void main() {
       expect(find.byKey(const Key('addToCartButton')), findsOneWidget);
       expect(find.text('Add To Cart'), findsOneWidget);
       verify(() => comboDealDetailBloc.add(
-            ComboDealDetailEvent.initMaterialItems(
+            ComboDealDetailEvent.initComboDealItems(
               items: [PriceAggregate.empty()],
-              requireFetchInfo: true,
+              salesConfigs: SalesOrganisationConfigs.empty(),
             ),
           )).called(1);
 

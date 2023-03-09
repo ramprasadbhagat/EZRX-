@@ -44,14 +44,14 @@ class ComboDealMaterialDto with _$ComboDealMaterialDto {
   const ComboDealMaterialDto._();
   @HiveType(typeId: 26, adapterName: 'ComboDealMaterialDtoAdapter')
   const factory ComboDealMaterialDto({
-        @StringToIntConverter()
-      @JsonKey(name: 'minQty', defaultValue: 0)
+    @StringToIntConverter()
+    @JsonKey(name: 'minQty', defaultValue: 0)
     @HiveField(0, defaultValue: 0)
         required int minQty,
     @JsonKey(name: 'materialNumber', defaultValue: '')
     @HiveField(1, defaultValue: '')
         required String materialNumber,
-            @StringToDoubleConverter()
+    @StringToDoubleConverter()
     @JsonKey(name: 'rate', defaultValue: 0)
     @HiveField(2, defaultValue: 0)
         required double rate,

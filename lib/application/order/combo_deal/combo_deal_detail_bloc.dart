@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_price_detail.dart';
@@ -24,41 +25,84 @@ class ComboDealDetailBloc
   ) async {
     await event.map(
       initialize: (e) async => emit(ComboDealDetailState.initial()),
-      initMaterialItems: (e) async {
+      initComboDealItems: (e) async {
         emit(
           state.copyWith(
             items: {
-              for (final item in e.items) item.getMaterialNumber: item,
+              for (final item in e.items)
+                item.getMaterialNumber: item.copyWith(
+                  salesOrgConfig: e.salesConfigs,
+                ),
             },
             selectedItems: {
               for (final item in e.items) item.getMaterialNumber: true,
             },
-            isFetchingComboInfo: e.requireFetchInfo,
-            isFetchingPrice: e.requireFetchInfo,
+            isFetchingComboInfo: true,
+            isFetchingPrice: true,
+          ),
+        );
+      },
+      initFromCartComboDealItems: (e) async {
+        final items = {
+          for (final item in e.items)
+            item.getMaterialNumber: item.copyWith(
+              salesOrgConfig: e.salesConfigs,
+            ),
+        };
+
+        final selectedItems = {
+          for (final item in e.items) item.getMaterialNumber: true,
+        };
+
+        final comboDeal = e.items.firstComboDeal;
+        final missingComboItemMaterialNumbers = comboDeal.allMaterialNumbers
+            .where(
+              (materialNumber) =>
+                  !e.items.materialNumbers.contains(materialNumber),
+            )
+            .toList();
+
+        items.addAll(
+          {
+            for (final materialNumber in missingComboItemMaterialNumbers)
+              materialNumber: PriceAggregate.empty()
+                  .copyWith(salesOrgConfig: e.salesConfigs)
+                  .copyWithComboDeal(comboDeal),
+          },
+        );
+
+        selectedItems.addAll(
+          {
+            for (final materialNumber in missingComboItemMaterialNumbers)
+              materialNumber: false,
+          },
+        );
+
+        emit(
+          state.copyWith(
+            items: items,
+            selectedItems: selectedItems,
+            isFetchingComboInfo: false,
+            isFetchingPrice: true,
           ),
         );
       },
       setComboDealInfo: (e) async {
         final itemsWithComboDealInfo = state.items.map(
-          (key, value) {
-            final materialWithDeal = value.copyWith(
-              comboDeal: e.comboDealInfo,
-            );
-            final materialWithMinDealQty = materialWithDeal.copyWith(
-              quantity: materialWithDeal.selfComboDeal.minQty,
-            );
-
-            return MapEntry(
-              key,
-              materialWithMinDealQty,
-            );
-          },
+          (key, value) => MapEntry(
+            key,
+            value.copyWithComboDeal(e.comboDealInfo),
+          ),
         );
 
         emit(
           state.copyWith(
             isFetchingComboInfo: false,
             items: itemsWithComboDealInfo,
+            selectedItems: {
+              for (final item in itemsWithComboDealInfo.values)
+                item.getMaterialNumber: item.selfComboDeal.mandatory,
+            },
           ),
         );
       },
@@ -95,11 +139,7 @@ class ComboDealDetailBloc
         final updatedItems = state.items.map(
           (key, value) => MapEntry(
             key,
-            key == e.item
-                ? value.copyWith(
-                    quantity: e.qty,
-                  )
-                : value,
+            key == e.item ? value.copyWith(quantity: e.qty) : value,
           ),
         );
 

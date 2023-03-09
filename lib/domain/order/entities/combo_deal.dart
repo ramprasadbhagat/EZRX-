@@ -29,11 +29,23 @@ class ComboDeal with _$ComboDeal {
         materialComboDeals: [],
       );
 
+  List<ComboDealQtyTier> get sortedQtyTier =>
+      List<ComboDealQtyTier>.from(flexiQtyTier)
+        ..sort(
+          (first, second) => second.minQty.compareTo(first.minQty),
+        );
+
   List<ComboDealMaterial> get allMaterials => materialComboDeals
       .map(
         (e) => e.materials,
       )
       .flattened
+      .toList();
+
+  List<MaterialNumber> get allMaterialNumbers => allMaterials
+      .map(
+        (e) => e.materialNumber,
+      )
       .toList();
 
   ComboDealMaterial singleDeal({
@@ -48,6 +60,12 @@ class ComboDeal with _$ComboDeal {
     if (materialComboDeals.isNotEmpty &&
         allMaterials.every((item) => item.mandatory)) {
       return ComboDealScheme.k1;
+    }
+
+    if (flexiAmountTier.isEmpty &&
+        flexiSKUTier.isEmpty &&
+        (groupDeal != ComboDealGroupDeal.empty() || flexiQtyTier.length == 1)) {
+      return ComboDealScheme.k2;
     }
 
     return ComboDealScheme.k1;

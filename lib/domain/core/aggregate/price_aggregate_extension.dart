@@ -3,6 +3,16 @@ part of 'price_aggregate.dart';
 extension ComboDealExtension on PriceAggregate {
   String get comboDealId => '${price.comboDeal.id}-${comboDeal.scheme.name}';
 
+  PriceAggregate copyWithComboDeal(ComboDeal comboDeal) {
+    final materialWithDeal = copyWith(
+      comboDeal: comboDeal,
+    );
+
+    return materialWithDeal.copyWith(
+      quantity: materialWithDeal.selfComboDeal.minQty,
+    );
+  }
+
   ComboDealMaterial get selfComboDeal => comboDeal.singleDeal(
         materialNumber: getMaterialNumber,
       );
@@ -41,4 +51,12 @@ extension ComboDealExtension on PriceAggregate {
   }
 
   bool get selfComboDealEligible => quantity >= selfComboDeal.minQty;
+}
+
+extension PriceAggregateExtension on List<PriceAggregate> {
+  List<MaterialNumber> get materialNumbers => map(
+        (e) => e.getMaterialNumber,
+      ).toList();
+
+  ComboDeal get firstComboDeal => isEmpty ? ComboDeal.empty() : first.comboDeal;
 }
