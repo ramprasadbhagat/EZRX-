@@ -145,6 +145,38 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         },
       );
     });
+    on<_DiscountOverride>((e, emit) async {
+      emit(
+        state.copyWith(
+          apiFailureOrSuccessOption: none(),
+          isFetching: true,
+        ),
+      );
+
+      final failureOrSuccess = await repository.discountOverride(
+        cartItem: CartItem.material(e.item),
+      );
+
+      await failureOrSuccess.fold(
+        (failure) {
+          emit(
+            state.copyWith(
+              apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+              isFetching: false,
+            ),
+          );
+        },
+        (cartItemList) async {
+          emit(
+            state.copyWith(
+              cartItems: cartItemList,
+              apiFailureOrSuccessOption: none(),
+              isFetching: false,
+            ),
+          );
+        },
+      );
+    });
     on<_VerifyMaterialDealBonus>((e, emit) async {
       final cartItem = state.getMaterialCartItem(material: e.item);
       final material = cartItem.materials.first;

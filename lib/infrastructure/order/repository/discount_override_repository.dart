@@ -10,6 +10,8 @@ import 'package:ezrxmobile/infrastructure/order/datasource/discount_override_loc
 import 'package:ezrxmobile/infrastructure/order/datasource/discount_override_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_dto.dart';
 
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+
 class DiscountOverrideRepository implements IDiscountOverrideRepository {
   final Config config;
   final DiscountOverrideLocalDataSource localDataSource;
@@ -26,6 +28,7 @@ class DiscountOverrideRepository implements IDiscountOverrideRepository {
     required CustomerCodeInfo customerCodeInfo,
     required SalesOrganisation salesOrganisation,
     required Price price,
+    required ShipToInfo shipToInfo,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -53,11 +56,13 @@ class DiscountOverrideRepository implements IDiscountOverrideRepository {
     try {
       final salesOrgCode = salesOrganisation.salesOrg.getOrCrash();
       final customerCode = customerCodeInfo.customerCodeSoldTo;
+      final shipToCode = shipToInfo.shipToCustomerCode;
 
       final priceData = await remoteDataSource.getMaterialOverridePriceList(
         salesOrgCode: salesOrgCode,
         customerCode: customerCode,
         materialQuery: PriceDto.fromDomain(price).overrideQuery,
+        shipToCode: shipToCode,
       );
 
       return Right(priceData.first);

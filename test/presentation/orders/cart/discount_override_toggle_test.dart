@@ -9,6 +9,7 @@ import 'package:ezrxmobile/application/order/cart/discount_override/discount_ove
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
@@ -286,6 +287,7 @@ void main() {
               price: Price.empty().copyWith(
                 zdp8Override: Zdp8OverrideValue(10),
               ),
+              shipToInfo: ShipToInfo.empty(),
               customerCode: CustomerCodeInfo.empty(),
               materialNumber: cartItem.getMaterialNumber,
               salesOrganisation: SalesOrganisation.empty(),
@@ -293,6 +295,99 @@ void main() {
             ),
           ),
         ).called(1);
+      },
+    );
+
+     testWidgets(
+      'DiscountOverride submit failure snackbar visible',
+      (tester) async {
+        final expectedStates = [
+          DiscountOverrideState.initial().copyWith(),
+          DiscountOverrideState.initial().copyWith(
+            apiFailureOrSuccessOption: optionOf(
+              const Left(
+                ApiFailure.other('fake-error'),
+              ),
+            ),
+          ),
+        ];
+        whenListen(
+            discountOverrideBlocMock, Stream.fromIterable(expectedStates));
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+
+        final discountOverride = find.byKey(const Key('discountOverride'));
+        expect(discountOverride, findsOneWidget);
+        final switchFinder = find.byType(CupertinoSwitch);
+        await tester.drag(switchFinder, const Offset(2000, 0));
+        await tester.pump();
+        final discountOverridsDialog =
+            find.byKey(const Key('discountOverridsDialog'));
+        expect(discountOverridsDialog, findsOneWidget);
+        final submit = find.byKey(const Key('Submit'));
+        expect(submit, findsOneWidget);
+        await tester.tap(submit);
+        verify(
+          () => discountOverrideBlocMock.add(
+            DiscountOverrideEvent.fetch(
+              price: Price.empty().copyWith(
+                zdp8Override: Zdp8OverrideValue(10),
+              ),
+              shipToInfo: ShipToInfo.empty(),
+              customerCode: CustomerCodeInfo.empty(),
+              materialNumber: cartItem.getMaterialNumber,
+              salesOrganisation: SalesOrganisation.empty(),
+              material: cartItem.materialInfo,
+            ),
+          ),
+        ).called(1);
+        final snackBarMessage = find.byKey(const Key('snackBarMessage'));
+        expect(snackBarMessage, findsOneWidget);
+      },
+    );
+
+     testWidgets(
+      'DiscountOverride submit success snackbar not visible',
+      (tester) async {
+        final expectedStates = [
+          DiscountOverrideState.initial().copyWith(),
+          DiscountOverrideState.initial().copyWith(
+            materialPrice: price,
+            showErrorMessages: true,
+          ),
+        ];
+        whenListen(
+            discountOverrideBlocMock, Stream.fromIterable(expectedStates));
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+
+        final discountOverride = find.byKey(const Key('discountOverride'));
+        expect(discountOverride, findsOneWidget);
+        final switchFinder = find.byType(CupertinoSwitch);
+        await tester.drag(switchFinder, const Offset(2000, 0));
+        await tester.pump();
+        final discountOverridsDialog =
+            find.byKey(const Key('discountOverridsDialog'));
+        expect(discountOverridsDialog, findsOneWidget);
+        final submit = find.byKey(const Key('Submit'));
+        expect(submit, findsOneWidget);
+        await tester.tap(submit);
+        verify(
+          () => discountOverrideBlocMock.add(
+            DiscountOverrideEvent.fetch(
+              price: Price.empty().copyWith(
+                zdp8Override: Zdp8OverrideValue(10),
+              ),
+              shipToInfo: ShipToInfo.empty(),
+              customerCode: CustomerCodeInfo.empty(),
+              materialNumber: cartItem.getMaterialNumber,
+              salesOrganisation: SalesOrganisation.empty(),
+              material: cartItem.materialInfo,
+            ),
+          ),
+        ).called(1);
+        final snackBarMessage = find.byKey(const Key('snackBarMessage'));
+        expect(snackBarMessage, findsNothing);
       },
     );
 
@@ -391,6 +486,7 @@ void main() {
               price: Price.empty().copyWith(
                 zdp8Override: Zdp8OverrideValue(0),
               ),
+              shipToInfo: ShipToInfo.empty(),
               customerCode: CustomerCodeInfo.empty(),
               materialNumber: cartItem.getMaterialNumber,
               salesOrganisation: SalesOrganisation.empty(),

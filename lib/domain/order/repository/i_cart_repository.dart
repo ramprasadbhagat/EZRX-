@@ -38,6 +38,10 @@ abstract class ICartRepository {
     required bool doNotAllowOutOfStockMaterials,
   });
 
+  Future<Either<ApiFailure, List<CartItem>>> discountOverride({
+    required CartItem cartItem,
+  });
+
   Future<Either<ApiFailure, List<CartItem>>> deleteFromCart({
     required CartItem item,
   });

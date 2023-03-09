@@ -135,6 +135,35 @@ class CartRepository implements ICartRepository {
   }
 
   @override
+  Future<Either<ApiFailure, List<CartItem>>> discountOverride({
+    required CartItem cartItem,
+  }) async {
+    try {
+      final inCartItem = cartStorage.get(id: cartItem.id)?.toDomain;
+      if (inCartItem != null) {
+        final updatedCartItem = inCartItem.copyWith(
+          materials: inCartItem.materials.map((item) {
+            if (item.getMaterialNumber == cartItem.materials.first.getMaterialNumber) {
+              return cartItem.materials.first;
+            }
+
+            return item;
+          }).toList(),
+        );
+
+        await cartStorage.put(
+          id: updatedCartItem.id,
+          item: CartItemDto.fromDomain(updatedCartItem),
+        );
+      }
+
+      return fetchCart();
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
   Future<Either<ApiFailure, List<CartItem>>> updateMaterialQtyInCartItem({
     required CartItem cartItem,
     required PriceAggregate updatedQtyItem,

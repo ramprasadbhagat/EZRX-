@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:flutter/cupertino.dart';
@@ -12,6 +13,8 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/discount_override/discount_override_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
+
+import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 
 class DiscountOverrideToggle extends StatelessWidget {
   final PriceAggregate cartItem;
@@ -37,25 +40,13 @@ class DiscountOverrideToggle extends StatelessWidget {
           ),
         );
 
-        //TODO: add missing event handler for cart bloc
-        // context.read<CartBloc>().add(
-        //       CartEvent.updateCartItem(
-        //         item: cartItem.copyWith(
-        //           price: state.materialPrice,
-        //         ),
-        //         customerCodeInfo:
-        //             context.read<CustomerCodeBloc>().state.customerCodeInfo,
-        //         doNotallowOutOfStockMaterial: context
-        //             .read<EligibilityBloc>()
-        //             .state
-        //             .doNotAllowOutOfStockMaterials,
-        //         salesOrganisation:
-        //             context.read<SalesOrgBloc>().state.salesOrganisation,
-        //         salesOrganisationConfigs:
-        //             context.read<SalesOrgBloc>().state.configs,
-        //         shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
-        //       ),
-        //     );
+        context.read<CartBloc>().add(
+              CartEvent.discountOverride(
+                item: cartItem.copyWith(
+                  price: state.materialPrice,
+                ),
+              ),
+            );
       },
       builder: ((context, state) {
         return Column(
@@ -96,6 +87,7 @@ class DiscountOverrideToggle extends StatelessWidget {
                               0,
                             ),
                           ),
+                          shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
                         ),
                       );
                 }
@@ -204,6 +196,7 @@ class DiscountOverrideDialog {
                         double.parse(controller.text),
                       ),
                     ),
+                    shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
                   ),
                 );
             context.router.pop();

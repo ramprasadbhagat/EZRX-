@@ -11,6 +11,8 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+
 part 'discount_override_event.dart';
 part 'discount_override_state.dart';
 part 'discount_override_bloc.freezed.dart';
@@ -34,6 +36,7 @@ class DiscountOverrideBloc
           customerCodeInfo: e.customerCode,
           salesOrganisation: e.salesOrganisation,
           price: e.price,
+          shipToInfo: e.shipToInfo,
         );
         await failureOrSuccess.fold(
           (_) async {

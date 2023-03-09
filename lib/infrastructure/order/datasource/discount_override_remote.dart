@@ -26,6 +26,7 @@ class DiscountOverrideRemoteDataSource {
     required String salesOrgCode,
     required String customerCode,
     required Map<String, dynamic> materialQuery,
+    required String shipToCode,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
       final queryData = queryMutation.getMaterialPrice();
@@ -33,6 +34,7 @@ class DiscountOverrideRemoteDataSource {
         'salesOrganisation': salesOrgCode,
         'customer': customerCode,
         'request': [materialQuery],
+        'shipToCode': shipToCode,
       };
 
       final res = await httpService.request(

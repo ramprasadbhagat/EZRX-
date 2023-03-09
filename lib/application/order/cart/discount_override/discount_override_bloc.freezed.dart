@@ -24,6 +24,7 @@ mixin _$DiscountOverrideEvent {
             SalesOrganisation salesOrganisation,
             MaterialInfo material,
             MaterialNumber materialNumber,
+            ShipToInfo shipToInfo,
             Price price)
         fetch,
     required TResult Function(Price price, bool showErrorMessages) update,
@@ -36,6 +37,7 @@ mixin _$DiscountOverrideEvent {
             SalesOrganisation salesOrganisation,
             MaterialInfo material,
             MaterialNumber materialNumber,
+            ShipToInfo shipToInfo,
             Price price)?
         fetch,
     TResult? Function(Price price, bool showErrorMessages)? update,
@@ -48,6 +50,7 @@ mixin _$DiscountOverrideEvent {
             SalesOrganisation salesOrganisation,
             MaterialInfo material,
             MaterialNumber materialNumber,
+            ShipToInfo shipToInfo,
             Price price)?
         fetch,
     TResult Function(Price price, bool showErrorMessages)? update,
@@ -135,11 +138,13 @@ abstract class _$$_FetchCopyWith<$Res>
       SalesOrganisation salesOrganisation,
       MaterialInfo material,
       MaterialNumber materialNumber,
+      ShipToInfo shipToInfo,
       Price price});
 
   $CustomerCodeInfoCopyWith<$Res> get customerCode;
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
   $MaterialInfoCopyWith<$Res> get material;
+  $ShipToInfoCopyWith<$Res> get shipToInfo;
   @override
   $PriceCopyWith<$Res> get price;
 }
@@ -158,6 +163,7 @@ class __$$_FetchCopyWithImpl<$Res>
     Object? salesOrganisation = null,
     Object? material = null,
     Object? materialNumber = null,
+    Object? shipToInfo = null,
     Object? price = null,
   }) {
     return _then(_$_Fetch(
@@ -177,6 +183,10 @@ class __$$_FetchCopyWithImpl<$Res>
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
               as MaterialNumber,
+      shipToInfo: null == shipToInfo
+          ? _value.shipToInfo
+          : shipToInfo // ignore: cast_nullable_to_non_nullable
+              as ShipToInfo,
       price: null == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
@@ -207,6 +217,14 @@ class __$$_FetchCopyWithImpl<$Res>
       return _then(_value.copyWith(material: value));
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ShipToInfoCopyWith<$Res> get shipToInfo {
+    return $ShipToInfoCopyWith<$Res>(_value.shipToInfo, (value) {
+      return _then(_value.copyWith(shipToInfo: value));
+    });
+  }
 }
 
 /// @nodoc
@@ -217,6 +235,7 @@ class _$_Fetch implements _Fetch {
       required this.salesOrganisation,
       required this.material,
       required this.materialNumber,
+      required this.shipToInfo,
       required this.price});
 
   @override
@@ -228,11 +247,13 @@ class _$_Fetch implements _Fetch {
   @override
   final MaterialNumber materialNumber;
   @override
+  final ShipToInfo shipToInfo;
+  @override
   final Price price;
 
   @override
   String toString() {
-    return 'DiscountOverrideEvent.fetch(customerCode: $customerCode, salesOrganisation: $salesOrganisation, material: $material, materialNumber: $materialNumber, price: $price)';
+    return 'DiscountOverrideEvent.fetch(customerCode: $customerCode, salesOrganisation: $salesOrganisation, material: $material, materialNumber: $materialNumber, shipToInfo: $shipToInfo, price: $price)';
   }
 
   @override
@@ -248,12 +269,14 @@ class _$_Fetch implements _Fetch {
                 other.material == material) &&
             (identical(other.materialNumber, materialNumber) ||
                 other.materialNumber == materialNumber) &&
+            (identical(other.shipToInfo, shipToInfo) ||
+                other.shipToInfo == shipToInfo) &&
             (identical(other.price, price) || other.price == price));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, customerCode, salesOrganisation,
-      material, materialNumber, price);
+      material, materialNumber, shipToInfo, price);
 
   @JsonKey(ignore: true)
   @override
@@ -269,12 +292,13 @@ class _$_Fetch implements _Fetch {
             SalesOrganisation salesOrganisation,
             MaterialInfo material,
             MaterialNumber materialNumber,
+            ShipToInfo shipToInfo,
             Price price)
         fetch,
     required TResult Function(Price price, bool showErrorMessages) update,
   }) {
-    return fetch(
-        customerCode, salesOrganisation, material, materialNumber, price);
+    return fetch(customerCode, salesOrganisation, material, materialNumber,
+        shipToInfo, price);
   }
 
   @override
@@ -285,12 +309,13 @@ class _$_Fetch implements _Fetch {
             SalesOrganisation salesOrganisation,
             MaterialInfo material,
             MaterialNumber materialNumber,
+            ShipToInfo shipToInfo,
             Price price)?
         fetch,
     TResult? Function(Price price, bool showErrorMessages)? update,
   }) {
-    return fetch?.call(
-        customerCode, salesOrganisation, material, materialNumber, price);
+    return fetch?.call(customerCode, salesOrganisation, material,
+        materialNumber, shipToInfo, price);
   }
 
   @override
@@ -301,14 +326,15 @@ class _$_Fetch implements _Fetch {
             SalesOrganisation salesOrganisation,
             MaterialInfo material,
             MaterialNumber materialNumber,
+            ShipToInfo shipToInfo,
             Price price)?
         fetch,
     TResult Function(Price price, bool showErrorMessages)? update,
     required TResult orElse(),
   }) {
     if (fetch != null) {
-      return fetch(
-          customerCode, salesOrganisation, material, materialNumber, price);
+      return fetch(customerCode, salesOrganisation, material, materialNumber,
+          shipToInfo, price);
     }
     return orElse();
   }
@@ -351,12 +377,14 @@ abstract class _Fetch implements DiscountOverrideEvent {
       required final SalesOrganisation salesOrganisation,
       required final MaterialInfo material,
       required final MaterialNumber materialNumber,
+      required final ShipToInfo shipToInfo,
       required final Price price}) = _$_Fetch;
 
   CustomerCodeInfo get customerCode;
   SalesOrganisation get salesOrganisation;
   MaterialInfo get material;
   MaterialNumber get materialNumber;
+  ShipToInfo get shipToInfo;
   @override
   Price get price;
   @override
@@ -446,6 +474,7 @@ class _$_Update implements _Update {
             SalesOrganisation salesOrganisation,
             MaterialInfo material,
             MaterialNumber materialNumber,
+            ShipToInfo shipToInfo,
             Price price)
         fetch,
     required TResult Function(Price price, bool showErrorMessages) update,
@@ -461,6 +490,7 @@ class _$_Update implements _Update {
             SalesOrganisation salesOrganisation,
             MaterialInfo material,
             MaterialNumber materialNumber,
+            ShipToInfo shipToInfo,
             Price price)?
         fetch,
     TResult? Function(Price price, bool showErrorMessages)? update,
@@ -476,6 +506,7 @@ class _$_Update implements _Update {
             SalesOrganisation salesOrganisation,
             MaterialInfo material,
             MaterialNumber materialNumber,
+            ShipToInfo shipToInfo,
             Price price)?
         fetch,
     TResult Function(Price price, bool showErrorMessages)? update,

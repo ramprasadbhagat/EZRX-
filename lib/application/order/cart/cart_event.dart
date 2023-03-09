@@ -19,6 +19,9 @@ class CartEvent with _$CartEvent {
     required ShipToInfo shipToInfo,
     required bool doNotallowOutOfStockMaterial,
   }) = _AddMaterialToCart;
+  const factory CartEvent.discountOverride({
+    required PriceAggregate item,
+  }) = _DiscountOverride;
   const factory CartEvent.addBundleToCart({
     required List<PriceAggregate> bundleItems,
     required SalesOrganisationConfigs salesOrganisationConfigs,

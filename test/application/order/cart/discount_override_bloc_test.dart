@@ -3,6 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/order/cart/discount_override/discount_override_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
@@ -32,7 +33,10 @@ void main() {
         when(() => discountOverrideRepositoryMock.getMaterialPriceWithOverride(
             customerCodeInfo: CustomerCodeInfo.empty(),
             salesOrganisation: SalesOrganisation.empty(),
-            price: Price.empty())).thenAnswer(
+            price: Price.empty(),
+            shipToInfo: ShipToInfo.empty().copyWith(
+            shipToCustomerCode: 'fake-code'
+          ),)).thenAnswer(
           (invocation) async => Right(
             Price.empty(),
           ),
@@ -45,6 +49,8 @@ void main() {
           material: MaterialInfo.empty(),
           materialNumber: MaterialNumber(''),
           price: Price.empty(),
+          shipToInfo:
+              ShipToInfo.empty().copyWith(shipToCustomerCode: 'fake-code'),
         ),
       ),
       expect: () => [
@@ -57,16 +63,19 @@ void main() {
         ),
       ],
     );
-blocTest<DiscountOverrideBloc, DiscountOverrideState>(
+    blocTest<DiscountOverrideBloc, DiscountOverrideState>(
       'update the override discount',
       build: () => DiscountOverrideBloc(
         repository: discountOverrideRepositoryMock,
       ),
       setUp: () {
         when(() => discountOverrideRepositoryMock.getMaterialPriceWithOverride(
-            customerCodeInfo: CustomerCodeInfo.empty(),
-            salesOrganisation: SalesOrganisation.empty(),
-            price: Price.empty())).thenAnswer(
+              customerCodeInfo: CustomerCodeInfo.empty(),
+              salesOrganisation: SalesOrganisation.empty(),
+              price: Price.empty(),
+              shipToInfo:
+                  ShipToInfo.empty().copyWith(shipToCustomerCode: 'fake-code'),
+            )).thenAnswer(
           (invocation) async => Right(
             Price.empty(),
           ),
@@ -80,8 +89,7 @@ blocTest<DiscountOverrideBloc, DiscountOverrideState>(
       ),
       expect: () => [
         DiscountOverrideState.initial().copyWith(
-            materialPrice:
-                Price.empty().copyWith(),
+            materialPrice: Price.empty().copyWith(),
             showErrorMessages: true,
             apiFailureOrSuccessOption: none()),
       ],
@@ -95,7 +103,10 @@ blocTest<DiscountOverrideBloc, DiscountOverrideState>(
         when(() => discountOverrideRepositoryMock.getMaterialPriceWithOverride(
             customerCodeInfo: CustomerCodeInfo.empty(),
             salesOrganisation: SalesOrganisation.empty(),
-            price: Price.empty())).thenAnswer(
+            price: Price.empty(),
+            shipToInfo: ShipToInfo.empty().copyWith(
+            shipToCustomerCode: 'fake-code'
+          ),)).thenAnswer(
           (invocation) async => const Left(
             ApiFailure.priceOverrideNotFound(),
           ),
@@ -108,6 +119,9 @@ blocTest<DiscountOverrideBloc, DiscountOverrideState>(
           material: MaterialInfo.empty(),
           materialNumber: MaterialNumber(''),
           price: Price.empty(),
+          shipToInfo: ShipToInfo.empty().copyWith(
+            shipToCustomerCode: 'fake-code'
+          ),
         ),
       ),
       expect: () => [
@@ -119,6 +133,4 @@ blocTest<DiscountOverrideBloc, DiscountOverrideState>(
       ],
     );
   });
-
-  
 }

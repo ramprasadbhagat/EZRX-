@@ -1,6 +1,7 @@
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
@@ -54,6 +55,9 @@ void main() {
       final result =
           await discountOverrideRepository.getMaterialPriceWithOverride(
               customerCodeInfo: fakeCustomerCodeInfo,
+              shipToInfo: ShipToInfo.empty().copyWith(
+                shipToCustomerCode: 'fake-code',
+              ),
               salesOrganisation: fakeSaleOrg,
               price: Price.empty().copyWith(
                 priceOverride: PriceOverrideValue(70.0),
@@ -73,6 +77,9 @@ void main() {
       final result =
           await discountOverrideRepository.getMaterialPriceWithOverride(
               customerCodeInfo: fakeCustomerCodeInfo,
+              shipToInfo: ShipToInfo.empty().copyWith(
+                shipToCustomerCode: 'fake-code',
+              ),
               salesOrganisation: fakeSaleOrg,
               price: Price.empty().copyWith(
                 priceOverride: PriceOverrideValue(70.0),
@@ -89,6 +96,7 @@ void main() {
       when(() => discountOverrideRemoteDataSource.getMaterialOverridePriceList(
           salesOrgCode: '2601',
           customerCode: '123456',
+          shipToCode: 'fake-code',
           materialQuery: PriceDto.fromDomain(Price.empty().copyWith(
             priceOverride: PriceOverrideValue(70.0),
             zdp8Override: Zdp8OverrideValue(12.0),
@@ -106,6 +114,9 @@ void main() {
       final result =
           await discountOverrideRepository.getMaterialPriceWithOverride(
         customerCodeInfo: fakeCustomerCodeInfo,
+        shipToInfo: ShipToInfo.empty().copyWith(
+                shipToCustomerCode: 'fake-code',
+              ),
         salesOrganisation: fakeSaleOrg,
         price: Price.empty().copyWith(
           priceOverride: PriceOverrideValue(70.0),
@@ -124,11 +135,15 @@ void main() {
       when(() => discountOverrideRemoteDataSource.getMaterialOverridePriceList(
           salesOrgCode: '',
           customerCode: '',
+          shipToCode: 'fake-code',
           materialQuery: {})).thenThrow((invocation) async => MockException());
 
       final result =
           await discountOverrideRepository.getMaterialPriceWithOverride(
               customerCodeInfo: fakeCustomerCodeInfo,
+              shipToInfo: ShipToInfo.empty().copyWith(
+                shipToCustomerCode: 'fake-code',
+              ),
               salesOrganisation: fakeSaleOrg,
               price: Price.empty().copyWith(
                 priceOverride: PriceOverrideValue(70.0),
@@ -151,6 +166,9 @@ void main() {
       final result =
           await discountOverrideRepository.getMaterialPriceWithOverride(
               customerCodeInfo: fakeCustomerCodeInfo,
+              shipToInfo: ShipToInfo.empty().copyWith(
+                shipToCustomerCode: 'fake-code',
+              ),
               salesOrganisation: fakeSaleOrg,
               price: Price.empty().copyWith(
                 priceOverride: PriceOverrideValue(70.0),
@@ -172,6 +190,9 @@ void main() {
 
       final result =
           await discountOverrideRepository.getMaterialPriceWithOverride(
+            shipToInfo: ShipToInfo.empty().copyWith(
+                shipToCustomerCode: 'fake-code',
+              ),
               customerCodeInfo: fakeCustomerCodeInfo,
               salesOrganisation: fakeSaleOrg,
               price: Price.empty().copyWith(
@@ -197,6 +218,9 @@ void main() {
       final result =
           await discountOverrideRepository.getMaterialPriceWithOverride(
               customerCodeInfo: fakeCustomerCodeInfo,
+              shipToInfo: ShipToInfo.empty().copyWith(
+                shipToCustomerCode: 'fake-code',
+              ),
               salesOrganisation: fakeSaleOrg,
               price: Price.empty().copyWith(
                 priceOverride: PriceOverrideValue(70.0),

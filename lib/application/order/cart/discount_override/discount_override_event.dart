@@ -7,6 +7,7 @@ class DiscountOverrideEvent with _$DiscountOverrideEvent {
     required SalesOrganisation salesOrganisation,
     required MaterialInfo material,
     required MaterialNumber materialNumber,
+    required ShipToInfo shipToInfo,
     required Price price,
   }) = _Fetch;
 

@@ -52,6 +52,7 @@ void main() {
             'salesOrganisation': '',
             'customer': '',
             'request': [{}],
+            'shipToCode': '',
           };
           final res = json.decode(
             await rootBundle
@@ -75,7 +76,11 @@ void main() {
           );
 
           final result = await remoteDataSource.getMaterialOverridePriceList(
-              customerCode: '', materialQuery: {}, salesOrgCode: '');
+            customerCode: '',
+            materialQuery: {},
+            salesOrgCode: '',
+            shipToCode: '',
+          );
 
           expect(
             result,
@@ -103,13 +108,17 @@ void main() {
                 'salesOrganisation': '',
                 'customer': '',
                 'request': [{}],
+                'shipToCode': '',
               },
             }),
           );
 
           await remoteDataSource
               .getMaterialOverridePriceList(
-                  customerCode: '', materialQuery: {}, salesOrgCode: '')
+                  customerCode: '',
+                  materialQuery: {},
+                  salesOrgCode: '',
+                  shipToCode: '')
               .onError((error, _) async {
             expect(error, isA<ServerException>());
             return Future.value(<PriceMock>[]);
@@ -135,17 +144,21 @@ void main() {
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
               'query': remoteDataSource.queryMutation.getMaterialPrice(),
-              'variables': {
+              'variables':  {
                 'salesOrganisation': '',
                 'customer': '',
                 'request': [{}],
+                'shipToCode': '',
               },
             }),
           );
 
           await remoteDataSource
               .getMaterialOverridePriceList(
-                  customerCode: '', materialQuery: {}, salesOrgCode: '')
+                  customerCode: '',
+                  materialQuery: {},
+                  salesOrgCode: '',
+                  shipToCode: '')
               .onError((error, _) async {
             expect(error, isA<ServerException>());
             return Future.value(<PriceMock>[]);
@@ -168,17 +181,21 @@ void main() {
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
               'query': remoteDataSource.queryMutation.getMaterialPrice(),
-              'variables': {
+              'variables':  {
                 'salesOrganisation': '',
                 'customer': '',
                 'request': [{}],
+                'shipToCode': '',
               },
             }),
           );
 
           await remoteDataSource
               .getMaterialOverridePriceList(
-                  customerCode: '', materialQuery: {}, salesOrgCode: '')
+                  customerCode: '',
+                  materialQuery: {},
+                  salesOrgCode: '',
+                  shipToCode: '')
               .onError((error, _) async {
             expect(error, isA<ServerException>());
             return Future.value(<PriceMock>[]);
