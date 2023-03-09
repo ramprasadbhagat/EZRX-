@@ -37,7 +37,8 @@ mixin _$MaterialListEvent {
             ShipToInfo shipToInfo,
             MaterialFilter selectedMaterialFilter,
             String pickAndPack,
-            SearchKey searchKey)
+            SearchKey searchKey,
+            bool isScanSearch)
         searchMaterialList,
     required TResult Function(String searchKey) updateSearchKey,
     required TResult Function(
@@ -73,7 +74,8 @@ mixin _$MaterialListEvent {
             ShipToInfo shipToInfo,
             MaterialFilter selectedMaterialFilter,
             String pickAndPack,
-            SearchKey searchKey)?
+            SearchKey searchKey,
+            bool isScanSearch)?
         searchMaterialList,
     TResult? Function(String searchKey)? updateSearchKey,
     TResult? Function(
@@ -109,7 +111,8 @@ mixin _$MaterialListEvent {
             ShipToInfo shipToInfo,
             MaterialFilter selectedMaterialFilter,
             String pickAndPack,
-            SearchKey searchKey)?
+            SearchKey searchKey,
+            bool isScanSearch)?
         searchMaterialList,
     TResult Function(String searchKey)? updateSearchKey,
     TResult Function(
@@ -230,7 +233,8 @@ class _$_Initialized implements _Initialized {
             ShipToInfo shipToInfo,
             MaterialFilter selectedMaterialFilter,
             String pickAndPack,
-            SearchKey searchKey)
+            SearchKey searchKey,
+            bool isScanSearch)
         searchMaterialList,
     required TResult Function(String searchKey) updateSearchKey,
     required TResult Function(
@@ -269,7 +273,8 @@ class _$_Initialized implements _Initialized {
             ShipToInfo shipToInfo,
             MaterialFilter selectedMaterialFilter,
             String pickAndPack,
-            SearchKey searchKey)?
+            SearchKey searchKey,
+            bool isScanSearch)?
         searchMaterialList,
     TResult? Function(String searchKey)? updateSearchKey,
     TResult? Function(
@@ -308,7 +313,8 @@ class _$_Initialized implements _Initialized {
             ShipToInfo shipToInfo,
             MaterialFilter selectedMaterialFilter,
             String pickAndPack,
-            SearchKey searchKey)?
+            SearchKey searchKey,
+            bool isScanSearch)?
         searchMaterialList,
     TResult Function(String searchKey)? updateSearchKey,
     TResult Function(
@@ -607,7 +613,8 @@ class _$_Fetch implements _Fetch {
             ShipToInfo shipToInfo,
             MaterialFilter selectedMaterialFilter,
             String pickAndPack,
-            SearchKey searchKey)
+            SearchKey searchKey,
+            bool isScanSearch)
         searchMaterialList,
     required TResult Function(String searchKey) updateSearchKey,
     required TResult Function(
@@ -647,7 +654,8 @@ class _$_Fetch implements _Fetch {
             ShipToInfo shipToInfo,
             MaterialFilter selectedMaterialFilter,
             String pickAndPack,
-            SearchKey searchKey)?
+            SearchKey searchKey,
+            bool isScanSearch)?
         searchMaterialList,
     TResult? Function(String searchKey)? updateSearchKey,
     TResult? Function(
@@ -687,7 +695,8 @@ class _$_Fetch implements _Fetch {
             ShipToInfo shipToInfo,
             MaterialFilter selectedMaterialFilter,
             String pickAndPack,
-            SearchKey searchKey)?
+            SearchKey searchKey,
+            bool isScanSearch)?
         searchMaterialList,
     TResult Function(String searchKey)? updateSearchKey,
     TResult Function(
@@ -788,7 +797,8 @@ abstract class _$$_SearchMagerialListCopyWith<$Res> {
       ShipToInfo shipToInfo,
       MaterialFilter selectedMaterialFilter,
       String pickAndPack,
-      SearchKey searchKey});
+      SearchKey searchKey,
+      bool isScanSearch});
 
   $UserCopyWith<$Res> get user;
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
@@ -817,6 +827,7 @@ class __$$_SearchMagerialListCopyWithImpl<$Res>
     Object? selectedMaterialFilter = null,
     Object? pickAndPack = null,
     Object? searchKey = null,
+    Object? isScanSearch = null,
   }) {
     return _then(_$_SearchMagerialList(
       user: null == user
@@ -851,6 +862,10 @@ class __$$_SearchMagerialListCopyWithImpl<$Res>
           ? _value.searchKey
           : searchKey // ignore: cast_nullable_to_non_nullable
               as SearchKey,
+      isScanSearch: null == isScanSearch
+          ? _value.isScanSearch
+          : isScanSearch // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 
@@ -915,7 +930,8 @@ class _$_SearchMagerialList implements _SearchMagerialList {
       required this.shipToInfo,
       required this.selectedMaterialFilter,
       required this.pickAndPack,
-      required this.searchKey});
+      required this.searchKey,
+      this.isScanSearch = false});
 
   @override
   final User user;
@@ -933,10 +949,13 @@ class _$_SearchMagerialList implements _SearchMagerialList {
   final String pickAndPack;
   @override
   final SearchKey searchKey;
+  @override
+  @JsonKey()
+  final bool isScanSearch;
 
   @override
   String toString() {
-    return 'MaterialListEvent.searchMaterialList(user: $user, salesOrganisation: $salesOrganisation, configs: $configs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, selectedMaterialFilter: $selectedMaterialFilter, pickAndPack: $pickAndPack, searchKey: $searchKey)';
+    return 'MaterialListEvent.searchMaterialList(user: $user, salesOrganisation: $salesOrganisation, configs: $configs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, selectedMaterialFilter: $selectedMaterialFilter, pickAndPack: $pickAndPack, searchKey: $searchKey, isScanSearch: $isScanSearch)';
   }
 
   @override
@@ -957,7 +976,9 @@ class _$_SearchMagerialList implements _SearchMagerialList {
             (identical(other.pickAndPack, pickAndPack) ||
                 other.pickAndPack == pickAndPack) &&
             (identical(other.searchKey, searchKey) ||
-                other.searchKey == searchKey));
+                other.searchKey == searchKey) &&
+            (identical(other.isScanSearch, isScanSearch) ||
+                other.isScanSearch == isScanSearch));
   }
 
   @override
@@ -970,7 +991,8 @@ class _$_SearchMagerialList implements _SearchMagerialList {
       shipToInfo,
       selectedMaterialFilter,
       pickAndPack,
-      searchKey);
+      searchKey,
+      isScanSearch);
 
   @JsonKey(ignore: true)
   @override
@@ -1001,7 +1023,8 @@ class _$_SearchMagerialList implements _SearchMagerialList {
             ShipToInfo shipToInfo,
             MaterialFilter selectedMaterialFilter,
             String pickAndPack,
-            SearchKey searchKey)
+            SearchKey searchKey,
+            bool isScanSearch)
         searchMaterialList,
     required TResult Function(String searchKey) updateSearchKey,
     required TResult Function(
@@ -1023,7 +1046,8 @@ class _$_SearchMagerialList implements _SearchMagerialList {
         shipToInfo,
         selectedMaterialFilter,
         pickAndPack,
-        searchKey);
+        searchKey,
+        isScanSearch);
   }
 
   @override
@@ -1048,7 +1072,8 @@ class _$_SearchMagerialList implements _SearchMagerialList {
             ShipToInfo shipToInfo,
             MaterialFilter selectedMaterialFilter,
             String pickAndPack,
-            SearchKey searchKey)?
+            SearchKey searchKey,
+            bool isScanSearch)?
         searchMaterialList,
     TResult? Function(String searchKey)? updateSearchKey,
     TResult? Function(
@@ -1070,7 +1095,8 @@ class _$_SearchMagerialList implements _SearchMagerialList {
         shipToInfo,
         selectedMaterialFilter,
         pickAndPack,
-        searchKey);
+        searchKey,
+        isScanSearch);
   }
 
   @override
@@ -1095,7 +1121,8 @@ class _$_SearchMagerialList implements _SearchMagerialList {
             ShipToInfo shipToInfo,
             MaterialFilter selectedMaterialFilter,
             String pickAndPack,
-            SearchKey searchKey)?
+            SearchKey searchKey,
+            bool isScanSearch)?
         searchMaterialList,
     TResult Function(String searchKey)? updateSearchKey,
     TResult Function(
@@ -1119,7 +1146,8 @@ class _$_SearchMagerialList implements _SearchMagerialList {
           shipToInfo,
           selectedMaterialFilter,
           pickAndPack,
-          searchKey);
+          searchKey,
+          isScanSearch);
     }
     return orElse();
   }
@@ -1174,7 +1202,8 @@ abstract class _SearchMagerialList implements MaterialListEvent {
       required final ShipToInfo shipToInfo,
       required final MaterialFilter selectedMaterialFilter,
       required final String pickAndPack,
-      required final SearchKey searchKey}) = _$_SearchMagerialList;
+      required final SearchKey searchKey,
+      final bool isScanSearch}) = _$_SearchMagerialList;
 
   User get user;
   SalesOrganisation get salesOrganisation;
@@ -1184,6 +1213,7 @@ abstract class _SearchMagerialList implements MaterialListEvent {
   MaterialFilter get selectedMaterialFilter;
   String get pickAndPack;
   SearchKey get searchKey;
+  bool get isScanSearch;
   @JsonKey(ignore: true)
   _$$_SearchMagerialListCopyWith<_$_SearchMagerialList> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1273,7 +1303,8 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
             ShipToInfo shipToInfo,
             MaterialFilter selectedMaterialFilter,
             String pickAndPack,
-            SearchKey searchKey)
+            SearchKey searchKey,
+            bool isScanSearch)
         searchMaterialList,
     required TResult Function(String searchKey) updateSearchKey,
     required TResult Function(
@@ -1312,7 +1343,8 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
             ShipToInfo shipToInfo,
             MaterialFilter selectedMaterialFilter,
             String pickAndPack,
-            SearchKey searchKey)?
+            SearchKey searchKey,
+            bool isScanSearch)?
         searchMaterialList,
     TResult? Function(String searchKey)? updateSearchKey,
     TResult? Function(
@@ -1351,7 +1383,8 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
             ShipToInfo shipToInfo,
             MaterialFilter selectedMaterialFilter,
             String pickAndPack,
-            SearchKey searchKey)?
+            SearchKey searchKey,
+            bool isScanSearch)?
         searchMaterialList,
     TResult Function(String searchKey)? updateSearchKey,
     TResult Function(
@@ -1658,7 +1691,8 @@ class _$_LoadMore implements _LoadMore {
             ShipToInfo shipToInfo,
             MaterialFilter selectedMaterialFilter,
             String pickAndPack,
-            SearchKey searchKey)
+            SearchKey searchKey,
+            bool isScanSearch)
         searchMaterialList,
     required TResult Function(String searchKey) updateSearchKey,
     required TResult Function(
@@ -1698,7 +1732,8 @@ class _$_LoadMore implements _LoadMore {
             ShipToInfo shipToInfo,
             MaterialFilter selectedMaterialFilter,
             String pickAndPack,
-            SearchKey searchKey)?
+            SearchKey searchKey,
+            bool isScanSearch)?
         searchMaterialList,
     TResult? Function(String searchKey)? updateSearchKey,
     TResult? Function(
@@ -1738,7 +1773,8 @@ class _$_LoadMore implements _LoadMore {
             ShipToInfo shipToInfo,
             MaterialFilter selectedMaterialFilter,
             String pickAndPack,
-            SearchKey searchKey)?
+            SearchKey searchKey,
+            bool isScanSearch)?
         searchMaterialList,
     TResult Function(String searchKey)? updateSearchKey,
     TResult Function(
@@ -1832,6 +1868,7 @@ mixin _$MaterialListState {
       throw _privateConstructorUsedError;
   bool get canLoadMore => throw _privateConstructorUsedError;
   bool get isFetching => throw _privateConstructorUsedError;
+  bool get isScanFromBarcode => throw _privateConstructorUsedError;
   int get nextPageIndex => throw _privateConstructorUsedError;
   SearchKey get searchKey => throw _privateConstructorUsedError;
   MaterialFilter get selectedFilters => throw _privateConstructorUsedError;
@@ -1852,6 +1889,7 @@ abstract class $MaterialListStateCopyWith<$Res> {
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
       bool canLoadMore,
       bool isFetching,
+      bool isScanFromBarcode,
       int nextPageIndex,
       SearchKey searchKey,
       MaterialFilter selectedFilters});
@@ -1876,6 +1914,7 @@ class _$MaterialListStateCopyWithImpl<$Res, $Val extends MaterialListState>
     Object? apiFailureOrSuccessOption = null,
     Object? canLoadMore = null,
     Object? isFetching = null,
+    Object? isScanFromBarcode = null,
     Object? nextPageIndex = null,
     Object? searchKey = null,
     Object? selectedFilters = null,
@@ -1896,6 +1935,10 @@ class _$MaterialListStateCopyWithImpl<$Res, $Val extends MaterialListState>
       isFetching: null == isFetching
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isScanFromBarcode: null == isScanFromBarcode
+          ? _value.isScanFromBarcode
+          : isScanFromBarcode // ignore: cast_nullable_to_non_nullable
               as bool,
       nextPageIndex: null == nextPageIndex
           ? _value.nextPageIndex
@@ -1934,6 +1977,7 @@ abstract class _$$_MaterialListStateCopyWith<$Res>
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
       bool canLoadMore,
       bool isFetching,
+      bool isScanFromBarcode,
       int nextPageIndex,
       SearchKey searchKey,
       MaterialFilter selectedFilters});
@@ -1957,6 +2001,7 @@ class __$$_MaterialListStateCopyWithImpl<$Res>
     Object? apiFailureOrSuccessOption = null,
     Object? canLoadMore = null,
     Object? isFetching = null,
+    Object? isScanFromBarcode = null,
     Object? nextPageIndex = null,
     Object? searchKey = null,
     Object? selectedFilters = null,
@@ -1977,6 +2022,10 @@ class __$$_MaterialListStateCopyWithImpl<$Res>
       isFetching: null == isFetching
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isScanFromBarcode: null == isScanFromBarcode
+          ? _value.isScanFromBarcode
+          : isScanFromBarcode // ignore: cast_nullable_to_non_nullable
               as bool,
       nextPageIndex: null == nextPageIndex
           ? _value.nextPageIndex
@@ -2002,6 +2051,7 @@ class _$_MaterialListState extends _MaterialListState {
       required this.apiFailureOrSuccessOption,
       required this.canLoadMore,
       required this.isFetching,
+      required this.isScanFromBarcode,
       required this.nextPageIndex,
       required this.searchKey,
       required this.selectedFilters})
@@ -2022,6 +2072,8 @@ class _$_MaterialListState extends _MaterialListState {
   @override
   final bool isFetching;
   @override
+  final bool isScanFromBarcode;
+  @override
   final int nextPageIndex;
   @override
   final SearchKey searchKey;
@@ -2030,7 +2082,7 @@ class _$_MaterialListState extends _MaterialListState {
 
   @override
   String toString() {
-    return 'MaterialListState(materialList: $materialList, apiFailureOrSuccessOption: $apiFailureOrSuccessOption, canLoadMore: $canLoadMore, isFetching: $isFetching, nextPageIndex: $nextPageIndex, searchKey: $searchKey, selectedFilters: $selectedFilters)';
+    return 'MaterialListState(materialList: $materialList, apiFailureOrSuccessOption: $apiFailureOrSuccessOption, canLoadMore: $canLoadMore, isFetching: $isFetching, isScanFromBarcode: $isScanFromBarcode, nextPageIndex: $nextPageIndex, searchKey: $searchKey, selectedFilters: $selectedFilters)';
   }
 
   @override
@@ -2047,6 +2099,8 @@ class _$_MaterialListState extends _MaterialListState {
                 other.canLoadMore == canLoadMore) &&
             (identical(other.isFetching, isFetching) ||
                 other.isFetching == isFetching) &&
+            (identical(other.isScanFromBarcode, isScanFromBarcode) ||
+                other.isScanFromBarcode == isScanFromBarcode) &&
             (identical(other.nextPageIndex, nextPageIndex) ||
                 other.nextPageIndex == nextPageIndex) &&
             (identical(other.searchKey, searchKey) ||
@@ -2062,6 +2116,7 @@ class _$_MaterialListState extends _MaterialListState {
       apiFailureOrSuccessOption,
       canLoadMore,
       isFetching,
+      isScanFromBarcode,
       nextPageIndex,
       searchKey,
       selectedFilters);
@@ -2081,6 +2136,7 @@ abstract class _MaterialListState extends MaterialListState {
           apiFailureOrSuccessOption,
       required final bool canLoadMore,
       required final bool isFetching,
+      required final bool isScanFromBarcode,
       required final int nextPageIndex,
       required final SearchKey searchKey,
       required final MaterialFilter selectedFilters}) = _$_MaterialListState;
@@ -2094,6 +2150,8 @@ abstract class _MaterialListState extends MaterialListState {
   bool get canLoadMore;
   @override
   bool get isFetching;
+  @override
+  bool get isScanFromBarcode;
   @override
   int get nextPageIndex;
   @override

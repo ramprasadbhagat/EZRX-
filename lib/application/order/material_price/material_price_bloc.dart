@@ -24,10 +24,13 @@ class MaterialPriceBloc extends Bloc<MaterialPriceEvent, MaterialPriceState> {
             MaterialPriceState.initial(),
           ),
           fetch: (e) async {
-            _filterFOCMaterial(
-              e.materials,
-              emit,
+            emit(
+              state.copyWith(
+                isFetching: true,
+              ),
             );
+
+            _filterFOCMaterial(e.materials, emit);
 
             final materialNumbers =
                 e.materials.map((e) => e.materialNumber).toList();
@@ -38,13 +41,16 @@ class MaterialPriceBloc extends Bloc<MaterialPriceEvent, MaterialPriceState> {
                       element,
                     ),
                   );
-            if (queryMaterialNumber.isEmpty) return;
+            if (queryMaterialNumber.isEmpty) {
+              emit(
+                state.copyWith(
+                  isFetching: false,
+                ),
+              );
 
-            emit(
-              state.copyWith(
-                isFetching: true,
-              ),
-            );
+              return;
+            }
+
             final failureOrSuccess = await repository.getMaterialPrice(
               customerCodeInfo: e.customerCodeInfo,
               shipToInfo: e.shipToInfo,

@@ -8,6 +8,7 @@ class MaterialListState with _$MaterialListState {
     required Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
     required bool canLoadMore,
     required bool isFetching,
+    required bool isScanFromBarcode,
     required int nextPageIndex,
     required SearchKey searchKey,
     required MaterialFilter selectedFilters,
@@ -18,12 +19,9 @@ class MaterialListState with _$MaterialListState {
         apiFailureOrSuccessOption: none(),
         canLoadMore: true,
         isFetching: false,
+        isScanFromBarcode: false,
         nextPageIndex: 0,
         searchKey: SearchKey(''),
         selectedFilters: MaterialFilter.empty(),
       );
-
-  bool get isSingularMaterialFetched {
-    return materialList.length == 1;
-  }
 }

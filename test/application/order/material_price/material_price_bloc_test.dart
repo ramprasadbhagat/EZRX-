@@ -98,7 +98,30 @@ void main() {
           materials: fakeMaterialQuery,
         ),
       ),
-      expect: () => [],
+      expect: () => [
+        MaterialPriceState.initial().copyWith(
+          isFetching: true,
+          materialPrice: {
+            for (var number in fakeMaterialQuery)
+              number.materialNumber: Price.empty().copyWith(
+                rules: [PriceRule.empty()],
+                tiers: [PriceTier.empty()],
+                bonuses: [PriceBonus.empty()],
+              ),
+          },
+        ),
+        MaterialPriceState.initial().copyWith(
+          isFetching: false,
+          materialPrice: {
+            for (var number in fakeMaterialQuery)
+              number.materialNumber: Price.empty().copyWith(
+                rules: [PriceRule.empty()],
+                tiers: [PriceTier.empty()],
+                bonuses: [PriceBonus.empty()],
+              ),
+          },
+        )
+      ],
     );
 
     blocTest<MaterialPriceBloc, MaterialPriceState>(
@@ -114,11 +137,23 @@ void main() {
         ),
       ),
       expect: () => [
-        MaterialPriceState.initial().copyWith(materialPrice: {
-          for (final material in fakeFOCMaterialQuery)
-            material.materialNumber:
-                Price.empty().copyWith(materialNumber: material.materialNumber)
-        })
+        MaterialPriceState.initial().copyWith(isFetching: true),
+        MaterialPriceState.initial().copyWith(
+          isFetching: true,
+          materialPrice: {
+            for (final material in fakeFOCMaterialQuery)
+              material.materialNumber: Price.empty()
+                  .copyWith(materialNumber: material.materialNumber)
+          },
+        ),
+        MaterialPriceState.initial().copyWith(
+          isFetching: false,
+          materialPrice: {
+            for (final material in fakeFOCMaterialQuery)
+              material.materialNumber: Price.empty()
+                  .copyWith(materialNumber: material.materialNumber)
+          },
+        ),
       ],
     );
 

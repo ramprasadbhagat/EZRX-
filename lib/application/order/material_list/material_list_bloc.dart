@@ -6,6 +6,7 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
@@ -50,6 +51,7 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
             materialList: <MaterialInfo>[],
             nextPageIndex: 0,
             apiFailureOrSuccessOption: none(),
+            isScanFromBarcode: false,
           ),
         );
         final failureOrSuccess = await materialListRepository.getMaterialList(
@@ -95,6 +97,7 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
           state.copyWith(
             isFetching: true,
             apiFailureOrSuccessOption: none(),
+            isScanFromBarcode: false,
           ),
         );
         final failureOrSuccess = await materialListRepository.getMaterialList(
@@ -144,6 +147,7 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
             materialList: <MaterialInfo>[],
             nextPageIndex: 0,
             apiFailureOrSuccessOption: none(),
+            isScanFromBarcode: e.isScanSearch,
           ),
         );
         final failureOrSuccess =

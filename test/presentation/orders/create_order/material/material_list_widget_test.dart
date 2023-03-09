@@ -22,6 +22,7 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
@@ -29,6 +30,7 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/favourites/entities/favourite_item.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
+import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
@@ -39,6 +41,7 @@ import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/custom_selector.dart';
+import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/add_to_cart.dart';
 import 'package:ezrxmobile/presentation/orders/combo_deal/widgets/combo_deal_label.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/favorite_button.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/material_list/material_list.dart';
@@ -1714,7 +1717,8 @@ void main() {
       await tester.pumpWidget(getScopedWidget(const MaterialListPage()));
       await tester.pump();
 
-      final findTextField = find.byKey(const Key('materialSearchField$fakeKeyword'));
+      final findTextField =
+          find.byKey(const Key('materialSearchField$fakeKeyword'));
       await tester.enterText(findTextField, fakeKeyword);
       await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pump(const Duration(seconds: 3));
@@ -1758,6 +1762,133 @@ void main() {
       await tester.tap(customSelectorBrand);
 
       await tester.pump();
+    });
+
+    testWidgets('Searching material after scanning successfully',
+        (tester) async {
+      whenListen(
+        mockScanMaterialInfoBloc,
+        Stream.fromIterable(
+          [
+            ScanMaterialInfoState.initial(),
+            ScanMaterialInfoState.initial().copyWith(
+              scannedData: 'fake-material-number',
+            ),
+          ],
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget(const MaterialListPage()));
+
+      verify(
+        () => materialListBlocMock.add(
+          MaterialListEvent.searchMaterialList(
+            configs: SalesOrganisationConfigs.empty(),
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            salesOrganisation: SalesOrganisation.empty(),
+            shipToInfo: ShipToInfo.empty(),
+            user: User.empty(),
+            isScanSearch: true,
+            pickAndPack: '',
+            selectedMaterialFilter: MaterialFilter.empty().copyWith(
+              uniqueTherapeuticClass: [
+                'GSK Consumer Healthcare',
+                'All other non-therapeutic products',
+              ],
+            ),
+            searchKey: SearchKey('fake-material-number'),
+          ),
+        ),
+      ).called(1);
+    });
+
+    testWidgets(
+        'Opening add to cart after scanning and fetching price successfully',
+        (tester) async {
+      when(() => materialListBlocMock.state).thenReturn(
+        MaterialListState.initial().copyWith(
+          materialList: [
+            MaterialInfo.empty().copyWith(materialNumber: fakeMaterialNumber),
+          ],
+          isScanFromBarcode: true,
+        ),
+      );
+
+      whenListen(
+        materialPriceBlocMock,
+        Stream.fromIterable(
+          [
+            MaterialPriceState.initial().copyWith(isFetching: true),
+            MaterialPriceState.initial().copyWith(
+              isFetching: false,
+              materialPrice: {
+                fakeMaterialNumber:
+                    Price.empty().copyWith(materialNumber: fakeMaterialNumber),
+              },
+            ),
+          ],
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget(const MaterialListPage()));
+
+      await tester.pump();
+
+      expect(find.byType(AddToCart), findsOneWidget);
+    });
+
+    testWidgets(
+        'Opening combo deal detail after scanning and fetching price successfully',
+        (tester) async {
+      final fakeComboDealPrice = Price.empty().copyWith(
+        materialNumber: fakeMaterialNumber,
+        comboDeal: PriceComboDeal.empty().copyWith(
+          flexibleGroup: FlexibleGroup('fake-group'),
+        ),
+      );
+
+      when(() => materialListBlocMock.state).thenReturn(
+        MaterialListState.initial().copyWith(
+          materialList: [
+            MaterialInfo.empty().copyWith(materialNumber: fakeMaterialNumber),
+          ],
+          isScanFromBarcode: true,
+        ),
+      );
+
+      when(() => cartBlocMock.state).thenReturn(
+        CartState.initial().copyWith(cartItems: [
+          CartItem.comboDeal([
+            PriceAggregate.empty().copyWith(
+              price: fakeComboDealPrice,
+            )
+          ])
+        ]),
+      );
+
+      whenListen(
+        materialPriceBlocMock,
+        Stream.fromIterable(
+          [
+            MaterialPriceState.initial().copyWith(isFetching: true),
+            MaterialPriceState.initial().copyWith(
+              isFetching: false,
+              materialPrice: {
+                fakeMaterialNumber: fakeComboDealPrice,
+              },
+            ),
+          ],
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget(const MaterialListPage()));
+
+      await tester.pump();
+
+      expect(
+        (autoRouterMock.current.args as ComboDealDetailPageRouteArgs).isEdit,
+        true,
+      );
     });
   });
 

@@ -1,3 +1,6 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,7 +18,6 @@ import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
@@ -67,6 +69,7 @@ class MaterialListPage extends StatelessWidget {
                         .state
                         .selectedMaterialFilter,
                     pickAndPack: eligibilityBloc.state.getPNPValueMaterial,
+                    isScanSearch: true,
                     searchKey: SearchKey(state.scannedData),
                   ),
                 );
@@ -92,6 +95,22 @@ class MaterialListPage extends StatelessWidget {
             );
           },
         ),
+        BlocListener<MaterialPriceBloc, MaterialPriceState>(
+          listenWhen: (previous, current) =>
+              previous.isFetching != current.isFetching && !current.isFetching,
+          listener: (context, state) {
+            final materialListState = context.read<MaterialListBloc>().state;
+
+            if (materialListState.materialList.length == 1 &&
+                materialListState.isScanFromBarcode) {
+              _onFetchScannerResult(
+                context: context,
+                listState: materialListState,
+                priceState: state,
+              );
+            }
+          },
+        ),
       ],
       child: Scaffold(
         key: const Key('materialListPage'),
@@ -102,11 +121,7 @@ class MaterialListPage extends StatelessWidget {
               previous.isFetching != current.isFetching,
           listener: (context, state) {
             state.apiFailureOrSuccessOption.fold(
-              () {
-                if (state.isSingularMaterialFetched) {
-                  _openAddToCartBottomSheet(context);
-                }
-              },
+              () {},
               (either) => either.fold(
                 (failure) {
                   ErrorUtils.handleApiFailure(context, failure);
@@ -153,8 +168,8 @@ class MaterialListPage extends StatelessWidget {
                         )
                       : ScrollList<MaterialInfo>(
                           emptyMessage: 'No material found',
-                          onRefresh: () => onRefresh(context),
-                          onLoadingMore: () => onLoadingMore(context),
+                          onRefresh: () => _onRefresh(context),
+                          onLoadingMore: () => _onLoadingMore(context),
                           isLoading: state.isFetching,
                           itemBuilder: (context, index, item) {
                             final salesOrgConfigs = context
@@ -178,7 +193,60 @@ class MaterialListPage extends StatelessWidget {
     );
   }
 
-  void onRefresh(BuildContext context) {
+  void _onFetchScannerResult({
+    required BuildContext context,
+    required MaterialListState listState,
+    required MaterialPriceState priceState,
+  }) {
+    final material = listState.materialList.first;
+    final eligibilityBloc = context.read<EligibilityBloc>();
+    final materialPrice = priceState.materialPrice[material.materialNumber];
+
+    final comboDealInCart = context.read<CartBloc>().state.getComboDealCartItem(
+          comboDealQuery: materialPrice!.comboDeal,
+        );
+
+    if (comboDealInCart.materials.isNotEmpty) {
+      context.router.push(
+        ComboDealDetailPageRoute(
+          comboItems: comboDealInCart.materials,
+          isEdit: true,
+        ),
+      );
+
+      return;
+    }
+
+    if (material.hasValidTenderContract) {
+      context.read<TenderContractBloc>().add(
+            TenderContractEvent.fetch(
+              customerCodeInfo: eligibilityBloc.state.customerCodeInfo,
+              salesOrganisation: eligibilityBloc.state.salesOrganisation,
+              shipToInfo: eligibilityBloc.state.shipToInfo,
+              materialInfo: material,
+              defaultSelectedTenderContract: TenderContract.empty(),
+            ),
+          );
+    }
+    CartBottomSheet.showAddToCartBottomSheet(
+      priceAggregate: PriceAggregate(
+        price: materialPrice,
+        materialInfo: material,
+        salesOrgConfig: eligibilityBloc.state.salesOrgConfigs,
+        quantity: 1,
+        bundle: Bundle.empty(),
+        addedBonusList: [],
+        stockInfo: StockInfo.empty().copyWith(
+          materialNumber: material.materialNumber,
+        ),
+        tenderContract: TenderContract.empty(),
+        comboDeal: ComboDeal.empty(),
+      ),
+      context: context,
+    );
+  }
+
+  void _onRefresh(BuildContext context) {
     final eligibilityBloc = context.read<EligibilityBloc>();
 
     context.read<MaterialPriceBloc>().add(
@@ -216,7 +284,7 @@ class MaterialListPage extends StatelessWidget {
         );
   }
 
-  void onLoadingMore(BuildContext context) {
+  void _onLoadingMore(BuildContext context) {
     final eligibilityBloc = context.read<EligibilityBloc>();
 
     context.read<MaterialListBloc>().add(
@@ -234,41 +302,4 @@ class MaterialListPage extends StatelessWidget {
           ),
         );
   }
-}
-
-void _openAddToCartBottomSheet(BuildContext context) {
-  final eligibilityBloc = context.read<EligibilityBloc>();
-  final materialInfo =
-      context.read<MaterialListBloc>().state.materialList.first;
-  final materialPrice = context
-      .read<MaterialPriceBloc>()
-      .state
-      .materialPrice[materialInfo.materialNumber];
-  if (materialInfo.hasValidTenderContract) {
-    context.read<TenderContractBloc>().add(
-          TenderContractEvent.fetch(
-            customerCodeInfo: eligibilityBloc.state.customerCodeInfo,
-            salesOrganisation: eligibilityBloc.state.salesOrganisation,
-            shipToInfo: eligibilityBloc.state.shipToInfo,
-            materialInfo: materialInfo,
-            defaultSelectedTenderContract: TenderContract.empty(),
-          ),
-        );
-  }
-  CartBottomSheet.showAddToCartBottomSheet(
-    priceAggregate: PriceAggregate(
-      price: materialPrice ?? Price.empty(),
-      materialInfo: materialInfo,
-      salesOrgConfig: eligibilityBloc.state.salesOrgConfigs,
-      quantity: 1,
-      bundle: Bundle.empty(),
-      addedBonusList: [],
-      stockInfo: StockInfo.empty().copyWith(
-        materialNumber: materialInfo.materialNumber,
-      ),
-      tenderContract: TenderContract.empty(),
-      comboDeal: ComboDeal.empty(),
-    ),
-    context: context,
-  );
 }

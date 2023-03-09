@@ -23,6 +23,7 @@ class MaterialListEvent with _$MaterialListEvent {
     required MaterialFilter selectedMaterialFilter,
     required String pickAndPack,
     required SearchKey searchKey,
+    @Default(false) bool isScanSearch,
   }) = _SearchMagerialList;
   const factory MaterialListEvent.updateSearchKey({required String searchKey}) =
       _UpdateSearchKey;
