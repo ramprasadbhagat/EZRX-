@@ -103,9 +103,9 @@ class _OrderTypeSelectorField extends StatelessWidget {
               child: Text(
                 leadingText,
                 style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                  fontSize: 12,
-                  fontWeight: FontWeight.normal,
-                ),
+                      fontSize: 12,
+                      fontWeight: FontWeight.normal,
+                    ),
               ),
             ),
           ),
@@ -167,7 +167,7 @@ class _OrderTypeSelectorField extends StatelessWidget {
   String get displayItemText => isReason
       ? orderDocumentTypeState.isReasonSelected
           ? orderDocumentTypeState.selectedReason.displayReasonText
-          : intialDropdownText
+          : '${itemList.first.orderReason}: ${itemList.first.description}'
       : orderDocumentTypeState.isOrderTypeSelected
           ? orderDocumentTypeState.selectedOrderType.documentType.getOrCrash()
           : intialDropdownText;
@@ -206,13 +206,7 @@ class _OrderTypeSelectorField extends StatelessWidget {
           context.router.pop();
         },
         onConfirmed: () {
-          context.router.popUntilRouteWithName(MaterialRootRoute.name);
-          context.read<OrderDocumentTypeBloc>().add(
-                OrderDocumentTypeEvent.selectedOrderType(
-                  selectedOrderType: type,
-                  isReasonSelected: isReason,
-                ),
-              );
+          _onConfirm(context: context, isReason: isReason, i: type);
         },
       );
     }
@@ -234,10 +228,10 @@ class _OrderTypeSelectorField extends StatelessWidget {
               key: Key(displayText),
               child: Text(
                 displayText,
-                style:Theme.of(context).textTheme.titleSmall?.copyWith(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
-                ), 
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                    ),
               ),
               onPressed: () => onOrderTypeSelected(context, ctx, i),
             );
@@ -248,18 +242,36 @@ class _OrderTypeSelectorField extends StatelessWidget {
   }
 }
 
+void _onConfirm({
+  required BuildContext context,
+  required bool isReason,
+  required OrderDocumentType i,
+}) {
+  context.router.pushAndPopUntil(
+    const MaterialRootRoute(),
+    predicate: (route) => route.settings.name == 'HomeNavigationTabbarRoute',
+  );
+  context.read<OrderDocumentTypeBloc>().add(
+        OrderDocumentTypeEvent.selectedOrderType(
+          selectedOrderType: i,
+          isReasonSelected: isReason,
+        ),
+      );
+}
+
 List<String> getValidationText(
   OrderDocumentType initial,
   OrderDocumentType selected,
   CartState cartState,
 ) {
   final list = <String>[];
+  final dialogContent = cartState.dialogContent(initial, selected);
   if (initial != selected &&
       cartState.showDialog(selected) &&
-      cartState.dialogContent.isNotEmpty) {
-    list.add('Changing order type to ${selected.documentType}!');
+      dialogContent.isNotEmpty) {
+    list.add('Changing order type to ${selected.documentType.getOrCrash()}!');
     list.add(
-      'Your cart includes ${cartState.dialogContent} materials, changing the order type will clear all items in your cart. Please confirm if you want to proceed',
+      'Your cart includes $dialogContent materials, changing the order type will clear all items in your cart. Please confirm if you want to proceed',
     );
   }
 

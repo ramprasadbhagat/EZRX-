@@ -7,4 +7,12 @@ abstract class IOrderDocumentTypeRepository {
   Future<Either<ApiFailure, List<OrderDocumentType>>> getOrderDocumentTypList({
     required SalesOrganisation salesOrganisation,
   });
+
+  Future<Either<ApiFailure, Unit>> putOrderTypeToCartStorage({
+    required OrderDocumentType orderType,
+  });
+
+  Future<Either<ApiFailure, Unit>> deleteOrderTypeFromCartStorage();
+
+  Either<ApiFailure, OrderDocumentType> getOrderTypeFromCartStorage();
 }

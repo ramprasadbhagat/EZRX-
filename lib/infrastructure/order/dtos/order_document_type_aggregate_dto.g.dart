@@ -3,6 +3,56 @@
 part of 'order_document_type_aggregate_dto.dart';
 
 // **************************************************************************
+// TypeAdapterGenerator
+// **************************************************************************
+
+class OrderDocumentTypeDtoAdapter extends TypeAdapter<_$_OrderDocumentTypeDto> {
+  @override
+  final int typeId = 31;
+
+  @override
+  _$_OrderDocumentTypeDto read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return _$_OrderDocumentTypeDto(
+      salesOrg: fields[0] == null ? '' : fields[0] as String,
+      documentType: fields[1] == null ? '' : fields[1] as String,
+      description: fields[2] == null ? '' : fields[2] as String,
+      shippingCondition: fields[3] == null ? '' : fields[3] as String,
+      orderReason: fields[4] == null ? '' : fields[4] as String,
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, _$_OrderDocumentTypeDto obj) {
+    writer
+      ..writeByte(5)
+      ..writeByte(0)
+      ..write(obj.salesOrg)
+      ..writeByte(1)
+      ..write(obj.documentType)
+      ..writeByte(2)
+      ..write(obj.description)
+      ..writeByte(3)
+      ..write(obj.shippingCondition)
+      ..writeByte(4)
+      ..write(obj.orderReason);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is OrderDocumentTypeDtoAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+// **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 

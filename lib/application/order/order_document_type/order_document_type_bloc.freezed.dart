@@ -24,6 +24,7 @@ mixin _$OrderDocumentTypeEvent {
     required TResult Function(
             OrderDocumentType selectedOrderType, bool isReasonSelected)
         selectedOrderType,
+    required TResult Function() deleteOrderTypeFromStorage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -33,6 +34,7 @@ mixin _$OrderDocumentTypeEvent {
     TResult? Function(
             OrderDocumentType selectedOrderType, bool isReasonSelected)?
         selectedOrderType,
+    TResult? Function()? deleteOrderTypeFromStorage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -42,6 +44,7 @@ mixin _$OrderDocumentTypeEvent {
     TResult Function(
             OrderDocumentType selectedOrderType, bool isReasonSelected)?
         selectedOrderType,
+    TResult Function()? deleteOrderTypeFromStorage,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -50,6 +53,8 @@ mixin _$OrderDocumentTypeEvent {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_FetchOrderDocumentType value) fetch,
     required TResult Function(_SelectedOrderType value) selectedOrderType,
+    required TResult Function(_DeleteOrderTypeFromStorage value)
+        deleteOrderTypeFromStorage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,6 +62,8 @@ mixin _$OrderDocumentTypeEvent {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_FetchOrderDocumentType value)? fetch,
     TResult? Function(_SelectedOrderType value)? selectedOrderType,
+    TResult? Function(_DeleteOrderTypeFromStorage value)?
+        deleteOrderTypeFromStorage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -64,6 +71,8 @@ mixin _$OrderDocumentTypeEvent {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_FetchOrderDocumentType value)? fetch,
     TResult Function(_SelectedOrderType value)? selectedOrderType,
+    TResult Function(_DeleteOrderTypeFromStorage value)?
+        deleteOrderTypeFromStorage,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -132,6 +141,7 @@ class _$_Initialized implements _Initialized {
     required TResult Function(
             OrderDocumentType selectedOrderType, bool isReasonSelected)
         selectedOrderType,
+    required TResult Function() deleteOrderTypeFromStorage,
   }) {
     return initialized();
   }
@@ -144,6 +154,7 @@ class _$_Initialized implements _Initialized {
     TResult? Function(
             OrderDocumentType selectedOrderType, bool isReasonSelected)?
         selectedOrderType,
+    TResult? Function()? deleteOrderTypeFromStorage,
   }) {
     return initialized?.call();
   }
@@ -156,6 +167,7 @@ class _$_Initialized implements _Initialized {
     TResult Function(
             OrderDocumentType selectedOrderType, bool isReasonSelected)?
         selectedOrderType,
+    TResult Function()? deleteOrderTypeFromStorage,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -170,6 +182,8 @@ class _$_Initialized implements _Initialized {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_FetchOrderDocumentType value) fetch,
     required TResult Function(_SelectedOrderType value) selectedOrderType,
+    required TResult Function(_DeleteOrderTypeFromStorage value)
+        deleteOrderTypeFromStorage,
   }) {
     return initialized(this);
   }
@@ -180,6 +194,8 @@ class _$_Initialized implements _Initialized {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_FetchOrderDocumentType value)? fetch,
     TResult? Function(_SelectedOrderType value)? selectedOrderType,
+    TResult? Function(_DeleteOrderTypeFromStorage value)?
+        deleteOrderTypeFromStorage,
   }) {
     return initialized?.call(this);
   }
@@ -190,6 +206,8 @@ class _$_Initialized implements _Initialized {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_FetchOrderDocumentType value)? fetch,
     TResult Function(_SelectedOrderType value)? selectedOrderType,
+    TResult Function(_DeleteOrderTypeFromStorage value)?
+        deleteOrderTypeFromStorage,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -295,6 +313,7 @@ class _$_FetchOrderDocumentType implements _FetchOrderDocumentType {
     required TResult Function(
             OrderDocumentType selectedOrderType, bool isReasonSelected)
         selectedOrderType,
+    required TResult Function() deleteOrderTypeFromStorage,
   }) {
     return fetch(salesOrganisation, isEDI);
   }
@@ -307,6 +326,7 @@ class _$_FetchOrderDocumentType implements _FetchOrderDocumentType {
     TResult? Function(
             OrderDocumentType selectedOrderType, bool isReasonSelected)?
         selectedOrderType,
+    TResult? Function()? deleteOrderTypeFromStorage,
   }) {
     return fetch?.call(salesOrganisation, isEDI);
   }
@@ -319,6 +339,7 @@ class _$_FetchOrderDocumentType implements _FetchOrderDocumentType {
     TResult Function(
             OrderDocumentType selectedOrderType, bool isReasonSelected)?
         selectedOrderType,
+    TResult Function()? deleteOrderTypeFromStorage,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -333,6 +354,8 @@ class _$_FetchOrderDocumentType implements _FetchOrderDocumentType {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_FetchOrderDocumentType value) fetch,
     required TResult Function(_SelectedOrderType value) selectedOrderType,
+    required TResult Function(_DeleteOrderTypeFromStorage value)
+        deleteOrderTypeFromStorage,
   }) {
     return fetch(this);
   }
@@ -343,6 +366,8 @@ class _$_FetchOrderDocumentType implements _FetchOrderDocumentType {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_FetchOrderDocumentType value)? fetch,
     TResult? Function(_SelectedOrderType value)? selectedOrderType,
+    TResult? Function(_DeleteOrderTypeFromStorage value)?
+        deleteOrderTypeFromStorage,
   }) {
     return fetch?.call(this);
   }
@@ -353,6 +378,8 @@ class _$_FetchOrderDocumentType implements _FetchOrderDocumentType {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_FetchOrderDocumentType value)? fetch,
     TResult Function(_SelectedOrderType value)? selectedOrderType,
+    TResult Function(_DeleteOrderTypeFromStorage value)?
+        deleteOrderTypeFromStorage,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -467,6 +494,7 @@ class _$_SelectedOrderType implements _SelectedOrderType {
     required TResult Function(
             OrderDocumentType selectedOrderType, bool isReasonSelected)
         selectedOrderType,
+    required TResult Function() deleteOrderTypeFromStorage,
   }) {
     return selectedOrderType(this.selectedOrderType, isReasonSelected);
   }
@@ -479,6 +507,7 @@ class _$_SelectedOrderType implements _SelectedOrderType {
     TResult? Function(
             OrderDocumentType selectedOrderType, bool isReasonSelected)?
         selectedOrderType,
+    TResult? Function()? deleteOrderTypeFromStorage,
   }) {
     return selectedOrderType?.call(this.selectedOrderType, isReasonSelected);
   }
@@ -491,6 +520,7 @@ class _$_SelectedOrderType implements _SelectedOrderType {
     TResult Function(
             OrderDocumentType selectedOrderType, bool isReasonSelected)?
         selectedOrderType,
+    TResult Function()? deleteOrderTypeFromStorage,
     required TResult orElse(),
   }) {
     if (selectedOrderType != null) {
@@ -505,6 +535,8 @@ class _$_SelectedOrderType implements _SelectedOrderType {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_FetchOrderDocumentType value) fetch,
     required TResult Function(_SelectedOrderType value) selectedOrderType,
+    required TResult Function(_DeleteOrderTypeFromStorage value)
+        deleteOrderTypeFromStorage,
   }) {
     return selectedOrderType(this);
   }
@@ -515,6 +547,8 @@ class _$_SelectedOrderType implements _SelectedOrderType {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_FetchOrderDocumentType value)? fetch,
     TResult? Function(_SelectedOrderType value)? selectedOrderType,
+    TResult? Function(_DeleteOrderTypeFromStorage value)?
+        deleteOrderTypeFromStorage,
   }) {
     return selectedOrderType?.call(this);
   }
@@ -525,6 +559,8 @@ class _$_SelectedOrderType implements _SelectedOrderType {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_FetchOrderDocumentType value)? fetch,
     TResult Function(_SelectedOrderType value)? selectedOrderType,
+    TResult Function(_DeleteOrderTypeFromStorage value)?
+        deleteOrderTypeFromStorage,
     required TResult orElse(),
   }) {
     if (selectedOrderType != null) {
@@ -544,6 +580,134 @@ abstract class _SelectedOrderType implements OrderDocumentTypeEvent {
   @JsonKey(ignore: true)
   _$$_SelectedOrderTypeCopyWith<_$_SelectedOrderType> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_DeleteOrderTypeFromStorageCopyWith<$Res> {
+  factory _$$_DeleteOrderTypeFromStorageCopyWith(
+          _$_DeleteOrderTypeFromStorage value,
+          $Res Function(_$_DeleteOrderTypeFromStorage) then) =
+      __$$_DeleteOrderTypeFromStorageCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_DeleteOrderTypeFromStorageCopyWithImpl<$Res>
+    extends _$OrderDocumentTypeEventCopyWithImpl<$Res,
+        _$_DeleteOrderTypeFromStorage>
+    implements _$$_DeleteOrderTypeFromStorageCopyWith<$Res> {
+  __$$_DeleteOrderTypeFromStorageCopyWithImpl(
+      _$_DeleteOrderTypeFromStorage _value,
+      $Res Function(_$_DeleteOrderTypeFromStorage) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_DeleteOrderTypeFromStorage implements _DeleteOrderTypeFromStorage {
+  const _$_DeleteOrderTypeFromStorage();
+
+  @override
+  String toString() {
+    return 'OrderDocumentTypeEvent.deleteOrderTypeFromStorage()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_DeleteOrderTypeFromStorage);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(SalesOrganisation salesOrganisation, bool isEDI)
+        fetch,
+    required TResult Function(
+            OrderDocumentType selectedOrderType, bool isReasonSelected)
+        selectedOrderType,
+    required TResult Function() deleteOrderTypeFromStorage,
+  }) {
+    return deleteOrderTypeFromStorage();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(SalesOrganisation salesOrganisation, bool isEDI)? fetch,
+    TResult? Function(
+            OrderDocumentType selectedOrderType, bool isReasonSelected)?
+        selectedOrderType,
+    TResult? Function()? deleteOrderTypeFromStorage,
+  }) {
+    return deleteOrderTypeFromStorage?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(SalesOrganisation salesOrganisation, bool isEDI)? fetch,
+    TResult Function(
+            OrderDocumentType selectedOrderType, bool isReasonSelected)?
+        selectedOrderType,
+    TResult Function()? deleteOrderTypeFromStorage,
+    required TResult orElse(),
+  }) {
+    if (deleteOrderTypeFromStorage != null) {
+      return deleteOrderTypeFromStorage();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_FetchOrderDocumentType value) fetch,
+    required TResult Function(_SelectedOrderType value) selectedOrderType,
+    required TResult Function(_DeleteOrderTypeFromStorage value)
+        deleteOrderTypeFromStorage,
+  }) {
+    return deleteOrderTypeFromStorage(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_FetchOrderDocumentType value)? fetch,
+    TResult? Function(_SelectedOrderType value)? selectedOrderType,
+    TResult? Function(_DeleteOrderTypeFromStorage value)?
+        deleteOrderTypeFromStorage,
+  }) {
+    return deleteOrderTypeFromStorage?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_FetchOrderDocumentType value)? fetch,
+    TResult Function(_SelectedOrderType value)? selectedOrderType,
+    TResult Function(_DeleteOrderTypeFromStorage value)?
+        deleteOrderTypeFromStorage,
+    required TResult orElse(),
+  }) {
+    if (deleteOrderTypeFromStorage != null) {
+      return deleteOrderTypeFromStorage(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _DeleteOrderTypeFromStorage implements OrderDocumentTypeEvent {
+  const factory _DeleteOrderTypeFromStorage() = _$_DeleteOrderTypeFromStorage;
 }
 
 /// @nodoc

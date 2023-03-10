@@ -39,29 +39,19 @@ class OrderEligibilityState with _$OrderEligibilityState {
       return true;
     }
 
-    return isNotSuspended
-        ? isCartContainsNonSampleMaterial
-            ? isTotalGreaterThanMinOrderAmount
-            : true
-        : false;
+    return isNotSuspended ? isTotalGreaterThanMinOrderAmount : false;
   }
 
   bool get isTotalGreaterThanMinOrderAmount {
     if (salesOrg.salesOrg.isTH) {
       return subTotal >= double.parse(configs.minOrderAmount);
     }
-    
+
     return grandTotal >= double.parse(configs.minOrderAmount);
   }
 
   bool get isNotSuspended {
     return !shipInfo.status.isSuspended && !customerCodeInfo.status.isSuspended;
-  }
-
-  bool get isCartContainsNonSampleMaterial {
-    return cartItems
-        .where((element) => (!element.materialInfo.isSampleMaterial))
-        .isNotEmpty;
   }
 
   bool get isCartItemsContainsFOCMaterial {

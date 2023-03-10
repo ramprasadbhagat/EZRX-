@@ -19,6 +19,7 @@ import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
@@ -726,23 +727,29 @@ class _MarketMessage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final orderMarketMessage =
-        context.read<SalesOrgBloc>().state.configs.orderSummaryDisclaimer;
-    final orderType =
-        context.read<OrderDocumentTypeBloc>().state.selectedOrderType;
+    return BlocBuilder<OrderDocumentTypeBloc, OrderDocumentTypeState>(
+      buildWhen: (previous, current) =>
+          previous.selectedOrderType != current.selectedOrderType,
+      builder: (context, state) {
+        final orderMarketMessage =
+            context.read<SalesOrgBloc>().state.configs.orderSummaryDisclaimer;
+        final orderType =
+            context.read<OrderDocumentTypeBloc>().state.selectedOrderType;
 
-    return !orderType.documentType.isSpecialOrderType
-        ? RichText(
-            text: TextSpan(
-              children: <TextSpan>[
-                TextSpan(
-                  text: orderMarketMessage,
-                  style: Theme.of(context).textTheme.titleSmall,
+        return !orderType.documentType.isSpecialOrderType
+            ? RichText(
+                text: TextSpan(
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: orderMarketMessage,
+                      style: Theme.of(context).textTheme.titleSmall,
+                    ),
+                  ],
                 ),
-              ],
-            ),
-          )
-        : const SizedBox.shrink();
+              )
+            : const SizedBox.shrink();
+      },
+    );
   }
 }
 
@@ -770,16 +777,56 @@ class _CartDetails extends StatelessWidget {
             .where((e) => e.itemType == CartItemType.material)
             .toList()
             .allMaterials;
+
+        final vatInPercentage = context.read<EligibilityBloc>().state;
+
+        return _CartItemsSection(
+          salesOrgConfig: salesOrgConfig,
+          taxCode: taxCode,
+          readyToSubmitCartItem: readyToSubmitCartItem,
+          vatInPercentage: vatInPercentage,
+          cartState: state,
+        );
+      },
+    );
+  }
+}
+
+class _CartItemsSection extends StatelessWidget {
+  final SalesOrganisationConfigs salesOrgConfig;
+  final String taxCode;
+  final List<PriceAggregate> readyToSubmitCartItem;
+  final EligibilityState vatInPercentage;
+  final CartState cartState;
+  const _CartItemsSection({
+    required this.salesOrgConfig,
+    required this.taxCode,
+    required this.readyToSubmitCartItem,
+    required this.vatInPercentage,
+    required this.cartState,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<OrderDocumentTypeBloc, OrderDocumentTypeState>(
+      buildWhen: (previous, current) =>
+          previous.selectedOrderType != current.selectedOrderType,
+      builder: (context, state) {
+        final isSpecialOrderType = state.isSpecialOrderType;
+
         context.read<OrderEligibilityBloc>().add(
               OrderEligibilityEvent.update(
                 cartItems: readyToSubmitCartItem,
-                orderType: '',
-                grandTotal: state.grandTotal,
-                subTotal: state.subtotal,
+                orderType: context
+                    .read<OrderDocumentTypeBloc>()
+                    .state
+                    .selectedOrderType
+                    .documentType
+                    .getOrDefaultValue(''),
+                grandTotal: cartState.grandTotal,
+                subTotal: cartState.subtotal,
               ),
             );
-
-        final vatInPercentage = context.read<EligibilityBloc>().state;
 
         return Column(
           children: [
@@ -788,7 +835,7 @@ class _CartDetails extends StatelessWidget {
               keyText: 'Subtotal'.tr(),
               valueText: StringUtils.displayPrice(
                 salesOrgConfig,
-                state.subtotal,
+                isSpecialOrderType ? 0.0 : cartState.subtotal,
               ),
             ),
             if (vatInPercentage.salesOrgConfigs.shouldDisplayVATInPercentage)
@@ -801,27 +848,29 @@ class _CartDetails extends StatelessWidget {
                 keyText: taxCode.tr(),
                 valueText: StringUtils.displayPrice(
                   salesOrgConfig,
-                  state.vatTotal,
+                  isSpecialOrderType ? 0.0 : cartState.vatTotal,
                 ),
               ),
             BalanceTextRow(
               keyText: 'Min. Order Value'.tr(),
               valueText: StringUtils.displayPrice(
                 salesOrgConfig,
-                double.parse(salesOrgConfig.minOrderAmount),
+                isSpecialOrderType
+                    ? 0.0
+                    : double.parse(salesOrgConfig.minOrderAmount),
               ),
             ),
             BalanceTextRow(
               keyText: 'Grand Total'.tr(),
               valueText: StringUtils.displayPrice(
                 salesOrgConfig,
-                state.grandTotal,
+                isSpecialOrderType ? 0.0 : cartState.grandTotal,
               ),
             ),
             const SizedBox(
               height: 20,
             ),
-            ...state.selectedCartItems.map((item) {
+            ...cartState.selectedCartItems.map((item) {
               switch (item.itemType) {
                 case CartItemType.material:
                   return CartMaterialItemTile(

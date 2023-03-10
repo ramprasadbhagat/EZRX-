@@ -19,7 +19,21 @@ class OrderDocumentTypeBloc
 
   Future<void> _onEvent(event, emit) async {
     await event.map(
-      initialized: (_) => emit(OrderDocumentTypeState.initial()),
+      initialized: (_) {
+        add(const OrderDocumentTypeEvent.deleteOrderTypeFromStorage());
+      },
+      deleteOrderTypeFromStorage: (_) async {
+        final failureOrSuccess =
+            await orderDocumentTypeRepository.deleteOrderTypeFromCartStorage();
+        failureOrSuccess.fold(
+          (failure) {
+            emit(OrderDocumentTypeState.initial());
+          },
+          (orderDocumentType) {
+            emit(OrderDocumentTypeState.initial());
+          },
+        );
+      },
       fetch: (e) async {
         emit(OrderDocumentTypeState.initial().copyWith(
           isSubmitting: true,
@@ -39,9 +53,16 @@ class OrderDocumentTypeBloc
               orderDocumentTypeList
                   .removeWhere((item) => item.documentType.isZPOR);
             }
+            final storedOrderType = _getOrderTypeFromStorage();
+            final selectedOrderType =
+                storedOrderType != OrderDocumentType.empty()
+                    ? orderDocumentTypeList.contains(storedOrderType)
+                        ? storedOrderType
+                        : orderDocumentTypeList.first
+                    : orderDocumentTypeList.first;
             add(
               OrderDocumentTypeEvent.selectedOrderType(
-                selectedOrderType: orderDocumentTypeList.first,
+                selectedOrderType: selectedOrderType,
                 isReasonSelected: false,
               ),
             );
@@ -54,18 +75,53 @@ class OrderDocumentTypeBloc
           },
         );
       },
-      selectedOrderType: (e) {
-        if (e.isReasonSelected) {
-          emit(state.copyWith(
-            isReasonSelected: true,
-            selectedReason: e.selectedOrderType,
-          ));
-        } else {
-          emit(state.copyWith(
-            isOrderTypeSelected: true,
+      selectedOrderType: (e) async {
+        final failureOrSuccess = await orderDocumentTypeRepository
+            .putOrderTypeToCartStorage(orderType: e.selectedOrderType);
+        failureOrSuccess.fold(
+          (failure) => _emitterAfterOrderTypeSelected(
+            isReasonSelected: e.isReasonSelected,
             selectedOrderType: e.selectedOrderType,
-          ));
-        }
+            emit: emit,
+          ),
+          (orderDocumentType) => _emitterAfterOrderTypeSelected(
+            isReasonSelected: e.isReasonSelected,
+            selectedOrderType: e.selectedOrderType,
+            emit: emit,
+          ),
+        );
+      },
+    );
+  }
+
+  void _emitterAfterOrderTypeSelected({
+    required bool isReasonSelected,
+    required OrderDocumentType selectedOrderType,
+    required Emitter<OrderDocumentTypeState> emit,
+  }) {
+    if (isReasonSelected) {
+      emit(state.copyWith(
+        isReasonSelected: true,
+        selectedReason: selectedOrderType,
+      ));
+    } else {
+      emit(state.copyWith(
+        isOrderTypeSelected: true,
+        selectedOrderType: selectedOrderType,
+      ));
+    }
+  }
+
+  OrderDocumentType _getOrderTypeFromStorage() {
+    final orderTypeFromStorage =
+        orderDocumentTypeRepository.getOrderTypeFromCartStorage();
+
+    return orderTypeFromStorage.fold(
+      (failure) {
+        return OrderDocumentType.empty();
+      },
+      (orderDocumentType) {
+        return orderDocumentType;
       },
     );
   }

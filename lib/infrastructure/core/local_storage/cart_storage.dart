@@ -76,7 +76,7 @@ class CartStorage {
 
   List<CartItemDto> getAll() {
     try {
-      return _cartBox.values.map((e) => e as CartItemDto).toList();
+      return _cartBox.values.whereType<CartItemDto>().map((e) => e).toList();
     } catch (e) {
       throw (CacheException(message: e.toString()));
     }

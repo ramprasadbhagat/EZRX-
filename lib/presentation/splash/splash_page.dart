@@ -279,8 +279,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                       current.user.role.type.hasReturnsAdminAccess),
           listener: (context, state) {
             if (state.user.role.type.isReturnApproverAccount) {
-              context.read<ReturnApproverBloc>()
-                  .add(
+              context.read<ReturnApproverBloc>().add(
                     ReturnApproverEvent.fetch(
                       user: state.user,
                       approverReturnFilter: context

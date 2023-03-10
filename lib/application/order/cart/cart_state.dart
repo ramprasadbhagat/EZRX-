@@ -54,12 +54,15 @@ class CartState with _$CartState {
       !element.materialInfo.isFOCMaterial ||
       !element.materialInfo.isSampleMaterial);
 
-  String get dialogContent => containNonSampleMaterial
-      ? 'non-sample'
-      : containNonFocMaterialOT
-          ? 'non-FOC'
+  String dialogContent(OrderDocumentType initial, OrderDocumentType selected) =>
+      selected.documentType.isSpecialOrderType
+          ? selected.documentType.isZPFB && containNonSampleMaterial
+              ? 'non-sample'
+              : selected.documentType.isZPFC && containNonFocMaterialOT
+                  ? 'non-FOC'
+                  : ''
           : containNonRegularMaterial
-              ? 'only sample and/or FOC'
+              ? 'FOC and/or sample'
               : '';
 
   bool showDialog(OrderDocumentType orderType) {

@@ -21,14 +21,19 @@ OrderDocumentTypeDto _$OrderDocumentTypeDtoFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$OrderDocumentTypeDto {
   @JsonKey(name: 'salesOrg')
+  @HiveField(0, defaultValue: '')
   String get salesOrg => throw _privateConstructorUsedError;
   @JsonKey(name: 'documentType')
+  @HiveField(1, defaultValue: '')
   String get documentType => throw _privateConstructorUsedError;
   @JsonKey(name: 'description')
+  @HiveField(2, defaultValue: '')
   String get description => throw _privateConstructorUsedError;
   @JsonKey(name: 'shippingCondition')
+  @HiveField(3, defaultValue: '')
   String get shippingCondition => throw _privateConstructorUsedError;
   @JsonKey(name: 'orderReason')
+  @HiveField(4, defaultValue: '')
   String get orderReason => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -44,11 +49,21 @@ abstract class $OrderDocumentTypeDtoCopyWith<$Res> {
       _$OrderDocumentTypeDtoCopyWithImpl<$Res, OrderDocumentTypeDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'salesOrg') String salesOrg,
-      @JsonKey(name: 'documentType') String documentType,
-      @JsonKey(name: 'description') String description,
-      @JsonKey(name: 'shippingCondition') String shippingCondition,
-      @JsonKey(name: 'orderReason') String orderReason});
+      {@JsonKey(name: 'salesOrg')
+      @HiveField(0, defaultValue: '')
+          String salesOrg,
+      @JsonKey(name: 'documentType')
+      @HiveField(1, defaultValue: '')
+          String documentType,
+      @JsonKey(name: 'description')
+      @HiveField(2, defaultValue: '')
+          String description,
+      @JsonKey(name: 'shippingCondition')
+      @HiveField(3, defaultValue: '')
+          String shippingCondition,
+      @JsonKey(name: 'orderReason')
+      @HiveField(4, defaultValue: '')
+          String orderReason});
 }
 
 /// @nodoc
@@ -105,11 +120,21 @@ abstract class _$$_OrderDocumentTypeDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'salesOrg') String salesOrg,
-      @JsonKey(name: 'documentType') String documentType,
-      @JsonKey(name: 'description') String description,
-      @JsonKey(name: 'shippingCondition') String shippingCondition,
-      @JsonKey(name: 'orderReason') String orderReason});
+      {@JsonKey(name: 'salesOrg')
+      @HiveField(0, defaultValue: '')
+          String salesOrg,
+      @JsonKey(name: 'documentType')
+      @HiveField(1, defaultValue: '')
+          String documentType,
+      @JsonKey(name: 'description')
+      @HiveField(2, defaultValue: '')
+          String description,
+      @JsonKey(name: 'shippingCondition')
+      @HiveField(3, defaultValue: '')
+          String shippingCondition,
+      @JsonKey(name: 'orderReason')
+      @HiveField(4, defaultValue: '')
+          String orderReason});
 }
 
 /// @nodoc
@@ -156,13 +181,24 @@ class __$$_OrderDocumentTypeDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
+@HiveType(typeId: 31, adapterName: 'OrderDocumentTypeDtoAdapter')
 class _$_OrderDocumentTypeDto extends _OrderDocumentTypeDto {
   const _$_OrderDocumentTypeDto(
-      {@JsonKey(name: 'salesOrg') required this.salesOrg,
-      @JsonKey(name: 'documentType') required this.documentType,
-      @JsonKey(name: 'description') required this.description,
-      @JsonKey(name: 'shippingCondition') required this.shippingCondition,
-      @JsonKey(name: 'orderReason') required this.orderReason})
+      {@JsonKey(name: 'salesOrg')
+      @HiveField(0, defaultValue: '')
+          required this.salesOrg,
+      @JsonKey(name: 'documentType')
+      @HiveField(1, defaultValue: '')
+          required this.documentType,
+      @JsonKey(name: 'description')
+      @HiveField(2, defaultValue: '')
+          required this.description,
+      @JsonKey(name: 'shippingCondition')
+      @HiveField(3, defaultValue: '')
+          required this.shippingCondition,
+      @JsonKey(name: 'orderReason')
+      @HiveField(4, defaultValue: '')
+          required this.orderReason})
       : super._();
 
   factory _$_OrderDocumentTypeDto.fromJson(Map<String, dynamic> json) =>
@@ -170,18 +206,23 @@ class _$_OrderDocumentTypeDto extends _OrderDocumentTypeDto {
 
   @override
   @JsonKey(name: 'salesOrg')
+  @HiveField(0, defaultValue: '')
   final String salesOrg;
   @override
   @JsonKey(name: 'documentType')
+  @HiveField(1, defaultValue: '')
   final String documentType;
   @override
   @JsonKey(name: 'description')
+  @HiveField(2, defaultValue: '')
   final String description;
   @override
   @JsonKey(name: 'shippingCondition')
+  @HiveField(3, defaultValue: '')
   final String shippingCondition;
   @override
   @JsonKey(name: 'orderReason')
+  @HiveField(4, defaultValue: '')
   final String orderReason;
 
   @override
@@ -229,14 +270,19 @@ class _$_OrderDocumentTypeDto extends _OrderDocumentTypeDto {
 abstract class _OrderDocumentTypeDto extends OrderDocumentTypeDto {
   const factory _OrderDocumentTypeDto(
       {@JsonKey(name: 'salesOrg')
+      @HiveField(0, defaultValue: '')
           required final String salesOrg,
       @JsonKey(name: 'documentType')
+      @HiveField(1, defaultValue: '')
           required final String documentType,
       @JsonKey(name: 'description')
+      @HiveField(2, defaultValue: '')
           required final String description,
       @JsonKey(name: 'shippingCondition')
+      @HiveField(3, defaultValue: '')
           required final String shippingCondition,
       @JsonKey(name: 'orderReason')
+      @HiveField(4, defaultValue: '')
           required final String orderReason}) = _$_OrderDocumentTypeDto;
   const _OrderDocumentTypeDto._() : super._();
 
@@ -245,18 +291,23 @@ abstract class _OrderDocumentTypeDto extends OrderDocumentTypeDto {
 
   @override
   @JsonKey(name: 'salesOrg')
+  @HiveField(0, defaultValue: '')
   String get salesOrg;
   @override
   @JsonKey(name: 'documentType')
+  @HiveField(1, defaultValue: '')
   String get documentType;
   @override
   @JsonKey(name: 'description')
+  @HiveField(2, defaultValue: '')
   String get description;
   @override
   @JsonKey(name: 'shippingCondition')
+  @HiveField(3, defaultValue: '')
   String get shippingCondition;
   @override
   @JsonKey(name: 'orderReason')
+  @HiveField(4, defaultValue: '')
   String get orderReason;
   @override
   @JsonKey(ignore: true)

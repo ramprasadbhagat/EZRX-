@@ -7,6 +7,8 @@ import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.da
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
@@ -208,7 +210,12 @@ class CartPage extends StatelessWidget {
             configs: config,
             customerCodeInfo: customerCodeInfo,
             grandTotal: context.read<CartBloc>().state.grandTotal,
-            orderType: '',
+            orderType: context
+                .read<OrderDocumentTypeBloc>()
+                .state
+                .selectedOrderType
+                .documentType
+                .getOrDefaultValue(''),
             salesOrg: context.read<SalesOrgBloc>().state.salesOrganisation,
             shipInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
             user: context.read<UserBloc>().state.user,
@@ -273,6 +280,36 @@ class _TotalSection extends StatelessWidget {
         final salesOrgConfig = context.read<SalesOrgBloc>().state.configs;
         final taxCode = context.read<SalesOrgBloc>().state.salesOrg.taxCode;
 
+        return _TotalPriceSection(
+          salesOrgConfig: salesOrgConfig,
+          cartState: state,
+          vatInPercentage: vatInPercentage,
+          taxCode: taxCode,
+        );
+      },
+    );
+  }
+}
+
+class _TotalPriceSection extends StatelessWidget {
+  final SalesOrganisationConfigs salesOrgConfig;
+  final CartState cartState;
+  final EligibilityState vatInPercentage;
+  final String taxCode;
+  const _TotalPriceSection({
+    required this.salesOrgConfig,
+    required this.cartState,
+    required this.vatInPercentage,
+    required this.taxCode,
+  });
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<OrderDocumentTypeBloc, OrderDocumentTypeState>(
+      buildWhen: (previous, current) =>
+          previous.selectedOrderType != current.selectedOrderType,
+      builder: (context, state) {
+        final isSpecialOrderType = state.isSpecialOrderType;
+
         return Expanded(
           flex: 2,
           key: const Key('totalSection'),
@@ -281,8 +318,10 @@ class _TotalSection extends StatelessWidget {
             children: [
               BalanceTextRow(
                 keyText: 'Subtotal'.tr(),
-                valueText:
-                    StringUtils.displayPrice(salesOrgConfig, state.subtotal),
+                valueText: StringUtils.displayPrice(
+                  salesOrgConfig,
+                  isSpecialOrderType ? 0.0 : cartState.subtotal,
+                ),
                 valueFlex: 1,
               ),
               if (vatInPercentage.salesOrgConfigs.shouldDisplayVATInPercentage)
@@ -296,7 +335,7 @@ class _TotalSection extends StatelessWidget {
                   keyText: taxCode.tr(),
                   valueText: StringUtils.displayPrice(
                     salesOrgConfig,
-                    state.vatTotal,
+                    isSpecialOrderType ? 0.0 : cartState.vatTotal,
                   ),
                   valueFlex: 1,
                 ),
@@ -304,7 +343,7 @@ class _TotalSection extends StatelessWidget {
                 keyText: 'Grand Total'.tr(),
                 valueText: StringUtils.displayPrice(
                   salesOrgConfig,
-                  state.grandTotal,
+                  isSpecialOrderType ? 0.0 : cartState.grandTotal,
                 ),
                 valueFlex: 1,
               ),

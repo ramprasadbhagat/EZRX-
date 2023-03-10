@@ -5,6 +5,7 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/discount_override/discount_override_bloc.dart';
+import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
@@ -14,7 +15,6 @@ import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/cart_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
-import 'package:ezrxmobile/presentation/orders/cart/item/cart_delete_item_button.dart';
 import 'package:ezrxmobile/presentation/orders/cart/remark/cart_item_remark.dart';
 import 'package:ezrxmobile/presentation/orders/cart/remark/add_remark_dialog.dart';
 import 'package:ezrxmobile/presentation/orders/cart/remark/add_remark_button.dart';
@@ -52,160 +52,190 @@ class CartMaterialItemTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final tenderContractNumber = material.tenderContract.contractNumber;
 
-    return Card(
-      child: Column(
-        children: [
-          CustomSlidable(
-            endActionPaneActions: [
-              CustomSlidableAction(
-                label: 'Delete',
-                icon: Icons.delete_outline,
-                onPressed: (context) => context.read<CartBloc>().add(
-                      CartEvent.removeFromCart(item: cartItem),
-                    ),
-              ),
-            ],
-            borderRadius: 8,
-            child: ListTile(
-              contentPadding: showCheckBox ? EdgeInsets.zero : null,
-              key: Key('cartItem${material.materialInfo.materialNumber}'),
-              onTap: () {
-                CartBottomSheet.showUpdateCartBottomSheet(
-                  context: context,
-                  cartItem: material,
-                );
-              },
-              leading: showCheckBox
-                  ? Checkbox(
-                      onChanged: (value) {
-                        if (value == null) return;
-                        context.read<CartBloc>().add(
-                              CartEvent.selectButtonTapped(
-                                cartItem: cartItem,
-                              ),
-                            );
-                      },
-                      value: cartItem.isSelected,
-                    )
-                  : const SizedBox.shrink(),
-              title: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Flexible(
-                        child: Text(
-                          material.materialInfo.materialDescription,
-                          style: Theme.of(context).textTheme.titleSmall?.apply(
-                                color: ZPColors.kPrimaryColor,
-                              ),
+    return BlocBuilder<OrderDocumentTypeBloc, OrderDocumentTypeState>(
+      buildWhen: (previous, current) =>
+          previous.selectedOrderType != current.selectedOrderType,
+      builder: (context, state) {
+        final isSpecialOrderType =
+            context.read<OrderDocumentTypeBloc>().state.isSpecialOrderType;
+
+        return Card(
+          child: Column(
+            children: [
+              CustomSlidable(
+                endActionPaneActions: [
+                  CustomSlidableAction(
+                    label: 'Delete',
+                    icon: Icons.delete_outline,
+                    onPressed: (context) => context.read<CartBloc>().add(
+                          CartEvent.removeFromCart(item: cartItem),
                         ),
-                      ),
-                      CartDeleteItemButton(item: cartItem),
-                    ],
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        material.materialInfo.materialNumber.displayMatNo,
-                        style: Theme.of(context).textTheme.titleSmall?.apply(
-                              color: ZPColors.lightGray,
-                            ),
-                      ),
-                      BonusDiscountLabel(
-                        price: material.price,
-                        materialInfo: material.materialInfo,
-                        tenderContractNumber: tenderContractNumber
-                            .displayTenderContractNumberInCart,
-                      ),
-                    ],
-                  ),
-                  Row(
+                ],
+                borderRadius: 8,
+                child: ListTile(
+                  contentPadding: showCheckBox ? EdgeInsets.zero : null,
+                  key: Key('cartItem${material.materialInfo.materialNumber}'),
+                  onTap: () {
+                    CartBottomSheet.showUpdateCartBottomSheet(
+                      context: context,
+                      cartItem: material,
+                    );
+                  },
+                  leading: showCheckBox
+                      ? Checkbox(
+                          onChanged: (value) {
+                            if (value == null) return;
+                            context.read<CartBloc>().add(
+                                  CartEvent.selectButtonTapped(
+                                    cartItem: cartItem,
+                                  ),
+                                );
+                          },
+                          value: cartItem.isSelected,
+                        )
+                      : const SizedBox.shrink(),
+                  title: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      CartMaterialItemTileDetails(
-                        material: material,
-                        taxCode: taxCode,
-                        isOrderSummaryView: isOrderSummaryView,
-                        cartItem: cartItem,
-                      ),
-                      Column(
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          _CartItemQuantityInput(cartItem: material),
-                          if (context
-                              .read<EligibilityBloc>()
-                              .state
-                              .isZDP8Override)
-                            BlocProvider(
-                              create: (context) =>
-                                  locator<DiscountOverrideBloc>()
-                                    ..add(
-                                      DiscountOverrideEvent.update(
-                                        price: material.price,
-                                        showErrorMessages: false,
+                          Flexible(
+                            child: Text(
+                              material.materialInfo.materialDescription,
+                              style:
+                                  Theme.of(context).textTheme.titleSmall?.apply(
+                                        color: ZPColors.kPrimaryColor,
                                       ),
-                                    ),
-                              child: DiscountOverrideToggle(
-                                cartItem: material,
-                              ),
                             ),
+                          ),
+                          IconButton(
+                            padding: const EdgeInsets.only(right: 8),
+                            constraints: const BoxConstraints(),
+                            key: const Key('deleteFromCart'),
+                            onPressed: () {
+                              context.read<CartBloc>().add(
+                                    CartEvent.removeFromCart(
+                                      item: cartItem,
+                                    ),
+                                  );
+                            },
+                            icon: const Icon(Icons.delete),
+                          ),
                         ],
                       ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            material.materialInfo.materialNumber.displayMatNo,
+                            style:
+                                Theme.of(context).textTheme.titleSmall?.apply(
+                                      color: ZPColors.lightGray,
+                                    ),
+                          ),
+                          isSpecialOrderType
+                              ? const SizedBox.shrink()
+                              : BonusDiscountLabel(
+                                  price: material.price,
+                                  materialInfo: material.materialInfo,
+                                  tenderContractNumber: tenderContractNumber
+                                      .displayTenderContractNumberInCart,
+                                ),
+                        ],
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          CartMaterialItemTileDetails(
+                            material: material,
+                            taxCode: taxCode,
+                            isOrderSummaryView: isOrderSummaryView,
+                            cartItem: cartItem,
+                          ),
+                          Column(
+                            children: [
+                              _CartItemQuantityInput(cartItem: material),
+                              if (context
+                                      .read<EligibilityBloc>()
+                                      .state
+                                      .isZDP8Override &&
+                                  !isSpecialOrderType)
+                                BlocProvider(
+                                  create: (context) =>
+                                      locator<DiscountOverrideBloc>()
+                                        ..add(
+                                          DiscountOverrideEvent.update(
+                                            price: material.price,
+                                            showErrorMessages: false,
+                                          ),
+                                        ),
+                                  child: DiscountOverrideToggle(
+                                    cartItem: material,
+                                  ),
+                                ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      if (isOrderSummaryView &&
+                          material.tenderContract != TenderContract.empty())
+                        TenderContractDetailsTile(
+                          tenderContract: material.tenderContract,
+                        ),
+                      if (material.materialInfo.remarks.isNotEmpty &&
+                          context
+                              .read<SalesOrgBloc>()
+                              .state
+                              .configs
+                              .enableRemarks)
+                        RemarksMessage(
+                          key: Key('remarks${material.materialInfo.remarks}'),
+                          message:
+                              '${'Remarks: '.tr()}${material.materialInfo.remarks}',
+                          showEditDeleteDialog: EditDeleteDialog(
+                            onDelete: () {
+                              context.read<CartBloc>().add(
+                                    CartEvent.addRemarkToCartItem(
+                                      item: cartItem,
+                                      message: '',
+                                    ),
+                                  );
+                            },
+                            onEdit: () {
+                              AddRemarkDialog.cartItem(
+                                context: context,
+                                cartItem: cartItem,
+                                isEdit: true,
+                              );
+                            },
+                          ),
+                        ),
                     ],
                   ),
-                  if (isOrderSummaryView &&
-                      material.tenderContract != TenderContract.empty())
-                    TenderContractDetailsTile(
-                      tenderContract: material.tenderContract,
-                    ),
-                  if (material.materialInfo.remarks.isNotEmpty &&
-                      context.read<SalesOrgBloc>().state.configs.enableRemarks)
-                    RemarksMessage(
-                      key: Key('remarks${material.materialInfo.remarks}'),
-                      message:
-                          '${'Remarks: '.tr()}${material.materialInfo.remarks}',
-                      showEditDeleteDialog: EditDeleteDialog(
-                        onDelete: () {
-                          context.read<CartBloc>().add(
-                                CartEvent.addRemarkToCartItem(
-                                  item: cartItem,
-                                  message: '',
-                                ),
-                              );
-                        },
-                        onEdit: () {
-                          AddRemarkDialog.cartItem(
-                            context: context,
-                            cartItem: cartItem,
-                            isEdit: true,
-                          );
-                        },
-                      ),
-                    ),
-                ],
+                ),
               ),
-            ),
-          ),
-          if (material.materialInfo.remarks.isEmpty &&
-              context.read<SalesOrgBloc>().state.configs.enableRemarks)
-            AddRemarksButton(
-              key: const Key('addRemarks'),
-              onPressed: () {
-                AddRemarkDialog.cartItem(
-                  context: context,
+              if (material.materialInfo.remarks.isEmpty &&
+                  context.read<SalesOrgBloc>().state.configs.enableRemarks)
+                AddRemarksButton(
+                  key: const Key('addRemarks'),
+                  onPressed: () {
+                    AddRemarkDialog.cartItem(
+                      context: context,
+                      cartItem: cartItem,
+                    );
+                  },
+                ),
+              if (material.notHavingContract && !isSpecialOrderType)
+                BounsTile(
+                  material: material,
                   cartItem: cartItem,
-                );
-              },
-            ),
-          if (material.notHavingContract)
-            BounsTile(
-              material: material,
-              cartItem: cartItem,
-            ),
-        ],
-      ),
+                ),
+            ],
+          ),
+        );
+      },
     );
   }
 }
@@ -239,6 +269,8 @@ class CartMaterialItemTileDetails extends StatelessWidget {
     final enableListPrice =
         context.read<SalesOrgBloc>().state.configs.enableListPrice;
     final enableVat = context.read<SalesOrgBloc>().state.configs.enableVat;
+    final isSpecialOrderType =
+        context.read<OrderDocumentTypeBloc>().state.isSpecialOrderType;
 
     return Expanded(
       child: Column(
@@ -273,7 +305,9 @@ class CartMaterialItemTileDetails extends StatelessWidget {
                     color: ZPColors.lightGray,
                   ),
             ),
-          if (!material.materialInfo.hidePrice && isOrderSummaryView)
+          if (!material.materialInfo.hidePrice &&
+              isOrderSummaryView &&
+              !isSpecialOrderType)
             Wrap(
               spacing: 8.0,
               runSpacing: 4.0,
@@ -291,7 +325,9 @@ class CartMaterialItemTileDetails extends StatelessWidget {
                 ),
               ],
             ),
-          if (material.price.tiers.isNotEmpty && isOrderSummaryView)
+          if (material.price.tiers.isNotEmpty &&
+              isOrderSummaryView &&
+              !isSpecialOrderType)
             Wrap(
               spacing: 8.0,
               runSpacing: 4.0,
@@ -301,7 +337,9 @@ class CartMaterialItemTileDetails extends StatelessWidget {
                   )
                   .toList(),
             ),
-          if (material.price.isBonusDealEligible && isOrderSummaryView)
+          if (material.price.isBonusDealEligible &&
+              isOrderSummaryView &&
+              !isSpecialOrderType)
             BonusDetails(cartItem: material),
           if (material.salesOrgConfig.expiryDateDisplay)
             Text(
@@ -317,72 +355,63 @@ class CartMaterialItemTileDetails extends StatelessWidget {
                     color: ZPColors.lightGray,
                   ),
             ),
-          InkWell(
-            key: const Key('priceOverride'),
-            onTap: () async {
-              if (_isPriceOverRideVisible(context)) {
-                final cartBloc = context.read<CartBloc>();
-                final result = await showModalBottomSheet(
-                  isScrollControlled: true,
-                  backgroundColor: Colors.transparent,
-                  context: context,
-                  builder: (BuildContext context) {
-                    return PriceSheet(
-                      key: const Key('priceSheet'),
-                      item: material,
-                    );
-                  },
-                );
-                if (result is List<Price>) {
-                  cartBloc.add(
-                    CartEvent.overrideCartItemPrice(
-                      overridenPrice: result,
-                      cartItem: cartItem,
-                    ),
+          if (!isSpecialOrderType)
+            InkWell(
+              key: const Key('priceOverride'),
+              onTap: () async {
+                if (_isPriceOverRideVisible(context)) {
+                  final cartBloc = context.read<CartBloc>();
+                  final result = await showModalBottomSheet(
+                    isScrollControlled: true,
+                    backgroundColor: Colors.transparent,
+                    context: context,
+                    builder: (BuildContext context) {
+                      return PriceSheet(
+                        key: const Key('priceSheet'),
+                        item: material,
+                      );
+                    },
                   );
-                }
-              }
-            },
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                if (enableVat)
-                  Text(
-                    '${'Price before $taxCode: '.tr()}${material.display(PriceType.finalPrice)}',
-                    style: Theme.of(context).textTheme.titleSmall?.apply(
-                          color:
-                              isPriceOverride ? ZPColors.red : ZPColors.black,
-                          decoration: _isPriceOverRideVisible(context)
-                              ? TextDecoration.underline
-                              : TextDecoration.none,
-                        ),
-                  ),
-                if (enableListPrice)
-                  Text(
-                    '${'List Price: '.tr()}${material.display(PriceType.listPrice)}',
-                    key: const Key('listPrice'),
-                    style: Theme.of(context).textTheme.titleSmall?.apply(
-                          color:
-                              isPriceOverride ? ZPColors.red : ZPColors.black,
-                          decoration: _isPriceOverRideVisible(context)
-                              ? TextDecoration.underline
-                              : TextDecoration.none,
-                        ),
-                  ),
-                Text(
-                  '${'Unit Price: '.tr()}${material.display(PriceType.unitPrice)}',
-                  key: const Key('unitPrice'),
-                  style: Theme.of(context).textTheme.titleSmall?.apply(
-                        color: isPriceOverride ? ZPColors.red : ZPColors.black,
-                        decoration: _isPriceOverRideVisible(context)
-                            ? TextDecoration.underline
-                            : TextDecoration.none,
+                  if (result is List<Price>) {
+                    cartBloc.add(
+                      CartEvent.overrideCartItemPrice(
+                        overridenPrice: result,
+                        cartItem: cartItem,
                       ),
-                ),
-                if (isOrderSummaryView)
+                    );
+                  }
+                }
+              },
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (enableVat)
+                    Text(
+                      '${'Price before $taxCode: '.tr()}${material.display(PriceType.finalPrice)}',
+                      style: Theme.of(context).textTheme.titleSmall?.apply(
+                            color:
+                                isPriceOverride ? ZPColors.red : ZPColors.black,
+                            decoration: _isPriceOverRideVisible(context)
+                                ? TextDecoration.underline
+                                : TextDecoration.none,
+                          ),
+                    ),
+                  if (enableListPrice)
+                    Text(
+                      '${'List Price: '.tr()}${material.display(PriceType.listPrice)}',
+                      key: const Key('listPrice'),
+                      style: Theme.of(context).textTheme.titleSmall?.apply(
+                            color:
+                                isPriceOverride ? ZPColors.red : ZPColors.black,
+                            decoration: _isPriceOverRideVisible(context)
+                                ? TextDecoration.underline
+                                : TextDecoration.none,
+                          ),
+                    ),
                   Text(
-                    '${'Total Price: '.tr()}${material.display(PriceType.unitPriceTotal)}',
+                    '${'Unit Price: '.tr()}${material.display(PriceType.unitPrice)}',
+                    key: const Key('unitPrice'),
                     style: Theme.of(context).textTheme.titleSmall?.apply(
                           color:
                               isPriceOverride ? ZPColors.red : ZPColors.black,
@@ -391,9 +420,20 @@ class CartMaterialItemTileDetails extends StatelessWidget {
                               : TextDecoration.none,
                         ),
                   ),
-              ],
+                  if (isOrderSummaryView)
+                    Text(
+                      '${'Total Price: '.tr()}${material.display(PriceType.unitPriceTotal)}',
+                      style: Theme.of(context).textTheme.titleSmall?.apply(
+                            color:
+                                isPriceOverride ? ZPColors.red : ZPColors.black,
+                            decoration: _isPriceOverRideVisible(context)
+                                ? TextDecoration.underline
+                                : TextDecoration.none,
+                          ),
+                    ),
+                ],
+              ),
             ),
-          ),
         ],
       ),
     );

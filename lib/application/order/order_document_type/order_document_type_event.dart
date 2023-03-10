@@ -11,4 +11,6 @@ class OrderDocumentTypeEvent with _$OrderDocumentTypeEvent {
     required OrderDocumentType selectedOrderType,
     required bool isReasonSelected,
   }) = _SelectedOrderType;
+  const factory OrderDocumentTypeEvent.deleteOrderTypeFromStorage() =
+      _DeleteOrderTypeFromStorage;
 }

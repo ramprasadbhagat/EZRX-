@@ -5,18 +5,22 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/repository/i_order_document_type_repository.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/order_storage.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_document_type_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_document_type_remote.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/order_document_type_aggregate_dto.dart';
 
 class OrderDocumentTypeRepository implements IOrderDocumentTypeRepository {
   final Config config;
   final OrderDocumentTypeLocalDataSource orderDocumentTypLocalDataSource;
   final OrderDocumentTypeRemoteDataSource orderDocumentTypRemoteDataSource;
+  final OrderStorage orderStorage;
 
   OrderDocumentTypeRepository({
     required this.config,
     required this.orderDocumentTypLocalDataSource,
     required this.orderDocumentTypRemoteDataSource,
+    required this.orderStorage,
   });
 
   @override
@@ -42,6 +46,45 @@ class OrderDocumentTypeRepository implements IOrderDocumentTypeRepository {
       );
 
       return Right(orderDocumentTypList);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, Unit>> deleteOrderTypeFromCartStorage() async {
+    try {
+      await orderStorage.deleteOrderType();
+
+      return const Right(unit);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Either<ApiFailure, OrderDocumentType> getOrderTypeFromCartStorage() {
+    try {
+      final orderType = orderStorage.getOrderType();
+
+      return Right(
+        orderType != null ? orderType.toDomain() : OrderDocumentType.empty(),
+      );
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, Unit>> putOrderTypeToCartStorage({
+    required OrderDocumentType orderType,
+  }) async {
+    try {
+      await orderStorage.putOrderType(
+        orderType: OrderDocumentTypeDto.fromDomain(orderType),
+      );
+
+      return const Right(unit);
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
     }
