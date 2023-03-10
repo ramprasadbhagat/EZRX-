@@ -256,7 +256,7 @@ class _RequestReturnListItem extends StatelessWidget {
               style: Theme.of(context).textTheme.titleSmall,
             ),
             Text(
-              '${returnItem.principalData.principalCode.getOrDefaultValue('')} - ${returnItem.principalData.principalName}',
+              '${returnItem.principalData.principalCode.getOrDefaultValue('')} - ${returnItem.principalData.principalName.name}',
               style: Theme.of(context).textTheme.titleSmall?.apply(
                     color: ZPColors.darkGray,
                   ),
