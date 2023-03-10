@@ -45,7 +45,7 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
-  late DateTime dateTime;
+  DateTime dateTime = DateTime.now();
 
   @override
   void initState() {
@@ -70,14 +70,14 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
       case AppLifecycleState.inactive:
         break;
       case AppLifecycleState.paused:
-        _initialiseTimestamp();
+        _initializeTimestamp();
         break;
       case AppLifecycleState.detached:
         break;
     }
   }
 
-  void _initialiseTimestamp() => dateTime = DateTime.now();
+  void _initializeTimestamp() => dateTime = DateTime.now();
 
   bool _checkIfRefreshIsNeeded() =>
       dateTime.difference(DateTime.now()).inMinutes >= 30;
