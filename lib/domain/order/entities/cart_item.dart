@@ -2,6 +2,8 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
+import 'package:ezrxmobile/domain/order/entities/combo_deal_group_deal.dart';
+import 'package:ezrxmobile/domain/order/entities/combo_deal_qty_tier.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_price_detail.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
@@ -220,42 +222,90 @@ class CartItem with _$CartItem {
     return bundleRate;
   }
 
-  double get _comboDealTotal {
-    switch (materials.first.comboDeal.scheme) {
+  double? get comboDealRate {
+    final comboDeal = materials.firstComboDeal;
+    switch (comboDeal.scheme) {
       case ComboDealScheme.k1:
+        return null;
+      case ComboDealScheme.k2:
+        return comboDeal.groupDeal != ComboDealGroupDeal.empty()
+            ? comboDeal.groupDeal.rate
+            : eligibleComboDealQtyTier.rate;
+      case ComboDealScheme.k3:
+      case ComboDealScheme.k4:
+      case ComboDealScheme.k5:
+        return null;
+    }
+  }
+
+  double get _comboDealTotal => materials.fold<double>(
+        0,
+        (sum, item) => sum + item.comboDealTotalListPrice,
+      );
+
+  double get _comboDealDiscountTotal {
+    final comboDeal = materials.firstComboDeal;
+    switch (comboDeal.scheme) {
+      case ComboDealScheme.k1:
+      case ComboDealScheme.k2:
         return materials.fold<double>(
           0,
-          (sum, item) => sum + item.comboDealTotalListPrice,
+          (sum, item) =>
+              sum + item.comboDealTotalUnitPrice(rate: comboDealRate),
         );
-      //TODO: Implement another cases
-      case ComboDealScheme.k2:
       case ComboDealScheme.k3:
       case ComboDealScheme.k4:
       case ComboDealScheme.k5:
         return materials.fold<double>(
           0,
-          (sum, item) => sum + item.comboDealTotalListPrice,
+          (sum, item) =>
+              sum + item.comboDealTotalUnitPrice(rate: comboDealRate),
         );
     }
   }
 
-  double get _comboDealDiscountTotal {
-    switch (materials.first.comboDeal.scheme) {
+  bool get isComboDealEligible {
+    final comboDeal = materials.firstComboDeal;
+
+    if (materials.any((item) => !item.selfComboDealEligible)) return false;
+
+    switch (comboDeal.scheme) {
       case ComboDealScheme.k1:
-        return materials.fold<double>(
-          0,
-          (sum, item) => sum + item.comboDealTotalUnitPrice,
-        );
-      //TODO: Implement another cases
+        return true;
       case ComboDealScheme.k2:
+        if (comboDeal.groupDeal != ComboDealGroupDeal.empty()) {
+          final includeAllComboSet = comboDeal.materialComboDeals.every(
+            (setItem) {
+              final totalSetQty = materials
+                  .where(
+                    (material) => setItem.materialNumbers
+                        .contains(material.getMaterialNumber),
+                  )
+                  .fold<int>(0, (sum, item) => sum + item.quantity);
+
+              return totalSetQty != 0;
+            },
+          );
+
+          return includeAllComboSet;
+        } else {
+          return eligibleComboDealQtyTier != ComboDealQtyTier.empty();
+        }
       case ComboDealScheme.k3:
       case ComboDealScheme.k4:
       case ComboDealScheme.k5:
-        return materials.fold<double>(
-          0,
-          (sum, item) => sum + item.comboDealTotalUnitPrice,
-        );
+        return false;
     }
+  }
+
+  ComboDealQtyTier get eligibleComboDealQtyTier {
+    if (materials.isEmpty) return ComboDealQtyTier.empty();
+    final comboDeal = materials.first.comboDeal;
+
+    return comboDeal.descendingSortedQtyTiers.firstWhere(
+      (tier) => totalQty >= tier.minQty,
+      orElse: () => ComboDealQtyTier.empty(),
+    );
   }
 
   List<MaterialItem> toSavedOrderMaterial() {

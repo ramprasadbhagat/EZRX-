@@ -11,6 +11,9 @@ class ComboDealMaterialSet with _$ComboDealMaterialSet {
     required String setNo,
     required List<ComboDealMaterial> materials,
   }) = _ComboDealMaterialSet;
+
+  List<MaterialNumber> get materialNumbers =>
+      materials.map((e) => e.materialNumber).toList();
 }
 
 @freezed

@@ -8,8 +8,10 @@ extension ComboDealExtension on PriceAggregate {
       comboDeal: comboDeal,
     );
 
+    final minQty = materialWithDeal.selfComboDeal.minQty;
+
     return materialWithDeal.copyWith(
-      quantity: materialWithDeal.selfComboDeal.minQty,
+      quantity: minQty == 0 ? 1 : minQty,
     );
   }
 
@@ -21,34 +23,19 @@ extension ComboDealExtension on PriceAggregate {
 
   double get comboDealTotalListPrice => comboDealListPrice * quantity;
 
-  double get comboDealUnitPrice {
-    //TODO: Currently, we only handled the case when rate type is percent. May be we need to revisit and implement other case
-    //TODO: Handle price for 1 qty for another scheme here
-    switch (comboDeal.scheme) {
-      case ComboDealScheme.k1:
-        return NumUtils.roundToPlaces(
-          comboDealListPrice * (100 + selfComboDeal.rate) / 100,
-        );
-      case ComboDealScheme.k2:
-      case ComboDealScheme.k3:
-      case ComboDealScheme.k4:
-      case ComboDealScheme.k5:
-        return comboDealListPrice * (100 + selfComboDeal.rate) / 100;
-    }
-  }
+  //TODO: Currently, we only handled the case when rate type is percent. May be we need to revisit and implement other case
+  double comboDealUnitPrice({
+    double? rate,
+  }) =>
+      NumUtils.priceByRate(
+        comboDealListPrice,
+        rate ?? selfComboDeal.rate,
+      );
 
-  double get comboDealTotalUnitPrice {
-    //TODO: Handle price for all qty for another scheme here
-    switch (comboDeal.scheme) {
-      case ComboDealScheme.k1:
-        return comboDealUnitPrice * quantity;
-      case ComboDealScheme.k2:
-      case ComboDealScheme.k3:
-      case ComboDealScheme.k4:
-      case ComboDealScheme.k5:
-        return comboDealUnitPrice * quantity;
-    }
-  }
+  double comboDealTotalUnitPrice({
+    double? rate,
+  }) =>
+      comboDealUnitPrice(rate: rate) * quantity;
 
   bool get selfComboDealEligible => quantity >= selfComboDeal.minQty;
 }

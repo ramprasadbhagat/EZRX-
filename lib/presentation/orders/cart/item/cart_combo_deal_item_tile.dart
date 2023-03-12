@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
+import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_delete_item_button.dart';
@@ -109,6 +110,7 @@ class CartComboDealItem extends StatelessWidget {
                                       showCheckBox ? EdgeInsets.zero : null,
                                   title: _ComboDealItem(
                                     material: material,
+                                    comboGroup: cartItem,
                                   ),
                                 ),
                                 if (index != cartItem.materials.length - 1)
@@ -144,9 +146,11 @@ class _ComboDealItem extends StatelessWidget {
   const _ComboDealItem({
     Key? key,
     required this.material,
+    required this.comboGroup,
   }) : super(key: key);
 
   final PriceAggregate material;
+  final CartItem comboGroup;
 
   @override
   Widget build(BuildContext context) {
@@ -240,7 +244,10 @@ class _ComboDealItem extends StatelessWidget {
                                         ),
                                   ),
                                 Text(
-                                  'List Price: ${material.display(PriceType.comboDealListPrice)}',
+                                  'List Price: ${StringUtils.displayPrice(
+                                    material.salesOrgConfig,
+                                    material.comboDealListPrice,
+                                  )}',
                                   style: Theme.of(context)
                                       .textTheme
                                       .titleSmall
@@ -249,7 +256,12 @@ class _ComboDealItem extends StatelessWidget {
                                       ),
                                 ),
                                 Text(
-                                  'Unit Price: ${material.display(PriceType.comboDealUnitPrice)}',
+                                  'Unit Price: ${StringUtils.displayPrice(
+                                    material.salesOrgConfig,
+                                    material.comboDealUnitPrice(
+                                      rate: comboGroup.comboDealRate,
+                                    ),
+                                  )}',
                                   style: Theme.of(context)
                                       .textTheme
                                       .titleSmall

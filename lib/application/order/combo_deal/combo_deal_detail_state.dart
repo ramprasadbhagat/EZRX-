@@ -17,11 +17,6 @@ class ComboDealDetailState with _$ComboDealDetailState {
         isFetchingComboInfo: false,
       );
 
-  List<PriceAggregate> get sortedItems => items.values.toList()
-    ..sort(
-      (first, second) => first.selfComboDeal.mandatory ? 0 : 1,
-    );
-
   List<PriceAggregate> get allSelectedItems {
     final selectedMaterials = Map<MaterialNumber, PriceAggregate>.from(items)
       ..removeWhere(
@@ -31,15 +26,25 @@ class ComboDealDetailState with _$ComboDealDetailState {
     return selectedMaterials.values.toList();
   }
 
+  ComboDeal get currentDeal => items.values.toList().firstComboDeal;
+
+  List<List<PriceAggregate>> get itemBySets {
+    return currentDeal.materialComboDeals.map((itemSet) {
+      final materials = <PriceAggregate>[];
+      for (final materialNumber in itemSet.materialNumbers) {
+        final material = items[materialNumber];
+        if (material != null) materials.add(material);
+      }
+
+      return materials;
+    }).toList();
+  }
+
   bool get isEnableAddToCart {
     if (isFetchingPrice || isFetchingComboInfo || allSelectedItems.isEmpty) {
       return false;
     }
 
-    if (items.values.any((item) => !item.selfComboDealEligible)) {
-      return false;
-    }
-
-    return true;
+    return CartItem.comboDeal(allSelectedItems).isComboDealEligible;
   }
 }

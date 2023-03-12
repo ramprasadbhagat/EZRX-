@@ -29,7 +29,7 @@ class ComboDeal with _$ComboDeal {
         materialComboDeals: [],
       );
 
-  List<ComboDealQtyTier> get sortedQtyTier =>
+  List<ComboDealQtyTier> get descendingSortedQtyTiers =>
       List<ComboDealQtyTier>.from(flexiQtyTier)
         ..sort(
           (first, second) => second.minQty.compareTo(first.minQty),

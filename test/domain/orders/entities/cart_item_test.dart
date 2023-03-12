@@ -1,6 +1,8 @@
 import 'package:ezrxmobile/domain/order/entities/bundle_info.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
+import 'package:ezrxmobile/domain/order/entities/combo_deal_group_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal_material.dart';
+import 'package:ezrxmobile/domain/order/entities/combo_deal_qty_tier.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
@@ -547,6 +549,102 @@ void main() {
       expect(cartItem.unitPrice, 270);
       expect(cartItem.grandTotalPrice, 270);
       expect(cartItem.subTotalPrice, 270);
+    });
+
+    test('K2.1 case', () {
+      final comboDeal = ComboDeal.empty().copyWith(
+        groupDeal: ComboDealGroupDeal.empty().copyWith(
+          rate: -15,
+          type: DiscountType('%'),
+        ),
+        materialComboDeals: [
+          ComboDealMaterialSet(
+            materials: [
+              ComboDealMaterial.empty().copyWith(
+                materialNumber: MaterialNumber('fake-material-1'),
+                mandatory: true,
+                minQty: 2,
+              ),
+            ],
+            setNo: 'fake-set-1',
+          ),
+          ComboDealMaterialSet(
+            materials: [
+              ComboDealMaterial.empty().copyWith(
+                materialNumber: MaterialNumber('fake-material-2'),
+              ),
+            ],
+            setNo: 'fake-set-2',
+          )
+        ],
+      );
+
+      final fakePriceAggregate1 = PriceAggregate.empty().copyWith(
+        materialInfo: MaterialInfo.empty()
+            .copyWith(materialNumber: MaterialNumber('fake-material-1')),
+        price: Price.empty().copyWith(lastPrice: MaterialPrice(150)),
+        quantity: 2,
+        comboDeal: comboDeal,
+      );
+      final fakePriceAggregate2 = PriceAggregate.empty().copyWith(
+        materialInfo: MaterialInfo.empty()
+            .copyWith(materialNumber: MaterialNumber('fake-material-2')),
+        price: Price.empty().copyWith(lastPrice: MaterialPrice(18500)),
+        quantity: 2,
+        comboDeal: comboDeal,
+      );
+      final cartItem =
+          CartItem.comboDeal([fakePriceAggregate1, fakePriceAggregate2]);
+      expect(cartItem.listPrice, 37300.00);
+      expect(cartItem.unitPrice, 31705.00);
+      expect(cartItem.grandTotalPrice, 31705.00);
+      expect(cartItem.subTotalPrice, 31705.00);
+    });
+
+    test('K2.2 case', () {
+      final comboDeal = ComboDeal.empty().copyWith(
+        flexiQtyTier: [
+          ComboDealQtyTier.empty().copyWith(
+            rate: -15,
+            minQty: 2,
+            type: DiscountType('%'),
+          )
+        ],
+        materialComboDeals: [
+          ComboDealMaterialSet(
+            materials: [
+              ComboDealMaterial.empty().copyWith(
+                materialNumber: MaterialNumber('fake-material-1'),
+              ),
+              ComboDealMaterial.empty().copyWith(
+                materialNumber: MaterialNumber('fake-material-2'),
+              ),
+            ],
+            setNo: 'fake-set',
+          )
+        ],
+      );
+
+      final fakePriceAggregate1 = PriceAggregate.empty().copyWith(
+        materialInfo: MaterialInfo.empty()
+            .copyWith(materialNumber: MaterialNumber('fake-material-1')),
+        price: Price.empty().copyWith(lastPrice: MaterialPrice(1.5)),
+        quantity: 2,
+        comboDeal: comboDeal,
+      );
+      final fakePriceAggregate2 = PriceAggregate.empty().copyWith(
+        materialInfo: MaterialInfo.empty()
+            .copyWith(materialNumber: MaterialNumber('fake-material-2')),
+        price: Price.empty().copyWith(lastPrice: MaterialPrice(250)),
+        quantity: 2,
+        comboDeal: comboDeal,
+      );
+      final cartItem =
+          CartItem.comboDeal([fakePriceAggregate1, fakePriceAggregate2]);
+      expect(cartItem.listPrice, 503.00);
+      expect(cartItem.unitPrice, 427.54);
+      expect(cartItem.grandTotalPrice, 427.54);
+      expect(cartItem.subTotalPrice, 427.54);
     });
   });
 }

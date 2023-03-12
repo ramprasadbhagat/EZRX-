@@ -232,18 +232,6 @@ class PriceAggregate with _$PriceAggregate {
             ? finalPriceTotal
             : unitPriceTotal;
         break;
-      case PriceType.comboDealListPrice:
-        result = NumUtils.roundToPlaces(comboDealListPrice);
-        break;
-      case PriceType.comboDealTotalListPrice:
-        result = NumUtils.roundToPlaces(comboDealTotalListPrice);
-        break;
-      case PriceType.comboDealUnitPrice:
-        result = NumUtils.roundToPlaces(comboDealUnitPrice);
-        break;
-      case PriceType.comboDealTotalUnitPrice:
-        result = NumUtils.roundToPlaces(comboDealTotalUnitPrice);
-        break;
       case PriceType.listPrice:
       default:
         result = listPrice;
@@ -424,8 +412,4 @@ enum PriceType {
   finalPrice,
   finalPriceTotal,
   unitPriceTotal,
-  comboDealListPrice,
-  comboDealTotalListPrice,
-  comboDealUnitPrice,
-  comboDealTotalUnitPrice,
 }
