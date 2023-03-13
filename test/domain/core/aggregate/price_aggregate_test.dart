@@ -1283,31 +1283,31 @@ void main() {
     );
 
     test(
-      'get price',
+      'get self deal for price when not provide rate',
       () {
-        final priceAggregate =
-            fakePriceAggregate.copyWith(comboDeal: fakeComboDealDetail);
-        // expect(priceAggregate.comboDealListPrice, 100);
-        // expect(priceAggregate.comboDealTotalListPrice, 300);
-        // expect(priceAggregate.comboDealUnitPrice, 90);
-        // expect(priceAggregate.comboDealTotalUnitPrice, 270);
-        //TODO: Fix test later in combo deal k2 test case ticket
-        // expect(
-        //   priceAggregate.display(PriceType.comboDealUnitPrice),
-        //   'NA 90.00',
-        // );
-        // expect(
-        //   priceAggregate.display(PriceType.comboDealTotalListPrice),
-        //   'NA 300.00',
-        // );
-        // expect(
-        //   priceAggregate.display(PriceType.comboDealTotalUnitPrice),
-        //   'NA 270.00',
-        // );
-        // expect(
-        //   priceAggregate.display(PriceType.listPrice),
-        //   'NA 100.00',
-        // );
+        final nonEligiblepPriceAggregate = fakePriceAggregate.copyWith(
+          comboDeal: fakeComboDealDetail,
+        );
+        final eligiblepPriceAggregate = fakePriceAggregate.copyWith(
+          comboDeal: fakeComboDealDetail,
+          quantity: 4,
+        );
+        expect(nonEligiblepPriceAggregate.comboDealUnitPrice(), 90);
+        expect(nonEligiblepPriceAggregate.comboDealTotalUnitPrice(), 270);
+        expect(eligiblepPriceAggregate.comboDealUnitPrice(), 90);
+        expect(eligiblepPriceAggregate.comboDealTotalUnitPrice(), 360);
+      },
+    );
+
+    test(
+      'get price when provide rate',
+      () {
+        final priceAggregate = fakePriceAggregate.copyWith(
+          comboDeal: fakeComboDealDetail,
+          quantity: 4,
+        );
+        expect(priceAggregate.comboDealUnitPrice(rate: -20), 80);
+        expect(priceAggregate.comboDealTotalUnitPrice(rate: -20), 320);
       },
     );
 

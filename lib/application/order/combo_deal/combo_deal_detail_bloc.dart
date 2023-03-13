@@ -67,7 +67,12 @@ class ComboDealDetailBloc
           {
             for (final materialNumber in missingComboItemMaterialNumbers)
               materialNumber: PriceAggregate.empty()
-                  .copyWith(salesOrgConfig: e.salesConfigs)
+                  .copyWith(
+                    salesOrgConfig: e.salesConfigs,
+                    materialInfo: MaterialInfo.empty().copyWith(
+                      materialNumber: materialNumber,
+                    ),
+                  )
                   .copyWithComboDeal(comboDeal),
           },
         );

@@ -14,7 +14,9 @@ import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
+import 'package:ezrxmobile/domain/order/entities/combo_deal_group_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal_material.dart';
+import 'package:ezrxmobile/domain/order/entities/combo_deal_qty_tier.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/price_combo_deal.dart';
@@ -193,7 +195,7 @@ void main() {
     });
   });
 
-  group('Combo deal K1 case', () {
+  group('Combo deal K1', () {
     final fakeFirstMaterial = PriceAggregate.empty().copyWith(
       materialInfo: MaterialInfo.empty().copyWith(
         materialNumber: MaterialNumber('fake-number-1'),
@@ -307,6 +309,11 @@ void main() {
         expect(find.byType(ComboDealItem), findsNWidgets(2));
         expect(
           find.byKey(const Key('Total label 720.0')),
+          findsOneWidget,
+        );
+        expect(
+          find.text(
+              'You must purchase all of the product items with min. of below mentioned quantity.'),
           findsOneWidget,
         );
         final addToCartButton = find.byKey(const Key('addToCartButton'));
@@ -429,97 +436,291 @@ void main() {
         ).called(1);
       },
     );
-//TODO: Fix test later in combo deal k2 test case ticket
-    // testWidgets(
-    //   'Eligible item verify add quantity',
-    //   (tester) async {
-    //     await tester.pumpWidget(
-    //       wrapper(
-    //         ComboDealItem(
-    //           material: fakeFirstMaterial.copyWith(quantity: 5),
-    //           isSelected: true,
-    //         ),
-    //       ),
-    //     );
+    testWidgets(
+      'Eligible item verify add quantity',
+      (tester) async {
+        await tester.pumpWidget(
+          wrapper(
+            Material(
+              child: ComboDealItem(
+                material: fakeFirstMaterial.copyWith(quantity: 5),
+                isSelected: true,
+              ),
+            ),
+          ),
+        );
+      },
+    );
+    testWidgets(
+      'Eligible item verify reduce quantity',
+      (tester) async {
+        await tester.pumpWidget(
+          wrapper(
+            Material(
+              child: ComboDealItem(
+                material: fakeFirstMaterial.copyWith(quantity: 5),
+                isSelected: true,
+              ),
+            ),
+          ),
+        );
+      },
+    );
+    testWidgets(
+      'Non-eligible item verify reduce quantity',
+      (tester) async {
+        await tester.pumpWidget(
+          wrapper(
+            Material(
+              child: ComboDealItem(
+                material: fakeFirstMaterial.copyWith(quantity: 3),
+                isSelected: true,
+              ),
+            ),
+          ),
+        );
 
-    //     expect(find.byKey(const Key('QuantityInput')), findsOneWidget);
-    //     await tester.tap(find.byKey(const Key('AddKey')));
-    //     await tester.pump();
-    //     verify(() => comboDealDetailBloc.add(
-    //           ComboDealDetailEvent.updateItemQuantity(
-    //             item: MaterialNumber('fake-number-1'),
-    //             qty: 6,
-    //           ),
-    //         )).called(1);
-    //   },
-    // );
+        expect(find.byKey(const Key('QuantityInput')), findsOneWidget);
+        await tester.tap(find.byKey(const Key('DeleteKey')));
+        await tester.pump();
+        verifyNever(() => comboDealDetailBloc.add(any()));
+      },
+    );
 
-    // testWidgets(
-    //   'Eligible item verify reduce quantity',
-    //   (tester) async {
-    //     await tester.pumpWidget(
-    //       wrapper(
-    //         ComboDealItem(
-    //           material: fakeFirstMaterial.copyWith(quantity: 5),
-    //           isSelected: true,
-    //         ),
-    //       ),
-    //     );
+    testWidgets(
+      'Item verify update selection',
+      (tester) async {
+        await tester.pumpWidget(
+          wrapper(
+            Material(
+              child: ComboDealItem(
+                material: fakeFirstMaterial.copyWith(quantity: 5),
+                isSelected: true,
+              ),
+            ),
+          ),
+        );
+        final checkBox = find.byType(Checkbox);
+        expect(checkBox, findsOneWidget);
+        await tester.tap(checkBox);
+        await tester.pump();
+        verify(
+          () => comboDealDetailBloc.add(
+            ComboDealDetailEvent.updateItemSelection(
+              item: MaterialNumber('fake-number-1'),
+            ),
+          ),
+        ).called(1);
+      },
+    );
+  });
 
-    //     expect(find.byKey(const Key('QuantityInput')), findsOneWidget);
-    //     await tester.tap(find.byKey(const Key('DeleteKey')));
-    //     await tester.pump();
-    //     verify(() => comboDealDetailBloc.add(
-    //           ComboDealDetailEvent.updateItemQuantity(
-    //             item: MaterialNumber('fake-number-1'),
-    //             qty: 4,
-    //           ),
-    //         )).called(1);
-    //   },
-    // );
+  group('Combo Deal k2.1', () {
+    final comboDeal = ComboDeal.empty().copyWith(
+      groupDeal: ComboDealGroupDeal.empty().copyWith(
+        rate: -10,
+      ),
+      materialComboDeals: [
+        ComboDealMaterialSet(
+          materials: [
+            ComboDealMaterial.empty().copyWith(
+              materialNumber: MaterialNumber('fake-number-1'),
+              minQty: 2,
+              mandatory: true,
+            )
+          ],
+          setNo: 'fake-set-1',
+        ),
+        ComboDealMaterialSet(
+          materials: [
+            ComboDealMaterial.empty().copyWith(
+              materialNumber: MaterialNumber('fake-number-2'),
+            )
+          ],
+          setNo: 'fake-set-2',
+        ),
+      ],
+    );
 
-    // testWidgets(
-    //   'Non-eligible item verify reduce quantity',
-    //   (tester) async {
-    //     await tester.pumpWidget(
-    //       wrapper(
-    //         ComboDealItem(
-    //           material: fakeFirstMaterial.copyWith(quantity: 3),
-    //           isSelected: true,
-    //         ),
-    //       ),
-    //     );
+    final fakeFirstMaterial = PriceAggregate.empty().copyWith(
+      materialInfo: MaterialInfo.empty().copyWith(
+        materialNumber: MaterialNumber('fake-number-1'),
+      ),
+      price: Price.empty().copyWith(lastPrice: MaterialPrice(100)),
+      comboDeal: comboDeal,
+    );
+    final fakeSecondMaterial = PriceAggregate.empty().copyWith(
+      materialInfo: MaterialInfo.empty().copyWith(
+        materialNumber: MaterialNumber('fake-number-2'),
+      ),
+      price: Price.empty().copyWith(lastPrice: MaterialPrice(100)),
+      comboDeal: comboDeal,
+    );
 
-    //     expect(find.byKey(const Key('QuantityInput')), findsOneWidget);
-    //     await tester.tap(find.byKey(const Key('DeleteKey')));
-    //     await tester.pump();
-    //     verifyNever(() => comboDealDetailBloc.add(any()));
-    //   },
-    // );
+    testWidgets(
+      'Display all item in combo deal with each set one item selected',
+      (tester) async {
+        when(() => comboDealDetailBloc.state).thenReturn(
+          ComboDealDetailState.initial().copyWith(
+            items: {
+              MaterialNumber('fake-number-1'):
+                  fakeFirstMaterial.copyWith(quantity: 4),
+              MaterialNumber('fake-number-2'):
+                  fakeSecondMaterial.copyWith(quantity: 2),
+            },
+            selectedItems: {
+              MaterialNumber('fake-number-1'): true,
+              MaterialNumber('fake-number-2'): true,
+            },
+          ),
+        );
+        await tester.pumpWidget(
+          wrapper(
+            const ComboDealDetailPage(
+              comboItems: [],
+            ),
+          ),
+        );
 
-    // testWidgets(
-    //   'Item verify update selection',
-    //   (tester) async {
-    //     await tester.pumpWidget(
-    //       wrapper(
-    //         ComboDealItem(
-    //           material: fakeFirstMaterial.copyWith(quantity: 5),
-    //           isSelected: true,
-    //         ),
-    //       ),
-    //     );
-    //     final checkBox = find.byType(Checkbox);
-    //     expect(checkBox, findsOneWidget);
-    //     await tester.tap(checkBox);
-    //     await tester.pump();
-    //     verify(
-    //       () => comboDealDetailBloc.add(
-    //         ComboDealDetailEvent.updateItemSelection(
-    //           item: MaterialNumber('fake-number-1'),
-    //         ),
-    //       ),
-    //     ).called(1);
-    //   },
-    // );
+        expect(find.byType(ComboDealItem), findsNWidgets(2));
+        expect(find.byType(MandatoryLabel), findsNWidgets(1));
+        expect(find.byType(DiscountLabel), findsNWidgets(3));
+        expect(
+          find.byKey(const Key('Total label 540.0')),
+          findsOneWidget,
+        );
+        expect(
+          find.text(
+              'You must purchase a mandatory product with a minimum QTY [2] + any other product set A'),
+          findsOneWidget,
+        );
+        expect(
+          find.text(
+              'You must purchase a mandatory product with a minimum QTY [1] + any other product set B'),
+          findsOneWidget,
+        );
+      },
+    );
+
+    testWidgets(
+      'Display all item in combo deal with each set one item selected, one material isn\'t eligible',
+      (tester) async {
+        when(() => comboDealDetailBloc.state).thenReturn(
+          ComboDealDetailState.initial().copyWith(
+            items: {
+              MaterialNumber('fake-number-1'):
+                  fakeFirstMaterial.copyWith(quantity: 1),
+              MaterialNumber('fake-number-2'):
+                  fakeSecondMaterial.copyWith(quantity: 2),
+            },
+            selectedItems: {
+              MaterialNumber('fake-number-1'): true,
+              MaterialNumber('fake-number-2'): true,
+            },
+          ),
+        );
+        await tester.pumpWidget(
+          wrapper(
+            const ComboDealDetailPage(
+              comboItems: [],
+            ),
+          ),
+        );
+
+        expect(find.byType(ComboDealItem), findsNWidgets(2));
+        expect(find.text('Minimun Quantity should be 2'), findsOneWidget);
+      },
+    );
+
+    testWidgets(
+      'Display empty',
+      (tester) async {
+        when(() => comboDealDetailBloc.state).thenReturn(
+          ComboDealDetailState.initial().copyWith(),
+        );
+        await tester.pumpWidget(
+          wrapper(
+            const ComboDealDetailPage(
+              comboItems: [],
+            ),
+          ),
+        );
+
+        expect(find.text('Combo bundle is empty'), findsOneWidget);
+      },
+    );
+  });
+
+  group('Combo Deal k2.2', () {
+    final comboDeal = ComboDeal.empty().copyWith(
+      flexiQtyTier: [
+        ComboDealQtyTier.empty().copyWith(
+          minQty: 2,
+          rate: -10,
+        ),
+      ],
+      materialComboDeals: [
+        ComboDealMaterialSet(
+          materials: [
+            ComboDealMaterial.empty().copyWith(
+              materialNumber: MaterialNumber('fake-number-1'),
+            ),
+            ComboDealMaterial.empty().copyWith(
+              materialNumber: MaterialNumber('fake-number-2'),
+            ),
+          ],
+          setNo: 'fake-set-1',
+        ),
+      ],
+    );
+
+    final fakeFirstMaterial = PriceAggregate.empty().copyWith(
+      materialInfo: MaterialInfo.empty().copyWith(
+        materialNumber: MaterialNumber('fake-number-1'),
+      ),
+      price: Price.empty().copyWith(lastPrice: MaterialPrice(100)),
+      comboDeal: comboDeal,
+    );
+    final fakeSecondMaterial = PriceAggregate.empty().copyWith(
+      materialInfo: MaterialInfo.empty().copyWith(
+        materialNumber: MaterialNumber('fake-number-2'),
+      ),
+      price: Price.empty().copyWith(lastPrice: MaterialPrice(100)),
+      comboDeal: comboDeal,
+    );
+
+    testWidgets(
+      'Display combo item with no item selected',
+      (tester) async {
+        when(() => comboDealDetailBloc.state).thenReturn(
+          ComboDealDetailState.initial().copyWith(
+            items: {
+              MaterialNumber('fake-number-1'):
+                  fakeFirstMaterial.copyWith(quantity: 4),
+              MaterialNumber('fake-number-2'):
+                  fakeSecondMaterial.copyWith(quantity: 2),
+            },
+            selectedItems: {
+              MaterialNumber('fake-number-1'): false,
+              MaterialNumber('fake-number-2'): false,
+            },
+          ),
+        );
+        await tester.pumpWidget(
+          wrapper(
+            const ComboDealDetailPage(
+              comboItems: [],
+            ),
+          ),
+        );
+
+        expect(find.byType(ComboDealItem), findsNWidgets(2));
+        expect(
+          find.text(
+              'You must purchase a total QTY of [2] from any product or products.'),
+          findsOneWidget,
+        );
+      },
+    );
   });
 }

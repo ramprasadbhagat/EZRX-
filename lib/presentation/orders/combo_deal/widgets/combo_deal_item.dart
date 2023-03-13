@@ -97,34 +97,8 @@ class ComboDealItem extends StatelessWidget {
                         ],
                       ),
                     ),
-                    //TODO: Revisit to fix quantity input update text issue
-                    QuantityInput(
-                      controller: TextEditingController(
-                        text: material.quantity.toString(),
-                      ),
-                      quantityTextKey: const Key('QuantityInput'),
-                      onFieldChange: (value) {
-                        onUpdateQuantity(
-                          context: context,
-                          value: value,
-                        );
-                      },
-                      minusPressed: material.selfComboDealEligible &&
-                              material.quantity != material.selfComboDeal.minQty
-                          ? (value) {
-                              onUpdateQuantity(
-                                context: context,
-                                value: value,
-                              );
-                            }
-                          : null,
-                      addPressed: (value) => onUpdateQuantity(
-                        context: context,
-                        value: value,
-                      ),
-                      quantityAddKey: const Key('AddKey'),
-                      quantityDeleteKey: const Key('DeleteKey'),
-                      isEnabled: true,
+                    _QuantityInput(
+                      material: material,
                     ),
                   ],
                 ),
@@ -239,5 +213,76 @@ class _PriceLabel extends StatelessWidget {
       case ComboDealScheme.k5:
         return null;
     }
+  }
+}
+
+class _QuantityInput extends StatefulWidget {
+  final PriceAggregate material;
+  const _QuantityInput({
+    Key? key,
+    required this.material,
+  }) : super(key: key);
+
+  @override
+  State<_QuantityInput> createState() => __QuantityInputState();
+}
+
+class __QuantityInputState extends State<_QuantityInput> {
+  late final TextEditingController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = TextEditingController(
+      text: widget.material.quantity.toString(),
+    );
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return QuantityInput(
+      controller: controller,
+      quantityTextKey: const Key('QuantityInput'),
+      onFieldChange: (value) {
+        _onUpdateQuantity(
+          context: context,
+          value: value,
+        );
+      },
+      minusPressed: widget.material.selfComboDealEligible &&
+              widget.material.quantity != widget.material.selfComboDeal.minQty
+          ? (value) {
+              _onUpdateQuantity(
+                context: context,
+                value: value,
+              );
+            }
+          : null,
+      addPressed: (value) => _onUpdateQuantity(
+        context: context,
+        value: value,
+      ),
+      quantityAddKey: const Key('AddKey'),
+      quantityDeleteKey: const Key('DeleteKey'),
+      isEnabled: true,
+    );
+  }
+
+  void _onUpdateQuantity({
+    required int value,
+    required BuildContext context,
+  }) {
+    context.read<ComboDealDetailBloc>().add(
+          ComboDealDetailEvent.updateItemQuantity(
+            item: widget.material.getMaterialNumber,
+            qty: value,
+          ),
+        );
   }
 }

@@ -528,7 +528,7 @@ void main() {
         materialInfo: MaterialInfo.empty()
             .copyWith(materialNumber: MaterialNumber('fake-material')),
         price: Price.empty().copyWith(lastPrice: MaterialPrice(100)),
-        quantity: 3,
+        quantity: 4,
         comboDeal: ComboDeal.empty().copyWith(
           materialComboDeals: [
             ComboDealMaterialSet(
@@ -545,10 +545,124 @@ void main() {
         ),
       );
       final cartItem = CartItem.comboDeal([fakePriceAggregate]);
-      expect(cartItem.listPrice, 300);
-      expect(cartItem.unitPrice, 270);
-      expect(cartItem.grandTotalPrice, 270);
-      expect(cartItem.subTotalPrice, 270);
+      final nonEligibleCartItem =
+          CartItem.comboDeal([fakePriceAggregate.copyWith(quantity: 3)]);
+      expect(nonEligibleCartItem.isComboDealEligible, false);
+      expect(cartItem.isComboDealEligible, true);
+      expect(cartItem.id, '--k1');
+      expect(cartItem.comboDealRate, null);
+      expect(cartItem.listPrice, 400);
+      expect(cartItem.unitPrice, 360);
+      expect(cartItem.grandTotalPrice, 360);
+      expect(cartItem.subTotalPrice, 360);
+    });
+
+    test('K2.1 case', () {
+      final comboDeal = ComboDeal.empty().copyWith(
+        groupDeal: ComboDealGroupDeal.empty().copyWith(
+          rate: -15,
+          type: DiscountType('%'),
+        ),
+        materialComboDeals: [
+          ComboDealMaterialSet(
+            materials: [
+              ComboDealMaterial.empty().copyWith(
+                materialNumber: MaterialNumber('fake-material-1'),
+                mandatory: true,
+                minQty: 2,
+              ),
+            ],
+            setNo: 'fake-set-1',
+          ),
+          ComboDealMaterialSet(
+            materials: [
+              ComboDealMaterial.empty().copyWith(
+                materialNumber: MaterialNumber('fake-material-2'),
+              ),
+            ],
+            setNo: 'fake-set-2',
+          )
+        ],
+      );
+
+      final fakePriceAggregate1 = PriceAggregate.empty().copyWith(
+        materialInfo: MaterialInfo.empty()
+            .copyWith(materialNumber: MaterialNumber('fake-material-1')),
+        price: Price.empty().copyWith(lastPrice: MaterialPrice(150)),
+        quantity: 2,
+        comboDeal: comboDeal,
+      );
+      final fakePriceAggregate2 = PriceAggregate.empty().copyWith(
+        materialInfo: MaterialInfo.empty()
+            .copyWith(materialNumber: MaterialNumber('fake-material-2')),
+        price: Price.empty().copyWith(lastPrice: MaterialPrice(18500)),
+        quantity: 2,
+        comboDeal: comboDeal,
+      );
+      final cartItem =
+          CartItem.comboDeal([fakePriceAggregate1, fakePriceAggregate2]);
+      final nonEligibleCartItem = CartItem.comboDeal([fakePriceAggregate1]);
+      expect(nonEligibleCartItem.isComboDealEligible, false);
+      expect(cartItem.isComboDealEligible, true);
+      expect(cartItem.id, '--k2');
+      expect(cartItem.comboDealRate, -15);
+      expect(cartItem.listPrice, 37300.00);
+      expect(cartItem.unitPrice, 31705.00);
+      expect(cartItem.grandTotalPrice, 31705.00);
+      expect(cartItem.subTotalPrice, 31705.00);
+    });
+
+    test('K2.2 case', () {
+      final comboDeal = ComboDeal.empty().copyWith(
+        flexiQtyTier: [
+          ComboDealQtyTier.empty().copyWith(
+            rate: -15,
+            minQty: 2,
+            type: DiscountType('%'),
+          )
+        ],
+        materialComboDeals: [
+          ComboDealMaterialSet(
+            materials: [
+              ComboDealMaterial.empty().copyWith(
+                materialNumber: MaterialNumber('fake-material-1'),
+              ),
+              ComboDealMaterial.empty().copyWith(
+                materialNumber: MaterialNumber('fake-material-2'),
+              ),
+            ],
+            setNo: 'fake-set',
+          )
+        ],
+      );
+
+      final fakePriceAggregate1 = PriceAggregate.empty().copyWith(
+        materialInfo: MaterialInfo.empty()
+            .copyWith(materialNumber: MaterialNumber('fake-material-1')),
+        price: Price.empty().copyWith(lastPrice: MaterialPrice(1.5)),
+        quantity: 2,
+        comboDeal: comboDeal,
+      );
+      final fakePriceAggregate2 = PriceAggregate.empty().copyWith(
+        materialInfo: MaterialInfo.empty()
+            .copyWith(materialNumber: MaterialNumber('fake-material-2')),
+        price: Price.empty().copyWith(lastPrice: MaterialPrice(250)),
+        quantity: 2,
+        comboDeal: comboDeal,
+      );
+      final cartItem =
+          CartItem.comboDeal([fakePriceAggregate1, fakePriceAggregate2]);
+
+      final nonEligibleCartItem =
+          CartItem.comboDeal([fakePriceAggregate1.copyWith(quantity: 1)]);
+      expect(nonEligibleCartItem.isComboDealEligible, false);
+      expect(cartItem.isComboDealEligible, true);
+      expect(cartItem.id, '--k2');
+      expect(cartItem.comboDealRate, -15);
+      expect(cartItem.listPrice, 503.00);
+      expect(cartItem.unitPrice, 427.54);
+      expect(cartItem.grandTotalPrice, 427.54);
+      expect(cartItem.subTotalPrice, 427.54);
     });
 
     test('K2.1 case', () {
