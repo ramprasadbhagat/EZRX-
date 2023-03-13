@@ -3,6 +3,7 @@ import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.da
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_license_info.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_ship_to_info.dart';
@@ -13,6 +14,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../utils/widget_utils.dart';
+import '../../order_history/order_history_details_widget_test.dart';
 
 class ShipToCodeBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState>
     implements ShipToCodeBloc {}
@@ -30,11 +32,13 @@ void main() {
   late PaymentCustomerInformationBloc paymentCustomerInformationBloc;
 
   setUpAll(
-    () {
+    () async {
       locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
       locator.registerLazySingleton(() => AppRouter());
       countlyService = CountlyServiceMock();
       locator.registerLazySingleton(() => countlyService);
+      locator.registerLazySingleton(() => MixpanelService());
+      locator<MixpanelService>().init(mixpanel: MixpanelMock());
     },
   );
   setUp(

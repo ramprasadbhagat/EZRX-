@@ -19,6 +19,7 @@ import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/price_combo_deal.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/presentation/orders/combo_deal/combo_deal_detail_page.dart';
 import 'package:ezrxmobile/presentation/orders/combo_deal/widgets/combo_deal_item.dart';
 import 'package:ezrxmobile/presentation/orders/combo_deal/widgets/combo_deal_label.dart';
@@ -30,6 +31,7 @@ import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../utils/widget_utils.dart';
+import '../../order_history/order_history_details_widget_test.dart';
 
 class MockEligibilityBloc extends MockBloc<EligibilityEvent, EligibilityState>
     implements EligibilityBloc {}
@@ -71,6 +73,8 @@ void main() {
     locator.registerLazySingleton(() => AppRouter());
     registerFallbackValue(const CartEvent.initialized());
     registerFallbackValue(const ComboDealDetailEvent.initialize());
+    locator.registerLazySingleton(() => MixpanelService());
+    locator<MixpanelService>().init(mixpanel: MixpanelMock());
     router = locator<AppRouter>();
   });
 

@@ -3,7 +3,9 @@ import 'package:badges/badges.dart' as bd;
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -40,6 +42,9 @@ class CartButton extends StatelessWidget {
                   icon: const Icon(Icons.shopping_cart_outlined),
                   onPressed: () {
                     final cartState = context.read<CartBloc>().state;
+                    trackMixpanelEvent(
+                      MixpanelEvents.cartWindow,
+                    );
                     locator<CountlyService>()
                         .addCountlyEvent('Cart Window', segmentation: {
                       'numItemInCart': cartState.cartItems.length,

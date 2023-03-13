@@ -2,6 +2,9 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/returns/entities/approver_rights_details.dart';
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/presentation/core/confirm_clear_cart_dialog.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +28,13 @@ class AddEditUserRestrictionPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    trackMixpanelEvent(
+      MixpanelEvents.pageViewVisited,
+      props: {
+        MixpanelProps.pageViewName: runtimeType.toString(),
+      },
+    );
+
     return Scaffold(
       key: const Key('AddEditUserRestrictionPage'),
       backgroundColor: ZPColors.white,
@@ -34,16 +44,14 @@ class AddEditUserRestrictionPage extends StatelessWidget {
       body:
           BlocConsumer<UserRestrictionDetailsBloc, UserRestrictionDetailsState>(
         listenWhen: (previous, current) =>
-            previous.userRestrictionStatus !=
-                current.userRestrictionStatus ||
+            previous.userRestrictionStatus != current.userRestrictionStatus ||
             previous.apiFailureOrSuccessOption !=
                 current.apiFailureOrSuccessOption,
         listener: (context, state) {
           state.apiFailureOrSuccessOption.fold(
             () {
               if (state.userRestrictionStatus.ifUserAdded) {
-                if (state
-                    .userRestrictionStatus.ifUserNotConfigured) {
+                if (state.userRestrictionStatus.ifUserNotConfigured) {
                   showSnackBar(
                     context: context,
                     message: 'No New Records Added',

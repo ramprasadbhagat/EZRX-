@@ -4,6 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/account/notification_settings/notification_settings_page.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -14,6 +15,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../utils/widget_utils.dart';
+import '../../order_history/order_history_details_widget_test.dart';
 
 class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
 
@@ -26,6 +28,7 @@ void main() async {
   setUpAll(() async {
     setupLocator();
     autoRouterMock = locator<AppRouter>();
+    locator<MixpanelService>().init(mixpanel: MixpanelMock());
   });
 
   group('Notification Settings Page should - ', () {

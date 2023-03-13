@@ -15,6 +15,7 @@ import 'package:ezrxmobile/domain/order/entities/additional_details_data.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/infrastructure/core/common/file_picker.dart';
 import 'package:ezrxmobile/infrastructure/core/common/permission.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/order_summary/addition_details/additional_attachment.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -27,6 +28,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import '../../../utils/widget_utils.dart';
+import '../../order_history/order_history_details_widget_test.dart';
 
 class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
     implements EligibilityBloc {}
@@ -55,13 +57,15 @@ void main() {
   late PermissionService permissionService;
   late EligibilityBloc eligibilityBlocMock;
 
-  setUpAll(() {
+  setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
     filePickerService = FilePickerServiceMock();
     permissionService = PermissionServiceMock();
     autoRouterMock = AppRouter();
     eligibilityBlocMock = EligibilityBlocMock();
     locator.registerLazySingleton(() => autoRouterMock);
+    locator.registerLazySingleton(() => MixpanelService());
+    locator<MixpanelService>().init(mixpanel: MixpanelMock());
     locator.registerLazySingleton(() => filePickerService);
     locator.registerLazySingleton(() => permissionService);
   });

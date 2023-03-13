@@ -21,6 +21,9 @@ import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/repository/i_order_repository.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/saved_order_dto.dart';
@@ -31,9 +34,11 @@ class OrderRepository implements IOrderRepository {
   final OrderLocalDataSource localDataSource;
   final OrderRemoteDataSource remoteDataSource;
   final CountlyService countlyService;
+  late MixpanelService mixpanelService;
 
   OrderRepository({
     required this.config,
+    required this.mixpanelService,
     required this.localDataSource,
     required this.remoteDataSource,
     required this.countlyService,
@@ -272,9 +277,17 @@ class OrderRepository implements IOrderRepository {
             SubmitOrderDto.fromDomain(submitOrder, configs.currency.getValue()),
       );
 
+      _trackOrderSuccessEvent(cartItems, grandTotal);
+
       return Right(submitOrderResponse);
     } catch (e) {
       await countlyService.addCountlyEvent('order_fail');
+      mixpanelService.trackEvent(
+        eventName: MixpanelEvents.orderFailed,
+        properties: {
+          MixpanelProps.errorMessage: e.toString(),
+        },
+      );
 
       return Left(
         FailureHandler.handleFailure(e),
@@ -403,6 +416,41 @@ class OrderRepository implements IOrderRepository {
       //TODO: principle list from sales org config
       materials: _getMaterialInfoList(cartItems: cartItems),
       poDocuments: data.poDocuments,
+    );
+  }
+
+  void _trackOrderSuccessEvent(
+    List<PriceAggregate> cartItems,
+    double grandTotal,
+  ) {
+    mixpanelService.trackEvent(
+      eventName: MixpanelEvents.orderSuccess,
+      properties: {
+        MixpanelProps.grandTotal: grandTotal,
+        MixpanelProps.productName:
+            cartItems.map((e) => e.materialNumberString).toList(),
+        MixpanelProps.productNumber: cartItems
+            .map((e) => e.getMaterialNumber.getOrDefaultValue(''))
+            .toList(),
+        MixpanelProps.productManufacturer: cartItems
+            .map((e) => e.materialInfo.principalData.principalName
+                .getOrDefaultValue(''))
+            .toList(),
+        MixpanelProps.productCategory: cartItems
+            .map((e) => e.materialInfo.materialGroup4.getMaterialGroup4Type)
+            .toList(),
+        MixpanelProps.productQty: cartItems.map((e) => e.quantity).toList(),
+        MixpanelProps.bonusName: cartItems
+            .map((e) =>
+                e.addedBonusList.map((e) => e.materialDescription).toList())
+            .toList(),
+        MixpanelProps.bonusManufacturer: cartItems
+            .map((e) => e.addedBonusList
+                .map((e) => e.materialInfo.principalData.principalName
+                    .getOrDefaultValue(''))
+                .toList())
+            .toList(),
+      },
     );
   }
 }

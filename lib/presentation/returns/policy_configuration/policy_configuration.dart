@@ -4,7 +4,10 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/returns/policy_configuration/policy_configuration_bloc.dart';
 import 'package:ezrxmobile/domain/returns/entities/policy_configuration.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
@@ -22,6 +25,12 @@ class PolicyConfigurationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     locator<CountlyService>().recordCountlyView('policy_configuration');
+    trackMixpanelEvent(
+      MixpanelEvents.pageViewVisited,
+      props: {
+        MixpanelProps.pageViewName: runtimeType.toString(),
+      },
+    );
 
     return Scaffold(
       appBar: const PreferredSize(

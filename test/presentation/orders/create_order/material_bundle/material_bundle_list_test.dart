@@ -19,6 +19,8 @@ import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/material_bundle_list.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -29,6 +31,7 @@ import 'package:mocktail/mocktail.dart';
 
 import '../../../../utils/material_frame_wrapper.dart';
 import '../../../../utils/widget_utils.dart';
+import '../../../order_history/order_history_details_widget_test.dart';
 
 class MaterialBundleListBlocMock
     extends MockBloc<MaterialBundleListEvent, MaterialBundleListState>
@@ -73,6 +76,8 @@ void main() {
   late MaterialPriceDetailBloc materialPriceDetailMockBloc;
 
   setUpAll(() async {
+    locator.registerLazySingleton(() => MixpanelService());
+    locator<MixpanelService>().init(mixpanel: MixpanelMock());
     autoRouterMock = AppRouter();
     userBlocMock = UserBlocMock();
     authBlocMock = AuthBlocMock();

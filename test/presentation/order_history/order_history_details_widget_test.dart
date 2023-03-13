@@ -43,6 +43,7 @@ import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/common/permission.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_history_details_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_history_local.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/order_history_details_repository.dart';
@@ -54,6 +55,7 @@ import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -135,6 +137,8 @@ class PermissionServiceMock extends Mock implements PermissionService {}
 class TenderContractRepositoryMock extends Mock
     implements TenderContractRepository {}
 
+class MixpanelMock extends Mock implements Mixpanel {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
@@ -189,6 +193,9 @@ void main() {
         .registerFactory<TenderContractRepository>(() => tenderRepositoryMock);
 
     locator.registerLazySingleton(() => permissionService);
+    locator.registerLazySingleton(() => MixpanelService());
+    locator<MixpanelService>().init(mixpanel: MixpanelMock());
+
     orderHistoryDetails =
         await OrderHistoryDetailsLocalDataSource().getOrderHistoryDetails();
     orderHistory = await OrderHistoryLocalDataSource().getOrderHistory();

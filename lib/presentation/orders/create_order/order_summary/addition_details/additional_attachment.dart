@@ -5,7 +5,10 @@ import 'package:ezrxmobile/application/order/additional_details/additional_detai
 import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/infrastructure/core/common/file_picker.dart';
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/common/permission.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/po_attachment.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
@@ -265,6 +268,9 @@ class _PoUploadOptionPickerState extends State<_PoUploadOptionPicker> {
       ..removeWhere((element) => (element.path ?? '').isEmpty);
 
     if (files.isEmpty || !mounted) return;
+    trackMixpanelEvent(MixpanelEvents.uploadAttachment, props: {
+      MixpanelProps.attachmentType: 'PO',
+    });
     context.read<PoAttachmentBloc>().add(
           PoAttachmentEvent.uploadFile(
             files: files,

@@ -2,6 +2,9 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/aup_tc/aup_tc.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -41,7 +44,14 @@ class HomeNavigationTabbar extends StatelessWidget {
                                   return BottomNavigationBar(
                                     key: const Key('homeTabbar'),
                                     currentIndex: tabsRouter.activeIndex,
-                                    onTap: tabsRouter.setActiveIndex,
+                                    onTap: (index) {
+                                      _trackEvents(
+                                        context: context,
+                                        index: index,
+                                      );
+
+                                      tabsRouter.setActiveIndex(index);
+                                    },
                                     items: _getTabs(context)
                                         .map(
                                           (item) => BottomNavigationBarItem(
@@ -89,6 +99,11 @@ class HomeNavigationTabbar extends StatelessWidget {
                                             .toList(),
                                         selectedIndex: activeIndex,
                                         onDestinationSelected: (index) {
+                                          _trackEvents(
+                                            context: context,
+                                            index: index,
+                                          );
+
                                           context.navigateTo(
                                             _getTabs(context)[index].route,
                                           );
@@ -109,6 +124,53 @@ class HomeNavigationTabbar extends StatelessWidget {
               );
       },
     );
+  }
+
+  void _trackEvents({
+    required BuildContext context,
+    required int index,
+  }) {
+    if (context.read<UserBloc>().state.userCanCreateOrder) {
+      switch (index) {
+        case 0:
+          trackMixpanelEvent(
+            MixpanelEvents.pageViewVisited,
+            props: {
+              MixpanelProps.pageViewName: 'home-page',
+            },
+          );
+          break;
+        case 1:
+          trackMixpanelEvent(
+            MixpanelEvents.orderHistory,
+          );
+          break;
+        case 2:
+          trackMixpanelEvent(
+            MixpanelEvents.pageViewVisited,
+            props: {
+              MixpanelProps.pageViewName: 'favourites-page',
+            },
+          );
+          break;
+        case 3:
+          trackMixpanelEvent(
+            MixpanelEvents.pageViewVisited,
+            props: {
+              MixpanelProps.pageViewName: 'account-page',
+            },
+          );
+          break;
+        default:
+      }
+    } else {
+      trackMixpanelEvent(
+        MixpanelEvents.pageViewVisited,
+        props: {
+          MixpanelProps.pageViewName: index == 0 ? 'home-page' : 'account-page',
+        },
+      );
+    }
   }
 }
 

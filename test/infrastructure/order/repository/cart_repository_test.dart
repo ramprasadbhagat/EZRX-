@@ -18,12 +18,15 @@ import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/cart_storage.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/cart_item_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/cart_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+
+import 'order_repository_test.dart';
 
 class MockConfig extends Mock implements Config {}
 
@@ -48,6 +51,7 @@ void main() {
   late SalesOrganisationConfigs mockSalesOrganisationConfigs;
   late SalesOrg mockSalesOrg;
   late SalesOrganisation mockSalesOrganisation;
+  late MixpanelService mixpanelService;
 
   final fakeShipToInfo = ShipToInfo.empty().copyWith(
     shipToCustomerCode: '1234567',
@@ -67,7 +71,9 @@ void main() {
     stockInfoRemoteDataSource = StockInfoRemoteDataSourceMock();
     cartStorageMock = MockCartStorage();
     countlyServiceMock = CountlyServiceMock();
+    mixpanelService = MixpanelServiceMock();
     cartRepository = CartRepository(
+      mixpanelService: mixpanelService,
       config: mockConfig,
       cartStorage: cartStorageMock,
       countlyService: countlyServiceMock,

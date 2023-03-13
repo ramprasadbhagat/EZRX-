@@ -11,6 +11,7 @@ import 'package:ezrxmobile/application/order/order_template_list/order_template_
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/order_template.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_template_local_datasource.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/orders/order_template/order_template_item.dart';
@@ -22,6 +23,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../utils/widget_utils.dart';
+import '../../order_history/order_history_details_widget_test.dart';
 
 class OrderTemplateListBlocMock
     extends MockBloc<OrderTemplateListEvent, OrderTemplateListState>
@@ -66,6 +68,7 @@ void main() {
   setupLocator();
 
   setUpAll(() async {
+    locator<MixpanelService>().init(mixpanel: MixpanelMock());
     WidgetsFlutterBinding.ensureInitialized();
     orderTemplatesMock =
         await OrderTemplateLocalDataSource().getOrderTemplates();

@@ -21,7 +21,6 @@ import 'package:ezrxmobile/application/returns/approver_actions/filter/return_ap
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
 import 'package:ezrxmobile/application/returns/policy_configuration/policy_configuration_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_request_type_code/return_request_type_code_bloc.dart';
-import 'package:ezrxmobile/application/returns/return_summary/return_summary_bloc.dart';
 import 'package:ezrxmobile/application/returns/usage_code/usage_code_bloc.dart';
 import 'package:ezrxmobile/application/returns/user_restriction/user_restriction_list_bloc.dart';
 import 'package:ezrxmobile/config.dart';
@@ -40,6 +39,7 @@ import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/entities/payment_customer_information.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/splash/splash_page.dart';
@@ -52,6 +52,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:upgrader/upgrader.dart';
 
 import '../../utils/widget_utils.dart';
+import '../order_history/order_history_details_widget_test.dart';
 
 class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 
@@ -99,6 +100,7 @@ class MaterialBundleListBlocMock
 class CovidMaterialListBlocMock
     extends MockBloc<CovidMaterialListEvent, CovidMaterialListState>
     implements CovidMaterialListBloc {}
+
 class MaterialFilterBlocMock
     extends MockBloc<MaterialFilterEvent, MaterialFilterState>
     implements MaterialFilterBloc {}
@@ -125,12 +127,10 @@ class MaterialListBlocMock
 class ReturnApproverBlocMock
     extends MockBloc<ReturnApproverEvent, ReturnApproverState>
     implements ReturnApproverBloc {}
-   
 
 class ReturnApproverFilterBlocMock
     extends MockBloc<ReturnApproverFilterEvent, ReturnApproverFilterState>
     implements ReturnApproverFilterBloc {}
-
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -182,6 +182,8 @@ void main() {
   setUpAll(() async {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
     locator.registerLazySingleton(() => AppRouter());
+    locator.registerLazySingleton(() => MixpanelService());
+    locator<MixpanelService>().init(mixpanel: MixpanelMock());
   });
 
   group('Splash Screen', () {
@@ -247,7 +249,7 @@ void main() {
           .thenReturn(MaterialFilterState.initial());
       when(() => returnApproverBlocMock.state)
           .thenReturn(ReturnApproverState.initial());
-           
+
       when(() => returnApproverFilterBlocMock.state)
           .thenReturn(ReturnApproverFilterState.initial());
     });
@@ -294,7 +296,6 @@ void main() {
                 create: (context) => materialFilterBlocMock),
             BlocProvider<ReturnApproverBloc>(
                 create: (context) => returnApproverBlocMock),
-                
             BlocProvider<ReturnApproverFilterBloc>(
                 create: (context) => returnApproverFilterBlocMock),
           ],

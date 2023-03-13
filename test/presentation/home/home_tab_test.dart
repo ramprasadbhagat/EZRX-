@@ -27,6 +27,7 @@ import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/home/home_tab.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -34,8 +35,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:visibility_detector/visibility_detector.dart';
 
 import '../../utils/widget_utils.dart';
+import '../order_history/order_history_details_widget_test.dart';
 import 'selectors/shipping_address_selector_test.dart';
 
 class MaterialListBlocMock
@@ -139,7 +142,9 @@ void main() {
       SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601'));
 
   group('Home banner test', () {
-    setUpAll(() {
+    setUpAll(() async {
+      locator.registerLazySingleton(() => MixpanelService());
+      locator<MixpanelService>().init(mixpanel: MixpanelMock());
       locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
       locator.registerLazySingleton(() => AppRouter());
       locator.registerLazySingleton(() => mockBannerBloc);
@@ -241,6 +246,7 @@ void main() {
       }
 
       testWidgets('Home Tab  test', (WidgetTester tester) async {
+        VisibilityDetectorController.instance.updateInterval = Duration.zero;
         final expectedEligibilityState = [
           EligibilityState.initial().copyWith(
               user: User.empty().copyWith(disableCreateOrder: false),

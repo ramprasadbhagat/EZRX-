@@ -13,6 +13,7 @@ import 'package:ezrxmobile/application/order/order_document_type/order_document_
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/material_filter.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -22,6 +23,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../utils/widget_utils.dart';
+import '../../order_history/order_history_details_widget_test.dart';
 
 class AutoRouterMock extends Mock implements AppRouter {}
 
@@ -66,6 +68,7 @@ void main() {
 
   setUpAll(() async {
     setupLocator();
+    locator<MixpanelService>().init(mixpanel: MixpanelMock());
   });
 
   group('Material Filter Test', () {

@@ -10,6 +10,8 @@ import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/cart_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
@@ -68,6 +70,9 @@ class FavouriteListTile extends StatelessWidget {
               onTap: state.isFetching
                   ? null
                   : () {
+                      trackMixpanelEvent(
+                        MixpanelEvents.addFromFavorite,
+                      );
                       CartBottomSheet.showAddToCartBottomSheet(
                         context: context,
                         priceAggregate: priceAggregate,

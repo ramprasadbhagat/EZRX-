@@ -4,6 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/account/contact_us/contact_us_page.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -13,6 +14,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../utils/widget_utils.dart';
+import '../../order_history/order_history_details_widget_test.dart';
 
 class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
     implements SalesOrgBloc {}
@@ -25,6 +27,7 @@ void main() {
   late AppRouter autoRouterMock;
   setUpAll(() async {
     setupLocator();
+    locator<MixpanelService>().init(mixpanel: MixpanelMock());
   });
 
   group('Contact Us Page', () {

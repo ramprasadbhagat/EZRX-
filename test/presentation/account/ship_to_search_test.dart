@@ -11,6 +11,7 @@ import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/presentation/account/ship_to_search.dart';
 import 'package:ezrxmobile/presentation/core/custom_label.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -21,6 +22,7 @@ import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../utils/widget_utils.dart';
+import '../order_history/order_history_details_widget_test.dart';
 
 class CustomerCodeBlocMock
     extends MockBloc<CustomerCodeEvent, CustomerCodeState>
@@ -81,6 +83,8 @@ void main() {
   setUpAll(() {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
     locator.registerLazySingleton(() => AppRouter());
+    locator.registerLazySingleton(() => MixpanelService());
+    locator<MixpanelService>().init(mixpanel: MixpanelMock());
   });
 
   group('Ship To Search Screen', () {

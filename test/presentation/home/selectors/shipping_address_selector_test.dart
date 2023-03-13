@@ -29,6 +29,7 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/home/selector/shipping_address_selector.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -40,6 +41,7 @@ import 'package:shimmer/shimmer.dart';
 
 import '../../../utils/material_frame_wrapper.dart';
 import '../../../utils/widget_utils.dart';
+import '../../order_history/order_history_details_widget_test.dart';
 
 class CustomerCodeBlocMock
     extends MockBloc<CustomerCodeEvent, CustomerCodeState>
@@ -164,7 +166,9 @@ void main() {
     customerInfos: [],
   );
 
-  setUpAll(() {
+  setUpAll(() async {
+    locator.registerLazySingleton(() => MixpanelService());
+    locator<MixpanelService>().init(mixpanel: MixpanelMock());
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
     locator.registerLazySingleton(() => AppRouter());
     mockCustomerCodeBloc = CustomerCodeBlocMock();

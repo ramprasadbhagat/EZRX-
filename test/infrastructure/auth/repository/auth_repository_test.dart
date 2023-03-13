@@ -16,6 +16,7 @@ import 'package:ezrxmobile/infrastructure/core/firebase/push_notification.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/cart_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/cred_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/token_storage.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/core/okta/okta_login.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -28,6 +29,7 @@ import 'package:local_auth_ios/local_auth_ios.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../presentation/home/selectors/shipping_address_selector_test.dart';
+import '../../order/repository/order_repository_test.dart';
 // ignore: depend_on_referenced_packages
 // ignore: depend_on_referenced_packages
 // ignore: depend_on_referenced_packages
@@ -73,6 +75,7 @@ void main() {
   late LocalAuthentication localAuthenticationMock;
   late CountlyService countlyServiceMock;
   late RoleName roleNameMock;
+  late MixpanelService mixpanelService;
 
   late AuthRepository repository;
   late Config configMock;
@@ -98,11 +101,13 @@ void main() {
       oktaLoginServicesMock = OktaLoginServicesMock();
       pushNotificationServiceMock = PushNotificationServiceMock();
       roleNameMock = RoleNameMock();
+      mixpanelService = MixpanelServiceMock();
 
       locator.registerLazySingleton(
           () => CountlyService(config: locator<Config>()));
 
       repository = AuthRepository(
+        mixpanelService: mixpanelService,
         remoteDataSource: remoteDataSourceMock,
         config: configMock,
         localDataSource: localDataSourceMock,
@@ -204,6 +209,7 @@ void main() {
       'User login using password with uat',
       () async {
         repository = AuthRepository(
+          mixpanelService: mixpanelService,
           remoteDataSource: remoteDataSourceMock,
           config: configMock,
           localDataSource: localDataSourceMock,
@@ -246,6 +252,7 @@ void main() {
       'User failed to login using password with mock',
       () async {
         repository = AuthRepository(
+          mixpanelService: mixpanelService,
           remoteDataSource: remoteDataSourceMock,
           config: configMock,
           localDataSource: localDataSourceMock,
@@ -279,6 +286,7 @@ void main() {
       'Allow user to login using password with mock',
       () async {
         repository = AuthRepository(
+          mixpanelService: mixpanelService,
           remoteDataSource: remoteDataSourceMock,
           config: configMock,
           localDataSource: localDataSourceMock,
@@ -310,6 +318,7 @@ void main() {
       'Allow user to proxy login with mock',
       () async {
         repository = AuthRepository(
+          mixpanelService: mixpanelService,
           remoteDataSource: remoteDataSourceMock,
           config: configMock,
           localDataSource: localDataSourceMock,
@@ -338,6 +347,7 @@ void main() {
       'User failed to proxy login with mock',
       () async {
         repository = AuthRepository(
+          mixpanelService: mixpanelService,
           remoteDataSource: remoteDataSourceMock,
           config: configMock,
           localDataSource: localDataSourceMock,
@@ -365,6 +375,7 @@ void main() {
       'User failed to proxy login with uat',
       () async {
         repository = AuthRepository(
+          mixpanelService: mixpanelService,
           remoteDataSource: remoteDataSourceMock,
           config: configMock,
           localDataSource: localDataSourceMock,
@@ -392,6 +403,7 @@ void main() {
       'Allow user to proxy login with uat',
       () async {
         repository = AuthRepository(
+          mixpanelService: mixpanelService,
           remoteDataSource: remoteDataSourceMock,
           config: configMock,
           localDataSource: localDataSourceMock,
@@ -418,6 +430,7 @@ void main() {
       'Allow user to get getEZRXJWT with mock',
       () async {
         repository = AuthRepository(
+          mixpanelService: mixpanelService,
           remoteDataSource: remoteDataSourceMock,
           config: configMock,
           localDataSource: localDataSourceMock,
@@ -446,6 +459,7 @@ void main() {
       'User failed to login using password with uat',
       () async {
         repository = AuthRepository(
+          mixpanelService: mixpanelService,
           remoteDataSource: remoteDataSourceMock,
           config: configMock,
           localDataSource: localDataSourceMock,
@@ -479,6 +493,7 @@ void main() {
       'User failed to get getEZRXJWT with mock',
       () async {
         repository = AuthRepository(
+          mixpanelService: mixpanelService,
           remoteDataSource: remoteDataSourceMock,
           config: configMock,
           localDataSource: localDataSourceMock,
@@ -506,6 +521,7 @@ void main() {
       'User failed to get getEZRXJWT with uat',
       () async {
         repository = AuthRepository(
+          mixpanelService: mixpanelService,
           remoteDataSource: remoteDataSourceMock,
           config: configMock,
           localDataSource: localDataSourceMock,
@@ -534,6 +550,7 @@ void main() {
       'Allow user to getEZRXJWT with uat',
       () async {
         repository = AuthRepository(
+          mixpanelService: mixpanelService,
           remoteDataSource: remoteDataSourceMock,
           config: configMock,
           localDataSource: localDataSourceMock,
@@ -563,6 +580,7 @@ void main() {
       'Allow user to handle token storage',
       () async {
         repository = AuthRepository(
+          mixpanelService: mixpanelService,
           remoteDataSource: remoteDataSourceMock,
           config: configMock,
           localDataSource: localDataSourceMock,
@@ -597,6 +615,7 @@ void main() {
       'user failed validated token.',
       () async {
         repository = AuthRepository(
+          mixpanelService: mixpanelService,
           remoteDataSource: remoteDataSourceMock,
           config: configMock,
           localDataSource: localDataSourceMock,
@@ -619,6 +638,7 @@ void main() {
       'Allow user to handle cred storage',
       () async {
         repository = AuthRepository(
+          mixpanelService: mixpanelService,
           remoteDataSource: remoteDataSourceMock,
           config: configMock,
           localDataSource: localDataSourceMock,
@@ -653,6 +673,7 @@ void main() {
       'Allow user to storeJWT',
       () async {
         repository = AuthRepository(
+          mixpanelService: mixpanelService,
           remoteDataSource: remoteDataSourceMock,
           config: configMock,
           localDataSource: localDataSourceMock,
@@ -679,6 +700,7 @@ void main() {
       'Allow user to logout',
       () async {
         repository = AuthRepository(
+          mixpanelService: mixpanelService,
           remoteDataSource: remoteDataSourceMock,
           config: configMock,
           localDataSource: localDataSourceMock,
@@ -712,6 +734,7 @@ void main() {
       'Allow user to handle okta login',
       () async {
         repository = AuthRepository(
+          mixpanelService: mixpanelService,
           remoteDataSource: remoteDataSourceMock,
           config: configMock,
           localDataSource: localDataSourceMock,
@@ -746,6 +769,7 @@ void main() {
       'Biometric Check success',
       () async {
         repository = AuthRepository(
+          mixpanelService: mixpanelService,
           remoteDataSource: remoteDataSourceMock,
           config: configMock,
           localDataSource: localDataSourceMock,
@@ -799,6 +823,7 @@ void main() {
       'Biometric canBeAuthenticated success',
       () async {
         repository = AuthRepository(
+          mixpanelService: mixpanelService,
           remoteDataSource: remoteDataSourceMock,
           config: configMock,
           localDataSource: localDataSourceMock,
@@ -832,6 +857,7 @@ void main() {
       'isEligibleProxyLogin failure',
       () async {
         repository = AuthRepository(
+          mixpanelService: mixpanelService,
           remoteDataSource: remoteDataSourceMock,
           config: configMock,
           localDataSource: localDataSourceMock,

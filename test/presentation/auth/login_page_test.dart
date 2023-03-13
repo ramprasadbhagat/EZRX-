@@ -18,6 +18,7 @@ import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/infrastructure/announcement/datasource/announcement_local.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/presentation/auth/login_page.dart';
 import 'package:ezrxmobile/presentation/splash/splash_page.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +29,7 @@ import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../utils/material_frame_wrapper.dart';
+import '../order_history/order_history_details_widget_test.dart';
 
 class LoginFormBlocMock extends MockBloc<LoginFormEvent, LoginFormState>
     implements LoginFormBloc {}
@@ -84,6 +86,8 @@ void main() {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
     locator
         .registerLazySingleton(() => CountlyService(config: locator<Config>()));
+    locator.registerLazySingleton(() => MixpanelService());
+    locator<MixpanelService>().init(mixpanel: MixpanelMock());
     announcementMock = await AnnouncementLocalDataSource().getAnnouncements();
   });
 

@@ -1,4 +1,9 @@
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
+import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
+import 'package:ezrxmobile/domain/order/entities/price.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/price_combo_deal.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -6,13 +11,8 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
-import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
-import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
-import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
-import 'package:ezrxmobile/domain/order/entities/price.dart';
-import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/cart_repository.dart';
 
 part 'cart_bloc.freezed.dart';

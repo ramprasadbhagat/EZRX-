@@ -25,6 +25,7 @@ import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_price_detail.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/bundle_item_detail_page.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -35,6 +36,7 @@ import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../../utils/widget_utils.dart';
+import '../../../order_history/order_history_details_widget_test.dart';
 
 class SalesOrgMockBloc extends MockBloc<SalesOrgEvent, SalesOrgState>
     implements SalesOrgBloc {}
@@ -125,6 +127,8 @@ void main() {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
     locator
         .registerLazySingleton(() => CountlyService(config: locator<Config>()));
+    locator.registerLazySingleton(() => MixpanelService());
+    locator<MixpanelService>().init(mixpanel: MixpanelMock());
   });
 
   group('Bundle item details test', () {

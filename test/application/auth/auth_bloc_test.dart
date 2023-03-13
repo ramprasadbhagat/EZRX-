@@ -77,7 +77,9 @@ void main() {
             (invocation) async => const Left(ApiFailure.invalidBiometirc()));
       },
       act: (AuthBloc bloc) async => bloc.add(const AuthEvent.init()),
-      expect: () => [const AuthState.unauthenticated()],
+      expect: () => [
+        const AuthState.unauthenticated(),
+      ],
     );
 
     blocTest(
@@ -98,7 +100,9 @@ void main() {
             (invocation) async => const Left(ApiFailure.invalidBiometirc()));
       },
       act: (AuthBloc bloc) async => bloc.add(const AuthEvent.authCheck()),
-      expect: () => [const AuthState.unauthenticated()],
+      expect: () => [
+        const AuthState.unauthenticated(),
+      ],
     );
     blocTest('Unauthenticated On Okta Token Test',
         build: () => AuthBloc(authRepository: authRepoMock),
@@ -115,8 +119,10 @@ void main() {
               (invocation) async => const Left(ApiFailure.other('fake-error')));
         },
         act: (AuthBloc bloc) async => bloc.add(const AuthEvent.authCheck()),
-        expect: () =>
-            [const AuthState.loading(), const AuthState.unauthenticated()]);
+        expect: () => [
+              const AuthState.loading(),
+              const AuthState.unauthenticated(),
+            ]);
     blocTest('Unauthenticated On EZRX JWT Test',
         build: () => AuthBloc(authRepository: authRepoMock),
         setUp: () {

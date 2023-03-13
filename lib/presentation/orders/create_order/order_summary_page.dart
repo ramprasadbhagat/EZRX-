@@ -23,7 +23,10 @@ import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
@@ -50,6 +53,12 @@ class OrderSummaryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     locator<CountlyService>().recordCountlyView('Order Summary Screen');
+    trackMixpanelEvent(
+      MixpanelEvents.pageViewVisited,
+      props: {
+        MixpanelProps.pageViewName: runtimeType.toString(),
+      },
+    );
 
     return Scaffold(
       key: const Key('orderSummaryKey'),
@@ -212,6 +221,9 @@ class _SubmitContinueButton extends StatelessWidget {
   }
 
   void _submitOrder(BuildContext context) {
+    trackMixpanelEvent(
+      MixpanelEvents.submitOrder,
+    );
     context.read<OrderSummaryBloc>().add(OrderSummaryEvent.submitOrder(
           config: context.read<SalesOrgBloc>().state.configs,
           shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
@@ -357,6 +369,9 @@ class _UtilityButton extends StatelessWidget {
   }
 
   void _saveOrder(BuildContext context, {bool isUpdate = false}) {
+    trackMixpanelEvent(
+      MixpanelEvents.saveOrder,
+    );
     isUpdate
         ? context.read<SavedOrderListBloc>().add(
               SavedOrderListEvent.updateDraft(
@@ -410,10 +425,8 @@ class _Stepper extends StatelessWidget {
                 context.read<CustomerCodeBloc>().state.customerCodeInfo,
             shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
             user: context.read<UserBloc>().state.user,
-            orderHistoryFilter: context
-                .read<OrderHistoryFilterBloc>()
-                .state
-                .orderHistoryFilter,
+            orderHistoryFilter:
+                context.read<OrderHistoryFilterBloc>().state.orderHistoryFilter,
             sortDirection: 'desc',
           ),
         );

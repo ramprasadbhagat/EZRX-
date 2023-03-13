@@ -10,6 +10,7 @@ import 'package:ezrxmobile/domain/auth/entities/reset_password.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/infrastructure/auth/repository/change_password_repository.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/account/change_password/change_password_page.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -20,6 +21,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../utils/tester_utils.dart';
+import '../../order_history/order_history_details_widget_test.dart';
 
 class ResetPasswordBlocMock
     extends MockBloc<ResetPasswordEvent, ResetPasswordState>
@@ -43,6 +45,7 @@ void main() {
   late AppRouter autoRouterMock;
   setUpAll(() async {
     setupLocator();
+    locator<MixpanelService>().init(mixpanel: MixpanelMock());
   });
 
   group('ChangePassword Test', () {

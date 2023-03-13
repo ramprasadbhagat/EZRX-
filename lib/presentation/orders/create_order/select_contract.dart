@@ -3,6 +3,9 @@ import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/tender_contract_item.dart';
@@ -18,6 +21,13 @@ class SelectContract extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    trackMixpanelEvent(
+      MixpanelEvents.pageViewVisited,
+      props: {
+        MixpanelProps.pageViewName: runtimeType.toString(),
+      },
+    );
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(

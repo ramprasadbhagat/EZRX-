@@ -233,8 +233,8 @@ void main() {
         OrderSummaryState.initial().copyWith(
           apiFailureOrSuccessOption: none(),
           isSubmitting: false,
-          submitOrderResponse: submitOrderResponse,
           isSubmitSuccess: true,
+          submitOrderResponse: submitOrderResponse,
         ),
       ],
     );

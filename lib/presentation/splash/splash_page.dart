@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:universal_io/io.dart';
 
 import 'package:auto_route/auto_route.dart';
@@ -92,7 +93,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
             state.map(
               initial: (_) => _showLoadingDialog(context),
               loading: (_) => _showLoadingDialog(context),
-              authenticated: (_) {
+              authenticated: (authState) {
                 context.read<UserBloc>().add(const UserEvent.fetch());
                 context.router.replaceAll(
                   [
@@ -101,7 +102,8 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                   ],
                 );
               },
-              unauthenticated: (_) {
+              unauthenticated: (unauthState) {
+                locator<MixpanelService>().resetSuperProps();
                 context.read<UserBloc>().add(const UserEvent.initialized());
                 context
                     .read<EligibilityBloc>()

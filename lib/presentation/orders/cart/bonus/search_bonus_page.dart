@@ -5,6 +5,9 @@ import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/cart_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
@@ -32,6 +35,12 @@ class _BonusAddPageState extends State<BonusAddPage> {
   @override
   void initState() {
     bonusMaterialBloc = context.read<BonusMaterialBloc>();
+    trackMixpanelEvent(
+      MixpanelEvents.pageViewVisited,
+      props: {
+        MixpanelProps.pageViewName: 'BonusAddPage',
+      },
+    );
     super.initState();
   }
 
@@ -59,36 +68,34 @@ class _BonusAddPageState extends State<BonusAddPage> {
               return Form(
                 child: TextFormField(
                   key: Key(
-                      'addBonusTextField${state.searchKey.getOrDefaultValue('')}',),
+                    'addBonusTextField${state.searchKey.getOrDefaultValue('')}',
+                  ),
                   controller: _searchController,
                   autocorrect: false,
                   enabled: !state.isFetching,
                   onFieldSubmitted: (value) {
                     if (value.length > 2) {
                       bonusMaterialBloc.add(
-                            BonusMaterialEvent.fetch(
-                              user: context.read<UserBloc>().state.user,
-                              salesOrganisation: context
-                                  .read<SalesOrgBloc>()
-                                  .state
-                                  .salesOrganisation,
-                              configs:
-                                  context.read<SalesOrgBloc>().state.configs,
-                              pickAndPack: context
-                                  .read<EligibilityBloc>()
-                                  .state
-                                  .getPNPValueMaterial,
-                              customerInfo: context
-                                  .read<CustomerCodeBloc>()
-                                  .state
-                                  .customerCodeInfo,
-                              shipInfo: context
-                                  .read<ShipToCodeBloc>()
-                                  .state
-                                  .shipToInfo,
-                              searchKey: value,
-                            ),
-                          );
+                        BonusMaterialEvent.fetch(
+                          user: context.read<UserBloc>().state.user,
+                          salesOrganisation: context
+                              .read<SalesOrgBloc>()
+                              .state
+                              .salesOrganisation,
+                          configs: context.read<SalesOrgBloc>().state.configs,
+                          pickAndPack: context
+                              .read<EligibilityBloc>()
+                              .state
+                              .getPNPValueMaterial,
+                          customerInfo: context
+                              .read<CustomerCodeBloc>()
+                              .state
+                              .customerCodeInfo,
+                          shipInfo:
+                              context.read<ShipToCodeBloc>().state.shipToInfo,
+                          searchKey: value,
+                        ),
+                      );
                     } else {
                       showSnackBar(
                         context: context,
@@ -111,8 +118,8 @@ class _BonusAddPageState extends State<BonusAddPage> {
                         if (_searchController.text.isEmpty) return;
                         _searchController.clear();
                         bonusMaterialBloc.add(
-                              const BonusMaterialEvent.reset(),
-                            );
+                          const BonusMaterialEvent.reset(),
+                        );
                       },
                     ),
                     hintText: 'Search...'.tr(),

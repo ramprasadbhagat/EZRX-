@@ -18,6 +18,7 @@ import 'package:ezrxmobile/domain/returns/entities/approver_return_request.dart'
 import 'package:ezrxmobile/domain/returns/entities/return_approver_filter.dart';
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/filter_icon.dart';
 import 'package:ezrxmobile/presentation/returns/approver_actions/approver_actions.dart';
@@ -29,6 +30,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../utils/widget_utils.dart';
+import '../../order_history/order_history_details_widget_test.dart';
 
 class ReturnApproverBlocMock
     extends MockBloc<ReturnApproverEvent, ReturnApproverState>
@@ -80,6 +82,8 @@ void main() {
 
   setUpAll(
     () {
+      locator.registerLazySingleton(() => MixpanelService());
+      locator<MixpanelService>().init(mixpanel: MixpanelMock());
       locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
       locator.registerLazySingleton(() => AppRouter());
       countlyService = CountlyServiceMock();
@@ -337,7 +341,7 @@ void main() {
             ),
           ),
         ];
-        
+
         whenListen(
           shipToCodeBlocMock,
           Stream.fromIterable(expectedShipToCodeState),

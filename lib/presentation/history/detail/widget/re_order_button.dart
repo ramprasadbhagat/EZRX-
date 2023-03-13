@@ -11,6 +11,8 @@ import 'package:ezrxmobile/application/order/order_history_details/order_history
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/additional_details_data.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/text_button_shimmer.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -93,6 +95,9 @@ class ReOrderButton extends StatelessWidget {
     MaterialPriceDetailState priceState,
     OrderHistoryDetailsState orderState,
   ) {
+    trackMixpanelEvent(
+      MixpanelEvents.reOrder,
+    );
     final eligibilityState = context.read<EligibilityBloc>().state;
     final orderHistoryDetails =
         context.read<OrderHistoryDetailsBloc>().state.orderHistoryDetails;

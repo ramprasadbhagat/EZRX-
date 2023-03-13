@@ -326,6 +326,19 @@ class Config {
     }
   }
 
+  String get mixpanelKey {
+    switch (appFlavor) {
+      case Flavor.dev:
+      case Flavor.mock:
+      case Flavor.uat:
+        return 'd39d1a5395bc4054f5d1cf296b20d80b';
+      case Flavor.prod:
+        return 'f401c9430963bf0091150adb1a0593e3';
+      default:
+        return 'f401c9430963bf0091150adb1a0593e3';
+    }
+  }
+
   String get scanditLicenseKey {
     switch (appFlavor) {
       case Flavor.mock:

@@ -6,6 +6,9 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/add_to_cart_button.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/cart_item_detail_widget.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/favorite_button.dart';
@@ -68,10 +71,17 @@ class _AddToCartState extends State<AddToCart> {
     final cartBloc = context.read<CartBloc>();
     final addToCartBloc = context.read<AddToCartBloc>();
 
+    trackMixpanelEvent(
+      MixpanelEvents.pageViewVisited,
+      props: {
+        MixpanelProps.pageViewName: '${runtimeType.toString()}Page',
+      },
+    );
+
     return WillPopScope(
       onWillPop: () {
         tenderContractBloc.add(const TenderContractEvent.unselected());
-        
+
         return Future.value(true);
       },
       child: Scaffold(
@@ -118,20 +128,19 @@ class _AddToCartState extends State<AddToCart> {
                   ),
                   AddToCartButton(
                     isAddToCartAllowed: _isAddToCartAllowed,
-                    cartItem:
-                        selectedTenderContract == TenderContract.empty() ||
-                                selectedTenderContract ==
-                                    TenderContract.noContract()
-                            ? state.cartItem
-                            : state.cartItem.copyWith(
-                                tenderContract: selectedTenderContract,
-                                price: state.cartItem.price.copyWith(
-                                  finalPrice: MaterialPrice(
-                                    selectedTenderContract
-                                        .tenderPrice.tenderPrice,
-                                  ),
-                                ),
+                    cartItem: selectedTenderContract ==
+                                TenderContract.empty() ||
+                            selectedTenderContract ==
+                                TenderContract.noContract()
+                        ? state.cartItem
+                        : state.cartItem.copyWith(
+                            tenderContract: selectedTenderContract,
+                            price: state.cartItem.price.copyWith(
+                              finalPrice: MaterialPrice(
+                                selectedTenderContract.tenderPrice.tenderPrice,
                               ),
+                            ),
+                          ),
                   ),
                 ],
               );

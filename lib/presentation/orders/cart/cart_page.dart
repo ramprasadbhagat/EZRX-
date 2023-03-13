@@ -15,7 +15,10 @@ import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.da
 import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
@@ -33,6 +36,12 @@ class CartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     locator<CountlyService>().recordCountlyView('Cart Window Screen');
+    trackMixpanelEvent(
+      MixpanelEvents.pageViewVisited,
+      props: {
+        MixpanelProps.pageViewName: runtimeType.toString(),
+      },
+    );
 
     return BlocConsumer<CartBloc, CartState>(
       listenWhen: (previous, current) =>
@@ -157,6 +166,9 @@ class CartPage extends StatelessWidget {
                               onPressed: state.selectedCartItems.isEmpty
                                   ? null
                                   : () {
+                                      trackMixpanelEvent(
+                                        MixpanelEvents.goToOrderSummary,
+                                      );
                                       locator<CountlyService>().addCountlyEvent(
                                         'Checkout',
                                         segmentation: {

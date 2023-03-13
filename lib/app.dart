@@ -8,6 +8,8 @@ import 'package:ezrxmobile/application/returns/request_return/request_return_blo
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_summary/return_summary_bloc.dart';
 import 'package:ezrxmobile/application/returns/request_return_filter/request_return_filter_bloc.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 import 'package:ezrxmobile/application/returns/return_summary_filter/return_summary_filter_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/order_storage.dart';
 import 'package:universal_io/io.dart';
@@ -132,6 +134,12 @@ Future<void> initialSetup({required Flavor flavor}) async {
   await locator<AccountSelectorStorage>().init();
   await locator<CartStorage>().init();
   await locator<CountlyService>().init();
+  locator<MixpanelService>().init(
+    mixpanel: await Mixpanel.init(
+      config.mixpanelKey,
+      trackAutomaticEvents: true,
+    ),
+  );
   await locator<MaterialInfoScanner>().init();
   await locator<OrderStorage>().init();
 }

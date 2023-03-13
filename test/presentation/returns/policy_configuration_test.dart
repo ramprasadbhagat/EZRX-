@@ -6,6 +6,7 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/returns/entities/policy_configuration.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/policy_configuration_local.dart';
 import 'package:ezrxmobile/presentation/returns/policy_configuration/policy_configuration.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -17,6 +18,7 @@ import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../utils/widget_utils.dart';
+import '../order_history/order_history_details_widget_test.dart';
 
 class MockPolicyConfigurationListBloc
     extends MockBloc<PolicyConfigurationEvent, PolicyConfigurationState>
@@ -33,6 +35,8 @@ void main() {
   final locator = GetIt.instance;
 
   setUpAll(() async {
+    locator.registerLazySingleton(() => MixpanelService());
+    locator<MixpanelService>().init(mixpanel: MixpanelMock());
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
     locator.registerLazySingleton(() => AppRouter());
     locator
@@ -80,8 +84,9 @@ void main() {
       verify(
         () => policyConfigurationListBlocMock.add(
           PolicyConfigurationEvent.fetch(
-              salesOrganisation: salesOrgBlocMock.state.salesOrganisation,
-              searchKey: '',),
+            salesOrganisation: salesOrgBlocMock.state.salesOrganisation,
+            searchKey: '',
+          ),
         ),
       ).called(1);
     });

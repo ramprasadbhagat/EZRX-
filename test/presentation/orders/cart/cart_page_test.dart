@@ -41,6 +41,7 @@ import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/cart_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/discount_override_repository.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -61,6 +62,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../utils/widget_utils.dart';
+import '../../order_history/order_history_details_widget_test.dart';
 
 class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
 
@@ -155,8 +157,10 @@ void main() {
   late CountlyService countlyMockService;
   late AdditionalDetailsBloc additionalDetailsBlocMock;
 
-  setUpAll(() {
+  setUpAll(() async {
     countlyMockService = CountlyServiceMock();
+    locator.registerLazySingleton(() => MixpanelService());
+    locator<MixpanelService>().init(mixpanel: MixpanelMock());
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
     locator
         .registerLazySingleton(() => CountlyService(config: locator<Config>()));
@@ -872,19 +876,17 @@ void main() {
         when(() => cartBloc.state).thenReturn(
           CartState.initial().copyWith(
             cartItems: [
-              CartItem.material(
-                mockCartItemWithDataList2.first.copyWith(
-                  price: Price.empty().copyWith(
-                    zmgDiscount: true,
-                    tiers: [
-                      PriceTier(
-                        tier: 'c',
-                        items: [PriceTierItem.empty()],
-                      )
-                    ],
-                  ),
-                )
-              )
+              CartItem.material(mockCartItemWithDataList2.first.copyWith(
+                price: Price.empty().copyWith(
+                  zmgDiscount: true,
+                  tiers: [
+                    PriceTier(
+                      tier: 'c',
+                      items: [PriceTierItem.empty()],
+                    )
+                  ],
+                ),
+              ))
             ],
             isFetching: false,
           ),
@@ -1034,7 +1036,9 @@ void main() {
       testWidgets('Check if price is overrided ', (tester) async {
         when(() => cartBloc.state).thenReturn(
           CartState.initial().copyWith(
-            cartItems: [CartItem.material(mockCartItemWithDataListOverride.first)],
+            cartItems: [
+              CartItem.material(mockCartItemWithDataListOverride.first)
+            ],
             isFetching: true,
           ),
         );
@@ -1333,12 +1337,12 @@ void main() {
 
         when(() => cartBloc.state).thenReturn(
           CartState.initial().copyWith(
-              cartItems: [CartItem.material(mockCartItemWithDataList.first)],
-              isFetching: false,
-              // selectedItemsMaterialNumber: mockCartItemWithDataList
-              //     .map<MaterialNumber>((e) => e.getMaterialNumber)
-              //     .toList()
-            ),
+            cartItems: [CartItem.material(mockCartItemWithDataList.first)],
+            isFetching: false,
+            // selectedItemsMaterialNumber: mockCartItemWithDataList
+            //     .map<MaterialNumber>((e) => e.getMaterialNumber)
+            //     .toList()
+          ),
         );
         when(() => customerCodeBloc.state).thenReturn(
           CustomerCodeState.initial().copyWith(
@@ -1460,7 +1464,9 @@ void main() {
       testWidgets('Test have cart item update cart', (tester) async {
         final newList = [
           mockCartItemWithDataList.first.copyWith(
-            materialInfo: mockCartItemWithDataList.first.materialInfo.copyWith(hasValidTenderContract: true,),
+            materialInfo: mockCartItemWithDataList.first.materialInfo.copyWith(
+              hasValidTenderContract: true,
+            ),
             tenderContract: TenderContract.empty().copyWith(
               contractNumber:
                   TenderContractNumber.tenderContractItemNumber('0000123'),

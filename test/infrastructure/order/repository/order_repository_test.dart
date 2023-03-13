@@ -28,6 +28,7 @@ import 'package:ezrxmobile/domain/order/entities/submit_order_response_message.d
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/saved_order_dto.dart';
@@ -55,6 +56,8 @@ class OrderRemoteDataSourceMock extends Mock implements OrderRemoteDataSource {}
 
 class CountlyServiceMock extends Mock implements CountlyService {}
 
+class MixpanelServiceMock extends Mock implements MixpanelService {}
+
 void main() {
   late OrderRepository orderRepository;
   late Config mockConfig;
@@ -64,6 +67,7 @@ void main() {
   final mockUser = User.empty();
   final mockSalesOrganisation =
       SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601'));
+  late MixpanelService mixpanelService;
 
   final mockShipToInfo = ShipToInfo.empty().copyWith(
     shipToCustomerCode: '3487654',
@@ -127,12 +131,14 @@ void main() {
     orderLocalDataSource = OrderLocalDataSourceMock();
     orderRemoteDataSource = OrderRemoteDataSourceMock();
     countlyService = CountlyServiceMock();
+    mixpanelService = MixpanelServiceMock();
 
     orderRepository = OrderRepository(
       config: mockConfig,
       localDataSource: orderLocalDataSource,
       remoteDataSource: orderRemoteDataSource,
       countlyService: countlyService,
+      mixpanelService: mixpanelService,
     );
   });
 

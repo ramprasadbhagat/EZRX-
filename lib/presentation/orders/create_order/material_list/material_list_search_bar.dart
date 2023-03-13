@@ -7,8 +7,11 @@ import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -84,6 +87,13 @@ class MaterialListSearchBarState extends State<MaterialListSearchBar> {
                           searchKey: SearchKey(value),
                         ),
                       );
+                  trackMixpanelEvent(
+                    MixpanelEvents.productSearch,
+                    props: {
+                      MixpanelProps.searchKey:
+                          state.searchKey.getOrDefaultValue(''),
+                    },
+                  );
                   locator<CountlyService>().addCountlyEvent(
                     'Product Search',
                     segmentation: {

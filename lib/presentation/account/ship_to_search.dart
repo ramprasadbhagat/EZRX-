@@ -4,6 +4,9 @@ import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/presentation/core/confirm_clear_cart_dialog.dart';
 import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:ezrxmobile/presentation/core/custom_label.dart';
@@ -37,6 +40,12 @@ class _ShiptToSearchPage extends State<ShiptToSearchPage> {
         ),
       );
     }
+    trackMixpanelEvent(
+      MixpanelEvents.pageViewVisited,
+      props: {
+        MixpanelProps.pageViewName: runtimeType.toString(),
+      },
+    );
     super.initState();
   }
 
@@ -175,8 +184,12 @@ class _HeaderMessage extends StatelessWidget {
     return !state.isSearching && state.shipToInfoList.isNotEmpty
         ? Padding(
             padding: const EdgeInsets.all(15.0),
-            child:  Text('Please select a shipping address',
-              style: Theme.of(context).textTheme.titleSmall?.copyWith(color: ZPColors.red),
+            child: Text(
+              'Please select a shipping address',
+              style: Theme.of(context)
+                  .textTheme
+                  .titleSmall
+                  ?.copyWith(color: ZPColors.red),
             ).tr(),
           )
         : const SizedBox.shrink();
@@ -270,6 +283,13 @@ class _ListContent extends StatelessWidget {
                       shipToInfo: shipToInfo,
                     ),
                   );
+                  trackMixpanelEvent(
+                    MixpanelEvents.shipToAddressSave,
+                    props: {
+                      MixpanelProps.shipToAddress:
+                          shipToInfo.shipToCustomerCode,
+                    },
+                  );
                 },
               );
             } else {
@@ -280,6 +300,12 @@ class _ListContent extends StatelessWidget {
                       shipToInfo: shipToInfo,
                     ),
                   );
+              trackMixpanelEvent(
+                MixpanelEvents.shipToAddressSave,
+                props: {
+                  MixpanelProps.shipToAddress: shipToInfo.shipToCustomerCode,
+                },
+              );
             }
           },
         ),

@@ -6,7 +6,10 @@ import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.da
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/covid_material_list/covid_material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -83,6 +86,12 @@ class CovidMaterialListSearchBarState
                               .getPNPValueMaterial,
                         ),
                       );
+                  trackMixpanelEvent(
+                    MixpanelEvents.productSearch,
+                    props: {
+                      MixpanelProps.searchKey: value,
+                    },
+                  );
                   locator<CountlyService>().addCountlyEvent(
                     'Product Search',
                     segmentation: {

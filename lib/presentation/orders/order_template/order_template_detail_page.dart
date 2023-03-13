@@ -10,7 +10,10 @@ import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_template.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/dialogs/custom_dialogs.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_action_button.dart';
@@ -55,6 +58,12 @@ class _OrderTemplateDetailPageState extends State<OrderTemplateDetailPage> {
                 pickAndPack: elibilityBloc.state.getPNPValueMaterial,
               ),
             );
+      },
+    );
+    trackMixpanelEvent(
+      MixpanelEvents.pageViewVisited,
+      props: {
+        MixpanelProps.pageViewName: 'OrderTemplateDetailPage',
       },
     );
   }
@@ -250,6 +259,9 @@ class _OrderTemplateDetailPageState extends State<OrderTemplateDetailPage> {
     MaterialPriceDetailState priceState,
     TenderContractListState tenderContractState,
   ) {
+    trackMixpanelEvent(
+      MixpanelEvents.selectTemplate,
+    );
     final cartBloc = context.read<CartBloc>();
     final salesConfigs = elibilityBloc.state.salesOrgConfigs;
 

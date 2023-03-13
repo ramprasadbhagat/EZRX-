@@ -45,6 +45,7 @@ import 'package:ezrxmobile/domain/order/entities/payment_term.dart' as pt;
 import 'package:ezrxmobile/domain/order/entities/submit_order_response.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/order_summary_page.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -54,6 +55,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../utils/widget_utils.dart';
+import '../../order_history/order_history_details_widget_test.dart';
 
 class OrderSummaryBlocMock
     extends MockBloc<OrderSummaryEvent, OrderSummaryState>
@@ -174,11 +176,13 @@ void main() {
   late PoAttachmentBloc poAttachmentBlocMock;
 
   setUpAll(
-    () {
+    () async {
       locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
       locator.registerLazySingleton(() => AppRouter());
       locator.registerLazySingleton(
           () => CountlyService(config: locator<Config>()));
+      locator.registerLazySingleton(() => MixpanelService());
+      locator<MixpanelService>().init(mixpanel: MixpanelMock());
     },
   );
   setUp(

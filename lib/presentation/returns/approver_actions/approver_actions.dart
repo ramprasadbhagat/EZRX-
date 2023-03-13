@@ -7,7 +7,10 @@ import 'package:ezrxmobile/application/returns/approver_actions/return_approver_
 import 'package:ezrxmobile/domain/returns/entities/approver_return_request.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_approver_filter.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/filter_icon.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
@@ -26,6 +29,12 @@ class ApproverActions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     locator<CountlyService>().recordCountlyView('approver_actions');
+    trackMixpanelEvent(
+      MixpanelEvents.pageViewVisited,
+      props: {
+        MixpanelProps.pageViewName: runtimeType.toString(),
+      },
+    );
 
     return Scaffold(
       key: scaffoldKey,

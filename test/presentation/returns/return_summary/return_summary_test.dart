@@ -20,6 +20,7 @@ import 'package:ezrxmobile/domain/returns/entities/return_summary_request_items.
 import 'package:ezrxmobile/domain/returns/entities/return_summary_requests.dart';
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/presentation/core/filter_icon.dart';
 import 'package:ezrxmobile/presentation/returns/return_summary/return_summary.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -30,6 +31,7 @@ import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../utils/widget_utils.dart';
+import '../../order_history/order_history_details_widget_test.dart';
 
 class ReturnSummaryBlocMock
     extends MockBloc<ReturnSummaryEvent, ReturnSummaryState>
@@ -64,9 +66,11 @@ void main() {
   setUpAll(() async {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
     locator.registerLazySingleton(() => AppRouter());
+    locator.registerLazySingleton(() => MixpanelService());
     locator
         .registerLazySingleton(() => CountlyService(config: locator<Config>()));
     autoRouterMock = locator<AppRouter>();
+    locator<MixpanelService>().init(mixpanel: MixpanelMock());
   });
 
   setUp(() async {

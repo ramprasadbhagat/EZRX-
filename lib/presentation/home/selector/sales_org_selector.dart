@@ -9,6 +9,9 @@ import 'package:ezrxmobile/application/order/order_document_type/order_document_
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/presentation/core/confirm_clear_cart_dialog.dart';
 import 'package:ezrxmobile/presentation/core/custom_selector.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
@@ -90,47 +93,61 @@ class SalesOrgSelector extends StatelessWidget {
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: state.userSalesOrganisations
-                  .map(
-                    (e) => PlatformDialogAction(
-                      key: Key('salesOrgOption${e.salesOrg.getOrCrash()}'),
-                      child: Text(e.salesOrg.fullName),
-                      onPressed: () {
-                        if (e != salesOrgBloc.state.salesOrganisation &&
-                            cartBloc.state.cartItems.isNotEmpty) {
-                          ConfirmClearDialog.show(
-                            context: context,
-                            title: 'Change sales organization'.tr(),
-                            description:
-                                'The progress on your cart is going to be lost. Do you want to proceed?'
-                                    .tr(),
-                            onCancel: () {
-                              context.router.pop();
-                            },
-                            onConfirmed: () {
-                              context.router.popUntilRouteWithName(
-                                HomeNavigationTabbarRoute.name,
-                              );
-                              salesOrgBloc.add(
-                                SalesOrgEvent.selected(
-                                  salesOrganisation: e,
-                                ),
-                              );
-                            },
-                          );
-                        } else {
-                          context.router.popUntilRouteWithName(
-                            HomeNavigationTabbarRoute.name,
-                          );
-                          salesOrgBloc.add(
-                            SalesOrgEvent.selected(
-                              salesOrganisation: e,
-                            ),
-                          );
-                        }
-                      },
-                    ),
-                  )
-                  .toList(),
+                    .map(
+                      (e) => PlatformDialogAction(
+                        key: Key('salesOrgOption${e.salesOrg.getOrCrash()}'),
+                        child: Text(e.salesOrg.fullName),
+                        onPressed: () {
+                          if (e != salesOrgBloc.state.salesOrganisation &&
+                              cartBloc.state.cartItems.isNotEmpty) {
+                            ConfirmClearDialog.show(
+                              context: context,
+                              title: 'Change sales organization'.tr(),
+                              description:
+                                  'The progress on your cart is going to be lost. Do you want to proceed?'
+                                      .tr(),
+                              onCancel: () {
+                                context.router.pop();
+                              },
+                              onConfirmed: () {
+                                context.router.popUntilRouteWithName(
+                                  HomeNavigationTabbarRoute.name,
+                                );
+                                salesOrgBloc.add(
+                                  SalesOrgEvent.selected(
+                                    salesOrganisation: e,
+                                  ),
+                                );
+                                trackMixpanelEvent(
+                                  MixpanelEvents.salesOrgSave,
+                                  props: {
+                                    MixpanelProps.salesOrg:
+                                        e.salesOrg.getOrDefaultValue(''),
+                                  },
+                                );
+                              },
+                            );
+                          } else {
+                            context.router.popUntilRouteWithName(
+                              HomeNavigationTabbarRoute.name,
+                            );
+                            salesOrgBloc.add(
+                              SalesOrgEvent.selected(
+                                salesOrganisation: e,
+                              ),
+                            );
+                            trackMixpanelEvent(
+                              MixpanelEvents.salesOrgSave,
+                              props: {
+                                MixpanelProps.salesOrg:
+                                    e.salesOrg.getOrDefaultValue(''),
+                              },
+                            );
+                          }
+                        },
+                      ),
+                    )
+                    .toList(),
               ),
             );
           },

@@ -14,6 +14,7 @@ import 'package:ezrxmobile/domain/returns/entities/return_approval_limit_details
 import 'package:ezrxmobile/domain/returns/entities/user_restriction_status.dart';
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/locator.dart';
 
 import 'package:ezrxmobile/presentation/returns/add_edit_user_restrictions.dart';
@@ -24,6 +25,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../utils/widget_utils.dart';
+import '../order_history/order_history_details_widget_test.dart';
 
 class UserRestrictionDetailsBlocMock
     extends MockBloc<UserRestrictionDetailsEvent, UserRestrictionDetailsState>
@@ -47,6 +49,8 @@ void main() {
 
   setUpAll(
     () {
+      locator.registerLazySingleton(() => MixpanelService());
+      locator<MixpanelService>().init(mixpanel: MixpanelMock());
       locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
       locator.registerLazySingleton(() => AppRouter());
       locator.registerLazySingleton(

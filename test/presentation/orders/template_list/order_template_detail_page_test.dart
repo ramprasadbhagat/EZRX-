@@ -19,6 +19,7 @@ import 'package:ezrxmobile/domain/order/entities/material_price_detail.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_template.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_template_local_datasource.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_material_item.dart';
@@ -31,6 +32,7 @@ import 'package:mocktail/mocktail.dart';
 
 import '../../../utils/widget_utils.dart';
 import '../../home/selectors/shipping_address_selector_test.dart';
+import '../../order_history/order_history_details_widget_test.dart';
 
 List<MaterialQueryInfo> _getMaterialList(List<MaterialItem> items) {
   final materialList = items
@@ -95,6 +97,7 @@ void main() {
   setUpAll(() async {
     setupLocator();
 
+    locator<MixpanelService>().init(mixpanel: MixpanelMock());
     final orders = await OrderTemplateLocalDataSource().getOrderTemplates();
     orderMock = orders.first;
     orderMockItems = orderMock.items;

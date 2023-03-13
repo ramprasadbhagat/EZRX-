@@ -1,4 +1,7 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -22,13 +25,20 @@ class _ScanMaterialInfoState extends State<ScanMaterialInfo>
   @override
   void initState() {
     super.initState();
+    trackMixpanelEvent(
+      MixpanelEvents.pageViewVisited,
+      props: {
+        MixpanelProps.pageViewName: 'ScanMaterialPage',
+      },
+    );
     _ambiguate(WidgetsBinding.instance)?.addObserver(this);
   }
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
-      scanMaterialInfoBloc.add(const ScanMaterialInfoEvent.scanMaterialNumberFromCamera());
+      scanMaterialInfoBloc
+          .add(const ScanMaterialInfoEvent.scanMaterialNumberFromCamera());
     } else if (state == AppLifecycleState.paused) {
       scanMaterialInfoBloc.add(const ScanMaterialInfoEvent.disableScan());
     }

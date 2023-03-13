@@ -7,7 +7,9 @@ import 'package:ezrxmobile/application/order/material_price_detail/material_pric
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_button.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
@@ -21,6 +23,9 @@ class SavedOrderListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    trackMixpanelEvent(
+      MixpanelEvents.savedOrderPageView,
+    );
     locator<CountlyService>().recordCountlyView('Saved Order Screen');
 
     return Scaffold(

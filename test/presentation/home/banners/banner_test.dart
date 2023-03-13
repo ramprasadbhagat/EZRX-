@@ -15,6 +15,7 @@ import 'package:ezrxmobile/infrastructure/account/repository/user_repository.dar
 import 'package:ezrxmobile/infrastructure/banner/repository/banner_repository.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/presentation/home/banners/banner.dart';
 import 'package:ezrxmobile/presentation/home/banners/banner_tile.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -25,8 +26,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:visibility_detector/visibility_detector.dart';
 
 import '../../../utils/widget_utils.dart';
+import '../../order_history/order_history_details_widget_test.dart';
 
 late final Uint8List imageUint8List;
 final options = RequestOptions(
@@ -95,6 +98,8 @@ void main() {
     locator.registerLazySingleton(() => mockAuthBloc);
     locator.registerLazySingleton(() => mockSalesOrgBloc);
     locator.registerLazySingleton(() => mockBannerBloc);
+    locator.registerLazySingleton(() => MixpanelService());
+    locator<MixpanelService>().init(mixpanel: MixpanelMock());
     autoRouterMock = locator<AppRouter>();
     mockHTTPService = MockHTTPService();
     mockUserBloc = MockUserBloc();
@@ -119,7 +124,7 @@ void main() {
       when(() => mockCustomerCodeBloc.state)
           .thenReturn(CustomerCodeState.initial());
       when(() => mockShipToCodeBloc.state)
-          .thenReturn(ShipToCodeState.initial());    
+          .thenReturn(ShipToCodeState.initial());
     });
 
     StackRouterScope getWUT() {
@@ -132,8 +137,7 @@ void main() {
           BlocProvider<UserBloc>(create: (context) => mockUserBloc),
           BlocProvider<CustomerCodeBloc>(
               create: (context) => mockCustomerCodeBloc),
-          BlocProvider<ShipToCodeBloc>(
-              create: (context) => mockShipToCodeBloc),    
+          BlocProvider<ShipToCodeBloc>(create: (context) => mockShipToCodeBloc),
         ],
         child: const Scaffold(body: HomeBanner()),
       );
@@ -141,6 +145,7 @@ void main() {
 
     testWidgets('Banner test 1 - Many banners for multiple pages',
         (tester) async {
+      VisibilityDetectorController.instance.updateInterval = Duration.zero;
       final bannerBloc = locator<MockBannerBloc>();
 
       when(() => bannerBloc.stream).thenAnswer((invocation) {

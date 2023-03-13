@@ -20,6 +20,7 @@ import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_price_detail.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/presentation/favourites/favourite_tab.dart';
 import 'package:ezrxmobile/presentation/favourites/favourite_tile.dart';
 import 'package:flutter/material.dart';
@@ -29,6 +30,7 @@ import 'package:mocktail/mocktail.dart';
 
 import '../../application/auth/auth_bloc_test.dart';
 import '../../utils/material_frame_wrapper.dart';
+import '../order_history/order_history_details_widget_test.dart';
 
 class UserMockBloc extends MockBloc<UserEvent, UserState> implements UserBloc {}
 
@@ -95,6 +97,8 @@ void main() {
     TestWidgetsFlutterBinding.ensureInitialized();
     locator.registerFactory<MaterialPriceDetailBloc>(
         () => mockMaterialPriceDetailBloc);
+    locator.registerLazySingleton(() => MixpanelService());
+    locator<MixpanelService>().init(mixpanel: MixpanelMock());
   });
 
   void initialSetup() {

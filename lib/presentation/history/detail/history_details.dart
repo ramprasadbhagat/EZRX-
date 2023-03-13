@@ -10,6 +10,8 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_basic_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/history/detail/widget/re_order_button.dart';
 import 'package:ezrxmobile/presentation/history/detail/section/bill_to_section.dart';
@@ -41,6 +43,9 @@ class HistoryDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    trackMixpanelEvent(
+      MixpanelEvents.orderDetailPageView,
+    );
     final disableCreateOrder =
         context.read<UserBloc>().state.user.disableCreateOrder;
 
@@ -129,7 +134,8 @@ class HistoryDetails extends StatelessWidget {
               if (context
                   .read<EligibilityBloc>()
                   .state
-                  .salesOrgConfigs.showPOAttachment)
+                  .salesOrgConfigs
+                  .showPOAttachment)
                 const HistoryPoAttachmentSection(),
               const HistoryInvoiceSection(),
               HistoryOrderSummarySection(

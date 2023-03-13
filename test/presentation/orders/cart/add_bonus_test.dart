@@ -20,8 +20,10 @@ import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/bonus_material_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/cart_repository.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/orders/cart/bonus/search_bonus_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -30,8 +32,11 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../utils/multi_bloc_provider_frame_wrapper.dart';
+import '../../order_history/order_history_details_widget_test.dart';
 
-class BonusMaterialBlocMock extends MockBloc<BonusMaterialEvent, BonusMaterialState> implements BonusMaterialBloc {}
+class BonusMaterialBlocMock
+    extends MockBloc<BonusMaterialEvent, BonusMaterialState>
+    implements BonusMaterialBloc {}
 
 class CartRepositoryMock extends Mock implements CartRepository {}
 
@@ -57,10 +62,11 @@ class CustomerCodeBlocMock
 class ShipToBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState>
     implements ShipToCodeBloc {}
 
-class MockSalesOrgBloc extends MockBloc<SalesOrgEvent, SalesOrgState> implements SalesOrgBloc {}
+class MockSalesOrgBloc extends MockBloc<SalesOrgEvent, SalesOrgState>
+    implements SalesOrgBloc {}
 
-class ShipToCodeBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState> implements ShipToCodeBloc {}
-
+class ShipToCodeBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState>
+    implements ShipToCodeBloc {}
 
 void main() {
   late BonusMaterialBloc bonusMaterialBloc;
@@ -73,6 +79,11 @@ void main() {
   late UserBloc userBlocMock;
   late CustomerCodeBloc customerCodeBlocMock;
   late ShipToCodeBloc shipToCodeBlocMock;
+
+  setUpAll(() {
+    locator.registerLazySingleton(() => MixpanelService());
+    locator<MixpanelService>().init(mixpanel: MixpanelMock());
+  });
 
   setUp(
     () {
@@ -106,17 +117,21 @@ void main() {
           ),
         ),
       ];
-      when(() => bonusMaterialBloc.state).thenReturn(BonusMaterialState.initial().copyWith(
+      when(() => bonusMaterialBloc.state)
+          .thenReturn(BonusMaterialState.initial().copyWith(
         failureOrSuccessOption: none(),
         bonus: mockbonusItemWithDataList,
         isFetching: false,
         isStarting: true,
       ));
-when(() => userBlocMock.state).thenReturn(UserState.initial());
+      when(() => userBlocMock.state).thenReturn(UserState.initial());
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
-      when(() => eligibilityBlocMock.state).thenReturn(EligibilityState.initial());
-      when(() => customerCodeBlocMock.state).thenReturn(CustomerCodeState.initial());
-      when(() => shipToCodeBlocMock.state).thenReturn(ShipToCodeState.initial());
+      when(() => eligibilityBlocMock.state)
+          .thenReturn(EligibilityState.initial());
+      when(() => customerCodeBlocMock.state)
+          .thenReturn(CustomerCodeState.initial());
+      when(() => shipToCodeBlocMock.state)
+          .thenReturn(ShipToCodeState.initial());
     },
   );
   group('Test Add_Bonus', () {
@@ -247,9 +262,11 @@ when(() => userBlocMock.state).thenReturn(UserState.initial());
       expect(bonusItemList, findsOneWidget);
     });
 
-
-    testWidgets('Test have bonus item list fetched when search text is initially valid.', (tester) async {
-      when(() => bonusMaterialBloc.state).thenReturn(BonusMaterialState.initial().copyWith(
+    testWidgets(
+        'Test have bonus item list fetched when search text is initially valid.',
+        (tester) async {
+      when(() => bonusMaterialBloc.state)
+          .thenReturn(BonusMaterialState.initial().copyWith(
         isFetching: false,
         isStarting: false,
         searchKey: SearchKey('000'),
@@ -270,7 +287,8 @@ when(() => userBlocMock.state).thenReturn(UserState.initial());
       expect(bonusItemList, findsOneWidget);
     });
 
-    testWidgets('Test have bonus item list fetched when search text is valid', (tester) async {
+    testWidgets('Test have bonus item list fetched when search text is valid',
+        (tester) async {
       final expectedStates = <BonusMaterialState>[
         BonusMaterialState.initial().copyWith(
           isFetching: false,
@@ -309,7 +327,8 @@ when(() => userBlocMock.state).thenReturn(UserState.initial());
           bonus: mockbonusItemWithDataList,
         ),
       );
-      when(() => tenderContractBlocMock.state).thenReturn(TenderContractState.initial());
+      when(() => tenderContractBlocMock.state)
+          .thenReturn(TenderContractState.initial());
       await tester.runAsync(() async {
         await tester.pumpWidget(getWidget());
       });
@@ -452,7 +471,8 @@ when(() => userBlocMock.state).thenReturn(UserState.initial());
           Stream.fromIterable(expectedCustomerCodeListStates));
       await tester.pumpWidget(getWidget());
       await tester.pump();
-      final addBonusSearchField = find.byKey(const Key('addBonusTextFieldTest'));
+      final addBonusSearchField =
+          find.byKey(const Key('addBonusTextFieldTest'));
       await tester.tap(addBonusSearchField);
       await tester.sendKeyDownEvent(LogicalKeyboardKey.enter);
       await tester.testTextInput.receiveAction(TextInputAction.done);
@@ -480,7 +500,8 @@ when(() => userBlocMock.state).thenReturn(UserState.initial());
           Stream.fromIterable(expectedCustomerCodeListStates));
       await tester.pumpWidget(getWidget());
       await tester.pump();
-      final addBonusSearchField = find.byKey(const Key('addBonusTextFieldTest'));
+      final addBonusSearchField =
+          find.byKey(const Key('addBonusTextFieldTest'));
       await tester.tap(addBonusSearchField);
       await tester.sendKeyDownEvent(LogicalKeyboardKey.enter);
       await tester.testTextInput.receiveAction(TextInputAction.done);
@@ -490,6 +511,5 @@ when(() => userBlocMock.state).thenReturn(UserState.initial());
       await tester.pump();
       expect(addBonusSearchFieldWidget.controller?.text ?? '', 'Test');
     });
-
   });
 }

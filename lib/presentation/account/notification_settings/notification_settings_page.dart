@@ -1,7 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/language_picker.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -14,6 +17,13 @@ class NotificationSettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    trackMixpanelEvent(
+      MixpanelEvents.pageViewVisited,
+      props: {
+        MixpanelProps.pageViewName: runtimeType.toString(),
+      },
+    );
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -31,7 +41,10 @@ class NotificationSettingsPage extends StatelessWidget {
               ),
               subtitle: Text(
                 'Email will be sent in your language of choice'.tr(),
-                style: Theme.of(context).textTheme.titleSmall?.apply(color: ZPColors.lightGray),
+                style: Theme.of(context)
+                    .textTheme
+                    .titleSmall
+                    ?.apply(color: ZPColors.lightGray),
               ),
               trailing: BlocBuilder<UserBloc, UserState>(
                 builder: (context, state) {
@@ -64,7 +77,10 @@ class NotificationSettingsPage extends StatelessWidget {
                       ),
                     ),
                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 10,
+                        vertical: 5,
+                      ),
                       decoration: BoxDecoration(
                         border: Border.all(
                           color: ZPColors.lightGray,
@@ -97,14 +113,16 @@ class NotificationSettingsPage extends StatelessWidget {
               subtitle: Text(
                 'Receive a notification of your order summary after placing an order on eZRx'
                     .tr(),
-                style: Theme.of(context).textTheme.titleSmall?.apply(color: ZPColors.lightGray),
+                style: Theme.of(context)
+                    .textTheme
+                    .titleSmall
+                    ?.apply(color: ZPColors.lightGray),
               ),
               trailing: BlocBuilder<UserBloc, UserState>(
                 buildWhen: (previous, current) =>
                     (previous.emailNotifications !=
                         current.emailNotifications) ||
-                    (previous.languagePreference !=
-                        current.languagePreference),
+                    (previous.languagePreference != current.languagePreference),
                 builder: (context, state) {
                   return PlatformSwitch(
                     key: const Key('flutterSwitch'),
@@ -113,8 +131,7 @@ class NotificationSettingsPage extends StatelessWidget {
                     onChanged: (bool value) {
                       context.read<UserBloc>().add(
                             UserEvent.updateNotificationSettings(
-                              languagePreference:
-                                  state.languagePreference,
+                              languagePreference: state.languagePreference,
                               emailNotifications: value,
                             ),
                           );

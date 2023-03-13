@@ -24,6 +24,8 @@ import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_filter.dart';
 import 'package:ezrxmobile/domain/returns/entities/request_return_filter.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_summary_filter.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/custom_selector.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -63,15 +65,28 @@ class ShipCodeSelector extends StatelessWidget {
                 );
 
             if (state.haveShipTo) {
+              final user = context.read<UserBloc>().state.user;
+              final customerCodeInfo =
+                  context.read<CustomerCodeBloc>().state.customerCodeInfo;
+
+              locator<MixpanelService>().registerSuperProps(
+                username: user.username.getOrDefaultValue(''),
+                salesOrg: context
+                    .read<SalesOrgBloc>()
+                    .state
+                    .salesOrg
+                    .getOrDefaultValue(''),
+                customerCode: customerCodeInfo.customerCodeSoldTo,
+                shipToAddress: state.shipToInfo.shipToCustomerCode,
+                userRole: user.role.type.getOrDefaultValue(''),
+              );
+
               context.read<EligibilityBloc>().add(
                     EligibilityEvent.update(
-                      user: context.read<UserBloc>().state.user,
+                      user: user,
                       salesOrganisation: salesOrgState.salesOrganisation,
                       salesOrgConfigs: salesOrgState.configs,
-                      customerCodeInfo: context
-                          .read<CustomerCodeBloc>()
-                          .state
-                          .customerCodeInfo,
+                      customerCodeInfo: customerCodeInfo,
                       shipToInfo: state.shipToInfo,
                     ),
                   );
@@ -90,11 +105,8 @@ class ShipCodeSelector extends StatelessWidget {
               if (context.read<UserBloc>().state.userCanCreateOrder) {
                 context.read<MaterialBundleListBloc>().add(
                       MaterialBundleListEvent.fetch(
-                        user: context.read<UserBloc>().state.user,
-                        customerCode: context
-                            .read<CustomerCodeBloc>()
-                            .state
-                            .customerCodeInfo,
+                        user: user,
+                        customerCode: customerCodeInfo,
                         salesOrganisation: context
                             .read<SalesOrgBloc>()
                             .state
@@ -107,13 +119,10 @@ class ShipCodeSelector extends StatelessWidget {
 
               context.read<SavedOrderListBloc>().add(
                     SavedOrderListEvent.fetch(
-                      userInfo: context.read<UserBloc>().state.user,
+                      userInfo: user,
                       selectedSalesOrganisation:
                           context.read<SalesOrgBloc>().state.salesOrganisation,
-                      selectedCustomerCode: context
-                          .read<CustomerCodeBloc>()
-                          .state
-                          .customerCodeInfo,
+                      selectedCustomerCode: customerCodeInfo,
                       selectedShipTo: state.shipToInfo,
                     ),
                   );
@@ -124,11 +133,8 @@ class ShipCodeSelector extends StatelessWidget {
                         salesOrgConfigs:
                             context.read<SalesOrgBloc>().state.configs,
                         shipToInfo: state.shipToInfo,
-                        user: context.read<UserBloc>().state.user,
-                        customerCodeInfo: context
-                            .read<CustomerCodeBloc>()
-                            .state
-                            .customerCodeInfo,
+                        user: user,
+                        customerCodeInfo: customerCodeInfo,
                         orderHistoryFilter: OrderHistoryFilter.empty(),
                         sortDirection: 'desc',
                       ),
@@ -137,21 +143,20 @@ class ShipCodeSelector extends StatelessWidget {
 
               context.read<OrderTemplateListBloc>().add(
                     OrderTemplateListEvent.fetch(
-                      context.read<UserBloc>().state.user,
+                      user,
                     ),
                   );
 
               context.read<FavouriteBloc>().add(
                     FavouriteEvent.fetch(
-                      user: context.read<UserBloc>().state.user,
+                      user: user,
                     ),
                   );
 
               context
                   .read<PaymentCustomerInformationBloc>()
                   .add(PaymentCustomerInformationEvent.fetch(
-                    customeCodeInfo:
-                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                    customeCodeInfo: customerCodeInfo,
                     salesOrganisation:
                         context.read<SalesOrgBloc>().state.salesOrganisation,
                     selectedShipToCode: context
@@ -161,23 +166,14 @@ class ShipCodeSelector extends StatelessWidget {
                         .shipToCustomerCode,
                   ));
 
-              if (context
-                  .read<UserBloc>()
-                  .state
-                  .user
-                  .role
-                  .type
-                  .hasReturnsAdminAccess) {
+              if (user.role.type.hasReturnsAdminAccess) {
                 context.read<RequestReturnBloc>().add(
                       RequestReturnEvent.fetch(
                         salesOrg: context
                             .read<SalesOrgBloc>()
                             .state
                             .salesOrganisation,
-                        customerCodeInfo: context
-                            .read<CustomerCodeBloc>()
-                            .state
-                            .customerCodeInfo,
+                        customerCodeInfo: customerCodeInfo,
                         shipInfo:
                             context.read<ShipToCodeBloc>().state.shipToInfo,
                         requestReturnFilter: RequestReturnFilter.empty(),
@@ -188,10 +184,7 @@ class ShipCodeSelector extends StatelessWidget {
               context.read<AdditionalDetailsBloc>().add(
                     AdditionalDetailsEvent.initialized(
                       config: context.read<SalesOrgBloc>().state.configs,
-                      customerCodeInfo: context
-                          .read<CustomerCodeBloc>()
-                          .state
-                          .customerCodeInfo,
+                      customerCodeInfo: customerCodeInfo,
                     ),
                   );
             } else {

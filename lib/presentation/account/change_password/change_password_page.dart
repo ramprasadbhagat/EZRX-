@@ -2,6 +2,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/presentation/account/change_password/widgets/change_password_button.dart';
 import 'package:ezrxmobile/presentation/account/change_password/widgets/change_password_validation.dart';
 import 'package:ezrxmobile/presentation/account/change_password/widgets/confirm_password_field.dart';
@@ -16,6 +19,12 @@ class ChangePasswordPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    trackMixpanelEvent(
+      MixpanelEvents.pageViewVisited,
+      props: {
+        MixpanelProps.pageViewName: runtimeType.toString(),
+      },
+    );
     final userBloc = context.read<UserBloc>();
 
     return Scaffold(
@@ -96,11 +105,11 @@ class _NoteText extends StatelessWidget {
             style: Theme.of(context).textTheme.titleMedium,
           ).tr(),
         ),
-         Text(
+        Text(
           'Previous eZRx passwords cannot be reused. For security reasons passwords can only be changed a maximum of three times for every 24 hours.',
           style: Theme.of(context).textTheme.titleSmall?.apply(
-            color: ZPColors.darkGray,
-          ),
+                color: ZPColors.darkGray,
+              ),
         ).tr(),
       ],
     );

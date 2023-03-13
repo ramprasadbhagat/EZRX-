@@ -6,6 +6,9 @@ import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/presentation/core/confirm_clear_cart_dialog.dart';
 import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
@@ -42,6 +45,12 @@ class _CustomerSearchPage extends State<CustomerSearchPage> {
         ),
       );
     }
+    trackMixpanelEvent(
+      MixpanelEvents.pageViewVisited,
+      props: {
+        MixpanelProps.pageViewName: runtimeType.toString(),
+      },
+    );
     salesOrgBloc = context.read<SalesOrgBloc>();
     userBloc = context.read<UserBloc>();
     super.initState();
@@ -174,7 +183,10 @@ class _HeaderMessage extends StatelessWidget {
             padding: const EdgeInsets.all(15.0),
             child: Text(
               'Please select a Customer Code',
-              style: Theme.of(context).textTheme.titleSmall?.copyWith(color: ZPColors.red),
+              style: Theme.of(context)
+                  .textTheme
+                  .titleSmall
+                  ?.copyWith(color: ZPColors.red),
             ).tr(),
           )
         : const SizedBox.shrink();
@@ -290,6 +302,10 @@ class _ListContent extends StatelessWidget {
                           customerCodeInfo: customerCodeInfo,
                         ),
                       );
+                  trackMixpanelEvent(MixpanelEvents.customerCodeSave, props: {
+                    MixpanelProps.customerCode:
+                        customerCodeInfo.customerCodeSoldTo,
+                  });
                 },
               );
             } else {
@@ -300,6 +316,9 @@ class _ListContent extends StatelessWidget {
                   customerCodeInfo: customerCodeInfo,
                 ),
               );
+              trackMixpanelEvent(MixpanelEvents.customerCodeSave, props: {
+                MixpanelProps.customerCode: customerCodeInfo.customerCodeSoldTo,
+              });
             }
           },
         ),

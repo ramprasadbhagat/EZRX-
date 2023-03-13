@@ -18,6 +18,7 @@ import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_local.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/presentation/account/customer_search.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +28,7 @@ import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../utils/widget_utils.dart';
+import '../order_history/order_history_details_widget_test.dart';
 
 class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
 
@@ -97,6 +99,8 @@ void main() {
   late AuthBloc authBloc;
   setUpAll(() {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
+    locator.registerLazySingleton(() => MixpanelService());
+    locator<MixpanelService>().init(mixpanel: MixpanelMock());
     locator.registerLazySingleton(() => AppRouter());
   });
 

@@ -13,6 +13,7 @@ import 'package:ezrxmobile/infrastructure/account/datasource/user_remote.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/analytics.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/crashlytics.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/token_storage.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:flutter/foundation.dart';
 
 class UserRepository implements IUserRepository {
@@ -22,6 +23,7 @@ class UserRepository implements IUserRepository {
   final FirebaseAnalyticsService firebaseAnalyticsService;
   final FirebaseCrashlyticsService firebaseCrashlyticsService;
   final TokenStorage tokenStorage;
+  final MixpanelService mixpanelService;
 
   UserRepository({
     required this.config,
@@ -30,6 +32,7 @@ class UserRepository implements IUserRepository {
     required this.firebaseAnalyticsService,
     required this.firebaseCrashlyticsService,
     required this.tokenStorage,
+    required this.mixpanelService,
   });
 
   @override
@@ -52,6 +55,15 @@ class UserRepository implements IUserRepository {
       //   name: user.username.getOrCrash(),
       //   value: user.email.getOrCrash(),
       // );
+
+      mixpanelService.setUser(
+        firstName: user.fullName.firstName,
+        lastName: user.fullName.lastName,
+        username: user.username.getOrDefaultValue(''),
+        email: user.email.getOrDefaultValue(''),
+        role: user.role.name,
+      );
+
       if (!kIsWeb) {
         await firebaseCrashlyticsService.crashlytics.setUserIdentifier(user.id);
       }

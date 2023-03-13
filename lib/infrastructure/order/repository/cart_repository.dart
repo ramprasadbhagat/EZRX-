@@ -17,6 +17,9 @@ import 'package:ezrxmobile/domain/order/repository/i_cart_repository.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/cart_storage.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/cart_item_dto.dart';
@@ -27,6 +30,7 @@ class CartRepository implements ICartRepository {
   final StockInfoLocalDataSource stockInfoLocalDataSource;
   final StockInfoRemoteDataSource stockInfoRemoteDataSource;
   final CountlyService countlyService;
+  final MixpanelService mixpanelService;
 
   CartRepository({
     required this.cartStorage,
@@ -34,6 +38,7 @@ class CartRepository implements ICartRepository {
     required this.stockInfoLocalDataSource,
     required this.stockInfoRemoteDataSource,
     required this.countlyService,
+    required this.mixpanelService,
   });
 
   @override
@@ -100,6 +105,14 @@ class CartRepository implements ICartRepository {
           .materials
           .isEmpty;
       if (isOutOfStockItem) {
+        mixpanelService.trackEvent(
+          eventName: MixpanelEvents.addToCartFailed,
+          properties: {
+            MixpanelProps.errorMessage:
+                const ApiFailure.productOutOfStock().failureMessage,
+          },
+        );
+
         return const Left(
           ApiFailure.productOutOfStock(),
         );
@@ -128,8 +141,19 @@ class CartRepository implements ICartRepository {
         item: CartItemDto.fromDomain(savedCartItem),
       );
 
-      return fetchCart();
+      final failureOrSuccess = fetchCart();
+      _trackAddToCartSuccessEvent(cartItem);
+
+      return failureOrSuccess;
     } catch (e) {
+      mixpanelService.trackEvent(
+        eventName: MixpanelEvents.addToCartFailed,
+        properties: {
+          MixpanelProps.errorMessage:
+              FailureHandler.handleFailure(e).failureMessage,
+        },
+      );
+
       return Left(FailureHandler.handleFailure(e));
     }
   }
@@ -227,6 +251,9 @@ class CartRepository implements ICartRepository {
     try {
       await countlyService.addCountlyEvent('Delete from Cart');
       await cartStorage.delete(id: item.id);
+      mixpanelService.trackEvent(
+        eventName: MixpanelEvents.clearCart,
+      );
 
       return fetchCart();
     } catch (e) {
@@ -776,5 +803,38 @@ class CartRepository implements ICartRepository {
         return Left(FailureHandler.handleFailure(e));
       }
     }
+  }
+
+  void _trackAddToCartSuccessEvent(CartItem cartItem) {
+    mixpanelService.trackEvent(
+      eventName: MixpanelEvents.addToCartSuccess,
+      properties: {
+        MixpanelProps.productName:
+            cartItem.materials.first.materialInfo.materialDescription,
+        MixpanelProps.productNumber: cartItem
+            .materials.first.materialInfo.materialNumber
+            .getOrDefaultValue(''),
+        MixpanelProps.productManufacturer: cartItem
+            .materials.first.materialInfo.principalData.principalName
+            .getOrDefaultValue(''),
+        MixpanelProps.productCategory: cartItem
+            .materials.first.materialInfo.materialGroup4.getMaterialGroup4Type,
+        MixpanelProps.productTotalPrice: cartItem
+            .materials.first.price.finalTotalPrice
+            .getOrDefaultValue(0.0),
+        MixpanelProps.productQty: cartItem.materials.first.quantity,
+        MixpanelProps.bonusName: cartItem.materials.first.addedBonusList
+            .map(
+              (e) => e.materialDescription,
+            )
+            .toList(),
+        MixpanelProps.bonusManufacturer: cartItem.materials.first.addedBonusList
+            .map(
+              (e) => e.materialInfo.principalData.principalName
+                  .getOrDefaultValue(''),
+            )
+            .toList(),
+      },
+    );
   }
 }

@@ -39,6 +39,7 @@ import 'package:ezrxmobile/domain/order/entities/price_combo_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/custom_selector.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/add_to_cart.dart';
@@ -55,6 +56,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../../utils/widget_utils.dart';
+import '../../../order_history/order_history_details_widget_test.dart';
 
 class SalesOrgMockBloc extends MockBloc<SalesOrgEvent, SalesOrgState>
     implements SalesOrgBloc {}
@@ -185,6 +187,7 @@ void main() {
 
   setUpAll(() async {
     setupLocator();
+    locator<MixpanelService>().init(mixpanel: MixpanelMock());
   });
 
   Widget getScopedWidget(Widget child) {

@@ -10,6 +10,8 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/auth/entities/login.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/auth/proxy_login_page.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +22,7 @@ import 'package:mocktail/mocktail.dart';
 
 import '../../utils/material_frame_wrapper.dart';
 import '../../utils/widget_utils.dart';
+import '../order_history/order_history_details_widget_test.dart';
 
 class ProxyLoginFormBlocMock
     extends MockBloc<ProxyLoginFormEvent, ProxyLoginFormState>
@@ -46,6 +49,8 @@ void main() {
   setUpAll(() {
     GetIt.instance.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
     GetIt.instance.registerLazySingleton(() => AppRouter());
+    locator.registerLazySingleton(() => MixpanelService());
+    locator<MixpanelService>().init(mixpanel: MixpanelMock());
   });
 
   group('Proxy Login Screen', () {

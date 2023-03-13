@@ -6,8 +6,11 @@ import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/config.dart' as c;
 import 'package:ezrxmobile/domain/banner/entities/banner.dart';
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -20,12 +23,14 @@ import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 // https://dev.azure.com/zuelligpharmadevops/eZRx%20Overall/_wiki/wikis/eZRx-Overall.wiki/3443/eZRx-banner-workflow-doubt
 class BannerTile extends StatelessWidget {
   final BannerItem banner;
+  final int bannerPosition;
   final HttpService httpService;
   final CountlyService countlyService;
   final c.Config config;
   final DefaultCacheManager defaultCacheManager;
   const BannerTile({
     Key? key,
+    required this.bannerPosition,
     required this.banner,
     required this.httpService,
     required this.countlyService,
@@ -42,6 +47,15 @@ class BannerTile extends StatelessWidget {
           return image.data != null
               ? GestureDetector(
                   onTap: () async {
+                    trackMixpanelEvent(MixpanelEvents.bannerClick, props: {
+                      MixpanelProps.bannerId: banner.id,
+                      MixpanelProps.bannerTitle: banner.title,
+                      MixpanelProps.bannerOrder: bannerPosition,
+                      MixpanelProps.bannerRedirected:
+                          banner.url.startsWith('https')
+                              ? 'external_web'
+                              : 'internal',
+                    });
                     await locator<CountlyService>().addCountlyEvent(
                       'carousel_banner_clicked',
                       segmentation: {

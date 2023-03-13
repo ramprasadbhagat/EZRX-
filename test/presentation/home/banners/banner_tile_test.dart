@@ -10,6 +10,7 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/banner/entities/banner.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/presentation/home/banners/banner_tile.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:file/local.dart';
@@ -23,6 +24,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 
 import '../../../utils/widget_utils.dart';
+import '../../order_history/order_history_details_widget_test.dart';
 
 late final Uint8List imageUint8List;
 final options = RequestOptions(
@@ -76,11 +78,12 @@ void main() {
     TestWidgetsFlutterBinding.ensureInitialized();
     WidgetsFlutterBinding.ensureInitialized();
     locator = GetIt.instance;
+    locator.registerLazySingleton(() => MixpanelService());
+    locator<MixpanelService>().init(mixpanel: MixpanelMock());
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
     locator.registerLazySingleton(() => AppRouter());
     locator
         .registerLazySingleton(() => CountlyService(config: locator<Config>()));
-
     mockHTTPService = MockHTTPService();
     cacheManagerMock = MockCacheManager();
     when(() => mockHTTPService.request(
@@ -131,6 +134,7 @@ void main() {
 
     Widget getWUT(Config config) {
       return BannerTile(
+        bannerPosition: 0,
         banner: mockBanner,
         httpService: mockHTTPService,
         countlyService: locator<CountlyService>(),
@@ -256,7 +260,6 @@ void main() {
       );
       await tester.tap(bannerTile);
       await tester.pump();
-
     });
 
     testWidgets('Banner test 4 - Mock cache file returns NULL', (tester) async {

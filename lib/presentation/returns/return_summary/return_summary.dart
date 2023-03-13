@@ -10,7 +10,10 @@ import 'package:ezrxmobile/domain/returns/entities/return_summary_filter.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_summary_requests.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/filter_icon.dart';
@@ -29,6 +32,12 @@ class ReturnSummary extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    trackMixpanelEvent(
+      MixpanelEvents.pageViewVisited,
+      props: {
+        MixpanelProps.pageViewName: runtimeType.toString(),
+      },
+    );
     const radius = 16.0;
     locator<CountlyService>().recordCountlyView('return_summary');
 
@@ -67,10 +76,11 @@ class ReturnSummary extends StatelessWidget {
                           Text(
                             'Status'.tr(),
                             key: const ValueKey('status'),
-                            style: Theme.of(context).textTheme.subtitle2?.apply(
-                                  color: ZPColors.kPrimaryColor,
-                                  fontStyle: FontStyle.normal,
-                                ),
+                            style:
+                                Theme.of(context).textTheme.titleSmall?.apply(
+                                      color: ZPColors.kPrimaryColor,
+                                      fontStyle: FontStyle.normal,
+                                    ),
                           ),
                           Text(
                             ' : ${state.returnSummaryFilter.activeStatus.displayStatusInList}',
@@ -171,7 +181,8 @@ class ReturnSummary extends StatelessWidget {
 
             return Column(
               children: [
-                context.read<ReturnSummaryFilterBloc>()
+                context
+                        .read<ReturnSummaryFilterBloc>()
                         .state
                         .returnSummaryFilter
                         .anyFilterApplied

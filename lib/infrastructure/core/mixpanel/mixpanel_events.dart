@@ -1,0 +1,34 @@
+class MixpanelEvents {
+  static String loginPageView = 'Login Page';
+  static String homePageView = 'Homepage';
+  static String orderHistoryPageView = 'Order History Page';
+  static String orderDetailPageView = 'Order Detail Page';
+  static String savedOrderPageView = 'Saved Order Page';
+  static String loginSuccess = 'Login Success';
+  static String loginFailure = 'Login Failure';
+  static String bannerClick = 'Banner Click';
+  static String bannerImpression = 'Banner Impression';
+  static String shipToAddressSave = 'Ship To Address Save';
+  static String salesOrgSave = 'Sales Org Save';
+  static String customerCodeSave = 'Customer Code Save';
+  static String savedOrder = 'Saved Orders';
+  static String orderHistory = 'Order History';
+  static String cartWindow = 'Cart Window';
+  static String goToOrderSummary = 'Go To Order Summary';
+  static String viewLicenseInfo = 'View License Info';
+  static String uploadAttachment = 'Upload Attachment';
+  static String addToCartSuccess = 'Add To Cart Success';
+  static String addToCartFailed = 'Add To Cart Failed';
+  static String productSearch = 'Product Search';
+  static String clearCart = 'Clear Cart';
+  static String addFromFavorite = 'Add From Favourite';
+  static String addBonus = 'Add Bonus';
+  static String submitOrder = 'Submit Order';
+  static String orderSuccess = 'Order Success';
+  static String orderFailed = 'Order Failed';
+  static String saveOrder = 'Save Order';
+  static String reOrder = 'Reorder';
+  static String selectTemplate = 'Select Template';
+  static String createOrderFromTemplate = 'Create Order From Template';
+  static String pageViewVisited = 'Pageview Visited';
+}

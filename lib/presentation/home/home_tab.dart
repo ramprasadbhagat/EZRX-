@@ -1,3 +1,5 @@
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/presentation/home/banners/banner.dart';
 import 'package:ezrxmobile/presentation/home/expansion_tiles/orders_expansion_tile.dart';
 import 'package:ezrxmobile/presentation/home/expansion_tiles/returns_expansion_tile.dart';
@@ -15,6 +17,10 @@ class HomeTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    trackMixpanelEvent(
+      MixpanelEvents.homePageView,
+    );
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,

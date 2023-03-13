@@ -70,11 +70,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   @override
-  Future<void> close() async {
-    return super.close();
-  }
-
-  @override
   void onChange(Change<AuthState> change) {
     super.onChange(change);
     // print(change);

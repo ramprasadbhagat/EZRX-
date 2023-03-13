@@ -20,6 +20,9 @@ import 'package:ezrxmobile/infrastructure/core/firebase/push_notification.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/cart_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/cred_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/token_storage.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/core/okta/okta_login.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
@@ -41,6 +44,7 @@ class AuthRepository implements IAuthRepository {
   final PushNotificationService pushNotificationService;
   final LocalAuthentication localAuthentication;
   final CountlyService countlyService;
+  final MixpanelService mixpanelService;
 
   AuthRepository({
     required this.config,
@@ -54,6 +58,7 @@ class AuthRepository implements IAuthRepository {
     required this.localAuthentication,
     required this.accountSelectorStorage,
     required this.countlyService,
+    required this.mixpanelService,
   });
 
   @override
@@ -83,15 +88,29 @@ class AuthRepository implements IAuthRepository {
         fcmToken: fcmToken,
       );
       await countlyService.addCountlyEvent('Login Success');
+      mixpanelService.trackEvent(
+        eventName: MixpanelEvents.loginSuccess,
+        properties: {
+          MixpanelProps.loginMethod: 'By username',
+        },
+      );
 
       return Right(login);
     } catch (e) {
       if (e.runtimeType == ServerException) {
         final serverExceptionObject = e as ServerException;
+
         await countlyService.addCountlyEvent(
           'Login Failed',
           segmentation: {
             'error_msg': serverExceptionObject.message,
+          },
+        );
+        mixpanelService.trackEvent(
+          eventName: MixpanelEvents.loginFailure,
+          properties: {
+            MixpanelProps.errorMessage: serverExceptionObject.message,
+            MixpanelProps.loginMethod: 'By username',
           },
         );
       }
@@ -233,8 +252,23 @@ class AuthRepository implements IAuthRepository {
     try {
       await oktaLoginServices.login();
 
+      mixpanelService.trackEvent(
+        eventName: MixpanelEvents.loginSuccess,
+        properties: {
+          MixpanelProps.loginMethod: 'Okta',
+        },
+      );
+
       return const Right(unit);
     } catch (e) {
+      mixpanelService.trackEvent(
+        eventName: MixpanelEvents.loginFailure,
+        properties: {
+          MixpanelProps.loginMethod: 'Okta',
+          MixpanelProps.errorMessage: e.toString(),
+        },
+      );
+
       return Left(FailureHandler.handleFailure(e));
     }
   }

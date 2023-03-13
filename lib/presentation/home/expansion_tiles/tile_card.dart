@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/home/home_tab.dart';
 import 'package:flutter/material.dart';
@@ -23,9 +25,15 @@ class TileCard extends StatelessWidget {
             break;
           case 'saved_order_list':
             countlyTile = 'Saved Orders';
+            trackMixpanelEvent(
+              MixpanelEvents.savedOrder,
+            );
             break;
           case 'order_template_list_page':
             countlyTile = 'Order Template';
+            trackMixpanelEvent(
+              MixpanelEvents.createOrderFromTemplate,
+            );
             break;
           case 'returns_overview':
             countlyTile = 'returns_overview';

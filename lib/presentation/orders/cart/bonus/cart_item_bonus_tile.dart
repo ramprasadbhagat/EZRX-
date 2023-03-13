@@ -4,6 +4,8 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/presentation/orders/cart/bonus/cart_item_bonus_item.dart';
 import 'package:ezrxmobile/presentation/core/custom_expansion_tile.dart'
     as custom;
@@ -58,11 +60,16 @@ class BounsTile extends StatelessWidget {
                         children: <Widget>[
                           SizedBox(
                             child: TextButton(
-                              onPressed: () => context.router.push(
-                                BonusAddPageRoute(
-                                  cartItem: cartItem,
-                                ),
-                              ),
+                              onPressed: () {
+                                trackMixpanelEvent(
+                                  MixpanelEvents.addBonus,
+                                );
+                                context.router.push(
+                                  BonusAddPageRoute(
+                                    cartItem: cartItem,
+                                  ),
+                                );
+                              },
                               child: Row(
                                 children: <Widget>[
                                   const Icon(

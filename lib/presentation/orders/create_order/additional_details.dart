@@ -6,6 +6,9 @@ import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/order/entities/additional_details_data.dart';
 import 'package:ezrxmobile/domain/order/entities/payment_term.dart';
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/order_summary/addition_details/additional_attachment.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/order_type_selector.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -27,6 +30,13 @@ class AdditionalDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    trackMixpanelEvent(
+      MixpanelEvents.pageViewVisited,
+      props: {
+        MixpanelProps.pageViewName: runtimeType.toString(),
+      },
+    );
+
     return Form(
       key: const Key('_additionalDetailsFormKey'),
       autovalidateMode: state.showErrorMessages
@@ -253,7 +263,7 @@ class _TextFormFieldState extends State<_TextFormField> {
               }) {
                 return Text(
                   '${_controller.text.runes.length}/${widget.maxLength}',
-                  style: Theme.of(context).textTheme.caption,
+                  style: Theme.of(context).textTheme.bodySmall,
                 );
               },
               onChanged: (value) {

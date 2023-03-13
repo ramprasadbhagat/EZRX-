@@ -8,10 +8,13 @@ import 'package:ezrxmobile/infrastructure/auth/dtos/jwt_dto.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/analytics.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/crashlytics.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/token_storage.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+
+import '../../order/repository/order_repository_test.dart';
 
 class ConfigMock extends Mock implements Config {}
 
@@ -39,12 +42,14 @@ void main() {
   late FirebaseAnalytics firebaseAnalyticsMock;
   late FirebaseAnalyticsObserver firebaseAnalyticsObserverMock;
   late FirebaseCrashlytics firebaseCrashlyticsMock;
+  late MixpanelService mixpanelService;
   const rootAdminToken =
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBVVRIX1RPS0VOIjoidzl4cEFhQkRZUSIsImV4cCI6MTY2MzQwOTAzNiwiaWF0IjoxNjYzMzIyNjM2LCJpZCI6MTE0NjEsInJpZ2h0cyI6W3sidmFsdWUiOlt7ImN1c3RvbWVyQ29kZSI6ImFsbCIsInNhbGVzT3JnIjoiMjYwMSIsInNoaXBUb0NvZGUiOlsiYWxsIl19XX1dLCJyb2xlIjoiWlAgQWRtaW4iLCJzYWxlc09yZ3MiOlsiMjYwMSJdLCJ1c2VybmFtZSI6ImV6cnh0ZXN0MDUifQ.MakZTQ3JUVqeRuXQcBU1cUKmHZft5AmFPJDvuG4DjlA';
   late String date;
   setUpAll(
     () async {
       configMock = ConfigMock();
+      mixpanelService = MixpanelServiceMock();
       localDataSourceMock = UserLocalDataSourceMock();
       firebaseAnalyticsMock = FirebaseAnalyticsMock();
       firebaseAnalyticsObserverMock = FirebaseAnalyticsObserverMock();
@@ -66,6 +71,7 @@ void main() {
         config: configMock,
         localDataSource: localDataSourceMock,
         tokenStorage: tokenStorageMock,
+        mixpanelService: mixpanelService,
       );
       date = DateTime.now().toUtc().toIso8601String();
     },
@@ -81,6 +87,7 @@ void main() {
           config: configMock,
           localDataSource: localDataSourceMock,
           tokenStorage: tokenStorageMock,
+          mixpanelService: mixpanelService,
         );
 
         when(() => configMock.appFlavor)
@@ -106,6 +113,7 @@ void main() {
           config: configMock,
           localDataSource: localDataSourceMock,
           tokenStorage: tokenStorageMock,
+          mixpanelService: mixpanelService,
         );
 
         when(() => configMock.appFlavor)
@@ -131,6 +139,7 @@ void main() {
           config: configMock,
           localDataSource: localDataSourceMock,
           tokenStorage: tokenStorageMock,
+          mixpanelService: mixpanelService,
         );
 
         when(() => configMock.appFlavor).thenAnswer((invocation) => Flavor.uat);
@@ -158,6 +167,7 @@ void main() {
           config: configMock,
           localDataSource: localDataSourceMock,
           tokenStorage: tokenStorageMock,
+          mixpanelService: mixpanelService,
         );
 
         when(() => configMock.appFlavor).thenAnswer((invocation) => Flavor.uat);
@@ -277,6 +287,7 @@ void main() {
           config: configMock,
           localDataSource: localDataSourceMock,
           tokenStorage: tokenStorageMock,
+          mixpanelService: mixpanelService,
         );
 
         when(() => configMock.appFlavor)
@@ -300,6 +311,7 @@ void main() {
           config: configMock,
           localDataSource: localDataSourceMock,
           tokenStorage: tokenStorageMock,
+          mixpanelService: mixpanelService,
         );
 
         when(() => configMock.appFlavor)
@@ -323,6 +335,7 @@ void main() {
           config: configMock,
           localDataSource: localDataSourceMock,
           tokenStorage: tokenStorageMock,
+          mixpanelService: mixpanelService,
         );
 
         when(() => configMock.appFlavor).thenAnswer((invocation) => Flavor.uat);
@@ -347,6 +360,7 @@ void main() {
           config: configMock,
           localDataSource: localDataSourceMock,
           tokenStorage: tokenStorageMock,
+          mixpanelService: mixpanelService,
         );
 
         when(() => configMock.appFlavor).thenAnswer((invocation) => Flavor.uat);
@@ -371,6 +385,7 @@ void main() {
           config: configMock,
           localDataSource: localDataSourceMock,
           tokenStorage: tokenStorageMock,
+          mixpanelService: mixpanelService,
         );
 
         when(() => configMock.appFlavor)
@@ -394,6 +409,7 @@ void main() {
           config: configMock,
           localDataSource: localDataSourceMock,
           tokenStorage: tokenStorageMock,
+          mixpanelService: mixpanelService,
         );
 
         when(() => configMock.appFlavor)
@@ -417,6 +433,7 @@ void main() {
           config: configMock,
           localDataSource: localDataSourceMock,
           tokenStorage: tokenStorageMock,
+          mixpanelService: mixpanelService,
         );
 
         when(() => configMock.appFlavor).thenAnswer((invocation) => Flavor.uat);
@@ -448,6 +465,7 @@ void main() {
           config: configMock,
           localDataSource: localDataSourceMock,
           tokenStorage: tokenStorageMock,
+          mixpanelService: mixpanelService,
         );
         when(() => tokenStorageMock.get())
             .thenAnswer((invocation) async => JWTDto(access: ''));
