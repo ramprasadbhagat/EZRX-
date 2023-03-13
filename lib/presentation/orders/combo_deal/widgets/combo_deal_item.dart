@@ -194,6 +194,8 @@ class _PriceLabel extends StatelessWidget {
             rate: rate,
           ),
           price: material.comboDealTotalListPrice,
+          discountEnable:
+              material.comboDeal.scheme == ComboDealScheme.k4 ? false : true,
         ),
       ],
     );

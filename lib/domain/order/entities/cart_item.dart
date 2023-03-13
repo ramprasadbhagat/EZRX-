@@ -41,7 +41,10 @@ class CartItem with _$CartItem {
         itemType: CartItemType.bundle,
       );
 
-  factory CartItem.comboDeal(List<PriceAggregate> materials) => CartItem(
+  factory CartItem.comboDeal(
+    List<PriceAggregate> materials,
+  ) =>
+      CartItem(
         materials: materials,
         itemType: CartItemType.comboDeal,
       );
@@ -233,6 +236,7 @@ class CartItem with _$CartItem {
             : eligibleComboDealQtyTier.rate;
       case ComboDealScheme.k3:
       case ComboDealScheme.k4:
+        return eligibleComboDealQtyTier.rate;
       case ComboDealScheme.k5:
         return null;
     }
@@ -255,6 +259,8 @@ class CartItem with _$CartItem {
         );
       case ComboDealScheme.k3:
       case ComboDealScheme.k4:
+        return _comboDealTotal +
+            (_comboDealTotal * eligibleComboDealQtyTier.rate) / 100;
       case ComboDealScheme.k5:
         return materials.fold<double>(
           0,
@@ -293,6 +299,7 @@ class CartItem with _$CartItem {
         }
       case ComboDealScheme.k3:
       case ComboDealScheme.k4:
+        return eligibleComboDealQtyTier != ComboDealQtyTier.empty();
       case ComboDealScheme.k5:
         return false;
     }

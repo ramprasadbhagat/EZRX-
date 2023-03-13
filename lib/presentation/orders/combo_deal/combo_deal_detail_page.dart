@@ -9,6 +9,7 @@ import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal_group_deal.dart';
+import 'package:ezrxmobile/domain/order/entities/combo_deal_qty_tier.dart';
 import 'package:ezrxmobile/domain/order/entities/price_combo_deal.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
@@ -327,6 +328,15 @@ class _HeaderMessage extends StatelessWidget {
             ? 0
             : comboDeal.flexiQtyTier.first.minQty;
         return 'You must purchase a total QTY of [$requiredQty] from any product or products.';
+      case ComboDealScheme.k4:
+        final flexiQtyTierCopyList =
+            List<ComboDealQtyTier>.from(comboDeal.flexiQtyTier);
+        flexiQtyTierCopyList.sort(((a, b) => a.minQty.compareTo(b.minQty)));
+        final tierText = flexiQtyTierCopyList
+            .map((e) => '${e.minQty}')
+            .toList()
+            .join(' OR ');
+        return 'You must purchase a product or products with a total QTY of $tierText. (Discounts will increase as the total quantity exceeds the minimum eligibilities)';
       default:
         return 'You must purchase all of the product items with min. of below mentioned quantity.';
     }

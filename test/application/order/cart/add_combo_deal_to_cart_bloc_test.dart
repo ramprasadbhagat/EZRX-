@@ -94,7 +94,9 @@ void main() {
             CartState.initial().copyWith(
               apiFailureOrSuccessOption: none(),
               cartItems: [
-                CartItem.comboDeal([fakeMaterialWithComboDeal])
+                CartItem.comboDeal(
+                  [fakeMaterialWithComboDeal],
+                )
               ],
               isFetching: false,
             ),
@@ -102,7 +104,9 @@ void main() {
       verify: (bloc) {
         expect(
           bloc.state.getComboDealCartItem(comboDealQuery: fakeComboDealQuery),
-          CartItem.comboDeal([fakeMaterialWithComboDeal]),
+          CartItem.comboDeal(
+            [fakeMaterialWithComboDeal],
+          ),
         );
         expect(
           bloc.state
@@ -122,7 +126,9 @@ void main() {
       ).thenAnswer((invocation) async => const Right([]));
       when(
         () => cartRepositoryMock.addItemToCart(
-          cartItem: CartItem.comboDeal([fakeMaterialWithComboDeal]),
+          cartItem: CartItem.comboDeal(
+            [fakeMaterialWithComboDeal],
+          ),
           override: false,
           customerCodeInfo: CustomerCodeInfo.empty(),
           salesOrganisation: SalesOrganisation.empty(),

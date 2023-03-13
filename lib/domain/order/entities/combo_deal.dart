@@ -60,6 +60,8 @@ class ComboDeal with _$ComboDeal {
     if (materialComboDeals.isNotEmpty &&
         allMaterials.every((item) => item.mandatory)) {
       return ComboDealScheme.k1;
+    } else if (flexiSKUTier.isEmpty && flexiQtyTier.isNotEmpty) {
+      return ComboDealScheme.k4;
     }
 
     if (flexiAmountTier.isEmpty &&
