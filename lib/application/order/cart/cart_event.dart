@@ -91,6 +91,9 @@ class CartEvent with _$CartEvent {
   }) = _SelectButtonTapped;
   const factory CartEvent.selectAllButtonTapped() = _SelectAllButtonTapped;
   const factory CartEvent.clearCart() = _ClearCart;
+  const factory CartEvent.clearSelectedItemsFromCart({
+    required List<String> selectedItemIds,
+  }) = _ClearSelectedItemsFromCart;
   const factory CartEvent.replaceWithOrderItems({
     required List<CartItem> items,
     required SalesOrganisationConfigs salesOrganisationConfigs,

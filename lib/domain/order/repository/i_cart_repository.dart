@@ -17,6 +17,10 @@ abstract class ICartRepository {
 
   Future<Either<ApiFailure, Unit>> clearCart();
 
+  Future<Either<ApiFailure, List<CartItem>>> clearCartOnlySelectedItems({
+    required List<String> selectedItemIds,
+  });
+
   Future<Either<ApiFailure, List<CartItem>>> addItemToCart({
     required CartItem cartItem,
     required bool override,

@@ -430,7 +430,18 @@ class _Stepper extends StatelessWidget {
             sortDirection: 'desc',
           ),
         );
-    context.read<CartBloc>().add(const CartEvent.clearCart());
+    final selectedItemIds = context
+        .read<CartBloc>()
+        .state
+        .cartItems
+        .where((e) => e.isSelected)
+        .map((e) => e.id)
+        .toList();
+    context.read<CartBloc>().add(
+          CartEvent.clearSelectedItemsFromCart(
+            selectedItemIds: selectedItemIds,
+          ),
+        );
     context.router.pushAndPopUntil(
       const OrderSuccessPageRoute(),
       predicate: (route) => route.settings.name == 'HomeNavigationTabbarRoute',

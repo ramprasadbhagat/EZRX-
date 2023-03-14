@@ -167,7 +167,8 @@ class CartRepository implements ICartRepository {
       if (inCartItem != null) {
         final updatedCartItem = inCartItem.copyWith(
           materials: inCartItem.materials.map((item) {
-            if (item.getMaterialNumber == cartItem.materials.first.getMaterialNumber) {
+            if (item.getMaterialNumber ==
+                cartItem.materials.first.getMaterialNumber) {
               return cartItem.materials.first;
             }
 
@@ -836,5 +837,18 @@ class CartRepository implements ICartRepository {
             .toList(),
       },
     );
+  }
+
+  @override
+  Future<Either<ApiFailure, List<CartItem>>> clearCartOnlySelectedItems({
+    required List<String> selectedItemIds,
+  }) async {
+    try {
+      await cartStorage.deleteSelectedItems(selectedItemIds: selectedItemIds);
+
+      return fetchCart();
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
   }
 }

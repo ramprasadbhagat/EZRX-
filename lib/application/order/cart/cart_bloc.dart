@@ -574,6 +574,36 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         },
       );
     });
+    on<_ClearSelectedItemsFromCart>((e, emit) async {
+      emit(
+        state.copyWith(
+          apiFailureOrSuccessOption: none(),
+          isClearing: true,
+        ),
+      );
+
+      final failureOrSuccess = await repository.clearCartOnlySelectedItems(
+        selectedItemIds: e.selectedItemIds,
+      );
+      await failureOrSuccess.fold(
+        (failure) async {
+          emit(
+            state.copyWith(
+              isClearing: false,
+              apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+            ),
+          );
+        },
+        (cartItemList) async {
+          emit(
+            state.copyWith(
+              isClearing: false,
+              cartItems: cartItemList,
+            ),
+          );
+        },
+      );
+    });
     on<_ReplaceWithOrderItems>((e, emit) async {
       emit(
         state.copyWith(

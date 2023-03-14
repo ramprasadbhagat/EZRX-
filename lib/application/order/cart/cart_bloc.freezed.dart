@@ -93,6 +93,8 @@ mixin _$CartEvent {
     required TResult Function(CartItem cartItem) selectButtonTapped,
     required TResult Function() selectAllButtonTapped,
     required TResult Function() clearCart,
+    required TResult Function(List<String> selectedItemIds)
+        clearSelectedItemsFromCart,
     required TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -179,6 +181,7 @@ mixin _$CartEvent {
     TResult? Function(CartItem cartItem)? selectButtonTapped,
     TResult? Function()? selectAllButtonTapped,
     TResult? Function()? clearCart,
+    TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult? Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -265,6 +268,7 @@ mixin _$CartEvent {
     TResult Function(CartItem cartItem)? selectButtonTapped,
     TResult Function()? selectAllButtonTapped,
     TResult Function()? clearCart,
+    TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -300,6 +304,8 @@ mixin _$CartEvent {
     required TResult Function(_SelectAllButtonTapped value)
         selectAllButtonTapped,
     required TResult Function(_ClearCart value) clearCart,
+    required TResult Function(_ClearSelectedItemsFromCart value)
+        clearSelectedItemsFromCart,
     required TResult Function(_ReplaceWithOrderItems value)
         replaceWithOrderItems,
   }) =>
@@ -324,6 +330,8 @@ mixin _$CartEvent {
     TResult? Function(_SelectButtonTapped value)? selectButtonTapped,
     TResult? Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult? Function(_ClearCart value)? clearCart,
+    TResult? Function(_ClearSelectedItemsFromCart value)?
+        clearSelectedItemsFromCart,
     TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
   }) =>
       throw _privateConstructorUsedError;
@@ -347,6 +355,8 @@ mixin _$CartEvent {
     TResult Function(_SelectButtonTapped value)? selectButtonTapped,
     TResult Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult Function(_ClearCart value)? clearCart,
+    TResult Function(_ClearSelectedItemsFromCart value)?
+        clearSelectedItemsFromCart,
     TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     required TResult orElse(),
   }) =>
@@ -483,6 +493,8 @@ class _$_Initialized implements _Initialized {
     required TResult Function(CartItem cartItem) selectButtonTapped,
     required TResult Function() selectAllButtonTapped,
     required TResult Function() clearCart,
+    required TResult Function(List<String> selectedItemIds)
+        clearSelectedItemsFromCart,
     required TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -572,6 +584,7 @@ class _$_Initialized implements _Initialized {
     TResult? Function(CartItem cartItem)? selectButtonTapped,
     TResult? Function()? selectAllButtonTapped,
     TResult? Function()? clearCart,
+    TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult? Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -661,6 +674,7 @@ class _$_Initialized implements _Initialized {
     TResult Function(CartItem cartItem)? selectButtonTapped,
     TResult Function()? selectAllButtonTapped,
     TResult Function()? clearCart,
+    TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -702,6 +716,8 @@ class _$_Initialized implements _Initialized {
     required TResult Function(_SelectAllButtonTapped value)
         selectAllButtonTapped,
     required TResult Function(_ClearCart value) clearCart,
+    required TResult Function(_ClearSelectedItemsFromCart value)
+        clearSelectedItemsFromCart,
     required TResult Function(_ReplaceWithOrderItems value)
         replaceWithOrderItems,
   }) {
@@ -729,6 +745,8 @@ class _$_Initialized implements _Initialized {
     TResult? Function(_SelectButtonTapped value)? selectButtonTapped,
     TResult? Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult? Function(_ClearCart value)? clearCart,
+    TResult? Function(_ClearSelectedItemsFromCart value)?
+        clearSelectedItemsFromCart,
     TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
   }) {
     return initialized?.call(this);
@@ -755,6 +773,8 @@ class _$_Initialized implements _Initialized {
     TResult Function(_SelectButtonTapped value)? selectButtonTapped,
     TResult Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult Function(_ClearCart value)? clearCart,
+    TResult Function(_ClearSelectedItemsFromCart value)?
+        clearSelectedItemsFromCart,
     TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     required TResult orElse(),
   }) {
@@ -1000,6 +1020,8 @@ class _$_Fetch implements _Fetch {
     required TResult Function(CartItem cartItem) selectButtonTapped,
     required TResult Function() selectAllButtonTapped,
     required TResult Function() clearCart,
+    required TResult Function(List<String> selectedItemIds)
+        clearSelectedItemsFromCart,
     required TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -1090,6 +1112,7 @@ class _$_Fetch implements _Fetch {
     TResult? Function(CartItem cartItem)? selectButtonTapped,
     TResult? Function()? selectAllButtonTapped,
     TResult? Function()? clearCart,
+    TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult? Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -1180,6 +1203,7 @@ class _$_Fetch implements _Fetch {
     TResult Function(CartItem cartItem)? selectButtonTapped,
     TResult Function()? selectAllButtonTapped,
     TResult Function()? clearCart,
+    TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -1222,6 +1246,8 @@ class _$_Fetch implements _Fetch {
     required TResult Function(_SelectAllButtonTapped value)
         selectAllButtonTapped,
     required TResult Function(_ClearCart value) clearCart,
+    required TResult Function(_ClearSelectedItemsFromCart value)
+        clearSelectedItemsFromCart,
     required TResult Function(_ReplaceWithOrderItems value)
         replaceWithOrderItems,
   }) {
@@ -1249,6 +1275,8 @@ class _$_Fetch implements _Fetch {
     TResult? Function(_SelectButtonTapped value)? selectButtonTapped,
     TResult? Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult? Function(_ClearCart value)? clearCart,
+    TResult? Function(_ClearSelectedItemsFromCart value)?
+        clearSelectedItemsFromCart,
     TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
   }) {
     return fetch?.call(this);
@@ -1275,6 +1303,8 @@ class _$_Fetch implements _Fetch {
     TResult Function(_SelectButtonTapped value)? selectButtonTapped,
     TResult Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult Function(_ClearCart value)? clearCart,
+    TResult Function(_ClearSelectedItemsFromCart value)?
+        clearSelectedItemsFromCart,
     TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     required TResult orElse(),
   }) {
@@ -1570,6 +1600,8 @@ class _$_AddMaterialToCart implements _AddMaterialToCart {
     required TResult Function(CartItem cartItem) selectButtonTapped,
     required TResult Function() selectAllButtonTapped,
     required TResult Function() clearCart,
+    required TResult Function(List<String> selectedItemIds)
+        clearSelectedItemsFromCart,
     required TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -1666,6 +1698,7 @@ class _$_AddMaterialToCart implements _AddMaterialToCart {
     TResult? Function(CartItem cartItem)? selectButtonTapped,
     TResult? Function()? selectAllButtonTapped,
     TResult? Function()? clearCart,
+    TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult? Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -1762,6 +1795,7 @@ class _$_AddMaterialToCart implements _AddMaterialToCart {
     TResult Function(CartItem cartItem)? selectButtonTapped,
     TResult Function()? selectAllButtonTapped,
     TResult Function()? clearCart,
+    TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -1810,6 +1844,8 @@ class _$_AddMaterialToCart implements _AddMaterialToCart {
     required TResult Function(_SelectAllButtonTapped value)
         selectAllButtonTapped,
     required TResult Function(_ClearCart value) clearCart,
+    required TResult Function(_ClearSelectedItemsFromCart value)
+        clearSelectedItemsFromCart,
     required TResult Function(_ReplaceWithOrderItems value)
         replaceWithOrderItems,
   }) {
@@ -1837,6 +1873,8 @@ class _$_AddMaterialToCart implements _AddMaterialToCart {
     TResult? Function(_SelectButtonTapped value)? selectButtonTapped,
     TResult? Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult? Function(_ClearCart value)? clearCart,
+    TResult? Function(_ClearSelectedItemsFromCart value)?
+        clearSelectedItemsFromCart,
     TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
   }) {
     return addMaterialToCart?.call(this);
@@ -1863,6 +1901,8 @@ class _$_AddMaterialToCart implements _AddMaterialToCart {
     TResult Function(_SelectButtonTapped value)? selectButtonTapped,
     TResult Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult Function(_ClearCart value)? clearCart,
+    TResult Function(_ClearSelectedItemsFromCart value)?
+        clearSelectedItemsFromCart,
     TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     required TResult orElse(),
   }) {
@@ -2044,6 +2084,8 @@ class _$_DiscountOverride implements _DiscountOverride {
     required TResult Function(CartItem cartItem) selectButtonTapped,
     required TResult Function() selectAllButtonTapped,
     required TResult Function() clearCart,
+    required TResult Function(List<String> selectedItemIds)
+        clearSelectedItemsFromCart,
     required TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -2133,6 +2175,7 @@ class _$_DiscountOverride implements _DiscountOverride {
     TResult? Function(CartItem cartItem)? selectButtonTapped,
     TResult? Function()? selectAllButtonTapped,
     TResult? Function()? clearCart,
+    TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult? Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -2222,6 +2265,7 @@ class _$_DiscountOverride implements _DiscountOverride {
     TResult Function(CartItem cartItem)? selectButtonTapped,
     TResult Function()? selectAllButtonTapped,
     TResult Function()? clearCart,
+    TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -2263,6 +2307,8 @@ class _$_DiscountOverride implements _DiscountOverride {
     required TResult Function(_SelectAllButtonTapped value)
         selectAllButtonTapped,
     required TResult Function(_ClearCart value) clearCart,
+    required TResult Function(_ClearSelectedItemsFromCart value)
+        clearSelectedItemsFromCart,
     required TResult Function(_ReplaceWithOrderItems value)
         replaceWithOrderItems,
   }) {
@@ -2290,6 +2336,8 @@ class _$_DiscountOverride implements _DiscountOverride {
     TResult? Function(_SelectButtonTapped value)? selectButtonTapped,
     TResult? Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult? Function(_ClearCart value)? clearCart,
+    TResult? Function(_ClearSelectedItemsFromCart value)?
+        clearSelectedItemsFromCart,
     TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
   }) {
     return discountOverride?.call(this);
@@ -2316,6 +2364,8 @@ class _$_DiscountOverride implements _DiscountOverride {
     TResult Function(_SelectButtonTapped value)? selectButtonTapped,
     TResult Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult Function(_ClearCart value)? clearCart,
+    TResult Function(_ClearSelectedItemsFromCart value)?
+        clearSelectedItemsFromCart,
     TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     required TResult orElse(),
   }) {
@@ -2587,6 +2637,8 @@ class _$_AddBundleToCart implements _AddBundleToCart {
     required TResult Function(CartItem cartItem) selectButtonTapped,
     required TResult Function() selectAllButtonTapped,
     required TResult Function() clearCart,
+    required TResult Function(List<String> selectedItemIds)
+        clearSelectedItemsFromCart,
     required TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -2682,6 +2734,7 @@ class _$_AddBundleToCart implements _AddBundleToCart {
     TResult? Function(CartItem cartItem)? selectButtonTapped,
     TResult? Function()? selectAllButtonTapped,
     TResult? Function()? clearCart,
+    TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult? Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -2777,6 +2830,7 @@ class _$_AddBundleToCart implements _AddBundleToCart {
     TResult Function(CartItem cartItem)? selectButtonTapped,
     TResult Function()? selectAllButtonTapped,
     TResult Function()? clearCart,
+    TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -2824,6 +2878,8 @@ class _$_AddBundleToCart implements _AddBundleToCart {
     required TResult Function(_SelectAllButtonTapped value)
         selectAllButtonTapped,
     required TResult Function(_ClearCart value) clearCart,
+    required TResult Function(_ClearSelectedItemsFromCart value)
+        clearSelectedItemsFromCart,
     required TResult Function(_ReplaceWithOrderItems value)
         replaceWithOrderItems,
   }) {
@@ -2851,6 +2907,8 @@ class _$_AddBundleToCart implements _AddBundleToCart {
     TResult? Function(_SelectButtonTapped value)? selectButtonTapped,
     TResult? Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult? Function(_ClearCart value)? clearCart,
+    TResult? Function(_ClearSelectedItemsFromCart value)?
+        clearSelectedItemsFromCart,
     TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
   }) {
     return addBundleToCart?.call(this);
@@ -2877,6 +2935,8 @@ class _$_AddBundleToCart implements _AddBundleToCart {
     TResult Function(_SelectButtonTapped value)? selectButtonTapped,
     TResult Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult Function(_ClearCart value)? clearCart,
+    TResult Function(_ClearSelectedItemsFromCart value)?
+        clearSelectedItemsFromCart,
     TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     required TResult orElse(),
   }) {
@@ -3172,6 +3232,8 @@ class _$_AddComboDealToCart implements _AddComboDealToCart {
     required TResult Function(CartItem cartItem) selectButtonTapped,
     required TResult Function() selectAllButtonTapped,
     required TResult Function() clearCart,
+    required TResult Function(List<String> selectedItemIds)
+        clearSelectedItemsFromCart,
     required TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -3268,6 +3330,7 @@ class _$_AddComboDealToCart implements _AddComboDealToCart {
     TResult? Function(CartItem cartItem)? selectButtonTapped,
     TResult? Function()? selectAllButtonTapped,
     TResult? Function()? clearCart,
+    TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult? Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -3364,6 +3427,7 @@ class _$_AddComboDealToCart implements _AddComboDealToCart {
     TResult Function(CartItem cartItem)? selectButtonTapped,
     TResult Function()? selectAllButtonTapped,
     TResult Function()? clearCart,
+    TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -3412,6 +3476,8 @@ class _$_AddComboDealToCart implements _AddComboDealToCart {
     required TResult Function(_SelectAllButtonTapped value)
         selectAllButtonTapped,
     required TResult Function(_ClearCart value) clearCart,
+    required TResult Function(_ClearSelectedItemsFromCart value)
+        clearSelectedItemsFromCart,
     required TResult Function(_ReplaceWithOrderItems value)
         replaceWithOrderItems,
   }) {
@@ -3439,6 +3505,8 @@ class _$_AddComboDealToCart implements _AddComboDealToCart {
     TResult? Function(_SelectButtonTapped value)? selectButtonTapped,
     TResult? Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult? Function(_ClearCart value)? clearCart,
+    TResult? Function(_ClearSelectedItemsFromCart value)?
+        clearSelectedItemsFromCart,
     TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
   }) {
     return addComboDealToCart?.call(this);
@@ -3465,6 +3533,8 @@ class _$_AddComboDealToCart implements _AddComboDealToCart {
     TResult Function(_SelectButtonTapped value)? selectButtonTapped,
     TResult Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult Function(_ClearCart value)? clearCart,
+    TResult Function(_ClearSelectedItemsFromCart value)?
+        clearSelectedItemsFromCart,
     TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     required TResult orElse(),
   }) {
@@ -3788,6 +3858,8 @@ class _$_UpdateMaterialQtyInCartItem implements _UpdateMaterialQtyInCartItem {
     required TResult Function(CartItem cartItem) selectButtonTapped,
     required TResult Function() selectAllButtonTapped,
     required TResult Function() clearCart,
+    required TResult Function(List<String> selectedItemIds)
+        clearSelectedItemsFromCart,
     required TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -3885,6 +3957,7 @@ class _$_UpdateMaterialQtyInCartItem implements _UpdateMaterialQtyInCartItem {
     TResult? Function(CartItem cartItem)? selectButtonTapped,
     TResult? Function()? selectAllButtonTapped,
     TResult? Function()? clearCart,
+    TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult? Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -3982,6 +4055,7 @@ class _$_UpdateMaterialQtyInCartItem implements _UpdateMaterialQtyInCartItem {
     TResult Function(CartItem cartItem)? selectButtonTapped,
     TResult Function()? selectAllButtonTapped,
     TResult Function()? clearCart,
+    TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -4031,6 +4105,8 @@ class _$_UpdateMaterialQtyInCartItem implements _UpdateMaterialQtyInCartItem {
     required TResult Function(_SelectAllButtonTapped value)
         selectAllButtonTapped,
     required TResult Function(_ClearCart value) clearCart,
+    required TResult Function(_ClearSelectedItemsFromCart value)
+        clearSelectedItemsFromCart,
     required TResult Function(_ReplaceWithOrderItems value)
         replaceWithOrderItems,
   }) {
@@ -4058,6 +4134,8 @@ class _$_UpdateMaterialQtyInCartItem implements _UpdateMaterialQtyInCartItem {
     TResult? Function(_SelectButtonTapped value)? selectButtonTapped,
     TResult? Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult? Function(_ClearCart value)? clearCart,
+    TResult? Function(_ClearSelectedItemsFromCart value)?
+        clearSelectedItemsFromCart,
     TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
   }) {
     return updateMaterialQtyInCartItem?.call(this);
@@ -4084,6 +4162,8 @@ class _$_UpdateMaterialQtyInCartItem implements _UpdateMaterialQtyInCartItem {
     TResult Function(_SelectButtonTapped value)? selectButtonTapped,
     TResult Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult Function(_ClearCart value)? clearCart,
+    TResult Function(_ClearSelectedItemsFromCart value)?
+        clearSelectedItemsFromCart,
     TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     required TResult orElse(),
   }) {
@@ -4355,6 +4435,8 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
     required TResult Function(CartItem cartItem) selectButtonTapped,
     required TResult Function() selectAllButtonTapped,
     required TResult Function() clearCart,
+    required TResult Function(List<String> selectedItemIds)
+        clearSelectedItemsFromCart,
     required TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -4445,6 +4527,7 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
     TResult? Function(CartItem cartItem)? selectButtonTapped,
     TResult? Function()? selectAllButtonTapped,
     TResult? Function()? clearCart,
+    TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult? Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -4535,6 +4618,7 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
     TResult Function(CartItem cartItem)? selectButtonTapped,
     TResult Function()? selectAllButtonTapped,
     TResult Function()? clearCart,
+    TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -4577,6 +4661,8 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
     required TResult Function(_SelectAllButtonTapped value)
         selectAllButtonTapped,
     required TResult Function(_ClearCart value) clearCart,
+    required TResult Function(_ClearSelectedItemsFromCart value)
+        clearSelectedItemsFromCart,
     required TResult Function(_ReplaceWithOrderItems value)
         replaceWithOrderItems,
   }) {
@@ -4604,6 +4690,8 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
     TResult? Function(_SelectButtonTapped value)? selectButtonTapped,
     TResult? Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult? Function(_ClearCart value)? clearCart,
+    TResult? Function(_ClearSelectedItemsFromCart value)?
+        clearSelectedItemsFromCart,
     TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
   }) {
     return verifyMaterialDealBonus?.call(this);
@@ -4630,6 +4718,8 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
     TResult Function(_SelectButtonTapped value)? selectButtonTapped,
     TResult Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult Function(_ClearCart value)? clearCart,
+    TResult Function(_ClearSelectedItemsFromCart value)?
+        clearSelectedItemsFromCart,
     TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     required TResult orElse(),
   }) {
@@ -4807,6 +4897,8 @@ class _$_RemoveFromCart implements _RemoveFromCart {
     required TResult Function(CartItem cartItem) selectButtonTapped,
     required TResult Function() selectAllButtonTapped,
     required TResult Function() clearCart,
+    required TResult Function(List<String> selectedItemIds)
+        clearSelectedItemsFromCart,
     required TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -4896,6 +4988,7 @@ class _$_RemoveFromCart implements _RemoveFromCart {
     TResult? Function(CartItem cartItem)? selectButtonTapped,
     TResult? Function()? selectAllButtonTapped,
     TResult? Function()? clearCart,
+    TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult? Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -4985,6 +5078,7 @@ class _$_RemoveFromCart implements _RemoveFromCart {
     TResult Function(CartItem cartItem)? selectButtonTapped,
     TResult Function()? selectAllButtonTapped,
     TResult Function()? clearCart,
+    TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -5026,6 +5120,8 @@ class _$_RemoveFromCart implements _RemoveFromCart {
     required TResult Function(_SelectAllButtonTapped value)
         selectAllButtonTapped,
     required TResult Function(_ClearCart value) clearCart,
+    required TResult Function(_ClearSelectedItemsFromCart value)
+        clearSelectedItemsFromCart,
     required TResult Function(_ReplaceWithOrderItems value)
         replaceWithOrderItems,
   }) {
@@ -5053,6 +5149,8 @@ class _$_RemoveFromCart implements _RemoveFromCart {
     TResult? Function(_SelectButtonTapped value)? selectButtonTapped,
     TResult? Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult? Function(_ClearCart value)? clearCart,
+    TResult? Function(_ClearSelectedItemsFromCart value)?
+        clearSelectedItemsFromCart,
     TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
   }) {
     return removeFromCart?.call(this);
@@ -5079,6 +5177,8 @@ class _$_RemoveFromCart implements _RemoveFromCart {
     TResult Function(_SelectButtonTapped value)? selectButtonTapped,
     TResult Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult Function(_ClearCart value)? clearCart,
+    TResult Function(_ClearSelectedItemsFromCart value)?
+        clearSelectedItemsFromCart,
     TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     required TResult orElse(),
   }) {
@@ -5257,6 +5357,8 @@ class _$_AddRemarkToCartItem implements _AddRemarkToCartItem {
     required TResult Function(CartItem cartItem) selectButtonTapped,
     required TResult Function() selectAllButtonTapped,
     required TResult Function() clearCart,
+    required TResult Function(List<String> selectedItemIds)
+        clearSelectedItemsFromCart,
     required TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -5346,6 +5448,7 @@ class _$_AddRemarkToCartItem implements _AddRemarkToCartItem {
     TResult? Function(CartItem cartItem)? selectButtonTapped,
     TResult? Function()? selectAllButtonTapped,
     TResult? Function()? clearCart,
+    TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult? Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -5435,6 +5538,7 @@ class _$_AddRemarkToCartItem implements _AddRemarkToCartItem {
     TResult Function(CartItem cartItem)? selectButtonTapped,
     TResult Function()? selectAllButtonTapped,
     TResult Function()? clearCart,
+    TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -5476,6 +5580,8 @@ class _$_AddRemarkToCartItem implements _AddRemarkToCartItem {
     required TResult Function(_SelectAllButtonTapped value)
         selectAllButtonTapped,
     required TResult Function(_ClearCart value) clearCart,
+    required TResult Function(_ClearSelectedItemsFromCart value)
+        clearSelectedItemsFromCart,
     required TResult Function(_ReplaceWithOrderItems value)
         replaceWithOrderItems,
   }) {
@@ -5503,6 +5609,8 @@ class _$_AddRemarkToCartItem implements _AddRemarkToCartItem {
     TResult? Function(_SelectButtonTapped value)? selectButtonTapped,
     TResult? Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult? Function(_ClearCart value)? clearCart,
+    TResult? Function(_ClearSelectedItemsFromCart value)?
+        clearSelectedItemsFromCart,
     TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
   }) {
     return addRemarkToCartItem?.call(this);
@@ -5529,6 +5637,8 @@ class _$_AddRemarkToCartItem implements _AddRemarkToCartItem {
     TResult Function(_SelectButtonTapped value)? selectButtonTapped,
     TResult Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult Function(_ClearCart value)? clearCart,
+    TResult Function(_ClearSelectedItemsFromCart value)?
+        clearSelectedItemsFromCart,
     TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     required TResult orElse(),
   }) {
@@ -5839,6 +5949,8 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
     required TResult Function(CartItem cartItem) selectButtonTapped,
     required TResult Function() selectAllButtonTapped,
     required TResult Function() clearCart,
+    required TResult Function(List<String> selectedItemIds)
+        clearSelectedItemsFromCart,
     required TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -5936,6 +6048,7 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
     TResult? Function(CartItem cartItem)? selectButtonTapped,
     TResult? Function()? selectAllButtonTapped,
     TResult? Function()? clearCart,
+    TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult? Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -6033,6 +6146,7 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
     TResult Function(CartItem cartItem)? selectButtonTapped,
     TResult Function()? selectAllButtonTapped,
     TResult Function()? clearCart,
+    TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -6082,6 +6196,8 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
     required TResult Function(_SelectAllButtonTapped value)
         selectAllButtonTapped,
     required TResult Function(_ClearCart value) clearCart,
+    required TResult Function(_ClearSelectedItemsFromCart value)
+        clearSelectedItemsFromCart,
     required TResult Function(_ReplaceWithOrderItems value)
         replaceWithOrderItems,
   }) {
@@ -6109,6 +6225,8 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
     TResult? Function(_SelectButtonTapped value)? selectButtonTapped,
     TResult? Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult? Function(_ClearCart value)? clearCart,
+    TResult? Function(_ClearSelectedItemsFromCart value)?
+        clearSelectedItemsFromCart,
     TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
   }) {
     return addBonusToCartItem?.call(this);
@@ -6135,6 +6253,8 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
     TResult Function(_SelectButtonTapped value)? selectButtonTapped,
     TResult Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult Function(_ClearCart value)? clearCart,
+    TResult Function(_ClearSelectedItemsFromCart value)?
+        clearSelectedItemsFromCart,
     TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     required TResult orElse(),
   }) {
@@ -6340,6 +6460,8 @@ class _$_RemoveBonusFromCartItem implements _RemoveBonusFromCartItem {
     required TResult Function(CartItem cartItem) selectButtonTapped,
     required TResult Function() selectAllButtonTapped,
     required TResult Function() clearCart,
+    required TResult Function(List<String> selectedItemIds)
+        clearSelectedItemsFromCart,
     required TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -6429,6 +6551,7 @@ class _$_RemoveBonusFromCartItem implements _RemoveBonusFromCartItem {
     TResult? Function(CartItem cartItem)? selectButtonTapped,
     TResult? Function()? selectAllButtonTapped,
     TResult? Function()? clearCart,
+    TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult? Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -6518,6 +6641,7 @@ class _$_RemoveBonusFromCartItem implements _RemoveBonusFromCartItem {
     TResult Function(CartItem cartItem)? selectButtonTapped,
     TResult Function()? selectAllButtonTapped,
     TResult Function()? clearCart,
+    TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -6559,6 +6683,8 @@ class _$_RemoveBonusFromCartItem implements _RemoveBonusFromCartItem {
     required TResult Function(_SelectAllButtonTapped value)
         selectAllButtonTapped,
     required TResult Function(_ClearCart value) clearCart,
+    required TResult Function(_ClearSelectedItemsFromCart value)
+        clearSelectedItemsFromCart,
     required TResult Function(_ReplaceWithOrderItems value)
         replaceWithOrderItems,
   }) {
@@ -6586,6 +6712,8 @@ class _$_RemoveBonusFromCartItem implements _RemoveBonusFromCartItem {
     TResult? Function(_SelectButtonTapped value)? selectButtonTapped,
     TResult? Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult? Function(_ClearCart value)? clearCart,
+    TResult? Function(_ClearSelectedItemsFromCart value)?
+        clearSelectedItemsFromCart,
     TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
   }) {
     return removeBonusFromCartItem?.call(this);
@@ -6612,6 +6740,8 @@ class _$_RemoveBonusFromCartItem implements _RemoveBonusFromCartItem {
     TResult Function(_SelectButtonTapped value)? selectButtonTapped,
     TResult Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult Function(_ClearCart value)? clearCart,
+    TResult Function(_ClearSelectedItemsFromCart value)?
+        clearSelectedItemsFromCart,
     TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     required TResult orElse(),
   }) {
@@ -6811,6 +6941,8 @@ class _$_AddRemarkToBonusItem implements _AddRemarkToBonusItem {
     required TResult Function(CartItem cartItem) selectButtonTapped,
     required TResult Function() selectAllButtonTapped,
     required TResult Function() clearCart,
+    required TResult Function(List<String> selectedItemIds)
+        clearSelectedItemsFromCart,
     required TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -6900,6 +7032,7 @@ class _$_AddRemarkToBonusItem implements _AddRemarkToBonusItem {
     TResult? Function(CartItem cartItem)? selectButtonTapped,
     TResult? Function()? selectAllButtonTapped,
     TResult? Function()? clearCart,
+    TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult? Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -6989,6 +7122,7 @@ class _$_AddRemarkToBonusItem implements _AddRemarkToBonusItem {
     TResult Function(CartItem cartItem)? selectButtonTapped,
     TResult Function()? selectAllButtonTapped,
     TResult Function()? clearCart,
+    TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -7030,6 +7164,8 @@ class _$_AddRemarkToBonusItem implements _AddRemarkToBonusItem {
     required TResult Function(_SelectAllButtonTapped value)
         selectAllButtonTapped,
     required TResult Function(_ClearCart value) clearCart,
+    required TResult Function(_ClearSelectedItemsFromCart value)
+        clearSelectedItemsFromCart,
     required TResult Function(_ReplaceWithOrderItems value)
         replaceWithOrderItems,
   }) {
@@ -7057,6 +7193,8 @@ class _$_AddRemarkToBonusItem implements _AddRemarkToBonusItem {
     TResult? Function(_SelectButtonTapped value)? selectButtonTapped,
     TResult? Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult? Function(_ClearCart value)? clearCart,
+    TResult? Function(_ClearSelectedItemsFromCart value)?
+        clearSelectedItemsFromCart,
     TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
   }) {
     return addRemarkToBonusItem?.call(this);
@@ -7083,6 +7221,8 @@ class _$_AddRemarkToBonusItem implements _AddRemarkToBonusItem {
     TResult Function(_SelectButtonTapped value)? selectButtonTapped,
     TResult Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult Function(_ClearCart value)? clearCart,
+    TResult Function(_ClearSelectedItemsFromCart value)?
+        clearSelectedItemsFromCart,
     TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     required TResult orElse(),
   }) {
@@ -7275,6 +7415,8 @@ class _$_OverrideCartItemPrice implements _OverrideCartItemPrice {
     required TResult Function(CartItem cartItem) selectButtonTapped,
     required TResult Function() selectAllButtonTapped,
     required TResult Function() clearCart,
+    required TResult Function(List<String> selectedItemIds)
+        clearSelectedItemsFromCart,
     required TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -7364,6 +7506,7 @@ class _$_OverrideCartItemPrice implements _OverrideCartItemPrice {
     TResult? Function(CartItem cartItem)? selectButtonTapped,
     TResult? Function()? selectAllButtonTapped,
     TResult? Function()? clearCart,
+    TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult? Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -7453,6 +7596,7 @@ class _$_OverrideCartItemPrice implements _OverrideCartItemPrice {
     TResult Function(CartItem cartItem)? selectButtonTapped,
     TResult Function()? selectAllButtonTapped,
     TResult Function()? clearCart,
+    TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -7494,6 +7638,8 @@ class _$_OverrideCartItemPrice implements _OverrideCartItemPrice {
     required TResult Function(_SelectAllButtonTapped value)
         selectAllButtonTapped,
     required TResult Function(_ClearCart value) clearCart,
+    required TResult Function(_ClearSelectedItemsFromCart value)
+        clearSelectedItemsFromCart,
     required TResult Function(_ReplaceWithOrderItems value)
         replaceWithOrderItems,
   }) {
@@ -7521,6 +7667,8 @@ class _$_OverrideCartItemPrice implements _OverrideCartItemPrice {
     TResult? Function(_SelectButtonTapped value)? selectButtonTapped,
     TResult? Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult? Function(_ClearCart value)? clearCart,
+    TResult? Function(_ClearSelectedItemsFromCart value)?
+        clearSelectedItemsFromCart,
     TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
   }) {
     return overrideCartItemPrice?.call(this);
@@ -7547,6 +7695,8 @@ class _$_OverrideCartItemPrice implements _OverrideCartItemPrice {
     TResult Function(_SelectButtonTapped value)? selectButtonTapped,
     TResult Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult Function(_ClearCart value)? clearCart,
+    TResult Function(_ClearSelectedItemsFromCart value)?
+        clearSelectedItemsFromCart,
     TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     required TResult orElse(),
   }) {
@@ -7720,6 +7870,8 @@ class _$_SelectButtonTapped implements _SelectButtonTapped {
     required TResult Function(CartItem cartItem) selectButtonTapped,
     required TResult Function() selectAllButtonTapped,
     required TResult Function() clearCart,
+    required TResult Function(List<String> selectedItemIds)
+        clearSelectedItemsFromCart,
     required TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -7809,6 +7961,7 @@ class _$_SelectButtonTapped implements _SelectButtonTapped {
     TResult? Function(CartItem cartItem)? selectButtonTapped,
     TResult? Function()? selectAllButtonTapped,
     TResult? Function()? clearCart,
+    TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult? Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -7898,6 +8051,7 @@ class _$_SelectButtonTapped implements _SelectButtonTapped {
     TResult Function(CartItem cartItem)? selectButtonTapped,
     TResult Function()? selectAllButtonTapped,
     TResult Function()? clearCart,
+    TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -7939,6 +8093,8 @@ class _$_SelectButtonTapped implements _SelectButtonTapped {
     required TResult Function(_SelectAllButtonTapped value)
         selectAllButtonTapped,
     required TResult Function(_ClearCart value) clearCart,
+    required TResult Function(_ClearSelectedItemsFromCart value)
+        clearSelectedItemsFromCart,
     required TResult Function(_ReplaceWithOrderItems value)
         replaceWithOrderItems,
   }) {
@@ -7966,6 +8122,8 @@ class _$_SelectButtonTapped implements _SelectButtonTapped {
     TResult? Function(_SelectButtonTapped value)? selectButtonTapped,
     TResult? Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult? Function(_ClearCart value)? clearCart,
+    TResult? Function(_ClearSelectedItemsFromCart value)?
+        clearSelectedItemsFromCart,
     TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
   }) {
     return selectButtonTapped?.call(this);
@@ -7992,6 +8150,8 @@ class _$_SelectButtonTapped implements _SelectButtonTapped {
     TResult Function(_SelectButtonTapped value)? selectButtonTapped,
     TResult Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult Function(_ClearCart value)? clearCart,
+    TResult Function(_ClearSelectedItemsFromCart value)?
+        clearSelectedItemsFromCart,
     TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     required TResult orElse(),
   }) {
@@ -8125,6 +8285,8 @@ class _$_SelectAllButtonTapped implements _SelectAllButtonTapped {
     required TResult Function(CartItem cartItem) selectButtonTapped,
     required TResult Function() selectAllButtonTapped,
     required TResult Function() clearCart,
+    required TResult Function(List<String> selectedItemIds)
+        clearSelectedItemsFromCart,
     required TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -8214,6 +8376,7 @@ class _$_SelectAllButtonTapped implements _SelectAllButtonTapped {
     TResult? Function(CartItem cartItem)? selectButtonTapped,
     TResult? Function()? selectAllButtonTapped,
     TResult? Function()? clearCart,
+    TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult? Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -8303,6 +8466,7 @@ class _$_SelectAllButtonTapped implements _SelectAllButtonTapped {
     TResult Function(CartItem cartItem)? selectButtonTapped,
     TResult Function()? selectAllButtonTapped,
     TResult Function()? clearCart,
+    TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -8344,6 +8508,8 @@ class _$_SelectAllButtonTapped implements _SelectAllButtonTapped {
     required TResult Function(_SelectAllButtonTapped value)
         selectAllButtonTapped,
     required TResult Function(_ClearCart value) clearCart,
+    required TResult Function(_ClearSelectedItemsFromCart value)
+        clearSelectedItemsFromCart,
     required TResult Function(_ReplaceWithOrderItems value)
         replaceWithOrderItems,
   }) {
@@ -8371,6 +8537,8 @@ class _$_SelectAllButtonTapped implements _SelectAllButtonTapped {
     TResult? Function(_SelectButtonTapped value)? selectButtonTapped,
     TResult? Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult? Function(_ClearCart value)? clearCart,
+    TResult? Function(_ClearSelectedItemsFromCart value)?
+        clearSelectedItemsFromCart,
     TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
   }) {
     return selectAllButtonTapped?.call(this);
@@ -8397,6 +8565,8 @@ class _$_SelectAllButtonTapped implements _SelectAllButtonTapped {
     TResult Function(_SelectButtonTapped value)? selectButtonTapped,
     TResult Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult Function(_ClearCart value)? clearCart,
+    TResult Function(_ClearSelectedItemsFromCart value)?
+        clearSelectedItemsFromCart,
     TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     required TResult orElse(),
   }) {
@@ -8524,6 +8694,8 @@ class _$_ClearCart implements _ClearCart {
     required TResult Function(CartItem cartItem) selectButtonTapped,
     required TResult Function() selectAllButtonTapped,
     required TResult Function() clearCart,
+    required TResult Function(List<String> selectedItemIds)
+        clearSelectedItemsFromCart,
     required TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -8613,6 +8785,7 @@ class _$_ClearCart implements _ClearCart {
     TResult? Function(CartItem cartItem)? selectButtonTapped,
     TResult? Function()? selectAllButtonTapped,
     TResult? Function()? clearCart,
+    TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult? Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -8702,6 +8875,7 @@ class _$_ClearCart implements _ClearCart {
     TResult Function(CartItem cartItem)? selectButtonTapped,
     TResult Function()? selectAllButtonTapped,
     TResult Function()? clearCart,
+    TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -8743,6 +8917,8 @@ class _$_ClearCart implements _ClearCart {
     required TResult Function(_SelectAllButtonTapped value)
         selectAllButtonTapped,
     required TResult Function(_ClearCart value) clearCart,
+    required TResult Function(_ClearSelectedItemsFromCart value)
+        clearSelectedItemsFromCart,
     required TResult Function(_ReplaceWithOrderItems value)
         replaceWithOrderItems,
   }) {
@@ -8770,6 +8946,8 @@ class _$_ClearCart implements _ClearCart {
     TResult? Function(_SelectButtonTapped value)? selectButtonTapped,
     TResult? Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult? Function(_ClearCart value)? clearCart,
+    TResult? Function(_ClearSelectedItemsFromCart value)?
+        clearSelectedItemsFromCart,
     TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
   }) {
     return clearCart?.call(this);
@@ -8796,6 +8974,8 @@ class _$_ClearCart implements _ClearCart {
     TResult Function(_SelectButtonTapped value)? selectButtonTapped,
     TResult Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult Function(_ClearCart value)? clearCart,
+    TResult Function(_ClearSelectedItemsFromCart value)?
+        clearSelectedItemsFromCart,
     TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     required TResult orElse(),
   }) {
@@ -8808,6 +8988,459 @@ class _$_ClearCart implements _ClearCart {
 
 abstract class _ClearCart implements CartEvent {
   const factory _ClearCart() = _$_ClearCart;
+}
+
+/// @nodoc
+abstract class _$$_ClearSelectedItemsFromCartCopyWith<$Res> {
+  factory _$$_ClearSelectedItemsFromCartCopyWith(
+          _$_ClearSelectedItemsFromCart value,
+          $Res Function(_$_ClearSelectedItemsFromCart) then) =
+      __$$_ClearSelectedItemsFromCartCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<String> selectedItemIds});
+}
+
+/// @nodoc
+class __$$_ClearSelectedItemsFromCartCopyWithImpl<$Res>
+    extends _$CartEventCopyWithImpl<$Res, _$_ClearSelectedItemsFromCart>
+    implements _$$_ClearSelectedItemsFromCartCopyWith<$Res> {
+  __$$_ClearSelectedItemsFromCartCopyWithImpl(
+      _$_ClearSelectedItemsFromCart _value,
+      $Res Function(_$_ClearSelectedItemsFromCart) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? selectedItemIds = null,
+  }) {
+    return _then(_$_ClearSelectedItemsFromCart(
+      selectedItemIds: null == selectedItemIds
+          ? _value._selectedItemIds
+          : selectedItemIds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_ClearSelectedItemsFromCart implements _ClearSelectedItemsFromCart {
+  const _$_ClearSelectedItemsFromCart(
+      {required final List<String> selectedItemIds})
+      : _selectedItemIds = selectedItemIds;
+
+  final List<String> _selectedItemIds;
+  @override
+  List<String> get selectedItemIds {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_selectedItemIds);
+  }
+
+  @override
+  String toString() {
+    return 'CartEvent.clearSelectedItemsFromCart(selectedItemIds: $selectedItemIds)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_ClearSelectedItemsFromCart &&
+            const DeepCollectionEquality()
+                .equals(other._selectedItemIds, _selectedItemIds));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_selectedItemIds));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_ClearSelectedItemsFromCartCopyWith<_$_ClearSelectedItemsFromCart>
+      get copyWith => __$$_ClearSelectedItemsFromCartCopyWithImpl<
+          _$_ClearSelectedItemsFromCart>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)
+        fetch,
+    required TResult Function(
+            PriceAggregate item,
+            bool overrideQty,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool doNotallowOutOfStockMaterial)
+        addMaterialToCart,
+    required TResult Function(PriceAggregate item) discountOverride,
+    required TResult Function(
+            List<PriceAggregate> bundleItems,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool doNotallowOutOfStockMaterial)
+        addBundleToCart,
+    required TResult Function(
+            List<PriceAggregate> comboDealItems,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool doNotallowOutOfStockMaterial,
+            bool overrideQty)
+        addComboDealToCart,
+    required TResult Function(
+            CartItem currentItem,
+            PriceAggregate updatedQtyItem,
+            bool overrideQty,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool doNotallowOutOfStockMaterial)
+        updateMaterialQtyInCartItem,
+    required TResult Function(
+            PriceAggregate item,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)
+        verifyMaterialDealBonus,
+    required TResult Function(CartItem item) removeFromCart,
+    required TResult Function(CartItem item, String message)
+        addRemarkToCartItem,
+    required TResult Function(
+            CartItem item,
+            MaterialItemBonus bonusItem,
+            bool overrideQty,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool doNotallowOutOfStockMaterial)
+        addBonusToCartItem,
+    required TResult Function(CartItem item, MaterialItemBonus bonusItem)
+        removeBonusFromCartItem,
+    required TResult Function(
+            CartItem item, MaterialItemBonus bonusItem, String message)
+        addRemarkToBonusItem,
+    required TResult Function(List<Price> overridenPrice, CartItem cartItem)
+        overrideCartItemPrice,
+    required TResult Function(CartItem cartItem) selectButtonTapped,
+    required TResult Function() selectAllButtonTapped,
+    required TResult Function() clearCart,
+    required TResult Function(List<String> selectedItemIds)
+        clearSelectedItemsFromCart,
+    required TResult Function(
+            List<CartItem> items,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool doNotallowOutOfStockMaterial)
+        replaceWithOrderItems,
+  }) {
+    return clearSelectedItemsFromCart(selectedItemIds);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        fetch,
+    TResult? Function(
+            PriceAggregate item,
+            bool overrideQty,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool doNotallowOutOfStockMaterial)?
+        addMaterialToCart,
+    TResult? Function(PriceAggregate item)? discountOverride,
+    TResult? Function(
+            List<PriceAggregate> bundleItems,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool doNotallowOutOfStockMaterial)?
+        addBundleToCart,
+    TResult? Function(
+            List<PriceAggregate> comboDealItems,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool doNotallowOutOfStockMaterial,
+            bool overrideQty)?
+        addComboDealToCart,
+    TResult? Function(
+            CartItem currentItem,
+            PriceAggregate updatedQtyItem,
+            bool overrideQty,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool doNotallowOutOfStockMaterial)?
+        updateMaterialQtyInCartItem,
+    TResult? Function(
+            PriceAggregate item,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)?
+        verifyMaterialDealBonus,
+    TResult? Function(CartItem item)? removeFromCart,
+    TResult? Function(CartItem item, String message)? addRemarkToCartItem,
+    TResult? Function(
+            CartItem item,
+            MaterialItemBonus bonusItem,
+            bool overrideQty,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool doNotallowOutOfStockMaterial)?
+        addBonusToCartItem,
+    TResult? Function(CartItem item, MaterialItemBonus bonusItem)?
+        removeBonusFromCartItem,
+    TResult? Function(
+            CartItem item, MaterialItemBonus bonusItem, String message)?
+        addRemarkToBonusItem,
+    TResult? Function(List<Price> overridenPrice, CartItem cartItem)?
+        overrideCartItemPrice,
+    TResult? Function(CartItem cartItem)? selectButtonTapped,
+    TResult? Function()? selectAllButtonTapped,
+    TResult? Function()? clearCart,
+    TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
+    TResult? Function(
+            List<CartItem> items,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool doNotallowOutOfStockMaterial)?
+        replaceWithOrderItems,
+  }) {
+    return clearSelectedItemsFromCart?.call(selectedItemIds);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool doNotAllowOutOfStockMaterials)?
+        fetch,
+    TResult Function(
+            PriceAggregate item,
+            bool overrideQty,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool doNotallowOutOfStockMaterial)?
+        addMaterialToCart,
+    TResult Function(PriceAggregate item)? discountOverride,
+    TResult Function(
+            List<PriceAggregate> bundleItems,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool doNotallowOutOfStockMaterial)?
+        addBundleToCart,
+    TResult Function(
+            List<PriceAggregate> comboDealItems,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool doNotallowOutOfStockMaterial,
+            bool overrideQty)?
+        addComboDealToCart,
+    TResult Function(
+            CartItem currentItem,
+            PriceAggregate updatedQtyItem,
+            bool overrideQty,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool doNotallowOutOfStockMaterial)?
+        updateMaterialQtyInCartItem,
+    TResult Function(
+            PriceAggregate item,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)?
+        verifyMaterialDealBonus,
+    TResult Function(CartItem item)? removeFromCart,
+    TResult Function(CartItem item, String message)? addRemarkToCartItem,
+    TResult Function(
+            CartItem item,
+            MaterialItemBonus bonusItem,
+            bool overrideQty,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool doNotallowOutOfStockMaterial)?
+        addBonusToCartItem,
+    TResult Function(CartItem item, MaterialItemBonus bonusItem)?
+        removeBonusFromCartItem,
+    TResult Function(
+            CartItem item, MaterialItemBonus bonusItem, String message)?
+        addRemarkToBonusItem,
+    TResult Function(List<Price> overridenPrice, CartItem cartItem)?
+        overrideCartItemPrice,
+    TResult Function(CartItem cartItem)? selectButtonTapped,
+    TResult Function()? selectAllButtonTapped,
+    TResult Function()? clearCart,
+    TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
+    TResult Function(
+            List<CartItem> items,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            bool doNotallowOutOfStockMaterial)?
+        replaceWithOrderItems,
+    required TResult orElse(),
+  }) {
+    if (clearSelectedItemsFromCart != null) {
+      return clearSelectedItemsFromCart(selectedItemIds);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_AddMaterialToCart value) addMaterialToCart,
+    required TResult Function(_DiscountOverride value) discountOverride,
+    required TResult Function(_AddBundleToCart value) addBundleToCart,
+    required TResult Function(_AddComboDealToCart value) addComboDealToCart,
+    required TResult Function(_UpdateMaterialQtyInCartItem value)
+        updateMaterialQtyInCartItem,
+    required TResult Function(_VerifyMaterialDealBonus value)
+        verifyMaterialDealBonus,
+    required TResult Function(_RemoveFromCart value) removeFromCart,
+    required TResult Function(_AddRemarkToCartItem value) addRemarkToCartItem,
+    required TResult Function(_AddBonusToCartItem value) addBonusToCartItem,
+    required TResult Function(_RemoveBonusFromCartItem value)
+        removeBonusFromCartItem,
+    required TResult Function(_AddRemarkToBonusItem value) addRemarkToBonusItem,
+    required TResult Function(_OverrideCartItemPrice value)
+        overrideCartItemPrice,
+    required TResult Function(_SelectButtonTapped value) selectButtonTapped,
+    required TResult Function(_SelectAllButtonTapped value)
+        selectAllButtonTapped,
+    required TResult Function(_ClearCart value) clearCart,
+    required TResult Function(_ClearSelectedItemsFromCart value)
+        clearSelectedItemsFromCart,
+    required TResult Function(_ReplaceWithOrderItems value)
+        replaceWithOrderItems,
+  }) {
+    return clearSelectedItemsFromCart(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_AddMaterialToCart value)? addMaterialToCart,
+    TResult? Function(_DiscountOverride value)? discountOverride,
+    TResult? Function(_AddBundleToCart value)? addBundleToCart,
+    TResult? Function(_AddComboDealToCart value)? addComboDealToCart,
+    TResult? Function(_UpdateMaterialQtyInCartItem value)?
+        updateMaterialQtyInCartItem,
+    TResult? Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
+    TResult? Function(_RemoveFromCart value)? removeFromCart,
+    TResult? Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
+    TResult? Function(_AddBonusToCartItem value)? addBonusToCartItem,
+    TResult? Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
+    TResult? Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
+    TResult? Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
+    TResult? Function(_SelectButtonTapped value)? selectButtonTapped,
+    TResult? Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
+    TResult? Function(_ClearCart value)? clearCart,
+    TResult? Function(_ClearSelectedItemsFromCart value)?
+        clearSelectedItemsFromCart,
+    TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
+  }) {
+    return clearSelectedItemsFromCart?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_AddMaterialToCart value)? addMaterialToCart,
+    TResult Function(_DiscountOverride value)? discountOverride,
+    TResult Function(_AddBundleToCart value)? addBundleToCart,
+    TResult Function(_AddComboDealToCart value)? addComboDealToCart,
+    TResult Function(_UpdateMaterialQtyInCartItem value)?
+        updateMaterialQtyInCartItem,
+    TResult Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
+    TResult Function(_RemoveFromCart value)? removeFromCart,
+    TResult Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
+    TResult Function(_AddBonusToCartItem value)? addBonusToCartItem,
+    TResult Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
+    TResult Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
+    TResult Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
+    TResult Function(_SelectButtonTapped value)? selectButtonTapped,
+    TResult Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
+    TResult Function(_ClearCart value)? clearCart,
+    TResult Function(_ClearSelectedItemsFromCart value)?
+        clearSelectedItemsFromCart,
+    TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
+    required TResult orElse(),
+  }) {
+    if (clearSelectedItemsFromCart != null) {
+      return clearSelectedItemsFromCart(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ClearSelectedItemsFromCart implements CartEvent {
+  const factory _ClearSelectedItemsFromCart(
+          {required final List<String> selectedItemIds}) =
+      _$_ClearSelectedItemsFromCart;
+
+  List<String> get selectedItemIds;
+  @JsonKey(ignore: true)
+  _$$_ClearSelectedItemsFromCartCopyWith<_$_ClearSelectedItemsFromCart>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -9061,6 +9694,8 @@ class _$_ReplaceWithOrderItems implements _ReplaceWithOrderItems {
     required TResult Function(CartItem cartItem) selectButtonTapped,
     required TResult Function() selectAllButtonTapped,
     required TResult Function() clearCart,
+    required TResult Function(List<String> selectedItemIds)
+        clearSelectedItemsFromCart,
     required TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -9156,6 +9791,7 @@ class _$_ReplaceWithOrderItems implements _ReplaceWithOrderItems {
     TResult? Function(CartItem cartItem)? selectButtonTapped,
     TResult? Function()? selectAllButtonTapped,
     TResult? Function()? clearCart,
+    TResult? Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult? Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -9251,6 +9887,7 @@ class _$_ReplaceWithOrderItems implements _ReplaceWithOrderItems {
     TResult Function(CartItem cartItem)? selectButtonTapped,
     TResult Function()? selectAllButtonTapped,
     TResult Function()? clearCart,
+    TResult Function(List<String> selectedItemIds)? clearSelectedItemsFromCart,
     TResult Function(
             List<CartItem> items,
             SalesOrganisationConfigs salesOrganisationConfigs,
@@ -9298,6 +9935,8 @@ class _$_ReplaceWithOrderItems implements _ReplaceWithOrderItems {
     required TResult Function(_SelectAllButtonTapped value)
         selectAllButtonTapped,
     required TResult Function(_ClearCart value) clearCart,
+    required TResult Function(_ClearSelectedItemsFromCart value)
+        clearSelectedItemsFromCart,
     required TResult Function(_ReplaceWithOrderItems value)
         replaceWithOrderItems,
   }) {
@@ -9325,6 +9964,8 @@ class _$_ReplaceWithOrderItems implements _ReplaceWithOrderItems {
     TResult? Function(_SelectButtonTapped value)? selectButtonTapped,
     TResult? Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult? Function(_ClearCart value)? clearCart,
+    TResult? Function(_ClearSelectedItemsFromCart value)?
+        clearSelectedItemsFromCart,
     TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
   }) {
     return replaceWithOrderItems?.call(this);
@@ -9351,6 +9992,8 @@ class _$_ReplaceWithOrderItems implements _ReplaceWithOrderItems {
     TResult Function(_SelectButtonTapped value)? selectButtonTapped,
     TResult Function(_SelectAllButtonTapped value)? selectAllButtonTapped,
     TResult Function(_ClearCart value)? clearCart,
+    TResult Function(_ClearSelectedItemsFromCart value)?
+        clearSelectedItemsFromCart,
     TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
     required TResult orElse(),
   }) {

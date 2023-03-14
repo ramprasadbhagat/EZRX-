@@ -193,6 +193,17 @@ void main() {
     );
 
     when(
+      () => cartStorageMock.getAll(),
+    ).thenReturn([]);
+
+    when(
+      () => cartStorageMock
+          .deleteSelectedItems(selectedItemIds: ['0000012345678']),
+    ).thenAnswer(
+      (invocation) async => Future.delayed(const Duration(seconds: 2)),
+    );
+
+    when(
       () => cartStorageMock.delete(
         id: fakeCartItem.id,
       ),
@@ -215,6 +226,12 @@ void main() {
     ).thenAnswer(
       (invocation) async => const Right(unit),
     );
+  });
+
+  test('Test Clear Select Items Cart - Success', () async {
+    final result = await cartRepository
+        .clearCartOnlySelectedItems(selectedItemIds: ['0000012345678']);
+    expect(result.isRight(), true);
   });
 
   test('Test Fetch Cart - Success', () async {
@@ -246,6 +263,19 @@ void main() {
     );
 
     final result = await cartRepository.clearCart();
+    expect(result.isLeft(), true);
+  });
+
+  test('Test Clear Selected Item Cart - Failure', () async {
+    when(
+      () => cartStorageMock
+          .deleteSelectedItems(selectedItemIds: ['0000012345678']),
+    ).thenThrow(
+      (invocation) async => MockException(),
+    );
+
+    final result = await cartRepository
+        .clearCartOnlySelectedItems(selectedItemIds: ['0000012345678']);
     expect(result.isLeft(), true);
   });
 

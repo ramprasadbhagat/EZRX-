@@ -122,4 +122,14 @@ class CartStorage {
       throw CacheException(message: e.toString());
     }
   }
+
+  Future<void> deleteSelectedItems({
+    required List<String> selectedItemIds,
+  }) async {
+    try {
+      await _cartBox.deleteAll(selectedItemIds);
+    } catch (e) {
+      throw CacheException(message: e.toString());
+    }
+  }
 }
