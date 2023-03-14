@@ -756,9 +756,9 @@ void main() {
       final cartItem =
           CartItem.comboDeal([fakePriceAggregate1, fakePriceAggregate2]);
       expect(cartItem.listPrice, 503.00);
-      expect(cartItem.unitPrice, 427.55);
-      expect(cartItem.grandTotalPrice, 427.55);
-      expect(cartItem.subTotalPrice, 427.55);
+      expect(cartItem.unitPrice, 427.54);
+      expect(cartItem.grandTotalPrice, 427.54);
+      expect(cartItem.subTotalPrice, 427.54);
     });
   });
 }

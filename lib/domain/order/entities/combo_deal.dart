@@ -60,14 +60,16 @@ class ComboDeal with _$ComboDeal {
     if (materialComboDeals.isNotEmpty &&
         allMaterials.every((item) => item.mandatory)) {
       return ComboDealScheme.k1;
-    } else if (flexiSKUTier.isEmpty && flexiQtyTier.isNotEmpty) {
-      return ComboDealScheme.k4;
     }
 
     if (flexiAmountTier.isEmpty &&
         flexiSKUTier.isEmpty &&
         (groupDeal != ComboDealGroupDeal.empty() || flexiQtyTier.length == 1)) {
       return ComboDealScheme.k2;
+    }
+
+    if (flexiSKUTier.isEmpty && flexiQtyTier.isNotEmpty) {
+      return ComboDealScheme.k4;
     }
 
     return ComboDealScheme.k1;
