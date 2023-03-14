@@ -36,7 +36,6 @@ class RequestReturn extends StatelessWidget {
         MixpanelProps.pageViewName: runtimeType.toString(),
       },
     );
-    const radius = 16.0;
 
     return Scaffold(
       key: scaffoldKey,

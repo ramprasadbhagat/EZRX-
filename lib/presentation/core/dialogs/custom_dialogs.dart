@@ -26,14 +26,14 @@ class CustomDialogs {
               child: Text(cancelText).tr(),
               onPressed: () async {
                 if (onCancelPressed != null) await onCancelPressed();
-                await context.router.pop();
+                if (context.mounted) await context.router.pop();
               },
             ),
             PlatformDialogAction(
               key: Key(confirmText),
               onPressed: () async {
                 if (onAcceptPressed != null) await onAcceptPressed();
-                await context.router.pop();
+                if (context.mounted) await context.router.pop();
               },
               child: Text(confirmText).tr(),
             ),

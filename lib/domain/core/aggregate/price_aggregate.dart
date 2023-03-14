@@ -287,14 +287,12 @@ class PriceAggregate with _$PriceAggregate {
         orElse: () => PriceBonusItem.empty(),
       );
 
-  @protected
   Iterable<MaterialItemBonus> get addedDealBonusMaterial =>
       addedBonusList.where(
         (MaterialItemBonus element) =>
             !element.additionalBonusFlag && element.bonusOverrideFlag,
       );
 
-  @protected
   List<BonusMaterial> get calculateMaterialItemBonus {
     switch (_bonusItem.calculation.getCalculationEnum) {
       case BonusMaterialCalculationEnum.calculation915:

@@ -118,8 +118,7 @@ class _PoAttachmentState extends State<PoAttachment> {
                                           .read<PoAttachmentBloc>()
                                           .add(PoAttachmentEvent.downloadFile(
                                             files: [poDocuments],
-                                            fetchMode:
-                                                FileOperationhMode.view,
+                                            fetchMode: FileOperationhMode.view,
                                           ));
                                     },
                                     child: _PoAttachmentWidget(
@@ -161,7 +160,7 @@ class _PoAttachmentState extends State<PoAttachment> {
                                     style: const TextStyle(
                                       shadows: [
                                         Shadow(
-                                            color: ZPColors.darkerGreen,
+                                          color: ZPColors.darkerGreen,
                                           offset: Offset(0, -2),
                                         ),
                                       ],
@@ -192,6 +191,7 @@ class _PoAttachmentState extends State<PoAttachment> {
                                   !(await locator<PermissionService>()
                                       .requeststoragePermission()
                                       .isGranted)) {
+                                if (!mounted) return;
                                 showSnackBar(
                                   context: context,
                                   message:
@@ -226,7 +226,7 @@ class _PoAttachmentState extends State<PoAttachment> {
                                   style: const TextStyle(
                                     shadows: [
                                       Shadow(
-                                          color: ZPColors.darkerGreen,
+                                        color: ZPColors.darkerGreen,
                                         offset: Offset(0, -2),
                                       ),
                                     ],
@@ -261,10 +261,12 @@ class _PoAttachmentState extends State<PoAttachment> {
     await file.writeAsBytes(orderHistoryDetailsPoDocumentsBuffer.buffer);
     final result = await OpenFile.open(file.path);
     if (result.type != ResultType.done) {
-      showSnackBar(
-        context: context,
-        message: result.message.tr(),
-      );
+      if (context.mounted) {
+        showSnackBar(
+          context: context,
+          message: result.message.tr(),
+        );
+      }
     }
   }
 
@@ -293,6 +295,7 @@ class _PoAttachmentState extends State<PoAttachment> {
         );
         await file.writeAsBytes(orderHistoryDetailsPoDocumentsBuffer.buffer);
       }
+      if (!mounted) return;
       showSnackBar(
         context: context,
         message: 'All attachments downloaded successfully.'.tr(),

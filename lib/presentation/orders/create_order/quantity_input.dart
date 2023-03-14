@@ -63,7 +63,7 @@ class QuantityInput extends StatelessWidget {
               contentPadding: EdgeInsets.zero,
               border: isEnabled ? const UnderlineInputBorder() : InputBorder.none,
             ),
-            style: Theme.of(context).textTheme.headline5,
+            style: Theme.of(context).textTheme.titleMedium,
           ),
         ),
         isLoading

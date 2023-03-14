@@ -40,7 +40,7 @@ class ProfileTile extends StatelessWidget {
           title: state.isNotEmpty
               ? Text(
                   state.userFullName.toString(),
-                  style: Theme.of(context).textTheme.headline6,
+                  style: Theme.of(context).textTheme.titleLarge,
                 )
               : LoadingShimmer.tile(line: 3),
           subtitle: state.isNotEmpty

@@ -85,10 +85,10 @@ class ExpansionTile extends StatefulWidget {
   final bool threeLineTitle;
 
   @override
-  _ExpansionTileState createState() => _ExpansionTileState();
+  ExpansionTileState createState() => ExpansionTileState();
 }
 
-class _ExpansionTileState extends State<ExpansionTile>
+class ExpansionTileState extends State<ExpansionTile>
     with SingleTickerProviderStateMixin {
   static final Animatable<double> _easeOutTween =
       CurveTween(curve: Curves.easeOut);

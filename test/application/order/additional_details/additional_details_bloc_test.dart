@@ -28,7 +28,6 @@ void main() {
   late AdditionalDetailsState state;
   late AdditionalDetailsData data;
   late OrderRepository repository;
-  late CartRepository cartRepository;
   late SavedOrder orderDetail;
   group(
     'Additional Details Bloc Test',
@@ -47,7 +46,6 @@ void main() {
           );
           customerCodeInfo = CustomerCodeInfo.empty();
           repository = SavedOrderRepositoryMock();
-          cartRepository = CartRepositoryMock();
           state = AdditionalDetailsState.initial();
           data = AdditionalDetailsData.empty();
         },

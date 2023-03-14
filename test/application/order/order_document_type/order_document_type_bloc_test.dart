@@ -19,7 +19,6 @@ class OrderDocumentTypeRepositoryMock extends Mock
 class CartStorageMock extends Mock implements CartStorage {}
 
 void main() {
-  late CartStorage cartStorageMock;
   final orderDocumentTypeRepository = OrderDocumentTypeRepositoryMock();
 
   final mockSalesOrganisation = SalesOrganisation.empty();
@@ -39,7 +38,6 @@ void main() {
     WidgetsFlutterBinding.ensureInitialized();
     orderTypeFromStorage =
         OrderDocumentType.defaultSelected(salesOrg: SalesOrg('2601'));
-    cartStorageMock = CartStorageMock();
     orderDocumentTypeListMock =
         await OrderDocumentTypeLocalDataSource().getOrderDocumentTypList();
     orderDocumentTypeListEDICustomerMock =

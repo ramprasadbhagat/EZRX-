@@ -36,10 +36,6 @@ void main() async {
     salesDeal: SalesDealNumber('fake-deal'),
   );
 
-  final fakeQueryMaterialNumbers = [
-    MaterialNumber('000000000023210571'),
-    MaterialNumber('000000000023245612'),
-  ];
   final fakeComboDeals = [ComboDeal.empty()];
 
   setUp(() {

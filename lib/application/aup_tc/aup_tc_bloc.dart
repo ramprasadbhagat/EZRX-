@@ -35,11 +35,6 @@ class AupTcBloc extends Bloc<AupTcEvent, AupTcState> {
     );
   }
 
-  @override
-  Future<void> close() async {
-    return super.close();
-  }
-
   String? _getInitialFile(SalesOrg salesOrg) {
     final salesOrgCountry = salesOrg.country;
 

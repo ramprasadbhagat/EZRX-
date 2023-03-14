@@ -68,7 +68,7 @@ class _PriceSheetState extends State<PriceSheet> {
                     Center(
                       child: Text(
                         widget.item.materialInfo.materialDescription,
-                        style: Theme.of(context).textTheme.headline6?.apply(
+                        style: Theme.of(context).textTheme.titleLarge?.apply(
                               color: ZPColors.black,
                             ),
                       ),

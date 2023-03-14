@@ -87,11 +87,6 @@ class ProxyLoginFormBloc
   }
 
   @override
-  Future<void> close() async {
-    return super.close();
-  }
-
-  @override
   void onChange(Change<ProxyLoginFormState> change) {
     super.onChange(change);
     // print(change);

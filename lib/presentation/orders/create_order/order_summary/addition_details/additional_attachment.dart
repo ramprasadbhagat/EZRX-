@@ -220,23 +220,9 @@ class _PoUploadOptionPickerState extends State<_PoUploadOptionPicker> {
   Future<void> uploadFile({
     required UploadOptionType uploadOptionType,
   }) async {
-    if (!(uploadOptionType == UploadOptionType.file &&
-        defaultTargetPlatform == TargetPlatform.iOS)) {
-      final permissionStatus = defaultTargetPlatform == TargetPlatform.iOS
-          ? await locator<PermissionService>().requestPhotoPermission()
-          : await locator<PermissionService>().requeststoragePermission();
-      if (!permissionStatus.isGranted && !permissionStatus.isLimited) {
-        showSnackBar(
-          context: context,
-          message: defaultTargetPlatform == TargetPlatform.iOS
-              ? 'Please enable Photos permission from the app settings'.tr()
-              : 'Please enable Storage permission from the app settings'.tr(),
-        );
-        await context.router.pop();
+    final shouldAllowUpload = await checkPermissions(uploadOptionType);
+    if (!shouldAllowUpload) return;
 
-        return;
-      }
-    }
     FilePickerResult? result;
     try {
       result = await locator<FilePickerService>().pickFiles(
@@ -252,15 +238,18 @@ class _PoUploadOptionPickerState extends State<_PoUploadOptionPicker> {
       final message =
           'Unable to upload file as either file format not supported or something wrong with the file'
               .tr();
-      showSnackBar(
-        context: context,
-        message: message,
-      );
-      await context.router.pop();
+      if (context.mounted) {
+        showSnackBar(
+          context: context,
+          message: message,
+        );
+        await context.router.pop();
+      }
 
       return;
     }
 
+    if (!mounted) return;
     await context.router.pop();
     if (result == null) return;
 
@@ -287,6 +276,30 @@ class _PoUploadOptionPickerState extends State<_PoUploadOptionPicker> {
                 .poDocuments,
           ),
         );
+  }
+
+  Future<bool> checkPermissions(UploadOptionType uploadOptionType) async {
+    if (!(uploadOptionType == UploadOptionType.file &&
+        defaultTargetPlatform == TargetPlatform.iOS)) {
+      final permissionStatus = defaultTargetPlatform == TargetPlatform.iOS
+          ? await locator<PermissionService>().requestPhotoPermission()
+          : await locator<PermissionService>().requeststoragePermission();
+      if (!permissionStatus.isGranted &&
+          !permissionStatus.isLimited &&
+          mounted) {
+        showSnackBar(
+          context: context,
+          message: defaultTargetPlatform == TargetPlatform.iOS
+              ? 'Please enable Photos permission from the app settings'.tr()
+              : 'Please enable Storage permission from the app settings'.tr(),
+        );
+        await context.router.pop();
+
+        return Future.value(false);
+      }
+    }
+
+    return Future.value(true);
   }
 }
 

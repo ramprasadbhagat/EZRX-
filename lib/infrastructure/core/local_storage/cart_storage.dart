@@ -69,7 +69,7 @@ class CartStorage {
       );
     } catch (e) {
       await Hive.deleteBoxFromDisk(_boxName);
-      Hive.resetAdapters();
+      //Hive.resetAdapters();
       await init();
     }
   }

@@ -82,18 +82,22 @@ class BannerTile extends StatelessWidget {
                       },
                     );
                     if (banner.isKeyword && banner.keyword != '') {
-                      context.read<MaterialListBloc>().add(
-                            MaterialListEvent.updateSearchKey(
-                              searchKey: banner.keyword,
-                            ),
-                          );
-                      await context.router.pushNamed('material_list_page');
+                      if (context.mounted) {
+                        context.read<MaterialListBloc>().add(
+                              MaterialListEvent.updateSearchKey(
+                                searchKey: banner.keyword,
+                              ),
+                            );
+                        await context.router.pushNamed('material_list_page');
+                      }
                     } else if (banner.urlLink.isNotEmpty) {
-                      await context.router.push(
-                        WebViewPageRoute(
-                          url: banner.urlLink,
-                        ),
-                      );
+                      if (context.mounted) {
+                        await context.router.push(
+                          WebViewPageRoute(
+                            url: banner.urlLink,
+                          ),
+                        );
+                      }
                     }
                   },
                   child: Image.memory(

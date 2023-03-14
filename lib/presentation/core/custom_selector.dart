@@ -32,7 +32,7 @@ class CustomSelector extends StatelessWidget {
                   title,
                   style: Theme.of(context)
                       .textTheme
-                      .caption
+                      .titleSmall
                       ?.apply(color: ZPColors.lightGray),
                   locale: locale,
                 ),

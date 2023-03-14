@@ -117,15 +117,4 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
       },
     );
   }
-
-  @override
-  Future<void> close() async {
-    return super.close();
-  }
-
-  @override
-  void onChange(Change<LoginFormState> change) {
-    super.onChange(change);
-    // print(change);
-  }
 }
