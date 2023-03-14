@@ -32,16 +32,13 @@ class OrderHistoryFilter with _$OrderHistoryFilter {
         ),
       );
 
-  int get appliedFilterCount {
-    var count = 1;
-
-    count += orderId.countWhenValid +
+  int get appliedFilterCount =>
+      orderId.countWhenValid +
         poNumber.countWhenValid +
         materialSearch.countWhenValid +
-        principalSearch.countWhenValid;
+      principalSearch.countWhenValid +
+      1;
 
-    return count;
-  }
 
   // to check if any filter applied
   bool get anyFilterApplied => this != OrderHistoryFilter.empty();

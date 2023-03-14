@@ -43,15 +43,10 @@ class ReturnApproverFilter with _$ReturnApproverFilter {
         end: toInvoiceDate.dateTimeByDateString,
       );
 
-  int get appliedFilterCount {
-    var count = toInvoiceDate.isValid() && fromInvoiceDate.isValid() ? 1 : 0;
-
-    count += returnId.countWhenValid +
-        createdBy.countWhenValid +
-        soldTo.countWhenValid +
-        shipTo.countWhenValid;
-
-    return count;
-  }
-
+  int get appliedFilterCount =>
+      returnId.countWhenValid +
+      createdBy.countWhenValid +
+      soldTo.countWhenValid +
+      shipTo.countWhenValid +
+      1;
 }

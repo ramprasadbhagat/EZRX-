@@ -281,11 +281,10 @@ class _ApplyButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       key: const Key('filterApplyButton'),
-      onPressed: () async {
+      onPressed: () => 
         context.read<ReturnApproverFilterBloc>().add(
               const ReturnApproverFilterEvent.applyFilters(),
-            );
-      },
+          ),
       child: Text(
         'Apply'.tr(),
         style: const TextStyle(color: ZPColors.white),
