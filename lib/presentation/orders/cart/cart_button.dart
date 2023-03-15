@@ -3,6 +3,7 @@ import 'package:badges/badges.dart' as bd;
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
@@ -45,11 +46,19 @@ class CartButton extends StatelessWidget {
                     trackMixpanelEvent(
                       MixpanelEvents.cartWindow,
                     );
+                    final isSpecialOrderType = context
+                        .read<OrderDocumentTypeBloc>()
+                        .state
+                        .isSpecialOrderType;
                     locator<CountlyService>()
                         .addCountlyEvent('Cart Window', segmentation: {
                       'numItemInCart': cartState.cartItems.length,
-                      'subTotal': cartState.subtotal,
-                      'grandTotal': cartState.grandTotal,
+                      'subTotal': cartState.subTotalBasedOnOrderType(
+                        isSpecial: isSpecialOrderType,
+                      ),
+                      'grandTotal': cartState.grandTotalBasedOnOrderType(
+                        isSpecial: isSpecialOrderType,
+                      ),
                     });
                     context.read<AdditionalDetailsBloc>().add(
                           const AdditionalDetailsEvent.clearSavedOrderId(),

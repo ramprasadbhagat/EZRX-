@@ -224,6 +224,8 @@ class _SubmitContinueButton extends StatelessWidget {
     trackMixpanelEvent(
       MixpanelEvents.submitOrder,
     );
+    final isSpecialType =
+        context.read<OrderDocumentTypeBloc>().state.isSpecialOrderType;
     context.read<OrderSummaryBloc>().add(OrderSummaryEvent.submitOrder(
           config: context.read<SalesOrgBloc>().state.configs,
           shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
@@ -234,7 +236,9 @@ class _SubmitContinueButton extends StatelessWidget {
           user: context.read<UserBloc>().state.user,
           cartItems:
               context.read<CartBloc>().state.selectedCartItems.allMaterials,
-          grandTotal: context.read<CartBloc>().state.grandTotal,
+          grandTotal: context.read<CartBloc>().state.grandTotalBasedOnOrderType(
+                isSpecial: isSpecialType,
+              ),
           orderType: context
               .read<OrderDocumentTypeBloc>()
               .state
@@ -372,6 +376,8 @@ class _UtilityButton extends StatelessWidget {
     trackMixpanelEvent(
       MixpanelEvents.saveOrder,
     );
+    final isSpecialType =
+        context.read<OrderDocumentTypeBloc>().state.isSpecialOrderType;
     isUpdate
         ? context.read<SavedOrderListBloc>().add(
               SavedOrderListEvent.updateDraft(
@@ -382,7 +388,10 @@ class _UtilityButton extends StatelessWidget {
                     context.read<SalesOrgBloc>().state.salesOrganisation,
                 user: context.read<UserBloc>().state.user,
                 cartItems: context.read<CartBloc>().state.selectedCartItems,
-                grandTotal: context.read<CartBloc>().state.grandTotal,
+                grandTotal: context
+                    .read<CartBloc>()
+                    .state
+                    .grandTotalBasedOnOrderType(isSpecial: isSpecialType),
                 data: context
                     .read<AdditionalDetailsBloc>()
                     .state
@@ -399,7 +408,10 @@ class _UtilityButton extends StatelessWidget {
                     context.read<SalesOrgBloc>().state.salesOrganisation,
                 user: context.read<UserBloc>().state.user,
                 cartItems: context.read<CartBloc>().state.selectedCartItems,
-                grandTotal: context.read<CartBloc>().state.grandTotal,
+                grandTotal: context
+                    .read<CartBloc>()
+                    .state
+                    .grandTotalBasedOnOrderType(isSpecial: isSpecialType),
                 data: context
                     .read<AdditionalDetailsBloc>()
                     .state
@@ -847,8 +859,12 @@ class _CartItemsSection extends StatelessWidget {
                     .selectedOrderType
                     .documentType
                     .getOrDefaultValue(''),
-                grandTotal: cartState.grandTotal,
-                subTotal: cartState.subtotal,
+                grandTotal: cartState.grandTotalBasedOnOrderType(
+                  isSpecial: isSpecialOrderType,
+                ),
+                subTotal: cartState.subTotalBasedOnOrderType(
+                  isSpecial: isSpecialOrderType,
+                ),
               ),
             );
 
@@ -859,7 +875,9 @@ class _CartItemsSection extends StatelessWidget {
               keyText: 'Subtotal'.tr(),
               valueText: StringUtils.displayPrice(
                 salesOrgConfig,
-                isSpecialOrderType ? 0.0 : cartState.subtotal,
+                cartState.subTotalBasedOnOrderType(
+                  isSpecial: isSpecialOrderType,
+                ),
               ),
             ),
             if (vatInPercentage.salesOrgConfigs.shouldDisplayVATInPercentage)
@@ -872,7 +890,9 @@ class _CartItemsSection extends StatelessWidget {
                 keyText: taxCode.tr(),
                 valueText: StringUtils.displayPrice(
                   salesOrgConfig,
-                  isSpecialOrderType ? 0.0 : cartState.vatTotal,
+                  cartState.vatTotalOnOrderType(
+                    isSpecial: isSpecialOrderType,
+                  ),
                 ),
               ),
             BalanceTextRow(
@@ -888,7 +908,9 @@ class _CartItemsSection extends StatelessWidget {
               keyText: 'Grand Total'.tr(),
               valueText: StringUtils.displayPrice(
                 salesOrgConfig,
-                isSpecialOrderType ? 0.0 : cartState.grandTotal,
+                cartState.grandTotalBasedOnOrderType(
+                  isSpecial: isSpecialOrderType,
+                ),
               ),
             ),
             const SizedBox(

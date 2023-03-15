@@ -182,6 +182,9 @@ class PriceAggregate with _$PriceAggregate {
     return finalPrice * quantity;
   }
 
+  double get totalVatForBundle =>
+      salesOrgConfig.shouldShowTax ? salesOrgConfig.vatValue / 100 : 0.0;
+
   double get unitPriceTotal {
     return salesOrgConfig.enableTaxAtTotalLevelOnly
         ? unitPriceForTotal * quantity

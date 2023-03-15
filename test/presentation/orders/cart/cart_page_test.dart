@@ -140,6 +140,7 @@ void main() {
   late List<PriceAggregate> mockCartItemWithDataList;
   late List<PriceAggregate> mockCartItemWithDataList2;
   late List<PriceAggregate> mockCartItemBundles;
+  late List<PriceAggregate> mockCartItemBundles2;
   // ignore: unused_local_variable
   late List<PriceAggregate> mockCartItemDiscountBundles;
   late MaterialListBloc materialListBlocMock;
@@ -195,6 +196,74 @@ void main() {
           () => Price.empty().copyWith(
                 finalPrice: MaterialPrice(4.5),
               ));
+
+      mockCartItemBundles2 = [
+        PriceAggregate.empty().copyWith(
+          addedBonusList: [
+            MaterialItemBonus.empty().copyWith(
+                materialInfo: MaterialInfo.empty().copyWith(
+              materialNumber: MaterialNumber('0000000000111111'),
+              materialDescription: ' Mosys D',
+              principalData: PrincipalData.empty().copyWith(
+                principalName: PrincipalName('å�°ç�£æ‹œè€³è‚¡ä»½æœ‰é™�å…¬å�¸'),
+              ),
+            )),
+          ],
+          salesOrgConfig: SalesOrganisationConfigs.empty().copyWith(
+            vatValue: 8,
+            enableVat: true,
+            enableTaxClassification: true,
+            enableTaxAtTotalLevelOnly: true,
+          ),
+          quantity: 5,
+          bundle: Bundle(
+            materials: <MaterialInfo>[
+              MaterialInfo.empty().copyWith(
+                materialNumber: MaterialNumber('000000000023168451'),
+                materialDescription: ' Triglyceride Mosys D',
+                principalData: PrincipalData.empty().copyWith(
+                  principalName:
+                      PrincipalName('å�°ç�£æ‹œè€³è‚¡ä»½æœ‰é™�å…¬å�¸'),
+                ),
+                remarks: '',
+              )
+            ],
+            bundleInformation: [
+              BundleInfo.empty().copyWith(
+                quantity: 1,
+                rate: 20.0,
+                sequence: 1,
+                type: DiscountType('%'),
+              ),
+              BundleInfo.empty().copyWith(
+                quantity: 10,
+                rate: 19.0,
+                sequence: 2,
+                type: DiscountType('%'),
+              ),
+              BundleInfo.empty().copyWith(
+                quantity: 100,
+                rate: 15.0,
+                sequence: 3,
+                type: DiscountType('%'),
+              ),
+            ],
+            bundleCode: '',
+            bundleName: BundleName('test'),
+          ),
+          materialInfo: MaterialInfo.empty().copyWith(
+            materialNumber: MaterialNumber('000000000023168451'),
+            materialDescription: ' Triglyceride Mosys D',
+            principalData: PrincipalData.empty().copyWith(
+              principalName: PrincipalName('å�°ç�£æ‹œè€³è‚¡ä»½æœ‰é™�å…¬å�¸'),
+            ),
+            remarks: '',
+          ),
+          stockInfo: StockInfo.empty().copyWith(
+            inStock: MaterialInStock('Yes'),
+          ),
+        ),
+      ];
 
       mockCartItemBundles = [
         PriceAggregate.empty().copyWith(
@@ -1591,6 +1660,114 @@ void main() {
           warnIfMissed: false,
         );
         await tester.pump();
+      });
+
+      testWidgets('Test to have correct GST and totalPrice', (tester) async {
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartItems: [CartItem.bundle(mockCartItemBundles2)],
+            isFetching: false,
+          ),
+        );
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+              vatValue: 8,
+              enableVat: true,
+              enableTaxClassification: true,
+              enableTaxAtTotalLevelOnly: true,
+            ),
+          ),
+        );
+        when(() => salesOrgBloc.state).thenReturn(
+          SalesOrgState.initial().copyWith(
+            configs: SalesOrganisationConfigs.empty().copyWith(
+              vatValue: 8,
+              enableVat: true,
+              enableTaxClassification: true,
+              enableTaxAtTotalLevelOnly: true,
+            ),
+          ),
+        );
+        await tester.runAsync(() async {
+          await tester.pumpWidget(getWidget());
+        });
+
+        await tester.pump();
+        final taxcodeInPercentageKey =
+            find.byKey(const Key('taxcodeInPercentageKey'));
+        expect(taxcodeInPercentageKey, findsOneWidget);
+        expect(find.text('VAT in %'), findsOneWidget);
+
+        final totalTaxKey = find.byKey(const Key('totalTaxKey'));
+        expect(totalTaxKey, findsOneWidget);
+        expect(find.text('VAT'), findsOneWidget);
+        final grandTotalKey = find.byKey(const Key('grandTotalKey'));
+        expect(grandTotalKey, findsOneWidget);
+        expect(find.text('Grand Total'), findsOneWidget);
+        expect(
+            cartBloc.state.grandTotalBasedOnOrderType(isSpecial: false), 108.0);
+      });
+
+      testWidgets('Test to have correct GST and totalPrice with Bundle',
+          (tester) async {
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartItems: [CartItem.bundle(mockCartItemBundles2)],
+            isFetching: false,
+          ),
+        );
+        when(() => orderDocumentTypeBlocMock.state).thenReturn(
+          OrderDocumentTypeState.initial().copyWith(
+              isOrderTypeSelected: true,
+              selectedOrderType: OrderDocumentType.empty().copyWith(
+                documentType: DocumentType('ZPFB'),
+              )),
+        );
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+              vatValue: 8,
+              enableVat: true,
+              enableTaxClassification: true,
+              enableTaxAtTotalLevelOnly: true,
+              currency: Currency('SGD'),
+            ),
+          ),
+        );
+        when(() => salesOrgBloc.state).thenReturn(
+          SalesOrgState.initial().copyWith(
+            configs: SalesOrganisationConfigs.empty().copyWith(
+              vatValue: 8,
+              enableVat: true,
+              enableTaxClassification: true,
+              enableTaxAtTotalLevelOnly: true,
+              currency: Currency('SGD'),
+            ),
+          ),
+        );
+        await tester.runAsync(() async {
+          await tester.pumpWidget(getWidget());
+        });
+        tester.binding.window.physicalSizeTestValue = const Size(1080, 1920);
+        tester.binding.window.devicePixelRatioTestValue = 1.0;
+
+        await tester.pumpAndSettle(const Duration(seconds: 5));
+        final taxcodeInPercentageKey =
+            find.byKey(const Key('taxcodeInPercentageKey'));
+        expect(taxcodeInPercentageKey, findsOneWidget);
+        expect(find.text('VAT in %'), findsOneWidget);
+
+        final totalTaxKey = find.byKey(const Key('totalTaxKey'));
+        expect(totalTaxKey, findsOneWidget);
+        expect(find.text('VAT'), findsOneWidget);
+        final grandTotalKey = find.byKey(const Key('grandTotalKey'));
+        expect(grandTotalKey, findsOneWidget);
+        expect(find.text('Grand Total'), findsOneWidget);
+        final txt = find.text(': SGD 108.00');
+        expect(txt, findsAtLeastNWidgets(1));
+        expect(
+            cartBloc.state.grandTotalBasedOnOrderType(isSpecial: true), 108.0);
       });
     },
   );

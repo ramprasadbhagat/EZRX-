@@ -18,17 +18,23 @@ class CartState with _$CartState {
         isClearing: false,
       );
 
-  double get subtotal => selectedCartItems.fold<double>(
+  double subTotalBasedOnOrderType({required bool isSpecial}) =>
+      selectedCartItems.fold<double>(
         0,
-        (sum, item) => sum + item.subTotalPrice,
+        (sum, item) =>
+            sum + item.subTotalPriceOnOrderType(isSpecial: isSpecial),
       );
 
-  double get grandTotal => selectedCartItems.fold<double>(
+  double grandTotalBasedOnOrderType({required bool isSpecial}) =>
+      selectedCartItems.fold<double>(
         0,
-        (sum, item) => sum + item.grandTotalPrice,
+        (sum, item) =>
+            sum + item.grandTotalPriceOnOrderType(isSpecial: isSpecial),
       );
 
-  double get vatTotal => grandTotal - subtotal;
+  double vatTotalOnOrderType({required bool isSpecial}) =>
+      grandTotalBasedOnOrderType(isSpecial: isSpecial) -
+      subTotalBasedOnOrderType(isSpecial: isSpecial);
 
   int zmgMaterialCount({required MaterialGroup itemMaterialGroup}) =>
       cartItems.zmgMaterialsQty(
