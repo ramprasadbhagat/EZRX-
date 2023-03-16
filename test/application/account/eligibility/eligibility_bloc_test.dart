@@ -92,6 +92,7 @@ void main() {
     greenDeliveryDelayInDays: 0,
     enableComboDeals: false,
     greenDeliveryUserRole: GreenDeliveryUserRole(0),
+    comboDealsUserRole: ComboDealUserRole(0),
   );
 
   group('Eligibility Bloc', () {
@@ -355,6 +356,107 @@ void main() {
 
       final showBillToInfo = eligibilityState.isBillToInfo;
       expect(showBillToInfo, false);
+    },
+  );
+
+  group(
+    'Combo Deal Eligible -',
+    () {
+      test(
+        'non eligible when salesConfig disable combo deal',
+        () {
+          final eligibilityState = EligibilityState.initial().copyWith(
+            user: fakeUser,
+            salesOrganisation: fakeSaleOrg,
+            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+              enableComboDeals: false,
+            ),
+            customerCodeInfo: fakeCustomerInfo,
+            shipToInfo: fakeShipToInfo,
+          );
+
+          expect(eligibilityState.comboDealEligible, false);
+        },
+      );
+
+      test(
+        'non eligible when customerCode combo deal eligibility return false',
+        () {
+          final eligibilityState = EligibilityState.initial().copyWith(
+            user: fakeUser,
+            salesOrganisation: fakeSaleOrg,
+            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+              enableComboDeals: true,
+            ),
+            customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+              comboEligible: false,
+            ),
+            shipToInfo: fakeShipToInfo,
+          );
+
+          expect(eligibilityState.comboDealEligible, false);
+        },
+      );
+
+      test(
+        'eligible when salesOrg enable combo deal, customerCode eligible and combo deal role is all user',
+        () {
+          final eligibilityState = EligibilityState.initial().copyWith(
+            user: fakeUser,
+            salesOrganisation: fakeSaleOrg,
+            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+              enableComboDeals: true,
+              comboDealsUserRole: ComboDealUserRole(1),
+            ),
+            customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+              comboEligible: true,
+            ),
+            shipToInfo: fakeShipToInfo,
+          );
+
+          expect(eligibilityState.comboDealEligible, true);
+        },
+      );
+
+      test(
+        'eligible when user is non sale rep, salesOrg enable combo deal, customerCode eligible and combo deal role is customer only',
+        () {
+          final eligibilityState = EligibilityState.initial().copyWith(
+            user: fakeUser,
+            salesOrganisation: fakeSaleOrg,
+            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+              enableComboDeals: true,
+              comboDealsUserRole: ComboDealUserRole(2),
+            ),
+            customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+              comboEligible: true,
+            ),
+            shipToInfo: fakeShipToInfo,
+          );
+
+          expect(eligibilityState.comboDealEligible, true);
+        },
+      );
+
+      test(
+        'non eligible when user is non sale rep, salesOrg enable combo deal, customerCode eligible and combo deal role is sale rep only',
+        () {
+          final eligibilityState = EligibilityState.initial().copyWith(
+            user: fakeUser,
+            salesOrganisation: fakeSaleOrg,
+            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+              enableComboDeals: true,
+              comboDealsUserRole: ComboDealUserRole(3),
+            ),
+            customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+              comboEligible: true,
+            ),
+            shipToInfo: fakeShipToInfo,
+          );
+
+          expect(eligibilityState.comboDealEligible, false);
+        },
+      );
     },
   );
 }

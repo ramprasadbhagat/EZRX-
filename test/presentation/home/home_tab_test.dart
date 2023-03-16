@@ -308,11 +308,13 @@ void main() {
         expect(find.text('Saved Orders'), findsOneWidget);
         expect(find.text('Order Template'), findsOneWidget);
         verify(() => materialPriceBlocMock.add(MaterialPriceEvent.fetch(
-            customerCodeInfo: fakeCustomerCodeInfo,
-            materials: [fakematerialInfo1],
-            salesConfigs: SalesOrganisationConfigs.empty(),
-            shipToInfo: ShipToInfo.empty(),
-            salesOrganisation: fakeSalesOrganisation))).called(2);
+              customerCodeInfo: fakeCustomerCodeInfo,
+              materials: [fakematerialInfo1],
+              salesConfigs: SalesOrganisationConfigs.empty(),
+              shipToInfo: ShipToInfo.empty(),
+              salesOrganisation: fakeSalesOrganisation,
+              comboDealEligible: false,
+            ))).called(2);
       });
 
       testWidgets('Home Tab _TileCard onTap test', (WidgetTester tester) async {

@@ -96,6 +96,7 @@ void main() {
           salesOrganisation: fakeSalesOrg,
           salesConfigs: fakeSalesConfigs,
           materials: fakeMaterialQuery,
+          comboDealEligible: false,
         ),
       ),
       expect: () => [
@@ -134,6 +135,7 @@ void main() {
           salesOrganisation: fakeSalesOrg,
           salesConfigs: fakeSalesConfigs,
           materials: fakeFOCMaterialQuery,
+          comboDealEligible: false,
         ),
       ),
       expect: () => [
@@ -168,6 +170,7 @@ void main() {
             salesOrganisation: fakeSalesOrg,
             salesConfigs: fakeSalesConfigs,
             materialNumberList: fakeMaterialNumberQuery,
+            comboDealEligible: false,
           ),
         ).thenAnswer(
           (_) async => Right(mockPriceMap),
@@ -180,6 +183,7 @@ void main() {
           salesOrganisation: fakeSalesOrg,
           salesConfigs: fakeSalesConfigs,
           materials: fakeMaterialQuery,
+          comboDealEligible: false,
         ),
       ),
       expect: () => [
@@ -204,6 +208,7 @@ void main() {
             salesOrganisation: fakeSalesOrg,
             salesConfigs: fakeSalesConfigs,
             materialNumberList: fakeMaterialNumberQuery,
+            comboDealEligible: false,
           ),
         ).thenAnswer(
           (_) async => const Left(ApiFailure.other('fake-error')),
@@ -216,6 +221,7 @@ void main() {
           salesOrganisation: fakeSalesOrg,
           salesConfigs: fakeSalesConfigs,
           materials: fakeMaterialQuery,
+          comboDealEligible: false,
         ),
       ),
       expect: () => [

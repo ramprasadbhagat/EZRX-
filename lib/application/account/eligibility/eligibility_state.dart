@@ -76,7 +76,9 @@ class EligibilityState with _$EligibilityState {
 
   String get getPNPValueCovidMaterial {
     // Condition 1: For Covid Tab Materials and Non-SG user, pickAndPack = "only"
-    return user.role.type.isSalesRep && !salesOrganisation.salesOrg.isSg ? 'only' : '';
+    return user.role.type.isSalesRep && !salesOrganisation.salesOrg.isSg
+        ? 'only'
+        : '';
   }
 
   bool get isAccountSuspended {
@@ -93,7 +95,8 @@ class EligibilityState with _$EligibilityState {
   }
 
   bool get isPaymentTermDescriptionEnable {
-    return !user.role.type.isSalesRep && !salesOrgConfigs.disablePaymentTermsDisplay;
+    return !user.role.type.isSalesRep &&
+        !salesOrgConfigs.disablePaymentTermsDisplay;
   }
 
   bool get validateOutOfStockValue {
@@ -105,8 +108,9 @@ class EligibilityState with _$EligibilityState {
         (salesOrgConfigs.addOosMaterials && validateOutOfStockValue));
   }
 
-  bool get isBonusOverrideEnable =>
-      user.role.type.isSalesRep ? user.hasBonusOverride : salesOrgConfigs.priceOverride;
+  bool get isBonusOverrideEnable => user.role.type.isSalesRep
+      ? user.hasBonusOverride
+      : salesOrgConfigs.priceOverride;
 
   bool get isSalesRepAndBonusEligible =>
       salesOrganisation.salesOrg.isMY &&
@@ -122,8 +126,9 @@ class EligibilityState with _$EligibilityState {
 
   bool get isZDP8Override =>
       user.role.type.isSalesRep && salesOrgConfigs.enableZDP8Override;
-  bool get isPriceOverrideEnable =>
-      user.role.type.isSalesRep ? user.hasPriceOverride : salesOrgConfigs.priceOverride;
+  bool get isPriceOverrideEnable => user.role.type.isSalesRep
+      ? user.hasPriceOverride
+      : salesOrgConfigs.priceOverride;
 
   bool get showGreenDeliveryBox {
     final gdEligibleRole = salesOrgConfigs.greenDeliveryUserRole;
@@ -147,5 +152,27 @@ class EligibilityState with _$EligibilityState {
 
     return false;
   }
-  
+
+  bool get comboDealEligible {
+    if (!salesOrgConfigs.enableComboDeals) return false;
+    if (!customerCodeInfo.comboEligible) return false;
+
+    final comboDealUserRole = salesOrgConfigs.comboDealsUserRole;
+    final userRole = user.role.type;
+
+
+    if (comboDealUserRole.isAllUsers) {
+      return true;
+    }
+
+    if (comboDealUserRole.isCustomerOnly && !userRole.isSalesRepRole) {
+      return true;
+    }
+
+    if (comboDealUserRole.isSalesRepOnly && userRole.isSalesRepRole) {
+      return true;
+    }
+
+    return false;
+  }
 }

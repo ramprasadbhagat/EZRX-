@@ -40,6 +40,7 @@ void main() {
           salesOrganisation: SalesOrganisation.empty(),
           salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
           shipToInfo: ShipToInfo.empty(),
+          comboDealEligible: true,
         )),
       expect: () => [
         CartState.initial().copyWith(isFetching: true),
@@ -75,6 +76,7 @@ void main() {
           salesOrganisation: SalesOrganisation.empty(),
           salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
           shipToInfo: ShipToInfo.empty(),
+          comboDealEligible: true,
         )),
       expect: () => [
         CartState.initial().copyWith(isFetching: true),
@@ -113,6 +115,7 @@ void main() {
         salesOrganisation: SalesOrganisation.empty(),
         salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
         shipToInfo: ShipToInfo.empty(),
+        comboDealEligible: false,
       )),
       expect: () => [
         CartState.initial().copyWith(isFetching: true),
@@ -150,6 +153,7 @@ void main() {
           salesOrganisation: SalesOrganisation.empty(),
           salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
           shipToInfo: ShipToInfo.empty(),
+          comboDealEligible: true,
         )),
       expect: () => [
         CartState.initial().copyWith(isFetching: true, cartItems: <CartItem>[]),
@@ -158,6 +162,53 @@ void main() {
           cartItems: mockMaterialCartItemList,
           isFetching: false,
         ),
+      ],
+    );
+
+    blocTest<CartBloc, CartState>(
+      '=> CartBloc Fetch when combo deal is disabled in sales configs',
+      build: () => CartBloc(cartRepositoryMock),
+      setUp: () {
+        final comboItem = CartItem.comboDeal(mockMaterialList);
+        final materialItem = CartItem.material(mockMaterialList.first);
+        final mockCartItems = [materialItem, comboItem];
+
+        when(() => cartRepositoryMock.fetchCart()).thenAnswer(
+          (invocation) => Right(mockCartItems),
+        );
+        when(() => cartRepositoryMock.saveToCartWithUpdatedStockInfo(
+              cartItem: mockCartItems,
+              customerCodeInfo: CustomerCodeInfo.empty(),
+              salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+              salesOrganisation: SalesOrganisation.empty(),
+              shipToInfo: ShipToInfo.empty(),
+            )).thenAnswer(
+          (invocation) async => Right(mockCartItems),
+        );
+        when(
+          () => cartRepositoryMock.clearCartOnlySelectedItems(
+            selectedItemIds: [comboItem.id],
+          ),
+        ).thenAnswer(
+          (invocation) async => Right([materialItem]),
+        );
+      },
+      act: (bloc) => bloc
+        ..add(CartEvent.fetch(
+          customerCodeInfo: CustomerCodeInfo.empty(),
+          doNotAllowOutOfStockMaterials: true,
+          salesOrganisation: SalesOrganisation.empty(),
+          salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+          shipToInfo: ShipToInfo.empty(),
+          comboDealEligible: false,
+        )),
+      expect: () => [
+        CartState.initial().copyWith(isFetching: true),
+        CartState.initial().copyWith(isFetching: false),
+        CartState.initial().copyWith(isClearing: true),
+        CartState.initial().copyWith(
+            isClearing: false,
+            cartItems: [CartItem.material(mockMaterialList.first)]),
       ],
     );
   });

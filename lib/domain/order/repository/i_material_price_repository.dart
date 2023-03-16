@@ -14,5 +14,6 @@ abstract class IMaterialPriceRepository {
     required SalesOrganisationConfigs salesConfigs,
     required ShipToInfo shipToInfo,
     required List<MaterialNumber> materialNumberList,
+    required bool comboDealEligible,
   });
 }

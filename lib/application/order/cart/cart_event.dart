@@ -9,6 +9,7 @@ class CartEvent with _$CartEvent {
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
     required bool doNotAllowOutOfStockMaterials,
+    required bool comboDealEligible,
   }) = _Fetch;
   const factory CartEvent.addMaterialToCart({
     required PriceAggregate item,

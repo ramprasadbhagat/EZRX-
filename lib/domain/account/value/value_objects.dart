@@ -356,3 +356,26 @@ class GreenDeliveryUserRole extends ValueObject<int> {
 
   const GreenDeliveryUserRole._(this.value);
 }
+
+class ComboDealUserRole extends ValueObject<int> {
+  @override
+  final Either<ValueFailure<int>, int> value;
+
+  factory ComboDealUserRole(int input) {
+    return ComboDealUserRole._(Right(input));
+  }
+
+  bool get isAllUsers {
+    return value.getOrElse(() => 0) == 1;
+  }
+
+  bool get isCustomerOnly {
+    return value.getOrElse(() => 0) == 2;
+  }
+
+  bool get isSalesRepOnly {
+    return value.getOrElse(() => 0) == 3;
+  }
+
+  const ComboDealUserRole._(this.value);
+}

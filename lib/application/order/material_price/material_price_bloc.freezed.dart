@@ -24,7 +24,8 @@ mixin _$MaterialPriceEvent {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesConfigs,
             ShipToInfo shipToInfo,
-            List<MaterialInfo> materials)
+            List<MaterialInfo> materials,
+            bool comboDealEligible)
         fetch,
   }) =>
       throw _privateConstructorUsedError;
@@ -36,7 +37,8 @@ mixin _$MaterialPriceEvent {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesConfigs,
             ShipToInfo shipToInfo,
-            List<MaterialInfo> materials)?
+            List<MaterialInfo> materials,
+            bool comboDealEligible)?
         fetch,
   }) =>
       throw _privateConstructorUsedError;
@@ -48,7 +50,8 @@ mixin _$MaterialPriceEvent {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesConfigs,
             ShipToInfo shipToInfo,
-            List<MaterialInfo> materials)?
+            List<MaterialInfo> materials,
+            bool comboDealEligible)?
         fetch,
     required TResult orElse(),
   }) =>
@@ -136,7 +139,8 @@ class _$_Initialized implements _Initialized {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesConfigs,
             ShipToInfo shipToInfo,
-            List<MaterialInfo> materials)
+            List<MaterialInfo> materials,
+            bool comboDealEligible)
         fetch,
   }) {
     return initialized();
@@ -151,7 +155,8 @@ class _$_Initialized implements _Initialized {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesConfigs,
             ShipToInfo shipToInfo,
-            List<MaterialInfo> materials)?
+            List<MaterialInfo> materials,
+            bool comboDealEligible)?
         fetch,
   }) {
     return initialized?.call();
@@ -166,7 +171,8 @@ class _$_Initialized implements _Initialized {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesConfigs,
             ShipToInfo shipToInfo,
-            List<MaterialInfo> materials)?
+            List<MaterialInfo> materials,
+            bool comboDealEligible)?
         fetch,
     required TResult orElse(),
   }) {
@@ -222,7 +228,8 @@ abstract class _$$_FetchCopyWith<$Res> {
       SalesOrganisation salesOrganisation,
       SalesOrganisationConfigs salesConfigs,
       ShipToInfo shipToInfo,
-      List<MaterialInfo> materials});
+      List<MaterialInfo> materials,
+      bool comboDealEligible});
 
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
@@ -245,6 +252,7 @@ class __$$_FetchCopyWithImpl<$Res>
     Object? salesConfigs = null,
     Object? shipToInfo = null,
     Object? materials = null,
+    Object? comboDealEligible = null,
   }) {
     return _then(_$_Fetch(
       customerCodeInfo: null == customerCodeInfo
@@ -267,6 +275,10 @@ class __$$_FetchCopyWithImpl<$Res>
           ? _value._materials
           : materials // ignore: cast_nullable_to_non_nullable
               as List<MaterialInfo>,
+      comboDealEligible: null == comboDealEligible
+          ? _value.comboDealEligible
+          : comboDealEligible // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 
@@ -312,7 +324,8 @@ class _$_Fetch implements _Fetch {
       required this.salesOrganisation,
       required this.salesConfigs,
       required this.shipToInfo,
-      required final List<MaterialInfo> materials})
+      required final List<MaterialInfo> materials,
+      required this.comboDealEligible})
       : _materials = materials;
 
   @override
@@ -331,8 +344,11 @@ class _$_Fetch implements _Fetch {
   }
 
   @override
+  final bool comboDealEligible;
+
+  @override
   String toString() {
-    return 'MaterialPriceEvent.fetch(customerCodeInfo: $customerCodeInfo, salesOrganisation: $salesOrganisation, salesConfigs: $salesConfigs, shipToInfo: $shipToInfo, materials: $materials)';
+    return 'MaterialPriceEvent.fetch(customerCodeInfo: $customerCodeInfo, salesOrganisation: $salesOrganisation, salesConfigs: $salesConfigs, shipToInfo: $shipToInfo, materials: $materials, comboDealEligible: $comboDealEligible)';
   }
 
   @override
@@ -349,7 +365,9 @@ class _$_Fetch implements _Fetch {
             (identical(other.shipToInfo, shipToInfo) ||
                 other.shipToInfo == shipToInfo) &&
             const DeepCollectionEquality()
-                .equals(other._materials, _materials));
+                .equals(other._materials, _materials) &&
+            (identical(other.comboDealEligible, comboDealEligible) ||
+                other.comboDealEligible == comboDealEligible));
   }
 
   @override
@@ -359,7 +377,8 @@ class _$_Fetch implements _Fetch {
       salesOrganisation,
       salesConfigs,
       shipToInfo,
-      const DeepCollectionEquality().hash(_materials));
+      const DeepCollectionEquality().hash(_materials),
+      comboDealEligible);
 
   @JsonKey(ignore: true)
   @override
@@ -376,11 +395,12 @@ class _$_Fetch implements _Fetch {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesConfigs,
             ShipToInfo shipToInfo,
-            List<MaterialInfo> materials)
+            List<MaterialInfo> materials,
+            bool comboDealEligible)
         fetch,
   }) {
     return fetch(customerCodeInfo, salesOrganisation, salesConfigs, shipToInfo,
-        materials);
+        materials, comboDealEligible);
   }
 
   @override
@@ -392,11 +412,12 @@ class _$_Fetch implements _Fetch {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesConfigs,
             ShipToInfo shipToInfo,
-            List<MaterialInfo> materials)?
+            List<MaterialInfo> materials,
+            bool comboDealEligible)?
         fetch,
   }) {
     return fetch?.call(customerCodeInfo, salesOrganisation, salesConfigs,
-        shipToInfo, materials);
+        shipToInfo, materials, comboDealEligible);
   }
 
   @override
@@ -408,13 +429,14 @@ class _$_Fetch implements _Fetch {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesConfigs,
             ShipToInfo shipToInfo,
-            List<MaterialInfo> materials)?
+            List<MaterialInfo> materials,
+            bool comboDealEligible)?
         fetch,
     required TResult orElse(),
   }) {
     if (fetch != null) {
       return fetch(customerCodeInfo, salesOrganisation, salesConfigs,
-          shipToInfo, materials);
+          shipToInfo, materials, comboDealEligible);
     }
     return orElse();
   }
@@ -457,13 +479,15 @@ abstract class _Fetch implements MaterialPriceEvent {
       required final SalesOrganisation salesOrganisation,
       required final SalesOrganisationConfigs salesConfigs,
       required final ShipToInfo shipToInfo,
-      required final List<MaterialInfo> materials}) = _$_Fetch;
+      required final List<MaterialInfo> materials,
+      required final bool comboDealEligible}) = _$_Fetch;
 
   CustomerCodeInfo get customerCodeInfo;
   SalesOrganisation get salesOrganisation;
   SalesOrganisationConfigs get salesConfigs;
   ShipToInfo get shipToInfo;
   List<MaterialInfo> get materials;
+  bool get comboDealEligible;
   @JsonKey(ignore: true)
   _$$_FetchCopyWith<_$_Fetch> get copyWith =>
       throw _privateConstructorUsedError;

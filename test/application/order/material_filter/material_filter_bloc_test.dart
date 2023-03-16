@@ -100,6 +100,7 @@ void main() {
     greenDeliveryDelayInDays: 0,
     enableComboDeals: false,
     greenDeliveryUserRole: GreenDeliveryUserRole(0),
+    comboDealsUserRole: ComboDealUserRole(0),
   );
 
   const fakeSelectedPrincipalFilterCategory = MaterialFilterType.principal;

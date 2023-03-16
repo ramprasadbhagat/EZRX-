@@ -78,13 +78,14 @@ class SalesOrganisationConfigsDtoAdapter
       greenDeliveryDelayInDays: fields[150] == null ? 2 : fields[150] as int,
       enableComboDeals: fields[151] == null ? false : fields[151] as bool,
       greenDeliveryUserRole: fields[152] == null ? 0 : fields[152] as int,
+      comboDealsUserRole: fields[153] == null ? 0 : fields[153] as int,
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_SalesOrganisationConfigsDto obj) {
     writer
-      ..writeByte(53)
+      ..writeByte(54)
       ..writeByte(100)
       ..write(obj.disableProcessingStatus)
       ..writeByte(101)
@@ -189,6 +190,8 @@ class SalesOrganisationConfigsDtoAdapter
       ..write(obj.enableComboDeals)
       ..writeByte(152)
       ..write(obj.greenDeliveryUserRole)
+      ..writeByte(153)
+      ..write(obj.comboDealsUserRole)
       ..writeByte(7)
       ..write(obj.principalList);
   }
@@ -270,6 +273,7 @@ _$_SalesOrganisationConfigsDto _$$_SalesOrganisationConfigsDtoFromJson(
       greenDeliveryDelayInDays: json['greenDeliveryDelayInDays'] as int? ?? 2,
       enableComboDeals: json['enableComboDeals'] as bool? ?? false,
       greenDeliveryUserRole: json['greenDeliveryUserRole'] as int? ?? 0,
+      comboDealsUserRole: json['comboDealsUserRole'] as int? ?? 0,
     );
 
 Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
@@ -329,4 +333,5 @@ Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
       'greenDeliveryDelayInDays': instance.greenDeliveryDelayInDays,
       'enableComboDeals': instance.enableComboDeals,
       'greenDeliveryUserRole': instance.greenDeliveryUserRole,
+      'comboDealsUserRole': instance.comboDealsUserRole,
     };

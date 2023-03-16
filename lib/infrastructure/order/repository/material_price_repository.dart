@@ -30,6 +30,7 @@ class MaterialPriceRepository implements IMaterialPriceRepository {
     required SalesOrganisationConfigs salesConfigs,
     required ShipToInfo shipToInfo,
     required List<MaterialNumber> materialNumberList,
+    required bool comboDealEligible,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -50,12 +51,10 @@ class MaterialPriceRepository implements IMaterialPriceRepository {
       final salesOrgCode = salesOrganisation.salesOrg.getOrCrash();
       final customerCode = customerCodeInfo.customerCodeSoldTo;
       final shipToCode = shipToInfo.shipToCustomerCode;
-      final isComboDealsEligible =
-          salesConfigs.enableComboDeals && customerCodeInfo.comboEligible;
       final queryMaterialNumbers =
           materialNumberList.map((e) => e.getOrCrash()).toList();
 
-      final queryComboDeals = isComboDealsEligible
+      final queryComboDeals = comboDealEligible
           ? customerCodeInfo.salesDeals.map((e) => e.getOrCrash()).toList()
           : <String>[];
 

@@ -172,6 +172,9 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
     @JsonKey(name: 'greenDeliveryUserRole', defaultValue: 0)
     @HiveField(152, defaultValue: 0)
         required int greenDeliveryUserRole,
+    @JsonKey(name: 'comboDealsUserRole', defaultValue: 0)
+    @HiveField(153, defaultValue: 0)
+        required int comboDealsUserRole,
   }) = _SalesOrganisationConfigsDto;
 
   factory SalesOrganisationConfigsDto.fromDomain(
@@ -231,6 +234,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       disableReturnsAccessSR: configs.disableReturnsAccessSR,
       disableReturnsAccess: configs.disableReturnsAccess,
       enableComboDeals: configs.enableComboDeals,
+      comboDealsUserRole:  configs.comboDealsUserRole.getOrDefaultValue(0),
     );
   }
 
@@ -289,6 +293,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       disableReturnsAccessSR: disableReturnsAccessSR,
       disableReturnsAccess: disableReturnsAccess,
       enableComboDeals: enableComboDeals,
+      comboDealsUserRole:  ComboDealUserRole(comboDealsUserRole),
     );
   }
 

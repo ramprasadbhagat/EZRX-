@@ -57,6 +57,7 @@ class MaterialPriceBloc extends Bloc<MaterialPriceEvent, MaterialPriceState> {
               salesOrganisation: e.salesOrganisation,
               salesConfigs: e.salesConfigs,
               materialNumberList: queryMaterialNumber.toSet().toList(),
+              comboDealEligible: e.comboDealEligible,
             );
 
             await failureOrSuccess.fold(

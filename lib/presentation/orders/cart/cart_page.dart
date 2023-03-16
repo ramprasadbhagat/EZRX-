@@ -104,6 +104,10 @@ class CartPage extends StatelessWidget {
                                 .read<SalesOrgBloc>()
                                 .state
                                 .salesOrganisation,
+                            comboDealEligible: context
+                                .read<EligibilityBloc>()
+                                .state
+                                .comboDealEligible,
                           ),
                         );
                   },

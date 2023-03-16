@@ -84,6 +84,7 @@ class SalesOrgQueryMutation {
           disableProcessingStatus
           enableIRN
           enableComboDeals
+          comboDealsUserRole
        }
       }
     ''';

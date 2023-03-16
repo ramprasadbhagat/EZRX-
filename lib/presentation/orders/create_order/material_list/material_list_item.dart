@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
@@ -119,22 +120,29 @@ class MaterialListItem extends StatelessWidget {
                 ),
               ],
             ),
-            BlocBuilder<MaterialPriceBloc, MaterialPriceState>(
+            BlocBuilder<EligibilityBloc, EligibilityState>(
               buildWhen: (previous, current) =>
-                  previous.isFetching != current.isFetching,
-              builder: (context, state) {
-                final price =
-                    state.getPriceForMaterial(materialInfo.materialNumber);
+                  previous.comboDealEligible != current.comboDealEligible,
+              builder: (context, eligibilityState) {
+                return BlocBuilder<MaterialPriceBloc, MaterialPriceState>(
+                  buildWhen: (previous, current) =>
+                      previous.isFetching != current.isFetching,
+                  builder: (context, state) {
+                    final price =
+                        state.getPriceForMaterial(materialInfo.materialNumber);
 
-                return price.comboDeal.isAvailable
-                    ? GestureDetector(
-                        onTap: () => _showComboDeal(
-                          context: context,
-                          price: price,
-                        ),
-                        child: const ComboDealLabel(),
-                      )
-                    : const SizedBox();
+                    return price.comboDeal.isAvailable &&
+                            eligibilityState.comboDealEligible
+                        ? GestureDetector(
+                            onTap: () => _showComboDeal(
+                              context: context,
+                              price: price,
+                            ),
+                            child: const ComboDealLabel(),
+                          )
+                        : const SizedBox();
+                  },
+                );
               },
             ),
           ],

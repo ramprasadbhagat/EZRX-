@@ -273,7 +273,15 @@ void main() {
     when(() => orderDocumentTypeBlocMock.state)
         .thenReturn(OrderDocumentTypeState.initial());
     when(() => eligibilityBlocMock.state)
-        .thenReturn(EligibilityState.initial());
+        .thenReturn(EligibilityState.initial().copyWith(
+      salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+        enableComboDeals: true,
+        comboDealsUserRole: ComboDealUserRole(1),
+      ),
+      customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+        comboEligible: true,
+      ),
+    ));
     when(() => shipToCodeBlocMock.state).thenReturn(ShipToCodeState.initial());
     when(() => mockTenderContractBloc.state)
         .thenReturn(TenderContractState.initial());
@@ -1786,8 +1794,13 @@ void main() {
       verify(
         () => materialListBlocMock.add(
           MaterialListEvent.searchMaterialList(
-            configs: SalesOrganisationConfigs.empty(),
-            customerCodeInfo: CustomerCodeInfo.empty(),
+            configs: SalesOrganisationConfigs.empty().copyWith(
+              enableComboDeals: true,
+              comboDealsUserRole: ComboDealUserRole(1),
+            ),
+            customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+              comboEligible: true,
+            ),
             salesOrganisation: SalesOrganisation.empty(),
             shipToInfo: ShipToInfo.empty(),
             user: User.empty(),
@@ -1905,6 +1918,32 @@ void main() {
         comboMaterialNumbers: [fakeMaterialNumber],
       ),
     );
+
+    testWidgets(
+        'Combo Deal label doesn\'t show when SalesConfig disable combo deal',
+        (tester) async {
+      when(() => eligibilityBlocMock.state)
+          .thenReturn(EligibilityState.initial());
+      when(() => materialPriceBlocMock.state).thenReturn(
+        MaterialPriceState.initial().copyWith(
+          materialPrice: {
+            fakeMaterialNumber: Price.empty().copyWith(
+              comboDeal: fakeComboDealQuery,
+            )
+          },
+        ),
+      );
+      await tester.pumpWidget(
+        getScopedWidget(
+          MaterialListItem(
+            materialInfo: fakematerialInfo,
+            salesOrgConfigs: salesOrgBlocMock.state.configs,
+          ),
+        ),
+      );
+      final comboLabel = find.byType(ComboDealLabel);
+      expect(comboLabel, findsNothing);
+    });
 
     testWidgets('Combo Deal label pressed when combo is in cart',
         (tester) async {

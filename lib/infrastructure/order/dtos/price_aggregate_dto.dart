@@ -188,6 +188,7 @@ const SalesOrganisationConfigsDto _emptySalesOrganisationConfigsDto =
   greenDeliveryDelayInDays: 0,
   enableComboDeals: false,
   greenDeliveryUserRole: 0,
+  comboDealsUserRole: 0,
 );
 
 const BundleDto _emptyBundleDto = BundleDto(

@@ -67,6 +67,7 @@ void main() {
         materialNumberList: fakeMaterialNumberQuery,
         salesConfigs: mockSalesConfigs,
         shipToInfo: mockShipToInfo,
+        comboDealEligible: false,
       );
       expect(
         result.isRight(),
@@ -83,6 +84,7 @@ void main() {
         materialNumberList: fakeMaterialNumberQuery,
         salesConfigs: mockSalesConfigs,
         shipToInfo: mockShipToInfo,
+        comboDealEligible: false,
       );
       expect(
         result.isLeft(),
@@ -108,6 +110,7 @@ void main() {
         materialNumberList: fakeMaterialNumberQuery,
         salesConfigs: mockSalesConfigs,
         shipToInfo: mockShipToInfo,
+        comboDealEligible: false,
       );
       expect(
         result.isRight(),
@@ -130,6 +133,7 @@ void main() {
         materialNumberList: fakeMaterialNumberQuery,
         salesConfigs: mockSalesConfigs,
         shipToInfo: mockShipToInfo,
+        comboDealEligible: false,
       );
       expect(
         result.isLeft(),

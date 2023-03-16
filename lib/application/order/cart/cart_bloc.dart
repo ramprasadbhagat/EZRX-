@@ -64,6 +64,27 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             return;
           }
 
+          if (!e.comboDealEligible) {
+            emit(
+              state.copyWith(
+                isFetching: false,
+              ),
+            );
+
+            final comboDealCartItemIds = cartWithStockInfo
+                .where((item) => item.itemType == CartItemType.comboDeal)
+                .map((item) => item.id)
+                .toList();
+
+            add(
+              _ClearSelectedItemsFromCart(
+                selectedItemIds: comboDealCartItemIds,
+              ),
+            );
+
+            return;
+          }
+
           emit(
             state.copyWith(
               cartItems: repository.updateDiscountQty(

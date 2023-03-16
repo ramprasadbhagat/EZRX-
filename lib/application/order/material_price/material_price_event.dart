@@ -9,5 +9,6 @@ class MaterialPriceEvent with _$MaterialPriceEvent {
     required SalesOrganisationConfigs salesConfigs,
     required ShipToInfo shipToInfo,
     required List<MaterialInfo> materials,
+    required bool comboDealEligible,
   }) = _Fetch;
 }

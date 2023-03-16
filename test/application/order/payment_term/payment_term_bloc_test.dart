@@ -92,6 +92,7 @@ void main() {
     greenDeliveryDelayInDays: 0,
     enableComboDeals: false,
     greenDeliveryUserRole: GreenDeliveryUserRole(0),
+    comboDealsUserRole: ComboDealUserRole(0),
   );
 
   final fakeCustomerCode = CustomerCodeInfo.empty().copyWith(

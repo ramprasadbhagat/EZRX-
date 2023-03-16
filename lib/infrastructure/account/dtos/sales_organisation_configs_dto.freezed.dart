@@ -181,6 +181,9 @@ mixin _$SalesOrganisationConfigsDto {
   @JsonKey(name: 'greenDeliveryUserRole', defaultValue: 0)
   @HiveField(152, defaultValue: 0)
   int get greenDeliveryUserRole => throw _privateConstructorUsedError;
+  @JsonKey(name: 'comboDealsUserRole', defaultValue: 0)
+  @HiveField(153, defaultValue: 0)
+  int get comboDealsUserRole => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -356,7 +359,10 @@ abstract class $SalesOrganisationConfigsDtoCopyWith<$Res> {
           bool enableComboDeals,
       @JsonKey(name: 'greenDeliveryUserRole', defaultValue: 0)
       @HiveField(152, defaultValue: 0)
-          int greenDeliveryUserRole});
+          int greenDeliveryUserRole,
+      @JsonKey(name: 'comboDealsUserRole', defaultValue: 0)
+      @HiveField(153, defaultValue: 0)
+          int comboDealsUserRole});
 }
 
 /// @nodoc
@@ -426,6 +432,7 @@ class _$SalesOrganisationConfigsDtoCopyWithImpl<$Res,
     Object? greenDeliveryDelayInDays = null,
     Object? enableComboDeals = null,
     Object? greenDeliveryUserRole = null,
+    Object? comboDealsUserRole = null,
   }) {
     return _then(_value.copyWith(
       disableProcessingStatus: null == disableProcessingStatus
@@ -640,6 +647,10 @@ class _$SalesOrganisationConfigsDtoCopyWithImpl<$Res,
           ? _value.greenDeliveryUserRole
           : greenDeliveryUserRole // ignore: cast_nullable_to_non_nullable
               as int,
+      comboDealsUserRole: null == comboDealsUserRole
+          ? _value.comboDealsUserRole
+          : comboDealsUserRole // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -813,7 +824,10 @@ abstract class _$$_SalesOrganisationConfigsDtoCopyWith<$Res>
           bool enableComboDeals,
       @JsonKey(name: 'greenDeliveryUserRole', defaultValue: 0)
       @HiveField(152, defaultValue: 0)
-          int greenDeliveryUserRole});
+          int greenDeliveryUserRole,
+      @JsonKey(name: 'comboDealsUserRole', defaultValue: 0)
+      @HiveField(153, defaultValue: 0)
+          int comboDealsUserRole});
 }
 
 /// @nodoc
@@ -882,6 +896,7 @@ class __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>
     Object? greenDeliveryDelayInDays = null,
     Object? enableComboDeals = null,
     Object? greenDeliveryUserRole = null,
+    Object? comboDealsUserRole = null,
   }) {
     return _then(_$_SalesOrganisationConfigsDto(
       disableProcessingStatus: null == disableProcessingStatus
@@ -1096,6 +1111,10 @@ class __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>
           ? _value.greenDeliveryUserRole
           : greenDeliveryUserRole // ignore: cast_nullable_to_non_nullable
               as int,
+      comboDealsUserRole: null == comboDealsUserRole
+          ? _value.comboDealsUserRole
+          : comboDealsUserRole // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -1264,7 +1283,10 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
           required this.enableComboDeals,
       @JsonKey(name: 'greenDeliveryUserRole', defaultValue: 0)
       @HiveField(152, defaultValue: 0)
-          required this.greenDeliveryUserRole})
+          required this.greenDeliveryUserRole,
+      @JsonKey(name: 'comboDealsUserRole', defaultValue: 0)
+      @HiveField(153, defaultValue: 0)
+          required this.comboDealsUserRole})
       : _principalList = principalList,
         super._();
 
@@ -1489,10 +1511,14 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
   @JsonKey(name: 'greenDeliveryUserRole', defaultValue: 0)
   @HiveField(152, defaultValue: 0)
   final int greenDeliveryUserRole;
+  @override
+  @JsonKey(name: 'comboDealsUserRole', defaultValue: 0)
+  @HiveField(153, defaultValue: 0)
+  final int comboDealsUserRole;
 
   @override
   String toString() {
-    return 'SalesOrganisationConfigsDto(disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableTaxClassification: $enableTaxClassification, enableVat: $enableVat, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, enableDefaultMD: $enableDefaultMD, priceOverride: $priceOverride, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, disableDeliveryDate: $disableDeliveryDate, enableBillTo: $enableBillTo, showPOAttachment: $showPOAttachment, expiryDateDisplay: $expiryDateDisplay, hideStockDisplay: $hideStockDisplay, addOosMaterials: $addOosMaterials, oosValue: $oosValue, enableRemarks: $enableRemarks, enableOHPrice: $enableOHPrice, poNumberRequired: $poNumberRequired, enableIRN: $enableIRN, enableTaxDisplay: $enableTaxDisplay, enableTaxAtTotalLevelOnly: $enableTaxAtTotalLevelOnly, netPriceOverride: $netPriceOverride, batchNumDisplay: $batchNumDisplay, displayOrderDiscount: $displayOrderDiscount, minOrderAmount: $minOrderAmount, salesOrg: $salesOrg, enableZDP8Override: $enableZDP8Override, disableReturnsAccessSR: $disableReturnsAccessSR, disableReturnsAccess: $disableReturnsAccess, enableGreenDelivery: $enableGreenDelivery, greenDeliveryDelayInDays: $greenDeliveryDelayInDays, enableComboDeals: $enableComboDeals, greenDeliveryUserRole: $greenDeliveryUserRole)';
+    return 'SalesOrganisationConfigsDto(disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableTaxClassification: $enableTaxClassification, enableVat: $enableVat, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, enableDefaultMD: $enableDefaultMD, priceOverride: $priceOverride, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, disableDeliveryDate: $disableDeliveryDate, enableBillTo: $enableBillTo, showPOAttachment: $showPOAttachment, expiryDateDisplay: $expiryDateDisplay, hideStockDisplay: $hideStockDisplay, addOosMaterials: $addOosMaterials, oosValue: $oosValue, enableRemarks: $enableRemarks, enableOHPrice: $enableOHPrice, poNumberRequired: $poNumberRequired, enableIRN: $enableIRN, enableTaxDisplay: $enableTaxDisplay, enableTaxAtTotalLevelOnly: $enableTaxAtTotalLevelOnly, netPriceOverride: $netPriceOverride, batchNumDisplay: $batchNumDisplay, displayOrderDiscount: $displayOrderDiscount, minOrderAmount: $minOrderAmount, salesOrg: $salesOrg, enableZDP8Override: $enableZDP8Override, disableReturnsAccessSR: $disableReturnsAccessSR, disableReturnsAccess: $disableReturnsAccess, enableGreenDelivery: $enableGreenDelivery, greenDeliveryDelayInDays: $greenDeliveryDelayInDays, enableComboDeals: $enableComboDeals, greenDeliveryUserRole: $greenDeliveryUserRole, comboDealsUserRole: $comboDealsUserRole)';
   }
 
   @override
@@ -1581,7 +1607,8 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
             (identical(other.enableGreenDelivery, enableGreenDelivery) || other.enableGreenDelivery == enableGreenDelivery) &&
             (identical(other.greenDeliveryDelayInDays, greenDeliveryDelayInDays) || other.greenDeliveryDelayInDays == greenDeliveryDelayInDays) &&
             (identical(other.enableComboDeals, enableComboDeals) || other.enableComboDeals == enableComboDeals) &&
-            (identical(other.greenDeliveryUserRole, greenDeliveryUserRole) || other.greenDeliveryUserRole == greenDeliveryUserRole));
+            (identical(other.greenDeliveryUserRole, greenDeliveryUserRole) || other.greenDeliveryUserRole == greenDeliveryUserRole) &&
+            (identical(other.comboDealsUserRole, comboDealsUserRole) || other.comboDealsUserRole == comboDealsUserRole));
   }
 
   @JsonKey(ignore: true)
@@ -1640,7 +1667,8 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
         enableGreenDelivery,
         greenDeliveryDelayInDays,
         enableComboDeals,
-        greenDeliveryUserRole
+        greenDeliveryUserRole,
+        comboDealsUserRole
       ]);
 
   @JsonKey(ignore: true)
@@ -1820,7 +1848,10 @@ abstract class _SalesOrganisationConfigsDto
               required final bool enableComboDeals,
           @JsonKey(name: 'greenDeliveryUserRole', defaultValue: 0)
           @HiveField(152, defaultValue: 0)
-              required final int greenDeliveryUserRole}) =
+              required final int greenDeliveryUserRole,
+          @JsonKey(name: 'comboDealsUserRole', defaultValue: 0)
+          @HiveField(153, defaultValue: 0)
+              required final int comboDealsUserRole}) =
       _$_SalesOrganisationConfigsDto;
   const _SalesOrganisationConfigsDto._() : super._();
 
@@ -2040,6 +2071,10 @@ abstract class _SalesOrganisationConfigsDto
   @JsonKey(name: 'greenDeliveryUserRole', defaultValue: 0)
   @HiveField(152, defaultValue: 0)
   int get greenDeliveryUserRole;
+  @override
+  @JsonKey(name: 'comboDealsUserRole', defaultValue: 0)
+  @HiveField(153, defaultValue: 0)
+  int get comboDealsUserRole;
   @override
   @JsonKey(ignore: true)
   _$$_SalesOrganisationConfigsDtoCopyWith<_$_SalesOrganisationConfigsDto>
