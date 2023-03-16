@@ -1039,6 +1039,69 @@ void main() {
       }
     });
 
+    testWidgets('show unit price when enable list price is true',
+        (tester) async {
+      final expectedState = [
+        MaterialListState.initial().copyWith(isFetching: true),
+        MaterialListState.initial().copyWith(
+          apiFailureOrSuccessOption: none(),
+          isFetching: false,
+          nextPageIndex: 2,
+          materialList: <MaterialInfo>[
+            MaterialInfo.empty().copyWith(
+                materialNumber: fakeMaterialNumber,
+                materialDescription: fakematerialInfo.materialDescription)
+          ],
+        ),
+      ];
+      when(() => materialListBlocMock.state)
+          .thenReturn(MaterialListState.initial());
+      when(() => salesOrgBlocMock.state).thenReturn(
+        SalesOrgState.initial().copyWith(
+          configs: SalesOrganisationConfigs.empty().copyWith(
+            enableListPrice: true,
+          ),
+        ),
+      );
+      whenListen(materialListBlocMock, Stream.fromIterable(expectedState));
+      when(() => materialPriceBlocMock.state).thenReturn(
+        MaterialPriceState.initial().copyWith(
+          isFetching: false,
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget(const MaterialListPage()));
+      await tester.pump();
+
+      final materialList = find.byKey(const Key('scrollList'));
+      expect(materialList, findsOneWidget);
+      await tester.drag(materialList, const Offset(0.0, -300));
+      await tester.pump();
+      final listContent = find.byKey(Key(
+          'materialOption${materialListBlocMock.state.materialList.first.materialNumber.getOrCrash()}'));
+      expect(listContent, findsOneWidget);
+
+      final priceAggregate = PriceAggregate.empty().copyWith(
+        materialInfo: materialListBlocMock.state.materialList.first,
+        salesOrgConfig: salesOrgBlocMock.state.configs.copyWith(
+          enableTaxClassification: true,
+          enableTaxDisplay: true,
+          currency: Currency('vnd'),
+        ),
+      );
+
+      if (priceAggregate.materialInfo.materialDescription.isNotEmpty) {
+        final mat = find.textContaining(
+            materialListBlocMock.state.materialList.first.materialDescription);
+        expect(mat, findsOneWidget);
+      }
+      final listPrice = find.textContaining('List Price:'.tr());
+      if (salesOrgBlocMock.state.configs.enableListPrice) {
+        expect(listPrice, findsOneWidget);
+      }
+      final unitPrice = find.textContaining('Unit Price: '.tr());
+      expect(unitPrice, findsOneWidget);
+    });
+
     testWidgets('zmg discount lable', (tester) async {
       final expectedState = [
         MaterialListState.initial().copyWith(isFetching: true),

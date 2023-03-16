@@ -356,11 +356,24 @@ class _PriceLabel extends StatelessWidget {
           );
         }
 
-        return Text(
-          '${'Unit Price: '.tr()}NA',
-          style: Theme.of(context).textTheme.titleSmall?.apply(
-                color: ZPColors.black,
-              ),
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            context.read<SalesOrgBloc>().state.configs.enableListPrice
+                ? Text(
+                    '${'List Price:'.tr()}NA',
+                    style: Theme.of(context).textTheme.titleSmall?.apply(
+                          color: ZPColors.lightGray,
+                        ),
+                  )
+                : const SizedBox.shrink(),
+            Text(
+              '${'Unit Price: '.tr()}NA',
+              style: Theme.of(context).textTheme.titleSmall?.apply(
+                    color: ZPColors.black,
+                  ),
+            ),
+          ],
         );
       },
     );
