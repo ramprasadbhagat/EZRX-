@@ -10,6 +10,8 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/value/constants.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_filter_local.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/material_filter_repository.dart';
@@ -57,7 +59,7 @@ void main() {
     disablePrincipals: false,
     enableGimmickMaterial: false,
     languageFilter: false,
-    languageValue: LanguageValue(''),
+    languageValue: LanguageValue(ApiLanguageCode.english),
     disableBundles: false,
     principalList: [],
     enableBatchNumber: false,

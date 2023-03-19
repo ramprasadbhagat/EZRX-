@@ -124,3 +124,21 @@ String getDateStringByDateTime(DateTime dateTime) =>
 String emptyIfZero(double value) {
   return value == 0 ? '' : value.toString();
 }
+
+String getLanguageString(String apiLanguageCode) {
+  switch (apiLanguageCode) {
+    case ApiLanguageCode.thai:
+      return 'ภาษาไทย';
+    case ApiLanguageCode.mandarin:
+      return '繁體中文';
+    case ApiLanguageCode.burmese:
+      return 'ဗမာဘာသာစကား';
+    case ApiLanguageCode.vietnamese:
+      return 'Tiếng Việt';
+    case ApiLanguageCode.khmer:
+      return 'ភាសាខ្មែរ';
+    case ApiLanguageCode.english:
+    default:
+      return 'English';
+  }
+}

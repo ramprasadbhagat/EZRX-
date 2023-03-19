@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'sales_organisation_configs.freezed.dart';

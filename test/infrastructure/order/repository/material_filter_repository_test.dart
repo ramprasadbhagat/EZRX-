@@ -9,6 +9,8 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
+import 'package:ezrxmobile/domain/core/value/constants.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_filter_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_filter_remote.dart';
@@ -97,7 +99,7 @@ void main() {
               salesOrganisation: '2601',
               soldToCustomerCode: '100000345',
               shipToCustomerCode: '1234567',
-              language: 'EN',
+              language: ApiLanguageCode.english,
               gimmickMaterial: false,
               pickAndPack: '',
               userName: 'user'))
@@ -107,7 +109,7 @@ void main() {
           salesOrgConfig: mockSalesOrganisationConfigs.copyWith(
               salesOrg: SalesOrg('2601'),
               languageFilter: true,
-              languageValue: LanguageValue('EN'),
+              languageValue: LanguageValue(ApiLanguageCode.english),
               currency: Currency('SG')),
           salesOrganisation: fakeSaleOrg,
           customerCodeInfo: fakeCustomerCodeInfo,
@@ -131,14 +133,14 @@ void main() {
             salesOrganisation: '2601',
             soldToCustomerCode: '100000345',
             shipToCustomerCode: '1234567',
-            language: 'EN',
+            language: ApiLanguageCode.english,
           )).thenAnswer((invocation) async => MaterialFilter.empty());
 
       final result = await materialFilterRepository.getMaterialFilterList(
           salesOrgConfig: mockSalesOrganisationConfigs.copyWith(
               salesOrg: SalesOrg('2601'),
               languageFilter: true,
-              languageValue: LanguageValue('EN'),
+              languageValue: LanguageValue(ApiLanguageCode.english),
               currency: Currency('SG')),
           salesOrganisation: fakeSaleOrg,
           customerCodeInfo: fakeCustomerCodeInfo,
@@ -160,7 +162,7 @@ void main() {
           salesOrganisation: '2601',
           soldToCustomerCode: '100000345',
           shipToCustomerCode: '1234567',
-          language: 'EN',
+          language: ApiLanguageCode.english,
           gimmickMaterial: false,
           pickAndPack: '',
           userName: 'user')).thenThrow((invocation) async => MockException());
@@ -184,7 +186,7 @@ void main() {
             salesOrganisation: '2601',
             soldToCustomerCode: '100000345',
             shipToCustomerCode: '1234567',
-            language: 'EN',
+            language: ApiLanguageCode.english,
           )).thenThrow((invocation) async => MockException());
 
       final result = await materialFilterRepository.getMaterialFilterList(

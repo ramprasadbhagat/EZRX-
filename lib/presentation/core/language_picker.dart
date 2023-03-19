@@ -1,4 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/domain/core/value/constants.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -93,4 +95,24 @@ extension LocaleExtension on Locale {
         return '';
     }
   }
+
+  String apiLanguageCode() {
+    switch (languageCode) {
+      case 'th':
+        return ApiLanguageCode.thai;
+      case 'zh':
+        return ApiLanguageCode.mandarin;
+      case 'my':
+        return ApiLanguageCode.burmese;
+      case 'vi':
+        return ApiLanguageCode.vietnamese;
+      case 'km':
+        return ApiLanguageCode.khmer;
+      case 'en':
+      default:
+        return ApiLanguageCode.english;
+    }
+  }
+
+  LanguageValue get languageValue => LanguageValue(apiLanguageCode());
 }

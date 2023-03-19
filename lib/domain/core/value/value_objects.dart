@@ -106,8 +106,18 @@ class DateTimeStringValue extends ValueObject<String> {
     return currentDate.isBefore(dateTime);
   }
 
-
-
-      
   const DateTimeStringValue._(this.value);
+}
+
+class LanguageValue extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory LanguageValue(String input) {
+    return LanguageValue._(validateStringNotEmpty(input));
+  }
+
+  String get languageString => getLanguageString(value.getOrElse(() => ''));
+
+  const LanguageValue._(this.value);
 }

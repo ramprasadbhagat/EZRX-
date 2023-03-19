@@ -7,6 +7,8 @@ import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
+import 'package:ezrxmobile/domain/core/value/constants.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
@@ -86,7 +88,7 @@ void main() {
     );
     mockSalesOrganisationConfigs = SalesOrganisationConfigs.empty().copyWith(
       languageFilter: true,
-      languageValue: LanguageValue('EN'),
+      languageValue: LanguageValue(ApiLanguageCode.english),
       disablePrincipals: false,
       enableGimmickMaterial: true,
       principalList: ['123', '234', '345'],

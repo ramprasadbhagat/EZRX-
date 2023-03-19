@@ -5,6 +5,8 @@ import 'package:ezrxmobile/domain/account/entities/setting_tc.dart';
 import 'package:ezrxmobile/domain/account/entities/settings.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/value/constants.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/user_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -143,14 +145,14 @@ void main() {
         when(() => userRepoMock.updateNotificationSettings(User.empty()
             .copyWith(
                 settings: Settings.empty().copyWith(
-                    languagePreference: 'en',
+                    languagePreference: LanguageValue(ApiLanguageCode.english),
                     emailNotifications: true)))).thenAnswer(
           (invocation) async => Right(User.empty()),
         );
       },
-      act: (UserBloc bloc) => bloc.add(
-          const UserEvent.updateNotificationSettings(
-              languagePreference: 'en', emailNotifications: true)),
+      act: (UserBloc bloc) => bloc.add(UserEvent.updateNotificationSettings(
+          languagePreference: LanguageValue(ApiLanguageCode.english),
+          emailNotifications: true)),
       expect: () => [UserState.initial()],
     );
 
@@ -168,16 +170,16 @@ void main() {
         when(() => userRepoMock.updateNotificationSettings(User.empty()
             .copyWith(
                 settings: Settings.empty().copyWith(
-                    languagePreference: 'en',
+                    languagePreference: LanguageValue(ApiLanguageCode.english),
                     emailNotifications: true)))).thenAnswer(
           (invocation) async => const Left(
             ApiFailure.other('Fake Error'),
           ),
         );
       },
-      act: (UserBloc bloc) => bloc.add(
-          const UserEvent.updateNotificationSettings(
-              languagePreference: 'en', emailNotifications: true)),
+      act: (UserBloc bloc) => bloc.add(UserEvent.updateNotificationSettings(
+          languagePreference: LanguageValue(ApiLanguageCode.english),
+          emailNotifications: true)),
       expect: () => [
         UserState.initial().copyWith(
             userFailureOrSuccessOption:

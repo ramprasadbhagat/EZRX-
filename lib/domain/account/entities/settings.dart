@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'settings.freezed.dart';
@@ -9,12 +10,12 @@ class Settings with _$Settings {
   const factory Settings({
     required bool emailNotifications,
     required bool mobileNotifications,
-    required String languagePreference,
+    required LanguageValue languagePreference,
   }) = _Settings;
 
-  factory Settings.empty() => const Settings(
+  factory Settings.empty() => Settings(
         emailNotifications: false,
         mobileNotifications: false,
-        languagePreference: '',
+        languagePreference: LanguageValue(''),
       );
 }

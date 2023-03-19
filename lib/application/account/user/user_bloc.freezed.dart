@@ -22,7 +22,7 @@ mixin _$UserEvent {
     required TResult Function() fetch,
     required TResult Function(String date) accptTnc,
     required TResult Function(
-            String languagePreference, bool emailNotifications)
+            LanguageValue languagePreference, bool emailNotifications)
         updateNotificationSettings,
   }) =>
       throw _privateConstructorUsedError;
@@ -31,7 +31,8 @@ mixin _$UserEvent {
     TResult? Function()? initialized,
     TResult? Function()? fetch,
     TResult? Function(String date)? accptTnc,
-    TResult? Function(String languagePreference, bool emailNotifications)?
+    TResult? Function(
+            LanguageValue languagePreference, bool emailNotifications)?
         updateNotificationSettings,
   }) =>
       throw _privateConstructorUsedError;
@@ -40,7 +41,7 @@ mixin _$UserEvent {
     TResult Function()? initialized,
     TResult Function()? fetch,
     TResult Function(String date)? accptTnc,
-    TResult Function(String languagePreference, bool emailNotifications)?
+    TResult Function(LanguageValue languagePreference, bool emailNotifications)?
         updateNotificationSettings,
     required TResult orElse(),
   }) =>
@@ -134,7 +135,7 @@ class _$_Initialized implements _Initialized {
     required TResult Function() fetch,
     required TResult Function(String date) accptTnc,
     required TResult Function(
-            String languagePreference, bool emailNotifications)
+            LanguageValue languagePreference, bool emailNotifications)
         updateNotificationSettings,
   }) {
     return initialized();
@@ -146,7 +147,8 @@ class _$_Initialized implements _Initialized {
     TResult? Function()? initialized,
     TResult? Function()? fetch,
     TResult? Function(String date)? accptTnc,
-    TResult? Function(String languagePreference, bool emailNotifications)?
+    TResult? Function(
+            LanguageValue languagePreference, bool emailNotifications)?
         updateNotificationSettings,
   }) {
     return initialized?.call();
@@ -158,7 +160,7 @@ class _$_Initialized implements _Initialized {
     TResult Function()? initialized,
     TResult Function()? fetch,
     TResult Function(String date)? accptTnc,
-    TResult Function(String languagePreference, bool emailNotifications)?
+    TResult Function(LanguageValue languagePreference, bool emailNotifications)?
         updateNotificationSettings,
     required TResult orElse(),
   }) {
@@ -253,7 +255,7 @@ class _$_Fetch implements _Fetch {
     required TResult Function() fetch,
     required TResult Function(String date) accptTnc,
     required TResult Function(
-            String languagePreference, bool emailNotifications)
+            LanguageValue languagePreference, bool emailNotifications)
         updateNotificationSettings,
   }) {
     return fetch();
@@ -265,7 +267,8 @@ class _$_Fetch implements _Fetch {
     TResult? Function()? initialized,
     TResult? Function()? fetch,
     TResult? Function(String date)? accptTnc,
-    TResult? Function(String languagePreference, bool emailNotifications)?
+    TResult? Function(
+            LanguageValue languagePreference, bool emailNotifications)?
         updateNotificationSettings,
   }) {
     return fetch?.call();
@@ -277,7 +280,7 @@ class _$_Fetch implements _Fetch {
     TResult Function()? initialized,
     TResult Function()? fetch,
     TResult Function(String date)? accptTnc,
-    TResult Function(String languagePreference, bool emailNotifications)?
+    TResult Function(LanguageValue languagePreference, bool emailNotifications)?
         updateNotificationSettings,
     required TResult orElse(),
   }) {
@@ -400,7 +403,7 @@ class _$_AccptTnc implements _AccptTnc {
     required TResult Function() fetch,
     required TResult Function(String date) accptTnc,
     required TResult Function(
-            String languagePreference, bool emailNotifications)
+            LanguageValue languagePreference, bool emailNotifications)
         updateNotificationSettings,
   }) {
     return accptTnc(date);
@@ -412,7 +415,8 @@ class _$_AccptTnc implements _AccptTnc {
     TResult? Function()? initialized,
     TResult? Function()? fetch,
     TResult? Function(String date)? accptTnc,
-    TResult? Function(String languagePreference, bool emailNotifications)?
+    TResult? Function(
+            LanguageValue languagePreference, bool emailNotifications)?
         updateNotificationSettings,
   }) {
     return accptTnc?.call(date);
@@ -424,7 +428,7 @@ class _$_AccptTnc implements _AccptTnc {
     TResult Function()? initialized,
     TResult Function()? fetch,
     TResult Function(String date)? accptTnc,
-    TResult Function(String languagePreference, bool emailNotifications)?
+    TResult Function(LanguageValue languagePreference, bool emailNotifications)?
         updateNotificationSettings,
     required TResult orElse(),
   }) {
@@ -491,7 +495,7 @@ abstract class _$$_UpdateNotificationSettingsCopyWith<$Res> {
           $Res Function(_$_UpdateNotificationSettings) then) =
       __$$_UpdateNotificationSettingsCopyWithImpl<$Res>;
   @useResult
-  $Res call({String languagePreference, bool emailNotifications});
+  $Res call({LanguageValue languagePreference, bool emailNotifications});
 }
 
 /// @nodoc
@@ -513,7 +517,7 @@ class __$$_UpdateNotificationSettingsCopyWithImpl<$Res>
       languagePreference: null == languagePreference
           ? _value.languagePreference
           : languagePreference // ignore: cast_nullable_to_non_nullable
-              as String,
+              as LanguageValue,
       emailNotifications: null == emailNotifications
           ? _value.emailNotifications
           : emailNotifications // ignore: cast_nullable_to_non_nullable
@@ -529,7 +533,7 @@ class _$_UpdateNotificationSettings implements _UpdateNotificationSettings {
       {required this.languagePreference, required this.emailNotifications});
 
   @override
-  final String languagePreference;
+  final LanguageValue languagePreference;
   @override
   final bool emailNotifications;
 
@@ -567,7 +571,7 @@ class _$_UpdateNotificationSettings implements _UpdateNotificationSettings {
     required TResult Function() fetch,
     required TResult Function(String date) accptTnc,
     required TResult Function(
-            String languagePreference, bool emailNotifications)
+            LanguageValue languagePreference, bool emailNotifications)
         updateNotificationSettings,
   }) {
     return updateNotificationSettings(languagePreference, emailNotifications);
@@ -579,7 +583,8 @@ class _$_UpdateNotificationSettings implements _UpdateNotificationSettings {
     TResult? Function()? initialized,
     TResult? Function()? fetch,
     TResult? Function(String date)? accptTnc,
-    TResult? Function(String languagePreference, bool emailNotifications)?
+    TResult? Function(
+            LanguageValue languagePreference, bool emailNotifications)?
         updateNotificationSettings,
   }) {
     return updateNotificationSettings?.call(
@@ -592,7 +597,7 @@ class _$_UpdateNotificationSettings implements _UpdateNotificationSettings {
     TResult Function()? initialized,
     TResult Function()? fetch,
     TResult Function(String date)? accptTnc,
-    TResult Function(String languagePreference, bool emailNotifications)?
+    TResult Function(LanguageValue languagePreference, bool emailNotifications)?
         updateNotificationSettings,
     required TResult orElse(),
   }) {
@@ -645,10 +650,10 @@ class _$_UpdateNotificationSettings implements _UpdateNotificationSettings {
 
 abstract class _UpdateNotificationSettings implements UserEvent {
   const factory _UpdateNotificationSettings(
-      {required final String languagePreference,
+      {required final LanguageValue languagePreference,
       required final bool emailNotifications}) = _$_UpdateNotificationSettings;
 
-  String get languagePreference;
+  LanguageValue get languagePreference;
   bool get emailNotifications;
   @JsonKey(ignore: true)
   _$$_UpdateNotificationSettingsCopyWith<_$_UpdateNotificationSettings>

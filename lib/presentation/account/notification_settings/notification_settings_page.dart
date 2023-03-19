@@ -61,14 +61,13 @@ class NotificationSettingsPage extends StatelessWidget {
                           locator<CountlyService>().addCountlyEvent(
                             'notification_language_changed',
                             segmentation: {
-                              'fromLanguage':
-                                  state.languagePreference.toUpperCase(),
-                              'toLanguage': locale.languageCode.toUpperCase(),
+                              'fromLanguage': state.languagePreference,
+                              'toLanguage': locale.apiLanguageCode(),
                             },
                           );
                           context.read<UserBloc>().add(
                                 UserEvent.updateNotificationSettings(
-                                  languagePreference: locale.languageCode,
+                                  languagePreference: locale.languageValue,
                                   emailNotifications: state.emailNotifications,
                                 ),
                               );
@@ -91,9 +90,7 @@ class NotificationSettingsPage extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
-                            state.languagePreference
-                                .toLocale()
-                                .languageString(),
+                            state.languagePreference.languageString,
                           ),
                           const Icon(
                             Icons.arrow_drop_down_outlined,

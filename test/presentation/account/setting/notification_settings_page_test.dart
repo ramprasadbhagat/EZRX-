@@ -4,6 +4,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
+import 'package:ezrxmobile/domain/core/value/constants.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/account/notification_settings/notification_settings_page.dart';
@@ -24,7 +26,7 @@ void main() async {
   EasyLocalization.logger.enableLevels = [];
   late final AppRouter autoRouterMock;
 
-  late UserBloc userBlocMock;
+  late UserBloc userBloc;
   setUpAll(() async {
     setupLocator();
     autoRouterMock = locator<AppRouter>();
@@ -46,7 +48,7 @@ void main() async {
         child: WidgetUtils.getScopedWidget(
           autoRouterMock: autoRouterMock,
           providers: [
-            BlocProvider<UserBloc>(create: (context) => userBlocMock),
+            BlocProvider<UserBloc>(create: (context) => userBloc),
           ],
           child: const NotificationSettingsPage(),
         ),
@@ -54,11 +56,11 @@ void main() async {
     }
 
     setUp(() {
-      userBlocMock = UserBlocMock();
-      when(() => userBlocMock.state).thenReturn(UserState(
+      userBloc = UserBlocMock();
+      when(() => userBloc.state).thenReturn(UserState(
         user: User.empty().copyWith(
           settings: User.empty().settings.copyWith(
-                languagePreference: 'en',
+                languagePreference: LanguageValue(ApiLanguageCode.english),
                 emailNotifications: false,
               ),
         ),
@@ -95,24 +97,34 @@ void main() async {
     );
 
     testWidgets(
-      'tapp on language preferences, changing the language',
+      'tap on language preferences, changing the language',
       (tester) async {
         await tester.pumpWidget(getScopedWidget());
         await tester
             .tap(find.byKey(const Key('gestureDetectorForLanguagePicker')));
         await tester.pumpAndSettle();
+
+        // select TH
         expect(
           find.byKey(const Key('notificationSettingsLanguagePicker')),
           findsOneWidget,
         );
-
         final thaiLanguageTile = find.byKey(const Key('thaiLanguageTile'));
         expect(thaiLanguageTile, findsOneWidget);
         await tester.tap(thaiLanguageTile, warnIfMissed: false);
         await tester.pump();
+        verify(
+          () => userBloc.add(
+            UserEvent.updateNotificationSettings(
+              languagePreference: LanguageValue(ApiLanguageCode.thai),
+              emailNotifications: false,
+            ),
+          ),
+        ).called(1);
         expect(find.text('ภาษาไทย'), findsOneWidget);
-        await tester.pump(const Duration(seconds: 2));
+        await tester.pump(const Duration(seconds: 1));
 
+        // select TW
         await tester
             .tap(find.byKey(const Key('notificationSettingsLanguagePicker')));
         final mandarinLanguageTile =
@@ -120,8 +132,18 @@ void main() async {
         expect(mandarinLanguageTile, findsOneWidget);
         await tester.tap(mandarinLanguageTile, warnIfMissed: false);
         await tester.pump();
+        verify(
+          () => userBloc.add(
+            UserEvent.updateNotificationSettings(
+              languagePreference: LanguageValue(ApiLanguageCode.mandarin),
+              emailNotifications: false,
+            ),
+          ),
+        ).called(1);
         expect(find.text('繁體中文'), findsOneWidget);
+        await tester.pump(const Duration(seconds: 1));
 
+        // select MM
         await tester
             .tap(find.byKey(const Key('notificationSettingsLanguagePicker')));
         final burmeseLanguageTile =
@@ -129,8 +151,18 @@ void main() async {
         expect(burmeseLanguageTile, findsOneWidget);
         await tester.tap(burmeseLanguageTile, warnIfMissed: false);
         await tester.pump();
+        verify(
+          () => userBloc.add(
+            UserEvent.updateNotificationSettings(
+              languagePreference: LanguageValue(ApiLanguageCode.burmese),
+              emailNotifications: false,
+            ),
+          ),
+        ).called(1);
         expect(find.text('ဗမာဘာသာစကား'), findsOneWidget);
+        await tester.pump(const Duration(seconds: 1));
 
+        // select VN
         await tester
             .tap(find.byKey(const Key('notificationSettingsLanguagePicker')));
         final vietnameseLanguageTile =
@@ -138,16 +170,36 @@ void main() async {
         expect(vietnameseLanguageTile, findsOneWidget);
         await tester.tap(vietnameseLanguageTile, warnIfMissed: false);
         await tester.pump();
+        verify(
+          () => userBloc.add(
+            UserEvent.updateNotificationSettings(
+              languagePreference: LanguageValue(ApiLanguageCode.vietnamese),
+              emailNotifications: false,
+            ),
+          ),
+        ).called(1);
         expect(find.text('Tiếng Việt'), findsOneWidget);
+        await tester.pump(const Duration(seconds: 1));
 
+        // select KH
         await tester
             .tap(find.byKey(const Key('notificationSettingsLanguagePicker')));
         final khmerLanguageTile = find.byKey(const Key('khmerLanguageTile'));
         expect(khmerLanguageTile, findsOneWidget);
         await tester.tap(khmerLanguageTile, warnIfMissed: false);
         await tester.pump();
+        verify(
+          () => userBloc.add(
+            UserEvent.updateNotificationSettings(
+              languagePreference: LanguageValue(ApiLanguageCode.khmer),
+              emailNotifications: false,
+            ),
+          ),
+        ).called(1);
         expect(find.text('ភាសាខ្មែរ'), findsOneWidget);
+        await tester.pump(const Duration(seconds: 1));
 
+        // select EN
         await tester
             .tap(find.byKey(const Key('notificationSettingsLanguagePicker')));
         final englishLanguageTile =
@@ -155,6 +207,14 @@ void main() async {
         expect(englishLanguageTile, findsOneWidget);
         await tester.tap(englishLanguageTile, warnIfMissed: false);
         await tester.pump();
+        verify(
+          () => userBloc.add(
+            UserEvent.updateNotificationSettings(
+              languagePreference: LanguageValue(ApiLanguageCode.english),
+              emailNotifications: false,
+            ),
+          ),
+        ).called(1);
         expect(find.text('English'), findsAtLeastNWidgets(1));
       },
     );

@@ -6,6 +6,8 @@ import 'package:ezrxmobile/domain/account/entities/sales_representative_info.dar
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 
 import 'package:ezrxmobile/domain/core/error/exception.dart';
+import 'package:ezrxmobile/domain/core/value/constants.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/payment_customer_information.dart';
 import 'package:ezrxmobile/domain/order/entities/payment_term.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/payment_term_local.dart';
@@ -21,7 +23,6 @@ class PaymentTermLocalDataSourceMock extends Mock
 
 class PaymentTermsRemoteDataSourceMock extends Mock
     implements PaymentTermsRemoteDataSource {}
-
 
 void main() {
   late PaymentTermsRepository paymentTermsRepository;
@@ -103,7 +104,8 @@ void main() {
           paymentCustomerInfo:
               mockPaymentCustomerInformation.copyWith(paymentTerm: 'K002'),
           salesOrgConfig: mockSalesOrganisationConfigs.copyWith(
-              languageFilter: true, languageValue: LanguageValue('E')),
+              languageFilter: true,
+              languageValue: LanguageValue(ApiLanguageCode.shortEnglish)),
           salesRepInfo:
               mockSalesRepresentativeInfo.copyWith(uniquePrincipalNumber: [
             '0000101991',

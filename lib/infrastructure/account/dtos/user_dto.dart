@@ -8,6 +8,8 @@ import 'package:ezrxmobile/domain/account/entities/settings.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/constants.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/role_dto.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/sales_organisation_dto.dart';
 import 'package:ezrxmobile/infrastructure/core/common/dto_helper.dart';
@@ -68,7 +70,8 @@ class UserDto with _$UserDto {
       userSalesOrganisations: _splitSalesOrg(user.userSalesOrganisations),
       emailNotifications: user.settings.emailNotifications,
       mobileNotifications: user.settings.mobileNotifications,
-      languagePreference: user.settings.languagePreference,
+      languagePreference: user.settings.languagePreference
+          .getOrDefaultValue(ApiLanguageCode.english),
       enableOrderType: user.enableOrderType,
       acceptPrivacyPolicy: user.settingTc.acceptPrivacyPolicy,
       acceptPrivacyPolicyTime:
@@ -118,7 +121,7 @@ class UserDto with _$UserDto {
       settings: Settings(
         emailNotifications: emailNotifications,
         mobileNotifications: mobileNotifications,
-        languagePreference: languagePreference,
+        languagePreference: LanguageValue(languagePreference),
       ),
       settingTc: SettingTc(
         acceptPrivacyPolicy: acceptPrivacyPolicy,
@@ -228,7 +231,7 @@ List<SalesOrganisationDto> _splitSalesOrg(
 String handleEmptyLanguagePreference(Map json, String key) {
   final String languagePreference = json[key] ?? '';
   if (languagePreference.isEmpty) {
-    return 'en';
+    return ApiLanguageCode.english;
   }
 
   return languagePreference;

@@ -8,6 +8,8 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
+import 'package:ezrxmobile/domain/core/value/constants.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
@@ -49,7 +51,7 @@ void main() {
   final mockSalesOrganisationConfigs = SalesOrganisationConfigs.empty()
       .copyWith(
           languageFilter: true,
-          languageValue: LanguageValue('EN'),
+          languageValue: LanguageValue(ApiLanguageCode.english),
           disablePrincipals: false,
           enableGimmickMaterial: true,
           principalList: ['123', '234', '345'],
@@ -241,7 +243,7 @@ void main() {
               offset: 0,
               orderBy: 'materialDescription_asc',
               searchKey: '1673',
-              language: 'EN',
+              language: ApiLanguageCode.english,
               gimmickMaterial: true,
               pickAndPack: 'include',
               principalNameList: ['GSK Consumer Healthcare'],
@@ -346,7 +348,7 @@ void main() {
           offset: 0,
           orderBy: 'materialDescription_asc',
           searchKey: '1673',
-          language: 'EN',
+          language: ApiLanguageCode.english,
           principalNameList: ['GSK Consumer Healthcare'],
           therapeuticClassList: ['Other multivitamins with minerals'],
           itemBrandList: ['Ribena RTD Blueberry'],
@@ -388,7 +390,7 @@ void main() {
               offset: 0,
               orderBy: 'orderDate',
               searchKey: '',
-              language: 'EN',
+              language: ApiLanguageCode.english,
               principalNameList: [
                 'GSK Consumer Healthcare',
                 'Pfizer PFE Private Limited test'
@@ -448,7 +450,7 @@ void main() {
           offset: 0,
           orderBy: 'orderDate',
           searchKey: '',
-          language: 'EN',
+          language: ApiLanguageCode.english,
           gimmickMaterial: true,
           pickAndPack: '',
           principalNameList: [
@@ -587,7 +589,7 @@ void main() {
           offset: 0,
           orderBy: 'materialDescription_asc',
           searchKey: '1763',
-          language: 'EN',
+          language: ApiLanguageCode.english,
           gimmickMaterial: true,
           pickAndPack: 'include',
           isForFOC: false)).thenAnswer((invocation) async => <MaterialInfo>[]);
@@ -628,7 +630,7 @@ void main() {
               excludePrincipal: [],
               isForFOC: false,
               itemBrandList: [],
-              language: 'EN',
+              language: ApiLanguageCode.english,
               principalNameList: [],
               salesOrgCode: '2601',
               shipToCode: '1234567',
@@ -671,7 +673,7 @@ void main() {
           offset: 0,
           orderBy: 'materialDescription_asc',
           searchKey: '173',
-          language: 'EN',
+          language: ApiLanguageCode.english,
           gimmickMaterial: true,
           pickAndPack: 'include',
           isForFOC: true)).thenThrow((invocation) async => MockException());

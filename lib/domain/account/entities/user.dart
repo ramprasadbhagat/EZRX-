@@ -5,6 +5,7 @@ import 'package:ezrxmobile/domain/account/entities/setting_tc.dart';
 import 'package:ezrxmobile/domain/account/entities/settings.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'user.freezed.dart';
@@ -38,10 +39,10 @@ class User with _$User {
         role: Role(id: '', name: '', type: RoleType(''), description: ''),
         customerCode: CustomerCode(''),
         userSalesOrganisations: <SalesOrganisation>[],
-        settings: const Settings(
+        settings: Settings(
           emailNotifications: false,
           mobileNotifications: false,
-          languagePreference: '',
+          languagePreference: LanguageValue(''),
         ),
         settingTc: SettingTc(
           acceptPrivacyPolicy: false,

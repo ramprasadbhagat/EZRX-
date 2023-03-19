@@ -10,6 +10,8 @@ import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/constants.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -49,7 +51,7 @@ void main() {
     disablePrincipals: false,
     enableGimmickMaterial: false,
     languageFilter: false,
-    languageValue: LanguageValue(''),
+    languageValue: LanguageValue(ApiLanguageCode.english),
     disableBundles: false,
     principalList: [],
     enableBatchNumber: false,

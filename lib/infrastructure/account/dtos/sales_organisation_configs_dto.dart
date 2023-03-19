@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
 part 'sales_organisation_configs_dto.freezed.dart';
@@ -234,7 +235,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       disableReturnsAccessSR: configs.disableReturnsAccessSR,
       disableReturnsAccess: configs.disableReturnsAccess,
       enableComboDeals: configs.enableComboDeals,
-      comboDealsUserRole:  configs.comboDealsUserRole.getOrDefaultValue(0),
+      comboDealsUserRole: configs.comboDealsUserRole.getOrDefaultValue(0),
     );
   }
 
@@ -293,7 +294,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       disableReturnsAccessSR: disableReturnsAccessSR,
       disableReturnsAccess: disableReturnsAccess,
       enableComboDeals: enableComboDeals,
-      comboDealsUserRole:  ComboDealUserRole(comboDealsUserRole),
+      comboDealsUserRole: ComboDealUserRole(comboDealsUserRole),
     );
   }
 

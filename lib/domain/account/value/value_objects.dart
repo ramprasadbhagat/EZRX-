@@ -299,17 +299,6 @@ class Status extends ValueObject<String> {
   const Status._(this.value);
 }
 
-class LanguageValue extends ValueObject<String> {
-  @override
-  final Either<ValueFailure<String>, String> value;
-
-  factory LanguageValue(String input) {
-    return LanguageValue._(validateStringNotEmpty(input));
-  }
-
-  const LanguageValue._(this.value);
-}
-
 class FutureDeliveryDay extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;

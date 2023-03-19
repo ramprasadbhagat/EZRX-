@@ -10,6 +10,8 @@ import 'package:ezrxmobile/domain/account/entities/sales_representative_info.dar
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/value/constants.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/payment_customer_information.dart';
 import 'package:ezrxmobile/domain/order/entities/payment_term.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/payment_term_local.dart';
@@ -49,7 +51,7 @@ void main() {
     disablePrincipals: false,
     enableGimmickMaterial: false,
     languageFilter: true,
-    languageValue: LanguageValue(''),
+    languageValue: LanguageValue(ApiLanguageCode.english),
     disableBundles: false,
     principalList: [],
     enableBatchNumber: false,

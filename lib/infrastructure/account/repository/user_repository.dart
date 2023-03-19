@@ -117,7 +117,8 @@ class UserRepository implements IUserRepository {
       try {
         final user =
             await remoteDataSource.updateUserNotificationAndLanguagePreference(
-          languagePreference: userDetails.settings.languagePreference,
+          languagePreference:
+              userDetails.settings.languagePreference.getValue(),
           emailNotification: userDetails.settings.emailNotifications,
           userId: userDetails.id,
         );

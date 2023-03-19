@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$Settings {
   bool get emailNotifications => throw _privateConstructorUsedError;
   bool get mobileNotifications => throw _privateConstructorUsedError;
-  String get languagePreference => throw _privateConstructorUsedError;
+  LanguageValue get languagePreference => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SettingsCopyWith<Settings> get copyWith =>
@@ -33,7 +33,7 @@ abstract class $SettingsCopyWith<$Res> {
   $Res call(
       {bool emailNotifications,
       bool mobileNotifications,
-      String languagePreference});
+      LanguageValue languagePreference});
 }
 
 /// @nodoc
@@ -65,7 +65,7 @@ class _$SettingsCopyWithImpl<$Res, $Val extends Settings>
       languagePreference: null == languagePreference
           ? _value.languagePreference
           : languagePreference // ignore: cast_nullable_to_non_nullable
-              as String,
+              as LanguageValue,
     ) as $Val);
   }
 }
@@ -80,7 +80,7 @@ abstract class _$$_SettingsCopyWith<$Res> implements $SettingsCopyWith<$Res> {
   $Res call(
       {bool emailNotifications,
       bool mobileNotifications,
-      String languagePreference});
+      LanguageValue languagePreference});
 }
 
 /// @nodoc
@@ -110,7 +110,7 @@ class __$$_SettingsCopyWithImpl<$Res>
       languagePreference: null == languagePreference
           ? _value.languagePreference
           : languagePreference // ignore: cast_nullable_to_non_nullable
-              as String,
+              as LanguageValue,
     ));
   }
 }
@@ -129,7 +129,7 @@ class _$_Settings extends _Settings {
   @override
   final bool mobileNotifications;
   @override
-  final String languagePreference;
+  final LanguageValue languagePreference;
 
   @override
   String toString() {
@@ -164,7 +164,7 @@ abstract class _Settings extends Settings {
   const factory _Settings(
       {required final bool emailNotifications,
       required final bool mobileNotifications,
-      required final String languagePreference}) = _$_Settings;
+      required final LanguageValue languagePreference}) = _$_Settings;
   const _Settings._() : super._();
 
   @override
@@ -172,7 +172,7 @@ abstract class _Settings extends Settings {
   @override
   bool get mobileNotifications;
   @override
-  String get languagePreference;
+  LanguageValue get languagePreference;
   @override
   @JsonKey(ignore: true)
   _$$_SettingsCopyWith<_$_Settings> get copyWith =>
