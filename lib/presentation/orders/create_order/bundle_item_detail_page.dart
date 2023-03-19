@@ -297,6 +297,7 @@ class _ListContent extends StatelessWidget {
               );
             },
             controller: controller,
+            minimumQty: 0,
           ),
         ],
       ),

@@ -397,6 +397,7 @@ class _BundleMaterialItemState extends State<_BundleMaterialItem> {
               },
               quantityAddKey: const Key('cartAdd'),
               quantityDeleteKey: const Key('cartDelete'),
+              minimumQty: 0,
               isLoading: state.isFetching,
             );
           },

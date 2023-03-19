@@ -235,7 +235,7 @@ class _SubmitContinueButton extends StatelessWidget {
               context.read<SalesOrgBloc>().state.salesOrganisation,
           user: context.read<UserBloc>().state.user,
           cartItems:
-              context.read<CartBloc>().state.selectedCartItems.allMaterials,
+              context.read<CartBloc>().state.selectedCartItems.validMaterials,
           grandTotal: context.read<CartBloc>().state.grandTotalBasedOnOrderType(
                 isSpecial: isSpecialType,
               ),

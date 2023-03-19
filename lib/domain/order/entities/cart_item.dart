@@ -416,4 +416,7 @@ extension CartItemListExtension on List<CartItem> {
 
   List<PriceAggregate> get allMaterials =>
       map((item) => item.materials).flattened.toList();
+
+  List<PriceAggregate> get validMaterials =>
+      allMaterials.where((e) => e.quantity > 0).toList();
 }

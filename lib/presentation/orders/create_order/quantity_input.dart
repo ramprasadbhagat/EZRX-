@@ -17,6 +17,8 @@ class QuantityInput extends StatelessWidget {
   final Key quantityDeleteKey;
   final bool isEnabled;
   final bool isLoading;
+  final int minimumQty;
+  final int maximumQty;
 
   const QuantityInput({
     Key? key,
@@ -29,10 +31,9 @@ class QuantityInput extends StatelessWidget {
     required this.quantityDeleteKey,
     required this.isEnabled,
     this.isLoading = false,
+    this.minimumQty = 1,
+    this.maximumQty = 100000,
   }) : super(key: key);
-
-  static const minimumQty = 0;
-  static const maximumQty = 100000;
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +64,7 @@ class QuantityInput extends StatelessWidget {
               contentPadding: EdgeInsets.zero,
               border: isEnabled ? const UnderlineInputBorder() : InputBorder.none,
             ),
-            style: Theme.of(context).textTheme.titleMedium,
+            style: Theme.of(context).textTheme.titleLarge,
           ),
         ),
         isLoading
@@ -78,7 +79,7 @@ class QuantityInput extends StatelessWidget {
                           FocusScope.of(context).unfocus();
                           final value =
                               (int.tryParse(controller.text) ?? 0) - 1;
-                          if (value > minimumQty) {
+                          if (value >= minimumQty) {
                             final text = value.toString();
                             controller.value = TextEditingValue(
                               text: text,
