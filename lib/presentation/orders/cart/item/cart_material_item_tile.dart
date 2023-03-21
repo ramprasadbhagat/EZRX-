@@ -342,7 +342,7 @@ class CartMaterialItemTileDetails extends StatelessWidget {
             BonusDetails(cartItem: material),
           if (material.salesOrgConfig.expiryDateDisplay)
             Text(
-              '${'Expiry Date : '.tr()}${material.stockInfo.expiryDate.naIfEmptyDateTime}',
+              '${'Expiry Date : '.tr()}${material.stockInfo.expiryDate.toValidDateString}',
               style: Theme.of(context).textTheme.titleSmall?.apply(
                     color: ZPColors.lightGray,
                   ),

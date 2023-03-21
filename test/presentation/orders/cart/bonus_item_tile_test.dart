@@ -10,6 +10,7 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
@@ -171,6 +172,7 @@ void main() {
             materialNumber: MaterialNumber('1234567'),
             remarks: 'test',
           ),
+          expiryDate: DateTimeStringValue('20230407'),
         );
         when(() => salesOrgBloc.state).thenReturn(
           SalesOrgState.initial().copyWith(
@@ -206,6 +208,9 @@ void main() {
         await tester.pump();
         final expiryDateDisplay = find.textContaining('Expiry Date');
         expect(expiryDateDisplay, findsOneWidget);
+        final expiryDate = find.textContaining('07 Apr 2023');
+        expect(expiryDate, findsOneWidget);
+
         final remarksMessage = find.byType(RemarksMessage);
         expect(remarksMessage, findsOneWidget);
         final quantityInput = find.byType(QuantityInput);

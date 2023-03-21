@@ -325,6 +325,7 @@ class CartRepository implements ICartRepository {
 
       final newBonusWithStock = newBonus.copyWith(
         inStock: stockInfo.inStock.getOrDefaultValue(''),
+        expiryDate: stockInfo.expiryDate,
       );
 
       final inCartItem = cartStorage.get(id: item.id)?.toDomain;
@@ -342,7 +343,9 @@ class CartRepository implements ICartRepository {
                   return newBonusWithStock;
                 }
 
-                return bonus.copyWith(qty: bonus.qty + newBonusWithStock.qty);
+                return bonus.copyWith(
+                    qty: bonus.qty + newBonusWithStock.qty,
+                    expiryDate: bonus.expiryDate,);
               }
 
               return bonus;
