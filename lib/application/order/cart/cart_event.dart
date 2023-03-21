@@ -10,6 +10,7 @@ class CartEvent with _$CartEvent {
     required ShipToInfo shipToInfo,
     required bool doNotAllowOutOfStockMaterials,
     required bool comboDealEligible,
+    @Default(false) bool isSpecialOrderType,
   }) = _Fetch;
   const factory CartEvent.addMaterialToCart({
     required PriceAggregate item,
@@ -19,6 +20,7 @@ class CartEvent with _$CartEvent {
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
     required bool doNotallowOutOfStockMaterial,
+    @Default(false) bool isSpecialOrderType,
   }) = _AddMaterialToCart;
   const factory CartEvent.discountOverride({
     required PriceAggregate item,

@@ -12,6 +12,7 @@ import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.d
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
+import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_details/order_history_details_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_filter/order_history_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
@@ -139,6 +140,10 @@ class TenderContractRepositoryMock extends Mock
 
 class MixpanelMock extends Mock implements Mixpanel {}
 
+class OrderDocumentTypeBlocMock
+    extends MockBloc<OrderDocumentTypeEvent, OrderDocumentTypeState>
+    implements OrderDocumentTypeBloc {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
@@ -165,6 +170,7 @@ void main() {
   late FavouriteBlocMock favouriteBlocMock;
   late AdditionalDetailsBlocMock additionalDetailsBlocMock;
   late PermissionService permissionService;
+  late OrderDocumentTypeBloc orderDocumentTypeBlocMock;
 
   final fakeUser = User.empty().copyWith(
     username: Username('fake-user'),
@@ -213,6 +219,7 @@ void main() {
       tenderContractBlocMock = TenderContractBlocMock();
       favouriteBlocMock = FavouriteBlocMock();
       additionalDetailsBlocMock = AdditionalDetailsBlocMock();
+      orderDocumentTypeBlocMock = OrderDocumentTypeBlocMock();
       when(() => userBlocMock.state).thenReturn(
         UserState.initial().copyWith(
           user: fakeUser,
@@ -261,6 +268,9 @@ void main() {
       when(() => tenderContractBlocMock.state)
           .thenReturn(TenderContractState.initial());
       when(() => favouriteBlocMock.state).thenReturn(FavouriteState.initial());
+      when(() => orderDocumentTypeBlocMock.state).thenReturn(
+        OrderDocumentTypeState.initial(),
+      );
     });
     StackRouterScope getWUT() {
       return WidgetUtils.getScopedWidget(
@@ -300,6 +310,9 @@ void main() {
           ),
           BlocProvider<AdditionalDetailsBloc>(
             create: (context) => additionalDetailsBlocMock,
+          ),
+          BlocProvider<OrderDocumentTypeBloc>(
+            create: (context) => orderDocumentTypeBlocMock,
           ),
         ],
         child: Material(

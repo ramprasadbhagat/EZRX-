@@ -126,7 +126,11 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       );
 
       final failureOrSuccess = await repository.addItemToCart(
-        cartItem: CartItem.material(e.item),
+        cartItem: CartItem.material(
+          e.item.copyWith(
+            isSpecialOrderType: e.isSpecialOrderType,
+          ),
+        ),
         override: e.overrideQty,
         customerCodeInfo: e.customerCodeInfo,
         salesOrganisationConfigs: e.salesOrganisationConfigs,
@@ -154,6 +158,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
               isFetching: false,
             ),
           );
+          if (e.isSpecialOrderType) return;
           add(
             _VerifyMaterialDealBonus(
               item: e.item,

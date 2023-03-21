@@ -52,11 +52,8 @@ class EligibilityState with _$EligibilityState {
     }
 
     // 1. country must be case 'TH', 'SG', 'TW', 'MY'
-    // 2. user role type must be SalesRep
-    // 3. sales org config OrderType feature toggle enable
     if (salesOrganisation.salesOrg.isOrderTypeEligible &&
-        user.role.type.isSalesRep &&
-        !salesOrgConfigs.disableOrderType) {
+        isEligiblePriceOverride) {
       return true;
     }
 
@@ -160,7 +157,6 @@ class EligibilityState with _$EligibilityState {
     final comboDealUserRole = salesOrgConfigs.comboDealsUserRole;
     final userRole = user.role.type;
 
-
     if (comboDealUserRole.isAllUsers) {
       return true;
     }
@@ -175,4 +171,11 @@ class EligibilityState with _$EligibilityState {
 
     return false;
   }
+
+  //============================================================
+  // 1. user role type must be SalesRep
+  // 2. sales org config OrderType feature toggle enable
+  //============================================================
+  bool get isEligiblePriceOverride =>
+      user.role.type.isSalesRep && !salesOrgConfigs.disableOrderType;
 }

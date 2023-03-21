@@ -12,6 +12,7 @@ import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
+import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -64,6 +65,11 @@ class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
 class AddToCartBlocMock extends MockBloc<AddToCartEvent, AddToCartState>
     implements AddToCartBloc {}
 
+class OrderDocumentTypeBlocMock
+    extends MockBloc<OrderDocumentTypeEvent, OrderDocumentTypeState>
+    implements OrderDocumentTypeBloc {}
+    
+
 void main() {
   var mockFavouriteBloc = MockFavouriteBloc();
   var userBlocMock = UserMockBloc();
@@ -76,6 +82,7 @@ void main() {
   late EligibilityBlocMock mockEligiblityBloc;
   late AddToCartBlocMock addToCartBlocMock;
   late AuthMockBloc authBlocMock;
+  late OrderDocumentTypeBloc orderDocumentTypeBlocMock;
 
   final mockFavourite1 = Favourite(
     id: 'fake-id-1',
@@ -113,6 +120,8 @@ void main() {
     mockMaterialPriceDetailBloc = MaterialPriceDetailMockBloc();
     mockEligiblityBloc = EligibilityBlocMock();
     addToCartBlocMock = AddToCartBlocMock();
+    orderDocumentTypeBlocMock = OrderDocumentTypeBlocMock();
+
     when(() => mockEligiblityBloc.state).thenReturn(EligibilityState.initial());
     when(() => customerCodeMockBloc.state)
         .thenReturn(CustomerCodeState.initial());
@@ -126,6 +135,9 @@ void main() {
         .thenReturn(MaterialPriceDetailState.initial());
     when(() => mockFavouriteBloc.state).thenReturn(FavouriteState.initial());
     when(() => addToCartBlocMock.state).thenReturn(AddToCartState.initial());
+    when(() => orderDocumentTypeBlocMock.state).thenReturn(
+      OrderDocumentTypeState.initial(),
+    );
   }
 
   group(
@@ -165,6 +177,9 @@ void main() {
                     create: (context) => mockEligiblityBloc),
                 BlocProvider<AddToCartBloc>(
                     create: (context) => addToCartBlocMock),
+                BlocProvider<OrderDocumentTypeBloc>(
+                  create: (context) => orderDocumentTypeBlocMock,
+                ),
               ],
               child: const FavouritesTab(),
             ),

@@ -109,6 +109,7 @@ void main() {
             contractPaymentTerm: 'contractPaymentTerm'),
         zmgMaterialCountOnCart: 10,
         comboDealDto: ComboDealDto.empty,
+        isSpecialOrderType: false,
       );
     });
     test('Test toDomain', () {

@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
@@ -7,12 +8,12 @@ import 'package:ezrxmobile/domain/order/entities/combo_deal_qty_tier.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_price_detail.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
+import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:collection/collection.dart';
 
 part 'cart_item.freezed.dart';
 part 'cart_item.g.dart';
@@ -146,6 +147,18 @@ class CartItem with _$CartItem {
               (material) =>
                   material.stockInfo.inStock.isMaterialInStock ||
                   allowOutOfStock,
+            )
+            .toList(),
+      );
+
+  CartItem commercialToSpecial({required Price price}) => copyWith(
+        materials: materials
+            .map(
+              (e) => e.copyWith(
+                price: price,
+                addedBonusList: [],
+                isSpecialOrderType: true,
+              ),
             )
             .toList(),
       );

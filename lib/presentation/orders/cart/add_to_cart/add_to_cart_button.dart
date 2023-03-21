@@ -4,6 +4,7 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
@@ -131,7 +132,11 @@ class AddToCartButton extends StatelessWidget {
           salesOrganisationConfigs: eligibilityState.salesOrgConfigs,
           shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
           doNotallowOutOfStockMaterial:
-          eligibilityState.doNotAllowOutOfStockMaterials,
+                  eligibilityState.doNotAllowOutOfStockMaterials, 
+              isSpecialOrderType: context
+                  .read<OrderDocumentTypeBloc>()
+                  .state
+                  .isSpecialOrderType,
         ),
       );
       context.router.pop();

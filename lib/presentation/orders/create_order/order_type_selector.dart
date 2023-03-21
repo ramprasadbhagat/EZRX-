@@ -1,9 +1,13 @@
 import 'dart:async';
 
 import 'package:auto_route/auto_route.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
+import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
+import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/presentation/core/confirm_clear_cart_dialog.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
@@ -197,6 +201,7 @@ class _OrderTypeSelectorField extends StatelessWidget {
               isReasonSelected: isReason,
             ),
           );
+      _commercialToSpecialItem(context: context);
     } else {
       ConfirmClearDialog.show(
         context: context,
@@ -238,6 +243,39 @@ class _OrderTypeSelectorField extends StatelessWidget {
           }).toList(),
         );
       },
+    );
+  }
+
+  //TODO : revisit and simplify
+  void _commercialToSpecialItem({
+    required BuildContext context,
+  }) {
+    final cartBloc = context.read<CartBloc>();
+    if (cartBloc.state.cartItems.isEmpty) return;
+
+    final materialPriceBloc = context.read<MaterialPriceBloc>();
+    final eligibilityState = context.read<EligibilityBloc>().state;
+    final specialItem = cartBloc.state.cartItems
+        .map(
+          (CartItem element) => element.itemType == CartItemType.material
+              ? element.commercialToSpecial(
+                  price: materialPriceBloc.state.getPriceForMaterial(
+                    element.materials.first.getMaterialNumber,
+                  ),
+                )
+              : element,
+        )
+        .toList();
+    cartBloc.add(
+      CartEvent.replaceWithOrderItems(
+        items: specialItem,
+        customerCodeInfo: eligibilityState.customerCodeInfo,
+        salesOrganisationConfigs: eligibilityState.salesOrgConfigs,
+        salesOrganisation: eligibilityState.salesOrganisation,
+        shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+        doNotallowOutOfStockMaterial:
+            eligibilityState.doNotAllowOutOfStockMaterials,
+      ),
     );
   }
 }

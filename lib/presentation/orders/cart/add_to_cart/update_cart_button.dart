@@ -5,6 +5,7 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
@@ -114,6 +115,10 @@ class UpdateCartButton extends StatelessWidget {
             salesOrganisationConfigs:
                 context.read<SalesOrgBloc>().state.configs,
             shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+              isSpecialOrderType: context
+                  .read<OrderDocumentTypeBloc>()
+                  .state
+                  .isSpecialOrderType,
           ),
         );
     context.router.pop();

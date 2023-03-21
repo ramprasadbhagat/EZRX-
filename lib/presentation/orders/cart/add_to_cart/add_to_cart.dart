@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
@@ -34,13 +35,14 @@ class _AddToCartState extends State<AddToCart> {
   late SalesOrgBloc salesOrgBloc;
   late AddToCartBloc addToCartBloc;
   late TenderContractBloc tenderContractBloc;
+  late CartBloc cartBloc;
 
   @override
   void initState() {
     salesOrgBloc = context.read<SalesOrgBloc>();
     addToCartBloc = context.read<AddToCartBloc>();
     tenderContractBloc = context.read<TenderContractBloc>();
-    final cartBloc = context.read<CartBloc>();
+    cartBloc = context.read<CartBloc>();
     final cartItem = addToCartBloc.state.cartItem;
     addToCartBloc.add(
       AddToCartEvent.updateQuantity(
@@ -60,6 +62,9 @@ class _AddToCartState extends State<AddToCart> {
   bool get _isAddToCartAllowed {
     return !(!salesOrgBloc.state.configs.materialWithoutPrice &&
         addToCartBloc.state.cartItem.price.finalPrice.isEmpty &&
+        (!context.read<EligibilityBloc>().state.isOrderTypeEnable &&
+            !addToCartBloc.state.cartItem.isSpecialOrderTypeNotTH &&
+            addToCartBloc.state.cartItem.isSpecialMaterial) &&
         !widget.isCovid19Tab);
   }
 
@@ -68,9 +73,6 @@ class _AddToCartState extends State<AddToCart> {
 
   @override
   Widget build(BuildContext context) {
-    final cartBloc = context.read<CartBloc>();
-    final addToCartBloc = context.read<AddToCartBloc>();
-
     trackMixpanelEvent(
       MixpanelEvents.pageViewVisited,
       props: {

@@ -35,6 +35,7 @@ class PriceAggregate with _$PriceAggregate {
     required StockInfo stockInfo,
     required TenderContract tenderContract,
     required ComboDeal comboDeal,
+    @Default(false) bool isSpecialOrderType,
   }) = _PriceAggregate;
 
   factory PriceAggregate.empty() => PriceAggregate(
@@ -122,22 +123,23 @@ class PriceAggregate with _$PriceAggregate {
     return NumUtils.roundToPlaces(vatCalculation(price.lastPrice.getOrCrash()));
   }
 
+  bool get isSpecialOrderTypeNotTH =>
+      isSpecialOrderType && !salesOrgConfig.salesOrg.isTH;
+
+  bool get isSpecialMaterial =>
+      !materialInfo.isFOCMaterial || !materialInfo.isSampleMaterial;
+
   double get finalPrice {
     var finalPrice = 0.0;
 
-    if (price.isDiscountEligible) {
-      finalPrice = tenderContract.tenderPrice.tenderPrice != 0
-          ? tenderContract.tenderPrice
-              .tenderPriceByPricingUnit(tenderContract.pricingUnit)
-          : discountedListPrice;
-    }
-
-    if (!price.isDiscountEligible) {
-      finalPrice = tenderContract.tenderPrice.tenderPrice != 0
-          ? tenderContract.tenderPrice
-              .tenderPriceByPricingUnit(tenderContract.pricingUnit)
-          : price.finalPrice.getOrDefaultValue(0);
-    }
+    finalPrice = tenderContract.tenderPrice.tenderPrice != 0
+        ? tenderContract.tenderPrice
+            .tenderPriceByPricingUnit(tenderContract.pricingUnit)
+        : isSpecialOrderTypeNotTH
+            ? 0.0
+            : (price.isDiscountEligible && !isSpecialOrderType)
+                ? discountedListPrice
+                : price.finalPrice.getOrDefaultValue(0);
 
     return NumUtils.roundToPlaces(finalPrice);
   }
@@ -274,13 +276,13 @@ class PriceAggregate with _$PriceAggregate {
 
   bool get refreshAddedBonus =>
       calculateMaterialItemBonus.length != addedDealBonusMaterial.length ||
-      calculateMaterialItemBonus.any((BonusMaterial canculatedBonus) =>
-          canculatedBonus.bonusQuantity !=
+      calculateMaterialItemBonus.any((BonusMaterial calculatedBonus) =>
+          calculatedBonus.bonusQuantity !=
           addedDealBonusMaterial
               .firstWhere(
                 (MaterialItemBonus availableBonus) =>
                     availableBonus.materialNumber ==
-                    canculatedBonus.materialNumber,
+                    calculatedBonus.materialNumber,
                 orElse: () => MaterialItemBonus.empty(),
               )
               .qty);

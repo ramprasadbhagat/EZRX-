@@ -6,7 +6,6 @@ import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.da
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/discount_override/discount_override_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
-import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
@@ -15,10 +14,10 @@ import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/cart_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
+import 'package:ezrxmobile/presentation/orders/cart/bonus/cart_item_bonus_tile.dart';
 import 'package:ezrxmobile/presentation/orders/cart/remark/cart_item_remark.dart';
 import 'package:ezrxmobile/presentation/orders/cart/remark/add_remark_dialog.dart';
 import 'package:ezrxmobile/presentation/orders/cart/remark/add_remark_button.dart';
-import 'package:ezrxmobile/presentation/orders/cart/bonus/cart_item_bonus_tile.dart';
 import 'package:ezrxmobile/presentation/orders/cart/override/discount_override_toggle.dart';
 import 'package:ezrxmobile/presentation/orders/cart/remark/update_remark_dialog.dart';
 import 'package:ezrxmobile/presentation/core/tender_contract_details_tile.dart';
@@ -255,12 +254,12 @@ class CartMaterialItemTileDetails extends StatelessWidget {
   }) : super(key: key);
 
   bool _isPriceOverRideVisible(BuildContext context) {
-    final enablePriceOverRide = context.read<EligibilityBloc>().state;
-    final disablePriceOverRide = context.read<OrderEligibilityBloc>().state;
+    if (!context.read<EligibilityBloc>().state.isEligiblePriceOverride ||
+        context.read<OrderDocumentTypeBloc>().state.isSpecialOrderType) {
+      return false;
+    }
 
-    if (disablePriceOverRide.isDisablePriceOverRide) return false;
-
-    return enablePriceOverRide.isPriceOverrideEnable;
+    return context.read<EligibilityBloc>().state.isPriceOverrideEnable;
   }
 
   @override
@@ -271,7 +270,7 @@ class CartMaterialItemTileDetails extends StatelessWidget {
     final enableVat = context.read<SalesOrgBloc>().state.configs.enableVat;
     final isSpecialOrderType =
         context.read<OrderDocumentTypeBloc>().state.isSpecialOrderType;
-
+        
     return Expanded(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -355,7 +354,8 @@ class CartMaterialItemTileDetails extends StatelessWidget {
                     color: ZPColors.lightGray,
                   ),
             ),
-          if (!isSpecialOrderType)
+          !material.isSpecialOrderTypeNotTH
+              ?
             InkWell(
               key: const Key('priceOverride'),
               onTap: () async {
@@ -433,7 +433,8 @@ class CartMaterialItemTileDetails extends StatelessWidget {
                     ),
                 ],
               ),
-            ),
+                )
+              : const SizedBox.shrink(),
         ],
       ),
     );
@@ -472,6 +473,9 @@ class _CartItemQuantityInputState extends State<_CartItemQuantityInput> {
 
   @override
   Widget build(BuildContext context) {
+    final isSpecialOrderType =
+        context.read<OrderDocumentTypeBloc>().state.isSpecialOrderType;
+
     return BlocBuilder<CartBloc, CartState>(
       buildWhen: (previous, current) =>
           previous.isFetching != current.isFetching,
@@ -509,6 +513,7 @@ class _CartItemQuantityInputState extends State<_CartItemQuantityInput> {
                     salesOrganisationConfigs:
                         context.read<SalesOrgBloc>().state.configs,
                     shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+                    isSpecialOrderType: isSpecialOrderType,
                   ),
                 );
           },
@@ -535,6 +540,7 @@ class _CartItemQuantityInputState extends State<_CartItemQuantityInput> {
                     salesOrganisationConfigs:
                         context.read<SalesOrgBloc>().state.configs,
                     shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+                    isSpecialOrderType: isSpecialOrderType,
                   ),
                 );
           },
@@ -561,6 +567,7 @@ class _CartItemQuantityInputState extends State<_CartItemQuantityInput> {
                     salesOrganisationConfigs:
                         context.read<SalesOrgBloc>().state.configs,
                     shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+                    isSpecialOrderType: isSpecialOrderType,
                   ),
                 );
           },

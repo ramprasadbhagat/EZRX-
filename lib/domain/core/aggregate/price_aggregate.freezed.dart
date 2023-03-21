@@ -28,6 +28,7 @@ mixin _$PriceAggregate {
   StockInfo get stockInfo => throw _privateConstructorUsedError;
   TenderContract get tenderContract => throw _privateConstructorUsedError;
   ComboDeal get comboDeal => throw _privateConstructorUsedError;
+  bool get isSpecialOrderType => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PriceAggregateCopyWith<PriceAggregate> get copyWith =>
@@ -50,7 +51,8 @@ abstract class $PriceAggregateCopyWith<$Res> {
       List<MaterialItemBonus> addedBonusList,
       StockInfo stockInfo,
       TenderContract tenderContract,
-      ComboDeal comboDeal});
+      ComboDeal comboDeal,
+      bool isSpecialOrderType});
 
   $PriceCopyWith<$Res> get price;
   $MaterialInfoCopyWith<$Res> get materialInfo;
@@ -84,6 +86,7 @@ class _$PriceAggregateCopyWithImpl<$Res, $Val extends PriceAggregate>
     Object? stockInfo = null,
     Object? tenderContract = null,
     Object? comboDeal = null,
+    Object? isSpecialOrderType = null,
   }) {
     return _then(_value.copyWith(
       price: null == price
@@ -126,6 +129,10 @@ class _$PriceAggregateCopyWithImpl<$Res, $Val extends PriceAggregate>
           ? _value.comboDeal
           : comboDeal // ignore: cast_nullable_to_non_nullable
               as ComboDeal,
+      isSpecialOrderType: null == isSpecialOrderType
+          ? _value.isSpecialOrderType
+          : isSpecialOrderType // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -205,7 +212,8 @@ abstract class _$$_PriceAggregateCopyWith<$Res>
       List<MaterialItemBonus> addedBonusList,
       StockInfo stockInfo,
       TenderContract tenderContract,
-      ComboDeal comboDeal});
+      ComboDeal comboDeal,
+      bool isSpecialOrderType});
 
   @override
   $PriceCopyWith<$Res> get price;
@@ -244,6 +252,7 @@ class __$$_PriceAggregateCopyWithImpl<$Res>
     Object? stockInfo = null,
     Object? tenderContract = null,
     Object? comboDeal = null,
+    Object? isSpecialOrderType = null,
   }) {
     return _then(_$_PriceAggregate(
       price: null == price
@@ -286,6 +295,10 @@ class __$$_PriceAggregateCopyWithImpl<$Res>
           ? _value.comboDeal
           : comboDeal // ignore: cast_nullable_to_non_nullable
               as ComboDeal,
+      isSpecialOrderType: null == isSpecialOrderType
+          ? _value.isSpecialOrderType
+          : isSpecialOrderType // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -303,7 +316,8 @@ class _$_PriceAggregate extends _PriceAggregate {
       required final List<MaterialItemBonus> addedBonusList,
       required this.stockInfo,
       required this.tenderContract,
-      required this.comboDeal})
+      required this.comboDeal,
+      this.isSpecialOrderType = false})
       : _addedBonusList = addedBonusList,
         super._();
 
@@ -333,10 +347,13 @@ class _$_PriceAggregate extends _PriceAggregate {
   final TenderContract tenderContract;
   @override
   final ComboDeal comboDeal;
+  @override
+  @JsonKey()
+  final bool isSpecialOrderType;
 
   @override
   String toString() {
-    return 'PriceAggregate(price: $price, materialInfo: $materialInfo, bundle: $bundle, salesOrgConfig: $salesOrgConfig, quantity: $quantity, discountedMaterialCount: $discountedMaterialCount, addedBonusList: $addedBonusList, stockInfo: $stockInfo, tenderContract: $tenderContract, comboDeal: $comboDeal)';
+    return 'PriceAggregate(price: $price, materialInfo: $materialInfo, bundle: $bundle, salesOrgConfig: $salesOrgConfig, quantity: $quantity, discountedMaterialCount: $discountedMaterialCount, addedBonusList: $addedBonusList, stockInfo: $stockInfo, tenderContract: $tenderContract, comboDeal: $comboDeal, isSpecialOrderType: $isSpecialOrderType)';
   }
 
   @override
@@ -362,7 +379,9 @@ class _$_PriceAggregate extends _PriceAggregate {
             (identical(other.tenderContract, tenderContract) ||
                 other.tenderContract == tenderContract) &&
             (identical(other.comboDeal, comboDeal) ||
-                other.comboDeal == comboDeal));
+                other.comboDeal == comboDeal) &&
+            (identical(other.isSpecialOrderType, isSpecialOrderType) ||
+                other.isSpecialOrderType == isSpecialOrderType));
   }
 
   @override
@@ -377,7 +396,8 @@ class _$_PriceAggregate extends _PriceAggregate {
       const DeepCollectionEquality().hash(_addedBonusList),
       stockInfo,
       tenderContract,
-      comboDeal);
+      comboDeal,
+      isSpecialOrderType);
 
   @JsonKey(ignore: true)
   @override
@@ -397,7 +417,8 @@ abstract class _PriceAggregate extends PriceAggregate {
       required final List<MaterialItemBonus> addedBonusList,
       required final StockInfo stockInfo,
       required final TenderContract tenderContract,
-      required final ComboDeal comboDeal}) = _$_PriceAggregate;
+      required final ComboDeal comboDeal,
+      final bool isSpecialOrderType}) = _$_PriceAggregate;
   const _PriceAggregate._() : super._();
 
   @override
@@ -420,6 +441,8 @@ abstract class _PriceAggregate extends PriceAggregate {
   TenderContract get tenderContract;
   @override
   ComboDeal get comboDeal;
+  @override
+  bool get isSpecialOrderType;
   @override
   @JsonKey(ignore: true)
   _$$_PriceAggregateCopyWith<_$_PriceAggregate> get copyWith =>

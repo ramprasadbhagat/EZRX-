@@ -25,7 +25,8 @@ mixin _$CartEvent {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible)
+            bool comboDealEligible,
+            bool isSpecialOrderType)
         fetch,
     required TResult Function(
             PriceAggregate item,
@@ -34,7 +35,8 @@ mixin _$CartEvent {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
+            bool doNotallowOutOfStockMaterial,
+            bool isSpecialOrderType)
         addMaterialToCart,
     required TResult Function(PriceAggregate item) discountOverride,
     required TResult Function(
@@ -115,7 +117,8 @@ mixin _$CartEvent {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible)?
+            bool comboDealEligible,
+            bool isSpecialOrderType)?
         fetch,
     TResult? Function(
             PriceAggregate item,
@@ -124,7 +127,8 @@ mixin _$CartEvent {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            bool doNotallowOutOfStockMaterial,
+            bool isSpecialOrderType)?
         addMaterialToCart,
     TResult? Function(PriceAggregate item)? discountOverride,
     TResult? Function(
@@ -203,7 +207,8 @@ mixin _$CartEvent {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible)?
+            bool comboDealEligible,
+            bool isSpecialOrderType)?
         fetch,
     TResult Function(
             PriceAggregate item,
@@ -212,7 +217,8 @@ mixin _$CartEvent {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            bool doNotallowOutOfStockMaterial,
+            bool isSpecialOrderType)?
         addMaterialToCart,
     TResult Function(PriceAggregate item)? discountOverride,
     TResult Function(
@@ -428,7 +434,8 @@ class _$_Initialized implements _Initialized {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible)
+            bool comboDealEligible,
+            bool isSpecialOrderType)
         fetch,
     required TResult Function(
             PriceAggregate item,
@@ -437,7 +444,8 @@ class _$_Initialized implements _Initialized {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
+            bool doNotallowOutOfStockMaterial,
+            bool isSpecialOrderType)
         addMaterialToCart,
     required TResult Function(PriceAggregate item) discountOverride,
     required TResult Function(
@@ -521,7 +529,8 @@ class _$_Initialized implements _Initialized {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible)?
+            bool comboDealEligible,
+            bool isSpecialOrderType)?
         fetch,
     TResult? Function(
             PriceAggregate item,
@@ -530,7 +539,8 @@ class _$_Initialized implements _Initialized {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            bool doNotallowOutOfStockMaterial,
+            bool isSpecialOrderType)?
         addMaterialToCart,
     TResult? Function(PriceAggregate item)? discountOverride,
     TResult? Function(
@@ -612,7 +622,8 @@ class _$_Initialized implements _Initialized {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible)?
+            bool comboDealEligible,
+            bool isSpecialOrderType)?
         fetch,
     TResult Function(
             PriceAggregate item,
@@ -621,7 +632,8 @@ class _$_Initialized implements _Initialized {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            bool doNotallowOutOfStockMaterial,
+            bool isSpecialOrderType)?
         addMaterialToCart,
     TResult Function(PriceAggregate item)? discountOverride,
     TResult Function(
@@ -806,7 +818,8 @@ abstract class _$$_FetchCopyWith<$Res> {
       CustomerCodeInfo customerCodeInfo,
       ShipToInfo shipToInfo,
       bool doNotAllowOutOfStockMaterials,
-      bool comboDealEligible});
+      bool comboDealEligible,
+      bool isSpecialOrderType});
 
   $SalesOrganisationConfigsCopyWith<$Res> get salesOrganisationConfigs;
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
@@ -830,6 +843,7 @@ class __$$_FetchCopyWithImpl<$Res>
     Object? shipToInfo = null,
     Object? doNotAllowOutOfStockMaterials = null,
     Object? comboDealEligible = null,
+    Object? isSpecialOrderType = null,
   }) {
     return _then(_$_Fetch(
       salesOrganisationConfigs: null == salesOrganisationConfigs
@@ -855,6 +869,10 @@ class __$$_FetchCopyWithImpl<$Res>
       comboDealEligible: null == comboDealEligible
           ? _value.comboDealEligible
           : comboDealEligible // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isSpecialOrderType: null == isSpecialOrderType
+          ? _value.isSpecialOrderType
+          : isSpecialOrderType // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
@@ -902,7 +920,8 @@ class _$_Fetch implements _Fetch {
       required this.customerCodeInfo,
       required this.shipToInfo,
       required this.doNotAllowOutOfStockMaterials,
-      required this.comboDealEligible});
+      required this.comboDealEligible,
+      this.isSpecialOrderType = false});
 
   @override
   final SalesOrganisationConfigs salesOrganisationConfigs;
@@ -916,10 +935,13 @@ class _$_Fetch implements _Fetch {
   final bool doNotAllowOutOfStockMaterials;
   @override
   final bool comboDealEligible;
+  @override
+  @JsonKey()
+  final bool isSpecialOrderType;
 
   @override
   String toString() {
-    return 'CartEvent.fetch(salesOrganisationConfigs: $salesOrganisationConfigs, salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, doNotAllowOutOfStockMaterials: $doNotAllowOutOfStockMaterials, comboDealEligible: $comboDealEligible)';
+    return 'CartEvent.fetch(salesOrganisationConfigs: $salesOrganisationConfigs, salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, doNotAllowOutOfStockMaterials: $doNotAllowOutOfStockMaterials, comboDealEligible: $comboDealEligible, isSpecialOrderType: $isSpecialOrderType)';
   }
 
   @override
@@ -941,7 +963,9 @@ class _$_Fetch implements _Fetch {
                 other.doNotAllowOutOfStockMaterials ==
                     doNotAllowOutOfStockMaterials) &&
             (identical(other.comboDealEligible, comboDealEligible) ||
-                other.comboDealEligible == comboDealEligible));
+                other.comboDealEligible == comboDealEligible) &&
+            (identical(other.isSpecialOrderType, isSpecialOrderType) ||
+                other.isSpecialOrderType == isSpecialOrderType));
   }
 
   @override
@@ -952,7 +976,8 @@ class _$_Fetch implements _Fetch {
       customerCodeInfo,
       shipToInfo,
       doNotAllowOutOfStockMaterials,
-      comboDealEligible);
+      comboDealEligible,
+      isSpecialOrderType);
 
   @JsonKey(ignore: true)
   @override
@@ -970,7 +995,8 @@ class _$_Fetch implements _Fetch {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible)
+            bool comboDealEligible,
+            bool isSpecialOrderType)
         fetch,
     required TResult Function(
             PriceAggregate item,
@@ -979,7 +1005,8 @@ class _$_Fetch implements _Fetch {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
+            bool doNotallowOutOfStockMaterial,
+            bool isSpecialOrderType)
         addMaterialToCart,
     required TResult Function(PriceAggregate item) discountOverride,
     required TResult Function(
@@ -1050,8 +1077,14 @@ class _$_Fetch implements _Fetch {
             bool doNotallowOutOfStockMaterial)
         replaceWithOrderItems,
   }) {
-    return fetch(salesOrganisationConfigs, salesOrganisation, customerCodeInfo,
-        shipToInfo, doNotAllowOutOfStockMaterials, comboDealEligible);
+    return fetch(
+        salesOrganisationConfigs,
+        salesOrganisation,
+        customerCodeInfo,
+        shipToInfo,
+        doNotAllowOutOfStockMaterials,
+        comboDealEligible,
+        isSpecialOrderType);
   }
 
   @override
@@ -1064,7 +1097,8 @@ class _$_Fetch implements _Fetch {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible)?
+            bool comboDealEligible,
+            bool isSpecialOrderType)?
         fetch,
     TResult? Function(
             PriceAggregate item,
@@ -1073,7 +1107,8 @@ class _$_Fetch implements _Fetch {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            bool doNotallowOutOfStockMaterial,
+            bool isSpecialOrderType)?
         addMaterialToCart,
     TResult? Function(PriceAggregate item)? discountOverride,
     TResult? Function(
@@ -1148,7 +1183,8 @@ class _$_Fetch implements _Fetch {
         customerCodeInfo,
         shipToInfo,
         doNotAllowOutOfStockMaterials,
-        comboDealEligible);
+        comboDealEligible,
+        isSpecialOrderType);
   }
 
   @override
@@ -1161,7 +1197,8 @@ class _$_Fetch implements _Fetch {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible)?
+            bool comboDealEligible,
+            bool isSpecialOrderType)?
         fetch,
     TResult Function(
             PriceAggregate item,
@@ -1170,7 +1207,8 @@ class _$_Fetch implements _Fetch {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            bool doNotallowOutOfStockMaterial,
+            bool isSpecialOrderType)?
         addMaterialToCart,
     TResult Function(PriceAggregate item)? discountOverride,
     TResult Function(
@@ -1247,7 +1285,8 @@ class _$_Fetch implements _Fetch {
           customerCodeInfo,
           shipToInfo,
           doNotAllowOutOfStockMaterials,
-          comboDealEligible);
+          comboDealEligible,
+          isSpecialOrderType);
     }
     return orElse();
   }
@@ -1353,7 +1392,8 @@ abstract class _Fetch implements CartEvent {
       required final CustomerCodeInfo customerCodeInfo,
       required final ShipToInfo shipToInfo,
       required final bool doNotAllowOutOfStockMaterials,
-      required final bool comboDealEligible}) = _$_Fetch;
+      required final bool comboDealEligible,
+      final bool isSpecialOrderType}) = _$_Fetch;
 
   SalesOrganisationConfigs get salesOrganisationConfigs;
   SalesOrganisation get salesOrganisation;
@@ -1361,6 +1401,7 @@ abstract class _Fetch implements CartEvent {
   ShipToInfo get shipToInfo;
   bool get doNotAllowOutOfStockMaterials;
   bool get comboDealEligible;
+  bool get isSpecialOrderType;
   @JsonKey(ignore: true)
   _$$_FetchCopyWith<_$_Fetch> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1379,7 +1420,8 @@ abstract class _$$_AddMaterialToCartCopyWith<$Res> {
       SalesOrganisation salesOrganisation,
       CustomerCodeInfo customerCodeInfo,
       ShipToInfo shipToInfo,
-      bool doNotallowOutOfStockMaterial});
+      bool doNotallowOutOfStockMaterial,
+      bool isSpecialOrderType});
 
   $PriceAggregateCopyWith<$Res> get item;
   $SalesOrganisationConfigsCopyWith<$Res> get salesOrganisationConfigs;
@@ -1406,6 +1448,7 @@ class __$$_AddMaterialToCartCopyWithImpl<$Res>
     Object? customerCodeInfo = null,
     Object? shipToInfo = null,
     Object? doNotallowOutOfStockMaterial = null,
+    Object? isSpecialOrderType = null,
   }) {
     return _then(_$_AddMaterialToCart(
       item: null == item
@@ -1435,6 +1478,10 @@ class __$$_AddMaterialToCartCopyWithImpl<$Res>
       doNotallowOutOfStockMaterial: null == doNotallowOutOfStockMaterial
           ? _value.doNotallowOutOfStockMaterial
           : doNotallowOutOfStockMaterial // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isSpecialOrderType: null == isSpecialOrderType
+          ? _value.isSpecialOrderType
+          : isSpecialOrderType // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
@@ -1491,7 +1538,8 @@ class _$_AddMaterialToCart implements _AddMaterialToCart {
       required this.salesOrganisation,
       required this.customerCodeInfo,
       required this.shipToInfo,
-      required this.doNotallowOutOfStockMaterial});
+      required this.doNotallowOutOfStockMaterial,
+      this.isSpecialOrderType = false});
 
   @override
   final PriceAggregate item;
@@ -1508,10 +1556,13 @@ class _$_AddMaterialToCart implements _AddMaterialToCart {
   final ShipToInfo shipToInfo;
   @override
   final bool doNotallowOutOfStockMaterial;
+  @override
+  @JsonKey()
+  final bool isSpecialOrderType;
 
   @override
   String toString() {
-    return 'CartEvent.addMaterialToCart(item: $item, overrideQty: $overrideQty, salesOrganisationConfigs: $salesOrganisationConfigs, salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, doNotallowOutOfStockMaterial: $doNotallowOutOfStockMaterial)';
+    return 'CartEvent.addMaterialToCart(item: $item, overrideQty: $overrideQty, salesOrganisationConfigs: $salesOrganisationConfigs, salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, doNotallowOutOfStockMaterial: $doNotallowOutOfStockMaterial, isSpecialOrderType: $isSpecialOrderType)';
   }
 
   @override
@@ -1534,7 +1585,9 @@ class _$_AddMaterialToCart implements _AddMaterialToCart {
             (identical(other.doNotallowOutOfStockMaterial,
                     doNotallowOutOfStockMaterial) ||
                 other.doNotallowOutOfStockMaterial ==
-                    doNotallowOutOfStockMaterial));
+                    doNotallowOutOfStockMaterial) &&
+            (identical(other.isSpecialOrderType, isSpecialOrderType) ||
+                other.isSpecialOrderType == isSpecialOrderType));
   }
 
   @override
@@ -1546,7 +1599,8 @@ class _$_AddMaterialToCart implements _AddMaterialToCart {
       salesOrganisation,
       customerCodeInfo,
       shipToInfo,
-      doNotallowOutOfStockMaterial);
+      doNotallowOutOfStockMaterial,
+      isSpecialOrderType);
 
   @JsonKey(ignore: true)
   @override
@@ -1565,7 +1619,8 @@ class _$_AddMaterialToCart implements _AddMaterialToCart {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible)
+            bool comboDealEligible,
+            bool isSpecialOrderType)
         fetch,
     required TResult Function(
             PriceAggregate item,
@@ -1574,7 +1629,8 @@ class _$_AddMaterialToCart implements _AddMaterialToCart {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
+            bool doNotallowOutOfStockMaterial,
+            bool isSpecialOrderType)
         addMaterialToCart,
     required TResult Function(PriceAggregate item) discountOverride,
     required TResult Function(
@@ -1652,7 +1708,8 @@ class _$_AddMaterialToCart implements _AddMaterialToCart {
         salesOrganisation,
         customerCodeInfo,
         shipToInfo,
-        doNotallowOutOfStockMaterial);
+        doNotallowOutOfStockMaterial,
+        isSpecialOrderType);
   }
 
   @override
@@ -1665,7 +1722,8 @@ class _$_AddMaterialToCart implements _AddMaterialToCart {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible)?
+            bool comboDealEligible,
+            bool isSpecialOrderType)?
         fetch,
     TResult? Function(
             PriceAggregate item,
@@ -1674,7 +1732,8 @@ class _$_AddMaterialToCart implements _AddMaterialToCart {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            bool doNotallowOutOfStockMaterial,
+            bool isSpecialOrderType)?
         addMaterialToCart,
     TResult? Function(PriceAggregate item)? discountOverride,
     TResult? Function(
@@ -1750,7 +1809,8 @@ class _$_AddMaterialToCart implements _AddMaterialToCart {
         salesOrganisation,
         customerCodeInfo,
         shipToInfo,
-        doNotallowOutOfStockMaterial);
+        doNotallowOutOfStockMaterial,
+        isSpecialOrderType);
   }
 
   @override
@@ -1763,7 +1823,8 @@ class _$_AddMaterialToCart implements _AddMaterialToCart {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible)?
+            bool comboDealEligible,
+            bool isSpecialOrderType)?
         fetch,
     TResult Function(
             PriceAggregate item,
@@ -1772,7 +1833,8 @@ class _$_AddMaterialToCart implements _AddMaterialToCart {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            bool doNotallowOutOfStockMaterial,
+            bool isSpecialOrderType)?
         addMaterialToCart,
     TResult Function(PriceAggregate item)? discountOverride,
     TResult Function(
@@ -1850,7 +1912,8 @@ class _$_AddMaterialToCart implements _AddMaterialToCart {
           salesOrganisation,
           customerCodeInfo,
           shipToInfo,
-          doNotallowOutOfStockMaterial);
+          doNotallowOutOfStockMaterial,
+          isSpecialOrderType);
     }
     return orElse();
   }
@@ -1957,7 +2020,8 @@ abstract class _AddMaterialToCart implements CartEvent {
       required final SalesOrganisation salesOrganisation,
       required final CustomerCodeInfo customerCodeInfo,
       required final ShipToInfo shipToInfo,
-      required final bool doNotallowOutOfStockMaterial}) = _$_AddMaterialToCart;
+      required final bool doNotallowOutOfStockMaterial,
+      final bool isSpecialOrderType}) = _$_AddMaterialToCart;
 
   PriceAggregate get item;
   bool get overrideQty;
@@ -1966,6 +2030,7 @@ abstract class _AddMaterialToCart implements CartEvent {
   CustomerCodeInfo get customerCodeInfo;
   ShipToInfo get shipToInfo;
   bool get doNotallowOutOfStockMaterial;
+  bool get isSpecialOrderType;
   @JsonKey(ignore: true)
   _$$_AddMaterialToCartCopyWith<_$_AddMaterialToCart> get copyWith =>
       throw _privateConstructorUsedError;
@@ -2052,7 +2117,8 @@ class _$_DiscountOverride implements _DiscountOverride {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible)
+            bool comboDealEligible,
+            bool isSpecialOrderType)
         fetch,
     required TResult Function(
             PriceAggregate item,
@@ -2061,7 +2127,8 @@ class _$_DiscountOverride implements _DiscountOverride {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
+            bool doNotallowOutOfStockMaterial,
+            bool isSpecialOrderType)
         addMaterialToCart,
     required TResult Function(PriceAggregate item) discountOverride,
     required TResult Function(
@@ -2145,7 +2212,8 @@ class _$_DiscountOverride implements _DiscountOverride {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible)?
+            bool comboDealEligible,
+            bool isSpecialOrderType)?
         fetch,
     TResult? Function(
             PriceAggregate item,
@@ -2154,7 +2222,8 @@ class _$_DiscountOverride implements _DiscountOverride {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            bool doNotallowOutOfStockMaterial,
+            bool isSpecialOrderType)?
         addMaterialToCart,
     TResult? Function(PriceAggregate item)? discountOverride,
     TResult? Function(
@@ -2236,7 +2305,8 @@ class _$_DiscountOverride implements _DiscountOverride {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible)?
+            bool comboDealEligible,
+            bool isSpecialOrderType)?
         fetch,
     TResult Function(
             PriceAggregate item,
@@ -2245,7 +2315,8 @@ class _$_DiscountOverride implements _DiscountOverride {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            bool doNotallowOutOfStockMaterial,
+            bool isSpecialOrderType)?
         addMaterialToCart,
     TResult Function(PriceAggregate item)? discountOverride,
     TResult Function(
@@ -2608,7 +2679,8 @@ class _$_AddBundleToCart implements _AddBundleToCart {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible)
+            bool comboDealEligible,
+            bool isSpecialOrderType)
         fetch,
     required TResult Function(
             PriceAggregate item,
@@ -2617,7 +2689,8 @@ class _$_AddBundleToCart implements _AddBundleToCart {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
+            bool doNotallowOutOfStockMaterial,
+            bool isSpecialOrderType)
         addMaterialToCart,
     required TResult Function(PriceAggregate item) discountOverride,
     required TResult Function(
@@ -2707,7 +2780,8 @@ class _$_AddBundleToCart implements _AddBundleToCart {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible)?
+            bool comboDealEligible,
+            bool isSpecialOrderType)?
         fetch,
     TResult? Function(
             PriceAggregate item,
@@ -2716,7 +2790,8 @@ class _$_AddBundleToCart implements _AddBundleToCart {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            bool doNotallowOutOfStockMaterial,
+            bool isSpecialOrderType)?
         addMaterialToCart,
     TResult? Function(PriceAggregate item)? discountOverride,
     TResult? Function(
@@ -2804,7 +2879,8 @@ class _$_AddBundleToCart implements _AddBundleToCart {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible)?
+            bool comboDealEligible,
+            bool isSpecialOrderType)?
         fetch,
     TResult Function(
             PriceAggregate item,
@@ -2813,7 +2889,8 @@ class _$_AddBundleToCart implements _AddBundleToCart {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            bool doNotallowOutOfStockMaterial,
+            bool isSpecialOrderType)?
         addMaterialToCart,
     TResult Function(PriceAggregate item)? discountOverride,
     TResult Function(
@@ -3206,7 +3283,8 @@ class _$_AddComboDealToCart implements _AddComboDealToCart {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible)
+            bool comboDealEligible,
+            bool isSpecialOrderType)
         fetch,
     required TResult Function(
             PriceAggregate item,
@@ -3215,7 +3293,8 @@ class _$_AddComboDealToCart implements _AddComboDealToCart {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
+            bool doNotallowOutOfStockMaterial,
+            bool isSpecialOrderType)
         addMaterialToCart,
     required TResult Function(PriceAggregate item) discountOverride,
     required TResult Function(
@@ -3306,7 +3385,8 @@ class _$_AddComboDealToCart implements _AddComboDealToCart {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible)?
+            bool comboDealEligible,
+            bool isSpecialOrderType)?
         fetch,
     TResult? Function(
             PriceAggregate item,
@@ -3315,7 +3395,8 @@ class _$_AddComboDealToCart implements _AddComboDealToCart {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            bool doNotallowOutOfStockMaterial,
+            bool isSpecialOrderType)?
         addMaterialToCart,
     TResult? Function(PriceAggregate item)? discountOverride,
     TResult? Function(
@@ -3404,7 +3485,8 @@ class _$_AddComboDealToCart implements _AddComboDealToCart {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible)?
+            bool comboDealEligible,
+            bool isSpecialOrderType)?
         fetch,
     TResult Function(
             PriceAggregate item,
@@ -3413,7 +3495,8 @@ class _$_AddComboDealToCart implements _AddComboDealToCart {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            bool doNotallowOutOfStockMaterial,
+            bool isSpecialOrderType)?
         addMaterialToCart,
     TResult Function(PriceAggregate item)? discountOverride,
     TResult Function(
@@ -3835,7 +3918,8 @@ class _$_UpdateMaterialQtyInCartItem implements _UpdateMaterialQtyInCartItem {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible)
+            bool comboDealEligible,
+            bool isSpecialOrderType)
         fetch,
     required TResult Function(
             PriceAggregate item,
@@ -3844,7 +3928,8 @@ class _$_UpdateMaterialQtyInCartItem implements _UpdateMaterialQtyInCartItem {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
+            bool doNotallowOutOfStockMaterial,
+            bool isSpecialOrderType)
         addMaterialToCart,
     required TResult Function(PriceAggregate item) discountOverride,
     required TResult Function(
@@ -3936,7 +4021,8 @@ class _$_UpdateMaterialQtyInCartItem implements _UpdateMaterialQtyInCartItem {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible)?
+            bool comboDealEligible,
+            bool isSpecialOrderType)?
         fetch,
     TResult? Function(
             PriceAggregate item,
@@ -3945,7 +4031,8 @@ class _$_UpdateMaterialQtyInCartItem implements _UpdateMaterialQtyInCartItem {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            bool doNotallowOutOfStockMaterial,
+            bool isSpecialOrderType)?
         addMaterialToCart,
     TResult? Function(PriceAggregate item)? discountOverride,
     TResult? Function(
@@ -4035,7 +4122,8 @@ class _$_UpdateMaterialQtyInCartItem implements _UpdateMaterialQtyInCartItem {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible)?
+            bool comboDealEligible,
+            bool isSpecialOrderType)?
         fetch,
     TResult Function(
             PriceAggregate item,
@@ -4044,7 +4132,8 @@ class _$_UpdateMaterialQtyInCartItem implements _UpdateMaterialQtyInCartItem {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            bool doNotallowOutOfStockMaterial,
+            bool isSpecialOrderType)?
         addMaterialToCart,
     TResult Function(PriceAggregate item)? discountOverride,
     TResult Function(
@@ -4415,7 +4504,8 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible)
+            bool comboDealEligible,
+            bool isSpecialOrderType)
         fetch,
     required TResult Function(
             PriceAggregate item,
@@ -4424,7 +4514,8 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
+            bool doNotallowOutOfStockMaterial,
+            bool isSpecialOrderType)
         addMaterialToCart,
     required TResult Function(PriceAggregate item) discountOverride,
     required TResult Function(
@@ -4509,7 +4600,8 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible)?
+            bool comboDealEligible,
+            bool isSpecialOrderType)?
         fetch,
     TResult? Function(
             PriceAggregate item,
@@ -4518,7 +4610,8 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            bool doNotallowOutOfStockMaterial,
+            bool isSpecialOrderType)?
         addMaterialToCart,
     TResult? Function(PriceAggregate item)? discountOverride,
     TResult? Function(
@@ -4601,7 +4694,8 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible)?
+            bool comboDealEligible,
+            bool isSpecialOrderType)?
         fetch,
     TResult Function(
             PriceAggregate item,
@@ -4610,7 +4704,8 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            bool doNotallowOutOfStockMaterial,
+            bool isSpecialOrderType)?
         addMaterialToCart,
     TResult Function(PriceAggregate item)? discountOverride,
     TResult Function(
@@ -4880,7 +4975,8 @@ class _$_RemoveFromCart implements _RemoveFromCart {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible)
+            bool comboDealEligible,
+            bool isSpecialOrderType)
         fetch,
     required TResult Function(
             PriceAggregate item,
@@ -4889,7 +4985,8 @@ class _$_RemoveFromCart implements _RemoveFromCart {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
+            bool doNotallowOutOfStockMaterial,
+            bool isSpecialOrderType)
         addMaterialToCart,
     required TResult Function(PriceAggregate item) discountOverride,
     required TResult Function(
@@ -4973,7 +5070,8 @@ class _$_RemoveFromCart implements _RemoveFromCart {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible)?
+            bool comboDealEligible,
+            bool isSpecialOrderType)?
         fetch,
     TResult? Function(
             PriceAggregate item,
@@ -4982,7 +5080,8 @@ class _$_RemoveFromCart implements _RemoveFromCart {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            bool doNotallowOutOfStockMaterial,
+            bool isSpecialOrderType)?
         addMaterialToCart,
     TResult? Function(PriceAggregate item)? discountOverride,
     TResult? Function(
@@ -5064,7 +5163,8 @@ class _$_RemoveFromCart implements _RemoveFromCart {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible)?
+            bool comboDealEligible,
+            bool isSpecialOrderType)?
         fetch,
     TResult Function(
             PriceAggregate item,
@@ -5073,7 +5173,8 @@ class _$_RemoveFromCart implements _RemoveFromCart {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            bool doNotallowOutOfStockMaterial,
+            bool isSpecialOrderType)?
         addMaterialToCart,
     TResult Function(PriceAggregate item)? discountOverride,
     TResult Function(
@@ -5343,7 +5444,8 @@ class _$_AddRemarkToCartItem implements _AddRemarkToCartItem {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible)
+            bool comboDealEligible,
+            bool isSpecialOrderType)
         fetch,
     required TResult Function(
             PriceAggregate item,
@@ -5352,7 +5454,8 @@ class _$_AddRemarkToCartItem implements _AddRemarkToCartItem {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
+            bool doNotallowOutOfStockMaterial,
+            bool isSpecialOrderType)
         addMaterialToCart,
     required TResult Function(PriceAggregate item) discountOverride,
     required TResult Function(
@@ -5436,7 +5539,8 @@ class _$_AddRemarkToCartItem implements _AddRemarkToCartItem {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible)?
+            bool comboDealEligible,
+            bool isSpecialOrderType)?
         fetch,
     TResult? Function(
             PriceAggregate item,
@@ -5445,7 +5549,8 @@ class _$_AddRemarkToCartItem implements _AddRemarkToCartItem {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            bool doNotallowOutOfStockMaterial,
+            bool isSpecialOrderType)?
         addMaterialToCart,
     TResult? Function(PriceAggregate item)? discountOverride,
     TResult? Function(
@@ -5527,7 +5632,8 @@ class _$_AddRemarkToCartItem implements _AddRemarkToCartItem {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible)?
+            bool comboDealEligible,
+            bool isSpecialOrderType)?
         fetch,
     TResult Function(
             PriceAggregate item,
@@ -5536,7 +5642,8 @@ class _$_AddRemarkToCartItem implements _AddRemarkToCartItem {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            bool doNotallowOutOfStockMaterial,
+            bool isSpecialOrderType)?
         addMaterialToCart,
     TResult Function(PriceAggregate item)? discountOverride,
     TResult Function(
@@ -5938,7 +6045,8 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible)
+            bool comboDealEligible,
+            bool isSpecialOrderType)
         fetch,
     required TResult Function(
             PriceAggregate item,
@@ -5947,7 +6055,8 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
+            bool doNotallowOutOfStockMaterial,
+            bool isSpecialOrderType)
         addMaterialToCart,
     required TResult Function(PriceAggregate item) discountOverride,
     required TResult Function(
@@ -6039,7 +6148,8 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible)?
+            bool comboDealEligible,
+            bool isSpecialOrderType)?
         fetch,
     TResult? Function(
             PriceAggregate item,
@@ -6048,7 +6158,8 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            bool doNotallowOutOfStockMaterial,
+            bool isSpecialOrderType)?
         addMaterialToCart,
     TResult? Function(PriceAggregate item)? discountOverride,
     TResult? Function(
@@ -6138,7 +6249,8 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible)?
+            bool comboDealEligible,
+            bool isSpecialOrderType)?
         fetch,
     TResult Function(
             PriceAggregate item,
@@ -6147,7 +6259,8 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            bool doNotallowOutOfStockMaterial,
+            bool isSpecialOrderType)?
         addMaterialToCart,
     TResult Function(PriceAggregate item)? discountOverride,
     TResult Function(
@@ -6452,7 +6565,8 @@ class _$_RemoveBonusFromCartItem implements _RemoveBonusFromCartItem {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible)
+            bool comboDealEligible,
+            bool isSpecialOrderType)
         fetch,
     required TResult Function(
             PriceAggregate item,
@@ -6461,7 +6575,8 @@ class _$_RemoveBonusFromCartItem implements _RemoveBonusFromCartItem {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
+            bool doNotallowOutOfStockMaterial,
+            bool isSpecialOrderType)
         addMaterialToCart,
     required TResult Function(PriceAggregate item) discountOverride,
     required TResult Function(
@@ -6545,7 +6660,8 @@ class _$_RemoveBonusFromCartItem implements _RemoveBonusFromCartItem {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible)?
+            bool comboDealEligible,
+            bool isSpecialOrderType)?
         fetch,
     TResult? Function(
             PriceAggregate item,
@@ -6554,7 +6670,8 @@ class _$_RemoveBonusFromCartItem implements _RemoveBonusFromCartItem {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            bool doNotallowOutOfStockMaterial,
+            bool isSpecialOrderType)?
         addMaterialToCart,
     TResult? Function(PriceAggregate item)? discountOverride,
     TResult? Function(
@@ -6636,7 +6753,8 @@ class _$_RemoveBonusFromCartItem implements _RemoveBonusFromCartItem {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible)?
+            bool comboDealEligible,
+            bool isSpecialOrderType)?
         fetch,
     TResult Function(
             PriceAggregate item,
@@ -6645,7 +6763,8 @@ class _$_RemoveBonusFromCartItem implements _RemoveBonusFromCartItem {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            bool doNotallowOutOfStockMaterial,
+            bool isSpecialOrderType)?
         addMaterialToCart,
     TResult Function(PriceAggregate item)? discountOverride,
     TResult Function(
@@ -6936,7 +7055,8 @@ class _$_AddRemarkToBonusItem implements _AddRemarkToBonusItem {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible)
+            bool comboDealEligible,
+            bool isSpecialOrderType)
         fetch,
     required TResult Function(
             PriceAggregate item,
@@ -6945,7 +7065,8 @@ class _$_AddRemarkToBonusItem implements _AddRemarkToBonusItem {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
+            bool doNotallowOutOfStockMaterial,
+            bool isSpecialOrderType)
         addMaterialToCart,
     required TResult Function(PriceAggregate item) discountOverride,
     required TResult Function(
@@ -7029,7 +7150,8 @@ class _$_AddRemarkToBonusItem implements _AddRemarkToBonusItem {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible)?
+            bool comboDealEligible,
+            bool isSpecialOrderType)?
         fetch,
     TResult? Function(
             PriceAggregate item,
@@ -7038,7 +7160,8 @@ class _$_AddRemarkToBonusItem implements _AddRemarkToBonusItem {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            bool doNotallowOutOfStockMaterial,
+            bool isSpecialOrderType)?
         addMaterialToCart,
     TResult? Function(PriceAggregate item)? discountOverride,
     TResult? Function(
@@ -7120,7 +7243,8 @@ class _$_AddRemarkToBonusItem implements _AddRemarkToBonusItem {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible)?
+            bool comboDealEligible,
+            bool isSpecialOrderType)?
         fetch,
     TResult Function(
             PriceAggregate item,
@@ -7129,7 +7253,8 @@ class _$_AddRemarkToBonusItem implements _AddRemarkToBonusItem {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            bool doNotallowOutOfStockMaterial,
+            bool isSpecialOrderType)?
         addMaterialToCart,
     TResult Function(PriceAggregate item)? discountOverride,
     TResult Function(
@@ -7413,7 +7538,8 @@ class _$_OverrideCartItemPrice implements _OverrideCartItemPrice {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible)
+            bool comboDealEligible,
+            bool isSpecialOrderType)
         fetch,
     required TResult Function(
             PriceAggregate item,
@@ -7422,7 +7548,8 @@ class _$_OverrideCartItemPrice implements _OverrideCartItemPrice {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
+            bool doNotallowOutOfStockMaterial,
+            bool isSpecialOrderType)
         addMaterialToCart,
     required TResult Function(PriceAggregate item) discountOverride,
     required TResult Function(
@@ -7506,7 +7633,8 @@ class _$_OverrideCartItemPrice implements _OverrideCartItemPrice {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible)?
+            bool comboDealEligible,
+            bool isSpecialOrderType)?
         fetch,
     TResult? Function(
             PriceAggregate item,
@@ -7515,7 +7643,8 @@ class _$_OverrideCartItemPrice implements _OverrideCartItemPrice {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            bool doNotallowOutOfStockMaterial,
+            bool isSpecialOrderType)?
         addMaterialToCart,
     TResult? Function(PriceAggregate item)? discountOverride,
     TResult? Function(
@@ -7597,7 +7726,8 @@ class _$_OverrideCartItemPrice implements _OverrideCartItemPrice {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible)?
+            bool comboDealEligible,
+            bool isSpecialOrderType)?
         fetch,
     TResult Function(
             PriceAggregate item,
@@ -7606,7 +7736,8 @@ class _$_OverrideCartItemPrice implements _OverrideCartItemPrice {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            bool doNotallowOutOfStockMaterial,
+            bool isSpecialOrderType)?
         addMaterialToCart,
     TResult Function(PriceAggregate item)? discountOverride,
     TResult Function(
@@ -7871,7 +8002,8 @@ class _$_SelectButtonTapped implements _SelectButtonTapped {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible)
+            bool comboDealEligible,
+            bool isSpecialOrderType)
         fetch,
     required TResult Function(
             PriceAggregate item,
@@ -7880,7 +8012,8 @@ class _$_SelectButtonTapped implements _SelectButtonTapped {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
+            bool doNotallowOutOfStockMaterial,
+            bool isSpecialOrderType)
         addMaterialToCart,
     required TResult Function(PriceAggregate item) discountOverride,
     required TResult Function(
@@ -7964,7 +8097,8 @@ class _$_SelectButtonTapped implements _SelectButtonTapped {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible)?
+            bool comboDealEligible,
+            bool isSpecialOrderType)?
         fetch,
     TResult? Function(
             PriceAggregate item,
@@ -7973,7 +8107,8 @@ class _$_SelectButtonTapped implements _SelectButtonTapped {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            bool doNotallowOutOfStockMaterial,
+            bool isSpecialOrderType)?
         addMaterialToCart,
     TResult? Function(PriceAggregate item)? discountOverride,
     TResult? Function(
@@ -8055,7 +8190,8 @@ class _$_SelectButtonTapped implements _SelectButtonTapped {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible)?
+            bool comboDealEligible,
+            bool isSpecialOrderType)?
         fetch,
     TResult Function(
             PriceAggregate item,
@@ -8064,7 +8200,8 @@ class _$_SelectButtonTapped implements _SelectButtonTapped {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            bool doNotallowOutOfStockMaterial,
+            bool isSpecialOrderType)?
         addMaterialToCart,
     TResult Function(PriceAggregate item)? discountOverride,
     TResult Function(
@@ -8289,7 +8426,8 @@ class _$_SelectAllButtonTapped implements _SelectAllButtonTapped {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible)
+            bool comboDealEligible,
+            bool isSpecialOrderType)
         fetch,
     required TResult Function(
             PriceAggregate item,
@@ -8298,7 +8436,8 @@ class _$_SelectAllButtonTapped implements _SelectAllButtonTapped {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
+            bool doNotallowOutOfStockMaterial,
+            bool isSpecialOrderType)
         addMaterialToCart,
     required TResult Function(PriceAggregate item) discountOverride,
     required TResult Function(
@@ -8382,7 +8521,8 @@ class _$_SelectAllButtonTapped implements _SelectAllButtonTapped {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible)?
+            bool comboDealEligible,
+            bool isSpecialOrderType)?
         fetch,
     TResult? Function(
             PriceAggregate item,
@@ -8391,7 +8531,8 @@ class _$_SelectAllButtonTapped implements _SelectAllButtonTapped {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            bool doNotallowOutOfStockMaterial,
+            bool isSpecialOrderType)?
         addMaterialToCart,
     TResult? Function(PriceAggregate item)? discountOverride,
     TResult? Function(
@@ -8473,7 +8614,8 @@ class _$_SelectAllButtonTapped implements _SelectAllButtonTapped {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible)?
+            bool comboDealEligible,
+            bool isSpecialOrderType)?
         fetch,
     TResult Function(
             PriceAggregate item,
@@ -8482,7 +8624,8 @@ class _$_SelectAllButtonTapped implements _SelectAllButtonTapped {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            bool doNotallowOutOfStockMaterial,
+            bool isSpecialOrderType)?
         addMaterialToCart,
     TResult Function(PriceAggregate item)? discountOverride,
     TResult Function(
@@ -8701,7 +8844,8 @@ class _$_ClearCart implements _ClearCart {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible)
+            bool comboDealEligible,
+            bool isSpecialOrderType)
         fetch,
     required TResult Function(
             PriceAggregate item,
@@ -8710,7 +8854,8 @@ class _$_ClearCart implements _ClearCart {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
+            bool doNotallowOutOfStockMaterial,
+            bool isSpecialOrderType)
         addMaterialToCart,
     required TResult Function(PriceAggregate item) discountOverride,
     required TResult Function(
@@ -8794,7 +8939,8 @@ class _$_ClearCart implements _ClearCart {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible)?
+            bool comboDealEligible,
+            bool isSpecialOrderType)?
         fetch,
     TResult? Function(
             PriceAggregate item,
@@ -8803,7 +8949,8 @@ class _$_ClearCart implements _ClearCart {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            bool doNotallowOutOfStockMaterial,
+            bool isSpecialOrderType)?
         addMaterialToCart,
     TResult? Function(PriceAggregate item)? discountOverride,
     TResult? Function(
@@ -8885,7 +9032,8 @@ class _$_ClearCart implements _ClearCart {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible)?
+            bool comboDealEligible,
+            bool isSpecialOrderType)?
         fetch,
     TResult Function(
             PriceAggregate item,
@@ -8894,7 +9042,8 @@ class _$_ClearCart implements _ClearCart {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            bool doNotallowOutOfStockMaterial,
+            bool isSpecialOrderType)?
         addMaterialToCart,
     TResult Function(PriceAggregate item)? discountOverride,
     TResult Function(
@@ -9150,7 +9299,8 @@ class _$_ClearSelectedItemsFromCart implements _ClearSelectedItemsFromCart {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible)
+            bool comboDealEligible,
+            bool isSpecialOrderType)
         fetch,
     required TResult Function(
             PriceAggregate item,
@@ -9159,7 +9309,8 @@ class _$_ClearSelectedItemsFromCart implements _ClearSelectedItemsFromCart {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
+            bool doNotallowOutOfStockMaterial,
+            bool isSpecialOrderType)
         addMaterialToCart,
     required TResult Function(PriceAggregate item) discountOverride,
     required TResult Function(
@@ -9243,7 +9394,8 @@ class _$_ClearSelectedItemsFromCart implements _ClearSelectedItemsFromCart {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible)?
+            bool comboDealEligible,
+            bool isSpecialOrderType)?
         fetch,
     TResult? Function(
             PriceAggregate item,
@@ -9252,7 +9404,8 @@ class _$_ClearSelectedItemsFromCart implements _ClearSelectedItemsFromCart {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            bool doNotallowOutOfStockMaterial,
+            bool isSpecialOrderType)?
         addMaterialToCart,
     TResult? Function(PriceAggregate item)? discountOverride,
     TResult? Function(
@@ -9334,7 +9487,8 @@ class _$_ClearSelectedItemsFromCart implements _ClearSelectedItemsFromCart {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible)?
+            bool comboDealEligible,
+            bool isSpecialOrderType)?
         fetch,
     TResult Function(
             PriceAggregate item,
@@ -9343,7 +9497,8 @@ class _$_ClearSelectedItemsFromCart implements _ClearSelectedItemsFromCart {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            bool doNotallowOutOfStockMaterial,
+            bool isSpecialOrderType)?
         addMaterialToCart,
     TResult Function(PriceAggregate item)? discountOverride,
     TResult Function(
@@ -9707,7 +9862,8 @@ class _$_ReplaceWithOrderItems implements _ReplaceWithOrderItems {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible)
+            bool comboDealEligible,
+            bool isSpecialOrderType)
         fetch,
     required TResult Function(
             PriceAggregate item,
@@ -9716,7 +9872,8 @@ class _$_ReplaceWithOrderItems implements _ReplaceWithOrderItems {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
+            bool doNotallowOutOfStockMaterial,
+            bool isSpecialOrderType)
         addMaterialToCart,
     required TResult Function(PriceAggregate item) discountOverride,
     required TResult Function(
@@ -9806,7 +9963,8 @@ class _$_ReplaceWithOrderItems implements _ReplaceWithOrderItems {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible)?
+            bool comboDealEligible,
+            bool isSpecialOrderType)?
         fetch,
     TResult? Function(
             PriceAggregate item,
@@ -9815,7 +9973,8 @@ class _$_ReplaceWithOrderItems implements _ReplaceWithOrderItems {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            bool doNotallowOutOfStockMaterial,
+            bool isSpecialOrderType)?
         addMaterialToCart,
     TResult? Function(PriceAggregate item)? discountOverride,
     TResult? Function(
@@ -9903,7 +10062,8 @@ class _$_ReplaceWithOrderItems implements _ReplaceWithOrderItems {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             bool doNotAllowOutOfStockMaterials,
-            bool comboDealEligible)?
+            bool comboDealEligible,
+            bool isSpecialOrderType)?
         fetch,
     TResult Function(
             PriceAggregate item,
@@ -9912,7 +10072,8 @@ class _$_ReplaceWithOrderItems implements _ReplaceWithOrderItems {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            bool doNotallowOutOfStockMaterial,
+            bool isSpecialOrderType)?
         addMaterialToCart,
     TResult Function(PriceAggregate item)? discountOverride,
     TResult Function(

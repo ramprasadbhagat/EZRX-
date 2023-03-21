@@ -160,13 +160,14 @@ class PriceAggregateDtoAdapter extends TypeAdapter<PriceAggregateDto> {
           : fields[8] as TenderContractDto,
       comboDealDto:
           fields[9] == null ? ComboDealDto.empty : fields[9] as ComboDealDto,
+      isSpecialOrderType: fields[10] == null ? false : fields[10] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, PriceAggregateDto obj) {
     writer
-      ..writeByte(10)
+      ..writeByte(11)
       ..writeByte(0)
       ..write(obj.materialDto)
       ..writeByte(1)
@@ -186,7 +187,9 @@ class PriceAggregateDtoAdapter extends TypeAdapter<PriceAggregateDto> {
       ..writeByte(8)
       ..write(obj.tenderContractDto)
       ..writeByte(9)
-      ..write(obj.comboDealDto);
+      ..write(obj.comboDealDto)
+      ..writeByte(10)
+      ..write(obj.isSpecialOrderType);
   }
 
   @override

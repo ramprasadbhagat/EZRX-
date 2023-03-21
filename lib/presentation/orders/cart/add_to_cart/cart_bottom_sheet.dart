@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
@@ -24,7 +25,12 @@ class CartBottomSheet {
     final isPresentInCart = currentItem != PriceAggregate.empty();
     context.read<AddToCartBloc>().add(
           AddToCartEvent.setCartItem(
-            isPresentInCart ? currentItem : priceAggregate,
+            (isPresentInCart ? currentItem : priceAggregate).copyWith(
+              isSpecialOrderType: context
+                  .read<OrderDocumentTypeBloc>()
+                  .state
+                  .isSpecialOrderType,
+            ),
           ),
         );
     showModalBottomSheet(
@@ -49,7 +55,12 @@ class CartBottomSheet {
   }) {
     context.read<AddToCartBloc>().add(
           AddToCartEvent.setCartItem(
-            cartItem,
+            cartItem.copyWith(
+              isSpecialOrderType: context
+                  .read<OrderDocumentTypeBloc>()
+                  .state
+                  .isSpecialOrderType,
+            ),
           ),
         );
     showModalBottomSheet(

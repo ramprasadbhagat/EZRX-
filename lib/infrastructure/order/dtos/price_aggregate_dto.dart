@@ -25,6 +25,7 @@ class PriceAggregateDto {
     required this.stockInfoDto,
     required this.tenderContractDto,
     required this.comboDealDto,
+    required this.isSpecialOrderType,
   });
 
   @HiveField(0, defaultValue: _emptyConstMaterialDto)
@@ -47,6 +48,8 @@ class PriceAggregateDto {
   TenderContractDto tenderContractDto;
   @HiveField(9, defaultValue: ComboDealDto.empty)
   ComboDealDto comboDealDto;
+  @HiveField(10, defaultValue: false)
+  bool isSpecialOrderType;
 
   factory PriceAggregateDto.fromDomain(PriceAggregate cart) {
     return PriceAggregateDto(
@@ -66,6 +69,7 @@ class PriceAggregateDto {
           )
           .toList(),
       comboDealDto: ComboDealDto.fromDomain(cart.comboDeal),
+      isSpecialOrderType: cart.isSpecialOrderType,
     );
   }
 
@@ -83,6 +87,8 @@ class PriceAggregateDto {
       stockInfo: stockInfoDto.toDomain(),
       tenderContract: tenderContractDto.toDomain(),
       comboDeal: comboDealDto.toDomain,
+      isSpecialOrderType: isSpecialOrderType,
+
     );
   }
 }

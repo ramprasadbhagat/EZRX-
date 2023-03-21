@@ -70,9 +70,4 @@ class OrderEligibilityState with _$OrderEligibilityState {
         ? cartItems.where((element) => element.hasSalesRepPrincipal).isNotEmpty
         : cartItems.where((element) => element.hasClientPrincipal).isNotEmpty;
   }
-
-  bool get isDisablePriceOverRide =>
-      user.role.type.isSalesRep &&
-      !configs.disableOrderType &&
-      eligibleOrderType;
 }
