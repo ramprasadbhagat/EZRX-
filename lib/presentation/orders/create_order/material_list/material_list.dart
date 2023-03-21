@@ -218,7 +218,7 @@ class MaterialListPage extends StatelessWidget {
 
     if (comboDealInCart.materials.isNotEmpty) {
       context.router.push(
-        ComboDealDetailPageRoute(
+        ComboDealMaterialDetailPageRoute(
           comboItems: comboDealInCart.materials,
           isEdit: true,
         ),

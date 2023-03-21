@@ -68,7 +68,7 @@ void main() {
           );
         },
         act: (bloc) => bloc.add(
-          ComboDealListEvent.fetch(
+          ComboDealListEvent.fetchMaterialDeal(
             salesOrganisation: fakeSalesOrg,
             customerCodeInfo: fakeCustomerCode,
             comboDeals: fakeComboDealQuery,
@@ -108,7 +108,7 @@ void main() {
           );
         },
         act: (bloc) => bloc.add(
-          ComboDealListEvent.fetch(
+          ComboDealListEvent.fetchMaterialDeal(
             salesOrganisation: fakeSalesOrg,
             customerCodeInfo: fakeCustomerCode,
             comboDeals: fakeComboDealQuery,
@@ -140,7 +140,7 @@ void main() {
           fakeComboDealQuery.id: comboDeals,
         }),
         act: (bloc) => bloc.add(
-          ComboDealListEvent.fetch(
+          ComboDealListEvent.fetchMaterialDeal(
             salesOrganisation: fakeSalesOrg,
             customerCodeInfo: fakeCustomerCode,
             comboDeals: fakeComboDealQuery,

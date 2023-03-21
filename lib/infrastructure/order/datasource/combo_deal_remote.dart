@@ -30,7 +30,7 @@ class ComboDealRemoteDataSource {
     required List<String> materialNumbers,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
-      final queryData = queryMutation.getComboDealList();
+      final queryData = queryMutation.getComboDealListForMaterial();
 
       final variables = {
         'salesOrg': salesOrgCode,
@@ -54,6 +54,37 @@ class ComboDealRemoteDataSource {
       return List.from(combos)
           .map((e) => ComboDealDto.fromJson(e).toDomain)
           .toList();
+    });
+  }
+
+  Future<ComboDeal> getComboDeal({
+    required String salesOrgCode,
+    required String customerCode,
+    required String salesDeal,
+    required String flexibleGroup,
+  }) async {
+    return await dataSourceExceptionHandler.handle(() async {
+      final queryData = queryMutation.getComboDealForPrincipleGroup();
+
+      final variables = {
+        'salesOrg': salesOrgCode,
+        'customerCode': customerCode,
+        'salesDeal': salesDeal,
+        'flexibleGroup': flexibleGroup,
+      };
+      final res = await httpService.request(
+        method: 'POST',
+        url: '${config.urlConstants}pricing',
+        data: jsonEncode({
+          'query': queryData,
+          'variables': variables,
+        }),
+        apiEndpoint: 'price',
+      );
+      _comboDealExceptionChecker(res: res);
+      final combo = res.data['data']['comboDealForPrincMatGrp'];
+
+      return ComboDealDto.fromJson(combo).toDomain;
     });
   }
 

@@ -5,6 +5,7 @@ import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal_group_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal_qty_tier.dart';
+import 'package:ezrxmobile/domain/order/entities/combo_deal_tier_rule.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal_sku_tier.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_price_detail.dart';
@@ -13,6 +14,7 @@ import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/domain/utils/num_utils.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -281,7 +283,7 @@ class CartItem with _$CartItem {
       case ComboDealScheme.k4:
         return eligibleComboDealQtyTier.rate;
       case ComboDealScheme.k5:
-        return null;
+        return eligibleComboDealTierRule.rate;
     }
   }
 
@@ -310,10 +312,9 @@ class CartItem with _$CartItem {
         return _comboDealTotal +
             (_comboDealTotal * eligibleComboDealQtyTier.rate) / 100;
       case ComboDealScheme.k5:
-        return materials.fold<double>(
-          0,
-          (sum, item) =>
-              sum + item.comboDealTotalUnitPrice(rate: comboDealRate),
+        return NumUtils.priceByRate(
+          _comboDealTotal,
+          eligibleComboDealTierRule.rate,
         );
     }
   }
@@ -350,7 +351,7 @@ class CartItem with _$CartItem {
       case ComboDealScheme.k4:
         return eligibleComboDealQtyTier != ComboDealQtyTier.empty();
       case ComboDealScheme.k5:
-        return false;
+        return eligibleComboDealTierRule != ComboDealTierRule.empty();
     }
   }
 
@@ -361,6 +362,16 @@ class CartItem with _$CartItem {
     return comboDeal.descendingSortedQtyTiers.firstWhere(
       (tier) => totalQty >= tier.minQty,
       orElse: () => ComboDealQtyTier.empty(),
+    );
+  }
+
+  ComboDealTierRule get eligibleComboDealTierRule {
+    if (materials.isEmpty) return ComboDealTierRule.empty();
+    final comboDeal = materials.first.comboDeal;
+
+    return comboDeal.descendingSortedMinAmountTiers.firstWhere(
+      (tier) => tier.minTotalAmount <= _comboDealTotal,
+      orElse: () => ComboDealTierRule.empty(),
     );
   }
 

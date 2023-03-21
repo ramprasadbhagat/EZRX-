@@ -262,6 +262,82 @@ class MaterialListRemoteDataSource {
     });
   }
 
+  Future<List<MaterialInfo>> getComboDealMaterials({
+    required String salesOrgCode,
+    required String customerCode,
+    required String shipToCode,
+    required int pageSize,
+    required int offset,
+    required List<String> principalNameList,
+  }) async {
+    return await dataSourceExceptionHandler.handle(() async {
+      final queryData = materialListQuery.comboDealMaterials;
+
+      final variables = {
+        'salesOrganisation': salesOrgCode,
+        'customerCode': customerCode,
+        'shipToCustomer': shipToCode,
+        'first': pageSize,
+        'after': offset,
+        'principalNameList': principalNameList,
+      };
+
+      final res = await httpService.request(
+        method: 'POST',
+        url: '${config.urlConstants}license',
+        data: jsonEncode({
+          'query': queryData,
+          'variables': variables,
+        }),
+        apiEndpoint: 'materialsWithMetaQuery',
+      );
+      _materialListExceptionChecker(res: res);
+      final finalData = res.data['data']['materialsWithMeta']['materials'];
+
+      return List.from(finalData)
+          .map((e) => MaterialDto.fromJson(e).toDomain())
+          .toList();
+    });
+  }
+
+  Future<List<MaterialInfo>> getComboDealMaterialsForSaleRep({
+    required String salesOrgCode,
+    required String customerCode,
+    required String shipToCode,
+    required int pageSize,
+    required int offset,
+    required List<String> principalNameList,
+  }) async {
+    return await dataSourceExceptionHandler.handle(() async {
+      final queryData = materialListQuery.comboDealMaterialsForSaleRep;
+
+      final variables = {
+        'salesOrganisation': salesOrgCode,
+        'customerSoldToCode': customerCode,
+        'customerShipToCode': shipToCode,
+        'first': pageSize,
+        'after': offset,
+        'principalNameList': principalNameList,
+      };
+      final res = await httpService.request(
+        method: 'POST',
+        url: '${config.urlConstants}license',
+        data: jsonEncode({
+          'query': queryData,
+          'variables': variables,
+        }),
+        apiEndpoint: 'customerMaterialsForSalesRep',
+      );
+      _materialListExceptionChecker(res: res);
+      final finalData =
+          res.data['data']['customerMaterialsForSalesRep']['materials'];
+
+      return List.from(finalData)
+          .map((e) => MaterialDto.fromJson(e).toDomain())
+          .toList();
+    });
+  }
+
   void _materialListExceptionChecker({required Response<dynamic> res}) {
     if (res.data['errors'] != null && res.data['errors'].isNotEmpty) {
       throw ServerException(message: res.data['errors'][0]['message']);

@@ -39,4 +39,14 @@ abstract class IMaterialListRepository {
     required String pickAndPack,
     bool isForFoc = false,
   });
+
+  Future<Either<ApiFailure, List<MaterialInfo>>> getComboDealMaterials({
+    required User user,
+    required SalesOrganisation salesOrganisation,
+    required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToInfo,
+    required int pageSize,
+    required int offset,
+    required List<String> principles,
+  });
 }

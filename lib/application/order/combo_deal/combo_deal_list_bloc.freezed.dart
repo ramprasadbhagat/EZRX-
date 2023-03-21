@@ -21,7 +21,10 @@ mixin _$ComboDealListEvent {
     required TResult Function() initialize,
     required TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, PriceComboDeal comboDeals)
-        fetch,
+        fetchMaterialDeal,
+    required TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, PriceComboDeal comboDeals)
+        fetchPrincipleGroupDeal,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -29,7 +32,10 @@ mixin _$ComboDealListEvent {
     TResult? Function()? initialize,
     TResult? Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, PriceComboDeal comboDeals)?
-        fetch,
+        fetchMaterialDeal,
+    TResult? Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, PriceComboDeal comboDeals)?
+        fetchPrincipleGroupDeal,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -37,26 +43,33 @@ mixin _$ComboDealListEvent {
     TResult Function()? initialize,
     TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, PriceComboDeal comboDeals)?
-        fetch,
+        fetchMaterialDeal,
+    TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, PriceComboDeal comboDeals)?
+        fetchPrincipleGroupDeal,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
-    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_FetchMaterialDeal value) fetchMaterialDeal,
+    required TResult Function(_FetchPrincipleGroupDeal value)
+        fetchPrincipleGroupDeal,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
-    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_FetchMaterialDeal value)? fetchMaterialDeal,
+    TResult? Function(_FetchPrincipleGroupDeal value)? fetchPrincipleGroupDeal,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
-    TResult Function(_Fetch value)? fetch,
+    TResult Function(_FetchMaterialDeal value)? fetchMaterialDeal,
+    TResult Function(_FetchPrincipleGroupDeal value)? fetchPrincipleGroupDeal,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -121,7 +134,10 @@ class _$_Initialize implements _Initialize {
     required TResult Function() initialize,
     required TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, PriceComboDeal comboDeals)
-        fetch,
+        fetchMaterialDeal,
+    required TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, PriceComboDeal comboDeals)
+        fetchPrincipleGroupDeal,
   }) {
     return initialize();
   }
@@ -132,7 +148,10 @@ class _$_Initialize implements _Initialize {
     TResult? Function()? initialize,
     TResult? Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, PriceComboDeal comboDeals)?
-        fetch,
+        fetchMaterialDeal,
+    TResult? Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, PriceComboDeal comboDeals)?
+        fetchPrincipleGroupDeal,
   }) {
     return initialize?.call();
   }
@@ -143,7 +162,10 @@ class _$_Initialize implements _Initialize {
     TResult Function()? initialize,
     TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, PriceComboDeal comboDeals)?
-        fetch,
+        fetchMaterialDeal,
+    TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, PriceComboDeal comboDeals)?
+        fetchPrincipleGroupDeal,
     required TResult orElse(),
   }) {
     if (initialize != null) {
@@ -156,7 +178,9 @@ class _$_Initialize implements _Initialize {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
-    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_FetchMaterialDeal value) fetchMaterialDeal,
+    required TResult Function(_FetchPrincipleGroupDeal value)
+        fetchPrincipleGroupDeal,
   }) {
     return initialize(this);
   }
@@ -165,7 +189,8 @@ class _$_Initialize implements _Initialize {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
-    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_FetchMaterialDeal value)? fetchMaterialDeal,
+    TResult? Function(_FetchPrincipleGroupDeal value)? fetchPrincipleGroupDeal,
   }) {
     return initialize?.call(this);
   }
@@ -174,7 +199,8 @@ class _$_Initialize implements _Initialize {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
-    TResult Function(_Fetch value)? fetch,
+    TResult Function(_FetchMaterialDeal value)? fetchMaterialDeal,
+    TResult Function(_FetchPrincipleGroupDeal value)? fetchPrincipleGroupDeal,
     required TResult orElse(),
   }) {
     if (initialize != null) {
@@ -189,9 +215,10 @@ abstract class _Initialize implements ComboDealListEvent {
 }
 
 /// @nodoc
-abstract class _$$_FetchCopyWith<$Res> {
-  factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
-      __$$_FetchCopyWithImpl<$Res>;
+abstract class _$$_FetchMaterialDealCopyWith<$Res> {
+  factory _$$_FetchMaterialDealCopyWith(_$_FetchMaterialDeal value,
+          $Res Function(_$_FetchMaterialDeal) then) =
+      __$$_FetchMaterialDealCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {SalesOrganisation salesOrganisation,
@@ -204,10 +231,11 @@ abstract class _$$_FetchCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_FetchCopyWithImpl<$Res>
-    extends _$ComboDealListEventCopyWithImpl<$Res, _$_Fetch>
-    implements _$$_FetchCopyWith<$Res> {
-  __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
+class __$$_FetchMaterialDealCopyWithImpl<$Res>
+    extends _$ComboDealListEventCopyWithImpl<$Res, _$_FetchMaterialDeal>
+    implements _$$_FetchMaterialDealCopyWith<$Res> {
+  __$$_FetchMaterialDealCopyWithImpl(
+      _$_FetchMaterialDeal _value, $Res Function(_$_FetchMaterialDeal) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -217,7 +245,7 @@ class __$$_FetchCopyWithImpl<$Res>
     Object? customerCodeInfo = null,
     Object? comboDeals = null,
   }) {
-    return _then(_$_Fetch(
+    return _then(_$_FetchMaterialDeal(
       salesOrganisation: null == salesOrganisation
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
@@ -260,8 +288,8 @@ class __$$_FetchCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Fetch implements _Fetch {
-  const _$_Fetch(
+class _$_FetchMaterialDeal implements _FetchMaterialDeal {
+  const _$_FetchMaterialDeal(
       {required this.salesOrganisation,
       required this.customerCodeInfo,
       required this.comboDeals});
@@ -275,14 +303,14 @@ class _$_Fetch implements _Fetch {
 
   @override
   String toString() {
-    return 'ComboDealListEvent.fetch(salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, comboDeals: $comboDeals)';
+    return 'ComboDealListEvent.fetchMaterialDeal(salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, comboDeals: $comboDeals)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Fetch &&
+            other is _$_FetchMaterialDeal &&
             (identical(other.salesOrganisation, salesOrganisation) ||
                 other.salesOrganisation == salesOrganisation) &&
             (identical(other.customerCodeInfo, customerCodeInfo) ||
@@ -298,8 +326,9 @@ class _$_Fetch implements _Fetch {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
-      __$$_FetchCopyWithImpl<_$_Fetch>(this, _$identity);
+  _$$_FetchMaterialDealCopyWith<_$_FetchMaterialDeal> get copyWith =>
+      __$$_FetchMaterialDealCopyWithImpl<_$_FetchMaterialDeal>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -307,9 +336,12 @@ class _$_Fetch implements _Fetch {
     required TResult Function() initialize,
     required TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, PriceComboDeal comboDeals)
-        fetch,
+        fetchMaterialDeal,
+    required TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, PriceComboDeal comboDeals)
+        fetchPrincipleGroupDeal,
   }) {
-    return fetch(salesOrganisation, customerCodeInfo, comboDeals);
+    return fetchMaterialDeal(salesOrganisation, customerCodeInfo, comboDeals);
   }
 
   @override
@@ -318,9 +350,13 @@ class _$_Fetch implements _Fetch {
     TResult? Function()? initialize,
     TResult? Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, PriceComboDeal comboDeals)?
-        fetch,
+        fetchMaterialDeal,
+    TResult? Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, PriceComboDeal comboDeals)?
+        fetchPrincipleGroupDeal,
   }) {
-    return fetch?.call(salesOrganisation, customerCodeInfo, comboDeals);
+    return fetchMaterialDeal?.call(
+        salesOrganisation, customerCodeInfo, comboDeals);
   }
 
   @override
@@ -329,11 +365,14 @@ class _$_Fetch implements _Fetch {
     TResult Function()? initialize,
     TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, PriceComboDeal comboDeals)?
-        fetch,
+        fetchMaterialDeal,
+    TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, PriceComboDeal comboDeals)?
+        fetchPrincipleGroupDeal,
     required TResult orElse(),
   }) {
-    if (fetch != null) {
-      return fetch(salesOrganisation, customerCodeInfo, comboDeals);
+    if (fetchMaterialDeal != null) {
+      return fetchMaterialDeal(salesOrganisation, customerCodeInfo, comboDeals);
     }
     return orElse();
   }
@@ -342,46 +381,266 @@ class _$_Fetch implements _Fetch {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
-    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_FetchMaterialDeal value) fetchMaterialDeal,
+    required TResult Function(_FetchPrincipleGroupDeal value)
+        fetchPrincipleGroupDeal,
   }) {
-    return fetch(this);
+    return fetchMaterialDeal(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
-    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_FetchMaterialDeal value)? fetchMaterialDeal,
+    TResult? Function(_FetchPrincipleGroupDeal value)? fetchPrincipleGroupDeal,
   }) {
-    return fetch?.call(this);
+    return fetchMaterialDeal?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
-    TResult Function(_Fetch value)? fetch,
+    TResult Function(_FetchMaterialDeal value)? fetchMaterialDeal,
+    TResult Function(_FetchPrincipleGroupDeal value)? fetchPrincipleGroupDeal,
     required TResult orElse(),
   }) {
-    if (fetch != null) {
-      return fetch(this);
+    if (fetchMaterialDeal != null) {
+      return fetchMaterialDeal(this);
     }
     return orElse();
   }
 }
 
-abstract class _Fetch implements ComboDealListEvent {
-  const factory _Fetch(
+abstract class _FetchMaterialDeal implements ComboDealListEvent {
+  const factory _FetchMaterialDeal(
       {required final SalesOrganisation salesOrganisation,
       required final CustomerCodeInfo customerCodeInfo,
-      required final PriceComboDeal comboDeals}) = _$_Fetch;
+      required final PriceComboDeal comboDeals}) = _$_FetchMaterialDeal;
 
   SalesOrganisation get salesOrganisation;
   CustomerCodeInfo get customerCodeInfo;
   PriceComboDeal get comboDeals;
   @JsonKey(ignore: true)
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
+  _$$_FetchMaterialDealCopyWith<_$_FetchMaterialDeal> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_FetchPrincipleGroupDealCopyWith<$Res> {
+  factory _$$_FetchPrincipleGroupDealCopyWith(_$_FetchPrincipleGroupDeal value,
+          $Res Function(_$_FetchPrincipleGroupDeal) then) =
+      __$$_FetchPrincipleGroupDealCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {SalesOrganisation salesOrganisation,
+      CustomerCodeInfo customerCodeInfo,
+      PriceComboDeal comboDeals});
+
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
+  $PriceComboDealCopyWith<$Res> get comboDeals;
+}
+
+/// @nodoc
+class __$$_FetchPrincipleGroupDealCopyWithImpl<$Res>
+    extends _$ComboDealListEventCopyWithImpl<$Res, _$_FetchPrincipleGroupDeal>
+    implements _$$_FetchPrincipleGroupDealCopyWith<$Res> {
+  __$$_FetchPrincipleGroupDealCopyWithImpl(_$_FetchPrincipleGroupDeal _value,
+      $Res Function(_$_FetchPrincipleGroupDeal) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? salesOrganisation = null,
+    Object? customerCodeInfo = null,
+    Object? comboDeals = null,
+  }) {
+    return _then(_$_FetchPrincipleGroupDeal(
+      salesOrganisation: null == salesOrganisation
+          ? _value.salesOrganisation
+          : salesOrganisation // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
+      customerCodeInfo: null == customerCodeInfo
+          ? _value.customerCodeInfo
+          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
+      comboDeals: null == comboDeals
+          ? _value.comboDeals
+          : comboDeals // ignore: cast_nullable_to_non_nullable
+              as PriceComboDeal,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
+    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
+      return _then(_value.copyWith(salesOrganisation: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
+    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
+      return _then(_value.copyWith(customerCodeInfo: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PriceComboDealCopyWith<$Res> get comboDeals {
+    return $PriceComboDealCopyWith<$Res>(_value.comboDeals, (value) {
+      return _then(_value.copyWith(comboDeals: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_FetchPrincipleGroupDeal implements _FetchPrincipleGroupDeal {
+  const _$_FetchPrincipleGroupDeal(
+      {required this.salesOrganisation,
+      required this.customerCodeInfo,
+      required this.comboDeals});
+
+  @override
+  final SalesOrganisation salesOrganisation;
+  @override
+  final CustomerCodeInfo customerCodeInfo;
+  @override
+  final PriceComboDeal comboDeals;
+
+  @override
+  String toString() {
+    return 'ComboDealListEvent.fetchPrincipleGroupDeal(salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, comboDeals: $comboDeals)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_FetchPrincipleGroupDeal &&
+            (identical(other.salesOrganisation, salesOrganisation) ||
+                other.salesOrganisation == salesOrganisation) &&
+            (identical(other.customerCodeInfo, customerCodeInfo) ||
+                other.customerCodeInfo == customerCodeInfo) &&
+            (identical(other.comboDeals, comboDeals) ||
+                other.comboDeals == comboDeals));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, salesOrganisation, customerCodeInfo, comboDeals);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_FetchPrincipleGroupDealCopyWith<_$_FetchPrincipleGroupDeal>
+      get copyWith =>
+          __$$_FetchPrincipleGroupDealCopyWithImpl<_$_FetchPrincipleGroupDeal>(
+              this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialize,
+    required TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, PriceComboDeal comboDeals)
+        fetchMaterialDeal,
+    required TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, PriceComboDeal comboDeals)
+        fetchPrincipleGroupDeal,
+  }) {
+    return fetchPrincipleGroupDeal(
+        salesOrganisation, customerCodeInfo, comboDeals);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialize,
+    TResult? Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, PriceComboDeal comboDeals)?
+        fetchMaterialDeal,
+    TResult? Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, PriceComboDeal comboDeals)?
+        fetchPrincipleGroupDeal,
+  }) {
+    return fetchPrincipleGroupDeal?.call(
+        salesOrganisation, customerCodeInfo, comboDeals);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialize,
+    TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, PriceComboDeal comboDeals)?
+        fetchMaterialDeal,
+    TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, PriceComboDeal comboDeals)?
+        fetchPrincipleGroupDeal,
+    required TResult orElse(),
+  }) {
+    if (fetchPrincipleGroupDeal != null) {
+      return fetchPrincipleGroupDeal(
+          salesOrganisation, customerCodeInfo, comboDeals);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialize value) initialize,
+    required TResult Function(_FetchMaterialDeal value) fetchMaterialDeal,
+    required TResult Function(_FetchPrincipleGroupDeal value)
+        fetchPrincipleGroupDeal,
+  }) {
+    return fetchPrincipleGroupDeal(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialize value)? initialize,
+    TResult? Function(_FetchMaterialDeal value)? fetchMaterialDeal,
+    TResult? Function(_FetchPrincipleGroupDeal value)? fetchPrincipleGroupDeal,
+  }) {
+    return fetchPrincipleGroupDeal?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialize value)? initialize,
+    TResult Function(_FetchMaterialDeal value)? fetchMaterialDeal,
+    TResult Function(_FetchPrincipleGroupDeal value)? fetchPrincipleGroupDeal,
+    required TResult orElse(),
+  }) {
+    if (fetchPrincipleGroupDeal != null) {
+      return fetchPrincipleGroupDeal(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _FetchPrincipleGroupDeal implements ComboDealListEvent {
+  const factory _FetchPrincipleGroupDeal(
+      {required final SalesOrganisation salesOrganisation,
+      required final CustomerCodeInfo customerCodeInfo,
+      required final PriceComboDeal comboDeals}) = _$_FetchPrincipleGroupDeal;
+
+  SalesOrganisation get salesOrganisation;
+  CustomerCodeInfo get customerCodeInfo;
+  PriceComboDeal get comboDeals;
+  @JsonKey(ignore: true)
+  _$$_FetchPrincipleGroupDealCopyWith<_$_FetchPrincipleGroupDeal>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc

@@ -10,22 +10,23 @@ import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'combo_deal_detail_event.dart';
-part 'combo_deal_detail_state.dart';
-part 'combo_deal_detail_bloc.freezed.dart';
+part 'combo_deal_material_detail_event.dart';
+part 'combo_deal_material_detail_state.dart';
+part 'combo_deal_material_detail_bloc.freezed.dart';
 
-class ComboDealDetailBloc
-    extends Bloc<ComboDealDetailEvent, ComboDealDetailState> {
-  ComboDealDetailBloc() : super(ComboDealDetailState.initial()) {
-    on<ComboDealDetailEvent>(_onEvent);
+class ComboDealMaterialDetailBloc
+    extends Bloc<ComboDealMaterialDetailEvent, ComboDealMaterialDetailState> {
+  ComboDealMaterialDetailBloc()
+      : super(ComboDealMaterialDetailState.initial()) {
+    on<ComboDealMaterialDetailEvent>(_onEvent);
   }
 
   Future<void> _onEvent(
-    ComboDealDetailEvent event,
-    Emitter<ComboDealDetailState> emit,
+    ComboDealMaterialDetailEvent event,
+    Emitter<ComboDealMaterialDetailState> emit,
   ) async {
     await event.map(
-      initialize: (e) async => emit(ComboDealDetailState.initial()),
+      initialize: (e) async => emit(ComboDealMaterialDetailState.initial()),
       initComboDealItems: (e) async {
         emit(
           state.copyWith(

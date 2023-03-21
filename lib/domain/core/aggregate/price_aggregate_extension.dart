@@ -45,5 +45,9 @@ extension PriceAggregateExtension on List<PriceAggregate> {
         (e) => e.getMaterialNumber,
       ).toList();
 
+  Map<MaterialNumber, PriceAggregate> get mapByMaterialNumber => {
+        for (final material in this) material.getMaterialNumber: material,
+      };
+
   ComboDeal get firstComboDeal => isEmpty ? ComboDeal.empty() : first.comboDeal;
 }

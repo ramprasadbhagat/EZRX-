@@ -173,6 +173,58 @@ class MaterialListRepository implements IMaterialListRepository {
     }
   }
 
+  @override
+  Future<Either<ApiFailure, List<MaterialInfo>>> getComboDealMaterials({
+    required User user,
+    required SalesOrganisation salesOrganisation,
+    required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToInfo,
+    required int pageSize,
+    required int offset,
+    required List<String> principles,
+  }) async {
+    //TODO: Implement this later
+    // if (config.appFlavor == Flavor.mock) {
+    //   try {
+    //     final materialListData = user.role.type.isSalesRep
+    //         ? await materialListLocalDataSource.getMaterialListSalesRep()
+    //         : await materialListLocalDataSource.getMaterialList();
+
+    //     return Right(materialListData);
+    //   } catch (e) {
+    //     return Left(FailureHandler.handleFailure(e));
+    //   }
+    // }
+
+    // Because principle code from response is something like 140132
+    // We need to transform it to valid one (0000140132)
+    final validPrinciples = principles.map((e) => e.padLeft(10, '0')).toList();
+
+    try {
+      final materialListData = user.role.type.isSalesRep
+          ? await materialListRemoteDataSource.getComboDealMaterialsForSaleRep(
+              salesOrgCode: salesOrganisation.salesOrg.getOrCrash(),
+              customerCode: customerCodeInfo.customerCodeSoldTo,
+              shipToCode: shipToInfo.shipToCustomerCode,
+              pageSize: pageSize,
+              offset: offset,
+              principalNameList: validPrinciples,
+            )
+          : await materialListRemoteDataSource.getComboDealMaterials(
+              salesOrgCode: salesOrganisation.salesOrg.getOrCrash(),
+              customerCode: customerCodeInfo.customerCodeSoldTo,
+              shipToCode: shipToInfo.shipToCustomerCode,
+              pageSize: pageSize,
+              offset: offset,
+              principalNameList: validPrinciples,
+            );
+
+      return Right(materialListData);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
   Future<void> callCountly(MaterialFilter selectedMaterialFilter) async {
     if (selectedMaterialFilter.uniquePrincipalName.isNotEmpty) {
       await countlyService.addCountlyEvent(

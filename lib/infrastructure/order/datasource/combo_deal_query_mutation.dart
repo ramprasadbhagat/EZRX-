@@ -1,5 +1,5 @@
 class ComboDealQueryMutation {
-  String getComboDealList() {
+  String getComboDealListForMaterial() {
     return '''
       query comboDealListForMaterial(
         \$salesOrg: String!
@@ -55,6 +55,42 @@ class ComboDealQueryMutation {
                 mandatory
               }
             }
+          }
+       }
+    ''';
+  }
+
+  String getComboDealForPrincipleGroup() {
+    return '''
+      query comboDealForPrincMatGrp(
+        \$salesOrg: String!
+        \$customerCode: String!
+        \$salesDeal: String!
+        \$flexibleGroup: String!
+      ) {
+        comboDealForPrincMatGrp(
+          salesOrg: \$salesOrg
+          customerCode: \$customerCode
+          salesDeal: \$salesDeal
+          flexibleGroup: \$flexibleGroup
+        ) {
+            flexiGroupCombo {
+              type      
+              value      
+              minQty      
+              setNo    
+            }    
+            flexiTierRule {      
+              rate      
+              type      
+              minTotalAmount      
+              maxTotalAmount      
+              minTotalCurrency      
+              maxTotalCurrency      
+              minQty      
+              conditionNumber      
+              conditions    
+            }  
           }
        }
     ''';

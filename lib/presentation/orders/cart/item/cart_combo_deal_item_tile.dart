@@ -43,7 +43,7 @@ class CartComboDealItem extends StatelessWidget {
             child: GestureDetector(
               onTap: () {
                 context.router.push(
-                  ComboDealDetailPageRoute(
+                  ComboDealMaterialDetailPageRoute(
                     comboItems: cartItem.materials,
                     isEdit: true,
                   ),

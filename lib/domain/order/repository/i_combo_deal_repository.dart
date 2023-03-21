@@ -11,4 +11,10 @@ abstract class IComboDealRepository {
     required CustomerCodeInfo customerCode,
     required PriceComboDeal comboDealInfo,
   });
+
+  Future<Either<ApiFailure, ComboDeal>> getComboDeal({
+    required SalesOrg salesOrg,
+    required CustomerCodeInfo customerCode,
+    required PriceComboDeal comboDealInfo,
+  });
 }

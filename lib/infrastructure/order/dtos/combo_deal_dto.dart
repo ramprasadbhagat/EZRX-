@@ -4,6 +4,7 @@ import 'package:ezrxmobile/infrastructure/order/dtos/combo_deal_group_deal_dto.d
 import 'package:ezrxmobile/infrastructure/order/dtos/combo_deal_material_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/combo_deal_qty_tier_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/combo_deal_sku_tier_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/combo_deal_tier_rule_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -31,6 +32,9 @@ class ComboDealDto with _$ComboDealDto {
     @JsonKey(name: 'materialComboDeals', defaultValue: [])
     @HiveField(4, defaultValue: [])
         required List<ComboDealMaterialSetDto> materialComboDeals,
+    @JsonKey(name: 'flexiTierRule', defaultValue: [])
+    @HiveField(5, defaultValue: [])
+        required List<ComboDealTierRuleDto> flexiTierRule,
   }) = _ComboDealDto;
 
   factory ComboDealDto.fromJson(Map<String, dynamic> json) =>
@@ -42,6 +46,7 @@ class ComboDealDto with _$ComboDealDto {
         flexiQtyTier: flexiQtyTier.map((e) => e.toDomain).toList(),
         flexiAmountTier: flexiAmountTier.map((e) => e.toDomain).toList(),
         materialComboDeals: materialComboDeals.map((e) => e.toDomain).toList(),
+        flexiTierRule: flexiTierRule.map((e) => e.toDomain).toList(),
       );
 
   factory ComboDealDto.fromDomain(ComboDeal domain) => ComboDealDto(
@@ -66,6 +71,11 @@ class ComboDealDto with _$ComboDealDto {
               (e) => ComboDealMaterialSetDto.fromDomain(e),
             )
             .toList(),
+        flexiTierRule: domain.flexiTierRule
+            .map(
+              (e) => ComboDealTierRuleDto.fromDomain(e),
+            )
+            .toList(),
       );
 
   static const empty = ComboDealDto(
@@ -73,5 +83,6 @@ class ComboDealDto with _$ComboDealDto {
     flexiQtyTier: [],
     flexiAmountTier: [],
     materialComboDeals: [],
+    flexiTierRule: [],
   );
 }

@@ -66,7 +66,8 @@ void main() async {
             ),
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
-              'query': remoteDataSource.queryMutation.getComboDealList(),
+              'query':
+                  remoteDataSource.queryMutation.getComboDealListForMaterial(),
               'variables': fakeQueryVariables
             }),
           );
@@ -100,7 +101,8 @@ void main() async {
             ),
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
-              'query': remoteDataSource.queryMutation.getComboDealList(),
+              'query':
+                  remoteDataSource.queryMutation.getComboDealListForMaterial(),
               'variables': fakeQueryVariables
             }),
           );
@@ -134,7 +136,8 @@ void main() async {
             ),
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
-              'query': remoteDataSource.queryMutation.getComboDealList(),
+              'query':
+                  remoteDataSource.queryMutation.getComboDealListForMaterial(),
               'variables': fakeQueryVariables
             }),
           );

@@ -17,8 +17,9 @@ import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_blo
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
-import 'package:ezrxmobile/application/order/combo_deal/combo_deal_detail_bloc.dart';
+import 'package:ezrxmobile/application/order/combo_deal/combo_deal_material_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_list_bloc.dart';
+import 'package:ezrxmobile/application/order/combo_deal/combo_deal_principle_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_list_bloc.dart';
@@ -1778,7 +1779,13 @@ void setupLocator() {
   );
 
   locator.registerFactory(
-    () => ComboDealDetailBloc(),
+    () => ComboDealMaterialDetailBloc(),
+  );
+
+  locator.registerFactory(
+    () => ComboDealPrincipleDetailBloc(
+      repository: locator<MaterialListRepository>(),
+    ),
   );
 
   //============================================================

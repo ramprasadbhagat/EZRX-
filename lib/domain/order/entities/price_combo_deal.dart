@@ -22,8 +22,7 @@ class PriceComboDeal with _$PriceComboDeal {
         category: PriceComboDealCategory.empty(),
       );
 
-  bool get isAvailable =>
-      isEligible && category.comboMaterialNumbers.isNotEmpty;
+  bool get isAvailable => isEligible && category.values.isNotEmpty;
 
   String get id =>
       '${flexibleGroup.getOrDefaultValue('')}-${salesDeal.getOrDefaultValue('')}';
@@ -34,12 +33,12 @@ class PriceComboDealCategory with _$PriceComboDealCategory {
   const PriceComboDealCategory._();
 
   const factory PriceComboDealCategory({
-    required ComboDealType type,
-    required List<MaterialNumber> comboMaterialNumbers,
+    required ComboDealCategoryType type,
+    required List<String> values,
   }) = _PriceComboDealCategory;
 
   factory PriceComboDealCategory.empty() => PriceComboDealCategory(
-        type: ComboDealType(''),
-        comboMaterialNumbers: [],
+        type: ComboDealCategoryType(''),
+        values: [],
       );
 }

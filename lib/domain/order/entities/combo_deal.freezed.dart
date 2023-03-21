@@ -23,6 +23,8 @@ mixin _$ComboDeal {
       throw _privateConstructorUsedError;
   List<ComboDealMaterialSet> get materialComboDeals =>
       throw _privateConstructorUsedError;
+  List<ComboDealTierRule> get flexiTierRule =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ComboDealCopyWith<ComboDeal> get copyWith =>
@@ -39,7 +41,8 @@ abstract class $ComboDealCopyWith<$Res> {
       List<ComboDealSKUTier> flexiSKUTier,
       List<ComboDealQtyTier> flexiQtyTier,
       List<ComboDealAmountTier> flexiAmountTier,
-      List<ComboDealMaterialSet> materialComboDeals});
+      List<ComboDealMaterialSet> materialComboDeals,
+      List<ComboDealTierRule> flexiTierRule});
 
   $ComboDealGroupDealCopyWith<$Res> get groupDeal;
 }
@@ -62,6 +65,7 @@ class _$ComboDealCopyWithImpl<$Res, $Val extends ComboDeal>
     Object? flexiQtyTier = null,
     Object? flexiAmountTier = null,
     Object? materialComboDeals = null,
+    Object? flexiTierRule = null,
   }) {
     return _then(_value.copyWith(
       groupDeal: null == groupDeal
@@ -84,6 +88,10 @@ class _$ComboDealCopyWithImpl<$Res, $Val extends ComboDeal>
           ? _value.materialComboDeals
           : materialComboDeals // ignore: cast_nullable_to_non_nullable
               as List<ComboDealMaterialSet>,
+      flexiTierRule: null == flexiTierRule
+          ? _value.flexiTierRule
+          : flexiTierRule // ignore: cast_nullable_to_non_nullable
+              as List<ComboDealTierRule>,
     ) as $Val);
   }
 
@@ -108,7 +116,8 @@ abstract class _$$_ComboDealCopyWith<$Res> implements $ComboDealCopyWith<$Res> {
       List<ComboDealSKUTier> flexiSKUTier,
       List<ComboDealQtyTier> flexiQtyTier,
       List<ComboDealAmountTier> flexiAmountTier,
-      List<ComboDealMaterialSet> materialComboDeals});
+      List<ComboDealMaterialSet> materialComboDeals,
+      List<ComboDealTierRule> flexiTierRule});
 
   @override
   $ComboDealGroupDealCopyWith<$Res> get groupDeal;
@@ -130,6 +139,7 @@ class __$$_ComboDealCopyWithImpl<$Res>
     Object? flexiQtyTier = null,
     Object? flexiAmountTier = null,
     Object? materialComboDeals = null,
+    Object? flexiTierRule = null,
   }) {
     return _then(_$_ComboDeal(
       groupDeal: null == groupDeal
@@ -152,6 +162,10 @@ class __$$_ComboDealCopyWithImpl<$Res>
           ? _value._materialComboDeals
           : materialComboDeals // ignore: cast_nullable_to_non_nullable
               as List<ComboDealMaterialSet>,
+      flexiTierRule: null == flexiTierRule
+          ? _value._flexiTierRule
+          : flexiTierRule // ignore: cast_nullable_to_non_nullable
+              as List<ComboDealTierRule>,
     ));
   }
 }
@@ -164,11 +178,13 @@ class _$_ComboDeal extends _ComboDeal {
       required final List<ComboDealSKUTier> flexiSKUTier,
       required final List<ComboDealQtyTier> flexiQtyTier,
       required final List<ComboDealAmountTier> flexiAmountTier,
-      required final List<ComboDealMaterialSet> materialComboDeals})
+      required final List<ComboDealMaterialSet> materialComboDeals,
+      required final List<ComboDealTierRule> flexiTierRule})
       : _flexiSKUTier = flexiSKUTier,
         _flexiQtyTier = flexiQtyTier,
         _flexiAmountTier = flexiAmountTier,
         _materialComboDeals = materialComboDeals,
+        _flexiTierRule = flexiTierRule,
         super._();
 
   @override
@@ -201,9 +217,16 @@ class _$_ComboDeal extends _ComboDeal {
     return EqualUnmodifiableListView(_materialComboDeals);
   }
 
+  final List<ComboDealTierRule> _flexiTierRule;
+  @override
+  List<ComboDealTierRule> get flexiTierRule {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_flexiTierRule);
+  }
+
   @override
   String toString() {
-    return 'ComboDeal(groupDeal: $groupDeal, flexiSKUTier: $flexiSKUTier, flexiQtyTier: $flexiQtyTier, flexiAmountTier: $flexiAmountTier, materialComboDeals: $materialComboDeals)';
+    return 'ComboDeal(groupDeal: $groupDeal, flexiSKUTier: $flexiSKUTier, flexiQtyTier: $flexiQtyTier, flexiAmountTier: $flexiAmountTier, materialComboDeals: $materialComboDeals, flexiTierRule: $flexiTierRule)';
   }
 
   @override
@@ -220,7 +243,9 @@ class _$_ComboDeal extends _ComboDeal {
             const DeepCollectionEquality()
                 .equals(other._flexiAmountTier, _flexiAmountTier) &&
             const DeepCollectionEquality()
-                .equals(other._materialComboDeals, _materialComboDeals));
+                .equals(other._materialComboDeals, _materialComboDeals) &&
+            const DeepCollectionEquality()
+                .equals(other._flexiTierRule, _flexiTierRule));
   }
 
   @override
@@ -230,7 +255,8 @@ class _$_ComboDeal extends _ComboDeal {
       const DeepCollectionEquality().hash(_flexiSKUTier),
       const DeepCollectionEquality().hash(_flexiQtyTier),
       const DeepCollectionEquality().hash(_flexiAmountTier),
-      const DeepCollectionEquality().hash(_materialComboDeals));
+      const DeepCollectionEquality().hash(_materialComboDeals),
+      const DeepCollectionEquality().hash(_flexiTierRule));
 
   @JsonKey(ignore: true)
   @override
@@ -241,12 +267,12 @@ class _$_ComboDeal extends _ComboDeal {
 
 abstract class _ComboDeal extends ComboDeal {
   const factory _ComboDeal(
-          {required final ComboDealGroupDeal groupDeal,
-          required final List<ComboDealSKUTier> flexiSKUTier,
-          required final List<ComboDealQtyTier> flexiQtyTier,
-          required final List<ComboDealAmountTier> flexiAmountTier,
-          required final List<ComboDealMaterialSet> materialComboDeals}) =
-      _$_ComboDeal;
+      {required final ComboDealGroupDeal groupDeal,
+      required final List<ComboDealSKUTier> flexiSKUTier,
+      required final List<ComboDealQtyTier> flexiQtyTier,
+      required final List<ComboDealAmountTier> flexiAmountTier,
+      required final List<ComboDealMaterialSet> materialComboDeals,
+      required final List<ComboDealTierRule> flexiTierRule}) = _$_ComboDeal;
   const _ComboDeal._() : super._();
 
   @override
@@ -259,6 +285,8 @@ abstract class _ComboDeal extends ComboDeal {
   List<ComboDealAmountTier> get flexiAmountTier;
   @override
   List<ComboDealMaterialSet> get materialComboDeals;
+  @override
+  List<ComboDealTierRule> get flexiTierRule;
   @override
   @JsonKey(ignore: true)
   _$$_ComboDealCopyWith<_$_ComboDeal> get copyWith =>

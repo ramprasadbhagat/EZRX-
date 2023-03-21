@@ -217,9 +217,8 @@ abstract class _PriceComboDeal extends PriceComboDeal {
 
 /// @nodoc
 mixin _$PriceComboDealCategory {
-  ComboDealType get type => throw _privateConstructorUsedError;
-  List<MaterialNumber> get comboMaterialNumbers =>
-      throw _privateConstructorUsedError;
+  ComboDealCategoryType get type => throw _privateConstructorUsedError;
+  List<String> get values => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PriceComboDealCategoryCopyWith<PriceComboDealCategory> get copyWith =>
@@ -232,7 +231,7 @@ abstract class $PriceComboDealCategoryCopyWith<$Res> {
           $Res Function(PriceComboDealCategory) then) =
       _$PriceComboDealCategoryCopyWithImpl<$Res, PriceComboDealCategory>;
   @useResult
-  $Res call({ComboDealType type, List<MaterialNumber> comboMaterialNumbers});
+  $Res call({ComboDealCategoryType type, List<String> values});
 }
 
 /// @nodoc
@@ -250,17 +249,17 @@ class _$PriceComboDealCategoryCopyWithImpl<$Res,
   @override
   $Res call({
     Object? type = null,
-    Object? comboMaterialNumbers = null,
+    Object? values = null,
   }) {
     return _then(_value.copyWith(
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as ComboDealType,
-      comboMaterialNumbers: null == comboMaterialNumbers
-          ? _value.comboMaterialNumbers
-          : comboMaterialNumbers // ignore: cast_nullable_to_non_nullable
-              as List<MaterialNumber>,
+              as ComboDealCategoryType,
+      values: null == values
+          ? _value.values
+          : values // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ) as $Val);
   }
 }
@@ -273,7 +272,7 @@ abstract class _$$_PriceComboDealCategoryCopyWith<$Res>
       __$$_PriceComboDealCategoryCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({ComboDealType type, List<MaterialNumber> comboMaterialNumbers});
+  $Res call({ComboDealCategoryType type, List<String> values});
 }
 
 /// @nodoc
@@ -289,17 +288,17 @@ class __$$_PriceComboDealCategoryCopyWithImpl<$Res>
   @override
   $Res call({
     Object? type = null,
-    Object? comboMaterialNumbers = null,
+    Object? values = null,
   }) {
     return _then(_$_PriceComboDealCategory(
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as ComboDealType,
-      comboMaterialNumbers: null == comboMaterialNumbers
-          ? _value._comboMaterialNumbers
-          : comboMaterialNumbers // ignore: cast_nullable_to_non_nullable
-              as List<MaterialNumber>,
+              as ComboDealCategoryType,
+      values: null == values
+          ? _value._values
+          : values // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ));
   }
 }
@@ -308,23 +307,22 @@ class __$$_PriceComboDealCategoryCopyWithImpl<$Res>
 
 class _$_PriceComboDealCategory extends _PriceComboDealCategory {
   const _$_PriceComboDealCategory(
-      {required this.type,
-      required final List<MaterialNumber> comboMaterialNumbers})
-      : _comboMaterialNumbers = comboMaterialNumbers,
+      {required this.type, required final List<String> values})
+      : _values = values,
         super._();
 
   @override
-  final ComboDealType type;
-  final List<MaterialNumber> _comboMaterialNumbers;
+  final ComboDealCategoryType type;
+  final List<String> _values;
   @override
-  List<MaterialNumber> get comboMaterialNumbers {
+  List<String> get values {
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_comboMaterialNumbers);
+    return EqualUnmodifiableListView(_values);
   }
 
   @override
   String toString() {
-    return 'PriceComboDealCategory(type: $type, comboMaterialNumbers: $comboMaterialNumbers)';
+    return 'PriceComboDealCategory(type: $type, values: $values)';
   }
 
   @override
@@ -333,13 +331,12 @@ class _$_PriceComboDealCategory extends _PriceComboDealCategory {
         (other.runtimeType == runtimeType &&
             other is _$_PriceComboDealCategory &&
             (identical(other.type, type) || other.type == type) &&
-            const DeepCollectionEquality()
-                .equals(other._comboMaterialNumbers, _comboMaterialNumbers));
+            const DeepCollectionEquality().equals(other._values, _values));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, type,
-      const DeepCollectionEquality().hash(_comboMaterialNumbers));
+  int get hashCode => Object.hash(
+      runtimeType, type, const DeepCollectionEquality().hash(_values));
 
   @JsonKey(ignore: true)
   @override
@@ -351,15 +348,14 @@ class _$_PriceComboDealCategory extends _PriceComboDealCategory {
 
 abstract class _PriceComboDealCategory extends PriceComboDealCategory {
   const factory _PriceComboDealCategory(
-          {required final ComboDealType type,
-          required final List<MaterialNumber> comboMaterialNumbers}) =
-      _$_PriceComboDealCategory;
+      {required final ComboDealCategoryType type,
+      required final List<String> values}) = _$_PriceComboDealCategory;
   const _PriceComboDealCategory._() : super._();
 
   @override
-  ComboDealType get type;
+  ComboDealCategoryType get type;
   @override
-  List<MaterialNumber> get comboMaterialNumbers;
+  List<String> get values;
   @override
   @JsonKey(ignore: true)
   _$$_PriceComboDealCategoryCopyWith<_$_PriceComboDealCategory> get copyWith =>

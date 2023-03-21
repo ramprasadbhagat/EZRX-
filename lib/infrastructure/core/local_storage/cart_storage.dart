@@ -10,6 +10,7 @@ import 'package:ezrxmobile/infrastructure/order/dtos/combo_deal_group_deal_dto.d
 import 'package:ezrxmobile/infrastructure/order/dtos/combo_deal_material_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/combo_deal_qty_tier_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/combo_deal_sku_tier_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/combo_deal_tier_rule_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_item_bonus_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_aggregate_dto.dart';
@@ -55,6 +56,7 @@ class CartStorage {
         ..registerAdapter(ComboDealAmountTierDtoAdapter())
         ..registerAdapter(ComboDealQtyTierDtoAdapter())
         ..registerAdapter(ComboDealGroupDealDtoAdapter())
+        ..registerAdapter(ComboDealTierRuleDtoAdapter())
         ..registerAdapter(ComboDealMaterialSetDtoAdapter())
         ..registerAdapter(ComboDealMaterialDtoAdapter())
         ..registerAdapter(SalesOrganisationConfigsDtoAdapter())

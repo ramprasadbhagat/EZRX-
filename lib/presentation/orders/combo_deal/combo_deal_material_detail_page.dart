@@ -2,50 +2,53 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
-import 'package:ezrxmobile/application/order/combo_deal/combo_deal_detail_bloc.dart';
+import 'package:ezrxmobile/application/order/combo_deal/combo_deal_material_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
-import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal_group_deal.dart';
-import 'package:ezrxmobile/domain/order/entities/combo_deal_qty_tier.dart';
 import 'package:ezrxmobile/domain/order/entities/price_combo_deal.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
+import 'package:ezrxmobile/presentation/orders/combo_deal/widgets/combo_deal_checkout.dart';
+import 'package:ezrxmobile/presentation/orders/combo_deal/widgets/combo_deal_header_message.dart';
 import 'package:ezrxmobile/presentation/orders/combo_deal/widgets/combo_deal_item.dart';
-import 'package:ezrxmobile/presentation/orders/combo_deal/widgets/combo_deal_label.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ComboDealDetailPage extends StatefulWidget implements AutoRouteWrapper {
+class ComboDealMaterialDetailPage extends StatefulWidget
+    implements AutoRouteWrapper {
   final List<PriceAggregate> comboItems;
   final bool isEdit;
-  const ComboDealDetailPage({
+  const ComboDealMaterialDetailPage({
     Key? key,
     required this.comboItems,
     this.isEdit = false,
   }) : super(key: key);
 
   @override
-  State<ComboDealDetailPage> createState() => _ComboDealDetailPageState();
+  State<ComboDealMaterialDetailPage> createState() =>
+      _ComboDealMaterialDetailPageState();
 
   @override
   Widget wrappedRoute(BuildContext context) {
     return BlocProvider(
-      create: (_) => ComboDealDetailBloc(),
+      create: (_) => ComboDealMaterialDetailBloc(),
       child: this,
     );
   }
 }
 
-class _ComboDealDetailPageState extends State<ComboDealDetailPage> {
+class _ComboDealMaterialDetailPageState
+    extends State<ComboDealMaterialDetailPage> {
   late final EligibilityBloc eligibilityBloc;
   late final PriceComboDeal priceComboDeal;
 
@@ -58,14 +61,14 @@ class _ComboDealDetailPageState extends State<ComboDealDetailPage> {
         : widget.comboItems.first.price.comboDeal;
 
     widget.isEdit
-        ? context.read<ComboDealDetailBloc>().add(
-              ComboDealDetailEvent.initFromCartComboDealItems(
+        ? context.read<ComboDealMaterialDetailBloc>().add(
+              ComboDealMaterialDetailEvent.initFromCartComboDealItems(
                 salesConfigs: eligibilityBloc.state.salesOrgConfigs,
                 items: widget.comboItems,
               ),
             )
-        : context.read<ComboDealDetailBloc>().add(
-              ComboDealDetailEvent.initComboDealItems(
+        : context.read<ComboDealMaterialDetailBloc>().add(
+              ComboDealMaterialDetailEvent.initComboDealItems(
                 salesConfigs: eligibilityBloc.state.salesOrgConfigs,
                 items: widget.comboItems,
               ),
@@ -78,12 +81,14 @@ class _ComboDealDetailPageState extends State<ComboDealDetailPage> {
               salesOrganisation: eligibilityBloc.state.salesOrganisation,
               salesOrganisationConfigs: eligibilityBloc.state.salesOrgConfigs,
               shipToCode: eligibilityBloc.state.shipToInfo,
-              materialInfoList: priceComboDeal.category.comboMaterialNumbers,
+              materialInfoList: priceComboDeal.category.values
+                  .map((value) => MaterialNumber(value))
+                  .toList(),
             ),
           );
       if (!widget.isEdit) {
         context.read<ComboDealListBloc>().add(
-              ComboDealListEvent.fetch(
+              ComboDealListEvent.fetchMaterialDeal(
                 customerCodeInfo: eligibilityBloc.state.customerCodeInfo,
                 salesOrganisation: eligibilityBloc.state.salesOrganisation,
                 comboDeals: priceComboDeal,
@@ -113,8 +118,8 @@ class _ComboDealDetailPageState extends State<ComboDealDetailPage> {
                 previous.isFetching != current.isFetching,
             listener: (context, state) {
               if (!state.isFetching) {
-                context.read<ComboDealDetailBloc>().add(
-                      ComboDealDetailEvent.setPriceInfo(
+                context.read<ComboDealMaterialDetailBloc>().add(
+                      ComboDealMaterialDetailEvent.setPriceInfo(
                         priceMap: state.comboDealMaterialDetails,
                         comboDeal: priceComboDeal,
                       ),
@@ -127,8 +132,8 @@ class _ComboDealDetailPageState extends State<ComboDealDetailPage> {
                 previous.isFetching != current.isFetching,
             listener: (context, state) {
               if (!state.isFetching) {
-                context.read<ComboDealDetailBloc>().add(
-                      ComboDealDetailEvent.setComboDealInfo(
+                context.read<ComboDealMaterialDetailBloc>().add(
+                      ComboDealMaterialDetailEvent.setComboDealInfo(
                         comboDealInfo: state.getComboDeal(
                           comboDealId: priceComboDeal.id,
                         ),
@@ -141,7 +146,8 @@ class _ComboDealDetailPageState extends State<ComboDealDetailPage> {
         child: Column(
           children: [
             Expanded(
-              child: BlocBuilder<ComboDealDetailBloc, ComboDealDetailState>(
+              child: BlocBuilder<ComboDealMaterialDetailBloc,
+                  ComboDealMaterialDetailState>(
                 builder: (context, state) {
                   if (state.isFetchingComboInfo || state.isFetchingPrice) {
                     return LoadingShimmer.logo(
@@ -158,7 +164,7 @@ class _ComboDealDetailPageState extends State<ComboDealDetailPage> {
                         )
                       : Column(
                           children: [
-                            _HeaderMessage(comboDeal: comboDeal),
+                            ComboDealHeaderMessage(comboDeal: comboDeal),
                             Expanded(
                               child: ScrollList<PriceAggregate>(
                                 isLoading: false,
@@ -166,15 +172,28 @@ class _ComboDealDetailPageState extends State<ComboDealDetailPage> {
                                   final isSelected = state.selectedItems[
                                           item.getMaterialNumber] ??
                                       false;
-                                  final selectedItems = CartItem.comboDeal(
-                                    state.allSelectedItems,
-                                  );
 
                                   return Card(
                                     child: ComboDealItem(
                                       material: item,
                                       isSelected: isSelected,
-                                      selectedItems: selectedItems,
+                                      onCheckBoxPressed: () => context
+                                          .read<ComboDealMaterialDetailBloc>()
+                                          .add(
+                                            ComboDealMaterialDetailEvent
+                                                .updateItemSelection(
+                                              item: item.getMaterialNumber,
+                                            ),
+                                          ),
+                                      onQuantityUpdated: (qty) => context
+                                          .read<ComboDealMaterialDetailBloc>()
+                                          .add(
+                                            ComboDealMaterialDetailEvent
+                                                .updateItemQuantity(
+                                              item: item.getMaterialNumber,
+                                              qty: qty,
+                                            ),
+                                          ),
                                     ),
                                   );
                                 },
@@ -187,74 +206,17 @@ class _ComboDealDetailPageState extends State<ComboDealDetailPage> {
                 },
               ),
             ),
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.symmetric(
-                vertical: 10,
-                horizontal: 8,
-              ),
-              decoration: const BoxDecoration(
-                color: ZPColors.white,
-                boxShadow: <BoxShadow>[
-                  BoxShadow(
-                    color: Colors.black54,
-                    blurRadius: 15.0,
-                    offset: Offset(0.0, 0.75),
-                  ),
-                ],
-              ),
-              child: BlocBuilder<ComboDealDetailBloc, ComboDealDetailState>(
-                builder: (context, state) {
-                  final comboDeal = state.currentDeal;
-                  final selectedItems =
-                      CartItem.comboDeal(state.allSelectedItems);
-
-                  return SafeArea(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Wrap(
-                          children: [
-                            PriceLabel(
-                              key: Key(
-                                'Total label ${selectedItems.unitPrice}',
-                              ),
-                              label: 'Total Value'.tr(),
-                              salesConfigs:
-                                  eligibilityBloc.state.salesOrgConfigs,
-                              discountPrice: selectedItems.unitPrice,
-                              price: selectedItems.listPrice,
-                              discountEnable: state.isEnableAddToCart,
-                            ),
-                            const SizedBox(width: 5),
-                            if (state.isEnableAddToCart &&
-                                comboDeal.scheme != ComboDealScheme.k1)
-                              DiscountLabel(
-                                label: '${selectedItems.comboDealRate} %',
-                              ),
-                          ],
-                        ),
-                        SizedBox(
-                          width: double.infinity,
-                          child: ElevatedButton(
-                            key: const ValueKey('addToCartButton'),
-                            onPressed: state.isEnableAddToCart
-                                ? () => onAddToCartPressed(
-                                      context: context,
-                                      selectedItems: state.allSelectedItems,
-                                    )
-                                : null,
-                            child: Text(
-                              widget.isEdit
-                                  ? 'Update cart'.tr()
-                                  : 'Add To Cart'.tr(),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
+            BlocBuilder<ComboDealMaterialDetailBloc,
+                ComboDealMaterialDetailState>(
+              builder: (context, state) => ComboDealCheckout(
+                isEdit: widget.isEdit,
+                rateEnabled: state.isEnableAddToCart,
+                currentDeal: state.currentDeal,
+                selectedItems: state.allSelectedItems,
+                onCheckoutPressed: () => onAddToCartPressed(
+                  context: context,
+                  selectedItems: state.allSelectedItems,
+                ),
               ),
             ),
           ],
@@ -288,66 +250,8 @@ class _ComboDealDetailPageState extends State<ComboDealDetailPage> {
   }
 }
 
-class _HeaderMessage extends StatelessWidget {
-  final ComboDeal comboDeal;
-
-  const _HeaderMessage({
-    required this.comboDeal,
-  });
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(10.0),
-      decoration: const BoxDecoration(
-        color: ZPColors.white,
-        boxShadow: <BoxShadow>[
-          BoxShadow(
-            color: Colors.black54,
-            blurRadius: 15.0,
-            offset: Offset(0.0, 0.75),
-          ),
-        ],
-      ),
-      child: Text(
-        _headerMessage,
-        style: const TextStyle(
-          fontSize: 14,
-          fontWeight: FontWeight.w700,
-          color: ZPColors.primary,
-        ),
-      ),
-    );
-  }
-
-  String get _headerMessage {
-    switch (comboDeal.scheme) {
-      case ComboDealScheme.k1:
-        return 'You must purchase all of the product items with min. of below mentioned quantity.';
-      case ComboDealScheme.k2:
-        final requiredQty = comboDeal.flexiQtyTier.isEmpty
-            ? 0
-            : comboDeal.flexiQtyTier.first.minQty;
-        return 'You must purchase a total QTY of [$requiredQty] from any product or products.';
-      case ComboDealScheme.k3:
-        return 'You must purchase ${comboDeal.sortedSKUTier.map((e) => '${e.minQty} unique products ').toList().join(' OR ')} WITH a min QTY of [${comboDeal.materialComboDeals.first.materials.first.minQty}] for each single product (Discounts will increase as the number of unique products increases)';
-      case ComboDealScheme.k4:
-        final flexiQtyTierCopyList =
-            List<ComboDealQtyTier>.from(comboDeal.flexiQtyTier);
-        flexiQtyTierCopyList.sort(((a, b) => a.minQty.compareTo(b.minQty)));
-        final tierText = flexiQtyTierCopyList
-            .map((e) => '${e.minQty}')
-            .toList()
-            .join(' OR ');
-        return 'You must purchase a product or products with a total QTY of $tierText. (Discounts will increase as the total quantity exceeds the minimum eligibilities)';
-      default:
-        return 'You must purchase all of the product items with min. of below mentioned quantity.';
-    }
-  }
-}
-
 class _K21ComboDealList extends StatelessWidget {
-  final ComboDealDetailState state;
+  final ComboDealMaterialDetailState state;
   const _K21ComboDealList({
     Key? key,
     required this.state,
@@ -396,7 +300,21 @@ class _K21ComboDealList extends StatelessWidget {
                       ComboDealItem(
                         material: material,
                         isSelected: isSelected,
-                        selectedItems: CartItem.materialEmpty(),
+                        onCheckBoxPressed: () => context
+                            .read<ComboDealMaterialDetailBloc>()
+                            .add(
+                              ComboDealMaterialDetailEvent.updateItemSelection(
+                                item: material.getMaterialNumber,
+                              ),
+                            ),
+                        onQuantityUpdated: (qty) => context
+                            .read<ComboDealMaterialDetailBloc>()
+                            .add(
+                              ComboDealMaterialDetailEvent.updateItemQuantity(
+                                item: material.getMaterialNumber,
+                                qty: qty,
+                              ),
+                            ),
                       ),
                       if (index != itemSet.length - 1) const _Divider(),
                     ],

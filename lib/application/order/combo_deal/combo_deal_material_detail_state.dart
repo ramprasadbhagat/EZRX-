@@ -1,16 +1,17 @@
-part of 'combo_deal_detail_bloc.dart';
+part of 'combo_deal_material_detail_bloc.dart';
 
 @freezed
-class ComboDealDetailState with _$ComboDealDetailState {
-  const ComboDealDetailState._();
-  const factory ComboDealDetailState({
+class ComboDealMaterialDetailState with _$ComboDealMaterialDetailState {
+  const ComboDealMaterialDetailState._();
+  const factory ComboDealMaterialDetailState({
     required Map<MaterialNumber, PriceAggregate> items,
     required Map<MaterialNumber, bool> selectedItems,
     required bool isFetchingPrice,
     required bool isFetchingComboInfo,
   }) = _ComboDealDetailState;
 
-  factory ComboDealDetailState.initial() => const ComboDealDetailState(
+  factory ComboDealMaterialDetailState.initial() =>
+      const ComboDealMaterialDetailState(
         items: {},
         selectedItems: {},
         isFetchingPrice: false,

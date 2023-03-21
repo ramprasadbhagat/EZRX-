@@ -42,14 +42,41 @@ class ComboDealRepository implements IComboDealRepository {
       final comboDeals = await remoteDataSource.getComboDealList(
         customerCode: customerCode.customerCodeSoldTo,
         flexibleGroup: comboDealInfo.flexibleGroup.getOrCrash(),
-        materialNumbers: comboDealInfo.category.comboMaterialNumbers
-            .map((e) => e.getOrCrash())
-            .toList(),
+        materialNumbers: comboDealInfo.category.values,
         salesDeal: comboDealInfo.salesDeal.getOrCrash(),
         salesOrgCode: salesOrg.getOrCrash(),
       );
 
       return Right(comboDeals);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, ComboDeal>> getComboDeal({
+    required SalesOrg salesOrg,
+    required CustomerCodeInfo customerCode,
+    required PriceComboDeal comboDealInfo,
+  }) async {
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final comboDeal = await localDataSource.getComboDeal();
+
+        return Right(comboDeal);
+      } catch (e) {
+        return Left(FailureHandler.handleFailure(e));
+      }
+    }
+    try {
+      final comboDeal = await remoteDataSource.getComboDeal(
+        customerCode: customerCode.customerCodeSoldTo,
+        flexibleGroup: comboDealInfo.flexibleGroup.getOrCrash(),
+        salesDeal: comboDealInfo.salesDeal.getOrCrash(),
+        salesOrgCode: salesOrg.getOrCrash(),
+      );
+
+      return Right(comboDeal);
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
     }

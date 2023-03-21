@@ -15,6 +15,7 @@ import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/orders/combo_deal/widgets/combo_deal_label.dart';
@@ -134,10 +135,21 @@ class MaterialListItem extends StatelessWidget {
                     return price.comboDeal.isAvailable &&
                             eligibilityState.comboDealEligible
                         ? GestureDetector(
-                            onTap: () => _showComboDeal(
-                              context: context,
-                              price: price,
-                            ),
+                            onTap: () {
+                              final comboType = price.comboDeal.category.type;
+                              if (comboType.isMaterialNumber) {
+                                _showMaterialComboDeal(
+                                  context: context,
+                                  price: price,
+                                );
+                              } else if (comboType.isPrinciple) {
+                                context.router.push(
+                                  ComboDealPrincipleDetailPageRoute(
+                                    comboDeal: price.comboDeal,
+                                  ),
+                                );
+                              }
+                            },
                             child: const ComboDealLabel(),
                           )
                         : const SizedBox();
@@ -171,7 +183,7 @@ class MaterialListItem extends StatelessWidget {
 
     if (comboDealInCart.materials.isNotEmpty) {
       context.router.push(
-        ComboDealDetailPageRoute(
+        ComboDealMaterialDetailPageRoute(
           comboItems: comboDealInCart.materials,
           isEdit: true,
         ),
@@ -211,7 +223,7 @@ class MaterialListItem extends StatelessWidget {
     );
   }
 
-  void _showComboDeal({
+  void _showMaterialComboDeal({
     required BuildContext context,
     required Price price,
   }) {
@@ -221,15 +233,15 @@ class MaterialListItem extends StatelessWidget {
 
     if (comboDealInCart.materials.isEmpty) {
       final salesConfig = context.read<SalesOrgBloc>().state.configs;
-      final materials = price.comboDeal.category.comboMaterialNumbers
+      final materials = price.comboDeal.category.values
           .map(
             (item) => PriceAggregate.empty().copyWith(
               salesOrgConfig: salesConfig,
               materialInfo: MaterialInfo.empty().copyWith(
-                materialNumber: item,
+                materialNumber: MaterialNumber(item),
               ),
               price: Price.empty().copyWith(
-                materialNumber: item,
+                materialNumber: MaterialNumber(item),
                 comboDeal: price.comboDeal,
               ),
             ),
@@ -237,13 +249,13 @@ class MaterialListItem extends StatelessWidget {
           .toList();
 
       context.router.push(
-        ComboDealDetailPageRoute(
+        ComboDealMaterialDetailPageRoute(
           comboItems: materials,
         ),
       );
     } else {
       context.router.push(
-        ComboDealDetailPageRoute(
+        ComboDealMaterialDetailPageRoute(
           comboItems: comboDealInCart.materials,
           isEdit: true,
         ),

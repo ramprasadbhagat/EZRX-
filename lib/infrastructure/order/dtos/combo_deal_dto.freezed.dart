@@ -39,6 +39,10 @@ mixin _$ComboDealDto {
   @HiveField(4, defaultValue: [])
   List<ComboDealMaterialSetDto> get materialComboDeals =>
       throw _privateConstructorUsedError;
+  @JsonKey(name: 'flexiTierRule', defaultValue: [])
+  @HiveField(5, defaultValue: [])
+  List<ComboDealTierRuleDto> get flexiTierRule =>
+      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -67,7 +71,10 @@ abstract class $ComboDealDtoCopyWith<$Res> {
           List<ComboDealAmountTierDto> flexiAmountTier,
       @JsonKey(name: 'materialComboDeals', defaultValue: [])
       @HiveField(4, defaultValue: [])
-          List<ComboDealMaterialSetDto> materialComboDeals});
+          List<ComboDealMaterialSetDto> materialComboDeals,
+      @JsonKey(name: 'flexiTierRule', defaultValue: [])
+      @HiveField(5, defaultValue: [])
+          List<ComboDealTierRuleDto> flexiTierRule});
 
   $ComboDealGroupDealDtoCopyWith<$Res> get groupDeal;
 }
@@ -90,6 +97,7 @@ class _$ComboDealDtoCopyWithImpl<$Res, $Val extends ComboDealDto>
     Object? flexiQtyTier = null,
     Object? flexiAmountTier = null,
     Object? materialComboDeals = null,
+    Object? flexiTierRule = null,
   }) {
     return _then(_value.copyWith(
       groupDeal: null == groupDeal
@@ -112,6 +120,10 @@ class _$ComboDealDtoCopyWithImpl<$Res, $Val extends ComboDealDto>
           ? _value.materialComboDeals
           : materialComboDeals // ignore: cast_nullable_to_non_nullable
               as List<ComboDealMaterialSetDto>,
+      flexiTierRule: null == flexiTierRule
+          ? _value.flexiTierRule
+          : flexiTierRule // ignore: cast_nullable_to_non_nullable
+              as List<ComboDealTierRuleDto>,
     ) as $Val);
   }
 
@@ -147,7 +159,10 @@ abstract class _$$_ComboDealDtoCopyWith<$Res>
           List<ComboDealAmountTierDto> flexiAmountTier,
       @JsonKey(name: 'materialComboDeals', defaultValue: [])
       @HiveField(4, defaultValue: [])
-          List<ComboDealMaterialSetDto> materialComboDeals});
+          List<ComboDealMaterialSetDto> materialComboDeals,
+      @JsonKey(name: 'flexiTierRule', defaultValue: [])
+      @HiveField(5, defaultValue: [])
+          List<ComboDealTierRuleDto> flexiTierRule});
 
   @override
   $ComboDealGroupDealDtoCopyWith<$Res> get groupDeal;
@@ -169,6 +184,7 @@ class __$$_ComboDealDtoCopyWithImpl<$Res>
     Object? flexiQtyTier = null,
     Object? flexiAmountTier = null,
     Object? materialComboDeals = null,
+    Object? flexiTierRule = null,
   }) {
     return _then(_$_ComboDealDto(
       groupDeal: null == groupDeal
@@ -191,6 +207,10 @@ class __$$_ComboDealDtoCopyWithImpl<$Res>
           ? _value._materialComboDeals
           : materialComboDeals // ignore: cast_nullable_to_non_nullable
               as List<ComboDealMaterialSetDto>,
+      flexiTierRule: null == flexiTierRule
+          ? _value._flexiTierRule
+          : flexiTierRule // ignore: cast_nullable_to_non_nullable
+              as List<ComboDealTierRuleDto>,
     ));
   }
 }
@@ -214,11 +234,15 @@ class _$_ComboDealDto extends _ComboDealDto {
           required final List<ComboDealAmountTierDto> flexiAmountTier,
       @JsonKey(name: 'materialComboDeals', defaultValue: [])
       @HiveField(4, defaultValue: [])
-          required final List<ComboDealMaterialSetDto> materialComboDeals})
+          required final List<ComboDealMaterialSetDto> materialComboDeals,
+      @JsonKey(name: 'flexiTierRule', defaultValue: [])
+      @HiveField(5, defaultValue: [])
+          required final List<ComboDealTierRuleDto> flexiTierRule})
       : _flexiSKUTier = flexiSKUTier,
         _flexiQtyTier = flexiQtyTier,
         _flexiAmountTier = flexiAmountTier,
         _materialComboDeals = materialComboDeals,
+        _flexiTierRule = flexiTierRule,
         super._();
 
   factory _$_ComboDealDto.fromJson(Map<String, dynamic> json) =>
@@ -264,9 +288,18 @@ class _$_ComboDealDto extends _ComboDealDto {
     return EqualUnmodifiableListView(_materialComboDeals);
   }
 
+  final List<ComboDealTierRuleDto> _flexiTierRule;
+  @override
+  @JsonKey(name: 'flexiTierRule', defaultValue: [])
+  @HiveField(5, defaultValue: [])
+  List<ComboDealTierRuleDto> get flexiTierRule {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_flexiTierRule);
+  }
+
   @override
   String toString() {
-    return 'ComboDealDto(groupDeal: $groupDeal, flexiSKUTier: $flexiSKUTier, flexiQtyTier: $flexiQtyTier, flexiAmountTier: $flexiAmountTier, materialComboDeals: $materialComboDeals)';
+    return 'ComboDealDto(groupDeal: $groupDeal, flexiSKUTier: $flexiSKUTier, flexiQtyTier: $flexiQtyTier, flexiAmountTier: $flexiAmountTier, materialComboDeals: $materialComboDeals, flexiTierRule: $flexiTierRule)';
   }
 
   @override
@@ -283,7 +316,9 @@ class _$_ComboDealDto extends _ComboDealDto {
             const DeepCollectionEquality()
                 .equals(other._flexiAmountTier, _flexiAmountTier) &&
             const DeepCollectionEquality()
-                .equals(other._materialComboDeals, _materialComboDeals));
+                .equals(other._materialComboDeals, _materialComboDeals) &&
+            const DeepCollectionEquality()
+                .equals(other._flexiTierRule, _flexiTierRule));
   }
 
   @JsonKey(ignore: true)
@@ -294,7 +329,8 @@ class _$_ComboDealDto extends _ComboDealDto {
       const DeepCollectionEquality().hash(_flexiSKUTier),
       const DeepCollectionEquality().hash(_flexiQtyTier),
       const DeepCollectionEquality().hash(_flexiAmountTier),
-      const DeepCollectionEquality().hash(_materialComboDeals));
+      const DeepCollectionEquality().hash(_materialComboDeals),
+      const DeepCollectionEquality().hash(_flexiTierRule));
 
   @JsonKey(ignore: true)
   @override
@@ -312,22 +348,25 @@ class _$_ComboDealDto extends _ComboDealDto {
 
 abstract class _ComboDealDto extends ComboDealDto {
   const factory _ComboDealDto(
-      {@JsonKey(name: 'groupDeal')
-      @HiveField(0, defaultValue: ComboDealGroupDealDto.empty)
-          final ComboDealGroupDealDto groupDeal,
-      @JsonKey(name: 'flexiSKUTier', defaultValue: [])
-      @HiveField(1, defaultValue: [])
-          required final List<ComboDealSKUTierDto> flexiSKUTier,
-      @JsonKey(name: 'flexiQtyTier', defaultValue: [])
-      @HiveField(2, defaultValue: [])
-          required final List<ComboDealQtyTierDto> flexiQtyTier,
-      @JsonKey(name: 'flexiAmmountTier', defaultValue: [])
-      @HiveField(3, defaultValue: [])
-          required final List<ComboDealAmountTierDto> flexiAmountTier,
-      @JsonKey(name: 'materialComboDeals', defaultValue: [])
-      @HiveField(4, defaultValue: [])
-          required final List<ComboDealMaterialSetDto>
-              materialComboDeals}) = _$_ComboDealDto;
+          {@JsonKey(name: 'groupDeal')
+          @HiveField(0, defaultValue: ComboDealGroupDealDto.empty)
+              final ComboDealGroupDealDto groupDeal,
+          @JsonKey(name: 'flexiSKUTier', defaultValue: [])
+          @HiveField(1, defaultValue: [])
+              required final List<ComboDealSKUTierDto> flexiSKUTier,
+          @JsonKey(name: 'flexiQtyTier', defaultValue: [])
+          @HiveField(2, defaultValue: [])
+              required final List<ComboDealQtyTierDto> flexiQtyTier,
+          @JsonKey(name: 'flexiAmmountTier', defaultValue: [])
+          @HiveField(3, defaultValue: [])
+              required final List<ComboDealAmountTierDto> flexiAmountTier,
+          @JsonKey(name: 'materialComboDeals', defaultValue: [])
+          @HiveField(4, defaultValue: [])
+              required final List<ComboDealMaterialSetDto> materialComboDeals,
+          @JsonKey(name: 'flexiTierRule', defaultValue: [])
+          @HiveField(5, defaultValue: [])
+              required final List<ComboDealTierRuleDto> flexiTierRule}) =
+      _$_ComboDealDto;
   const _ComboDealDto._() : super._();
 
   factory _ComboDealDto.fromJson(Map<String, dynamic> json) =
@@ -353,6 +392,10 @@ abstract class _ComboDealDto extends ComboDealDto {
   @JsonKey(name: 'materialComboDeals', defaultValue: [])
   @HiveField(4, defaultValue: [])
   List<ComboDealMaterialSetDto> get materialComboDeals;
+  @override
+  @JsonKey(name: 'flexiTierRule', defaultValue: [])
+  @HiveField(5, defaultValue: [])
+  List<ComboDealTierRuleDto> get flexiTierRule;
   @override
   @JsonKey(ignore: true)
   _$$_ComboDealDtoCopyWith<_$_ComboDealDto> get copyWith =>

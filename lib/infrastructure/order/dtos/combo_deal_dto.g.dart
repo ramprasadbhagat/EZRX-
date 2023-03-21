@@ -32,13 +32,16 @@ class ComboDealDtoAdapter extends TypeAdapter<_$_ComboDealDto> {
       materialComboDeals: fields[4] == null
           ? []
           : (fields[4] as List).cast<ComboDealMaterialSetDto>(),
+      flexiTierRule: fields[5] == null
+          ? []
+          : (fields[5] as List).cast<ComboDealTierRuleDto>(),
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_ComboDealDto obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(6)
       ..writeByte(0)
       ..write(obj.groupDeal)
       ..writeByte(1)
@@ -48,7 +51,9 @@ class ComboDealDtoAdapter extends TypeAdapter<_$_ComboDealDto> {
       ..writeByte(3)
       ..write(obj.flexiAmountTier)
       ..writeByte(4)
-      ..write(obj.materialComboDeals);
+      ..write(obj.materialComboDeals)
+      ..writeByte(5)
+      ..write(obj.flexiTierRule);
   }
 
   @override
@@ -92,6 +97,11 @@ _$_ComboDealDto _$$_ComboDealDtoFromJson(Map<String, dynamic> json) =>
                   ComboDealMaterialSetDto.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
+      flexiTierRule: (json['flexiTierRule'] as List<dynamic>?)
+              ?.map((e) =>
+                  ComboDealTierRuleDto.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
     );
 
 Map<String, dynamic> _$$_ComboDealDtoToJson(_$_ComboDealDto instance) =>
@@ -103,4 +113,5 @@ Map<String, dynamic> _$$_ComboDealDtoToJson(_$_ComboDealDto instance) =>
           instance.flexiAmountTier.map((e) => e.toJson()).toList(),
       'materialComboDeals':
           instance.materialComboDeals.map((e) => e.toJson()).toList(),
+      'flexiTierRule': instance.flexiTierRule.map((e) => e.toJson()).toList(),
     };

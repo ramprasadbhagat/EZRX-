@@ -88,6 +88,17 @@
         "Bonuses": [],
         "TieredPricing": [],
         "Bundles": [],
+        "ComboDeals": {
+          "Eligible": true,
+          "FlexibleGroup": "5000000049",
+          "SalesDeal": "0040000050",
+          "Category": {
+            "Type": "ZPRINC",
+            "Value": [
+              "140132"
+            ]
+          }
+        },
         "Valid": true
       },
       {

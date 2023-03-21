@@ -3,6 +3,7 @@ import 'package:ezrxmobile/domain/order/entities/combo_deal_group_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal_material.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal_qty_tier.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal_sku_tier.dart';
+import 'package:ezrxmobile/domain/order/entities/combo_deal_tier_rule.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:collection/collection.dart';
@@ -19,6 +20,7 @@ class ComboDeal with _$ComboDeal {
     required List<ComboDealQtyTier> flexiQtyTier,
     required List<ComboDealAmountTier> flexiAmountTier,
     required List<ComboDealMaterialSet> materialComboDeals,
+    required List<ComboDealTierRule> flexiTierRule,
   }) = _ComboDeal;
 
   factory ComboDeal.empty() => ComboDeal(
@@ -27,6 +29,7 @@ class ComboDeal with _$ComboDeal {
         flexiQtyTier: [],
         flexiAmountTier: [],
         materialComboDeals: [],
+        flexiTierRule: [],
       );
 
   List<ComboDealQtyTier> get descendingSortedQtyTiers =>
@@ -35,12 +38,19 @@ class ComboDeal with _$ComboDeal {
           (first, second) => second.minQty.compareTo(first.minQty),
         );
 
+  List<ComboDealTierRule> get descendingSortedMinAmountTiers =>
+      List<ComboDealTierRule>.from(flexiTierRule)
+        ..sort(
+          (first, second) =>
+              second.minTotalAmount.compareTo(first.minTotalAmount),
+        );
+
   List<ComboDealSKUTier> get descendingSortedSKUTier =>
       List<ComboDealSKUTier>.from(flexiSKUTier)
         ..sort(
           (first, second) => second.minQty.compareTo(first.minQty),
         );
-      
+
   List<ComboDealSKUTier> get sortedSKUTier =>
       List<ComboDealSKUTier>.from(flexiSKUTier)
         ..sort(
@@ -79,17 +89,27 @@ class ComboDeal with _$ComboDeal {
         (groupDeal != ComboDealGroupDeal.empty() || flexiQtyTier.length == 1)) {
       return ComboDealScheme.k2;
     }
-    
+
     if (flexiSKUTier.isNotEmpty && flexiQtyTier.isEmpty) {
       return ComboDealScheme.k3;
     }
     if (flexiSKUTier.isEmpty && flexiQtyTier.isNotEmpty) {
       return ComboDealScheme.k4;
     }
-    
+
+    if (!isMaterialDeal && flexiTierRule.isNotEmpty) {
+      return ComboDealScheme.k5;
+    }
 
     return ComboDealScheme.k1;
   }
+
+  bool get isMaterialDeal =>
+      groupDeal != ComboDealGroupDeal.empty() ||
+      flexiAmountTier.isNotEmpty ||
+      flexiQtyTier.isNotEmpty ||
+      flexiSKUTier.isNotEmpty ||
+      materialComboDeals.isNotEmpty;
 }
 
 enum ComboDealScheme { k1, k2, k3, k4, k5 }

@@ -26,7 +26,7 @@ class ComboDealListBloc extends Bloc<ComboDealListEvent, ComboDealListState> {
   ) async {
     await event.map(
       initialize: (e) async => emit(ComboDealListState.initial()),
-      fetch: (e) async {
+      fetchMaterialDeal: (e) async {
         emit(
           state.copyWith(
             isFetching: true,
@@ -64,6 +64,52 @@ class ComboDealListBloc extends Bloc<ComboDealListEvent, ComboDealListState> {
                   ..addAll(
                     {
                       e.comboDeals.id: comboDeals,
+                    },
+                  ),
+                isFetching: false,
+              ),
+            );
+          },
+        );
+      },
+      fetchPrincipleGroupDeal: (e) async {
+        emit(
+          state.copyWith(
+            isFetching: true,
+          ),
+        );
+
+        if (state.comboDeals.containsKey(e.comboDeals.id)) {
+          emit(
+            state.copyWith(
+              isFetching: false,
+            ),
+          );
+
+          return;
+        }
+
+        final failureOrSuccess = await repository.getComboDeal(
+          comboDealInfo: e.comboDeals,
+          customerCode: e.customerCodeInfo,
+          salesOrg: e.salesOrganisation.salesOrg,
+        );
+        failureOrSuccess.fold(
+          (failure) {
+            emit(
+              state.copyWith(
+                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+                isFetching: false,
+              ),
+            );
+          },
+          (comboDeal) {
+            emit(
+              state.copyWith(
+                comboDeals: Map.from(state.comboDeals)
+                  ..addAll(
+                    {
+                      e.comboDeals.id: [comboDeal],
                     },
                   ),
                 isFetching: false,

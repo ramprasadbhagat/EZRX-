@@ -769,13 +769,18 @@ class FlexibleGroup extends ValueObject<String> {
   const FlexibleGroup._(this.value);
 }
 
-class ComboDealType extends ValueObject<String> {
+class ComboDealCategoryType extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
 
-  factory ComboDealType(String input) {
-    return ComboDealType._(validateStringNotEmpty(input));
+  factory ComboDealCategoryType(String input) {
+    return ComboDealCategoryType._(validateStringNotEmpty(input));
   }
 
-  const ComboDealType._(this.value);
+  //TODO: Add test for this
+  bool get isMaterialNumber => value.getOrElse(() => '') == 'MATNR';
+
+  bool get isPrinciple => value.getOrElse(() => '') == 'ZPRINC';
+
+  const ComboDealCategoryType._(this.value);
 }

@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'combo_deal_detail_bloc.dart';
+part of 'combo_deal_material_detail_bloc.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$ComboDealDetailEvent {
+mixin _$ComboDealMaterialDetailEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
@@ -108,17 +108,19 @@ mixin _$ComboDealDetailEvent {
 }
 
 /// @nodoc
-abstract class $ComboDealDetailEventCopyWith<$Res> {
-  factory $ComboDealDetailEventCopyWith(ComboDealDetailEvent value,
-          $Res Function(ComboDealDetailEvent) then) =
-      _$ComboDealDetailEventCopyWithImpl<$Res, ComboDealDetailEvent>;
+abstract class $ComboDealMaterialDetailEventCopyWith<$Res> {
+  factory $ComboDealMaterialDetailEventCopyWith(
+          ComboDealMaterialDetailEvent value,
+          $Res Function(ComboDealMaterialDetailEvent) then) =
+      _$ComboDealMaterialDetailEventCopyWithImpl<$Res,
+          ComboDealMaterialDetailEvent>;
 }
 
 /// @nodoc
-class _$ComboDealDetailEventCopyWithImpl<$Res,
-        $Val extends ComboDealDetailEvent>
-    implements $ComboDealDetailEventCopyWith<$Res> {
-  _$ComboDealDetailEventCopyWithImpl(this._value, this._then);
+class _$ComboDealMaterialDetailEventCopyWithImpl<$Res,
+        $Val extends ComboDealMaterialDetailEvent>
+    implements $ComboDealMaterialDetailEventCopyWith<$Res> {
+  _$ComboDealMaterialDetailEventCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -135,7 +137,7 @@ abstract class _$$_InitializeCopyWith<$Res> {
 
 /// @nodoc
 class __$$_InitializeCopyWithImpl<$Res>
-    extends _$ComboDealDetailEventCopyWithImpl<$Res, _$_Initialize>
+    extends _$ComboDealMaterialDetailEventCopyWithImpl<$Res, _$_Initialize>
     implements _$$_InitializeCopyWith<$Res> {
   __$$_InitializeCopyWithImpl(
       _$_Initialize _value, $Res Function(_$_Initialize) _then)
@@ -149,7 +151,7 @@ class _$_Initialize implements _Initialize {
 
   @override
   String toString() {
-    return 'ComboDealDetailEvent.initialize()';
+    return 'ComboDealMaterialDetailEvent.initialize()';
   }
 
   @override
@@ -275,7 +277,7 @@ class _$_Initialize implements _Initialize {
   }
 }
 
-abstract class _Initialize implements ComboDealDetailEvent {
+abstract class _Initialize implements ComboDealMaterialDetailEvent {
   const factory _Initialize() = _$_Initialize;
 }
 
@@ -293,8 +295,8 @@ abstract class _$$_InitComboDealItemsCopyWith<$Res> {
 
 /// @nodoc
 class __$$_InitComboDealItemsCopyWithImpl<$Res>
-    extends _$ComboDealDetailEventCopyWithImpl<$Res, _$_InitComboDealItems>
-    implements _$$_InitComboDealItemsCopyWith<$Res> {
+    extends _$ComboDealMaterialDetailEventCopyWithImpl<$Res,
+        _$_InitComboDealItems> implements _$$_InitComboDealItemsCopyWith<$Res> {
   __$$_InitComboDealItemsCopyWithImpl(
       _$_InitComboDealItems _value, $Res Function(_$_InitComboDealItems) _then)
       : super(_value, _then);
@@ -346,7 +348,7 @@ class _$_InitComboDealItems implements _InitComboDealItems {
 
   @override
   String toString() {
-    return 'ComboDealDetailEvent.initComboDealItems(items: $items, salesConfigs: $salesConfigs)';
+    return 'ComboDealMaterialDetailEvent.initComboDealItems(items: $items, salesConfigs: $salesConfigs)';
   }
 
   @override
@@ -484,7 +486,7 @@ class _$_InitComboDealItems implements _InitComboDealItems {
   }
 }
 
-abstract class _InitComboDealItems implements ComboDealDetailEvent {
+abstract class _InitComboDealItems implements ComboDealMaterialDetailEvent {
   const factory _InitComboDealItems(
           {required final List<PriceAggregate> items,
           required final SalesOrganisationConfigs salesConfigs}) =
@@ -512,7 +514,7 @@ abstract class _$$_InitFromCartComboDealItemsCopyWith<$Res> {
 
 /// @nodoc
 class __$$_InitFromCartComboDealItemsCopyWithImpl<$Res>
-    extends _$ComboDealDetailEventCopyWithImpl<$Res,
+    extends _$ComboDealMaterialDetailEventCopyWithImpl<$Res,
         _$_InitFromCartComboDealItems>
     implements _$$_InitFromCartComboDealItemsCopyWith<$Res> {
   __$$_InitFromCartComboDealItemsCopyWithImpl(
@@ -567,7 +569,7 @@ class _$_InitFromCartComboDealItems implements _InitFromCartComboDealItems {
 
   @override
   String toString() {
-    return 'ComboDealDetailEvent.initFromCartComboDealItems(items: $items, salesConfigs: $salesConfigs)';
+    return 'ComboDealMaterialDetailEvent.initFromCartComboDealItems(items: $items, salesConfigs: $salesConfigs)';
   }
 
   @override
@@ -705,7 +707,8 @@ class _$_InitFromCartComboDealItems implements _InitFromCartComboDealItems {
   }
 }
 
-abstract class _InitFromCartComboDealItems implements ComboDealDetailEvent {
+abstract class _InitFromCartComboDealItems
+    implements ComboDealMaterialDetailEvent {
   const factory _InitFromCartComboDealItems(
           {required final List<PriceAggregate> items,
           required final SalesOrganisationConfigs salesConfigs}) =
@@ -733,7 +736,7 @@ abstract class _$$_SetPriceInfoCopyWith<$Res> {
 
 /// @nodoc
 class __$$_SetPriceInfoCopyWithImpl<$Res>
-    extends _$ComboDealDetailEventCopyWithImpl<$Res, _$_SetPriceInfo>
+    extends _$ComboDealMaterialDetailEventCopyWithImpl<$Res, _$_SetPriceInfo>
     implements _$$_SetPriceInfoCopyWith<$Res> {
   __$$_SetPriceInfoCopyWithImpl(
       _$_SetPriceInfo _value, $Res Function(_$_SetPriceInfo) _then)
@@ -786,7 +789,7 @@ class _$_SetPriceInfo implements _SetPriceInfo {
 
   @override
   String toString() {
-    return 'ComboDealDetailEvent.setPriceInfo(priceMap: $priceMap, comboDeal: $comboDeal)';
+    return 'ComboDealMaterialDetailEvent.setPriceInfo(priceMap: $priceMap, comboDeal: $comboDeal)';
   }
 
   @override
@@ -923,7 +926,7 @@ class _$_SetPriceInfo implements _SetPriceInfo {
   }
 }
 
-abstract class _SetPriceInfo implements ComboDealDetailEvent {
+abstract class _SetPriceInfo implements ComboDealMaterialDetailEvent {
   const factory _SetPriceInfo(
       {required final Map<MaterialNumber, MaterialPriceDetail> priceMap,
       required final PriceComboDeal comboDeal}) = _$_SetPriceInfo;
@@ -948,8 +951,8 @@ abstract class _$$_SetComboDealInfoCopyWith<$Res> {
 
 /// @nodoc
 class __$$_SetComboDealInfoCopyWithImpl<$Res>
-    extends _$ComboDealDetailEventCopyWithImpl<$Res, _$_SetComboDealInfo>
-    implements _$$_SetComboDealInfoCopyWith<$Res> {
+    extends _$ComboDealMaterialDetailEventCopyWithImpl<$Res,
+        _$_SetComboDealInfo> implements _$$_SetComboDealInfoCopyWith<$Res> {
   __$$_SetComboDealInfoCopyWithImpl(
       _$_SetComboDealInfo _value, $Res Function(_$_SetComboDealInfo) _then)
       : super(_value, _then);
@@ -986,7 +989,7 @@ class _$_SetComboDealInfo implements _SetComboDealInfo {
 
   @override
   String toString() {
-    return 'ComboDealDetailEvent.setComboDealInfo(comboDealInfo: $comboDealInfo)';
+    return 'ComboDealMaterialDetailEvent.setComboDealInfo(comboDealInfo: $comboDealInfo)';
   }
 
   @override
@@ -1121,7 +1124,7 @@ class _$_SetComboDealInfo implements _SetComboDealInfo {
   }
 }
 
-abstract class _SetComboDealInfo implements ComboDealDetailEvent {
+abstract class _SetComboDealInfo implements ComboDealMaterialDetailEvent {
   const factory _SetComboDealInfo({required final ComboDeal comboDealInfo}) =
       _$_SetComboDealInfo;
 
@@ -1142,8 +1145,8 @@ abstract class _$$_UpdateItemQuantityCopyWith<$Res> {
 
 /// @nodoc
 class __$$_UpdateItemQuantityCopyWithImpl<$Res>
-    extends _$ComboDealDetailEventCopyWithImpl<$Res, _$_UpdateItemQuantity>
-    implements _$$_UpdateItemQuantityCopyWith<$Res> {
+    extends _$ComboDealMaterialDetailEventCopyWithImpl<$Res,
+        _$_UpdateItemQuantity> implements _$$_UpdateItemQuantityCopyWith<$Res> {
   __$$_UpdateItemQuantityCopyWithImpl(
       _$_UpdateItemQuantity _value, $Res Function(_$_UpdateItemQuantity) _then)
       : super(_value, _then);
@@ -1179,7 +1182,7 @@ class _$_UpdateItemQuantity implements _UpdateItemQuantity {
 
   @override
   String toString() {
-    return 'ComboDealDetailEvent.updateItemQuantity(item: $item, qty: $qty)';
+    return 'ComboDealMaterialDetailEvent.updateItemQuantity(item: $item, qty: $qty)';
   }
 
   @override
@@ -1315,7 +1318,7 @@ class _$_UpdateItemQuantity implements _UpdateItemQuantity {
   }
 }
 
-abstract class _UpdateItemQuantity implements ComboDealDetailEvent {
+abstract class _UpdateItemQuantity implements ComboDealMaterialDetailEvent {
   const factory _UpdateItemQuantity(
       {required final MaterialNumber item,
       required final int qty}) = _$_UpdateItemQuantity;
@@ -1338,7 +1341,8 @@ abstract class _$$_UpdateItemSelectionCopyWith<$Res> {
 
 /// @nodoc
 class __$$_UpdateItemSelectionCopyWithImpl<$Res>
-    extends _$ComboDealDetailEventCopyWithImpl<$Res, _$_UpdateItemSelection>
+    extends _$ComboDealMaterialDetailEventCopyWithImpl<$Res,
+        _$_UpdateItemSelection>
     implements _$$_UpdateItemSelectionCopyWith<$Res> {
   __$$_UpdateItemSelectionCopyWithImpl(_$_UpdateItemSelection _value,
       $Res Function(_$_UpdateItemSelection) _then)
@@ -1368,7 +1372,7 @@ class _$_UpdateItemSelection implements _UpdateItemSelection {
 
   @override
   String toString() {
-    return 'ComboDealDetailEvent.updateItemSelection(item: $item)';
+    return 'ComboDealMaterialDetailEvent.updateItemSelection(item: $item)';
   }
 
   @override
@@ -1503,7 +1507,7 @@ class _$_UpdateItemSelection implements _UpdateItemSelection {
   }
 }
 
-abstract class _UpdateItemSelection implements ComboDealDetailEvent {
+abstract class _UpdateItemSelection implements ComboDealMaterialDetailEvent {
   const factory _UpdateItemSelection({required final MaterialNumber item}) =
       _$_UpdateItemSelection;
 
@@ -1514,7 +1518,7 @@ abstract class _UpdateItemSelection implements ComboDealDetailEvent {
 }
 
 /// @nodoc
-mixin _$ComboDealDetailState {
+mixin _$ComboDealMaterialDetailState {
   Map<MaterialNumber, PriceAggregate> get items =>
       throw _privateConstructorUsedError;
   Map<MaterialNumber, bool> get selectedItems =>
@@ -1523,15 +1527,17 @@ mixin _$ComboDealDetailState {
   bool get isFetchingComboInfo => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $ComboDealDetailStateCopyWith<ComboDealDetailState> get copyWith =>
-      throw _privateConstructorUsedError;
+  $ComboDealMaterialDetailStateCopyWith<ComboDealMaterialDetailState>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ComboDealDetailStateCopyWith<$Res> {
-  factory $ComboDealDetailStateCopyWith(ComboDealDetailState value,
-          $Res Function(ComboDealDetailState) then) =
-      _$ComboDealDetailStateCopyWithImpl<$Res, ComboDealDetailState>;
+abstract class $ComboDealMaterialDetailStateCopyWith<$Res> {
+  factory $ComboDealMaterialDetailStateCopyWith(
+          ComboDealMaterialDetailState value,
+          $Res Function(ComboDealMaterialDetailState) then) =
+      _$ComboDealMaterialDetailStateCopyWithImpl<$Res,
+          ComboDealMaterialDetailState>;
   @useResult
   $Res call(
       {Map<MaterialNumber, PriceAggregate> items,
@@ -1541,10 +1547,10 @@ abstract class $ComboDealDetailStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ComboDealDetailStateCopyWithImpl<$Res,
-        $Val extends ComboDealDetailState>
-    implements $ComboDealDetailStateCopyWith<$Res> {
-  _$ComboDealDetailStateCopyWithImpl(this._value, this._then);
+class _$ComboDealMaterialDetailStateCopyWithImpl<$Res,
+        $Val extends ComboDealMaterialDetailState>
+    implements $ComboDealMaterialDetailStateCopyWith<$Res> {
+  _$ComboDealMaterialDetailStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -1582,7 +1588,7 @@ class _$ComboDealDetailStateCopyWithImpl<$Res,
 
 /// @nodoc
 abstract class _$$_ComboDealDetailStateCopyWith<$Res>
-    implements $ComboDealDetailStateCopyWith<$Res> {
+    implements $ComboDealMaterialDetailStateCopyWith<$Res> {
   factory _$$_ComboDealDetailStateCopyWith(_$_ComboDealDetailState value,
           $Res Function(_$_ComboDealDetailState) then) =
       __$$_ComboDealDetailStateCopyWithImpl<$Res>;
@@ -1597,7 +1603,8 @@ abstract class _$$_ComboDealDetailStateCopyWith<$Res>
 
 /// @nodoc
 class __$$_ComboDealDetailStateCopyWithImpl<$Res>
-    extends _$ComboDealDetailStateCopyWithImpl<$Res, _$_ComboDealDetailState>
+    extends _$ComboDealMaterialDetailStateCopyWithImpl<$Res,
+        _$_ComboDealDetailState>
     implements _$$_ComboDealDetailStateCopyWith<$Res> {
   __$$_ComboDealDetailStateCopyWithImpl(_$_ComboDealDetailState _value,
       $Res Function(_$_ComboDealDetailState) _then)
@@ -1665,7 +1672,7 @@ class _$_ComboDealDetailState extends _ComboDealDetailState {
 
   @override
   String toString() {
-    return 'ComboDealDetailState(items: $items, selectedItems: $selectedItems, isFetchingPrice: $isFetchingPrice, isFetchingComboInfo: $isFetchingComboInfo)';
+    return 'ComboDealMaterialDetailState(items: $items, selectedItems: $selectedItems, isFetchingPrice: $isFetchingPrice, isFetchingComboInfo: $isFetchingComboInfo)';
   }
 
   @override
@@ -1698,7 +1705,7 @@ class _$_ComboDealDetailState extends _ComboDealDetailState {
           this, _$identity);
 }
 
-abstract class _ComboDealDetailState extends ComboDealDetailState {
+abstract class _ComboDealDetailState extends ComboDealMaterialDetailState {
   const factory _ComboDealDetailState(
       {required final Map<MaterialNumber, PriceAggregate> items,
       required final Map<MaterialNumber, bool> selectedItems,

@@ -1,6 +1,6 @@
-import 'package:ezrxmobile/application/order/combo_deal/combo_deal_detail_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
-import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal_group_deal.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
@@ -8,18 +8,19 @@ import 'package:ezrxmobile/presentation/orders/combo_deal/widgets/combo_deal_lab
 import 'package:ezrxmobile/presentation/orders/create_order/quantity_input.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ComboDealItem extends StatelessWidget {
   final PriceAggregate material;
+  final VoidCallback onCheckBoxPressed;
+  final Function(int qty) onQuantityUpdated;
   final bool isSelected;
-  final CartItem selectedItems;
 
   const ComboDealItem({
     Key? key,
     required this.material,
     required this.isSelected,
-    required this.selectedItems,
+    required this.onCheckBoxPressed,
+    required this.onQuantityUpdated,
   }) : super(key: key);
 
   @override
@@ -32,11 +33,7 @@ class ComboDealItem extends StatelessWidget {
           Checkbox(
             onChanged: material.selfComboDeal.mandatory
                 ? null
-                : (_) => context.read<ComboDealDetailBloc>().add(
-                      ComboDealDetailEvent.updateItemSelection(
-                        item: material.getMaterialNumber,
-                      ),
-                    ),
+                : (_) => onCheckBoxPressed.call(),
             value: isSelected,
           ),
           Expanded(
@@ -106,6 +103,7 @@ class ComboDealItem extends StatelessWidget {
                     ),
                     _QuantityInput(
                       material: material,
+                      onQuantityUpdated: onQuantityUpdated,
                     ),
                   ],
                 ),
@@ -119,20 +117,7 @@ class ComboDealItem extends StatelessWidget {
       ),
     );
   }
-
-  void onUpdateQuantity({
-    required int value,
-    required BuildContext context,
-  }) {
-    context.read<ComboDealDetailBloc>().add(
-          ComboDealDetailEvent.updateItemQuantity(
-            item: material.getMaterialNumber,
-            qty: value,
-          ),
-        );
-  }
 }
-
 
 class _DiscountLabel extends StatelessWidget {
   final PriceAggregate material;
@@ -140,7 +125,6 @@ class _DiscountLabel extends StatelessWidget {
   const _DiscountLabel({
     Key? key,
     required this.material,
-    
   }) : super(key: key);
 
   @override
@@ -183,6 +167,15 @@ class _PriceLabel extends StatelessWidget {
     required this.material,
   }) : super(key: key);
 
+  SalesOrganisationConfigs get salesConfigs =>
+      material.comboDeal.scheme == ComboDealScheme.k5
+          ? SalesOrganisationConfigs.empty().copyWith(
+              currency: Currency(
+                material.comboDeal.flexiTierRule.first.minTotalCurrency,
+              ),
+            )
+          : material.salesOrgConfig;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -190,29 +183,39 @@ class _PriceLabel extends StatelessWidget {
       children: [
         PriceLabel(
           label: 'ZP Price',
-          salesConfigs: material.salesOrgConfig,
+          salesConfigs: salesConfigs,
           discountPrice: material.comboDealUnitPrice(
-            rate: rate,
+            rate: _rate,
           ),
           price: material.comboDealListPrice,
           discountEnable: false,
         ),
         PriceLabel(
           label: 'Total Price',
-          salesConfigs: material.salesOrgConfig,
+          salesConfigs: salesConfigs,
           discountPrice: material.comboDealTotalUnitPrice(
-            rate: rate,
+            rate: _rate,
           ),
           price: material.comboDealTotalListPrice,
-          discountEnable:
-              !(material.comboDeal.scheme == ComboDealScheme.k4 ||
-              material.comboDeal.scheme == ComboDealScheme.k3),
+          discountEnable: _enableDiscount,
         ),
       ],
     );
   }
 
-  double? get rate {
+  bool get _enableDiscount {
+    switch (material.comboDeal.scheme) {
+      case ComboDealScheme.k1:
+      case ComboDealScheme.k2:
+        return true;
+      case ComboDealScheme.k3:
+      case ComboDealScheme.k4:
+      case ComboDealScheme.k5:
+        return false;
+    }
+  }
+
+  double? get _rate {
     final comboDeal = material.comboDeal;
     switch (comboDeal.scheme) {
       case ComboDealScheme.k1:
@@ -231,9 +234,11 @@ class _PriceLabel extends StatelessWidget {
 
 class _QuantityInput extends StatefulWidget {
   final PriceAggregate material;
+  final Function(int qty) onQuantityUpdated;
   const _QuantityInput({
     Key? key,
     required this.material,
+    required this.onQuantityUpdated,
   }) : super(key: key);
 
   @override
@@ -262,40 +267,15 @@ class __QuantityInputState extends State<_QuantityInput> {
     return QuantityInput(
       controller: controller,
       quantityTextKey: const Key('QuantityInput'),
-      onFieldChange: (value) {
-        _onUpdateQuantity(
-          context: context,
-          value: value,
-        );
-      },
+      onFieldChange: widget.onQuantityUpdated,
       minusPressed: widget.material.selfComboDealEligible &&
               widget.material.quantity != widget.material.selfComboDeal.minQty
-          ? (value) {
-              _onUpdateQuantity(
-                context: context,
-                value: value,
-              );
-            }
+          ? widget.onQuantityUpdated
           : null,
-      addPressed: (value) => _onUpdateQuantity(
-        context: context,
-        value: value,
-      ),
+      addPressed: widget.onQuantityUpdated,
       quantityAddKey: const Key('AddKey'),
       quantityDeleteKey: const Key('DeleteKey'),
       isEnabled: true,
     );
-  }
-
-  void _onUpdateQuantity({
-    required int value,
-    required BuildContext context,
-  }) {
-    context.read<ComboDealDetailBloc>().add(
-          ComboDealDetailEvent.updateItemQuantity(
-            item: widget.material.getMaterialNumber,
-            qty: value,
-          ),
-        );
   }
 }

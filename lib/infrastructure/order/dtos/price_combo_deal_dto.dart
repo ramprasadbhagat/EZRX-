@@ -70,20 +70,12 @@ class PriceComboDealCategoryDto with _$PriceComboDealCategoryDto {
   factory PriceComboDealCategoryDto.fromDomain(PriceComboDealCategory domain) =>
       PriceComboDealCategoryDto(
         type: domain.type.getOrDefaultValue(''),
-        value: domain.comboMaterialNumbers
-            .map(
-              (e) => e.getOrDefaultValue(''),
-            )
-            .toList(),
+        value: domain.values,
       );
 
   PriceComboDealCategory get toDomain => PriceComboDealCategory(
-        type: ComboDealType(type),
-        comboMaterialNumbers: value
-            .map(
-              (e) => MaterialNumber(e),
-            )
-            .toList(),
+        type: ComboDealCategoryType(type),
+        values: value,
       );
 
   static const empty = PriceComboDealCategoryDto(
