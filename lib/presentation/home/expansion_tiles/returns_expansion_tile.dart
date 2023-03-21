@@ -214,7 +214,7 @@ class _RequestQuantity extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(5.0),
         child: Column(
           children: [
             GestureDetector(
