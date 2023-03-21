@@ -8,6 +8,7 @@ import 'package:ezrxmobile/application/returns/request_return/request_return_blo
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_summary/return_summary_bloc.dart';
 import 'package:ezrxmobile/application/returns/request_return_filter/request_return_filter_bloc.dart';
+import 'package:ezrxmobile/application/returns/return_summary_details/return_summary_details_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 import 'package:ezrxmobile/application/returns/return_summary_filter/return_summary_filter_bloc.dart';
@@ -348,6 +349,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider<ReturnSummaryFilterBloc>(
           create: (context) => locator<ReturnSummaryFilterBloc>(),
+        ),
+        BlocProvider<ReturnSummaryDetailsBloc>(
+          create: (context) => locator<ReturnSummaryDetailsBloc>(),
         ),
       ],
       child: MaterialApp.router(

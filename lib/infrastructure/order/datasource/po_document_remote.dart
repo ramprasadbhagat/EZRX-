@@ -10,7 +10,9 @@ class PoDocumentRemote {
   final HttpService httpService;
   final DataSourceExceptionHandler dataSourceExceptionHandler;
 
-  static const _downaloadUrl = '/api/downloadPOAttachment';
+  static const _pODownloadUrl = '/api/downloadPOAttachment';
+  static const _returnSummaryAttachmentUrl = '/api/downloadAttachment';
+
   static const _uploadUrl = '/api/po-upload';
 
   static const _method = 'POST';
@@ -22,11 +24,14 @@ class PoDocumentRemote {
   Future<PoDocumentsBuffer> fileDownload(
     String name,
     String imgUrl,
+    AttachmentType attachmentType,
   ) async {
     return await dataSourceExceptionHandler.handle(() async {
       final res = await httpService.request(
         method: _method,
-        url: _downaloadUrl,
+        url: attachmentType == AttachmentType.downloadPOAttachment
+            ? _pODownloadUrl
+            : _returnSummaryAttachmentUrl,
         data: {'url': imgUrl},
         responseType: ResponseType.bytes,
       );

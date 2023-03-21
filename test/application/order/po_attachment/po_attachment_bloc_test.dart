@@ -45,7 +45,7 @@ void main() {
       blocTest<PoAttachmentBloc, PoAttachmentState>(
         'PoAttachmentBloc Bloc Download file fail',
         setUp: () {
-          when(() => poAttachmentRepository.downloadFiles(poDocumentsList))
+          when(() => poAttachmentRepository.downloadFiles(poDocumentsList, AttachmentType.downloadPOAttachment))
               .thenAnswer(
             (invocation) async => const Left(
               ApiFailure.other('fake-error'),
@@ -55,17 +55,17 @@ void main() {
         build: () => PoAttachmentBloc(
             downloadAttachmentRepository: poAttachmentRepository),
         act: (bloc) => bloc.add(PoAttachmentEvent.downloadFile(
-          fetchMode: FileOperationhMode.download,
+          fetchMode: FileOperationMode.download,
           files: poDocumentsList,
         )),
         expect: () => [
           PoAttachmentState.initial().copyWith(
-            fileOperationhMode: FileOperationhMode.download,
+            fileOperationMode: FileOperationMode.download,
             isFetching: true,
             fileUrl: poDocumentsList,
           ),
           PoAttachmentState.initial().copyWith(
-              fileOperationhMode: FileOperationhMode.download,
+              fileOperationMode: FileOperationMode.download,
               isFetching: false,
               failureOrSuccessOption:
                   optionOf(const Left(ApiFailure.other('fake-error')))),
@@ -75,7 +75,7 @@ void main() {
       blocTest<PoAttachmentBloc, PoAttachmentState>(
         'PoAttachmentBloc Bloc Download file success',
         setUp: () {
-          when(() => poAttachmentRepository.downloadFiles(poDocumentsList))
+          when(() => poAttachmentRepository.downloadFiles(poDocumentsList, AttachmentType.downloadPOAttachment))
               .thenAnswer(
             (invocation) async => Right(
               downLoadedPoDocumentsList,
@@ -85,17 +85,17 @@ void main() {
         build: () => PoAttachmentBloc(
             downloadAttachmentRepository: poAttachmentRepository),
         act: (bloc) => bloc.add(PoAttachmentEvent.downloadFile(
-          fetchMode: FileOperationhMode.download,
+          fetchMode: FileOperationMode.download,
           files: poDocumentsList,
         )),
         expect: () => [
           PoAttachmentState.initial().copyWith(
-            fileOperationhMode: FileOperationhMode.download,
+            fileOperationMode: FileOperationMode.download,
             isFetching: true,
             fileUrl: poDocumentsList,
           ),
           PoAttachmentState.initial().copyWith(
-              fileOperationhMode: FileOperationhMode.download,
+              fileOperationMode: FileOperationMode.download,
               isFetching: false,
               fileData: downLoadedPoDocumentsList,
               failureOrSuccessOption: optionOf(
@@ -136,11 +136,11 @@ void main() {
         ),
         expect: () => [
           PoAttachmentState.initial().copyWith(
-            fileOperationhMode: FileOperationhMode.upload,
+            fileOperationMode: FileOperationMode.upload,
             isFetching: true,
           ),
           PoAttachmentState.initial().copyWith(
-            fileOperationhMode: FileOperationhMode.upload,
+            fileOperationMode: FileOperationMode.upload,
             failureOrSuccessOption: optionOf(
               const Left(
                 ApiFailure.other('Fake-error'),
@@ -178,11 +178,11 @@ void main() {
         ),
         expect: () => [
           PoAttachmentState.initial().copyWith(
-            fileOperationhMode: FileOperationhMode.upload,
+            fileOperationMode: FileOperationMode.upload,
             isFetching: true,
           ),
           PoAttachmentState.initial().copyWith(
-            fileOperationhMode: FileOperationhMode.upload,
+            fileOperationMode: FileOperationMode.upload,
           ),
         ],
       );

@@ -98,6 +98,3 @@ String getReturnSummaryFilterByStatus(String filter) => filter == 'Active'
     : filter != 'All'
         ? 'COMPLETED'
         : '';
-
-
-

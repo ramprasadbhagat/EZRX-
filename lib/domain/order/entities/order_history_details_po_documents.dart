@@ -13,3 +13,5 @@ class PoDocuments with _$PoDocuments {
         name: '',
       );
 }
+enum AttachmentType { downloadPOAttachment, downloadAttachment }
+

@@ -33,6 +33,8 @@ class PoAttachmentRepository implements IpoAttachmentRepository {
   @override
   Future<Either<ApiFailure, List<PoDocumentsBuffer>>> downloadFiles(
     List<PoDocuments> files,
+    AttachmentType attachmentType,
+
   ) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -50,7 +52,7 @@ class PoAttachmentRepository implements IpoAttachmentRepository {
     try {
       final localFile = Future.wait(files
           .map(
-            (e) async => await remoteDataSource.fileDownload(e.name, e.url),
+            (e) async => await remoteDataSource.fileDownload(e.name, e.url, attachmentType),
           )
           .toList());
 

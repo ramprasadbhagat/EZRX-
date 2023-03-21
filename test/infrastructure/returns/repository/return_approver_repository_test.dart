@@ -5,9 +5,9 @@ import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
-import 'package:ezrxmobile/domain/returns/entities/approver_return_request.dart';
-import 'package:ezrxmobile/domain/returns/entities/approver_return_requests_id.dart';
+import 'package:ezrxmobile/domain/returns/entities/request_information.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_approver_filter.dart';
+import 'package:ezrxmobile/domain/returns/entities/return_requests_id.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/approver_return_request_information_local.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/approver_return_request_information_remote.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/approver_return_requests_local.dart';
@@ -93,7 +93,7 @@ void main() {
           when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
           when(() => approverReturnRequestsLocalMock.getReturns()).thenAnswer(
             (invocation) async =>
-                [ApproverReturnRequestsId(requestId: 'fake-requestId')],
+                [ReturnRequestsId(requestId: 'fake-requestId')],
           );
 
           final result = await returnApproverRepository.getReturnRequests(
@@ -148,7 +148,7 @@ void main() {
                   }, offset: 0, pageSize: 11, username: 'Fake-username'))
               .thenAnswer(
             (invocation) async => [
-              ApproverReturnRequestsId(requestId: 'fake-requestId'),
+              ReturnRequestsId(requestId: 'fake-requestId'),
             ],
           );
 
@@ -207,14 +207,14 @@ void main() {
         () async {
           when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
           when(() => approverReturnRequestInformationLocalMock
-              .getApproverReturnRequestInfomration(
+              .getApproverReturnRequestInformation(
                   returnRequestId: 'fake-requestId')).thenAnswer(
-            (invocation) async => ApproverReturnRequest.empty(),
+            (invocation) async => RequestInformation.empty(),
           );
 
           final result = await returnApproverRepository
               .getReturnInformation(returnRequestIds: [
-            ApproverReturnRequestsId(requestId: 'fake-requestId'),
+            ReturnRequestsId(requestId: 'fake-requestId'),
           ]);
           expect(
             result.isRight(),
@@ -228,13 +228,13 @@ void main() {
         () async {
           when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
           when(() => approverReturnRequestInformationLocalMock
-                  .getApproverReturnRequestInfomration(
+                  .getApproverReturnRequestInformation(
                       returnRequestId: 'fake-requestId'))
               .thenThrow(const ApiFailure.serverTimeout());
 
           final result = await returnApproverRepository
               .getReturnInformation(returnRequestIds: [
-            ApproverReturnRequestsId(requestId: 'fake-requestId'),
+            ReturnRequestsId(requestId: 'fake-requestId'),
           ]);
           expect(
             result.isLeft(),
@@ -248,14 +248,14 @@ void main() {
         () async {
           when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
           when(() => approverReturnRequestInformationRemoteMock
-              .getApproverReturnRequestInfomration(
+              .getApproverReturnRequestInformation(
                   returnRequestId: 'fake-requestId')).thenAnswer(
-            (invocation) async => ApproverReturnRequest.empty(),
+            (invocation) async => RequestInformation.empty(),
           );
 
           final result = await returnApproverRepository
               .getReturnInformation(returnRequestIds: [
-            ApproverReturnRequestsId(requestId: 'fake-requestId'),
+            ReturnRequestsId(requestId: 'fake-requestId'),
           ]);
           expect(
             result.isRight(),
@@ -269,13 +269,13 @@ void main() {
         () async {
           when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
           when(() => approverReturnRequestInformationRemoteMock
-                  .getApproverReturnRequestInfomration(
+                  .getApproverReturnRequestInformation(
                       returnRequestId: 'fake-requestId'))
               .thenThrow(const ApiFailure.serverTimeout());
 
           final result = await returnApproverRepository
               .getReturnInformation(returnRequestIds: [
-            ApproverReturnRequestsId(requestId: 'fake-requestId'),
+            ReturnRequestsId(requestId: 'fake-requestId'),
           ]);
           expect(
             result.isLeft(),

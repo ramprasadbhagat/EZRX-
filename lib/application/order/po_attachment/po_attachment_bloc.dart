@@ -34,13 +34,13 @@ class PoAttachmentBloc extends Bloc<PoAttachmentEvent, PoAttachmentState> {
       downloadFile: (_DownloadFile e) async {
         emit(
           PoAttachmentState.initial().copyWith(
-            fileOperationhMode: e.fetchMode,
+            fileOperationMode: e.fetchMode,
             isFetching: true,
             fileUrl: e.files,
           ),
         );
-        final failureOrSuccess =
-            await downloadAttachmentRepository.downloadFiles(e.files);
+        final failureOrSuccess = await downloadAttachmentRepository
+            .downloadFiles(e.files, e.attachmentType);
         failureOrSuccess.fold(
           (l) => emit(
             state.copyWith(
@@ -76,7 +76,7 @@ class PoAttachmentBloc extends Bloc<PoAttachmentEvent, PoAttachmentState> {
         emit(
           PoAttachmentState.initial().copyWith(
             isFetching: true,
-            fileOperationhMode: FileOperationhMode.upload,
+            fileOperationMode: FileOperationMode.upload,
             fileUrl: renamedFiles
                 .map(
                   (element) => PoDocuments.empty().copyWith(

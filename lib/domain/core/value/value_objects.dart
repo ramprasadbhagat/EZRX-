@@ -121,3 +121,17 @@ class LanguageValue extends ValueObject<String> {
 
   const LanguageValue._(this.value);
 }
+class StringValue extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory StringValue(String input) {
+    return StringValue._(Right(input));
+  }
+
+  String get displayStringValue {
+    return dashIfEmpty((value.getOrElse(() => '')));
+  }
+
+  const StringValue._(this.value);
+}

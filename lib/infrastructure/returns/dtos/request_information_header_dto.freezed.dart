@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'approver_return_request_information_header_dto.dart';
+part of 'request_information_header_dto.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,14 +14,13 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-ApproverReturnRequestInformationHeaderDto
-    _$ApproverReturnRequestInformationHeaderDtoFromJson(
-        Map<String, dynamic> json) {
-  return _ApproverReturnRequestInformationHeaderDto.fromJson(json);
+RequestInformationHeaderDto _$RequestInformationHeaderDtoFromJson(
+    Map<String, dynamic> json) {
+  return _RequestInformationHeaderDto.fromJson(json);
 }
 
 /// @nodoc
-mixin _$ApproverReturnRequestInformationHeaderDto {
+mixin _$RequestInformationHeaderDto {
   @JsonKey(name: 'soldTo', defaultValue: '')
   String get soldTo => throw _privateConstructorUsedError;
   @JsonKey(name: 'shipTo', defaultValue: '')
@@ -72,18 +71,17 @@ mixin _$ApproverReturnRequestInformationHeaderDto {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $ApproverReturnRequestInformationHeaderDtoCopyWith<
-          ApproverReturnRequestInformationHeaderDto>
+  $RequestInformationHeaderDtoCopyWith<RequestInformationHeaderDto>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ApproverReturnRequestInformationHeaderDtoCopyWith<$Res> {
-  factory $ApproverReturnRequestInformationHeaderDtoCopyWith(
-          ApproverReturnRequestInformationHeaderDto value,
-          $Res Function(ApproverReturnRequestInformationHeaderDto) then) =
-      _$ApproverReturnRequestInformationHeaderDtoCopyWithImpl<$Res,
-          ApproverReturnRequestInformationHeaderDto>;
+abstract class $RequestInformationHeaderDtoCopyWith<$Res> {
+  factory $RequestInformationHeaderDtoCopyWith(
+          RequestInformationHeaderDto value,
+          $Res Function(RequestInformationHeaderDto) then) =
+      _$RequestInformationHeaderDtoCopyWithImpl<$Res,
+          RequestInformationHeaderDto>;
   @useResult
   $Res call(
       {@JsonKey(name: 'soldTo', defaultValue: '')
@@ -135,11 +133,10 @@ abstract class $ApproverReturnRequestInformationHeaderDtoCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ApproverReturnRequestInformationHeaderDtoCopyWithImpl<$Res,
-        $Val extends ApproverReturnRequestInformationHeaderDto>
-    implements $ApproverReturnRequestInformationHeaderDtoCopyWith<$Res> {
-  _$ApproverReturnRequestInformationHeaderDtoCopyWithImpl(
-      this._value, this._then);
+class _$RequestInformationHeaderDtoCopyWithImpl<$Res,
+        $Val extends RequestInformationHeaderDto>
+    implements $RequestInformationHeaderDtoCopyWith<$Res> {
+  _$RequestInformationHeaderDtoCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -271,12 +268,12 @@ class _$ApproverReturnRequestInformationHeaderDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ApproverReturnRequestInformationHeaderDtoCopyWith<$Res>
-    implements $ApproverReturnRequestInformationHeaderDtoCopyWith<$Res> {
-  factory _$$_ApproverReturnRequestInformationHeaderDtoCopyWith(
-          _$_ApproverReturnRequestInformationHeaderDto value,
-          $Res Function(_$_ApproverReturnRequestInformationHeaderDto) then) =
-      __$$_ApproverReturnRequestInformationHeaderDtoCopyWithImpl<$Res>;
+abstract class _$$_RequestInformationHeaderDtoCopyWith<$Res>
+    implements $RequestInformationHeaderDtoCopyWith<$Res> {
+  factory _$$_RequestInformationHeaderDtoCopyWith(
+          _$_RequestInformationHeaderDto value,
+          $Res Function(_$_RequestInformationHeaderDto) then) =
+      __$$_RequestInformationHeaderDtoCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -329,13 +326,13 @@ abstract class _$$_ApproverReturnRequestInformationHeaderDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ApproverReturnRequestInformationHeaderDtoCopyWithImpl<$Res>
-    extends _$ApproverReturnRequestInformationHeaderDtoCopyWithImpl<$Res,
-        _$_ApproverReturnRequestInformationHeaderDto>
-    implements _$$_ApproverReturnRequestInformationHeaderDtoCopyWith<$Res> {
-  __$$_ApproverReturnRequestInformationHeaderDtoCopyWithImpl(
-      _$_ApproverReturnRequestInformationHeaderDto _value,
-      $Res Function(_$_ApproverReturnRequestInformationHeaderDto) _then)
+class __$$_RequestInformationHeaderDtoCopyWithImpl<$Res>
+    extends _$RequestInformationHeaderDtoCopyWithImpl<$Res,
+        _$_RequestInformationHeaderDto>
+    implements _$$_RequestInformationHeaderDtoCopyWith<$Res> {
+  __$$_RequestInformationHeaderDtoCopyWithImpl(
+      _$_RequestInformationHeaderDto _value,
+      $Res Function(_$_RequestInformationHeaderDto) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -365,7 +362,7 @@ class __$$_ApproverReturnRequestInformationHeaderDtoCopyWithImpl<$Res>
     Object? returnInvoices = null,
     Object? salesDoc = null,
   }) {
-    return _then(_$_ApproverReturnRequestInformationHeaderDto(
+    return _then(_$_RequestInformationHeaderDto(
       soldTo: null == soldTo
           ? _value.soldTo
           : soldTo // ignore: cast_nullable_to_non_nullable
@@ -464,9 +461,8 @@ class __$$_ApproverReturnRequestInformationHeaderDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ApproverReturnRequestInformationHeaderDto
-    extends _ApproverReturnRequestInformationHeaderDto {
-  _$_ApproverReturnRequestInformationHeaderDto(
+class _$_RequestInformationHeaderDto extends _RequestInformationHeaderDto {
+  _$_RequestInformationHeaderDto(
       {@JsonKey(name: 'soldTo', defaultValue: '')
           required this.soldTo,
       @JsonKey(name: 'shipTo', defaultValue: '')
@@ -517,9 +513,8 @@ class _$_ApproverReturnRequestInformationHeaderDto
         _salesDoc = salesDoc,
         super._();
 
-  factory _$_ApproverReturnRequestInformationHeaderDto.fromJson(
-          Map<String, dynamic> json) =>
-      _$$_ApproverReturnRequestInformationHeaderDtoFromJson(json);
+  factory _$_RequestInformationHeaderDto.fromJson(Map<String, dynamic> json) =>
+      _$$_RequestInformationHeaderDtoFromJson(json);
 
   @override
   @JsonKey(name: 'soldTo', defaultValue: '')
@@ -602,14 +597,14 @@ class _$_ApproverReturnRequestInformationHeaderDto
 
   @override
   String toString() {
-    return 'ApproverReturnRequestInformationHeaderDto(soldTo: $soldTo, shipTo: $shipTo, createdBy: $createdBy, returnType: $returnType, status: $status, createdDate: $createdDate, createdTime: $createdTime, requestID: $requestID, salesOrg: $salesOrg, refundTotal: $refundTotal, totalItemCount: $totalItemCount, returnTypeDesc: $returnTypeDesc, ppaHeld: $ppaHeld, cName1: $cName1, cName2: $cName2, cName3: $cName3, cName4: $cName4, street1: $street1, street2: $street2, street3: $street3, street4: $street4, returnInvoices: $returnInvoices, salesDoc: $salesDoc)';
+    return 'RequestInformationHeaderDto(soldTo: $soldTo, shipTo: $shipTo, createdBy: $createdBy, returnType: $returnType, status: $status, createdDate: $createdDate, createdTime: $createdTime, requestID: $requestID, salesOrg: $salesOrg, refundTotal: $refundTotal, totalItemCount: $totalItemCount, returnTypeDesc: $returnTypeDesc, ppaHeld: $ppaHeld, cName1: $cName1, cName2: $cName2, cName3: $cName3, cName4: $cName4, street1: $street1, street2: $street2, street3: $street3, street4: $street4, returnInvoices: $returnInvoices, salesDoc: $salesDoc)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ApproverReturnRequestInformationHeaderDto &&
+            other is _$_RequestInformationHeaderDto &&
             (identical(other.soldTo, soldTo) || other.soldTo == soldTo) &&
             (identical(other.shipTo, shipTo) || other.shipTo == shipTo) &&
             (identical(other.createdBy, createdBy) ||
@@ -677,23 +672,21 @@ class _$_ApproverReturnRequestInformationHeaderDto
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ApproverReturnRequestInformationHeaderDtoCopyWith<
-          _$_ApproverReturnRequestInformationHeaderDto>
-      get copyWith =>
-          __$$_ApproverReturnRequestInformationHeaderDtoCopyWithImpl<
-              _$_ApproverReturnRequestInformationHeaderDto>(this, _$identity);
+  _$$_RequestInformationHeaderDtoCopyWith<_$_RequestInformationHeaderDto>
+      get copyWith => __$$_RequestInformationHeaderDtoCopyWithImpl<
+          _$_RequestInformationHeaderDto>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ApproverReturnRequestInformationHeaderDtoToJson(
+    return _$$_RequestInformationHeaderDtoToJson(
       this,
     );
   }
 }
 
-abstract class _ApproverReturnRequestInformationHeaderDto
-    extends ApproverReturnRequestInformationHeaderDto {
-  factory _ApproverReturnRequestInformationHeaderDto(
+abstract class _RequestInformationHeaderDto
+    extends RequestInformationHeaderDto {
+  factory _RequestInformationHeaderDto(
           {@JsonKey(name: 'soldTo', defaultValue: '')
               required final String soldTo,
           @JsonKey(name: 'shipTo', defaultValue: '')
@@ -740,12 +733,11 @@ abstract class _ApproverReturnRequestInformationHeaderDto
               required final List<ReturnInvoicesDto> returnInvoices,
           @JsonKey(name: 'salesDoc', defaultValue: <RetrunSalesDocDto>[])
               required final List<RetrunSalesDocDto> salesDoc}) =
-      _$_ApproverReturnRequestInformationHeaderDto;
-  _ApproverReturnRequestInformationHeaderDto._() : super._();
+      _$_RequestInformationHeaderDto;
+  _RequestInformationHeaderDto._() : super._();
 
-  factory _ApproverReturnRequestInformationHeaderDto.fromJson(
-          Map<String, dynamic> json) =
-      _$_ApproverReturnRequestInformationHeaderDto.fromJson;
+  factory _RequestInformationHeaderDto.fromJson(Map<String, dynamic> json) =
+      _$_RequestInformationHeaderDto.fromJson;
 
   @override
   @JsonKey(name: 'soldTo', defaultValue: '')
@@ -818,8 +810,7 @@ abstract class _ApproverReturnRequestInformationHeaderDto
   List<RetrunSalesDocDto> get salesDoc;
   @override
   @JsonKey(ignore: true)
-  _$$_ApproverReturnRequestInformationHeaderDtoCopyWith<
-          _$_ApproverReturnRequestInformationHeaderDto>
+  _$$_RequestInformationHeaderDtoCopyWith<_$_RequestInformationHeaderDto>
       get copyWith => throw _privateConstructorUsedError;
 }
 

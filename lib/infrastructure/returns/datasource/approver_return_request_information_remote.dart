@@ -4,14 +4,14 @@ import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
-import 'package:ezrxmobile/domain/returns/entities/approver_return_request.dart';
+import 'package:ezrxmobile/domain/returns/entities/request_information.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
-import 'package:ezrxmobile/infrastructure/returns/datasource/approver_return_request_information_query.dart';
-import 'package:ezrxmobile/infrastructure/returns/dtos/approver_return_request_dto.dart';
+import 'package:ezrxmobile/infrastructure/returns/datasource/request_information_query.dart';
+import 'package:ezrxmobile/infrastructure/returns/dtos/request_information_dto.dart';
 
 class ApproverReturnRequestInformationRemote {
   HttpService httpService;
-  ApproverReturnRequestInformationQuery approverReturnRequestInformationQuery;
+  RequestInformationQuery approverReturnRequestInformationQuery;
   DataSourceExceptionHandler dataSourceExceptionHandler;
   Config config;
   ApproverReturnRequestInformationRemote({
@@ -21,7 +21,7 @@ class ApproverReturnRequestInformationRemote {
     required this.config,
   });
 
-  Future<ApproverReturnRequest> getApproverReturnRequestInfomration(
+  Future<RequestInformation> getApproverReturnRequestInformation(
       {
     required String returnRequestId,
   }) async {
@@ -43,7 +43,7 @@ class ApproverReturnRequestInformationRemote {
     _approverReturnRequestInformationExceptionChecker(res: res);
     final data = res.data['data']['requestInformationV2'];
 
-    return ApproverReturnRequestDto.fromJson(data).toDomain();
+    return RequestInformationDto.fromJson(data).toDomain();
   }
 
   void _approverReturnRequestInformationExceptionChecker({

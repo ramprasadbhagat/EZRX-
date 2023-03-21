@@ -107,7 +107,7 @@ void main() {
               url: 'fake-url-1',
             ),
           ],
-          fileOperationhMode: FileOperationhMode.upload,
+          fileOperationMode: FileOperationMode.upload,
         )
       ];
       whenListen(poAttachmentBlocMock, Stream.fromIterable(expectedStates));
@@ -154,7 +154,7 @@ void main() {
               url: 'fake-url-2',
             ),
           ],
-          fileOperationhMode: FileOperationhMode.upload,
+          fileOperationMode: FileOperationMode.upload,
         )
       ];
       whenListen(poAttachmentBlocMock, Stream.fromIterable(expectedStates));
@@ -201,7 +201,7 @@ void main() {
                 url: 'fake-url-1',
               ),
             ],
-            fileOperationhMode: FileOperationhMode.upload,
+            fileOperationMode: FileOperationMode.upload,
             failureOrSuccessOption:
                 optionOf(const Left(ApiFailure.other('Fake-exception'))))
       ];
@@ -283,7 +283,7 @@ void main() {
               url: 'fake-url-1',
             ),
           ],
-          fileOperationhMode: FileOperationhMode.upload,
+          fileOperationMode: FileOperationMode.upload,
           failureOrSuccessOption: none(),
         )
       ];
@@ -418,7 +418,7 @@ void main() {
               url: 'fake-url-1',
             ),
           ],
-          fileOperationhMode: FileOperationhMode.upload,
+          fileOperationMode: FileOperationMode.upload,
           isFetching: true,
         )
       ];

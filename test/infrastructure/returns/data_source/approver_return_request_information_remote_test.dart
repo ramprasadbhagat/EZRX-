@@ -4,11 +4,11 @@ import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
-import 'package:ezrxmobile/domain/returns/entities/approver_return_request.dart';
+import 'package:ezrxmobile/domain/returns/entities/request_information.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
-import 'package:ezrxmobile/infrastructure/returns/datasource/approver_return_request_information_query.dart';
+import 'package:ezrxmobile/infrastructure/returns/datasource/request_information_query.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/approver_return_request_information_remote.dart';
-import 'package:ezrxmobile/infrastructure/returns/dtos/approver_return_request_dto.dart';
+import 'package:ezrxmobile/infrastructure/returns/dtos/request_information_dto.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -40,8 +40,7 @@ void main() {
         httpService: service,
         config: Config(),
         dataSourceExceptionHandler: DataSourceExceptionHandler(),
-        approverReturnRequestInformationQuery:
-            ApproverReturnRequestInformationQuery(),
+        approverReturnRequestInformationQuery: RequestInformationQuery(),
       );
     },
   );
@@ -50,7 +49,7 @@ void main() {
     'Return Approver information Remote Datasource',
     () {
       test(
-        'getApproverReturnRequestInfomration Success',
+        'getApproverReturnRequestInformation Success',
         () async {
           final res = json.decode(
             await rootBundle.loadString(
@@ -73,21 +72,20 @@ void main() {
           );
 
           final result =
-              await remoteDataSource.getApproverReturnRequestInfomration(
+              await remoteDataSource.getApproverReturnRequestInformation(
             returnRequestId: 'fake-requestId',
           );
 
           expect(
             result,
-            ApproverReturnRequestDto.fromJson(
-                    res['data']['requestInformationV2'])
+            RequestInformationDto.fromJson(res['data']['requestInformationV2'])
                 .toDomain(),
           );
         },
       );
 
       test(
-        'getApproverReturnRequestInfomration status is not 200',
+        'getApproverReturnRequestInformation status is not 200',
         () async {
           dioAdapter.onPost(
             '/api/ereturn',
@@ -105,18 +103,18 @@ void main() {
           );
 
           await remoteDataSource
-              .getApproverReturnRequestInfomration(
+              .getApproverReturnRequestInformation(
             returnRequestId: 'fake-requestId',
           )
               .onError((error, _) {
             expect(error, isA<ServerException>());
-            return ApproverReturnRequest.empty();
+            return RequestInformation.empty();
           });
         },
       );
 
       test(
-        'getApproverReturnRequestInfomration throws an error',
+        'getApproverReturnRequestInformation throws an error',
         () async {
           dioAdapter.onPost(
             '/api/ereturn',
@@ -139,12 +137,12 @@ void main() {
           );
 
           await remoteDataSource
-              .getApproverReturnRequestInfomration(
+              .getApproverReturnRequestInformation(
             returnRequestId: 'fake-requestId',
           )
               .onError((error, _) {
             expect(error, isA<ServerException>());
-            return ApproverReturnRequest.empty();
+            return RequestInformation.empty();
           });
         },
       );

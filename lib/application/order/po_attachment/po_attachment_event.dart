@@ -5,7 +5,8 @@ class PoAttachmentEvent with _$PoAttachmentEvent {
   const factory PoAttachmentEvent.initialized() = _Initialized;
   const factory PoAttachmentEvent.downloadFile({
     required List<PoDocuments> files,
-    required FileOperationhMode fetchMode,
+    required FileOperationMode fetchMode,
+    @Default(AttachmentType.downloadPOAttachment) AttachmentType attachmentType,
   }) = _DownloadFile;
   const factory PoAttachmentEvent.uploadFile({
     required List<PlatformFile> files,
@@ -16,3 +17,4 @@ class PoAttachmentEvent with _$PoAttachmentEvent {
     required List<PoDocuments> uploadedPODocument,
   }) = _UpLoadFile;
 }
+

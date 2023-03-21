@@ -142,3 +142,6 @@ String getLanguageString(String apiLanguageCode) {
       return 'English';
   }
 }
+String dashIfEmpty(String text) {
+  return text.isEmpty ? '-' : text;
+}

@@ -318,10 +318,9 @@ void main() {
       when(() => mockOrderHistoryDetailsBloc.state).thenReturn(
         OrderHistoryDetailsState.initial().copyWith(
           orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
-            orderHistoryDetailsShippingInformation: 
-              OrderHistoryDetailsShippingInformation.empty().copyWith(
-                pOReference: POReference('test')
-              ),        
+            orderHistoryDetailsShippingInformation:
+                OrderHistoryDetailsShippingInformation.empty()
+                    .copyWith(pOReference: POReference('test')),
           ),
           failureOrSuccessOption: none(),
           isLoading: false,
@@ -628,7 +627,7 @@ void main() {
       );
       when(() => downloadAttachmentBlocMock.state).thenReturn(
         PoAttachmentState.initial()
-            .copyWith(fileOperationhMode: FileOperationhMode.view),
+            .copyWith(fileOperationMode: FileOperationMode.view),
       );
       await tester.pumpWidget(getWUT());
       await tester.pump();
@@ -659,7 +658,7 @@ void main() {
                   ApiFailure.other('fake-error'),
                 ),
               ),
-              fileOperationhMode: FileOperationhMode.download,
+              fileOperationMode: FileOperationMode.download,
             ),
             PoAttachmentState.initial(),
           ]));
@@ -689,7 +688,7 @@ void main() {
           downloadAttachmentBlocMock,
           Stream.fromIterable([
             PoAttachmentState.initial().copyWith(
-                fileOperationhMode: FileOperationhMode.none,
+                fileOperationMode: FileOperationMode.none,
                 failureOrSuccessOption: none(),
                 fileData: [
                   PoDocumentsBuffer.empty().copyWith(
@@ -739,7 +738,7 @@ void main() {
           downloadAttachmentBlocMock,
           Stream.fromIterable([
             PoAttachmentState.initial().copyWith(
-                fileOperationhMode: FileOperationhMode.download,
+                fileOperationMode: FileOperationMode.download,
                 failureOrSuccessOption: optionOf(const Right('succes')),
                 fileData: [
                   PoDocumentsBuffer.empty().copyWith(
@@ -790,7 +789,7 @@ void main() {
           downloadAttachmentBlocMock,
           Stream.fromIterable([
             PoAttachmentState.initial().copyWith(
-                fileOperationhMode: FileOperationhMode.download,
+                fileOperationMode: FileOperationMode.download,
                 failureOrSuccessOption: optionOf(const Right('succes')),
                 fileData: [
                   PoDocumentsBuffer.empty().copyWith(
@@ -840,7 +839,7 @@ void main() {
           downloadAttachmentBlocMock,
           Stream.fromIterable([
             PoAttachmentState.initial().copyWith(
-                fileOperationhMode: FileOperationhMode.view,
+                fileOperationMode: FileOperationMode.view,
                 failureOrSuccessOption: optionOf(const Right('succes')),
                 fileData: [
                   PoDocumentsBuffer.empty().copyWith(

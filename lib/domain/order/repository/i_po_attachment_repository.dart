@@ -11,6 +11,7 @@ import 'package:file_picker/file_picker.dart';
 abstract class IpoAttachmentRepository {
   Future<Either<ApiFailure, List<PoDocumentsBuffer>>> downloadFiles(
     List<PoDocuments> files,
+    AttachmentType attachmentType,
   );
   Future<Either<ApiFailure, List<PoDocuments>>> uploadFiles({
     required SalesOrg salesOrg,

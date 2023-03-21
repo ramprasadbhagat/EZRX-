@@ -4,17 +4,16 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'approver_return_request_information_header.freezed.dart';
+part 'return_request_information_header.freezed.dart';
 
 @freezed
-class ApproverReturnRequestInformationHeader
-    with _$ApproverReturnRequestInformationHeader {
-  factory ApproverReturnRequestInformationHeader({
+class ReturnRequestInformationHeader with _$ReturnRequestInformationHeader {
+  factory ReturnRequestInformationHeader({
     required String soldTo,
     required String shipTo,
     required String createdBy,
     required String returnType,
-    required String status,
+    required ReturnSummaryStatus status,
     required DateTimeStringValue createdDate,
     required String createdTime,
     required String requestID,
@@ -33,10 +32,10 @@ class ApproverReturnRequestInformationHeader
     required String street4,
     required List<ReturnInvoices> returnInvoices,
     required List<ReturnSalesDoc> salesDoc,
-  }) = _ApproverReturnRequestInformationHeader;
+  }) = _ReturnRequestInformationHeader;
 
-  factory ApproverReturnRequestInformationHeader.empty() =>
-      ApproverReturnRequestInformationHeader(
+  factory ReturnRequestInformationHeader.empty() =>
+      ReturnRequestInformationHeader(
         cName1: '',
         cName2: '',
         cName3: '',
@@ -54,7 +53,7 @@ class ApproverReturnRequestInformationHeader
         salesOrg: SalesOrg(''),
         shipTo: '',
         soldTo: '',
-        status: '',
+        status: ReturnSummaryStatus(''),
         street1: '',
         street2: '',
         street3: '',

@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'approver_return_request_information.dart';
+part of 'return_request_information.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,12 +15,12 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$ApproverReturnRequestInformation {
+mixin _$ReturnRequestInformation {
   String get invoiceNo => throw _privateConstructorUsedError;
   String get returnValue => throw _privateConstructorUsedError;
   List<String> get actionRequired => throw _privateConstructorUsedError;
-  String get expiryDate => throw _privateConstructorUsedError;
-  String get comment => throw _privateConstructorUsedError;
+  DateTimeStringValue get expiryDate => throw _privateConstructorUsedError;
+  StringValue get comment => throw _privateConstructorUsedError;
   String get salesDocument => throw _privateConstructorUsedError;
   String get exchangeOrder => throw _privateConstructorUsedError;
   String get refundCurrency => throw _privateConstructorUsedError;
@@ -36,11 +36,11 @@ mixin _$ApproverReturnRequestInformation {
   String get createdTimeStamp => throw _privateConstructorUsedError;
   String get poDate => throw _privateConstructorUsedError;
   String get returnQuantity => throw _privateConstructorUsedError;
-  String get unitPrice => throw _privateConstructorUsedError;
-  String get totalPrice => throw _privateConstructorUsedError;
+  double get unitPrice => throw _privateConstructorUsedError;
+  double get totalPrice => throw _privateConstructorUsedError;
   String get billingItemNumber => throw _privateConstructorUsedError;
   String get salesDocumentItemNumber => throw _privateConstructorUsedError;
-  String get materialNumber => throw _privateConstructorUsedError;
+  MaterialNumber get materialNumber => throw _privateConstructorUsedError;
   String get materialDescription => throw _privateConstructorUsedError;
   String get batch => throw _privateConstructorUsedError;
   String get materialGroup => throw _privateConstructorUsedError;
@@ -50,10 +50,10 @@ mixin _$ApproverReturnRequestInformation {
   String get storageLocation => throw _privateConstructorUsedError;
   String get highLevelItemCode => throw _privateConstructorUsedError;
   String get orderReason => throw _privateConstructorUsedError;
-  String get priceDate => throw _privateConstructorUsedError;
-  String get createdDate => throw _privateConstructorUsedError;
+  DateTimeStringValue get priceDate => throw _privateConstructorUsedError;
+  DateTimeStringValue get createdDate => throw _privateConstructorUsedError;
   String get overrideType => throw _privateConstructorUsedError;
-  String get overrideValue => throw _privateConstructorUsedError;
+  StringValue get overrideValue => throw _privateConstructorUsedError;
   String get returnOrderText => throw _privateConstructorUsedError;
   String get returnOrderDesc => throw _privateConstructorUsedError;
   String get principal => throw _privateConstructorUsedError;
@@ -61,7 +61,7 @@ mixin _$ApproverReturnRequestInformation {
   String get eZRxNumber => throw _privateConstructorUsedError;
   String get bapiStatus => throw _privateConstructorUsedError;
   String get cnNumber => throw _privateConstructorUsedError;
-  String get status => throw _privateConstructorUsedError;
+  ReturnSummaryStatus get status => throw _privateConstructorUsedError;
   String get statusReason => throw _privateConstructorUsedError;
   String get priceOverride => throw _privateConstructorUsedError;
   String get remarks => throw _privateConstructorUsedError;
@@ -78,24 +78,22 @@ mixin _$ApproverReturnRequestInformation {
   List<String> get attachments => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $ApproverReturnRequestInformationCopyWith<ApproverReturnRequestInformation>
-      get copyWith => throw _privateConstructorUsedError;
+  $ReturnRequestInformationCopyWith<ReturnRequestInformation> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ApproverReturnRequestInformationCopyWith<$Res> {
-  factory $ApproverReturnRequestInformationCopyWith(
-          ApproverReturnRequestInformation value,
-          $Res Function(ApproverReturnRequestInformation) then) =
-      _$ApproverReturnRequestInformationCopyWithImpl<$Res,
-          ApproverReturnRequestInformation>;
+abstract class $ReturnRequestInformationCopyWith<$Res> {
+  factory $ReturnRequestInformationCopyWith(ReturnRequestInformation value,
+          $Res Function(ReturnRequestInformation) then) =
+      _$ReturnRequestInformationCopyWithImpl<$Res, ReturnRequestInformation>;
   @useResult
   $Res call(
       {String invoiceNo,
       String returnValue,
       List<String> actionRequired,
-      String expiryDate,
-      String comment,
+      DateTimeStringValue expiryDate,
+      StringValue comment,
       String salesDocument,
       String exchangeOrder,
       String refundCurrency,
@@ -111,11 +109,11 @@ abstract class $ApproverReturnRequestInformationCopyWith<$Res> {
       String createdTimeStamp,
       String poDate,
       String returnQuantity,
-      String unitPrice,
-      String totalPrice,
+      double unitPrice,
+      double totalPrice,
       String billingItemNumber,
       String salesDocumentItemNumber,
-      String materialNumber,
+      MaterialNumber materialNumber,
       String materialDescription,
       String batch,
       String materialGroup,
@@ -125,10 +123,10 @@ abstract class $ApproverReturnRequestInformationCopyWith<$Res> {
       String storageLocation,
       String highLevelItemCode,
       String orderReason,
-      String priceDate,
-      String createdDate,
+      DateTimeStringValue priceDate,
+      DateTimeStringValue createdDate,
       String overrideType,
-      String overrideValue,
+      StringValue overrideValue,
       String returnOrderText,
       String returnOrderDesc,
       String principal,
@@ -136,7 +134,7 @@ abstract class $ApproverReturnRequestInformationCopyWith<$Res> {
       String eZRxNumber,
       String bapiStatus,
       String cnNumber,
-      String status,
+      ReturnSummaryStatus status,
       String statusReason,
       String priceOverride,
       String remarks,
@@ -154,10 +152,10 @@ abstract class $ApproverReturnRequestInformationCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ApproverReturnRequestInformationCopyWithImpl<$Res,
-        $Val extends ApproverReturnRequestInformation>
-    implements $ApproverReturnRequestInformationCopyWith<$Res> {
-  _$ApproverReturnRequestInformationCopyWithImpl(this._value, this._then);
+class _$ReturnRequestInformationCopyWithImpl<$Res,
+        $Val extends ReturnRequestInformation>
+    implements $ReturnRequestInformationCopyWith<$Res> {
+  _$ReturnRequestInformationCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -244,11 +242,11 @@ class _$ApproverReturnRequestInformationCopyWithImpl<$Res,
       expiryDate: null == expiryDate
           ? _value.expiryDate
           : expiryDate // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DateTimeStringValue,
       comment: null == comment
           ? _value.comment
           : comment // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StringValue,
       salesDocument: null == salesDocument
           ? _value.salesDocument
           : salesDocument // ignore: cast_nullable_to_non_nullable
@@ -312,11 +310,11 @@ class _$ApproverReturnRequestInformationCopyWithImpl<$Res,
       unitPrice: null == unitPrice
           ? _value.unitPrice
           : unitPrice // ignore: cast_nullable_to_non_nullable
-              as String,
+              as double,
       totalPrice: null == totalPrice
           ? _value.totalPrice
           : totalPrice // ignore: cast_nullable_to_non_nullable
-              as String,
+              as double,
       billingItemNumber: null == billingItemNumber
           ? _value.billingItemNumber
           : billingItemNumber // ignore: cast_nullable_to_non_nullable
@@ -328,7 +326,7 @@ class _$ApproverReturnRequestInformationCopyWithImpl<$Res,
       materialNumber: null == materialNumber
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
-              as String,
+              as MaterialNumber,
       materialDescription: null == materialDescription
           ? _value.materialDescription
           : materialDescription // ignore: cast_nullable_to_non_nullable
@@ -368,11 +366,11 @@ class _$ApproverReturnRequestInformationCopyWithImpl<$Res,
       priceDate: null == priceDate
           ? _value.priceDate
           : priceDate // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DateTimeStringValue,
       createdDate: null == createdDate
           ? _value.createdDate
           : createdDate // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DateTimeStringValue,
       overrideType: null == overrideType
           ? _value.overrideType
           : overrideType // ignore: cast_nullable_to_non_nullable
@@ -380,7 +378,7 @@ class _$ApproverReturnRequestInformationCopyWithImpl<$Res,
       overrideValue: null == overrideValue
           ? _value.overrideValue
           : overrideValue // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StringValue,
       returnOrderText: null == returnOrderText
           ? _value.returnOrderText
           : returnOrderText // ignore: cast_nullable_to_non_nullable
@@ -412,7 +410,7 @@ class _$ApproverReturnRequestInformationCopyWithImpl<$Res,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as String,
+              as ReturnSummaryStatus,
       statusReason: null == statusReason
           ? _value.statusReason
           : statusReason // ignore: cast_nullable_to_non_nullable
@@ -474,20 +472,20 @@ class _$ApproverReturnRequestInformationCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ApproverReturnRequestInformationCopyWith<$Res>
-    implements $ApproverReturnRequestInformationCopyWith<$Res> {
-  factory _$$_ApproverReturnRequestInformationCopyWith(
-          _$_ApproverReturnRequestInformation value,
-          $Res Function(_$_ApproverReturnRequestInformation) then) =
-      __$$_ApproverReturnRequestInformationCopyWithImpl<$Res>;
+abstract class _$$_ReturnRequestInformationCopyWith<$Res>
+    implements $ReturnRequestInformationCopyWith<$Res> {
+  factory _$$_ReturnRequestInformationCopyWith(
+          _$_ReturnRequestInformation value,
+          $Res Function(_$_ReturnRequestInformation) then) =
+      __$$_ReturnRequestInformationCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {String invoiceNo,
       String returnValue,
       List<String> actionRequired,
-      String expiryDate,
-      String comment,
+      DateTimeStringValue expiryDate,
+      StringValue comment,
       String salesDocument,
       String exchangeOrder,
       String refundCurrency,
@@ -503,11 +501,11 @@ abstract class _$$_ApproverReturnRequestInformationCopyWith<$Res>
       String createdTimeStamp,
       String poDate,
       String returnQuantity,
-      String unitPrice,
-      String totalPrice,
+      double unitPrice,
+      double totalPrice,
       String billingItemNumber,
       String salesDocumentItemNumber,
-      String materialNumber,
+      MaterialNumber materialNumber,
       String materialDescription,
       String batch,
       String materialGroup,
@@ -517,10 +515,10 @@ abstract class _$$_ApproverReturnRequestInformationCopyWith<$Res>
       String storageLocation,
       String highLevelItemCode,
       String orderReason,
-      String priceDate,
-      String createdDate,
+      DateTimeStringValue priceDate,
+      DateTimeStringValue createdDate,
       String overrideType,
-      String overrideValue,
+      StringValue overrideValue,
       String returnOrderText,
       String returnOrderDesc,
       String principal,
@@ -528,7 +526,7 @@ abstract class _$$_ApproverReturnRequestInformationCopyWith<$Res>
       String eZRxNumber,
       String bapiStatus,
       String cnNumber,
-      String status,
+      ReturnSummaryStatus status,
       String statusReason,
       String priceOverride,
       String remarks,
@@ -546,13 +544,12 @@ abstract class _$$_ApproverReturnRequestInformationCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ApproverReturnRequestInformationCopyWithImpl<$Res>
-    extends _$ApproverReturnRequestInformationCopyWithImpl<$Res,
-        _$_ApproverReturnRequestInformation>
-    implements _$$_ApproverReturnRequestInformationCopyWith<$Res> {
-  __$$_ApproverReturnRequestInformationCopyWithImpl(
-      _$_ApproverReturnRequestInformation _value,
-      $Res Function(_$_ApproverReturnRequestInformation) _then)
+class __$$_ReturnRequestInformationCopyWithImpl<$Res>
+    extends _$ReturnRequestInformationCopyWithImpl<$Res,
+        _$_ReturnRequestInformation>
+    implements _$$_ReturnRequestInformationCopyWith<$Res> {
+  __$$_ReturnRequestInformationCopyWithImpl(_$_ReturnRequestInformation _value,
+      $Res Function(_$_ReturnRequestInformation) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -619,7 +616,7 @@ class __$$_ApproverReturnRequestInformationCopyWithImpl<$Res>
     Object? outsidePolicy = null,
     Object? attachments = null,
   }) {
-    return _then(_$_ApproverReturnRequestInformation(
+    return _then(_$_ReturnRequestInformation(
       invoiceNo: null == invoiceNo
           ? _value.invoiceNo
           : invoiceNo // ignore: cast_nullable_to_non_nullable
@@ -635,11 +632,11 @@ class __$$_ApproverReturnRequestInformationCopyWithImpl<$Res>
       expiryDate: null == expiryDate
           ? _value.expiryDate
           : expiryDate // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DateTimeStringValue,
       comment: null == comment
           ? _value.comment
           : comment // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StringValue,
       salesDocument: null == salesDocument
           ? _value.salesDocument
           : salesDocument // ignore: cast_nullable_to_non_nullable
@@ -703,11 +700,11 @@ class __$$_ApproverReturnRequestInformationCopyWithImpl<$Res>
       unitPrice: null == unitPrice
           ? _value.unitPrice
           : unitPrice // ignore: cast_nullable_to_non_nullable
-              as String,
+              as double,
       totalPrice: null == totalPrice
           ? _value.totalPrice
           : totalPrice // ignore: cast_nullable_to_non_nullable
-              as String,
+              as double,
       billingItemNumber: null == billingItemNumber
           ? _value.billingItemNumber
           : billingItemNumber // ignore: cast_nullable_to_non_nullable
@@ -719,7 +716,7 @@ class __$$_ApproverReturnRequestInformationCopyWithImpl<$Res>
       materialNumber: null == materialNumber
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
-              as String,
+              as MaterialNumber,
       materialDescription: null == materialDescription
           ? _value.materialDescription
           : materialDescription // ignore: cast_nullable_to_non_nullable
@@ -759,11 +756,11 @@ class __$$_ApproverReturnRequestInformationCopyWithImpl<$Res>
       priceDate: null == priceDate
           ? _value.priceDate
           : priceDate // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DateTimeStringValue,
       createdDate: null == createdDate
           ? _value.createdDate
           : createdDate // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DateTimeStringValue,
       overrideType: null == overrideType
           ? _value.overrideType
           : overrideType // ignore: cast_nullable_to_non_nullable
@@ -771,7 +768,7 @@ class __$$_ApproverReturnRequestInformationCopyWithImpl<$Res>
       overrideValue: null == overrideValue
           ? _value.overrideValue
           : overrideValue // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StringValue,
       returnOrderText: null == returnOrderText
           ? _value.returnOrderText
           : returnOrderText // ignore: cast_nullable_to_non_nullable
@@ -803,7 +800,7 @@ class __$$_ApproverReturnRequestInformationCopyWithImpl<$Res>
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as String,
+              as ReturnSummaryStatus,
       statusReason: null == statusReason
           ? _value.statusReason
           : statusReason // ignore: cast_nullable_to_non_nullable
@@ -866,9 +863,8 @@ class __$$_ApproverReturnRequestInformationCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ApproverReturnRequestInformation
-    implements _ApproverReturnRequestInformation {
-  _$_ApproverReturnRequestInformation(
+class _$_ReturnRequestInformation extends _ReturnRequestInformation {
+  _$_ReturnRequestInformation(
       {required this.invoiceNo,
       required this.returnValue,
       required final List<String> actionRequired,
@@ -932,7 +928,8 @@ class _$_ApproverReturnRequestInformation
       : _actionRequired = actionRequired,
         _imageUrl = imageUrl,
         _attachmentUrl = attachmentUrl,
-        _attachments = attachments;
+        _attachments = attachments,
+        super._();
 
   @override
   final String invoiceNo;
@@ -946,9 +943,9 @@ class _$_ApproverReturnRequestInformation
   }
 
   @override
-  final String expiryDate;
+  final DateTimeStringValue expiryDate;
   @override
-  final String comment;
+  final StringValue comment;
   @override
   final String salesDocument;
   @override
@@ -980,15 +977,15 @@ class _$_ApproverReturnRequestInformation
   @override
   final String returnQuantity;
   @override
-  final String unitPrice;
+  final double unitPrice;
   @override
-  final String totalPrice;
+  final double totalPrice;
   @override
   final String billingItemNumber;
   @override
   final String salesDocumentItemNumber;
   @override
-  final String materialNumber;
+  final MaterialNumber materialNumber;
   @override
   final String materialDescription;
   @override
@@ -1018,13 +1015,13 @@ class _$_ApproverReturnRequestInformation
   @override
   final String orderReason;
   @override
-  final String priceDate;
+  final DateTimeStringValue priceDate;
   @override
-  final String createdDate;
+  final DateTimeStringValue createdDate;
   @override
   final String overrideType;
   @override
-  final String overrideValue;
+  final StringValue overrideValue;
   @override
   final String returnOrderText;
   @override
@@ -1040,7 +1037,7 @@ class _$_ApproverReturnRequestInformation
   @override
   final String cnNumber;
   @override
-  final String status;
+  final ReturnSummaryStatus status;
   @override
   final String statusReason;
   @override
@@ -1076,14 +1073,14 @@ class _$_ApproverReturnRequestInformation
 
   @override
   String toString() {
-    return 'ApproverReturnRequestInformation(invoiceNo: $invoiceNo, returnValue: $returnValue, actionRequired: $actionRequired, expiryDate: $expiryDate, comment: $comment, salesDocument: $salesDocument, exchangeOrder: $exchangeOrder, refundCurrency: $refundCurrency, rejectReason: $rejectReason, exchangeOrderNumber: $exchangeOrderNumber, docType: $docType, referenceDocument: $referenceDocument, division: $division, purchaseMethod: $purchaseMethod, usage: $usage, distributionChannel: $distributionChannel, approvalTimeStamp: $approvalTimeStamp, createdTimeStamp: $createdTimeStamp, poDate: $poDate, returnQuantity: $returnQuantity, unitPrice: $unitPrice, totalPrice: $totalPrice, billingItemNumber: $billingItemNumber, salesDocumentItemNumber: $salesDocumentItemNumber, materialNumber: $materialNumber, materialDescription: $materialDescription, batch: $batch, materialGroup: $materialGroup, imageUrl: $imageUrl, attachmentUrl: $attachmentUrl, plant: $plant, storageLocation: $storageLocation, highLevelItemCode: $highLevelItemCode, orderReason: $orderReason, priceDate: $priceDate, createdDate: $createdDate, overrideType: $overrideType, overrideValue: $overrideValue, returnOrderText: $returnOrderText, returnOrderDesc: $returnOrderDesc, principal: $principal, bapiSalesDocNumber: $bapiSalesDocNumber, eZRxNumber: $eZRxNumber, bapiStatus: $bapiStatus, cnNumber: $cnNumber, status: $status, statusReason: $statusReason, priceOverride: $priceOverride, remarks: $remarks, sendForDestruction: $sendForDestruction, quarantine: $quarantine, returnToStock: $returnToStock, productRecall: $productRecall, returnType: $returnType, returnTypeDesc: $returnTypeDesc, purchaseNumberCOverride: $purchaseNumberCOverride, purchaseNumberC: $purchaseNumberC, ppaHeld: $ppaHeld, outsidePolicy: $outsidePolicy, attachments: $attachments)';
+    return 'ReturnRequestInformation(invoiceNo: $invoiceNo, returnValue: $returnValue, actionRequired: $actionRequired, expiryDate: $expiryDate, comment: $comment, salesDocument: $salesDocument, exchangeOrder: $exchangeOrder, refundCurrency: $refundCurrency, rejectReason: $rejectReason, exchangeOrderNumber: $exchangeOrderNumber, docType: $docType, referenceDocument: $referenceDocument, division: $division, purchaseMethod: $purchaseMethod, usage: $usage, distributionChannel: $distributionChannel, approvalTimeStamp: $approvalTimeStamp, createdTimeStamp: $createdTimeStamp, poDate: $poDate, returnQuantity: $returnQuantity, unitPrice: $unitPrice, totalPrice: $totalPrice, billingItemNumber: $billingItemNumber, salesDocumentItemNumber: $salesDocumentItemNumber, materialNumber: $materialNumber, materialDescription: $materialDescription, batch: $batch, materialGroup: $materialGroup, imageUrl: $imageUrl, attachmentUrl: $attachmentUrl, plant: $plant, storageLocation: $storageLocation, highLevelItemCode: $highLevelItemCode, orderReason: $orderReason, priceDate: $priceDate, createdDate: $createdDate, overrideType: $overrideType, overrideValue: $overrideValue, returnOrderText: $returnOrderText, returnOrderDesc: $returnOrderDesc, principal: $principal, bapiSalesDocNumber: $bapiSalesDocNumber, eZRxNumber: $eZRxNumber, bapiStatus: $bapiStatus, cnNumber: $cnNumber, status: $status, statusReason: $statusReason, priceOverride: $priceOverride, remarks: $remarks, sendForDestruction: $sendForDestruction, quarantine: $quarantine, returnToStock: $returnToStock, productRecall: $productRecall, returnType: $returnType, returnTypeDesc: $returnTypeDesc, purchaseNumberCOverride: $purchaseNumberCOverride, purchaseNumberC: $purchaseNumberC, ppaHeld: $ppaHeld, outsidePolicy: $outsidePolicy, attachments: $attachments)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ApproverReturnRequestInformation &&
+            other is _$_ReturnRequestInformation &&
             (identical(other.invoiceNo, invoiceNo) ||
                 other.invoiceNo == invoiceNo) &&
             (identical(other.returnValue, returnValue) ||
@@ -1252,76 +1249,74 @@ class _$_ApproverReturnRequestInformation
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ApproverReturnRequestInformationCopyWith<
-          _$_ApproverReturnRequestInformation>
-      get copyWith => __$$_ApproverReturnRequestInformationCopyWithImpl<
-          _$_ApproverReturnRequestInformation>(this, _$identity);
+  _$$_ReturnRequestInformationCopyWith<_$_ReturnRequestInformation>
+      get copyWith => __$$_ReturnRequestInformationCopyWithImpl<
+          _$_ReturnRequestInformation>(this, _$identity);
 }
 
-abstract class _ApproverReturnRequestInformation
-    implements ApproverReturnRequestInformation {
-  factory _ApproverReturnRequestInformation(
-          {required final String invoiceNo,
-          required final String returnValue,
-          required final List<String> actionRequired,
-          required final String expiryDate,
-          required final String comment,
-          required final String salesDocument,
-          required final String exchangeOrder,
-          required final String refundCurrency,
-          required final String rejectReason,
-          required final String exchangeOrderNumber,
-          required final String docType,
-          required final String referenceDocument,
-          required final String division,
-          required final String purchaseMethod,
-          required final String usage,
-          required final String distributionChannel,
-          required final String approvalTimeStamp,
-          required final String createdTimeStamp,
-          required final String poDate,
-          required final String returnQuantity,
-          required final String unitPrice,
-          required final String totalPrice,
-          required final String billingItemNumber,
-          required final String salesDocumentItemNumber,
-          required final String materialNumber,
-          required final String materialDescription,
-          required final String batch,
-          required final String materialGroup,
-          required final List<String> imageUrl,
-          required final List<String> attachmentUrl,
-          required final String plant,
-          required final String storageLocation,
-          required final String highLevelItemCode,
-          required final String orderReason,
-          required final String priceDate,
-          required final String createdDate,
-          required final String overrideType,
-          required final String overrideValue,
-          required final String returnOrderText,
-          required final String returnOrderDesc,
-          required final String principal,
-          required final String bapiSalesDocNumber,
-          required final String eZRxNumber,
-          required final String bapiStatus,
-          required final String cnNumber,
-          required final String status,
-          required final String statusReason,
-          required final String priceOverride,
-          required final String remarks,
-          required final bool sendForDestruction,
-          required final bool quarantine,
-          required final bool returnToStock,
-          required final bool productRecall,
-          required final String returnType,
-          required final String returnTypeDesc,
-          required final String purchaseNumberCOverride,
-          required final String purchaseNumberC,
-          required final bool ppaHeld,
-          required final bool outsidePolicy,
-          required final List<String> attachments}) =
-      _$_ApproverReturnRequestInformation;
+abstract class _ReturnRequestInformation extends ReturnRequestInformation {
+  factory _ReturnRequestInformation(
+      {required final String invoiceNo,
+      required final String returnValue,
+      required final List<String> actionRequired,
+      required final DateTimeStringValue expiryDate,
+      required final StringValue comment,
+      required final String salesDocument,
+      required final String exchangeOrder,
+      required final String refundCurrency,
+      required final String rejectReason,
+      required final String exchangeOrderNumber,
+      required final String docType,
+      required final String referenceDocument,
+      required final String division,
+      required final String purchaseMethod,
+      required final String usage,
+      required final String distributionChannel,
+      required final String approvalTimeStamp,
+      required final String createdTimeStamp,
+      required final String poDate,
+      required final String returnQuantity,
+      required final double unitPrice,
+      required final double totalPrice,
+      required final String billingItemNumber,
+      required final String salesDocumentItemNumber,
+      required final MaterialNumber materialNumber,
+      required final String materialDescription,
+      required final String batch,
+      required final String materialGroup,
+      required final List<String> imageUrl,
+      required final List<String> attachmentUrl,
+      required final String plant,
+      required final String storageLocation,
+      required final String highLevelItemCode,
+      required final String orderReason,
+      required final DateTimeStringValue priceDate,
+      required final DateTimeStringValue createdDate,
+      required final String overrideType,
+      required final StringValue overrideValue,
+      required final String returnOrderText,
+      required final String returnOrderDesc,
+      required final String principal,
+      required final String bapiSalesDocNumber,
+      required final String eZRxNumber,
+      required final String bapiStatus,
+      required final String cnNumber,
+      required final ReturnSummaryStatus status,
+      required final String statusReason,
+      required final String priceOverride,
+      required final String remarks,
+      required final bool sendForDestruction,
+      required final bool quarantine,
+      required final bool returnToStock,
+      required final bool productRecall,
+      required final String returnType,
+      required final String returnTypeDesc,
+      required final String purchaseNumberCOverride,
+      required final String purchaseNumberC,
+      required final bool ppaHeld,
+      required final bool outsidePolicy,
+      required final List<String> attachments}) = _$_ReturnRequestInformation;
+  _ReturnRequestInformation._() : super._();
 
   @override
   String get invoiceNo;
@@ -1330,9 +1325,9 @@ abstract class _ApproverReturnRequestInformation
   @override
   List<String> get actionRequired;
   @override
-  String get expiryDate;
+  DateTimeStringValue get expiryDate;
   @override
-  String get comment;
+  StringValue get comment;
   @override
   String get salesDocument;
   @override
@@ -1364,15 +1359,15 @@ abstract class _ApproverReturnRequestInformation
   @override
   String get returnQuantity;
   @override
-  String get unitPrice;
+  double get unitPrice;
   @override
-  String get totalPrice;
+  double get totalPrice;
   @override
   String get billingItemNumber;
   @override
   String get salesDocumentItemNumber;
   @override
-  String get materialNumber;
+  MaterialNumber get materialNumber;
   @override
   String get materialDescription;
   @override
@@ -1392,13 +1387,13 @@ abstract class _ApproverReturnRequestInformation
   @override
   String get orderReason;
   @override
-  String get priceDate;
+  DateTimeStringValue get priceDate;
   @override
-  String get createdDate;
+  DateTimeStringValue get createdDate;
   @override
   String get overrideType;
   @override
-  String get overrideValue;
+  StringValue get overrideValue;
   @override
   String get returnOrderText;
   @override
@@ -1414,7 +1409,7 @@ abstract class _ApproverReturnRequestInformation
   @override
   String get cnNumber;
   @override
-  String get status;
+  ReturnSummaryStatus get status;
   @override
   String get statusReason;
   @override
@@ -1445,7 +1440,6 @@ abstract class _ApproverReturnRequestInformation
   List<String> get attachments;
   @override
   @JsonKey(ignore: true)
-  _$$_ApproverReturnRequestInformationCopyWith<
-          _$_ApproverReturnRequestInformation>
+  _$$_ReturnRequestInformationCopyWith<_$_ReturnRequestInformation>
       get copyWith => throw _privateConstructorUsedError;
 }

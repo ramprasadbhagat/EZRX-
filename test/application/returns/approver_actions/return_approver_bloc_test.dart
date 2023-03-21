@@ -5,9 +5,9 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
-import 'package:ezrxmobile/domain/returns/entities/approver_return_request.dart';
-import 'package:ezrxmobile/domain/returns/entities/approver_return_requests_id.dart';
+import 'package:ezrxmobile/domain/returns/entities/request_information.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_approver_filter.dart';
+import 'package:ezrxmobile/domain/returns/entities/return_requests_id.dart';
 import 'package:ezrxmobile/infrastructure/returns/repository/return_approver_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -18,7 +18,7 @@ class ReturnApproverRepositoryMock extends Mock
 
 void main() {
   late ReturnApproverRepository repository;
-  late List<ApproverReturnRequestsId> approverReturnRequestsIdList;
+  late List<ReturnRequestsId> approverReturnRequestsIdList;
   late ReturnApproverFilter returnApproverFilter;
   final fakeToDate = DateTime.now();
 
@@ -32,7 +32,7 @@ void main() {
 
   setUp(() {
     approverReturnRequestsIdList = [
-      ApproverReturnRequestsId(requestId: 'fakeApproverReturnRequestId'),
+      ReturnRequestsId(requestId: 'fakeApproverReturnRequestId'),
     ];
     returnApproverFilter = ReturnApproverFilter.empty().copyWith(
       toInvoiceDate: DateTimeStringValue(
@@ -165,7 +165,7 @@ void main() {
           ).thenAnswer(
             (invocation) async => Right(
               [
-                ApproverReturnRequest.empty(),
+                RequestInformation.empty(),
               ],
             ),
           );
@@ -182,7 +182,7 @@ void main() {
           ),
           ReturnApproverState.initial().copyWith(
             approverReturnRequestList: [
-              ApproverReturnRequest.empty(),
+              RequestInformation.empty(),
             ],
             failureOrSuccessOption: none(),
             canLoadMore: false,
@@ -205,7 +205,7 @@ void main() {
           isFetching: false,
           approverReturnRequestList: List.filled(
             11,
-            ApproverReturnRequest.empty(),
+            RequestInformation.empty(),
           ),
           nextPageIndex: 1,
         ),
@@ -233,14 +233,14 @@ void main() {
           ReturnApproverState.initial().copyWith(
               approverReturnRequestList: List.filled(
                 11,
-                ApproverReturnRequest.empty(),
+                RequestInformation.empty(),
               ),
               isFetching: true,
               nextPageIndex: 1),
           ReturnApproverState.initial().copyWith(
               approverReturnRequestList: List.filled(
                 11,
-                ApproverReturnRequest.empty(),
+                RequestInformation.empty(),
               ),
               failureOrSuccessOption: optionOf(
                 const Left(
@@ -260,7 +260,7 @@ void main() {
           isFetching: false,
           approverReturnRequestList: List.filled(
             11,
-            ApproverReturnRequest.empty(),
+            RequestInformation.empty(),
           ),
           nextPageIndex: 1,
         ),
@@ -303,14 +303,14 @@ void main() {
           ReturnApproverState.initial().copyWith(
               approverReturnRequestList: List.filled(
                 11,
-                ApproverReturnRequest.empty(),
+                RequestInformation.empty(),
               ),
               isFetching: true,
               nextPageIndex: 1),
           ReturnApproverState.initial().copyWith(
             approverReturnRequestList: List.filled(
               11,
-              ApproverReturnRequest.empty(),
+              RequestInformation.empty(),
             ),
             failureOrSuccessOption: optionOf(
               const Left(
@@ -331,7 +331,7 @@ void main() {
           isFetching: false,
           approverReturnRequestList: List.filled(
             11,
-            ApproverReturnRequest.empty(),
+            RequestInformation.empty(),
           ),
           nextPageIndex: 1,
         ),
@@ -362,7 +362,7 @@ void main() {
             (invocation) async => Right(
               List.filled(
                 11,
-                ApproverReturnRequest.empty(),
+                RequestInformation.empty(),
               ),
             ),
           );
@@ -377,7 +377,7 @@ void main() {
           ReturnApproverState.initial().copyWith(
             approverReturnRequestList: List.filled(
               11,
-              ApproverReturnRequest.empty(),
+              RequestInformation.empty(),
             ),
             isFetching: true,
             nextPageIndex: 1,
@@ -385,7 +385,7 @@ void main() {
           ReturnApproverState.initial().copyWith(
               approverReturnRequestList: List.filled(
                 22,
-                ApproverReturnRequest.empty(),
+                RequestInformation.empty(),
               ),
               nextPageIndex: 2),
         ],

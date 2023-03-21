@@ -6,6 +6,7 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_summary/return_summary_bloc.dart';
+import 'package:ezrxmobile/application/returns/return_summary_details/return_summary_details_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_summary_filter/return_summary_filter_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
@@ -53,6 +54,10 @@ class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
 class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
     implements SalesOrgBloc {}
 
+class ReturnSummaryDetailsBlocMock
+    extends MockBloc<ReturnSummaryDetailsEvent, ReturnSummaryDetailsState>
+    implements ReturnSummaryDetailsBloc {}
+
 void main() {
   late ReturnSummaryBloc returnSummaryBlocMock;
   late ReturnSummaryFilterBloc returnSummaryFilterBlocMock;
@@ -62,6 +67,7 @@ void main() {
   late SalesOrgBloc salesOrgBlocMock;
   late AppRouter autoRouterMock;
   final locator = GetIt.instance;
+  late ReturnSummaryDetailsBloc returnSummaryDetailsBlocMock;
 
   setUpAll(() async {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
@@ -81,6 +87,7 @@ void main() {
     shipToCodeBlocMock = ShipToCodeBlocMock();
     userBlocMock = UserBlocMock();
     salesOrgBlocMock = SalesOrgBlocMock();
+    returnSummaryDetailsBlocMock = ReturnSummaryDetailsBlocMock();
 
     when(() => returnSummaryBlocMock.state)
         .thenReturn(ReturnSummaryState.initial());
@@ -91,6 +98,8 @@ void main() {
     when(() => shipToCodeBlocMock.state).thenReturn(ShipToCodeState.initial());
     when(() => userBlocMock.state).thenReturn(UserState.initial());
     when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
+    when(() => returnSummaryDetailsBlocMock.state)
+        .thenReturn(ReturnSummaryDetailsState.initial());
   });
 
   Future getWidget(tester) async {
@@ -115,6 +124,9 @@ void main() {
           ),
           BlocProvider<SalesOrgBloc>(
             create: (context) => salesOrgBlocMock,
+          ),
+          BlocProvider<ReturnSummaryDetailsBloc>(
+            create: (context) => returnSummaryDetailsBlocMock,
           ),
         ],
         child: ReturnSummary(),

@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/approver_return_request_information_local.dart';
-import 'package:ezrxmobile/infrastructure/returns/dtos/approver_return_request_dto.dart';
+import 'package:ezrxmobile/infrastructure/returns/dtos/request_information_dto.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -23,7 +23,7 @@ void main() {
     'Return Approver request information Local Datasource',
     () {
       test(
-        'getApproverReturnRequestInfomration',
+        'getApproverReturnRequestInformation',
         () async {
           final res = json.decode(
             await rootBundle.loadString(
@@ -32,13 +32,13 @@ void main() {
           );
 
           final result =
-              await localDataSource.getApproverReturnRequestInfomration(
+              await localDataSource.getApproverReturnRequestInformation(
             returnRequestId: 'fake-requestId',
           );
 
           expect(
             result,
-            ApproverReturnRequestDto.fromJson(
+            RequestInformationDto.fromJson(
                     res['data']['requestInformationV2'])
                 .toDomain(),
           );

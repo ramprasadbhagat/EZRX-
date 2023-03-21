@@ -1,4 +1,4 @@
-class ApproverReturnRequestInformationQuery {
+class RequestInformationQuery {
   String getReturnInformationQuery() {
     return '''
        query requestInformationV2(\$request: requestInformationRequest!) {

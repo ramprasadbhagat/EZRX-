@@ -565,7 +565,7 @@ mixin _$ReturnApproverState {
   bool get isFetching => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption =>
       throw _privateConstructorUsedError;
-  List<ApproverReturnRequest> get approverReturnRequestList =>
+  List<RequestInformation> get approverReturnRequestList =>
       throw _privateConstructorUsedError;
   int get nextPageIndex => throw _privateConstructorUsedError;
   bool get canLoadMore => throw _privateConstructorUsedError;
@@ -584,7 +584,7 @@ abstract class $ReturnApproverStateCopyWith<$Res> {
   $Res call(
       {bool isFetching,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
-      List<ApproverReturnRequest> approverReturnRequestList,
+      List<RequestInformation> approverReturnRequestList,
       int nextPageIndex,
       bool canLoadMore});
 }
@@ -620,7 +620,7 @@ class _$ReturnApproverStateCopyWithImpl<$Res, $Val extends ReturnApproverState>
       approverReturnRequestList: null == approverReturnRequestList
           ? _value.approverReturnRequestList
           : approverReturnRequestList // ignore: cast_nullable_to_non_nullable
-              as List<ApproverReturnRequest>,
+              as List<RequestInformation>,
       nextPageIndex: null == nextPageIndex
           ? _value.nextPageIndex
           : nextPageIndex // ignore: cast_nullable_to_non_nullable
@@ -644,7 +644,7 @@ abstract class _$$_ReturnApproverStateCopyWith<$Res>
   $Res call(
       {bool isFetching,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
-      List<ApproverReturnRequest> approverReturnRequestList,
+      List<RequestInformation> approverReturnRequestList,
       int nextPageIndex,
       bool canLoadMore});
 }
@@ -678,7 +678,7 @@ class __$$_ReturnApproverStateCopyWithImpl<$Res>
       approverReturnRequestList: null == approverReturnRequestList
           ? _value._approverReturnRequestList
           : approverReturnRequestList // ignore: cast_nullable_to_non_nullable
-              as List<ApproverReturnRequest>,
+              as List<RequestInformation>,
       nextPageIndex: null == nextPageIndex
           ? _value.nextPageIndex
           : nextPageIndex // ignore: cast_nullable_to_non_nullable
@@ -697,7 +697,7 @@ class _$_ReturnApproverState implements _ReturnApproverState {
   const _$_ReturnApproverState(
       {required this.isFetching,
       required this.failureOrSuccessOption,
-      required final List<ApproverReturnRequest> approverReturnRequestList,
+      required final List<RequestInformation> approverReturnRequestList,
       required this.nextPageIndex,
       required this.canLoadMore})
       : _approverReturnRequestList = approverReturnRequestList;
@@ -706,9 +706,9 @@ class _$_ReturnApproverState implements _ReturnApproverState {
   final bool isFetching;
   @override
   final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption;
-  final List<ApproverReturnRequest> _approverReturnRequestList;
+  final List<RequestInformation> _approverReturnRequestList;
   @override
-  List<ApproverReturnRequest> get approverReturnRequestList {
+  List<RequestInformation> get approverReturnRequestList {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_approverReturnRequestList);
   }
@@ -761,7 +761,7 @@ abstract class _ReturnApproverState implements ReturnApproverState {
   const factory _ReturnApproverState(
       {required final bool isFetching,
       required final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
-      required final List<ApproverReturnRequest> approverReturnRequestList,
+      required final List<RequestInformation> approverReturnRequestList,
       required final int nextPageIndex,
       required final bool canLoadMore}) = _$_ReturnApproverState;
 
@@ -770,7 +770,7 @@ abstract class _ReturnApproverState implements ReturnApproverState {
   @override
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption;
   @override
-  List<ApproverReturnRequest> get approverReturnRequestList;
+  List<RequestInformation> get approverReturnRequestList;
   @override
   int get nextPageIndex;
   @override

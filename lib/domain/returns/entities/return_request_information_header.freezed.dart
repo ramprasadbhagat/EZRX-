@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'approver_return_request_information_header.dart';
+part of 'return_request_information_header.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,12 +15,12 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$ApproverReturnRequestInformationHeader {
+mixin _$ReturnRequestInformationHeader {
   String get soldTo => throw _privateConstructorUsedError;
   String get shipTo => throw _privateConstructorUsedError;
   String get createdBy => throw _privateConstructorUsedError;
   String get returnType => throw _privateConstructorUsedError;
-  String get status => throw _privateConstructorUsedError;
+  ReturnSummaryStatus get status => throw _privateConstructorUsedError;
   DateTimeStringValue get createdDate => throw _privateConstructorUsedError;
   String get createdTime => throw _privateConstructorUsedError;
   String get requestID => throw _privateConstructorUsedError;
@@ -41,25 +41,24 @@ mixin _$ApproverReturnRequestInformationHeader {
   List<ReturnSalesDoc> get salesDoc => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $ApproverReturnRequestInformationHeaderCopyWith<
-          ApproverReturnRequestInformationHeader>
+  $ReturnRequestInformationHeaderCopyWith<ReturnRequestInformationHeader>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ApproverReturnRequestInformationHeaderCopyWith<$Res> {
-  factory $ApproverReturnRequestInformationHeaderCopyWith(
-          ApproverReturnRequestInformationHeader value,
-          $Res Function(ApproverReturnRequestInformationHeader) then) =
-      _$ApproverReturnRequestInformationHeaderCopyWithImpl<$Res,
-          ApproverReturnRequestInformationHeader>;
+abstract class $ReturnRequestInformationHeaderCopyWith<$Res> {
+  factory $ReturnRequestInformationHeaderCopyWith(
+          ReturnRequestInformationHeader value,
+          $Res Function(ReturnRequestInformationHeader) then) =
+      _$ReturnRequestInformationHeaderCopyWithImpl<$Res,
+          ReturnRequestInformationHeader>;
   @useResult
   $Res call(
       {String soldTo,
       String shipTo,
       String createdBy,
       String returnType,
-      String status,
+      ReturnSummaryStatus status,
       DateTimeStringValue createdDate,
       String createdTime,
       String requestID,
@@ -81,10 +80,10 @@ abstract class $ApproverReturnRequestInformationHeaderCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ApproverReturnRequestInformationHeaderCopyWithImpl<$Res,
-        $Val extends ApproverReturnRequestInformationHeader>
-    implements $ApproverReturnRequestInformationHeaderCopyWith<$Res> {
-  _$ApproverReturnRequestInformationHeaderCopyWithImpl(this._value, this._then);
+class _$ReturnRequestInformationHeaderCopyWithImpl<$Res,
+        $Val extends ReturnRequestInformationHeader>
+    implements $ReturnRequestInformationHeaderCopyWith<$Res> {
+  _$ReturnRequestInformationHeaderCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -138,7 +137,7 @@ class _$ApproverReturnRequestInformationHeaderCopyWithImpl<$Res,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as String,
+              as ReturnSummaryStatus,
       createdDate: null == createdDate
           ? _value.createdDate
           : createdDate // ignore: cast_nullable_to_non_nullable
@@ -216,12 +215,12 @@ class _$ApproverReturnRequestInformationHeaderCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ApproverReturnRequestInformationHeaderCopyWith<$Res>
-    implements $ApproverReturnRequestInformationHeaderCopyWith<$Res> {
-  factory _$$_ApproverReturnRequestInformationHeaderCopyWith(
-          _$_ApproverReturnRequestInformationHeader value,
-          $Res Function(_$_ApproverReturnRequestInformationHeader) then) =
-      __$$_ApproverReturnRequestInformationHeaderCopyWithImpl<$Res>;
+abstract class _$$_ReturnRequestInformationHeaderCopyWith<$Res>
+    implements $ReturnRequestInformationHeaderCopyWith<$Res> {
+  factory _$$_ReturnRequestInformationHeaderCopyWith(
+          _$_ReturnRequestInformationHeader value,
+          $Res Function(_$_ReturnRequestInformationHeader) then) =
+      __$$_ReturnRequestInformationHeaderCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -229,7 +228,7 @@ abstract class _$$_ApproverReturnRequestInformationHeaderCopyWith<$Res>
       String shipTo,
       String createdBy,
       String returnType,
-      String status,
+      ReturnSummaryStatus status,
       DateTimeStringValue createdDate,
       String createdTime,
       String requestID,
@@ -251,13 +250,13 @@ abstract class _$$_ApproverReturnRequestInformationHeaderCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ApproverReturnRequestInformationHeaderCopyWithImpl<$Res>
-    extends _$ApproverReturnRequestInformationHeaderCopyWithImpl<$Res,
-        _$_ApproverReturnRequestInformationHeader>
-    implements _$$_ApproverReturnRequestInformationHeaderCopyWith<$Res> {
-  __$$_ApproverReturnRequestInformationHeaderCopyWithImpl(
-      _$_ApproverReturnRequestInformationHeader _value,
-      $Res Function(_$_ApproverReturnRequestInformationHeader) _then)
+class __$$_ReturnRequestInformationHeaderCopyWithImpl<$Res>
+    extends _$ReturnRequestInformationHeaderCopyWithImpl<$Res,
+        _$_ReturnRequestInformationHeader>
+    implements _$$_ReturnRequestInformationHeaderCopyWith<$Res> {
+  __$$_ReturnRequestInformationHeaderCopyWithImpl(
+      _$_ReturnRequestInformationHeader _value,
+      $Res Function(_$_ReturnRequestInformationHeader) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -287,7 +286,7 @@ class __$$_ApproverReturnRequestInformationHeaderCopyWithImpl<$Res>
     Object? returnInvoices = null,
     Object? salesDoc = null,
   }) {
-    return _then(_$_ApproverReturnRequestInformationHeader(
+    return _then(_$_ReturnRequestInformationHeader(
       soldTo: null == soldTo
           ? _value.soldTo
           : soldTo // ignore: cast_nullable_to_non_nullable
@@ -307,7 +306,7 @@ class __$$_ApproverReturnRequestInformationHeaderCopyWithImpl<$Res>
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as String,
+              as ReturnSummaryStatus,
       createdDate: null == createdDate
           ? _value.createdDate
           : createdDate // ignore: cast_nullable_to_non_nullable
@@ -386,9 +385,9 @@ class __$$_ApproverReturnRequestInformationHeaderCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ApproverReturnRequestInformationHeader
-    implements _ApproverReturnRequestInformationHeader {
-  _$_ApproverReturnRequestInformationHeader(
+class _$_ReturnRequestInformationHeader
+    implements _ReturnRequestInformationHeader {
+  _$_ReturnRequestInformationHeader(
       {required this.soldTo,
       required this.shipTo,
       required this.createdBy,
@@ -424,7 +423,7 @@ class _$_ApproverReturnRequestInformationHeader
   @override
   final String returnType;
   @override
-  final String status;
+  final ReturnSummaryStatus status;
   @override
   final DateTimeStringValue createdDate;
   @override
@@ -473,14 +472,14 @@ class _$_ApproverReturnRequestInformationHeader
 
   @override
   String toString() {
-    return 'ApproverReturnRequestInformationHeader(soldTo: $soldTo, shipTo: $shipTo, createdBy: $createdBy, returnType: $returnType, status: $status, createdDate: $createdDate, createdTime: $createdTime, requestID: $requestID, salesOrg: $salesOrg, refundTotal: $refundTotal, totalItemCount: $totalItemCount, returnTypeDesc: $returnTypeDesc, ppaHeld: $ppaHeld, cName1: $cName1, cName2: $cName2, cName3: $cName3, cName4: $cName4, street1: $street1, street2: $street2, street3: $street3, street4: $street4, returnInvoices: $returnInvoices, salesDoc: $salesDoc)';
+    return 'ReturnRequestInformationHeader(soldTo: $soldTo, shipTo: $shipTo, createdBy: $createdBy, returnType: $returnType, status: $status, createdDate: $createdDate, createdTime: $createdTime, requestID: $requestID, salesOrg: $salesOrg, refundTotal: $refundTotal, totalItemCount: $totalItemCount, returnTypeDesc: $returnTypeDesc, ppaHeld: $ppaHeld, cName1: $cName1, cName2: $cName2, cName3: $cName3, cName4: $cName4, street1: $street1, street2: $street2, street3: $street3, street4: $street4, returnInvoices: $returnInvoices, salesDoc: $salesDoc)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ApproverReturnRequestInformationHeader &&
+            other is _$_ReturnRequestInformationHeader &&
             (identical(other.soldTo, soldTo) || other.soldTo == soldTo) &&
             (identical(other.shipTo, shipTo) || other.shipTo == shipTo) &&
             (identical(other.createdBy, createdBy) ||
@@ -547,20 +546,19 @@ class _$_ApproverReturnRequestInformationHeader
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ApproverReturnRequestInformationHeaderCopyWith<
-          _$_ApproverReturnRequestInformationHeader>
-      get copyWith => __$$_ApproverReturnRequestInformationHeaderCopyWithImpl<
-          _$_ApproverReturnRequestInformationHeader>(this, _$identity);
+  _$$_ReturnRequestInformationHeaderCopyWith<_$_ReturnRequestInformationHeader>
+      get copyWith => __$$_ReturnRequestInformationHeaderCopyWithImpl<
+          _$_ReturnRequestInformationHeader>(this, _$identity);
 }
 
-abstract class _ApproverReturnRequestInformationHeader
-    implements ApproverReturnRequestInformationHeader {
-  factory _ApproverReturnRequestInformationHeader(
+abstract class _ReturnRequestInformationHeader
+    implements ReturnRequestInformationHeader {
+  factory _ReturnRequestInformationHeader(
           {required final String soldTo,
           required final String shipTo,
           required final String createdBy,
           required final String returnType,
-          required final String status,
+          required final ReturnSummaryStatus status,
           required final DateTimeStringValue createdDate,
           required final String createdTime,
           required final String requestID,
@@ -579,7 +577,7 @@ abstract class _ApproverReturnRequestInformationHeader
           required final String street4,
           required final List<ReturnInvoices> returnInvoices,
           required final List<ReturnSalesDoc> salesDoc}) =
-      _$_ApproverReturnRequestInformationHeader;
+      _$_ReturnRequestInformationHeader;
 
   @override
   String get soldTo;
@@ -590,7 +588,7 @@ abstract class _ApproverReturnRequestInformationHeader
   @override
   String get returnType;
   @override
-  String get status;
+  ReturnSummaryStatus get status;
   @override
   DateTimeStringValue get createdDate;
   @override
@@ -629,8 +627,7 @@ abstract class _ApproverReturnRequestInformationHeader
   List<ReturnSalesDoc> get salesDoc;
   @override
   @JsonKey(ignore: true)
-  _$$_ApproverReturnRequestInformationHeaderCopyWith<
-          _$_ApproverReturnRequestInformationHeader>
+  _$$_ReturnRequestInformationHeaderCopyWith<_$_ReturnRequestInformationHeader>
       get copyWith => throw _privateConstructorUsedError;
 }
 

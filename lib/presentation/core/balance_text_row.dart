@@ -11,6 +11,7 @@ class BalanceTextRow extends StatelessWidget {
   final int valueFlex;
   final bool valueTextLoading;
   final bool isStatus;
+  final Color valueColor;
 
   const BalanceTextRow({
     Key? key,
@@ -20,6 +21,7 @@ class BalanceTextRow extends StatelessWidget {
     this.valueFlex = 2,
     this.valueTextLoading = false,
     this.isStatus = false,
+    this.valueColor = ZPColors.black,
   }) : super(key: key);
 
   @override
@@ -29,7 +31,7 @@ class BalanceTextRow extends StatelessWidget {
         vertical: 2.0,
       ),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
             flex: keyFlex,
@@ -63,7 +65,9 @@ class BalanceTextRow extends StatelessWidget {
                       )
                     : Text(
                         ': $valueText',
-                        style: Theme.of(context).textTheme.titleSmall,
+                        style: Theme.of(context).textTheme.titleSmall?.apply(
+                              color: valueColor,
+                            ),
                       ),
           ),
         ],

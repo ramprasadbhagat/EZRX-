@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/approver_return_requests_local.dart';
-import 'package:ezrxmobile/infrastructure/returns/dtos/approver_return_requests_id_dto.dart';
+import 'package:ezrxmobile/infrastructure/returns/dtos/return_requests_id_dto.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -37,7 +37,7 @@ void main() {
             result,
             List.from(res['data']['requestsForApproverV2']['requestID'])
                 .map(
-                  (e) => ApproverReturnRequestsIdDto.fromJson({'requestId': e})
+                  (e) => ReturnRequestsIdDto.fromJson({'requestId': e})
                       .toDomain(),
                 )
                 .toList()

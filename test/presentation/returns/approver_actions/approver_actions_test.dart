@@ -14,7 +14,7 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
-import 'package:ezrxmobile/domain/returns/entities/approver_return_request.dart';
+import 'package:ezrxmobile/domain/returns/entities/request_information.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_approver_filter.dart';
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
@@ -62,7 +62,7 @@ void main() {
   late ReturnApproverFilterBloc returnApproverFilterBlocMock;
   late CountlyService countlyService;
   late ShipToCodeBloc shipToCodeBlocMock;
-  late List<ApproverReturnRequest> approverReturnRequestList;
+  late List<RequestInformation> approverReturnRequestList;
   late SalesOrgBloc salesOrgBlocMock;
   late EligibilityBloc eligibilityBlocMock;
   late ReturnApproverFilter returnApproverFilter;
@@ -89,7 +89,7 @@ void main() {
       countlyService = CountlyServiceMock();
       locator.registerLazySingleton(() => countlyService);
       approverReturnRequestList = [
-        ApproverReturnRequest.empty(),
+        RequestInformation.empty(),
       ];
     },
   );

@@ -7,7 +7,7 @@ import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/approver_return_request_query.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/approver_return_requests_remote.dart';
-import 'package:ezrxmobile/infrastructure/returns/dtos/approver_return_requests_id_dto.dart';
+import 'package:ezrxmobile/infrastructure/returns/dtos/return_requests_id_dto.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -84,7 +84,7 @@ void main() {
               List.from(res['data']['requestsForApproverV2']['requestID'])
                   .map(
                     (e) =>
-                        ApproverReturnRequestsIdDto.fromJson({'requestId': e})
+                        ReturnRequestsIdDto.fromJson({'requestId': e})
                             .toDomain(),
                   )
                   .toList()

@@ -1,15 +1,17 @@
-import 'package:ezrxmobile/domain/returns/entities/approver_return_request_information.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/domain/returns/entities/return_request_information.dart';
+import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'approver_return_request_information_dto.freezed.dart';
-part 'approver_return_request_information_dto.g.dart';
+part 'return_request_information_dto.freezed.dart';
+part 'return_request_information_dto.g.dart';
 
 @freezed
-class ApproverReturnRequestInformationDto
-    with _$ApproverReturnRequestInformationDto {
-  const ApproverReturnRequestInformationDto._();
+class ReturnRequestInformationDto with _$ReturnRequestInformationDto {
+  const ReturnRequestInformationDto._();
 
-  factory ApproverReturnRequestInformationDto({
+  factory ReturnRequestInformationDto({
     @JsonKey(name: 'invoiceNo', defaultValue: '') required String invoiceNo,
     @JsonKey(name: 'returnValue', defaultValue: '') required String returnValue,
     @JsonKey(name: 'actionRequired', defaultValue: <String>[])
@@ -106,20 +108,85 @@ class ApproverReturnRequestInformationDto
         required bool outsidePolicy,
     @JsonKey(name: 'attachments', defaultValue: <String>[])
         required List<String> attachments,
-  }) = _ApproverReturnRequestInformationDto;
-
-  ApproverReturnRequestInformation toDomain() {
-    return ApproverReturnRequestInformation(
+  }) = _ReturnRequestInformationDto;
+  factory ReturnRequestInformationDto.fromDomain(
+    ReturnRequestInformation requestInformation,
+  ) {
+    return ReturnRequestInformationDto(
+      actionRequired: requestInformation.actionRequired,
+      approvalTimeStamp: requestInformation.approvalTimeStamp,
+      batch: requestInformation.batch,
+      division: requestInformation.division,
+      createdDate: requestInformation.createdDate.getOrCrash(),
+      invoiceNo: requestInformation.invoiceNo,
+      cnNumber: requestInformation.cnNumber,
+      bapiStatus: requestInformation.bapiStatus,
+      eZRxNumber: requestInformation.eZRxNumber,
+      expiryDate: requestInformation.expiryDate.getOrCrash(),
+      exchangeOrder: requestInformation.exchangeOrder,
+      bapiSalesDocNumber: requestInformation.bapiSalesDocNumber,
+      materialDescription: requestInformation.materialDescription,
+      orderReason: requestInformation.orderReason,
+      plant: requestInformation.plant,
+      ppaHeld: requestInformation.ppaHeld,
+      poDate: requestInformation.poDate,
+      purchaseNumberC: requestInformation.purchaseNumberC,
+      outsidePolicy: requestInformation.outsidePolicy,
+      highLevelItemCode: requestInformation.highLevelItemCode,
+      returnToStock: requestInformation.returnToStock,
+      docType: requestInformation.docType,
+      remarks: requestInformation.remarks,
+      principal: requestInformation.principal,
+      priceDate: requestInformation.priceDate.getOrCrash(),
+      returnOrderText: requestInformation.returnOrderText,
+      quarantine: requestInformation.quarantine,
+      returnTypeDesc: requestInformation.returnTypeDesc,
+      exchangeOrderNumber: requestInformation.exchangeOrderNumber,
+      rejectReason: requestInformation.rejectReason,
+      productRecall: requestInformation.productRecall,
+      salesDocument: requestInformation.salesDocument,
+      returnOrderDesc: requestInformation.returnOrderDesc,
+      usage: requestInformation.usage,
+      distributionChannel: requestInformation.distributionChannel,
+      purchaseMethod: requestInformation.purchaseMethod,
+      comment: requestInformation.comment.getOrCrash(),
+      storageLocation: requestInformation.storageLocation,
+      statusReason: requestInformation.statusReason,
+      returnType: requestInformation.returnType,
+      returnValue: requestInformation.returnValue,
+      createdTimeStamp: requestInformation.createdTimeStamp,
+      billingItemNumber: requestInformation.billingItemNumber,
+      returnQuantity: requestInformation.returnQuantity,
+      sendForDestruction: requestInformation.sendForDestruction,
+      materialGroup: requestInformation.materialGroup,
+      attachmentUrl: requestInformation.attachmentUrl,
+      attachments: requestInformation.attachments,
+      materialNumber: requestInformation.materialNumber.getOrCrash(),
+      imageUrl: requestInformation.imageUrl,
+      overrideType: requestInformation.overrideType,
+      overrideValue: requestInformation.overrideValue.getOrCrash(),
+      priceOverride: requestInformation.priceOverride,
+      purchaseNumberCOverride: requestInformation.purchaseNumberCOverride,
+      referenceDocument: requestInformation.referenceDocument,
+      refundCurrency: requestInformation.refundCurrency,
+      salesDocumentItemNumber: requestInformation.salesDocumentItemNumber,
+      status: requestInformation.status.getOrCrash(),
+      unitPrice: requestInformation.unitPrice.toString(),
+      totalPrice: requestInformation.totalPrice.toString(),
+    );
+  }
+  ReturnRequestInformation toDomain() {
+    return ReturnRequestInformation(
       actionRequired: actionRequired,
       approvalTimeStamp: approvalTimeStamp,
       batch: batch,
       division: division,
-      createdDate: createdDate,
+      createdDate: DateTimeStringValue(createdDate),
       invoiceNo: invoiceNo,
       cnNumber: cnNumber,
       bapiStatus: bapiStatus,
       eZRxNumber: eZRxNumber,
-      expiryDate: expiryDate,
+      expiryDate: DateTimeStringValue(expiryDate),
       exchangeOrder: exchangeOrder,
       bapiSalesDocNumber: bapiSalesDocNumber,
       materialDescription: materialDescription,
@@ -134,7 +201,7 @@ class ApproverReturnRequestInformationDto
       docType: docType,
       remarks: remarks,
       principal: principal,
-      priceDate: priceDate,
+      priceDate: DateTimeStringValue(priceDate),
       returnOrderText: returnOrderText,
       quarantine: quarantine,
       returnTypeDesc: returnTypeDesc,
@@ -146,12 +213,12 @@ class ApproverReturnRequestInformationDto
       usage: usage,
       distributionChannel: distributionChannel,
       purchaseMethod: purchaseMethod,
-      comment: comment,
-      totalPrice: totalPrice,
-      unitPrice: unitPrice,
+      comment: StringValue(comment),
+      totalPrice: double.parse(totalPrice),
+      unitPrice: double.parse(unitPrice),
       storageLocation: storageLocation,
       statusReason: statusReason,
-      status: status,
+      status: ReturnSummaryStatus(status),
       returnType: returnType,
       returnValue: returnValue,
       createdTimeStamp: createdTimeStamp,
@@ -161,10 +228,10 @@ class ApproverReturnRequestInformationDto
       materialGroup: materialGroup,
       attachmentUrl: attachmentUrl,
       attachments: attachments,
-      materialNumber: materialNumber,
+      materialNumber: MaterialNumber(materialNumber),
       imageUrl: imageUrl,
       overrideType: overrideType,
-      overrideValue: overrideValue,
+      overrideValue: StringValue(overrideValue),
       priceOverride: priceOverride,
       purchaseNumberCOverride: purchaseNumberCOverride,
       referenceDocument: referenceDocument,
@@ -173,8 +240,8 @@ class ApproverReturnRequestInformationDto
     );
   }
 
-  factory ApproverReturnRequestInformationDto.fromJson(
+  factory ReturnRequestInformationDto.fromJson(
     Map<String, dynamic> json,
   ) =>
-      _$ApproverReturnRequestInformationDtoFromJson(json);
+      _$ReturnRequestInformationDtoFromJson(json);
 }

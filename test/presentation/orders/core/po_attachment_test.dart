@@ -127,7 +127,7 @@ void main() {
           fileUrl: [
             fakePoDocumentList.first,
           ],
-          fileOperationhMode: FileOperationhMode.download,
+          fileOperationMode: FileOperationMode.download,
           failureOrSuccessOption: optionOf(Right(
             fakePoDocumentList.first,
           )),
@@ -174,7 +174,7 @@ void main() {
         PoAttachmentState.initial().copyWith(
           fileUrl: [
           fakePoDocumentList.first,
-        ], fileOperationhMode: FileOperationhMode.download, isFetching: true)
+        ], fileOperationMode: FileOperationMode.download, isFetching: true)
       ];
       whenListen(poAttachmentBlocMock, Stream.fromIterable(expectedStates));
       await tester.pumpWidget(
@@ -229,7 +229,7 @@ void main() {
           fileUrl: [
             fakePoDocumentList.first,
           ],
-          fileOperationhMode: FileOperationhMode.upload,
+          fileOperationMode: FileOperationMode.upload,
         )
       ];
       whenListen(poAttachmentBlocMock, Stream.fromIterable(expectedStates));
@@ -274,7 +274,7 @@ void main() {
           fileUrl: [
             fakePoDocumentList.first,
           ],
-          fileOperationhMode: FileOperationhMode.download,
+          fileOperationMode: FileOperationMode.download,
         )
       ];
       whenListen(poAttachmentBlocMock, Stream.fromIterable(expectedStates));
@@ -306,7 +306,7 @@ void main() {
         fileUrl: [
           fakePoDocumentList.first,
         ],
-        fileOperationhMode: FileOperationhMode.upload,
+        fileOperationMode: FileOperationMode.upload,
         isFetching: true,
       ));
       await tester.pumpWidget(

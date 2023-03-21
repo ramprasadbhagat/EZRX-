@@ -1,13 +1,13 @@
 import 'dart:convert';
 
-import 'package:ezrxmobile/domain/returns/entities/approver_return_request.dart';
-import 'package:ezrxmobile/infrastructure/returns/dtos/approver_return_request_dto.dart';
+import 'package:ezrxmobile/domain/returns/entities/request_information.dart';
+import 'package:ezrxmobile/infrastructure/returns/dtos/request_information_dto.dart';
 import 'package:flutter/services.dart';
 
 class ApproverReturnRequestInformationLocal {
   ApproverReturnRequestInformationLocal();
 
-  Future<ApproverReturnRequest> getApproverReturnRequestInfomration(
+  Future<RequestInformation> getApproverReturnRequestInformation(
       {
     required String returnRequestId,
   }) async {
@@ -18,6 +18,6 @@ class ApproverReturnRequestInformationLocal {
     );
     final res = data['data']['requestInformationV2'];
 
-    return ApproverReturnRequestDto.fromJson(res).toDomain();
+    return RequestInformationDto.fromJson(res).toDomain();
   }
 }

@@ -1,11 +1,15 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_summary/return_summary_bloc.dart';
+import 'package:ezrxmobile/application/returns/return_summary_details/return_summary_details_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_summary_filter/return_summary_filter_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_summary_filter.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_summary_requests.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
@@ -18,6 +22,7 @@ import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dar
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/returns/return_summary/return_summary_filter.dart';
 import 'package:ezrxmobile/presentation/returns/return_summary/return_summary_filter_by_status.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -66,10 +71,11 @@ class ReturnSummary extends StatelessWidget {
                           Text(
                             'Status'.tr(),
                             key: const ValueKey('status'),
-                            style: Theme.of(context).textTheme.titleSmall?.apply(
-                                  color: ZPColors.kPrimaryColor,
-                                  fontStyle: FontStyle.normal,
-                                ),
+                            style:
+                                Theme.of(context).textTheme.titleSmall?.apply(
+                                      color: ZPColors.kPrimaryColor,
+                                      fontStyle: FontStyle.normal,
+                                    ),
                           ),
                           Text(
                             ' : ${state.returnSummaryFilter.activeStatus.displayStatusInList}',
@@ -160,6 +166,9 @@ class ReturnSummary extends StatelessWidget {
               previous.returnSummaryList != current.returnSummaryList,
           builder: (context, returnSummaryState) {
             final configs = context.read<SalesOrgBloc>().state.configs;
+            final customerCode =
+                context.read<CustomerCodeBloc>().state.customerCodeInfo;
+            final shipToInfo = context.read<ShipToCodeBloc>().state.shipToInfo;
 
             if (returnSummaryState.isLoading &&
                 returnSummaryState.returnSummaryList.isEmpty) {
@@ -170,7 +179,8 @@ class ReturnSummary extends StatelessWidget {
 
             return Column(
               children: [
-                context.read<ReturnSummaryFilterBloc>()
+                context
+                        .read<ReturnSummaryFilterBloc>()
                         .state
                         .returnSummaryFilter
                         .anyFilterApplied
@@ -250,6 +260,8 @@ class ReturnSummary extends StatelessWidget {
                         ReturnSummaryListItem(
                       returnSummaryRequests: item,
                       configs: configs,
+                      customerCodeInfo: customerCode,
+                      shipToInfo: shipToInfo,
                     ),
                     items: returnSummaryState.returnSummaryList,
                   ),
@@ -268,9 +280,13 @@ class ReturnSummaryListItem extends StatelessWidget {
     Key? key,
     required this.returnSummaryRequests,
     required this.configs,
+    required this.customerCodeInfo,
+    required this.shipToInfo,
   }) : super(key: key);
   final ReturnSummaryRequest returnSummaryRequests;
   final SalesOrganisationConfigs configs;
+  final CustomerCodeInfo customerCodeInfo;
+  final ShipToInfo shipToInfo;
 
   @override
   Widget build(BuildContext context) {
@@ -372,6 +388,18 @@ class ReturnSummaryListItem extends StatelessWidget {
             ),
           ],
         ),
+        onTap: () {
+          context.read<ReturnSummaryDetailsBloc>().add(
+                ReturnSummaryDetailsEvent.fetch(
+                  returnSummaryRequests: returnSummaryRequests,
+                ),
+              );
+          context.router.push(ReturnSummaryDetailsRoute(
+            customerCodeInfo: customerCodeInfo,
+            shipToInfo: shipToInfo,
+            returnSummaryRequests: returnSummaryRequests,
+          ));
+        },
       ),
     );
   }

@@ -3,10 +3,10 @@ import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
-import 'package:ezrxmobile/domain/returns/entities/approver_return_requests_id.dart';
+import 'package:ezrxmobile/domain/returns/entities/return_requests_id.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/approver_return_request_query.dart';
-import 'package:ezrxmobile/infrastructure/returns/dtos/approver_return_requests_id_dto.dart';
+import 'package:ezrxmobile/infrastructure/returns/dtos/return_requests_id_dto.dart';
 
 
 class ApproverReturnRequestsRemote {
@@ -21,7 +21,7 @@ class ApproverReturnRequestsRemote {
     required this.config,
   });
 
-  Future<List<ApproverReturnRequestsId>> getReturns({
+  Future<List<ReturnRequestsId>> getReturns({
     required String username,
     required int offset,
     required int pageSize,
@@ -52,7 +52,7 @@ class ApproverReturnRequestsRemote {
     )
         .map(
           (e) =>
-              ApproverReturnRequestsIdDto.fromJson({'requestId': e}).toDomain(),
+              ReturnRequestsIdDto.fromJson({'requestId': e}).toDomain(),
         )
         .toList()
       ..retainWhere((element) => element.isValidRequestId);

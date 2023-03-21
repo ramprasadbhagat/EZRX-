@@ -42,7 +42,7 @@ String materialGroup4Type(bool isFoc) {
   return isFoc ? 'ZPFC' : 'ZPOR';
 }
 
-bool checkMatrialType(String type) {
+bool checkMaterialType(String type) {
   return type == 'Comm';
 }
 
@@ -80,7 +80,8 @@ bool havingSubmitPrincipalForSalesRep(String principalCode) {
 
 Color getStatusLabelColor(String statusType) {
   switch (statusType) {
-    case 'Delivered':
+    case 'Approved for Return':
+    case 'FAILED':
       return ZPColors.lightSecondary;
     case 'Cancelled':
     case 'Failed':
@@ -89,6 +90,10 @@ Color getStatusLabelColor(String statusType) {
     case 'Picking in-progress':
     case 'Order Created':
     case 'Out for delivery':
+    case 'Pending Approval':
+      return ZPColors.lightRed;
+    case 'Completed':
+      return ZPColors.darkGray;
     default:
       return ZPColors.lightYellow;
   }

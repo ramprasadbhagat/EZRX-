@@ -1,50 +1,49 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'approver_return_request_information_header_dto.dart';
+part of 'request_information_header_dto.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ApproverReturnRequestInformationHeaderDto
-    _$$_ApproverReturnRequestInformationHeaderDtoFromJson(
-            Map<String, dynamic> json) =>
-        _$_ApproverReturnRequestInformationHeaderDto(
-          soldTo: json['soldTo'] as String? ?? '',
-          shipTo: json['shipTo'] as String? ?? '',
-          createdBy: json['createdBy'] as String? ?? '',
-          returnType: json['returnType'] as String? ?? '',
-          status: json['status'] as String? ?? '',
-          createdDate: json['createdDate'] as String? ?? '',
-          createdTime: json['createdTime'] as String? ?? '',
-          requestID: json['requestID'] as String? ?? '',
-          salesOrg: json['salesOrg'] as String? ?? '',
-          refundTotal: json['refundTotal'] as String? ?? '',
-          totalItemCount: json['totalItemCount'] as String? ?? '',
-          returnTypeDesc: json['returnTypeDesc'] as String? ?? '',
-          ppaHeld: json['ppaHeld'] as bool? ?? false,
-          cName1: json['cName1'] as String? ?? '',
-          cName2: json['cName2'] as String? ?? '',
-          cName3: json['cName3'] as String? ?? '',
-          cName4: json['cName4'] as String? ?? '',
-          street1: json['street1'] as String? ?? '',
-          street2: json['street2'] as String? ?? '',
-          street3: json['street3'] as String? ?? '',
-          street4: json['street4'] as String? ?? '',
-          returnInvoices: (json['returnInvoices'] as List<dynamic>?)
-                  ?.map((e) =>
-                      ReturnInvoicesDto.fromJson(e as Map<String, dynamic>))
-                  .toList() ??
-              [],
-          salesDoc: (json['salesDoc'] as List<dynamic>?)
-                  ?.map((e) =>
-                      RetrunSalesDocDto.fromJson(e as Map<String, dynamic>))
-                  .toList() ??
-              [],
-        );
+_$_RequestInformationHeaderDto _$$_RequestInformationHeaderDtoFromJson(
+        Map<String, dynamic> json) =>
+    _$_RequestInformationHeaderDto(
+      soldTo: json['soldTo'] as String? ?? '',
+      shipTo: json['shipTo'] as String? ?? '',
+      createdBy: json['createdBy'] as String? ?? '',
+      returnType: json['returnType'] as String? ?? '',
+      status: json['status'] as String? ?? '',
+      createdDate: json['createdDate'] as String? ?? '',
+      createdTime: json['createdTime'] as String? ?? '',
+      requestID: json['requestID'] as String? ?? '',
+      salesOrg: json['salesOrg'] as String? ?? '',
+      refundTotal: json['refundTotal'] as String? ?? '',
+      totalItemCount: json['totalItemCount'] as String? ?? '',
+      returnTypeDesc: json['returnTypeDesc'] as String? ?? '',
+      ppaHeld: json['ppaHeld'] as bool? ?? false,
+      cName1: json['cName1'] as String? ?? '',
+      cName2: json['cName2'] as String? ?? '',
+      cName3: json['cName3'] as String? ?? '',
+      cName4: json['cName4'] as String? ?? '',
+      street1: json['street1'] as String? ?? '',
+      street2: json['street2'] as String? ?? '',
+      street3: json['street3'] as String? ?? '',
+      street4: json['street4'] as String? ?? '',
+      returnInvoices: (json['returnInvoices'] as List<dynamic>?)
+              ?.map(
+                  (e) => ReturnInvoicesDto.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      salesDoc: (json['salesDoc'] as List<dynamic>?)
+              ?.map(
+                  (e) => RetrunSalesDocDto.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
 
-Map<String, dynamic> _$$_ApproverReturnRequestInformationHeaderDtoToJson(
-        _$_ApproverReturnRequestInformationHeaderDto instance) =>
+Map<String, dynamic> _$$_RequestInformationHeaderDtoToJson(
+        _$_RequestInformationHeaderDto instance) =>
     <String, dynamic>{
       'soldTo': instance.soldTo,
       'shipTo': instance.shipTo,

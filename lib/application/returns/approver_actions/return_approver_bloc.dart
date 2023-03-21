@@ -4,7 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_approver_filter.dart';
-import 'package:ezrxmobile/domain/returns/entities/approver_return_request.dart';
+import 'package:ezrxmobile/domain/returns/entities/request_information.dart';
 import 'package:ezrxmobile/domain/returns/repository/i_return_approver_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -35,7 +35,7 @@ class ReturnApproverBloc
         emit(
           state.copyWith(
             isFetching: true,
-            approverReturnRequestList: <ApproverReturnRequest>[],
+            approverReturnRequestList: <RequestInformation>[],
             nextPageIndex: 0,
             failureOrSuccessOption: none(),
           ),
@@ -127,7 +127,7 @@ class ReturnApproverBloc
                 emit(
                   state.copyWith(
                     isFetching: false,
-                    approverReturnRequestList: List<ApproverReturnRequest>.from(
+                    approverReturnRequestList: List<RequestInformation>.from(
                       state.approverReturnRequestList,
                     )
                           ..addAll(approverReturnRequestInformationList),

@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'approver_return_request_information_dto.dart';
+part of 'return_request_information_dto.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,13 +14,13 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-ApproverReturnRequestInformationDto
-    _$ApproverReturnRequestInformationDtoFromJson(Map<String, dynamic> json) {
-  return _ApproverReturnRequestInformationDto.fromJson(json);
+ReturnRequestInformationDto _$ReturnRequestInformationDtoFromJson(
+    Map<String, dynamic> json) {
+  return _ReturnRequestInformationDto.fromJson(json);
 }
 
 /// @nodoc
-mixin _$ApproverReturnRequestInformationDto {
+mixin _$ReturnRequestInformationDto {
   @JsonKey(name: 'invoiceNo', defaultValue: '')
   String get invoiceNo => throw _privateConstructorUsedError;
   @JsonKey(name: 'returnValue', defaultValue: '')
@@ -144,18 +144,17 @@ mixin _$ApproverReturnRequestInformationDto {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $ApproverReturnRequestInformationDtoCopyWith<
-          ApproverReturnRequestInformationDto>
+  $ReturnRequestInformationDtoCopyWith<ReturnRequestInformationDto>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ApproverReturnRequestInformationDtoCopyWith<$Res> {
-  factory $ApproverReturnRequestInformationDtoCopyWith(
-          ApproverReturnRequestInformationDto value,
-          $Res Function(ApproverReturnRequestInformationDto) then) =
-      _$ApproverReturnRequestInformationDtoCopyWithImpl<$Res,
-          ApproverReturnRequestInformationDto>;
+abstract class $ReturnRequestInformationDtoCopyWith<$Res> {
+  factory $ReturnRequestInformationDtoCopyWith(
+          ReturnRequestInformationDto value,
+          $Res Function(ReturnRequestInformationDto) then) =
+      _$ReturnRequestInformationDtoCopyWithImpl<$Res,
+          ReturnRequestInformationDto>;
   @useResult
   $Res call(
       {@JsonKey(name: 'invoiceNo', defaultValue: '')
@@ -281,10 +280,10 @@ abstract class $ApproverReturnRequestInformationDtoCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ApproverReturnRequestInformationDtoCopyWithImpl<$Res,
-        $Val extends ApproverReturnRequestInformationDto>
-    implements $ApproverReturnRequestInformationDtoCopyWith<$Res> {
-  _$ApproverReturnRequestInformationDtoCopyWithImpl(this._value, this._then);
+class _$ReturnRequestInformationDtoCopyWithImpl<$Res,
+        $Val extends ReturnRequestInformationDto>
+    implements $ReturnRequestInformationDtoCopyWith<$Res> {
+  _$ReturnRequestInformationDtoCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -601,12 +600,12 @@ class _$ApproverReturnRequestInformationDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ApproverReturnRequestInformationDtoCopyWith<$Res>
-    implements $ApproverReturnRequestInformationDtoCopyWith<$Res> {
-  factory _$$_ApproverReturnRequestInformationDtoCopyWith(
-          _$_ApproverReturnRequestInformationDto value,
-          $Res Function(_$_ApproverReturnRequestInformationDto) then) =
-      __$$_ApproverReturnRequestInformationDtoCopyWithImpl<$Res>;
+abstract class _$$_ReturnRequestInformationDtoCopyWith<$Res>
+    implements $ReturnRequestInformationDtoCopyWith<$Res> {
+  factory _$$_ReturnRequestInformationDtoCopyWith(
+          _$_ReturnRequestInformationDto value,
+          $Res Function(_$_ReturnRequestInformationDto) then) =
+      __$$_ReturnRequestInformationDtoCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -733,13 +732,13 @@ abstract class _$$_ApproverReturnRequestInformationDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ApproverReturnRequestInformationDtoCopyWithImpl<$Res>
-    extends _$ApproverReturnRequestInformationDtoCopyWithImpl<$Res,
-        _$_ApproverReturnRequestInformationDto>
-    implements _$$_ApproverReturnRequestInformationDtoCopyWith<$Res> {
-  __$$_ApproverReturnRequestInformationDtoCopyWithImpl(
-      _$_ApproverReturnRequestInformationDto _value,
-      $Res Function(_$_ApproverReturnRequestInformationDto) _then)
+class __$$_ReturnRequestInformationDtoCopyWithImpl<$Res>
+    extends _$ReturnRequestInformationDtoCopyWithImpl<$Res,
+        _$_ReturnRequestInformationDto>
+    implements _$$_ReturnRequestInformationDtoCopyWith<$Res> {
+  __$$_ReturnRequestInformationDtoCopyWithImpl(
+      _$_ReturnRequestInformationDto _value,
+      $Res Function(_$_ReturnRequestInformationDto) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -806,7 +805,7 @@ class __$$_ApproverReturnRequestInformationDtoCopyWithImpl<$Res>
     Object? outsidePolicy = null,
     Object? attachments = null,
   }) {
-    return _then(_$_ApproverReturnRequestInformationDto(
+    return _then(_$_ReturnRequestInformationDto(
       invoiceNo: null == invoiceNo
           ? _value.invoiceNo
           : invoiceNo // ignore: cast_nullable_to_non_nullable
@@ -1053,9 +1052,8 @@ class __$$_ApproverReturnRequestInformationDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ApproverReturnRequestInformationDto
-    extends _ApproverReturnRequestInformationDto {
-  _$_ApproverReturnRequestInformationDto(
+class _$_ReturnRequestInformationDto extends _ReturnRequestInformationDto {
+  _$_ReturnRequestInformationDto(
       {@JsonKey(name: 'invoiceNo', defaultValue: '')
           required this.invoiceNo,
       @JsonKey(name: 'returnValue', defaultValue: '')
@@ -1182,9 +1180,8 @@ class _$_ApproverReturnRequestInformationDto
         _attachments = attachments,
         super._();
 
-  factory _$_ApproverReturnRequestInformationDto.fromJson(
-          Map<String, dynamic> json) =>
-      _$$_ApproverReturnRequestInformationDtoFromJson(json);
+  factory _$_ReturnRequestInformationDto.fromJson(Map<String, dynamic> json) =>
+      _$$_ReturnRequestInformationDtoFromJson(json);
 
   @override
   @JsonKey(name: 'invoiceNo', defaultValue: '')
@@ -1388,14 +1385,14 @@ class _$_ApproverReturnRequestInformationDto
 
   @override
   String toString() {
-    return 'ApproverReturnRequestInformationDto(invoiceNo: $invoiceNo, returnValue: $returnValue, actionRequired: $actionRequired, expiryDate: $expiryDate, comment: $comment, salesDocument: $salesDocument, exchangeOrder: $exchangeOrder, refundCurrency: $refundCurrency, rejectReason: $rejectReason, exchangeOrderNumber: $exchangeOrderNumber, docType: $docType, referenceDocument: $referenceDocument, division: $division, purchaseMethod: $purchaseMethod, usage: $usage, distributionChannel: $distributionChannel, approvalTimeStamp: $approvalTimeStamp, createdTimeStamp: $createdTimeStamp, poDate: $poDate, returnQuantity: $returnQuantity, unitPrice: $unitPrice, totalPrice: $totalPrice, billingItemNumber: $billingItemNumber, salesDocumentItemNumber: $salesDocumentItemNumber, materialNumber: $materialNumber, materialDescription: $materialDescription, batch: $batch, materialGroup: $materialGroup, imageUrl: $imageUrl, attachmentUrl: $attachmentUrl, plant: $plant, storageLocation: $storageLocation, highLevelItemCode: $highLevelItemCode, orderReason: $orderReason, priceDate: $priceDate, createdDate: $createdDate, overrideType: $overrideType, overrideValue: $overrideValue, returnOrderText: $returnOrderText, returnOrderDesc: $returnOrderDesc, principal: $principal, bapiSalesDocNumber: $bapiSalesDocNumber, eZRxNumber: $eZRxNumber, bapiStatus: $bapiStatus, cnNumber: $cnNumber, status: $status, statusReason: $statusReason, priceOverride: $priceOverride, remarks: $remarks, sendForDestruction: $sendForDestruction, quarantine: $quarantine, returnToStock: $returnToStock, productRecall: $productRecall, returnType: $returnType, returnTypeDesc: $returnTypeDesc, purchaseNumberCOverride: $purchaseNumberCOverride, purchaseNumberC: $purchaseNumberC, ppaHeld: $ppaHeld, outsidePolicy: $outsidePolicy, attachments: $attachments)';
+    return 'ReturnRequestInformationDto(invoiceNo: $invoiceNo, returnValue: $returnValue, actionRequired: $actionRequired, expiryDate: $expiryDate, comment: $comment, salesDocument: $salesDocument, exchangeOrder: $exchangeOrder, refundCurrency: $refundCurrency, rejectReason: $rejectReason, exchangeOrderNumber: $exchangeOrderNumber, docType: $docType, referenceDocument: $referenceDocument, division: $division, purchaseMethod: $purchaseMethod, usage: $usage, distributionChannel: $distributionChannel, approvalTimeStamp: $approvalTimeStamp, createdTimeStamp: $createdTimeStamp, poDate: $poDate, returnQuantity: $returnQuantity, unitPrice: $unitPrice, totalPrice: $totalPrice, billingItemNumber: $billingItemNumber, salesDocumentItemNumber: $salesDocumentItemNumber, materialNumber: $materialNumber, materialDescription: $materialDescription, batch: $batch, materialGroup: $materialGroup, imageUrl: $imageUrl, attachmentUrl: $attachmentUrl, plant: $plant, storageLocation: $storageLocation, highLevelItemCode: $highLevelItemCode, orderReason: $orderReason, priceDate: $priceDate, createdDate: $createdDate, overrideType: $overrideType, overrideValue: $overrideValue, returnOrderText: $returnOrderText, returnOrderDesc: $returnOrderDesc, principal: $principal, bapiSalesDocNumber: $bapiSalesDocNumber, eZRxNumber: $eZRxNumber, bapiStatus: $bapiStatus, cnNumber: $cnNumber, status: $status, statusReason: $statusReason, priceOverride: $priceOverride, remarks: $remarks, sendForDestruction: $sendForDestruction, quarantine: $quarantine, returnToStock: $returnToStock, productRecall: $productRecall, returnType: $returnType, returnTypeDesc: $returnTypeDesc, purchaseNumberCOverride: $purchaseNumberCOverride, purchaseNumberC: $purchaseNumberC, ppaHeld: $ppaHeld, outsidePolicy: $outsidePolicy, attachments: $attachments)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ApproverReturnRequestInformationDto &&
+            other is _$_ReturnRequestInformationDto &&
             (identical(other.invoiceNo, invoiceNo) ||
                 other.invoiceNo == invoiceNo) &&
             (identical(other.returnValue, returnValue) ||
@@ -1565,22 +1562,21 @@ class _$_ApproverReturnRequestInformationDto
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ApproverReturnRequestInformationDtoCopyWith<
-          _$_ApproverReturnRequestInformationDto>
-      get copyWith => __$$_ApproverReturnRequestInformationDtoCopyWithImpl<
-          _$_ApproverReturnRequestInformationDto>(this, _$identity);
+  _$$_ReturnRequestInformationDtoCopyWith<_$_ReturnRequestInformationDto>
+      get copyWith => __$$_ReturnRequestInformationDtoCopyWithImpl<
+          _$_ReturnRequestInformationDto>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ApproverReturnRequestInformationDtoToJson(
+    return _$$_ReturnRequestInformationDtoToJson(
       this,
     );
   }
 }
 
-abstract class _ApproverReturnRequestInformationDto
-    extends ApproverReturnRequestInformationDto {
-  factory _ApproverReturnRequestInformationDto(
+abstract class _ReturnRequestInformationDto
+    extends ReturnRequestInformationDto {
+  factory _ReturnRequestInformationDto(
           {@JsonKey(name: 'invoiceNo', defaultValue: '')
               required final String invoiceNo,
           @JsonKey(name: 'returnValue', defaultValue: '')
@@ -1701,12 +1697,11 @@ abstract class _ApproverReturnRequestInformationDto
               required final bool outsidePolicy,
           @JsonKey(name: 'attachments', defaultValue: <String>[])
               required final List<String> attachments}) =
-      _$_ApproverReturnRequestInformationDto;
-  _ApproverReturnRequestInformationDto._() : super._();
+      _$_ReturnRequestInformationDto;
+  _ReturnRequestInformationDto._() : super._();
 
-  factory _ApproverReturnRequestInformationDto.fromJson(
-          Map<String, dynamic> json) =
-      _$_ApproverReturnRequestInformationDto.fromJson;
+  factory _ReturnRequestInformationDto.fromJson(Map<String, dynamic> json) =
+      _$_ReturnRequestInformationDto.fromJson;
 
   @override
   @JsonKey(name: 'invoiceNo', defaultValue: '')
@@ -1890,7 +1885,6 @@ abstract class _ApproverReturnRequestInformationDto
   List<String> get attachments;
   @override
   @JsonKey(ignore: true)
-  _$$_ApproverReturnRequestInformationDtoCopyWith<
-          _$_ApproverReturnRequestInformationDto>
+  _$$_ReturnRequestInformationDtoCopyWith<_$_ReturnRequestInformationDto>
       get copyWith => throw _privateConstructorUsedError;
 }

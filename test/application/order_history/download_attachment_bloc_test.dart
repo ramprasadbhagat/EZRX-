@@ -20,7 +20,7 @@ void main() {
         OrderHistoryDetails.empty().orderHistoryDetailsPoDocuments;
     final emptyFileMap = PoDocuments.empty();
     final emptyResponseData = [PoDocumentsBuffer.empty()];
-    const emptyFetchMode = FileOperationhMode.none;
+    const emptyFetchMode = FileOperationMode.none;
     const apiServerTimeOut = ApiFailure.serverTimeout();
     PoAttachmentBloc getDownloadAttachmentBloc() {
       return PoAttachmentBloc(
@@ -53,7 +53,7 @@ void main() {
       'emit correct data on successful downloadFile() event',
       setUp: () {
         when(
-          () => downloadAttachmentRepository.downloadFiles(emptyFile),
+          () => downloadAttachmentRepository.downloadFiles(emptyFile,AttachmentType.downloadPOAttachment),
         ).thenAnswer((invocation) async => Right(emptyResponseData));
       },
       build: () => getDownloadAttachmentBloc(),
@@ -64,7 +64,7 @@ void main() {
       expect: () => [
         PoAttachmentState.initial().copyWith(
           isFetching: true,
-          fileOperationhMode: emptyFetchMode,
+          fileOperationMode: emptyFetchMode,
         ),
         PoAttachmentState.initial().copyWith(
           failureOrSuccessOption: optionOf(Right(emptyResponseData)),
@@ -77,7 +77,7 @@ void main() {
       'emit correct data on unsuccessful downloadFile() event',
       setUp: () {
         when(
-          () => downloadAttachmentRepository.downloadFiles([emptyFileMap]),
+          () => downloadAttachmentRepository.downloadFiles([emptyFileMap],AttachmentType.downloadPOAttachment),
         ).thenAnswer((invocation) async => const Left(apiServerTimeOut));
       },
       build: () => getDownloadAttachmentBloc(),
@@ -89,7 +89,7 @@ void main() {
         PoAttachmentState.initial().copyWith(
           isFetching: true,
           fileUrl: [PoDocuments.empty()],
-          fileOperationhMode: emptyFetchMode,
+          fileOperationMode: emptyFetchMode,
         ),
         PoAttachmentState.initial().copyWith(
           failureOrSuccessOption: optionOf(const Left(apiServerTimeOut)),

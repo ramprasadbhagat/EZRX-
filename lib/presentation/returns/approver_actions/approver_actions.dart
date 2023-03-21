@@ -4,7 +4,7 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
-import 'package:ezrxmobile/domain/returns/entities/approver_return_request.dart';
+import 'package:ezrxmobile/domain/returns/entities/request_information.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_approver_filter.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
@@ -177,7 +177,7 @@ class ApproverActions extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Expanded(
-                  child: ScrollList<ApproverReturnRequest>(
+                  child: ScrollList<RequestInformation>(
                     emptyMessage: 'No Return found'.tr(),
                     onRefresh: () {
                       if (!context.read<ShipToCodeBloc>().state.haveShipTo) {

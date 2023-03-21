@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:ezrxmobile/domain/returns/entities/approver_return_request_information_header.dart';
-import 'package:ezrxmobile/infrastructure/returns/dtos/approver_return_request_information_header_dto.dart';
+import 'package:ezrxmobile/domain/returns/entities/return_request_information_header.dart';
+import 'package:ezrxmobile/infrastructure/returns/dtos/request_information_header_dto.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -17,9 +17,9 @@ void main() {
     });
     test('=> Approver return request information header', () {
       final approverReturnRequestInformationHeader =
-          ApproverReturnRequestInformationHeaderDto.fromJson(data).toDomain();
+          RequestInformationHeaderDto.fromJson(data).toDomain();
       expect(approverReturnRequestInformationHeader,
-          isA<ApproverReturnRequestInformationHeader>());
+          isA<ReturnRequestInformationHeader>());
     });
 
     test('=> Approver return request information header ReturnInvoicesDto', () {

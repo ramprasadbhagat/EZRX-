@@ -407,7 +407,7 @@ class OrderItemType extends ValueObject<String> {
   }
 
   bool get isMaterialTypeComm {
-    return checkMatrialType(value.getOrElse(() => ''));
+    return checkMaterialType(value.getOrElse(() => ''));
   }
 
   const OrderItemType._(this.value);

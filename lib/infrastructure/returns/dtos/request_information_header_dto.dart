@@ -1,18 +1,16 @@
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/domain/returns/entities/approver_return_request_information_header.dart';
+import 'package:ezrxmobile/domain/returns/entities/return_request_information_header.dart';
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-
-part 'approver_return_request_information_header_dto.freezed.dart';
-part 'approver_return_request_information_header_dto.g.dart';
+part 'request_information_header_dto.freezed.dart';
+part 'request_information_header_dto.g.dart';
 
 @freezed
-class ApproverReturnRequestInformationHeaderDto
-    with _$ApproverReturnRequestInformationHeaderDto {
-  const ApproverReturnRequestInformationHeaderDto._();
-  factory ApproverReturnRequestInformationHeaderDto({
+class RequestInformationHeaderDto with _$RequestInformationHeaderDto {
+  const RequestInformationHeaderDto._();
+  factory RequestInformationHeaderDto({
     @JsonKey(name: 'soldTo', defaultValue: '') required String soldTo,
     @JsonKey(name: 'shipTo', defaultValue: '') required String shipTo,
     @JsonKey(name: 'createdBy', defaultValue: '') required String createdBy,
@@ -40,16 +38,16 @@ class ApproverReturnRequestInformationHeaderDto
         required List<ReturnInvoicesDto> returnInvoices,
     @JsonKey(name: 'salesDoc', defaultValue: <RetrunSalesDocDto>[])
         required List<RetrunSalesDocDto> salesDoc,
-  }) = _ApproverReturnRequestInformationHeaderDto;
+  }) = _RequestInformationHeaderDto;
 
-  ApproverReturnRequestInformationHeader toDomain() {
-    return ApproverReturnRequestInformationHeader(
+  ReturnRequestInformationHeader toDomain() {
+    return ReturnRequestInformationHeader(
       cName1: cName1,
       cName2: cName2,
       cName3: cName3,
       cName4: cName4,
       createdBy: createdBy,
-      createdDate: DateTimeStringValue(createdDate) ,
+      createdDate: DateTimeStringValue(createdDate),
       createdTime: createdTime,
       ppaHeld: ppaHeld,
       refundTotal: RefundTotal(refundTotal),
@@ -59,7 +57,7 @@ class ApproverReturnRequestInformationHeaderDto
       salesOrg: SalesOrg(salesOrg),
       shipTo: shipTo,
       soldTo: soldTo,
-      status: status,
+      status: ReturnSummaryStatus(status),
       street1: street1,
       street2: street2,
       street3: street3,
@@ -70,10 +68,10 @@ class ApproverReturnRequestInformationHeaderDto
     );
   }
 
-  factory ApproverReturnRequestInformationHeaderDto.fromJson(
+  factory RequestInformationHeaderDto.fromJson(
     Map<String, dynamic> json,
   ) =>
-      _$ApproverReturnRequestInformationHeaderDtoFromJson(json);
+      _$RequestInformationHeaderDtoFromJson(json);
 }
 
 @freezed

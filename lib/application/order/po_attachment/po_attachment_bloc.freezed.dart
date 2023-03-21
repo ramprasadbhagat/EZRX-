@@ -19,8 +19,8 @@ mixin _$PoAttachmentEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(
-            List<PoDocuments> files, FileOperationhMode fetchMode)
+    required TResult Function(List<PoDocuments> files,
+            FileOperationMode fetchMode, AttachmentType attachmentType)
         downloadFile,
     required TResult Function(
             List<PlatformFile> files,
@@ -35,7 +35,8 @@ mixin _$PoAttachmentEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(List<PoDocuments> files, FileOperationhMode fetchMode)?
+    TResult? Function(List<PoDocuments> files, FileOperationMode fetchMode,
+            AttachmentType attachmentType)?
         downloadFile,
     TResult? Function(
             List<PlatformFile> files,
@@ -50,7 +51,8 @@ mixin _$PoAttachmentEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(List<PoDocuments> files, FileOperationhMode fetchMode)?
+    TResult Function(List<PoDocuments> files, FileOperationMode fetchMode,
+            AttachmentType attachmentType)?
         downloadFile,
     TResult Function(
             List<PlatformFile> files,
@@ -144,8 +146,8 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(
-            List<PoDocuments> files, FileOperationhMode fetchMode)
+    required TResult Function(List<PoDocuments> files,
+            FileOperationMode fetchMode, AttachmentType attachmentType)
         downloadFile,
     required TResult Function(
             List<PlatformFile> files,
@@ -163,7 +165,8 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(List<PoDocuments> files, FileOperationhMode fetchMode)?
+    TResult? Function(List<PoDocuments> files, FileOperationMode fetchMode,
+            AttachmentType attachmentType)?
         downloadFile,
     TResult? Function(
             List<PlatformFile> files,
@@ -181,7 +184,8 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(List<PoDocuments> files, FileOperationhMode fetchMode)?
+    TResult Function(List<PoDocuments> files, FileOperationMode fetchMode,
+            AttachmentType attachmentType)?
         downloadFile,
     TResult Function(
             List<PlatformFile> files,
@@ -244,7 +248,10 @@ abstract class _$$_DownloadFileCopyWith<$Res> {
           _$_DownloadFile value, $Res Function(_$_DownloadFile) then) =
       __$$_DownloadFileCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<PoDocuments> files, FileOperationhMode fetchMode});
+  $Res call(
+      {List<PoDocuments> files,
+      FileOperationMode fetchMode,
+      AttachmentType attachmentType});
 }
 
 /// @nodoc
@@ -260,6 +267,7 @@ class __$$_DownloadFileCopyWithImpl<$Res>
   $Res call({
     Object? files = null,
     Object? fetchMode = null,
+    Object? attachmentType = null,
   }) {
     return _then(_$_DownloadFile(
       files: null == files
@@ -269,7 +277,11 @@ class __$$_DownloadFileCopyWithImpl<$Res>
       fetchMode: null == fetchMode
           ? _value.fetchMode
           : fetchMode // ignore: cast_nullable_to_non_nullable
-              as FileOperationhMode,
+              as FileOperationMode,
+      attachmentType: null == attachmentType
+          ? _value.attachmentType
+          : attachmentType // ignore: cast_nullable_to_non_nullable
+              as AttachmentType,
     ));
   }
 }
@@ -278,7 +290,9 @@ class __$$_DownloadFileCopyWithImpl<$Res>
 
 class _$_DownloadFile implements _DownloadFile {
   const _$_DownloadFile(
-      {required final List<PoDocuments> files, required this.fetchMode})
+      {required final List<PoDocuments> files,
+      required this.fetchMode,
+      this.attachmentType = AttachmentType.downloadPOAttachment})
       : _files = files;
 
   final List<PoDocuments> _files;
@@ -289,11 +303,14 @@ class _$_DownloadFile implements _DownloadFile {
   }
 
   @override
-  final FileOperationhMode fetchMode;
+  final FileOperationMode fetchMode;
+  @override
+  @JsonKey()
+  final AttachmentType attachmentType;
 
   @override
   String toString() {
-    return 'PoAttachmentEvent.downloadFile(files: $files, fetchMode: $fetchMode)';
+    return 'PoAttachmentEvent.downloadFile(files: $files, fetchMode: $fetchMode, attachmentType: $attachmentType)';
   }
 
   @override
@@ -303,12 +320,14 @@ class _$_DownloadFile implements _DownloadFile {
             other is _$_DownloadFile &&
             const DeepCollectionEquality().equals(other._files, _files) &&
             (identical(other.fetchMode, fetchMode) ||
-                other.fetchMode == fetchMode));
+                other.fetchMode == fetchMode) &&
+            (identical(other.attachmentType, attachmentType) ||
+                other.attachmentType == attachmentType));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_files), fetchMode);
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(_files), fetchMode, attachmentType);
 
   @JsonKey(ignore: true)
   @override
@@ -320,8 +339,8 @@ class _$_DownloadFile implements _DownloadFile {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(
-            List<PoDocuments> files, FileOperationhMode fetchMode)
+    required TResult Function(List<PoDocuments> files,
+            FileOperationMode fetchMode, AttachmentType attachmentType)
         downloadFile,
     required TResult Function(
             List<PlatformFile> files,
@@ -332,14 +351,15 @@ class _$_DownloadFile implements _DownloadFile {
             List<PoDocuments> uploadedPODocument)
         uploadFile,
   }) {
-    return downloadFile(files, fetchMode);
+    return downloadFile(files, fetchMode, attachmentType);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(List<PoDocuments> files, FileOperationhMode fetchMode)?
+    TResult? Function(List<PoDocuments> files, FileOperationMode fetchMode,
+            AttachmentType attachmentType)?
         downloadFile,
     TResult? Function(
             List<PlatformFile> files,
@@ -350,14 +370,15 @@ class _$_DownloadFile implements _DownloadFile {
             List<PoDocuments> uploadedPODocument)?
         uploadFile,
   }) {
-    return downloadFile?.call(files, fetchMode);
+    return downloadFile?.call(files, fetchMode, attachmentType);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(List<PoDocuments> files, FileOperationhMode fetchMode)?
+    TResult Function(List<PoDocuments> files, FileOperationMode fetchMode,
+            AttachmentType attachmentType)?
         downloadFile,
     TResult Function(
             List<PlatformFile> files,
@@ -370,7 +391,7 @@ class _$_DownloadFile implements _DownloadFile {
     required TResult orElse(),
   }) {
     if (downloadFile != null) {
-      return downloadFile(files, fetchMode);
+      return downloadFile(files, fetchMode, attachmentType);
     }
     return orElse();
   }
@@ -413,10 +434,12 @@ class _$_DownloadFile implements _DownloadFile {
 abstract class _DownloadFile implements PoAttachmentEvent {
   const factory _DownloadFile(
       {required final List<PoDocuments> files,
-      required final FileOperationhMode fetchMode}) = _$_DownloadFile;
+      required final FileOperationMode fetchMode,
+      final AttachmentType attachmentType}) = _$_DownloadFile;
 
   List<PoDocuments> get files;
-  FileOperationhMode get fetchMode;
+  FileOperationMode get fetchMode;
+  AttachmentType get attachmentType;
   @JsonKey(ignore: true)
   _$$_DownloadFileCopyWith<_$_DownloadFile> get copyWith =>
       throw _privateConstructorUsedError;
@@ -589,8 +612,8 @@ class _$_UpLoadFile implements _UpLoadFile {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(
-            List<PoDocuments> files, FileOperationhMode fetchMode)
+    required TResult Function(List<PoDocuments> files,
+            FileOperationMode fetchMode, AttachmentType attachmentType)
         downloadFile,
     required TResult Function(
             List<PlatformFile> files,
@@ -609,7 +632,8 @@ class _$_UpLoadFile implements _UpLoadFile {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(List<PoDocuments> files, FileOperationhMode fetchMode)?
+    TResult? Function(List<PoDocuments> files, FileOperationMode fetchMode,
+            AttachmentType attachmentType)?
         downloadFile,
     TResult? Function(
             List<PlatformFile> files,
@@ -628,7 +652,8 @@ class _$_UpLoadFile implements _UpLoadFile {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(List<PoDocuments> files, FileOperationhMode fetchMode)?
+    TResult Function(List<PoDocuments> files, FileOperationMode fetchMode,
+            AttachmentType attachmentType)?
         downloadFile,
     TResult Function(
             List<PlatformFile> files,
@@ -707,8 +732,7 @@ mixin _$PoAttachmentState {
   bool get isFetching => throw _privateConstructorUsedError;
   List<PoDocumentsBuffer> get fileData => throw _privateConstructorUsedError;
   List<PoDocuments> get fileUrl => throw _privateConstructorUsedError;
-  FileOperationhMode get fileOperationhMode =>
-      throw _privateConstructorUsedError;
+  FileOperationMode get fileOperationMode => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption =>
       throw _privateConstructorUsedError;
 
@@ -727,7 +751,7 @@ abstract class $PoAttachmentStateCopyWith<$Res> {
       {bool isFetching,
       List<PoDocumentsBuffer> fileData,
       List<PoDocuments> fileUrl,
-      FileOperationhMode fileOperationhMode,
+      FileOperationMode fileOperationMode,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption});
 }
 
@@ -747,7 +771,7 @@ class _$PoAttachmentStateCopyWithImpl<$Res, $Val extends PoAttachmentState>
     Object? isFetching = null,
     Object? fileData = null,
     Object? fileUrl = null,
-    Object? fileOperationhMode = null,
+    Object? fileOperationMode = null,
     Object? failureOrSuccessOption = null,
   }) {
     return _then(_value.copyWith(
@@ -763,10 +787,10 @@ class _$PoAttachmentStateCopyWithImpl<$Res, $Val extends PoAttachmentState>
           ? _value.fileUrl
           : fileUrl // ignore: cast_nullable_to_non_nullable
               as List<PoDocuments>,
-      fileOperationhMode: null == fileOperationhMode
-          ? _value.fileOperationhMode
-          : fileOperationhMode // ignore: cast_nullable_to_non_nullable
-              as FileOperationhMode,
+      fileOperationMode: null == fileOperationMode
+          ? _value.fileOperationMode
+          : fileOperationMode // ignore: cast_nullable_to_non_nullable
+              as FileOperationMode,
       failureOrSuccessOption: null == failureOrSuccessOption
           ? _value.failureOrSuccessOption
           : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
@@ -787,7 +811,7 @@ abstract class _$$_PoAttachmentStateCopyWith<$Res>
       {bool isFetching,
       List<PoDocumentsBuffer> fileData,
       List<PoDocuments> fileUrl,
-      FileOperationhMode fileOperationhMode,
+      FileOperationMode fileOperationMode,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption});
 }
 
@@ -805,7 +829,7 @@ class __$$_PoAttachmentStateCopyWithImpl<$Res>
     Object? isFetching = null,
     Object? fileData = null,
     Object? fileUrl = null,
-    Object? fileOperationhMode = null,
+    Object? fileOperationMode = null,
     Object? failureOrSuccessOption = null,
   }) {
     return _then(_$_PoAttachmentState(
@@ -821,10 +845,10 @@ class __$$_PoAttachmentStateCopyWithImpl<$Res>
           ? _value._fileUrl
           : fileUrl // ignore: cast_nullable_to_non_nullable
               as List<PoDocuments>,
-      fileOperationhMode: null == fileOperationhMode
-          ? _value.fileOperationhMode
-          : fileOperationhMode // ignore: cast_nullable_to_non_nullable
-              as FileOperationhMode,
+      fileOperationMode: null == fileOperationMode
+          ? _value.fileOperationMode
+          : fileOperationMode // ignore: cast_nullable_to_non_nullable
+              as FileOperationMode,
       failureOrSuccessOption: null == failureOrSuccessOption
           ? _value.failureOrSuccessOption
           : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
@@ -840,7 +864,7 @@ class _$_PoAttachmentState extends _PoAttachmentState {
       {required this.isFetching,
       required final List<PoDocumentsBuffer> fileData,
       required final List<PoDocuments> fileUrl,
-      required this.fileOperationhMode,
+      required this.fileOperationMode,
       required this.failureOrSuccessOption})
       : _fileData = fileData,
         _fileUrl = fileUrl,
@@ -863,13 +887,13 @@ class _$_PoAttachmentState extends _PoAttachmentState {
   }
 
   @override
-  final FileOperationhMode fileOperationhMode;
+  final FileOperationMode fileOperationMode;
   @override
   final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption;
 
   @override
   String toString() {
-    return 'PoAttachmentState(isFetching: $isFetching, fileData: $fileData, fileUrl: $fileUrl, fileOperationhMode: $fileOperationhMode, failureOrSuccessOption: $failureOrSuccessOption)';
+    return 'PoAttachmentState(isFetching: $isFetching, fileData: $fileData, fileUrl: $fileUrl, fileOperationMode: $fileOperationMode, failureOrSuccessOption: $failureOrSuccessOption)';
   }
 
   @override
@@ -881,8 +905,8 @@ class _$_PoAttachmentState extends _PoAttachmentState {
                 other.isFetching == isFetching) &&
             const DeepCollectionEquality().equals(other._fileData, _fileData) &&
             const DeepCollectionEquality().equals(other._fileUrl, _fileUrl) &&
-            (identical(other.fileOperationhMode, fileOperationhMode) ||
-                other.fileOperationhMode == fileOperationhMode) &&
+            (identical(other.fileOperationMode, fileOperationMode) ||
+                other.fileOperationMode == fileOperationMode) &&
             (identical(other.failureOrSuccessOption, failureOrSuccessOption) ||
                 other.failureOrSuccessOption == failureOrSuccessOption));
   }
@@ -893,7 +917,7 @@ class _$_PoAttachmentState extends _PoAttachmentState {
       isFetching,
       const DeepCollectionEquality().hash(_fileData),
       const DeepCollectionEquality().hash(_fileUrl),
-      fileOperationhMode,
+      fileOperationMode,
       failureOrSuccessOption);
 
   @JsonKey(ignore: true)
@@ -909,7 +933,7 @@ abstract class _PoAttachmentState extends PoAttachmentState {
       {required final bool isFetching,
       required final List<PoDocumentsBuffer> fileData,
       required final List<PoDocuments> fileUrl,
-      required final FileOperationhMode fileOperationhMode,
+      required final FileOperationMode fileOperationMode,
       required final Option<Either<ApiFailure, dynamic>>
           failureOrSuccessOption}) = _$_PoAttachmentState;
   const _PoAttachmentState._() : super._();
@@ -921,7 +945,7 @@ abstract class _PoAttachmentState extends PoAttachmentState {
   @override
   List<PoDocuments> get fileUrl;
   @override
-  FileOperationhMode get fileOperationhMode;
+  FileOperationMode get fileOperationMode;
   @override
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption;
   @override

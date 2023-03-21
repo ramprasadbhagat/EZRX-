@@ -3,8 +3,8 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
-import 'package:ezrxmobile/domain/returns/entities/approver_return_request.dart';
-import 'package:ezrxmobile/domain/returns/entities/approver_return_requests_id.dart';
+import 'package:ezrxmobile/domain/returns/entities/request_information.dart';
+import 'package:ezrxmobile/domain/returns/entities/return_requests_id.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_approver_filter.dart';
 import 'package:ezrxmobile/domain/returns/repository/i_return_approver_repository.dart';
@@ -32,43 +32,43 @@ class ReturnApproverRepository implements IReturnApproverRepository {
   });
 
   @override
-  Future<Either<ApiFailure, List<ApproverReturnRequest>>> getReturnInformation({
-    required List<ApproverReturnRequestsId> returnRequestIds,
+  Future<Either<ApiFailure, List<RequestInformation>>> getReturnInformation({
+    required List<ReturnRequestsId> returnRequestIds,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
-        final returnRequestInformations = await Future.wait(returnRequestIds
+        final returnRequestInformation = await Future.wait(returnRequestIds
             .map(
               (e) async => await returnRequestInformationLocalDataSource
-                  .getApproverReturnRequestInfomration(
+                  .getApproverReturnRequestInformation(
                 returnRequestId: e.requestId,
               ),
             )
             .toList());
 
-        return Right(returnRequestInformations);
+        return Right(returnRequestInformation);
       } catch (e) {
         return Left(FailureHandler.handleFailure(e));
       }
     }
     try {
-      final returnRequestInformations = await Future.wait(returnRequestIds
+      final returnRequestInformation = await Future.wait(returnRequestIds
           .map(
             (e) async => await returnRequestInformationRemoteDataSource
-                .getApproverReturnRequestInfomration(
+                .getApproverReturnRequestInformation(
               returnRequestId: e.requestId,
             ),
           )
           .toList());
 
-      return Right(returnRequestInformations);
+      return Right(returnRequestInformation);
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
     }
   }
 
   @override
-  Future<Either<ApiFailure, List<ApproverReturnRequestsId>>> getReturnRequests({
+  Future<Either<ApiFailure, List<ReturnRequestsId>>> getReturnRequests({
     required User user,
     required int offset,
     required int pageSize,

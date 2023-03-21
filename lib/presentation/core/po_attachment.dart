@@ -62,7 +62,7 @@ class _PoAttachmentState extends State<PoAttachment> {
       children: [
         BlocListener<PoAttachmentBloc, PoAttachmentState>(
           listenWhen: (previous, current) =>
-              previous != current && current.fileDownloaing,
+              previous != current && current.fileDownloading,
           listener: (context, state) async {
             state.failureOrSuccessOption.fold(
               () => {},
@@ -71,7 +71,7 @@ class _PoAttachmentState extends State<PoAttachment> {
                   ErrorUtils.handleApiFailure(context, failure);
                 },
                 (r) async {
-                  if (state.fileOperationhMode == FileOperationhMode.view) {
+                  if (state.fileOperationMode == FileOperationMode.view) {
                     await openFile(
                       state.fileData.first,
                     );
@@ -118,7 +118,7 @@ class _PoAttachmentState extends State<PoAttachment> {
                                           .read<PoAttachmentBloc>()
                                           .add(PoAttachmentEvent.downloadFile(
                                             files: [poDocuments],
-                                            fetchMode: FileOperationhMode.view,
+                                            fetchMode: FileOperationMode.view,
                                           ));
                                     },
                                     child: _PoAttachmentWidget(
@@ -204,7 +204,7 @@ class _PoAttachmentState extends State<PoAttachment> {
                               context.read<PoAttachmentBloc>().add(
                                     PoAttachmentEvent.downloadFile(
                                       files: widget.poDocuments,
-                                      fetchMode: FileOperationhMode.download,
+                                      fetchMode: FileOperationMode.download,
                                     ),
                                   );
                             },

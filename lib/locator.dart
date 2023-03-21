@@ -25,6 +25,7 @@ import 'package:ezrxmobile/application/order/tender_contract/tender_contract_lis
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_summary/return_summary_bloc.dart';
 import 'package:ezrxmobile/application/returns/request_return_filter/request_return_filter_bloc.dart';
+import 'package:ezrxmobile/application/returns/return_summary_details/return_summary_details_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_summary_filter/return_summary_filter_bloc.dart';
 import 'package:ezrxmobile/domain/order/repository/i_combo_deal_repository.dart';
 import 'package:ezrxmobile/infrastructure/core/common/file_picker.dart';
@@ -199,7 +200,6 @@ import 'package:ezrxmobile/infrastructure/order/repository/price_override_reposi
 import 'package:ezrxmobile/infrastructure/order/repository/tender_contract_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/valid_customer_material_repository.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/approver_return_request_information_local.dart';
-import 'package:ezrxmobile/infrastructure/returns/datasource/approver_return_request_information_query.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/approver_return_request_information_remote.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/approver_return_request_query.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/approver_return_requests_local.dart';
@@ -207,9 +207,12 @@ import 'package:ezrxmobile/infrastructure/returns/datasource/approver_return_req
 import 'package:ezrxmobile/infrastructure/returns/datasource/policy_configuration_local.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/policy_configuration_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/policy_configuration_remote.dart';
+import 'package:ezrxmobile/infrastructure/returns/datasource/request_information_query.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/request_return_local.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/request_return_remote.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_request_list_query.dart';
+import 'package:ezrxmobile/infrastructure/returns/datasource/return_summary_details_local.dart';
+import 'package:ezrxmobile/infrastructure/returns/datasource/return_summary_details_remote.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_summary_local.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_summary_remote.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_summary_request_by_user_query_mutation.dart';
@@ -222,6 +225,7 @@ import 'package:ezrxmobile/infrastructure/returns/datasource/user_restriction_re
 import 'package:ezrxmobile/infrastructure/returns/repository/policy_configuration_repository.dart';
 import 'package:ezrxmobile/infrastructure/returns/repository/request_return_repository.dart';
 import 'package:ezrxmobile/infrastructure/returns/repository/return_approver_repository.dart';
+import 'package:ezrxmobile/infrastructure/returns/repository/return_summary_details_repository.dart';
 import 'package:ezrxmobile/infrastructure/returns/repository/return_summary_repository.dart';
 import 'package:ezrxmobile/infrastructure/returns/repository/usage_code_repository.dart';
 import 'package:ezrxmobile/infrastructure/returns/repository/user_restriction_repository.dart';
@@ -1608,7 +1612,7 @@ void setupLocator() {
     () => ApproverReturnRequestQuery(),
   );
   locator.registerLazySingleton(
-    () => ApproverReturnRequestInformationQuery(),
+    () => RequestInformationQuery(),
   );
   locator.registerLazySingleton(
     () => ApproverReturnRequestsLocal(),
@@ -1629,8 +1633,7 @@ void setupLocator() {
       config: locator<Config>(),
       httpService: locator<HttpService>(),
       dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
-      approverReturnRequestInformationQuery:
-          locator<ApproverReturnRequestInformationQuery>(),
+      approverReturnRequestInformationQuery: locator<RequestInformationQuery>(),
     ),
   );
 
@@ -1753,6 +1756,40 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => ScanMaterialInfoBloc(
       scanInfoRepository: locator<ScanMaterialInfoRepository>(),
+    ),
+  );
+
+  //============================================================
+  //  Return Summary Details
+  //
+  //============================================================
+
+  locator.registerLazySingleton(
+      () => ReturnSummaryDetailsRequestInformationLocal(),);
+
+
+  locator.registerLazySingleton(
+    () => ReturnSummaryDetailsRepository(
+      config: locator<Config>(),
+      returnSummaryDetailsRequestInformationLocal:
+          locator<ReturnSummaryDetailsRequestInformationLocal>(),
+      returnSummaryDetailsRequestInformationRemote:
+          locator<ReturnSummaryDetailsRequestInformationRemote>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => ReturnSummaryDetailsBloc(
+      returnSummaryDetailsRepository: locator<ReturnSummaryDetailsRepository>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => ReturnSummaryDetailsRequestInformationRemote(
+      config: locator<Config>(),
+      httpService: locator<HttpService>(),
+      requestInformationQuery: locator<RequestInformationQuery>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
     ),
   );
 }

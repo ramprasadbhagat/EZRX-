@@ -57,7 +57,7 @@ void main() {
           .thenAnswer((invocation) async => PoDocumentsBuffer.empty());
 
       final result = await orderHistoryDetailsPoDocumentRepository
-          .downloadFiles(emptyFile);
+          .downloadFiles(emptyFile, AttachmentType.downloadPOAttachment);
       expect(
         result.isRight(),
         true,
@@ -70,7 +70,7 @@ void main() {
           .thenThrow((invocation) async => MockException());
 
       final result = await orderHistoryDetailsPoDocumentRepository
-          .downloadFiles([emptyFileMap]);
+          .downloadFiles([emptyFileMap], AttachmentType.downloadPOAttachment);
       expect(
         result.isLeft(),
         true,
@@ -79,11 +79,11 @@ void main() {
     test('get orderHistoryDetailsPoDocument successfully remote', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
       when(() =>
-              orderHistoryDetailsPoDocumentDownloadRemote.fileDownload('', ''))
+              orderHistoryDetailsPoDocumentDownloadRemote.fileDownload('', '',AttachmentType.downloadPOAttachment))
           .thenAnswer((invocation) async => PoDocumentsBuffer.empty());
 
       final result = await orderHistoryDetailsPoDocumentRepository
-          .downloadFiles(emptyFile);
+          .downloadFiles(emptyFile, AttachmentType.downloadPOAttachment);
       expect(
         result.isRight(),
         true,
@@ -92,11 +92,11 @@ void main() {
     test('get orderHistoryDetailsPoDocument fail remote', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
       when(() =>
-              orderHistoryDetailsPoDocumentDownloadRemote.fileDownload('', ''))
+              orderHistoryDetailsPoDocumentDownloadRemote.fileDownload('', '', AttachmentType.downloadPOAttachment))
           .thenThrow((invocation) async => MockException());
 
       final result = await orderHistoryDetailsPoDocumentRepository
-          .downloadFiles([emptyFileMap]);
+          .downloadFiles([emptyFileMap], AttachmentType.downloadPOAttachment);
       expect(
         result.isLeft(),
         true,
