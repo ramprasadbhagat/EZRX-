@@ -27,6 +27,14 @@ mixin _$ComboDealPrincipleDetailEvent {
             ShipToInfo shipToInfo,
             List<String> principles)
         fetch,
+    required TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            List<String> principles)
+        loadMore,
     required TResult Function(Map<MaterialNumber, MaterialPriceDetail> priceMap,
             PriceComboDeal comboDeal)
         setPriceInfo,
@@ -46,6 +54,14 @@ mixin _$ComboDealPrincipleDetailEvent {
             ShipToInfo shipToInfo,
             List<String> principles)?
         fetch,
+    TResult? Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            List<String> principles)?
+        loadMore,
     TResult? Function(Map<MaterialNumber, MaterialPriceDetail> priceMap,
             PriceComboDeal comboDeal)?
         setPriceInfo,
@@ -65,6 +81,14 @@ mixin _$ComboDealPrincipleDetailEvent {
             ShipToInfo shipToInfo,
             List<String> principles)?
         fetch,
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            List<String> principles)?
+        loadMore,
     TResult Function(Map<MaterialNumber, MaterialPriceDetail> priceMap,
             PriceComboDeal comboDeal)?
         setPriceInfo,
@@ -78,6 +102,7 @@ mixin _$ComboDealPrincipleDetailEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_SetPriceInfo value) setPriceInfo,
     required TResult Function(_SetComboDealInfo value) setComboDealInfo,
     required TResult Function(_UpdateItemQuantity value) updateItemQuantity,
@@ -88,6 +113,7 @@ mixin _$ComboDealPrincipleDetailEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_SetPriceInfo value)? setPriceInfo,
     TResult? Function(_SetComboDealInfo value)? setComboDealInfo,
     TResult? Function(_UpdateItemQuantity value)? updateItemQuantity,
@@ -98,6 +124,7 @@ mixin _$ComboDealPrincipleDetailEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_LoadMore value)? loadMore,
     TResult Function(_SetPriceInfo value)? setPriceInfo,
     TResult Function(_SetComboDealInfo value)? setComboDealInfo,
     TResult Function(_UpdateItemQuantity value)? updateItemQuantity,
@@ -175,6 +202,14 @@ class _$_Initialize implements _Initialize {
             ShipToInfo shipToInfo,
             List<String> principles)
         fetch,
+    required TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            List<String> principles)
+        loadMore,
     required TResult Function(Map<MaterialNumber, MaterialPriceDetail> priceMap,
             PriceComboDeal comboDeal)
         setPriceInfo,
@@ -197,6 +232,14 @@ class _$_Initialize implements _Initialize {
             ShipToInfo shipToInfo,
             List<String> principles)?
         fetch,
+    TResult? Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            List<String> principles)?
+        loadMore,
     TResult? Function(Map<MaterialNumber, MaterialPriceDetail> priceMap,
             PriceComboDeal comboDeal)?
         setPriceInfo,
@@ -219,6 +262,14 @@ class _$_Initialize implements _Initialize {
             ShipToInfo shipToInfo,
             List<String> principles)?
         fetch,
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            List<String> principles)?
+        loadMore,
     TResult Function(Map<MaterialNumber, MaterialPriceDetail> priceMap,
             PriceComboDeal comboDeal)?
         setPriceInfo,
@@ -238,6 +289,7 @@ class _$_Initialize implements _Initialize {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_SetPriceInfo value) setPriceInfo,
     required TResult Function(_SetComboDealInfo value) setComboDealInfo,
     required TResult Function(_UpdateItemQuantity value) updateItemQuantity,
@@ -251,6 +303,7 @@ class _$_Initialize implements _Initialize {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_SetPriceInfo value)? setPriceInfo,
     TResult? Function(_SetComboDealInfo value)? setComboDealInfo,
     TResult? Function(_UpdateItemQuantity value)? updateItemQuantity,
@@ -264,6 +317,7 @@ class _$_Initialize implements _Initialize {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_LoadMore value)? loadMore,
     TResult Function(_SetPriceInfo value)? setPriceInfo,
     TResult Function(_SetComboDealInfo value)? setComboDealInfo,
     TResult Function(_UpdateItemQuantity value)? updateItemQuantity,
@@ -468,6 +522,14 @@ class _$_Fetch implements _Fetch {
             ShipToInfo shipToInfo,
             List<String> principles)
         fetch,
+    required TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            List<String> principles)
+        loadMore,
     required TResult Function(Map<MaterialNumber, MaterialPriceDetail> priceMap,
             PriceComboDeal comboDeal)
         setPriceInfo,
@@ -491,6 +553,14 @@ class _$_Fetch implements _Fetch {
             ShipToInfo shipToInfo,
             List<String> principles)?
         fetch,
+    TResult? Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            List<String> principles)?
+        loadMore,
     TResult? Function(Map<MaterialNumber, MaterialPriceDetail> priceMap,
             PriceComboDeal comboDeal)?
         setPriceInfo,
@@ -514,6 +584,14 @@ class _$_Fetch implements _Fetch {
             ShipToInfo shipToInfo,
             List<String> principles)?
         fetch,
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            List<String> principles)?
+        loadMore,
     TResult Function(Map<MaterialNumber, MaterialPriceDetail> priceMap,
             PriceComboDeal comboDeal)?
         setPriceInfo,
@@ -534,6 +612,7 @@ class _$_Fetch implements _Fetch {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_SetPriceInfo value) setPriceInfo,
     required TResult Function(_SetComboDealInfo value) setComboDealInfo,
     required TResult Function(_UpdateItemQuantity value) updateItemQuantity,
@@ -547,6 +626,7 @@ class _$_Fetch implements _Fetch {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_SetPriceInfo value)? setPriceInfo,
     TResult? Function(_SetComboDealInfo value)? setComboDealInfo,
     TResult? Function(_UpdateItemQuantity value)? updateItemQuantity,
@@ -560,6 +640,7 @@ class _$_Fetch implements _Fetch {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_LoadMore value)? loadMore,
     TResult Function(_SetPriceInfo value)? setPriceInfo,
     TResult Function(_SetComboDealInfo value)? setComboDealInfo,
     TResult Function(_UpdateItemQuantity value)? updateItemQuantity,
@@ -590,6 +671,347 @@ abstract class _Fetch implements ComboDealPrincipleDetailEvent {
   List<String> get principles;
   @JsonKey(ignore: true)
   _$$_FetchCopyWith<_$_Fetch> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_LoadMoreCopyWith<$Res> {
+  factory _$$_LoadMoreCopyWith(
+          _$_LoadMore value, $Res Function(_$_LoadMore) then) =
+      __$$_LoadMoreCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {User user,
+      SalesOrganisation salesOrganisation,
+      SalesOrganisationConfigs salesConfigs,
+      CustomerCodeInfo customerCodeInfo,
+      ShipToInfo shipToInfo,
+      List<String> principles});
+
+  $UserCopyWith<$Res> get user;
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
+  $SalesOrganisationConfigsCopyWith<$Res> get salesConfigs;
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
+  $ShipToInfoCopyWith<$Res> get shipToInfo;
+}
+
+/// @nodoc
+class __$$_LoadMoreCopyWithImpl<$Res>
+    extends _$ComboDealPrincipleDetailEventCopyWithImpl<$Res, _$_LoadMore>
+    implements _$$_LoadMoreCopyWith<$Res> {
+  __$$_LoadMoreCopyWithImpl(
+      _$_LoadMore _value, $Res Function(_$_LoadMore) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? user = null,
+    Object? salesOrganisation = null,
+    Object? salesConfigs = null,
+    Object? customerCodeInfo = null,
+    Object? shipToInfo = null,
+    Object? principles = null,
+  }) {
+    return _then(_$_LoadMore(
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
+      salesOrganisation: null == salesOrganisation
+          ? _value.salesOrganisation
+          : salesOrganisation // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
+      salesConfigs: null == salesConfigs
+          ? _value.salesConfigs
+          : salesConfigs // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisationConfigs,
+      customerCodeInfo: null == customerCodeInfo
+          ? _value.customerCodeInfo
+          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
+      shipToInfo: null == shipToInfo
+          ? _value.shipToInfo
+          : shipToInfo // ignore: cast_nullable_to_non_nullable
+              as ShipToInfo,
+      principles: null == principles
+          ? _value._principles
+          : principles // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
+    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
+      return _then(_value.copyWith(salesOrganisation: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationConfigsCopyWith<$Res> get salesConfigs {
+    return $SalesOrganisationConfigsCopyWith<$Res>(_value.salesConfigs,
+        (value) {
+      return _then(_value.copyWith(salesConfigs: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
+    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
+      return _then(_value.copyWith(customerCodeInfo: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ShipToInfoCopyWith<$Res> get shipToInfo {
+    return $ShipToInfoCopyWith<$Res>(_value.shipToInfo, (value) {
+      return _then(_value.copyWith(shipToInfo: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_LoadMore implements _LoadMore {
+  const _$_LoadMore(
+      {required this.user,
+      required this.salesOrganisation,
+      required this.salesConfigs,
+      required this.customerCodeInfo,
+      required this.shipToInfo,
+      required final List<String> principles})
+      : _principles = principles;
+
+  @override
+  final User user;
+  @override
+  final SalesOrganisation salesOrganisation;
+  @override
+  final SalesOrganisationConfigs salesConfigs;
+  @override
+  final CustomerCodeInfo customerCodeInfo;
+  @override
+  final ShipToInfo shipToInfo;
+  final List<String> _principles;
+  @override
+  List<String> get principles {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_principles);
+  }
+
+  @override
+  String toString() {
+    return 'ComboDealPrincipleDetailEvent.loadMore(user: $user, salesOrganisation: $salesOrganisation, salesConfigs: $salesConfigs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, principles: $principles)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_LoadMore &&
+            (identical(other.user, user) || other.user == user) &&
+            (identical(other.salesOrganisation, salesOrganisation) ||
+                other.salesOrganisation == salesOrganisation) &&
+            (identical(other.salesConfigs, salesConfigs) ||
+                other.salesConfigs == salesConfigs) &&
+            (identical(other.customerCodeInfo, customerCodeInfo) ||
+                other.customerCodeInfo == customerCodeInfo) &&
+            (identical(other.shipToInfo, shipToInfo) ||
+                other.shipToInfo == shipToInfo) &&
+            const DeepCollectionEquality()
+                .equals(other._principles, _principles));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      user,
+      salesOrganisation,
+      salesConfigs,
+      customerCodeInfo,
+      shipToInfo,
+      const DeepCollectionEquality().hash(_principles));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_LoadMoreCopyWith<_$_LoadMore> get copyWith =>
+      __$$_LoadMoreCopyWithImpl<_$_LoadMore>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialize,
+    required TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            List<String> principles)
+        fetch,
+    required TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            List<String> principles)
+        loadMore,
+    required TResult Function(Map<MaterialNumber, MaterialPriceDetail> priceMap,
+            PriceComboDeal comboDeal)
+        setPriceInfo,
+    required TResult Function(ComboDeal comboDealInfo) setComboDealInfo,
+    required TResult Function(MaterialNumber item, int qty) updateItemQuantity,
+    required TResult Function(MaterialNumber item) updateItemSelection,
+  }) {
+    return loadMore(user, salesOrganisation, salesConfigs, customerCodeInfo,
+        shipToInfo, principles);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialize,
+    TResult? Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            List<String> principles)?
+        fetch,
+    TResult? Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            List<String> principles)?
+        loadMore,
+    TResult? Function(Map<MaterialNumber, MaterialPriceDetail> priceMap,
+            PriceComboDeal comboDeal)?
+        setPriceInfo,
+    TResult? Function(ComboDeal comboDealInfo)? setComboDealInfo,
+    TResult? Function(MaterialNumber item, int qty)? updateItemQuantity,
+    TResult? Function(MaterialNumber item)? updateItemSelection,
+  }) {
+    return loadMore?.call(user, salesOrganisation, salesConfigs,
+        customerCodeInfo, shipToInfo, principles);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialize,
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            List<String> principles)?
+        fetch,
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            List<String> principles)?
+        loadMore,
+    TResult Function(Map<MaterialNumber, MaterialPriceDetail> priceMap,
+            PriceComboDeal comboDeal)?
+        setPriceInfo,
+    TResult Function(ComboDeal comboDealInfo)? setComboDealInfo,
+    TResult Function(MaterialNumber item, int qty)? updateItemQuantity,
+    TResult Function(MaterialNumber item)? updateItemSelection,
+    required TResult orElse(),
+  }) {
+    if (loadMore != null) {
+      return loadMore(user, salesOrganisation, salesConfigs, customerCodeInfo,
+          shipToInfo, principles);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialize value) initialize,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_SetPriceInfo value) setPriceInfo,
+    required TResult Function(_SetComboDealInfo value) setComboDealInfo,
+    required TResult Function(_UpdateItemQuantity value) updateItemQuantity,
+    required TResult Function(_UpdateItemSelection value) updateItemSelection,
+  }) {
+    return loadMore(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialize value)? initialize,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_SetPriceInfo value)? setPriceInfo,
+    TResult? Function(_SetComboDealInfo value)? setComboDealInfo,
+    TResult? Function(_UpdateItemQuantity value)? updateItemQuantity,
+    TResult? Function(_UpdateItemSelection value)? updateItemSelection,
+  }) {
+    return loadMore?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialize value)? initialize,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_SetPriceInfo value)? setPriceInfo,
+    TResult Function(_SetComboDealInfo value)? setComboDealInfo,
+    TResult Function(_UpdateItemQuantity value)? updateItemQuantity,
+    TResult Function(_UpdateItemSelection value)? updateItemSelection,
+    required TResult orElse(),
+  }) {
+    if (loadMore != null) {
+      return loadMore(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _LoadMore implements ComboDealPrincipleDetailEvent {
+  const factory _LoadMore(
+      {required final User user,
+      required final SalesOrganisation salesOrganisation,
+      required final SalesOrganisationConfigs salesConfigs,
+      required final CustomerCodeInfo customerCodeInfo,
+      required final ShipToInfo shipToInfo,
+      required final List<String> principles}) = _$_LoadMore;
+
+  User get user;
+  SalesOrganisation get salesOrganisation;
+  SalesOrganisationConfigs get salesConfigs;
+  CustomerCodeInfo get customerCodeInfo;
+  ShipToInfo get shipToInfo;
+  List<String> get principles;
+  @JsonKey(ignore: true)
+  _$$_LoadMoreCopyWith<_$_LoadMore> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -696,6 +1118,14 @@ class _$_SetPriceInfo implements _SetPriceInfo {
             ShipToInfo shipToInfo,
             List<String> principles)
         fetch,
+    required TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            List<String> principles)
+        loadMore,
     required TResult Function(Map<MaterialNumber, MaterialPriceDetail> priceMap,
             PriceComboDeal comboDeal)
         setPriceInfo,
@@ -718,6 +1148,14 @@ class _$_SetPriceInfo implements _SetPriceInfo {
             ShipToInfo shipToInfo,
             List<String> principles)?
         fetch,
+    TResult? Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            List<String> principles)?
+        loadMore,
     TResult? Function(Map<MaterialNumber, MaterialPriceDetail> priceMap,
             PriceComboDeal comboDeal)?
         setPriceInfo,
@@ -740,6 +1178,14 @@ class _$_SetPriceInfo implements _SetPriceInfo {
             ShipToInfo shipToInfo,
             List<String> principles)?
         fetch,
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            List<String> principles)?
+        loadMore,
     TResult Function(Map<MaterialNumber, MaterialPriceDetail> priceMap,
             PriceComboDeal comboDeal)?
         setPriceInfo,
@@ -759,6 +1205,7 @@ class _$_SetPriceInfo implements _SetPriceInfo {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_SetPriceInfo value) setPriceInfo,
     required TResult Function(_SetComboDealInfo value) setComboDealInfo,
     required TResult Function(_UpdateItemQuantity value) updateItemQuantity,
@@ -772,6 +1219,7 @@ class _$_SetPriceInfo implements _SetPriceInfo {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_SetPriceInfo value)? setPriceInfo,
     TResult? Function(_SetComboDealInfo value)? setComboDealInfo,
     TResult? Function(_UpdateItemQuantity value)? updateItemQuantity,
@@ -785,6 +1233,7 @@ class _$_SetPriceInfo implements _SetPriceInfo {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_LoadMore value)? loadMore,
     TResult Function(_SetPriceInfo value)? setPriceInfo,
     TResult Function(_SetComboDealInfo value)? setComboDealInfo,
     TResult Function(_UpdateItemQuantity value)? updateItemQuantity,
@@ -894,6 +1343,14 @@ class _$_SetComboDealInfo implements _SetComboDealInfo {
             ShipToInfo shipToInfo,
             List<String> principles)
         fetch,
+    required TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            List<String> principles)
+        loadMore,
     required TResult Function(Map<MaterialNumber, MaterialPriceDetail> priceMap,
             PriceComboDeal comboDeal)
         setPriceInfo,
@@ -916,6 +1373,14 @@ class _$_SetComboDealInfo implements _SetComboDealInfo {
             ShipToInfo shipToInfo,
             List<String> principles)?
         fetch,
+    TResult? Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            List<String> principles)?
+        loadMore,
     TResult? Function(Map<MaterialNumber, MaterialPriceDetail> priceMap,
             PriceComboDeal comboDeal)?
         setPriceInfo,
@@ -938,6 +1403,14 @@ class _$_SetComboDealInfo implements _SetComboDealInfo {
             ShipToInfo shipToInfo,
             List<String> principles)?
         fetch,
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            List<String> principles)?
+        loadMore,
     TResult Function(Map<MaterialNumber, MaterialPriceDetail> priceMap,
             PriceComboDeal comboDeal)?
         setPriceInfo,
@@ -957,6 +1430,7 @@ class _$_SetComboDealInfo implements _SetComboDealInfo {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_SetPriceInfo value) setPriceInfo,
     required TResult Function(_SetComboDealInfo value) setComboDealInfo,
     required TResult Function(_UpdateItemQuantity value) updateItemQuantity,
@@ -970,6 +1444,7 @@ class _$_SetComboDealInfo implements _SetComboDealInfo {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_SetPriceInfo value)? setPriceInfo,
     TResult? Function(_SetComboDealInfo value)? setComboDealInfo,
     TResult? Function(_UpdateItemQuantity value)? updateItemQuantity,
@@ -983,6 +1458,7 @@ class _$_SetComboDealInfo implements _SetComboDealInfo {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_LoadMore value)? loadMore,
     TResult Function(_SetPriceInfo value)? setPriceInfo,
     TResult Function(_SetComboDealInfo value)? setComboDealInfo,
     TResult Function(_UpdateItemQuantity value)? updateItemQuantity,
@@ -1088,6 +1564,14 @@ class _$_UpdateItemQuantity implements _UpdateItemQuantity {
             ShipToInfo shipToInfo,
             List<String> principles)
         fetch,
+    required TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            List<String> principles)
+        loadMore,
     required TResult Function(Map<MaterialNumber, MaterialPriceDetail> priceMap,
             PriceComboDeal comboDeal)
         setPriceInfo,
@@ -1110,6 +1594,14 @@ class _$_UpdateItemQuantity implements _UpdateItemQuantity {
             ShipToInfo shipToInfo,
             List<String> principles)?
         fetch,
+    TResult? Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            List<String> principles)?
+        loadMore,
     TResult? Function(Map<MaterialNumber, MaterialPriceDetail> priceMap,
             PriceComboDeal comboDeal)?
         setPriceInfo,
@@ -1132,6 +1624,14 @@ class _$_UpdateItemQuantity implements _UpdateItemQuantity {
             ShipToInfo shipToInfo,
             List<String> principles)?
         fetch,
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            List<String> principles)?
+        loadMore,
     TResult Function(Map<MaterialNumber, MaterialPriceDetail> priceMap,
             PriceComboDeal comboDeal)?
         setPriceInfo,
@@ -1151,6 +1651,7 @@ class _$_UpdateItemQuantity implements _UpdateItemQuantity {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_SetPriceInfo value) setPriceInfo,
     required TResult Function(_SetComboDealInfo value) setComboDealInfo,
     required TResult Function(_UpdateItemQuantity value) updateItemQuantity,
@@ -1164,6 +1665,7 @@ class _$_UpdateItemQuantity implements _UpdateItemQuantity {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_SetPriceInfo value)? setPriceInfo,
     TResult? Function(_SetComboDealInfo value)? setComboDealInfo,
     TResult? Function(_UpdateItemQuantity value)? updateItemQuantity,
@@ -1177,6 +1679,7 @@ class _$_UpdateItemQuantity implements _UpdateItemQuantity {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_LoadMore value)? loadMore,
     TResult Function(_SetPriceInfo value)? setPriceInfo,
     TResult Function(_SetComboDealInfo value)? setComboDealInfo,
     TResult Function(_UpdateItemQuantity value)? updateItemQuantity,
@@ -1277,6 +1780,14 @@ class _$_UpdateItemSelection implements _UpdateItemSelection {
             ShipToInfo shipToInfo,
             List<String> principles)
         fetch,
+    required TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            List<String> principles)
+        loadMore,
     required TResult Function(Map<MaterialNumber, MaterialPriceDetail> priceMap,
             PriceComboDeal comboDeal)
         setPriceInfo,
@@ -1299,6 +1810,14 @@ class _$_UpdateItemSelection implements _UpdateItemSelection {
             ShipToInfo shipToInfo,
             List<String> principles)?
         fetch,
+    TResult? Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            List<String> principles)?
+        loadMore,
     TResult? Function(Map<MaterialNumber, MaterialPriceDetail> priceMap,
             PriceComboDeal comboDeal)?
         setPriceInfo,
@@ -1321,6 +1840,14 @@ class _$_UpdateItemSelection implements _UpdateItemSelection {
             ShipToInfo shipToInfo,
             List<String> principles)?
         fetch,
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            List<String> principles)?
+        loadMore,
     TResult Function(Map<MaterialNumber, MaterialPriceDetail> priceMap,
             PriceComboDeal comboDeal)?
         setPriceInfo,
@@ -1340,6 +1867,7 @@ class _$_UpdateItemSelection implements _UpdateItemSelection {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_SetPriceInfo value) setPriceInfo,
     required TResult Function(_SetComboDealInfo value) setComboDealInfo,
     required TResult Function(_UpdateItemQuantity value) updateItemQuantity,
@@ -1353,6 +1881,7 @@ class _$_UpdateItemSelection implements _UpdateItemSelection {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_SetPriceInfo value)? setPriceInfo,
     TResult? Function(_SetComboDealInfo value)? setComboDealInfo,
     TResult? Function(_UpdateItemQuantity value)? updateItemQuantity,
@@ -1366,6 +1895,7 @@ class _$_UpdateItemSelection implements _UpdateItemSelection {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_LoadMore value)? loadMore,
     TResult Function(_SetPriceInfo value)? setPriceInfo,
     TResult Function(_SetComboDealInfo value)? setComboDealInfo,
     TResult Function(_UpdateItemQuantity value)? updateItemQuantity,
@@ -1400,6 +1930,7 @@ mixin _$ComboDealPrincipleDetailState {
   bool get isFetchingPrice => throw _privateConstructorUsedError;
   bool get isFetchingComboInfo => throw _privateConstructorUsedError;
   bool get isFetchingMaterials => throw _privateConstructorUsedError;
+  bool get canLoadMore => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ComboDealPrincipleDetailStateCopyWith<ComboDealPrincipleDetailState>
@@ -1420,7 +1951,8 @@ abstract class $ComboDealPrincipleDetailStateCopyWith<$Res> {
       Map<MaterialNumber, bool> selectedItems,
       bool isFetchingPrice,
       bool isFetchingComboInfo,
-      bool isFetchingMaterials});
+      bool isFetchingMaterials,
+      bool canLoadMore});
 }
 
 /// @nodoc
@@ -1443,6 +1975,7 @@ class _$ComboDealPrincipleDetailStateCopyWithImpl<$Res,
     Object? isFetchingPrice = null,
     Object? isFetchingComboInfo = null,
     Object? isFetchingMaterials = null,
+    Object? canLoadMore = null,
   }) {
     return _then(_value.copyWith(
       apiFailureOrSuccessOption: null == apiFailureOrSuccessOption
@@ -1469,6 +2002,10 @@ class _$ComboDealPrincipleDetailStateCopyWithImpl<$Res,
           ? _value.isFetchingMaterials
           : isFetchingMaterials // ignore: cast_nullable_to_non_nullable
               as bool,
+      canLoadMore: null == canLoadMore
+          ? _value.canLoadMore
+          : canLoadMore // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -1488,7 +2025,8 @@ abstract class _$$_ComboDealPrincipleDetailStateCopyWith<$Res>
       Map<MaterialNumber, bool> selectedItems,
       bool isFetchingPrice,
       bool isFetchingComboInfo,
-      bool isFetchingMaterials});
+      bool isFetchingMaterials,
+      bool canLoadMore});
 }
 
 /// @nodoc
@@ -1510,6 +2048,7 @@ class __$$_ComboDealPrincipleDetailStateCopyWithImpl<$Res>
     Object? isFetchingPrice = null,
     Object? isFetchingComboInfo = null,
     Object? isFetchingMaterials = null,
+    Object? canLoadMore = null,
   }) {
     return _then(_$_ComboDealPrincipleDetailState(
       apiFailureOrSuccessOption: null == apiFailureOrSuccessOption
@@ -1536,6 +2075,10 @@ class __$$_ComboDealPrincipleDetailStateCopyWithImpl<$Res>
           ? _value.isFetchingMaterials
           : isFetchingMaterials // ignore: cast_nullable_to_non_nullable
               as bool,
+      canLoadMore: null == canLoadMore
+          ? _value.canLoadMore
+          : canLoadMore // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -1549,7 +2092,8 @@ class _$_ComboDealPrincipleDetailState extends _ComboDealPrincipleDetailState {
       required final Map<MaterialNumber, bool> selectedItems,
       required this.isFetchingPrice,
       required this.isFetchingComboInfo,
-      required this.isFetchingMaterials})
+      required this.isFetchingMaterials,
+      required this.canLoadMore})
       : _items = items,
         _selectedItems = selectedItems,
         super._();
@@ -1576,10 +2120,12 @@ class _$_ComboDealPrincipleDetailState extends _ComboDealPrincipleDetailState {
   final bool isFetchingComboInfo;
   @override
   final bool isFetchingMaterials;
+  @override
+  final bool canLoadMore;
 
   @override
   String toString() {
-    return 'ComboDealPrincipleDetailState(apiFailureOrSuccessOption: $apiFailureOrSuccessOption, items: $items, selectedItems: $selectedItems, isFetchingPrice: $isFetchingPrice, isFetchingComboInfo: $isFetchingComboInfo, isFetchingMaterials: $isFetchingMaterials)';
+    return 'ComboDealPrincipleDetailState(apiFailureOrSuccessOption: $apiFailureOrSuccessOption, items: $items, selectedItems: $selectedItems, isFetchingPrice: $isFetchingPrice, isFetchingComboInfo: $isFetchingComboInfo, isFetchingMaterials: $isFetchingMaterials, canLoadMore: $canLoadMore)';
   }
 
   @override
@@ -1598,7 +2144,9 @@ class _$_ComboDealPrincipleDetailState extends _ComboDealPrincipleDetailState {
             (identical(other.isFetchingComboInfo, isFetchingComboInfo) ||
                 other.isFetchingComboInfo == isFetchingComboInfo) &&
             (identical(other.isFetchingMaterials, isFetchingMaterials) ||
-                other.isFetchingMaterials == isFetchingMaterials));
+                other.isFetchingMaterials == isFetchingMaterials) &&
+            (identical(other.canLoadMore, canLoadMore) ||
+                other.canLoadMore == canLoadMore));
   }
 
   @override
@@ -1609,7 +2157,8 @@ class _$_ComboDealPrincipleDetailState extends _ComboDealPrincipleDetailState {
       const DeepCollectionEquality().hash(_selectedItems),
       isFetchingPrice,
       isFetchingComboInfo,
-      isFetchingMaterials);
+      isFetchingMaterials,
+      canLoadMore);
 
   @JsonKey(ignore: true)
   @override
@@ -1622,14 +2171,14 @@ class _$_ComboDealPrincipleDetailState extends _ComboDealPrincipleDetailState {
 abstract class _ComboDealPrincipleDetailState
     extends ComboDealPrincipleDetailState {
   const factory _ComboDealPrincipleDetailState(
-          {required final Option<Either<ApiFailure, dynamic>>
-              apiFailureOrSuccessOption,
-          required final Map<MaterialNumber, PriceAggregate> items,
-          required final Map<MaterialNumber, bool> selectedItems,
-          required final bool isFetchingPrice,
-          required final bool isFetchingComboInfo,
-          required final bool isFetchingMaterials}) =
-      _$_ComboDealPrincipleDetailState;
+      {required final Option<Either<ApiFailure, dynamic>>
+          apiFailureOrSuccessOption,
+      required final Map<MaterialNumber, PriceAggregate> items,
+      required final Map<MaterialNumber, bool> selectedItems,
+      required final bool isFetchingPrice,
+      required final bool isFetchingComboInfo,
+      required final bool isFetchingMaterials,
+      required final bool canLoadMore}) = _$_ComboDealPrincipleDetailState;
   const _ComboDealPrincipleDetailState._() : super._();
 
   @override
@@ -1644,6 +2193,8 @@ abstract class _ComboDealPrincipleDetailState
   bool get isFetchingComboInfo;
   @override
   bool get isFetchingMaterials;
+  @override
+  bool get canLoadMore;
   @override
   @JsonKey(ignore: true)
   _$$_ComboDealPrincipleDetailStateCopyWith<_$_ComboDealPrincipleDetailState>

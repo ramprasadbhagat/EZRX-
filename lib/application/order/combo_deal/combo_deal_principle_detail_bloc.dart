@@ -21,6 +21,8 @@ part 'combo_deal_principle_detail_event.dart';
 part 'combo_deal_principle_detail_state.dart';
 part 'combo_deal_principle_detail_bloc.freezed.dart';
 
+const int _defaultPageSize = 10;
+
 class ComboDealPrincipleDetailBloc
     extends Bloc<ComboDealPrincipleDetailEvent, ComboDealPrincipleDetailState> {
   final IMaterialListRepository repository;
@@ -40,7 +42,7 @@ class ComboDealPrincipleDetailBloc
           salesOrganisation: e.salesOrganisation,
           customerCodeInfo: e.customerCodeInfo,
           shipToInfo: e.shipToInfo,
-          pageSize: 10,
+          pageSize: _defaultPageSize,
           offset: 0,
           principles: e.principles,
         );
@@ -59,6 +61,7 @@ class ComboDealPrincipleDetailBloc
                 isFetchingMaterials: false,
                 isFetchingComboInfo: true,
                 isFetchingPrice: true,
+                canLoadMore: materialList.length >= _defaultPageSize,
                 items: materialList
                     .map(
                       (material) => PriceAggregate.empty().copyWith(
@@ -74,6 +77,57 @@ class ComboDealPrincipleDetailBloc
         );
       },
     );
+    on<_LoadMore>((e, emit) async {
+      if (state.isFetching || !state.canLoadMore) return;
+      emit(
+        state.copyWith(
+          isFetchingMaterials: true,
+          apiFailureOrSuccessOption: none(),
+        ),
+      );
+      final failureOrSuccess = await repository.getComboDealMaterials(
+        user: e.user,
+        salesOrganisation: e.salesOrganisation,
+        customerCodeInfo: e.customerCodeInfo,
+        shipToInfo: e.shipToInfo,
+        pageSize: _defaultPageSize,
+        offset: state.items.length,
+        principles: e.principles,
+      );
+
+      await failureOrSuccess.fold(
+        (failure) async {
+          emit(
+            state.copyWith(
+              isFetchingMaterials: false,
+              apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+            ),
+          );
+        },
+        (materialList) async {
+          emit(
+            state.copyWith(
+              isFetchingMaterials: false,
+              isFetchingComboInfo: true,
+              isFetchingPrice: true,
+              canLoadMore: materialList.length >= _defaultPageSize,
+              items: Map.from(state.items)
+                ..addAll(
+                  materialList
+                      .map(
+                        (material) => PriceAggregate.empty().copyWith(
+                          materialInfo: material,
+                          salesOrgConfig: e.salesConfigs,
+                        ),
+                      )
+                      .toList()
+                      .mapByMaterialNumber,
+                ),
+            ),
+          );
+        },
+      );
+    });
     on<_SetPriceInfo>((e, emit) {
       final itemsWithPriceInfo = state.items.map(
         (key, value) {
@@ -115,10 +169,6 @@ class ComboDealPrincipleDetailBloc
         state.copyWith(
           isFetchingComboInfo: false,
           items: itemsWithComboDealInfo,
-          selectedItems: {
-            for (final item in itemsWithComboDealInfo.values)
-              item.getMaterialNumber: false,
-          },
         ),
       );
     });

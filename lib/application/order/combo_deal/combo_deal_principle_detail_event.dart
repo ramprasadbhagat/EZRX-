@@ -11,6 +11,14 @@ class ComboDealPrincipleDetailEvent with _$ComboDealPrincipleDetailEvent {
     required ShipToInfo shipToInfo,
     required List<String> principles,
   }) = _Fetch;
+  const factory ComboDealPrincipleDetailEvent.loadMore({
+    required User user,
+    required SalesOrganisation salesOrganisation,
+    required SalesOrganisationConfigs salesConfigs,
+    required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToInfo,
+    required List<String> principles,
+  }) = _LoadMore;
   const factory ComboDealPrincipleDetailEvent.setPriceInfo({
     required Map<MaterialNumber, MaterialPriceDetail> priceMap,
     required PriceComboDeal comboDeal,

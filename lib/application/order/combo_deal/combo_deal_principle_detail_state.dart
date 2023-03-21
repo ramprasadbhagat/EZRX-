@@ -10,6 +10,7 @@ class ComboDealPrincipleDetailState with _$ComboDealPrincipleDetailState {
     required bool isFetchingPrice,
     required bool isFetchingComboInfo,
     required bool isFetchingMaterials,
+    required bool canLoadMore,
   }) = _ComboDealPrincipleDetailState;
 
   factory ComboDealPrincipleDetailState.initial() =>
@@ -19,13 +20,14 @@ class ComboDealPrincipleDetailState with _$ComboDealPrincipleDetailState {
         isFetchingPrice: false,
         isFetchingComboInfo: false,
         isFetchingMaterials: false,
+        canLoadMore: false,
         apiFailureOrSuccessOption: none(),
       );
 
   List<PriceAggregate> get allSelectedItems {
     final selectedMaterials = Map<MaterialNumber, PriceAggregate>.from(items)
       ..removeWhere(
-        (key, value) => selectedItems[key] == false,
+        (key, value) => !(selectedItems[key] ?? false),
       );
 
     return selectedMaterials.values.toList();

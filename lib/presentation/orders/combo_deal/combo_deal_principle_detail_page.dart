@@ -130,8 +130,10 @@ class ComboDealPrincipleDetailPage extends StatelessWidget
             Expanded(
               child: BlocBuilder<ComboDealPrincipleDetailBloc,
                   ComboDealPrincipleDetailState>(
+                buildWhen: (previous, current) =>
+                    previous.isFetching != current.isFetching,
                 builder: (context, state) {
-                  if (state.isFetching) {
+                  if (state.isFetching && state.items.isEmpty) {
                     return LoadingShimmer.logo(
                       key: const Key('loaderImage'),
                     );
@@ -143,36 +145,60 @@ class ComboDealPrincipleDetailPage extends StatelessWidget
                       Expanded(
                         child: ScrollList<PriceAggregate>(
                           emptyMessage: 'Combo bundle is empty'.tr(),
-                          isLoading: state.isFetchingMaterials,
-                          itemBuilder: (context, index, item) {
-                            final isSelected =
-                                state.selectedItems[item.getMaterialNumber] ??
-                                    false;
-
-                            return Card(
-                              child: ComboDealItem(
-                                material: item,
-                                isSelected: isSelected,
-                                onCheckBoxPressed: () => context
-                                    .read<ComboDealPrincipleDetailBloc>()
-                                    .add(
-                                      ComboDealPrincipleDetailEvent
-                                          .updateItemSelection(
-                                        item: item.getMaterialNumber,
-                                      ),
-                                    ),
-                                onQuantityUpdated: (qty) => context
-                                    .read<ComboDealPrincipleDetailBloc>()
-                                    .add(
-                                      ComboDealPrincipleDetailEvent
-                                          .updateItemQuantity(
-                                        item: item.getMaterialNumber,
-                                        qty: qty,
-                                      ),
-                                    ),
-                              ),
-                            );
+                          onLoadingMore: () {
+                            final eligibilityBloc =
+                                context.read<EligibilityBloc>();
+                            context.read<ComboDealPrincipleDetailBloc>().add(
+                                  ComboDealPrincipleDetailEvent.loadMore(
+                                    user: eligibilityBloc.state.user,
+                                    salesOrganisation:
+                                        eligibilityBloc.state.salesOrganisation,
+                                    salesConfigs:
+                                        eligibilityBloc.state.salesOrgConfigs,
+                                    customerCodeInfo:
+                                        eligibilityBloc.state.customerCodeInfo,
+                                    shipToInfo:
+                                        eligibilityBloc.state.shipToInfo,
+                                    principles: comboDeal.category.values,
+                                  ),
+                                );
                           },
+                          isLoading: state.isFetching,
+                          itemBuilder: (context, index, item) => BlocBuilder<
+                              ComboDealPrincipleDetailBloc,
+                              ComboDealPrincipleDetailState>(
+                            buildWhen: (previous, current) =>
+                                previous.selectedItems != current.selectedItems,
+                            builder: (context, state) {
+                              final isSelected =
+                                  state.selectedItems[item.getMaterialNumber] ??
+                                      false;
+
+                              return Card(
+                                child: ComboDealItem(
+                                  material: item,
+                                  isSelected: isSelected,
+                                  onCheckBoxPressed: () => context
+                                      .read<ComboDealPrincipleDetailBloc>()
+                                      .add(
+                                        ComboDealPrincipleDetailEvent
+                                            .updateItemSelection(
+                                          item: item.getMaterialNumber,
+                                        ),
+                                      ),
+                                  onQuantityUpdated: (qty) => context
+                                      .read<ComboDealPrincipleDetailBloc>()
+                                      .add(
+                                        ComboDealPrincipleDetailEvent
+                                            .updateItemQuantity(
+                                          item: item.getMaterialNumber,
+                                          qty: qty,
+                                        ),
+                                      ),
+                                ),
+                              );
+                            },
+                          ),
                           items: state.items.values.toList(),
                         ),
                       ),
