@@ -1,0 +1,13 @@
+{
+    "data": {
+      "returnRequestsOverviewV2": {
+        "requestSubmitted": 3,
+        "requestPendingApproval": 0,
+        "requestRejected": 0,
+        "requestForApproval": 4
+      }
+    },
+    "extensions": {
+      "trace-id": "7cd584d03a7daceaech37bdc81198887"
+    }
+  }

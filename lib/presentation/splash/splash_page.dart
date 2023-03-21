@@ -1,8 +1,8 @@
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/application/returns/returns_overview/returns_overview_bloc.dart';
 import 'package:universal_io/io.dart';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/approver/approver_bloc.dart';
@@ -384,6 +384,18 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                         .read<EligibilityBloc>()
                         .state
                         .getPNPValueMaterial,
+                  ),
+                );
+
+            context.read<ReturnsOverviewBloc>().add(
+                  ReturnsOverviewEvent.fetch(
+                    salesOrganisation:
+                        context.read<SalesOrgBloc>().state.salesOrganisation,
+                    user: context.read<UserBloc>().state.user,
+                    customerCodeInfo:
+                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                    shipToInfo:
+                        context.read<EligibilityBloc>().state.shipToInfo,
                   ),
                 );
           },

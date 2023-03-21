@@ -13,8 +13,8 @@ import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 import 'package:ezrxmobile/application/returns/return_summary_filter/return_summary_filter_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/order_storage.dart';
+import 'package:ezrxmobile/application/returns/returns_overview/returns_overview_bloc.dart';
 import 'package:universal_io/io.dart';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_localization_loader/easy_localization_loader.dart';
@@ -319,6 +319,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider<UserRestrictionDetailsBloc>(
           create: (context) => locator<UserRestrictionDetailsBloc>(),
+        ),
+        BlocProvider<ReturnsOverviewBloc>(
+          create: (context) => locator<ReturnsOverviewBloc>(),
         ),
         BlocProvider<RequestReturnBloc>(
           create: (context) => locator<RequestReturnBloc>(),

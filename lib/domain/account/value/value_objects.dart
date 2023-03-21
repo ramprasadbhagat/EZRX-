@@ -193,6 +193,14 @@ class RoleType extends ValueObject<String> {
   bool get isReturnApproverAccount =>
       isReturnApprover || isRootAdmin || isReturnAdmin;
 
+  bool get isReturnsOverviewAccessible =>
+      isRootAdmin ||
+      isReturnAdmin ||
+      isZPAdmin ||
+      isClientUser ||
+      isSalesRep ||
+      isReturnRequestor;
+
   const RoleType._(this.value);
 }
 
