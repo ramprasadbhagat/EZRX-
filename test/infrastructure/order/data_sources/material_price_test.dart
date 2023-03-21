@@ -71,7 +71,7 @@ void main() {
           }),
         );
 
-        final result = await remoteDataSource.getMaterialList(
+        final result = await remoteDataSource.getMaterialPriceList(
           customerCode: 'fake-customer-code',
           salesDeal: [],
           materialNumbers: [],
@@ -85,6 +85,51 @@ void main() {
             List.from(priceData)
                 .map((e) => PriceDto.fromJson(e).toDomain())
                 .toList());
+      });
+
+      test('Get Material Price test', () async {
+        final variables = {
+          'salesOrganisation': 'fake-sales-org',
+          'customer': 'fake-customer-code',
+          'shipToCode': 'fake-ship-code',
+          'request': {
+          'MaterialNumber': 'fake-number',
+          'salesDeal': [],
+        },
+        };
+        final res = json.decode(
+          await rootBundle
+              .loadString('assets/json/getMaterialPriceResponse.json'),
+        );
+
+        dioAdapter.onPost(
+          '/api/pricing',
+          (server) => server.reply(
+            200,
+            res,
+            delay: const Duration(seconds: 1),
+          ),
+          headers: {'Content-Type': 'application/json; charset=utf-8'},
+          data: jsonEncode({
+            'query': remoteDataSource.queryMutation.getMaterialPrice(),
+            'variables': variables
+          }),
+        );
+
+        final result = await remoteDataSource.getMaterialPrice(
+          customerCode: 'fake-customer-code',
+          salesDeal: [],
+          materialNumber: 'fake-number',
+          salesOrgCode: 'fake-sales-org',
+          shipToCode: 'fake-ship-code',
+        );
+        final priceData = res['data']['price'][0];
+
+        expect(
+            result,
+            PriceDto.fromJson(priceData).toDomain(),
+             );
+
       });
 
       test('Statuscode not equal to 200', () async {
@@ -110,7 +155,7 @@ void main() {
         );
 
         await remoteDataSource
-            .getMaterialList(
+            .getMaterialPriceList(
           customerCode: 'fake-customer-code',
           salesDeal: [],
           materialNumbers: [],
@@ -124,11 +169,14 @@ void main() {
       });
 
       test('response with errors', () async {
-        final variables = {
+         final variables = {
           'salesOrganisation': 'fake-sales-org',
           'customer': 'fake-customer-code',
           'shipToCode': 'fake-ship-code',
-          'request': [],
+          'request': {
+          'MaterialNumber': 'fake-number',
+          'salesDeal': [],
+        },
         };
 
         dioAdapter.onPost(
@@ -151,8 +199,8 @@ void main() {
         );
 
         await remoteDataSource
-            .getMaterialList(
-          customerCode: 'fake-customer-code',
+            .getMaterialPriceList(
+         customerCode: 'fake-customer-code',
           salesDeal: [],
           materialNumbers: [],
           salesOrgCode: 'fake-sales-org',

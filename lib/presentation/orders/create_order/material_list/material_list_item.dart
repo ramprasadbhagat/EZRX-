@@ -168,17 +168,25 @@ class MaterialListItem extends StatelessWidget {
         .read<MaterialPriceBloc>()
         .state
         .materialPrice[materialInfo.materialNumber];
-    if (materialPrice == null && !salesOrgConfigs.materialWithoutPrice) {
-      showSnackBar(
-        context: context,
-        message: 'Product Not Available'.tr(),
-      );
+
+    if (materialPrice == null) {
+      if(!salesOrgConfigs.materialWithoutPrice){
+        showSnackBar(
+          context: context,
+          message: 'Product Not Available'.tr(),
+        );
+      }else{
+        showSnackBar(
+          context: context,
+          message: 'Price currently unavailable for this product.'.tr(),
+        );
+      }
 
       return;
     }
 
     final comboDealInCart = context.read<CartBloc>().state.getComboDealCartItem(
-          comboDealQuery: materialPrice!.comboDeal,
+          comboDealQuery: materialPrice.comboDeal,
         );
 
     if (comboDealInCart.materials.isNotEmpty) {

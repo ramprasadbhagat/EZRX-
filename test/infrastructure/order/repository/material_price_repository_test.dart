@@ -93,14 +93,11 @@ void main() {
     });
     test('get materialPrice successfully remote', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
-      when(() => materialPriceRemoteDataSource.getMaterialList(
+      when(() => materialPriceRemoteDataSource.getMaterialPriceList(
             salesOrgCode: 'fake-name',
             customerCode: 'fake-customer-code',
             shipToCode: 'fake-ship-code',
-            materialNumbers: [
-              '1',
-              '2',
-            ],
+            materialNumbers: [],
             salesDeal: [],
           )).thenAnswer((invocation) async => <Price>[]);
 
@@ -119,7 +116,7 @@ void main() {
     });
     test('get materialPrice fail remote', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
-      when(() => materialPriceRemoteDataSource.getMaterialList(
+      when(() => materialPriceRemoteDataSource.getMaterialPriceList(
             salesOrgCode: '23456700',
             customerCode: '',
             materialNumbers: [],
@@ -141,4 +138,31 @@ void main() {
       );
     });
   });
+
+
+  test('get materialPrice successfully', () async {
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
+      when(() => materialPriceRemoteDataSource.getMaterialPrice(
+            salesOrgCode: 'fake-name',
+            customerCode: 'fake-customer-code',
+            shipToCode: 'fake-ship-code',
+            materialNumber: 'fake-number',
+            salesDeal: [],
+          )).thenAnswer((invocation) async => Price.empty().copyWith(
+            finalPrice: MaterialPrice(123),
+          ));
+
+      final result = await materialPriceRepository.getMaterialPrice(
+        customerCodeInfo: mockCustomerCodeInfo,
+        salesOrganisation: mockSalesOrganisation,
+        materialNumberList: [MaterialNumber('fake-number')],
+        salesConfigs: mockSalesConfigs,
+        shipToInfo: mockShipToInfo,
+        comboDealEligible: false,
+      );
+      expect(
+        result.isRight(),
+        true,
+      );
+    });
 }

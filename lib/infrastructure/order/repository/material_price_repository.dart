@@ -58,18 +58,48 @@ class MaterialPriceRepository implements IMaterialPriceRepository {
           ? customerCodeInfo.salesDeals.map((e) => e.getOrCrash()).toList()
           : <String>[];
 
-      final priceData = await remoteDataSource.getMaterialList(
+      final priceData = <MaterialNumber, Price>{};
+
+      await Future.wait(queryMaterialNumbers.map((e) async {
+        final price = await getPrice(
+          salesOrgCode: salesOrgCode,
+          customerCode: customerCode,
+          materialNumber: e,
+          shipToCode: shipToCode,
+          salesDeal: queryComboDeals,
+        );
+        price.fold(
+          (failure) {},
+          (price) => priceData.addAll({price.materialNumber: price}),
+        );
+      }));
+
+      return Right(
+        priceData,
+      );
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  Future<Either<ApiFailure, Price>> getPrice({
+    required String salesOrgCode,
+    required String customerCode,
+    required String shipToCode,
+    required String materialNumber,
+    required List<String> salesDeal,
+  }) async {
+    try {
+      final price = await remoteDataSource.getMaterialPrice(
         salesOrgCode: salesOrgCode,
         customerCode: customerCode,
-        materialNumbers: queryMaterialNumbers,
+        materialNumber: materialNumber,
         shipToCode: shipToCode,
-        salesDeal: queryComboDeals,
+        salesDeal: salesDeal,
       );
 
       return Right(
-        {
-          for (var price in priceData) price.materialNumber: price,
-        },
+        price,
       );
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));

@@ -22,7 +22,9 @@ class MaterialPriceRemoteDataSource {
     required this.config,
   });
 
-  Future<List<Price>> getMaterialList({
+
+  //TODO: Will revisit once BE apis are enhanced
+  Future<List<Price>> getMaterialPriceList({
     required String salesOrgCode,
     required String customerCode,
     required String shipToCode,
@@ -60,6 +62,41 @@ class MaterialPriceRemoteDataSource {
       return List.from(priceData)
           .map((e) => PriceDto.fromJson(e).toDomain())
           .toList();
+    });
+  }
+
+  Future<Price> getMaterialPrice({
+    required String salesOrgCode,
+    required String customerCode,
+    required String shipToCode,
+    required String materialNumber,
+    required List<String> salesDeal,
+  }) async {
+    return await dataSourceExceptionHandler.handle(() async {
+      final queryData = queryMutation.getMaterialPrice();
+
+      final variables = {
+        'salesOrganisation': salesOrgCode,
+        'customer': customerCode,
+        'shipToCode': shipToCode,
+        'request': {
+          'MaterialNumber': materialNumber,
+          'salesDeal': salesDeal,
+        },
+      };
+      final res = await httpService.request(
+        method: 'POST',
+        url: '${config.urlConstants}pricing',
+        data: jsonEncode({
+          'query': queryData,
+          'variables': variables,
+        }),
+        apiEndpoint: 'price',
+      );
+      _materialPriceExceptionChecker(res: res);
+      final priceData = res.data['data']['price'][0];
+
+      return PriceDto.fromJson(priceData).toDomain();
     });
   }
 
