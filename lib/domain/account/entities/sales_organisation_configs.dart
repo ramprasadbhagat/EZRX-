@@ -151,4 +151,6 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
 
   bool get shouldShowTax =>
       (enableVat && enableTaxClassification) || enableTaxAtTotalLevelOnly;
+
+  bool get taxDisplayForOrderHistoryAndDetails => enableTaxDisplay || enableTaxAtTotalLevelOnly;
 }

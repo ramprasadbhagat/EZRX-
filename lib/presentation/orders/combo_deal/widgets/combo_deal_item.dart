@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_detail_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal_group_deal.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
@@ -12,11 +13,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class ComboDealItem extends StatelessWidget {
   final PriceAggregate material;
   final bool isSelected;
+  final CartItem selectedItems;
 
   const ComboDealItem({
     Key? key,
     required this.material,
     required this.isSelected,
+    required this.selectedItems,
   }) : super(key: key);
 
   @override
@@ -51,7 +54,9 @@ class ComboDealItem extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(width: 5),
-                    _DiscountLabel(material: material),
+                    _DiscountLabel(
+                      material: material,
+                    ),
                     const SizedBox(width: 5),
                     if (material.selfComboDeal.mandatory)
                       const MandatoryLabel(),
@@ -83,10 +88,12 @@ class ComboDealItem extends StatelessWidget {
                                       color: ZPColors.lightGray,
                                     ),
                           ),
-                          _PriceLabel(material: material),
+                          _PriceLabel(
+                            material: material,
+                          ),
                           if (!material.selfComboDealEligible)
                             Text(
-                              'Minimun Quantity should be ${material.selfComboDeal.minQty}',
+                              'Minimum Quantity should be ${material.selfComboDeal.minQty}',
                               style: Theme.of(context)
                                   .textTheme
                                   .titleSmall
@@ -126,11 +133,14 @@ class ComboDealItem extends StatelessWidget {
   }
 }
 
+
 class _DiscountLabel extends StatelessWidget {
   final PriceAggregate material;
+
   const _DiscountLabel({
     Key? key,
     required this.material,
+    
   }) : super(key: key);
 
   @override
@@ -195,7 +205,8 @@ class _PriceLabel extends StatelessWidget {
           ),
           price: material.comboDealTotalListPrice,
           discountEnable:
-              material.comboDeal.scheme == ComboDealScheme.k4 ? false : true,
+              !(material.comboDeal.scheme == ComboDealScheme.k4 ||
+              material.comboDeal.scheme == ComboDealScheme.k3),
         ),
       ],
     );

@@ -13,6 +13,7 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal_group_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal_material.dart';
@@ -270,7 +271,7 @@ void main() {
           find.byKey(const Key('Total label 540.0')),
           findsOneWidget,
         );
-        expect(find.text('Minimun Quantity should be 3'), findsOneWidget);
+        expect(find.text('Minimum Quantity should be 3'), findsOneWidget);
         final addToCartButton = find.byKey(const Key('addToCartButton'));
         expect(addToCartButton, findsOneWidget);
 
@@ -450,6 +451,7 @@ void main() {
               child: ComboDealItem(
                 material: fakeFirstMaterial.copyWith(quantity: 5),
                 isSelected: true,
+                selectedItems: CartItem.materialEmpty(),
               ),
             ),
           ),
@@ -465,6 +467,7 @@ void main() {
               child: ComboDealItem(
                 material: fakeFirstMaterial.copyWith(quantity: 5),
                 isSelected: true,
+                selectedItems: CartItem.materialEmpty(),
               ),
             ),
           ),
@@ -480,6 +483,7 @@ void main() {
               child: ComboDealItem(
                 material: fakeFirstMaterial.copyWith(quantity: 3),
                 isSelected: true,
+                selectedItems: CartItem.materialEmpty(),
               ),
             ),
           ),
@@ -501,6 +505,7 @@ void main() {
               child: ComboDealItem(
                 material: fakeFirstMaterial.copyWith(quantity: 5),
                 isSelected: true,
+                selectedItems: CartItem.materialEmpty(),
               ),
             ),
           ),
@@ -633,7 +638,7 @@ void main() {
         );
 
         expect(find.byType(ComboDealItem), findsNWidgets(2));
-        expect(find.text('Minimun Quantity should be 2'), findsOneWidget);
+        expect(find.text('Minimum Quantity should be 2'), findsOneWidget);
       },
     );
 

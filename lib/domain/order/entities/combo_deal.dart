@@ -35,6 +35,18 @@ class ComboDeal with _$ComboDeal {
           (first, second) => second.minQty.compareTo(first.minQty),
         );
 
+  List<ComboDealSKUTier> get descendingSortedSKUTier =>
+      List<ComboDealSKUTier>.from(flexiSKUTier)
+        ..sort(
+          (first, second) => second.minQty.compareTo(first.minQty),
+        );
+      
+  List<ComboDealSKUTier> get sortedSKUTier =>
+      List<ComboDealSKUTier>.from(flexiSKUTier)
+        ..sort(
+          (first, second) => first.minQty.compareTo(second.minQty),
+        );
+
   List<ComboDealMaterial> get allMaterials => materialComboDeals
       .map(
         (e) => e.materials,
@@ -67,10 +79,14 @@ class ComboDeal with _$ComboDeal {
         (groupDeal != ComboDealGroupDeal.empty() || flexiQtyTier.length == 1)) {
       return ComboDealScheme.k2;
     }
-
+    
+    if (flexiSKUTier.isNotEmpty && flexiQtyTier.isEmpty) {
+      return ComboDealScheme.k3;
+    }
     if (flexiSKUTier.isEmpty && flexiQtyTier.isNotEmpty) {
       return ComboDealScheme.k4;
     }
+    
 
     return ComboDealScheme.k1;
   }

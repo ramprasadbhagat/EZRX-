@@ -166,11 +166,15 @@ class _ComboDealDetailPageState extends State<ComboDealDetailPage> {
                                   final isSelected = state.selectedItems[
                                           item.getMaterialNumber] ??
                                       false;
+                                  final selectedItems = CartItem.comboDeal(
+                                    state.allSelectedItems,
+                                  );
 
                                   return Card(
                                     child: ComboDealItem(
                                       material: item,
                                       isSelected: isSelected,
+                                      selectedItems: selectedItems,
                                     ),
                                   );
                                 },
@@ -294,10 +298,7 @@ class _HeaderMessage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.symmetric(
-        vertical: 10,
-        horizontal: 8,
-      ),
+      padding: const EdgeInsets.all(10.0),
       decoration: const BoxDecoration(
         color: ZPColors.white,
         boxShadow: <BoxShadow>[
@@ -328,6 +329,8 @@ class _HeaderMessage extends StatelessWidget {
             ? 0
             : comboDeal.flexiQtyTier.first.minQty;
         return 'You must purchase a total QTY of [$requiredQty] from any product or products.';
+      case ComboDealScheme.k3:
+        return 'You must purchase ${comboDeal.sortedSKUTier.map((e) => '${e.minQty} unique products ').toList().join(' OR ')} WITH a min QTY of [${comboDeal.materialComboDeals.first.materials.first.minQty}] for each single product (Discounts will increase as the number of unique products increases)';
       case ComboDealScheme.k4:
         final flexiQtyTierCopyList =
             List<ComboDealQtyTier>.from(comboDeal.flexiQtyTier);
@@ -393,6 +396,7 @@ class _K21ComboDealList extends StatelessWidget {
                       ComboDealItem(
                         material: material,
                         isSelected: isSelected,
+                        selectedItems: CartItem.materialEmpty(),
                       ),
                       if (index != itemSet.length - 1) const _Divider(),
                     ],

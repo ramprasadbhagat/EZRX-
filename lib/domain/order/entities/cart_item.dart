@@ -5,6 +5,7 @@ import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal_group_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal_qty_tier.dart';
+import 'package:ezrxmobile/domain/order/entities/combo_deal_sku_tier.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_price_detail.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
@@ -276,6 +277,7 @@ class CartItem with _$CartItem {
             ? comboDeal.groupDeal.rate
             : eligibleComboDealQtyTier.rate;
       case ComboDealScheme.k3:
+        return eligibleComboDealSKUTier.rate;
       case ComboDealScheme.k4:
         return eligibleComboDealQtyTier.rate;
       case ComboDealScheme.k5:
@@ -299,6 +301,11 @@ class CartItem with _$CartItem {
               sum + item.comboDealTotalUnitPrice(rate: comboDealRate),
         );
       case ComboDealScheme.k3:
+        return materials.fold<double>(
+          0,
+          (sum, item) =>
+              sum + item.comboDealTotalUnitPrice(rate: comboDealRate),
+        );
       case ComboDealScheme.k4:
         return _comboDealTotal +
             (_comboDealTotal * eligibleComboDealQtyTier.rate) / 100;
@@ -339,6 +346,7 @@ class CartItem with _$CartItem {
           return eligibleComboDealQtyTier != ComboDealQtyTier.empty();
         }
       case ComboDealScheme.k3:
+        return eligibleComboDealSKUTier != ComboDealSKUTier.empty();
       case ComboDealScheme.k4:
         return eligibleComboDealQtyTier != ComboDealQtyTier.empty();
       case ComboDealScheme.k5:
@@ -353,6 +361,16 @@ class CartItem with _$CartItem {
     return comboDeal.descendingSortedQtyTiers.firstWhere(
       (tier) => totalQty >= tier.minQty,
       orElse: () => ComboDealQtyTier.empty(),
+    );
+  }
+
+  ComboDealSKUTier get eligibleComboDealSKUTier {
+    if (materials.isEmpty) return ComboDealSKUTier.empty();
+    final comboDeal = materials.first.comboDeal;
+
+    return comboDeal.descendingSortedSKUTier.firstWhere(
+      (tier) => materials.length >= tier.minQty,
+      orElse: () => ComboDealSKUTier.empty(),
     );
   }
 

@@ -18,12 +18,10 @@ class HistoryOrderDetailSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final enableOHPrice =
         context.read<EligibilityBloc>().state.salesOrgConfigs.enableOHPrice;
-    final enableTaxDisplay =
-        context.read<SalesOrgBloc>().state.configs.enableTaxDisplay;
-    final enableTaxAtTotalLevelOnly =
-        context.read<SalesOrgBloc>().state.configs.enableTaxAtTotalLevelOnly;
     final customerCodeInfo =
         context.read<EligibilityBloc>().state.customerCodeInfo;
+
+    final taxDisplayForOrderHistoryAndDetails = context.read<SalesOrgBloc>().state.configs.taxDisplayForOrderHistoryAndDetails;
 
     return BlocBuilder<OrderHistoryDetailsBloc, OrderHistoryDetailsState>(
       buildWhen: (previous, current) => previous.isLoading != current.isLoading,
@@ -53,7 +51,7 @@ class HistoryOrderDetailSection extends StatelessWidget {
                 keyFlex: 1,
                 valueFlex: 1,
               ),
-            if (enableTaxDisplay || enableTaxAtTotalLevelOnly)
+            if (taxDisplayForOrderHistoryAndDetails)
               BalanceTextRow(
                 key: const Key('taxDisplay'),
                 keyText: context.read<SalesOrgBloc>().state.salesOrg.isSg
@@ -72,7 +70,9 @@ class HistoryOrderDetailSection extends StatelessWidget {
                 keyText: 'Grand Total'.tr(),
                 valueText: StringUtils.displayPrice(
                   context.read<SalesOrgBloc>().state.configs,
-                  orderDetails.orderHistoryDetailsOrderHeader.grandTotal,
+                  taxDisplayForOrderHistoryAndDetails
+                      ? orderDetails.orderHistoryDetailsOrderHeader.grandTotal
+                      : orderDetails.orderHistoryDetailsOrderHeader.orderValue,
                 ),
                 keyFlex: 1,
                 valueFlex: 1,
