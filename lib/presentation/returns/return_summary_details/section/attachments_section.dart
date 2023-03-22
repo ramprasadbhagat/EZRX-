@@ -14,13 +14,11 @@ import 'package:path_provider/path_provider.dart';
 
 class ReturnSummaryDetailsAttachmentSection extends StatefulWidget {
   final List<PoDocuments> poDocuments;
-  final AttachMentsUploadMode attachMentsUploadMode;
+  final AttachmentsUploadMode attachmentsUploadMode;
 
-  const ReturnSummaryDetailsAttachmentSection({
-    Key? key,
+  const ReturnSummaryDetailsAttachmentSection({ Key? key,
     required this.poDocuments,
-    required this.attachMentsUploadMode,
-  }) : super(key: key);
+    required this.attachmentsUploadMode,}) : super(key: key);
 
   @override
   State<ReturnSummaryDetailsAttachmentSection> createState() =>
@@ -63,7 +61,7 @@ class _ReturnSummaryDetailsAttachmentState
               Expanded(
                 flex: 3,
                 child: Text(
-                  widget.attachMentsUploadMode == AttachMentsUploadMode.user
+                  widget.attachmentsUploadMode == AttachmentsUploadMode.user
                       ? 'Attachments '
                       : 'Attachments by approver ',
                   style: Theme.of(context).textTheme.titleSmall?.apply(
@@ -158,7 +156,7 @@ class _ReturnSummaryAttachmentDownloadIndicator extends StatelessWidget {
   }
 }
 
-enum AttachMentsUploadMode { approver, user }
+enum AttachmentsUploadMode { approver, user }
 
 class _ReturnSummaryAttachmentWidget extends StatelessWidget {
   final PoDocuments poDocuments;

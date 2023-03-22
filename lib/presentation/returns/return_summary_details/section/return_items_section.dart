@@ -12,8 +12,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ReturnItemsSection extends StatelessWidget {
   const ReturnItemsSection({
-    Key? key,
-  }) : super(key: key);
+    Key? key,}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -73,8 +72,8 @@ class ReturnItemsSection extends StatelessWidget {
                           ReturnSummaryDetailsAttachmentSection(
                             poDocuments:
                                 e.attachmentsUploadByApproverUrlToPoDocuments,
-                            attachMentsUploadMode:
-                                AttachMentsUploadMode.approver,
+                            attachmentsUploadMode:
+                                AttachmentsUploadMode.approver,
                           ),
                           BalanceTextRow(
                             keyFlex: 3,
@@ -150,7 +149,7 @@ class ReturnItemsSection extends StatelessWidget {
                           ReturnSummaryDetailsAttachmentSection(
                             poDocuments:
                                 e.attachmentsUploadByUserUrlToPoDocuments,
-                            attachMentsUploadMode: AttachMentsUploadMode.user,
+                            attachmentsUploadMode: AttachmentsUploadMode.user,
                           ),
                         ],
                       ),

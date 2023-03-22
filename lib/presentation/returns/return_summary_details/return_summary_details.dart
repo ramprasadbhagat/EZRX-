@@ -24,8 +24,7 @@ class ReturnSummaryDetails extends StatelessWidget {
     Key? key,
     required this.customerCodeInfo,
     required this.shipToInfo,
-    required this.returnSummaryRequests,
-  }) : super(key: key);
+    required this.returnSummaryRequests,}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

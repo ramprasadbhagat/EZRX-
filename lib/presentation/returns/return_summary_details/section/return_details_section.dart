@@ -10,8 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ReturnSummaryDetailsSection extends StatelessWidget {
   const ReturnSummaryDetailsSection({
-    Key? key,
-  }) : super(key: key);
+    Key? key,}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

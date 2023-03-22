@@ -9,8 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ReturnSummaryCustomerDetailsSection extends StatelessWidget {
   const ReturnSummaryCustomerDetailsSection({
-    Key? key,
-  }) : super(key: key);
+    Key? key,}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
