@@ -21,10 +21,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class ComboDealPrincipleDetailPage extends StatelessWidget
     implements AutoRouteWrapper {
   final PriceComboDeal comboDeal;
+  final List<PriceAggregate> initialComboItems;
+
   const ComboDealPrincipleDetailPage({
     Key? key,
     required this.comboDeal,
+    this.initialComboItems = const [],
   }) : super(key: key);
+
+  bool get isEdit => initialComboItems.isNotEmpty;
 
   @override
   Widget wrappedRoute(BuildContext context) {
@@ -33,6 +38,11 @@ class ComboDealPrincipleDetailPage extends StatelessWidget
     return BlocProvider(
       create: (context) => locator<ComboDealPrincipleDetailBloc>()
         ..add(
+          ComboDealPrincipleDetailEvent.initFromCart(
+            items: initialComboItems,
+          ),
+        )
+        ..add(
           ComboDealPrincipleDetailEvent.fetch(
             user: eligibilityBloc.state.user,
             salesOrganisation: eligibilityBloc.state.salesOrganisation,
@@ -40,6 +50,7 @@ class ComboDealPrincipleDetailPage extends StatelessWidget
             customerCodeInfo: eligibilityBloc.state.customerCodeInfo,
             shipToInfo: eligibilityBloc.state.shipToInfo,
             principles: comboDeal.category.values,
+            fetchFromCart: isEdit,
           ),
         ),
       child: this,
@@ -71,9 +82,26 @@ class ComboDealPrincipleDetailPage extends StatelessWidget
         BlocListener<ComboDealPrincipleDetailBloc,
             ComboDealPrincipleDetailState>(
           listenWhen: (previous, current) =>
-              previous.items.length != current.items.length,
+              previous.isFetchingMaterials != current.isFetchingMaterials &&
+              !current.isFetchingMaterials,
           listener: (context, state) {
             final eligibilityBloc = context.read<EligibilityBloc>();
+
+            isEdit
+                ? context.read<ComboDealPrincipleDetailBloc>().add(
+                      ComboDealPrincipleDetailEvent.setComboDealInfo(
+                        comboDealInfo: initialComboItems.firstComboDeal,
+                      ),
+                    )
+                : context.read<ComboDealListBloc>().add(
+                      ComboDealListEvent.fetchPrincipleGroupDeal(
+                        customerCodeInfo:
+                            eligibilityBloc.state.customerCodeInfo,
+                        salesOrganisation:
+                            eligibilityBloc.state.salesOrganisation,
+                        comboDeals: comboDeal,
+                      ),
+                    );
 
             context.read<MaterialPriceDetailBloc>().add(
                   MaterialPriceDetailEvent.comboDealFetch(
@@ -84,13 +112,6 @@ class ComboDealPrincipleDetailPage extends StatelessWidget
                         eligibilityBloc.state.salesOrgConfigs,
                     shipToCode: eligibilityBloc.state.shipToInfo,
                     materialInfoList: state.items.keys.toList(),
-                  ),
-                );
-            context.read<ComboDealListBloc>().add(
-                  ComboDealListEvent.fetchPrincipleGroupDeal(
-                    customerCodeInfo: eligibilityBloc.state.customerCodeInfo,
-                    salesOrganisation: eligibilityBloc.state.salesOrganisation,
-                    comboDeals: comboDeal,
                   ),
                 );
           },
@@ -210,7 +231,7 @@ class ComboDealPrincipleDetailPage extends StatelessWidget
             BlocBuilder<ComboDealPrincipleDetailBloc,
                 ComboDealPrincipleDetailState>(
               builder: (context, state) => ComboDealCheckout(
-                isEdit: false,
+                isEdit: isEdit,
                 rateEnabled: state.isEnableAddToCart,
                 currentDeal: state.currentDeal,
                 selectedItems: state.allSelectedItems,
@@ -246,12 +267,11 @@ class ComboDealPrincipleDetailPage extends StatelessWidget
             overrideQty: true,
           ),
         );
-    //TODO: Implement edit route
 
-    // if (widget.isEdit) {
-    //   context.router.pop();
-    // } else {
-    context.router.popAndPush(const CartPageRoute());
-    // }
+    if (isEdit) {
+      context.router.pop();
+    } else {
+      context.router.popAndPush(const CartPageRoute());
+    }
   }
 }

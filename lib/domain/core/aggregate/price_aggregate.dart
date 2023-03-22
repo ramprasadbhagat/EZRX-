@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/order/entities/price_combo_deal.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';

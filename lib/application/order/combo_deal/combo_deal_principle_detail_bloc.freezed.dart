@@ -19,13 +19,15 @@ mixin _$ComboDealPrincipleDetailEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
+    required TResult Function(List<PriceAggregate> items) initFromCart,
     required TResult Function(
             User user,
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            List<String> principles)
+            List<String> principles,
+            bool fetchFromCart)
         fetch,
     required TResult Function(
             User user,
@@ -46,13 +48,15 @@ mixin _$ComboDealPrincipleDetailEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialize,
+    TResult? Function(List<PriceAggregate> items)? initFromCart,
     TResult? Function(
             User user,
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            List<String> principles)?
+            List<String> principles,
+            bool fetchFromCart)?
         fetch,
     TResult? Function(
             User user,
@@ -73,13 +77,15 @@ mixin _$ComboDealPrincipleDetailEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
+    TResult Function(List<PriceAggregate> items)? initFromCart,
     TResult Function(
             User user,
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            List<String> principles)?
+            List<String> principles,
+            bool fetchFromCart)?
         fetch,
     TResult Function(
             User user,
@@ -101,6 +107,7 @@ mixin _$ComboDealPrincipleDetailEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
+    required TResult Function(_InitFromCart value) initFromCart,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_SetPriceInfo value) setPriceInfo,
@@ -112,6 +119,7 @@ mixin _$ComboDealPrincipleDetailEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
+    TResult? Function(_InitFromCart value)? initFromCart,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_SetPriceInfo value)? setPriceInfo,
@@ -123,6 +131,7 @@ mixin _$ComboDealPrincipleDetailEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
+    TResult Function(_InitFromCart value)? initFromCart,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_SetPriceInfo value)? setPriceInfo,
@@ -194,13 +203,15 @@ class _$_Initialize implements _Initialize {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
+    required TResult Function(List<PriceAggregate> items) initFromCart,
     required TResult Function(
             User user,
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            List<String> principles)
+            List<String> principles,
+            bool fetchFromCart)
         fetch,
     required TResult Function(
             User user,
@@ -224,13 +235,15 @@ class _$_Initialize implements _Initialize {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialize,
+    TResult? Function(List<PriceAggregate> items)? initFromCart,
     TResult? Function(
             User user,
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            List<String> principles)?
+            List<String> principles,
+            bool fetchFromCart)?
         fetch,
     TResult? Function(
             User user,
@@ -254,13 +267,15 @@ class _$_Initialize implements _Initialize {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
+    TResult Function(List<PriceAggregate> items)? initFromCart,
     TResult Function(
             User user,
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            List<String> principles)?
+            List<String> principles,
+            bool fetchFromCart)?
         fetch,
     TResult Function(
             User user,
@@ -288,6 +303,7 @@ class _$_Initialize implements _Initialize {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
+    required TResult Function(_InitFromCart value) initFromCart,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_SetPriceInfo value) setPriceInfo,
@@ -302,6 +318,7 @@ class _$_Initialize implements _Initialize {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
+    TResult? Function(_InitFromCart value)? initFromCart,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_SetPriceInfo value)? setPriceInfo,
@@ -316,6 +333,7 @@ class _$_Initialize implements _Initialize {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
+    TResult Function(_InitFromCart value)? initFromCart,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_SetPriceInfo value)? setPriceInfo,
@@ -336,6 +354,233 @@ abstract class _Initialize implements ComboDealPrincipleDetailEvent {
 }
 
 /// @nodoc
+abstract class _$$_InitFromCartCopyWith<$Res> {
+  factory _$$_InitFromCartCopyWith(
+          _$_InitFromCart value, $Res Function(_$_InitFromCart) then) =
+      __$$_InitFromCartCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<PriceAggregate> items});
+}
+
+/// @nodoc
+class __$$_InitFromCartCopyWithImpl<$Res>
+    extends _$ComboDealPrincipleDetailEventCopyWithImpl<$Res, _$_InitFromCart>
+    implements _$$_InitFromCartCopyWith<$Res> {
+  __$$_InitFromCartCopyWithImpl(
+      _$_InitFromCart _value, $Res Function(_$_InitFromCart) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? items = null,
+  }) {
+    return _then(_$_InitFromCart(
+      items: null == items
+          ? _value._items
+          : items // ignore: cast_nullable_to_non_nullable
+              as List<PriceAggregate>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_InitFromCart implements _InitFromCart {
+  const _$_InitFromCart({required final List<PriceAggregate> items})
+      : _items = items;
+
+  final List<PriceAggregate> _items;
+  @override
+  List<PriceAggregate> get items {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_items);
+  }
+
+  @override
+  String toString() {
+    return 'ComboDealPrincipleDetailEvent.initFromCart(items: $items)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_InitFromCart &&
+            const DeepCollectionEquality().equals(other._items, _items));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_items));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_InitFromCartCopyWith<_$_InitFromCart> get copyWith =>
+      __$$_InitFromCartCopyWithImpl<_$_InitFromCart>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialize,
+    required TResult Function(List<PriceAggregate> items) initFromCart,
+    required TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            List<String> principles,
+            bool fetchFromCart)
+        fetch,
+    required TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            List<String> principles)
+        loadMore,
+    required TResult Function(Map<MaterialNumber, MaterialPriceDetail> priceMap,
+            PriceComboDeal comboDeal)
+        setPriceInfo,
+    required TResult Function(ComboDeal comboDealInfo) setComboDealInfo,
+    required TResult Function(MaterialNumber item, int qty) updateItemQuantity,
+    required TResult Function(MaterialNumber item) updateItemSelection,
+  }) {
+    return initFromCart(items);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialize,
+    TResult? Function(List<PriceAggregate> items)? initFromCart,
+    TResult? Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            List<String> principles,
+            bool fetchFromCart)?
+        fetch,
+    TResult? Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            List<String> principles)?
+        loadMore,
+    TResult? Function(Map<MaterialNumber, MaterialPriceDetail> priceMap,
+            PriceComboDeal comboDeal)?
+        setPriceInfo,
+    TResult? Function(ComboDeal comboDealInfo)? setComboDealInfo,
+    TResult? Function(MaterialNumber item, int qty)? updateItemQuantity,
+    TResult? Function(MaterialNumber item)? updateItemSelection,
+  }) {
+    return initFromCart?.call(items);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialize,
+    TResult Function(List<PriceAggregate> items)? initFromCart,
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            List<String> principles,
+            bool fetchFromCart)?
+        fetch,
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            List<String> principles)?
+        loadMore,
+    TResult Function(Map<MaterialNumber, MaterialPriceDetail> priceMap,
+            PriceComboDeal comboDeal)?
+        setPriceInfo,
+    TResult Function(ComboDeal comboDealInfo)? setComboDealInfo,
+    TResult Function(MaterialNumber item, int qty)? updateItemQuantity,
+    TResult Function(MaterialNumber item)? updateItemSelection,
+    required TResult orElse(),
+  }) {
+    if (initFromCart != null) {
+      return initFromCart(items);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialize value) initialize,
+    required TResult Function(_InitFromCart value) initFromCart,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_SetPriceInfo value) setPriceInfo,
+    required TResult Function(_SetComboDealInfo value) setComboDealInfo,
+    required TResult Function(_UpdateItemQuantity value) updateItemQuantity,
+    required TResult Function(_UpdateItemSelection value) updateItemSelection,
+  }) {
+    return initFromCart(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialize value)? initialize,
+    TResult? Function(_InitFromCart value)? initFromCart,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_SetPriceInfo value)? setPriceInfo,
+    TResult? Function(_SetComboDealInfo value)? setComboDealInfo,
+    TResult? Function(_UpdateItemQuantity value)? updateItemQuantity,
+    TResult? Function(_UpdateItemSelection value)? updateItemSelection,
+  }) {
+    return initFromCart?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialize value)? initialize,
+    TResult Function(_InitFromCart value)? initFromCart,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_SetPriceInfo value)? setPriceInfo,
+    TResult Function(_SetComboDealInfo value)? setComboDealInfo,
+    TResult Function(_UpdateItemQuantity value)? updateItemQuantity,
+    TResult Function(_UpdateItemSelection value)? updateItemSelection,
+    required TResult orElse(),
+  }) {
+    if (initFromCart != null) {
+      return initFromCart(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _InitFromCart implements ComboDealPrincipleDetailEvent {
+  const factory _InitFromCart({required final List<PriceAggregate> items}) =
+      _$_InitFromCart;
+
+  List<PriceAggregate> get items;
+  @JsonKey(ignore: true)
+  _$$_InitFromCartCopyWith<_$_InitFromCart> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 abstract class _$$_FetchCopyWith<$Res> {
   factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
       __$$_FetchCopyWithImpl<$Res>;
@@ -346,7 +591,8 @@ abstract class _$$_FetchCopyWith<$Res> {
       SalesOrganisationConfigs salesConfigs,
       CustomerCodeInfo customerCodeInfo,
       ShipToInfo shipToInfo,
-      List<String> principles});
+      List<String> principles,
+      bool fetchFromCart});
 
   $UserCopyWith<$Res> get user;
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
@@ -371,6 +617,7 @@ class __$$_FetchCopyWithImpl<$Res>
     Object? customerCodeInfo = null,
     Object? shipToInfo = null,
     Object? principles = null,
+    Object? fetchFromCart = null,
   }) {
     return _then(_$_Fetch(
       user: null == user
@@ -397,6 +644,10 @@ class __$$_FetchCopyWithImpl<$Res>
           ? _value._principles
           : principles // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      fetchFromCart: null == fetchFromCart
+          ? _value.fetchFromCart
+          : fetchFromCart // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 
@@ -451,7 +702,8 @@ class _$_Fetch implements _Fetch {
       required this.salesConfigs,
       required this.customerCodeInfo,
       required this.shipToInfo,
-      required final List<String> principles})
+      required final List<String> principles,
+      required this.fetchFromCart})
       : _principles = principles;
 
   @override
@@ -472,8 +724,11 @@ class _$_Fetch implements _Fetch {
   }
 
   @override
+  final bool fetchFromCart;
+
+  @override
   String toString() {
-    return 'ComboDealPrincipleDetailEvent.fetch(user: $user, salesOrganisation: $salesOrganisation, salesConfigs: $salesConfigs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, principles: $principles)';
+    return 'ComboDealPrincipleDetailEvent.fetch(user: $user, salesOrganisation: $salesOrganisation, salesConfigs: $salesConfigs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, principles: $principles, fetchFromCart: $fetchFromCart)';
   }
 
   @override
@@ -491,7 +746,9 @@ class _$_Fetch implements _Fetch {
             (identical(other.shipToInfo, shipToInfo) ||
                 other.shipToInfo == shipToInfo) &&
             const DeepCollectionEquality()
-                .equals(other._principles, _principles));
+                .equals(other._principles, _principles) &&
+            (identical(other.fetchFromCart, fetchFromCart) ||
+                other.fetchFromCart == fetchFromCart));
   }
 
   @override
@@ -502,7 +759,8 @@ class _$_Fetch implements _Fetch {
       salesConfigs,
       customerCodeInfo,
       shipToInfo,
-      const DeepCollectionEquality().hash(_principles));
+      const DeepCollectionEquality().hash(_principles),
+      fetchFromCart);
 
   @JsonKey(ignore: true)
   @override
@@ -514,13 +772,15 @@ class _$_Fetch implements _Fetch {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
+    required TResult Function(List<PriceAggregate> items) initFromCart,
     required TResult Function(
             User user,
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            List<String> principles)
+            List<String> principles,
+            bool fetchFromCart)
         fetch,
     required TResult Function(
             User user,
@@ -538,20 +798,22 @@ class _$_Fetch implements _Fetch {
     required TResult Function(MaterialNumber item) updateItemSelection,
   }) {
     return fetch(user, salesOrganisation, salesConfigs, customerCodeInfo,
-        shipToInfo, principles);
+        shipToInfo, principles, fetchFromCart);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialize,
+    TResult? Function(List<PriceAggregate> items)? initFromCart,
     TResult? Function(
             User user,
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            List<String> principles)?
+            List<String> principles,
+            bool fetchFromCart)?
         fetch,
     TResult? Function(
             User user,
@@ -569,20 +831,22 @@ class _$_Fetch implements _Fetch {
     TResult? Function(MaterialNumber item)? updateItemSelection,
   }) {
     return fetch?.call(user, salesOrganisation, salesConfigs, customerCodeInfo,
-        shipToInfo, principles);
+        shipToInfo, principles, fetchFromCart);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
+    TResult Function(List<PriceAggregate> items)? initFromCart,
     TResult Function(
             User user,
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            List<String> principles)?
+            List<String> principles,
+            bool fetchFromCart)?
         fetch,
     TResult Function(
             User user,
@@ -602,7 +866,7 @@ class _$_Fetch implements _Fetch {
   }) {
     if (fetch != null) {
       return fetch(user, salesOrganisation, salesConfigs, customerCodeInfo,
-          shipToInfo, principles);
+          shipToInfo, principles, fetchFromCart);
     }
     return orElse();
   }
@@ -611,6 +875,7 @@ class _$_Fetch implements _Fetch {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
+    required TResult Function(_InitFromCart value) initFromCart,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_SetPriceInfo value) setPriceInfo,
@@ -625,6 +890,7 @@ class _$_Fetch implements _Fetch {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
+    TResult? Function(_InitFromCart value)? initFromCart,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_SetPriceInfo value)? setPriceInfo,
@@ -639,6 +905,7 @@ class _$_Fetch implements _Fetch {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
+    TResult Function(_InitFromCart value)? initFromCart,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_SetPriceInfo value)? setPriceInfo,
@@ -661,7 +928,8 @@ abstract class _Fetch implements ComboDealPrincipleDetailEvent {
       required final SalesOrganisationConfigs salesConfigs,
       required final CustomerCodeInfo customerCodeInfo,
       required final ShipToInfo shipToInfo,
-      required final List<String> principles}) = _$_Fetch;
+      required final List<String> principles,
+      required final bool fetchFromCart}) = _$_Fetch;
 
   User get user;
   SalesOrganisation get salesOrganisation;
@@ -669,6 +937,7 @@ abstract class _Fetch implements ComboDealPrincipleDetailEvent {
   CustomerCodeInfo get customerCodeInfo;
   ShipToInfo get shipToInfo;
   List<String> get principles;
+  bool get fetchFromCart;
   @JsonKey(ignore: true)
   _$$_FetchCopyWith<_$_Fetch> get copyWith =>
       throw _privateConstructorUsedError;
@@ -855,13 +1124,15 @@ class _$_LoadMore implements _LoadMore {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
+    required TResult Function(List<PriceAggregate> items) initFromCart,
     required TResult Function(
             User user,
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            List<String> principles)
+            List<String> principles,
+            bool fetchFromCart)
         fetch,
     required TResult Function(
             User user,
@@ -886,13 +1157,15 @@ class _$_LoadMore implements _LoadMore {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialize,
+    TResult? Function(List<PriceAggregate> items)? initFromCart,
     TResult? Function(
             User user,
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            List<String> principles)?
+            List<String> principles,
+            bool fetchFromCart)?
         fetch,
     TResult? Function(
             User user,
@@ -917,13 +1190,15 @@ class _$_LoadMore implements _LoadMore {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
+    TResult Function(List<PriceAggregate> items)? initFromCart,
     TResult Function(
             User user,
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            List<String> principles)?
+            List<String> principles,
+            bool fetchFromCart)?
         fetch,
     TResult Function(
             User user,
@@ -952,6 +1227,7 @@ class _$_LoadMore implements _LoadMore {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
+    required TResult Function(_InitFromCart value) initFromCart,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_SetPriceInfo value) setPriceInfo,
@@ -966,6 +1242,7 @@ class _$_LoadMore implements _LoadMore {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
+    TResult? Function(_InitFromCart value)? initFromCart,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_SetPriceInfo value)? setPriceInfo,
@@ -980,6 +1257,7 @@ class _$_LoadMore implements _LoadMore {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
+    TResult Function(_InitFromCart value)? initFromCart,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_SetPriceInfo value)? setPriceInfo,
@@ -1110,13 +1388,15 @@ class _$_SetPriceInfo implements _SetPriceInfo {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
+    required TResult Function(List<PriceAggregate> items) initFromCart,
     required TResult Function(
             User user,
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            List<String> principles)
+            List<String> principles,
+            bool fetchFromCart)
         fetch,
     required TResult Function(
             User user,
@@ -1140,13 +1420,15 @@ class _$_SetPriceInfo implements _SetPriceInfo {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialize,
+    TResult? Function(List<PriceAggregate> items)? initFromCart,
     TResult? Function(
             User user,
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            List<String> principles)?
+            List<String> principles,
+            bool fetchFromCart)?
         fetch,
     TResult? Function(
             User user,
@@ -1170,13 +1452,15 @@ class _$_SetPriceInfo implements _SetPriceInfo {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
+    TResult Function(List<PriceAggregate> items)? initFromCart,
     TResult Function(
             User user,
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            List<String> principles)?
+            List<String> principles,
+            bool fetchFromCart)?
         fetch,
     TResult Function(
             User user,
@@ -1204,6 +1488,7 @@ class _$_SetPriceInfo implements _SetPriceInfo {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
+    required TResult Function(_InitFromCart value) initFromCart,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_SetPriceInfo value) setPriceInfo,
@@ -1218,6 +1503,7 @@ class _$_SetPriceInfo implements _SetPriceInfo {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
+    TResult? Function(_InitFromCart value)? initFromCart,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_SetPriceInfo value)? setPriceInfo,
@@ -1232,6 +1518,7 @@ class _$_SetPriceInfo implements _SetPriceInfo {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
+    TResult Function(_InitFromCart value)? initFromCart,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_SetPriceInfo value)? setPriceInfo,
@@ -1335,13 +1622,15 @@ class _$_SetComboDealInfo implements _SetComboDealInfo {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
+    required TResult Function(List<PriceAggregate> items) initFromCart,
     required TResult Function(
             User user,
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            List<String> principles)
+            List<String> principles,
+            bool fetchFromCart)
         fetch,
     required TResult Function(
             User user,
@@ -1365,13 +1654,15 @@ class _$_SetComboDealInfo implements _SetComboDealInfo {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialize,
+    TResult? Function(List<PriceAggregate> items)? initFromCart,
     TResult? Function(
             User user,
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            List<String> principles)?
+            List<String> principles,
+            bool fetchFromCart)?
         fetch,
     TResult? Function(
             User user,
@@ -1395,13 +1686,15 @@ class _$_SetComboDealInfo implements _SetComboDealInfo {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
+    TResult Function(List<PriceAggregate> items)? initFromCart,
     TResult Function(
             User user,
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            List<String> principles)?
+            List<String> principles,
+            bool fetchFromCart)?
         fetch,
     TResult Function(
             User user,
@@ -1429,6 +1722,7 @@ class _$_SetComboDealInfo implements _SetComboDealInfo {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
+    required TResult Function(_InitFromCart value) initFromCart,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_SetPriceInfo value) setPriceInfo,
@@ -1443,6 +1737,7 @@ class _$_SetComboDealInfo implements _SetComboDealInfo {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
+    TResult? Function(_InitFromCart value)? initFromCart,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_SetPriceInfo value)? setPriceInfo,
@@ -1457,6 +1752,7 @@ class _$_SetComboDealInfo implements _SetComboDealInfo {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
+    TResult Function(_InitFromCart value)? initFromCart,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_SetPriceInfo value)? setPriceInfo,
@@ -1556,13 +1852,15 @@ class _$_UpdateItemQuantity implements _UpdateItemQuantity {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
+    required TResult Function(List<PriceAggregate> items) initFromCart,
     required TResult Function(
             User user,
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            List<String> principles)
+            List<String> principles,
+            bool fetchFromCart)
         fetch,
     required TResult Function(
             User user,
@@ -1586,13 +1884,15 @@ class _$_UpdateItemQuantity implements _UpdateItemQuantity {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialize,
+    TResult? Function(List<PriceAggregate> items)? initFromCart,
     TResult? Function(
             User user,
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            List<String> principles)?
+            List<String> principles,
+            bool fetchFromCart)?
         fetch,
     TResult? Function(
             User user,
@@ -1616,13 +1916,15 @@ class _$_UpdateItemQuantity implements _UpdateItemQuantity {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
+    TResult Function(List<PriceAggregate> items)? initFromCart,
     TResult Function(
             User user,
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            List<String> principles)?
+            List<String> principles,
+            bool fetchFromCart)?
         fetch,
     TResult Function(
             User user,
@@ -1650,6 +1952,7 @@ class _$_UpdateItemQuantity implements _UpdateItemQuantity {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
+    required TResult Function(_InitFromCart value) initFromCart,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_SetPriceInfo value) setPriceInfo,
@@ -1664,6 +1967,7 @@ class _$_UpdateItemQuantity implements _UpdateItemQuantity {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
+    TResult? Function(_InitFromCart value)? initFromCart,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_SetPriceInfo value)? setPriceInfo,
@@ -1678,6 +1982,7 @@ class _$_UpdateItemQuantity implements _UpdateItemQuantity {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
+    TResult Function(_InitFromCart value)? initFromCart,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_SetPriceInfo value)? setPriceInfo,
@@ -1772,13 +2077,15 @@ class _$_UpdateItemSelection implements _UpdateItemSelection {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialize,
+    required TResult Function(List<PriceAggregate> items) initFromCart,
     required TResult Function(
             User user,
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            List<String> principles)
+            List<String> principles,
+            bool fetchFromCart)
         fetch,
     required TResult Function(
             User user,
@@ -1802,13 +2109,15 @@ class _$_UpdateItemSelection implements _UpdateItemSelection {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialize,
+    TResult? Function(List<PriceAggregate> items)? initFromCart,
     TResult? Function(
             User user,
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            List<String> principles)?
+            List<String> principles,
+            bool fetchFromCart)?
         fetch,
     TResult? Function(
             User user,
@@ -1832,13 +2141,15 @@ class _$_UpdateItemSelection implements _UpdateItemSelection {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialize,
+    TResult Function(List<PriceAggregate> items)? initFromCart,
     TResult Function(
             User user,
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            List<String> principles)?
+            List<String> principles,
+            bool fetchFromCart)?
         fetch,
     TResult Function(
             User user,
@@ -1866,6 +2177,7 @@ class _$_UpdateItemSelection implements _UpdateItemSelection {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialize value) initialize,
+    required TResult Function(_InitFromCart value) initFromCart,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_SetPriceInfo value) setPriceInfo,
@@ -1880,6 +2192,7 @@ class _$_UpdateItemSelection implements _UpdateItemSelection {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialize value)? initialize,
+    TResult? Function(_InitFromCart value)? initFromCart,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_SetPriceInfo value)? setPriceInfo,
@@ -1894,6 +2207,7 @@ class _$_UpdateItemSelection implements _UpdateItemSelection {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialize value)? initialize,
+    TResult Function(_InitFromCart value)? initFromCart,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_SetPriceInfo value)? setPriceInfo,
@@ -1927,6 +2241,7 @@ mixin _$ComboDealPrincipleDetailState {
       throw _privateConstructorUsedError;
   Map<MaterialNumber, bool> get selectedItems =>
       throw _privateConstructorUsedError;
+  int get itemPageNumber => throw _privateConstructorUsedError;
   bool get isFetchingPrice => throw _privateConstructorUsedError;
   bool get isFetchingComboInfo => throw _privateConstructorUsedError;
   bool get isFetchingMaterials => throw _privateConstructorUsedError;
@@ -1949,6 +2264,7 @@ abstract class $ComboDealPrincipleDetailStateCopyWith<$Res> {
       {Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
       Map<MaterialNumber, PriceAggregate> items,
       Map<MaterialNumber, bool> selectedItems,
+      int itemPageNumber,
       bool isFetchingPrice,
       bool isFetchingComboInfo,
       bool isFetchingMaterials,
@@ -1972,6 +2288,7 @@ class _$ComboDealPrincipleDetailStateCopyWithImpl<$Res,
     Object? apiFailureOrSuccessOption = null,
     Object? items = null,
     Object? selectedItems = null,
+    Object? itemPageNumber = null,
     Object? isFetchingPrice = null,
     Object? isFetchingComboInfo = null,
     Object? isFetchingMaterials = null,
@@ -1990,6 +2307,10 @@ class _$ComboDealPrincipleDetailStateCopyWithImpl<$Res,
           ? _value.selectedItems
           : selectedItems // ignore: cast_nullable_to_non_nullable
               as Map<MaterialNumber, bool>,
+      itemPageNumber: null == itemPageNumber
+          ? _value.itemPageNumber
+          : itemPageNumber // ignore: cast_nullable_to_non_nullable
+              as int,
       isFetchingPrice: null == isFetchingPrice
           ? _value.isFetchingPrice
           : isFetchingPrice // ignore: cast_nullable_to_non_nullable
@@ -2023,6 +2344,7 @@ abstract class _$$_ComboDealPrincipleDetailStateCopyWith<$Res>
       {Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
       Map<MaterialNumber, PriceAggregate> items,
       Map<MaterialNumber, bool> selectedItems,
+      int itemPageNumber,
       bool isFetchingPrice,
       bool isFetchingComboInfo,
       bool isFetchingMaterials,
@@ -2045,6 +2367,7 @@ class __$$_ComboDealPrincipleDetailStateCopyWithImpl<$Res>
     Object? apiFailureOrSuccessOption = null,
     Object? items = null,
     Object? selectedItems = null,
+    Object? itemPageNumber = null,
     Object? isFetchingPrice = null,
     Object? isFetchingComboInfo = null,
     Object? isFetchingMaterials = null,
@@ -2063,6 +2386,10 @@ class __$$_ComboDealPrincipleDetailStateCopyWithImpl<$Res>
           ? _value._selectedItems
           : selectedItems // ignore: cast_nullable_to_non_nullable
               as Map<MaterialNumber, bool>,
+      itemPageNumber: null == itemPageNumber
+          ? _value.itemPageNumber
+          : itemPageNumber // ignore: cast_nullable_to_non_nullable
+              as int,
       isFetchingPrice: null == isFetchingPrice
           ? _value.isFetchingPrice
           : isFetchingPrice // ignore: cast_nullable_to_non_nullable
@@ -2090,6 +2417,7 @@ class _$_ComboDealPrincipleDetailState extends _ComboDealPrincipleDetailState {
       {required this.apiFailureOrSuccessOption,
       required final Map<MaterialNumber, PriceAggregate> items,
       required final Map<MaterialNumber, bool> selectedItems,
+      required this.itemPageNumber,
       required this.isFetchingPrice,
       required this.isFetchingComboInfo,
       required this.isFetchingMaterials,
@@ -2115,6 +2443,8 @@ class _$_ComboDealPrincipleDetailState extends _ComboDealPrincipleDetailState {
   }
 
   @override
+  final int itemPageNumber;
+  @override
   final bool isFetchingPrice;
   @override
   final bool isFetchingComboInfo;
@@ -2125,7 +2455,7 @@ class _$_ComboDealPrincipleDetailState extends _ComboDealPrincipleDetailState {
 
   @override
   String toString() {
-    return 'ComboDealPrincipleDetailState(apiFailureOrSuccessOption: $apiFailureOrSuccessOption, items: $items, selectedItems: $selectedItems, isFetchingPrice: $isFetchingPrice, isFetchingComboInfo: $isFetchingComboInfo, isFetchingMaterials: $isFetchingMaterials, canLoadMore: $canLoadMore)';
+    return 'ComboDealPrincipleDetailState(apiFailureOrSuccessOption: $apiFailureOrSuccessOption, items: $items, selectedItems: $selectedItems, itemPageNumber: $itemPageNumber, isFetchingPrice: $isFetchingPrice, isFetchingComboInfo: $isFetchingComboInfo, isFetchingMaterials: $isFetchingMaterials, canLoadMore: $canLoadMore)';
   }
 
   @override
@@ -2139,6 +2469,8 @@ class _$_ComboDealPrincipleDetailState extends _ComboDealPrincipleDetailState {
             const DeepCollectionEquality().equals(other._items, _items) &&
             const DeepCollectionEquality()
                 .equals(other._selectedItems, _selectedItems) &&
+            (identical(other.itemPageNumber, itemPageNumber) ||
+                other.itemPageNumber == itemPageNumber) &&
             (identical(other.isFetchingPrice, isFetchingPrice) ||
                 other.isFetchingPrice == isFetchingPrice) &&
             (identical(other.isFetchingComboInfo, isFetchingComboInfo) ||
@@ -2155,6 +2487,7 @@ class _$_ComboDealPrincipleDetailState extends _ComboDealPrincipleDetailState {
       apiFailureOrSuccessOption,
       const DeepCollectionEquality().hash(_items),
       const DeepCollectionEquality().hash(_selectedItems),
+      itemPageNumber,
       isFetchingPrice,
       isFetchingComboInfo,
       isFetchingMaterials,
@@ -2175,6 +2508,7 @@ abstract class _ComboDealPrincipleDetailState
           apiFailureOrSuccessOption,
       required final Map<MaterialNumber, PriceAggregate> items,
       required final Map<MaterialNumber, bool> selectedItems,
+      required final int itemPageNumber,
       required final bool isFetchingPrice,
       required final bool isFetchingComboInfo,
       required final bool isFetchingMaterials,
@@ -2187,6 +2521,8 @@ abstract class _ComboDealPrincipleDetailState
   Map<MaterialNumber, PriceAggregate> get items;
   @override
   Map<MaterialNumber, bool> get selectedItems;
+  @override
+  int get itemPageNumber;
   @override
   bool get isFetchingPrice;
   @override

@@ -3,6 +3,9 @@ part of 'combo_deal_principle_detail_bloc.dart';
 @freezed
 class ComboDealPrincipleDetailEvent with _$ComboDealPrincipleDetailEvent {
   const factory ComboDealPrincipleDetailEvent.initialize() = _Initialize;
+  const factory ComboDealPrincipleDetailEvent.initFromCart({
+    required List<PriceAggregate> items,
+  }) = _InitFromCart;
   const factory ComboDealPrincipleDetailEvent.fetch({
     required User user,
     required SalesOrganisation salesOrganisation,
@@ -10,6 +13,7 @@ class ComboDealPrincipleDetailEvent with _$ComboDealPrincipleDetailEvent {
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
     required List<String> principles,
+    required bool fetchFromCart,
   }) = _Fetch;
   const factory ComboDealPrincipleDetailEvent.loadMore({
     required User user,

@@ -7,6 +7,7 @@ class ComboDealPrincipleDetailState with _$ComboDealPrincipleDetailState {
     required Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
     required Map<MaterialNumber, PriceAggregate> items,
     required Map<MaterialNumber, bool> selectedItems,
+    required int itemPageNumber,
     required bool isFetchingPrice,
     required bool isFetchingComboInfo,
     required bool isFetchingMaterials,
@@ -15,6 +16,7 @@ class ComboDealPrincipleDetailState with _$ComboDealPrincipleDetailState {
 
   factory ComboDealPrincipleDetailState.initial() =>
       ComboDealPrincipleDetailState(
+        itemPageNumber: 0,
         items: {},
         selectedItems: {},
         isFetchingPrice: false,

@@ -30,53 +30,75 @@ class ComboDealPrincipleDetailBloc
   ComboDealPrincipleDetailBloc({
     required this.repository,
   }) : super(ComboDealPrincipleDetailState.initial()) {
-    on<_Fetch>(
-      (e, emit) async {
-        emit(
-          state.copyWith(
-            isFetchingMaterials: true,
-          ),
-        );
-        final failureOrSuccess = await repository.getComboDealMaterials(
-          user: e.user,
-          salesOrganisation: e.salesOrganisation,
-          customerCodeInfo: e.customerCodeInfo,
-          shipToInfo: e.shipToInfo,
-          pageSize: _defaultPageSize,
-          offset: 0,
-          principles: e.principles,
-        );
-        failureOrSuccess.fold(
-          (failure) {
-            emit(
-              state.copyWith(
-                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-                isFetchingMaterials: false,
+    on<_InitFromCart>((e, emit) async {
+      emit(
+        state.copyWith(
+          items: Map.from(state.items)..addAll(e.items.mapByMaterialNumber),
+          selectedItems: Map.from(state.items)
+            ..addAll(
+              {
+                for (final item in e.items) item.getMaterialNumber: true,
+              },
+            ),
+        ),
+      );
+    });
+    on<_Fetch>((e, emit) async {
+      emit(
+        state.copyWith(
+          isFetchingMaterials: true,
+        ),
+      );
+      final failureOrSuccess = await repository.getComboDealMaterials(
+        user: e.user,
+        salesOrganisation: e.salesOrganisation,
+        customerCodeInfo: e.customerCodeInfo,
+        shipToInfo: e.shipToInfo,
+        pageSize: _defaultPageSize,
+        offset: 0,
+        principles: e.principles,
+      );
+      failureOrSuccess.fold(
+        (failure) {
+          emit(
+            state.copyWith(
+              apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+              isFetchingMaterials: false,
+            ),
+          );
+        },
+        (materialList) {
+          final newItems = <MaterialNumber, PriceAggregate>{};
+          if (e.fetchFromCart) {
+            newItems
+              ..addAll(state.items)
+              ..addAll(
+                _newItemsFromMaterialList(
+                  materialList: materialList,
+                  salesConfigs: e.salesConfigs,
+                ),
+              );
+          } else {
+            newItems.addAll(
+              _itemFromMaterialList(
+                materialList: materialList,
+                salesConfigs: e.salesConfigs,
               ),
             );
-          },
-          (materialList) {
-            emit(
-              state.copyWith(
-                isFetchingMaterials: false,
-                isFetchingComboInfo: true,
-                isFetchingPrice: true,
-                canLoadMore: materialList.length >= _defaultPageSize,
-                items: materialList
-                    .map(
-                      (material) => PriceAggregate.empty().copyWith(
-                        materialInfo: material,
-                        salesOrgConfig: e.salesConfigs,
-                      ),
-                    )
-                    .toList()
-                    .mapByMaterialNumber,
-              ),
-            );
-          },
-        );
-      },
-    );
+          }
+          emit(
+            state.copyWith(
+              isFetchingMaterials: false,
+              isFetchingComboInfo: true,
+              isFetchingPrice: true,
+              canLoadMore: materialList.length >= _defaultPageSize,
+              itemPageNumber: 1,
+              items: newItems,
+            ),
+          );
+        },
+      );
+    });
     on<_LoadMore>((e, emit) async {
       if (state.isFetching || !state.canLoadMore) return;
       emit(
@@ -91,7 +113,7 @@ class ComboDealPrincipleDetailBloc
         customerCodeInfo: e.customerCodeInfo,
         shipToInfo: e.shipToInfo,
         pageSize: _defaultPageSize,
-        offset: state.items.length,
+        offset: state.itemPageNumber * _defaultPageSize,
         principles: e.principles,
       );
 
@@ -111,17 +133,13 @@ class ComboDealPrincipleDetailBloc
               isFetchingComboInfo: true,
               isFetchingPrice: true,
               canLoadMore: materialList.length >= _defaultPageSize,
+              itemPageNumber: state.itemPageNumber + 1,
               items: Map.from(state.items)
                 ..addAll(
-                  materialList
-                      .map(
-                        (material) => PriceAggregate.empty().copyWith(
-                          materialInfo: material,
-                          salesOrgConfig: e.salesConfigs,
-                        ),
-                      )
-                      .toList()
-                      .mapByMaterialNumber,
+                  _newItemsFromMaterialList(
+                    materialList: materialList,
+                    salesConfigs: e.salesConfigs,
+                  ),
                 ),
             ),
           );
@@ -161,7 +179,7 @@ class ComboDealPrincipleDetailBloc
       final itemsWithComboDealInfo = state.items.map(
         (key, value) => MapEntry(
           key,
-          value.copyWithComboDeal(e.comboDealInfo),
+          value.copyWith(comboDeal: e.comboDealInfo),
         ),
       );
 
@@ -198,4 +216,32 @@ class ComboDealPrincipleDetailBloc
       );
     });
   }
+
+  Map<MaterialNumber, PriceAggregate> _newItemsFromMaterialList({
+    required List<MaterialInfo> materialList,
+    required SalesOrganisationConfigs salesConfigs,
+  }) {
+    final newItems = _itemFromMaterialList(
+      materialList: materialList,
+      salesConfigs: salesConfigs,
+    );
+
+    newItems.removeWhere((key, value) => state.items.containsKey(key));
+
+    return newItems;
+  }
+
+  Map<MaterialNumber, PriceAggregate> _itemFromMaterialList({
+    required List<MaterialInfo> materialList,
+    required SalesOrganisationConfigs salesConfigs,
+  }) =>
+      materialList
+          .map(
+            (material) => PriceAggregate.empty().copyWith(
+              materialInfo: material,
+              salesOrgConfig: salesConfigs,
+            ),
+          )
+          .toList()
+          .mapByMaterialNumber;
 }

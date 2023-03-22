@@ -136,19 +136,10 @@ class MaterialListItem extends StatelessWidget {
                             eligibilityState.comboDealEligible
                         ? GestureDetector(
                             onTap: () {
-                              final comboType = price.comboDeal.category.type;
-                              if (comboType.isMaterialNumber) {
-                                _showMaterialComboDeal(
-                                  context: context,
-                                  price: price,
-                                );
-                              } else if (comboType.isPrinciple) {
-                                context.router.push(
-                                  ComboDealPrincipleDetailPageRoute(
-                                    comboDeal: price.comboDeal,
-                                  ),
-                                );
-                              }
+                              _showComboDeal(
+                                context: context,
+                                price: price,
+                              );
                             },
                             child: const ComboDealLabel(),
                           )
@@ -190,11 +181,9 @@ class MaterialListItem extends StatelessWidget {
         );
 
     if (comboDealInCart.materials.isNotEmpty) {
-      context.router.push(
-        ComboDealMaterialDetailPageRoute(
-          comboItems: comboDealInCart.materials,
-          isEdit: true,
-        ),
+      _showComboDeal(
+        context: context,
+        price: materialPrice,
       );
 
       return;
@@ -231,7 +220,7 @@ class MaterialListItem extends StatelessWidget {
     );
   }
 
-  void _showMaterialComboDeal({
+  void _showComboDeal({
     required BuildContext context,
     required Price price,
   }) {
@@ -240,34 +229,55 @@ class MaterialListItem extends StatelessWidget {
         );
 
     if (comboDealInCart.materials.isEmpty) {
-      final salesConfig = context.read<SalesOrgBloc>().state.configs;
-      final materials = price.comboDeal.category.values
-          .map(
-            (item) => PriceAggregate.empty().copyWith(
-              salesOrgConfig: salesConfig,
-              materialInfo: MaterialInfo.empty().copyWith(
-                materialNumber: MaterialNumber(item),
+      final comboDealType = price.comboDeal.category.type;
+      if (comboDealType.isMaterialNumber) {
+        final salesConfig = context.read<SalesOrgBloc>().state.configs;
+        final materials = price.comboDeal.category.values
+            .map(
+              (item) => PriceAggregate.empty().copyWith(
+                salesOrgConfig: salesConfig,
+                materialInfo: MaterialInfo.empty().copyWith(
+                  materialNumber: MaterialNumber(item),
+                ),
+                price: Price.empty().copyWith(
+                  materialNumber: MaterialNumber(item),
+                  comboDeal: price.comboDeal,
+                ),
               ),
-              price: Price.empty().copyWith(
-                materialNumber: MaterialNumber(item),
-                comboDeal: price.comboDeal,
-              ),
-            ),
-          )
-          .toList();
+            )
+            .toList();
 
-      context.router.push(
-        ComboDealMaterialDetailPageRoute(
-          comboItems: materials,
-        ),
-      );
+        context.router.push(
+          ComboDealMaterialDetailPageRoute(
+            comboItems: materials,
+          ),
+        );
+      } else if (comboDealType.isPrinciple) {
+        context.router.push(
+          ComboDealPrincipleDetailPageRoute(
+            comboDeal: price.comboDeal,
+          ),
+        );
+      }
     } else {
-      context.router.push(
-        ComboDealMaterialDetailPageRoute(
-          comboItems: comboDealInCart.materials,
-          isEdit: true,
-        ),
-      );
+      final priceComboDeal = comboDealInCart.materials.firstPriceComboDeal;
+      final comboDealType = priceComboDeal.category.type;
+
+      if (comboDealType.isMaterialNumber) {
+        context.router.push(
+          ComboDealMaterialDetailPageRoute(
+            comboItems: comboDealInCart.materials,
+            isEdit: true,
+          ),
+        );
+      } else if (comboDealType.isPrinciple) {
+        context.router.push(
+          ComboDealPrincipleDetailPageRoute(
+            comboDeal: priceComboDeal,
+            initialComboItems: comboDealInCart.materials,
+          ),
+        );
+      }
     }
   }
 }

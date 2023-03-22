@@ -367,6 +367,7 @@ class AppRouter extends _i42.RootStackRouter {
             child: _i37.ComboDealPrincipleDetailPage(
           key: args.key,
           comboDeal: args.comboDeal,
+          initialComboItems: args.initialComboItems,
         )),
       );
     },
@@ -1348,12 +1349,14 @@ class ComboDealPrincipleDetailPageRoute
   ComboDealPrincipleDetailPageRoute({
     _i43.Key? key,
     required _i57.PriceComboDeal comboDeal,
+    List<_i56.PriceAggregate> initialComboItems = const [],
   }) : super(
           ComboDealPrincipleDetailPageRoute.name,
           path: 'combo_deal_principle_detail',
           args: ComboDealPrincipleDetailPageRouteArgs(
             key: key,
             comboDeal: comboDeal,
+            initialComboItems: initialComboItems,
           ),
         );
 
@@ -1364,15 +1367,18 @@ class ComboDealPrincipleDetailPageRouteArgs {
   const ComboDealPrincipleDetailPageRouteArgs({
     this.key,
     required this.comboDeal,
+    this.initialComboItems = const [],
   });
 
   final _i43.Key? key;
 
   final _i57.PriceComboDeal comboDeal;
 
+  final List<_i56.PriceAggregate> initialComboItems;
+
   @override
   String toString() {
-    return 'ComboDealPrincipleDetailPageRouteArgs{key: $key, comboDeal: $comboDeal}';
+    return 'ComboDealPrincipleDetailPageRouteArgs{key: $key, comboDeal: $comboDeal, initialComboItems: $initialComboItems}';
   }
 }
 

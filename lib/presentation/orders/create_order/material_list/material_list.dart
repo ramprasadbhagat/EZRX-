@@ -217,12 +217,24 @@ class MaterialListPage extends StatelessWidget {
         );
 
     if (comboDealInCart.materials.isNotEmpty) {
-      context.router.push(
-        ComboDealMaterialDetailPageRoute(
-          comboItems: comboDealInCart.materials,
-          isEdit: true,
-        ),
-      );
+      final priceComboDeal = comboDealInCart.materials.firstPriceComboDeal;
+      final comboDealType = priceComboDeal.category.type;
+
+      if (comboDealType.isMaterialNumber) {
+        context.router.push(
+          ComboDealMaterialDetailPageRoute(
+            comboItems: comboDealInCart.materials,
+            isEdit: true,
+          ),
+        );
+      } else if (comboDealType.isPrinciple) {
+        context.router.push(
+          ComboDealPrincipleDetailPageRoute(
+            comboDeal: priceComboDeal,
+            initialComboItems: comboDealInCart.materials,
+          ),
+        );
+      }
 
       return;
     }

@@ -42,12 +42,24 @@ class CartComboDealItem extends StatelessWidget {
             borderRadius: 8,
             child: GestureDetector(
               onTap: () {
-                context.router.push(
-                  ComboDealMaterialDetailPageRoute(
-                    comboItems: cartItem.materials,
-                    isEdit: true,
-                  ),
-                );
+                final priceComboDeal = cartItem.materials.firstPriceComboDeal;
+                final comboDealType = priceComboDeal.category.type;
+
+                if (comboDealType.isMaterialNumber) {
+                  context.router.push(
+                    ComboDealMaterialDetailPageRoute(
+                      comboItems: cartItem.materials,
+                      isEdit: true,
+                    ),
+                  );
+                } else if (comboDealType.isPrinciple) {
+                  context.router.push(
+                    ComboDealPrincipleDetailPageRoute(
+                      comboDeal: priceComboDeal,
+                      initialComboItems: cartItem.materials,
+                    ),
+                  );
+                }
               },
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,

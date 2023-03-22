@@ -74,7 +74,7 @@ class ComboDealMaterialDetailBloc
                       materialNumber: materialNumber,
                     ),
                   )
-                  .copyWithComboDeal(comboDeal),
+                  .copyWithComboDealMinQty(comboDeal),
           },
         );
 
@@ -98,7 +98,7 @@ class ComboDealMaterialDetailBloc
         final itemsWithComboDealInfo = state.items.map(
           (key, value) => MapEntry(
             key,
-            value.copyWithComboDeal(e.comboDealInfo),
+            value.copyWithComboDealMinQty(e.comboDealInfo),
           ),
         );
 

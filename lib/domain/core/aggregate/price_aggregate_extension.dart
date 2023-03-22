@@ -3,7 +3,7 @@ part of 'price_aggregate.dart';
 extension ComboDealExtension on PriceAggregate {
   String get comboDealId => '${price.comboDeal.id}-${comboDeal.scheme.name}';
 
-  PriceAggregate copyWithComboDeal(ComboDeal comboDeal) {
+  PriceAggregate copyWithComboDealMinQty(ComboDeal comboDeal) {
     final materialWithDeal = copyWith(
       comboDeal: comboDeal,
     );
@@ -50,4 +50,7 @@ extension PriceAggregateExtension on List<PriceAggregate> {
       };
 
   ComboDeal get firstComboDeal => isEmpty ? ComboDeal.empty() : first.comboDeal;
+
+  PriceComboDeal get firstPriceComboDeal =>
+      isEmpty ? PriceComboDeal.empty() : first.price.comboDeal;
 }
