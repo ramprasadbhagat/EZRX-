@@ -16,7 +16,7 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class UpdateBonus extends StatelessWidget {
+class UpdateBonus extends StatefulWidget {
   const UpdateBonus({
     Key? key,
     required this.materialInfo,
@@ -29,11 +29,27 @@ class UpdateBonus extends StatelessWidget {
   final bool isUpdateFromCart;
 
   @override
-  Widget build(BuildContext context) {
-    final controller = TextEditingController(
-      text: '${materialInfo.quantity == 0 ? "1" : materialInfo.quantity}',
-    );
+  State<UpdateBonus> createState() => _UpdateBonusState();
+}
 
+class _UpdateBonusState extends State<UpdateBonus> {
+  late TextEditingController controller;
+
+  @override
+  void initState() {
+    controller = TextEditingController();
+
+    controller.text = widget.materialInfo.quantity == 0 ? '1' : widget.materialInfo.quantity.toString();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       key: const Key('updateBonus'),
       backgroundColor: Colors.transparent,
@@ -47,7 +63,7 @@ class UpdateBonus extends StatelessWidget {
               children: [
                 Center(
                   child: Text(
-                    materialInfo.materialDescription,
+                    widget.materialInfo.materialDescription,
                     style: Theme.of(context).textTheme.titleLarge?.apply(
                           color: ZPColors.black, // ZPColors.black,
                         ),
@@ -55,7 +71,7 @@ class UpdateBonus extends StatelessWidget {
                 ),
                 Center(
                   child: Text(
-                    materialInfo.principalData.principalName
+                    widget.materialInfo.principalData.principalName
                         .getOrDefaultValue(''),
                     style: Theme.of(context).textTheme.titleSmall?.apply(
                           color: ZPColors.lightGray,
@@ -64,7 +80,7 @@ class UpdateBonus extends StatelessWidget {
                 ),
                 Center(
                   child: Text(
-                    materialInfo.materialNumber.displayMatNo,
+                    widget.materialInfo.materialNumber.displayMatNo,
                     style: Theme.of(context).textTheme.titleSmall?.apply(
                           color: ZPColors.lightGray,
                         ),
@@ -85,9 +101,9 @@ class UpdateBonus extends StatelessWidget {
                           'changed_quantity',
                           segmentation: {
                             'materialNum':
-                                materialInfo.materialNumber.getOrCrash(),
-                            'listPrice': cartItem.listPrice,
-                            'price': cartItem.unitPrice,
+                                widget.materialInfo.materialNumber.getOrCrash(),
+                            'listPrice': widget.cartItem.listPrice,
+                            'price': widget.cartItem.unitPrice,
                           },
                         );
                       },
@@ -96,9 +112,9 @@ class UpdateBonus extends StatelessWidget {
                           'deduct_quantity',
                           segmentation: {
                             'materialNum':
-                                materialInfo.materialNumber.getOrCrash(),
-                            'listPrice': cartItem.listPrice,
-                            'price': cartItem.unitPrice,
+                                widget.materialInfo.materialNumber.getOrCrash(),
+                            'listPrice': widget.cartItem.listPrice,
+                            'price': widget.cartItem.unitPrice,
                           },
                         );
                       },
@@ -107,9 +123,9 @@ class UpdateBonus extends StatelessWidget {
                           'add_quantity',
                           segmentation: {
                             'materialNum':
-                                materialInfo.materialNumber.getOrCrash(),
-                            'listPrice': cartItem.listPrice,
-                            'price': cartItem.unitPrice,
+                                widget.materialInfo.materialNumber.getOrCrash(),
+                            'listPrice': widget.cartItem.listPrice,
+                            'price': widget.cartItem.unitPrice,
                           },
                         );
                       },
@@ -125,11 +141,11 @@ class UpdateBonus extends StatelessWidget {
                 locator<CountlyService>().addCountlyEvent('Add to bonus');
                 context.read<CartBloc>().add(
                       CartEvent.addBonusToCartItem(
-                        item: cartItem,
+                        item: widget.cartItem,
                         bonusItem: MaterialItemBonus.empty().copyWith(
-                          materialInfo: materialInfo,
+                          materialInfo: widget.materialInfo,
                           materialDescription:
-                              materialInfo.materialDescription,
+                              widget.materialInfo.materialDescription,
                           additionalBonusFlag: true,
                           bonusOverrideFlag: true,
                           qty: int.tryParse(controller.text) ?? 1,
