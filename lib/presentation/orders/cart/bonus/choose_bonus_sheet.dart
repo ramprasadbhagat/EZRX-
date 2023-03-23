@@ -67,6 +67,7 @@ class _UpdateBonusState extends State<UpdateBonus> {
                     style: Theme.of(context).textTheme.titleLarge?.apply(
                           color: ZPColors.black, // ZPColors.black,
                         ),
+                    textAlign: TextAlign.center,
                   ),
                 ),
                 Center(

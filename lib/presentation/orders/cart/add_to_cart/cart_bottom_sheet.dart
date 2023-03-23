@@ -7,6 +7,7 @@ import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/update_cart.dart';
 import 'package:ezrxmobile/presentation/orders/cart/bonus/choose_bonus_sheet.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/add_to_cart.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -34,7 +35,7 @@ class CartBottomSheet {
           ),
         );
     showModalBottomSheet(
-      barrierColor: Colors.transparent,
+      barrierColor: ZPColors.white,
       context: context,
       enableDrag: false,
       isScrollControlled: true,
@@ -64,7 +65,7 @@ class CartBottomSheet {
           ),
         );
     showModalBottomSheet(
-      barrierColor: Colors.transparent,
+      barrierColor: ZPColors.white,
       context: context,
       enableDrag: false,
       isScrollControlled: true,
@@ -89,7 +90,6 @@ class CartBottomSheet {
         ),
       ),
       context: context,
-      useSafeArea: true,
       builder: (_) {
         return UpdateBonus(
           materialInfo: item,
