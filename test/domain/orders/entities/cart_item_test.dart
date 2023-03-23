@@ -126,17 +126,21 @@ void main() {
         itemType: CartItemType.material,
       );
       final stockInfoMap = {
-        MaterialNumber('5'): StockInfo.empty().copyWith(
+        MaterialNumber('5'): [
+          StockInfo.empty().copyWith(
           materialNumber: MaterialNumber('5'),
           salesDistrict: 'Dist 0',
-        ),
-        MaterialNumber('10'): StockInfo.empty().copyWith(
+          )
+        ],
+        MaterialNumber('10'): [
+          StockInfo.empty().copyWith(
           materialNumber: MaterialNumber('10'),
           salesDistrict: 'Dist 1',
-        ),
+          )
+        ],
       };
       final newCartItem =
-          cartItem.copyWithStockInfo(stockInfoMap: stockInfoMap);
+          cartItem.copyWithStockInfo(stockInfoMap: stockInfoMap, salesOrganisationConfigs: SalesOrganisationConfigs.empty(),);
 
       expect(newCartItem.materials[0].getMaterialNumber.getOrCrash(), '5');
       expect(newCartItem.materials[0].stockInfo.salesDistrict, 'Dist 0');

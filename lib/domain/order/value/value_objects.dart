@@ -784,3 +784,18 @@ class ComboDealCategoryType extends ValueObject<String> {
 
   const ComboDealCategoryType._(this.value);
 }
+
+class BatchNumber extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory BatchNumber(String input) {
+    return BatchNumber._(validateStringNotEmpty(input));
+  }
+
+  String get selectOrGetBatch {
+    return value.getOrElse(() => 'Select'.tr());
+  }
+
+  const BatchNumber._(this.value);
+}

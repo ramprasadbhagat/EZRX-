@@ -15,6 +15,8 @@ import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/cart_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
 import 'package:ezrxmobile/presentation/orders/cart/bonus/cart_item_bonus_tile.dart';
+import 'package:ezrxmobile/presentation/orders/cart/item/batch_number.dart';
+import 'package:ezrxmobile/presentation/orders/cart/override/price_override_bottomsheet.dart';
 import 'package:ezrxmobile/presentation/orders/cart/remark/cart_item_remark.dart';
 import 'package:ezrxmobile/presentation/orders/cart/remark/add_remark_dialog.dart';
 import 'package:ezrxmobile/presentation/orders/cart/remark/add_remark_button.dart';
@@ -23,7 +25,6 @@ import 'package:ezrxmobile/presentation/orders/cart/remark/update_remark_dialog.
 import 'package:ezrxmobile/presentation/core/tender_contract_details_tile.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/bonus_discount_label.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/cart_item_bonus_detail_widget.dart';
-import 'package:ezrxmobile/presentation/orders/cart/override/price_override_bottomsheet.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/price_tier_label.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/quantity_input.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -254,7 +255,7 @@ class CartMaterialItemTileDetails extends StatelessWidget {
   }) : super(key: key);
 
   bool _isPriceOverRideVisible(BuildContext context) {
-    if (!context.read<EligibilityBloc>().state.isEligiblePriceOverride ||
+    if (context.read<EligibilityBloc>().state.isOrderTypeEligible &&
         context.read<OrderDocumentTypeBloc>().state.isSpecialOrderType) {
       return false;
     }
@@ -270,7 +271,7 @@ class CartMaterialItemTileDetails extends StatelessWidget {
     final enableVat = context.read<SalesOrgBloc>().state.configs.enableVat;
     final isSpecialOrderType =
         context.read<OrderDocumentTypeBloc>().state.isSpecialOrderType;
-        
+
     return Expanded(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -354,6 +355,10 @@ class CartMaterialItemTileDetails extends StatelessWidget {
                     color: ZPColors.lightGray,
                   ),
             ),
+          BatchNumberLabel(
+            cartItem: cartItem,
+            isOrderSummaryView: isOrderSummaryView,
+          ),
           !material.isSpecialOrderTypeNotTH
               ?
             InkWell(

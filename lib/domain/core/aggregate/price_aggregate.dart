@@ -37,6 +37,7 @@ class PriceAggregate with _$PriceAggregate {
     required TenderContract tenderContract,
     required ComboDeal comboDeal,
     @Default(false) bool isSpecialOrderType,
+    @Default(<StockInfo>[]) List<StockInfo> stockInfoList,
   }) = _PriceAggregate;
 
   factory PriceAggregate.empty() => PriceAggregate(
@@ -69,7 +70,8 @@ class PriceAggregate with _$PriceAggregate {
 
   SubmitMaterialInfo toSubmitMaterialInfo() {
     return SubmitMaterialInfo(
-      batch: salesOrgConfig.enableBatchNumber ? stockInfo.batch : '',
+      batch:
+          salesOrgConfig.enableBatchNumber ? stockInfo.batch : BatchNumber(''),
       bonuses: <MaterialItemBonus>[],
       comment: '',
       materialNumber: materialInfo.materialNumber,

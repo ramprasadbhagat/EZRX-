@@ -34,7 +34,7 @@ class StockInfoDto with _$StockInfoDto {
     return StockInfoDto(
       materialNumber: stockInfo.materialNumber.getOrDefaultValue(''),
       expiryDate: stockInfo.expiryDate.getOrDefaultValue(''),
-      batch: stockInfo.batch,
+      batch: stockInfo.batch.getOrDefaultValue(''),
       inStock: stockInfo.inStock.getOrDefaultValue(''),
       salesDistrict: stockInfo.salesDistrict,
     );
@@ -43,7 +43,7 @@ class StockInfoDto with _$StockInfoDto {
   StockInfo toDomain() {
     return StockInfo(
       materialNumber: MaterialNumber(materialNumber),
-      batch: batch,
+      batch: BatchNumber(batch),
       expiryDate: DateTimeStringValue(expiryDate),
       inStock: MaterialInStock(inStock),
       salesDistrict: salesDistrict,

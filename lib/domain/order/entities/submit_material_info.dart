@@ -15,7 +15,7 @@ class SubmitMaterialInfo with _$SubmitMaterialInfo {
     required TenderContract tenderContract,
     required List<MaterialItemBonus> bonuses,
     required String comment,
-    required String batch,
+    required BatchNumber batch,
     required String salesDistrict,
     required MaterialItemOverride materialItemOverride,
   }) = _SubmitMaterialInfo;
@@ -26,7 +26,7 @@ class SubmitMaterialInfo with _$SubmitMaterialInfo {
         tenderContract: TenderContract.empty(),
         bonuses: <MaterialItemBonus>[],
         comment: '',
-        batch: '',
+        batch: BatchNumber(''),
         salesDistrict: '',
         materialItemOverride: MaterialItemOverride.empty(),
       );

@@ -110,6 +110,7 @@ void main() {
         zmgMaterialCountOnCart: 10,
         comboDealDto: ComboDealDto.empty,
         isSpecialOrderType: false,
+        stockInfoDtoList: [],
       );
     });
     test('Test toDomain', () {

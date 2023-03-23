@@ -120,4 +120,11 @@ class CartState with _$CartState {
       orElse: () => CartItem.comboDeal([]),
     );
   }
+
+  bool get batchNotSelected => cartItems.any(
+        (element) =>
+            element.itemType == CartItemType.material &&
+            element.materials.first.salesOrgConfig.enableBatchNumber &&
+            !element.materials.first.stockInfo.batch.isValid(),
+      );
 }

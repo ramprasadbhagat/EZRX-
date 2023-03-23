@@ -3,6 +3,7 @@ import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
+import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/price_combo_deal.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -711,6 +712,37 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           );
         },
         (cartItemList) async {
+          emit(
+            state.copyWith(
+              cartItems: cartItemList,
+              apiFailureOrSuccessOption: none(),
+              isFetching: false,
+            ),
+          );
+        },
+      );
+    });
+    on<_UpdateBatchInCartItem>((e, emit) async {
+      emit(state.copyWith(
+        isFetching: true,
+        apiFailureOrSuccessOption: none(),
+      ));
+
+      final failureOrSuccess = await repository.updatedBatchInCartItem(
+        item: e.item,
+        stockInfo: e.stockInfo,
+      );
+
+      failureOrSuccess.fold(
+        (failure) {
+          emit(
+            state.copyWith(
+              apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+              isFetching: false,
+            ),
+          );
+        },
+        (cartItemList) {
           emit(
             state.copyWith(
               cartItems: cartItemList,

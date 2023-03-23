@@ -52,8 +52,8 @@ class EligibilityState with _$EligibilityState {
     }
 
     // 1. country must be case 'TH', 'SG', 'TW', 'MY'
-    if (salesOrganisation.salesOrg.isOrderTypeEligible &&
-        isEligiblePriceOverride) {
+    if (salesOrganisation.salesOrg.isValidCountryOrderTypeEligible &&
+        isOrderTypeEligible) {
       return true;
     }
 
@@ -176,6 +176,6 @@ class EligibilityState with _$EligibilityState {
   // 1. user role type must be SalesRep
   // 2. sales org config OrderType feature toggle enable
   //============================================================
-  bool get isEligiblePriceOverride =>
+  bool get isOrderTypeEligible =>
       user.role.type.isSalesRep && !salesOrgConfigs.disableOrderType;
 }

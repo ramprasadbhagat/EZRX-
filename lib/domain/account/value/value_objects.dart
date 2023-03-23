@@ -80,7 +80,7 @@ class SalesOrg extends ValueObject<String> {
     return country == 'TW';
   }
 
-  bool get isOrderTypeEligible {
+  bool get isValidCountryOrderTypeEligible {
     return countrySupportOrderType(country);
   }
 

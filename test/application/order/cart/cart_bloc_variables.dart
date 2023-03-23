@@ -22,7 +22,7 @@ final mockStockInfo = StockInfo.empty().copyWith(
   inStock: MaterialInStock('Yes'),
   expiryDate: DateTimeStringValue('NA'),
   salesDistrict: '',
-  batch: '',
+  batch: BatchNumber(''),
 );
 final mockMaterialList = [
   PriceAggregate.empty().copyWith(
@@ -204,7 +204,7 @@ final bonus913MockCartItem = PriceAggregate.empty().copyWith(
     inStock: MaterialInStock('Yes'),
     expiryDate: DateTimeStringValue('NA'),
     salesDistrict: '',
-    batch: '',
+    batch: BatchNumber(''),
   ),
   price: Price.empty().copyWith(
     materialNumber: bonusMaterialNumber,
@@ -276,7 +276,7 @@ final bonus911MockCartItem = PriceAggregate.empty().copyWith(
     inStock: MaterialInStock('Yes'),
     expiryDate: DateTimeStringValue('NA'),
     salesDistrict: '',
-    batch: '',
+    batch: BatchNumber(''),
   ),
   price: Price.empty().copyWith(
     materialNumber: bonusMaterialNumber,
@@ -347,7 +347,7 @@ final bonus914MockCartItem = PriceAggregate.empty().copyWith(
     inStock: MaterialInStock('Yes'),
     expiryDate: DateTimeStringValue('NA'),
     salesDistrict: '',
-    batch: '',
+    batch: BatchNumber(''),
   ),
   price: Price.empty().copyWith(
     materialNumber: bonusMaterialNumber,
@@ -418,7 +418,7 @@ final bonus915MockCartItem = PriceAggregate.empty().copyWith(
     inStock: MaterialInStock('Yes'),
     expiryDate: DateTimeStringValue('NA'),
     salesDistrict: '',
-    batch: '',
+    batch: BatchNumber(''),
   ),
   price: Price.empty().copyWith(
     materialNumber: bonusMaterialNumber,

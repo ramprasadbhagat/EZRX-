@@ -34,8 +34,8 @@ class OrderItemCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final eligibiltiyBlocState = context.read<EligibilityBloc>().state;
-    final salesOrgConfigs = eligibiltiyBlocState.salesOrgConfigs;
+    final eligibilityBlocState = context.read<EligibilityBloc>().state;
+    final salesOrgConfigs = eligibilityBlocState.salesOrgConfigs;
     final enableTaxDisplay = salesOrgConfigs.enableTaxDisplay;
     final enableDisplayOrderDiscount = salesOrgConfigs.displayOrderDiscount;
     final enableRemark = salesOrgConfigs.enableRemarks;
@@ -99,7 +99,7 @@ class OrderItemCard extends StatelessWidget {
                         keyFlex: 1,
                         valueFlex: 1,
                       ),
-                      eligibiltiyBlocState.salesOrgConfigs.batchNumDisplay
+                      eligibilityBlocState.salesOrgConfigs.batchNumDisplay 
                           ? BalanceTextRow(
                               keyText: 'Batch Number & Expiry Date'.tr(),
                               valueText: orderHistoryDetailsBonusAggregate
@@ -117,7 +117,7 @@ class OrderItemCard extends StatelessWidget {
                         keyFlex: 1,
                         valueFlex: 1,
                       ),
-                      eligibiltiyBlocState
+                      eligibilityBlocState
                                   .salesOrgConfigs.disableDeliveryDate &&
                               orderHistoryDetailsBonusAggregate
                                   .orderItem.plannedDeliveryDate.isNotEmpty

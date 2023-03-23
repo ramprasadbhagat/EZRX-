@@ -105,4 +105,9 @@ class CartEvent with _$CartEvent {
     required ShipToInfo shipToInfo,
     required bool doNotallowOutOfStockMaterial,
   }) = _ReplaceWithOrderItems;
+
+  const factory CartEvent.updateBatchInCartItem({
+    required CartItem item,
+    required StockInfo stockInfo,
+  }) = _UpdateBatchInCartItem;
 }

@@ -109,7 +109,8 @@ abstract class ICartRepository {
     required ShipToInfo shipToInfo,
   });
 
-  Future<Either<ApiFailure, Map<MaterialNumber, StockInfo>>> getStockInfoList({
+  Future<Either<ApiFailure, Map<MaterialNumber, List<StockInfo>>>>
+      getStockInfoList({
     required List<MaterialInfo> items,
     required CustomerCodeInfo customerCodeInfo,
     required SalesOrganisationConfigs salesOrganisationConfigs,
@@ -117,7 +118,7 @@ abstract class ICartRepository {
     required ShipToInfo shipToInfo,
   });
 
-  Future<Either<ApiFailure, StockInfo>> getStockInfo({
+  Future<Either<ApiFailure, List<StockInfo>>> getStockInfo({
     required MaterialInfo material,
     required CustomerCodeInfo customerCodeInfo,
     required SalesOrganisationConfigs salesOrganisationConfigs,
@@ -132,5 +133,10 @@ abstract class ICartRepository {
     required SalesOrganisation salesOrganisation,
     required ShipToInfo shipToInfo,
     required bool doNotAllowOutOfStockMaterials,
+  });
+
+  Future<Either<ApiFailure, List<CartItem>>> updatedBatchInCartItem({
+    required CartItem item,
+    required StockInfo stockInfo,
   });
 }

@@ -130,7 +130,7 @@ void main() {
             emptySalesOrganisationConfigs.copyWith(enableBatchNumber: false),
       );
       final submitMaterialInfo = customPriceAggregate.toSubmitMaterialInfo();
-      expect(submitMaterialInfo.batch, '');
+      expect(submitMaterialInfo.batch, BatchNumber(''));
       expect(submitMaterialInfo.bonuses, <MaterialItemBonus>[]);
       expect(submitMaterialInfo.comment, '');
       expect(submitMaterialInfo.materialNumber,

@@ -221,6 +221,15 @@ class _SubmitContinueButton extends StatelessWidget {
   }
 
   void _submitOrder(BuildContext context) {
+    final cartBloc = context.read<CartBloc>();
+    if (cartBloc.state.batchNotSelected) {
+      showSnackBar(
+        context: context,
+        message: 'Batch Number is empty'.tr(),
+      );
+
+      return;
+    }
     trackMixpanelEvent(
       MixpanelEvents.submitOrder,
     );
@@ -234,11 +243,10 @@ class _SubmitContinueButton extends StatelessWidget {
           salesOrganisation:
               context.read<SalesOrgBloc>().state.salesOrganisation,
           user: context.read<UserBloc>().state.user,
-          cartItems:
-              context.read<CartBloc>().state.selectedCartItems.validMaterials,
-          grandTotal: context.read<CartBloc>().state.grandTotalBasedOnOrderType(
-                isSpecial: isSpecialType,
-              ),
+          cartItems: cartBloc.state.selectedCartItems.validMaterials,
+          grandTotal: cartBloc.state.grandTotalBasedOnOrderType(
+            isSpecial: isSpecialType,
+          ),
           orderType: context
               .read<OrderDocumentTypeBloc>()
               .state

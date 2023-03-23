@@ -21,7 +21,7 @@ mixin _$SubmitMaterialInfo {
   TenderContract get tenderContract => throw _privateConstructorUsedError;
   List<MaterialItemBonus> get bonuses => throw _privateConstructorUsedError;
   String get comment => throw _privateConstructorUsedError;
-  String get batch => throw _privateConstructorUsedError;
+  BatchNumber get batch => throw _privateConstructorUsedError;
   String get salesDistrict => throw _privateConstructorUsedError;
   MaterialItemOverride get materialItemOverride =>
       throw _privateConstructorUsedError;
@@ -43,7 +43,7 @@ abstract class $SubmitMaterialInfoCopyWith<$Res> {
       TenderContract tenderContract,
       List<MaterialItemBonus> bonuses,
       String comment,
-      String batch,
+      BatchNumber batch,
       String salesDistrict,
       MaterialItemOverride materialItemOverride});
 
@@ -97,7 +97,7 @@ class _$SubmitMaterialInfoCopyWithImpl<$Res, $Val extends SubmitMaterialInfo>
       batch: null == batch
           ? _value.batch
           : batch // ignore: cast_nullable_to_non_nullable
-              as String,
+              as BatchNumber,
       salesDistrict: null == salesDistrict
           ? _value.salesDistrict
           : salesDistrict // ignore: cast_nullable_to_non_nullable
@@ -141,7 +141,7 @@ abstract class _$$_SubmitMaterialInfoCopyWith<$Res>
       TenderContract tenderContract,
       List<MaterialItemBonus> bonuses,
       String comment,
-      String batch,
+      BatchNumber batch,
       String salesDistrict,
       MaterialItemOverride materialItemOverride});
 
@@ -195,7 +195,7 @@ class __$$_SubmitMaterialInfoCopyWithImpl<$Res>
       batch: null == batch
           ? _value.batch
           : batch // ignore: cast_nullable_to_non_nullable
-              as String,
+              as BatchNumber,
       salesDistrict: null == salesDistrict
           ? _value.salesDistrict
           : salesDistrict // ignore: cast_nullable_to_non_nullable
@@ -239,7 +239,7 @@ class _$_SubmitMaterialInfo extends _SubmitMaterialInfo {
   @override
   final String comment;
   @override
-  final String batch;
+  final BatchNumber batch;
   @override
   final String salesDistrict;
   @override
@@ -297,7 +297,7 @@ abstract class _SubmitMaterialInfo extends SubmitMaterialInfo {
           required final TenderContract tenderContract,
           required final List<MaterialItemBonus> bonuses,
           required final String comment,
-          required final String batch,
+          required final BatchNumber batch,
           required final String salesDistrict,
           required final MaterialItemOverride materialItemOverride}) =
       _$_SubmitMaterialInfo;
@@ -314,7 +314,7 @@ abstract class _SubmitMaterialInfo extends SubmitMaterialInfo {
   @override
   String get comment;
   @override
-  String get batch;
+  BatchNumber get batch;
   @override
   String get salesDistrict;
   @override

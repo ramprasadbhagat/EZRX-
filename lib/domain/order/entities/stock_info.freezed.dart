@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$StockInfo {
   MaterialNumber get materialNumber => throw _privateConstructorUsedError;
   DateTimeStringValue get expiryDate => throw _privateConstructorUsedError;
-  String get batch => throw _privateConstructorUsedError;
+  BatchNumber get batch => throw _privateConstructorUsedError;
   MaterialInStock get inStock => throw _privateConstructorUsedError;
   String get salesDistrict => throw _privateConstructorUsedError;
 
@@ -35,7 +35,7 @@ abstract class $StockInfoCopyWith<$Res> {
   $Res call(
       {MaterialNumber materialNumber,
       DateTimeStringValue expiryDate,
-      String batch,
+      BatchNumber batch,
       MaterialInStock inStock,
       String salesDistrict});
 }
@@ -71,7 +71,7 @@ class _$StockInfoCopyWithImpl<$Res, $Val extends StockInfo>
       batch: null == batch
           ? _value.batch
           : batch // ignore: cast_nullable_to_non_nullable
-              as String,
+              as BatchNumber,
       inStock: null == inStock
           ? _value.inStock
           : inStock // ignore: cast_nullable_to_non_nullable
@@ -94,7 +94,7 @@ abstract class _$$_StockInfoCopyWith<$Res> implements $StockInfoCopyWith<$Res> {
   $Res call(
       {MaterialNumber materialNumber,
       DateTimeStringValue expiryDate,
-      String batch,
+      BatchNumber batch,
       MaterialInStock inStock,
       String salesDistrict});
 }
@@ -128,7 +128,7 @@ class __$$_StockInfoCopyWithImpl<$Res>
       batch: null == batch
           ? _value.batch
           : batch // ignore: cast_nullable_to_non_nullable
-              as String,
+              as BatchNumber,
       inStock: null == inStock
           ? _value.inStock
           : inStock // ignore: cast_nullable_to_non_nullable
@@ -157,7 +157,7 @@ class _$_StockInfo extends _StockInfo {
   @override
   final DateTimeStringValue expiryDate;
   @override
-  final String batch;
+  final BatchNumber batch;
   @override
   final MaterialInStock inStock;
   @override
@@ -198,7 +198,7 @@ abstract class _StockInfo extends StockInfo {
   const factory _StockInfo(
       {required final MaterialNumber materialNumber,
       required final DateTimeStringValue expiryDate,
-      required final String batch,
+      required final BatchNumber batch,
       required final MaterialInStock inStock,
       required final String salesDistrict}) = _$_StockInfo;
   const _StockInfo._() : super._();
@@ -208,7 +208,7 @@ abstract class _StockInfo extends StockInfo {
   @override
   DateTimeStringValue get expiryDate;
   @override
-  String get batch;
+  BatchNumber get batch;
   @override
   MaterialInStock get inStock;
   @override

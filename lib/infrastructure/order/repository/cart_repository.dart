@@ -96,7 +96,7 @@ class CartRepository implements ICartRepository {
 
       final cartItemWithStock = cartItem.copyWithStockInfo(
         stockInfoMap: stockInfo.getOrElse(() => {}),
-      );
+        salesOrganisationConfigs: salesOrganisationConfigs,);
 
       final isOutOfStockItem = cartItemWithStock
           .copyWithInStockOnly(
@@ -207,7 +207,13 @@ class CartRepository implements ICartRepository {
         salesOrganisation: salesOrganisation,
         shipToInfo: shipToInfo,
       );
-      final stockInfo = result.getOrElse(() => StockInfo.empty());
+      final stockInfo = result.fold(
+        (failure) => StockInfo.empty(),
+        (stockInfoList) => _getStockInfo(
+          stockInfoList: stockInfoList,
+          materialNumber: updatedQtyItem.materialInfo.materialNumber,
+        ),
+      );
       if (!stockInfo.inStock.isMaterialInStock &&
           doNotAllowOutOfStockMaterials) {
         return const Left(
@@ -315,12 +321,15 @@ class CartRepository implements ICartRepository {
         salesOrganisation: salesOrganisation,
         shipToInfo: shipToInfo,
       );
-      final stockInfo = result.getOrElse(() => StockInfo.empty());
+      final stockInfo = result.fold(
+        (failure) => StockInfo.empty(),
+        (stockInfoList) => _getStockInfo(
+          stockInfoList: stockInfoList,
+          materialNumber: newBonus.materialInfo.materialNumber,),
+      );
       if (!stockInfo.inStock.isMaterialInStock &&
           doNotAllowOutOfStockMaterials) {
-        return const Left(
-          ApiFailure.productOutOfStock(),
-        );
+        return const Left(ApiFailure.productOutOfStock());
       }
 
       final newBonusWithStock = newBonus.copyWith(
@@ -435,8 +444,14 @@ class CartRepository implements ICartRepository {
       );
       final bonusStockInfoMap = failureOrSuccess.getOrElse(() => {});
       final dealBonusWithStockInfo = material.getMaterialItemBonus.map((bonus) {
-        final stockInfo = bonusStockInfoMap[bonus.materialNumber];
-        if (stockInfo != null) {
+        final stockInfoList = bonusStockInfoMap[bonus.materialNumber] ?? [];
+        if (stockInfoList.isNotEmpty) {
+          final stockInfo = stockInfoList.firstWhere(
+            (element) =>
+                element.materialNumber == material.materialInfo.materialNumber,
+            orElse: () => StockInfo.empty(),
+          );
+          
           return bonus.copyWith(
             inStock: stockInfo.inStock.getOrCrash(),
           );
@@ -653,8 +668,12 @@ class CartRepository implements ICartRepository {
         (failure) => Left(failure),
         (stockInfoMap) async {
           final cartItemWithStockInfo = cartItem
-              .map((item) => item.copyWithStockInfo(stockInfoMap: stockInfoMap))
-              .toList();
+              .map(
+                (item) => item.copyWithStockInfo(
+                  stockInfoMap: stockInfoMap, 
+                  salesOrganisationConfigs: salesOrganisationConfigs,
+                ),
+              ).toList();
 
           try {
             await cartStorage.putAll(items: {
@@ -697,6 +716,7 @@ class CartRepository implements ICartRepository {
               stockInfoMap: stockInfoMap.getOrElse(
                 () => {},
               ),
+              salesOrganisationConfigs: salesOrganisationConfigs,
             ),
           )
           .toList();
@@ -724,7 +744,8 @@ class CartRepository implements ICartRepository {
   }
 
   @override
-  Future<Either<ApiFailure, Map<MaterialNumber, StockInfo>>> getStockInfoList({
+  Future<Either<ApiFailure, Map<MaterialNumber, List<StockInfo>>>>
+      getStockInfoList({
     required List<MaterialInfo> items,
     required CustomerCodeInfo customerCodeInfo,
     required SalesOrganisationConfigs salesOrganisationConfigs,
@@ -732,7 +753,7 @@ class CartRepository implements ICartRepository {
     required ShipToInfo shipToInfo,
   }) async {
     try {
-      final stockInfoMap = <MaterialNumber, StockInfo>{};
+      final stockInfoMap = <MaterialNumber, List<StockInfo>>{};
       for (final item in items) {
         final response = await getStockInfo(
           customerCodeInfo: customerCodeInfo,
@@ -742,9 +763,11 @@ class CartRepository implements ICartRepository {
           shipToInfo: shipToInfo,
         );
         final stockInfo = response.fold(
-          (failure) => StockInfo.empty().copyWith(
-            materialNumber: item.materialNumber,
-          ),
+          (failure) => [
+            StockInfo.empty().copyWith(
+              materialNumber: item.materialNumber,
+            ),
+          ],
           (stockInfo) => stockInfo,
         );
         stockInfoMap.addAll(
@@ -759,7 +782,7 @@ class CartRepository implements ICartRepository {
   }
 
   @override
-  Future<Either<ApiFailure, StockInfo>> getStockInfo({
+  Future<Either<ApiFailure, List<StockInfo>>> getStockInfo({
     required MaterialInfo material,
     required CustomerCodeInfo customerCodeInfo,
     required SalesOrganisationConfigs salesOrganisationConfigs,
@@ -771,12 +794,8 @@ class CartRepository implements ICartRepository {
         final stockInfoList = salesOrganisationConfigs.enableBatchNumber
             ? await stockInfoLocalDataSource.getStockInfoList()
             : [await stockInfoLocalDataSource.getStockInfo()];
-        final stockInformation = stockInfoList.firstWhere(
-          (element) => element.materialNumber == material.materialNumber,
-          orElse: () => StockInfo.empty(),
-        );
 
-        return Right(stockInformation);
+        return Right(stockInfoList);
       } catch (e) {
         return Left(FailureHandler.handleFailure(e));
       }
@@ -797,12 +816,8 @@ class CartRepository implements ICartRepository {
                   selectedCustomerCode: customerCodeInfo.customerCodeSoldTo,
                 ),
               ];
-        final stockInformation = stockInfoList.firstWhere(
-          (element) => element.materialNumber == material.materialNumber,
-          orElse: () => StockInfo.empty(),
-        );
 
-        return Right(stockInformation);
+        return Right(stockInfoList);
       } catch (e) {
         return Left(FailureHandler.handleFailure(e));
       }
@@ -848,6 +863,34 @@ class CartRepository implements ICartRepository {
   }) async {
     try {
       await cartStorage.deleteSelectedItems(selectedItemIds: selectedItemIds);
+
+      return fetchCart();
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  StockInfo _getStockInfo({
+    required List<StockInfo> stockInfoList,
+    required MaterialNumber materialNumber,
+  }) =>
+      stockInfoList.firstWhere(
+        (element) => element.materialNumber == materialNumber,
+        orElse: () => StockInfo.empty(),
+      );
+
+  @override
+  Future<Either<ApiFailure, List<CartItem>>> updatedBatchInCartItem({
+    required CartItem item,
+    required StockInfo stockInfo,
+  }) async {
+    try {
+      await cartStorage.put(
+        id: item.id,
+        item: CartItemDto.fromDomain(
+          item.copyWithBatch(stockInfo: stockInfo),
+        ),
+      );
 
       return fetchCart();
     } catch (e) {

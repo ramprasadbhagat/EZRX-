@@ -38,7 +38,7 @@ class SubmitMaterialInfoDto with _$SubmitMaterialInfoDto {
       tenderContract: TenderContract.empty(),
       bonuses: bonuses.map((e) => e.toDomain()).toList(),
       comment: comment,
-      batch: batch,
+      batch: BatchNumber(batch),
       salesDistrict: salesDistrict,
       materialItemOverride: MaterialItemOverride.empty(),
     );
@@ -61,7 +61,7 @@ class SubmitMaterialInfoDto with _$SubmitMaterialInfoDto {
           )
           .toList(),
       comment: submitMaterialInfo.comment,
-      batch: submitMaterialInfo.batch,
+      batch: submitMaterialInfo.batch.getOrDefaultValue(''),
       salesDistrict:
           submitMaterialInfo.tenderContract.salesDistrict.getOrCrash(),
       materialItemOverride: MaterialItemOverrideDto.fromDomain(

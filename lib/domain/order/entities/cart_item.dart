@@ -131,17 +131,39 @@ class CartItem with _$CartItem {
   }
 
   CartItem copyWithStockInfo({
-    required Map<MaterialNumber, StockInfo> stockInfoMap,
+    required Map<MaterialNumber, List<StockInfo>> stockInfoMap,
+    required SalesOrganisationConfigs salesOrganisationConfigs, 
   }) =>
       copyWith(
         materials: materials.map((material) {
-          final stockInfo = stockInfoMap[material.getMaterialNumber];
-          if (stockInfo != null) {
-            return material.copyWith(stockInfo: stockInfo);
-          }
-
-          return material;
+          final stockInfoList = stockInfoMap[material.getMaterialNumber] ?? [];
+          final stockInfo =
+              stockInfoList.isEmpty
+              ? StockInfo.empty()
+              : stockInfoList.firstWhere(
+                      (element) =>
+                          element.materialNumber ==
+                          material.materialInfo.materialNumber,
+                      orElse: () => StockInfo.empty(),
+                    );
+                    
+          return material.copyWith(
+            stockInfo: stockInfo,
+            stockInfoList: stockInfoList,
+            salesOrgConfig: salesOrganisationConfigs,
+          );
         }).toList(),
+      );
+
+  CartItem copyWithBatch({
+    required StockInfo stockInfo,
+  }) =>
+      copyWith(
+        materials: materials
+            .map((material) => material.copyWith(
+                  stockInfo: stockInfo,
+                ))
+            .toList(),
       );
 
   CartItem copyWithInStockOnly({required bool allowOutOfStock}) => copyWith(
