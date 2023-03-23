@@ -20,6 +20,7 @@ mixin _$ComboDealQtyTier {
   String get conditionNumber => throw _privateConstructorUsedError;
   int get minQty => throw _privateConstructorUsedError;
   DiscountType get type => throw _privateConstructorUsedError;
+  String get suffix => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ComboDealQtyTierCopyWith<ComboDealQtyTier> get copyWith =>
@@ -33,7 +34,11 @@ abstract class $ComboDealQtyTierCopyWith<$Res> {
       _$ComboDealQtyTierCopyWithImpl<$Res, ComboDealQtyTier>;
   @useResult
   $Res call(
-      {double rate, String conditionNumber, int minQty, DiscountType type});
+      {double rate,
+      String conditionNumber,
+      int minQty,
+      DiscountType type,
+      String suffix});
 }
 
 /// @nodoc
@@ -53,6 +58,7 @@ class _$ComboDealQtyTierCopyWithImpl<$Res, $Val extends ComboDealQtyTier>
     Object? conditionNumber = null,
     Object? minQty = null,
     Object? type = null,
+    Object? suffix = null,
   }) {
     return _then(_value.copyWith(
       rate: null == rate
@@ -71,6 +77,10 @@ class _$ComboDealQtyTierCopyWithImpl<$Res, $Val extends ComboDealQtyTier>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as DiscountType,
+      suffix: null == suffix
+          ? _value.suffix
+          : suffix // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -84,7 +94,11 @@ abstract class _$$_ComboDealQtyTierCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {double rate, String conditionNumber, int minQty, DiscountType type});
+      {double rate,
+      String conditionNumber,
+      int minQty,
+      DiscountType type,
+      String suffix});
 }
 
 /// @nodoc
@@ -102,6 +116,7 @@ class __$$_ComboDealQtyTierCopyWithImpl<$Res>
     Object? conditionNumber = null,
     Object? minQty = null,
     Object? type = null,
+    Object? suffix = null,
   }) {
     return _then(_$_ComboDealQtyTier(
       rate: null == rate
@@ -120,6 +135,10 @@ class __$$_ComboDealQtyTierCopyWithImpl<$Res>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as DiscountType,
+      suffix: null == suffix
+          ? _value.suffix
+          : suffix // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -131,7 +150,8 @@ class _$_ComboDealQtyTier extends _ComboDealQtyTier {
       {required this.rate,
       required this.conditionNumber,
       required this.minQty,
-      required this.type})
+      required this.type,
+      required this.suffix})
       : super._();
 
   @override
@@ -142,10 +162,12 @@ class _$_ComboDealQtyTier extends _ComboDealQtyTier {
   final int minQty;
   @override
   final DiscountType type;
+  @override
+  final String suffix;
 
   @override
   String toString() {
-    return 'ComboDealQtyTier(rate: $rate, conditionNumber: $conditionNumber, minQty: $minQty, type: $type)';
+    return 'ComboDealQtyTier(rate: $rate, conditionNumber: $conditionNumber, minQty: $minQty, type: $type, suffix: $suffix)';
   }
 
   @override
@@ -157,12 +179,13 @@ class _$_ComboDealQtyTier extends _ComboDealQtyTier {
             (identical(other.conditionNumber, conditionNumber) ||
                 other.conditionNumber == conditionNumber) &&
             (identical(other.minQty, minQty) || other.minQty == minQty) &&
-            (identical(other.type, type) || other.type == type));
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.suffix, suffix) || other.suffix == suffix));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, rate, conditionNumber, minQty, type);
+      Object.hash(runtimeType, rate, conditionNumber, minQty, type, suffix);
 
   @JsonKey(ignore: true)
   @override
@@ -176,7 +199,8 @@ abstract class _ComboDealQtyTier extends ComboDealQtyTier {
       {required final double rate,
       required final String conditionNumber,
       required final int minQty,
-      required final DiscountType type}) = _$_ComboDealQtyTier;
+      required final DiscountType type,
+      required final String suffix}) = _$_ComboDealQtyTier;
   const _ComboDealQtyTier._() : super._();
 
   @override
@@ -187,6 +211,8 @@ abstract class _ComboDealQtyTier extends ComboDealQtyTier {
   int get minQty;
   @override
   DiscountType get type;
+  @override
+  String get suffix;
   @override
   @JsonKey(ignore: true)
   _$$_ComboDealQtyTierCopyWith<_$_ComboDealQtyTier> get copyWith =>

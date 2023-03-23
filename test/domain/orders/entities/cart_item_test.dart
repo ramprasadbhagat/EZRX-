@@ -550,7 +550,7 @@ void main() {
       expect(nonEligibleCartItem.isComboDealEligible, false);
       expect(cartItem.isComboDealEligible, true);
       expect(cartItem.id, '--k1');
-      expect(cartItem.comboDealRate, null);
+      expect(cartItem.comboDealRate(material: PriceAggregate.empty()), null);
       expect(cartItem.listPrice, 400);
       expect(cartItem.unitPrice, 360);
       expect(cartItem.grandTotalPrice, 360);
@@ -605,7 +605,7 @@ void main() {
       expect(nonEligibleCartItem.isComboDealEligible, false);
       expect(cartItem.isComboDealEligible, true);
       expect(cartItem.id, '--k2');
-      expect(cartItem.comboDealRate, -15);
+      expect(cartItem.comboDealRate(material: PriceAggregate.empty()), -15);
       expect(cartItem.listPrice, 37300.00);
       expect(cartItem.unitPrice, 31705.00);
       expect(cartItem.grandTotalPrice, 31705.00);
@@ -658,7 +658,7 @@ void main() {
       expect(nonEligibleCartItem.isComboDealEligible, false);
       expect(cartItem.isComboDealEligible, true);
       expect(cartItem.id, '--k2');
-      expect(cartItem.comboDealRate, -15);
+      expect(cartItem.comboDealRate(material: PriceAggregate.empty()), -15);
       expect(cartItem.listPrice, 503.00);
       expect(cartItem.unitPrice, 427.54);
       expect(cartItem.grandTotalPrice, 427.54);

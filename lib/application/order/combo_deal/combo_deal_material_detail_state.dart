@@ -27,6 +27,11 @@ class ComboDealMaterialDetailState with _$ComboDealMaterialDetailState {
     return selectedMaterials.values.toList();
   }
 
+  int get totalSelectedQuantity => allSelectedItems.fold<int>(
+        0,
+        (previousValue, element) => previousValue + element.quantity,
+      );
+
   ComboDeal get currentDeal => items.values.toList().firstComboDeal;
 
   List<List<PriceAggregate>> get itemBySets {

@@ -63,13 +63,14 @@ class ComboDealMaterialDtoAdapter extends TypeAdapter<_$_ComboDealMaterialDto> {
       type: fields[3] == null ? '' : fields[3] as String,
       conditionNumber: fields[4] == null ? '' : fields[4] as String,
       mandatory: fields[5] == null ? false : fields[5] as bool,
+      suffix: fields[6] == null ? '' : fields[6] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_ComboDealMaterialDto obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.minQty)
       ..writeByte(1)
@@ -81,7 +82,9 @@ class ComboDealMaterialDtoAdapter extends TypeAdapter<_$_ComboDealMaterialDto> {
       ..writeByte(4)
       ..write(obj.conditionNumber)
       ..writeByte(5)
-      ..write(obj.mandatory);
+      ..write(obj.mandatory)
+      ..writeByte(6)
+      ..write(obj.suffix);
   }
 
   @override
@@ -130,6 +133,7 @@ _$_ComboDealMaterialDto _$$_ComboDealMaterialDtoFromJson(
       type: json['type'] as String? ?? '',
       conditionNumber: json['conditionNumber'] as String? ?? '',
       mandatory: json['mandatory'] as bool? ?? false,
+      suffix: json['suffix'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_ComboDealMaterialDtoToJson(
@@ -141,4 +145,5 @@ Map<String, dynamic> _$$_ComboDealMaterialDtoToJson(
       'type': instance.type,
       'conditionNumber': instance.conditionNumber,
       'mandatory': instance.mandatory,
+      'suffix': instance.suffix,
     };

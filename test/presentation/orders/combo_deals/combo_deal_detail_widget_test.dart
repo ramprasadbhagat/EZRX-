@@ -767,18 +767,21 @@ void main() {
               conditionNumber: '',
               minQty: 3,
               type: DiscountType('%'),
+              suffix: '',
             ),
             ComboDealQtyTier(
               rate: 5.5,
               conditionNumber: '',
               minQty: 8,
               type: DiscountType('%'),
+              suffix: '',
             ),
             ComboDealQtyTier(
               rate: 6.0,
               conditionNumber: '',
               minQty: 20,
               type: DiscountType('%'),
+              suffix: '',
             ),
           ],
         ),
@@ -808,18 +811,21 @@ void main() {
               conditionNumber: '',
               minQty: 3,
               type: DiscountType('%'),
+              suffix: '',
             ),
             ComboDealQtyTier(
               rate: 5.5,
               conditionNumber: '',
               minQty: 8,
               type: DiscountType('%'),
+              suffix: '',
             ),
             ComboDealQtyTier(
               rate: 6.0,
               conditionNumber: '',
               minQty: 20,
               type: DiscountType('%'),
+              suffix: '',
             ),
           ],
         ),
@@ -955,6 +961,271 @@ void main() {
               items: {
                 MaterialNumber('fake-number-1'):
                     fakeFirstMaterial.copyWith(quantity: 3),
+                MaterialNumber('fake-number-2'):
+                    fakeSecondMaterial.copyWith(quantity: 1),
+              },
+              selectedItems: {},
+            ),
+          );
+          await tester.pumpWidget(
+            wrapper(
+              ComboDealMaterialDetailPage(
+                comboItems: [fakeFirstMaterial, fakeSecondMaterial],
+                isEdit: true,
+              ),
+            ),
+          );
+
+          expect(find.byType(ComboDealItem), findsNWidgets(2));
+          expect(find.byType(MandatoryLabel), findsNothing);
+          expect(
+            find.text(headerTitle),
+            findsOneWidget,
+          );
+          final checkbox = find.byType(Checkbox);
+          expect(checkbox, findsAtLeastNWidgets(2));
+          final getFirstCheckbox = checkbox.at(1);
+          await tester.tap(getFirstCheckbox);
+          await tester.pump();
+          final addToCartButton = find.byKey(const Key('addToCartButton'));
+          expect(addToCartButton, findsOneWidget);
+
+          await tester.tap(addToCartButton);
+          await tester.pump();
+
+          verify(() => cartBloc.add(any()));
+        },
+      );
+    },
+  );
+
+  group(
+    'Combo deal K4_2 case',
+    () {
+      const headerTitle =
+          'You must purchase a product or products with a total QTY of 6 OR 60. (Discounts will increase as the total quantity exceeds the minimum eligibilities)';
+      final fakeFirstMaterial = PriceAggregate.empty().copyWith(
+        materialInfo: MaterialInfo.empty().copyWith(
+          materialNumber: MaterialNumber('fake-number-1'),
+        ),
+        price: Price.empty().copyWith(lastPrice: MaterialPrice(100)),
+        comboDeal: ComboDeal.empty().copyWith(
+          materialComboDeals: [
+            ComboDealMaterialSet(
+              materials: [
+                ComboDealMaterial.empty().copyWith(
+                  minQty: 0,
+                  materialNumber: MaterialNumber('fake-number-1'),
+                  rate: -6,
+                  suffix: '1',
+                  type: DiscountType('%'),
+                ),
+                ComboDealMaterial.empty().copyWith(
+                  minQty: 0,
+                  materialNumber: MaterialNumber('fake-number-1'),
+                  rate: -6.5,
+                  suffix: '2',
+                  type: DiscountType('%'),
+                ),
+              ],
+              setNo: 'fake-set',
+            ),
+          ],
+          flexiQtyTier: <ComboDealQtyTier>[
+            ComboDealQtyTier(
+              rate: 0.0,
+              conditionNumber: '',
+              minQty: 6,
+              type: DiscountType('%'),
+              suffix: '1',
+            ),
+            ComboDealQtyTier(
+              rate: 0.0,
+              conditionNumber: '',
+              minQty: 60,
+              type: DiscountType('%'),
+              suffix: '2',
+            ),
+          ],
+        ),
+      );
+
+      final fakeSecondMaterial = PriceAggregate.empty().copyWith(
+        materialInfo: MaterialInfo.empty().copyWith(
+          materialNumber: MaterialNumber('fake-number-2'),
+        ),
+        price: Price.empty().copyWith(lastPrice: MaterialPrice(100)),
+        comboDeal: ComboDeal.empty().copyWith(
+          materialComboDeals: [
+            ComboDealMaterialSet(
+              materials: [
+                ComboDealMaterial.empty().copyWith(
+                  minQty: 0,
+                  materialNumber: MaterialNumber('fake-number-2'),
+                  rate: -7,
+                  suffix: '1',
+                  type: DiscountType('%'),
+                ),
+                ComboDealMaterial.empty().copyWith(
+                  minQty: 0,
+                  materialNumber: MaterialNumber('fake-number-2'),
+                  rate: -7.5,
+                  suffix: '2',
+                  type: DiscountType('%'),
+                )
+              ],
+              setNo: 'fake-set',
+            ),
+          ],
+          flexiQtyTier: <ComboDealQtyTier>[
+            ComboDealQtyTier(
+              rate: 0.0,
+              conditionNumber: '',
+              minQty: 6,
+              type: DiscountType('%'),
+              suffix: '1',
+            ),
+            ComboDealQtyTier(
+              rate: 0.0,
+              conditionNumber: '',
+              minQty: 60,
+              type: DiscountType('%'),
+              suffix: '2',
+            ),
+          ],
+        ),
+      );
+
+      testWidgets(
+        'Display 2 combo item, none is selected, nothing happen while add to cart',
+        (tester) async {
+          when(() => comboDealDetailBloc.state).thenReturn(
+            ComboDealMaterialDetailState.initial().copyWith(
+              items: {
+                MaterialNumber('fake-number-1'): fakeFirstMaterial,
+                MaterialNumber('fake-number-2'): fakeSecondMaterial,
+              },
+              selectedItems: {},
+            ),
+          );
+          await tester.pumpWidget(
+            wrapper(
+              ComboDealMaterialDetailPage(
+                comboItems: [fakeFirstMaterial, fakeSecondMaterial],
+              ),
+            ),
+          );
+
+          expect(find.byType(ComboDealItem), findsNWidgets(2));
+          expect(find.byType(MandatoryLabel), findsNothing);
+          expect(
+            find.text(headerTitle),
+            findsOneWidget,
+          );
+          final addToCartButton = find.byKey(const Key('addToCartButton'));
+          expect(addToCartButton, findsOneWidget);
+
+          await tester.tap(addToCartButton);
+          await tester.pump();
+
+          verifyNever(() => cartBloc.add(any()));
+        },
+      );
+
+      testWidgets(
+        'Display 2 combo item, select one, increase quantity to 2, nothing happen while add to cart',
+        (tester) async {
+          when(() => comboDealDetailBloc.state).thenReturn(
+            ComboDealMaterialDetailState.initial().copyWith(
+              items: {
+                MaterialNumber('fake-number-1'):
+                    fakeFirstMaterial.copyWith(quantity: 2),
+                MaterialNumber('fake-number-2'):
+                    fakeSecondMaterial.copyWith(quantity: 0),
+              },
+              selectedItems: {},
+            ),
+          );
+          await tester.pumpWidget(
+            wrapper(
+              ComboDealMaterialDetailPage(
+                comboItems: [fakeFirstMaterial, fakeSecondMaterial],
+              ),
+            ),
+          );
+
+          expect(find.byType(ComboDealItem), findsNWidgets(2));
+          expect(find.byType(MandatoryLabel), findsNothing);
+          expect(
+            find.text(headerTitle),
+            findsOneWidget,
+          );
+          final checkbox = find.byType(Checkbox);
+          expect(checkbox, findsAtLeastNWidgets(2));
+          final getFirstCheckbox = checkbox.at(0);
+          await tester.tap(getFirstCheckbox);
+          await tester.pump();
+          final addToCartButton = find.byKey(const Key('addToCartButton'));
+          expect(addToCartButton, findsOneWidget);
+
+          await tester.tap(addToCartButton);
+          await tester.pump();
+
+          verifyNever(() => cartBloc.add(any()));
+        },
+      );
+
+      testWidgets(
+        'Display 2 combo item, select one, increase total quantity to 6, add to cart',
+        (tester) async {
+          when(() => comboDealDetailBloc.state).thenReturn(
+            ComboDealMaterialDetailState.initial().copyWith(
+              items: {
+                MaterialNumber('fake-number-1'):
+                    fakeFirstMaterial.copyWith(quantity: 5),
+                MaterialNumber('fake-number-2'):
+                    fakeSecondMaterial.copyWith(quantity: 1),
+              },
+              selectedItems: {},
+            ),
+          );
+          await tester.pumpWidget(
+            wrapper(
+              ComboDealMaterialDetailPage(
+                comboItems: [fakeFirstMaterial, fakeSecondMaterial],
+              ),
+            ),
+          );
+
+          expect(find.byType(ComboDealItem), findsNWidgets(2));
+          expect(find.byType(MandatoryLabel), findsNothing);
+          expect(
+            find.text(headerTitle),
+            findsOneWidget,
+          );
+          final checkbox = find.byType(Checkbox);
+          expect(checkbox, findsAtLeastNWidgets(2));
+          final getFirstCheckbox = checkbox.at(0);
+          await tester.tap(getFirstCheckbox);
+          await tester.pump();
+          final addToCartButton = find.byKey(const Key('addToCartButton'));
+          expect(addToCartButton, findsOneWidget);
+
+          await tester.tap(addToCartButton);
+          await tester.pump();
+
+          verify(() => cartBloc.add(any()));
+        },
+      );
+
+      testWidgets(
+        'Edit Combo Deals, include another material and add to cart',
+        (tester) async {
+          when(() => comboDealDetailBloc.state).thenReturn(
+            ComboDealMaterialDetailState.initial().copyWith(
+              items: {
+                MaterialNumber('fake-number-1'):
+                    fakeFirstMaterial.copyWith(quantity: 5),
                 MaterialNumber('fake-number-2'):
                     fakeSecondMaterial.copyWith(quantity: 1),
               },

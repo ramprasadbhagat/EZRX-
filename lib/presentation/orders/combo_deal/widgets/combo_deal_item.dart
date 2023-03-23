@@ -1,13 +1,16 @@
+import 'package:ezrxmobile/application/order/combo_deal/combo_deal_material_detail_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal_group_deal.dart';
+import 'package:ezrxmobile/domain/order/entities/combo_deal_qty_tier.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/orders/combo_deal/widgets/combo_deal_label.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/quantity_input.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ComboDealItem extends StatelessWidget {
   final PriceAggregate material;
@@ -154,6 +157,28 @@ class _DiscountLabel extends StatelessWidget {
               );
       case ComboDealScheme.k3:
       case ComboDealScheme.k4:
+        return const SizedBox();
+      case ComboDealScheme.k4_2:
+        final totalSelectedQuantity = context
+            .read<ComboDealMaterialDetailBloc>()
+            .state
+            .totalSelectedQuantity;
+
+        final selectedSuffix = comboDeal.selectedSuffixForK4_2(
+          material: material,
+          eligibleComboDealQtyTier:
+              comboDeal.descendingSortedQtyTiers.firstWhere(
+            (tier) => totalSelectedQuantity >= tier.minQty,
+            orElse: () => ComboDealQtyTier.empty(),
+          ),
+        );
+
+        return DiscountLabel(
+          label: StringUtils.displayDiscount(
+            selectedSuffix.rate,
+            selectedSuffix.type,
+          ),
+        );
       case ComboDealScheme.k5:
         return const SizedBox();
     }
@@ -185,7 +210,7 @@ class _PriceLabel extends StatelessWidget {
           label: 'ZP Price',
           salesConfigs: salesConfigs,
           discountPrice: material.comboDealUnitPrice(
-            rate: _rate,
+            rate: rate(context: context),
           ),
           price: material.comboDealListPrice,
           discountEnable: false,
@@ -194,7 +219,7 @@ class _PriceLabel extends StatelessWidget {
           label: 'Total Price',
           salesConfigs: salesConfigs,
           discountPrice: material.comboDealTotalUnitPrice(
-            rate: _rate,
+            rate: rate(context: context),
           ),
           price: material.comboDealTotalListPrice,
           discountEnable: _enableDiscount,
@@ -210,12 +235,15 @@ class _PriceLabel extends StatelessWidget {
         return true;
       case ComboDealScheme.k3:
       case ComboDealScheme.k4:
+        return false;
+      case ComboDealScheme.k4_2:
+        return true;
       case ComboDealScheme.k5:
         return false;
     }
   }
 
-  double? get _rate {
+  double? rate({required BuildContext context}) {
     final comboDeal = material.comboDeal;
     switch (comboDeal.scheme) {
       case ComboDealScheme.k1:
@@ -226,6 +254,22 @@ class _PriceLabel extends StatelessWidget {
             : comboDeal.flexiQtyTier.first.rate;
       case ComboDealScheme.k3:
       case ComboDealScheme.k4:
+        return null;
+      case ComboDealScheme.k4_2:
+        final totalSelectedQuantity = context
+            .read<ComboDealMaterialDetailBloc>()
+            .state
+            .totalSelectedQuantity;
+        final selectedSuffix = comboDeal.selectedSuffixForK4_2(
+          material: material,
+          eligibleComboDealQtyTier:
+              comboDeal.descendingSortedQtyTiers.firstWhere(
+            (tier) => totalSelectedQuantity >= tier.minQty,
+            orElse: () => ComboDealQtyTier.empty(),
+          ),
+        );
+
+        return selectedSuffix.rate;
       case ComboDealScheme.k5:
         return null;
     }

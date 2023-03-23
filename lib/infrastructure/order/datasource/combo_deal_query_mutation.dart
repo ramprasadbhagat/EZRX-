@@ -34,6 +34,7 @@ class ComboDealQueryMutation {
               type
               conditionNumber
               minQty
+              suffix
             }
             flexiAmmountTier {
               conditionNumber
@@ -53,6 +54,7 @@ class ComboDealQueryMutation {
                 type
                 conditionNumber
                 mandatory
+                suffix
               }
             }
           }

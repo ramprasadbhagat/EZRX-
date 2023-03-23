@@ -12,6 +12,7 @@ class ComboDealQtyTier with _$ComboDealQtyTier {
     required String conditionNumber,
     required int minQty,
     required DiscountType type,
+    required String suffix,
   }) = _ComboDealQtyTier;
 
   factory ComboDealQtyTier.empty() => ComboDealQtyTier(
@@ -19,5 +20,6 @@ class ComboDealQtyTier with _$ComboDealQtyTier {
         conditionNumber: '',
         minQty: 0,
         type: DiscountType(''),
+        suffix: '',
       );
 }

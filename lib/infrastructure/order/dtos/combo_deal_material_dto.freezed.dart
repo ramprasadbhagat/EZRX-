@@ -245,6 +245,9 @@ mixin _$ComboDealMaterialDto {
   @JsonKey(name: 'mandatory', defaultValue: false)
   @HiveField(5, defaultValue: false)
   bool get mandatory => throw _privateConstructorUsedError;
+  @JsonKey(name: 'suffix', defaultValue: '')
+  @HiveField(6, defaultValue: '')
+  String get suffix => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -278,7 +281,10 @@ abstract class $ComboDealMaterialDtoCopyWith<$Res> {
           String conditionNumber,
       @JsonKey(name: 'mandatory', defaultValue: false)
       @HiveField(5, defaultValue: false)
-          bool mandatory});
+          bool mandatory,
+      @JsonKey(name: 'suffix', defaultValue: '')
+      @HiveField(6, defaultValue: '')
+          String suffix});
 }
 
 /// @nodoc
@@ -301,6 +307,7 @@ class _$ComboDealMaterialDtoCopyWithImpl<$Res,
     Object? type = null,
     Object? conditionNumber = null,
     Object? mandatory = null,
+    Object? suffix = null,
   }) {
     return _then(_value.copyWith(
       minQty: null == minQty
@@ -327,6 +334,10 @@ class _$ComboDealMaterialDtoCopyWithImpl<$Res,
           ? _value.mandatory
           : mandatory // ignore: cast_nullable_to_non_nullable
               as bool,
+      suffix: null == suffix
+          ? _value.suffix
+          : suffix // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -359,7 +370,10 @@ abstract class _$$_ComboDealMaterialDtoCopyWith<$Res>
           String conditionNumber,
       @JsonKey(name: 'mandatory', defaultValue: false)
       @HiveField(5, defaultValue: false)
-          bool mandatory});
+          bool mandatory,
+      @JsonKey(name: 'suffix', defaultValue: '')
+      @HiveField(6, defaultValue: '')
+          String suffix});
 }
 
 /// @nodoc
@@ -379,6 +393,7 @@ class __$$_ComboDealMaterialDtoCopyWithImpl<$Res>
     Object? type = null,
     Object? conditionNumber = null,
     Object? mandatory = null,
+    Object? suffix = null,
   }) {
     return _then(_$_ComboDealMaterialDto(
       minQty: null == minQty
@@ -405,6 +420,10 @@ class __$$_ComboDealMaterialDtoCopyWithImpl<$Res>
           ? _value.mandatory
           : mandatory // ignore: cast_nullable_to_non_nullable
               as bool,
+      suffix: null == suffix
+          ? _value.suffix
+          : suffix // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -433,7 +452,10 @@ class _$_ComboDealMaterialDto extends _ComboDealMaterialDto {
           required this.conditionNumber,
       @JsonKey(name: 'mandatory', defaultValue: false)
       @HiveField(5, defaultValue: false)
-          required this.mandatory})
+          required this.mandatory,
+      @JsonKey(name: 'suffix', defaultValue: '')
+      @HiveField(6, defaultValue: '')
+          required this.suffix})
       : super._();
 
   factory _$_ComboDealMaterialDto.fromJson(Map<String, dynamic> json) =>
@@ -465,10 +487,14 @@ class _$_ComboDealMaterialDto extends _ComboDealMaterialDto {
   @JsonKey(name: 'mandatory', defaultValue: false)
   @HiveField(5, defaultValue: false)
   final bool mandatory;
+  @override
+  @JsonKey(name: 'suffix', defaultValue: '')
+  @HiveField(6, defaultValue: '')
+  final String suffix;
 
   @override
   String toString() {
-    return 'ComboDealMaterialDto(minQty: $minQty, materialNumber: $materialNumber, rate: $rate, type: $type, conditionNumber: $conditionNumber, mandatory: $mandatory)';
+    return 'ComboDealMaterialDto(minQty: $minQty, materialNumber: $materialNumber, rate: $rate, type: $type, conditionNumber: $conditionNumber, mandatory: $mandatory, suffix: $suffix)';
   }
 
   @override
@@ -484,13 +510,14 @@ class _$_ComboDealMaterialDto extends _ComboDealMaterialDto {
             (identical(other.conditionNumber, conditionNumber) ||
                 other.conditionNumber == conditionNumber) &&
             (identical(other.mandatory, mandatory) ||
-                other.mandatory == mandatory));
+                other.mandatory == mandatory) &&
+            (identical(other.suffix, suffix) || other.suffix == suffix));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, minQty, materialNumber, rate,
-      type, conditionNumber, mandatory);
+      type, conditionNumber, mandatory, suffix);
 
   @JsonKey(ignore: true)
   @override
@@ -528,7 +555,10 @@ abstract class _ComboDealMaterialDto extends ComboDealMaterialDto {
           required final String conditionNumber,
       @JsonKey(name: 'mandatory', defaultValue: false)
       @HiveField(5, defaultValue: false)
-          required final bool mandatory}) = _$_ComboDealMaterialDto;
+          required final bool mandatory,
+      @JsonKey(name: 'suffix', defaultValue: '')
+      @HiveField(6, defaultValue: '')
+          required final String suffix}) = _$_ComboDealMaterialDto;
   const _ComboDealMaterialDto._() : super._();
 
   factory _ComboDealMaterialDto.fromJson(Map<String, dynamic> json) =
@@ -560,6 +590,10 @@ abstract class _ComboDealMaterialDto extends ComboDealMaterialDto {
   @JsonKey(name: 'mandatory', defaultValue: false)
   @HiveField(5, defaultValue: false)
   bool get mandatory;
+  @override
+  @JsonKey(name: 'suffix', defaultValue: '')
+  @HiveField(6, defaultValue: '')
+  String get suffix;
   @override
   @JsonKey(ignore: true)
   _$$_ComboDealMaterialDtoCopyWith<_$_ComboDealMaterialDto> get copyWith =>

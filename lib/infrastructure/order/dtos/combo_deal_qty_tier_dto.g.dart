@@ -21,13 +21,14 @@ class ComboDealQtyTierDtoAdapter extends TypeAdapter<_$_ComboDealQtyTierDto> {
       conditionNumber: fields[1] == null ? '' : fields[1] as String,
       minQty: fields[2] == null ? 0 : fields[2] as int,
       type: fields[3] == null ? '' : fields[3] as String,
+      suffix: fields[4] == null ? '' : fields[4] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_ComboDealQtyTierDto obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.rate)
       ..writeByte(1)
@@ -35,7 +36,9 @@ class ComboDealQtyTierDtoAdapter extends TypeAdapter<_$_ComboDealQtyTierDto> {
       ..writeByte(2)
       ..write(obj.minQty)
       ..writeByte(3)
-      ..write(obj.type);
+      ..write(obj.type)
+      ..writeByte(4)
+      ..write(obj.suffix);
   }
 
   @override
@@ -64,6 +67,7 @@ _$_ComboDealQtyTierDto _$$_ComboDealQtyTierDtoFromJson(
           ? 0
           : const StringToIntConverter().fromJson(json['minQty'] as String),
       type: json['type'] as String? ?? '',
+      suffix: json['suffix'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_ComboDealQtyTierDtoToJson(
@@ -73,4 +77,5 @@ Map<String, dynamic> _$$_ComboDealQtyTierDtoToJson(
       'conditionNumber': instance.conditionNumber,
       'minQty': const StringToIntConverter().toJson(instance.minQty),
       'type': instance.type,
+      'suffix': instance.suffix,
     };

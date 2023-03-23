@@ -269,7 +269,9 @@ class CartItem with _$CartItem {
     return bundleRate;
   }
 
-  double? get comboDealRate {
+  double? comboDealRate({
+    required PriceAggregate material,
+  }) {
     final comboDeal = materials.firstComboDeal;
     switch (comboDeal.scheme) {
       case ComboDealScheme.k1:
@@ -282,6 +284,12 @@ class CartItem with _$CartItem {
         return eligibleComboDealSKUTier.rate;
       case ComboDealScheme.k4:
         return eligibleComboDealQtyTier.rate;
+      case ComboDealScheme.k4_2:
+        final selectedSuffix = comboDeal.selectedSuffixForK4_2(
+          material: material,
+          eligibleComboDealQtyTier: eligibleComboDealQtyTier,
+        );
+        return selectedSuffix.rate;
       case ComboDealScheme.k5:
         return eligibleComboDealTierRule.rate;
     }
@@ -300,17 +308,20 @@ class CartItem with _$CartItem {
         return materials.fold<double>(
           0,
           (sum, item) =>
-              sum + item.comboDealTotalUnitPrice(rate: comboDealRate),
+              sum +
+              item.comboDealTotalUnitPrice(rate: comboDealRate(material: item)),
         );
       case ComboDealScheme.k3:
-        return materials.fold<double>(
-          0,
-          (sum, item) =>
-              sum + item.comboDealTotalUnitPrice(rate: comboDealRate),
-        );
       case ComboDealScheme.k4:
         return _comboDealTotal +
             (_comboDealTotal * eligibleComboDealQtyTier.rate) / 100;
+      case ComboDealScheme.k4_2:
+        return materials.fold<double>(
+          0,
+          (sum, item) =>
+              sum +
+              item.comboDealTotalUnitPrice(rate: comboDealRate(material: item)),
+        );
       case ComboDealScheme.k5:
         return NumUtils.priceByRate(
           _comboDealTotal,
@@ -349,6 +360,7 @@ class CartItem with _$CartItem {
       case ComboDealScheme.k3:
         return eligibleComboDealSKUTier != ComboDealSKUTier.empty();
       case ComboDealScheme.k4:
+      case ComboDealScheme.k4_2:
         return eligibleComboDealQtyTier != ComboDealQtyTier.empty();
       case ComboDealScheme.k5:
         return eligibleComboDealTierRule != ComboDealTierRule.empty();

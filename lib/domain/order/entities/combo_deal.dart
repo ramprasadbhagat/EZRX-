@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal_amount_tier.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal_group_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal_material.dart';
@@ -94,6 +95,12 @@ class ComboDeal with _$ComboDeal {
       return ComboDealScheme.k3;
     }
     if (flexiSKUTier.isEmpty && flexiQtyTier.isNotEmpty) {
+      if (materialComboDeals.isNotEmpty &&
+          allMaterials.every((item) => item.suffix.isNotEmpty) &&
+          flexiQtyTier.every((tier) => tier.suffix.isNotEmpty)) {
+        return ComboDealScheme.k4_2;
+      }
+
       return ComboDealScheme.k4;
     }
 
@@ -110,6 +117,17 @@ class ComboDeal with _$ComboDeal {
       flexiQtyTier.isNotEmpty ||
       flexiSKUTier.isNotEmpty ||
       materialComboDeals.isNotEmpty;
+
+  ComboDealMaterial selectedSuffixForK4_2({
+    required PriceAggregate material,
+    required ComboDealQtyTier eligibleComboDealQtyTier,
+  }) =>
+      allMaterials.firstWhere(
+        (element) =>
+            element.materialNumber == material.getMaterialNumber &&
+            eligibleComboDealQtyTier.suffix == element.suffix,
+        orElse: () => ComboDealMaterial.empty(),
+      );
 }
 
-enum ComboDealScheme { k1, k2, k3, k4, k5 }
+enum ComboDealScheme { k1, k2, k3, k4, k4_2, k5 }

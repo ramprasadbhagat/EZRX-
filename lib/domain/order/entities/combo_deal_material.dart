@@ -27,6 +27,7 @@ class ComboDealMaterial with _$ComboDealMaterial {
     required DiscountType type,
     required String conditionNumber,
     required bool mandatory,
+    required String suffix,
   }) = _ComboDealMaterial;
 
   factory ComboDealMaterial.empty() => ComboDealMaterial(
@@ -36,5 +37,6 @@ class ComboDealMaterial with _$ComboDealMaterial {
         type: DiscountType(''),
         conditionNumber: '',
         mandatory: false,
+        suffix: '',
       );
 }

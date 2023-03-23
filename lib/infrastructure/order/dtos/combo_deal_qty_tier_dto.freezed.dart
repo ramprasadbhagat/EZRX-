@@ -34,6 +34,9 @@ mixin _$ComboDealQtyTierDto {
   @JsonKey(name: 'type', defaultValue: '')
   @HiveField(3, defaultValue: '')
   String get type => throw _privateConstructorUsedError;
+  @JsonKey(name: 'suffix', defaultValue: '')
+  @HiveField(4, defaultValue: '')
+  String get suffix => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -61,7 +64,10 @@ abstract class $ComboDealQtyTierDtoCopyWith<$Res> {
           int minQty,
       @JsonKey(name: 'type', defaultValue: '')
       @HiveField(3, defaultValue: '')
-          String type});
+          String type,
+      @JsonKey(name: 'suffix', defaultValue: '')
+      @HiveField(4, defaultValue: '')
+          String suffix});
 }
 
 /// @nodoc
@@ -81,6 +87,7 @@ class _$ComboDealQtyTierDtoCopyWithImpl<$Res, $Val extends ComboDealQtyTierDto>
     Object? conditionNumber = null,
     Object? minQty = null,
     Object? type = null,
+    Object? suffix = null,
   }) {
     return _then(_value.copyWith(
       rate: null == rate
@@ -98,6 +105,10 @@ class _$ComboDealQtyTierDtoCopyWithImpl<$Res, $Val extends ComboDealQtyTierDto>
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
+              as String,
+      suffix: null == suffix
+          ? _value.suffix
+          : suffix // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -125,7 +136,10 @@ abstract class _$$_ComboDealQtyTierDtoCopyWith<$Res>
           int minQty,
       @JsonKey(name: 'type', defaultValue: '')
       @HiveField(3, defaultValue: '')
-          String type});
+          String type,
+      @JsonKey(name: 'suffix', defaultValue: '')
+      @HiveField(4, defaultValue: '')
+          String suffix});
 }
 
 /// @nodoc
@@ -143,6 +157,7 @@ class __$$_ComboDealQtyTierDtoCopyWithImpl<$Res>
     Object? conditionNumber = null,
     Object? minQty = null,
     Object? type = null,
+    Object? suffix = null,
   }) {
     return _then(_$_ComboDealQtyTierDto(
       rate: null == rate
@@ -160,6 +175,10 @@ class __$$_ComboDealQtyTierDtoCopyWithImpl<$Res>
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
+              as String,
+      suffix: null == suffix
+          ? _value.suffix
+          : suffix // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -183,7 +202,10 @@ class _$_ComboDealQtyTierDto extends _ComboDealQtyTierDto {
           required this.minQty,
       @JsonKey(name: 'type', defaultValue: '')
       @HiveField(3, defaultValue: '')
-          required this.type})
+          required this.type,
+      @JsonKey(name: 'suffix', defaultValue: '')
+      @HiveField(4, defaultValue: '')
+          required this.suffix})
       : super._();
 
   factory _$_ComboDealQtyTierDto.fromJson(Map<String, dynamic> json) =>
@@ -207,10 +229,14 @@ class _$_ComboDealQtyTierDto extends _ComboDealQtyTierDto {
   @JsonKey(name: 'type', defaultValue: '')
   @HiveField(3, defaultValue: '')
   final String type;
+  @override
+  @JsonKey(name: 'suffix', defaultValue: '')
+  @HiveField(4, defaultValue: '')
+  final String suffix;
 
   @override
   String toString() {
-    return 'ComboDealQtyTierDto(rate: $rate, conditionNumber: $conditionNumber, minQty: $minQty, type: $type)';
+    return 'ComboDealQtyTierDto(rate: $rate, conditionNumber: $conditionNumber, minQty: $minQty, type: $type, suffix: $suffix)';
   }
 
   @override
@@ -222,13 +248,14 @@ class _$_ComboDealQtyTierDto extends _ComboDealQtyTierDto {
             (identical(other.conditionNumber, conditionNumber) ||
                 other.conditionNumber == conditionNumber) &&
             (identical(other.minQty, minQty) || other.minQty == minQty) &&
-            (identical(other.type, type) || other.type == type));
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.suffix, suffix) || other.suffix == suffix));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, rate, conditionNumber, minQty, type);
+      Object.hash(runtimeType, rate, conditionNumber, minQty, type, suffix);
 
   @JsonKey(ignore: true)
   @override
@@ -260,7 +287,10 @@ abstract class _ComboDealQtyTierDto extends ComboDealQtyTierDto {
           required final int minQty,
       @JsonKey(name: 'type', defaultValue: '')
       @HiveField(3, defaultValue: '')
-          required final String type}) = _$_ComboDealQtyTierDto;
+          required final String type,
+      @JsonKey(name: 'suffix', defaultValue: '')
+      @HiveField(4, defaultValue: '')
+          required final String suffix}) = _$_ComboDealQtyTierDto;
   const _ComboDealQtyTierDto._() : super._();
 
   factory _ComboDealQtyTierDto.fromJson(Map<String, dynamic> json) =
@@ -284,6 +314,10 @@ abstract class _ComboDealQtyTierDto extends ComboDealQtyTierDto {
   @JsonKey(name: 'type', defaultValue: '')
   @HiveField(3, defaultValue: '')
   String get type;
+  @override
+  @JsonKey(name: 'suffix', defaultValue: '')
+  @HiveField(4, defaultValue: '')
+  String get suffix;
   @override
   @JsonKey(ignore: true)
   _$$_ComboDealQtyTierDtoCopyWith<_$_ComboDealQtyTierDto> get copyWith =>

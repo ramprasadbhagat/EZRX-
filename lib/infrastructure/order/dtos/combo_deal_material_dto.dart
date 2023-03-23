@@ -64,6 +64,9 @@ class ComboDealMaterialDto with _$ComboDealMaterialDto {
     @JsonKey(name: 'mandatory', defaultValue: false)
     @HiveField(5, defaultValue: false)
         required bool mandatory,
+    @JsonKey(name: 'suffix', defaultValue: '')
+    @HiveField(6, defaultValue: '')
+        required String suffix,
   }) = _ComboDealMaterialDto;
 
   factory ComboDealMaterialDto.fromJson(Map<String, dynamic> json) =>
@@ -76,6 +79,7 @@ class ComboDealMaterialDto with _$ComboDealMaterialDto {
         type: DiscountType(type),
         conditionNumber: conditionNumber,
         mandatory: mandatory,
+        suffix: suffix,
       );
 
   factory ComboDealMaterialDto.fromDomain(ComboDealMaterial domain) =>
@@ -86,5 +90,6 @@ class ComboDealMaterialDto with _$ComboDealMaterialDto {
         type: domain.type.getOrDefaultValue(''),
         conditionNumber: domain.conditionNumber,
         mandatory: domain.mandatory,
+        suffix: domain.suffix,
       );
 }

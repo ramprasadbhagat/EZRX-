@@ -26,6 +26,9 @@ class ComboDealQtyTierDto with _$ComboDealQtyTierDto {
     @JsonKey(name: 'type', defaultValue: '')
     @HiveField(3, defaultValue: '')
         required String type,
+    @JsonKey(name: 'suffix', defaultValue: '')
+    @HiveField(4, defaultValue: '')
+        required String suffix,
   }) = _ComboDealQtyTierDto;
 
   factory ComboDealQtyTierDto.fromJson(Map<String, dynamic> json) =>
@@ -36,6 +39,7 @@ class ComboDealQtyTierDto with _$ComboDealQtyTierDto {
         conditionNumber: conditionNumber,
         minQty: minQty,
         type: DiscountType(type),
+        suffix: suffix,
       );
 
   factory ComboDealQtyTierDto.fromDomain(ComboDealQtyTier domain) =>
@@ -44,5 +48,6 @@ class ComboDealQtyTierDto with _$ComboDealQtyTierDto {
         conditionNumber: domain.conditionNumber,
         minQty: domain.minQty,
         type: domain.type.getOrDefaultValue(''),
+        suffix: domain.suffix,
       );
 }

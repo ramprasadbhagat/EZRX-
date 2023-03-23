@@ -212,7 +212,7 @@ class _ComboDealItem extends StatelessWidget {
                         ),
                         if (material.salesOrgConfig.expiryDateDisplay)
                           Text(
-                            '${'Expiry Date : '.tr()}${material.stockInfo.expiryDate.naIfEmptyDateTime}',
+                            '${'Expiry Date : '.tr()}${material.stockInfo.expiryDate.toValidDateString}',
                             style:
                                 Theme.of(context).textTheme.titleSmall?.apply(
                                       color: ZPColors.lightGray,
@@ -271,7 +271,9 @@ class _ComboDealItem extends StatelessWidget {
                                   'Unit Price: ${StringUtils.displayPrice(
                                     material.salesOrgConfig,
                                     material.comboDealUnitPrice(
-                                      rate: comboGroup.comboDealRate,
+                                      rate: comboGroup.comboDealRate(
+                                        material: material,
+                                      ),
                                     ),
                                   )}',
                                   style: Theme.of(context)
