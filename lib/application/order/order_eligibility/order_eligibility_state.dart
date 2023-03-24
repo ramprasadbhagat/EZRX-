@@ -42,6 +42,9 @@ class OrderEligibilityState with _$OrderEligibilityState {
     return isNotSuspended ? isTotalGreaterThanMinOrderAmount : false;
   }
 
+  bool get eligibleForOrderSubmit =>
+      isMinOrderValuePassed && validateRegularOrderType;
+
   bool get isTotalGreaterThanMinOrderAmount {
     if (salesOrg.salesOrg.isTH) {
       return subTotal >= double.parse(configs.minOrderAmount);
@@ -70,4 +73,10 @@ class OrderEligibilityState with _$OrderEligibilityState {
         ? cartItems.where((element) => element.hasSalesRepPrincipal).isNotEmpty
         : cartItems.where((element) => element.hasClientPrincipal).isNotEmpty;
   }
+
+  bool get containsRegularMaterials => cartItems
+      .any((element) => !element.materialInfo.isSpecialOrderTypeMaterial);
+
+  bool get validateRegularOrderType =>
+      orderType.contains('ZPOR') && !configs.salesOrg.isTH ? containsRegularMaterials : true;
 }

@@ -524,9 +524,11 @@ class _Stepper extends StatelessWidget {
       builder: (context, state) {
         final config = context.read<SalesOrgBloc>().state.configs;
         final eligibleForOrderSubmit =
-            context.read<OrderEligibilityBloc>().state.isMinOrderValuePassed;
+            context.read<OrderEligibilityBloc>().state.eligibleForOrderSubmit;
         final isAccountSuspended =
             context.read<EligibilityBloc>().state.isAccountSuspended;
+        final validateRegularOrderType =
+            context.read<OrderEligibilityBloc>().state.validateRegularOrderType;
 
         return Stepper(
           margin: const EdgeInsets.fromLTRB(50, 10, 10, 10),
@@ -534,6 +536,10 @@ class _Stepper extends StatelessWidget {
             return Column(
               children: [
                 EdiUserContinueNote(
+                  maxStepsReached: details.currentStep == state.maxSteps,
+                ),
+                _ContainsSpecialOrderMaterialWarning(
+                  containsSpecialOrderMaterial: !validateRegularOrderType,
                   maxStepsReached: details.currentStep == state.maxSteps,
                 ),
                 Padding(
@@ -952,5 +958,51 @@ class _CartItemsSection extends StatelessWidget {
         );
       },
     );
+  }
+}
+
+class _ContainsSpecialOrderMaterialWarning extends StatelessWidget {
+  final bool containsSpecialOrderMaterial;
+  final bool maxStepsReached;
+
+  const _ContainsSpecialOrderMaterialWarning({
+    Key? key,
+    required this.containsSpecialOrderMaterial,
+    required this.maxStepsReached,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    if (containsSpecialOrderMaterial && maxStepsReached) {
+      return Padding(
+        key: const Key('containsSpecialOrderTypeMaterialWarning'),
+        padding: const EdgeInsets.all(8.0),
+        child: Row(crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Icon(
+              Icons.info_outline_rounded,
+              color: ZPColors.red,
+              size: 18,
+            ),
+            const SizedBox(
+              width: 8,
+            ),
+            Expanded(
+              child: Text(
+                'Regular orders cannot contain only sample and/or FOC materials. Please add a commercial material to proceed.'
+                    .tr(),
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                      fontSize: 12,
+                      fontStyle: FontStyle.italic,
+                      color: ZPColors.error,
+                    ),
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
+    return const SizedBox();
   }
 }

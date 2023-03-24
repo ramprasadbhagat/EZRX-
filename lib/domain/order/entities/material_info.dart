@@ -86,4 +86,6 @@ class MaterialInfo with _$MaterialInfo {
   String get displayDescription => materialDescription.isEmpty
       ? defaultMaterialDescription
       : materialDescription;
+
+  bool get isSpecialOrderTypeMaterial => isSampleMaterial || isFOCMaterial;
 }
