@@ -388,7 +388,7 @@ class AppRouter extends _i42.RootStackRouter {
     FavouritesTabRoute.name: (routeData) {
       return _i42.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i40.FavouritesTab(),
+        child: _i42.WrappedRoute(child: const _i40.FavouritesTab()),
       );
     },
     AccountTabRoute.name: (routeData) {
