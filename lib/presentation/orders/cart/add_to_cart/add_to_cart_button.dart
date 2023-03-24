@@ -119,6 +119,25 @@ class AddToCartButton extends StatelessWidget {
         message:
         'Commercial material cannot be combined with covid material.'.tr(),
       );
+    } else if (!selectedCartItem.materialInfo.materialGroup4.isFOC &&
+        cartState.containSampleMaterial) {
+      showSnackBar(
+        context: context,
+        message:
+            'Commercial material cannot be combined with sample material.'.tr(),
+      );
+    } else if (selectedCartItem.materialInfo.materialGroup4.isFOC &&
+        cartState.containSampleMaterial) {
+      showSnackBar(
+        context: context,
+        message: 'You cannot add non-sample materials to a sample order. Please submit separate orders if you wish to proceed.'.tr(),
+      );
+    } else if (selectedCartItem.materialInfo.isSampleMaterial &&
+        cartState.containFocMaterial) {
+      showSnackBar(
+        context: context,
+        message: 'You cannot add non-FOC materials to a FOC order. Please submit separate orders if you wish to proceed'.tr(),
+      );
     } else {
       final eligibilityState = context.read<EligibilityBloc>().state;
       final selectedTenderContract =

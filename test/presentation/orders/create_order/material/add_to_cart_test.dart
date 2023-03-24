@@ -799,5 +799,221 @@ void main() {
         expect(addToCartButton, findsOneWidget);
       },
     );
+    testWidgets(
+      'Test Add FOC material when SAMPLE material is present in CART',
+      (tester) async {
+        when(() => addToCartBlocMock.state).thenReturn(
+          AddToCartState.initial().copyWith(
+            cartItem: priceAggregate.copyWith(
+              price: priceAggregate.price.copyWith(
+                zmgDiscount: true,
+              ),
+              materialInfo: priceAggregate.materialInfo
+                  .copyWith(materialGroup4: MaterialGroup.four('6A1')),
+            ),
+          ),
+        );
+
+        when(() => cartBlocMock.state).thenReturn(
+          CartState.initial().copyWith(
+            cartItems: [
+              CartItem.materialEmpty().copyWith(
+                materials: [
+                  PriceAggregate.empty().copyWith(
+                    materialInfo: MaterialInfo.empty().copyWith(
+                      isSampleMaterial: true,
+                      materialGroup4: MaterialGroup.four('6A1'),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        );
+
+        final fakeUser = User.empty().copyWith(
+          username: Username('fakeUser'),
+          disableCreateOrder: false,
+          role: Role(
+            type: RoleType('fakeRole'),
+            description: '',
+            id: '',
+            name: '',
+          ),
+        );
+
+        when(
+          () => userBlocMock.state,
+        ).thenReturn(
+          UserState.initial().copyWith(
+            user: fakeUser,
+          ),
+        );
+
+        await tester.pumpWidget(
+          getScopedWidget(const AddToCart(isCovid19Tab: false)),
+        );
+        await tester.pump();
+        tester.binding.window.physicalSizeTestValue = const Size(1080, 1920);
+        tester.binding.window.devicePixelRatioTestValue = 1.0;
+
+        final addToCartButton = find.text('Add to Cart');
+        expect(addToCartButton, findsOneWidget);
+        await tester.tap(addToCartButton);
+        await tester.pump();
+
+        const snackbarText =
+            'You cannot add non-sample materials to a sample order. Please submit separate orders if you wish to proceed.';
+        final snackbarWidget = find.text(snackbarText);
+
+        expect(snackbarWidget, findsOneWidget);
+      },
+    );
+
+    testWidgets(
+      'Test Add SAMPLE material when FOC material is present in CART',
+      (tester) async {
+        when(() => addToCartBlocMock.state).thenReturn(
+          AddToCartState.initial().copyWith(
+            cartItem: priceAggregate.copyWith(
+              price: priceAggregate.price.copyWith(
+                zmgDiscount: true,
+              ),
+              materialInfo: priceAggregate.materialInfo.copyWith(
+                isSampleMaterial: true,
+                materialGroup4: MaterialGroup.four('6A1'),
+              ),
+            ),
+          ),
+        );
+
+        when(() => cartBlocMock.state).thenReturn(
+          CartState.initial().copyWith(
+            cartItems: [
+              CartItem.materialEmpty().copyWith(
+                materials: [
+                  PriceAggregate.empty().copyWith(
+                    materialInfo: MaterialInfo.empty().copyWith(
+                      isFOCMaterial: true,
+                      materialGroup4: MaterialGroup.four('6A1'),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        );
+
+        final fakeUser = User.empty().copyWith(
+          username: Username('fakeUser'),
+          disableCreateOrder: false,
+          role: Role(
+            type: RoleType('fakeRole'),
+            description: '',
+            id: '',
+            name: '',
+          ),
+        );
+
+        when(
+          () => userBlocMock.state,
+        ).thenReturn(
+          UserState.initial().copyWith(
+            user: fakeUser,
+          ),
+        );
+
+        await tester.pumpWidget(
+          getScopedWidget(const AddToCart(isCovid19Tab: false)),
+        );
+        await tester.pump();
+        tester.binding.window.physicalSizeTestValue = const Size(1080, 1920);
+        tester.binding.window.devicePixelRatioTestValue = 1.0;
+
+        final addToCartButton = find.text('Add to Cart');
+        expect(addToCartButton, findsOneWidget);
+        await tester.tap(addToCartButton);
+        await tester.pump();
+
+        const snackbarText =
+            'You cannot add non-FOC materials to a FOC order. Please submit separate orders if you wish to proceed';
+        final snackbarWidget = find.text(snackbarText);
+
+        expect(snackbarWidget, findsOneWidget);
+      },
+    );
+
+    testWidgets(
+      'Test Add Commercial material when Sample material is present in CART',
+      (tester) async {
+        when(() => addToCartBlocMock.state).thenReturn(
+          AddToCartState.initial().copyWith(
+            cartItem: priceAggregate.copyWith(
+              price: priceAggregate.price.copyWith(
+                zmgDiscount: true,
+              ),
+              materialInfo: priceAggregate.materialInfo.copyWith(
+                isSampleMaterial: false,
+                materialGroup4: MaterialGroup.four('6A5'),
+              ),
+            ),
+          ),
+        );
+
+        when(() => cartBlocMock.state).thenReturn(
+          CartState.initial().copyWith(
+            cartItems: [
+              CartItem.materialEmpty().copyWith(
+                materials: [
+                  PriceAggregate.empty().copyWith(
+                    materialInfo: MaterialInfo.empty().copyWith(
+                      isSampleMaterial: true,
+                      materialGroup4: MaterialGroup.four('6A2'),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        );
+
+        final fakeUser = User.empty().copyWith(
+          username: Username('fakeUser'),
+          disableCreateOrder: false,
+          role: Role(
+            type: RoleType('fakeRole'),
+            description: '',
+            id: '',
+            name: '',
+          ),
+        );
+
+        when(
+          () => userBlocMock.state,
+        ).thenReturn(
+          UserState.initial().copyWith(
+            user: fakeUser,
+          ),
+        );
+
+        await tester.pumpWidget(
+          getScopedWidget(const AddToCart(isCovid19Tab: false)),
+        );
+        await tester.pump();
+        tester.binding.window.physicalSizeTestValue = const Size(1080, 1920);
+        tester.binding.window.devicePixelRatioTestValue = 1.0;
+
+        final addToCartButton = find.text('Add to Cart');
+        expect(addToCartButton, findsOneWidget);
+        await tester.tap(addToCartButton);
+        await tester.pump();
+
+        const snackbarText =
+            'Commercial material cannot be combined with sample material.';
+        final snackbarWidget = find.text(snackbarText);
+
+        expect(snackbarWidget, findsOneWidget);
+      },
+    );
   });
 }
