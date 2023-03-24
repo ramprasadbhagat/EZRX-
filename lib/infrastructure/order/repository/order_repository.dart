@@ -428,7 +428,7 @@ class OrderRepository implements IOrderRepository {
       properties: {
         MixpanelProps.grandTotal: grandTotal,
         MixpanelProps.productName:
-            cartItems.map((e) => e.materialNumberString).toList(),
+            cartItems.map((e) => e.materialInfo.materialDescription).toList(),
         MixpanelProps.productNumber: cartItems
             .map((e) => e.getMaterialNumber.getOrDefaultValue(''))
             .toList(),
