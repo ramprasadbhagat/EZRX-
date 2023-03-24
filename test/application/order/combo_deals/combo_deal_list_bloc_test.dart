@@ -21,6 +21,7 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   late IComboDealRepository repository;
   late List<ComboDeal> comboDeals;
+  late ComboDeal principleComboDeal;
   final fakeSalesOrg = SalesOrganisation.empty().copyWith(
     salesOrg: SalesOrg('fake-sales-org'),
   );
@@ -32,27 +33,26 @@ void main() {
   );
 
   setUpAll(() async {
+    principleComboDeal = await ComboDealLocalDataSource().getComboDeal();
     comboDeals = await ComboDealLocalDataSource().getComboDealList();
   });
 
   setUp(() {
     repository = MockComboDealReposity();
   });
-
+  blocTest<ComboDealListBloc, ComboDealListState>(
+    'Init',
+    build: () => ComboDealListBloc(repository: repository),
+    act: (bloc) => bloc.add(
+      const ComboDealListEvent.initialize(),
+    ),
+    expect: () => [
+      ComboDealListState.initial(),
+    ],
+  );
   group(
     'Combo Deal List',
     () {
-      blocTest<ComboDealListBloc, ComboDealListState>(
-        'Init',
-        build: () => ComboDealListBloc(repository: repository),
-        act: (bloc) => bloc.add(
-          const ComboDealListEvent.initialize(),
-        ),
-        expect: () => [
-          ComboDealListState.initial(),
-        ],
-      );
-
       blocTest<ComboDealListBloc, ComboDealListState>(
         'Fetch success when state is empty',
         build: () => ComboDealListBloc(repository: repository),
@@ -163,4 +163,115 @@ void main() {
       );
     },
   );
+
+  group('Principle Combo Deal', () {
+    blocTest<ComboDealListBloc, ComboDealListState>(
+      'Fetch success when state is empty',
+      build: () => ComboDealListBloc(repository: repository),
+      setUp: () {
+        when(
+          () => repository.getComboDeal(
+            salesOrg: fakeSalesOrg.salesOrg,
+            customerCode: fakeCustomerCode,
+            comboDealInfo: fakeComboDealQuery,
+          ),
+        ).thenAnswer(
+          (_) async => Right(principleComboDeal),
+        );
+      },
+      act: (bloc) => bloc.add(
+        ComboDealListEvent.fetchPrincipleGroupDeal(
+          salesOrganisation: fakeSalesOrg,
+          customerCodeInfo: fakeCustomerCode,
+          comboDeals: fakeComboDealQuery,
+        ),
+      ),
+      expect: () => [
+        ComboDealListState.initial().copyWith(isFetching: true),
+        ComboDealListState.initial().copyWith(
+          isFetching: false,
+          comboDeals: {
+            fakeComboDealQuery.id: [principleComboDeal],
+          },
+        ),
+      ],
+      verify: (bloc) {
+        expect(
+          bloc.state.getComboDeal(comboDealId: fakeComboDealQuery.id),
+          principleComboDeal,
+        );
+      },
+    );
+
+    blocTest<ComboDealListBloc, ComboDealListState>(
+      'Fetch failure when state is empty',
+      build: () => ComboDealListBloc(repository: repository),
+      setUp: () {
+        when(
+          () => repository.getComboDeal(
+            salesOrg: fakeSalesOrg.salesOrg,
+            customerCode: fakeCustomerCode,
+            comboDealInfo: fakeComboDealQuery,
+          ),
+        ).thenAnswer(
+          (_) async => const Left(
+            ApiFailure.other('fake-error'),
+          ),
+        );
+      },
+      act: (bloc) => bloc.add(
+        ComboDealListEvent.fetchPrincipleGroupDeal(
+          salesOrganisation: fakeSalesOrg,
+          customerCodeInfo: fakeCustomerCode,
+          comboDeals: fakeComboDealQuery,
+        ),
+      ),
+      expect: () => [
+        ComboDealListState.initial().copyWith(isFetching: true),
+        ComboDealListState.initial().copyWith(
+          isFetching: false,
+          apiFailureOrSuccessOption: optionOf(
+            const Left(
+              ApiFailure.other('fake-error'),
+            ),
+          ),
+        ),
+      ],
+      verify: (bloc) {
+        expect(
+          bloc.state.getComboDeal(comboDealId: fakeComboDealQuery.id),
+          ComboDeal.empty(),
+        );
+      },
+    );
+
+    blocTest<ComboDealListBloc, ComboDealListState>(
+      'Fetch stop when already stayed in state',
+      build: () => ComboDealListBloc(repository: repository),
+      seed: () => ComboDealListState.initial().copyWith(comboDeals: {
+        fakeComboDealQuery.id: [principleComboDeal],
+      }),
+      act: (bloc) => bloc.add(
+        ComboDealListEvent.fetchPrincipleGroupDeal(
+          salesOrganisation: fakeSalesOrg,
+          customerCodeInfo: fakeCustomerCode,
+          comboDeals: fakeComboDealQuery,
+        ),
+      ),
+      expect: () => [
+        ComboDealListState.initial().copyWith(
+          isFetching: true,
+          comboDeals: {
+            fakeComboDealQuery.id: [principleComboDeal],
+          },
+        ),
+        ComboDealListState.initial().copyWith(
+          isFetching: false,
+          comboDeals: {
+            fakeComboDealQuery.id: [principleComboDeal],
+          },
+        ),
+      ],
+    );
+  });
 }

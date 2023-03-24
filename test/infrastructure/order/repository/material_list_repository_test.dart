@@ -743,4 +743,144 @@ void main() {
       );
     });
   });
+
+  group('Materials for combo deal', () {
+    test('get successfully local', () async {
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
+      when(() => materialListLocalDataSource.getMaterialList())
+          .thenAnswer((invocation) async => <MaterialInfo>[]);
+
+      final result = await materialListRepository.getComboDealMaterials(
+        customerCodeInfo: fakeCustomerCodeInfo,
+        offset: 0,
+        pageSize: 10,
+        salesOrganisation: fakeSaleOrg,
+        shipToInfo: fakeShipToInfo,
+        user: mockUser,
+        principles: ['fake'],
+      );
+      expect(
+        result.isRight(),
+        true,
+      );
+    });
+
+    test('get success remote', () async {
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
+      when(
+        () => materialListRemoteDataSource.getComboDealMaterials(
+          offset: 0,
+          pageSize: 10,
+          customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+          principalNameList: ['000000fake'],
+          salesOrgCode: fakeSaleOrg.salesOrg.getOrDefaultValue(''),
+          shipToCode: fakeShipToInfo.shipToCustomerCode,
+        ),
+      ).thenAnswer((invocation) async => [MaterialInfo.empty()]);
+
+      final result = await materialListRepository.getComboDealMaterials(
+        customerCodeInfo: fakeCustomerCodeInfo,
+        offset: 0,
+        pageSize: 10,
+        salesOrganisation: fakeSaleOrg,
+        shipToInfo: fakeShipToInfo,
+        user: mockUser,
+        principles: ['fake'],
+      );
+      expect(
+        result.isRight(),
+        true,
+      );
+    });
+    test('get failure remote', () async {
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
+      when(
+        () => materialListRemoteDataSource.getComboDealMaterials(
+          offset: 0,
+          pageSize: 10,
+          customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+          principalNameList: ['000000fake'],
+          salesOrgCode: fakeSaleOrg.salesOrg.getOrDefaultValue(''),
+          shipToCode: fakeShipToInfo.shipToCustomerCode,
+        ),
+      ).thenThrow((invocation) async => MockException());
+
+      final result = await materialListRepository.getComboDealMaterials(
+        customerCodeInfo: fakeCustomerCodeInfo,
+        offset: 0,
+        pageSize: 10,
+        salesOrganisation: fakeSaleOrg,
+        shipToInfo: fakeShipToInfo,
+        user: mockUser,
+        principles: ['fake'],
+      );
+      expect(
+        result.isLeft(),
+        true,
+      );
+    });
+
+    test('get success remote SalesRep', () async {
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
+      when(
+        () => materialListRemoteDataSource.getComboDealMaterialsForSaleRep(
+          offset: 0,
+          pageSize: 10,
+          customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+          principalNameList: ['000000fake'],
+          salesOrgCode: fakeSaleOrg.salesOrg.getOrDefaultValue(''),
+          shipToCode: fakeShipToInfo.shipToCustomerCode,
+        ),
+      ).thenAnswer((invocation) async => [MaterialInfo.empty()]);
+
+      final result = await materialListRepository.getComboDealMaterials(
+        customerCodeInfo: fakeCustomerCodeInfo,
+        offset: 0,
+        pageSize: 10,
+        salesOrganisation: fakeSaleOrg,
+        shipToInfo: fakeShipToInfo,
+        user: mockUser.copyWith(
+          role: Role.empty().copyWith(
+            type: RoleType('external_sales_rep'),
+          ),
+        ),
+        principles: ['fake'],
+      );
+      expect(
+        result.isRight(),
+        true,
+      );
+    });
+    test('get failure remote', () async {
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
+      when(
+        () => materialListRemoteDataSource.getComboDealMaterialsForSaleRep(
+          offset: 0,
+          pageSize: 10,
+          customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+          principalNameList: ['000000fake'],
+          salesOrgCode: fakeSaleOrg.salesOrg.getOrDefaultValue(''),
+          shipToCode: fakeShipToInfo.shipToCustomerCode,
+        ),
+      ).thenThrow((invocation) async => MockException());
+
+      final result = await materialListRepository.getComboDealMaterials(
+        customerCodeInfo: fakeCustomerCodeInfo,
+        offset: 0,
+        pageSize: 10,
+        salesOrganisation: fakeSaleOrg,
+        shipToInfo: fakeShipToInfo,
+        user: mockUser.copyWith(
+          role: Role.empty().copyWith(
+            type: RoleType('external_sales_rep'),
+          ),
+        ),
+        principles: ['fake'],
+      );
+      expect(
+        result.isLeft(),
+        true,
+      );
+    });
+  });
 }

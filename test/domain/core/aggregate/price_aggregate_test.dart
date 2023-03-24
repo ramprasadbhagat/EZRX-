@@ -4,12 +4,14 @@ import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal_material.dart';
+import 'package:ezrxmobile/domain/order/entities/combo_deal_tier_rule.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
 import 'package:ezrxmobile/domain/order/entities/order_template_material.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/price_bonus.dart';
+import 'package:ezrxmobile/domain/order/entities/price_combo_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
@@ -1328,5 +1330,78 @@ void main() {
         );
       },
     );
+  });
+
+  group('PriceAggregate list extension test', () {
+    test('Map by material number', () {
+      final list = [
+        PriceAggregate.empty().copyWith(
+          materialInfo: MaterialInfo.empty().copyWith(
+            materialNumber: MaterialNumber('fake-1'),
+          ),
+        ),
+        PriceAggregate.empty().copyWith(
+          materialInfo: MaterialInfo.empty().copyWith(
+            materialNumber: MaterialNumber('fake-2'),
+          ),
+        ),
+      ];
+      expect(list.mapByMaterialNumber, {
+        MaterialNumber('fake-1'): PriceAggregate.empty().copyWith(
+          materialInfo: MaterialInfo.empty().copyWith(
+            materialNumber: MaterialNumber('fake-1'),
+          ),
+        ),
+        MaterialNumber('fake-2'): PriceAggregate.empty().copyWith(
+          materialInfo: MaterialInfo.empty().copyWith(
+            materialNumber: MaterialNumber('fake-2'),
+          ),
+        ),
+      });
+    });
+
+    test('First ComboDeal', () {
+      final list = [
+        PriceAggregate.empty().copyWith(
+          comboDeal: ComboDeal.empty().copyWith(
+            flexiTierRule: [ComboDealTierRule.empty()],
+          ),
+        ),
+        PriceAggregate.empty().copyWith(
+          comboDeal: ComboDeal.empty(),
+        ),
+      ];
+      expect(
+        list.firstComboDeal,
+        ComboDeal.empty().copyWith(
+          flexiTierRule: [ComboDealTierRule.empty()],
+        ),
+      );
+    });
+
+    test('First PriceComboDeal', () {
+      final list = [
+        PriceAggregate.empty().copyWith(
+          price: Price.empty().copyWith(
+            comboDeal: PriceComboDeal.empty().copyWith(
+              category: PriceComboDealCategory(
+                type: ComboDealCategoryType('fake-type'),
+                values: [],
+              ),
+            ),
+          ),
+        ),
+        PriceAggregate.empty(),
+      ];
+      expect(
+        list.firstPriceComboDeal,
+        PriceComboDeal.empty().copyWith(
+          category: PriceComboDealCategory(
+            type: ComboDealCategoryType('fake-type'),
+            values: [],
+          ),
+        ),
+      );
+    });
   });
 }

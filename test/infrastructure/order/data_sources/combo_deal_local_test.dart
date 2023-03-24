@@ -14,10 +14,10 @@ void main() async {
   locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
 
   group(
-    'Combo Deals for Material',
+    'Combo Deals',
     () {
       test(
-        'Get combo deal list',
+        'Get combo deal material',
         () async {
           final res = json.decode(
             await rootBundle
@@ -31,6 +31,24 @@ void main() async {
             List.from(res['data']['comboDealForMaterials'])
                 .map((e) => ComboDealDto.fromJson(e).toDomain)
                 .toList(),
+          );
+        },
+      );
+
+      test(
+        'Get combo deal principle group',
+        () async {
+          final res = json.decode(
+            await rootBundle.loadString(
+                'assets/json/getComboDealForPrincipleGroupResponse.json'),
+          );
+
+          final result = await localDataSource.getComboDeal();
+
+          expect(
+            result,
+            ComboDealDto.fromJson(res['data']['comboDealForPrincMatGrp'])
+                .toDomain,
           );
         },
       );

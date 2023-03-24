@@ -183,18 +183,17 @@ class MaterialListRepository implements IMaterialListRepository {
     required int offset,
     required List<String> principles,
   }) async {
-    //TODO: Implement this later
-    // if (config.appFlavor == Flavor.mock) {
-    //   try {
-    //     final materialListData = user.role.type.isSalesRep
-    //         ? await materialListLocalDataSource.getMaterialListSalesRep()
-    //         : await materialListLocalDataSource.getMaterialList();
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final materialListData = user.role.type.isSalesRep
+            ? await materialListLocalDataSource.getMaterialListSalesRep()
+            : await materialListLocalDataSource.getMaterialList();
 
-    //     return Right(materialListData);
-    //   } catch (e) {
-    //     return Left(FailureHandler.handleFailure(e));
-    //   }
-    // }
+        return Right(materialListData);
+      } catch (e) {
+        return Left(FailureHandler.handleFailure(e));
+      }
+    }
 
     // Because principle code from response is something like 140132
     // We need to transform it to valid one (0000140132)

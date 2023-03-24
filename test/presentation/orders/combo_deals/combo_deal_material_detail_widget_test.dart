@@ -507,7 +507,13 @@ void main() {
               child: ComboDealItem(
                 material: fakeFirstMaterial.copyWith(quantity: 5),
                 isSelected: true,
-                onCheckBoxPressed: () {},
+                onCheckBoxPressed: () {
+                  comboDealDetailBloc.add(
+                    ComboDealMaterialDetailEvent.updateItemSelection(
+                      item: MaterialNumber('fake-number-1'),
+                    ),
+                  );
+                },
                 onQuantityUpdated: (int qty) {},
               ),
             ),
@@ -517,14 +523,13 @@ void main() {
         expect(checkBox, findsOneWidget);
         await tester.tap(checkBox);
         await tester.pump();
-        //TODO: Update this
-        // verify(
-        //   () => comboDealDetailBloc.add(
-        //     ComboDealMaterialDetailEvent.updateItemSelection(
-        //       item: MaterialNumber('fake-number-1'),
-        //     ),
-        //   ),
-        // ).called(1);
+        verify(
+          () => comboDealDetailBloc.add(
+            ComboDealMaterialDetailEvent.updateItemSelection(
+              item: MaterialNumber('fake-number-1'),
+            ),
+          ),
+        ).called(1);
       },
     );
   });

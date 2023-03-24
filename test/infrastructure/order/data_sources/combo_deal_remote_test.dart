@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
+import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/combo_deal_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/combo_deal_remote.dart';
@@ -35,23 +36,29 @@ void main() async {
   final fakeMaterialNumbers = ['fake-number'];
   const fakeSalesDeal = 'fake-sales-deal';
   const fakeFlexibleGroup = 'fake-flexible-group';
-  final fakeJson = json.decode(
-    await rootBundle
-        .loadString('assets/json/getComboDealForMaterialResponse.json'),
-  );
-  final fakeQueryVariables = {
-    'salesOrg': fakeSalesOrgCode,
-    'customerCode': fakeCustomerCode,
-    'salesDeal': fakeSalesDeal,
-    'flexibleGroup': fakeFlexibleGroup,
-    'materialNumbers': fakeMaterialNumbers,
-  };
 
   locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
 
   group(
-    'Combo Deal List',
+    'Combo Deal Material',
     () {
+      late dynamic fakeJson;
+
+      final fakeQueryVariables = {
+        'salesOrg': fakeSalesOrgCode,
+        'customerCode': fakeCustomerCode,
+        'salesDeal': fakeSalesDeal,
+        'flexibleGroup': fakeFlexibleGroup,
+        'materialNumbers': fakeMaterialNumbers,
+      };
+
+      setUpAll(() async {
+        fakeJson = json.decode(
+          await rootBundle
+              .loadString('assets/json/getComboDealForMaterialResponse.json'),
+        );
+      });
+
       test(
         'Get Combo Deal List with 200 response status code',
         () async {
@@ -121,41 +128,90 @@ void main() async {
           });
         },
       );
-
-      test(
-        'Get Combo Deal List with error response status code',
-        () async {
-          dioAdapter.onPost(
-            '/api/pricing',
-            (server) => server.reply(
-              204,
-              {
-                'error': 'fake-error',
-              },
-              delay: const Duration(seconds: 1),
-            ),
-            headers: {'Content-Type': 'application/json; charset=utf-8'},
-            data: jsonEncode({
-              'query':
-                  remoteDataSource.queryMutation.getComboDealListForMaterial(),
-              'variables': fakeQueryVariables
-            }),
-          );
-
-          await remoteDataSource
-              .getComboDealList(
-            customerCode: fakeCustomerCode,
-            salesOrgCode: fakeSalesOrgCode,
-            materialNumbers: fakeMaterialNumbers,
-            salesDeal: fakeSalesDeal,
-            flexibleGroup: fakeFlexibleGroup,
-          )
-              .onError((error, _) {
-            expect(error, isA<ServerException>());
-            return [];
-          });
-        },
-      );
     },
   );
+
+  group('Combo Deal Principle', () {
+    final fakeQueryVariables = {
+      'salesOrg': fakeSalesOrgCode,
+      'customerCode': fakeCustomerCode,
+      'salesDeal': fakeSalesDeal,
+      'flexibleGroup': fakeFlexibleGroup,
+    };
+
+    late dynamic fakeJson;
+
+    setUpAll(() async {
+      fakeJson = json.decode(
+        await rootBundle.loadString(
+            'assets/json/getComboDealForPrincipleGroupResponse.json'),
+      );
+    });
+
+    test(
+      'Get Combo Deal Principle with 200 response status code',
+      () async {
+        final finalData = fakeJson['data']['comboDealForPrincMatGrp'];
+
+        dioAdapter.onPost(
+          '/api/pricing',
+          (server) => server.reply(
+            200,
+            fakeJson,
+            delay: const Duration(seconds: 1),
+          ),
+          headers: {'Content-Type': 'application/json; charset=utf-8'},
+          data: jsonEncode({
+            'query':
+                remoteDataSource.queryMutation.getComboDealForPrincipleGroup(),
+            'variables': fakeQueryVariables
+          }),
+        );
+
+        final result = await remoteDataSource.getComboDeal(
+          customerCode: fakeCustomerCode,
+          salesOrgCode: fakeSalesOrgCode,
+          salesDeal: fakeSalesDeal,
+          flexibleGroup: fakeFlexibleGroup,
+        );
+
+        expect(
+          result,
+          ComboDealDto.fromJson(finalData).toDomain,
+        );
+      },
+    );
+
+    test(
+      'Get Combo Deal Principle with error response status code',
+      () async {
+        dioAdapter.onPost(
+          '/api/pricing',
+          (server) => server.reply(
+            204,
+            {},
+            delay: const Duration(seconds: 1),
+          ),
+          headers: {'Content-Type': 'application/json; charset=utf-8'},
+          data: jsonEncode({
+            'query':
+                remoteDataSource.queryMutation.getComboDealForPrincipleGroup(),
+            'variables': fakeQueryVariables
+          }),
+        );
+
+        await remoteDataSource
+            .getComboDeal(
+          customerCode: fakeCustomerCode,
+          salesOrgCode: fakeSalesOrgCode,
+          salesDeal: fakeSalesDeal,
+          flexibleGroup: fakeFlexibleGroup,
+        )
+            .onError((error, _) {
+          expect(error, isA<ServerException>());
+          return ComboDeal.empty();
+        });
+      },
+    );
+  });
 }

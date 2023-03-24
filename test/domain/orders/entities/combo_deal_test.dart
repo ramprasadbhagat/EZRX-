@@ -2,6 +2,7 @@ import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal_group_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal_material.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal_qty_tier.dart';
+import 'package:ezrxmobile/domain/order/entities/combo_deal_tier_rule.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -84,6 +85,45 @@ void main() {
         ComboDealQtyTier.empty().copyWith(minQty: 2),
         ComboDealQtyTier.empty().copyWith(minQty: 1),
       ]);
+    });
+
+    test('K5 case', () {
+      final comboDeal = ComboDeal.empty().copyWith(flexiTierRule: [
+        ComboDealTierRule.empty(),
+      ]);
+
+      expect(comboDeal.scheme, ComboDealScheme.k5);
+    });
+
+    test('Sort rule tier with min amount descending', () {
+      final comboDeal = ComboDeal.empty().copyWith(flexiTierRule: [
+        ComboDealTierRule.empty().copyWith(minTotalAmount: 10),
+        ComboDealTierRule.empty().copyWith(minTotalAmount: 100),
+        ComboDealTierRule.empty().copyWith(minTotalAmount: 30),
+        ComboDealTierRule.empty().copyWith(minTotalAmount: 40),
+      ]);
+
+      expect(
+        comboDeal.descendingSortedMinAmountTiers,
+        [
+          ComboDealTierRule.empty().copyWith(minTotalAmount: 100),
+          ComboDealTierRule.empty().copyWith(minTotalAmount: 40),
+          ComboDealTierRule.empty().copyWith(minTotalAmount: 30),
+          ComboDealTierRule.empty().copyWith(minTotalAmount: 10),
+        ],
+      );
+    });
+
+    test('Check material deal', () {
+      final materialComboDeal = ComboDeal.empty().copyWith(flexiQtyTier: [
+        ComboDealQtyTier.empty(),
+      ]);
+      final principleComboDeal = ComboDeal.empty().copyWith(flexiTierRule: [
+        ComboDealTierRule.empty(),
+      ]);
+
+      expect(materialComboDeal.isMaterialDeal, true);
+      expect(principleComboDeal.isMaterialDeal, false);
     });
   });
 }

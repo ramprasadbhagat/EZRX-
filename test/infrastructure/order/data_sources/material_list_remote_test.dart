@@ -442,4 +442,187 @@ void main() {
       });
     },
   );
+
+  group('Combo deal material list', () {
+    test('get successfully', () async {
+      final variables = {
+        'salesOrganisation': 'fake-sales-org',
+        'customerCode': 'fake-customer-code',
+        'shipToCustomer': 'fake-shipto-code',
+        'first': 10,
+        'after': 0,
+        'principalNameList': ['fake-name'],
+      };
+      final res = json.decode(
+        await rootBundle
+            .loadString('assets/json/getMaterialsWithMetaResponse.json'),
+      );
+
+      dioAdapter.onPost(
+        '/api/license',
+        (server) => server.reply(
+          200,
+          res,
+          delay: const Duration(seconds: 1),
+        ),
+        headers: {'Content-Type': 'application/json; charset=utf-8'},
+        data: jsonEncode({
+          'query': remoteDataSource.materialListQuery.comboDealMaterials,
+          'variables': variables
+        }),
+      );
+
+      final result = await remoteDataSource.getComboDealMaterials(
+        customerCode: 'fake-customer-code',
+        offset: 0,
+        pageSize: 10,
+        principalNameList: ['fake-name'],
+        salesOrgCode: 'fake-sales-org',
+        shipToCode: 'fake-shipto-code',
+      );
+      final finalData = res['data']['materialsWithMeta']['materials'];
+
+      expect(
+          result,
+          List.from(finalData)
+              .map((e) => MaterialDto.fromJson(e).toDomain())
+              .toList());
+    });
+
+    test('get failure', () async {
+      final variables = {
+        'salesOrganisation': 'fake-sales-org',
+        'customerCode': 'fake-customer-code',
+        'shipToCustomer': 'fake-shipto-code',
+        'first': 10,
+        'after': 0,
+        'principalNameList': ['fake-name'],
+      };
+
+      dioAdapter.onPost(
+        '/api/license',
+        (server) => server.reply(
+          200,
+          {
+            'data': null,
+            'errors': [
+              {'message': 'fake-error'}
+            ],
+          },
+          delay: const Duration(seconds: 1),
+        ),
+        headers: {'Content-Type': 'application/json; charset=utf-8'},
+        data: jsonEncode({
+          'query': remoteDataSource.materialListQuery.comboDealMaterials,
+          'variables': variables
+        }),
+      );
+
+      await remoteDataSource
+          .getComboDealMaterials(
+        customerCode: 'fake-customer-code',
+        offset: 0,
+        pageSize: 10,
+        principalNameList: ['fake-name'],
+        salesOrgCode: 'fake-sales-org',
+        shipToCode: 'fake-shipto-code',
+      )
+          .onError((error, _) async {
+        expect(error, isA<ServerException>());
+        return Future.value(<MaterialInfoMock>[]);
+      });
+    });
+
+    test('get successfully for salesRep', () async {
+      final variables = {
+        'salesOrganisation': 'fake-sales-org',
+        'customerSoldToCode': 'fake-customer-code',
+        'customerShipToCode': 'fake-shipto-code',
+        'first': 10,
+        'after': 0,
+        'principalNameList': ['fake-name'],
+      };
+      final res = json.decode(
+        await rootBundle.loadString(
+            'assets/json/getCustomerMaterialsForSalesRepResponse.json'),
+      );
+
+      dioAdapter.onPost(
+        '/api/license',
+        (server) => server.reply(
+          200,
+          res,
+          delay: const Duration(seconds: 1),
+        ),
+        headers: {'Content-Type': 'application/json; charset=utf-8'},
+        data: jsonEncode({
+          'query':
+              remoteDataSource.materialListQuery.comboDealMaterialsForSaleRep,
+          'variables': variables
+        }),
+      );
+
+      final result = await remoteDataSource.getComboDealMaterialsForSaleRep(
+        customerCode: 'fake-customer-code',
+        offset: 0,
+        pageSize: 10,
+        principalNameList: ['fake-name'],
+        salesOrgCode: 'fake-sales-org',
+        shipToCode: 'fake-shipto-code',
+      );
+      final finalData =
+          res['data']['customerMaterialsForSalesRep']['materials'];
+
+      expect(
+          result,
+          List.from(finalData)
+              .map((e) => MaterialDto.fromJson(e).toDomain())
+              .toList());
+    });
+
+    test('get failure for salesRep', () async {
+      final variables = {
+        'salesOrganisation': 'fake-sales-org',
+        'customerSoldToCode': 'fake-customer-code',
+        'customerShipToCode': 'fake-shipto-code',
+        'first': 10,
+        'after': 0,
+        'principalNameList': ['fake-name'],
+      };
+
+      dioAdapter.onPost(
+        '/api/license',
+        (server) => server.reply(
+          200,
+          {
+            'data': null,
+            'errors': [
+              {'message': 'fake-error'}
+            ],
+          },
+          delay: const Duration(seconds: 1),
+        ),
+        headers: {'Content-Type': 'application/json; charset=utf-8'},
+        data: jsonEncode({
+          'query':
+              remoteDataSource.materialListQuery.comboDealMaterialsForSaleRep,
+          'variables': variables
+        }),
+      );
+
+      await remoteDataSource
+          .getComboDealMaterialsForSaleRep(
+        customerCode: 'fake-customer-code',
+        offset: 0,
+        pageSize: 10,
+        principalNameList: ['fake-name'],
+        salesOrgCode: 'fake-sales-org',
+        shipToCode: 'fake-shipto-code',
+      )
+          .onError((error, _) async {
+        expect(error, isA<ServerException>());
+        return Future.value(<MaterialInfoMock>[]);
+      });
+    });
+  });
 }

@@ -3,6 +3,7 @@ import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal_group_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal_material.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal_qty_tier.dart';
+import 'package:ezrxmobile/domain/order/entities/combo_deal_tier_rule.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
@@ -763,6 +764,50 @@ void main() {
       expect(cartItem.unitPrice, 427.54);
       expect(cartItem.grandTotalPrice, 427.54);
       expect(cartItem.subTotalPrice, 427.54);
+    });
+
+    test('K5 case', () {
+      final comboDeal = ComboDeal.empty().copyWith(flexiTierRule: [
+        ComboDealTierRule.empty().copyWith(
+          minTotalAmount: 50,
+          rate: -10,
+        ),
+        ComboDealTierRule.empty().copyWith(
+          minTotalAmount: 300,
+          rate: -10,
+        ),
+      ]);
+
+      final fakePriceAggregate1 = PriceAggregate.empty().copyWith(
+        price: Price.empty().copyWith(lastPrice: MaterialPrice(100)),
+        quantity: 2,
+        comboDeal: comboDeal,
+      );
+      final fakePriceAggregate2 = PriceAggregate.empty().copyWith(
+        price: Price.empty().copyWith(lastPrice: MaterialPrice(50)),
+        quantity: 2,
+        comboDeal: comboDeal,
+      );
+      final cartItem =
+          CartItem.comboDeal([fakePriceAggregate1, fakePriceAggregate2]);
+
+      expect(cartItem.listPrice, 300.0);
+      expect(cartItem.unitPrice, 270.0);
+      expect(cartItem.grandTotalPrice, 270.0);
+      expect(cartItem.subTotalPrice, 270.0);
+      expect(
+        cartItem.eligibleComboDealTierRule,
+        ComboDealTierRule.empty().copyWith(
+          minTotalAmount: 300,
+          rate: -10,
+        ),
+      );
+      expect(
+        cartItem.comboDealRate(
+          material: PriceAggregate.empty(),
+        ),
+        -10,
+      );
     });
   });
 }

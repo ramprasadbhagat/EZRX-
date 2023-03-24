@@ -279,4 +279,28 @@ void main() {
       },
     );
   });
+
+  group('ComboDealCategoryType Value Object', () {
+    test(
+      'is material number type',
+      () {
+        final valObj = ComboDealCategoryType('MATNR');
+        expect(
+          valObj.isMaterialNumber,
+          true,
+        );
+      },
+    );
+
+    test(
+      'is principle group type',
+      () {
+        final valObj = ComboDealCategoryType('ZPRINC');
+        expect(
+          valObj.isPrinciple,
+          true,
+        );
+      },
+    );
+  });
 }

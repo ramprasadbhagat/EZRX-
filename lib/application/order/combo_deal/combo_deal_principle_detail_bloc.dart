@@ -30,11 +30,12 @@ class ComboDealPrincipleDetailBloc
   ComboDealPrincipleDetailBloc({
     required this.repository,
   }) : super(ComboDealPrincipleDetailState.initial()) {
+    on<_Initialize>((e, emit) => emit(ComboDealPrincipleDetailState.initial()));
     on<_InitFromCart>((e, emit) async {
       emit(
         state.copyWith(
           items: Map.from(state.items)..addAll(e.items.mapByMaterialNumber),
-          selectedItems: Map.from(state.items)
+          selectedItems: Map.from(state.selectedItems)
             ..addAll(
               {
                 for (final item in e.items) item.getMaterialNumber: true,
