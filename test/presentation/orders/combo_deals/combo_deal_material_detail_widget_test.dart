@@ -17,6 +17,7 @@ import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal_group_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal_material.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal_qty_tier.dart';
+import 'package:ezrxmobile/domain/order/entities/combo_deal_sku_tier.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/price_combo_deal.dart';
@@ -1263,6 +1264,381 @@ void main() {
           await tester.tap(addToCartButton);
           await tester.pump();
 
+          verify(() => cartBloc.add(any()));
+        },
+      );
+    },
+  );
+
+  group(
+    'Combo deal K3 case',
+    () {
+      final flexiSKUTier = <ComboDealSKUTier>[
+        ComboDealSKUTier(
+          rate: -14.0,
+          conditionNumber: '',
+          minQty: 4,
+          type: DiscountType('%'),
+        ),
+        ComboDealSKUTier(
+          rate: -12.0,
+          conditionNumber: '',
+          minQty: 2,
+          type: DiscountType('%'),
+        ),
+        ComboDealSKUTier(
+          rate: -13.0,
+          conditionNumber: '',
+          minQty: 3,
+          type: DiscountType('%'),
+        ),
+      ];
+      final fakeFirstMaterial = PriceAggregate.empty().copyWith(
+        materialInfo: MaterialInfo.empty().copyWith(
+          materialNumber: MaterialNumber('fake-number-1'),
+        ),
+        quantity: 5,
+        price: Price.empty().copyWith(lastPrice: MaterialPrice(1.5)),
+        comboDeal: ComboDeal.empty().copyWith(
+          materialComboDeals: [
+            ComboDealMaterialSet(
+              materials: [
+                ComboDealMaterial.empty().copyWith(
+                  minQty: 5,
+                  materialNumber: MaterialNumber('fake-number-1'),
+                ),
+              ],
+              setNo: 'fake-set',
+            ),
+          ],
+          flexiSKUTier: flexiSKUTier,
+        ),
+      );
+
+      final fakeSecondMaterial = PriceAggregate.empty().copyWith(
+        materialInfo: MaterialInfo.empty().copyWith(
+          materialNumber: MaterialNumber('fake-number-2'),
+        ),
+        quantity: 5,
+        price: Price.empty().copyWith(lastPrice: MaterialPrice(250)),
+        comboDeal: ComboDeal.empty().copyWith(
+          materialComboDeals: [
+            ComboDealMaterialSet(
+              materials: [
+                ComboDealMaterial.empty().copyWith(
+                  minQty: 5,
+                  materialNumber: MaterialNumber('fake-number-2'),
+                ),
+              ],
+              setNo: 'fake-set',
+            ),
+          ],
+          flexiSKUTier: flexiSKUTier,
+        ),
+      );
+
+      final fakeThirdMaterial = PriceAggregate.empty().copyWith(
+        materialInfo: MaterialInfo.empty().copyWith(
+          materialNumber: MaterialNumber('fake-number-3'),
+        ),
+        quantity: 5,
+        price: Price.empty().copyWith(lastPrice: MaterialPrice(20)),
+        comboDeal: ComboDeal.empty().copyWith(
+          materialComboDeals: [
+            ComboDealMaterialSet(
+              materials: [
+                ComboDealMaterial.empty().copyWith(
+                  minQty: 5,
+                  materialNumber: MaterialNumber('fake-number-3'),
+                ),
+              ],
+              setNo: 'fake-set',
+            ),
+          ],
+          flexiSKUTier: flexiSKUTier,
+        ),
+      );
+
+      final fakeFourthMaterial = PriceAggregate.empty().copyWith(
+        materialInfo: MaterialInfo.empty().copyWith(
+          materialNumber: MaterialNumber('fake-number-3'),
+        ),
+        quantity: 5,
+        price: Price.empty().copyWith(lastPrice: MaterialPrice(12.89)),
+        comboDeal: ComboDeal.empty().copyWith(
+          materialComboDeals: [
+            ComboDealMaterialSet(
+              materials: [
+                ComboDealMaterial.empty().copyWith(
+                  minQty: 5,
+                  materialNumber: MaterialNumber('fake-number-3'),
+                ),
+              ],
+              setNo: 'fake-set',
+            ),
+          ],
+          flexiSKUTier: flexiSKUTier,
+        ),
+      );
+
+      final headerTitle =
+          'You must purchase ${fakeFirstMaterial.comboDeal.sortedSKUTier.map((e) => '${e.minQty} unique products ').toList().join(' OR ')} WITH a min QTY of [${fakeFirstMaterial.comboDeal.materialComboDeals.first.materials.first.minQty}] for each single product (Discounts will increase as the number of unique products increases)';
+
+      testWidgets(
+        'Display 4 combo item, none is selected, nothing happen while add to cart',
+        (tester) async {
+          when(() => comboDealDetailBloc.state).thenReturn(
+            ComboDealMaterialDetailState.initial().copyWith(
+              items: {
+                MaterialNumber('fake-number-1'): fakeFirstMaterial,
+                MaterialNumber('fake-number-2'): fakeSecondMaterial,
+                MaterialNumber('fake-number-3'): fakeThirdMaterial,
+                MaterialNumber('fake-number-4'): fakeFourthMaterial,
+              },
+              selectedItems: {
+                MaterialNumber('fake-number-1'): false,
+                MaterialNumber('fake-number-2'): false,
+                MaterialNumber('fake-number-3'): false,
+                MaterialNumber('fake-number-4'): false,
+              },
+            ),
+          );
+          await tester.pumpWidget(
+            wrapper(
+              ComboDealMaterialDetailPage(
+                comboItems: [
+                  fakeFirstMaterial,
+                  fakeSecondMaterial,
+                  fakeThirdMaterial,
+                  fakeFourthMaterial,
+                ],
+              ),
+            ),
+          );
+
+          expect(find.byType(ComboDealItem), findsNWidgets(4));
+          expect(find.byType(MandatoryLabel), findsNothing);
+          expect(find.byType(DiscountLabel), findsNothing);
+          expect(
+            find.text(headerTitle),
+            findsOneWidget,
+          );
+          final addToCartButton = find.byKey(const Key('addToCartButton'));
+          expect(addToCartButton, findsOneWidget);
+
+          await tester.tap(addToCartButton);
+          await tester.pump();
+          expect(
+            find.byKey(const Key('Total label 0.0')),
+            findsOneWidget,
+          );
+          verifyNever(() => cartBloc.add(any()));
+        },
+      );
+
+      testWidgets(
+        'Display 4 combo item, selected one, nothing happen while add to cart',
+        (tester) async {
+          when(() => comboDealDetailBloc.state).thenReturn(
+            ComboDealMaterialDetailState.initial().copyWith(
+              items: {
+                MaterialNumber('fake-number-1'): fakeFirstMaterial,
+                MaterialNumber('fake-number-2'): fakeSecondMaterial,
+                MaterialNumber('fake-number-3'): fakeThirdMaterial,
+                MaterialNumber('fake-number-4'): fakeFourthMaterial,
+              },
+              selectedItems: {
+                MaterialNumber('fake-number-1'): true,
+                MaterialNumber('fake-number-2'): false,
+                MaterialNumber('fake-number-3'): false,
+                MaterialNumber('fake-number-4'): false,
+              },
+            ),
+          );
+          await tester.pumpWidget(
+            wrapper(
+              ComboDealMaterialDetailPage(
+                comboItems: [
+                  fakeFirstMaterial,
+                  fakeSecondMaterial,
+                  fakeThirdMaterial,
+                  fakeFourthMaterial,
+                ],
+              ),
+            ),
+          );
+
+          expect(find.byType(ComboDealItem), findsNWidgets(4));
+          expect(find.byType(MandatoryLabel), findsNothing);
+          expect(find.byType(DiscountLabel), findsNothing);
+          expect(
+            find.text(headerTitle),
+            findsOneWidget,
+          );
+          final addToCartButton = find.byKey(const Key('addToCartButton'));
+          expect(addToCartButton, findsOneWidget);
+
+          await tester.tap(addToCartButton);
+          await tester.pump();
+          expect(
+            find.byKey(const Key('Total label 7.5')),
+            findsOneWidget,
+          );
+          verifyNever(() => cartBloc.add(any()));
+        },
+      );
+
+      testWidgets(
+        'Display 4 combo item, two selected, add to cart',
+        (tester) async {
+          when(() => comboDealDetailBloc.state).thenReturn(
+            ComboDealMaterialDetailState.initial().copyWith(
+              items: {
+                MaterialNumber('fake-number-1'): fakeFirstMaterial,
+                MaterialNumber('fake-number-2'): fakeSecondMaterial,
+                MaterialNumber('fake-number-3'): fakeThirdMaterial,
+                MaterialNumber('fake-number-4'): fakeFourthMaterial,
+              },
+              selectedItems: {
+                MaterialNumber('fake-number-1'): true,
+                MaterialNumber('fake-number-2'): true,
+                MaterialNumber('fake-number-3'): false,
+                MaterialNumber('fake-number-4'): false,
+              },
+            ),
+          );
+          await tester.pumpWidget(
+            wrapper(
+              ComboDealMaterialDetailPage(
+                comboItems: [
+                  fakeFirstMaterial,
+                  fakeSecondMaterial,
+                  fakeThirdMaterial,
+                  fakeFourthMaterial,
+                ],
+              ),
+            ),
+          );
+
+          expect(find.byType(ComboDealItem), findsNWidgets(4));
+          expect(find.byType(MandatoryLabel), findsNothing);
+          expect(
+            find.text(headerTitle),
+            findsOneWidget,
+          );
+          final checkbox = find.byType(Checkbox);
+          expect(checkbox, findsAtLeastNWidgets(4));
+          final addToCartButton = find.byKey(const Key('addToCartButton'));
+          expect(addToCartButton, findsOneWidget);
+          expect(find.byType(DiscountLabel), findsOneWidget);
+          await tester.tap(addToCartButton);
+          await tester.pump();
+          verify(() => cartBloc.add(any()));
+        },
+      );
+
+      testWidgets(
+        'Display 4 combo item, Three selected, add to cart',
+        (tester) async {
+          when(() => comboDealDetailBloc.state).thenReturn(
+            ComboDealMaterialDetailState.initial().copyWith(
+              items: {
+                MaterialNumber('fake-number-1'): fakeFirstMaterial,
+                MaterialNumber('fake-number-2'): fakeSecondMaterial,
+                MaterialNumber('fake-number-3'): fakeThirdMaterial,
+                MaterialNumber('fake-number-4'): fakeFourthMaterial,
+              },
+              selectedItems: {
+                MaterialNumber('fake-number-1'): true,
+                MaterialNumber('fake-number-2'): true,
+                MaterialNumber('fake-number-3'): true,
+                MaterialNumber('fake-number-4'): false,
+              },
+            ),
+          );
+          await tester.pumpWidget(
+            wrapper(
+              ComboDealMaterialDetailPage(
+                comboItems: [
+                  fakeFirstMaterial,
+                  fakeSecondMaterial,
+                  fakeThirdMaterial,
+                  fakeFourthMaterial,
+                ],
+              ),
+            ),
+          );
+
+          expect(find.byType(ComboDealItem), findsNWidgets(4));
+          expect(find.byType(MandatoryLabel), findsNothing);
+          expect(
+            find.text(headerTitle),
+            findsOneWidget,
+          );
+          final checkbox = find.byType(Checkbox);
+          expect(checkbox, findsAtLeastNWidgets(4));
+          final addToCartButton = find.byKey(const Key('addToCartButton'));
+          expect(addToCartButton, findsOneWidget);
+          expect(find.byType(DiscountLabel), findsOneWidget);
+          expect(
+            find.byKey(const Key('Total label 1181.0')),
+            findsOneWidget,
+          );
+          await tester.tap(addToCartButton);
+          await tester.pump();
+          verify(() => cartBloc.add(any()));
+        },
+      );
+
+      testWidgets(
+        'Display 4 combo item, Four selected, add to cart',
+        (tester) async {
+          when(() => comboDealDetailBloc.state).thenReturn(
+            ComboDealMaterialDetailState.initial().copyWith(
+              items: {
+                MaterialNumber('fake-number-1'): fakeFirstMaterial,
+                MaterialNumber('fake-number-2'): fakeSecondMaterial,
+                MaterialNumber('fake-number-3'): fakeThirdMaterial,
+                MaterialNumber('fake-number-4'): fakeFourthMaterial,
+              },
+              selectedItems: {
+                MaterialNumber('fake-number-1'): true,
+                MaterialNumber('fake-number-2'): true,
+                MaterialNumber('fake-number-3'): true,
+                MaterialNumber('fake-number-4'): true,
+              },
+            ),
+          );
+          await tester.pumpWidget(
+            wrapper(
+              ComboDealMaterialDetailPage(
+                comboItems: [
+                  fakeFirstMaterial,
+                  fakeSecondMaterial,
+                  fakeThirdMaterial,
+                  fakeFourthMaterial,
+                ],
+              ),
+            ),
+          );
+
+          expect(find.byType(ComboDealItem), findsNWidgets(4));
+          expect(find.byType(MandatoryLabel), findsNothing);
+          expect(
+            find.text(headerTitle),
+            findsOneWidget,
+          );
+          final checkbox = find.byType(Checkbox);
+          expect(checkbox, findsAtLeastNWidgets(4));
+          final addToCartButton = find.byKey(const Key('addToCartButton'));
+          expect(addToCartButton, findsOneWidget);
+          expect(find.byType(DiscountLabel), findsOneWidget);
+          expect(
+            find.byKey(const Key('Total label 1222.9')),
+            findsOneWidget,
+          );
+          await tester.tap(addToCartButton);
+          await tester.pump();
           verify(() => cartBloc.add(any()));
         },
       );
