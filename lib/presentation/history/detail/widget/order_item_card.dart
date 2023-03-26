@@ -41,6 +41,7 @@ class OrderItemCard extends StatelessWidget {
     final enableRemark = salesOrgConfigs.enableRemarks;
     final disableCreateOrder =
         context.read<UserBloc>().state.user.disableCreateOrder;
+    final enableOHPrice = salesOrgConfigs.enableOHPrice;
 
     return BlocBuilder<OrderHistoryDetailsBloc, OrderHistoryDetailsState>(
       buildWhen: (previous, current) => previous.isLoading != current.isLoading,
@@ -140,28 +141,34 @@ class OrderItemCard extends StatelessWidget {
                         keyFlex: 1,
                         valueFlex: 1,
                       ),
-                      BalanceTextRow(
-                        keyText: 'ZP Price'.tr(),
-                        valueText: StringUtils.displayPrice(
-                          salesOrgConfigs,
-                          orderHistoryDetailsBonusAggregate
-                              .orderItem.unitPrice.zpPrice,
+                      if (enableOHPrice)
+                        BalanceTextRow(
+                          key: Key('zpPrice${orderHistoryDetailsBonusAggregate
+                            .orderItem.materialNumber.getOrDefaultValue('')}'),
+                          keyText: 'ZP Price'.tr(),
+                          valueText: StringUtils.displayPrice(
+                            salesOrgConfigs,
+                            orderHistoryDetailsBonusAggregate
+                                .orderItem.unitPrice.zpPrice,
+                          ),
+                          valueTextLoading: state.isLoading,
+                          keyFlex: 1,
+                          valueFlex: 1,
                         ),
-                        valueTextLoading: state.isLoading,
-                        keyFlex: 1,
-                        valueFlex: 1,
-                      ),
-                      BalanceTextRow(
-                        keyText: 'Total Price'.tr(),
-                        valueText: StringUtils.displayPrice(
-                          salesOrgConfigs,
-                          orderHistoryDetailsBonusAggregate
-                              .orderItem.totalPrice.totalPrice,
+                      if (enableOHPrice)
+                        BalanceTextRow(
+                          key: Key('totalPrice${orderHistoryDetailsBonusAggregate
+                            .orderItem.materialNumber.getOrDefaultValue('')}'),
+                          keyText: 'Total Price'.tr(),
+                          valueText: StringUtils.displayPrice(
+                            salesOrgConfigs,
+                            orderHistoryDetailsBonusAggregate
+                                .orderItem.totalPrice.totalPrice,
+                          ),
+                          valueTextLoading: state.isLoading,
+                          keyFlex: 1,
+                          valueFlex: 1,
                         ),
-                        valueTextLoading: state.isLoading,
-                        keyFlex: 1,
-                        valueFlex: 1,
-                      ),
                       if (enableTaxDisplay)
                         BalanceTextRow(
                           keyText: 'Included Tax '.tr(),

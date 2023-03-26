@@ -34,9 +34,9 @@ class CartBundleItemTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final enableListPrice =
-        context.read<SalesOrgBloc>().state.configs.enableListPrice;
-    final enableVat = context.read<SalesOrgBloc>().state.configs.enableVat;
+    final salesOrgConfigs = context.read<SalesOrgBloc>().state.configs;
+    final enableListPrice = salesOrgConfigs.enableListPrice;
+    final enableMaterialLevelTax = salesOrgConfigs.enableMaterialLevelTax;
 
     return Card(
       child: Column(
@@ -123,7 +123,7 @@ class CartBundleItemTile extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                enableVat
+                                enableMaterialLevelTax
                                     ? Text(
                                         '${'Price before $taxCode: '.tr()}${materialCommonInfo.display(PriceType.finalPrice)}',
                                         style: Theme.of(context)

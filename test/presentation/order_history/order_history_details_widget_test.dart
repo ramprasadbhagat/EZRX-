@@ -1175,6 +1175,7 @@ void main() {
           enableRemarks: true,
           displayOrderDiscount: true,
           disableDeliveryDate: true,
+          enableOHPrice: false,
         )),
       );
       when(() => userBlocMock.state).thenReturn(
@@ -1213,6 +1214,15 @@ void main() {
 
       expect(orderItemBonusCardField, findsOneWidget);
       await tester.pump();
+
+      expect(
+          find.byKey(Key(
+              'zpPriceBonus${orderHistoryDetails.orderHistoryDetailsOrderItem.first.materialNumber.getOrDefaultValue('')}')),
+          findsNothing);
+      expect(
+          find.byKey(Key(
+              'totalPriceBonus${orderHistoryDetails.orderHistoryDetailsOrderItem.first.materialNumber.getOrDefaultValue('')}')),
+          findsNothing);
 
       final sapStatusNotEmptyOrderItem =
           find.byKey(const Key('sapStatusNotEmpty'));
@@ -1347,6 +1357,7 @@ void main() {
           enableRemarks: true,
           displayOrderDiscount: true,
           disableDeliveryDate: true,
+          enableOHPrice: false,
         )),
       );
       // when(() => mockCartBloc.state).thenReturn(CartState.initial().copyWith(
@@ -1394,6 +1405,15 @@ void main() {
           find.byKey(Key('orderItemCard-$materialNumber-0'));
 
       expect(orderItemCardField, findsOneWidget);
+
+      expect(
+          find.byKey(Key(
+              'zpPrice${orderHistoryDetails.orderHistoryDetailsOrderItem.first.materialNumber.getOrDefaultValue('')}')),
+          findsNothing);
+      expect(
+          find.byKey(Key(
+              'totalPrice${orderHistoryDetails.orderHistoryDetailsOrderItem.first.materialNumber.getOrDefaultValue('')}')),
+          findsNothing);
 
       final sapStatusNotEmptyOrderItem =
           find.byKey(const Key('sapStatusNotEmpty'));

@@ -266,9 +266,9 @@ class CartMaterialItemTileDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isPriceOverride = material.price.isPriceOverride;
-    final enableListPrice =
-        context.read<SalesOrgBloc>().state.configs.enableListPrice;
-    final enableVat = context.read<SalesOrgBloc>().state.configs.enableVat;
+    final salesOrgConfigs = context.read<SalesOrgBloc>().state.configs;
+    final enableListPrice = salesOrgConfigs.enableListPrice;
+    final enableMaterialLevelTax = salesOrgConfigs.enableMaterialLevelTax;
     final isSpecialOrderType =
         context.read<OrderDocumentTypeBloc>().state.isSpecialOrderType;
 
@@ -390,9 +390,10 @@ class CartMaterialItemTileDetails extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      if (enableVat)
+                      if (enableMaterialLevelTax)
                         Text(
                           '${'Price before $taxCode: '.tr()}${material.display(PriceType.finalPrice)}',
+                          key: Key('pricebefore${material.getMaterialNumber.getOrDefaultValue('')}'),
                           style: Theme.of(context).textTheme.titleSmall?.apply(
                                 color: isPriceOverride
                                     ? ZPColors.red

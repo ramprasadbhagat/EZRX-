@@ -153,4 +153,6 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
       (enableVat && enableTaxClassification) || enableTaxAtTotalLevelOnly;
 
   bool get taxDisplayForOrderHistoryAndDetails => enableTaxDisplay || enableTaxAtTotalLevelOnly;
+
+  bool get enableMaterialLevelTax => enableVat && !enableTaxAtTotalLevelOnly;
 }

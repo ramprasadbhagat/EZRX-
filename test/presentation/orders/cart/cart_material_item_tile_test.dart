@@ -11,14 +11,23 @@ import 'package:ezrxmobile/application/order/material_price/material_price_bloc.
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
+import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/orders/cart/item/cart_material_item_tile.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+
+import '../../../utils/widget_utils.dart';
 
 class TenderContractBlocMock
     extends MockBloc<TenderContractEvent, TenderContractState>
@@ -62,9 +71,11 @@ class PriceOverrideMockBloc
     extends MockBloc<PriceOverrideEvent, PriceOverrideState>
     implements PriceOverrideBloc {}
 
+class AutoRouterMock extends Mock implements AppRouter {}
+
 void main() {
   late TenderContractBloc tenderContractBlocMock;
-  // late UserBloc userBlockMock;
+  late UserBloc userBlockMock;
   late OrderDocumentTypeBloc orderDocumentTypeBlocMock;
   late SalesOrgBloc salesOrgBloc;
   late EligibilityBloc eligibilityBloc;
@@ -74,11 +85,12 @@ void main() {
   late CartBloc cartBloc;
   late MaterialPriceBloc materialPriceBloc;
   late Map<MaterialNumber, Price> mockPriceList;
-  //late List<PriceAggregate> priceAggregates;
+  late List<PriceAggregate> priceAggregates;
+  late CartItem cartMaterialItem;
   late OrderEligibilityBloc orderEligibilityBlocMock;
   late AddToCartBloc addToCartBlocMock;
   late PriceOverrideBloc priceOverrideMockBloc;
-  //late AppRouter autoRouter;
+  late AppRouter autoRouter;
   // final mockUser = User.empty();
   // final mockRole = Role.empty();
 
@@ -86,14 +98,14 @@ void main() {
     countlyService = CountlyServiceMock();
     locator.registerLazySingleton(() => countlyService);
     locator.registerFactory(() => AppRouter());
-    // autoRouter = locator<AppRouter>();
+    autoRouter = locator<AppRouter>();
   });
 
   setUp(
     () {
       WidgetsFlutterBinding.ensureInitialized();
       tenderContractBlocMock = TenderContractBlocMock();
-      // userBlockMock = UserBlocMock();
+      userBlockMock = UserBlocMock();
       salesOrgBloc = SalesOrgBlocMock();
       orderDocumentTypeBlocMock = OrderDocumentTypeBlocMock();
       eligibilityBloc = EligibilityBlocMock();
@@ -135,57 +147,102 @@ void main() {
       when(() => priceOverrideMockBloc.state).thenReturn(
         PriceOverrideState.initial(),
       );
-      // priceAggregates = <PriceAggregate>[
-      //   PriceAggregate.empty().copyWith(
-      //     quantity: 2,
-      //     materialInfo: MaterialInfo.empty().copyWith(
-      //       materialNumber: MaterialNumber('000000000023168451'),
-      //       materialDescription: ' Triglyceride Mosys D',
-      //       principalData: PrincipalData.empty().copyWith(
-      //         principalName: '台灣拜耳股份有限公司',
-      //       ),
-      //     ),
-      //   ),
-      // ];
+      priceAggregates = <PriceAggregate>[
+        PriceAggregate.empty().copyWith(
+          quantity: 2,
+          materialInfo: MaterialInfo.empty().copyWith(
+            materialNumber: MaterialNumber('000000000023168451'),
+            materialDescription: ' Triglyceride Mosys D',
+            principalData: PrincipalData.empty().copyWith(
+              principalName: PrincipalName('台灣拜耳股份有限公司'),
+            ),
+          ),
+        ),
+      ];
+      cartMaterialItem = CartItem(
+        materials: priceAggregates,
+        itemType: CartItemType.material,
+      );
     },
   );
-  // group('Cart Item Tile Test', () {
-  //   Widget getWidget() {
-  //     return WidgetUtils.getScopedWidget(
-  //       autoRouterMock: autoRouter,
-  //       providers: [
-  //         BlocProvider<TenderContractBloc>(
-  //             create: (context) => tenderContractBlocMock),
-  //         BlocProvider<OrderDocumentTypeBloc>(
-  //             create: (context) => orderDocumentTypeBlocMock),
-  //         BlocProvider<UserBloc>(create: (context) => userBlockMock),
-  //         BlocProvider<EligibilityBloc>(create: (context) => eligibilityBloc),
-  //         BlocProvider<ShipToCodeBloc>(create: (context) => shipToCodeBloc),
-  //         BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBloc),
-  //         BlocProvider<CartBloc>(create: (context) => cartBloc),
-  //         BlocProvider<CustomerCodeBloc>(
-  //           create: (context) => customerCodeBloc,
-  //         ),
-  //         BlocProvider<MaterialPriceBloc>(
-  //           create: (context) => materialPriceBloc,
-  //         ),
-  //         BlocProvider<OrderEligibilityBloc>(
-  //           create: (context) => orderEligibilityBlocMock,
-  //         ),
-  //         BlocProvider<AddToCartBloc>(create: ((context) => addToCartBlocMock)),
-  //         BlocProvider<PriceOverrideBloc>(
-  //           create: (context) => priceOverrideMockBloc,
-  //         ),
-  //       ],
-  //       child: Material(
-  //         child: CartMaterialItemTile(
-  //           cartItem: priceAggregates.first,
-  //           showCheckBox: true,
-  //           isOrderSummaryView: true,
-  //         ),
-  //       ),
-  //     );
-  //   }
+  group('Cart Item Tile Test', () {
+    Widget getWidget() {
+      return WidgetUtils.getScopedWidget(
+        autoRouterMock: autoRouter,
+        providers: [
+          BlocProvider<TenderContractBloc>(
+              create: (context) => tenderContractBlocMock),
+          BlocProvider<OrderDocumentTypeBloc>(
+              create: (context) => orderDocumentTypeBlocMock),
+          BlocProvider<UserBloc>(create: (context) => userBlockMock),
+          BlocProvider<EligibilityBloc>(create: (context) => eligibilityBloc),
+          BlocProvider<ShipToCodeBloc>(create: (context) => shipToCodeBloc),
+          BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBloc),
+          BlocProvider<CartBloc>(create: (context) => cartBloc),
+          BlocProvider<CustomerCodeBloc>(
+            create: (context) => customerCodeBloc,
+          ),
+          BlocProvider<MaterialPriceBloc>(
+            create: (context) => materialPriceBloc,
+          ),
+          BlocProvider<OrderEligibilityBloc>(
+            create: (context) => orderEligibilityBlocMock,
+          ),
+          BlocProvider<AddToCartBloc>(create: ((context) => addToCartBlocMock)),
+          BlocProvider<PriceOverrideBloc>(
+            create: (context) => priceOverrideMockBloc,
+          ),
+        ],
+        child: MaterialApp(
+          title: 'Tests',
+          home: Scaffold(
+            body: SingleChildScrollView(
+              child: CartMaterialItemTile(
+                cartItem: cartMaterialItem,
+                showCheckBox: true,
+                isOrderSummaryView: true,
+              ),
+            ),
+          ),
+        ),
+      );
+    }
+
+    testWidgets(
+      'cart item price before check when enable vat at total level enabled',
+      (tester) async {
+        when(() => salesOrgBloc.state).thenReturn(SalesOrgState.initial()
+            .copyWith(
+                configs: SalesOrganisationConfigs.empty().copyWith(
+                    enableTaxAtTotalLevelOnly: true, enableVat: true)));
+        final expectedStates = [
+          CartState.initial().copyWith(
+            isFetching: true,
+          ),
+          CartState.initial()
+              .copyWith(isFetching: false, cartItems: [cartMaterialItem]),
+        ];
+        whenListen(cartBloc, Stream.fromIterable(expectedStates));
+
+        when(() => countlyService.addCountlyEvent(
+              'changed_quantity',
+              segmentation: {
+                'materialNum': priceAggregates.first.getMaterialNumber
+                    .getOrDefaultValue(''),
+                'listPrice': priceAggregates.first.listPrice,
+                'price':
+                    priceAggregates.first.price.finalPrice.getOrDefaultValue(0),
+              },
+            )).thenAnswer((invocation) async => Future.value());
+
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+
+        expect(find.byKey(Key(
+            'pricebefore${cartMaterialItem.materials.first.getMaterialNumber.getOrDefaultValue('')}')), findsNothing);
+      },
+    );
+  });
 
   //   testWidgets(
   //     'cart item quantity update',
