@@ -9,158 +9,105 @@ resources:
 pool:
   vmImage: 'macos-latest'
 
-stages:
-- stage: TestStage
-  dependsOn: []
-  displayName: UnitTestStage
-  jobs:
-
-  - job: TestJob
-    displayName: UnitTestJob
-    steps: 
-
-    - task: Bash@3
-      displayName: flutter setup
-      inputs:
-        targetType: 'inline'
-        script: |
-          brew tap leoafarias/fvm
-          brew install fvm
-          echo Y | fvm global 3.7.5
-          fvm flutter pub get
-
-    - task: Bash@3
-      displayName: Analyze flutter. Reject error, warning, info code
-      inputs:
-        targetType: 'inline'
-        script: |
-          fvm flutter analyze --fatal-infos --fatal-warnings
-          fvm flutter pub run dart_code_metrics:metrics analyze lib --fatal-style --fatal-performance --fatal-warnings
-
-    - task: Bash@3
-      displayName: Test all the unit test
-      inputs:
-        targetType: 'inline'
-        script: |
-          fvm flutter test --coverage
-
-    # - task: Bash@3
-    #   displayName: IOS simulator setup
-    #   inputs:
-    #     targetType: 'inline'
-    #     script: |
-    #       open -a simulator
-    #       fvm flutter emulators --launch apple_ios_simulator
-    #       sleep 5
-
-    # - task: Bash@3
-    #   displayName: Launch IOS simulator and Test all the integration test
-    #   inputs:
-    #     targetType: 'inline'
-    #     script: |
-    #       fvm flutter drive --driver=test_driver/integration_driver.dart --target=integration_test/app_test.dart --flavor dev
-
-    
-
-# jobs:
-# - job: Analyse
-#   pool: devops-flutter
-#   displayName: Analyze flutter. Reject error, warning, info code
-#   steps: 
-#   - bash: flutter375 analyze --fatal-infos --fatal-warnings
-#   - bash: flutter375 pub run dart_code_metrics:metrics analyze lib --fatal-style --fatal-performance --fatal-warnings
-# - job:
-#   pool: devops-flutter
-#   displayName: Test application
-#   steps: 
-#   - bash: flutter375 test test/application
-# - job:
-#   pool: devops-flutter
-#   displayName: Test domain
-#   steps: 
-#   - bash: flutter375 test test/domain
-# - job:
-#   pool: devops-flutter
-#   displayName: Test infrastructure -> account
-#   steps: 
-#   - bash: flutter375 test test/infrastructure/account
-# - job:
-#   pool: devops-flutter
-#   displayName: Test infrastructure -> announcement
-#   steps: 
-#   - bash: flutter375 test test/infrastructure/announcement
-# - job:
-#   pool: devops-flutter
-#   displayName: Test infrastructure -> aup_tc
-#   steps: 
-#   - bash: flutter375 test test/infrastructure/aup_tc
-# - job:
-#   pool: devops-flutter
-#   displayName: Test infrastructure -> auth
-#   steps: 
-#   - bash: flutter375 test test/infrastructure/auth
-# - job:
-#   pool: devops-flutter
-#   displayName: Test infrastructure -> banner
-#   steps: 
-#   - bash: flutter375 test test/infrastructure/banner
-# - job:
-#   pool: devops-flutter
-#   displayName: Test infrastructure -> favourites
-#   steps: 
-#   - bash: flutter375 test test/infrastructure/favourites
-# - job:
-#   pool: devops-flutter
-#   displayName: Test infrastructure -> order
-#   steps: 
-#   - bash: flutter375 test test/infrastructure/order
-# - job:
-#   pool: devops-flutter
-#   displayName: Test infrastructure -> returns
-#   steps: 
-#   - bash: flutter375 test test/infrastructure/returns
-# - job:
-#   pool: devops-flutter
-#   displayName: Test presentation -> account
-#   steps: 
-#   - bash: flutter375 test test/presentation/account
-# - job:
-#   pool: devops-flutter
-#   displayName: Test presentation -> announcement
-#   steps: 
-#   - bash: flutter375 test test/presentation/announcement
-# - job:
-#   pool: devops-flutter
-#   displayName: Test presentation -> aup_tc_test
-#   steps: 
-#   - bash: flutter375 test test/presentation/aup_tc_test
-# - job:
-#   pool: devops-flutter
-#   displayName: Test presentation -> auth
-#   steps: 
-#   - bash: flutter375 test test/presentation/auth
-# - job:
-#   pool: devops-flutter
-#   displayName: Test presentation -> favorites
-#   steps: 
-#   - bash: flutter375 test test/presentation/favorites
-# - job:
-#   pool: devops-flutter
-#   displayName: Test presentation -> home
-#   steps: 
-#   - bash: flutter375 test test/presentation/home
-# - job:
-#   pool: devops-flutter
-#   displayName: Test presentation -> order-history
-#   steps: 
-#   - bash: flutter375 test test/presentation/order_history
-# - job:
-#   pool: devops-flutter
-#   displayName: Test presentation -> orders
-#   steps: 
-#   - bash: flutter375 test test/presentation/orders
-# - job:
-#   pool: devops-flutter
-#   displayName: Test presentation -> returns
-#   steps: 
-#   - bash: flutter375 test test/presentation/returns
+jobs:
+- job: Analyse
+  pool: devops-flutter
+  displayName: Analyze flutter. Reject error, warning, info code
+  steps: 
+  - bash: flutter375 analyze --fatal-infos --fatal-warnings
+  - bash: flutter375 pub run dart_code_metrics:metrics analyze lib --fatal-style --fatal-performance --fatal-warnings
+- job:
+  pool: devops-flutter
+  displayName: Test application
+  steps: 
+  - bash: flutter375 test test/application
+- job:
+  pool: devops-flutter
+  displayName: Test domain
+  steps: 
+  - bash: flutter375 test test/domain
+- job:
+  pool: devops-flutter
+  displayName: Test infrastructure -> account
+  steps: 
+  - bash: flutter375 test test/infrastructure/account
+- job:
+  pool: devops-flutter
+  displayName: Test infrastructure -> announcement
+  steps: 
+  - bash: flutter375 test test/infrastructure/announcement
+- job:
+  pool: devops-flutter
+  displayName: Test infrastructure -> aup_tc
+  steps: 
+  - bash: flutter375 test test/infrastructure/aup_tc
+- job:
+  pool: devops-flutter
+  displayName: Test infrastructure -> auth
+  steps: 
+  - bash: flutter375 test test/infrastructure/auth
+- job:
+  pool: devops-flutter
+  displayName: Test infrastructure -> banner
+  steps: 
+  - bash: flutter375 test test/infrastructure/banner
+- job:
+  pool: devops-flutter
+  displayName: Test infrastructure -> favourites
+  steps: 
+  - bash: flutter375 test test/infrastructure/favourites
+- job:
+  pool: devops-flutter
+  displayName: Test infrastructure -> order
+  steps: 
+  - bash: flutter375 test test/infrastructure/order
+- job:
+  pool: devops-flutter
+  displayName: Test infrastructure -> returns
+  steps: 
+  - bash: flutter375 test test/infrastructure/returns
+- job:
+  pool: devops-flutter
+  displayName: Test presentation -> account
+  steps: 
+  - bash: flutter375 test test/presentation/account
+- job:
+  pool: devops-flutter
+  displayName: Test presentation -> announcement
+  steps: 
+  - bash: flutter375 test test/presentation/announcement
+- job:
+  pool: devops-flutter
+  displayName: Test presentation -> aup_tc_test
+  steps: 
+  - bash: flutter375 test test/presentation/aup_tc_test
+- job:
+  pool: devops-flutter
+  displayName: Test presentation -> auth
+  steps: 
+  - bash: flutter375 test test/presentation/auth
+- job:
+  pool: devops-flutter
+  displayName: Test presentation -> favorites
+  steps: 
+  - bash: flutter375 test test/presentation/favorites
+- job:
+  pool: devops-flutter
+  displayName: Test presentation -> home
+  steps: 
+  - bash: flutter375 test test/presentation/home
+- job:
+  pool: devops-flutter
+  displayName: Test presentation -> order-history
+  steps: 
+  - bash: flutter375 test test/presentation/order_history
+- job:
+  pool: devops-flutter
+  displayName: Test presentation -> orders
+  steps: 
+  - bash: flutter375 test test/presentation/orders
+- job:
+  pool: devops-flutter
+  displayName: Test presentation -> returns
+  steps: 
+  - bash: flutter375 test test/presentation/returns
