@@ -7,6 +7,7 @@ import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
+import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_details/order_history_details_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/additional_details_data.dart';
@@ -101,6 +102,15 @@ class ReOrderButton extends StatelessWidget {
     final eligibilityState = context.read<EligibilityBloc>().state;
     final orderHistoryDetails =
         context.read<OrderHistoryDetailsBloc>().state.orderHistoryDetails;
+    final orderDocumentTypeBloc = context.read<OrderDocumentTypeBloc>();
+    final uniqueOrderTypeList = orderDocumentTypeBloc.state.uniqueOrderTypeList;
+
+    final selectedOrderType = uniqueOrderTypeList.firstWhere(
+      (element) =>
+          element.documentType.documentTypeCode ==
+          orderHistoryDetails.orderHistoryDetailsOrderHeader.type,
+      orElse: () => uniqueOrderTypeList.first,
+    );
 
     final items =
         orderHistoryDetails.allItemQueryInfo.map<PriceAggregate>((queryInfo) {
@@ -111,12 +121,21 @@ class ReOrderButton extends StatelessWidget {
           salesOrgConfig: eligibilityState.salesOrgConfigs,
           materialInfo: itemInfo.info,
           price: itemInfo.price,
+          isSpecialOrderType: selectedOrderType.documentType.isSpecialOrderType,
         );
       }
 
       return PriceAggregate.empty();
     }).toList();
-
+    if (eligibilityState.isOrderTypeEligible) {
+      orderDocumentTypeBloc.add(
+        OrderDocumentTypeEvent.selectedOrderType(
+          selectedOrderType: selectedOrderType,
+          isReasonSelected:
+              context.read<OrderDocumentTypeBloc>().state.isReasonFieldEnable,
+        ),
+      );
+    }
     context.read<CartBloc>().add(CartEvent.replaceWithOrderItems(
           items: _getUniqueItems(items: items),
           customerCodeInfo: eligibilityState.customerCodeInfo,

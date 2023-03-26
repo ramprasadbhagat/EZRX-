@@ -52,7 +52,7 @@ class EligibilityState with _$EligibilityState {
     }
 
     // 1. country must be case 'TH', 'SG', 'TW', 'MY'
-    if (salesOrganisation.salesOrg.isValidCountryOrderTypeEligible &&
+     if (salesOrganisation.salesOrg.isValidCountryOrderTypeEligible &&
         isOrderTypeEligible) {
       return true;
     }

@@ -360,84 +360,87 @@ class CartMaterialItemTileDetails extends StatelessWidget {
             isOrderSummaryView: isOrderSummaryView,
           ),
           !material.isSpecialOrderTypeNotTH
-              ?
-            InkWell(
-              key: const Key('priceOverride'),
-              onTap: () async {
-                if (_isPriceOverRideVisible(context)) {
-                  final cartBloc = context.read<CartBloc>();
-                  final result = await showModalBottomSheet(
-                    isScrollControlled: true,
-                    backgroundColor: Colors.transparent,
-                    context: context,
-                    builder: (BuildContext context) {
-                      return PriceSheet(
-                        key: const Key('priceSheet'),
-                        item: material,
+              ? InkWell(
+                  key: const Key('priceOverride'),
+                  onTap: () async {
+                    if (_isPriceOverRideVisible(context)) {
+                      final cartBloc = context.read<CartBloc>();
+                      final result = await showModalBottomSheet(
+                        isScrollControlled: true,
+                        backgroundColor: Colors.transparent,
+                        context: context,
+                        builder: (BuildContext context) {
+                          return PriceSheet(
+                            key: const Key('priceSheet'),
+                            item: material,
+                          );
+                        },
                       );
-                    },
-                  );
-                  if (result is List<Price>) {
-                    cartBloc.add(
-                      CartEvent.overrideCartItemPrice(
-                        overridenPrice: result,
-                        cartItem: cartItem,
-                      ),
-                    );
-                  }
-                }
-              },
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  if (enableVat)
-                    Text(
-                      '${'Price before $taxCode: '.tr()}${material.display(PriceType.finalPrice)}',
-                      style: Theme.of(context).textTheme.titleSmall?.apply(
-                            color:
-                                isPriceOverride ? ZPColors.red : ZPColors.black,
-                            decoration: _isPriceOverRideVisible(context)
-                                ? TextDecoration.underline
-                                : TextDecoration.none,
+                      if (result is List<Price>) {
+                        cartBloc.add(
+                          CartEvent.overrideCartItemPrice(
+                            overridenPrice: result,
+                            cartItem: cartItem,
                           ),
-                    ),
-                  if (enableListPrice)
-                    Text(
-                      '${'List Price: '.tr()}${material.display(PriceType.listPrice)}',
-                      key: const Key('listPrice'),
-                      style: Theme.of(context).textTheme.titleSmall?.apply(
-                            color:
-                                isPriceOverride ? ZPColors.red : ZPColors.black,
-                            decoration: _isPriceOverRideVisible(context)
-                                ? TextDecoration.underline
-                                : TextDecoration.none,
-                          ),
-                    ),
-                  Text(
-                    '${'Unit Price: '.tr()}${material.display(PriceType.unitPrice)}',
-                    key: const Key('unitPrice'),
-                    style: Theme.of(context).textTheme.titleSmall?.apply(
-                          color:
-                              isPriceOverride ? ZPColors.red : ZPColors.black,
-                          decoration: _isPriceOverRideVisible(context)
-                              ? TextDecoration.underline
-                              : TextDecoration.none,
+                        );
+                      }
+                    }
+                  },
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      if (enableVat)
+                        Text(
+                          '${'Price before $taxCode: '.tr()}${material.display(PriceType.finalPrice)}',
+                          style: Theme.of(context).textTheme.titleSmall?.apply(
+                                color: isPriceOverride
+                                    ? ZPColors.red
+                                    : ZPColors.black,
+                                decoration: _isPriceOverRideVisible(context)
+                                    ? TextDecoration.underline
+                                    : TextDecoration.none,
+                              ),
                         ),
+                      if (enableListPrice)
+                        Text(
+                          '${'List Price: '.tr()}${material.display(PriceType.listPrice)}',
+                          key: const Key('listPrice'),
+                          style: Theme.of(context).textTheme.titleSmall?.apply(
+                                color: isPriceOverride
+                                    ? ZPColors.red
+                                    : ZPColors.black,
+                                decoration: _isPriceOverRideVisible(context)
+                                    ? TextDecoration.underline
+                                    : TextDecoration.none,
+                              ),
+                        ),
+                      Text(
+                        '${'Unit Price: '.tr()}${material.display(PriceType.unitPrice)}',
+                        key: const Key('unitPrice'),
+                        style: Theme.of(context).textTheme.titleSmall?.apply(
+                              color: isPriceOverride
+                                  ? ZPColors.red
+                                  : ZPColors.black,
+                              decoration: _isPriceOverRideVisible(context)
+                                  ? TextDecoration.underline
+                                  : TextDecoration.none,
+                            ),
+                      ),
+                      if (isOrderSummaryView)
+                        Text(
+                          '${'Total Price: '.tr()}${material.display(PriceType.unitPriceTotal)}',
+                          style: Theme.of(context).textTheme.titleSmall?.apply(
+                                color: isPriceOverride
+                                    ? ZPColors.red
+                                    : ZPColors.black,
+                                decoration: _isPriceOverRideVisible(context)
+                                    ? TextDecoration.underline
+                                    : TextDecoration.none,
+                              ),
+                        ),
+                    ],
                   ),
-                  if (isOrderSummaryView)
-                    Text(
-                      '${'Total Price: '.tr()}${material.display(PriceType.unitPriceTotal)}',
-                      style: Theme.of(context).textTheme.titleSmall?.apply(
-                            color:
-                                isPriceOverride ? ZPColors.red : ZPColors.black,
-                            decoration: _isPriceOverRideVisible(context)
-                                ? TextDecoration.underline
-                                : TextDecoration.none,
-                          ),
-                    ),
-                ],
-              ),
                 )
               : const SizedBox.shrink(),
         ],

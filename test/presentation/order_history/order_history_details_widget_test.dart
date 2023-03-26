@@ -33,10 +33,12 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_price_detail.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
+import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_basic_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_messages.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details_order_header.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_document_buffer.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_shipping_information.dart';
@@ -877,11 +879,24 @@ void main() {
     testWidgets('addToCartPressed test ', (tester) async {
       when(() => mockOrderHistoryDetailsBloc.state).thenReturn(
         OrderHistoryDetailsState.initial().copyWith(
-          orderHistoryDetails: OrderHistoryDetails.empty(),
+          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+              orderHistoryDetailsOrderHeader:
+                  OrderHistoryDetailsOrderHeader.empty()),
           failureOrSuccessOption: none(),
           isLoading: false,
           showErrorMessage: false,
         ),
+      );
+
+      when(() => orderDocumentTypeBlocMock.state).thenReturn(
+        OrderDocumentTypeState.initial().copyWith(
+            selectedOrderType:
+                orderDocumentTypeBlocMock.state.selectedOrderType,
+            orderDocumentTypeList: [
+              OrderDocumentType.empty().copyWith(
+                documentType: DocumentType('ZPRO'),
+              )
+            ]),
       );
       when(() => materialPriceDetailBlocMock.state).thenReturn(
         MaterialPriceDetailState.initial().copyWith(
@@ -918,11 +933,24 @@ void main() {
         (tester) async {
       when(() => mockOrderHistoryDetailsBloc.state).thenReturn(
         OrderHistoryDetailsState.initial().copyWith(
-          orderHistoryDetails: OrderHistoryDetails.empty(),
+          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+              orderHistoryDetailsOrderHeader:
+                  OrderHistoryDetailsOrderHeader.empty()),
           failureOrSuccessOption: none(),
           isLoading: false,
           showErrorMessage: false,
         ),
+      );
+
+      when(() => orderDocumentTypeBlocMock.state).thenReturn(
+        OrderDocumentTypeState.initial().copyWith(
+            selectedOrderType:
+                orderDocumentTypeBlocMock.state.selectedOrderType,
+            orderDocumentTypeList: [
+              OrderDocumentType.empty().copyWith(
+                documentType: DocumentType('ZPRO'),
+              )
+            ]),
       );
       when(() => materialPriceDetailBlocMock.state).thenReturn(
         MaterialPriceDetailState.initial().copyWith(
@@ -961,22 +989,26 @@ void main() {
 
     testWidgets('fetch tender contract test with valid tender contract',
         (tester) async {
-      final items = [
-        orderHistoryDetails.orderHistoryDetailsOrderItem.first.copyWith(
-          isTenderContractMaterial: true,
-          sAPStatus: SAPStatus('Order Placed'),
-          materialNumber: MaterialNumber('000001234'),
-        ),
-      ];
       when(() => mockOrderHistoryDetailsBloc.state).thenReturn(
         OrderHistoryDetailsState.initial().copyWith(
           orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
-            orderHistoryDetailsOrderItem: items,
-          ),
+              orderHistoryDetailsOrderHeader:
+                  OrderHistoryDetailsOrderHeader.empty()),
           failureOrSuccessOption: none(),
           isLoading: false,
           showErrorMessage: false,
         ),
+      );
+
+      when(() => orderDocumentTypeBlocMock.state).thenReturn(
+        OrderDocumentTypeState.initial().copyWith(
+            selectedOrderType:
+                orderDocumentTypeBlocMock.state.selectedOrderType,
+            orderDocumentTypeList: [
+              OrderDocumentType.empty().copyWith(
+                documentType: DocumentType('ZPRO'),
+              )
+            ]),
       );
       when(() => materialPriceDetailBlocMock.state).thenReturn(
         MaterialPriceDetailState.initial().copyWith(
@@ -1513,12 +1545,26 @@ void main() {
     testWidgets('order summary  addToCartPressed test ', (tester) async {
       when(() => mockOrderHistoryDetailsBloc.state).thenReturn(
         OrderHistoryDetailsState.initial().copyWith(
-          orderHistoryDetails: orderHistoryDetails,
+          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+              orderHistoryDetailsOrderHeader:
+                  OrderHistoryDetailsOrderHeader.empty()),
           failureOrSuccessOption: none(),
           isLoading: false,
           showErrorMessage: false,
         ),
       );
+
+      when(() => orderDocumentTypeBlocMock.state).thenReturn(
+        OrderDocumentTypeState.initial().copyWith(
+            selectedOrderType:
+                orderDocumentTypeBlocMock.state.selectedOrderType,
+            orderDocumentTypeList: [
+              OrderDocumentType.empty().copyWith(
+                documentType: DocumentType('ZPRO'),
+              )
+            ]),
+      );
+
       whenListen(
           userBlocMock,
           Stream.fromIterable([
@@ -1688,5 +1734,52 @@ void main() {
         expect(reorderButton, findsOneWidget);
       },
     );
+    testWidgets('Reorder test for spacial order', (tester) async {
+      when(() => mockOrderHistoryDetailsBloc.state).thenReturn(
+        OrderHistoryDetailsState.initial().copyWith(
+          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+              orderHistoryDetailsOrderHeader:
+                  OrderHistoryDetailsOrderHeader.empty()
+                      .copyWith(type: 'ZPFB')),
+          failureOrSuccessOption: none(),
+          isLoading: false,
+          showErrorMessage: false,
+        ),
+      );
+
+      when(() => orderDocumentTypeBlocMock.state).thenReturn(
+        OrderDocumentTypeState.initial().copyWith(
+            selectedOrderType:
+                orderDocumentTypeBlocMock.state.selectedOrderType,
+            orderDocumentTypeList: [
+              OrderDocumentType.empty().copyWith(
+                documentType: DocumentType('ZPFB'),
+              )
+            ]),
+      );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          user: User.empty().copyWith(
+            role: Role.empty().copyWith(
+              type: RoleType('external_sales_rep'),
+            ),
+            hasPriceOverride: false,
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(getWUT());
+      await tester.pump();
+      final reorder = find.byKey(const Key('addToCartPressed'));
+
+      await tester.tap(reorder);
+      await tester.pump();
+      verify(() => orderDocumentTypeBlocMock
+          .add(OrderDocumentTypeEvent.selectedOrderType(
+              selectedOrderType: OrderDocumentType.empty().copyWith(
+                documentType: DocumentType('ZPFB'),
+              ),
+              isReasonSelected: false))).called(1);
+    });
   });
 }
