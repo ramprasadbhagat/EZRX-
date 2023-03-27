@@ -73,6 +73,7 @@ class OrderSummaryBloc extends Bloc<OrderSummaryEvent, OrderSummaryState> {
           data: value.data,
           orderType: value.orderType,
           configs: value.config,
+          orderReason: value.orderReason,
         );
         failureOrSuccess.fold(
           (failure) {

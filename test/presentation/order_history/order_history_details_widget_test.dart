@@ -1760,7 +1760,7 @@ void main() {
           orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
               orderHistoryDetailsOrderHeader:
                   OrderHistoryDetailsOrderHeader.empty()
-                      .copyWith(type: 'ZPFB')),
+                      .copyWith(type: 'ZPFB', orderReason: '814')),
           failureOrSuccessOption: none(),
           isLoading: false,
           showErrorMessage: false,
@@ -1769,11 +1769,14 @@ void main() {
 
       when(() => orderDocumentTypeBlocMock.state).thenReturn(
         OrderDocumentTypeState.initial().copyWith(
-            selectedOrderType:
-                orderDocumentTypeBlocMock.state.selectedOrderType,
+            selectedOrderType: OrderDocumentType.empty().copyWith(
+              documentType: DocumentType('ZPFB'),
+              orderReason: '814',
+            ),
             orderDocumentTypeList: [
               OrderDocumentType.empty().copyWith(
                 documentType: DocumentType('ZPFB'),
+                orderReason: '814',
               )
             ]),
       );
@@ -1794,11 +1797,10 @@ void main() {
 
       await tester.tap(reorder);
       await tester.pump();
-      verify(() => orderDocumentTypeBlocMock
-          .add(OrderDocumentTypeEvent.selectedOrderType(
+      verify(() => orderDocumentTypeBlocMock.add(
+          OrderDocumentTypeEvent.selectedOrderType(
               selectedOrderType: OrderDocumentType.empty().copyWith(
-                documentType: DocumentType('ZPFB'),
-              ),
+                  documentType: DocumentType('ZPFB'), orderReason: '814'),
               isReasonSelected: false))).called(1);
     });
   });

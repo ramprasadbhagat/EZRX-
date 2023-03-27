@@ -33,7 +33,8 @@ mixin _$OrderSummaryEvent {
             SalesOrganisation salesOrganisation,
             AdditionalDetailsData data,
             String orderType,
-            SalesOrganisationConfigs config)
+            SalesOrganisationConfigs config,
+            String orderReason)
         submitOrder,
   }) =>
       throw _privateConstructorUsedError;
@@ -54,7 +55,8 @@ mixin _$OrderSummaryEvent {
             SalesOrganisation salesOrganisation,
             AdditionalDetailsData data,
             String orderType,
-            SalesOrganisationConfigs config)?
+            SalesOrganisationConfigs config,
+            String orderReason)?
         submitOrder,
   }) =>
       throw _privateConstructorUsedError;
@@ -75,7 +77,8 @@ mixin _$OrderSummaryEvent {
             SalesOrganisation salesOrganisation,
             AdditionalDetailsData data,
             String orderType,
-            SalesOrganisationConfigs config)?
+            SalesOrganisationConfigs config,
+            String orderReason)?
         submitOrder,
     required TResult orElse(),
   }) =>
@@ -252,7 +255,8 @@ class _$_Initialized implements _Initialized {
             SalesOrganisation salesOrganisation,
             AdditionalDetailsData data,
             String orderType,
-            SalesOrganisationConfigs config)
+            SalesOrganisationConfigs config,
+            String orderReason)
         submitOrder,
   }) {
     return initialized(step, maxSteps, additionalDetailsStep, config);
@@ -276,7 +280,8 @@ class _$_Initialized implements _Initialized {
             SalesOrganisation salesOrganisation,
             AdditionalDetailsData data,
             String orderType,
-            SalesOrganisationConfigs config)?
+            SalesOrganisationConfigs config,
+            String orderReason)?
         submitOrder,
   }) {
     return initialized?.call(step, maxSteps, additionalDetailsStep, config);
@@ -300,7 +305,8 @@ class _$_Initialized implements _Initialized {
             SalesOrganisation salesOrganisation,
             AdditionalDetailsData data,
             String orderType,
-            SalesOrganisationConfigs config)?
+            SalesOrganisationConfigs config,
+            String orderReason)?
         submitOrder,
     required TResult orElse(),
   }) {
@@ -420,7 +426,8 @@ class _$_StepContinue implements _StepContinue {
             SalesOrganisation salesOrganisation,
             AdditionalDetailsData data,
             String orderType,
-            SalesOrganisationConfigs config)
+            SalesOrganisationConfigs config,
+            String orderReason)
         submitOrder,
   }) {
     return stepContinue();
@@ -444,7 +451,8 @@ class _$_StepContinue implements _StepContinue {
             SalesOrganisation salesOrganisation,
             AdditionalDetailsData data,
             String orderType,
-            SalesOrganisationConfigs config)?
+            SalesOrganisationConfigs config,
+            String orderReason)?
         submitOrder,
   }) {
     return stepContinue?.call();
@@ -468,7 +476,8 @@ class _$_StepContinue implements _StepContinue {
             SalesOrganisation salesOrganisation,
             AdditionalDetailsData data,
             String orderType,
-            SalesOrganisationConfigs config)?
+            SalesOrganisationConfigs config,
+            String orderReason)?
         submitOrder,
     required TResult orElse(),
   }) {
@@ -576,7 +585,8 @@ class _$_StepCancel implements _StepCancel {
             SalesOrganisation salesOrganisation,
             AdditionalDetailsData data,
             String orderType,
-            SalesOrganisationConfigs config)
+            SalesOrganisationConfigs config,
+            String orderReason)
         submitOrder,
   }) {
     return stepCancel();
@@ -600,7 +610,8 @@ class _$_StepCancel implements _StepCancel {
             SalesOrganisation salesOrganisation,
             AdditionalDetailsData data,
             String orderType,
-            SalesOrganisationConfigs config)?
+            SalesOrganisationConfigs config,
+            String orderReason)?
         submitOrder,
   }) {
     return stepCancel?.call();
@@ -624,7 +635,8 @@ class _$_StepCancel implements _StepCancel {
             SalesOrganisation salesOrganisation,
             AdditionalDetailsData data,
             String orderType,
-            SalesOrganisationConfigs config)?
+            SalesOrganisationConfigs config,
+            String orderReason)?
         submitOrder,
     required TResult orElse(),
   }) {
@@ -758,7 +770,8 @@ class _$_StepTapped implements _StepTapped {
             SalesOrganisation salesOrganisation,
             AdditionalDetailsData data,
             String orderType,
-            SalesOrganisationConfigs config)
+            SalesOrganisationConfigs config,
+            String orderReason)
         submitOrder,
   }) {
     return stepTapped(step);
@@ -782,7 +795,8 @@ class _$_StepTapped implements _StepTapped {
             SalesOrganisation salesOrganisation,
             AdditionalDetailsData data,
             String orderType,
-            SalesOrganisationConfigs config)?
+            SalesOrganisationConfigs config,
+            String orderReason)?
         submitOrder,
   }) {
     return stepTapped?.call(step);
@@ -806,7 +820,8 @@ class _$_StepTapped implements _StepTapped {
             SalesOrganisation salesOrganisation,
             AdditionalDetailsData data,
             String orderType,
-            SalesOrganisationConfigs config)?
+            SalesOrganisationConfigs config,
+            String orderReason)?
         submitOrder,
     required TResult orElse(),
   }) {
@@ -881,7 +896,8 @@ abstract class _$$_SubmitOrderCopyWith<$Res> {
       SalesOrganisation salesOrganisation,
       AdditionalDetailsData data,
       String orderType,
-      SalesOrganisationConfigs config});
+      SalesOrganisationConfigs config,
+      String orderReason});
 
   $ShipToInfoCopyWith<$Res> get shipToInfo;
   $UserCopyWith<$Res> get user;
@@ -911,6 +927,7 @@ class __$$_SubmitOrderCopyWithImpl<$Res>
     Object? data = null,
     Object? orderType = null,
     Object? config = null,
+    Object? orderReason = null,
   }) {
     return _then(_$_SubmitOrder(
       shipToInfo: null == shipToInfo
@@ -949,6 +966,10 @@ class __$$_SubmitOrderCopyWithImpl<$Res>
           ? _value.config
           : config // ignore: cast_nullable_to_non_nullable
               as SalesOrganisationConfigs,
+      orderReason: null == orderReason
+          ? _value.orderReason
+          : orderReason // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 
@@ -1013,7 +1034,8 @@ class _$_SubmitOrder implements _SubmitOrder {
       required this.salesOrganisation,
       required this.data,
       required this.orderType,
-      required this.config})
+      required this.config,
+      required this.orderReason})
       : _cartItems = cartItems;
 
   @override
@@ -1039,10 +1061,12 @@ class _$_SubmitOrder implements _SubmitOrder {
   final String orderType;
   @override
   final SalesOrganisationConfigs config;
+  @override
+  final String orderReason;
 
   @override
   String toString() {
-    return 'OrderSummaryEvent.submitOrder(shipToInfo: $shipToInfo, user: $user, cartItems: $cartItems, grandTotal: $grandTotal, customerCodeInfo: $customerCodeInfo, salesOrganisation: $salesOrganisation, data: $data, orderType: $orderType, config: $config)';
+    return 'OrderSummaryEvent.submitOrder(shipToInfo: $shipToInfo, user: $user, cartItems: $cartItems, grandTotal: $grandTotal, customerCodeInfo: $customerCodeInfo, salesOrganisation: $salesOrganisation, data: $data, orderType: $orderType, config: $config, orderReason: $orderReason)';
   }
 
   @override
@@ -1064,7 +1088,9 @@ class _$_SubmitOrder implements _SubmitOrder {
             (identical(other.data, data) || other.data == data) &&
             (identical(other.orderType, orderType) ||
                 other.orderType == orderType) &&
-            (identical(other.config, config) || other.config == config));
+            (identical(other.config, config) || other.config == config) &&
+            (identical(other.orderReason, orderReason) ||
+                other.orderReason == orderReason));
   }
 
   @override
@@ -1078,7 +1104,8 @@ class _$_SubmitOrder implements _SubmitOrder {
       salesOrganisation,
       data,
       orderType,
-      config);
+      config,
+      orderReason);
 
   @JsonKey(ignore: true)
   @override
@@ -1104,11 +1131,21 @@ class _$_SubmitOrder implements _SubmitOrder {
             SalesOrganisation salesOrganisation,
             AdditionalDetailsData data,
             String orderType,
-            SalesOrganisationConfigs config)
+            SalesOrganisationConfigs config,
+            String orderReason)
         submitOrder,
   }) {
-    return submitOrder(shipToInfo, user, cartItems, grandTotal,
-        customerCodeInfo, salesOrganisation, data, orderType, config);
+    return submitOrder(
+        shipToInfo,
+        user,
+        cartItems,
+        grandTotal,
+        customerCodeInfo,
+        salesOrganisation,
+        data,
+        orderType,
+        config,
+        orderReason);
   }
 
   @override
@@ -1129,11 +1166,21 @@ class _$_SubmitOrder implements _SubmitOrder {
             SalesOrganisation salesOrganisation,
             AdditionalDetailsData data,
             String orderType,
-            SalesOrganisationConfigs config)?
+            SalesOrganisationConfigs config,
+            String orderReason)?
         submitOrder,
   }) {
-    return submitOrder?.call(shipToInfo, user, cartItems, grandTotal,
-        customerCodeInfo, salesOrganisation, data, orderType, config);
+    return submitOrder?.call(
+        shipToInfo,
+        user,
+        cartItems,
+        grandTotal,
+        customerCodeInfo,
+        salesOrganisation,
+        data,
+        orderType,
+        config,
+        orderReason);
   }
 
   @override
@@ -1154,13 +1201,23 @@ class _$_SubmitOrder implements _SubmitOrder {
             SalesOrganisation salesOrganisation,
             AdditionalDetailsData data,
             String orderType,
-            SalesOrganisationConfigs config)?
+            SalesOrganisationConfigs config,
+            String orderReason)?
         submitOrder,
     required TResult orElse(),
   }) {
     if (submitOrder != null) {
-      return submitOrder(shipToInfo, user, cartItems, grandTotal,
-          customerCodeInfo, salesOrganisation, data, orderType, config);
+      return submitOrder(
+          shipToInfo,
+          user,
+          cartItems,
+          grandTotal,
+          customerCodeInfo,
+          salesOrganisation,
+          data,
+          orderType,
+          config,
+          orderReason);
     }
     return orElse();
   }
@@ -1216,7 +1273,8 @@ abstract class _SubmitOrder implements OrderSummaryEvent {
       required final SalesOrganisation salesOrganisation,
       required final AdditionalDetailsData data,
       required final String orderType,
-      required final SalesOrganisationConfigs config}) = _$_SubmitOrder;
+      required final SalesOrganisationConfigs config,
+      required final String orderReason}) = _$_SubmitOrder;
 
   ShipToInfo get shipToInfo;
   User get user;
@@ -1227,6 +1285,7 @@ abstract class _SubmitOrder implements OrderSummaryEvent {
   AdditionalDetailsData get data;
   String get orderType;
   SalesOrganisationConfigs get config;
+  String get orderReason;
   @JsonKey(ignore: true)
   _$$_SubmitOrderCopyWith<_$_SubmitOrder> get copyWith =>
       throw _privateConstructorUsedError;

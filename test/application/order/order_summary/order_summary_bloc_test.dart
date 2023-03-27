@@ -198,6 +198,7 @@ void main() {
                   .copyWith(salesOrg: SalesOrg('2601')),
               data: AdditionalDetailsData.empty(),
               orderType: '',
+              orderReason: '',
               configs: SalesOrganisationConfigs.empty()
                   .copyWith(currency: Currency('PHP')),
             )).thenAnswer((value) async => Right(submitOrderResponse));
@@ -220,6 +221,7 @@ void main() {
                 SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601')),
             data: AdditionalDetailsData.empty(),
             orderType: '',
+            orderReason: '',
             config: SalesOrganisationConfigs.empty()
                 .copyWith(currency: Currency('PHP')),
           ),
@@ -258,6 +260,7 @@ void main() {
                       .copyWith(salesOrg: SalesOrg('2601')),
                   data: AdditionalDetailsData.empty(),
                   orderType: '',
+                  orderReason: '',
                   configs: SalesOrganisationConfigs.empty()
                       .copyWith(currency: Currency('PHP')),
                 ))
@@ -282,6 +285,7 @@ void main() {
                 SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601')),
             data: AdditionalDetailsData.empty(),
             orderType: '',
+            orderReason: '',
             config: SalesOrganisationConfigs.empty()
                 .copyWith(currency: Currency('PHP')),
           ),

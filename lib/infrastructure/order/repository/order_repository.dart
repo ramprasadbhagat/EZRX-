@@ -244,6 +244,7 @@ class OrderRepository implements IOrderRepository {
     required AdditionalDetailsData data,
     required String orderType,
     required SalesOrganisationConfigs configs,
+    required String orderReason,
   }) async {
     final submitOrder = _getSubmitOrderRequest(
       shipToInfo: shipToInfo,
@@ -254,6 +255,7 @@ class OrderRepository implements IOrderRepository {
       customerCodeInfo: customerCodeInfo,
       salesOrganisation: salesOrganisation,
       configs: configs,
+      orderReason: orderReason,
     );
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -379,6 +381,7 @@ class OrderRepository implements IOrderRepository {
     required CustomerCodeInfo customerCodeInfo,
     required SalesOrganisation salesOrganisation,
     required SalesOrganisationConfigs configs,
+    required String orderReason,
   }) {
     return SubmitOrder.empty().copyWith(
       userName: data.contactPerson.getValue().isNotEmpty
@@ -401,7 +404,7 @@ class OrderRepository implements IOrderRepository {
                   cartItem.tenderContract.tenderOrderReason.getValue())
               .contains('730')
           ? '730'
-          : '',
+          : orderReason,
       purchaseOrderType: user.role.type.purchaseOrderType,
       shippingCondition: data.greenDeliveryEnabled
           ? ShippingCondition.greenDelivery()

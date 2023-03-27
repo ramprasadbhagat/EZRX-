@@ -96,24 +96,18 @@ class ReOrderButton extends StatelessWidget {
     MaterialPriceDetailState priceState,
     OrderHistoryDetailsState orderState,
   ) {
-    trackMixpanelEvent(
-      MixpanelEvents.reOrder,
-    );
+    trackMixpanelEvent( MixpanelEvents.reOrder,);
     final eligibilityState = context.read<EligibilityBloc>().state;
-    final orderHistoryDetails =
-        context.read<OrderHistoryDetailsBloc>().state.orderHistoryDetails;
+    final orderHistoryDetails =context.read<OrderHistoryDetailsBloc>().state.orderHistoryDetails;
     final orderDocumentTypeBloc = context.read<OrderDocumentTypeBloc>();
     final uniqueOrderTypeList = orderDocumentTypeBloc.state.uniqueOrderTypeList;
 
     final selectedOrderType = uniqueOrderTypeList.firstWhere(
-      (element) =>
-          element.documentType.documentTypeCode ==
-          orderHistoryDetails.orderHistoryDetailsOrderHeader.type,
+      (element) => element.documentType.documentTypeCode == orderHistoryDetails.orderHistoryDetailsOrderHeader.type,
       orElse: () => uniqueOrderTypeList.first,
     );
 
-    final items =
-        orderHistoryDetails.allItemQueryInfo.map<PriceAggregate>((queryInfo) {
+    final items = orderHistoryDetails.allItemQueryInfo.map<PriceAggregate>((queryInfo) {
       final itemInfo = priceState.materialDetails[queryInfo];
       final material = orderState.materials[queryInfo];
       if (itemInfo != null && material != null) {
@@ -128,13 +122,20 @@ class ReOrderButton extends StatelessWidget {
       return PriceAggregate.empty();
     }).toList();
     if (eligibilityState.isOrderTypeEligible) {
-      orderDocumentTypeBloc.add(
-        OrderDocumentTypeEvent.selectedOrderType(
-          selectedOrderType: selectedOrderType,
-          isReasonSelected:
-              context.read<OrderDocumentTypeBloc>().state.isReasonFieldEnable,
-        ),
+      orderDocumentTypeBloc.add(OrderDocumentTypeEvent.selectedOrderType(
+            selectedOrderType: selectedOrderType,
+            isReasonSelected: context.read<OrderDocumentTypeBloc>().state.isReasonFieldEnable,),
       );
+      final reasonList = context.read<OrderDocumentTypeBloc>().state.reasonList;
+      final selectedOrderReason = reasonList.firstWhere(
+        (element) =>element.orderReason == orderHistoryDetails.orderHistoryDetailsOrderHeader.orderReason,
+        orElse: () => reasonList.first,
+      );
+      if (orderDocumentTypeBloc.state.reasonList.isNotEmpty) {
+        orderDocumentTypeBloc.add(OrderDocumentTypeEvent.selectedOrderType(
+              selectedOrderType: selectedOrderReason, isReasonSelected: true,),
+        );
+      }
     }
     context.read<CartBloc>().add(CartEvent.replaceWithOrderItems(
           items: _getUniqueItems(items: items),

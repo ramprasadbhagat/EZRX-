@@ -255,6 +255,11 @@ class _SubmitContinueButton extends StatelessWidget {
               .documentTypeCode,
           data:
               context.read<AdditionalDetailsBloc>().state.additionalDetailsData,
+          orderReason: context
+              .read<OrderDocumentTypeBloc>()
+              .state
+              .selectedReason
+              .orderReason,
         ));
   }
 

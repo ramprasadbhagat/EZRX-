@@ -88,6 +88,7 @@ class OrderHistoryDetailsDto with _$OrderHistoryDetailsDto {
         eZRXNumber: orderHistoryDetailsOrderHeader.eZRXNumber,
         orderBy: orderHistoryDetailsOrderHeader.orderBy,
         referenceNotes: orderHistoryDetailsOrderHeader.referenceNotes,
+        orderReason: orderHistoryDetailsOrderHeader.orderReason,
       ),
       orderHistoryDetailsShippingInformation:
           OrderHistoryDetailsShippingInformation(
