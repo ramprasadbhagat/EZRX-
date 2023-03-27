@@ -88,7 +88,7 @@ void main() {
   late MaterialBundleListBloc materialBundleListMockBloc;
   late MaterialPriceDetailBloc materialPriceDetailMockBloc;
   late TenderContractBloc tenderContractBlocMock;
-
+  
   final mockBundle = Bundle(
     materials: <MaterialInfo>[],
     bundleName: BundleName('Mock Bundle'),

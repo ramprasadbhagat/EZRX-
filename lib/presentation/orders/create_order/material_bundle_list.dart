@@ -21,6 +21,7 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+
 class MaterialBundleListPage extends StatelessWidget {
   const MaterialBundleListPage({Key? key}) : super(key: key);
 

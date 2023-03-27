@@ -12,6 +12,7 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/constants.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -116,6 +117,7 @@ void main() {
             salesOrgConfigs: fakeSaleOrgConfig,
             customerCodeInfo: fakeCustomerInfo,
             shipToInfo: fakeShipToInfo,
+            selectedOrderType: OrderDocumentType.empty(),
           ),
         );
       },

@@ -12,6 +12,7 @@ import 'package:ezrxmobile/application/order/material_filter/material_filter_blo
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
+import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_filter/order_history_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_filter_by_status/order_history_filter_by_status_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
@@ -45,6 +46,8 @@ class ShipCodeSelector extends StatelessWidget {
               previous.shipToInfo != current.shipToInfo,
           listener: (context, state) {
             final salesOrgState = context.read<SalesOrgBloc>().state;
+            final orderDocumentTypeState =
+                context.read<OrderDocumentTypeBloc>().state;
 
             context.read<MaterialFilterBloc>().add(
                   const MaterialFilterEvent.resetFilter(),
@@ -88,6 +91,7 @@ class ShipCodeSelector extends StatelessWidget {
                       salesOrgConfigs: salesOrgState.configs,
                       customerCodeInfo: customerCodeInfo,
                       shipToInfo: state.shipToInfo,
+                      selectedOrderType: orderDocumentTypeState.selectedOrderType,
                     ),
                   );
               context.read<ReturnSummaryBloc>().add(

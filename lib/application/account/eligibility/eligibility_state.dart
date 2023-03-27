@@ -10,6 +10,7 @@ class EligibilityState with _$EligibilityState {
     required SalesOrganisationConfigs salesOrgConfigs,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
+    required OrderDocumentType selectedOrderType,
   }) = _EligibilityState;
 
   factory EligibilityState.initial() => EligibilityState(
@@ -18,6 +19,7 @@ class EligibilityState with _$EligibilityState {
         salesOrgConfigs: SalesOrganisationConfigs.empty(),
         customerCodeInfo: CustomerCodeInfo.empty(),
         shipToInfo: ShipToInfo.empty(),
+        selectedOrderType: OrderDocumentType.empty(),
       );
 
   bool get isReturnsEnable {
@@ -171,6 +173,10 @@ class EligibilityState with _$EligibilityState {
 
     return false;
   }
+
+  bool get isBundleMaterialEnable =>
+      !salesOrgConfigs.disableBundles &&
+      !selectedOrderType.documentType.isSpecialOrderType;
 
   //============================================================
   // 1. user role type must be SalesRep

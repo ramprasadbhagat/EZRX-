@@ -365,6 +365,16 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                         .getPNPValueMaterial,
                   ),
                 );
+            context.read<EligibilityBloc>().add(
+                    EligibilityEvent.update(
+                      user: context.read<UserBloc>().state.user,
+                      salesOrganisation: context.read<SalesOrgBloc>().state.salesOrganisation,
+                      salesOrgConfigs: context.read<SalesOrgBloc>().state.configs,
+                      customerCodeInfo: context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                      shipToInfo: context.read<EligibilityBloc>().state.shipToInfo,
+                      selectedOrderType: state.selectedOrderType,
+                    ),
+                  );
             context.read<MaterialListBloc>().add(
                   MaterialListEvent.fetch(
                     user: context.read<UserBloc>().state.user,

@@ -9,17 +9,19 @@ import 'package:ezrxmobile/presentation/orders/create_order/material_list/materi
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:ezrxmobile/presentation/orders/create_order/order_type_selector.dart';
+
 class MaterialRoot extends StatelessWidget {
   const MaterialRoot({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<EligibilityBloc, EligibilityState>(
       buildWhen: (previous, current) =>
-          previous.salesOrgConfigs.disableBundles !=
-              current.salesOrgConfigs.disableBundles ||
+          previous.isBundleMaterialEnable !=
+              current.isBundleMaterialEnable ||
           previous.isCovidMaterialEnable != current.isCovidMaterialEnable,
       builder: (context, state) {
-        final isBundleMaterialEnable = !state.salesOrgConfigs.disableBundles;
+        final isBundleMaterialEnable = state.isBundleMaterialEnable;
         final isCovidMaterialEnable = state.isCovidMaterialEnable;
         final length = 1 +
             (isBundleMaterialEnable ? 1 : 0) +
@@ -30,24 +32,35 @@ class MaterialRoot extends StatelessWidget {
             title: const Text('Create Order').tr(),
             actions: const [CartButton()],
           ),
-          body: length == 1
-              ? const MaterialListPage()
-              : TabViewPage(
-                  length: length,
-                  tabHeaderText: [
-                    'Material'.tr(),
-                    if (isBundleMaterialEnable) 'Bundles'.tr(),
-                    if (isCovidMaterialEnable) 'COVID-19'.tr(),
-                  ],
-                  tabWidgets: [
-                    const MaterialListPage(),
-                    if (isBundleMaterialEnable) const MaterialBundleListPage(),
-                    if (isCovidMaterialEnable)
-                      const CovidMaterialListPage(
-                        addToCart: CartBottomSheet.showAddToCartBottomSheet,
+          body: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (context.read<EligibilityBloc>().state.isOrderTypeEnable)
+                const OrderTypeSelector(hideReasonField: true),
+              length == 1
+                  ? const Expanded(child: MaterialListPage())
+                  : Expanded(
+                      child: TabViewPage(
+                        length: length,
+                        tabHeaderText: [
+                          'Material'.tr(),
+                          if (isBundleMaterialEnable) 'Bundles'.tr(),
+                          if (isCovidMaterialEnable) 'COVID-19'.tr(),
+                        ],
+                        tabWidgets: [
+                          const MaterialListPage(),
+                          if (isBundleMaterialEnable)
+                            const MaterialBundleListPage(),
+                          if (isCovidMaterialEnable)
+                            const CovidMaterialListPage(
+                              addToCart:
+                                  CartBottomSheet.showAddToCartBottomSheet,
+                            ),
+                        ],
                       ),
-                  ],
-                ),
+                    ),
+            ],
+          ),
         );
       },
     );

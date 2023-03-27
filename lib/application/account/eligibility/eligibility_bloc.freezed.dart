@@ -24,7 +24,8 @@ mixin _$EligibilityEvent {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrgConfigs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)
+            ShipToInfo shipToInfo,
+            OrderDocumentType selectedOrderType)
         update,
   }) =>
       throw _privateConstructorUsedError;
@@ -36,7 +37,8 @@ mixin _$EligibilityEvent {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrgConfigs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            OrderDocumentType selectedOrderType)?
         update,
   }) =>
       throw _privateConstructorUsedError;
@@ -48,7 +50,8 @@ mixin _$EligibilityEvent {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrgConfigs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            OrderDocumentType selectedOrderType)?
         update,
     required TResult orElse(),
   }) =>
@@ -136,7 +139,8 @@ class _$_Initialized implements _Initialized {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrgConfigs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)
+            ShipToInfo shipToInfo,
+            OrderDocumentType selectedOrderType)
         update,
   }) {
     return initialized();
@@ -151,7 +155,8 @@ class _$_Initialized implements _Initialized {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrgConfigs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            OrderDocumentType selectedOrderType)?
         update,
   }) {
     return initialized?.call();
@@ -166,7 +171,8 @@ class _$_Initialized implements _Initialized {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrgConfigs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            OrderDocumentType selectedOrderType)?
         update,
     required TResult orElse(),
   }) {
@@ -222,13 +228,15 @@ abstract class _$$_UpdateCopyWith<$Res> {
       SalesOrganisation salesOrganisation,
       SalesOrganisationConfigs salesOrgConfigs,
       CustomerCodeInfo customerCodeInfo,
-      ShipToInfo shipToInfo});
+      ShipToInfo shipToInfo,
+      OrderDocumentType selectedOrderType});
 
   $UserCopyWith<$Res> get user;
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
   $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfigs;
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
   $ShipToInfoCopyWith<$Res> get shipToInfo;
+  $OrderDocumentTypeCopyWith<$Res> get selectedOrderType;
 }
 
 /// @nodoc
@@ -246,6 +254,7 @@ class __$$_UpdateCopyWithImpl<$Res>
     Object? salesOrgConfigs = null,
     Object? customerCodeInfo = null,
     Object? shipToInfo = null,
+    Object? selectedOrderType = null,
   }) {
     return _then(_$_Update(
       user: null == user
@@ -268,6 +277,10 @@ class __$$_UpdateCopyWithImpl<$Res>
           ? _value.shipToInfo
           : shipToInfo // ignore: cast_nullable_to_non_nullable
               as ShipToInfo,
+      selectedOrderType: null == selectedOrderType
+          ? _value.selectedOrderType
+          : selectedOrderType // ignore: cast_nullable_to_non_nullable
+              as OrderDocumentType,
     ));
   }
 
@@ -311,6 +324,14 @@ class __$$_UpdateCopyWithImpl<$Res>
       return _then(_value.copyWith(shipToInfo: value));
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $OrderDocumentTypeCopyWith<$Res> get selectedOrderType {
+    return $OrderDocumentTypeCopyWith<$Res>(_value.selectedOrderType, (value) {
+      return _then(_value.copyWith(selectedOrderType: value));
+    });
+  }
 }
 
 /// @nodoc
@@ -321,7 +342,8 @@ class _$_Update implements _Update {
       required this.salesOrganisation,
       required this.salesOrgConfigs,
       required this.customerCodeInfo,
-      required this.shipToInfo});
+      required this.shipToInfo,
+      required this.selectedOrderType});
 
   @override
   final User user;
@@ -333,10 +355,12 @@ class _$_Update implements _Update {
   final CustomerCodeInfo customerCodeInfo;
   @override
   final ShipToInfo shipToInfo;
+  @override
+  final OrderDocumentType selectedOrderType;
 
   @override
   String toString() {
-    return 'EligibilityEvent.update(user: $user, salesOrganisation: $salesOrganisation, salesOrgConfigs: $salesOrgConfigs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo)';
+    return 'EligibilityEvent.update(user: $user, salesOrganisation: $salesOrganisation, salesOrgConfigs: $salesOrgConfigs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, selectedOrderType: $selectedOrderType)';
   }
 
   @override
@@ -352,12 +376,14 @@ class _$_Update implements _Update {
             (identical(other.customerCodeInfo, customerCodeInfo) ||
                 other.customerCodeInfo == customerCodeInfo) &&
             (identical(other.shipToInfo, shipToInfo) ||
-                other.shipToInfo == shipToInfo));
+                other.shipToInfo == shipToInfo) &&
+            (identical(other.selectedOrderType, selectedOrderType) ||
+                other.selectedOrderType == selectedOrderType));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, user, salesOrganisation,
-      salesOrgConfigs, customerCodeInfo, shipToInfo);
+      salesOrgConfigs, customerCodeInfo, shipToInfo, selectedOrderType);
 
   @JsonKey(ignore: true)
   @override
@@ -374,11 +400,12 @@ class _$_Update implements _Update {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrgConfigs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)
+            ShipToInfo shipToInfo,
+            OrderDocumentType selectedOrderType)
         update,
   }) {
-    return update(
-        user, salesOrganisation, salesOrgConfigs, customerCodeInfo, shipToInfo);
+    return update(user, salesOrganisation, salesOrgConfigs, customerCodeInfo,
+        shipToInfo, selectedOrderType);
   }
 
   @override
@@ -390,11 +417,12 @@ class _$_Update implements _Update {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrgConfigs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            OrderDocumentType selectedOrderType)?
         update,
   }) {
-    return update?.call(
-        user, salesOrganisation, salesOrgConfigs, customerCodeInfo, shipToInfo);
+    return update?.call(user, salesOrganisation, salesOrgConfigs,
+        customerCodeInfo, shipToInfo, selectedOrderType);
   }
 
   @override
@@ -406,13 +434,14 @@ class _$_Update implements _Update {
             SalesOrganisation salesOrganisation,
             SalesOrganisationConfigs salesOrgConfigs,
             CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
+            ShipToInfo shipToInfo,
+            OrderDocumentType selectedOrderType)?
         update,
     required TResult orElse(),
   }) {
     if (update != null) {
       return update(user, salesOrganisation, salesOrgConfigs, customerCodeInfo,
-          shipToInfo);
+          shipToInfo, selectedOrderType);
     }
     return orElse();
   }
@@ -455,13 +484,15 @@ abstract class _Update implements EligibilityEvent {
       required final SalesOrganisation salesOrganisation,
       required final SalesOrganisationConfigs salesOrgConfigs,
       required final CustomerCodeInfo customerCodeInfo,
-      required final ShipToInfo shipToInfo}) = _$_Update;
+      required final ShipToInfo shipToInfo,
+      required final OrderDocumentType selectedOrderType}) = _$_Update;
 
   User get user;
   SalesOrganisation get salesOrganisation;
   SalesOrganisationConfigs get salesOrgConfigs;
   CustomerCodeInfo get customerCodeInfo;
   ShipToInfo get shipToInfo;
+  OrderDocumentType get selectedOrderType;
   @JsonKey(ignore: true)
   _$$_UpdateCopyWith<_$_Update> get copyWith =>
       throw _privateConstructorUsedError;
@@ -475,6 +506,7 @@ mixin _$EligibilityState {
       throw _privateConstructorUsedError;
   CustomerCodeInfo get customerCodeInfo => throw _privateConstructorUsedError;
   ShipToInfo get shipToInfo => throw _privateConstructorUsedError;
+  OrderDocumentType get selectedOrderType => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $EligibilityStateCopyWith<EligibilityState> get copyWith =>
@@ -492,13 +524,15 @@ abstract class $EligibilityStateCopyWith<$Res> {
       SalesOrganisation salesOrganisation,
       SalesOrganisationConfigs salesOrgConfigs,
       CustomerCodeInfo customerCodeInfo,
-      ShipToInfo shipToInfo});
+      ShipToInfo shipToInfo,
+      OrderDocumentType selectedOrderType});
 
   $UserCopyWith<$Res> get user;
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
   $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfigs;
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
   $ShipToInfoCopyWith<$Res> get shipToInfo;
+  $OrderDocumentTypeCopyWith<$Res> get selectedOrderType;
 }
 
 /// @nodoc
@@ -519,6 +553,7 @@ class _$EligibilityStateCopyWithImpl<$Res, $Val extends EligibilityState>
     Object? salesOrgConfigs = null,
     Object? customerCodeInfo = null,
     Object? shipToInfo = null,
+    Object? selectedOrderType = null,
   }) {
     return _then(_value.copyWith(
       user: null == user
@@ -541,6 +576,10 @@ class _$EligibilityStateCopyWithImpl<$Res, $Val extends EligibilityState>
           ? _value.shipToInfo
           : shipToInfo // ignore: cast_nullable_to_non_nullable
               as ShipToInfo,
+      selectedOrderType: null == selectedOrderType
+          ? _value.selectedOrderType
+          : selectedOrderType // ignore: cast_nullable_to_non_nullable
+              as OrderDocumentType,
     ) as $Val);
   }
 
@@ -584,6 +623,14 @@ class _$EligibilityStateCopyWithImpl<$Res, $Val extends EligibilityState>
       return _then(_value.copyWith(shipToInfo: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $OrderDocumentTypeCopyWith<$Res> get selectedOrderType {
+    return $OrderDocumentTypeCopyWith<$Res>(_value.selectedOrderType, (value) {
+      return _then(_value.copyWith(selectedOrderType: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -599,7 +646,8 @@ abstract class _$$_EligibilityStateCopyWith<$Res>
       SalesOrganisation salesOrganisation,
       SalesOrganisationConfigs salesOrgConfigs,
       CustomerCodeInfo customerCodeInfo,
-      ShipToInfo shipToInfo});
+      ShipToInfo shipToInfo,
+      OrderDocumentType selectedOrderType});
 
   @override
   $UserCopyWith<$Res> get user;
@@ -611,6 +659,8 @@ abstract class _$$_EligibilityStateCopyWith<$Res>
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
   @override
   $ShipToInfoCopyWith<$Res> get shipToInfo;
+  @override
+  $OrderDocumentTypeCopyWith<$Res> get selectedOrderType;
 }
 
 /// @nodoc
@@ -629,6 +679,7 @@ class __$$_EligibilityStateCopyWithImpl<$Res>
     Object? salesOrgConfigs = null,
     Object? customerCodeInfo = null,
     Object? shipToInfo = null,
+    Object? selectedOrderType = null,
   }) {
     return _then(_$_EligibilityState(
       user: null == user
@@ -651,6 +702,10 @@ class __$$_EligibilityStateCopyWithImpl<$Res>
           ? _value.shipToInfo
           : shipToInfo // ignore: cast_nullable_to_non_nullable
               as ShipToInfo,
+      selectedOrderType: null == selectedOrderType
+          ? _value.selectedOrderType
+          : selectedOrderType // ignore: cast_nullable_to_non_nullable
+              as OrderDocumentType,
     ));
   }
 }
@@ -663,7 +718,8 @@ class _$_EligibilityState extends _EligibilityState {
       required this.salesOrganisation,
       required this.salesOrgConfigs,
       required this.customerCodeInfo,
-      required this.shipToInfo})
+      required this.shipToInfo,
+      required this.selectedOrderType})
       : super._();
 
   @override
@@ -676,10 +732,12 @@ class _$_EligibilityState extends _EligibilityState {
   final CustomerCodeInfo customerCodeInfo;
   @override
   final ShipToInfo shipToInfo;
+  @override
+  final OrderDocumentType selectedOrderType;
 
   @override
   String toString() {
-    return 'EligibilityState(user: $user, salesOrganisation: $salesOrganisation, salesOrgConfigs: $salesOrgConfigs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo)';
+    return 'EligibilityState(user: $user, salesOrganisation: $salesOrganisation, salesOrgConfigs: $salesOrgConfigs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, selectedOrderType: $selectedOrderType)';
   }
 
   @override
@@ -695,12 +753,14 @@ class _$_EligibilityState extends _EligibilityState {
             (identical(other.customerCodeInfo, customerCodeInfo) ||
                 other.customerCodeInfo == customerCodeInfo) &&
             (identical(other.shipToInfo, shipToInfo) ||
-                other.shipToInfo == shipToInfo));
+                other.shipToInfo == shipToInfo) &&
+            (identical(other.selectedOrderType, selectedOrderType) ||
+                other.selectedOrderType == selectedOrderType));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, user, salesOrganisation,
-      salesOrgConfigs, customerCodeInfo, shipToInfo);
+      salesOrgConfigs, customerCodeInfo, shipToInfo, selectedOrderType);
 
   @JsonKey(ignore: true)
   @override
@@ -711,11 +771,13 @@ class _$_EligibilityState extends _EligibilityState {
 
 abstract class _EligibilityState extends EligibilityState {
   const factory _EligibilityState(
-      {required final User user,
-      required final SalesOrganisation salesOrganisation,
-      required final SalesOrganisationConfigs salesOrgConfigs,
-      required final CustomerCodeInfo customerCodeInfo,
-      required final ShipToInfo shipToInfo}) = _$_EligibilityState;
+          {required final User user,
+          required final SalesOrganisation salesOrganisation,
+          required final SalesOrganisationConfigs salesOrgConfigs,
+          required final CustomerCodeInfo customerCodeInfo,
+          required final ShipToInfo shipToInfo,
+          required final OrderDocumentType selectedOrderType}) =
+      _$_EligibilityState;
   const _EligibilityState._() : super._();
 
   @override
@@ -728,6 +790,8 @@ abstract class _EligibilityState extends EligibilityState {
   CustomerCodeInfo get customerCodeInfo;
   @override
   ShipToInfo get shipToInfo;
+  @override
+  OrderDocumentType get selectedOrderType;
   @override
   @JsonKey(ignore: true)
   _$$_EligibilityStateCopyWith<_$_EligibilityState> get copyWith =>

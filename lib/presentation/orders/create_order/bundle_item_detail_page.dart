@@ -141,14 +141,14 @@ class BundleItemDetailPage extends StatelessWidget {
 
                     return ElevatedButton(
                       onPressed: () {
-                        locator<CountlyService>()
-                            .addCountlyEvent('Add bundles to cart');
-                        _addToCartPressed(
-                          context,
-                          bundleAggregate.bundle,
-                          quantityControllerList,
-                        );
-                      },
+                              locator<CountlyService>()
+                                  .addCountlyEvent('Add bundles to cart');
+                              _addToCartPressed(
+                                context,
+                                bundleAggregate.bundle,
+                                quantityControllerList,
+                              );
+                            },
                       child: const Text('Add to Cart').tr(),
                     );
                   },

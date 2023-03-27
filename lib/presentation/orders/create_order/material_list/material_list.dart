@@ -33,7 +33,6 @@ import 'package:ezrxmobile/presentation/orders/create_order/material_list/materi
 import 'package:ezrxmobile/presentation/orders/create_order/material_list/material_list_item.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/material_list/material_list_scan_picker.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/material_list/material_list_search_bar.dart';
-import 'package:ezrxmobile/presentation/orders/create_order/order_type_selector.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 
 class MaterialListPage extends StatelessWidget {
@@ -168,8 +167,6 @@ class MaterialListPage extends StatelessWidget {
                   ],
                 ),
                 const AccountSuspendedBanner(),
-                if (context.read<EligibilityBloc>().state.isOrderTypeEnable)
-                  const OrderTypeSelector(hideReasonField: true),
                 const MaterialListFilters(),
                 Expanded(
                   child: state.isFetching && state.materialList.isEmpty

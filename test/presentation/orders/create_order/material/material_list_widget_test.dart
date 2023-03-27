@@ -2157,5 +2157,39 @@ void main() {
       );
       expect(find.text('Fake-resgistration-number'), findsOneWidget);
     });
+
+    testWidgets('Find OrderType Selector', (tester) async {
+      when(() => materialListBlocMock.state)
+          .thenReturn(MaterialListState.initial());
+      when(() => eligibilityBlocMock.state)
+          .thenReturn(EligibilityState.initial().copyWith(
+            salesOrganisation: SalesOrganisation.empty().copyWith(
+             salesOrg: SalesOrg('2601'),
+            ),
+            selectedOrderType: OrderDocumentType.empty().copyWith(
+              documentType: DocumentType('ZPOR'),
+              salesOrg: SalesOrg('2601'),
+            ),
+            user: User.empty().copyWith(
+              role: Role(
+                description: '',
+                id: '',
+                name: '',
+                type: RoleType(
+                  'internal_sales_rep'
+                )
+              )
+            ),
+            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+              disableOrderType: false
+            )
+            ));
+      await tester.pumpWidget(getScopedWidget(const MaterialRoot()));
+
+      final materialsListPage = find.byKey(const Key('orderTypeSelector'));
+      
+      expect(materialsListPage, findsOneWidget);
+      await tester.pump();
+    });
   });
 }

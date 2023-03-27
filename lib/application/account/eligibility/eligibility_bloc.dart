@@ -6,6 +6,8 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
+
 part 'eligibility_event.dart';
 part 'eligibility_state.dart';
 part 'eligibility_bloc.freezed.dart';
@@ -28,6 +30,7 @@ class EligibilityBloc extends Bloc<EligibilityEvent, EligibilityState> {
           salesOrgConfigs: e.salesOrgConfigs,
           customerCodeInfo: e.customerCodeInfo,
           shipToInfo: e.shipToInfo,
+          selectedOrderType: e.selectedOrderType,
         ));
       },
     );

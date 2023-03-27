@@ -10,6 +10,7 @@ import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/material_bundle_list/material_bundle_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
+import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
@@ -18,6 +19,7 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -43,6 +45,10 @@ class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 
 class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
     implements SalesOrgBloc {}
+
+class OrderDocumentTypeMockBloc
+    extends MockBloc<OrderDocumentTypeEvent, OrderDocumentTypeState>
+    implements OrderDocumentTypeBloc {}
 
 class CustomerCodeBlocMock
     extends MockBloc<CustomerCodeEvent, CustomerCodeState>
@@ -74,6 +80,7 @@ void main() {
   late List<BundleAggregate> mockBundleItems;
   late MaterialBundleListBloc materialBundleListBloc;
   late MaterialPriceDetailBloc materialPriceDetailMockBloc;
+  late OrderDocumentTypeBloc orderDocumentTypeBlocMock;
 
   setUpAll(() async {
     locator.registerLazySingleton(() => MixpanelService());
@@ -87,6 +94,7 @@ void main() {
     customerCodeBlocMock = CustomerCodeBlocMock();
     materialBundleListBloc = MaterialBundleListBlocMock();
     materialPriceDetailMockBloc = MaterialPriceDetailMockBloc();
+    orderDocumentTypeBlocMock = OrderDocumentTypeMockBloc();
 
     mockBundleInfoList = [
       BundleInfo(
@@ -190,6 +198,8 @@ void main() {
     when(() => shipToCodeBLocMock.state).thenReturn(ShipToCodeState.initial());
     when(() => materialPriceDetailMockBloc.state)
         .thenReturn(MaterialPriceDetailState.initial());
+    when(() => orderDocumentTypeBlocMock.state)
+        .thenReturn(OrderDocumentTypeState.initial());
     when(() => salesOrgBlocMock.state).thenReturn(
       SalesOrgState.initial().copyWith(
         salesOrganisation: SalesOrganisation.empty().copyWith(
@@ -234,6 +244,9 @@ void main() {
           ),
           BlocProvider<MaterialPriceDetailBloc>(
             create: (context) => materialPriceDetailMockBloc,
+          ),
+          BlocProvider<OrderDocumentTypeBloc>(
+            create: (context) => orderDocumentTypeBlocMock,
           ),
           if (additionalProviders.isNotEmpty) ...additionalProviders,
         ],
@@ -523,6 +536,63 @@ void main() {
       await tester.pump(const Duration(seconds: 2));
 
       expect(autoRouterMock.current.name, BundleItemDetailPageRoute.name);
+    });
+
+    testWidgets('On Material List Item Add Button Tapped', (tester) async {
+      when(() => materialBundleListBloc.state).thenReturn(
+        MaterialBundleListState.initial().copyWith(
+          bundleList: [
+            BundleAggregate(
+              bundle: Bundle(
+                materials: <MaterialInfo>[],
+                bundleName: BundleName(''),
+                bundleCode: '0010276811',
+                bundleInformation: mockBundleInfoList,
+              ),
+              materialInfos: <MaterialInfo>[
+                MaterialInfo.empty().copyWith(bundles: [
+                  Bundle.empty().copyWith(bundleName: BundleName('fake-bundle'))
+                ])
+              ],
+            ),
+          ],
+          nextPageIndex: 1,
+          canLoadMore: true,
+        ),
+      );
+
+      when(() => materialPriceDetailMockBloc.state).thenReturn(
+        MaterialPriceDetailState.initial().copyWith(materialDetails: {}),
+      );
+
+      when(() => orderDocumentTypeBlocMock.state).thenReturn(
+        OrderDocumentTypeState.initial().copyWith(
+            selectedOrderType: OrderDocumentType.empty()
+                .copyWith(documentType: DocumentType('ZPFC'))),
+      );
+
+      when(() => eligibilityMockBloc.state).thenReturn(
+        EligibilityState.initial(),
+      );
+
+      await tester.pumpWidget(getScopedWidget(
+        const MaterialBundleListPage(),
+        [
+          BlocProvider<MaterialPriceDetailBloc>(
+            create: (context) => materialPriceDetailMockBloc,
+          ),
+          BlocProvider<EligibilityBloc>(
+              create: (context) => eligibilityMockBloc),
+        ],
+      ));
+
+      final firstMockBundleItem = find.text(
+        'Add',
+      );
+
+      expect(firstMockBundleItem, findsOneWidget);
+
+      await tester.tap(firstMockBundleItem);
     });
   });
 }
