@@ -98,6 +98,9 @@ DateTime getDeliveryDateTime(String input) {
 }
 
 String displayDateStringOrEmpty(String text) {
+  if (isNumericOnly(text) && int.parse(text) <= 0) {
+    return '-';
+  }
   final parsedDate = DateTime.tryParse(text);
   if (parsedDate == null) {
     return '';
@@ -105,6 +108,7 @@ String displayDateStringOrEmpty(String text) {
 
   return DateFormat(DateTimeFormatString.displayFormat).format(parsedDate);
 }
+bool isNumericOnly(String text) => RegExp(r'^\d+$').hasMatch(text);
 
 String formattedDateTimeForAPI(String text) {
   final parsedDate = DateTime.tryParse(text);

@@ -296,6 +296,9 @@ void main() {
 
       testWidgets('order Type test', (tester) async {
         final newShortList = orderHistoryItem.orderHistoryItems.sublist(0, 3);
+        final firstItem = newShortList.first
+            .copyWith(deliveryDate: DateTimeStringValue('00000000'));
+        newShortList.insert(0, firstItem);
         final list = orderHistoryItem.copyWith(orderHistoryItems: newShortList);
         final orderHistoryBloc = locator<OrderHistoryListBlocMock>();
         final expectedStates = [
@@ -306,6 +309,13 @@ void main() {
         ];
         whenListen(
             mockOrderHistoryFilterBloc, Stream.fromIterable(expectedStates));
+
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+              salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+            disableDeliveryDate: true,
+          )),
+        );
 
         when(() => customerCodeBlocMock.state).thenReturn(
           CustomerCodeState.initial().copyWith(
@@ -352,6 +362,17 @@ void main() {
         await tester.pumpAndSettle(const Duration(seconds: 3));
         expect(find.byKey(const Key('orderHistoryList')), findsWidgets);
         expect(find.byType(OrderHistoryListTile), findsWidgets);
+
+        final materialDeliveryDate =
+            find.byKey(const Key('material000000000021211474deliveryDate-'));
+        expect(
+          materialDeliveryDate,
+          findsOneWidget,
+        );
+
+        final descendantDateValue = find.descendant(
+            of: materialDeliveryDate, matching: find.textContaining('-'));
+        expect(descendantDateValue, findsOneWidget);
 
         await tester.drag(
             find.byKey(const Key('scrollList')), const Offset(0.0, -800));
@@ -442,7 +463,7 @@ void main() {
             ShipToCodeState.initial().copyWith(
                 shipToInfo:
                     ShipToInfo.empty().copyWith(defaultShipToAddress: true)));
-        
+
         await tester.pumpWidget(getWUT());
         await tester.pump();
 

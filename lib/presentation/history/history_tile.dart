@@ -154,6 +154,8 @@ class OrderHistoryListTile extends StatelessWidget {
               ),
               disableDeliveryDate && orderHistoryItem.deliveryDate.isNotEmpty
                   ? BalanceTextRow(
+                      key: Key(
+                          'material${orderHistoryItem.materialNumber.getOrDefaultValue('')}deliveryDate${orderHistoryItem.deliveryDate.toValidDateString}',),
                       keyText: 'Delivery Date/Time'.tr(),
                       valueText:
                           orderHistoryItem.deliveryDate.toValidDateString,
