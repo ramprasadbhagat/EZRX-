@@ -303,4 +303,28 @@ void main() {
       },
     );
   });
+
+  group('BatchNumber Value Object', () {
+    test(
+      'BatchNumber available ',
+      () {
+        final valObj = BatchNumber('fake-batch');
+        expect(
+          valObj.selectOrGetBatch,
+          'fake-batch',
+        );
+      },
+    );
+
+    test(
+      'BatchNumber not available ',
+      () {
+        final valObj = BatchNumber('');
+        expect(
+          valObj.selectOrGetBatch,
+          'Select',
+        );
+      },
+    );
+  });
 }

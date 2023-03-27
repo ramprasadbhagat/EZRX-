@@ -180,6 +180,10 @@ final mockCartItem = CartItem(
     materials: [PriceAggregate.empty()], itemType: CartItemType.material);
 final mockCartItemWithRemarks =
     CartItem(materials: [mockItemWithRemarks], itemType: CartItemType.material);
+final mockCartItemWithOutBatch =
+    CartItem(materials: mockItemWithOutBatch, itemType: CartItemType.material);
+final mockCartItemWithBatch =
+    CartItem(materials: mockItemWithBatch, itemType: CartItemType.material);
 
 //****************************************************************************************************** */
 //                                                                                                       //
@@ -472,4 +476,34 @@ final bonus915MockCartItem = PriceAggregate.empty().copyWith(
 );
 final bonus915mockMaterialList = [
   CartItem(materials: [bonus915MockCartItem], itemType: CartItemType.material)
+];
+
+final batchStockInfoMock = [
+  StockInfo.empty().copyWith(
+    materialNumber: MaterialNumber('000000000023168451'),
+    inStock: MaterialInStock('Yes'),
+    expiryDate: DateTimeStringValue('NA'),
+    salesDistrict: '',
+    batch: BatchNumber('fake-batch'),
+  ),
+];
+
+final mockItemWithOutBatch = [
+  PriceAggregate.empty().copyWith(
+    quantity: 1,
+    materialInfo: MaterialInfo.empty().copyWith(
+      materialNumber: MaterialNumber('000000000023168451'),
+    ),
+  ),
+];
+
+final mockItemWithBatch = [
+  PriceAggregate.empty().copyWith(
+    quantity: 1,
+    materialInfo: MaterialInfo.empty().copyWith(
+      materialNumber: MaterialNumber('000000000023168451'),
+    ),
+    stockInfo: batchStockInfoMock.first,
+    stockInfoList: batchStockInfoMock,
+  ),
 ];

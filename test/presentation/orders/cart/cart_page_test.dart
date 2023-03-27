@@ -28,6 +28,7 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle_info.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
@@ -157,6 +158,9 @@ void main() {
   late OrderSummaryBloc orderSummaryBlocMock;
   late CountlyService countlyMockService;
   late AdditionalDetailsBloc additionalDetailsBlocMock;
+  late CartItem mockCartItemWithOutBatch;
+  late CartItem mockCartItemWithBatch;
+  late List<StockInfo> batchStockInfoMock;
 
   setUpAll(() async {
     countlyMockService = CountlyServiceMock();
@@ -455,6 +459,37 @@ void main() {
           ),
         ),
       ];
+      mockCartItemWithOutBatch = CartItem(materials: [
+        PriceAggregate.empty().copyWith(
+          quantity: 1,
+          materialInfo: MaterialInfo.empty().copyWith(
+            materialNumber: MaterialNumber('000000000023168451'),
+          ),
+        ),
+      ], itemType: CartItemType.material);
+
+      batchStockInfoMock = [
+        StockInfo.empty().copyWith(
+          materialNumber: MaterialNumber('000000000023168451'),
+          inStock: MaterialInStock('Yes'),
+          expiryDate: DateTimeStringValue('NA'),
+          salesDistrict: '',
+          batch: BatchNumber('fake-batch'),
+        ),
+      ];
+      mockCartItemWithBatch = CartItem(
+        materials: [
+          PriceAggregate.empty().copyWith(
+            quantity: 1,
+            materialInfo: MaterialInfo.empty().copyWith(
+              materialNumber: MaterialNumber('000000000023168451'),
+            ),
+            stockInfo: batchStockInfoMock.first,
+            stockInfoList: batchStockInfoMock,
+          ),
+        ],
+        itemType: CartItemType.material,
+      );
       when(() => cartBloc.state).thenReturn(CartState.initial().copyWith(
         apiFailureOrSuccessOption: none(),
         cartItems: [CartItem.material(mockCartItemWithDataList.first)],
@@ -1768,6 +1803,59 @@ void main() {
         expect(txt, findsAtLeastNWidgets(1));
         expect(
             cartBloc.state.grandTotalBasedOnOrderType(isSpecial: true), 108.0);
+      });
+
+
+      testWidgets('cart Item with no valid batch valid ', (tester) async {
+        locator.unregister<CountlyService>();
+        locator.registerLazySingleton<CountlyService>(() => countlyMockService);
+
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartItems: [mockCartItemWithOutBatch],
+            isFetching: false,
+          ),
+        );
+        when(() => salesOrgBloc.state).thenReturn(
+          SalesOrgState.initial().copyWith(
+            configs: SalesOrganisationConfigs.empty().copyWith(
+              enableBatchNumber: true,
+            ),
+          ),
+        );
+
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+
+        final batchNumber = find.byKey(ValueKey(
+            'batchNumber_${mockCartItemWithOutBatch.materials.first.materialNumberString}'));
+        expect(batchNumber, findsOneWidget);
+      });
+
+      testWidgets('cart Item with valid batch valid ', (tester) async {
+        locator.unregister<CountlyService>();
+        locator.registerLazySingleton<CountlyService>(() => countlyMockService);
+
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartItems: [mockCartItemWithBatch],
+            isFetching: false,
+          ),
+        );
+        when(() => salesOrgBloc.state).thenReturn(
+          SalesOrgState.initial().copyWith(
+            configs: SalesOrganisationConfigs.empty().copyWith(
+              enableBatchNumber: true,
+            ),
+          ),
+        );
+
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+
+        final batchNumber = find.byKey(ValueKey(
+            'batchNumber_${mockCartItemWithBatch.materials.first.materialNumberString}'));
+        expect(batchNumber, findsOneWidget);
       });
     },
   );

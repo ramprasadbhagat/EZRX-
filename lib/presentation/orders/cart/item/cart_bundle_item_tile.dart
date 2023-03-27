@@ -282,6 +282,15 @@ class _BundleMaterialItemState extends State<_BundleMaterialItem> {
                       color: ZPColors.lightGray,
                     ),
               ),
+              Text(
+                '${'Expiry Date : '.tr()}${widget.material.stockInfo.expiryDate.toValidDateString}',
+                key: ValueKey(
+                  'expiryDate_${widget.material.getMaterialNumber}',
+                ),
+                style: Theme.of(context).textTheme.titleSmall?.apply(
+                      color: ZPColors.lightGray,
+                    ),
+              ),
             ],
           ),
         ),

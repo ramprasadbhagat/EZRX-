@@ -1667,4 +1667,28 @@ void main() {
     );
     expect(result.isLeft(), true);
   });
+  test('Test Update Stock In Cart - Success', () async {
+    final result = await cartRepository.updatedBatchInCartItem(
+      item: fakeCartItem,
+      stockInfo: StockInfo.empty(),
+    );
+    expect(result.isRight(), false);
+  });
+
+  test('Test Update Stock In Cart - Failure', () async {
+    when(
+      () => cartStorageMock.put(
+        id: fakeCartItem.id,
+        item: CartItemDto.fromDomain(fakeCartItem),
+      ),
+    ).thenThrow(
+      (invocation) async => MockException(),
+    );
+
+    final result = await cartRepository.updatedBatchInCartItem(
+      item: fakeCartItem,
+      stockInfo: StockInfo.empty(),
+    );
+    expect(result.isLeft(), true);
+  });
 }

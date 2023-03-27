@@ -356,6 +356,9 @@ class CartMaterialItemTileDetails extends StatelessWidget {
                   ),
             ),
           BatchNumberLabel(
+            key: ValueKey(
+              'batchNumber_${cartItem.materials.first.materialNumberString}',
+            ),
             cartItem: cartItem,
             isOrderSummaryView: isOrderSummaryView,
           ),

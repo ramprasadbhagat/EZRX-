@@ -763,11 +763,7 @@ class CartRepository implements ICartRepository {
           shipToInfo: shipToInfo,
         );
         final stockInfo = response.fold(
-          (failure) => [
-            StockInfo.empty().copyWith(
-              materialNumber: item.materialNumber,
-            ),
-          ],
+          (failure) => <StockInfo>[],
           (stockInfo) => stockInfo,
         );
         stockInfoMap.addAll(

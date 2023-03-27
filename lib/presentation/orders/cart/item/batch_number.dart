@@ -37,6 +37,9 @@ class BatchNumberLabel extends StatelessWidget {
       },
       child: Text(
         '${'Batch Number : '.tr()}${material.stockInfo.batch.selectOrGetBatch}',
+        key: ValueKey(
+          'batchNumber_${material.stockInfo.batch.selectOrGetBatch}',
+        ),
         style: Theme.of(context).textTheme.titleSmall?.copyWith(
               decoration: TextDecoration.underline,
               decorationThickness: 2,
@@ -63,9 +66,10 @@ class _BatchActionSheet extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         AppBar(
-          title: Text(
-            'Select Batch Number'.tr(),
-          ),
+          key: const ValueKey('selectBatchNumber'),
+          title: const Text(
+            'Select Batch Number',
+          ).tr(),
           automaticallyImplyLeading: false,
           actions: [
             IconButton(
@@ -79,12 +83,17 @@ class _BatchActionSheet extends StatelessWidget {
           ],
         ),
         SafeArea(
-          child: Column(
+          child: item.materials.first.batchNumbers.isNotEmpty
+              ? Column(
             children: item.materials.first.stockInfoList.map(
               (StockInfo stockInfo) {
                 return RadioListTile<StockInfo>(
+                    key: ValueKey(
+                      stockInfo.batch.getOrDefaultValue(''),
+                    ),
                   title: Text(
                     stockInfo.batch.getOrDefaultValue(''),
+                      
                   ),
                   groupValue: item.materials.first.stockInfo,
                   controlAffinity: ListTileControlAffinity.trailing,
@@ -99,9 +108,17 @@ class _BatchActionSheet extends StatelessWidget {
                   },
                   value: stockInfo,
                 );
-              },
-            ).toList(),
-          ),
+                    },
+                  ).toList(),
+                )
+              : Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Text(
+                    'No batch found',
+                    key: const Key('noBatchFound'),
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ).tr(),
+                ),
         ),
       ],
     );

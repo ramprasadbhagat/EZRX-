@@ -410,6 +410,10 @@ class PriceAggregate with _$PriceAggregate {
   PriceAggregate copyWithIncreasedQty({required int qty}) => copyWith(
         quantity: quantity + qty,
       );
+
+  List<StockInfo> get batchNumbers => List<StockInfo>.from(stockInfoList)
+      .where((StockInfo element) => element.batch.isValid())
+      .toList();
 }
 
 enum PriceType {

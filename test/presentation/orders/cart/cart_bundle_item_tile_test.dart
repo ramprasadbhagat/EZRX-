@@ -192,7 +192,9 @@ void main() {
         await tester.tap(quantityInput.first, warnIfMissed: false);
         final cartDelete = find.byKey(const ValueKey('cartDelete'));
         expect(cartDelete, findsNWidgets(2));
-
+        final expiryDate = find.byKey(
+            ValueKey('expiryDate_${priceAggregates.first.getMaterialNumber}'));
+        expect(expiryDate, findsOneWidget);
 
         await tester.tap(cartDelete.first);
         verify(
