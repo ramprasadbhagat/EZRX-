@@ -130,10 +130,6 @@ class RoleType extends ValueObject<String> {
     return roleOrderType(value.getOrElse(() => ''));
   }
 
-  bool get isClient {
-    return loginUserType == 'client';
-  }
-
   bool get isZPAdmin {
     return value.getOrElse(() => '') == 'zp_admin';
   }

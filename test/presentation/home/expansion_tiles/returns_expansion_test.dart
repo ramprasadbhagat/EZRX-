@@ -62,7 +62,8 @@ class MockAuthBloc extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
     implements EligibilityBloc {}
 
-class ReturnsOverviewBlocMock extends MockBloc<ReturnsOverviewEvent, ReturnsOverviewState>
+class ReturnsOverviewBlocMock
+    extends MockBloc<ReturnsOverviewEvent, ReturnsOverviewState>
     implements ReturnsOverviewBloc {}
 
 class ReturnSummaryFilterBlocMock
@@ -151,7 +152,8 @@ void main() {
           BlocProvider<ShipToCodeBloc>(create: (context) => mockShipToCodeBloc),
           BlocProvider<EligibilityBloc>(
               create: (context) => eligibilityBlocMock),
-          BlocProvider<ReturnsOverviewBloc>(create: (context) => mockReturnsOverviewBloc),
+          BlocProvider<ReturnsOverviewBloc>(
+              create: (context) => mockReturnsOverviewBloc),
           BlocProvider<ReturnSummaryFilterBloc>(
               create: (context) => returnSummaryFilterBlocMock),
         ],
@@ -161,6 +163,30 @@ void main() {
       );
     }
 
+    testWidgets(
+        'ReturnsExpansionTile should not be displayed when isReturnsEnable is false',
+        (WidgetTester tester) async {
+      // Arrange
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial()
+          .copyWith(
+            user: User.empty().copyWith(
+              //this make isReturnsEnable = false
+              disableReturns: true,
+            ),
+          ),
+      );
+      // Act
+      await tester.pumpWidget(
+        BlocProvider<EligibilityBloc>.value(
+          value: eligibilityBlocMock,
+          child: const ReturnsExpansionTile(),
+        ),
+      );
+      // Assert
+      expect(find.byType(SizedBox), findsOneWidget);
+    });
+    
     // testWidgets(
     //   'Returns Features Visibility Test - Root admin',
     //   (tester) async {

@@ -175,7 +175,7 @@ void main() {
           description: '',
           name: '',
           id: '',
-          type: RoleType('client'),
+          type: RoleType('client_user'),
         ),
       )));
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial()
@@ -214,7 +214,7 @@ void main() {
                 description: '',
                 name: '',
                 id: '',
-                type: RoleType('client'),
+                type: RoleType('client_user'),
               ),
             ),
             salesOrganisation:

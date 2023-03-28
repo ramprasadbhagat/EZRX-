@@ -29,7 +29,7 @@ class EligibilityState with _$EligibilityState {
       return false;
     }
 
-    if (user.role.type.isClient && salesOrgConfigs.disableReturnsAccess) {
+    if (user.role.type.isCustomer && salesOrgConfigs.disableReturnsAccess) {
       return false;
     }
 
@@ -39,7 +39,7 @@ class EligibilityState with _$EligibilityState {
   bool get isCovidMaterialEnable {
     // 1. SG Covid tab
     return (customerCodeInfo.customerAttr7.isZEV &&
-            user.role.type.isClient &&
+            user.role.type.isCustomer &&
             salesOrganisation.salesOrg.isSg) ||
         // 2. Sample item
         customerCodeInfo.customerGrp4.canOrderCovidMaterial ||
