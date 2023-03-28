@@ -8,6 +8,7 @@ import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/additional_details_data.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
+import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_order_response.dart';
 
@@ -44,9 +45,8 @@ abstract class IOrderRepository {
     required CustomerCodeInfo customerCodeInfo,
     required SalesOrganisation salesOrganisation,
     required AdditionalDetailsData data,
-    required String orderType,
+    required OrderDocumentType orderDocumentType,
     required SalesOrganisationConfigs configs,
-    required String orderReason,
   });
 
   Future<Either<ApiFailure, SavedOrder>> getSavedOrderDetail({

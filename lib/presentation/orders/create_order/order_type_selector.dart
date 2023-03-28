@@ -7,6 +7,7 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
+import 'package:ezrxmobile/application/order/order_history_details/order_history_details_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/presentation/core/confirm_clear_cart_dialog.dart';
@@ -52,6 +53,8 @@ class OrderTypeSelector extends StatelessWidget {
                 intialDropdownText: 'Please Select Order Type',
                 dropDownTitle: 'Please select order type',
                 orderDocumentTypeState: state,
+                orderHistoryDetailsState:
+                    context.read<OrderHistoryDetailsBloc>().state,
               ),
               if (!hideReasonField && state.isReasonFieldEnable)
                 Container(
@@ -64,6 +67,8 @@ class OrderTypeSelector extends StatelessWidget {
                     dropDownTitle: 'Please select order reason',
                     isReason: true,
                     orderDocumentTypeState: state,
+                    orderHistoryDetailsState:
+                        context.read<OrderHistoryDetailsBloc>().state,
                   ),
                 ),
               const SizedBox(
@@ -83,6 +88,7 @@ class _OrderTypeSelectorField extends StatelessWidget {
   final String intialDropdownText;
   final String dropDownTitle;
   final OrderDocumentTypeState orderDocumentTypeState;
+  final OrderHistoryDetailsState orderHistoryDetailsState;
   final bool isReason;
   const _OrderTypeSelectorField({
     Key? key,
@@ -92,6 +98,7 @@ class _OrderTypeSelectorField extends StatelessWidget {
     required this.dropDownTitle,
     required this.orderDocumentTypeState,
     this.isReason = false,
+    required this.orderHistoryDetailsState,
   }) : super(key: key);
 
   @override
@@ -171,10 +178,21 @@ class _OrderTypeSelectorField extends StatelessWidget {
   String get displayItemText => isReason
       ? orderDocumentTypeState.isReasonSelected
           ? orderDocumentTypeState.selectedReason.displayReasonText
-          : '${itemList.first.orderReason}: ${itemList.first.description}'
+          : displayReasonText
       : orderDocumentTypeState.isOrderTypeSelected
           ? orderDocumentTypeState.selectedOrderType.documentType.getOrCrash()
           : intialDropdownText;
+
+  String get displayReasonText {
+    final orderReason = orderHistoryDetailsState
+        .orderHistoryDetails.orderHistoryDetailsOrderHeader.orderReason;
+    final reasonList = orderDocumentTypeState.reasonList.firstWhere(
+      (element) => element.orderReason == orderReason,
+      orElse: () => orderDocumentTypeState.reasonList.first,
+    );
+
+    return '${reasonList.orderReason} : ${reasonList.description}';
+  }
 
   void onOrderTypeSelected(
     BuildContext context,

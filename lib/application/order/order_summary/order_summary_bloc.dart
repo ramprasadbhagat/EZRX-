@@ -7,6 +7,7 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/additional_details_data.dart';
+import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_order_response.dart';
 import 'package:ezrxmobile/domain/order/repository/i_order_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -71,9 +72,9 @@ class OrderSummaryBloc extends Bloc<OrderSummaryEvent, OrderSummaryState> {
           customerCodeInfo: value.customerCodeInfo,
           salesOrganisation: value.salesOrganisation,
           data: value.data,
-          orderType: value.orderType,
+          orderDocumentType: value.orderDocumentType,
           configs: value.config,
-          orderReason: value.orderReason,
+        
         );
         failureOrSuccess.fold(
           (failure) {

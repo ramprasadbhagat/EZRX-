@@ -12,6 +12,7 @@ import 'package:ezrxmobile/application/order/order_history_details/order_history
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/additional_details_data.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
+import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
@@ -23,12 +24,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ReOrderButton extends StatelessWidget {
   final bool fromTopMenu;
-
   const ReOrderButton({
     Key? key,
     required this.fromTopMenu,
   }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     if (!context.read<UserBloc>().state.userCanCreateOrder) {
@@ -91,22 +90,20 @@ class ReOrderButton extends StatelessWidget {
     );
   }
 
-  void _addToCartPressed(
+  Future<void> _addToCartPressed(
     BuildContext context,
     MaterialPriceDetailState priceState,
     OrderHistoryDetailsState orderState,
-  ) {
-    trackMixpanelEvent( MixpanelEvents.reOrder,);
+  ) async {
+    trackMixpanelEvent(MixpanelEvents.reOrder,);
     final eligibilityState = context.read<EligibilityBloc>().state;
     final orderHistoryDetails =context.read<OrderHistoryDetailsBloc>().state.orderHistoryDetails;
     final orderDocumentTypeBloc = context.read<OrderDocumentTypeBloc>();
     final uniqueOrderTypeList = orderDocumentTypeBloc.state.uniqueOrderTypeList;
-
     final selectedOrderType = uniqueOrderTypeList.firstWhere(
       (element) => element.documentType.documentTypeCode == orderHistoryDetails.orderHistoryDetailsOrderHeader.type,
-      orElse: () => uniqueOrderTypeList.first,
+      orElse: () => OrderDocumentType.empty(),
     );
-
     final items = orderHistoryDetails.allItemQueryInfo.map<PriceAggregate>((queryInfo) {
       final itemInfo = priceState.materialDetails[queryInfo];
       final material = orderState.materials[queryInfo];
@@ -123,17 +120,20 @@ class ReOrderButton extends StatelessWidget {
     }).toList();
     if (eligibilityState.isOrderTypeEligible) {
       orderDocumentTypeBloc.add(OrderDocumentTypeEvent.selectedOrderType(
-            selectedOrderType: selectedOrderType,
-            isReasonSelected: context.read<OrderDocumentTypeBloc>().state.isReasonFieldEnable,),
+          selectedOrderType: selectedOrderType,
+          isReasonSelected: context.read<OrderDocumentTypeBloc>().state.isReasonFieldEnable,
+        ),
       );
       final reasonList = context.read<OrderDocumentTypeBloc>().state.reasonList;
       final selectedOrderReason = reasonList.firstWhere(
-        (element) =>element.orderReason == orderHistoryDetails.orderHistoryDetailsOrderHeader.orderReason,
-        orElse: () => reasonList.first,
+        (element) => element.orderReason == orderHistoryDetails.orderHistoryDetailsOrderHeader.orderReason,
+        orElse: () => OrderDocumentType.empty(),
       );
-      if (orderDocumentTypeBloc.state.reasonList.isNotEmpty) {
-        orderDocumentTypeBloc.add(OrderDocumentTypeEvent.selectedOrderType(
-              selectedOrderType: selectedOrderReason, isReasonSelected: true,),
+      if (selectedOrderReason != OrderDocumentType.empty()) {
+        orderDocumentTypeBloc.add( OrderDocumentTypeEvent.selectedOrderType(
+            selectedOrderType: selectedOrderReason,
+            isReasonSelected: true,
+          ),
         );
       }
     }
@@ -155,7 +155,7 @@ class ReOrderButton extends StatelessWidget {
             customerCodeInfo: eligibilityState.customerCodeInfo,
           ),
         );
-    context.router.pushAndPopUntil(
+    await context.router.pushAndPopUntil(
       const CartPageRoute(),
       predicate: (route) => route.settings.name == 'HomeNavigationTabbarRoute',
     );

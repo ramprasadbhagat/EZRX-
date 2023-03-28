@@ -12,6 +12,7 @@ import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/additional_details_data.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item.dart';
+import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_order.dart';
@@ -242,20 +243,18 @@ class OrderRepository implements IOrderRepository {
     required CustomerCodeInfo customerCodeInfo,
     required SalesOrganisation salesOrganisation,
     required AdditionalDetailsData data,
-    required String orderType,
+    required OrderDocumentType orderDocumentType,
     required SalesOrganisationConfigs configs,
-    required String orderReason,
   }) async {
     final submitOrder = _getSubmitOrderRequest(
       shipToInfo: shipToInfo,
       user: user,
       data: data,
       cartItems: cartItems,
-      orderType: orderType,
+      orderDocumentType: orderDocumentType,
       customerCodeInfo: customerCodeInfo,
       salesOrganisation: salesOrganisation,
       configs: configs,
-      orderReason: orderReason,
     );
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -377,11 +376,10 @@ class OrderRepository implements IOrderRepository {
     required User user,
     required AdditionalDetailsData data,
     required List<PriceAggregate> cartItems,
-    required String orderType,
     required CustomerCodeInfo customerCodeInfo,
     required SalesOrganisation salesOrganisation,
     required SalesOrganisationConfigs configs,
-    required String orderReason,
+    required OrderDocumentType orderDocumentType,
   }) {
     return SubmitOrder.empty().copyWith(
       userName: data.contactPerson.getValue().isNotEmpty
@@ -397,14 +395,17 @@ class OrderRepository implements IOrderRepository {
       trackingLevel: 'items',
       collectiveNumber: '',
       subscribeStatusChange: true,
-      orderType:
-          getOrderType(orderType: orderType, cartItems: cartItems, user: user),
+      orderType: getOrderType(
+        orderType: orderDocumentType.documentType.documentTypeCode,
+        cartItems: cartItems,
+        user: user,
+      ),
       orderReason: cartItems
               .map((cartItem) =>
                   cartItem.tenderContract.tenderOrderReason.getValue())
               .contains('730')
           ? '730'
-          : orderReason,
+          : orderDocumentType.orderReason,
       purchaseOrderType: user.role.type.purchaseOrderType,
       shippingCondition: data.greenDeliveryEnabled
           ? ShippingCondition.greenDelivery()

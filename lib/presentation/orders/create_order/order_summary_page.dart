@@ -247,19 +247,10 @@ class _SubmitContinueButton extends StatelessWidget {
           grandTotal: cartBloc.state.grandTotalBasedOnOrderType(
             isSpecial: isSpecialType,
           ),
-          orderType: context
-              .read<OrderDocumentTypeBloc>()
-              .state
-              .selectedOrderType
-              .documentType
-              .documentTypeCode,
+          orderDocumentType:
+              context.read<OrderDocumentTypeBloc>().state.selectedOrderType,
           data:
               context.read<AdditionalDetailsBloc>().state.additionalDetailsData,
-          orderReason: context
-              .read<OrderDocumentTypeBloc>()
-              .state
-              .selectedReason
-              .orderReason,
         ));
   }
 
@@ -982,7 +973,8 @@ class _ContainsSpecialOrderMaterialWarning extends StatelessWidget {
       return Padding(
         key: const Key('containsSpecialOrderTypeMaterialWarning'),
         padding: const EdgeInsets.all(8.0),
-        child: Row(crossAxisAlignment: CrossAxisAlignment.start,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Icon(
               Icons.info_outline_rounded,

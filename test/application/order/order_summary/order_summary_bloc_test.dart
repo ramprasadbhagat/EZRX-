@@ -11,8 +11,10 @@ import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/additional_details_data.dart';
+import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_order_response.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_order_response_message.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/order_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -197,8 +199,8 @@ void main() {
               salesOrganisation: SalesOrganisation.empty()
                   .copyWith(salesOrg: SalesOrg('2601')),
               data: AdditionalDetailsData.empty(),
-              orderType: '',
-              orderReason: '',
+              orderDocumentType: OrderDocumentType.empty()
+                  .copyWith(documentType: DocumentType(''), orderReason: ''),
               configs: SalesOrganisationConfigs.empty()
                   .copyWith(currency: Currency('PHP')),
             )).thenAnswer((value) async => Right(submitOrderResponse));
@@ -220,8 +222,8 @@ void main() {
             salesOrganisation:
                 SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601')),
             data: AdditionalDetailsData.empty(),
-            orderType: '',
-            orderReason: '',
+            orderDocumentType: OrderDocumentType.empty()
+                .copyWith(documentType: DocumentType(''), orderReason: ''), 
             config: SalesOrganisationConfigs.empty()
                 .copyWith(currency: Currency('PHP')),
           ),
@@ -259,8 +261,8 @@ void main() {
                   salesOrganisation: SalesOrganisation.empty()
                       .copyWith(salesOrg: SalesOrg('2601')),
                   data: AdditionalDetailsData.empty(),
-                  orderType: '',
-                  orderReason: '',
+                  orderDocumentType: OrderDocumentType.empty().copyWith(
+                      documentType: DocumentType(''), orderReason: ''), 
                   configs: SalesOrganisationConfigs.empty()
                       .copyWith(currency: Currency('PHP')),
                 ))
@@ -284,8 +286,8 @@ void main() {
             salesOrganisation:
                 SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601')),
             data: AdditionalDetailsData.empty(),
-            orderType: '',
-            orderReason: '',
+             orderDocumentType: OrderDocumentType.empty()
+                .copyWith(documentType: DocumentType(''), orderReason: ''), 
             config: SalesOrganisationConfigs.empty()
                 .copyWith(currency: Currency('PHP')),
           ),

@@ -21,9 +21,9 @@ class OrderSummaryEvent with _$OrderSummaryEvent {
     required CustomerCodeInfo customerCodeInfo,
     required SalesOrganisation salesOrganisation,
     required AdditionalDetailsData data,
-    required String orderType,
+    required OrderDocumentType orderDocumentType,
     required SalesOrganisationConfigs config,
-    required String orderReason,
+  
 
   }) = _SubmitOrder;
 }

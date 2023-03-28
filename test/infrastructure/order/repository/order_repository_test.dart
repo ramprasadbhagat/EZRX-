@@ -18,6 +18,7 @@ import 'package:ezrxmobile/domain/order/entities/additional_details_data.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item.dart';
+import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_material_info.dart';
@@ -397,8 +398,8 @@ void main() {
         customerCodeInfo: mockCustomerCodeInfo,
         salesOrganisation: mockSalesOrganisation,
         data: data,
-        orderType: 'ZPOR',
-        orderReason: '',
+        orderDocumentType: OrderDocumentType.empty()
+            .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''), 
         configs: SalesOrganisationConfigs.empty()
             .copyWith(currency: Currency('PHP')),
       );
@@ -447,8 +448,8 @@ void main() {
         salesOrganisation:
             SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601')),
         data: AdditionalDetailsData.empty(),
-        orderType: 'ZPOR',
-        orderReason: '',
+        orderDocumentType: OrderDocumentType.empty()
+            .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''), 
         configs: SalesOrganisationConfigs.empty()
             .copyWith(currency: Currency('PHP')),
       );
@@ -579,8 +580,8 @@ void main() {
         customerCodeInfo: mockCustomerCodeInfo,
         salesOrganisation: mockSalesOrganisation,
         data: data,
-        orderType: 'ZPOR',
-        orderReason: '',
+        orderDocumentType: OrderDocumentType.empty()
+            .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''), 
         configs: SalesOrganisationConfigs.empty()
             .copyWith(currency: Currency('PHP')),
       );
@@ -716,8 +717,8 @@ void main() {
         customerCodeInfo: mockCustomerCodeInfo,
         salesOrganisation: mockSalesOrganisation,
         data: data,
-        orderType: 'ZPOR',
-        orderReason: '',
+        orderDocumentType: OrderDocumentType.empty()
+            .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''), 
         configs: SalesOrganisationConfigs.empty()
             .copyWith(currency: Currency('PHP')),
       );
@@ -769,8 +770,8 @@ void main() {
         salesOrganisation:
             SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601')),
         data: AdditionalDetailsData.empty(),
-        orderType: 'ZPOR',
-        orderReason: '',
+         orderDocumentType: OrderDocumentType.empty()
+            .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''), 
         configs: SalesOrganisationConfigs.empty()
             .copyWith(currency: Currency('PHP')),
       );

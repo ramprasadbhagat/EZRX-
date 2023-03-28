@@ -16,6 +16,7 @@ import 'package:ezrxmobile/application/order/material_list/material_list_bloc.da
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
+import 'package:ezrxmobile/application/order/order_history_details/order_history_details_bloc.dart';
 import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
@@ -124,6 +125,10 @@ class ScanMaterialinfoBlocMock
 class AddToCartBlocMock extends MockBloc<AddToCartEvent, AddToCartState>
     implements AddToCartBloc {}
 
+class OrderHistoryDetailsBlocMock
+    extends MockBloc<OrderHistoryDetailsEvent, OrderHistoryDetailsState>
+    implements OrderHistoryDetailsBloc {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late MaterialListBloc materialListBlocMock;
@@ -144,6 +149,7 @@ void main() {
   late MaterialPriceDetailBloc mockMaterialPriceDetailBloc;
   late ScanMaterialInfoBloc mockScanMaterialInfoBloc;
   late AddToCartBloc mockAddToCartBloc;
+  late OrderHistoryDetailsBloc mockOrderHistoryDetailsBloc;
 
   final fakeMaterialNumber = MaterialNumber('000000000023168451');
   final fakeMaterialPrice = MaterialPrice(10.0);
@@ -223,7 +229,11 @@ void main() {
             create: ((context) => mockMaterialPriceDetailBloc)),
         BlocProvider<ComboDealListBloc>(
             create: ((context) => mockComboDealListBloc)),
-        BlocProvider<AddToCartBloc>(create: ((context) => mockAddToCartBloc)),
+        BlocProvider<AddToCartBloc>(
+          create: ((context) => mockAddToCartBloc),
+        ),
+        BlocProvider<OrderHistoryDetailsBloc>(
+            create: ((context) => mockOrderHistoryDetailsBloc)),
       ],
       child: child,
     );
@@ -248,6 +258,7 @@ void main() {
     mockMaterialPriceDetailBloc = MaterialPriceDetailBlocMock();
     mockScanMaterialInfoBloc = ScanMaterialinfoBlocMock();
     mockAddToCartBloc = AddToCartBlocMock();
+    mockOrderHistoryDetailsBloc = OrderHistoryDetailsBlocMock();
     when(() => userBlocMock.state).thenReturn(UserState.initial());
     when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
     when(() => customerCodeBlocMock.state)
@@ -257,6 +268,9 @@ void main() {
         .thenReturn(MaterialPriceState.initial());
     when(() => cartBlocMock.state).thenReturn(CartState.initial());
     when(() => mockAddToCartBloc.state).thenReturn(AddToCartState.initial());
+    when(() => mockOrderHistoryDetailsBloc.state)
+        .thenReturn(OrderHistoryDetailsState.initial());
+
     when(() => mockMaterialFilterBloc.state).thenReturn(
       MaterialFilterState.initial().copyWith(
         selectedMaterialFilter:
