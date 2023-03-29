@@ -232,8 +232,8 @@ void main() {
       () async {
         const input = 'internal_sales_rep';
         final roleType = RoleType(input);
-        final result = roleType.loginUserType;
-        expect(result, 'salesRep');
+        final result = roleType.isSalesRepRole;
+        expect(result, true);
       },
     );
 
@@ -242,8 +242,8 @@ void main() {
       () async {
         const input = 'external_sales_rep';
         final roleType = RoleType(input);
-        final result = roleType.loginUserType;
-        expect(result, 'salesRep');
+        final result = roleType.isSalesRepRole;
+        expect(result, true);
       },
     );
 
@@ -252,8 +252,8 @@ void main() {
       () async {
         const input = 'client_user';
         final roleType = RoleType(input);
-        final result = roleType.loginUserType;
-        expect(result, 'client');
+        final result = roleType.isCustomer;
+        expect(result, true);
       },
     );
 
@@ -326,7 +326,7 @@ void main() {
       () async {
         const input = 'internal_sales_rep';
         final salesRep = RoleType(input);
-        final result = salesRep.isSalesRep;
+        final result = salesRep.isSalesRepRole;
         expect(result, true);
       },
     );
@@ -336,7 +336,7 @@ void main() {
       () async {
         const input = 'external_sales_rep';
         final salesRep = RoleType(input);
-        final result = salesRep.isSalesRep;
+        final result = salesRep.isSalesRepRole;
         expect(result, true);
       },
     );
@@ -346,7 +346,7 @@ void main() {
       () async {
         const input = 'dummy';
         final salesRep = RoleType(input);
-        final result = salesRep.isSalesRep;
+        final result = salesRep.isSalesRepRole;
         expect(result, false);
       },
     );

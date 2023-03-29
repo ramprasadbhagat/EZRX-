@@ -25,7 +25,7 @@ class OrderHistoryDetailsRepository implements IOrderHistoryDetailsRepository {
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
-        final result = user.role.type.isSalesRep
+        final result = user.role.type.isSalesRepRole
             ? await localDataSource.getOrderHistoryDetailsForSalesRep()
             : await localDataSource.getOrderHistoryDetails();
 
@@ -35,17 +35,15 @@ class OrderHistoryDetailsRepository implements IOrderHistoryDetailsRepository {
       }
     }
     try {
-      final orderHistoryDetailsList = user.role.type.isSalesRep
+      final orderHistoryDetailsList = user.role.type.isSalesRepRole
           ? await orderHistoryDetailsRemoteDataSource
               .getOrderHistoryDetailsForSalesRep(
-              loginUserType: user.role.type.loginUserType,
               companyName: '',
               orderId: orderHistoryItem.orderNumber.getOrCrash(),
               language: '',
               userName: user.username.getOrCrash(),
             )
           : await orderHistoryDetailsRemoteDataSource.getOrderHistoryDetails(
-              loginUserType: user.role.type.loginUserType,
               companyName: '',
               orderId: orderHistoryItem.orderNumber.getOrCrash(),
               language: '',

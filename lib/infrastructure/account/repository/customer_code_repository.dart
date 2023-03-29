@@ -42,7 +42,7 @@ class CustomerCodeRepository implements ICustomerCodeRepository {
     final salesOrg = salesOrganisation.salesOrg.getOrCrash();
     if (config.appFlavor == Flavor.mock) {
       try {
-        final customerCodeInfo = user.role.type.isSalesRep
+        final customerCodeInfo = user.role.type.isSalesRepRole
             ? await localCustomerCodeDataSource.getSalesRepCustomerCodeList()
             : await localCustomerCodeDataSource.getCustomerCodeList();
 
@@ -52,7 +52,7 @@ class CustomerCodeRepository implements ICustomerCodeRepository {
       }
     }
     try {
-      final customerCodeInfo = user.role.type.isSalesRep
+      final customerCodeInfo = user.role.type.isSalesRepRole
           ? await remoteDataSource.getSalesRepCustomerCodeList(
               salesOrg: salesOrg,
               customerCode: customerCode,

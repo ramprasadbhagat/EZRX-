@@ -72,7 +72,7 @@ class AdditionalDetails extends StatelessWidget {
                 )
               : const SizedBox.shrink(),
           config.enableCollectiveNumber &&
-                  context.read<UserBloc>().state.user.role.type.isSalesRep
+                  context.read<UserBloc>().state.user.role.type.isSalesRepRole
               ? _TextFormField(
                   labelText: 'Collective Number',
                   keyText: 'collectiveNumberKey',

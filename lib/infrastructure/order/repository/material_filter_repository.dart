@@ -50,7 +50,7 @@ class MaterialFilterRepository implements IMaterialFilterRepository {
       }
     } else {
       try {
-        final filterMaterialData = user.role.type.isSalesRep
+        final filterMaterialData = user.role.type.isSalesRepRole
             ? await filterMaterialRemoteDataSource.getFiltersSalesRep(
                 salesOrganisation: salesOrg,
                 soldToCustomerCode: customerCode,

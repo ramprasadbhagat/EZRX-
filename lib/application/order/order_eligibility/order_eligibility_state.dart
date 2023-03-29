@@ -69,7 +69,7 @@ class OrderEligibilityState with _$OrderEligibilityState {
   }
 
   bool get hasPrincipal {
-    return user.role.type.isSalesRep
+    return user.role.type.isSalesRepRole
         ? cartItems.where((element) => element.hasSalesRepPrincipal).isNotEmpty
         : cartItems.where((element) => element.hasClientPrincipal).isNotEmpty;
   }

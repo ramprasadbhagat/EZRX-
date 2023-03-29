@@ -272,16 +272,6 @@ bool roleCanLoginOnBehalfByZPAdmin(String userRoleType) {
   }
 }
 
-String logInUserType(String roleType) {
-  switch (roleType) {
-    case 'internal_sales_rep':
-    case 'external_sales_rep':
-      return 'salesRep';
-    default:
-      return 'client';
-  }
-}
-
 String roleOrderType(String roleType) {
   switch (roleType) {
     case 'internal_sales_rep':

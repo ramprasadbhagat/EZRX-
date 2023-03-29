@@ -31,7 +31,7 @@ class MaterialBundleListRepository implements IMaterialBundleListRepository {
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
-        final materialBundleListData = user.role.type.isSalesRep
+        final materialBundleListData = user.role.type.isSalesRepRole
             ? await materialBundleListLocalDatasource
                 .getMaterialBundleListForSalesRep()
             : await materialBundleListLocalDatasource.getMaterialBundleList();
@@ -42,7 +42,7 @@ class MaterialBundleListRepository implements IMaterialBundleListRepository {
       }
     }
     try {
-      final bundleInfo = user.role.type.isSalesRep
+      final bundleInfo = user.role.type.isSalesRepRole
           ? await materialBundleListRemoteDatasource
               .getMaterialBundleListForSalesRep(
               userName: user.username.getOrCrash(),

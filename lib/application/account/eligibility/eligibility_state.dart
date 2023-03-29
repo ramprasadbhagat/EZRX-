@@ -25,7 +25,7 @@ class EligibilityState with _$EligibilityState {
   bool get isReturnsEnable {
     if (user.disableReturns) return false;
 
-    if (user.role.type.isSalesRep && salesOrgConfigs.disableReturnsAccessSR) {
+    if (user.role.type.isSalesRepRole && salesOrgConfigs.disableReturnsAccessSR) {
       return false;
     }
 
@@ -44,7 +44,7 @@ class EligibilityState with _$EligibilityState {
         // 2. Sample item
         customerCodeInfo.customerGrp4.canOrderCovidMaterial ||
         // 3. PH Covid tab
-        (user.role.type.isSalesRep && salesOrganisation.salesOrg.isPH);
+        (user.role.type.isSalesRepRole && salesOrganisation.salesOrg.isPH);
   }
 
   bool get isOrderTypeEnable {
@@ -67,7 +67,7 @@ class EligibilityState with _$EligibilityState {
     // Condition 1: user role type must be SalesRep
     // Condition 2: If SG user then pickAndPack = "include"
     // Condition 3: If TH,MY,TW user then pickAndPack = "include" (isOrderTypeEnable already covers this so can reuse that)
-    return user.role.type.isSalesRep &&
+    return user.role.type.isSalesRepRole &&
             (salesOrganisation.salesOrg.isSg || isOrderTypeEnable)
         ? 'include'
         : '';
@@ -75,7 +75,7 @@ class EligibilityState with _$EligibilityState {
 
   String get getPNPValueCovidMaterial {
     // Condition 1: For Covid Tab Materials and Non-SG user, pickAndPack = "only"
-    return user.role.type.isSalesRep && !salesOrganisation.salesOrg.isSg
+    return user.role.type.isSalesRepRole && !salesOrganisation.salesOrg.isSg
         ? 'only'
         : '';
   }
@@ -87,19 +87,19 @@ class EligibilityState with _$EligibilityState {
   String get getPNPValueBonusMaterialSearch {
     // Condition 1: user role type must be SalesRep
     // Condition 2: If SG and MY user, then pickAndPack = "include"
-    return user.role.type.isSalesRep &&
+    return user.role.type.isSalesRepRole &&
             (salesOrganisation.salesOrg.isSg || salesOrganisation.salesOrg.isMY)
         ? 'include'
         : '';
   }
 
   bool get isPaymentTermDescriptionEnable {
-    return !user.role.type.isSalesRep &&
+    return !user.role.type.isSalesRepRole &&
         !salesOrgConfigs.disablePaymentTermsDisplay;
   }
 
   bool get validateOutOfStockValue {
-    return user.role.type.isSalesRep && salesOrgConfigs.oosValue.isOosValueZero;
+    return user.role.type.isSalesRepRole && salesOrgConfigs.oosValue.isOosValueZero;
   }
 
   bool get doNotAllowOutOfStockMaterials {
@@ -107,25 +107,25 @@ class EligibilityState with _$EligibilityState {
         (salesOrgConfigs.addOosMaterials && validateOutOfStockValue));
   }
 
-  bool get isBonusOverrideEnable => user.role.type.isSalesRep
+  bool get isBonusOverrideEnable => user.role.type.isSalesRepRole
       ? user.hasBonusOverride
       : salesOrgConfigs.priceOverride;
 
   bool get isSalesRepAndBonusEligible =>
       salesOrganisation.salesOrg.isMY &&
-      user.role.type.isSalesRep &&
+      user.role.type.isSalesRepRole &&
       user.hasBonusOverride;
 
   bool get isOrderSummaryPPEDisclaimerEnable {
-    return salesOrganisation.salesOrg.isSg && !user.role.type.isSalesRep;
+    return salesOrganisation.salesOrg.isSg && !user.role.type.isSalesRepRole;
   }
 
   bool get isBillToInfo =>
       customerCodeInfo.hasBillToInfo && salesOrgConfigs.enableBillTo;
 
   bool get isZDP8Override =>
-      user.role.type.isSalesRep && salesOrgConfigs.enableZDP8Override;
-  bool get isPriceOverrideEnable => user.role.type.isSalesRep
+      user.role.type.isSalesRepRole && salesOrgConfigs.enableZDP8Override;
+  bool get isPriceOverrideEnable => user.role.type.isSalesRepRole
       ? user.hasPriceOverride
       : salesOrgConfigs.priceOverride;
 
@@ -183,5 +183,5 @@ class EligibilityState with _$EligibilityState {
   // 2. sales org config OrderType feature toggle enable
   //============================================================
   bool get isOrderTypeEligible =>
-      user.role.type.isSalesRep && !salesOrgConfigs.disableOrderType;
+      user.role.type.isSalesRepRole && !salesOrgConfigs.disableOrderType;
 }

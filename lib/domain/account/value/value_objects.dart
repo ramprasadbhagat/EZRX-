@@ -118,13 +118,9 @@ class RoleType extends ValueObject<String> {
     return isAdmin(value.getOrElse(() => ''));
   }
 
-  String get loginUserType {
-    return logInUserType(value.getOrElse(() => ''));
-  }
+  
 
-  bool get isSalesRep {
-    return loginUserType == 'salesRep';
-  }
+ 
 
   String get purchaseOrderType {
     return roleOrderType(value.getOrElse(() => ''));
@@ -194,7 +190,7 @@ class RoleType extends ValueObject<String> {
       isReturnAdmin ||
       isZPAdmin ||
       isClientUser ||
-      isSalesRep ||
+      isSalesRepRole ||
       isReturnRequestor;
 
   const RoleType._(this.value);

@@ -46,7 +46,7 @@ class MaterialListRepository implements IMaterialListRepository {
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
-        final materialListData = user.role.type.isSalesRep
+        final materialListData = user.role.type.isSalesRepRole
             ? await materialListLocalDataSource.getMaterialListSalesRep()
             : await materialListLocalDataSource.getMaterialList();
 
@@ -57,7 +57,7 @@ class MaterialListRepository implements IMaterialListRepository {
     }
 
     try {
-      final materialListData = user.role.type.isSalesRep
+      final materialListData = user.role.type.isSalesRepRole
           ? await materialListRemoteDataSource.getMaterialListSalesRep(
               userName: user.username.getOrCrash(),
               salesOrgCode: salesOrganisation.salesOrg.getOrCrash(),
@@ -121,7 +121,7 @@ class MaterialListRepository implements IMaterialListRepository {
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
-        final materialListData = user.role.type.isSalesRep
+        final materialListData = user.role.type.isSalesRepRole
             ? await materialListLocalDataSource.searchMaterialListSalesRep()
             : await materialListLocalDataSource.searchMaterialList();
 
@@ -132,7 +132,7 @@ class MaterialListRepository implements IMaterialListRepository {
     }
 
     try {
-      final materialListData = user.role.type.isSalesRep
+      final materialListData = user.role.type.isSalesRepRole
           ? await materialListRemoteDataSource.searchMaterialListSalesRep(
               userName: user.username.getOrCrash(),
               pickAndPack: pickAndPack,
@@ -185,7 +185,7 @@ class MaterialListRepository implements IMaterialListRepository {
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
-        final materialListData = user.role.type.isSalesRep
+        final materialListData = user.role.type.isSalesRepRole
             ? await materialListLocalDataSource.getMaterialListSalesRep()
             : await materialListLocalDataSource.getMaterialList();
 
@@ -200,7 +200,7 @@ class MaterialListRepository implements IMaterialListRepository {
     final validPrinciples = principles.map((e) => e.padLeft(10, '0')).toList();
 
     try {
-      final materialListData = user.role.type.isSalesRep
+      final materialListData = user.role.type.isSalesRepRole
           ? await materialListRemoteDataSource.getComboDealMaterialsForSaleRep(
               salesOrgCode: salesOrganisation.salesOrg.getOrCrash(),
               customerCode: customerCodeInfo.customerCodeSoldTo,

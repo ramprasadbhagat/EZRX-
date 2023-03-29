@@ -114,7 +114,6 @@ void main() {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
       when(() => orderHistoryDetailsRemoteDataSource
               .getOrderHistoryDetailsForSalesRep(
-                  loginUserType: 'salesRep',
                   companyName: '',
                   orderId: '02001949952333',
                   language: '',
@@ -140,7 +139,6 @@ void main() {
       when(
         () => orderHistoryDetailsRemoteDataSource
             .getOrderHistoryDetailsForSalesRep(
-                loginUserType: mockUser.role.type.loginUserType,
                 userName: '',
                 orderId: '',
                 language: '',
@@ -161,7 +159,6 @@ void main() {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
       when(
         () => orderHistoryDetailsRemoteDataSource.getOrderHistoryDetails(
-            loginUserType: mockUser.role.type.loginUserType,
             companyName: '',
             orderId: '200012',
             language: ''),
@@ -180,7 +177,6 @@ void main() {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
       when(
         () => orderHistoryDetailsRemoteDataSource.getOrderHistoryDetails(
-            loginUserType: mockUser.role.type.loginUserType,
             companyName: '',
             orderId: mockOrderHistoryItem.orderNumber.getOrDefaultValue(''),
             language: ''),

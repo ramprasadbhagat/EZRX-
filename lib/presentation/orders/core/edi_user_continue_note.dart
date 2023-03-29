@@ -48,7 +48,7 @@ class EdiUserContinueNote extends StatelessWidget {
     final eligibiityState = context.read<EligibilityBloc>().state;
 
     return eligibiityState.customerCodeInfo.status.isEDI &&
-        eligibiityState.user.role.type.isSalesRep &&
+        eligibiityState.user.role.type.isSalesRepRole &&
         !orderType.isSpecialOrderType;
   }
 }

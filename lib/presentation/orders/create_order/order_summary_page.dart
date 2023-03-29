@@ -215,7 +215,7 @@ class _SubmitContinueButton extends StatelessWidget {
     final eligibiityState = context.read<EligibilityBloc>().state;
 
     return eligibiityState.customerCodeInfo.status.isEDI
-        ? eligibiityState.user.role.type.isSalesRep &&
+        ? eligibiityState.user.role.type.isSalesRepRole &&
             orderType.isSpecialOrderType
         : true;
   }
@@ -582,7 +582,7 @@ class _Stepper extends StatelessWidget {
 
 bool _isDisclamerPresent(BuildContext context) {
   return context.read<SalesOrgBloc>().state.salesOrganisation.salesOrg.isSg &&
-      !context.read<UserBloc>().state.user.role.type.isSalesRep;
+      !context.read<UserBloc>().state.user.role.type.isSalesRepRole;
 }
 
 List<Step> _getSteps({

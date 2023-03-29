@@ -38,7 +38,7 @@ class BonusMaterialRepository implements IBonusMaterialRepository {
     if (config.appFlavor == Flavor.mock) {
       try {
         final List<MaterialInfo> bonusMaterial;
-        bonusMaterial = user.role.type.isSalesRep
+        bonusMaterial = user.role.type.isSalesRepRole
             ? await localDataSource.customerMaterialsForSalesRep()
             : await localDataSource.getadditionalBonus();
 
@@ -52,7 +52,7 @@ class BonusMaterialRepository implements IBonusMaterialRepository {
 
     try {
       final List<MaterialInfo> bonusMaterial;
-      bonusMaterial = user.role.type.isSalesRep
+      bonusMaterial = user.role.type.isSalesRepRole
           ? await remoteDataSource.customerMaterialsForSalesRep(
               gimmickMaterial: configs.enableGimmickMaterial,
               pickandpack: pickAndPack,

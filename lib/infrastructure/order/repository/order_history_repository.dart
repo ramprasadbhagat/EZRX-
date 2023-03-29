@@ -41,7 +41,7 @@ class OrderHistoryRepository implements IOrderHistoryRepository {
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
-        final result = user.role.type.isSalesRep
+        final result = user.role.type.isSalesRepRole
             ? await localDataSource.getOrderHistoryForSalesRep()
             : await localDataSource.getOrderHistory();
 
@@ -52,9 +52,8 @@ class OrderHistoryRepository implements IOrderHistoryRepository {
     }
 
     try {
-      final orderHistoryItemList = user.role.type.isSalesRep
+      final orderHistoryItemList = user.role.type.isSalesRepRole
           ? await orderHistoryRemoteDataSource.getOrderHistorySalesRep(
-              loginUserType: user.role.type.loginUserType,
               shipTo: shipTo.shipToCustomerCode,
               soldTo: soldTo.customerCodeSoldTo,
               pageSize: pageSize,
@@ -67,7 +66,6 @@ class OrderHistoryRepository implements IOrderHistoryRepository {
                   OrderHistoryFilterDto.fromDomain(orderHistoryFilter).toJson(),
             )
           : await orderHistoryRemoteDataSource.getOrderHistory(
-              loginUserType: user.role.type.loginUserType,
               shipTo: shipTo.shipToCustomerCode,
               soldTo: soldTo.customerCodeSoldTo,
               pageSize: pageSize,

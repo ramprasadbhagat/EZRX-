@@ -89,7 +89,7 @@ void main() {
               searchKey: '1763',
               selectedMaterialFilter: MaterialFilter.empty(),
               pickAndPack: 'incldue',
-              isForFoc: mockUser.role.type.isSalesRep ? false : true,
+              isForFoc: mockUser.role.type.isSalesRepRole ? false : true,
             )).thenAnswer(
           (invocation) async => Right(materialListMock),
         );
@@ -146,7 +146,7 @@ void main() {
               searchKey: '1234',
               selectedMaterialFilter: MaterialFilter.empty(),
               pickAndPack: 'only',
-              isForFoc: mockUser.role.type.isSalesRep ? false : true,
+              isForFoc: mockUser.role.type.isSalesRepRole ? false : true,
             )).thenAnswer(
           (invocation) async => const Left(ApiFailure.other('fake-error')),
         );
@@ -215,7 +215,7 @@ void main() {
               orderBy: 'materialDescription_asc',
               searchKey: '',
               pickAndPack: 'exclude',
-              isForFoc: mockUser.role.type.isSalesRep ? false : true,
+              isForFoc: mockUser.role.type.isSalesRepRole ? false : true,
               selectedMaterialFilter: MaterialFilter.empty(),
               orderDocumentType: OrderDocumentType.empty(),
             )).thenAnswer(
@@ -266,8 +266,8 @@ void main() {
               selectedMaterialFilter: MaterialFilter.empty(),
               orderDocumentType: OrderDocumentType.empty(),
               pickAndPack:
-                  mockUser.role.type.isSalesRep ? 'incldue' : 'exclude',
-              isForFoc: mockUser.role.type.isSalesRep ? false : true,
+                  mockUser.role.type.isSalesRepRole ? 'incldue' : 'exclude',
+              isForFoc: mockUser.role.type.isSalesRepRole ? false : true,
             )).thenAnswer(
           (invocation) async => Right(materialListMock),
         );
@@ -328,7 +328,7 @@ void main() {
               orderBy: 'materialDescription_asc',
               searchKey: '',
               pickAndPack: 'only',
-              isForFoc: mockUser.role.type.isSalesRep ? false : true,
+              isForFoc: mockUser.role.type.isSalesRepRole ? false : true,
               orderDocumentType: OrderDocumentType.empty(),
               selectedMaterialFilter: MaterialFilter.empty(),
             )).thenAnswer(
@@ -343,7 +343,7 @@ void main() {
               pageSize: _defaultPageSize,
               offset: materialListMock.length,
               pickAndPack: 'only',
-              isForFoc: mockUser.role.type.isSalesRep ? false : true,
+              isForFoc: mockUser.role.type.isSalesRepRole ? false : true,
               orderBy: 'materialDescription_asc',
               searchKey: '',
               selectedMaterialFilter: MaterialFilter.empty(),
@@ -414,7 +414,7 @@ void main() {
               orderBy: 'materialDescription_asc',
               searchKey: '',
               pickAndPack: 'only',
-              isForFoc: mockUser.role.type.isSalesRep ? false : true,
+              isForFoc: mockUser.role.type.isSalesRepRole ? false : true,
               selectedMaterialFilter: MaterialFilter.empty(),
               orderDocumentType: OrderDocumentType.empty(),
             )).thenAnswer(
@@ -431,7 +431,7 @@ void main() {
               orderBy: 'materialDescription_asc',
               searchKey: '',
               pickAndPack: 'only',
-              isForFoc: mockUser.role.type.isSalesRep ? false : true,
+              isForFoc: mockUser.role.type.isSalesRepRole ? false : true,
               selectedMaterialFilter: MaterialFilter.empty(),
               orderDocumentType: OrderDocumentType.empty(),
             )).thenAnswer(

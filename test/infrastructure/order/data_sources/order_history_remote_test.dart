@@ -83,7 +83,6 @@ void main() {
           shipTo: 'fake-shipto',
           soldTo: 'fake-soldto',
           sort: 'ASC',
-          loginUserType: 'fake-loginusertype',
           filterQuery: {},
         );
 
@@ -134,7 +133,6 @@ void main() {
           shipTo: 'fake-shipto',
           soldTo: 'fake-soldto',
           sort: 'ASC',
-          loginUserType: 'fake-loginusertype',
           filterQuery: {},
         );
 
@@ -178,7 +176,6 @@ void main() {
           shipTo: 'fake-shipto',
           soldTo: 'fake-soldto',
           sort: 'ASC',
-          loginUserType: 'fake-loginusertype',
           filterQuery: {},
         ).onError((error, _) async {
           expect(error, isA<ServerException>());
@@ -224,7 +221,6 @@ void main() {
           shipTo: 'fake-shipto',
           soldTo: 'fake-soldto',
           sort: 'ASC',
-          loginUserType: 'fake-loginusertype',
           filterQuery: {},
         ).onError((error, _) async {
           expect(error, isA<ServerException>());

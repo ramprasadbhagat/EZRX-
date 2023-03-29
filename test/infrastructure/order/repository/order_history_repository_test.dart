@@ -164,14 +164,7 @@ void main() {
 
       when(
         () => orderHistoryRemoteDataSource.getOrderHistorySalesRep(
-          loginUserType: mockUser
-              .copyWith(
-                role:
-                    Role.empty().copyWith(type: RoleType('external_sales_rep')),
-              )
-              .role
-              .type
-              .loginUserType,
+         
           shipTo: mockShipToInfo.shipToCustomerCode,
           soldTo: mockCustomerCodeInfo.customerCodeSoldTo,
           pageSize: 10,
@@ -235,7 +228,6 @@ void main() {
                   DateTimeStringValue(getDateStringByDateTime(fakeFromDate))
                       .apiDateTimeFormat,
             },
-            loginUserType: mockUser.role.type.loginUserType,
             soldTo: mockCustomerCodeInfo.customerCodeSoldTo,
             shipTo: mockShipToInfo.shipToCustomerCode,
             pageSize: 1,
@@ -276,7 +268,6 @@ void main() {
             'materialSearch': 'fake_materialSearch',
             'principalSearch': 'fake_principalSearch',
           },
-          loginUserType: mockUser.role.type.loginUserType,
           soldTo: mockCustomerCodeInfo.customerCodeSoldTo,
           shipTo: mockShipToInfo.shipToCustomerCode,
           pageSize: 10,
@@ -329,7 +320,6 @@ void main() {
                 DateTimeStringValue(getDateStringByDateTime(fakeFromDate))
                     .apiDateTimeFormat,
           },
-          loginUserType: mockUser.role.type.loginUserType,
           soldTo: mockCustomerCodeInfo.customerCodeSoldTo,
           shipTo: mockShipToInfo.shipToCustomerCode,
           pageSize: 1,

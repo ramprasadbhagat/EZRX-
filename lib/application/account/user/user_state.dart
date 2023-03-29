@@ -15,7 +15,7 @@ class UserState with _$UserState {
       );
 
   bool get haveSalesOrganisation => user.userSalesOrganisations.isNotEmpty;
-  bool get isSalesRep => user.role.type.isSalesRep;
+  bool get isSalesRep => user.role.type.isSalesRepRole;
   bool get isNotEmpty => user != User.empty();
   String get userRoleName => user.role.name;
   FullName get userFullName => user.fullName;

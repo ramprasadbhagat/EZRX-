@@ -24,7 +24,6 @@ class OrderHistoryRemoteDataSource {
   });
 
   Future<OrderHistory> getOrderHistory({
-    required String loginUserType,
     required String soldTo,
     required String shipTo,
     required int pageSize,
@@ -71,7 +70,6 @@ class OrderHistoryRemoteDataSource {
   }
 
   Future<OrderHistory> getOrderHistorySalesRep({
-    required String loginUserType,
     required String soldTo,
     required String shipTo,
     required int pageSize,

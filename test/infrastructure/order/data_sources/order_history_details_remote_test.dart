@@ -73,7 +73,6 @@ void main() {
         final result = await remoteDataSource.getOrderHistoryDetails(
             companyName: 'fake-companyname',
             language: 'fake-language',
-            loginUserType: 'fake-loginusertype',
             orderId: 'fake-order');
 
         expect(
@@ -113,7 +112,6 @@ void main() {
         final result = await remoteDataSource.getOrderHistoryDetailsForSalesRep(
           companyName: 'fake-companyname',
           language: 'fake-language',
-          loginUserType: 'fake-loginusertype',
           orderId: 'fake-order',
           userName: 'fake-username',
         );
@@ -152,7 +150,6 @@ void main() {
             .getOrderHistoryDetailsForSalesRep(
           companyName: 'fake-companyname',
           language: 'fake-language',
-          loginUserType: 'fake-loginusertype',
           orderId: 'fake-order',
           userName: 'fake-username',
         )
@@ -194,7 +191,6 @@ void main() {
             .getOrderHistoryDetailsForSalesRep(
           companyName: 'fake-companyname',
           language: 'fake-language',
-          loginUserType: 'fake-loginusertype',
           orderId: 'fake-order',
           userName: 'fake-username',
         )

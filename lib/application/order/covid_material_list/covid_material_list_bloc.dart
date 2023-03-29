@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
@@ -61,7 +60,7 @@ class CovidMaterialListBloc
           orderBy: 'materialDescription_asc',
           searchKey: state.searchKey.getValue(),
           pickAndPack: e.pickAndPack,
-          isForFoc: e.user.role.type.isSalesRep ? false : true,
+          isForFoc: !e.user.role.type.isSalesRepRole,
           selectedMaterialFilter: MaterialFilter.empty(),
           orderDocumentType: OrderDocumentType.empty(),
         );
@@ -106,7 +105,7 @@ class CovidMaterialListBloc
           orderBy: 'materialDescription_asc',
           searchKey: state.searchKey.getValue(),
           pickAndPack: e.pickAndPack,
-          isForFoc: e.user.role.type.isSalesRep ? false : true,
+          isForFoc: !e.user.role.type.isSalesRepRole,
           selectedMaterialFilter: MaterialFilter.empty(),
           orderDocumentType: OrderDocumentType.empty(),
         );
@@ -150,7 +149,7 @@ class CovidMaterialListBloc
           selectedMaterialFilter: e.selectedMaterialFilter,
 
           pickAndPack: e.pickAndPack,
-          isForFoc: e.user.role.type.isSalesRep ? false : true,
+          isForFoc: !e.user.role.type.isSalesRepRole,
         );
         await failureOrSuccess.fold(
           (failure) async {

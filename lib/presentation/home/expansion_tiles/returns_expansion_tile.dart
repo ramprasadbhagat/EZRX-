@@ -90,7 +90,7 @@ class ReturnsExpansionTile extends StatelessWidget {
         returnSummaryTile,
       ];
     } else if (roleType.isClientUser ||
-        roleType.isSalesRep ||
+        roleType.isSalesRepRole ||
         roleType.isReturnRequestor) {
       return [
         requestReturnTile,

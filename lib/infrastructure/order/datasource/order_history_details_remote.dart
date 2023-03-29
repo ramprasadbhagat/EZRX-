@@ -22,7 +22,6 @@ class OrderHistoryDetailsRemoteDataSource {
   });
 
   Future<OrderHistoryDetails> getOrderHistoryDetails({
-    required String loginUserType,
     required String companyName,
     required String orderId,
     required String language,
@@ -59,7 +58,6 @@ class OrderHistoryDetailsRemoteDataSource {
   }
 
   Future<OrderHistoryDetails> getOrderHistoryDetailsForSalesRep({
-    required String loginUserType,
     required String companyName,
     required String orderId,
     required String language,
