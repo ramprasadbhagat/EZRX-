@@ -79,13 +79,14 @@ class SalesOrganisationConfigsDtoAdapter
       enableComboDeals: fields[151] == null ? false : fields[151] as bool,
       greenDeliveryUserRole: fields[152] == null ? 0 : fields[152] as int,
       comboDealsUserRole: fields[153] == null ? 0 : fields[153] as int,
+      enableGMN: fields[154] == null ? false : fields[154] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_SalesOrganisationConfigsDto obj) {
     writer
-      ..writeByte(54)
+      ..writeByte(55)
       ..writeByte(100)
       ..write(obj.disableProcessingStatus)
       ..writeByte(101)
@@ -192,6 +193,8 @@ class SalesOrganisationConfigsDtoAdapter
       ..write(obj.greenDeliveryUserRole)
       ..writeByte(153)
       ..write(obj.comboDealsUserRole)
+      ..writeByte(154)
+      ..write(obj.enableGMN)
       ..writeByte(7)
       ..write(obj.principalList);
   }
@@ -274,6 +277,7 @@ _$_SalesOrganisationConfigsDto _$$_SalesOrganisationConfigsDtoFromJson(
       enableComboDeals: json['enableComboDeals'] as bool? ?? false,
       greenDeliveryUserRole: json['greenDeliveryUserRole'] as int? ?? 0,
       comboDealsUserRole: json['comboDealsUserRole'] as int? ?? 0,
+      enableGMN: json['enableGMN'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
@@ -334,4 +338,5 @@ Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
       'enableComboDeals': instance.enableComboDeals,
       'greenDeliveryUserRole': instance.greenDeliveryUserRole,
       'comboDealsUserRole': instance.comboDealsUserRole,
+      'enableGMN': instance.enableGMN,
     };

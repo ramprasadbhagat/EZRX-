@@ -145,6 +145,7 @@ void main() {
     isFOCMaterial: false,
     quantity: 0,
     remarks: '',
+    genericMaterialName: '',
   );
 
   setUpAll(() async {
@@ -444,6 +445,7 @@ void main() {
             isFOCMaterial: false,
             quantity: 0,
             remarks: '',
+            genericMaterialName: '',
           )
         ],
       ));
@@ -856,7 +858,8 @@ void main() {
       );
       await tester.pump();
 
-      final findTextField = find.byKey(const Key('covidMaterialSearchField$fakeKey'));
+      final findTextField =
+          find.byKey(const Key('covidMaterialSearchField$fakeKey'));
       await tester.enterText(findTextField, fakeKey);
       await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pump(const Duration(seconds: 3));

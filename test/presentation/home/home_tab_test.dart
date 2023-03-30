@@ -134,6 +134,7 @@ void main() {
     defaultMaterialDescription: '',
     isFOCMaterial: false,
     remarks: '',
+    genericMaterialName: '',
   );
   final fakeCustomerCodeInfo = CustomerCodeInfo.empty().copyWith(
     customerCodeSoldTo: 'fake-1234',

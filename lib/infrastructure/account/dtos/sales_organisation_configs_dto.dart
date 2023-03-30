@@ -176,6 +176,9 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
     @JsonKey(name: 'comboDealsUserRole', defaultValue: 0)
     @HiveField(153, defaultValue: 0)
         required int comboDealsUserRole,
+    @JsonKey(name: 'enableGMN', defaultValue: false)
+    @HiveField(154, defaultValue: false)
+        required bool enableGMN,
   }) = _SalesOrganisationConfigsDto;
 
   factory SalesOrganisationConfigsDto.fromDomain(
@@ -236,6 +239,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       disableReturnsAccess: configs.disableReturnsAccess,
       enableComboDeals: configs.enableComboDeals,
       comboDealsUserRole: configs.comboDealsUserRole.getOrDefaultValue(0),
+      enableGMN:configs.enableGMN,
     );
   }
 
@@ -295,6 +299,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       disableReturnsAccess: disableReturnsAccess,
       enableComboDeals: enableComboDeals,
       comboDealsUserRole: ComboDealUserRole(comboDealsUserRole),
+      enableGMN: enableGMN,
     );
   }
 

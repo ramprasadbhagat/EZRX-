@@ -121,6 +121,7 @@ const MaterialDto _emptyConstMaterialDto = MaterialDto(
   isFOCMaterial: false,
   quantity: 0,
   remarks: '',
+  genericMaterialName: '',
 );
 
 const PriceDto _emptyPriceDto = PriceDto(
@@ -200,6 +201,7 @@ const SalesOrganisationConfigsDto _emptySalesOrganisationConfigsDto =
   enableComboDeals: false,
   greenDeliveryUserRole: 0,
   comboDealsUserRole: 0,
+  enableGMN:false,
 );
 
 const BundleDto _emptyBundleDto = BundleDto(

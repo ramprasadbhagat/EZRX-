@@ -151,12 +151,12 @@ void main() {
         PriceAggregate.empty().copyWith(
           quantity: 2,
           materialInfo: MaterialInfo.empty().copyWith(
-            materialNumber: MaterialNumber('000000000023168451'),
-            materialDescription: ' Triglyceride Mosys D',
-            principalData: PrincipalData.empty().copyWith(
-              principalName: PrincipalName('台灣拜耳股份有限公司'),
-            ),
-          ),
+              materialNumber: MaterialNumber('000000000023168451'),
+              materialDescription: ' Triglyceride Mosys D',
+              principalData: PrincipalData.empty().copyWith(
+                principalName: PrincipalName('台灣拜耳股份有限公司'),
+              ),
+              genericMaterialName: "Dostinex Tab 0.5mg 2's (Program stock)"),
         ),
       ];
       cartMaterialItem = CartItem(
@@ -238,10 +238,20 @@ void main() {
         await tester.pumpWidget(getWidget());
         await tester.pump();
 
-        expect(find.byKey(Key(
-            'pricebefore${cartMaterialItem.materials.first.getMaterialNumber.getOrDefaultValue('')}')), findsNothing);
+        expect(
+            find.byKey(Key(
+                'pricebefore${cartMaterialItem.materials.first.getMaterialNumber.getOrDefaultValue('')}')),
+            findsNothing);
       },
     );
+    testWidgets('Test enableGMN true ', (tester) async {
+      when(() => salesOrgBloc.state).thenReturn(SalesOrgState.initial()
+          .copyWith(
+              configs: SalesOrganisationConfigs.empty()
+                  .copyWith(enableTaxAtTotalLevelOnly: true, enableGMN: true)));
+      await tester.pumpWidget(getWidget());
+      await tester.pump();
+    });
   });
 
   //   testWidgets(

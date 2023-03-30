@@ -95,6 +95,7 @@ void main() {
     enableComboDeals: false,
     greenDeliveryUserRole: GreenDeliveryUserRole(0),
     comboDealsUserRole: ComboDealUserRole(0),
+    enableGMN: false,
   );
 
   final fakeCustomerCode = CustomerCodeInfo.empty().copyWith(

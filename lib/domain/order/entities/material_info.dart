@@ -33,6 +33,7 @@ class MaterialInfo with _$MaterialInfo {
     required bool isFOCMaterial,
     required int quantity,
     required String remarks,
+    required String genericMaterialName,
   }) = _MaterialInfo;
 
   factory MaterialInfo.empty() => MaterialInfo(
@@ -60,6 +61,7 @@ class MaterialInfo with _$MaterialInfo {
         isFOCMaterial: false,
         quantity: 0,
         remarks: '',
+        genericMaterialName:'',
       );
 
   MaterialQueryInfo get queryInfo => MaterialQueryInfo.fromBundles(

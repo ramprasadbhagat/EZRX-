@@ -29,6 +29,7 @@ void main() {
         taxm1: '',
         therapeuticClass: '',
         unitOfMeasurement: '',
+        genericMaterialName: '',
       );
     });
 

@@ -164,31 +164,31 @@ void main() {
   ];
 
   final fakematerialInfo = MaterialInfo(
-    quantity: 0,
-    materialNumber: fakeMaterialNumber,
-    materialDescription: "Reag Cup 15ml 1'S",
-    governmentMaterialCode: '',
-    therapeuticClass: 'All other non-therapeutic products',
-    itemBrand: 'Item not listed in I',
-    principalData: PrincipalData(
-      principalName: PrincipalName('台灣羅氏醫療診斷設備(股)公司'),
-      principalCode: PrincipalCode('0000102004'),
-    ),
-    taxClassification: MaterialTaxClassification('Product : Full Tax'),
-    itemRegistrationNumber: 'NA',
-    unitOfMeasurement: 'EA',
-    materialGroup2: MaterialGroup.two(''),
-    materialGroup4: MaterialGroup.four('OTH'),
-    isSampleMaterial: false,
-    hidePrice: false,
-    hasValidTenderContract: false,
-    hasMandatoryTenderContract: false,
-    taxes: ['5'],
-    bundles: [],
-    defaultMaterialDescription: '',
-    isFOCMaterial: false,
-    remarks: '',
-  );
+      quantity: 0,
+      materialNumber: fakeMaterialNumber,
+      materialDescription: "Reag Cup 15ml 1'S",
+      governmentMaterialCode: '',
+      therapeuticClass: 'All other non-therapeutic products',
+      itemBrand: 'Item not listed in I',
+      principalData: PrincipalData(
+        principalName: PrincipalName('台灣羅氏醫療診斷設備(股)公司'),
+        principalCode: PrincipalCode('0000102004'),
+      ),
+      taxClassification: MaterialTaxClassification('Product : Full Tax'),
+      itemRegistrationNumber: 'NA',
+      unitOfMeasurement: 'EA',
+      materialGroup2: MaterialGroup.two(''),
+      materialGroup4: MaterialGroup.four('OTH'),
+      isSampleMaterial: false,
+      hidePrice: false,
+      hasValidTenderContract: false,
+      hasMandatoryTenderContract: false,
+      taxes: ['5'],
+      bundles: [],
+      defaultMaterialDescription: '',
+      isFOCMaterial: false,
+      remarks: '',
+      genericMaterialName: '',);
   late MaterialFilterBloc mockMaterialFilterBloc;
 
   setUpAll(() async {
@@ -395,6 +395,7 @@ void main() {
               defaultMaterialDescription: '',
               isFOCMaterial: false,
               remarks: '',
+              genericMaterialName: '',
             )
           ],
         )
@@ -2175,35 +2176,47 @@ void main() {
     testWidgets('Find OrderType Selector', (tester) async {
       when(() => materialListBlocMock.state)
           .thenReturn(MaterialListState.initial());
-      when(() => eligibilityBlocMock.state)
-          .thenReturn(EligibilityState.initial().copyWith(
-            salesOrganisation: SalesOrganisation.empty().copyWith(
-             salesOrg: SalesOrg('2601'),
-            ),
-            selectedOrderType: OrderDocumentType.empty().copyWith(
-              documentType: DocumentType('ZPOR'),
-              salesOrg: SalesOrg('2601'),
-            ),
-            user: User.empty().copyWith(
-              role: Role(
-                description: '',
-                id: '',
-                name: '',
-                type: RoleType(
-                  'internal_sales_rep'
-                )
-              )
-            ),
-            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-              disableOrderType: false
-            )
-            ));
+      when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+              salesOrganisation: SalesOrganisation.empty().copyWith(
+                salesOrg: SalesOrg('2601'),
+              ),
+              selectedOrderType: OrderDocumentType.empty().copyWith(
+                documentType: DocumentType('ZPOR'),
+                salesOrg: SalesOrg('2601'),
+              ),
+              user: User.empty().copyWith(
+                  role: Role(
+                      description: '',
+                      id: '',
+                      name: '',
+                      type: RoleType('internal_sales_rep'))),
+              salesOrgConfigs: SalesOrganisationConfigs.empty()
+                  .copyWith(disableOrderType: false)));
       await tester.pumpWidget(getScopedWidget(const MaterialRoot()));
 
       final materialsListPage = find.byKey(const Key('orderTypeSelector'));
-      
+
       expect(materialsListPage, findsOneWidget);
       await tester.pump();
+    });
+
+    testWidgets('Test enableGMN true and GenericMaterialName field Display',
+        (tester) async {
+      await tester.pumpWidget(
+        getScopedWidget(
+          MaterialListItem(
+            materialInfo: fakematerialInfo.copyWith(
+              genericMaterialName: 'Fake-GenericMaterialName',
+            ),
+            salesOrgConfigs: salesOrgBlocMock.state.configs.copyWith(
+              enableGMN: true,
+            ),
+          ),
+        ),
+      );
+
+      expect(find.text('Fake-GenericMaterialName'), findsOneWidget);
     });
   });
 }

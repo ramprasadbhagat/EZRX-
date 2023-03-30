@@ -43,7 +43,7 @@ class MaterialListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
-        key: Key('materialOption${materialInfo.materialNumber.getOrCrash()}'),
+        key: Key('materialOption${materialInfo.materialNumber.getOrDefaultValue('')}'),
         onTap: () => _showMaterialDetail(context),
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -97,6 +97,14 @@ class MaterialListItem extends StatelessWidget {
                         ),
                   )
                 : const SizedBox.shrink(),
+            if (salesOrgConfigs.enableGMN &&
+                materialInfo.genericMaterialName.isNotEmpty)
+              Text(
+                materialInfo.genericMaterialName,
+                style: Theme.of(context).textTheme.titleSmall?.apply(
+                      color: ZPColors.lightGray,
+                    ),
+              ),
             Text(
               materialInfo.principalData.principalName.getOrDefaultValue(''),
               style: Theme.of(context).textTheme.titleSmall?.apply(
@@ -161,12 +169,12 @@ class MaterialListItem extends StatelessWidget {
         .materialPrice[materialInfo.materialNumber];
 
     if (materialPrice == null) {
-      if(!salesOrgConfigs.materialWithoutPrice){
+      if (!salesOrgConfigs.materialWithoutPrice) {
         showSnackBar(
           context: context,
           message: 'Product Not Available'.tr(),
         );
-      }else{
+      } else {
         showSnackBar(
           context: context,
           message: 'Price currently unavailable for this product.'.tr(),

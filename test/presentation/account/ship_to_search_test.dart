@@ -79,6 +79,8 @@ void main() {
     defaultMaterialDescription: '',
     isFOCMaterial: false,
     remarks: '',
+    genericMaterialName: '',
+
   );
   setUpAll(() {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);

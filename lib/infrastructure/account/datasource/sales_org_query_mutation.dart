@@ -85,6 +85,7 @@ class SalesOrgQueryMutation {
           enableIRN
           enableComboDeals
           comboDealsUserRole
+          enableGMN
        }
       }
     ''';

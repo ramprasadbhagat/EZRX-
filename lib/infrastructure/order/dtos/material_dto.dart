@@ -80,6 +80,9 @@ class MaterialDto with _$MaterialDto {
     @JsonKey(name: 'remarks', defaultValue: '')
     @HiveField(21, defaultValue: '')
         required String remarks,
+    @JsonKey(name: 'genericMaterialName', defaultValue: '')
+    @HiveField(22, defaultValue: '')
+        required String genericMaterialName,
   }) = _MaterialDto;
 
   factory MaterialDto.fromDomain(MaterialInfo materialInfo) {
@@ -109,6 +112,7 @@ class MaterialDto with _$MaterialDto {
           materialInfo.bundles.map((e) => BundleDto.fromDomain(e)).toList(),
       isFOCMaterial: materialInfo.isFOCMaterial,
       remarks: materialInfo.remarks,
+      genericMaterialName: materialInfo.genericMaterialName,
     );
   }
 
@@ -138,6 +142,7 @@ class MaterialDto with _$MaterialDto {
       isFOCMaterial: isFOCMaterial,
       quantity: quantity,
       remarks: remarks,
+      genericMaterialName: genericMaterialName,
     );
   }
 

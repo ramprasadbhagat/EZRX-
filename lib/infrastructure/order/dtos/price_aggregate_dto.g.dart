@@ -40,7 +40,8 @@ class PriceAggregateDtoAdapter extends TypeAdapter<PriceAggregateDto> {
               unitOfMeasurement: '',
               isFOCMaterial: false,
               quantity: 0,
-              remarks: '')
+              remarks: '',
+              genericMaterialName: '')
           : fields[0] as MaterialDto,
       quantity: fields[1] == null ? 1 : fields[1] as int,
       priceDto: fields[2] == null
@@ -119,7 +120,8 @@ class PriceAggregateDtoAdapter extends TypeAdapter<PriceAggregateDto> {
               greenDeliveryDelayInDays: 0,
               enableComboDeals: false,
               greenDeliveryUserRole: 0,
-              comboDealsUserRole: 0)
+              comboDealsUserRole: 0,
+              enableGMN: false)
           : fields[3] as SalesOrganisationConfigsDto,
       zmgMaterialCountOnCart: fields[4] == null ? 0 : fields[4] as int,
       bundleDto: fields[5] == null

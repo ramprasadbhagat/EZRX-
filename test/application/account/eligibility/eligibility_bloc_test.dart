@@ -96,6 +96,7 @@ void main() {
     enableComboDeals: false,
     greenDeliveryUserRole: GreenDeliveryUserRole(0),
     comboDealsUserRole: ComboDealUserRole(0),
+    enableGMN:false,
   );
 
   group('Eligibility Bloc', () {

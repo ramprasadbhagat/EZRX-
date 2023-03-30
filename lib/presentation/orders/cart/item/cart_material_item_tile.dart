@@ -298,6 +298,9 @@ class CartMaterialItemTileDetails extends StatelessWidget {
                     color: ZPColors.lightGray,
                   ),
             ),
+          _GenericMaterialNameDisplayWidget(
+            material: material,
+          ),
           if (isOrderSummaryView)
             Text(
               '${'Unit of Measurement : '.tr()}${material.materialInfo.unitOfMeasurement}',
@@ -396,7 +399,9 @@ class CartMaterialItemTileDetails extends StatelessWidget {
                       if (enableMaterialLevelTax)
                         Text(
                           '${'Price before $taxCode: '.tr()}${material.display(PriceType.finalPrice)}',
-                          key: Key('pricebefore${material.getMaterialNumber.getOrDefaultValue('')}'),
+                          key: Key(
+                            'pricebefore${material.getMaterialNumber.getOrDefaultValue('')}',
+                          ),
                           style: Theme.of(context).textTheme.titleSmall?.apply(
                                 color: isPriceOverride
                                     ? ZPColors.red
@@ -587,5 +592,24 @@ class _CartItemQuantityInputState extends State<_CartItemQuantityInput> {
         );
       },
     );
+  }
+}
+
+class _GenericMaterialNameDisplayWidget extends StatelessWidget {
+  final PriceAggregate material;
+
+  const _GenericMaterialNameDisplayWidget({Key? key, required this.material})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return material.displayGenericMaterialName
+        ? Text(
+            '${'Generic Material Name :'.tr()}${material.materialInfo.genericMaterialName}',
+            style: Theme.of(context).textTheme.titleSmall?.apply(
+                  color: ZPColors.lightGray,
+                ),
+          )
+        : const SizedBox.shrink();
   }
 }

@@ -95,6 +95,8 @@ void main() {
     defaultMaterialDescription: '',
     isFOCMaterial: false,
     remarks: '',
+    genericMaterialName: '',
+
   );
   late AuthBloc authBloc;
   setUpAll(() {

@@ -63,6 +63,7 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
     required bool disableReturnsAccess,
     required bool enableComboDeals,
     required ComboDealUserRole comboDealsUserRole,
+    required bool enableGMN,
   }) = _SalesOrganisationConfigs;
 
   factory SalesOrganisationConfigs.empty() => SalesOrganisationConfigs(
@@ -120,6 +121,7 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
         enableComboDeals: false,
         greenDeliveryUserRole: GreenDeliveryUserRole(0),
         comboDealsUserRole: ComboDealUserRole(0),
+        enableGMN:false,
       );
 
   String get getConfigLangauge {

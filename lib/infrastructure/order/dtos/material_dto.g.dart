@@ -41,13 +41,14 @@ class MaterialDtoAdapter extends TypeAdapter<_$_MaterialDto> {
       isFOCMaterial: fields[19] == null ? false : fields[19] as bool,
       quantity: fields[20] == null ? 0 : fields[20] as int,
       remarks: fields[21] == null ? '' : fields[21] as String,
+      genericMaterialName: fields[22] == null ? '' : fields[22] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_MaterialDto obj) {
     writer
-      ..writeByte(22)
+      ..writeByte(23)
       ..writeByte(0)
       ..write(obj.materialNumber)
       ..writeByte(1)
@@ -88,6 +89,8 @@ class MaterialDtoAdapter extends TypeAdapter<_$_MaterialDto> {
       ..write(obj.quantity)
       ..writeByte(21)
       ..write(obj.remarks)
+      ..writeByte(22)
+      ..write(obj.genericMaterialName)
       ..writeByte(16)
       ..write(obj.taxes)
       ..writeByte(17)
@@ -141,6 +144,7 @@ _$_MaterialDto _$$_MaterialDtoFromJson(Map<String, dynamic> json) =>
       isFOCMaterial: json['isFOCMaterial'] as bool? ?? false,
       quantity: _validateQantity(json, 'quantity') as int? ?? 0,
       remarks: json['remarks'] as String? ?? '',
+      genericMaterialName: json['genericMaterialName'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_MaterialDtoToJson(_$_MaterialDto instance) =>
@@ -167,4 +171,5 @@ Map<String, dynamic> _$$_MaterialDtoToJson(_$_MaterialDto instance) =>
       'isFOCMaterial': instance.isFOCMaterial,
       'quantity': instance.quantity,
       'remarks': instance.remarks,
+      'genericMaterialName': instance.genericMaterialName,
     };

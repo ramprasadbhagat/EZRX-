@@ -58,6 +58,7 @@ class MaterialsWithMetaQuery {
           hidePrice
           hasValidTenderContract
           hasMandatoryTenderContract
+          genericMaterialName
         }
       }
     }
@@ -130,6 +131,7 @@ class MaterialsWithMetaQuery {
           hasValidTenderContract
           hasMandatoryTenderContract
           isFOCMaterial
+          genericMaterialName
         }
       }
     }
@@ -179,6 +181,7 @@ class MaterialsWithMetaQuery {
           hidePrice
           hasValidTenderContract
           hasMandatoryTenderContract
+          genericMaterialName
         }
       }
     }
@@ -229,6 +232,7 @@ class MaterialsWithMetaQuery {
           hasValidTenderContract
           hasMandatoryTenderContract
           isFOCMaterial
+          genericMaterialName
         }
       }
     }

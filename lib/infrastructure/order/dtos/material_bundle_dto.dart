@@ -52,6 +52,7 @@ class MaterialBundleDto with _$MaterialBundleDto {
       isFOCMaterial: false,
       quantity: 0,
       remarks: '',
+      genericMaterialName:'',
     );
   }
 

@@ -388,6 +388,9 @@ class PriceAggregate with _$PriceAggregate {
     return materialInfo.principalData.principalCode.isSubmitAllowedForClient();
   }
 
+  bool get displayGenericMaterialName =>
+      salesOrgConfig.enableGMN && materialInfo.genericMaterialName.isNotEmpty;
+
   bool get notHavingContract =>
       tenderContract == TenderContract.empty() ||
       tenderContract == TenderContract.noContract();
