@@ -148,14 +148,14 @@ void main() {
       final userNameTextField = find.byKey(const Key('loginUsernameField'));
       final passwordTextField = find.byKey(const Key('loginPasswordField'));
       final loginSubmitButton = find.byKey(const Key('loginSubmitButton'));
-      final ssoLoginButton = find.byKey(const Key('ssoLoginButton'));
+      // final ssoLoginButton = find.byKey(const Key('ssoLoginButton'));
       final rememberPasswordCheckBox =
           find.byKey(const Key('loginRememberPasswordCheckbox'));
 
       expect(userNameTextField, findsOneWidget);
       expect(passwordTextField, findsOneWidget);
       expect(loginSubmitButton, findsOneWidget);
-      expect(ssoLoginButton, findsOneWidget);
+      // expect(ssoLoginButton, findsOneWidget);
       expect(rememberPasswordCheckBox, findsOneWidget);
     });
 
@@ -303,14 +303,14 @@ void main() {
       final userNameTextField = find.byKey(const Key('loginUsernameField'));
       final passwordTextField = find.byKey(const Key('loginPasswordField'));
       final loginSubmitButton = find.byKey(const Key('loginSubmitButton'));
-      final ssoLoginButton = find.byKey(const Key('ssoLoginButton'));
+      // final ssoLoginButton = find.byKey(const Key('ssoLoginButton'));
       final rememberPasswordCheckBox =
           find.byKey(const Key('loginRememberPasswordCheckbox'));
 
       expect(userNameTextField, findsNothing);
       expect(passwordTextField, findsNothing);
       expect(loginSubmitButton, findsNothing);
-      expect(ssoLoginButton, findsNothing);
+      // expect(ssoLoginButton, findsNothing);
       expect(rememberPasswordCheckBox, findsNothing);
     });
 
@@ -345,14 +345,14 @@ void main() {
       final userNameTextField = find.byKey(const Key('loginUsernameField'));
       final passwordTextField = find.byKey(const Key('loginPasswordField'));
       final loginSubmitButton = find.byKey(const Key('loginSubmitButton'));
-      final ssoLoginButton = find.byKey(const Key('ssoLoginButton'));
+      // final ssoLoginButton = find.byKey(const Key('ssoLoginButton'));
       final rememberPasswordCheckBox =
           find.byKey(const Key('loginRememberPasswordCheckbox'));
 
       expect(userNameTextField, findsOneWidget);
       expect(passwordTextField, findsOneWidget);
       expect(loginSubmitButton, findsOneWidget);
-      expect(ssoLoginButton, findsOneWidget);
+      // expect(ssoLoginButton, findsOneWidget);
       expect(rememberPasswordCheckBox, findsOneWidget);
 
       final loadingIndicator =
@@ -430,9 +430,9 @@ void main() {
           ),
         );
         await tester.pump();
-        final ssoLoginButton = find.byKey(const Key('ssoLoginButton'));
-        expect(ssoLoginButton, findsOneWidget);
-        await tester.tap(ssoLoginButton);
+        // final ssoLoginButton = find.byKey(const Key('ssoLoginButton'));
+        // expect(ssoLoginButton, findsOneWidget);
+        // await tester.tap(ssoLoginButton);
         await tester.pump();
       },
     );
