@@ -84,10 +84,10 @@ class _LoginPageState extends State<LoginPage> {
                         children: [
                           const Spacer(),
                           const _Logo(),
-                          const Spacer(),
-                          const _SSOLoginButton(),
-                          const Spacer(),
-                          const _OrDivider(),
+                          // const Spacer(),
+                          // const _SSOLoginButton(),
+                          // const Spacer(),
+                          // const _OrDivider(),
                           const Spacer(),
                           _UsernameField(
                             controller: _usernameController,

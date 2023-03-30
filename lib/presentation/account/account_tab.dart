@@ -27,8 +27,8 @@ class AccountTab extends StatelessWidget {
           tiles: [
             const ProfileTile(),
             const _LoginOnBehalfTile(),
-            const _SettingsTile(),
             const _SupportTile(),
+            const _SettingsTile(),
           ],
         ).toList(),
       ),
