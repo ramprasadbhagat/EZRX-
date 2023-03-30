@@ -3,9 +3,7 @@ import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
-import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
-import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
@@ -128,49 +126,49 @@ class _Logo extends StatelessWidget {
   }
 }
 
-class _SSOLoginButton extends StatelessWidget {
-  const _SSOLoginButton({Key? key}) : super(key: key);
+// class _SSOLoginButton extends StatelessWidget {
+//   const _SSOLoginButton({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<LoginFormBloc, LoginFormState>(
-      buildWhen: (previous, current) =>
-          previous.isSubmitting != current.isSubmitting,
-      builder: (context, state) {
-        return ElevatedButton(
-          key: const Key('ssoLoginButton'),
-          onPressed: state.isSubmitting
-              ? null
-              : () {
-                  locator<CountlyService>()
-                      .addCountlyEvent('Okta Login Success');
-                  FocusScope.of(context).unfocus();
-                  context
-                      .read<LoginFormBloc>()
-                      .add(const LoginFormEvent.loginWithOktaButtonPressed());
-                },
-          child: LoadingShimmer.withChild(
-            enabled: state.isSubmitting,
-            child: const Text('Login with SSO').tr(),
-          ),
-        );
-      },
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return BlocBuilder<LoginFormBloc, LoginFormState>(
+//       buildWhen: (previous, current) =>
+//           previous.isSubmitting != current.isSubmitting,
+//       builder: (context, state) {
+//         return ElevatedButton(
+//           key: const Key('ssoLoginButton'),
+//           onPressed: state.isSubmitting
+//               ? null
+//               : () {
+//                   locator<CountlyService>()
+//                       .addCountlyEvent('Okta Login Success');
+//                   FocusScope.of(context).unfocus();
+//                   context
+//                       .read<LoginFormBloc>()
+//                       .add(const LoginFormEvent.loginWithOktaButtonPressed());
+//                 },
+//           child: LoadingShimmer.withChild(
+//             enabled: state.isSubmitting,
+//             child: const Text('Login with SSO').tr(),
+//           ),
+//         );
+//       },
+//     );
+//   }
+// }
 
-class _OrDivider extends StatelessWidget {
-  const _OrDivider({Key? key}) : super(key: key);
+// class _OrDivider extends StatelessWidget {
+//   const _OrDivider({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Row(children: <Widget>[
-      const Expanded(child: Divider()),
-      Text('OR', style: Theme.of(context).textTheme.labelLarge),
-      const Expanded(child: Divider()),
-    ]);
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Row(children: <Widget>[
+//       const Expanded(child: Divider()),
+//       Text('OR', style: Theme.of(context).textTheme.labelLarge),
+//       const Expanded(child: Divider()),
+//     ]);
+//   }
+// }
 
 class _UsernameField extends StatelessWidget {
   final TextEditingController controller;
