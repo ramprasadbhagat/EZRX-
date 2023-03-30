@@ -42,6 +42,7 @@ import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/entities/payment_term.dart' as pt;
+import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_order_response.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
@@ -900,7 +901,7 @@ void main() {
         await tester.pumpWidget(getWidget());
         await tester.pump();
         if (orderSummaryBlocMock.state.step == 4) {
-         if (!orderEligibilityBlocMock.state.validateRegularOrderType) {
+          if (!orderEligibilityBlocMock.state.validateRegularOrderType) {
             final warningText = find.textContaining(
                 'Regular orders cannot contain only sample and/or FOC materials. Please add a commercial material to proceed.'
                     .tr());
@@ -2063,6 +2064,129 @@ void main() {
             ),
           ),
         ).called(1);
+      },
+    );
+
+    testWidgets(
+      '=> test submit without batch number',
+      (tester) async {
+        when(
+          () => orderSummaryBlocMock.state,
+        ).thenReturn(
+          OrderSummaryState.initial().copyWith(
+            step: 4,
+            maxSteps: 4,
+          ),
+        );
+
+        when(
+          () => cartBlocMock.state,
+        ).thenReturn(
+          CartState.initial().copyWith(cartItems: [
+            CartItem.material(
+              PriceAggregate.empty().copyWith(
+                materialInfo: MaterialInfo.empty().copyWith(
+                  materialNumber: MaterialNumber('123456789'),
+                ),
+                stockInfo: StockInfo.empty(),
+                salesOrgConfig: SalesOrganisationConfigs.empty().copyWith(
+                  enableBatchNumber: true,
+                ),
+                quantity: 10,
+              ),
+            ),
+          ]),
+        );
+
+        whenListen(
+            additionalDetailsBlocMock,
+            Stream.fromIterable(
+              [
+                AdditionalDetailsState.initial().copyWith(
+                  isValidated: false,
+                ),
+                AdditionalDetailsState.initial().copyWith(
+                  isValidated: true,
+                ),
+              ],
+            ));
+        tester.binding.window.physicalSizeTestValue = const Size(1080, 1920);
+        tester.binding.window.devicePixelRatioTestValue = 1.0;
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+        final cartDetailsKey = find.byKey(const Key('_cartDetailsKey'));
+        expect(cartDetailsKey, findsOneWidget);
+        final disclaimer = find.textContaining('Batch Number is empty');
+        expect(disclaimer, findsOneWidget);
+      },
+    );
+
+    testWidgets(
+      '=> test submit with batch number',
+      (tester) async {
+        when(
+          () => orderSummaryBlocMock.state,
+        ).thenReturn(
+          OrderSummaryState.initial().copyWith(
+            step: 4,
+            maxSteps: 4,
+          ),
+        );
+
+        when(
+          () => cartBlocMock.state,
+        ).thenReturn(
+          CartState.initial().copyWith(cartItems: [
+            CartItem.material(
+              PriceAggregate.empty().copyWith(
+                materialInfo: MaterialInfo.empty().copyWith(
+                  materialNumber: MaterialNumber('123456789'),
+                ),
+                  stockInfo: StockInfo.empty(),
+                  salesOrgConfig: SalesOrganisationConfigs.empty().copyWith(
+                    enableBatchNumber: true,
+                  ),
+                  quantity: 10,
+                ),
+              ).copyWith(isSelected: false),
+              CartItem.material(
+                PriceAggregate.empty().copyWith(
+                  materialInfo: MaterialInfo.empty().copyWith(
+                    materialNumber: MaterialNumber('123456790'),
+                  ),
+                  stockInfo: StockInfo.empty().copyWith(
+                    batch: BatchNumber('fake-batch'),
+                  ),
+                  salesOrgConfig: SalesOrganisationConfigs.empty().copyWith(
+                    enableBatchNumber: true,
+                  ),
+                  quantity: 10,
+                ),
+              ),
+            ],
+          ),
+        );
+
+        whenListen(
+            additionalDetailsBlocMock,
+            Stream.fromIterable(
+              [
+                AdditionalDetailsState.initial().copyWith(
+                  isValidated: false,
+                ),
+                AdditionalDetailsState.initial().copyWith(
+                  isValidated: true,
+                ),
+              ],
+            ));
+        tester.binding.window.physicalSizeTestValue = const Size(1080, 1920);
+        tester.binding.window.devicePixelRatioTestValue = 1.0;
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+        final cartDetailsKey = find.byKey(const Key('_cartDetailsKey'));
+        expect(cartDetailsKey, findsOneWidget);
+        final disclaimer = find.textContaining('Batch Number is empty');
+        expect(disclaimer, findsNothing);
       },
     );
   });

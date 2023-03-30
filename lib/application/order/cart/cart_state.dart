@@ -121,7 +121,7 @@ class CartState with _$CartState {
     );
   }
 
-  bool get batchNotSelected => cartItems.any(
+  bool get batchNotSelected => selectedCartItems.any(
         (element) =>
             element.itemType == CartItemType.material &&
             element.materials.first.salesOrgConfig.enableBatchNumber &&
