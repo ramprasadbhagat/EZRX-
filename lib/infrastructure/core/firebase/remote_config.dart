@@ -38,7 +38,7 @@ class RemoteConfigService {
             minutes: 1,
           ),
           minimumFetchInterval: const Duration(
-            hours: 1,
+            minutes: 10,
           ),
         ),
       );

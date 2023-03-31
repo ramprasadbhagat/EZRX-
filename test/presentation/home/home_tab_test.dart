@@ -26,9 +26,11 @@ import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/home/expansion_tiles/returns_expansion_tile.dart';
 import 'package:ezrxmobile/presentation/home/home_tab.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
@@ -90,6 +92,8 @@ class MockHTTPService extends Mock implements HttpService {}
 
 class AutoRouterMock extends Mock implements AppRouter {}
 
+class RemoteConfigServiceMock extends Mock implements RemoteConfigService {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
@@ -108,6 +112,7 @@ void main() {
   late ApproverBlocMock approverBlocMock;
   late HttpService mockHTTPService;
   late AppRouter autoRouterMock;
+  late RemoteConfigService remoteConfigServiceMock;
   final fakeMaterialNumber = MaterialNumber('000000000023168451');
   final fakematerialInfo1 = MaterialInfo(
     quantity: 0,
@@ -158,6 +163,7 @@ void main() {
         () => mockHTTPService,
       );
       autoRouterMock = locator<AppRouter>();
+      locator.registerLazySingleton(() => remoteConfigServiceMock);
     });
     group('Home Tab Screen', () {
       setUp(() {
@@ -174,6 +180,7 @@ void main() {
         approverBlocMock = ApproverBlocMock();
         cartBlocMock = CartBlocMock();
         mockHTTPService = MockHTTPService();
+        remoteConfigServiceMock = RemoteConfigServiceMock();
 
         when(() => mockCustomerCodeBloc.state).thenReturn(
             CustomerCodeState.initial()
@@ -202,6 +209,7 @@ void main() {
           ),
         );
         when(() => approverBlocMock.state).thenReturn(ApproverState.initial());
+        when(() => remoteConfigServiceMock.getReturnsConfig()).thenReturn(true);
       });
 
       Future getWidget(tester) async {
@@ -297,6 +305,10 @@ void main() {
         expect(
             find.byKey(const ValueKey('homeSalesOrgSelector')), findsOneWidget);
         final ediUserBanner = find.byKey(const ValueKey('EdiUserBanner'));
+        final returnsExpansionTile = find.byType(ReturnsExpansionTile);
+        if(remoteConfigServiceMock.getReturnsConfig()){
+           expect(returnsExpansionTile, findsOneWidget);
+        }
         expect(ediUserBanner, findsOneWidget);
         expect(find.byKey(const ValueKey('homeCustomerCodeSelector')),
             findsOneWidget);
