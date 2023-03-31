@@ -749,48 +749,49 @@ void main() {
     () {
       const headerTitle =
           'You must purchase a product or products with a total QTY of 3 OR 8 OR 20. (Discounts will increase as the total quantity exceeds the minimum eligibilities)';
+      final fakeComboDeal = ComboDeal.empty().copyWith(
+        materialComboDeals: [
+          ComboDealMaterialSet(
+            materials: [
+              ComboDealMaterial.empty().copyWith(
+                minQty: 0,
+                materialNumber: MaterialNumber('fake-number-1'),
+                rate: -10,
+              ),
+            ],
+            setNo: 'fake-set',
+          ),
+        ],
+        flexiQtyTier: <ComboDealQtyTier>[
+          ComboDealQtyTier(
+            rate: -5.0,
+            conditionNumber: '',
+            minQty: 3,
+            type: DiscountType('%'),
+            suffix: '',
+          ),
+          ComboDealQtyTier(
+            rate: -5.5,
+            conditionNumber: '',
+            minQty: 8,
+            type: DiscountType('%'),
+            suffix: '',
+          ),
+          ComboDealQtyTier(
+            rate: -6.0,
+            conditionNumber: '',
+            minQty: 20,
+            type: DiscountType('%'),
+            suffix: '',
+          ),
+        ],
+      );
       final fakeFirstMaterial = PriceAggregate.empty().copyWith(
         materialInfo: MaterialInfo.empty().copyWith(
           materialNumber: MaterialNumber('fake-number-1'),
         ),
         price: Price.empty().copyWith(lastPrice: MaterialPrice(100)),
-        comboDeal: ComboDeal.empty().copyWith(
-          materialComboDeals: [
-            ComboDealMaterialSet(
-              materials: [
-                ComboDealMaterial.empty().copyWith(
-                  minQty: 0,
-                  materialNumber: MaterialNumber('fake-number-1'),
-                  rate: -10,
-                ),
-              ],
-              setNo: 'fake-set',
-            ),
-          ],
-          flexiQtyTier: <ComboDealQtyTier>[
-            ComboDealQtyTier(
-              rate: 5.0,
-              conditionNumber: '',
-              minQty: 3,
-              type: DiscountType('%'),
-              suffix: '',
-            ),
-            ComboDealQtyTier(
-              rate: 5.5,
-              conditionNumber: '',
-              minQty: 8,
-              type: DiscountType('%'),
-              suffix: '',
-            ),
-            ComboDealQtyTier(
-              rate: 6.0,
-              conditionNumber: '',
-              minQty: 20,
-              type: DiscountType('%'),
-              suffix: '',
-            ),
-          ],
-        ),
+        comboDeal: fakeComboDeal,
       );
 
       final fakeSecondMaterial = PriceAggregate.empty().copyWith(
@@ -798,43 +799,89 @@ void main() {
           materialNumber: MaterialNumber('fake-number-2'),
         ),
         price: Price.empty().copyWith(lastPrice: MaterialPrice(100)),
-        comboDeal: ComboDeal.empty().copyWith(
-          materialComboDeals: [
-            ComboDealMaterialSet(
-              materials: [
-                ComboDealMaterial.empty().copyWith(
-                  minQty: 0,
-                  materialNumber: MaterialNumber('fake-number-2'),
-                  rate: -10,
-                )
-              ],
-              setNo: 'fake-set',
-            ),
-          ],
-          flexiQtyTier: <ComboDealQtyTier>[
-            ComboDealQtyTier(
-              rate: 5.0,
-              conditionNumber: '',
-              minQty: 3,
-              type: DiscountType('%'),
-              suffix: '',
-            ),
-            ComboDealQtyTier(
-              rate: 5.5,
-              conditionNumber: '',
-              minQty: 8,
-              type: DiscountType('%'),
-              suffix: '',
-            ),
-            ComboDealQtyTier(
-              rate: 6.0,
-              conditionNumber: '',
-              minQty: 20,
-              type: DiscountType('%'),
-              suffix: '',
-            ),
-          ],
+        comboDeal: fakeComboDeal,
+      );
+
+      final fakeMaterial1 = PriceAggregate.empty().copyWith(
+        materialInfo: MaterialInfo.empty().copyWith(
+          materialNumber: MaterialNumber('fake-number-1'),
         ),
+        price: Price.empty().copyWith(
+          lastPrice: MaterialPrice(1.5),
+        ),
+        comboDeal: fakeComboDeal,
+      );
+      final fakeMaterial2 = PriceAggregate.empty().copyWith(
+        materialInfo: MaterialInfo.empty().copyWith(
+          materialNumber: MaterialNumber('fake-number-2'),
+        ),
+        price: Price.empty().copyWith(
+          lastPrice: MaterialPrice(250),
+        ),
+        comboDeal: fakeComboDeal,
+      );
+      final fakeMaterial3 = PriceAggregate.empty().copyWith(
+        materialInfo: MaterialInfo.empty().copyWith(
+          materialNumber: MaterialNumber('fake-number-3'),
+        ),
+        price: Price.empty().copyWith(
+          lastPrice: MaterialPrice(20),
+        ),
+        comboDeal: fakeComboDeal,
+      );
+
+      testWidgets(
+        'Select 3 item with 5 quantity each, total price should be 1282.85',
+        (tester) async {
+          when(() => comboDealDetailBloc.state).thenReturn(
+            ComboDealMaterialDetailState.initial().copyWith(
+              items: {
+                MaterialNumber('fake-number-1'): fakeMaterial1.copyWith(
+                  quantity: 5,
+                ),
+                MaterialNumber('fake-number-2'): fakeMaterial2.copyWith(
+                  quantity: 5,
+                ),
+                MaterialNumber('fake-number-3'): fakeMaterial3.copyWith(
+                  quantity: 5,
+                ),
+              },
+              selectedItems: {
+                MaterialNumber('fake-number-1'): true,
+                MaterialNumber('fake-number-2'): true,
+                MaterialNumber('fake-number-3'): true,
+              },
+            ),
+          );
+          await tester.pumpWidget(
+            wrapper(
+              ComboDealMaterialDetailPage(
+                comboItems: [
+                  fakeMaterial1,
+                  fakeMaterial2,
+                  fakeMaterial3,
+                ],
+              ),
+            ),
+          );
+
+          expect(find.byType(ComboDealItem), findsNWidgets(3));
+          expect(find.byType(MandatoryLabel), findsNothing);
+          expect(
+            find.text(headerTitle),
+            findsOneWidget,
+          );
+          final addToCartButton = find.byKey(const Key('addToCartButton'));
+          expect(addToCartButton, findsOneWidget);
+
+          final totalPrice = find.byKey(const Key('Total label 1282.85'));
+          expect(totalPrice, findsOneWidget);
+
+          //await tester.tap(addToCartButton);
+          //await tester.pump();
+
+          //verifyNever(() => cartBloc.add(any()));
+        },
       );
 
       testWidgets(

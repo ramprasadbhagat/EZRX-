@@ -340,8 +340,14 @@ class CartItem with _$CartItem {
               sum + item.comboDealTotalUnitPrice(rate: comboDealRate(material: item),),
         );
       case ComboDealScheme.k4:
-        return _comboDealTotal +
-            (_comboDealTotal * eligibleComboDealQtyTier.rate) / 100;
+        return materials.fold<double>(
+          0,
+          (sum, item) =>
+              sum +
+              item.comboDealTotalUnitPrice(
+                rate: eligibleComboDealQtyTier.rate,
+              ),
+        );
       case ComboDealScheme.k4_2:
         return materials.fold<double>(
           0,
