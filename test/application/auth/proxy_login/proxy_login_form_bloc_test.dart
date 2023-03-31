@@ -151,7 +151,8 @@ void main() {
         ),
         proxyloginFormState.copyWith(
           isSubmitting: false,
-          showErrorMessages: true,
+          username: Username(''),
+          showErrorMessages: false,
           authFailureOrSuccessOption: optionOf(const Right(unit)),
         ),
       ],
@@ -305,7 +306,8 @@ void main() {
         ),
         proxyloginFormState.copyWith(
           isSubmitting: false,
-          showErrorMessages: true,
+          username: Username(''),
+          showErrorMessages: false,
           authFailureOrSuccessOption: optionOf(const Right(
             unit,
           )),

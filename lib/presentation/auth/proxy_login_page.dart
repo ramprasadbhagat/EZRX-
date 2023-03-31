@@ -8,10 +8,13 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 
 class LoginOnBehalfPage extends StatelessWidget {
   const LoginOnBehalfPage({Key? key}) : super(key: key);
@@ -105,6 +108,14 @@ class _UsernameFieldState extends State<UsernameField> {
   final TextEditingController _usernameController = TextEditingController();
 
   @override
+  void initState() {
+    context.read<ProxyLoginFormBloc>().add(
+          const ProxyLoginFormEvent.initialized(),
+        );
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocBuilder<ProxyLoginFormBloc, ProxyLoginFormState>(
       buildWhen: (previous, current) =>
@@ -119,13 +130,13 @@ class _UsernameFieldState extends State<UsernameField> {
           onChanged: (value) => context.read<ProxyLoginFormBloc>().add(
                 ProxyLoginFormEvent.usernameChanged(value),
               ),
-          validator: (_) => state.username.value.fold(
-            (f) => f.maybeMap(
-              empty: (_) => 'Username cannot be empty.'.tr(),
-              orElse: () => null,
-            ),
-            (_) => null,
-          ),
+          validator: (text) => Username(text!).value.fold(
+                (f) => f.maybeMap(
+                  empty: (_) => 'Username cannot be empty.'.tr(),
+                  orElse: () => null,
+                ),
+                (_) => null,
+              ),
           onFieldSubmitted: (value) {
             if (!state.isSubmitting) {
               FocusScope.of(context).unfocus();
@@ -157,20 +168,20 @@ class LoginButton extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.isSubmitting != current.isSubmitting,
       builder: (context, state) {
-        return SizedBox(
-          width: MediaQuery.of(context).size.width,
-          child: ElevatedButton(
-            key: const Key('proxyLoginSubmitButton'),
-            onPressed: state.isSubmitting
-                ? null
-                : () {
-                    FocusScope.of(context).unfocus();
-                    context.read<ProxyLoginFormBloc>().add(
-                          ProxyLoginFormEvent.loginWithADButtonPressed(
-                            context.read<UserBloc>().state.user,
-                          ),
-                        );
-                  },
+        return ElevatedButton(
+          key: const Key('proxyLoginSubmitButton'),
+          onPressed: state.isSubmitting
+              ? null
+              : () {
+                  FocusScope.of(context).unfocus();
+                  context.read<ProxyLoginFormBloc>().add(
+                        ProxyLoginFormEvent.loginWithADButtonPressed(
+                          context.read<UserBloc>().state.user,
+                        ),
+                      );
+                },
+          child: LoadingShimmer.withChild(
+            enabled: state.isSubmitting,
             child: const Text('Login').tr(),
           ),
         );

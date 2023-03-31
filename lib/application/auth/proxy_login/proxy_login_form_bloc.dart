@@ -25,6 +25,7 @@ class ProxyLoginFormBloc
     Emitter<ProxyLoginFormState> emit,
   ) async {
     await event.map(
+      initialized: (e) async => emit(ProxyLoginFormState.initial()),
       usernameChanged: (e) {
         emit(state.copyWith(
           username: Username(e.usernameStr),
@@ -61,21 +62,30 @@ class ProxyLoginFormBloc
               );
 
               await isEligibleProxyLoginFailureOrSuccess.fold(
-                (_) {},
+                (_) {
+                  emit(
+                    state.copyWith(
+                      isSubmitting: false,
+                      showErrorMessages: true,
+                      authFailureOrSuccessOption:
+                          optionOf(isEligibleProxyLoginFailureOrSuccess),
+                    ),
+                  );
+                },
                 (success) async {
                   await authRepository.logout();
                   await authRepository.storeJWT(jwt: login.jwt);
+                  emit(
+                    state.copyWith(
+                      username: Username(''),
+                      isSubmitting: false,
+                      showErrorMessages: false,
+                      authFailureOrSuccessOption: optionOf(
+                        isEligibleProxyLoginFailureOrSuccess,
+                      ),
+                    ),
+                  );
                 },
-              );
-
-              emit(
-                state.copyWith(
-                  isSubmitting: false,
-                  showErrorMessages: true,
-                  authFailureOrSuccessOption: optionOf(
-                    isEligibleProxyLoginFailureOrSuccess,
-                  ),
-                ),
               );
             },
           );
