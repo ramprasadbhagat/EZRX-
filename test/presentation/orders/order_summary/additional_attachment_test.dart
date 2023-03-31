@@ -22,6 +22,7 @@ import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -68,6 +69,23 @@ void main() {
     locator<MixpanelService>().init(mixpanel: MixpanelMock());
     locator.registerLazySingleton(() => filePickerService);
     locator.registerLazySingleton(() => permissionService);
+    const MethodChannel('dev.fluttercommunity.plus/device_info')
+        .setMockMethodCallHandler((MethodCall methodCall) async {
+      if (methodCall.method == 'getAndroidDeviceInfo') {
+        return <String, dynamic>{
+          'version': {
+            'sdkInt': 32,
+          },
+          'displayMetrics': {
+            'widthPx': 100.0,
+            'heightPx': 100.0,
+            'xDpi': 100.0,
+            'yDpi': 100.0,
+          },
+        };
+      }
+      return null;
+    });
   });
 
   setUp(() {
@@ -193,6 +211,7 @@ void main() {
         'Po Attachment File Upload Test android upload photo with no permission',
         (tester) async {
       debugDefaultTargetPlatformOverride = TargetPlatform.android;
+
       final expectedStates = [
         PoAttachmentState.initial().copyWith(
             fileUrl: [

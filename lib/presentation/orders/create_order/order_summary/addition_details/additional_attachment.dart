@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
@@ -220,7 +221,10 @@ class _PoUploadOptionPickerState extends State<_PoUploadOptionPicker> {
   Future<void> uploadFile({
     required UploadOptionType uploadOptionType,
   }) async {
-    final shouldAllowUpload = await checkPermissions(uploadOptionType);
+    final shouldAllowUpload =
+        await _checkIfDeviceIsIosOrAndroidWithSDKIsLessThan33()
+            ? await checkPermissions(uploadOptionType)
+            : true;
     if (!shouldAllowUpload) return;
 
     FilePickerResult? result;
@@ -276,6 +280,16 @@ class _PoUploadOptionPickerState extends State<_PoUploadOptionPicker> {
                 .poDocuments,
           ),
         );
+  }
+
+  Future<bool> _checkIfDeviceIsIosOrAndroidWithSDKIsLessThan33() async {
+    if (defaultTargetPlatform != TargetPlatform.android) {
+      return true;
+    }
+    final plugin = DeviceInfoPlugin();
+    final androidDeviceInfo = await plugin.androidInfo;
+
+    return androidDeviceInfo.version.sdkInt! < 33;
   }
 
   Future<bool> checkPermissions(UploadOptionType uploadOptionType) async {
