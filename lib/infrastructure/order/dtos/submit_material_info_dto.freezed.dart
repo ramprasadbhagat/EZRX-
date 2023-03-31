@@ -28,8 +28,9 @@ mixin _$SubmitMaterialInfoDto {
   @JsonKey(name: 'contract')
   SubmitTenderContractDto get tenderContract =>
       throw _privateConstructorUsedError;
-  @JsonKey(name: 'bonuses', defaultValue: <MaterialItemBonusDto>[])
-  List<MaterialItemBonusDto> get bonuses => throw _privateConstructorUsedError;
+  @JsonKey(name: 'bonuses', defaultValue: <SubmitMaterialItemBonusDto>[])
+  List<SubmitMaterialItemBonusDto> get bonuses =>
+      throw _privateConstructorUsedError;
   @JsonKey(name: 'comment', defaultValue: '')
   String get comment => throw _privateConstructorUsedError;
   @JsonKey(
@@ -67,8 +68,8 @@ abstract class $SubmitMaterialInfoDtoCopyWith<$Res> {
           int qty,
       @JsonKey(name: 'contract')
           SubmitTenderContractDto tenderContract,
-      @JsonKey(name: 'bonuses', defaultValue: <MaterialItemBonusDto>[])
-          List<MaterialItemBonusDto> bonuses,
+      @JsonKey(name: 'bonuses', defaultValue: <SubmitMaterialItemBonusDto>[])
+          List<SubmitMaterialItemBonusDto> bonuses,
       @JsonKey(name: 'comment', defaultValue: '')
           String comment,
       @JsonKey(name: 'batch', defaultValue: '', toJson: overrideBatchJson, includeIfNull: false)
@@ -121,7 +122,7 @@ class _$SubmitMaterialInfoDtoCopyWithImpl<$Res,
       bonuses: null == bonuses
           ? _value.bonuses
           : bonuses // ignore: cast_nullable_to_non_nullable
-              as List<MaterialItemBonusDto>,
+              as List<SubmitMaterialItemBonusDto>,
       comment: null == comment
           ? _value.comment
           : comment // ignore: cast_nullable_to_non_nullable
@@ -175,8 +176,8 @@ abstract class _$$_SubmitMaterialInfoDtoCopyWith<$Res>
           int qty,
       @JsonKey(name: 'contract')
           SubmitTenderContractDto tenderContract,
-      @JsonKey(name: 'bonuses', defaultValue: <MaterialItemBonusDto>[])
-          List<MaterialItemBonusDto> bonuses,
+      @JsonKey(name: 'bonuses', defaultValue: <SubmitMaterialItemBonusDto>[])
+          List<SubmitMaterialItemBonusDto> bonuses,
       @JsonKey(name: 'comment', defaultValue: '')
           String comment,
       @JsonKey(name: 'batch', defaultValue: '', toJson: overrideBatchJson, includeIfNull: false)
@@ -228,7 +229,7 @@ class __$$_SubmitMaterialInfoDtoCopyWithImpl<$Res>
       bonuses: null == bonuses
           ? _value._bonuses
           : bonuses // ignore: cast_nullable_to_non_nullable
-              as List<MaterialItemBonusDto>,
+              as List<SubmitMaterialItemBonusDto>,
       comment: null == comment
           ? _value.comment
           : comment // ignore: cast_nullable_to_non_nullable
@@ -259,8 +260,8 @@ class _$_SubmitMaterialInfoDto extends _SubmitMaterialInfoDto {
           required this.qty,
       @JsonKey(name: 'contract')
           required this.tenderContract,
-      @JsonKey(name: 'bonuses', defaultValue: <MaterialItemBonusDto>[])
-          required final List<MaterialItemBonusDto> bonuses,
+      @JsonKey(name: 'bonuses', defaultValue: <SubmitMaterialItemBonusDto>[])
+          required final List<SubmitMaterialItemBonusDto> bonuses,
       @JsonKey(name: 'comment', defaultValue: '')
           required this.comment,
       @JsonKey(name: 'batch', defaultValue: '', toJson: overrideBatchJson, includeIfNull: false)
@@ -284,10 +285,10 @@ class _$_SubmitMaterialInfoDto extends _SubmitMaterialInfoDto {
   @override
   @JsonKey(name: 'contract')
   final SubmitTenderContractDto tenderContract;
-  final List<MaterialItemBonusDto> _bonuses;
+  final List<SubmitMaterialItemBonusDto> _bonuses;
   @override
-  @JsonKey(name: 'bonuses', defaultValue: <MaterialItemBonusDto>[])
-  List<MaterialItemBonusDto> get bonuses {
+  @JsonKey(name: 'bonuses', defaultValue: <SubmitMaterialItemBonusDto>[])
+  List<SubmitMaterialItemBonusDto> get bonuses {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_bonuses);
   }
@@ -373,8 +374,8 @@ abstract class _SubmitMaterialInfoDto extends SubmitMaterialInfoDto {
           required final int qty,
       @JsonKey(name: 'contract')
           required final SubmitTenderContractDto tenderContract,
-      @JsonKey(name: 'bonuses', defaultValue: <MaterialItemBonusDto>[])
-          required final List<MaterialItemBonusDto> bonuses,
+      @JsonKey(name: 'bonuses', defaultValue: <SubmitMaterialItemBonusDto>[])
+          required final List<SubmitMaterialItemBonusDto> bonuses,
       @JsonKey(name: 'comment', defaultValue: '')
           required final String comment,
       @JsonKey(name: 'batch', defaultValue: '', toJson: overrideBatchJson, includeIfNull: false)
@@ -398,8 +399,8 @@ abstract class _SubmitMaterialInfoDto extends SubmitMaterialInfoDto {
   @JsonKey(name: 'contract')
   SubmitTenderContractDto get tenderContract;
   @override
-  @JsonKey(name: 'bonuses', defaultValue: <MaterialItemBonusDto>[])
-  List<MaterialItemBonusDto> get bonuses;
+  @JsonKey(name: 'bonuses', defaultValue: <SubmitMaterialItemBonusDto>[])
+  List<SubmitMaterialItemBonusDto> get bonuses;
   @override
   @JsonKey(name: 'comment', defaultValue: '')
   String get comment;

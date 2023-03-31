@@ -2,8 +2,8 @@ import 'package:ezrxmobile/domain/order/entities/material_item_override.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/infrastructure/order/dtos/material_item_bonus_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_item_override_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/submit_material_item_bonus_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/submit_tender_contract_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -20,8 +20,8 @@ class SubmitMaterialInfoDto with _$SubmitMaterialInfoDto {
         required String materialNumber,
     @JsonKey(name: 'qty', defaultValue: 0) required int qty,
     @JsonKey(name: 'contract') required SubmitTenderContractDto tenderContract,
-    @JsonKey(name: 'bonuses', defaultValue: <MaterialItemBonusDto>[])
-        required List<MaterialItemBonusDto> bonuses,
+    @JsonKey(name: 'bonuses', defaultValue: <SubmitMaterialItemBonusDto>[])
+        required List<SubmitMaterialItemBonusDto> bonuses,
     @JsonKey(name: 'comment', defaultValue: '') required String comment,
     @JsonKey(name: 'batch', defaultValue: '', toJson: overrideBatchJson, includeIfNull: false)
         required String batch,
@@ -57,7 +57,7 @@ class SubmitMaterialInfoDto with _$SubmitMaterialInfoDto {
       ),
       bonuses: submitMaterialInfo.bonuses
           .map(
-            (e) => MaterialItemBonusDto.fromDomain(e),
+            (e) => SubmitMaterialItemBonusDto.fromDomain(e),
           )
           .toList(),
       comment: submitMaterialInfo.comment,

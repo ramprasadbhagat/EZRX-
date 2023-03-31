@@ -15,11 +15,13 @@ import 'package:ezrxmobile/domain/order/entities/price_combo_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
+import 'package:ezrxmobile/domain/order/entities/submit_material_item_bonus.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/num_utils.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_item_override_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/submit_material_item_bonus_dto.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -1402,6 +1404,35 @@ void main() {
           ),
         ),
       );
+    });
+    test('toSubmitMaterialInfo from with bonus', () {
+      final submitMaterialInfo = emptyPriceAggregate.copyWith(
+        addedBonusList: [
+          MaterialItemBonus.empty(),
+        ],
+      ).toSubmitMaterialInfo();
+
+      expect(submitMaterialInfo.batch, emptyPriceAggregate.stockInfo.batch);
+      expect(
+        submitMaterialInfo.bonuses,
+        <SubmitMaterialItemBonus>[
+          SubmitMaterialItemBonusDto.fromMaterialItemBonus(
+                  MaterialItemBonus.empty())
+              .toDomain()
+        ],
+      );
+      expect(submitMaterialInfo.comment, '');
+      expect(submitMaterialInfo.materialNumber,
+          emptyPriceAggregate.materialInfo.materialNumber);
+      expect(submitMaterialInfo.quantity, emptyPriceAggregate.quantity);
+      expect(submitMaterialInfo.salesDistrict,
+          emptyPriceAggregate.stockInfo.salesDistrict);
+      expect(
+          submitMaterialInfo.materialItemOverride,
+          MaterialItemOverrideDto.fromPrice(emptyPriceAggregate.price)
+              .toDomain());
+      expect(submitMaterialInfo.tenderContract,
+          emptyPriceAggregate.tenderContract);
     });
   });
 }

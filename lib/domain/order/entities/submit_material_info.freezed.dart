@@ -19,7 +19,8 @@ mixin _$SubmitMaterialInfo {
   MaterialNumber get materialNumber => throw _privateConstructorUsedError;
   int get quantity => throw _privateConstructorUsedError;
   TenderContract get tenderContract => throw _privateConstructorUsedError;
-  List<MaterialItemBonus> get bonuses => throw _privateConstructorUsedError;
+  List<SubmitMaterialItemBonus> get bonuses =>
+      throw _privateConstructorUsedError;
   String get comment => throw _privateConstructorUsedError;
   BatchNumber get batch => throw _privateConstructorUsedError;
   String get salesDistrict => throw _privateConstructorUsedError;
@@ -41,7 +42,7 @@ abstract class $SubmitMaterialInfoCopyWith<$Res> {
       {MaterialNumber materialNumber,
       int quantity,
       TenderContract tenderContract,
-      List<MaterialItemBonus> bonuses,
+      List<SubmitMaterialItemBonus> bonuses,
       String comment,
       BatchNumber batch,
       String salesDistrict,
@@ -89,7 +90,7 @@ class _$SubmitMaterialInfoCopyWithImpl<$Res, $Val extends SubmitMaterialInfo>
       bonuses: null == bonuses
           ? _value.bonuses
           : bonuses // ignore: cast_nullable_to_non_nullable
-              as List<MaterialItemBonus>,
+              as List<SubmitMaterialItemBonus>,
       comment: null == comment
           ? _value.comment
           : comment // ignore: cast_nullable_to_non_nullable
@@ -139,7 +140,7 @@ abstract class _$$_SubmitMaterialInfoCopyWith<$Res>
       {MaterialNumber materialNumber,
       int quantity,
       TenderContract tenderContract,
-      List<MaterialItemBonus> bonuses,
+      List<SubmitMaterialItemBonus> bonuses,
       String comment,
       BatchNumber batch,
       String salesDistrict,
@@ -187,7 +188,7 @@ class __$$_SubmitMaterialInfoCopyWithImpl<$Res>
       bonuses: null == bonuses
           ? _value._bonuses
           : bonuses // ignore: cast_nullable_to_non_nullable
-              as List<MaterialItemBonus>,
+              as List<SubmitMaterialItemBonus>,
       comment: null == comment
           ? _value.comment
           : comment // ignore: cast_nullable_to_non_nullable
@@ -215,7 +216,7 @@ class _$_SubmitMaterialInfo extends _SubmitMaterialInfo {
       {required this.materialNumber,
       required this.quantity,
       required this.tenderContract,
-      required final List<MaterialItemBonus> bonuses,
+      required final List<SubmitMaterialItemBonus> bonuses,
       required this.comment,
       required this.batch,
       required this.salesDistrict,
@@ -229,9 +230,9 @@ class _$_SubmitMaterialInfo extends _SubmitMaterialInfo {
   final int quantity;
   @override
   final TenderContract tenderContract;
-  final List<MaterialItemBonus> _bonuses;
+  final List<SubmitMaterialItemBonus> _bonuses;
   @override
-  List<MaterialItemBonus> get bonuses {
+  List<SubmitMaterialItemBonus> get bonuses {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_bonuses);
   }
@@ -295,7 +296,7 @@ abstract class _SubmitMaterialInfo extends SubmitMaterialInfo {
           {required final MaterialNumber materialNumber,
           required final int quantity,
           required final TenderContract tenderContract,
-          required final List<MaterialItemBonus> bonuses,
+          required final List<SubmitMaterialItemBonus> bonuses,
           required final String comment,
           required final BatchNumber batch,
           required final String salesDistrict,
@@ -310,7 +311,7 @@ abstract class _SubmitMaterialInfo extends SubmitMaterialInfo {
   @override
   TenderContract get tenderContract;
   @override
-  List<MaterialItemBonus> get bonuses;
+  List<SubmitMaterialItemBonus> get bonuses;
   @override
   String get comment;
   @override

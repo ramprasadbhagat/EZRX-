@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/order/entities/price_combo_deal.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/submit_material_item_bonus_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
@@ -72,7 +73,12 @@ class PriceAggregate with _$PriceAggregate {
     return SubmitMaterialInfo(
       batch:
           salesOrgConfig.enableBatchNumber ? stockInfo.batch : BatchNumber(''),
-      bonuses: <MaterialItemBonus>[],
+      bonuses: addedBonusList
+          .map(
+            (e) =>
+                SubmitMaterialItemBonusDto.fromMaterialItemBonus(e).toDomain(),
+          )
+          .toList(),
       comment: '',
       materialNumber: materialInfo.materialNumber,
       quantity: quantity,

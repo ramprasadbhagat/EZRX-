@@ -14,8 +14,8 @@ _$_SubmitMaterialInfoDto _$$_SubmitMaterialInfoDtoFromJson(
       tenderContract: SubmitTenderContractDto.fromJson(
           json['contract'] as Map<String, dynamic>),
       bonuses: (json['bonuses'] as List<dynamic>?)
-              ?.map((e) =>
-                  MaterialItemBonusDto.fromJson(e as Map<String, dynamic>))
+              ?.map((e) => SubmitMaterialItemBonusDto.fromJson(
+                  e as Map<String, dynamic>))
               .toList() ??
           [],
       comment: json['comment'] as String? ?? '',
