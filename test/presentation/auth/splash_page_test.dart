@@ -1,6 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
-import 'package:ezrxmobile/application/account/approver/approver_bloc.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
@@ -65,8 +64,7 @@ class CustomerCodeBlocMock
     extends MockBloc<CustomerCodeEvent, CustomerCodeState>
     implements CustomerCodeBloc {}
 
-class ApproverBlocMock extends MockBloc<ApproverEvent, ApproverState>
-    implements ApproverBloc {}
+
 
 class ShipToCodeBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState>
     implements ShipToCodeBloc {}
@@ -147,7 +145,6 @@ void main() {
   late PaymentTermBloc paymentTermBlocMock;
   late EligibilityBloc eligibilityBlocMock;
   late AppRouter autoRouterMock;
-  late ApproverBloc approverBlocMock;
   late UserRestrictionListBloc userRestrictionListBlocMock;
   late UsageCodeBloc usageCodeBlocMock;
   late ReturnRequestTypeCodeBloc returnRequestTypeCodeBlocMock;
@@ -201,7 +198,6 @@ void main() {
       cartBlocMock = CartBlocMock();
       paymentCustomerInformationBlocMock = PaymentCustomerInformationBlocMock();
       paymentTermBlocMock = PaymentTermBlocMock();
-      approverBlocMock = ApproverBlocMock();
       userRestrictionListBlocMock = UserRestrictionListBlocMock();
       eligibilityBlocMock = EligibilityBlocMock();
       autoRouterMock = locator<AppRouter>();
@@ -233,7 +229,6 @@ void main() {
           .thenReturn(PaymentCustomerInformationState.initial());
       when(() => paymentTermBlocMock.state)
           .thenReturn(PaymentTermState.initial());
-      when(() => approverBlocMock.state).thenReturn(ApproverState.initial());
       when(() => eligibilityBlocMock.state)
           .thenReturn(EligibilityState.initial());
       when(() => userRestrictionListBlocMock.state)
@@ -264,7 +259,6 @@ void main() {
             BlocProvider<AuthBloc>(create: (context) => authBlocMock),
             BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBlocMock),
             BlocProvider<UserBloc>(create: (context) => userBlocMock),
-            BlocProvider<ApproverBloc>(create: (context) => approverBlocMock),
             BlocProvider<UserRestrictionListBloc>(
               create: (context) => userRestrictionListBlocMock,
             ),

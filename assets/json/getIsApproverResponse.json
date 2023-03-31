@@ -1,8 +1,0 @@
-{
-  "data": {
-    "isApprover": {
-      "isApprover": true,
-      "__typename": "isApproverResponse"
-    }
-  }
-}

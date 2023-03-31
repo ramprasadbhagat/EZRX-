@@ -2,7 +2,6 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_localization_loader/easy_localization_loader.dart';
-import 'package:ezrxmobile/application/account/approver/approver_bloc.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
@@ -43,8 +42,7 @@ class ShipToCodeBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState>
 
 class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
 
-class ApproverBlocMock extends MockBloc<ApproverEvent, ApproverState>
-    implements ApproverBloc {}
+
 
 class AutoRouterMock extends Mock implements AppRouter {}
 
@@ -111,7 +109,6 @@ void main() {
   late AuthBloc authBlocMock;
   late AppRouter autoRouterMock;
   late CartBloc cartBlocMock;
-  late ApproverBloc approverBlocMock;
   setUpAll(() {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
     locator.registerLazySingleton(() => AppRouter());
@@ -125,7 +122,6 @@ void main() {
       authBlocMock = AuthBlocMock();
       autoRouterMock = locator<AppRouter>();
       cartBlocMock = CartBlocMock();
-      approverBlocMock = ApproverBlocMock();
       when(() => userBlocMock.state).thenReturn(UserState.initial());
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
       when(() => cartBlocMock.state).thenReturn(CartState.initial());
@@ -134,7 +130,6 @@ void main() {
       when(() => shipToCodeBlocMock.state)
           .thenReturn(ShipToCodeState.initial());
       when(() => authBlocMock.state).thenReturn(const AuthState.initial());
-      when(() => approverBlocMock.state).thenReturn(ApproverState.initial());
     });
 
     Widget getScopedWidget() {
@@ -152,7 +147,6 @@ void main() {
           autoRouterMock: autoRouterMock,
           providers: [
             BlocProvider<UserBloc>(create: (context) => userBlocMock),
-            BlocProvider<ApproverBloc>(create: (context) => approverBlocMock),
             BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBlocMock),
             BlocProvider<CustomerCodeBloc>(
                 create: (context) => customerCodeBlocMock),

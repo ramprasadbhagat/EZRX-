@@ -1,7 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_localization_loader/easy_localization_loader.dart';
-import 'package:ezrxmobile/application/account/approver/approver_bloc.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
@@ -85,9 +84,6 @@ class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 
 class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
 
-class ApproverBlocMock extends MockBloc<ApproverEvent, ApproverState>
-    implements ApproverBloc {}
-
 class MockHTTPService extends Mock implements HttpService {}
 
 class AutoRouterMock extends Mock implements AppRouter {}
@@ -109,7 +105,6 @@ void main() {
   late ShipToCodeBlocMock shipToCodeBlocMock;
   late AuthBlocMock authBlocMock;
   late UserBlocMock userBlocMock;
-  late ApproverBlocMock approverBlocMock;
   late HttpService mockHTTPService;
   late AppRouter autoRouterMock;
   late RemoteConfigService remoteConfigServiceMock;
@@ -177,7 +172,6 @@ void main() {
         shipToCodeBlocMock = ShipToCodeBlocMock();
         authBlocMock = AuthBlocMock();
         userBlocMock = UserBlocMock();
-        approverBlocMock = ApproverBlocMock();
         cartBlocMock = CartBlocMock();
         mockHTTPService = MockHTTPService();
         remoteConfigServiceMock = RemoteConfigServiceMock();
@@ -208,7 +202,6 @@ void main() {
             user: fakeUser,
           ),
         );
-        when(() => approverBlocMock.state).thenReturn(ApproverState.initial());
         when(() => remoteConfigServiceMock.getReturnsConfig()).thenReturn(true);
       });
 
@@ -245,8 +238,6 @@ void main() {
                     create: (context) => shipToCodeBlocMock),
                 BlocProvider<AuthBloc>(create: (context) => authBlocMock),
                 BlocProvider<UserBloc>(create: (context) => userBlocMock),
-                BlocProvider<ApproverBloc>(
-                    create: (context) => approverBlocMock),
               ],
               child: const HomeTab(),
             ),

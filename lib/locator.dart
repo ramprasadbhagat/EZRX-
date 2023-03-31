@@ -1,4 +1,3 @@
-import 'package:ezrxmobile/application/account/approver/approver_bloc.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
@@ -67,9 +66,6 @@ import 'package:ezrxmobile/application/returns/user_restriction/user_restriction
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/account_selector_storage.dart';
-import 'package:ezrxmobile/infrastructure/account/datasource/approver_local.dart';
-import 'package:ezrxmobile/infrastructure/account/datasource/approver_query_mutation.dart';
-import 'package:ezrxmobile/infrastructure/account/datasource/approver_remote.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_remote.dart';
@@ -82,7 +78,6 @@ import 'package:ezrxmobile/infrastructure/account/datasource/sales_rep_remote.da
 import 'package:ezrxmobile/infrastructure/account/datasource/user_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/user_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/user_remote.dart';
-import 'package:ezrxmobile/infrastructure/account/repository/approver_repository.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/customer_code_repository.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/sales_org_repository.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/sales_rep_repository.dart';
@@ -392,39 +387,6 @@ void setupLocator() {
 
   locator.registerLazySingleton(
     () => ProxyLoginFormBloc(authRepository: locator<AuthRepository>()),
-  );
-
-  //============================================================
-  //  Returns Approver
-  //
-  //============================================================
-
-  locator.registerLazySingleton(() => ApproverQueryMutation());
-
-  locator.registerLazySingleton(() => ApproverLocalDataSource());
-
-  locator.registerLazySingleton(
-    () => ApproverRemoteDataSource(
-      config: locator<Config>(),
-      httpService: locator<HttpService>(),
-      approverQueryMutation: locator<ApproverQueryMutation>(),
-      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
-    ),
-  );
-
-  locator.registerLazySingleton(
-    () => ApproverRepository(
-      localDataSource: locator<ApproverLocalDataSource>(),
-      remoteDataSource: locator<ApproverRemoteDataSource>(),
-      config: locator<Config>(),
-      remoteConfigService: locator<RemoteConfigService>(),
-    ),
-  );
-
-  locator.registerLazySingleton(
-    () => ApproverBloc(
-      approverRepository: locator<ApproverRepository>(),
-    ),
   );
 
   //============================================================
@@ -1809,8 +1771,8 @@ void setupLocator() {
   //============================================================
 
   locator.registerLazySingleton(
-      () => ReturnSummaryDetailsRequestInformationLocal(),);
-
+    () => ReturnSummaryDetailsRequestInformationLocal(),
+  );
 
   locator.registerLazySingleton(
     () => ReturnSummaryDetailsRepository(

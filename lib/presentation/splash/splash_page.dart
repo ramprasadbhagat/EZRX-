@@ -5,7 +5,6 @@ import 'package:ezrxmobile/application/returns/returns_overview/returns_overview
 import 'package:universal_io/io.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/approver/approver_bloc.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
@@ -126,12 +125,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
             final welcomeMessage =
                 '${'Welcome back'.tr()}, ${state.user.username.getOrCrash()}';
             showSnackBar(context: context, message: welcomeMessage);
-
-            context.read<ApproverBloc>().add(
-                  ApproverEvent.fetch(
-                    userInfo: state.user,
-                  ),
-                );
           },
         ),
         BlocListener<UserBloc, UserState>(
@@ -366,15 +359,18 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                   ),
                 );
             context.read<EligibilityBloc>().add(
-                    EligibilityEvent.update(
-                      user: context.read<UserBloc>().state.user,
-                      salesOrganisation: context.read<SalesOrgBloc>().state.salesOrganisation,
-                      salesOrgConfigs: context.read<SalesOrgBloc>().state.configs,
-                      customerCodeInfo: context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                      shipToInfo: context.read<EligibilityBloc>().state.shipToInfo,
-                      selectedOrderType: state.selectedOrderType,
-                    ),
-                  );
+                  EligibilityEvent.update(
+                    user: context.read<UserBloc>().state.user,
+                    salesOrganisation:
+                        context.read<SalesOrgBloc>().state.salesOrganisation,
+                    salesOrgConfigs: context.read<SalesOrgBloc>().state.configs,
+                    customerCodeInfo:
+                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                    shipToInfo:
+                        context.read<EligibilityBloc>().state.shipToInfo,
+                    selectedOrderType: state.selectedOrderType,
+                  ),
+                );
             context.read<MaterialListBloc>().add(
                   MaterialListEvent.fetch(
                     user: context.read<UserBloc>().state.user,
