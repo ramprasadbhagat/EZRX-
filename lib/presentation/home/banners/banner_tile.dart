@@ -1,11 +1,15 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:dio/dio.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/config.dart' as c;
 import 'package:ezrxmobile/domain/banner/entities/banner.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
@@ -84,10 +88,35 @@ class BannerTile extends StatelessWidget {
                     if (banner.isKeyword && banner.keyword != '') {
                       if (context.mounted) {
                         context.read<MaterialListBloc>().add(
-                              MaterialListEvent.updateSearchKey(
-                                searchKey: banner.keyword,
+                              MaterialListEvent.searchMaterialList(
+                                user:
+                                    context.read<EligibilityBloc>().state.user,
+                                salesOrganisation: context
+                                    .read<SalesOrgBloc>()
+                                    .state
+                                    .salesOrganisation,
+                                configs:
+                                    context.read<SalesOrgBloc>().state.configs,
+                                customerCodeInfo: context
+                                    .read<CustomerCodeBloc>()
+                                    .state
+                                    .customerCodeInfo,
+                                shipToInfo: context
+                                    .read<ShipToCodeBloc>()
+                                    .state
+                                    .shipToInfo,
+                                selectedMaterialFilter: context
+                                    .read<MaterialFilterBloc>()
+                                    .state
+                                    .selectedMaterialFilter,
+                                pickAndPack: context
+                                    .read<EligibilityBloc>()
+                                    .state
+                                    .getPNPValueMaterial,
+                                searchKey: SearchKey(banner.keyword),
                               ),
                             );
+
                         await context.router.pushNamed('material_list_page');
                       }
                     } else if (banner.urlLink.isNotEmpty) {

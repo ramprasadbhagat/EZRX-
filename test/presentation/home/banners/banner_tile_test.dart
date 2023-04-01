@@ -2,12 +2,21 @@ import 'package:auto_route/auto_route.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dio/dio.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
+import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/banner/entities/banner.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
@@ -56,6 +65,13 @@ class MaterialListBlocMock
 
 class AutoRouterMock extends Mock implements AppRouter {}
 
+class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
+    implements EligibilityBloc {}
+
+class MockMaterialFilterBloc
+    extends MockBloc<MaterialFilterEvent, MaterialFilterState>
+    implements MaterialFilterBloc {}
+
 void main() {
   late GetIt locator;
   late HttpService mockHTTPService;
@@ -73,6 +89,8 @@ void main() {
   late CustomerCodeBloc customerCodeBlocMock;
   late ShipToCodeBloc shipToCodeBlocMock;
   late MaterialListBloc materialListBloc;
+  late EligibilityBlocMock eligibilityBlocMock;
+  late MaterialFilterBloc materialfilterBlocMock;
 
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
@@ -121,6 +139,9 @@ void main() {
       customerCodeBlocMock = CustomerCodeBlocMock();
       shipToCodeBlocMock = ShipToCodeBlocMock();
       materialListBloc = MaterialListBlocMock();
+      eligibilityBlocMock = EligibilityBlocMock();
+      materialfilterBlocMock = MockMaterialFilterBloc();
+
       when(() => userBlocMock.state).thenReturn(UserState.initial());
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
       when(() => authBlocMock.state).thenReturn(const AuthState.initial());
@@ -130,6 +151,10 @@ void main() {
           .thenReturn(ShipToCodeState.initial());
       when(() => materialListBloc.state)
           .thenReturn(MaterialListState.initial());
+      when(() => eligibilityBlocMock.state)
+          .thenReturn(EligibilityState.initial());
+      when(() => materialfilterBlocMock.state)
+          .thenReturn(MaterialFilterState.initial());
     });
 
     Widget getWUT(Config config) {
@@ -154,6 +179,10 @@ void main() {
               create: (context) => customerCodeBlocMock),
           BlocProvider<ShipToCodeBloc>(create: (context) => shipToCodeBlocMock),
           BlocProvider<MaterialListBloc>(create: (context) => materialListBloc),
+          BlocProvider<EligibilityBloc>(
+              create: ((context) => eligibilityBlocMock)),
+          BlocProvider<MaterialFilterBloc>(
+              create: ((context) => materialfilterBlocMock)),
         ],
         child: getWUT(config),
       );
@@ -305,6 +334,56 @@ void main() {
         bannerTile,
         findsOneWidget,
       );
+    });
+    testWidgets('Test Banner deep linking to filter material search',
+        (tester) async {
+      final config = locator<Config>();
+      config.appFlavor = Flavor.uat;
+      const fileSystem = LocalFileSystem();
+      mockBanner =
+          mockBanner.copyWith(isKeyword: true, keyword: 'fake-keyword');
+      when(
+        () => cacheManagerMock.getFileFromCache(mockUrl),
+      ).thenAnswer(
+        (invocation) async {
+          final fileInfo = FileInfo(
+            fileSystem.file('./assets/images/ezrxlogo.png'),
+            FileSource.Cache,
+            DateTime(2050),
+            mockUrl,
+          );
+
+          return fileInfo;
+        },
+      );
+
+      final wut = getScopedWidget(config);
+
+      await tester.pumpWidget(wut);
+      await tester.pump();
+
+      final bannerTile = find.byType(BannerTile);
+      expect(
+        bannerTile,
+        findsOneWidget,
+      );
+      await tester.tap(bannerTile);
+      await tester.pump();
+
+      verify(
+        () => materialListBloc.add(
+          MaterialListEvent.searchMaterialList(
+            configs: SalesOrganisationConfigs.empty(),
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            salesOrganisation: SalesOrganisation.empty(),
+            shipToInfo: ShipToInfo.empty(),
+            user: User.empty(),
+            pickAndPack: '',
+            selectedMaterialFilter: MaterialFilter.empty(),
+            searchKey: SearchKey('fake-keyword'),
+          ),
+        ),
+      ).called(1);
     });
   });
 }
