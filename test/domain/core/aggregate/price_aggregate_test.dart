@@ -5,6 +5,7 @@ import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal_material.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal_tier_rule.dart';
+import 'package:ezrxmobile/domain/order/entities/discount_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
@@ -1262,10 +1263,24 @@ void main() {
       materialNumber: fakeMaterialNumber,
       rate: -10,
     );
-    final fakeComboDealDetail = ComboDeal.empty().copyWith(
+    final fakePercentMaterialDeal = fakeMaterialDeal.copyWith(
+      type: DiscountType('%'),
+    );
+    final fakeAmountMaterialDeal = fakeMaterialDeal.copyWith(
+      type: DiscountType('USD'),
+    );
+    final fakePercentComboDealDetail = ComboDeal.empty().copyWith(
       materialComboDeals: [
         ComboDealMaterialSet(
-          materials: [fakeMaterialDeal],
+          materials: [fakePercentMaterialDeal],
+          setNo: 'fake-set',
+        )
+      ],
+    );
+    final fakeAmountComboDealDetail = ComboDeal.empty().copyWith(
+      materialComboDeals: [
+        ComboDealMaterialSet(
+          materials: [fakeAmountMaterialDeal],
           setNo: 'fake-set',
         )
       ],
@@ -1276,50 +1291,118 @@ void main() {
       price: Price.empty().copyWith(lastPrice: MaterialPrice(100)),
       quantity: 3,
     );
-    test(
-      'get self deal',
-      () {
-        final priceAggregate =
-            fakePriceAggregate.copyWith(comboDeal: fakeComboDealDetail);
-        expect(priceAggregate.selfComboDeal, fakeMaterialDeal);
-        expect(priceAggregate.selfComboDeal.minQty, 4);
-      },
-    );
 
-    test(
-      'get self deal for price when not provide rate',
-      () {
-        final nonEligiblepPriceAggregate = fakePriceAggregate.copyWith(
-          comboDeal: fakeComboDealDetail,
+    group('get self deal', () {
+      test('percent discount type', () {
+        final priceAggregate1 = fakePriceAggregate.copyWith(
+          comboDeal: fakePercentComboDealDetail,
         );
-        final eligiblepPriceAggregate = fakePriceAggregate.copyWith(
-          comboDeal: fakeComboDealDetail,
+        expect(priceAggregate1.selfComboDeal, fakePercentMaterialDeal);
+        expect(priceAggregate1.selfComboDeal.minQty, 4);
+        expect(priceAggregate1.selfComboDeal.discountInfo.rate, -10);
+        expect(
+          priceAggregate1.selfComboDeal.discountInfo.type,
+          DiscountType('%'),
+        );
+        expect(priceAggregate1.comboDealUnitPrice(), 90);
+        expect(priceAggregate1.comboDealTotalUnitPrice(), 270);
+      });
+
+      test('amount discount type', () {
+        final priceAggregate2 = fakePriceAggregate.copyWith(
+          comboDeal: fakeAmountComboDealDetail,
           quantity: 4,
         );
-        expect(nonEligiblepPriceAggregate.comboDealUnitPrice(), 90);
-        expect(nonEligiblepPriceAggregate.comboDealTotalUnitPrice(), 270);
-        expect(eligiblepPriceAggregate.comboDealUnitPrice(), 90);
-        expect(eligiblepPriceAggregate.comboDealTotalUnitPrice(), 360);
-      },
-    );
 
-    test(
-      'get price when provide rate',
-      () {
-        final priceAggregate = fakePriceAggregate.copyWith(
-          comboDeal: fakeComboDealDetail,
+        expect(priceAggregate2.comboDealUnitPrice(), -10);
+        expect(priceAggregate2.comboDealTotalUnitPrice(), -40);
+        expect(priceAggregate2.selfComboDeal, fakeAmountMaterialDeal);
+        expect(priceAggregate2.selfComboDeal.minQty, 4);
+        expect(priceAggregate2.selfComboDeal.discountInfo.rate, -10);
+        expect(
+          priceAggregate2.selfComboDeal.discountInfo.type,
+          DiscountType('USD'),
+        );
+      });
+
+      test('discount type is empty', () {
+        final fakeAmountComboDealDetail = ComboDeal.empty().copyWith(
+          materialComboDeals: [
+            ComboDealMaterialSet(
+              materials: [
+                fakeAmountMaterialDeal.copyWith(
+                  type: DiscountType(''),
+                )
+              ],
+              setNo: 'fake-set',
+            )
+          ],
+        );
+        final priceAggregate2 = fakePriceAggregate.copyWith(
+          comboDeal: fakeAmountComboDealDetail,
           quantity: 4,
         );
-        expect(priceAggregate.comboDealUnitPrice(rate: -20), 80);
-        expect(priceAggregate.comboDealTotalUnitPrice(rate: -20), 320);
-      },
-    );
+
+        expect(priceAggregate2.comboDealUnitPrice(), 100);
+        expect(priceAggregate2.comboDealTotalUnitPrice(), 400);
+      });
+    });
+
+    group('get price when provide rate,', () {
+      final priceAggregate = fakePriceAggregate.copyWith(
+        comboDeal: fakePercentComboDealDetail,
+        quantity: 4,
+      );
+      test('percent discount type', () {
+        expect(
+          priceAggregate.comboDealUnitPrice(
+            discount: DiscountInfo(type: DiscountType('%'), rate: -20),
+          ),
+          80,
+        );
+        expect(
+          priceAggregate.comboDealTotalUnitPrice(
+            discount: DiscountInfo(type: DiscountType('%'), rate: -20),
+          ),
+          320,
+        );
+      });
+      test('amount discount type', () {
+        expect(
+          priceAggregate.comboDealUnitPrice(
+            discount: DiscountInfo(type: DiscountType('USD'), rate: -20),
+          ),
+          -20,
+        );
+        expect(
+          priceAggregate.comboDealTotalUnitPrice(
+            discount: DiscountInfo(type: DiscountType('USD'), rate: -20),
+          ),
+          -80,
+        );
+      });
+
+      test('empty discount type', () {
+        expect(
+          priceAggregate.comboDealUnitPrice(
+            discount: DiscountInfo(type: DiscountType(''), rate: 100),
+          ),
+          100,
+        );
+        expect(
+          priceAggregate.comboDealTotalUnitPrice(
+            discount: DiscountInfo(type: DiscountType(''), rate: 100),
+          ),
+          400,
+        );
+      });
+    });
 
     test(
       'get qty eligible',
       () {
         final priceAggregate = fakePriceAggregate.copyWith(
-          comboDeal: fakeComboDealDetail,
+          comboDeal: fakePercentComboDealDetail,
         );
 
         expect(

@@ -23,19 +23,28 @@ extension ComboDealExtension on PriceAggregate {
 
   double get comboDealTotalListPrice => comboDealListPrice * quantity;
 
-  //TODO: Currently, we only handled the case when rate type is percent. May be we need to revisit and implement other case
   double comboDealUnitPrice({
-    double? rate,
-  }) =>
-      NumUtils.priceByRate(
+    DiscountInfo? discount,
+  }) {
+    final discountInfo = discount ?? selfComboDeal.discountInfo;
+
+    if (discountInfo.type.isPercent) {
+      return NumUtils.priceByRate(
         comboDealListPrice,
-        rate ?? selfComboDeal.rate,
+        discountInfo.rate,
       );
+    }
+    if (discountInfo.type.isAmount) {
+      return discountInfo.rate;
+    }
+
+    return comboDealListPrice;
+  }
 
   double comboDealTotalUnitPrice({
-    double? rate,
+    DiscountInfo? discount,
   }) =>
-      comboDealUnitPrice(rate: rate) * quantity;
+      comboDealUnitPrice(discount: discount) * quantity;
 
   bool get selfComboDealEligible => quantity >= selfComboDeal.minQty;
 }

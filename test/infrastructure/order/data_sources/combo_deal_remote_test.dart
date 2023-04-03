@@ -55,7 +55,7 @@ void main() async {
       setUpAll(() async {
         fakeJson = json.decode(
           await rootBundle
-              .loadString('assets/json/getComboDealForMaterialResponse.json'),
+              .loadString('assets/json/getComboDealForMaterialResponseK1.json'),
         );
       });
 
@@ -144,7 +144,7 @@ void main() async {
     setUpAll(() async {
       fakeJson = json.decode(
         await rootBundle.loadString(
-            'assets/json/getComboDealForPrincipleGroupResponse.json'),
+            'assets/json/getComboDealForPrincipleGroupResponseK5.json'),
       );
     });
 

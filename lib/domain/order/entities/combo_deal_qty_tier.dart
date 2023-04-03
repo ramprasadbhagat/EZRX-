@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/order/entities/discount_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -21,5 +22,10 @@ class ComboDealQtyTier with _$ComboDealQtyTier {
         minQty: 0,
         type: DiscountType(''),
         suffix: '',
+      );
+
+  DiscountInfo get discountInfo => DiscountInfo(
+        type: type,
+        rate: rate,
       );
 }

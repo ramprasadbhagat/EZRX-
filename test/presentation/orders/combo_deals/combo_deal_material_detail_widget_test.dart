@@ -210,6 +210,7 @@ void main() {
                 minQty: 4,
                 materialNumber: MaterialNumber('fake-number-1'),
                 rate: -10,
+                type: DiscountType('%'),
               )
             ],
             setNo: 'fake-set',
@@ -231,6 +232,7 @@ void main() {
                 materialNumber: MaterialNumber('fake-number-2'),
                 rate: -10,
                 mandatory: true,
+                type: DiscountType('%'),
               )
             ],
             setNo: 'fake-set',
@@ -266,7 +268,7 @@ void main() {
 
         expect(find.byType(ComboDealItem), findsNWidgets(2));
         expect(find.byType(MandatoryLabel), findsNWidgets(1));
-        expect(find.widgetWithText(DiscountLabel, ' -10.0'), findsNWidgets(2));
+        expect(find.widgetWithText(DiscountLabel, '-10.0 %'), findsNWidgets(2));
         expect(
           find.byKey(const Key('Total label 540.0')),
           findsOneWidget,
@@ -539,6 +541,7 @@ void main() {
     final comboDeal = ComboDeal.empty().copyWith(
       groupDeal: ComboDealGroupDeal.empty().copyWith(
         rate: -10,
+        type: DiscountType('%'),
       ),
       materialComboDeals: [
         ComboDealMaterialSet(
@@ -677,6 +680,7 @@ void main() {
         ComboDealQtyTier.empty().copyWith(
           minQty: 2,
           rate: -10,
+          type: DiscountType('%'),
         ),
       ],
       materialComboDeals: [

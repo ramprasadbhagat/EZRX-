@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/order/entities/discount_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -27,5 +28,10 @@ class ComboDealTierRule with _$ComboDealTierRule {
         maxTotalCurrency: '',
         type: DiscountType(''),
         minQty: 0,
+      );
+
+  DiscountInfo get discountInfo => DiscountInfo(
+        type: type,
+        rate: rate,
       );
 }

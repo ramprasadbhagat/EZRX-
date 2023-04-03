@@ -21,7 +21,7 @@ void main() async {
         () async {
           final res = json.decode(
             await rootBundle
-                .loadString('assets/json/getComboDealForMaterialResponse.json'),
+                .loadString('assets/json/getComboDealForMaterialResponseK1.json'),
           );
 
           final result = await localDataSource.getComboDealList();
@@ -40,7 +40,7 @@ void main() async {
         () async {
           final res = json.decode(
             await rootBundle.loadString(
-                'assets/json/getComboDealForPrincipleGroupResponse.json'),
+                'assets/json/getComboDealForPrincipleGroupResponseK5.json'),
           );
 
           final result = await localDataSource.getComboDeal();

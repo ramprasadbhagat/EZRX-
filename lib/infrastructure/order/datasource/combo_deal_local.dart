@@ -11,7 +11,7 @@ class ComboDealLocalDataSource {
     await Future.delayed(const Duration(seconds: 4));
     final data = json.decode(
       await rootBundle
-          .loadString('assets/json/getComboDealForMaterialResponse.json'),
+          .loadString('assets/json/getComboDealForMaterialResponseK1.json'),
     );
     final finalData = data['data']['comboDealForMaterials'];
 
@@ -24,7 +24,7 @@ class ComboDealLocalDataSource {
     await Future.delayed(const Duration(seconds: 4));
     final data = json.decode(
       await rootBundle
-          .loadString('assets/json/getComboDealForPrincipleGroupResponse.json'),
+          .loadString('assets/json/getComboDealForPrincipleGroupResponseK5.json'),
     );
     final finalData = data['data']['comboDealForPrincMatGrp'];
 

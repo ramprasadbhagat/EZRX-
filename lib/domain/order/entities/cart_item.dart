@@ -7,6 +7,7 @@ import 'package:ezrxmobile/domain/order/entities/combo_deal_group_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal_qty_tier.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal_tier_rule.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal_sku_tier.dart';
+import 'package:ezrxmobile/domain/order/entities/discount_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_price_detail.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
@@ -132,21 +133,20 @@ class CartItem with _$CartItem {
 
   CartItem copyWithStockInfo({
     required Map<MaterialNumber, List<StockInfo>> stockInfoMap,
-    required SalesOrganisationConfigs salesOrganisationConfigs, 
+    required SalesOrganisationConfigs salesOrganisationConfigs,
   }) =>
       copyWith(
         materials: materials.map((material) {
           final stockInfoList = stockInfoMap[material.getMaterialNumber] ?? [];
-          final stockInfo =
-              stockInfoList.isEmpty
+          final stockInfo = stockInfoList.isEmpty
               ? StockInfo.empty()
               : stockInfoList.firstWhere(
-                      (element) =>
-                          element.materialNumber ==
-                          material.materialInfo.materialNumber,
-                      orElse: () => StockInfo.empty(),
-                    );
-                    
+                  (element) =>
+                      element.materialNumber ==
+                      material.materialInfo.materialNumber,
+                  orElse: () => StockInfo.empty(),
+                );
+
           return material.copyWith(
             stockInfo: stockInfo,
             stockInfoList: stockInfoList,
@@ -291,7 +291,7 @@ class CartItem with _$CartItem {
     return bundleRate;
   }
 
-  double? comboDealRate({
+  DiscountInfo? comboDealRate({
     required PriceAggregate material,
   }) {
     final comboDeal = materials.firstComboDeal;
@@ -300,20 +300,20 @@ class CartItem with _$CartItem {
         return null;
       case ComboDealScheme.k2:
         return comboDeal.groupDeal != ComboDealGroupDeal.empty()
-            ? comboDeal.groupDeal.rate
-            : eligibleComboDealQtyTier.rate;
+            ? comboDeal.groupDeal.discountInfo
+            : eligibleComboDealQtyTier.discountInfo;
       case ComboDealScheme.k3:
-        return eligibleComboDealSKUTier.rate;
+        return eligibleComboDealSKUTier.discountInfo;
       case ComboDealScheme.k4:
-        return eligibleComboDealQtyTier.rate;
+        return eligibleComboDealQtyTier.discountInfo;
       case ComboDealScheme.k4_2:
         final selectedSuffix = comboDeal.selectedSuffixForK4_2(
           material: material,
           eligibleComboDealQtyTier: eligibleComboDealQtyTier,
         );
-        return selectedSuffix.rate;
+        return selectedSuffix.discountInfo;
       case ComboDealScheme.k5:
-        return eligibleComboDealTierRule.rate;
+        return eligibleComboDealTierRule.discountInfo;
     }
   }
 
@@ -327,39 +327,26 @@ class CartItem with _$CartItem {
     switch (comboDeal.scheme) {
       case ComboDealScheme.k1:
       case ComboDealScheme.k2:
-        return materials.fold<double>(
-          0,
-          (sum, item) =>
-              sum +
-              item.comboDealTotalUnitPrice(rate: comboDealRate(material: item)),
-        );
       case ComboDealScheme.k3:
-       return materials.fold<double>(
-          0,
-          (sum, item) =>
-              sum + item.comboDealTotalUnitPrice(rate: comboDealRate(material: item),),
-        );
       case ComboDealScheme.k4:
-        return materials.fold<double>(
-          0,
-          (sum, item) =>
-              sum +
-              item.comboDealTotalUnitPrice(
-                rate: eligibleComboDealQtyTier.rate,
-              ),
-        );
       case ComboDealScheme.k4_2:
         return materials.fold<double>(
           0,
           (sum, item) =>
               sum +
-              item.comboDealTotalUnitPrice(rate: comboDealRate(material: item)),
+              item.comboDealTotalUnitPrice(
+                discount: comboDealRate(material: item),
+              ),
         );
       case ComboDealScheme.k5:
-        return NumUtils.priceByRate(
-          _comboDealTotal,
-          eligibleComboDealTierRule.rate,
-        );
+        final discount = eligibleComboDealTierRule.discountInfo;
+
+        return discount.type.isPercent
+            ? NumUtils.priceByRate(
+                _comboDealTotal,
+                discount.rate,
+              )
+            : discount.rate;
     }
   }
 

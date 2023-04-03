@@ -1,0 +1,88 @@
+{
+  "data": {
+    "comboDealForMaterials": [
+      {
+        "groupDeal": null,
+        "flexiSKUTier": [],
+        "flexiQtyTier": [
+          {
+            "rate": "-15.00",
+            "type": "",
+            "conditionNumber": "0015958842",
+            "minQty": "2.000",
+            "suffix": "1",
+            "__typename": "FlexiQtyTier"
+          },
+          {
+            "rate": "-15.00",
+            "type": "%",
+            "conditionNumber": "0015958842",
+            "minQty": "3.000",
+            "suffix": "2",
+            "__typename": "FlexiQtyTier"
+          },
+          {
+            "rate": "-30.00",
+            "type": "USD",
+            "conditionNumber": "0015958842",
+            "minQty": "4.000",
+            "suffix": "3",
+            "__typename": "FlexiQtyTier"
+          }
+        ],
+        "flexiAmmountTier": [],
+        "materialComboDeals": [
+          {
+            "setNo": "00000001",
+            "materials": [
+              {
+                "minQty": "0.000",
+                "materialNumber": "000000000021130726",
+                "rate": "",
+                "type": "",
+                "conditionNumber": "",
+                "mandatory": false,
+                "suffix": "",
+                "__typename": "FlexiMaterialDeal"
+              },
+              {
+                "minQty": "0.000",
+                "materialNumber": "000000000021130718",
+                "rate": "",
+                "type": "",
+                "conditionNumber": "",
+                "mandatory": false,
+                "suffix": "",
+                "__typename": "FlexiMaterialDeal"
+              },
+              {
+                "minQty": "0.000",
+                "materialNumber": "000000000021222875",
+                "rate": "",
+                "type": "",
+                "conditionNumber": "",
+                "mandatory": false,
+                "__typename": "FlexiMaterialDeal"
+              },
+              {
+                "minQty": "0.000",
+                "materialNumber": "000000000021130728",
+                "rate": "",
+                "type": "",
+                "conditionNumber": "",
+                "mandatory": false,
+                "suffix": "",
+                "__typename": "FlexiMaterialDeal"
+              }
+            ],
+            "__typename": "FlexiDealSet"
+          }
+        ],
+        "__typename": "ComboDeal"
+      }
+    ]
+  },
+  "extensions": {
+    "trace-id": "33f3d49e8d204042b2ff19043fa85c97"
+  }
+}

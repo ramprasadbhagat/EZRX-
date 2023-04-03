@@ -1,0 +1,82 @@
+{
+  "data": {
+    "comboDealForMaterials": [
+      {
+        "groupDeal": null,
+        "flexiSKUTier": [
+          {
+            "rate": "-13.00",
+            "conditionNumber": "0015958901",
+            "minQty": "3",
+            "type": "%",
+            "__typename": "FlexiSKUTier"
+          },
+          {
+            "rate": "-14.00",
+            "conditionNumber": "0015958902",
+            "minQty": "4",
+            "type": "USD",
+            "__typename": "FlexiSKUTier"
+          },
+          {
+            "rate": "-12.00",
+            "conditionNumber": "0015958900",
+            "minQty": "2",
+            "type": "",
+            "__typename": "FlexiSKUTier"
+          }
+        ],
+        "flexiQtyTier": [],
+        "flexiAmmountTier": [],
+        "materialComboDeals": [
+          {
+            "setNo": "00000001",
+            "materials": [
+              {
+                "minQty": "5.000",
+                "materialNumber": "000000000021130726",
+                "rate": "",
+                "type": "",
+                "conditionNumber": "",
+                "mandatory": false,
+                "__typename": "FlexiMaterialDeal"
+              },
+              {
+                "minQty": "5.000",
+                "materialNumber": "000000000021130718",
+                "rate": "",
+                "type": "",
+                "conditionNumber": "",
+                "mandatory": false,
+                "__typename": "FlexiMaterialDeal"
+              },
+              {
+                "minQty": "5.000",
+                "materialNumber": "000000000021222875",
+                "rate": "",
+                "type": "",
+                "conditionNumber": "",
+                "mandatory": false,
+                "__typename": "FlexiMaterialDeal"
+              },
+              {
+                "minQty": "5.000",
+                "materialNumber": "000000000021130728",
+                "rate": "",
+                "type": "",
+                "conditionNumber": "",
+                "mandatory": false,
+                "__typename": "FlexiMaterialDeal"
+              }
+            ],
+            "__typename": "FlexiDealSet"
+          }
+        ],
+        "__typename": "ComboDeal"
+      }
+    ]
+  },
+  "extensions": {
+    "trace-id": "62c37460473c4540a294fa1b43131c96"
+  }
+}

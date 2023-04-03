@@ -271,7 +271,7 @@ class _ComboDealItem extends StatelessWidget {
                                   'Unit Price: ${StringUtils.displayPrice(
                                     material.salesOrgConfig,
                                     material.comboDealUnitPrice(
-                                      rate: comboGroup.comboDealRate(
+                                      discount: comboGroup.comboDealRate(
                                         material: material,
                                       ),
                                     ),

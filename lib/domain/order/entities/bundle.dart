@@ -32,6 +32,6 @@ class Bundle with _$Bundle {
 
   List<String> get bundleInfoMessage => sortedBundleInformation
       .map((e) =>
-          '${'Buy'.tr()} ${e.quantity} ${'or more'.tr()} ${e.type.isPercent() ? '${e.rate.abs()} ${e.type.getOrCrash()}' : '${e.type.getOrCrash()} ${e.rate}'}')
+          '${'Buy'.tr()} ${e.quantity} ${'or more'.tr()} ${e.type.isPercent ? '${e.rate.abs()} ${e.type.getOrCrash()}' : '${e.type.getOrCrash()} ${e.rate}'}')
       .toList();
 }

@@ -1,0 +1,65 @@
+{
+  "data": {
+    "comboDealForMaterials": [
+      {
+        "groupDeal": {
+          "minTotalAmount": "",
+          "maxTotalAmount": "",
+          "minTotalQuantity": "",
+          "rate": "-15.00",
+          "type": "%",
+          "conditionNumber": "0015958839",
+          "__typename": "GroupDeal"
+        },
+        "flexiSKUTier": [],
+        "flexiQtyTier": [],
+        "flexiAmmountTier": [],
+        "materialComboDeals": [
+          {
+            "setNo": "00000001",
+            "materials": [
+              {
+                "minQty": "2.000",
+                "materialNumber": "000000000021130726",
+                "rate": "",
+                "type": "",
+                "conditionNumber": "",
+                "mandatory": true,
+                "__typename": "FlexiMaterialDeal"
+              }
+            ],
+            "__typename": "FlexiDealSet"
+          },
+          {
+            "setNo": "00000002",
+            "materials": [
+              {
+                "minQty": "0.000",
+                "materialNumber": "000000000021130718",
+                "rate": "",
+                "type": "",
+                "conditionNumber": "",
+                "mandatory": false,
+                "__typename": "FlexiMaterialDeal"
+              },
+              {
+                "minQty": "0.000",
+                "materialNumber": "000000000021222875",
+                "rate": "",
+                "type": "",
+                "conditionNumber": "",
+                "mandatory": false,
+                "__typename": "FlexiMaterialDeal"
+              }
+            ],
+            "__typename": "FlexiDealSet"
+          }
+        ],
+        "__typename": "ComboDeal"
+      }
+    ]
+  },
+  "extensions": {
+    "trace-id": "e3d897709a2e469ca35f89e76c924b80"
+  }
+}

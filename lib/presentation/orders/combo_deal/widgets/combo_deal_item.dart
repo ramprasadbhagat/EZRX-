@@ -5,7 +5,7 @@ import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal_group_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal_qty_tier.dart';
-import 'package:ezrxmobile/domain/utils/string_utils.dart';
+import 'package:ezrxmobile/domain/order/entities/discount_info.dart';
 import 'package:ezrxmobile/presentation/orders/combo_deal/widgets/combo_deal_label.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/quantity_input.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -135,26 +135,24 @@ class _DiscountLabel extends StatelessWidget {
     final comboDeal = material.comboDeal;
     switch (comboDeal.scheme) {
       case ComboDealScheme.k1:
+        final discountInfo = material.selfComboDeal.discountInfo;
+        if (discountInfo.type.isEmpty) return const SizedBox();
+
         return DiscountLabel(
-          label: StringUtils.displayDiscount(
-            material.selfComboDeal.rate,
-            material.selfComboDeal.type,
-          ),
+          label: discountInfo.text,
         );
       case ComboDealScheme.k2:
-        return material.comboDeal.groupDeal != ComboDealGroupDeal.empty()
-            ? DiscountLabel(
-                label: StringUtils.displayDiscount(
-                  comboDeal.groupDeal.rate,
-                  comboDeal.groupDeal.type,
-                ),
-              )
-            : DiscountLabel(
-                label: StringUtils.displayDiscount(
-                  comboDeal.flexiQtyTier.first.rate,
-                  comboDeal.flexiQtyTier.first.type,
-                ),
-              );
+        final discountInfo =
+            material.comboDeal.groupDeal != ComboDealGroupDeal.empty()
+                ? comboDeal.groupDeal.discountInfo
+                : comboDeal.flexiQtyTier.first.discountInfo;
+
+        if (discountInfo.type.isEmpty) return const SizedBox();
+
+        return DiscountLabel(
+          label: discountInfo.text,
+        );
+
       case ComboDealScheme.k3:
       case ComboDealScheme.k4:
         return const SizedBox();
@@ -164,20 +162,21 @@ class _DiscountLabel extends StatelessWidget {
             .state
             .totalSelectedQuantity;
 
-        final selectedSuffix = comboDeal.selectedSuffixForK4_2(
-          material: material,
-          eligibleComboDealQtyTier:
-              comboDeal.descendingSortedQtyTiers.firstWhere(
-            (tier) => totalSelectedQuantity >= tier.minQty,
-            orElse: () => ComboDealQtyTier.empty(),
-          ),
-        );
+        final discountInfo = comboDeal
+            .selectedSuffixForK4_2(
+              material: material,
+              eligibleComboDealQtyTier:
+                  comboDeal.descendingSortedQtyTiers.firstWhere(
+                (tier) => totalSelectedQuantity >= tier.minQty,
+                orElse: () => ComboDealQtyTier.empty(),
+              ),
+            )
+            .discountInfo;
+
+        if (discountInfo.type.isEmpty) return const SizedBox();
 
         return DiscountLabel(
-          label: StringUtils.displayDiscount(
-            selectedSuffix.rate,
-            selectedSuffix.type,
-          ),
+          label: discountInfo.text,
         );
       case ComboDealScheme.k5:
         return const SizedBox();
@@ -210,7 +209,7 @@ class _PriceLabel extends StatelessWidget {
           label: 'ZP Price',
           salesConfigs: salesConfigs,
           discountPrice: material.comboDealUnitPrice(
-            rate: rate(context: context),
+            discount: rate(context: context),
           ),
           price: material.comboDealListPrice,
           discountEnable: false,
@@ -219,7 +218,7 @@ class _PriceLabel extends StatelessWidget {
           label: 'Total Price',
           salesConfigs: salesConfigs,
           discountPrice: material.comboDealTotalUnitPrice(
-            rate: rate(context: context),
+            discount: rate(context: context),
           ),
           price: material.comboDealTotalListPrice,
           discountEnable: _enableDiscount,
@@ -243,15 +242,15 @@ class _PriceLabel extends StatelessWidget {
     }
   }
 
-  double? rate({required BuildContext context}) {
+  DiscountInfo? rate({required BuildContext context}) {
     final comboDeal = material.comboDeal;
     switch (comboDeal.scheme) {
       case ComboDealScheme.k1:
         return null;
       case ComboDealScheme.k2:
         return comboDeal.groupDeal != ComboDealGroupDeal.empty()
-            ? comboDeal.groupDeal.rate
-            : comboDeal.flexiQtyTier.first.rate;
+            ? comboDeal.groupDeal.discountInfo
+            : comboDeal.flexiQtyTier.first.discountInfo;
       case ComboDealScheme.k3:
       case ComboDealScheme.k4:
         return null;
@@ -269,7 +268,7 @@ class _PriceLabel extends StatelessWidget {
           ),
         );
 
-        return selectedSuffix.rate;
+        return selectedSuffix.discountInfo;
       case ComboDealScheme.k5:
         return null;
     }

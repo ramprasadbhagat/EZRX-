@@ -5,6 +5,7 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
+import 'package:ezrxmobile/domain/order/entities/discount_info.dart';
 import 'package:ezrxmobile/presentation/orders/combo_deal/widgets/combo_deal_label.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -74,8 +75,10 @@ class ComboDealCheckout extends StatelessWidget {
                     currentDeal.scheme != ComboDealScheme.k1 &&
                     currentDeal.scheme != ComboDealScheme.k4_2)
                   DiscountLabel(
-                    label:
-                        '${cartItem.comboDealRate(material: PriceAggregate.empty())} %',
+                    label: cartItem
+                            .comboDealRate(material: PriceAggregate.empty())
+                            ?.text ??
+                        '',
                   ),
               ],
             ),
@@ -83,17 +86,23 @@ class ComboDealCheckout extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 5),
                 child: Wrap(
-                  children: currentDeal.descendingSortedMinAmountTiers.reversed
-                      .map(
-                        (tier) => Padding(
-                          padding: const EdgeInsets.only(right: 5),
-                          child: DiscountLabel(
-                            label:
-                                '>=${tier.minTotalAmount.toInt()} - ${tier.rate.abs().toInt()}%',
-                          ),
+                  runSpacing: 5,
+                  children:
+                      currentDeal.descendingSortedMinAmountTiers.reversed.map(
+                    (tier) {
+                      final rateText = DiscountInfo(
+                        rate: tier.discountInfo.rate.abs(),
+                        type: tier.discountInfo.type,
+                      ).text;
+
+                      return Padding(
+                        padding: const EdgeInsets.only(right: 5),
+                        child: DiscountLabel(
+                          label: '>=${tier.minTotalAmount.toInt()} - $rateText',
                         ),
-                      )
-                      .toList(),
+                      );
+                    },
+                  ).toList(),
                 ),
               ),
             SizedBox(

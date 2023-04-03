@@ -188,16 +188,17 @@ class ComboDealPrincipleDetailPage extends StatelessWidget
                           itemBuilder: (context, index, item) => BlocBuilder<
                               ComboDealPrincipleDetailBloc,
                               ComboDealPrincipleDetailState>(
-                            buildWhen: (previous, current) =>
-                                previous.selectedItems != current.selectedItems,
                             builder: (context, state) {
                               final isSelected =
                                   state.selectedItems[item.getMaterialNumber] ??
                                       false;
+                              final material =
+                                  state.items[item.getMaterialNumber] ??
+                                      PriceAggregate.empty();
 
                               return Card(
                                 child: ComboDealItem(
-                                  material: item,
+                                  material: material,
                                   isSelected: isSelected,
                                   onCheckBoxPressed: () => context
                                       .read<ComboDealPrincipleDetailBloc>()

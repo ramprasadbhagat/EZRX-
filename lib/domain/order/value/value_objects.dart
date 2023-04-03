@@ -240,8 +240,16 @@ class DiscountType extends ValueObject<String> {
 
   const DiscountType._(this.value);
 
-  bool isPercent() {
+  bool get isAmount {
+    return !isEmpty && !isPercent;
+  }
+
+  bool get isPercent {
     return materialBundleTypeIsPercent(value.getOrElse(() => ''));
+  }
+
+  bool get isEmpty {
+    return value.getOrElse(() => '').isEmpty;
   }
 }
 

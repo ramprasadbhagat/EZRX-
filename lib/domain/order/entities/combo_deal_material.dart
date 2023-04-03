@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/order/entities/discount_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -38,5 +39,10 @@ class ComboDealMaterial with _$ComboDealMaterial {
         conditionNumber: '',
         mandatory: false,
         suffix: '',
+      );
+
+  DiscountInfo get discountInfo => DiscountInfo(
+        type: type,
+        rate: rate,
       );
 }

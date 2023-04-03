@@ -26,8 +26,8 @@
                 {
                   "minQty": "15.000",
                   "materialNumber": "000000000021130718",
-                  "rate": "-4.00",
-                  "type": "%",
+                  "rate": "",
+                  "type": "",
                   "conditionNumber": "0015958834",
                   "mandatory": true
                 }
@@ -39,8 +39,8 @@
                 {
                   "minQty": "20.000",
                   "materialNumber": "000000000021222875",
-                  "rate": "-8.50",
-                  "type": "%",
+                  "rate": "8",
+                  "type": "USD",
                   "conditionNumber": "0015958836",
                   "mandatory": true
                 }
