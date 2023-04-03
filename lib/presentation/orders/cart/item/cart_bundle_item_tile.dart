@@ -39,6 +39,7 @@ class CartBundleItemTile extends StatelessWidget {
     final enableMaterialLevelTax = salesOrgConfigs.enableMaterialLevelTax;
 
     return Card(
+      key: Key('bundleCartItem${materialCommonInfo.bundle.bundleCode}'),
       child: Column(
         children: [
           CustomSlidable(
@@ -285,7 +286,7 @@ class _BundleMaterialItemState extends State<_BundleMaterialItem> {
               Text(
                 '${'Expiry Date : '.tr()}${widget.material.stockInfo.expiryDate.toValidDateString}',
                 key: ValueKey(
-                  'expiryDate_${widget.material.getMaterialNumber}',
+                  'expiryDate${widget.material.getMaterialNumber.getOrDefaultValue('')}',
                 ),
                 style: Theme.of(context).textTheme.titleSmall?.apply(
                       color: ZPColors.lightGray,
@@ -302,7 +303,7 @@ class _BundleMaterialItemState extends State<_BundleMaterialItem> {
               isEnabled:
                   widget.material.tenderContract == TenderContract.empty() &&
                       !state.isFetching,
-              quantityTextKey: const Key('cartItem'),
+              quantityTextKey: Key('cartItem${widget.material.getMaterialNumber.getOrDefaultValue('')}'),
               controller: controller,
               onFieldChange: (value) {
                 locator<CountlyService>().addCountlyEvent(
@@ -404,8 +405,8 @@ class _BundleMaterialItemState extends State<_BundleMaterialItem> {
                       ),
                     );
               },
-              quantityAddKey: const Key('cartAdd'),
-              quantityDeleteKey: const Key('cartDelete'),
+              quantityAddKey: Key('cartAdd${widget.material.getMaterialNumber.getOrCrash()}'),
+              quantityDeleteKey: Key('cartDelete${widget.material.getMaterialNumber.getOrCrash()}'),
               minimumQty: 0,
               isLoading: state.isFetching,
             );

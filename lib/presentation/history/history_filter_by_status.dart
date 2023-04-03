@@ -50,7 +50,7 @@ class HistoryFilterByStatus extends StatelessWidget {
               Column(
                 children: state.getAllStatusName.map((status) {
                   return CheckboxListTile(
-                    key: Key('checkboxListTile_$status'),
+                    key: Key('checkboxListTile$status'),
                     dense: true,
                     checkColor: Colors.white,
                     activeColor: ZPColors.kPrimaryColor,

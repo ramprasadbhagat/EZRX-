@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/application/returns/returns_overview/returns_overview_bloc.dart';
 import 'package:universal_io/io.dart';
@@ -340,7 +341,8 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               context.read<UserBloc>().state.isNotEmpty &&
               context.read<UserBloc>().state.userCanCreateOrder &&
               previous.selectedOrderType != current.selectedOrderType &&
-              current.selectedOrderType != OrderDocumentType.empty(),
+              current.selectedOrderType != OrderDocumentType.empty() && 
+              context.read<SalesOrgBloc>().state.salesOrganisation != SalesOrganisation.empty(),
           listener: (context, state) {
             context.read<MaterialFilterBloc>().add(
                   MaterialFilterEvent.fetch(

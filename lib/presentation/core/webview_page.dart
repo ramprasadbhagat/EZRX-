@@ -10,13 +10,14 @@ class WebViewPage extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<WebViewPage> createState() => _WebViewPageState();
+  State<WebViewPage> createState() => WebViewPageState();
 }
 
-class _WebViewPageState extends State<WebViewPage> {
+class WebViewPageState extends State<WebViewPage> {
   bool isLoading = true;
   bool errorLoadingUrl = false;
 
+  late InAppWebViewController controller;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,7 +50,9 @@ class _WebViewPageState extends State<WebViewPage> {
                       mediaPlaybackRequiresUserGesture: false,
                     ),
                   ),
-                  onWebViewCreated: (InAppWebViewController controller) {},
+                  onWebViewCreated: (InAppWebViewController webViewController) {
+                    controller = webViewController;
+                  },
                   onLoadStart: ((controller, url) {
                     setState(() {
                       isLoading = true;

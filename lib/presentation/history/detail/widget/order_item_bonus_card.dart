@@ -112,6 +112,7 @@ class OrderItemBonusCard extends StatelessWidget {
                       ),
                       eligibiltiyBlocState.salesOrgConfigs.batchNumDisplay
                           ? BalanceTextRow(
+                              key: const Key('batchNumberExpiryDate'),
                               keyText: 'Batch Number & Expiry Date'.tr(),
                               valueText: orderHistoryDetailsBonusAggregate
                                   .orderItem.batchAndExpiryDate,

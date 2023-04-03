@@ -150,8 +150,14 @@ class RoleType extends ValueObject<String> {
     return value.getOrElse(() => '') == 'zp_admin_attachments';
   }
 
+  // it indicate both check the customer with role type as user or client user
   bool get isClientUser {
-    return value.getOrElse(() => '') == 'client_user';
+    return value.getOrElse(() => '') == 'client_user' || isUser;
+  }
+
+  // it indicate the customer with role type as user
+  bool get isUser {
+    return value.getOrElse(() => '') == 'user';
   }
 
   bool get isInternalSalesRep {

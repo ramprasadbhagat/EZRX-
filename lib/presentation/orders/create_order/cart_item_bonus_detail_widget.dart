@@ -17,6 +17,7 @@ class BonusDetails extends StatelessWidget {
         children: [
           if (cartItem.price.sameMaterialBonus.isNotEmpty)
             Column(
+              key: const Key('bonusesMaterial'),
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [

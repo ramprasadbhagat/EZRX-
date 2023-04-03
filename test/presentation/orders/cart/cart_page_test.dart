@@ -711,19 +711,21 @@ void main() {
 
         await tester.pump();
         final item = find.byKey(Key(
-            'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber}'));
+            'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber.getOrDefaultValue('')}'));
         expect(item, findsOneWidget);
         final listWidget = find.byWidgetPredicate((w) => w is ListTile);
         expect(listWidget, findsAtLeastNWidgets(1));
-        final addWidget = tester.widget(find.byKey(const Key('cartAdd')));
-        await tester.tap(find.byWidget(addWidget));
+        final addWidget = find.byKey(Key(
+            'cartAdd${mockCartItemWithDataList.first.getMaterialNumber.getOrDefaultValue('')}'));
+        await tester.tap(addWidget);
         await tester.pump();
 
         await tester.drag(
             find.byKey(const Key('slidable')), const Offset(-300, 0.0));
         await tester.pump();
 
-        final removeWidget = tester.widget(find.byKey(const Key('cartDelete')));
+        final removeWidget = tester.widget(find.byKey(Key(
+            'cartDelete${mockCartItemWithDataList.first.getMaterialNumber.getOrDefaultValue('')}')));
         await tester.tap(find.byWidget(removeWidget));
         await tester.pump();
       });
@@ -743,15 +745,17 @@ void main() {
 
         await tester.pump();
         final item = find.byKey(Key(
-            'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber}'));
+            'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber.getOrDefaultValue('')}'));
         expect(item, findsOneWidget);
         final listWidget = find.byWidgetPredicate((w) => w is ListTile);
         expect(listWidget, findsAtLeastNWidgets(1));
-        final addWidget = tester.widget(find.byKey(const Key('cartAdd')));
+        final addWidget = tester.widget(find.byKey(Key(
+            'cartAdd${mockCartItemWithDataList.first.getMaterialNumber.getOrDefaultValue('')}')));
         await tester.tap(find.byWidget(addWidget));
         await tester.pump();
 
-        final removeWidget = tester.widget(find.byKey(const Key('cartDelete')));
+        final removeWidget = tester.widget(find.byKey(Key(
+            'cartDelete${mockCartItemWithDataList.first.getMaterialNumber.getOrDefaultValue('')}')));
         await tester.tap(find.byWidget(removeWidget));
         await tester.pump();
       });
@@ -771,12 +775,13 @@ void main() {
 
         await tester.pump();
         final item = find.byKey(Key(
-            'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber}'));
+            'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber.getOrDefaultValue('')}'));
         expect(item, findsOneWidget);
         final listWidget = find.byWidgetPredicate((w) => w is ListTile);
         expect(listWidget, findsAtLeastNWidgets(1));
 
-        final removeWidget = tester.widget(find.byKey(const Key('cartDelete')));
+        final removeWidget = tester.widget(find.byKey(Key(
+            'cartDelete${mockCartItemWithDataList.first.getMaterialNumber.getOrDefaultValue('')}')));
         await tester.tap(find.byWidget(removeWidget));
         await tester.pump();
       });
@@ -899,7 +904,7 @@ void main() {
 
         await tester.pump();
         final item = find.byKey(Key(
-            'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber}'));
+            'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber.getOrDefaultValue('')}'));
         expect(item, findsOneWidget);
         final listWidget = find.byWidgetPredicate((w) => w is ListTile);
         expect(listWidget, findsAtLeastNWidgets(1));
@@ -934,7 +939,7 @@ void main() {
 
         await tester.pump();
         final item = find.byKey(Key(
-            'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber}'));
+            'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber.getOrDefaultValue('')}'));
         expect(item, findsOneWidget);
         final listWidget = find.byWidgetPredicate((w) => w is ListTile);
         expect(listWidget, findsAtLeastNWidgets(1));
@@ -1033,15 +1038,17 @@ void main() {
 
         await tester.pump();
         final item = find.byKey(Key(
-            'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber}'));
+            'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber.getOrDefaultValue('')}'));
         expect(item, findsOneWidget);
         final listWidget = find.byWidgetPredicate((w) => w is ListTile);
         expect(listWidget, findsAtLeastNWidgets(1));
-        final removeWidget = tester.widget(find.byKey(const Key('cartDelete')));
+        final removeWidget = tester.widget(find.byKey(Key(
+            'cartDelete${mockCartItemWithDataList.first.getMaterialNumber.getOrDefaultValue('')}')));
         await tester.tap(find.byWidget(removeWidget));
 
         await tester.pump();
-        final priceWidget = find.byKey(const Key('priceOverride'));
+        final priceWidget = find.byKey(Key(
+            'priceOverride${mockCartItemWithDataList.first.getMaterialNumber.getOrDefaultValue('')}'));
         expect(priceWidget, findsOneWidget);
         final unitPrice = find.byKey(const Key('unitPrice'));
 
@@ -1088,12 +1095,12 @@ void main() {
 
         await tester.pump();
         final item = find.byKey(Key(
-            'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber}'));
+            'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber.getOrDefaultValue('')}'));
         expect(item, findsOneWidget);
         final listWidget = find.byWidgetPredicate((w) => w is ListTile);
         expect(listWidget, findsAtLeastNWidgets(1));
         await tester.pump();
-        final priceWidget = find.byKey(const Key('priceOverride'));
+        final priceWidget = find.byKey(Key('priceOverride${mockCartItemWithDataList.first.getMaterialNumber.getOrDefaultValue('')}'));
         expect(priceWidget, findsOneWidget);
         await tester.tap(priceWidget);
         await tester.pump();
@@ -1116,16 +1123,17 @@ void main() {
 
         await tester.pump();
         final item = find.byKey(Key(
-            'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber}'));
+            'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber.getOrDefaultValue('')}'));
         expect(item, findsOneWidget);
         final listWidget = find.byWidgetPredicate((w) => w is ListTile);
         expect(listWidget, findsAtLeastNWidgets(1));
-        final removeWidget = tester.widget(find.byKey(const Key('cartDelete')));
+        final removeWidget = tester.widget(find.byKey(Key(
+            'cartDelete${mockCartItemWithDataList.first.getMaterialNumber.getOrDefaultValue('')}')));
         await tester.tap(find.byWidget(removeWidget));
 
         await tester.pump();
         final priceWidget = find.byKey(
-          const Key('priceOverride'),
+          Key('priceOverride${mockCartItemWithDataList.first.getMaterialNumber.getOrDefaultValue('')}'),
         );
         // tester.widget(find.byKey(const Key('priceOverride')));
         expect(priceWidget, findsOneWidget);
@@ -1153,11 +1161,11 @@ void main() {
 
         await tester.pump();
         final item = find.byKey(Key(
-            'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber}'));
+            'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber.getOrDefaultValue('')}'));
         expect(item, findsOneWidget);
         final listWidget = find.byWidgetPredicate((w) => w is ListTile);
         expect(listWidget, findsAtLeastNWidgets(1));
-        final priceWidget = find.byKey(const Key('priceOverride'));
+        final priceWidget = find.byKey(Key('priceOverride${mockCartItemWithDataList.first.getMaterialNumber.getOrDefaultValue('')}'));
         expect(priceWidget, findsOneWidget);
         final unitPrice = find.byKey(const Key('unitPrice'));
 
@@ -1625,7 +1633,7 @@ void main() {
 
         await tester.pump();
         final item = find.byKey(Key(
-            'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber}'));
+            'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber.getOrDefaultValue('')}'));
         expect(item, findsOneWidget);
         await tester.tap(item);
         await tester.pump();
@@ -1636,9 +1644,21 @@ void main() {
 
       testWidgets('Test have cart item update cart button pressed',
           (tester) async {
+        final newList = [
+          mockCartItemWithDataList.first.copyWith(
+            materialInfo: mockCartItemWithDataList.first.materialInfo.copyWith(
+              hasValidTenderContract: true,
+            ),
+            tenderContract: TenderContract.empty().copyWith(
+              contractNumber:
+                  TenderContractNumber.tenderContractItemNumber('0000123'),
+              tenderOrderReason: TenderContractReason('750'),
+            ),
+          )
+        ];
         when(() => cartBloc.state).thenReturn(
           CartState.initial().copyWith(
-            cartItems: [CartItem.material(mockCartItemWithDataList.first)],
+            cartItems: [CartItem.material(newList.first)],
             isFetching: false,
           ),
         );
@@ -1647,7 +1667,7 @@ void main() {
                 selectedTenderContract: TenderContract.empty().copyWith(
                   contractNumber:
                       TenderContractNumber.tenderContractItemNumber('0000123'),
-                  remainingTenderQuantity: 12,
+                  tenderOrderReason: TenderContractReason('750'),
                 ),
                 apiFailureOrSuccessOption: optionOf(const Right('success')),
                 isFetching: false,
@@ -1659,31 +1679,33 @@ void main() {
               TenderContract.empty().copyWith(
                   contractNumber:
                       TenderContractNumber.tenderContractItemNumber('0000125'),
-                  tenderOrderReason: TenderContractReason('730'))
+                  tenderOrderReason: TenderContractReason('750'))
             ]));
         when(() => addToCartBlocMock.state).thenReturn(
           AddToCartState.initial().copyWith(
             cartItem: mockCartItemBundles.first.copyWith(
               materialInfo: MaterialInfo.empty().copyWith(
                   hasValidTenderContract: true,
-                  materialNumber: MaterialNumber('000000000023168451')),
+                  materialNumber: MaterialNumber('0000123')),
               tenderContract: TenderContract.empty().copyWith(
                 contractNumber:
-                    TenderContractNumber.tenderContractItemNumber('0000001234'),
-                tenderOrderReason: TenderContractReason('730'),
+                    TenderContractNumber.tenderContractItemNumber('0000123'),
+                tenderOrderReason: TenderContractReason('750'),
               ),
             ),
           ),
         );
+        whenListen(tenderContractBlocMock,
+            Stream.fromIterable([tenderContractBlocMock.state]));
         await tester.runAsync(() async {
           await tester.pumpWidget(getWidget());
         });
 
         await tester.pump();
         final item = find.byKey(Key(
-            'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber}'));
+            'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber.getOrDefaultValue('')}'));
         expect(item, findsOneWidget);
-        await tester.tap(item, warnIfMissed: false);
+        await tester.tap(item);
         await tester.pump();
         final updateCartBottomSheet = find.byType(UpdateCartButton);
         expect(updateCartBottomSheet, findsOneWidget);

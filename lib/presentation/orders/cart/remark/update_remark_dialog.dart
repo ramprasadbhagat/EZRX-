@@ -24,10 +24,12 @@ class EditDeleteDialog extends StatelessWidget {
       itemBuilder: (context) {
         return [
           const PopupMenuItem(
+            key: Key('editRemark'),
             value: 'edit',
             child: Text('Edit'),
           ),
           const PopupMenuItem(
+            key: Key('deleteRemark'),
             value: 'delete',
             child: Text('Delete'),
           ),

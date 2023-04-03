@@ -11,6 +11,7 @@ class OrderHistoryFilterDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      key: const Key('orderHistoryFilterDrawer'),
       width: MediaQuery.of(context).size.width * 0.8,
       child: BlocConsumer<OrderHistoryFilterBloc, OrderHistoryFilterState>(
         listenWhen: (previous, current) =>

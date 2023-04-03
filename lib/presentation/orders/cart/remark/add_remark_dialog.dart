@@ -91,12 +91,12 @@ class AddRemarkDialog {
                 content: RemarksForm(currentRemarkData: remarks),
                 actions: [
                   PlatformDialogAction(
-                    key: const Key(cancelText),
+                    key: Key(cancelText.toLowerCase()),
                     child: const Text(cancelText).tr(),
                     onPressed: () => context.router.pop(),
                   ),
                   PlatformDialogAction(
-                    key: Key(confirmText),
+                    key: Key(confirmText.toLowerCase()),
                     onPressed: () => context.read<RemarksFormBloc>().add(
                           const RemarksFormEvent.submit(),
                         ),

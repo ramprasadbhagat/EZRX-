@@ -155,7 +155,7 @@ class FavouriteListTile extends StatelessWidget {
                                   ),
                                 )
                               : IconButton(
-                                  key: const Key('deleteFavouriteFavPage'),
+                                  key: Key('deleteFavouriteFavPage${favourite.materialNumber.getOrDefaultValue('')}'),
                                   icon: const Icon(
                                     Icons.favorite,
                                     color: ZPColors.secondary,

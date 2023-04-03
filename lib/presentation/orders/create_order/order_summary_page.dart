@@ -366,9 +366,10 @@ class _UtilityButton extends StatelessWidget {
                       enabled: isLoading,
                       child: Text(
                         isUpdateOrder ? 'Update' : 'Save',
+                        key: Key(isUpdateOrder ? 'Update' : 'Save'),
                       ).tr(),
                     )
-                  : const Text('Back').tr(),
+                  : const Text('Back', key: Key('stepBack'),).tr(),
             );
           },
         );
@@ -784,6 +785,7 @@ class _MarketMessage extends StatelessWidget {
 
         return !orderType.documentType.isSpecialOrderType
             ? RichText(
+              key: const Key('minimumOrderAmount'),
                 text: TextSpan(
                   children: <TextSpan>[
                     TextSpan(

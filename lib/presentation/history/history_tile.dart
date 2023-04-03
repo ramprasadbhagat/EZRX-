@@ -113,6 +113,7 @@ class OrderHistoryListTile extends StatelessWidget {
                   salesOrgConfigs.disableProcessingStatus
                       ? const SizedBox.shrink()
                       : Container(
+                          key: const Key('disableProcessingStatus'),
                           padding: const EdgeInsets.symmetric(
                             horizontal: 10,
                             vertical: 4,
@@ -141,6 +142,7 @@ class OrderHistoryListTile extends StatelessWidget {
                 valueText: orderHistoryItem.orderType,
               ),
               BalanceTextRow(
+                key: Key('materialId${orderHistoryItem.materialNumber.getOrDefaultValue('')}'),
                 keyText: 'Material ID'.tr(),
                 valueText: orderHistoryItem.materialNumber.displayMatNo,
               ),

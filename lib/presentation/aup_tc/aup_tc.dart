@@ -27,6 +27,7 @@ class AupTCDialogState extends State<AupTCDialog> {
   int lastHighValue = 0;
   bool isLoading = false;
 
+  late InAppWebViewController controller;
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AupTcBloc, AupTcState>(
@@ -48,6 +49,9 @@ class AupTCDialogState extends State<AupTCDialog> {
                 InAppWebView(
                   key: const ValueKey('auptcwebview'),
                   initialFile: state.initialFile,
+                  onWebViewCreated: (InAppWebViewController webViewController) {
+                    controller = webViewController;
+                  },
                   initialUrlRequest: URLRequest(url: Uri.parse(state.url)),
                   onLoadStart: (controller, url) {
                     setState(

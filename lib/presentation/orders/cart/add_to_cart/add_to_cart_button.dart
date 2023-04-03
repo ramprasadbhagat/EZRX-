@@ -82,6 +82,7 @@ class AddToCartButton extends StatelessWidget {
             if (userCanCreateOrder)
               SafeArea(
                 child: ElevatedButton(
+                  key: const Key('addMaterialToCart'),
                   style: isAddToCartAllowed &&
                       isSelectedTenderContractValid(context) &&
                       isValidQuantitySelected(context)

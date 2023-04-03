@@ -39,7 +39,7 @@ class CartButton extends StatelessWidget {
                 position: bd.BadgePosition.topEnd(top: 0, end: 3),
                 animationType: bd.BadgeAnimationType.fade,
                 child: IconButton(
-                  key: const Key('CartButton'),
+                  key: const Key('cartButton'),
                   icon: const Icon(Icons.shopping_cart_outlined),
                   onPressed: () {
                     final cartState = context.read<CartBloc>().state;

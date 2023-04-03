@@ -43,7 +43,8 @@ class MaterialListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
-        key: Key('materialOption${materialInfo.materialNumber.getOrDefaultValue('')}'),
+        key: Key(
+            'materialOption${materialInfo.materialNumber.getOrDefaultValue('')}',),
         onTap: () => _showMaterialDetail(context),
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -83,6 +84,9 @@ class MaterialListItem extends StatelessWidget {
                     materialInfo.defaultMaterialDescription.isNotEmpty)
                 ? Text(
                     materialInfo.defaultMaterialDescription,
+                    key: Key(
+                      'defaultMaterialDescription${materialInfo.materialNumber.getOrDefaultValue('')}',
+                    ),
                     style: Theme.of(context).textTheme.titleSmall?.apply(
                           color: ZPColors.lightGray,
                         ),
@@ -92,6 +96,9 @@ class MaterialListItem extends StatelessWidget {
                     materialInfo.itemRegistrationNumber.isNotEmpty)
                 ? Text(
                     materialInfo.itemRegistrationNumber,
+                    key: Key(
+                      'registrationNumber${materialInfo.materialNumber.getOrDefaultValue('')}',
+                    ),
                     style: Theme.of(context).textTheme.titleSmall?.apply(
                           color: ZPColors.lightGray,
                         ),
@@ -101,6 +108,8 @@ class MaterialListItem extends StatelessWidget {
                 materialInfo.genericMaterialName.isNotEmpty)
               Text(
                 materialInfo.genericMaterialName,
+                key: Key(
+                    'genericMaterial${materialInfo.materialNumber.getOrDefaultValue('')}',),
                 style: Theme.of(context).textTheme.titleSmall?.apply(
                       color: ZPColors.lightGray,
                     ),
@@ -304,6 +313,9 @@ class _GovermentMaterialCode extends StatelessWidget {
                 materialInfo.governmentMaterialCode.isNotEmpty
             ? Text(
                 '${'Government Material Code:'.tr()} ${materialInfo.governmentMaterialCode}',
+                key: Key(
+                  'governmentMaterialCode${materialInfo.materialNumber.getOrDefaultValue('')}',
+                ),
                 style: Theme.of(context).textTheme.titleSmall?.apply(
                       color: ZPColors.lightGray,
                     ),
@@ -356,6 +368,9 @@ class _PriceLabel extends StatelessWidget {
               priceAggregate.taxDetails.isNotEmpty
                   ? Text(
                       priceAggregate.taxDetails,
+                      key: Key(
+                        'taxClassification${materialInfo.materialNumber.getOrDefaultValue('')}',
+                      ),
                       style: Theme.of(context).textTheme.titleSmall?.apply(
                             color: ZPColors.lightGray,
                           ),
@@ -364,6 +379,9 @@ class _PriceLabel extends StatelessWidget {
               context.read<SalesOrgBloc>().state.configs.enableVat
                   ? Text(
                       '${'Price before ${context.read<SalesOrgBloc>().state.salesOrg.taxCode}: '.tr()}${priceAggregate.display(PriceType.finalPrice)}',
+                      key: Key(
+                        'priceBefore${materialInfo.materialNumber.getOrDefaultValue('')}',
+                      ),
                       style: Theme.of(context).textTheme.titleSmall?.apply(
                             color: ZPColors.lightGray,
                           ),
@@ -372,6 +390,9 @@ class _PriceLabel extends StatelessWidget {
               context.read<SalesOrgBloc>().state.configs.enableListPrice
                   ? Text(
                       '${'List Price:'.tr()}${priceAggregate.display(PriceType.listPrice)}',
+                      key: Key(
+                        'listPrice${materialInfo.materialNumber.getOrDefaultValue('')}',
+                      ),
                       style: Theme.of(context).textTheme.titleSmall?.apply(
                             color: ZPColors.lightGray,
                           ),

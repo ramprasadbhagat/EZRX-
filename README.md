@@ -43,9 +43,11 @@ https://resocoder.com/2020/03/09/flutter-firebase-ddd-course-1-domain-driven-des
 
 ### Integration test
 #### Local test/ CI test
-```fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/app_test.dart ```
+For SG market:
+type command `make run_sg_client_test` to run integration test
+type command `make run_sg_external_test` to run integration test
 #### Browserstack test
-```fvm flutter test --flavor uat --machine integration_test/app_test.dart > report.json```
+```fvm flutter test --flavor uat --machine integration_test/<filePath> > report.json```
 
 ### Flavor
 | Flavor| Package name | App Name | Endpoint |

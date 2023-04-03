@@ -75,7 +75,7 @@ class CartMaterialItemTile extends StatelessWidget {
                 borderRadius: 8,
                 child: ListTile(
                   contentPadding: showCheckBox ? EdgeInsets.zero : null,
-                  key: Key('cartItem${material.materialInfo.materialNumber}'),
+                  key: Key('materialCartItem${material.materialInfo.materialNumber.getOrDefaultValue('')}'),
                   onTap: () {
                     CartBottomSheet.showUpdateCartBottomSheet(
                       context: context,
@@ -347,6 +347,7 @@ class CartMaterialItemTileDetails extends StatelessWidget {
           if (material.salesOrgConfig.expiryDateDisplay)
             Text(
               '${'Expiry Date : '.tr()}${material.stockInfo.expiryDate.toValidDateString}',
+              key: Key('expiryDate${material.materialInfo.materialNumber.getOrDefaultValue('')}'),
               style: Theme.of(context).textTheme.titleSmall?.apply(
                     color: ZPColors.lightGray,
                   ),
@@ -354,6 +355,8 @@ class CartMaterialItemTileDetails extends StatelessWidget {
           if (!material.salesOrgConfig.hideStockDisplay)
             Text(
               '${'In Stock : '.tr()}${material.stockInfo.inStock.getOrDefaultValue('')}',
+              key: Key(
+                  'Stock${material.materialInfo.materialNumber.getOrDefaultValue('')}${material.stockInfo.inStock.getOrDefaultValue('')}',),
               style: Theme.of(context).textTheme.titleSmall?.apply(
                     color: ZPColors.lightGray,
                   ),
@@ -367,7 +370,8 @@ class CartMaterialItemTileDetails extends StatelessWidget {
           ),
           !material.isSpecialOrderTypeNotTH
               ? InkWell(
-                  key: const Key('priceOverride'),
+                  key: Key(
+                      'priceOverride${material.materialInfo.materialNumber.getOrDefaultValue('')}',),
                   onTap: () async {
                     if (_isPriceOverRideVisible(context)) {
                       final cartBloc = context.read<CartBloc>();
@@ -502,9 +506,9 @@ class _CartItemQuantityInputState extends State<_CartItemQuantityInput> {
         return QuantityInput(
           isEnabled: !widget.cartItem.materialInfo.hasValidTenderContract &&
               !state.isFetching,
-          quantityAddKey: const Key('cartAdd'),
-          quantityDeleteKey: const Key('cartDelete'),
-          quantityTextKey: const Key('cartItem'),
+          quantityAddKey: Key('cartAdd${widget.cartItem.getMaterialNumber.getOrDefaultValue('')}'),
+          quantityDeleteKey:  Key('cartDelete${widget.cartItem.getMaterialNumber.getOrDefaultValue('')}'),
+          quantityTextKey: Key('cartItem${widget.cartItem.getMaterialNumber.getOrDefaultValue('')}'),
           controller: controller,
           onFieldChange: (value) {
             locator<CountlyService>().addCountlyEvent(

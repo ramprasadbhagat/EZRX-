@@ -66,6 +66,7 @@ class _BodyContent extends StatelessWidget {
             height: 15,
           ),
           ElevatedButton(
+            key: const Key('createNewOrder'),
             onPressed: () {
               locator<CountlyService>().addCountlyEvent('thankyou_to_create');
               context.router.pushAndPopUntil(
@@ -79,6 +80,7 @@ class _BodyContent extends StatelessWidget {
             ),
           ),
           ElevatedButton(
+            key: const Key('goToOrderHistory'),
             onPressed: () {
               locator<CountlyService>()
                   .addCountlyEvent('order_history', segmentation: {

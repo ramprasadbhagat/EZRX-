@@ -14,7 +14,7 @@ class EdiUserBanner extends StatelessWidget {
       builder: (context, state) {
         return state.customerCodeInfo.status.isEDI
             ? SizedBox(
-                key: const Key('EdiUserBanner'),
+                key: const Key('ediUserBanner'),
                 height: 38,
                 child: Container(
                   decoration: const BoxDecoration(
@@ -29,6 +29,7 @@ class EdiUserBanner extends StatelessWidget {
                       'Orders for EDI Customers are disabled. Please place orders through EDI'
                           .tr(),
                       textAlign: TextAlign.center,
+                      key: const Key('ediCustomerOrderDisable'),
                       style: const TextStyle(
                           fontSize: 12, fontWeight: FontWeight.w600,),
                     ),

@@ -44,13 +44,14 @@ class AdditionalDetails extends StatelessWidget {
           : AutovalidateMode.disabled,
       child: Column(
         children: [
-          _TextFormField(
-            labelText: 'Customer PO Reference',
-            keyText: 'customerPOReferenceKey',
-            maxLength: 35,
-            label: AdditionalDetailsLabel.customerPoReference,
-            additionalDetails: state.additionalDetailsData,
-          ),
+          config.poNumberRequired ?
+              _TextFormField(
+                labelText: 'Customer PO Reference',
+                keyText: 'customerPOReferenceKey',
+                maxLength: 35,
+                label: AdditionalDetailsLabel.customerPoReference,
+                additionalDetails: state.additionalDetailsData,
+              ) : const SizedBox.shrink(),
           config.enableSpecialInstructions
               ? _TextFormField(
                   labelText: 'Special Instructions',
@@ -431,6 +432,7 @@ class _DatePickerFieldState extends State<_DatePickerField> {
               previous.isLoading != current.isLoading,
           builder: (context, state) {
             return InkWell(
+              key: const Key('requestedDeliveryDate'),
               onTap: state.additionalDetailsData.greenDeliveryEnabled ||
                       state.isLoading
                   ? null
@@ -661,6 +663,7 @@ class _GreenDeliveryBox extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 16.0),
       child: GestureDetector(
+        key: const Key('greenDeliveryCheckBox'),
         onTap: () {
           if (isLoading) return;
 

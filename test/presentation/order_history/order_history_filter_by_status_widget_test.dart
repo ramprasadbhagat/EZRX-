@@ -74,7 +74,7 @@ void main() {
       expect(filtercByStatus, findsOneWidget);
       expect(filterclearAllButton, findsOneWidget);
 
-      final checkboxListTile = find.byKey(const Key('checkboxListTile_Cancelled'));
+      final checkboxListTile = find.byKey(const Key('checkboxListTileCancelled'));
       expect(checkboxListTile, findsWidgets);
 
       await tester.tap(checkboxListTile.first);

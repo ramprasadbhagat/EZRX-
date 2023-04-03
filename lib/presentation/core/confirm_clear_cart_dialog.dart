@@ -28,6 +28,7 @@ class ConfirmClearDialog {
             }
           },
           child: PlatformAlertDialog(
+            key: const Key('customerCodeDialogChange'),
             title: Text(title),
             content: Text(description),
             actions: [

@@ -12,6 +12,7 @@ class LicenseModel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: const Key('licenseDetails'),
       backgroundColor: Colors.transparent,
       appBar: AppBar(
         title: Text(

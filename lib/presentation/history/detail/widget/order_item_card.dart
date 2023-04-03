@@ -102,6 +102,7 @@ class OrderItemCard extends StatelessWidget {
                       ),
                       eligibilityBlocState.salesOrgConfigs.batchNumDisplay 
                           ? BalanceTextRow(
+                              key: const Key('batchNumberExpiryDate'),
                               keyText: 'Batch Number & Expiry Date'.tr(),
                               valueText: orderHistoryDetailsBonusAggregate
                                   .orderItem.batchAndExpiryDate,
@@ -171,6 +172,7 @@ class OrderItemCard extends StatelessWidget {
                         ),
                       if (enableTaxDisplay)
                         BalanceTextRow(
+                          key: const Key('enableTaxDisplay'),
                           keyText: 'Included Tax '.tr(),
                           valueText: orderHistoryDetailsBonusAggregate
                               .orderItem.tax

@@ -229,7 +229,7 @@ void main() {
               item: mockFavourite1,
               user: User.empty(),
             ))).called(1);
-        final favouriteButton = find.byKey(const Key('deleteFavouriteFavPage'));
+        final favouriteButton = find.byKey(Key('deleteFavouriteFavPage${mockFavourite1.materialNumber.getOrDefaultValue('')}'));
 
         expect(favouriteButton, findsOneWidget);
         await tester.tap(favouriteButton);

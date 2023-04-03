@@ -315,10 +315,34 @@ void main() {
           .thenReturn(MaterialListState.initial());
       await tester.pumpWidget(getScopedWidget(const MaterialRoot()));
       final materialsListPage = find.byKey(const Key('materialListPage'));
-      final searchButton = find.byKey(const Key('CartButton'));
+      final searchButton = find.byKey(const Key('cartButton'));
       expect(materialsListPage, findsOneWidget);
       expect(searchButton, findsOneWidget);
       await tester.tap(searchButton);
+      await tester.pump();
+    });
+
+    testWidgets('Matrials List Page covid tab check', (tester) async {
+      when(() => materialListBlocMock.state)
+          .thenReturn(MaterialListState.initial());
+      when(() => eligibilityBlocMock.state)
+          .thenReturn(EligibilityState.initial().copyWith(
+            customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+              customerAttr7: CustomerAttr7('ZEV'),
+            ),
+            user: User.empty().copyWith(
+              role: Role.empty().copyWith(
+                type: RoleType('user')
+              )
+            ),
+            salesOrganisation: SalesOrganisation.empty().copyWith(
+              salesOrg: SalesOrg('2601')
+            ),
+          ));
+      await tester.pumpWidget(getScopedWidget(const MaterialRoot()));
+      final materialsListPage = find.byKey(const Key('materialListPage'));
+      expect(materialsListPage, findsOneWidget);
+      expect(find.byKey(const Key('covid-19')), findsOneWidget);
       await tester.pump();
     });
 

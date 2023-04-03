@@ -29,6 +29,7 @@ class LoginOnBehalfPage extends StatelessWidget {
     );
 
     return Scaffold(
+      key: const Key('loginOnBehalfPage'),
       appBar: AppBar(title: const Text('Login on behalf').tr()),
       body: BlocConsumer<ProxyLoginFormBloc, ProxyLoginFormState>(
         listenWhen: (previous, current) =>

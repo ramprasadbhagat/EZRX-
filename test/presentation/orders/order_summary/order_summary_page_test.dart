@@ -364,7 +364,7 @@ void main() {
         tester.binding.window.devicePixelRatioTestValue = 1.0;
         final orderSummaryPage = find.byKey(const Key('orderSummaryKey'));
         expect(orderSummaryPage, findsOneWidget);
-        final ediUserBanner = find.byKey(const ValueKey('EdiUserBanner'));
+        final ediUserBanner = find.byKey(const ValueKey('ediUserBanner'));
         expect(ediUserBanner, findsOneWidget);
         final continueKey =
             find.byKey(const Key('continueButtonKey'), skipOffstage: false);

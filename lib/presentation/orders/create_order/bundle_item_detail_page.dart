@@ -113,7 +113,6 @@ class BundleItemDetailPage extends StatelessWidget {
                       return _ListContent(
                         materialInfo: materialDetail.info,
                         enableDefaultMD: enableDefaultMD,
-                        bundleCode: bundleAggregate.bundle.bundleCode,
                         controller: controller,
                       );
                     },
@@ -140,6 +139,7 @@ class BundleItemDetailPage extends StatelessWidget {
                     }
 
                     return ElevatedButton(
+                      key: const Key('addBundlesToCart'),
                       onPressed: () {
                               locator<CountlyService>()
                                   .addCountlyEvent('Add bundles to cart');
@@ -214,14 +214,12 @@ class BundleItemDetailPage extends StatelessWidget {
 class _ListContent extends StatelessWidget {
   final MaterialInfo materialInfo;
   final bool enableDefaultMD;
-  final String bundleCode;
   final TextEditingController controller;
 
   const _ListContent({
     Key? key,
     required this.materialInfo,
     required this.enableDefaultMD,
-    required this.bundleCode,
     required this.controller,
   }) : super(key: key);
 
@@ -268,10 +266,10 @@ class _ListContent extends StatelessWidget {
           ),
           QuantityInput(
             isEnabled: true,
-            quantityAddKey: const Key('bundleAdd'),
-            quantityDeleteKey: const Key('bundleDelete'),
+            quantityAddKey: Key('bundleAdd${materialInfo.materialNumber.getOrDefaultValue('')}'),
+            quantityDeleteKey: Key('bundleDelete${materialInfo.materialNumber.getOrDefaultValue('')}'),
             quantityTextKey:
-                Key('$bundleCode${materialInfo.materialNumber.getValue()}'),
+                Key('bundleText${materialInfo.materialNumber.getOrDefaultValue('')}'),
             onFieldChange: (int value) {
               locator<CountlyService>().addCountlyEvent(
                 'changed_quantity',

@@ -24,6 +24,8 @@ class BatchNumberLabel extends StatelessWidget {
     }
 
     return InkWell(
+      key:
+          Key('batchNumber${material.getMaterialNumber.getOrDefaultValue('')}'),
       onTap: () {
         showModalBottomSheet(
           isScrollControlled: true,
@@ -93,7 +95,7 @@ class _BatchActionSheet extends StatelessWidget {
                     ),
                   title: Text(
                     stockInfo.batch.getOrDefaultValue(''),
-                      
+                    key: const Key('selectBatchNumberRadioListTile'),
                   ),
                   groupValue: item.materials.first.stockInfo,
                   controlAffinity: ListTileControlAffinity.trailing,

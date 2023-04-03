@@ -87,6 +87,7 @@ class _AddToCartState extends State<AddToCart> {
         return Future.value(true);
       },
       child: Scaffold(
+        key: const Key('materialDetailsPage'),
         backgroundColor: ZPColors.white,
         appBar: AppBar(
           title: const Text('Material Detail').tr(),

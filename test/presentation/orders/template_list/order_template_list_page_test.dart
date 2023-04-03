@@ -140,7 +140,7 @@ void main() {
 
       final materialsListPage = find.byKey(const Key('OrderTemplateListPage'));
       expect(materialsListPage, findsOneWidget);
-      final cartButton = find.byKey(const Key('CartButton'));
+      final cartButton = find.byKey(const Key('cartButton'));
       expect(cartButton, findsOneWidget);
     });
 

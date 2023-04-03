@@ -159,6 +159,7 @@ class HistoryTab extends StatelessWidget {
                                 current.orderHistoryFilter.appliedFilterCount,
                             builder: (context, state) {
                               return FilterCountButton(
+                                key: const Key('filterOrderHistory'),
                                 filterCount:
                                     state.orderHistoryFilter.appliedFilterCount,
                                 onTap: () {

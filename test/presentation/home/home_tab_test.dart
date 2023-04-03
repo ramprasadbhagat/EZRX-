@@ -295,7 +295,7 @@ void main() {
         expect(find.byType(HomeTab), findsOneWidget);
         expect(
             find.byKey(const ValueKey('homeSalesOrgSelector')), findsOneWidget);
-        final ediUserBanner = find.byKey(const ValueKey('EdiUserBanner'));
+        final ediUserBanner = find.byKey(const ValueKey('ediUserBanner'));
         final returnsExpansionTile = find.byType(ReturnsExpansionTile);
         if(remoteConfigServiceMock.getReturnsConfig()){
            expect(returnsExpansionTile, findsOneWidget);

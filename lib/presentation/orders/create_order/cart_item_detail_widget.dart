@@ -78,6 +78,7 @@ class _CartItemDetailWidgetState extends State<CartItemDetailWidget> {
         ),
         if (widget.cartItem.price.isDiscountEligible)
           Column(
+            key: const Key('tieredPricing'),
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(

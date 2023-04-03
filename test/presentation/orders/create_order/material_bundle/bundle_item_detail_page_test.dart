@@ -287,10 +287,12 @@ void main() {
           ),
         ),
       );
+      await tester.pump();
 
-      final itemQuantityAddButton = find.byKey(const Key('bundleAdd'));
+      final itemQuantityAddButton = find
+          .byKey(Key('bundleAdd${mockMaterialInfo.materialNumber.getOrDefaultValue('')}'));
       final quantityTextWidget = find.byKey(Key(
-          '${mockBundleAggregate.bundle.bundleCode}${mockMaterialInfo.materialNumber.getValue()}'));
+          'bundleText${mockMaterialInfo.materialNumber.getOrDefaultValue('')}'));
       final quantityTextInput = tester.widget<TextField>(quantityTextWidget);
 
       expect(quantityTextInput.controller?.value.text, '0');
@@ -310,10 +312,12 @@ void main() {
         ),
       );
 
-      final itemQuantityAddButton = find.byKey(const Key('bundleAdd'));
-      final itemQuantityDeleteButton = find.byKey(const Key('bundleDelete'));
+      final itemQuantityAddButton = find
+          .byKey(Key('bundleAdd${mockMaterialInfo.materialNumber.getOrDefaultValue('')}'));
+      final itemQuantityDeleteButton = find.byKey(
+          Key('bundleDelete${mockMaterialInfo.materialNumber.getOrDefaultValue('')}'));
       final quantityTextWidget = find.byKey(Key(
-          '${mockBundleAggregate.bundle.bundleCode}${mockMaterialInfo.materialNumber.getValue()}'));
+          'bundleText${mockMaterialInfo.materialNumber.getOrDefaultValue('')}'));
       final quantityTextInput = tester.widget<TextField>(quantityTextWidget);
 
       expect(quantityTextInput.controller?.value.text, '0');
@@ -335,7 +339,7 @@ void main() {
           ),
         );
         final quantityTextWidget = find.byKey(Key(
-            '${mockBundleAggregate.bundle.bundleCode}${mockMaterialInfo.materialNumber.getValue()}'));
+            'bundleText${mockMaterialInfo.materialNumber.getOrDefaultValue('')}'));
         final quantityTextInput = tester.widget<TextField>(quantityTextWidget);
 
         quantityTextInput.controller?.clear();
@@ -369,7 +373,7 @@ void main() {
       );
 
       final quantityTextWidget = find.byKey(Key(
-          '${mockBundleAggregate.bundle.bundleCode}${mockMaterialInfo.materialNumber.getValue()}'));
+          'bundleText${mockMaterialInfo.materialNumber.getOrDefaultValue('')}'));
 
       await tester.enterText(quantityTextWidget, '5');
       await tester.pump();

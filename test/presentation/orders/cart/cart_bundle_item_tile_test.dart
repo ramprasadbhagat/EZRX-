@@ -190,13 +190,14 @@ void main() {
         await tester.pump();
 
         await tester.tap(quantityInput.first, warnIfMissed: false);
-        final cartDelete = find.byKey(const ValueKey('cartDelete'));
-        expect(cartDelete, findsNWidgets(2));
+        final cartDelete = find.byKey(ValueKey('cartDelete${bundleItem.materials.first.getMaterialNumber.getOrDefaultValue('')}'));
+        expect(cartDelete, findsOneWidget);
         final expiryDate = find.byKey(
-            ValueKey('expiryDate_${priceAggregates.first.getMaterialNumber}'));
+            ValueKey('expiryDate${priceAggregates.first.getMaterialNumber.getOrDefaultValue('')}'));
         expect(expiryDate, findsOneWidget);
 
-        await tester.tap(cartDelete.first);
+
+        await tester.tap(cartDelete);
         verify(
           () => countlyService.addCountlyEvent(
             'deduct_quantity',

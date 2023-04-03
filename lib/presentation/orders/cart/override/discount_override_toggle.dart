@@ -61,6 +61,7 @@ class DiscountOverrideToggle extends StatelessWidget {
                   Theme.of(context).textTheme.titleSmall?.copyWith(fontSize: 8),
             ).tr(),
             CupertinoSwitch(
+              key: const Key('discountOverrideToggle'),
               value: state.isDiscountOverride,
               activeColor: ZPColors.kPrimaryColor,
               onChanged: (bool val) {
@@ -105,6 +106,7 @@ class DiscountOverrideToggle extends StatelessWidget {
                 ),
                 child: Text(
                   '${'Discount : '.tr()}${cartItem.price.zdp8Override.getOrDefaultValue(0)}',
+                  key: const Key('discountOverridePercentage'),
                   style: Theme.of(context).textTheme.labelSmall?.apply(
                         color: state.isDiscountOverride
                             ? ZPColors.red
