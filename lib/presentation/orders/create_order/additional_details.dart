@@ -15,7 +15,6 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:ezrxmobile/presentation/utils/runes_length_limiting_text_input_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_svg/svg.dart';
 
 class AdditionalDetails extends StatelessWidget {
@@ -524,7 +523,7 @@ class _DatePickerFieldState extends State<_DatePickerField> {
     BuildContext context,
   ) async {
     final futureDeliveryDay = widget.futureDeliveryDay;
-    final orderDate = await showPlatformDatePicker(
+    final orderDate = await showDatePicker(
       context: context,
       firstDate: DateTime.now().add(const Duration(days: 1)),
       lastDate: futureDeliveryDay.isEmpty
