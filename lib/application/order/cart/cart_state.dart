@@ -9,6 +9,7 @@ class CartState with _$CartState {
     required Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
     required bool isFetching,
     required bool isClearing,
+    required bool isFetchingBonus,
   }) = _CartState;
 
   factory CartState.initial() => CartState(
@@ -16,6 +17,7 @@ class CartState with _$CartState {
         apiFailureOrSuccessOption: none(),
         isFetching: false,
         isClearing: false,
+        isFetchingBonus: false,
       );
 
   double subTotalBasedOnOrderType({required bool isSpecial}) =>

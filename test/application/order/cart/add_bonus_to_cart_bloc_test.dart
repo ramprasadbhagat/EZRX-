@@ -122,7 +122,7 @@ void main() {
               )
             ]),
           ],
-          isFetching: true,
+          isFetchingBonus: true,
         ),
         CartState.initial().copyWith(
           apiFailureOrSuccessOption: none(),
@@ -136,7 +136,7 @@ void main() {
               ])
             ])
           ],
-          isFetching: false,
+          isFetchingBonus: false,
         ),
       ],
     );
@@ -231,7 +231,7 @@ void main() {
               )
             ]),
           ],
-          isFetching: true,
+          isFetchingBonus: true,
         ),
         CartState.initial().copyWith(
           apiFailureOrSuccessOption:
@@ -244,7 +244,7 @@ void main() {
               ])
             ])
           ],
-          isFetching: false,
+          isFetchingBonus: false,
         ),
       ],
     );
@@ -293,7 +293,7 @@ void main() {
             mockMaterialCartItemFirst
                 .copyWith(materials: [PriceAggregate.empty()])
           ],
-          isFetching: true,
+          isFetchingBonus: true,
         ),
         CartState.initial().copyWith(
           apiFailureOrSuccessOption: optionOf(const Left(
@@ -303,7 +303,7 @@ void main() {
             mockMaterialCartItemFirst
                 .copyWith(materials: [PriceAggregate.empty()])
           ],
-          isFetching: false,
+          isFetchingBonus: false,
         ),
       ],
     );

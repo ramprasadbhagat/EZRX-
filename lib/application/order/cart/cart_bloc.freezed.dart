@@ -10947,6 +10947,7 @@ mixin _$CartState {
       throw _privateConstructorUsedError;
   bool get isFetching => throw _privateConstructorUsedError;
   bool get isClearing => throw _privateConstructorUsedError;
+  bool get isFetchingBonus => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CartStateCopyWith<CartState> get copyWith =>
@@ -10962,7 +10963,8 @@ abstract class $CartStateCopyWith<$Res> {
       {List<CartItem> cartItems,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
       bool isFetching,
-      bool isClearing});
+      bool isClearing,
+      bool isFetchingBonus});
 }
 
 /// @nodoc
@@ -10982,6 +10984,7 @@ class _$CartStateCopyWithImpl<$Res, $Val extends CartState>
     Object? apiFailureOrSuccessOption = null,
     Object? isFetching = null,
     Object? isClearing = null,
+    Object? isFetchingBonus = null,
   }) {
     return _then(_value.copyWith(
       cartItems: null == cartItems
@@ -11000,6 +11003,10 @@ class _$CartStateCopyWithImpl<$Res, $Val extends CartState>
           ? _value.isClearing
           : isClearing // ignore: cast_nullable_to_non_nullable
               as bool,
+      isFetchingBonus: null == isFetchingBonus
+          ? _value.isFetchingBonus
+          : isFetchingBonus // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -11015,7 +11022,8 @@ abstract class _$$_CartStateCopyWith<$Res> implements $CartStateCopyWith<$Res> {
       {List<CartItem> cartItems,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
       bool isFetching,
-      bool isClearing});
+      bool isClearing,
+      bool isFetchingBonus});
 }
 
 /// @nodoc
@@ -11033,6 +11041,7 @@ class __$$_CartStateCopyWithImpl<$Res>
     Object? apiFailureOrSuccessOption = null,
     Object? isFetching = null,
     Object? isClearing = null,
+    Object? isFetchingBonus = null,
   }) {
     return _then(_$_CartState(
       cartItems: null == cartItems
@@ -11051,6 +11060,10 @@ class __$$_CartStateCopyWithImpl<$Res>
           ? _value.isClearing
           : isClearing // ignore: cast_nullable_to_non_nullable
               as bool,
+      isFetchingBonus: null == isFetchingBonus
+          ? _value.isFetchingBonus
+          : isFetchingBonus // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -11062,7 +11075,8 @@ class _$_CartState extends _CartState {
       {required final List<CartItem> cartItems,
       required this.apiFailureOrSuccessOption,
       required this.isFetching,
-      required this.isClearing})
+      required this.isClearing,
+      required this.isFetchingBonus})
       : _cartItems = cartItems,
         super._();
 
@@ -11079,10 +11093,12 @@ class _$_CartState extends _CartState {
   final bool isFetching;
   @override
   final bool isClearing;
+  @override
+  final bool isFetchingBonus;
 
   @override
   String toString() {
-    return 'CartState(cartItems: $cartItems, apiFailureOrSuccessOption: $apiFailureOrSuccessOption, isFetching: $isFetching, isClearing: $isClearing)';
+    return 'CartState(cartItems: $cartItems, apiFailureOrSuccessOption: $apiFailureOrSuccessOption, isFetching: $isFetching, isClearing: $isClearing, isFetchingBonus: $isFetchingBonus)';
   }
 
   @override
@@ -11098,7 +11114,9 @@ class _$_CartState extends _CartState {
             (identical(other.isFetching, isFetching) ||
                 other.isFetching == isFetching) &&
             (identical(other.isClearing, isClearing) ||
-                other.isClearing == isClearing));
+                other.isClearing == isClearing) &&
+            (identical(other.isFetchingBonus, isFetchingBonus) ||
+                other.isFetchingBonus == isFetchingBonus));
   }
 
   @override
@@ -11107,7 +11125,8 @@ class _$_CartState extends _CartState {
       const DeepCollectionEquality().hash(_cartItems),
       apiFailureOrSuccessOption,
       isFetching,
-      isClearing);
+      isClearing,
+      isFetchingBonus);
 
   @JsonKey(ignore: true)
   @override
@@ -11122,7 +11141,8 @@ abstract class _CartState extends CartState {
       required final Option<Either<ApiFailure, dynamic>>
           apiFailureOrSuccessOption,
       required final bool isFetching,
-      required final bool isClearing}) = _$_CartState;
+      required final bool isClearing,
+      required final bool isFetchingBonus}) = _$_CartState;
   const _CartState._() : super._();
 
   @override
@@ -11133,6 +11153,8 @@ abstract class _CartState extends CartState {
   bool get isFetching;
   @override
   bool get isClearing;
+  @override
+  bool get isFetchingBonus;
   @override
   @JsonKey(ignore: true)
   _$$_CartStateCopyWith<_$_CartState> get copyWith =>

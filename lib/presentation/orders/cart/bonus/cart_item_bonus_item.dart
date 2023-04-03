@@ -157,113 +157,129 @@ class _BonusItemTileState extends State<BonusItemTile> {
               ),
               Padding(
                 padding: const EdgeInsets.only(right: 20.0),
-                child: QuantityInput(
-                  isEnabled: widget.isBonusOverrideEnable,
-                  quantityAddKey: const Key('addBonusFromCart'),
-                  quantityDeleteKey: const Key('removeBonusFromCart'),
-                  quantityTextKey: Key(
-                    'itemCount${widget.bonusItem.qty}',
-                  ),
-                  controller: quantityController,
-                  onFieldChange: (value) {
-                    locator<CountlyService>().addCountlyEvent(
-                      'changed_quantity',
-                      segmentation: {
-                        'materialNum': widget
-                            .bonusItem.materialInfo.materialNumber
-                            .getOrCrash(),
-                      },
-                    );
-                    context.read<CartBloc>().add(
-                          CartEvent.addBonusToCartItem(
-                            item: widget.cartItem,
-                            overrideQty: true,
-                            bonusItem: widget.bonusItem.copyWith(qty: value),
-                            customerCodeInfo: context
-                                .read<CustomerCodeBloc>()
-                                .state
-                                .customerCodeInfo,
-                            doNotallowOutOfStockMaterial: context
-                                .read<EligibilityBloc>()
-                                .state
-                                .doNotAllowOutOfStockMaterials,
-                            salesOrganisation: context
-                                .read<SalesOrgBloc>()
-                                .state
-                                .salesOrganisation,
-                            salesOrganisationConfigs:
-                                context.read<SalesOrgBloc>().state.configs,
-                            shipToInfo:
-                                context.read<ShipToCodeBloc>().state.shipToInfo,
-                          ),
+                child: BlocBuilder<CartBloc, CartState>(
+                  buildWhen: (previous, current) =>
+                      previous.isFetchingBonus != current.isFetchingBonus,
+                  builder: (context, state) {
+                    return QuantityInput(
+                      isLoading: state.isFetchingBonus,
+                      isEnabled: widget.isBonusOverrideEnable,
+                      quantityAddKey: const Key('addBonusFromCart'),
+                      quantityDeleteKey: const Key('removeBonusFromCart'),
+                      quantityTextKey: Key(
+                        'itemCount${widget.bonusItem.qty}',
+                      ),
+                      controller: quantityController,
+                      onFieldChange: (value) {
+                        locator<CountlyService>().addCountlyEvent(
+                          'changed_quantity',
+                          segmentation: {
+                            'materialNum': widget
+                                .bonusItem.materialInfo.materialNumber
+                                .getOrCrash(),
+                          },
                         );
-                  },
-                  minusPressed: (value) {
-                    locator<CountlyService>().addCountlyEvent(
-                      'deduct_quantity',
-                      segmentation: {
-                        'materialNum':
-                            widget.material.getMaterialNumber.getOrCrash(),
-                        'listPrice': widget.material.listPrice,
-                        'price': widget.material.price.finalPrice.getOrCrash(),
+                        context.read<CartBloc>().add(
+                              CartEvent.addBonusToCartItem(
+                                item: widget.cartItem,
+                                overrideQty: true,
+                                bonusItem:
+                                    widget.bonusItem.copyWith(qty: value),
+                                customerCodeInfo: context
+                                    .read<CustomerCodeBloc>()
+                                    .state
+                                    .customerCodeInfo,
+                                doNotallowOutOfStockMaterial: context
+                                    .read<EligibilityBloc>()
+                                    .state
+                                    .doNotAllowOutOfStockMaterials,
+                                salesOrganisation: context
+                                    .read<SalesOrgBloc>()
+                                    .state
+                                    .salesOrganisation,
+                                salesOrganisationConfigs:
+                                    context.read<SalesOrgBloc>().state.configs,
+                                shipToInfo: context
+                                    .read<ShipToCodeBloc>()
+                                    .state
+                                    .shipToInfo,
+                              ),
+                            );
                       },
-                    );
-                    context.read<CartBloc>().add(
-                          CartEvent.addBonusToCartItem(
-                            item: widget.cartItem,
-                            bonusItem: widget.bonusItem.copyWith(qty: -1),
-                            customerCodeInfo: context
-                                .read<CustomerCodeBloc>()
-                                .state
-                                .customerCodeInfo,
-                            doNotallowOutOfStockMaterial: context
-                                .read<EligibilityBloc>()
-                                .state
-                                .doNotAllowOutOfStockMaterials,
-                            salesOrganisation: context
-                                .read<SalesOrgBloc>()
-                                .state
-                                .salesOrganisation,
-                            salesOrganisationConfigs:
-                                context.read<SalesOrgBloc>().state.configs,
-                            shipToInfo:
-                                context.read<ShipToCodeBloc>().state.shipToInfo,
-                          ),
+                      minusPressed: (value) {
+                        locator<CountlyService>().addCountlyEvent(
+                          'deduct_quantity',
+                          segmentation: {
+                            'materialNum':
+                                widget.material.getMaterialNumber.getOrCrash(),
+                            'listPrice': widget.material.listPrice,
+                            'price':
+                                widget.material.price.finalPrice.getOrCrash(),
+                          },
                         );
-                  },
-                  addPressed: (value) {
-                    locator<CountlyService>().addCountlyEvent(
-                      'add_quantity',
-                      segmentation: {
-                        'materialNum':
-                            widget.material.getMaterialNumber.getOrCrash(),
-                        'listPrice': widget.material.listPrice,
-                        'price': widget.material.price.finalPrice.getOrCrash(),
+                        context.read<CartBloc>().add(
+                              CartEvent.addBonusToCartItem(
+                                item: widget.cartItem,
+                                bonusItem: widget.bonusItem.copyWith(qty: -1),
+                                customerCodeInfo: context
+                                    .read<CustomerCodeBloc>()
+                                    .state
+                                    .customerCodeInfo,
+                                doNotallowOutOfStockMaterial: context
+                                    .read<EligibilityBloc>()
+                                    .state
+                                    .doNotAllowOutOfStockMaterials,
+                                salesOrganisation: context
+                                    .read<SalesOrgBloc>()
+                                    .state
+                                    .salesOrganisation,
+                                salesOrganisationConfigs:
+                                    context.read<SalesOrgBloc>().state.configs,
+                                shipToInfo: context
+                                    .read<ShipToCodeBloc>()
+                                    .state
+                                    .shipToInfo,
+                              ),
+                            );
                       },
-                    );
+                      addPressed: (value) {
+                        locator<CountlyService>().addCountlyEvent(
+                          'add_quantity',
+                          segmentation: {
+                            'materialNum':
+                                widget.material.getMaterialNumber.getOrCrash(),
+                            'listPrice': widget.material.listPrice,
+                            'price':
+                                widget.material.price.finalPrice.getOrCrash(),
+                          },
+                        );
 
-                    context.read<CartBloc>().add(
-                          CartEvent.addBonusToCartItem(
-                            item: widget.cartItem,
-                            bonusItem: widget.bonusItem.copyWith(qty: 1),
-                            customerCodeInfo: context
-                                .read<CustomerCodeBloc>()
-                                .state
-                                .customerCodeInfo,
-                            doNotallowOutOfStockMaterial: context
-                                .read<EligibilityBloc>()
-                                .state
-                                .doNotAllowOutOfStockMaterials,
-                            salesOrganisation: context
-                                .read<SalesOrgBloc>()
-                                .state
-                                .salesOrganisation,
-                            salesOrganisationConfigs:
-                                context.read<SalesOrgBloc>().state.configs,
-                            shipToInfo:
-                                context.read<ShipToCodeBloc>().state.shipToInfo,
-                          ),
-                        );
+                        context.read<CartBloc>().add(
+                              CartEvent.addBonusToCartItem(
+                                item: widget.cartItem,
+                                bonusItem: widget.bonusItem.copyWith(qty: 1),
+                                customerCodeInfo: context
+                                    .read<CustomerCodeBloc>()
+                                    .state
+                                    .customerCodeInfo,
+                                doNotallowOutOfStockMaterial: context
+                                    .read<EligibilityBloc>()
+                                    .state
+                                    .doNotAllowOutOfStockMaterials,
+                                salesOrganisation: context
+                                    .read<SalesOrgBloc>()
+                                    .state
+                                    .salesOrganisation,
+                                salesOrganisationConfigs:
+                                    context.read<SalesOrgBloc>().state.configs,
+                                shipToInfo: context
+                                    .read<ShipToCodeBloc>()
+                                    .state
+                                    .shipToInfo,
+                              ),
+                            );
+                      },
+                    );
                   },
                 ),
               ),
