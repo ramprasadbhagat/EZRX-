@@ -58,14 +58,14 @@ class OrderHistoryListTile extends StatelessWidget {
       onTap: () {
         locator<CountlyService>()
             .addCountlyEvent('view Order Details', segmentation: {
-          'order_id': orderHistoryItem.orderNumber.getOrCrash(),
+          'order_id': orderHistoryItem.orderNumber.getOrDefaultValue(''),
           'createdDate': orderHistoryItem.createdDate,
           'selectedSalesOrg': context
               .read<SalesOrgBloc>()
               .state
               .salesOrganisation
               .salesOrg
-              .getOrCrash(),
+              .getOrDefaultValue(''),
           'selectedCustomerCode': context
               .read<CustomerCodeBloc>()
               .state
@@ -102,7 +102,7 @@ class OrderHistoryListTile extends StatelessWidget {
                 children: <Widget>[
                   Flexible(
                     child: Text(
-                      '#${orderHistoryItem.orderNumber.getOrCrash()}',
+                      '#${orderHistoryItem.orderNumber.getOrDefaultValue('')}',
                       softWrap: true,
                       style: Theme.of(context).textTheme.titleSmall?.copyWith(
                             color: ZPColors.kPrimaryColor,
@@ -126,7 +126,7 @@ class OrderHistoryListTile extends StatelessWidget {
                             ),
                           ),
                           child: Text(
-                            orderHistoryItem.status.getOrCrash(),
+                            orderHistoryItem.status.getOrDefaultValue('').tr(),
                             style: Theme.of(context)
                                 .textTheme
                                 .titleSmall
@@ -157,7 +157,8 @@ class OrderHistoryListTile extends StatelessWidget {
               disableDeliveryDate && orderHistoryItem.deliveryDate.isNotEmpty
                   ? BalanceTextRow(
                       key: Key(
-                          'material${orderHistoryItem.materialNumber.getOrDefaultValue('')}deliveryDate${orderHistoryItem.deliveryDate.toValidDateString}',),
+                        'material${orderHistoryItem.materialNumber.getOrDefaultValue('')}deliveryDate${orderHistoryItem.deliveryDate.toValidDateString}',
+                      ),
                       keyText: 'Delivery Date/Time'.tr(),
                       valueText:
                           orderHistoryItem.deliveryDate.toValidDateString,
