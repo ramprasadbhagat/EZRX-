@@ -1,5 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
@@ -686,6 +687,130 @@ void main() {
 
         await tester.sendKeyEvent(LogicalKeyboardKey.enter);
         await tester.pumpAndSettle();
+      },
+    );
+
+    testWidgets(
+      'Login Validation - Username is empty and Password is filled, validation error message only for username',
+      (tester) async {
+        final expectedStates = [
+          LoginFormState.initial(),
+          LoginFormState.initial().copyWith(
+            username: Username(''),
+            password: Password.login('password'),
+            isSubmitting: false,
+            showErrorMessages: true,
+          ),
+        ];
+
+        whenListen(loginBlocMock, Stream.fromIterable(expectedStates));
+        await tester.pumpWidget(
+          MaterialFrameWrapper(
+            child: MultiBlocProvider(
+              providers: [
+                BlocProvider<LoginFormBloc>(
+                  create: (context) => loginBlocMock,
+                ),
+                BlocProvider<AnnouncementBloc>(
+                  create: (context) => announcementBlocMock,
+                ),
+                BlocProvider<PaymentCustomerInformationBloc>(
+                  create: (context) => paymentCustomerInformationBlocMock,
+                ),
+                BlocProvider<CartBloc>(
+                  create: (context) => CartBlocMock(),
+                ),
+                BlocProvider<UserBloc>(
+                  create: (context) => userBlocMock,
+                ),
+                BlocProvider<AuthBloc>(
+                  create: (context) => authBlocMock,
+                ),
+              ],
+              child: const LoginPage(),
+            ),
+          ),
+        );
+        await tester.pump();
+        final password = find.byKey(const Key('loginPasswordField'));
+        expect(password, findsOneWidget);
+
+        await tester.testTextInput.receiveAction(TextInputAction.done);
+        await tester.pump();
+
+        final loginSubmitButton = find.byKey(const Key('loginSubmitButton'));
+        expect(loginSubmitButton, findsOneWidget);
+        await tester.tap(loginSubmitButton);
+        await tester.pump();
+
+        final usernameErrorText =
+            find.textContaining('Username cannot be empty.'.tr());
+        expect(usernameErrorText, findsOneWidget);
+        final passwordErrorText =
+            find.textContaining('Password cannot be empty.'.tr());
+        expect(passwordErrorText, findsNothing);
+      },
+    );
+
+    testWidgets(
+      'Login Validation - Password is empty and username is filled, validation error message only for password',
+      (tester) async {
+        final expectedStates = [
+          LoginFormState.initial(),
+          LoginFormState.initial().copyWith(
+            username: Username('username'),
+            password: Password.login(''),
+            isSubmitting: false,
+            showErrorMessages: true,
+          ),
+        ];
+
+        whenListen(loginBlocMock, Stream.fromIterable(expectedStates));
+        await tester.pumpWidget(
+          MaterialFrameWrapper(
+            child: MultiBlocProvider(
+              providers: [
+                BlocProvider<LoginFormBloc>(
+                  create: (context) => loginBlocMock,
+                ),
+                BlocProvider<AnnouncementBloc>(
+                  create: (context) => announcementBlocMock,
+                ),
+                BlocProvider<PaymentCustomerInformationBloc>(
+                  create: (context) => paymentCustomerInformationBlocMock,
+                ),
+                BlocProvider<CartBloc>(
+                  create: (context) => CartBlocMock(),
+                ),
+                BlocProvider<UserBloc>(
+                  create: (context) => userBlocMock,
+                ),
+                BlocProvider<AuthBloc>(
+                  create: (context) => authBlocMock,
+                ),
+              ],
+              child: const LoginPage(),
+            ),
+          ),
+        );
+        await tester.pump();
+        final password = find.byKey(const Key('loginPasswordField'));
+        expect(password, findsOneWidget);
+
+        await tester.testTextInput.receiveAction(TextInputAction.done);
+        await tester.pump();
+
+        final loginSubmitButton = find.byKey(const Key('loginSubmitButton'));
+        expect(loginSubmitButton, findsOneWidget);
+        await tester.tap(loginSubmitButton);
+        await tester.pump();
+
+        final usernameErrorText =
+            find.textContaining('Username cannot be empty.'.tr());
+        expect(usernameErrorText, findsNothing);
+        final passwordErrorText =
+            find.textContaining('Password cannot be empty.'.tr());
+        expect(passwordErrorText, findsOneWidget);
       },
     );
   });

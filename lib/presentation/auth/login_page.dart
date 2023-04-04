@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
+import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
@@ -206,7 +207,7 @@ class _UsernameField extends StatelessWidget {
           onChanged: (value) => context.read<LoginFormBloc>().add(
                 LoginFormEvent.usernameChanged(value),
               ),
-          validator: (_) => state.username.value.fold(
+          validator: (text) => Username(text ?? '').value.fold(
             (f) => f.maybeMap(
               empty: (_) => 'Username cannot be empty.'.tr(),
               orElse: () => null,
@@ -267,7 +268,7 @@ class _PasswordField extends StatelessWidget {
           onChanged: (value) => context.read<LoginFormBloc>().add(
                 LoginFormEvent.passwordChanged(value),
               ),
-          validator: (_) => state.password.value.fold(
+          validator: (text) => Password.login(text ?? '').value.fold(
             (f) => f.maybeMap(
               empty: (_) => 'Password cannot be empty.'.tr(),
               orElse: () => null,
