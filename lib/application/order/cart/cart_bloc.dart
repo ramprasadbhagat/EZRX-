@@ -665,6 +665,40 @@ class CartBloc extends Bloc<CartEvent, CartState> {
               isFetching: false,
             ),
           );
+
+          if (state.isBonusRestricted) return;
+
+          for (final material in state.getCartItemMaterialList) {
+            final failureOrSuccess = await repository.updateMaterialDealBonus(
+              material: material.materials.first,
+              customerCodeInfo: e.customerCodeInfo,
+              salesOrganisationConfigs: e.salesOrganisationConfigs,
+              salesOrganisation: e.salesOrganisation,
+              shipToInfo: e.shipToInfo,
+            );
+
+            await failureOrSuccess.fold(
+              (failure) {
+                emit(
+                  state.copyWith(
+                    apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+                    isFetching: false,
+                  ),
+                );
+              },
+              (cartItemList) async {
+                if (material == state.getCartItemMaterialList.last) {
+                  emit(
+                    state.copyWith(
+                      cartItems: cartItemList,
+                      apiFailureOrSuccessOption: none(),
+                      isFetching: false,
+                    ),
+                  );
+                }
+              },
+            );
+          }
         },
       );
     });

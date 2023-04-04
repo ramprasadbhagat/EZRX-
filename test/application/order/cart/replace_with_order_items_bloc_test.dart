@@ -7,6 +7,7 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'cart_bloc_variables.dart';
@@ -125,6 +126,72 @@ void main() {
           apiFailureOrSuccessOption:
               optionOf(const Left(ApiFailure.productOutOfStock())),
           cartItems: [],
+          isFetching: false,
+        ),
+      ],
+    );
+
+    blocTest<CartBloc, CartState>(
+      'Replace with orderItems with bonus',
+      build: () => CartBloc(cartRepositoryMock),
+      setUp: () {
+        when(() => cartRepositoryMock.replaceCartWithItems(
+                  items: cartItemListWithBonus,
+                  customerCodeInfo: CustomerCodeInfo.empty(),
+                  salesOrganisation: SalesOrganisation.empty(),
+                  shipToInfo: ShipToInfo.empty(),
+                  doNotAllowOutOfStockMaterials: true,
+                  salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+                ))
+            .thenAnswer((invocation) async => Right(cartItemListWithBonus));
+        when(() => cartRepositoryMock.updateDiscountQty(
+                items: cartItemListWithBonus))
+            .thenAnswer((invocation) => [CartItem(
+              itemType: CartItemType.material,
+              materials: cartItemListWithBonus.first.materials
+            )]);
+        when(() => cartRepositoryMock.updateMaterialDealBonus(
+              material: cartItemListWithBonus.first.materials.first,
+              customerCodeInfo: CustomerCodeInfo.empty(),
+              salesOrganisation: SalesOrganisation.empty(),
+              shipToInfo: ShipToInfo.empty(),
+              salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+            )).thenAnswer((invocation) async => Right([
+            CartItem(materials: [
+              mockMaterialCartItemList.first.materials.first
+                  .copyWith(quantity: 10)
+            ], itemType: CartItemType.material)
+          ]));
+      },
+      act: (bloc) => bloc.add(CartEvent.replaceWithOrderItems(
+        items: cartItemListWithBonus,
+        customerCodeInfo: CustomerCodeInfo.empty(),
+        salesOrganisation: SalesOrganisation.empty(),
+        shipToInfo: ShipToInfo.empty(),
+        doNotallowOutOfStockMaterial: true,
+        salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+      )),
+      expect: () => [
+        CartState.initial().copyWith(
+          apiFailureOrSuccessOption: none(),
+          isFetching: true,
+        ),
+        CartState.initial().copyWith(
+          apiFailureOrSuccessOption: none(),
+          cartItems: [CartItem(
+              itemType: CartItemType.material,
+              materials: cartItemListWithBonus.first.materials
+            )],
+          isFetching: false,
+        ),
+        CartState.initial().copyWith(
+          apiFailureOrSuccessOption: none(),
+          cartItems: [
+            CartItem(materials: [
+              mockMaterialCartItemList.first.materials.first
+                  .copyWith(quantity: 10)
+            ], itemType: CartItemType.material)
+          ],
           isFetching: false,
         ),
       ],

@@ -193,6 +193,7 @@ final mockCartItemWithBatch =
 //********************************************************************************************************/
 
 final bonusMaterialNumber = MaterialNumber('000000000023063913');
+
 final bonus913MockCartItem = PriceAggregate.empty().copyWith(
   quantity: 1,
   materialInfo: MaterialInfo.empty().copyWith(
@@ -474,6 +475,62 @@ final bonus915MockCartItem = PriceAggregate.empty().copyWith(
     ],
   ),
 );
+
+final cartItemListWithBonus = [
+  CartItem(itemType: CartItemType.material, materials: [
+    mockMaterialCartItemList.first.materials.first.copyWith(
+      price: Price.empty().copyWith(
+        materialNumber: bonusMaterialNumber,
+        finalPrice: MaterialPrice(540),
+        bonuses: [
+          PriceBonus(
+            items: [
+              PriceBonusItem.empty().copyWith(
+                calculation: BonusMaterialCalculation('913'),
+                qualifyingQuantity: 3,
+                bonusMaterials: [
+                  BonusMaterial.empty().copyWith(
+                      materialNumber: bonusMaterialNumber,
+                      materialDescription: '(M) TEOSYAL PS RD I 1ML PRFS 2S',
+                      bonusQuantity: 1,
+                      bonusRatio: 1,
+                      qualifyingQuantity: 3,
+                      calculation: BonusMaterialCalculation('913'))
+                ],
+              ),
+              PriceBonusItem.empty().copyWith(
+                calculation: BonusMaterialCalculation('913'),
+                qualifyingQuantity: 5,
+                bonusMaterials: [
+                  BonusMaterial.empty().copyWith(
+                      materialNumber: bonusMaterialNumber,
+                      materialDescription: '(M) TEOSYAL PS RD I 1ML PRFS 2S',
+                      bonusQuantity: 2,
+                      bonusRatio: 2,
+                      qualifyingQuantity: 5,
+                      calculation: BonusMaterialCalculation('913'))
+                ],
+              ),
+              PriceBonusItem.empty().copyWith(
+                calculation: BonusMaterialCalculation('913'),
+                qualifyingQuantity: 10,
+                bonusMaterials: [
+                  BonusMaterial.empty().copyWith(
+                      materialNumber: bonusMaterialNumber,
+                      materialDescription: '(M) TEOSYAL PS RD I 1ML PRFS 2S',
+                      bonusQuantity: 3,
+                      bonusRatio: 3,
+                      qualifyingQuantity: 10,
+                      calculation: BonusMaterialCalculation('913'))
+                ],
+              ),
+            ],
+          ),
+        ],
+      ),
+    )
+  ])
+];
 final bonus915mockMaterialList = [
   CartItem(materials: [bonus915MockCartItem], itemType: CartItemType.material)
 ];

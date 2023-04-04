@@ -62,6 +62,16 @@ class CartState with _$CartState {
       !element.materialInfo.isFOCMaterial ||
       !element.materialInfo.isSampleMaterial);
 
+  List<CartItem> get getCartItemMaterialList => cartItems
+      .where((element) => element.itemType == CartItemType.material)
+      .toList();
+
+  bool get containsSpecialOrderTypeMaterials => cartItems.allMaterials
+      .any((element) => element.materialInfo.isSpecialOrderTypeMaterial);
+
+  bool get isBonusRestricted =>
+      containsSpecialOrderTypeMaterials || getCartItemMaterialList.isEmpty;
+
   String dialogContent(OrderDocumentType initial, OrderDocumentType selected) =>
       selected.documentType.isSpecialOrderType
           ? selected.documentType.isZPFB && containNonSampleMaterial
