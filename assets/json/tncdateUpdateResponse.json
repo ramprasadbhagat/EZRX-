@@ -1,92 +1,16 @@
 {
-    "data": {
+  "data": {
+    "updateUser": {
       "user": {
-        "id": "11589",
         "username": "jstalin",
         "email": "jstalin@zuelligpharma.com",
-        "provider": "local",
-        "confirmed": false,
-        "blocked": false,
-        "role": {
-          "id": "7",
-          "name": "ROOT Admin",
-          "description": "ROOT Admin",
-          "type": "root_admin"
-        },
-        "initialLogin": true,
-        "customerCode": "-",
-        "accessRight": {
-          "Users": true,
-          "Orders": true,
-          "Promos": false,
-          "HCPHUB": false,
-          "Products": false,
-          "Services": false,
-          "Analytics": false,
-          "LoyaltyScheme": false
-        },
-        "salesOrganization": "",
-        "firstName": "jstalin",
-        "lastName": "jstalin",
-        "adName": "jstalin",
-        "isFromAD": true,
-        "shipToAddr": "",
-        "salesOrganizationTwo": "",
-        "customerCodeTwo": "",
-        "shipToAddrTwo": "",
-        "customerCodeSet": {
-          "value": []
-        },
-        "customerCodeSetTwo": {
-          "value": []
-        },
-        "lastLogin": "",
-        "mobileNumber": "-",
-        "countryCode": "-",
-        "acceptTCTimestamp": "2022-09-21T23:57:43.290583Z",
-        "optIn": false,
-        "optInTimestamp": "",
-        "totp2fa": false,
-        "totpSecret": "",
-        "hasPriceOverride": false,
-        "hasBonusOverride": false,
-        "principalOverrideList": "",
-        "mobileAccess": false,
-        "disable2fa": false,
-        "emailNotifications": false,
-        "mobileNotifications": false,
-        "acceptPrivacyPolicy":true,
-        "acceptPrivacyPolicyTime":"2021-12-01T07:22:01Z",
-        "privacyPolicyAcceptedPlatform":"mobile",
-        "mobileToken": [
-          {
-            "token": "d65ZeACdSgW6DG7lGrJiwu:APA91bHiRnCbDYf7kt44iD6ofbe6ckqBNHT-d8AP1SQ7BVylL4Ef8aKsbR6WrnHDkAIQMcjOGhwZbg0DYRvnGQ1bYBLGiQVBrR7qW4fv7wh9zMeAMElc1-zjp0zUcPo5vS5cNQ2CTOUY",
-            "provider": "firebase",
-            "dateUpdated": "1664050820"
-          }
-        ],
-        "passwordLastUpdate": "",
-        "disableReturns": false,
-        "passwordLastRetained": "",
-        "languagePreference": "",
-        "userSalesOrganisationList": {
-          "value": [
-            {
-              "salesOrg": "2601",
-              "customerCode": "all",
-              "shipToCode": [
-                "all"
-              ]
-            }
-          ]
-        },
-        "passwordActionName": "",
-        "passwordActionTime": "",
-        "disablePaymentAccess": true,
-        "disableCreateOrder": false,
-        "createdAt": "2022-09-08T18:05:17Z",
-        "updatedAt": "",
-        "enableOrderType": false
+        "acceptPrivacyPolicy": true,
+        "acceptPrivacyPolicyTime": "2023-04-05T05:59:08.350875Z",
+        "privacyPolicyAcceptedPlatform": "Mobile"
       }
     }
+  },
+  "extensions": {
+    "trace-id": "297370896dfc479aa70d0ea2b8a183cf"
   }
+}

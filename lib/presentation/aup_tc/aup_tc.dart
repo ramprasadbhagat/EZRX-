@@ -107,18 +107,22 @@ class AcceptButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BottomAppBar(
-      elevation: 10,
-      child: SizedBox(
-        height: 100,
+    return Container(
+      color: ZPColors.systrmMessageColor,
+      child: SafeArea(
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Text(
-              'I acknowledge that I have read, and do hereby accept the \nterms of use & Regional Privacy Policy',
-              style: Theme.of(context).textTheme.titleSmall?.apply(
-                    color: ZPColors.black,
-                  ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8),
+              child: Text(
+                'I acknowledge that I have read, and do hereby accept the terms of use & Regional Privacy Policy',
+                style: Theme.of(context).textTheme.titleSmall?.apply(
+                      color: ZPColors.black,
+                    ),
+                textAlign: TextAlign.center,
+              ),
             ),
             ElevatedButton(
               onPressed: () {

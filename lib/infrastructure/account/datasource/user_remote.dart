@@ -80,7 +80,7 @@ class UserRemoteDataSource {
       );
       _userExceptionChecker(res: res);
 
-      return SettingTcDto.fromJson(res.data['data']['user']).toDomain();
+      return SettingTcDto.fromJson(res.data['data']['updateUser']['user']).toDomain();
     });
   }
 
