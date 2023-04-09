@@ -658,32 +658,32 @@ List<_OrderSummaryDetails> _getTextRowLevelsForCustomerInfo(
 ) {
   return [
     _OrderSummaryDetails(
-      key: 'Customer Name',
+      key: 'Customer Name.'.tr(),
       value:
           '${customer.customerName.name1} ${customer.customerName.name2} ${customer.customerName.name3} ${customer.customerName.name4}',
     ),
     _OrderSummaryDetails(
-      key: 'Customer Email',
+      key: 'Customer Email'.tr(),
       value: customer.customerEmailAddress,
     ),
     _OrderSummaryDetails(
-      key: 'Customer ship to ID',
+      key: 'Customer ship to ID'.tr(),
       value: customer.shipToInfos[0].shipToCustomerCode,
     ),
     _OrderSummaryDetails(
-      key: 'Customer sold to ID',
+      key: 'Customer sold to ID'.tr(),
       value: customer.customerCodeSoldTo,
     ),
     _OrderSummaryDetails(
-      key: 'Customer Classification',
+      key: 'Customer Classification'.tr(),
       value: customer.customerClassification.displayCustomerClassification,
     ),
     _OrderSummaryDetails(
-      key: 'Customer Local Group',
+      key: 'Customer Local Group'.tr(),
       value: customer.customerLocalGroup,
     ),
     _OrderSummaryDetails(
-      key: 'Payment Term Description',
+      key: 'Payment Term Description'.tr(),
       value: customer.paymentTermDescription,
     ),
   ];
@@ -747,17 +747,36 @@ class _Disclaimer extends StatelessWidget {
       key: const Key('disclaimerKey'),
       children: [
         context.read<EligibilityBloc>().state.isOrderSummaryPPEDisclaimerEnable
-            ? RichText(
-                text: TextSpan(
-                  children: <TextSpan>[
-                    TextSpan(
-                      text:
-                          'To avoid delays to your PPE Orders, please\n\n\u2022 Order the quantity as stated in the MOH Order template\n\n\u2022 Do not place NON PPE items in the same Order\nNote: Minimum Order value is waived for MOH PPE Orders only\n',
-                      style: Theme.of(context).textTheme.titleSmall,
-                    ),
-                  ],
+            ? Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'To avoid delays to your PPE Orders, please.',
+                   style: Theme.of(context).textTheme.titleSmall?.apply(
+                    color: ZPColors.lightGray,
+                   ),
                 ),
-              )
+                Text(
+                  '\u2022 Order the quantity as stated in the MOH Order template',
+                   style: Theme.of(context).textTheme.titleSmall?.apply(
+                    color: ZPColors.lightGray,
+                   ),
+                ),
+                Text(
+                  '\u2022 Do not place NON PPE items in the same Order',
+                   style: Theme.of(context).textTheme.titleSmall?.apply(
+                    color: ZPColors.lightGray,
+                   ),
+                ),
+                Text(
+                  'Note: Minimum Order value is waived for MOH PPE Orders only\n',
+                   style: Theme.of(context).textTheme.titleSmall?.apply(
+                    color: ZPColors.lightGray,
+                   ),
+                ),
+              ],
+            )
             : const SizedBox.shrink(),
         const _MarketMessage(),
         const SizedBox(
@@ -784,17 +803,28 @@ class _MarketMessage extends StatelessWidget {
             context.read<OrderDocumentTypeBloc>().state.selectedOrderType;
 
         return !orderType.documentType.isSpecialOrderType
-            ? RichText(
-              key: const Key('minimumOrderAmount'),
-                text: TextSpan(
-                  children: <TextSpan>[
-                    TextSpan(
-                      text: orderMarketMessage,
-                      style: Theme.of(context).textTheme.titleSmall,
-                    ),
-                  ],
+            ? Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Note'.tr(),
+                  style: Theme.of(context).textTheme.titleSmall,
                 ),
-              )
+                RichText(
+                  key: const Key('minimumOrderAmount'),
+                    text: TextSpan(
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: orderMarketMessage,
+                          style: Theme.of(context).textTheme.titleSmall?.apply(
+                            color: ZPColors.lightGray,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+              ],
+            )
             : const SizedBox.shrink();
       },
     );

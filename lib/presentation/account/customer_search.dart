@@ -182,7 +182,7 @@ class _HeaderMessage extends StatelessWidget {
         ? Padding(
             padding: const EdgeInsets.all(15.0),
             child: Text(
-              'Please select a Customer Code',
+              'Please select a customer code'.tr(),
               style: Theme.of(context)
                   .textTheme
                   .titleSmall

@@ -199,7 +199,7 @@ void main() {
         await tester.pumpAndSettle(const Duration(seconds: 3));
 
         expect(find.byKey(const Key('customerCodeSelect')), findsOneWidget);
-        expect(find.text('Please select a Customer Code'.tr()), findsOneWidget);
+        expect(find.text('Please select a customer code'.tr()), findsOneWidget);
 
         if (salesOrgVariants.currentValue == SalesOrgVariant.onn) {
           final customerCodeOption =

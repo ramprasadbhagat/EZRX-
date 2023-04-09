@@ -293,7 +293,7 @@ class CartMaterialItemTileDetails extends StatelessWidget {
           ),
           if (isOrderSummaryView)
             Text(
-              '${'Material type : '.tr()}${material.toSavedOrderMaterial().type.getOrDefaultValue('')}',
+              '${'Material type'.tr()} : ${material.toSavedOrderMaterial().type.getOrDefaultValue('')}',
               style: Theme.of(context).textTheme.titleSmall?.apply(
                     color: ZPColors.lightGray,
                   ),
@@ -303,7 +303,7 @@ class CartMaterialItemTileDetails extends StatelessWidget {
           ),
           if (isOrderSummaryView)
             Text(
-              '${'Unit of Measurement : '.tr()}${material.materialInfo.unitOfMeasurement}',
+              '${'Unit of Measurement'.tr()} : ${material.materialInfo.unitOfMeasurement}',
               style: Theme.of(context).textTheme.titleSmall?.apply(
                     color: ZPColors.lightGray,
                   ),
@@ -320,7 +320,7 @@ class CartMaterialItemTileDetails extends StatelessWidget {
                     bottom: 3.0,
                   ),
                   child: Text(
-                    'Deals : '.tr(),
+                    'Deals :'.tr(),
                     style: Theme.of(context).textTheme.titleSmall?.apply(
                           color: ZPColors.lightGray,
                         ),
@@ -346,7 +346,7 @@ class CartMaterialItemTileDetails extends StatelessWidget {
             BonusDetails(cartItem: material),
           if (material.salesOrgConfig.expiryDateDisplay)
             Text(
-              '${'Expiry Date : '.tr()}${material.stockInfo.expiryDate.toValidDateString}',
+              '${'Expiry Date :'.tr()}${material.stockInfo.expiryDate.toValidDateString}',
               key: Key('expiryDate${material.materialInfo.materialNumber.getOrDefaultValue('')}'),
               style: Theme.of(context).textTheme.titleSmall?.apply(
                     color: ZPColors.lightGray,
@@ -354,7 +354,7 @@ class CartMaterialItemTileDetails extends StatelessWidget {
             ),
           if (!material.salesOrgConfig.hideStockDisplay)
             Text(
-              '${'In Stock : '.tr()}${material.stockInfo.inStock.getOrDefaultValue('')}',
+              '${'In Stock :'.tr()}${material.stockInfo.inStock.getOrDefaultValue('')}',
               key: Key(
                   'Stock${material.materialInfo.materialNumber.getOrDefaultValue('')}${material.stockInfo.inStock.getOrDefaultValue('')}',),
               style: Theme.of(context).textTheme.titleSmall?.apply(
@@ -417,7 +417,7 @@ class CartMaterialItemTileDetails extends StatelessWidget {
                         ),
                       if (enableListPrice)
                         Text(
-                          '${'List Price: '.tr()}${material.display(PriceType.listPrice)}',
+                          '${'List Price:'.tr()} ${material.display(PriceType.listPrice)}',
                           key: const Key('listPrice'),
                           style: Theme.of(context).textTheme.titleSmall?.apply(
                                 color: isPriceOverride
@@ -429,7 +429,7 @@ class CartMaterialItemTileDetails extends StatelessWidget {
                               ),
                         ),
                       Text(
-                        '${'Unit Price: '.tr()}${material.display(PriceType.unitPrice)}',
+                        '${'Unit Price:'.tr()} ${material.display(PriceType.unitPrice)}',
                         key: const Key('unitPrice'),
                         style: Theme.of(context).textTheme.titleSmall?.apply(
                               color: isPriceOverride
@@ -442,7 +442,7 @@ class CartMaterialItemTileDetails extends StatelessWidget {
                       ),
                       if (isOrderSummaryView)
                         Text(
-                          '${'Total Price: '.tr()}${material.display(PriceType.unitPriceTotal)}',
+                          '${'Total Price'.tr()}: ${material.display(PriceType.unitPriceTotal)}',
                           style: Theme.of(context).textTheme.titleSmall?.apply(
                                 color: isPriceOverride
                                     ? ZPColors.red

@@ -399,7 +399,7 @@ class _PriceLabel extends StatelessWidget {
                     )
                   : const SizedBox.shrink(),
               Text(
-                '${'Unit Price: '.tr()}${priceAggregate.display(PriceType.unitPrice)}',
+                '${'Unit Price:'.tr()} ${priceAggregate.display(PriceType.unitPrice)}',
                 style: Theme.of(context).textTheme.titleSmall?.apply(
                       color: ZPColors.black,
                     ),

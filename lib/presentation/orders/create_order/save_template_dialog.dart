@@ -39,7 +39,7 @@ class SaveTemplateDialog {
               actions: [
                 PlatformDialogAction(
                   key: const Key('closeButton'),
-                  child: const Text('Close'),
+                  child: Text('Close'.tr()),
                   onPressed: () => context.router.pop(),
                 ),
                 PlatformDialogAction(
@@ -50,7 +50,7 @@ class SaveTemplateDialog {
                           context,
                           state.templateName.getValue(),
                         ),
-                  child: const Text('Save'),
+                  child: Text('Save'.tr()),
                 ),
               ],
             );
