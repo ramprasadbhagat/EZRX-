@@ -174,6 +174,8 @@ class CartPage extends StatelessWidget {
                               onPressed: state.selectedCartItems.isEmpty
                                   ? null
                                   : () {
+                                      FocusScope.of(context)
+                                          .requestFocus(FocusNode());
                                       trackMixpanelEvent(
                                         MixpanelEvents.goToOrderSummary,
                                       );
