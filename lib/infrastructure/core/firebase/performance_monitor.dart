@@ -5,8 +5,10 @@ class PerformanceMonitorService {
   static final _performance = FirebasePerformance.instance;
   FirebasePerformance get performance => _performance;
   final _map = <int, HttpMetric>{};
-  late final RequestContentLengthMethod requestContentLengthMethod;
-  late final ResponseContentLengthMethod responseContentLengthMethod;
+  final RequestContentLengthMethod requestContentLengthMethod =
+      defaultRequestContentLength;
+  final ResponseContentLengthMethod responseContentLengthMethod =
+      defaultResponseContentLength;
 
   // ================================================================
   //  Network Performance
