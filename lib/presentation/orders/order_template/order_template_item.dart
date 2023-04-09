@@ -45,14 +45,15 @@ class OrderTemplateItem extends StatelessWidget {
           },
           title: Row(
             children: [
-              Text(
-                orderTemplate.templateName,
-                style: Theme.of(context).textTheme.titleSmall,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
+              Expanded(
+                child: Text(
+                  orderTemplate.templateName,
+                  style: Theme.of(context).textTheme.titleSmall,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
-              const Spacer(),
-              IconButton(
+              TextButton.icon(
                 key: const Key('deleteFromList'),
                 onPressed: () async {
                   await CustomDialogs.confirmationDialog(
@@ -72,6 +73,7 @@ class OrderTemplateItem extends StatelessWidget {
                   );
                 },
                 icon: const Icon(Icons.delete),
+                label: const Text('Delete'),
               ),
             ],
           ),
