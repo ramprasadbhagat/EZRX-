@@ -1,6 +1,7 @@
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/account/dtos/sales_organisation_configs_principal_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
 part 'sales_organisation_configs_dto.freezed.dart';
@@ -33,11 +34,10 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
     @JsonKey(name: 'disablePrincipals', defaultValue: false)
     @HiveField(106, defaultValue: false)
         required bool disablePrincipals,
-    @_PrincipalListConverter()
     @JsonKey(name: 'principalList')
+    @_PrincipalListConverter()
     @HiveField(7, defaultValue: [])
-        // TODO: Wasim , need data type here instead of List<dynamic>
-        required List principalList,
+        required List<SalesOrganisationConfigsPrincipalDto> principalList,
     @JsonKey(name: 'disableOrderType', defaultValue: false)
     @HiveField(108, defaultValue: false)
         required bool disableOrderType,
@@ -196,7 +196,9 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       languageFilter: configs.languageFilter,
       languageValue: configs.languageValue.getOrDefaultValue(''),
       disablePrincipals: configs.disablePrincipals,
-      principalList: configs.principalList,
+      principalList: List.from(configs.principalList)
+              .map((e) => SalesOrganisationConfigsPrincipalDto.fromDomain(e))
+              .toList(),
       disableOrderType: configs.disableOrderType,
       enableBatchNumber: configs.enableBatchNumber,
       disableBundles: configs.disableBundles,
@@ -255,7 +257,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       languageFilter: languageFilter,
       languageValue: LanguageValue(languageValue),
       disablePrincipals: disablePrincipals,
-      principalList: principalList,
+      principalList: principalList.map((e) => e.toDomain()).toList(),
       disableOrderType: disableOrderType,
       enableBatchNumber: enableBatchNumber,
       disableBundles: disableBundles,
@@ -308,18 +310,24 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
 }
 
 class _PrincipalListConverter
-    extends JsonConverter<List, Map<String, dynamic>> {
+    extends JsonConverter<List<SalesOrganisationConfigsPrincipalDto>, Map<String, dynamic>> {
   const _PrincipalListConverter();
 
+  //======================================================================
+  // Response give an extra 'value' level that no useful on our DTO and Entity
+  // We use this way to remove it
+  //
+  //======================================================================
+
   @override
-  List fromJson(Map<String, dynamic> json) {
-    return List.from(json['value']).map((e) => e).toList();
+  List<SalesOrganisationConfigsPrincipalDto> fromJson(Map<String, dynamic> json) {
+    return List.from(json['value']).map((e) => SalesOrganisationConfigsPrincipalDto.fromJson(e)).toList();
   }
 
   @override
-  Map<String, dynamic> toJson(List object) {
+  Map<String, dynamic> toJson(List<SalesOrganisationConfigsPrincipalDto> object) {
     return {
-      'value': object.map((e) => e).toList(),
+      'value': object.map((e) => {'date': e.date , 'principal' : e.principalCode}).toList(),
     };
   }
 }

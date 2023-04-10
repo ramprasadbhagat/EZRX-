@@ -3,6 +3,7 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs_principal.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
@@ -11,6 +12,7 @@ import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/value/constants.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/additional_bonus/bonus_material_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/additional_bonus/bonus_material_remote.dart';
@@ -44,7 +46,17 @@ void main() {
           languageValue: LanguageValue(ApiLanguageCode.english),
           disablePrincipals: true,
           enableGimmickMaterial: true,
-          principalList: ['123', '234', '345']);
+          principalList: [
+            SalesOrganisationConfigsPrincipal.empty().copyWith(
+              principalCode: PrincipalCode('123')
+            ),
+            SalesOrganisationConfigsPrincipal.empty().copyWith(
+              principalCode: PrincipalCode('234')
+            ),
+            SalesOrganisationConfigsPrincipal.empty().copyWith(
+              principalCode: PrincipalCode('345')
+            ),
+          ]);
   final mockShipToInfo = ShipToInfo.empty()
       .copyWith(shipToCustomerCode: '1234567', status: Status('fake_status'));
   final mockCustomerCodeInfo = CustomerCodeInfo.empty().copyWith(

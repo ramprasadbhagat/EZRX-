@@ -25,7 +25,8 @@ mixin _$SalesOrganisationConfigs {
   bool get languageFilter => throw _privateConstructorUsedError;
   LanguageValue get languageValue => throw _privateConstructorUsedError;
   bool get disablePrincipals => throw _privateConstructorUsedError;
-  List<dynamic> get principalList => throw _privateConstructorUsedError;
+  List<SalesOrganisationConfigsPrincipal> get principalList =>
+      throw _privateConstructorUsedError;
   bool get disableOrderType => throw _privateConstructorUsedError;
   bool get enableBatchNumber => throw _privateConstructorUsedError;
   bool get disableBundles => throw _privateConstructorUsedError;
@@ -95,7 +96,7 @@ abstract class $SalesOrganisationConfigsCopyWith<$Res> {
       bool languageFilter,
       LanguageValue languageValue,
       bool disablePrincipals,
-      List<dynamic> principalList,
+      List<SalesOrganisationConfigsPrincipal> principalList,
       bool disableOrderType,
       bool enableBatchNumber,
       bool disableBundles,
@@ -253,7 +254,7 @@ class _$SalesOrganisationConfigsCopyWithImpl<$Res,
       principalList: null == principalList
           ? _value.principalList
           : principalList // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
+              as List<SalesOrganisationConfigsPrincipal>,
       disableOrderType: null == disableOrderType
           ? _value.disableOrderType
           : disableOrderType // ignore: cast_nullable_to_non_nullable
@@ -457,7 +458,7 @@ abstract class _$$_SalesOrganisationConfigsCopyWith<$Res>
       bool languageFilter,
       LanguageValue languageValue,
       bool disablePrincipals,
-      List<dynamic> principalList,
+      List<SalesOrganisationConfigsPrincipal> principalList,
       bool disableOrderType,
       bool enableBatchNumber,
       bool disableBundles,
@@ -613,7 +614,7 @@ class __$$_SalesOrganisationConfigsCopyWithImpl<$Res>
       principalList: null == principalList
           ? _value._principalList
           : principalList // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
+              as List<SalesOrganisationConfigsPrincipal>,
       disableOrderType: null == disableOrderType
           ? _value.disableOrderType
           : disableOrderType // ignore: cast_nullable_to_non_nullable
@@ -811,7 +812,7 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
       required this.languageFilter,
       required this.languageValue,
       required this.disablePrincipals,
-      required final List<dynamic> principalList,
+      required final List<SalesOrganisationConfigsPrincipal> principalList,
       required this.disableOrderType,
       required this.enableBatchNumber,
       required this.disableBundles,
@@ -878,9 +879,9 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
   final LanguageValue languageValue;
   @override
   final bool disablePrincipals;
-  final List<dynamic> _principalList;
+  final List<SalesOrganisationConfigsPrincipal> _principalList;
   @override
-  List<dynamic> get principalList {
+  List<SalesOrganisationConfigsPrincipal> get principalList {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_principalList);
   }
@@ -1151,7 +1152,7 @@ abstract class _SalesOrganisationConfigs extends SalesOrganisationConfigs {
       required final bool languageFilter,
       required final LanguageValue languageValue,
       required final bool disablePrincipals,
-      required final List<dynamic> principalList,
+      required final List<SalesOrganisationConfigsPrincipal> principalList,
       required final bool disableOrderType,
       required final bool enableBatchNumber,
       required final bool disableBundles,
@@ -1218,7 +1219,7 @@ abstract class _SalesOrganisationConfigs extends SalesOrganisationConfigs {
   @override
   bool get disablePrincipals;
   @override
-  List<dynamic> get principalList;
+  List<SalesOrganisationConfigsPrincipal> get principalList;
   @override
   bool get disableOrderType;
   @override

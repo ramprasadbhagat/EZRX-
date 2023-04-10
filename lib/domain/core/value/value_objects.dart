@@ -106,6 +106,8 @@ class DateTimeStringValue extends ValueObject<String> {
     return currentDate.isBefore(dateTime);
   }
 
+  int get dateTimeIntValue => getDateTimeIntValue(value.getOrElse(() => ''));
+
   const DateTimeStringValue._(this.value);
 }
 

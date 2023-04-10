@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs_principal.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -19,7 +20,7 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
     required bool languageFilter,
     required LanguageValue languageValue,
     required bool disablePrincipals,
-    required List principalList,
+    required List<SalesOrganisationConfigsPrincipal> principalList,
     required bool disableOrderType,
     required bool enableBatchNumber,
     required bool disableBundles,
@@ -78,7 +79,7 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
         languageFilter: false,
         languageValue: LanguageValue(''),
         disablePrincipals: false,
-        principalList: [],
+        principalList: <SalesOrganisationConfigsPrincipal>[],
         disableOrderType: false,
         enableBatchNumber: false,
         disableBundles: false,
@@ -135,9 +136,12 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
   String get getConfigLangaugeDefaultEnglish =>
       languageFilter ? languageValue.getOrDefaultValue('E') : 'E';
 
-  List get getExcludePrincipal {
-    return disablePrincipals ? [] : principalList;
+  List<String> get getExcludePrincipal {
+    return disablePrincipals ? [] : getPrincipalCodeList;
   }
+
+  List<String> get getPrincipalCodeList =>
+      principalList.map((e) => e.principalCode.getOrDefaultValue('')).toList();
 
   String get orderSummaryDisclaimer {
     final message = StringBuffer();

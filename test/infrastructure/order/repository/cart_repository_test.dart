@@ -3,6 +3,7 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs_principal.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
@@ -91,7 +92,17 @@ void main() {
       languageValue: LanguageValue(ApiLanguageCode.english),
       disablePrincipals: false,
       enableGimmickMaterial: true,
-      principalList: ['123', '234', '345'],
+      principalList: [
+        SalesOrganisationConfigsPrincipal.empty().copyWith(
+              principalCode: PrincipalCode('123')
+            ),
+            SalesOrganisationConfigsPrincipal.empty().copyWith(
+              principalCode: PrincipalCode('234')
+            ),
+            SalesOrganisationConfigsPrincipal.empty().copyWith(
+              principalCode: PrincipalCode('345')
+            ),
+      ],
       currency: Currency('SG'),
       salesOrg: mockSalesOrg,
     );

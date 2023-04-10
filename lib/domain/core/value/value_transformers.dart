@@ -129,6 +129,9 @@ String emptyIfZero(double value) {
   return value == 0 ? '' : value.toString();
 }
 
+int getDateTimeIntValue(String value) =>
+    isNumericOnly(value) ? int.parse(value) : 0;
+
 String getLanguageString(String apiLanguageCode) {
   switch (apiLanguageCode) {
     case ApiLanguageCode.thai:

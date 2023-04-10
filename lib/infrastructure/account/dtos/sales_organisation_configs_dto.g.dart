@@ -26,8 +26,9 @@ class SalesOrganisationConfigsDtoAdapter
       languageFilter: fields[104] == null ? false : fields[104] as bool,
       languageValue: fields[105] == null ? '' : fields[105] as String,
       disablePrincipals: fields[106] == null ? false : fields[106] as bool,
-      principalList:
-          fields[7] == null ? [] : (fields[7] as List).cast<dynamic>(),
+      principalList: fields[7] == null
+          ? []
+          : (fields[7] as List).cast<SalesOrganisationConfigsPrincipalDto>(),
       disableOrderType: fields[108] == null ? false : fields[108] as bool,
       enableBatchNumber: fields[109] == null ? false : fields[109] as bool,
       disableBundles: fields[110] == null ? false : fields[110] as bool,

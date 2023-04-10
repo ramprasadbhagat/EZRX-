@@ -42,10 +42,11 @@ mixin _$SalesOrganisationConfigsDto {
   @JsonKey(name: 'disablePrincipals', defaultValue: false)
   @HiveField(106, defaultValue: false)
   bool get disablePrincipals => throw _privateConstructorUsedError;
-  @_PrincipalListConverter()
   @JsonKey(name: 'principalList')
+  @_PrincipalListConverter()
   @HiveField(7, defaultValue: [])
-  List<dynamic> get principalList => throw _privateConstructorUsedError;
+  List<SalesOrganisationConfigsPrincipalDto> get principalList =>
+      throw _privateConstructorUsedError;
   @JsonKey(name: 'disableOrderType', defaultValue: false)
   @HiveField(108, defaultValue: false)
   bool get disableOrderType => throw _privateConstructorUsedError;
@@ -224,10 +225,10 @@ abstract class $SalesOrganisationConfigsDtoCopyWith<$Res> {
       @JsonKey(name: 'disablePrincipals', defaultValue: false)
       @HiveField(106, defaultValue: false)
           bool disablePrincipals,
-      @_PrincipalListConverter()
       @JsonKey(name: 'principalList')
+      @_PrincipalListConverter()
       @HiveField(7, defaultValue: [])
-          List<dynamic> principalList,
+          List<SalesOrganisationConfigsPrincipalDto> principalList,
       @JsonKey(name: 'disableOrderType', defaultValue: false)
       @HiveField(108, defaultValue: false)
           bool disableOrderType,
@@ -473,7 +474,7 @@ class _$SalesOrganisationConfigsDtoCopyWithImpl<$Res,
       principalList: null == principalList
           ? _value.principalList
           : principalList // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
+              as List<SalesOrganisationConfigsPrincipalDto>,
       disableOrderType: null == disableOrderType
           ? _value.disableOrderType
           : disableOrderType // ignore: cast_nullable_to_non_nullable
@@ -697,10 +698,10 @@ abstract class _$$_SalesOrganisationConfigsDtoCopyWith<$Res>
       @JsonKey(name: 'disablePrincipals', defaultValue: false)
       @HiveField(106, defaultValue: false)
           bool disablePrincipals,
-      @_PrincipalListConverter()
       @JsonKey(name: 'principalList')
+      @_PrincipalListConverter()
       @HiveField(7, defaultValue: [])
-          List<dynamic> principalList,
+          List<SalesOrganisationConfigsPrincipalDto> principalList,
       @JsonKey(name: 'disableOrderType', defaultValue: false)
       @HiveField(108, defaultValue: false)
           bool disableOrderType,
@@ -945,7 +946,7 @@ class __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>
       principalList: null == principalList
           ? _value._principalList
           : principalList // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
+              as List<SalesOrganisationConfigsPrincipalDto>,
       disableOrderType: null == disableOrderType
           ? _value.disableOrderType
           : disableOrderType // ignore: cast_nullable_to_non_nullable
@@ -1164,10 +1165,11 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
       @JsonKey(name: 'disablePrincipals', defaultValue: false)
       @HiveField(106, defaultValue: false)
           required this.disablePrincipals,
-      @_PrincipalListConverter()
       @JsonKey(name: 'principalList')
+      @_PrincipalListConverter()
       @HiveField(7, defaultValue: [])
-          required final List<dynamic> principalList,
+          required final List<SalesOrganisationConfigsPrincipalDto>
+              principalList,
       @JsonKey(name: 'disableOrderType', defaultValue: false)
       @HiveField(108, defaultValue: false)
           required this.disableOrderType,
@@ -1343,12 +1345,12 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
   @JsonKey(name: 'disablePrincipals', defaultValue: false)
   @HiveField(106, defaultValue: false)
   final bool disablePrincipals;
-  final List<dynamic> _principalList;
+  final List<SalesOrganisationConfigsPrincipalDto> _principalList;
   @override
-  @_PrincipalListConverter()
   @JsonKey(name: 'principalList')
+  @_PrincipalListConverter()
   @HiveField(7, defaultValue: [])
-  List<dynamic> get principalList {
+  List<SalesOrganisationConfigsPrincipalDto> get principalList {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_principalList);
   }
@@ -1738,10 +1740,11 @@ abstract class _SalesOrganisationConfigsDto
       @JsonKey(name: 'disablePrincipals', defaultValue: false)
       @HiveField(106, defaultValue: false)
           required final bool disablePrincipals,
-      @_PrincipalListConverter()
       @JsonKey(name: 'principalList')
+      @_PrincipalListConverter()
       @HiveField(7, defaultValue: [])
-          required final List<dynamic> principalList,
+          required final List<SalesOrganisationConfigsPrincipalDto>
+              principalList,
       @JsonKey(name: 'disableOrderType', defaultValue: false)
       @HiveField(108, defaultValue: false)
           required final bool disableOrderType,
@@ -1917,10 +1920,10 @@ abstract class _SalesOrganisationConfigsDto
   @HiveField(106, defaultValue: false)
   bool get disablePrincipals;
   @override
-  @_PrincipalListConverter()
   @JsonKey(name: 'principalList')
+  @_PrincipalListConverter()
   @HiveField(7, defaultValue: [])
-  List<dynamic> get principalList;
+  List<SalesOrganisationConfigsPrincipalDto> get principalList;
   @override
   @JsonKey(name: 'disableOrderType', defaultValue: false)
   @HiveField(108, defaultValue: false)

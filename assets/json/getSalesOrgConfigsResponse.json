@@ -41,7 +41,13 @@
             "supportMail": "",
             "disablePrincipals": false,
             "principalList": {
-               "value": []
+               "value": [
+                  {
+                    "date": 2023040722,
+                    "principal": "0000000000",
+                    "__typename": "Principal"
+                  }
+               ]
             },
             "enable2FA": false,
             "disableBundles": false,

@@ -3,6 +3,7 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs_principal.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
@@ -54,7 +55,17 @@ void main() {
           languageValue: LanguageValue(ApiLanguageCode.english),
           disablePrincipals: false,
           enableGimmickMaterial: true,
-          principalList: ['123', '234', '345'],
+          principalList: [
+            SalesOrganisationConfigsPrincipal.empty().copyWith(
+              principalCode: PrincipalCode('123')
+            ),
+            SalesOrganisationConfigsPrincipal.empty().copyWith(
+              principalCode: PrincipalCode('234')
+            ),
+            SalesOrganisationConfigsPrincipal.empty().copyWith(
+              principalCode: PrincipalCode('345')
+            ),
+          ],
           currency: Currency('SG'),
           salesOrg: SalesOrg('2601'));
   final mockOrderDocumentType = OrderDocumentType.empty().copyWith(
@@ -238,7 +249,7 @@ void main() {
               salesOrgCode: '2601',
               customerCode: '100000345',
               shipToCode: '1234567',
-              excludePrincipal: ['123', '234', '345'],
+              excludePrincipal: mockSalesOrganisationConfigs.getPrincipalCodeList,
               pageSize: 10,
               offset: 0,
               orderBy: 'materialDescription_asc',
@@ -343,7 +354,7 @@ void main() {
           salesOrgCode: '2601',
           customerCode: '100000345',
           shipToCode: '1234567',
-          excludePrincipal: ['123', '234', '345'],
+          excludePrincipal: mockSalesOrganisationConfigs.getPrincipalCodeList,
           pageSize: 10,
           offset: 0,
           orderBy: 'materialDescription_asc',
@@ -385,7 +396,7 @@ void main() {
               salesOrgCode: '2601',
               customerCode: '100000345',
               shipToCode: '1234567',
-              excludePrincipal: ['123', '234', '345'],
+              excludePrincipal: mockSalesOrganisationConfigs.getPrincipalCodeList,
               pageSize: 10,
               offset: 0,
               orderBy: 'orderDate',
@@ -445,7 +456,7 @@ void main() {
           salesOrgCode: '2601',
           customerCode: '100000345',
           shipToCode: '1234567',
-          excludePrincipal: ['123', '234', '345'],
+          excludePrincipal: mockSalesOrganisationConfigs.getPrincipalCodeList,
           pageSize: 10,
           offset: 0,
           orderBy: 'orderDate',
@@ -584,7 +595,7 @@ void main() {
           salesOrgCode: '2601',
           customerCode: '100000345',
           shipToCode: '1234567',
-          excludePrincipal: ['123', '234', '345'],
+          excludePrincipal: mockSalesOrganisationConfigs.getPrincipalCodeList,
           pageSize: 10,
           offset: 0,
           orderBy: 'materialDescription_asc',
@@ -668,7 +679,7 @@ void main() {
           salesOrgCode: '2601',
           customerCode: '100000345',
           shipToCode: '1234567',
-          excludePrincipal: ['1763', '234', '345'],
+          excludePrincipal: mockSalesOrganisationConfigs.getPrincipalCodeList,
           pageSize: 10,
           offset: 0,
           orderBy: 'materialDescription_asc',
