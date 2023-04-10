@@ -29,11 +29,11 @@ class AddToCartButton extends StatelessWidget {
     final tenderContractInCart = cartItems.isEmpty
         ? TenderContract.empty()
         : cartItems
-        .firstWhere(
-          (element) => element.tenderContract.tenderOrderReason.is730,
-      orElse: () => cartItems.first,
-    )
-        .tenderContract;
+            .firstWhere(
+              (element) => element.tenderContract.tenderOrderReason.is730,
+              orElse: () => cartItems.first,
+            )
+            .tenderContract;
     final selectedTenderContractReason = context
         .read<TenderContractBloc>()
         .state
@@ -44,9 +44,9 @@ class AddToCartButton extends StatelessWidget {
     return cartItems.isEmpty
         ? true
         : ((tenderContractInCartReason.is730 ==
-        selectedTenderContractReason.is730) ||
-        (!tenderContractInCartReason.is730 ==
-            !selectedTenderContractReason.is730));
+                selectedTenderContractReason.is730) ||
+            (!tenderContractInCartReason.is730 ==
+                !selectedTenderContractReason.is730));
   }
 
   bool isValidQuantitySelected(BuildContext context) {
@@ -66,33 +66,33 @@ class AddToCartButton extends StatelessWidget {
 
     return BlocBuilder<TenderContractBloc, TenderContractState>(
       buildWhen: (previous, current) =>
-      previous.selectedTenderContract != current.selectedTenderContract,
+          previous.selectedTenderContract != current.selectedTenderContract,
       builder: (builderContext, state) {
         return Column(
           children: [
             isSelectedTenderContractValid(context)
                 ? const SizedBox.shrink()
                 : const Text(
-              'Tender material 730 cannot be combined with any other material in the cart.',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: ZPColors.red,
-              ),
-            ),
+                    'Tender material 730 cannot be combined with any other material in the cart.',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: ZPColors.red,
+                    ),
+                  ),
             if (userCanCreateOrder)
               SafeArea(
                 child: ElevatedButton(
                   key: const Key('addMaterialToCart'),
                   style: isAddToCartAllowed &&
-                      isSelectedTenderContractValid(context) &&
-                      isValidQuantitySelected(context)
+                          isSelectedTenderContractValid(context) &&
+                          isValidQuantitySelected(context)
                       ? null
                       : ElevatedButton.styleFrom(
-                    backgroundColor: ZPColors.lightGray,
-                  ),
+                          backgroundColor: ZPColors.lightGray,
+                        ),
                   onPressed: () => isAddToCartAllowed &&
-                      isSelectedTenderContractValid(context) &&
-                      isValidQuantitySelected(context)
+                          isSelectedTenderContractValid(context) &&
+                          isValidQuantitySelected(context)
                       ? _addToCart(context, cartItem)
                       : null,
                   child: const Text('Add to Cart').tr(),
@@ -107,37 +107,38 @@ class AddToCartButton extends StatelessWidget {
   void _addToCart(BuildContext context, PriceAggregate selectedCartItem) {
     final cartState = context.read<CartBloc>().state;
     if (selectedCartItem.materialInfo.materialGroup4.isFOC &&
+        cartState.containNonCovidMaterial) {
+      showSnackBar(
+        context: context,
+        message:
+            'Covid material cannot be combined with commercial material.'.tr(),
+      );
+    } else if (!selectedCartItem.materialInfo.materialGroup4.isFOC &&
+        cartState.containCovidMaterial) {
+      showSnackBar(
+        context: context,
+        message:
+            'Commercial material cannot be combined with covid material.'.tr(),
+      );
+    } else if (selectedCartItem.isSpecialOrderType &&
+        selectedCartItem.materialInfo.isFOCMaterial &&
+        cartState.containSampleMaterial &&
         cartState.containNonFocMaterial) {
       showSnackBar(
         context: context,
         message:
-        'Covid material cannot be combined with commercial material.'.tr(),
+            'You cannot add non-sample materials to a sample order. Please submit separate orders if you wish to proceed.'
+                .tr(),
       );
-    } else if (!selectedCartItem.materialInfo.materialGroup4.isFOC &&
-        cartState.containFocMaterial) {
+    } else if (selectedCartItem.isSpecialOrderType &&
+        selectedCartItem.materialInfo.isSampleMaterial &&
+        cartState.containFocMaterial &&
+        cartState.containNonSampleMaterial) {
       showSnackBar(
         context: context,
         message:
-        'Commercial material cannot be combined with covid material.'.tr(),
-      );
-    } else if (!selectedCartItem.materialInfo.materialGroup4.isFOC &&
-        cartState.containSampleMaterial) {
-      showSnackBar(
-        context: context,
-        message:
-            'Commercial material cannot be combined with sample material.'.tr(),
-      );
-    } else if (selectedCartItem.materialInfo.materialGroup4.isFOC &&
-        cartState.containSampleMaterial) {
-      showSnackBar(
-        context: context,
-        message: 'You cannot add non-sample materials to a sample order. Please submit separate orders if you wish to proceed.'.tr(),
-      );
-    } else if (selectedCartItem.materialInfo.isSampleMaterial &&
-        cartState.containFocMaterial) {
-      showSnackBar(
-        context: context,
-        message: 'You cannot add non-FOC materials to a FOC order. Please submit separate orders if you wish to proceed'.tr(),
+            'You cannot add non-FOC materials to a FOC order. Please submit separate orders if you wish to proceed'
+                .tr(),
       );
     } else {
       final eligibilityState = context.read<EligibilityBloc>().state;
@@ -145,20 +146,20 @@ class AddToCartButton extends StatelessWidget {
           context.read<TenderContractBloc>().state.selectedTenderContract;
 
       context.read<CartBloc>().add(
-        CartEvent.addMaterialToCart(
-          item: cartItem.copyWith(tenderContract: selectedTenderContract),
-          customerCodeInfo: eligibilityState.customerCodeInfo,
-          salesOrganisation: eligibilityState.salesOrganisation,
-          salesOrganisationConfigs: eligibilityState.salesOrgConfigs,
-          shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
-          doNotallowOutOfStockMaterial:
-                  eligibilityState.doNotAllowOutOfStockMaterials, 
+            CartEvent.addMaterialToCart(
+              item: cartItem.copyWith(tenderContract: selectedTenderContract),
+              customerCodeInfo: eligibilityState.customerCodeInfo,
+              salesOrganisation: eligibilityState.salesOrganisation,
+              salesOrganisationConfigs: eligibilityState.salesOrgConfigs,
+              shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+              doNotallowOutOfStockMaterial:
+                  eligibilityState.doNotAllowOutOfStockMaterials,
               isSpecialOrderType: context
                   .read<OrderDocumentTypeBloc>()
                   .state
                   .isSpecialOrderType,
-        ),
-      );
+            ),
+          );
       context.router.pop();
     }
   }

@@ -11,9 +11,13 @@ import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
+import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
@@ -74,6 +78,10 @@ class AuthBlocBlocMock extends MockBloc<AuthEvent, AuthState>
 
 class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
 
+class OrderDocumentTypeBlocMock
+    extends MockBloc<OrderDocumentTypeEvent, OrderDocumentTypeState>
+    implements OrderDocumentTypeBloc {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late SalesOrgBloc salesOrgBlocMock;
@@ -87,6 +95,7 @@ void main() {
   late FavouriteBloc favouriteMockBloc;
   late AuthBlocBlocMock authBlocBlocMock;
   late UserBlocMock userBlocMock;
+  late OrderDocumentTypeBlocMock orderDocumentTypeBlocMock;
 
   final materialInfo = MaterialInfo.empty().copyWith(
     materialNumber: MaterialNumber('000000000023168451'),
@@ -129,6 +138,7 @@ void main() {
       favouriteMockBloc = FavoriteMockBloc();
       authBlocBlocMock = AuthBlocBlocMock();
       userBlocMock = UserBlocMock();
+      orderDocumentTypeBlocMock = OrderDocumentTypeBlocMock();
 
       autoRouterMock = locator<AppRouter>();
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
@@ -144,6 +154,8 @@ void main() {
       when(() => favouriteMockBloc.state).thenReturn(FavouriteState.initial());
       when(() => authBlocBlocMock.state).thenReturn(const AuthState.initial());
       when(() => userBlocMock.state).thenReturn(UserState.initial());
+      when(() => orderDocumentTypeBlocMock.state)
+          .thenReturn(OrderDocumentTypeState.initial());
     });
 
     Widget getScopedWidget(Widget child) {
@@ -175,6 +187,8 @@ void main() {
             BlocProvider<FavouriteBloc>(create: (context) => favouriteMockBloc),
             BlocProvider<AuthBloc>(create: (context) => authBlocBlocMock),
             BlocProvider<UserBloc>(create: (context) => userBlocMock),
+            BlocProvider<OrderDocumentTypeBloc>(
+                create: (context) => orderDocumentTypeBlocMock),
           ],
           child: child,
         ),
@@ -799,17 +813,20 @@ void main() {
         expect(addToCartButton, findsOneWidget);
       },
     );
+
     testWidgets(
-      'Test Add FOC material when SAMPLE material is present in CART',
+      'Test Do not allow non-sample material when sample material is already in cart',
       (tester) async {
         when(() => addToCartBlocMock.state).thenReturn(
           AddToCartState.initial().copyWith(
             cartItem: priceAggregate.copyWith(
+              isSpecialOrderType: true,
               price: priceAggregate.price.copyWith(
                 zmgDiscount: true,
               ),
-              materialInfo: priceAggregate.materialInfo
-                  .copyWith(materialGroup4: MaterialGroup.four('6A1')),
+              materialInfo: priceAggregate.materialInfo.copyWith(
+                isFOCMaterial: true,
+              ),
             ),
           ),
         );
@@ -822,7 +839,7 @@ void main() {
                   PriceAggregate.empty().copyWith(
                     materialInfo: MaterialInfo.empty().copyWith(
                       isSampleMaterial: true,
-                      materialGroup4: MaterialGroup.four('6A1'),
+                      isFOCMaterial: false,
                     ),
                   ),
                 ],
@@ -871,17 +888,18 @@ void main() {
     );
 
     testWidgets(
-      'Test Add SAMPLE material when FOC material is present in CART',
+      'Test Do not allow non-FOC material when FOC material is already in cart',
       (tester) async {
         when(() => addToCartBlocMock.state).thenReturn(
           AddToCartState.initial().copyWith(
             cartItem: priceAggregate.copyWith(
+              isSpecialOrderType: true,
               price: priceAggregate.price.copyWith(
                 zmgDiscount: true,
               ),
               materialInfo: priceAggregate.materialInfo.copyWith(
                 isSampleMaterial: true,
-                materialGroup4: MaterialGroup.four('6A1'),
+                isFOCMaterial: false,
               ),
             ),
           ),
@@ -894,8 +912,8 @@ void main() {
                 materials: [
                   PriceAggregate.empty().copyWith(
                     materialInfo: MaterialInfo.empty().copyWith(
+                      isSampleMaterial: false,
                       isFOCMaterial: true,
-                      materialGroup4: MaterialGroup.four('6A1'),
                     ),
                   ),
                 ],
@@ -944,7 +962,7 @@ void main() {
     );
 
     testWidgets(
-      'Test Add Commercial material when Sample material is present in CART',
+      'Test Add SAMPLE material when SAMPLE material is present in CART',
       (tester) async {
         when(() => addToCartBlocMock.state).thenReturn(
           AddToCartState.initial().copyWith(
@@ -953,8 +971,7 @@ void main() {
                 zmgDiscount: true,
               ),
               materialInfo: priceAggregate.materialInfo.copyWith(
-                isSampleMaterial: false,
-                materialGroup4: MaterialGroup.four('6A5'),
+                isSampleMaterial: true,
               ),
             ),
           ),
@@ -968,7 +985,6 @@ void main() {
                   PriceAggregate.empty().copyWith(
                     materialInfo: MaterialInfo.empty().copyWith(
                       isSampleMaterial: true,
-                      materialGroup4: MaterialGroup.four('6A2'),
                     ),
                   ),
                 ],
@@ -1008,11 +1024,26 @@ void main() {
         await tester.tap(addToCartButton);
         await tester.pump();
 
-        const snackbarText =
-            'Commercial material cannot be combined with sample material.';
-        final snackbarWidget = find.text(snackbarText);
-
-        expect(snackbarWidget, findsOneWidget);
+        verify(
+          () => cartBlocMock.add(
+            CartEvent.addMaterialToCart(
+              item: priceAggregate.copyWith(
+                price: priceAggregate.price.copyWith(
+                  zmgDiscount: true,
+                ),
+                materialInfo: priceAggregate.materialInfo.copyWith(
+                  isSampleMaterial: true,
+                ),
+              ),
+              customerCodeInfo: CustomerCodeInfo.empty(),
+              salesOrganisation: SalesOrganisation.empty(),
+              salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+              shipToInfo: ShipToInfo.empty(),
+              doNotallowOutOfStockMaterial: true,
+              isSpecialOrderType: false,
+            ),
+          ),
+        ).called(1);
       },
     );
   });

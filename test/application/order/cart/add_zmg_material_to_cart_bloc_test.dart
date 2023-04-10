@@ -181,7 +181,7 @@ void main() {
               .zmgMaterialCount(itemMaterialGroup: MaterialGroup.two('004')),
           0,
         );
-        expect(bloc.state.containFocMaterial, true);
+        expect(bloc.state.containCovidMaterial, true);
       },
     );
     blocTest<CartBloc, CartState>(
@@ -273,7 +273,7 @@ void main() {
               .zmgMaterialCount(itemMaterialGroup: MaterialGroup.two('004')),
           0,
         );
-        expect(bloc.state.containNonFocMaterial, true);
+        expect(bloc.state.containNonCovidMaterial, true);
       },
     );
     blocTest<CartBloc, CartState>(
