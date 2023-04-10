@@ -116,7 +116,7 @@ class OrderHistoryDetailsDto with _$OrderHistoryDetailsDto {
       ),
       orderHistoryDetailsPoDocuments:
           orderHistoryDetailsPoDocuments.map((e) => e.toDomain()).toList(),
-      orderHistoryDetailsSpecialInstructions: SpecialInstructions(''),
+      orderHistoryDetailsSpecialInstructions:  SpecialInstructions(orderHistoryDetailsSpecialInstructions),
       orderHistoryDetailsMessages:
           orderHistoryDetailsMessages.map((e) => e.toDomain()).toList(),
     );

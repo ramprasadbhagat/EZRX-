@@ -21,7 +21,11 @@ class HistoryOrderDetailSection extends StatelessWidget {
     final customerCodeInfo =
         context.read<EligibilityBloc>().state.customerCodeInfo;
 
-    final taxDisplayForOrderHistoryAndDetails = context.read<SalesOrgBloc>().state.configs.taxDisplayForOrderHistoryAndDetails;
+    final taxDisplayForOrderHistoryAndDetails = context
+        .read<SalesOrgBloc>()
+        .state
+        .configs
+        .taxDisplayForOrderHistoryAndDetails;
 
     return BlocBuilder<OrderHistoryDetailsBloc, OrderHistoryDetailsState>(
       buildWhen: (previous, current) => previous.isLoading != current.isLoading,
@@ -120,21 +124,22 @@ class HistoryOrderDetailSection extends StatelessWidget {
                     valueFlex: 1,
                   )
                 : const SizedBox.shrink(),
-            !context
-                    .read<EligibilityBloc>()
-                    .state
-                    .salesOrgConfigs
-                    .enableSpecialInstructions
-                ? BalanceTextRow(
-                    keyText: 'Special Instructions'.tr(),
-                    valueText: orderDetails
-                        .orderHistoryDetailsSpecialInstructions
-                        .displaySpecialInstructions,
-                    valueTextLoading: state.isLoading,
-                    keyFlex: 1,
-                    valueFlex: 1,
-                  )
-                : const SizedBox.shrink(),
+            BalanceTextRow(
+              keyText: 'Special Instructions'.tr(),
+              valueText: orderDetails.orderHistoryDetailsSpecialInstructions
+                  .displaySpecialInstructions,
+              valueTextLoading: state.isLoading,
+              keyFlex: 1,
+              valueFlex: 1,
+            ),
+            BalanceTextRow(
+              keyText: 'Reference Note'.tr(),
+              valueText:
+                  orderDetails.orderHistoryDetailsOrderHeader.referenceNotes,
+              valueTextLoading: state.isLoading,
+              keyFlex: 1,
+              valueFlex: 1,
+            ),
             BalanceTextRow(
               keyText: 'PO No.'.tr(),
               valueText: orderDetails.orderHistoryDetailsShippingInformation

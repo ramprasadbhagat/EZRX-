@@ -38,7 +38,6 @@ class OrderItemCard extends StatelessWidget {
     final salesOrgConfigs = eligibilityBlocState.salesOrgConfigs;
     final enableTaxDisplay = salesOrgConfigs.enableTaxDisplay;
     final enableDisplayOrderDiscount = salesOrgConfigs.displayOrderDiscount;
-    final enableRemark = salesOrgConfigs.enableRemarks;
     final disableCreateOrder =
         context.read<UserBloc>().state.user.disableCreateOrder;
     final enableOHPrice = salesOrgConfigs.enableOHPrice;
@@ -181,7 +180,6 @@ class OrderItemCard extends StatelessWidget {
                           keyFlex: 1,
                           valueFlex: 1,
                         ),
-                      if (enableRemark)
                         BalanceTextRow(
                           keyText: 'Remarks'.tr(),
                           valueText: orderHistoryDetailsBonusAggregate

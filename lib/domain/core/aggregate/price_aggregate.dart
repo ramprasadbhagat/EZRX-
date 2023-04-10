@@ -80,7 +80,7 @@ class PriceAggregate with _$PriceAggregate {
                 SubmitMaterialItemBonusDto.fromMaterialItemBonus(e).toDomain(),
           )
           .toList(),
-      comment: '',
+      comment: materialInfo.remarks,
       materialNumber: materialInfo.materialNumber,
       quantity: quantity,
       salesDistrict: stockInfo.salesDistrict,
