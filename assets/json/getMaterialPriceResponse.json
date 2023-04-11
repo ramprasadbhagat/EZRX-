@@ -474,30 +474,6 @@
         "Valid": true
       },
       {
-        "MaterialNumber": "000000000023063774",
-        "ListPrice": 540,
-        "AdditionalBonusEligible": true,
-        "PriceRules": [
-          {
-            "Type": "MYR",
-            "Rate": 540,
-            "Conditions": "ZLP0 - A901 - 0002069567",
-            "BonusEligible": true,
-            "__typename": "PriceRule"
-          }
-        ],
-        "Bundles": [],
-        "Bonuses": [],
-        "TieredPricing": [],
-        "Valid": true,
-        "FinalIndividualPrice": 540,
-        "ZMGDiscount": false,
-        "OverridenRulePresent": false,
-        "ZDP5MaxQuota": "",
-        "ZDP5RemainingQuota": "",
-        "__typename": "Price"
-      },
-      {
         "MaterialNumber": "000000000021209747",
         "ListPrice": 540,
         "AdditionalBonusEligible": true,
@@ -845,7 +821,322 @@
         "ZDP5MaxQuota": "",
         "ZDP5RemainingQuota": "",
         "__typename": "Price"
-      }
+      },
+      {
+        "MaterialNumber": "000000000023064890",
+        "ListPrice": 23.93,
+        "AdditionalBonusEligible": true,
+        "PriceRules": [
+          {
+            "Type": "MYR",
+            "Rate": 23.93,
+            "Conditions": "ZLP0 - A901 - 0002070558",
+            "BonusEligible": true,
+            "__typename": "PriceRule"
+          }
+        ],
+        "Bundles": [],
+        "Bonuses": [
+          {
+            "BonusTiers": [
+              {
+                "QualifyingQuantity": 12,
+                "Calculation": "913",
+                "BonusMaterial": [
+                  {
+                    "Id": 1,
+                    "MaterialNumber": "000000000023064890",
+                    "MaterialDescription": "BEROCCA EFFTAB15'S",
+                    "LimitPerTransaction": 0,
+                    "QualifyingQuantity": 12,
+                    "BonusQuantity": 1,
+                    "Calculation": "913",
+                    "BonusRatio": 1,
+                    "ConditionId": "0000216292",
+                    "__typename": "BonusMaterial"
+                  }
+                ],
+                "__typename": "BonusTier"
+              }
+            ],
+            "__typename": "Bonus"
+          }
+        ],
+        "TieredPricing": [],
+        "ComboDeals": null,
+        "Valid": true,
+        "FinalIndividualPrice": 23.93,
+        "ZMGDiscount": false,
+        "OverridenRulePresent": false,
+        "ZDP5MaxQuota": "",
+        "ZDP5RemainingQuota": "",
+        "__typename": "Price"
+      },
+      {
+        "MaterialNumber": "000000000023063774",
+        "ListPrice": 540,
+        "AdditionalBonusEligible": true,
+        "PriceRules": [
+          {
+            "Type": "MYR",
+            "Rate": 540,
+            "Conditions": "ZLP0 - A901 - 0002069567",
+            "BonusEligible": true,
+            "__typename": "PriceRule"
+          }
+        ],
+        "Bundles": [],
+        "Bonuses": [
+          {
+            "BonusTiers": [
+              {
+                "QualifyingQuantity": 4,
+                "Calculation": "913",
+                "BonusMaterial": [
+                  {
+                    "Id": 1,
+                    "MaterialNumber": "000000000023063774",
+                    "MaterialDescription": "(M) TEOSYAL PS RD I 1ML PRFS 2'S",
+                    "LimitPerTransaction": 0,
+                    "QualifyingQuantity": 4,
+                    "BonusQuantity": 1,
+                    "Calculation": "913",
+                    "BonusRatio": 1,
+                    "ConditionId": "0000224002",
+                    "__typename": "BonusMaterial"
+                  }
+                ],
+                "__typename": "BonusTier"
+              },
+              {
+                "QualifyingQuantity": 10,
+                "Calculation": "913",
+                "BonusMaterial": [
+                  {
+                    "Id": 2,
+                    "MaterialNumber": "000000000023063774",
+                    "MaterialDescription": "(M) TEOSYAL PS RD I 1ML PRFS 2'S",
+                    "LimitPerTransaction": 0,
+                    "QualifyingQuantity": 10,
+                    "BonusQuantity": 3,
+                    "Calculation": "913",
+                    "BonusRatio": 3,
+                    "ConditionId": "0000224002",
+                    "__typename": "BonusMaterial"
+                  }
+                ],
+                "__typename": "BonusTier"
+              }
+            ],
+            "__typename": "Bonus"
+          }
+        ],
+        "TieredPricing": [],
+        "ComboDeals": null,
+        "Valid": true,
+        "FinalIndividualPrice": 540,
+        "ZMGDiscount": false,
+        "OverridenRulePresent": false,
+        "ZDP5MaxQuota": "",
+        "ZDP5RemainingQuota": "",
+        "__typename": "Price"
+      },
+      {
+        "MaterialNumber": "000000000023175832",
+        "ListPrice": 550,
+        "AdditionalBonusEligible": true,
+        "PriceRules": [
+          {
+            "Type": "TWD",
+            "Rate": 550,
+            "Conditions": "ZLP0 - A750 - 0079729832",
+            "BonusEligible": true,
+            "__typename": "PriceRule"
+          },
+          {
+            "Type": "TWD",
+            "Rate": 0,
+            "Conditions": "ZDP7 - A750 - 0079729769",
+            "BonusEligible": true,
+            "__typename": "PriceRule"
+          }
+        ],
+        "Bundles": [],
+        "Bonuses": [
+          {
+            "BonusTiers": [
+              {
+                "QualifyingQuantity": 1,
+                "Calculation": "913",
+                "BonusMaterial": [
+                  {
+                    "Id": 1,
+                    "MaterialNumber": "000000000026063717",
+                    "MaterialDescription": "悅己膜衣錠 衛教說明書 ( Yasmin )",
+                    "LimitPerTransaction": 0,
+                    "QualifyingQuantity": 1,
+                    "BonusQuantity": 1,
+                    "Calculation": "913",
+                    "BonusRatio": 1,
+                    "ConditionId": "0004634285",
+                    "__typename": "BonusMaterial"
+                  }
+                ],
+                "__typename": "BonusTier"
+              },
+              {
+                "QualifyingQuantity": 12,
+                "Calculation": "913",
+                "BonusMaterial": [
+                  {
+                    "Id": 2,
+                    "MaterialNumber": "000000000023175832",
+                    "MaterialDescription": "悅己膜衣錠 1x21",
+                    "LimitPerTransaction": 0,
+                    "QualifyingQuantity": 12,
+                    "BonusQuantity": 2,
+                    "Calculation": "913",
+                    "BonusRatio": 1,
+                    "ConditionId": "0004634285",
+                    "__typename": "BonusMaterial"
+                  },
+                  {
+                    "Id": 3,
+                    "MaterialNumber": "000000000026063717",
+                    "MaterialDescription": "悅己膜衣錠 衛教說明書 ( Yasmin )",
+                    "LimitPerTransaction": 0,
+                    "QualifyingQuantity": 12,
+                    "BonusQuantity": 14,
+                    "Calculation": "913",
+                    "BonusRatio": 1,
+                    "ConditionId": "0004634285",
+                    "__typename": "BonusMaterial"
+                  }
+                ],
+                "__typename": "BonusTier"
+              },
+              {
+                "QualifyingQuantity": 24,
+                "Calculation": "913",
+                "BonusMaterial": [
+                  {
+                    "Id": 4,
+                    "MaterialNumber": "000000000023175832",
+                    "MaterialDescription": "悅己膜衣錠 1x21",
+                    "LimitPerTransaction": 0,
+                    "QualifyingQuantity": 24,
+                    "BonusQuantity": 5,
+                    "Calculation": "913",
+                    "BonusRatio": 1,
+                    "ConditionId": "0004634285",
+                    "__typename": "BonusMaterial"
+                  },
+                  {
+                    "Id": 5,
+                    "MaterialNumber": "000000000026063717",
+                    "MaterialDescription": "悅己膜衣錠 衛教說明書 ( Yasmin )",
+                    "LimitPerTransaction": 0,
+                    "QualifyingQuantity": 24,
+                    "BonusQuantity": 29,
+                    "Calculation": "913",
+                    "BonusRatio": 1,
+                    "ConditionId": "0004634285",
+                    "__typename": "BonusMaterial"
+                  }
+                ],
+                "__typename": "BonusTier"
+              },
+              {
+                "QualifyingQuantity": 53,
+                "Calculation": "913",
+                "BonusMaterial": [
+                  {
+                    "Id": 6,
+                    "MaterialNumber": "000000000023175832",
+                    "MaterialDescription": "悅己膜衣錠 1x21",
+                    "LimitPerTransaction": 0,
+                    "QualifyingQuantity": 53,
+                    "BonusQuantity": 15,
+                    "Calculation": "913",
+                    "BonusRatio": 1,
+                    "ConditionId": "0004634285",
+                    "__typename": "BonusMaterial"
+                  },
+                  {
+                    "Id": 7,
+                    "MaterialNumber": "000000000026063717",
+                    "MaterialDescription": "悅己膜衣錠 衛教說明書 ( Yasmin )",
+                    "LimitPerTransaction": 0,
+                    "QualifyingQuantity": 53,
+                    "BonusQuantity": 68,
+                    "Calculation": "913",
+                    "BonusRatio": 1,
+                    "ConditionId": "0004634285",
+                    "__typename": "BonusMaterial"
+                  }
+                ],
+                "__typename": "BonusTier"
+              },
+              {
+                "QualifyingQuantity": 74,
+                "Calculation": "913",
+                "BonusMaterial": [
+                  {
+                    "Id": 8,
+                    "MaterialNumber": "000000000023175832",
+                    "MaterialDescription": "悅己膜衣錠 1x21",
+                    "LimitPerTransaction": 0,
+                    "QualifyingQuantity": 74,
+                    "BonusQuantity": 28,
+                    "Calculation": "913",
+                    "BonusRatio": 1,
+                    "ConditionId": "0004634285",
+                    "__typename": "BonusMaterial"
+                  },
+                  {
+                    "Id": 9,
+                    "MaterialNumber": "000000000026063717",
+                    "MaterialDescription": "悅己膜衣錠 衛教說明書 ( Yasmin )",
+                    "LimitPerTransaction": 0,
+                    "QualifyingQuantity": 74,
+                    "BonusQuantity": 102,
+                    "Calculation": "913",
+                    "BonusRatio": 1,
+                    "ConditionId": "0004634285",
+                    "__typename": "BonusMaterial"
+                  }
+                ],
+                "__typename": "BonusTier"
+              }
+            ],
+            "__typename": "Bonus"
+          }
+        ],
+        "TieredPricing": [
+          {
+            "Tier": "C",
+            "PriceTier": [
+              {
+                "Sequence": 0,
+                "Quantity": 1,
+                "Type": "",
+                "Rate": 550,
+                "ApplyBonus": true,
+                "__typename": "PriceTier"
+              }
+            ],
+            "__typename": "TieredPricing"
+          }
+        ],
+        "ComboDeals": null,
+        "Valid": true,
+        "FinalIndividualPrice": 550,
+        "ZMGDiscount": false,
+        "OverridenRulePresent": false,
+        "ZDP5MaxQuota": "",
+        "ZDP5RemainingQuota": "",
+        "__typename": "Price"
+    }
     ]
   }
 }

@@ -334,17 +334,19 @@ class PriceAggregate with _$PriceAggregate {
         final bonusMaterial = <MaterialNumber, BonusMaterial>{};
         price.priceBonusItem.fold<int>(quantity, (remainQty, element) {
           if (remainQty >= element.qualifyingQuantity) {
+            final ratio = (remainQty / element.qualifyingQuantity).truncate();
             for (final newBonus in element.bonusMaterials) {
               bonusMaterial.update(
                 newBonus.materialNumber,
                 (BonusMaterial oldBonus) => oldBonus.copyWith(
                   bonusQuantity:
-                      oldBonus.bonusQuantity + newBonus.bonusQuantity,
+                      oldBonus.bonusQuantity + (newBonus.bonusQuantity * ratio),
                 ),
-                ifAbsent: () => newBonus,
+                ifAbsent: () => newBonus.copyWith(
+                  bonusQuantity: newBonus.bonusQuantity * ratio,
+                ),
               );
             }
-            final ratio = (remainQty / element.qualifyingQuantity).truncate();
 
             return remainQty - (ratio * element.qualifyingQuantity);
           } else {

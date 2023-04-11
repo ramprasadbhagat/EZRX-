@@ -4,7 +4,7 @@
       {
         "MaterialNumber": "000000000023245611",
         "ExpiryDate": "20230731",
-        "Batch": "199021",
+        "Batch": "199019",
         "InStock": "Yes",
         "SalesDistrict": null
       },
@@ -39,7 +39,7 @@
       {
         "MaterialNumber": "000000000023063774",
         "ExpiryDate": "20230731",
-        "Batch": "199021",
+        "Batch": "199020",
         "InStock": "Yes",
         "SalesDistrict": null
       },
@@ -53,14 +53,14 @@
       {
         "MaterialNumber": "000000000021209747",
         "ExpiryDate": "20230731",
-        "Batch": "199021",
+        "Batch": "199022",
         "InStock": "Yes",
         "SalesDistrict": null
       },
       {
         "MaterialNumber": "000000000023245612",
         "ExpiryDate": "20230731",
-        "Batch": "199021",
+        "Batch": "199023",
         "InStock": "Yes",
         "SalesDistrict": null
       },
@@ -74,6 +74,27 @@
       {
         "MaterialNumber": "000000000023007483",
         "ExpiryDate": "20230731",
+        "Batch": "204623",
+        "InStock": "Yes",
+        "SalesDistrict": null
+      },
+      {
+        "MaterialNumber": "000000000023064890",
+        "ExpiryDate": "20230727",
+        "Batch": "204623",
+        "InStock": "Yes",
+        "SalesDistrict": null
+      },
+      {
+        "MaterialNumber": "000000000023175832",
+        "ExpiryDate": "20230024",
+        "Batch": "204623",
+        "InStock": "Yes",
+        "SalesDistrict": null
+      },
+      {
+        "MaterialNumber": "000000000026063717",
+        "ExpiryDate": "20230050",
         "Batch": "204623",
         "InStock": "Yes",
         "SalesDistrict": null

@@ -448,7 +448,7 @@ class CartRepository implements ICartRepository {
         if (stockInfoList.isNotEmpty) {
           final stockInfo = stockInfoList.firstWhere(
             (element) =>
-                element.materialNumber == material.materialInfo.materialNumber,
+                element.materialNumber == bonus.materialInfo.materialNumber,
             orElse: () => StockInfo.empty(),
           );
           

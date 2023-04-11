@@ -303,6 +303,82 @@
           "hasMandatoryTenderContract": null,
           "isSampleMaterial": false,
           "__typename": "Material"
+        },
+        {
+          "materialNumber": "000000000023064890",
+          "materialDescription": "BEROCCA EFFTAB15'S",
+          "principalCode": "0000101369",
+          "principalName": "BAYER CO (MALAYSIA) SDN BHD",
+          "therapeuticClass": "Vitamin B complex with other drugs",
+          "governmentMaterialCode": "",
+          "genericMaterialName": "BEROCCA EFF INDO    TAB          15'S",
+          "defaultMaterialDescription": "BEROCCA EFFTAB15'S",
+          "oldMaterialCode": "25180107803",
+          "itemRegistrationNumber": "MAL08042261X",
+          "taxM1": "1",
+          "taxes": [
+            "6"
+          ],
+          "unitOfMeasurement": "EA",
+          "taxClassification": "Product : Full Tax",
+          "hasValidTenderContract": null,
+          "hasMandatoryTenderContract": null,
+          "isSampleMaterial": false,
+          "hidePrice": false,
+          "isFOCMaterial": true,
+          "__typename": "Material"
+        },
+        {
+          "materialNumber": "000000000023063774",
+          "materialDescription": "(M) TEOSYAL PS RD I 1ML PRFS 2'S",
+          "principalCode": "0000101363",
+          "principalName": "PARVUS SDN BHD",
+          "therapeuticClass": "Other dermatological preparations",
+          "governmentMaterialCode": "",
+          "genericMaterialName": "",
+          "defaultMaterialDescription": "(M) TEOSYAL PS RD I 1ML PRFS 2'S",
+          "oldMaterialCode": "PVFILTEOPRI2MLAC",
+          "materialGroup4": "2GD",
+          "materialGroup2": "",
+          "taxClassification": "Product : No Tax",
+          "itemRegistrationNumber": "NOT REQUIRED",
+          "taxM1": "0",
+          "taxes": [
+            "6"
+          ],
+          "unitOfMeasurement": "EA",
+          "hidePrice": false,
+          "hasValidTenderContract": null,
+          "hasMandatoryTenderContract": null,
+          "isSampleMaterial": false,
+          "isFOCMaterial": false,
+          "__typename": "Material"
+        },
+        {
+          "materialNumber": "000000000023175832",
+          "materialDescription": "悅己膜衣錠 1x21",
+          "principalCode": "0000101968",
+          "principalName": "台灣拜耳股份有限公司",
+          "therapeuticClass": "Non-IMS classified",
+          "governmentMaterialCode": "",
+          "genericMaterialName": "",
+          "defaultMaterialDescription": "Yasmin FTB 1x21 TW",
+          "oldMaterialCode": "182YS12",
+          "materialGroup4": "E1",
+          "materialGroup2": "",
+          "taxClassification": "Product : Full Tax",
+          "itemRegistrationNumber": "D023338",
+          "taxM1": "1",
+          "taxes": [
+            "5"
+          ],
+          "unitOfMeasurement": "EA",
+          "hidePrice": false,
+          "hasValidTenderContract": null,
+          "hasMandatoryTenderContract": null,
+          "isSampleMaterial": false,
+          "isFOCMaterial": false,
+          "__typename": "Material"
         }
       ]
     }

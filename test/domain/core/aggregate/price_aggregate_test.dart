@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
@@ -22,6 +25,7 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/num_utils.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_item_override_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/price_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/submit_material_item_bonus_dto.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -40,7 +44,7 @@ void main() {
   final emptyTenderContract = TenderContract.empty();
   final emptyPriceAggregate = PriceAggregate.empty();
   final emptyComboDeal = ComboDeal.empty();
-
+  late List<Price> materialPriceListFromLocal;
   group('Price Aggregate Test', () {
     test('should return correct price aggregate object', () {
       final priceAggregate = PriceAggregate(
@@ -1516,6 +1520,193 @@ void main() {
               .toDomain());
       expect(submitMaterialInfo.tenderContract,
           emptyPriceAggregate.tenderContract);
+    });
+  });
+
+  group('PriceAggregate Bonus Deal Test', () {
+    setUpAll(() async {
+      //     var input = await File('assets/json/getMaterialPriceResponse.json').readAsString();
+      // var map = jsonDecode(input);
+      final data = json.decode(
+        await File('assets/json/getMaterialPriceResponse.json').readAsString(),
+      );
+      final finalData = data['data']['price'];
+      materialPriceListFromLocal = List.from(finalData)
+          .map((e) => PriceDto.fromJson(e).toDomain())
+          .toList();
+    });
+    test('PriceAggregate single Bonus Deal', () {
+      final price = materialPriceListFromLocal.firstWhere(
+        (element) =>
+            element.materialNumber == MaterialNumber('000000000023064890'),
+        orElse: () => Price.empty(),
+      );
+      final singleBonusPriceAggregate = PriceAggregate.empty().copyWith(
+        price: price,
+      );
+      expect(
+        singleBonusPriceAggregate
+            .copyWith(quantity: 11)
+            .calculateMaterialItemBonus,
+        [],
+      );
+      expect(
+        singleBonusPriceAggregate
+            .copyWith(quantity: 12)
+            .calculateMaterialItemBonus,
+        [
+          price.priceBonusItem.first.bonusMaterials.first.copyWith(
+            bonusQuantity: 1,
+          )
+        ],
+      );
+      expect(
+        singleBonusPriceAggregate
+            .copyWith(quantity: 24)
+            .calculateMaterialItemBonus,
+        [
+          price.priceBonusItem.first.bonusMaterials.first.copyWith(
+            bonusQuantity: 2,
+          )
+        ],
+      );
+    });
+
+    test('PriceAggregate multiple Bonus Deal', () {
+      final price = materialPriceListFromLocal.firstWhere(
+        (element) =>
+            element.materialNumber == MaterialNumber('000000000023063774'),
+        orElse: () => Price.empty(),
+      );
+      final multipleBonusPriceAggregate = PriceAggregate.empty().copyWith(
+        price: price,
+      );
+      expect(
+        multipleBonusPriceAggregate
+            .copyWith(quantity: 3)
+            .calculateMaterialItemBonus,
+        [],
+      );
+      expect(
+        multipleBonusPriceAggregate
+            .copyWith(quantity: 9)
+            .calculateMaterialItemBonus,
+        [
+          price.priceBonusItem.last.bonusMaterials.first.copyWith(
+            bonusQuantity: 2,
+          )
+        ],
+      );
+      expect(
+        multipleBonusPriceAggregate
+            .copyWith(quantity: 10)
+            .calculateMaterialItemBonus,
+        [
+          price.priceBonusItem.first.bonusMaterials.first.copyWith(
+            bonusQuantity: 3,
+          )
+        ],
+      );
+      expect(
+        multipleBonusPriceAggregate
+            .copyWith(quantity: 14)
+            .calculateMaterialItemBonus,
+        [
+          price.priceBonusItem.first.bonusMaterials.first.copyWith(
+            bonusQuantity: 4,
+          )
+        ],
+      );
+      expect(
+        multipleBonusPriceAggregate
+            .copyWith(quantity: 18)
+            .calculateMaterialItemBonus,
+        [
+          price.priceBonusItem.first.bonusMaterials.first.copyWith(
+            bonusQuantity: 5,
+          )
+        ],
+      );
+      expect(
+        multipleBonusPriceAggregate
+            .copyWith(quantity: 20)
+            .calculateMaterialItemBonus,
+        [
+          price.priceBonusItem.first.bonusMaterials.first.copyWith(
+            bonusQuantity: 6,
+          )
+        ],
+      );
+    });
+
+    test('PriceAggregate multiple Bonus Deal with multiple material', () {
+      final price = materialPriceListFromLocal.firstWhere(
+        (element) =>
+            element.materialNumber == MaterialNumber('000000000023175832'),
+        orElse: () => Price.empty(),
+      );
+      final multipleBonusPriceAggregate = PriceAggregate.empty().copyWith(
+        price: price,
+      );
+      expect(
+        multipleBonusPriceAggregate
+            .copyWith(quantity: 1)
+            .calculateMaterialItemBonus,
+        [
+          price.priceBonusItem.last.bonusMaterials.last.copyWith(
+            bonusQuantity: 1,
+          )
+        ],
+      );
+      expect(
+        multipleBonusPriceAggregate
+            .copyWith(quantity: 11)
+            .calculateMaterialItemBonus,
+        [
+          price.priceBonusItem.last.bonusMaterials.last.copyWith(
+            bonusQuantity: 11,
+          )
+        ],
+      );
+      expect(
+        multipleBonusPriceAggregate
+            .copyWith(quantity: 12)
+            .calculateMaterialItemBonus,
+        [
+          price.priceBonusItem.elementAt(3).bonusMaterials.first.copyWith(
+                bonusQuantity: 2,
+              ),
+          price.priceBonusItem.elementAt(3).bonusMaterials.last.copyWith(
+                bonusQuantity: 14,
+              )
+        ],
+      );
+      expect(
+        multipleBonusPriceAggregate
+            .copyWith(quantity: 20)
+            .calculateMaterialItemBonus,
+        [
+          price.priceBonusItem.elementAt(3).bonusMaterials.first.copyWith(
+                bonusQuantity: 2,
+              ),
+          price.priceBonusItem.elementAt(3).bonusMaterials.last.copyWith(
+                bonusQuantity: 22,
+              )
+        ],
+      );
+      expect(
+        multipleBonusPriceAggregate
+            .copyWith(quantity: 24)
+            .calculateMaterialItemBonus,
+        [
+          price.priceBonusItem.elementAt(2).bonusMaterials.first.copyWith(
+                bonusQuantity: 5,
+              ),
+          price.priceBonusItem.elementAt(2).bonusMaterials.last.copyWith(
+                bonusQuantity: 29,
+              )
+        ],
+      );
     });
   });
 }
