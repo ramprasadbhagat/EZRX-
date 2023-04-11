@@ -6,17 +6,17 @@ part of 'price_aggregate_dto.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class PriceAggregateDtoAdapter extends TypeAdapter<PriceAggregateDto> {
+class PriceAggregateDtoAdapter extends TypeAdapter<_$_PriceAggregateDto> {
   @override
   final int typeId = 2;
 
   @override
-  PriceAggregateDto read(BinaryReader reader) {
+  _$_PriceAggregateDto read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return PriceAggregateDto(
+    return _$_PriceAggregateDto(
       materialDto: fields[0] == null
           ? const MaterialDto(
               bundles: [],
@@ -169,7 +169,7 @@ class PriceAggregateDtoAdapter extends TypeAdapter<PriceAggregateDto> {
   }
 
   @override
-  void write(BinaryWriter writer, PriceAggregateDto obj) {
+  void write(BinaryWriter writer, _$_PriceAggregateDto obj) {
     writer
       ..writeByte(12)
       ..writeByte(0)
@@ -184,8 +184,6 @@ class PriceAggregateDtoAdapter extends TypeAdapter<PriceAggregateDto> {
       ..write(obj.zmgMaterialCountOnCart)
       ..writeByte(5)
       ..write(obj.bundleDto)
-      ..writeByte(6)
-      ..write(obj.bonusItem)
       ..writeByte(7)
       ..write(obj.stockInfoDto)
       ..writeByte(8)
@@ -194,6 +192,8 @@ class PriceAggregateDtoAdapter extends TypeAdapter<PriceAggregateDto> {
       ..write(obj.comboDealDto)
       ..writeByte(10)
       ..write(obj.isSpecialOrderType)
+      ..writeByte(6)
+      ..write(obj.bonusItem)
       ..writeByte(11)
       ..write(obj.stockInfoDtoList);
   }

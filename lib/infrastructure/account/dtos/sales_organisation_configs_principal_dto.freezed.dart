@@ -21,8 +21,13 @@ SalesOrganisationConfigsPrincipalDto
 
 /// @nodoc
 mixin _$SalesOrganisationConfigsPrincipalDto {
+//The date is not been used anywhere and
+//it is not in proper format
+//e.g - YYYYMMDD00 (extra two zero at the end)
+  @HiveField(1, defaultValue: 0)
   @JsonKey(name: 'date', defaultValue: 0)
   int get date => throw _privateConstructorUsedError;
+  @HiveField(2, defaultValue: '')
   @JsonKey(name: 'principal')
   String get principalCode => throw _privateConstructorUsedError;
 
@@ -42,8 +47,12 @@ abstract class $SalesOrganisationConfigsPrincipalDtoCopyWith<$Res> {
           SalesOrganisationConfigsPrincipalDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'date', defaultValue: 0) int date,
-      @JsonKey(name: 'principal') String principalCode});
+      {@HiveField(1, defaultValue: 0)
+      @JsonKey(name: 'date', defaultValue: 0)
+          int date,
+      @HiveField(2, defaultValue: '')
+      @JsonKey(name: 'principal')
+          String principalCode});
 }
 
 /// @nodoc
@@ -86,8 +95,12 @@ abstract class _$$_SalesOrganisationConfigsPrincipalDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'date', defaultValue: 0) int date,
-      @JsonKey(name: 'principal') String principalCode});
+      {@HiveField(1, defaultValue: 0)
+      @JsonKey(name: 'date', defaultValue: 0)
+          int date,
+      @HiveField(2, defaultValue: '')
+      @JsonKey(name: 'principal')
+          String principalCode});
 }
 
 /// @nodoc
@@ -121,21 +134,32 @@ class __$$_SalesOrganisationConfigsPrincipalDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
+@HiveType(
+    typeId: 33, adapterName: 'SalesOrganisationConfigsPrincipalDtoAdapter')
 class _$_SalesOrganisationConfigsPrincipalDto
     extends _SalesOrganisationConfigsPrincipalDto {
   const _$_SalesOrganisationConfigsPrincipalDto(
-      {@JsonKey(name: 'date', defaultValue: 0) required this.date,
-      @JsonKey(name: 'principal') required this.principalCode})
+      {@HiveField(1, defaultValue: 0)
+      @JsonKey(name: 'date', defaultValue: 0)
+          required this.date,
+      @HiveField(2, defaultValue: '')
+      @JsonKey(name: 'principal')
+          required this.principalCode})
       : super._();
 
   factory _$_SalesOrganisationConfigsPrincipalDto.fromJson(
           Map<String, dynamic> json) =>
       _$$_SalesOrganisationConfigsPrincipalDtoFromJson(json);
 
+//The date is not been used anywhere and
+//it is not in proper format
+//e.g - YYYYMMDD00 (extra two zero at the end)
   @override
+  @HiveField(1, defaultValue: 0)
   @JsonKey(name: 'date', defaultValue: 0)
   final int date;
   @override
+  @HiveField(2, defaultValue: '')
   @JsonKey(name: 'principal')
   final String principalCode;
 
@@ -177,8 +201,12 @@ class _$_SalesOrganisationConfigsPrincipalDto
 abstract class _SalesOrganisationConfigsPrincipalDto
     extends SalesOrganisationConfigsPrincipalDto {
   const factory _SalesOrganisationConfigsPrincipalDto(
-          {@JsonKey(name: 'date', defaultValue: 0) required final int date,
-          @JsonKey(name: 'principal') required final String principalCode}) =
+          {@HiveField(1, defaultValue: 0)
+          @JsonKey(name: 'date', defaultValue: 0)
+              required final int date,
+          @HiveField(2, defaultValue: '')
+          @JsonKey(name: 'principal')
+              required final String principalCode}) =
       _$_SalesOrganisationConfigsPrincipalDto;
   const _SalesOrganisationConfigsPrincipalDto._() : super._();
 
@@ -186,10 +214,14 @@ abstract class _SalesOrganisationConfigsPrincipalDto
           Map<String, dynamic> json) =
       _$_SalesOrganisationConfigsPrincipalDto.fromJson;
 
-  @override
+  @override //The date is not been used anywhere and
+//it is not in proper format
+//e.g - YYYYMMDD00 (extra two zero at the end)
+  @HiveField(1, defaultValue: 0)
   @JsonKey(name: 'date', defaultValue: 0)
   int get date;
   @override
+  @HiveField(2, defaultValue: '')
   @JsonKey(name: 'principal')
   String get principalCode;
   @override

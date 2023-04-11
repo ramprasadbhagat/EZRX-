@@ -8,51 +8,42 @@ import 'package:ezrxmobile/infrastructure/order/dtos/price_combo_deal_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/stock_info_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/tender_contract_dto.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
 
 part 'price_aggregate_dto.g.dart';
+part 'price_aggregate_dto.freezed.dart';
 
-@HiveType(typeId: 2, adapterName: 'PriceAggregateDtoAdapter')
-class PriceAggregateDto {
-  PriceAggregateDto({
-    required this.materialDto,
-    required this.quantity,
-    required this.priceDto,
-    required this.salesOrganisationConfigsDto,
-    required this.zmgMaterialCountOnCart,
-    required this.bundleDto,
-    required this.bonusItem,
-    required this.stockInfoDto,
-    required this.tenderContractDto,
-    required this.comboDealDto,
-    required this.isSpecialOrderType,
-    required this.stockInfoDtoList,
-  });
-
+@freezed
+class PriceAggregateDto with _$PriceAggregateDto {
+  const PriceAggregateDto._();
+  @HiveType(typeId: 2, adapterName: 'PriceAggregateDtoAdapter')
+  const factory PriceAggregateDto({
   @HiveField(0, defaultValue: _emptyConstMaterialDto)
-  MaterialDto materialDto;
+  required MaterialDto materialDto,
   @HiveField(1, defaultValue: 1)
-  int quantity;
+  required int quantity,
   @HiveField(2, defaultValue: _emptyPriceDto)
-  PriceDto priceDto;
+  required PriceDto priceDto,
   @HiveField(3, defaultValue: _emptySalesOrganisationConfigsDto)
-  SalesOrganisationConfigsDto salesOrganisationConfigsDto;
+  required SalesOrganisationConfigsDto salesOrganisationConfigsDto,
   @HiveField(4, defaultValue: 0)
-  int zmgMaterialCountOnCart;
+  required int zmgMaterialCountOnCart,
   @HiveField(5, defaultValue: _emptyBundleDto)
-  BundleDto bundleDto;
+  required BundleDto bundleDto,
   @HiveField(6, defaultValue: [])
-  List<MaterialItemBonusDto> bonusItem;
+  required List<MaterialItemBonusDto> bonusItem,
   @HiveField(7, defaultValue: _emptyStockInfoDto)
-  StockInfoDto stockInfoDto;
+  required StockInfoDto stockInfoDto,
   @HiveField(8, defaultValue: _emptyTenderContractDto)
-  TenderContractDto tenderContractDto;
+  required TenderContractDto tenderContractDto,
   @HiveField(9, defaultValue: ComboDealDto.empty)
-  ComboDealDto comboDealDto;
+  required ComboDealDto comboDealDto,
   @HiveField(10, defaultValue: false)
-  bool isSpecialOrderType;
+  required bool isSpecialOrderType,
   @HiveField(11, defaultValue: [])
-  List<StockInfoDto> stockInfoDtoList;
+  required List<StockInfoDto> stockInfoDtoList,
+  }) = _PriceAggregateDto;
 
   factory PriceAggregateDto.fromDomain(PriceAggregate cart) {
     return PriceAggregateDto(
@@ -201,7 +192,7 @@ const SalesOrganisationConfigsDto _emptySalesOrganisationConfigsDto =
   enableComboDeals: false,
   greenDeliveryUserRole: 0,
   comboDealsUserRole: 0,
-  enableGMN:false,
+  enableGMN: false,
 );
 
 const BundleDto _emptyBundleDto = BundleDto(
