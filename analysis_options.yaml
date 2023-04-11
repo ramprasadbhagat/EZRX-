@@ -108,5 +108,4 @@ dart_code_metrics:
     - avoid-use-expanded-as-spacer
     # - prefer-correct-edge-insets-constructor
     - avoid-returning-widgets
-    - avoid-dynamic
     
