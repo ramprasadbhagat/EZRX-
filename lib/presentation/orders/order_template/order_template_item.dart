@@ -53,30 +53,28 @@ class OrderTemplateItem extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
-              TextButton.icon(
-                key: const Key('deleteFromList'),
-                onPressed: () async {
-                  await CustomDialogs.confirmationDialog(
-                    context: context,
-                    title: 'Delete Order Template?'.tr(),
-                    message:
-                        'Are you sure you want to delete this Order Template?'
-                            .tr(),
-                    confirmText: 'Yes'.tr(),
-                    cancelText: 'No'.tr(),
-                    onAcceptPressed: () async {
-                      context.read<OrderTemplateListBloc>().add(
-                            OrderTemplateListEvent.delete(
-                              orderTemplate,
-                            ),
-                          );
-                    },
-                  );
-                },
-                icon: const Icon(Icons.delete),
-                label: Text('Delete'.tr()),
-              ),
             ],
+          ),
+          trailing: IconButton(
+            key: const Key('deleteFromList'),
+            onPressed: () async {
+              await CustomDialogs.confirmationDialog(
+                context: context,
+                title: 'Delete Order Template'.tr(),
+                message:
+                    'Are you sure you want to delete this Order Template?'.tr(),
+                confirmText: 'Yes'.tr(),
+                cancelText: 'No'.tr(),
+                onAcceptPressed: () async {
+                  context.read<OrderTemplateListBloc>().add(
+                        OrderTemplateListEvent.delete(
+                          orderTemplate,
+                        ),
+                      );
+                },
+              );
+            },
+            icon: const Icon(Icons.delete),
           ),
         ),
       ),
