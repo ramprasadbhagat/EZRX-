@@ -167,7 +167,7 @@ class CartBundleItemTile extends StatelessWidget {
                                       ),
                                 ),
                                 Text(
-                                  '${cartItem.subTotalPrice.isNegative ? 'Total Discount: '.tr() : 'Total Amount: '.tr()}${StringUtils.displayPrice(materialCommonInfo.salesOrgConfig, cartItem.subTotalPrice)}',
+                                  '${cartItem.subTotalPrice().isNegative ? 'Total Discount: '.tr() : 'Total Amount: '.tr()}${StringUtils.displayPrice(materialCommonInfo.salesOrgConfig, cartItem.subTotalPrice())}',
                                   key: const Key('cartBundleItemTotal'),
                                   style: Theme.of(context)
                                       .textTheme
@@ -303,7 +303,9 @@ class _BundleMaterialItemState extends State<_BundleMaterialItem> {
               isEnabled:
                   widget.material.tenderContract == TenderContract.empty() &&
                       !state.isFetching,
-              quantityTextKey: Key('cartItem${widget.material.getMaterialNumber.getOrDefaultValue('')}'),
+              quantityTextKey: Key(
+                'cartItem${widget.material.getMaterialNumber.getOrDefaultValue('')}',
+              ),
               controller: controller,
               onFieldChange: (value) {
                 locator<CountlyService>().addCountlyEvent(
@@ -405,8 +407,12 @@ class _BundleMaterialItemState extends State<_BundleMaterialItem> {
                       ),
                     );
               },
-              quantityAddKey: Key('cartAdd${widget.material.getMaterialNumber.getOrCrash()}'),
-              quantityDeleteKey: Key('cartDelete${widget.material.getMaterialNumber.getOrCrash()}'),
+              quantityAddKey: Key(
+                'cartAdd${widget.material.getMaterialNumber.getOrCrash()}',
+              ),
+              quantityDeleteKey: Key(
+                'cartDelete${widget.material.getMaterialNumber.getOrCrash()}',
+              ),
               minimumQty: 0,
               isLoading: state.isFetching,
             );

@@ -109,8 +109,8 @@ void main() async {
       test('Unit price', () {
         const unitPrice = 87.0 * 5 + 87.0 * 5 + 87.0 * 5;
         expect(cartItem.unitPrice, unitPrice);
-        expect(cartItem.grandTotalPrice, unitPrice);
-        expect(cartItem.subTotalPrice, unitPrice);
+        expect(cartItem.grandTotalPrice(), unitPrice);
+        expect(cartItem.subTotalPrice(), unitPrice);
       });
     });
 
@@ -161,8 +161,8 @@ void main() async {
       test('Unit price', () {
         const unitPrice = -14.0 * 5 + -14.0 * 5 + -14.0 * 5 + -14.0 * 5;
         expect(cartItem.unitPrice, unitPrice);
-        expect(cartItem.grandTotalPrice, unitPrice);
-        expect(cartItem.subTotalPrice, unitPrice);
+        expect(cartItem.grandTotalPrice(), unitPrice);
+        expect(cartItem.subTotalPrice(), unitPrice);
       });
     });
 
@@ -203,8 +203,8 @@ void main() async {
       test('Unit price', () {
         const unitPrice = 100 * 5 + 100 * 5;
         expect(cartItem.unitPrice, unitPrice);
-        expect(cartItem.grandTotalPrice, unitPrice);
-        expect(cartItem.subTotalPrice, unitPrice);
+        expect(cartItem.grandTotalPrice(), unitPrice);
+        expect(cartItem.subTotalPrice(), unitPrice);
       });
     });
   });

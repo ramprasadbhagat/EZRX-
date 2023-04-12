@@ -1779,7 +1779,11 @@ void main() {
         expect(grandTotalKey, findsOneWidget);
         expect(find.text('Grand Total'), findsOneWidget);
         expect(
-            cartBloc.state.grandTotalBasedOnOrderType(isSpecial: false), 108.0);
+            cartBloc.state.grandTotal(
+              isSpecialOrderType: false,
+              isMYMarketSalesRep: false,
+            ),
+            108.0);
       });
 
       testWidgets('Test to have correct GST and totalPrice with Bundle',
@@ -1840,7 +1844,11 @@ void main() {
         final txt = find.text(': SGD 108.00');
         expect(txt, findsAtLeastNWidgets(1));
         expect(
-            cartBloc.state.grandTotalBasedOnOrderType(isSpecial: true), 108.0);
+            cartBloc.state.grandTotal(
+              isSpecialOrderType: true,
+              isMYMarketSalesRep: false,
+            ),
+            108.0);
       });
 
 

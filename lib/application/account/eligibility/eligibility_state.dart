@@ -25,7 +25,8 @@ class EligibilityState with _$EligibilityState {
   bool get isReturnsEnable {
     if (user.disableReturns) return false;
 
-    if (user.role.type.isSalesRepRole && salesOrgConfigs.disableReturnsAccessSR) {
+    if (user.role.type.isSalesRepRole &&
+        salesOrgConfigs.disableReturnsAccessSR) {
       return false;
     }
 
@@ -54,7 +55,7 @@ class EligibilityState with _$EligibilityState {
     }
 
     // 1. country must be case 'TH', 'SG', 'TW', 'MY'
-     if (salesOrganisation.salesOrg.isValidCountryOrderTypeEligible &&
+    if (salesOrganisation.salesOrg.isValidCountryOrderTypeEligible &&
         isOrderTypeEligible) {
       return true;
     }
@@ -99,7 +100,8 @@ class EligibilityState with _$EligibilityState {
   }
 
   bool get validateOutOfStockValue {
-    return user.role.type.isSalesRepRole && salesOrgConfigs.oosValue.isOosValueZero;
+    return user.role.type.isSalesRepRole &&
+        salesOrgConfigs.oosValue.isOosValueZero;
   }
 
   bool get doNotAllowOutOfStockMaterials {
@@ -184,4 +186,7 @@ class EligibilityState with _$EligibilityState {
   //============================================================
   bool get isOrderTypeEligible =>
       user.role.type.isSalesRepRole && !salesOrgConfigs.disableOrderType;
+
+  bool get isMYMarketSalesRep =>
+      user.role.type.isSalesRepRole && salesOrganisation.salesOrg.isMY;
 }

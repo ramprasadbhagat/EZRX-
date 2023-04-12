@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:badges/badges.dart' as bd;
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
@@ -50,14 +51,20 @@ class CartButton extends StatelessWidget {
                         .read<OrderDocumentTypeBloc>()
                         .state
                         .isSpecialOrderType;
+                    final isMYMarketSalesRep = context
+                        .read<EligibilityBloc>()
+                        .state
+                        .isMYMarketSalesRep;
                     locator<CountlyService>()
                         .addCountlyEvent('Cart Window', segmentation: {
                       'numItemInCart': cartState.cartItems.length,
-                      'subTotal': cartState.subTotalBasedOnOrderType(
-                        isSpecial: isSpecialOrderType,
+                      'subTotal': cartState.subTotal(
+                        isSpecialOrderType: isSpecialOrderType,
+                        isMYMarketSalesRep: isMYMarketSalesRep,
                       ),
-                      'grandTotal': cartState.grandTotalBasedOnOrderType(
-                        isSpecial: isSpecialOrderType,
+                      'grandTotal': cartState.grandTotal(
+                        isSpecialOrderType: isSpecialOrderType,
+                        isMYMarketSalesRep: isMYMarketSalesRep,
                       ),
                     });
                     context.read<AdditionalDetailsBloc>().add(

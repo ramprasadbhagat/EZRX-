@@ -20,23 +20,46 @@ class CartState with _$CartState {
         isFetchingBonus: false,
       );
 
-  double subTotalBasedOnOrderType({required bool isSpecial}) =>
+  double subTotal({
+    required bool isSpecialOrderType,
+    required bool isMYMarketSalesRep,
+  }) =>
       selectedCartItems.fold<double>(
         0,
         (sum, item) =>
-            sum + item.subTotalPriceOnOrderType(isSpecial: isSpecial),
+            sum +
+            item.subTotalPrice(
+              isSpecialOrderType: isSpecialOrderType,
+              isMYMarketSalesRep: isMYMarketSalesRep,
+            ),
       );
 
-  double grandTotalBasedOnOrderType({required bool isSpecial}) =>
+  double grandTotal({
+    required bool isSpecialOrderType,
+    required bool isMYMarketSalesRep,
+  }) =>
       selectedCartItems.fold<double>(
         0,
         (sum, item) =>
-            sum + item.grandTotalPriceOnOrderType(isSpecial: isSpecial),
+            sum +
+            item.grandTotalPrice(
+              isSpecialOrderType: isSpecialOrderType,
+              isMYMarketSalesRep: isMYMarketSalesRep,
+            ),
       );
 
-  double vatTotalOnOrderType({required bool isSpecial}) =>
-      grandTotalBasedOnOrderType(isSpecial: isSpecial) -
-      subTotalBasedOnOrderType(isSpecial: isSpecial);
+  double vatTotalOnOrderType({
+    required bool isSpecial,
+    required bool isMYMarketSalesRep,
+  }) =>
+      grandTotal(
+        isSpecialOrderType: isSpecial,
+        isMYMarketSalesRep: isMYMarketSalesRep,
+      ) -
+      subTotal(
+        isSpecialOrderType: isSpecial,
+        isMYMarketSalesRep: isMYMarketSalesRep,
+      );
 
   int zmgMaterialCount({required MaterialGroup itemMaterialGroup}) =>
       cartItems.zmgMaterialsQty(

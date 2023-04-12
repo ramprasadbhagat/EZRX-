@@ -71,8 +71,8 @@ void main() async {
     test('Unit price', () {
       const unitPrice = 91.5 * 24 + 20 * 8 + 15 * 100;
       expect(cartItem.unitPrice, unitPrice);
-      expect(cartItem.grandTotalPrice, unitPrice);
-      expect(cartItem.subTotalPrice, unitPrice);
+      expect(cartItem.grandTotalPrice(), unitPrice);
+      expect(cartItem.subTotalPrice(), unitPrice);
     });
 
     test('Combo not eligible when materials don\'t conform self deal', () {

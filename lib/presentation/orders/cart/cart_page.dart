@@ -179,6 +179,10 @@ class CartPage extends StatelessWidget {
                                       trackMixpanelEvent(
                                         MixpanelEvents.goToOrderSummary,
                                       );
+                                      final isMYMarketSalesRep = context
+                                          .read<EligibilityBloc>()
+                                          .state
+                                          .isMYMarketSalesRep;
                                       final isSpecialOrderType = context
                                           .read<OrderDocumentTypeBloc>()
                                           .state
@@ -188,13 +192,17 @@ class CartPage extends StatelessWidget {
                                         segmentation: {
                                           'numItemInCart':
                                               state.cartItems.length,
-                                          'subTotal':
-                                              state.subTotalBasedOnOrderType(
-                                            isSpecial: isSpecialOrderType,
+                                          'subTotal': state.subTotal(
+                                            isSpecialOrderType:
+                                                isSpecialOrderType,
+                                            isMYMarketSalesRep:
+                                                isMYMarketSalesRep,
                                           ),
-                                          'grandTotal':
-                                              state.grandTotalBasedOnOrderType(
-                                            isSpecial: isSpecialOrderType,
+                                          'grandTotal': state.grandTotal(
+                                            isSpecialOrderType:
+                                                isSpecialOrderType,
+                                            isMYMarketSalesRep:
+                                                isMYMarketSalesRep,
                                           ),
                                         },
                                       );
@@ -214,6 +222,8 @@ class CartPage extends StatelessWidget {
   }
 
   void _goToOrderSummary(BuildContext context) {
+    final isMYMarketSalesRep =
+        context.read<EligibilityBloc>().state.isMYMarketSalesRep;
     final config = context.read<SalesOrgBloc>().state.configs;
     final customerCodeInfo =
         context.read<CustomerCodeBloc>().state.customerCodeInfo;
@@ -243,10 +253,10 @@ class CartPage extends StatelessWidget {
                 context.read<CartBloc>().state.selectedCartItems.allMaterials,
             configs: config,
             customerCodeInfo: customerCodeInfo,
-            grandTotal:
-                context.read<CartBloc>().state.grandTotalBasedOnOrderType(
-                      isSpecial: isSpecialOrderType,
-                    ),
+            grandTotal: context.read<CartBloc>().state.grandTotal(
+                  isSpecialOrderType: isSpecialOrderType,
+                  isMYMarketSalesRep: isMYMarketSalesRep,
+                ),
             orderType: context
                 .read<OrderDocumentTypeBloc>()
                 .state
@@ -256,8 +266,9 @@ class CartPage extends StatelessWidget {
             salesOrg: context.read<SalesOrgBloc>().state.salesOrganisation,
             shipInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
             user: context.read<UserBloc>().state.user,
-            subTotal: context.read<CartBloc>().state.subTotalBasedOnOrderType(
-                  isSpecial: isSpecialOrderType,
+            subTotal: context.read<CartBloc>().state.subTotal(
+                  isSpecialOrderType: isSpecialOrderType,
+                  isMYMarketSalesRep: isMYMarketSalesRep,
                 ),
           ),
         );
@@ -351,6 +362,9 @@ class _TotalPriceSection extends StatelessWidget {
           previous.selectedOrderType != current.selectedOrderType,
       builder: (context, state) {
         final isSpecialOrderType = state.isSpecialOrderType;
+        final isMYMarketSalesRep = context.select<EligibilityBloc, bool>(
+          (bloc) => bloc.state.isMYMarketSalesRep,
+        );
 
         return Expanded(
           flex: 2,
@@ -362,8 +376,9 @@ class _TotalPriceSection extends StatelessWidget {
                 keyText: 'Subtotal'.tr(),
                 valueText: StringUtils.displayPrice(
                   salesOrgConfig,
-                  cartState.subTotalBasedOnOrderType(
-                    isSpecial: isSpecialOrderType,
+                  cartState.subTotal(
+                    isSpecialOrderType: isSpecialOrderType,
+                    isMYMarketSalesRep: isMYMarketSalesRep,
                   ),
                 ),
                 valueFlex: 1,
@@ -383,6 +398,7 @@ class _TotalPriceSection extends StatelessWidget {
                     salesOrgConfig,
                     cartState.vatTotalOnOrderType(
                       isSpecial: isSpecialOrderType,
+                      isMYMarketSalesRep: isMYMarketSalesRep,
                     ),
                   ),
                   valueFlex: 1,
@@ -392,8 +408,9 @@ class _TotalPriceSection extends StatelessWidget {
                 keyText: 'Grand Total'.tr(),
                 valueText: StringUtils.displayPrice(
                   salesOrgConfig,
-                  cartState.grandTotalBasedOnOrderType(
-                    isSpecial: isSpecialOrderType,
+                  cartState.grandTotal(
+                    isSpecialOrderType: isSpecialOrderType,
+                    isMYMarketSalesRep: isMYMarketSalesRep,
                   ),
                 ),
                 valueFlex: 1,

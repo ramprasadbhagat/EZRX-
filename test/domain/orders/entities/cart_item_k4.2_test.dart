@@ -107,8 +107,8 @@ void main() async {
     test('Unit price', () {
       const unitPrice = 95.0 * 1 + -5 * 5 + 100;
       expect(cartItem.unitPrice, unitPrice);
-      expect(cartItem.grandTotalPrice, unitPrice);
-      expect(cartItem.subTotalPrice, unitPrice);
+      expect(cartItem.grandTotalPrice(), unitPrice);
+      expect(cartItem.subTotalPrice(), unitPrice);
     });
   });
 }

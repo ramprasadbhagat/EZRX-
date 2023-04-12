@@ -225,11 +225,17 @@ class CartItem with _$CartItem {
     }
   }
 
-  double get subTotalPrice {
+  double subTotalPrice({
+    bool isSpecialOrderType = false,
+    bool isMYMarketSalesRep = false,
+  }) {
     if (materials.isEmpty) return 0;
     switch (itemType) {
       case CartItemType.material:
-        return materials.first.finalPriceTotal;
+        final material = materials.first;
+        final isPnG = isMYMarketSalesRep && material.materialInfo.hidePrice;
+
+        return (isSpecialOrderType || isPnG) ? 0 : material.finalPriceTotal;
       case CartItemType.bundle:
         return _bundleRate * totalQty;
       case CartItemType.comboDeal:
@@ -237,37 +243,17 @@ class CartItem with _$CartItem {
     }
   }
 
-  double subTotalPriceOnOrderType({required bool isSpecial}) {
+  double grandTotalPrice({
+    bool isSpecialOrderType = false,
+    bool isMYMarketSalesRep = false,
+  }) {
     if (materials.isEmpty) return 0;
     switch (itemType) {
       case CartItemType.material:
-        return isSpecial ? 0.0 : materials.first.finalPriceTotal;
-      case CartItemType.bundle:
-        return _bundleRate * totalQty;
-      case CartItemType.comboDeal:
-        return _comboDealDiscountTotal;
-    }
-  }
+        final material = materials.first;
+        final isPnG = isMYMarketSalesRep && material.materialInfo.hidePrice;
 
-  double get grandTotalPrice {
-    if (materials.isEmpty) return 0;
-    switch (itemType) {
-      case CartItemType.material:
-        return materials.first.unitPriceTotal;
-      case CartItemType.bundle:
-        var totalWithoutVat = _bundleRate * totalQty;
-        totalWithoutVat += materials.first.totalVatForBundle * totalWithoutVat;
-        return totalWithoutVat;
-      case CartItemType.comboDeal:
-        return _comboDealDiscountTotal;
-    }
-  }
-
-  double grandTotalPriceOnOrderType({required bool isSpecial}) {
-    if (materials.isEmpty) return 0;
-    switch (itemType) {
-      case CartItemType.material:
-        return isSpecial ? 0.0 : materials.first.unitPriceTotal;
+        return (isSpecialOrderType || isPnG) ? 0 : material.unitPriceTotal;
       case CartItemType.bundle:
         var totalWithoutVat = _bundleRate * totalQty;
         totalWithoutVat += materials.first.totalVatForBundle * totalWithoutVat;

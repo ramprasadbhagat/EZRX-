@@ -235,6 +235,9 @@ class _SubmitContinueButton extends StatelessWidget {
     );
     final isSpecialType =
         context.read<OrderDocumentTypeBloc>().state.isSpecialOrderType;
+    final isMYMarketSalesRep =
+        context.read<EligibilityBloc>().state.isMYMarketSalesRep;
+
     context.read<OrderSummaryBloc>().add(OrderSummaryEvent.submitOrder(
           config: context.read<SalesOrgBloc>().state.configs,
           shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
@@ -244,8 +247,9 @@ class _SubmitContinueButton extends StatelessWidget {
               context.read<SalesOrgBloc>().state.salesOrganisation,
           user: context.read<UserBloc>().state.user,
           cartItems: cartBloc.state.selectedCartItems.validMaterials,
-          grandTotal: cartBloc.state.grandTotalBasedOnOrderType(
-            isSpecial: isSpecialType,
+          grandTotal: cartBloc.state.grandTotal(
+            isSpecialOrderType: isSpecialType,
+            isMYMarketSalesRep: isMYMarketSalesRep,
           ),
           orderDocumentType:
               context.read<OrderDocumentTypeBloc>().state.selectedOrderType,
@@ -369,7 +373,10 @@ class _UtilityButton extends StatelessWidget {
                         key: Key(isUpdateOrder ? 'Update' : 'Save'),
                       ).tr(),
                     )
-                  : const Text('Back', key: Key('stepBack'),).tr(),
+                  : const Text(
+                      'Back',
+                      key: Key('stepBack'),
+                    ).tr(),
             );
           },
         );
@@ -383,6 +390,9 @@ class _UtilityButton extends StatelessWidget {
     );
     final isSpecialType =
         context.read<OrderDocumentTypeBloc>().state.isSpecialOrderType;
+
+    final isMYMarketSalesRep =
+        context.read<EligibilityBloc>().state.isMYMarketSalesRep;
     isUpdate
         ? context.read<SavedOrderListBloc>().add(
               SavedOrderListEvent.updateDraft(
@@ -393,10 +403,10 @@ class _UtilityButton extends StatelessWidget {
                     context.read<SalesOrgBloc>().state.salesOrganisation,
                 user: context.read<UserBloc>().state.user,
                 cartItems: context.read<CartBloc>().state.selectedCartItems,
-                grandTotal: context
-                    .read<CartBloc>()
-                    .state
-                    .grandTotalBasedOnOrderType(isSpecial: isSpecialType),
+                grandTotal: context.read<CartBloc>().state.grandTotal(
+                      isSpecialOrderType: isSpecialType,
+                      isMYMarketSalesRep: isMYMarketSalesRep,
+                    ),
                 data: context
                     .read<AdditionalDetailsBloc>()
                     .state
@@ -413,10 +423,10 @@ class _UtilityButton extends StatelessWidget {
                     context.read<SalesOrgBloc>().state.salesOrganisation,
                 user: context.read<UserBloc>().state.user,
                 cartItems: context.read<CartBloc>().state.selectedCartItems,
-                grandTotal: context
-                    .read<CartBloc>()
-                    .state
-                    .grandTotalBasedOnOrderType(isSpecial: isSpecialType),
+                grandTotal: context.read<CartBloc>().state.grandTotal(
+                      isSpecialOrderType: isSpecialType,
+                      isMYMarketSalesRep: isMYMarketSalesRep,
+                    ),
                 data: context
                     .read<AdditionalDetailsBloc>()
                     .state
@@ -748,35 +758,35 @@ class _Disclaimer extends StatelessWidget {
       children: [
         context.read<EligibilityBloc>().state.isOrderSummaryPPEDisclaimerEnable
             ? Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'To avoid delays to your PPE Orders, please.',
-                   style: Theme.of(context).textTheme.titleSmall?.apply(
-                    color: ZPColors.lightGray,
-                   ),
-                ),
-                Text(
-                  '\u2022 Order the quantity as stated in the MOH Order template',
-                   style: Theme.of(context).textTheme.titleSmall?.apply(
-                    color: ZPColors.lightGray,
-                   ),
-                ),
-                Text(
-                  '\u2022 Do not place NON PPE items in the same Order',
-                   style: Theme.of(context).textTheme.titleSmall?.apply(
-                    color: ZPColors.lightGray,
-                   ),
-                ),
-                Text(
-                  'Note: Minimum Order value is waived for MOH PPE Orders only\n',
-                   style: Theme.of(context).textTheme.titleSmall?.apply(
-                    color: ZPColors.lightGray,
-                   ),
-                ),
-              ],
-            )
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'To avoid delays to your PPE Orders, please.',
+                    style: Theme.of(context).textTheme.titleSmall?.apply(
+                          color: ZPColors.lightGray,
+                        ),
+                  ),
+                  Text(
+                    '\u2022 Order the quantity as stated in the MOH Order template',
+                    style: Theme.of(context).textTheme.titleSmall?.apply(
+                          color: ZPColors.lightGray,
+                        ),
+                  ),
+                  Text(
+                    '\u2022 Do not place NON PPE items in the same Order',
+                    style: Theme.of(context).textTheme.titleSmall?.apply(
+                          color: ZPColors.lightGray,
+                        ),
+                  ),
+                  Text(
+                    'Note: Minimum Order value is waived for MOH PPE Orders only\n',
+                    style: Theme.of(context).textTheme.titleSmall?.apply(
+                          color: ZPColors.lightGray,
+                        ),
+                  ),
+                ],
+              )
             : const SizedBox.shrink(),
         const _MarketMessage(),
         const SizedBox(
@@ -804,27 +814,27 @@ class _MarketMessage extends StatelessWidget {
 
         return !orderType.documentType.isSpecialOrderType
             ? Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Note'.tr(),
-                  style: Theme.of(context).textTheme.titleSmall,
-                ),
-                RichText(
-                  key: const Key('minimumOrderAmount'),
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Note'.tr(),
+                    style: Theme.of(context).textTheme.titleSmall,
+                  ),
+                  RichText(
+                    key: const Key('minimumOrderAmount'),
                     text: TextSpan(
                       children: <TextSpan>[
                         TextSpan(
                           text: orderMarketMessage,
                           style: Theme.of(context).textTheme.titleSmall?.apply(
-                            color: ZPColors.lightGray,
-                          ),
+                                color: ZPColors.lightGray,
+                              ),
                         ),
                       ],
                     ),
                   ),
-              ],
-            )
+                ],
+              )
             : const SizedBox.shrink();
       },
     );
@@ -891,6 +901,9 @@ class _CartItemsSection extends StatelessWidget {
           previous.selectedOrderType != current.selectedOrderType,
       builder: (context, state) {
         final isSpecialOrderType = state.isSpecialOrderType;
+        final isMYMarketSalesRep = context.select<EligibilityBloc, bool>(
+          (bloc) => bloc.state.isMYMarketSalesRep,
+        );
 
         context.read<OrderEligibilityBloc>().add(
               OrderEligibilityEvent.update(
@@ -901,11 +914,13 @@ class _CartItemsSection extends StatelessWidget {
                     .selectedOrderType
                     .documentType
                     .getOrDefaultValue(''),
-                grandTotal: cartState.grandTotalBasedOnOrderType(
-                  isSpecial: isSpecialOrderType,
+                grandTotal: cartState.grandTotal(
+                  isSpecialOrderType: isSpecialOrderType,
+                  isMYMarketSalesRep: isMYMarketSalesRep,
                 ),
-                subTotal: cartState.subTotalBasedOnOrderType(
-                  isSpecial: isSpecialOrderType,
+                subTotal: cartState.subTotal(
+                  isSpecialOrderType: isSpecialOrderType,
+                  isMYMarketSalesRep: isMYMarketSalesRep,
                 ),
               ),
             );
@@ -917,8 +932,9 @@ class _CartItemsSection extends StatelessWidget {
               keyText: 'Subtotal'.tr(),
               valueText: StringUtils.displayPrice(
                 salesOrgConfig,
-                cartState.subTotalBasedOnOrderType(
-                  isSpecial: isSpecialOrderType,
+                cartState.subTotal(
+                  isSpecialOrderType: isSpecialOrderType,
+                  isMYMarketSalesRep: isMYMarketSalesRep,
                 ),
               ),
             ),
@@ -934,6 +950,7 @@ class _CartItemsSection extends StatelessWidget {
                   salesOrgConfig,
                   cartState.vatTotalOnOrderType(
                     isSpecial: isSpecialOrderType,
+                    isMYMarketSalesRep: isMYMarketSalesRep,
                   ),
                 ),
               ),
@@ -950,8 +967,9 @@ class _CartItemsSection extends StatelessWidget {
               keyText: 'Grand Total'.tr(),
               valueText: StringUtils.displayPrice(
                 salesOrgConfig,
-                cartState.grandTotalBasedOnOrderType(
-                  isSpecial: isSpecialOrderType,
+                cartState.grandTotal(
+                  isSpecialOrderType: isSpecialOrderType,
+                  isMYMarketSalesRep: isMYMarketSalesRep,
                 ),
               ),
             ),
