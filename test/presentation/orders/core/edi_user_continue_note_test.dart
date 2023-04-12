@@ -5,6 +5,7 @@ import 'package:ezrxmobile/application/order/order_document_type/order_document_
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
@@ -130,6 +131,35 @@ void main() {
           expect(ediUserContinueNoteText, findsNothing);
         },
       );
+      testWidgets(
+        'hide message ',
+        (tester) async {
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              user: User.empty().copyWith(
+                role: Role.empty().copyWith(
+                  type: RoleType('internal_sales_rep'),
+                ),
+              ),
+              customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+                status: Status('EDI'),
+              ),
+              salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+                disableOrderType: true,
+              ),
+            ),
+          );
+          await tester.pumpWidget(getWidget());
+          await tester.pump();
+          final ediUserContinueNoteText = find.textContaining(
+              '*Note: For special orders if you want to proceed please select order type inside Additional Information.'
+                  .tr());
+          expect(ediUserContinueNoteText, findsNothing);
+        },
+      );
     },
+    
   );
+
+  
 }
