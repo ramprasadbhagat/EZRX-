@@ -71,21 +71,32 @@ void main() {
             ),
           );
         },
-        act: (bloc) => bloc.add(
-          PriceOverrideEvent.fetch(
-            customerCodeInfo: CustomerCodeInfo.empty(),
-            item: PriceAggregate.empty(),
-            newPrice: 70.0,
-            salesOrganisation: SalesOrganisation.empty(),
+        act: (bloc) => bloc
+          ..add(
+            const PriceOverrideEvent.priceOverrideValueChanged(
+              newPrice: '70.0',
+            ),
+          )
+          ..add(
+            PriceOverrideEvent.fetch(
+              customerCodeInfo: CustomerCodeInfo.empty(),
+              item: PriceAggregate.empty(),
+              salesOrganisation: SalesOrganisation.empty(),
+            ),
           ),
-        ),
         expect: () => [
           PriceOverrideState.initial().copyWith(
+            priceOverrideValue: PriceOverrideValue(70.0),
+            showErrorMessages: false,
+          ),
+          PriceOverrideState.initial().copyWith(
+            priceOverrideValue: PriceOverrideValue(70.0),
             isFetching: true,
             cartItemList: [],
           ),
           PriceOverrideState.initial().copyWith(
             isFetching: false,
+            priceOverrideValue: PriceOverrideValue(70.0),
             cartItemList: [
               Price.empty().copyWith(
                 priceOverride: PriceOverrideValue(70.0),
@@ -114,22 +125,34 @@ void main() {
             ),
           );
         },
-        act: (bloc) => bloc.add(
-          PriceOverrideEvent.fetch(
-            customerCodeInfo: CustomerCodeInfo.empty(),
-            item: PriceAggregate.empty(),
-            newPrice: 70.0,
-            salesOrganisation: SalesOrganisation.empty(),
+        act: (bloc) => bloc
+          ..add(
+            const PriceOverrideEvent.priceOverrideValueChanged(
+              newPrice: '70.0',
+            ),
+          )
+          ..add(
+            PriceOverrideEvent.fetch(
+              customerCodeInfo: CustomerCodeInfo.empty(),
+              item: PriceAggregate.empty(),
+              salesOrganisation: SalesOrganisation.empty(),
+            ),
           ),
-        ),
         expect: () => [
           PriceOverrideState.initial().copyWith(
+            priceOverrideValue: PriceOverrideValue(70.0),
+            showErrorMessages: false,
+          ),
+          PriceOverrideState.initial().copyWith(
+            priceOverrideValue: PriceOverrideValue(70.0),
             isFetching: true,
             cartItemList: [],
           ),
           PriceOverrideState.initial().copyWith(
+            priceOverrideValue: PriceOverrideValue(70.0),
             isFetching: false,
             cartItemList: [],
+            showErrorMessages: true,
             apiFailureOrSuccessOption: optionOf(
               const Left(ApiFailure.priceOverrideNotFound()),
             ),

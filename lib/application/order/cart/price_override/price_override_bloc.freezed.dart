@@ -21,32 +21,28 @@ mixin _$PriceOverrideEvent {
     required TResult Function() initialized,
     required TResult Function(
             PriceAggregate item,
-            double newPrice,
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)
         fetch,
+    required TResult Function(String newPrice) priceOverrideValueChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(
-            PriceAggregate item,
-            double newPrice,
-            SalesOrganisation salesOrganisation,
+    TResult? Function(PriceAggregate item, SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)?
         fetch,
+    TResult? Function(String newPrice)? priceOverrideValueChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(
-            PriceAggregate item,
-            double newPrice,
-            SalesOrganisation salesOrganisation,
+    TResult Function(PriceAggregate item, SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)?
         fetch,
+    TResult Function(String newPrice)? priceOverrideValueChanged,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -54,18 +50,24 @@ mixin _$PriceOverrideEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_PriceOverrideValueChanged value)
+        priceOverrideValueChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_PriceOverrideValueChanged value)?
+        priceOverrideValueChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_PriceOverrideValueChanged value)?
+        priceOverrideValueChanged,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -130,10 +132,10 @@ class _$_Initialized implements _Initialized {
     required TResult Function() initialized,
     required TResult Function(
             PriceAggregate item,
-            double newPrice,
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)
         fetch,
+    required TResult Function(String newPrice) priceOverrideValueChanged,
   }) {
     return initialized();
   }
@@ -142,12 +144,10 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(
-            PriceAggregate item,
-            double newPrice,
-            SalesOrganisation salesOrganisation,
+    TResult? Function(PriceAggregate item, SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)?
         fetch,
+    TResult? Function(String newPrice)? priceOverrideValueChanged,
   }) {
     return initialized?.call();
   }
@@ -156,12 +156,10 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(
-            PriceAggregate item,
-            double newPrice,
-            SalesOrganisation salesOrganisation,
+    TResult Function(PriceAggregate item, SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)?
         fetch,
+    TResult Function(String newPrice)? priceOverrideValueChanged,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -175,6 +173,8 @@ class _$_Initialized implements _Initialized {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_PriceOverrideValueChanged value)
+        priceOverrideValueChanged,
   }) {
     return initialized(this);
   }
@@ -184,6 +184,8 @@ class _$_Initialized implements _Initialized {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_PriceOverrideValueChanged value)?
+        priceOverrideValueChanged,
   }) {
     return initialized?.call(this);
   }
@@ -193,6 +195,8 @@ class _$_Initialized implements _Initialized {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_PriceOverrideValueChanged value)?
+        priceOverrideValueChanged,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -213,7 +217,6 @@ abstract class _$$_FetchCopyWith<$Res> {
   @useResult
   $Res call(
       {PriceAggregate item,
-      double newPrice,
       SalesOrganisation salesOrganisation,
       CustomerCodeInfo customerCodeInfo});
 
@@ -233,7 +236,6 @@ class __$$_FetchCopyWithImpl<$Res>
   @override
   $Res call({
     Object? item = null,
-    Object? newPrice = null,
     Object? salesOrganisation = null,
     Object? customerCodeInfo = null,
   }) {
@@ -242,10 +244,6 @@ class __$$_FetchCopyWithImpl<$Res>
           ? _value.item
           : item // ignore: cast_nullable_to_non_nullable
               as PriceAggregate,
-      newPrice: null == newPrice
-          ? _value.newPrice
-          : newPrice // ignore: cast_nullable_to_non_nullable
-              as double,
       salesOrganisation: null == salesOrganisation
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
@@ -287,14 +285,11 @@ class __$$_FetchCopyWithImpl<$Res>
 class _$_Fetch implements _Fetch {
   const _$_Fetch(
       {required this.item,
-      required this.newPrice,
       required this.salesOrganisation,
       required this.customerCodeInfo});
 
   @override
   final PriceAggregate item;
-  @override
-  final double newPrice;
   @override
   final SalesOrganisation salesOrganisation;
   @override
@@ -302,7 +297,7 @@ class _$_Fetch implements _Fetch {
 
   @override
   String toString() {
-    return 'PriceOverrideEvent.fetch(item: $item, newPrice: $newPrice, salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo)';
+    return 'PriceOverrideEvent.fetch(item: $item, salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo)';
   }
 
   @override
@@ -311,8 +306,6 @@ class _$_Fetch implements _Fetch {
         (other.runtimeType == runtimeType &&
             other is _$_Fetch &&
             (identical(other.item, item) || other.item == item) &&
-            (identical(other.newPrice, newPrice) ||
-                other.newPrice == newPrice) &&
             (identical(other.salesOrganisation, salesOrganisation) ||
                 other.salesOrganisation == salesOrganisation) &&
             (identical(other.customerCodeInfo, customerCodeInfo) ||
@@ -320,8 +313,8 @@ class _$_Fetch implements _Fetch {
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, item, newPrice, salesOrganisation, customerCodeInfo);
+  int get hashCode =>
+      Object.hash(runtimeType, item, salesOrganisation, customerCodeInfo);
 
   @JsonKey(ignore: true)
   @override
@@ -335,42 +328,38 @@ class _$_Fetch implements _Fetch {
     required TResult Function() initialized,
     required TResult Function(
             PriceAggregate item,
-            double newPrice,
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)
         fetch,
+    required TResult Function(String newPrice) priceOverrideValueChanged,
   }) {
-    return fetch(item, newPrice, salesOrganisation, customerCodeInfo);
+    return fetch(item, salesOrganisation, customerCodeInfo);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(
-            PriceAggregate item,
-            double newPrice,
-            SalesOrganisation salesOrganisation,
+    TResult? Function(PriceAggregate item, SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)?
         fetch,
+    TResult? Function(String newPrice)? priceOverrideValueChanged,
   }) {
-    return fetch?.call(item, newPrice, salesOrganisation, customerCodeInfo);
+    return fetch?.call(item, salesOrganisation, customerCodeInfo);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(
-            PriceAggregate item,
-            double newPrice,
-            SalesOrganisation salesOrganisation,
+    TResult Function(PriceAggregate item, SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)?
         fetch,
+    TResult Function(String newPrice)? priceOverrideValueChanged,
     required TResult orElse(),
   }) {
     if (fetch != null) {
-      return fetch(item, newPrice, salesOrganisation, customerCodeInfo);
+      return fetch(item, salesOrganisation, customerCodeInfo);
     }
     return orElse();
   }
@@ -380,6 +369,8 @@ class _$_Fetch implements _Fetch {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_PriceOverrideValueChanged value)
+        priceOverrideValueChanged,
   }) {
     return fetch(this);
   }
@@ -389,6 +380,8 @@ class _$_Fetch implements _Fetch {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_PriceOverrideValueChanged value)?
+        priceOverrideValueChanged,
   }) {
     return fetch?.call(this);
   }
@@ -398,6 +391,8 @@ class _$_Fetch implements _Fetch {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_PriceOverrideValueChanged value)?
+        priceOverrideValueChanged,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -410,12 +405,10 @@ class _$_Fetch implements _Fetch {
 abstract class _Fetch implements PriceOverrideEvent {
   const factory _Fetch(
       {required final PriceAggregate item,
-      required final double newPrice,
       required final SalesOrganisation salesOrganisation,
       required final CustomerCodeInfo customerCodeInfo}) = _$_Fetch;
 
   PriceAggregate get item;
-  double get newPrice;
   SalesOrganisation get salesOrganisation;
   CustomerCodeInfo get customerCodeInfo;
   @JsonKey(ignore: true)
@@ -424,11 +417,169 @@ abstract class _Fetch implements PriceOverrideEvent {
 }
 
 /// @nodoc
+abstract class _$$_PriceOverrideValueChangedCopyWith<$Res> {
+  factory _$$_PriceOverrideValueChangedCopyWith(
+          _$_PriceOverrideValueChanged value,
+          $Res Function(_$_PriceOverrideValueChanged) then) =
+      __$$_PriceOverrideValueChangedCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String newPrice});
+}
+
+/// @nodoc
+class __$$_PriceOverrideValueChangedCopyWithImpl<$Res>
+    extends _$PriceOverrideEventCopyWithImpl<$Res, _$_PriceOverrideValueChanged>
+    implements _$$_PriceOverrideValueChangedCopyWith<$Res> {
+  __$$_PriceOverrideValueChangedCopyWithImpl(
+      _$_PriceOverrideValueChanged _value,
+      $Res Function(_$_PriceOverrideValueChanged) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? newPrice = null,
+  }) {
+    return _then(_$_PriceOverrideValueChanged(
+      newPrice: null == newPrice
+          ? _value.newPrice
+          : newPrice // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_PriceOverrideValueChanged implements _PriceOverrideValueChanged {
+  const _$_PriceOverrideValueChanged({required this.newPrice});
+
+  @override
+  final String newPrice;
+
+  @override
+  String toString() {
+    return 'PriceOverrideEvent.priceOverrideValueChanged(newPrice: $newPrice)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_PriceOverrideValueChanged &&
+            (identical(other.newPrice, newPrice) ||
+                other.newPrice == newPrice));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, newPrice);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_PriceOverrideValueChangedCopyWith<_$_PriceOverrideValueChanged>
+      get copyWith => __$$_PriceOverrideValueChangedCopyWithImpl<
+          _$_PriceOverrideValueChanged>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(
+            PriceAggregate item,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)
+        fetch,
+    required TResult Function(String newPrice) priceOverrideValueChanged,
+  }) {
+    return priceOverrideValueChanged(newPrice);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(PriceAggregate item, SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)?
+        fetch,
+    TResult? Function(String newPrice)? priceOverrideValueChanged,
+  }) {
+    return priceOverrideValueChanged?.call(newPrice);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(PriceAggregate item, SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)?
+        fetch,
+    TResult Function(String newPrice)? priceOverrideValueChanged,
+    required TResult orElse(),
+  }) {
+    if (priceOverrideValueChanged != null) {
+      return priceOverrideValueChanged(newPrice);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_PriceOverrideValueChanged value)
+        priceOverrideValueChanged,
+  }) {
+    return priceOverrideValueChanged(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_PriceOverrideValueChanged value)?
+        priceOverrideValueChanged,
+  }) {
+    return priceOverrideValueChanged?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_PriceOverrideValueChanged value)?
+        priceOverrideValueChanged,
+    required TResult orElse(),
+  }) {
+    if (priceOverrideValueChanged != null) {
+      return priceOverrideValueChanged(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _PriceOverrideValueChanged implements PriceOverrideEvent {
+  const factory _PriceOverrideValueChanged({required final String newPrice}) =
+      _$_PriceOverrideValueChanged;
+
+  String get newPrice;
+  @JsonKey(ignore: true)
+  _$$_PriceOverrideValueChangedCopyWith<_$_PriceOverrideValueChanged>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$PriceOverrideState {
   List<Price> get cartItemList => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption =>
       throw _privateConstructorUsedError;
   bool get isFetching => throw _privateConstructorUsedError;
+  PriceOverrideValue get priceOverrideValue =>
+      throw _privateConstructorUsedError;
+  bool get showErrorMessages => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PriceOverrideStateCopyWith<PriceOverrideState> get copyWith =>
@@ -444,7 +595,9 @@ abstract class $PriceOverrideStateCopyWith<$Res> {
   $Res call(
       {List<Price> cartItemList,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
-      bool isFetching});
+      bool isFetching,
+      PriceOverrideValue priceOverrideValue,
+      bool showErrorMessages});
 }
 
 /// @nodoc
@@ -463,6 +616,8 @@ class _$PriceOverrideStateCopyWithImpl<$Res, $Val extends PriceOverrideState>
     Object? cartItemList = null,
     Object? apiFailureOrSuccessOption = null,
     Object? isFetching = null,
+    Object? priceOverrideValue = null,
+    Object? showErrorMessages = null,
   }) {
     return _then(_value.copyWith(
       cartItemList: null == cartItemList
@@ -476,6 +631,14 @@ class _$PriceOverrideStateCopyWithImpl<$Res, $Val extends PriceOverrideState>
       isFetching: null == isFetching
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
+              as bool,
+      priceOverrideValue: null == priceOverrideValue
+          ? _value.priceOverrideValue
+          : priceOverrideValue // ignore: cast_nullable_to_non_nullable
+              as PriceOverrideValue,
+      showErrorMessages: null == showErrorMessages
+          ? _value.showErrorMessages
+          : showErrorMessages // ignore: cast_nullable_to_non_nullable
               as bool,
     ) as $Val);
   }
@@ -492,7 +655,9 @@ abstract class _$$_PriceOverrideStateCopyWith<$Res>
   $Res call(
       {List<Price> cartItemList,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
-      bool isFetching});
+      bool isFetching,
+      PriceOverrideValue priceOverrideValue,
+      bool showErrorMessages});
 }
 
 /// @nodoc
@@ -509,6 +674,8 @@ class __$$_PriceOverrideStateCopyWithImpl<$Res>
     Object? cartItemList = null,
     Object? apiFailureOrSuccessOption = null,
     Object? isFetching = null,
+    Object? priceOverrideValue = null,
+    Object? showErrorMessages = null,
   }) {
     return _then(_$_PriceOverrideState(
       cartItemList: null == cartItemList
@@ -523,6 +690,14 @@ class __$$_PriceOverrideStateCopyWithImpl<$Res>
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
               as bool,
+      priceOverrideValue: null == priceOverrideValue
+          ? _value.priceOverrideValue
+          : priceOverrideValue // ignore: cast_nullable_to_non_nullable
+              as PriceOverrideValue,
+      showErrorMessages: null == showErrorMessages
+          ? _value.showErrorMessages
+          : showErrorMessages // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -533,7 +708,9 @@ class _$_PriceOverrideState extends _PriceOverrideState {
   const _$_PriceOverrideState(
       {required final List<Price> cartItemList,
       required this.apiFailureOrSuccessOption,
-      required this.isFetching})
+      required this.isFetching,
+      required this.priceOverrideValue,
+      required this.showErrorMessages})
       : _cartItemList = cartItemList,
         super._();
 
@@ -548,10 +725,14 @@ class _$_PriceOverrideState extends _PriceOverrideState {
   final Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption;
   @override
   final bool isFetching;
+  @override
+  final PriceOverrideValue priceOverrideValue;
+  @override
+  final bool showErrorMessages;
 
   @override
   String toString() {
-    return 'PriceOverrideState(cartItemList: $cartItemList, apiFailureOrSuccessOption: $apiFailureOrSuccessOption, isFetching: $isFetching)';
+    return 'PriceOverrideState(cartItemList: $cartItemList, apiFailureOrSuccessOption: $apiFailureOrSuccessOption, isFetching: $isFetching, priceOverrideValue: $priceOverrideValue, showErrorMessages: $showErrorMessages)';
   }
 
   @override
@@ -565,7 +746,11 @@ class _$_PriceOverrideState extends _PriceOverrideState {
                     apiFailureOrSuccessOption) ||
                 other.apiFailureOrSuccessOption == apiFailureOrSuccessOption) &&
             (identical(other.isFetching, isFetching) ||
-                other.isFetching == isFetching));
+                other.isFetching == isFetching) &&
+            (identical(other.priceOverrideValue, priceOverrideValue) ||
+                other.priceOverrideValue == priceOverrideValue) &&
+            (identical(other.showErrorMessages, showErrorMessages) ||
+                other.showErrorMessages == showErrorMessages));
   }
 
   @override
@@ -573,7 +758,9 @@ class _$_PriceOverrideState extends _PriceOverrideState {
       runtimeType,
       const DeepCollectionEquality().hash(_cartItemList),
       apiFailureOrSuccessOption,
-      isFetching);
+      isFetching,
+      priceOverrideValue,
+      showErrorMessages);
 
   @JsonKey(ignore: true)
   @override
@@ -588,7 +775,9 @@ abstract class _PriceOverrideState extends PriceOverrideState {
       {required final List<Price> cartItemList,
       required final Option<Either<ApiFailure, dynamic>>
           apiFailureOrSuccessOption,
-      required final bool isFetching}) = _$_PriceOverrideState;
+      required final bool isFetching,
+      required final PriceOverrideValue priceOverrideValue,
+      required final bool showErrorMessages}) = _$_PriceOverrideState;
   const _PriceOverrideState._() : super._();
 
   @override
@@ -597,6 +786,10 @@ abstract class _PriceOverrideState extends PriceOverrideState {
   Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption;
   @override
   bool get isFetching;
+  @override
+  PriceOverrideValue get priceOverrideValue;
+  @override
+  bool get showErrorMessages;
   @override
   @JsonKey(ignore: true)
   _$$_PriceOverrideStateCopyWith<_$_PriceOverrideState> get copyWith =>

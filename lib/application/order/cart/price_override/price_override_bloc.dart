@@ -28,51 +28,72 @@ class PriceOverrideBloc extends Bloc<PriceOverrideEvent, PriceOverrideState> {
   ) async {
     await event.map(
       fetch: (_Fetch value) async {
-        emit(
-          state.copyWith(
-            apiFailureOrSuccessOption: none(),
-            isFetching: true,
-          ),
-        );
-        final failureOrSuccess = await priceOverrideRepository.updateItemPrice(
-          newPrice: value.newPrice,
-          customerCodeInfo: value.customerCodeInfo,
-          item: value.item,
-          salesOrganisation: value.salesOrganisation,
-        );
-        failureOrSuccess.fold(
-          (failure) {
-            emit(
-              state.copyWith(
-                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-                isFetching: false,
-              ),
-            );
-          },
-          (itemPrice) {
-            emit(
-              state.copyWith(
-                apiFailureOrSuccessOption: none(),
-                isFetching: false,
-                cartItemList: itemPrice
-                    .map(
-                      (e) => e.copyWith(
-                        zdp8Override: value.item.price.zdp8Override,
-                        priceOverride: PriceOverrideValue(value.newPrice),
-                        isPriceOverride: true,
-                      ),
-                    )
-                    .toList(),
-              ),
-            );
-          },
-        );
+        final isPriceOverrideValue = state.priceOverrideValue.isValid();
+
+        if (isPriceOverrideValue) {
+          emit(
+            state.copyWith(
+              apiFailureOrSuccessOption: none(),
+              isFetching: true,
+              showErrorMessages: false,
+            ),
+          );
+          final failureOrSuccess =
+              await priceOverrideRepository.updateItemPrice(
+            newPrice: state.priceOverrideValue.getOrCrash(),
+            customerCodeInfo: value.customerCodeInfo,
+            item: value.item,
+            salesOrganisation: value.salesOrganisation,
+          );
+          failureOrSuccess.fold(
+            (failure) {
+              emit(
+                state.copyWith(
+                  showErrorMessages: true,
+                  apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+                  isFetching: false,
+                ),
+              );
+            },
+            (itemPrice) {
+              emit(
+                state.copyWith(
+                  apiFailureOrSuccessOption: none(),
+                  isFetching: false,
+                  showErrorMessages: false,
+                  cartItemList: itemPrice
+                      .map(
+                        (e) => e.copyWith(
+                          zdp8Override: value.item.price.zdp8Override,
+                          priceOverride: state.priceOverrideValue,
+                          isPriceOverride: true,
+                        ),
+                      )
+                      .toList(),
+                ),
+              );
+            },
+          );
+        } else {
+          emit(state.copyWith(showErrorMessages: true));
+        }
       },
       initialized: (_Initialized value) {
         emit(
           state.copyWith(
             apiFailureOrSuccessOption: none(),
             isFetching: false,
+            priceOverrideValue: PriceOverrideValue(0.0),
+          ),
+        );
+      },
+      priceOverrideValueChanged: (_PriceOverrideValueChanged value) {
+        emit(
+          state.copyWith(
+            priceOverrideValue: PriceOverrideValue(
+              double.parse(value.newPrice),
+            ),
+            showErrorMessages: false,
           ),
         );
       },

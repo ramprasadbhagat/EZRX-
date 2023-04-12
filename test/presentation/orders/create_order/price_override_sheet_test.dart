@@ -1,5 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
@@ -82,28 +83,58 @@ void main() {
           find.byKey(const Key('priceOverrideSubmitButton'));
       final formField = find.byType(TextFormField);
       final formFieldWidget = tester.widget<TextFormField>(formField);
+      final newPrice = mockPriceAggregates.first.getNewPrice();
 
       expect(priceSheetWidget, findsOneWidget);
       expect(overridePriceButton, findsOneWidget);
       expect(
         formFieldWidget.controller?.text,
-        mockPriceAggregates.first.getNewPrice().toStringAsFixed(2),
+        newPrice != 0.0 ? newPrice.toStringAsFixed(2) : '',
       );
     });
 
     testWidgets('Change Price Test', (tester) async {
       await tester.pumpWidget(getScopedWidget(PriceSheet(
         item: mockPriceAggregates.first.copyWith(
-          salesOrgConfig: SalesOrganisationConfigs.empty().copyWith(
-            currency: Currency('vnd')
-          )
-        ),
+            salesOrgConfig: SalesOrganisationConfigs.empty()
+                .copyWith(currency: Currency('vnd'))),
       )));
 
       final priceOverrideTextFormField =
           find.byKey(const Key('priceOverrideTextFormField'));
       expect(priceOverrideTextFormField, findsOneWidget);
       await tester.enterText(priceOverrideTextFormField, '0.11');
+    });
+
+    testWidgets('Change Price Test validation error', (tester) async {
+      final expectedStates = [
+        PriceOverrideState.initial(),
+        PriceOverrideState.initial().copyWith(
+          priceOverrideValue: PriceOverrideValue(0.0),
+          isFetching: false,
+          showErrorMessages: true,
+        ),
+      ];
+
+      whenListen(priceOverrideMockBloc, Stream.fromIterable(expectedStates));
+      await tester.pumpWidget(getScopedWidget(PriceSheet(
+        item: mockPriceAggregates.first.copyWith(
+            salesOrgConfig: SalesOrganisationConfigs.empty()
+                .copyWith(currency: Currency('vnd'))),
+      )));
+
+      final priceOverrideTextFormField =
+          find.byKey(const Key('priceOverrideTextFormField'));
+      expect(priceOverrideTextFormField, findsOneWidget);
+      await tester.enterText(priceOverrideTextFormField, '0.0');
+      await tester.pump();
+      final priceOverrideSubmitButton =
+          find.byKey(const Key('priceOverrideSubmitButton'));
+      await tester.tap(priceOverrideSubmitButton);
+      await tester.pump();
+      final priceOverrideErrorText =
+          find.textContaining('Priceoverride cannot be empty or zero.'.tr());
+      expect(priceOverrideErrorText, findsOneWidget);
     });
 
     testWidgets('Update cart test success', (tester) async {
@@ -177,17 +208,16 @@ void main() {
 
       final expectedState = [
         PriceOverrideState.initial().copyWith(
-          isFetching: false,
-          cartItemList: [
-            Price.empty().copyWith(
-              materialNumber: MaterialNumber('1'),
-              finalPrice: MaterialPrice(1),
-              finalTotalPrice: MaterialPrice(1),
-              lastPrice: MaterialPrice(0.5),
-            ),
-          ],
-          apiFailureOrSuccessOption: optionOf(const Right('success'))
-        ),
+            isFetching: false,
+            cartItemList: [
+              Price.empty().copyWith(
+                materialNumber: MaterialNumber('1'),
+                finalPrice: MaterialPrice(1),
+                finalTotalPrice: MaterialPrice(1),
+                lastPrice: MaterialPrice(0.5),
+              ),
+            ],
+            apiFailureOrSuccessOption: optionOf(const Right('success'))),
       ];
 
       whenListen(priceOverrideMockBloc, Stream.fromIterable(expectedState));
