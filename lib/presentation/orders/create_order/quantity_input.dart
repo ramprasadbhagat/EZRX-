@@ -62,7 +62,8 @@ class QuantityInput extends StatelessWidget {
             decoration: InputDecoration(
               isDense: true,
               contentPadding: EdgeInsets.zero,
-              border: isEnabled ? const UnderlineInputBorder() : InputBorder.none,
+              border:
+                  isEnabled ? const UnderlineInputBorder() : InputBorder.none,
             ),
             style: Theme.of(context).textTheme.titleLarge,
           ),
@@ -71,7 +72,7 @@ class QuantityInput extends StatelessWidget {
             ? const QuantityIconShimmer()
             : isEnabled
                 ? Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       QuantityIcon(
                         key: quantityDeleteKey,
@@ -122,10 +123,14 @@ class QuantityInput extends StatelessWidget {
             builder: (context, state) {
               final value = int.tryParse(controller.text);
 
+              //If controller.text is blank (User clears the text field), then int.tryParse would return null.
+              //The null check below will cover this scenario
+              if (value == null) return const SizedBox.shrink();
+
               return state.selectedTenderContract == TenderContract.empty() ||
                       state.selectedTenderContract ==
                           TenderContract.noContract() ||
-                      value! <=
+                      value <=
                           state.selectedTenderContract.remainingTenderQuantity
                   ? const SizedBox.shrink()
                   : const Text(
