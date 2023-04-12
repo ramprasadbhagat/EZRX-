@@ -131,7 +131,7 @@ class FavouriteListTile extends StatelessWidget {
                                       )
                                     : const SizedBox.shrink(),
                                 Text(
-                                  '${'Unit Price: '.tr()}${priceAggregate.display(PriceType.unitPrice)}',
+                                  '${'Unit Price:'.tr()}${priceAggregate.display(PriceType.unitPrice)}',
                                   style: Theme.of(context)
                                       .textTheme
                                       .titleSmall
@@ -155,7 +155,9 @@ class FavouriteListTile extends StatelessWidget {
                                   ),
                                 )
                               : IconButton(
-                                  key: Key('deleteFavouriteFavPage${favourite.materialNumber.getOrDefaultValue('')}'),
+                                  key: Key(
+                                    'deleteFavouriteFavPage${favourite.materialNumber.getOrDefaultValue('')}',
+                                  ),
                                   icon: const Icon(
                                     Icons.favorite,
                                     color: ZPColors.secondary,

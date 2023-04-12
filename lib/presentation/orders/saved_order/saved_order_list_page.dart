@@ -57,7 +57,7 @@ class SavedOrderListPage extends StatelessWidget {
               const AccountSuspendedBanner(),
               Expanded(
                 child: ScrollList<SavedOrder>(
-                  emptyMessage: 'No saved order found',
+                  emptyMessage: 'No saved order found'.tr(),
                   onRefresh: () {
                     context
                         .read<MaterialPriceDetailBloc>()

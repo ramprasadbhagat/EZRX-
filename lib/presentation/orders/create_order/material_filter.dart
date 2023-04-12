@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
@@ -167,7 +168,7 @@ class _BodyContent extends StatelessWidget {
         : Stack(
             children: [
               ScrollList(
-                emptyMessage: 'No filter option found',
+                emptyMessage: 'No filter option found'.tr(),
                 isLoading: state.isFetching,
                 itemBuilder: (context, index, item) => ListTile(
                   key: Key('filterOption-${filterList[index]}'),

@@ -289,13 +289,16 @@ class _SelectAllButton extends StatelessWidget {
                       );
                 },
               ),
-              Text(
-                'Select All'.tr(),
-                style: TextStyle(
-                  color:
-                      state.selectedCartItems.length == state.cartItems.length
-                          ? ZPColors.primary
-                          : ZPColors.black,
+              Flexible(
+                child: Text(
+                  'Select All'.tr(),
+                  style: TextStyle(
+                    color:
+                        state.selectedCartItems.length == state.cartItems.length
+                            ? ZPColors.primary
+                            : ZPColors.black,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
               ),
             ],

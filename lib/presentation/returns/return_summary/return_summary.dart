@@ -216,7 +216,7 @@ class ReturnSummary extends StatelessWidget {
                       ),
                 Expanded(
                   child: ScrollList<ReturnSummaryRequest>(
-                    emptyMessage: 'You have not submitted any return request',
+                    emptyMessage: 'You have not submitted any return request'.tr(),
                     onRefresh: () {
                       context.read<ReturnSummaryFilterBloc>().add(
                             const ReturnSummaryFilterEvent.initialized(),

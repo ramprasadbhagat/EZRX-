@@ -35,7 +35,7 @@ class FavouritesTab extends StatelessWidget implements AutoRouteWrapper {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Favourites',
+          'Favourites'.tr(),
           locale: context.locale,
         ).tr(),
         automaticallyImplyLeading: false,
@@ -61,16 +61,13 @@ class FavouritesTab extends StatelessWidget implements AutoRouteWrapper {
             context.read<MaterialPriceDetailBloc>().add(
                   MaterialPriceDetailEvent.fetch(
                     user: context.read<UserBloc>().state.user,
-                    customerCode: context
-                        .read<CustomerCodeBloc>()
-                        .state
-                        .customerCodeInfo,
+                    customerCode:
+                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
                     salesOrganisation:
                         context.read<SalesOrgBloc>().state.salesOrganisation,
                     salesOrganisationConfigs:
                         context.read<SalesOrgBloc>().state.configs,
-                    shipToCode:
-                        context.read<ShipToCodeBloc>().state.shipToInfo,
+                    shipToCode: context.read<ShipToCodeBloc>().state.shipToInfo,
                     materialInfoList: state.favouriteItems
                         .map(
                           (item) => MaterialQueryInfo.fromFavorite(
@@ -94,8 +91,7 @@ class FavouritesTab extends StatelessWidget implements AutoRouteWrapper {
             return LoadingShimmer.logo(key: const Key('LoaderImage'));
           }
 
-          return BlocBuilder<MaterialPriceDetailBloc,
-              MaterialPriceDetailState>(
+          return BlocBuilder<MaterialPriceDetailBloc, MaterialPriceDetailState>(
             buildWhen: (previous, current) =>
                 previous.isValidating != current.isValidating,
             builder: (context, priceState) {
@@ -116,7 +112,7 @@ class FavouritesTab extends StatelessWidget implements AutoRouteWrapper {
                   const AccountSuspendedBanner(),
                   Expanded(
                     child: ScrollList<Favourite>(
-                      emptyMessage: 'No favorite found',
+                      emptyMessage: 'No favorite found'.tr(),
                       onRefresh: () {
                         context.read<MaterialPriceDetailBloc>().add(
                               const MaterialPriceDetailEvent.initialized(),

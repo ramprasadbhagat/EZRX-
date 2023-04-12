@@ -97,7 +97,7 @@ class _BodyContent extends StatelessWidget {
               covidMaterialListState.materialList.isEmpty
           ? LoadingShimmer.logo(key: const Key('loaderImage'))
           : ScrollList<MaterialInfo>(
-              emptyMessage: 'There are no vaccine in this customer code',
+              emptyMessage: 'There are no vaccine in this customer code'.tr(),
               onRefresh: () {
                 context.read<CovidMaterialListBloc>().add(
                       const CovidMaterialListEvent.updateSearchKey(

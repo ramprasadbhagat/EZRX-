@@ -241,7 +241,7 @@ class OrderBundleItem extends StatelessWidget {
                     ),
                   ),
                   _MaterialItemInfo(
-                    title: 'Unit Price: '.tr(),
+                    title: 'Unit Price:'.tr(),
                     info: _MaterialPriceInfo(
                       materialQueryInfo: material.queryInfo,
                       priceType: PriceType.unitPrice,

@@ -134,18 +134,18 @@ class OrdersExpansionTile extends StatelessWidget {
   List<HomePageTile> _getHomePageTiles(bool userCanCreateOrder) {
     return <HomePageTile>[
       if (userCanCreateOrder)
-        const HomePageTile(
-          title: 'Create Order',
+        HomePageTile(
+          title: 'Create Order'.tr(),
           icon: Icons.add_box_outlined,
           routeName: 'material_list_page',
         ),
-      const HomePageTile(
-        title: 'Saved Orders',
+      HomePageTile(
+        title: 'Saved Orders'.tr(),
         icon: Icons.bookmark_border_outlined,
         routeName: 'saved_order_list',
       ),
-      const HomePageTile(
-        title: 'Order Template',
+      HomePageTile(
+        title: 'Order Template'.tr(),
         icon: Icons.featured_play_list_outlined,
         routeName: 'order_template_list_page',
       ),

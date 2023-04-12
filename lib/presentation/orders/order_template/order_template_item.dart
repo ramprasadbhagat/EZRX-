@@ -58,11 +58,12 @@ class OrderTemplateItem extends StatelessWidget {
                 onPressed: () async {
                   await CustomDialogs.confirmationDialog(
                     context: context,
-                    title: 'Delete Order Template?',
+                    title: 'Delete Order Template?'.tr(),
                     message:
-                        'Are you sure you want to delete this Order Template?',
-                    confirmText: 'Yes',
-                    cancelText: 'No',
+                        'Are you sure you want to delete this Order Template?'
+                            .tr(),
+                    confirmText: 'Yes'.tr(),
+                    cancelText: 'No'.tr(),
                     onAcceptPressed: () async {
                       context.read<OrderTemplateListBloc>().add(
                             OrderTemplateListEvent.delete(
@@ -73,7 +74,7 @@ class OrderTemplateItem extends StatelessWidget {
                   );
                 },
                 icon: const Icon(Icons.delete),
-                label: const Text('Delete'),
+                label: Text('Delete'.tr()),
               ),
             ],
           ),

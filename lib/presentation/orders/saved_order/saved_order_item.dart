@@ -63,19 +63,19 @@ class SavedOrderItem extends StatelessWidget {
                 style: Theme.of(context).textTheme.titleSmall,
               ),
               Text(
-                'Sold To IDs: ${order.soldToParty.name}',
+                '${'Sold To IDs:'.tr()} ${order.soldToParty.name}',
                 style: Theme.of(context).textTheme.titleSmall?.apply(
                       color: ZPColors.lightGray,
                     ),
               ),
               Text(
-                'Ship To IDs: ${order.shipToParty.name}',
+                '${'Ship To IDs:'.tr()} ${order.shipToParty.name}',
                 style: Theme.of(context).textTheme.titleSmall?.apply(
                       color: ZPColors.lightGray,
                     ),
               ),
               Text(
-                'Order Value: ${StringUtils.displayPrice(context.read<SalesOrgBloc>().state.configs, order.totalOrderValue)}',
+                '${'Order Value:'.tr()} ${StringUtils.displayPrice(context.read<SalesOrgBloc>().state.configs, order.totalOrderValue)}',
                 style: Theme.of(context).textTheme.titleSmall?.apply(
                       color: ZPColors.black,
                     ),

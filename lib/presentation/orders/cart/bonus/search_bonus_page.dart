@@ -143,7 +143,7 @@ class _BonusAddPageState extends State<BonusAddPage> {
               : state.isFetching
                   ? LoadingShimmer.logo(key: const Key('loaderImage'))
                   : ScrollList<MaterialInfo>(
-                      emptyMessage: 'No materials found',
+                      emptyMessage: 'No materials found'.tr(),
                       // onRefresh: () {
                       // context.read<BonusMaterialBloc>().add(
                       //       const BonusMaterialEvent.reset(),

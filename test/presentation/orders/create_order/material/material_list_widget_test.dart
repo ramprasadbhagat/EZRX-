@@ -1137,7 +1137,7 @@ void main() {
       if (salesOrgBlocMock.state.configs.enableListPrice) {
         expect(listPrice, findsOneWidget);
       }
-      final unitPrice = find.textContaining('Unit Price: '.tr());
+      final unitPrice = find.textContaining('Unit Price:'.tr());
       expect(unitPrice, findsOneWidget);
     });
 

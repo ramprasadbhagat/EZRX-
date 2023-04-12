@@ -77,7 +77,8 @@ class OrderItemCard extends StatelessWidget {
                   StatusLabel(
                     status: StatusType(
                       orderHistoryDetailsBonusAggregate
-                          .orderItem.sAPStatus.displaySAPStatus,
+                          .orderItem.sAPStatus.displaySAPStatus
+                          .tr(),
                     ),
                   ),
                   Padding(
@@ -99,7 +100,7 @@ class OrderItemCard extends StatelessWidget {
                         keyFlex: 1,
                         valueFlex: 1,
                       ),
-                      eligibilityBlocState.salesOrgConfigs.batchNumDisplay 
+                      eligibilityBlocState.salesOrgConfigs.batchNumDisplay
                           ? BalanceTextRow(
                               key: const Key('batchNumberExpiryDate'),
                               keyText: 'Batch Number & Expiry Date'.tr(),
@@ -125,8 +126,10 @@ class OrderItemCard extends StatelessWidget {
                           ? BalanceTextRow(
                               key: const Key('deliveryDateTime'),
                               keyText: 'Delivery Date/Time'.tr(),
-                              valueText:orderHistoryDetailsBonusAggregate
-                                    .orderItem.plannedDeliveryDate.toValidDateString,
+                              valueText: orderHistoryDetailsBonusAggregate
+                                  .orderItem
+                                  .plannedDeliveryDate
+                                  .toValidDateString,
                               valueTextLoading: state.isLoading,
                               keyFlex: 1,
                               valueFlex: 1,
@@ -143,8 +146,9 @@ class OrderItemCard extends StatelessWidget {
                       ),
                       if (enableOHPrice)
                         BalanceTextRow(
-                          key: Key('zpPrice${orderHistoryDetailsBonusAggregate
-                            .orderItem.materialNumber.getOrDefaultValue('')}'),
+                          key: Key(
+                            'zpPrice${orderHistoryDetailsBonusAggregate.orderItem.materialNumber.getOrDefaultValue('')}',
+                          ),
                           keyText: 'ZP Price'.tr(),
                           valueText: StringUtils.displayPrice(
                             salesOrgConfigs,
@@ -157,8 +161,9 @@ class OrderItemCard extends StatelessWidget {
                         ),
                       if (enableOHPrice)
                         BalanceTextRow(
-                          key: Key('totalPrice${orderHistoryDetailsBonusAggregate
-                            .orderItem.materialNumber.getOrDefaultValue('')}'),
+                          key: Key(
+                            'totalPrice${orderHistoryDetailsBonusAggregate.orderItem.materialNumber.getOrDefaultValue('')}',
+                          ),
                           keyText: 'Total Price'.tr(),
                           valueText: StringUtils.displayPrice(
                             salesOrgConfigs,
@@ -180,14 +185,14 @@ class OrderItemCard extends StatelessWidget {
                           keyFlex: 1,
                           valueFlex: 1,
                         ),
-                        BalanceTextRow(
-                          keyText: 'Remarks'.tr(),
-                          valueText: orderHistoryDetailsBonusAggregate
-                              .orderItem.lineReferenceNotes.displayRemarks,
-                          valueTextLoading: state.isLoading,
-                          keyFlex: 1,
-                          valueFlex: 1,
-                        ),
+                      BalanceTextRow(
+                        keyText: 'Remarks'.tr(),
+                        valueText: orderHistoryDetailsBonusAggregate
+                            .orderItem.lineReferenceNotes.displayRemarks,
+                        valueTextLoading: state.isLoading,
+                        keyFlex: 1,
+                        valueFlex: 1,
+                      ),
                       if (enableDisplayOrderDiscount)
                         BalanceTextRow(
                           key: const Key('discountRateForItemCard'),

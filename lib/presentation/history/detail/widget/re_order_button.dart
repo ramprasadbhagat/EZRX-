@@ -80,7 +80,7 @@ class ReOrderButton extends StatelessWidget {
                               ),
                       child: LoadingShimmer.withChild(
                         enabled: state.isLoading,
-                        child: const Text('Re-order').tr(),
+                        child: const Text('Re-Order').tr(),
                       ),
                     ),
                   );

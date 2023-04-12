@@ -59,7 +59,7 @@ class OrderTemplateListPage extends StatelessWidget {
                 child: state.isFetching && state.orderTemplateList.isEmpty
                     ? LoadingShimmer.logo(key: const Key('loading-shimmer'))
                     : ScrollList<OrderTemplate>(
-                        emptyMessage: 'No order template found',
+                        emptyMessage: 'No order template found'.tr(),
                         onRefresh: () {
                           context.read<MaterialPriceDetailBloc>().add(
                                 const MaterialPriceDetailEvent.initialized(),

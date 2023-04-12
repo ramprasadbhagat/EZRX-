@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
@@ -174,7 +175,7 @@ class MaterialListPage extends StatelessWidget {
                           key: const Key('loaderImage'),
                         )
                       : ScrollList<MaterialInfo>(
-                          emptyMessage: 'No material found',
+                          emptyMessage: 'No material found'.tr(),
                           onRefresh: () => _onRefresh(context),
                           onLoadingMore: () => _onLoadingMore(context),
                           isLoading: state.isFetching,

@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
@@ -319,10 +320,10 @@ class _OrderTemplateDetailPageState extends State<OrderTemplateDetailPage> {
   ) async {
     await CustomDialogs.confirmationDialog(
       context: context,
-      title: 'Delete Order Template?',
-      message: 'Are you sure you want to delete this Order Template?',
-      confirmText: 'Yes',
-      cancelText: 'No',
+      title: 'Delete Order Template?'.tr(),
+      message: 'Are you sure you want to delete this Order Template?'.tr(),
+      confirmText: 'Yes'.tr(),
+      cancelText: 'No'.tr(),
       onAcceptPressed: () async {
         context.read<OrderTemplateListBloc>().add(
               OrderTemplateListEvent.delete(

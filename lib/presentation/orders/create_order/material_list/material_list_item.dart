@@ -44,7 +44,8 @@ class MaterialListItem extends StatelessWidget {
     return Card(
       child: ListTile(
         key: Key(
-            'materialOption${materialInfo.materialNumber.getOrDefaultValue('')}',),
+          'materialOption${materialInfo.materialNumber.getOrDefaultValue('')}',
+        ),
         onTap: () => _showMaterialDetail(context),
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -427,7 +428,7 @@ class _PriceLabel extends StatelessWidget {
                   )
                 : const SizedBox.shrink(),
             Text(
-              '${'Unit Price: '.tr()}NA',
+              '${'Unit Price:'.tr()}NA',
               style: Theme.of(context).textTheme.titleSmall?.apply(
                     color: ZPColors.black,
                   ),

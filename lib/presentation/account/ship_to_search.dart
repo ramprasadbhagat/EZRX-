@@ -211,7 +211,7 @@ class _BodyContent extends StatelessWidget {
         isLoading: state.isSearching,
         itemBuilder: (_, __, item) => _ListContent(shipToInfo: item),
         items: state.shipToInfoList,
-        emptyMessage: 'No Shipping Address Found',
+        emptyMessage: 'No Shipping Address Found'.tr(),
       ),
     );
   }

@@ -59,7 +59,7 @@ class OrderMaterialItem extends StatelessWidget {
                   return Row(
                     children: [
                       Text(
-                        'Material Description: '.tr(),
+                        'Material Description:'.tr(),
                         style: Theme.of(context).textTheme.titleMedium?.apply(
                               color: ZPColors.darkerGreen,
                             ),
@@ -163,7 +163,7 @@ class OrderMaterialItem extends StatelessWidget {
                 ),
               ),
             _MaterialItemInfo(
-              title: 'Unit Price: '.tr(),
+              title: 'Unit Price'.tr(),
               info: _MaterialPriceInfo(
                 materialQueryInfo: materialQueryInfo,
                 priceType: PriceType.unitPrice,

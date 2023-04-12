@@ -231,7 +231,7 @@ class _BodyContent extends StatelessWidget {
         isLoading: state.isFetching,
         itemBuilder: (_, __, item) => _ListContent(customerCodeInfo: item),
         items: state.customerCodeList,
-        emptyMessage: 'No Customer Code Found',
+        emptyMessage: 'No Customer Code Found'.tr(),
       ),
     );
   }

@@ -182,7 +182,7 @@ class _RequestReturnList extends StatelessWidget {
                 key: const Key('LoaderImage'),
               )
             : ScrollList<ReturnItem>(
-                emptyMessage: 'No Request for Return found',
+                emptyMessage: 'No Request for Return found'.tr(),
                 onRefresh: () {
                   context.read<RequestReturnBloc>().add(
                         RequestReturnEvent.fetch(

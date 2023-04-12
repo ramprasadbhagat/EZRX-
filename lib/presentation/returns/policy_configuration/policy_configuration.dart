@@ -62,7 +62,7 @@ class PolicyConfigurationPage extends StatelessWidget {
           }
 
           return ScrollList<PolicyConfiguration>(
-            emptyMessage: 'No Policy Configurations found',
+            emptyMessage: 'No Policy Configurations found'.tr(),
             onRefresh: () {
               context.read<PolicyConfigurationBloc>().add(
                     PolicyConfigurationEvent.fetch(
