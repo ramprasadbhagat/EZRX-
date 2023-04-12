@@ -81,7 +81,7 @@ class EligibilityState with _$EligibilityState {
   }
 
   bool get isAccountSuspended {
-    return customerCodeInfo.status.isSuspended && shipToInfo.status.isSuspended;
+    return customerCodeInfo.status.isSuspended || shipToInfo.status.isSuspended;
   }
 
   String get getPNPValueBonusMaterialSearch {

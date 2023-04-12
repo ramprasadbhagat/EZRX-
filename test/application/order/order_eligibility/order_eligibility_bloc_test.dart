@@ -43,28 +43,33 @@ void main() {
           initializedOrderEligibilityEvent = OrderEligibilityEvent.initialized(
             user: fakeUser,
             cartItems: [fakeCartItem],
-            salesOrg: SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601')),
+            salesOrg:
+                SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601')),
             configs: SalesOrganisationConfigs.empty().copyWith(
               minOrderAmount: '50.0',
             ),
-            customerCodeInfo: CustomerCodeInfo.empty().copyWith(division: 'div'),
+            customerCodeInfo:
+                CustomerCodeInfo.empty().copyWith(division: 'div'),
             shipInfo: ShipToInfo.empty().copyWith(city1: 'Kol'),
             orderType: '',
             grandTotal: 100.0,
             subTotal: 80.0,
           );
-          initializedOrderEligibilityState = OrderEligibilityState.initial().copyWith(
+          initializedOrderEligibilityState =
+              OrderEligibilityState.initial().copyWith(
             user: fakeUser,
             cartItems: [
               fakeCartItem.copyWith(
                 quantity: 1,
               )
             ],
-            salesOrg: SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601')),
+            salesOrg:
+                SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601')),
             configs: SalesOrganisationConfigs.empty().copyWith(
               minOrderAmount: '50.0',
             ),
-            customerCodeInfo: CustomerCodeInfo.empty().copyWith(division: 'div'),
+            customerCodeInfo:
+                CustomerCodeInfo.empty().copyWith(division: 'div'),
             shipInfo: ShipToInfo.empty().copyWith(city1: 'Kol'),
             orderType: '',
             grandTotal: 100.0,
@@ -106,7 +111,8 @@ void main() {
         '=> Test if isMinOrderValuePassed',
         build: () => OrderEligibilityBloc(),
         act: (bloc) {
-          final isMinOrderValuePassed = initializedOrderEligibilityState.isMinOrderValuePassed;
+          final isMinOrderValuePassed =
+              initializedOrderEligibilityState.isMinOrderValuePassed;
           expect(isMinOrderValuePassed, true);
         },
       );
@@ -130,7 +136,8 @@ void main() {
         act: (bloc) {
           final isMinOrderValuePassed = initializedOrderEligibilityState
               .copyWith(
-                salesOrg: SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2902')),
+                salesOrg: SalesOrganisation.empty()
+                    .copyWith(salesOrg: SalesOrg('2902')),
                 subTotal: 40.0,
               )
               .isMinOrderValuePassed;
@@ -144,7 +151,8 @@ void main() {
         act: (bloc) {
           final isMinOrderValuePassed = initializedOrderEligibilityState
               .copyWith(
-                salesOrg: SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2902')),
+                salesOrg: SalesOrganisation.empty()
+                    .copyWith(salesOrg: SalesOrg('2902')),
                 subTotal: 50.0,
               )
               .isMinOrderValuePassed;
@@ -158,11 +166,44 @@ void main() {
         act: (bloc) {
           final isMinOrderValuePassed = initializedOrderEligibilityState
               .copyWith(
-                salesOrg: SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2902')),
+                salesOrg: SalesOrganisation.empty()
+                    .copyWith(salesOrg: SalesOrg('2902')),
                 subTotal: 60.0,
               )
               .isMinOrderValuePassed;
           expect(isMinOrderValuePassed, true);
+        },
+      );
+
+      blocTest<OrderEligibilityBloc, OrderEligibilityState>(
+        '=> Test if isMinOrderValuePassed And Customer Code Account Suspended',
+        build: () => OrderEligibilityBloc(),
+        act: (bloc) {
+          final orderEligibilityState =
+              initializedOrderEligibilityState.copyWith(
+            customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+              status: Status('Z1'),
+            ),
+          );
+
+          expect(orderEligibilityState.isAccountSuspended, true);
+          expect(orderEligibilityState.isMinOrderValuePassed, false);
+        },
+      );
+
+      blocTest<OrderEligibilityBloc, OrderEligibilityState>(
+        '=> Test if isMinOrderValuePassed And Ship to Account Suspended',
+        build: () => OrderEligibilityBloc(),
+        act: (bloc) {
+          final orderEligibilityState =
+              initializedOrderEligibilityState.copyWith(
+            shipInfo: ShipToInfo.empty().copyWith(
+              status: Status('Z1'),
+            ),
+          );
+
+          expect(orderEligibilityState.isAccountSuspended, true);
+          expect(orderEligibilityState.isMinOrderValuePassed, false);
         },
       );
     },

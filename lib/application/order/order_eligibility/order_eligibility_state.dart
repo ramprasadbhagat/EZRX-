@@ -39,7 +39,7 @@ class OrderEligibilityState with _$OrderEligibilityState {
       return true;
     }
 
-    return isNotSuspended ? isTotalGreaterThanMinOrderAmount : false;
+    return !isAccountSuspended ? isTotalGreaterThanMinOrderAmount : false;
   }
 
   bool get eligibleForOrderSubmit =>
@@ -53,8 +53,8 @@ class OrderEligibilityState with _$OrderEligibilityState {
     return grandTotal >= double.parse(configs.minOrderAmount);
   }
 
-  bool get isNotSuspended {
-    return !shipInfo.status.isSuspended && !customerCodeInfo.status.isSuspended;
+  bool get isAccountSuspended {
+    return customerCodeInfo.status.isSuspended || shipInfo.status.isSuspended;
   }
 
   bool get isCartItemsContainsFOCMaterial {

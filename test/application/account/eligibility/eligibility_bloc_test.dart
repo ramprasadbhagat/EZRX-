@@ -462,6 +462,31 @@ void main() {
           expect(eligibilityState.comboDealEligible, false);
         },
       );
+
+      test(
+        'Customer Code Account Suspended',
+        () {
+          final eligibilityState = EligibilityState.initial().copyWith(
+            customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+              status: Status('Z1'),
+            ),
+          );
+
+          expect(eligibilityState.isAccountSuspended, true);
+        },
+      );
+      test(
+        'ShipsTo Code Account Suspended',
+        () {
+          final eligibilityState = EligibilityState.initial().copyWith(
+            shipToInfo: ShipToInfo.empty().copyWith(
+              status: Status('Z1'),
+            ),
+          );
+
+          expect(eligibilityState.isAccountSuspended, true);
+        },
+      );
     },
   );
 }
