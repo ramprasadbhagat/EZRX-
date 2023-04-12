@@ -19,6 +19,7 @@ import 'package:ezrxmobile/application/order/order_document_type/order_document_
 import 'package:ezrxmobile/application/order/order_history_details/order_history_details_bloc.dart';
 import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
@@ -40,6 +41,8 @@ import 'package:ezrxmobile/domain/order/entities/price_combo_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/custom_selector.dart';
@@ -129,6 +132,12 @@ class OrderHistoryDetailsBlocMock
     extends MockBloc<OrderHistoryDetailsEvent, OrderHistoryDetailsState>
     implements OrderHistoryDetailsBloc {}
 
+class RemoteConfigServiceMock extends Mock implements RemoteConfigService {}
+
+class MockConfig extends Mock implements Config {}
+
+class MockCountlyService extends Mock implements CountlyService {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late MaterialListBloc materialListBlocMock;
@@ -150,6 +159,8 @@ void main() {
   late ScanMaterialInfoBloc mockScanMaterialInfoBloc;
   late AddToCartBloc mockAddToCartBloc;
   late OrderHistoryDetailsBloc mockOrderHistoryDetailsBloc;
+  late RemoteConfigService remoteConfigServiceMock;
+  late Config mockConfig;
 
   final fakeMaterialNumber = MaterialNumber('000000000023168451');
   final fakeMaterialPrice = MaterialPrice(10.0);
@@ -192,7 +203,30 @@ void main() {
   late MaterialFilterBloc mockMaterialFilterBloc;
 
   setUpAll(() async {
-    setupLocator();
+    locator.registerLazySingleton(() => userBlocMock);
+    locator.registerLazySingleton(() => salesOrgBlocMock);
+    locator.registerLazySingleton(() => customerCodeBlocMock);
+    locator.registerLazySingleton(() => shipToCodeBlocMock);
+    locator.registerLazySingleton(() => mockFavouriteBloc);
+    locator.registerLazySingleton(() => materialPriceBlocMock);
+    locator.registerLazySingleton(() => cartBlocMock);
+    locator.registerLazySingleton(() => mockMaterialFilterBloc);
+    locator.registerLazySingleton(() => materialListBlocMock);
+    locator.registerLazySingleton(() => orderDocumentTypeBlocMock);
+    locator.registerLazySingleton(() => eligibilityBlocMock);
+    locator.registerLazySingleton(() => mockTenderContractBloc);
+    locator.registerLazySingleton(() => mockScanMaterialInfoBloc);
+    locator.registerLazySingleton(() => mockAdditionalDetailsBloc);
+    locator.registerLazySingleton(() => mockMaterialPriceDetailBloc);
+    locator.registerLazySingleton(() => mockComboDealListBloc);
+    locator.registerLazySingleton(() => mockOrderHistoryDetailsBloc);
+    locator.registerLazySingleton(() => mockAddToCartBloc);
+    locator.registerLazySingleton(() => remoteConfigServiceMock);
+    locator.registerLazySingleton(() => AppRouter());
+    locator.registerLazySingleton(() => mockConfig);
+    locator
+        .registerLazySingleton(() => CountlyService(config: locator<Config>()));
+    locator.registerLazySingleton(() => MixpanelService());
     locator<MixpanelService>().init(mixpanel: MixpanelMock());
   });
 
@@ -258,7 +292,11 @@ void main() {
     mockMaterialPriceDetailBloc = MaterialPriceDetailBlocMock();
     mockScanMaterialInfoBloc = ScanMaterialinfoBlocMock();
     mockAddToCartBloc = AddToCartBlocMock();
+    remoteConfigServiceMock = RemoteConfigServiceMock();
+    mockConfig = MockConfig();
     mockOrderHistoryDetailsBloc = OrderHistoryDetailsBlocMock();
+    when(() => remoteConfigServiceMock.getScanToOrderConfig()).thenReturn(true);
+    when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
     when(() => userBlocMock.state).thenReturn(UserState.initial());
     when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
     when(() => customerCodeBlocMock.state)
@@ -327,18 +365,14 @@ void main() {
           .thenReturn(MaterialListState.initial());
       when(() => eligibilityBlocMock.state)
           .thenReturn(EligibilityState.initial().copyWith(
-            customerCodeInfo: CustomerCodeInfo.empty().copyWith(
-              customerAttr7: CustomerAttr7('ZEV'),
-            ),
-            user: User.empty().copyWith(
-              role: Role.empty().copyWith(
-                type: RoleType('user')
-              )
-            ),
-            salesOrganisation: SalesOrganisation.empty().copyWith(
-              salesOrg: SalesOrg('2601')
-            ),
-          ));
+        customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+          customerAttr7: CustomerAttr7('ZEV'),
+        ),
+        user: User.empty()
+            .copyWith(role: Role.empty().copyWith(type: RoleType('user'))),
+        salesOrganisation:
+            SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601')),
+      ));
       await tester.pumpWidget(getScopedWidget(const MaterialRoot()));
       final materialsListPage = find.byKey(const Key('materialListPage'));
       expect(materialsListPage, findsOneWidget);
@@ -471,6 +505,23 @@ void main() {
         final clearSearch = find.byKey(const Key('clearSearch'));
         expect(clearSearch, findsOneWidget);
         await tester.tap(clearSearch);
+      },
+    );
+
+    testWidgets(
+      'Find Scan To Order Button as per firebase config',
+      (tester) async {
+        await tester.pumpWidget(getScopedWidget(
+          const MaterialListPage(),
+        ));
+
+        await tester.pumpAndSettle(const Duration(seconds: 3));
+        final scanToOrderButton = find.byIcon(Icons.qr_code_scanner_outlined);
+        if (remoteConfigServiceMock.getScanToOrderConfig()) {
+          expect(scanToOrderButton, findsOneWidget);
+        } else {
+          expect(scanToOrderButton, findsNothing);
+        }
       },
     );
     testWidgets('Search input must be greater than 2 characters.',

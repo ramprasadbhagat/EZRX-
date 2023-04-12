@@ -36,6 +36,10 @@ import 'package:ezrxmobile/presentation/orders/create_order/material_list/materi
 import 'package:ezrxmobile/presentation/orders/create_order/material_list/material_list_search_bar.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 
+import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
+
+import 'package:ezrxmobile/locator.dart';
+
 class MaterialListPage extends StatelessWidget {
   const MaterialListPage({Key? key}) : super(key: key);
 
@@ -150,21 +154,24 @@ class MaterialListPage extends StatelessWidget {
                 Row(
                   children: [
                     const Expanded(child: MaterialListSearchBar()),
-                    Container(
-                      color: ZPColors.white,
-                      child: IconButton(
-                        padding: const EdgeInsets.only(right: 10),
-                        onPressed: () {
-                          showPlatformDialog(
-                            context: context,
-                            barrierDismissible: true,
-                            useRootNavigator: true,
-                            builder: (_) => const MaterialListScanPicker(),
-                          );
-                        },
-                        icon: const Icon(Icons.qr_code_scanner_outlined),
-                      ),
-                    ),
+                    locator<RemoteConfigService>().getScanToOrderConfig()
+                        ? Container(
+                            color: ZPColors.white,
+                            child: IconButton(
+                              padding: const EdgeInsets.only(right: 10),
+                              onPressed: () {
+                                showPlatformDialog(
+                                  context: context,
+                                  barrierDismissible: true,
+                                  useRootNavigator: true,
+                                  builder: (_) =>
+                                      const MaterialListScanPicker(),
+                                );
+                              },
+                              icon: const Icon(Icons.qr_code_scanner_outlined),
+                            ),
+                          )
+                        : const SizedBox.shrink(),
                   ],
                 ),
                 const AccountSuspendedBanner(),

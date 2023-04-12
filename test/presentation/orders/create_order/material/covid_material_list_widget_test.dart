@@ -15,6 +15,7 @@ import 'package:ezrxmobile/application/order/material_list/material_list_bloc.da
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
@@ -28,6 +29,8 @@ import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/covid_material_list/covid_material_list.dart';
@@ -92,6 +95,12 @@ class ScanMaterialInfoBlocMock
     extends MockBloc<ScanMaterialInfoEvent, ScanMaterialInfoState>
     implements ScanMaterialInfoBloc {}
 
+class RemoteConfigServiceMock extends Mock implements RemoteConfigService {}
+
+class MockConfig extends Mock implements Config {}
+
+class MockCountlyService extends Mock implements CountlyService {}
+
 class AddToCartStub {
   void addToCart() {
     // Do nothing
@@ -119,6 +128,8 @@ void main() {
   late EligibilityBlocMock eligibilityBlocMock;
   late AddToCartStub mockAddToCartStub;
   late ScanMaterialInfoBlocMock scanMaterialInfoBlocMock;
+  late RemoteConfigService remoteConfigServiceMock;
+  late Config mockConfig;
 
   final fakeMaterialInfo = MaterialInfo(
     materialNumber: fakeMaterialNumber,
@@ -149,7 +160,23 @@ void main() {
   );
 
   setUpAll(() async {
-    setupLocator();
+    locator.registerLazySingleton(() => userBlocMock);
+    locator.registerLazySingleton(() => salesOrgBlocMock);
+    locator.registerLazySingleton(() => customerCodeBlocMock);
+    locator.registerLazySingleton(() => shipToCodeBlocMock);
+    locator.registerLazySingleton(() => mockFavouriteBloc);
+    locator.registerLazySingleton(() => materialPriceBlocMock);
+    locator.registerLazySingleton(() => cartBlocMock);
+    locator.registerLazySingleton(() => mockMaterialFilterBloc);
+    locator.registerLazySingleton(() => materialListBlocMock);
+    locator.registerLazySingleton(() => orderDocumentTypeBlocMock);
+    locator.registerLazySingleton(() => eligibilityBlocMock);
+    locator.registerLazySingleton(() => remoteConfigServiceMock);
+    locator.registerLazySingleton(() => AppRouter());
+    locator.registerLazySingleton(() => mockConfig);
+    locator
+        .registerLazySingleton(() => CountlyService(config: locator<Config>()));
+    locator.registerLazySingleton(() => MixpanelService());
     locator<MixpanelService>().init(mixpanel: MixpanelMock());
   });
 
@@ -170,6 +197,10 @@ void main() {
       eligibilityBlocMock = EligibilityBlocMock();
       scanMaterialInfoBlocMock = ScanMaterialInfoBlocMock();
       mockAddToCartStub = MockAddToCartStub();
+      remoteConfigServiceMock = RemoteConfigServiceMock();
+      mockConfig = MockConfig();
+      when(() => remoteConfigServiceMock.getScanToOrderConfig()).thenReturn(true);
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
       when(() => userBlocMock.state).thenReturn(UserState.initial().copyWith(
           user: User.empty().copyWith(
         role: Role(
