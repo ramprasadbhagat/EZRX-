@@ -63,6 +63,9 @@ class EligibilityState with _$EligibilityState {
     return false;
   }
 
+  bool get isOrderTypeEnableAndSpecialOrderType =>
+      !isOrderTypeEnable || !selectedOrderType.documentType.isSpecialOrderType;
+
   // ***pickAndPack values***
   String get getPNPValueMaterial {
     // Condition 1: user role type must be SalesRep

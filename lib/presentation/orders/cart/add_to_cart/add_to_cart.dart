@@ -62,7 +62,10 @@ class _AddToCartState extends State<AddToCart> {
   bool get _isAddToCartAllowed {
     return !(!salesOrgBloc.state.configs.materialWithoutPrice &&
         addToCartBloc.state.cartItem.price.finalPrice.isEmpty &&
-        (!context.read<EligibilityBloc>().state.isOrderTypeEnable &&
+        (context
+                .read<EligibilityBloc>()
+                .state
+                .isOrderTypeEnableAndSpecialOrderType &&
             !addToCartBloc.state.cartItem.isSpecialOrderTypeNotTH &&
             addToCartBloc.state.cartItem.isSpecialMaterial) &&
         !widget.isCovid19Tab);

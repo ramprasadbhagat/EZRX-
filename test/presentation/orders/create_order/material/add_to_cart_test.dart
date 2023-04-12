@@ -25,6 +25,7 @@ import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/price_bonus.dart';
 import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
@@ -1044,6 +1045,131 @@ void main() {
             ),
           ),
         ).called(1);
+      },
+    );
+
+    testWidgets(
+      'Test Block adding to cart if materialWithoutPrice is false, disable ordertype is false and price is empty for salesrep user',
+      (tester) async {
+        when(() => addToCartBlocMock.state).thenReturn(
+          AddToCartState.initial().copyWith(
+            cartItem: priceAggregate.copyWith(
+              price: priceAggregate.price
+                  .copyWith(zmgDiscount: true, finalPrice: MaterialPrice(0)),
+              quantity: 1,
+              materialInfo: priceAggregate.materialInfo.copyWith(
+                isSampleMaterial: false,
+              ),
+            ),
+          ),
+        );
+
+        when(() => eligibilityMockBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+              materialWithoutPrice: false,
+              disableOrderType: false,
+            ),
+            selectedOrderType: OrderDocumentType.defaultSelected(
+              salesOrg: SalesOrg('2601'),
+            ),
+            user: User.empty().copyWith(
+              username: Username('fakeUser'),
+              disableCreateOrder: false,
+              role: Role(
+                type: RoleType('external_sales_rep'),
+                description: '',
+                id: '',
+                name: '',
+              ),
+            ),
+            salesOrganisation:
+                SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601')),
+          ),
+        );
+
+        when(() => salesOrgBlocMock.state).thenReturn(
+          SalesOrgState.initial().copyWith(
+              salesOrganisation: SalesOrganisation.empty()
+                  .copyWith(salesOrg: SalesOrg('2601')),
+              configs: SalesOrganisationConfigs.empty().copyWith(
+                materialWithoutPrice: false,
+                disableOrderType: false,
+              )),
+        );
+
+        when(() => cartBlocMock.state).thenReturn(
+          CartState.initial().copyWith(
+            cartItems: [
+              CartItem.materialEmpty().copyWith(
+                materials: [
+                  PriceAggregate.empty().copyWith(
+                    materialInfo: MaterialInfo.empty().copyWith(
+                      isSampleMaterial: true,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        );
+
+        final fakeUser = User.empty().copyWith(
+          username: Username('fakeUser'),
+          disableCreateOrder: false,
+          role: Role(
+            type: RoleType('external_sales_rep'),
+            description: '',
+            id: '',
+            name: '',
+          ),
+        );
+
+        when(
+          () => userBlocMock.state,
+        ).thenReturn(
+          UserState.initial().copyWith(
+            user: fakeUser,
+          ),
+        );
+
+        await tester.pumpWidget(
+          getScopedWidget(const AddToCart(isCovid19Tab: false)),
+        );
+        await tester.pump();
+        tester.binding.window.physicalSizeTestValue = const Size(1080, 1920);
+        tester.binding.window.devicePixelRatioTestValue = 1.0;
+
+        final addToCartButton = find.text('Add to Cart');
+        expect(addToCartButton, findsOneWidget);
+        await tester.tap(addToCartButton);
+        await tester.pump();
+
+        verifyNever(
+          () => cartBlocMock.add(
+            CartEvent.addMaterialToCart(
+              item: priceAggregate.copyWith(
+                quantity: 1,
+                price: priceAggregate.price
+                    .copyWith(zmgDiscount: true, finalPrice: MaterialPrice(0)),
+                materialInfo: priceAggregate.materialInfo.copyWith(
+                  isSampleMaterial: false,
+                ),
+              ),
+              customerCodeInfo: CustomerCodeInfo.empty(),
+              salesOrganisation: SalesOrganisation.empty()
+                  .copyWith(salesOrg: SalesOrg('2601')),
+              salesOrganisationConfigs:
+                  SalesOrganisationConfigs.empty().copyWith(
+                materialWithoutPrice: false,
+                disableOrderType: false,
+              ),
+              shipToInfo: ShipToInfo.empty(),
+              doNotallowOutOfStockMaterial: true,
+              isSpecialOrderType: false,
+            ),
+          ),
+        );
       },
     );
   });
