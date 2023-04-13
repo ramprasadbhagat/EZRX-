@@ -185,7 +185,15 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
   bool get shouldShowTax =>
       (enableVat && enableTaxClassification) || enableTaxAtTotalLevelOnly;
 
-  bool get taxDisplayForOrderHistoryAndDetails => enableTaxDisplay || enableTaxAtTotalLevelOnly;
+  bool get taxDisplayForOrderHistoryAndDetails =>
+      enableTaxDisplay || enableTaxAtTotalLevelOnly;
 
   bool get enableMaterialLevelTax => enableVat && !enableTaxAtTotalLevelOnly;
+
+  bool get enablePrincipalList => disablePrincipals && principalList.isNotEmpty;
+
+  SalesOrganisationConfigsPrincipal get checkIsPrincipalCodeForAllMaterial =>
+      principalList.firstWhere(
+          (principal) => principal.principalCode.checkIsPrincipalCodeForAll,
+          orElse: () => SalesOrganisationConfigsPrincipal.empty(),);
 }

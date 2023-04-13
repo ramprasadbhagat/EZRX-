@@ -416,8 +416,8 @@ class OrderRepository implements IOrderRepository {
         salesOrganisation: salesOrganisation,
         shipToInfo: shipToInfo,
       ),
-      blockOrder: false,
-      //TODO: principle list from sales org config
+      blockOrder: configs.enablePrincipalList &&
+          cartItems.any((item) => item.checkSalesCutOff),
       materials: _getMaterialInfoList(cartItems: cartItems),
       poDocuments: data.poDocuments,
     );

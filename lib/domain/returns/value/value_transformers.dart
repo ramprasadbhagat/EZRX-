@@ -74,9 +74,6 @@ Color getStatusTextColor(String statusType) {
   }
 }
 
-DateTime getDateTimebyDateString(String value) {
-  return DateTime.tryParse(value) ?? DateTime.now();
-}
 
 String filterLabel(String sort) {
   switch (sort) {

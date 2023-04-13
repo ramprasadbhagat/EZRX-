@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs_principal.dart';
 import 'package:ezrxmobile/domain/order/entities/discount_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price_combo_deal.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/submit_material_item_bonus_dto.dart';
@@ -426,6 +427,21 @@ class PriceAggregate with _$PriceAggregate {
   List<StockInfo> get batchNumbers => List<StockInfo>.from(stockInfoList)
       .where((StockInfo element) => element.batch.isValid())
       .toList();
+
+  bool get checkSalesCutOff {
+    final salesOrgPrincipal = salesOrgConfig.checkIsPrincipalCodeForAllMaterial;
+    if (salesOrgPrincipal != SalesOrganisationConfigsPrincipal.empty()) {
+      return salesOrgPrincipal.date.isBefore(DateTime.now());
+    }
+    for (final salesOrgPrincipal in salesOrgConfig.principalList) {
+      if (materialInfo.principalData.principalCode ==
+          salesOrgPrincipal.principalCode) {
+        return salesOrgPrincipal.date.isBefore(DateTime.now());
+      }
+    }
+
+    return false;
+  }
 }
 
 enum PriceType {

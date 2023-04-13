@@ -119,8 +119,28 @@ String formattedDateTimeForAPI(String text) {
   return DateFormat(DateTimeFormatString.apiFormat).format(parsedDate);
 }
 
-DateTime getDateTimeByDateString(String value) =>
-    DateTime.tryParse(value) ?? DateTime.now();
+DateTime getDateTimeByDateString(String value) {
+  //if length is 10, then it convert dateTime till hour
+  //yyyyddmmhh (only for principal Date)
+  if (value.length >= 10) {
+    return getDateTimeByPrinciPalString(value);
+  }
+
+  return DateTime.tryParse(value) ?? DateTime.now();
+}
+
+DateTime getDateTimeByPrinciPalString(String value) {
+  final hour = int.parse(value.substring(8, 10));
+  final principalDate = DateTime.parse(value.substring(0, 8));
+  //From api getting utc timezone, convert it to local & comparing
+
+  return DateTime.utc(
+    principalDate.year,
+    principalDate.month,
+    principalDate.day,
+    hour,
+  ).toLocal();
+}
 
 String getDateStringByDateTime(DateTime dateTime) =>
     DateFormat(DateTimeFormatString.apiFormat).format(dateTime);
@@ -149,6 +169,7 @@ String getLanguageString(String apiLanguageCode) {
       return 'English';
   }
 }
+
 String dashIfEmpty(String text) {
   return text.isEmpty ? '-' : text;
 }

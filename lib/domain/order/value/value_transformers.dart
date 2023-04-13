@@ -74,6 +74,10 @@ bool havingPnGPrincipalCode(String principalCode) {
   return principalCode == '105307' || principalCode == '101308';
 }
 
+bool isPrincipalCodeForAll(String principalCode) {
+  return principalCode == '0000000000';
+}
+
 bool havingSubmitPrincipalForSalesRep(String principalCode) {
   return principalCode == '100225';
 }

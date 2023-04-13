@@ -6,6 +6,7 @@ import 'package:ezrxmobile/domain/account/entities/full_name.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs_principal.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_address.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_name.dart';
@@ -14,6 +15,7 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/additional_details_data.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
@@ -21,6 +23,7 @@ import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
+import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_order.dart';
@@ -60,6 +63,9 @@ class CountlyServiceMock extends Mock implements CountlyService {}
 
 class MixpanelServiceMock extends Mock implements MixpanelService {}
 
+class SalesOrganisationConfigsMock extends Mock
+    implements SalesOrganisationConfigs {}
+
 void main() {
   late OrderRepository orderRepository;
   late Config mockConfig;
@@ -70,6 +76,7 @@ void main() {
   final mockSalesOrganisation =
       SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601'));
   late MixpanelService mixpanelService;
+  late SalesOrganisationConfigs salesOrganisationConfigs;
 
   final mockShipToInfo = ShipToInfo.empty().copyWith(
     shipToCustomerCode: '3487654',
@@ -134,6 +141,7 @@ void main() {
     orderRemoteDataSource = OrderRemoteDataSourceMock();
     countlyService = CountlyServiceMock();
     mixpanelService = MixpanelServiceMock();
+    salesOrganisationConfigs = SalesOrganisationConfigsMock();
 
     orderRepository = OrderRepository(
       config: mockConfig,
@@ -280,6 +288,33 @@ void main() {
     test('get submit order successfully locally ', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
 
+      salesOrganisationConfigs = SalesOrganisationConfigs.empty().copyWith(
+          currency: Currency('PHP'),
+          disablePrincipals: true,
+          principalList: [
+            SalesOrganisationConfigsPrincipal.empty().copyWith(
+                date: DateTimeStringValue('2093041107'),
+                principalCode: PrincipalCode('0000140332')),
+            SalesOrganisationConfigsPrincipal.empty().copyWith(
+                date: DateTimeStringValue('2023041107'),
+                principalCode: PrincipalCode('0000000000'))
+          ]);
+
+      final cartMaterial = <PriceAggregate>[
+        PriceAggregate.empty().copyWith(
+          quantity: 2,
+          materialInfo: MaterialInfo.empty().copyWith(
+              materialNumber: MaterialNumber('000000000023001758'),
+              principalData: PrincipalData.empty()
+                  .copyWith(principalCode: PrincipalCode('0000140332'))),
+          tenderContract: TenderContract.empty().copyWith(
+            contractPaymentTerm: TenderContractInfo.contractPaymentTerm('term'),
+            tenderOrderReason: TenderContractReason('reas'),
+          ),
+          salesOrgConfig: salesOrganisationConfigs,
+        )
+      ];
+
       final data = AdditionalDetailsData.empty().copyWith(
         customerPoReference: CustomerPoReference('CO REF'),
         contactPerson: ContactPerson('PERSON'),
@@ -353,7 +388,8 @@ void main() {
           division: mockCustomerCodeInfo.division,
           salesOrganisation: mockSalesOrganisation.salesOrg.getOrCrash(),
         ),
-        blockOrder: false,
+        blockOrder: salesOrganisationConfigs.enablePrincipalList &&
+            cartMaterial.any((item) => item.checkSalesCutOff),
         materials: <PriceAggregate>[
           PriceAggregate.empty().copyWith(
             quantity: 2,
@@ -382,85 +418,115 @@ void main() {
       final result = await orderRepository.submitOrder(
         shipToInfo: mockShipToInfo,
         user: mockUser,
-        cartItems: <PriceAggregate>[
-          PriceAggregate.empty().copyWith(
-            quantity: 2,
-            materialInfo: MaterialInfo.empty().copyWith(
-              materialNumber: MaterialNumber('000000000023001758'),
-            ),
-            tenderContract: TenderContract.empty().copyWith(
-              contractPaymentTerm:
-                  TenderContractInfo.contractPaymentTerm('term'),
-              tenderOrderReason: TenderContractReason('reas'),
-            ),
-          )
-        ],
+        cartItems: cartMaterial,
         grandTotal: 100.0,
         customerCodeInfo: mockCustomerCodeInfo,
         salesOrganisation: mockSalesOrganisation,
         data: data,
         orderDocumentType: OrderDocumentType.empty()
-            .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''), 
-        configs: SalesOrganisationConfigs.empty()
-            .copyWith(currency: Currency('PHP')),
+            .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''),
+        configs: salesOrganisationConfigs,
       );
       expect(
         result.isRight(),
         true,
       );
+      expect(submitOrder.blockOrder, true);
     });
     test('get submit order fail locally ', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
+      salesOrganisationConfigs = SalesOrganisationConfigs.empty().copyWith(
+          currency: Currency('PHP'),
+          disablePrincipals: true,
+          principalList: [
+            SalesOrganisationConfigsPrincipal.empty().copyWith(
+                date: DateTimeStringValue('2023041107'),
+                principalCode: PrincipalCode('0000140332')),
+            SalesOrganisationConfigsPrincipal.empty().copyWith(
+                date: DateTimeStringValue('2023041208'),
+                principalCode: PrincipalCode('0000000000'))
+          ]);
+      final cartMaterial = <PriceAggregate>[
+        PriceAggregate.empty().copyWith(
+          quantity: 2,
+          materialInfo: MaterialInfo.empty()
+              .copyWith(
+                materialNumber: MaterialNumber('000000000023001758'),
+                principalData: PrincipalData.empty().copyWith(
+                  principalCode: PrincipalCode('0000140332')
+                )
+              ),
+        )
+      ];
+      final submitOrder = SubmitOrder.empty().copyWith(
+        userName: '',
+        companyName: CompanyName('name'),
+        customer: SubmitOrderCustomer.empty().copyWith(
+          division: 'div',
+          salesOrganisation: '2601',
+        ),
+        materials: [
+          SubmitMaterialInfo.empty().copyWith(
+              materialNumber: MaterialNumber('000000000023001758'), quantity: 2)
+        ],
+        purchaseOrderType: 'ZPOR',
+        orderType: 'ZPOR',
+        subscribeStatusChange: true,
+        trackingLevel: 'items',
+        blockOrder: salesOrganisationConfigs.enablePrincipalList &&
+            cartMaterial.any((item) => item.checkSalesCutOff),
+      );
 
       when(() => orderLocalDataSource.submitOrder(
-          submitOrder: SubmitOrderDto.fromDomain(
-              SubmitOrder.empty().copyWith(
-                  userName: '',
-                  companyName: CompanyName('name'),
-                  customer: SubmitOrderCustomer.empty().copyWith(
-                    division: 'div',
-                    salesOrganisation: '2601',
-                  ),
-                  materials: [
-                    SubmitMaterialInfo.empty().copyWith(
-                        materialNumber: MaterialNumber('000000000023001758'),
-                        quantity: 2)
-                  ],
-                  purchaseOrderType: 'ZPOR',
-                  orderType: 'ZPOR',
-                  subscribeStatusChange: true,
-                  trackingLevel: 'items',
-                  blockOrder: false),
-              ''))).thenThrow((invocation) async => MockException());
+              submitOrder: SubmitOrderDto.fromDomain((submitOrder), '')))
+          .thenThrow((invocation) async => MockException());
 
       final result = await orderRepository.submitOrder(
         shipToInfo: ShipToInfo.empty(),
         user: User.empty().copyWith(
             email: EmailAddress('awsib@gmail.com'), username: Username('user')),
-        cartItems: <PriceAggregate>[
-          PriceAggregate.empty().copyWith(
-            quantity: 2,
-            materialInfo: MaterialInfo.empty()
-                .copyWith(materialNumber: MaterialNumber('000000000023001758')),
-          )
-        ],
+        cartItems: cartMaterial,
         grandTotal: 100.0,
         customerCodeInfo: CustomerCodeInfo.empty().copyWith(division: 'div'),
         salesOrganisation:
             SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601')),
         data: AdditionalDetailsData.empty(),
         orderDocumentType: OrderDocumentType.empty()
-            .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''), 
-        configs: SalesOrganisationConfigs.empty()
-            .copyWith(currency: Currency('PHP')),
+            .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''),
+        configs: salesOrganisationConfigs,
       );
       expect(
         result.isLeft(),
         true,
       );
+      expect(submitOrder.blockOrder, false);
     });
     test('get submit order successfully remote ', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
+
+      salesOrganisationConfigs = SalesOrganisationConfigs.empty().copyWith(
+          currency: Currency('PHP'),
+          disablePrincipals: true,
+          principalList: [
+            SalesOrganisationConfigsPrincipal.empty().copyWith(
+                date: DateTimeStringValue('2093041107'),
+                principalCode: PrincipalCode('0000140332')),
+          ]);
+
+      final cartMaterial = <PriceAggregate>[
+        PriceAggregate.empty().copyWith(
+          quantity: 2,
+          materialInfo: MaterialInfo.empty().copyWith(
+              materialNumber: MaterialNumber('000000000023001758'),
+              principalData: PrincipalData.empty()
+                  .copyWith(principalCode: PrincipalCode('0000140332'))),
+          tenderContract: TenderContract.empty().copyWith(
+            contractPaymentTerm: TenderContractInfo.contractPaymentTerm('term'),
+            tenderOrderReason: TenderContractReason('reas'),
+          ),
+          salesOrgConfig: salesOrganisationConfigs,
+        )
+      ];
 
       final data = AdditionalDetailsData.empty().copyWith(
         customerPoReference: CustomerPoReference('CO REF'),
@@ -535,7 +601,8 @@ void main() {
           division: mockCustomerCodeInfo.division,
           salesOrganisation: mockSalesOrganisation.salesOrg.getOrCrash(),
         ),
-        blockOrder: false,
+        blockOrder: salesOrganisationConfigs.enablePrincipalList &&
+            cartMaterial.any((item) => item.checkSalesCutOff),
         materials: <PriceAggregate>[
           PriceAggregate.empty().copyWith(
             quantity: 2,
@@ -564,38 +631,50 @@ void main() {
       final result = await orderRepository.submitOrder(
         shipToInfo: mockShipToInfo,
         user: mockUser,
-        cartItems: <PriceAggregate>[
-          PriceAggregate.empty().copyWith(
-            quantity: 2,
-            materialInfo: MaterialInfo.empty().copyWith(
-              materialNumber: MaterialNumber('000000000023001758'),
-            ),
-            tenderContract: TenderContract.empty().copyWith(
-              contractPaymentTerm:
-                  TenderContractInfo.contractPaymentTerm('term'),
-              tenderOrderReason: TenderContractReason('reas'),
-            ),
-          )
-        ],
+        cartItems: cartMaterial,
         grandTotal: 100.0,
         customerCodeInfo: mockCustomerCodeInfo,
         salesOrganisation: mockSalesOrganisation,
         data: data,
         orderDocumentType: OrderDocumentType.empty()
-            .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''), 
-        configs: SalesOrganisationConfigs.empty()
-            .copyWith(currency: Currency('PHP')),
+            .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''),
+        configs: salesOrganisationConfigs,
       );
       expect(
         result.isRight(),
         true,
       );
+      expect(submitOrder.blockOrder, false);
     });
 
     test(
         'get submit order successfully remote when additional data greenDeliveryEnabled true',
         () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
+      salesOrganisationConfigs = SalesOrganisationConfigs.empty().copyWith(
+          currency: Currency('PHP'),
+          disablePrincipals: true,
+          principalList: [
+            SalesOrganisationConfigsPrincipal.empty().copyWith(
+                date: DateTimeStringValue('2023041107'),
+                principalCode: PrincipalCode('0000140331'))
+          ]);
+
+      final cartMaterial = <PriceAggregate>[
+        PriceAggregate.empty().copyWith(
+          quantity: 2,
+          materialInfo: MaterialInfo.empty().copyWith(
+              materialNumber: MaterialNumber('000000000023001758'),
+              principalData: PrincipalData.empty().copyWith(
+                principalCode: PrincipalCode('0000140332'),
+              )),
+          tenderContract: TenderContract.empty().copyWith(
+            contractPaymentTerm: TenderContractInfo.contractPaymentTerm('term'),
+            tenderOrderReason: TenderContractReason('reas'),
+          ),
+          salesOrgConfig: salesOrganisationConfigs,
+        )
+      ];
 
       final data = AdditionalDetailsData.empty().copyWith(
         customerPoReference: CustomerPoReference('CO REF'),
@@ -672,7 +751,8 @@ void main() {
           division: mockCustomerCodeInfo.division,
           salesOrganisation: mockSalesOrganisation.salesOrg.getOrCrash(),
         ),
-        blockOrder: false,
+        blockOrder: salesOrganisationConfigs.enablePrincipalList &&
+            cartMaterial.any((item) => item.checkSalesCutOff),
         materials: <PriceAggregate>[
           PriceAggregate.empty().copyWith(
             quantity: 2,
@@ -701,32 +781,20 @@ void main() {
       final result = await orderRepository.submitOrder(
         shipToInfo: mockShipToInfo,
         user: mockUser,
-        cartItems: <PriceAggregate>[
-          PriceAggregate.empty().copyWith(
-            quantity: 2,
-            materialInfo: MaterialInfo.empty().copyWith(
-              materialNumber: MaterialNumber('000000000023001758'),
-            ),
-            tenderContract: TenderContract.empty().copyWith(
-              contractPaymentTerm:
-                  TenderContractInfo.contractPaymentTerm('term'),
-              tenderOrderReason: TenderContractReason('reas'),
-            ),
-          )
-        ],
+        cartItems: cartMaterial,
         grandTotal: 100.0,
         customerCodeInfo: mockCustomerCodeInfo,
         salesOrganisation: mockSalesOrganisation,
         data: data,
         orderDocumentType: OrderDocumentType.empty()
-            .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''), 
-        configs: SalesOrganisationConfigs.empty()
-            .copyWith(currency: Currency('PHP')),
+            .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''),
+        configs: salesOrganisationConfigs,
       );
       expect(
         result.isRight(),
         true,
       );
+      expect(submitOrder.blockOrder, false);
     });
     test('get submit order fail remote ', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
@@ -771,8 +839,8 @@ void main() {
         salesOrganisation:
             SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601')),
         data: AdditionalDetailsData.empty(),
-         orderDocumentType: OrderDocumentType.empty()
-            .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''), 
+        orderDocumentType: OrderDocumentType.empty()
+            .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''),
         configs: SalesOrganisationConfigs.empty()
             .copyWith(currency: Currency('PHP')),
       );
@@ -1660,6 +1728,24 @@ void main() {
   test('get submit order successfully remote ', () async {
     when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
 
+    salesOrganisationConfigs =
+        SalesOrganisationConfigs.empty().copyWith(currency: Currency('PHP'));
+
+    final cartMaterial = <PriceAggregate>[
+      PriceAggregate.empty().copyWith(
+        quantity: 2,
+        materialInfo: MaterialInfo.empty().copyWith(
+            materialNumber: MaterialNumber('000000000023001758'),
+            principalData: PrincipalData.empty()
+                .copyWith(principalCode: PrincipalCode('0000140332'))),
+        tenderContract: TenderContract.empty().copyWith(
+          contractPaymentTerm: TenderContractInfo.contractPaymentTerm('term'),
+          tenderOrderReason: TenderContractReason('reas'),
+        ),
+        salesOrgConfig: salesOrganisationConfigs,
+      )
+    ];
+
     final data = AdditionalDetailsData.empty().copyWith(
       customerPoReference: CustomerPoReference('CO REF'),
       contactPerson: ContactPerson('PERSON'),
@@ -1734,7 +1820,8 @@ void main() {
         division: mockCustomerCodeInfo.division,
         salesOrganisation: mockSalesOrganisation.salesOrg.getOrCrash(),
       ),
-      blockOrder: false,
+      blockOrder: salesOrganisationConfigs.enablePrincipalList &&
+          cartMaterial.any((item) => item.checkSalesCutOff),
       materials: <PriceAggregate>[
         PriceAggregate.empty().copyWith(
           quantity: 2,
@@ -1784,13 +1871,13 @@ void main() {
       customerCodeInfo: mockCustomerCodeInfo,
       salesOrganisation: mockSalesOrganisation,
       data: data,
-      configs:
-          SalesOrganisationConfigs.empty().copyWith(currency: Currency('PHP')),
+      configs: salesOrganisationConfigs,
       orderDocumentType: OrderDocumentType.empty(),
     );
     expect(
       result.isRight(),
       true,
     );
+    expect(submitOrder.blockOrder, false);
   });
 }

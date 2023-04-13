@@ -131,6 +131,10 @@ class PrincipalCode extends ValueObject<String> {
     );
   }
 
+  bool get checkIsPrincipalCodeForAll => isPrincipalCodeForAll(
+        value.getOrElse(() => ''),
+      );
+
   bool get isPnGPrinciple => havingPnGPrincipalCode(
         removeLeadingZero(
           value.getOrElse(() => ''),
