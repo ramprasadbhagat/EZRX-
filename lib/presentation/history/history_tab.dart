@@ -178,6 +178,7 @@ class HistoryTab extends StatelessWidget {
       ),
       endDrawer: const OrderHistoryFilterDrawer(),
       body: BlocListener<OrderHistoryFilterBloc, OrderHistoryFilterState>(
+        key: const Key('orderHistoryTab'),
         listenWhen: (previous, current) =>
             previous.isSubmitting != current.isSubmitting &&
                 current.isSubmitting ||

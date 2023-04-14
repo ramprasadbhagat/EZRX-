@@ -27,6 +27,7 @@ class BalanceTextRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
+      key: Key('$keyText$valueText'),
       padding: const EdgeInsets.symmetric(
         vertical: 2.0,
       ),

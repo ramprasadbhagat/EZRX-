@@ -33,6 +33,7 @@ class FavouritesTab extends StatelessWidget implements AutoRouteWrapper {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: const Key('favouritesPage'),
       appBar: AppBar(
         title: Text(
           'Favourites'.tr(),
@@ -126,6 +127,7 @@ class FavouritesTab extends StatelessWidget implements AutoRouteWrapper {
                       isLoading: false,
                       itemBuilder: (context, index, itemInfo) {
                         return FavouriteListTile(
+                          key: Key('FavouriteItem$index'),
                           favourite: itemInfo,
                         );
                       },

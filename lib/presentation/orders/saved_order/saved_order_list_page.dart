@@ -29,6 +29,7 @@ class SavedOrderListPage extends StatelessWidget {
     locator<CountlyService>().recordCountlyView('Saved Order Screen');
 
     return Scaffold(
+      key: const Key('SavedOrderListKey'),
       appBar: AppBar(
         title: const Text('Saved Orders').tr(),
         actions: const [CartButton()],
@@ -95,6 +96,7 @@ class SavedOrderListPage extends StatelessWidget {
                       ),
                   isLoading: state.isFetching,
                   itemBuilder: (context, index, item) => SavedOrderItem(
+                    key: Key('SavedOrder$index'),
                     order: item,
                     isDeleting: state.isDeleting,
                   ),

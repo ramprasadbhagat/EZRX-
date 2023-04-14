@@ -25,6 +25,7 @@ class HomeTab extends StatelessWidget {
     );
 
     return Scaffold(
+      key: const Key('homeScreen'),
       appBar: AppBar(
         centerTitle: true,
         title: SvgPicture.asset('assets/svg/ezrxlogo.svg', height: 30),

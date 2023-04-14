@@ -110,7 +110,8 @@ class MaterialListItem extends StatelessWidget {
               Text(
                 materialInfo.genericMaterialName,
                 key: Key(
-                    'genericMaterial${materialInfo.materialNumber.getOrDefaultValue('')}',),
+                  'genericMaterial${materialInfo.materialNumber.getOrDefaultValue('')}',
+                ),
                 style: Theme.of(context).textTheme.titleSmall?.apply(
                       color: ZPColors.lightGray,
                     ),
@@ -130,7 +131,12 @@ class MaterialListItem extends StatelessWidget {
                 _PriceLabel(materialInfo: materialInfo),
                 Row(
                   children: [
-                    FavoriteButton(materialInfo: materialInfo),
+                    FavoriteButton(
+                      key: Key(
+                        'favoriteButtonKey${materialInfo.materialNumber.displayMatNo}',
+                      ),
+                      materialInfo: materialInfo,
+                    ),
                     CustomSmallButton(
                       onPressed: () => _showMaterialDetail(context),
                       text: 'Add'.tr(),
