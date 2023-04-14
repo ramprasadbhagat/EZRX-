@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:ezrxmobile/domain/announcement/entities/announcement.dart';
+import 'package:ezrxmobile/domain/announcement/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'announcement_dto.freezed.dart';
@@ -9,40 +12,40 @@ class AnnouncementDto with _$AnnouncementDto {
   const AnnouncementDto._();
 
   const factory AnnouncementDto({
-    @JsonKey(name: 'startTime', defaultValue: '', readValue: announcementDateTimeFormatCheck)
-        required String startTime,
-    @JsonKey(name: 'endTime', defaultValue: '', readValue: announcementDateTimeFormatCheck)
-        required String endTime,
-    @JsonKey(
-      name: 'description',
-      defaultValue: '',
-    )
-        required String description,
-    @JsonKey(
-      name: 'id',
-      defaultValue: '',
-    )
-        required String id,
-    @JsonKey(
-      name: 'type',
-      defaultValue: '',
-    )
-        required String type,
-    @JsonKey(
-      name: 'active',
-      defaultValue: false,
-    )
-        required bool active,
+    @JsonKey(name: 'active', defaultValue: false) required bool active,
+    @JsonKey(name: 'descriptionList', defaultValue: [])
+        required List<AnnouncementMessageDto> descriptionList,
+    @JsonKey(name: 'startTime', defaultValue: '') required String startTime,
+    @JsonKey(name: 'endTime', defaultValue: '') required String endTime,
+    @JsonKey(name: 'type', defaultValue: '') required String type,
+    @JsonKey(name: 'day', defaultValue: '') required String day,
+    @JsonKey(name: 'functionLabel', defaultValue: '')
+        required String functionLabel,
+    @JsonKey(name: 'id', defaultValue: '') required String id,
+    @JsonKey(name: 'isModuleSpecific', defaultValue: false)
+        required bool isModuleSpecific,
+    @_ModuleNameConverter()
+    @JsonKey(name: 'moduleName', defaultValue: [])
+        required List<String> moduleName,
+    @JsonKey(name: 'loginType', defaultValue: '') required String loginType,
+    @JsonKey(name: 'isCrossButton', defaultValue: false)
+        required bool isCrossButton,
   }) = _AnnouncementDto;
 
-  Announcement toDomain() {
+  Announcement get toDomain {
     return Announcement(
-      id: id,
+      active: active,
+      descriptionList: descriptionList.map((e) => e.toDomain).toList(),
       startTime: startTime,
       endTime: endTime,
-      description: description,
-      active: active,
-      type: type,
+      type: AnnouncementType(type),
+      day: day,
+      functionLabel: functionLabel,
+      id: id,
+      isModuleSpecific: isModuleSpecific,
+      moduleName: moduleName.map((e) => AnnouncementDislayModule(e)).toList(),
+      loginType: AnnouncementDislayTime(loginType),
+      isCrossButton: isCrossButton,
     );
   }
 
@@ -50,10 +53,42 @@ class AnnouncementDto with _$AnnouncementDto {
       _$AnnouncementDtoFromJson(json);
 }
 
-String announcementDateTimeFormatCheck(Map json, String key){
-  if (json[key].isEmpty) return '';
+@freezed
+class AnnouncementMessageDto with _$AnnouncementMessageDto {
+  const AnnouncementMessageDto._();
 
-    return json[key].split(' ').length > 2
-        ? "${json[key].split(' ')[0]} ${json[key].split(' ')[1]}"
-        : json[key].split(' ')[0];
+  const factory AnnouncementMessageDto({
+    @JsonKey(name: 'languageCode', defaultValue: '')
+        required String languageCode,
+    @JsonKey(name: 'language', defaultValue: '') required String language,
+    @JsonKey(name: 'announcement', defaultValue: '')
+        required String announcement,
+  }) = _AnnouncementMessageDto;
+
+  factory AnnouncementMessageDto.fromJson(Map<String, dynamic> json) =>
+      _$AnnouncementMessageDtoFromJson(json);
+
+  AnnouncementMessage get toDomain => AnnouncementMessage(
+        languageCode: languageCode,
+        language: language,
+        announcement: announcement,
+      );
+}
+
+class _ModuleNameConverter extends JsonConverter<List<String>, String> {
+  const _ModuleNameConverter();
+
+  @override
+  List<String> fromJson(String json) {
+    final list = jsonDecode(
+      json.replaceAll('\\"', '"'),
+    );
+    
+    return List.from(list);
+  }
+
+  @override
+  String toJson(List<String> object) {
+    return jsonEncode(object).toString();
+  }
 }

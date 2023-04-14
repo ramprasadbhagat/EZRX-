@@ -11,6 +11,6 @@ class AnnouncementLocalDataSource {
     );
 
     return AnnouncementDto.fromJson(res['data']['getAnnouncements'][0])
-        .toDomain();
+        .toDomain;
   }
 }

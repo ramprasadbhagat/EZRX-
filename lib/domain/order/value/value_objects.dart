@@ -789,7 +789,6 @@ class ComboDealCategoryType extends ValueObject<String> {
     return ComboDealCategoryType._(validateStringNotEmpty(input));
   }
 
-  //TODO: Add test for this
   bool get isMaterialNumber => value.getOrElse(() => '') == 'MATNR';
 
   bool get isPrinciple => value.getOrElse(() => '') == 'ZPRINC';

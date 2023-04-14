@@ -1099,7 +1099,8 @@ void main() {
         final listWidget = find.byWidgetPredicate((w) => w is ListTile);
         expect(listWidget, findsAtLeastNWidgets(1));
         await tester.pump();
-        final priceWidget = find.byKey(Key('priceOverride${mockCartItemWithDataList.first.getMaterialNumber.getOrDefaultValue('')}'));
+        final priceWidget = find.byKey(Key(
+            'priceOverride${mockCartItemWithDataList.first.getMaterialNumber.getOrDefaultValue('')}'));
         expect(priceWidget, findsOneWidget);
         await tester.tap(priceWidget);
         await tester.pump();
@@ -1164,7 +1165,8 @@ void main() {
         expect(item, findsOneWidget);
         final listWidget = find.byWidgetPredicate((w) => w is ListTile);
         expect(listWidget, findsAtLeastNWidgets(1));
-        final priceWidget = find.byKey(Key('priceOverride${mockCartItemWithDataList.first.getMaterialNumber.getOrDefaultValue('')}'));
+        final priceWidget = find.byKey(Key(
+            'priceOverride${mockCartItemWithDataList.first.getMaterialNumber.getOrDefaultValue('')}'));
         expect(priceWidget, findsOneWidget);
         final unitPrice = find.byKey(const Key('unitPrice'));
 
@@ -1850,7 +1852,6 @@ void main() {
             ),
             108.0);
       });
-
 
       testWidgets('cart Item with no valid batch valid ', (tester) async {
         locator.unregister<CountlyService>();

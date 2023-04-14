@@ -88,7 +88,7 @@ void main() {
   late MaterialBundleListBloc materialBundleListMockBloc;
   late MaterialPriceDetailBloc materialPriceDetailMockBloc;
   late TenderContractBloc tenderContractBlocMock;
-  
+
   final mockBundle = Bundle(
     materials: <MaterialInfo>[],
     bundleName: BundleName('Mock Bundle'),
@@ -289,8 +289,8 @@ void main() {
       );
       await tester.pump();
 
-      final itemQuantityAddButton = find
-          .byKey(Key('bundleAdd${mockMaterialInfo.materialNumber.getOrDefaultValue('')}'));
+      final itemQuantityAddButton = find.byKey(Key(
+          'bundleAdd${mockMaterialInfo.materialNumber.getOrDefaultValue('')}'));
       final quantityTextWidget = find.byKey(Key(
           'bundleText${mockMaterialInfo.materialNumber.getOrDefaultValue('')}'));
       final quantityTextInput = tester.widget<TextField>(quantityTextWidget);
@@ -312,10 +312,10 @@ void main() {
         ),
       );
 
-      final itemQuantityAddButton = find
-          .byKey(Key('bundleAdd${mockMaterialInfo.materialNumber.getOrDefaultValue('')}'));
-      final itemQuantityDeleteButton = find.byKey(
-          Key('bundleDelete${mockMaterialInfo.materialNumber.getOrDefaultValue('')}'));
+      final itemQuantityAddButton = find.byKey(Key(
+          'bundleAdd${mockMaterialInfo.materialNumber.getOrDefaultValue('')}'));
+      final itemQuantityDeleteButton = find.byKey(Key(
+          'bundleDelete${mockMaterialInfo.materialNumber.getOrDefaultValue('')}'));
       final quantityTextWidget = find.byKey(Key(
           'bundleText${mockMaterialInfo.materialNumber.getOrDefaultValue('')}'));
       final quantityTextInput = tester.widget<TextField>(quantityTextWidget);

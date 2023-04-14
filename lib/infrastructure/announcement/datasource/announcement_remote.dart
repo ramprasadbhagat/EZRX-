@@ -36,7 +36,7 @@ class AnnouncementRemoteDataSource {
       }
 
       return AnnouncementDto.fromJson(res.data['data']['getAnnouncements'][0])
-          .toDomain();
+          .toDomain;
     });
   }
 

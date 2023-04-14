@@ -175,31 +175,32 @@ void main() {
   ];
 
   final fakematerialInfo = MaterialInfo(
-      quantity: 0,
-      materialNumber: fakeMaterialNumber,
-      materialDescription: "Reag Cup 15ml 1'S",
-      governmentMaterialCode: '',
-      therapeuticClass: 'All other non-therapeutic products',
-      itemBrand: 'Item not listed in I',
-      principalData: PrincipalData(
-        principalName: PrincipalName('台灣羅氏醫療診斷設備(股)公司'),
-        principalCode: PrincipalCode('0000102004'),
-      ),
-      taxClassification: MaterialTaxClassification('Product : Full Tax'),
-      itemRegistrationNumber: 'NA',
-      unitOfMeasurement: 'EA',
-      materialGroup2: MaterialGroup.two(''),
-      materialGroup4: MaterialGroup.four('OTH'),
-      isSampleMaterial: false,
-      hidePrice: false,
-      hasValidTenderContract: false,
-      hasMandatoryTenderContract: false,
-      taxes: ['5'],
-      bundles: [],
-      defaultMaterialDescription: '',
-      isFOCMaterial: false,
-      remarks: '',
-      genericMaterialName: '',);
+    quantity: 0,
+    materialNumber: fakeMaterialNumber,
+    materialDescription: "Reag Cup 15ml 1'S",
+    governmentMaterialCode: '',
+    therapeuticClass: 'All other non-therapeutic products',
+    itemBrand: 'Item not listed in I',
+    principalData: PrincipalData(
+      principalName: PrincipalName('台灣羅氏醫療診斷設備(股)公司'),
+      principalCode: PrincipalCode('0000102004'),
+    ),
+    taxClassification: MaterialTaxClassification('Product : Full Tax'),
+    itemRegistrationNumber: 'NA',
+    unitOfMeasurement: 'EA',
+    materialGroup2: MaterialGroup.two(''),
+    materialGroup4: MaterialGroup.four('OTH'),
+    isSampleMaterial: false,
+    hidePrice: false,
+    hasValidTenderContract: false,
+    hasMandatoryTenderContract: false,
+    taxes: ['5'],
+    bundles: [],
+    defaultMaterialDescription: '',
+    isFOCMaterial: false,
+    remarks: '',
+    genericMaterialName: '',
+  );
   late MaterialFilterBloc mockMaterialFilterBloc;
 
   setUpAll(() async {
@@ -2005,61 +2006,62 @@ void main() {
 
       expect(find.byType(AddToCart), findsOneWidget);
     });
-    //TODO: Fix combo testcase
-    //   testWidgets(
-    //       'Opening combo deal detail after scanning and fetching price successfully',
-    //       (tester) async {
-    //     final fakeComboDealPrice = Price.empty().copyWith(
-    //       materialNumber: fakeMaterialNumber,
-    //       comboDeal: PriceComboDeal.empty().copyWith(
-    //         flexibleGroup: FlexibleGroup('fake-group'),
-    //       ),
-    //     );
 
-    //     when(() => materialListBlocMock.state).thenReturn(
-    //       MaterialListState.initial().copyWith(
-    //         materialList: [
-    //           MaterialInfo.empty().copyWith(materialNumber: fakeMaterialNumber),
-    //         ],
-    //         isScanFromBarcode: true,
-    //       ),
-    //     );
+    testWidgets(
+        'Opening combo deal detail after scanning and fetching price successfully',
+        (tester) async {
+      final fakeComboDealPrice = Price.empty().copyWith(
+        materialNumber: fakeMaterialNumber,
+        comboDeal: PriceComboDeal.empty().copyWith(
+          category: PriceComboDealCategory(
+              type: ComboDealCategoryType('MATNR'), values: []),
+          flexibleGroup: FlexibleGroup('fake-group'),
+        ),
+      );
 
-    //     when(() => cartBlocMock.state).thenReturn(
-    //       CartState.initial().copyWith(cartItems: [
-    //         CartItem.comboDeal([
-    //           PriceAggregate.empty().copyWith(
-    //             price: fakeComboDealPrice,
-    //           )
-    //         ])
-    //       ]),
-    //     );
+      when(() => materialListBlocMock.state).thenReturn(
+        MaterialListState.initial().copyWith(
+          materialList: [
+            MaterialInfo.empty().copyWith(materialNumber: fakeMaterialNumber),
+          ],
+          isScanFromBarcode: true,
+        ),
+      );
 
-    //     whenListen(
-    //       materialPriceBlocMock,
-    //       Stream.fromIterable(
-    //         [
-    //           MaterialPriceState.initial().copyWith(isFetching: true),
-    //           MaterialPriceState.initial().copyWith(
-    //             isFetching: false,
-    //             materialPrice: {
-    //               fakeMaterialNumber: fakeComboDealPrice,
-    //             },
-    //           ),
-    //         ],
-    //       ),
-    //     );
+      when(() => cartBlocMock.state).thenReturn(
+        CartState.initial().copyWith(cartItems: [
+          CartItem.comboDeal([
+            PriceAggregate.empty().copyWith(
+              price: fakeComboDealPrice,
+            )
+          ])
+        ]),
+      );
 
-    //     await tester.pumpWidget(getScopedWidget(const MaterialListPage()));
+      whenListen(
+        materialPriceBlocMock,
+        Stream.fromIterable(
+          [
+            MaterialPriceState.initial().copyWith(isFetching: true),
+            MaterialPriceState.initial().copyWith(
+              isFetching: false,
+              materialPrice: {
+                fakeMaterialNumber: fakeComboDealPrice,
+              },
+            ),
+          ],
+        ),
+      );
 
-    //     await tester.pump();
+      await tester.pumpWidget(getScopedWidget(const MaterialListPage()));
+      await tester.pump();
 
-    //     expect(
-    //       (autoRouterMock.current.args as ComboDealMaterialDetailPageRouteArgs)
-    //           .isEdit,
-    //       true,
-    //     );
-    //   });
+      expect(
+        (autoRouterMock.current.args as ComboDealMaterialDetailPageRouteArgs)
+            .isEdit,
+        true,
+      );
+    });
   });
 
   group('Material List Item Test', () {
@@ -2068,7 +2070,7 @@ void main() {
       flexibleGroup: FlexibleGroup('fake-flexible-group'),
       salesDeal: SalesDealNumber('fake-sales-deal'),
       category: PriceComboDealCategory(
-        type: ComboDealCategoryType('fake-type'),
+        type: ComboDealCategoryType('MATNR'),
         values: [fakeMaterialNumber.getOrCrash()],
       ),
     );
@@ -2099,122 +2101,122 @@ void main() {
       expect(comboLabel, findsNothing);
     });
 
-    // testWidgets('Combo Deal label pressed when combo is in cart',
-    //     (tester) async {
-    //   final comboMaterial = PriceAggregate.empty().copyWith(
-    //     materialInfo: MaterialInfo.empty().copyWith(
-    //       materialNumber: fakeMaterialNumber,
-    //     ),
-    //     price: Price.empty().copyWith(
-    //       comboDeal: fakeComboDealQuery,
-    //     ),
-    //   );
-    //   when(() => cartBlocMock.state).thenReturn(
-    //     CartState.initial().copyWith(cartItems: [
-    //       CartItem.comboDeal([comboMaterial])
-    //     ]),
-    //   );
-    //   when(() => materialPriceBlocMock.state).thenReturn(
-    //     MaterialPriceState.initial().copyWith(
-    //       materialPrice: {
-    //         fakeMaterialNumber: Price.empty().copyWith(
-    //           comboDeal: fakeComboDealQuery,
-    //         )
-    //       },
-    //     ),
-    //   );
-    //   await tester.pumpWidget(
-    //     getScopedWidget(
-    //       MaterialListItem(
-    //         materialInfo: fakematerialInfo,
-    //         salesOrgConfigs: salesOrgBlocMock.state.configs,
-    //       ),
-    //     ),
-    //   );
-    //   final comboLabel = find.byType(ComboDealLabel);
-    //   expect(comboLabel, findsOneWidget);
-    //   await tester.tap(comboLabel);
-    //   await tester.pump();
+    testWidgets('Combo Deal label pressed when combo is in cart',
+        (tester) async {
+      final comboMaterial = PriceAggregate.empty().copyWith(
+        materialInfo: MaterialInfo.empty().copyWith(
+          materialNumber: fakeMaterialNumber,
+        ),
+        price: Price.empty().copyWith(
+          comboDeal: fakeComboDealQuery,
+        ),
+      );
+      when(() => cartBlocMock.state).thenReturn(
+        CartState.initial().copyWith(cartItems: [
+          CartItem.comboDeal([comboMaterial])
+        ]),
+      );
+      when(() => materialPriceBlocMock.state).thenReturn(
+        MaterialPriceState.initial().copyWith(
+          materialPrice: {
+            fakeMaterialNumber: Price.empty().copyWith(
+              comboDeal: fakeComboDealQuery,
+            )
+          },
+        ),
+      );
+      await tester.pumpWidget(
+        getScopedWidget(
+          MaterialListItem(
+            materialInfo: fakematerialInfo,
+            salesOrgConfigs: salesOrgBlocMock.state.configs,
+          ),
+        ),
+      );
+      final comboLabel = find.byType(ComboDealLabel);
+      expect(comboLabel, findsOneWidget);
+      await tester.tap(comboLabel);
+      await tester.pump();
 
-    //   expect(
-    //     (autoRouterMock.current.args as ComboDealMaterialDetailPageRouteArgs)
-    //         .isEdit,
-    //     true,
-    //   );
-    // });
-    //TODO: Fix this
-    // testWidgets('Combo Deal label pressed when cart empty', (tester) async {
-    //   when(() => materialPriceBlocMock.state).thenReturn(
-    //     MaterialPriceState.initial().copyWith(
-    //       materialPrice: {
-    //         fakeMaterialNumber: Price.empty().copyWith(
-    //           comboDeal: fakeComboDealQuery,
-    //         )
-    //       },
-    //     ),
-    //   );
-    //   await tester.pumpWidget(
-    //     getScopedWidget(
-    //       MaterialListItem(
-    //         materialInfo: fakematerialInfo,
-    //         salesOrgConfigs: salesOrgBlocMock.state.configs,
-    //       ),
-    //     ),
-    //   );
-    //   final comboLabel = find.byType(ComboDealLabel);
-    //   expect(comboLabel, findsOneWidget);
-    //   await tester.tap(comboLabel);
-    //   await tester.pump();
+      expect(
+        (autoRouterMock.current.args as ComboDealMaterialDetailPageRouteArgs)
+            .isEdit,
+        true,
+      );
+    });
 
-    //   expect(
-    //     (autoRouterMock.current.args as ComboDealMaterialDetailPageRouteArgs)
-    //         .isEdit,
-    //     false,
-    //   );
-    // });
+    testWidgets('Combo Deal label pressed when cart empty', (tester) async {
+      when(() => materialPriceBlocMock.state).thenReturn(
+        MaterialPriceState.initial().copyWith(
+          materialPrice: {
+            fakeMaterialNumber: Price.empty().copyWith(
+              comboDeal: fakeComboDealQuery,
+            )
+          },
+        ),
+      );
+      await tester.pumpWidget(
+        getScopedWidget(
+          MaterialListItem(
+            materialInfo: fakematerialInfo,
+            salesOrgConfigs: salesOrgBlocMock.state.configs,
+          ),
+        ),
+      );
+      final comboLabel = find.byType(ComboDealLabel);
+      expect(comboLabel, findsOneWidget);
+      await tester.tap(comboLabel);
+      await tester.pump();
 
-    // testWidgets('Add button pressed when combo is in cart', (tester) async {
-    //   final comboMaterial = PriceAggregate.empty().copyWith(
-    //     materialInfo: MaterialInfo.empty().copyWith(
-    //       materialNumber: fakeMaterialNumber,
-    //     ),
-    //     price: Price.empty().copyWith(
-    //       comboDeal: fakeComboDealQuery,
-    //     ),
-    //   );
-    //   when(() => cartBlocMock.state).thenReturn(
-    //     CartState.initial().copyWith(cartItems: [
-    //       CartItem.comboDeal([comboMaterial])
-    //     ]),
-    //   );
-    //   when(() => materialPriceBlocMock.state).thenReturn(
-    //     MaterialPriceState.initial().copyWith(
-    //       materialPrice: {
-    //         fakeMaterialNumber: Price.empty().copyWith(
-    //           comboDeal: fakeComboDealQuery,
-    //         )
-    //       },
-    //     ),
-    //   );
-    //   await tester.pumpWidget(
-    //     getScopedWidget(
-    //       MaterialListItem(
-    //         materialInfo: fakematerialInfo,
-    //         salesOrgConfigs: salesOrgBlocMock.state.configs,
-    //       ),
-    //     ),
-    //   );
-    //   final addButton = find.text('Add');
-    //   expect(addButton, findsOneWidget);
-    //   await tester.tap(addButton);
-    //   await tester.pump();
+      expect(
+        (autoRouterMock.current.args as ComboDealMaterialDetailPageRouteArgs)
+            .isEdit,
+        false,
+      );
+    });
 
-    //   expect(
-    //     (autoRouterMock.current.args as ComboDealMaterialDetailPageRouteArgs)
-    //         .isEdit,
-    //     true,
-    //   );
-    // });
+    testWidgets('Add button pressed when combo is in cart', (tester) async {
+      final comboMaterial = PriceAggregate.empty().copyWith(
+        materialInfo: MaterialInfo.empty().copyWith(
+          materialNumber: fakeMaterialNumber,
+        ),
+        price: Price.empty().copyWith(
+          comboDeal: fakeComboDealQuery,
+        ),
+      );
+      when(() => cartBlocMock.state).thenReturn(
+        CartState.initial().copyWith(cartItems: [
+          CartItem.comboDeal([comboMaterial])
+        ]),
+      );
+      when(() => materialPriceBlocMock.state).thenReturn(
+        MaterialPriceState.initial().copyWith(
+          materialPrice: {
+            fakeMaterialNumber: Price.empty().copyWith(
+              comboDeal: fakeComboDealQuery,
+            )
+          },
+        ),
+      );
+      await tester.pumpWidget(
+        getScopedWidget(
+          MaterialListItem(
+            materialInfo: fakematerialInfo,
+            salesOrgConfigs: salesOrgBlocMock.state.configs,
+          ),
+        ),
+      );
+      final addButton = find.text('Add');
+      expect(addButton, findsOneWidget);
+      await tester.tap(addButton);
+      await tester.pump();
+
+      expect(
+        (autoRouterMock.current.args as ComboDealMaterialDetailPageRouteArgs)
+            .isEdit,
+        true,
+      );
+    });
 
     testWidgets('Material default description', (tester) async {
       await tester.pumpWidget(

@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
@@ -94,6 +95,9 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               initial: (_) => _showLoadingDialog(context),
               loading: (_) => _showLoadingDialog(context),
               authenticated: (authState) {
+                context.read<AnnouncementBloc>().add(
+                      const AnnouncementEvent.getAnnouncement(),
+                    );
                 context.read<UserBloc>().add(const UserEvent.fetch());
                 context.router.replaceAll(
                   [
@@ -104,6 +108,9 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               },
               unauthenticated: (unauthState) {
                 locator<MixpanelService>().resetSuperProps();
+                context.read<AnnouncementBloc>().add(
+                      const AnnouncementEvent.getAnnouncement(),
+                    );
                 context.read<UserBloc>().add(const UserEvent.initialized());
                 context
                     .read<EligibilityBloc>()
@@ -341,8 +348,9 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               context.read<UserBloc>().state.isNotEmpty &&
               context.read<UserBloc>().state.userCanCreateOrder &&
               previous.selectedOrderType != current.selectedOrderType &&
-              current.selectedOrderType != OrderDocumentType.empty() && 
-              context.read<SalesOrgBloc>().state.salesOrganisation != SalesOrganisation.empty(),
+              current.selectedOrderType != OrderDocumentType.empty() &&
+              context.read<SalesOrgBloc>().state.salesOrganisation !=
+                  SalesOrganisation.empty(),
           listener: (context, state) {
             context.read<MaterialFilterBloc>().add(
                   MaterialFilterEvent.fetch(

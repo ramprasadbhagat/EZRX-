@@ -13,11 +13,9 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/announcement/entities/announcement.dart';
 import 'package:ezrxmobile/domain/auth/entities/login.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/infrastructure/announcement/datasource/announcement_local.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/presentation/auth/login_page.dart';
@@ -71,7 +69,6 @@ void main() {
   late LoginFormBloc loginBlocMock;
   late AuthBloc authBlocMock;
   late AnnouncementBloc announcementBlocMock;
-  late Announcement announcementMock;
   final UserBloc userBlocMock = UserBlocMock();
   final SalesOrgBloc salesOrgBlocMock = SalesOrgBlocMock();
   final CustomerCodeBloc customerCodeBlocMock = CustomerCodeBlocMock();
@@ -89,7 +86,6 @@ void main() {
         .registerLazySingleton(() => CountlyService(config: locator<Config>()));
     locator.registerLazySingleton(() => MixpanelService());
     locator<MixpanelService>().init(mixpanel: MixpanelMock());
-    announcementMock = await AnnouncementLocalDataSource().getAnnouncements();
   });
 
   group('Login Screen', () {
@@ -116,10 +112,10 @@ void main() {
           .thenReturn(EligibilityState.initial());
       when(() => orderDocumentTypeBlocMock.state)
           .thenReturn(OrderDocumentTypeState.initial());
+      when(() => authBlocMock.state).thenReturn(const AuthState.initial());
     });
-    testWidgets("Test don't have credential", (tester) async {
-      await tester.pumpWidget(
-        MaterialFrameWrapper(
+
+    Widget loginTestPage() => MaterialFrameWrapper(
           child: MultiBlocProvider(
             providers: [
               BlocProvider<LoginFormBloc>(
@@ -140,11 +136,16 @@ void main() {
               BlocProvider<OrderDocumentTypeBloc>(
                 create: (context) => orderDocumentTypeBlocMock,
               ),
+              BlocProvider<AuthBloc>(
+                create: (context) => authBlocMock,
+              ),
             ],
             child: const LoginPage(),
           ),
-        ),
-      );
+        );
+
+    testWidgets("Test don't have credential", (tester) async {
+      await tester.pumpWidget(loginTestPage());
       // Create the Finders.
       final userNameTextField = find.byKey(const Key('loginUsernameField'));
       final passwordTextField = find.byKey(const Key('loginPasswordField'));
@@ -172,33 +173,7 @@ void main() {
 
       whenListen(loginBlocMock, Stream.fromIterable(expectedStates));
 
-      await tester.pumpWidget(
-        MaterialFrameWrapper(
-          child: MultiBlocProvider(
-            providers: [
-              BlocProvider<LoginFormBloc>(
-                create: (context) => loginBlocMock,
-              ),
-              BlocProvider<AnnouncementBloc>(
-                create: (context) => announcementBlocMock,
-              ),
-              BlocProvider<PaymentCustomerInformationBloc>(
-                create: (context) => paymentCustomerInformationBlocMock,
-              ),
-              BlocProvider<CartBloc>(
-                create: (context) => cartBlocMock,
-              ),
-              BlocProvider<UserBloc>(
-                create: (context) => userBlocMock,
-              ),
-              BlocProvider<OrderDocumentTypeBloc>(
-                create: (context) => orderDocumentTypeBlocMock,
-              ),
-            ],
-            child: const LoginPage(),
-          ),
-        ),
-      );
+      await tester.pumpWidget(loginTestPage());
 
       final errorMessage = find.byKey(const Key('snackBarMessage'));
 
@@ -222,39 +197,7 @@ void main() {
 
       whenListen(loginBlocMock, Stream.fromIterable(expectedStates));
 
-      await tester.pumpWidget(
-        MaterialFrameWrapper(
-          child: MultiBlocProvider(
-            providers: [
-              BlocProvider<LoginFormBloc>(
-                create: (context) => loginBlocMock,
-              ),
-              BlocProvider<AuthBloc>(
-                create: (context) => authBlocMock,
-              ),
-              BlocProvider<AnnouncementBloc>(
-                create: (context) => announcementBlocMock,
-              ),
-              BlocProvider<PaymentCustomerInformationBloc>(
-                create: (context) => paymentCustomerInformationBlocMock,
-              ),
-              BlocProvider<CartBloc>(
-                create: (context) => cartBlocMock,
-              ),
-              BlocProvider<UserBloc>(
-                create: (context) => userBlocMock,
-              ),
-              BlocProvider<EligibilityBloc>(
-                create: (context) => eligibilityBlocMock,
-              ),
-              BlocProvider<OrderDocumentTypeBloc>(
-                create: (context) => orderDocumentTypeBlocMock,
-              ),
-            ],
-            child: const LoginPage(),
-          ),
-        ),
-      );
+      await tester.pumpWidget(loginTestPage());
 
       await tester.pump();
 
@@ -315,82 +258,11 @@ void main() {
       expect(rememberPasswordCheckBox, findsNothing);
     });
 
-    testWidgets("Test don't have credential and have announcement",
-        (tester) async {
-      when(() => announcementBlocMock.state).thenReturn(
-        AnnouncementState.initial().copyWith(
-          announcement: announcementMock,
-          isLoading: false,
-        ),
-      );
-
-      await tester.pumpWidget(
-        MaterialFrameWrapper(
-          child: MultiBlocProvider(
-            providers: [
-              BlocProvider<LoginFormBloc>(
-                create: (context) => loginBlocMock,
-              ),
-              BlocProvider<AnnouncementBloc>(
-                create: (context) => announcementBlocMock,
-              ),
-              BlocProvider<UserBloc>(
-                create: (context) => userBlocMock,
-              ),
-            ],
-            child: const LoginPage(),
-          ),
-        ),
-      );
-
-      final userNameTextField = find.byKey(const Key('loginUsernameField'));
-      final passwordTextField = find.byKey(const Key('loginPasswordField'));
-      final loginSubmitButton = find.byKey(const Key('loginSubmitButton'));
-      // final ssoLoginButton = find.byKey(const Key('ssoLoginButton'));
-      final rememberPasswordCheckBox =
-          find.byKey(const Key('loginRememberPasswordCheckbox'));
-
-      expect(userNameTextField, findsOneWidget);
-      expect(passwordTextField, findsOneWidget);
-      expect(loginSubmitButton, findsOneWidget);
-      // expect(ssoLoginButton, findsOneWidget);
-      expect(rememberPasswordCheckBox, findsOneWidget);
-
-      final loadingIndicator =
-          find.byKey(const Key('announcementLoadingIndicator'));
-      final reloadIcon = find.byKey(const Key('announcementReloadIcon'));
-      final announcementDescription =
-          find.byKey(const Key('announcementDescription'));
-      final closeIcon = find.byKey(const Key('announcementCloseIcon'));
-
-      expect(loadingIndicator, findsNothing);
-      expect(reloadIcon, findsOneWidget);
-      expect(announcementDescription, findsOneWidget);
-      expect(closeIcon, findsOneWidget);
-    });
-
     testWidgets(
       'test onWillPop',
       (tester) async {
         var willPopCalled = false;
-        await tester.pumpWidget(
-          MaterialFrameWrapper(
-            child: MultiBlocProvider(
-              providers: [
-                BlocProvider<LoginFormBloc>(
-                  create: (context) => loginBlocMock,
-                ),
-                BlocProvider<AnnouncementBloc>(
-                  create: (context) => announcementBlocMock,
-                ),
-                BlocProvider<UserBloc>(
-                  create: (context) => userBlocMock,
-                ),
-              ],
-              child: const LoginPage(),
-            ),
-          ),
-        );
+        await tester.pumpWidget(loginTestPage());
 
         await tester.pump();
         final dynamic widgetsAppState = tester.state(find.byType(WidgetsApp));
@@ -403,33 +275,7 @@ void main() {
     testWidgets(
       'SSOLogin Login',
       (tester) async {
-        await tester.pumpWidget(
-          MaterialFrameWrapper(
-            child: MultiBlocProvider(
-              providers: [
-                BlocProvider<LoginFormBloc>(
-                  create: (context) => loginBlocMock,
-                ),
-                BlocProvider<AnnouncementBloc>(
-                  create: (context) => announcementBlocMock,
-                ),
-                BlocProvider<PaymentCustomerInformationBloc>(
-                  create: (context) => paymentCustomerInformationBlocMock,
-                ),
-                BlocProvider<CartBloc>(
-                  create: (context) => CartBlocMock(),
-                ),
-                BlocProvider<UserBloc>(
-                  create: (context) => userBlocMock,
-                ),
-                BlocProvider<AuthBloc>(
-                  create: (context) => authBlocMock,
-                ),
-              ],
-              child: const LoginPage(),
-            ),
-          ),
-        );
+        await tester.pumpWidget(loginTestPage());
         await tester.pump();
         // final ssoLoginButton = find.byKey(const Key('ssoLoginButton'));
         // expect(ssoLoginButton, findsOneWidget);
@@ -449,33 +295,7 @@ void main() {
         ];
 
         whenListen(loginBlocMock, Stream.fromIterable(expectedStates));
-        await tester.pumpWidget(
-          MaterialFrameWrapper(
-            child: MultiBlocProvider(
-              providers: [
-                BlocProvider<LoginFormBloc>(
-                  create: (context) => loginBlocMock,
-                ),
-                BlocProvider<AnnouncementBloc>(
-                  create: (context) => announcementBlocMock,
-                ),
-                BlocProvider<PaymentCustomerInformationBloc>(
-                  create: (context) => paymentCustomerInformationBlocMock,
-                ),
-                BlocProvider<CartBloc>(
-                  create: (context) => CartBlocMock(),
-                ),
-                BlocProvider<UserBloc>(
-                  create: (context) => userBlocMock,
-                ),
-                BlocProvider<AuthBloc>(
-                  create: (context) => authBlocMock,
-                ),
-              ],
-              child: const LoginPage(),
-            ),
-          ),
-        );
+        await tester.pumpWidget(loginTestPage());
         await tester.pump();
         final userName = find.byKey(const Key('loginUsernameField'));
         expect(userName, findsOneWidget);
@@ -503,30 +323,7 @@ void main() {
       );
       whenListen(loginBlocMock, Stream.fromIterable(expectedStates));
 
-      await tester.pumpWidget(
-        MaterialFrameWrapper(
-          child: MultiBlocProvider(
-            providers: [
-              BlocProvider<LoginFormBloc>(
-                create: (context) => loginBlocMock,
-              ),
-              BlocProvider<AnnouncementBloc>(
-                create: (context) => announcementBlocMock,
-              ),
-              BlocProvider<PaymentCustomerInformationBloc>(
-                create: (context) => paymentCustomerInformationBlocMock,
-              ),
-              BlocProvider<CartBloc>(
-                create: (context) => cartBlocMock,
-              ),
-              BlocProvider<UserBloc>(
-                create: (context) => userBlocMock,
-              ),
-            ],
-            child: const LoginPage(),
-          ),
-        ),
-      );
+      await tester.pumpWidget(loginTestPage());
       await tester.enterText(
           find.byKey(const Key('loginUsernameField')), '1\n2');
       await tester.pump(const Duration(
@@ -552,30 +349,7 @@ void main() {
       );
       whenListen(loginBlocMock, Stream.fromIterable(expectedStates));
 
-      await tester.pumpWidget(
-        MaterialFrameWrapper(
-          child: MultiBlocProvider(
-            providers: [
-              BlocProvider<LoginFormBloc>(
-                create: (context) => loginBlocMock,
-              ),
-              BlocProvider<AnnouncementBloc>(
-                create: (context) => announcementBlocMock,
-              ),
-              BlocProvider<PaymentCustomerInformationBloc>(
-                create: (context) => paymentCustomerInformationBlocMock,
-              ),
-              BlocProvider<CartBloc>(
-                create: (context) => cartBlocMock,
-              ),
-              BlocProvider<UserBloc>(
-                create: (context) => userBlocMock,
-              ),
-            ],
-            child: const LoginPage(),
-          ),
-        ),
-      );
+      await tester.pumpWidget(loginTestPage());
       await tester.enterText(
           find.byKey(const Key('loginPasswordField')), 'Staysafe01');
       await tester.pump(const Duration(
@@ -601,30 +375,7 @@ void main() {
       );
       whenListen(loginBlocMock, Stream.fromIterable(expectedStates));
 
-      await tester.pumpWidget(
-        MaterialFrameWrapper(
-          child: MultiBlocProvider(
-            providers: [
-              BlocProvider<LoginFormBloc>(
-                create: (context) => loginBlocMock,
-              ),
-              BlocProvider<AnnouncementBloc>(
-                create: (context) => announcementBlocMock,
-              ),
-              BlocProvider<PaymentCustomerInformationBloc>(
-                create: (context) => paymentCustomerInformationBlocMock,
-              ),
-              BlocProvider<CartBloc>(
-                create: (context) => cartBlocMock,
-              ),
-              BlocProvider<UserBloc>(
-                create: (context) => userBlocMock,
-              ),
-            ],
-            child: const LoginPage(),
-          ),
-        ),
-      );
+      await tester.pumpWidget(loginTestPage());
       await tester.enterText(
           find.byKey(const Key('loginPasswordField')), 'St@ysafe01');
       await tester.pump(const Duration(
@@ -644,33 +395,7 @@ void main() {
         ];
 
         whenListen(loginBlocMock, Stream.fromIterable(expectedStates));
-        await tester.pumpWidget(
-          MaterialFrameWrapper(
-            child: MultiBlocProvider(
-              providers: [
-                BlocProvider<LoginFormBloc>(
-                  create: (context) => loginBlocMock,
-                ),
-                BlocProvider<AnnouncementBloc>(
-                  create: (context) => announcementBlocMock,
-                ),
-                BlocProvider<PaymentCustomerInformationBloc>(
-                  create: (context) => paymentCustomerInformationBlocMock,
-                ),
-                BlocProvider<CartBloc>(
-                  create: (context) => CartBlocMock(),
-                ),
-                BlocProvider<UserBloc>(
-                  create: (context) => userBlocMock,
-                ),
-                BlocProvider<AuthBloc>(
-                  create: (context) => authBlocMock,
-                ),
-              ],
-              child: const LoginPage(),
-            ),
-          ),
-        );
+        await tester.pumpWidget(loginTestPage());
         await tester.pump();
         final password = find.byKey(const Key('loginPasswordField'));
         expect(password, findsOneWidget);
@@ -704,33 +429,7 @@ void main() {
         ];
 
         whenListen(loginBlocMock, Stream.fromIterable(expectedStates));
-        await tester.pumpWidget(
-          MaterialFrameWrapper(
-            child: MultiBlocProvider(
-              providers: [
-                BlocProvider<LoginFormBloc>(
-                  create: (context) => loginBlocMock,
-                ),
-                BlocProvider<AnnouncementBloc>(
-                  create: (context) => announcementBlocMock,
-                ),
-                BlocProvider<PaymentCustomerInformationBloc>(
-                  create: (context) => paymentCustomerInformationBlocMock,
-                ),
-                BlocProvider<CartBloc>(
-                  create: (context) => CartBlocMock(),
-                ),
-                BlocProvider<UserBloc>(
-                  create: (context) => userBlocMock,
-                ),
-                BlocProvider<AuthBloc>(
-                  create: (context) => authBlocMock,
-                ),
-              ],
-              child: const LoginPage(),
-            ),
-          ),
-        );
+        await tester.pumpWidget(loginTestPage());
         await tester.pump();
         final password = find.byKey(const Key('loginPasswordField'));
         expect(password, findsOneWidget);
@@ -766,33 +465,7 @@ void main() {
         ];
 
         whenListen(loginBlocMock, Stream.fromIterable(expectedStates));
-        await tester.pumpWidget(
-          MaterialFrameWrapper(
-            child: MultiBlocProvider(
-              providers: [
-                BlocProvider<LoginFormBloc>(
-                  create: (context) => loginBlocMock,
-                ),
-                BlocProvider<AnnouncementBloc>(
-                  create: (context) => announcementBlocMock,
-                ),
-                BlocProvider<PaymentCustomerInformationBloc>(
-                  create: (context) => paymentCustomerInformationBlocMock,
-                ),
-                BlocProvider<CartBloc>(
-                  create: (context) => CartBlocMock(),
-                ),
-                BlocProvider<UserBloc>(
-                  create: (context) => userBlocMock,
-                ),
-                BlocProvider<AuthBloc>(
-                  create: (context) => authBlocMock,
-                ),
-              ],
-              child: const LoginPage(),
-            ),
-          ),
-        );
+        await tester.pumpWidget(loginTestPage());
         await tester.pump();
         final password = find.byKey(const Key('loginPasswordField'));
         expect(password, findsOneWidget);

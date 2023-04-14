@@ -1,354 +1,301 @@
+import 'dart:convert';
+
 import 'package:bloc_test/bloc_test.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
+import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/announcement/entities/announcement.dart';
 import 'package:ezrxmobile/infrastructure/announcement/datasource/announcement_local.dart';
+import 'package:ezrxmobile/infrastructure/announcement/dtos/announcement_dto.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
+import 'package:intl/intl.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../utils/material_frame_wrapper.dart';
-import '../../utils/tester_utils.dart';
 
 class AnnouncementBlocMock
     extends MockBloc<AnnouncementEvent, AnnouncementState>
     implements AnnouncementBloc {}
 
+class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
+    implements SalesOrgBloc {}
+
+class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
+
 void main() {
   late AnnouncementBloc announcementBlocMock;
+  late SalesOrgBloc salesOrgBlocMock;
+  late AuthBloc authBlocMock;
   late Announcement announcementMock;
+  late Announcement announcementCustomMock;
 
   setUpAll(() async {
+    TestWidgetsFlutterBinding.ensureInitialized();
     GetIt.instance.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
     announcementMock = await AnnouncementLocalDataSource().getAnnouncements();
+    final rawData = json.decode(
+      await rootBundle
+          .loadString('assets/json/getAnnouncementsCustomResponse.json'),
+    );
+
+    announcementCustomMock =
+        AnnouncementDto.fromJson(rawData['data']['getAnnouncements'][0])
+            .toDomain;
+
+    announcementMock = announcementMock.copyWith(
+      endTime: DateFormat.yMd().add_jm().format(
+            DateTime.now().add(const Duration(days: 10)),
+          ),
+    );
+
+    announcementCustomMock = announcementCustomMock.copyWith(
+      endTime: DateFormat.yMd().add_jm().format(
+            DateTime.now().add(const Duration(days: 10)),
+          ),
+    );
   });
 
-  group('Announcement Widget', () {
-    setUp(() {
-      announcementBlocMock = AnnouncementBlocMock();
-      when(() => announcementBlocMock.state)
-          .thenReturn(AnnouncementState.initial());
-    });
-    testWidgets("Test that haven't loaded announcement", (tester) async {
-      await tester.pumpWidget(
-        MaterialFrameWrapper(
-          child: BlocProvider<AnnouncementBloc>(
-            create: (context) => announcementBlocMock,
-            child: const AnnouncementWidget(),
-          ),
-        ),
-      );
-
-      final loadingIndicator =
-          find.byKey(const Key('announcementLoadingIndicator'));
-      final reloadIcon = find.byKey(const Key('announcementReloadIcon'));
-      final announcementDescription =
-          find.byKey(const Key('announcementDescription'));
-      final closeIcon = find.byKey(const Key('announcementCloseIcon'));
-
-      expect(loadingIndicator, findsNothing);
-      expect(reloadIcon, findsNothing);
-      expect(announcementDescription, findsNothing);
-      expect(closeIcon, findsNothing);
-    });
-
-    testWidgets('Test that loaded announcement', (tester) async {
-      when(() => announcementBlocMock.state).thenReturn(
-        AnnouncementState.initial().copyWith(
-          announcement: announcementMock,
-        ),
-      );
-      await tester.pumpWidget(
-        MaterialFrameWrapper(
-          child: BlocProvider<AnnouncementBloc>(
-            create: (context) => announcementBlocMock,
-            child: const AnnouncementWidget(),
-          ),
-        ),
-      );
-
-      final loadingIndicator =
-          find.byKey(const Key('announcementLoadingIndicator'));
-      final reloadIcon = find.byKey(const Key('announcementReloadIcon'));
-      final announcementDescription =
-          find.byKey(const Key('announcementDescription'));
-      final closeIcon = find.byKey(const Key('announcementCloseIcon'));
-
-      expect(loadingIndicator, findsNothing);
-      expect(reloadIcon, findsOneWidget);
-      expect(announcementDescription, findsOneWidget);
-      expect(closeIcon, findsOneWidget);
-    });
-
-    testWidgets('Test that announcement loaded successfully and got translated',
-        (tester) async {
-      const evaluatedText = <String>[
-        'eZRx will be undergoing enhancements from ',
-        'SGT on',
-        'We apologize for the inconvenience and appreciate your patience.'
-      ];
-
-      final needTranslatedAnnouncementMock =
-          announcementMock.copyWith(description: evaluatedText.join(' '));
-
-      when(() => announcementBlocMock.state).thenReturn(
-        AnnouncementState.initial().copyWith(
-          announcement: needTranslatedAnnouncementMock,
-        ),
-      );
-      await TesterUtils.setUpLocalizationWrapper(
-        home: BlocProvider<AnnouncementBloc>(
-          create: (context) => announcementBlocMock,
+  Widget announcement() => MaterialFrameWrapper(
+        child: MultiBlocProvider(
+          providers: [
+            BlocProvider<AnnouncementBloc>(
+              create: (context) => announcementBlocMock,
+            ),
+            BlocProvider<AuthBloc>(
+              create: (context) => authBlocMock,
+            ),
+            BlocProvider<SalesOrgBloc>(
+              create: (context) => salesOrgBlocMock,
+            ),
+          ],
           child: const AnnouncementWidget(),
         ),
-        tester: tester,
-        locale: const Locale('vi', 'VN'),
       );
+  setUp(() {
+    announcementBlocMock = AnnouncementBlocMock();
+    authBlocMock = AuthBlocMock();
+    salesOrgBlocMock = SalesOrgBlocMock();
+    when(() => announcementBlocMock.state)
+        .thenReturn(AnnouncementState.initial());
+    when(() => authBlocMock.state).thenReturn(const AuthState.initial());
+    when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
+  });
 
-      final loadingIndicator =
-          find.byKey(const Key('announcementLoadingIndicator'));
-      final reloadIcon = find.byKey(const Key('announcementReloadIcon'));
-      final announcementDescription =
-          find.byKey(const Key('announcementDescription'));
-      final closeIcon = find.byKey(const Key('announcementCloseIcon'));
-
-      expect(loadingIndicator, findsNothing);
-      expect(reloadIcon, findsOneWidget);
-      expect(announcementDescription, findsOneWidget);
-      expect(closeIcon, findsOneWidget);
-
-      final descriptionTextWidget =
-          announcementDescription.evaluate().single.widget as Text;
-
-      final descriptionText = descriptionTextWidget.data!;
-
-      if (needTranslatedAnnouncementMock.description.isNotEmpty) {
-        final isValidDescription = descriptionText.isNotEmpty;
-        expect(isValidDescription, true);
-      }
-
-      for (final text in evaluatedText) {
-        if (needTranslatedAnnouncementMock.descriptionParsed.contains(text)) {
-          final isValidDescription = descriptionText.contains(text.tr());
-          expect(isValidDescription, true);
-        }
-      }
-    });
-
-    testWidgets('Test that loaded announcement error', (tester) async {
-      when(() => announcementBlocMock.state)
-          .thenReturn(AnnouncementState.initial());
-
-      await tester.pumpWidget(
-        MaterialFrameWrapper(
-          child: BlocProvider<AnnouncementBloc>(
-            create: (context) => announcementBlocMock,
-            child: const AnnouncementWidget(),
-          ),
-        ),
-      );
-
-      final loadingIndicator =
-          find.byKey(const Key('announcementLoadingIndicator'));
-      final reloadIcon = find.byKey(const Key('announcementReloadIcon'));
-      final announcementDescription =
-          find.byKey(const Key('announcementDescription'));
-      final closeIcon = find.byKey(const Key('announcementCloseIcon'));
-
-      expect(loadingIndicator, findsNothing);
-      expect(reloadIcon, findsNothing);
-      expect(announcementDescription, findsNothing);
-      expect(closeIcon, findsNothing);
-    });
-
-    testWidgets('Test that loaded announcement then click reload',
+  group('Normal announcement with Post login type', () {
+    testWidgets('doen\'t show when AuthState is unauthenticated',
         (tester) async {
-      when(() => announcementBlocMock.state).thenReturn(
-        AnnouncementState.initial().copyWith(
-          announcement: announcementMock,
-        ),
-      );
+      when(() => authBlocMock.state).thenReturn(const AuthState.initial());
+      await tester.pumpWidget(announcement());
 
-      await tester.pumpWidget(
-        MaterialFrameWrapper(
-          child: BlocProvider<AnnouncementBloc>(
-            create: (context) => announcementBlocMock,
-            child: const AnnouncementWidget(),
-          ),
-        ),
-      );
+      expect(find.byType(SizedBox), findsOneWidget);
+    });
 
-      final loadingIndicator =
-          find.byKey(const Key('announcementLoadingIndicator'));
+    testWidgets('doen\'t show when endtime is passed', (tester) async {
+      when(() => authBlocMock.state)
+          .thenReturn(const AuthState.authenticated());
+      when(() => announcementBlocMock.state)
+          .thenReturn(AnnouncementState.initial().copyWith(
+        isClosed: false,
+        announcement: announcementMock.copyWith(
+          endTime: DateFormat.yMd()
+              .add_jm()
+              .format(DateTime.now().subtract(const Duration(days: 10))),
+        ),
+      ));
+      await tester.pumpWidget(announcement());
+
+      expect(
+        find.byKey(const Key('announcementDescription')),
+        findsNothing,
+      );
+    });
+
+    testWidgets('doen\'t show when active is false', (tester) async {
+      when(() => authBlocMock.state)
+          .thenReturn(const AuthState.authenticated());
+      when(() => announcementBlocMock.state)
+          .thenReturn(AnnouncementState.initial().copyWith(
+        isClosed: false,
+        announcement: announcementMock.copyWith(active: false),
+      ));
+      await tester.pumpWidget(announcement());
+
+      expect(
+        find.byKey(const Key('announcementDescription')),
+        findsNothing,
+      );
+    });
+
+    testWidgets('show when AuthState is authenticated', (tester) async {
+      when(() => authBlocMock.state)
+          .thenReturn(const AuthState.authenticated());
+      when(() => announcementBlocMock.state)
+          .thenReturn(AnnouncementState.initial().copyWith(
+        isClosed: false,
+        announcement: announcementMock,
+      ));
+      await tester.pumpWidget(announcement());
       final reloadIcon = find.byKey(const Key('announcementReloadIcon'));
-      final announcementDescription =
-          find.byKey(const Key('announcementDescription'));
       final closeIcon = find.byKey(const Key('announcementCloseIcon'));
-
-      expect(loadingIndicator, findsNothing);
       expect(reloadIcon, findsOneWidget);
-      expect(announcementDescription, findsOneWidget);
       expect(closeIcon, findsOneWidget);
+      expect(
+        find.byKey(const Key('announcementDescription')),
+        findsOneWidget,
+      );
 
+      expect(
+        find.textContaining('eZRx will be unavailable from'),
+        findsOneWidget,
+      );
+      await tester.tap(closeIcon);
       await tester.tap(reloadIcon);
 
-      when(() => announcementBlocMock.state).thenReturn(
-        AnnouncementState.initial().copyWith(
-          isLoading: true,
-          announcement: announcementMock,
-        ),
-      );
-
-      await tester.pumpWidget(
-        MaterialFrameWrapper(
-          key: UniqueKey(),
-          child: BlocProvider<AnnouncementBloc>(
-            create: (context) => announcementBlocMock,
-            child: const AnnouncementWidget(),
-          ),
-        ),
-      );
-
-      expect(loadingIndicator, findsOneWidget);
-      expect(reloadIcon, findsNothing);
-      expect(announcementDescription, findsOneWidget);
-      expect(closeIcon, findsOneWidget);
+      verify(
+        () =>
+            announcementBlocMock.add(const AnnouncementEvent.getAnnouncement()),
+      ).called(1);
+      verify(
+        () => announcementBlocMock.add(const AnnouncementEvent.close()),
+      ).called(1);
     });
 
-    testWidgets('Test that when user click close icon', (tester) async {
-      when(() => announcementBlocMock.state).thenReturn(
-        AnnouncementState.initial().copyWith(
-          announcement: announcementMock,
-        ),
-      );
+    testWidgets('with no close icon', (tester) async {
+      when(() => authBlocMock.state)
+          .thenReturn(const AuthState.authenticated());
+      when(() => announcementBlocMock.state)
+          .thenReturn(AnnouncementState.initial().copyWith(
+        isClosed: false,
+        announcement: announcementMock.copyWith(isCrossButton: false),
+      ));
+      await tester.pumpWidget(announcement());
 
-      await tester.pumpWidget(
-        MaterialFrameWrapper(
-          child: BlocProvider<AnnouncementBloc>(
-            create: (context) => announcementBlocMock,
-            child: const AnnouncementWidget(),
-          ),
-        ),
-      );
-
-      final loadingIndicator =
-          find.byKey(const Key('announcementLoadingIndicator'));
-      final reloadIcon = find.byKey(const Key('announcementReloadIcon'));
-      final announcementDescription =
-          find.byKey(const Key('announcementDescription'));
       final closeIcon = find.byKey(const Key('announcementCloseIcon'));
 
-      expect(loadingIndicator, findsNothing);
-      expect(reloadIcon, findsOneWidget);
-      expect(announcementDescription, findsOneWidget);
-      expect(closeIcon, findsOneWidget);
-
-      await tester.tap(closeIcon);
-
-      when(() => announcementBlocMock.state).thenReturn(
-        AnnouncementState.initial().copyWith(
-          isClosed: true,
-          announcement: Announcement.empty(),
-        ),
-      );
-
-      await tester.pumpWidget(
-        MaterialFrameWrapper(
-          key: UniqueKey(),
-          child: BlocProvider<AnnouncementBloc>(
-            create: (context) => announcementBlocMock,
-            child: const AnnouncementWidget(),
-          ),
-        ),
-      );
-
-      expect(loadingIndicator, findsNothing);
-      expect(reloadIcon, findsNothing);
-      expect(announcementDescription, findsNothing);
       expect(closeIcon, findsNothing);
     });
 
-    testWidgets('Test that loaded announcement but empty description',
-        (tester) async {
-      when(() => announcementBlocMock.state).thenReturn(
-        AnnouncementState.initial().copyWith(
-          isLoading: false,
-          announcement: Announcement.empty(),
-        ),
-      );
+    testWidgets('with loading icon', (tester) async {
+      when(() => authBlocMock.state)
+          .thenReturn(const AuthState.authenticated());
+      when(() => announcementBlocMock.state)
+          .thenReturn(AnnouncementState.initial().copyWith(
+        isClosed: false,
+        isLoading: true,
+        announcement: announcementMock,
+      ));
+      await tester.pumpWidget(announcement());
 
-      await tester.pumpWidget(
-        MaterialFrameWrapper(
-          child: Scaffold(
-            body: BlocProvider<AnnouncementBloc>(
-              create: (context) => announcementBlocMock,
-              child: const AnnouncementWidget(),
-            ),
-          ),
-        ),
-      );
+      final loadingIcon = find.byKey(const Key('announcementLoadingIndicator'));
 
-      final loadingIndicator =
-          find.byKey(const Key('announcementLoadingIndicator'));
-      final reloadIcon = find.byKey(const Key('announcementReloadIcon'));
-      final announcementDescription =
-          find.byKey(const Key('announcementDescription'));
-      final closeIcon = find.byKey(const Key('announcementCloseIcon'));
-
-      expect(loadingIndicator, findsNothing);
-      expect(reloadIcon, findsNothing);
-      expect(announcementDescription, findsNothing);
-      expect(closeIcon, findsNothing);
+      expect(loadingIcon, findsOneWidget);
     });
 
-    testWidgets(
-        'Test that loaded announcement and havent change UI while announcement not change',
-        (tester) async {
-      when(() => announcementBlocMock.state).thenReturn(
-        AnnouncementState.initial().copyWith(
-          isLoading: true,
-          announcement: announcementMock,
-        ),
-      );
-      final expectedStates = [
-        AnnouncementState.initial().copyWith(
-          announcement: announcementMock,
-          isLoading: true,
-        ),
-        AnnouncementState.initial().copyWith(
-          announcement: announcementMock,
-          isLoading: true,
-        ),
-      ];
+    // testWidgets('call show event when AuthState shift to authenticated',
+    //     (tester) async {
+    //   whenListen(
+    //       authBlocMock,
+    //       Stream.fromIterable(
+    //         [
+    //           const AuthState.loading(),
+    //           const AuthState.authenticated(),
+    //         ],
+    //       ));
+    //   when(() => announcementBlocMock.state)
+    //       .thenReturn(AnnouncementState.initial());
+    //   await tester.pumpWidget(announcement());
 
-      whenListen(announcementBlocMock, Stream.fromIterable(expectedStates));
+    //   verify(() => announcementBlocMock
+    //       .add(const AnnouncementEvent.getAnnouncement())).called(1);
+    // });
 
-      await tester.pumpWidget(
-        MaterialFrameWrapper(
-          child: Scaffold(
-            body: BlocProvider<AnnouncementBloc>(
-              create: (context) => announcementBlocMock,
-              child: const AnnouncementWidget(),
-            ),
+    //   testWidgets('call show event when AuthState shift to unanthenticated',
+    //       (tester) async {
+    //     whenListen(
+    //         authBlocMock,
+    //         Stream.fromIterable(
+    //           [
+    //             const AuthState.loading(),
+    //             const AuthState.unauthenticated(),
+    //           ],
+    //         ));
+    //     when(() => announcementBlocMock.state)
+    //         .thenReturn(AnnouncementState.initial());
+    //     await tester.pumpWidget(announcement());
+
+    //     verify(() => announcementBlocMock
+    //         .add(const AnnouncementEvent.getAnnouncement())).called(1);
+    //   });
+    // });
+    group('Custom announcement', () {
+      testWidgets(
+          'show with default EN language when AuthState is authenticated',
+          (tester) async {
+        when(() => authBlocMock.state)
+            .thenReturn(const AuthState.authenticated());
+        when(() => announcementBlocMock.state)
+            .thenReturn(AnnouncementState.initial().copyWith(
+          isClosed: false,
+          announcement: announcementCustomMock,
+        ));
+        await tester.pumpWidget(announcement());
+        final reloadIcon = find.byKey(const Key('announcementReloadIcon'));
+        final closeIcon = find.byKey(const Key('announcementCloseIcon'));
+        expect(reloadIcon, findsOneWidget);
+        expect(closeIcon, findsOneWidget);
+        expect(
+          find.byKey(const Key('announcementDescription')),
+          findsOneWidget,
+        );
+
+        expect(
+          find.text(
+            'Please note that eZRx will be unavailable \${startTime} from 30 January 2023 18:30 to 30 January 2023 19:00 (GMT +8), due to scheduled maintenance. We apologise for any inconvenience caused and thank you for your patience.',
           ),
-        ),
-      );
+          findsOneWidget,
+        );
+      });
 
-      final loadingIndicator =
-          find.byKey(const Key('announcementLoadingIndicator'));
-      final reloadIcon = find.byKey(const Key('announcementReloadIcon'));
-      final announcementDescription =
-          find.byKey(const Key('announcementDescription'));
-      final closeIcon = find.byKey(const Key('announcementCloseIcon'));
+      testWidgets('show with Myanmar language when AuthState is authenticated',
+          (tester) async {
+        when(() => authBlocMock.state)
+            .thenReturn(const AuthState.authenticated());
+        when(() => announcementBlocMock.state)
+            .thenReturn(AnnouncementState.initial().copyWith(
+          isClosed: false,
+          announcement: announcementCustomMock,
+        ));
+        when(() => salesOrgBlocMock.state).thenReturn(
+          SalesOrgState.initial().copyWith(
+            salesOrganisation:
+                SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2200')),
+          ),
+        );
+        await tester.pumpWidget(announcement());
+        final reloadIcon = find.byKey(const Key('announcementReloadIcon'));
+        final closeIcon = find.byKey(const Key('announcementCloseIcon'));
+        expect(reloadIcon, findsOneWidget);
+        expect(closeIcon, findsOneWidget);
+        expect(
+          find.byKey(const Key('announcementDescription')),
+          findsOneWidget,
+        );
 
-      expect(loadingIndicator, findsOneWidget);
-      expect(reloadIcon, findsNothing);
-      expect(announcementDescription, findsOneWidget);
-      expect(closeIcon, findsOneWidget);
+        expect(
+          find.text(
+            'Test',
+          ),
+          findsOneWidget,
+        );
+      });
     });
   });
 }

@@ -5,6 +5,7 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.dart';
@@ -65,6 +66,10 @@ class OrderDocumentTypeMockBloc
     extends MockBloc<OrderDocumentTypeEvent, OrderDocumentTypeState>
     implements OrderDocumentTypeBloc {}
 
+class AnnouncementBlocMock
+    extends MockBloc<AnnouncementEvent, AnnouncementState>
+    implements AnnouncementBloc {}
+
 void main() {
   late GetIt locator;
   late SalesOrgBloc mockSalesOrgBloc;
@@ -77,6 +82,7 @@ void main() {
   late EligibilityBloc eligibilityBlocMock;
   late ResetPasswordBloc resetPasswordBlocMock;
   late OrderDocumentTypeBloc orderDocumentTypeBlocMock;
+  late AnnouncementBloc announcementBlocMock;
 
   setUpAll(() async {
     setupLocator();
@@ -108,27 +114,31 @@ void main() {
         installerStore: '');
   });
 
+  setUp(() {
+    userBlocMock = UserBlocMock();
+    cartBlocMock = CartBlocMock();
+    paymentCustomerInformationBlocMock = PaymentCustomerInfoMockBloc();
+    eligibilityBlocMock = EligibilityBlocMock();
+    resetPasswordBlocMock = ResetPasswordMockBloc();
+    orderDocumentTypeBlocMock = OrderDocumentTypeMockBloc();
+    announcementBlocMock = AnnouncementBlocMock();
+    when(() => userBlocMock.state).thenReturn(UserState.initial());
+    when(() => mockAuthBloc.state).thenReturn(const AuthState.initial());
+    when(() => cartBlocMock.state).thenReturn(CartState.initial());
+    when(() => paymentCustomerInformationBlocMock.state)
+        .thenReturn(PaymentCustomerInformationState.initial());
+    when(() => eligibilityBlocMock.state)
+        .thenReturn(EligibilityState.initial());
+    when(() => resetPasswordBlocMock.state)
+        .thenReturn(ResetPasswordState.initial());
+    when(() => orderDocumentTypeBlocMock.state)
+        .thenReturn(OrderDocumentTypeState.initial());
+    when(() => mockSalesOrgBloc.state).thenReturn(SalesOrgState.initial());
+    when(() => announcementBlocMock.state)
+        .thenReturn(AnnouncementState.initial());
+  });
+
   group('AupTc Widget Show hide base on state.showTermsAndConditon true', () {
-    setUp(() {
-      userBlocMock = UserBlocMock();
-      cartBlocMock = CartBlocMock();
-      paymentCustomerInformationBlocMock = PaymentCustomerInfoMockBloc();
-      eligibilityBlocMock = EligibilityBlocMock();
-      resetPasswordBlocMock = ResetPasswordMockBloc();
-      orderDocumentTypeBlocMock = OrderDocumentTypeMockBloc();
-      when(() => userBlocMock.state).thenReturn(UserState.initial());
-      when(() => mockAuthBloc.state).thenReturn(const AuthState.initial());
-      when(() => cartBlocMock.state).thenReturn(CartState.initial());
-      when(() => paymentCustomerInformationBlocMock.state)
-          .thenReturn(PaymentCustomerInformationState.initial());
-      when(() => eligibilityBlocMock.state)
-          .thenReturn(EligibilityState.initial());
-      when(() => resetPasswordBlocMock.state)
-          .thenReturn(ResetPasswordState.initial());
-      when(() => orderDocumentTypeBlocMock.state)
-          .thenReturn(OrderDocumentTypeState.initial());
-      when(() => mockSalesOrgBloc.state).thenReturn(SalesOrgState.initial());
-    });
     testWidgets(
         'Test - AupTc Widget Show AupTcBloc state.showTermsAndConditon=true',
         (tester) async {
@@ -214,6 +224,9 @@ void main() {
             ),
             BlocProvider<OrderDocumentTypeBloc>(
               create: (context) => orderDocumentTypeBlocMock,
+            ),
+            BlocProvider<AnnouncementBloc>(
+              create: (context) => announcementBlocMock,
             ),
           ],
           child: const SplashPage(),
@@ -301,6 +314,9 @@ void main() {
           ),
           BlocProvider<AupTcBloc>(
             create: (context) => mockAupTcBloc,
+          ),
+          BlocProvider<AnnouncementBloc>(
+            create: (context) => announcementBlocMock,
           ),
         ]);
     await tester.pump();

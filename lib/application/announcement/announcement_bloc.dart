@@ -29,13 +29,17 @@ class AnnouncementBloc extends Bloc<AnnouncementEvent, AnnouncementState> {
             await announcementRepository.getAnnouncements();
         failureOrSuccess.fold(
           (failure) {
-            emit(state.copyWith(isLoading: false));
+            emit(
+              state.copyWith(isLoading: false),
+            );
           },
           (newAnnouncement) {
             emit(
               state.copyWith(
                 isLoading: false,
+                isClosed: false,
                 announcement: newAnnouncement,
+                preferSalesOrgLanguage: true,
               ),
             );
           },
@@ -44,9 +48,20 @@ class AnnouncementBloc extends Bloc<AnnouncementEvent, AnnouncementState> {
       close: (_) {
         emit(
           state.copyWith(
-            announcement: Announcement.empty(),
             isClosed: true,
           ),
+        );
+      },
+      show: (_) {
+        emit(
+          state.copyWith(
+            isClosed: false,
+          ),
+        );
+      },
+      changePreferLanguage: (e) {
+        emit(
+          state.copyWith(preferSalesOrgLanguage: e.preferSalesOrgLanguage),
         );
       },
     );

@@ -47,7 +47,7 @@ class CartComboDealItem extends StatelessWidget {
 
                 if (comboDealType.isMaterialNumber) {
                   context.router.push(
-                    ComboDealMaterialDetailPageRoute(
+                   ComboDealMaterialDetailPageRoute(
                       comboItems: cartItem.materials,
                       isEdit: true,
                     ),

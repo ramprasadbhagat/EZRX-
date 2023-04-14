@@ -141,14 +141,14 @@ class BundleItemDetailPage extends StatelessWidget {
                     return ElevatedButton(
                       key: const Key('addBundlesToCart'),
                       onPressed: () {
-                              locator<CountlyService>()
-                                  .addCountlyEvent('Add bundles to cart');
-                              _addToCartPressed(
-                                context,
-                                bundleAggregate.bundle,
-                                quantityControllerList,
-                              );
-                            },
+                        locator<CountlyService>()
+                            .addCountlyEvent('Add bundles to cart');
+                        _addToCartPressed(
+                          context,
+                          bundleAggregate.bundle,
+                          quantityControllerList,
+                        );
+                      },
                       child: const Text('Add to Cart').tr(),
                     );
                   },
@@ -266,10 +266,15 @@ class _ListContent extends StatelessWidget {
           ),
           QuantityInput(
             isEnabled: true,
-            quantityAddKey: Key('bundleAdd${materialInfo.materialNumber.getOrDefaultValue('')}'),
-            quantityDeleteKey: Key('bundleDelete${materialInfo.materialNumber.getOrDefaultValue('')}'),
-            quantityTextKey:
-                Key('bundleText${materialInfo.materialNumber.getOrDefaultValue('')}'),
+            quantityAddKey: Key(
+              'bundleAdd${materialInfo.materialNumber.getOrDefaultValue('')}',
+            ),
+            quantityDeleteKey: Key(
+              'bundleDelete${materialInfo.materialNumber.getOrDefaultValue('')}',
+            ),
+            quantityTextKey: Key(
+              'bundleText${materialInfo.materialNumber.getOrDefaultValue('')}',
+            ),
             onFieldChange: (int value) {
               locator<CountlyService>().addCountlyEvent(
                 'changed_quantity',

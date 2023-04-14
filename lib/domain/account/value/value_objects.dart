@@ -36,6 +36,10 @@ class SalesOrg extends ValueObject<String> {
     return '${value.getOrElse(() => '')} - $buName';
   }
 
+  String get languageCode {
+    return salesOrgLanguageCode(country);
+  }
+
   String get country {
     return salesOrgCountry(value.getOrElse(() => ''));
   }
@@ -117,10 +121,6 @@ class RoleType extends ValueObject<String> {
   bool get hasReturnsAdminAccess {
     return isAdmin(value.getOrElse(() => ''));
   }
-
-  
-
- 
 
   String get purchaseOrderType {
     return roleOrderType(value.getOrElse(() => ''));

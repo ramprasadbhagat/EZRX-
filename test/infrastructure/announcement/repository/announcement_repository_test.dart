@@ -39,7 +39,7 @@ void main() {
         );
 
         return AnnouncementDto.fromJson(res['data']['getAnnouncements'][0])
-            .toDomain();
+            .toDomain;
       });
 
       remoteDataSourceMock = AnnouncementRemoteDataSourceMock();

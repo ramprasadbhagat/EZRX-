@@ -71,7 +71,7 @@ void main() {
           expect(
             result,
             AnnouncementDto.fromJson(res['data']['getAnnouncements'][0])
-                .toDomain(),
+                .toDomain,
           );
         },
       );

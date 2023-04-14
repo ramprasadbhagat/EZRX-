@@ -68,7 +68,6 @@ class AddToCartBlocMock extends MockBloc<AddToCartEvent, AddToCartState>
 class OrderDocumentTypeBlocMock
     extends MockBloc<OrderDocumentTypeEvent, OrderDocumentTypeState>
     implements OrderDocumentTypeBloc {}
-    
 
 void main() {
   var mockFavouriteBloc = MockFavouriteBloc();
@@ -229,7 +228,8 @@ void main() {
               item: mockFavourite1,
               user: User.empty(),
             ))).called(1);
-        final favouriteButton = find.byKey(Key('deleteFavouriteFavPage${mockFavourite1.materialNumber.getOrDefaultValue('')}'));
+        final favouriteButton = find.byKey(Key(
+            'deleteFavouriteFavPage${mockFavourite1.materialNumber.getOrDefaultValue('')}'));
 
         expect(favouriteButton, findsOneWidget);
         await tester.tap(favouriteButton);

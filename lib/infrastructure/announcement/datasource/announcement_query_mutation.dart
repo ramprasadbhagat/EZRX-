@@ -8,12 +8,24 @@ class AnnouncementQueryMutation {
     return '''
     {
       getAnnouncements {
-        id
         active
-        description
+        descriptionList {
+            language
+            languageCode
+            announcement
+        }
         startTime
         endTime
         type
+        day
+        functionLabel
+        id
+        created_at
+        updated_at
+        isModuleSpecific
+        moduleName
+        loginType
+        isCrossButton
       }
     }
     ''';

@@ -17,10 +17,14 @@ import 'package:mocktail/mocktail.dart';
 
 import '../../utils/widget_utils.dart';
 
-class MockPolicyConfigurationListBloc extends MockBloc<PolicyConfigurationEvent, PolicyConfigurationState> implements PolicyConfigurationBloc {}
-class MOckEligibilityBloc extends MockBloc<EligibilityEvent,EligibilityState> implements EligibilityBloc {}
+class MockPolicyConfigurationListBloc
+    extends MockBloc<PolicyConfigurationEvent, PolicyConfigurationState>
+    implements PolicyConfigurationBloc {}
 
-void main(){
+class MOckEligibilityBloc extends MockBloc<EligibilityEvent, EligibilityState>
+    implements EligibilityBloc {}
+
+void main() {
   late PolicyConfigurationBloc policyConfigurationListBlocMock;
   late EligibilityBloc eligibilityBlocMock;
   late AppRouter autoRouterMock;
@@ -29,7 +33,8 @@ void main(){
   setUpAll(() async {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
     locator.registerLazySingleton(() => AppRouter());
-    locator.registerLazySingleton(() => CountlyService(config: locator<Config>()));
+    locator
+        .registerLazySingleton(() => CountlyService(config: locator<Config>()));
     autoRouterMock = locator<AppRouter>();
   });
 
@@ -37,8 +42,10 @@ void main(){
     WidgetsFlutterBinding.ensureInitialized();
     policyConfigurationListBlocMock = MockPolicyConfigurationListBloc();
     eligibilityBlocMock = MOckEligibilityBloc();
-    when(() => policyConfigurationListBlocMock.state).thenReturn(PolicyConfigurationState.initial());
-    when(() => eligibilityBlocMock.state).thenReturn(EligibilityState.initial());
+    when(() => policyConfigurationListBlocMock.state)
+        .thenReturn(PolicyConfigurationState.initial());
+    when(() => eligibilityBlocMock.state)
+        .thenReturn(EligibilityState.initial());
   });
 
   Future getWidget(tester) async {
@@ -59,9 +66,9 @@ void main(){
   }
 
   group('Add Policy Configuration Test', () {
-
     testWidgets('=> Test Add Policy Configuration screen', (tester) async {
-      when(() => eligibilityBlocMock.state).thenReturn(EligibilityState.initial().copyWith(
+      when(() => eligibilityBlocMock.state)
+          .thenReturn(EligibilityState.initial().copyWith(
         salesOrganisation: SalesOrganisation.empty().copyWith(
           salesOrg: SalesOrg('2601'),
         ),
@@ -79,7 +86,8 @@ void main(){
         ),
       ];
 
-      whenListen(policyConfigurationListBlocMock, Stream.fromIterable(expectedState));
+      whenListen(
+          policyConfigurationListBlocMock, Stream.fromIterable(expectedState));
 
       await getWidget(tester);
 
@@ -90,7 +98,9 @@ void main(){
       await tester.tap(findSwitchButton);
       await tester.pump();
 
-      final findSalesPrincipalCode = find.ancestor(of: find.text('Please assign a valid sales principal code'.tr()), matching: find.byType(TextFormField));
+      final findSalesPrincipalCode = find.ancestor(
+          of: find.text('Please assign a valid sales principal code'.tr()),
+          matching: find.byType(TextFormField));
       expect(findSalesPrincipalCode, findsOneWidget);
       await tester.enterText(findSalesPrincipalCode, 'test');
       await tester.pump();
@@ -99,23 +109,25 @@ void main(){
       await tester.enterText(findSalesPrincipalCode, 'test');
       await tester.pump();
 
-      final findMonthsBeforeExpiry = find.ancestor(of: find.text('Months Before Expiry'.tr()), matching: find.byType(TextFormField));
+      final findMonthsBeforeExpiry = find.ancestor(
+          of: find.text('Months Before Expiry'.tr()),
+          matching: find.byType(TextFormField));
       expect(findMonthsBeforeExpiry, findsOneWidget);
       await tester.enterText(findMonthsBeforeExpiry, '123');
       await tester.pump();
 
-      final findMonthsAfterExpiry = find.ancestor(of: find.text('Months After Expiry'.tr()), matching: find.byType(TextFormField));
+      final findMonthsAfterExpiry = find.ancestor(
+          of: find.text('Months After Expiry'.tr()),
+          matching: find.byType(TextFormField));
       expect(findMonthsAfterExpiry, findsOneWidget);
       await tester.enterText(findMonthsAfterExpiry, '123');
       await tester.pump();
 
-      final findSubmitButton = find.ancestor(of: find.text('Submit'.tr()), matching: find.byType(ElevatedButton));
+      final findSubmitButton = find.ancestor(
+          of: find.text('Submit'.tr()), matching: find.byType(ElevatedButton));
       expect(findSubmitButton, findsOneWidget);
       await tester.tap(findSubmitButton);
       await tester.pump();
-
     });
-
   });
-
 }

@@ -20,18 +20,24 @@ mixin _$AnnouncementEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() getAnnouncement,
     required TResult Function() close,
+    required TResult Function() show,
+    required TResult Function(bool preferSalesOrgLanguage) changePreferLanguage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getAnnouncement,
     TResult? Function()? close,
+    TResult? Function()? show,
+    TResult? Function(bool preferSalesOrgLanguage)? changePreferLanguage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getAnnouncement,
     TResult Function()? close,
+    TResult Function()? show,
+    TResult Function(bool preferSalesOrgLanguage)? changePreferLanguage,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -39,18 +45,24 @@ mixin _$AnnouncementEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_GetAnnouncement value) getAnnouncement,
     required TResult Function(_Close value) close,
+    required TResult Function(_Show value) show,
+    required TResult Function(_ChangePreferLanguage value) changePreferLanguage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetAnnouncement value)? getAnnouncement,
     TResult? Function(_Close value)? close,
+    TResult? Function(_Show value)? show,
+    TResult? Function(_ChangePreferLanguage value)? changePreferLanguage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetAnnouncement value)? getAnnouncement,
     TResult Function(_Close value)? close,
+    TResult Function(_Show value)? show,
+    TResult Function(_ChangePreferLanguage value)? changePreferLanguage,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -114,6 +126,8 @@ class _$_GetAnnouncement implements _GetAnnouncement {
   TResult when<TResult extends Object?>({
     required TResult Function() getAnnouncement,
     required TResult Function() close,
+    required TResult Function() show,
+    required TResult Function(bool preferSalesOrgLanguage) changePreferLanguage,
   }) {
     return getAnnouncement();
   }
@@ -123,6 +137,8 @@ class _$_GetAnnouncement implements _GetAnnouncement {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getAnnouncement,
     TResult? Function()? close,
+    TResult? Function()? show,
+    TResult? Function(bool preferSalesOrgLanguage)? changePreferLanguage,
   }) {
     return getAnnouncement?.call();
   }
@@ -132,6 +148,8 @@ class _$_GetAnnouncement implements _GetAnnouncement {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getAnnouncement,
     TResult Function()? close,
+    TResult Function()? show,
+    TResult Function(bool preferSalesOrgLanguage)? changePreferLanguage,
     required TResult orElse(),
   }) {
     if (getAnnouncement != null) {
@@ -145,6 +163,8 @@ class _$_GetAnnouncement implements _GetAnnouncement {
   TResult map<TResult extends Object?>({
     required TResult Function(_GetAnnouncement value) getAnnouncement,
     required TResult Function(_Close value) close,
+    required TResult Function(_Show value) show,
+    required TResult Function(_ChangePreferLanguage value) changePreferLanguage,
   }) {
     return getAnnouncement(this);
   }
@@ -154,6 +174,8 @@ class _$_GetAnnouncement implements _GetAnnouncement {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetAnnouncement value)? getAnnouncement,
     TResult? Function(_Close value)? close,
+    TResult? Function(_Show value)? show,
+    TResult? Function(_ChangePreferLanguage value)? changePreferLanguage,
   }) {
     return getAnnouncement?.call(this);
   }
@@ -163,6 +185,8 @@ class _$_GetAnnouncement implements _GetAnnouncement {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetAnnouncement value)? getAnnouncement,
     TResult Function(_Close value)? close,
+    TResult Function(_Show value)? show,
+    TResult Function(_ChangePreferLanguage value)? changePreferLanguage,
     required TResult orElse(),
   }) {
     if (getAnnouncement != null) {
@@ -214,6 +238,8 @@ class _$_Close implements _Close {
   TResult when<TResult extends Object?>({
     required TResult Function() getAnnouncement,
     required TResult Function() close,
+    required TResult Function() show,
+    required TResult Function(bool preferSalesOrgLanguage) changePreferLanguage,
   }) {
     return close();
   }
@@ -223,6 +249,8 @@ class _$_Close implements _Close {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getAnnouncement,
     TResult? Function()? close,
+    TResult? Function()? show,
+    TResult? Function(bool preferSalesOrgLanguage)? changePreferLanguage,
   }) {
     return close?.call();
   }
@@ -232,6 +260,8 @@ class _$_Close implements _Close {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getAnnouncement,
     TResult Function()? close,
+    TResult Function()? show,
+    TResult Function(bool preferSalesOrgLanguage)? changePreferLanguage,
     required TResult orElse(),
   }) {
     if (close != null) {
@@ -245,6 +275,8 @@ class _$_Close implements _Close {
   TResult map<TResult extends Object?>({
     required TResult Function(_GetAnnouncement value) getAnnouncement,
     required TResult Function(_Close value) close,
+    required TResult Function(_Show value) show,
+    required TResult Function(_ChangePreferLanguage value) changePreferLanguage,
   }) {
     return close(this);
   }
@@ -254,6 +286,8 @@ class _$_Close implements _Close {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetAnnouncement value)? getAnnouncement,
     TResult? Function(_Close value)? close,
+    TResult? Function(_Show value)? show,
+    TResult? Function(_ChangePreferLanguage value)? changePreferLanguage,
   }) {
     return close?.call(this);
   }
@@ -263,6 +297,8 @@ class _$_Close implements _Close {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetAnnouncement value)? getAnnouncement,
     TResult Function(_Close value)? close,
+    TResult Function(_Show value)? show,
+    TResult Function(_ChangePreferLanguage value)? changePreferLanguage,
     required TResult orElse(),
   }) {
     if (close != null) {
@@ -277,8 +313,269 @@ abstract class _Close implements AnnouncementEvent {
 }
 
 /// @nodoc
+abstract class _$$_ShowCopyWith<$Res> {
+  factory _$$_ShowCopyWith(_$_Show value, $Res Function(_$_Show) then) =
+      __$$_ShowCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_ShowCopyWithImpl<$Res>
+    extends _$AnnouncementEventCopyWithImpl<$Res, _$_Show>
+    implements _$$_ShowCopyWith<$Res> {
+  __$$_ShowCopyWithImpl(_$_Show _value, $Res Function(_$_Show) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_Show implements _Show {
+  const _$_Show();
+
+  @override
+  String toString() {
+    return 'AnnouncementEvent.show()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_Show);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() getAnnouncement,
+    required TResult Function() close,
+    required TResult Function() show,
+    required TResult Function(bool preferSalesOrgLanguage) changePreferLanguage,
+  }) {
+    return show();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? getAnnouncement,
+    TResult? Function()? close,
+    TResult? Function()? show,
+    TResult? Function(bool preferSalesOrgLanguage)? changePreferLanguage,
+  }) {
+    return show?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? getAnnouncement,
+    TResult Function()? close,
+    TResult Function()? show,
+    TResult Function(bool preferSalesOrgLanguage)? changePreferLanguage,
+    required TResult orElse(),
+  }) {
+    if (show != null) {
+      return show();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetAnnouncement value) getAnnouncement,
+    required TResult Function(_Close value) close,
+    required TResult Function(_Show value) show,
+    required TResult Function(_ChangePreferLanguage value) changePreferLanguage,
+  }) {
+    return show(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetAnnouncement value)? getAnnouncement,
+    TResult? Function(_Close value)? close,
+    TResult? Function(_Show value)? show,
+    TResult? Function(_ChangePreferLanguage value)? changePreferLanguage,
+  }) {
+    return show?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetAnnouncement value)? getAnnouncement,
+    TResult Function(_Close value)? close,
+    TResult Function(_Show value)? show,
+    TResult Function(_ChangePreferLanguage value)? changePreferLanguage,
+    required TResult orElse(),
+  }) {
+    if (show != null) {
+      return show(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Show implements AnnouncementEvent {
+  const factory _Show() = _$_Show;
+}
+
+/// @nodoc
+abstract class _$$_ChangePreferLanguageCopyWith<$Res> {
+  factory _$$_ChangePreferLanguageCopyWith(_$_ChangePreferLanguage value,
+          $Res Function(_$_ChangePreferLanguage) then) =
+      __$$_ChangePreferLanguageCopyWithImpl<$Res>;
+  @useResult
+  $Res call({bool preferSalesOrgLanguage});
+}
+
+/// @nodoc
+class __$$_ChangePreferLanguageCopyWithImpl<$Res>
+    extends _$AnnouncementEventCopyWithImpl<$Res, _$_ChangePreferLanguage>
+    implements _$$_ChangePreferLanguageCopyWith<$Res> {
+  __$$_ChangePreferLanguageCopyWithImpl(_$_ChangePreferLanguage _value,
+      $Res Function(_$_ChangePreferLanguage) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? preferSalesOrgLanguage = null,
+  }) {
+    return _then(_$_ChangePreferLanguage(
+      preferSalesOrgLanguage: null == preferSalesOrgLanguage
+          ? _value.preferSalesOrgLanguage
+          : preferSalesOrgLanguage // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_ChangePreferLanguage implements _ChangePreferLanguage {
+  const _$_ChangePreferLanguage({required this.preferSalesOrgLanguage});
+
+  @override
+  final bool preferSalesOrgLanguage;
+
+  @override
+  String toString() {
+    return 'AnnouncementEvent.changePreferLanguage(preferSalesOrgLanguage: $preferSalesOrgLanguage)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_ChangePreferLanguage &&
+            (identical(other.preferSalesOrgLanguage, preferSalesOrgLanguage) ||
+                other.preferSalesOrgLanguage == preferSalesOrgLanguage));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, preferSalesOrgLanguage);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_ChangePreferLanguageCopyWith<_$_ChangePreferLanguage> get copyWith =>
+      __$$_ChangePreferLanguageCopyWithImpl<_$_ChangePreferLanguage>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() getAnnouncement,
+    required TResult Function() close,
+    required TResult Function() show,
+    required TResult Function(bool preferSalesOrgLanguage) changePreferLanguage,
+  }) {
+    return changePreferLanguage(preferSalesOrgLanguage);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? getAnnouncement,
+    TResult? Function()? close,
+    TResult? Function()? show,
+    TResult? Function(bool preferSalesOrgLanguage)? changePreferLanguage,
+  }) {
+    return changePreferLanguage?.call(preferSalesOrgLanguage);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? getAnnouncement,
+    TResult Function()? close,
+    TResult Function()? show,
+    TResult Function(bool preferSalesOrgLanguage)? changePreferLanguage,
+    required TResult orElse(),
+  }) {
+    if (changePreferLanguage != null) {
+      return changePreferLanguage(preferSalesOrgLanguage);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetAnnouncement value) getAnnouncement,
+    required TResult Function(_Close value) close,
+    required TResult Function(_Show value) show,
+    required TResult Function(_ChangePreferLanguage value) changePreferLanguage,
+  }) {
+    return changePreferLanguage(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetAnnouncement value)? getAnnouncement,
+    TResult? Function(_Close value)? close,
+    TResult? Function(_Show value)? show,
+    TResult? Function(_ChangePreferLanguage value)? changePreferLanguage,
+  }) {
+    return changePreferLanguage?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetAnnouncement value)? getAnnouncement,
+    TResult Function(_Close value)? close,
+    TResult Function(_Show value)? show,
+    TResult Function(_ChangePreferLanguage value)? changePreferLanguage,
+    required TResult orElse(),
+  }) {
+    if (changePreferLanguage != null) {
+      return changePreferLanguage(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ChangePreferLanguage implements AnnouncementEvent {
+  const factory _ChangePreferLanguage(
+      {required final bool preferSalesOrgLanguage}) = _$_ChangePreferLanguage;
+
+  bool get preferSalesOrgLanguage;
+  @JsonKey(ignore: true)
+  _$$_ChangePreferLanguageCopyWith<_$_ChangePreferLanguage> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$AnnouncementState {
   Announcement get announcement => throw _privateConstructorUsedError;
+  bool get preferSalesOrgLanguage => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   bool get isClosed => throw _privateConstructorUsedError;
 
@@ -293,7 +590,11 @@ abstract class $AnnouncementStateCopyWith<$Res> {
           AnnouncementState value, $Res Function(AnnouncementState) then) =
       _$AnnouncementStateCopyWithImpl<$Res, AnnouncementState>;
   @useResult
-  $Res call({Announcement announcement, bool isLoading, bool isClosed});
+  $Res call(
+      {Announcement announcement,
+      bool preferSalesOrgLanguage,
+      bool isLoading,
+      bool isClosed});
 
   $AnnouncementCopyWith<$Res> get announcement;
 }
@@ -312,6 +613,7 @@ class _$AnnouncementStateCopyWithImpl<$Res, $Val extends AnnouncementState>
   @override
   $Res call({
     Object? announcement = null,
+    Object? preferSalesOrgLanguage = null,
     Object? isLoading = null,
     Object? isClosed = null,
   }) {
@@ -320,6 +622,10 @@ class _$AnnouncementStateCopyWithImpl<$Res, $Val extends AnnouncementState>
           ? _value.announcement
           : announcement // ignore: cast_nullable_to_non_nullable
               as Announcement,
+      preferSalesOrgLanguage: null == preferSalesOrgLanguage
+          ? _value.preferSalesOrgLanguage
+          : preferSalesOrgLanguage // ignore: cast_nullable_to_non_nullable
+              as bool,
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -348,7 +654,11 @@ abstract class _$$_AnnouncementStateCopyWith<$Res>
       __$$_AnnouncementStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Announcement announcement, bool isLoading, bool isClosed});
+  $Res call(
+      {Announcement announcement,
+      bool preferSalesOrgLanguage,
+      bool isLoading,
+      bool isClosed});
 
   @override
   $AnnouncementCopyWith<$Res> get announcement;
@@ -366,6 +676,7 @@ class __$$_AnnouncementStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? announcement = null,
+    Object? preferSalesOrgLanguage = null,
     Object? isLoading = null,
     Object? isClosed = null,
   }) {
@@ -374,6 +685,10 @@ class __$$_AnnouncementStateCopyWithImpl<$Res>
           ? _value.announcement
           : announcement // ignore: cast_nullable_to_non_nullable
               as Announcement,
+      preferSalesOrgLanguage: null == preferSalesOrgLanguage
+          ? _value.preferSalesOrgLanguage
+          : preferSalesOrgLanguage // ignore: cast_nullable_to_non_nullable
+              as bool,
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -391,6 +706,7 @@ class __$$_AnnouncementStateCopyWithImpl<$Res>
 class _$_AnnouncementState extends _AnnouncementState {
   const _$_AnnouncementState(
       {required this.announcement,
+      required this.preferSalesOrgLanguage,
       required this.isLoading,
       required this.isClosed})
       : super._();
@@ -398,13 +714,15 @@ class _$_AnnouncementState extends _AnnouncementState {
   @override
   final Announcement announcement;
   @override
+  final bool preferSalesOrgLanguage;
+  @override
   final bool isLoading;
   @override
   final bool isClosed;
 
   @override
   String toString() {
-    return 'AnnouncementState(announcement: $announcement, isLoading: $isLoading, isClosed: $isClosed)';
+    return 'AnnouncementState(announcement: $announcement, preferSalesOrgLanguage: $preferSalesOrgLanguage, isLoading: $isLoading, isClosed: $isClosed)';
   }
 
   @override
@@ -414,6 +732,8 @@ class _$_AnnouncementState extends _AnnouncementState {
             other is _$_AnnouncementState &&
             (identical(other.announcement, announcement) ||
                 other.announcement == announcement) &&
+            (identical(other.preferSalesOrgLanguage, preferSalesOrgLanguage) ||
+                other.preferSalesOrgLanguage == preferSalesOrgLanguage) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.isClosed, isClosed) ||
@@ -421,8 +741,8 @@ class _$_AnnouncementState extends _AnnouncementState {
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, announcement, isLoading, isClosed);
+  int get hashCode => Object.hash(
+      runtimeType, announcement, preferSalesOrgLanguage, isLoading, isClosed);
 
   @JsonKey(ignore: true)
   @override
@@ -435,12 +755,15 @@ class _$_AnnouncementState extends _AnnouncementState {
 abstract class _AnnouncementState extends AnnouncementState {
   const factory _AnnouncementState(
       {required final Announcement announcement,
+      required final bool preferSalesOrgLanguage,
       required final bool isLoading,
       required final bool isClosed}) = _$_AnnouncementState;
   const _AnnouncementState._() : super._();
 
   @override
   Announcement get announcement;
+  @override
+  bool get preferSalesOrgLanguage;
   @override
   bool get isLoading;
   @override

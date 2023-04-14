@@ -204,7 +204,6 @@ class App extends StatelessWidget {
         BlocProvider<CustomerCodeBloc>(
           create: (context) => locator<CustomerCodeBloc>(),
         ),
-       
         BlocProvider<UserRestrictionListBloc>(
           create: (context) => locator<UserRestrictionListBloc>(),
         ),
@@ -215,8 +214,7 @@ class App extends StatelessWidget {
           create: (context) => locator<EligibilityBloc>(),
         ),
         BlocProvider<AnnouncementBloc>(
-          create: (context) => locator<AnnouncementBloc>()
-            ..add(const AnnouncementEvent.getAnnouncement()),
+          create: (context) => locator<AnnouncementBloc>(),
         ),
         BlocProvider<SavedOrderListBloc>(
           create: (context) => locator<SavedOrderListBloc>(),
@@ -371,18 +369,6 @@ class App extends StatelessWidget {
           ],
         ),
         routeInformationParser: router.defaultRouteParser(),
-        // builder: (context, child) => ResponsiveWrapper.builder(
-        //   child,
-        //   maxWidth: 1200,
-        //   minWidth: 480,
-        //   defaultScale: true,
-        //   breakpoints: const [
-        //     ResponsiveBreakpoint.resize(360, name: MOBILE),
-        //     ResponsiveBreakpoint.resize(800, name: TABLET),
-        //     ResponsiveBreakpoint.resize(1000, name: DESKTOP),
-        //   ],
-        //   background: const ColoredBox(color: ZPColors.white),
-        // ),
       ),
     );
   }

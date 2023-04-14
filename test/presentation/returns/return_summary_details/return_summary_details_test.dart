@@ -29,18 +29,25 @@ import 'package:mocktail/mocktail.dart';
 import '../../../utils/widget_utils.dart';
 import '../../order_history/order_history_details_widget_test.dart';
 
-class ReturnSummaryDetailsBlocMock extends MockBloc<ReturnSummaryDetailsEvent, ReturnSummaryDetailsState> implements ReturnSummaryDetailsBloc {}
+class ReturnSummaryDetailsBlocMock
+    extends MockBloc<ReturnSummaryDetailsEvent, ReturnSummaryDetailsState>
+    implements ReturnSummaryDetailsBloc {}
 
-class ShipToCodeBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState> implements ShipToCodeBloc {}
+class ShipToCodeBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState>
+    implements ShipToCodeBloc {}
 
-class CustomerCodeBlocMock extends MockBloc<CustomerCodeEvent, CustomerCodeState> implements CustomerCodeBloc {}
+class CustomerCodeBlocMock
+    extends MockBloc<CustomerCodeEvent, CustomerCodeState>
+    implements CustomerCodeBloc {}
 
-class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState> implements SalesOrgBloc {}
+class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
+    implements SalesOrgBloc {}
 
-class PoAttachmentBlocMock extends MockBloc<PoAttachmentEvent, PoAttachmentState> implements PoAttachmentBloc {}
+class PoAttachmentBlocMock
+    extends MockBloc<PoAttachmentEvent, PoAttachmentState>
+    implements PoAttachmentBloc {}
 
-
-void main(){
+void main() {
   late ReturnSummaryDetailsBloc returnSummaryDetailsBlocMock;
   late ShipToCodeBloc shipToCodeBlocMock;
   late CustomerCodeBloc customerCodeBlocMock;
@@ -53,7 +60,8 @@ void main(){
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
     locator.registerLazySingleton(() => AppRouter());
     locator.registerLazySingleton(() => MixpanelService());
-    locator.registerLazySingleton(() => CountlyService(config: locator<Config>()));
+    locator
+        .registerLazySingleton(() => CountlyService(config: locator<Config>()));
     autoRouterMock = locator<AppRouter>();
     locator<MixpanelService>().init(mixpanel: MixpanelMock());
   });
@@ -65,11 +73,14 @@ void main(){
     customerCodeBlocMock = CustomerCodeBlocMock();
     salesOrgBlocMock = SalesOrgBlocMock();
     poAttachmentBlocMock = PoAttachmentBlocMock();
-    when(() => returnSummaryDetailsBlocMock.state).thenReturn(ReturnSummaryDetailsState.initial());
+    when(() => returnSummaryDetailsBlocMock.state)
+        .thenReturn(ReturnSummaryDetailsState.initial());
     when(() => shipToCodeBlocMock.state).thenReturn(ShipToCodeState.initial());
-    when(() => customerCodeBlocMock.state).thenReturn(CustomerCodeState.initial());
+    when(() => customerCodeBlocMock.state)
+        .thenReturn(CustomerCodeState.initial());
     when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
-    when(() => poAttachmentBlocMock.state).thenReturn(PoAttachmentState.initial());
+    when(() => poAttachmentBlocMock.state)
+        .thenReturn(PoAttachmentState.initial());
   });
 
   Future getWidget(tester) async {
@@ -96,18 +107,19 @@ void main(){
         child: ReturnSummaryDetails(
           customerCodeInfo: CustomerCodeInfo.empty(),
           shipToInfo: ShipToInfo.empty(),
-          returnSummaryRequests: ReturnSummaryRequest.empty().copyWith(returnId: 'mock_id'),
+          returnSummaryRequests:
+              ReturnSummaryRequest.empty().copyWith(returnId: 'mock_id'),
         ),
       ),
     );
   }
 
   group('Return Summary Details Test', () {
-
     testWidgets('=> ReturnSummaryDetails screen test', (tester) async {
       final expectedState = [
         ReturnSummaryDetailsState.initial().copyWith(
-          failureOrSuccessOption: optionOf(const Left(ApiFailure.other('mock-error'))),
+          failureOrSuccessOption:
+              optionOf(const Left(ApiFailure.other('mock-error'))),
         ),
         ReturnSummaryDetailsState.initial().copyWith(
           failureOrSuccessOption: none(),
@@ -115,7 +127,7 @@ void main(){
         ),
         ReturnSummaryDetailsState.initial().copyWith(
           isLoading: true,
-          failureOrSuccessOption:  optionOf(const Right('')),
+          failureOrSuccessOption: optionOf(const Right('')),
           requestInformation: RequestInformation.empty().copyWith(
             requestInformation: [
               ReturnRequestInformation.empty(),
@@ -123,7 +135,8 @@ void main(){
           ),
         ),
       ];
-      whenListen(returnSummaryDetailsBlocMock, Stream.fromIterable(expectedState));
+      whenListen(
+          returnSummaryDetailsBlocMock, Stream.fromIterable(expectedState));
 
       await getWidget(tester);
       await tester.pump(const Duration(milliseconds: 100));
@@ -177,7 +190,8 @@ void main(){
       final findMaterialNumberText = find.text('Material Number'.tr());
       expect(findMaterialNumberText, findsOneWidget);
 
-      final findApproveRejectReasonText = find.text('Approve/Reject Reason'.tr());
+      final findApproveRejectReasonText =
+          find.text('Approve/Reject Reason'.tr());
       expect(findApproveRejectReasonText, findsOneWidget);
 
       final findSapRoCreationText = find.text('SAP RO Creation'.tr());
@@ -212,7 +226,5 @@ void main(){
       await tester.tap(findIcon);
       await tester.pump();
     });
-
   });
-
 }

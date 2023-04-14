@@ -16,12 +16,20 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$Announcement {
+  bool get active => throw _privateConstructorUsedError;
+  List<AnnouncementMessage> get descriptionList =>
+      throw _privateConstructorUsedError;
   String get startTime => throw _privateConstructorUsedError;
   String get endTime => throw _privateConstructorUsedError;
-  String get description => throw _privateConstructorUsedError;
+  AnnouncementType get type => throw _privateConstructorUsedError;
+  String get day => throw _privateConstructorUsedError;
+  String get functionLabel => throw _privateConstructorUsedError;
   String get id => throw _privateConstructorUsedError;
-  String get type => throw _privateConstructorUsedError;
-  bool get active => throw _privateConstructorUsedError;
+  bool get isModuleSpecific => throw _privateConstructorUsedError;
+  List<AnnouncementDislayModule> get moduleName =>
+      throw _privateConstructorUsedError;
+  AnnouncementDislayTime get loginType => throw _privateConstructorUsedError;
+  bool get isCrossButton => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AnnouncementCopyWith<Announcement> get copyWith =>
@@ -35,12 +43,18 @@ abstract class $AnnouncementCopyWith<$Res> {
       _$AnnouncementCopyWithImpl<$Res, Announcement>;
   @useResult
   $Res call(
-      {String startTime,
+      {bool active,
+      List<AnnouncementMessage> descriptionList,
+      String startTime,
       String endTime,
-      String description,
+      AnnouncementType type,
+      String day,
+      String functionLabel,
       String id,
-      String type,
-      bool active});
+      bool isModuleSpecific,
+      List<AnnouncementDislayModule> moduleName,
+      AnnouncementDislayTime loginType,
+      bool isCrossButton});
 }
 
 /// @nodoc
@@ -56,14 +70,28 @@ class _$AnnouncementCopyWithImpl<$Res, $Val extends Announcement>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? active = null,
+    Object? descriptionList = null,
     Object? startTime = null,
     Object? endTime = null,
-    Object? description = null,
-    Object? id = null,
     Object? type = null,
-    Object? active = null,
+    Object? day = null,
+    Object? functionLabel = null,
+    Object? id = null,
+    Object? isModuleSpecific = null,
+    Object? moduleName = null,
+    Object? loginType = null,
+    Object? isCrossButton = null,
   }) {
     return _then(_value.copyWith(
+      active: null == active
+          ? _value.active
+          : active // ignore: cast_nullable_to_non_nullable
+              as bool,
+      descriptionList: null == descriptionList
+          ? _value.descriptionList
+          : descriptionList // ignore: cast_nullable_to_non_nullable
+              as List<AnnouncementMessage>,
       startTime: null == startTime
           ? _value.startTime
           : startTime // ignore: cast_nullable_to_non_nullable
@@ -72,21 +100,37 @@ class _$AnnouncementCopyWithImpl<$Res, $Val extends Announcement>
           ? _value.endTime
           : endTime // ignore: cast_nullable_to_non_nullable
               as String,
-      description: null == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as AnnouncementType,
+      day: null == day
+          ? _value.day
+          : day // ignore: cast_nullable_to_non_nullable
+              as String,
+      functionLabel: null == functionLabel
+          ? _value.functionLabel
+          : functionLabel // ignore: cast_nullable_to_non_nullable
               as String,
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as String,
-      active: null == active
-          ? _value.active
-          : active // ignore: cast_nullable_to_non_nullable
+      isModuleSpecific: null == isModuleSpecific
+          ? _value.isModuleSpecific
+          : isModuleSpecific // ignore: cast_nullable_to_non_nullable
+              as bool,
+      moduleName: null == moduleName
+          ? _value.moduleName
+          : moduleName // ignore: cast_nullable_to_non_nullable
+              as List<AnnouncementDislayModule>,
+      loginType: null == loginType
+          ? _value.loginType
+          : loginType // ignore: cast_nullable_to_non_nullable
+              as AnnouncementDislayTime,
+      isCrossButton: null == isCrossButton
+          ? _value.isCrossButton
+          : isCrossButton // ignore: cast_nullable_to_non_nullable
               as bool,
     ) as $Val);
   }
@@ -101,12 +145,18 @@ abstract class _$$_AnnouncementCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String startTime,
+      {bool active,
+      List<AnnouncementMessage> descriptionList,
+      String startTime,
       String endTime,
-      String description,
+      AnnouncementType type,
+      String day,
+      String functionLabel,
       String id,
-      String type,
-      bool active});
+      bool isModuleSpecific,
+      List<AnnouncementDislayModule> moduleName,
+      AnnouncementDislayTime loginType,
+      bool isCrossButton});
 }
 
 /// @nodoc
@@ -120,14 +170,28 @@ class __$$_AnnouncementCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? active = null,
+    Object? descriptionList = null,
     Object? startTime = null,
     Object? endTime = null,
-    Object? description = null,
-    Object? id = null,
     Object? type = null,
-    Object? active = null,
+    Object? day = null,
+    Object? functionLabel = null,
+    Object? id = null,
+    Object? isModuleSpecific = null,
+    Object? moduleName = null,
+    Object? loginType = null,
+    Object? isCrossButton = null,
   }) {
     return _then(_$_Announcement(
+      active: null == active
+          ? _value.active
+          : active // ignore: cast_nullable_to_non_nullable
+              as bool,
+      descriptionList: null == descriptionList
+          ? _value._descriptionList
+          : descriptionList // ignore: cast_nullable_to_non_nullable
+              as List<AnnouncementMessage>,
       startTime: null == startTime
           ? _value.startTime
           : startTime // ignore: cast_nullable_to_non_nullable
@@ -136,21 +200,37 @@ class __$$_AnnouncementCopyWithImpl<$Res>
           ? _value.endTime
           : endTime // ignore: cast_nullable_to_non_nullable
               as String,
-      description: null == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as AnnouncementType,
+      day: null == day
+          ? _value.day
+          : day // ignore: cast_nullable_to_non_nullable
+              as String,
+      functionLabel: null == functionLabel
+          ? _value.functionLabel
+          : functionLabel // ignore: cast_nullable_to_non_nullable
               as String,
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as String,
-      active: null == active
-          ? _value.active
-          : active // ignore: cast_nullable_to_non_nullable
+      isModuleSpecific: null == isModuleSpecific
+          ? _value.isModuleSpecific
+          : isModuleSpecific // ignore: cast_nullable_to_non_nullable
+              as bool,
+      moduleName: null == moduleName
+          ? _value._moduleName
+          : moduleName // ignore: cast_nullable_to_non_nullable
+              as List<AnnouncementDislayModule>,
+      loginType: null == loginType
+          ? _value.loginType
+          : loginType // ignore: cast_nullable_to_non_nullable
+              as AnnouncementDislayTime,
+      isCrossButton: null == isCrossButton
+          ? _value.isCrossButton
+          : isCrossButton // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
@@ -160,30 +240,60 @@ class __$$_AnnouncementCopyWithImpl<$Res>
 
 class _$_Announcement extends _Announcement {
   const _$_Announcement(
-      {required this.startTime,
+      {required this.active,
+      required final List<AnnouncementMessage> descriptionList,
+      required this.startTime,
       required this.endTime,
-      required this.description,
-      required this.id,
       required this.type,
-      required this.active})
-      : super._();
+      required this.day,
+      required this.functionLabel,
+      required this.id,
+      required this.isModuleSpecific,
+      required final List<AnnouncementDislayModule> moduleName,
+      required this.loginType,
+      required this.isCrossButton})
+      : _descriptionList = descriptionList,
+        _moduleName = moduleName,
+        super._();
+
+  @override
+  final bool active;
+  final List<AnnouncementMessage> _descriptionList;
+  @override
+  List<AnnouncementMessage> get descriptionList {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_descriptionList);
+  }
 
   @override
   final String startTime;
   @override
   final String endTime;
   @override
-  final String description;
+  final AnnouncementType type;
+  @override
+  final String day;
+  @override
+  final String functionLabel;
   @override
   final String id;
   @override
-  final String type;
+  final bool isModuleSpecific;
+  final List<AnnouncementDislayModule> _moduleName;
   @override
-  final bool active;
+  List<AnnouncementDislayModule> get moduleName {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_moduleName);
+  }
+
+  @override
+  final AnnouncementDislayTime loginType;
+  @override
+  final bool isCrossButton;
 
   @override
   String toString() {
-    return 'Announcement(startTime: $startTime, endTime: $endTime, description: $description, id: $id, type: $type, active: $active)';
+    return 'Announcement(active: $active, descriptionList: $descriptionList, startTime: $startTime, endTime: $endTime, type: $type, day: $day, functionLabel: $functionLabel, id: $id, isModuleSpecific: $isModuleSpecific, moduleName: $moduleName, loginType: $loginType, isCrossButton: $isCrossButton)';
   }
 
   @override
@@ -191,19 +301,42 @@ class _$_Announcement extends _Announcement {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Announcement &&
+            (identical(other.active, active) || other.active == active) &&
+            const DeepCollectionEquality()
+                .equals(other._descriptionList, _descriptionList) &&
             (identical(other.startTime, startTime) ||
                 other.startTime == startTime) &&
             (identical(other.endTime, endTime) || other.endTime == endTime) &&
-            (identical(other.description, description) ||
-                other.description == description) &&
-            (identical(other.id, id) || other.id == id) &&
             (identical(other.type, type) || other.type == type) &&
-            (identical(other.active, active) || other.active == active));
+            (identical(other.day, day) || other.day == day) &&
+            (identical(other.functionLabel, functionLabel) ||
+                other.functionLabel == functionLabel) &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.isModuleSpecific, isModuleSpecific) ||
+                other.isModuleSpecific == isModuleSpecific) &&
+            const DeepCollectionEquality()
+                .equals(other._moduleName, _moduleName) &&
+            (identical(other.loginType, loginType) ||
+                other.loginType == loginType) &&
+            (identical(other.isCrossButton, isCrossButton) ||
+                other.isCrossButton == isCrossButton));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, startTime, endTime, description, id, type, active);
+      runtimeType,
+      active,
+      const DeepCollectionEquality().hash(_descriptionList),
+      startTime,
+      endTime,
+      type,
+      day,
+      functionLabel,
+      id,
+      isModuleSpecific,
+      const DeepCollectionEquality().hash(_moduleName),
+      loginType,
+      isCrossButton);
 
   @JsonKey(ignore: true)
   @override
@@ -214,28 +347,208 @@ class _$_Announcement extends _Announcement {
 
 abstract class _Announcement extends Announcement {
   const factory _Announcement(
-      {required final String startTime,
+      {required final bool active,
+      required final List<AnnouncementMessage> descriptionList,
+      required final String startTime,
       required final String endTime,
-      required final String description,
+      required final AnnouncementType type,
+      required final String day,
+      required final String functionLabel,
       required final String id,
-      required final String type,
-      required final bool active}) = _$_Announcement;
+      required final bool isModuleSpecific,
+      required final List<AnnouncementDislayModule> moduleName,
+      required final AnnouncementDislayTime loginType,
+      required final bool isCrossButton}) = _$_Announcement;
   const _Announcement._() : super._();
 
+  @override
+  bool get active;
+  @override
+  List<AnnouncementMessage> get descriptionList;
   @override
   String get startTime;
   @override
   String get endTime;
   @override
-  String get description;
+  AnnouncementType get type;
+  @override
+  String get day;
+  @override
+  String get functionLabel;
   @override
   String get id;
   @override
-  String get type;
+  bool get isModuleSpecific;
   @override
-  bool get active;
+  List<AnnouncementDislayModule> get moduleName;
+  @override
+  AnnouncementDislayTime get loginType;
+  @override
+  bool get isCrossButton;
   @override
   @JsonKey(ignore: true)
   _$$_AnnouncementCopyWith<_$_Announcement> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+mixin _$AnnouncementMessage {
+  String get languageCode => throw _privateConstructorUsedError;
+  String get language => throw _privateConstructorUsedError;
+  String get announcement => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $AnnouncementMessageCopyWith<AnnouncementMessage> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $AnnouncementMessageCopyWith<$Res> {
+  factory $AnnouncementMessageCopyWith(
+          AnnouncementMessage value, $Res Function(AnnouncementMessage) then) =
+      _$AnnouncementMessageCopyWithImpl<$Res, AnnouncementMessage>;
+  @useResult
+  $Res call({String languageCode, String language, String announcement});
+}
+
+/// @nodoc
+class _$AnnouncementMessageCopyWithImpl<$Res, $Val extends AnnouncementMessage>
+    implements $AnnouncementMessageCopyWith<$Res> {
+  _$AnnouncementMessageCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? languageCode = null,
+    Object? language = null,
+    Object? announcement = null,
+  }) {
+    return _then(_value.copyWith(
+      languageCode: null == languageCode
+          ? _value.languageCode
+          : languageCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      language: null == language
+          ? _value.language
+          : language // ignore: cast_nullable_to_non_nullable
+              as String,
+      announcement: null == announcement
+          ? _value.announcement
+          : announcement // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_AnnouncementMessageCopyWith<$Res>
+    implements $AnnouncementMessageCopyWith<$Res> {
+  factory _$$_AnnouncementMessageCopyWith(_$_AnnouncementMessage value,
+          $Res Function(_$_AnnouncementMessage) then) =
+      __$$_AnnouncementMessageCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String languageCode, String language, String announcement});
+}
+
+/// @nodoc
+class __$$_AnnouncementMessageCopyWithImpl<$Res>
+    extends _$AnnouncementMessageCopyWithImpl<$Res, _$_AnnouncementMessage>
+    implements _$$_AnnouncementMessageCopyWith<$Res> {
+  __$$_AnnouncementMessageCopyWithImpl(_$_AnnouncementMessage _value,
+      $Res Function(_$_AnnouncementMessage) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? languageCode = null,
+    Object? language = null,
+    Object? announcement = null,
+  }) {
+    return _then(_$_AnnouncementMessage(
+      languageCode: null == languageCode
+          ? _value.languageCode
+          : languageCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      language: null == language
+          ? _value.language
+          : language // ignore: cast_nullable_to_non_nullable
+              as String,
+      announcement: null == announcement
+          ? _value.announcement
+          : announcement // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_AnnouncementMessage extends _AnnouncementMessage {
+  const _$_AnnouncementMessage(
+      {required this.languageCode,
+      required this.language,
+      required this.announcement})
+      : super._();
+
+  @override
+  final String languageCode;
+  @override
+  final String language;
+  @override
+  final String announcement;
+
+  @override
+  String toString() {
+    return 'AnnouncementMessage(languageCode: $languageCode, language: $language, announcement: $announcement)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_AnnouncementMessage &&
+            (identical(other.languageCode, languageCode) ||
+                other.languageCode == languageCode) &&
+            (identical(other.language, language) ||
+                other.language == language) &&
+            (identical(other.announcement, announcement) ||
+                other.announcement == announcement));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, languageCode, language, announcement);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_AnnouncementMessageCopyWith<_$_AnnouncementMessage> get copyWith =>
+      __$$_AnnouncementMessageCopyWithImpl<_$_AnnouncementMessage>(
+          this, _$identity);
+}
+
+abstract class _AnnouncementMessage extends AnnouncementMessage {
+  const factory _AnnouncementMessage(
+      {required final String languageCode,
+      required final String language,
+      required final String announcement}) = _$_AnnouncementMessage;
+  const _AnnouncementMessage._() : super._();
+
+  @override
+  String get languageCode;
+  @override
+  String get language;
+  @override
+  String get announcement;
+  @override
+  @JsonKey(ignore: true)
+  _$$_AnnouncementMessageCopyWith<_$_AnnouncementMessage> get copyWith =>
       throw _privateConstructorUsedError;
 }

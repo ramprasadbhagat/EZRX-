@@ -208,12 +208,12 @@ class _UsernameField extends StatelessWidget {
                 LoginFormEvent.usernameChanged(value),
               ),
           validator: (text) => Username(text ?? '').value.fold(
-            (f) => f.maybeMap(
-              empty: (_) => 'Username cannot be empty.'.tr(),
-              orElse: () => null,
-            ),
-            (_) => null,
-          ),
+                (f) => f.maybeMap(
+                  empty: (_) => 'Username cannot be empty.'.tr(),
+                  orElse: () => null,
+                ),
+                (_) => null,
+              ),
         );
       },
     );
@@ -269,12 +269,12 @@ class _PasswordField extends StatelessWidget {
                 LoginFormEvent.passwordChanged(value),
               ),
           validator: (text) => Password.login(text ?? '').value.fold(
-            (f) => f.maybeMap(
-              empty: (_) => 'Password cannot be empty.'.tr(),
-              orElse: () => null,
-            ),
-            (_) => null,
-          ),
+                (f) => f.maybeMap(
+                  empty: (_) => 'Password cannot be empty.'.tr(),
+                  orElse: () => null,
+                ),
+                (_) => null,
+              ),
           onFieldSubmitted: (value) {
             if (!state.isSubmitting) {
               FocusScope.of(context).unfocus();

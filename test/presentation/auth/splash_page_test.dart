@@ -6,6 +6,7 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_rep/sales_rep_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
@@ -51,6 +52,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:upgrader/upgrader.dart';
 
 import '../../utils/widget_utils.dart';
+import '../aup_tc_test/apu_tc_test.dart';
 import '../order_history/order_history_details_widget_test.dart';
 
 class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
@@ -63,8 +65,6 @@ class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
 class CustomerCodeBlocMock
     extends MockBloc<CustomerCodeEvent, CustomerCodeState>
     implements CustomerCodeBloc {}
-
-
 
 class ShipToCodeBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState>
     implements ShipToCodeBloc {}
@@ -158,6 +158,8 @@ void main() {
   late OrderDocumentTypeBloc orderDocumentTypeMock;
   late ReturnApproverBloc returnApproverBlocMock;
   late ReturnApproverFilterBlocMock returnApproverFilterBlocMock;
+  late AnnouncementBloc announcementBlocMock;
+
   final fakeSalesOrganisation =
       SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601'));
 
@@ -209,6 +211,7 @@ void main() {
       materialFilterBlocMock = MaterialFilterBlocMock();
       returnApproverBlocMock = ReturnApproverBlocMock();
       returnApproverFilterBlocMock = ReturnApproverFilterBlocMock();
+      announcementBlocMock = AnnouncementBlocMock();
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
       when(() => orderDocumentTypeMock.state).thenReturn(
         OrderDocumentTypeState.initial().copyWith(
@@ -247,6 +250,8 @@ void main() {
 
       when(() => returnApproverFilterBlocMock.state)
           .thenReturn(ReturnApproverFilterState.initial());
+      when(() => announcementBlocMock.state)
+          .thenReturn(AnnouncementState.initial());
     });
 
     Future getWidget(tester) async {
@@ -292,6 +297,8 @@ void main() {
                 create: (context) => returnApproverBlocMock),
             BlocProvider<ReturnApproverFilterBloc>(
                 create: (context) => returnApproverFilterBlocMock),
+            BlocProvider<AnnouncementBloc>(
+                create: (context) => announcementBlocMock),
           ],
           child: const SplashPage(),
         ),

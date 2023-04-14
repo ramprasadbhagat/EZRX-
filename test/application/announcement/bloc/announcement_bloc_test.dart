@@ -62,6 +62,7 @@ void main() {
         announcementState.copyWith(
           isLoading: false,
           announcement: announcementMock,
+          isClosed: false,
         ),
       ],
       verify: (AnnouncementBloc bloc) => expect(
@@ -88,16 +89,23 @@ void main() {
         announcementState.copyWith(
           isLoading: false,
           announcement: announcementMock,
+          isClosed: false,
         ),
         announcementState.copyWith(
           isClosed: true,
-          announcement: Announcement.empty(),
+          announcement: announcementMock,
         ),
       ],
-      verify: (AnnouncementBloc bloc) => expect(
-        announcementState.announcement,
-        Announcement.empty(),
-      ),
+    );
+
+    blocTest(
+      'Show announcement',
+      build: () => AnnouncementBloc(announcementRepository: repository),
+      seed: () => announcementState.copyWith(isClosed: true),
+      act: (AnnouncementBloc bloc) => bloc.add(const AnnouncementEvent.show()),
+      expect: () => [
+        announcementState.copyWith(isClosed: false),
+      ],
     );
   });
 }

@@ -224,6 +224,22 @@ String salesOrgCountry(String salesOrg) {
   return salesOrgCountryMap[salesOrg] ?? 'Unknown';
 }
 
+String salesOrgLanguageCode(String country) {
+  final salesOrgCountryMap = {
+    'MY': 'en',
+    'MM': 'my',
+    'PH': 'en',
+    'SG': 'en',
+    'TW': 'zh',
+    'TH': 'th',
+    'VN': 'vi',
+    'KR': 'en',
+    'KH': 'km',
+  };
+
+  return salesOrgCountryMap[country] ?? 'en';
+}
+
 //  Possible role
 //  'internal_sales_rep'
 //  'external_sales_rep'
