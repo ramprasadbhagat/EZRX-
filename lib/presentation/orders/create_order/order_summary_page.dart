@@ -19,6 +19,7 @@ import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
@@ -665,6 +666,7 @@ class _OrderSummaryDetails {
 
 List<_OrderSummaryDetails> _getTextRowLevelsForCustomerInfo(
   CustomerCodeInfo customer,
+  ShipToInfo shipToInfo,
 ) {
   return [
     _OrderSummaryDetails(
@@ -678,7 +680,7 @@ List<_OrderSummaryDetails> _getTextRowLevelsForCustomerInfo(
     ),
     _OrderSummaryDetails(
       key: 'Customer ship to ID'.tr(),
-      value: customer.shipToInfos[0].shipToCustomerCode,
+      value: shipToInfo.shipToCustomerCode,
     ),
     _OrderSummaryDetails(
       key: 'Customer sold to ID'.tr(),
@@ -728,8 +730,10 @@ class _CustomerDetailsStep extends StatelessWidget {
       builder: (context, state) {
         return Column(
           children: [
-            ..._getTextRowLevelsForCustomerInfo(state.customerCodeInfo)
-                .map((e) {
+            ..._getTextRowLevelsForCustomerInfo(
+              state.customerCodeInfo,
+              context.read<ShipToCodeBloc>().state.shipToInfo,
+            ).map((e) {
               return Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: BalanceTextRow(

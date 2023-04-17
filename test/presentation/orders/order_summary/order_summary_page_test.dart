@@ -2136,12 +2136,13 @@ void main() {
         when(
           () => cartBlocMock.state,
         ).thenReturn(
-          CartState.initial().copyWith(cartItems: [
-            CartItem.material(
-              PriceAggregate.empty().copyWith(
-                materialInfo: MaterialInfo.empty().copyWith(
-                  materialNumber: MaterialNumber('123456789'),
-                ),
+          CartState.initial().copyWith(
+            cartItems: [
+              CartItem.material(
+                PriceAggregate.empty().copyWith(
+                  materialInfo: MaterialInfo.empty().copyWith(
+                    materialNumber: MaterialNumber('123456789'),
+                  ),
                   stockInfo: StockInfo.empty(),
                   salesOrgConfig: SalesOrganisationConfigs.empty().copyWith(
                     enableBatchNumber: true,
@@ -2187,6 +2188,86 @@ void main() {
         expect(cartDetailsKey, findsOneWidget);
         final disclaimer = find.textContaining('Batch Number is empty');
         expect(disclaimer, findsNothing);
+      },
+    );
+
+    testWidgets(
+      'Customer Details should display selected shipToCode not the default one',
+      (tester) async {
+        when(
+          () => orderSummaryBlocMock.state,
+        ).thenReturn(
+          OrderSummaryState.initial().copyWith(
+            step: 0,
+            maxSteps: 4,
+            additionalDetailsStep: 3,
+          ),
+        );
+
+        when(
+          () => salesOrgBlocMock.state,
+        ).thenReturn(
+          SalesOrgState.initial().copyWith(
+            salesOrganisation: SalesOrganisation.empty().copyWith(
+              salesOrg: SalesOrg('2800'),
+            ),
+          ),
+        );
+
+        when(
+          () => customerCodeBlocMock.state,
+        ).thenReturn(
+          CustomerCodeState.initial().copyWith(
+            customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+              customerCodeSoldTo: '0030038539',
+              shipToInfos: [
+                ShipToInfo.empty().copyWith(
+                  shipToCustomerCode: '0070100094',
+                  defaultShipToAddress: true,
+                ),
+                ShipToInfo.empty().copyWith(
+                  shipToCustomerCode: '0070100095',
+                  defaultShipToAddress: false,
+                ),
+              ],
+            ),
+          ),
+        );
+
+        when(
+          () => shipToCodeBlocMock.state,
+        ).thenReturn(
+          ShipToCodeState.initial().copyWith(
+            shipToInfo: ShipToInfo.empty().copyWith(
+              shipToCustomerCode: '0070100095',
+              defaultShipToAddress: false,
+            ),
+          ),
+        );
+
+        when(
+          () => cartBlocMock.state,
+        ).thenReturn(
+          CartState.initial().copyWith(
+            cartItems: [
+              CartItem.material(
+                PriceAggregate.empty().copyWith(
+                  materialInfo: MaterialInfo.empty().copyWith(
+                    materialNumber: MaterialNumber('123456789'),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+
+        final key = 'Customer ship to ID'.tr();
+        expect(find.text(key), findsOneWidget);
+        const value = ': 0070100095';
+        expect(find.text(value), findsAtLeastNWidgets(2));
       },
     );
   });
