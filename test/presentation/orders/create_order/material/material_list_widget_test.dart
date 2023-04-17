@@ -891,161 +891,159 @@ void main() {
       await tester.pumpAndSettle(const Duration(seconds: 1));
     });
 
-    // TODO: need Wasim help
-    // testWidgets('Clear material list Search', (tester) async {
-    //   final expectedMaterialListStates = [
-    //     MaterialListState.initial().copyWith(
-    //       isFetching: false,
-    //       materialList: [],
-    //     ),
-    //   ];
+    testWidgets('Clear material list Search', (tester) async {
+      final expectedMaterialListStates = [
+        MaterialListState.initial().copyWith(
+          isFetching: true,
+          materialList: [
+            MaterialInfo.empty().copyWith(
+              materialNumber: MaterialNumber('112322'),
+            ),
+            MaterialInfo.empty().copyWith(
+              materialNumber: MaterialNumber('22334455'),
+            ),
+            MaterialInfo.empty().copyWith(
+              materialNumber: MaterialNumber('3344556677'),
+            ),
+          ],
+        ),
+        MaterialListState.initial().copyWith(
+          isFetching: false,
+          searchKey: SearchKey.search('112322'),
+          materialList: [
+            MaterialInfo.empty().copyWith(
+              materialNumber: MaterialNumber('112322'),
+            )
+          ],
+        ),
+      ];
 
-    //   whenListen(
-    //       customerCodeBlocMock, Stream.fromIterable(expectedMaterialListStates),
-    //       initialState: materialListBlocMock.state.copyWith(
-    //           isFetching: true,
-    //           canLoadMore: true,
-    //           materialList: [MaterialInfo.empty()]));
+      whenListen(
+        materialListBlocMock,
+        Stream.fromIterable(expectedMaterialListStates),
+      );
 
-    //   await tester.runAsync(() async {
-    //     await tester.pumpWidget(getScopedWidget(
-    //       MaterialListPage(addToCart: () {}),
-    //     ));
-    //   });
+      await tester.runAsync(() async {
+        await tester.pumpWidget(getScopedWidget(
+          const MaterialListPage(),
+        ));
+      });
 
-    //   await tester.pump();
-    //   final clearMaterialListSearch =
-    //       find.byKey(const Key('clearMaterialListSearch'));
-    //   expect(clearMaterialListSearch, findsOneWidget);
-    // });
+      await tester.pump();
+      tester.binding.window.physicalSizeTestValue = const Size(1080, 1920);
+      tester.binding.window.devicePixelRatioTestValue = 1.0;
+      final listWidget = find.byWidgetPredicate((w) => w is MaterialListItem);
+      expect(listWidget, findsOneWidget);
+      final materialSearchField =
+          find.byKey(const Key('materialSearchField112322'));
+      expect(materialSearchField, findsOneWidget);
+      final clearSearch = find.byKey(const Key('clearSearch'));
+      expect(clearSearch, findsOneWidget);
+      await tester.tap(clearSearch);
+      await tester.pump();
+      verify(
+        () => materialListBlocMock.add(
+          MaterialListEvent.fetch(
+            user: User.empty(),
+            salesOrganisation: SalesOrganisation.empty(),
+            configs: SalesOrganisationConfigs.empty(),
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            shipToInfo: ShipToInfo.empty(),
+            selectedMaterialFilter: MaterialFilter.empty(),
+            orderDocumentType: OrderDocumentType.empty(),
+            pickAndPack: '',
+          ),
+        ),
+      ).called(1);
+    });
 
-    // testWidgets('Start to fetch price', (tester) async {
-    //   final fakeMaterial = MaterialInfo.empty().copyWith(
-    //     materialNumber: MaterialNumber('fake-number'),
-    //   );
-    //   final fakeCustomerCodeInfo =
-    //       CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: 'fake-code');
-    //   final fakeSalesOrg = SalesOrganisation.empty().copyWith(
-    //     salesOrg: SalesOrg('fake-name'),
-    //   );
-    //   final expectedState = [
-    //     MaterialListState.initial().copyWith(
-    //       nextPageIndex: 2,
-    //       materialList: [fakeMaterial],
-    //     )
-    //   ];
-    //   when(() => materialListBlocMock.state).thenReturn(
-    //     MaterialListState.initial(),
-    //   );
-    //   whenListen(
-    //     materialListBlocMock,
-    //     Stream.fromIterable(expectedState),
-    //   );
-    //   when(() => customerCodeBlocMock.state).thenReturn(
-    //     CustomerCodeState.initial().copyWith(
-    //       customeCodeInfo: fakeCustomerCodeInfo,
-    //     ),
-    //   );
-    //   when(() => salesOrgBlocMock.state).thenReturn(
-    //     SalesOrgState.initial().copyWith(
-    //       salesOrganisation: fakeSalesOrg,
-    //     ),
-    //   );
-    //   await tester.pumpWidget(
-    //     getScopedWidget(
-    //       const MaterialListPage(),
-    //     ),
-    //   );
-    //   await tester.pump();
+    testWidgets('Material List show price properly', (tester) async {
+      final expectedState = [
+        MaterialListState.initial().copyWith(isFetching: true),
+        MaterialListState.initial().copyWith(
+          apiFailureOrSuccessOption: none(),
+          isFetching: false,
+          nextPageIndex: 2,
+          materialList: <MaterialInfo>[
+            MaterialInfo.empty().copyWith(materialNumber: fakeMaterialNumber)
+          ],
+        )
+      ];
+      when(() => materialListBlocMock.state)
+          .thenReturn(MaterialListState.initial());
+      whenListen(materialListBlocMock, Stream.fromIterable(expectedState));
+      when(() => materialPriceBlocMock.state).thenReturn(
+        MaterialPriceState.initial().copyWith(
+          isFetching: false,
+          materialPrice: {
+            fakeMaterialNumber: Price.empty().copyWith(
+              finalPrice: MaterialPrice(10),
+            )
+          },
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget(const MaterialListPage()));
+      await tester.pump();
+      tester.binding.window.physicalSizeTestValue = const Size(1080, 1920);
+      tester.binding.window.devicePixelRatioTestValue = 1.0;
+      final materialList = find.byKey(const Key('scrollList'));
+      expect(materialList, findsOneWidget);
+      await tester.drag(materialList, const Offset(0.0, -300));
+      await tester.pump();
+      final listContent = find.byKey(Key(
+          'materialOption${materialListBlocMock.state.materialList.first.materialNumber.getOrCrash()}'));
+      expect(listContent, findsOneWidget);
+      await tester.pump();
+      final price = find.text('${'Unit Price:'.tr()} NA 10.00');
+      expect(price, findsOneWidget);
+    });
 
-    //   expect(customerCodeBlocMock.state.customeCodeInfo, fakeCustomerCodeInfo);
-    //   expect(salesOrgBlocMock.state.salesOrganisation, fakeSalesOrg);
+    testWidgets('Material List show loading price', (tester) async {
+      final expectedState = [
+        MaterialListState.initial().copyWith(isFetching: true),
+        MaterialListState.initial().copyWith(
+          apiFailureOrSuccessOption: none(),
+          isFetching: false,
+          nextPageIndex: 2,
+          materialList: <MaterialInfo>[
+            MaterialInfo.empty().copyWith(materialNumber: fakeMaterialNumber)
+          ],
+        )
+      ];
+      when(() => materialListBlocMock.state)
+          .thenReturn(MaterialListState.initial());
+      whenListen(materialListBlocMock, Stream.fromIterable(expectedState));
+      when(() => materialPriceBlocMock.state).thenReturn(
+        MaterialPriceState.initial().copyWith(
+          isFetching: true,
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget(const MaterialListPage()));
+      await tester.pump();
+      final materialList = find.byKey(const Key('scrollList'));
+      expect(materialList, findsOneWidget);
+      await tester.drag(materialList, const Offset(0.0, -300));
+      await tester.pump();
+      final listContent = find.byKey(Key(
+          'materialOption${materialListBlocMock.state.materialList.first.materialNumber.getOrCrash()}'));
+      expect(listContent, findsOneWidget);
+      await tester.pump();
+      final loadingIndicator = find.byKey(const Key('price-loading'));
+      expect(loadingIndicator, findsOneWidget);
 
-    //   verify(() => materialPriceBlocMock.add(MaterialPriceEvent.fetch(
-    //       customerCode: fakeCustomerCodeInfo,
-    //       salesOrganisation: fakeSalesOrg,
-    //       materialNumbers: [MaterialNumber('fake-number')]))).called(1);
-    // });
+      await tester.drag(
+        listContent,
+        const Offset(0.0, 1000.0),
+      );
+      await tester.pump(const Duration(seconds: 1));
 
-    // testWidgets('Material List show price properly', (tester) async {
-    //   final expectedState = [
-    //     MaterialListState.initial().copyWith(isFetching: true),
-    //     MaterialListState.initial().copyWith(
-    //       apiFailureOrSuccessOption: none(),
-    //       isFetching: false,
-    //       nextPageIndex: 2,
-    //       materialList: <MaterialInfo>[
-    //         MaterialInfo.empty().copyWith(materialNumber: fakeMaterialNumber)
-    //       ],
-    //     )
-    //   ];
-    //   when(() => materialListBlocMock.state)
-    //       .thenReturn(MaterialListState.initial());
-    //   whenListen(materialListBlocMock, Stream.fromIterable(expectedState));
-    //   when(() => materialPriceBlocMock.state).thenReturn(
-    //     MaterialPriceState.initial().copyWith(
-    //       isFetching: false,
-    //       materialPrice: {
-    //         fakeMaterialNumber: Price.empty().copyWith(
-    //           finalPrice: MaterialPrice(10),
-    //         )
-    //       },
-    //     ),
-    //   );
-    //   await tester.pumpWidget(getScopedWidget(const MaterialListPage()));
-    //   await tester.pump();
-    //   final materialList = find.byKey(const Key('scrollList'));
-    //   expect(materialList, findsOneWidget);
-    //   await tester.drag(materialList, const Offset(0.0, -300));
-    //   await tester.pump();
-    //   final listContent = find.byKey(Key(
-    //       'materialOption${materialListBlocMock.state.materialList.first.materialNumber.getOrCrash()}'));
-    //   expect(listContent, findsOneWidget);
-    //   await tester.pump();
-    //   final price = find.text('${'Unit Price: '.tr()}\$10');
-    //   expect(price, findsOneWidget);
-    // });
-
-    // testWidgets('Material List show loading price', (tester) async {
-    //   final expectedState = [
-    //     MaterialListState.initial().copyWith(isFetching: true),
-    //     MaterialListState.initial().copyWith(
-    //       apiFailureOrSuccessOption: none(),
-    //       isFetching: false,
-    //       nextPageIndex: 2,
-    //       materialList: <MaterialInfo>[
-    //         MaterialInfo.empty().copyWith(materialNumber: fakeMaterialNumber)
-    //       ],
-    //     )
-    //   ];
-    //   when(() => materialListBlocMock.state)
-    //       .thenReturn(MaterialListState.initial());
-    //   whenListen(materialListBlocMock, Stream.fromIterable(expectedState));
-    //   when(() => materialPriceBlocMock.state).thenReturn(
-    //     MaterialPriceState.initial().copyWith(
-    //       isFetching: true,
-    //     ),
-    //   );
-    //   await tester.pumpWidget(getScopedWidget(const MaterialListPage()));
-    //   await tester.pump();
-    //   final materialList = find.byKey(const Key('scrollList'));
-    //   expect(materialList, findsOneWidget);
-    //   await tester.drag(materialList, const Offset(0.0, -300));
-    //   await tester.pump();
-    //   final listContent = find.byKey(Key(
-    //       'materialOption${materialListBlocMock.state.materialList.first.materialNumber.getOrCrash()}'));
-    //   expect(listContent, findsOneWidget);
-    //   await tester.pump();
-    //   final loadingIndicator = find.byKey(const Key('price-loading'));
-    //   expect(loadingIndicator, findsOneWidget);
-
-    //   await tester.fling(listContent, const Offset(0, 300), 600);
-    //   await tester.pump(const Duration(seconds: 1));
-    //   await tester.pump(const Duration(seconds: 1));
-    //   verify(() =>
-    //           materialPriceBlocMock.add(const MaterialPriceEvent.initialized()))
-    //       .called(1);
-    // });
+      //await tester.fling(listContent, const Offset(0, 300), 600);
+      await tester.pump(const Duration(seconds: 1));
+      await tester.pump(const Duration(seconds: 1));
+      verify(() =>
+              materialPriceBlocMock.add(const MaterialPriceEvent.initialized()))
+          .called(1);
+    });
 
     //Test for Pricing
     testWidgets('show list price and unit price', (tester) async {
@@ -2006,7 +2004,6 @@ void main() {
 
       expect(find.byType(AddToCart), findsOneWidget);
     });
-
     testWidgets(
         'Opening combo deal detail after scanning and fetching price successfully',
         (tester) async {

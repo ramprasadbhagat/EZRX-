@@ -23,6 +23,7 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
@@ -45,11 +46,14 @@ import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/cart_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/discount_override_repository.dart';
 import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 // import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/update_cart_button.dart';
 // import 'package:ezrxmobile/presentation/orders/cart/cart_bundle_item_tile.dart';
 // import 'package:ezrxmobile/presentation/orders/cart/cart_material_item_tile.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_page.dart';
+import 'package:ezrxmobile/presentation/orders/cart/item/cart_bundle_item_tile.dart';
+import 'package:ezrxmobile/presentation/orders/cart/item/cart_material_item_tile.dart';
 // import 'package:ezrxmobile/presentation/orders/cart/item/cart_bundle_item_tile.dart';
 // import 'package:ezrxmobile/presentation/orders/cart/item/cart_material_item_tile.dart';
 import 'package:ezrxmobile/presentation/orders/core/account_suspended_warning.dart';
@@ -392,7 +396,6 @@ void main() {
             principalData: PrincipalData.empty().copyWith(
               principalName: PrincipalName('å�°ç�£æ‹œè€³è‚¡ä»½æœ‰é™�å…¬å�¸'),
             ),
-            remarks: '',
           ),
           stockInfo: StockInfo.empty().copyWith(
             inStock: MaterialInStock('Yes'),
@@ -653,47 +656,76 @@ void main() {
         // verify(() => authBlocMock.add(const AuthEvent.authCheck()));
       });
 
-      //todo : merge solve
-      // testWidgets('Test have cart item list and Refresh', (tester) async {
-      //   when(() => cartBloc.state).thenReturn(
-      //     CartState.initial().copyWith(
-      //       // selectedItemsMaterialNumber: mockMaterialItemList,
-      //       cartItems: [CartItem.bundle(mockCartItemBundles)],
-      //       isFetching: false,
-      //     ),
-      //   );
-      //   await tester.runAsync(() async {
-      //     await tester.pumpWidget(getWidget());
-      //   });
+      testWidgets('Test have cart item list and Refresh', (tester) async {
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            // selectedItemsMaterialNumber: mockMaterialItemList,
+            cartItems: [
+              CartItem.bundle(mockCartItemBundles),
+              mockCartItemWithOutBatch,
+            ],
+            isFetching: false,
+          ),
+        );
+        await tester.runAsync(() async {
+          await tester.pumpWidget(getWidget());
+        });
 
-      //   await tester.pump();
-      //   final noBundleList = find.text('No bundle found');
-      //   expect(noBundleList, findsNothing);
-      //   final scrollWidget = find.byWidgetPredicate((w) => w is ScrollList);
-      //   expect(scrollWidget, findsOneWidget);
+        await tester.pump();
+        final noBundleList = find.text('No bundle found');
+        expect(noBundleList, findsNothing);
+        final scrollWidget = find.byWidgetPredicate((w) => w is ScrollList);
+        expect(scrollWidget, findsOneWidget);
 
-      //   final cartBundleItemTile =
-      //       find.byWidgetPredicate((w) => w is CartBundleItemTile);
+        final cartBundleItemTile =
+            find.byWidgetPredicate((w) => w is CartBundleItemTile);
 
-      //   expect(cartBundleItemTile, findsOneWidget);
-      //   final cartTile =
-      //       find.byWidgetPredicate((w) => w is CartMaterialItemTile);
+        expect(cartBundleItemTile, findsOneWidget);
+        final cartTile =
+            find.byWidgetPredicate((w) => w is CartMaterialItemTile);
 
-      //   expect(cartTile, findsOneWidget);
-      //   final selectAllButton = find.byKey(const Key('selectAllButton'));
+        expect(cartTile, findsOneWidget);
+        final selectAllButton = find.byKey(const Key('selectAllButton'));
 
-      //   expect(selectAllButton, findsOneWidget);
+        expect(selectAllButton, findsOneWidget);
 
-      //   final totalSection = find.byKey(const Key('totalSection'));
+        final totalSection = find.byKey(const Key('totalSection'));
 
-      //   expect(totalSection, findsOneWidget);
+        expect(totalSection, findsOneWidget);
 
-      //   await tester.fling(scrollWidget, const Offset(0.0, 300.0), 1000.0);
-      //   await tester.pump();
-      //   await tester.pump(const Duration(seconds: 1));
-      //   await tester.pump(const Duration(seconds: 1));
-      //   await tester.pump(const Duration(seconds: 1));
-      // });
+        await tester.fling(scrollWidget, const Offset(0.0, 300.0), 1000.0);
+        await tester.pump();
+        await tester.pump(const Duration(seconds: 1));
+        await tester.pump(const Duration(seconds: 1));
+        await tester.pump(const Duration(seconds: 1));
+        verify(
+          () => cartBloc.add(
+            CartEvent.fetch(
+              salesOrganisationConfigs:
+                  SalesOrganisationConfigs.empty().copyWith(
+                enableReferenceNote: true,
+                enableVat: true,
+                enableFutureDeliveryDay: true,
+                enableMobileNumber: true,
+                enableSpecialInstructions: true,
+                disableOrderType: false,
+                enableCollectiveNumber: true,
+                enablePaymentTerms: true,
+                enableRemarks: true,
+                priceOverride: true,
+              ),
+              salesOrganisation: SalesOrganisation.empty()
+                  .copyWith(salesOrg: SalesOrg('2601')),
+              customerCodeInfo:
+                  CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: '1234'),
+              shipToInfo: ShipToInfo.empty(),
+              doNotAllowOutOfStockMaterials: true,
+              comboDealEligible: false,
+              isSpecialOrderType: false,
+            ),
+          ),
+        ).called(1);
+      });
 
       testWidgets('Test have cart item list add and slide and remove item',
           (tester) async {
@@ -760,7 +792,6 @@ void main() {
       });
 
       testWidgets('Test have cart item list decrease item', (tester) async {
-        //todo
         when(() => cartBloc.state).thenReturn(
           CartState.initial().copyWith(
             cartItems: [CartItem.material(mockCartItemWithDataList2.first)],
@@ -785,103 +816,90 @@ void main() {
         await tester.pump();
       });
 
-      // todo : merge solve
-      // testWidgets('Test have cart item list with one remark message',
-      //     (tester) async {
-      //   final mockCartItemWithRemarkDataList = [
-      //     mockCartItemWithDataList2.first.copyWith(
-      //       materialInfo: mockCartItemWithDataList2.first.materialInfo.copyWith(
-      //         remarks: 'good product',
-      //       ),
-      //     ),
-      //   ];
+      testWidgets('Test have cart item list with one remark message',
+          (tester) async {
+        final mockCartItemWithRemarkDataList = [
+          mockCartItemWithDataList2.first.copyWith(
+            materialInfo: mockCartItemWithDataList2.first.materialInfo.copyWith(
+              remarks: 'good product',
+            ),
+          ),
+        ];
 
-      //   when(() => cartBloc.state).thenReturn(
-      //     CartState.initial().copyWith(
-      //       cartItems: [CartItem.material(mockCartItemWithDataList.first)],
-      //       isFetching: false,
-      //     ),
-      //   );
-      //   when(() => salesOrgBloc.state).thenReturn(
-      //     SalesOrgState.initial().copyWith(
-      //         configs: SalesOrganisationConfigs.empty().copyWith(
-      //       enableRemarks: true,
-      //     )),
-      //   );
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartItems: [
+              CartItem.material(mockCartItemWithRemarkDataList.first)
+            ],
+            isFetching: false,
+          ),
+        );
+        when(() => salesOrgBloc.state).thenReturn(
+          SalesOrgState.initial().copyWith(
+              configs: SalesOrganisationConfigs.empty().copyWith(
+            enableRemarks: true,
+          )),
+        );
 
-      //   await tester.runAsync(() async {
-      //     await tester.pumpWidget(getWidget());
-      //   });
+        await tester.runAsync(() async {
+          await tester.pumpWidget(getWidget());
+        });
 
-      //   await tester.pump();
-      //   final item = find.byKey(Key(
-      //       'cartItem${mockCartItemWithRemarkDataList[0].materialInfo.materialNumber}'));
-      //   expect(item, findsOneWidget);
-      //   final listWidget = find.byWidgetPredicate((w) => w is ListTile);
-      //   expect(listWidget, findsAtLeastNWidgets(1));
+        await tester.pump();
+        final item = find.byKey(Key(
+            'cartItem${mockCartItemWithRemarkDataList[0].materialInfo.materialNumber.getOrCrash()}'));
+        expect(item, findsOneWidget);
+        final listWidget = find.byWidgetPredicate((w) => w is ListTile);
+        expect(listWidget, findsAtLeastNWidgets(1));
 
-      //   final remarkWidget = find.byKey(Key(
-      //       'remarks${mockCartItemWithRemarkDataList[0].materialInfo.remarks}'));
-      //   expect(remarkWidget, findsOneWidget);
-      // });
+        final remarkWidget = find.byKey(Key(
+            'remarks${mockCartItemWithRemarkDataList[0].materialInfo.remarks}'));
+        expect(remarkWidget, findsOneWidget);
+      });
 
-      // TODO: Biswaranjan
-      // delete button now change to slide to show
-      // Cart item now directly get value from Price Aggegrate instead of cal
-      // testWidgets('Test have cart item list and remove from cart',
-      //     (tester) async {
-      //   //todo
-      //   when(() => cartBloc.state).thenReturn(
-      //     CartState.initial().copyWith(
-      //       cartItemList: mockCartItemWithDataList2,
-      //       isFetching: true,
-      //     ),
-      //   );
+      testWidgets('Test have cart item list and remove from cart by swapping',
+          (tester) async {
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartItems: mockCartItemWithDataList2
+                .map((e) => CartItem.material(e))
+                .toList(),
+            isFetching: true,
+          ),
+        );
 
-      //   await tester.runAsync(() async {
-      //     await tester.pumpWidget(getWidget());
-      //   });
+        await tester.runAsync(() async {
+          await tester.pumpWidget(getWidget());
+        });
 
-      //   await tester.pump();
-      //   final item = find.byKey(Key(
-      //       'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber}'));
-      //   expect(item, findsOneWidget);
-      //   final listWidget = find.byWidgetPredicate((w) => w is ListTile);
-      //   expect(listWidget, findsOneWidget);
+        await tester.pump();
+        final item = find.byKey(Key(
+            'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber.getOrCrash()}'));
+        expect(item, findsOneWidget);
+        final listWidget = find.byWidgetPredicate((w) => w is ListTile);
+        expect(listWidget, findsOneWidget);
 
-      //   final deleteWidget = tester.widget(find.byIcon(Icons.delete));
-      //   await tester.tap(find.byWidget(deleteWidget));
-      //   await tester.pump();
-      // });
-      // testWidgets('Test have cart item list and Material price loading',
-      //     (tester) async {
-      //   //todo
-      //   when(() => cartBloc.state).thenReturn(
-      //     CartState.initial().copyWith(
-      //       cartItemList: mockCartItemWithDataList2,
-      //       isFetching: false,
-      //     ),
-      //   );
-      //   when(() => materialPriceBloc.state).thenReturn(
-      //     MaterialPriceState.initial().copyWith(
-      //       materialPrice: {},
-      //       isFetching: true,
-      //     ),
-      //   );
-
-      //   await tester.runAsync(() async {
-      //     await tester.pumpWidget(getWidget());
-      //   });
-
-      //   await tester.pump();
-      //   final item = find.byKey(Key(
-      //       'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber}'));
-      //   expect(item, findsOneWidget);
-      //   final listWidget = find.byWidgetPredicate((w) => w is ListTile);
-      //   expect(listWidget, findsOneWidget);
-      //   final finder = find.byKey(const Key('price-loading'));
-      //   expect(finder, findsOneWidget);
-      // });
+        await tester.drag(listWidget, const Offset(-500, 0));
+        await tester.pump();
+        final deleteIcon = find.byIcon(Icons.delete_outline);
+        expect(deleteIcon, findsOneWidget);
+        final text = find.text('Delete');
+        expect(text, findsOneWidget);
+        await tester.tap(
+          text,
+        );
+        await tester.pump();
+        verify(
+          () => cartBloc.add(
+            CartEvent.removeFromCart(
+              item: mockCartItemWithDataList2
+                  .map((e) => CartItem.material(e))
+                  .toList()
+                  .first,
+            ),
+          ),
+        ).called(1);
+      });
       testWidgets('Test have cart item list and Material price loading NA',
           (tester) async {
         when(() => cartBloc.state).thenReturn(
@@ -1200,249 +1218,263 @@ void main() {
             find.byKey(const Key('discountOverride'));
         expect(discountOverrideFinder, findsOneWidget);
       });
-      // testWidgets('Test have cart item list add update a bonus item',
-      //     (tester) async {
-      //   when(() => cartBloc.state).thenReturn(
-      //     CartState.initial().copyWith(
-      //       cartItems: [CartItem.material(mockCartItemWithDataList.first)],
-      //       isFetching: true,
-      //     ),
-      //   );
+      testWidgets('Test have cart item list add update a bonus item',
+          (tester) async {
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartItems: [CartItem.material(mockCartItemWithDataList.first)],
+            isFetching: true,
+          ),
+        );
 
-      //   await tester.runAsync(() async {
-      //     await tester.pumpWidget(getWidget());
-      //   });
+        await tester.runAsync(() async {
+          await tester.pumpWidget(getWidget());
+        });
 
-      //   await tester.pump();
-      //   final item = find.byKey(Key(
-      //       'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber}'));
-      //   expect(item, findsOneWidget);
+        await tester.pump();
+        final item = find.byKey(Key(
+            'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber.getOrCrash()}'));
+        expect(item, findsOneWidget);
 
-      //   if (salesOrgBloc.state.configs.enableRemarks) {
-      //     final addRemarkButton =
-      //         tester.widget(find.byKey(const Key('addRemarksBonus')));
-      //     await tester.tap(find.byWidget(addRemarkButton));
-      //     await tester.pump();
+        if (salesOrgBloc.state.configs.enableRemarks) {
+          final addRemarkButton =
+              tester.widget(find.byKey(const Key('addRemarksBonus')));
+          await tester.tap(find.byWidget(addRemarkButton));
+          await tester.pump();
 
-      //     final addRemarkDialog = find.byKey(const Key('addRemarksDialog'));
-      //     expect(addRemarkDialog, findsOneWidget);
+          final addRemarkDialog = find.byKey(const Key('addRemarksDialog'));
+          expect(addRemarkDialog, findsOneWidget);
 
-      //     const remarkText = '1234';
-      //     final textField = find.byKey(const Key('remarkTextField'));
-      //     await tester.enterText(textField, remarkText);
+          const remarkText = '1234';
+          final textField = find.byKey(const Key('remarkTextField'));
+          await tester.enterText(textField, remarkText);
 
-      //     verify(() => cartBloc.add(CartEvent.addRemarkToBonusItem(remarkText)))
-      //         .called(1);
+          final addButton = find.byKey(const Key('add'));
+          await tester.tap(addButton);
+          await tester.pump();
 
-      //     final addButton = find.byKey(const Key('Add'));
-      //     await tester.tap(addButton);
-      //     await tester.pump();
+          verify(
+            () => cartBloc.add(
+              CartEvent.addRemarkToBonusItem(
+                message: remarkText,
+                bonusItem: mockCartItemWithDataList[0].addedBonusList[0],
+                item: CartItem.material(mockCartItemWithDataList.first),
+              ),
+            ),
+          ).called(1);
+        }
+      });
 
-      //     verify(
-      //       () => cartBloc.add(
-      //         CartEvent.addRemarksToBonusItem(
-      //           item: mockCartItemWithDataList[0],
-      //           bonusItem:
-      //               mockCartItemWithDataList[0].addedBonusList[0].materialInfo,
-      //           isDelete: false,
-      //         ),
-      //       ),
-      //     ).called(1);
-      //   }
-      // });
+      testWidgets('Test have Tire Discount cart item', (tester) async {
+        when(() => materialPriceBloc.state)
+            .thenReturn(MaterialPriceState.initial().copyWith(
+          isFetching: false,
+          materialPrice: {
+            MaterialNumber('000000000023168451'): Price.empty().copyWith(
+              zmgDiscount: true,
+              tiers: [
+                PriceTier(
+                  tier: 'c',
+                  items: [PriceTierItem.empty()],
+                )
+              ],
+            )
+          },
+        ));
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartItems: [
+              CartItem.material(
+                mockCartItemWithDataList2.first.copyWith(
+                  price: Price.empty().copyWith(
+                    zmgDiscount: true,
+                    tiers: [
+                      PriceTier(
+                        tier: 'c',
+                        items: [PriceTierItem.empty()],
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ],
+            isFetching: false,
+          ),
+        );
+        when(() => addToCartBlocMock.state).thenReturn(
+          AddToCartState.initial().copyWith(
+            cartItem: PriceAggregate.empty().copyWith(
+              price: Price.empty().copyWith(
+                tiers: [
+                  PriceTier(
+                    tier: 'c',
+                    items: [PriceTierItem.empty()],
+                  )
+                ],
+              ),
+            ),
+          ),
+        );
+        await tester.pumpWidget(Material(child: getWidget()));
+        await tester.pump();
+        final tierDiscountLable = find.byKey(const Key('tieredPricingLogo'));
+        expect(tierDiscountLable, findsOneWidget);
+        await tester.tap(
+          tierDiscountLable,
+        );
+        await tester.pump();
+        expect(find.byKey(const Key('updateCartBottomSheet')), findsOneWidget);
+        expect(find.byKey(const Key('priceTierLable')), findsWidgets);
+      });
 
-      // testWidgets('Test have Tire Discount cart item', (tester) async {
-      //   when(() => materialPriceBloc.state)
-      //       .thenReturn(MaterialPriceState.initial().copyWith(
-      //     isFetching: false,
-      //     materialPrice: {
-      //       MaterialNumber('000000000023168451'): Price.empty().copyWith(
-      //         zmgDiscount: true,
-      //         tiers: [
-      //           PriceTier(
-      //             tier: 'c',
-      //             items: [PriceTierItem.empty()],
-      //           )
-      //         ],
-      //       )
-      //     },
-      //   ));
-      //   when(() => cartBloc.state).thenReturn(
-      //     CartState.initial().copyWith(
-      //       cartItemList: [mockCartItemWithDataList2.first],
-      //       isFetching: false,
-      //     ),
-      //   );
-      //   when(() => addToCartBlocMock.state).thenReturn(
-      //     AddToCartState.initial().copyWith(
-      //       cartItem: PriceAggregate.empty().copyWith(
-      //         price: Price.empty().copyWith(
-      //           tiers: [
-      //             PriceTier(
-      //               tier: 'c',
-      //               items: [PriceTierItem.empty()],
-      //             )
-      //           ],
-      //         ),
-      //       ),
-      //     ),
-      //   );
-      //   await tester.pumpWidget(Material(child: getWidget()));
-      //   await tester.pump();
-      //   final tierDiscountLable = find.byKey(const Key('tieredPricingLogo'));
-      //   expect(tierDiscountLable, findsOneWidget);
-      //   await tester.tap(
-      //     tierDiscountLable,
-      //   );
-      //   await tester.pump();
-      //   expect(find.byKey(const Key('updateCartBottomSheet')), findsOneWidget);
-      //   expect(find.byKey(const Key('priceTierLable')), findsWidgets);
-      // });
+      testWidgets('Test have Bundle Discount cart item', (tester) async {
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartItems: mockCartItemDiscountBundles
+                .map((e) => CartItem.bundle([e]))
+                .toList(),
+            isFetching: false,
+          ),
+        );
 
-      // testWidgets('Test have Bundle Discount cart item', (tester) async {
-      //   when(() => cartBloc.state).thenReturn(
-      //     CartState.initial().copyWith(
-      //       cartItemList: mockCartItemDiscountBundles,
-      //       isFetching: false,
-      //     ),
-      //   );
+        await tester.pumpWidget(Material(child: getWidget()));
+        await tester.pump();
 
-      //   await tester.pumpWidget(Material(child: getWidget()));
-      //   await tester.pump();
+        final cartBundleItemTile = find.byType(CartBundleItemTile);
+        expect(cartBundleItemTile, findsNWidgets(2));
 
-      //   final cartBundleItemTile = find.byType(CartBundleItemTile);
-      //   expect(cartBundleItemTile, findsNWidgets(2));
+        expect(find.byKey(const Key('cartBundleItemTotal')), findsNWidgets(2));
 
-      //   expect(find.byKey(const Key('cartBundleItemTotal')), findsNWidgets(2));
+        expect(find.textContaining('Total Discount: '), findsOneWidget);
+        expect(find.textContaining('Total Amount: '), findsOneWidget);
+      });
 
-      //   expect(find.textContaining('Total Discount: '), findsOneWidget);
-      //   expect(find.textContaining('Total Amount: '), findsOneWidget);
-      // });
+      testWidgets('Test have cart item list add delete a bonus item',
+          (tester) async {
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartItems: mockCartItemWithDataList
+                .map(
+                  (e) => CartItem.material(e.copyWith(
+                    materialInfo: e.materialInfo.copyWith(
+                      materialGroup4: MaterialGroup.four('none'),
+                      hidePrice: false,
+                    ),
+                    price: e.price.copyWith(additionalBonusEligible: true),
+                  )),
+                )
+                .toList(),
+            isFetching: true,
+          ),
+        );
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+              user: User.empty().copyWith(
+            role: Role.empty().copyWith(
+              type: RoleType('external_sales_rep'),
+            ),
+            hasBonusOverride: true,
+          )),
+        );
+        await tester.runAsync(() async {
+          await tester.pumpWidget(getWidget());
+        });
 
-      // testWidgets('Test have cart item list add delete a bonus item',
-      //     (tester) async {
-      //   when(() => cartBloc.state).thenReturn(
-      //     CartState.initial().copyWith(
-      //       cartItemList: mockCartItemWithDataList
-      //           .map(
-      //             (e) => e.copyWith(
-      //               materialInfo: e.materialInfo.copyWith(
-      //                 materialGroup4: MaterialGroup.four('none'),
-      //                 hidePrice: false,
-      //               ),
-      //               price: e.price.copyWith(additionalBonusEligible: true),
-      //             ),
-      //           )
-      //           .toList(),
-      //       isFetching: true,
-      //     ),
-      //   );
-      //   when(() => eligibilityBloc.state).thenReturn(
-      //     EligibilityState.initial().copyWith(
-      //         user: User.empty().copyWith(
-      //       role: Role.empty().copyWith(
-      //         type: RoleType('external_sales_rep'),
-      //       ),
-      //       hasBonusOverride: true,
-      //     )),
-      //   );
-      //   await tester.runAsync(() async {
-      //     await tester.pumpWidget(getWidget());
-      //   });
+        await tester.pump();
 
-      //   await tester.pump();
+        final listWidget = find.byWidgetPredicate((w) => w is ListTile);
+        expect(listWidget, findsAtLeastNWidgets(1));
+        final item = find.byKey(const Key('bonusTile'));
+        expect(item, findsOneWidget);
+        final addWidget = tester.widget(
+          find.byKey(
+            const Key('addBonusFromCart'),
+          ),
+        );
+        await tester.tap(
+          find.byWidget(addWidget),
+        );
 
-      //   final listWidget = find.byWidgetPredicate((w) => w is ListTile);
-      //   expect(listWidget, findsAtLeastNWidgets(1));
-      //   final item = find.byKey(const Key('bonusTile'));
-      //   expect(item, findsOneWidget);
-      //   final addWidget = tester.widget(
-      //     find.byKey(
-      //       const Key('addBonusFromCart'),
-      //     ),
-      //   );
-      //   await tester.tap(
-      //     find.byWidget(addWidget),
-      //   );
+        final removeWidget = tester.widget(
+          find.byKey(
+            const Key('removeBonusFromCart'),
+          ),
+        );
+        await tester.tap(
+          find.byWidget(removeWidget),
+        );
+        final deleteWidget = tester.widget(
+          find.byKey(
+            const Key('deleteBonusFromCart'),
+          ),
+        );
+        await tester.tap(
+          find.byWidget(deleteWidget),
+        );
 
-      //   final removeWidget = tester.widget(
-      //     find.byKey(
-      //       const Key('removeBonusFromCart'),
-      //     ),
-      //   );
-      //   await tester.tap(
-      //     find.byWidget(removeWidget),
-      //   );
-      //   final deleteWidget = tester.widget(
-      //     find.byKey(
-      //       const Key('deleteBonusFromCart'),
-      //     ),
-      //   );
-      //   await tester.tap(
-      //     find.byWidget(deleteWidget),
-      //   );
+        final addBonusButton = find.byKey(
+          const Key('addBonusButton'),
+        );
+        expect(addBonusButton, findsOneWidget);
+        await tester.tap(addBonusButton);
+        await tester.pump();
+        expect(autoRouter.current.name, BonusAddPageRoute.name);
+      });
 
-      //   final addBonusButton = find.byKey(
-      //     const Key('addBonusButton'),
-      //   );
-      //   expect(addBonusButton, findsOneWidget);
-      //   await tester.tap(addBonusButton);
-      //   await tester.pump();
-      //   expect(autoRouter.current.name, BonusAddPageRoute.name);
-      // });
+      testWidgets('Test have cart item remarks update', (tester) async {
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartItems: mockCartItemWithDataList
+                .map((e) => CartItem.material(e))
+                .toList(),
+            isFetching: true,
+          ),
+        );
 
-      // testWidgets('Test have cart item remarks update', (tester) async {
-      //   when(() => cartBloc.state).thenReturn(
-      //     CartState.initial().copyWith(
-      //       cartItemList: mockCartItemWithDataList,
-      //       isFetching: true,
-      //     ),
-      //   );
+        when(() => salesOrgBloc.state).thenReturn(
+          SalesOrgState.initial().copyWith(
+            configs: SalesOrganisationConfigs.empty().copyWith(
+              enableRemarks: true,
+            ),
+          ),
+        );
+        final expectedStates = [
+          CartState.initial().copyWith(
+            cartItems: mockCartItemWithDataList
+                .map((e) => CartItem.material(e))
+                .toList(),
+          ),
+          CartState.initial().copyWith(
+            cartItems: mockCartItemWithDataList
+                .map((e) => CartItem.material(e))
+                .toList(),
+          ),
+        ];
 
-      //   when(() => salesOrgBloc.state).thenReturn(
-      //     SalesOrgState.initial().copyWith(
-      //       configs: SalesOrganisationConfigs.empty().copyWith(
-      //         enableRemarks: true,
-      //       ),
-      //     ),
-      //   );
-      //   final expectedStates = [
-      //     CartState.initial().copyWith(
-      //       cartItemList: mockCartItemWithDataList,
-      //       remarks: Remarks('test'),
-      //       showErrorMessages: true,
-      //       isRemarksAdding: true,
-      //     ),
-      //     CartState.initial().copyWith(
-      //       cartItemList: mockCartItemWithDataList,
-      //       remarks: Remarks(''),
-      //       showErrorMessages: false,
-      //       isRemarksAdding: false,
-      //     ),
-      //   ];
+        await tester.runAsync(() async {
+          await tester.pumpWidget(getWidget());
+        });
 
-      //   await tester.runAsync(() async {
-      //     await tester.pumpWidget(getWidget());
-      //   });
-
-      //   await tester.pump();
-      //   final item = find.byKey(Key(
-      //       'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber}'));
-      //   expect(item, findsOneWidget);
-      //   final addRemarkDialog = find.byKey(const Key('addRemarksDialog'));
-      //   final addRemarkButton =
-      //       tester.widget(find.byKey(const Key('addRemarksBonus')));
-      //   await tester.tap(find.byWidget(addRemarkButton));
-      //   whenListen(
-      //     cartBloc,
-      //     Stream.fromIterable(expectedStates),
-      //     initialState: CartState.initial().copyWith(
-      //       cartItemList: mockCartItemWithDataList,
-      //       isFetching: true,
-      //     ),
-      //   );
-      //   await tester.pump();
-      // });
+        await tester.pump();
+        final item = find.byKey(Key(
+            'cartItem${mockCartItemWithDataList[0].materialInfo.materialNumber.getOrCrash()}'));
+        expect(item, findsOneWidget);
+        //final addRemarkDialog = find.byKey(const Key('addRemarksDialog'));
+        final addRemarkButton =
+            tester.widget(find.byKey(const Key('addRemarksBonus')));
+        await tester.tap(find.byWidget(addRemarkButton));
+        whenListen(
+          cartBloc,
+          Stream.fromIterable(expectedStates),
+          initialState: CartState.initial().copyWith(
+            cartItems: mockCartItemWithDataList
+                .map((e) => CartItem.material(e))
+                .toList(),
+            isFetching: true,
+          ),
+        );
+        await tester.pump();
+      });
 
       testWidgets('cart order summary ', (tester) async {
         locator.unregister<CountlyService>();
@@ -1506,52 +1538,50 @@ void main() {
         ).called(1);
       });
 
-      // testWidgets('cart item radio button', (tester) async {
-      //   final expectedStates = [
-      //     CartState.initial().copyWith(
-      //       cartItemList: [],
-      //       isFetching: true,
-      //       selectedItemsMaterialNumber: [],
-      //       apiFailureOrSuccessOption:
-      //           optionOf(const Left(ApiFailure.other('Fake-Error'))),
-      //     ),
-      //     CartState.initial().copyWith(
-      //       cartItemList: mockCartItemWithDataList,
-      //       isFetching: false,
-      //       apiFailureOrSuccessOption: none(),
-      //       selectedItemsMaterialNumber: mockCartItemWithDataList
-      //           .map<MaterialNumber>((e) => e.getMaterialNumber)
-      //           .toList(),
-      //     )
-      //   ];
-      //   whenListen(cartBloc, Stream.fromIterable(expectedStates));
-      //   when(() => eligibilityBloc.state).thenReturn(
-      //     EligibilityState.initial().copyWith(
-      //       salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-      //         enableTaxAtTotalLevelOnly: true,
-      //       ),
-      //     ),
-      //   );
-      //   const taxCode = 'VAT';
-      //   when(() => salesOrgBloc.state).thenReturn(
-      //     SalesOrgState.initial().copyWith(
-      //         salesOrganisation: SalesOrganisation.empty().copyWith(
-      //       salesOrg: SalesOrg(taxCode),
-      //     )),
-      //   );
-      //   await tester.runAsync(() async {
-      //     await tester.pumpWidget(getWidget());
-      //   });
+      testWidgets('cart item radio button', (tester) async {
+        final expectedStates = [
+          CartState.initial().copyWith(
+            cartItems: [],
+            isFetching: true,
+            apiFailureOrSuccessOption:
+                optionOf(const Left(ApiFailure.other('Fake-Error'))),
+          ),
+          CartState.initial().copyWith(
+            cartItems: mockCartItemWithDataList
+                .map((e) => CartItem.material(e))
+                .toList(),
+            isFetching: false,
+            apiFailureOrSuccessOption: none(),
+          )
+        ];
+        whenListen(cartBloc, Stream.fromIterable(expectedStates));
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+              enableTaxAtTotalLevelOnly: true,
+            ),
+          ),
+        );
+        const taxCode = 'VAT';
+        when(() => salesOrgBloc.state).thenReturn(
+          SalesOrgState.initial().copyWith(
+              salesOrganisation: SalesOrganisation.empty().copyWith(
+            salesOrg: SalesOrg(taxCode),
+          )),
+        );
+        await tester.runAsync(() async {
+          await tester.pumpWidget(getWidget());
+        });
 
-      //   await tester.pump();
-      //   final selectAllRadioButton =
-      //       find.byKey(const Key('selectAllRadioButton'));
-      //   expect(selectAllRadioButton, findsOneWidget);
-      //   await tester.tap(selectAllRadioButton);
-      //   verify(() => cartBloc.add(
-      //         const CartEvent.updateSelectAllItems(),
-      //       )).called(1);
-      // });
+        await tester.pump();
+        final selectAllRadioButton =
+            find.byKey(const Key('selectAllRadioButton'));
+        expect(selectAllRadioButton, findsOneWidget);
+        await tester.tap(selectAllRadioButton);
+        verify(() => cartBloc.add(
+              const CartEvent.selectAllButtonTapped(),
+            )).called(1);
+      });
 
       testWidgets('cart page Customer Code AccountSuspendedBanner ',
           (tester) async {
