@@ -234,8 +234,6 @@ class _SubmitContinueButton extends StatelessWidget {
     trackMixpanelEvent(
       MixpanelEvents.submitOrder,
     );
-    final isSpecialType =
-        context.read<OrderDocumentTypeBloc>().state.isSpecialOrderType;
     final isMYMarketSalesRep =
         context.read<EligibilityBloc>().state.isMYMarketSalesRep;
 
@@ -249,7 +247,6 @@ class _SubmitContinueButton extends StatelessWidget {
           user: context.read<UserBloc>().state.user,
           cartItems: cartBloc.state.selectedCartItems.validMaterials,
           grandTotal: cartBloc.state.grandTotal(
-            isSpecialOrderType: isSpecialType,
             isMYMarketSalesRep: isMYMarketSalesRep,
           ),
           orderDocumentType:
@@ -389,8 +386,6 @@ class _UtilityButton extends StatelessWidget {
     trackMixpanelEvent(
       MixpanelEvents.saveOrder,
     );
-    final isSpecialType =
-        context.read<OrderDocumentTypeBloc>().state.isSpecialOrderType;
 
     final isMYMarketSalesRep =
         context.read<EligibilityBloc>().state.isMYMarketSalesRep;
@@ -405,7 +400,6 @@ class _UtilityButton extends StatelessWidget {
                 user: context.read<UserBloc>().state.user,
                 cartItems: context.read<CartBloc>().state.selectedCartItems,
                 grandTotal: context.read<CartBloc>().state.grandTotal(
-                      isSpecialOrderType: isSpecialType,
                       isMYMarketSalesRep: isMYMarketSalesRep,
                     ),
                 data: context
@@ -425,7 +419,6 @@ class _UtilityButton extends StatelessWidget {
                 user: context.read<UserBloc>().state.user,
                 cartItems: context.read<CartBloc>().state.selectedCartItems,
                 grandTotal: context.read<CartBloc>().state.grandTotal(
-                      isSpecialOrderType: isSpecialType,
                       isMYMarketSalesRep: isMYMarketSalesRep,
                     ),
                 data: context
@@ -908,6 +901,7 @@ class _CartItemsSection extends StatelessWidget {
         final isMYMarketSalesRep = context.select<EligibilityBloc, bool>(
           (bloc) => bloc.state.isMYMarketSalesRep,
         );
+        final isTH = context.read<SalesOrgBloc>().state.salesOrg.isTH;
 
         context.read<OrderEligibilityBloc>().add(
               OrderEligibilityEvent.update(
@@ -919,11 +913,9 @@ class _CartItemsSection extends StatelessWidget {
                     .documentType
                     .getOrDefaultValue(''),
                 grandTotal: cartState.grandTotal(
-                  isSpecialOrderType: isSpecialOrderType,
                   isMYMarketSalesRep: isMYMarketSalesRep,
                 ),
                 subTotal: cartState.subTotal(
-                  isSpecialOrderType: isSpecialOrderType,
                   isMYMarketSalesRep: isMYMarketSalesRep,
                 ),
               ),
@@ -937,7 +929,6 @@ class _CartItemsSection extends StatelessWidget {
               valueText: StringUtils.displayPrice(
                 salesOrgConfig,
                 cartState.subTotal(
-                  isSpecialOrderType: isSpecialOrderType,
                   isMYMarketSalesRep: isMYMarketSalesRep,
                 ),
               ),
@@ -953,7 +944,6 @@ class _CartItemsSection extends StatelessWidget {
                 valueText: StringUtils.displayPrice(
                   salesOrgConfig,
                   cartState.vatTotalOnOrderType(
-                    isSpecial: isSpecialOrderType,
                     isMYMarketSalesRep: isMYMarketSalesRep,
                   ),
                 ),
@@ -962,7 +952,7 @@ class _CartItemsSection extends StatelessWidget {
               keyText: 'Min. Order Value'.tr(),
               valueText: StringUtils.displayPrice(
                 salesOrgConfig,
-                isSpecialOrderType
+                isSpecialOrderType && !isTH
                     ? 0.0
                     : double.parse(salesOrgConfig.minOrderAmount),
               ),
@@ -972,7 +962,6 @@ class _CartItemsSection extends StatelessWidget {
               valueText: StringUtils.displayPrice(
                 salesOrgConfig,
                 cartState.grandTotal(
-                  isSpecialOrderType: isSpecialOrderType,
                   isMYMarketSalesRep: isMYMarketSalesRep,
                 ),
               ),

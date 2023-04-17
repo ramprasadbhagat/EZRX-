@@ -40,8 +40,11 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/additional_details_data.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/entities/payment_term.dart' as pt;
+import 'package:ezrxmobile/domain/order/entities/price.dart';
+import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_order_response.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -1134,6 +1137,95 @@ void main() {
           skipOffstage: false,
         );
         expect(customerDetailsKey, findsOneWidget);
+      },
+    );
+
+    testWidgets(
+      '=> test price when special order type with market TH',
+      (tester) async {
+        when(() => orderSummaryBlocMock.state)
+            .thenReturn(OrderSummaryState.initial().copyWith(
+          step: 4,
+          maxSteps: 4,
+          additionalDetailsStep: 3,
+        ));
+        when(() => cartBlocMock.state).thenReturn(
+          CartState.initial().copyWith(
+            cartItems: [
+              CartItem.material(
+                PriceAggregate.empty().copyWith(
+                  price: Price.empty().copyWith(
+                    finalPrice: MaterialPrice(108),
+                  ),
+                  addedBonusList: [
+                    MaterialItemBonus.empty().copyWith(
+                      materialInfo: MaterialInfo.empty().copyWith(
+                        materialNumber: MaterialNumber('0000000000111111'),
+                      ),
+                      materialDescription: ' Mosys D',
+                    ),
+                  ],
+                  quantity: 1,
+                  materialInfo: MaterialInfo.empty().copyWith(
+                    materialNumber: MaterialNumber('000000000023168451'),
+                    materialDescription: ' Triglyceride Mosys D',
+                    principalData: PrincipalData.empty().copyWith(
+                      principalName:
+                          PrincipalName('å�°ç�£æ‹œè€³è‚¡ä»½æœ‰é™�å…¬å�¸'),
+                    ),
+                    remarks: '',
+                  ),
+                  stockInfo: StockInfo.empty().copyWith(
+                    inStock: MaterialInStock('Yes'),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+        when(() => orderDocumentTypeBlocMock.state).thenReturn(
+          OrderDocumentTypeState.initial().copyWith(
+              isOrderTypeSelected: true,
+              selectedOrderType: OrderDocumentType.empty().copyWith(
+                documentType: DocumentType('ZPFB'),
+              )),
+        );
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: SalesOrganisation.empty().copyWith(
+              salesOrg: SalesOrg('2900'),
+            ),
+            selectedOrderType: OrderDocumentType.empty().copyWith(
+              documentType: DocumentType('ZPFB'),
+            ),
+          ),
+        );
+        when(() => salesOrgBlocMock.state)
+            .thenReturn(SalesOrgState.initial().copyWith(
+          configs: SalesOrganisationConfigs.empty().copyWith(
+            enableVat: true,
+          ),
+          salesOrganisation: SalesOrganisation.empty().copyWith(
+            salesOrg: SalesOrg('2900'),
+          ),
+        ));
+        when(() => userBlocMock.state).thenReturn(
+          UserState.initial().copyWith(
+            user: User.empty(),
+          ),
+        );
+
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+        final cartDetailsKey = find.byKey(
+          const Key('_cartDetailsKey'),
+          skipOffstage: false,
+        );
+        expect(cartDetailsKey, findsOneWidget);
+        expect(find.text('Subtotal'), findsOneWidget);
+        expect(find.text('Grand Total'), findsOneWidget);
+        final txt = find.text(': NA 108.00');
+        expect(txt, findsAtLeastNWidgets(2));
       },
     );
 

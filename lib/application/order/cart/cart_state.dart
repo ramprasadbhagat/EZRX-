@@ -21,7 +21,6 @@ class CartState with _$CartState {
       );
 
   double subTotal({
-    required bool isSpecialOrderType,
     required bool isMYMarketSalesRep,
   }) =>
       selectedCartItems.fold<double>(
@@ -29,13 +28,12 @@ class CartState with _$CartState {
         (sum, item) =>
             sum +
             item.subTotalPrice(
-              isSpecialOrderType: isSpecialOrderType,
+              isSpecialOrderType: item.materials.first.isSpecialOrderTypeNotTH,
               isMYMarketSalesRep: isMYMarketSalesRep,
             ),
       );
 
   double grandTotal({
-    required bool isSpecialOrderType,
     required bool isMYMarketSalesRep,
   }) =>
       selectedCartItems.fold<double>(
@@ -43,21 +41,18 @@ class CartState with _$CartState {
         (sum, item) =>
             sum +
             item.grandTotalPrice(
-              isSpecialOrderType: isSpecialOrderType,
+              isSpecialOrderType: item.materials.first.isSpecialOrderTypeNotTH,
               isMYMarketSalesRep: isMYMarketSalesRep,
             ),
       );
 
   double vatTotalOnOrderType({
-    required bool isSpecial,
     required bool isMYMarketSalesRep,
   }) =>
       grandTotal(
-        isSpecialOrderType: isSpecial,
         isMYMarketSalesRep: isMYMarketSalesRep,
       ) -
       subTotal(
-        isSpecialOrderType: isSpecial,
         isMYMarketSalesRep: isMYMarketSalesRep,
       );
 

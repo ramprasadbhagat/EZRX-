@@ -1,5 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
@@ -1812,10 +1813,84 @@ void main() {
         expect(find.text('Grand Total'), findsOneWidget);
         expect(
             cartBloc.state.grandTotal(
-              isSpecialOrderType: false,
               isMYMarketSalesRep: false,
             ),
             108.0);
+      });
+
+      testWidgets(
+          'Test to have correct price for special ordertype with market TH',
+          (tester) async {
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartItems: [
+              CartItem.material(
+                mockCartItemWithDataList.first.copyWith(
+                  price: Price.empty().copyWith(
+                    finalPrice: MaterialPrice(108),
+                  ),
+                ),
+              ),
+            ],
+            isFetching: false,
+          ),
+        );
+        when(() => orderDocumentTypeBlocMock.state).thenReturn(
+          OrderDocumentTypeState.initial().copyWith(
+              isOrderTypeSelected: true,
+              selectedOrderType: OrderDocumentType.empty().copyWith(
+                documentType: DocumentType('ZPFB'),
+              )),
+        );
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+              vatValue: 8,
+              enableVat: true,
+              enableTaxClassification: true,
+              enableTaxAtTotalLevelOnly: true,
+            ),
+            salesOrganisation: SalesOrganisation.empty().copyWith(
+              salesOrg: SalesOrg('2902'),
+            ),
+            selectedOrderType: OrderDocumentType.empty().copyWith(
+              documentType: DocumentType('ZPFB'),
+            ),
+          ),
+        );
+        when(() => salesOrgBloc.state).thenReturn(
+          SalesOrgState.initial().copyWith(
+            configs: SalesOrganisationConfigs.empty().copyWith(
+              vatValue: 8,
+              enableVat: true,
+              enableTaxClassification: true,
+              enableTaxAtTotalLevelOnly: true,
+            ),
+            salesOrganisation: SalesOrganisation.empty().copyWith(
+              salesOrg: SalesOrg('2902'),
+            ),
+          ),
+        );
+        await tester.runAsync(() async {
+          await tester.pumpWidget(getWidget());
+        });
+
+        await tester.pump();
+        tester.binding.window.physicalSizeTestValue = const Size(1080, 1920);
+        tester.binding.window.devicePixelRatioTestValue = 1.0;
+        final taxcodeInPercentageKey =
+            find.byKey(const Key('taxcodeInPercentageKey'));
+        expect(taxcodeInPercentageKey, findsOneWidget);
+        expect(find.text('VAT in %'), findsOneWidget);
+
+        final totalTaxKey = find.byKey(const Key('totalTaxKey'));
+        expect(totalTaxKey, findsOneWidget);
+        expect(find.text('VAT'), findsOneWidget);
+        final grandTotalKey = find.byKey(const Key('grandTotalKey'));
+        expect(grandTotalKey, findsOneWidget);
+        expect(find.text('Grand Total'.tr()), findsOneWidget);
+        final txt = find.text(': NA 108.00');
+        expect(txt, findsAtLeastNWidgets(1));
       });
 
       testWidgets('Test to have correct GST and totalPrice with Bundle',
@@ -1877,7 +1952,6 @@ void main() {
         expect(txt, findsAtLeastNWidgets(1));
         expect(
             cartBloc.state.grandTotal(
-              isSpecialOrderType: true,
               isMYMarketSalesRep: false,
             ),
             108.0);

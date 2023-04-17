@@ -183,24 +183,16 @@ class CartPage extends StatelessWidget {
                                           .read<EligibilityBloc>()
                                           .state
                                           .isMYMarketSalesRep;
-                                      final isSpecialOrderType = context
-                                          .read<OrderDocumentTypeBloc>()
-                                          .state
-                                          .isSpecialOrderType;
                                       locator<CountlyService>().addCountlyEvent(
                                         'Checkout',
                                         segmentation: {
                                           'numItemInCart':
                                               state.cartItems.length,
                                           'subTotal': state.subTotal(
-                                            isSpecialOrderType:
-                                                isSpecialOrderType,
                                             isMYMarketSalesRep:
                                                 isMYMarketSalesRep,
                                           ),
                                           'grandTotal': state.grandTotal(
-                                            isSpecialOrderType:
-                                                isSpecialOrderType,
                                             isMYMarketSalesRep:
                                                 isMYMarketSalesRep,
                                           ),
@@ -244,8 +236,6 @@ class CartPage extends StatelessWidget {
           step: 0,
           config: config,
         ));
-    final isSpecialOrderType =
-        context.read<OrderDocumentTypeBloc>().state.isSpecialOrderType;
 
     context.read<OrderEligibilityBloc>().add(
           OrderEligibilityEvent.initialized(
@@ -254,7 +244,6 @@ class CartPage extends StatelessWidget {
             configs: config,
             customerCodeInfo: customerCodeInfo,
             grandTotal: context.read<CartBloc>().state.grandTotal(
-                  isSpecialOrderType: isSpecialOrderType,
                   isMYMarketSalesRep: isMYMarketSalesRep,
                 ),
             orderType: context
@@ -267,7 +256,6 @@ class CartPage extends StatelessWidget {
             shipInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
             user: context.read<UserBloc>().state.user,
             subTotal: context.read<CartBloc>().state.subTotal(
-                  isSpecialOrderType: isSpecialOrderType,
                   isMYMarketSalesRep: isMYMarketSalesRep,
                 ),
           ),
@@ -361,7 +349,6 @@ class _TotalPriceSection extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.selectedOrderType != current.selectedOrderType,
       builder: (context, state) {
-        final isSpecialOrderType = state.isSpecialOrderType;
         final isMYMarketSalesRep = context.select<EligibilityBloc, bool>(
           (bloc) => bloc.state.isMYMarketSalesRep,
         );
@@ -377,7 +364,6 @@ class _TotalPriceSection extends StatelessWidget {
                 valueText: StringUtils.displayPrice(
                   salesOrgConfig,
                   cartState.subTotal(
-                    isSpecialOrderType: isSpecialOrderType,
                     isMYMarketSalesRep: isMYMarketSalesRep,
                   ),
                 ),
@@ -397,7 +383,6 @@ class _TotalPriceSection extends StatelessWidget {
                   valueText: StringUtils.displayPrice(
                     salesOrgConfig,
                     cartState.vatTotalOnOrderType(
-                      isSpecial: isSpecialOrderType,
                       isMYMarketSalesRep: isMYMarketSalesRep,
                     ),
                   ),
@@ -409,7 +394,6 @@ class _TotalPriceSection extends StatelessWidget {
                 valueText: StringUtils.displayPrice(
                   salesOrgConfig,
                   cartState.grandTotal(
-                    isSpecialOrderType: isSpecialOrderType,
                     isMYMarketSalesRep: isMYMarketSalesRep,
                   ),
                 ),

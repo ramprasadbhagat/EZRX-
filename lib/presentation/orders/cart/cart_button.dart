@@ -4,7 +4,6 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
-import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
@@ -47,10 +46,6 @@ class CartButton extends StatelessWidget {
                     trackMixpanelEvent(
                       MixpanelEvents.cartWindow,
                     );
-                    final isSpecialOrderType = context
-                        .read<OrderDocumentTypeBloc>()
-                        .state
-                        .isSpecialOrderType;
                     final isMYMarketSalesRep = context
                         .read<EligibilityBloc>()
                         .state
@@ -59,11 +54,9 @@ class CartButton extends StatelessWidget {
                         .addCountlyEvent('Cart Window', segmentation: {
                       'numItemInCart': cartState.cartItems.length,
                       'subTotal': cartState.subTotal(
-                        isSpecialOrderType: isSpecialOrderType,
                         isMYMarketSalesRep: isMYMarketSalesRep,
                       ),
                       'grandTotal': cartState.grandTotal(
-                        isSpecialOrderType: isSpecialOrderType,
                         isMYMarketSalesRep: isMYMarketSalesRep,
                       ),
                     });
