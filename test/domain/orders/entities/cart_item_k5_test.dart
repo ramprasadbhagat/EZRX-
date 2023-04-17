@@ -8,6 +8,7 @@ import 'package:ezrxmobile/domain/order/entities/discount_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/domain/utils/num_utils.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/combo_deal_dto.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -38,11 +39,12 @@ void main() async {
       );
 
   //total order amount:
-  //>=200 => percent deal,
-  //>=500 => invalid deal,
+  //>=200 => invalid deal,
+  //>=500 => percent deal,
   //>=700 => amount deal
 
-  final material1 = comboMaterial(MaterialNumber('000000000021130726'), 1, 100);
+  final material1 =
+      comboMaterial(MaterialNumber('000000000021130726'), 1, 19.99);
   final material2 = comboMaterial(MaterialNumber('000000000021222875'), 1, 100);
 
   group('Cart Item K5 -', () {
@@ -51,11 +53,14 @@ void main() async {
     });
     test('Combo eligible when when total amount is suffice', () {
       expect(
-          CartItem.comboDeal([material1, material2]).isComboDealEligible, true);
+          CartItem.comboDeal([material1, material2.copyWith(quantity: 2)])
+              .isComboDealEligible,
+          true);
     });
 
     group('Percent deal -', () {
-      final cartItem = CartItem.comboDeal([material1, material2]);
+      final cartItem =
+          CartItem.comboDeal([material1.copyWith(quantity: 29), material2]);
       test('Eligible tier', () {
         expect(cartItem.eligibleComboDealQtyTier, ComboDealQtyTier.empty());
         expect(cartItem.eligibleComboDealSKUTier, ComboDealSKUTier.empty());
@@ -64,8 +69,8 @@ void main() async {
           ComboDealTierRule(
             rate: -3.00,
             type: DiscountType('%'),
-            minTotalAmount: 200.00,
-            maxTotalAmount: 499.00,
+            minTotalAmount: 500.00,
+            maxTotalAmount: 700.00,
             minTotalCurrency: 'USD',
             maxTotalCurrency: 'USD',
             minQty: 0,
@@ -86,11 +91,12 @@ void main() async {
       });
 
       test('List price', () {
-        expect(cartItem.listPrice, 200.0);
+        expect(cartItem.listPrice, 19.99 * 29 + 100.00);
       });
 
       test('Unit price', () {
-        const unitPrice = (100 + 100) * 97 / 100;
+        final unitPrice = NumUtils.priceByRate(19.99, -3) * 29 +
+            NumUtils.priceByRate(100, -3);
         expect(cartItem.unitPrice, unitPrice);
         expect(cartItem.grandTotalPrice(), unitPrice);
         expect(cartItem.subTotalPrice(), unitPrice);
@@ -99,7 +105,7 @@ void main() async {
 
     group('Amount deal -', () {
       final cartItem = CartItem.comboDeal([
-        material1,
+        material1.copyWith(quantity: 2),
         material2.copyWith(quantity: 7),
       ]);
       test('Eligible tier', () {
@@ -108,7 +114,7 @@ void main() async {
         expect(
           cartItem.eligibleComboDealTierRule,
           ComboDealTierRule(
-            rate: 0.00,
+            rate: 5.10,
             type: DiscountType('USD'),
             minTotalAmount: 701.00,
             maxTotalAmount: 000.00,
@@ -123,20 +129,20 @@ void main() async {
       test('Combo rate', () {
         expect(
           cartItem.comboDealRate(material: material1),
-          DiscountInfo(type: DiscountType('USD'), rate: 0.0),
+          DiscountInfo(type: DiscountType('USD'), rate: 5.10),
         );
         expect(
           cartItem.comboDealRate(material: material2),
-          DiscountInfo(type: DiscountType('USD'), rate: 0.0),
+          DiscountInfo(type: DiscountType('USD'), rate: 5.10),
         );
       });
 
       test('List price', () {
-        expect(cartItem.listPrice, 800.0);
+        expect(cartItem.listPrice, 739.98);
       });
 
       test('Unit price', () {
-        const unitPrice = 0;
+        const unitPrice = 5.10 * 2 + 5.10 * 7;
         expect(cartItem.unitPrice, unitPrice);
         expect(cartItem.grandTotalPrice(), unitPrice);
         expect(cartItem.subTotalPrice(), unitPrice);
@@ -144,8 +150,10 @@ void main() async {
     });
 
     group('Invalid deal -', () {
-      final cartItem =
-          CartItem.comboDeal([material1, material2.copyWith(quantity: 4)]);
+      final cartItem = CartItem.comboDeal([
+        material1.copyWith(quantity: 2),
+        material2.copyWith(quantity: 2),
+      ]);
       test('Eligible tier', () {
         expect(cartItem.eligibleComboDealQtyTier, ComboDealQtyTier.empty());
         expect(cartItem.eligibleComboDealSKUTier, ComboDealSKUTier.empty());
@@ -154,8 +162,8 @@ void main() async {
           ComboDealTierRule(
             rate: -5.00,
             type: DiscountType(''),
-            minTotalAmount: 500.00,
-            maxTotalAmount: 700.00,
+            minTotalAmount: 200.00,
+            maxTotalAmount: 499.00,
             minTotalCurrency: 'USD',
             maxTotalCurrency: 'USD',
             minQty: 0,
@@ -176,11 +184,11 @@ void main() async {
       });
 
       test('List price', () {
-        expect(cartItem.listPrice, 500.0);
+        expect(cartItem.listPrice, 239.98);
       });
 
       test('Unit price', () {
-        const unitPrice = -5;
+        const unitPrice = 19.99 * 2 + 100 * 2;
         expect(cartItem.unitPrice, unitPrice);
         expect(cartItem.grandTotalPrice(), unitPrice);
         expect(cartItem.subTotalPrice(), unitPrice);

@@ -15,7 +15,6 @@ import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/domain/utils/num_utils.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -308,33 +307,14 @@ class CartItem with _$CartItem {
         (sum, item) => sum + item.comboDealTotalListPrice,
       );
 
-  double get _comboDealDiscountTotal {
-    final comboDeal = materials.firstComboDeal;
-    switch (comboDeal.scheme) {
-      case ComboDealScheme.k1:
-      case ComboDealScheme.k2:
-      case ComboDealScheme.k3:
-      case ComboDealScheme.k4:
-      case ComboDealScheme.k4_2:
-        return materials.fold<double>(
-          0,
-          (sum, item) =>
-              sum +
-              item.comboDealTotalUnitPrice(
-                discount: comboDealRate(material: item),
-              ),
-        );
-      case ComboDealScheme.k5:
-        final discount = eligibleComboDealTierRule.discountInfo;
-
-        return discount.type.isPercent
-            ? NumUtils.priceByRate(
-                _comboDealTotal,
-                discount.rate,
-              )
-            : discount.rate;
-    }
-  }
+  double get _comboDealDiscountTotal => materials.fold<double>(
+        0,
+        (sum, item) =>
+            sum +
+            item.comboDealTotalUnitPrice(
+              discount: comboDealRate(material: item),
+            ),
+      );
 
   bool get isComboDealEligible {
     final comboDeal = materials.firstComboDeal;
