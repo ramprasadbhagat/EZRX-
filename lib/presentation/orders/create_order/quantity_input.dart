@@ -17,6 +17,7 @@ class QuantityInput extends StatelessWidget {
   final Key quantityDeleteKey;
   final bool isEnabled;
   final bool isLoading;
+  final bool returnZeroOnFieldEmpty;
   final int minimumQty;
   final int maximumQty;
 
@@ -30,6 +31,7 @@ class QuantityInput extends StatelessWidget {
     required this.quantityAddKey,
     required this.quantityDeleteKey,
     required this.isEnabled,
+    this.returnZeroOnFieldEmpty = false,
     this.isLoading = false,
     this.minimumQty = 1,
     this.maximumQty = 100000,
@@ -56,7 +58,13 @@ class QuantityInput extends StatelessWidget {
               LengthLimitingTextInputFormatter(6),
             ],
             onChanged: (String text) {
-              if (text.isEmpty) return;
+              if (text.isEmpty) {
+                if (returnZeroOnFieldEmpty) {
+                  onFieldChange(0);
+                }
+
+                return;
+              }
               onFieldChange(int.parse(text));
             },
             decoration: InputDecoration(

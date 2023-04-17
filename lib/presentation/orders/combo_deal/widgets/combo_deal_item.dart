@@ -311,6 +311,7 @@ class __QuantityInputState extends State<_QuantityInput> {
       controller: controller,
       quantityTextKey: const Key('QuantityInput'),
       onFieldChange: widget.onQuantityUpdated,
+      returnZeroOnFieldEmpty: true,
       minusPressed: widget.material.selfComboDealEligible &&
               widget.material.quantity != widget.material.selfComboDeal.minQty
           ? widget.onQuantityUpdated
