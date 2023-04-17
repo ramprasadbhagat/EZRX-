@@ -1,6 +1,7 @@
 class DateTimeFormatString {
-  static const String apiFormat = 'yyyyMMdd';
-  static const String displayFormat = 'dd MMM yyyy';
+  static const String apiDateFormat = 'yyyyMMdd';
+  static const String displayDateFormat = 'dd MMM yyyy';
+  static const String displayDateTimeFormat = 'dd MMM yyyy HH:mm:ss';
 }
 
 class ApiLanguageCode {

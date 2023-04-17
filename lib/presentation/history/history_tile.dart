@@ -44,15 +44,11 @@ class OrderHistoryListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final enableOHPrice =
-        context.read<EligibilityBloc>().state.salesOrgConfigs.enableOHPrice;
-    final enableTaxDisplay =
-        context.read<EligibilityBloc>().state.salesOrgConfigs.enableTaxDisplay;
-    final disableDeliveryDate = context
-        .read<EligibilityBloc>()
-        .state
-        .salesOrgConfigs
-        .disableDeliveryDate;
+    final salesOrgConfigs =
+        context.read<EligibilityBloc>().state.salesOrgConfigs;
+    final enableOHPrice = salesOrgConfigs.enableOHPrice;
+    final enableTaxDisplay = salesOrgConfigs.enableTaxDisplay;
+    final enableDeliveryDate = !salesOrgConfigs.disableDeliveryDate;
 
     return GestureDetector(
       onTap: () {
@@ -154,14 +150,14 @@ class OrderHistoryListTile extends StatelessWidget {
                 keyText: 'Order Date'.tr(),
                 valueText: orderHistoryItem.createdDate.toValidDateString,
               ),
-              disableDeliveryDate && orderHistoryItem.deliveryDate.isNotEmpty
+              enableDeliveryDate
                   ? BalanceTextRow(
                       key: Key(
-                        'material${orderHistoryItem.materialNumber.getOrDefaultValue('')}deliveryDate${orderHistoryItem.deliveryDate.toValidDateString}',
+                        'material${orderHistoryItem.materialNumber.getOrDefaultValue('')}deliveryDateTime${orderHistoryItem.deliveryDateTime.toValidDateTimeString}',
                       ),
                       keyText: 'Delivery Date/Time'.tr(),
-                      valueText:
-                          orderHistoryItem.deliveryDate.toValidDateString,
+                      valueText: orderHistoryItem
+                          .deliveryDateTime.toValidDateTimeString,
                     )
                   : const SizedBox.shrink(),
               BalanceTextRow(

@@ -313,7 +313,7 @@ void main() {
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
               salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-            disableDeliveryDate: true,
+            disableDeliveryDate: false,
           )),
         );
 
@@ -364,15 +364,15 @@ void main() {
         expect(find.byType(OrderHistoryListTile), findsWidgets);
 
         final materialDeliveryDate =
-            find.byKey(const Key('material000000000021211474deliveryDate-'));
+            find.byKey(const Key('material000000000021211474deliveryDateTime-'));
         expect(
           materialDeliveryDate,
-          findsOneWidget,
+          findsWidgets,
         );
 
         final descendantDateValue = find.descendant(
             of: materialDeliveryDate, matching: find.textContaining('-'));
-        expect(descendantDateValue, findsOneWidget);
+        expect(descendantDateValue, findsWidgets);
 
         await tester.drag(
             find.byKey(const Key('scrollList')), const Offset(0.0, -800));

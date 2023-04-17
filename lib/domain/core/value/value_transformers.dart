@@ -37,15 +37,6 @@ String getTelephoneNotGreaterThan16(String text) {
   return text.length > 16 ? text.substring(0, 16) : text;
 }
 
-// String getParsedString(String textString) {
-//   if (textString.isEmpty) {
-//     return '';
-//   }
-//   var parsed = textString.toString();
-//   parsed = parsed.replaceAll('\'', '\\\'');
-
-//   return parsed.toString();
-// }
 bool isMinCharacter({required String input, required int minLength}) =>
     input.length >= minLength;
 
@@ -97,17 +88,20 @@ DateTime getDeliveryDateTime(String input) {
   return deliveryDate;
 }
 
-String displayDateStringOrEmpty(String text) {
-  if (isNumericOnly(text) && int.parse(text) <= 0) {
+
+String displayDateTimeStringOrEmpty(String text, String format) {
+  if (getDateTimeIntValue(text) <= 0) {
     return '-';
   }
-  final parsedDate = DateTime.tryParse(text);
+  final parsedDate = tryParseDateTime(text);
   if (parsedDate == null) {
     return '';
   }
-
-  return DateFormat(DateTimeFormatString.displayFormat).format(parsedDate);
+  
+  return DateFormat(format)
+      .format(parsedDate);
 }
+
 bool isNumericOnly(String text) => RegExp(r'^\d+$').hasMatch(text);
 
 String formattedDateTimeForAPI(String text) {
@@ -116,34 +110,36 @@ String formattedDateTimeForAPI(String text) {
     return '';
   }
 
-  return DateFormat(DateTimeFormatString.apiFormat).format(parsedDate);
+  return DateFormat(DateTimeFormatString.apiDateFormat).format(parsedDate);
 }
 
-DateTime getDateTimeByDateString(String value) {
-  //if length is 10, then it convert dateTime till hour
-  //yyyyddmmhh (only for principal Date)
-  if (value.length >= 10) {
-    return getDateTimeByPrinciPalString(value);
+DateTime? tryParseDateTime(String input) {
+  final standardInput = input.padRight(14, '0');
+  try {
+    final year = int.parse(standardInput.substring(0, 4));
+    final month = int.parse(standardInput.substring(4, 6));
+    final day = int.parse(standardInput.substring(6, 8));
+    final hour = int.parse(standardInput.substring(8, 10));
+    final minute = int.parse(standardInput.substring(10, 12));
+    final second = int.parse(standardInput.substring(12, 14));
+
+    //if length is 10, then it convert dateTime till hour
+    //yyyyddmmhh (only for principal Date)
+    if (input.length == 10) {
+      return DateTime.utc(year, month, day, hour).toLocal();
+    }
+
+    return DateTime(year, month, day, hour, minute, second);
+  } on FormatException {
+    return null;
   }
-
-  return DateTime.tryParse(value) ?? DateTime.now();
 }
 
-DateTime getDateTimeByPrinciPalString(String value) {
-  final hour = int.parse(value.substring(8, 10));
-  final principalDate = DateTime.parse(value.substring(0, 8));
-  //From api getting utc timezone, convert it to local & comparing
-
-  return DateTime.utc(
-    principalDate.year,
-    principalDate.month,
-    principalDate.day,
-    hour,
-  ).toLocal();
-}
+DateTime getDateTimeByDateString(String value) =>
+    tryParseDateTime(value) ?? DateTime.now();
 
 String getDateStringByDateTime(DateTime dateTime) =>
-    DateFormat(DateTimeFormatString.apiFormat).format(dateTime);
+    DateFormat(DateTimeFormatString.apiDateFormat).format(dateTime);
 
 String emptyIfZero(double value) {
   return value == 0 ? '' : value.toString();

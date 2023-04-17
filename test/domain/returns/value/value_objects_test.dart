@@ -81,7 +81,7 @@ void main() {
         final simpleInvoiceDate = DateTimeStringValue(getDateStringByDateTime(input));
         final apiParameterValueOrEmpty = simpleInvoiceDate.apiDateTimeFormat;
         expect(apiParameterValueOrEmpty,
-            DateFormat(DateTimeFormatString.apiFormat).format(input));
+            DateFormat(DateTimeFormatString.apiDateFormat).format(input));
       },
     );
   });

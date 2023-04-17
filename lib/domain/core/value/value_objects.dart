@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/core/error/errors.dart';
 import 'package:ezrxmobile/domain/core/error/failures.dart';
+import 'package:ezrxmobile/domain/core/value/constants.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/core/value/value_validators.dart';
 import 'package:flutter/foundation.dart';
@@ -88,8 +89,15 @@ class DateTimeStringValue extends ValueObject<String> {
 
   String get naIfEmptyDateTime => naIfEmpty(value.getOrElse(() => ''));
 
-  String get toValidDateString =>
-      displayDateStringOrEmpty(value.getOrElse(() => ''));
+  String get toValidDateString => displayDateTimeStringOrEmpty(
+        value.getOrElse(() => ''),
+        DateTimeFormatString.displayDateFormat,
+      );
+
+  String get toValidDateTimeString => displayDateTimeStringOrEmpty(
+        value.getOrElse(() => ''),
+        DateTimeFormatString.displayDateFormat,
+      );
 
   bool get isNotEmpty => value.getOrElse(() => '').isNotEmpty;
 
@@ -118,6 +126,7 @@ class LanguageValue extends ValueObject<String> {
 
   const LanguageValue._(this.value);
 }
+
 class StringValue extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;

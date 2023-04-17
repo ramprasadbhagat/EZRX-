@@ -27,6 +27,8 @@ class OrderHistoryItem with _$OrderHistoryItem {
     required String purchaseOrderType,
   }) = _OrderHistoryItem;
 
+  DateTimeStringValue get deliveryDateTime => DateTimeStringValue('${deliveryDate.getOrDefaultValue('00000000')}$deliveryTime');
+
   factory OrderHistoryItem.empty() => OrderHistoryItem(
         materialNumber: MaterialNumber(''),
         materialDescription: '',
@@ -35,7 +37,7 @@ class OrderHistoryItem with _$OrderHistoryItem {
         totalPrice: TotalPrice('0.0'),
         status: StatusType(''),
         deliveryDate: DateTimeStringValue(''),
-        deliveryTime: '',
+        deliveryTime: '000000',
         lineNumber: '',
         tax: 0.0,
         orderType: '',
