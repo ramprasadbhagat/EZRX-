@@ -5,6 +5,7 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/auth/proxy_login/proxy_login_form_bloc.dart';
+import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/auth/entities/login.dart';
@@ -20,7 +21,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../utils/material_frame_wrapper.dart';
 import '../../utils/widget_utils.dart';
 import '../order_history/order_history_details_widget_test.dart';
 
@@ -38,6 +38,10 @@ class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
 class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
     implements EligibilityBloc {}
 
+class MaterialListBlocMock
+    extends MockBloc<MaterialListEvent, MaterialListState>
+    implements MaterialListBloc {}
+
 void main() {
   late ProxyLoginFormBloc proxyloginBlocMock;
   late AuthBloc authBlocMock;
@@ -45,6 +49,7 @@ void main() {
   late UserBloc userBlocMock;
   late EligibilityBloc eligibilityBlocMock;
   late AppRouter autoRouterMock;
+  late MaterialListBloc materialListBlocMock;
 
   setUpAll(() {
     GetIt.instance.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
@@ -53,6 +58,30 @@ void main() {
     locator<MixpanelService>().init(mixpanel: MixpanelMock());
   });
 
+  Widget testPage() {
+    return WidgetUtils.getScopedWidget(
+      autoRouterMock: autoRouterMock,
+      providers: [
+        BlocProvider<ProxyLoginFormBloc>(
+          create: (context) => proxyloginBlocMock,
+        ),
+        BlocProvider<SalesOrgBloc>(
+          create: (context) => salesOrgBlocMock,
+        ),
+        BlocProvider<UserBloc>(
+          create: (context) => userBlocMock,
+        ),
+        BlocProvider<EligibilityBloc>(
+          create: (context) => eligibilityBlocMock,
+        ),
+        BlocProvider<MaterialListBloc>(
+          create: (context) => materialListBlocMock,
+        ),
+      ],
+      child: const LoginOnBehalfPage(),
+    );
+  }
+
   group('Proxy Login Screen', () {
     setUp(() {
       proxyloginBlocMock = ProxyLoginFormBlocMock();
@@ -60,6 +89,7 @@ void main() {
       salesOrgBlocMock = SalesOrgBlocMock();
       userBlocMock = UserBlocMock();
       eligibilityBlocMock = EligibilityBlocMock();
+      materialListBlocMock = MaterialListBlocMock();
       autoRouterMock = GetIt.instance<AppRouter>();
 
       when(() => eligibilityBlocMock.state)
@@ -67,17 +97,12 @@ void main() {
 
       when(() => proxyloginBlocMock.state)
           .thenReturn(ProxyLoginFormState.initial());
+      when(() => materialListBlocMock.state)
+          .thenReturn(MaterialListState.initial());
     });
 
     testWidgets("Test don't have AD credential", (tester) async {
-      await tester.pumpWidget(
-        MaterialFrameWrapper(
-          child: BlocProvider<ProxyLoginFormBloc>(
-            create: (context) => proxyloginBlocMock,
-            child: const LoginOnBehalfPage(),
-          ),
-        ),
-      );
+      await tester.pumpWidget(testPage());
 
       // Create the Finders.
       final userNameTextField =
@@ -145,14 +170,7 @@ void main() {
 
       whenListen(proxyloginBlocMock, Stream.fromIterable(expectedStates));
 
-      await tester.pumpWidget(
-        MaterialFrameWrapper(
-          child: BlocProvider<ProxyLoginFormBloc>(
-            create: (context) => proxyloginBlocMock,
-            child: const LoginOnBehalfPage(),
-          ),
-        ),
-      );
+      await tester.pumpWidget(testPage());
 
       final errorMessage = find.byKey(const Key('snackBarMessage'));
 
@@ -202,26 +220,7 @@ void main() {
       when(() => userBlocMock.state).thenReturn(UserState.initial());
 
       whenListen(proxyloginBlocMock, Stream.fromIterable(expectedStates));
-      await tester.pumpWidget(
-        WidgetUtils.getScopedWidget(
-          autoRouterMock: autoRouterMock,
-          providers: [
-            BlocProvider<ProxyLoginFormBloc>(
-              create: (context) => proxyloginBlocMock,
-            ),
-            BlocProvider<SalesOrgBloc>(
-              create: (context) => salesOrgBlocMock,
-            ),
-            BlocProvider<UserBloc>(
-              create: (context) => userBlocMock,
-            ),
-            BlocProvider<EligibilityBloc>(
-              create: (context) => eligibilityBlocMock,
-            ),
-          ],
-          child: const LoginOnBehalfPage(),
-        ),
-      );
+      await tester.pumpWidget(testPage());
       final userNameTextField =
           find.byKey(const Key('proxyLoginUsernameField'));
       expect(userNameTextField, findsOneWidget);
@@ -235,6 +234,10 @@ void main() {
       expect(proxyLoginSubmitButton, findsOneWidget);
       await tester.tap(proxyLoginSubmitButton);
       await tester.pump();
+
+      verify(() =>
+              materialListBlocMock.add(const MaterialListEvent.initialized()))
+          .called(1);
     });
 
     testWidgets('username is valid', (tester) async {
@@ -260,23 +263,7 @@ void main() {
 
       whenListen(proxyloginBlocMock, Stream.fromIterable(expectedStates));
 
-      await tester.pumpWidget(
-        WidgetUtils.getScopedWidget(
-          autoRouterMock: autoRouterMock,
-          providers: [
-            BlocProvider<ProxyLoginFormBloc>(
-              create: (context) => proxyloginBlocMock,
-            ),
-            BlocProvider<SalesOrgBloc>(
-              create: (context) => salesOrgBlocMock,
-            ),
-            BlocProvider<UserBloc>(
-              create: (context) => userBlocMock,
-            ),
-          ],
-          child: const LoginOnBehalfPage(),
-        ),
-      );
+      await tester.pumpWidget(testPage());
       await tester.pump(const Duration(
         seconds: 2,
       ));

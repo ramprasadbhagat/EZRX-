@@ -4,6 +4,7 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/proxy_login/proxy_login_form_bloc.dart';
+import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
@@ -50,6 +51,9 @@ class LoginOnBehalfPage extends StatelessWidget {
                 context
                     .read<EligibilityBloc>()
                     .add(const EligibilityEvent.initialized());
+                context
+                    .read<MaterialListBloc>()
+                    .add(const MaterialListEvent.initialized());
                 context.read<UserBloc>().add(const UserEvent.fetch());
                 context.router.pop();
               },

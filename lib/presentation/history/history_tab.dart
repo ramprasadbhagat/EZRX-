@@ -232,7 +232,8 @@ class HistoryTab extends StatelessWidget {
                 );
               },
               buildWhen: (previous, current) =>
-                  previous.isFetching != current.isFetching,
+                  previous.isFetching != current.isFetching ||
+                  previous.orderHistoryList != current.orderHistoryList,
               builder: (context, state) {
                 return state.isFetching &&
                         state
