@@ -554,7 +554,7 @@ void main() {
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
             salesOrgConfigs: SalesOrganisationConfigs.empty()
-                .copyWith(enablePaymentTerms: true)),
+                .copyWith(disablePaymentTermsDisplay: false)),
       );
 
       await tester.pumpWidget(getWUT());

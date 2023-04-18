@@ -26,6 +26,8 @@ class HistoryOrderDetailSection extends StatelessWidget {
         .state
         .configs
         .taxDisplayForOrderHistoryAndDetails;
+    final paymentTermDisplay =
+        context.read<EligibilityBloc>().state.isPaymentTermDescriptionEnable;
 
     return BlocBuilder<OrderHistoryDetailsBloc, OrderHistoryDetailsState>(
       buildWhen: (previous, current) => previous.isLoading != current.isLoading,
@@ -176,11 +178,7 @@ class HistoryOrderDetailSection extends StatelessWidget {
               keyFlex: 1,
               valueFlex: 1,
             ),
-            context
-                    .read<EligibilityBloc>()
-                    .state
-                    .salesOrgConfigs
-                    .enablePaymentTerms
+            paymentTermDisplay
                 ? BalanceTextRow(
                     key: const ValueKey('paymentTerm'),
                     keyText: 'Payment Term'.tr(),
@@ -191,7 +189,7 @@ class HistoryOrderDetailSection extends StatelessWidget {
                     valueFlex: 1,
                   )
                 : const SizedBox.shrink(),
-            context.read<EligibilityBloc>().state.isPaymentTermDescriptionEnable
+            paymentTermDisplay
                 ? BalanceTextRow(
                     keyText: 'Payment Term Description'.tr(),
                     valueText: orderDetails.orderHistoryDetailsPaymentTerm
