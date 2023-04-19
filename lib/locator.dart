@@ -29,8 +29,9 @@ import 'package:ezrxmobile/application/returns/return_summary_details/return_sum
 import 'package:ezrxmobile/application/returns/return_summary_filter/return_summary_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/returns_overview/returns_overview_bloc.dart';
 import 'package:ezrxmobile/domain/order/repository/i_combo_deal_repository.dart';
+import 'package:ezrxmobile/infrastructure/core/common/device_info.dart';
 import 'package:ezrxmobile/infrastructure/core/common/file_picker.dart';
-import 'package:ezrxmobile/infrastructure/core/common/permission.dart';
+import 'package:ezrxmobile/infrastructure/core/common/permission_service.dart';
 import 'package:ezrxmobile/application/returns/request_return/request_return_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_request_type_code/return_request_type_code_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
@@ -1311,10 +1312,21 @@ void setupLocator() {
   //============================================================
 
   locator.registerLazySingleton(
+    () => FilePickerService(),
+  );
+  locator.registerLazySingleton(
+    () => PermissionService(),
+  );
+
+  locator.registerLazySingleton(
+    () => DeviceInfo(),
+  );
+
+  locator.registerLazySingleton(
     () => PoDocumentLocalDataSource(),
   );
   locator.registerLazySingleton(
-    () => PoDocumentRemote(
+    () => PoDocumentRemoteDataSource(
       httpService: locator<HttpService>(),
       dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
     ),
@@ -1323,14 +1335,17 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => PoAttachmentRepository(
       config: locator<Config>(),
-      remoteDataSource: locator<PoDocumentRemote>(),
+      remoteDataSource: locator<PoDocumentRemoteDataSource>(),
       localDataSource: locator<PoDocumentLocalDataSource>(),
+      permissionService: locator<PermissionService>(),
+      deviceInfo: locator<DeviceInfo>(),
+      filePickerService: locator<FilePickerService>(), 
     ),
   );
 
   locator.registerLazySingleton(
     () => PoAttachmentBloc(
-      downloadAttachmentRepository: locator<PoAttachmentRepository>(),
+      poAttachmentRepository: locator<PoAttachmentRepository>(),
     ),
   );
 
@@ -1585,23 +1600,6 @@ void setupLocator() {
     ),
   );
 
-  //============================================================
-  //  Permission
-  //
-  //============================================================
-
-  locator.registerLazySingleton(
-    () => PermissionService(),
-  );
-
-  //============================================================
-  //  File Picker
-  //
-  //============================================================
-
-  locator.registerLazySingleton(
-    () => FilePickerService(),
-  );
 
   //============================================================
   //  Return Approver Actions

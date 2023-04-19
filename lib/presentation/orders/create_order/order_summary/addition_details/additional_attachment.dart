@@ -1,26 +1,19 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:device_info_plus/device_info_plus.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/infrastructure/core/common/file_picker.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
-import 'package:ezrxmobile/infrastructure/core/common/permission.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
-import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/po_attachment.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
-import 'package:file_picker/file_picker.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 class AdditionPoAttachmentUpload extends StatelessWidget {
   const AdditionPoAttachmentUpload({Key? key}) : super(key: key);
@@ -51,10 +44,9 @@ class AdditionPoAttachmentUpload extends StatelessWidget {
                 },
                 (either) => either.fold(
                   (failure) {
-                    final failureMessage = failure.failureMessage;
                     showSnackBar(
                       context: context,
-                      message: failureMessage.tr(),
+                      message: failure.failureMessage.tr(),
                     );
                   },
                   (_) {},
@@ -87,7 +79,7 @@ class AdditionPoAttachmentUpload extends StatelessWidget {
                             'orderSummaryAdditionalPoAttachment',
                           ),
                           poDocuments: state.additionalDetailsData.poDocuments,
-                          poattachMentRenderMode: PoAttachMentRenderMode.edit,
+                          poAttachMentRenderMode: PoAttachMentRenderMode.edit,
                           uploadingPocDocument:
                               poAttachmentState.uploadInProgressPoDocument,
                         ),
@@ -218,55 +210,17 @@ class _PoUploadOptionPickerState extends State<_PoUploadOptionPicker> {
     );
   }
 
-  Future<void> uploadFile({
+  void uploadFile({
     required UploadOptionType uploadOptionType,
-  }) async {
-    final shouldAllowUpload =
-        await _checkIfDeviceIsIosOrAndroidWithSDKIsLessThan33()
-            ? await checkPermissions(uploadOptionType)
-            : true;
-    if (!shouldAllowUpload) return;
-
-    FilePickerResult? result;
-    try {
-      result = await locator<FilePickerService>().pickFiles(
-        allowMultiple: true,
-        fileType: uploadOptionType == UploadOptionType.file
-            ? FileType.custom
-            : FileType.image,
-        allowedExtensions: uploadOptionType == UploadOptionType.file
-            ? allowedExtensions
-            : null,
-      );
-    } catch (e) {
-      final message =
-          'Unable to upload file as either file format not supported or something wrong with the file'
-              .tr();
-      if (context.mounted) {
-        showSnackBar(
-          context: context,
-          message: message,
-        );
-        await context.router.pop();
-      }
-
-      return;
-    }
-
-    if (!mounted) return;
-    await context.router.pop();
-    if (result == null) return;
-
-    final files = List<PlatformFile>.from(result.files)
-      ..removeWhere((element) => (element.path ?? '').isEmpty);
-
-    if (files.isEmpty || !mounted) return;
-    trackMixpanelEvent(MixpanelEvents.uploadAttachment, props: {
-      MixpanelProps.attachmentType: 'PO',
-    });
+  }) {
+    trackMixpanelEvent(
+      MixpanelEvents.uploadAttachment,
+      props: {
+        MixpanelProps.attachmentType: 'PO',
+      },
+    );
     context.read<PoAttachmentBloc>().add(
           PoAttachmentEvent.uploadFile(
-            files: files,
             customerCodeInfo:
                 context.read<EligibilityBloc>().state.customerCodeInfo,
             shipToInfo: context.read<EligibilityBloc>().state.shipToInfo,
@@ -278,56 +232,9 @@ class _PoUploadOptionPickerState extends State<_PoUploadOptionPicker> {
                 .state
                 .additionalDetailsData
                 .poDocuments,
+            uploadOptionType: uploadOptionType,
           ),
         );
-  }
-
-  Future<bool> _checkIfDeviceIsIosOrAndroidWithSDKIsLessThan33() async {
-    if (defaultTargetPlatform != TargetPlatform.android) {
-      return true;
-    }
-    final plugin = DeviceInfoPlugin();
-    final androidDeviceInfo = await plugin.androidInfo;
-
-    return androidDeviceInfo.version.sdkInt! < 33;
-  }
-
-  Future<bool> checkPermissions(UploadOptionType uploadOptionType) async {
-    if (!(uploadOptionType == UploadOptionType.file &&
-        defaultTargetPlatform == TargetPlatform.iOS)) {
-      final permissionStatus = defaultTargetPlatform == TargetPlatform.iOS
-          ? await locator<PermissionService>().requestPhotoPermission()
-          : await locator<PermissionService>().requeststoragePermission();
-      if (!permissionStatus.isGranted &&
-          !permissionStatus.isLimited &&
-          mounted) {
-        showSnackBar(
-          context: context,
-          message: defaultTargetPlatform == TargetPlatform.iOS
-              ? 'Please enable Photos permission from the app settings'.tr()
-              : 'Please enable Storage permission from the app settings'.tr(),
-        );
-        await context.router.pop();
-
-        return Future.value(false);
-      }
-    }
-
-    return Future.value(true);
+    context.router.pop();
   }
 }
-
-enum UploadOptionType { file, gallery }
-
-const allowedExtensions = [
-  'jpg',
-  'pdf',
-  'doc',
-  'png',
-  'jpge',
-  'csv',
-  'pdf',
-  'xlsx',
-  'xls',
-  'heic',
-];

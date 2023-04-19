@@ -54,7 +54,7 @@ void main() {
             .thenAnswer((invocation) async => const Right(unit));
         when(() => authRepoMock.canBeAuthenticatedAndBioAvailable()).thenAnswer(
             (invocation) async =>
-                const Left(ApiFailure.deviceNotSupportBiometirc()));
+                const Left(ApiFailure.deviceNotSupportBiometric()));
       },
       act: (AuthBloc bloc) async => bloc.add(const AuthEvent.authCheck()),
       expect: () => [const AuthState.authenticated()],
@@ -74,7 +74,7 @@ void main() {
         when(() => authRepoMock.canBeAuthenticatedAndBioAvailable())
             .thenAnswer((invocation) async => const Right(true));
         when(() => authRepoMock.doBiometricAuthentication()).thenAnswer(
-            (invocation) async => const Left(ApiFailure.invalidBiometirc()));
+            (invocation) async => const Left(ApiFailure.invalidBiometric()));
       },
       act: (AuthBloc bloc) async => bloc.add(const AuthEvent.init()),
       expect: () => [
@@ -97,7 +97,7 @@ void main() {
         when(() => authRepoMock.canBeAuthenticatedAndBioAvailable())
             .thenAnswer((invocation) async => const Right(true));
         when(() => authRepoMock.doBiometricAuthentication()).thenAnswer(
-            (invocation) async => const Left(ApiFailure.invalidBiometirc()));
+            (invocation) async => const Left(ApiFailure.invalidBiometric()));
       },
       act: (AuthBloc bloc) async => bloc.add(const AuthEvent.authCheck()),
       expect: () => [
@@ -181,7 +181,7 @@ void main() {
               .thenAnswer((invocation) async => const Right(unit));
           when(() => authRepoMock.canBeAuthenticatedAndBioAvailable())
               .thenAnswer((invocation) async =>
-                  const Left(ApiFailure.deviceNotSupportBiometirc()));
+                  const Left(ApiFailure.deviceNotSupportBiometric()));
           when(() => authRepoMock.logout())
               .thenAnswer((invocation) async => const Right(unit));
         },

@@ -7,7 +7,6 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_document_buffer.dart';
 import 'package:ezrxmobile/domain/order/repository/i_po_attachment_repository.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -18,9 +17,9 @@ part 'po_attachment_state.dart';
 part 'po_attachment_bloc.freezed.dart';
 
 class PoAttachmentBloc extends Bloc<PoAttachmentEvent, PoAttachmentState> {
-  final IpoAttachmentRepository downloadAttachmentRepository;
+  final IpoAttachmentRepository poAttachmentRepository;
   PoAttachmentBloc({
-    required this.downloadAttachmentRepository,
+    required this.poAttachmentRepository,
   }) : super(PoAttachmentState.initial()) {
     on<PoAttachmentEvent>(_onEvent);
   }
@@ -39,8 +38,10 @@ class PoAttachmentBloc extends Bloc<PoAttachmentEvent, PoAttachmentState> {
             fileUrl: e.files,
           ),
         );
-        final failureOrSuccess = await downloadAttachmentRepository
-            .downloadFiles(e.files, e.attachmentType);
+        final failureOrSuccess = await poAttachmentRepository.downloadFiles(
+          e.files,
+          e.attachmentType,
+        );
         failureOrSuccess.fold(
           (l) => emit(
             state.copyWith(
@@ -60,55 +61,91 @@ class PoAttachmentBloc extends Bloc<PoAttachmentEvent, PoAttachmentState> {
         );
       },
       uploadFile: (_UpLoadFile e) async {
-        final renamedFiles = e.files
-            .map(
-              (element) => PlatformFile(
-                path: element.path,
-                name:
-                    '${e.user.username.getOrCrash()}_${e.customerCodeInfo.customerCodeSoldTo}_${e.shipToInfo.shipToCustomerCode}_${DateTime.now().toUtc().millisecondsSinceEpoch}_${element.name}',
-                size: element.size,
-                bytes: element.bytes,
-                readStream: element.readStream,
-                identifier: element.identifier,
-              ),
-            )
-            .toList();
         emit(
-          PoAttachmentState.initial().copyWith(
+          state.copyWith(
             isFetching: true,
+            failureOrSuccessOption: none(),
+            fileUrl: [],
             fileOperationMode: FileOperationMode.upload,
-            fileUrl: renamedFiles
-                .map(
-                  (element) => PoDocuments.empty().copyWith(
-                    name: element.name,
-                  ),
-                )
-                .toList(),
           ),
         );
-        final failureOrSuccess = await downloadAttachmentRepository.uploadFiles(
-          salesOrg: e.salesOrg,
-          files: renamedFiles,
-          shipToInfo: e.shipToInfo,
-          customerCodeInfo: e.customerCodeInfo,
+        final failureOrSuccessPermission =
+            await poAttachmentRepository.getPermission(
+          uploadOptionType: e.uploadOptionType,
+        );
+        await failureOrSuccessPermission.fold(
+          (failure) async =>
+            emit(
+              state.copyWith(
+                failureOrSuccessOption: optionOf(failureOrSuccessPermission),
+                isFetching: false,
+              ),
+          ),
+          (_) async {
+            final pickFilesFailureOrSuccess =
+            await poAttachmentRepository.pickFiles(
+          uploadOptionType: e.uploadOptionType,
           user: e.user,
-          uploadedPODocument: e.uploadedPODocument,
+          customerCodeInfo: e.customerCodeInfo,
+          shipToInfo: e.shipToInfo,
         );
-        failureOrSuccess.fold(
-          (l) => emit(
-            state.copyWith(
-              failureOrSuccessOption: optionOf(failureOrSuccess),
-              isFetching: false,
-              fileUrl: [],
-            ),
-          ),
-          (r) => emit(
-            state.copyWith(
-              failureOrSuccessOption: none(),
-              fileUrl: r,
-              isFetching: false,
-            ),
-          ),
+            await pickFilesFailureOrSuccess.fold(
+              (failure) async => emit(
+                state.copyWith(
+                  failureOrSuccessOption: optionOf(pickFilesFailureOrSuccess),
+                  isFetching: false,
+                ),
+              ),
+          (files) async {
+                if (files.isEmpty) {
+                  emit(
+                    state.copyWith(
+                      isFetching: false,
+                    ),
+                  );
+                  
+                  return;
+                }
+                emit(
+                  state.copyWith(
+                    fileUrl: files
+                        .map(
+                          (element) => PoDocuments.empty().copyWith(
+                            name: element.name,
+                          ),
+                        )
+                        .toList(),
+                  ),
+                );
+                final uploadFilesFailureOrSuccess =
+                    await poAttachmentRepository.uploadFiles(
+                  salesOrg: e.salesOrg,
+                  files: files,
+                  shipToInfo: e.shipToInfo,
+                  customerCodeInfo: e.customerCodeInfo,
+                  user: e.user,
+                  uploadedPODocument: e.uploadedPODocument,
+                );
+                uploadFilesFailureOrSuccess.fold(
+                  (l) => emit(
+                    state.copyWith(
+                      failureOrSuccessOption:
+                          optionOf(uploadFilesFailureOrSuccess),
+                      isFetching: false,
+                      fileUrl: [],
+                    ),
+                  ),
+                  (r) => emit(
+                    state.copyWith(
+                      failureOrSuccessOption: none(),
+                      fileUrl: r,
+                      isFetching: false,
+                    ),
+                  ),
+                );
+              },
+            );
+          },
         );
       },
     );

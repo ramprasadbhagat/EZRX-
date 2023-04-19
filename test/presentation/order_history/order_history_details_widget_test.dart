@@ -44,7 +44,7 @@ import 'package:ezrxmobile/domain/order/entities/order_history_details_po_docume
 import 'package:ezrxmobile/domain/order/entities/order_history_details_shipping_information.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/infrastructure/core/common/permission.dart';
+import 'package:ezrxmobile/infrastructure/core/common/permission_service.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_history_details_local.dart';
@@ -768,7 +768,7 @@ void main() {
       await tester.drag(find.byKey(const Key('scrollHistoryDetail')),
           const Offset(0.0, -700));
       await tester.pump();
-      when(() => permissionService.requeststoragePermission())
+      when(() => permissionService.requestStoragePermission())
           .thenAnswer((invocation) async => PermissionStatus.granted);
       final downloadAll = find.byKey(const Key('downloadAll'));
       await tester.tap(downloadAll, warnIfMissed: false);

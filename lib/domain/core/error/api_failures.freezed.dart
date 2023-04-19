@@ -31,12 +31,16 @@ mixin _$ApiFailure {
     required TResult Function() proxyLoginRolePermissionNotMatch,
     required TResult Function() proxyLoginZPTargetRoleNotMatch,
     required TResult Function() proxyLoginZPSalesOrgNotMatch,
-    required TResult Function() deviceNotSupportBiometirc,
+    required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
-    required TResult Function() invalidBiometirc,
+    required TResult Function() invalidBiometric,
     required TResult Function() priceOverrideNotFound,
     required TResult Function() productOutOfStock,
+    required TResult Function() photoPermissionFailed,
+    required TResult Function() storagePermissionFailed,
+    required TResult Function() invalidFileFormat,
+    required TResult Function() uploadCountExcideLimit,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -54,12 +58,16 @@ mixin _$ApiFailure {
     TResult? Function()? proxyLoginRolePermissionNotMatch,
     TResult? Function()? proxyLoginZPTargetRoleNotMatch,
     TResult? Function()? proxyLoginZPSalesOrgNotMatch,
-    TResult? Function()? deviceNotSupportBiometirc,
+    TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
-    TResult? Function()? invalidBiometirc,
+    TResult? Function()? invalidBiometric,
     TResult? Function()? priceOverrideNotFound,
     TResult? Function()? productOutOfStock,
+    TResult? Function()? photoPermissionFailed,
+    TResult? Function()? storagePermissionFailed,
+    TResult? Function()? invalidFileFormat,
+    TResult? Function()? uploadCountExcideLimit,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -77,12 +85,16 @@ mixin _$ApiFailure {
     TResult Function()? proxyLoginRolePermissionNotMatch,
     TResult Function()? proxyLoginZPTargetRoleNotMatch,
     TResult Function()? proxyLoginZPSalesOrgNotMatch,
-    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
-    TResult Function()? invalidBiometirc,
+    TResult Function()? invalidBiometric,
     TResult Function()? priceOverrideNotFound,
     TResult Function()? productOutOfStock,
+    TResult Function()? photoPermissionFailed,
+    TResult Function()? storagePermissionFailed,
+    TResult Function()? invalidFileFormat,
+    TResult Function()? uploadCountExcideLimit,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -105,16 +117,23 @@ mixin _$ApiFailure {
         proxyLoginZPTargetRoleNotMatch,
     required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
         proxyLoginZPSalesOrgNotMatch,
-    required TResult Function(_DeviceNotSupportBiometirc value)
-        deviceNotSupportBiometirc,
+    required TResult Function(_DeviceNotSupportBiometric value)
+        deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
         cannotCheckBiometrics,
     required TResult Function(_NoSupportedBiometrics value)
         noSupportedBiometrics,
-    required TResult Function(_InvalidBiometirc value) invalidBiometirc,
+    required TResult Function(_InvalidBiometric value) invalidBiometric,
     required TResult Function(_PriceOverrideNotFound value)
         priceOverrideNotFound,
     required TResult Function(_ProductOutOfStock value) productOutOfStock,
+    required TResult Function(_PhotoPermissionFailed value)
+        photoPermissionFailed,
+    required TResult Function(_StoragePermissionFailed value)
+        storagePermissionFailed,
+    required TResult Function(_InvalidFileFormat value) invalidFileFormat,
+    required TResult Function(_UploadCountExcideLimit value)
+        uploadCountExcideLimit,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -136,13 +155,17 @@ mixin _$ApiFailure {
         proxyLoginZPTargetRoleNotMatch,
     TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
         proxyLoginZPSalesOrgNotMatch,
-    TResult? Function(_DeviceNotSupportBiometirc value)?
-        deviceNotSupportBiometirc,
+    TResult? Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
-    TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult? Function(_InvalidBiometric value)? invalidBiometric,
     TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
     TResult? Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult? Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult? Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult? Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -164,13 +187,17 @@ mixin _$ApiFailure {
         proxyLoginZPTargetRoleNotMatch,
     TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
         proxyLoginZPSalesOrgNotMatch,
-    TResult Function(_DeviceNotSupportBiometirc value)?
-        deviceNotSupportBiometirc,
+    TResult Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
-    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult Function(_InvalidBiometric value)? invalidBiometric,
     TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
     TResult Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -269,12 +296,16 @@ class _$_Other implements _Other {
     required TResult Function() proxyLoginRolePermissionNotMatch,
     required TResult Function() proxyLoginZPTargetRoleNotMatch,
     required TResult Function() proxyLoginZPSalesOrgNotMatch,
-    required TResult Function() deviceNotSupportBiometirc,
+    required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
-    required TResult Function() invalidBiometirc,
+    required TResult Function() invalidBiometric,
     required TResult Function() priceOverrideNotFound,
     required TResult Function() productOutOfStock,
+    required TResult Function() photoPermissionFailed,
+    required TResult Function() storagePermissionFailed,
+    required TResult Function() invalidFileFormat,
+    required TResult Function() uploadCountExcideLimit,
   }) {
     return other(message);
   }
@@ -295,12 +326,16 @@ class _$_Other implements _Other {
     TResult? Function()? proxyLoginRolePermissionNotMatch,
     TResult? Function()? proxyLoginZPTargetRoleNotMatch,
     TResult? Function()? proxyLoginZPSalesOrgNotMatch,
-    TResult? Function()? deviceNotSupportBiometirc,
+    TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
-    TResult? Function()? invalidBiometirc,
+    TResult? Function()? invalidBiometric,
     TResult? Function()? priceOverrideNotFound,
     TResult? Function()? productOutOfStock,
+    TResult? Function()? photoPermissionFailed,
+    TResult? Function()? storagePermissionFailed,
+    TResult? Function()? invalidFileFormat,
+    TResult? Function()? uploadCountExcideLimit,
   }) {
     return other?.call(message);
   }
@@ -321,12 +356,16 @@ class _$_Other implements _Other {
     TResult Function()? proxyLoginRolePermissionNotMatch,
     TResult Function()? proxyLoginZPTargetRoleNotMatch,
     TResult Function()? proxyLoginZPSalesOrgNotMatch,
-    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
-    TResult Function()? invalidBiometirc,
+    TResult Function()? invalidBiometric,
     TResult Function()? priceOverrideNotFound,
     TResult Function()? productOutOfStock,
+    TResult Function()? photoPermissionFailed,
+    TResult Function()? storagePermissionFailed,
+    TResult Function()? invalidFileFormat,
+    TResult Function()? uploadCountExcideLimit,
     required TResult orElse(),
   }) {
     if (other != null) {
@@ -355,16 +394,23 @@ class _$_Other implements _Other {
         proxyLoginZPTargetRoleNotMatch,
     required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
         proxyLoginZPSalesOrgNotMatch,
-    required TResult Function(_DeviceNotSupportBiometirc value)
-        deviceNotSupportBiometirc,
+    required TResult Function(_DeviceNotSupportBiometric value)
+        deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
         cannotCheckBiometrics,
     required TResult Function(_NoSupportedBiometrics value)
         noSupportedBiometrics,
-    required TResult Function(_InvalidBiometirc value) invalidBiometirc,
+    required TResult Function(_InvalidBiometric value) invalidBiometric,
     required TResult Function(_PriceOverrideNotFound value)
         priceOverrideNotFound,
     required TResult Function(_ProductOutOfStock value) productOutOfStock,
+    required TResult Function(_PhotoPermissionFailed value)
+        photoPermissionFailed,
+    required TResult Function(_StoragePermissionFailed value)
+        storagePermissionFailed,
+    required TResult Function(_InvalidFileFormat value) invalidFileFormat,
+    required TResult Function(_UploadCountExcideLimit value)
+        uploadCountExcideLimit,
   }) {
     return other(this);
   }
@@ -389,13 +435,17 @@ class _$_Other implements _Other {
         proxyLoginZPTargetRoleNotMatch,
     TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
         proxyLoginZPSalesOrgNotMatch,
-    TResult? Function(_DeviceNotSupportBiometirc value)?
-        deviceNotSupportBiometirc,
+    TResult? Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
-    TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult? Function(_InvalidBiometric value)? invalidBiometric,
     TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
     TResult? Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult? Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult? Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult? Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
   }) {
     return other?.call(this);
   }
@@ -420,13 +470,17 @@ class _$_Other implements _Other {
         proxyLoginZPTargetRoleNotMatch,
     TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
         proxyLoginZPSalesOrgNotMatch,
-    TResult Function(_DeviceNotSupportBiometirc value)?
-        deviceNotSupportBiometirc,
+    TResult Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
-    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult Function(_InvalidBiometric value)? invalidBiometric,
     TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
     TResult Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     required TResult orElse(),
   }) {
     if (other != null) {
@@ -522,12 +576,16 @@ class _$_ServerError implements _ServerError {
     required TResult Function() proxyLoginRolePermissionNotMatch,
     required TResult Function() proxyLoginZPTargetRoleNotMatch,
     required TResult Function() proxyLoginZPSalesOrgNotMatch,
-    required TResult Function() deviceNotSupportBiometirc,
+    required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
-    required TResult Function() invalidBiometirc,
+    required TResult Function() invalidBiometric,
     required TResult Function() priceOverrideNotFound,
     required TResult Function() productOutOfStock,
+    required TResult Function() photoPermissionFailed,
+    required TResult Function() storagePermissionFailed,
+    required TResult Function() invalidFileFormat,
+    required TResult Function() uploadCountExcideLimit,
   }) {
     return serverError(message);
   }
@@ -548,12 +606,16 @@ class _$_ServerError implements _ServerError {
     TResult? Function()? proxyLoginRolePermissionNotMatch,
     TResult? Function()? proxyLoginZPTargetRoleNotMatch,
     TResult? Function()? proxyLoginZPSalesOrgNotMatch,
-    TResult? Function()? deviceNotSupportBiometirc,
+    TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
-    TResult? Function()? invalidBiometirc,
+    TResult? Function()? invalidBiometric,
     TResult? Function()? priceOverrideNotFound,
     TResult? Function()? productOutOfStock,
+    TResult? Function()? photoPermissionFailed,
+    TResult? Function()? storagePermissionFailed,
+    TResult? Function()? invalidFileFormat,
+    TResult? Function()? uploadCountExcideLimit,
   }) {
     return serverError?.call(message);
   }
@@ -574,12 +636,16 @@ class _$_ServerError implements _ServerError {
     TResult Function()? proxyLoginRolePermissionNotMatch,
     TResult Function()? proxyLoginZPTargetRoleNotMatch,
     TResult Function()? proxyLoginZPSalesOrgNotMatch,
-    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
-    TResult Function()? invalidBiometirc,
+    TResult Function()? invalidBiometric,
     TResult Function()? priceOverrideNotFound,
     TResult Function()? productOutOfStock,
+    TResult Function()? photoPermissionFailed,
+    TResult Function()? storagePermissionFailed,
+    TResult Function()? invalidFileFormat,
+    TResult Function()? uploadCountExcideLimit,
     required TResult orElse(),
   }) {
     if (serverError != null) {
@@ -608,16 +674,23 @@ class _$_ServerError implements _ServerError {
         proxyLoginZPTargetRoleNotMatch,
     required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
         proxyLoginZPSalesOrgNotMatch,
-    required TResult Function(_DeviceNotSupportBiometirc value)
-        deviceNotSupportBiometirc,
+    required TResult Function(_DeviceNotSupportBiometric value)
+        deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
         cannotCheckBiometrics,
     required TResult Function(_NoSupportedBiometrics value)
         noSupportedBiometrics,
-    required TResult Function(_InvalidBiometirc value) invalidBiometirc,
+    required TResult Function(_InvalidBiometric value) invalidBiometric,
     required TResult Function(_PriceOverrideNotFound value)
         priceOverrideNotFound,
     required TResult Function(_ProductOutOfStock value) productOutOfStock,
+    required TResult Function(_PhotoPermissionFailed value)
+        photoPermissionFailed,
+    required TResult Function(_StoragePermissionFailed value)
+        storagePermissionFailed,
+    required TResult Function(_InvalidFileFormat value) invalidFileFormat,
+    required TResult Function(_UploadCountExcideLimit value)
+        uploadCountExcideLimit,
   }) {
     return serverError(this);
   }
@@ -642,13 +715,17 @@ class _$_ServerError implements _ServerError {
         proxyLoginZPTargetRoleNotMatch,
     TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
         proxyLoginZPSalesOrgNotMatch,
-    TResult? Function(_DeviceNotSupportBiometirc value)?
-        deviceNotSupportBiometirc,
+    TResult? Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
-    TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult? Function(_InvalidBiometric value)? invalidBiometric,
     TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
     TResult? Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult? Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult? Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult? Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
   }) {
     return serverError?.call(this);
   }
@@ -673,13 +750,17 @@ class _$_ServerError implements _ServerError {
         proxyLoginZPTargetRoleNotMatch,
     TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
         proxyLoginZPSalesOrgNotMatch,
-    TResult Function(_DeviceNotSupportBiometirc value)?
-        deviceNotSupportBiometirc,
+    TResult Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
-    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult Function(_InvalidBiometric value)? invalidBiometric,
     TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
     TResult Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     required TResult orElse(),
   }) {
     if (serverError != null) {
@@ -749,12 +830,16 @@ class _$_PoorConnection implements _PoorConnection {
     required TResult Function() proxyLoginRolePermissionNotMatch,
     required TResult Function() proxyLoginZPTargetRoleNotMatch,
     required TResult Function() proxyLoginZPSalesOrgNotMatch,
-    required TResult Function() deviceNotSupportBiometirc,
+    required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
-    required TResult Function() invalidBiometirc,
+    required TResult Function() invalidBiometric,
     required TResult Function() priceOverrideNotFound,
     required TResult Function() productOutOfStock,
+    required TResult Function() photoPermissionFailed,
+    required TResult Function() storagePermissionFailed,
+    required TResult Function() invalidFileFormat,
+    required TResult Function() uploadCountExcideLimit,
   }) {
     return poorConnection();
   }
@@ -775,12 +860,16 @@ class _$_PoorConnection implements _PoorConnection {
     TResult? Function()? proxyLoginRolePermissionNotMatch,
     TResult? Function()? proxyLoginZPTargetRoleNotMatch,
     TResult? Function()? proxyLoginZPSalesOrgNotMatch,
-    TResult? Function()? deviceNotSupportBiometirc,
+    TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
-    TResult? Function()? invalidBiometirc,
+    TResult? Function()? invalidBiometric,
     TResult? Function()? priceOverrideNotFound,
     TResult? Function()? productOutOfStock,
+    TResult? Function()? photoPermissionFailed,
+    TResult? Function()? storagePermissionFailed,
+    TResult? Function()? invalidFileFormat,
+    TResult? Function()? uploadCountExcideLimit,
   }) {
     return poorConnection?.call();
   }
@@ -801,12 +890,16 @@ class _$_PoorConnection implements _PoorConnection {
     TResult Function()? proxyLoginRolePermissionNotMatch,
     TResult Function()? proxyLoginZPTargetRoleNotMatch,
     TResult Function()? proxyLoginZPSalesOrgNotMatch,
-    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
-    TResult Function()? invalidBiometirc,
+    TResult Function()? invalidBiometric,
     TResult Function()? priceOverrideNotFound,
     TResult Function()? productOutOfStock,
+    TResult Function()? photoPermissionFailed,
+    TResult Function()? storagePermissionFailed,
+    TResult Function()? invalidFileFormat,
+    TResult Function()? uploadCountExcideLimit,
     required TResult orElse(),
   }) {
     if (poorConnection != null) {
@@ -835,16 +928,23 @@ class _$_PoorConnection implements _PoorConnection {
         proxyLoginZPTargetRoleNotMatch,
     required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
         proxyLoginZPSalesOrgNotMatch,
-    required TResult Function(_DeviceNotSupportBiometirc value)
-        deviceNotSupportBiometirc,
+    required TResult Function(_DeviceNotSupportBiometric value)
+        deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
         cannotCheckBiometrics,
     required TResult Function(_NoSupportedBiometrics value)
         noSupportedBiometrics,
-    required TResult Function(_InvalidBiometirc value) invalidBiometirc,
+    required TResult Function(_InvalidBiometric value) invalidBiometric,
     required TResult Function(_PriceOverrideNotFound value)
         priceOverrideNotFound,
     required TResult Function(_ProductOutOfStock value) productOutOfStock,
+    required TResult Function(_PhotoPermissionFailed value)
+        photoPermissionFailed,
+    required TResult Function(_StoragePermissionFailed value)
+        storagePermissionFailed,
+    required TResult Function(_InvalidFileFormat value) invalidFileFormat,
+    required TResult Function(_UploadCountExcideLimit value)
+        uploadCountExcideLimit,
   }) {
     return poorConnection(this);
   }
@@ -869,13 +969,17 @@ class _$_PoorConnection implements _PoorConnection {
         proxyLoginZPTargetRoleNotMatch,
     TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
         proxyLoginZPSalesOrgNotMatch,
-    TResult? Function(_DeviceNotSupportBiometirc value)?
-        deviceNotSupportBiometirc,
+    TResult? Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
-    TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult? Function(_InvalidBiometric value)? invalidBiometric,
     TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
     TResult? Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult? Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult? Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult? Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
   }) {
     return poorConnection?.call(this);
   }
@@ -900,13 +1004,17 @@ class _$_PoorConnection implements _PoorConnection {
         proxyLoginZPTargetRoleNotMatch,
     TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
         proxyLoginZPSalesOrgNotMatch,
-    TResult Function(_DeviceNotSupportBiometirc value)?
-        deviceNotSupportBiometirc,
+    TResult Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
-    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult Function(_InvalidBiometric value)? invalidBiometric,
     TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
     TResult Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     required TResult orElse(),
   }) {
     if (poorConnection != null) {
@@ -971,12 +1079,16 @@ class _$_ServerTimeout implements _ServerTimeout {
     required TResult Function() proxyLoginRolePermissionNotMatch,
     required TResult Function() proxyLoginZPTargetRoleNotMatch,
     required TResult Function() proxyLoginZPSalesOrgNotMatch,
-    required TResult Function() deviceNotSupportBiometirc,
+    required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
-    required TResult Function() invalidBiometirc,
+    required TResult Function() invalidBiometric,
     required TResult Function() priceOverrideNotFound,
     required TResult Function() productOutOfStock,
+    required TResult Function() photoPermissionFailed,
+    required TResult Function() storagePermissionFailed,
+    required TResult Function() invalidFileFormat,
+    required TResult Function() uploadCountExcideLimit,
   }) {
     return serverTimeout();
   }
@@ -997,12 +1109,16 @@ class _$_ServerTimeout implements _ServerTimeout {
     TResult? Function()? proxyLoginRolePermissionNotMatch,
     TResult? Function()? proxyLoginZPTargetRoleNotMatch,
     TResult? Function()? proxyLoginZPSalesOrgNotMatch,
-    TResult? Function()? deviceNotSupportBiometirc,
+    TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
-    TResult? Function()? invalidBiometirc,
+    TResult? Function()? invalidBiometric,
     TResult? Function()? priceOverrideNotFound,
     TResult? Function()? productOutOfStock,
+    TResult? Function()? photoPermissionFailed,
+    TResult? Function()? storagePermissionFailed,
+    TResult? Function()? invalidFileFormat,
+    TResult? Function()? uploadCountExcideLimit,
   }) {
     return serverTimeout?.call();
   }
@@ -1023,12 +1139,16 @@ class _$_ServerTimeout implements _ServerTimeout {
     TResult Function()? proxyLoginRolePermissionNotMatch,
     TResult Function()? proxyLoginZPTargetRoleNotMatch,
     TResult Function()? proxyLoginZPSalesOrgNotMatch,
-    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
-    TResult Function()? invalidBiometirc,
+    TResult Function()? invalidBiometric,
     TResult Function()? priceOverrideNotFound,
     TResult Function()? productOutOfStock,
+    TResult Function()? photoPermissionFailed,
+    TResult Function()? storagePermissionFailed,
+    TResult Function()? invalidFileFormat,
+    TResult Function()? uploadCountExcideLimit,
     required TResult orElse(),
   }) {
     if (serverTimeout != null) {
@@ -1057,16 +1177,23 @@ class _$_ServerTimeout implements _ServerTimeout {
         proxyLoginZPTargetRoleNotMatch,
     required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
         proxyLoginZPSalesOrgNotMatch,
-    required TResult Function(_DeviceNotSupportBiometirc value)
-        deviceNotSupportBiometirc,
+    required TResult Function(_DeviceNotSupportBiometric value)
+        deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
         cannotCheckBiometrics,
     required TResult Function(_NoSupportedBiometrics value)
         noSupportedBiometrics,
-    required TResult Function(_InvalidBiometirc value) invalidBiometirc,
+    required TResult Function(_InvalidBiometric value) invalidBiometric,
     required TResult Function(_PriceOverrideNotFound value)
         priceOverrideNotFound,
     required TResult Function(_ProductOutOfStock value) productOutOfStock,
+    required TResult Function(_PhotoPermissionFailed value)
+        photoPermissionFailed,
+    required TResult Function(_StoragePermissionFailed value)
+        storagePermissionFailed,
+    required TResult Function(_InvalidFileFormat value) invalidFileFormat,
+    required TResult Function(_UploadCountExcideLimit value)
+        uploadCountExcideLimit,
   }) {
     return serverTimeout(this);
   }
@@ -1091,13 +1218,17 @@ class _$_ServerTimeout implements _ServerTimeout {
         proxyLoginZPTargetRoleNotMatch,
     TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
         proxyLoginZPSalesOrgNotMatch,
-    TResult? Function(_DeviceNotSupportBiometirc value)?
-        deviceNotSupportBiometirc,
+    TResult? Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
-    TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult? Function(_InvalidBiometric value)? invalidBiometric,
     TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
     TResult? Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult? Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult? Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult? Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
   }) {
     return serverTimeout?.call(this);
   }
@@ -1122,13 +1253,17 @@ class _$_ServerTimeout implements _ServerTimeout {
         proxyLoginZPTargetRoleNotMatch,
     TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
         proxyLoginZPSalesOrgNotMatch,
-    TResult Function(_DeviceNotSupportBiometirc value)?
-        deviceNotSupportBiometirc,
+    TResult Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
-    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult Function(_InvalidBiometric value)? invalidBiometric,
     TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
     TResult Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     required TResult orElse(),
   }) {
     if (serverTimeout != null) {
@@ -1193,12 +1328,16 @@ class _$_UserNotFound implements _UserNotFound {
     required TResult Function() proxyLoginRolePermissionNotMatch,
     required TResult Function() proxyLoginZPTargetRoleNotMatch,
     required TResult Function() proxyLoginZPSalesOrgNotMatch,
-    required TResult Function() deviceNotSupportBiometirc,
+    required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
-    required TResult Function() invalidBiometirc,
+    required TResult Function() invalidBiometric,
     required TResult Function() priceOverrideNotFound,
     required TResult Function() productOutOfStock,
+    required TResult Function() photoPermissionFailed,
+    required TResult Function() storagePermissionFailed,
+    required TResult Function() invalidFileFormat,
+    required TResult Function() uploadCountExcideLimit,
   }) {
     return userNotFound();
   }
@@ -1219,12 +1358,16 @@ class _$_UserNotFound implements _UserNotFound {
     TResult? Function()? proxyLoginRolePermissionNotMatch,
     TResult? Function()? proxyLoginZPTargetRoleNotMatch,
     TResult? Function()? proxyLoginZPSalesOrgNotMatch,
-    TResult? Function()? deviceNotSupportBiometirc,
+    TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
-    TResult? Function()? invalidBiometirc,
+    TResult? Function()? invalidBiometric,
     TResult? Function()? priceOverrideNotFound,
     TResult? Function()? productOutOfStock,
+    TResult? Function()? photoPermissionFailed,
+    TResult? Function()? storagePermissionFailed,
+    TResult? Function()? invalidFileFormat,
+    TResult? Function()? uploadCountExcideLimit,
   }) {
     return userNotFound?.call();
   }
@@ -1245,12 +1388,16 @@ class _$_UserNotFound implements _UserNotFound {
     TResult Function()? proxyLoginRolePermissionNotMatch,
     TResult Function()? proxyLoginZPTargetRoleNotMatch,
     TResult Function()? proxyLoginZPSalesOrgNotMatch,
-    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
-    TResult Function()? invalidBiometirc,
+    TResult Function()? invalidBiometric,
     TResult Function()? priceOverrideNotFound,
     TResult Function()? productOutOfStock,
+    TResult Function()? photoPermissionFailed,
+    TResult Function()? storagePermissionFailed,
+    TResult Function()? invalidFileFormat,
+    TResult Function()? uploadCountExcideLimit,
     required TResult orElse(),
   }) {
     if (userNotFound != null) {
@@ -1279,16 +1426,23 @@ class _$_UserNotFound implements _UserNotFound {
         proxyLoginZPTargetRoleNotMatch,
     required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
         proxyLoginZPSalesOrgNotMatch,
-    required TResult Function(_DeviceNotSupportBiometirc value)
-        deviceNotSupportBiometirc,
+    required TResult Function(_DeviceNotSupportBiometric value)
+        deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
         cannotCheckBiometrics,
     required TResult Function(_NoSupportedBiometrics value)
         noSupportedBiometrics,
-    required TResult Function(_InvalidBiometirc value) invalidBiometirc,
+    required TResult Function(_InvalidBiometric value) invalidBiometric,
     required TResult Function(_PriceOverrideNotFound value)
         priceOverrideNotFound,
     required TResult Function(_ProductOutOfStock value) productOutOfStock,
+    required TResult Function(_PhotoPermissionFailed value)
+        photoPermissionFailed,
+    required TResult Function(_StoragePermissionFailed value)
+        storagePermissionFailed,
+    required TResult Function(_InvalidFileFormat value) invalidFileFormat,
+    required TResult Function(_UploadCountExcideLimit value)
+        uploadCountExcideLimit,
   }) {
     return userNotFound(this);
   }
@@ -1313,13 +1467,17 @@ class _$_UserNotFound implements _UserNotFound {
         proxyLoginZPTargetRoleNotMatch,
     TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
         proxyLoginZPSalesOrgNotMatch,
-    TResult? Function(_DeviceNotSupportBiometirc value)?
-        deviceNotSupportBiometirc,
+    TResult? Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
-    TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult? Function(_InvalidBiometric value)? invalidBiometric,
     TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
     TResult? Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult? Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult? Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult? Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
   }) {
     return userNotFound?.call(this);
   }
@@ -1344,13 +1502,17 @@ class _$_UserNotFound implements _UserNotFound {
         proxyLoginZPTargetRoleNotMatch,
     TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
         proxyLoginZPSalesOrgNotMatch,
-    TResult Function(_DeviceNotSupportBiometirc value)?
-        deviceNotSupportBiometirc,
+    TResult Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
-    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult Function(_InvalidBiometric value)? invalidBiometric,
     TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
     TResult Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     required TResult orElse(),
   }) {
     if (userNotFound != null) {
@@ -1420,12 +1582,16 @@ class _$_InvalidEmailAndPasswordCombination
     required TResult Function() proxyLoginRolePermissionNotMatch,
     required TResult Function() proxyLoginZPTargetRoleNotMatch,
     required TResult Function() proxyLoginZPSalesOrgNotMatch,
-    required TResult Function() deviceNotSupportBiometirc,
+    required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
-    required TResult Function() invalidBiometirc,
+    required TResult Function() invalidBiometric,
     required TResult Function() priceOverrideNotFound,
     required TResult Function() productOutOfStock,
+    required TResult Function() photoPermissionFailed,
+    required TResult Function() storagePermissionFailed,
+    required TResult Function() invalidFileFormat,
+    required TResult Function() uploadCountExcideLimit,
   }) {
     return invalidEmailAndPasswordCombination();
   }
@@ -1446,12 +1612,16 @@ class _$_InvalidEmailAndPasswordCombination
     TResult? Function()? proxyLoginRolePermissionNotMatch,
     TResult? Function()? proxyLoginZPTargetRoleNotMatch,
     TResult? Function()? proxyLoginZPSalesOrgNotMatch,
-    TResult? Function()? deviceNotSupportBiometirc,
+    TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
-    TResult? Function()? invalidBiometirc,
+    TResult? Function()? invalidBiometric,
     TResult? Function()? priceOverrideNotFound,
     TResult? Function()? productOutOfStock,
+    TResult? Function()? photoPermissionFailed,
+    TResult? Function()? storagePermissionFailed,
+    TResult? Function()? invalidFileFormat,
+    TResult? Function()? uploadCountExcideLimit,
   }) {
     return invalidEmailAndPasswordCombination?.call();
   }
@@ -1472,12 +1642,16 @@ class _$_InvalidEmailAndPasswordCombination
     TResult Function()? proxyLoginRolePermissionNotMatch,
     TResult Function()? proxyLoginZPTargetRoleNotMatch,
     TResult Function()? proxyLoginZPSalesOrgNotMatch,
-    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
-    TResult Function()? invalidBiometirc,
+    TResult Function()? invalidBiometric,
     TResult Function()? priceOverrideNotFound,
     TResult Function()? productOutOfStock,
+    TResult Function()? photoPermissionFailed,
+    TResult Function()? storagePermissionFailed,
+    TResult Function()? invalidFileFormat,
+    TResult Function()? uploadCountExcideLimit,
     required TResult orElse(),
   }) {
     if (invalidEmailAndPasswordCombination != null) {
@@ -1506,16 +1680,23 @@ class _$_InvalidEmailAndPasswordCombination
         proxyLoginZPTargetRoleNotMatch,
     required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
         proxyLoginZPSalesOrgNotMatch,
-    required TResult Function(_DeviceNotSupportBiometirc value)
-        deviceNotSupportBiometirc,
+    required TResult Function(_DeviceNotSupportBiometric value)
+        deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
         cannotCheckBiometrics,
     required TResult Function(_NoSupportedBiometrics value)
         noSupportedBiometrics,
-    required TResult Function(_InvalidBiometirc value) invalidBiometirc,
+    required TResult Function(_InvalidBiometric value) invalidBiometric,
     required TResult Function(_PriceOverrideNotFound value)
         priceOverrideNotFound,
     required TResult Function(_ProductOutOfStock value) productOutOfStock,
+    required TResult Function(_PhotoPermissionFailed value)
+        photoPermissionFailed,
+    required TResult Function(_StoragePermissionFailed value)
+        storagePermissionFailed,
+    required TResult Function(_InvalidFileFormat value) invalidFileFormat,
+    required TResult Function(_UploadCountExcideLimit value)
+        uploadCountExcideLimit,
   }) {
     return invalidEmailAndPasswordCombination(this);
   }
@@ -1540,13 +1721,17 @@ class _$_InvalidEmailAndPasswordCombination
         proxyLoginZPTargetRoleNotMatch,
     TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
         proxyLoginZPSalesOrgNotMatch,
-    TResult? Function(_DeviceNotSupportBiometirc value)?
-        deviceNotSupportBiometirc,
+    TResult? Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
-    TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult? Function(_InvalidBiometric value)? invalidBiometric,
     TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
     TResult? Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult? Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult? Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult? Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
   }) {
     return invalidEmailAndPasswordCombination?.call(this);
   }
@@ -1571,13 +1756,17 @@ class _$_InvalidEmailAndPasswordCombination
         proxyLoginZPTargetRoleNotMatch,
     TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
         proxyLoginZPSalesOrgNotMatch,
-    TResult Function(_DeviceNotSupportBiometirc value)?
-        deviceNotSupportBiometirc,
+    TResult Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
-    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult Function(_InvalidBiometric value)? invalidBiometric,
     TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
     TResult Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     required TResult orElse(),
   }) {
     if (invalidEmailAndPasswordCombination != null) {
@@ -1643,12 +1832,16 @@ class _$_AccountLocked implements _AccountLocked {
     required TResult Function() proxyLoginRolePermissionNotMatch,
     required TResult Function() proxyLoginZPTargetRoleNotMatch,
     required TResult Function() proxyLoginZPSalesOrgNotMatch,
-    required TResult Function() deviceNotSupportBiometirc,
+    required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
-    required TResult Function() invalidBiometirc,
+    required TResult Function() invalidBiometric,
     required TResult Function() priceOverrideNotFound,
     required TResult Function() productOutOfStock,
+    required TResult Function() photoPermissionFailed,
+    required TResult Function() storagePermissionFailed,
+    required TResult Function() invalidFileFormat,
+    required TResult Function() uploadCountExcideLimit,
   }) {
     return accountLocked();
   }
@@ -1669,12 +1862,16 @@ class _$_AccountLocked implements _AccountLocked {
     TResult? Function()? proxyLoginRolePermissionNotMatch,
     TResult? Function()? proxyLoginZPTargetRoleNotMatch,
     TResult? Function()? proxyLoginZPSalesOrgNotMatch,
-    TResult? Function()? deviceNotSupportBiometirc,
+    TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
-    TResult? Function()? invalidBiometirc,
+    TResult? Function()? invalidBiometric,
     TResult? Function()? priceOverrideNotFound,
     TResult? Function()? productOutOfStock,
+    TResult? Function()? photoPermissionFailed,
+    TResult? Function()? storagePermissionFailed,
+    TResult? Function()? invalidFileFormat,
+    TResult? Function()? uploadCountExcideLimit,
   }) {
     return accountLocked?.call();
   }
@@ -1695,12 +1892,16 @@ class _$_AccountLocked implements _AccountLocked {
     TResult Function()? proxyLoginRolePermissionNotMatch,
     TResult Function()? proxyLoginZPTargetRoleNotMatch,
     TResult Function()? proxyLoginZPSalesOrgNotMatch,
-    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
-    TResult Function()? invalidBiometirc,
+    TResult Function()? invalidBiometric,
     TResult Function()? priceOverrideNotFound,
     TResult Function()? productOutOfStock,
+    TResult Function()? photoPermissionFailed,
+    TResult Function()? storagePermissionFailed,
+    TResult Function()? invalidFileFormat,
+    TResult Function()? uploadCountExcideLimit,
     required TResult orElse(),
   }) {
     if (accountLocked != null) {
@@ -1729,16 +1930,23 @@ class _$_AccountLocked implements _AccountLocked {
         proxyLoginZPTargetRoleNotMatch,
     required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
         proxyLoginZPSalesOrgNotMatch,
-    required TResult Function(_DeviceNotSupportBiometirc value)
-        deviceNotSupportBiometirc,
+    required TResult Function(_DeviceNotSupportBiometric value)
+        deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
         cannotCheckBiometrics,
     required TResult Function(_NoSupportedBiometrics value)
         noSupportedBiometrics,
-    required TResult Function(_InvalidBiometirc value) invalidBiometirc,
+    required TResult Function(_InvalidBiometric value) invalidBiometric,
     required TResult Function(_PriceOverrideNotFound value)
         priceOverrideNotFound,
     required TResult Function(_ProductOutOfStock value) productOutOfStock,
+    required TResult Function(_PhotoPermissionFailed value)
+        photoPermissionFailed,
+    required TResult Function(_StoragePermissionFailed value)
+        storagePermissionFailed,
+    required TResult Function(_InvalidFileFormat value) invalidFileFormat,
+    required TResult Function(_UploadCountExcideLimit value)
+        uploadCountExcideLimit,
   }) {
     return accountLocked(this);
   }
@@ -1763,13 +1971,17 @@ class _$_AccountLocked implements _AccountLocked {
         proxyLoginZPTargetRoleNotMatch,
     TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
         proxyLoginZPSalesOrgNotMatch,
-    TResult? Function(_DeviceNotSupportBiometirc value)?
-        deviceNotSupportBiometirc,
+    TResult? Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
-    TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult? Function(_InvalidBiometric value)? invalidBiometric,
     TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
     TResult? Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult? Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult? Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult? Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
   }) {
     return accountLocked?.call(this);
   }
@@ -1794,13 +2006,17 @@ class _$_AccountLocked implements _AccountLocked {
         proxyLoginZPTargetRoleNotMatch,
     TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
         proxyLoginZPSalesOrgNotMatch,
-    TResult Function(_DeviceNotSupportBiometirc value)?
-        deviceNotSupportBiometirc,
+    TResult Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
-    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult Function(_InvalidBiometric value)? invalidBiometric,
     TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
     TResult Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     required TResult orElse(),
   }) {
     if (accountLocked != null) {
@@ -1865,12 +2081,16 @@ class _$_AccountExpired implements _AccountExpired {
     required TResult Function() proxyLoginRolePermissionNotMatch,
     required TResult Function() proxyLoginZPTargetRoleNotMatch,
     required TResult Function() proxyLoginZPSalesOrgNotMatch,
-    required TResult Function() deviceNotSupportBiometirc,
+    required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
-    required TResult Function() invalidBiometirc,
+    required TResult Function() invalidBiometric,
     required TResult Function() priceOverrideNotFound,
     required TResult Function() productOutOfStock,
+    required TResult Function() photoPermissionFailed,
+    required TResult Function() storagePermissionFailed,
+    required TResult Function() invalidFileFormat,
+    required TResult Function() uploadCountExcideLimit,
   }) {
     return accountExpired();
   }
@@ -1891,12 +2111,16 @@ class _$_AccountExpired implements _AccountExpired {
     TResult? Function()? proxyLoginRolePermissionNotMatch,
     TResult? Function()? proxyLoginZPTargetRoleNotMatch,
     TResult? Function()? proxyLoginZPSalesOrgNotMatch,
-    TResult? Function()? deviceNotSupportBiometirc,
+    TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
-    TResult? Function()? invalidBiometirc,
+    TResult? Function()? invalidBiometric,
     TResult? Function()? priceOverrideNotFound,
     TResult? Function()? productOutOfStock,
+    TResult? Function()? photoPermissionFailed,
+    TResult? Function()? storagePermissionFailed,
+    TResult? Function()? invalidFileFormat,
+    TResult? Function()? uploadCountExcideLimit,
   }) {
     return accountExpired?.call();
   }
@@ -1917,12 +2141,16 @@ class _$_AccountExpired implements _AccountExpired {
     TResult Function()? proxyLoginRolePermissionNotMatch,
     TResult Function()? proxyLoginZPTargetRoleNotMatch,
     TResult Function()? proxyLoginZPSalesOrgNotMatch,
-    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
-    TResult Function()? invalidBiometirc,
+    TResult Function()? invalidBiometric,
     TResult Function()? priceOverrideNotFound,
     TResult Function()? productOutOfStock,
+    TResult Function()? photoPermissionFailed,
+    TResult Function()? storagePermissionFailed,
+    TResult Function()? invalidFileFormat,
+    TResult Function()? uploadCountExcideLimit,
     required TResult orElse(),
   }) {
     if (accountExpired != null) {
@@ -1951,16 +2179,23 @@ class _$_AccountExpired implements _AccountExpired {
         proxyLoginZPTargetRoleNotMatch,
     required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
         proxyLoginZPSalesOrgNotMatch,
-    required TResult Function(_DeviceNotSupportBiometirc value)
-        deviceNotSupportBiometirc,
+    required TResult Function(_DeviceNotSupportBiometric value)
+        deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
         cannotCheckBiometrics,
     required TResult Function(_NoSupportedBiometrics value)
         noSupportedBiometrics,
-    required TResult Function(_InvalidBiometirc value) invalidBiometirc,
+    required TResult Function(_InvalidBiometric value) invalidBiometric,
     required TResult Function(_PriceOverrideNotFound value)
         priceOverrideNotFound,
     required TResult Function(_ProductOutOfStock value) productOutOfStock,
+    required TResult Function(_PhotoPermissionFailed value)
+        photoPermissionFailed,
+    required TResult Function(_StoragePermissionFailed value)
+        storagePermissionFailed,
+    required TResult Function(_InvalidFileFormat value) invalidFileFormat,
+    required TResult Function(_UploadCountExcideLimit value)
+        uploadCountExcideLimit,
   }) {
     return accountExpired(this);
   }
@@ -1985,13 +2220,17 @@ class _$_AccountExpired implements _AccountExpired {
         proxyLoginZPTargetRoleNotMatch,
     TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
         proxyLoginZPSalesOrgNotMatch,
-    TResult? Function(_DeviceNotSupportBiometirc value)?
-        deviceNotSupportBiometirc,
+    TResult? Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
-    TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult? Function(_InvalidBiometric value)? invalidBiometric,
     TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
     TResult? Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult? Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult? Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult? Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
   }) {
     return accountExpired?.call(this);
   }
@@ -2016,13 +2255,17 @@ class _$_AccountExpired implements _AccountExpired {
         proxyLoginZPTargetRoleNotMatch,
     TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
         proxyLoginZPSalesOrgNotMatch,
-    TResult Function(_DeviceNotSupportBiometirc value)?
-        deviceNotSupportBiometirc,
+    TResult Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
-    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult Function(_InvalidBiometric value)? invalidBiometric,
     TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
     TResult Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     required TResult orElse(),
   }) {
     if (accountExpired != null) {
@@ -2087,12 +2330,16 @@ class _$_TokenExpired implements _TokenExpired {
     required TResult Function() proxyLoginRolePermissionNotMatch,
     required TResult Function() proxyLoginZPTargetRoleNotMatch,
     required TResult Function() proxyLoginZPSalesOrgNotMatch,
-    required TResult Function() deviceNotSupportBiometirc,
+    required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
-    required TResult Function() invalidBiometirc,
+    required TResult Function() invalidBiometric,
     required TResult Function() priceOverrideNotFound,
     required TResult Function() productOutOfStock,
+    required TResult Function() photoPermissionFailed,
+    required TResult Function() storagePermissionFailed,
+    required TResult Function() invalidFileFormat,
+    required TResult Function() uploadCountExcideLimit,
   }) {
     return tokenExpired();
   }
@@ -2113,12 +2360,16 @@ class _$_TokenExpired implements _TokenExpired {
     TResult? Function()? proxyLoginRolePermissionNotMatch,
     TResult? Function()? proxyLoginZPTargetRoleNotMatch,
     TResult? Function()? proxyLoginZPSalesOrgNotMatch,
-    TResult? Function()? deviceNotSupportBiometirc,
+    TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
-    TResult? Function()? invalidBiometirc,
+    TResult? Function()? invalidBiometric,
     TResult? Function()? priceOverrideNotFound,
     TResult? Function()? productOutOfStock,
+    TResult? Function()? photoPermissionFailed,
+    TResult? Function()? storagePermissionFailed,
+    TResult? Function()? invalidFileFormat,
+    TResult? Function()? uploadCountExcideLimit,
   }) {
     return tokenExpired?.call();
   }
@@ -2139,12 +2390,16 @@ class _$_TokenExpired implements _TokenExpired {
     TResult Function()? proxyLoginRolePermissionNotMatch,
     TResult Function()? proxyLoginZPTargetRoleNotMatch,
     TResult Function()? proxyLoginZPSalesOrgNotMatch,
-    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
-    TResult Function()? invalidBiometirc,
+    TResult Function()? invalidBiometric,
     TResult Function()? priceOverrideNotFound,
     TResult Function()? productOutOfStock,
+    TResult Function()? photoPermissionFailed,
+    TResult Function()? storagePermissionFailed,
+    TResult Function()? invalidFileFormat,
+    TResult Function()? uploadCountExcideLimit,
     required TResult orElse(),
   }) {
     if (tokenExpired != null) {
@@ -2173,16 +2428,23 @@ class _$_TokenExpired implements _TokenExpired {
         proxyLoginZPTargetRoleNotMatch,
     required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
         proxyLoginZPSalesOrgNotMatch,
-    required TResult Function(_DeviceNotSupportBiometirc value)
-        deviceNotSupportBiometirc,
+    required TResult Function(_DeviceNotSupportBiometric value)
+        deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
         cannotCheckBiometrics,
     required TResult Function(_NoSupportedBiometrics value)
         noSupportedBiometrics,
-    required TResult Function(_InvalidBiometirc value) invalidBiometirc,
+    required TResult Function(_InvalidBiometric value) invalidBiometric,
     required TResult Function(_PriceOverrideNotFound value)
         priceOverrideNotFound,
     required TResult Function(_ProductOutOfStock value) productOutOfStock,
+    required TResult Function(_PhotoPermissionFailed value)
+        photoPermissionFailed,
+    required TResult Function(_StoragePermissionFailed value)
+        storagePermissionFailed,
+    required TResult Function(_InvalidFileFormat value) invalidFileFormat,
+    required TResult Function(_UploadCountExcideLimit value)
+        uploadCountExcideLimit,
   }) {
     return tokenExpired(this);
   }
@@ -2207,13 +2469,17 @@ class _$_TokenExpired implements _TokenExpired {
         proxyLoginZPTargetRoleNotMatch,
     TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
         proxyLoginZPSalesOrgNotMatch,
-    TResult? Function(_DeviceNotSupportBiometirc value)?
-        deviceNotSupportBiometirc,
+    TResult? Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
-    TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult? Function(_InvalidBiometric value)? invalidBiometric,
     TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
     TResult? Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult? Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult? Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult? Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
   }) {
     return tokenExpired?.call(this);
   }
@@ -2238,13 +2504,17 @@ class _$_TokenExpired implements _TokenExpired {
         proxyLoginZPTargetRoleNotMatch,
     TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
         proxyLoginZPSalesOrgNotMatch,
-    TResult Function(_DeviceNotSupportBiometirc value)?
-        deviceNotSupportBiometirc,
+    TResult Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
-    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult Function(_InvalidBiometric value)? invalidBiometric,
     TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
     TResult Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     required TResult orElse(),
   }) {
     if (tokenExpired != null) {
@@ -2309,12 +2579,16 @@ class _$_AuthenticationFailed implements _AuthenticationFailed {
     required TResult Function() proxyLoginRolePermissionNotMatch,
     required TResult Function() proxyLoginZPTargetRoleNotMatch,
     required TResult Function() proxyLoginZPSalesOrgNotMatch,
-    required TResult Function() deviceNotSupportBiometirc,
+    required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
-    required TResult Function() invalidBiometirc,
+    required TResult Function() invalidBiometric,
     required TResult Function() priceOverrideNotFound,
     required TResult Function() productOutOfStock,
+    required TResult Function() photoPermissionFailed,
+    required TResult Function() storagePermissionFailed,
+    required TResult Function() invalidFileFormat,
+    required TResult Function() uploadCountExcideLimit,
   }) {
     return authenticationFailed();
   }
@@ -2335,12 +2609,16 @@ class _$_AuthenticationFailed implements _AuthenticationFailed {
     TResult? Function()? proxyLoginRolePermissionNotMatch,
     TResult? Function()? proxyLoginZPTargetRoleNotMatch,
     TResult? Function()? proxyLoginZPSalesOrgNotMatch,
-    TResult? Function()? deviceNotSupportBiometirc,
+    TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
-    TResult? Function()? invalidBiometirc,
+    TResult? Function()? invalidBiometric,
     TResult? Function()? priceOverrideNotFound,
     TResult? Function()? productOutOfStock,
+    TResult? Function()? photoPermissionFailed,
+    TResult? Function()? storagePermissionFailed,
+    TResult? Function()? invalidFileFormat,
+    TResult? Function()? uploadCountExcideLimit,
   }) {
     return authenticationFailed?.call();
   }
@@ -2361,12 +2639,16 @@ class _$_AuthenticationFailed implements _AuthenticationFailed {
     TResult Function()? proxyLoginRolePermissionNotMatch,
     TResult Function()? proxyLoginZPTargetRoleNotMatch,
     TResult Function()? proxyLoginZPSalesOrgNotMatch,
-    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
-    TResult Function()? invalidBiometirc,
+    TResult Function()? invalidBiometric,
     TResult Function()? priceOverrideNotFound,
     TResult Function()? productOutOfStock,
+    TResult Function()? photoPermissionFailed,
+    TResult Function()? storagePermissionFailed,
+    TResult Function()? invalidFileFormat,
+    TResult Function()? uploadCountExcideLimit,
     required TResult orElse(),
   }) {
     if (authenticationFailed != null) {
@@ -2395,16 +2677,23 @@ class _$_AuthenticationFailed implements _AuthenticationFailed {
         proxyLoginZPTargetRoleNotMatch,
     required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
         proxyLoginZPSalesOrgNotMatch,
-    required TResult Function(_DeviceNotSupportBiometirc value)
-        deviceNotSupportBiometirc,
+    required TResult Function(_DeviceNotSupportBiometric value)
+        deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
         cannotCheckBiometrics,
     required TResult Function(_NoSupportedBiometrics value)
         noSupportedBiometrics,
-    required TResult Function(_InvalidBiometirc value) invalidBiometirc,
+    required TResult Function(_InvalidBiometric value) invalidBiometric,
     required TResult Function(_PriceOverrideNotFound value)
         priceOverrideNotFound,
     required TResult Function(_ProductOutOfStock value) productOutOfStock,
+    required TResult Function(_PhotoPermissionFailed value)
+        photoPermissionFailed,
+    required TResult Function(_StoragePermissionFailed value)
+        storagePermissionFailed,
+    required TResult Function(_InvalidFileFormat value) invalidFileFormat,
+    required TResult Function(_UploadCountExcideLimit value)
+        uploadCountExcideLimit,
   }) {
     return authenticationFailed(this);
   }
@@ -2429,13 +2718,17 @@ class _$_AuthenticationFailed implements _AuthenticationFailed {
         proxyLoginZPTargetRoleNotMatch,
     TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
         proxyLoginZPSalesOrgNotMatch,
-    TResult? Function(_DeviceNotSupportBiometirc value)?
-        deviceNotSupportBiometirc,
+    TResult? Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
-    TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult? Function(_InvalidBiometric value)? invalidBiometric,
     TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
     TResult? Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult? Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult? Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult? Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
   }) {
     return authenticationFailed?.call(this);
   }
@@ -2460,13 +2753,17 @@ class _$_AuthenticationFailed implements _AuthenticationFailed {
         proxyLoginZPTargetRoleNotMatch,
     TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
         proxyLoginZPSalesOrgNotMatch,
-    TResult Function(_DeviceNotSupportBiometirc value)?
-        deviceNotSupportBiometirc,
+    TResult Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
-    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult Function(_InvalidBiometric value)? invalidBiometric,
     TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
     TResult Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     required TResult orElse(),
   }) {
     if (authenticationFailed != null) {
@@ -2535,12 +2832,16 @@ class _$_ProxyLoginRolePermissionNotMatch
     required TResult Function() proxyLoginRolePermissionNotMatch,
     required TResult Function() proxyLoginZPTargetRoleNotMatch,
     required TResult Function() proxyLoginZPSalesOrgNotMatch,
-    required TResult Function() deviceNotSupportBiometirc,
+    required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
-    required TResult Function() invalidBiometirc,
+    required TResult Function() invalidBiometric,
     required TResult Function() priceOverrideNotFound,
     required TResult Function() productOutOfStock,
+    required TResult Function() photoPermissionFailed,
+    required TResult Function() storagePermissionFailed,
+    required TResult Function() invalidFileFormat,
+    required TResult Function() uploadCountExcideLimit,
   }) {
     return proxyLoginRolePermissionNotMatch();
   }
@@ -2561,12 +2862,16 @@ class _$_ProxyLoginRolePermissionNotMatch
     TResult? Function()? proxyLoginRolePermissionNotMatch,
     TResult? Function()? proxyLoginZPTargetRoleNotMatch,
     TResult? Function()? proxyLoginZPSalesOrgNotMatch,
-    TResult? Function()? deviceNotSupportBiometirc,
+    TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
-    TResult? Function()? invalidBiometirc,
+    TResult? Function()? invalidBiometric,
     TResult? Function()? priceOverrideNotFound,
     TResult? Function()? productOutOfStock,
+    TResult? Function()? photoPermissionFailed,
+    TResult? Function()? storagePermissionFailed,
+    TResult? Function()? invalidFileFormat,
+    TResult? Function()? uploadCountExcideLimit,
   }) {
     return proxyLoginRolePermissionNotMatch?.call();
   }
@@ -2587,12 +2892,16 @@ class _$_ProxyLoginRolePermissionNotMatch
     TResult Function()? proxyLoginRolePermissionNotMatch,
     TResult Function()? proxyLoginZPTargetRoleNotMatch,
     TResult Function()? proxyLoginZPSalesOrgNotMatch,
-    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
-    TResult Function()? invalidBiometirc,
+    TResult Function()? invalidBiometric,
     TResult Function()? priceOverrideNotFound,
     TResult Function()? productOutOfStock,
+    TResult Function()? photoPermissionFailed,
+    TResult Function()? storagePermissionFailed,
+    TResult Function()? invalidFileFormat,
+    TResult Function()? uploadCountExcideLimit,
     required TResult orElse(),
   }) {
     if (proxyLoginRolePermissionNotMatch != null) {
@@ -2621,16 +2930,23 @@ class _$_ProxyLoginRolePermissionNotMatch
         proxyLoginZPTargetRoleNotMatch,
     required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
         proxyLoginZPSalesOrgNotMatch,
-    required TResult Function(_DeviceNotSupportBiometirc value)
-        deviceNotSupportBiometirc,
+    required TResult Function(_DeviceNotSupportBiometric value)
+        deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
         cannotCheckBiometrics,
     required TResult Function(_NoSupportedBiometrics value)
         noSupportedBiometrics,
-    required TResult Function(_InvalidBiometirc value) invalidBiometirc,
+    required TResult Function(_InvalidBiometric value) invalidBiometric,
     required TResult Function(_PriceOverrideNotFound value)
         priceOverrideNotFound,
     required TResult Function(_ProductOutOfStock value) productOutOfStock,
+    required TResult Function(_PhotoPermissionFailed value)
+        photoPermissionFailed,
+    required TResult Function(_StoragePermissionFailed value)
+        storagePermissionFailed,
+    required TResult Function(_InvalidFileFormat value) invalidFileFormat,
+    required TResult Function(_UploadCountExcideLimit value)
+        uploadCountExcideLimit,
   }) {
     return proxyLoginRolePermissionNotMatch(this);
   }
@@ -2655,13 +2971,17 @@ class _$_ProxyLoginRolePermissionNotMatch
         proxyLoginZPTargetRoleNotMatch,
     TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
         proxyLoginZPSalesOrgNotMatch,
-    TResult? Function(_DeviceNotSupportBiometirc value)?
-        deviceNotSupportBiometirc,
+    TResult? Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
-    TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult? Function(_InvalidBiometric value)? invalidBiometric,
     TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
     TResult? Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult? Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult? Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult? Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
   }) {
     return proxyLoginRolePermissionNotMatch?.call(this);
   }
@@ -2686,13 +3006,17 @@ class _$_ProxyLoginRolePermissionNotMatch
         proxyLoginZPTargetRoleNotMatch,
     TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
         proxyLoginZPSalesOrgNotMatch,
-    TResult Function(_DeviceNotSupportBiometirc value)?
-        deviceNotSupportBiometirc,
+    TResult Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
-    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult Function(_InvalidBiometric value)? invalidBiometric,
     TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
     TResult Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     required TResult orElse(),
   }) {
     if (proxyLoginRolePermissionNotMatch != null) {
@@ -2762,12 +3086,16 @@ class _$_ProxyLoginZPTargetRoleNotMatch
     required TResult Function() proxyLoginRolePermissionNotMatch,
     required TResult Function() proxyLoginZPTargetRoleNotMatch,
     required TResult Function() proxyLoginZPSalesOrgNotMatch,
-    required TResult Function() deviceNotSupportBiometirc,
+    required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
-    required TResult Function() invalidBiometirc,
+    required TResult Function() invalidBiometric,
     required TResult Function() priceOverrideNotFound,
     required TResult Function() productOutOfStock,
+    required TResult Function() photoPermissionFailed,
+    required TResult Function() storagePermissionFailed,
+    required TResult Function() invalidFileFormat,
+    required TResult Function() uploadCountExcideLimit,
   }) {
     return proxyLoginZPTargetRoleNotMatch();
   }
@@ -2788,12 +3116,16 @@ class _$_ProxyLoginZPTargetRoleNotMatch
     TResult? Function()? proxyLoginRolePermissionNotMatch,
     TResult? Function()? proxyLoginZPTargetRoleNotMatch,
     TResult? Function()? proxyLoginZPSalesOrgNotMatch,
-    TResult? Function()? deviceNotSupportBiometirc,
+    TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
-    TResult? Function()? invalidBiometirc,
+    TResult? Function()? invalidBiometric,
     TResult? Function()? priceOverrideNotFound,
     TResult? Function()? productOutOfStock,
+    TResult? Function()? photoPermissionFailed,
+    TResult? Function()? storagePermissionFailed,
+    TResult? Function()? invalidFileFormat,
+    TResult? Function()? uploadCountExcideLimit,
   }) {
     return proxyLoginZPTargetRoleNotMatch?.call();
   }
@@ -2814,12 +3146,16 @@ class _$_ProxyLoginZPTargetRoleNotMatch
     TResult Function()? proxyLoginRolePermissionNotMatch,
     TResult Function()? proxyLoginZPTargetRoleNotMatch,
     TResult Function()? proxyLoginZPSalesOrgNotMatch,
-    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
-    TResult Function()? invalidBiometirc,
+    TResult Function()? invalidBiometric,
     TResult Function()? priceOverrideNotFound,
     TResult Function()? productOutOfStock,
+    TResult Function()? photoPermissionFailed,
+    TResult Function()? storagePermissionFailed,
+    TResult Function()? invalidFileFormat,
+    TResult Function()? uploadCountExcideLimit,
     required TResult orElse(),
   }) {
     if (proxyLoginZPTargetRoleNotMatch != null) {
@@ -2848,16 +3184,23 @@ class _$_ProxyLoginZPTargetRoleNotMatch
         proxyLoginZPTargetRoleNotMatch,
     required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
         proxyLoginZPSalesOrgNotMatch,
-    required TResult Function(_DeviceNotSupportBiometirc value)
-        deviceNotSupportBiometirc,
+    required TResult Function(_DeviceNotSupportBiometric value)
+        deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
         cannotCheckBiometrics,
     required TResult Function(_NoSupportedBiometrics value)
         noSupportedBiometrics,
-    required TResult Function(_InvalidBiometirc value) invalidBiometirc,
+    required TResult Function(_InvalidBiometric value) invalidBiometric,
     required TResult Function(_PriceOverrideNotFound value)
         priceOverrideNotFound,
     required TResult Function(_ProductOutOfStock value) productOutOfStock,
+    required TResult Function(_PhotoPermissionFailed value)
+        photoPermissionFailed,
+    required TResult Function(_StoragePermissionFailed value)
+        storagePermissionFailed,
+    required TResult Function(_InvalidFileFormat value) invalidFileFormat,
+    required TResult Function(_UploadCountExcideLimit value)
+        uploadCountExcideLimit,
   }) {
     return proxyLoginZPTargetRoleNotMatch(this);
   }
@@ -2882,13 +3225,17 @@ class _$_ProxyLoginZPTargetRoleNotMatch
         proxyLoginZPTargetRoleNotMatch,
     TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
         proxyLoginZPSalesOrgNotMatch,
-    TResult? Function(_DeviceNotSupportBiometirc value)?
-        deviceNotSupportBiometirc,
+    TResult? Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
-    TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult? Function(_InvalidBiometric value)? invalidBiometric,
     TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
     TResult? Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult? Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult? Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult? Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
   }) {
     return proxyLoginZPTargetRoleNotMatch?.call(this);
   }
@@ -2913,13 +3260,17 @@ class _$_ProxyLoginZPTargetRoleNotMatch
         proxyLoginZPTargetRoleNotMatch,
     TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
         proxyLoginZPSalesOrgNotMatch,
-    TResult Function(_DeviceNotSupportBiometirc value)?
-        deviceNotSupportBiometirc,
+    TResult Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
-    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult Function(_InvalidBiometric value)? invalidBiometric,
     TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
     TResult Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     required TResult orElse(),
   }) {
     if (proxyLoginZPTargetRoleNotMatch != null) {
@@ -2988,12 +3339,16 @@ class _$_ProxyLoginZPSalesOrgNotMatch implements _ProxyLoginZPSalesOrgNotMatch {
     required TResult Function() proxyLoginRolePermissionNotMatch,
     required TResult Function() proxyLoginZPTargetRoleNotMatch,
     required TResult Function() proxyLoginZPSalesOrgNotMatch,
-    required TResult Function() deviceNotSupportBiometirc,
+    required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
-    required TResult Function() invalidBiometirc,
+    required TResult Function() invalidBiometric,
     required TResult Function() priceOverrideNotFound,
     required TResult Function() productOutOfStock,
+    required TResult Function() photoPermissionFailed,
+    required TResult Function() storagePermissionFailed,
+    required TResult Function() invalidFileFormat,
+    required TResult Function() uploadCountExcideLimit,
   }) {
     return proxyLoginZPSalesOrgNotMatch();
   }
@@ -3014,12 +3369,16 @@ class _$_ProxyLoginZPSalesOrgNotMatch implements _ProxyLoginZPSalesOrgNotMatch {
     TResult? Function()? proxyLoginRolePermissionNotMatch,
     TResult? Function()? proxyLoginZPTargetRoleNotMatch,
     TResult? Function()? proxyLoginZPSalesOrgNotMatch,
-    TResult? Function()? deviceNotSupportBiometirc,
+    TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
-    TResult? Function()? invalidBiometirc,
+    TResult? Function()? invalidBiometric,
     TResult? Function()? priceOverrideNotFound,
     TResult? Function()? productOutOfStock,
+    TResult? Function()? photoPermissionFailed,
+    TResult? Function()? storagePermissionFailed,
+    TResult? Function()? invalidFileFormat,
+    TResult? Function()? uploadCountExcideLimit,
   }) {
     return proxyLoginZPSalesOrgNotMatch?.call();
   }
@@ -3040,12 +3399,16 @@ class _$_ProxyLoginZPSalesOrgNotMatch implements _ProxyLoginZPSalesOrgNotMatch {
     TResult Function()? proxyLoginRolePermissionNotMatch,
     TResult Function()? proxyLoginZPTargetRoleNotMatch,
     TResult Function()? proxyLoginZPSalesOrgNotMatch,
-    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
-    TResult Function()? invalidBiometirc,
+    TResult Function()? invalidBiometric,
     TResult Function()? priceOverrideNotFound,
     TResult Function()? productOutOfStock,
+    TResult Function()? photoPermissionFailed,
+    TResult Function()? storagePermissionFailed,
+    TResult Function()? invalidFileFormat,
+    TResult Function()? uploadCountExcideLimit,
     required TResult orElse(),
   }) {
     if (proxyLoginZPSalesOrgNotMatch != null) {
@@ -3074,16 +3437,23 @@ class _$_ProxyLoginZPSalesOrgNotMatch implements _ProxyLoginZPSalesOrgNotMatch {
         proxyLoginZPTargetRoleNotMatch,
     required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
         proxyLoginZPSalesOrgNotMatch,
-    required TResult Function(_DeviceNotSupportBiometirc value)
-        deviceNotSupportBiometirc,
+    required TResult Function(_DeviceNotSupportBiometric value)
+        deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
         cannotCheckBiometrics,
     required TResult Function(_NoSupportedBiometrics value)
         noSupportedBiometrics,
-    required TResult Function(_InvalidBiometirc value) invalidBiometirc,
+    required TResult Function(_InvalidBiometric value) invalidBiometric,
     required TResult Function(_PriceOverrideNotFound value)
         priceOverrideNotFound,
     required TResult Function(_ProductOutOfStock value) productOutOfStock,
+    required TResult Function(_PhotoPermissionFailed value)
+        photoPermissionFailed,
+    required TResult Function(_StoragePermissionFailed value)
+        storagePermissionFailed,
+    required TResult Function(_InvalidFileFormat value) invalidFileFormat,
+    required TResult Function(_UploadCountExcideLimit value)
+        uploadCountExcideLimit,
   }) {
     return proxyLoginZPSalesOrgNotMatch(this);
   }
@@ -3108,13 +3478,17 @@ class _$_ProxyLoginZPSalesOrgNotMatch implements _ProxyLoginZPSalesOrgNotMatch {
         proxyLoginZPTargetRoleNotMatch,
     TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
         proxyLoginZPSalesOrgNotMatch,
-    TResult? Function(_DeviceNotSupportBiometirc value)?
-        deviceNotSupportBiometirc,
+    TResult? Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
-    TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult? Function(_InvalidBiometric value)? invalidBiometric,
     TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
     TResult? Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult? Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult? Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult? Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
   }) {
     return proxyLoginZPSalesOrgNotMatch?.call(this);
   }
@@ -3139,13 +3513,17 @@ class _$_ProxyLoginZPSalesOrgNotMatch implements _ProxyLoginZPSalesOrgNotMatch {
         proxyLoginZPTargetRoleNotMatch,
     TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
         proxyLoginZPSalesOrgNotMatch,
-    TResult Function(_DeviceNotSupportBiometirc value)?
-        deviceNotSupportBiometirc,
+    TResult Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
-    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult Function(_InvalidBiometric value)? invalidBiometric,
     TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
     TResult Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     required TResult orElse(),
   }) {
     if (proxyLoginZPSalesOrgNotMatch != null) {
@@ -3161,38 +3539,38 @@ abstract class _ProxyLoginZPSalesOrgNotMatch implements ApiFailure {
 }
 
 /// @nodoc
-abstract class _$$_DeviceNotSupportBiometircCopyWith<$Res> {
-  factory _$$_DeviceNotSupportBiometircCopyWith(
-          _$_DeviceNotSupportBiometirc value,
-          $Res Function(_$_DeviceNotSupportBiometirc) then) =
-      __$$_DeviceNotSupportBiometircCopyWithImpl<$Res>;
+abstract class _$$_DeviceNotSupportBiometricCopyWith<$Res> {
+  factory _$$_DeviceNotSupportBiometricCopyWith(
+          _$_DeviceNotSupportBiometric value,
+          $Res Function(_$_DeviceNotSupportBiometric) then) =
+      __$$_DeviceNotSupportBiometricCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_DeviceNotSupportBiometircCopyWithImpl<$Res>
-    extends _$ApiFailureCopyWithImpl<$Res, _$_DeviceNotSupportBiometirc>
-    implements _$$_DeviceNotSupportBiometircCopyWith<$Res> {
-  __$$_DeviceNotSupportBiometircCopyWithImpl(
-      _$_DeviceNotSupportBiometirc _value,
-      $Res Function(_$_DeviceNotSupportBiometirc) _then)
+class __$$_DeviceNotSupportBiometricCopyWithImpl<$Res>
+    extends _$ApiFailureCopyWithImpl<$Res, _$_DeviceNotSupportBiometric>
+    implements _$$_DeviceNotSupportBiometricCopyWith<$Res> {
+  __$$_DeviceNotSupportBiometricCopyWithImpl(
+      _$_DeviceNotSupportBiometric _value,
+      $Res Function(_$_DeviceNotSupportBiometric) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_DeviceNotSupportBiometirc implements _DeviceNotSupportBiometirc {
-  const _$_DeviceNotSupportBiometirc();
+class _$_DeviceNotSupportBiometric implements _DeviceNotSupportBiometric {
+  const _$_DeviceNotSupportBiometric();
 
   @override
   String toString() {
-    return 'ApiFailure.deviceNotSupportBiometirc()';
+    return 'ApiFailure.deviceNotSupportBiometric()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_DeviceNotSupportBiometirc);
+            other is _$_DeviceNotSupportBiometric);
   }
 
   @override
@@ -3214,14 +3592,18 @@ class _$_DeviceNotSupportBiometirc implements _DeviceNotSupportBiometirc {
     required TResult Function() proxyLoginRolePermissionNotMatch,
     required TResult Function() proxyLoginZPTargetRoleNotMatch,
     required TResult Function() proxyLoginZPSalesOrgNotMatch,
-    required TResult Function() deviceNotSupportBiometirc,
+    required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
-    required TResult Function() invalidBiometirc,
+    required TResult Function() invalidBiometric,
     required TResult Function() priceOverrideNotFound,
     required TResult Function() productOutOfStock,
+    required TResult Function() photoPermissionFailed,
+    required TResult Function() storagePermissionFailed,
+    required TResult Function() invalidFileFormat,
+    required TResult Function() uploadCountExcideLimit,
   }) {
-    return deviceNotSupportBiometirc();
+    return deviceNotSupportBiometric();
   }
 
   @override
@@ -3240,14 +3622,18 @@ class _$_DeviceNotSupportBiometirc implements _DeviceNotSupportBiometirc {
     TResult? Function()? proxyLoginRolePermissionNotMatch,
     TResult? Function()? proxyLoginZPTargetRoleNotMatch,
     TResult? Function()? proxyLoginZPSalesOrgNotMatch,
-    TResult? Function()? deviceNotSupportBiometirc,
+    TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
-    TResult? Function()? invalidBiometirc,
+    TResult? Function()? invalidBiometric,
     TResult? Function()? priceOverrideNotFound,
     TResult? Function()? productOutOfStock,
+    TResult? Function()? photoPermissionFailed,
+    TResult? Function()? storagePermissionFailed,
+    TResult? Function()? invalidFileFormat,
+    TResult? Function()? uploadCountExcideLimit,
   }) {
-    return deviceNotSupportBiometirc?.call();
+    return deviceNotSupportBiometric?.call();
   }
 
   @override
@@ -3266,16 +3652,20 @@ class _$_DeviceNotSupportBiometirc implements _DeviceNotSupportBiometirc {
     TResult Function()? proxyLoginRolePermissionNotMatch,
     TResult Function()? proxyLoginZPTargetRoleNotMatch,
     TResult Function()? proxyLoginZPSalesOrgNotMatch,
-    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
-    TResult Function()? invalidBiometirc,
+    TResult Function()? invalidBiometric,
     TResult Function()? priceOverrideNotFound,
     TResult Function()? productOutOfStock,
+    TResult Function()? photoPermissionFailed,
+    TResult Function()? storagePermissionFailed,
+    TResult Function()? invalidFileFormat,
+    TResult Function()? uploadCountExcideLimit,
     required TResult orElse(),
   }) {
-    if (deviceNotSupportBiometirc != null) {
-      return deviceNotSupportBiometirc();
+    if (deviceNotSupportBiometric != null) {
+      return deviceNotSupportBiometric();
     }
     return orElse();
   }
@@ -3300,18 +3690,25 @@ class _$_DeviceNotSupportBiometirc implements _DeviceNotSupportBiometirc {
         proxyLoginZPTargetRoleNotMatch,
     required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
         proxyLoginZPSalesOrgNotMatch,
-    required TResult Function(_DeviceNotSupportBiometirc value)
-        deviceNotSupportBiometirc,
+    required TResult Function(_DeviceNotSupportBiometric value)
+        deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
         cannotCheckBiometrics,
     required TResult Function(_NoSupportedBiometrics value)
         noSupportedBiometrics,
-    required TResult Function(_InvalidBiometirc value) invalidBiometirc,
+    required TResult Function(_InvalidBiometric value) invalidBiometric,
     required TResult Function(_PriceOverrideNotFound value)
         priceOverrideNotFound,
     required TResult Function(_ProductOutOfStock value) productOutOfStock,
+    required TResult Function(_PhotoPermissionFailed value)
+        photoPermissionFailed,
+    required TResult Function(_StoragePermissionFailed value)
+        storagePermissionFailed,
+    required TResult Function(_InvalidFileFormat value) invalidFileFormat,
+    required TResult Function(_UploadCountExcideLimit value)
+        uploadCountExcideLimit,
   }) {
-    return deviceNotSupportBiometirc(this);
+    return deviceNotSupportBiometric(this);
   }
 
   @override
@@ -3334,15 +3731,19 @@ class _$_DeviceNotSupportBiometirc implements _DeviceNotSupportBiometirc {
         proxyLoginZPTargetRoleNotMatch,
     TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
         proxyLoginZPSalesOrgNotMatch,
-    TResult? Function(_DeviceNotSupportBiometirc value)?
-        deviceNotSupportBiometirc,
+    TResult? Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
-    TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult? Function(_InvalidBiometric value)? invalidBiometric,
     TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
     TResult? Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult? Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult? Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult? Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
   }) {
-    return deviceNotSupportBiometirc?.call(this);
+    return deviceNotSupportBiometric?.call(this);
   }
 
   @override
@@ -3365,24 +3766,28 @@ class _$_DeviceNotSupportBiometirc implements _DeviceNotSupportBiometirc {
         proxyLoginZPTargetRoleNotMatch,
     TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
         proxyLoginZPSalesOrgNotMatch,
-    TResult Function(_DeviceNotSupportBiometirc value)?
-        deviceNotSupportBiometirc,
+    TResult Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
-    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult Function(_InvalidBiometric value)? invalidBiometric,
     TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
     TResult Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     required TResult orElse(),
   }) {
-    if (deviceNotSupportBiometirc != null) {
-      return deviceNotSupportBiometirc(this);
+    if (deviceNotSupportBiometric != null) {
+      return deviceNotSupportBiometric(this);
     }
     return orElse();
   }
 }
 
-abstract class _DeviceNotSupportBiometirc implements ApiFailure {
-  const factory _DeviceNotSupportBiometirc() = _$_DeviceNotSupportBiometirc;
+abstract class _DeviceNotSupportBiometric implements ApiFailure {
+  const factory _DeviceNotSupportBiometric() = _$_DeviceNotSupportBiometric;
 }
 
 /// @nodoc
@@ -3436,12 +3841,16 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
     required TResult Function() proxyLoginRolePermissionNotMatch,
     required TResult Function() proxyLoginZPTargetRoleNotMatch,
     required TResult Function() proxyLoginZPSalesOrgNotMatch,
-    required TResult Function() deviceNotSupportBiometirc,
+    required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
-    required TResult Function() invalidBiometirc,
+    required TResult Function() invalidBiometric,
     required TResult Function() priceOverrideNotFound,
     required TResult Function() productOutOfStock,
+    required TResult Function() photoPermissionFailed,
+    required TResult Function() storagePermissionFailed,
+    required TResult Function() invalidFileFormat,
+    required TResult Function() uploadCountExcideLimit,
   }) {
     return cannotCheckBiometrics();
   }
@@ -3462,12 +3871,16 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
     TResult? Function()? proxyLoginRolePermissionNotMatch,
     TResult? Function()? proxyLoginZPTargetRoleNotMatch,
     TResult? Function()? proxyLoginZPSalesOrgNotMatch,
-    TResult? Function()? deviceNotSupportBiometirc,
+    TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
-    TResult? Function()? invalidBiometirc,
+    TResult? Function()? invalidBiometric,
     TResult? Function()? priceOverrideNotFound,
     TResult? Function()? productOutOfStock,
+    TResult? Function()? photoPermissionFailed,
+    TResult? Function()? storagePermissionFailed,
+    TResult? Function()? invalidFileFormat,
+    TResult? Function()? uploadCountExcideLimit,
   }) {
     return cannotCheckBiometrics?.call();
   }
@@ -3488,12 +3901,16 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
     TResult Function()? proxyLoginRolePermissionNotMatch,
     TResult Function()? proxyLoginZPTargetRoleNotMatch,
     TResult Function()? proxyLoginZPSalesOrgNotMatch,
-    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
-    TResult Function()? invalidBiometirc,
+    TResult Function()? invalidBiometric,
     TResult Function()? priceOverrideNotFound,
     TResult Function()? productOutOfStock,
+    TResult Function()? photoPermissionFailed,
+    TResult Function()? storagePermissionFailed,
+    TResult Function()? invalidFileFormat,
+    TResult Function()? uploadCountExcideLimit,
     required TResult orElse(),
   }) {
     if (cannotCheckBiometrics != null) {
@@ -3522,16 +3939,23 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
         proxyLoginZPTargetRoleNotMatch,
     required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
         proxyLoginZPSalesOrgNotMatch,
-    required TResult Function(_DeviceNotSupportBiometirc value)
-        deviceNotSupportBiometirc,
+    required TResult Function(_DeviceNotSupportBiometric value)
+        deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
         cannotCheckBiometrics,
     required TResult Function(_NoSupportedBiometrics value)
         noSupportedBiometrics,
-    required TResult Function(_InvalidBiometirc value) invalidBiometirc,
+    required TResult Function(_InvalidBiometric value) invalidBiometric,
     required TResult Function(_PriceOverrideNotFound value)
         priceOverrideNotFound,
     required TResult Function(_ProductOutOfStock value) productOutOfStock,
+    required TResult Function(_PhotoPermissionFailed value)
+        photoPermissionFailed,
+    required TResult Function(_StoragePermissionFailed value)
+        storagePermissionFailed,
+    required TResult Function(_InvalidFileFormat value) invalidFileFormat,
+    required TResult Function(_UploadCountExcideLimit value)
+        uploadCountExcideLimit,
   }) {
     return cannotCheckBiometrics(this);
   }
@@ -3556,13 +3980,17 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
         proxyLoginZPTargetRoleNotMatch,
     TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
         proxyLoginZPSalesOrgNotMatch,
-    TResult? Function(_DeviceNotSupportBiometirc value)?
-        deviceNotSupportBiometirc,
+    TResult? Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
-    TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult? Function(_InvalidBiometric value)? invalidBiometric,
     TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
     TResult? Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult? Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult? Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult? Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
   }) {
     return cannotCheckBiometrics?.call(this);
   }
@@ -3587,13 +4015,17 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
         proxyLoginZPTargetRoleNotMatch,
     TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
         proxyLoginZPSalesOrgNotMatch,
-    TResult Function(_DeviceNotSupportBiometirc value)?
-        deviceNotSupportBiometirc,
+    TResult Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
-    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult Function(_InvalidBiometric value)? invalidBiometric,
     TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
     TResult Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     required TResult orElse(),
   }) {
     if (cannotCheckBiometrics != null) {
@@ -3658,12 +4090,16 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
     required TResult Function() proxyLoginRolePermissionNotMatch,
     required TResult Function() proxyLoginZPTargetRoleNotMatch,
     required TResult Function() proxyLoginZPSalesOrgNotMatch,
-    required TResult Function() deviceNotSupportBiometirc,
+    required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
-    required TResult Function() invalidBiometirc,
+    required TResult Function() invalidBiometric,
     required TResult Function() priceOverrideNotFound,
     required TResult Function() productOutOfStock,
+    required TResult Function() photoPermissionFailed,
+    required TResult Function() storagePermissionFailed,
+    required TResult Function() invalidFileFormat,
+    required TResult Function() uploadCountExcideLimit,
   }) {
     return noSupportedBiometrics();
   }
@@ -3684,12 +4120,16 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
     TResult? Function()? proxyLoginRolePermissionNotMatch,
     TResult? Function()? proxyLoginZPTargetRoleNotMatch,
     TResult? Function()? proxyLoginZPSalesOrgNotMatch,
-    TResult? Function()? deviceNotSupportBiometirc,
+    TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
-    TResult? Function()? invalidBiometirc,
+    TResult? Function()? invalidBiometric,
     TResult? Function()? priceOverrideNotFound,
     TResult? Function()? productOutOfStock,
+    TResult? Function()? photoPermissionFailed,
+    TResult? Function()? storagePermissionFailed,
+    TResult? Function()? invalidFileFormat,
+    TResult? Function()? uploadCountExcideLimit,
   }) {
     return noSupportedBiometrics?.call();
   }
@@ -3710,12 +4150,16 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
     TResult Function()? proxyLoginRolePermissionNotMatch,
     TResult Function()? proxyLoginZPTargetRoleNotMatch,
     TResult Function()? proxyLoginZPSalesOrgNotMatch,
-    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
-    TResult Function()? invalidBiometirc,
+    TResult Function()? invalidBiometric,
     TResult Function()? priceOverrideNotFound,
     TResult Function()? productOutOfStock,
+    TResult Function()? photoPermissionFailed,
+    TResult Function()? storagePermissionFailed,
+    TResult Function()? invalidFileFormat,
+    TResult Function()? uploadCountExcideLimit,
     required TResult orElse(),
   }) {
     if (noSupportedBiometrics != null) {
@@ -3744,16 +4188,23 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
         proxyLoginZPTargetRoleNotMatch,
     required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
         proxyLoginZPSalesOrgNotMatch,
-    required TResult Function(_DeviceNotSupportBiometirc value)
-        deviceNotSupportBiometirc,
+    required TResult Function(_DeviceNotSupportBiometric value)
+        deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
         cannotCheckBiometrics,
     required TResult Function(_NoSupportedBiometrics value)
         noSupportedBiometrics,
-    required TResult Function(_InvalidBiometirc value) invalidBiometirc,
+    required TResult Function(_InvalidBiometric value) invalidBiometric,
     required TResult Function(_PriceOverrideNotFound value)
         priceOverrideNotFound,
     required TResult Function(_ProductOutOfStock value) productOutOfStock,
+    required TResult Function(_PhotoPermissionFailed value)
+        photoPermissionFailed,
+    required TResult Function(_StoragePermissionFailed value)
+        storagePermissionFailed,
+    required TResult Function(_InvalidFileFormat value) invalidFileFormat,
+    required TResult Function(_UploadCountExcideLimit value)
+        uploadCountExcideLimit,
   }) {
     return noSupportedBiometrics(this);
   }
@@ -3778,13 +4229,17 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
         proxyLoginZPTargetRoleNotMatch,
     TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
         proxyLoginZPSalesOrgNotMatch,
-    TResult? Function(_DeviceNotSupportBiometirc value)?
-        deviceNotSupportBiometirc,
+    TResult? Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
-    TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult? Function(_InvalidBiometric value)? invalidBiometric,
     TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
     TResult? Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult? Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult? Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult? Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
   }) {
     return noSupportedBiometrics?.call(this);
   }
@@ -3809,13 +4264,17 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
         proxyLoginZPTargetRoleNotMatch,
     TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
         proxyLoginZPSalesOrgNotMatch,
-    TResult Function(_DeviceNotSupportBiometirc value)?
-        deviceNotSupportBiometirc,
+    TResult Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
-    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult Function(_InvalidBiometric value)? invalidBiometric,
     TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
     TResult Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     required TResult orElse(),
   }) {
     if (noSupportedBiometrics != null) {
@@ -3830,35 +4289,35 @@ abstract class _NoSupportedBiometrics implements ApiFailure {
 }
 
 /// @nodoc
-abstract class _$$_InvalidBiometircCopyWith<$Res> {
-  factory _$$_InvalidBiometircCopyWith(
-          _$_InvalidBiometirc value, $Res Function(_$_InvalidBiometirc) then) =
-      __$$_InvalidBiometircCopyWithImpl<$Res>;
+abstract class _$$_InvalidBiometricCopyWith<$Res> {
+  factory _$$_InvalidBiometricCopyWith(
+          _$_InvalidBiometric value, $Res Function(_$_InvalidBiometric) then) =
+      __$$_InvalidBiometricCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_InvalidBiometircCopyWithImpl<$Res>
-    extends _$ApiFailureCopyWithImpl<$Res, _$_InvalidBiometirc>
-    implements _$$_InvalidBiometircCopyWith<$Res> {
-  __$$_InvalidBiometircCopyWithImpl(
-      _$_InvalidBiometirc _value, $Res Function(_$_InvalidBiometirc) _then)
+class __$$_InvalidBiometricCopyWithImpl<$Res>
+    extends _$ApiFailureCopyWithImpl<$Res, _$_InvalidBiometric>
+    implements _$$_InvalidBiometricCopyWith<$Res> {
+  __$$_InvalidBiometricCopyWithImpl(
+      _$_InvalidBiometric _value, $Res Function(_$_InvalidBiometric) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_InvalidBiometirc implements _InvalidBiometirc {
-  const _$_InvalidBiometirc();
+class _$_InvalidBiometric implements _InvalidBiometric {
+  const _$_InvalidBiometric();
 
   @override
   String toString() {
-    return 'ApiFailure.invalidBiometirc()';
+    return 'ApiFailure.invalidBiometric()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_InvalidBiometirc);
+        (other.runtimeType == runtimeType && other is _$_InvalidBiometric);
   }
 
   @override
@@ -3880,14 +4339,18 @@ class _$_InvalidBiometirc implements _InvalidBiometirc {
     required TResult Function() proxyLoginRolePermissionNotMatch,
     required TResult Function() proxyLoginZPTargetRoleNotMatch,
     required TResult Function() proxyLoginZPSalesOrgNotMatch,
-    required TResult Function() deviceNotSupportBiometirc,
+    required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
-    required TResult Function() invalidBiometirc,
+    required TResult Function() invalidBiometric,
     required TResult Function() priceOverrideNotFound,
     required TResult Function() productOutOfStock,
+    required TResult Function() photoPermissionFailed,
+    required TResult Function() storagePermissionFailed,
+    required TResult Function() invalidFileFormat,
+    required TResult Function() uploadCountExcideLimit,
   }) {
-    return invalidBiometirc();
+    return invalidBiometric();
   }
 
   @override
@@ -3906,14 +4369,18 @@ class _$_InvalidBiometirc implements _InvalidBiometirc {
     TResult? Function()? proxyLoginRolePermissionNotMatch,
     TResult? Function()? proxyLoginZPTargetRoleNotMatch,
     TResult? Function()? proxyLoginZPSalesOrgNotMatch,
-    TResult? Function()? deviceNotSupportBiometirc,
+    TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
-    TResult? Function()? invalidBiometirc,
+    TResult? Function()? invalidBiometric,
     TResult? Function()? priceOverrideNotFound,
     TResult? Function()? productOutOfStock,
+    TResult? Function()? photoPermissionFailed,
+    TResult? Function()? storagePermissionFailed,
+    TResult? Function()? invalidFileFormat,
+    TResult? Function()? uploadCountExcideLimit,
   }) {
-    return invalidBiometirc?.call();
+    return invalidBiometric?.call();
   }
 
   @override
@@ -3932,16 +4399,20 @@ class _$_InvalidBiometirc implements _InvalidBiometirc {
     TResult Function()? proxyLoginRolePermissionNotMatch,
     TResult Function()? proxyLoginZPTargetRoleNotMatch,
     TResult Function()? proxyLoginZPSalesOrgNotMatch,
-    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
-    TResult Function()? invalidBiometirc,
+    TResult Function()? invalidBiometric,
     TResult Function()? priceOverrideNotFound,
     TResult Function()? productOutOfStock,
+    TResult Function()? photoPermissionFailed,
+    TResult Function()? storagePermissionFailed,
+    TResult Function()? invalidFileFormat,
+    TResult Function()? uploadCountExcideLimit,
     required TResult orElse(),
   }) {
-    if (invalidBiometirc != null) {
-      return invalidBiometirc();
+    if (invalidBiometric != null) {
+      return invalidBiometric();
     }
     return orElse();
   }
@@ -3966,18 +4437,25 @@ class _$_InvalidBiometirc implements _InvalidBiometirc {
         proxyLoginZPTargetRoleNotMatch,
     required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
         proxyLoginZPSalesOrgNotMatch,
-    required TResult Function(_DeviceNotSupportBiometirc value)
-        deviceNotSupportBiometirc,
+    required TResult Function(_DeviceNotSupportBiometric value)
+        deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
         cannotCheckBiometrics,
     required TResult Function(_NoSupportedBiometrics value)
         noSupportedBiometrics,
-    required TResult Function(_InvalidBiometirc value) invalidBiometirc,
+    required TResult Function(_InvalidBiometric value) invalidBiometric,
     required TResult Function(_PriceOverrideNotFound value)
         priceOverrideNotFound,
     required TResult Function(_ProductOutOfStock value) productOutOfStock,
+    required TResult Function(_PhotoPermissionFailed value)
+        photoPermissionFailed,
+    required TResult Function(_StoragePermissionFailed value)
+        storagePermissionFailed,
+    required TResult Function(_InvalidFileFormat value) invalidFileFormat,
+    required TResult Function(_UploadCountExcideLimit value)
+        uploadCountExcideLimit,
   }) {
-    return invalidBiometirc(this);
+    return invalidBiometric(this);
   }
 
   @override
@@ -4000,15 +4478,19 @@ class _$_InvalidBiometirc implements _InvalidBiometirc {
         proxyLoginZPTargetRoleNotMatch,
     TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
         proxyLoginZPSalesOrgNotMatch,
-    TResult? Function(_DeviceNotSupportBiometirc value)?
-        deviceNotSupportBiometirc,
+    TResult? Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
-    TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult? Function(_InvalidBiometric value)? invalidBiometric,
     TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
     TResult? Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult? Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult? Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult? Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
   }) {
-    return invalidBiometirc?.call(this);
+    return invalidBiometric?.call(this);
   }
 
   @override
@@ -4031,24 +4513,28 @@ class _$_InvalidBiometirc implements _InvalidBiometirc {
         proxyLoginZPTargetRoleNotMatch,
     TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
         proxyLoginZPSalesOrgNotMatch,
-    TResult Function(_DeviceNotSupportBiometirc value)?
-        deviceNotSupportBiometirc,
+    TResult Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
-    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult Function(_InvalidBiometric value)? invalidBiometric,
     TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
     TResult Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     required TResult orElse(),
   }) {
-    if (invalidBiometirc != null) {
-      return invalidBiometirc(this);
+    if (invalidBiometric != null) {
+      return invalidBiometric(this);
     }
     return orElse();
   }
 }
 
-abstract class _InvalidBiometirc implements ApiFailure {
-  const factory _InvalidBiometirc() = _$_InvalidBiometirc;
+abstract class _InvalidBiometric implements ApiFailure {
+  const factory _InvalidBiometric() = _$_InvalidBiometric;
 }
 
 /// @nodoc
@@ -4102,12 +4588,16 @@ class _$_PriceOverrideNotFound implements _PriceOverrideNotFound {
     required TResult Function() proxyLoginRolePermissionNotMatch,
     required TResult Function() proxyLoginZPTargetRoleNotMatch,
     required TResult Function() proxyLoginZPSalesOrgNotMatch,
-    required TResult Function() deviceNotSupportBiometirc,
+    required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
-    required TResult Function() invalidBiometirc,
+    required TResult Function() invalidBiometric,
     required TResult Function() priceOverrideNotFound,
     required TResult Function() productOutOfStock,
+    required TResult Function() photoPermissionFailed,
+    required TResult Function() storagePermissionFailed,
+    required TResult Function() invalidFileFormat,
+    required TResult Function() uploadCountExcideLimit,
   }) {
     return priceOverrideNotFound();
   }
@@ -4128,12 +4618,16 @@ class _$_PriceOverrideNotFound implements _PriceOverrideNotFound {
     TResult? Function()? proxyLoginRolePermissionNotMatch,
     TResult? Function()? proxyLoginZPTargetRoleNotMatch,
     TResult? Function()? proxyLoginZPSalesOrgNotMatch,
-    TResult? Function()? deviceNotSupportBiometirc,
+    TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
-    TResult? Function()? invalidBiometirc,
+    TResult? Function()? invalidBiometric,
     TResult? Function()? priceOverrideNotFound,
     TResult? Function()? productOutOfStock,
+    TResult? Function()? photoPermissionFailed,
+    TResult? Function()? storagePermissionFailed,
+    TResult? Function()? invalidFileFormat,
+    TResult? Function()? uploadCountExcideLimit,
   }) {
     return priceOverrideNotFound?.call();
   }
@@ -4154,12 +4648,16 @@ class _$_PriceOverrideNotFound implements _PriceOverrideNotFound {
     TResult Function()? proxyLoginRolePermissionNotMatch,
     TResult Function()? proxyLoginZPTargetRoleNotMatch,
     TResult Function()? proxyLoginZPSalesOrgNotMatch,
-    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
-    TResult Function()? invalidBiometirc,
+    TResult Function()? invalidBiometric,
     TResult Function()? priceOverrideNotFound,
     TResult Function()? productOutOfStock,
+    TResult Function()? photoPermissionFailed,
+    TResult Function()? storagePermissionFailed,
+    TResult Function()? invalidFileFormat,
+    TResult Function()? uploadCountExcideLimit,
     required TResult orElse(),
   }) {
     if (priceOverrideNotFound != null) {
@@ -4188,16 +4686,23 @@ class _$_PriceOverrideNotFound implements _PriceOverrideNotFound {
         proxyLoginZPTargetRoleNotMatch,
     required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
         proxyLoginZPSalesOrgNotMatch,
-    required TResult Function(_DeviceNotSupportBiometirc value)
-        deviceNotSupportBiometirc,
+    required TResult Function(_DeviceNotSupportBiometric value)
+        deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
         cannotCheckBiometrics,
     required TResult Function(_NoSupportedBiometrics value)
         noSupportedBiometrics,
-    required TResult Function(_InvalidBiometirc value) invalidBiometirc,
+    required TResult Function(_InvalidBiometric value) invalidBiometric,
     required TResult Function(_PriceOverrideNotFound value)
         priceOverrideNotFound,
     required TResult Function(_ProductOutOfStock value) productOutOfStock,
+    required TResult Function(_PhotoPermissionFailed value)
+        photoPermissionFailed,
+    required TResult Function(_StoragePermissionFailed value)
+        storagePermissionFailed,
+    required TResult Function(_InvalidFileFormat value) invalidFileFormat,
+    required TResult Function(_UploadCountExcideLimit value)
+        uploadCountExcideLimit,
   }) {
     return priceOverrideNotFound(this);
   }
@@ -4222,13 +4727,17 @@ class _$_PriceOverrideNotFound implements _PriceOverrideNotFound {
         proxyLoginZPTargetRoleNotMatch,
     TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
         proxyLoginZPSalesOrgNotMatch,
-    TResult? Function(_DeviceNotSupportBiometirc value)?
-        deviceNotSupportBiometirc,
+    TResult? Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
-    TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult? Function(_InvalidBiometric value)? invalidBiometric,
     TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
     TResult? Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult? Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult? Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult? Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
   }) {
     return priceOverrideNotFound?.call(this);
   }
@@ -4253,13 +4762,17 @@ class _$_PriceOverrideNotFound implements _PriceOverrideNotFound {
         proxyLoginZPTargetRoleNotMatch,
     TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
         proxyLoginZPSalesOrgNotMatch,
-    TResult Function(_DeviceNotSupportBiometirc value)?
-        deviceNotSupportBiometirc,
+    TResult Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
-    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult Function(_InvalidBiometric value)? invalidBiometric,
     TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
     TResult Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     required TResult orElse(),
   }) {
     if (priceOverrideNotFound != null) {
@@ -4324,12 +4837,16 @@ class _$_ProductOutOfStock implements _ProductOutOfStock {
     required TResult Function() proxyLoginRolePermissionNotMatch,
     required TResult Function() proxyLoginZPTargetRoleNotMatch,
     required TResult Function() proxyLoginZPSalesOrgNotMatch,
-    required TResult Function() deviceNotSupportBiometirc,
+    required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
     required TResult Function() noSupportedBiometrics,
-    required TResult Function() invalidBiometirc,
+    required TResult Function() invalidBiometric,
     required TResult Function() priceOverrideNotFound,
     required TResult Function() productOutOfStock,
+    required TResult Function() photoPermissionFailed,
+    required TResult Function() storagePermissionFailed,
+    required TResult Function() invalidFileFormat,
+    required TResult Function() uploadCountExcideLimit,
   }) {
     return productOutOfStock();
   }
@@ -4350,12 +4867,16 @@ class _$_ProductOutOfStock implements _ProductOutOfStock {
     TResult? Function()? proxyLoginRolePermissionNotMatch,
     TResult? Function()? proxyLoginZPTargetRoleNotMatch,
     TResult? Function()? proxyLoginZPSalesOrgNotMatch,
-    TResult? Function()? deviceNotSupportBiometirc,
+    TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
     TResult? Function()? noSupportedBiometrics,
-    TResult? Function()? invalidBiometirc,
+    TResult? Function()? invalidBiometric,
     TResult? Function()? priceOverrideNotFound,
     TResult? Function()? productOutOfStock,
+    TResult? Function()? photoPermissionFailed,
+    TResult? Function()? storagePermissionFailed,
+    TResult? Function()? invalidFileFormat,
+    TResult? Function()? uploadCountExcideLimit,
   }) {
     return productOutOfStock?.call();
   }
@@ -4376,12 +4897,16 @@ class _$_ProductOutOfStock implements _ProductOutOfStock {
     TResult Function()? proxyLoginRolePermissionNotMatch,
     TResult Function()? proxyLoginZPTargetRoleNotMatch,
     TResult Function()? proxyLoginZPSalesOrgNotMatch,
-    TResult Function()? deviceNotSupportBiometirc,
+    TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
     TResult Function()? noSupportedBiometrics,
-    TResult Function()? invalidBiometirc,
+    TResult Function()? invalidBiometric,
     TResult Function()? priceOverrideNotFound,
     TResult Function()? productOutOfStock,
+    TResult Function()? photoPermissionFailed,
+    TResult Function()? storagePermissionFailed,
+    TResult Function()? invalidFileFormat,
+    TResult Function()? uploadCountExcideLimit,
     required TResult orElse(),
   }) {
     if (productOutOfStock != null) {
@@ -4410,16 +4935,23 @@ class _$_ProductOutOfStock implements _ProductOutOfStock {
         proxyLoginZPTargetRoleNotMatch,
     required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
         proxyLoginZPSalesOrgNotMatch,
-    required TResult Function(_DeviceNotSupportBiometirc value)
-        deviceNotSupportBiometirc,
+    required TResult Function(_DeviceNotSupportBiometric value)
+        deviceNotSupportBiometric,
     required TResult Function(_CannotCheckBiometrics value)
         cannotCheckBiometrics,
     required TResult Function(_NoSupportedBiometrics value)
         noSupportedBiometrics,
-    required TResult Function(_InvalidBiometirc value) invalidBiometirc,
+    required TResult Function(_InvalidBiometric value) invalidBiometric,
     required TResult Function(_PriceOverrideNotFound value)
         priceOverrideNotFound,
     required TResult Function(_ProductOutOfStock value) productOutOfStock,
+    required TResult Function(_PhotoPermissionFailed value)
+        photoPermissionFailed,
+    required TResult Function(_StoragePermissionFailed value)
+        storagePermissionFailed,
+    required TResult Function(_InvalidFileFormat value) invalidFileFormat,
+    required TResult Function(_UploadCountExcideLimit value)
+        uploadCountExcideLimit,
   }) {
     return productOutOfStock(this);
   }
@@ -4444,13 +4976,17 @@ class _$_ProductOutOfStock implements _ProductOutOfStock {
         proxyLoginZPTargetRoleNotMatch,
     TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
         proxyLoginZPSalesOrgNotMatch,
-    TResult? Function(_DeviceNotSupportBiometirc value)?
-        deviceNotSupportBiometirc,
+    TResult? Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
     TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
-    TResult? Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult? Function(_InvalidBiometric value)? invalidBiometric,
     TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
     TResult? Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult? Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult? Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult? Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
   }) {
     return productOutOfStock?.call(this);
   }
@@ -4475,13 +5011,17 @@ class _$_ProductOutOfStock implements _ProductOutOfStock {
         proxyLoginZPTargetRoleNotMatch,
     TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
         proxyLoginZPSalesOrgNotMatch,
-    TResult Function(_DeviceNotSupportBiometirc value)?
-        deviceNotSupportBiometirc,
+    TResult Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
     TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
     TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
-    TResult Function(_InvalidBiometirc value)? invalidBiometirc,
+    TResult Function(_InvalidBiometric value)? invalidBiometric,
     TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
     TResult Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
     required TResult orElse(),
   }) {
     if (productOutOfStock != null) {
@@ -4493,4 +5033,1002 @@ class _$_ProductOutOfStock implements _ProductOutOfStock {
 
 abstract class _ProductOutOfStock implements ApiFailure {
   const factory _ProductOutOfStock() = _$_ProductOutOfStock;
+}
+
+/// @nodoc
+abstract class _$$_PhotoPermissionFailedCopyWith<$Res> {
+  factory _$$_PhotoPermissionFailedCopyWith(_$_PhotoPermissionFailed value,
+          $Res Function(_$_PhotoPermissionFailed) then) =
+      __$$_PhotoPermissionFailedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_PhotoPermissionFailedCopyWithImpl<$Res>
+    extends _$ApiFailureCopyWithImpl<$Res, _$_PhotoPermissionFailed>
+    implements _$$_PhotoPermissionFailedCopyWith<$Res> {
+  __$$_PhotoPermissionFailedCopyWithImpl(_$_PhotoPermissionFailed _value,
+      $Res Function(_$_PhotoPermissionFailed) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_PhotoPermissionFailed implements _PhotoPermissionFailed {
+  const _$_PhotoPermissionFailed();
+
+  @override
+  String toString() {
+    return 'ApiFailure.photoPermissionFailed()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_PhotoPermissionFailed);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String message) other,
+    required TResult Function(String message) serverError,
+    required TResult Function() poorConnection,
+    required TResult Function() serverTimeout,
+    required TResult Function() userNotFound,
+    required TResult Function() invalidEmailAndPasswordCombination,
+    required TResult Function() accountLocked,
+    required TResult Function() accountExpired,
+    required TResult Function() tokenExpired,
+    required TResult Function() authenticationFailed,
+    required TResult Function() proxyLoginRolePermissionNotMatch,
+    required TResult Function() proxyLoginZPTargetRoleNotMatch,
+    required TResult Function() proxyLoginZPSalesOrgNotMatch,
+    required TResult Function() deviceNotSupportBiometric,
+    required TResult Function() cannotCheckBiometrics,
+    required TResult Function() noSupportedBiometrics,
+    required TResult Function() invalidBiometric,
+    required TResult Function() priceOverrideNotFound,
+    required TResult Function() productOutOfStock,
+    required TResult Function() photoPermissionFailed,
+    required TResult Function() storagePermissionFailed,
+    required TResult Function() invalidFileFormat,
+    required TResult Function() uploadCountExcideLimit,
+  }) {
+    return photoPermissionFailed();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String message)? other,
+    TResult? Function(String message)? serverError,
+    TResult? Function()? poorConnection,
+    TResult? Function()? serverTimeout,
+    TResult? Function()? userNotFound,
+    TResult? Function()? invalidEmailAndPasswordCombination,
+    TResult? Function()? accountLocked,
+    TResult? Function()? accountExpired,
+    TResult? Function()? tokenExpired,
+    TResult? Function()? authenticationFailed,
+    TResult? Function()? proxyLoginRolePermissionNotMatch,
+    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
+    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult? Function()? deviceNotSupportBiometric,
+    TResult? Function()? cannotCheckBiometrics,
+    TResult? Function()? noSupportedBiometrics,
+    TResult? Function()? invalidBiometric,
+    TResult? Function()? priceOverrideNotFound,
+    TResult? Function()? productOutOfStock,
+    TResult? Function()? photoPermissionFailed,
+    TResult? Function()? storagePermissionFailed,
+    TResult? Function()? invalidFileFormat,
+    TResult? Function()? uploadCountExcideLimit,
+  }) {
+    return photoPermissionFailed?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String message)? other,
+    TResult Function(String message)? serverError,
+    TResult Function()? poorConnection,
+    TResult Function()? serverTimeout,
+    TResult Function()? userNotFound,
+    TResult Function()? invalidEmailAndPasswordCombination,
+    TResult Function()? accountLocked,
+    TResult Function()? accountExpired,
+    TResult Function()? tokenExpired,
+    TResult Function()? authenticationFailed,
+    TResult Function()? proxyLoginRolePermissionNotMatch,
+    TResult Function()? proxyLoginZPTargetRoleNotMatch,
+    TResult Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult Function()? deviceNotSupportBiometric,
+    TResult Function()? cannotCheckBiometrics,
+    TResult Function()? noSupportedBiometrics,
+    TResult Function()? invalidBiometric,
+    TResult Function()? priceOverrideNotFound,
+    TResult Function()? productOutOfStock,
+    TResult Function()? photoPermissionFailed,
+    TResult Function()? storagePermissionFailed,
+    TResult Function()? invalidFileFormat,
+    TResult Function()? uploadCountExcideLimit,
+    required TResult orElse(),
+  }) {
+    if (photoPermissionFailed != null) {
+      return photoPermissionFailed();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Other value) other,
+    required TResult Function(_ServerError value) serverError,
+    required TResult Function(_PoorConnection value) poorConnection,
+    required TResult Function(_ServerTimeout value) serverTimeout,
+    required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_InvalidEmailAndPasswordCombination value)
+        invalidEmailAndPasswordCombination,
+    required TResult Function(_AccountLocked value) accountLocked,
+    required TResult Function(_AccountExpired value) accountExpired,
+    required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_AuthenticationFailed value) authenticationFailed,
+    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
+        proxyLoginRolePermissionNotMatch,
+    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
+        proxyLoginZPTargetRoleNotMatch,
+    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
+        proxyLoginZPSalesOrgNotMatch,
+    required TResult Function(_DeviceNotSupportBiometric value)
+        deviceNotSupportBiometric,
+    required TResult Function(_CannotCheckBiometrics value)
+        cannotCheckBiometrics,
+    required TResult Function(_NoSupportedBiometrics value)
+        noSupportedBiometrics,
+    required TResult Function(_InvalidBiometric value) invalidBiometric,
+    required TResult Function(_PriceOverrideNotFound value)
+        priceOverrideNotFound,
+    required TResult Function(_ProductOutOfStock value) productOutOfStock,
+    required TResult Function(_PhotoPermissionFailed value)
+        photoPermissionFailed,
+    required TResult Function(_StoragePermissionFailed value)
+        storagePermissionFailed,
+    required TResult Function(_InvalidFileFormat value) invalidFileFormat,
+    required TResult Function(_UploadCountExcideLimit value)
+        uploadCountExcideLimit,
+  }) {
+    return photoPermissionFailed(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Other value)? other,
+    TResult? Function(_ServerError value)? serverError,
+    TResult? Function(_PoorConnection value)? poorConnection,
+    TResult? Function(_ServerTimeout value)? serverTimeout,
+    TResult? Function(_UserNotFound value)? userNotFound,
+    TResult? Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult? Function(_AccountLocked value)? accountLocked,
+    TResult? Function(_AccountExpired value)? accountExpired,
+    TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_AuthenticationFailed value)? authenticationFailed,
+    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
+        proxyLoginRolePermissionNotMatch,
+    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
+        proxyLoginZPTargetRoleNotMatch,
+    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
+        proxyLoginZPSalesOrgNotMatch,
+    TResult? Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
+    TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult? Function(_InvalidBiometric value)? invalidBiometric,
+    TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult? Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult? Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult? Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult? Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+  }) {
+    return photoPermissionFailed?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Other value)? other,
+    TResult Function(_ServerError value)? serverError,
+    TResult Function(_PoorConnection value)? poorConnection,
+    TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult Function(_AccountLocked value)? accountLocked,
+    TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_AuthenticationFailed value)? authenticationFailed,
+    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
+        proxyLoginRolePermissionNotMatch,
+    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
+        proxyLoginZPTargetRoleNotMatch,
+    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
+        proxyLoginZPSalesOrgNotMatch,
+    TResult Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
+    TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult Function(_InvalidBiometric value)? invalidBiometric,
+    TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    required TResult orElse(),
+  }) {
+    if (photoPermissionFailed != null) {
+      return photoPermissionFailed(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _PhotoPermissionFailed implements ApiFailure {
+  const factory _PhotoPermissionFailed() = _$_PhotoPermissionFailed;
+}
+
+/// @nodoc
+abstract class _$$_StoragePermissionFailedCopyWith<$Res> {
+  factory _$$_StoragePermissionFailedCopyWith(_$_StoragePermissionFailed value,
+          $Res Function(_$_StoragePermissionFailed) then) =
+      __$$_StoragePermissionFailedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_StoragePermissionFailedCopyWithImpl<$Res>
+    extends _$ApiFailureCopyWithImpl<$Res, _$_StoragePermissionFailed>
+    implements _$$_StoragePermissionFailedCopyWith<$Res> {
+  __$$_StoragePermissionFailedCopyWithImpl(_$_StoragePermissionFailed _value,
+      $Res Function(_$_StoragePermissionFailed) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_StoragePermissionFailed implements _StoragePermissionFailed {
+  const _$_StoragePermissionFailed();
+
+  @override
+  String toString() {
+    return 'ApiFailure.storagePermissionFailed()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_StoragePermissionFailed);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String message) other,
+    required TResult Function(String message) serverError,
+    required TResult Function() poorConnection,
+    required TResult Function() serverTimeout,
+    required TResult Function() userNotFound,
+    required TResult Function() invalidEmailAndPasswordCombination,
+    required TResult Function() accountLocked,
+    required TResult Function() accountExpired,
+    required TResult Function() tokenExpired,
+    required TResult Function() authenticationFailed,
+    required TResult Function() proxyLoginRolePermissionNotMatch,
+    required TResult Function() proxyLoginZPTargetRoleNotMatch,
+    required TResult Function() proxyLoginZPSalesOrgNotMatch,
+    required TResult Function() deviceNotSupportBiometric,
+    required TResult Function() cannotCheckBiometrics,
+    required TResult Function() noSupportedBiometrics,
+    required TResult Function() invalidBiometric,
+    required TResult Function() priceOverrideNotFound,
+    required TResult Function() productOutOfStock,
+    required TResult Function() photoPermissionFailed,
+    required TResult Function() storagePermissionFailed,
+    required TResult Function() invalidFileFormat,
+    required TResult Function() uploadCountExcideLimit,
+  }) {
+    return storagePermissionFailed();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String message)? other,
+    TResult? Function(String message)? serverError,
+    TResult? Function()? poorConnection,
+    TResult? Function()? serverTimeout,
+    TResult? Function()? userNotFound,
+    TResult? Function()? invalidEmailAndPasswordCombination,
+    TResult? Function()? accountLocked,
+    TResult? Function()? accountExpired,
+    TResult? Function()? tokenExpired,
+    TResult? Function()? authenticationFailed,
+    TResult? Function()? proxyLoginRolePermissionNotMatch,
+    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
+    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult? Function()? deviceNotSupportBiometric,
+    TResult? Function()? cannotCheckBiometrics,
+    TResult? Function()? noSupportedBiometrics,
+    TResult? Function()? invalidBiometric,
+    TResult? Function()? priceOverrideNotFound,
+    TResult? Function()? productOutOfStock,
+    TResult? Function()? photoPermissionFailed,
+    TResult? Function()? storagePermissionFailed,
+    TResult? Function()? invalidFileFormat,
+    TResult? Function()? uploadCountExcideLimit,
+  }) {
+    return storagePermissionFailed?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String message)? other,
+    TResult Function(String message)? serverError,
+    TResult Function()? poorConnection,
+    TResult Function()? serverTimeout,
+    TResult Function()? userNotFound,
+    TResult Function()? invalidEmailAndPasswordCombination,
+    TResult Function()? accountLocked,
+    TResult Function()? accountExpired,
+    TResult Function()? tokenExpired,
+    TResult Function()? authenticationFailed,
+    TResult Function()? proxyLoginRolePermissionNotMatch,
+    TResult Function()? proxyLoginZPTargetRoleNotMatch,
+    TResult Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult Function()? deviceNotSupportBiometric,
+    TResult Function()? cannotCheckBiometrics,
+    TResult Function()? noSupportedBiometrics,
+    TResult Function()? invalidBiometric,
+    TResult Function()? priceOverrideNotFound,
+    TResult Function()? productOutOfStock,
+    TResult Function()? photoPermissionFailed,
+    TResult Function()? storagePermissionFailed,
+    TResult Function()? invalidFileFormat,
+    TResult Function()? uploadCountExcideLimit,
+    required TResult orElse(),
+  }) {
+    if (storagePermissionFailed != null) {
+      return storagePermissionFailed();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Other value) other,
+    required TResult Function(_ServerError value) serverError,
+    required TResult Function(_PoorConnection value) poorConnection,
+    required TResult Function(_ServerTimeout value) serverTimeout,
+    required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_InvalidEmailAndPasswordCombination value)
+        invalidEmailAndPasswordCombination,
+    required TResult Function(_AccountLocked value) accountLocked,
+    required TResult Function(_AccountExpired value) accountExpired,
+    required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_AuthenticationFailed value) authenticationFailed,
+    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
+        proxyLoginRolePermissionNotMatch,
+    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
+        proxyLoginZPTargetRoleNotMatch,
+    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
+        proxyLoginZPSalesOrgNotMatch,
+    required TResult Function(_DeviceNotSupportBiometric value)
+        deviceNotSupportBiometric,
+    required TResult Function(_CannotCheckBiometrics value)
+        cannotCheckBiometrics,
+    required TResult Function(_NoSupportedBiometrics value)
+        noSupportedBiometrics,
+    required TResult Function(_InvalidBiometric value) invalidBiometric,
+    required TResult Function(_PriceOverrideNotFound value)
+        priceOverrideNotFound,
+    required TResult Function(_ProductOutOfStock value) productOutOfStock,
+    required TResult Function(_PhotoPermissionFailed value)
+        photoPermissionFailed,
+    required TResult Function(_StoragePermissionFailed value)
+        storagePermissionFailed,
+    required TResult Function(_InvalidFileFormat value) invalidFileFormat,
+    required TResult Function(_UploadCountExcideLimit value)
+        uploadCountExcideLimit,
+  }) {
+    return storagePermissionFailed(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Other value)? other,
+    TResult? Function(_ServerError value)? serverError,
+    TResult? Function(_PoorConnection value)? poorConnection,
+    TResult? Function(_ServerTimeout value)? serverTimeout,
+    TResult? Function(_UserNotFound value)? userNotFound,
+    TResult? Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult? Function(_AccountLocked value)? accountLocked,
+    TResult? Function(_AccountExpired value)? accountExpired,
+    TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_AuthenticationFailed value)? authenticationFailed,
+    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
+        proxyLoginRolePermissionNotMatch,
+    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
+        proxyLoginZPTargetRoleNotMatch,
+    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
+        proxyLoginZPSalesOrgNotMatch,
+    TResult? Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
+    TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult? Function(_InvalidBiometric value)? invalidBiometric,
+    TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult? Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult? Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult? Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult? Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+  }) {
+    return storagePermissionFailed?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Other value)? other,
+    TResult Function(_ServerError value)? serverError,
+    TResult Function(_PoorConnection value)? poorConnection,
+    TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult Function(_AccountLocked value)? accountLocked,
+    TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_AuthenticationFailed value)? authenticationFailed,
+    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
+        proxyLoginRolePermissionNotMatch,
+    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
+        proxyLoginZPTargetRoleNotMatch,
+    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
+        proxyLoginZPSalesOrgNotMatch,
+    TResult Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
+    TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult Function(_InvalidBiometric value)? invalidBiometric,
+    TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    required TResult orElse(),
+  }) {
+    if (storagePermissionFailed != null) {
+      return storagePermissionFailed(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _StoragePermissionFailed implements ApiFailure {
+  const factory _StoragePermissionFailed() = _$_StoragePermissionFailed;
+}
+
+/// @nodoc
+abstract class _$$_InvalidFileFormatCopyWith<$Res> {
+  factory _$$_InvalidFileFormatCopyWith(_$_InvalidFileFormat value,
+          $Res Function(_$_InvalidFileFormat) then) =
+      __$$_InvalidFileFormatCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_InvalidFileFormatCopyWithImpl<$Res>
+    extends _$ApiFailureCopyWithImpl<$Res, _$_InvalidFileFormat>
+    implements _$$_InvalidFileFormatCopyWith<$Res> {
+  __$$_InvalidFileFormatCopyWithImpl(
+      _$_InvalidFileFormat _value, $Res Function(_$_InvalidFileFormat) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_InvalidFileFormat implements _InvalidFileFormat {
+  const _$_InvalidFileFormat();
+
+  @override
+  String toString() {
+    return 'ApiFailure.invalidFileFormat()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_InvalidFileFormat);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String message) other,
+    required TResult Function(String message) serverError,
+    required TResult Function() poorConnection,
+    required TResult Function() serverTimeout,
+    required TResult Function() userNotFound,
+    required TResult Function() invalidEmailAndPasswordCombination,
+    required TResult Function() accountLocked,
+    required TResult Function() accountExpired,
+    required TResult Function() tokenExpired,
+    required TResult Function() authenticationFailed,
+    required TResult Function() proxyLoginRolePermissionNotMatch,
+    required TResult Function() proxyLoginZPTargetRoleNotMatch,
+    required TResult Function() proxyLoginZPSalesOrgNotMatch,
+    required TResult Function() deviceNotSupportBiometric,
+    required TResult Function() cannotCheckBiometrics,
+    required TResult Function() noSupportedBiometrics,
+    required TResult Function() invalidBiometric,
+    required TResult Function() priceOverrideNotFound,
+    required TResult Function() productOutOfStock,
+    required TResult Function() photoPermissionFailed,
+    required TResult Function() storagePermissionFailed,
+    required TResult Function() invalidFileFormat,
+    required TResult Function() uploadCountExcideLimit,
+  }) {
+    return invalidFileFormat();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String message)? other,
+    TResult? Function(String message)? serverError,
+    TResult? Function()? poorConnection,
+    TResult? Function()? serverTimeout,
+    TResult? Function()? userNotFound,
+    TResult? Function()? invalidEmailAndPasswordCombination,
+    TResult? Function()? accountLocked,
+    TResult? Function()? accountExpired,
+    TResult? Function()? tokenExpired,
+    TResult? Function()? authenticationFailed,
+    TResult? Function()? proxyLoginRolePermissionNotMatch,
+    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
+    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult? Function()? deviceNotSupportBiometric,
+    TResult? Function()? cannotCheckBiometrics,
+    TResult? Function()? noSupportedBiometrics,
+    TResult? Function()? invalidBiometric,
+    TResult? Function()? priceOverrideNotFound,
+    TResult? Function()? productOutOfStock,
+    TResult? Function()? photoPermissionFailed,
+    TResult? Function()? storagePermissionFailed,
+    TResult? Function()? invalidFileFormat,
+    TResult? Function()? uploadCountExcideLimit,
+  }) {
+    return invalidFileFormat?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String message)? other,
+    TResult Function(String message)? serverError,
+    TResult Function()? poorConnection,
+    TResult Function()? serverTimeout,
+    TResult Function()? userNotFound,
+    TResult Function()? invalidEmailAndPasswordCombination,
+    TResult Function()? accountLocked,
+    TResult Function()? accountExpired,
+    TResult Function()? tokenExpired,
+    TResult Function()? authenticationFailed,
+    TResult Function()? proxyLoginRolePermissionNotMatch,
+    TResult Function()? proxyLoginZPTargetRoleNotMatch,
+    TResult Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult Function()? deviceNotSupportBiometric,
+    TResult Function()? cannotCheckBiometrics,
+    TResult Function()? noSupportedBiometrics,
+    TResult Function()? invalidBiometric,
+    TResult Function()? priceOverrideNotFound,
+    TResult Function()? productOutOfStock,
+    TResult Function()? photoPermissionFailed,
+    TResult Function()? storagePermissionFailed,
+    TResult Function()? invalidFileFormat,
+    TResult Function()? uploadCountExcideLimit,
+    required TResult orElse(),
+  }) {
+    if (invalidFileFormat != null) {
+      return invalidFileFormat();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Other value) other,
+    required TResult Function(_ServerError value) serverError,
+    required TResult Function(_PoorConnection value) poorConnection,
+    required TResult Function(_ServerTimeout value) serverTimeout,
+    required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_InvalidEmailAndPasswordCombination value)
+        invalidEmailAndPasswordCombination,
+    required TResult Function(_AccountLocked value) accountLocked,
+    required TResult Function(_AccountExpired value) accountExpired,
+    required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_AuthenticationFailed value) authenticationFailed,
+    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
+        proxyLoginRolePermissionNotMatch,
+    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
+        proxyLoginZPTargetRoleNotMatch,
+    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
+        proxyLoginZPSalesOrgNotMatch,
+    required TResult Function(_DeviceNotSupportBiometric value)
+        deviceNotSupportBiometric,
+    required TResult Function(_CannotCheckBiometrics value)
+        cannotCheckBiometrics,
+    required TResult Function(_NoSupportedBiometrics value)
+        noSupportedBiometrics,
+    required TResult Function(_InvalidBiometric value) invalidBiometric,
+    required TResult Function(_PriceOverrideNotFound value)
+        priceOverrideNotFound,
+    required TResult Function(_ProductOutOfStock value) productOutOfStock,
+    required TResult Function(_PhotoPermissionFailed value)
+        photoPermissionFailed,
+    required TResult Function(_StoragePermissionFailed value)
+        storagePermissionFailed,
+    required TResult Function(_InvalidFileFormat value) invalidFileFormat,
+    required TResult Function(_UploadCountExcideLimit value)
+        uploadCountExcideLimit,
+  }) {
+    return invalidFileFormat(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Other value)? other,
+    TResult? Function(_ServerError value)? serverError,
+    TResult? Function(_PoorConnection value)? poorConnection,
+    TResult? Function(_ServerTimeout value)? serverTimeout,
+    TResult? Function(_UserNotFound value)? userNotFound,
+    TResult? Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult? Function(_AccountLocked value)? accountLocked,
+    TResult? Function(_AccountExpired value)? accountExpired,
+    TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_AuthenticationFailed value)? authenticationFailed,
+    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
+        proxyLoginRolePermissionNotMatch,
+    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
+        proxyLoginZPTargetRoleNotMatch,
+    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
+        proxyLoginZPSalesOrgNotMatch,
+    TResult? Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
+    TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult? Function(_InvalidBiometric value)? invalidBiometric,
+    TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult? Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult? Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult? Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult? Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+  }) {
+    return invalidFileFormat?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Other value)? other,
+    TResult Function(_ServerError value)? serverError,
+    TResult Function(_PoorConnection value)? poorConnection,
+    TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult Function(_AccountLocked value)? accountLocked,
+    TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_AuthenticationFailed value)? authenticationFailed,
+    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
+        proxyLoginRolePermissionNotMatch,
+    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
+        proxyLoginZPTargetRoleNotMatch,
+    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
+        proxyLoginZPSalesOrgNotMatch,
+    TResult Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
+    TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult Function(_InvalidBiometric value)? invalidBiometric,
+    TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    required TResult orElse(),
+  }) {
+    if (invalidFileFormat != null) {
+      return invalidFileFormat(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _InvalidFileFormat implements ApiFailure {
+  const factory _InvalidFileFormat() = _$_InvalidFileFormat;
+}
+
+/// @nodoc
+abstract class _$$_UploadCountExcideLimitCopyWith<$Res> {
+  factory _$$_UploadCountExcideLimitCopyWith(_$_UploadCountExcideLimit value,
+          $Res Function(_$_UploadCountExcideLimit) then) =
+      __$$_UploadCountExcideLimitCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_UploadCountExcideLimitCopyWithImpl<$Res>
+    extends _$ApiFailureCopyWithImpl<$Res, _$_UploadCountExcideLimit>
+    implements _$$_UploadCountExcideLimitCopyWith<$Res> {
+  __$$_UploadCountExcideLimitCopyWithImpl(_$_UploadCountExcideLimit _value,
+      $Res Function(_$_UploadCountExcideLimit) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_UploadCountExcideLimit implements _UploadCountExcideLimit {
+  const _$_UploadCountExcideLimit();
+
+  @override
+  String toString() {
+    return 'ApiFailure.uploadCountExcideLimit()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_UploadCountExcideLimit);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String message) other,
+    required TResult Function(String message) serverError,
+    required TResult Function() poorConnection,
+    required TResult Function() serverTimeout,
+    required TResult Function() userNotFound,
+    required TResult Function() invalidEmailAndPasswordCombination,
+    required TResult Function() accountLocked,
+    required TResult Function() accountExpired,
+    required TResult Function() tokenExpired,
+    required TResult Function() authenticationFailed,
+    required TResult Function() proxyLoginRolePermissionNotMatch,
+    required TResult Function() proxyLoginZPTargetRoleNotMatch,
+    required TResult Function() proxyLoginZPSalesOrgNotMatch,
+    required TResult Function() deviceNotSupportBiometric,
+    required TResult Function() cannotCheckBiometrics,
+    required TResult Function() noSupportedBiometrics,
+    required TResult Function() invalidBiometric,
+    required TResult Function() priceOverrideNotFound,
+    required TResult Function() productOutOfStock,
+    required TResult Function() photoPermissionFailed,
+    required TResult Function() storagePermissionFailed,
+    required TResult Function() invalidFileFormat,
+    required TResult Function() uploadCountExcideLimit,
+  }) {
+    return uploadCountExcideLimit();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String message)? other,
+    TResult? Function(String message)? serverError,
+    TResult? Function()? poorConnection,
+    TResult? Function()? serverTimeout,
+    TResult? Function()? userNotFound,
+    TResult? Function()? invalidEmailAndPasswordCombination,
+    TResult? Function()? accountLocked,
+    TResult? Function()? accountExpired,
+    TResult? Function()? tokenExpired,
+    TResult? Function()? authenticationFailed,
+    TResult? Function()? proxyLoginRolePermissionNotMatch,
+    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
+    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult? Function()? deviceNotSupportBiometric,
+    TResult? Function()? cannotCheckBiometrics,
+    TResult? Function()? noSupportedBiometrics,
+    TResult? Function()? invalidBiometric,
+    TResult? Function()? priceOverrideNotFound,
+    TResult? Function()? productOutOfStock,
+    TResult? Function()? photoPermissionFailed,
+    TResult? Function()? storagePermissionFailed,
+    TResult? Function()? invalidFileFormat,
+    TResult? Function()? uploadCountExcideLimit,
+  }) {
+    return uploadCountExcideLimit?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String message)? other,
+    TResult Function(String message)? serverError,
+    TResult Function()? poorConnection,
+    TResult Function()? serverTimeout,
+    TResult Function()? userNotFound,
+    TResult Function()? invalidEmailAndPasswordCombination,
+    TResult Function()? accountLocked,
+    TResult Function()? accountExpired,
+    TResult Function()? tokenExpired,
+    TResult Function()? authenticationFailed,
+    TResult Function()? proxyLoginRolePermissionNotMatch,
+    TResult Function()? proxyLoginZPTargetRoleNotMatch,
+    TResult Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult Function()? deviceNotSupportBiometric,
+    TResult Function()? cannotCheckBiometrics,
+    TResult Function()? noSupportedBiometrics,
+    TResult Function()? invalidBiometric,
+    TResult Function()? priceOverrideNotFound,
+    TResult Function()? productOutOfStock,
+    TResult Function()? photoPermissionFailed,
+    TResult Function()? storagePermissionFailed,
+    TResult Function()? invalidFileFormat,
+    TResult Function()? uploadCountExcideLimit,
+    required TResult orElse(),
+  }) {
+    if (uploadCountExcideLimit != null) {
+      return uploadCountExcideLimit();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Other value) other,
+    required TResult Function(_ServerError value) serverError,
+    required TResult Function(_PoorConnection value) poorConnection,
+    required TResult Function(_ServerTimeout value) serverTimeout,
+    required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_InvalidEmailAndPasswordCombination value)
+        invalidEmailAndPasswordCombination,
+    required TResult Function(_AccountLocked value) accountLocked,
+    required TResult Function(_AccountExpired value) accountExpired,
+    required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_AuthenticationFailed value) authenticationFailed,
+    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
+        proxyLoginRolePermissionNotMatch,
+    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
+        proxyLoginZPTargetRoleNotMatch,
+    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
+        proxyLoginZPSalesOrgNotMatch,
+    required TResult Function(_DeviceNotSupportBiometric value)
+        deviceNotSupportBiometric,
+    required TResult Function(_CannotCheckBiometrics value)
+        cannotCheckBiometrics,
+    required TResult Function(_NoSupportedBiometrics value)
+        noSupportedBiometrics,
+    required TResult Function(_InvalidBiometric value) invalidBiometric,
+    required TResult Function(_PriceOverrideNotFound value)
+        priceOverrideNotFound,
+    required TResult Function(_ProductOutOfStock value) productOutOfStock,
+    required TResult Function(_PhotoPermissionFailed value)
+        photoPermissionFailed,
+    required TResult Function(_StoragePermissionFailed value)
+        storagePermissionFailed,
+    required TResult Function(_InvalidFileFormat value) invalidFileFormat,
+    required TResult Function(_UploadCountExcideLimit value)
+        uploadCountExcideLimit,
+  }) {
+    return uploadCountExcideLimit(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Other value)? other,
+    TResult? Function(_ServerError value)? serverError,
+    TResult? Function(_PoorConnection value)? poorConnection,
+    TResult? Function(_ServerTimeout value)? serverTimeout,
+    TResult? Function(_UserNotFound value)? userNotFound,
+    TResult? Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult? Function(_AccountLocked value)? accountLocked,
+    TResult? Function(_AccountExpired value)? accountExpired,
+    TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_AuthenticationFailed value)? authenticationFailed,
+    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
+        proxyLoginRolePermissionNotMatch,
+    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
+        proxyLoginZPTargetRoleNotMatch,
+    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
+        proxyLoginZPSalesOrgNotMatch,
+    TResult? Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
+    TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult? Function(_InvalidBiometric value)? invalidBiometric,
+    TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult? Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult? Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult? Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult? Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+  }) {
+    return uploadCountExcideLimit?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Other value)? other,
+    TResult Function(_ServerError value)? serverError,
+    TResult Function(_PoorConnection value)? poorConnection,
+    TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult Function(_AccountLocked value)? accountLocked,
+    TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_AuthenticationFailed value)? authenticationFailed,
+    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
+        proxyLoginRolePermissionNotMatch,
+    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
+        proxyLoginZPTargetRoleNotMatch,
+    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
+        proxyLoginZPSalesOrgNotMatch,
+    TResult Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
+    TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult Function(_InvalidBiometric value)? invalidBiometric,
+    TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    required TResult orElse(),
+  }) {
+    if (uploadCountExcideLimit != null) {
+      return uploadCountExcideLimit(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UploadCountExcideLimit implements ApiFailure {
+  const factory _UploadCountExcideLimit() = _$_UploadCountExcideLimit;
 }

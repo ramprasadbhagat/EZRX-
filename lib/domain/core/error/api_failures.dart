@@ -28,15 +28,23 @@ class ApiFailure with _$ApiFailure {
       _ProxyLoginZPSalesOrgNotMatch;
 
   // Bio failure
-  const factory ApiFailure.deviceNotSupportBiometirc() =
-      _DeviceNotSupportBiometirc;
+  const factory ApiFailure.deviceNotSupportBiometric() =
+      _DeviceNotSupportBiometric;
   const factory ApiFailure.cannotCheckBiometrics() = _CannotCheckBiometrics;
   const factory ApiFailure.noSupportedBiometrics() = _NoSupportedBiometrics;
-  const factory ApiFailure.invalidBiometirc() = _InvalidBiometirc;
+  const factory ApiFailure.invalidBiometric() = _InvalidBiometric;
   const factory ApiFailure.priceOverrideNotFound() = _PriceOverrideNotFound;
 
   // Cart failure
   const factory ApiFailure.productOutOfStock() = _ProductOutOfStock;
+
+  // permission failure
+  const factory ApiFailure.photoPermissionFailed() = _PhotoPermissionFailed;
+  const factory ApiFailure.storagePermissionFailed() = _StoragePermissionFailed;
+
+  //po attachment failure
+  const factory ApiFailure.invalidFileFormat() = _InvalidFileFormat;
+  const factory ApiFailure.uploadCountExcideLimit() = _UploadCountExcideLimit;
 }
 
 extension ApiFailureExt on ApiFailure {
@@ -53,10 +61,10 @@ extension ApiFailureExt on ApiFailure {
       accountExpired: (_) => 'Account is Expired',
       tokenExpired: (_) => 'Session token is Expired',
       authenticationFailed: (_) => 'Your session has expired',
-      deviceNotSupportBiometirc: (_) => 'Device not support biometric',
+      deviceNotSupportBiometric: (_) => 'Device not support biometric',
       cannotCheckBiometrics: (_) => 'Unable to check your biometric',
       noSupportedBiometrics: (_) => 'No supported biometric',
-      invalidBiometirc: (_) => 'Incorrect biometric',
+      invalidBiometric: (_) => 'Incorrect biometric',
       priceOverrideNotFound: (_) => 'Price override not found!',
       proxyLoginRolePermissionNotMatch: (_) =>
           'Only Root Admin and ZP Admin can login on behalf',
@@ -65,6 +73,14 @@ extension ApiFailureExt on ApiFailure {
       proxyLoginZPTargetRoleNotMatch: (_) =>
           'ZP Admin can only login on behalf of Sales Rep and Customer users',
       productOutOfStock: (_) => 'Product Not Available',
+      photoPermissionFailed: (_) =>
+          'Please enable Photos permission from the app settings',
+      storagePermissionFailed: (_) =>
+          'Please enable Storage permission from the app settings',
+      invalidFileFormat: (_) =>
+          'Unable to upload file as either file format not supported or something wrong with the file',
+      uploadCountExcideLimit: (_) => 'Number of files exceeds the criteria',
+
     );
 
     return failureMessage;

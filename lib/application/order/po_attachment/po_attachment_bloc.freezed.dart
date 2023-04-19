@@ -23,12 +23,12 @@ mixin _$PoAttachmentEvent {
             FileOperationMode fetchMode, AttachmentType attachmentType)
         downloadFile,
     required TResult Function(
-            List<PlatformFile> files,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             SalesOrg salesOrg,
             User user,
-            List<PoDocuments> uploadedPODocument)
+            List<PoDocuments> uploadedPODocument,
+            UploadOptionType uploadOptionType)
         uploadFile,
   }) =>
       throw _privateConstructorUsedError;
@@ -39,12 +39,12 @@ mixin _$PoAttachmentEvent {
             AttachmentType attachmentType)?
         downloadFile,
     TResult? Function(
-            List<PlatformFile> files,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             SalesOrg salesOrg,
             User user,
-            List<PoDocuments> uploadedPODocument)?
+            List<PoDocuments> uploadedPODocument,
+            UploadOptionType uploadOptionType)?
         uploadFile,
   }) =>
       throw _privateConstructorUsedError;
@@ -55,12 +55,12 @@ mixin _$PoAttachmentEvent {
             AttachmentType attachmentType)?
         downloadFile,
     TResult Function(
-            List<PlatformFile> files,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             SalesOrg salesOrg,
             User user,
-            List<PoDocuments> uploadedPODocument)?
+            List<PoDocuments> uploadedPODocument,
+            UploadOptionType uploadOptionType)?
         uploadFile,
     required TResult orElse(),
   }) =>
@@ -150,12 +150,12 @@ class _$_Initialized implements _Initialized {
             FileOperationMode fetchMode, AttachmentType attachmentType)
         downloadFile,
     required TResult Function(
-            List<PlatformFile> files,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             SalesOrg salesOrg,
             User user,
-            List<PoDocuments> uploadedPODocument)
+            List<PoDocuments> uploadedPODocument,
+            UploadOptionType uploadOptionType)
         uploadFile,
   }) {
     return initialized();
@@ -169,12 +169,12 @@ class _$_Initialized implements _Initialized {
             AttachmentType attachmentType)?
         downloadFile,
     TResult? Function(
-            List<PlatformFile> files,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             SalesOrg salesOrg,
             User user,
-            List<PoDocuments> uploadedPODocument)?
+            List<PoDocuments> uploadedPODocument,
+            UploadOptionType uploadOptionType)?
         uploadFile,
   }) {
     return initialized?.call();
@@ -188,12 +188,12 @@ class _$_Initialized implements _Initialized {
             AttachmentType attachmentType)?
         downloadFile,
     TResult Function(
-            List<PlatformFile> files,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             SalesOrg salesOrg,
             User user,
-            List<PoDocuments> uploadedPODocument)?
+            List<PoDocuments> uploadedPODocument,
+            UploadOptionType uploadOptionType)?
         uploadFile,
     required TResult orElse(),
   }) {
@@ -343,12 +343,12 @@ class _$_DownloadFile implements _DownloadFile {
             FileOperationMode fetchMode, AttachmentType attachmentType)
         downloadFile,
     required TResult Function(
-            List<PlatformFile> files,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             SalesOrg salesOrg,
             User user,
-            List<PoDocuments> uploadedPODocument)
+            List<PoDocuments> uploadedPODocument,
+            UploadOptionType uploadOptionType)
         uploadFile,
   }) {
     return downloadFile(files, fetchMode, attachmentType);
@@ -362,12 +362,12 @@ class _$_DownloadFile implements _DownloadFile {
             AttachmentType attachmentType)?
         downloadFile,
     TResult? Function(
-            List<PlatformFile> files,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             SalesOrg salesOrg,
             User user,
-            List<PoDocuments> uploadedPODocument)?
+            List<PoDocuments> uploadedPODocument,
+            UploadOptionType uploadOptionType)?
         uploadFile,
   }) {
     return downloadFile?.call(files, fetchMode, attachmentType);
@@ -381,12 +381,12 @@ class _$_DownloadFile implements _DownloadFile {
             AttachmentType attachmentType)?
         downloadFile,
     TResult Function(
-            List<PlatformFile> files,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             SalesOrg salesOrg,
             User user,
-            List<PoDocuments> uploadedPODocument)?
+            List<PoDocuments> uploadedPODocument,
+            UploadOptionType uploadOptionType)?
         uploadFile,
     required TResult orElse(),
   }) {
@@ -452,12 +452,12 @@ abstract class _$$_UpLoadFileCopyWith<$Res> {
       __$$_UpLoadFileCopyWithImpl<$Res>;
   @useResult
   $Res call(
-      {List<PlatformFile> files,
-      CustomerCodeInfo customerCodeInfo,
+      {CustomerCodeInfo customerCodeInfo,
       ShipToInfo shipToInfo,
       SalesOrg salesOrg,
       User user,
-      List<PoDocuments> uploadedPODocument});
+      List<PoDocuments> uploadedPODocument,
+      UploadOptionType uploadOptionType});
 
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
   $ShipToInfoCopyWith<$Res> get shipToInfo;
@@ -475,18 +475,14 @@ class __$$_UpLoadFileCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? files = null,
     Object? customerCodeInfo = null,
     Object? shipToInfo = null,
     Object? salesOrg = null,
     Object? user = null,
     Object? uploadedPODocument = null,
+    Object? uploadOptionType = null,
   }) {
     return _then(_$_UpLoadFile(
-      files: null == files
-          ? _value._files
-          : files // ignore: cast_nullable_to_non_nullable
-              as List<PlatformFile>,
       customerCodeInfo: null == customerCodeInfo
           ? _value.customerCodeInfo
           : customerCodeInfo // ignore: cast_nullable_to_non_nullable
@@ -507,6 +503,10 @@ class __$$_UpLoadFileCopyWithImpl<$Res>
           ? _value._uploadedPODocument
           : uploadedPODocument // ignore: cast_nullable_to_non_nullable
               as List<PoDocuments>,
+      uploadOptionType: null == uploadOptionType
+          ? _value.uploadOptionType
+          : uploadOptionType // ignore: cast_nullable_to_non_nullable
+              as UploadOptionType,
     ));
   }
 
@@ -539,21 +539,13 @@ class __$$_UpLoadFileCopyWithImpl<$Res>
 
 class _$_UpLoadFile implements _UpLoadFile {
   const _$_UpLoadFile(
-      {required final List<PlatformFile> files,
-      required this.customerCodeInfo,
+      {required this.customerCodeInfo,
       required this.shipToInfo,
       required this.salesOrg,
       required this.user,
-      required final List<PoDocuments> uploadedPODocument})
-      : _files = files,
-        _uploadedPODocument = uploadedPODocument;
-
-  final List<PlatformFile> _files;
-  @override
-  List<PlatformFile> get files {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_files);
-  }
+      required final List<PoDocuments> uploadedPODocument,
+      required this.uploadOptionType})
+      : _uploadedPODocument = uploadedPODocument;
 
   @override
   final CustomerCodeInfo customerCodeInfo;
@@ -571,8 +563,11 @@ class _$_UpLoadFile implements _UpLoadFile {
   }
 
   @override
+  final UploadOptionType uploadOptionType;
+
+  @override
   String toString() {
-    return 'PoAttachmentEvent.uploadFile(files: $files, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, salesOrg: $salesOrg, user: $user, uploadedPODocument: $uploadedPODocument)';
+    return 'PoAttachmentEvent.uploadFile(customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, salesOrg: $salesOrg, user: $user, uploadedPODocument: $uploadedPODocument, uploadOptionType: $uploadOptionType)';
   }
 
   @override
@@ -580,7 +575,6 @@ class _$_UpLoadFile implements _UpLoadFile {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_UpLoadFile &&
-            const DeepCollectionEquality().equals(other._files, _files) &&
             (identical(other.customerCodeInfo, customerCodeInfo) ||
                 other.customerCodeInfo == customerCodeInfo) &&
             (identical(other.shipToInfo, shipToInfo) ||
@@ -589,18 +583,20 @@ class _$_UpLoadFile implements _UpLoadFile {
                 other.salesOrg == salesOrg) &&
             (identical(other.user, user) || other.user == user) &&
             const DeepCollectionEquality()
-                .equals(other._uploadedPODocument, _uploadedPODocument));
+                .equals(other._uploadedPODocument, _uploadedPODocument) &&
+            (identical(other.uploadOptionType, uploadOptionType) ||
+                other.uploadOptionType == uploadOptionType));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(_files),
       customerCodeInfo,
       shipToInfo,
       salesOrg,
       user,
-      const DeepCollectionEquality().hash(_uploadedPODocument));
+      const DeepCollectionEquality().hash(_uploadedPODocument),
+      uploadOptionType);
 
   @JsonKey(ignore: true)
   @override
@@ -616,16 +612,16 @@ class _$_UpLoadFile implements _UpLoadFile {
             FileOperationMode fetchMode, AttachmentType attachmentType)
         downloadFile,
     required TResult Function(
-            List<PlatformFile> files,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             SalesOrg salesOrg,
             User user,
-            List<PoDocuments> uploadedPODocument)
+            List<PoDocuments> uploadedPODocument,
+            UploadOptionType uploadOptionType)
         uploadFile,
   }) {
-    return uploadFile(files, customerCodeInfo, shipToInfo, salesOrg, user,
-        uploadedPODocument);
+    return uploadFile(customerCodeInfo, shipToInfo, salesOrg, user,
+        uploadedPODocument, uploadOptionType);
   }
 
   @override
@@ -636,16 +632,16 @@ class _$_UpLoadFile implements _UpLoadFile {
             AttachmentType attachmentType)?
         downloadFile,
     TResult? Function(
-            List<PlatformFile> files,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             SalesOrg salesOrg,
             User user,
-            List<PoDocuments> uploadedPODocument)?
+            List<PoDocuments> uploadedPODocument,
+            UploadOptionType uploadOptionType)?
         uploadFile,
   }) {
-    return uploadFile?.call(files, customerCodeInfo, shipToInfo, salesOrg, user,
-        uploadedPODocument);
+    return uploadFile?.call(customerCodeInfo, shipToInfo, salesOrg, user,
+        uploadedPODocument, uploadOptionType);
   }
 
   @override
@@ -656,18 +652,18 @@ class _$_UpLoadFile implements _UpLoadFile {
             AttachmentType attachmentType)?
         downloadFile,
     TResult Function(
-            List<PlatformFile> files,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             SalesOrg salesOrg,
             User user,
-            List<PoDocuments> uploadedPODocument)?
+            List<PoDocuments> uploadedPODocument,
+            UploadOptionType uploadOptionType)?
         uploadFile,
     required TResult orElse(),
   }) {
     if (uploadFile != null) {
-      return uploadFile(files, customerCodeInfo, shipToInfo, salesOrg, user,
-          uploadedPODocument);
+      return uploadFile(customerCodeInfo, shipToInfo, salesOrg, user,
+          uploadedPODocument, uploadOptionType);
     }
     return orElse();
   }
@@ -709,19 +705,19 @@ class _$_UpLoadFile implements _UpLoadFile {
 
 abstract class _UpLoadFile implements PoAttachmentEvent {
   const factory _UpLoadFile(
-      {required final List<PlatformFile> files,
-      required final CustomerCodeInfo customerCodeInfo,
+      {required final CustomerCodeInfo customerCodeInfo,
       required final ShipToInfo shipToInfo,
       required final SalesOrg salesOrg,
       required final User user,
-      required final List<PoDocuments> uploadedPODocument}) = _$_UpLoadFile;
+      required final List<PoDocuments> uploadedPODocument,
+      required final UploadOptionType uploadOptionType}) = _$_UpLoadFile;
 
-  List<PlatformFile> get files;
   CustomerCodeInfo get customerCodeInfo;
   ShipToInfo get shipToInfo;
   SalesOrg get salesOrg;
   User get user;
   List<PoDocuments> get uploadedPODocument;
+  UploadOptionType get uploadOptionType;
   @JsonKey(ignore: true)
   _$$_UpLoadFileCopyWith<_$_UpLoadFile> get copyWith =>
       throw _privateConstructorUsedError;

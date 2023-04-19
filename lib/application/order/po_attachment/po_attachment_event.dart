@@ -9,12 +9,13 @@ class PoAttachmentEvent with _$PoAttachmentEvent {
     @Default(AttachmentType.downloadPOAttachment) AttachmentType attachmentType,
   }) = _DownloadFile;
   const factory PoAttachmentEvent.uploadFile({
-    required List<PlatformFile> files,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
     required SalesOrg salesOrg,
     required User user,
     required List<PoDocuments> uploadedPODocument,
+    required UploadOptionType uploadOptionType,
   }) = _UpLoadFile;
 }
 
+enum UploadOptionType { file, gallery }

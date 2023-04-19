@@ -24,7 +24,7 @@ void main() {
     const apiServerTimeOut = ApiFailure.serverTimeout();
     PoAttachmentBloc getDownloadAttachmentBloc() {
       return PoAttachmentBloc(
-        downloadAttachmentRepository: downloadAttachmentRepository,
+        poAttachmentRepository: downloadAttachmentRepository,
       );
     }
 

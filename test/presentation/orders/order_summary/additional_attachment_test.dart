@@ -5,17 +5,12 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
-import 'package:ezrxmobile/domain/account/entities/user.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/order/entities/additional_details_data.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/infrastructure/core/common/file_picker.dart';
-import 'package:ezrxmobile/infrastructure/core/common/permission.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/po_attachment_repository.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/order_summary/addition_details/additional_attachment.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -26,7 +21,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 import '../../../utils/widget_utils.dart';
 import '../../order_history/order_history_details_widget_test.dart';
@@ -48,27 +42,24 @@ class PoAttachmentBlocMock
 
 class FilePickerServiceMock extends Mock implements FilePickerService {}
 
-class PermissionServiceMock extends Mock implements PermissionService {}
+
 
 void main() {
   late AppRouter autoRouterMock;
   late AdditionalDetailsBloc additionalDetailsBlocMock;
   late PoAttachmentBloc poAttachmentBlocMock;
   late FilePickerService filePickerService;
-  late PermissionService permissionService;
   late EligibilityBloc eligibilityBlocMock;
 
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
     filePickerService = FilePickerServiceMock();
-    permissionService = PermissionServiceMock();
     autoRouterMock = AppRouter();
     eligibilityBlocMock = EligibilityBlocMock();
     locator.registerLazySingleton(() => autoRouterMock);
     locator.registerLazySingleton(() => MixpanelService());
     locator<MixpanelService>().init(mixpanel: MixpanelMock());
     locator.registerLazySingleton(() => filePickerService);
-    locator.registerLazySingleton(() => permissionService);
     const MethodChannel('dev.fluttercommunity.plus/device_info')
         .setMockMethodCallHandler((MethodCall methodCall) async {
       if (methodCall.method == 'getAndroidDeviceInfo') {
@@ -99,7 +90,7 @@ void main() {
         .thenReturn(EligibilityState.initial());
   });
 
-  group('PoAttatchment Upload Widget Tests', () {
+  group('PoAttachment Upload Widget Tests', () {
     Widget getTestWidget() {
       return WidgetUtils.getScopedWidget(
           autoRouterMock: autoRouterMock,
@@ -129,12 +120,11 @@ void main() {
         )
       ];
       whenListen(poAttachmentBlocMock, Stream.fromIterable(expectedStates));
-
       await tester.pumpWidget(getTestWidget());
       await tester.pump();
-      final poAttachmentUploadSuccessfullMessage =
+      final poAttachmentUploadSuccessfulMessage =
           find.text('fake-name-1 file uploaded successfully'.tr());
-      expect(poAttachmentUploadSuccessfullMessage, findsOneWidget);
+      expect(poAttachmentUploadSuccessfulMessage, findsOneWidget);
       final poAttachmentUploadButton = find.byKey(
         const ValueKey('poAttachmentUploadButton'),
       );
@@ -162,44 +152,26 @@ void main() {
       debugDefaultTargetPlatformOverride = TargetPlatform.iOS;
       final expectedStates = [
         PoAttachmentState.initial().copyWith(
-          fileUrl: [
-            PoDocuments(
-              name: 'fake-name-1',
-              url: 'fake-url-1',
-            ),
-            PoDocuments(
-              name: 'fake-name-2',
-              url: 'fake-url-2',
-            ),
-          ],
           fileOperationMode: FileOperationMode.upload,
-        )
+          isFetching: true,
+        ),
+        PoAttachmentState.initial().copyWith(
+          fileOperationMode: FileOperationMode.upload,
+          failureOrSuccessOption: optionOf(
+            const Left(
+              ApiFailure.photoPermissionFailed(),
+            ),
+          ),
+        ),
       ];
       whenListen(poAttachmentBlocMock, Stream.fromIterable(expectedStates));
 
       await tester.pumpWidget(getTestWidget());
       await tester.pump();
-      final poAttachmentUploadSuccessfullMessage =
-          find.text('2 files uploaded successfully'.tr());
-      expect(poAttachmentUploadSuccessfullMessage, findsOneWidget);
       final poAttachmentUploadButton = find.byKey(
         const ValueKey('poAttachmentUploadButton'),
       );
       expect(poAttachmentUploadButton, findsOneWidget);
-      await tester.tap(poAttachmentUploadButton);
-      await tester.pump();
-      final poAttachmentUploadDialog = find.byKey(
-        const ValueKey('poAttachmentUploadDialog'),
-      );
-      expect(poAttachmentUploadDialog, findsOneWidget);
-      final poAttachmentPhotoUploadButton = find.byKey(
-        const ValueKey('poAttachmentPhotoUploadButton'),
-      );
-      when(() => permissionService.requestPhotoPermission())
-          .thenAnswer((invocation) async => PermissionStatus.denied);
-      expect(poAttachmentPhotoUploadButton, findsOneWidget);
-      await tester.tap(poAttachmentPhotoUploadButton);
-      await tester.pumpAndSettle();
       final iosNoPhotoPermission = find
           .text('Please enable Photos permission from the app settings'.tr());
       await tester.pumpAndSettle(const Duration(seconds: 10));
@@ -214,43 +186,30 @@ void main() {
 
       final expectedStates = [
         PoAttachmentState.initial().copyWith(
-            fileUrl: [
-              PoDocuments(
-                name: 'fake-name-1',
-                url: 'fake-url-1',
-              ),
-            ],
-            fileOperationMode: FileOperationMode.upload,
+          fileOperationMode: FileOperationMode.upload,
+          isFetching: true,
+        ),
+        PoAttachmentState.initial().copyWith(
+          fileOperationMode: FileOperationMode.upload,
             failureOrSuccessOption:
-                optionOf(const Left(ApiFailure.other('Fake-exception'))))
+              optionOf(
+            const Left(
+              ApiFailure.storagePermissionFailed(),
+            ),
+          ),
+        ),
       ];
       whenListen(poAttachmentBlocMock, Stream.fromIterable(expectedStates));
 
       await tester.pumpWidget(getTestWidget());
       await tester.pump();
-      final poAttachmentBlocException = find.text('Fake-exception'.tr());
-      expect(poAttachmentBlocException, findsOneWidget);
       final poAttachmentUploadButton = find.byKey(
         const ValueKey('poAttachmentUploadButton'),
       );
       expect(poAttachmentUploadButton, findsOneWidget);
-      await tester.tap(poAttachmentUploadButton);
-      await tester.pump();
-      final poAttachmentUploadDialog = find.byKey(
-        const ValueKey('poAttachmentUploadDialog'),
-      );
-      expect(poAttachmentUploadDialog, findsOneWidget);
-      final poAttachmentPhotoUploadButton = find.byKey(
-        const ValueKey('poAttachmentPhotoUploadButton'),
-      );
-      when(() => permissionService.requeststoragePermission())
-          .thenAnswer((invocation) async => PermissionStatus.denied);
-      expect(poAttachmentPhotoUploadButton, findsOneWidget);
-      await tester.tap(poAttachmentPhotoUploadButton);
-      await tester.pumpAndSettle(const Duration(seconds: 10));
-      final iosNoPhotoPermission = find
+      final androidStoragePermission = find
           .text('Please enable Storage permission from the app settings'.tr());
-      expect(iosNoPhotoPermission, findsOneWidget);
+      expect(androidStoragePermission, findsOneWidget);
       debugDefaultTargetPlatformOverride = null;
     });
 
@@ -258,32 +217,28 @@ void main() {
         'Po Attachment File Upload Test android upload photo file picker error',
         (tester) async {
       debugDefaultTargetPlatformOverride = TargetPlatform.android;
+
+      final expectedStates = [
+        PoAttachmentState.initial().copyWith(
+          fileOperationMode: FileOperationMode.upload,
+          isFetching: true,
+        ),
+        PoAttachmentState.initial().copyWith(
+          fileOperationMode: FileOperationMode.upload,
+          failureOrSuccessOption: optionOf(
+            const Left(
+              ApiFailure.invalidFileFormat(),
+            ),
+          ),
+        ),
+      ];
+      whenListen(poAttachmentBlocMock, Stream.fromIterable(expectedStates));
       await tester.pumpWidget(getTestWidget());
       await tester.pump();
       final poAttachmentUploadButton = find.byKey(
         const ValueKey('poAttachmentUploadButton'),
       );
       expect(poAttachmentUploadButton, findsOneWidget);
-      await tester.tap(poAttachmentUploadButton);
-      await tester.pump();
-      final poAttachmentUploadDialog = find.byKey(
-        const ValueKey('poAttachmentUploadDialog'),
-      );
-      expect(poAttachmentUploadDialog, findsOneWidget);
-      final poAttachmentPhotoUploadButton = find.byKey(
-        const ValueKey('poAttachmentPhotoUploadButton'),
-      );
-      when(() => permissionService.requeststoragePermission())
-          .thenAnswer((invocation) async => PermissionStatus.granted);
-
-      when(() => filePickerService.pickFiles(
-          allowMultiple: true, fileType: FileType.image)).thenThrow(
-        (invocation) async => MockException(message: 'File-Picker-Error'),
-      );
-      expect(poAttachmentPhotoUploadButton, findsOneWidget);
-      await tester.tap(poAttachmentPhotoUploadButton);
-      await tester.pumpAndSettle(const Duration(seconds: 10));
-
       final filePickerError = find.text(
           'Unable to upload file as either file format not supported or something wrong with the file'
               .tr());
@@ -323,8 +278,6 @@ void main() {
       final poAttachmentFileUploadButton = find.byKey(
         const ValueKey('poAttachmentFileUploadButton'),
       );
-      when(() => permissionService.requestPhotoPermission())
-          .thenAnswer((invocation) async => PermissionStatus.denied);
       when(() => filePickerService.pickFiles(
           allowMultiple: true, fileType: FileType.image)).thenAnswer(
         (invocation) async => null,
@@ -356,7 +309,9 @@ void main() {
       when(() => filePickerService.pickFiles(
           allowMultiple: true,
           fileType: FileType.custom,
-          allowedExtensions: allowedExtensions)).thenAnswer(
+          allowedExtensions: allowedExtensions,
+        ),
+      ).thenAnswer(
         (invocation) async => const FilePickerResult([]),
       );
       expect(poAttachmentFileUploadButton, findsOneWidget);
@@ -382,8 +337,6 @@ void main() {
       final poAttachmentFileUploadButton = find.byKey(
         const ValueKey('poAttachmentFileUploadButton'),
       );
-      when(() => permissionService.requeststoragePermission())
-          .thenAnswer((invocation) async => PermissionStatus.granted);
       when(() => filePickerService.pickFiles(
           allowMultiple: true,
           fileType: FileType.custom,
@@ -399,24 +352,6 @@ void main() {
       expect(poAttachmentFileUploadButton, findsOneWidget);
       await tester.tap(poAttachmentFileUploadButton);
       await tester.pumpAndSettle(const Duration(seconds: 10));
-      verify(
-        () => poAttachmentBlocMock.add(
-          PoAttachmentEvent.uploadFile(
-            files: [
-              PlatformFile(
-                name: 'fake-name',
-                size: 2,
-                path: 'Fake-path',
-              )
-            ],
-            customerCodeInfo: CustomerCodeInfo.empty(),
-            salesOrg: SalesOrg(''),
-            shipToInfo: ShipToInfo.empty(),
-            uploadedPODocument: [],
-            user: User.empty(),
-          ),
-        ),
-      ).called(1);
       debugDefaultTargetPlatformOverride = null;
     });
 
@@ -442,7 +377,7 @@ void main() {
         )
       ];
 
-      final expectedadditionalDetailsDataState = [
+      final expectedAdditionalDetailsDataState = [
         AdditionalDetailsState.initial(),
         AdditionalDetailsState.initial().copyWith(
             additionalDetailsData: AdditionalDetailsData.empty().copyWith(
@@ -452,7 +387,7 @@ void main() {
       whenListen(poAttachmentBlocMock,
           Stream.fromIterable(expectedStatesPoAttachmentState));
       whenListen(additionalDetailsBlocMock,
-          Stream.fromIterable(expectedadditionalDetailsDataState));
+          Stream.fromIterable(expectedAdditionalDetailsDataState));
       await tester.pumpWidget(getTestWidget());
       await tester.pump();
       final orderSummaryAdditionalPoAttachment = find.byKey(

@@ -6,7 +6,7 @@ import 'package:ezrxmobile/domain/order/entities/order_history_details_po_docume
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/order_history_details_po_documents_dto.dart';
 
-class PoDocumentRemote {
+class PoDocumentRemoteDataSource {
   final HttpService httpService;
   final DataSourceExceptionHandler dataSourceExceptionHandler;
 
@@ -17,7 +17,7 @@ class PoDocumentRemote {
 
   static const _method = 'POST';
 
-  PoDocumentRemote({
+  PoDocumentRemoteDataSource({
     required this.httpService,
     required this.dataSourceExceptionHandler,
   });

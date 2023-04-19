@@ -382,7 +382,7 @@ class AuthRepository implements IAuthRepository {
       );
 
       if (!isLocalAuthSuccess) {
-        return const Left(ApiFailure.invalidBiometirc());
+        return const Left(ApiFailure.invalidBiometric());
       }
 
       return const Right(true);
@@ -395,14 +395,14 @@ class AuthRepository implements IAuthRepository {
   Future<Either<ApiFailure, bool>> canBeAuthenticatedAndBioAvailable() async {
     try {
       if (kIsWeb) {
-        return const Left(ApiFailure.deviceNotSupportBiometirc());
+        return const Left(ApiFailure.deviceNotSupportBiometric());
       }
       if (!await localAuthentication.canCheckBiometrics) {
         return const Left(ApiFailure.cannotCheckBiometrics());
       }
 
       if (!await localAuthentication.isDeviceSupported()) {
-        return const Left(ApiFailure.deviceNotSupportBiometirc());
+        return const Left(ApiFailure.deviceNotSupportBiometric());
       }
 
       final availableBiometrics =

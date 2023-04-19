@@ -7,7 +7,7 @@ import 'package:ezrxmobile/application/order/payment_customer_information/paymen
 import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/infrastructure/core/common/file_picker.dart';
-import 'package:ezrxmobile/infrastructure/core/common/permission.dart';
+import 'package:ezrxmobile/infrastructure/core/common/permission_service.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/po_attachment.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -104,7 +104,7 @@ void main() {
           body: PoAttachment(
             poDocuments: poDocuments,
             uploadingPocDocument: const [],
-            poattachMentRenderMode: PoAttachMentRenderMode.view,
+            poAttachMentRenderMode: PoAttachMentRenderMode.view,
           ),
         ),
       );
@@ -155,7 +155,7 @@ void main() {
       await tester.tap(viewAll);
       await tester.pump();
       expect(find.byKey(const ValueKey('fake-name-3')), findsOneWidget);
-      when(() => permissionService.requeststoragePermission())
+      when(() => permissionService.requestStoragePermission())
           .thenAnswer((invocation) async => PermissionStatus.granted);
       expect(find.byIcon(Icons.attachment_outlined), findsWidgets);
       await tester.tap(downloadAll);
@@ -187,7 +187,7 @@ void main() {
       final downloadAll = find.byKey(const ValueKey('downloadAll'));
       expect(downloadAll, findsOneWidget);
       await tester.pump();
-      when(() => permissionService.requeststoragePermission())
+      when(() => permissionService.requestStoragePermission())
           .thenAnswer((invocation) async => PermissionStatus.granted);
       expect(find.byIcon(Icons.attachment_outlined), findsWidgets);
       await tester.tap(downloadAll);
@@ -217,7 +217,7 @@ void main() {
           body: PoAttachment(
             poDocuments: poDocuments,
             uploadingPocDocument: uploadingPocDocument,
-            poattachMentRenderMode: PoAttachMentRenderMode.edit,
+            poAttachMentRenderMode: PoAttachMentRenderMode.edit,
           ),
         ),
       );
@@ -289,7 +289,7 @@ void main() {
       expect(find.byKey(const ValueKey('fake-name-2')), findsOneWidget);
       final downloadAll = find.byKey(const ValueKey('downloadAll'));
       expect(downloadAll, findsOneWidget);
-      when(() => permissionService.requeststoragePermission())
+      when(() => permissionService.requestStoragePermission())
           .thenAnswer((invocation) async => PermissionStatus.denied);
       await tester.tap(downloadAll);
       final permissionDeniedMessage =

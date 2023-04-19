@@ -23,7 +23,7 @@ class HistoryPoAttachmentSection extends StatelessWidget {
               child: PoAttachment(
                 poDocuments:
                     state.orderHistoryDetails.orderHistoryDetailsPoDocuments,
-                poattachMentRenderMode: PoAttachMentRenderMode.view,
+                poAttachMentRenderMode: PoAttachMentRenderMode.view,
                 uploadingPocDocument: const <PoDocuments>[],
               ),
             ),

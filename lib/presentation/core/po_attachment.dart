@@ -7,7 +7,7 @@ import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.da
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_document_buffer.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
-import 'package:ezrxmobile/infrastructure/core/common/permission.dart';
+import 'package:ezrxmobile/infrastructure/core/common/permission_service.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
@@ -22,13 +22,13 @@ import 'package:ezrxmobile/presentation/core/custom_expansion_tile.dart'
 import 'package:permission_handler/permission_handler.dart';
 
 class PoAttachment extends StatefulWidget {
-  final PoAttachMentRenderMode poattachMentRenderMode;
+  final PoAttachMentRenderMode poAttachMentRenderMode;
   final List<PoDocuments> poDocuments;
   final List<PoDocuments> uploadingPocDocument;
   const PoAttachment({
     Key? key,
     required this.poDocuments,
-    required this.poattachMentRenderMode,
+    required this.poAttachMentRenderMode,
     required this.uploadingPocDocument,
   }) : super(key: key);
 
@@ -41,11 +41,11 @@ class _PoAttachmentState extends State<PoAttachment> {
 
   @override
   Widget build(BuildContext context) {
-    final edit = widget.poattachMentRenderMode == PoAttachMentRenderMode.edit;
+    final edit = widget.poAttachMentRenderMode == PoAttachMentRenderMode.edit;
 
     if (widget.poDocuments.isEmpty &&
         !context.read<PoAttachmentBloc>().state.fileUploading) {
-      return Container();
+      return const SizedBox.shrink();
     }
 
     return custom.ExpansionTile(
@@ -189,7 +189,7 @@ class _PoAttachmentState extends State<PoAttachment> {
                               if (defaultTargetPlatform ==
                                       TargetPlatform.android &&
                                   !(await locator<PermissionService>()
-                                      .requeststoragePermission()
+                                      .requestStoragePermission()
                                       .isGranted)) {
                                 if (!mounted) return;
                                 showSnackBar(
@@ -310,7 +310,7 @@ class _PoAttachmentState extends State<PoAttachment> {
 
   int get listLength {
     final listLen = widget.poDocuments.length;
-    if (widget.poattachMentRenderMode == PoAttachMentRenderMode.edit) {
+    if (widget.poAttachMentRenderMode == PoAttachMentRenderMode.edit) {
       return listLen;
     }
 
