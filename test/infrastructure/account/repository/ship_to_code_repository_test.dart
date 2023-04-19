@@ -2,26 +2,23 @@ import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/account_selector_storage.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/account_selector_storage_dto.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/ship_to_code_repository.dart';
-import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-class CountlyServiceMock extends Mock implements CountlyService {}
+
 
 class AccountSelectorStorageMock extends Mock
     implements AccountSelectorStorage {}
 
 void main() {
-  late CountlyService countlyServiceMock;
   late ShipToCodeRepository shipToCodeRepository;
   late AccountSelectorStorage accountSelectorStorageMock;
 
   setUpAll(() {
-    countlyServiceMock = CountlyServiceMock();
     accountSelectorStorageMock = AccountSelectorStorageMock();
 
     shipToCodeRepository = ShipToCodeRepository(
-      countlyService: countlyServiceMock,
       accountSelectorStorage: accountSelectorStorageMock,
     );
 
@@ -67,17 +64,6 @@ void main() {
         return Future.value();
       });
 
-      when(
-        () => countlyServiceMock.addCountlyEvent(
-          'ship_to_address_save',
-          segmentation: {
-            'shipToAddress': mockShipToCode,
-          },
-        ),
-      ).thenAnswer((invocation) async {
-        return;
-      });
-
       final result = await shipToCodeRepository.storeShipToCode(
         shipToCode: mockShipToCode,
       );
@@ -101,17 +87,6 @@ void main() {
           );
         },
       ).thenThrow((invocation) => MockException());
-
-      when(
-            () => countlyServiceMock.addCountlyEvent(
-          'ship_to_address_save',
-          segmentation: {
-            'shipToAddress': mockShipToCode,
-          },
-        ),
-      ).thenAnswer((invocation) async {
-        return;
-      });
 
       final result = await shipToCodeRepository.storeShipToCode(
         shipToCode: mockShipToCode,

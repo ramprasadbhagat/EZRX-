@@ -9,10 +9,9 @@ import 'package:ezrxmobile/application/order/material_list/material_list_bloc.da
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
-import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -92,29 +91,6 @@ class MaterialListSearchBarState extends State<MaterialListSearchBar> {
                     props: {
                       MixpanelProps.searchKey:
                           state.searchKey.getOrDefaultValue(''),
-                    },
-                  );
-                  locator<CountlyService>().addCountlyEvent(
-                    'Product Search',
-                    segmentation: {
-                      'searchKeyWord': value,
-                      'numResults': state.materialList.length,
-                      'selectedSalesOrg': context
-                          .read<SalesOrgBloc>()
-                          .state
-                          .salesOrganisation
-                          .salesOrg
-                          .getOrDefaultValue(''),
-                      'selectedCustomerCode': context
-                          .read<CustomerCodeBloc>()
-                          .state
-                          .customerCodeInfo
-                          .customerCodeSoldTo,
-                      'selectedShipToAddress': context
-                          .read<ShipToCodeBloc>()
-                          .state
-                          .shipToInfo
-                          .shipToCustomerCode,
                     },
                   );
                 } else {

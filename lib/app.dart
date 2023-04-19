@@ -60,7 +60,7 @@ import 'package:ezrxmobile/application/returns/usage_code/usage_code_bloc.dart';
 import 'package:ezrxmobile/application/returns/user_restriction/user_restriction_list_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/account_selector_storage.dart';
-import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+
 import 'package:ezrxmobile/infrastructure/core/firebase/analytics.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/crashlytics.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
@@ -133,7 +133,6 @@ Future<void> initialSetup({required Flavor flavor}) async {
   await locator<OktaLoginServices>().init();
   await locator<AccountSelectorStorage>().init();
   await locator<CartStorage>().init();
-  await locator<CountlyService>().init();
   locator<MixpanelService>().init(
     mixpanel: await Mixpanel.init(
       config.mixpanelKey,

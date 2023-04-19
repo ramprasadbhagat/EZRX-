@@ -14,7 +14,7 @@ import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+
 import 'package:ezrxmobile/infrastructure/order/repository/bonus_material_repository.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/orders/cart/bonus/choose_bonus_sheet.dart';
@@ -55,7 +55,7 @@ class CustomerCodeBlocMock
 class ShipToBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState>
     implements ShipToCodeBloc {}
 
-class CountlyServiceMock extends Mock implements CountlyService {}
+
 
 void main() {
   late BonusMaterialBloc bonusMaterialBloc;
@@ -68,13 +68,11 @@ void main() {
   late EligibilityBloc eligibilityBloc;
   late CustomerCodeBloc customerCodeBloc;
   late ShipToCodeBloc shipToCodeBloc;
-  late CountlyService countlyService;
+  
   late CartBloc cartBloc;
   late AppRouter autoRouter;
 
   setUpAll(() {
-    countlyService = CountlyServiceMock();
-    locator.registerLazySingleton(() => countlyService);
     locator.registerFactory(() => AppRouter());
     autoRouter = locator<AppRouter>();
   });
@@ -172,14 +170,6 @@ void main() {
     testWidgets(
       'Update bonus Quantity Change',
       (tester) async {
-        when(() => countlyService.addCountlyEvent(
-              'changed_quantity',
-              segmentation: {
-                'materialNum': cartItem.getMaterialNumber.getOrDefaultValue(''),
-                'listPrice': cartItem.listPrice,
-                'price': cartItem.price.finalPrice.getOrDefaultValue(0),
-              },
-            )).thenAnswer((invocation) async => Future.value());
         await tester.pumpWidget(getWidget());
         await tester.pump();
         final updateBonus = find.byKey(const Key('updateBonus'));
@@ -187,30 +177,12 @@ void main() {
         final quantityInput = find.byType(QuantityInput);
         expect(quantityInput, findsOneWidget);
         await tester.enterText(quantityInput.first, '12');
-        verify(
-          () => countlyService.addCountlyEvent(
-            'changed_quantity',
-            segmentation: {
-              'materialNum': cartItem.getMaterialNumber.getOrDefaultValue(''),
-              'listPrice': cartItem.listPrice,
-              'price': cartItem.price.finalPrice.getOrDefaultValue(0),
-            },
-          ),
-        ).called(1);
       },
     );
 
     testWidgets(
       'Update bonus Quantity Increment',
       (tester) async {
-        when(() => countlyService.addCountlyEvent(
-              'add_quantity',
-              segmentation: {
-                'materialNum': cartItem.getMaterialNumber.getOrDefaultValue(''),
-                'listPrice': cartItem.listPrice,
-                'price': cartItem.price.finalPrice.getOrDefaultValue(0),
-              },
-            )).thenAnswer((invocation) async => Future.value());
         await tester.pumpWidget(getWidget());
         await tester.pump();
         final updateBonus = find.byKey(const Key('updateBonus'));
@@ -218,30 +190,12 @@ void main() {
         final bounsAdd = find.byKey(const Key('bounsAdd'));
         expect(bounsAdd, findsOneWidget);
         await tester.tap(bounsAdd.first);
-        verify(
-          () => countlyService.addCountlyEvent(
-            'add_quantity',
-            segmentation: {
-              'materialNum': cartItem.getMaterialNumber.getOrDefaultValue(''),
-              'listPrice': cartItem.listPrice,
-              'price': cartItem.price.finalPrice.getOrDefaultValue(0),
-            },
-          ),
-        ).called(1);
       },
     );
 
     testWidgets(
       'Update bonus Quantity Decrement',
       (tester) async {
-        when(() => countlyService.addCountlyEvent(
-              'deduct_quantity',
-              segmentation: {
-                'materialNum': cartItem.getMaterialNumber.getOrDefaultValue(''),
-                'listPrice': cartItem.listPrice,
-                'price': cartItem.price.finalPrice.getOrDefaultValue(0),
-              },
-            )).thenAnswer((invocation) async => Future.value());
         await tester.pumpWidget(getWidget());
         await tester.pump();
         final updateBonus = find.byKey(const Key('updateBonus'));
@@ -249,26 +203,12 @@ void main() {
         final bonusDelete = find.byKey(const Key('bonusDelete'));
         expect(bonusDelete, findsOneWidget);
         await tester.tap(bonusDelete.first);
-
-        verify(
-          () => countlyService.addCountlyEvent(
-            'deduct_quantity',
-            segmentation: {
-              'materialNum': cartItem.getMaterialNumber.getOrDefaultValue(''),
-              'listPrice': cartItem.listPrice,
-              'price': cartItem.price.finalPrice.getOrDefaultValue(0),
-            },
-          ),
-        ).called(1);
       },
     );
 
     testWidgets(
       'Add updated bonus',
       (tester) async {
-        when(() => countlyService.addCountlyEvent(
-              'Add to bonus',
-            )).thenAnswer((invocation) async => Future.value());
         await tester.pumpWidget(getWidget());
         await tester.pump();
         final updateBonus = find.byKey(const Key('updateBonus'));
@@ -277,12 +217,6 @@ void main() {
         expect(addButton, findsOneWidget);
         await tester.tap(addButton.first);
         await tester.pump();
-
-        verify(
-          () => countlyService.addCountlyEvent(
-            'Add to bonus',
-          ),
-        ).called(1);
         final addBonusSnackBar =
             find.textContaining('Bonus item added to the cart'.tr());
         expect(addBonusSnackBar, findsOneWidget);

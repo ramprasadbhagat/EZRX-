@@ -11,7 +11,6 @@ import 'package:ezrxmobile/infrastructure/auth/datasource/auth_remote.dart';
 import 'package:ezrxmobile/infrastructure/auth/dtos/cred_dto.dart';
 import 'package:ezrxmobile/infrastructure/auth/dtos/jwt_dto.dart';
 import 'package:ezrxmobile/infrastructure/auth/repository/auth_repository.dart';
-import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/push_notification.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/cart_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/cred_storage.dart';
@@ -20,7 +19,6 @@ import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/core/okta/okta_login.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
 import 'package:local_auth/local_auth.dart';
 // ignore: depend_on_referenced_packages
 import 'package:local_auth_android/local_auth_android.dart';
@@ -59,7 +57,7 @@ class PushNotificationServiceMock extends Mock
 
 class LocalAuthenticationMock extends Mock implements LocalAuthentication {}
 
-class CountlyServiceMock extends Mock implements CountlyService {}
+
 
 class RoleNameMock extends Mock implements RoleName {}
 
@@ -73,7 +71,6 @@ void main() {
   late OktaLoginServices oktaLoginServicesMock;
   late PushNotificationService pushNotificationServiceMock;
   late LocalAuthentication localAuthenticationMock;
-  late CountlyService countlyServiceMock;
   late RoleName roleNameMock;
   late MixpanelService mixpanelService;
 
@@ -84,8 +81,6 @@ void main() {
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBVVRIX1RPS0VOIjoidzl4cEFhQkRZUSIsImV4cCI6MTY2MzQwOTAzNiwiaWF0IjoxNjYzMzIyNjM2LCJpZCI6MTE0NjEsInJpZ2h0cyI6W3sidmFsdWUiOlt7ImN1c3RvbWVyQ29kZSI6ImFsbCIsInNhbGVzT3JnIjoiMjYwMSIsInNoaXBUb0NvZGUiOlsiYWxsIl19XX1dLCJyb2xlIjoiWlAgQWRtaW4iLCJzYWxlc09yZ3MiOlsiMjYwMSJdLCJ1c2VybmFtZSI6ImV6cnh0ZXN0MDUifQ.MakZTQ3JUVqeRuXQcBU1cUKmHZft5AmFPJDvuG4DjlA';
   final fakeJWT = JWT(rootAdminToken);
 
-  final locator = GetIt.instance;
-
   setUpAll(
     () async {
       configMock = ConfigMock();
@@ -95,16 +90,12 @@ void main() {
       remoteDataSourceMock = AuthRemoteDataSourceMock();
       accountSelectorStorageMock = AccountSelectorStorageMock();
       cartStorageMock = CartStorageMock();
-      countlyServiceMock = CountlyServiceMock();
       credStorageMock = CredStorageMock();
       localAuthenticationMock = LocalAuthenticationMock();
       oktaLoginServicesMock = OktaLoginServicesMock();
       pushNotificationServiceMock = PushNotificationServiceMock();
       roleNameMock = RoleNameMock();
       mixpanelService = MixpanelServiceMock();
-
-      locator.registerLazySingleton(
-          () => CountlyService(config: locator<Config>()));
 
       repository = AuthRepository(
         mixpanelService: mixpanelService,
@@ -114,7 +105,6 @@ void main() {
         tokenStorage: tokenStorageMock,
         accountSelectorStorage: accountSelectorStorageMock,
         cartStorage: cartStorageMock,
-        countlyService: countlyServiceMock,
         credStorage: credStorageMock,
         localAuthentication: localAuthenticationMock,
         oktaLoginServices: oktaLoginServicesMock,
@@ -192,11 +182,6 @@ void main() {
         return [BiometricType.fingerprint];
       });
 
-      when(() => countlyServiceMock.addCountlyEvent('Biometric login'))
-          .thenAnswer((invocation) async {
-        return;
-      });
-
       when(
         () => roleNameMock.isEligibleLoginRoleForZPAdmin,
       ).thenAnswer((invocation) {
@@ -216,16 +201,11 @@ void main() {
           tokenStorage: tokenStorageMock,
           accountSelectorStorage: accountSelectorStorageMock,
           cartStorage: cartStorageMock,
-          countlyService: countlyServiceMock,
           credStorage: credStorageMock,
           localAuthentication: localAuthenticationMock,
           oktaLoginServices: oktaLoginServicesMock,
           pushNotificationService: pushNotificationServiceMock,
         );
-        when(() => countlyServiceMock.addCountlyEvent('Login Success'))
-            .thenAnswer((invocation) async {
-          return;
-        });
         when(() => configMock.appFlavor).thenAnswer((invocation) => Flavor.uat);
 
         when(() => pushNotificationServiceMock.getFCMToken())
@@ -242,9 +222,6 @@ void main() {
             await repository.login(password: pass, username: userName);
 
         expect(result.isRight(), true);
-
-        verify(() => countlyServiceMock.addCountlyEvent('Login Success'))
-            .called(1);
       },
     );
 
@@ -259,7 +236,6 @@ void main() {
           tokenStorage: tokenStorageMock,
           accountSelectorStorage: accountSelectorStorageMock,
           cartStorage: cartStorageMock,
-          countlyService: countlyServiceMock,
           credStorage: credStorageMock,
           localAuthentication: localAuthenticationMock,
           oktaLoginServices: oktaLoginServicesMock,
@@ -293,7 +269,6 @@ void main() {
           tokenStorage: tokenStorageMock,
           accountSelectorStorage: accountSelectorStorageMock,
           cartStorage: cartStorageMock,
-          countlyService: countlyServiceMock,
           credStorage: credStorageMock,
           localAuthentication: localAuthenticationMock,
           oktaLoginServices: oktaLoginServicesMock,
@@ -325,7 +300,6 @@ void main() {
           tokenStorage: tokenStorageMock,
           accountSelectorStorage: accountSelectorStorageMock,
           cartStorage: cartStorageMock,
-          countlyService: countlyServiceMock,
           credStorage: credStorageMock,
           localAuthentication: localAuthenticationMock,
           oktaLoginServices: oktaLoginServicesMock,
@@ -354,7 +328,6 @@ void main() {
           tokenStorage: tokenStorageMock,
           accountSelectorStorage: accountSelectorStorageMock,
           cartStorage: cartStorageMock,
-          countlyService: countlyServiceMock,
           credStorage: credStorageMock,
           localAuthentication: localAuthenticationMock,
           oktaLoginServices: oktaLoginServicesMock,
@@ -382,7 +355,6 @@ void main() {
           tokenStorage: tokenStorageMock,
           accountSelectorStorage: accountSelectorStorageMock,
           cartStorage: cartStorageMock,
-          countlyService: countlyServiceMock,
           credStorage: credStorageMock,
           localAuthentication: localAuthenticationMock,
           oktaLoginServices: oktaLoginServicesMock,
@@ -410,7 +382,6 @@ void main() {
           tokenStorage: tokenStorageMock,
           accountSelectorStorage: accountSelectorStorageMock,
           cartStorage: cartStorageMock,
-          countlyService: countlyServiceMock,
           credStorage: credStorageMock,
           localAuthentication: localAuthenticationMock,
           oktaLoginServices: oktaLoginServicesMock,
@@ -437,7 +408,6 @@ void main() {
           tokenStorage: tokenStorageMock,
           accountSelectorStorage: accountSelectorStorageMock,
           cartStorage: cartStorageMock,
-          countlyService: countlyServiceMock,
           credStorage: credStorageMock,
           localAuthentication: localAuthenticationMock,
           oktaLoginServices: oktaLoginServicesMock,
@@ -466,7 +436,6 @@ void main() {
           tokenStorage: tokenStorageMock,
           accountSelectorStorage: accountSelectorStorageMock,
           cartStorage: cartStorageMock,
-          countlyService: countlyServiceMock,
           credStorage: credStorageMock,
           localAuthentication: localAuthenticationMock,
           oktaLoginServices: oktaLoginServicesMock,
@@ -500,7 +469,6 @@ void main() {
           tokenStorage: tokenStorageMock,
           accountSelectorStorage: accountSelectorStorageMock,
           cartStorage: cartStorageMock,
-          countlyService: countlyServiceMock,
           credStorage: credStorageMock,
           localAuthentication: localAuthenticationMock,
           oktaLoginServices: oktaLoginServicesMock,
@@ -528,7 +496,6 @@ void main() {
           tokenStorage: tokenStorageMock,
           accountSelectorStorage: accountSelectorStorageMock,
           cartStorage: cartStorageMock,
-          countlyService: countlyServiceMock,
           credStorage: credStorageMock,
           localAuthentication: localAuthenticationMock,
           oktaLoginServices: oktaLoginServicesMock,
@@ -557,7 +524,6 @@ void main() {
           tokenStorage: tokenStorageMock,
           accountSelectorStorage: accountSelectorStorageMock,
           cartStorage: cartStorageMock,
-          countlyService: countlyServiceMock,
           credStorage: credStorageMock,
           localAuthentication: localAuthenticationMock,
           oktaLoginServices: oktaLoginServicesMock,
@@ -587,7 +553,6 @@ void main() {
           tokenStorage: tokenStorageMock,
           accountSelectorStorage: accountSelectorStorageMock,
           cartStorage: cartStorageMock,
-          countlyService: countlyServiceMock,
           credStorage: credStorageMock,
           localAuthentication: localAuthenticationMock,
           oktaLoginServices: oktaLoginServicesMock,
@@ -622,7 +587,6 @@ void main() {
           tokenStorage: tokenStorageMock,
           accountSelectorStorage: accountSelectorStorageMock,
           cartStorage: cartStorageMock,
-          countlyService: countlyServiceMock,
           credStorage: credStorageMock,
           localAuthentication: localAuthenticationMock,
           oktaLoginServices: oktaLoginServicesMock,
@@ -645,7 +609,6 @@ void main() {
           tokenStorage: tokenStorageMock,
           accountSelectorStorage: accountSelectorStorageMock,
           cartStorage: cartStorageMock,
-          countlyService: countlyServiceMock,
           credStorage: credStorageMock,
           localAuthentication: localAuthenticationMock,
           oktaLoginServices: oktaLoginServicesMock,
@@ -680,7 +643,6 @@ void main() {
           tokenStorage: tokenStorageMock,
           accountSelectorStorage: accountSelectorStorageMock,
           cartStorage: cartStorageMock,
-          countlyService: countlyServiceMock,
           credStorage: credStorageMock,
           localAuthentication: localAuthenticationMock,
           oktaLoginServices: oktaLoginServicesMock,
@@ -707,7 +669,6 @@ void main() {
           tokenStorage: tokenStorageMock,
           accountSelectorStorage: accountSelectorStorageMock,
           cartStorage: cartStorageMock,
-          countlyService: countlyServiceMock,
           credStorage: credStorageMock,
           localAuthentication: localAuthenticationMock,
           oktaLoginServices: oktaLoginServicesMock,
@@ -741,7 +702,6 @@ void main() {
           tokenStorage: tokenStorageMock,
           accountSelectorStorage: accountSelectorStorageMock,
           cartStorage: cartStorageMock,
-          countlyService: countlyServiceMock,
           credStorage: credStorageMock,
           localAuthentication: localAuthenticationMock,
           oktaLoginServices: oktaLoginServicesMock,
@@ -776,7 +736,6 @@ void main() {
           tokenStorage: tokenStorageMock,
           accountSelectorStorage: accountSelectorStorageMock,
           cartStorage: cartStorageMock,
-          countlyService: countlyServiceMock,
           credStorage: credStorageMock,
           localAuthentication: localAuthenticationMock,
           oktaLoginServices: oktaLoginServicesMock,
@@ -830,7 +789,6 @@ void main() {
           tokenStorage: tokenStorageMock,
           accountSelectorStorage: accountSelectorStorageMock,
           cartStorage: cartStorageMock,
-          countlyService: countlyServiceMock,
           credStorage: credStorageMock,
           localAuthentication: localAuthenticationMock,
           oktaLoginServices: oktaLoginServicesMock,
@@ -864,7 +822,6 @@ void main() {
           tokenStorage: tokenStorageMock,
           accountSelectorStorage: accountSelectorStorageMock,
           cartStorage: cartStorageMock,
-          countlyService: countlyServiceMock,
           credStorage: credStorageMock,
           localAuthentication: localAuthenticationMock,
           oktaLoginServices: oktaLoginServicesMock,

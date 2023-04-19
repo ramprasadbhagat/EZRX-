@@ -14,10 +14,9 @@ import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
-import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
-import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/dialogs/custom_dialogs.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_action_button.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_bundle_item.dart';
@@ -46,7 +45,6 @@ class _SavedOrderDetailPageState extends State<SavedOrderDetailPage> {
   void initState() {
     super.initState();
     eligibilityBloc = context.read<EligibilityBloc>();
-    locator<CountlyService>().recordCountlyView('Saved Order Details Screen');
     WidgetsBinding.instance.addPostFrameCallback(
       (_) {
         context.read<MaterialPriceDetailBloc>().add(
@@ -323,7 +321,6 @@ class _SavedOrderDetailPageState extends State<SavedOrderDetailPage> {
       const CartPageRoute(),
       predicate: (route) => route.settings.name == 'HomeNavigationTabbarRoute',
     );
-    locator<CountlyService>().recordCountlyView('Use saved order');
   }
 
   Future<void> _deletePressed(

@@ -7,7 +7,7 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/policy_configuration.dart';
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
-import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+
 import 'package:ezrxmobile/infrastructure/returns/datasource/policy_configuration_local.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/policy_configuration_remote.dart';
 import 'package:ezrxmobile/infrastructure/returns/repository/policy_configuration_repository.dart';
@@ -22,7 +22,7 @@ class PolicyConfigurationLocalDataSourceMock extends Mock
 class PolicyConfigurationRemoteDataSourceMock extends Mock
     implements PolicyConfigurationRemoteDataSource {}
 
-class CountlyServiceMock extends Mock implements CountlyService {}
+
 
 void main() {
   late PolicyConfigurationRepository policyConfigurationRepo;
@@ -33,7 +33,7 @@ void main() {
   );
   late PolicyConfigurationLocalDataSource policyConfigurationLocalSource;
   late PolicyConfigurationRemoteDataSource policyConfigurationRemoteSource;
-  late CountlyService countlyService;
+  
   final policyConfigurationListMock = [
     PolicyConfiguration(
         salesOrg: SalesOrg('2601'),
@@ -59,12 +59,11 @@ void main() {
     mockConfig = MockConfig();
     policyConfigurationLocalSource = PolicyConfigurationLocalDataSourceMock();
     policyConfigurationRemoteSource = PolicyConfigurationRemoteDataSourceMock();
-    countlyService = CountlyServiceMock();
+    
     policyConfigurationRepo = PolicyConfigurationRepository(
       config: mockConfig,
       localDataSource: policyConfigurationLocalSource,
       remoteDataSource: policyConfigurationRemoteSource,
-      countlyService: countlyService,
     );
   });
 

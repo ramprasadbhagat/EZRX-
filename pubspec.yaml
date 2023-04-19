@@ -71,7 +71,6 @@ dependencies:
   flutter_cache_manager: ^3.3.0
   flutter_inappwebview: ^5.7.1
   scandit_flutter_datacapture_barcode: ^6.16.1
-  countly_flutter: ^22.2.0
   loading_indicator: ^3.1.0
   file: ^6.1.4
   badges: ^2.0.3

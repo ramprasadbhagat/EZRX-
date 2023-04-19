@@ -19,7 +19,7 @@ import 'package:ezrxmobile/domain/order/entities/price_bonus.dart';
 import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+
 import 'package:ezrxmobile/infrastructure/core/local_storage/cart_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_local.dart';
@@ -35,7 +35,7 @@ class MockConfig extends Mock implements Config {}
 
 class MockCartStorage extends Mock implements CartStorage {}
 
-class CountlyServiceMock extends Mock implements CountlyService {}
+
 
 class StockInfoRemoteDataSourceMock extends Mock
     implements StockInfoRemoteDataSource {}
@@ -48,7 +48,6 @@ void main() {
   late CartStorage cartStorageMock;
   late StockInfoLocalDataSourceMock stockInfoLocalDataSource;
   late StockInfoRemoteDataSourceMock stockInfoRemoteDataSource;
-  late CountlyService countlyServiceMock;
   late CartRepository cartRepository;
   late CartItem fakeCartItem;
   late SalesOrganisationConfigs mockSalesOrganisationConfigs;
@@ -73,13 +72,11 @@ void main() {
     stockInfoLocalDataSource = StockInfoLocalDataSourceMock();
     stockInfoRemoteDataSource = StockInfoRemoteDataSourceMock();
     cartStorageMock = MockCartStorage();
-    countlyServiceMock = CountlyServiceMock();
     mixpanelService = MixpanelServiceMock();
     cartRepository = CartRepository(
       mixpanelService: mixpanelService,
       config: mockConfig,
       cartStorage: cartStorageMock,
-      countlyService: countlyServiceMock,
       stockInfoLocalDataSource: stockInfoLocalDataSource,
       stockInfoRemoteDataSource: stockInfoRemoteDataSource,
     );
@@ -216,22 +213,6 @@ void main() {
     when(
       () => cartStorageMock.delete(
         id: fakeCartItem.id,
-      ),
-    ).thenAnswer(
-      (invocation) async => const Right(unit),
-    );
-
-    when(
-      () => countlyServiceMock.addCountlyEvent(
-        'Delete from Cart',
-      ),
-    ).thenAnswer(
-      (invocation) async => const Right(unit),
-    );
-
-    when(
-      () => countlyServiceMock.addCountlyEvent(
-        'Remove bonus',
       ),
     ).thenAnswer(
       (invocation) async => const Right(unit),

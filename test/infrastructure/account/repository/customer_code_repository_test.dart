@@ -11,7 +11,7 @@ import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_local
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_remote.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/account_selector_storage_dto.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/customer_code_repository.dart';
-import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -26,7 +26,7 @@ class AccountSelectorStorageMock extends Mock
 
 class ConfigMock extends Mock implements Config {}
 
-class CountlyServiceMock extends Mock implements CountlyService {}
+
 
 void main() {
   late int offset;
@@ -35,7 +35,6 @@ void main() {
   late bool hideCustomer;
   late String mockCustomerCode;
   late SalesOrganisation mockSalesOrg;
-  late CountlyService countlyServiceMock;
   late User mockClientUser, mockSalesRepUser;
   late CustomerCodeRepository customerCodeRepository;
   late AccountSelectorStorage accountSelectorStorageMock;
@@ -44,7 +43,6 @@ void main() {
 
   setUpAll(() async {
     configMock = ConfigMock();
-    countlyServiceMock = CountlyServiceMock();
     accountSelectorStorageMock = AccountSelectorStorageMock();
     customerCodeLocalDataSourceMock = CustomerCodeLocalDataSourceMock();
     customerCodeRemoteDataSourceMock = CustomerCodeRemoteDataSourceMock();
@@ -73,7 +71,6 @@ void main() {
 
     customerCodeRepository = CustomerCodeRepository(
       config: configMock,
-      countlyService: countlyServiceMock,
       accountSelectorStorage: accountSelectorStorageMock,
       remoteDataSource: customerCodeRemoteDataSourceMock,
       localCustomerCodeDataSource: customerCodeLocalDataSourceMock,
@@ -301,16 +298,6 @@ void main() {
       ).thenAnswer((invocation) async {
         return;
       });
-      when(
-        () => countlyServiceMock.addCountlyEvent(
-          'customerCode_save',
-          segmentation: {
-            'customerCode': mockCustomerCode,
-          },
-        ),
-      ).thenAnswer((invocation) async {
-        return;
-      });
 
       final result = await customerCodeRepository.storeCustomerCode(
         customerCode: mockCustomerCode,
@@ -329,17 +316,6 @@ void main() {
               any(named: 'accountSelectorStorageDto', that: isNotNull),
         ),
       ).thenThrow((invocation) => MockException());
-
-      when(
-        () => countlyServiceMock.addCountlyEvent(
-          'customerCode_save',
-          segmentation: {
-            'customerCode': mockCustomerCode,
-          },
-        ),
-      ).thenAnswer((invocation) async {
-        return;
-      });
 
       final result = await customerCodeRepository.storeCustomerCode(
         customerCode: mockCustomerCode,

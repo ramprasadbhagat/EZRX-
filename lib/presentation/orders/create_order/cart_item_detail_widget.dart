@@ -5,8 +5,7 @@ import 'package:ezrxmobile/application/order/tender_contract/tender_contract_blo
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
-import 'package:ezrxmobile/locator.dart';
+
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/cart_item_bonus_detail_widget.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/price_tier_label.dart';
@@ -100,30 +99,12 @@ class _CartItemDetailWidgetState extends State<CartItemDetailWidget> {
             quantityTextKey: const Key('item'),
             controller: _controller,
             onFieldChange: (val) {
-              locator<CountlyService>()
-                  .addCountlyEvent('changed_quantity', segmentation: {
-                'materialNum': widget.cartItem.getMaterialNumber.getOrCrash(),
-                'listPrice': widget.cartItem.listPrice,
-                'price': widget.cartItem.price.finalPrice.getOrCrash(),
-              });
               widget.onQuantityChanged.call(val);
             },
             minusPressed: (val) {
-              locator<CountlyService>()
-                  .addCountlyEvent('deduct_quantity', segmentation: {
-                'materialNum': widget.cartItem.getMaterialNumber.getOrCrash(),
-                'listPrice': widget.cartItem.listPrice,
-                'price': widget.cartItem.price.finalPrice.getOrCrash(),
-              });
               widget.onQuantityChanged.call(val);
             },
             addPressed: (val) {
-              locator<CountlyService>()
-                  .addCountlyEvent('add_quantity', segmentation: {
-                'materialNum': widget.cartItem.getMaterialNumber.getOrCrash(),
-                'listPrice': widget.cartItem.listPrice,
-                'price': widget.cartItem.price.finalPrice.getOrCrash(),
-              });
               widget.onQuantityChanged.call(val);
             },
           ),

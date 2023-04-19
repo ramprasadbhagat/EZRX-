@@ -1,9 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
-import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
-import 'package:ezrxmobile/locator.dart';
 import 'package:flutter/material.dart';
 
 class ReturnsOverview extends StatelessWidget {
@@ -11,7 +10,6 @@ class ReturnsOverview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    locator<CountlyService>().recordCountlyView('returns_overview');
     trackMixpanelEvent(
       MixpanelEvents.pageViewVisited,
       props: {

@@ -1,14 +1,10 @@
 import 'dart:async';
 
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/banner/entities/banner.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
-import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
@@ -74,33 +70,6 @@ class _HomeBannerState extends State<HomeBanner> {
                   allowImplicitScrolling: true,
                   itemBuilder: (_, index) {
                     final banner = state.banner[index % state.banner.length];
-                    final userState = context.read<UserBloc>().state;
-
-                    locator<CountlyService>().addCountlyEvent(
-                      'banner_impression',
-                      segmentation: {
-                        'banner_id':
-                            state.banner[index % state.banner.length].id,
-                        'landingPage':
-                            state.banner[index % state.banner.length].urlLink,
-                        'selectedSalesOrg':
-                            state.banner[index % state.banner.length].salesOrg,
-                        'selectedCustomerCode': context
-                            .read<CustomerCodeBloc>()
-                            .state
-                            .customerCodeInfo
-                            .customerCodeSoldTo,
-                        'selectedShipToAddress': context
-                            .read<ShipToCodeBloc>()
-                            .state
-                            .shipToInfo
-                            .shipToCustomerCode,
-                        'userRole':
-                            userState.user.role.type.getOrDefaultValue(''),
-                        'username': userState.userFullName.displayFullName,
-                      },
-                    );
-
                     if (isBannerVisible &&
                         banner != BannerItem.empty() &&
                         index > 1) {
@@ -119,7 +88,6 @@ class _HomeBannerState extends State<HomeBanner> {
                       bannerPosition: index % state.banner.length,
                       banner: state.banner[index % state.banner.length],
                       httpService: locator<HttpService>(),
-                      countlyService: locator<CountlyService>(),
                       config: locator<Config>(),
                       defaultCacheManager: DefaultCacheManager(),
                     );

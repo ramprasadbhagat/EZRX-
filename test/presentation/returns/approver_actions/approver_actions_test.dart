@@ -17,7 +17,7 @@ import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/returns/entities/request_information.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_approver_filter.dart';
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
-import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/filter_icon.dart';
@@ -40,7 +40,7 @@ class ReturnApproverFilterBlocMock
     extends MockBloc<ReturnApproverFilterEvent, ReturnApproverFilterState>
     implements ReturnApproverFilterBloc {}
 
-class CountlyServiceMock extends Mock implements CountlyService {}
+
 
 class ShipToCodeBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState>
     implements ShipToCodeBloc {}
@@ -60,7 +60,7 @@ void main() {
   late CustomerCodeBloc customerCodeBlocMock;
   late ReturnApproverBloc returnApproverBlocMock;
   late ReturnApproverFilterBloc returnApproverFilterBlocMock;
-  late CountlyService countlyService;
+  
   late ShipToCodeBloc shipToCodeBlocMock;
   late List<RequestInformation> approverReturnRequestList;
   late SalesOrgBloc salesOrgBlocMock;
@@ -86,8 +86,6 @@ void main() {
       locator<MixpanelService>().init(mixpanel: MixpanelMock());
       locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
       locator.registerLazySingleton(() => AppRouter());
-      countlyService = CountlyServiceMock();
-      locator.registerLazySingleton(() => countlyService);
       approverReturnRequestList = [
         RequestInformation.empty(),
       ];
@@ -118,9 +116,6 @@ void main() {
           .thenReturn(ReturnApproverState.initial());
       when(() => returnApproverFilterBlocMock.state)
           .thenReturn(ReturnApproverFilterState.initial());
-      when(
-        () => countlyService.recordCountlyView('approver_actions'),
-      ).thenAnswer((invocation) async => Future.value());
       when(() => shipToCodeBlocMock.state)
           .thenReturn(ShipToCodeState.initial());
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());

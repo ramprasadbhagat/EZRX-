@@ -17,7 +17,6 @@ import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/cart_repository.dart';
-import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/orders/cart/remark/cart_item_remark.dart';
 import 'package:ezrxmobile/presentation/orders/cart/bonus/cart_item_bonus_item.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/quantity_input.dart';
@@ -25,7 +24,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+
 
 import '../../../utils/widget_utils.dart';
 import '../order_success/order_success_page_test.dart';
@@ -55,7 +54,7 @@ class CustomerCodeBlocMock
 class ShipToBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState>
     implements ShipToCodeBloc {}
 
-class CountlyServiceMock extends Mock implements CountlyService {}
+
 
 class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
 
@@ -70,13 +69,8 @@ void main() {
   late CustomerCodeBloc customerCodeBloc;
   late ShipToCodeBloc shipToCodeBloc;
   late MaterialItemBonus materialItemBonus;
-  late CountlyService countlyService;
+  
   late CartBloc cartBloc;
-
-  setUpAll(() {
-    countlyService = CountlyServiceMock();
-    locator.registerLazySingleton(() => countlyService);
-  });
 
   setUp(
     () {
@@ -180,29 +174,6 @@ void main() {
                 SalesOrganisationConfigs.empty().copyWith(enableRemarks: true),
           ),
         );
-        when(() => countlyService.addCountlyEvent(
-              'changed_quantity',
-              segmentation: {
-                'materialNum': MaterialNumber('1234567').getOrDefaultValue(''),
-              },
-            )).thenAnswer((invocation) async => Future.value());
-
-        when(() => countlyService.addCountlyEvent(
-              'add_quantity',
-              segmentation: {
-                'materialNum': cartItem.getMaterialNumber.getOrDefaultValue(''),
-                'listPrice': cartItem.listPrice,
-                'price': cartItem.price.finalPrice.getOrDefaultValue(0),
-              },
-            )).thenAnswer((invocation) async => Future.value());
-        when(() => countlyService.addCountlyEvent(
-              'deduct_quantity',
-              segmentation: {
-                'materialNum': cartItem.getMaterialNumber.getOrDefaultValue(''),
-                'listPrice': cartItem.listPrice,
-                'price': cartItem.price.finalPrice.getOrDefaultValue(0),
-              },
-            )).thenAnswer((invocation) async => Future.value());
 
         await tester.pumpWidget(getWidget());
         await tester.pump();
@@ -220,14 +191,6 @@ void main() {
 
         await tester.tap(quantityInput, warnIfMissed: false);
         await tester.enterText(quantityInput, '12');
-        verify(
-          () => countlyService.addCountlyEvent(
-            'changed_quantity',
-            segmentation: {
-              'materialNum': MaterialNumber('1234567').getOrDefaultValue(''),
-            },
-          ),
-        ).called(1);
         // verify(
         //   () => cartBloc.add(
         //     CartEvent.updateBonusItem(
@@ -244,16 +207,6 @@ void main() {
         final addBonusFromCart = find.byKey(const ValueKey('addBonusFromCart'));
         expect(addBonusFromCart, findsOneWidget);
         await tester.tap(addBonusFromCart);
-        verify(
-          () => countlyService.addCountlyEvent(
-            'add_quantity',
-            segmentation: {
-              'materialNum': cartItem.getMaterialNumber.getOrDefaultValue(''),
-              'listPrice': cartItem.listPrice,
-              'price': cartItem.price.finalPrice.getOrDefaultValue(0),
-            },
-          ),
-        ).called(1);
 
         // verify(
         //   () => cartBloc.add(
@@ -273,16 +226,6 @@ void main() {
             find.byKey(const ValueKey('removeBonusFromCart'));
         expect(removeBonusFromCart, findsOneWidget);
         await tester.tap(removeBonusFromCart);
-        verify(
-          () => countlyService.addCountlyEvent(
-            'deduct_quantity',
-            segmentation: {
-              'materialNum': cartItem.getMaterialNumber.getOrDefaultValue(''),
-              'listPrice': cartItem.listPrice,
-              'price': cartItem.price.finalPrice.getOrDefaultValue(0),
-            },
-          ),
-        ).called(1);
 
         // verify(
         //   () => cartBloc.add(
@@ -315,12 +258,6 @@ void main() {
                 SalesOrganisationConfigs.empty().copyWith(enableRemarks: true),
           ),
         );
-        when(() => countlyService.addCountlyEvent(
-              'changed_quantity',
-              segmentation: {
-                'materialNum': MaterialNumber('1234567').getOrDefaultValue(''),
-              },
-            )).thenAnswer((invocation) async => Future.value());
 
         await tester.pumpWidget(getWidget());
         await tester.pump();

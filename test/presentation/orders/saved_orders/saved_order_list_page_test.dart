@@ -16,7 +16,7 @@ import 'package:ezrxmobile/domain/account/entities/ship_to_name.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
-import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_local.dart';
 import 'package:ezrxmobile/presentation/orders/saved_order/saved_order_item.dart';
@@ -76,8 +76,6 @@ void main() {
     locator<MixpanelService>().init(mixpanel: MixpanelMock());
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
     locator.registerLazySingleton(() => AppRouter());
-    locator
-        .registerLazySingleton(() => CountlyService(config: locator<Config>()));
     savedOrdersMock = await OrderLocalDataSource().getSavedOrders();
     autoRouterMock = locator<AppRouter>();
   });

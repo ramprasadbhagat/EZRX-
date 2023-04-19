@@ -16,7 +16,7 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/auth/entities/login.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/presentation/auth/login_page.dart';
 import 'package:ezrxmobile/presentation/splash/splash_page.dart';
@@ -82,8 +82,6 @@ void main() {
   setUpAll(() async {
     locator = GetIt.instance;
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
-    locator
-        .registerLazySingleton(() => CountlyService(config: locator<Config>()));
     locator.registerLazySingleton(() => MixpanelService());
     locator<MixpanelService>().init(mixpanel: MixpanelMock());
   });

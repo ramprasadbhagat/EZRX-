@@ -21,7 +21,7 @@ import 'package:ezrxmobile/domain/order/entities/submit_order_response.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/repository/i_order_repository.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
@@ -34,7 +34,7 @@ class OrderRepository implements IOrderRepository {
   final Config config;
   final OrderLocalDataSource localDataSource;
   final OrderRemoteDataSource remoteDataSource;
-  final CountlyService countlyService;
+  
   late MixpanelService mixpanelService;
 
   OrderRepository({
@@ -42,7 +42,7 @@ class OrderRepository implements IOrderRepository {
     required this.mixpanelService,
     required this.localDataSource,
     required this.remoteDataSource,
-    required this.countlyService,
+    
   });
 
   @override
@@ -161,7 +161,6 @@ class OrderRepository implements IOrderRepository {
 
       if (savedOrder.isDraftOrder) {
         final newlyAddedDraftOrder = draftOrder.copyWith(id: savedOrder.id);
-        await countlyService.addCountlyEvent('Save order');
 
         return Right(newlyAddedDraftOrder);
       } else {
@@ -282,7 +281,6 @@ class OrderRepository implements IOrderRepository {
 
       return Right(submitOrderResponse);
     } catch (e) {
-      await countlyService.addCountlyEvent('order_fail');
       mixpanelService.trackEvent(
         eventName: MixpanelEvents.orderFailed,
         properties: {

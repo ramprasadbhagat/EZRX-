@@ -15,7 +15,7 @@ import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+
 import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_list_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/material_list_repository.dart';
@@ -30,14 +30,14 @@ class MaterialListLocalDataSourceMock extends Mock
 class MaterialListRemoteDataSourceMock extends Mock
     implements MaterialListRemoteDataSource {}
 
-class CountlyServiceMock extends Mock implements CountlyService {}
+
 
 void main() {
   late MaterialListRepository materialListRepository;
   late Config mockConfig;
   late MaterialListLocalDataSource materialListLocalDataSource;
   late MaterialListRemoteDataSource materialListRemoteDataSource;
-  late CountlyService countlyService;
+  
 
   final fakeSaleOrg =
       SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601'));
@@ -82,13 +82,11 @@ void main() {
     mockConfig = MockConfig();
     materialListLocalDataSource = MaterialListLocalDataSourceMock();
     materialListRemoteDataSource = MaterialListRemoteDataSourceMock();
-    countlyService = CountlyServiceMock();
-
     materialListRepository = MaterialListRepository(
         config: mockConfig,
         materialListLocalDataSource: materialListLocalDataSource,
         materialListRemoteDataSource: materialListRemoteDataSource,
-        countlyService: countlyService);
+        );
   });
 
   group('materialListRepository should - ', () {
@@ -96,50 +94,6 @@ void main() {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
       when(() => materialListLocalDataSource.getMaterialListSalesRep())
           .thenAnswer((invocation) async => <MaterialInfo>[]);
-
-      if (mockMaterialFilter != MaterialFilter.empty()) {
-        when(
-          () => countlyService.addCountlyEvent(
-            'select_principal',
-            segmentation: {
-              'principalName': mockMaterialFilter,
-            },
-          ),
-        ).thenAnswer((invocation) async {
-          return;
-        });
-        when(
-          () => countlyService.addCountlyEvent(
-            'Use filterl',
-            segmentation: {
-              'principal_nam': mockMaterialFilter,
-            },
-          ),
-        ).thenAnswer((invocation) async {
-          return;
-        });
-        when(
-          () => countlyService.addCountlyEvent(
-            'select_thera_class',
-            segmentation: {
-              'theraClassName': mockMaterialFilter,
-              'numSelected': mockMaterialFilter
-            },
-          ),
-        ).thenAnswer((invocation) async {
-          return;
-        });
-        when(
-          () => countlyService.addCountlyEvent(
-            'Use filterl',
-            segmentation: {
-              'therapeutic_class': mockMaterialFilter,
-            },
-          ),
-        ).thenAnswer((invocation) async {
-          return;
-        });
-      }
 
       final result = await materialListRepository.getMaterialList(
         customerCodeInfo: fakeCustomerCodeInfo,
@@ -266,61 +220,6 @@ void main() {
               materialNumber: MaterialNumber('123456'),
             )
           ]);
-
-      when(
-        () => countlyService.addCountlyEvent(
-          'select_principal',
-          segmentation: {
-            'principalName': mockMaterialFilter.uniquePrincipalName.join(','),
-            'numSelected': mockMaterialFilter.uniquePrincipalName.length,
-          },
-        ),
-      ).thenAnswer((invocation) async {
-        return;
-      });
-      when(
-        () => countlyService.addCountlyEvent(
-          'Use filter',
-          segmentation: {
-            'principal_name': mockMaterialFilter.uniquePrincipalName.join(','),
-          },
-        ),
-      ).thenAnswer((invocation) async {
-        return;
-      });
-      when(
-        () => countlyService.addCountlyEvent(
-          'select_thera_class',
-          segmentation: {
-            'theraClassName':
-                mockMaterialFilter.uniqueTherapeuticClass.join(','),
-            'numSelected': mockMaterialFilter.uniqueTherapeuticClass.length
-          },
-        ),
-      ).thenAnswer((invocation) async {
-        return;
-      });
-      when(
-        () => countlyService.addCountlyEvent(
-          'Use filter',
-          segmentation: {
-            'therapeutic_class':
-                mockMaterialFilter.uniqueTherapeuticClass.join(','),
-          },
-        ),
-      ).thenAnswer((invocation) async {
-        return;
-      });
-      when(
-        () => countlyService.addCountlyEvent(
-          'Use filter',
-          segmentation: {
-            'item_brand': mockMaterialFilter.uniqueItemBrand.join(','),
-          },
-        ),
-      ).thenAnswer((invocation) async {
-        return;
-      });
 
       final result = await materialListRepository.getMaterialList(
         customerCodeInfo: fakeCustomerCodeInfo,

@@ -8,8 +8,7 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
-import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
-import 'package:ezrxmobile/locator.dart';
+
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/quantity_input.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -39,7 +38,9 @@ class _UpdateBonusState extends State<UpdateBonus> {
   void initState() {
     controller = TextEditingController();
 
-    controller.text = widget.materialInfo.quantity == 0 ? '1' : widget.materialInfo.quantity.toString();
+    controller.text = widget.materialInfo.quantity == 0
+        ? '1'
+        : widget.materialInfo.quantity.toString();
     super.initState();
   }
 
@@ -48,6 +49,7 @@ class _UpdateBonusState extends State<UpdateBonus> {
     controller.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -97,39 +99,9 @@ class _UpdateBonusState extends State<UpdateBonus> {
                       quantityDeleteKey: const Key('bonusDelete'),
                       quantityTextKey: const Key('bonusItem'),
                       controller: controller,
-                      onFieldChange: (p0) {
-                        locator<CountlyService>().addCountlyEvent(
-                          'changed_quantity',
-                          segmentation: {
-                            'materialNum':
-                                widget.materialInfo.materialNumber.getOrCrash(),
-                            'listPrice': widget.cartItem.listPrice,
-                            'price': widget.cartItem.unitPrice,
-                          },
-                        );
-                      },
-                      minusPressed: (p0) {
-                        locator<CountlyService>().addCountlyEvent(
-                          'deduct_quantity',
-                          segmentation: {
-                            'materialNum':
-                                widget.materialInfo.materialNumber.getOrCrash(),
-                            'listPrice': widget.cartItem.listPrice,
-                            'price': widget.cartItem.unitPrice,
-                          },
-                        );
-                      },
-                      addPressed: (p0) {
-                        locator<CountlyService>().addCountlyEvent(
-                          'add_quantity',
-                          segmentation: {
-                            'materialNum':
-                                widget.materialInfo.materialNumber.getOrCrash(),
-                            'listPrice': widget.cartItem.listPrice,
-                            'price': widget.cartItem.unitPrice,
-                          },
-                        );
-                      },
+                      onFieldChange: (p0) {},
+                      addPressed: (p0) {},
+                      minusPressed: (p0) {},
                     ),
                   ],
                 ),
@@ -139,7 +111,6 @@ class _UpdateBonusState extends State<UpdateBonus> {
             ElevatedButton(
               key: const Key('addButton'),
               onPressed: () {
-                locator<CountlyService>().addCountlyEvent('Add to bonus');
                 context.read<CartBloc>().add(
                       CartEvent.addBonusToCartItem(
                         item: widget.cartItem,

@@ -3,7 +3,7 @@ import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/orders/order_success/order_success_page.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -34,8 +34,6 @@ void main() {
   setUpAll(
     () {
       locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
-      locator.registerLazySingleton(
-          () => CountlyService(config: locator<Config>()));
       locator.registerLazySingleton(() => AppRouter());
     },
   );

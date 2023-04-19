@@ -26,7 +26,6 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_history_local.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/order_history_repository.dart';
@@ -114,8 +113,10 @@ void main() {
     orderHistoryItem = await OrderHistoryLocalDataSource().getOrderHistory();
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
     locator.registerLazySingleton(() => AppRouter());
-    locator
-        .registerLazySingleton(() => CountlyService(config: locator<Config>()));
+    locator.registerLazySingleton(() => mockOrderHistoryListBloc);
+    locator.registerLazySingleton(() => mockShipToCodeBloc);
+    locator.registerLazySingleton(() => mockCartBloc);
+    locator.registerLazySingleton(() => mockSalesOrgBloc);
     locator.registerLazySingleton(() => MixpanelService());
     locator<MixpanelService>().init(mixpanel: MixpanelMock());
     autoRouterMock = locator<AppRouter>();

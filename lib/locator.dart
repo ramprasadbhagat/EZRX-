@@ -102,7 +102,7 @@ import 'package:ezrxmobile/infrastructure/banner/datasource/banner_local.dart';
 import 'package:ezrxmobile/infrastructure/banner/datasource/banner_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/banner/datasource/banner_remote.dart';
 import 'package:ezrxmobile/infrastructure/banner/repository/banner_repository.dart';
-import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+
 import 'package:ezrxmobile/infrastructure/core/firebase/analytics.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/crashlytics.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/dynamic_links.dart';
@@ -111,7 +111,6 @@ import 'package:ezrxmobile/infrastructure/core/firebase/push_notification.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/core/http/interceptor/auth_interceptor.dart';
-import 'package:ezrxmobile/infrastructure/core/http/interceptor/countly_interceptor.dart';
 import 'package:ezrxmobile/infrastructure/core/http/interceptor/performance_interceptor.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/cart_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/cred_storage.dart';
@@ -318,7 +317,6 @@ void setupLocator() {
       config: locator<Config>(),
       authQueryMutation: locator<AuthQueryMutation>(),
       pushNotificationService: locator<PushNotificationService>(),
-      countlyService: locator<CountlyService>(),
     ),
   );
   locator.registerLazySingleton(
@@ -327,15 +325,11 @@ void setupLocator() {
     ),
   );
   locator.registerLazySingleton(
-    () => CountlyInterceptor(countlyService: locator<CountlyService>()),
-  );
-  locator.registerLazySingleton(
     () => HttpService(
       config: locator<Config>(),
       interceptors: [
         locator<AuthInterceptor>(),
         locator<PerformanceInterceptor>(),
-        locator<CountlyInterceptor>(),
       ],
     ),
   );
@@ -371,7 +365,6 @@ void setupLocator() {
       oktaLoginServices: locator<OktaLoginServices>(),
       pushNotificationService: locator<PushNotificationService>(),
       localAuthentication: locator<LocalAuthentication>(),
-      countlyService: locator<CountlyService>(),
       mixpanelService: locator<MixpanelService>(),
     ),
   );
@@ -611,7 +604,6 @@ void setupLocator() {
       config: locator<Config>(),
       localDataSource: locator<FavouriteLocalDataSource>(),
       remoteDataSource: locator<FavouriteRemoteDataSource>(),
-      countlyService: locator<CountlyService>(),
     ),
   );
   locator.registerLazySingleton(
@@ -644,7 +636,6 @@ void setupLocator() {
       config: locator<Config>(),
       localDataSource: locator<SalesOrgLocalDataSource>(),
       remoteDataSource: locator<SalesOrgRemoteDataSource>(),
-      countlyService: locator<CountlyService>(),
     ),
   );
 
@@ -677,7 +668,6 @@ void setupLocator() {
       remoteDataSource: locator<CustomerCodeRemoteDataSource>(),
       localCustomerCodeDataSource: locator<CustomerCodeLocalDataSource>(),
       accountSelectorStorage: locator<AccountSelectorStorage>(),
-      countlyService: locator<CountlyService>(),
     ),
   );
 
@@ -695,7 +685,6 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => ShipToCodeRepository(
       accountSelectorStorage: locator<AccountSelectorStorage>(),
-      countlyService: locator<CountlyService>(),
     ),
   );
 
@@ -712,17 +701,6 @@ void setupLocator() {
 
   locator.registerLazySingleton(
     () => EligibilityBloc(),
-  );
-
-  //============================================================
-  //  Countly
-  //
-  //============================================================
-
-  locator.registerLazySingleton(
-    () => CountlyService(
-      config: locator<Config>(),
-    ),
   );
 
   //============================================================
@@ -778,7 +756,6 @@ void setupLocator() {
       config: locator<Config>(),
       localDataSource: locator<OrderLocalDataSource>(),
       remoteDataSource: locator<OrderRemoteDataSource>(),
-      countlyService: locator<CountlyService>(),
       mixpanelService: locator<MixpanelService>(),
     ),
   );
@@ -861,7 +838,6 @@ void setupLocator() {
       config: locator<Config>(),
       materialListLocalDataSource: locator<MaterialListLocalDataSource>(),
       materialListRemoteDataSource: locator<MaterialListRemoteDataSource>(),
-      countlyService: locator<CountlyService>(),
     ),
   );
 
@@ -929,7 +905,6 @@ void setupLocator() {
       config: locator<Config>(),
       orderTemplateLocalDataSource: locator<OrderTemplateLocalDataSource>(),
       orderTemplateRemoteDataSource: locator<OrderTemplateRemoteDataSource>(),
-      countlyService: locator<CountlyService>(),
     ),
   );
 
@@ -989,7 +964,6 @@ void setupLocator() {
       config: locator<Config>(),
       localDataSource: locator<OrderHistoryLocalDataSource>(),
       orderHistoryRemoteDataSource: locator<OrderHistoryRemoteDataSource>(),
-      countlyService: locator<CountlyService>(),
     ),
   );
   locator.registerLazySingleton(
@@ -1514,7 +1488,6 @@ void setupLocator() {
       config: locator<Config>(),
       stockInfoLocalDataSource: locator<StockInfoLocalDataSource>(),
       stockInfoRemoteDataSource: locator<StockInfoRemoteDataSource>(),
-      countlyService: locator<CountlyService>(),
     ),
   );
 
@@ -1549,7 +1522,6 @@ void setupLocator() {
     () => PolicyConfigurationRepository(
       config: locator<Config>(),
       localDataSource: locator<PolicyConfigurationLocalDataSource>(),
-      countlyService: locator<CountlyService>(),
       remoteDataSource: locator<PolicyConfigurationRemoteDataSource>(),
     ),
   );

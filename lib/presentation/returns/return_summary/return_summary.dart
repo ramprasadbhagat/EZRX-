@@ -14,8 +14,7 @@ import 'package:ezrxmobile/domain/returns/entities/return_summary_filter.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_summary_requests.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
-import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
-import 'package:ezrxmobile/locator.dart';
+
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/filter_icon.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
@@ -34,7 +33,6 @@ class ReturnSummary extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    locator<CountlyService>().recordCountlyView('return_summary');
 
     return Scaffold(
       key: scaffoldKey,

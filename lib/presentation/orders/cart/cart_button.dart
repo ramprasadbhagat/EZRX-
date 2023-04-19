@@ -1,13 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:badges/badges.dart' as bd;
-import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
-import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
-import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
-import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -42,24 +37,6 @@ class CartButton extends StatelessWidget {
                   key: const Key('cartButton'),
                   icon: const Icon(Icons.shopping_cart_outlined),
                   onPressed: () {
-                    final cartState = context.read<CartBloc>().state;
-                    trackMixpanelEvent(
-                      MixpanelEvents.cartWindow,
-                    );
-                    final isMYMarketSalesRep = context
-                        .read<EligibilityBloc>()
-                        .state
-                        .isMYMarketSalesRep;
-                    locator<CountlyService>()
-                        .addCountlyEvent('Cart Window', segmentation: {
-                      'numItemInCart': cartState.cartItems.length,
-                      'subTotal': cartState.subTotal(
-                        isMYMarketSalesRep: isMYMarketSalesRep,
-                      ),
-                      'grandTotal': cartState.grandTotal(
-                        isMYMarketSalesRep: isMYMarketSalesRep,
-                      ),
-                    });
                     context.read<AdditionalDetailsBloc>().add(
                           const AdditionalDetailsEvent.clearSavedOrderId(),
                         );

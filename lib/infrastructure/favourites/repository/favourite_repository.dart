@@ -7,7 +7,7 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/favourites/entities/favourite_item.dart';
 import 'package:ezrxmobile/domain/favourites/repository/i_favourite_repository.dart';
-import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+
 import 'package:ezrxmobile/infrastructure/favourites/datasource/favourite_remote.dart';
 import 'package:ezrxmobile/infrastructure/favourites/datasource/favourites_local.dart';
 
@@ -15,13 +15,13 @@ class FavouriteRepository implements IFavouriteRepository {
   final Config config;
   final FavouriteLocalDataSource localDataSource;
   final FavouriteRemoteDataSource remoteDataSource;
-  final CountlyService countlyService;
+  
 
   FavouriteRepository({
     required this.config,
     required this.localDataSource,
     required this.remoteDataSource,
-    required this.countlyService,
+    
   });
 
   @override
@@ -84,10 +84,6 @@ class FavouriteRepository implements IFavouriteRepository {
       );
       final newfavouriteItems = List<Favourite>.from(favouriteItems)
         ..insert(0, item.copyWith(id: addedFavourite.id));
-      await countlyService.addCountlyEvent(
-        'Add to favourite',
-        segmentation: {'materialNum': item.materialNumber.getOrCrash()},
-      );
 
       return Right(newfavouriteItems);
     } catch (e) {
@@ -113,10 +109,6 @@ class FavouriteRepository implements IFavouriteRepository {
           await remoteDataSource.deleteFavourite(itemId: item.id);
       final newfavouriteItems = List<Favourite>.from(favouriteItems)
         ..removeWhere((element) => element.id == deletedFavourite.id);
-      await countlyService.addCountlyEvent(
-        'remove_favourite',
-        segmentation: {'materialNum': item.id},
-      );
 
       return Right(newfavouriteItems);
     } catch (e) {

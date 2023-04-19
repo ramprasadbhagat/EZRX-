@@ -6,7 +6,7 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+
 import 'package:ezrxmobile/infrastructure/order/datasource/discount_override_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/discount_override_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_dto.dart';
@@ -22,7 +22,7 @@ class DiscountOverrideLocalDataSourceMock extends Mock
 class DiscountOverrideRemoteDataSourceMock extends Mock
     implements DiscountOverrideRemoteDataSource {}
 
-class CountlyServiceMock extends Mock implements CountlyService {}
+
 
 void main() {
   late DiscountOverrideRepository discountOverrideRepository;

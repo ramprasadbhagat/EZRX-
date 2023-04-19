@@ -6,7 +6,6 @@ import 'package:ezrxmobile/infrastructure/account/datasource/account_selector_st
 import 'package:ezrxmobile/infrastructure/auth/datasource/change_password_local.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/change_password_remote.dart';
 import 'package:ezrxmobile/infrastructure/auth/repository/change_password_repository.dart';
-import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/push_notification.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/cart_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/cred_storage.dart';
@@ -14,7 +13,6 @@ import 'package:ezrxmobile/infrastructure/core/local_storage/token_storage.dart'
 import 'package:ezrxmobile/infrastructure/core/okta/okta_login.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -44,46 +42,20 @@ class PushNotificationServiceMock extends Mock
 
 class LocalAuthenticationMock extends Mock implements LocalAuthentication {}
 
-class CountlyServiceMock extends Mock implements CountlyService {}
+
 
 void main() {
   late ChangePasswordRemoteDataSourceMock remoteDataSourceMock;
   late ChangePasswordLocalDataSourceMock localDataSourceMock;
-  // late TokenStorage tokenStorageMock;
-  // late CredStorage credStorageMock;
-  // late CartStorage cartStorageMock;
-  // late AccountSelectorStorage accountSelectorStorageMock;
-  // late OktaLoginServices oktaLoginServicesMock;
-  // late PushNotificationService pushNotificationServiceMock;
-  // late LocalAuthentication localAuthenticationMock;
-  // late CountlyService countlyServiceMock;
-
   late ChangePasswordRepository repository;
   late Config configMock;
-
-  // const rootAdminToken =
-  //     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBVVRIX1RPS0VOIjoidzl4cEFhQkRZUSIsImV4cCI6MTY2MzQwOTAzNiwiaWF0IjoxNjYzMzIyNjM2LCJpZCI6MTE0NjEsInJpZ2h0cyI6W3sidmFsdWUiOlt7ImN1c3RvbWVyQ29kZSI6ImFsbCIsInNhbGVzT3JnIjoiMjYwMSIsInNoaXBUb0NvZGUiOlsiYWxsIl19XX1dLCJyb2xlIjoiWlAgQWRtaW4iLCJzYWxlc09yZ3MiOlsiMjYwMSJdLCJ1c2VybmFtZSI6ImV6cnh0ZXN0MDUifQ.MakZTQ3JUVqeRuXQcBU1cUKmHZft5AmFPJDvuG4DjlA';
-  // final fakeJWT = JWT('fake-success');
-
-  final locator = GetIt.instance;
 
   setUpAll(
     () async {
       configMock = ConfigMock();
       localDataSourceMock = ChangePasswordLocalDataSourceMock();
 
-      // tokenStorageMock = MockTokenStorage();
       remoteDataSourceMock = ChangePasswordRemoteDataSourceMock();
-      // accountSelectorStorageMock = AccountSelectorStorageMock();
-      // cartStorageMock = CartStorageMock();
-      // countlyServiceMock = CountlyServiceMock();
-      // credStorageMock = CredStorageMock();
-      // localAuthenticationMock = LocalAuthenticationMock();
-      // oktaLoginServicesMock = OktaLoginServicesMock();
-      // pushNotificationServiceMock = PushNotificationServiceMock();
-
-      locator.registerLazySingleton(
-          () => CountlyService(config: locator<Config>()));
 
       repository = ChangePasswordRepository(
         changePasswordRemoteDataSource: remoteDataSourceMock,

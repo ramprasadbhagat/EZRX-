@@ -17,7 +17,7 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/user_repository.dart';
 import 'package:ezrxmobile/infrastructure/banner/repository/banner_repository.dart';
-import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/presentation/home/expansion_tiles/returns_expansion_tile.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -98,8 +98,6 @@ void main() {
     locator = GetIt.instance;
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
     locator.registerLazySingleton(() => AppRouter());
-    locator
-        .registerLazySingleton(() => CountlyService(config: locator<Config>()));
     locator.registerLazySingleton(() => mockAuthBloc);
     locator.registerLazySingleton(() => mockSalesOrgBloc);
     locator.registerLazySingleton(() => mockBannerBloc);

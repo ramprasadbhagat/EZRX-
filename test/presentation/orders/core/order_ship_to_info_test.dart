@@ -2,7 +2,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_license_info.dart';
@@ -19,7 +19,7 @@ import '../../order_history/order_history_details_widget_test.dart';
 class ShipToCodeBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState>
     implements ShipToCodeBloc {}
 
-class CountlyServiceMock extends Mock implements CountlyService {}
+
 
 class MockPaymentCustomerInformationBloc extends MockBloc<
         PaymentCustomerInformationEvent, PaymentCustomerInformationState>
@@ -27,7 +27,7 @@ class MockPaymentCustomerInformationBloc extends MockBloc<
 
 void main() {
   late AppRouter autoRouterMock;
-  late CountlyService countlyService;
+  
   late ShipToCodeBloc shipToCodeBlocMock;
   late PaymentCustomerInformationBloc paymentCustomerInformationBloc;
 
@@ -35,8 +35,6 @@ void main() {
     () async {
       locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
       locator.registerLazySingleton(() => AppRouter());
-      countlyService = CountlyServiceMock();
-      locator.registerLazySingleton(() => countlyService);
       locator.registerLazySingleton(() => MixpanelService());
       locator<MixpanelService>().init(mixpanel: MixpanelMock());
     },
@@ -74,13 +72,6 @@ void main() {
       testWidgets(
         'order ship to info licence check',
         (tester) async {
-          when(
-            () => countlyService
-                .addCountlyEvent('view_license_info', segmentation: {
-              'NumLicenseAttached': 0,
-              'LicenseType': 'NA',
-            }),
-          ).thenAnswer((invocation) async => Future.value());
           await tester.pumpWidget(getWidget());
           await tester.pump();
           final shipToAddressInfoStepperKey =
@@ -91,13 +82,6 @@ void main() {
               find.byKey(const Key('shipToAddressInfo_license'));
           expect(shipToAddressInfoLicense, findsOneWidget);
           await tester.tap(shipToAddressInfoLicense);
-          verify(
-            () => countlyService
-                .addCountlyEvent('view_license_info', segmentation: {
-              'NumLicenseAttached': 0,
-              'LicenseType': 'NA',
-            }),
-          ).called(1);
           await tester.pump();
           final licenseModel = find.byType(LicenseModel);
           expect(licenseModel, findsOneWidget);

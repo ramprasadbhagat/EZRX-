@@ -16,7 +16,7 @@ import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/orders/cart/override/discount_override_toggle.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -47,7 +47,7 @@ class CustomerCodeBlocMock
 class ShipToBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState>
     implements ShipToCodeBloc {}
 
-class CountlyServiceMock extends Mock implements CountlyService {}
+
 
 class DiscountOverrideBlocMock
     extends MockBloc<DiscountOverrideEvent, DiscountOverrideState>
@@ -59,15 +59,13 @@ void main() {
   late EligibilityBloc eligibilityBloc;
   late CustomerCodeBloc customerCodeBloc;
   late ShipToCodeBloc shipToCodeBloc;
-  late CountlyService countlyService;
+  
   late CartBloc cartBloc;
   late AppRouter autoRouter;
   late DiscountOverrideBloc discountOverrideBlocMock;
   late Price price;
 
   setUpAll(() {
-    countlyService = CountlyServiceMock();
-    locator.registerLazySingleton(() => countlyService);
     locator.registerFactory(() => AppRouter());
     autoRouter = locator<AppRouter>();
   });

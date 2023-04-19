@@ -8,7 +8,7 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/banner/entities/banner.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/infrastructure/banner/repository/banner_repository.dart';
-import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
@@ -33,9 +33,6 @@ void main() {
   setUpAll(() {
     locator = GetIt.instance;
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
-    locator.registerLazySingleton(
-      () => locator<CountlyService>(),
-    );
     locator.registerLazySingleton<HttpService>(
       () => HttpService(
         config: locator<Config>(),

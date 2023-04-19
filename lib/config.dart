@@ -254,20 +254,6 @@ class Config {
     }
   }
 
-  String get getCountlyApiKey {
-    switch (appFlavor) {
-      case Flavor.dev:
-      case Flavor.uat:
-        return '02990adcb274a658318737fd58e23069620df8c8';
-      case Flavor.prod:
-        return '2f293538f1a001f1ae2e022bd305e0eae543d394';
-      case Flavor.mock:
-      default:
-        return '';
-    }
-  }
-
-  String get getCountlyServerUrl => 'https://countly.azurefd.net';
 
   FirebaseOptions get firebaseOptions {
     switch (appFlavor) {

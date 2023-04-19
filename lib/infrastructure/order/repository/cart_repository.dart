@@ -15,7 +15,7 @@ import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/repository/i_cart_repository.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+
 import 'package:ezrxmobile/infrastructure/core/local_storage/cart_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
@@ -29,7 +29,7 @@ class CartRepository implements ICartRepository {
   final Config config;
   final StockInfoLocalDataSource stockInfoLocalDataSource;
   final StockInfoRemoteDataSource stockInfoRemoteDataSource;
-  final CountlyService countlyService;
+  
   final MixpanelService mixpanelService;
 
   CartRepository({
@@ -37,7 +37,7 @@ class CartRepository implements ICartRepository {
     required this.config,
     required this.stockInfoLocalDataSource,
     required this.stockInfoRemoteDataSource,
-    required this.countlyService,
+    
     required this.mixpanelService,
   });
 
@@ -74,16 +74,6 @@ class CartRepository implements ICartRepository {
     required ShipToInfo shipToInfo,
     required bool doNotAllowOutOfStockMaterials,
   }) async {
-    //TODO: Implement countly event for both adding material and bundle to cart
-    //    await countlyService
-    //     .addCountlyEvent('Add materials to cart', segmentation: {
-    //   'materialNum': cartItem.getMaterialNumber.getOrCrash(),
-    //   'listPrice': cartItem.listPrice,
-    //   'price': cartItem.price.finalPrice.getOrCrash(),
-    //   'numItemInCart': cartStorage.cartBoxSize,
-    //   'materialType':
-    //       cartItem.materialInfo.materialGroup4.getMaterialGroup4Type,
-    // });
 
     try {
       final stockInfo = await getStockInfoList(
@@ -256,7 +246,6 @@ class CartRepository implements ICartRepository {
     required CartItem item,
   }) async {
     try {
-      await countlyService.addCountlyEvent('Delete from Cart');
       await cartStorage.delete(id: item.id);
       mixpanelService.trackEvent(
         eventName: MixpanelEvents.clearCart,
@@ -413,7 +402,6 @@ class CartRepository implements ICartRepository {
             break;
         }
       }
-      await countlyService.addCountlyEvent('Remove bonus');
 
       return fetchCart();
     } catch (e) {

@@ -7,10 +7,9 @@ import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/covid_material_list/covid_material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
-import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
-import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -90,29 +89,6 @@ class CovidMaterialListSearchBarState
                     MixpanelEvents.productSearch,
                     props: {
                       MixpanelProps.searchKey: value,
-                    },
-                  );
-                  locator<CountlyService>().addCountlyEvent(
-                    'Product Search',
-                    segmentation: {
-                      'searchKeyWord': value,
-                      'numResults': state.materialList.length,
-                      'selectedSalesOrg': context
-                          .read<SalesOrgBloc>()
-                          .state
-                          .salesOrganisation
-                          .salesOrg
-                          .getOrDefaultValue(''),
-                      'selectedCustomerCode': context
-                          .read<CustomerCodeBloc>()
-                          .state
-                          .customerCodeInfo
-                          .customerCodeSoldTo,
-                      'selectedShipToAddress': context
-                          .read<ShipToCodeBloc>()
-                          .state
-                          .shipToInfo
-                          .shipToCustomerCode,
                     },
                   );
                 } else {

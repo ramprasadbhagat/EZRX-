@@ -5,7 +5,7 @@ import 'package:ezrxmobile/application/returns/policy_configuration/policy_confi
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/returns/entities/policy_configuration.dart';
-import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/policy_configuration_local.dart';
 import 'package:ezrxmobile/presentation/returns/policy_configuration/policy_configuration.dart';
@@ -39,8 +39,6 @@ void main() {
     locator<MixpanelService>().init(mixpanel: MixpanelMock());
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
     locator.registerLazySingleton(() => AppRouter());
-    locator
-        .registerLazySingleton(() => CountlyService(config: locator<Config>()));
     policyConfigurationListMock =
         await PolicyConfigurationLocalDataSource().getPolicyConfiguration();
     autoRouterMock = locator<AppRouter>();

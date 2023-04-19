@@ -2,10 +2,9 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
-import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
-import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/language_picker.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -58,13 +57,6 @@ class NotificationSettingsPage extends StatelessWidget {
                           'notificationSettingsLanguagePicker',
                         ),
                         onPressed: (Locale locale) {
-                          locator<CountlyService>().addCountlyEvent(
-                            'notification_language_changed',
-                            segmentation: {
-                              'fromLanguage': state.languagePreference,
-                              'toLanguage': locale.apiLanguageCode(),
-                            },
-                          );
                           context.read<UserBloc>().add(
                                 UserEvent.updateNotificationSettings(
                                   languagePreference: locale.languageValue,

@@ -16,10 +16,9 @@ import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
-import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
-import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_bundle_item_tile.dart';
@@ -35,7 +34,6 @@ class CartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    locator<CountlyService>().recordCountlyView('Cart Window Screen');
     trackMixpanelEvent(
       MixpanelEvents.pageViewVisited,
       props: {
@@ -178,25 +176,6 @@ class CartPage extends StatelessWidget {
                                           .requestFocus(FocusNode());
                                       trackMixpanelEvent(
                                         MixpanelEvents.goToOrderSummary,
-                                      );
-                                      final isMYMarketSalesRep = context
-                                          .read<EligibilityBloc>()
-                                          .state
-                                          .isMYMarketSalesRep;
-                                      locator<CountlyService>().addCountlyEvent(
-                                        'Checkout',
-                                        segmentation: {
-                                          'numItemInCart':
-                                              state.cartItems.length,
-                                          'subTotal': state.subTotal(
-                                            isMYMarketSalesRep:
-                                                isMYMarketSalesRep,
-                                          ),
-                                          'grandTotal': state.grandTotal(
-                                            isMYMarketSalesRep:
-                                                isMYMarketSalesRep,
-                                          ),
-                                        },
                                       );
                                       _goToOrderSummary(context);
                                     },

@@ -32,7 +32,7 @@ import 'package:ezrxmobile/domain/order/entities/submit_order_response.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_order_response_message.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_remote.dart';
@@ -59,7 +59,7 @@ class OrderLocalDataSourceMock extends Mock implements OrderLocalDataSource {}
 
 class OrderRemoteDataSourceMock extends Mock implements OrderRemoteDataSource {}
 
-class CountlyServiceMock extends Mock implements CountlyService {}
+
 
 class MixpanelServiceMock extends Mock implements MixpanelService {}
 
@@ -71,7 +71,7 @@ void main() {
   late Config mockConfig;
   late OrderLocalDataSource orderLocalDataSource;
   late OrderRemoteDataSource orderRemoteDataSource;
-  late CountlyService countlyService;
+  
   final mockUser = User.empty();
   final mockSalesOrganisation =
       SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601'));
@@ -139,7 +139,7 @@ void main() {
     mockConfig = MockConfig();
     orderLocalDataSource = OrderLocalDataSourceMock();
     orderRemoteDataSource = OrderRemoteDataSourceMock();
-    countlyService = CountlyServiceMock();
+    
     mixpanelService = MixpanelServiceMock();
     salesOrganisationConfigs = SalesOrganisationConfigsMock();
 
@@ -147,7 +147,6 @@ void main() {
       config: mockConfig,
       localDataSource: orderLocalDataSource,
       remoteDataSource: orderRemoteDataSource,
-      countlyService: countlyService,
       mixpanelService: mixpanelService,
     );
   });
@@ -819,10 +818,6 @@ void main() {
                   trackingLevel: 'items',
                   blockOrder: false),
               ''))).thenThrow((invocation) async => MockException());
-      when(() => countlyService.addCountlyEvent('order_fail'))
-          .thenAnswer((invocation) async {
-        return;
-      });
       final result = await orderRepository.submitOrder(
         shipToInfo: ShipToInfo.empty(),
         user: User.empty().copyWith(
@@ -1331,10 +1326,6 @@ void main() {
                 id: '12345678',
               ));
 
-      when(() => countlyService.addCountlyEvent(
-            'Save order',
-          )).thenAnswer((invocation) => Future.value());
-
       final result = await orderRepository.createDraftOrder(
         shipToInfo: mockShipToInfo,
         user: user,
@@ -1437,10 +1428,6 @@ void main() {
                 id: '12345678',
               ));
 
-      when(() => countlyService.addCountlyEvent(
-            'Save order',
-          )).thenAnswer((invocation) => Future.value());
-
       final result = await orderRepository.createDraftOrder(
         shipToInfo: mockShipToInfo,
         user: user,
@@ -1538,10 +1525,6 @@ void main() {
       when(() => orderRemoteDataSource.createDraftOrder(
               draftOrder: SavedOrderDto.fromDomain(draftOrder)))
           .thenThrow((invocation) async => MockException());
-
-      when(() => countlyService.addCountlyEvent(
-            'Save order',
-          )).thenAnswer((invocation) => Future.value());
 
       final result = await orderRepository.createDraftOrder(
         shipToInfo: mockShipToInfo,

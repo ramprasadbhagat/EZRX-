@@ -12,21 +12,21 @@ import 'package:ezrxmobile/infrastructure/account/datasource/sales_org_local.dar
 import 'package:ezrxmobile/infrastructure/account/datasource/sales_org_remote.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/account_selector_storage.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/account_selector_storage_dto.dart';
-import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+
 
 class SalesOrgRepository implements ISalesOrgRepository {
   final Config config;
   final SalesOrgRemoteDataSource remoteDataSource;
   final SalesOrgLocalDataSource localDataSource;
   final AccountSelectorStorage accountSelectorStorage;
-  final CountlyService countlyService;
+  
 
   SalesOrgRepository({
     required this.config,
     required this.remoteDataSource,
     required this.localDataSource,
     required this.accountSelectorStorage,
-    required this.countlyService,
+    
   });
 
   @override
@@ -47,11 +47,6 @@ class SalesOrgRepository implements ISalesOrgRepository {
     try {
       final salesOrgConfigs = await remoteDataSource.getConfig(
         salesOrg: salesOrg,
-      );
-
-      await countlyService.addCountlyEvent(
-        'salesOrg_save',
-        segmentation: {'salesOrg': salesOrg},
       );
 
       return Right(salesOrgConfigs);

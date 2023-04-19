@@ -13,7 +13,7 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/returns/entities/request_information.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_information.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_summary_requests.dart';
-import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/presentation/returns/return_summary_details/return_summary_details.dart';
 import 'package:ezrxmobile/presentation/returns/return_summary_details/section/customer_details_section.dart';
@@ -60,8 +60,6 @@ void main() {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
     locator.registerLazySingleton(() => AppRouter());
     locator.registerLazySingleton(() => MixpanelService());
-    locator
-        .registerLazySingleton(() => CountlyService(config: locator<Config>()));
     autoRouterMock = locator<AppRouter>();
     locator<MixpanelService>().init(mixpanel: MixpanelMock());
   });

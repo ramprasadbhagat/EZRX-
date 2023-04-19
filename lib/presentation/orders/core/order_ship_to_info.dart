@@ -1,11 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
-import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
-import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
-import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_license_info.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -48,22 +45,8 @@ class ShipToAddressInfo extends StatelessWidget {
                             child: GestureDetector(
                               key: const ValueKey('shipToAddressInfo_license'),
                               onTap: () {
-                                final paymentCustomerInformationState = context
-                                    .read<PaymentCustomerInformationBloc>()
-                                    .state;
                                 trackMixpanelEvent(
                                   MixpanelEvents.viewLicenseInfo,
-                                );
-                                locator<CountlyService>().addCountlyEvent(
-                                  'view_license_info',
-                                  segmentation: {
-                                    'NumLicenseAttached':
-                                        paymentCustomerInformationState
-                                            .licenses.length,
-                                    'LicenseType':
-                                        paymentCustomerInformationState
-                                            .getLicensesType,
-                                  },
                                 );
                                 showModalBottomSheet(
                                   context: context,

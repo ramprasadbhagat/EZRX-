@@ -94,8 +94,6 @@ void main() {
     eligibilityBlocMock = EligibilityBlocMock();
     locator = GetIt.instance;
     locator<Config>().appName;
-    locator<Config>().getCountlyApiKey;
-    locator<Config>().getCountlyServerUrl;
     locator<Config>().getTCKHUrl;
     locator<Config>().getTCMMUrl;
     locator<Config>().getTCTHUrl;

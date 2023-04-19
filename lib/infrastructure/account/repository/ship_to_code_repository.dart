@@ -4,15 +4,15 @@ import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/account_selector_storage.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/account_selector_storage_dto.dart';
-import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+
 
 class ShipToCodeRepository extends IShipToCodeRepository {
   AccountSelectorStorage accountSelectorStorage;
-  final CountlyService countlyService;
+  
 
   ShipToCodeRepository({
     required this.accountSelectorStorage,
-    required this.countlyService,
+    
   });
 
   @override
@@ -39,11 +39,6 @@ class ShipToCodeRepository extends IShipToCodeRepository {
             shippingAddress: shipToCode,
           ),
         ),
-      );
-
-      await countlyService.addCountlyEvent(
-        'ship_to_address_save',
-        segmentation: {'shipToAddress': shipToCode},
       );
 
       return const Right(unit);

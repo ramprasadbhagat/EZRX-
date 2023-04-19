@@ -42,7 +42,7 @@ import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/cart_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/discount_override_repository.dart';
@@ -128,7 +128,7 @@ class OrderSummaryBlocMock
     extends MockBloc<OrderSummaryEvent, OrderSummaryState>
     implements OrderSummaryBloc {}
 
-class CountlyServiceMock extends Mock implements CountlyService {}
+
 
 class AdditionalDetailsBlocMock
     extends MockBloc<AdditionalDetailsEvent, AdditionalDetailsState>
@@ -160,19 +160,15 @@ void main() {
   late PriceOverrideBloc priceOverrideBloc;
   late AppRouter autoRouter;
   late OrderSummaryBloc orderSummaryBlocMock;
-  late CountlyService countlyMockService;
   late AdditionalDetailsBloc additionalDetailsBlocMock;
   late CartItem mockCartItemWithOutBatch;
   late CartItem mockCartItemWithBatch;
   late List<StockInfo> batchStockInfoMock;
 
   setUpAll(() async {
-    countlyMockService = CountlyServiceMock();
     locator.registerLazySingleton(() => MixpanelService());
     locator<MixpanelService>().init(mixpanel: MixpanelMock());
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
-    locator
-        .registerLazySingleton(() => CountlyService(config: locator<Config>()));
     locator.registerLazySingleton(() => DiscountOverrideRepositoryMock());
     locator.registerFactory(() =>
         DiscountOverrideBloc(repository: DiscountOverrideRepositoryMock()));
@@ -552,9 +548,6 @@ void main() {
           .thenReturn(PriceOverrideState.initial());
       when(() => additionalDetailsBlocMock.state)
           .thenReturn(AdditionalDetailsState.initial());
-      when(() => countlyMockService.recordCountlyView(
-            'Cart Window Screen',
-          )).thenAnswer((invocation) async => Future.value());
     },
   );
   group(
@@ -1478,8 +1471,6 @@ void main() {
       });
 
       testWidgets('cart order summary ', (tester) async {
-        locator.unregister<CountlyService>();
-        locator.registerLazySingleton<CountlyService>(() => countlyMockService);
 
         when(() => cartBloc.state).thenReturn(
           CartState.initial().copyWith(
@@ -1508,17 +1499,6 @@ void main() {
                 SalesOrganisationConfigs.empty().copyWith(enableBillTo: true),
           ),
         );
-        when(() => countlyMockService.addCountlyEvent(
-              'Checkout',
-              segmentation: {
-                'numItemInCart': mockCartItemWithDataList.length,
-                'subTotal': 0,
-                'grandTotal': 0,
-              },
-            )).thenAnswer((invocation) async => Future.value());
-        when(() => countlyMockService.recordCountlyView(
-              'Cart Window Screen',
-            )).thenAnswer((invocation) async => Future.value());
         await tester.runAsync(() async {
           await tester.pumpWidget(getWidget());
         });
@@ -1527,16 +1507,6 @@ void main() {
         final orderSummaryButton = find.byKey(const Key('orderSummaryButton'));
         expect(orderSummaryButton, findsOneWidget);
         await tester.tap(orderSummaryButton);
-        verify(
-          () => countlyMockService.addCountlyEvent(
-            'Checkout',
-            segmentation: {
-              'numItemInCart': mockCartItemWithDataList.length,
-              'subTotal': 0,
-              'grandTotal': 0,
-            },
-          ),
-        ).called(1);
       });
 
       testWidgets('cart item radio button', (tester) async {
@@ -1958,8 +1928,6 @@ void main() {
       });
 
       testWidgets('cart Item with no valid batch valid ', (tester) async {
-        locator.unregister<CountlyService>();
-        locator.registerLazySingleton<CountlyService>(() => countlyMockService);
 
         when(() => cartBloc.state).thenReturn(
           CartState.initial().copyWith(
@@ -1984,8 +1952,6 @@ void main() {
       });
 
       testWidgets('cart Item with valid batch valid ', (tester) async {
-        locator.unregister<CountlyService>();
-        locator.registerLazySingleton<CountlyService>(() => countlyMockService);
 
         when(() => cartBloc.state).thenReturn(
           CartState.initial().copyWith(

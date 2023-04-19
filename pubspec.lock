@@ -257,14 +257,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.2"
-  countly_flutter:
-    dependency: "direct main"
-    description:
-      name: countly_flutter
-      sha256: bea3755c86189e66e90a3c644da6c8649d03a7689ab40adf84990a2ffbeafe9b
-      url: "https://pub.dev"
-    source: hosted
-    version: "22.02.0"
   coverage:
     dependency: transitive
     description:

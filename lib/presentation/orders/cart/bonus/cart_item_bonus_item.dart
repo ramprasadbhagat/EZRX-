@@ -7,8 +7,7 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
-import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
-import 'package:ezrxmobile/locator.dart';
+
 import 'package:ezrxmobile/presentation/orders/cart/remark/add_remark_button.dart';
 import 'package:ezrxmobile/presentation/orders/cart/remark/add_remark_dialog.dart';
 import 'package:ezrxmobile/presentation/orders/cart/remark/cart_item_remark.dart';
@@ -171,14 +170,6 @@ class _BonusItemTileState extends State<BonusItemTile> {
                       ),
                       controller: quantityController,
                       onFieldChange: (value) {
-                        locator<CountlyService>().addCountlyEvent(
-                          'changed_quantity',
-                          segmentation: {
-                            'materialNum': widget
-                                .bonusItem.materialInfo.materialNumber
-                                .getOrCrash(),
-                          },
-                        );
                         context.read<CartBloc>().add(
                               CartEvent.addBonusToCartItem(
                                 item: widget.cartItem,
@@ -207,16 +198,6 @@ class _BonusItemTileState extends State<BonusItemTile> {
                             );
                       },
                       minusPressed: (value) {
-                        locator<CountlyService>().addCountlyEvent(
-                          'deduct_quantity',
-                          segmentation: {
-                            'materialNum':
-                                widget.material.getMaterialNumber.getOrCrash(),
-                            'listPrice': widget.material.listPrice,
-                            'price':
-                                widget.material.price.finalPrice.getOrCrash(),
-                          },
-                        );
                         context.read<CartBloc>().add(
                               CartEvent.addBonusToCartItem(
                                 item: widget.cartItem,
@@ -243,17 +224,6 @@ class _BonusItemTileState extends State<BonusItemTile> {
                             );
                       },
                       addPressed: (value) {
-                        locator<CountlyService>().addCountlyEvent(
-                          'add_quantity',
-                          segmentation: {
-                            'materialNum':
-                                widget.material.getMaterialNumber.getOrCrash(),
-                            'listPrice': widget.material.listPrice,
-                            'price':
-                                widget.material.price.finalPrice.getOrCrash(),
-                          },
-                        );
-
                         context.read<CartBloc>().add(
                               CartEvent.addBonusToCartItem(
                                 item: widget.cartItem,

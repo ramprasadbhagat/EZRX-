@@ -26,8 +26,6 @@ void main() {
     locator<Config>().appFlavor = Flavor.mock;
 
     locator<Config>().appName;
-    locator<Config>().getCountlyApiKey;
-    locator<Config>().getCountlyServerUrl;
     locator<Config>().getTCKHUrl;
     locator<Config>().getTCMMUrl;
     locator<Config>().getTCTHUrl;

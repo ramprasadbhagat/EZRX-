@@ -1,9 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
-import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
-import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/home/home_tab.dart';
 import 'package:flutter/material.dart';
 
@@ -18,45 +16,18 @@ class TileCard extends StatelessWidget {
     return GestureDetector(
       key: ValueKey(homePageTile.routeName),
       onTap: () {
-        String countlyTile;
         switch (homePageTile.routeName) {
-          case 'material_list_page':
-            countlyTile = 'Create Order';
-            break;
           case 'saved_order_list':
-            countlyTile = 'Saved Orders';
             trackMixpanelEvent(
               MixpanelEvents.savedOrder,
             );
             break;
           case 'order_template_list_page':
-            countlyTile = 'Order Template';
             trackMixpanelEvent(
               MixpanelEvents.createOrderFromTemplate,
             );
             break;
-          case 'returns_overview':
-            countlyTile = 'returns_overview';
-            break;
-          case 'request_return':
-            countlyTile = 'request_return';
-            break;
-          case 'approver_actions':
-            countlyTile = 'approver_actions';
-            break;
-          case 'return_summary':
-            countlyTile = 'return_summary';
-            break;
-          case 'user_restriction':
-            countlyTile = 'user_restriction';
-            break;
-          case 'policy_configuration':
-            countlyTile = 'policy_configuration';
-            break;
-          default:
-            countlyTile = '';
         }
-        locator<CountlyService>().addCountlyEvent(countlyTile);
         context.router.pushNamed(homePageTile.routeName);
       },
       child: Card(

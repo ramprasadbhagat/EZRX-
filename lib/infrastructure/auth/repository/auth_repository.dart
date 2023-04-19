@@ -15,7 +15,7 @@ import 'package:ezrxmobile/infrastructure/auth/datasource/auth_local.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/auth_remote.dart';
 import 'package:ezrxmobile/infrastructure/auth/dtos/cred_dto.dart';
 import 'package:ezrxmobile/infrastructure/auth/dtos/jwt_dto.dart';
-import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+
 import 'package:ezrxmobile/infrastructure/core/firebase/push_notification.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/cart_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/cred_storage.dart';
@@ -43,7 +43,7 @@ class AuthRepository implements IAuthRepository {
   final OktaLoginServices oktaLoginServices;
   final PushNotificationService pushNotificationService;
   final LocalAuthentication localAuthentication;
-  final CountlyService countlyService;
+  
   final MixpanelService mixpanelService;
 
   AuthRepository({
@@ -57,7 +57,7 @@ class AuthRepository implements IAuthRepository {
     required this.pushNotificationService,
     required this.localAuthentication,
     required this.accountSelectorStorage,
-    required this.countlyService,
+    
     required this.mixpanelService,
   });
 
@@ -87,7 +87,6 @@ class AuthRepository implements IAuthRepository {
         password: passwordStr,
         fcmToken: fcmToken,
       );
-      await countlyService.addCountlyEvent('Login Success');
       mixpanelService.trackEvent(
         eventName: MixpanelEvents.loginSuccess,
         properties: {
@@ -99,13 +98,6 @@ class AuthRepository implements IAuthRepository {
     } catch (e) {
       if (e.runtimeType == ServerException) {
         final serverExceptionObject = e as ServerException;
-
-        await countlyService.addCountlyEvent(
-          'Login Failed',
-          segmentation: {
-            'error_msg': serverExceptionObject.message,
-          },
-        );
         mixpanelService.trackEvent(
           eventName: MixpanelEvents.loginFailure,
           properties: {
@@ -415,7 +407,6 @@ class AuthRepository implements IAuthRepository {
       if (!isBioAvailable) {
         return const Left(ApiFailure.noSupportedBiometrics());
       }
-      await countlyService.addCountlyEvent('Biometric login');
 
       return const Right(true);
     } on PlatformException catch (e) {

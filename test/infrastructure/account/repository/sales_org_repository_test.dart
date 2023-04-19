@@ -8,7 +8,7 @@ import 'package:ezrxmobile/infrastructure/account/datasource/sales_org_local.dar
 import 'package:ezrxmobile/infrastructure/account/datasource/sales_org_remote.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/account_selector_storage_dto.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/sales_org_repository.dart';
-import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -23,13 +23,12 @@ class AccountSelectorStorageMock extends Mock
 
 class ConfigMock extends Mock implements Config {}
 
-class CountlyServiceMock extends Mock implements CountlyService {}
+
 
 void main() {
   late Config configMock;
   late String mockSalesOrgName;
   late SalesOrganisation mockSalesOrg;
-  late CountlyService countlyServiceMock;
   late SalesOrgRepository salesOrgRepository;
   late AccountSelectorStorage accountSelectorStorageMock;
   late SalesOrgLocalDataSource salesOrgLocalDataSourceMock;
@@ -39,7 +38,6 @@ void main() {
     TestWidgetsFlutterBinding.ensureInitialized();
 
     configMock = ConfigMock();
-    countlyServiceMock = CountlyServiceMock();
     accountSelectorStorageMock = AccountSelectorStorageMock();
     salesOrgLocalDataSourceMock = SalesOrgLocalDataSourceMock();
     salesOrgRemoteDataSourceMock = SalesOrgRemoteDataSourceMock();
@@ -52,7 +50,6 @@ void main() {
 
     salesOrgRepository = SalesOrgRepository(
       config: configMock,
-      countlyService: countlyServiceMock,
       localDataSource: salesOrgLocalDataSourceMock,
       remoteDataSource: salesOrgRemoteDataSourceMock,
       accountSelectorStorage: accountSelectorStorageMock,
@@ -101,17 +98,6 @@ void main() {
       when(() => configMock.appFlavor).thenReturn(Flavor.uat);
 
       when(
-        () => countlyServiceMock.addCountlyEvent(
-          'salesOrg_save',
-          segmentation: {
-            'salesOrg': mockSalesOrg.salesOrg.getOrCrash(),
-          },
-        ),
-      ).thenAnswer((invocation) async {
-        return;
-      });
-
-      when(
         () => salesOrgRemoteDataSourceMock.getConfig(
           salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
         ),
@@ -126,17 +112,6 @@ void main() {
     test('Get Sales Organisation Config from remote data source failed test',
         () async {
       when(() => configMock.appFlavor).thenReturn(Flavor.uat);
-
-      when(
-        () => countlyServiceMock.addCountlyEvent(
-          'salesOrg_save',
-          segmentation: {
-            'salesOrg': mockSalesOrg.salesOrg.getOrCrash(),
-          },
-        ),
-      ).thenAnswer((invocation) async {
-        return;
-      });
 
       when(
         () => salesOrgRemoteDataSourceMock.getConfig(

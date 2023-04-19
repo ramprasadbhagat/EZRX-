@@ -24,7 +24,7 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+
 import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
@@ -150,8 +150,6 @@ void main() {
       locator.registerLazySingleton(() => AppRouter());
       locator.registerLazySingleton(() => mockBannerBloc);
       locator.registerLazySingleton(() => eligibilityBlocMock);
-      locator.registerLazySingleton(
-          () => CountlyService(config: locator<Config>()));
       mockHTTPService = MockHTTPService();
       autoRouterMock = locator<AppRouter>();
       locator.registerLazySingleton<HttpService>(

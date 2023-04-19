@@ -16,10 +16,9 @@ import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
-import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
-import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/custom_label.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/quantity_input.dart';
@@ -141,8 +140,6 @@ class BundleItemDetailPage extends StatelessWidget {
                     return ElevatedButton(
                       key: const Key('addBundlesToCart'),
                       onPressed: () {
-                        locator<CountlyService>()
-                            .addCountlyEvent('Add bundles to cart');
                         _addToCartPressed(
                           context,
                           bundleAggregate.bundle,
@@ -275,30 +272,9 @@ class _ListContent extends StatelessWidget {
             quantityTextKey: Key(
               'bundleText${materialInfo.materialNumber.getOrDefaultValue('')}',
             ),
-            onFieldChange: (int value) {
-              locator<CountlyService>().addCountlyEvent(
-                'changed_quantity',
-                segmentation: {
-                  'materialNum': materialInfo.materialNumber.getOrCrash(),
-                },
-              );
-            },
-            minusPressed: (int value) {
-              locator<CountlyService>().addCountlyEvent(
-                'deduct_quantity',
-                segmentation: {
-                  'materialNum': materialInfo.materialNumber.getOrCrash(),
-                },
-              );
-            },
-            addPressed: (int value) {
-              locator<CountlyService>().addCountlyEvent(
-                'add_quantity',
-                segmentation: {
-                  'materialNum': materialInfo.materialNumber.getOrCrash(),
-                },
-              );
-            },
+            onFieldChange: (int value) {},
+            addPressed: (int value) {},
+            minusPressed: (int value) {},
             controller: controller,
             minimumQty: 0,
           ),

@@ -3,7 +3,7 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/favourites/entities/favourite_item.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+
 import 'package:ezrxmobile/infrastructure/favourites/datasource/favourite_remote.dart';
 import 'package:ezrxmobile/infrastructure/favourites/datasource/favourites_local.dart';
 import 'package:ezrxmobile/infrastructure/favourites/repository/favourite_repository.dart';
@@ -18,14 +18,14 @@ class FavoriteLocalDataSourceMock extends Mock
 class FavoriteRemoteDataSourceMock extends Mock
     implements FavouriteRemoteDataSource {}
 
-class CountlyServiceMock extends Mock implements CountlyService {}
+
 
 void main() {
   late FavouriteRepository favoriteRepo;
   late Config mockConfig;
   late FavouriteLocalDataSource favoriteLocalSource;
   late FavouriteRemoteDataSource favoriteRemoteSource;
-  late CountlyService countlyService;
+  
   //data
   final favoriteMockList = [
     Favourite.empty(),
@@ -40,12 +40,11 @@ void main() {
     mockConfig = MockConfig();
     favoriteLocalSource = FavoriteLocalDataSourceMock();
     favoriteRemoteSource = FavoriteRemoteDataSourceMock();
-    countlyService = CountlyServiceMock();
+    
     favoriteRepo = FavouriteRepository(
       config: mockConfig,
       localDataSource: favoriteLocalSource,
       remoteDataSource: favoriteRemoteSource,
-      countlyService: countlyService,
     );
   });
 
@@ -130,14 +129,6 @@ void main() {
           materialNumber: mockFavorite.materialNumber.getOrCrash(),
         ),
       ).thenAnswer((invocation) async => mockFavorite);
-      when(
-        () => countlyService.addCountlyEvent(
-          'Add to favourite',
-          segmentation: {
-            'materialNum': mockFavorite.materialNumber.getOrCrash()
-          },
-        ),
-      ).thenAnswer((invocation) => Future.value());
 
       final result = await favoriteRepo.addFavourites(
           isPackAndPick: false,
@@ -162,14 +153,6 @@ void main() {
           materialNumber: mockFavorite.materialNumber.getOrCrash(),
         ),
       ).thenAnswer((invocation) async => mockFavorite);
-      when(
-        () => countlyService.addCountlyEvent(
-          'Add to favourite',
-          segmentation: {
-            'materialNum': mockFavorite.materialNumber.getOrCrash()
-          },
-        ),
-      ).thenAnswer((invocation) => Future.value());
 
       final result = await favoriteRepo.addFavourites(
           isPackAndPick: true,
@@ -197,12 +180,6 @@ void main() {
           materialNumber: favorite.materialNumber.getOrCrash(),
         ),
       ).thenAnswer((invocation) async => favorite);
-      when(
-        () => countlyService.addCountlyEvent(
-          'Add to favourite',
-          segmentation: {'materialNum': favorite.materialNumber.getOrCrash()},
-        ),
-      ).thenAnswer((invocation) => Future.value());
 
       final result = await favoriteRepo.addFavourites(
           isPackAndPick: false,
@@ -259,12 +236,6 @@ void main() {
           itemId: mockFavorite.id,
         ),
       ).thenAnswer((invocation) async => mockFavorite);
-      when(
-        () => countlyService.addCountlyEvent(
-          'remove_favourite',
-          segmentation: {'materialNum': mockFavorite.id},
-        ),
-      ).thenAnswer((invocation) => Future.value());
 
       final result = await favoriteRepo.deleteFavourites(
         item: mockFavorite,

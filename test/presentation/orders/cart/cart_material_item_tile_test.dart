@@ -25,7 +25,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+
 
 import '../../../utils/widget_utils.dart';
 
@@ -52,7 +52,7 @@ class CustomerCodeBlocMock
 class ShipToBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState>
     implements ShipToCodeBloc {}
 
-class CountlyServiceMock extends Mock implements CountlyService {}
+
 
 class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
 
@@ -81,7 +81,7 @@ void main() {
   late EligibilityBloc eligibilityBloc;
   late CustomerCodeBloc customerCodeBloc;
   late ShipToCodeBloc shipToCodeBloc;
-  late CountlyService countlyService;
+  
   late CartBloc cartBloc;
   late MaterialPriceBloc materialPriceBloc;
   late Map<MaterialNumber, Price> mockPriceList;
@@ -95,8 +95,6 @@ void main() {
   // final mockRole = Role.empty();
 
   setUpAll(() {
-    countlyService = CountlyServiceMock();
-    locator.registerLazySingleton(() => countlyService);
     locator.registerFactory(() => AppRouter());
     autoRouter = locator<AppRouter>();
   });
@@ -224,17 +222,6 @@ void main() {
         ];
         whenListen(cartBloc, Stream.fromIterable(expectedStates));
 
-        when(() => countlyService.addCountlyEvent(
-              'changed_quantity',
-              segmentation: {
-                'materialNum': priceAggregates.first.getMaterialNumber
-                    .getOrDefaultValue(''),
-                'listPrice': priceAggregates.first.listPrice,
-                'price':
-                    priceAggregates.first.price.finalPrice.getOrDefaultValue(0),
-              },
-            )).thenAnswer((invocation) async => Future.value());
-
         await tester.pumpWidget(getWidget());
         await tester.pump();
 
@@ -268,34 +255,11 @@ void main() {
   //       ];
   //       whenListen(cartBloc, Stream.fromIterable(expectedStates));
 
-  //       when(() => countlyService.addCountlyEvent(
-  //             'changed_quantity',
-  //             segmentation: {
-  //               'materialNum': priceAggregates.first.getMaterialNumber
-  //                   .getOrDefaultValue(''),
-  //               'listPrice': priceAggregates.first.listPrice,
-  //               'price':
-  //                   priceAggregates.first.price.finalPrice.getOrDefaultValue(0),
-  //             },
-  //           )).thenAnswer((invocation) async => Future.value());
-
   //       await tester.pumpWidget(getWidget());
   //       await tester.pump();
   //       final quantityInput = find.byType(QuantityInput);
   //       expect(quantityInput, findsOneWidget);
   //       await tester.enterText(quantityInput.first, '12');
-  //       verify(
-  //         () => countlyService.addCountlyEvent(
-  //           'changed_quantity',
-  //           segmentation: {
-  //             'materialNum':
-  //                 priceAggregates.first.getMaterialNumber.getOrDefaultValue(''),
-  //             'listPrice': priceAggregates.first.listPrice,
-  //             'price':
-  //                 priceAggregates.first.price.finalPrice.getOrDefaultValue(0),
-  //           },
-  //         ),
-  //       ).called(1);
   //       verify(
   //         () => cartBloc.add(
   //           CartEvent.updateCartItem(
@@ -325,17 +289,6 @@ void main() {
   //       ];
   //       whenListen(cartBloc, Stream.fromIterable(expectedStates));
 
-  //       when(() => countlyService.addCountlyEvent(
-  //             'add_quantity',
-  //             segmentation: {
-  //               'materialNum': priceAggregates.first.getMaterialNumber
-  //                   .getOrDefaultValue(''),
-  //               'listPrice': priceAggregates.first.listPrice,
-  //               'price':
-  //                   priceAggregates.first.price.finalPrice.getOrDefaultValue(0),
-  //             },
-  //           )).thenAnswer((invocation) async => Future.value());
-
   //       await tester.pumpWidget(getWidget());
   //       await tester.pump();
   //       final quantityInput = find.byType(QuantityInput);
@@ -343,18 +296,6 @@ void main() {
   //       final cartAdd = find.byKey(const ValueKey('cartAdd'));
   //       expect(cartAdd, findsOneWidget);
   //       await tester.tap(cartAdd, warnIfMissed: false);
-  //       verify(
-  //         () => countlyService.addCountlyEvent(
-  //           'add_quantity',
-  //           segmentation: {
-  //             'materialNum':
-  //                 priceAggregates.first.getMaterialNumber.getOrDefaultValue(''),
-  //             'listPrice': priceAggregates.first.listPrice,
-  //             'price':
-  //                 priceAggregates.first.price.finalPrice.getOrDefaultValue(0),
-  //           },
-  //         ),
-  //       ).called(1);
   //       verify(
   //         () => cartBloc.add(
   //           CartEvent.addToCart(
@@ -373,16 +314,6 @@ void main() {
   //   testWidgets(
   //     'Cart item quntity decrement',
   //     (tester) async {
-  //       when(() => countlyService.addCountlyEvent(
-  //             'deduct_quantity',
-  //             segmentation: {
-  //               'materialNum': priceAggregates.first.getMaterialNumber
-  //                   .getOrDefaultValue(''),
-  //               'listPrice': priceAggregates.first.listPrice,
-  //               'price':
-  //                   priceAggregates.first.price.finalPrice.getOrDefaultValue(0),
-  //             },
-  //           )).thenAnswer((invocation) async => Future.value());
 
   //       await tester.pumpWidget(getWidget());
   //       await tester.pump();
@@ -390,18 +321,6 @@ void main() {
   //       expect(cartDelete, findsOneWidget);
   //       await tester.ensureVisible(cartDelete.first);
   //       await tester.tap(cartDelete.first);
-  //       verify(
-  //         () => countlyService.addCountlyEvent(
-  //           'deduct_quantity',
-  //           segmentation: {
-  //             'materialNum':
-  //                 priceAggregates.first.getMaterialNumber.getOrDefaultValue(''),
-  //             'listPrice': priceAggregates.first.listPrice,
-  //             'price':
-  //                 priceAggregates.first.price.finalPrice.getOrDefaultValue(0),
-  //           },
-  //         ),
-  //       ).called(1);
 
   //       verify(
   //         () => cartBloc.add(

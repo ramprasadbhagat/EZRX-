@@ -5,10 +5,9 @@ import 'package:ezrxmobile/application/order/order_template_list/order_template_
 import 'package:ezrxmobile/domain/order/entities/order_template.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
-import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
-import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_button.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
@@ -28,8 +27,6 @@ class OrderTemplateListPage extends StatelessWidget {
         MixpanelProps.pageViewName: runtimeType.toString(),
       },
     );
-    locator<CountlyService>()
-        .recordCountlyView('Manage Order Templates Screen');
 
     return Scaffold(
       key: const Key('OrderTemplateListPage'),

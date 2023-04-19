@@ -13,7 +13,7 @@ import 'package:ezrxmobile/domain/core/value/constants.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+
 import 'package:ezrxmobile/infrastructure/order/datasource/additional_bonus/bonus_material_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/additional_bonus/bonus_material_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/bonus_material_repository.dart';
@@ -28,7 +28,7 @@ class BonusMaterialLocalDataSourceMock extends Mock
 class BonusMaterialRemoteDataSourceMock extends Mock
     implements BonusMaterialRemoteDataSource {}
 
-class CountlyServiceMock extends Mock implements CountlyService {}
+
 
 void main() {
   late BonusMaterialRepository bonusMaterialRepository;

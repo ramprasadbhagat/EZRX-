@@ -13,7 +13,7 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/user_repository.dart';
-import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/bonus_material_repository.dart';
 import 'package:flutter/material.dart';
@@ -46,9 +46,6 @@ void main() {
     locator = GetIt.instance;
 
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
-    locator.registerLazySingleton(
-      () => locator<CountlyService>(),
-    );
     locator.registerLazySingleton<HttpService>(
       () => HttpService(
         config: locator<Config>(),

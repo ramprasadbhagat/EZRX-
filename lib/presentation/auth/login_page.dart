@@ -141,8 +141,6 @@ class _Logo extends StatelessWidget {
 //           onPressed: state.isSubmitting
 //               ? null
 //               : () {
-//                   locator<CountlyService>()
-//                       .addCountlyEvent('Okta Login Success');
 //                   FocusScope.of(context).unfocus();
 //                   context
 //                       .read<LoginFormBloc>()

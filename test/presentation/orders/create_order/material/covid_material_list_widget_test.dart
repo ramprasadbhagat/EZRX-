@@ -29,7 +29,7 @@ import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+
 import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -98,8 +98,6 @@ class ScanMaterialInfoBlocMock
 class RemoteConfigServiceMock extends Mock implements RemoteConfigService {}
 
 class MockConfig extends Mock implements Config {}
-
-class MockCountlyService extends Mock implements CountlyService {}
 
 class AddToCartStub {
   void addToCart() {
@@ -174,8 +172,6 @@ void main() {
     locator.registerLazySingleton(() => remoteConfigServiceMock);
     locator.registerLazySingleton(() => AppRouter());
     locator.registerLazySingleton(() => mockConfig);
-    locator
-        .registerLazySingleton(() => CountlyService(config: locator<Config>()));
     locator.registerLazySingleton(() => MixpanelService());
     locator<MixpanelService>().init(mixpanel: MixpanelMock());
   });

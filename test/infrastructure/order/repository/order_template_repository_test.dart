@@ -10,7 +10,7 @@ import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/order_template.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+
 import 'package:ezrxmobile/infrastructure/order/datasource/order_template_local_datasource.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_template_remote_datasource.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_item_dto.dart';
@@ -36,7 +36,7 @@ class OrderTemplateLocalDataSourceMock extends Mock
 class OrderTemplateRemoteDataSourceMock extends Mock
     implements OrderTemplateRemoteDataSource {}
 
-class CountlyServiceMock extends Mock implements CountlyService {}
+
 
 void main() {
   late OrderTemplateRepository orderTemplateRepository;
@@ -44,7 +44,6 @@ void main() {
   late OrderTemplateLocalDataSource orderTemplateLocalDataSource;
   late OrderTemplateRemoteDataSource orderTemplateRemoteDataSource;
   final mockUser = User.empty().copyWith(id: '1');
-  late CountlyService countlyServiceMock;
 
   final mockOrderTemplate = OrderTemplate(
     items: <MaterialItem>[],
@@ -98,7 +97,6 @@ void main() {
   final saveTemplateListMock = [tempObj];
 
   setUpAll(() async {
-    countlyServiceMock = CountlyServiceMock();
 
     mockConfig = MockConfig();
     orderTemplateLocalDataSource = OrderTemplateLocalDataSourceMock();
@@ -107,7 +105,6 @@ void main() {
     orderTemplateRepository = OrderTemplateRepository(
         config: mockConfig,
         orderTemplateLocalDataSource: orderTemplateLocalDataSource,
-        countlyService: countlyServiceMock, //CountlyServiceMock(),
         orderTemplateRemoteDataSource: orderTemplateRemoteDataSource);
   });
 
@@ -216,10 +213,6 @@ void main() {
         mockOrderTemplate,
       );
 
-      when(() => countlyServiceMock.addCountlyEvent(
-            'save_as_template',
-          )).thenAnswer((invocation) => Future.value());
-
       final result = await orderTemplateRepository.saveOrderTemplate(
         templateName: 'fake-saved-template',
         userID: '1',
@@ -260,10 +253,6 @@ void main() {
         assert(isItemPresent == false);
         return mockOrderTemplate;
       });
-
-      when(() => countlyServiceMock.addCountlyEvent(
-            'Delete template',
-          )).thenAnswer((invocation) => Future.value());
 
       final isItemPresent = <OrderTemplate>[].contains(tempObj);
       assert(isItemPresent == false);

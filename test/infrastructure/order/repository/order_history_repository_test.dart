@@ -11,7 +11,7 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_filter.dart';
-import 'package:ezrxmobile/infrastructure/core/countly/countly.dart';
+
 import 'package:ezrxmobile/infrastructure/order/datasource/order_history_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_history_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/order_history_repository.dart';
@@ -27,14 +27,14 @@ class OrderHistoryLocalDataSourceMock extends Mock
 class OrderHistoryRemoteDataSourceMock extends Mock
     implements OrderHistoryRemoteDataSource {}
 
-class CountlyServiceMock extends Mock implements CountlyService {}
+
 
 void main() {
   late OrderHistoryRepository orderHistoryRepository;
   late Config mockConfig;
   late OrderHistoryLocalDataSource orderHistoryLocalDataSource;
   late OrderHistoryRemoteDataSource orderHistoryRemoteDataSource;
-  late CountlyService countlyService;
+  
   final orderHistoryMockList = OrderHistory.empty();
 
   final mockUser = User.empty();
@@ -63,11 +63,10 @@ void main() {
     mockConfig = MockConfig();
     orderHistoryLocalDataSource = OrderHistoryLocalDataSourceMock();
     orderHistoryRemoteDataSource = OrderHistoryRemoteDataSourceMock();
-    countlyService = CountlyServiceMock();
+    
     orderHistoryRepository = OrderHistoryRepository(
       config: mockConfig,
       localDataSource: orderHistoryLocalDataSource,
-      countlyService: countlyService,
       orderHistoryRemoteDataSource: orderHistoryRemoteDataSource,
     );
   });
@@ -186,13 +185,6 @@ void main() {
           },
         ),
       ).thenAnswer((invocation) async => orderHistoryMockList);
-      when(() => countlyService.addCountlyEvent(
-            'order_history_filter',
-            segmentation: {
-              'isDateChanged':
-                  mockOrderHistoryFilter.toDate.isBefore(DateTime.now()),
-            },
-          )).thenAnswer((invocation) => Future.value());
       final result = await orderHistoryRepository.getOrderHistory(
           salesOrgConfig: mockSalesOrganisationConfigs.copyWith(
               languageValue: LanguageValue('E'), languageFilter: true),
@@ -277,14 +269,6 @@ void main() {
           companyName: '',
         ),
       ).thenAnswer((invocation) async => orderHistoryMockList);
-
-      when(() => countlyService.addCountlyEvent(
-            'order_history_filter',
-            segmentation: {
-              'isDateChanged':
-                  mockOrderHistoryFilter.toDate.isBefore(DateTime.now()),
-            },
-          )).thenAnswer((invocation) => Future.value());
 
       final result = await orderHistoryRepository.getOrderHistory(
           salesOrgConfig: mockSalesOrganisationConfigs,
