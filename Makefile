@@ -17,9 +17,9 @@ run_uat:
 run_prod:
 	@fvm flutter run --flavor prod -t lib/main_prod.dart
 build_ios_uat:
-	@flutter build ipa --flavor uat -t lib/main_stage.dart --release --export-options-plist=ios/config/uat/exportOptions.plist
+	@flutter build ipa --flavor uat -t lib/main_uat.dart --release --export-options-plist=ios/config/uat/exportOptions.plist
 build_android_uat:
-	@fvm flutter build appbundle --flavor uat -t lib/main_stage.dart --release
+	@fvm flutter build appbundle --flavor uat -t lib/main_uat.dart --release
 build_ios_prod:
 	@fvm flutter build ipa --flavor prod -t lib/main_prod.dart --release --export-options-plist=ios/config/prod/exportOptions.plist
 build_android_prod:
