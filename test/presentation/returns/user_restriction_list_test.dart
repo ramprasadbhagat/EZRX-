@@ -1,6 +1,8 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
+import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/returns/user_restriction/user_restriction_list_bloc.dart';
 import 'package:ezrxmobile/application/returns/user_restriction_details/user_restriction_details_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
@@ -29,6 +31,12 @@ class UserRestrictionDetailsBlocMock
 class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
     implements SalesOrgBloc {}
 
+class AnnouncementBlocMock
+    extends MockBloc<AnnouncementEvent, AnnouncementState>
+    implements AnnouncementBloc {}
+
+class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
@@ -39,6 +47,8 @@ void main() {
   late UserRestrictionDetailsBloc userRestrictiondetailsBlocMock;
   late List<String> mockUserNamesList;
   late UserRestrictionListBloc userRestrictionListBlocMock;
+  late AuthBloc authBlocMock;
+  late AnnouncementBloc announcementBlocMock;
 
   setUpAll(() async {
     setupLocator();
@@ -50,6 +60,8 @@ void main() {
     userRestrictiondetailsBlocMock = UserRestrictionDetailsBlocMock();
     autoRouterMock = locator<AppRouter>();
     userRestrictionListBlocMock = UserRestrictionListBlocMock();
+    authBlocMock = AuthBlocMock();
+    announcementBlocMock = AnnouncementBlocMock();
     mockUserNamesList = [
       'mockUser',
       'mockPerson',
@@ -58,6 +70,9 @@ void main() {
     ];
     when(() => userRestrictiondetailsBlocMock.state)
         .thenReturn(UserRestrictionDetailsState.initial());
+    when(() => authBlocMock.state).thenReturn(const AuthState.initial());
+    when(() => announcementBlocMock.state)
+        .thenReturn(AnnouncementState.initial());
   });
 
   Widget getScopedWidget(Widget child) {
@@ -70,6 +85,9 @@ void main() {
         BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBlocMock),
         BlocProvider<UserRestrictionDetailsBloc>(
             create: (context) => userRestrictiondetailsBlocMock),
+        BlocProvider<AuthBloc>(create: (context) => authBlocMock),
+        BlocProvider<AnnouncementBloc>(
+            create: (context) => announcementBlocMock),
       ],
       child: child,
     );

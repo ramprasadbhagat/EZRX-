@@ -6,6 +6,7 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
@@ -92,6 +93,10 @@ class CustomerCodeBlocMock
     extends MockBloc<CustomerCodeEvent, CustomerCodeState>
     implements CustomerCodeBloc {}
 
+class AnnouncementBlocMock
+    extends MockBloc<AnnouncementEvent, AnnouncementState>
+    implements AnnouncementBloc {}
+
 class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 
 class AddToCartBlocMock extends MockBloc<AddToCartEvent, AddToCartState>
@@ -128,8 +133,6 @@ class OrderSummaryBlocMock
     extends MockBloc<OrderSummaryEvent, OrderSummaryState>
     implements OrderSummaryBloc {}
 
-
-
 class AdditionalDetailsBlocMock
     extends MockBloc<AdditionalDetailsEvent, AdditionalDetailsState>
     implements AdditionalDetailsBloc {}
@@ -155,7 +158,8 @@ void main() {
   late List<PriceAggregate> mockCartItemWithDataListOverride;
   late Map<MaterialNumber, Price> mockPriceList;
   late OrderEligibilityBloc orderEligibilityBlocMock;
-  final AuthBloc authBlocMock = AuthBlocMock();
+  late AuthBloc authBlocMock;
+  late AnnouncementBloc announcementBlocMock;
   final AddToCartBloc addToCartBlocMock = AddToCartBlocMock();
   late PriceOverrideBloc priceOverrideBloc;
   late AppRouter autoRouter;
@@ -193,6 +197,8 @@ void main() {
       orderEligibilityBlocMock = OrderEligibilityBlocMock();
       priceOverrideBloc = PriceOverrideBlocMock();
       orderSummaryBlocMock = OrderSummaryBlocMock();
+      authBlocMock = AuthBlocMock();
+      announcementBlocMock = AnnouncementBlocMock();
 
       mockPriceList = {};
       mockPriceList.putIfAbsent(
@@ -548,6 +554,9 @@ void main() {
           .thenReturn(PriceOverrideState.initial());
       when(() => additionalDetailsBlocMock.state)
           .thenReturn(AdditionalDetailsState.initial());
+      when(() => announcementBlocMock.state)
+          .thenReturn(AnnouncementState.initial());
+      when(() => authBlocMock.state).thenReturn(const AuthState.initial());
     },
   );
   group(
@@ -583,6 +592,9 @@ void main() {
                 create: (context) => orderSummaryBlocMock),
             BlocProvider<AdditionalDetailsBloc>(
                 create: (context) => additionalDetailsBlocMock),
+            BlocProvider<AuthBloc>(create: (context) => authBlocMock),
+            BlocProvider<AnnouncementBloc>(
+                create: (context) => announcementBlocMock),
           ],
           child: const CartPage(),
         );
@@ -1471,7 +1483,6 @@ void main() {
       });
 
       testWidgets('cart order summary ', (tester) async {
-
         when(() => cartBloc.state).thenReturn(
           CartState.initial().copyWith(
             cartItems: [CartItem.material(mockCartItemWithDataList.first)],
@@ -1928,7 +1939,6 @@ void main() {
       });
 
       testWidgets('cart Item with no valid batch valid ', (tester) async {
-
         when(() => cartBloc.state).thenReturn(
           CartState.initial().copyWith(
             cartItems: [mockCartItemWithOutBatch],
@@ -1952,7 +1962,6 @@ void main() {
       });
 
       testWidgets('cart Item with valid batch valid ', (tester) async {
-
         when(() => cartBloc.state).thenReturn(
           CartState.initial().copyWith(
             cartItems: [mockCartItemWithBatch],

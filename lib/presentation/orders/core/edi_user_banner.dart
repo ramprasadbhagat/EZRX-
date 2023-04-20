@@ -13,27 +13,19 @@ class EdiUserBanner extends StatelessWidget {
           previous.customerCodeInfo.status != current.customerCodeInfo.status,
       builder: (context, state) {
         return state.customerCodeInfo.status.isEDI
-            ? SizedBox(
+            ? Container(
                 key: const Key('ediUserBanner'),
-                height: 38,
-                child: Container(
-                  decoration: const BoxDecoration(
-                    color: Colors.orange,
-                    shape: BoxShape.rectangle,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(0.0),
-                    ),
-                  ),
-                  child: Center(
-                    child: Text(
-                      'Orders for EDI Customers are disabled. Please place orders through EDI'
-                          .tr(),
-                      textAlign: TextAlign.center,
-                      key: const Key('ediCustomerOrderDisable'),
-                      style: const TextStyle(
-                          fontSize: 12, fontWeight: FontWeight.w600,),
-                    ),
-                  ),
+                height: 40,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: Colors.orange.withOpacity(0.8),
+                ),
+                child: Text(
+                  'Orders for EDI Customers are disabled. Please place orders through EDI'
+                      .tr(),
+                  textAlign: TextAlign.center,
+                  key: const Key('ediCustomerOrderDisable'),
+                  style: Theme.of(context).textTheme.titleSmall,
                 ),
               )
             : const SizedBox.shrink();

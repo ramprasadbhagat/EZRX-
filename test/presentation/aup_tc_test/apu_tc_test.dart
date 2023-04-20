@@ -30,7 +30,11 @@ import '../../utils/material_frame_wrapper.dart';
 import '../../utils/tester_utils.dart';
 import '../../utils/widget_utils.dart';
 
-class MockAuthBloc extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
+class AnnouncementBlocMock
+    extends MockBloc<AnnouncementEvent, AnnouncementState>
+    implements AnnouncementBloc {}
+
+class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 
 class MockAupTcBloc extends MockBloc<AupTcEvent, AupTcState>
     implements AupTcBloc {}
@@ -66,14 +70,11 @@ class OrderDocumentTypeMockBloc
     extends MockBloc<OrderDocumentTypeEvent, OrderDocumentTypeState>
     implements OrderDocumentTypeBloc {}
 
-class AnnouncementBlocMock
-    extends MockBloc<AnnouncementEvent, AnnouncementState>
-    implements AnnouncementBloc {}
-
 void main() {
   late GetIt locator;
   late SalesOrgBloc mockSalesOrgBloc;
-  late AuthBloc mockAuthBloc;
+  late AuthBloc authBlocMock;
+  late AnnouncementBloc announcementBlocMock;
   late AppRouter autoRouterMock;
   late MockAupTcBloc mockAupTcBloc;
   late UserBloc userBlocMock;
@@ -82,14 +83,14 @@ void main() {
   late EligibilityBloc eligibilityBlocMock;
   late ResetPasswordBloc resetPasswordBlocMock;
   late OrderDocumentTypeBloc orderDocumentTypeBlocMock;
-  late AnnouncementBloc announcementBlocMock;
 
   setUpAll(() async {
     setupLocator();
 
     TestWidgetsFlutterBinding.ensureInitialized();
     mockSalesOrgBloc = SalesOrgBlocMock();
-    mockAuthBloc = MockAuthBloc();
+    authBlocMock = AuthBlocMock();
+    announcementBlocMock = AnnouncementBlocMock();
     mockAupTcBloc = MockAupTcBloc();
     eligibilityBlocMock = EligibilityBlocMock();
     locator = GetIt.instance;
@@ -121,7 +122,7 @@ void main() {
     orderDocumentTypeBlocMock = OrderDocumentTypeMockBloc();
     announcementBlocMock = AnnouncementBlocMock();
     when(() => userBlocMock.state).thenReturn(UserState.initial());
-    when(() => mockAuthBloc.state).thenReturn(const AuthState.initial());
+
     when(() => cartBlocMock.state).thenReturn(CartState.initial());
     when(() => paymentCustomerInformationBlocMock.state)
         .thenReturn(PaymentCustomerInformationState.initial());
@@ -132,6 +133,7 @@ void main() {
     when(() => orderDocumentTypeBlocMock.state)
         .thenReturn(OrderDocumentTypeState.initial());
     when(() => mockSalesOrgBloc.state).thenReturn(SalesOrgState.initial());
+    when(() => authBlocMock.state).thenReturn(const AuthState.initial());
     when(() => announcementBlocMock.state)
         .thenReturn(AnnouncementState.initial());
   });
@@ -152,6 +154,9 @@ void main() {
               BlocProvider<AupTcBloc>(
                 create: (context) => mockAupTcBloc,
               ),
+              BlocProvider<AuthBloc>(create: (context) => authBlocMock),
+              BlocProvider<AnnouncementBloc>(
+                  create: (context) => announcementBlocMock),
             ],
             child: HomeNavigationTabbar(),
           ),
@@ -181,16 +186,11 @@ void main() {
     testWidgets(
         'Test - AupTc Widget Show AupTcBloc state.showTermsAndConditon=false',
         (tester) async {
-      final expectedStates = [
-        const AuthState.authenticated(),
-      ];
       when(() => mockAupTcBloc.state).thenReturn(
         AupTcState.initial().copyWith(
           showTermsAndConditon: false,
         ),
       );
-      whenListen(mockAuthBloc, Stream.fromIterable(expectedStates),
-          initialState: const AuthState.initial());
 
       await tester.pumpWidget(
         WidgetUtils.getScopedWidget(
@@ -200,7 +200,7 @@ void main() {
               create: (context) => mockSalesOrgBloc,
             ),
             BlocProvider<AuthBloc>(
-              create: (context) => mockAuthBloc,
+              create: (context) => authBlocMock,
             ),
             BlocProvider<AupTcBloc>(
               create: (context) => mockAupTcBloc,
@@ -232,7 +232,6 @@ void main() {
       );
       await tester.pump();
       final auptcscreen = find.byKey(const Key('auptcscreen'));
-      expect(autoRouterMock.current.name, HomeNavigationTabbarRoute.name);
       expect(auptcscreen, findsNothing);
     });
   });
@@ -247,6 +246,9 @@ void main() {
       MaterialFrameWrapper(
         child: MultiBlocProvider(
           providers: [
+            BlocProvider<AuthBloc>(create: (context) => authBlocMock),
+            BlocProvider<AnnouncementBloc>(
+                create: (context) => announcementBlocMock),
             BlocProvider<AupTcBloc>(
               create: (context) => mockAupTcBloc,
             ),
@@ -278,6 +280,9 @@ void main() {
       MaterialFrameWrapper(
         child: MultiBlocProvider(
           providers: [
+            BlocProvider<AuthBloc>(create: (context) => authBlocMock),
+            BlocProvider<AnnouncementBloc>(
+                create: (context) => announcementBlocMock),
             BlocProvider<AupTcBloc>(
               create: (context) => mockAupTcBloc,
             ),
@@ -307,9 +312,9 @@ void main() {
         isAutoRouteEnabled: true,
         autoRouterMock: autoRouterMock,
         providers: [
-          BlocProvider<AuthBloc>(
-            create: (context) => mockAuthBloc,
-          ),
+          BlocProvider<AuthBloc>(create: (context) => authBlocMock),
+          BlocProvider<AnnouncementBloc>(
+              create: (context) => announcementBlocMock),
           BlocProvider<AupTcBloc>(
             create: (context) => mockAupTcBloc,
           ),
@@ -352,9 +357,9 @@ void main() {
         isAutoRouteEnabled: true,
         autoRouterMock: autoRouterMock,
         providers: [
-          BlocProvider<AuthBloc>(
-            create: (context) => mockAuthBloc,
-          ),
+          BlocProvider<AuthBloc>(create: (context) => authBlocMock),
+          BlocProvider<AnnouncementBloc>(
+              create: (context) => announcementBlocMock),
           BlocProvider<AupTcBloc>(
             create: (context) => mockAupTcBloc,
           ),
@@ -374,9 +379,9 @@ void main() {
         isAutoRouteEnabled: true,
         autoRouterMock: autoRouterMock,
         providers: [
-          BlocProvider<AuthBloc>(
-            create: (context) => mockAuthBloc,
-          ),
+          BlocProvider<AuthBloc>(create: (context) => authBlocMock),
+          BlocProvider<AnnouncementBloc>(
+              create: (context) => announcementBlocMock),
           BlocProvider<AupTcBloc>(
             create: (context) => mockAupTcBloc,
           ),
@@ -399,9 +404,9 @@ void main() {
         isAutoRouteEnabled: true,
         autoRouterMock: autoRouterMock,
         providers: [
-          BlocProvider<AuthBloc>(
-            create: (context) => mockAuthBloc,
-          ),
+          BlocProvider<AuthBloc>(create: (context) => authBlocMock),
+          BlocProvider<AnnouncementBloc>(
+              create: (context) => announcementBlocMock),
           BlocProvider<AupTcBloc>(
             create: (context) => mockAupTcBloc,
           ),
@@ -421,9 +426,9 @@ void main() {
         isAutoRouteEnabled: true,
         autoRouterMock: autoRouterMock,
         providers: [
-          BlocProvider<AuthBloc>(
-            create: (context) => mockAuthBloc,
-          ),
+          BlocProvider<AuthBloc>(create: (context) => authBlocMock),
+          BlocProvider<AnnouncementBloc>(
+              create: (context) => announcementBlocMock),
           BlocProvider<AupTcBloc>(
             create: (context) => mockAupTcBloc,
           ),

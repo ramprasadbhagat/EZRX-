@@ -1,10 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/domain/announcement/entities/announcement.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
+import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/language_picker.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -29,108 +31,113 @@ class NotificationSettingsPage extends StatelessWidget {
           'Set Up Email Notifications'.tr(),
         ),
       ),
-      body: ListView(
-        children: ListTile.divideTiles(
-          color: Theme.of(context).iconTheme.color,
-          tiles: [
-            ListTile(
-              title: Text(
-                'Language Preferences'.tr(),
-                style: Theme.of(context).textTheme.titleMedium,
-              ),
-              subtitle: Text(
-                'Email will be sent in your language of choice'.tr(),
-                style: Theme.of(context)
-                    .textTheme
-                    .titleSmall
-                    ?.apply(color: ZPColors.lightGray),
-              ),
-              trailing: BlocBuilder<UserBloc, UserState>(
-                builder: (context, state) {
-                  return GestureDetector(
-                    key: const Key('gestureDetectorForLanguagePicker'),
-                    onTap: () => showPlatformDialog(
-                      context: context,
-                      barrierDismissible: true,
-                      builder: (_) => LanguagePicker(
-                        key: const Key(
-                          'notificationSettingsLanguagePicker',
-                        ),
-                        onPressed: (Locale locale) {
-                          context.read<UserBloc>().add(
-                                UserEvent.updateNotificationSettings(
-                                  languagePreference: locale.languageValue,
-                                  emailNotifications: state.emailNotifications,
-                                ),
-                              );
-                          context.router.pop();
-                        },
-                      ),
-                    ),
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 10,
-                        vertical: 5,
-                      ),
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: ZPColors.lightGray,
-                        ),
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            state.languagePreference.languageString,
+      body: AnnouncementBanner(
+        appModule: AppModule.core,
+        child: ListView(
+          children: ListTile.divideTiles(
+            color: Theme.of(context).iconTheme.color,
+            tiles: [
+              ListTile(
+                title: Text(
+                  'Language Preferences'.tr(),
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+                subtitle: Text(
+                  'Email will be sent in your language of choice'.tr(),
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleSmall
+                      ?.apply(color: ZPColors.lightGray),
+                ),
+                trailing: BlocBuilder<UserBloc, UserState>(
+                  builder: (context, state) {
+                    return GestureDetector(
+                      key: const Key('gestureDetectorForLanguagePicker'),
+                      onTap: () => showPlatformDialog(
+                        context: context,
+                        barrierDismissible: true,
+                        builder: (_) => LanguagePicker(
+                          key: const Key(
+                            'notificationSettingsLanguagePicker',
                           ),
-                          const Icon(
-                            Icons.arrow_drop_down_outlined,
-                          ),
-                        ],
+                          onPressed: (Locale locale) {
+                            context.read<UserBloc>().add(
+                                  UserEvent.updateNotificationSettings(
+                                    languagePreference: locale.languageValue,
+                                    emailNotifications:
+                                        state.emailNotifications,
+                                  ),
+                                );
+                            context.router.pop();
+                          },
+                        ),
                       ),
-                    ),
-                  );
-                },
-              ),
-            ),
-            ListTile(
-              title: Text(
-                'Order Summary Update'.tr(),
-                style: Theme.of(context).textTheme.titleMedium,
-              ),
-              subtitle: Text(
-                'Receive a notification of your order summary after placing an order on eZRx'
-                    .tr(),
-                style: Theme.of(context)
-                    .textTheme
-                    .titleSmall
-                    ?.apply(color: ZPColors.lightGray),
-              ),
-              trailing: BlocBuilder<UserBloc, UserState>(
-                buildWhen: (previous, current) =>
-                    (previous.emailNotifications !=
-                        current.emailNotifications) ||
-                    (previous.languagePreference != current.languagePreference),
-                builder: (context, state) {
-                  return PlatformSwitch(
-                    key: const Key('flutterSwitch'),
-                    activeColor: ZPColors.secondary,
-                    value: state.emailNotifications,
-                    onChanged: (bool value) {
-                      context.read<UserBloc>().add(
-                            UserEvent.updateNotificationSettings(
-                              languagePreference: state.languagePreference,
-                              emailNotifications: value,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 5,
+                        ),
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: ZPColors.lightGray,
+                          ),
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              state.languagePreference.languageString,
                             ),
-                          );
-                    },
-                  );
-                },
+                            const Icon(
+                              Icons.arrow_drop_down_outlined,
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
               ),
-            ),
-          ],
-        ).toList(),
+              ListTile(
+                title: Text(
+                  'Order Summary Update'.tr(),
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+                subtitle: Text(
+                  'Receive a notification of your order summary after placing an order on eZRx'
+                      .tr(),
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleSmall
+                      ?.apply(color: ZPColors.lightGray),
+                ),
+                trailing: BlocBuilder<UserBloc, UserState>(
+                  buildWhen: (previous, current) =>
+                      (previous.emailNotifications !=
+                          current.emailNotifications) ||
+                      (previous.languagePreference !=
+                          current.languagePreference),
+                  builder: (context, state) {
+                    return PlatformSwitch(
+                      key: const Key('flutterSwitch'),
+                      activeColor: ZPColors.secondary,
+                      value: state.emailNotifications,
+                      onChanged: (bool value) {
+                        context.read<UserBloc>().add(
+                              UserEvent.updateNotificationSettings(
+                                languagePreference: state.languagePreference,
+                                emailNotifications: value,
+                              ),
+                            );
+                      },
+                    );
+                  },
+                ),
+              ),
+            ],
+          ).toList(),
+        ),
       ),
     );
   }

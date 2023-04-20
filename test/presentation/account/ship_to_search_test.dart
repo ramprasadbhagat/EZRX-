@@ -2,6 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
+import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
+import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
@@ -33,6 +35,12 @@ class ShipToCodeBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState>
 
 class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
 
+class AnnouncementBlocMock
+    extends MockBloc<AnnouncementEvent, AnnouncementState>
+    implements AnnouncementBloc {}
+
+class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
+
 class AutoRouterMock extends Mock implements AppRouter {}
 
 enum CustomerCodeVariant { onn, off }
@@ -51,6 +59,8 @@ void main() {
   late CustomerCodeBlocMock customerCodeBlocMock;
   late ShipToCodeBlocMock shipToCodeBlocMock;
   late AppRouter autoRouterMock;
+  late AuthBloc authBlocMock;
+  late AnnouncementBloc announcementBlocMock;
   late CartBloc cartBlocMock;
   final fakeMaterialNumber = MaterialNumber('000000000023168451');
 
@@ -80,7 +90,6 @@ void main() {
     isFOCMaterial: false,
     remarks: '',
     genericMaterialName: '',
-
   );
   setUpAll(() {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
@@ -95,11 +104,16 @@ void main() {
       shipToCodeBlocMock = ShipToCodeBlocMock();
       autoRouterMock = locator<AppRouter>();
       cartBlocMock = CartBlocMock();
+      authBlocMock = AuthBlocMock();
+      announcementBlocMock = AnnouncementBlocMock();
       when(() => customerCodeBlocMock.state)
           .thenReturn(CustomerCodeState.initial());
       when(() => shipToCodeBlocMock.state)
           .thenReturn(ShipToCodeState.initial());
       when(() => cartBlocMock.state).thenReturn(CartState.initial());
+      when(() => authBlocMock.state).thenReturn(const AuthState.initial());
+      when(() => announcementBlocMock.state)
+          .thenReturn(AnnouncementState.initial());
     });
 
     StackRouterScope getScopedWidget() {
@@ -110,6 +124,9 @@ void main() {
               create: (context) => customerCodeBlocMock),
           BlocProvider<ShipToCodeBloc>(create: (context) => shipToCodeBlocMock),
           BlocProvider<CartBloc>(create: (context) => cartBlocMock),
+          BlocProvider<AuthBloc>(create: (context) => authBlocMock),
+          BlocProvider<AnnouncementBloc>(
+              create: (context) => announcementBlocMock),
         ],
         child: const ShiptToSearchPage(),
       );

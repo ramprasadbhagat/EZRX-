@@ -3,11 +3,13 @@ import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_bloc.dart';
+import 'package:ezrxmobile/domain/announcement/entities/announcement.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
+import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/cart_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
@@ -131,114 +133,117 @@ class _BonusAddPageState extends State<BonusAddPage> {
           ),
         ),
       ),
-      body: BlocBuilder<BonusMaterialBloc, BonusMaterialState>(
-        buildWhen: (previous, current) =>
-            previous.isFetching != current.isFetching ||
-            previous.isStarting != current.isStarting,
-        builder: (context, state) {
-          return state.isStarting
-              ? Container(
-                  key: const Key('empty'),
-                )
-              : state.isFetching
-                  ? LoadingShimmer.logo(key: const Key('loaderImage'))
-                  : ScrollList<MaterialInfo>(
-                      emptyMessage: 'No materials found'.tr(),
-                      // onRefresh: () {
-                      // context.read<BonusMaterialBloc>().add(
-                      //       const BonusMaterialEvent.reset(),
-                      //     );
-                      // },
-                      isLoading: state.isFetching,
-                      itemBuilder: (context, i, item) => Card(
-                        child: Padding(
-                          key: const Key('bonusItemList'),
-                          padding: const EdgeInsets.all(10),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                flex: 5,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(left: 5),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      Text(
-                                        state.bonus[i].materialNumber
-                                            .displayMatNo,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .titleSmall
-                                            ?.apply(
-                                              color: ZPColors.kPrimaryColor,
-                                            ),
-                                      ),
-                                      Text(
-                                        state.bonus[i].materialDescription,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .titleSmall,
-                                      ),
-                                      Text(
-                                        state.bonus[i].principalData
-                                            .principalName
-                                            .getOrDefaultValue(''),
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .titleSmall
-                                            ?.apply(
-                                              color: ZPColors.lightGray,
-                                            ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Expanded(
-                                flex: 1,
-                                child: GestureDetector(
-                                  key: const Key('addItem'),
-                                  onTap: () {
-                                    CartBottomSheet
-                                        .showUpdateCartBonusBottomSheet(
-                                      context: context,
-                                      cartItem: widget.cartItem,
-                                      item: state.bonus[i],
-                                      isUpdateFromCart: false,
-                                    );
-                                  },
-                                  child: Container(
-                                    width: 50.0,
-                                    height: 23.0,
-                                    alignment: Alignment.center,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(18.0),
-                                      gradient: const LinearGradient(
-                                        colors: [
-                                          ZPColors.kPrimaryColor,
-                                          ZPColors.gradient,
-                                        ],
-                                      ),
-                                    ),
-                                    child: Text(
-                                      'ADD'.tr(),
-                                      style: const TextStyle(
-                                        fontSize: 10,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                      ),
+      body: AnnouncementBanner(
+        appModule: AppModule.orders,
+        child: BlocBuilder<BonusMaterialBloc, BonusMaterialState>(
+          buildWhen: (previous, current) =>
+              previous.isFetching != current.isFetching ||
+              previous.isStarting != current.isStarting,
+          builder: (context, state) {
+            return state.isStarting
+                ? Container(
+                    key: const Key('empty'),
+                  )
+                : state.isFetching
+                    ? LoadingShimmer.logo(key: const Key('loaderImage'))
+                    : ScrollList<MaterialInfo>(
+                        emptyMessage: 'No materials found'.tr(),
+                        // onRefresh: () {
+                        // context.read<BonusMaterialBloc>().add(
+                        //       const BonusMaterialEvent.reset(),
+                        //     );
+                        // },
+                        isLoading: state.isFetching,
+                        itemBuilder: (context, i, item) => Card(
+                          child: Padding(
+                            key: const Key('bonusItemList'),
+                            padding: const EdgeInsets.all(10),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  flex: 5,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left: 5),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        Text(
+                                          state.bonus[i].materialNumber
+                                              .displayMatNo,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .titleSmall
+                                              ?.apply(
+                                                color: ZPColors.kPrimaryColor,
+                                              ),
+                                        ),
+                                        Text(
+                                          state.bonus[i].materialDescription,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .titleSmall,
+                                        ),
+                                        Text(
+                                          state.bonus[i].principalData
+                                              .principalName
+                                              .getOrDefaultValue(''),
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .titleSmall
+                                              ?.apply(
+                                                color: ZPColors.lightGray,
+                                              ),
+                                        ),
+                                      ],
                                     ),
                                   ),
                                 ),
-                              ),
-                            ],
+                                Expanded(
+                                  flex: 1,
+                                  child: GestureDetector(
+                                    key: const Key('addItem'),
+                                    onTap: () {
+                                      CartBottomSheet
+                                          .showUpdateCartBonusBottomSheet(
+                                        context: context,
+                                        cartItem: widget.cartItem,
+                                        item: state.bonus[i],
+                                        isUpdateFromCart: false,
+                                      );
+                                    },
+                                    child: Container(
+                                      width: 50.0,
+                                      height: 23.0,
+                                      alignment: Alignment.center,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(18.0),
+                                        gradient: const LinearGradient(
+                                          colors: [
+                                            ZPColors.kPrimaryColor,
+                                            ZPColors.gradient,
+                                          ],
+                                        ),
+                                      ),
+                                      child: Text(
+                                        'ADD'.tr(),
+                                        style: const TextStyle(
+                                          fontSize: 10,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                      items: state.bonus,
-                    );
-        },
+                        items: state.bonus,
+                      );
+          },
+        ),
       ),
     );
   }

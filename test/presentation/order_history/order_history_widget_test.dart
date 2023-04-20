@@ -7,6 +7,8 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
+import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_details/order_history_details_bloc.dart';
@@ -39,7 +41,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
-import '../../utils/multi_bloc_provider_frame_wrapper.dart';
 import '../../utils/widget_utils.dart';
 import '../orders/create_order/material_bundle/material_bundle_list_test.dart';
 import 'order_history_details_widget_test.dart';
@@ -84,6 +85,12 @@ class OrderHistoryDetailsBlocMock
     extends MockBloc<OrderHistoryDetailsEvent, OrderHistoryDetailsState>
     implements OrderHistoryDetailsBloc {}
 
+class AnnouncementBlocMock
+    extends MockBloc<AnnouncementEvent, AnnouncementState>
+    implements AnnouncementBloc {}
+
+class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late GetIt locator;
@@ -94,6 +101,8 @@ void main() {
   late CartBloc mockCartBloc;
   late SalesOrgBloc mockSalesOrgBloc;
   late UserBloc userBlocMock;
+  late AuthBloc authBlocMock;
+  late AnnouncementBloc announcementBlocMock;
   late CustomerCodeBloc customerCodeBlocMock;
 
   late AppRouter autoRouterMock;
@@ -136,6 +145,8 @@ void main() {
         mockCartBloc = CartMocBloc();
         mockSalesOrgBloc = SalesOrgMockBloc();
         userBlocMock = UserBlocMock();
+        authBlocMock = AuthBlocMock();
+        announcementBlocMock = AnnouncementBlocMock();
         when(() => userBlocMock.state).thenReturn(UserState.initial());
         when(() => mockOrderHistoryListBloc.state)
             .thenReturn(OrderHistoryListState.initial());
@@ -153,6 +164,11 @@ void main() {
             .thenReturn(EligibilityState.initial());
         when(() => mockMaterialPriceDetailBloc.state)
             .thenReturn(MaterialPriceDetailState.initial());
+        when(() => authBlocMock.state).thenReturn(const AuthState.initial());
+        when(() => announcementBlocMock.state)
+            .thenReturn(AnnouncementState.initial());
+        when(() => mockOrderHistoryDetailsBloc.state)
+            .thenReturn(OrderHistoryDetailsState.initial());
       });
       Widget getWUT() {
         return EasyLocalization(
@@ -185,6 +201,11 @@ void main() {
                   create: (context) => eligibilityBlocMock),
               BlocProvider<MaterialPriceDetailBloc>(
                   create: (context) => mockMaterialPriceDetailBloc),
+              BlocProvider<AuthBloc>(create: (context) => authBlocMock),
+              BlocProvider<AnnouncementBloc>(
+                  create: (context) => announcementBlocMock),
+              BlocProvider<OrderHistoryDetailsBloc>(
+                  create: (context) => mockOrderHistoryDetailsBloc),
             ],
             child: Material(child: HistoryTab()),
           ),
@@ -589,19 +610,7 @@ void main() {
           ),
         );
 
-        await tester.pumpWidget(
-          MultiBlocProviderFrameWrapper(
-            providers: [
-              BlocProvider<MaterialPriceDetailBloc>(
-                create: (context) => mockMaterialPriceDetailBloc,
-              ),
-              BlocProvider<OrderHistoryDetailsBloc>(
-                create: (context) => mockOrderHistoryDetailsBloc,
-              ),
-            ],
-            child: getWUT(),
-          ),
-        );
+        await tester.pumpWidget(getWUT());
 
         await tester.pump();
 

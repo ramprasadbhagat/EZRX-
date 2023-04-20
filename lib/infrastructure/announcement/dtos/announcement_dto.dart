@@ -80,10 +80,11 @@ class _ModuleNameConverter extends JsonConverter<List<String>, String> {
 
   @override
   List<String> fromJson(String json) {
+    if (json.isEmpty) return [];
     final list = jsonDecode(
       json.replaceAll('\\"', '"'),
     );
-    
+
     return List.from(list);
   }
 

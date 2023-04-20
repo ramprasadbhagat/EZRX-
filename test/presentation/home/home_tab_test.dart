@@ -6,6 +6,7 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
@@ -80,6 +81,10 @@ class ShipToCodeBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState>
 class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
     implements EligibilityBloc {}
 
+class AnnouncementBlocMock
+    extends MockBloc<AnnouncementEvent, AnnouncementState>
+    implements AnnouncementBloc {}
+
 class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 
 class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
@@ -103,7 +108,8 @@ void main() {
   late CartBlocMock cartBlocMock;
   late BannerBlocMock mockBannerBloc;
   late ShipToCodeBlocMock shipToCodeBlocMock;
-  late AuthBlocMock authBlocMock;
+  late AuthBloc authBlocMock;
+  late AnnouncementBloc announcementBlocMock;
   late UserBlocMock userBlocMock;
   late HttpService mockHTTPService;
   late AppRouter autoRouterMock;
@@ -169,6 +175,7 @@ void main() {
         eligibilityBlocMock = EligibilityBlocMock();
         shipToCodeBlocMock = ShipToCodeBlocMock();
         authBlocMock = AuthBlocMock();
+        announcementBlocMock = AnnouncementBlocMock();
         userBlocMock = UserBlocMock();
         cartBlocMock = CartBlocMock();
         mockHTTPService = MockHTTPService();
@@ -201,6 +208,9 @@ void main() {
           ),
         );
         when(() => remoteConfigServiceMock.getReturnsConfig()).thenReturn(true);
+        when(() => authBlocMock.state).thenReturn(const AuthState.initial());
+        when(() => announcementBlocMock.state)
+            .thenReturn(AnnouncementState.initial());
       });
 
       Future getWidget(tester) async {
@@ -236,6 +246,9 @@ void main() {
                     create: (context) => shipToCodeBlocMock),
                 BlocProvider<AuthBloc>(create: (context) => authBlocMock),
                 BlocProvider<UserBloc>(create: (context) => userBlocMock),
+                BlocProvider<AuthBloc>(create: (context) => authBlocMock),
+                BlocProvider<AnnouncementBloc>(
+                    create: (context) => announcementBlocMock),
               ],
               child: const HomeTab(),
             ),
@@ -295,8 +308,8 @@ void main() {
             find.byKey(const ValueKey('homeSalesOrgSelector')), findsOneWidget);
         final ediUserBanner = find.byKey(const ValueKey('ediUserBanner'));
         final returnsExpansionTile = find.byType(ReturnsExpansionTile);
-        if(remoteConfigServiceMock.getReturnsConfig()){
-           expect(returnsExpansionTile, findsOneWidget);
+        if (remoteConfigServiceMock.getReturnsConfig()) {
+          expect(returnsExpansionTile, findsOneWidget);
         }
         expect(ediUserBanner, findsOneWidget);
         expect(find.byKey(const ValueKey('homeCustomerCodeSelector')),

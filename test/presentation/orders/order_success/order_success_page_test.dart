@@ -2,6 +2,8 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
+import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
+import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 
 import 'package:ezrxmobile/locator.dart';
@@ -26,11 +28,19 @@ class CustomerCodeBlocMock
     extends MockBloc<CustomerCodeEvent, CustomerCodeState>
     implements CustomerCodeBloc {}
 
+class AnnouncementBlocMock
+    extends MockBloc<AnnouncementEvent, AnnouncementState>
+    implements AnnouncementBloc {}
+
+class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
+
 void main() {
   late AppRouter autoRouterMock;
   late SalesOrgBloc mockSalesOrgBloc;
   late CustomerCodeBloc customerCodeBlocMock;
   late ShipToCodeBloc shipToCodeBlocMock;
+  late AuthBloc authBlocMock;
+  late AnnouncementBloc announcementBlocMock;
   setUpAll(
     () {
       locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
@@ -44,12 +54,17 @@ void main() {
       mockSalesOrgBloc = MockSalesOrgBloc();
       customerCodeBlocMock = CustomerCodeBlocMock();
       shipToCodeBlocMock = ShipToCodeBlocMock();
+      authBlocMock = AuthBlocMock();
+      announcementBlocMock = AnnouncementBlocMock();
 
       when(() => mockSalesOrgBloc.state).thenReturn(SalesOrgState.initial());
       when(() => customerCodeBlocMock.state)
           .thenReturn(CustomerCodeState.initial());
       when(() => shipToCodeBlocMock.state)
           .thenReturn(ShipToCodeState.initial());
+      when(() => authBlocMock.state).thenReturn(const AuthState.initial());
+      when(() => announcementBlocMock.state)
+          .thenReturn(AnnouncementState.initial());
     },
   );
   group(
@@ -65,6 +80,9 @@ void main() {
                 create: (context) => customerCodeBlocMock),
             BlocProvider<ShipToCodeBloc>(
                 create: (context) => shipToCodeBlocMock),
+            BlocProvider<AuthBloc>(create: (context) => authBlocMock),
+            BlocProvider<AnnouncementBloc>(
+                create: (context) => announcementBlocMock),
           ],
         );
       }

@@ -6,6 +6,8 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
+import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
@@ -68,6 +70,12 @@ class MockSalesOrgBloc extends MockBloc<SalesOrgEvent, SalesOrgState>
 class ShipToCodeBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState>
     implements ShipToCodeBloc {}
 
+class AnnouncementBlocMock
+    extends MockBloc<AnnouncementEvent, AnnouncementState>
+    implements AnnouncementBloc {}
+
+class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
+
 void main() {
   late BonusMaterialBloc bonusMaterialBloc;
   late List<MaterialInfo> mockbonusItemWithDataList;
@@ -79,6 +87,8 @@ void main() {
   late UserBloc userBlocMock;
   late CustomerCodeBloc customerCodeBlocMock;
   late ShipToCodeBloc shipToCodeBlocMock;
+  late AuthBloc authBlocMock;
+  late AnnouncementBloc announcementBlocMock;
 
   setUpAll(() {
     locator.registerLazySingleton(() => MixpanelService());
@@ -96,6 +106,8 @@ void main() {
       userBlocMock = UserBlocMock();
       customerCodeBlocMock = CustomerCodeBlocMock();
       shipToCodeBlocMock = ShipToCodeBlocMock();
+      authBlocMock = AuthBlocMock();
+      announcementBlocMock = AnnouncementBlocMock();
 
       cartItem = PriceAggregate.empty().copyWith(
         quantity: 2,
@@ -132,6 +144,9 @@ void main() {
           .thenReturn(CustomerCodeState.initial());
       when(() => shipToCodeBlocMock.state)
           .thenReturn(ShipToCodeState.initial());
+      when(() => authBlocMock.state).thenReturn(const AuthState.initial());
+      when(() => announcementBlocMock.state)
+          .thenReturn(AnnouncementState.initial());
     },
   );
   group('Test Add_Bonus', () {
@@ -173,6 +188,9 @@ void main() {
           BlocProvider<SalesOrgBloc>(
             create: (context) => salesOrgBlocMock,
           ),
+          BlocProvider<AuthBloc>(create: (context) => authBlocMock),
+          BlocProvider<AnnouncementBloc>(
+              create: (context) => announcementBlocMock),
         ],
         child: BonusAddPage(
           cartItem: CartItem.material(cartItem),

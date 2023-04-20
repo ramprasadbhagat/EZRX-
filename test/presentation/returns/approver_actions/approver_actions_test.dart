@@ -5,6 +5,8 @@ import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
+import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
+import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
 import 'package:ezrxmobile/config.dart';
@@ -55,6 +57,12 @@ class CustomerCodeMockBloc
     extends MockBloc<CustomerCodeEvent, CustomerCodeState>
     implements CustomerCodeBloc {}
 
+class AnnouncementBlocMock
+    extends MockBloc<AnnouncementEvent, AnnouncementState>
+    implements AnnouncementBloc {}
+
+class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
+
 void main() {
   late AppRouter autoRouterMock;
   late CustomerCodeBloc customerCodeBlocMock;
@@ -66,6 +74,8 @@ void main() {
   late SalesOrgBloc salesOrgBlocMock;
   late EligibilityBloc eligibilityBlocMock;
   late ReturnApproverFilter returnApproverFilter;
+  late AuthBloc authBlocMock;
+  late AnnouncementBloc announcementBlocMock;
   final fakeToDate = DateTime.parse(
     DateFormat('yyyyMMdd').format(
       DateTime.now(),
@@ -100,6 +110,8 @@ void main() {
       shipToCodeBlocMock = ShipToCodeBlocMock();
       salesOrgBlocMock = SalesOrgBlocMock();
       eligibilityBlocMock = EligibilityBlocMock();
+      authBlocMock = AuthBlocMock();
+      announcementBlocMock = AnnouncementBlocMock();
 
       customerCodeBlocMock = CustomerCodeMockBloc();
       returnApproverFilter = ReturnApproverFilter.empty().copyWith(
@@ -123,6 +135,9 @@ void main() {
           .thenReturn(EligibilityState.initial());
       when(() => customerCodeBlocMock.state)
           .thenReturn(CustomerCodeState.initial());
+      when(() => authBlocMock.state).thenReturn(const AuthState.initial());
+      when(() => announcementBlocMock.state)
+          .thenReturn(AnnouncementState.initial());
     },
   );
   group('Test Action Approver Page', () {
@@ -147,6 +162,9 @@ void main() {
           BlocProvider<CustomerCodeBloc>(
             create: (context) => customerCodeBlocMock,
           ),
+          BlocProvider<AuthBloc>(create: (context) => authBlocMock),
+          BlocProvider<AnnouncementBloc>(
+              create: (context) => announcementBlocMock),
         ],
         child: ApproverActions(),
       );

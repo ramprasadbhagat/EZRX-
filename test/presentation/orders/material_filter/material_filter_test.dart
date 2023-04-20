@@ -7,6 +7,8 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
+import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
@@ -54,6 +56,12 @@ class MockOrderDocumentTypeBloc
     extends MockBloc<OrderDocumentTypeEvent, OrderDocumentTypeState>
     implements OrderDocumentTypeBloc {}
 
+class AnnouncementBlocMock
+    extends MockBloc<AnnouncementEvent, AnnouncementState>
+    implements AnnouncementBloc {}
+
+class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late MaterialFilterBloc materialfilterBlocMock;
@@ -65,6 +73,8 @@ void main() {
   late MockShipToCodeBloc shipToCodeBloc;
   late MockUserBloc userBloc;
   late MockOrderDocumentTypeBloc orderDocumentTypeBloc;
+  late AuthBloc authBlocMock;
+  late AnnouncementBloc announcementBlocMock;
 
   setUpAll(() async {
     setupLocator();
@@ -82,6 +92,8 @@ void main() {
       eligibilityBloc = MockEligibilityBloc();
       customerCodeBloc = MockCustomerCodeBloc();
       orderDocumentTypeBloc = MockOrderDocumentTypeBloc();
+      authBlocMock = AuthBlocMock();
+      announcementBlocMock = AnnouncementBlocMock();
 
       when(() => materialfilterBlocMock.state)
           .thenReturn(MaterialFilterState.initial());
@@ -95,6 +107,9 @@ void main() {
           .thenReturn(CustomerCodeState.initial());
       when(() => orderDocumentTypeBloc.state)
           .thenReturn(OrderDocumentTypeState.initial());
+      when(() => authBlocMock.state).thenReturn(const AuthState.initial());
+      when(() => announcementBlocMock.state)
+          .thenReturn(AnnouncementState.initial());
     });
 
     Widget getScopedWidget(Widget child) {
@@ -124,6 +139,9 @@ void main() {
                 create: ((context) => eligibilityBloc)),
             BlocProvider<OrderDocumentTypeBloc>(
                 create: ((context) => orderDocumentTypeBloc)),
+            BlocProvider<AuthBloc>(create: (context) => authBlocMock),
+            BlocProvider<AnnouncementBloc>(
+                create: (context) => announcementBlocMock),
           ],
           child: child,
         ),

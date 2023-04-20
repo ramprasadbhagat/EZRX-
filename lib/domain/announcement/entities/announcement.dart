@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/announcement/value/value_objects.dart';
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'announcement.freezed.dart';
@@ -39,22 +38,20 @@ class Announcement with _$Announcement {
         isCrossButton: false,
       );
 
-  bool isValidScreenToDisplay({
-    required String screenName,
+  bool isValidModuleToDisplay({
+    required AppModule module,
   }) {
-    //TODO: This is currently unused, will refactor this code when implement module specific feature for announcement
-    if (screenName == HomeNavigationTabbarRoute.name ||
-        screenName == HomeTabRoute.name) return true;
+    if (module == AppModule.home || !isModuleSpecific) return true;
 
-    return moduleName.any((module) {
-      if (module.isReturn) {
-        return screenName.startsWith('Return');
+    return moduleName.any((moduleName) {
+      if (moduleName.isReturn) {
+        return module == AppModule.returns;
       }
-      if (module.isPayment) {
-        return false;
+      if (moduleName.isPayment) {
+        return module == AppModule.payments;
       }
-      if (module.isOrder) {
-        return screenName.startsWith('Order');
+      if (moduleName.isOrder) {
+        return module == AppModule.orders;
       }
 
       return false;
@@ -117,4 +114,12 @@ class AnnouncementMessage with _$AnnouncementMessage {
         language: '',
         announcement: '',
       );
+}
+
+enum AppModule {
+  core,
+  home,
+  orders,
+  returns,
+  payments,
 }

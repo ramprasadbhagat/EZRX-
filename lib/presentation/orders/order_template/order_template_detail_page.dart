@@ -5,6 +5,7 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_list_bloc.dart';
+import 'package:ezrxmobile/domain/announcement/entities/announcement.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item.dart';
@@ -15,6 +16,7 @@ import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
+import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/dialogs/custom_dialogs.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_action_button.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_bundle_item.dart';
@@ -93,146 +95,152 @@ class _OrderTemplateDetailPageState extends State<OrderTemplateDetailPage> {
                 ),
               );
         },
-        child: CustomScrollView(
-          slivers: [
-            BlocBuilder<MaterialPriceDetailBloc, MaterialPriceDetailState>(
-              buildWhen: (previous, current) =>
-                  previous.isValidating != current.isValidating,
-              builder: (context, state) {
-                final isInvalidOrder = widget.order.allMaterialQueryInfo.every(
-                  (item) => !state.isValidMaterial(
-                    query: item,
-                  ),
-                );
-
-                return SliverAppBar(
-                  pinned: true,
-                  toolbarHeight:
-                      !state.isValidating && isInvalidOrder ? 50.0 : 0,
-                  automaticallyImplyLeading: false,
-                  flexibleSpace: FlexibleSpaceBar.createSettings(
-                    currentExtent: double.infinity,
-                    minExtent: 0,
-                    maxExtent: double.infinity,
-                    child: OrderInvalidWarning(
-                      key: const Key('invalidWarningMessage'),
-                      isLoading: state.isValidating,
-                      isInvalidOrder: isInvalidOrder,
-                    ),
-                  ),
-                );
-              },
-            ),
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (context, index) {
-                  var material = widget.order.items[index];
-                  final materialPrice = context
-                          .read<MaterialPriceDetailBloc>()
-                          .state
-                          .materialDetails[material.queryInfo]
-                          ?.price ??
-                      Price.empty();
-                  material = material.copyWith(
-                    bonuses: List.from(material.bonuses)
-                      ..addAll(
-                        PriceAggregate.empty()
-                            .copyWith(
-                              quantity: material.qty,
-                              price: materialPrice,
-                            )
-                            .getMaterialItemBonus,
-                      ),
-                  );
-
-                  return Column(
-                    children: [
-                      material.type.isBundle
-                          ? OrderBundleItem(
-                              material: material,
-                              materialNumber:
-                                  material.materialNumber.displayMatNo,
-                              qty: material.qty.toString(),
-                            )
-                          : OrderMaterialItem(
-                              materialQueryInfo: material.queryInfo,
-                              materialNumber:
-                                  material.materialNumber.displayMatNo,
-                              qty: material.qty.toString(),
-                            ),
-                      if (material.bonuses.isNotEmpty)
-                        SaveOrderBounsTile(
-                          item: material,
-                        ),
-                    ],
-                  );
-                },
-                childCount: widget.order.items.length,
-              ),
-            ),
-            SliverToBoxAdapter(
-              key: const Key('orderAction'),
-              child: BlocConsumer<MaterialPriceDetailBloc,
-                  MaterialPriceDetailState>(
-                listenWhen: (previous, current) =>
-                    previous.isValidating != current.isValidating ||
-                    previous.isFetching != current.isFetching,
-                listener: (context, state) {
-                  if (!state.isFetching && !state.isValidating) {
-                    final materialNumberWithTenderContract = widget.order.items
-                        .where(
-                          (item) =>
-                              !item.type.isBundle &&
-                              state.materialDetails[item.queryInfo]?.info
-                                      .hasValidTenderContract ==
-                                  true,
-                        )
-                        .map((item) => item.materialNumber)
-                        .toList();
-
-                    context.read<TenderContractListBloc>().add(
-                          TenderContractListEvent.fetch(
-                            salesOrganisation:
-                                elibilityBloc.state.salesOrganisation,
-                            customerCodeInfo:
-                                elibilityBloc.state.customerCodeInfo,
-                            shipToInfo: elibilityBloc.state.shipToInfo,
-                            materialNumbers: materialNumberWithTenderContract,
-                          ),
-                        );
-                  }
-                },
+        child: AnnouncementBanner(
+          appModule: AppModule.orders,
+          child: CustomScrollView(
+            slivers: [
+              BlocBuilder<MaterialPriceDetailBloc, MaterialPriceDetailState>(
                 buildWhen: (previous, current) =>
-                    previous.isValidating != current.isValidating ||
-                    previous.isFetching != current.isFetching,
+                    previous.isValidating != current.isValidating,
                 builder: (context, state) {
-                  return BlocBuilder<TenderContractListBloc,
-                      TenderContractListState>(
-                    buildWhen: (previous, current) =>
-                        previous.isFetching != current.isFetching,
-                    builder: (context, tenderState) {
-                      return OrderActionButton(
-                        onAddToCartPressed: () => _addToCartPressed(
-                          context,
-                          state,
-                          tenderState,
-                        ),
-                        onDeletePressed: () => _deletePressed(context),
-                        enableAddToCart: widget.order.allMaterialQueryInfo.any(
-                          (item) => state.isValidMaterial(
-                            query: item,
-                          ),
-                        ),
-                        isLoading: state.isFetching ||
-                            state.isValidating ||
-                            tenderState.isFetching,
-                      );
-                    },
+                  final isInvalidOrder =
+                      widget.order.allMaterialQueryInfo.every(
+                    (item) => !state.isValidMaterial(
+                      query: item,
+                    ),
+                  );
+
+                  return SliverAppBar(
+                    pinned: true,
+                    toolbarHeight:
+                        !state.isValidating && isInvalidOrder ? 50.0 : 0,
+                    automaticallyImplyLeading: false,
+                    flexibleSpace: FlexibleSpaceBar.createSettings(
+                      currentExtent: double.infinity,
+                      minExtent: 0,
+                      maxExtent: double.infinity,
+                      child: OrderInvalidWarning(
+                        key: const Key('invalidWarningMessage'),
+                        isLoading: state.isValidating,
+                        isInvalidOrder: isInvalidOrder,
+                      ),
+                    ),
                   );
                 },
               ),
-            ),
-          ],
+              SliverList(
+                delegate: SliverChildBuilderDelegate(
+                  (context, index) {
+                    var material = widget.order.items[index];
+                    final materialPrice = context
+                            .read<MaterialPriceDetailBloc>()
+                            .state
+                            .materialDetails[material.queryInfo]
+                            ?.price ??
+                        Price.empty();
+                    material = material.copyWith(
+                      bonuses: List.from(material.bonuses)
+                        ..addAll(
+                          PriceAggregate.empty()
+                              .copyWith(
+                                quantity: material.qty,
+                                price: materialPrice,
+                              )
+                              .getMaterialItemBonus,
+                        ),
+                    );
+
+                    return Column(
+                      children: [
+                        material.type.isBundle
+                            ? OrderBundleItem(
+                                material: material,
+                                materialNumber:
+                                    material.materialNumber.displayMatNo,
+                                qty: material.qty.toString(),
+                              )
+                            : OrderMaterialItem(
+                                materialQueryInfo: material.queryInfo,
+                                materialNumber:
+                                    material.materialNumber.displayMatNo,
+                                qty: material.qty.toString(),
+                              ),
+                        if (material.bonuses.isNotEmpty)
+                          SaveOrderBounsTile(
+                            item: material,
+                          ),
+                      ],
+                    );
+                  },
+                  childCount: widget.order.items.length,
+                ),
+              ),
+              SliverToBoxAdapter(
+                key: const Key('orderAction'),
+                child: BlocConsumer<MaterialPriceDetailBloc,
+                    MaterialPriceDetailState>(
+                  listenWhen: (previous, current) =>
+                      previous.isValidating != current.isValidating ||
+                      previous.isFetching != current.isFetching,
+                  listener: (context, state) {
+                    if (!state.isFetching && !state.isValidating) {
+                      final materialNumberWithTenderContract =
+                          widget.order.items
+                              .where(
+                                (item) =>
+                                    !item.type.isBundle &&
+                                    state.materialDetails[item.queryInfo]?.info
+                                            .hasValidTenderContract ==
+                                        true,
+                              )
+                              .map((item) => item.materialNumber)
+                              .toList();
+
+                      context.read<TenderContractListBloc>().add(
+                            TenderContractListEvent.fetch(
+                              salesOrganisation:
+                                  elibilityBloc.state.salesOrganisation,
+                              customerCodeInfo:
+                                  elibilityBloc.state.customerCodeInfo,
+                              shipToInfo: elibilityBloc.state.shipToInfo,
+                              materialNumbers: materialNumberWithTenderContract,
+                            ),
+                          );
+                    }
+                  },
+                  buildWhen: (previous, current) =>
+                      previous.isValidating != current.isValidating ||
+                      previous.isFetching != current.isFetching,
+                  builder: (context, state) {
+                    return BlocBuilder<TenderContractListBloc,
+                        TenderContractListState>(
+                      buildWhen: (previous, current) =>
+                          previous.isFetching != current.isFetching,
+                      builder: (context, tenderState) {
+                        return OrderActionButton(
+                          onAddToCartPressed: () => _addToCartPressed(
+                            context,
+                            state,
+                            tenderState,
+                          ),
+                          onDeletePressed: () => _deletePressed(context),
+                          enableAddToCart:
+                              widget.order.allMaterialQueryInfo.any(
+                            (item) => state.isValidMaterial(
+                              query: item,
+                            ),
+                          ),
+                          isLoading: state.isFetching ||
+                              state.isValidating ||
+                              tenderState.isFetching,
+                        );
+                      },
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

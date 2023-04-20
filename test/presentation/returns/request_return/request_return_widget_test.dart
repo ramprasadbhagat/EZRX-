@@ -3,6 +3,8 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
+import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
+import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/returns/request_return/request_return_bloc.dart';
 import 'package:ezrxmobile/application/returns/request_return_filter/request_return_filter_bloc.dart';
 import 'package:ezrxmobile/config.dart';
@@ -48,6 +50,12 @@ class CustomerCodeMockBloc
 class ShipToCodeMockBloc extends MockBloc<ShipToCodeEvent, ShipToCodeState>
     implements ShipToCodeBloc {}
 
+class AnnouncementBlocMock
+    extends MockBloc<AnnouncementEvent, AnnouncementState>
+    implements AnnouncementBloc {}
+
+class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
+
 void main() {
   late RequestReturnBloc requestReturnBlocMock;
   late RequestReturnFilterBloc requestReturnFilterBlocMock;
@@ -55,6 +63,8 @@ void main() {
   late CustomerCodeBloc customerCodeBlocMock;
   late ShipToCodeBloc shipToCodeBLocMock;
   late AppRouter autoRouterMock;
+  late AuthBloc authBlocMock;
+  late AnnouncementBloc announcementBlocMock;
 
   var requestReturnResponse = ReturnRequest.empty();
   final locator = GetIt.instance;
@@ -76,6 +86,8 @@ void main() {
     customerCodeBlocMock = CustomerCodeMockBloc();
     shipToCodeBLocMock = ShipToCodeMockBloc();
     requestReturnFilterBlocMock = RequestReturnFilterMockBloc();
+    authBlocMock = AuthBlocMock();
+    announcementBlocMock = AnnouncementBlocMock();
 
     when(() => requestReturnBlocMock.state)
         .thenReturn(RequestReturnState.initial());
@@ -85,6 +97,9 @@ void main() {
     when(() => customerCodeBlocMock.state)
         .thenReturn(CustomerCodeState.initial());
     when(() => shipToCodeBLocMock.state).thenReturn(ShipToCodeState.initial());
+    when(() => authBlocMock.state).thenReturn(const AuthState.initial());
+    when(() => announcementBlocMock.state)
+        .thenReturn(AnnouncementState.initial());
   });
 
   Future getWidget(tester) async {
@@ -107,6 +122,9 @@ void main() {
           BlocProvider<ShipToCodeBloc>(
             create: (context) => shipToCodeBLocMock,
           ),
+          BlocProvider<AuthBloc>(create: (context) => authBlocMock),
+          BlocProvider<AnnouncementBloc>(
+              create: (context) => announcementBlocMock),
         ],
         child: const RequestReturn(),
       ),

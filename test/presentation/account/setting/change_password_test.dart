@@ -2,6 +2,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/full_name.dart';
@@ -31,6 +32,10 @@ class MockUserBloc extends MockBloc<UserEvent, UserState> implements UserBloc {}
 
 class MockResetPassword extends Mock implements ChangePasswordRepository {}
 
+class AnnouncementBlocMock
+    extends MockBloc<AnnouncementEvent, AnnouncementState>
+    implements AnnouncementBloc {}
+
 class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 
 class AutoRouterMock extends Mock implements AppRouter {}
@@ -41,6 +46,7 @@ void main() {
 
   late ResetPasswordBloc resetPasswordBlocMock;
   late AuthBloc authBlocMock;
+  late AnnouncementBloc announcementBlocMock;
   late UserBloc mockUserBloc;
   late AppRouter autoRouterMock;
   setUpAll(() async {
@@ -53,7 +59,13 @@ void main() {
       resetPasswordBlocMock = ResetPasswordBlocMock();
       mockUserBloc = MockUserBloc();
       authBlocMock = AuthBlocMock();
+      authBlocMock = AuthBlocMock();
+      announcementBlocMock = AnnouncementBlocMock();
       autoRouterMock = locator<AppRouter>();
+
+      when(() => authBlocMock.state).thenReturn(const AuthState.initial());
+      when(() => announcementBlocMock.state)
+          .thenReturn(AnnouncementState.initial());
     });
 
     Future getScopedWidget(Widget home, WidgetTester tester) {
@@ -64,7 +76,9 @@ void main() {
         isAutoRouteEnabled: true,
         autoRouterMock: autoRouterMock,
         providers: [
-          BlocProvider<AuthBloc>(create: ((context) => authBlocMock)),
+          BlocProvider<AuthBloc>(create: (context) => authBlocMock),
+          BlocProvider<AnnouncementBloc>(
+              create: (context) => announcementBlocMock),
           BlocProvider<UserBloc>(create: (context) => mockUserBloc),
           BlocProvider<ResetPasswordBloc>(
             create: (context) => resetPasswordBlocMock,

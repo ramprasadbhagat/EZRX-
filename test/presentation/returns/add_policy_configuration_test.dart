@@ -1,6 +1,8 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
+import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/returns/policy_configuration/policy_configuration_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
@@ -24,10 +26,18 @@ class MockPolicyConfigurationListBloc
 class MOckEligibilityBloc extends MockBloc<EligibilityEvent, EligibilityState>
     implements EligibilityBloc {}
 
+class AnnouncementBlocMock
+    extends MockBloc<AnnouncementEvent, AnnouncementState>
+    implements AnnouncementBloc {}
+
+class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
+
 void main() {
   late PolicyConfigurationBloc policyConfigurationListBlocMock;
   late EligibilityBloc eligibilityBlocMock;
   late AppRouter autoRouterMock;
+  late AuthBloc authBlocMock;
+  late AnnouncementBloc announcementBlocMock;
   final locator = GetIt.instance;
 
   setUpAll(() async {
@@ -40,10 +50,15 @@ void main() {
     WidgetsFlutterBinding.ensureInitialized();
     policyConfigurationListBlocMock = MockPolicyConfigurationListBloc();
     eligibilityBlocMock = MOckEligibilityBloc();
+    authBlocMock = AuthBlocMock();
+    announcementBlocMock = AnnouncementBlocMock();
     when(() => policyConfigurationListBlocMock.state)
         .thenReturn(PolicyConfigurationState.initial());
     when(() => eligibilityBlocMock.state)
         .thenReturn(EligibilityState.initial());
+    when(() => authBlocMock.state).thenReturn(const AuthState.initial());
+    when(() => announcementBlocMock.state)
+        .thenReturn(AnnouncementState.initial());
   });
 
   Future getWidget(tester) async {
@@ -57,6 +72,9 @@ void main() {
           BlocProvider<EligibilityBloc>(
             create: (context) => eligibilityBlocMock,
           ),
+          BlocProvider<AuthBloc>(create: (context) => authBlocMock),
+          BlocProvider<AnnouncementBloc>(
+              create: (context) => announcementBlocMock),
         ],
         child: const AddPolicyConfiguration(),
       ),

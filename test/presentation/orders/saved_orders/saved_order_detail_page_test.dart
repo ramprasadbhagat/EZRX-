@@ -4,6 +4,8 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
+import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
@@ -85,6 +87,12 @@ class TenderContractListBlocMock
     extends MockBloc<TenderContractListEvent, TenderContractListState>
     implements TenderContractListBloc {}
 
+class AnnouncementBlocMock
+    extends MockBloc<AnnouncementEvent, AnnouncementState>
+    implements AnnouncementBloc {}
+
+class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
+
 void main() {
   late UserBloc userBlocMock;
   late SalesOrgBloc salesOrgBlocMock;
@@ -99,6 +107,8 @@ void main() {
   late SavedOrderListBlocMock savedOrderListBlocMock;
   late AdditionalDetailsBlocMock additionalDetailsMockBloc;
   late TenderContractListBloc tenderContractListBlocMock;
+  late AuthBloc authBlocMock;
+  late AnnouncementBloc announcementBlocMock;
   final locator = GetIt.instance;
   final fakeUser = User.empty().copyWith(
     username: Username('fake-user'),
@@ -131,6 +141,8 @@ void main() {
     savedOrderListBlocMock = SavedOrderListBlocMock();
     additionalDetailsMockBloc = AdditionalDetailsBlocMock();
     tenderContractListBlocMock = TenderContractListBlocMock();
+    authBlocMock = AuthBlocMock();
+    announcementBlocMock = AnnouncementBlocMock();
 
     when(() => userBlocMock.state).thenReturn(
       UserState.initial().copyWith(
@@ -153,6 +165,9 @@ void main() {
         .thenReturn(AdditionalDetailsState.initial());
     when(() => tenderContractListBlocMock.state)
         .thenReturn(TenderContractListState.initial());
+    when(() => authBlocMock.state).thenReturn(const AuthState.initial());
+    when(() => announcementBlocMock.state)
+        .thenReturn(AnnouncementState.initial());
   });
 
   Widget savedOrderDetailPage(Widget child) => WidgetUtils.getScopedWidget(
@@ -186,6 +201,9 @@ void main() {
         BlocProvider<TenderContractListBloc>(
           create: (context) => tenderContractListBlocMock,
         ),
+        BlocProvider<AuthBloc>(create: (context) => authBlocMock),
+        BlocProvider<AnnouncementBloc>(
+            create: (context) => announcementBlocMock),
       ],
       child: child);
 

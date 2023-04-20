@@ -5,7 +5,6 @@ import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
-import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/aup_tc/aup_tc.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
@@ -28,99 +27,89 @@ class HomeNavigationTabbar extends StatelessWidget {
               )
             : WillPopScope(
                 onWillPop: () async => false,
-                child: Stack(
-                  children: [
-                    SizerUtil.deviceType == DeviceType.mobile
-                        ? BlocBuilder<UserBloc, UserState>(
-                            buildWhen: (previous, current) =>
-                                previous != current,
-                            builder: (context, state) {
-                              return AutoTabsScaffold(
-                                lazyLoad: false,
-                                routes: _getTabs(context)
-                                    .map((item) => item.route)
+                child: SizerUtil.deviceType == DeviceType.mobile
+                    ? BlocBuilder<UserBloc, UserState>(
+                        buildWhen: (previous, current) => previous != current,
+                        builder: (context, state) {
+                          return AutoTabsScaffold(
+                            lazyLoad: false,
+                            routes: _getTabs(context)
+                                .map((item) => item.route)
+                                .toList(),
+                            bottomNavigationBuilder: (_, tabsRouter) {
+                              return BottomNavigationBar(
+                                key: const Key('homeTabbar'),
+                                currentIndex: tabsRouter.activeIndex,
+                                onTap: (index) {
+                                  _trackEvents(
+                                    context: context,
+                                    index: index,
+                                  );
+
+                                  tabsRouter.setActiveIndex(index);
+                                },
+                                items: _getTabs(context)
+                                    .map(
+                                      (item) => BottomNavigationBarItem(
+                                        icon: item.icon,
+                                        label: item.label.tr(),
+                                      ),
+                                    )
                                     .toList(),
-                                bottomNavigationBuilder: (_, tabsRouter) {
-                                  return BottomNavigationBar(
+                              );
+                            },
+                          );
+                        },
+                      )
+                    : BlocBuilder<UserBloc, UserState>(
+                        buildWhen: (previous, current) => previous != current,
+                        builder: (context, state) {
+                          return AutoTabsRouter(
+                            lazyLoad: false,
+                            routes: _getTabs(context)
+                                .map((item) => item.route)
+                                .toList(),
+                            builder: (context, child, animation) {
+                              var activeIndex = _getTabs(context).indexWhere(
+                                (d) => context.tabsRouter
+                                    .isRouteActive(d.route.routeName),
+                              );
+                              if (activeIndex == -1) {
+                                activeIndex = 0;
+                              }
+
+                              return Row(
+                                children: [
+                                  NavigationRail(
                                     key: const Key('homeTabbar'),
-                                    currentIndex: tabsRouter.activeIndex,
-                                    onTap: (index) {
+                                    destinations: _getTabs(context)
+                                        .map(
+                                          (item) => NavigationRailDestination(
+                                            icon: item.icon,
+                                            label: Text(item.label).tr(),
+                                          ),
+                                        )
+                                        .toList(),
+                                    selectedIndex: activeIndex,
+                                    onDestinationSelected: (index) {
                                       _trackEvents(
                                         context: context,
                                         index: index,
                                       );
 
-                                      tabsRouter.setActiveIndex(index);
+                                      context.navigateTo(
+                                        _getTabs(context)[index].route,
+                                      );
                                     },
-                                    items: _getTabs(context)
-                                        .map(
-                                          (item) => BottomNavigationBarItem(
-                                            icon: item.icon,
-                                            label: item.label.tr(),
-                                          ),
-                                        )
-                                        .toList(),
-                                  );
-                                },
+                                    labelType: NavigationRailLabelType.selected,
+                                  ),
+                                  Expanded(child: child),
+                                ],
                               );
                             },
-                          )
-                        : BlocBuilder<UserBloc, UserState>(
-                            buildWhen: (previous, current) =>
-                                previous != current,
-                            builder: (context, state) {
-                              return AutoTabsRouter(
-                                lazyLoad: false,
-                                routes: _getTabs(context)
-                                    .map((item) => item.route)
-                                    .toList(),
-                                builder: (context, child, animation) {
-                                  var activeIndex =
-                                      _getTabs(context).indexWhere(
-                                    (d) => context.tabsRouter
-                                        .isRouteActive(d.route.routeName),
-                                  );
-                                  if (activeIndex == -1) {
-                                    activeIndex = 0;
-                                  }
-
-                                  return Row(
-                                    children: [
-                                      NavigationRail(
-                                        key: const Key('homeTabbar'),
-                                        destinations: _getTabs(context)
-                                            .map(
-                                              (item) =>
-                                                  NavigationRailDestination(
-                                                icon: item.icon,
-                                                label: Text(item.label).tr(),
-                                              ),
-                                            )
-                                            .toList(),
-                                        selectedIndex: activeIndex,
-                                        onDestinationSelected: (index) {
-                                          _trackEvents(
-                                            context: context,
-                                            index: index,
-                                          );
-
-                                          context.navigateTo(
-                                            _getTabs(context)[index].route,
-                                          );
-                                        },
-                                        labelType:
-                                            NavigationRailLabelType.selected,
-                                      ),
-                                      Expanded(child: child),
-                                    ],
-                                  );
-                                },
-                              );
-                            },
-                          ),
-                    const AnnouncementWidget(),
-                  ],
-                ),
+                          );
+                        },
+                      ),
               );
       },
     );

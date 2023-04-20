@@ -2,6 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
+import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_list_bloc.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_principle_detail_bloc.dart';
@@ -63,6 +65,12 @@ class MockTenderContractBloc
 class MockMaterialListRepository extends Mock
     implements MaterialListRepository {}
 
+class AnnouncementBlocMock
+    extends MockBloc<AnnouncementEvent, AnnouncementState>
+    implements AnnouncementBloc {}
+
+class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late MaterialPriceDetailBloc materialPriceDetailBloc;
@@ -72,6 +80,8 @@ void main() {
   late ComboDealListBloc comboDealListBloc;
   late UserBloc userBloc;
   late TenderContractBloc tenderContractBloc;
+  late AuthBloc authBlocMock;
+  late AnnouncementBloc announcementBlocMock;
   late AppRouter router;
   final locator = GetIt.instance;
 
@@ -92,6 +102,8 @@ void main() {
     comboDealListBloc = MockComboDealListBloc();
     userBloc = MockUserBloc();
     tenderContractBloc = MockTenderContractBloc();
+    authBlocMock = AuthBlocMock();
+    announcementBlocMock = AnnouncementBlocMock();
 
     when(() => materialPriceDetailBloc.state)
         .thenReturn(MaterialPriceDetailState.initial());
@@ -104,6 +116,9 @@ void main() {
     when(() => userBloc.state).thenReturn(UserState.initial());
     when(() => tenderContractBloc.state)
         .thenReturn(TenderContractState.initial());
+    when(() => authBlocMock.state).thenReturn(const AuthState.initial());
+    when(() => announcementBlocMock.state)
+        .thenReturn(AnnouncementState.initial());
   });
 
   Widget wrapper(Widget child) => WidgetUtils.getScopedWidget(
@@ -128,6 +143,9 @@ void main() {
           BlocProvider<ComboDealListBloc>(
             create: (context) => comboDealListBloc,
           ),
+          BlocProvider<AuthBloc>(create: (context) => authBlocMock),
+          BlocProvider<AnnouncementBloc>(
+              create: (context) => announcementBlocMock),
         ],
         child: child,
       );

@@ -2,6 +2,8 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
+import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/returns/user_restriction/user_restriction_list_bloc.dart';
 import 'package:ezrxmobile/application/returns/user_restriction_details/user_restriction_details_bloc.dart';
@@ -40,12 +42,20 @@ class UserRestrictionListBlocMock
 
 class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
 
+class AnnouncementBlocMock
+    extends MockBloc<AnnouncementEvent, AnnouncementState>
+    implements AnnouncementBloc {}
+
+class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
+
 void main() {
   late UserRestrictionDetailsBloc userRestrictionDetailsMockBloc;
   late EligibilityBloc eligibilityBlocMock;
   late UserRestrictionListBloc userRestrictionListBlocMock;
   late CartBloc cartBlocMock;
   late AppRouter autoRouterMock;
+  late AuthBloc authBlocMock;
+  late AnnouncementBloc announcementBlocMock;
 
   setUpAll(
     () {
@@ -72,6 +82,9 @@ void main() {
         BlocProvider<CartBloc>(
           create: (context) => cartBlocMock,
         ),
+        BlocProvider<AuthBloc>(create: (context) => authBlocMock),
+        BlocProvider<AnnouncementBloc>(
+            create: (context) => announcementBlocMock),
       ],
       child: child,
     );
@@ -84,6 +97,8 @@ void main() {
       eligibilityBlocMock = EligibilityBlocMock();
       userRestrictionListBlocMock = UserRestrictionListBlocMock();
       cartBlocMock = CartBlocMock();
+      authBlocMock = AuthBlocMock();
+      announcementBlocMock = AnnouncementBlocMock();
       autoRouterMock = locator<AppRouter>();
       when(() => userRestrictionDetailsMockBloc.state)
           .thenReturn(UserRestrictionDetailsState.initial());
@@ -92,6 +107,9 @@ void main() {
       when(() => userRestrictionListBlocMock.state)
           .thenReturn(UserRestrictionListState.initial());
       when(() => cartBlocMock.state).thenReturn(CartState.initial());
+      when(() => authBlocMock.state).thenReturn(const AuthState.initial());
+      when(() => announcementBlocMock.state)
+          .thenReturn(AnnouncementState.initial());
     },
   );
   group('Test Add Edit User Restriction Page', () {
@@ -104,6 +122,9 @@ void main() {
           BlocProvider<EligibilityBloc>(
             create: (context) => eligibilityBlocMock,
           ),
+          BlocProvider<AuthBloc>(create: (context) => authBlocMock),
+          BlocProvider<AnnouncementBloc>(
+              create: (context) => announcementBlocMock),
         ],
         child: AddEditUserRestrictionPage(isEditing: false),
       );

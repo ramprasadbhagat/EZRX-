@@ -63,7 +63,7 @@ void main() {
     );
   });
 
-  Widget announcement() => MaterialFrameWrapper(
+  Widget announcement(AppModule module) => MaterialFrameWrapper(
         child: MultiBlocProvider(
           providers: [
             BlocProvider<AnnouncementBloc>(
@@ -76,7 +76,11 @@ void main() {
               create: (context) => salesOrgBlocMock,
             ),
           ],
-          child: const AnnouncementWidget(),
+          child: Material(
+            child: AnnouncementWidget(
+              appModule: module,
+            ),
+          ),
         ),
       );
   setUp(() {
@@ -93,7 +97,7 @@ void main() {
     testWidgets('doen\'t show when AuthState is unauthenticated',
         (tester) async {
       when(() => authBlocMock.state).thenReturn(const AuthState.initial());
-      await tester.pumpWidget(announcement());
+      await tester.pumpWidget(announcement(AppModule.core));
 
       expect(find.byType(SizedBox), findsOneWidget);
     });
@@ -110,7 +114,7 @@ void main() {
               .format(DateTime.now().subtract(const Duration(days: 10))),
         ),
       ));
-      await tester.pumpWidget(announcement());
+      await tester.pumpWidget(announcement(AppModule.core));
 
       expect(
         find.byKey(const Key('announcementDescription')),
@@ -126,7 +130,7 @@ void main() {
         isClosed: false,
         announcement: announcementMock.copyWith(active: false),
       ));
-      await tester.pumpWidget(announcement());
+      await tester.pumpWidget(announcement(AppModule.core));
 
       expect(
         find.byKey(const Key('announcementDescription')),
@@ -142,7 +146,7 @@ void main() {
         isClosed: false,
         announcement: announcementMock,
       ));
-      await tester.pumpWidget(announcement());
+      await tester.pumpWidget(announcement(AppModule.core));
       final reloadIcon = find.byKey(const Key('announcementReloadIcon'));
       final closeIcon = find.byKey(const Key('announcementCloseIcon'));
       expect(reloadIcon, findsOneWidget);
@@ -176,7 +180,7 @@ void main() {
         isClosed: false,
         announcement: announcementMock.copyWith(isCrossButton: false),
       ));
-      await tester.pumpWidget(announcement());
+      await tester.pumpWidget(announcement(AppModule.core));
 
       final closeIcon = find.byKey(const Key('announcementCloseIcon'));
 
@@ -192,7 +196,7 @@ void main() {
         isLoading: true,
         announcement: announcementMock,
       ));
-      await tester.pumpWidget(announcement());
+      await tester.pumpWidget(announcement(AppModule.core));
 
       final loadingIcon = find.byKey(const Key('announcementLoadingIndicator'));
 
@@ -246,7 +250,7 @@ void main() {
           isClosed: false,
           announcement: announcementCustomMock,
         ));
-        await tester.pumpWidget(announcement());
+        await tester.pumpWidget(announcement(AppModule.orders));
         final reloadIcon = find.byKey(const Key('announcementReloadIcon'));
         final closeIcon = find.byKey(const Key('announcementCloseIcon'));
         expect(reloadIcon, findsOneWidget);
@@ -279,7 +283,7 @@ void main() {
                 SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2200')),
           ),
         );
-        await tester.pumpWidget(announcement());
+        await tester.pumpWidget(announcement(AppModule.orders));
         final reloadIcon = find.byKey(const Key('announcementReloadIcon'));
         final closeIcon = find.byKey(const Key('announcementCloseIcon'));
         expect(reloadIcon, findsOneWidget);

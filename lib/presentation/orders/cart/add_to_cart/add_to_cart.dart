@@ -5,11 +5,13 @@ import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.d
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
+import 'package:ezrxmobile/domain/announcement/entities/announcement.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
+import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/add_to_cart_button.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/cart_item_detail_widget.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/favorite_button.dart';
@@ -100,57 +102,60 @@ class _AddToCartState extends State<AddToCart> {
             ),
           ],
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(15),
-          child: BlocBuilder<AddToCartBloc, AddToCartState>(
-            buildWhen: (previous, current) => previous != current,
-            builder: (context, state) {
-              return Column(
-                children: [
-                  Expanded(
-                    child: ListView(
-                      children: [
-                        CartItemDetailWidget(
-                          cartItem: state.cartItem,
-                          onQuantityChanged: (int value) {
-                            final cartItem = addToCartBloc.state.cartItem;
-                            final discountedMaterialCount = cartBloc.state
-                                .zmgMaterialWithoutMaterial(cartItem);
-                            addToCartBloc.add(
-                              AddToCartEvent.updateQuantity(
-                                value,
-                                discountedMaterialCount,
-                              ),
-                            );
-                          },
-                        ),
-                        state.cartItem.materialInfo.hasValidTenderContract
-                            ? SelectContract(
-                                materialInfo: state.cartItem.materialInfo,
-                              )
-                            : const SizedBox.shrink(),
-                      ],
+        body: AnnouncementBanner(
+          appModule: AppModule.orders,
+          child: Padding(
+            padding: const EdgeInsets.all(15),
+            child: BlocBuilder<AddToCartBloc, AddToCartState>(
+              buildWhen: (previous, current) => previous != current,
+              builder: (context, state) {
+                return Column(
+                  children: [
+                    Expanded(
+                      child: ListView(
+                        children: [
+                          CartItemDetailWidget(
+                            cartItem: state.cartItem,
+                            onQuantityChanged: (int value) {
+                              final cartItem = addToCartBloc.state.cartItem;
+                              final discountedMaterialCount = cartBloc.state
+                                  .zmgMaterialWithoutMaterial(cartItem);
+                              addToCartBloc.add(
+                                AddToCartEvent.updateQuantity(
+                                  value,
+                                  discountedMaterialCount,
+                                ),
+                              );
+                            },
+                          ),
+                          state.cartItem.materialInfo.hasValidTenderContract
+                              ? SelectContract(
+                                  materialInfo: state.cartItem.materialInfo,
+                                )
+                              : const SizedBox.shrink(),
+                        ],
+                      ),
                     ),
-                  ),
-                  AddToCartButton(
-                    isAddToCartAllowed: _isAddToCartAllowed,
-                    cartItem: selectedTenderContract ==
-                                TenderContract.empty() ||
-                            selectedTenderContract ==
-                                TenderContract.noContract()
-                        ? state.cartItem
-                        : state.cartItem.copyWith(
-                            tenderContract: selectedTenderContract,
-                            price: state.cartItem.price.copyWith(
-                              finalPrice: MaterialPrice(
-                                selectedTenderContract.tenderPrice.tenderPrice,
+                    AddToCartButton(
+                      isAddToCartAllowed: _isAddToCartAllowed,
+                      cartItem: selectedTenderContract ==
+                                  TenderContract.empty() ||
+                              selectedTenderContract ==
+                                  TenderContract.noContract()
+                          ? state.cartItem
+                          : state.cartItem.copyWith(
+                              tenderContract: selectedTenderContract,
+                              price: state.cartItem.price.copyWith(
+                                finalPrice: MaterialPrice(
+                                  selectedTenderContract.tenderPrice.tenderPrice,
+                                ),
                               ),
                             ),
-                          ),
-                  ),
-                ],
-              );
-            },
+                    ),
+                  ],
+                );
+              },
+            ),
           ),
         ),
       ),

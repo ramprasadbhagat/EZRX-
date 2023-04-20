@@ -3,9 +3,11 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/returns/policy_configuration/policy_configuration_bloc.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/announcement/entities/announcement.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/policy_configuration.dart';
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
+import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -47,52 +49,55 @@ class AddPolicyConfigurationState extends State<AddPolicyConfiguration> {
     return Scaffold(
       backgroundColor: ZPColors.white,
       appBar: AppBar(title: const Text('Add Policy Configuration').tr()),
-      body: Padding(
-        padding: const EdgeInsets.all(15),
-        child: Form(
-          key: formKey,
-          autovalidateMode: AutovalidateMode.disabled,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              const _SalesOrganizationField(),
-              const SizedBox(
-                height: 16,
-              ),
-              const _PrincipalCodeField(),
-              const SizedBox(
-                height: 16,
-              ),
-              const _ReturnsAllowedField(),
-              const SizedBox(
-                height: 16,
-              ),
-              BlocListener<PolicyConfigurationBloc, PolicyConfigurationState>(
-                listener: (context, state) {},
-                listenWhen: (previous, current) =>
-                    previous.returnsAllowed != current.returnsAllowed,
-                child: BlocBuilder<PolicyConfigurationBloc,
-                    PolicyConfigurationState>(
-                  builder: (context, state) {
-                    return state.returnsAllowed.getOrCrash()
-                        ? Column(
-                            children: const [
-                              _MonthsBeforeExpiryField(),
-                              SizedBox(
-                                height: 16,
-                              ),
-                              _MonthsAfterExpiryField(),
-                              SizedBox(
-                                height: 20,
-                              ),
-                            ],
-                          )
-                        : const SizedBox.shrink();
-                  },
+      body: AnnouncementBanner(
+        appModule: AppModule.returns,
+        child: Padding(
+          padding: const EdgeInsets.all(15),
+          child: Form(
+            key: formKey,
+            autovalidateMode: AutovalidateMode.disabled,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                const _SalesOrganizationField(),
+                const SizedBox(
+                  height: 16,
                 ),
-              ),
-              const _SubmitButton(),
-            ],
+                const _PrincipalCodeField(),
+                const SizedBox(
+                  height: 16,
+                ),
+                const _ReturnsAllowedField(),
+                const SizedBox(
+                  height: 16,
+                ),
+                BlocListener<PolicyConfigurationBloc, PolicyConfigurationState>(
+                  listener: (context, state) {},
+                  listenWhen: (previous, current) =>
+                      previous.returnsAllowed != current.returnsAllowed,
+                  child: BlocBuilder<PolicyConfigurationBloc,
+                      PolicyConfigurationState>(
+                    builder: (context, state) {
+                      return state.returnsAllowed.getOrCrash()
+                          ? Column(
+                              children: const [
+                                _MonthsBeforeExpiryField(),
+                                SizedBox(
+                                  height: 16,
+                                ),
+                                _MonthsAfterExpiryField(),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                              ],
+                            )
+                          : const SizedBox.shrink();
+                    },
+                  ),
+                ),
+                const _SubmitButton(),
+              ],
+            ),
           ),
         ),
       ),

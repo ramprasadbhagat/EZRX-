@@ -4,6 +4,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
+import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
+import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_summary_details/return_summary_details_bloc.dart';
 import 'package:ezrxmobile/config.dart';
@@ -47,6 +49,12 @@ class PoAttachmentBlocMock
     extends MockBloc<PoAttachmentEvent, PoAttachmentState>
     implements PoAttachmentBloc {}
 
+class AnnouncementBlocMock
+    extends MockBloc<AnnouncementEvent, AnnouncementState>
+    implements AnnouncementBloc {}
+
+class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
+
 void main() {
   late ReturnSummaryDetailsBloc returnSummaryDetailsBlocMock;
   late ShipToCodeBloc shipToCodeBlocMock;
@@ -55,6 +63,8 @@ void main() {
   late PoAttachmentBloc poAttachmentBlocMock;
   final locator = GetIt.instance;
   late AppRouter autoRouterMock;
+  late AuthBloc authBlocMock;
+  late AnnouncementBloc announcementBlocMock;
 
   setUpAll(() async {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
@@ -71,6 +81,8 @@ void main() {
     customerCodeBlocMock = CustomerCodeBlocMock();
     salesOrgBlocMock = SalesOrgBlocMock();
     poAttachmentBlocMock = PoAttachmentBlocMock();
+    authBlocMock = AuthBlocMock();
+    announcementBlocMock = AnnouncementBlocMock();
     when(() => returnSummaryDetailsBlocMock.state)
         .thenReturn(ReturnSummaryDetailsState.initial());
     when(() => shipToCodeBlocMock.state).thenReturn(ShipToCodeState.initial());
@@ -79,6 +91,9 @@ void main() {
     when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
     when(() => poAttachmentBlocMock.state)
         .thenReturn(PoAttachmentState.initial());
+    when(() => authBlocMock.state).thenReturn(const AuthState.initial());
+    when(() => announcementBlocMock.state)
+        .thenReturn(AnnouncementState.initial());
   });
 
   Future getWidget(tester) async {
@@ -101,6 +116,9 @@ void main() {
           BlocProvider<PoAttachmentBloc>(
             create: (context) => poAttachmentBlocMock,
           ),
+          BlocProvider<AuthBloc>(create: (context) => authBlocMock),
+          BlocProvider<AnnouncementBloc>(
+              create: (context) => announcementBlocMock),
         ],
         child: ReturnSummaryDetails(
           customerCodeInfo: CustomerCodeInfo.empty(),

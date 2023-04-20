@@ -1,8 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/domain/announcement/entities/announcement.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
+import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,53 +26,57 @@ class ContactUsPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Contact Us').tr(),
       ),
-      body: BlocBuilder<SalesOrgBloc, SalesOrgState>(
-        buildWhen: (previous, current) => previous.salesOrg != current.salesOrg,
-        builder: (context, state) {
-          final salesOrg = state.salesOrg;
+      body: AnnouncementBanner(
+        appModule: AppModule.core,
+        child: BlocBuilder<SalesOrgBloc, SalesOrgState>(
+          buildWhen: (previous, current) =>
+              previous.salesOrg != current.salesOrg,
+          builder: (context, state) {
+            final salesOrg = state.salesOrg;
 
-          return ListView(
-            children: ListTile.divideTiles(
-              context: context,
-              tiles: [
-                ListTile(
-                  key: const Key('nameTile'),
-                  title: Text(salesOrg.contactPersonName),
-                ),
-                if (salesOrg.contact.instruction.isNotEmpty)
+            return ListView(
+              children: ListTile.divideTiles(
+                context: context,
+                tiles: [
                   ListTile(
-                    key: const Key('instructionTile'),
-                    title: Text(salesOrg.contact.instruction).tr(),
+                    key: const Key('nameTile'),
+                    title: Text(salesOrg.contactPersonName),
                   ),
-                ...salesOrg.contact.phoneNumbers.map(
-                  (e) => ListTile(
-                    key: const Key('phoneNumberTile'),
-                    onTap: () async => e.displayTelephoneNumber != 'NA'
-                        ? await _makeCall('tel://${e.displayTelephoneNumber}')
-                        : null,
-                    title: Text(
-                      e.displayTelephoneNumber,
-                      style: const TextStyle(color: ZPColors.primary),
+                  if (salesOrg.contact.instruction.isNotEmpty)
+                    ListTile(
+                      key: const Key('instructionTile'),
+                      title: Text(salesOrg.contact.instruction).tr(),
                     ),
-                    leading: const Icon(Icons.call, color: ZPColors.primary),
+                  ...salesOrg.contact.phoneNumbers.map(
+                    (e) => ListTile(
+                      key: const Key('phoneNumberTile'),
+                      onTap: () async => e.displayTelephoneNumber != 'NA'
+                          ? await _makeCall('tel://${e.displayTelephoneNumber}')
+                          : null,
+                      title: Text(
+                        e.displayTelephoneNumber,
+                        style: const TextStyle(color: ZPColors.primary),
+                      ),
+                      leading: const Icon(Icons.call, color: ZPColors.primary),
+                    ),
                   ),
-                ),
-                ListTile(
-                  key: const Key('emailTile'),
-                  onTap: () => _sendEmail(
-                    salesOrg.contactEmail,
-                    salesOrg.contactPersonName,
+                  ListTile(
+                    key: const Key('emailTile'),
+                    onTap: () => _sendEmail(
+                      salesOrg.contactEmail,
+                      salesOrg.contactPersonName,
+                    ),
+                    leading: const Icon(Icons.email, color: ZPColors.primary),
+                    title: Text(
+                      salesOrg.contactEmail,
+                      style: const TextStyle(color: ZPColors.primary),
+                    ).tr(),
                   ),
-                  leading: const Icon(Icons.email, color: ZPColors.primary),
-                  title: Text(
-                    salesOrg.contactEmail,
-                    style: const TextStyle(color: ZPColors.primary),
-                  ).tr(),
-                ),
-              ],
-            ).toList(),
-          );
-        },
+                ],
+              ).toList(),
+            );
+          },
+        ),
       ),
     );
   }

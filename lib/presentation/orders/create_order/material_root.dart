@@ -1,5 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/domain/announcement/entities/announcement.dart';
+import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/cart_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_button.dart';
 import 'package:ezrxmobile/presentation/core/tab_view.dart';
@@ -34,6 +36,9 @@ class MaterialRoot extends StatelessWidget {
           body: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
+              const AnnouncementWidget(
+                appModule: AppModule.orders,
+              ),
               if (context.read<EligibilityBloc>().state.isOrderTypeEnable)
                 const OrderTypeSelector(hideReasonField: true),
               length == 1

@@ -52,10 +52,13 @@ import 'package:mocktail/mocktail.dart';
 import 'package:upgrader/upgrader.dart';
 
 import '../../utils/widget_utils.dart';
-import '../aup_tc_test/apu_tc_test.dart';
 import '../order_history/order_history_details_widget_test.dart';
 
 class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
+
+class AnnouncementBlocMock
+    extends MockBloc<AnnouncementEvent, AnnouncementState>
+    implements AnnouncementBloc {}
 
 class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
 

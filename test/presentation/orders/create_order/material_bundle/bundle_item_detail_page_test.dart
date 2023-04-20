@@ -6,6 +6,7 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
@@ -54,7 +55,11 @@ class MaterialBundleListMockBloc
     extends MockBloc<MaterialBundleListEvent, MaterialBundleListState>
     implements MaterialBundleListBloc {}
 
-class AuthMockBloc extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
+class AnnouncementBlocMock
+    extends MockBloc<AnnouncementEvent, AnnouncementState>
+    implements AnnouncementBloc {}
+
+class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 
 class CartMockBloc extends MockBloc<CartEvent, CartState> implements CartBloc {}
 
@@ -77,7 +82,8 @@ class TenderContractBlocMock
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late CartBloc cartMockBloc;
-  late AuthBloc authMockBloc;
+  late AuthBloc authBlocMock;
+  late AnnouncementBloc announcementBlocMock;
   late UserBloc userMockBloc;
   late AppRouter autoRouterMock;
   late SalesOrgBloc salesOrgMockBloc;
@@ -134,7 +140,8 @@ void main() {
       autoRouterMock = AppRouter();
       cartMockBloc = CartMockBloc();
       userMockBloc = UserMockBloc();
-      authMockBloc = AuthMockBloc();
+      authBlocMock = AuthBlocMock();
+      announcementBlocMock = AnnouncementBlocMock();
       salesOrgMockBloc = SalesOrgMockBloc();
       addToCartMockBloc = AddToCartMockBloc();
       shipToCodeMockBloc = ShipToCodeMockBloc();
@@ -149,7 +156,9 @@ void main() {
       when(() => addToCartMockBloc.state).thenReturn(AddToCartState.initial());
       when(() => customerCodeMockBloc.state)
           .thenReturn(CustomerCodeState.initial());
-      when(() => authMockBloc.state).thenReturn(const AuthState.initial());
+      when(() => authBlocMock.state).thenReturn(const AuthState.initial());
+      when(() => announcementBlocMock.state)
+          .thenReturn(AnnouncementState.initial());
       when(() => materialBundleListMockBloc.state)
           .thenReturn(MaterialBundleListState.initial());
       when(() => userMockBloc.state).thenReturn(
@@ -189,7 +198,9 @@ void main() {
             BlocProvider<CartBloc>(create: ((context) => cartMockBloc)),
             BlocProvider<SalesOrgBloc>(create: ((context) => salesOrgMockBloc)),
             BlocProvider<UserBloc>(create: ((context) => userMockBloc)),
-            BlocProvider<AuthBloc>(create: ((context) => authMockBloc)),
+            BlocProvider<AuthBloc>(create: (context) => authBlocMock),
+            BlocProvider<AnnouncementBloc>(
+                create: (context) => announcementBlocMock),
             BlocProvider<ShipToCodeBloc>(
                 create: ((context) => shipToCodeMockBloc)),
             BlocProvider<CustomerCodeBloc>(

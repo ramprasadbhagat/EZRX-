@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
+import 'package:ezrxmobile/domain/announcement/entities/announcement.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
@@ -10,6 +11,7 @@ import 'package:ezrxmobile/presentation/account/change_password/widgets/change_p
 import 'package:ezrxmobile/presentation/account/change_password/widgets/confirm_password_field.dart';
 import 'package:ezrxmobile/presentation/account/change_password/widgets/new_password_field.dart';
 import 'package:ezrxmobile/presentation/account/change_password/widgets/old_password_field.dart';
+import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,27 +33,30 @@ class ChangePasswordPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Change Password').tr(),
       ),
-      body: ListView(
-        padding: const EdgeInsets.all(15.0),
-        children: <Widget>[
-          _ChangePasswordForm(
-            key: const Key('changePasswordFrom'),
-            user: userBloc.state.user,
-          ),
-          const ResetPasswordValidation(
-            key: Key('resetPasswordValidation'),
-          ),
-          const _NoteText(
-            key: Key('noteText'),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          ResetPasswordButton(
-            key: const Key('resetPasswordButton'),
-            user: userBloc.state.user,
-          ),
-        ],
+      body: AnnouncementBanner(
+        appModule: AppModule.core,
+        child: ListView(
+          padding: const EdgeInsets.all(15.0),
+          children: <Widget>[
+            _ChangePasswordForm(
+              key: const Key('changePasswordFrom'),
+              user: userBloc.state.user,
+            ),
+            const ResetPasswordValidation(
+              key: Key('resetPasswordValidation'),
+            ),
+            const _NoteText(
+              key: Key('noteText'),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            ResetPasswordButton(
+              key: const Key('resetPasswordButton'),
+              user: userBloc.state.user,
+            ),
+          ],
+        ),
       ),
     );
   }

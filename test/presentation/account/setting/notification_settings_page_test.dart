@@ -3,6 +3,8 @@ import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
+import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/value/constants.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -21,12 +23,20 @@ import '../../order_history/order_history_details_widget_test.dart';
 
 class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
 
+class AnnouncementBlocMock
+    extends MockBloc<AnnouncementEvent, AnnouncementState>
+    implements AnnouncementBloc {}
+
+class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
+
 void main() async {
   TestWidgetsFlutterBinding.ensureInitialized();
   EasyLocalization.logger.enableLevels = [];
   late final AppRouter autoRouterMock;
 
   late UserBloc userBloc;
+  late AuthBloc authBlocMock;
+  late AnnouncementBloc announcementBlocMock;
   setUpAll(() async {
     setupLocator();
     autoRouterMock = locator<AppRouter>();
@@ -49,6 +59,9 @@ void main() async {
           autoRouterMock: autoRouterMock,
           providers: [
             BlocProvider<UserBloc>(create: (context) => userBloc),
+            BlocProvider<AuthBloc>(create: (context) => authBlocMock),
+            BlocProvider<AnnouncementBloc>(
+                create: (context) => announcementBlocMock),
           ],
           child: const NotificationSettingsPage(),
         ),
@@ -57,6 +70,8 @@ void main() async {
 
     setUp(() {
       userBloc = UserBlocMock();
+      authBlocMock = AuthBlocMock();
+      announcementBlocMock = AnnouncementBlocMock();
       when(() => userBloc.state).thenReturn(UserState(
         user: User.empty().copyWith(
           settings: User.empty().settings.copyWith(
@@ -66,6 +81,9 @@ void main() async {
         ),
         userFailureOrSuccessOption: none(),
       ));
+      when(() => authBlocMock.state).thenReturn(const AuthState.initial());
+      when(() => announcementBlocMock.state)
+          .thenReturn(AnnouncementState.initial());
     });
 
     testWidgets('Load [NotificationSettingsPage] widgets', (tester) async {

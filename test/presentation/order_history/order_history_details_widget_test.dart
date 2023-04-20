@@ -6,6 +6,8 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
+import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
@@ -146,6 +148,12 @@ class OrderDocumentTypeBlocMock
     extends MockBloc<OrderDocumentTypeEvent, OrderDocumentTypeState>
     implements OrderDocumentTypeBloc {}
 
+class AnnouncementBlocMock
+    extends MockBloc<AnnouncementEvent, AnnouncementState>
+    implements AnnouncementBloc {}
+
+class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
@@ -158,7 +166,8 @@ void main() {
   final userBlocMock = UserBlocMock();
   final tenderContractMockBloc = TenderContractMockBloc();
   late CustomerCodeBloc customerCodeBlocMock;
-
+  late AuthBloc authBlocMock;
+  late AnnouncementBloc announcementBlocMock;
   late AppRouter autoRouterMock;
 
   late OrderHistoryDetails orderHistoryDetails;
@@ -222,6 +231,8 @@ void main() {
       favouriteBlocMock = FavouriteBlocMock();
       additionalDetailsBlocMock = AdditionalDetailsBlocMock();
       orderDocumentTypeBlocMock = OrderDocumentTypeBlocMock();
+      authBlocMock = AuthBlocMock();
+      announcementBlocMock = AnnouncementBlocMock();
       when(() => userBlocMock.state).thenReturn(
         UserState.initial().copyWith(
           user: fakeUser,
@@ -273,6 +284,9 @@ void main() {
       when(() => orderDocumentTypeBlocMock.state).thenReturn(
         OrderDocumentTypeState.initial(),
       );
+      when(() => authBlocMock.state).thenReturn(const AuthState.initial());
+      when(() => announcementBlocMock.state)
+          .thenReturn(AnnouncementState.initial());
     });
     StackRouterScope getWUT() {
       return WidgetUtils.getScopedWidget(
@@ -316,6 +330,9 @@ void main() {
           BlocProvider<OrderDocumentTypeBloc>(
             create: (context) => orderDocumentTypeBlocMock,
           ),
+          BlocProvider<AuthBloc>(create: (context) => authBlocMock),
+          BlocProvider<AnnouncementBloc>(
+              create: (context) => announcementBlocMock),
         ],
         child: Material(
             child: HistoryDetails(

@@ -6,6 +6,7 @@ import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/config.dart';
@@ -28,8 +29,6 @@ import '../../utils/widget_utils.dart';
 
 class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
 
-class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
-
 class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
     implements SalesOrgBloc {}
 
@@ -42,7 +41,11 @@ class ShipToCodeBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState>
 
 class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
 
+class AnnouncementBlocMock
+    extends MockBloc<AnnouncementEvent, AnnouncementState>
+    implements AnnouncementBloc {}
 
+class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 
 class AutoRouterMock extends Mock implements AppRouter {}
 
@@ -107,6 +110,7 @@ void main() {
   late CustomerCodeBloc customerCodeBlocMock;
   late ShipToCodeBloc shipToCodeBlocMock;
   late AuthBloc authBlocMock;
+  late AnnouncementBloc announcementBlocMock;
   late AppRouter autoRouterMock;
   late CartBloc cartBlocMock;
   setUpAll(() {
@@ -120,6 +124,7 @@ void main() {
       customerCodeBlocMock = CustomerCodeBlocMock();
       shipToCodeBlocMock = ShipToCodeBlocMock();
       authBlocMock = AuthBlocMock();
+      announcementBlocMock = AnnouncementBlocMock();
       autoRouterMock = locator<AppRouter>();
       cartBlocMock = CartBlocMock();
       when(() => userBlocMock.state).thenReturn(UserState.initial());
@@ -130,6 +135,8 @@ void main() {
       when(() => shipToCodeBlocMock.state)
           .thenReturn(ShipToCodeState.initial());
       when(() => authBlocMock.state).thenReturn(const AuthState.initial());
+      when(() => announcementBlocMock.state)
+          .thenReturn(AnnouncementState.initial());
     });
 
     Widget getScopedWidget() {
@@ -153,6 +160,8 @@ void main() {
             BlocProvider<ShipToCodeBloc>(
                 create: (context) => shipToCodeBlocMock),
             BlocProvider<AuthBloc>(create: (context) => authBlocMock),
+            BlocProvider<AnnouncementBloc>(
+                create: (context) => announcementBlocMock),
             BlocProvider<CartBloc>(create: (context) => cartBlocMock),
           ],
           child: const AccountTab(),

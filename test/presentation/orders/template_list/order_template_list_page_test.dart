@@ -5,6 +5,8 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
+import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
@@ -52,6 +54,12 @@ class MockShipToCodeBloc extends MockBloc<ShipToCodeEvent, ShipToCodeState>
 class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
     implements EligibilityBloc {}
 
+class AnnouncementBlocMock
+    extends MockBloc<AnnouncementEvent, AnnouncementState>
+    implements AnnouncementBloc {}
+
+class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
+
 void main() {
   late OrderTemplateListBloc orderTemplateListBloc;
   late CartBloc cartBloc;
@@ -61,6 +69,8 @@ void main() {
   late MockSalesOrgBloc mockSalesOrgBloc;
   late MockShipToCodeBloc mockShipToCodeBloc;
   late EligibilityBlocMock mockEligiblityBloc;
+  late AuthBloc authBlocMock;
+  late AnnouncementBloc announcementBlocMock;
 
   var orderTemplatesMock = <OrderTemplate>[];
   late AppRouter autoRouterMock;
@@ -87,6 +97,8 @@ void main() {
     mockSalesOrgBloc = MockSalesOrgBloc();
     mockShipToCodeBloc = MockShipToCodeBloc();
     mockEligiblityBloc = EligibilityBlocMock();
+    authBlocMock = AuthBlocMock();
+    announcementBlocMock = AnnouncementBlocMock();
     when(() => userBloc.state).thenReturn(UserState.initial());
     when(() => orderTemplateListBloc.state)
         .thenReturn(OrderTemplateListState.initial());
@@ -95,7 +107,9 @@ void main() {
     when(() => mockCustomerBloc.state).thenReturn(CustomerCodeState.initial());
     when(() => mockSalesOrgBloc.state).thenReturn(SalesOrgState.initial());
     when(() => mockShipToCodeBloc.state).thenReturn(ShipToCodeState.initial());
-
+    when(() => authBlocMock.state).thenReturn(const AuthState.initial());
+    when(() => announcementBlocMock.state)
+        .thenReturn(AnnouncementState.initial());
     when(() => mockEligiblityBloc.state).thenReturn(EligibilityState.initial());
   });
 
@@ -117,6 +131,9 @@ void main() {
         BlocProvider<SalesOrgBloc>(create: (context) => mockSalesOrgBloc),
         BlocProvider<ShipToCodeBloc>(create: (context) => mockShipToCodeBloc),
         BlocProvider<EligibilityBloc>(create: (context) => mockEligiblityBloc),
+        BlocProvider<AuthBloc>(create: (context) => authBlocMock),
+        BlocProvider<AnnouncementBloc>(
+            create: (context) => announcementBlocMock),
       ],
       child: const OrderTemplateListPage(),
     );

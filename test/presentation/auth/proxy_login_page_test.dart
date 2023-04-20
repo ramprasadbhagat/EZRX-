@@ -3,6 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/auth/proxy_login/proxy_login_form_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
@@ -28,6 +29,10 @@ class ProxyLoginFormBlocMock
     extends MockBloc<ProxyLoginFormEvent, ProxyLoginFormState>
     implements ProxyLoginFormBloc {}
 
+class AnnouncementBlocMock
+    extends MockBloc<AnnouncementEvent, AnnouncementState>
+    implements AnnouncementBloc {}
+
 class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 
 class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
@@ -45,6 +50,7 @@ class MaterialListBlocMock
 void main() {
   late ProxyLoginFormBloc proxyloginBlocMock;
   late AuthBloc authBlocMock;
+  late AnnouncementBloc announcementBlocMock;
   late SalesOrgBloc salesOrgBlocMock;
   late UserBloc userBlocMock;
   late EligibilityBloc eligibilityBlocMock;
@@ -77,6 +83,12 @@ void main() {
         BlocProvider<MaterialListBloc>(
           create: (context) => materialListBlocMock,
         ),
+        BlocProvider<AuthBloc>(
+          create: (context) => authBlocMock,
+        ),
+        BlocProvider<AnnouncementBloc>(
+          create: (context) => announcementBlocMock,
+        ),
       ],
       child: const LoginOnBehalfPage(),
     );
@@ -89,6 +101,8 @@ void main() {
       salesOrgBlocMock = SalesOrgBlocMock();
       userBlocMock = UserBlocMock();
       eligibilityBlocMock = EligibilityBlocMock();
+      authBlocMock = AuthBlocMock();
+      announcementBlocMock = AnnouncementBlocMock();
       materialListBlocMock = MaterialListBlocMock();
       autoRouterMock = GetIt.instance<AppRouter>();
 
@@ -97,6 +111,9 @@ void main() {
 
       when(() => proxyloginBlocMock.state)
           .thenReturn(ProxyLoginFormState.initial());
+      when(() => authBlocMock.state).thenReturn(const AuthState.initial());
+      when(() => announcementBlocMock.state)
+          .thenReturn(AnnouncementState.initial());
       when(() => materialListBlocMock.state)
           .thenReturn(MaterialListState.initial());
     });

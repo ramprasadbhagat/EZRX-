@@ -7,6 +7,8 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
+import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/covid_material_list/covid_material_list_bloc.dart';
@@ -99,6 +101,12 @@ class RemoteConfigServiceMock extends Mock implements RemoteConfigService {}
 
 class MockConfig extends Mock implements Config {}
 
+class AnnouncementBlocMock
+    extends MockBloc<AnnouncementEvent, AnnouncementState>
+    implements AnnouncementBloc {}
+
+class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
+
 class AddToCartStub {
   void addToCart() {
     // Do nothing
@@ -128,6 +136,8 @@ void main() {
   late ScanMaterialInfoBlocMock scanMaterialInfoBlocMock;
   late RemoteConfigService remoteConfigServiceMock;
   late Config mockConfig;
+  late AuthBloc authBlocMock;
+  late AnnouncementBloc announcementBlocMock;
 
   final fakeMaterialInfo = MaterialInfo(
     materialNumber: fakeMaterialNumber,
@@ -194,8 +204,11 @@ void main() {
       scanMaterialInfoBlocMock = ScanMaterialInfoBlocMock();
       mockAddToCartStub = MockAddToCartStub();
       remoteConfigServiceMock = RemoteConfigServiceMock();
+      authBlocMock = AuthBlocMock();
+      announcementBlocMock = AnnouncementBlocMock();
       mockConfig = MockConfig();
-      when(() => remoteConfigServiceMock.getScanToOrderConfig()).thenReturn(true);
+      when(() => remoteConfigServiceMock.getScanToOrderConfig())
+          .thenReturn(true);
       when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
       when(() => userBlocMock.state).thenReturn(UserState.initial().copyWith(
           user: User.empty().copyWith(
@@ -235,6 +248,9 @@ void main() {
           .thenReturn(ShipToCodeState.initial());
       when(() => scanMaterialInfoBlocMock.state)
           .thenReturn(ScanMaterialInfoState.initial());
+      when(() => authBlocMock.state).thenReturn(const AuthState.initial());
+      when(() => announcementBlocMock.state)
+          .thenReturn(AnnouncementState.initial());
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
             user: User.empty().copyWith(
@@ -292,6 +308,9 @@ void main() {
                 create: ((context) => eligibilityBlocMock)),
             BlocProvider<ScanMaterialInfoBloc>(
                 create: ((context) => scanMaterialInfoBlocMock)),
+            BlocProvider<AuthBloc>(create: (context) => authBlocMock),
+            BlocProvider<AnnouncementBloc>(
+                create: (context) => announcementBlocMock),
           ],
           child: child,
         ),

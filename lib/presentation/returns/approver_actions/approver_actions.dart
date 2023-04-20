@@ -4,6 +4,7 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
+import 'package:ezrxmobile/domain/announcement/entities/announcement.dart';
 import 'package:ezrxmobile/domain/returns/entities/request_information.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_approver_filter.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
@@ -11,6 +12,7 @@ import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
+import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/filter_icon.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/returns/approver_actions/filter_drawer.dart';
@@ -171,53 +173,48 @@ class ApproverActions extends StatelessWidget {
           buildWhen: (previous, current) =>
               previous.isFetching != current.isFetching,
           builder: (context, state) {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Expanded(
-                  child: ScrollList<RequestInformation>(
-                    emptyMessage: 'No Return found'.tr(),
-                    onRefresh: () {
-                      if (!context.read<ShipToCodeBloc>().state.haveShipTo) {
-                        return;
-                      }
-                      final returnApproverFilterBloc =
-                          context.read<ReturnApproverFilterBloc>();
-                      returnApproverFilterBloc.add(
-                        const ReturnApproverFilterEvent.initialized(),
+            return AnnouncementBanner(
+              appModule: AppModule.returns,
+              child: ScrollList<RequestInformation>(
+                emptyMessage: 'No Return found'.tr(),
+                onRefresh: () {
+                  if (!context.read<ShipToCodeBloc>().state.haveShipTo) {
+                    return;
+                  }
+                  final returnApproverFilterBloc =
+                      context.read<ReturnApproverFilterBloc>();
+                  returnApproverFilterBloc.add(
+                    const ReturnApproverFilterEvent.initialized(),
+                  );
+                  context.read<ReturnApproverBloc>().add(
+                        ReturnApproverEvent.fetch(
+                          user: context.read<EligibilityBloc>().state.user,
+                          approverReturnFilter:
+                              ReturnApproverFilter.empty().copyWith(
+                            sortBy: returnApproverFilterBloc.state.activeSort,
+                          ),
+                        ),
                       );
-                      context.read<ReturnApproverBloc>().add(
-                            ReturnApproverEvent.fetch(
-                              user: context.read<EligibilityBloc>().state.user,
-                              approverReturnFilter:
-                                  ReturnApproverFilter.empty().copyWith(
-                                sortBy:
-                                    returnApproverFilterBloc.state.activeSort,
-                              ),
-                            ),
-                          );
-                    },
-                    onLoadingMore: () {
-                      context.read<ReturnApproverBloc>().add(
-                            ReturnApproverEvent.loadMore(
-                              user: context.read<EligibilityBloc>().state.user,
-                              approverReturnFilter: context
-                                  .read<ReturnApproverFilterBloc>()
-                                  .state
-                                  .approverReturnFilter,
-                            ),
-                          );
-                    },
-                    isLoading: state.isFetching,
-                    itemBuilder: (context, index, itemInfo) {
-                      return ApproverReturnRequestTile(
-                        approverReturnRequest: itemInfo,
+                },
+                onLoadingMore: () {
+                  context.read<ReturnApproverBloc>().add(
+                        ReturnApproverEvent.loadMore(
+                          user: context.read<EligibilityBloc>().state.user,
+                          approverReturnFilter: context
+                              .read<ReturnApproverFilterBloc>()
+                              .state
+                              .approverReturnFilter,
+                        ),
                       );
-                    },
-                    items: state.approverReturnRequestList,
-                  ),
-                ),
-              ],
+                },
+                isLoading: state.isFetching,
+                itemBuilder: (context, index, itemInfo) {
+                  return ApproverReturnRequestTile(
+                    approverReturnRequest: itemInfo,
+                  );
+                },
+                items: state.approverReturnRequestList,
+              ),
             );
           },
         ),

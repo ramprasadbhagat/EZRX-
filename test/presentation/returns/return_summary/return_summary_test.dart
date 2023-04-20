@@ -5,6 +5,8 @@ import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
+import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_summary/return_summary_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_summary_details/return_summary_details_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_summary_filter/return_summary_filter_bloc.dart';
@@ -58,6 +60,12 @@ class ReturnSummaryDetailsBlocMock
     extends MockBloc<ReturnSummaryDetailsEvent, ReturnSummaryDetailsState>
     implements ReturnSummaryDetailsBloc {}
 
+class AnnouncementBlocMock
+    extends MockBloc<AnnouncementEvent, AnnouncementState>
+    implements AnnouncementBloc {}
+
+class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
+
 void main() {
   late ReturnSummaryBloc returnSummaryBlocMock;
   late ReturnSummaryFilterBloc returnSummaryFilterBlocMock;
@@ -68,6 +76,8 @@ void main() {
   late AppRouter autoRouterMock;
   final locator = GetIt.instance;
   late ReturnSummaryDetailsBloc returnSummaryDetailsBlocMock;
+  late AuthBloc authBlocMock;
+  late AnnouncementBloc announcementBlocMock;
 
   setUpAll(() async {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
@@ -86,6 +96,8 @@ void main() {
     userBlocMock = UserBlocMock();
     salesOrgBlocMock = SalesOrgBlocMock();
     returnSummaryDetailsBlocMock = ReturnSummaryDetailsBlocMock();
+    authBlocMock = AuthBlocMock();
+    announcementBlocMock = AnnouncementBlocMock();
 
     when(() => returnSummaryBlocMock.state)
         .thenReturn(ReturnSummaryState.initial());
@@ -98,6 +110,9 @@ void main() {
     when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
     when(() => returnSummaryDetailsBlocMock.state)
         .thenReturn(ReturnSummaryDetailsState.initial());
+    when(() => authBlocMock.state).thenReturn(const AuthState.initial());
+    when(() => announcementBlocMock.state)
+        .thenReturn(AnnouncementState.initial());
   });
 
   Future getWidget(tester) async {
@@ -126,6 +141,9 @@ void main() {
           BlocProvider<ReturnSummaryDetailsBloc>(
             create: (context) => returnSummaryDetailsBlocMock,
           ),
+          BlocProvider<AuthBloc>(create: (context) => authBlocMock),
+          BlocProvider<AnnouncementBloc>(
+              create: (context) => announcementBlocMock),
         ],
         child: ReturnSummary(),
       ),

@@ -21,7 +21,6 @@ import 'package:ezrxmobile/presentation/home_tab.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_page.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/bundle_item_detail_page.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/material_filter.dart';
-import 'package:ezrxmobile/presentation/orders/create_order/material_list/material_list.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/material_root.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/order_summary_page.dart';
 import 'package:ezrxmobile/presentation/orders/order_template/order_template_detail_page.dart';
@@ -35,7 +34,6 @@ import 'package:ezrxmobile/presentation/returns/policy_configuration/policy_conf
 import 'package:ezrxmobile/presentation/returns/request_return/request_return.dart';
 import 'package:ezrxmobile/presentation/returns/return_summary/return_summary.dart';
 import 'package:ezrxmobile/presentation/returns/return_summary_details/return_summary_details.dart';
-import 'package:ezrxmobile/presentation/returns/returns_overview.dart';
 import 'package:ezrxmobile/presentation/returns/user_restriction_list.dart';
 import 'package:ezrxmobile/presentation/splash/splash_page.dart';
 
@@ -50,7 +48,6 @@ import 'package:ezrxmobile/presentation/orders/create_order/scan_material_info.d
     AutoRoute(path: 'login', page: LoginPage),
     AutoRoute(path: 'login_on_behalf', page: LoginOnBehalfPage),
     AutoRoute(path: 'settings', page: SettingsPage),
-    AutoRoute(path: 'returns_overview', page: ReturnsOverview),
     AutoRoute(path: 'request_return', page: RequestReturn),
     AutoRoute(path: 'approver_actions', page: ApproverActions),
     AutoRoute(path: 'return_summary', page: ReturnSummary),
@@ -67,7 +64,6 @@ import 'package:ezrxmobile/presentation/orders/create_order/scan_material_info.d
     AutoRoute(path: 'customer_search_page', page: CustomerSearchPage),
     AutoRoute(path: 'ship_to_search_page', page: ShiptToSearchPage),
     AutoRoute(path: 'material_list_page', page: MaterialRoot),
-    AutoRoute(path: 'material_list_page', page: MaterialListPage),
     AutoRoute(path: 'material_filter_page', page: MaterialFilterPage),
     AutoRoute(path: 'tos', page: AupTCDialog),
     AutoRoute(path: 'order_template_list_page', page: OrderTemplateListPage),

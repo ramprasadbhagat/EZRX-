@@ -5,6 +5,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/config.dart';
@@ -38,6 +39,10 @@ class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
 class CustomerCodeBlocMock
     extends MockBloc<CustomerCodeEvent, CustomerCodeState>
     implements CustomerCodeBloc {}
+
+class AnnouncementBlocMock
+    extends MockBloc<AnnouncementEvent, AnnouncementState>
+    implements AnnouncementBloc {}
 
 class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 
@@ -96,9 +101,9 @@ void main() {
     isFOCMaterial: false,
     remarks: '',
     genericMaterialName: '',
-
   );
-  late AuthBloc authBloc;
+  late AuthBloc authBlocMock;
+  late AnnouncementBloc announcementBlocMock;
   setUpAll(() {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
     locator.registerLazySingleton(() => MixpanelService());
@@ -112,7 +117,8 @@ void main() {
       salesOrgBlocMock = SalesOrgBlocMock();
       customerCodeBlocMock = CustomerCodeBlocMock();
       cartBlocMock = CartBlocMock();
-      authBloc = AuthBlocMock();
+      authBlocMock = AuthBlocMock();
+      announcementBlocMock = AnnouncementBlocMock();
       autoRouterMock = locator<AppRouter>();
       // salesOrganisationConfigs =
       //     await SalesOrgLocalDataSource().getConfig(salesOrg: '');
@@ -127,6 +133,9 @@ void main() {
       when(() => customerCodeBlocMock.state)
           .thenReturn(CustomerCodeState.initial());
       when(() => cartBlocMock.state).thenReturn(CartState.initial());
+      when(() => authBlocMock.state).thenReturn(const AuthState.initial());
+      when(() => announcementBlocMock.state)
+          .thenReturn(AnnouncementState.initial());
     });
 
     StackRouterScope getScopedWidget() {
@@ -138,7 +147,9 @@ void main() {
           BlocProvider<CustomerCodeBloc>(
               create: (context) => customerCodeBlocMock),
           BlocProvider<CartBloc>(create: (context) => cartBlocMock),
-          BlocProvider<AuthBloc>(create: (context) => authBloc),
+          BlocProvider<AuthBloc>(create: (context) => authBlocMock),
+          BlocProvider<AnnouncementBloc>(
+              create: (context) => announcementBlocMock),
         ],
         child: const CustomerSearchPage(),
       );

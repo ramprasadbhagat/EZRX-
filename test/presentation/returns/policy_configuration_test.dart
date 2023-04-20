@@ -1,6 +1,8 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
+import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/returns/policy_configuration/policy_configuration_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -27,12 +29,20 @@ class MockPolicyConfigurationListBloc
 class MockSalesOrgBloc extends MockBloc<SalesOrgEvent, SalesOrgState>
     implements SalesOrgBloc {}
 
+class AnnouncementBlocMock
+    extends MockBloc<AnnouncementEvent, AnnouncementState>
+    implements AnnouncementBloc {}
+
+class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
+
 void main() {
   late PolicyConfigurationBloc policyConfigurationListBlocMock;
   late SalesOrgBloc salesOrgBlocMock;
   late AppRouter autoRouterMock;
   var policyConfigurationListMock = <PolicyConfiguration>[];
   final locator = GetIt.instance;
+  late AuthBloc authBlocMock;
+  late AnnouncementBloc announcementBlocMock;
 
   setUpAll(() async {
     locator.registerLazySingleton(() => MixpanelService());
@@ -48,10 +58,15 @@ void main() {
     WidgetsFlutterBinding.ensureInitialized();
     policyConfigurationListBlocMock = MockPolicyConfigurationListBloc();
     salesOrgBlocMock = MockSalesOrgBloc();
+    authBlocMock = AuthBlocMock();
+    announcementBlocMock = AnnouncementBlocMock();
     when(() => policyConfigurationListBlocMock.state)
         .thenReturn(PolicyConfigurationState.initial());
 
     when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
+    when(() => authBlocMock.state).thenReturn(const AuthState.initial());
+    when(() => announcementBlocMock.state)
+        .thenReturn(AnnouncementState.initial());
   });
 
   Future getWidget(tester) async {
@@ -65,6 +80,9 @@ void main() {
           BlocProvider<SalesOrgBloc>(
             create: (context) => salesOrgBlocMock,
           ),
+          BlocProvider<AuthBloc>(create: (context) => authBlocMock),
+          BlocProvider<AnnouncementBloc>(
+              create: (context) => announcementBlocMock),
         ],
         child: const PolicyConfigurationPage(),
       ),

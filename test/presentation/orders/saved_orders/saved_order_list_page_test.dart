@@ -5,6 +5,8 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
+import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
@@ -57,6 +59,12 @@ class MockCartBloc extends MockBloc<CartEvent, CartState> implements CartBloc {}
 class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
     implements EligibilityBloc {}
 
+class AnnouncementBlocMock
+    extends MockBloc<AnnouncementEvent, AnnouncementState>
+    implements AnnouncementBloc {}
+
+class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
+
 void main() {
   late SavedOrderListBloc savedOrderListBlocMock;
   late UserBloc userBlocMock;
@@ -67,6 +75,8 @@ void main() {
   late CartBloc cartBlocMock;
   late AppRouter autoRouterMock;
   late EligibilityBloc eligibilityBlocMock;
+  late AuthBloc authBlocMock;
+  late AnnouncementBloc announcementBlocMock;
 
   var savedOrdersMock = <SavedOrder>[];
   final locator = GetIt.instance;
@@ -90,6 +100,8 @@ void main() {
     materialPriceDetailBlocMock = MockMaterialPriceDetailBloc();
     cartBlocMock = MockCartBloc();
     eligibilityBlocMock = EligibilityBlocMock();
+    authBlocMock = AuthBlocMock();
+    announcementBlocMock = AnnouncementBlocMock();
 
     when(() => savedOrderListBlocMock.state)
         .thenReturn(SavedOrderListState.initial());
@@ -103,6 +115,9 @@ void main() {
     when(() => cartBlocMock.state).thenReturn(CartState.initial());
     when(() => eligibilityBlocMock.state)
         .thenReturn(EligibilityState.initial());
+    when(() => authBlocMock.state).thenReturn(const AuthState.initial());
+    when(() => announcementBlocMock.state)
+        .thenReturn(AnnouncementState.initial());
   });
 
   Future getWidget(tester) async {
@@ -132,6 +147,9 @@ void main() {
           BlocProvider<EligibilityBloc>(
             create: (context) => eligibilityBlocMock,
           ),
+          BlocProvider<AuthBloc>(create: (context) => authBlocMock),
+          BlocProvider<AnnouncementBloc>(
+              create: (context) => announcementBlocMock),
         ],
         child: const SavedOrderListPage(),
       ),

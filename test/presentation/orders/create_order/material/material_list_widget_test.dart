@@ -6,6 +6,8 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
+import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
@@ -136,6 +138,12 @@ class RemoteConfigServiceMock extends Mock implements RemoteConfigService {}
 
 class MockConfig extends Mock implements Config {}
 
+class AnnouncementBlocMock
+    extends MockBloc<AnnouncementEvent, AnnouncementState>
+    implements AnnouncementBloc {}
+
+class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late MaterialListBloc materialListBlocMock;
@@ -159,6 +167,8 @@ void main() {
   late OrderHistoryDetailsBloc mockOrderHistoryDetailsBloc;
   late RemoteConfigService remoteConfigServiceMock;
   late Config mockConfig;
+  late AuthBloc authBlocMock;
+  late AnnouncementBloc announcementBlocMock;
 
   final fakeMaterialNumber = MaterialNumber('000000000023168451');
   final fakeMaterialPrice = MaterialPrice(10.0);
@@ -265,6 +275,9 @@ void main() {
         ),
         BlocProvider<OrderHistoryDetailsBloc>(
             create: ((context) => mockOrderHistoryDetailsBloc)),
+        BlocProvider<AuthBloc>(create: (context) => authBlocMock),
+        BlocProvider<AnnouncementBloc>(
+            create: (context) => announcementBlocMock),
       ],
       child: child,
     );
@@ -290,6 +303,8 @@ void main() {
     mockScanMaterialInfoBloc = ScanMaterialinfoBlocMock();
     mockAddToCartBloc = AddToCartBlocMock();
     remoteConfigServiceMock = RemoteConfigServiceMock();
+    authBlocMock = AuthBlocMock();
+    announcementBlocMock = AnnouncementBlocMock();
     mockConfig = MockConfig();
     mockOrderHistoryDetailsBloc = OrderHistoryDetailsBlocMock();
     when(() => remoteConfigServiceMock.getScanToOrderConfig()).thenReturn(true);
@@ -305,6 +320,9 @@ void main() {
     when(() => mockAddToCartBloc.state).thenReturn(AddToCartState.initial());
     when(() => mockOrderHistoryDetailsBloc.state)
         .thenReturn(OrderHistoryDetailsState.initial());
+    when(() => authBlocMock.state).thenReturn(const AuthState.initial());
+    when(() => announcementBlocMock.state)
+        .thenReturn(AnnouncementState.initial());
 
     when(() => mockMaterialFilterBloc.state).thenReturn(
       MaterialFilterState.initial().copyWith(

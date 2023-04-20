@@ -2,13 +2,39 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
+import 'package:ezrxmobile/domain/announcement/entities/announcement.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 
+class AnnouncementBanner extends StatelessWidget {
+  final AppModule appModule;
+  final Widget child;
+  const AnnouncementBanner({
+    Key? key,
+    required this.appModule,
+    required this.child,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        AnnouncementWidget(appModule: appModule),
+        Expanded(child: child),
+      ],
+    );
+  }
+}
+
 class AnnouncementWidget extends StatelessWidget {
-  const AnnouncementWidget({Key? key}) : super(key: key);
+  final AppModule appModule;
+
+  const AnnouncementWidget({
+    Key? key,
+    required this.appModule,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,117 +51,94 @@ class AnnouncementWidget extends StatelessWidget {
               unauthenticated: (value) =>
                   displayTime.isPreLogin || displayTime.isPreAndPost,
             );
+            final isValidModule = state.announcement.isValidModuleToDisplay(
+              module: appModule,
+            );
             if (!state.announcement.hasValidAnnouncement ||
                 state.isClosed ||
-                !isValidTime) {
+                !isValidTime ||
+                !isValidModule) {
               return const SizedBox();
             }
 
-            return Dismissible(
-              key: const Key('dismissibleAnnouncement'),
-              direction: state.announcement.isCrossButton
-                  ? DismissDirection.horizontal
-                  : DismissDirection.none,
-              onDismissed: (direction) {
-                context
-                    .read<AnnouncementBloc>()
-                    .add(const AnnouncementEvent.close());
-              },
-              child: SafeArea(
-                bottom: false,
-                child: Card(
-                  margin: const EdgeInsets.symmetric(horizontal: 15.0),
-                  color: ZPColors.announcementColor,
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 40,
-                        child: state.isLoading
-                            ? Container(
-                                key: const Key(
-                                  'announcementLoadingIndicator',
-                                ),
-                                width: 30,
-                                height: 10,
-                                padding: const EdgeInsets.only(right: 8.0),
-                                child: const LoadingIndicator(
-                                  indicatorType: Indicator.ballBeat,
-                                  colors: [ZPColors.white],
-                                ),
-                              )
-                            : IconButton(
-                                key: const Key('announcementReloadIcon'),
-                                onPressed: () {
-                                  context.read<AnnouncementBloc>().add(
-                                        const AnnouncementEvent
-                                            .getAnnouncement(),
-                                      );
-                                },
-                                padding: const EdgeInsets.only(right: 8.0),
-                                icon: const Icon(
-                                  Icons.replay_outlined,
-                                  color: ZPColors.white,
-                                ),
-                              ),
-                      ),
-                      BlocConsumer<SalesOrgBloc, SalesOrgState>(
-                        listenWhen: (previous, current) =>
-                            previous.salesOrg != current.salesOrg,
-                        listener: (context, salesOrgState) {
-                          context.read<AnnouncementBloc>().add(
-                                const AnnouncementEvent.changePreferLanguage(
-                                  preferSalesOrgLanguage: true,
-                                ),
-                              );
-                        },
-                        buildWhen: (previous, current) =>
-                            previous.salesOrg != current.salesOrg,
-                        builder: (context, salesOrgState) {
-                          final announcement =
-                              state.announcement.descriptionDisplay(
-                            languageCode: state.preferSalesOrgLanguage
-                                ? salesOrgState.salesOrg.languageCode
-                                : context.locale.languageCode,
-                          );
-
-                          return Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                announcement,
-                                key: const Key(
-                                  'announcementDescription',
-                                ),
-                                textAlign: TextAlign.justify,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleSmall
-                                    ?.apply(
-                                      color: ZPColors.white,
-                                    ),
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                      if (state.announcement.isCrossButton)
-                        IconButton(
-                          key: const Key('announcementCloseIcon'),
-                          onPressed: () {
-                            context
-                                .read<AnnouncementBloc>()
-                                .add(const AnnouncementEvent.close());
-                          },
-                          padding: const EdgeInsets.only(left: 8.0),
-                          icon: const Icon(
-                            Icons.close,
-                            color: ZPColors.white,
-                          ),
+            return ListTile(
+              tileColor: ZPColors.announcementColor,
+              dense: true,
+              contentPadding: const EdgeInsets.symmetric(horizontal: 3),
+              horizontalTitleGap: 8,
+              subtitle: BlocConsumer<SalesOrgBloc, SalesOrgState>(
+                listenWhen: (previous, current) =>
+                    previous.salesOrg != current.salesOrg,
+                listener: (context, salesOrgState) {
+                  context.read<AnnouncementBloc>().add(
+                        const AnnouncementEvent.changePreferLanguage(
+                          preferSalesOrgLanguage: true,
                         ),
-                    ],
-                  ),
-                ),
+                      );
+                },
+                buildWhen: (previous, current) =>
+                    previous.salesOrg != current.salesOrg,
+                builder: (context, salesOrgState) {
+                  final announcement = state.announcement.descriptionDisplay(
+                    languageCode: state.preferSalesOrgLanguage
+                        ? salesOrgState.salesOrg.languageCode
+                        : context.locale.languageCode,
+                  );
+
+                  return Text(
+                    announcement,
+                    key: const Key(
+                      'announcementDescription',
+                    ),
+                    textAlign: TextAlign.justify,
+                    style: Theme.of(context).textTheme.titleSmall?.apply(
+                          color: ZPColors.white,
+                        ),
+                  );
+                },
               ),
+              leading: state.isLoading
+                  ? Container(
+                      width: 48,
+                      alignment: Alignment.center,
+                      child: const SizedBox(
+                        key: Key(
+                          'announcementLoadingIndicator',
+                        ),
+                        width: 24,
+                        height: 10,
+                        child: LoadingIndicator(
+                          indicatorType: Indicator.ballBeat,
+                          colors: [ZPColors.white],
+                        ),
+                      ),
+                    )
+                  : IconButton(
+                      key: const Key('announcementReloadIcon'),
+                      onPressed: () {
+                        context.read<AnnouncementBloc>().add(
+                              const AnnouncementEvent.getAnnouncement(),
+                            );
+                      },
+                      icon: const Icon(
+                        Icons.replay_outlined,
+                        color: ZPColors.white,
+                      ),
+                    ),
+              trailing: state.announcement.isCrossButton
+                  ? IconButton(
+                      key: const Key('announcementCloseIcon'),
+                      onPressed: () {
+                        context
+                            .read<AnnouncementBloc>()
+                            .add(const AnnouncementEvent.close());
+                      },
+                      icon: const Icon(
+                        Icons.close,
+                        color: ZPColors.white,
+                      ),
+                    )
+                  : null,
             );
           },
         );

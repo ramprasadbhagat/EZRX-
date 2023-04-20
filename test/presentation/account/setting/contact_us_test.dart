@@ -2,6 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
+import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
@@ -19,11 +21,19 @@ import '../../order_history/order_history_details_widget_test.dart';
 class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
     implements SalesOrgBloc {}
 
+class AnnouncementBlocMock
+    extends MockBloc<AnnouncementEvent, AnnouncementState>
+    implements AnnouncementBloc {}
+
+class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
+
 void main() {
   final binding = TestWidgetsFlutterBinding.ensureInitialized();
 
   WidgetsFlutterBinding.ensureInitialized();
   late SalesOrgBloc salesOrgBlocMock;
+  late AuthBloc authBlocMock;
+  late AnnouncementBloc announcementBlocMock;
   late AppRouter autoRouterMock;
   setUpAll(() async {
     setupLocator();
@@ -34,11 +44,16 @@ void main() {
     setUp(() {
       autoRouterMock = locator<AppRouter>();
       salesOrgBlocMock = SalesOrgBlocMock();
+      authBlocMock = AuthBlocMock();
+      announcementBlocMock = AnnouncementBlocMock();
       when(() => salesOrgBlocMock.state)
           .thenReturn(SalesOrgState.initial().copyWith(
         salesOrganisation:
             SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2001')),
       ));
+      when(() => authBlocMock.state).thenReturn(const AuthState.initial());
+      when(() => announcementBlocMock.state)
+          .thenReturn(AnnouncementState.initial());
     });
 
     StackRouterScope getScopedWidget() {
@@ -46,6 +61,9 @@ void main() {
         autoRouterMock: autoRouterMock,
         providers: [
           BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBlocMock),
+          BlocProvider<AuthBloc>(create: (context) => authBlocMock),
+          BlocProvider<AnnouncementBloc>(
+              create: (context) => announcementBlocMock),
         ],
         child: const ContactUsPage(),
       );

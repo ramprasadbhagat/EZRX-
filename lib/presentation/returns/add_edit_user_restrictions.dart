@@ -1,10 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/domain/announcement/entities/announcement.dart';
 import 'package:ezrxmobile/domain/returns/entities/approver_rights_details.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
+import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/confirm_clear_cart_dialog.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -41,159 +43,164 @@ class AddEditUserRestrictionPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(isEditing ? 'Configure Restriction' : 'Add Restriction'),
       ),
-      body:
-          BlocConsumer<UserRestrictionDetailsBloc, UserRestrictionDetailsState>(
-        listenWhen: (previous, current) =>
-            previous.userRestrictionStatus != current.userRestrictionStatus ||
-            previous.apiFailureOrSuccessOption !=
-                current.apiFailureOrSuccessOption,
-        listener: (context, state) {
-          state.apiFailureOrSuccessOption.fold(
-            () {
-              if (state.userRestrictionStatus.ifUserAdded) {
-                if (state.userRestrictionStatus.ifUserNotConfigured) {
-                  showSnackBar(
-                    context: context,
-                    message: 'No New Records Added',
-                  );
-
-                  return;
-                }
-                context.read<UserRestrictionListBloc>().add(
-                      UserRestrictionListEvent.fetch(
-                        salesOrg: context
-                            .read<EligibilityBloc>()
-                            .state
-                            .salesOrganisation
-                            .salesOrg,
-                      ),
+      body: AnnouncementBanner(
+        appModule: AppModule.returns,
+        child: BlocConsumer<UserRestrictionDetailsBloc,
+            UserRestrictionDetailsState>(
+          listenWhen: (previous, current) =>
+              previous.userRestrictionStatus != current.userRestrictionStatus ||
+              previous.apiFailureOrSuccessOption !=
+                  current.apiFailureOrSuccessOption,
+          listener: (context, state) {
+            state.apiFailureOrSuccessOption.fold(
+              () {
+                if (state.userRestrictionStatus.ifUserAdded) {
+                  if (state.userRestrictionStatus.ifUserNotConfigured) {
+                    showSnackBar(
+                      context: context,
+                      message: 'No New Records Added',
                     );
-                context.router.pop();
-              }
-            },
-            (either) => either.fold(
-              (failure) {
-                ErrorUtils.handleApiFailure(context, failure);
+
+                    return;
+                  }
+                  context.read<UserRestrictionListBloc>().add(
+                        UserRestrictionListEvent.fetch(
+                          salesOrg: context
+                              .read<EligibilityBloc>()
+                              .state
+                              .salesOrganisation
+                              .salesOrg,
+                        ),
+                      );
+                  context.router.pop();
+                }
               },
-              (_) {},
-            ),
-          );
-        },
-        builder: (context, state) {
-          return state.isFetching
-              ? LoadingShimmer.logo(
-                  key: const Key('LoaderImage'),
-                )
-              : Padding(
-                  padding: const EdgeInsets.all(15),
-                  child: CustomScrollView(
-                    slivers: [
-                      SliverToBoxAdapter(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              'User Restrictions',
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                            Form(
-                              key: returnApprovalLimitFormKey,
-                              child: Column(
+              (either) => either.fold(
+                (failure) {
+                  ErrorUtils.handleApiFailure(context, failure);
+                },
+                (_) {},
+              ),
+            );
+          },
+          builder: (context, state) {
+            return state.isFetching
+                ? LoadingShimmer.logo(
+                    key: const Key('LoaderImage'),
+                  )
+                : Padding(
+                    padding: const EdgeInsets.all(15),
+                    child: CustomScrollView(
+                      slivers: [
+                        SliverToBoxAdapter(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                'User Restrictions',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              Form(
+                                key: returnApprovalLimitFormKey,
+                                child: Column(
+                                  children: [
+                                    const SizedBox(
+                                      height: 15,
+                                    ),
+                                    _TextFormField(
+                                      label: UserRestrictionLabel.userName,
+                                      keyText: 'userNameKey',
+                                      value: state.approverRights.userName
+                                          .getValue(),
+                                      isFromEdit: isEditing,
+                                    ),
+                                    const SizedBox(
+                                      height: 15,
+                                    ),
+                                    _TextFormField(
+                                      label:
+                                          UserRestrictionLabel.returnLowerLimit,
+                                      keyText: 'returnLowerLimit',
+                                      value: state.approvalLimits
+                                          .valueLowerLimit.parsedValue,
+                                      isFromEdit: isEditing,
+                                      keyboardType: TextInputType.number,
+                                    ),
+                                    const SizedBox(
+                                      height: 15,
+                                    ),
+                                    _TextFormField(
+                                      label:
+                                          UserRestrictionLabel.returnUpperLimit,
+                                      keyText: 'returnUpperLimit',
+                                      value: state.approvalLimits
+                                          .valueUpperLimit.parsedValue,
+                                      isFromEdit: isEditing,
+                                      keyboardType: TextInputType.number,
+                                    ),
+                                    const SizedBox(
+                                      height: 15,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                  const SizedBox(
-                                    height: 15,
+                                  const Text(
+                                    'Approver Rights',
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
                                   ),
-                                  _TextFormField(
-                                    label: UserRestrictionLabel.userName,
-                                    keyText: 'userNameKey',
-                                    value: state.approverRights.userName
-                                        .getValue(),
-                                    isFromEdit: isEditing,
-                                  ),
-                                  const SizedBox(
-                                    height: 15,
-                                  ),
-                                  _TextFormField(
-                                    label:
-                                        UserRestrictionLabel.returnLowerLimit,
-                                    keyText: 'returnLowerLimit',
-                                    value: state.approvalLimits.valueLowerLimit
-                                        .parsedValue,
-                                    isFromEdit: isEditing,
-                                    keyboardType: TextInputType.number,
-                                  ),
-                                  const SizedBox(
-                                    height: 15,
-                                  ),
-                                  _TextFormField(
-                                    label:
-                                        UserRestrictionLabel.returnUpperLimit,
-                                    keyText: 'returnUpperLimit',
-                                    value: state.approvalLimits.valueUpperLimit
-                                        .parsedValue,
-                                    isFromEdit: isEditing,
-                                    keyboardType: TextInputType.number,
-                                  ),
-                                  const SizedBox(
-                                    height: 15,
+                                  IconButton(
+                                    key: const Key('addApproverRightsButton'),
+                                    onPressed: () {
+                                      context
+                                          .read<UserRestrictionDetailsBloc>()
+                                          .add(
+                                            UserRestrictionDetailsEvent
+                                                .addApproverRights(
+                                              salesOrg: context
+                                                  .read<EligibilityBloc>()
+                                                  .state
+                                                  .salesOrganisation
+                                                  .salesOrg,
+                                            ),
+                                          );
+                                    },
+                                    icon: const Icon(
+                                      Icons.add,
+                                      color: ZPColors.black,
+                                    ),
                                   ),
                                 ],
                               ),
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                const Text(
-                                  'Approver Rights',
-                                  style: TextStyle(fontWeight: FontWeight.bold),
-                                ),
-                                IconButton(
-                                  key: const Key('addApproverRightsButton'),
-                                  onPressed: () {
-                                    context
-                                        .read<UserRestrictionDetailsBloc>()
-                                        .add(
-                                          UserRestrictionDetailsEvent
-                                              .addApproverRights(
-                                            salesOrg: context
-                                                .read<EligibilityBloc>()
-                                                .state
-                                                .salesOrganisation
-                                                .salesOrg,
-                                          ),
-                                        );
-                                  },
-                                  icon: const Icon(
-                                    Icons.add,
-                                    color: ZPColors.black,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                      SliverList(
-                        delegate: SliverChildBuilderDelegate(
-                          (context, index) => _ApproverRights(
-                            approverRights:
-                                state.addedApproverRightsList[index],
-                            index: index,
-                            isFromEdit: isEditing,
+                            ],
                           ),
-                          childCount: state.addedApproverRightsList.length,
                         ),
-                      ),
-                      SliverToBoxAdapter(
-                        child: _AddDeleteButton(
-                          isEditing: isEditing,
-                          formKey: returnApprovalLimitFormKey,
+                        SliverList(
+                          delegate: SliverChildBuilderDelegate(
+                            (context, index) => _ApproverRights(
+                              approverRights:
+                                  state.addedApproverRightsList[index],
+                              index: index,
+                              isFromEdit: isEditing,
+                            ),
+                            childCount: state.addedApproverRightsList.length,
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                );
-        },
+                        SliverToBoxAdapter(
+                          child: _AddDeleteButton(
+                            isEditing: isEditing,
+                            formKey: returnApprovalLimitFormKey,
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+          },
+        ),
       ),
     );
   }

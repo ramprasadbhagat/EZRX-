@@ -1,5 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
@@ -7,13 +9,14 @@ import 'package:ezrxmobile/application/order/order_history_details/order_history
 import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/announcement/entities/announcement.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_basic_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
-import 'package:ezrxmobile/presentation/history/detail/widget/re_order_button.dart';
 import 'package:ezrxmobile/presentation/history/detail/section/bill_to_section.dart';
 import 'package:ezrxmobile/presentation/history/detail/section/invoice_section.dart';
 import 'package:ezrxmobile/presentation/history/detail/section/order_detail_section.dart';
@@ -22,8 +25,7 @@ import 'package:ezrxmobile/presentation/history/detail/section/po_attachment_sec
 import 'package:ezrxmobile/presentation/history/detail/section/ship_to_section.dart';
 import 'package:ezrxmobile/presentation/history/detail/section/sold_to_section.dart';
 import 'package:ezrxmobile/presentation/history/detail/section/system_message_section.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ezrxmobile/presentation/history/detail/widget/re_order_button.dart';
 
 class HistoryDetails extends StatelessWidget {
   final OrderHistoryItem orderHistoryItem;
@@ -109,40 +111,43 @@ class HistoryDetails extends StatelessWidget {
                   const ReOrderButton(fromTopMenu: true),
                 ],
         ),
-        body: SingleChildScrollView(
-          padding: const EdgeInsets.only(
-            left: 15,
-            right: 15,
-            bottom: 20,
-          ),
-          key: const Key('scrollHistoryDetail'),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const HistorySystemMessageSection(),
-              const HistoryOrderDetailSection(),
-              const HistorySoldToSection(
-                key: Key('soldToAddressWidget'),
-              ),
-              const HistoryShipToSection(
-                key: Key('shipToAddressWidget'),
-              ),
-              if (context.read<EligibilityBloc>().state.isBillToInfo)
-                HistoryBillToSection(
-                  billToInfo: billToInfo,
+        body: AnnouncementBanner(
+          appModule: AppModule.orders,
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.only(
+              left: 15,
+              right: 15,
+              bottom: 20,
+            ),
+            key: const Key('scrollHistoryDetail'),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const HistorySystemMessageSection(),
+                const HistoryOrderDetailSection(),
+                const HistorySoldToSection(
+                  key: Key('soldToAddressWidget'),
                 ),
-              if (context
-                  .read<EligibilityBloc>()
-                  .state
-                  .salesOrgConfigs
-                  .showPOAttachment)
-                const HistoryPoAttachmentSection(),
-              const HistoryInvoiceSection(),
-              HistoryOrderSummarySection(
-                salesOrgConfigs: salesOrgConfigs,
-              ),
-              const ReOrderButton(fromTopMenu: false),
-            ],
+                const HistoryShipToSection(
+                  key: Key('shipToAddressWidget'),
+                ),
+                if (context.read<EligibilityBloc>().state.isBillToInfo)
+                  HistoryBillToSection(
+                    billToInfo: billToInfo,
+                  ),
+                if (context
+                    .read<EligibilityBloc>()
+                    .state
+                    .salesOrgConfigs
+                    .showPOAttachment)
+                  const HistoryPoAttachmentSection(),
+                const HistoryInvoiceSection(),
+                HistoryOrderSummarySection(
+                  salesOrgConfigs: salesOrgConfigs,
+                ),
+                const ReOrderButton(fromTopMenu: false),
+              ],
+            ),
           ),
         ),
       ),

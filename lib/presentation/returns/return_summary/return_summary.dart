@@ -10,11 +10,12 @@ import 'package:ezrxmobile/application/returns/return_summary_filter/return_summ
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/announcement/entities/announcement.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_summary_filter.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_summary_requests.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
-
+import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/filter_icon.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
@@ -33,7 +34,6 @@ class ReturnSummary extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
@@ -108,165 +108,171 @@ class ReturnSummary extends StatelessWidget {
         ),
       ),
       endDrawer: const ReturnSummaryFilterDrawer(),
-      body: BlocListener<ReturnSummaryFilterBloc, ReturnSummaryFilterState>(
-        listenWhen: (previous, current) =>
-            previous.isSubmitting != current.isSubmitting &&
-                current.isSubmitting ||
-            !scaffoldKey.currentState!.isEndDrawerOpen,
-        listener: (context, state) {
-          final hasCustomerCodeInfo = context
-              .read<CustomerCodeBloc>()
-              .state
-              .customerCodeInfo
-              .customerCodeSoldTo
-              .isNotEmpty;
-          final hasShipToInfo = context
-              .read<ShipToCodeBloc>()
-              .state
-              .shipToInfo
-              .shipToCustomerCode
-              .isNotEmpty;
-          if (hasCustomerCodeInfo && hasShipToInfo) {
-            context.read<ReturnSummaryBloc>()
-              ..add(const ReturnSummaryEvent.initialized())
-              ..add(
-                ReturnSummaryEvent.fetch(
-                  user: context.read<UserBloc>().state.user,
-                  customerCodeInfo:
-                      context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                  shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
-                  returnSummaryFilter: context
-                      .read<ReturnSummaryFilterBloc>()
-                      .state
-                      .returnSummaryFilter,
-                ),
-              );
-          }
-        },
-        child: BlocConsumer<ReturnSummaryBloc, ReturnSummaryState>(
-          listenWhen: (previous, current) {
-            return previous.failureOrSuccessOption !=
-                current.failureOrSuccessOption;
-          },
+      body: AnnouncementBanner(
+        appModule: AppModule.returns,
+        child: BlocListener<ReturnSummaryFilterBloc, ReturnSummaryFilterState>(
+          listenWhen: (previous, current) =>
+              previous.isSubmitting != current.isSubmitting &&
+                  current.isSubmitting ||
+              !scaffoldKey.currentState!.isEndDrawerOpen,
           listener: (context, state) {
-            state.failureOrSuccessOption.fold(
-              () {},
-              (either) => either.fold(
-                (failure) {
-                  ErrorUtils.handleApiFailure(context, failure);
-                },
-                (_) {},
-              ),
-            );
-          },
-          buildWhen: (previous, current) =>
-              previous.isLoading != current.isLoading ||
-              previous.returnSummaryList != current.returnSummaryList,
-          builder: (context, returnSummaryState) {
-            final configs = context.read<SalesOrgBloc>().state.configs;
-            final customerCode =
-                context.read<CustomerCodeBloc>().state.customerCodeInfo;
-            final shipToInfo = context.read<ShipToCodeBloc>().state.shipToInfo;
-
-            if (returnSummaryState.isLoading &&
-                returnSummaryState.returnSummaryList.isEmpty) {
-              return LoadingShimmer.logo(
-                key: const Key('LoaderImage'),
-              );
-            }
-
-            return Column(
-              children: [
-                context
+            final hasCustomerCodeInfo = context
+                .read<CustomerCodeBloc>()
+                .state
+                .customerCodeInfo
+                .customerCodeSoldTo
+                .isNotEmpty;
+            final hasShipToInfo = context
+                .read<ShipToCodeBloc>()
+                .state
+                .shipToInfo
+                .shipToCustomerCode
+                .isNotEmpty;
+            if (hasCustomerCodeInfo && hasShipToInfo) {
+              context.read<ReturnSummaryBloc>()
+                ..add(const ReturnSummaryEvent.initialized())
+                ..add(
+                  ReturnSummaryEvent.fetch(
+                    user: context.read<UserBloc>().state.user,
+                    customerCodeInfo:
+                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                    shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+                    returnSummaryFilter: context
                         .read<ReturnSummaryFilterBloc>()
                         .state
-                        .returnSummaryFilter
-                        .anyFilterApplied
-                    ? const SizedBox.shrink()
-                    : Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const Icon(
-                              Icons.info_outline_rounded,
-                              color: ZPColors.darkerGreen,
-                              size: 18,
-                            ),
-                            const SizedBox(
-                              width: 8,
-                            ),
-                            Expanded(
-                              child: Text(
-                                'Return summary dates pre-set for past 7 days. Change the date range from “Filter” for more data'
-                                    .tr(),
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleSmall
-                                    ?.copyWith(
-                                      fontSize: 12,
-                                      fontStyle: FontStyle.italic,
-                                    ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                Expanded(
-                  child: ScrollList<ReturnSummaryRequest>(
-                    emptyMessage: 'You have not submitted any return request'.tr(),
-                    onRefresh: () {
-                      context.read<ReturnSummaryFilterBloc>().add(
-                            const ReturnSummaryFilterEvent.initialized(),
-                          );
-                      context.read<ReturnSummaryBloc>().add(
-                            ReturnSummaryEvent.fetch(
-                              user: context.read<UserBloc>().state.user,
-                              customerCodeInfo: context
-                                  .read<CustomerCodeBloc>()
-                                  .state
-                                  .customerCodeInfo,
-                              shipToInfo: context
-                                  .read<ShipToCodeBloc>()
-                                  .state
-                                  .shipToInfo,
-                              returnSummaryFilter: ReturnSummaryFilter.empty(),
-                            ),
-                          );
-                    },
-                    onLoadingMore: () {
-                      context.read<ReturnSummaryBloc>().add(
-                            ReturnSummaryEvent.loadMore(
-                              user: context.read<UserBloc>().state.user,
-                              customerCodeInfo: context
-                                  .read<CustomerCodeBloc>()
-                                  .state
-                                  .customerCodeInfo,
-                              shipToInfo: context
-                                  .read<ShipToCodeBloc>()
-                                  .state
-                                  .shipToInfo,
-                              returnSummaryFilter: context
-                                  .read<ReturnSummaryFilterBloc>()
-                                  .state
-                                  .returnSummaryFilter,
-                            ),
-                          );
-                    },
-                    isLoading: returnSummaryState.isLoading,
-                    itemBuilder: (context, index, item) =>
-                        ReturnSummaryListItem(
-                      returnSummaryRequests: item,
-                      configs: configs,
-                      customerCodeInfo: customerCode,
-                      shipToInfo: shipToInfo,
-                    ),
-                    items: returnSummaryState.returnSummaryList,
+                        .returnSummaryFilter,
                   ),
-                ),
-              ],
-            );
+                );
+            }
           },
+          child: BlocConsumer<ReturnSummaryBloc, ReturnSummaryState>(
+            listenWhen: (previous, current) {
+              return previous.failureOrSuccessOption !=
+                  current.failureOrSuccessOption;
+            },
+            listener: (context, state) {
+              state.failureOrSuccessOption.fold(
+                () {},
+                (either) => either.fold(
+                  (failure) {
+                    ErrorUtils.handleApiFailure(context, failure);
+                  },
+                  (_) {},
+                ),
+              );
+            },
+            buildWhen: (previous, current) =>
+                previous.isLoading != current.isLoading ||
+                previous.returnSummaryList != current.returnSummaryList,
+            builder: (context, returnSummaryState) {
+              final configs = context.read<SalesOrgBloc>().state.configs;
+              final customerCode =
+                  context.read<CustomerCodeBloc>().state.customerCodeInfo;
+              final shipToInfo =
+                  context.read<ShipToCodeBloc>().state.shipToInfo;
+
+              if (returnSummaryState.isLoading &&
+                  returnSummaryState.returnSummaryList.isEmpty) {
+                return LoadingShimmer.logo(
+                  key: const Key('LoaderImage'),
+                );
+              }
+
+              return Column(
+                children: [
+                  context
+                          .read<ReturnSummaryFilterBloc>()
+                          .state
+                          .returnSummaryFilter
+                          .anyFilterApplied
+                      ? const SizedBox.shrink()
+                      : Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Icon(
+                                Icons.info_outline_rounded,
+                                color: ZPColors.darkerGreen,
+                                size: 18,
+                              ),
+                              const SizedBox(
+                                width: 8,
+                              ),
+                              Expanded(
+                                child: Text(
+                                  'Return summary dates pre-set for past 7 days. Change the date range from “Filter” for more data'
+                                      .tr(),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleSmall
+                                      ?.copyWith(
+                                        fontSize: 12,
+                                        fontStyle: FontStyle.italic,
+                                      ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                  Expanded(
+                    child: ScrollList<ReturnSummaryRequest>(
+                      emptyMessage:
+                          'You have not submitted any return request'.tr(),
+                      onRefresh: () {
+                        context.read<ReturnSummaryFilterBloc>().add(
+                              const ReturnSummaryFilterEvent.initialized(),
+                            );
+                        context.read<ReturnSummaryBloc>().add(
+                              ReturnSummaryEvent.fetch(
+                                user: context.read<UserBloc>().state.user,
+                                customerCodeInfo: context
+                                    .read<CustomerCodeBloc>()
+                                    .state
+                                    .customerCodeInfo,
+                                shipToInfo: context
+                                    .read<ShipToCodeBloc>()
+                                    .state
+                                    .shipToInfo,
+                                returnSummaryFilter:
+                                    ReturnSummaryFilter.empty(),
+                              ),
+                            );
+                      },
+                      onLoadingMore: () {
+                        context.read<ReturnSummaryBloc>().add(
+                              ReturnSummaryEvent.loadMore(
+                                user: context.read<UserBloc>().state.user,
+                                customerCodeInfo: context
+                                    .read<CustomerCodeBloc>()
+                                    .state
+                                    .customerCodeInfo,
+                                shipToInfo: context
+                                    .read<ShipToCodeBloc>()
+                                    .state
+                                    .shipToInfo,
+                                returnSummaryFilter: context
+                                    .read<ReturnSummaryFilterBloc>()
+                                    .state
+                                    .returnSummaryFilter,
+                              ),
+                            );
+                      },
+                      isLoading: returnSummaryState.isLoading,
+                      itemBuilder: (context, index, item) =>
+                          ReturnSummaryListItem(
+                        returnSummaryRequests: item,
+                        configs: configs,
+                        customerCodeInfo: customerCode,
+                        shipToInfo: shipToInfo,
+                      ),
+                      items: returnSummaryState.returnSummaryList,
+                    ),
+                  ),
+                ],
+              );
+            },
+          ),
         ),
       ),
     );

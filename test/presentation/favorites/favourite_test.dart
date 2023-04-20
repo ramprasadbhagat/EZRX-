@@ -7,6 +7,7 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
@@ -35,7 +36,11 @@ import '../order_history/order_history_details_widget_test.dart';
 
 class UserMockBloc extends MockBloc<UserEvent, UserState> implements UserBloc {}
 
-class AuthMockBloc extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
+class AnnouncementBlocMock
+    extends MockBloc<AnnouncementEvent, AnnouncementState>
+    implements AnnouncementBloc {}
+
+class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 
 class ShipToCodeMockBloc extends MockBloc<ShipToCodeEvent, ShipToCodeState>
     implements ShipToCodeBloc {}
@@ -68,6 +73,7 @@ class AddToCartBlocMock extends MockBloc<AddToCartEvent, AddToCartState>
 class OrderDocumentTypeBlocMock
     extends MockBloc<OrderDocumentTypeEvent, OrderDocumentTypeState>
     implements OrderDocumentTypeBloc {}
+    
 
 void main() {
   var mockFavouriteBloc = MockFavouriteBloc();
@@ -80,7 +86,8 @@ void main() {
   var mockMaterialPriceDetailBloc = MaterialPriceDetailMockBloc();
   late EligibilityBlocMock mockEligiblityBloc;
   late AddToCartBlocMock addToCartBlocMock;
-  late AuthMockBloc authBlocMock;
+  late AuthBloc authBlocMock;
+  late AnnouncementBloc announcementBlocMock;
   late OrderDocumentTypeBloc orderDocumentTypeBlocMock;
 
   final mockFavourite1 = Favourite(
@@ -108,7 +115,8 @@ void main() {
   });
 
   void initialSetup() {
-    authBlocMock = AuthMockBloc();
+    authBlocMock = AuthBlocMock();
+    announcementBlocMock = AnnouncementBlocMock();
     mockFavouriteBloc = MockFavouriteBloc();
     userBlocMock = UserMockBloc();
     shipToCodeMockBloc = ShipToCodeMockBloc();
@@ -137,6 +145,9 @@ void main() {
     when(() => orderDocumentTypeBlocMock.state).thenReturn(
       OrderDocumentTypeState.initial(),
     );
+    when(() => authBlocMock.state).thenReturn(const AuthState.initial());
+    when(() => announcementBlocMock.state)
+        .thenReturn(AnnouncementState.initial());
   }
 
   group(
@@ -179,6 +190,9 @@ void main() {
                 BlocProvider<OrderDocumentTypeBloc>(
                   create: (context) => orderDocumentTypeBlocMock,
                 ),
+                BlocProvider<AuthBloc>(create: (context) => authBlocMock),
+                BlocProvider<AnnouncementBloc>(
+                    create: (context) => announcementBlocMock),
               ],
               child: const FavouritesTab(),
             ),

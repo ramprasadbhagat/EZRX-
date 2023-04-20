@@ -6,6 +6,7 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
@@ -74,14 +75,17 @@ class TenderContractBlocMock
 class FavoriteMockBloc extends MockBloc<FavouriteEvent, FavouriteState>
     implements FavouriteBloc {}
 
-class AuthBlocBlocMock extends MockBloc<AuthEvent, AuthState>
-    implements AuthBloc {}
-
 class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
 
 class OrderDocumentTypeBlocMock
     extends MockBloc<OrderDocumentTypeEvent, OrderDocumentTypeState>
     implements OrderDocumentTypeBloc {}
+
+class AnnouncementBlocMock
+    extends MockBloc<AnnouncementEvent, AnnouncementState>
+    implements AnnouncementBloc {}
+
+class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -94,7 +98,8 @@ void main() {
   final AddToCartBloc addToCartBlocMock = AddToCartBlocMock();
   late TenderContractBloc tenderContractBlocMock;
   late FavouriteBloc favouriteMockBloc;
-  late AuthBlocBlocMock authBlocBlocMock;
+  late AuthBloc authBlocMock;
+  late AnnouncementBloc announcementBlocMock;
   late UserBlocMock userBlocMock;
   late OrderDocumentTypeBlocMock orderDocumentTypeBlocMock;
 
@@ -137,7 +142,8 @@ void main() {
       shipToCodeMockBloc = ShipToCodeMockBloc();
       tenderContractBlocMock = TenderContractBlocMock();
       favouriteMockBloc = FavoriteMockBloc();
-      authBlocBlocMock = AuthBlocBlocMock();
+      authBlocMock = AuthBlocMock();
+      announcementBlocMock = AnnouncementBlocMock();
       userBlocMock = UserBlocMock();
       orderDocumentTypeBlocMock = OrderDocumentTypeBlocMock();
 
@@ -153,7 +159,9 @@ void main() {
       when(() => tenderContractBlocMock.state)
           .thenReturn(TenderContractState.initial());
       when(() => favouriteMockBloc.state).thenReturn(FavouriteState.initial());
-      when(() => authBlocBlocMock.state).thenReturn(const AuthState.initial());
+      when(() => authBlocMock.state).thenReturn(const AuthState.initial());
+      when(() => announcementBlocMock.state)
+          .thenReturn(AnnouncementState.initial());
       when(() => userBlocMock.state).thenReturn(UserState.initial());
       when(() => orderDocumentTypeBlocMock.state)
           .thenReturn(OrderDocumentTypeState.initial());
@@ -186,7 +194,9 @@ void main() {
             BlocProvider<TenderContractBloc>(
                 create: (context) => tenderContractBlocMock),
             BlocProvider<FavouriteBloc>(create: (context) => favouriteMockBloc),
-            BlocProvider<AuthBloc>(create: (context) => authBlocBlocMock),
+            BlocProvider<AuthBloc>(create: (context) => authBlocMock),
+            BlocProvider<AnnouncementBloc>(
+                create: (context) => announcementBlocMock),
             BlocProvider<UserBloc>(create: (context) => userBlocMock),
             BlocProvider<OrderDocumentTypeBloc>(
                 create: (context) => orderDocumentTypeBlocMock),

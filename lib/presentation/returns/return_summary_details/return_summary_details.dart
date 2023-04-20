@@ -4,9 +4,11 @@ import 'package:ezrxmobile/application/returns/return_summary_details/return_sum
 
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/announcement/entities/announcement.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 
 import 'package:ezrxmobile/domain/returns/entities/return_summary_requests.dart';
+import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/returns/return_summary_details/section/customer_details_section.dart';
 import 'package:ezrxmobile/presentation/returns/return_summary_details/section/return_details_section.dart';
@@ -58,18 +60,21 @@ class ReturnSummaryDetails extends StatelessWidget {
           ),
           title: Text(returnSummaryRequests.returnId.tr()),
         ),
-        body: SingleChildScrollView(
-          padding: const EdgeInsets.only(
-            left: 15,
-            right: 15,
-            bottom: 20,
-          ),
-          child: Column(
-            children: const [
-              ReturnSummaryCustomerDetailsSection(),
-              ReturnSummaryDetailsSection(),
-              ReturnItemsSection(),
-            ],
+        body: AnnouncementBanner(
+          appModule: AppModule.returns,
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.only(
+              left: 15,
+              right: 15,
+              bottom: 20,
+            ),
+            child: Column(
+              children: const [
+                ReturnSummaryCustomerDetailsSection(),
+                ReturnSummaryDetailsSection(),
+                ReturnItemsSection(),
+              ],
+            ),
           ),
         ),
       ),

@@ -3,11 +3,13 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/returns/user_restriction/user_restriction_list_bloc.dart';
+import 'package:ezrxmobile/domain/announcement/entities/announcement.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
+import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
@@ -39,54 +41,57 @@ class UserRestrictionListPage extends StatelessWidget {
         preferredSize: Size(double.infinity, 50),
         child: CustomAppBar(child: UserRestrictionListSearch()),
       ),
-      body: BlocConsumer<UserRestrictionListBloc, UserRestrictionListState>(
-        listener: (context, state) {
-          state.apiFailureOrSuccessOption.fold(
-            () {},
-            (either) => either.fold(
-              (failure) {
-                ErrorUtils.handleApiFailure(context, failure);
-              },
-              (_) {},
-            ),
-          );
-        },
-        buildWhen: (previous, current) =>
-            previous.isFetching != current.isFetching ||
-            previous.searchKey != current.searchKey,
-        builder: (context, state) {
-          if (state.isFetching) {
-            return LoadingShimmer.logo(
-              key: const Key('LoaderImage'),
-            );
-          }
-
-          return Column(
-            children: [
-              _HeaderMessage(state: state),
-              Expanded(
-                child: ScrollList<String>(
-                  emptyMessage: 'No user restrictions found'.tr(),
-                  isLoading: state.isFetching,
-                  onRefresh: () {
-                    final salesOrg =
-                        context.read<SalesOrgBloc>().state.salesOrg;
-                    context.read<UserRestrictionListBloc>().add(
-                          UserRestrictionListEvent.fetch(
-                            salesOrg: salesOrg,
-                          ),
-                        );
-                  },
-                  itemBuilder: (_, __, item) => _UserRestrictionItem(
-                    username: item,
-                  ),
-                  key: const Key('userRestrictionList'),
-                  items: state.getSearchedUsernamesList,
-                ),
+      body: AnnouncementBanner(
+        appModule: AppModule.returns,
+        child: BlocConsumer<UserRestrictionListBloc, UserRestrictionListState>(
+          listener: (context, state) {
+            state.apiFailureOrSuccessOption.fold(
+              () {},
+              (either) => either.fold(
+                (failure) {
+                  ErrorUtils.handleApiFailure(context, failure);
+                },
+                (_) {},
               ),
-            ],
-          );
-        },
+            );
+          },
+          buildWhen: (previous, current) =>
+              previous.isFetching != current.isFetching ||
+              previous.searchKey != current.searchKey,
+          builder: (context, state) {
+            if (state.isFetching) {
+              return LoadingShimmer.logo(
+                key: const Key('LoaderImage'),
+              );
+            }
+
+            return Column(
+              children: [
+                _HeaderMessage(state: state),
+                Expanded(
+                  child: ScrollList<String>(
+                    emptyMessage: 'No user restrictions found'.tr(),
+                    isLoading: state.isFetching,
+                    onRefresh: () {
+                      final salesOrg =
+                          context.read<SalesOrgBloc>().state.salesOrg;
+                      context.read<UserRestrictionListBloc>().add(
+                            UserRestrictionListEvent.fetch(
+                              salesOrg: salesOrg,
+                            ),
+                          );
+                    },
+                    itemBuilder: (_, __, item) => _UserRestrictionItem(
+                      username: item,
+                    ),
+                    key: const Key('userRestrictionList'),
+                    items: state.getSearchedUsernamesList,
+                  ),
+                ),
+              ],
+            );
+          },
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {

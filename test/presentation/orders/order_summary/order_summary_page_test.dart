@@ -6,6 +6,8 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
+import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
@@ -130,6 +132,12 @@ class PoAttachmentBlocMock
     extends MockBloc<PoAttachmentEvent, PoAttachmentState>
     implements PoAttachmentBloc {}
 
+class AnnouncementBlocMock
+    extends MockBloc<AnnouncementEvent, AnnouncementState>
+    implements AnnouncementBloc {}
+
+class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
+
 enum StepVariant {
   three,
   five,
@@ -178,6 +186,8 @@ void main() {
   late TenderContractBloc tenderContractBlocMock;
   late AddToCartBloc addToCartBlocMock;
   late PoAttachmentBloc poAttachmentBlocMock;
+  late AuthBloc authBlocMock;
+  late AnnouncementBloc announcementBlocMock;
 
   setUpAll(
     () async {
@@ -209,6 +219,8 @@ void main() {
       tenderContractBlocMock = TenderContractBlocMock();
       addToCartBlocMock = AddToCartBlocMock();
       poAttachmentBlocMock = PoAttachmentBlocMock();
+      authBlocMock = AuthBlocMock();
+      announcementBlocMock = AnnouncementBlocMock();
 
       autoRouterMock = locator<AppRouter>();
 
@@ -273,6 +285,9 @@ void main() {
           .thenReturn(TenderContractState.initial());
       when(() => poAttachmentBlocMock.state)
           .thenReturn(PoAttachmentState.initial());
+      when(() => authBlocMock.state).thenReturn(const AuthState.initial());
+      when(() => announcementBlocMock.state)
+          .thenReturn(AnnouncementState.initial());
     },
   );
   group('Test Order Summary Page', () {
@@ -313,6 +328,9 @@ void main() {
           BlocProvider<AddToCartBloc>(create: (context) => addToCartBlocMock),
           BlocProvider<PoAttachmentBloc>(
               create: (context) => poAttachmentBlocMock),
+          BlocProvider<AuthBloc>(create: (context) => authBlocMock),
+          BlocProvider<AnnouncementBloc>(
+              create: (context) => announcementBlocMock),
         ],
         child: const OrderSummaryPage(),
       );

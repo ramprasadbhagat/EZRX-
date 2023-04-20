@@ -7,6 +7,7 @@ import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.da
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
+import 'package:ezrxmobile/domain/announcement/entities/announcement.dart';
 import 'package:ezrxmobile/domain/core/aggregate/bundle_aggregate.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
@@ -19,6 +20,7 @@ import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
+import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/custom_label.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/quantity_input.dart';
@@ -55,103 +57,106 @@ class BundleItemDetailPage extends StatelessWidget {
           title: Text('#${bundleAggregate.bundle.bundleCode}'),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const CustomLabel(
-              textValue: 'Deals%',
-            ),
-            ...bundleAggregate.bundle.bundleInfoMessage
-                .map(
-                  (e) => Text(
-                    e,
-                    style: Theme.of(context).textTheme.titleSmall?.apply(
-                          color: ZPColors.lightGray,
-                        ),
-                  ),
-                )
-                .toList(),
-            Expanded(
-              child: BlocBuilder<MaterialPriceDetailBloc,
-                  MaterialPriceDetailState>(
-                buildWhen: (previous, current) =>
-                    previous.isValidating != current.isValidating ||
-                    previous.isFetching != current.isFetching,
-                builder: (context, state) {
-                  return ListView.builder(
-                    itemCount: bundleAggregate.materialInfos.length,
-                    itemBuilder: (context, index) {
-                      if (state.isValidating || state.isFetching) {
-                        return LoadingShimmer.withChild(
-                          child: const Card(
-                            child: SizedBox(
-                              key: Key('itemLoading'),
-                              height: 60,
-                              width: double.infinity,
-                            ),
-                          ),
-                        );
-                      }
-                      final queryInfo = MaterialQueryInfo.fromBundles(
-                        materialInfo: bundleAggregate.materialInfos[index],
-                      );
-                      final controller = TextEditingController();
-                      controller.text = '0';
-                      quantityControllerList[bundleAggregate
-                          .materialInfos[index].materialNumber
-                          .getOrCrash()] = controller;
-                      final materialDetail = state.materialDetails[queryInfo]!;
-                      final enableDefaultMD = context
-                          .read<SalesOrgBloc>()
-                          .state
-                          .configs
-                          .enableDefaultMD;
-
-                      return _ListContent(
-                        materialInfo: materialDetail.info,
-                        enableDefaultMD: enableDefaultMD,
-                        controller: controller,
-                      );
-                    },
-                  );
-                },
+      body: AnnouncementBanner(
+        appModule: AppModule.orders,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const CustomLabel(
+                textValue: 'Deals%',
               ),
-            ),
-            if (userCanCreateOrder)
-              Center(
+              ...bundleAggregate.bundle.bundleInfoMessage
+                  .map(
+                    (e) => Text(
+                      e,
+                      style: Theme.of(context).textTheme.titleSmall?.apply(
+                            color: ZPColors.lightGray,
+                          ),
+                    ),
+                  )
+                  .toList(),
+              Expanded(
                 child: BlocBuilder<MaterialPriceDetailBloc,
                     MaterialPriceDetailState>(
                   buildWhen: (previous, current) =>
                       previous.isValidating != current.isValidating ||
                       previous.isFetching != current.isFetching,
                   builder: (context, state) {
-                    if (state.isValidating || state.isFetching) {
-                      return LoadingShimmer.withChild(
-                        child: ElevatedButton(
-                          key: const Key('buttonLoading'),
-                          onPressed: () {},
-                          child: const SizedBox(),
-                        ),
-                      );
-                    }
-
-                    return ElevatedButton(
-                      key: const Key('addBundlesToCart'),
-                      onPressed: () {
-                        _addToCartPressed(
-                          context,
-                          bundleAggregate.bundle,
-                          quantityControllerList,
+                    return ListView.builder(
+                      itemCount: bundleAggregate.materialInfos.length,
+                      itemBuilder: (context, index) {
+                        if (state.isValidating || state.isFetching) {
+                          return LoadingShimmer.withChild(
+                            child: const Card(
+                              child: SizedBox(
+                                key: Key('itemLoading'),
+                                height: 60,
+                                width: double.infinity,
+                              ),
+                            ),
+                          );
+                        }
+                        final queryInfo = MaterialQueryInfo.fromBundles(
+                          materialInfo: bundleAggregate.materialInfos[index],
+                        );
+                        final controller = TextEditingController();
+                        controller.text = '0';
+                        quantityControllerList[bundleAggregate
+                            .materialInfos[index].materialNumber
+                            .getOrCrash()] = controller;
+                        final materialDetail = state.materialDetails[queryInfo]!;
+                        final enableDefaultMD = context
+                            .read<SalesOrgBloc>()
+                            .state
+                            .configs
+                            .enableDefaultMD;
+      
+                        return _ListContent(
+                          materialInfo: materialDetail.info,
+                          enableDefaultMD: enableDefaultMD,
+                          controller: controller,
                         );
                       },
-                      child: const Text('Add to Cart').tr(),
                     );
                   },
                 ),
               ),
-          ],
+              if (userCanCreateOrder)
+                Center(
+                  child: BlocBuilder<MaterialPriceDetailBloc,
+                      MaterialPriceDetailState>(
+                    buildWhen: (previous, current) =>
+                        previous.isValidating != current.isValidating ||
+                        previous.isFetching != current.isFetching,
+                    builder: (context, state) {
+                      if (state.isValidating || state.isFetching) {
+                        return LoadingShimmer.withChild(
+                          child: ElevatedButton(
+                            key: const Key('buttonLoading'),
+                            onPressed: () {},
+                            child: const SizedBox(),
+                          ),
+                        );
+                      }
+      
+                      return ElevatedButton(
+                        key: const Key('addBundlesToCart'),
+                        onPressed: () {
+                          _addToCartPressed(
+                            context,
+                            bundleAggregate.bundle,
+                            quantityControllerList,
+                          );
+                        },
+                        child: const Text('Add to Cart').tr(),
+                      );
+                    },
+                  ),
+                ),
+            ],
+          ),
         ),
       ),
     );

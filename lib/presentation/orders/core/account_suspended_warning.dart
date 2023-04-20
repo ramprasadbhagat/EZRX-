@@ -19,8 +19,8 @@ class AccountSuspendedBanner extends StatelessWidget {
                 width: double.infinity,
                 alignment: Alignment.center,
                 height: 40,
-                decoration: const BoxDecoration(
-                  color: ZPColors.error,
+                decoration: BoxDecoration(
+                  color: ZPColors.error.withOpacity(0.8),
                 ),
                 child: Text(
                   'Customer is suspended, please contact ZP Admin for support',
