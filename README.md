@@ -87,9 +87,7 @@ type command `make run_sg_external_test` to run integration test
 ### Test Coverage
 1. [Read this](https://codewithandrea.com/articles/flutter-test-coverage/)
 2. ```brew install lcov```
-3. ```fvm flutter test --coverage```
-4. ```genhtml coverage/lcov.info -o coverage/html```
-5. ```open coverage/html/index.html```
+3. ```make run_test```
 
 ### How to `bloc_test` the loading_more function
 Let's assume that we test loading_more function for load a page 2
