@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
@@ -43,14 +44,13 @@ class AdditionalDetails extends StatelessWidget {
           : AutovalidateMode.disabled,
       child: Column(
         children: [
-          config.poNumberRequired ?
-              _TextFormField(
-                labelText: 'Customer PO Reference',
-                keyText: 'customerPOReferenceKey',
-                maxLength: 35,
-                label: AdditionalDetailsLabel.customerPoReference,
-                additionalDetails: state.additionalDetailsData,
-              ) : const SizedBox.shrink(),
+          _TextFormField(
+            labelText: 'Customer PO Reference',
+            keyText: 'customerPOReferenceKey',
+            maxLength: 35,
+            label: AdditionalDetailsLabel.customerPoReference,
+            additionalDetails: state.additionalDetailsData,
+          ),
           config.enableSpecialInstructions
               ? _TextFormField(
                   labelText: 'Special Instructions',
@@ -341,19 +341,23 @@ class _TextFormFieldState extends State<_TextFormField> {
   }) {
     switch (label) {
       case AdditionalDetailsLabel.customerPoReference:
-        return context
-            .read<AdditionalDetailsBloc>()
-            .state
-            .additionalDetailsData
-            .customerPoReference
-            .value
-            .fold(
-              (f) => f.maybeMap(
-                empty: (_) => 'Customer PO Reference Required.'.tr(),
-                orElse: () => null,
-              ),
-              (_) => null,
-            );
+        if (context.read<SalesOrgBloc>().state.configs.poNumberRequired) {
+          return context
+              .read<AdditionalDetailsBloc>()
+              .state
+              .additionalDetailsData
+              .customerPoReference
+              .value
+              .fold(
+                (f) => f.maybeMap(
+                  empty: (_) => 'Customer PO Reference Required.'.tr(),
+                  orElse: () => null,
+                ),
+                (_) => null,
+              );
+        }
+        return null;
+        
       case AdditionalDetailsLabel.contactNumber:
         return context
             .read<AdditionalDetailsBloc>()

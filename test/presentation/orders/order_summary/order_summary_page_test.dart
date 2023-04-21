@@ -639,15 +639,24 @@ void main() {
           ),
         );
         whenListen(shipToCodeBlocMock, Stream.fromIterable(expectedStates));
+        when(() => salesOrgBlocMock.state)
+            .thenReturn(SalesOrgState.initial().copyWith(
+                configs: SalesOrganisationConfigs.empty().copyWith(
+          poNumberRequired: false,
+        )));
         tester.binding.window.physicalSizeTestValue = const Size(1080, 1920);
         tester.binding.window.devicePixelRatioTestValue = 1.0;
         await tester.pumpWidget(getWidget());
         await tester.pumpAndSettle();
-        final customerDetailsKey =
-            find.byKey(const Key('additionalDetailsFormKey'));
+        final customerDetailsKey = find
+            .byKey(const Key('additionalDetailsFormKey'),);
+        await tester.pumpAndSettle();
+        await tester
+            .ensureVisible(find.byKey(const Key('additionalDetailsFormKey')));
         expect(customerDetailsKey, findsOneWidget);
-        await tester.tap(customerDetailsKey);
+        await tester.tap(customerDetailsKey, warnIfMissed: false);
         await tester.pump(const Duration(seconds: 2));
+        expect(find.byKey(const Key('customerPOReferenceKey')), findsOneWidget);
         await tester.enterText(
             find.byKey(const Key('customerPOReferenceKey')), '12');
 
