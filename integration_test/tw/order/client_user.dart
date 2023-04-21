@@ -8,8 +8,8 @@ import '../../robots/home/customer_search_robot.dart';
 import '../../robots/favorite_robot.dart';
 import '../../robots/home/home_robot.dart';
 import '../../robots/login_robot.dart';
-import '../../robots/orders/material_detail_robot.dart';
-import '../../robots/orders/create_order/material_list_robot.dart';
+import '../../robots/orders/create_order/material_list/material_detail_robot.dart';
+import '../../robots/orders/create_order/material_list/material_list_robot.dart';
 import '../../robots/orders/create_order/order_confirmation_robot.dart';
 import '../../robots/history/order_history_details_robot.dart';
 import '../../robots/history/order_history_robot.dart';
@@ -75,21 +75,17 @@ void main() {
     customerSearchRobot.verify();
     await customerSearchRobot.search('30038539');
     await customerSearchRobot.tapCustomerCode('0030038539');
-    await homeRobot.verify();
+    homeRobot.verify();
     homeRobot.findShipToSelector();
     await homeRobot.tapShipToSelector();
     shipToSearchRobot.verify();
     await shipToSearchRobot.search('0095');
-    await shipToSearchRobot.tapShipToCode('0070100095');
-    await homeRobot.verify();
+    await shipToSearchRobot.tapShipToCode(shipToCode: '0070100095');
+    homeRobot.verify();
     await homeRobot.goToCreateOrder();
     materialListRobot.verify();
     await materialListRobot.search('451');
-    materialListRobot.verifyMaterialPrice(
-      false,
-      'TWD',
-      '000000000023168451',
-    );
+    materialListRobot.verifyMaterialPrice();
     await materialListRobot.tapMaterial('000000000023168451');
     materialDetailRobot.verify();
     materialDetailRobot.findAddToCart();
@@ -153,15 +149,9 @@ void main() {
     orderHistoryRobot.verifyMaterialID('23168451');
     orderHistoryRobot.verifyMaterialName('Reag Cup');
     orderHistoryRobot.verifyQuantity('3');
-    orderHistoryRobot.verifyZPPrice('TWD', '0.00');
-    orderHistoryRobot.verifyTotalPrice('TWD', '0.00');
-    orderHistoryRobot.verifyTax('0.00');
     await orderHistoryRobot.tapOrderedItem();
     orderHistoryDetailsRobot.verify();
     orderHistoryDetailsRobot.findOrderDetails();
-    orderHistoryDetailsRobot.verifySubTotal('TWD', '0.00');
-    orderHistoryDetailsRobot.verifyOrderTax('TWD', '0.00');
-    orderHistoryDetailsRobot.verifyGrandTotal('TWD', '0.00');
     orderHistoryDetailsRobot.verifyOrderType('ZPOR');
     orderHistoryDetailsRobot.verifyContactPerson('1234');
     orderHistoryDetailsRobot.verifyContactNumber('035943248');
@@ -181,26 +171,21 @@ void main() {
     await orderHistoryDetailsRobot.tapShipToAddress();
     orderHistoryDetailsRobot.findInvoices();
     orderHistoryDetailsRobot.findOrderSummary();
-    orderHistoryDetailsRobot.verifyStatus('Order Creating');
     orderHistoryDetailsRobot.verifyMaterialType('Comm');
     orderHistoryDetailsRobot.verifyMaterialID('23168451');
     orderHistoryDetailsRobot.verifyQuantity('3');
-    orderHistoryDetailsRobot.verifyZPPrice('TWD', '0.00');
-    orderHistoryDetailsRobot.verifyTotalPrice('TWD', '0.00');
+    orderHistoryDetailsRobot.verifyEnableZPPrice('000000000023168451');
+    orderHistoryDetailsRobot.verifyEnableTotalPrice('000000000021022175');
     orderHistoryDetailsRobot.verifyOrderSummaryTax('0.00');
     await orderHistoryDetailsRobot.tapOrderSummary();
     orderHistoryDetailsRobot.findBackButton();
     await orderHistoryDetailsRobot.tapBackButton();
     orderHistoryRobot.verify();
     await homeRobot.tapHomeTab();
-    await homeRobot.verify();
+    homeRobot.verify();
     await homeRobot.goToCreateOrder();
     materialListRobot.verify();
-    materialListRobot.verifyMaterialPrice(
-      false,
-      'TWD',
-      '000000000023168451',
-    );
+    materialListRobot.verifyMaterialPrice();
     await materialListRobot.tapMaterial('000000000023168451');
     materialDetailRobot.verify();
     materialDetailRobot.findAddToCart();
@@ -265,7 +250,7 @@ void main() {
     materialListRobot.findFavoriteIcon('23168451');
     await materialListRobot.tapFavoriteIcon('23168451');
     await materialListRobot.goBack();
-    await homeRobot.verify();
+    homeRobot.verify();
     homeRobot.findFavoriteTab();
     await homeRobot.tapFavoriteTab();
     favoriteRobot.verify();

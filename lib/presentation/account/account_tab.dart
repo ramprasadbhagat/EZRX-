@@ -17,6 +17,7 @@ class AccountTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        key: const Key('accountPage'),
         title: const Text('Account').tr(),
         automaticallyImplyLeading: false,
         actions: const [

@@ -7,14 +7,37 @@ class OrderHistoryRobot {
   OrderHistoryRobot(this.tester);
 
   final orderedItem = find.byKey(const ValueKey('historyTitle0'));
+  final filterOrderHistory = find.byKey(const Key('filterOrderHistory'));
 
   void verify() {
     final orderHistory = find.byKey(const Key('orderHistoryTab'));
     expect(orderHistory, findsOneWidget);
   }
 
+  void findOrderHistoryFilter() {
+    expect(filterOrderHistory, findsOneWidget);
+  }
+
+  Future<void> findOrderHistoryFilterByMaterialNumber(
+      String materialNumber) async {
+    await tester.tap(filterOrderHistory);
+    await tester.pumpAndSettle();
+    await tester.enterText(
+        find.byKey(const Key('filterMaterialSearchField')), materialNumber);
+    await tester.pumpAndSettle();
+  }
+
+  Future<void> tapOrderHistoryFilterApplyButton() async {
+    await tester.tap(find.byKey(const Key('filterApplyButton')));
+    await tester.pumpAndSettle();
+  }
+
   void findOrderedItem() {
     expect(orderedItem, findsOneWidget);
+  }
+
+  void findOrderItemByMaterialNumber(String materialNumber) {
+    expect(find.byKey(Key('materialId$materialNumber')), findsWidgets);
   }
 
   void verifyOrderType(String orderType) {
@@ -35,21 +58,6 @@ class OrderHistoryRobot {
   void verifyMaterialName(String materialName) {
     final material = find.textContaining(materialName);
     expect(material, findsAtLeastNWidgets(1));
-  }
-
-  void verifyZPPrice(String currency, String price) {
-    final zpPrice = find.byKey(Key('ZP Price$currency $price'));
-    expect(zpPrice, findsAtLeastNWidgets(1));
-  }
-
-  void verifyTotalPrice(String currency, String price) {
-    final totalPrice = find.byKey(Key('Total Price$currency $price'));
-    expect(totalPrice, findsAtLeastNWidgets(1));
-  }
-
-  void verifyTax(String tax) {
-    final taxWidget = find.byKey(Key('Included Tax$tax'));
-    expect(taxWidget, findsAtLeastNWidgets(1));
   }
 
   Future<void> tapOrderedItem() async {

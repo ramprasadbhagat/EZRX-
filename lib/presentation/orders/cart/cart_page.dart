@@ -355,7 +355,7 @@ class _TotalPriceSection extends StatelessWidget {
               ),
               if (vatInPercentage.salesOrgConfigs.shouldDisplayVATInPercentage)
                 BalanceTextRow(
-                  key: const Key('taxcodeInPercentageKey'),
+                  key: const Key('taxCodeInPercentageKey'),
                   keyText: '$taxCode in %'.tr(),
                   valueText: '${salesOrgConfig.vatValue}%',
                   valueFlex: 1,

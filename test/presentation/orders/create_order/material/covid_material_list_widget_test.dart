@@ -326,7 +326,7 @@ void main() {
       await tester.pump(const Duration(seconds: 1));
       final laoder = find.byKey(const Key('loaderImage'));
       final covidMaterialsListPage =
-          find.byKey(const Key('covidmaterialListPage'));
+          find.byKey(const Key('covidMaterialListPage'));
       final searchField = find.byKey(const Key('covidMaterialSearchField'));
       final cartButton = find.byKey(const Key('cartButton'));
       expect(laoder, findsOneWidget);
@@ -374,7 +374,7 @@ void main() {
       await tester.pump();
       await tester.pump(const Duration(seconds: 1));
       final covidMaterialsListPage =
-          find.byKey(const Key('covidmaterialListPage'));
+          find.byKey(const Key('covidMaterialListPage'));
       expect(covidMaterialsListPage, findsOneWidget);
 
       expect(find.text('There are no vaccine in this customer code'.tr()),
@@ -391,7 +391,7 @@ void main() {
       await tester.pump();
       await tester.pump(const Duration(seconds: 1));
       final covidMaterialsListPage =
-          find.byKey(const Key('covidmaterialListPage'));
+          find.byKey(const Key('covidMaterialListPage'));
       expect(covidMaterialsListPage, findsOneWidget);
 
       expect(find.text('There are no vaccine in this customer code'.tr()),
@@ -418,7 +418,7 @@ void main() {
       await tester.pump();
       await tester.pump(const Duration(seconds: 1));
       final covidMaterialsListPage =
-          find.byKey(const Key('covidmaterialListPage'));
+          find.byKey(const Key('covidMaterialListPage'));
       expect(covidMaterialsListPage, findsOneWidget);
       await tester.pump();
       final materialList = find.byKey(const Key('scrollList'));
@@ -441,7 +441,7 @@ void main() {
       await tester.pump();
       await tester.pump(const Duration(seconds: 1));
       final covidMaterialsListPage =
-          find.byKey(const Key('covidmaterialListPage'));
+          find.byKey(const Key('covidMaterialListPage'));
       expect(covidMaterialsListPage, findsOneWidget);
       final covidMaterialList = find.byKey(const Key('scrollList'));
       expect(covidMaterialList, findsOneWidget);
@@ -501,7 +501,7 @@ void main() {
       await tester.pump();
       await tester.pump(const Duration(seconds: 1));
       final covidMaterialsListPage =
-          find.byKey(const Key('covidmaterialListPage'));
+          find.byKey(const Key('covidMaterialListPage'));
       expect(covidMaterialsListPage, findsOneWidget);
       await tester.pump();
       final materialList = find.byKey(const Key('scrollList'));

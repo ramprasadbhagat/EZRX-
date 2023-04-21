@@ -30,7 +30,11 @@ class OrderTemplateListRobot {
   }
 
   Future<void> tapTemplateItemDelete() async {
-    await tester.tap(deleteIcon);
+    if(deleteIcon.evaluate().length>1){
+      await tester.tap(deleteIcon.first);
+    }else{
+      await tester.tap(deleteIcon);
+    }
     await tester.pumpAndSettle();
   }
 

@@ -359,9 +359,9 @@ void main() {
       expect(addBonusTextField, findsOneWidget);
       final bonusItemList = find.byKey(const Key('bonusItemList'));
       expect(bonusItemList, findsOneWidget);
-      final add = find.byKey(const Key('addItem'));
+      final add = find.byKey(Key('addItem${mockbonusItemWithDataList.first.materialNumber.getOrDefaultValue('')}'));
       expect(add, findsOneWidget);
-      final addItem = tester.widget(find.byKey(const Key('addItem')));
+      final addItem = tester.widget(find.byKey(Key('addItem${mockbonusItemWithDataList.first.materialNumber.getOrDefaultValue('')}')));
       await tester.tap(find.byWidget(addItem));
       await tester.pump();
 

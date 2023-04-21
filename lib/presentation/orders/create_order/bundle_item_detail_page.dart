@@ -49,7 +49,7 @@ class BundleItemDetailPage extends StatelessWidget {
     );
 
     return Scaffold(
-      key: const Key('BundleItemDetailPage'),
+      key: const Key('bundleItemDetailPage'),
       backgroundColor: ZPColors.white,
       appBar: PreferredSize(
         preferredSize: const Size(double.infinity, 60),

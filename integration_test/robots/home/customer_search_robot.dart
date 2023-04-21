@@ -27,5 +27,11 @@ class CustomerSearchRobot {
     expect(customerCodeOptionNew, findsOneWidget);
     await tester.tap(customerCodeOptionNew);
     await tester.pumpAndSettle();
+    final customerCodeDialogChange =
+        find.byKey(const Key('customerCodeDialogChange'));
+    if(customerCodeDialogChange.evaluate().isNotEmpty){
+      await tester.tap(find.byKey(const Key('Change')));
+      await tester.pumpAndSettle();
+    }
   }
 }

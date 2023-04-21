@@ -106,7 +106,7 @@ class BounsTile extends StatelessWidget {
                       (bonusItem) {
                         return BonusItemTile(
                           key: ValueKey(
-                            '${bonusItem.materialInfo.materialNumber}${bonusItem.additionalBonusFlag}${bonusItem.qty}',
+                            '${bonusItem.materialInfo.materialNumber.getOrDefaultValue('')}${bonusItem.additionalBonusFlag}${bonusItem.qty}',
                           ),
                           cartItem: cartItem,
                           bonusItem: bonusItem,

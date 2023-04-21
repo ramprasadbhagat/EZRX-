@@ -1142,7 +1142,7 @@ void main() {
       final deliveryDate = find.byKey(const Key('deliveryDateTime'));
       expect(deliveryDate, findsOneWidget);
 
-      final discountRate = find.byKey(const Key('discountRateForBonusCard'));
+      final discountRate = find.byKey(const Key('discountRateForItemCard'));
 
       expect(discountRate, findsOneWidget);
       await tester.pump();
@@ -1238,7 +1238,7 @@ void main() {
           findsNothing);
       expect(
           find.byKey(Key(
-              'totalPriceBonus${orderHistoryDetails.orderHistoryDetailsOrderItem.first.materialNumber.getOrDefaultValue('')}')),
+              'totalPrice${orderHistoryDetails.orderHistoryDetailsOrderItem.first.materialNumber.getOrDefaultValue('')}')),
           findsNothing);
 
       final sapStatusNotEmptyOrderItem =

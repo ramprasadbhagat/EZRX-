@@ -106,7 +106,7 @@ class DiscountOverrideToggle extends StatelessWidget {
                 ),
                 child: Text(
                   '${'Discount : '.tr()}${cartItem.price.zdp8Override.getOrDefaultValue(0)}',
-                  key: const Key('discountOverridePercentage'),
+                  key: Key('discountOverridePercentage${cartItem.price.zdp8Override.getOrDefaultValue(0)}'),
                   style: Theme.of(context).textTheme.labelSmall?.apply(
                         color: state.isDiscountOverride
                             ? ZPColors.red

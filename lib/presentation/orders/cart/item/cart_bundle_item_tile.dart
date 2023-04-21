@@ -197,6 +197,7 @@ class CartBundleItemTile extends StatelessWidget {
                         title: Padding(
                           padding: EdgeInsets.only(left: showCheckBox ? 40 : 0),
                           child: _BundleMaterialItem(
+                            key: Key('bundleMaterial${material.materialInfo.materialNumber.getOrDefaultValue('')}${material.quantity}'),
                             cartItem: cartItem,
                             material: material,
                           ),

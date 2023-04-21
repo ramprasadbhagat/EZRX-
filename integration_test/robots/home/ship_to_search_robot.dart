@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -21,10 +22,17 @@ class ShipToSearchRobot {
     await tester.pumpAndSettle();
   }
 
-  Future<void> tapShipToCode(String shipToCode) async {
-    final shipToOption = find.byKey(Key('shipToOption$shipToCode'));
-    expect(shipToOption, findsOneWidget);
-    await tester.tap(shipToOption);
-    await tester.pumpAndSettle();
+  Future<void> tapShipToCode({String shipToCode = ''}) async {
+    //if this function call with empty ship to code, let robot to think
+    //then it automatically select the default ship to code
+    if(shipToCode.isNotEmpty){
+      final shipToOption = find.byKey(Key('shipToOption$shipToCode'));
+      expect(shipToOption, findsOneWidget);
+      await tester.tap(shipToOption);
+      await tester.pumpAndSettle();
+    }else{
+      await tester.tap(find.text('Default'.tr()));
+      await tester.pumpAndSettle();
+    }
   }
 }

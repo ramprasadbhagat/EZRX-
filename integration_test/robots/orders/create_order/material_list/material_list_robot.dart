@@ -13,6 +13,11 @@ class MaterialListRobot {
     expect(find.byKey(const Key('materialListPage')), findsOneWidget);
   }
 
+  void verifyDisableOrderTypeSelection() {
+    final orderTypeSelector = find.byKey(const Key('orderTypeSelector'));
+    expect(orderTypeSelector, findsNothing);
+  }
+
   Future<void> search(String materialNumber) async {
     final materialSearchField = find.byKey(const Key('materialSearchField'));
     expect(materialSearchField, findsOneWidget);
@@ -22,20 +27,17 @@ class MaterialListRobot {
     await tester.pumpAndSettle();
   }
 
-  void verifyMaterialPrice(
-    bool isConfigPriceEnabled,
-    String currencyCode,
-    String materialNumber,
-  ) {
-    final listPriceText = find.byKey(Key('listPrice$materialNumber'));
-    expect(listPriceText, findsOneWidget);
-    if (isConfigPriceEnabled) {
-      //currency check
-      expect(find.textContaining(currencyCode), findsWidgets);
-    } else {
-      //enable Materials without Price
-      expect(find.text('${'List Price:'.tr()}NA'), findsWidgets);
-    }
+  void verifyMaterialPrice() {
+    //enable Materials without Price
+    expect(find.text('${'List Price:'.tr()}NA'), findsWidgets);
+  }
+
+  void verifyCurrencyCheck(String currencyCode) {
+    expect(find.textContaining(currencyCode), findsWidgets);
+  }
+
+  void verifyEnableListPrice(String materialNumber) {
+    expect(find.byKey(Key('listPrice$materialNumber')), findsOneWidget);
   }
 
   Future<void> tapMaterial(String materialNumber) async {
@@ -64,6 +66,11 @@ class MaterialListRobot {
     await tester.tap(favoriteIcon);
     await tester.pumpAndSettle();
     await tester.pump(const Duration(seconds: 3));
+  }
+
+  Future<void> clearSearchMaterial() async {
+    await tester.tap(find.byKey(const Key('clearSearch')));
+    await tester.pumpAndSettle();
   }
 
   Future<void> goBack() async {

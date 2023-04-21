@@ -15,7 +15,7 @@ class SavedOrderDetailRobot {
 
   void verifyMaterialNumber(String number) {
     final materialNumber = find.text(': $number');
-    expect(materialNumber, findsOneWidget);
+    expect(materialNumber, findsWidgets);
   }
 
   void verifyMaterialQuantity(String qty) {

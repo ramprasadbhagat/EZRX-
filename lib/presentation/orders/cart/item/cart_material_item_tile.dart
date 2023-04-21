@@ -115,7 +115,8 @@ class CartMaterialItemTile extends StatelessWidget {
                           IconButton(
                             padding: const EdgeInsets.only(right: 8),
                             constraints: const BoxConstraints(),
-                            key: const Key('deleteFromCart'),
+                            key: Key(
+                                'deleteFromCart${material.materialInfo.materialNumber.getOrDefaultValue('')}',),
                             onPressed: () {
                               context.read<CartBloc>().add(
                                     CartEvent.removeFromCart(
@@ -197,6 +198,7 @@ class CartMaterialItemTile extends StatelessWidget {
                           message:
                               '${'Remarks: '.tr()}${material.materialInfo.remarks}',
                           showEditDeleteDialog: EditDeleteDialog(
+                            key: Key('editDeleteDialog${material.materialInfo.materialNumber.getOrDefaultValue('')}'),
                             onDelete: () {
                               context.read<CartBloc>().add(
                                     CartEvent.addRemarkToCartItem(
@@ -221,7 +223,8 @@ class CartMaterialItemTile extends StatelessWidget {
               if (material.materialInfo.remarks.isEmpty &&
                   context.read<SalesOrgBloc>().state.configs.enableRemarks)
                 AddRemarksButton(
-                  key: const Key('addRemarks'),
+                  key: Key(
+                      'addRemarks${material.materialInfo.materialNumber.getOrDefaultValue('')}',),
                   onPressed: () {
                     AddRemarkDialog.cartItem(
                       context: context,

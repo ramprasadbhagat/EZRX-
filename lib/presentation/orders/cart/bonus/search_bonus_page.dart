@@ -202,7 +202,9 @@ class _BonusAddPageState extends State<BonusAddPage> {
                                 Expanded(
                                   flex: 1,
                                   child: GestureDetector(
-                                    key: const Key('addItem'),
+                                    key: Key(
+                                      'addItem${state.bonus[i].materialNumber.getOrDefaultValue('')}',
+                                    ),
                                     onTap: () {
                                       CartBottomSheet
                                           .showUpdateCartBonusBottomSheet(

@@ -29,6 +29,7 @@ class MaterialRoot extends StatelessWidget {
             (isCovidMaterialEnable ? 1 : 0);
 
         return Scaffold(
+          key: const Key('materialRootPage'),
           appBar: AppBar(
             title: const Text('Create Order').tr(),
             actions: const [CartButton()],

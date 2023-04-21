@@ -118,9 +118,11 @@ class _BonusItemTileState extends State<BonusItemTile> {
                           .enableRemarks)
                         widget.bonusItem.materialInfo.remarks.isNotEmpty
                             ? RemarksMessage(
+                                key: Key('remarks${widget.bonusItem.materialInfo.remarks}'),
                                 message:
                                     '${'Remarks: '.tr()}${widget.bonusItem.materialInfo.remarks}',
                                 showEditDeleteDialog: EditDeleteDialog(
+                                  key: Key('editDeleteDialog${widget.bonusItem.materialInfo.materialNumber.getOrDefaultValue('')}'),
                                   onDelete: () {
                                     context.read<CartBloc>().add(
                                           CartEvent.addRemarkToBonusItem(

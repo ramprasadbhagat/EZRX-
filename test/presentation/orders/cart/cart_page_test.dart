@@ -1781,9 +1781,9 @@ void main() {
         });
 
         await tester.pump();
-        final taxcodeInPercentageKey =
-            find.byKey(const Key('taxcodeInPercentageKey'));
-        expect(taxcodeInPercentageKey, findsOneWidget);
+        final taxCodeInPercentageKey =
+            find.byKey(const Key('taxCodeInPercentageKey'));
+        expect(taxCodeInPercentageKey, findsOneWidget);
         expect(find.text('VAT in %'), findsOneWidget);
 
         final totalTaxKey = find.byKey(const Key('totalTaxKey'));
@@ -1860,7 +1860,7 @@ void main() {
         tester.binding.window.physicalSizeTestValue = const Size(1080, 1920);
         tester.binding.window.devicePixelRatioTestValue = 1.0;
         final taxcodeInPercentageKey =
-            find.byKey(const Key('taxcodeInPercentageKey'));
+            find.byKey(const Key('taxCodeInPercentageKey'));
         expect(taxcodeInPercentageKey, findsOneWidget);
         expect(find.text('VAT in %'), findsOneWidget);
 
@@ -1918,9 +1918,9 @@ void main() {
         tester.binding.window.devicePixelRatioTestValue = 1.0;
 
         await tester.pumpAndSettle(const Duration(seconds: 5));
-        final taxcodeInPercentageKey =
-            find.byKey(const Key('taxcodeInPercentageKey'));
-        expect(taxcodeInPercentageKey, findsOneWidget);
+        final taxCodeInPercentageKey =
+            find.byKey(const Key('taxCodeInPercentageKey'));
+        expect(taxCodeInPercentageKey, findsOneWidget);
         expect(find.text('VAT in %'), findsOneWidget);
 
         final totalTaxKey = find.byKey(const Key('totalTaxKey'));

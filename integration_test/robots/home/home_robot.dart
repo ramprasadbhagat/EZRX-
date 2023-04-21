@@ -14,10 +14,15 @@ class HomeRobot {
   final homeTabbar = find.byKey(const Key('homeTab'));
   final favoriteTabbar = find.byKey(const Key('favoritesTab'));
   final orderTemplate = find.text('Order Template');
+  final savedOrders = find.text('Saved Orders');
 
-  Future<void> verify() async {
+  void verify() {
     final home = find.byKey(const Key('homeScreen'));
     expect(home, findsOneWidget);
+  }
+
+  void verifyEdiCustomer() {
+    expect(find.byKey(const Key('ediCustomerOrderDisable')), findsOneWidget);
   }
 
   void findSalesOrgSelector() {
@@ -112,6 +117,16 @@ class HomeRobot {
 
   Future<void> tapOrderTemplate() async {
     await tester.tap(orderTemplate);
+    await tester.pumpAndSettle();
+  }
+
+  void findSavedOrders() {
+    expect(savedOrders, findsOneWidget);
+  }
+
+  Future<void> tapSavedOrders() async {
+    await tester.pumpAndSettle();
+    await tester.tap(savedOrders);
     await tester.pumpAndSettle();
   }
 }

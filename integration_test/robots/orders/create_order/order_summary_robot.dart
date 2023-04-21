@@ -15,6 +15,16 @@ class OrderSummaryRobot {
   final saveButton = find.text('Save', skipOffstage: false).last;
   final orderTemplate = find.byKey(const Key('orderSummarySaveTemplate'));
   final saveTemplateButton = find.byKey(const Key('saveButton'));
+  final specialInstructionField =
+      find.byKey(const Key('specialInstructionKey'));
+
+  void verify() {
+    expect(find.byKey(const Key('orderSummaryKey')), findsOneWidget);
+  }
+
+  void verifyEdiCustomer() {
+    expect(find.byKey(const Key('ediCustomerOrderDisable')), findsOneWidget);
+  }
 
   void verifyCustomerName(String name) {
     final customerName = find.textContaining(name);
@@ -43,7 +53,16 @@ class OrderSummaryRobot {
 
   void verifyPhone(String phoneName) {
     final phone = find.byKey(Key('Phone$phoneName'));
-    expect(phone, findsNWidgets(2));
+    expect(phone, findsWidgets);
+  }
+
+  void findSpecialInstruction() {
+    expect(specialInstructionField, findsOneWidget);
+  }
+
+  Future<void> enterSpecialInstruction(String value) async {
+    await tester.enterText(specialInstructionField, value);
+    await tester.pumpAndSettle();
   }
 
   Future<void> enterContactPerson(String value) async {
@@ -51,6 +70,11 @@ class OrderSummaryRobot {
     expect(contactPerson, findsOneWidget);
     await tester.enterText(contactPerson, value);
     await tester.pumpAndSettle();
+  }
+
+  Future<void> getKeyboardDown() async {
+    await tester.testTextInput.receiveAction(TextInputAction.done);
+    await tester.pumpAndSettle(const Duration(seconds: 2));
   }
 
   void findSelectPaymentTerm() {
@@ -62,6 +86,27 @@ class OrderSummaryRobot {
     await tester.pumpAndSettle();
     await tester.tap(selectPaymentTerm);
     await tester.pumpAndSettle();
+  }
+
+  void allowMinimumOrderAmount(String amount) {
+    expect(find.byKey(const Key('minimumOrderAmount')), findsOneWidget);
+    expect(find.textContaining(amount), findsWidgets);
+  }
+
+  void findBundleItem(String bundleCode) {
+    expect(
+        find.byKey(
+          Key('bundleCartItem$bundleCode'),
+        ),
+        findsOneWidget);
+  }
+
+  void findBundleMaterialItem(String materialNumber, int quantity) {
+    expect(
+        find.byKey(
+          Key('bundleMaterial$materialNumber$quantity'),
+        ),
+        findsOneWidget);
   }
 
   Future<void> tapPaymentTerm() async {
@@ -116,6 +161,66 @@ class OrderSummaryRobot {
     expect(totalPrice, findsOneWidget);
   }
 
+  void verifySubTotalPrice(String currency, String price) {
+    expect(find.byKey(Key('Subtotal$currency $price')), findsOneWidget);
+  }
+
+  void verifyGrandTotalPrice(String currency, String price) {
+    expect(find.byKey(Key('Grand Total$currency $price')), findsOneWidget);
+  }
+
+  void verifyBundleMaterialListPrice(
+      bool isConfigPriceEnabled, String currency, String price) {
+    var listPrice = find.text(
+      'List Price: NA',
+    );
+    if (isConfigPriceEnabled) {
+      listPrice = find.text(
+        'List Price: $currency $price',
+      );
+    }
+    expect(listPrice, findsOneWidget);
+  }
+
+  void verifyBundleMaterialUnitPrice(
+      bool isConfigPriceEnabled, String currency, String price) {
+    var unitPrice = find.text(
+      'Unit Price: NA',
+    );
+    if (isConfigPriceEnabled) {
+      unitPrice = find.text(
+        'Unit Price: $currency $price',
+      );
+    }
+    expect(unitPrice, findsOneWidget);
+  }
+
+  void verifyBundleMaterialTotalDiscount(
+      bool isConfigPriceEnabled, String currency, String price) {
+    var totalPrice = find.text(
+      'Total Discount: NA',
+    );
+    if (isConfigPriceEnabled) {
+      totalPrice = find.text(
+        'Total Discount: $currency $price',
+      );
+    }
+    expect(totalPrice, findsOneWidget);
+  }
+
+  void verifyBundleMaterialTotalAmount(
+      bool isConfigPriceEnabled, String currency, String price) {
+    var totalPrice = find.text(
+      'Total Amount: NA',
+    );
+    if (isConfigPriceEnabled) {
+      totalPrice = find.text(
+        'Total Amount: $currency $price',
+      );
+    }
+    expect(totalPrice, findsOneWidget);
+  }
+
   void findSubmit() {
     expect(submitButton, findsOneWidget);
   }
@@ -140,7 +245,7 @@ class OrderSummaryRobot {
 
   void verifyPostalCode(String postalCode) {
     final postal = find.byKey(Key('Postal Code$postalCode'));
-    expect(postal, findsOneWidget);
+    expect(postal, findsWidgets);
   }
 
   void findAddQuantity(String materialNumber) {

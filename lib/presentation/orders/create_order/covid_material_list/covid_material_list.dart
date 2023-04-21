@@ -46,7 +46,7 @@ class CovidMaterialListPage extends StatelessWidget {
     );
 
     return Scaffold(
-      key: const Key('covidmaterialListPage'),
+      key: const Key('covidMaterialListPage'),
       body: BlocConsumer<CovidMaterialListBloc, CovidMaterialListState>(
         listenWhen: (previous, current) =>
             previous.apiFailureOrSuccessOption !=
@@ -208,7 +208,7 @@ class _ListContent extends StatelessWidget {
     return Card(
       child: ListTile(
         key: Key(
-          'covidMaterialOption${materialInfo.materialNumber.getOrCrash()}',
+          'covidMaterialOption${materialInfo.materialNumber.getOrDefaultValue('')}',
         ),
         onTap: () => _showMaterialDetail(context),
         title: Column(

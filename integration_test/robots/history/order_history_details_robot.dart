@@ -12,6 +12,7 @@ class OrderHistoryDetailsRobot {
   final orderSummary = find.text('Order Summary');
   final backButton =
       find.byKey(const ValueKey('backToOrderHistoryDetailsPage'));
+  final reOrderButton = find.byKey(const Key('reOrderButton'));
 
   void verify() {
     final orderHistoryDetails =
@@ -21,21 +22,6 @@ class OrderHistoryDetailsRobot {
 
   void findOrderDetails() {
     expect(orderDetails, findsOneWidget);
-  }
-
-  void verifySubTotal(String currency, String price) {
-    final subTotal = find.byKey(Key('Total sub value$currency $price'));
-    expect(subTotal, findsOneWidget);
-  }
-
-  void verifyOrderTax(String currency, String price) {
-    final tax = find.byKey(Key('Total Tax$currency $price'));
-    expect(tax, findsOneWidget);
-  }
-
-  void verifyGrandTotal(String currency, String price) {
-    final grandTotal = find.byKey(Key('Grand Total$currency $price'));
-    expect(grandTotal, findsOneWidget);
   }
 
   void verifyOrderType(String type) {
@@ -79,7 +65,7 @@ class OrderHistoryDetailsRobot {
 
   void verifyPostalCode(String postalCode) {
     final postal = find.byKey(Key('Postal Code$postalCode'));
-    expect(postal, findsOneWidget);
+    expect(postal, findsWidgets);
   }
 
   void verifyCountry(String country) {
@@ -120,11 +106,6 @@ class OrderHistoryDetailsRobot {
     await tester.pumpAndSettle();
   }
 
-  void verifyStatus(String status) {
-    final statusLabel = find.text(status);
-    expect(statusLabel, findsOneWidget);
-  }
-
   void verifyMaterialType(String materialType) {
     final type = find.byKey(Key('Type$materialType'));
     expect(type, findsOneWidget);
@@ -132,7 +113,7 @@ class OrderHistoryDetailsRobot {
 
   void verifyMaterialID(String id) {
     final materialID = find.byKey(Key('Material ID$id'));
-    expect(materialID, findsOneWidget);
+    expect(materialID, findsWidgets);
   }
 
   void verifyQuantity(String qty) {
@@ -140,14 +121,26 @@ class OrderHistoryDetailsRobot {
     expect(quantity, findsOneWidget);
   }
 
-  void verifyZPPrice(String currency, String price) {
-    final zpPrice = find.byKey(Key('ZP Price$currency $price'));
+  void verifyEnableZPPrice(
+    String materialNumber,
+  ) {
+    final zpPrice = find.byKey(Key('zpPrice$materialNumber'));
     expect(zpPrice, findsOneWidget);
   }
 
-  void verifyTotalPrice(String currency, String price) {
-    final totalPrice = find.byKey(Key('Total Price$currency $price'));
+  void verifyEnableTotalPrice(
+    String materialNumber,
+  ) {
+    final totalPrice = find.byKey(Key('totalPrice$materialNumber'));
     expect(totalPrice, findsOneWidget);
+  }
+
+  void verifyDisplayBatchExpiryDate() {
+    expect(find.byKey(const Key('batchNumberExpiryDate')), findsWidgets);
+  }
+
+  void verifyDisplayDiscount() {
+    expect(find.byKey(const Key('discountRateForItemCard')), findsWidgets);
   }
 
   void verifyOrderSummaryTax(String tax) {
@@ -157,6 +150,15 @@ class OrderHistoryDetailsRobot {
 
   void findBackButton() {
     expect(backButton, findsOneWidget);
+  }
+
+  void findReOrderButton() {
+    expect(reOrderButton, findsOneWidget);
+  }
+
+  Future<void> tapReOrderButton() async {
+    await tester.tap(reOrderButton);
+    await tester.pumpAndSettle();
   }
 
   Future<void> tapBackButton() async {

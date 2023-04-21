@@ -248,7 +248,7 @@ void main() {
       final pageTitleWidget = find.text('#$pageTitle');
 
       final bundleItemDetailPage =
-          find.byKey(const Key('BundleItemDetailPage'));
+          find.byKey(const Key('bundleItemDetailPage'));
 
       expect(pageTitleWidget, findsOneWidget);
       expect(bundleItemDetailPage, findsOneWidget);
@@ -273,7 +273,7 @@ void main() {
         Key('materialOption${mockMaterialInfo.materialNumber.getValue()}'),
       );
       final bundleItemDetailPage =
-          find.byKey(const Key('BundleItemDetailPage'));
+          find.byKey(const Key('bundleItemDetailPage'));
       final addToCartButton = find.text('Add to Cart');
 
       expect(pageTitleWidget, findsOneWidget);

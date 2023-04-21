@@ -156,7 +156,7 @@ class OrderItemBonusCard extends StatelessWidget {
                       ),
                       if (enableOHPrice)
                         BalanceTextRow(
-                          key: Key('zpPriceBonus${orderHistoryDetailsBonusAggregate
+                          key: Key('zpPrice${orderHistoryDetailsBonusAggregate
                             .orderItem.materialNumber.getOrDefaultValue('')}'),
                           keyText: 'ZP Price'.tr(),
                           valueText: StringUtils.displayPrice(
@@ -170,7 +170,7 @@ class OrderItemBonusCard extends StatelessWidget {
                         ),
                       if (enableOHPrice)
                         BalanceTextRow(
-                          key: Key('totalPriceBonus${orderHistoryDetailsBonusAggregate
+                          key: Key('totalPrice${orderHistoryDetailsBonusAggregate
                             .orderItem.materialNumber.getOrDefaultValue('')}'),
                           keyText: 'Total Price'.tr(),
                           valueText: StringUtils.displayPrice(
@@ -202,7 +202,7 @@ class OrderItemBonusCard extends StatelessWidget {
                       ),
                       if (enableDisplayOrderDiscount)
                         BalanceTextRow(
-                          key: const Key('discountRateForBonusCard'),
+                          key: const Key('discountRateForItemCard'),
                           keyText: 'Discount'.tr(),
                           valueText: orderHistoryDetailsBonusAggregate
                               .details.discountRate,
