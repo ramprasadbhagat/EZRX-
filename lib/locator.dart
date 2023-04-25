@@ -1385,6 +1385,7 @@ void setupLocator() {
     ),
   );
 
+  // Using registerFactory here because we need multiple instances of DiscountOverrideBloc
   locator.registerFactory(
     () => DiscountOverrideBloc(
       repository: locator<DiscountOverrideRepository>(),
@@ -1417,7 +1418,7 @@ void setupLocator() {
     ),
   );
 
-  locator.registerFactory(
+  locator.registerLazySingleton(
     () => ReturnRequestTypeCodeBloc(
       returnRequestTypeCodeRepository:
           locator<ReturnRequestTypeCodeRepository>(),
@@ -1450,13 +1451,13 @@ void setupLocator() {
     ),
   );
 
-  locator.registerFactory(
+  locator.registerLazySingleton(
     () => RequestReturnBloc(
       returnRequestRepository: locator<RequestReturnRepository>(),
     ),
   );
 
-  locator.registerFactory(
+  locator.registerLazySingleton(
     () => RequestReturnFilterBloc(),
   );
 
