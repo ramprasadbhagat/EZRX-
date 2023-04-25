@@ -64,7 +64,7 @@ List<SoldToDetails> _getTextRowLevelsForSoldToInfo(
     ),
     SoldToDetails(
       key: 'Country'.tr(),
-      value: customer.region,
+      value: customer.country,
     ),
     SoldToDetails(
       key: 'Phone'.tr(),

@@ -107,7 +107,7 @@ List<ShipToDetails> _getTextRowLevelsForShipToInfo(ShipToInfo shipToInfo) {
     ),
     ShipToDetails(
       key: 'Country'.tr(),
-      value: shipToInfo.region,
+      value: shipToInfo.country,
     ),
     ShipToDetails(
       key: 'Phone'.tr(),

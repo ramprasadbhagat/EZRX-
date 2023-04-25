@@ -38,6 +38,7 @@ class CustomerCodeQueryMutation {
             emailAddresses
             comboEligible
             salesDeals
+            country
             shipTo {
               defaultShipToAddress
               shipToCustomerCode
@@ -60,6 +61,7 @@ class CustomerCodeQueryMutation {
               status
               region
               telephoneNumber
+              country
             }
             billTo{
               billToCustomerCode
@@ -147,6 +149,7 @@ class CustomerCodeQueryMutation {
               paymentTermDescription
               comboEligible
               salesDeals
+              country
               shipTo {
                   defaultShipToAddress
                   shipToCustomerCode
@@ -169,6 +172,7 @@ class CustomerCodeQueryMutation {
                   status
                   region
                   telephoneNumber
+                  country
               }
               billTo{
               billToCustomerCode

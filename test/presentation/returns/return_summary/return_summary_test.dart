@@ -245,6 +245,7 @@ void main() {
           floor: '',
           plant: '',
           licenses: [],
+          country: ''
         ),
       ));
 

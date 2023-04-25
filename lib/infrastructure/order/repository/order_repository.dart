@@ -347,7 +347,7 @@ class OrderRepository implements IOrderRepository {
       processingStatus: 'Draft',
       isDraftOrder: true,
       companyName: CompanyName(shipToInfo.shipToName.toString()),
-      country: shipToInfo.region,
+      country: shipToInfo.country,
       postCode1: shipToInfo.postalCode,
       specialInstructions: data.specialInstruction.getValue(),
       poReference: data.customerPoReference.getValue(),

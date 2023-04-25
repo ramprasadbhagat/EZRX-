@@ -47,6 +47,7 @@ class CustomerCodeDto with _$CustomerCodeDto {
         required bool comboEligible,
     @JsonKey(name: 'salesDeals', defaultValue: [])
         required List<String> salesDeals,
+    @JsonKey(name: 'country', defaultValue: '') required String country,
   }) = _CustomerCodeDto;
 
   CustomerCodeInfo toDomain() {
@@ -82,6 +83,7 @@ class CustomerCodeDto with _$CustomerCodeDto {
       comboEligible: comboEligible,
       salesDeals: salesDeals.map((e) => SalesDealNumber(e)).toList(),
       telephoneNumber: PhoneNumber(telephoneNumber),
+      country: country,
     );
   }
 

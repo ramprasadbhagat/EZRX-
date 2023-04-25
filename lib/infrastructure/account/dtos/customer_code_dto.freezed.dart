@@ -74,6 +74,8 @@ mixin _$CustomerCodeDto {
   bool get comboEligible => throw _privateConstructorUsedError;
   @JsonKey(name: 'salesDeals', defaultValue: [])
   List<String> get salesDeals => throw _privateConstructorUsedError;
+  @JsonKey(name: 'country', defaultValue: '')
+  String get country => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -141,7 +143,9 @@ abstract class $CustomerCodeDtoCopyWith<$Res> {
       @JsonKey(name: 'comboEligible', defaultValue: false)
           bool comboEligible,
       @JsonKey(name: 'salesDeals', defaultValue: [])
-          List<String> salesDeals});
+          List<String> salesDeals,
+      @JsonKey(name: 'country', defaultValue: '')
+          String country});
 }
 
 /// @nodoc
@@ -184,6 +188,7 @@ class _$CustomerCodeDtoCopyWithImpl<$Res, $Val extends CustomerCodeDto>
     Object? emailAddresses = null,
     Object? comboEligible = null,
     Object? salesDeals = null,
+    Object? country = null,
   }) {
     return _then(_value.copyWith(
       customerCodeSoldTo: null == customerCodeSoldTo
@@ -294,6 +299,10 @@ class _$CustomerCodeDtoCopyWithImpl<$Res, $Val extends CustomerCodeDto>
           ? _value.salesDeals
           : salesDeals // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      country: null == country
+          ? _value.country
+          : country // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -360,7 +369,9 @@ abstract class _$$_CustomerCodeDtoCopyWith<$Res>
       @JsonKey(name: 'comboEligible', defaultValue: false)
           bool comboEligible,
       @JsonKey(name: 'salesDeals', defaultValue: [])
-          List<String> salesDeals});
+          List<String> salesDeals,
+      @JsonKey(name: 'country', defaultValue: '')
+          String country});
 }
 
 /// @nodoc
@@ -401,6 +412,7 @@ class __$$_CustomerCodeDtoCopyWithImpl<$Res>
     Object? emailAddresses = null,
     Object? comboEligible = null,
     Object? salesDeals = null,
+    Object? country = null,
   }) {
     return _then(_$_CustomerCodeDto(
       customerCodeSoldTo: null == customerCodeSoldTo
@@ -511,6 +523,10 @@ class __$$_CustomerCodeDtoCopyWithImpl<$Res>
           ? _value._salesDeals
           : salesDeals // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      country: null == country
+          ? _value.country
+          : country // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -572,7 +588,9 @@ class _$_CustomerCodeDto extends _CustomerCodeDto {
       @JsonKey(name: 'comboEligible', defaultValue: false)
           required this.comboEligible,
       @JsonKey(name: 'salesDeals', defaultValue: [])
-          required final List<String> salesDeals})
+          required final List<String> salesDeals,
+      @JsonKey(name: 'country', defaultValue: '')
+          required this.country})
       : _shipToInfos = shipToInfos,
         _billToInfos = billToInfos,
         _emailAddresses = emailAddresses,
@@ -684,8 +702,12 @@ class _$_CustomerCodeDto extends _CustomerCodeDto {
   }
 
   @override
+  @JsonKey(name: 'country', defaultValue: '')
+  final String country;
+
+  @override
   String toString() {
-    return 'CustomerCodeDto(customerCodeSoldTo: $customerCodeSoldTo, name1: $name1, name2: $name2, name3: $name3, name4: $name4, status: $status, street1: $street1, street2: $street2, street3: $street3, street4: $street4, street5: $street5, city1: $city1, city2: $city2, telephoneNumber: $telephoneNumber, postalCode: $postalCode, division: $division, customerClassification: $customerClassification, customerLocalGroup: $customerLocalGroup, paymentTermDescription: $paymentTermDescription, shipToInfos: $shipToInfos, billToInfos: $billToInfos, customerAttr7: $customerAttr7, customerGrp4: $customerGrp4, region: $region, emailAddresses: $emailAddresses, comboEligible: $comboEligible, salesDeals: $salesDeals)';
+    return 'CustomerCodeDto(customerCodeSoldTo: $customerCodeSoldTo, name1: $name1, name2: $name2, name3: $name3, name4: $name4, status: $status, street1: $street1, street2: $street2, street3: $street3, street4: $street4, street5: $street5, city1: $city1, city2: $city2, telephoneNumber: $telephoneNumber, postalCode: $postalCode, division: $division, customerClassification: $customerClassification, customerLocalGroup: $customerLocalGroup, paymentTermDescription: $paymentTermDescription, shipToInfos: $shipToInfos, billToInfos: $billToInfos, customerAttr7: $customerAttr7, customerGrp4: $customerGrp4, region: $region, emailAddresses: $emailAddresses, comboEligible: $comboEligible, salesDeals: $salesDeals, country: $country)';
   }
 
   @override
@@ -733,7 +755,8 @@ class _$_CustomerCodeDto extends _CustomerCodeDto {
             (identical(other.comboEligible, comboEligible) ||
                 other.comboEligible == comboEligible) &&
             const DeepCollectionEquality()
-                .equals(other._salesDeals, _salesDeals));
+                .equals(other._salesDeals, _salesDeals) &&
+            (identical(other.country, country) || other.country == country));
   }
 
   @JsonKey(ignore: true)
@@ -766,7 +789,8 @@ class _$_CustomerCodeDto extends _CustomerCodeDto {
         region,
         const DeepCollectionEquality().hash(_emailAddresses),
         comboEligible,
-        const DeepCollectionEquality().hash(_salesDeals)
+        const DeepCollectionEquality().hash(_salesDeals),
+        country
       ]);
 
   @JsonKey(ignore: true)
@@ -838,7 +862,9 @@ abstract class _CustomerCodeDto extends CustomerCodeDto {
       @JsonKey(name: 'comboEligible', defaultValue: false)
           required final bool comboEligible,
       @JsonKey(name: 'salesDeals', defaultValue: [])
-          required final List<String> salesDeals}) = _$_CustomerCodeDto;
+          required final List<String> salesDeals,
+      @JsonKey(name: 'country', defaultValue: '')
+          required final String country}) = _$_CustomerCodeDto;
   const _CustomerCodeDto._() : super._();
 
   factory _CustomerCodeDto.fromJson(Map<String, dynamic> json) =
@@ -925,6 +951,9 @@ abstract class _CustomerCodeDto extends CustomerCodeDto {
   @override
   @JsonKey(name: 'salesDeals', defaultValue: [])
   List<String> get salesDeals;
+  @override
+  @JsonKey(name: 'country', defaultValue: '')
+  String get country;
   @override
   @JsonKey(ignore: true)
   _$$_CustomerCodeDtoCopyWith<_$_CustomerCodeDto> get copyWith =>

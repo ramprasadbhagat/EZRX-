@@ -45,6 +45,7 @@ _$_CustomerCodeDto _$$_CustomerCodeDtoFromJson(Map<String, dynamic> json) =>
               ?.map((e) => e as String)
               .toList() ??
           [],
+      country: json['country'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_CustomerCodeDtoToJson(_$_CustomerCodeDto instance) =>
@@ -76,4 +77,5 @@ Map<String, dynamic> _$$_CustomerCodeDtoToJson(_$_CustomerCodeDto instance) =>
       'emailAddresses': instance.emailAddresses,
       'comboEligible': instance.comboEligible,
       'salesDeals': instance.salesDeals,
+      'country': instance.country,
     };

@@ -59,8 +59,6 @@ class OrderLocalDataSourceMock extends Mock implements OrderLocalDataSource {}
 
 class OrderRemoteDataSourceMock extends Mock implements OrderRemoteDataSource {}
 
-
-
 class MixpanelServiceMock extends Mock implements MixpanelService {}
 
 class SalesOrganisationConfigsMock extends Mock
@@ -71,7 +69,7 @@ void main() {
   late Config mockConfig;
   late OrderLocalDataSource orderLocalDataSource;
   late OrderRemoteDataSource orderRemoteDataSource;
-  
+
   final mockUser = User.empty();
   final mockSalesOrganisation =
       SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601'));
@@ -84,7 +82,7 @@ void main() {
     city1: 'kolkata',
     shipToName: const ShipToName(
         name1: 'test1', name2: 'test2', name3: 'test3', name4: 'test4'),
-    region: 'abc',
+    country: 'abc',
     postalCode: '700023',
     shipToAddress:
         ShipToAddress.empty().copyWith(street: 'new town', street2: 'new twon'),
@@ -114,7 +112,7 @@ void main() {
     processingStatus: 'Draft',
     isDraftOrder: true,
     companyName: CompanyName(mockShipToInfo.shipToName.toString()),
-    country: mockShipToInfo.region,
+    country: mockShipToInfo.country,
     postCode1: mockShipToInfo.postalCode,
     specialInstructions: '',
     poReference: '',
@@ -139,7 +137,7 @@ void main() {
     mockConfig = MockConfig();
     orderLocalDataSource = OrderLocalDataSourceMock();
     orderRemoteDataSource = OrderRemoteDataSourceMock();
-    
+
     mixpanelService = MixpanelServiceMock();
     salesOrganisationConfigs = SalesOrganisationConfigsMock();
 
@@ -448,13 +446,10 @@ void main() {
       final cartMaterial = <PriceAggregate>[
         PriceAggregate.empty().copyWith(
           quantity: 2,
-          materialInfo: MaterialInfo.empty()
-              .copyWith(
-                materialNumber: MaterialNumber('000000000023001758'),
-                principalData: PrincipalData.empty().copyWith(
-                  principalCode: PrincipalCode('0000140332')
-                )
-              ),
+          materialInfo: MaterialInfo.empty().copyWith(
+              materialNumber: MaterialNumber('000000000023001758'),
+              principalData: PrincipalData.empty()
+                  .copyWith(principalCode: PrincipalCode('0000140332'))),
         )
       ];
       final submitOrder = SubmitOrder.empty().copyWith(
@@ -929,7 +924,7 @@ void main() {
         processingStatus: 'Draft',
         isDraftOrder: true,
         companyName: CompanyName(mockShipToInfo.shipToName.toString()),
-        country: mockShipToInfo.region,
+        country: mockShipToInfo.country,
         postCode1: mockShipToInfo.postalCode,
         specialInstructions: data.specialInstruction.getValue(),
         poReference: data.customerPoReference.getValue(),
@@ -1041,7 +1036,7 @@ void main() {
         processingStatus: 'Draft',
         isDraftOrder: true,
         companyName: CompanyName(mockShipToInfo.shipToName.toString()),
-        country: mockShipToInfo.region,
+        country: mockShipToInfo.country,
         postCode1: mockShipToInfo.postalCode,
         specialInstructions: data.specialInstruction.getValue(),
         poReference: data.customerPoReference.getValue(),
@@ -1143,7 +1138,7 @@ void main() {
         processingStatus: 'Draft',
         isDraftOrder: true,
         companyName: CompanyName(mockShipToInfo.shipToName.toString()),
-        country: mockShipToInfo.region,
+        country: mockShipToInfo.country,
         postCode1: mockShipToInfo.postalCode,
         specialInstructions: data.specialInstruction.getValue(),
         poReference: data.customerPoReference.getValue(),
@@ -1285,7 +1280,7 @@ void main() {
         processingStatus: 'Draft',
         isDraftOrder: true,
         companyName: CompanyName(mockShipToInfo.shipToName.toString()),
-        country: mockShipToInfo.region,
+        country: mockShipToInfo.country,
         postCode1: mockShipToInfo.postalCode,
         specialInstructions: data.specialInstruction.getValue(),
         poReference: data.customerPoReference.getValue(),
@@ -1387,7 +1382,7 @@ void main() {
         processingStatus: 'Draft',
         isDraftOrder: true,
         companyName: CompanyName(mockShipToInfo.shipToName.toString()),
-        country: mockShipToInfo.region,
+        country: mockShipToInfo.country,
         postCode1: mockShipToInfo.postalCode,
         specialInstructions: data.specialInstruction.getValue(),
         poReference: data.customerPoReference.getValue(),
@@ -1489,7 +1484,7 @@ void main() {
         processingStatus: 'Draft',
         isDraftOrder: true,
         companyName: CompanyName(mockShipToInfo.shipToName.toString()),
-        country: mockShipToInfo.region,
+        country: mockShipToInfo.country,
         postCode1: mockShipToInfo.postalCode,
         specialInstructions: data.specialInstruction.getValue(),
         poReference: data.customerPoReference.getValue(),

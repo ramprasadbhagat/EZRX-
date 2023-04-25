@@ -32,6 +32,7 @@ _$_ShipToDto _$$_ShipToDtoFromJson(Map<String, dynamic> json) => _$_ShipToDto(
               ?.map((e) => LicenseDto.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
+      country: json['country'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_ShipToDtoToJson(_$_ShipToDto instance) =>
@@ -58,4 +59,5 @@ Map<String, dynamic> _$$_ShipToDtoToJson(_$_ShipToDto instance) =>
       'floor': instance.floor,
       'plant': instance.plant,
       'licenses': instance.licenseDtoList.map((e) => e.toJson()).toList(),
+      'country': instance.country,
     };

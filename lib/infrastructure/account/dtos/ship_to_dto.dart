@@ -36,6 +36,7 @@ class ShipToDto with _$ShipToDto {
     @JsonKey(name: 'plant') required String plant,
     @JsonKey(name: 'licenses', defaultValue: <LicenseDto>[])
         required List<LicenseDto> licenseDtoList,
+    @JsonKey(name: 'country', defaultValue: '') required String country,
   }) = _ShipToDto;
 
   factory ShipToDto.fromDomain(ShipToInfo shipToInfo) {
@@ -63,6 +64,7 @@ class ShipToDto with _$ShipToDto {
       plant: shipToInfo.plant,
       licenseDtoList:
           shipToInfo.licenses.map((e) => LicenseDto.fromDomain(e)).toList(),
+      country: shipToInfo.country,
     );
   }
 
@@ -98,6 +100,7 @@ class ShipToDto with _$ShipToDto {
       licenses: licenseDtoList.isNotEmpty
           ? licenseDtoList.map((e) => e.toDomain()).toList()
           : <LicenseInfo>[],
+      country: country,
     );
   }
 

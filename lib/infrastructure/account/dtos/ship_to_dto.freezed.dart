@@ -64,6 +64,8 @@ mixin _$ShipToDto {
   String get plant => throw _privateConstructorUsedError;
   @JsonKey(name: 'licenses', defaultValue: <LicenseDto>[])
   List<LicenseDto> get licenseDtoList => throw _privateConstructorUsedError;
+  @JsonKey(name: 'country', defaultValue: '')
+  String get country => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -120,7 +122,9 @@ abstract class $ShipToDtoCopyWith<$Res> {
       @JsonKey(name: 'plant')
           String plant,
       @JsonKey(name: 'licenses', defaultValue: <LicenseDto>[])
-          List<LicenseDto> licenseDtoList});
+          List<LicenseDto> licenseDtoList,
+      @JsonKey(name: 'country', defaultValue: '')
+          String country});
 }
 
 /// @nodoc
@@ -158,6 +162,7 @@ class _$ShipToDtoCopyWithImpl<$Res, $Val extends ShipToDto>
     Object? floor = null,
     Object? plant = null,
     Object? licenseDtoList = null,
+    Object? country = null,
   }) {
     return _then(_value.copyWith(
       shipToCustomerCode: null == shipToCustomerCode
@@ -248,6 +253,10 @@ class _$ShipToDtoCopyWithImpl<$Res, $Val extends ShipToDto>
           ? _value.licenseDtoList
           : licenseDtoList // ignore: cast_nullable_to_non_nullable
               as List<LicenseDto>,
+      country: null == country
+          ? _value.country
+          : country // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -303,7 +312,9 @@ abstract class _$$_ShipToDtoCopyWith<$Res> implements $ShipToDtoCopyWith<$Res> {
       @JsonKey(name: 'plant')
           String plant,
       @JsonKey(name: 'licenses', defaultValue: <LicenseDto>[])
-          List<LicenseDto> licenseDtoList});
+          List<LicenseDto> licenseDtoList,
+      @JsonKey(name: 'country', defaultValue: '')
+          String country});
 }
 
 /// @nodoc
@@ -339,6 +350,7 @@ class __$$_ShipToDtoCopyWithImpl<$Res>
     Object? floor = null,
     Object? plant = null,
     Object? licenseDtoList = null,
+    Object? country = null,
   }) {
     return _then(_$_ShipToDto(
       shipToCustomerCode: null == shipToCustomerCode
@@ -429,6 +441,10 @@ class __$$_ShipToDtoCopyWithImpl<$Res>
           ? _value._licenseDtoList
           : licenseDtoList // ignore: cast_nullable_to_non_nullable
               as List<LicenseDto>,
+      country: null == country
+          ? _value.country
+          : country // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -480,7 +496,9 @@ class _$_ShipToDto extends _ShipToDto {
       @JsonKey(name: 'plant')
           required this.plant,
       @JsonKey(name: 'licenses', defaultValue: <LicenseDto>[])
-          required final List<LicenseDto> licenseDtoList})
+          required final List<LicenseDto> licenseDtoList,
+      @JsonKey(name: 'country', defaultValue: '')
+          required this.country})
       : _licenseDtoList = licenseDtoList,
         super._();
 
@@ -559,8 +577,12 @@ class _$_ShipToDto extends _ShipToDto {
   }
 
   @override
+  @JsonKey(name: 'country', defaultValue: '')
+  final String country;
+
+  @override
   String toString() {
-    return 'ShipToDto(shipToCustomerCode: $shipToCustomerCode, defaultShipToAddress: $defaultShipToAddress, name1: $name1, name2: $name2, name3: $name3, name4: $name4, status: $status, street: $street, street2: $street2, street3: $street3, street4: $street4, street5: $street5, postalCode: $postalCode, city1: $city1, city2: $city2, telephoneNumber: $telephoneNumber, houseNumber1: $houseNumber1, building: $building, region: $region, floor: $floor, plant: $plant, licenseDtoList: $licenseDtoList)';
+    return 'ShipToDto(shipToCustomerCode: $shipToCustomerCode, defaultShipToAddress: $defaultShipToAddress, name1: $name1, name2: $name2, name3: $name3, name4: $name4, status: $status, street: $street, street2: $street2, street3: $street3, street4: $street4, street5: $street5, postalCode: $postalCode, city1: $city1, city2: $city2, telephoneNumber: $telephoneNumber, houseNumber1: $houseNumber1, building: $building, region: $region, floor: $floor, plant: $plant, licenseDtoList: $licenseDtoList, country: $country)';
   }
 
   @override
@@ -596,7 +618,8 @@ class _$_ShipToDto extends _ShipToDto {
             (identical(other.floor, floor) || other.floor == floor) &&
             (identical(other.plant, plant) || other.plant == plant) &&
             const DeepCollectionEquality()
-                .equals(other._licenseDtoList, _licenseDtoList));
+                .equals(other._licenseDtoList, _licenseDtoList) &&
+            (identical(other.country, country) || other.country == country));
   }
 
   @JsonKey(ignore: true)
@@ -624,7 +647,8 @@ class _$_ShipToDto extends _ShipToDto {
         region,
         floor,
         plant,
-        const DeepCollectionEquality().hash(_licenseDtoList)
+        const DeepCollectionEquality().hash(_licenseDtoList),
+        country
       ]);
 
   @JsonKey(ignore: true)
@@ -686,7 +710,9 @@ abstract class _ShipToDto extends ShipToDto {
       @JsonKey(name: 'plant')
           required final String plant,
       @JsonKey(name: 'licenses', defaultValue: <LicenseDto>[])
-          required final List<LicenseDto> licenseDtoList}) = _$_ShipToDto;
+          required final List<LicenseDto> licenseDtoList,
+      @JsonKey(name: 'country', defaultValue: '')
+          required final String country}) = _$_ShipToDto;
   const _ShipToDto._() : super._();
 
   factory _ShipToDto.fromJson(Map<String, dynamic> json) =
@@ -758,6 +784,9 @@ abstract class _ShipToDto extends ShipToDto {
   @override
   @JsonKey(name: 'licenses', defaultValue: <LicenseDto>[])
   List<LicenseDto> get licenseDtoList;
+  @override
+  @JsonKey(name: 'country', defaultValue: '')
+  String get country;
   @override
   @JsonKey(ignore: true)
   _$$_ShipToDtoCopyWith<_$_ShipToDto> get copyWith =>

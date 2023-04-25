@@ -32,6 +32,7 @@ class CustomerCodeInfo with _$CustomerCodeInfo {
     required bool comboEligible,
     required List<SalesDealNumber> salesDeals,
     required PhoneNumber telephoneNumber,
+    required String country,
   }) = _CustomerCodeInfo;
 
   factory CustomerCodeInfo.empty() => CustomerCodeInfo(
@@ -66,6 +67,7 @@ class CustomerCodeInfo with _$CustomerCodeInfo {
         comboEligible: false,
         salesDeals: [],
         telephoneNumber: PhoneNumber(''),
+        country: '',
       );
 
   bool get hasBillToInfo {
