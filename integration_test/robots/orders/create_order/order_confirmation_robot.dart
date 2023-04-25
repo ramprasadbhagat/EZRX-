@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 class OrderConfirmationRobot {
@@ -34,6 +34,13 @@ class OrderConfirmationRobot {
 
   Future<void> tapGoToOrderHistoryButton() async {
     await tester.tap(orderHistory);
+    await tester.pumpAndSettle();
+  }
+  
+  Future<void> goBack() async {
+    // ignore: omit_local_variable_types
+    final NavigatorState navigator = tester.state(find.byType(Navigator));
+    navigator.pop();
     await tester.pumpAndSettle();
   }
 }

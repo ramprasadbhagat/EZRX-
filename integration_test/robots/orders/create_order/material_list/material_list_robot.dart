@@ -28,12 +28,20 @@ class MaterialListRobot {
   }
 
   void verifyMaterialPrice() {
-    //enable Materials without Price
-    expect(find.text('${'List Price:'.tr()}NA'), findsWidgets);
+    expect(find.textContaining('List Price:'.tr()), findsWidgets);
   }
 
   void verifyCurrencyCheck(String currencyCode) {
-    expect(find.textContaining(currencyCode), findsWidgets);
+    final existPrice =
+        find.textContaining('${'List Price:'.tr()}NA').evaluate().isEmpty;
+    if (existPrice) {
+      expect(find.textContaining(currencyCode), findsWidgets);
+    }
+    expect(find.textContaining(currencyCode), findsNothing);
+  }
+
+  void verifyEnableGMC() {
+    expect(find.textContaining('Government Material Code:'.tr()), findsWidgets);
   }
 
   void verifyEnableListPrice(String materialNumber) {

@@ -128,6 +128,26 @@ class OrderHistoryDetailsRobot {
     expect(zpPrice, findsOneWidget);
   }
 
+  void verifyEnableTaxDisplay() {
+    final enableTaxDisplay = find.byKey(const Key('enableTaxDisplay'));
+    expect(enableTaxDisplay, findsOneWidget);
+  }
+
+  void verifyDiscountRateDisplay() {
+    final discountRateForItemCard =
+        find.byKey(const Key('discountRateForItemCard'));
+    expect(discountRateForItemCard, findsOneWidget);
+  }
+
+  void verifyDeliveryDateTime([enabled = true]) {
+    final deliveryDateTime = find.byKey(const Key('deliveryDateTime'));
+    if (enabled) {
+      expect(deliveryDateTime, findsOneWidget);
+    } else {
+      expect(deliveryDateTime, findsNothing);
+    }
+  }
+
   void verifyEnableTotalPrice(
     String materialNumber,
   ) {

@@ -84,7 +84,7 @@ class OrderHistoryListTile extends StatelessWidget {
                   salesOrgConfigs.disableProcessingStatus
                       ? const SizedBox.shrink()
                       : Container(
-                          key: const Key('disableProcessingStatus'),
+                          key: const Key('processingStatus'),
                           padding: const EdgeInsets.symmetric(
                             horizontal: 10,
                             vertical: 4,

@@ -85,6 +85,7 @@ void main() {
     await homeRobot.goToCreateOrder();
     materialListRobot.verify();
     await materialListRobot.search('451');
+    materialListRobot.verifyEnableListPrice('000000000023168451');
     materialListRobot.verifyMaterialPrice();
     await materialListRobot.tapMaterial('000000000023168451');
     materialDetailRobot.verify();

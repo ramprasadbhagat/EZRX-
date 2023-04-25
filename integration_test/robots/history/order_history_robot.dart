@@ -45,6 +45,15 @@ class OrderHistoryRobot {
     expect(orderTypeWidget, findsAtLeastNWidgets(1));
   }
 
+  void verifyOrderProcessingStatus([enabled = true]) {
+    final processingStatus = find.byKey(const Key('processingStatus'));
+    if (enabled) {
+      expect(processingStatus, findsAtLeastNWidgets(1));
+    } else {
+      expect(processingStatus, findsNothing);
+    }
+  }
+
   void verifyQuantity(String quantity) {
     final quantityWidget = find.byKey(Key('Quantity$quantity'));
     expect(quantityWidget, findsAtLeastNWidgets(1));

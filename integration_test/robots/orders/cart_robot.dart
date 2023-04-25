@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -18,7 +19,13 @@ class CartRobot {
   }
 
   void verifyExpiryMaterial(String materialNumber) {
-    expect(find.byKey(Key('expiryDate$materialNumber')), findsOneWidget);
+    final expiryDate = find.byKey(Key('expiryDate$materialNumber'));
+    expect(expiryDate, findsNothing);
+  }
+
+  void verifyHideStockDisplay() {
+    final expiryDate = find.textContaining('In Stock : '.tr());
+    expect(expiryDate, findsNothing);
   }
 
   void verifyEnableDiscountOverrideMaterial() {
@@ -31,12 +38,15 @@ class CartRobot {
     await tester.enterText(find.byKey(const Key('discountOvverrideField')),
         discountPercentage.toString());
     await tester.pumpAndSettle();
-    await tester.tap(find.byKey(const Key('Submit')),);
+    await tester.tap(
+      find.byKey(const Key('Submit')),
+    );
     await tester.pumpAndSettle(const Duration(seconds: 5));
   }
 
   void verifyDiscountOverridePercentage(double discountPercentage) {
-    expect(find.byKey(Key('discountOverridePercentage$discountPercentage')), findsOneWidget);
+    expect(find.byKey(Key('discountOverridePercentage$discountPercentage')),
+        findsOneWidget);
   }
 
   void findMaterialItem(String materialNumber, int quantity) {
@@ -59,9 +69,23 @@ class CartRobot {
   }
 
   void verifyEnableVatAtTotalLevel(String materialNumber, int percentage) {
-    expect(find.byKey(const Key('taxCodeInPercentageKey')), findsOneWidget);
-    expect(find.textContaining('$percentage%'), findsOneWidget);
-    expect(find.byKey(const Key('totalTaxKey')), findsOneWidget);
+    verifyVatAtTotalLevel(materialNumber, percentage);
+  }
+
+  void verifyVatAtTotalLevel(String materialNumber, int percentage,
+      [bool enabled = true]) {
+    final taxCodeInPercentageKey =
+        find.byKey(const Key('taxCodeInPercentageKey'));
+    final totalTaxKey = find.byKey(const Key('totalTaxKey'));
+    if (enabled) {
+      expect(taxCodeInPercentageKey, findsOneWidget);
+      expect(find.textContaining('$percentage%'), findsOneWidget);
+      expect(totalTaxKey, findsOneWidget);
+    } else {
+      expect(taxCodeInPercentageKey, findsNothing);
+      expect(find.textContaining('$percentage%'), findsNothing);
+      expect(totalTaxKey, findsNothing);
+    }
     expect(find.byKey(Key('pricebefore$materialNumber')), findsNothing);
   }
 

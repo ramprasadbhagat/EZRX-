@@ -300,12 +300,11 @@ class _GovermentMaterialCode extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<SalesOrgBloc, SalesOrgState>(
       builder: (context, state) {
-        return state.configs.enableGMC &&
-                materialInfo.governmentMaterialCode.isNotEmpty
+        return state.configs.enableGMC
             ? Text(
                 '${'Government Material Code:'.tr()} ${materialInfo.governmentMaterialCode}',
                 key: Key(
-                  'governmentMaterialCode${materialInfo.materialNumber.getOrDefaultValue('')}',
+                  'governmentMaterialCode${materialInfo.governmentMaterialCode}',
                 ),
                 style: Theme.of(context).textTheme.titleSmall?.apply(
                       color: ZPColors.lightGray,

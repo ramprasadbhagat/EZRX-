@@ -22,6 +22,14 @@ class ShipToSearchRobot {
     await tester.pumpAndSettle();
   }
 
+  Future<void> clearSearch() async {
+    final clearShipToSearch =
+        find.byKey(const Key('clearShipToSearch'));
+    expect(clearShipToSearch, findsOneWidget);
+    await tester.tap(clearShipToSearch);
+    await tester.pumpAndSettle();
+  }
+
   Future<void> tapShipToCode({String shipToCode = ''}) async {
     //if this function call with empty ship to code, let robot to think
     //then it automatically select the default ship to code

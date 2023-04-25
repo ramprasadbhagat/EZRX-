@@ -42,7 +42,7 @@ class HomeRobot {
     await tester.tap(salesOrgOption);
     await tester.pumpAndSettle();
   }
-
+  
   void findAnnouncementCloseIcon() {
     expect(announcementCloseIcon, findsOneWidget);
   }

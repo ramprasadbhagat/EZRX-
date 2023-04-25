@@ -17,6 +17,10 @@ class MaterialRootRobot {
     expect(bundles, findsOneWidget);
   }
 
+  void findNoBundleTab() {
+    expect(bundles, findsNothing);
+  }
+
   void findMaterialTab() {
     expect(material, findsOneWidget);
   }
