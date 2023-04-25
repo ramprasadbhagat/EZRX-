@@ -17,7 +17,6 @@ import 'package:ezrxmobile/application/order/material_price/material_price_bloc.
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
-import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
@@ -244,17 +243,6 @@ class MaterialListPage extends StatelessWidget {
       return;
     }
 
-    if (material.hasValidTenderContract) {
-      context.read<TenderContractBloc>().add(
-            TenderContractEvent.fetch(
-              customerCodeInfo: eligibilityBloc.state.customerCodeInfo,
-              salesOrganisation: eligibilityBloc.state.salesOrganisation,
-              shipToInfo: eligibilityBloc.state.shipToInfo,
-              materialInfo: material,
-              defaultSelectedTenderContract: TenderContract.empty(),
-            ),
-          );
-    }
     CartBottomSheet.showAddToCartBottomSheet(
       priceAggregate: PriceAggregate(
         price: materialPrice,

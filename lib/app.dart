@@ -34,7 +34,6 @@ import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
-import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
@@ -54,7 +53,6 @@ import 'package:ezrxmobile/application/order/order_template_list/order_template_
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
-import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
 import 'package:ezrxmobile/application/returns/policy_configuration/policy_configuration_bloc.dart';
 import 'package:ezrxmobile/application/returns/usage_code/usage_code_bloc.dart';
 import 'package:ezrxmobile/application/returns/user_restriction/user_restriction_list_bloc.dart';
@@ -272,9 +270,6 @@ class App extends StatelessWidget {
         BlocProvider<PriceOverrideBloc>(
           create: (context) => locator<PriceOverrideBloc>(),
         ),
-        BlocProvider<AddToCartBloc>(
-          create: (context) => locator<AddToCartBloc>(),
-        ),
         BlocProvider<OrderSummaryBloc>(
           create: (context) => locator<OrderSummaryBloc>(),
         ),
@@ -295,9 +290,6 @@ class App extends StatelessWidget {
         ),
         BlocProvider<OrderEligibilityBloc>(
           create: (context) => locator<OrderEligibilityBloc>(),
-        ),
-        BlocProvider<TenderContractBloc>(
-          create: (context) => locator<TenderContractBloc>(),
         ),
         BlocProvider<CartBloc>(
           create: (context) => locator<CartBloc>(),

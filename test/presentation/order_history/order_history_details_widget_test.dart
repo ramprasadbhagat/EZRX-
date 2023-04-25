@@ -211,8 +211,9 @@ void main() {
 
     locator.registerLazySingleton(() => permissionService);
     locator.registerLazySingleton(() => MixpanelService());
+    locator.registerFactory<AddToCartBloc>(() => addToCartBlocMock);
+    locator.registerFactory<TenderContractBloc>(() => tenderContractBlocMock);
     locator<MixpanelService>().init(mixpanel: MixpanelMock());
-
     orderHistoryDetails =
         await OrderHistoryDetailsLocalDataSource().getOrderHistoryDetails();
     orderHistory = await OrderHistoryLocalDataSource().getOrderHistory();
@@ -277,7 +278,6 @@ void main() {
       when(() => addToCartBlocMock.state).thenReturn(AddToCartState.initial());
       when(() => materialPriceBlocMock.state)
           .thenReturn(MaterialPriceState.initial());
-      when(() => addToCartBlocMock.state).thenReturn(AddToCartState.initial());
       when(() => tenderContractBlocMock.state)
           .thenReturn(TenderContractState.initial());
       when(() => favouriteBlocMock.state).thenReturn(FavouriteState.initial());
@@ -288,6 +288,7 @@ void main() {
       when(() => announcementBlocMock.state)
           .thenReturn(AnnouncementState.initial());
     });
+
     StackRouterScope getWUT() {
       return WidgetUtils.getScopedWidget(
         autoRouterMock: autoRouterMock,

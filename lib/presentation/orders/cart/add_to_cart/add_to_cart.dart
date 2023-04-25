@@ -1,11 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
 import 'package:ezrxmobile/domain/announcement/entities/announcement.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
@@ -21,7 +21,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/select_contract.dart';
 
-class AddToCart extends StatefulWidget {
+class AddToCart extends StatelessWidget {
   final bool isCovid19Tab;
 
   const AddToCart({
@@ -30,54 +30,10 @@ class AddToCart extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<AddToCart> createState() => _AddToCartState();
-}
-
-class _AddToCartState extends State<AddToCart> {
-  late SalesOrgBloc salesOrgBloc;
-  late AddToCartBloc addToCartBloc;
-  late TenderContractBloc tenderContractBloc;
-  late CartBloc cartBloc;
-
-  @override
-  void initState() {
-    salesOrgBloc = context.read<SalesOrgBloc>();
-    addToCartBloc = context.read<AddToCartBloc>();
-    tenderContractBloc = context.read<TenderContractBloc>();
-    cartBloc = context.read<CartBloc>();
-    final cartItem = addToCartBloc.state.cartItem;
-    addToCartBloc.add(
-      AddToCartEvent.updateQuantity(
-        1,
-        cartBloc.state.zmgMaterialWithoutMaterial(cartItem),
-      ),
-    );
-    tenderContractBloc.add(const TenderContractEvent.unselected());
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
-  bool get _isAddToCartAllowed {
-    return !(!salesOrgBloc.state.configs.materialWithoutPrice &&
-        addToCartBloc.state.cartItem.price.finalPrice.isEmpty &&
-        (context
-                .read<EligibilityBloc>()
-                .state
-                .isOrderTypeEnableAndSpecialOrderType &&
-            !addToCartBloc.state.cartItem.isSpecialOrderTypeNotTH &&
-            addToCartBloc.state.cartItem.isSpecialMaterial) &&
-        !widget.isCovid19Tab);
-  }
-
-  TenderContract get selectedTenderContract =>
-      context.read<TenderContractBloc>().state.selectedTenderContract;
-
-  @override
   Widget build(BuildContext context) {
+    final addToCartBloc = context.read<AddToCartBloc>();
+    final cartBloc = context.read<CartBloc>();
+
     trackMixpanelEvent(
       MixpanelEvents.pageViewVisited,
       props: {
@@ -85,80 +41,102 @@ class _AddToCartState extends State<AddToCart> {
       },
     );
 
-    return WillPopScope(
-      onWillPop: () {
-        tenderContractBloc.add(const TenderContractEvent.unselected());
-
-        return Future.value(true);
-      },
-      child: Scaffold(
-        key: const Key('materialDetailsPage'),
-        backgroundColor: ZPColors.white,
-        appBar: AppBar(
-          title: const Text('Material Detail').tr(),
-          actions: [
-            FavoriteButton(
-              materialInfo: addToCartBloc.state.cartItem.materialInfo,
-            ),
-          ],
-        ),
-        body: AnnouncementBanner(
-          appModule: AppModule.orders,
-          child: Padding(
-            padding: const EdgeInsets.all(15),
-            child: BlocBuilder<AddToCartBloc, AddToCartState>(
-              buildWhen: (previous, current) => previous != current,
-              builder: (context, state) {
-                return Column(
-                  children: [
-                    Expanded(
-                      child: ListView(
-                        children: [
-                          CartItemDetailWidget(
-                            cartItem: state.cartItem,
-                            onQuantityChanged: (int value) {
-                              final cartItem = addToCartBloc.state.cartItem;
-                              final discountedMaterialCount = cartBloc.state
-                                  .zmgMaterialWithoutMaterial(cartItem);
-                              addToCartBloc.add(
-                                AddToCartEvent.updateQuantity(
-                                  value,
-                                  discountedMaterialCount,
-                                ),
-                              );
-                            },
-                          ),
-                          state.cartItem.materialInfo.hasValidTenderContract
-                              ? SelectContract(
-                                  materialInfo: state.cartItem.materialInfo,
-                                )
-                              : const SizedBox.shrink(),
-                        ],
-                      ),
+    return Scaffold(
+      key: const Key('materialDetailsPage'),
+      backgroundColor: ZPColors.white,
+      appBar: AppBar(
+        title: const Text('Material Detail').tr(),
+        actions: [
+          FavoriteButton(
+            materialInfo: addToCartBloc.state.cartItem.materialInfo,
+          ),
+        ],
+      ),
+      body: AnnouncementBanner(
+        appModule: AppModule.orders,
+        child: Padding(
+          padding: const EdgeInsets.all(15),
+          child: BlocBuilder<AddToCartBloc, AddToCartState>(
+            buildWhen: (previous, current) => previous != current,
+            builder: (context, state) {
+              return Column(
+                children: [
+                  Expanded(
+                    child: ListView(
+                      children: [
+                        CartItemDetailWidget(
+                          cartItem: state.cartItem,
+                          onQuantityChanged: (int value) {
+                            final cartItem = state.cartItem;
+                            final discountedMaterialCount = cartBloc.state
+                                .zmgMaterialWithoutMaterial(cartItem);
+                            addToCartBloc.add(
+                              AddToCartEvent.updateQuantity(
+                                value,
+                                discountedMaterialCount,
+                              ),
+                            );
+                          },
+                        ),
+                        state.cartItem.materialInfo.hasValidTenderContract
+                            ? SelectContract(
+                                materialInfo: state.cartItem.materialInfo,
+                              )
+                            : const SizedBox.shrink(),
+                      ],
                     ),
-                    AddToCartButton(
-                      isAddToCartAllowed: _isAddToCartAllowed,
-                      cartItem: selectedTenderContract ==
-                                  TenderContract.empty() ||
-                              selectedTenderContract ==
-                                  TenderContract.noContract()
-                          ? state.cartItem
-                          : state.cartItem.copyWith(
-                              tenderContract: selectedTenderContract,
-                              price: state.cartItem.price.copyWith(
-                                finalPrice: MaterialPrice(
-                                  selectedTenderContract.tenderPrice.tenderPrice,
+                  ),
+                  BlocBuilder<TenderContractBloc, TenderContractState>(
+                    buildWhen: (previous, current) =>
+                        previous.selectedTenderContract !=
+                        current.selectedTenderContract,
+                    builder: (context, tenderContractState) {
+                      final selectedContract =
+                          tenderContractState.selectedTenderContract;
+                      final eligibilityState =
+                          context.read<EligibilityBloc>().state;
+
+                      return AddToCartButton(
+                        isAddToCartAllowed: _isAddToCartAllowed(
+                          cartItem: state.cartItem,
+                          materialWithoutPrice: eligibilityState
+                              .salesOrgConfigs.materialWithoutPrice,
+                          isOrderTypeEnableAndSpecialOrderType: eligibilityState
+                              .isOrderTypeEnableAndSpecialOrderType,
+                        ),
+                        cartItem: selectedContract == TenderContract.empty() ||
+                                selectedContract == TenderContract.noContract()
+                            ? state.cartItem
+                            : state.cartItem.copyWith(
+                                tenderContract: selectedContract,
+                                price: state.cartItem.price.copyWith(
+                                  finalPrice: MaterialPrice(
+                                    selectedContract.tenderPrice.tenderPrice,
+                                  ),
                                 ),
                               ),
-                            ),
-                    ),
-                  ],
-                );
-              },
-            ),
+                      );
+                    },
+                  ),
+                ],
+              );
+            },
           ),
         ),
       ),
     );
+  }
+
+  bool _isAddToCartAllowed({
+    required PriceAggregate cartItem,
+    required bool isOrderTypeEnableAndSpecialOrderType,
+    required bool materialWithoutPrice,
+  }) {
+    return !(!materialWithoutPrice &&
+        cartItem.price.finalPrice.isEmpty &&
+        (isOrderTypeEnableAndSpecialOrderType &&
+            !cartItem.isSpecialOrderTypeNotTH &&
+            cartItem.isSpecialMaterial) &&
+        !isCovid19Tab);
   }
 }

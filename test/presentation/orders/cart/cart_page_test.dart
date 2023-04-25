@@ -177,6 +177,8 @@ void main() {
     locator.registerFactory(() =>
         DiscountOverrideBloc(repository: DiscountOverrideRepositoryMock()));
     locator.registerFactory(() => AppRouter());
+    locator.registerFactory<AddToCartBloc>(() => addToCartBlocMock);
+    locator.registerFactory<TenderContractBloc>(() => tenderContractBlocMock);
     autoRouter = locator<AppRouter>();
   });
   setUp(

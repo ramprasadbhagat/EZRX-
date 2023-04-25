@@ -1313,7 +1313,7 @@ void setupLocator() {
       localDataSource: locator<PoDocumentLocalDataSource>(),
       permissionService: locator<PermissionService>(),
       deviceInfo: locator<DeviceInfo>(),
-      filePickerService: locator<FilePickerService>(), 
+      filePickerService: locator<FilePickerService>(),
     ),
   );
 
@@ -1349,7 +1349,7 @@ void setupLocator() {
     ),
   );
 
-  locator.registerLazySingleton(
+  locator.registerFactory(
     () => TenderContractBloc(
       tenderContractRepository: locator<TenderContractRepository>(),
     ),
@@ -1465,7 +1465,7 @@ void setupLocator() {
   //
   //============================================================
 
-  locator.registerLazySingleton(
+  locator.registerFactory(
     () => AddToCartBloc(),
   );
 
@@ -1571,7 +1571,6 @@ void setupLocator() {
       usageRemoteDataSource: locator<UsageCodeRemoteDataSource>(),
     ),
   );
-
 
   //============================================================
   //  Return Approver Actions

@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
@@ -33,10 +32,7 @@ class _CartItemDetailWidgetState extends State<CartItemDetailWidget> {
 
   @override
   void initState() {
-    _controller = TextEditingController();
-    final addToCartBloc = context.read<AddToCartBloc>();
-
-    _controller.text = addToCartBloc.state.cartItem.quantity.toString();
+    _controller = TextEditingController(text: _qty);
     super.initState();
   }
 
@@ -45,6 +41,17 @@ class _CartItemDetailWidgetState extends State<CartItemDetailWidget> {
     _controller.dispose();
     super.dispose();
   }
+
+  @override
+  void didUpdateWidget(covariant CartItemDetailWidget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (_qty != _controller.text) {
+      _controller.text = _qty;
+      _controller.selection = TextSelection.collapsed(offset: _qty.length);
+    }
+  }
+
+  String get _qty => widget.cartItem.quantity.toString();
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +96,6 @@ class _CartItemDetailWidgetState extends State<CartItemDetailWidget> {
                   .toList(),
             ],
           ),
-
         Padding(
           padding: const EdgeInsets.all(15),
           child: QuantityInput(
@@ -108,6 +114,35 @@ class _CartItemDetailWidgetState extends State<CartItemDetailWidget> {
               widget.onQuantityChanged.call(val);
             },
           ),
+        ),
+        ValueListenableBuilder<TextEditingValue>(
+          valueListenable: _controller,
+          builder: (context, controller, _) {
+            return BlocBuilder<TenderContractBloc, TenderContractState>(
+              builder: (context, state) {
+                final value = int.tryParse(controller.text);
+
+                //If controller.text is blank (User clears the text field), then int.tryParse would return null.
+                //The null check below will cover this scenario
+                if (value == null) return const SizedBox.shrink();
+
+                return state.selectedTenderContract == TenderContract.empty() ||
+                        state.selectedTenderContract ==
+                            TenderContract.noContract() ||
+                        value <=
+                            state.selectedTenderContract.remainingTenderQuantity
+                    ? const SizedBox.shrink()
+                    : const Text(
+                        'Please ensure the order quantity is less than \nor equal to Remaining Quantity of the contract',
+                        textAlign: TextAlign.center,
+                        maxLines: 2,
+                        style: TextStyle(
+                          color: ZPColors.red,
+                        ),
+                      );
+              },
+            );
+          },
         ),
         BlocBuilder<TenderContractBloc, TenderContractState>(
           buildWhen: (previous, current) =>
@@ -135,11 +170,11 @@ class _CartItemDetailWidgetState extends State<CartItemDetailWidget> {
                 children: [
                   enableVat
                       ? BalanceTextRow(
-                        keyText: 'Unit price before $taxCode'.tr(),
-                        valueText: cartItem.display(PriceType.finalPrice),
-                        keyFlex: 1,
-                        valueFlex: 1,
-                      )
+                          keyText: 'Unit price before $taxCode'.tr(),
+                          valueText: cartItem.display(PriceType.finalPrice),
+                          keyFlex: 1,
+                          valueFlex: 1,
+                        )
                       : const SizedBox.shrink(),
                   BalanceTextRow(
                     keyText: 'Unit Price'.tr(),
@@ -149,11 +184,12 @@ class _CartItemDetailWidgetState extends State<CartItemDetailWidget> {
                   ),
                   enableVat
                       ? BalanceTextRow(
-                        keyText: 'Total price before $taxCode'.tr(),
-                        valueText: cartItem.display(PriceType.finalPriceTotal),
-                        keyFlex: 1,
-                        valueFlex: 1,
-                      )
+                          keyText: 'Total price before $taxCode'.tr(),
+                          valueText:
+                              cartItem.display(PriceType.finalPriceTotal),
+                          keyFlex: 1,
+                          valueFlex: 1,
+                        )
                       : const SizedBox.shrink(),
                   BalanceTextRow(
                     keyText: 'Total Price'.tr(),
