@@ -39,6 +39,7 @@ import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/entities/payment_customer_information.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -133,6 +134,8 @@ class ReturnApproverFilterBlocMock
     extends MockBloc<ReturnApproverFilterEvent, ReturnApproverFilterState>
     implements ReturnApproverFilterBloc {}
 
+class RemoteConfigServiceMock extends Mock implements RemoteConfigService {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
@@ -162,6 +165,7 @@ void main() {
   late ReturnApproverBloc returnApproverBlocMock;
   late ReturnApproverFilterBlocMock returnApproverFilterBlocMock;
   late AnnouncementBloc announcementBlocMock;
+  late RemoteConfigService remoteConfigServiceMock;
 
   final fakeSalesOrganisation =
       SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601'));
@@ -182,10 +186,14 @@ void main() {
 
   // late AppRouter router;
   setUpAll(() async {
+    remoteConfigServiceMock = RemoteConfigServiceMock();
+    when(() => remoteConfigServiceMock.getReturnsConfig()).thenReturn(true);
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
     locator.registerLazySingleton(() => AppRouter());
     locator.registerLazySingleton(() => MixpanelService());
     locator<MixpanelService>().init(mixpanel: MixpanelMock());
+    locator.registerLazySingleton<RemoteConfigService>(
+        () => remoteConfigServiceMock);
   });
 
   group('Splash Screen', () {
