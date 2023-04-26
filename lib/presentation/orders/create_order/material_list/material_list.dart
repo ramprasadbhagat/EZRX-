@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/domain/banner/entities/banner.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
@@ -245,6 +246,7 @@ class MaterialListPage extends StatelessWidget {
 
     CartBottomSheet.showAddToCartBottomSheet(
       priceAggregate: PriceAggregate(
+        banner: BannerItem.empty(),
         price: materialPrice,
         materialInfo: material,
         salesOrgConfig: eligibilityBloc.state.salesOrgConfigs,

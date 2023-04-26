@@ -1,8 +1,10 @@
+import 'package:ezrxmobile/domain/banner/entities/banner.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 
 class MixpanelService {
   late Mixpanel mixpanel;
+  BannerItem banner = BannerItem.empty();
 
   void init({required Mixpanel mixpanel}) {
     this.mixpanel = mixpanel;
@@ -66,5 +68,13 @@ class MixpanelService {
           MixpanelProps.userRole,
           role,
         );
+  }
+
+  void setBannerOrderFlow(BannerItem banner) {
+    this.banner = banner;
+  }
+
+  void resetBannerOrderFlow() {
+    banner = BannerItem.empty();
   }
 }

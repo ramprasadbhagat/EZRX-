@@ -1,5 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/banner/entities/banner.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
@@ -65,6 +66,7 @@ class CartItem with _$CartItem {
 
     return CartItem.material(
       PriceAggregate(
+        banner: material.banner,
         price: itemInfo.price.copyWith(
           isPriceOverride: material.overridenPrice.isValid(),
           zdp8Override: material.zdp8Override,
@@ -113,6 +115,7 @@ class CartItem with _$CartItem {
             priceDetailMap[material.queryInfo] ?? MaterialPriceDetail.empty();
 
         return PriceAggregate(
+          banner: BannerItem.empty(),
           price: priceDetail.price,
           materialInfo: priceDetail.info,
           bundle: bundle,

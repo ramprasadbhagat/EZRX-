@@ -1,5 +1,7 @@
+import 'package:ezrxmobile/domain/banner/entities/banner.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/banner/dtos/banner_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/bundle_info_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_item_bonus_dto.dart';
@@ -74,10 +76,13 @@ class MaterialItemDto with _$MaterialItemDto {
         required List<BundleInfoDto> bundleInformation,
     @JsonKey(name: 'totalQuantity', defaultValue: 0)
         required int totalQuantity,
+    @JsonKey(name: 'banner', readValue: bannerOverride)
+        required BannerDto banner,
   }) = _MaterialItemDto;
 
   MaterialItem toDomain() {
     return MaterialItem(
+      banner: banner.toDomain(),
       bundleName: bundleName,
       bundleCode: bundleCode,
       defaultMaterialDescription: defaultMaterialDescription,
@@ -107,6 +112,7 @@ class MaterialItemDto with _$MaterialItemDto {
 
   factory MaterialItemDto.fromDomain(MaterialItem materialItem) {
     return MaterialItemDto(
+      banner: BannerDto.fromDomain(materialItem.banner),
       bundleCode: materialItem.bundleCode,
       bundleName: materialItem.bundleName,
       materials:
@@ -159,3 +165,6 @@ double doubleFormatCheck(Map json, String key) =>
 
 dynamic overrideTojson(double priceOverride) =>
     priceOverride != 0 ? priceOverride : null;
+
+Map<String, dynamic> bannerOverride(Map json, String key) =>
+    json[key] ?? BannerDto.fromDomain(BannerItem.empty()).toJson();

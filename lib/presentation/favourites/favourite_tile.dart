@@ -3,6 +3,7 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
+import 'package:ezrxmobile/domain/banner/entities/banner.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/favourites/entities/favourite_item.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
@@ -52,6 +53,7 @@ class FavouriteListTile extends StatelessWidget {
             final priceDetail = state.materialDetails[queryInfo]!;
 
             final priceAggregate = PriceAggregate(
+              banner: BannerItem.empty(),
               price: priceDetail.price,
               materialInfo: priceDetail.info,
               salesOrgConfig: context.read<SalesOrgBloc>().state.configs,

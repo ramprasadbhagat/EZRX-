@@ -7,6 +7,7 @@ import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.da
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
+import 'package:ezrxmobile/domain/banner/entities/banner.dart';
 import 'package:ezrxmobile/domain/announcement/entities/announcement.dart';
 import 'package:ezrxmobile/domain/core/aggregate/bundle_aggregate.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
@@ -106,13 +107,14 @@ class BundleItemDetailPage extends StatelessWidget {
                         quantityControllerList[bundleAggregate
                             .materialInfos[index].materialNumber
                             .getOrCrash()] = controller;
-                        final materialDetail = state.materialDetails[queryInfo]!;
+                        final materialDetail =
+                            state.materialDetails[queryInfo]!;
                         final enableDefaultMD = context
                             .read<SalesOrgBloc>()
                             .state
                             .configs
                             .enableDefaultMD;
-      
+
                         return _ListContent(
                           materialInfo: materialDetail.info,
                           enableDefaultMD: enableDefaultMD,
@@ -140,7 +142,7 @@ class BundleItemDetailPage extends StatelessWidget {
                           ),
                         );
                       }
-      
+
                       return ElevatedButton(
                         key: const Key('addBundlesToCart'),
                         onPressed: () {
@@ -173,6 +175,7 @@ class BundleItemDetailPage extends StatelessWidget {
           materialPriceDetailBloc.state.materialDetails[material.queryInfo];
       if (itemInfo != null) {
         final priceAggregate = PriceAggregate(
+          banner: BannerItem.empty(),
           price: itemInfo.price,
           materialInfo: itemInfo.info,
           salesOrgConfig: context.read<SalesOrgBloc>().state.configs,

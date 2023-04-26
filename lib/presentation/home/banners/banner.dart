@@ -76,7 +76,7 @@ class _HomeBannerState extends State<HomeBanner> {
                       trackMixpanelEvent(
                         MixpanelEvents.bannerImpression,
                         props: {
-                          MixpanelProps.bannerId: banner.id,
+                          MixpanelProps.bannerId: banner.id.toString(),
                           MixpanelProps.bannerTitle: banner.title,
                         },
                       );

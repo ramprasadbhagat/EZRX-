@@ -5,6 +5,7 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/banner/entities/banner.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
@@ -86,7 +87,8 @@ class CartRepository implements ICartRepository {
 
       final cartItemWithStock = cartItem.copyWithStockInfo(
         stockInfoMap: stockInfo.getOrElse(() => {}),
-        salesOrganisationConfigs: salesOrganisationConfigs,);
+        salesOrganisationConfigs: salesOrganisationConfigs,
+      );
 
       final isOutOfStockItem = cartItemWithStock
           .copyWithInStockOnly(
@@ -313,7 +315,8 @@ class CartRepository implements ICartRepository {
         (failure) => StockInfo.empty(),
         (stockInfoList) => _getStockInfo(
           stockInfoList: stockInfoList,
-          materialNumber: newBonus.materialInfo.materialNumber,),
+          materialNumber: newBonus.materialInfo.materialNumber,
+        ),
       );
       if (!stockInfo.inStock.isMaterialInStock &&
           doNotAllowOutOfStockMaterials) {
@@ -341,8 +344,9 @@ class CartRepository implements ICartRepository {
                 }
 
                 return bonus.copyWith(
-                    qty: bonus.qty + newBonusWithStock.qty,
-                    expiryDate: bonus.expiryDate,);
+                  qty: bonus.qty + newBonusWithStock.qty,
+                  expiryDate: bonus.expiryDate,
+                );
               }
 
               return bonus;
@@ -436,7 +440,7 @@ class CartRepository implements ICartRepository {
                 element.materialNumber == bonus.materialInfo.materialNumber,
             orElse: () => StockInfo.empty(),
           );
-          
+
           return bonus.copyWith(
             inStock: stockInfo.inStock.getOrCrash(),
           );
@@ -653,10 +657,11 @@ class CartRepository implements ICartRepository {
           final cartItemWithStockInfo = cartItem
               .map(
                 (item) => item.copyWithStockInfo(
-                  stockInfoMap: stockInfoMap, 
+                  stockInfoMap: stockInfoMap,
                   salesOrganisationConfigs: salesOrganisationConfigs,
                 ),
-              ).toList();
+              )
+              .toList();
 
           try {
             await cartStorage.putAll(items: {
@@ -804,35 +809,45 @@ class CartRepository implements ICartRepository {
   }
 
   void _trackAddToCartSuccessEvent(CartItem cartItem) {
+    final isBannerClicked = cartItem.materials.firstWhere(
+          (item) => item.banner != BannerItem.empty(),
+          orElse: () => PriceAggregate.empty(),
+        ) !=
+        PriceAggregate.empty();
+    final props = <String, dynamic>{
+      MixpanelProps.productName:
+          cartItem.materials.first.materialInfo.materialDescription,
+      MixpanelProps.productNumber: cartItem
+          .materials.first.materialInfo.materialNumber
+          .getOrDefaultValue(''),
+      MixpanelProps.productManufacturer: cartItem
+          .materials.first.materialInfo.principalData.principalName
+          .getOrDefaultValue(''),
+      MixpanelProps.productCategory: cartItem
+          .materials.first.materialInfo.materialGroup4.getMaterialGroup4Type,
+      MixpanelProps.productTotalPrice:
+          cartItem.materials.first.price.finalTotalPrice.getOrDefaultValue(0.0),
+      MixpanelProps.productQty: cartItem.materials.first.quantity,
+      MixpanelProps.bonusName: cartItem.materials.first.addedBonusList
+          .map(
+            (e) => e.materialDescription,
+          )
+          .toList(),
+      MixpanelProps.bonusManufacturer: cartItem.materials.first.addedBonusList
+          .map(
+            (e) => e.materialInfo.principalData.principalName
+                .getOrDefaultValue(''),
+          )
+          .toList(),
+      MixpanelProps.bannerClicked: isBannerClicked,
+      MixpanelProps.bannerId: cartItem.materials.first.banner.id.toString(),
+      MixpanelProps.bannerTitle: cartItem.materials.first.banner.title,
+      MixpanelProps.bannerType: cartItem.materials.first.banner.category,
+    };
+
     mixpanelService.trackEvent(
       eventName: MixpanelEvents.addToCartSuccess,
-      properties: {
-        MixpanelProps.productName:
-            cartItem.materials.first.materialInfo.materialDescription,
-        MixpanelProps.productNumber: cartItem
-            .materials.first.materialInfo.materialNumber
-            .getOrDefaultValue(''),
-        MixpanelProps.productManufacturer: cartItem
-            .materials.first.materialInfo.principalData.principalName
-            .getOrDefaultValue(''),
-        MixpanelProps.productCategory: cartItem
-            .materials.first.materialInfo.materialGroup4.getMaterialGroup4Type,
-        MixpanelProps.productTotalPrice: cartItem
-            .materials.first.price.finalTotalPrice
-            .getOrDefaultValue(0.0),
-        MixpanelProps.productQty: cartItem.materials.first.quantity,
-        MixpanelProps.bonusName: cartItem.materials.first.addedBonusList
-            .map(
-              (e) => e.materialDescription,
-            )
-            .toList(),
-        MixpanelProps.bonusManufacturer: cartItem.materials.first.addedBonusList
-            .map(
-              (e) => e.materialInfo.principalData.principalName
-                  .getOrDefaultValue(''),
-            )
-            .toList(),
-      },
+      properties: props,
     );
   }
 

@@ -5,6 +5,7 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/banner/entities/banner.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
@@ -13,6 +14,8 @@ import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/orders/combo_deal/widgets/combo_deal_label.dart';
@@ -210,9 +213,14 @@ class MaterialListItem extends StatelessWidget {
       return;
     }
 
+    final mixpanelService = locator<MixpanelService>();
+
     CartBottomSheet.showAddToCartBottomSheet(
       context: context,
       priceAggregate: PriceAggregate(
+        banner: mixpanelService.banner != BannerItem.empty()
+            ? mixpanelService.banner
+            : BannerItem.empty(),
         price: materialPrice,
         materialInfo: materialInfo,
         salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
@@ -331,6 +339,7 @@ class _PriceLabel extends StatelessWidget {
         final itemPrice = state.materialPrice[materialInfo.materialNumber];
         if (itemPrice != null) {
           final priceAggregate = PriceAggregate(
+            banner: BannerItem.empty(),
             price: itemPrice,
             materialInfo: materialInfo,
             salesOrgConfig: context.read<SalesOrgBloc>().state.configs,

@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs_principal.dart';
+import 'package:ezrxmobile/domain/banner/entities/banner.dart';
 import 'package:ezrxmobile/domain/order/entities/discount_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price_combo_deal.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/submit_material_item_bonus_dto.dart';
@@ -32,6 +33,7 @@ class PriceAggregate with _$PriceAggregate {
     required Price price,
     required MaterialInfo materialInfo,
     required Bundle bundle,
+    required BannerItem banner,
     required SalesOrganisationConfigs salesOrgConfig,
     required int quantity,
     @Default(0) int discountedMaterialCount,
@@ -45,6 +47,7 @@ class PriceAggregate with _$PriceAggregate {
 
   factory PriceAggregate.empty() => PriceAggregate(
         price: Price.empty(),
+        banner: BannerItem.empty(),
         materialInfo: MaterialInfo.empty(),
         bundle: Bundle.empty(),
         salesOrgConfig: SalesOrganisationConfigs.empty(),
@@ -92,6 +95,7 @@ class PriceAggregate with _$PriceAggregate {
 
   MaterialItem toSavedOrderMaterial() {
     return MaterialItem.empty().copyWith(
+      banner: banner,
       materialNumber: materialInfo.materialNumber,
       qty: quantity,
       defaultMaterialDescription: materialInfo.materialDescription,

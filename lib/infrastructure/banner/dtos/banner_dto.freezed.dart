@@ -20,30 +20,45 @@ BannerDto _$BannerDtoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$BannerDto {
+  @HiveField(0, defaultValue: 0)
   @JsonKey(name: 'id')
   int get id => throw _privateConstructorUsedError;
+  @HiveField(1, defaultValue: '')
   @JsonKey(name: 'url')
   String get url => throw _privateConstructorUsedError;
+  @HiveField(2, defaultValue: '')
   @JsonKey(name: 'title')
   String get title => throw _privateConstructorUsedError;
+  @HiveField(3, defaultValue: '')
   @JsonKey(name: 'description')
   String get description => throw _privateConstructorUsedError;
+  @HiveField(4, defaultValue: '')
   @JsonKey(name: 'buttonLabel')
   String get buttonLabel => throw _privateConstructorUsedError;
+  @HiveField(5, defaultValue: '')
   @JsonKey(name: 'urlLink')
   String get urlLink => throw _privateConstructorUsedError;
+  @HiveField(6, defaultValue: false)
   @JsonKey(name: 'isPreSalesOrg')
   bool get isPreSalesOrg => throw _privateConstructorUsedError;
+  @HiveField(7, defaultValue: '')
   @JsonKey(name: 'salesOrg')
   String get salesOrg => throw _privateConstructorUsedError;
+  @HiveField(8, defaultValue: 0)
   @JsonKey(name: 'serial')
   int get serial => throw _privateConstructorUsedError;
+  @HiveField(9, defaultValue: false)
   @JsonKey(name: 'isCustomer')
   bool get isCustomer => throw _privateConstructorUsedError;
+  @HiveField(10, defaultValue: false)
   @JsonKey(name: 'isKeyword', defaultValue: false)
   bool get isKeyword => throw _privateConstructorUsedError;
+  @HiveField(11, defaultValue: '')
   @JsonKey(name: 'keyword', defaultValue: '')
   String get keyword => throw _privateConstructorUsedError;
+  @HiveField(12, defaultValue: '')
+  @JsonKey(name: 'category', defaultValue: '')
+  String get category => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -57,18 +72,45 @@ abstract class $BannerDtoCopyWith<$Res> {
       _$BannerDtoCopyWithImpl<$Res, BannerDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'id') int id,
-      @JsonKey(name: 'url') String url,
-      @JsonKey(name: 'title') String title,
-      @JsonKey(name: 'description') String description,
-      @JsonKey(name: 'buttonLabel') String buttonLabel,
-      @JsonKey(name: 'urlLink') String urlLink,
-      @JsonKey(name: 'isPreSalesOrg') bool isPreSalesOrg,
-      @JsonKey(name: 'salesOrg') String salesOrg,
-      @JsonKey(name: 'serial') int serial,
-      @JsonKey(name: 'isCustomer') bool isCustomer,
-      @JsonKey(name: 'isKeyword', defaultValue: false) bool isKeyword,
-      @JsonKey(name: 'keyword', defaultValue: '') String keyword});
+      {@HiveField(0, defaultValue: 0)
+      @JsonKey(name: 'id')
+          int id,
+      @HiveField(1, defaultValue: '')
+      @JsonKey(name: 'url')
+          String url,
+      @HiveField(2, defaultValue: '')
+      @JsonKey(name: 'title')
+          String title,
+      @HiveField(3, defaultValue: '')
+      @JsonKey(name: 'description')
+          String description,
+      @HiveField(4, defaultValue: '')
+      @JsonKey(name: 'buttonLabel')
+          String buttonLabel,
+      @HiveField(5, defaultValue: '')
+      @JsonKey(name: 'urlLink')
+          String urlLink,
+      @HiveField(6, defaultValue: false)
+      @JsonKey(name: 'isPreSalesOrg')
+          bool isPreSalesOrg,
+      @HiveField(7, defaultValue: '')
+      @JsonKey(name: 'salesOrg')
+          String salesOrg,
+      @HiveField(8, defaultValue: 0)
+      @JsonKey(name: 'serial')
+          int serial,
+      @HiveField(9, defaultValue: false)
+      @JsonKey(name: 'isCustomer')
+          bool isCustomer,
+      @HiveField(10, defaultValue: false)
+      @JsonKey(name: 'isKeyword', defaultValue: false)
+          bool isKeyword,
+      @HiveField(11, defaultValue: '')
+      @JsonKey(name: 'keyword', defaultValue: '')
+          String keyword,
+      @HiveField(12, defaultValue: '')
+      @JsonKey(name: 'category', defaultValue: '')
+          String category});
 }
 
 /// @nodoc
@@ -96,6 +138,7 @@ class _$BannerDtoCopyWithImpl<$Res, $Val extends BannerDto>
     Object? isCustomer = null,
     Object? isKeyword = null,
     Object? keyword = null,
+    Object? category = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -146,6 +189,10 @@ class _$BannerDtoCopyWithImpl<$Res, $Val extends BannerDto>
           ? _value.keyword
           : keyword // ignore: cast_nullable_to_non_nullable
               as String,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -158,18 +205,45 @@ abstract class _$$_BannerDtoCopyWith<$Res> implements $BannerDtoCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'id') int id,
-      @JsonKey(name: 'url') String url,
-      @JsonKey(name: 'title') String title,
-      @JsonKey(name: 'description') String description,
-      @JsonKey(name: 'buttonLabel') String buttonLabel,
-      @JsonKey(name: 'urlLink') String urlLink,
-      @JsonKey(name: 'isPreSalesOrg') bool isPreSalesOrg,
-      @JsonKey(name: 'salesOrg') String salesOrg,
-      @JsonKey(name: 'serial') int serial,
-      @JsonKey(name: 'isCustomer') bool isCustomer,
-      @JsonKey(name: 'isKeyword', defaultValue: false) bool isKeyword,
-      @JsonKey(name: 'keyword', defaultValue: '') String keyword});
+      {@HiveField(0, defaultValue: 0)
+      @JsonKey(name: 'id')
+          int id,
+      @HiveField(1, defaultValue: '')
+      @JsonKey(name: 'url')
+          String url,
+      @HiveField(2, defaultValue: '')
+      @JsonKey(name: 'title')
+          String title,
+      @HiveField(3, defaultValue: '')
+      @JsonKey(name: 'description')
+          String description,
+      @HiveField(4, defaultValue: '')
+      @JsonKey(name: 'buttonLabel')
+          String buttonLabel,
+      @HiveField(5, defaultValue: '')
+      @JsonKey(name: 'urlLink')
+          String urlLink,
+      @HiveField(6, defaultValue: false)
+      @JsonKey(name: 'isPreSalesOrg')
+          bool isPreSalesOrg,
+      @HiveField(7, defaultValue: '')
+      @JsonKey(name: 'salesOrg')
+          String salesOrg,
+      @HiveField(8, defaultValue: 0)
+      @JsonKey(name: 'serial')
+          int serial,
+      @HiveField(9, defaultValue: false)
+      @JsonKey(name: 'isCustomer')
+          bool isCustomer,
+      @HiveField(10, defaultValue: false)
+      @JsonKey(name: 'isKeyword', defaultValue: false)
+          bool isKeyword,
+      @HiveField(11, defaultValue: '')
+      @JsonKey(name: 'keyword', defaultValue: '')
+          String keyword,
+      @HiveField(12, defaultValue: '')
+      @JsonKey(name: 'category', defaultValue: '')
+          String category});
 }
 
 /// @nodoc
@@ -195,6 +269,7 @@ class __$$_BannerDtoCopyWithImpl<$Res>
     Object? isCustomer = null,
     Object? isKeyword = null,
     Object? keyword = null,
+    Object? category = null,
   }) {
     return _then(_$_BannerDto(
       id: null == id
@@ -245,71 +320,119 @@ class __$$_BannerDtoCopyWithImpl<$Res>
           ? _value.keyword
           : keyword // ignore: cast_nullable_to_non_nullable
               as String,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
+@HiveType(typeId: 34, adapterName: 'BannerDtoAdapter')
 class _$_BannerDto extends _BannerDto {
   const _$_BannerDto(
-      {@JsonKey(name: 'id') required this.id,
-      @JsonKey(name: 'url') required this.url,
-      @JsonKey(name: 'title') required this.title,
-      @JsonKey(name: 'description') required this.description,
-      @JsonKey(name: 'buttonLabel') required this.buttonLabel,
-      @JsonKey(name: 'urlLink') required this.urlLink,
-      @JsonKey(name: 'isPreSalesOrg') required this.isPreSalesOrg,
-      @JsonKey(name: 'salesOrg') required this.salesOrg,
-      @JsonKey(name: 'serial') required this.serial,
-      @JsonKey(name: 'isCustomer') required this.isCustomer,
-      @JsonKey(name: 'isKeyword', defaultValue: false) required this.isKeyword,
-      @JsonKey(name: 'keyword', defaultValue: '') required this.keyword})
+      {@HiveField(0, defaultValue: 0)
+      @JsonKey(name: 'id')
+          required this.id,
+      @HiveField(1, defaultValue: '')
+      @JsonKey(name: 'url')
+          required this.url,
+      @HiveField(2, defaultValue: '')
+      @JsonKey(name: 'title')
+          required this.title,
+      @HiveField(3, defaultValue: '')
+      @JsonKey(name: 'description')
+          required this.description,
+      @HiveField(4, defaultValue: '')
+      @JsonKey(name: 'buttonLabel')
+          required this.buttonLabel,
+      @HiveField(5, defaultValue: '')
+      @JsonKey(name: 'urlLink')
+          required this.urlLink,
+      @HiveField(6, defaultValue: false)
+      @JsonKey(name: 'isPreSalesOrg')
+          required this.isPreSalesOrg,
+      @HiveField(7, defaultValue: '')
+      @JsonKey(name: 'salesOrg')
+          required this.salesOrg,
+      @HiveField(8, defaultValue: 0)
+      @JsonKey(name: 'serial')
+          required this.serial,
+      @HiveField(9, defaultValue: false)
+      @JsonKey(name: 'isCustomer')
+          required this.isCustomer,
+      @HiveField(10, defaultValue: false)
+      @JsonKey(name: 'isKeyword', defaultValue: false)
+          required this.isKeyword,
+      @HiveField(11, defaultValue: '')
+      @JsonKey(name: 'keyword', defaultValue: '')
+          required this.keyword,
+      @HiveField(12, defaultValue: '')
+      @JsonKey(name: 'category', defaultValue: '')
+          required this.category})
       : super._();
 
   factory _$_BannerDto.fromJson(Map<String, dynamic> json) =>
       _$$_BannerDtoFromJson(json);
 
   @override
+  @HiveField(0, defaultValue: 0)
   @JsonKey(name: 'id')
   final int id;
   @override
+  @HiveField(1, defaultValue: '')
   @JsonKey(name: 'url')
   final String url;
   @override
+  @HiveField(2, defaultValue: '')
   @JsonKey(name: 'title')
   final String title;
   @override
+  @HiveField(3, defaultValue: '')
   @JsonKey(name: 'description')
   final String description;
   @override
+  @HiveField(4, defaultValue: '')
   @JsonKey(name: 'buttonLabel')
   final String buttonLabel;
   @override
+  @HiveField(5, defaultValue: '')
   @JsonKey(name: 'urlLink')
   final String urlLink;
   @override
+  @HiveField(6, defaultValue: false)
   @JsonKey(name: 'isPreSalesOrg')
   final bool isPreSalesOrg;
   @override
+  @HiveField(7, defaultValue: '')
   @JsonKey(name: 'salesOrg')
   final String salesOrg;
   @override
+  @HiveField(8, defaultValue: 0)
   @JsonKey(name: 'serial')
   final int serial;
   @override
+  @HiveField(9, defaultValue: false)
   @JsonKey(name: 'isCustomer')
   final bool isCustomer;
   @override
+  @HiveField(10, defaultValue: false)
   @JsonKey(name: 'isKeyword', defaultValue: false)
   final bool isKeyword;
   @override
+  @HiveField(11, defaultValue: '')
   @JsonKey(name: 'keyword', defaultValue: '')
   final String keyword;
+  @override
+  @HiveField(12, defaultValue: '')
+  @JsonKey(name: 'category', defaultValue: '')
+  final String category;
 
   @override
   String toString() {
-    return 'BannerDto(id: $id, url: $url, title: $title, description: $description, buttonLabel: $buttonLabel, urlLink: $urlLink, isPreSalesOrg: $isPreSalesOrg, salesOrg: $salesOrg, serial: $serial, isCustomer: $isCustomer, isKeyword: $isKeyword, keyword: $keyword)';
+    return 'BannerDto(id: $id, url: $url, title: $title, description: $description, buttonLabel: $buttonLabel, urlLink: $urlLink, isPreSalesOrg: $isPreSalesOrg, salesOrg: $salesOrg, serial: $serial, isCustomer: $isCustomer, isKeyword: $isKeyword, keyword: $keyword, category: $category)';
   }
 
   @override
@@ -334,7 +457,9 @@ class _$_BannerDto extends _BannerDto {
                 other.isCustomer == isCustomer) &&
             (identical(other.isKeyword, isKeyword) ||
                 other.isKeyword == isKeyword) &&
-            (identical(other.keyword, keyword) || other.keyword == keyword));
+            (identical(other.keyword, keyword) || other.keyword == keyword) &&
+            (identical(other.category, category) ||
+                other.category == category));
   }
 
   @JsonKey(ignore: true)
@@ -352,7 +477,8 @@ class _$_BannerDto extends _BannerDto {
       serial,
       isCustomer,
       isKeyword,
-      keyword);
+      keyword,
+      category);
 
   @JsonKey(ignore: true)
   @override
@@ -370,71 +496,102 @@ class _$_BannerDto extends _BannerDto {
 
 abstract class _BannerDto extends BannerDto {
   const factory _BannerDto(
-      {@JsonKey(name: 'id')
+      {@HiveField(0, defaultValue: 0)
+      @JsonKey(name: 'id')
           required final int id,
+      @HiveField(1, defaultValue: '')
       @JsonKey(name: 'url')
           required final String url,
+      @HiveField(2, defaultValue: '')
       @JsonKey(name: 'title')
           required final String title,
+      @HiveField(3, defaultValue: '')
       @JsonKey(name: 'description')
           required final String description,
+      @HiveField(4, defaultValue: '')
       @JsonKey(name: 'buttonLabel')
           required final String buttonLabel,
+      @HiveField(5, defaultValue: '')
       @JsonKey(name: 'urlLink')
           required final String urlLink,
+      @HiveField(6, defaultValue: false)
       @JsonKey(name: 'isPreSalesOrg')
           required final bool isPreSalesOrg,
+      @HiveField(7, defaultValue: '')
       @JsonKey(name: 'salesOrg')
           required final String salesOrg,
+      @HiveField(8, defaultValue: 0)
       @JsonKey(name: 'serial')
           required final int serial,
+      @HiveField(9, defaultValue: false)
       @JsonKey(name: 'isCustomer')
           required final bool isCustomer,
+      @HiveField(10, defaultValue: false)
       @JsonKey(name: 'isKeyword', defaultValue: false)
           required final bool isKeyword,
+      @HiveField(11, defaultValue: '')
       @JsonKey(name: 'keyword', defaultValue: '')
-          required final String keyword}) = _$_BannerDto;
+          required final String keyword,
+      @HiveField(12, defaultValue: '')
+      @JsonKey(name: 'category', defaultValue: '')
+          required final String category}) = _$_BannerDto;
   const _BannerDto._() : super._();
 
   factory _BannerDto.fromJson(Map<String, dynamic> json) =
       _$_BannerDto.fromJson;
 
   @override
+  @HiveField(0, defaultValue: 0)
   @JsonKey(name: 'id')
   int get id;
   @override
+  @HiveField(1, defaultValue: '')
   @JsonKey(name: 'url')
   String get url;
   @override
+  @HiveField(2, defaultValue: '')
   @JsonKey(name: 'title')
   String get title;
   @override
+  @HiveField(3, defaultValue: '')
   @JsonKey(name: 'description')
   String get description;
   @override
+  @HiveField(4, defaultValue: '')
   @JsonKey(name: 'buttonLabel')
   String get buttonLabel;
   @override
+  @HiveField(5, defaultValue: '')
   @JsonKey(name: 'urlLink')
   String get urlLink;
   @override
+  @HiveField(6, defaultValue: false)
   @JsonKey(name: 'isPreSalesOrg')
   bool get isPreSalesOrg;
   @override
+  @HiveField(7, defaultValue: '')
   @JsonKey(name: 'salesOrg')
   String get salesOrg;
   @override
+  @HiveField(8, defaultValue: 0)
   @JsonKey(name: 'serial')
   int get serial;
   @override
+  @HiveField(9, defaultValue: false)
   @JsonKey(name: 'isCustomer')
   bool get isCustomer;
   @override
+  @HiveField(10, defaultValue: false)
   @JsonKey(name: 'isKeyword', defaultValue: false)
   bool get isKeyword;
   @override
+  @HiveField(11, defaultValue: '')
   @JsonKey(name: 'keyword', defaultValue: '')
   String get keyword;
+  @override
+  @HiveField(12, defaultValue: '')
+  @JsonKey(name: 'category', defaultValue: '')
+  String get category;
   @override
   @JsonKey(ignore: true)
   _$$_BannerDtoCopyWith<_$_BannerDto> get copyWith =>

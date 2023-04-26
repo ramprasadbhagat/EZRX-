@@ -20,7 +20,8 @@ class BannerQueryMutation {
             serial
             isCustomer
             isKeyword  
-            keyword   
+            keyword
+            category   
  
         }
     }

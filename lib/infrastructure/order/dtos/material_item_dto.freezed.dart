@@ -74,6 +74,8 @@ mixin _$MaterialItemDto {
       throw _privateConstructorUsedError;
   @JsonKey(name: 'totalQuantity', defaultValue: 0)
   int get totalQuantity => throw _privateConstructorUsedError;
+  @JsonKey(name: 'banner', readValue: bannerOverride)
+  BannerDto get banner => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -135,9 +137,12 @@ abstract class $MaterialItemDtoCopyWith<$Res> {
       @JsonKey(name: 'bundleInformation', defaultValue: [])
           List<BundleInfoDto> bundleInformation,
       @JsonKey(name: 'totalQuantity', defaultValue: 0)
-          int totalQuantity});
+          int totalQuantity,
+      @JsonKey(name: 'banner', readValue: bannerOverride)
+          BannerDto banner});
 
   $TenderContractDtoCopyWith<$Res> get tenderContractDto;
+  $BannerDtoCopyWith<$Res> get banner;
 }
 
 /// @nodoc
@@ -177,6 +182,7 @@ class _$MaterialItemDtoCopyWithImpl<$Res, $Val extends MaterialItemDto>
     Object? remarks = null,
     Object? bundleInformation = null,
     Object? totalQuantity = null,
+    Object? banner = null,
   }) {
     return _then(_value.copyWith(
       bundleName: null == bundleName
@@ -275,6 +281,10 @@ class _$MaterialItemDtoCopyWithImpl<$Res, $Val extends MaterialItemDto>
           ? _value.totalQuantity
           : totalQuantity // ignore: cast_nullable_to_non_nullable
               as int,
+      banner: null == banner
+          ? _value.banner
+          : banner // ignore: cast_nullable_to_non_nullable
+              as BannerDto,
     ) as $Val);
   }
 
@@ -283,6 +293,14 @@ class _$MaterialItemDtoCopyWithImpl<$Res, $Val extends MaterialItemDto>
   $TenderContractDtoCopyWith<$Res> get tenderContractDto {
     return $TenderContractDtoCopyWith<$Res>(_value.tenderContractDto, (value) {
       return _then(_value.copyWith(tenderContractDto: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $BannerDtoCopyWith<$Res> get banner {
+    return $BannerDtoCopyWith<$Res>(_value.banner, (value) {
+      return _then(_value.copyWith(banner: value) as $Val);
     });
   }
 }
@@ -343,10 +361,14 @@ abstract class _$$_MaterialItemDtoCopyWith<$Res>
       @JsonKey(name: 'bundleInformation', defaultValue: [])
           List<BundleInfoDto> bundleInformation,
       @JsonKey(name: 'totalQuantity', defaultValue: 0)
-          int totalQuantity});
+          int totalQuantity,
+      @JsonKey(name: 'banner', readValue: bannerOverride)
+          BannerDto banner});
 
   @override
   $TenderContractDtoCopyWith<$Res> get tenderContractDto;
+  @override
+  $BannerDtoCopyWith<$Res> get banner;
 }
 
 /// @nodoc
@@ -384,6 +406,7 @@ class __$$_MaterialItemDtoCopyWithImpl<$Res>
     Object? remarks = null,
     Object? bundleInformation = null,
     Object? totalQuantity = null,
+    Object? banner = null,
   }) {
     return _then(_$_MaterialItemDto(
       bundleName: null == bundleName
@@ -482,6 +505,10 @@ class __$$_MaterialItemDtoCopyWithImpl<$Res>
           ? _value.totalQuantity
           : totalQuantity // ignore: cast_nullable_to_non_nullable
               as int,
+      banner: null == banner
+          ? _value.banner
+          : banner // ignore: cast_nullable_to_non_nullable
+              as BannerDto,
     ));
   }
 }
@@ -537,7 +564,9 @@ class _$_MaterialItemDto extends _MaterialItemDto {
       @JsonKey(name: 'bundleInformation', defaultValue: [])
           required final List<BundleInfoDto> bundleInformation,
       @JsonKey(name: 'totalQuantity', defaultValue: 0)
-          required this.totalQuantity})
+          required this.totalQuantity,
+      @JsonKey(name: 'banner', readValue: bannerOverride)
+          required this.banner})
       : _materials = materials,
         _bonuses = bonuses,
         _bundleInformation = bundleInformation,
@@ -638,10 +667,13 @@ class _$_MaterialItemDto extends _MaterialItemDto {
   @override
   @JsonKey(name: 'totalQuantity', defaultValue: 0)
   final int totalQuantity;
+  @override
+  @JsonKey(name: 'banner', readValue: bannerOverride)
+  final BannerDto banner;
 
   @override
   String toString() {
-    return 'MaterialItemDto(bundleName: $bundleName, bundleCode: $bundleCode, materials: $materials, qty: $qty, hidePrice: $hidePrice, bonuses: $bonuses, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, materialNumber: $materialNumber, tenderContractDto: $tenderContractDto, hasValidTenderContract: $hasValidTenderContract, tenderOrderReason: $tenderOrderReason, overridenPrice: $overridenPrice, unitOfMeasurement: $unitOfMeasurement, itemRegistrationNumber: $itemRegistrationNumber, defaultMaterialDescription: $defaultMaterialDescription, materialDescription: $materialDescription, type: $type, comment: $comment, batchNumber: $batchNumber, zdp8Override: $zdp8Override, remarks: $remarks, bundleInformation: $bundleInformation, totalQuantity: $totalQuantity)';
+    return 'MaterialItemDto(bundleName: $bundleName, bundleCode: $bundleCode, materials: $materials, qty: $qty, hidePrice: $hidePrice, bonuses: $bonuses, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, materialNumber: $materialNumber, tenderContractDto: $tenderContractDto, hasValidTenderContract: $hasValidTenderContract, tenderOrderReason: $tenderOrderReason, overridenPrice: $overridenPrice, unitOfMeasurement: $unitOfMeasurement, itemRegistrationNumber: $itemRegistrationNumber, defaultMaterialDescription: $defaultMaterialDescription, materialDescription: $materialDescription, type: $type, comment: $comment, batchNumber: $batchNumber, zdp8Override: $zdp8Override, remarks: $remarks, bundleInformation: $bundleInformation, totalQuantity: $totalQuantity, banner: $banner)';
   }
 
   @override
@@ -693,7 +725,8 @@ class _$_MaterialItemDto extends _MaterialItemDto {
             const DeepCollectionEquality()
                 .equals(other._bundleInformation, _bundleInformation) &&
             (identical(other.totalQuantity, totalQuantity) ||
-                other.totalQuantity == totalQuantity));
+                other.totalQuantity == totalQuantity) &&
+            (identical(other.banner, banner) || other.banner == banner));
   }
 
   @JsonKey(ignore: true)
@@ -723,7 +756,8 @@ class _$_MaterialItemDto extends _MaterialItemDto {
         zdp8Override,
         remarks,
         const DeepCollectionEquality().hash(_bundleInformation),
-        totalQuantity
+        totalQuantity,
+        banner
       ]);
 
   @JsonKey(ignore: true)
@@ -789,7 +823,9 @@ abstract class _MaterialItemDto extends MaterialItemDto {
       @JsonKey(name: 'bundleInformation', defaultValue: [])
           required final List<BundleInfoDto> bundleInformation,
       @JsonKey(name: 'totalQuantity', defaultValue: 0)
-          required final int totalQuantity}) = _$_MaterialItemDto;
+          required final int totalQuantity,
+      @JsonKey(name: 'banner', readValue: bannerOverride)
+          required final BannerDto banner}) = _$_MaterialItemDto;
   const _MaterialItemDto._() : super._();
 
   factory _MaterialItemDto.fromJson(Map<String, dynamic> json) =
@@ -872,6 +908,9 @@ abstract class _MaterialItemDto extends MaterialItemDto {
   @override
   @JsonKey(name: 'totalQuantity', defaultValue: 0)
   int get totalQuantity;
+  @override
+  @JsonKey(name: 'banner', readValue: bannerOverride)
+  BannerDto get banner;
   @override
   @JsonKey(ignore: true)
   _$$_MaterialItemDtoCopyWith<_$_MaterialItemDto> get copyWith =>

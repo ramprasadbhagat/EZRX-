@@ -1,6 +1,7 @@
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/sales_organisation_configs_dto.dart';
+import 'package:ezrxmobile/infrastructure/banner/dtos/banner_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/bundle_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/combo_deal_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_dto.dart';
@@ -19,6 +20,7 @@ void main() {
   group('Test bundleDto ', () {
     setUp(() async {
       data = PriceAggregateDto(
+        bannerDto: BannerDto.empty,
         bonusItem: [
           const MaterialItemBonusDto(
               materialNumber: '',

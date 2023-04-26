@@ -2,6 +2,7 @@ import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/sales_organisation_configs_dto.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/sales_organisation_configs_principal_dto.dart';
+import 'package:ezrxmobile/infrastructure/banner/dtos/banner_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/bundle_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/bundle_info_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/cart_item_dto.dart';
@@ -67,7 +68,8 @@ class CartStorage {
         ..registerAdapter(MaterialItemBonusDtoAdapter())
         ..registerAdapter(CartItemDtoAdapter())
         ..registerAdapter(SalesOrganisationConfigsPrincipalDtoAdapter())
-        ..registerAdapter(CartItemTypeAdapter());
+        ..registerAdapter(CartItemTypeAdapter())
+        ..registerAdapter(BannerDtoAdapter());
       _cartBox = await Hive.openBox(
         _boxName,
       );

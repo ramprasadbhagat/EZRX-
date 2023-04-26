@@ -5,6 +5,7 @@ import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_details/order_history_details_bloc.dart';
+import 'package:ezrxmobile/domain/banner/entities/banner.dart';
 import 'package:ezrxmobile/domain/core/aggregate/bonus_aggregate.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
@@ -156,8 +157,9 @@ class OrderItemBonusCard extends StatelessWidget {
                       ),
                       if (enableOHPrice)
                         BalanceTextRow(
-                          key: Key('zpPrice${orderHistoryDetailsBonusAggregate
-                            .orderItem.materialNumber.getOrDefaultValue('')}'),
+                          key: Key(
+                            'zpPrice${orderHistoryDetailsBonusAggregate.orderItem.materialNumber.getOrDefaultValue('')}',
+                          ),
                           keyText: 'ZP Price'.tr(),
                           valueText: StringUtils.displayPrice(
                             salesOrgConfigs,
@@ -170,8 +172,9 @@ class OrderItemBonusCard extends StatelessWidget {
                         ),
                       if (enableOHPrice)
                         BalanceTextRow(
-                          key: Key('totalPrice${orderHistoryDetailsBonusAggregate
-                            .orderItem.materialNumber.getOrDefaultValue('')}'),
+                          key: Key(
+                            'totalPrice${orderHistoryDetailsBonusAggregate.orderItem.materialNumber.getOrDefaultValue('')}',
+                          ),
                           keyText: 'Total Price'.tr(),
                           valueText: StringUtils.displayPrice(
                             salesOrgConfigs,
@@ -339,6 +342,7 @@ void _addToCartPressed(
     CartBottomSheet.showAddToCartBottomSheet(
       context: context,
       priceAggregate: PriceAggregate(
+        banner: BannerItem.empty(),
         price: itemInfo.price,
         materialInfo: itemInfo.info,
         salesOrgConfig: context.read<SalesOrgBloc>().state.configs,

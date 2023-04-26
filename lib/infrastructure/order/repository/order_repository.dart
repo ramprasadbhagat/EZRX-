@@ -6,6 +6,7 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
+import 'package:ezrxmobile/domain/banner/entities/banner.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
@@ -425,34 +426,47 @@ class OrderRepository implements IOrderRepository {
     List<PriceAggregate> cartItems,
     double grandTotal,
   ) {
+    final isBannerClicked = cartItems
+        .map(
+          (e) => e.banner != BannerItem.empty(),
+        )
+        .toList();
+    final props = {
+      MixpanelProps.grandTotal: grandTotal,
+      MixpanelProps.productName:
+          cartItems.map((e) => e.materialInfo.materialDescription).toList(),
+      MixpanelProps.productNumber: cartItems
+          .map((e) => e.getMaterialNumber.getOrDefaultValue(''))
+          .toList(),
+      MixpanelProps.productManufacturer: cartItems
+          .map((e) =>
+              e.materialInfo.principalData.principalName.getOrDefaultValue(''))
+          .toList(),
+      MixpanelProps.productCategory: cartItems
+          .map((e) => e.materialInfo.materialGroup4.getMaterialGroup4Type)
+          .toList(),
+      MixpanelProps.productQty: cartItems.map((e) => e.quantity).toList(),
+      MixpanelProps.bonusName: cartItems
+          .map((e) =>
+              e.addedBonusList.map((e) => e.materialDescription).toList())
+          .toList(),
+      MixpanelProps.bonusManufacturer: cartItems
+          .map((e) => e.addedBonusList
+              .map((e) => e.materialInfo.principalData.principalName
+                  .getOrDefaultValue(''))
+              .toList())
+          .toList(),
+      MixpanelProps.bannerClicked: isBannerClicked,
+      MixpanelProps.bannerId:
+          cartItems.map((e) => e.banner.id.toString()).toList(),
+      MixpanelProps.bannerTitle: cartItems.map((e) => e.banner.title).toList(),
+      MixpanelProps.bannerType:
+          cartItems.map((e) => e.banner.category).toList(),
+    };
+
     mixpanelService.trackEvent(
       eventName: MixpanelEvents.orderSuccess,
-      properties: {
-        MixpanelProps.grandTotal: grandTotal,
-        MixpanelProps.productName:
-            cartItems.map((e) => e.materialInfo.materialDescription).toList(),
-        MixpanelProps.productNumber: cartItems
-            .map((e) => e.getMaterialNumber.getOrDefaultValue(''))
-            .toList(),
-        MixpanelProps.productManufacturer: cartItems
-            .map((e) => e.materialInfo.principalData.principalName
-                .getOrDefaultValue(''))
-            .toList(),
-        MixpanelProps.productCategory: cartItems
-            .map((e) => e.materialInfo.materialGroup4.getMaterialGroup4Type)
-            .toList(),
-        MixpanelProps.productQty: cartItems.map((e) => e.quantity).toList(),
-        MixpanelProps.bonusName: cartItems
-            .map((e) =>
-                e.addedBonusList.map((e) => e.materialDescription).toList())
-            .toList(),
-        MixpanelProps.bonusManufacturer: cartItems
-            .map((e) => e.addedBonusList
-                .map((e) => e.materialInfo.principalData.principalName
-                    .getOrDefaultValue(''))
-                .toList())
-            .toList(),
-      },
+      properties: props,
     );
   }
 }

@@ -1,6 +1,7 @@
 class MixpanelProps {
   static String loginMethod = 'login_method';
   static String errorMessage = 'error_msg';
+  static String bannerClicked = 'banner_clicked';
   static String bannerId = 'banner_id';
   static String bannerTitle = 'banner_title';
   static String bannerOrder = 'banner_order';
@@ -25,4 +26,5 @@ class MixpanelProps {
   static String firstName = 'first_name';
   static String lastName = 'last_name';
   static String email = 'email';
+  static String bannerType = 'banner_type';
 }

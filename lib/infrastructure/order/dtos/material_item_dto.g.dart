@@ -47,6 +47,8 @@ _$_MaterialItemDto _$$_MaterialItemDtoFromJson(Map<String, dynamic> json) =>
               .toList() ??
           [],
       totalQuantity: json['totalQuantity'] as int? ?? 0,
+      banner: BannerDto.fromJson(
+          bannerOverride(json, 'banner') as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_MaterialItemDtoToJson(_$_MaterialItemDto instance) {
@@ -84,5 +86,6 @@ Map<String, dynamic> _$$_MaterialItemDtoToJson(_$_MaterialItemDto instance) {
   val['bundleInformation'] =
       instance.bundleInformation.map((e) => e.toJson()).toList();
   val['totalQuantity'] = instance.totalQuantity;
+  val['banner'] = instance.banner.toJson();
   return val;
 }

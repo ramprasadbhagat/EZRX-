@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/sales_organisation_configs_dto.dart';
+import 'package:ezrxmobile/infrastructure/banner/dtos/banner_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/bundle_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/combo_deal_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_dto.dart';
@@ -19,34 +20,31 @@ class PriceAggregateDto with _$PriceAggregateDto {
   const PriceAggregateDto._();
   @HiveType(typeId: 2, adapterName: 'PriceAggregateDtoAdapter')
   const factory PriceAggregateDto({
-  @HiveField(0, defaultValue: _emptyConstMaterialDto)
-  required MaterialDto materialDto,
-  @HiveField(1, defaultValue: 1)
-  required int quantity,
-  @HiveField(2, defaultValue: _emptyPriceDto)
-  required PriceDto priceDto,
-  @HiveField(3, defaultValue: _emptySalesOrganisationConfigsDto)
-  required SalesOrganisationConfigsDto salesOrganisationConfigsDto,
-  @HiveField(4, defaultValue: 0)
-  required int zmgMaterialCountOnCart,
-  @HiveField(5, defaultValue: _emptyBundleDto)
-  required BundleDto bundleDto,
-  @HiveField(6, defaultValue: [])
-  required List<MaterialItemBonusDto> bonusItem,
-  @HiveField(7, defaultValue: _emptyStockInfoDto)
-  required StockInfoDto stockInfoDto,
-  @HiveField(8, defaultValue: _emptyTenderContractDto)
-  required TenderContractDto tenderContractDto,
-  @HiveField(9, defaultValue: ComboDealDto.empty)
-  required ComboDealDto comboDealDto,
-  @HiveField(10, defaultValue: false)
-  required bool isSpecialOrderType,
-  @HiveField(11, defaultValue: [])
-  required List<StockInfoDto> stockInfoDtoList,
+    @HiveField(0, defaultValue: _emptyConstMaterialDto)
+        required MaterialDto materialDto,
+    @HiveField(1, defaultValue: 1) required int quantity,
+    @HiveField(2, defaultValue: _emptyPriceDto) required PriceDto priceDto,
+    @HiveField(3, defaultValue: _emptySalesOrganisationConfigsDto)
+        required SalesOrganisationConfigsDto salesOrganisationConfigsDto,
+    @HiveField(4, defaultValue: 0) required int zmgMaterialCountOnCart,
+    @HiveField(5, defaultValue: _emptyBundleDto) required BundleDto bundleDto,
+    @HiveField(6, defaultValue: [])
+        required List<MaterialItemBonusDto> bonusItem,
+    @HiveField(7, defaultValue: _emptyStockInfoDto)
+        required StockInfoDto stockInfoDto,
+    @HiveField(8, defaultValue: _emptyTenderContractDto)
+        required TenderContractDto tenderContractDto,
+    @HiveField(9, defaultValue: ComboDealDto.empty)
+        required ComboDealDto comboDealDto,
+    @HiveField(10, defaultValue: false) required bool isSpecialOrderType,
+    @HiveField(11, defaultValue: [])
+        required List<StockInfoDto> stockInfoDtoList,
+    @HiveField(12, defaultValue: BannerDto.empty) required BannerDto bannerDto,
   }) = _PriceAggregateDto;
 
   factory PriceAggregateDto.fromDomain(PriceAggregate cart) {
     return PriceAggregateDto(
+      bannerDto: BannerDto.fromDomain(cart.banner),
       materialDto: MaterialDto.fromDomain(cart.materialInfo),
       quantity: cart.quantity,
       priceDto: PriceDto.fromDomain(cart.price),
@@ -71,6 +69,7 @@ class PriceAggregateDto with _$PriceAggregateDto {
 
   PriceAggregate toDomain() {
     return PriceAggregate(
+      banner: bannerDto.toDomain(),
       materialInfo: materialDto.toDomain(),
       quantity: quantity,
       price: priceDto.toDomain(),

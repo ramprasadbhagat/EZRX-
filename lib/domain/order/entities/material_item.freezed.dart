@@ -41,6 +41,7 @@ mixin _$MaterialItem {
   bool get hasValidTenderContract => throw _privateConstructorUsedError;
   TenderContractReason get tenderOrderReason =>
       throw _privateConstructorUsedError;
+  BannerItem get banner => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MaterialItemCopyWith<MaterialItem> get copyWith =>
@@ -77,9 +78,11 @@ abstract class $MaterialItemCopyWith<$Res> {
       int totalQuantity,
       TenderContract tenderContract,
       bool hasValidTenderContract,
-      TenderContractReason tenderOrderReason});
+      TenderContractReason tenderOrderReason,
+      BannerItem banner});
 
   $TenderContractCopyWith<$Res> get tenderContract;
+  $BannerItemCopyWith<$Res> get banner;
 }
 
 /// @nodoc
@@ -119,6 +122,7 @@ class _$MaterialItemCopyWithImpl<$Res, $Val extends MaterialItem>
     Object? tenderContract = null,
     Object? hasValidTenderContract = null,
     Object? tenderOrderReason = null,
+    Object? banner = null,
   }) {
     return _then(_value.copyWith(
       bundleName: null == bundleName
@@ -217,6 +221,10 @@ class _$MaterialItemCopyWithImpl<$Res, $Val extends MaterialItem>
           ? _value.tenderOrderReason
           : tenderOrderReason // ignore: cast_nullable_to_non_nullable
               as TenderContractReason,
+      banner: null == banner
+          ? _value.banner
+          : banner // ignore: cast_nullable_to_non_nullable
+              as BannerItem,
     ) as $Val);
   }
 
@@ -225,6 +233,14 @@ class _$MaterialItemCopyWithImpl<$Res, $Val extends MaterialItem>
   $TenderContractCopyWith<$Res> get tenderContract {
     return $TenderContractCopyWith<$Res>(_value.tenderContract, (value) {
       return _then(_value.copyWith(tenderContract: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $BannerItemCopyWith<$Res> get banner {
+    return $BannerItemCopyWith<$Res>(_value.banner, (value) {
+      return _then(_value.copyWith(banner: value) as $Val);
     });
   }
 }
@@ -261,10 +277,13 @@ abstract class _$$_MaterialItemCopyWith<$Res>
       int totalQuantity,
       TenderContract tenderContract,
       bool hasValidTenderContract,
-      TenderContractReason tenderOrderReason});
+      TenderContractReason tenderOrderReason,
+      BannerItem banner});
 
   @override
   $TenderContractCopyWith<$Res> get tenderContract;
+  @override
+  $BannerItemCopyWith<$Res> get banner;
 }
 
 /// @nodoc
@@ -302,6 +321,7 @@ class __$$_MaterialItemCopyWithImpl<$Res>
     Object? tenderContract = null,
     Object? hasValidTenderContract = null,
     Object? tenderOrderReason = null,
+    Object? banner = null,
   }) {
     return _then(_$_MaterialItem(
       bundleName: null == bundleName
@@ -400,6 +420,10 @@ class __$$_MaterialItemCopyWithImpl<$Res>
           ? _value.tenderOrderReason
           : tenderOrderReason // ignore: cast_nullable_to_non_nullable
               as TenderContractReason,
+      banner: null == banner
+          ? _value.banner
+          : banner // ignore: cast_nullable_to_non_nullable
+              as BannerItem,
     ));
   }
 }
@@ -431,7 +455,8 @@ class _$_MaterialItem extends _MaterialItem {
       required this.totalQuantity,
       required this.tenderContract,
       required this.hasValidTenderContract,
-      required this.tenderOrderReason})
+      required this.tenderOrderReason,
+      required this.banner})
       : _materials = materials,
         _bonuses = bonuses,
         _bundleInformation = bundleInformation,
@@ -500,10 +525,12 @@ class _$_MaterialItem extends _MaterialItem {
   final bool hasValidTenderContract;
   @override
   final TenderContractReason tenderOrderReason;
+  @override
+  final BannerItem banner;
 
   @override
   String toString() {
-    return 'MaterialItem(bundleName: $bundleName, bundleCode: $bundleCode, materials: $materials, qty: $qty, type: $type, comment: $comment, hidePrice: $hidePrice, batchNumber: $batchNumber, bonuses: $bonuses, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, materialNumber: $materialNumber, defaultMaterialDescription: $defaultMaterialDescription, overridenPrice: $overridenPrice, unitOfMeasurement: $unitOfMeasurement, itemRegistrationNumber: $itemRegistrationNumber, materialDescription: $materialDescription, remarks: $remarks, zdp8Override: $zdp8Override, bundleInformation: $bundleInformation, totalQuantity: $totalQuantity, tenderContract: $tenderContract, hasValidTenderContract: $hasValidTenderContract, tenderOrderReason: $tenderOrderReason)';
+    return 'MaterialItem(bundleName: $bundleName, bundleCode: $bundleCode, materials: $materials, qty: $qty, type: $type, comment: $comment, hidePrice: $hidePrice, batchNumber: $batchNumber, bonuses: $bonuses, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, materialNumber: $materialNumber, defaultMaterialDescription: $defaultMaterialDescription, overridenPrice: $overridenPrice, unitOfMeasurement: $unitOfMeasurement, itemRegistrationNumber: $itemRegistrationNumber, materialDescription: $materialDescription, remarks: $remarks, zdp8Override: $zdp8Override, bundleInformation: $bundleInformation, totalQuantity: $totalQuantity, tenderContract: $tenderContract, hasValidTenderContract: $hasValidTenderContract, tenderOrderReason: $tenderOrderReason, banner: $banner)';
   }
 
   @override
@@ -555,7 +582,8 @@ class _$_MaterialItem extends _MaterialItem {
             (identical(other.hasValidTenderContract, hasValidTenderContract) ||
                 other.hasValidTenderContract == hasValidTenderContract) &&
             (identical(other.tenderOrderReason, tenderOrderReason) ||
-                other.tenderOrderReason == tenderOrderReason));
+                other.tenderOrderReason == tenderOrderReason) &&
+            (identical(other.banner, banner) || other.banner == banner));
   }
 
   @override
@@ -584,7 +612,8 @@ class _$_MaterialItem extends _MaterialItem {
         totalQuantity,
         tenderContract,
         hasValidTenderContract,
-        tenderOrderReason
+        tenderOrderReason,
+        banner
       ]);
 
   @JsonKey(ignore: true)
@@ -619,7 +648,8 @@ abstract class _MaterialItem extends MaterialItem {
       required final int totalQuantity,
       required final TenderContract tenderContract,
       required final bool hasValidTenderContract,
-      required final TenderContractReason tenderOrderReason}) = _$_MaterialItem;
+      required final TenderContractReason tenderOrderReason,
+      required final BannerItem banner}) = _$_MaterialItem;
   const _MaterialItem._() : super._();
 
   @override
@@ -670,6 +700,8 @@ abstract class _MaterialItem extends MaterialItem {
   bool get hasValidTenderContract;
   @override
   TenderContractReason get tenderOrderReason;
+  @override
+  BannerItem get banner;
   @override
   @JsonKey(ignore: true)
   _$$_MaterialItemCopyWith<_$_MaterialItem> get copyWith =>

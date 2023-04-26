@@ -14,6 +14,8 @@ import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +29,7 @@ class BannerTile extends StatelessWidget {
   final BannerItem banner;
   final int bannerPosition;
   final HttpService httpService;
-  
+
   final c.Config config;
   final DefaultCacheManager defaultCacheManager;
   const BannerTile({
@@ -35,7 +37,6 @@ class BannerTile extends StatelessWidget {
     required this.bannerPosition,
     required this.banner,
     required this.httpService,
-    
     required this.config,
     required this.defaultCacheManager,
   }) : super(key: key);
@@ -50,7 +51,7 @@ class BannerTile extends StatelessWidget {
               ? GestureDetector(
                   onTap: () async {
                     trackMixpanelEvent(MixpanelEvents.bannerClick, props: {
-                      MixpanelProps.bannerId: banner.id,
+                      MixpanelProps.bannerId: banner.id.toString(),
                       MixpanelProps.bannerTitle: banner.title,
                       MixpanelProps.bannerOrder: bannerPosition,
                       MixpanelProps.bannerRedirected:
@@ -60,6 +61,7 @@ class BannerTile extends StatelessWidget {
                     });
                     if (banner.isKeyword && banner.keyword != '') {
                       if (context.mounted) {
+                        locator<MixpanelService>().setBannerOrderFlow(banner);
                         context.read<MaterialListBloc>().add(
                               MaterialListEvent.searchMaterialList(
                                 user:

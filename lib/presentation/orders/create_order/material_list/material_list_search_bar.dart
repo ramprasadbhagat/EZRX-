@@ -7,11 +7,14 @@ import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
+import 'package:ezrxmobile/domain/banner/entities/banner.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -60,6 +63,7 @@ class MaterialListSearchBarState extends State<MaterialListSearchBar> {
               enabled: !state.isFetching,
               onFieldSubmitted: (value) {
                 if (value.length > 2) {
+                  _resetMixpanelOrderFlow();
                   // search code goes here
                   context.read<MaterialListBloc>().add(
                         MaterialListEvent.searchMaterialList(
@@ -108,6 +112,7 @@ class MaterialListSearchBarState extends State<MaterialListSearchBar> {
                   key: const Key('clearSearch'),
                   icon: const Icon(Icons.clear),
                   onPressed: () {
+                    _resetMixpanelOrderFlow();
                     //To reset the filters
                     context.read<MaterialFilterBloc>().add(
                           const MaterialFilterEvent.clearSelected(),
@@ -157,5 +162,12 @@ class MaterialListSearchBarState extends State<MaterialListSearchBar> {
         },
       ),
     );
+  }
+
+  void _resetMixpanelOrderFlow() {
+    final mixpanelService = locator<MixpanelService>();
+    if (mixpanelService.banner != BannerItem.empty()) {
+      mixpanelService.resetBannerOrderFlow();
+    }
   }
 }

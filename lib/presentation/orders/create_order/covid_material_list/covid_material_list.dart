@@ -8,6 +8,7 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/covid_material_list/covid_material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/banner/entities/banner.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
@@ -186,6 +187,7 @@ class _ListContent extends StatelessWidget {
       addToCart(
         context: context,
         priceAggregate: PriceAggregate(
+          banner: BannerItem.empty(),
           price: materialPrice,
           materialInfo: materialInfo,
           salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
@@ -311,6 +313,7 @@ class _PriceLabel extends StatelessWidget {
         final itemPrice = state.materialPrice[materialInfo.materialNumber];
         if (itemPrice != null) {
           final priceAggregate = PriceAggregate(
+            banner: BannerItem.empty(),
             price: itemPrice,
             materialInfo: materialInfo,
             salesOrgConfig: context.read<SalesOrgBloc>().state.configs,

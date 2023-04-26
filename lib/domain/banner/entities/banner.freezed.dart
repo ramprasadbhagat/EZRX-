@@ -28,6 +28,7 @@ mixin _$BannerItem {
   String get salesOrg => throw _privateConstructorUsedError;
   bool get isKeyword => throw _privateConstructorUsedError;
   String get keyword => throw _privateConstructorUsedError;
+  String get category => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $BannerItemCopyWith<BannerItem> get copyWith =>
@@ -52,7 +53,8 @@ abstract class $BannerItemCopyWith<$Res> {
       String urlLink,
       String salesOrg,
       bool isKeyword,
-      String keyword});
+      String keyword,
+      String category});
 }
 
 /// @nodoc
@@ -80,6 +82,7 @@ class _$BannerItemCopyWithImpl<$Res, $Val extends BannerItem>
     Object? salesOrg = null,
     Object? isKeyword = null,
     Object? keyword = null,
+    Object? category = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -130,6 +133,10 @@ class _$BannerItemCopyWithImpl<$Res, $Val extends BannerItem>
           ? _value.keyword
           : keyword // ignore: cast_nullable_to_non_nullable
               as String,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -154,7 +161,8 @@ abstract class _$$_BannerItemCopyWith<$Res>
       String urlLink,
       String salesOrg,
       bool isKeyword,
-      String keyword});
+      String keyword,
+      String category});
 }
 
 /// @nodoc
@@ -180,6 +188,7 @@ class __$$_BannerItemCopyWithImpl<$Res>
     Object? salesOrg = null,
     Object? isKeyword = null,
     Object? keyword = null,
+    Object? category = null,
   }) {
     return _then(_$_BannerItem(
       id: null == id
@@ -230,6 +239,10 @@ class __$$_BannerItemCopyWithImpl<$Res>
           ? _value.keyword
           : keyword // ignore: cast_nullable_to_non_nullable
               as String,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -249,7 +262,8 @@ class _$_BannerItem extends _BannerItem {
       required this.urlLink,
       required this.salesOrg,
       required this.isKeyword,
-      required this.keyword})
+      required this.keyword,
+      required this.category})
       : super._();
 
   @override
@@ -276,10 +290,12 @@ class _$_BannerItem extends _BannerItem {
   final bool isKeyword;
   @override
   final String keyword;
+  @override
+  final String category;
 
   @override
   String toString() {
-    return 'BannerItem(id: $id, serial: $serial, isPreSalesOrg: $isPreSalesOrg, isCustomer: $isCustomer, url: $url, title: $title, description: $description, buttonLabel: $buttonLabel, urlLink: $urlLink, salesOrg: $salesOrg, isKeyword: $isKeyword, keyword: $keyword)';
+    return 'BannerItem(id: $id, serial: $serial, isPreSalesOrg: $isPreSalesOrg, isCustomer: $isCustomer, url: $url, title: $title, description: $description, buttonLabel: $buttonLabel, urlLink: $urlLink, salesOrg: $salesOrg, isKeyword: $isKeyword, keyword: $keyword, category: $category)';
   }
 
   @override
@@ -304,7 +320,9 @@ class _$_BannerItem extends _BannerItem {
                 other.salesOrg == salesOrg) &&
             (identical(other.isKeyword, isKeyword) ||
                 other.isKeyword == isKeyword) &&
-            (identical(other.keyword, keyword) || other.keyword == keyword));
+            (identical(other.keyword, keyword) || other.keyword == keyword) &&
+            (identical(other.category, category) ||
+                other.category == category));
   }
 
   @override
@@ -321,7 +339,8 @@ class _$_BannerItem extends _BannerItem {
       urlLink,
       salesOrg,
       isKeyword,
-      keyword);
+      keyword,
+      category);
 
   @JsonKey(ignore: true)
   @override
@@ -343,7 +362,8 @@ abstract class _BannerItem extends BannerItem {
       required final String urlLink,
       required final String salesOrg,
       required final bool isKeyword,
-      required final String keyword}) = _$_BannerItem;
+      required final String keyword,
+      required final String category}) = _$_BannerItem;
   const _BannerItem._() : super._();
 
   @override
@@ -370,6 +390,8 @@ abstract class _BannerItem extends BannerItem {
   bool get isKeyword;
   @override
   String get keyword;
+  @override
+  String get category;
   @override
   @JsonKey(ignore: true)
   _$$_BannerItemCopyWith<_$_BannerItem> get copyWith =>

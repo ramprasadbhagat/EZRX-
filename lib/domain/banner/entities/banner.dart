@@ -19,6 +19,7 @@ class BannerItem with _$BannerItem {
     required String salesOrg,
     required bool isKeyword,
     required String keyword,
+    required String category,
   }) = _BannerItem;
 
   factory BannerItem.empty() => const BannerItem(
@@ -34,5 +35,6 @@ class BannerItem with _$BannerItem {
         salesOrg: '',
         isKeyword: false,
         keyword: '',
+        category: '',
       );
 }

@@ -165,13 +165,14 @@ class PriceAggregateDtoAdapter extends TypeAdapter<_$_PriceAggregateDto> {
       isSpecialOrderType: fields[10] == null ? false : fields[10] as bool,
       stockInfoDtoList:
           fields[11] == null ? [] : (fields[11] as List).cast<StockInfoDto>(),
+      bannerDto: fields[12] == null ? BannerDto.empty : fields[12] as BannerDto,
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_PriceAggregateDto obj) {
     writer
-      ..writeByte(12)
+      ..writeByte(13)
       ..writeByte(0)
       ..write(obj.materialDto)
       ..writeByte(1)
@@ -192,6 +193,8 @@ class PriceAggregateDtoAdapter extends TypeAdapter<_$_PriceAggregateDto> {
       ..write(obj.comboDealDto)
       ..writeByte(10)
       ..write(obj.isSpecialOrderType)
+      ..writeByte(12)
+      ..write(obj.bannerDto)
       ..writeByte(6)
       ..write(obj.bonusItem)
       ..writeByte(11)

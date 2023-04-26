@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
+import 'package:ezrxmobile/domain/banner/entities/banner.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
@@ -328,6 +329,7 @@ class _MaterialPriceInfo extends StatelessWidget {
         }
         if (itemInfo != null) {
           final priceAggregate = PriceAggregate(
+            banner: BannerItem.empty(),
             price: itemInfo.price,
             materialInfo: itemInfo.info,
             salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
