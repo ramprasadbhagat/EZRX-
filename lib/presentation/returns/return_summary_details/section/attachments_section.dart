@@ -1,16 +1,11 @@
-import 'package:universal_io/io.dart';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_details_po_document_buffer.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
-import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:open_file_safe/open_file_safe.dart';
-import 'package:path_provider/path_provider.dart';
 
 class ReturnSummaryDetailsAttachmentSection extends StatefulWidget {
   final List<PoDocuments> poDocuments;
@@ -39,7 +34,9 @@ class _ReturnSummaryDetailsAttachmentState
       children: [
         BlocListener<PoAttachmentBloc, PoAttachmentState>(
           listenWhen: (previous, current) =>
-              previous != current && current.fileDownloading,
+              previous != current &&
+              current.fileDownloading &&
+              !current.isFetching,
           listener: (context, state) async {
             state.failureOrSuccessOption.fold(
               () => {},
@@ -47,11 +44,7 @@ class _ReturnSummaryDetailsAttachmentState
                 (failure) {
                   ErrorUtils.handleApiFailure(context, failure);
                 },
-                (r) async {
-                  await _openFile(
-                    state.fileData.first,
-                  );
-                },
+                (_) {},
               ),
             );
           },
@@ -88,22 +81,6 @@ class _ReturnSummaryDetailsAttachmentState
     );
   }
 
-  Future<void> _openFile(
-    PoDocumentsBuffer returnSummaryDetailsPoDocumentsBuffer,
-  ) async {
-    final appStorage = await getApplicationDocumentsDirectory();
-    final file = File(
-      '${appStorage.path}/${returnSummaryDetailsPoDocumentsBuffer.name}',
-    );
-    await file.writeAsBytes(returnSummaryDetailsPoDocumentsBuffer.buffer);
-    final result = await OpenFile.open(file.path);
-    if (result.type != ResultType.done && context.mounted) {
-      showSnackBar(
-        context: context,
-        message: result.message.tr(),
-      );
-    }
-  }
 }
 
 class _ReturnSummaryAttachmentDownloadIndicator extends StatelessWidget {
@@ -170,9 +147,8 @@ class _ReturnSummaryAttachmentWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.read<PoAttachmentBloc>().add(PoAttachmentEvent.downloadFile(
-              files: [poDocuments],
-              fetchMode: FileOperationMode.view,
+        context.read<PoAttachmentBloc>().add(PoAttachmentEvent.openFile(
+              files: poDocuments,
               attachmentType: AttachmentType.downloadAttachment,
             ));
       },

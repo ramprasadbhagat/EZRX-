@@ -5,9 +5,11 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/infrastructure/core/common/file_picker.dart';
 import 'package:ezrxmobile/infrastructure/core/common/permission_service.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/po_attachment_repository.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/po_attachment.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -39,6 +41,9 @@ class FilePickerServiceMock extends Mock implements FilePickerService {}
 
 class PermissionServiceMock extends Mock implements PermissionService {}
 
+class PoAttachmentRepositoryMock extends Mock
+    implements PoAttachmentRepository {}
+
 void main() {
   late AppRouter autoRouterMock;
   late AdditionalDetailsBloc additionalDetailsBlocMock;
@@ -46,6 +51,7 @@ void main() {
   late FilePickerService filePickerService;
   late PermissionService permissionService;
   late EligibilityBloc eligibilityBlocMock;
+  late PoAttachmentRepository poAttachmentRepositoryMock;
 
   setUpAll(() {
     TestWidgetsFlutterBinding.ensureInitialized();
@@ -59,10 +65,9 @@ void main() {
   });
 
   setUp(() {
-    // poDocuments = [];
-    // uploadingPocDocument = [];
     additionalDetailsBlocMock = AdditionalDetailsMock();
     poAttachmentBlocMock = PoAttachmentBlocMock();
+    poAttachmentRepositoryMock = PoAttachmentRepositoryMock();
     when(() => additionalDetailsBlocMock.state)
         .thenReturn(AdditionalDetailsState.initial());
     when(() => poAttachmentBlocMock.state)
@@ -124,13 +129,12 @@ void main() {
 
       final expectedStates = [
         PoAttachmentState.initial().copyWith(
-          fileUrl: [
-            fakePoDocumentList.first,
-          ],
           fileOperationMode: FileOperationMode.download,
-          failureOrSuccessOption: optionOf(Right(
-            fakePoDocumentList.first,
-          )),
+          isFetching: true,
+        ),
+        PoAttachmentState.initial().copyWith(
+          fileOperationMode: FileOperationMode.download,
+          isFetching: false,
         )
       ];
       whenListen(poAttachmentBlocMock, Stream.fromIterable(expectedStates));
@@ -171,8 +175,7 @@ void main() {
       debugDefaultTargetPlatformOverride = TargetPlatform.android;
 
       final expectedStates = [
-        PoAttachmentState.initial().copyWith(
-          fileUrl: [
+        PoAttachmentState.initial().copyWith(fileUrl: [
           fakePoDocumentList.first,
         ], fileOperationMode: FileOperationMode.download, isFetching: true)
       ];
@@ -289,37 +292,15 @@ void main() {
       expect(find.byKey(const ValueKey('fake-name-2')), findsOneWidget);
       final downloadAll = find.byKey(const ValueKey('downloadAll'));
       expect(downloadAll, findsOneWidget);
-      when(() => permissionService.requestStoragePermission())
-          .thenAnswer((invocation) async => PermissionStatus.denied);
+      when(() => poAttachmentRepositoryMock.downloadPermission())
+          .thenAnswer((invocation) async => const Left(
+                ApiFailure.storagePermissionFailed(),
+              ));
       await tester.tap(downloadAll);
-      final permissionDeniedMessage =
-          find.text('Allow apps to access the storage'.tr());
       await tester.pumpAndSettle(const Duration(seconds: 10));
-      expect(permissionDeniedMessage, findsOneWidget);
 
       debugDefaultTargetPlatformOverride = null;
     });
 
-    testWidgets('Po Attachment Document Upload no pemission', (tester) async {
-      when(() => poAttachmentBlocMock.state)
-          .thenReturn(PoAttachmentState.initial().copyWith(
-        fileUrl: [
-          fakePoDocumentList.first,
-        ],
-        fileOperationMode: FileOperationMode.upload,
-        isFetching: true,
-      ));
-      await tester.pumpWidget(
-        getTestWidget(
-          poDocuments: fakePoDocumentList,
-        ),
-      );
-      await tester.pump();
-      expect(
-        find.byKey(ValueKey(
-            'poAttachmentUploadInProgress ${fakePoDocumentList.first.name}')),
-        findsOneWidget,
-      );
-    });
   });
 }

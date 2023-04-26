@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:math';
 
 import 'package:dartz/dartz.dart';
@@ -10,16 +11,18 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_details_po_document_buffer.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/domain/order/repository/i_po_attachment_repository.dart';
 import 'package:ezrxmobile/infrastructure/core/common/device_info.dart';
 import 'package:ezrxmobile/infrastructure/core/common/file_picker.dart';
 import 'package:ezrxmobile/infrastructure/core/common/permission_service.dart';
+import 'package:ezrxmobile/infrastructure/core/common/file_path_helper.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/po_document_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/po_document_remote.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
+import 'package:open_file_safe/open_file_safe.dart' as ofs;
+import 'package:open_file_safe/open_file_safe.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 const int _fileSizeLimitMB = 5;
@@ -32,6 +35,7 @@ class PoAttachmentRepository implements IpoAttachmentRepository {
   final DeviceInfo deviceInfo;
   final PermissionService permissionService;
   final FilePickerService filePickerService;
+  final FileSystemHelper fileSystemHelper;
 
   PoAttachmentRepository({
     required this.config,
@@ -40,20 +44,24 @@ class PoAttachmentRepository implements IpoAttachmentRepository {
     required this.deviceInfo,
     required this.permissionService,
     required this.filePickerService,
+    required this.fileSystemHelper,
   });
 
   @override
-  Future<Either<ApiFailure, List<PoDocumentsBuffer>>> downloadFiles(
+  Future<Either<ApiFailure, List<File>>> downloadFiles(
     List<PoDocuments> files,
     AttachmentType attachmentType,
   ) async {
     if (config.appFlavor == Flavor.mock) {
       try {
-        final localFile = Future.wait(files
-            .map(
-              (e) async => await localDataSource.fileDownload(e.name, e.url),
-            )
-            .toList());
+        final localFile = Future.wait(files.map(
+          (e) async {
+            final downloadedFile =
+                await localDataSource.fileDownload(e.name, e.url);
+
+            return await fileSystemHelper.getDownloadedFile(downloadedFile);
+          },
+        ).toList());
 
         return Right(await localFile);
       } catch (e) {
@@ -61,17 +69,62 @@ class PoAttachmentRepository implements IpoAttachmentRepository {
       }
     }
     try {
-      final localFile = Future.wait(files
-          .map(
-            (e) async => await remoteDataSource.fileDownload(
-              e.name,
-              e.url,
-              attachmentType,
-            ),
-          )
-          .toList());
+      final localFile = Future.wait(files.map(
+        (e) async {
+          final downloadedFile = await remoteDataSource.fileDownload(
+            e.name,
+            e.url,
+            attachmentType,
+          );
+
+          return await fileSystemHelper.getDownloadedFile(downloadedFile);
+        },
+      ).toList());
 
       return Right(await localFile);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, OpenResult>> openFile({
+    required PoDocuments files,
+    required AttachmentType attachmentType,
+  }) async {
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final localFile = await localDataSource.fileDownload(
+          files.name,
+          files.url,
+        );
+        final result = await fileSystemHelper.openFile(localFile);
+        if (result.type != ofs.ResultType.done) {
+          return Left(
+            FailureHandler.handleFailure(result.message),
+          );
+        }
+
+        return Right(result);
+      } catch (e) {
+        return Left(FailureHandler.handleFailure(e));
+      }
+    }
+    try {
+      final localFile = await remoteDataSource.fileDownload(
+        files.name,
+        files.url,
+        attachmentType,
+      );
+      final result = await fileSystemHelper.openFile(localFile);
+
+      if (result.type != ofs.ResultType.done) {
+        return Left(
+          FailureHandler.handleFailure(result.message),
+        );
+      }
+
+      return Right(result);
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
     }
@@ -204,6 +257,31 @@ class PoAttachmentRepository implements IpoAttachmentRepository {
       );
     }
   }
+
+  @override
+  Future<Either<ApiFailure, PermissionStatus>> downloadPermission() async {
+    try {
+      if (defaultTargetPlatform == TargetPlatform.iOS) {
+        return const Right(PermissionStatus.granted);
+      }
+      if (await deviceInfo.checkIfDeviceIsAndroidWithSDK33()) {
+        return const Right(PermissionStatus.granted);
+      }
+
+      final permissionStatus =
+          await permissionService.requestStoragePermission();
+
+      return permissionStatus == PermissionStatus.granted ||
+              permissionStatus == PermissionStatus.limited
+          ? Right(permissionStatus)
+          : const Left(ApiFailure.storagePermissionFailed());
+    } catch (e) {
+      return Left(
+        FailureHandler.handleFailure(e),
+      );
+    }
+  }
+
 }
 
 const allowedExtensions = [

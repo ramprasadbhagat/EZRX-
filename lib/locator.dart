@@ -34,6 +34,7 @@ import 'package:ezrxmobile/infrastructure/core/common/file_picker.dart';
 import 'package:ezrxmobile/infrastructure/core/common/permission_service.dart';
 import 'package:ezrxmobile/application/returns/request_return/request_return_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_request_type_code/return_request_type_code_bloc.dart';
+import 'package:ezrxmobile/infrastructure/core/common/file_path_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/order_storage.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/combo_deal_local.dart';
@@ -1297,6 +1298,10 @@ void setupLocator() {
   );
 
   locator.registerLazySingleton(
+    () => FileSystemHelper(),
+  );
+
+  locator.registerLazySingleton(
     () => PoDocumentLocalDataSource(),
   );
   locator.registerLazySingleton(
@@ -1314,6 +1319,7 @@ void setupLocator() {
       permissionService: locator<PermissionService>(),
       deviceInfo: locator<DeviceInfo>(),
       filePickerService: locator<FilePickerService>(),
+      fileSystemHelper: locator<FileSystemHelper>(),
     ),
   );
 

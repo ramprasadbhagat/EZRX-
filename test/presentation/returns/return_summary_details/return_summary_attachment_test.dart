@@ -1,9 +1,7 @@
-import 'dart:typed_data';
 import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_details_po_document_buffer.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
@@ -102,12 +100,6 @@ void main() {
             PoDocuments(
               name: 'fake-name-1',
               url: 'fake-url-1',
-            ),
-          ],
-          fileData: [
-            PoDocumentsBuffer(
-              name: 'fake-name-1',
-              buffer: Uint8List(0),
             ),
           ],
           failureOrSuccessOption: optionOf(const Right('')),

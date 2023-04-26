@@ -1,25 +1,17 @@
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:universal_io/io.dart';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_details_po_document_buffer.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
-import 'package:ezrxmobile/infrastructure/core/common/permission_service.dart';
-import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:open_file_safe/open_file_safe.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:ezrxmobile/presentation/core/custom_expansion_tile.dart'
     as custom;
-import 'package:permission_handler/permission_handler.dart';
 
 class PoAttachment extends StatefulWidget {
   final PoAttachMentRenderMode poAttachMentRenderMode;
@@ -62,23 +54,24 @@ class _PoAttachmentState extends State<PoAttachment> {
       children: [
         BlocListener<PoAttachmentBloc, PoAttachmentState>(
           listenWhen: (previous, current) =>
-              previous != current && current.fileDownloading,
+              previous != current &&
+              current.fileDownloading &&
+              !current.isFetching,
           listener: (context, state) async {
-            state.failureOrSuccessOption.fold(
-              () => {},
+            await state.failureOrSuccessOption.fold(
+              () {
+                if (state.isDownloadOperation) {
+                  showSnackBar(
+                    context: context,
+                    message: 'All attachments downloaded successfully.'.tr(),
+                  );
+                }
+              },
               (either) => either.fold(
                 (failure) {
                   ErrorUtils.handleApiFailure(context, failure);
                 },
-                (r) async {
-                  if (state.fileOperationMode == FileOperationMode.view) {
-                    await openFile(
-                      state.fileData.first,
-                    );
-                  } else {
-                    await downloadAllFile(state.fileData);
-                  }
-                },
+                (_) async {},
               ),
             );
           },
@@ -116,9 +109,8 @@ class _PoAttachmentState extends State<PoAttachment> {
                                     onTap: () async {
                                       context
                                           .read<PoAttachmentBloc>()
-                                          .add(PoAttachmentEvent.downloadFile(
-                                            files: [poDocuments],
-                                            fetchMode: FileOperationMode.view,
+                                          .add(PoAttachmentEvent.openFile(
+                                            files: poDocuments,
                                           ));
                                     },
                                     child: _PoAttachmentWidget(
@@ -186,25 +178,9 @@ class _PoAttachmentState extends State<PoAttachment> {
                           InkWell(
                             key: const Key('downloadAll'),
                             onTap: () async {
-                              if (defaultTargetPlatform ==
-                                      TargetPlatform.android &&
-                                  !(await locator<PermissionService>()
-                                      .requestStoragePermission()
-                                      .isGranted)) {
-                                if (!mounted) return;
-                                showSnackBar(
-                                  context: context,
-                                  message:
-                                      'Allow apps to access the storage'.tr(),
-                                );
-
-                                return;
-                              }
-                              if (!mounted) return;
                               context.read<PoAttachmentBloc>().add(
                                     PoAttachmentEvent.downloadFile(
                                       files: widget.poDocuments,
-                                      fetchMode: FileOperationMode.download,
                                     ),
                                   );
                             },
@@ -252,61 +228,6 @@ class _PoAttachmentState extends State<PoAttachment> {
     );
   }
 
-  Future<void> openFile(
-    PoDocumentsBuffer orderHistoryDetailsPoDocumentsBuffer,
-  ) async {
-    final appStorage = await getApplicationDocumentsDirectory();
-    final file =
-        File('${appStorage.path}/${orderHistoryDetailsPoDocumentsBuffer.name}');
-    await file.writeAsBytes(orderHistoryDetailsPoDocumentsBuffer.buffer);
-    final result = await OpenFile.open(file.path);
-    if (result.type != ResultType.done) {
-      if (context.mounted) {
-        showSnackBar(
-          context: context,
-          message: result.message.tr(),
-        );
-      }
-    }
-  }
-
-  Future<String> getFilePath() async {
-    if (Platform.isAndroid) {
-      final directory = await getExternalStorageDirectory();
-
-      return '${directory?.path.split('Android').first}Download';
-    } else {
-      final directory = await getApplicationDocumentsDirectory();
-
-      return await directory.exists()
-          ? directory.path
-          : (await directory.create(recursive: true)).path;
-    }
-  }
-
-  Future<void> downloadAllFile(
-    List<PoDocumentsBuffer> orderHistoryDetailsPoDocumentsBuffers,
-  ) async {
-    try {
-      for (final orderHistoryDetailsPoDocumentsBuffer
-          in orderHistoryDetailsPoDocumentsBuffers) {
-        final file = File(
-          '${await getFilePath()}/${orderHistoryDetailsPoDocumentsBuffer.name}',
-        );
-        await file.writeAsBytes(orderHistoryDetailsPoDocumentsBuffer.buffer);
-      }
-      if (!mounted) return;
-      showSnackBar(
-        context: context,
-        message: 'All attachments downloaded successfully.'.tr(),
-      );
-    } catch (e) {
-      showSnackBar(
-        context: context,
-        message: 'Some Thing Went Wrong'.tr(),
-      );
-    }
-  }
 
   int get listLength {
     final listLen = widget.poDocuments.length;

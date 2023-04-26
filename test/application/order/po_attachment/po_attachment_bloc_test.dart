@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
@@ -6,16 +8,18 @@ import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_details_po_document_buffer.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/po_attachment_repository.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:open_file_safe/open_file_safe.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class PoAttachmentRepositoryMock extends Mock
     implements PoAttachmentRepository {}
+
+class MockFile extends Mock implements File {}
 
 void main() {
   late PoAttachmentRepository poAttachmentRepository;
@@ -26,13 +30,6 @@ void main() {
         )
       ];
 
-      final downLoadedPoDocumentsList = poDocumentsList
-          .map(
-            (e) => PoDocumentsBuffer.empty().copyWith(
-              name: e.name,
-            ),
-          )
-          .toList();
 
   group(
     'PoAttachmentBloc Bloc Download Test',
@@ -40,9 +37,46 @@ void main() {
       setUpAll(() {
         poAttachmentRepository = PoAttachmentRepositoryMock();
       });
+
+      blocTest<PoAttachmentBloc, PoAttachmentState>(
+        'PoAttachmentBloc Bloc Download Permission fail',
+        setUp: () {
+          when(() => poAttachmentRepository.downloadPermission()).thenAnswer(
+            (invocation) async => const Left(
+              ApiFailure.storagePermissionFailed(),
+            ),
+          );
+        },
+        build: () =>
+            PoAttachmentBloc(poAttachmentRepository: poAttachmentRepository),
+        act: (bloc) => bloc.add(
+          PoAttachmentEvent.downloadFile(
+            files: poDocumentsList,
+          ),
+        ),
+        expect: () => [
+          PoAttachmentState.initial().copyWith(
+            isFetching: true,
+            fileOperationMode: FileOperationMode.download,
+          ),
+          PoAttachmentState.initial().copyWith(
+            fileOperationMode: FileOperationMode.download,
+            failureOrSuccessOption: optionOf(
+              const Left(
+                ApiFailure.storagePermissionFailed(),
+              ),
+            ),
+          ),
+        ],
+      );
       blocTest<PoAttachmentBloc, PoAttachmentState>(
         'PoAttachmentBloc Bloc Download file fail',
         setUp: () {
+          when(() => poAttachmentRepository.downloadPermission()).thenAnswer(
+            (invocation) async => const Right(
+              PermissionStatus.granted,
+            ),
+          );
           when(() => poAttachmentRepository.downloadFiles(
               poDocumentsList, AttachmentType.downloadPOAttachment)).thenAnswer(
             (invocation) async => const Left(
@@ -53,14 +87,12 @@ void main() {
         build: () =>
             PoAttachmentBloc(poAttachmentRepository: poAttachmentRepository),
         act: (bloc) => bloc.add(PoAttachmentEvent.downloadFile(
-          fetchMode: FileOperationMode.download,
           files: poDocumentsList,
         )),
         expect: () => [
           PoAttachmentState.initial().copyWith(
             fileOperationMode: FileOperationMode.download,
             isFetching: true,
-            fileUrl: poDocumentsList,
           ),
           PoAttachmentState.initial().copyWith(
               fileOperationMode: FileOperationMode.download,
@@ -73,38 +105,148 @@ void main() {
       blocTest<PoAttachmentBloc, PoAttachmentState>(
         'PoAttachmentBloc Bloc Download file success',
         setUp: () {
+          when(() => poAttachmentRepository.downloadPermission()).thenAnswer(
+            (invocation) async => const Right(
+              PermissionStatus.granted,
+            ),
+          );
           when(() => poAttachmentRepository.downloadFiles(
               poDocumentsList, AttachmentType.downloadPOAttachment)).thenAnswer(
-            (invocation) async => Right(
-              downLoadedPoDocumentsList,
+            (invocation) async => const Right(
+              [],
             ),
           );
         },
         build: () =>
             PoAttachmentBloc(poAttachmentRepository: poAttachmentRepository),
         act: (bloc) => bloc.add(PoAttachmentEvent.downloadFile(
-          fetchMode: FileOperationMode.download,
           files: poDocumentsList,
         )),
         expect: () => [
           PoAttachmentState.initial().copyWith(
             fileOperationMode: FileOperationMode.download,
             isFetching: true,
-            fileUrl: poDocumentsList,
           ),
           PoAttachmentState.initial().copyWith(
               fileOperationMode: FileOperationMode.download,
-              isFetching: false,
-              fileData: downLoadedPoDocumentsList,
-              failureOrSuccessOption: optionOf(
-                Right(
-                  downLoadedPoDocumentsList,
-                ),
-              ))
+            isFetching: false,
+          ),
         ],
       );
     },
   );
+
+  group(
+    'PoAttachmentBloc Bloc Open File Test',
+    () {
+      setUpAll(() {
+        poAttachmentRepository = PoAttachmentRepositoryMock();
+      });
+
+      blocTest<PoAttachmentBloc, PoAttachmentState>(
+        'PoAttachmentBloc Bloc Open Permission fail',
+        setUp: () {
+          when(() => poAttachmentRepository.downloadPermission()).thenAnswer(
+            (invocation) async => const Left(
+              ApiFailure.storagePermissionFailed(),
+            ),
+          );
+        },
+        build: () =>
+            PoAttachmentBloc(poAttachmentRepository: poAttachmentRepository),
+        act: (bloc) => bloc.add(
+          PoAttachmentEvent.openFile(
+            files: poDocumentsList.first,
+          ),
+        ),
+        expect: () => [
+          PoAttachmentState.initial().copyWith(
+            isFetching: true,
+            fileOperationMode: FileOperationMode.view,
+          ),
+          PoAttachmentState.initial().copyWith(
+            fileOperationMode: FileOperationMode.view,
+            failureOrSuccessOption: optionOf(
+              const Left(
+                ApiFailure.storagePermissionFailed(),
+              ),
+            ),
+          ),
+        ],
+      );
+      blocTest<PoAttachmentBloc, PoAttachmentState>(
+        'PoAttachmentBloc Bloc Open file fail',
+        setUp: () {
+          when(() => poAttachmentRepository.downloadPermission()).thenAnswer(
+            (invocation) async => const Right(
+              PermissionStatus.granted,
+            ),
+          );
+          when(() => poAttachmentRepository.openFile(
+                files: poDocumentsList.first,
+                attachmentType: AttachmentType.downloadPOAttachment,
+              )).thenAnswer(
+            (invocation) async => const Left(
+              ApiFailure.other('fake-error'),
+            ),
+          );
+        },
+        build: () =>
+            PoAttachmentBloc(poAttachmentRepository: poAttachmentRepository),
+        act: (bloc) => bloc.add(PoAttachmentEvent.openFile(
+          files: poDocumentsList.first,
+        )),
+        expect: () => [
+          PoAttachmentState.initial().copyWith(
+            fileOperationMode: FileOperationMode.view,
+            isFetching: true,
+          ),
+          PoAttachmentState.initial().copyWith(
+              fileOperationMode: FileOperationMode.view,
+              isFetching: false,
+              failureOrSuccessOption:
+                  optionOf(const Left(ApiFailure.other('fake-error')))),
+        ],
+      );
+
+      blocTest<PoAttachmentBloc, PoAttachmentState>(
+        'PoAttachmentBloc Bloc Open file success',
+        setUp: () {
+          when(() => poAttachmentRepository.downloadPermission()).thenAnswer(
+            (invocation) async => const Right(
+              PermissionStatus.granted,
+            ),
+          );
+          when(() => poAttachmentRepository.openFile(
+                files: poDocumentsList.first,
+                attachmentType: AttachmentType.downloadPOAttachment,
+              )).thenAnswer(
+            (invocation) async => Right(
+              OpenResult(),
+            ),
+          );
+        },
+        build: () =>
+            PoAttachmentBloc(poAttachmentRepository: poAttachmentRepository),
+        act: (bloc) => bloc.add(PoAttachmentEvent.openFile(
+          files: poDocumentsList.first,
+        )),
+        expect: () => [
+          PoAttachmentState.initial().copyWith(
+            fileOperationMode: FileOperationMode.view,
+            isFetching: true,
+          ),
+          PoAttachmentState.initial().copyWith(
+            fileOperationMode: FileOperationMode.view,
+            isFetching: false,
+          ),
+        ],
+      );
+
+    },
+  );
+
+  
 
   group(
     'PoAttachmentBloc Bloc Upload Test',

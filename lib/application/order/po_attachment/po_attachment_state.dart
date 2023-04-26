@@ -5,14 +5,12 @@ class PoAttachmentState with _$PoAttachmentState {
   const PoAttachmentState._();
   const factory PoAttachmentState({
     required bool isFetching,
-    required List<PoDocumentsBuffer> fileData,
     required List<PoDocuments> fileUrl,
     required FileOperationMode fileOperationMode,
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
   }) = _PoAttachmentState;
   factory PoAttachmentState.initial() => const PoAttachmentState(
         isFetching: false,
-        fileData: <PoDocumentsBuffer>[],
         fileUrl: <PoDocuments>[],
         fileOperationMode: FileOperationMode.none,
         failureOrSuccessOption: None(),
@@ -36,6 +34,9 @@ class PoAttachmentState with _$PoAttachmentState {
   bool get fileDownloading =>
       fileOperationMode == FileOperationMode.download ||
       fileOperationMode == FileOperationMode.view;
+
+  bool get isDownloadOperation =>
+      fileOperationMode == FileOperationMode.download;
 }
 
 enum FileOperationMode {

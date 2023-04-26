@@ -41,7 +41,6 @@ import 'package:ezrxmobile/domain/order/entities/order_history_basic_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_messages.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_header.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_details_po_document_buffer.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_shipping_information.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
@@ -463,7 +462,7 @@ void main() {
       }
     });
 
-    testWidgets('Bill to address  not visiable test ', (tester) async {
+    testWidgets('Bill to address  not visible test ', (tester) async {
       when(() => mockOrderHistoryDetailsBloc.state).thenReturn(
         OrderHistoryDetailsState.initial().copyWith(
           orderHistoryDetails: orderHistoryDetails,
@@ -475,9 +474,9 @@ void main() {
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(),
       );
-      final isBillToenable = eligibilityBlocMock.state.isOrderTypeEnable;
+      final isBillToEnable = eligibilityBlocMock.state.isOrderTypeEnable;
 
-      expect(isBillToenable, false);
+      expect(isBillToEnable, false);
       when(() => mockOrderHistoryListBloc.state).thenReturn(
         OrderHistoryListState.initial()
             .copyWith(orderHistoryList: orderHistory),
@@ -488,7 +487,7 @@ void main() {
 
       expect(billToAddress, findsNothing);
     });
-    testWidgets('Bill to address visiable test ', (tester) async {
+    testWidgets('Bill to address visible test ', (tester) async {
       when(() => mockOrderHistoryDetailsBloc.state).thenReturn(
         OrderHistoryDetailsState.initial().copyWith(
           orderHistoryDetails: orderHistoryDetails,
@@ -524,7 +523,7 @@ void main() {
       expect(billToAddress, findsOneWidget);
     });
     testWidgets(
-        'Bill to address not visiable test when billToCustomerCode is empty',
+        'Bill to address not visible test when billToCustomerCode is empty',
         (tester) async {
       when(() => mockOrderHistoryDetailsBloc.state).thenReturn(
         OrderHistoryDetailsState.initial().copyWith(
@@ -560,7 +559,7 @@ void main() {
 
       expect(billToAddress, findsNothing);
     });
-    testWidgets('PaymentTerm text visiable test ', (tester) async {
+    testWidgets('PaymentTerm text visible test ', (tester) async {
       when(() => mockOrderHistoryDetailsBloc.state).thenReturn(
         OrderHistoryDetailsState.initial().copyWith(
           orderHistoryDetails: orderHistoryDetails,
@@ -580,7 +579,7 @@ void main() {
 
       expect(paymentTerm, findsOneWidget);
     });
-    testWidgets('OrderHistoryDetailsPaget not visiable test ', (tester) async {
+    testWidgets('OrderHistoryDetailsPage not visible test ', (tester) async {
       when(() => mockOrderHistoryDetailsBloc.state).thenReturn(
         OrderHistoryDetailsState.initial().copyWith(
           orderHistoryDetails: OrderHistoryDetails.empty(),
@@ -723,11 +722,7 @@ void main() {
             PoAttachmentState.initial().copyWith(
                 fileOperationMode: FileOperationMode.none,
                 failureOrSuccessOption: none(),
-                fileData: [
-                  PoDocumentsBuffer.empty().copyWith(
-                    name: 'fake-name',
-                  )
-                ]),
+            ),
             PoAttachmentState.initial(),
           ]));
       await tester.pumpWidget(getWUT());
@@ -755,9 +750,6 @@ void main() {
               (index) => mockPoDocuments.first,
             ),
           ),
-          failureOrSuccessOption: none(),
-          isLoading: false,
-          showErrorMessage: false,
         ),
       );
       when(() => eligibilityBlocMock.state).thenReturn(
@@ -772,12 +764,7 @@ void main() {
           Stream.fromIterable([
             PoAttachmentState.initial().copyWith(
                 fileOperationMode: FileOperationMode.download,
-                failureOrSuccessOption: optionOf(const Right('succes')),
-                fileData: [
-                  PoDocumentsBuffer.empty().copyWith(
-                    name: 'fake-name',
-                  )
-                ]),
+            ),
             PoAttachmentState.initial(),
           ]));
 
@@ -806,9 +793,6 @@ void main() {
               (index) => mockPoDocuments.first,
             ),
           ),
-          failureOrSuccessOption: none(),
-          isLoading: false,
-          showErrorMessage: false,
         ),
       );
       when(() => eligibilityBlocMock.state).thenReturn(
@@ -823,12 +807,7 @@ void main() {
           Stream.fromIterable([
             PoAttachmentState.initial().copyWith(
                 fileOperationMode: FileOperationMode.download,
-                failureOrSuccessOption: optionOf(const Right('succes')),
-                fileData: [
-                  PoDocumentsBuffer.empty().copyWith(
-                    name: 'fake-name',
-                  )
-                ]),
+            ),
             PoAttachmentState.initial(),
           ]));
 
@@ -856,9 +835,6 @@ void main() {
               (index) => mockPoDocuments.first,
             ),
           ),
-          failureOrSuccessOption: none(),
-          isLoading: false,
-          showErrorMessage: false,
         ),
       );
       when(() => eligibilityBlocMock.state).thenReturn(
@@ -873,12 +849,7 @@ void main() {
           Stream.fromIterable([
             PoAttachmentState.initial().copyWith(
                 fileOperationMode: FileOperationMode.view,
-                failureOrSuccessOption: optionOf(const Right('succes')),
-                fileData: [
-                  PoDocumentsBuffer.empty().copyWith(
-                    name: 'fake-name',
-                  )
-                ]),
+            ),
             PoAttachmentState.initial(),
           ]));
       await tester.pumpWidget(getWUT());
@@ -1064,7 +1035,7 @@ void main() {
       await tester.tap(addToCartPressed);
     });
 
-    testWidgets('dispalyPrice test ', (tester) async {
+    testWidgets('displayPrice test ', (tester) async {
       when(() => mockOrderHistoryDetailsBloc.state).thenReturn(
         OrderHistoryDetailsState.initial().copyWith(
           orderHistoryDetails: orderHistoryDetails,
