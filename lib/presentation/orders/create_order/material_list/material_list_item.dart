@@ -28,6 +28,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/cart_bottom_sheet.dart';
+import 'package:flutter_svg/svg.dart';
 
 class MaterialListItem extends StatelessWidget {
   final MaterialInfo materialInfo;
@@ -47,130 +48,146 @@ class MaterialListItem extends StatelessWidget {
           'materialOption${materialInfo.materialNumber.getOrDefaultValue('')}',
         ),
         onTap: () => _showMaterialDetail(context),
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        title: Row(
           children: [
-            Text(
-              materialInfo.materialDescription,
-              style: Theme.of(context).textTheme.titleSmall?.apply(
-                    color: ZPColors.kPrimaryColor,
-                  ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  materialInfo.materialNumber.displayMatNo,
-                  style: Theme.of(context).textTheme.titleSmall?.apply(
-                        color: ZPColors.lightGray,
-                      ),
-                ),
-                BlocBuilder<MaterialPriceBloc, MaterialPriceState>(
-                  buildWhen: (previous, current) =>
-                      previous.isFetching != current.isFetching,
-                  builder: (context, state) {
-                    final price =
-                        state.getPriceForMaterial(materialInfo.materialNumber);
-
-                    return BonusDiscountLabel(
-                      materialInfo: materialInfo,
-                      price: price,
-                      tenderContractNumber: 'Tender Contract',
-                    );
-                  },
-                ),
-              ],
-            ),
-            (salesOrgConfigs.enableDefaultMD &&
-                    materialInfo.defaultMaterialDescription.isNotEmpty)
-                ? Text(
-                    materialInfo.defaultMaterialDescription,
-                    key: Key(
-                      'defaultMaterialDescription${materialInfo.materialNumber.getOrDefaultValue('')}',
-                    ),
-                    style: Theme.of(context).textTheme.titleSmall?.apply(
-                          color: ZPColors.lightGray,
-                        ),
-                  )
-                : const SizedBox.shrink(),
-            (salesOrgConfigs.enableIRN &&
-                    materialInfo.itemRegistrationNumber.isNotEmpty)
-                ? Text(
-                    materialInfo.itemRegistrationNumber,
-                    key: Key(
-                      'registrationNumber${materialInfo.materialNumber.getOrDefaultValue('')}',
-                    ),
-                    style: Theme.of(context).textTheme.titleSmall?.apply(
-                          color: ZPColors.lightGray,
-                        ),
-                  )
-                : const SizedBox.shrink(),
-            if (salesOrgConfigs.enableGMN &&
-                materialInfo.genericMaterialName.isNotEmpty)
-              Text(
-                materialInfo.genericMaterialName,
-                key: Key(
-                  'genericMaterial${materialInfo.materialNumber.getOrDefaultValue('')}',
-                ),
-                style: Theme.of(context).textTheme.titleSmall?.apply(
-                      color: ZPColors.lightGray,
-                    ),
+            Padding(
+              padding: const EdgeInsets.only(right: 10),
+              child: SvgPicture.asset(
+                'assets/svg/default_product_image.svg',
+                key: const ValueKey('addToCartProductImage'),
+                height: 70,
+                fit: BoxFit.fitHeight,
               ),
-            Text(
-              materialInfo.principalData.principalName.getOrDefaultValue(''),
-              style: Theme.of(context).textTheme.titleSmall?.apply(
-                    color: ZPColors.lightGray,
+            ),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    materialInfo.materialDescription,
+                    style: Theme.of(context).textTheme.titleSmall?.apply(
+                          color: ZPColors.kPrimaryColor,
+                        ),
                   ),
-            ),
-            _GovermentMaterialCode(
-              materialInfo: materialInfo,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                _PriceLabel(materialInfo: materialInfo),
-                Row(
-                  children: [
-                    FavoriteButton(
-                      key: Key(
-                        'favoriteButtonKey${materialInfo.materialNumber.displayMatNo}',
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        materialInfo.materialNumber.displayMatNo,
+                        style: Theme.of(context).textTheme.titleSmall?.apply(
+                              color: ZPColors.lightGray,
+                            ),
                       ),
-                      materialInfo: materialInfo,
+                      BlocBuilder<MaterialPriceBloc, MaterialPriceState>(
+                        buildWhen: (previous, current) =>
+                            previous.isFetching != current.isFetching,
+                        builder: (context, state) {
+                          final price = state
+                              .getPriceForMaterial(materialInfo.materialNumber);
+            
+                          return BonusDiscountLabel(
+                            materialInfo: materialInfo,
+                            price: price,
+                            tenderContractNumber: 'Tender Contract',
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                  (salesOrgConfigs.enableDefaultMD &&
+                          materialInfo.defaultMaterialDescription.isNotEmpty)
+                      ? Text(
+                          materialInfo.defaultMaterialDescription,
+                          key: Key(
+                            'defaultMaterialDescription${materialInfo.materialNumber.getOrDefaultValue('')}',
+                          ),
+                          style: Theme.of(context).textTheme.titleSmall?.apply(
+                                color: ZPColors.lightGray,
+                              ),
+                        )
+                      : const SizedBox.shrink(),
+                  (salesOrgConfigs.enableIRN &&
+                          materialInfo.itemRegistrationNumber.isNotEmpty)
+                      ? Text(
+                          materialInfo.itemRegistrationNumber,
+                          key: Key(
+                            'registrationNumber${materialInfo.materialNumber.getOrDefaultValue('')}',
+                          ),
+                          style: Theme.of(context).textTheme.titleSmall?.apply(
+                                color: ZPColors.lightGray,
+                              ),
+                        )
+                      : const SizedBox.shrink(),
+                  if (salesOrgConfigs.enableGMN &&
+                      materialInfo.genericMaterialName.isNotEmpty)
+                    Text(
+                      materialInfo.genericMaterialName,
+                      key: Key(
+                        'genericMaterial${materialInfo.materialNumber.getOrDefaultValue('')}',
+                      ),
+                      style: Theme.of(context).textTheme.titleSmall?.apply(
+                            color: ZPColors.lightGray,
+                          ),
                     ),
-                    CustomSmallButton(
-                      onPressed: () => _showMaterialDetail(context),
-                      text: 'Add'.tr(),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            BlocBuilder<EligibilityBloc, EligibilityState>(
-              buildWhen: (previous, current) =>
-                  previous.comboDealEligible != current.comboDealEligible,
-              builder: (context, eligibilityState) {
-                return BlocBuilder<MaterialPriceBloc, MaterialPriceState>(
-                  buildWhen: (previous, current) =>
-                      previous.isFetching != current.isFetching,
-                  builder: (context, state) {
-                    final price =
-                        state.getPriceForMaterial(materialInfo.materialNumber);
-
-                    return price.comboDeal.isAvailable &&
-                            eligibilityState.comboDealEligible
-                        ? GestureDetector(
-                            onTap: () {
-                              _showComboDeal(
-                                context: context,
-                                price: price,
-                              );
-                            },
-                            child: const ComboDealLabel(),
-                          )
-                        : const SizedBox();
-                  },
-                );
-              },
+                  Text(
+                    materialInfo.principalData.principalName
+                        .getOrDefaultValue(''),
+                    style: Theme.of(context).textTheme.titleSmall?.apply(
+                          color: ZPColors.lightGray,
+                        ),
+                  ),
+                  _GovermentMaterialCode(
+                    materialInfo: materialInfo,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Flexible(child: _PriceLabel(materialInfo: materialInfo)),
+                      Row(
+                        children: [
+                          FavoriteButton(
+                            key: Key(
+                              'favoriteButtonKey${materialInfo.materialNumber.displayMatNo}',
+                            ),
+                            materialInfo: materialInfo,
+                          ),
+                          CustomSmallButton(
+                            onPressed: () => _showMaterialDetail(context),
+                            text: 'Add'.tr(),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  BlocBuilder<EligibilityBloc, EligibilityState>(
+                    buildWhen: (previous, current) =>
+                        previous.comboDealEligible != current.comboDealEligible,
+                    builder: (context, eligibilityState) {
+                      return BlocBuilder<MaterialPriceBloc, MaterialPriceState>(
+                        buildWhen: (previous, current) =>
+                            previous.isFetching != current.isFetching,
+                        builder: (context, state) {
+                          final price = state
+                              .getPriceForMaterial(materialInfo.materialNumber);
+            
+                          return price.comboDeal.isAvailable &&
+                                  eligibilityState.comboDealEligible
+                              ? GestureDetector(
+                                  onTap: () {
+                                    _showComboDeal(
+                                      context: context,
+                                      price: price,
+                                    );
+                                  },
+                                  child: const ComboDealLabel(),
+                                )
+                              : const SizedBox();
+                        },
+                      );
+                    },
+                  ),
+                ],
+              ),
             ),
           ],
         ),

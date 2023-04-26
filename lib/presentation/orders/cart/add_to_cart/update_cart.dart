@@ -7,6 +7,7 @@ import 'package:ezrxmobile/presentation/orders/create_order/select_contract.dart
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 
 class UpdateCart extends StatelessWidget {
   const UpdateCart({
@@ -32,6 +33,15 @@ class UpdateCart extends StatelessWidget {
                 Expanded(
                   child: ListView(
                     children: [
+                      Padding(
+                          padding: const EdgeInsets.only(bottom: 15),
+                          child: SvgPicture.asset(
+                            'assets/svg/default_product_image.svg',
+                            key: const ValueKey('updateCartProductImage'),
+                            height: 80,
+                            fit: BoxFit.fitHeight,
+                          ),
+                        ),
                       CartItemDetailWidget(
                         cartItem: state.cartItem,
                         onQuantityChanged: (int value) {
