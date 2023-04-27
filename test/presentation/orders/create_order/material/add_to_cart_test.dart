@@ -14,6 +14,7 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/access_right.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
@@ -799,6 +800,9 @@ void main() {
         final fakeUser = User.empty().copyWith(
           username: Username('fakeUser'),
           disableCreateOrder: false,
+          accessRight: AccessRight.empty().copyWith(
+            orders: true,
+          ),
           role: Role(
             type: RoleType('fakeRole'),
             description: '',
@@ -862,6 +866,7 @@ void main() {
         final fakeUser = User.empty().copyWith(
           username: Username('fakeUser'),
           disableCreateOrder: false,
+          accessRight: AccessRight.empty().copyWith(orders: true),
           role: Role(
             type: RoleType('fakeRole'),
             description: '',
@@ -936,6 +941,9 @@ void main() {
         final fakeUser = User.empty().copyWith(
           username: Username('fakeUser'),
           disableCreateOrder: false,
+          accessRight: AccessRight.empty().copyWith(
+            orders: true,
+          ),
           role: Role(
             type: RoleType('fakeRole'),
             description: '',
@@ -1007,6 +1015,9 @@ void main() {
         final fakeUser = User.empty().copyWith(
           username: Username('fakeUser'),
           disableCreateOrder: false,
+          accessRight: AccessRight.empty().copyWith(
+            orders: true,
+          ),
           role: Role(
             type: RoleType('fakeRole'),
             description: '',
@@ -1127,6 +1138,9 @@ void main() {
         final fakeUser = User.empty().copyWith(
           username: Username('fakeUser'),
           disableCreateOrder: false,
+          accessRight: AccessRight.empty().copyWith(
+            orders: true,
+          ),
           role: Role(
             type: RoleType('external_sales_rep'),
             description: '',

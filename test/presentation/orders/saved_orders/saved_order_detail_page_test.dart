@@ -12,6 +12,7 @@ import 'package:ezrxmobile/application/order/material_price_detail/material_pric
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_list_bloc.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/entities/access_right.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
@@ -146,7 +147,11 @@ void main() {
 
     when(() => userBlocMock.state).thenReturn(
       UserState.initial().copyWith(
-        user: fakeUser,
+        user: fakeUser.copyWith(
+          accessRight: AccessRight.empty().copyWith(
+            orders: true,
+          ),
+        ),
       ),
     );
     when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());

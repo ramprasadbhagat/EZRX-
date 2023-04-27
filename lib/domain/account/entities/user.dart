@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/account/entities/access_right.dart';
 import 'package:ezrxmobile/domain/account/entities/full_name.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
@@ -22,6 +23,7 @@ class User with _$User {
     required Role role,
     required CustomerCode customerCode,
     required List<SalesOrganisation> userSalesOrganisations,
+    required AccessRight accessRight,
     required Settings settings,
     required SettingTc settingTc,
     required bool enableOrderType,
@@ -39,6 +41,7 @@ class User with _$User {
         role: Role(id: '', name: '', type: RoleType(''), description: ''),
         customerCode: CustomerCode(''),
         userSalesOrganisations: <SalesOrganisation>[],
+        accessRight: AccessRight.empty(),
         settings: Settings(
           emailNotifications: false,
           mobileNotifications: false,

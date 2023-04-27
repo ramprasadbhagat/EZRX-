@@ -13,7 +13,10 @@
                 "mobileNumber": "-",
                 "acceptMobileTC": false,
                 "languagePreference": "TH",
-                "emailNotifications": false
+                "emailNotifications": false,
+                "accessRight":{
+                    "Orders":true
+                }
             }
         }
     }

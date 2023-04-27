@@ -38,6 +38,8 @@ mixin _$UserDto {
   @JsonKey(name: 'userSalesOrganisationList', defaultValue: [])
   List<SalesOrganisationDto> get userSalesOrganisations =>
       throw _privateConstructorUsedError;
+  @JsonKey(name: 'accessRight')
+  AccessRightDto get accessRight => throw _privateConstructorUsedError;
   @JsonKey(name: 'emailNotifications', defaultValue: false)
   bool get emailNotifications => throw _privateConstructorUsedError;
   @JsonKey(name: 'mobileNotifications', defaultValue: false)
@@ -93,6 +95,8 @@ abstract class $UserDtoCopyWith<$Res> {
       @_SalesOrganisationListConverter()
       @JsonKey(name: 'userSalesOrganisationList', defaultValue: [])
           List<SalesOrganisationDto> userSalesOrganisations,
+      @JsonKey(name: 'accessRight')
+          AccessRightDto accessRight,
       @JsonKey(name: 'emailNotifications', defaultValue: false)
           bool emailNotifications,
       @JsonKey(name: 'mobileNotifications', defaultValue: false)
@@ -117,6 +121,7 @@ abstract class $UserDtoCopyWith<$Res> {
           bool hasPriceOverride});
 
   $RoleDtoCopyWith<$Res> get role;
+  $AccessRightDtoCopyWith<$Res> get accessRight;
 }
 
 /// @nodoc
@@ -140,6 +145,7 @@ class _$UserDtoCopyWithImpl<$Res, $Val extends UserDto>
     Object? role = null,
     Object? customerCode = null,
     Object? userSalesOrganisations = null,
+    Object? accessRight = null,
     Object? emailNotifications = null,
     Object? mobileNotifications = null,
     Object? languagePreference = null,
@@ -185,6 +191,10 @@ class _$UserDtoCopyWithImpl<$Res, $Val extends UserDto>
           ? _value.userSalesOrganisations
           : userSalesOrganisations // ignore: cast_nullable_to_non_nullable
               as List<SalesOrganisationDto>,
+      accessRight: null == accessRight
+          ? _value.accessRight
+          : accessRight // ignore: cast_nullable_to_non_nullable
+              as AccessRightDto,
       emailNotifications: null == emailNotifications
           ? _value.emailNotifications
           : emailNotifications // ignore: cast_nullable_to_non_nullable
@@ -239,6 +249,14 @@ class _$UserDtoCopyWithImpl<$Res, $Val extends UserDto>
       return _then(_value.copyWith(role: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $AccessRightDtoCopyWith<$Res> get accessRight {
+    return $AccessRightDtoCopyWith<$Res>(_value.accessRight, (value) {
+      return _then(_value.copyWith(accessRight: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -266,6 +284,8 @@ abstract class _$$_UserDtoCopyWith<$Res> implements $UserDtoCopyWith<$Res> {
       @_SalesOrganisationListConverter()
       @JsonKey(name: 'userSalesOrganisationList', defaultValue: [])
           List<SalesOrganisationDto> userSalesOrganisations,
+      @JsonKey(name: 'accessRight')
+          AccessRightDto accessRight,
       @JsonKey(name: 'emailNotifications', defaultValue: false)
           bool emailNotifications,
       @JsonKey(name: 'mobileNotifications', defaultValue: false)
@@ -291,6 +311,8 @@ abstract class _$$_UserDtoCopyWith<$Res> implements $UserDtoCopyWith<$Res> {
 
   @override
   $RoleDtoCopyWith<$Res> get role;
+  @override
+  $AccessRightDtoCopyWith<$Res> get accessRight;
 }
 
 /// @nodoc
@@ -311,6 +333,7 @@ class __$$_UserDtoCopyWithImpl<$Res>
     Object? role = null,
     Object? customerCode = null,
     Object? userSalesOrganisations = null,
+    Object? accessRight = null,
     Object? emailNotifications = null,
     Object? mobileNotifications = null,
     Object? languagePreference = null,
@@ -356,6 +379,10 @@ class __$$_UserDtoCopyWithImpl<$Res>
           ? _value._userSalesOrganisations
           : userSalesOrganisations // ignore: cast_nullable_to_non_nullable
               as List<SalesOrganisationDto>,
+      accessRight: null == accessRight
+          ? _value.accessRight
+          : accessRight // ignore: cast_nullable_to_non_nullable
+              as AccessRightDto,
       emailNotifications: null == emailNotifications
           ? _value.emailNotifications
           : emailNotifications // ignore: cast_nullable_to_non_nullable
@@ -425,6 +452,8 @@ class _$_UserDto extends _UserDto {
       @_SalesOrganisationListConverter()
       @JsonKey(name: 'userSalesOrganisationList', defaultValue: [])
           required final List<SalesOrganisationDto> userSalesOrganisations,
+      @JsonKey(name: 'accessRight')
+          required this.accessRight,
       @JsonKey(name: 'emailNotifications', defaultValue: false)
           required this.emailNotifications,
       @JsonKey(name: 'mobileNotifications', defaultValue: false)
@@ -484,6 +513,9 @@ class _$_UserDto extends _UserDto {
   }
 
   @override
+  @JsonKey(name: 'accessRight')
+  final AccessRightDto accessRight;
+  @override
   @JsonKey(name: 'emailNotifications', defaultValue: false)
   final bool emailNotifications;
   @override
@@ -522,7 +554,7 @@ class _$_UserDto extends _UserDto {
 
   @override
   String toString() {
-    return 'UserDto(id: $id, username: $username, email: $email, firstName: $firstName, lastName: $lastName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, emailNotifications: $emailNotifications, mobileNotifications: $mobileNotifications, languagePreference: $languagePreference, enableOrderType: $enableOrderType, acceptPrivacyPolicy: $acceptPrivacyPolicy, acceptPrivacyPolicyTime: $acceptPrivacyPolicyTime, privacyPolicyAcceptedPlatform: $privacyPolicyAcceptedPlatform, hasBonusOverride: $hasBonusOverride, disableCreateOrder: $disableCreateOrder, disableReturns: $disableReturns, hasPriceOverride: $hasPriceOverride)';
+    return 'UserDto(id: $id, username: $username, email: $email, firstName: $firstName, lastName: $lastName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, accessRight: $accessRight, emailNotifications: $emailNotifications, mobileNotifications: $mobileNotifications, languagePreference: $languagePreference, enableOrderType: $enableOrderType, acceptPrivacyPolicy: $acceptPrivacyPolicy, acceptPrivacyPolicyTime: $acceptPrivacyPolicyTime, privacyPolicyAcceptedPlatform: $privacyPolicyAcceptedPlatform, hasBonusOverride: $hasBonusOverride, disableCreateOrder: $disableCreateOrder, disableReturns: $disableReturns, hasPriceOverride: $hasPriceOverride)';
   }
 
   @override
@@ -543,6 +575,8 @@ class _$_UserDto extends _UserDto {
                 other.customerCode == customerCode) &&
             const DeepCollectionEquality().equals(
                 other._userSalesOrganisations, _userSalesOrganisations) &&
+            (identical(other.accessRight, accessRight) ||
+                other.accessRight == accessRight) &&
             (identical(other.emailNotifications, emailNotifications) ||
                 other.emailNotifications == emailNotifications) &&
             (identical(other.mobileNotifications, mobileNotifications) ||
@@ -582,6 +616,7 @@ class _$_UserDto extends _UserDto {
         role,
         customerCode,
         const DeepCollectionEquality().hash(_userSalesOrganisations),
+        accessRight,
         emailNotifications,
         mobileNotifications,
         languagePreference,
@@ -628,6 +663,8 @@ abstract class _UserDto extends UserDto {
       @_SalesOrganisationListConverter()
       @JsonKey(name: 'userSalesOrganisationList', defaultValue: [])
           required final List<SalesOrganisationDto> userSalesOrganisations,
+      @JsonKey(name: 'accessRight')
+          required final AccessRightDto accessRight,
       @JsonKey(name: 'emailNotifications', defaultValue: false)
           required final bool emailNotifications,
       @JsonKey(name: 'mobileNotifications', defaultValue: false)
@@ -679,6 +716,9 @@ abstract class _UserDto extends UserDto {
   @_SalesOrganisationListConverter()
   @JsonKey(name: 'userSalesOrganisationList', defaultValue: [])
   List<SalesOrganisationDto> get userSalesOrganisations;
+  @override
+  @JsonKey(name: 'accessRight')
+  AccessRightDto get accessRight;
   @override
   @JsonKey(name: 'emailNotifications', defaultValue: false)
   bool get emailNotifications;

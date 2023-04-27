@@ -20,6 +20,7 @@ import 'package:ezrxmobile/application/order/order_history_filter/order_history_
 import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
 import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/access_right.dart';
 import 'package:ezrxmobile/domain/account/entities/bill_to_address.dart';
 import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
@@ -382,6 +383,19 @@ void main() {
 
     testWidgets('Show Error Message test with reorder button loading',
         (tester) async {
+      when(() => userBlocMock.state).thenReturn(
+        UserState.initial().copyWith(
+          user: fakeUser.copyWith(
+            role: Role.empty().copyWith(
+              type: RoleType('fake_type'),
+            ),
+            accessRight: AccessRight.empty().copyWith(
+              orders: true,
+            ),
+            disableCreateOrder: false,
+          ),
+        ),
+      );
       whenListen(
           mockOrderHistoryDetailsBloc,
           Stream.fromIterable(
@@ -598,6 +612,19 @@ void main() {
     });
 
     testWidgets('Reorder test ', (tester) async {
+      when(() => userBlocMock.state).thenReturn(
+        UserState.initial().copyWith(
+          user: fakeUser.copyWith(
+            role: Role.empty().copyWith(
+              type: RoleType('fake_type'),
+            ),
+            accessRight: AccessRight.empty().copyWith(
+              orders: true,
+            ),
+            disableCreateOrder: false,
+          ),
+        ),
+      );
       when(() => mockOrderHistoryDetailsBloc.state).thenReturn(
         OrderHistoryDetailsState.initial().copyWith(
           orderHistoryDetails: OrderHistoryDetails.empty(),
@@ -866,6 +893,19 @@ void main() {
     });
 
     testWidgets('addToCartPressed test ', (tester) async {
+      when(() => userBlocMock.state).thenReturn(
+        UserState.initial().copyWith(
+          user: fakeUser.copyWith(
+            role: Role.empty().copyWith(
+              type: RoleType('fake_type'),
+            ),
+            accessRight: AccessRight.empty().copyWith(
+              orders: true,
+            ),
+            disableCreateOrder: false,
+          ),
+        ),
+      );
       when(() => mockOrderHistoryDetailsBloc.state).thenReturn(
         OrderHistoryDetailsState.initial().copyWith(
           orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
@@ -920,6 +960,19 @@ void main() {
 
     testWidgets('fetch tender contract test with empty tender contract',
         (tester) async {
+      when(() => userBlocMock.state).thenReturn(
+        UserState.initial().copyWith(
+          user: fakeUser.copyWith(
+            role: Role.empty().copyWith(
+              type: RoleType('fake_type'),
+            ),
+            accessRight: AccessRight.empty().copyWith(
+              orders: true,
+            ),
+            disableCreateOrder: false,
+          ),
+        ),
+      );
       when(() => mockOrderHistoryDetailsBloc.state).thenReturn(
         OrderHistoryDetailsState.initial().copyWith(
           orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
@@ -978,6 +1031,19 @@ void main() {
 
     testWidgets('fetch tender contract test with valid tender contract',
         (tester) async {
+      when(() => userBlocMock.state).thenReturn(
+        UserState.initial().copyWith(
+          user: fakeUser.copyWith(
+            role: Role.empty().copyWith(
+              type: RoleType('fake_type'),
+            ),
+            accessRight: AccessRight.empty().copyWith(
+              orders: true,
+            ),
+            disableCreateOrder: false,
+          ),
+        ),
+      );
       when(() => mockOrderHistoryDetailsBloc.state).thenReturn(
         OrderHistoryDetailsState.initial().copyWith(
           orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
@@ -1515,6 +1581,19 @@ void main() {
 
     testWidgets('order summary  addToCartPressed test with duplicate order ',
         (tester) async {
+      when(() => userBlocMock.state).thenReturn(
+        UserState.initial().copyWith(
+          user: fakeUser.copyWith(
+            role: Role.empty().copyWith(
+              type: RoleType('fake_type'),
+            ),
+            accessRight: AccessRight.empty().copyWith(
+              orders: true,
+            ),
+            disableCreateOrder: false,
+          ),
+        ),
+      );
       final item = orderHistoryDetails.orderHistoryDetailsOrderItem.first;
       when(() => mockOrderHistoryDetailsBloc.state).thenReturn(
         OrderHistoryDetailsState.initial().copyWith(
@@ -1552,6 +1631,19 @@ void main() {
     });
 
     testWidgets('order summary  addToCartPressed test ', (tester) async {
+      when(() => userBlocMock.state).thenReturn(
+        UserState.initial().copyWith(
+          user: fakeUser.copyWith(
+            role: Role.empty().copyWith(
+              type: RoleType('fake_type'),
+            ),
+            accessRight: AccessRight.empty().copyWith(
+              orders: true,
+            ),
+            disableCreateOrder: false,
+          ),
+        ),
+      );
       when(() => mockOrderHistoryDetailsBloc.state).thenReturn(
         OrderHistoryDetailsState.initial().copyWith(
           orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
@@ -1718,14 +1810,13 @@ void main() {
       'Test Order History Detail Disable create order Reorder Button Hidden - disableCreateOrder false',
       (tester) async {
         final fakeUser = User.empty().copyWith(
-          username: Username('fakeUser'),
-          disableCreateOrder: false,
-          role: Role(
-            type: RoleType('fakeRole'),
-            description: '',
-            id: '',
-            name: '',
+          role: Role.empty().copyWith(
+            type: RoleType('fake_type'),
           ),
+          accessRight: AccessRight.empty().copyWith(
+            orders: true,
+          ),
+          disableCreateOrder: false,
         );
 
         when(
@@ -1744,6 +1835,19 @@ void main() {
       },
     );
     testWidgets('Reorder test for spacial order', (tester) async {
+      when(() => userBlocMock.state).thenReturn(
+        UserState.initial().copyWith(
+          user: fakeUser.copyWith(
+            role: Role.empty().copyWith(
+              type: RoleType('fake_type'),
+            ),
+            accessRight: AccessRight.empty().copyWith(
+              orders: true,
+            ),
+            disableCreateOrder: false,
+          ),
+        ),
+      );
       when(() => mockOrderHistoryDetailsBloc.state).thenReturn(
         OrderHistoryDetailsState.initial().copyWith(
           orderHistoryDetails: OrderHistoryDetails.empty().copyWith(

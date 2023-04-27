@@ -10,6 +10,7 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/constants.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/account/dtos/access_right_dto.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/role_dto.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/sales_organisation_dto.dart';
 import 'package:ezrxmobile/infrastructure/core/common/dto_helper.dart';
@@ -34,6 +35,7 @@ class UserDto with _$UserDto {
     @_SalesOrganisationListConverter()
     @JsonKey(name: 'userSalesOrganisationList', defaultValue: [])
         required List<SalesOrganisationDto> userSalesOrganisations,
+    @JsonKey(name: 'accessRight') required AccessRightDto accessRight,
     @JsonKey(name: 'emailNotifications', defaultValue: false)
         required bool emailNotifications,
     @JsonKey(name: 'mobileNotifications', defaultValue: false)
@@ -68,6 +70,7 @@ class UserDto with _$UserDto {
       role: RoleDto.fromDomain(user.role),
       customerCode: user.customerCode.getOrCrash(),
       userSalesOrganisations: _splitSalesOrg(user.userSalesOrganisations),
+      accessRight: AccessRightDto.fromDomain(user.accessRight),
       emailNotifications: user.settings.emailNotifications,
       mobileNotifications: user.settings.mobileNotifications,
       languagePreference: user.settings.languagePreference
@@ -84,10 +87,21 @@ class UserDto with _$UserDto {
       hasPriceOverride: user.hasPriceOverride,
     );
   }
+  static const emptyAccessRight = AccessRightDto(
+    users: false,
+    orders: false,
+    promos: false,
+    hCPHUB: false,
+    products: false,
+    services: false,
+    analytics: false,
+    loyaltyScheme: false,
+  );
   static const emptyUserDto = UserDto(
     acceptPrivacyPolicy: false,
     acceptPrivacyPolicyTime: '',
     customerCode: '',
+    accessRight: emptyAccessRight,
     email: '',
     emailNotifications: false,
     enableOrderType: false,
@@ -118,6 +132,7 @@ class UserDto with _$UserDto {
       ),
       customerCode: CustomerCode(customerCode),
       userSalesOrganisations: _mergeSalesOrg(userSalesOrganisations),
+      accessRight: accessRight.toDomain(),
       settings: Settings(
         emailNotifications: emailNotifications,
         mobileNotifications: mobileNotifications,

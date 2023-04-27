@@ -49,7 +49,7 @@ class HistoryDetails extends StatelessWidget {
       MixpanelEvents.orderDetailPageView,
     );
     final disableCreateOrder =
-        context.read<UserBloc>().state.user.disableCreateOrder;
+        !context.read<UserBloc>().state.userCanCreateOrder;
 
     return MultiBlocListener(
       listeners: [

@@ -24,6 +24,7 @@ mixin _$User {
   CustomerCode get customerCode => throw _privateConstructorUsedError;
   List<SalesOrganisation> get userSalesOrganisations =>
       throw _privateConstructorUsedError;
+  AccessRight get accessRight => throw _privateConstructorUsedError;
   Settings get settings => throw _privateConstructorUsedError;
   SettingTc get settingTc => throw _privateConstructorUsedError;
   bool get enableOrderType => throw _privateConstructorUsedError;
@@ -49,6 +50,7 @@ abstract class $UserCopyWith<$Res> {
       Role role,
       CustomerCode customerCode,
       List<SalesOrganisation> userSalesOrganisations,
+      AccessRight accessRight,
       Settings settings,
       SettingTc settingTc,
       bool enableOrderType,
@@ -59,6 +61,7 @@ abstract class $UserCopyWith<$Res> {
 
   $FullNameCopyWith<$Res> get fullName;
   $RoleCopyWith<$Res> get role;
+  $AccessRightCopyWith<$Res> get accessRight;
   $SettingsCopyWith<$Res> get settings;
   $SettingTcCopyWith<$Res> get settingTc;
 }
@@ -83,6 +86,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? role = null,
     Object? customerCode = null,
     Object? userSalesOrganisations = null,
+    Object? accessRight = null,
     Object? settings = null,
     Object? settingTc = null,
     Object? enableOrderType = null,
@@ -120,6 +124,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.userSalesOrganisations
           : userSalesOrganisations // ignore: cast_nullable_to_non_nullable
               as List<SalesOrganisation>,
+      accessRight: null == accessRight
+          ? _value.accessRight
+          : accessRight // ignore: cast_nullable_to_non_nullable
+              as AccessRight,
       settings: null == settings
           ? _value.settings
           : settings // ignore: cast_nullable_to_non_nullable
@@ -169,6 +177,14 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
 
   @override
   @pragma('vm:prefer-inline')
+  $AccessRightCopyWith<$Res> get accessRight {
+    return $AccessRightCopyWith<$Res>(_value.accessRight, (value) {
+      return _then(_value.copyWith(accessRight: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
   $SettingsCopyWith<$Res> get settings {
     return $SettingsCopyWith<$Res>(_value.settings, (value) {
       return _then(_value.copyWith(settings: value) as $Val);
@@ -198,6 +214,7 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       Role role,
       CustomerCode customerCode,
       List<SalesOrganisation> userSalesOrganisations,
+      AccessRight accessRight,
       Settings settings,
       SettingTc settingTc,
       bool enableOrderType,
@@ -210,6 +227,8 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
   $FullNameCopyWith<$Res> get fullName;
   @override
   $RoleCopyWith<$Res> get role;
+  @override
+  $AccessRightCopyWith<$Res> get accessRight;
   @override
   $SettingsCopyWith<$Res> get settings;
   @override
@@ -232,6 +251,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
     Object? role = null,
     Object? customerCode = null,
     Object? userSalesOrganisations = null,
+    Object? accessRight = null,
     Object? settings = null,
     Object? settingTc = null,
     Object? enableOrderType = null,
@@ -269,6 +289,10 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
           ? _value._userSalesOrganisations
           : userSalesOrganisations // ignore: cast_nullable_to_non_nullable
               as List<SalesOrganisation>,
+      accessRight: null == accessRight
+          ? _value.accessRight
+          : accessRight // ignore: cast_nullable_to_non_nullable
+              as AccessRight,
       settings: null == settings
           ? _value.settings
           : settings // ignore: cast_nullable_to_non_nullable
@@ -312,6 +336,7 @@ class _$_User extends _User {
       required this.role,
       required this.customerCode,
       required final List<SalesOrganisation> userSalesOrganisations,
+      required this.accessRight,
       required this.settings,
       required this.settingTc,
       required this.enableOrderType,
@@ -342,6 +367,8 @@ class _$_User extends _User {
   }
 
   @override
+  final AccessRight accessRight;
+  @override
   final Settings settings;
   @override
   final SettingTc settingTc;
@@ -358,7 +385,7 @@ class _$_User extends _User {
 
   @override
   String toString() {
-    return 'User(id: $id, username: $username, email: $email, fullName: $fullName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, settings: $settings, settingTc: $settingTc, enableOrderType: $enableOrderType, hasBonusOverride: $hasBonusOverride, disableCreateOrder: $disableCreateOrder, disableReturns: $disableReturns, hasPriceOverride: $hasPriceOverride)';
+    return 'User(id: $id, username: $username, email: $email, fullName: $fullName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, accessRight: $accessRight, settings: $settings, settingTc: $settingTc, enableOrderType: $enableOrderType, hasBonusOverride: $hasBonusOverride, disableCreateOrder: $disableCreateOrder, disableReturns: $disableReturns, hasPriceOverride: $hasPriceOverride)';
   }
 
   @override
@@ -377,6 +404,8 @@ class _$_User extends _User {
                 other.customerCode == customerCode) &&
             const DeepCollectionEquality().equals(
                 other._userSalesOrganisations, _userSalesOrganisations) &&
+            (identical(other.accessRight, accessRight) ||
+                other.accessRight == accessRight) &&
             (identical(other.settings, settings) ||
                 other.settings == settings) &&
             (identical(other.settingTc, settingTc) ||
@@ -403,6 +432,7 @@ class _$_User extends _User {
       role,
       customerCode,
       const DeepCollectionEquality().hash(_userSalesOrganisations),
+      accessRight,
       settings,
       settingTc,
       enableOrderType,
@@ -427,6 +457,7 @@ abstract class _User extends User {
       required final Role role,
       required final CustomerCode customerCode,
       required final List<SalesOrganisation> userSalesOrganisations,
+      required final AccessRight accessRight,
       required final Settings settings,
       required final SettingTc settingTc,
       required final bool enableOrderType,
@@ -450,6 +481,8 @@ abstract class _User extends User {
   CustomerCode get customerCode;
   @override
   List<SalesOrganisation> get userSalesOrganisations;
+  @override
+  AccessRight get accessRight;
   @override
   Settings get settings;
   @override

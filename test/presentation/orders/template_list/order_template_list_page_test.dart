@@ -10,6 +10,7 @@ import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/access_right.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/order_template.dart';
@@ -99,7 +100,8 @@ void main() {
     mockEligiblityBloc = EligibilityBlocMock();
     authBlocMock = AuthBlocMock();
     announcementBlocMock = AnnouncementBlocMock();
-    when(() => userBloc.state).thenReturn(UserState.initial());
+    when(() => userBloc.state).thenReturn(UserState.initial().copyWith(
+        user: User.empty().copyWith(accessRight: AccessRight.empty())));
     when(() => orderTemplateListBloc.state)
         .thenReturn(OrderTemplateListState.initial());
     when(() => cartBloc.state).thenReturn(CartState.initial());
@@ -148,6 +150,16 @@ void main() {
       when(() => orderTemplateListBloc.state).thenReturn(
         OrderTemplateListState.initial().copyWith(
           isFetching: true,
+        ),
+      );
+
+      when(() => userBloc.state).thenReturn(
+        UserState.initial().copyWith(
+          user: User.empty().copyWith(
+            accessRight: AccessRight.empty().copyWith(
+              orders: true,
+            ),
+          ),
         ),
       );
 

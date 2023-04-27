@@ -18,6 +18,7 @@ import 'package:ezrxmobile/application/order/material_price/material_price_bloc.
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/entities/access_right.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
@@ -318,6 +319,13 @@ void main() {
     }
 
     testWidgets('Page Initialized', (tester) async {
+      when(() => userBlocMock.state).thenReturn(
+        UserState.initial().copyWith(
+            user: User.empty().copyWith(
+                accessRight: AccessRight.empty().copyWith(
+          orders: true,
+        ))),
+      );
       await tester.pumpWidget(getScopedWidget(const MaterialRoot()));
       final covidTabTitle = find.text('COVID-19');
       expect(covidTabTitle, findsOneWidget);

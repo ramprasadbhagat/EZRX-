@@ -42,7 +42,7 @@ class OrderItemBonusCard extends StatelessWidget {
     final enableDisplayOrderDiscount = salesOrgConfigs.displayOrderDiscount;
     final enableRemark = salesOrgConfigs.enableRemarks;
     final disableCreateOrder =
-        context.read<UserBloc>().state.user.disableCreateOrder;
+        !context.read<UserBloc>().state.userCanCreateOrder;
     final enableOHPrice = salesOrgConfigs.enableOHPrice;
 
     return BlocBuilder<OrderHistoryDetailsBloc, OrderHistoryDetailsState>(

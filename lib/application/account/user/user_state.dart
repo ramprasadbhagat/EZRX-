@@ -26,5 +26,13 @@ class UserState with _$UserState {
   List<SalesOrganisation> get userSalesOrganisations =>
       user.userSalesOrganisations;
   bool get userCanCreateOrder =>
-      isNotEmpty && !(user.disableCreateOrder || user.role.type.isReturnRole);
+      isNotEmpty && !(isCreateOrderDisabled || user.role.type.isReturnRole);
+  bool get showHistoryTab => user.role.type.isCustomer
+      ? user.accessRight.orders && user.disableCreateOrder
+      : false;
+  bool get isCreateOrderDisabled => user.role.type.isCustomer
+      ? user.accessRight.orders
+          ? user.disableCreateOrder
+          : true
+      : !user.accessRight.orders;
 }

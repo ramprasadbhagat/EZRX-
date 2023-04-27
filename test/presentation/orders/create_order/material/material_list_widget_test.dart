@@ -22,6 +22,7 @@ import 'package:ezrxmobile/application/order/order_history_details/order_history
 import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/entities/access_right.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
@@ -364,6 +365,11 @@ void main() {
 
   group('Material List Test', () {
     testWidgets('Matrials List Page Initialized', (tester) async {
+      when(() => userBlocMock.state).thenReturn(UserState.initial().copyWith(
+          user: User.empty().copyWith(
+              accessRight: AccessRight.empty().copyWith(
+        orders: true,
+      ))));
       when(() => materialListBlocMock.state)
           .thenReturn(MaterialListState.initial());
       await tester.pumpWidget(getScopedWidget(const MaterialRoot()));

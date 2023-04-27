@@ -165,10 +165,16 @@ class HomeNavigationTabbar extends StatelessWidget {
 
 List<RouteItem> _getTabs(BuildContext context) {
   if (!context.read<UserBloc>().state.userCanCreateOrder) {
-    return [
-      homeTabRouteItem,
-      accountTabRouteItem,
-    ];
+    return context.read<UserBloc>().state.showHistoryTab
+        ? [
+            homeTabRouteItem,
+            historyTabRouteItem,
+            accountTabRouteItem,
+          ]
+        : [
+            homeTabRouteItem,
+            accountTabRouteItem,
+          ];
   }
 
   return [

@@ -14,6 +14,7 @@ import 'package:ezrxmobile/application/order/material_bundle_list/material_bundl
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/entities/access_right.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
@@ -227,6 +228,11 @@ void main() {
           .thenReturn(MaterialPriceDetailState.initial().copyWith(
         isFetching: true,
       ));
+      when((() => userMockBloc.state)).thenReturn(UserState.initial().copyWith(
+          user: User.empty().copyWith(
+              accessRight: AccessRight.empty().copyWith(
+        orders: true,
+      ))));
       whenListen(
           materialPriceDetailMockBloc,
           Stream.fromIterable([
@@ -260,6 +266,12 @@ void main() {
     });
 
     testWidgets('Page Initialized', (tester) async {
+      when((() => userMockBloc.state)).thenReturn(UserState.initial().copyWith(
+        user: User.empty().copyWith(
+            accessRight: AccessRight.empty().copyWith(
+          orders: true,
+        )),
+      ));
       await tester.pumpWidget(
         getScopedWidget(
           BundleItemDetailPage(
@@ -359,6 +371,12 @@ void main() {
     );
 
     testWidgets('Add to cart test', (tester) async {
+      when((() => userMockBloc.state)).thenReturn(UserState.initial().copyWith(
+        user: User.empty().copyWith(
+            accessRight: AccessRight.empty().copyWith(
+          orders: true,
+        )),
+      ));
       await tester.pumpWidget(
         getScopedWidget(
           BundleItemDetailPage(
@@ -557,6 +575,9 @@ void main() {
         final fakeUser = User.empty().copyWith(
           username: Username('fakeUser'),
           disableCreateOrder: false,
+          accessRight: AccessRight.empty().copyWith(
+            orders: true,
+          ),
           role: Role(
             type: RoleType('fakeRole'),
             description: '',

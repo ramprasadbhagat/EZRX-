@@ -23,13 +23,14 @@ class OrdersExpansionTile extends StatelessWidget {
     return BlocBuilder<UserBloc, UserState>(
       buildWhen: (previous, current) =>
           previous.user != current.user ||
-          previous.user.disableCreateOrder != current.user.disableCreateOrder,
+          previous.userCanCreateOrder != current.userCanCreateOrder,
       builder: (context, state) {
         final homePageTiles = _getHomePageTiles(state.userCanCreateOrder);
 
-        return state.user.disableCreateOrder
+        return !state.userCanCreateOrder
             ? const SizedBox.shrink()
             : custom.ExpansionTile(
+                key: const Key('orderExpansionTile'),
                 initiallyExpanded: true,
                 title: Padding(
                   padding: const EdgeInsets.only(left: 15),

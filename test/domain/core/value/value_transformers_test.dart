@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/account/entities/access_right.dart';
 import 'package:ezrxmobile/domain/account/entities/full_name.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/setting_tc.dart';
@@ -312,6 +313,7 @@ void main() {
           id: '1',
           username: Username('choo'),
           email: EmailAddress('abc@gmail.com'),
+          accessRight: AccessRight.empty(),
           fullName: const FullName(firstName: 'dipankar', lastName: 'das'),
           role: Role(
               id: '2',
@@ -341,6 +343,7 @@ void main() {
           id: '1',
           username: Username('choo'),
           email: EmailAddress('abc@gmail.com'),
+          accessRight: AccessRight.empty(),
           fullName: const FullName(firstName: 'dipankar', lastName: 'das'),
           role: Role(
               id: '2',
@@ -370,6 +373,7 @@ void main() {
           id: '1',
           username: Username('choo'),
           email: EmailAddress('abc@gmail.com'),
+          accessRight: AccessRight.empty(),
           fullName: const FullName(firstName: 'dipankar', lastName: 'das'),
           role: Role(
               id: '2',
@@ -399,6 +403,7 @@ void main() {
           id: '1',
           username: Username('choo'),
           email: EmailAddress('abc@gmail.com'),
+          accessRight: AccessRight.empty(),
           fullName: const FullName(firstName: 'dipankar', lastName: 'das'),
           role: Role(
               id: '2',

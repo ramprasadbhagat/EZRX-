@@ -10,6 +10,7 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_list_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/access_right.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
@@ -131,7 +132,10 @@ void main() {
     announcementBlocMock = AnnouncementBlocMock();
     when(() => userBlocMock.state).thenReturn(
       UserState.initial().copyWith(
-        user: fakeUser,
+        user: fakeUser.copyWith(
+            accessRight: AccessRight.empty().copyWith(
+          orders: true,
+        )),
       ),
     );
     when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
@@ -274,6 +278,11 @@ void main() {
         final expectedStates = [
           MaterialPriceDetailState.initial().copyWith(isValidating: false)
         ];
+        when(() => userBlocMock.state).thenReturn(UserState.initial().copyWith(
+            user: User.empty().copyWith(
+                accessRight: AccessRight.empty().copyWith(
+          orders: true,
+        ))));
 
         whenListen(
             materialPriceDetailBlocMock, Stream.fromIterable(expectedStates));
@@ -338,6 +347,15 @@ void main() {
                           isFOC: true,
                         ),
             },
+          ),
+        );
+        when(() => userBlocMock.state).thenReturn(
+          UserState.initial().copyWith(
+            user: User.empty().copyWith(
+              accessRight: AccessRight.empty().copyWith(
+                orders: true,
+              ),
+            ),
           ),
         );
         await tester.pumpWidget(orderTemplateDetailPage());
@@ -648,6 +666,9 @@ void main() {
         final fakeUser = User.empty().copyWith(
           username: Username('fakeUser'),
           disableCreateOrder: false,
+          accessRight: AccessRight.empty().copyWith(
+            orders: true,
+          ),
           role: Role(
             type: RoleType('fakeRole'),
             description: '',
@@ -663,6 +684,8 @@ void main() {
             user: fakeUser,
           ),
         );
+        tester.binding.window.physicalSizeTestValue = const Size(1080, 1920);
+        tester.binding.window.devicePixelRatioTestValue = 1.0;
 
         await tester.pumpWidget(orderTemplateDetailPage());
         await tester.pump();

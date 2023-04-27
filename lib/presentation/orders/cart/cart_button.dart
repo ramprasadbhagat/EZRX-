@@ -13,7 +13,7 @@ class CartButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final disableCreateOrder =
-        context.read<UserBloc>().state.user.disableCreateOrder;
+        !context.read<UserBloc>().state.userCanCreateOrder;
 
     return disableCreateOrder
         ? const SizedBox.shrink()
