@@ -63,16 +63,17 @@ stages:
         script: |
           fvm flutter build ipa --flavor uat -t lib/main_uat.dart --release --export-options-plist=ios/config/uat/exportOptions.plist
 
-    - task: AppCenterDistribute@3
-      displayName: Upload to Microsoft Appcenter
-      inputs:
-        serverEndpoint: 'eZRx Uat Appcenter IOS'
-        appSlug: '$(APPCENTER_APP_SLUG_UAT_IOS)'
-        appFile: 'build/ios/ipa/*.ipa'
-        destinationType: 'groups'
-        destinationGroupIds: '$(APPCENTER_DESTINATION_GROUP_IDS_UAT)'
-        releaseNotesInput: 'uat release'
-        isSilent: true
+    # We need Adhoc build + need to add user to the developer device list, no benefit to do this instead using TestFlight
+    # - task: AppCenterDistribute@3
+    #   displayName: Upload to Microsoft Appcenter
+    #   inputs:
+    #     serverEndpoint: 'eZRx Uat Appcenter IOS'
+    #     appSlug: '$(APPCENTER_APP_SLUG_UAT_IOS)'
+    #     appFile: 'build/ios/ipa/*.ipa'
+    #     destinationType: 'groups'
+    #     destinationGroupIds: '$(APPCENTER_DESTINATION_GROUP_IDS_UAT)'
+    #     releaseNotesInput: 'uat release'
+    #     isSilent: true
     
     - task: AppStoreRelease@1
       displayName: 'Upload to the App Store TestFlight track'
