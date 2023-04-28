@@ -1,4 +1,4 @@
-import 'package:ezrxmobile/domain/announcement/entities/announcement.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +31,7 @@ class WebViewPageState extends State<WebViewPage> {
         ),
       ),
       body: AnnouncementBanner(
-        appModule: AppModule.core,
+        currentPath: context.router.currentPath,
         child: errorLoadingUrl
             ? Center(
                 key: const ValueKey('errorLoadingUrl'),
@@ -54,7 +54,8 @@ class WebViewPageState extends State<WebViewPage> {
                         mediaPlaybackRequiresUserGesture: false,
                       ),
                     ),
-                    onWebViewCreated: (InAppWebViewController webViewController) {
+                    onWebViewCreated:
+                        (InAppWebViewController webViewController) {
                       controller = webViewController;
                     },
                     onLoadStart: ((controller, url) {

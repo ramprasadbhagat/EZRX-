@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:ezrxmobile/domain/announcement/entities/announcement.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
@@ -71,7 +70,7 @@ class _ScanMaterialInfoState extends State<ScanMaterialInfo>
           ),
           body: SafeArea(
             child: AnnouncementBanner(
-              appModule: AppModule.orders,
+              currentPath: context.router.currentPath,
               child: scanMaterialInfoBloc.dataCaptureView,
             ),
           ),

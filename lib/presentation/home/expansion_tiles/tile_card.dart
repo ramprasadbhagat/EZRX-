@@ -17,12 +17,12 @@ class TileCard extends StatelessWidget {
       key: ValueKey(homePageTile.routeName),
       onTap: () {
         switch (homePageTile.routeName) {
-          case 'saved_order_list':
+          case 'orders/saved_order_list':
             trackMixpanelEvent(
               MixpanelEvents.savedOrder,
             );
             break;
-          case 'order_template_list_page':
+          case 'orders/order_template_list':
             trackMixpanelEvent(
               MixpanelEvents.createOrderFromTemplate,
             );

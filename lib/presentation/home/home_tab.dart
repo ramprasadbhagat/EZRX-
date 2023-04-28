@@ -1,4 +1,3 @@
-import 'package:ezrxmobile/domain/announcement/entities/announcement.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
@@ -12,6 +11,7 @@ import 'package:ezrxmobile/presentation/home/selector/shipping_address_selector.
 import 'package:ezrxmobile/presentation/orders/cart/cart_button.dart';
 import 'package:ezrxmobile/presentation/orders/core/account_suspended_warning.dart';
 import 'package:ezrxmobile/presentation/orders/core/edi_user_banner.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -50,8 +50,8 @@ class HomeTab extends StatelessWidget {
       ),
       body: ListView(
         children: [
-          const AnnouncementWidget(
-            appModule: AppModule.home,
+          AnnouncementWidget(
+            currentPath: const HomeTabRoute().path,
           ),
           const EdiUserBanner(),
           const AccountSuspendedBanner(),

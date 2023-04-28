@@ -251,29 +251,29 @@ const requestReturnTile = HomePageTile(
   key: Key('requestReturnTile'),
   title: 'Request return',
   icon: Icons.pending_actions_outlined,
-  routeName: 'request_return',
+  routeName: 'returns/request_return',
 );
 const approverActionsTile = HomePageTile(
   key: Key('approverActionsTile'),
   title: 'Approver actions',
   icon: Icons.rule_outlined,
-  routeName: 'approver_actions',
+  routeName: 'returns/approver_actions',
 );
 const returnSummaryTile = HomePageTile(
   key: Key('returnSummaryTile'),
   title: 'Return Summary',
   icon: Icons.summarize_outlined,
-  routeName: 'return_summary',
+  routeName: 'returns/return_summary',
 );
 const userRestrictionTile = HomePageTile(
   key: Key('userRestrictionTile'),
   title: 'User Restriction',
   icon: Icons.admin_panel_settings_outlined,
-  routeName: 'user_restriction',
+  routeName: 'returns/user_restrictions',
 );
 const policyConfigurationTile = HomePageTile(
   key: Key('policyConfigurationTile'),
   title: 'Policy Configuration',
   icon: Icons.policy_outlined,
-  routeName: 'policy_configuration',
+  routeName: 'returns/policy_configuration',
 );

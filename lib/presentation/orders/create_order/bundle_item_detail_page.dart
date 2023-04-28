@@ -8,7 +8,6 @@ import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/domain/banner/entities/banner.dart';
-import 'package:ezrxmobile/domain/announcement/entities/announcement.dart';
 import 'package:ezrxmobile/domain/core/aggregate/bundle_aggregate.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
@@ -59,7 +58,7 @@ class BundleItemDetailPage extends StatelessWidget {
         ),
       ),
       body: AnnouncementBanner(
-        appModule: AppModule.orders,
+        currentPath: context.router.currentPath,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
@@ -212,7 +211,7 @@ class BundleItemDetailPage extends StatelessWidget {
         );
 
     //TODO: Will revisit
-    context.router.pushNamed('cart_page');
+    context.router.pushNamed('orders/cart');
   }
 }
 

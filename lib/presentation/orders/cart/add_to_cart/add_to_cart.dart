@@ -1,10 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
-import 'package:ezrxmobile/domain/announcement/entities/announcement.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -54,7 +54,7 @@ class AddToCart extends StatelessWidget {
         ],
       ),
       body: AnnouncementBanner(
-        appModule: AppModule.orders,
+        currentPath: context.router.currentPath,
         child: Padding(
           padding: const EdgeInsets.all(15),
           child: BlocBuilder<AddToCartBloc, AddToCartState>(

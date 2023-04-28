@@ -26,7 +26,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import '../../utils/material_frame_wrapper.dart';
 import '../../utils/tester_utils.dart';
 import '../../utils/widget_utils.dart';
 
@@ -51,7 +50,10 @@ class CustomerCodeBlocMock
 class ShipToCodeBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState>
     implements ShipToCodeBloc {}
 
-class AutoRouterMock extends Mock implements AppRouter {}
+class AutoRouterMock extends Mock implements AppRouter {
+  @override
+  String currentPath = '';
+}
 
 class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
 
@@ -148,7 +150,8 @@ void main() {
         ),
       );
       await tester.pumpWidget(
-        MaterialFrameWrapper(
+        WidgetUtils.getScopedWidget(
+          autoRouterMock: autoRouterMock,
           child: MultiBlocProvider(
             providers: [
               BlocProvider<AupTcBloc>(
@@ -243,7 +246,8 @@ void main() {
       ),
     );
     await tester.pumpWidget(
-      MaterialFrameWrapper(
+      WidgetUtils.getScopedWidget(
+        autoRouterMock: autoRouterMock,
         child: MultiBlocProvider(
           providers: [
             BlocProvider<AuthBloc>(create: (context) => authBlocMock),
@@ -277,7 +281,8 @@ void main() {
       ),
     );
     await tester.pumpWidget(
-      MaterialFrameWrapper(
+      WidgetUtils.getScopedWidget(
+        autoRouterMock: autoRouterMock,
         child: MultiBlocProvider(
           providers: [
             BlocProvider<AuthBloc>(create: (context) => authBlocMock),

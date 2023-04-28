@@ -1,6 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/domain/announcement/entities/announcement.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
@@ -27,7 +27,7 @@ class ContactUsPage extends StatelessWidget {
         title: const Text('Contact Us').tr(),
       ),
       body: AnnouncementBanner(
-        appModule: AppModule.core,
+        currentPath: context.router.currentPath,
         child: BlocBuilder<SalesOrgBloc, SalesOrgState>(
           buildWhen: (previous, current) =>
               previous.salesOrg != current.salesOrg,

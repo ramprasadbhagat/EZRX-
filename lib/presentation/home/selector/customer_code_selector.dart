@@ -51,7 +51,7 @@ class CustomerCodeSelector extends StatelessWidget {
           title: 'Customer Code'.tr(),
           onTap: state.isFetching
               ? null
-              : () => context.router.pushNamed('customer_search_page'),
+              : () => context.router.pushNamed('customer_search'),
           child: state.isFetching
               ? LoadingShimmer.tile()
               : FittedBox(

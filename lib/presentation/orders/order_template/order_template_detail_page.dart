@@ -5,7 +5,6 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_list_bloc.dart';
-import 'package:ezrxmobile/domain/announcement/entities/announcement.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item.dart';
@@ -96,7 +95,7 @@ class _OrderTemplateDetailPageState extends State<OrderTemplateDetailPage> {
               );
         },
         child: AnnouncementBanner(
-          appModule: AppModule.orders,
+          currentPath: context.router.currentPath,
           child: CustomScrollView(
             slivers: [
               BlocBuilder<MaterialPriceDetailBloc, MaterialPriceDetailState>(

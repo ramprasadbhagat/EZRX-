@@ -1,7 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
-import 'package:ezrxmobile/domain/announcement/entities/announcement.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
@@ -110,8 +110,8 @@ class _LoginPageState extends State<LoginPage> {
                       padding: const EdgeInsets.symmetric(horizontal: 10.0),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(10),
-                        child: const AnnouncementWidget(
-                          appModule: AppModule.core,
+                        child: AnnouncementWidget(
+                          currentPath: context.router.currentPath,
                         ),
                       ),
                     ),

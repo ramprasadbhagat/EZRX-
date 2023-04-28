@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/domain/announcement/entities/announcement.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -22,9 +21,9 @@ class OrderSuccessPage extends StatelessWidget {
         ),
         title: const Text('Order Confirmation').tr(),
       ),
-      body: const AnnouncementBanner(
-        appModule: AppModule.orders,
-        child: _BodyContent(),
+      body: AnnouncementBanner(
+        currentPath: context.router.currentPath,
+        child: const _BodyContent(),
       ),
     );
   }

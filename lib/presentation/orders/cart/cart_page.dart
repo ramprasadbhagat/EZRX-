@@ -9,7 +9,6 @@ import 'package:ezrxmobile/application/order/additional_details/additional_detai
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
-import 'package:ezrxmobile/domain/announcement/entities/announcement.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
@@ -81,8 +80,8 @@ class CartPage extends StatelessWidget {
           ),
           body: Column(
             children: [
-              const AnnouncementWidget(
-                appModule: AppModule.orders,
+              AnnouncementWidget(
+                currentPath: context.router.currentPath,
               ),
               const AccountSuspendedBanner(),
               Expanded(
@@ -244,7 +243,7 @@ class CartPage extends StatelessWidget {
                 ),
           ),
         );
-    context.router.pushNamed('order_summary');
+    context.router.pushNamed('orders/order_summary');
   }
 }
 

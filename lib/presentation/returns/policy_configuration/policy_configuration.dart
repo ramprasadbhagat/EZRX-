@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/returns/policy_configuration/policy_configuration_bloc.dart';
-import 'package:ezrxmobile/domain/announcement/entities/announcement.dart';
 import 'package:ezrxmobile/domain/returns/entities/policy_configuration.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
@@ -38,7 +37,7 @@ class PolicyConfigurationPage extends StatelessWidget {
         child: CustomAppBar(child: _PolicyConfigurationSearch()),
       ),
       body: AnnouncementBanner(
-        appModule: AppModule.returns,
+        currentPath: context.router.currentPath,
         child: BlocConsumer<PolicyConfigurationBloc, PolicyConfigurationState>(
           listenWhen: (previous, current) =>
               previous.failureOrSuccessOption != current.failureOrSuccessOption,

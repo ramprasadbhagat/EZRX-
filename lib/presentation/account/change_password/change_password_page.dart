@@ -1,8 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
-import 'package:ezrxmobile/domain/announcement/entities/announcement.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
@@ -34,7 +34,7 @@ class ChangePasswordPage extends StatelessWidget {
         title: const Text('Change Password').tr(),
       ),
       body: AnnouncementBanner(
-        appModule: AppModule.core,
+        currentPath: context.router.currentPath,
         child: ListView(
           padding: const EdgeInsets.all(15.0),
           children: <Widget>[

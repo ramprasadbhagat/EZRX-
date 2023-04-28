@@ -1,8 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
-import 'package:ezrxmobile/domain/announcement/entities/announcement.dart';
 import 'package:ezrxmobile/domain/order/entities/order_template.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
@@ -53,8 +53,8 @@ class OrderTemplateListPage extends StatelessWidget {
         builder: (context, state) {
           return Column(
             children: [
-              const AnnouncementWidget(
-                appModule: AppModule.orders,
+              AnnouncementWidget(
+                currentPath: context.router.currentPath,
               ),
               const AccountSuspendedBanner(),
               Expanded(

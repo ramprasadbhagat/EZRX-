@@ -91,7 +91,8 @@ class ShipCodeSelector extends StatelessWidget {
                       salesOrgConfigs: salesOrgState.configs,
                       customerCodeInfo: customerCodeInfo,
                       shipToInfo: state.shipToInfo,
-                      selectedOrderType: orderDocumentTypeState.selectedOrderType,
+                      selectedOrderType:
+                          orderDocumentTypeState.selectedOrderType,
                     ),
                   );
               context.read<ReturnSummaryBloc>().add(
@@ -223,7 +224,7 @@ class ShipCodeSelector extends StatelessWidget {
               title: 'Shipping Address'.tr(),
               onTap: customerCodeState.isFetching
                   ? null
-                  : () => context.router.pushNamed('ship_to_search_page'),
+                  : () => context.router.pushNamed('ship_to_search'),
               child: customerCodeState.isFetching
                   ? LoadingShimmer.tile()
                   : FittedBox(

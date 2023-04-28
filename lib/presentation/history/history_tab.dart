@@ -8,7 +8,6 @@ import 'package:ezrxmobile/application/order/order_history_filter/order_history_
 import 'package:ezrxmobile/application/order/order_history_filter_by_status/order_history_filter_by_status_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
-import 'package:ezrxmobile/domain/announcement/entities/announcement.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
@@ -24,6 +23,7 @@ import 'package:ezrxmobile/presentation/history/history_filter.dart';
 import 'package:ezrxmobile/presentation/history/history_filter_by_status.dart';
 import 'package:ezrxmobile/presentation/history/history_tile.dart';
 import 'package:ezrxmobile/presentation/orders/core/account_suspended_warning.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -244,8 +244,8 @@ class HistoryTab extends StatelessWidget {
                     : Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const AnnouncementWidget(
-                            appModule: AppModule.orders,
+                          AnnouncementWidget(
+                            currentPath: HistoryTabRoute().path,
                           ),
                           const AccountSuspendedBanner(),
                           if (context

@@ -411,59 +411,59 @@ class AppRouter extends _i40.RootStackRouter {
         ),
         _i40.RouteConfig(
           RequestReturnRoute.name,
-          path: 'request_return',
+          path: 'returns/request_return',
         ),
         _i40.RouteConfig(
           ApproverActionsRoute.name,
-          path: 'approver_actions',
+          path: 'returns/approver_actions',
         ),
         _i40.RouteConfig(
           ReturnSummaryRoute.name,
-          path: 'return_summary',
+          path: 'returns/return_summary',
         ),
         _i40.RouteConfig(
           UserRestrictionListPageRoute.name,
-          path: 'user_restriction',
+          path: 'returns/user_restrictions',
         ),
         _i40.RouteConfig(
           PolicyConfigurationPageRoute.name,
-          path: 'policy_configuration',
+          path: 'returns/policy_configuration',
         ),
         _i40.RouteConfig(
           AddPolicyConfigurationRoute.name,
-          path: 'add_policy_config',
+          path: 'returns/add_policy_config',
         ),
         _i40.RouteConfig(
           WebViewPageRoute.name,
-          path: 'web_view_page',
+          path: 'web_view',
         ),
         _i40.RouteConfig(
           ChangePasswordPageRoute.name,
-          path: 'change_password_page',
+          path: 'change_password',
         ),
         _i40.RouteConfig(
           ContactUsPageRoute.name,
-          path: 'contact_us_page',
+          path: 'contact_us',
         ),
         _i40.RouteConfig(
           NotificationSettingsPageRoute.name,
-          path: 'notification_settings_page',
+          path: 'notification_settings',
         ),
         _i40.RouteConfig(
           CustomerSearchPageRoute.name,
-          path: 'customer_search_page',
+          path: 'customer_search',
         ),
         _i40.RouteConfig(
           ShiptToSearchPageRoute.name,
-          path: 'ship_to_search_page',
+          path: 'ship_to_search',
         ),
         _i40.RouteConfig(
           MaterialRootRoute.name,
-          path: 'material_list_page',
+          path: 'orders/material_list',
         ),
         _i40.RouteConfig(
           MaterialFilterPageRoute.name,
-          path: 'material_filter_page',
+          path: 'orders/material_filter',
         ),
         _i40.RouteConfig(
           AupTCDialogRoute.name,
@@ -471,23 +471,23 @@ class AppRouter extends _i40.RootStackRouter {
         ),
         _i40.RouteConfig(
           OrderTemplateListPageRoute.name,
-          path: 'order_template_list_page',
+          path: 'orders/order_template_list',
         ),
         _i40.RouteConfig(
           CartPageRoute.name,
-          path: 'cart_page',
+          path: 'orders/cart',
         ),
         _i40.RouteConfig(
           OrderSummaryPageRoute.name,
-          path: 'order_summary',
+          path: 'orders/order_summary',
         ),
         _i40.RouteConfig(
           OrderSuccessPageRoute.name,
-          path: 'order_confirmation',
+          path: 'orders/order_confirmation',
         ),
         _i40.RouteConfig(
           OrderTemplateDetailPageRoute.name,
-          path: 'order_template_detail_page',
+          path: 'orders/order_template_detail',
         ),
         _i40.RouteConfig(
           HomeNavigationTabbarRoute.name,
@@ -495,65 +495,65 @@ class AppRouter extends _i40.RootStackRouter {
           children: [
             _i40.RouteConfig(
               HomeTabRoute.name,
-              path: 'home-tab',
+              path: 'home',
               parent: HomeNavigationTabbarRoute.name,
             ),
             _i40.RouteConfig(
               HistoryTabRoute.name,
-              path: 'history-tab',
+              path: 'orders/history',
               parent: HomeNavigationTabbarRoute.name,
             ),
             _i40.RouteConfig(
               FavouritesTabRoute.name,
-              path: 'favourites-tab',
+              path: 'orders/favourites',
               parent: HomeNavigationTabbarRoute.name,
             ),
             _i40.RouteConfig(
               AccountTabRoute.name,
-              path: 'account-tab',
+              path: 'core/account',
               parent: HomeNavigationTabbarRoute.name,
             ),
           ],
         ),
         _i40.RouteConfig(
           SavedOrderListPageRoute.name,
-          path: 'saved_order_list',
+          path: 'orders/saved_order_list',
         ),
         _i40.RouteConfig(
           SavedOrderDetailPageRoute.name,
-          path: 'saved_order_detail',
+          path: 'orders/saved_order_detail',
         ),
         _i40.RouteConfig(
           HistoryDetailsRoute.name,
-          path: 'history_details',
+          path: 'orders/history_details',
         ),
         _i40.RouteConfig(
           BonusAddPageRoute.name,
-          path: 'add_bonus',
+          path: 'orders/add_bonus',
         ),
         _i40.RouteConfig(
           AddEditUserRestrictionPageRoute.name,
-          path: 'add_edit_user_restriction',
+          path: 'returns/add_edit_user_restriction',
         ),
         _i40.RouteConfig(
           ScanMaterialInfoRoute.name,
-          path: 'scan_material_info',
+          path: 'orders/scan_material_info',
         ),
         _i40.RouteConfig(
           ReturnSummaryDetailsRoute.name,
-          path: 'return_summary_details',
+          path: 'returns/return_summary_details',
         ),
         _i40.RouteConfig(
           BundleItemDetailPageRoute.name,
-          path: 'bundle_item_detail',
+          path: 'orders/bundle_item_detail',
         ),
         _i40.RouteConfig(
           ComboDealMaterialDetailPageRoute.name,
-          path: 'combo_deal_material_detail',
+          path: 'orders/combo_deal_material_detail',
         ),
         _i40.RouteConfig(
           ComboDealPrincipleDetailPageRoute.name,
-          path: 'combo_deal_principle_detail',
+          path: 'orders/combo_deal_principle_detail',
         ),
       ];
 }
@@ -612,7 +612,7 @@ class RequestReturnRoute extends _i40.PageRouteInfo<void> {
   const RequestReturnRoute()
       : super(
           RequestReturnRoute.name,
-          path: 'request_return',
+          path: 'returns/request_return',
         );
 
   static const String name = 'RequestReturnRoute';
@@ -625,7 +625,7 @@ class ApproverActionsRoute
   ApproverActionsRoute({_i41.Key? key})
       : super(
           ApproverActionsRoute.name,
-          path: 'approver_actions',
+          path: 'returns/approver_actions',
           args: ApproverActionsRouteArgs(key: key),
         );
 
@@ -649,7 +649,7 @@ class ReturnSummaryRoute extends _i40.PageRouteInfo<ReturnSummaryRouteArgs> {
   ReturnSummaryRoute({_i41.Key? key})
       : super(
           ReturnSummaryRoute.name,
-          path: 'return_summary',
+          path: 'returns/return_summary',
           args: ReturnSummaryRouteArgs(key: key),
         );
 
@@ -673,7 +673,7 @@ class UserRestrictionListPageRoute extends _i40.PageRouteInfo<void> {
   const UserRestrictionListPageRoute()
       : super(
           UserRestrictionListPageRoute.name,
-          path: 'user_restriction',
+          path: 'returns/user_restrictions',
         );
 
   static const String name = 'UserRestrictionListPageRoute';
@@ -685,7 +685,7 @@ class PolicyConfigurationPageRoute extends _i40.PageRouteInfo<void> {
   const PolicyConfigurationPageRoute()
       : super(
           PolicyConfigurationPageRoute.name,
-          path: 'policy_configuration',
+          path: 'returns/policy_configuration',
         );
 
   static const String name = 'PolicyConfigurationPageRoute';
@@ -697,7 +697,7 @@ class AddPolicyConfigurationRoute extends _i40.PageRouteInfo<void> {
   const AddPolicyConfigurationRoute()
       : super(
           AddPolicyConfigurationRoute.name,
-          path: 'add_policy_config',
+          path: 'returns/add_policy_config',
         );
 
   static const String name = 'AddPolicyConfigurationRoute';
@@ -712,7 +712,7 @@ class WebViewPageRoute extends _i40.PageRouteInfo<WebViewPageRouteArgs> {
     String? initialFile,
   }) : super(
           WebViewPageRoute.name,
-          path: 'web_view_page',
+          path: 'web_view',
           args: WebViewPageRouteArgs(
             key: key,
             url: url,
@@ -748,7 +748,7 @@ class ChangePasswordPageRoute extends _i40.PageRouteInfo<void> {
   const ChangePasswordPageRoute()
       : super(
           ChangePasswordPageRoute.name,
-          path: 'change_password_page',
+          path: 'change_password',
         );
 
   static const String name = 'ChangePasswordPageRoute';
@@ -760,7 +760,7 @@ class ContactUsPageRoute extends _i40.PageRouteInfo<void> {
   const ContactUsPageRoute()
       : super(
           ContactUsPageRoute.name,
-          path: 'contact_us_page',
+          path: 'contact_us',
         );
 
   static const String name = 'ContactUsPageRoute';
@@ -772,7 +772,7 @@ class NotificationSettingsPageRoute extends _i40.PageRouteInfo<void> {
   const NotificationSettingsPageRoute()
       : super(
           NotificationSettingsPageRoute.name,
-          path: 'notification_settings_page',
+          path: 'notification_settings',
         );
 
   static const String name = 'NotificationSettingsPageRoute';
@@ -784,7 +784,7 @@ class CustomerSearchPageRoute extends _i40.PageRouteInfo<void> {
   const CustomerSearchPageRoute()
       : super(
           CustomerSearchPageRoute.name,
-          path: 'customer_search_page',
+          path: 'customer_search',
         );
 
   static const String name = 'CustomerSearchPageRoute';
@@ -796,7 +796,7 @@ class ShiptToSearchPageRoute extends _i40.PageRouteInfo<void> {
   const ShiptToSearchPageRoute()
       : super(
           ShiptToSearchPageRoute.name,
-          path: 'ship_to_search_page',
+          path: 'ship_to_search',
         );
 
   static const String name = 'ShiptToSearchPageRoute';
@@ -808,7 +808,7 @@ class MaterialRootRoute extends _i40.PageRouteInfo<void> {
   const MaterialRootRoute()
       : super(
           MaterialRootRoute.name,
-          path: 'material_list_page',
+          path: 'orders/material_list',
         );
 
   static const String name = 'MaterialRootRoute';
@@ -823,7 +823,7 @@ class MaterialFilterPageRoute
     required _i42.MaterialFilterType filterType,
   }) : super(
           MaterialFilterPageRoute.name,
-          path: 'material_filter_page',
+          path: 'orders/material_filter',
           args: MaterialFilterPageRouteArgs(
             key: key,
             filterType: filterType,
@@ -889,7 +889,7 @@ class OrderTemplateListPageRoute extends _i40.PageRouteInfo<void> {
   const OrderTemplateListPageRoute()
       : super(
           OrderTemplateListPageRoute.name,
-          path: 'order_template_list_page',
+          path: 'orders/order_template_list',
         );
 
   static const String name = 'OrderTemplateListPageRoute';
@@ -901,7 +901,7 @@ class CartPageRoute extends _i40.PageRouteInfo<void> {
   const CartPageRoute()
       : super(
           CartPageRoute.name,
-          path: 'cart_page',
+          path: 'orders/cart',
         );
 
   static const String name = 'CartPageRoute';
@@ -913,7 +913,7 @@ class OrderSummaryPageRoute extends _i40.PageRouteInfo<void> {
   const OrderSummaryPageRoute()
       : super(
           OrderSummaryPageRoute.name,
-          path: 'order_summary',
+          path: 'orders/order_summary',
         );
 
   static const String name = 'OrderSummaryPageRoute';
@@ -925,7 +925,7 @@ class OrderSuccessPageRoute extends _i40.PageRouteInfo<void> {
   const OrderSuccessPageRoute()
       : super(
           OrderSuccessPageRoute.name,
-          path: 'order_confirmation',
+          path: 'orders/order_confirmation',
         );
 
   static const String name = 'OrderSuccessPageRoute';
@@ -940,7 +940,7 @@ class OrderTemplateDetailPageRoute
     required _i43.OrderTemplate order,
   }) : super(
           OrderTemplateDetailPageRoute.name,
-          path: 'order_template_detail_page',
+          path: 'orders/order_template_detail',
           args: OrderTemplateDetailPageRouteArgs(
             key: key,
             order: order,
@@ -1000,7 +1000,7 @@ class SavedOrderListPageRoute extends _i40.PageRouteInfo<void> {
   const SavedOrderListPageRoute()
       : super(
           SavedOrderListPageRoute.name,
-          path: 'saved_order_list',
+          path: 'orders/saved_order_list',
         );
 
   static const String name = 'SavedOrderListPageRoute';
@@ -1015,7 +1015,7 @@ class SavedOrderDetailPageRoute
     required _i44.SavedOrder order,
   }) : super(
           SavedOrderDetailPageRoute.name,
-          path: 'saved_order_detail',
+          path: 'orders/saved_order_detail',
           args: SavedOrderDetailPageRouteArgs(
             key: key,
             order: order,
@@ -1053,7 +1053,7 @@ class HistoryDetailsRoute extends _i40.PageRouteInfo<HistoryDetailsRouteArgs> {
     required _i49.SalesOrganisationConfigs salesOrgConfigs,
   }) : super(
           HistoryDetailsRoute.name,
-          path: 'history_details',
+          path: 'orders/history_details',
           args: HistoryDetailsRouteArgs(
             key: key,
             orderHistoryItem: orderHistoryItem,
@@ -1103,7 +1103,7 @@ class BonusAddPageRoute extends _i40.PageRouteInfo<BonusAddPageRouteArgs> {
     required _i50.CartItem cartItem,
   }) : super(
           BonusAddPageRoute.name,
-          path: 'add_bonus',
+          path: 'orders/add_bonus',
           args: BonusAddPageRouteArgs(
             key: key,
             cartItem: cartItem,
@@ -1138,7 +1138,7 @@ class AddEditUserRestrictionPageRoute
     required bool isEditing,
   }) : super(
           AddEditUserRestrictionPageRoute.name,
-          path: 'add_edit_user_restriction',
+          path: 'returns/add_edit_user_restriction',
           args: AddEditUserRestrictionPageRouteArgs(
             key: key,
             isEditing: isEditing,
@@ -1170,7 +1170,7 @@ class ScanMaterialInfoRoute extends _i40.PageRouteInfo<void> {
   const ScanMaterialInfoRoute()
       : super(
           ScanMaterialInfoRoute.name,
-          path: 'scan_material_info',
+          path: 'orders/scan_material_info',
         );
 
   static const String name = 'ScanMaterialInfoRoute';
@@ -1187,7 +1187,7 @@ class ReturnSummaryDetailsRoute
     required _i52.ReturnSummaryRequest returnSummaryRequests,
   }) : super(
           ReturnSummaryDetailsRoute.name,
-          path: 'return_summary_details',
+          path: 'returns/return_summary_details',
           args: ReturnSummaryDetailsRouteArgs(
             key: key,
             customerCodeInfo: customerCodeInfo,
@@ -1230,7 +1230,7 @@ class BundleItemDetailPageRoute
     required _i53.BundleAggregate bundleAggregate,
   }) : super(
           BundleItemDetailPageRoute.name,
-          path: 'bundle_item_detail',
+          path: 'orders/bundle_item_detail',
           args: BundleItemDetailPageRouteArgs(
             key: key,
             bundleAggregate: bundleAggregate,
@@ -1266,7 +1266,7 @@ class ComboDealMaterialDetailPageRoute
     bool isEdit = false,
   }) : super(
           ComboDealMaterialDetailPageRoute.name,
-          path: 'combo_deal_material_detail',
+          path: 'orders/combo_deal_material_detail',
           args: ComboDealMaterialDetailPageRouteArgs(
             key: key,
             comboItems: comboItems,
@@ -1306,7 +1306,7 @@ class ComboDealPrincipleDetailPageRoute
     List<_i54.PriceAggregate> initialComboItems = const [],
   }) : super(
           ComboDealPrincipleDetailPageRoute.name,
-          path: 'combo_deal_principle_detail',
+          path: 'orders/combo_deal_principle_detail',
           args: ComboDealPrincipleDetailPageRouteArgs(
             key: key,
             comboDeal: comboDeal,
@@ -1342,7 +1342,7 @@ class HomeTabRoute extends _i40.PageRouteInfo<void> {
   const HomeTabRoute()
       : super(
           HomeTabRoute.name,
-          path: 'home-tab',
+          path: 'home',
         );
 
   static const String name = 'HomeTabRoute';
@@ -1354,7 +1354,7 @@ class HistoryTabRoute extends _i40.PageRouteInfo<HistoryTabRouteArgs> {
   HistoryTabRoute({_i41.Key? key})
       : super(
           HistoryTabRoute.name,
-          path: 'history-tab',
+          path: 'orders/history',
           args: HistoryTabRouteArgs(key: key),
         );
 
@@ -1378,7 +1378,7 @@ class FavouritesTabRoute extends _i40.PageRouteInfo<void> {
   const FavouritesTabRoute()
       : super(
           FavouritesTabRoute.name,
-          path: 'favourites-tab',
+          path: 'orders/favourites',
         );
 
   static const String name = 'FavouritesTabRoute';
@@ -1390,7 +1390,7 @@ class AccountTabRoute extends _i40.PageRouteInfo<void> {
   const AccountTabRoute()
       : super(
           AccountTabRoute.name,
-          path: 'account-tab',
+          path: 'core/account',
         );
 
   static const String name = 'AccountTabRoute';

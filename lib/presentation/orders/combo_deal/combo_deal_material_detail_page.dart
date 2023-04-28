@@ -5,7 +5,6 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_material_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
-import 'package:ezrxmobile/domain/announcement/entities/announcement.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal_group_deal.dart';
@@ -147,8 +146,8 @@ class _ComboDealMaterialDetailPageState
         ],
         child: Column(
           children: [
-            const AnnouncementWidget(
-              appModule: AppModule.orders,
+            AnnouncementWidget(
+              currentPath: context.router.currentPath,
             ),
             Expanded(
               child: BlocBuilder<ComboDealMaterialDetailBloc,

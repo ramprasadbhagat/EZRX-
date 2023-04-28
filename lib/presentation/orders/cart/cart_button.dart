@@ -40,7 +40,7 @@ class CartButton extends StatelessWidget {
                     context.read<AdditionalDetailsBloc>().add(
                           const AdditionalDetailsEvent.clearSavedOrderId(),
                         );
-                    context.router.pushNamed('cart_page');
+                    context.router.pushNamed('orders/cart');
                   },
                 ),
               );

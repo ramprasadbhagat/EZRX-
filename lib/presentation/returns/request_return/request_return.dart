@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
@@ -5,7 +6,6 @@ import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.da
 import 'package:ezrxmobile/application/returns/request_return/request_return_bloc.dart';
 import 'package:ezrxmobile/application/returns/request_return_filter/request_return_filter_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
-import 'package:ezrxmobile/domain/announcement/entities/announcement.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
@@ -106,9 +106,9 @@ class RequestReturn extends StatelessWidget {
         ),
       ),
       endDrawer: const RequestReturnFilterDrawer(),
-      body: const AnnouncementBanner(
-        appModule: AppModule.returns,
-        child: _WrapRequestReturnBody(),
+      body: AnnouncementBanner(
+        currentPath: context.router.currentPath,
+        child: const _WrapRequestReturnBody(),
       ),
     );
   }

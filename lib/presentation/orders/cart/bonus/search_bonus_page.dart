@@ -1,9 +1,9 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_bloc.dart';
-import 'package:ezrxmobile/domain/announcement/entities/announcement.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
@@ -134,7 +134,7 @@ class _BonusAddPageState extends State<BonusAddPage> {
         ),
       ),
       body: AnnouncementBanner(
-        appModule: AppModule.orders,
+        currentPath: context.router.currentPath,
         child: BlocBuilder<BonusMaterialBloc, BonusMaterialState>(
           buildWhen: (previous, current) =>
               previous.isFetching != current.isFetching ||
@@ -219,7 +219,8 @@ class _BonusAddPageState extends State<BonusAddPage> {
                                       height: 23.0,
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(18.0),
+                                        borderRadius:
+                                            BorderRadius.circular(18.0),
                                         gradient: const LinearGradient(
                                           colors: [
                                             ZPColors.kPrimaryColor,

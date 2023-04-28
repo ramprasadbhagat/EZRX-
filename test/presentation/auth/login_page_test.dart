@@ -19,6 +19,7 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/presentation/auth/login_page.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/splash/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -28,6 +29,7 @@ import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../utils/material_frame_wrapper.dart';
+import '../../utils/widget_utils.dart';
 import '../order_history/order_history_details_widget_test.dart';
 
 class LoginFormBlocMock extends MockBloc<LoginFormEvent, LoginFormState>
@@ -64,6 +66,11 @@ class OrderDocumentTypeMockBloc
     extends MockBloc<OrderDocumentTypeEvent, OrderDocumentTypeState>
     implements OrderDocumentTypeBloc {}
 
+class AutoRouterMock extends Mock implements AppRouter {
+  @override
+  String currentPath = '';
+}
+
 void main() {
   late GetIt locator;
   late LoginFormBloc loginBlocMock;
@@ -75,6 +82,7 @@ void main() {
   final ShipToCodeBloc shipToCodeBLocMock = ShipToCodeBlocMock();
   final CartBloc cartBlocMock = CartBlocMock();
   final eligibilityBlocMock = EligibilityBlocMock();
+  late AutoRouterMock autoRouterMock;
   final PaymentCustomerInformationBloc paymentCustomerInformationBlocMock =
       PaymentCustomerInformationBlocMock();
   late OrderDocumentTypeBloc orderDocumentTypeBlocMock;
@@ -90,6 +98,7 @@ void main() {
     setUp(() {
       WidgetsFlutterBinding.ensureInitialized();
       loginBlocMock = LoginFormBlocMock();
+      autoRouterMock = AutoRouterMock();
       authBlocMock = AuthBlocMock();
       announcementBlocMock = AnnnouncementBlocMock();
       orderDocumentTypeBlocMock = OrderDocumentTypeMockBloc();
@@ -113,7 +122,8 @@ void main() {
       when(() => authBlocMock.state).thenReturn(const AuthState.initial());
     });
 
-    Widget loginTestPage() => MaterialFrameWrapper(
+    Widget loginTestPage() => WidgetUtils.getScopedWidget(
+          autoRouterMock: autoRouterMock,
           child: MultiBlocProvider(
             providers: [
               BlocProvider<LoginFormBloc>(

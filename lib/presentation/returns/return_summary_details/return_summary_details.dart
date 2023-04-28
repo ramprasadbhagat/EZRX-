@@ -4,7 +4,6 @@ import 'package:ezrxmobile/application/returns/return_summary_details/return_sum
 
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
-import 'package:ezrxmobile/domain/announcement/entities/announcement.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 
 import 'package:ezrxmobile/domain/returns/entities/return_summary_requests.dart';
@@ -61,7 +60,7 @@ class ReturnSummaryDetails extends StatelessWidget {
           title: Text(returnSummaryRequests.returnId.tr()),
         ),
         body: AnnouncementBanner(
-          appModule: AppModule.returns,
+          currentPath: context.router.currentPath,
           child: SingleChildScrollView(
             padding: const EdgeInsets.only(
               left: 15,

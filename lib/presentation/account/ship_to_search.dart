@@ -4,7 +4,6 @@ import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
-import 'package:ezrxmobile/domain/announcement/entities/announcement.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
@@ -67,8 +66,8 @@ class _ShiptToSearchPage extends State<ShiptToSearchPage> {
         builder: (context, state) {
           return Column(
             children: [
-              const AnnouncementWidget(
-                appModule: AppModule.core,
+              AnnouncementWidget(
+                currentPath: context.router.currentPath,
               ),
               _HeaderMessage(
                 state: state,

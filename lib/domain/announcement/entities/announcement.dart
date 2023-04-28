@@ -39,19 +39,21 @@ class Announcement with _$Announcement {
       );
 
   bool isValidModuleToDisplay({
-    required AppModule module,
+    required String currentPath,
   }) {
-    if (module == AppModule.home || !isModuleSpecific) return true;
+    if (!isModuleSpecific) {
+      return true;
+    }
 
     return moduleName.any((moduleName) {
       if (moduleName.isReturn) {
-        return module == AppModule.returns;
+        return currentPath.startsWith(AppModule.returns.name);
       }
       if (moduleName.isPayment) {
-        return module == AppModule.payments;
+        return currentPath.startsWith(AppModule.payments.name);
       }
       if (moduleName.isOrder) {
-        return module == AppModule.orders;
+        return currentPath.startsWith(AppModule.orders.name);
       }
 
       return false;
@@ -117,8 +119,6 @@ class AnnouncementMessage with _$AnnouncementMessage {
 }
 
 enum AppModule {
-  core,
-  home,
   orders,
   returns,
   payments,

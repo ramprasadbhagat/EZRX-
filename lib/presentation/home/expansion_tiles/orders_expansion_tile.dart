@@ -138,17 +138,17 @@ class OrdersExpansionTile extends StatelessWidget {
         HomePageTile(
           title: 'Create Order'.tr(),
           icon: Icons.add_box_outlined,
-          routeName: 'material_list_page',
+          routeName: 'orders/material_list',
         ),
       HomePageTile(
         title: 'Saved Orders'.tr(),
         icon: Icons.bookmark_border_outlined,
-        routeName: 'saved_order_list',
+        routeName: 'orders/saved_order_list',
       ),
       HomePageTile(
         title: 'Order Template'.tr(),
         icon: Icons.featured_play_list_outlined,
-        routeName: 'order_template_list_page',
+        routeName: 'orders/order_template_list',
       ),
     ];
   }

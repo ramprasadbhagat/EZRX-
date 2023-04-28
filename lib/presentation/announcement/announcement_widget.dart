@@ -2,26 +2,27 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
-import 'package:ezrxmobile/domain/announcement/entities/announcement.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 
 class AnnouncementBanner extends StatelessWidget {
-  final AppModule appModule;
   final Widget child;
+  final String currentPath;
   const AnnouncementBanner({
     Key? key,
-    required this.appModule,
     required this.child,
+    required this.currentPath,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        AnnouncementWidget(appModule: appModule),
+        AnnouncementWidget(
+          currentPath: currentPath,
+        ),
         Expanded(child: child),
       ],
     );
@@ -29,11 +30,11 @@ class AnnouncementBanner extends StatelessWidget {
 }
 
 class AnnouncementWidget extends StatelessWidget {
-  final AppModule appModule;
+  final String currentPath;
 
   const AnnouncementWidget({
     Key? key,
-    required this.appModule,
+    required this.currentPath,
   }) : super(key: key);
 
   @override
@@ -52,7 +53,7 @@ class AnnouncementWidget extends StatelessWidget {
                   displayTime.isPreLogin || displayTime.isPreAndPost,
             );
             final isValidModule = state.announcement.isValidModuleToDisplay(
-              module: appModule,
+              currentPath: currentPath,
             );
             if (!state.announcement.hasValidAnnouncement ||
                 state.isClosed ||

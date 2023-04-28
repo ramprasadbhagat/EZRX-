@@ -4,7 +4,6 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/proxy_login/proxy_login_form_bloc.dart';
-import 'package:ezrxmobile/domain/announcement/entities/announcement.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
@@ -66,7 +65,7 @@ class LoginOnBehalfPage extends StatelessWidget {
             previous.showErrorMessages != current.showErrorMessages,
         builder: (context, state) {
           return AnnouncementBanner(
-            appModule: AppModule.core,
+            currentPath: context.router.currentPath,
             child: Padding(
               padding: const EdgeInsets.all(25.0),
               child: Form(

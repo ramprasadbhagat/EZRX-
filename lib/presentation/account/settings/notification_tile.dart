@@ -15,7 +15,7 @@ class NotificationTile extends StatelessWidget {
         locale: context.locale,
       ),
       onTap: () {
-        context.router.pushNamed('notification_settings_page');
+        context.router.pushNamed('notification_settings');
       },
     );
   }

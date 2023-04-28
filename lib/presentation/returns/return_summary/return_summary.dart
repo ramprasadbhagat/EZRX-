@@ -10,7 +10,6 @@ import 'package:ezrxmobile/application/returns/return_summary_filter/return_summ
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
-import 'package:ezrxmobile/domain/announcement/entities/announcement.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_summary_filter.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_summary_requests.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
@@ -109,7 +108,7 @@ class ReturnSummary extends StatelessWidget {
       ),
       endDrawer: const ReturnSummaryFilterDrawer(),
       body: AnnouncementBanner(
-        appModule: AppModule.returns,
+        currentPath: context.router.currentPath,
         child: BlocListener<ReturnSummaryFilterBloc, ReturnSummaryFilterState>(
           listenWhen: (previous, current) =>
               previous.isSubmitting != current.isSubmitting &&

@@ -3,7 +3,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/returns/user_restriction/user_restriction_list_bloc.dart';
-import 'package:ezrxmobile/domain/announcement/entities/announcement.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 
@@ -42,7 +41,7 @@ class UserRestrictionListPage extends StatelessWidget {
         child: CustomAppBar(child: UserRestrictionListSearch()),
       ),
       body: AnnouncementBanner(
-        appModule: AppModule.returns,
+        currentPath: context.router.currentPath,
         child: BlocConsumer<UserRestrictionListBloc, UserRestrictionListState>(
           listener: (context, state) {
             state.apiFailureOrSuccessOption.fold(

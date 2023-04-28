@@ -581,21 +581,21 @@ void main() {
         await getWidget(tester);
         await tester.pump();
 
-        final onTapTest = find.byKey(const Key('material_list_page'));
+        final onTapTest = find.byKey(const Key('orders/material_list'));
         expect(onTapTest, findsOneWidget);
         await tester.tap(onTapTest);
 
         expect(onTapTest, findsAtLeastNWidgets(1));
 
         expect(autoRouterMock.current.name, MaterialRootRoute.name);
-        final onTapTest1 = find.byKey(const Key('saved_order_list'));
+        final onTapTest1 = find.byKey(const Key('orders/saved_order_list'));
         expect(onTapTest1, findsOneWidget);
         await tester.tap(onTapTest1);
 
         expect(onTapTest1, findsAtLeastNWidgets(1));
 
         expect(autoRouterMock.current.name, SavedOrderListPageRoute.name);
-        final onTapTest2 = find.byKey(const Key('order_template_list_page'));
+        final onTapTest2 = find.byKey(const Key('orders/order_template_list'));
         expect(onTapTest2, findsOneWidget);
         await tester.tap(onTapTest2);
 

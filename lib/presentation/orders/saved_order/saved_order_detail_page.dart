@@ -7,7 +7,6 @@ import 'package:ezrxmobile/application/order/material_price_detail/material_pric
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_list_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
-import 'package:ezrxmobile/domain/announcement/entities/announcement.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item.dart';
@@ -79,7 +78,7 @@ class _SavedOrderDetailPageState extends State<SavedOrderDetailPage> {
         title: Text('#${widget.order.id}'),
       ),
       body: AnnouncementBanner(
-        appModule: AppModule.orders,
+        currentPath: context.router.currentPath,
         child: RefreshIndicator(
           key: const ValueKey('savedDetailRefreshIndicator'),
           color: ZPColors.primary,

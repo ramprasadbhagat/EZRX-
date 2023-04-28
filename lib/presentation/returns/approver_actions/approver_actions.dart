@@ -1,10 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
-import 'package:ezrxmobile/domain/announcement/entities/announcement.dart';
 import 'package:ezrxmobile/domain/returns/entities/request_information.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_approver_filter.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
@@ -174,7 +174,7 @@ class ApproverActions extends StatelessWidget {
               previous.isFetching != current.isFetching,
           builder: (context, state) {
             return AnnouncementBanner(
-              appModule: AppModule.returns,
+              currentPath: context.router.currentPath,
               child: ScrollList<RequestInformation>(
                 emptyMessage: 'No Return found'.tr(),
                 onRefresh: () {

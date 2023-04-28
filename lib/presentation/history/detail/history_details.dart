@@ -9,7 +9,6 @@ import 'package:ezrxmobile/application/order/order_history_details/order_history
 import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
-import 'package:ezrxmobile/domain/announcement/entities/announcement.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_basic_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
@@ -112,7 +111,7 @@ class HistoryDetails extends StatelessWidget {
                 ],
         ),
         body: AnnouncementBanner(
-          appModule: AppModule.orders,
+          currentPath: context.router.currentPath,
           child: SingleChildScrollView(
             padding: const EdgeInsets.only(
               left: 15,

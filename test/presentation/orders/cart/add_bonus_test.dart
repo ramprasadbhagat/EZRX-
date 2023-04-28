@@ -27,13 +27,14 @@ import 'package:ezrxmobile/infrastructure/order/repository/bonus_material_reposi
 import 'package:ezrxmobile/infrastructure/order/repository/cart_repository.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/orders/cart/bonus/search_bonus_page.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../../utils/multi_bloc_provider_frame_wrapper.dart';
+import '../../../utils/widget_utils.dart';
 import '../../order_history/order_history_details_widget_test.dart';
 
 class BonusMaterialBlocMock
@@ -76,6 +77,11 @@ class AnnouncementBlocMock
 
 class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 
+class MockAppRouter extends Mock implements AppRouter {
+  @override
+  String currentPath = '';
+}
+
 void main() {
   late BonusMaterialBloc bonusMaterialBloc;
   late List<MaterialInfo> mockbonusItemWithDataList;
@@ -89,6 +95,7 @@ void main() {
   late ShipToCodeBloc shipToCodeBlocMock;
   late AuthBloc authBlocMock;
   late AnnouncementBloc announcementBlocMock;
+  late AppRouter mockAppRouter;
 
   setUpAll(() {
     locator.registerLazySingleton(() => MixpanelService());
@@ -98,6 +105,7 @@ void main() {
   setUp(
     () {
       WidgetsFlutterBinding.ensureInitialized();
+      mockAppRouter = MockAppRouter();
       bonusMaterialBloc = BonusMaterialBlocMock();
       tenderContractBlocMock = TenderContractBlocMock();
       bonusMaterialRepository = BonusMaterialRepositoryMock();
@@ -151,7 +159,8 @@ void main() {
   );
   group('Test Add_Bonus', () {
     Widget getWidget() {
-      return MultiBlocProviderFrameWrapper(
+      return WidgetUtils.getScopedWidget(
+        autoRouterMock: mockAppRouter,
         providers: [
           BlocProvider<BonusMaterialBloc>(
             create: (context) => bonusMaterialBloc,
@@ -359,9 +368,11 @@ void main() {
       expect(addBonusTextField, findsOneWidget);
       final bonusItemList = find.byKey(const Key('bonusItemList'));
       expect(bonusItemList, findsOneWidget);
-      final add = find.byKey(Key('addItem${mockbonusItemWithDataList.first.materialNumber.getOrDefaultValue('')}'));
+      final add = find.byKey(Key(
+          'addItem${mockbonusItemWithDataList.first.materialNumber.getOrDefaultValue('')}'));
       expect(add, findsOneWidget);
-      final addItem = tester.widget(find.byKey(Key('addItem${mockbonusItemWithDataList.first.materialNumber.getOrDefaultValue('')}')));
+      final addItem = tester.widget(find.byKey(Key(
+          'addItem${mockbonusItemWithDataList.first.materialNumber.getOrDefaultValue('')}')));
       await tester.tap(find.byWidget(addItem));
       await tester.pump();
 

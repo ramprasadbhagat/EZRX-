@@ -3,7 +3,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/returns/policy_configuration/policy_configuration_bloc.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
-import 'package:ezrxmobile/domain/announcement/entities/announcement.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/policy_configuration.dart';
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
@@ -50,7 +49,7 @@ class AddPolicyConfigurationState extends State<AddPolicyConfiguration> {
       backgroundColor: ZPColors.white,
       appBar: AppBar(title: const Text('Add Policy Configuration').tr()),
       body: AnnouncementBanner(
-        appModule: AppModule.returns,
+        currentPath: context.router.currentPath,
         child: Padding(
           padding: const EdgeInsets.all(15),
           child: Form(

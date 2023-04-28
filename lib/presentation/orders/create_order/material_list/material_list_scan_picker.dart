@@ -35,7 +35,7 @@ class MaterialListScanPicker extends StatelessWidget {
             ],
           ),
           onPressed: () {
-            context.router.pushNamed('scan_material_info');
+            context.router.pushNamed('orders/scan_material_info');
             context.read<ScanMaterialInfoBloc>().add(
                   const ScanMaterialInfoEvent.scanMaterialNumberFromCamera(),
                 );

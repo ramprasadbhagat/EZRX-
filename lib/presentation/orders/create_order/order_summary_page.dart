@@ -19,7 +19,6 @@ import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
-import 'package:ezrxmobile/domain/announcement/entities/announcement.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
@@ -69,9 +68,9 @@ class OrderSummaryPage extends StatelessWidget {
           _SaveTemplateButton(),
         ],
       ),
-      body: const AnnouncementBanner(
-        appModule: AppModule.orders,
-        child: _BodyContent(),
+      body: AnnouncementBanner(
+        currentPath: context.router.currentPath,
+        child: const _BodyContent(),
       ),
     );
   }

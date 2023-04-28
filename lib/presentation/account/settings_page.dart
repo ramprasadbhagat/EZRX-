@@ -3,7 +3,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/announcement/entities/announcement.dart';
 import 'package:ezrxmobile/infrastructure/core/package_info/package_info.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/account/settings/language_tile.dart';
@@ -22,13 +21,12 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(title: const Text('Settings').tr()),
       body: Stack(
         children: [
           AnnouncementBanner(
-            appModule: AppModule.core,
+            currentPath: context.router.currentPath,
             child: ListView(
               children: ListTile.divideTiles(
                 context: context,
@@ -44,7 +42,7 @@ class SettingsPage extends StatelessWidget {
                       context
                           .read<ResetPasswordBloc>()
                           .add(const ResetPasswordEvent.onRestart());
-                      context.router.pushNamed('change_password_page');
+                      context.router.pushNamed('change_password');
                     },
                   ),
                   const LanguageTile(),
@@ -52,7 +50,7 @@ class SettingsPage extends StatelessWidget {
                     key: const Key('contactUsTile'),
                     leading: const Icon(Icons.contact_support_outlined),
                     title: const Text('Contact Us').tr(),
-                    onTap: () => context.router.pushNamed('contact_us_page'),
+                    onTap: () => context.router.pushNamed('contact_us'),
                   ),
                   ListTile(
                     key: const Key('tostile'),
