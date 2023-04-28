@@ -146,13 +146,13 @@ class MaterialsWithMetaQuery {
         \$salesOrganisation: String!, 
         \$first: Int, 
         \$after: Int, 
-        \$principalNameList: [String!],
+        \$principalCodeList: [String!],
         ) {
             materialsWithMeta(
               customer: \$customerCode, 
               shipToCustomer: \$shipToCustomer, 
               salesOrganisation: \$salesOrganisation, 
-              principalCodeList: \$principalNameList,
+              principalCodeList: \$principalCodeList,
               first: \$first, 
               after: \$after, 
               ) {
