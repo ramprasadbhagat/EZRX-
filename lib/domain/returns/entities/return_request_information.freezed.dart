@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'return_request_information.dart';
 
@@ -938,6 +938,7 @@ class _$_ReturnRequestInformation extends _ReturnRequestInformation {
   final List<String> _actionRequired;
   @override
   List<String> get actionRequired {
+    if (_actionRequired is EqualUnmodifiableListView) return _actionRequired;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_actionRequired);
   }
@@ -995,6 +996,7 @@ class _$_ReturnRequestInformation extends _ReturnRequestInformation {
   final List<String> _imageUrl;
   @override
   List<String> get imageUrl {
+    if (_imageUrl is EqualUnmodifiableListView) return _imageUrl;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_imageUrl);
   }
@@ -1002,6 +1004,7 @@ class _$_ReturnRequestInformation extends _ReturnRequestInformation {
   final List<String> _attachmentUrl;
   @override
   List<String> get attachmentUrl {
+    if (_attachmentUrl is EqualUnmodifiableListView) return _attachmentUrl;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_attachmentUrl);
   }
@@ -1067,6 +1070,7 @@ class _$_ReturnRequestInformation extends _ReturnRequestInformation {
   final List<String> _attachments;
   @override
   List<String> get attachments {
+    if (_attachments is EqualUnmodifiableListView) return _attachments;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_attachments);
   }

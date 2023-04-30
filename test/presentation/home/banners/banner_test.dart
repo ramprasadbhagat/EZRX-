@@ -91,7 +91,7 @@ void main() {
     mockAuthBloc = MockAuthBloc();
     mockSalesOrgBloc = MockSalesOrgBloc();
     locator = GetIt.instance;
-    locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
+    locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton(() => AppRouter());
     locator.registerLazySingleton(() => mockAuthBloc);
     locator.registerLazySingleton(() => mockSalesOrgBloc);

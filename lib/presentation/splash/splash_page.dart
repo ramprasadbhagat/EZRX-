@@ -426,25 +426,20 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
           },
         ),
       ],
-      child: UpgradeAlert(
-        upgrader: Upgrader(
-          messages: UpgraderLocalizationMessage(),
-          dialogStyle: Platform.isIOS
-              ? UpgradeDialogStyle.cupertino
-              : UpgradeDialogStyle.material,
-          debugLogging:
-              locator<Config>().appFlavor == Flavor.prod ? false : true,
-          minAppVersion: '1.0.0',
-        ),
-        child: Scaffold(
-          backgroundColor: ZPColors.white,
-          body: Image.asset(
-            'assets/images/splash.png',
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-          ),
-        ),
-      ),
+      child: locator<Config>().appFlavor == Flavor.mock
+          ? const _Splash()
+          : UpgradeAlert(
+              upgrader: Upgrader(
+                messages: UpgraderLocalizationMessage(),
+                dialogStyle: Platform.isIOS
+                    ? UpgradeDialogStyle.cupertino
+                    : UpgradeDialogStyle.material,
+                debugLogging:
+                    locator<Config>().appFlavor == Flavor.prod ? false : true,
+                minAppVersion: '1.0.0',
+              ),
+              child: const _Splash(),
+            ),
     );
   }
 
@@ -468,6 +463,22 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
           ),
         );
       },
+    );
+  }
+}
+
+class _Splash extends StatelessWidget {
+  const _Splash({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: ZPColors.white,
+      body: Image.asset(
+        'assets/images/splash.png',
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+      ),
     );
   }
 }

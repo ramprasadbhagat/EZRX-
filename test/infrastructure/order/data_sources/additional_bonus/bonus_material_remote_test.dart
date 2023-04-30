@@ -20,7 +20,7 @@ class MaterialInfoMock extends Mock implements MaterialInfo {}
 
 void main() {
   late BonusMaterialRemoteDataSource remoteDataSource;
-  locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
+  locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
 
   final dio = Dio(
     BaseOptions(

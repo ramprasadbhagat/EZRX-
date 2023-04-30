@@ -39,7 +39,7 @@ void main() {
 
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
-    GetIt.instance.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
+    GetIt.instance.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     announcementMock = await AnnouncementLocalDataSource().getAnnouncements();
     final rawData = json.decode(
       await rootBundle

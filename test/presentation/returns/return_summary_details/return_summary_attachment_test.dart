@@ -28,7 +28,7 @@ void main() {
   late AppRouter autoRouterMock;
 
   setUpAll(() async {
-    locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
+    locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton(() => AppRouter());
     locator.registerLazySingleton(() => MixpanelService());
     autoRouterMock = locator<AppRouter>();

@@ -189,7 +189,8 @@ void main() {
           userId: saleOrgName,
           date: date, //DateTime.now().toUtc().toIso8601String(),
         );
-        final resTest = SettingTcDto.fromJson(res['data']['updateUser']['user']).toDomain();
+        final resTest =
+            SettingTcDto.fromJson(res['data']['updateUser']['user']).toDomain();
         expect(result.acceptPrivacyPolicy, resTest.acceptPrivacyPolicy);
       },
     );

@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'return_request_dto.dart';
 
@@ -48,13 +48,9 @@ abstract class $ReturnRequestDtoCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'isSearchComplete', defaultValue: false)
           bool isSearchComplete,
-      @JsonKey(
-          name: 'materialBasicInformation', defaultValue: <
-              MaterialBasicInformationDto>[])
+      @JsonKey(name: 'materialBasicInformation', defaultValue: <MaterialBasicInformationDto>[])
           List<MaterialBasicInformationDto> basicInformations,
-      @JsonKey(
-          name: 'materials', fromJson: _unmarshallMaterialItem, defaultValue: <
-              ReturnItemDto>[])
+      @JsonKey(name: 'materials', fromJson: _unmarshallMaterialItem, defaultValue: <ReturnItemDto>[])
           List<ReturnItemDto> items});
 }
 
@@ -103,13 +99,9 @@ abstract class _$$_ReturnRequestDtoCopyWith<$Res>
   $Res call(
       {@JsonKey(name: 'isSearchComplete', defaultValue: false)
           bool isSearchComplete,
-      @JsonKey(
-          name: 'materialBasicInformation', defaultValue: <
-              MaterialBasicInformationDto>[])
+      @JsonKey(name: 'materialBasicInformation', defaultValue: <MaterialBasicInformationDto>[])
           List<MaterialBasicInformationDto> basicInformations,
-      @JsonKey(
-          name: 'materials', fromJson: _unmarshallMaterialItem, defaultValue: <
-              ReturnItemDto>[])
+      @JsonKey(name: 'materials', fromJson: _unmarshallMaterialItem, defaultValue: <ReturnItemDto>[])
           List<ReturnItemDto> items});
 }
 
@@ -151,13 +143,9 @@ class _$_ReturnRequestDto extends _ReturnRequestDto {
   const _$_ReturnRequestDto(
       {@JsonKey(name: 'isSearchComplete', defaultValue: false)
           required this.isSearchComplete,
-      @JsonKey(
-          name: 'materialBasicInformation', defaultValue: <
-              MaterialBasicInformationDto>[])
+      @JsonKey(name: 'materialBasicInformation', defaultValue: <MaterialBasicInformationDto>[])
           required final List<MaterialBasicInformationDto> basicInformations,
-      @JsonKey(
-          name: 'materials', fromJson: _unmarshallMaterialItem, defaultValue: <
-              ReturnItemDto>[])
+      @JsonKey(name: 'materials', fromJson: _unmarshallMaterialItem, defaultValue: <ReturnItemDto>[])
           required final List<ReturnItemDto> items})
       : _basicInformations = basicInformations,
         _items = items,
@@ -175,6 +163,8 @@ class _$_ReturnRequestDto extends _ReturnRequestDto {
       name: 'materialBasicInformation',
       defaultValue: <MaterialBasicInformationDto>[])
   List<MaterialBasicInformationDto> get basicInformations {
+    if (_basicInformations is EqualUnmodifiableListView)
+      return _basicInformations;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_basicInformations);
   }
@@ -186,6 +176,7 @@ class _$_ReturnRequestDto extends _ReturnRequestDto {
       fromJson: _unmarshallMaterialItem,
       defaultValue: <ReturnItemDto>[])
   List<ReturnItemDto> get items {
+    if (_items is EqualUnmodifiableListView) return _items;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_items);
   }
@@ -233,13 +224,9 @@ abstract class _ReturnRequestDto extends ReturnRequestDto {
   const factory _ReturnRequestDto(
       {@JsonKey(name: 'isSearchComplete', defaultValue: false)
           required final bool isSearchComplete,
-      @JsonKey(
-          name: 'materialBasicInformation', defaultValue: <
-              MaterialBasicInformationDto>[])
+      @JsonKey(name: 'materialBasicInformation', defaultValue: <MaterialBasicInformationDto>[])
           required final List<MaterialBasicInformationDto> basicInformations,
-      @JsonKey(
-          name: 'materials', fromJson: _unmarshallMaterialItem, defaultValue: <
-              ReturnItemDto>[])
+      @JsonKey(name: 'materials', fromJson: _unmarshallMaterialItem, defaultValue: <ReturnItemDto>[])
           required final List<ReturnItemDto> items}) = _$_ReturnRequestDto;
   const _ReturnRequestDto._() : super._();
 

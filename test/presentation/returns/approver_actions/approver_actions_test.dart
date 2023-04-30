@@ -42,8 +42,6 @@ class ReturnApproverFilterBlocMock
     extends MockBloc<ReturnApproverFilterEvent, ReturnApproverFilterState>
     implements ReturnApproverFilterBloc {}
 
-
-
 class ShipToCodeBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState>
     implements ShipToCodeBloc {}
 
@@ -68,7 +66,7 @@ void main() {
   late CustomerCodeBloc customerCodeBlocMock;
   late ReturnApproverBloc returnApproverBlocMock;
   late ReturnApproverFilterBloc returnApproverFilterBlocMock;
-  
+
   late ShipToCodeBloc shipToCodeBlocMock;
   late List<RequestInformation> approverReturnRequestList;
   late SalesOrgBloc salesOrgBlocMock;
@@ -94,7 +92,7 @@ void main() {
     () {
       locator.registerLazySingleton(() => MixpanelService());
       locator<MixpanelService>().init(mixpanel: MixpanelMock());
-      locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
+      locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
       locator.registerLazySingleton(() => AppRouter());
       approverReturnRequestList = [
         RequestInformation.empty(),

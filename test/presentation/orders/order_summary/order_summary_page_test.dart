@@ -191,7 +191,7 @@ void main() {
 
   setUpAll(
     () async {
-      locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
+      locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
       locator.registerLazySingleton(() => AppRouter());
       locator.registerLazySingleton(() => MixpanelService());
       locator<MixpanelService>().init(mixpanel: MixpanelMock());
@@ -648,8 +648,9 @@ void main() {
         tester.binding.window.devicePixelRatioTestValue = 1.0;
         await tester.pumpWidget(getWidget());
         await tester.pumpAndSettle();
-        final customerDetailsKey = find
-            .byKey(const Key('additionalDetailsFormKey'),);
+        final customerDetailsKey = find.byKey(
+          const Key('additionalDetailsFormKey'),
+        );
         await tester.pumpAndSettle();
         await tester
             .ensureVisible(find.byKey(const Key('additionalDetailsFormKey')));

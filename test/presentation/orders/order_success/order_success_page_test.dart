@@ -43,7 +43,7 @@ void main() {
   late AnnouncementBloc announcementBlocMock;
   setUpAll(
     () {
-      locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
+      locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
       locator.registerLazySingleton(() => AppRouter());
     },
   );

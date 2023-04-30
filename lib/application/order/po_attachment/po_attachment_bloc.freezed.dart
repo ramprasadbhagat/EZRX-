@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'po_attachment_bloc.dart';
 
@@ -303,6 +303,7 @@ class _$_DownloadFile implements _DownloadFile {
   final List<PoDocuments> _files;
   @override
   List<PoDocuments> get files {
+    if (_files is EqualUnmodifiableListView) return _files;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_files);
   }
@@ -762,6 +763,8 @@ class _$_UpLoadFile implements _UpLoadFile {
   final List<PoDocuments> _uploadedPODocument;
   @override
   List<PoDocuments> get uploadedPODocument {
+    if (_uploadedPODocument is EqualUnmodifiableListView)
+      return _uploadedPODocument;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_uploadedPODocument);
   }
@@ -1067,6 +1070,7 @@ class _$_PoAttachmentState extends _PoAttachmentState {
   final List<PoDocuments> _fileUrl;
   @override
   List<PoDocuments> get fileUrl {
+    if (_fileUrl is EqualUnmodifiableListView) return _fileUrl;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_fileUrl);
   }

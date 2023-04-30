@@ -7,9 +7,9 @@ class DeviceInfo {
       final plugin = DeviceInfoPlugin();
       final androidDeviceInfo = await plugin.androidInfo;
 
-      return androidDeviceInfo.version.sdkInt! >= 33;
+      return androidDeviceInfo.version.sdkInt >= 33;
     }
-    
+
     return false;
   }
 }

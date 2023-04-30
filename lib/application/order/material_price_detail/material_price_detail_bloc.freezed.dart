@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'material_price_detail_bloc.dart';
 
@@ -498,6 +498,8 @@ class _$_Refresh implements _Refresh {
   final List<MaterialQueryInfo> _materialInfoList;
   @override
   List<MaterialQueryInfo> get materialInfoList {
+    if (_materialInfoList is EqualUnmodifiableListView)
+      return _materialInfoList;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_materialInfoList);
   }
@@ -898,6 +900,8 @@ class _$_Fetch implements _Fetch {
   final List<MaterialQueryInfo> _materialInfoList;
   @override
   List<MaterialQueryInfo> get materialInfoList {
+    if (_materialInfoList is EqualUnmodifiableListView)
+      return _materialInfoList;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_materialInfoList);
   }
@@ -1286,6 +1290,8 @@ class _$_ComboDealFetch implements _ComboDealFetch {
   final List<MaterialNumber> _materialInfoList;
   @override
   List<MaterialNumber> get materialInfoList {
+    if (_materialInfoList is EqualUnmodifiableListView)
+      return _materialInfoList;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_materialInfoList);
   }
@@ -1625,6 +1631,7 @@ class _$_MaterialPriceDetailState extends _MaterialPriceDetailState {
   final Map<MaterialQueryInfo, MaterialPriceDetail> _materialDetails;
   @override
   Map<MaterialQueryInfo, MaterialPriceDetail> get materialDetails {
+    if (_materialDetails is EqualUnmodifiableMapView) return _materialDetails;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableMapView(_materialDetails);
   }

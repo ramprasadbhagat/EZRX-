@@ -96,7 +96,7 @@ void main() {
     mockAuthBloc = MockAuthBloc();
     mockSalesOrgBloc = MockSalesOrgBloc();
     locator = GetIt.instance;
-    locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
+    locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton(() => AppRouter());
     locator.registerLazySingleton(() => mockAuthBloc);
     locator.registerLazySingleton(() => mockSalesOrgBloc);
@@ -166,13 +166,12 @@ void main() {
         (WidgetTester tester) async {
       // Arrange
       when(() => eligibilityBlocMock.state).thenReturn(
-        EligibilityState.initial()
-          .copyWith(
-            user: User.empty().copyWith(
-              //this make isReturnsEnable = false
-              disableReturns: true,
-            ),
+        EligibilityState.initial().copyWith(
+          user: User.empty().copyWith(
+            //this make isReturnsEnable = false
+            disableReturns: true,
           ),
+        ),
       );
       // Act
       await tester.pumpWidget(
@@ -184,7 +183,7 @@ void main() {
       // Assert
       expect(find.byType(SizedBox), findsOneWidget);
     });
-    
+
     // testWidgets(
     //   'Returns Features Visibility Test - Root admin',
     //   (tester) async {

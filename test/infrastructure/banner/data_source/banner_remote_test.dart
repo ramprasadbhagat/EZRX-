@@ -103,7 +103,6 @@ void main() {
       });
     });
     test('Exception Checker with status code equals to 200', () async {
-
       dioAdapter.onPost(
         '${remoteDataSource.config.urlConstants}license',
         (server) => server.reply(

@@ -98,7 +98,7 @@ void main() {
     locator = GetIt.instance;
     locator.registerLazySingleton(() => MixpanelService());
     locator<MixpanelService>().init(mixpanel: MixpanelMock());
-    locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
+    locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton(() => AppRouter());
     mockHTTPService = MockHTTPService();
     cacheManagerMock = MockCacheManager();
@@ -200,7 +200,7 @@ void main() {
 
     testWidgets('Banner test 2 - Non Mock Flavour', (tester) async {
       final config = locator<Config>();
-      config.appFlavor = Flavor.uat;
+      config.appFlavor = Flavor.mock;
       await tester.pumpWidget(getWUT(config));
       await tester.pump();
 
@@ -213,7 +213,7 @@ void main() {
 
     testWidgets('Banner test 3 - Have mock cache file', (tester) async {
       final config = locator<Config>();
-      config.appFlavor = Flavor.uat;
+      config.appFlavor = Flavor.mock;
       const fileSystem = LocalFileSystem();
 
       when(
@@ -254,7 +254,7 @@ void main() {
     testWidgets('Banner test 3 - Have mock cache file with keyword ',
         (tester) async {
       final config = locator<Config>();
-      config.appFlavor = Flavor.uat;
+      config.appFlavor = Flavor.mock;
       const fileSystem = LocalFileSystem();
       mockBanner =
           mockBanner.copyWith(isKeyword: true, keyword: 'fake-keyword');
@@ -313,7 +313,7 @@ void main() {
     testWidgets('Banner test 4 - Mock cache file when flavor is mock',
         (tester) async {
       final config = locator<Config>();
-      config.appFlavor = Flavor.uat;
+      config.appFlavor = Flavor.mock;
 
       when(
         () => cacheManagerMock.getFileFromCache(mockUrl),
@@ -335,7 +335,7 @@ void main() {
     testWidgets('Test Banner deep linking to filter material search',
         (tester) async {
       final config = locator<Config>();
-      config.appFlavor = Flavor.uat;
+      config.appFlavor = Flavor.mock;
       const fileSystem = LocalFileSystem();
       mockBanner =
           mockBanner.copyWith(isKeyword: true, keyword: 'fake-keyword');

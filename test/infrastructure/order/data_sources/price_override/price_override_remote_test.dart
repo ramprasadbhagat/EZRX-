@@ -20,7 +20,7 @@ class PriceMock extends Mock implements Price {}
 
 void main() {
   late PriceOverrideRemoteDataSource remoteDataSource;
-  locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
+  locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
 
   final dio = Dio(
     BaseOptions(

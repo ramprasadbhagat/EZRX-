@@ -120,7 +120,7 @@ void main() {
     TestWidgetsFlutterBinding.ensureInitialized();
     locator = GetIt.instance;
     orderHistoryItem = await OrderHistoryLocalDataSource().getOrderHistory();
-    locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
+    locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton(() => AppRouter());
     locator.registerLazySingleton(() => mockOrderHistoryListBloc);
     locator.registerLazySingleton(() => mockShipToCodeBloc);

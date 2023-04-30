@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'request_information_header_dto.dart';
 
@@ -583,6 +583,7 @@ class _$_RequestInformationHeaderDto extends _RequestInformationHeaderDto {
   @override
   @JsonKey(name: 'returnInvoices', defaultValue: <ReturnInvoicesDto>[])
   List<ReturnInvoicesDto> get returnInvoices {
+    if (_returnInvoices is EqualUnmodifiableListView) return _returnInvoices;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_returnInvoices);
   }
@@ -591,6 +592,7 @@ class _$_RequestInformationHeaderDto extends _RequestInformationHeaderDto {
   @override
   @JsonKey(name: 'salesDoc', defaultValue: <RetrunSalesDocDto>[])
   List<RetrunSalesDocDto> get salesDoc {
+    if (_salesDoc is EqualUnmodifiableListView) return _salesDoc;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_salesDoc);
   }
@@ -1175,6 +1177,7 @@ class _$_RetrunSalesDocDto extends _RetrunSalesDocDto {
   @override
   @JsonKey(name: 'creditNotes', defaultValue: <ReturnCreditNotesDto>[])
   List<ReturnCreditNotesDto> get creditNotes {
+    if (_creditNotes is EqualUnmodifiableListView) return _creditNotes;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_creditNotes);
   }
@@ -1388,6 +1391,7 @@ class _$_ReturnCreditNotesDto extends _ReturnCreditNotesDto {
   @override
   @JsonKey(name: 'materials', defaultValue: <ReturnMaterialDto>[])
   List<ReturnMaterialDto> get materials {
+    if (_materials is EqualUnmodifiableListView) return _materials;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_materials);
   }

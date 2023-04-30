@@ -19,21 +19,19 @@ import '../../order_history/order_history_details_widget_test.dart';
 class ShipToCodeBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState>
     implements ShipToCodeBloc {}
 
-
-
 class MockPaymentCustomerInformationBloc extends MockBloc<
         PaymentCustomerInformationEvent, PaymentCustomerInformationState>
     implements PaymentCustomerInformationBloc {}
 
 void main() {
   late AppRouter autoRouterMock;
-  
+
   late ShipToCodeBloc shipToCodeBlocMock;
   late PaymentCustomerInformationBloc paymentCustomerInformationBloc;
 
   setUpAll(
     () async {
-      locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
+      locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
       locator.registerLazySingleton(() => AppRouter());
       locator.registerLazySingleton(() => MixpanelService());
       locator<MixpanelService>().init(mixpanel: MixpanelMock());

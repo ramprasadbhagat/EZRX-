@@ -30,7 +30,7 @@ class CartRepository implements ICartRepository {
   final Config config;
   final StockInfoLocalDataSource stockInfoLocalDataSource;
   final StockInfoRemoteDataSource stockInfoRemoteDataSource;
-  
+
   final MixpanelService mixpanelService;
 
   CartRepository({
@@ -38,7 +38,6 @@ class CartRepository implements ICartRepository {
     required this.config,
     required this.stockInfoLocalDataSource,
     required this.stockInfoRemoteDataSource,
-    
     required this.mixpanelService,
   });
 
@@ -75,7 +74,6 @@ class CartRepository implements ICartRepository {
     required ShipToInfo shipToInfo,
     required bool doNotAllowOutOfStockMaterials,
   }) async {
-
     try {
       final stockInfo = await getStockInfoList(
         items: cartItem.materials.map((e) => e.materialInfo).toList(),
@@ -105,9 +103,7 @@ class CartRepository implements ICartRepository {
           },
         );
 
-        return const Left(
-          ApiFailure.productOutOfStock(),
-        );
+        return const Left(ApiFailure.productOutOfStock());
       }
 
       final inCartItem = cartStorage.get(id: cartItemWithStock.id)?.toDomain;
@@ -339,9 +335,6 @@ class CartRepository implements ICartRepository {
                   bonus.additionalBonusFlag ==
                       newBonusWithStock.additionalBonusFlag) {
                 bonusExisting = true;
-                if (overrideQty) {
-                  return newBonusWithStock;
-                }
 
                 return bonus.copyWith(
                   qty: bonus.qty + newBonusWithStock.qty,

@@ -197,12 +197,12 @@ void main() {
           '/api/pricing',
           (server) => server.reply(
             200,
-             {
-                'data': null,
-                'errors': [
-                  {'message': 'fake-error'}
-                ],
-              },
+            {
+              'data': null,
+              'errors': [
+                {'message': 'fake-error'}
+              ],
+            },
             delay: const Duration(seconds: 1),
           ),
           headers: {'Content-Type': 'application/json; charset=utf-8'},

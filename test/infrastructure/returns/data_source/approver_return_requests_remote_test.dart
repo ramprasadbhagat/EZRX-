@@ -83,9 +83,8 @@ void main() {
               result,
               List.from(res['data']['requestsForApproverV2']['requestID'])
                   .map(
-                    (e) =>
-                        ReturnRequestsIdDto.fromJson({'requestId': e})
-                            .toDomain(),
+                    (e) => ReturnRequestsIdDto.fromJson({'requestId': e})
+                        .toDomain(),
                   )
                   .toList()
                 ..retainWhere((element) => element.isValidRequestId));

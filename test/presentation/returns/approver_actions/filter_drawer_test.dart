@@ -28,8 +28,6 @@ class ReturnApproverFilterBlocMock
     extends MockBloc<ReturnApproverFilterEvent, ReturnApproverFilterState>
     implements ReturnApproverFilterBloc {}
 
-
-
 class ShipToCodeBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState>
     implements ShipToCodeBloc {}
 
@@ -40,11 +38,10 @@ void main() {
   late AppRouter autoRouterMock;
   late ReturnApproverBloc returnApproverBlocMock;
   late ReturnApproverFilterBloc returnApproverFilterBlocMock;
-  
+
   late ShipToCodeBloc shipToCodeBlocMock;
   late SalesOrgBloc salesOrgBlocMock;
   final mockReturnApproverFilter = ReturnApproverFilter.empty();
-
 
   final fakeToDate = DateTime.parse(
     DateFormat('yyyyMMdd').format(
@@ -62,7 +59,7 @@ void main() {
 
   setUpAll(
     () {
-      locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
+      locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
       locator.registerLazySingleton(() => AppRouter());
     },
   );
@@ -118,7 +115,10 @@ void main() {
         expect(find.byKey(const Key('filterCreatedBy')), findsOneWidget);
         expect(find.byKey(const Key('shipToSearchField')), findsOneWidget);
         expect(find.byKey(const Key('soldToSearchField')), findsOneWidget);
-        expect(find.byKey( Key('filterInvoiceDateField+${mockReturnApproverFilter.getFilteredInvoiceDate}')), findsOneWidget);
+        expect(
+            find.byKey(Key(
+                'filterInvoiceDateField+${mockReturnApproverFilter.getFilteredInvoiceDate}')),
+            findsOneWidget);
         expect(find.byKey(const Key('filterApplyButton')), findsOneWidget);
         expect(find.byKey(const Key('filterClearButton')), findsOneWidget);
       },
@@ -427,9 +427,8 @@ void main() {
         await tester.pumpWidget(getWidget());
         await tester.pumpAndSettle();
 
-        final filterFromDateField =
-            find.byKey( Key('filterInvoiceDateField+${mockReturnApproverFilter.getFilteredInvoiceDate}'
-            ));
+        final filterFromDateField = find.byKey(Key(
+            'filterInvoiceDateField+${mockReturnApproverFilter.getFilteredInvoiceDate}'));
         expect(filterFromDateField, findsOneWidget);
         await tester.tap(filterFromDateField);
         await tester.pumpAndSettle();

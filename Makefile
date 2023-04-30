@@ -5,6 +5,11 @@ CLIENTUSER := 'order/client_user.dart'
 EXTERNALSALESREP := 'order/external_sales_rep.dart'
 
 run_test:
+	@fvm flutter analyze --fatal-infos --fatal-warnings
+	@fvm flutter pub run dart_code_metrics:metrics analyze lib --fatal-style --fatal-performance --fatal-warnings
+	# @fvm flutter pub run dart_code_metrics:metrics check-unnecessary-nullable lib --fatal-found
+	# @fvm flutter pub run dart_code_metrics:metrics check-unused-code lib --fatal-unused
+	# @fvm flutter pub run dart_code_metrics:metrics check-unused-files lib --fatal-unused  
 	@fvm flutter test --coverage && genhtml coverage/lcov.info -o coverage/html && open coverage/html/index.html
 run_uat_cd:
 	@git tag -a uat.${VERSION}-${BUILD} -m "uat ${VERSION}(${BUILD})" && git push origin uat.${VERSION}-${BUILD}

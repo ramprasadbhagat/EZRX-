@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'order_history_details_shipping_information_dto.dart';
 
@@ -57,28 +57,25 @@ abstract class $OrderHistoryDetailsShippingInformationDtoCopyWith<$Res> {
       _$OrderHistoryDetailsShippingInformationDtoCopyWithImpl<$Res,
           OrderHistoryDetailsShippingInformationDto>;
   @useResult
-  $Res
-      call(
-          {@JsonKey(name: 'Address', defaultValue: '')
-              String address,
-          @JsonKey(name: 'POReference', defaultValue: '')
-              String pOReference,
-          @JsonKey(name: 'InvoiceNumber', defaultValue: '')
-              String invoiceNumber,
-          @JsonKey(name: 'InvoiceDate', defaultValue: '')
-              String invoiceDate,
-          @JsonKey(name: 'PostalCode', defaultValue: '')
-              String postalCode,
-          @JsonKey(name: 'Country', defaultValue: '')
-              String country,
-          @JsonKey(name: 'Phone', defaultValue: '')
-              String phone,
-          @JsonKey(name: 'Fax', defaultValue: '')
-              String fax,
-          @JsonKey(
-              name: 'Invoices', defaultValue: <
-                  OrderHistoryDetailsInvoicesDto>[])
-              List<OrderHistoryDetailsInvoicesDto> invoices});
+  $Res call(
+      {@JsonKey(name: 'Address', defaultValue: '')
+          String address,
+      @JsonKey(name: 'POReference', defaultValue: '')
+          String pOReference,
+      @JsonKey(name: 'InvoiceNumber', defaultValue: '')
+          String invoiceNumber,
+      @JsonKey(name: 'InvoiceDate', defaultValue: '')
+          String invoiceDate,
+      @JsonKey(name: 'PostalCode', defaultValue: '')
+          String postalCode,
+      @JsonKey(name: 'Country', defaultValue: '')
+          String country,
+      @JsonKey(name: 'Phone', defaultValue: '')
+          String phone,
+      @JsonKey(name: 'Fax', defaultValue: '')
+          String fax,
+      @JsonKey(name: 'Invoices', defaultValue: <OrderHistoryDetailsInvoicesDto>[])
+          List<OrderHistoryDetailsInvoicesDto> invoices});
 }
 
 /// @nodoc
@@ -156,28 +153,25 @@ abstract class _$$_OrderHistoryDetailsShippingInformationDtoCopyWith<$Res>
       __$$_OrderHistoryDetailsShippingInformationDtoCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res
-      call(
-          {@JsonKey(name: 'Address', defaultValue: '')
-              String address,
-          @JsonKey(name: 'POReference', defaultValue: '')
-              String pOReference,
-          @JsonKey(name: 'InvoiceNumber', defaultValue: '')
-              String invoiceNumber,
-          @JsonKey(name: 'InvoiceDate', defaultValue: '')
-              String invoiceDate,
-          @JsonKey(name: 'PostalCode', defaultValue: '')
-              String postalCode,
-          @JsonKey(name: 'Country', defaultValue: '')
-              String country,
-          @JsonKey(name: 'Phone', defaultValue: '')
-              String phone,
-          @JsonKey(name: 'Fax', defaultValue: '')
-              String fax,
-          @JsonKey(
-              name: 'Invoices', defaultValue: <
-                  OrderHistoryDetailsInvoicesDto>[])
-              List<OrderHistoryDetailsInvoicesDto> invoices});
+  $Res call(
+      {@JsonKey(name: 'Address', defaultValue: '')
+          String address,
+      @JsonKey(name: 'POReference', defaultValue: '')
+          String pOReference,
+      @JsonKey(name: 'InvoiceNumber', defaultValue: '')
+          String invoiceNumber,
+      @JsonKey(name: 'InvoiceDate', defaultValue: '')
+          String invoiceDate,
+      @JsonKey(name: 'PostalCode', defaultValue: '')
+          String postalCode,
+      @JsonKey(name: 'Country', defaultValue: '')
+          String country,
+      @JsonKey(name: 'Phone', defaultValue: '')
+          String phone,
+      @JsonKey(name: 'Fax', defaultValue: '')
+          String fax,
+      @JsonKey(name: 'Invoices', defaultValue: <OrderHistoryDetailsInvoicesDto>[])
+          List<OrderHistoryDetailsInvoicesDto> invoices});
 }
 
 /// @nodoc
@@ -302,6 +296,7 @@ class _$_OrderHistoryDetailsShippingInformationDto
   @override
   @JsonKey(name: 'Invoices', defaultValue: <OrderHistoryDetailsInvoicesDto>[])
   List<OrderHistoryDetailsInvoicesDto> get invoices {
+    if (_invoices is EqualUnmodifiableListView) return _invoices;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_invoices);
   }

@@ -80,7 +80,7 @@ void main() {
   late AnnouncementBloc announcementBlocMock;
 
   setUpAll(() async {
-    locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
+    locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton(() => AppRouter());
     locator.registerLazySingleton(() => MixpanelService());
     autoRouterMock = locator<AppRouter>();
@@ -230,23 +230,22 @@ void main() {
       when(() => shipToCodeBlocMock.state)
           .thenReturn(ShipToCodeState.initial().copyWith(
         shipToInfo: ShipToInfo(
-          defaultShipToAddress: true,
-          shipToCustomerCode: '',
-          shipToName: ShipToName.empty(),
-          shipToAddress: ShipToAddress.empty(),
-          status: Status(''),
-          building: '',
-          city1: '',
-          city2: '',
-          postalCode: '',
-          houseNumber1: '',
-          telephoneNumber: '',
-          region: '',
-          floor: '',
-          plant: '',
-          licenses: [],
-          country: ''
-        ),
+            defaultShipToAddress: true,
+            shipToCustomerCode: '',
+            shipToName: ShipToName.empty(),
+            shipToAddress: ShipToAddress.empty(),
+            status: Status(''),
+            building: '',
+            city1: '',
+            city2: '',
+            postalCode: '',
+            houseNumber1: '',
+            telephoneNumber: '',
+            region: '',
+            floor: '',
+            plant: '',
+            licenses: [],
+            country: ''),
       ));
 
       final expectedState = [

@@ -111,11 +111,12 @@ void main() {
             }),
           );
 
-          final result =
-              await remoteDataSource.getPolicyConfiguration(salesOrg: salesOrg,
-              offSet: 0,
-              pageSize: 10,
-              searchKey: '',);
+          final result = await remoteDataSource.getPolicyConfiguration(
+            salesOrg: salesOrg,
+            offSet: 0,
+            pageSize: 10,
+            searchKey: '',
+          );
 
           expect(
             result.length,
@@ -150,10 +151,12 @@ void main() {
           );
 
           await remoteDataSource
-              .getPolicyConfiguration(salesOrg: salesOrg,
-              offSet: 0,
-              pageSize: 10,
-              searchKey: '',)
+              .getPolicyConfiguration(
+            salesOrg: salesOrg,
+            offSet: 0,
+            pageSize: 10,
+            searchKey: '',
+          )
               .onError((error, _) async {
             expect(error, isA<ServerException>());
             return Future.value(<PolicyConfigurationListMock>[]);
@@ -185,10 +188,12 @@ void main() {
           );
 
           await remoteDataSource
-              .getPolicyConfiguration(salesOrg: salesOrg,
-              offSet: 0,
-              pageSize: 10,
-              searchKey: '',)
+              .getPolicyConfiguration(
+            salesOrg: salesOrg,
+            offSet: 0,
+            pageSize: 10,
+            searchKey: '',
+          )
               .onError((error, _) async {
             expect(error, isA<ServerException>());
             return Future.value(<PolicyConfigurationListMock>[]);

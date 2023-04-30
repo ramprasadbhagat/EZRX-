@@ -58,7 +58,7 @@ void main() {
   late MaterialListBloc materialListBlocMock;
 
   setUpAll(() {
-    GetIt.instance.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
+    GetIt.instance.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     GetIt.instance.registerLazySingleton(() => AppRouter());
     locator.registerLazySingleton(() => MixpanelService());
     locator<MixpanelService>().init(mixpanel: MixpanelMock());

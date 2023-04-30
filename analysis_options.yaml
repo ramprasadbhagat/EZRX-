@@ -105,7 +105,7 @@ dart_code_metrics:
     - avoid-shrink-wrap-in-lists
     - avoid-unnecessary-setstate
     - always-remove-listener
-    - avoid-use-expanded-as-spacer
+    - avoid-expanded-as-spacer
     # - prefer-correct-edge-insets-constructor
     - avoid-returning-widgets
     

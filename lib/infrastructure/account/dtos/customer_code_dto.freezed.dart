@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'customer_code_dto.dart';
 
@@ -661,6 +661,7 @@ class _$_CustomerCodeDto extends _CustomerCodeDto {
   @override
   @JsonKey(name: 'shipTo')
   List<ShipToDto> get shipToInfos {
+    if (_shipToInfos is EqualUnmodifiableListView) return _shipToInfos;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_shipToInfos);
   }
@@ -669,6 +670,7 @@ class _$_CustomerCodeDto extends _CustomerCodeDto {
   @override
   @JsonKey(name: 'billTo')
   List<BillToDto> get billToInfos {
+    if (_billToInfos is EqualUnmodifiableListView) return _billToInfos;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_billToInfos);
   }
@@ -686,6 +688,7 @@ class _$_CustomerCodeDto extends _CustomerCodeDto {
   @override
   @JsonKey(name: 'emailAddresses', defaultValue: [])
   List<String> get emailAddresses {
+    if (_emailAddresses is EqualUnmodifiableListView) return _emailAddresses;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_emailAddresses);
   }
@@ -697,6 +700,7 @@ class _$_CustomerCodeDto extends _CustomerCodeDto {
   @override
   @JsonKey(name: 'salesDeals', defaultValue: [])
   List<String> get salesDeals {
+    if (_salesDeals is EqualUnmodifiableListView) return _salesDeals;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_salesDeals);
   }

@@ -34,7 +34,7 @@ void main() {
   late AppRouter autoRouterMock;
   setUpAll(
     () {
-      locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
+      locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
       locator.registerLazySingleton(() => AppRouter());
     },
   );
@@ -156,8 +156,5 @@ void main() {
         },
       );
     },
-    
   );
-
-  
 }

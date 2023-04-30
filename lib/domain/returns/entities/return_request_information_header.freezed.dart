@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'return_request_information_header.dart';
 
@@ -459,6 +459,7 @@ class _$_ReturnRequestInformationHeader
   final List<ReturnInvoices> _returnInvoices;
   @override
   List<ReturnInvoices> get returnInvoices {
+    if (_returnInvoices is EqualUnmodifiableListView) return _returnInvoices;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_returnInvoices);
   }
@@ -466,6 +467,7 @@ class _$_ReturnRequestInformationHeader
   final List<ReturnSalesDoc> _salesDoc;
   @override
   List<ReturnSalesDoc> get salesDoc {
+    if (_salesDoc is EqualUnmodifiableListView) return _salesDoc;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_salesDoc);
   }
@@ -919,6 +921,7 @@ class _$_ReturnSalesDoc implements _ReturnSalesDoc {
   final List<ReturnCreditNotes> _creditNotes;
   @override
   List<ReturnCreditNotes> get creditNotes {
+    if (_creditNotes is EqualUnmodifiableListView) return _creditNotes;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_creditNotes);
   }
@@ -1084,6 +1087,7 @@ class _$_ReturnCreditNotes implements _ReturnCreditNotes {
   final List<ReturnMaterial> _materials;
   @override
   List<ReturnMaterial> get materials {
+    if (_materials is EqualUnmodifiableListView) return _materials;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_materials);
   }

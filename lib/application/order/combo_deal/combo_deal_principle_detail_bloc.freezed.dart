@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'combo_deal_principle_detail_bloc.dart';
 
@@ -393,6 +393,7 @@ class _$_InitFromCart implements _InitFromCart {
   final List<PriceAggregate> _items;
   @override
   List<PriceAggregate> get items {
+    if (_items is EqualUnmodifiableListView) return _items;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_items);
   }
@@ -719,6 +720,7 @@ class _$_Fetch implements _Fetch {
   final List<String> _principles;
   @override
   List<String> get principles {
+    if (_principles is EqualUnmodifiableListView) return _principles;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_principles);
   }
@@ -1077,6 +1079,7 @@ class _$_LoadMore implements _LoadMore {
   final List<String> _principles;
   @override
   List<String> get principles {
+    if (_principles is EqualUnmodifiableListView) return _principles;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_principles);
   }
@@ -1352,6 +1355,7 @@ class _$_SetPriceInfo implements _SetPriceInfo {
   final Map<MaterialNumber, MaterialPriceDetail> _priceMap;
   @override
   Map<MaterialNumber, MaterialPriceDetail> get priceMap {
+    if (_priceMap is EqualUnmodifiableMapView) return _priceMap;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableMapView(_priceMap);
   }
@@ -2431,6 +2435,7 @@ class _$_ComboDealPrincipleDetailState extends _ComboDealPrincipleDetailState {
   final Map<MaterialNumber, PriceAggregate> _items;
   @override
   Map<MaterialNumber, PriceAggregate> get items {
+    if (_items is EqualUnmodifiableMapView) return _items;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableMapView(_items);
   }
@@ -2438,6 +2443,7 @@ class _$_ComboDealPrincipleDetailState extends _ComboDealPrincipleDetailState {
   final Map<MaterialNumber, bool> _selectedItems;
   @override
   Map<MaterialNumber, bool> get selectedItems {
+    if (_selectedItems is EqualUnmodifiableMapView) return _selectedItems;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableMapView(_selectedItems);
   }

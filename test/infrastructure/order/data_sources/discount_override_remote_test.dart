@@ -144,7 +144,7 @@ void main() {
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
               'query': remoteDataSource.queryMutation.getMaterialPrice(),
-              'variables':  {
+              'variables': {
                 'salesOrganisation': '',
                 'customer': '',
                 'request': [{}],
@@ -181,7 +181,7 @@ void main() {
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
               'query': remoteDataSource.queryMutation.getMaterialPrice(),
-              'variables':  {
+              'variables': {
                 'salesOrganisation': '',
                 'customer': '',
                 'request': [{}],

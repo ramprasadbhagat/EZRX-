@@ -40,7 +40,7 @@ void main() {
   );
 
   setUpAll(() async {
-    locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
+    locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton(() => AppRouter());
     autoRouterMock = locator<AppRouter>();
   });

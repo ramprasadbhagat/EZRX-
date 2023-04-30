@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'combo_deal_dto.dart';
 
@@ -257,6 +257,7 @@ class _$_ComboDealDto extends _ComboDealDto {
   @JsonKey(name: 'flexiSKUTier', defaultValue: [])
   @HiveField(1, defaultValue: [])
   List<ComboDealSKUTierDto> get flexiSKUTier {
+    if (_flexiSKUTier is EqualUnmodifiableListView) return _flexiSKUTier;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_flexiSKUTier);
   }
@@ -266,6 +267,7 @@ class _$_ComboDealDto extends _ComboDealDto {
   @JsonKey(name: 'flexiQtyTier', defaultValue: [])
   @HiveField(2, defaultValue: [])
   List<ComboDealQtyTierDto> get flexiQtyTier {
+    if (_flexiQtyTier is EqualUnmodifiableListView) return _flexiQtyTier;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_flexiQtyTier);
   }
@@ -275,6 +277,7 @@ class _$_ComboDealDto extends _ComboDealDto {
   @JsonKey(name: 'flexiAmmountTier', defaultValue: [])
   @HiveField(3, defaultValue: [])
   List<ComboDealAmountTierDto> get flexiAmountTier {
+    if (_flexiAmountTier is EqualUnmodifiableListView) return _flexiAmountTier;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_flexiAmountTier);
   }
@@ -284,6 +287,8 @@ class _$_ComboDealDto extends _ComboDealDto {
   @JsonKey(name: 'materialComboDeals', defaultValue: [])
   @HiveField(4, defaultValue: [])
   List<ComboDealMaterialSetDto> get materialComboDeals {
+    if (_materialComboDeals is EqualUnmodifiableListView)
+      return _materialComboDeals;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_materialComboDeals);
   }
@@ -293,6 +298,7 @@ class _$_ComboDealDto extends _ComboDealDto {
   @JsonKey(name: 'flexiTierRule', defaultValue: [])
   @HiveField(5, defaultValue: [])
   List<ComboDealTierRuleDto> get flexiTierRule {
+    if (_flexiTierRule is EqualUnmodifiableListView) return _flexiTierRule;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_flexiTierRule);
   }

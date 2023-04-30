@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'price_dto.dart';
 
@@ -513,6 +513,7 @@ class _$_PriceDto extends _PriceDto {
   @JsonKey(name: 'PriceRules', defaultValue: <PriceRuleDto>[])
   @HiveField(1, defaultValue: <PriceRuleDto>[])
   List<PriceRuleDto> get rules {
+    if (_rules is EqualUnmodifiableListView) return _rules;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_rules);
   }
@@ -522,6 +523,7 @@ class _$_PriceDto extends _PriceDto {
   @JsonKey(name: 'TieredPricing', defaultValue: <PriceTierDto>[])
   @HiveField(2, defaultValue: <PriceTierDto>[])
   List<PriceTierDto> get tiers {
+    if (_tiers is EqualUnmodifiableListView) return _tiers;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_tiers);
   }
@@ -531,6 +533,7 @@ class _$_PriceDto extends _PriceDto {
   @JsonKey(name: 'Bonuses', defaultValue: <PriceBonusDto>[])
   @HiveField(3, defaultValue: <PriceBonusDto>[])
   List<PriceBonusDto> get bonuses {
+    if (_bonuses is EqualUnmodifiableListView) return _bonuses;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_bonuses);
   }
@@ -540,6 +543,7 @@ class _$_PriceDto extends _PriceDto {
   @JsonKey(name: 'Bundles', defaultValue: <PriceBundleDto>[])
   @HiveField(4, defaultValue: <PriceBundleDto>[])
   List<PriceBundleDto> get bundles {
+    if (_bundles is EqualUnmodifiableListView) return _bundles;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_bundles);
   }

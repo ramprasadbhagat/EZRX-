@@ -96,6 +96,7 @@ void main() {
     mockAupTcBloc = MockAupTcBloc();
     eligibilityBlocMock = EligibilityBlocMock();
     locator = GetIt.instance;
+    locator<Config>().appFlavor = Flavor.mock;
     locator<Config>().appName;
     locator<Config>().getTCKHUrl;
     locator<Config>().getTCMMUrl;

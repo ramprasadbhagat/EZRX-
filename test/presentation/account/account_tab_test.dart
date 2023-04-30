@@ -114,7 +114,7 @@ void main() {
   late AppRouter autoRouterMock;
   late CartBloc cartBlocMock;
   setUpAll(() {
-    locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
+    locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton(() => AppRouter());
   });
   group('Account Tab Screen', () {

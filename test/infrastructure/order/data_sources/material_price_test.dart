@@ -20,7 +20,7 @@ class MockPrice extends Mock implements Price {}
 
 void main() {
   late MaterialPriceRemoteDataSource remoteDataSource;
-  locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
+  locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
 
   final dio = Dio(
     BaseOptions(
@@ -93,9 +93,9 @@ void main() {
           'customer': 'fake-customer-code',
           'shipToCode': 'fake-ship-code',
           'request': {
-          'MaterialNumber': 'fake-number',
-          'salesDeal': [],
-        },
+            'MaterialNumber': 'fake-number',
+            'salesDeal': [],
+          },
         };
         final res = json.decode(
           await rootBundle
@@ -126,10 +126,9 @@ void main() {
         final priceData = res['data']['price'][0];
 
         expect(
-            result,
-            PriceDto.fromJson(priceData).toDomain(),
-             );
-
+          result,
+          PriceDto.fromJson(priceData).toDomain(),
+        );
       });
 
       test('Statuscode not equal to 200', () async {
@@ -169,14 +168,14 @@ void main() {
       });
 
       test('response with errors', () async {
-         final variables = {
+        final variables = {
           'salesOrganisation': 'fake-sales-org',
           'customer': 'fake-customer-code',
           'shipToCode': 'fake-ship-code',
           'request': {
-          'MaterialNumber': 'fake-number',
-          'salesDeal': [],
-        },
+            'MaterialNumber': 'fake-number',
+            'salesDeal': [],
+          },
         };
 
         dioAdapter.onPost(
@@ -200,7 +199,7 @@ void main() {
 
         await remoteDataSource
             .getMaterialPriceList(
-         customerCode: 'fake-customer-code',
+          customerCode: 'fake-customer-code',
           salesDeal: [],
           materialNumbers: [],
           salesOrgCode: 'fake-sales-org',

@@ -172,7 +172,7 @@ void main() {
   setUpAll(() async {
     locator.registerLazySingleton(() => MixpanelService());
     locator<MixpanelService>().init(mixpanel: MixpanelMock());
-    locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
+    locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton(() => DiscountOverrideRepositoryMock());
     locator.registerFactory(() =>
         DiscountOverrideBloc(repository: DiscountOverrideRepositoryMock()));

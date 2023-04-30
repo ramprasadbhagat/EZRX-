@@ -91,7 +91,6 @@ void main() {
       });
 
       test('status not equal to 200', () async {
-
         dioAdapter.onPost(
           '/api//order',
           (server) => server.reply(
@@ -128,7 +127,6 @@ void main() {
       });
 
       test('response with error', () async {
-
         dioAdapter.onPost(
           '/api//order',
           (server) => server.reply(

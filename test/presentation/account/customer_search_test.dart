@@ -105,7 +105,7 @@ void main() {
   late AuthBloc authBlocMock;
   late AnnouncementBloc announcementBlocMock;
   setUpAll(() {
-    locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
+    locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton(() => MixpanelService());
     locator<MixpanelService>().init(mixpanel: MixpanelMock());
     locator.registerLazySingleton(() => AppRouter());
