@@ -35,7 +35,9 @@ class UserDto with _$UserDto {
     @_SalesOrganisationListConverter()
     @JsonKey(name: 'userSalesOrganisationList', defaultValue: [])
         required List<SalesOrganisationDto> userSalesOrganisations,
-    @JsonKey(name: 'accessRight') required AccessRightDto accessRight,
+    @Default(AccessRightDto.emptyAccessRightDto)
+    @JsonKey(name: 'accessRight')
+        AccessRightDto accessRight,
     @JsonKey(name: 'emailNotifications', defaultValue: false)
         required bool emailNotifications,
     @JsonKey(name: 'mobileNotifications', defaultValue: false)
@@ -87,21 +89,10 @@ class UserDto with _$UserDto {
       hasPriceOverride: user.hasPriceOverride,
     );
   }
-  static const emptyAccessRight = AccessRightDto(
-    users: false,
-    orders: false,
-    promos: false,
-    hCPHUB: false,
-    products: false,
-    services: false,
-    analytics: false,
-    loyaltyScheme: false,
-  );
   static const emptyUserDto = UserDto(
     acceptPrivacyPolicy: false,
     acceptPrivacyPolicyTime: '',
     customerCode: '',
-    accessRight: emptyAccessRight,
     email: '',
     emailNotifications: false,
     enableOrderType: false,

@@ -6,10 +6,7 @@
                 "name": "qweqweqwewqcszczc",
                 "cartList": "[{\"bundleName\":\"\",\"bundleCode\":\"\",\"materials\":[],\"qty\":5,\"hidePrice\":false,\"additionalBonus\":[{\"MaterialNumber\":\"000000000011007178\"}],\"materialGroup2\":\"\",\"materialGroup4\":\"6PA\",\"materialNumber\":\"000000000011007178\",\"unitOfMeasurement\":\"EA\",\"itemRegistrationNumber\":\"SIN 1897P\",\"defaultMaterialDescription\":\"(TG)Amoxil Cap 500mg 1x100's\",\"materialDescription\":\"\",\"type\":\"Comm\",\"comment\":\"\",\"batchNumber\":\"\",\"zdp8Override\":0.0,\"remarks\":\"\",\"bundleInformation\":[],\"totalQuantity\":0},{\"bundleName\":\"\",\"bundleCode\":\"0010276898\",\"materials\":[{\"materialNumber\":\"000000000023007401\",\"materialDescription\":\"Veg Glucosamine Sulphate 1500mg  2x60s\",\"governmentMaterialCode\":\"\",\"therapeuticClass\":\"Antirheumatics, non-steroidal plain\",\"itemBrand\":\"Veg Glucosamine Sulp\",\"principalName\":\"Ocean Health Pte Ltd\",\"principalCode\":\"0000100748\",\"taxClassification\":\"Product : Full Tax\",\"itemRegistrationNumber\":\"\",\"unitOfMeasurement\":\"EA\",\"materialGroup2\":\"50\",\"materialGroup4\":\"6GS\",\"isSampleMaterial\":false,\"hidePrice\":false,\"hasValidTenderContract\":false,\"hasMandatoryTenderContract\":false,\"taxes\":[\"0\"],\"bundles\":[],\"defaultMaterialDescription\":\"Veg Glucosamine Sulphate 1500mg  2x60s\",\"isFOCMaterial\":false,\"quantity\":1,\"remarks\":\"\"},{\"materialNumber\":\"000000000023007377\",\"materialDescription\":\"Skin Nutrition Capsule 2x60s\",\"governmentMaterialCode\":\"\",\"therapeuticClass\":\"Emollients, protectives\",\"itemBrand\":\"Skin Nutrition Capsu\",\"principalName\":\"Ocean Health Pte Ltd\",\"principalCode\":\"0000100748\",\"taxClassification\":\"Product : Full Tax\",\"itemRegistrationNumber\":\"\",\"unitOfMeasurement\":\"EA\",\"materialGroup2\":\"50\",\"materialGroup4\":\"6GS\",\"isSampleMaterial\":false,\"hidePrice\":false,\"hasValidTenderContract\":false,\"hasMandatoryTenderContract\":false,\"taxes\":[\"0\"],\"bundles\":[],\"defaultMaterialDescription\":\"Skin Nutrition Capsule 2x60s\",\"isFOCMaterial\":false,\"quantity\":2,\"remarks\":\"\"},{\"materialNumber\":\"000000000023007310\",\"materialDescription\":\"Joint RX Cap w       300s + 50g\",\"governmentMaterialCode\":\"\",\"therapeuticClass\":\"A-rheumatics, non-steroidal combination\",\"itemBrand\":\"Joint RX Cap w\",\"principalName\":\"Ocean Health Pte Ltd\",\"principalCode\":\"0000100748\",\"taxClassification\":\"Product : Full Tax\",\"itemRegistrationNumber\":\"\",\"unitOfMeasurement\":\"EA\",\"materialGroup2\":\"50\",\"materialGroup4\":\"6GS\",\"isSampleMaterial\":false,\"hidePrice\":false,\"hasValidTenderContract\":false,\"hasMandatoryTenderContract\":false,\"taxes\":[\"0\"],\"bundles\":[],\"defaultMaterialDescription\":\"Joint RX Cap w       300s + 50g\",\"isFOCMaterial\":false,\"quantity\":3,\"remarks\":\"\"},{\"materialNumber\":\"000000000023007396\",\"materialDescription\":\"Joint GS-500        Cap          270's\",\"governmentMaterialCode\":\"\",\"therapeuticClass\":\"A-rheumatics, non-steroidal combination\",\"itemBrand\":\"Joint GS-500\",\"principalName\":\"Ocean Health Pte Ltd\",\"principalCode\":\"0000100748\",\"taxClassification\":\"Product : Full Tax\",\"itemRegistrationNumber\":\"\",\"unitOfMeasurement\":\"EA\",\"materialGroup2\":\"50\",\"materialGroup4\":\"6GS\",\"isSampleMaterial\":false,\"hidePrice\":false,\"hasValidTenderContract\":false,\"hasMandatoryTenderContract\":false,\"taxes\":[\"0\"],\"bundles\":[],\"defaultMaterialDescription\":\"Joint GS-500        Cap          270's\",\"isFOCMaterial\":false,\"quantity\":4,\"remarks\":\"\"}],\"qty\":0,\"hidePrice\":false,\"additionalBonus\":[],\"materialGroup2\":\"\",\"materialGroup4\":\"\",\"materialNumber\":\"\",\"unitOfMeasurement\":\"\",\"itemRegistrationNumber\":\"\",\"defaultMaterialDescription\":\"\",\"materialDescription\":\"\",\"type\":\"Bundle\",\"comment\":\"\",\"batchNumber\":\"\",\"zdp8Override\":0.0,\"remarks\":\"\",\"bundleInformation\":[{\"sequence\":1,\"quantity\":1,\"type\":\"%\",\"rate\":-10.0},{\"sequence\":4,\"quantity\":10,\"type\":\"%\",\"rate\":-15.0},{\"sequence\":7,\"quantity\":15,\"type\":\"%\",\"rate\":-20.0},{\"sequence\":13,\"quantity\":50,\"type\":\"%\",\"rate\":-30.0},{\"sequence\":10,\"quantity\":20,\"type\":\"%\",\"rate\":-25.0}],\"totalQuantity\":10}]",
                 "user": {
-                    "id": "11461",
-                    "accessRight":{
-                        "Orders":true
-                    }
+                    "id": "11461"
                 }
             },
             {
@@ -17,10 +14,7 @@
                 "name": "asfasad",
                 "cartList": "[{\"materialNumber\":\"000000000021211474\",\"materialGroup4\":\"6GS\",\"qty\":4,\"type\":\"Comm\",\"principalName\":\"Pfizer PFE Private Limited test\",\"materialDescription\":\"?Genotropin GQ 5.3MG SFDPO 1xPTCC DEMO\",\"hasValidTenderContract\":null,\"orderType\":\"\",\"orderReason\":\"\",\"orderTypeDescription\":\"\",\"orderTypeShipping\":\"\"},{\"materialNumber\":\"000000000021027094\",\"materialGroup4\":\"6GS\",\"qty\":3,\"type\":\"Comm\",\"principalName\":\"GSK Consumer Healthcare\",\"materialDescription\":\"Biotene MouthWash 237/240ml Twin Pack\",\"hasValidTenderContract\":null,\"orderType\":\"\",\"orderReason\":\"\",\"orderTypeDescription\":\"\",\"orderTypeShipping\":\"\"},{\"materialNumber\":\"000000000021095980\",\"materialGroup4\":\"6GS\",\"qty\":4,\"type\":\"Comm\",\"principalName\":\"GSK Consumer Healthcare\",\"materialDescription\":\"BREATHE RIGHT CLEAR MEDIUM X12\",\"hasValidTenderContract\":null,\"orderType\":\"\",\"orderReason\":\"\",\"orderTypeDescription\":\"\",\"orderTypeShipping\":\"\"}]",
                 "user": {
-                    "id": "11461",
-                    "accessRight":{
-                        "Orders":true
-                    }
+                    "id": "11461"
                 }
             },
             {
@@ -28,10 +22,7 @@
                 "name": "qfw",
                 "cartList": "null",
                 "user": {
-                    "id": "11461",
-                    "accessRight":{
-                        "Orders":true
-                    }
+                    "id": "11461"
                 }
             },
             {
@@ -39,10 +30,7 @@
                 "name": "dqw",
                 "cartList": "[{\"materialNumber\":\"000000000021211474\",\"materialGroup4\":\"6GS\",\"qty\":4,\"type\":\"Comm\",\"principalName\":\"Pfizer PFE Private Limited test\",\"materialDescription\":\"?Genotropin GQ 5.3MG SFDPO 1xPTCC DEMO\",\"hasValidTenderContract\":null,\"orderType\":\"\",\"orderReason\":\"\",\"orderTypeDescription\":\"\",\"orderTypeShipping\":\"\"},{\"materialNumber\":\"000000000021027094\",\"materialGroup4\":\"6GS\",\"qty\":3,\"type\":\"Comm\",\"principalName\":\"GSK Consumer Healthcare\",\"materialDescription\":\"Biotene MouthWash 237/240ml Twin Pack\",\"hasValidTenderContract\":null,\"orderType\":\"\",\"orderReason\":\"\",\"orderTypeDescription\":\"\",\"orderTypeShipping\":\"\"},{\"materialNumber\":\"000000000021095980\",\"materialGroup4\":\"6GS\",\"qty\":4,\"type\":\"Comm\",\"principalName\":\"GSK Consumer Healthcare\",\"materialDescription\":\"BREATHE RIGHT CLEAR MEDIUM X12\",\"hasValidTenderContract\":null,\"orderType\":\"\",\"orderReason\":\"\",\"orderTypeDescription\":\"\",\"orderTypeShipping\":\"\"}]",
                 "user": {
-                    "id": "11461",
-                    "accessRight":{
-                        "Orders":true
-                    }
+                    "id": "11461"
                 }
             },
             {
@@ -50,10 +38,7 @@
                 "name": "ffff",
                 "cartList": "[{\"materialNumber\":\"000000000021211474\",\"materialGroup4\":\"6GS\",\"qty\":4,\"type\":\"Comm\",\"principalName\":\"Pfizer PFE Private Limited test\",\"materialDescription\":\"?Genotropin GQ 5.3MG SFDPO 1xPTCC DEMO\",\"hasValidTenderContract\":null,\"orderType\":\"\",\"orderReason\":\"\",\"orderTypeDescription\":\"\",\"orderTypeShipping\":\"\"},{\"materialNumber\":\"000000000021027094\",\"materialGroup4\":\"6GS\",\"qty\":3,\"type\":\"Comm\",\"principalName\":\"GSK Consumer Healthcare\",\"materialDescription\":\"Biotene MouthWash 237/240ml Twin Pack\",\"hasValidTenderContract\":null,\"orderType\":\"\",\"orderReason\":\"\",\"orderTypeDescription\":\"\",\"orderTypeShipping\":\"\"},{\"materialNumber\":\"000000000021095980\",\"materialGroup4\":\"6GS\",\"qty\":4,\"type\":\"Comm\",\"principalName\":\"GSK Consumer Healthcare\",\"materialDescription\":\"BREATHE RIGHT CLEAR MEDIUM X12\",\"hasValidTenderContract\":null,\"orderType\":\"\",\"orderReason\":\"\",\"orderTypeDescription\":\"\",\"orderTypeShipping\":\"\"}]",
                 "user": {
-                    "id": "11461",
-                    "accessRight":{
-                        "Orders":true
-                    }
+                    "id": "11461"
                 }
             },
             {
@@ -61,10 +46,7 @@
                 "name": "hhhh",
                 "cartList": "[{\"materialNumber\":\"000000000021211474\",\"materialGroup4\":\"6GS\",\"qty\":4,\"type\":\"Comm\",\"principalName\":\"Pfizer PFE Private Limited test\",\"materialDescription\":\"?Genotropin GQ 5.3MG SFDPO 1xPTCC DEMO\",\"hasValidTenderContract\":null,\"orderType\":\"\",\"orderReason\":\"\",\"orderTypeDescription\":\"\",\"orderTypeShipping\":\"\"},{\"materialNumber\":\"000000000021027094\",\"materialGroup4\":\"6GS\",\"qty\":3,\"type\":\"Comm\",\"principalName\":\"GSK Consumer Healthcare\",\"materialDescription\":\"Biotene MouthWash 237/240ml Twin Pack\",\"hasValidTenderContract\":null,\"orderType\":\"\",\"orderReason\":\"\",\"orderTypeDescription\":\"\",\"orderTypeShipping\":\"\"},{\"materialNumber\":\"000000000021095980\",\"materialGroup4\":\"6GS\",\"qty\":4,\"type\":\"Comm\",\"principalName\":\"GSK Consumer Healthcare\",\"materialDescription\":\"BREATHE RIGHT CLEAR MEDIUM X12\",\"hasValidTenderContract\":null,\"orderType\":\"\",\"orderReason\":\"\",\"orderTypeDescription\":\"\",\"orderTypeShipping\":\"\"}]",
                 "user": {
-                    "id": "11461",
-                    "accessRight":{
-                        "Orders":true
-                    }
+                    "id": "11461"
                 }
             },
             {
@@ -72,10 +54,7 @@
                 "name": "3333",
                 "cartList": "[{\"materialNumber\":\"000000000021211474\",\"materialGroup4\":\"6GS\",\"qty\":4,\"type\":\"Comm\",\"principalName\":\"Pfizer PFE Private Limited test\",\"materialDescription\":\"?Genotropin GQ 5.3MG SFDPO 1xPTCC DEMO\",\"hasValidTenderContract\":null,\"orderType\":\"\",\"orderReason\":\"\",\"orderTypeDescription\":\"\",\"orderTypeShipping\":\"\"},{\"materialNumber\":\"000000000021027094\",\"materialGroup4\":\"6GS\",\"qty\":3,\"type\":\"Comm\",\"principalName\":\"GSK Consumer Healthcare\",\"materialDescription\":\"Biotene MouthWash 237/240ml Twin Pack\",\"hasValidTenderContract\":null,\"orderType\":\"\",\"orderReason\":\"\",\"orderTypeDescription\":\"\",\"orderTypeShipping\":\"\"},{\"materialNumber\":\"000000000021095980\",\"materialGroup4\":\"6GS\",\"qty\":4,\"type\":\"Comm\",\"principalName\":\"GSK Consumer Healthcare\",\"materialDescription\":\"BREATHE RIGHT CLEAR MEDIUM X12\",\"hasValidTenderContract\":null,\"orderType\":\"\",\"orderReason\":\"\",\"orderTypeDescription\":\"\",\"orderTypeShipping\":\"\"}]",
                 "user": {
-                    "id": "11461",
-                    "accessRight":{
-                        "Orders":true
-                    }
+                    "id": "11461"
                 }
             },
             {
@@ -83,10 +62,7 @@
                 "name": "ccccc",
                 "cartList": "[{\"materialNumber\":\"000000000021211474\",\"materialGroup4\":\"6GS\",\"qty\":4,\"type\":\"Comm\",\"principalName\":\"Pfizer PFE Private Limited test\",\"materialDescription\":\"?Genotropin GQ 5.3MG SFDPO 1xPTCC DEMO\",\"hasValidTenderContract\":null,\"orderType\":\"\",\"orderReason\":\"\",\"orderTypeDescription\":\"\",\"orderTypeShipping\":\"\"},{\"materialNumber\":\"000000000021027094\",\"materialGroup4\":\"6GS\",\"qty\":3,\"type\":\"Comm\",\"principalName\":\"GSK Consumer Healthcare\",\"materialDescription\":\"Biotene MouthWash 237/240ml Twin Pack\",\"hasValidTenderContract\":null,\"orderType\":\"\",\"orderReason\":\"\",\"orderTypeDescription\":\"\",\"orderTypeShipping\":\"\"},{\"materialNumber\":\"000000000021095980\",\"materialGroup4\":\"6GS\",\"qty\":4,\"type\":\"Comm\",\"principalName\":\"GSK Consumer Healthcare\",\"materialDescription\":\"BREATHE RIGHT CLEAR MEDIUM X12\",\"hasValidTenderContract\":null,\"orderType\":\"\",\"orderReason\":\"\",\"orderTypeDescription\":\"\",\"orderTypeShipping\":\"\"}]",
                 "user": {
-                    "id": "11461",
-                    "accessRight":{
-                        "Orders":true
-                    }
+                    "id": "11461"
                 }
             },
             {
@@ -94,10 +70,7 @@
                 "name": "sssss",
                 "cartList": "[{\"materialNumber\":\"000000000021211474\",\"materialGroup4\":\"6GS\",\"qty\":4,\"type\":\"Comm\",\"principalName\":\"Pfizer PFE Private Limited test\",\"materialDescription\":\"?Genotropin GQ 5.3MG SFDPO 1xPTCC DEMO\",\"hasValidTenderContract\":null,\"orderType\":\"\",\"orderReason\":\"\",\"orderTypeDescription\":\"\",\"orderTypeShipping\":\"\"},{\"materialNumber\":\"000000000021027094\",\"materialGroup4\":\"6GS\",\"qty\":3,\"type\":\"Comm\",\"principalName\":\"GSK Consumer Healthcare\",\"materialDescription\":\"Biotene MouthWash 237/240ml Twin Pack\",\"hasValidTenderContract\":null,\"orderType\":\"\",\"orderReason\":\"\",\"orderTypeDescription\":\"\",\"orderTypeShipping\":\"\"},{\"materialNumber\":\"000000000021095980\",\"materialGroup4\":\"6GS\",\"qty\":4,\"type\":\"Comm\",\"principalName\":\"GSK Consumer Healthcare\",\"materialDescription\":\"BREATHE RIGHT CLEAR MEDIUM X12\",\"hasValidTenderContract\":null,\"orderType\":\"\",\"orderReason\":\"\",\"orderTypeDescription\":\"\",\"orderTypeShipping\":\"\"}]",
                 "user": {
-                    "id": "11461",
-                    "accessRight":{
-                        "Orders":true
-                    }
+                    "id": "11461"
                 }
             },
             {
@@ -105,10 +78,7 @@
                 "name": "cccc",
                 "cartList": "[{\"materialNumber\":\"000000000021211474\",\"materialGroup4\":\"6GS\",\"qty\":4,\"type\":\"Comm\",\"principalName\":\"Pfizer PFE Private Limited test\",\"materialDescription\":\"?Genotropin GQ 5.3MG SFDPO 1xPTCC DEMO\",\"hasValidTenderContract\":null,\"orderType\":\"\",\"orderReason\":\"\",\"orderTypeDescription\":\"\",\"orderTypeShipping\":\"\"},{\"materialNumber\":\"000000000021027094\",\"materialGroup4\":\"6GS\",\"qty\":3,\"type\":\"Comm\",\"principalName\":\"GSK Consumer Healthcare\",\"materialDescription\":\"Biotene MouthWash 237/240ml Twin Pack\",\"hasValidTenderContract\":null,\"orderType\":\"\",\"orderReason\":\"\",\"orderTypeDescription\":\"\",\"orderTypeShipping\":\"\"},{\"materialNumber\":\"000000000021095980\",\"materialGroup4\":\"6GS\",\"qty\":4,\"type\":\"Comm\",\"principalName\":\"GSK Consumer Healthcare\",\"materialDescription\":\"BREATHE RIGHT CLEAR MEDIUM X12\",\"hasValidTenderContract\":null,\"orderType\":\"\",\"orderReason\":\"\",\"orderTypeDescription\":\"\",\"orderTypeShipping\":\"\"}]",
                 "user": {
-                    "id": "11461",
-                    "accessRight":{
-                        "Orders":true
-                    }
+                    "id": "11461"
                 }
             }
         ]

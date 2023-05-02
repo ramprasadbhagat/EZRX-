@@ -6,10 +6,7 @@
         "name": "test",
         "cartList": "[{\"materialNumber\":\"000000000021026707\",\"materialGroup4\":\"6GS\",\"qty\":2,\"principalName\":\"GSK Consumer Healthcare\",\"materialDescription\":\"?ibena Regular 200ml\",\"hasValidTenderContract\":false},{\"materialNumber\":\"000000000021036865\",\"materialGroup4\":\"6GS\",\"qty\":2,\"principalName\":\"GSK Consumer Healthcare\",\"materialDescription\":\"ACNE-AID BAR X100G\",\"hasValidTenderContract\":false}]",
         "user": {
-          "id": "11461",
-          "accessRight":{
-            "Orders":true
-          }
+          "id": "11461"
         }
       }
     }

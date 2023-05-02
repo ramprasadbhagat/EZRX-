@@ -453,7 +453,7 @@ class _$_UserDto extends _UserDto {
       @JsonKey(name: 'userSalesOrganisationList', defaultValue: [])
           required final List<SalesOrganisationDto> userSalesOrganisations,
       @JsonKey(name: 'accessRight')
-          required this.accessRight,
+          this.accessRight = AccessRightDto.emptyAccessRightDto,
       @JsonKey(name: 'emailNotifications', defaultValue: false)
           required this.emailNotifications,
       @JsonKey(name: 'mobileNotifications', defaultValue: false)
@@ -666,7 +666,7 @@ abstract class _UserDto extends UserDto {
       @JsonKey(name: 'userSalesOrganisationList', defaultValue: [])
           required final List<SalesOrganisationDto> userSalesOrganisations,
       @JsonKey(name: 'accessRight')
-          required final AccessRightDto accessRight,
+          final AccessRightDto accessRight,
       @JsonKey(name: 'emailNotifications', defaultValue: false)
           required final bool emailNotifications,
       @JsonKey(name: 'mobileNotifications', defaultValue: false)

@@ -20,8 +20,10 @@ _$_UserDto _$$_UserDtoFromJson(Map<String, dynamic> json) => _$_UserDto(
           ? []
           : const _SalesOrganisationListConverter().fromJson(
               json['userSalesOrganisationList'] as Map<String, dynamic>),
-      accessRight:
-          AccessRightDto.fromJson(json['accessRight'] as Map<String, dynamic>),
+      accessRight: json['accessRight'] == null
+          ? AccessRightDto.emptyAccessRightDto
+          : AccessRightDto.fromJson(
+              json['accessRight'] as Map<String, dynamic>),
       emailNotifications: json['emailNotifications'] as bool? ?? false,
       mobileNotifications: json['mobileNotifications'] as bool? ?? false,
       languagePreference:

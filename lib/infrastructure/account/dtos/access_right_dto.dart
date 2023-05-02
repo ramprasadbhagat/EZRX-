@@ -46,6 +46,17 @@ class AccessRightDto with _$AccessRightDto {
     );
   }
 
+  static const emptyAccessRightDto = AccessRightDto(
+    users: false,
+    orders: false,
+    promos: false,
+    hCPHUB: false,
+    products: false,
+    services: false,
+    analytics: false,
+    loyaltyScheme: false,
+  );
+
   factory AccessRightDto.fromJson(Map<String, dynamic> json) =>
       _$AccessRightDtoFromJson(json);
 }
