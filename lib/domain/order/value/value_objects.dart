@@ -702,8 +702,10 @@ class StatusType extends ValueObject<String> {
   factory StatusType(String input) =>
       StatusType._(validateStringNotEmpty(input));
 
-  bool statusContains(StatusType statusType) =>
-      value.getOrElse(() => '').contains(statusType.getOrDefaultValue(''));
+  bool statusContains(StatusType statusType) => value
+      .getOrElse(() => '')
+      .toLowerCase()
+      .contains(statusType.getOrDefaultValue('').toLowerCase());
 
   Color get displayStatusLabelColor =>
       getStatusLabelColor(value.getOrElse(() => ''));

@@ -18,9 +18,10 @@ class OrderHistoryFilterByStatusState with _$OrderHistoryFilterByStatusState {
         'Delivered',
         'Failed',
         'Pending',
-        'Picking in-progress',
+        'Picking in progress',
         'Order Created',
         'Out for delivery',
+        'Order packed and ready for delivery',
       ];
 
   bool isChecked(String status) {
