@@ -179,9 +179,7 @@ class OrderItemCard extends StatelessWidget {
                         BalanceTextRow(
                           key: const Key('enableTaxDisplay'),
                           keyText: 'Included Tax '.tr(),
-                          valueText: orderHistoryDetailsBonusAggregate
-                              .orderItem.tax
-                              .toStringAsFixed(2),
+                          valueText: StringUtils.formatter.format(orderHistoryDetailsBonusAggregate.orderItem.tax),
                           valueTextLoading: state.isLoading,
                           keyFlex: 1,
                           valueFlex: 1,

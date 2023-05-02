@@ -159,7 +159,7 @@ class OrderHistoryListTile extends StatelessWidget {
                 BalanceTextRow(
                   key: const Key('includedTax'),
                   keyText: 'Included Tax'.tr(),
-                  valueText: orderHistoryItem.tax.toStringAsFixed(2),
+                  valueText: StringUtils.formatter.format(orderHistoryItem.tax),
                 ),
             ],
           ),

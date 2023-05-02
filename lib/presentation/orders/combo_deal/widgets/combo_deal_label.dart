@@ -106,7 +106,7 @@ class PriceLabel extends StatelessWidget {
                 ),
           ),
           TextSpan(
-            text: discountEnable ? price.toStringAsFixed(2) : '',
+            text: discountEnable ? StringUtils.formatter.format(price) : '',
             style: Theme.of(context).textTheme.titleSmall?.copyWith(
                   color: ZPColors.lightGray,
                   decoration: TextDecoration.lineThrough,

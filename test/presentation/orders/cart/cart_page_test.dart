@@ -1872,7 +1872,7 @@ void main() {
         final grandTotalKey = find.byKey(const Key('grandTotalKey'));
         expect(grandTotalKey, findsOneWidget);
         expect(find.text('Grand Total'.tr()), findsOneWidget);
-        final txt = find.text(': NA 108.00');
+        final txt = find.text(': NA 108');
         expect(txt, findsAtLeastNWidgets(1));
       });
 
@@ -1931,7 +1931,7 @@ void main() {
         final grandTotalKey = find.byKey(const Key('grandTotalKey'));
         expect(grandTotalKey, findsOneWidget);
         expect(find.text('Grand Total'), findsOneWidget);
-        final txt = find.text(': SGD 108.00');
+        final txt = find.text(': SGD 108');
         expect(txt, findsAtLeastNWidgets(1));
         expect(
             cartBloc.state.grandTotal(

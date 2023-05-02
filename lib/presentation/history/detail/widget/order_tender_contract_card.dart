@@ -128,8 +128,7 @@ class OrderTenderContractCard extends StatelessWidget {
                     ),
                     BalanceTextRow(
                       keyText: 'Tax '.tr(),
-                      valueText: orderHistoryDetailsBonusAggregate.orderItem.tax
-                          .toStringAsFixed(2),
+                      valueText: StringUtils.formatter.format(orderHistoryDetailsBonusAggregate.orderItem.tax),
                       valueTextLoading: isLoading,
                       keyFlex: 1,
                       valueFlex: 1,

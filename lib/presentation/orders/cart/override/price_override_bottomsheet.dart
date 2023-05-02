@@ -6,6 +6,7 @@ import 'package:ezrxmobile/application/order/cart/price_override/price_override_
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
+import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +46,7 @@ class _PriceSheetState extends State<PriceSheet> {
 
     newPrice = widget.item.price.priceOverride.getOrDefaultValue(0);
     _controller = _getInitValueWithController(
-      text: newPrice == 0.0 ? '' : (newPrice).toStringAsFixed(2),
+      text: newPrice == 0.0 ? '' : StringUtils.formatter.format(newPrice),
     );
   }
 

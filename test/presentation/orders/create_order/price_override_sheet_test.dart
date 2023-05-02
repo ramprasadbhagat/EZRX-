@@ -10,6 +10,7 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/orders/cart/override/price_override_bottomsheet.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
@@ -89,7 +90,7 @@ void main() {
       expect(overridePriceButton, findsOneWidget);
       expect(
         formFieldWidget.controller?.text,
-        newPrice != 0.0 ? newPrice.toStringAsFixed(2) : '',
+        newPrice != 0.0 ? StringUtils.formatter.format(newPrice) : '',
       );
     });
 

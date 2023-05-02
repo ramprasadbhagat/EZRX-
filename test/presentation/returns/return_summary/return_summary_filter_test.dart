@@ -6,6 +6,7 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_summary_filter.dart';
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
+import 'package:ezrxmobile/domain/utils/string_utils.dart';
 
 import 'package:ezrxmobile/presentation/returns/return_summary/return_summary_filter.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -143,7 +144,7 @@ void main() {
       verify(
         () => returnSummaryFilterBlocMock.add(
           ReturnSummaryFilterEvent.refundTotalToChanged(
-              double.parse('123456').toStringAsFixed(2)),
+              StringUtils.formatter.format(double.parse('123456'))),
         ),
       ).called(1);
     });
@@ -169,7 +170,7 @@ void main() {
       verify(
         () => returnSummaryFilterBlocMock.add(
           ReturnSummaryFilterEvent.refundTotalFromChanged(
-              double.parse('12').toStringAsFixed(2)),
+              StringUtils.formatter.format(double.parse('12'))),
         ),
       ).called(1);
     });

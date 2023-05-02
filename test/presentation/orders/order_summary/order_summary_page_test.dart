@@ -1250,7 +1250,7 @@ void main() {
         expect(cartDetailsKey, findsOneWidget);
         expect(find.text('Subtotal'), findsOneWidget);
         expect(find.text('Grand Total'), findsOneWidget);
-        final txt = find.text(': NA 108.00');
+        final txt = find.text(': NA 108');
         expect(txt, findsAtLeastNWidgets(2));
       },
     );

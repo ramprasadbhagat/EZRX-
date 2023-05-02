@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/returns/return_summary_filter/return_summary_filter_bloc.dart';
+import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -164,7 +165,7 @@ class _TotalPriceToFilter extends StatelessWidget {
             onChanged: (value) => context.read<ReturnSummaryFilterBloc>().add(
                   ReturnSummaryFilterEvent.refundTotalToChanged(
                     value.isNotEmpty
-                        ? double.parse(value).toStringAsFixed(2)
+                        ? StringUtils.formatter.format(double.parse(value))
                         : '',
                   ),
                 ),
@@ -201,7 +202,7 @@ class _TotalPriceFromFilter extends StatelessWidget {
             onChanged: (value) => context.read<ReturnSummaryFilterBloc>().add(
                   ReturnSummaryFilterEvent.refundTotalFromChanged(
                     value.isNotEmpty
-                        ? double.parse(value).toStringAsFixed(2)
+                        ? StringUtils.formatter.format( double.parse(value))
                         : '',
                   ),
                 ),

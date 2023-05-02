@@ -1016,7 +1016,7 @@ void main() {
           'materialOption${materialListBlocMock.state.materialList.first.materialNumber.getOrCrash()}'));
       expect(listContent, findsOneWidget);
       await tester.pump();
-      final price = find.text('${'Unit Price:'.tr()} NA 10.00');
+      final price = find.text('${'Unit Price:'.tr()} NA 10');
       expect(price, findsOneWidget);
     });
 

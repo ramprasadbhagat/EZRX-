@@ -1,18 +1,22 @@
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:intl/intl.dart';
 
 class StringUtils {
+  static final formatter = NumberFormat('###,###,###,###,###.##');
+
   static String displayPrice(
     SalesOrganisationConfigs salesOrgConfig,
     double price,
   ) {
     if (salesOrgConfig.currency.isVN) {
-      return '${price.toStringAsFixed(2)} ${salesOrgConfig.currency.code}';
+      return '${formatter.format(price)} ${salesOrgConfig.currency.code}';
     }
 
     if (price.isNegative) {
-      return '- ${salesOrgConfig.currency.code} ${(price * -1).toStringAsFixed(2)}';
+      return '- ${salesOrgConfig.currency.code} ${formatter.format(price * -1)}';
     }
 
-    return '${salesOrgConfig.currency.code} ${price.toStringAsFixed(2)}';
+    return '${salesOrgConfig.currency.code} ${formatter.format(price)}';
   }
 }
+          

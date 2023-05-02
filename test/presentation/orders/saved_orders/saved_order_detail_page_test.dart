@@ -360,7 +360,7 @@ void main() {
         expect(find.byType(OrderMaterialItem), findsAtLeastNWidgets(1));
 
         final currency = SalesOrganisationConfigs.empty().currency.code;
-        expect(find.text(': $currency 10.00'), findsAtLeastNWidgets(1));
+        expect(find.text(': $currency 10'), findsAtLeastNWidgets(1));
       },
     );
 
