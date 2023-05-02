@@ -69,8 +69,8 @@ void main() {
           ),
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: jsonEncode({
-            'query':
-                remoteDataSource.orderHistoryQueryMutation.getOrderHistoryRep(),
+            'query': remoteDataSource.orderHistoryQueryMutation
+                .getOrderHistoryForCustomer(),
             'variables': variables
           }),
         );
@@ -162,8 +162,8 @@ void main() {
           ),
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: jsonEncode({
-            'query':
-                remoteDataSource.orderHistoryQueryMutation.getOrderHistoryRep(),
+            'query': remoteDataSource.orderHistoryQueryMutation
+                .getOrderHistoryForCustomer(),
             'variables': variables
           }),
         );
@@ -207,8 +207,8 @@ void main() {
           ),
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: jsonEncode({
-            'query':
-                remoteDataSource.orderHistoryQueryMutation.getOrderHistoryRep(),
+            'query': remoteDataSource.orderHistoryQueryMutation
+                .getOrderHistoryForCustomer(),
             'variables': variables
           }),
         );

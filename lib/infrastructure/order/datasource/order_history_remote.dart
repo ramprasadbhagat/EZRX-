@@ -34,7 +34,7 @@ class OrderHistoryRemoteDataSource {
     required Map<String, dynamic> filterQuery,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
-      final queryData = orderHistoryQueryMutation.getOrderHistoryRep();
+      final queryData = orderHistoryQueryMutation.getOrderHistoryForCustomer();
 
       final variables = {
         'soldTo': soldTo,

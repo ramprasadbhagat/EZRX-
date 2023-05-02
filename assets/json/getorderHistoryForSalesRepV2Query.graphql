@@ -1,0 +1,72 @@
+ query orderHistoryForSalesRepV2(
+            $orderBy: String!,  
+            $language: String!,
+            $first: Int!,
+            $after: Int!,
+            $shipTo: [String],
+            $soldTo: String!,
+            $userName: String!,
+            $sort:String!
+            $orderNumber:String
+           $poReference:String
+           $materialSearch:String
+           $principalSearch:String
+            ){
+             orderHistoryForSalesRepV2(
+              orderBy:$orderBy,
+              language:$language,
+              shipTo:$shipTo,
+              soldTo:$soldTo,
+              after:$after,
+              first:$first, 
+              userName:$userName,
+              sort:$sort,
+              orderNumber:$orderNumber,
+              poReference:$poReference,
+              materialSearch:$materialSearch,
+              principalSearch:$principalSearch,
+            ) {
+                  OrderHistory {
+                    OrderBasicInformation { SoldTo ShipTo CompanyName }
+                    OrderItems {
+                      MaterialCode
+                      MaterialDescription
+                      Qty
+                      UnitPrice
+                      TotalPrice
+                      Status
+                      DeliveryDate
+                      DeliveryTime
+                      LineNumber
+                      Tax
+                      OrderType
+                      OrderNumber
+                      EZRXNumber
+                      CreatedDate
+                      CreatedTime
+                      OrderBy
+                      PurchaseOrderType
+                    }
+                  }
+                }
+              }
+
+ variable:
+ {
+"soldTo": "0030147366", 
+ "shipTo": ["0071038218"], 
+ "first":10, 
+"after": 0, 
+"orderBy": "orderDate", 
+"sort": "desc", 
+"userName": "thtp-extest",
+"language": "E", 
+"toDate": "20230131",
+"fromDate": "20230101",
+"materialSearch": null,
+"poReference": null,
+"principalSearch": null,
+"orderNumber": null
+}
+                
+              

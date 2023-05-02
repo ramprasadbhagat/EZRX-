@@ -1,5 +1,5 @@
 class OrderHistoryQueryMutation {
-  String getOrderHistoryRep() {
+  String getOrderHistoryForCustomer() {
     return '''
       query orderHistoryV2(                                                                   
       \$soldTo: String!,
@@ -73,6 +73,8 @@ class OrderHistoryQueryMutation {
      \$poReference:String
      \$materialSearch:String
      \$principalSearch:String
+     \$fromDate: String!,
+      \$toDate: String!,
       ){
        orderHistoryForSalesRepV2(
         orderBy:\$orderBy,
@@ -87,6 +89,8 @@ class OrderHistoryQueryMutation {
         poReference:\$poReference,
         materialSearch:\$materialSearch,
         principalSearch:\$principalSearch,
+        fromDate:\$fromDate, 
+        toDate:\$toDate,
       ) {
             OrderHistory {
               OrderBasicInformation { SoldTo ShipTo CompanyName }
