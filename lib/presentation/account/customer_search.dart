@@ -5,6 +5,7 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
@@ -14,136 +15,21 @@ import 'package:ezrxmobile/presentation/core/confirm_clear_cart_dialog.dart';
 import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
-
-class CustomerSearchPage extends StatefulWidget {
+class CustomerSearchPage extends StatelessWidget {
   const CustomerSearchPage({Key? key}) : super(key: key);
-
-  @override
-  State<CustomerSearchPage> createState() => _CustomerSearchPage();
-}
-
-class _CustomerSearchPage extends State<CustomerSearchPage> {
-  late TextEditingController _searchController;
-  late CustomerCodeBloc customerCodeBloc;
-  late SalesOrgBloc salesOrgBloc;
-  late UserBloc userBloc;
-
-  @override
-  void initState() {
-    _searchController = TextEditingController();
-    customerCodeBloc = context.read<CustomerCodeBloc>();
-    final searchText = customerCodeBloc.state.searchKey;
-    if (customerCodeBloc.state.isSearchActive && searchText.isValid()) {
-      _searchController.value = TextEditingValue(
-        text: searchText.getOrCrash(),
-        selection: TextSelection.collapsed(
-          offset: _searchController.selection.base.offset,
-        ),
-      );
-    }
-    trackMixpanelEvent(
-      MixpanelEvents.pageViewVisited,
-      props: {
-        MixpanelProps.pageViewName: runtimeType.toString(),
-      },
-    );
-    salesOrgBloc = context.read<SalesOrgBloc>();
-    userBloc = context.read<UserBloc>();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: const Key('customerSearchPage'),
-      appBar: PreferredSize(
-        preferredSize: const Size(double.infinity, 60),
-        child: CustomAppBar(
-          child: BlocConsumer<CustomerCodeBloc, CustomerCodeState>(
-            listenWhen: (previous, current) =>
-                previous.searchKey != current.searchKey,
-            listener: (context, state) {
-              state.apiFailureOrSuccessOption.fold(
-                () {},
-                (either) => either.fold(
-                  (failure) {
-                    ErrorUtils.handleApiFailure(context, failure);
-                  },
-                  (_) {},
-                ),
-              );
-              final searchText = state.searchKey.getValue();
-              _searchController.value = TextEditingValue(
-                text: searchText,
-                selection: TextSelection.collapsed(
-                  offset: _searchController.selection.base.offset,
-                ),
-              );
-            },
-            buildWhen: (previous, current) =>
-                previous.searchKey != current.searchKey ||
-                previous.isFetching != current.isFetching,
-            builder: (context, state) {
-              return Form(
-                child: TextFormField(
-                  key: const Key('customerCodeSearchField'),
-                  autocorrect: false,
-                  controller: _searchController,
-                  enabled: !state.isFetching,
-                  onChanged: (value) {
-                    customerCodeBloc
-                        .add(CustomerCodeEvent.updateSearchKey(value));
-                  },
-                  onFieldSubmitted: (value) {
-                    if (state.searchKey.isValid()) {
-                      customerCodeBloc.add(
-                        CustomerCodeEvent.search(
-                          userInfo: userBloc.state.user,
-                          selectedSalesOrg:
-                              salesOrgBloc.state.salesOrganisation,
-                          hidecustomer: salesOrgBloc.state.hideCustomer,
-                        ),
-                      );
-                    } else {
-                      showSnackBar(
-                        context: context,
-                        message:
-                            'Please enter at least 2 characters.'.tr(),
-                      );
-                    }
-                  },
-                  decoration: InputDecoration(
-                    prefixIcon: const Icon(Icons.search),
-                    suffixIcon: IconButton(
-                      key: const Key('clearCustomerCodeSearch'),
-                      icon: const Icon(Icons.clear),
-                      onPressed: () {
-                        if (_searchController.text.isNotEmpty) {
-                          customerCodeBloc.add(
-                            CustomerCodeEvent.fetch(
-                              userInfo: userBloc.state.user,
-                              selectedSalesOrg:
-                                  salesOrgBloc.state.salesOrganisation,
-                              isRefresh: true,
-                              hidecustomer: salesOrgBloc.state.hideCustomer,
-                            ),
-                          );
-                        }
-                      },
-                    ),
-                    hintText: 'Search...'.tr(),
-                    border: InputBorder.none,
-                  ),
-                ),
-              );
-            },
-          ),
-        ),
+      appBar: const PreferredSize(
+        preferredSize: Size(double.infinity, 60),
+        child: _AppBar(),
       ),
       body: BlocBuilder<CustomerCodeBloc, CustomerCodeState>(
         buildWhen: (previous, current) =>
@@ -166,11 +52,121 @@ class _CustomerSearchPage extends State<CustomerSearchPage> {
       ),
     );
   }
+}
+
+class _AppBar extends StatefulWidget {
+  const _AppBar({Key? key}) : super(key: key);
+
+  @override
+  State<_AppBar> createState() => _AppBarState();
+}
+
+class _AppBarState extends State<_AppBar> {
+  late TextEditingController _searchController;
+  late CustomerCodeBloc _customerCodeBloc;
+  late SalesOrgBloc _salesOrgBloc;
+  late UserBloc _userBloc;
+
+  @override
+  void initState() {
+    _searchController = TextEditingController();
+    _customerCodeBloc = context.read<CustomerCodeBloc>();
+    final searchText = _customerCodeBloc.state.searchKey;
+    if (_customerCodeBloc.state.isSearchActive && searchText.isValid()) {
+      _searchController.value = TextEditingValue(
+        text: searchText.getOrCrash(),
+        selection: TextSelection.collapsed(
+          offset: _searchController.selection.base.offset,
+        ),
+      );
+    }
+    trackMixpanelEvent(
+      MixpanelEvents.pageViewVisited,
+      props: {
+        MixpanelProps.pageViewName: runtimeType.toString(),
+      },
+    );
+    _salesOrgBloc = context.read<SalesOrgBloc>();
+    _userBloc = context.read<UserBloc>();
+    super.initState();
+  }
 
   @override
   void dispose() {
     _searchController.dispose();
     super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomAppBar(
+      child: BlocListener<CustomerCodeBloc, CustomerCodeState>(
+        listenWhen: (previous, current) =>
+            previous.searchKey != current.searchKey,
+        listener: (context, state) {
+          state.apiFailureOrSuccessOption.fold(
+            () {},
+            (either) => either.fold(
+              (failure) {
+                ErrorUtils.handleApiFailure(context, failure);
+              },
+              (_) {},
+            ),
+          );
+          final searchText = state.searchKey.getValue();
+          _searchController.value = TextEditingValue(
+            text: searchText,
+            selection: TextSelection.collapsed(
+              offset: _searchController.selection.base.offset,
+            ),
+          );
+        },
+        child: TextFormField(
+          key: const Key('customerCodeSearchField'),
+          autocorrect: false,
+          controller: _searchController,
+          enabled: !_customerCodeBloc.state.isFetching,
+          onFieldSubmitted: (value) {
+            if (SearchKey.search(value).isValid()) {
+              _customerCodeBloc.add(CustomerCodeEvent.updateSearchKey(value));
+              _customerCodeBloc.add(
+                CustomerCodeEvent.search(
+                  userInfo: _userBloc.state.user,
+                  selectedSalesOrg: _salesOrgBloc.state.salesOrganisation,
+                  hidecustomer: _salesOrgBloc.state.hideCustomer,
+                ),
+              );
+            } else {
+              showSnackBar(
+                context: context,
+                message: 'Please enter at least 2 characters.'.tr(),
+              );
+            }
+          },
+          decoration: InputDecoration(
+            prefixIcon: const Icon(Icons.search),
+            suffixIcon: IconButton(
+              key: const Key('clearCustomerCodeSearch'),
+              icon: const Icon(Icons.clear),
+              onPressed: () {
+                if (_searchController.text.isNotEmpty) {
+                  _customerCodeBloc.add(
+                    CustomerCodeEvent.fetch(
+                      userInfo: _userBloc.state.user,
+                      selectedSalesOrg: _salesOrgBloc.state.salesOrganisation,
+                      isRefresh: true,
+                      hidecustomer: _salesOrgBloc.state.hideCustomer,
+                    ),
+                  );
+                }
+              },
+            ),
+            hintText: 'Search...'.tr(),
+            border: InputBorder.none,
+          ),
+        ),
+      ),
+    );
   }
 }
 

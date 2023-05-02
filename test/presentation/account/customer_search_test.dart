@@ -538,12 +538,13 @@ void main() {
 
       await tester.pump();
       await tester.enterText(
-          find.byKey(const Key('customerCodeSearchField')), 'a@b.c');
+          find.byKey(const Key('customerCodeSearchField')), 'GSK');
       await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pump();
       expect(find.text('123'), findsNothing);
-      expect(find.text('a@b.c'), findsOneWidget);
+      expect(find.text('GSK'), findsOneWidget);
     });
+
     testWidgets('Test error Message to Customer code Search', (tester) async {
       final expectedCustomerCodeListStates = [
         CustomerCodeState.initial().copyWith(
@@ -554,6 +555,7 @@ void main() {
         CustomerCodeState.initial().copyWith(
           isFetching: false,
           customerCodeList: [],
+          searchKey: SearchKey('12'),
           apiFailureOrSuccessOption: optionOf(
             const Left(
               ApiFailure.other('fake-error'),
@@ -577,50 +579,12 @@ void main() {
 
       await tester.pump();
       await tester.enterText(
-          find.byKey(const Key('customerCodeSearchField')), 'a@b.c');
+          find.byKey(const Key('customerCodeSearchField')), '12');
       await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pump();
-      expect(find.text('123'), findsNothing);
-      expect(find.text('a@b.c'), findsOneWidget);
       final errorMessage = find.byKey(const Key('snackBarMessage'));
       await tester.pump();
       expect(errorMessage, findsOneWidget);
-    });
-    testWidgets('Field Submitted Customer code Search when ', (tester) async {
-      final expectedCustomerCodeListStates = [
-        CustomerCodeState.initial().copyWith(
-            isFetching: false,
-            customerCodeList: [],
-            apiFailureOrSuccessOption: none(),
-            searchKey: SearchKey('')),
-        CustomerCodeState.initial().copyWith(
-          isFetching: false,
-          customerCodeList: [],
-          searchKey: SearchKey('GSK'),
-          apiFailureOrSuccessOption: optionOf(const Right('')),
-        ),
-      ];
-
-      whenListen(customerCodeBlocMock,
-          Stream.fromIterable(expectedCustomerCodeListStates),
-          initialState: customerCodeBlocMock.state.copyWith(
-            isFetching: true,
-            canLoadMore: true,
-            customerCodeInfo: customerCodeListMock.first,
-            customerCodeList: customerCodeListMock,
-          ));
-
-      await tester.runAsync(() async {
-        await tester.pumpWidget(getScopedWidget());
-      });
-
-      await tester.pump();
-      await tester.enterText(
-          find.byKey(const Key('customerCodeSearchField')), 'a@b.c');
-      await tester.testTextInput.receiveAction(TextInputAction.done);
-      await tester.pump();
-      expect(find.text('123'), findsNothing);
-      expect(find.text('a@b.c'), findsOneWidget);
     });
   });
 }

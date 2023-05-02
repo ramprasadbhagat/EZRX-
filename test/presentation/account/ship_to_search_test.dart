@@ -173,14 +173,14 @@ void main() {
       expect(find.text('123'), findsNothing);
       expect(find.text('a@b.c'), findsOneWidget);
     });
+
     testWidgets('snackBarMessage test', (tester) async {
       await tester.pumpWidget(getScopedWidget());
       await tester.enterText(
-          find.byKey(const Key('shipToCodeSearchField')), 'a@b.c');
+          find.byKey(const Key('shipToCodeSearchField')), 'G');
       await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pump();
       expect(find.text('123'), findsNothing);
-      expect(find.text('a@b.c'), findsOneWidget);
       final errorMessage = find.byKey(const Key('snackBarMessage'));
       expect(errorMessage, findsOneWidget);
     });

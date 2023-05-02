@@ -4,6 +4,7 @@ import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
@@ -18,47 +19,16 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ShiptToSearchPage extends StatefulWidget {
+class ShiptToSearchPage extends StatelessWidget {
   const ShiptToSearchPage({Key? key}) : super(key: key);
-
-  @override
-  State<ShiptToSearchPage> createState() => _ShiptToSearchPage();
-}
-
-class _ShiptToSearchPage extends State<ShiptToSearchPage> {
-  late TextEditingController _searchController;
-
-  // Timer? _debounce;
-  @override
-  void initState() {
-    _searchController = TextEditingController();
-    final searchText = context.read<ShipToCodeBloc>().state.searchKey;
-    if (searchText.isValid()) {
-      _searchController.value = TextEditingValue(
-        text: searchText.getOrCrash(),
-        selection: TextSelection.collapsed(
-          offset: _searchController.selection.base.offset,
-        ),
-      );
-    }
-    trackMixpanelEvent(
-      MixpanelEvents.pageViewVisited,
-      props: {
-        MixpanelProps.pageViewName: runtimeType.toString(),
-      },
-    );
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: const Key('shipToSearchPage'),
-      appBar: PreferredSize(
-        preferredSize: const Size(double.infinity, 60),
-        child: AppBar(
-          searchController: _searchController,
-        ),
+      appBar: const PreferredSize(
+        preferredSize: Size(double.infinity, 60),
+        child: _AppBar(),
       ),
       body: BlocBuilder<ShipToCodeBloc, ShipToCodeState>(
         buildWhen: (previous, current) =>
@@ -81,99 +51,107 @@ class _ShiptToSearchPage extends State<ShiptToSearchPage> {
       ),
     );
   }
+}
+
+class _AppBar extends StatefulWidget {
+  const _AppBar({Key? key}) : super(key: key);
+
+  @override
+  State<_AppBar> createState() => _AppBarState();
+}
+
+class _AppBarState extends State<_AppBar> {
+  late TextEditingController _searchController;
+  late ShipToCodeBloc _shipToCodeBloc;
+
+  // Timer? _debounce;
+  @override
+  void initState() {
+    _searchController = TextEditingController();
+    _shipToCodeBloc = context.read<ShipToCodeBloc>();
+
+    final searchText = _shipToCodeBloc.state.searchKey;
+    if (searchText.isValid()) {
+      _searchController.value = TextEditingValue(
+        text: searchText.getOrCrash(),
+        selection: TextSelection.collapsed(
+          offset: _searchController.selection.base.offset,
+        ),
+      );
+    }
+    trackMixpanelEvent(
+      MixpanelEvents.pageViewVisited,
+      props: {
+        MixpanelProps.pageViewName: runtimeType.toString(),
+      },
+    );
+    super.initState();
+  }
 
   @override
   void dispose() {
-    // _debounce?.cancel();
     _searchController.dispose();
     super.dispose();
   }
-}
-
-class AppBar extends StatelessWidget {
-  final TextEditingController searchController;
-
-  const AppBar({Key? key, required this.searchController}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return CustomAppBar(
-      child: BlocConsumer<ShipToCodeBloc, ShipToCodeState>(
+      child: BlocListener<ShipToCodeBloc, ShipToCodeState>(
         listenWhen: (previous, current) =>
             previous.searchKey != current.searchKey,
         listener: (context, state) {
           final searchText = state.searchKey.getValue();
-          searchController.value = TextEditingValue(
+          _searchController.value = TextEditingValue(
             text: searchText,
             selection: TextSelection.collapsed(
-              offset: searchController.selection.base.offset,
+              offset: _searchController.selection.base.offset,
             ),
           );
         },
-        buildWhen: (previous, current) =>
-            previous.searchKey != current.searchKey,
-        builder: (context, state) {
-          return Form(
-            child: TextFormField(
-              key: const Key('shipToCodeSearchField'),
-              controller: searchController,
-              enabled: !state.isSearching,
-              onChanged: (value) {
-                context
-                    .read<ShipToCodeBloc>()
-                    .add(ShipToCodeEvent.updateSearchKey(value));
-              },
-              onFieldSubmitted: (value) {
-                if (state.searchKey.isValid()) {
-                  context.read<ShipToCodeBloc>().add(
-                        ShipToCodeEvent.search(
-                          shipToInfos: context
-                              .read<CustomerCodeBloc>()
-                              .state
-                              .shipToInfos,
-                        ),
-                      );
-                } else {
-                  showSnackBar(
-                    context: context,
-                    message:
-                        'Please enter at least 2 characters.'.tr(),
+        child: TextFormField(
+          key: const Key('shipToCodeSearchField'),
+          controller: _searchController,
+          enabled: !_shipToCodeBloc.state.isSearching,
+          onFieldSubmitted: (value) {
+            if (SearchKey.search(value).isValid()) {
+              context
+                  .read<ShipToCodeBloc>()
+                  .add(ShipToCodeEvent.updateSearchKey(value));
+              context.read<ShipToCodeBloc>().add(
+                    ShipToCodeEvent.search(
+                      shipToInfos:
+                          context.read<CustomerCodeBloc>().state.shipToInfos,
+                    ),
                   );
-                }
-              },
-              // validator: (_) => customerCodeBloc.state.searchKey.value.fold(
-              //   (f) => f.maybeMap(
-              //     subceedLength: (f) =>
-              //         'Search input must be greater than 4 characters.'
-              //             .tr(),
-              //     orElse: () => null,
-              //   ),
-              //   (_) => null,
-              // ),
-              decoration: InputDecoration(
-                focusedBorder: const OutlineInputBorder(
-                  borderSide: BorderSide(color: ZPColors.primary),
-                ),
-                isDense: true,
-                prefixIcon: const Icon(Icons.search),
-                suffixIcon: IconButton(
-                  key: const Key('clearShipToSearch'),
-                  icon: const Icon(Icons.clear),
-                  onPressed: () {
-                    context.read<ShipToCodeBloc>().add(ShipToCodeEvent.load(
-                          shipToInfos: context
-                              .read<CustomerCodeBloc>()
-                              .state
-                              .shipToInfos,
-                        ));
-                  },
-                ),
-                hintText: 'Search...'.tr(),
-                border: InputBorder.none,
-              ),
+            } else {
+              showSnackBar(
+                context: context,
+                message:
+                    'Please enter at least 2 characters.'.tr(),
+              );
+            }
+          },
+          decoration: InputDecoration(
+            focusedBorder: const OutlineInputBorder(
+              borderSide: BorderSide(color: ZPColors.primary),
             ),
-          );
-        },
+            isDense: true,
+            prefixIcon: const Icon(Icons.search),
+            suffixIcon: IconButton(
+              key: const Key('clearShipToSearch'),
+              icon: const Icon(Icons.clear),
+              onPressed: () {
+                context.read<ShipToCodeBloc>().add(ShipToCodeEvent.load(
+                      shipToInfos:
+                          context.read<CustomerCodeBloc>().state.shipToInfos,
+                    ));
+              },
+            ),
+            hintText: 'Search...'.tr(),
+            border: InputBorder.none,
+          ),
+        ),
       ),
     );
   }
@@ -181,6 +159,7 @@ class AppBar extends StatelessWidget {
 
 class _HeaderMessage extends StatelessWidget {
   final ShipToCodeState state;
+
   const _HeaderMessage({Key? key, required this.state}) : super(key: key);
 
   @override
@@ -202,6 +181,7 @@ class _HeaderMessage extends StatelessWidget {
 
 class _BodyContent extends StatelessWidget {
   final ShipToCodeState state;
+
   const _BodyContent({
     Key? key,
     required this.state,
@@ -223,6 +203,7 @@ class _BodyContent extends StatelessWidget {
 
 class _ListContent extends StatelessWidget {
   final ShipToInfo shipToInfo;
+
   const _ListContent({Key? key, required this.shipToInfo}) : super(key: key);
 
   @override
