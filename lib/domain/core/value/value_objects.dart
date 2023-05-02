@@ -57,13 +57,13 @@ class SearchKey extends ValueObject<String> {
 
   factory SearchKey.search(String searchText) {
     return SearchKey._(validateStringNotEmpty(searchText)
-        .flatMap((input) => validateMinStringLength(input, 3)));
+        .flatMap((input) => validateMinStringLength(input, 2)));
   }
 
   factory SearchKey.searchFilter(String searchText) {
     return SearchKey._(
       (validateStringIsEmpty(searchText).fold(
-        (l) => validateMinStringLength(l.failedValue, 3),
+        (l) => validateMinStringLength(l.failedValue, 2),
         (r) => Right(r),
       )),
     );

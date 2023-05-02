@@ -76,7 +76,7 @@ class _BonusAddPageState extends State<BonusAddPage> {
                   autocorrect: false,
                   enabled: !state.isFetching,
                   onFieldSubmitted: (value) {
-                    if (value.length > 2) {
+                    if (value.length > 1) {
                       bonusMaterialBloc.add(
                         BonusMaterialEvent.fetch(
                           user: context.read<UserBloc>().state.user,
@@ -102,8 +102,7 @@ class _BonusAddPageState extends State<BonusAddPage> {
                       showSnackBar(
                         context: context,
                         message:
-                            'Search input must be greater than 2 characters.'
-                                .tr(),
+                            'Please enter at least 2 characters.'.tr(),
                       );
                     }
                   },

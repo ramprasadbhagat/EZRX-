@@ -281,7 +281,7 @@ void main() {
       build: (() => ReturnApproverFilterBloc()),
       seed: () => ReturnApproverFilterState.initial().copyWith(
         approverReturnFilter: ReturnApproverFilter.empty().copyWith(
-          returnId: SearchKey.searchFilter('12'),
+          returnId: SearchKey.searchFilter('2'),
           toInvoiceDate: DateTimeStringValue(
             getDateStringByDateTime(fakeToDate),
           ),
@@ -299,7 +299,7 @@ void main() {
         ReturnApproverFilterState.initial().copyWith(
           showErrorMessages: true,
           approverReturnFilter: ReturnApproverFilter.empty().copyWith(
-            returnId: SearchKey.searchFilter('12'),
+            returnId: SearchKey.searchFilter('2'),
             toInvoiceDate: DateTimeStringValue(
               getDateStringByDateTime(fakeToDate),
             ),

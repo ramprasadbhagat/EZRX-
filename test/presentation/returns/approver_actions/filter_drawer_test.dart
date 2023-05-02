@@ -194,7 +194,7 @@ void main() {
         await tester.pump();
 
         expect(
-            find.text('Search input must be greater than 2 characters.'.tr()),
+            find.text('Please enter at least 2 characters.'.tr()),
             findsOneWidget);
       },
     );
@@ -218,7 +218,7 @@ void main() {
         await tester.pump();
 
         expect(
-            find.text('Search input must be greater than 2 characters.'.tr()),
+            find.text('Please enter at least 2 characters.'.tr()),
             findsNothing);
       },
     );
@@ -255,7 +255,7 @@ void main() {
         await tester.pump();
 
         expect(
-            find.text('Search input must be greater than 2 characters.'.tr()),
+            find.text('Please enter at least 2 characters.'.tr()),
             findsOneWidget);
       },
     );
@@ -278,7 +278,7 @@ void main() {
         await tester.pump();
 
         expect(
-            find.text('Search input must be greater than 2 characters.'.tr()),
+            find.text('Please enter at least 2 characters.'.tr()),
             findsNothing);
       },
     );
@@ -314,7 +314,7 @@ void main() {
         await tester.pump();
 
         expect(
-            find.text('Search input must be greater than 2 characters.'.tr()),
+            find.text('Please enter at least 2 characters.'.tr()),
             findsOneWidget);
       },
     );
@@ -337,7 +337,7 @@ void main() {
         await tester.pump();
 
         expect(
-            find.text('Search input must be greater than 2 characters.'.tr()),
+            find.text('Please enter at least 2 characters.'.tr()),
             findsNothing);
       },
     );
@@ -373,7 +373,7 @@ void main() {
         await tester.pump();
 
         expect(
-            find.text('Search input must be greater than 2 characters.'.tr()),
+            find.text('Please enter at least 2 characters.'.tr()),
             findsOneWidget);
       },
     );
@@ -396,7 +396,7 @@ void main() {
         await tester.pump();
 
         expect(
-            find.text('Search input must be greater than 2 characters.'.tr()),
+            find.text('Please enter at least 2 characters.'.tr()),
             findsNothing);
       },
     );

@@ -122,7 +122,7 @@ class _ReturnIdByFilter extends StatelessWidget {
           validator: (_) => state.approverReturnFilter.returnId.value.fold(
             (f) => f.maybeMap(
               subceedLength: (f) =>
-                  'Search input must be greater than 2 characters.'.tr(),
+                  'Please enter at least 2 characters.'.tr(),
               orElse: () => null,
             ),
             (_) => null,
@@ -161,7 +161,7 @@ class _CreatedByFilter extends StatelessWidget {
           validator: (_) => state.approverReturnFilter.createdBy.value.fold(
             (f) => f.maybeMap(
               subceedLength: (f) =>
-                  'Search input must be greater than 2 characters.'.tr(),
+                  'Please enter at least 2 characters.'.tr(),
               orElse: () => null,
             ),
             (_) => null,
@@ -199,7 +199,7 @@ class _ShipToFilter extends StatelessWidget {
           validator: (_) => state.approverReturnFilter.shipTo.value.fold(
             (f) => f.maybeMap(
               subceedLength: (f) =>
-                  'Search input must be greater than 2 characters.'.tr(),
+                  'Please enter at least 2 characters.'.tr(),
               orElse: () => null,
             ),
             (_) => null,
@@ -235,7 +235,7 @@ class _SoldToFilter extends StatelessWidget {
           validator: (_) => state.approverReturnFilter.soldTo.value.fold(
             (f) => f.maybeMap(
               subceedLength: (f) =>
-                  'Search input must be greater than 2 characters.'.tr(),
+                  'Please enter at least 2 characters.'.tr(),
               orElse: () => null,
             ),
             (_) => null,

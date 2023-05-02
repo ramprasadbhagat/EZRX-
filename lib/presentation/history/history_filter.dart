@@ -118,7 +118,7 @@ class _OrderIdByFilter extends StatelessWidget {
           validator: (_) => state.orderHistoryFilter.orderId.value.fold(
             (f) => f.maybeMap(
               subceedLength: (f) =>
-                  'Search input must be greater than 2 characters.'.tr(),
+                  'Please enter at least 2 characters.'.tr(),
               orElse: () => null,
             ),
             (_) => null,
@@ -156,7 +156,7 @@ class _PoNumberFilter extends StatelessWidget {
           validator: (_) => state.orderHistoryFilter.poNumber.value.fold(
             (f) => f.maybeMap(
               subceedLength: (f) =>
-                  'Search input must be greater than 2 characters.'.tr(),
+                  'Please enter at least 2 characters.'.tr(),
               orElse: () => null,
             ),
             (_) => null,
@@ -195,7 +195,7 @@ class _MaterialSearchByFilter extends StatelessWidget {
           validator: (_) => state.orderHistoryFilter.materialSearch.value.fold(
             (f) => f.maybeMap(
               subceedLength: (f) =>
-                  'Search input must be greater than 2 characters.'.tr(),
+                  'Please enter at least 2 characters.'.tr(),
               orElse: () => null,
             ),
             (_) => null,
@@ -232,7 +232,7 @@ class _PrincipalSearchByFilter extends StatelessWidget {
           validator: (_) => state.orderHistoryFilter.principalSearch.value.fold(
             (f) => f.maybeMap(
               subceedLength: (f) =>
-                  'Search input must be greater than 2 characters.'.tr(),
+                  'Please enter at least 2 characters.'.tr(),
               orElse: () => null,
             ),
             (_) => null,

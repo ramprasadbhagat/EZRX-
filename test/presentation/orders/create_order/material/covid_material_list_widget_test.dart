@@ -923,7 +923,7 @@ void main() {
     });
 
     testWidgets(
-        'Search input must be greater than 2 characters. with clear icon tapped',
+        'Please enter at least 2 characters. with clear icon tapped',
         (WidgetTester tester) async {
       final expectedCustomerCodeListStates = [
         CovidMaterialListState.initial().copyWith(isFetching: true),
@@ -948,12 +948,12 @@ void main() {
 
       final textField = find.byType(TextFormField);
 
-      await tester.enterText(textField, '12');
+      await tester.enterText(textField, '1');
       await tester.testTextInput.receiveAction(TextInputAction.done);
       expect(textField, findsOneWidget);
       await tester.pump(const Duration(seconds: 2));
 
-      expect(find.text('Search input must be greater than 2 characters.'),
+      expect(find.text('Please enter at least 2 characters.'),
           findsOneWidget);
       final iconsClear = find.byIcon(Icons.clear);
       expect(iconsClear, findsOneWidget);

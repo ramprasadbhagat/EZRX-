@@ -132,7 +132,7 @@ class _ReturnIdByFilter extends StatelessWidget {
           validator: (_) => state.returnSummaryFilter.requestId.value.fold(
             (f) => f.maybeMap(
               subceedLength: (f) =>
-                  'Search input must be greater than 3 characters.'.tr(),
+                  'Please enter at least 2 characters.'.tr(),
               orElse: () => null,
             ),
             (_) => null,

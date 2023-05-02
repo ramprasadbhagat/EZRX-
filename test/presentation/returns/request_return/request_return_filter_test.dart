@@ -110,7 +110,7 @@ void main() {
         expect(invoiceIdTextFieldText, findsOneWidget);
 
         final minLengthErrorMessage =
-            find.text('Search input must be greater than 2 characters.');
+            find.text('Please enter at least 2 characters.');
         await tester.pump();
 
         expect(minLengthErrorMessage, findsNothing);

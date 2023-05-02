@@ -62,7 +62,7 @@ class MaterialListSearchBarState extends State<MaterialListSearchBar> {
               controller: _searchController,
               enabled: !state.isFetching,
               onFieldSubmitted: (value) {
-                if (value.length > 2) {
+                if (value.length > 1) {
                   _resetMixpanelOrderFlow();
                   // search code goes here
                   context.read<MaterialListBloc>().add(
@@ -101,7 +101,7 @@ class MaterialListSearchBarState extends State<MaterialListSearchBar> {
                   showSnackBar(
                     context: context,
                     message:
-                        'Search input must be greater than 2 characters.'.tr(),
+                        'Please enter at least 2 characters.'.tr(),
                   );
                 }
               },

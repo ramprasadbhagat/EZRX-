@@ -98,7 +98,7 @@ void main() {
           .thenReturn(ReturnSummaryFilterState.initial().copyWith(
         showErrorMessages: true,
         returnSummaryFilter: ReturnSummaryFilter.empty().copyWith(
-          requestId: SearchKey.searchFilter('12'),
+          requestId: SearchKey.searchFilter('2'),
         ),
       ));
 
@@ -109,16 +109,16 @@ void main() {
       expect(findText, findsOneWidget);
       final findTextField =
           find.ancestor(of: findText, matching: find.byType(TextFormField));
-      await tester.enterText(findTextField, '12');
+      await tester.enterText(findTextField, '2');
       await tester.pump(const Duration(
         seconds: 1,
       ));
-      expect(find.text('Search input must be greater than 3 characters.'.tr()),
+      expect(find.text('Please enter at least 2 characters.'.tr()),
           findsOneWidget);
       await tester.pump();
       verify(
         () => returnSummaryFilterBlocMock.add(
-          const ReturnSummaryFilterEvent.returnIdChanged('12'),
+          const ReturnSummaryFilterEvent.returnIdChanged('2'),
         ),
       ).called(1);
     });

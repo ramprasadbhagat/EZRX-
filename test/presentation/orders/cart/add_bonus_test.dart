@@ -410,12 +410,12 @@ void main() {
       await tester.pumpWidget(getWidget());
       final addBonusSearchField = find.byKey(const Key('addBonusTextField'));
       await tester.enterText(addBonusSearchField, '');
-      await tester.sendKeyDownEvent(LogicalKeyboardKey.enter);
+      await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pump();
 
-      find.text(
-        'Search input must be greater than 2 characters.'.tr(),
-      );
+      expect(find.text(
+        'Please enter at least 2 characters.'.tr(),
+      ), findsOneWidget);
     });
 
     testWidgets('Test add bonus search field clear', (tester) async {

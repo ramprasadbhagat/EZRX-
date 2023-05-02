@@ -547,7 +547,7 @@ void main() {
         }
       },
     );
-    testWidgets('Search input must be greater than 2 characters.',
+    testWidgets('Please enter at least 2 characters.',
         (WidgetTester tester) async {
       final expectedCustomerCodeListStates = [
         MaterialListState.initial().copyWith(isFetching: true),
@@ -565,13 +565,13 @@ void main() {
       final textField = find.byType(TextFormField);
       expect(textField, findsOneWidget);
 
-      await tester.enterText(textField, '1234');
+      await tester.enterText(textField, '12');
       await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pump();
       expect(
-          find.text('12'), findsNothing); // 2 characters shouldn't be allowed
+          find.text('1'), findsNothing); // 1 characters shouldn't be allowed
 
-      expect(find.text('1234'), findsOneWidget);
+      expect(find.text('12'), findsOneWidget);
     });
 
     testWidgets('Order Type Document type disable',

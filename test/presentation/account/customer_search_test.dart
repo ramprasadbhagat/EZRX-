@@ -316,15 +316,14 @@ void main() {
         expect(find.text('Change Customer Code'), findsNothing);
       },
     );
-    testWidgets('Search input must be greater than 2 characters.',
+    testWidgets('Please enter at least 2 characters.',
         (tester) async {
       await tester.pumpWidget(getScopedWidget());
       await tester.pumpAndSettle(const Duration(seconds: 3));
 
       final txtForm = find.byKey(const Key('customerCodeSearchField'));
-      await tester.enterText(txtForm, '1234');
-      expect(find.text('123'), findsNothing);
-      expect(find.text('1234'), findsOneWidget);
+      await tester.enterText(txtForm, '12');
+      expect(find.text('12'), findsOneWidget);
     });
 
     testWidgets('Test have customer code list and emit load more state include',
