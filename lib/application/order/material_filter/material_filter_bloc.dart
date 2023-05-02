@@ -127,6 +127,40 @@ class MaterialFilterBloc
           ),
         );
       },
+      clearAllSelected: (e) {
+        switch (e.filterType) {
+          case MaterialFilterType.principal:
+            emit(
+              state.copyWith(
+                selectedMaterialFilter: state.selectedMaterialFilter.copyWith(
+                  uniquePrincipalName: <String>[],
+                ),
+                apiFailureOrSuccessOption: none(),
+              ),
+            );
+            break;
+          case MaterialFilterType.therapeutic:
+            emit(
+              state.copyWith(
+                selectedMaterialFilter: state.selectedMaterialFilter.copyWith(
+                  uniqueTherapeuticClass: <String>[],
+                ),
+                apiFailureOrSuccessOption: none(),
+              ),
+            );
+            break;
+          case MaterialFilterType.brand:
+            emit(
+              state.copyWith(
+                selectedMaterialFilter: state.selectedMaterialFilter.copyWith(
+                  uniqueItemBrand: <String>[],
+                ),
+                apiFailureOrSuccessOption: none(),
+              ),
+            );
+            break;
+        }
+      },
     );
   }
 }

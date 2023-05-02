@@ -435,6 +435,53 @@ void main() {
       expect(find.text('RandomKey'), findsOneWidget);
     });
 
+    testWidgets(
+        'Material Filter Clear All button appears when atleast one item in the selected list and onTapping clears the selected item for respective type',
+        (tester) async {
+      final expectedState = [
+        MaterialFilterState.initial().copyWith(
+          apiFailureOrSuccessOption: none(),
+          selectedMaterialFilter: const MaterialFilter(
+              uniqueItemBrand: [],
+              uniquePrincipalName: [
+                'GSK Consumer Healthcare',
+                'Pfizer PFE Private Limited test'
+              ],
+              uniqueTherapeuticClass: []),
+        )
+      ];
+      when(() => materialfilterBlocMock.state).thenReturn(
+          MaterialFilterState.initial().copyWith(
+              materialFilter: const MaterialFilter(
+                  uniqueItemBrand: [],
+                  uniquePrincipalName: [
+            'GSK Consumer Healthcare',
+            'Pfizer PFE Private Limited test'
+          ],
+                  uniqueTherapeuticClass: [])));
+      whenListen(materialfilterBlocMock, Stream.fromIterable(expectedState));
+      await tester.pumpWidget(getScopedWidget(const MaterialFilterPage(
+        filterType: MaterialFilterType.principal,
+      )));
+
+      final optionTile =
+          find.byKey(const Key('filterOption-GSK Consumer Healthcare'));
+      expect(optionTile, findsOneWidget);
+      final clearAllButton = find.byKey(const Key('filterclearMaterialList'));
+      expect(clearAllButton, findsNothing);
+      await tester.tap(optionTile);
+      await tester.pump();
+      expect(clearAllButton, findsOneWidget);
+      await tester.tap(clearAllButton);
+      verify(
+        () => materialfilterBlocMock.add(
+          const MaterialFilterEvent.clearAllSelected(
+            MaterialFilterType.principal,
+          ),
+        ),
+      ).called(1);
+    });
+
     testWidgets('Material Filter Page loading test', (tester) async {
       whenListen(
           materialfilterBlocMock,

@@ -32,6 +32,7 @@ mixin _$MaterialFilterEvent {
         updateMaterialSelected,
     required TResult Function(String searchkey) updateSearchKey,
     required TResult Function() clearSelected,
+    required TResult Function(MaterialFilterType filterType) clearAllSelected,
     required TResult Function() resetFilter,
   }) =>
       throw _privateConstructorUsedError;
@@ -50,6 +51,7 @@ mixin _$MaterialFilterEvent {
         updateMaterialSelected,
     TResult? Function(String searchkey)? updateSearchKey,
     TResult? Function()? clearSelected,
+    TResult? Function(MaterialFilterType filterType)? clearAllSelected,
     TResult? Function()? resetFilter,
   }) =>
       throw _privateConstructorUsedError;
@@ -68,6 +70,7 @@ mixin _$MaterialFilterEvent {
         updateMaterialSelected,
     TResult Function(String searchkey)? updateSearchKey,
     TResult Function()? clearSelected,
+    TResult Function(MaterialFilterType filterType)? clearAllSelected,
     TResult Function()? resetFilter,
     required TResult orElse(),
   }) =>
@@ -80,6 +83,7 @@ mixin _$MaterialFilterEvent {
         updateMaterialSelected,
     required TResult Function(_updateSearchKey value) updateSearchKey,
     required TResult Function(_clearSelected value) clearSelected,
+    required TResult Function(_clearAllSelected value) clearAllSelected,
     required TResult Function(_resetFilter value) resetFilter,
   }) =>
       throw _privateConstructorUsedError;
@@ -90,6 +94,7 @@ mixin _$MaterialFilterEvent {
     TResult? Function(_updateMaterialSelected value)? updateMaterialSelected,
     TResult? Function(_updateSearchKey value)? updateSearchKey,
     TResult? Function(_clearSelected value)? clearSelected,
+    TResult? Function(_clearAllSelected value)? clearAllSelected,
     TResult? Function(_resetFilter value)? resetFilter,
   }) =>
       throw _privateConstructorUsedError;
@@ -100,6 +105,7 @@ mixin _$MaterialFilterEvent {
     TResult Function(_updateMaterialSelected value)? updateMaterialSelected,
     TResult Function(_updateSearchKey value)? updateSearchKey,
     TResult Function(_clearSelected value)? clearSelected,
+    TResult Function(_clearAllSelected value)? clearAllSelected,
     TResult Function(_resetFilter value)? resetFilter,
     required TResult orElse(),
   }) =>
@@ -176,6 +182,7 @@ class _$_Initialized implements _Initialized {
         updateMaterialSelected,
     required TResult Function(String searchkey) updateSearchKey,
     required TResult Function() clearSelected,
+    required TResult Function(MaterialFilterType filterType) clearAllSelected,
     required TResult Function() resetFilter,
   }) {
     return initialized();
@@ -197,6 +204,7 @@ class _$_Initialized implements _Initialized {
         updateMaterialSelected,
     TResult? Function(String searchkey)? updateSearchKey,
     TResult? Function()? clearSelected,
+    TResult? Function(MaterialFilterType filterType)? clearAllSelected,
     TResult? Function()? resetFilter,
   }) {
     return initialized?.call();
@@ -218,6 +226,7 @@ class _$_Initialized implements _Initialized {
         updateMaterialSelected,
     TResult Function(String searchkey)? updateSearchKey,
     TResult Function()? clearSelected,
+    TResult Function(MaterialFilterType filterType)? clearAllSelected,
     TResult Function()? resetFilter,
     required TResult orElse(),
   }) {
@@ -236,6 +245,7 @@ class _$_Initialized implements _Initialized {
         updateMaterialSelected,
     required TResult Function(_updateSearchKey value) updateSearchKey,
     required TResult Function(_clearSelected value) clearSelected,
+    required TResult Function(_clearAllSelected value) clearAllSelected,
     required TResult Function(_resetFilter value) resetFilter,
   }) {
     return initialized(this);
@@ -249,6 +259,7 @@ class _$_Initialized implements _Initialized {
     TResult? Function(_updateMaterialSelected value)? updateMaterialSelected,
     TResult? Function(_updateSearchKey value)? updateSearchKey,
     TResult? Function(_clearSelected value)? clearSelected,
+    TResult? Function(_clearAllSelected value)? clearAllSelected,
     TResult? Function(_resetFilter value)? resetFilter,
   }) {
     return initialized?.call(this);
@@ -262,6 +273,7 @@ class _$_Initialized implements _Initialized {
     TResult Function(_updateMaterialSelected value)? updateMaterialSelected,
     TResult Function(_updateSearchKey value)? updateSearchKey,
     TResult Function(_clearSelected value)? clearSelected,
+    TResult Function(_clearAllSelected value)? clearAllSelected,
     TResult Function(_resetFilter value)? resetFilter,
     required TResult orElse(),
   }) {
@@ -457,6 +469,7 @@ class _$_fetch implements _fetch {
         updateMaterialSelected,
     required TResult Function(String searchkey) updateSearchKey,
     required TResult Function() clearSelected,
+    required TResult Function(MaterialFilterType filterType) clearAllSelected,
     required TResult Function() resetFilter,
   }) {
     return fetch(salesOrganisation, customerCodeInfo, shipToInfo, user,
@@ -479,6 +492,7 @@ class _$_fetch implements _fetch {
         updateMaterialSelected,
     TResult? Function(String searchkey)? updateSearchKey,
     TResult? Function()? clearSelected,
+    TResult? Function(MaterialFilterType filterType)? clearAllSelected,
     TResult? Function()? resetFilter,
   }) {
     return fetch?.call(salesOrganisation, customerCodeInfo, shipToInfo, user,
@@ -501,6 +515,7 @@ class _$_fetch implements _fetch {
         updateMaterialSelected,
     TResult Function(String searchkey)? updateSearchKey,
     TResult Function()? clearSelected,
+    TResult Function(MaterialFilterType filterType)? clearAllSelected,
     TResult Function()? resetFilter,
     required TResult orElse(),
   }) {
@@ -520,6 +535,7 @@ class _$_fetch implements _fetch {
         updateMaterialSelected,
     required TResult Function(_updateSearchKey value) updateSearchKey,
     required TResult Function(_clearSelected value) clearSelected,
+    required TResult Function(_clearAllSelected value) clearAllSelected,
     required TResult Function(_resetFilter value) resetFilter,
   }) {
     return fetch(this);
@@ -533,6 +549,7 @@ class _$_fetch implements _fetch {
     TResult? Function(_updateMaterialSelected value)? updateMaterialSelected,
     TResult? Function(_updateSearchKey value)? updateSearchKey,
     TResult? Function(_clearSelected value)? clearSelected,
+    TResult? Function(_clearAllSelected value)? clearAllSelected,
     TResult? Function(_resetFilter value)? resetFilter,
   }) {
     return fetch?.call(this);
@@ -546,6 +563,7 @@ class _$_fetch implements _fetch {
     TResult Function(_updateMaterialSelected value)? updateMaterialSelected,
     TResult Function(_updateSearchKey value)? updateSearchKey,
     TResult Function(_clearSelected value)? clearSelected,
+    TResult Function(_clearAllSelected value)? clearAllSelected,
     TResult Function(_resetFilter value)? resetFilter,
     required TResult orElse(),
   }) {
@@ -665,6 +683,7 @@ class _$_updateMaterialSelected implements _updateMaterialSelected {
         updateMaterialSelected,
     required TResult Function(String searchkey) updateSearchKey,
     required TResult Function() clearSelected,
+    required TResult Function(MaterialFilterType filterType) clearAllSelected,
     required TResult Function() resetFilter,
   }) {
     return updateMaterialSelected(filterType, selectedFilter);
@@ -686,6 +705,7 @@ class _$_updateMaterialSelected implements _updateMaterialSelected {
         updateMaterialSelected,
     TResult? Function(String searchkey)? updateSearchKey,
     TResult? Function()? clearSelected,
+    TResult? Function(MaterialFilterType filterType)? clearAllSelected,
     TResult? Function()? resetFilter,
   }) {
     return updateMaterialSelected?.call(filterType, selectedFilter);
@@ -707,6 +727,7 @@ class _$_updateMaterialSelected implements _updateMaterialSelected {
         updateMaterialSelected,
     TResult Function(String searchkey)? updateSearchKey,
     TResult Function()? clearSelected,
+    TResult Function(MaterialFilterType filterType)? clearAllSelected,
     TResult Function()? resetFilter,
     required TResult orElse(),
   }) {
@@ -725,6 +746,7 @@ class _$_updateMaterialSelected implements _updateMaterialSelected {
         updateMaterialSelected,
     required TResult Function(_updateSearchKey value) updateSearchKey,
     required TResult Function(_clearSelected value) clearSelected,
+    required TResult Function(_clearAllSelected value) clearAllSelected,
     required TResult Function(_resetFilter value) resetFilter,
   }) {
     return updateMaterialSelected(this);
@@ -738,6 +760,7 @@ class _$_updateMaterialSelected implements _updateMaterialSelected {
     TResult? Function(_updateMaterialSelected value)? updateMaterialSelected,
     TResult? Function(_updateSearchKey value)? updateSearchKey,
     TResult? Function(_clearSelected value)? clearSelected,
+    TResult? Function(_clearAllSelected value)? clearAllSelected,
     TResult? Function(_resetFilter value)? resetFilter,
   }) {
     return updateMaterialSelected?.call(this);
@@ -751,6 +774,7 @@ class _$_updateMaterialSelected implements _updateMaterialSelected {
     TResult Function(_updateMaterialSelected value)? updateMaterialSelected,
     TResult Function(_updateSearchKey value)? updateSearchKey,
     TResult Function(_clearSelected value)? clearSelected,
+    TResult Function(_clearAllSelected value)? clearAllSelected,
     TResult Function(_resetFilter value)? resetFilter,
     required TResult orElse(),
   }) {
@@ -852,6 +876,7 @@ class _$_updateSearchKey implements _updateSearchKey {
         updateMaterialSelected,
     required TResult Function(String searchkey) updateSearchKey,
     required TResult Function() clearSelected,
+    required TResult Function(MaterialFilterType filterType) clearAllSelected,
     required TResult Function() resetFilter,
   }) {
     return updateSearchKey(searchkey);
@@ -873,6 +898,7 @@ class _$_updateSearchKey implements _updateSearchKey {
         updateMaterialSelected,
     TResult? Function(String searchkey)? updateSearchKey,
     TResult? Function()? clearSelected,
+    TResult? Function(MaterialFilterType filterType)? clearAllSelected,
     TResult? Function()? resetFilter,
   }) {
     return updateSearchKey?.call(searchkey);
@@ -894,6 +920,7 @@ class _$_updateSearchKey implements _updateSearchKey {
         updateMaterialSelected,
     TResult Function(String searchkey)? updateSearchKey,
     TResult Function()? clearSelected,
+    TResult Function(MaterialFilterType filterType)? clearAllSelected,
     TResult Function()? resetFilter,
     required TResult orElse(),
   }) {
@@ -912,6 +939,7 @@ class _$_updateSearchKey implements _updateSearchKey {
         updateMaterialSelected,
     required TResult Function(_updateSearchKey value) updateSearchKey,
     required TResult Function(_clearSelected value) clearSelected,
+    required TResult Function(_clearAllSelected value) clearAllSelected,
     required TResult Function(_resetFilter value) resetFilter,
   }) {
     return updateSearchKey(this);
@@ -925,6 +953,7 @@ class _$_updateSearchKey implements _updateSearchKey {
     TResult? Function(_updateMaterialSelected value)? updateMaterialSelected,
     TResult? Function(_updateSearchKey value)? updateSearchKey,
     TResult? Function(_clearSelected value)? clearSelected,
+    TResult? Function(_clearAllSelected value)? clearAllSelected,
     TResult? Function(_resetFilter value)? resetFilter,
   }) {
     return updateSearchKey?.call(this);
@@ -938,6 +967,7 @@ class _$_updateSearchKey implements _updateSearchKey {
     TResult Function(_updateMaterialSelected value)? updateMaterialSelected,
     TResult Function(_updateSearchKey value)? updateSearchKey,
     TResult Function(_clearSelected value)? clearSelected,
+    TResult Function(_clearAllSelected value)? clearAllSelected,
     TResult Function(_resetFilter value)? resetFilter,
     required TResult orElse(),
   }) {
@@ -1009,6 +1039,7 @@ class _$_clearSelected implements _clearSelected {
         updateMaterialSelected,
     required TResult Function(String searchkey) updateSearchKey,
     required TResult Function() clearSelected,
+    required TResult Function(MaterialFilterType filterType) clearAllSelected,
     required TResult Function() resetFilter,
   }) {
     return clearSelected();
@@ -1030,6 +1061,7 @@ class _$_clearSelected implements _clearSelected {
         updateMaterialSelected,
     TResult? Function(String searchkey)? updateSearchKey,
     TResult? Function()? clearSelected,
+    TResult? Function(MaterialFilterType filterType)? clearAllSelected,
     TResult? Function()? resetFilter,
   }) {
     return clearSelected?.call();
@@ -1051,6 +1083,7 @@ class _$_clearSelected implements _clearSelected {
         updateMaterialSelected,
     TResult Function(String searchkey)? updateSearchKey,
     TResult Function()? clearSelected,
+    TResult Function(MaterialFilterType filterType)? clearAllSelected,
     TResult Function()? resetFilter,
     required TResult orElse(),
   }) {
@@ -1069,6 +1102,7 @@ class _$_clearSelected implements _clearSelected {
         updateMaterialSelected,
     required TResult Function(_updateSearchKey value) updateSearchKey,
     required TResult Function(_clearSelected value) clearSelected,
+    required TResult Function(_clearAllSelected value) clearAllSelected,
     required TResult Function(_resetFilter value) resetFilter,
   }) {
     return clearSelected(this);
@@ -1082,6 +1116,7 @@ class _$_clearSelected implements _clearSelected {
     TResult? Function(_updateMaterialSelected value)? updateMaterialSelected,
     TResult? Function(_updateSearchKey value)? updateSearchKey,
     TResult? Function(_clearSelected value)? clearSelected,
+    TResult? Function(_clearAllSelected value)? clearAllSelected,
     TResult? Function(_resetFilter value)? resetFilter,
   }) {
     return clearSelected?.call(this);
@@ -1095,6 +1130,7 @@ class _$_clearSelected implements _clearSelected {
     TResult Function(_updateMaterialSelected value)? updateMaterialSelected,
     TResult Function(_updateSearchKey value)? updateSearchKey,
     TResult Function(_clearSelected value)? clearSelected,
+    TResult Function(_clearAllSelected value)? clearAllSelected,
     TResult Function(_resetFilter value)? resetFilter,
     required TResult orElse(),
   }) {
@@ -1107,6 +1143,197 @@ class _$_clearSelected implements _clearSelected {
 
 abstract class _clearSelected implements MaterialFilterEvent {
   const factory _clearSelected() = _$_clearSelected;
+}
+
+/// @nodoc
+abstract class _$$_clearAllSelectedCopyWith<$Res> {
+  factory _$$_clearAllSelectedCopyWith(
+          _$_clearAllSelected value, $Res Function(_$_clearAllSelected) then) =
+      __$$_clearAllSelectedCopyWithImpl<$Res>;
+  @useResult
+  $Res call({MaterialFilterType filterType});
+}
+
+/// @nodoc
+class __$$_clearAllSelectedCopyWithImpl<$Res>
+    extends _$MaterialFilterEventCopyWithImpl<$Res, _$_clearAllSelected>
+    implements _$$_clearAllSelectedCopyWith<$Res> {
+  __$$_clearAllSelectedCopyWithImpl(
+      _$_clearAllSelected _value, $Res Function(_$_clearAllSelected) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? filterType = null,
+  }) {
+    return _then(_$_clearAllSelected(
+      null == filterType
+          ? _value.filterType
+          : filterType // ignore: cast_nullable_to_non_nullable
+              as MaterialFilterType,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_clearAllSelected implements _clearAllSelected {
+  const _$_clearAllSelected(this.filterType);
+
+  @override
+  final MaterialFilterType filterType;
+
+  @override
+  String toString() {
+    return 'MaterialFilterEvent.clearAllSelected(filterType: $filterType)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_clearAllSelected &&
+            (identical(other.filterType, filterType) ||
+                other.filterType == filterType));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, filterType);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_clearAllSelectedCopyWith<_$_clearAllSelected> get copyWith =>
+      __$$_clearAllSelectedCopyWithImpl<_$_clearAllSelected>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SalesOrganisationConfigs salesOrgConfig,
+            String pickAndPack)
+        fetch,
+    required TResult Function(
+            MaterialFilterType filterType, String selectedFilter)
+        updateMaterialSelected,
+    required TResult Function(String searchkey) updateSearchKey,
+    required TResult Function() clearSelected,
+    required TResult Function(MaterialFilterType filterType) clearAllSelected,
+    required TResult Function() resetFilter,
+  }) {
+    return clearAllSelected(filterType);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SalesOrganisationConfigs salesOrgConfig,
+            String pickAndPack)?
+        fetch,
+    TResult? Function(MaterialFilterType filterType, String selectedFilter)?
+        updateMaterialSelected,
+    TResult? Function(String searchkey)? updateSearchKey,
+    TResult? Function()? clearSelected,
+    TResult? Function(MaterialFilterType filterType)? clearAllSelected,
+    TResult? Function()? resetFilter,
+  }) {
+    return clearAllSelected?.call(filterType);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SalesOrganisationConfigs salesOrgConfig,
+            String pickAndPack)?
+        fetch,
+    TResult Function(MaterialFilterType filterType, String selectedFilter)?
+        updateMaterialSelected,
+    TResult Function(String searchkey)? updateSearchKey,
+    TResult Function()? clearSelected,
+    TResult Function(MaterialFilterType filterType)? clearAllSelected,
+    TResult Function()? resetFilter,
+    required TResult orElse(),
+  }) {
+    if (clearAllSelected != null) {
+      return clearAllSelected(filterType);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_fetch value) fetch,
+    required TResult Function(_updateMaterialSelected value)
+        updateMaterialSelected,
+    required TResult Function(_updateSearchKey value) updateSearchKey,
+    required TResult Function(_clearSelected value) clearSelected,
+    required TResult Function(_clearAllSelected value) clearAllSelected,
+    required TResult Function(_resetFilter value) resetFilter,
+  }) {
+    return clearAllSelected(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_fetch value)? fetch,
+    TResult? Function(_updateMaterialSelected value)? updateMaterialSelected,
+    TResult? Function(_updateSearchKey value)? updateSearchKey,
+    TResult? Function(_clearSelected value)? clearSelected,
+    TResult? Function(_clearAllSelected value)? clearAllSelected,
+    TResult? Function(_resetFilter value)? resetFilter,
+  }) {
+    return clearAllSelected?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_fetch value)? fetch,
+    TResult Function(_updateMaterialSelected value)? updateMaterialSelected,
+    TResult Function(_updateSearchKey value)? updateSearchKey,
+    TResult Function(_clearSelected value)? clearSelected,
+    TResult Function(_clearAllSelected value)? clearAllSelected,
+    TResult Function(_resetFilter value)? resetFilter,
+    required TResult orElse(),
+  }) {
+    if (clearAllSelected != null) {
+      return clearAllSelected(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _clearAllSelected implements MaterialFilterEvent {
+  const factory _clearAllSelected(final MaterialFilterType filterType) =
+      _$_clearAllSelected;
+
+  MaterialFilterType get filterType;
+  @JsonKey(ignore: true)
+  _$$_clearAllSelectedCopyWith<_$_clearAllSelected> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -1161,6 +1388,7 @@ class _$_resetFilter implements _resetFilter {
         updateMaterialSelected,
     required TResult Function(String searchkey) updateSearchKey,
     required TResult Function() clearSelected,
+    required TResult Function(MaterialFilterType filterType) clearAllSelected,
     required TResult Function() resetFilter,
   }) {
     return resetFilter();
@@ -1182,6 +1410,7 @@ class _$_resetFilter implements _resetFilter {
         updateMaterialSelected,
     TResult? Function(String searchkey)? updateSearchKey,
     TResult? Function()? clearSelected,
+    TResult? Function(MaterialFilterType filterType)? clearAllSelected,
     TResult? Function()? resetFilter,
   }) {
     return resetFilter?.call();
@@ -1203,6 +1432,7 @@ class _$_resetFilter implements _resetFilter {
         updateMaterialSelected,
     TResult Function(String searchkey)? updateSearchKey,
     TResult Function()? clearSelected,
+    TResult Function(MaterialFilterType filterType)? clearAllSelected,
     TResult Function()? resetFilter,
     required TResult orElse(),
   }) {
@@ -1221,6 +1451,7 @@ class _$_resetFilter implements _resetFilter {
         updateMaterialSelected,
     required TResult Function(_updateSearchKey value) updateSearchKey,
     required TResult Function(_clearSelected value) clearSelected,
+    required TResult Function(_clearAllSelected value) clearAllSelected,
     required TResult Function(_resetFilter value) resetFilter,
   }) {
     return resetFilter(this);
@@ -1234,6 +1465,7 @@ class _$_resetFilter implements _resetFilter {
     TResult? Function(_updateMaterialSelected value)? updateMaterialSelected,
     TResult? Function(_updateSearchKey value)? updateSearchKey,
     TResult? Function(_clearSelected value)? clearSelected,
+    TResult? Function(_clearAllSelected value)? clearAllSelected,
     TResult? Function(_resetFilter value)? resetFilter,
   }) {
     return resetFilter?.call(this);
@@ -1247,6 +1479,7 @@ class _$_resetFilter implements _resetFilter {
     TResult Function(_updateMaterialSelected value)? updateMaterialSelected,
     TResult Function(_updateSearchKey value)? updateSearchKey,
     TResult Function(_clearSelected value)? clearSelected,
+    TResult Function(_clearAllSelected value)? clearAllSelected,
     TResult Function(_resetFilter value)? resetFilter,
     required TResult orElse(),
   }) {

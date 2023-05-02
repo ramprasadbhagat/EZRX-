@@ -125,6 +125,20 @@ class MaterialFilterPage extends StatelessWidget {
             appBar: PreferredSize(
               preferredSize: const Size(double.infinity, 50),
               child: CustomAppBar(
+                actionWidget: [
+                  if (state.showClearButton(filterType: filterType))
+                    TextButton(
+                      key: const ValueKey('filterclearMaterialList'),
+                      onPressed: () {
+                        context.read<MaterialFilterBloc>().add(
+                              MaterialFilterEvent.clearAllSelected(filterType),
+                            );
+                      },
+                      child: Text(
+                        'Clear All'.tr(),
+                      ),
+                    ),
+                ],
                 child: MaterialFilterSearch(
                   onSearchMethod: (String value) {
                     context.read<MaterialFilterBloc>().add(

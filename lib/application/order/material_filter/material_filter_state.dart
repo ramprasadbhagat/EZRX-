@@ -99,4 +99,16 @@ class MaterialFilterState with _$MaterialFilterState {
       uniqueTherapeuticClass: <String>[],
     );
   }
+
+  bool showClearButton({required MaterialFilterType filterType}) {
+    switch (filterType) {
+      case MaterialFilterType.principal:
+        return selectedMaterialFilter.uniquePrincipalName.isNotEmpty;
+      case MaterialFilterType.therapeutic:
+        return selectedMaterialFilter.uniqueTherapeuticClass.isNotEmpty;
+      case MaterialFilterType.brand:
+      default:
+        return selectedMaterialFilter.uniqueItemBrand.isNotEmpty;
+    }
+  }
 }

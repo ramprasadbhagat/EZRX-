@@ -104,7 +104,6 @@ void main() {
     greenDeliveryUserRole: GreenDeliveryUserRole(0),
     comboDealsUserRole: ComboDealUserRole(0),
     enableGMN: false,
-
   );
 
   const fakeSelectedPrincipalFilterCategory = MaterialFilterType.principal;
@@ -354,6 +353,102 @@ void main() {
           apiFailureOrSuccessOption: none(),
         ),
         MaterialFilterState.initial(),
+      ],
+    );
+
+    blocTest<MaterialFilterBloc, MaterialFilterState>(
+      'clearAllSelected for PrincipleName',
+      build: () => MaterialFilterBloc(
+        materialFilterRepository: materialFilterRepositoryMock,
+      ),
+      seed: () => MaterialFilterState.initial().copyWith(
+        selectedMaterialFilter: MaterialFilter.empty().copyWith(
+          uniquePrincipalName: [
+            'Principle Name 1',
+            'Principle Name 2',
+            'Principle Name 3',
+          ],
+        ),
+      ),
+      act: (bloc) {
+        bloc.add(
+          const MaterialFilterEvent.clearAllSelected(
+            MaterialFilterType.principal,
+          ),
+        );
+      },
+      expect: () => [
+        MaterialFilterState.initial().copyWith(
+          selectedMaterialFilter:
+              MaterialFilterState.initial().selectedMaterialFilter.copyWith(
+            uniquePrincipalName: [],
+          ),
+          apiFailureOrSuccessOption: none(),
+        ),
+      ],
+    );
+
+    blocTest<MaterialFilterBloc, MaterialFilterState>(
+      'clearAllSelected for Therapeutic Class',
+      build: () => MaterialFilterBloc(
+        materialFilterRepository: materialFilterRepositoryMock,
+      ),
+      seed: () => MaterialFilterState.initial().copyWith(
+        selectedMaterialFilter: MaterialFilter.empty().copyWith(
+          uniqueTherapeuticClass: [
+            'Therapeutic Class 1',
+            'Therapeutic Class 2',
+            'Therapeutic Class 3',
+          ],
+        ),
+      ),
+      act: (bloc) {
+        bloc.add(
+          const MaterialFilterEvent.clearAllSelected(
+            MaterialFilterType.therapeutic,
+          ),
+        );
+      },
+      expect: () => [
+        MaterialFilterState.initial().copyWith(
+          selectedMaterialFilter:
+              MaterialFilterState.initial().selectedMaterialFilter.copyWith(
+            uniqueTherapeuticClass: [],
+          ),
+          apiFailureOrSuccessOption: none(),
+        ),
+      ],
+    );
+
+    blocTest<MaterialFilterBloc, MaterialFilterState>(
+      'clearAllSelected for Item Brand',
+      build: () => MaterialFilterBloc(
+        materialFilterRepository: materialFilterRepositoryMock,
+      ),
+      seed: () => MaterialFilterState.initial().copyWith(
+        selectedMaterialFilter: MaterialFilter.empty().copyWith(
+          uniqueItemBrand: [
+            'Item Brand 1',
+            'Item Brand 2',
+            'Item Brand 3',
+          ],
+        ),
+      ),
+      act: (bloc) {
+        bloc.add(
+          const MaterialFilterEvent.clearAllSelected(
+            MaterialFilterType.brand,
+          ),
+        );
+      },
+      expect: () => [
+        MaterialFilterState.initial().copyWith(
+          selectedMaterialFilter:
+              MaterialFilterState.initial().selectedMaterialFilter.copyWith(
+            uniqueItemBrand: [],
+          ),
+          apiFailureOrSuccessOption: none(),
+        ),
       ],
     );
 
