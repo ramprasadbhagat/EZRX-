@@ -69,7 +69,7 @@ class LanguagePicker extends StatelessWidget {
 
   void _returnCurrentLocale({
     required String languageCode,
-    String? countryCode,
+    required String countryCode,
   }) {
     final locale = Locale(languageCode, countryCode);
     onPressed(locale);

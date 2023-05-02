@@ -79,5 +79,5 @@ class _ScanMaterialInfoState extends State<ScanMaterialInfo>
     );
   }
 
-  T? _ambiguate<T>(T? value) => value;
+  T? _ambiguate<T>(T value) => value;
 }

@@ -16,7 +16,7 @@ jobs:
   steps: 
   - bash: flutter375 analyze --fatal-infos --fatal-warnings
   - bash: flutter375 pub run dart_code_metrics:metrics analyze lib --fatal-style --fatal-performance --fatal-warnings
-  # - bash: flutter375 pub run dart_code_metrics:metrics check-unnecessary-nullable lib --fatal-found
+  - bash: flutter375 pub run dart_code_metrics:metrics check-unnecessary-nullable lib --fatal-found
   # - bash: flutter375 pub run dart_code_metrics:metrics check-unused-code lib --fatal-unused
   # - bash: flutter375 pub run dart_code_metrics:metrics check-unused-files lib --fatal-unused  
 - job:

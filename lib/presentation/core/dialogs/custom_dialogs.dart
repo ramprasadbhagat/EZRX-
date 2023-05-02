@@ -9,7 +9,7 @@ class CustomDialogs {
     required String title,
     required String message,
     Future<void> Function()? onCancelPressed,
-    Future<void> Function()? onAcceptPressed,
+    required Future<void> Function() onAcceptPressed,
     String confirmText = 'OK',
     String cancelText = 'Cancel',
   }) async {
@@ -32,7 +32,7 @@ class CustomDialogs {
             PlatformDialogAction(
               key: Key(confirmText),
               onPressed: () async {
-                if (onAcceptPressed != null) await onAcceptPressed();
+                await onAcceptPressed();
                 if (context.mounted) await context.router.pop();
               },
               child: Text(confirmText).tr(),

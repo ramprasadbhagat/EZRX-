@@ -38,6 +38,7 @@ void main() {
           child: MaterialApp(
             home: Scaffold(
               body: QuantityInput(
+                addPressed: (value) {},
                 controller: TextEditingController(),
                 quantityTextKey: const Key('text'),
                 onFieldChange: onFieldChanged,

@@ -3,7 +3,7 @@ import 'dart:math' as math;
 import 'package:flutter/services.dart';
 
 class RunesLengthLimitingTextInputFormatter extends TextInputFormatter {
-  final int? maxLength;
+  final int maxLength;
 
   RunesLengthLimitingTextInputFormatter(this.maxLength);
 
@@ -37,9 +37,7 @@ class RunesLengthLimitingTextInputFormatter extends TextInputFormatter {
   ) {
     final maxLength = this.maxLength;
 
-    if (maxLength == null ||
-        maxLength == -1 ||
-        newValue.text.runes.length <= maxLength) {
+    if (maxLength == -1 || newValue.text.runes.length <= maxLength) {
       return newValue;
     }
 

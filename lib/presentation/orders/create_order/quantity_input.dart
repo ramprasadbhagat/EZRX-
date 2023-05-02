@@ -8,7 +8,7 @@ class QuantityInput extends StatelessWidget {
   final Key quantityTextKey;
   final Function(int) onFieldChange;
   final Function(int)? minusPressed;
-  final Function(int)? addPressed;
+  final Function(int) addPressed;
   final Key quantityAddKey;
   final Key quantityDeleteKey;
   final bool isEnabled;
@@ -23,7 +23,7 @@ class QuantityInput extends StatelessWidget {
     required this.quantityTextKey,
     required this.onFieldChange,
     this.minusPressed,
-    this.addPressed,
+    required this.addPressed,
     required this.quantityAddKey,
     required this.quantityDeleteKey,
     required this.isEnabled,
@@ -113,11 +113,11 @@ class QuantityInput extends StatelessWidget {
                                 offset: controller.selection.base.offset,
                               ),
                             );
-                            addPressed?.call(value);
+                            addPressed.call(value);
                           }
                         },
                         icon: Icons.add,
-                        isEnabled: isEnabled && addPressed != null,
+                        isEnabled: isEnabled,
                       ),
                     ],
                   )
