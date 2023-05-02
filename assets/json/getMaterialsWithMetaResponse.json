@@ -10,6 +10,7 @@
       "materials": [
         {
           "materialNumber": "000000000023168451",
+          "ean": "2234567890",
           "isSampleMaterial": false,
           "materialDescription": " Reag Cup 15ml 1'S",
           "defaultMaterialDescription": " Reag Cup 15ml 1'S",
@@ -32,6 +33,7 @@
         },
         {
           "materialNumber": "000000000023167583",
+          "ean": "2234567890",
           "isSampleMaterial": false,
           "materialDescription": " TBILI 917/Mod P 6'S/Bx",
           "defaultMaterialDescription": " TBILI 917/Mod P 6'S/Bx",
@@ -54,6 +56,7 @@
         },
         {
           "materialNumber": "000000000023167634",
+          "ean": "2234567890",
           "isSampleMaterial": false,
           "materialDescription": " Triglyceride Mosys D",
           "defaultMaterialDescription": " Triglyceride Mosys D",
@@ -76,6 +79,7 @@
         },
         {
           "materialNumber": "000000000021091528",
+          "ean": "2234567890",
           "isSampleMaterial": false,
           "materialDescription": " 佳糖維膜衣錠１００毫克２８顆／盒　",
           "defaultMaterialDescription": " 佳糖維膜衣錠１００毫克２８顆／盒　",
@@ -98,6 +102,7 @@
         },
         {
           "materialNumber": "000000000023270009",
+          "ean": "2234567890",
           "isSampleMaterial": false,
           "materialDescription": "\"拜安捷２\"血糖監測系統（一套）",
           "defaultMaterialDescription": "\"拜安捷２\"血糖監測系統（一套）",
@@ -120,6 +125,7 @@
         },
         {
           "materialNumber": "000000000023340340",
+          "ean": "2234567890",
           "isSampleMaterial": false,
           "materialDescription": "\"瑞士\"宜保利血注射液 2,000單位 0.5公撮針筒裝/支",
           "defaultMaterialDescription": "\"瑞士\"宜保利血注射液 2,000單位 0.5公撮針筒裝/支",
@@ -142,6 +148,7 @@
         },
         {
           "materialNumber": "000000000023270018",
+          "ean": "2234567890",
           "isSampleMaterial": false,
           "materialDescription": "\"科基\"血凝素第八因子注射劑（重組體）with Vial Adapter，100",
           "defaultMaterialDescription": "\"科基\"血凝素第八因子注射劑（重組體）with Vial Adapter，100",
@@ -164,6 +171,7 @@
         },
         {
           "materialNumber": "000000000023270017",
+          "ean": "2234567890",
           "isSampleMaterial": false,
           "materialDescription": "\"科基\"血凝素第八因子注射劑（重組體）with Vial Adapter，500",
           "defaultMaterialDescription": "\"科基\"血凝素第八因子注射劑（重組體）with Vial Adapter，500",
@@ -186,6 +194,7 @@
         },
         {
           "materialNumber": "000000000023022683",
+          "ean": "2234567890",
           "isSampleMaterial": false,
           "materialDescription": "#984 std-A(BP1232)",
           "defaultMaterialDescription": "#984 std-A(BP1232)",
@@ -208,6 +217,7 @@
         },
         {
           "materialNumber": "000000000023166001",
+          "ean": "2234567890",
           "isSampleMaterial": false,
           "materialDescription": "#984 std-A(BP1232)",
           "defaultMaterialDescription": "#984 std-A(BP1232)",
@@ -230,6 +240,7 @@
         },
         {
           "materialNumber": "000000000023063774",
+          "ean": "2234567890",
           "materialDescription": "(M) TEOSYAL PS RD I 1ML PRFS 2'S",
           "principalCode": "0000101363",
           "principalName": "PARVUS SDN BHD",
@@ -256,6 +267,7 @@
         },
         {
           "materialNumber": "000000000023175833",
+          "ean": "2234567890",
           "materialDescription": "悅己膜衣錠 1x21",
           "principalCode": "0000101968",
           "principalName": "台灣拜耳股份有限公司",
@@ -281,6 +293,7 @@
         },
         {
           "materialNumber": "000000000023007483",
+          "ean": "2234567890",
           "materialDescription": "Brilinta Tab 90mg 4x14s",
           "principalCode": "0000100729",
           "principalName": "AstraZeneca Singapore Pte Ltd",
@@ -306,6 +319,7 @@
         },
         {
           "materialNumber": "000000000023064890",
+          "ean": "2234567890",
           "materialDescription": "BEROCCA EFFTAB15'S",
           "principalCode": "0000101369",
           "principalName": "BAYER CO (MALAYSIA) SDN BHD",
@@ -330,6 +344,7 @@
         },
         {
           "materialNumber": "000000000023063774",
+          "ean": "2234567890",
           "materialDescription": "(M) TEOSYAL PS RD I 1ML PRFS 2'S",
           "principalCode": "0000101363",
           "principalName": "PARVUS SDN BHD",
@@ -356,6 +371,7 @@
         },
         {
           "materialNumber": "000000000023175832",
+          "ean": "2234567890",
           "materialDescription": "悅己膜衣錠 1x21",
           "principalCode": "0000101968",
           "principalName": "台灣拜耳股份有限公司",

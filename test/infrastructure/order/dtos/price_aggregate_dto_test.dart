@@ -40,6 +40,7 @@ void main() {
             materials: <MaterialDto>[]),
         materialDto: const MaterialDto(
           bundles: [],
+          ean: '',
           defaultMaterialDescription: '',
           governmentMaterialCode: '',
           hasMandatoryTenderContract: false,

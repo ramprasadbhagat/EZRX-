@@ -77,6 +77,7 @@ void main() {
   final fakeMaterialNumber = MaterialNumber('000000000023168451');
   final fakematerialInfo = MaterialInfo(
     quantity: 0,
+    ean: '2234567890',
     materialNumber: fakeMaterialNumber,
     materialDescription: "Reag Cup 15ml 1'S",
     governmentMaterialCode: '',

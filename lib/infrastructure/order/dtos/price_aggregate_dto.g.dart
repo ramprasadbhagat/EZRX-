@@ -21,6 +21,7 @@ class PriceAggregateDtoAdapter extends TypeAdapter<_$_PriceAggregateDto> {
           ? const MaterialDto(
               bundles: [],
               governmentMaterialCode: '',
+              ean: '',
               defaultMaterialDescription: '',
               hasMandatoryTenderContract: false,
               hasValidTenderContract: false,

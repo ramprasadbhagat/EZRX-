@@ -47,11 +47,13 @@ class CustomerMaterialDto with _$CustomerMaterialDto {
     @JsonKey(name: 'IsFOCMaterial', defaultValue: false)
         required bool isFOCMaterial,
     @JsonKey(name: 'remarks', defaultValue: '') required String remarks,
-    @JsonKey(name: 'genericMaterialName', defaultValue: '') required String genericMaterialName,
+    @JsonKey(name: 'genericMaterialName', defaultValue: '')
+        required String genericMaterialName,
   }) = _CustomerMaterialDto;
 
   MaterialInfo toDomain() => MaterialInfo(
         materialNumber: MaterialNumber(materialNumber),
+        ean: '',
         materialDescription: materialDescription,
         defaultMaterialDescription: defaultMaterialDescription,
         governmentMaterialCode: governmentMaterialCode,
@@ -79,7 +81,7 @@ class CustomerMaterialDto with _$CustomerMaterialDto {
         isFOCMaterial: isFOCMaterial,
         quantity: 0,
         remarks: remarks,
-        genericMaterialName:genericMaterialName,
+        genericMaterialName: genericMaterialName,
       );
 
   factory CustomerMaterialDto.fromJson(Map<String, dynamic> json) =>

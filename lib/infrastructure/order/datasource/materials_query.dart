@@ -41,6 +41,7 @@ class MaterialsWithMetaQuery {
         }
         materials {
           materialNumber
+          ean
           isSampleMaterial
           materialDescription
           defaultMaterialDescription
@@ -113,6 +114,7 @@ class MaterialsWithMetaQuery {
         }
         materials {
           materialNumber
+          ean
           isSampleMaterial
           materialDescription
           defaultMaterialDescription
@@ -164,6 +166,7 @@ class MaterialsWithMetaQuery {
         }
         materials {
           materialNumber
+          ean
           isSampleMaterial
           materialDescription
           defaultMaterialDescription
@@ -214,6 +217,7 @@ class MaterialsWithMetaQuery {
         }
         materials {
           materialNumber
+          ean
           isSampleMaterial
           materialDescription
           defaultMaterialDescription

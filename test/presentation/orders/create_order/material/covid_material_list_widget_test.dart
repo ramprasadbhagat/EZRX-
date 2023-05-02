@@ -142,6 +142,7 @@ void main() {
 
   final fakeMaterialInfo = MaterialInfo(
     materialNumber: fakeMaterialNumber,
+    ean: '2234567890',
     materialDescription: "Reag Cup 15ml 1'S",
     governmentMaterialCode: '',
     therapeuticClass: 'All other non-therapeutic products',
@@ -476,6 +477,7 @@ void main() {
         materialList: <MaterialInfo>[
           MaterialInfo(
             materialNumber: fakeMaterialNumber,
+            ean: '2234567890',
             materialDescription: "Reag Cup 15ml 1'S",
             governmentMaterialCode: '',
             therapeuticClass: 'All other non-therapeutic products',

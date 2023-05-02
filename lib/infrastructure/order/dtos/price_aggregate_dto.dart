@@ -91,6 +91,7 @@ class PriceAggregateDto with _$PriceAggregateDto {
 const MaterialDto _emptyConstMaterialDto = MaterialDto(
   bundles: [],
   governmentMaterialCode: '',
+  ean: '',
   defaultMaterialDescription: '',
   hasMandatoryTenderContract: false,
   hasValidTenderContract: false,

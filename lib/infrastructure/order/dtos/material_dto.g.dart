@@ -42,13 +42,14 @@ class MaterialDtoAdapter extends TypeAdapter<_$_MaterialDto> {
       quantity: fields[20] == null ? 0 : fields[20] as int,
       remarks: fields[21] == null ? '' : fields[21] as String,
       genericMaterialName: fields[22] == null ? '' : fields[22] as String,
+      ean: fields[23] == null ? '' : fields[23] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_MaterialDto obj) {
     writer
-      ..writeByte(23)
+      ..writeByte(24)
       ..writeByte(0)
       ..write(obj.materialNumber)
       ..writeByte(1)
@@ -91,6 +92,8 @@ class MaterialDtoAdapter extends TypeAdapter<_$_MaterialDto> {
       ..write(obj.remarks)
       ..writeByte(22)
       ..write(obj.genericMaterialName)
+      ..writeByte(23)
+      ..write(obj.ean)
       ..writeByte(16)
       ..write(obj.taxes)
       ..writeByte(17)
@@ -145,6 +148,7 @@ _$_MaterialDto _$$_MaterialDtoFromJson(Map<String, dynamic> json) =>
       quantity: _validateQantity(json, 'quantity') as int? ?? 0,
       remarks: json['remarks'] as String? ?? '',
       genericMaterialName: json['genericMaterialName'] as String? ?? '',
+      ean: json['ean'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_MaterialDtoToJson(_$_MaterialDto instance) =>
@@ -172,4 +176,5 @@ Map<String, dynamic> _$$_MaterialDtoToJson(_$_MaterialDto instance) =>
       'quantity': instance.quantity,
       'remarks': instance.remarks,
       'genericMaterialName': instance.genericMaterialName,
+      'ean': instance.ean,
     };

@@ -29,6 +29,7 @@ class MaterialBundleDto with _$MaterialBundleDto {
   MaterialInfo toDomain() {
     return MaterialInfo(
       materialNumber: MaterialNumber(materialNumber),
+      ean: '',
       bundles: bundles.map((e) => e.toDomain()).toList(),
       materialDescription: '',
       governmentMaterialCode: '',
@@ -52,7 +53,7 @@ class MaterialBundleDto with _$MaterialBundleDto {
       isFOCMaterial: false,
       quantity: 0,
       remarks: '',
-      genericMaterialName:'',
+      genericMaterialName: '',
     );
   }
 
