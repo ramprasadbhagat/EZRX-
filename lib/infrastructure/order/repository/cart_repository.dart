@@ -337,7 +337,7 @@ class CartRepository implements ICartRepository {
                 bonusExisting = true;
 
                 return bonus.copyWith(
-                  qty: bonus.qty + newBonusWithStock.qty,
+                  qty: overrideQty? newBonusWithStock.qty : bonus.qty + newBonusWithStock.qty,
                   expiryDate: bonus.expiryDate,
                 );
               }
