@@ -1213,40 +1213,6 @@ void main() {
       expect(unitPrice, findsOneWidget);
     });
 
-    testWidgets('zmg discount lable', (tester) async {
-      final expectedState = [
-        MaterialListState.initial().copyWith(isFetching: true),
-        MaterialListState.initial().copyWith(
-          apiFailureOrSuccessOption: none(),
-          isFetching: false,
-          nextPageIndex: 2,
-          materialList: <MaterialInfo>[
-            MaterialInfo.empty().copyWith(materialNumber: fakeMaterialNumber)
-          ],
-        )
-      ];
-      whenListen(materialListBlocMock, Stream.fromIterable(expectedState));
-      when(() => materialPriceBlocMock.state).thenReturn(
-        MaterialPriceState.initial().copyWith(
-          isFetching: false,
-          materialPrice: {
-            fakeMaterialNumber: Price.empty().copyWith(
-              zmgDiscount: true,
-              tiers: [
-                PriceTier.empty().copyWith(items: [PriceTierItem.empty()])
-              ],
-            )
-          },
-        ),
-      );
-      await tester.pumpWidget(getScopedWidget(const MaterialListPage()));
-      await tester.pump();
-      final listContent = find.byKey(Key(
-          'materialOption${materialListBlocMock.state.materialList.first.materialNumber.getOrCrash()}'));
-      expect(listContent, findsOneWidget);
-      final zmgDiscountLable = find.byKey(const Key('zmgDiscountLable'));
-      expect(zmgDiscountLable, findsOneWidget);
-    });
 
     testWidgets('test Bonus Logo', (tester) async {
       final expectedState = [
@@ -1286,8 +1252,8 @@ void main() {
       final listContent = find.byKey(Key(
           'materialOption${materialListBlocMock.state.materialList.first.materialNumber.getOrCrash()}'));
       expect(listContent, findsOneWidget);
-      final zmgDiscountLable = find.byKey(const Key('bonusLogo'));
-      expect(zmgDiscountLable, findsOneWidget);
+      final bonusLogo = find.byKey(const Key('bonusLogo'));
+      expect(bonusLogo, findsOneWidget);
     });
 
     testWidgets('test TieredPricing Logo', (tester) async {
@@ -1324,8 +1290,8 @@ void main() {
       final listContent = find.byKey(Key(
           'materialOption${materialListBlocMock.state.materialList.first.materialNumber.getOrCrash()}'));
       expect(listContent, findsOneWidget);
-      final zmgDiscountLable = find.byKey(const Key('tieredPricingLogo'));
-      expect(zmgDiscountLable, findsOneWidget);
+      final tieredPricingLogo = find.byKey(const Key('tieredPricingLogo'));
+      expect(tieredPricingLogo, findsOneWidget);
     });
 
     testWidgets('Test loadingMore', (tester) async {

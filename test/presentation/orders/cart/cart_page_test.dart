@@ -1033,11 +1033,11 @@ void main() {
 
         await tester.pumpWidget(Material(child: getWidget()));
         await tester.pump();
-        final zmgDiscountLable = find.byKey(const Key('zmgDiscountLable'));
-        expect(zmgDiscountLable, findsOneWidget);
+        final tierLabel = find.byKey(const Key('tieredPricingLogo'));
+        expect(tierLabel, findsOneWidget);
         await tester.pump();
         await tester.tap(
-          zmgDiscountLable,
+          tierLabel,
         );
         await tester.pump();
         expect(find.byKey(const Key('updateCartBottomSheet')), findsOneWidget);

@@ -39,7 +39,7 @@ class _BodyContent extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            'Thank You',
+            'Thank You'.tr(),
             style: Theme.of(context)
                 .textTheme
                 .headlineMedium
@@ -51,11 +51,12 @@ class _BodyContent extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 15),
             child: Text(
-              'Your order has been received successfully',
+              'Your order has been received successfully'.tr(),
               style: Theme.of(context)
                   .textTheme
                   .titleLarge
                   ?.apply(color: ZPColors.darkGray),
+              textAlign: TextAlign.center,
             ),
           ),
           const SizedBox(
@@ -70,8 +71,8 @@ class _BodyContent extends StatelessWidget {
                     route.settings.name == 'HomeNavigationTabbarRoute',
               );
             },
-            child: const Text(
-              'Create New Order',
+            child: Text(
+              'Create New Order'.tr(),
             ),
           ),
           ElevatedButton(
@@ -87,8 +88,8 @@ class _BodyContent extends StatelessWidget {
                     route.settings.name == 'HomeNavigationTabbarRoute',
               );
             },
-            child: const Text(
-              'Go To Order History',
+            child: Text(
+              'Go To Order History'.tr(),
             ),
           ),
         ],
