@@ -55,108 +55,106 @@ class MaterialListSearchBarState extends State<MaterialListSearchBar> {
         builder: (context, state) {
           _searchController.text = state.searchKey.getOrDefaultValue('');
 
-          return Form(
-            child: TextFormField(
-              key: Key('materialSearchField${_searchController.text}'),
-              autocorrect: false,
-              controller: _searchController,
-              enabled: !state.isFetching,
-              onFieldSubmitted: (value) {
-                if (value.length > 1) {
+          return TextFormField(
+            key: Key('materialSearchField${_searchController.text}'),
+            autocorrect: false,
+            controller: _searchController,
+            enabled: !state.isFetching,
+            onFieldSubmitted: (value) {
+              if (SearchKey.search(value).isValid()) {
+                _resetMixpanelOrderFlow();
+                // search code goes here
+                context.read<MaterialListBloc>().add(
+                      MaterialListEvent.searchMaterialList(
+                        user: context.read<UserBloc>().state.user,
+                        salesOrganisation: context
+                            .read<SalesOrgBloc>()
+                            .state
+                            .salesOrganisation,
+                        configs: context.read<SalesOrgBloc>().state.configs,
+                        customerCodeInfo: context
+                            .read<CustomerCodeBloc>()
+                            .state
+                            .customerCodeInfo,
+                        shipToInfo:
+                            context.read<ShipToCodeBloc>().state.shipToInfo,
+                        selectedMaterialFilter: context
+                            .read<MaterialFilterBloc>()
+                            .state
+                            .selectedMaterialFilter,
+                        pickAndPack: context
+                            .read<EligibilityBloc>()
+                            .state
+                            .getPNPValueMaterial,
+                        searchKey: SearchKey(value),
+                      ),
+                    );
+                trackMixpanelEvent(
+                  MixpanelEvents.productSearch,
+                  props: {
+                    MixpanelProps.searchKey:
+                        state.searchKey.getOrDefaultValue(''),
+                  },
+                );
+              } else {
+                showSnackBar(
+                  context: context,
+                  message:
+                      'Please enter at least 2 characters.'.tr(),
+                );
+              }
+            },
+            decoration: InputDecoration(
+              isDense: true,
+              prefixIcon: const Icon(Icons.search),
+              suffixIcon: IconButton(
+                key: const Key('clearSearch'),
+                icon: const Icon(Icons.clear),
+                onPressed: () {
                   _resetMixpanelOrderFlow();
-                  // search code goes here
+                  //To reset the filters
+                  context.read<MaterialFilterBloc>().add(
+                        const MaterialFilterEvent.clearSelected(),
+                      );
+
                   context.read<MaterialListBloc>().add(
-                        MaterialListEvent.searchMaterialList(
-                          user: context.read<UserBloc>().state.user,
-                          salesOrganisation: context
-                              .read<SalesOrgBloc>()
-                              .state
-                              .salesOrganisation,
-                          configs: context.read<SalesOrgBloc>().state.configs,
-                          customerCodeInfo: context
-                              .read<CustomerCodeBloc>()
-                              .state
-                              .customerCodeInfo,
-                          shipToInfo:
-                              context.read<ShipToCodeBloc>().state.shipToInfo,
-                          selectedMaterialFilter: context
-                              .read<MaterialFilterBloc>()
-                              .state
-                              .selectedMaterialFilter,
-                          pickAndPack: context
-                              .read<EligibilityBloc>()
-                              .state
-                              .getPNPValueMaterial,
-                          searchKey: SearchKey(value),
+                        const MaterialListEvent.updateSearchKey(
+                          searchKey: '',
                         ),
                       );
-                  trackMixpanelEvent(
-                    MixpanelEvents.productSearch,
-                    props: {
-                      MixpanelProps.searchKey:
-                          state.searchKey.getOrDefaultValue(''),
-                    },
-                  );
-                } else {
-                  showSnackBar(
-                    context: context,
-                    message:
-                        'Please enter at least 2 characters.'.tr(),
-                  );
-                }
-              },
-              decoration: InputDecoration(
-                isDense: true,
-                prefixIcon: const Icon(Icons.search),
-                suffixIcon: IconButton(
-                  key: const Key('clearSearch'),
-                  icon: const Icon(Icons.clear),
-                  onPressed: () {
-                    _resetMixpanelOrderFlow();
-                    //To reset the filters
-                    context.read<MaterialFilterBloc>().add(
-                          const MaterialFilterEvent.clearSelected(),
-                        );
-
-                    context.read<MaterialListBloc>().add(
-                          const MaterialListEvent.updateSearchKey(
-                            searchKey: '',
-                          ),
-                        );
-                    // fetch code goes here
-                    context
-                        .read<MaterialListBloc>()
-                        .add(MaterialListEvent.fetch(
-                          user: context.read<UserBloc>().state.user,
-                          salesOrganisation: context
-                              .read<SalesOrgBloc>()
-                              .state
-                              .salesOrganisation,
-                          configs: context.read<SalesOrgBloc>().state.configs,
-                          customerCodeInfo: context
-                              .read<CustomerCodeBloc>()
-                              .state
-                              .customerCodeInfo,
-                          shipToInfo:
-                              context.read<ShipToCodeBloc>().state.shipToInfo,
-                          selectedMaterialFilter: context
-                              .read<MaterialFilterBloc>()
-                              .state
-                              .getEmptyMaterialFilter(),
-                          orderDocumentType: context
-                              .read<OrderDocumentTypeBloc>()
-                              .state
-                              .selectedOrderType,
-                          pickAndPack: context
-                              .read<EligibilityBloc>()
-                              .state
-                              .getPNPValueMaterial,
-                        ));
-                  },
-                ),
-                hintText: 'Search...'.tr(),
-                // border: InputBorder.none,
+                  // fetch code goes here
+                  context
+                      .read<MaterialListBloc>()
+                      .add(MaterialListEvent.fetch(
+                        user: context.read<UserBloc>().state.user,
+                        salesOrganisation: context
+                            .read<SalesOrgBloc>()
+                            .state
+                            .salesOrganisation,
+                        configs: context.read<SalesOrgBloc>().state.configs,
+                        customerCodeInfo: context
+                            .read<CustomerCodeBloc>()
+                            .state
+                            .customerCodeInfo,
+                        shipToInfo:
+                            context.read<ShipToCodeBloc>().state.shipToInfo,
+                        selectedMaterialFilter: context
+                            .read<MaterialFilterBloc>()
+                            .state
+                            .getEmptyMaterialFilter(),
+                        orderDocumentType: context
+                            .read<OrderDocumentTypeBloc>()
+                            .state
+                            .selectedOrderType,
+                        pickAndPack: context
+                            .read<EligibilityBloc>()
+                            .state
+                            .getPNPValueMaterial,
+                      ));
+                },
               ),
+              hintText: 'Search...'.tr(),
+              // border: InputBorder.none,
             ),
           );
         },

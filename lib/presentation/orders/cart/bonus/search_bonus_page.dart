@@ -4,6 +4,7 @@ import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_bloc.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
@@ -21,116 +22,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 
-class BonusAddPage extends StatefulWidget {
+class BonusAddPage extends StatelessWidget {
   final CartItem cartItem;
 
-  @override
-  State<BonusAddPage> createState() => _BonusAddPageState();
-
   const BonusAddPage({Key? key, required this.cartItem}) : super(key: key);
-}
-
-class _BonusAddPageState extends State<BonusAddPage> {
-  final TextEditingController _searchController = TextEditingController();
-  late BonusMaterialBloc bonusMaterialBloc;
-
-  @override
-  void initState() {
-    bonusMaterialBloc = context.read<BonusMaterialBloc>();
-    trackMixpanelEvent(
-      MixpanelEvents.pageViewVisited,
-      props: {
-        MixpanelProps.pageViewName: 'BonusAddPage',
-      },
-    );
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _searchController.dispose();
-    bonusMaterialBloc.add(const BonusMaterialEvent.initialized());
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: const Key('addBonus'),
-      appBar: PreferredSize(
-        preferredSize: const Size(double.infinity, 60),
-        child: CustomAppBar(
-          child: BlocBuilder<BonusMaterialBloc, BonusMaterialState>(
-            buildWhen: (previous, current) =>
-                previous.searchKey != current.searchKey ||
-                previous.isFetching != current.isFetching,
-            builder: (context, state) {
-              _searchController.text = state.searchKey.getOrDefaultValue('');
-
-              return Form(
-                child: TextFormField(
-                  key: Key(
-                    'addBonusTextField${state.searchKey.getOrDefaultValue('')}',
-                  ),
-                  controller: _searchController,
-                  autocorrect: false,
-                  enabled: !state.isFetching,
-                  onFieldSubmitted: (value) {
-                    if (value.length > 1) {
-                      bonusMaterialBloc.add(
-                        BonusMaterialEvent.fetch(
-                          user: context.read<UserBloc>().state.user,
-                          salesOrganisation: context
-                              .read<SalesOrgBloc>()
-                              .state
-                              .salesOrganisation,
-                          configs: context.read<SalesOrgBloc>().state.configs,
-                          pickAndPack: context
-                              .read<EligibilityBloc>()
-                              .state
-                              .getPNPValueMaterial,
-                          customerInfo: context
-                              .read<CustomerCodeBloc>()
-                              .state
-                              .customerCodeInfo,
-                          shipInfo:
-                              context.read<ShipToCodeBloc>().state.shipToInfo,
-                          searchKey: value,
-                        ),
-                      );
-                    } else {
-                      showSnackBar(
-                        context: context,
-                        message:
-                            'Please enter at least 2 characters.'.tr(),
-                      );
-                    }
-                  },
-                  decoration: InputDecoration(
-                    focusedBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(color: ZPColors.primary),
-                    ),
-                    isDense: true,
-                    prefixIcon: const Icon(Icons.search),
-                    suffixIcon: IconButton(
-                      key: const ValueKey('addBonusTextFieldClear'),
-                      icon: const Icon(Icons.clear),
-                      onPressed: () {
-                        if (_searchController.text.isEmpty) return;
-                        _searchController.clear();
-                        bonusMaterialBloc.add(
-                          const BonusMaterialEvent.reset(),
-                        );
-                      },
-                    ),
-                    hintText: 'Search...'.tr(),
-                    border: InputBorder.none,
-                  ),
-                ),
-              );
-            },
-          ),
-        ),
+      appBar: const PreferredSize(
+        preferredSize: Size(double.infinity, 60),
+        child: _AppBar(),
       ),
       body: AnnouncementBanner(
         currentPath: context.router.currentPath,
@@ -140,8 +43,8 @@ class _BonusAddPageState extends State<BonusAddPage> {
               previous.isStarting != current.isStarting,
           builder: (context, state) {
             return state.isStarting
-                ? Container(
-                    key: const Key('empty'),
+                ? const SizedBox.shrink(
+                    key:  Key('empty'),
                   )
                 : state.isFetching
                     ? LoadingShimmer.logo(key: const Key('loaderImage'))
@@ -208,7 +111,7 @@ class _BonusAddPageState extends State<BonusAddPage> {
                                       CartBottomSheet
                                           .showUpdateCartBonusBottomSheet(
                                         context: context,
-                                        cartItem: widget.cartItem,
+                                        cartItem: cartItem,
                                         item: state.bonus[i],
                                         isUpdateFromCart: false,
                                       );
@@ -246,6 +149,113 @@ class _BonusAddPageState extends State<BonusAddPage> {
                       );
           },
         ),
+      ),
+    );
+  }
+}
+
+
+class _AppBar extends StatefulWidget {
+  const _AppBar({Key? key}) : super(key: key);
+
+  @override
+  State<_AppBar> createState() => _AppBarState();
+}
+
+class _AppBarState extends State<_AppBar> {
+  final TextEditingController _searchController = TextEditingController();
+  late BonusMaterialBloc bonusMaterialBloc;
+
+  @override
+  void initState() {
+    bonusMaterialBloc = context.read<BonusMaterialBloc>();
+    trackMixpanelEvent(
+      MixpanelEvents.pageViewVisited,
+      props: {
+        MixpanelProps.pageViewName: 'BonusAddPage',
+      },
+    );
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    bonusMaterialBloc.add(const BonusMaterialEvent.initialized());
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomAppBar(
+      child: BlocBuilder<BonusMaterialBloc, BonusMaterialState>(
+        buildWhen: (previous, current) =>
+        previous.searchKey != current.searchKey ||
+            previous.isFetching != current.isFetching,
+        builder: (context, state) {
+          _searchController.text = state.searchKey.getOrDefaultValue('');
+
+          return TextFormField(
+            key: Key(
+              'addBonusTextField${state.searchKey.getOrDefaultValue('')}',
+            ),
+            controller: _searchController,
+            autocorrect: false,
+            enabled: !state.isFetching,
+            onFieldSubmitted: (value) {
+              if (SearchKey.search(value).isValid()) {
+                bonusMaterialBloc.add(
+                  BonusMaterialEvent.fetch(
+                    user: context.read<UserBloc>().state.user,
+                    salesOrganisation: context
+                        .read<SalesOrgBloc>()
+                        .state
+                        .salesOrganisation,
+                    configs: context.read<SalesOrgBloc>().state.configs,
+                    pickAndPack: context
+                        .read<EligibilityBloc>()
+                        .state
+                        .getPNPValueMaterial,
+                    customerInfo: context
+                        .read<CustomerCodeBloc>()
+                        .state
+                        .customerCodeInfo,
+                    shipInfo:
+                    context.read<ShipToCodeBloc>().state.shipToInfo,
+                    searchKey: value,
+                  ),
+                );
+              } else {
+                showSnackBar(
+                  context: context,
+                  message:
+                  'Please enter at least 2 characters.'
+                      .tr(),
+                );
+              }
+            },
+            decoration: InputDecoration(
+              focusedBorder: const OutlineInputBorder(
+                borderSide: BorderSide(color: ZPColors.primary),
+              ),
+              isDense: true,
+              prefixIcon: const Icon(Icons.search),
+              suffixIcon: IconButton(
+                key: const ValueKey('addBonusTextFieldClear'),
+                icon: const Icon(Icons.clear),
+                onPressed: () {
+                  if (_searchController.text.isEmpty) return;
+                  _searchController.clear();
+                  bonusMaterialBloc.add(
+                    const BonusMaterialEvent.reset(),
+                  );
+                },
+              ),
+              hintText: 'Search...'.tr(),
+              border: InputBorder.none,
+            ),
+          );
+        },
       ),
     );
   }

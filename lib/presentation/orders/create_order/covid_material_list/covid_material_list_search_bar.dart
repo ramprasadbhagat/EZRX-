@@ -6,6 +6,7 @@ import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.da
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/covid_material_list/covid_material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
@@ -52,17 +53,72 @@ class CovidMaterialListSearchBarState
         builder: (context, state) {
           _searchController.text = state.searchKey.getOrDefaultValue('');
 
-          return Form(
-            child: TextFormField(
-              key: Key('covidMaterialSearchField${_searchController.text}'),
-              autocorrect: false,
-              controller: _searchController,
-              enabled: !state.isFetching,
-              onFieldSubmitted: (value) {
-                if (value.length > 1) {
-                  // search code goes here
+          return TextFormField(
+            key: Key('covidMaterialSearchField${_searchController.text}'),
+            autocorrect: false,
+            controller: _searchController,
+            enabled: !state.isFetching,
+            onFieldSubmitted: (value) {
+              if (SearchKey.search(value).isValid()) {
+                // search code goes here
+                context.read<CovidMaterialListBloc>().add(
+                      CovidMaterialListEvent.searchMaterialList(
+                        user: context.read<UserBloc>().state.user,
+                        salesOrganisation: context
+                            .read<SalesOrgBloc>()
+                            .state
+                            .salesOrganisation,
+                        configs: context.read<SalesOrgBloc>().state.configs,
+                        customerCodeInfo: context
+                            .read<CustomerCodeBloc>()
+                            .state
+                            .customerCodeInfo,
+                        shipToInfo:
+                            context.read<ShipToCodeBloc>().state.shipToInfo,
+                        selectedMaterialFilter: context
+                            .read<MaterialFilterBloc>()
+                            .state
+                            .selectedMaterialFilter,
+                        pickAndPack: context
+                            .read<EligibilityBloc>()
+                            .state
+                            .getPNPValueMaterial,
+                      ),
+                    );
+                trackMixpanelEvent(
+                  MixpanelEvents.productSearch,
+                  props: {
+                    MixpanelProps.searchKey: value,
+                  },
+                );
+              } else {
+                showSnackBar(
+                  context: context,
+                  message:
+                      'Please enter at least 2 characters.'.tr(),
+                );
+              }
+            },
+            decoration: InputDecoration(
+              isDense: true,
+              prefixIcon: const Icon(Icons.search),
+              suffixIcon: IconButton(
+                key: const Key('clearSearch'),
+                icon: const Icon(Icons.clear),
+                onPressed: () {
+                  //To reset the filters
+                  context.read<MaterialFilterBloc>().add(
+                        const MaterialFilterEvent.clearSelected(),
+                      );
+
                   context.read<CovidMaterialListBloc>().add(
-                        CovidMaterialListEvent.searchMaterialList(
+                        const CovidMaterialListEvent.updateSearchKey(
+                          searchKey: '',
+                        ),
+                      );
+                  // fetch code goes here
+                  context.read<CovidMaterialListBloc>().add(
+                        CovidMaterialListEvent.fetch(
                           user: context.read<UserBloc>().state.user,
                           salesOrganisation: context
                               .read<SalesOrgBloc>()
@@ -75,72 +131,15 @@ class CovidMaterialListSearchBarState
                               .customerCodeInfo,
                           shipToInfo:
                               context.read<ShipToCodeBloc>().state.shipToInfo,
-                          selectedMaterialFilter: context
-                              .read<MaterialFilterBloc>()
-                              .state
-                              .selectedMaterialFilter,
                           pickAndPack: context
                               .read<EligibilityBloc>()
                               .state
                               .getPNPValueMaterial,
                         ),
                       );
-                  trackMixpanelEvent(
-                    MixpanelEvents.productSearch,
-                    props: {
-                      MixpanelProps.searchKey: value,
-                    },
-                  );
-                } else {
-                  showSnackBar(
-                    context: context,
-                    message:
-                        'Please enter at least 2 characters.'.tr(),
-                  );
-                }
-              },
-              decoration: InputDecoration(
-                isDense: true,
-                prefixIcon: const Icon(Icons.search),
-                suffixIcon: IconButton(
-                  key: const Key('clearSearch'),
-                  icon: const Icon(Icons.clear),
-                  onPressed: () {
-                    //To reset the filters
-                    context.read<MaterialFilterBloc>().add(
-                          const MaterialFilterEvent.clearSelected(),
-                        );
-
-                    context.read<CovidMaterialListBloc>().add(
-                          const CovidMaterialListEvent.updateSearchKey(
-                            searchKey: '',
-                          ),
-                        );
-                    // fetch code goes here
-                    context.read<CovidMaterialListBloc>().add(
-                          CovidMaterialListEvent.fetch(
-                            user: context.read<UserBloc>().state.user,
-                            salesOrganisation: context
-                                .read<SalesOrgBloc>()
-                                .state
-                                .salesOrganisation,
-                            configs: context.read<SalesOrgBloc>().state.configs,
-                            customerCodeInfo: context
-                                .read<CustomerCodeBloc>()
-                                .state
-                                .customerCodeInfo,
-                            shipToInfo:
-                                context.read<ShipToCodeBloc>().state.shipToInfo,
-                            pickAndPack: context
-                                .read<EligibilityBloc>()
-                                .state
-                                .getPNPValueMaterial,
-                          ),
-                        );
-                  },
-                ),
-                hintText: 'Search...'.tr(),
+                },
               ),
+              hintText: 'Search...'.tr(),
             ),
           );
         },
