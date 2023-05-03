@@ -96,7 +96,7 @@ class CartMaterialItemTile extends StatelessWidget {
                           },
                           value: cartItem.isSelected,
                         )
-                      : const SizedBox.shrink(),
+                      : null,
                   title: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
