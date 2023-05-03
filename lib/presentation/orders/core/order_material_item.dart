@@ -57,34 +57,27 @@ class OrderMaterialItem extends StatelessWidget {
                   final materialDescription =
                       itemInfo?.info.materialDescription ?? '';
 
-                  return Row(
-                    children: [
-                      Text(
-                        'Material Description:'.tr(),
-                        style: Theme.of(context).textTheme.titleMedium?.apply(
-                              color: ZPColors.darkerGreen,
-                            ),
-                      ),
-                      state.isFetching || state.isValidating
-                          ? SizedBox(
-                              key: const Key('material-description-key'),
-                              width: 100,
-                              child: LoadingShimmer.tile(),
+                  return state.isFetching || state.isValidating
+                      ? SizedBox(
+                          key: const Key('material-description-key'),
+                          width: 100,
+                          child: LoadingShimmer.tile(),
+                        )
+                      : itemInfo == null
+                          ? Text(
+                              'NA',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleMedium
+                                  ?.apply(
+                                    color: ZPColors.darkerGreen,
+                                  ),
                             )
-                          : itemInfo == null
-                              ? Text(
-                                  'NA',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .titleMedium
-                                      ?.apply(
-                                        color: ZPColors.darkerGreen,
-                                      ),
-                                )
-                              : Flexible(
+                          : Row(
+                            children: [
+                              Flexible(
                                   child: Text(
                                     materialDescription,
-                                    overflow: TextOverflow.ellipsis,
                                     style: Theme.of(context)
                                         .textTheme
                                         .titleMedium
@@ -93,8 +86,8 @@ class OrderMaterialItem extends StatelessWidget {
                                         ),
                                   ),
                                 ),
-                    ],
-                  );
+                            ],
+                          );
                 },
               ),
             ),
