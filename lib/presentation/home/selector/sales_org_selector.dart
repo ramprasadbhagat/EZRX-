@@ -85,6 +85,7 @@ class SalesOrgSelector extends StatelessWidget {
           builder: (context, state) {
             return PlatformAlertDialog(
               title: FittedBox(
+                fit: BoxFit.scaleDown,
                 child: const Text('Please select a Sales Org').tr(),
               ),
               material: (context, platform) => MaterialAlertDialogData(
