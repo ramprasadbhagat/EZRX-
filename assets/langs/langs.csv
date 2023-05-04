@@ -595,3 +595,7 @@ Batch Number,Batch Number,Batch Number,Batch Number,Batch Number,Batch Number,Ba
 Material Qty:,Material Qty:,จำนวน:,數量:,အရေအတွက်:,Số lượng sản phẩm:,ចំនួនផលិតផល:,
 Cart Details,Cart Details,Cart Details,Cart Details,Cart Details,Cart Details,Cart Details,
 Please enter at least 2 characters.,Please enter at least 2 characters.,Please enter at least 2 characters.,請輸入至少兩個字母,Please enter at least 2 characters.,Please enter at least 2 characters.,Please enter at least 2 characters.,
+Payments,Payments,การชำระเงิน,付款,ငွေပေးချေမှုများ,Thanh toán,ការទូទាត់,
+All Invoices,All Invoices,ใบแจ้งหนี้ทั้งหมด,所有發票,ပြေစာများအားလုံး,Tất cả hoá đơn,វិក្កយបត្រទាំងអស់។,
+All Credits,All Credits,เครดิตทั้งหมด,所有學分,Credits အားလုံး,Tất cả các khoản tín dụng,ឥណទានទាំងអស់។,
+Payment Summary,Payment Summary,สรุปการชำระเงิน,付款摘要,ငွေပေးချေမှု အကျဉ်းချုပ်,Tổng hợp thanh toán,សង្ខេបការទូទាត់,

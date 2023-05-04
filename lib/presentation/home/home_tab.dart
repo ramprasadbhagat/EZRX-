@@ -1,9 +1,11 @@
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/home/banners/banner.dart';
 import 'package:ezrxmobile/presentation/home/expansion_tiles/orders_expansion_tile.dart';
+import 'package:ezrxmobile/presentation/home/expansion_tiles/payments_expansion_tile.dart';
 import 'package:ezrxmobile/presentation/home/expansion_tiles/returns_expansion_tile.dart';
 import 'package:ezrxmobile/presentation/home/selector/customer_code_selector.dart';
 import 'package:ezrxmobile/presentation/home/selector/sales_org_selector.dart';
@@ -13,6 +15,7 @@ import 'package:ezrxmobile/presentation/orders/core/account_suspended_warning.da
 import 'package:ezrxmobile/presentation/orders/core/edi_user_banner.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:ezrxmobile/locator.dart';
@@ -61,6 +64,9 @@ class HomeTab extends StatelessWidget {
           const OrdersExpansionTile(),
           locator<RemoteConfigService>().getReturnsConfig()
               ? const ReturnsExpansionTile()
+              : const SizedBox.shrink(),
+          context.read<UserBloc>().state.user.role.type.isPaymentsAccessible
+              ? const PaymentsExpansionTile()
               : const SizedBox.shrink(),
         ],
       ),
