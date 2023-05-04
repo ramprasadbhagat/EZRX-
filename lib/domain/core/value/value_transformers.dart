@@ -2,12 +2,12 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/value/constants.dart';
 import 'package:intl/intl.dart';
 
-String stringCapitalize(String text) {
-  if (text.isEmpty) return '';
-  if (text.length == 1) return text;
+// String stringCapitalize(String text) {
+//   if (text.isEmpty) return '';
+//   if (text.length == 1) return text;
 
-  return '${text[0].toUpperCase()}${text.substring(1).toLowerCase()}';
-}
+//   return '${text[0].toUpperCase()}${text.substring(1).toLowerCase()}';
+// }
 
 // a simple string => A Simple String
 String stringTitleCase(String text) {
@@ -88,7 +88,6 @@ DateTime getDeliveryDateTime(String input) {
   return deliveryDate;
 }
 
-
 String displayDateTimeStringOrEmpty(String text, String format) {
   if (getDateTimeIntValue(text) <= 0) {
     return '-';
@@ -97,9 +96,8 @@ String displayDateTimeStringOrEmpty(String text, String format) {
   if (parsedDate == null) {
     return '';
   }
-  
-  return DateFormat(format)
-      .format(parsedDate);
+
+  return DateFormat(format).format(parsedDate);
 }
 
 bool isNumericOnly(String text) => RegExp(r'^\d+$').hasMatch(text);

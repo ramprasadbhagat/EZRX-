@@ -42,6 +42,7 @@ import 'package:ezrxmobile/presentation/history/detail/history_details.dart';
 
 import 'package:ezrxmobile/presentation/orders/create_order/scan_material_info.dart';
 
+//ignore: unused-code
 @MaterialAutoRouter(
   replaceInRouteName: 'Page,Route,Tab',
   routes: <AutoRoute>[

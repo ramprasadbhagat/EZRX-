@@ -150,16 +150,9 @@ class MaterialItemDto with _$MaterialItemDto {
       _$MaterialItemDtoFromJson(json);
 }
 
-bool boolStringFormatCheck(Map json, String key) =>
-    json[key] == '' ? false : json[key];
-
-Map<String, dynamic> materialItemOverride(Map json, String key) =>
-    json[key] ?? {};
-
 Map<String, dynamic> tenderContractOverride(Map json, String key) =>
     json[key] ?? TenderContractDto.fromDomain(TenderContract.empty()).toJson();
 
-int intFormatCheck(Map json, String key) => json[key] is int ? json[key] : 0;
 double doubleFormatCheck(Map json, String key) =>
     double.tryParse('${json[key]}') ?? 0;
 

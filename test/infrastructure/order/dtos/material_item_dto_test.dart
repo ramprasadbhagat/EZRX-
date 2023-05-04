@@ -19,7 +19,8 @@ void main() {
       mapObject = {
         'batchNumber': '12345',
         'materialNumber': '12345',
-        'tenderContract': TenderContractDto.fromDomain(TenderContract.empty()).toJson(),
+        'tenderContract':
+            TenderContractDto.fromDomain(TenderContract.empty()).toJson(),
       };
     });
     test('Test toDomain', () {
@@ -36,21 +37,6 @@ void main() {
     test('Test toJson', () {
       final configsDtoMap = MaterialItemDto.fromDomain(data).toJson();
       expect(configsDtoMap['materialNumber'], '12345');
-    });
-
-    test('Test boolStringFormatCheck', () {
-      final res = boolStringFormatCheck({'fake-key': false}, 'fake-key');
-      expect(res, false);
-    });
-
-    test('Test materialItemOverride', () {
-      final res = materialItemOverride({'fake-key': <String,dynamic>{}}, 'fake-key');
-      expect(res, {});
-    });
-
-     test('Test intFormatCheck', () {
-      final res = intFormatCheck({'fake-key': 1}, 'fake-key');
-      expect(res, 1);
     });
   });
 }

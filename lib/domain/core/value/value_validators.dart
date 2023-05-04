@@ -3,14 +3,14 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 
-Either<ValueFailure<String>, String> validateMaxStringLength(
-  String input,
-  int maxLength,
-) {
-  return input.length <= maxLength
-      ? right(input)
-      : left(ValueFailure.exceedingLength(failedValue: input, max: maxLength));
-}
+// Either<ValueFailure<String>, String> validateMaxStringLength(
+//   String input,
+//   int maxLength,
+// ) {
+//   return input.length <= maxLength
+//       ? right(input)
+//       : left(ValueFailure.exceedingLength(failedValue: input, max: maxLength));
+// }
 
 Either<ValueFailure<String>, String> validateStringNotEmpty(String input) {
   return input.isNotEmpty
@@ -20,16 +20,10 @@ Either<ValueFailure<String>, String> validateStringNotEmpty(String input) {
 
 Either<ValueFailure<String>, String> validateDateString(String input) {
   final dateTime = tryParseDateTime(input);
-  
+
   return dateTime != null
       ? right(input)
       : left(ValueFailure.invalidDateValue(failedValue: input));
-}
-
-Either<ValueFailure<String>, String> validateSingleLine(String input) {
-  return input.contains('\n')
-      ? left(ValueFailure.multiline(failedValue: input))
-      : right(input);
 }
 
 Either<ValueFailure<String>, String> validateEmailAddress(String input) {
