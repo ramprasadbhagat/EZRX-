@@ -526,12 +526,9 @@ class _Stepper extends StatelessWidget {
       buildWhen: (previous, current) => previous != current,
       builder: (context, state) {
         final config = context.read<SalesOrgBloc>().state.configs;
-        final eligibleForOrderSubmit =
-            context.read<OrderEligibilityBloc>().state.eligibleForOrderSubmit;
         final isAccountSuspended =
             context.read<EligibilityBloc>().state.isAccountSuspended;
-        final validateRegularOrderType =
-            context.read<OrderEligibilityBloc>().state.validateRegularOrderType;
+        final orderEligibilityState = context.read<OrderEligibilityBloc>().state;
 
         return Stepper(
           margin: const EdgeInsets.fromLTRB(50, 10, 10, 10),
@@ -542,7 +539,11 @@ class _Stepper extends StatelessWidget {
                   maxStepsReached: details.currentStep == state.maxSteps,
                 ),
                 _ContainsSpecialOrderMaterialWarning(
-                  containsSpecialOrderMaterial: !validateRegularOrderType,
+                  containsSpecialOrderMaterial: !orderEligibilityState.validateRegularOrderType,
+                  maxStepsReached: details.currentStep == state.maxSteps,
+                ),
+                _MovCheckMessage(
+                  isMovQualified: orderEligibilityState.isMinOrderValuePassed, 
                   maxStepsReached: details.currentStep == state.maxSteps,
                 ),
                 Padding(
@@ -552,7 +553,7 @@ class _Stepper extends StatelessWidget {
                     children: [
                       _SubmitContinueButton(
                         details: details,
-                        eligibleForOrderSubmit: eligibleForOrderSubmit &&
+                        eligibleForOrderSubmit: orderEligibilityState.eligibleForOrderSubmit &&
                             !context.read<PoAttachmentBloc>().state.isFetching,
                         isAccountSuspended: isAccountSuspended,
                         orderSummaryState: state,
@@ -1049,5 +1050,51 @@ class _ContainsSpecialOrderMaterialWarning extends StatelessWidget {
     }
 
     return const SizedBox();
+  }
+}
+
+class _MovCheckMessage extends StatelessWidget {
+  final bool isMovQualified;
+  final bool maxStepsReached;
+  const _MovCheckMessage({
+    Key? key, 
+    required this.isMovQualified, 
+    required this.maxStepsReached,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    if(!isMovQualified && maxStepsReached){
+      return Padding(
+        key: const Key('MovCheckMessage'),
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Icon(
+              Icons.info_outline_rounded,
+              color: ZPColors.red,
+              size: 18,
+            ),
+            const SizedBox(
+              width: 8,
+            ),
+            Expanded(
+              child: Text(
+                'Note : Minimum order value criteria doesnt match! Please update your cart to proceed.'
+                    .tr(),
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                      fontSize: 12,
+                      fontStyle: FontStyle.italic,
+                      color: ZPColors.error,
+                    ),
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
+    return const SizedBox.shrink();
   }
 }
