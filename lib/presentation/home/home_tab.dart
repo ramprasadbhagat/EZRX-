@@ -65,7 +65,14 @@ class HomeTab extends StatelessWidget {
           locator<RemoteConfigService>().getReturnsConfig()
               ? const ReturnsExpansionTile()
               : const SizedBox.shrink(),
-          context.read<UserBloc>().state.user.role.type.isPaymentsAccessible
+          locator<RemoteConfigService>().getPaymentsConfig() &&
+                  context
+                      .read<UserBloc>()
+                      .state
+                      .user
+                      .role
+                      .type
+                      .isPaymentsAccessible
               ? const PaymentsExpansionTile()
               : const SizedBox.shrink(),
         ],

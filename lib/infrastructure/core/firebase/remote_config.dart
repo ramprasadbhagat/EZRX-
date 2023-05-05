@@ -19,6 +19,10 @@ class RemoteConfigService {
     return getBool(RemoteConfigConstants.enableReturns);
   }
 
+  bool getPaymentsConfig() {
+    return getBool(RemoteConfigConstants.enablePayments);
+  }
+
   bool getScanToOrderConfig() {
     return getBool(RemoteConfigConstants.enableScanToOrder);
   }
@@ -29,6 +33,9 @@ class RemoteConfigService {
     await remoteConfig.setDefaults(
       const {
         RemoteConfigConstants.enableTnc: false,
+        RemoteConfigConstants.enableReturns: false,
+        RemoteConfigConstants.enablePayments: false,
+        RemoteConfigConstants.enableScanToOrder: false,
       },
     );
   }

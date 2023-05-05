@@ -222,6 +222,7 @@ void main() {
           ),
         );
         when(() => remoteConfigServiceMock.getReturnsConfig()).thenReturn(true);
+        when(() => remoteConfigServiceMock.getPaymentsConfig()).thenReturn(true);
         when(() => authBlocMock.state).thenReturn(const AuthState.initial());
         when(() => announcementBlocMock.state)
             .thenReturn(AnnouncementState.initial());
