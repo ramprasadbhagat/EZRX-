@@ -15,7 +15,7 @@ class BonusLabel extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       key: const ValueKey('bonusLable'),
-      // width: 150,
+      constraints: const BoxConstraints(minHeight: 30, maxWidth: 400),
       alignment: Alignment.center,
       margin: const EdgeInsets.only(bottom: 5),
       decoration: const BoxDecoration(
@@ -74,6 +74,7 @@ class _ExpandedBonusLabelState extends State<ExpandedBonusLabel> {
         Container(
           key: const ValueKey('bonusLable'),
           alignment: Alignment.center,
+          constraints: const BoxConstraints(minHeight: 30, maxWidth: 400),
           margin: const EdgeInsets.only(bottom: 5),
           padding: const EdgeInsets.symmetric(horizontal: 20),
           decoration: const BoxDecoration(
@@ -115,10 +116,13 @@ class _ExpandedBonusLabelState extends State<ExpandedBonusLabel> {
               InkWell(
                 key: const Key('Expandable'),
                 onTap: () => setState(() => isExpanded = !isExpanded),
-                child: Icon(
-                  isExpanded ? Icons.remove : Icons.add,
-                  color: ZPColors.black,
-                  size: 18,
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                  child: Icon(
+                    isExpanded ? Icons.remove : Icons.add,
+                    color: ZPColors.black,
+                    size: 18,
+                  ),
                 ),
               ),
             ],

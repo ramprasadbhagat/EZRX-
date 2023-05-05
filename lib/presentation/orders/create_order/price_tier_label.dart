@@ -18,7 +18,7 @@ class PriceTierLabel extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       key: const ValueKey('priceTierLable'),
-      // width: 180,
+      constraints: const BoxConstraints(minHeight: 30, maxWidth: 400),
       alignment: Alignment.center,
       margin: const EdgeInsets.only(bottom: 5),
       decoration: const BoxDecoration(
