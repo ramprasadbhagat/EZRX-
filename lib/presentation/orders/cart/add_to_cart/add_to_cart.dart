@@ -48,8 +48,14 @@ class AddToCart extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Material Detail').tr(),
         actions: [
-          FavoriteButton(
-            materialInfo: addToCartBloc.state.cartItem.materialInfo,
+          BlocBuilder<AddToCartBloc, AddToCartState>(
+            buildWhen: (previous, current) =>
+                previous.cartItem.materialInfo != current.cartItem.materialInfo,
+            builder: (context, state) {
+              return FavoriteButton(
+                materialInfo: state.cartItem.materialInfo,
+              );
+            },
           ),
         ],
       ),

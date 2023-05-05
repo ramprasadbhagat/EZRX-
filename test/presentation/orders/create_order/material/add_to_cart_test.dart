@@ -25,6 +25,7 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/favourites/entities/favourite_item.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
@@ -88,6 +89,9 @@ class AnnouncementBlocMock
 
 class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 
+class MockFavouriteBloc extends MockBloc<FavouriteEvent, FavouriteState>
+    implements FavouriteBloc {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late SalesOrgBloc salesOrgBlocMock;
@@ -103,6 +107,7 @@ void main() {
   late AnnouncementBloc announcementBlocMock;
   late UserBlocMock userBlocMock;
   late OrderDocumentTypeBlocMock orderDocumentTypeBlocMock;
+  late MockFavouriteBloc mockFavouriteBloc;
 
   final materialInfo = MaterialInfo.empty().copyWith(
     materialNumber: MaterialNumber('000000000023168451'),
@@ -112,6 +117,7 @@ void main() {
           'Ã¥ï¿½Â°Ã§ï¿½Â£Ã¦â€¹Å“Ã¨â‚¬Â³Ã¨â€šÂ¡Ã¤Â»Â½Ã¦Å“â€°Ã©â„¢ï¿½Ã¥â€¦Â¬Ã¥ï¿½Â¸'),
     ),
   );
+  final fakeMaterialNumber = MaterialNumber('000000000023168451');
 
   final priceAggregate = PriceAggregate.empty().copyWith(
     quantity: 1,
@@ -132,6 +138,7 @@ void main() {
   setUpAll(() async {
     setupLocator();
     locator<MixpanelService>().init(mixpanel: MixpanelMock());
+    locator.registerLazySingleton(() => mockFavouriteBloc);
   });
 
   group('Material List Test', () {
@@ -147,6 +154,7 @@ void main() {
       announcementBlocMock = AnnouncementBlocMock();
       userBlocMock = UserBlocMock();
       orderDocumentTypeBlocMock = OrderDocumentTypeBlocMock();
+      mockFavouriteBloc = MockFavouriteBloc();
 
       autoRouterMock = locator<AppRouter>();
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
@@ -166,6 +174,7 @@ void main() {
       when(() => userBlocMock.state).thenReturn(UserState.initial());
       when(() => orderDocumentTypeBlocMock.state)
           .thenReturn(OrderDocumentTypeState.initial());
+      when(() => mockFavouriteBloc.state).thenReturn(FavouriteState.initial());
     });
 
     Widget getScopedWidget(Widget child) {
@@ -201,6 +210,8 @@ void main() {
             BlocProvider<UserBloc>(create: (context) => userBlocMock),
             BlocProvider<OrderDocumentTypeBloc>(
                 create: (context) => orderDocumentTypeBlocMock),
+            BlocProvider<FavouriteBloc>(
+                create: ((context) => mockFavouriteBloc)),
           ],
           child: child,
         ),
@@ -1196,5 +1207,43 @@ void main() {
         );
       },
     );
+
+    testWidgets('In Material Details page favorite button tap testing',
+        (tester) async {
+      when(() => addToCartBlocMock.state).thenReturn(
+        AddToCartState.initial().copyWith(
+          cartItem: priceAggregate.copyWith(materialInfo: MaterialInfo.empty()),
+        ),
+      );
+      whenListen(
+          addToCartBlocMock,
+          Stream.fromIterable([
+            AddToCartState.initial().copyWith(
+              cartItem: priceAggregate.copyWith(
+                  materialInfo: priceAggregate.materialInfo),
+            ),
+          ]));
+      whenListen(
+          mockFavouriteBloc,
+          Stream.fromIterable([
+            FavouriteState.initial().copyWith(
+              favouriteItems: [
+                Favourite.empty().copyWith(materialNumber: fakeMaterialNumber),
+              ],
+            ),
+          ]));
+
+      await tester.pumpWidget(
+        getScopedWidget(const AddToCart(isCovid19Tab: false)),
+      );
+
+      final favoriteButtonBorderOutlined =
+          find.byIcon(Icons.favorite_border_outlined);
+
+      await tester.tap(favoriteButtonBorderOutlined);
+      await tester.pumpAndSettle();
+      expect(find.byIcon(Icons.favorite), findsOneWidget);
+      await tester.pump();
+    });
   });
 }
