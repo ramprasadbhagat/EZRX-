@@ -363,8 +363,10 @@ class HistoryTab extends StatelessWidget {
                                           .read<OrderHistoryFilterBloc>()
                                           .state
                                           .sortDirection,
-                                      orderHistoryFilter:
-                                          OrderHistoryFilter.empty(),
+                                      orderHistoryFilter: context
+                                          .read<OrderHistoryFilterBloc>()
+                                          .state
+                                          .orderHistoryFilter,
                                     ),
                                   ),
                               itemBuilder: (context, index, item) =>
