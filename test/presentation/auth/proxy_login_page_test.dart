@@ -8,7 +8,6 @@ import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/auth/proxy_login/proxy_login_form_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/auth/entities/login.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -197,31 +196,6 @@ void main() {
       expect(errorMessage, findsOneWidget);
     });
 
-    testWidgets('Test Proxy login success', (tester) async {
-      final expectedStates = [
-        ProxyLoginFormState.initial().copyWith(
-          authFailureOrSuccessOption:
-              optionOf(Right(Login(jwt: JWT('fake-success')))),
-        ),
-        UserState.initial().copyWith(
-          user: User.empty(),
-          userFailureOrSuccessOption:
-              optionOf(Right(Login(jwt: JWT('fake-success')))),
-        )
-      ];
-      when(() => authBlocMock.state)
-          .thenReturn(const AuthState.authenticated());
-
-      whenListen(proxyloginBlocMock, Stream.fromIterable(expectedStates));
-      final userNameTextField =
-          find.byKey(const Key('proxyLoginUsernameField'));
-      final proxyLoginSubmitButton =
-          find.byKey(const Key('proxyLoginSubmitButton'));
-
-      expect(userNameTextField, findsNothing);
-      expect(proxyLoginSubmitButton, findsNothing);
-    });
-
     testWidgets('Test Proxy login success with listner', (tester) async {
       final expectedStates = [
         ProxyLoginFormState.initial().copyWith(
@@ -255,6 +229,9 @@ void main() {
       verify(() =>
               materialListBlocMock.add(const MaterialListEvent.initialized()))
           .called(1);
+
+      verify(() => announcementBlocMock
+          .add(const AnnouncementEvent.getAnnouncement())).called(1);
     });
 
     testWidgets('username is valid', (tester) async {

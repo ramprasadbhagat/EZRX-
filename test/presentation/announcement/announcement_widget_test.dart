@@ -8,6 +8,7 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/announcement/entities/announcement.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/announcement/datasource/announcement_local.dart';
 import 'package:ezrxmobile/infrastructure/announcement/dtos/announcement_dto.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
@@ -51,15 +52,17 @@ void main() {
             .toDomain;
 
     announcementMock = announcementMock.copyWith(
-      endTime: DateFormat.yMd().add_jm().format(
-            DateTime.now().add(const Duration(days: 10)),
-          ),
+      endTime:
+          DateTimeStringValue.announcement(DateFormat.yMd().add_jm().format(
+                DateTime.now().add(const Duration(days: 10)),
+              )),
     );
 
     announcementCustomMock = announcementCustomMock.copyWith(
-      endTime: DateFormat.yMd().add_jm().format(
-            DateTime.now().add(const Duration(days: 10)),
-          ),
+      endTime:
+          DateTimeStringValue.announcement(DateFormat.yMd().add_jm().format(
+                DateTime.now().add(const Duration(days: 10)),
+              )),
     );
   });
 
@@ -109,9 +112,9 @@ void main() {
           .thenReturn(AnnouncementState.initial().copyWith(
         isClosed: false,
         announcement: announcementMock.copyWith(
-          endTime: DateFormat.yMd()
+          endTime: DateTimeStringValue.announcement(DateFormat.yMd()
               .add_jm()
-              .format(DateTime.now().subtract(const Duration(days: 10))),
+              .format(DateTime.now().subtract(const Duration(days: 10)))),
         ),
       ));
       await tester.pumpWidget(announcement('core'));

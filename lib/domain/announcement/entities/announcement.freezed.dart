@@ -19,8 +19,8 @@ mixin _$Announcement {
   bool get active => throw _privateConstructorUsedError;
   List<AnnouncementMessage> get descriptionList =>
       throw _privateConstructorUsedError;
-  String get startTime => throw _privateConstructorUsedError;
-  String get endTime => throw _privateConstructorUsedError;
+  DateTimeStringValue get startTime => throw _privateConstructorUsedError;
+  DateTimeStringValue get endTime => throw _privateConstructorUsedError;
   AnnouncementType get type => throw _privateConstructorUsedError;
   String get day => throw _privateConstructorUsedError;
   String get functionLabel => throw _privateConstructorUsedError;
@@ -45,8 +45,8 @@ abstract class $AnnouncementCopyWith<$Res> {
   $Res call(
       {bool active,
       List<AnnouncementMessage> descriptionList,
-      String startTime,
-      String endTime,
+      DateTimeStringValue startTime,
+      DateTimeStringValue endTime,
       AnnouncementType type,
       String day,
       String functionLabel,
@@ -95,11 +95,11 @@ class _$AnnouncementCopyWithImpl<$Res, $Val extends Announcement>
       startTime: null == startTime
           ? _value.startTime
           : startTime // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DateTimeStringValue,
       endTime: null == endTime
           ? _value.endTime
           : endTime // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DateTimeStringValue,
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -147,8 +147,8 @@ abstract class _$$_AnnouncementCopyWith<$Res>
   $Res call(
       {bool active,
       List<AnnouncementMessage> descriptionList,
-      String startTime,
-      String endTime,
+      DateTimeStringValue startTime,
+      DateTimeStringValue endTime,
       AnnouncementType type,
       String day,
       String functionLabel,
@@ -195,11 +195,11 @@ class __$$_AnnouncementCopyWithImpl<$Res>
       startTime: null == startTime
           ? _value.startTime
           : startTime // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DateTimeStringValue,
       endTime: null == endTime
           ? _value.endTime
           : endTime // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DateTimeStringValue,
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -267,9 +267,9 @@ class _$_Announcement extends _Announcement {
   }
 
   @override
-  final String startTime;
+  final DateTimeStringValue startTime;
   @override
-  final String endTime;
+  final DateTimeStringValue endTime;
   @override
   final AnnouncementType type;
   @override
@@ -351,8 +351,8 @@ abstract class _Announcement extends Announcement {
   const factory _Announcement(
       {required final bool active,
       required final List<AnnouncementMessage> descriptionList,
-      required final String startTime,
-      required final String endTime,
+      required final DateTimeStringValue startTime,
+      required final DateTimeStringValue endTime,
       required final AnnouncementType type,
       required final String day,
       required final String functionLabel,
@@ -368,9 +368,9 @@ abstract class _Announcement extends Announcement {
   @override
   List<AnnouncementMessage> get descriptionList;
   @override
-  String get startTime;
+  DateTimeStringValue get startTime;
   @override
-  String get endTime;
+  DateTimeStringValue get endTime;
   @override
   AnnouncementType get type;
   @override

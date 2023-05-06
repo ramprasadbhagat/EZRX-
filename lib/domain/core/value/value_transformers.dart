@@ -133,8 +133,19 @@ DateTime? tryParseDateTime(String input) {
   }
 }
 
+DateTime? tryParseAnnouncementDateTime(String input) {
+  try {
+    return DateFormat.yMd().add_jm().parse(input);
+  } catch (_) {
+    return null;
+  }
+}
+
 DateTime getDateTimeByDateString(String value) =>
     tryParseDateTime(value) ?? DateTime.now();
+
+DateTime getDateTimeByAnnouncementDateString(String value) =>
+    tryParseAnnouncementDateTime(value) ?? DateTime.now();
 
 String getDateStringByDateTime(DateTime dateTime) =>
     DateFormat(DateTimeFormatString.apiDateFormat).format(dateTime);

@@ -1,5 +1,5 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/announcement/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'announcement.freezed.dart';
@@ -11,8 +11,8 @@ class Announcement with _$Announcement {
   const factory Announcement({
     required bool active,
     required List<AnnouncementMessage> descriptionList,
-    required String startTime,
-    required String endTime,
+    required DateTimeStringValue startTime,
+    required DateTimeStringValue endTime,
     required AnnouncementType type,
     required String day,
     required String functionLabel,
@@ -26,8 +26,8 @@ class Announcement with _$Announcement {
   factory Announcement.empty() => Announcement(
         active: false,
         descriptionList: [],
-        startTime: '',
-        endTime: '',
+        startTime: DateTimeStringValue.announcement(''),
+        endTime: DateTimeStringValue.announcement(''),
         type: AnnouncementType(''),
         day: '',
         functionLabel: '',
@@ -71,33 +71,26 @@ class Announcement with _$Announcement {
               )
               .announcement
           : descriptionList.first.announcement
-              .replaceAll('\${startTime}', startTime)
-              .replaceAll('\${endTime}', endTime)
+              .replaceAll('\${startTime}', startTime.getValue())
+              .replaceAll('\${endTime}', endTime.getValue())
               .replaceAll('\${day}', _dayDisplay)
               .replaceAll('\${functionLabel}', functionLabel);
 
   bool get _isCustomAnnouncement => descriptionList.length != 1;
 
-  String get _dayDisplay => startTime.isEmpty ? '' : startTime.split(' ')[0];
+  String get _dayDisplay =>
+      !startTime.isValid() ? '' : startTime.getOrCrash().split(' ')[0];
 
   bool get hasValidAnnouncement =>
       this != Announcement.empty() && active && !_isExpired;
 
   bool get _isExpired {
-    final parsedEndTime = _toDateTime(endTime);
-    if (parsedEndTime != null) {
-      return DateTime.now().isAfter(parsedEndTime);
+    if (startTime.isValid() && endTime.isValid()) {
+      return DateTime.now().isAfter(endTime.dateTimeByAnnouncementDateString) ||
+          DateTime.now().isBefore(startTime.dateTimeByAnnouncementDateString);
     }
 
     return true;
-  }
-
-  DateTime? _toDateTime(String text) {
-    try {
-      return DateFormat.yMd().add_jm().parseLoose(text);
-    } catch (_) {
-      return DateTime.now();
-    }
   }
 }
 

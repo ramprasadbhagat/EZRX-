@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:ezrxmobile/domain/announcement/entities/announcement.dart';
 import 'package:ezrxmobile/domain/announcement/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'announcement_dto.freezed.dart';
@@ -36,8 +37,8 @@ class AnnouncementDto with _$AnnouncementDto {
     return Announcement(
       active: active,
       descriptionList: descriptionList.map((e) => e.toDomain).toList(),
-      startTime: startTime,
-      endTime: endTime,
+      startTime: DateTimeStringValue.announcement(startTime),
+      endTime: DateTimeStringValue.announcement(endTime),
       type: AnnouncementType(type),
       day: day,
       functionLabel: functionLabel,

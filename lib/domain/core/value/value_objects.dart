@@ -87,6 +87,10 @@ class DateTimeStringValue extends ValueObject<String> {
     return DateTimeStringValue._(validateDateString(input));
   }
 
+  factory DateTimeStringValue.announcement(String input) {
+    return DateTimeStringValue._(validateAnnouncementDateString(input));
+  }
+
   String get naIfEmptyDateTime => naIfEmpty(value.getOrElse(() => ''));
 
   String get toValidDateString => displayDateTimeStringOrEmpty(
@@ -106,6 +110,9 @@ class DateTimeStringValue extends ValueObject<String> {
 
   DateTime get dateTimeByDateString =>
       getDateTimeByDateString(value.getOrElse(() => ''));
+
+  DateTime get dateTimeByAnnouncementDateString =>
+      getDateTimeByAnnouncementDateString(value.getOrElse(() => ''));
 
   bool isBefore(DateTime dateTime) => dateTimeByDateString.isBefore(dateTime);
 
