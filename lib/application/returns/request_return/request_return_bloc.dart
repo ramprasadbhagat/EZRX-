@@ -14,7 +14,7 @@ part 'request_return_event.dart';
 part 'request_return_state.dart';
 part 'request_return_bloc.freezed.dart';
 
-const int _defaultPageSize = 10;
+const int _pageSize = 20;
 
 class RequestReturnBloc extends Bloc<RequestReturnEvent, RequestReturnState> {
   final IReturnRequestRepository returnRequestRepository;
@@ -44,7 +44,7 @@ class RequestReturnBloc extends Bloc<RequestReturnEvent, RequestReturnState> {
           salesOrganisation: value.salesOrg,
           shipToInfo: value.shipInfo,
           customerCodeInfo: value.customerCodeInfo,
-          pageSize: _defaultPageSize,
+          pageSize: _pageSize,
           offSet: 0,
           requestReturnFilter: value.requestReturnFilter,
         );
@@ -62,7 +62,7 @@ class RequestReturnBloc extends Bloc<RequestReturnEvent, RequestReturnState> {
             emit(
               state.copyWith(
                 returnItemList: requestReturn.items,
-                canLoadMore: requestReturn.items.length >= _defaultPageSize,
+                canLoadMore: requestReturn.items.length >= _pageSize,
                 failureOrSuccessOption: none(),
                 isLoading: false,
               ),
@@ -85,7 +85,7 @@ class RequestReturnBloc extends Bloc<RequestReturnEvent, RequestReturnState> {
           salesOrganisation: value.salesOrg,
           shipToInfo: value.shipInfo,
           customerCodeInfo: value.customerCodeInfo,
-          pageSize: _defaultPageSize,
+          pageSize: _pageSize,
           offSet: state.returnItemList.length,
           requestReturnFilter: value.requestReturnFilter,
         );
@@ -105,7 +105,7 @@ class RequestReturnBloc extends Bloc<RequestReturnEvent, RequestReturnState> {
             emit(
               state.copyWith(
                 returnItemList: updateItemList,
-                canLoadMore: requestReturn.items.length >= _defaultPageSize,
+                canLoadMore: requestReturn.items.length >= _pageSize,
                 failureOrSuccessOption: none(),
                 isLoading: false,
               ),
@@ -121,7 +121,7 @@ class RequestReturnBloc extends Bloc<RequestReturnEvent, RequestReturnState> {
         emit(
           state.copyWith(
             returnItemList: sortedItems,
-            canLoadMore: sortedItems.length >= _defaultPageSize,
+            canLoadMore: sortedItems.length >= _pageSize,
             failureOrSuccessOption: none(),
             isLoading: false,
             sortDirection: value.sortDirection,

@@ -54,7 +54,7 @@ void main() {
       saleOrgName = '2601';
       shipToCode = '0000002610';
       customerCode = '0000002610';
-      pageSize = 10;
+      pageSize = 20;
       offset = 0;
       draftOrder = const SavedOrderDto(
         address1: '',

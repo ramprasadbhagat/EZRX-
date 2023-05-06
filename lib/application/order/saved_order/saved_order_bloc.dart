@@ -18,7 +18,7 @@ part 'saved_order_bloc.freezed.dart';
 part 'saved_order_event.dart';
 part 'saved_order_state.dart';
 
-const int _defaultPageSize = 10;
+const int _pageSize = 20;
 
 class SavedOrderListBloc
     extends Bloc<SavedOrderListEvent, SavedOrderListState> {
@@ -51,7 +51,7 @@ class SavedOrderListBloc
           salesOrg: e.selectedSalesOrganisation,
           customerCode: e.selectedCustomerCode,
           shipToCode: e.selectedShipTo,
-          pageSize: _defaultPageSize,
+          pageSize: _pageSize,
           offset: 0,
         );
 
@@ -70,7 +70,7 @@ class SavedOrderListBloc
                 savedOrders: savedOrders,
                 apiFailureOrSuccessOption: none(),
                 isFetching: false,
-                canLoadMore: savedOrders.length >= _defaultPageSize,
+                canLoadMore: savedOrders.length >= _pageSize,
                 nextPageIndex: 1,
                 isCreating: false,
               ),
@@ -92,7 +92,7 @@ class SavedOrderListBloc
           salesOrg: e.selectedSalesOrganisation,
           customerCode: e.selectedCustomerCode,
           shipToCode: e.selectedShipTo,
-          pageSize: _defaultPageSize,
+          pageSize: _pageSize,
           offset: state.savedOrders.length,
         );
 
@@ -114,7 +114,7 @@ class SavedOrderListBloc
                 savedOrders: newSavedOrders,
                 apiFailureOrSuccessOption: none(),
                 isFetching: false,
-                canLoadMore: savedOrders.length >= _defaultPageSize,
+                canLoadMore: savedOrders.length >= _pageSize,
                 nextPageIndex: state.nextPageIndex + 1,
                 isCreating: false,
               ),

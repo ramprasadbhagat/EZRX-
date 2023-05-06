@@ -12,7 +12,7 @@ part 'policy_configuration_event.dart';
 part 'policy_configuration_state.dart';
 part 'policy_configuration_bloc.freezed.dart';
 
-int _pageSize = 10;
+int _pageSize = 20;
 
 class PolicyConfigurationBloc
     extends Bloc<PolicyConfigurationEvent, PolicyConfigurationState> {

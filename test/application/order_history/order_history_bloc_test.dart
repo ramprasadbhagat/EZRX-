@@ -16,7 +16,7 @@ import 'package:mocktail/mocktail.dart';
 
 class OrderHistoryRepoMock extends Mock implements OrderHistoryRepository {}
 
-const _defaultPageSize = 10;
+const _defaultPageSize = 20;
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();

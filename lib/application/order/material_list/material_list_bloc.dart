@@ -19,7 +19,7 @@ part 'material_list_bloc.freezed.dart';
 part 'material_list_event.dart';
 part 'material_list_state.dart';
 
-int _pageSize = 10;
+int _pageSize = 20;
 
 class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
   final IMaterialListRepository materialListRepository;

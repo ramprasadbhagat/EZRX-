@@ -13,7 +13,7 @@ part 'return_approver_event.dart';
 part 'return_approver_state.dart';
 part 'return_approver_bloc.freezed.dart';
 
-const int _pageSize = 11;
+const int _pageSize = 20;
 
 class ReturnApproverBloc
     extends Bloc<ReturnApproverEvent, ReturnApproverState> {

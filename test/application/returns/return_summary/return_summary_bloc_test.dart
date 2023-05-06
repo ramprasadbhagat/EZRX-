@@ -20,6 +20,8 @@ import 'package:mocktail/mocktail.dart';
 class MockReturnSummaryRepository extends Mock
     implements ReturnSummaryRepository {}
 
+const _pageSize = 20;
+
 void main() {
   late MockReturnSummaryRepository mockReturnSummaryRepository;
   late ReturnSummaryFilter returnSummaryFilter;
@@ -72,7 +74,7 @@ void main() {
                 shipTo: ShipToInfo.empty(),
                 user:
                     User.empty().copyWith(username: Username('mock-username')),
-                pageSize: 10,
+                pageSize: _pageSize,
                 offSet: 0,
                 returnSummaryFilter: returnSummaryFilter,
               )).thenAnswer(
@@ -107,7 +109,7 @@ void main() {
                 shipTo: ShipToInfo.empty(),
                 user:
                     User.empty().copyWith(username: Username('mock-username')),
-                pageSize: 10,
+                pageSize: _pageSize,
                 offSet: 0,
                 returnSummaryFilter: returnSummaryFilter,
               )).thenAnswer(
@@ -144,7 +146,7 @@ void main() {
                 shipTo: ShipToInfo.empty(),
                 user:
                     User.empty().copyWith(username: Username('mock-username')),
-                pageSize: 10,
+                pageSize: _pageSize,
                 offSet: 0,
                 returnSummaryFilter: returnSummaryFilter,
               )).thenAnswer(
@@ -180,7 +182,7 @@ void main() {
                 shipTo: ShipToInfo.empty(),
                 user:
                     User.empty().copyWith(username: Username('mock-username')),
-                pageSize: 10,
+                pageSize: _pageSize,
                 offSet: 0,
                 returnSummaryFilter: returnSummaryFilter,
               )).thenAnswer(

@@ -21,7 +21,7 @@ import 'package:mocktail/mocktail.dart';
 class MockMaterialListRepository extends Mock
     implements MaterialListRepository {}
 
-const _defaultPageSize = 10;
+const _defaultPageSize = 20;
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -39,7 +39,12 @@ void main() {
   final materialState = MaterialListState.initial();
   setUpAll(() async {
     materialListMockRepository = MockMaterialListRepository();
-    materialListMock = await MaterialListLocalDataSource().getMaterialList();
+    final loadedMaterialListMock =
+        await MaterialListLocalDataSource().getMaterialList();
+    materialListMock = [
+      ...loadedMaterialListMock,
+      ...loadedMaterialListMock,
+    ];
   });
 
   group('Material List Bloc', () {
@@ -572,91 +577,91 @@ void main() {
   });
 
   blocTest(
-      'Fetch material again after ShipToCode changed',
-      build: () =>
-          MaterialListBloc(materialListRepository: materialListMockRepository),
-      act: (MaterialListBloc bloc) {
-        bloc.add(MaterialListEvent.fetch(
-          user: mockUser,
-          salesOrganisation: mockSalesOrganisation,
-          configs: mockSalesOrganisationConfigs,
-          customerCodeInfo: mockCustomerCodeInfo,
-          shipToInfo: mockShipToInfo,
-          selectedMaterialFilter: mockSelectedMaterialFilter,
-          orderDocumentType: mockSelectedOrderDocumentType,
-          pickAndPack: 'include',
-        ));
-        bloc.add(MaterialListEvent.loadMore(
-          user: mockUser,
-          salesOrganisation: mockSalesOrganisation,
-          configs: mockSalesOrganisationConfigs,
-          customerCodeInfo: mockCustomerCodeInfo,
-          shipToInfo: mockShipToInfo,
-          selectedMaterialFilter: mockSelectedMaterialFilter,
-          orderDocumentType: mockSelectedOrderDocumentType,
-          pickAndPack: 'include',
-        ));
-      },
-      setUp: () {
-        when(() => materialListMockRepository.getMaterialList(
-              user: mockUser,
-              salesOrganisation: mockSalesOrganisation,
-              salesOrgConfig: mockSalesOrganisationConfigs,
-              customerCodeInfo: mockCustomerCodeInfo,
-              shipToInfo: mockShipToInfo,
-              pageSize: _defaultPageSize,
-              offset: 0,
-              orderBy: 'materialDescription_asc',
-              searchKey: '',
-              selectedMaterialFilter: mockSelectedMaterialFilter,
-              orderDocumentType: mockSelectedOrderDocumentType,
-              pickAndPack: 'include',
-            )).thenAnswer(
-          (invocation) async => Right(materialListMock),
-        );
-        when(() => materialListMockRepository.getMaterialList(
-              user: mockUser,
-              salesOrganisation: mockSalesOrganisation,
-              salesOrgConfig: mockSalesOrganisationConfigs,
-              customerCodeInfo: mockCustomerCodeInfo,
-              shipToInfo: mockShipToInfo,
-              pageSize: _defaultPageSize,
-              offset: materialListMock.length,
-              orderBy: 'materialDescription_asc',
-              searchKey: '',
-              selectedMaterialFilter: mockSelectedMaterialFilter,
-              orderDocumentType: mockSelectedOrderDocumentType,
-              pickAndPack: 'include',
-            )).thenAnswer(
-          (invocation) async => Right(materialListMock),
-        );
-      },
-      expect: () => [
-        materialState.copyWith(
-          isFetching: true,
-          apiFailureOrSuccessOption: none(),
-        ),
-        materialState.copyWith(
-          isFetching: false,
-          materialList: materialListMock,
-          apiFailureOrSuccessOption: none(),
-          canLoadMore: true,
-          nextPageIndex: 1,
-        ),
-        materialState.copyWith(
-          isFetching: true,
-          materialList: materialListMock,
-          apiFailureOrSuccessOption: none(),
-          canLoadMore: true,
-          nextPageIndex: 1,
-        ),
-        materialState.copyWith(
-          isFetching: false,
-          materialList: [...materialListMock, ...materialListMock],
-          apiFailureOrSuccessOption: none(),
-          canLoadMore: true,
-          nextPageIndex: 2,
-        ),
-      ],
-    );
+    'Fetch material again after ShipToCode changed',
+    build: () =>
+        MaterialListBloc(materialListRepository: materialListMockRepository),
+    act: (MaterialListBloc bloc) {
+      bloc.add(MaterialListEvent.fetch(
+        user: mockUser,
+        salesOrganisation: mockSalesOrganisation,
+        configs: mockSalesOrganisationConfigs,
+        customerCodeInfo: mockCustomerCodeInfo,
+        shipToInfo: mockShipToInfo,
+        selectedMaterialFilter: mockSelectedMaterialFilter,
+        orderDocumentType: mockSelectedOrderDocumentType,
+        pickAndPack: 'include',
+      ));
+      bloc.add(MaterialListEvent.loadMore(
+        user: mockUser,
+        salesOrganisation: mockSalesOrganisation,
+        configs: mockSalesOrganisationConfigs,
+        customerCodeInfo: mockCustomerCodeInfo,
+        shipToInfo: mockShipToInfo,
+        selectedMaterialFilter: mockSelectedMaterialFilter,
+        orderDocumentType: mockSelectedOrderDocumentType,
+        pickAndPack: 'include',
+      ));
+    },
+    setUp: () {
+      when(() => materialListMockRepository.getMaterialList(
+            user: mockUser,
+            salesOrganisation: mockSalesOrganisation,
+            salesOrgConfig: mockSalesOrganisationConfigs,
+            customerCodeInfo: mockCustomerCodeInfo,
+            shipToInfo: mockShipToInfo,
+            pageSize: _defaultPageSize,
+            offset: 0,
+            orderBy: 'materialDescription_asc',
+            searchKey: '',
+            selectedMaterialFilter: mockSelectedMaterialFilter,
+            orderDocumentType: mockSelectedOrderDocumentType,
+            pickAndPack: 'include',
+          )).thenAnswer(
+        (invocation) async => Right(materialListMock),
+      );
+      when(() => materialListMockRepository.getMaterialList(
+            user: mockUser,
+            salesOrganisation: mockSalesOrganisation,
+            salesOrgConfig: mockSalesOrganisationConfigs,
+            customerCodeInfo: mockCustomerCodeInfo,
+            shipToInfo: mockShipToInfo,
+            pageSize: _defaultPageSize,
+            offset: materialListMock.length,
+            orderBy: 'materialDescription_asc',
+            searchKey: '',
+            selectedMaterialFilter: mockSelectedMaterialFilter,
+            orderDocumentType: mockSelectedOrderDocumentType,
+            pickAndPack: 'include',
+          )).thenAnswer(
+        (invocation) async => Right(materialListMock),
+      );
+    },
+    expect: () => [
+      materialState.copyWith(
+        isFetching: true,
+        apiFailureOrSuccessOption: none(),
+      ),
+      materialState.copyWith(
+        isFetching: false,
+        materialList: materialListMock,
+        apiFailureOrSuccessOption: none(),
+        canLoadMore: true,
+        nextPageIndex: 1,
+      ),
+      materialState.copyWith(
+        isFetching: true,
+        materialList: materialListMock,
+        apiFailureOrSuccessOption: none(),
+        canLoadMore: true,
+        nextPageIndex: 1,
+      ),
+      materialState.copyWith(
+        isFetching: false,
+        materialList: [...materialListMock, ...materialListMock],
+        apiFailureOrSuccessOption: none(),
+        canLoadMore: true,
+        nextPageIndex: 2,
+      ),
+    ],
+  );
 }

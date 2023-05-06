@@ -18,7 +18,7 @@ part 'material_bundle_list_bloc.freezed.dart';
 part 'material_bundle_list_event.dart';
 part 'material_bundle_list_state.dart';
 
-const int _pageSize = 10;
+const int _pageSize = 20;
 
 class MaterialBundleListBloc
     extends Bloc<MaterialBundleListEvent, MaterialBundleListState> {

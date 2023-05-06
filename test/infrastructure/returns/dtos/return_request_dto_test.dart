@@ -21,7 +21,7 @@ void main() {
         final returnRequest = ReturnRequestDto.fromDomain(
             ReturnRequestDto.fromJson(data['data']['searchReturnMaterials'])
                 .toDomain());
-        expect(returnRequest.items.length, 11);
+        expect(returnRequest.items.length, 21);
       });
 
       test('=> ReturnRequest tojson', () {
@@ -29,7 +29,7 @@ void main() {
                 ReturnRequestDto.fromJson(data['data']['searchReturnMaterials'])
                     .toDomain())
             .toJson();
-        expect(returnRequest['materials'].length, 11);
+        expect(returnRequest['materials'].length, 21);
       });
     },
   );

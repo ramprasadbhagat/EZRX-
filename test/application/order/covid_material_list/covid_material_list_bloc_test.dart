@@ -21,7 +21,7 @@ import 'package:mocktail/mocktail.dart';
 
 class MaterialListMockRepo extends Mock implements MaterialListRepository {}
 
-const _defaultPageSize = 10;
+const _defaultPageSize = 20;
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -41,7 +41,9 @@ void main() {
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
     materialListMockRepository = MaterialListMockRepo();
-    materialListMock = await MaterialListLocalDataSource().getMaterialList();
+    final loadedMaterialListMock =
+        await MaterialListLocalDataSource().getMaterialList();
+    materialListMock = [...loadedMaterialListMock, ...loadedMaterialListMock];
   });
 
   group('Covid Material List Bloc', () {

@@ -23,7 +23,7 @@ import 'package:mocktail/mocktail.dart';
 
 class OrderRepositoryMock extends Mock implements OrderRepository {}
 
-const _defaultPageSize = 10;
+const _defaultPageSize = 20;
 
 void main() {
   final repository = OrderRepositoryMock();
@@ -39,7 +39,11 @@ void main() {
   late final SavedOrder updatedSavedOrderMock;
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
-    savedOrderListMock = await OrderLocalDataSource().getSavedOrders();
+    final loadedSaveOrder = await OrderLocalDataSource().getSavedOrders();
+    savedOrderListMock = [
+      ...loadedSaveOrder,
+      ...loadedSaveOrder,
+    ];
     updatedSavedOrderMock = await OrderLocalDataSource().updateDraftOrder();
   });
 

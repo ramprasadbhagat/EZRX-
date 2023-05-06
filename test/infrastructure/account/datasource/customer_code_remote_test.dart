@@ -46,7 +46,7 @@ void main() {
         customerCodeQueryMutation: CustomerCodeQueryMutation(),
       );
       saleOrgName = '2601';
-      pageSize = 10;
+      pageSize = 20;
 
       hideCustomer = true;
       mockCustomerCode = '0000002610';
@@ -54,7 +54,7 @@ void main() {
       variables = {
         'searchKey': mockCustomerCode,
         'salesOrganisation': '2203',
-        'first': 10,
+        'first': 20,
         'after': 0,
         'filterBlockCustomer': true,
       };
@@ -188,7 +188,7 @@ void main() {
 
           final data = {
             'salesOrganisation': '2203',
-            'first': 10,
+            'first': 20,
             'after': 0,
             'username': mockCustomerCode,
             'searchKey': mockCustomerCode,

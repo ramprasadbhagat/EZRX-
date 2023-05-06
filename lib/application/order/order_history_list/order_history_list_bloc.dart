@@ -17,7 +17,7 @@ part 'order_history_list_bloc.freezed.dart';
 part 'order_history_list_event.dart';
 part 'order_history_list_state.dart';
 
-const int _pageSize = 10;
+const int _pageSize = 20;
 
 class OrderHistoryListBloc
     extends Bloc<OrderHistoryListEvent, OrderHistoryListState> {

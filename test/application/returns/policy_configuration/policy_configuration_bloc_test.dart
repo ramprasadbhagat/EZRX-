@@ -17,6 +17,9 @@ import 'package:mocktail/mocktail.dart';
 class PolicyConfigurationRepositoryMock extends Mock
     implements PolicyConfigurationRepository {}
 
+const _pageSize = 20;
+
+
 void main() {
   final repository = PolicyConfigurationRepositoryMock();
   final mockSalesOrg = SalesOrganisation.empty();
@@ -70,7 +73,7 @@ void main() {
           when(() => repository.getPolicyConfiguration(
               salesOrganisation: mockSalesOrg,
               offSet: 0,
-              pageSize: 10,
+              pageSize: _pageSize,
               searchKey: SearchKey(''))).thenAnswer(
             (invocation) async => const Left(
               ApiFailure.other('fake-error'),
@@ -101,7 +104,7 @@ void main() {
           when(() => repository.getPolicyConfiguration(
               salesOrganisation: mockSalesOrg,
               offSet: 0,
-              pageSize: 10,
+                pageSize: _pageSize,
               searchKey: SearchKey(''),)).thenAnswer(
             (invocation) async => Right(policyConfigurationListMock),
           );

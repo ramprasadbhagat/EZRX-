@@ -14,7 +14,7 @@ part 'customer_code_bloc.freezed.dart';
 part 'customer_code_event.dart';
 part 'customer_code_state.dart';
 
-const int _pageSize = 10;
+const int _pageSize = 20;
 
 class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
   final ICustomerCodeRepository customerCodeRepository;

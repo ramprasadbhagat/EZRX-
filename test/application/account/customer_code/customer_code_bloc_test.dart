@@ -57,7 +57,7 @@ void main() {
     customerInfos: fakeMultipleSalesOrgCustomerInfos,
   );
 
-  const fakePageSize = 10;
+  const fakePageSize = 20;
 
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();

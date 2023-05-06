@@ -478,6 +478,426 @@
                         "__typename": "item"
                     },
                     "__typename": "returnMaterialInformation"
+                },
+                {
+                    "item": {
+                        "assignmentNumber": "1080004899",
+                        "referenceDocument": "0085377938",
+                        "purchaseNumberC": "test for return 4",
+                        "poMethod": "",
+                        "createdDate": "20211202",
+                        "currency": "SGD",
+                        "plant": "2617",
+                        "material": "000000000021026760",
+                        "materialDescription": "Physiogel CR A.I. Cream 50ml",
+                        "itemNumber": "000010",
+                        "targetQuantity": "10",
+                        "storeLocation": "1001",
+                        "batch": "230721",
+                        "highLevelItemCode": "",
+                        "orderReason": "",
+                        "priceDate": "20211202",
+                        "unitPrice": "20.96",
+                        "totalPrice": "209.60000000000002",
+                        "principalCode": "0000100762",
+                        "principalName": "GSK Consumer Healthcare",
+                        "expiryDate": "20240131",
+                        "eligibleForReturn": true,
+                        "schedules": [
+                            {
+                                "scheduledLine": "00001",
+                                "requestDate": "20211202",
+                                "__typename": "schedule"
+                            }
+                        ],
+                        "conditions": [],
+                        "texts": [],
+                        "suggestedPriceOverride": "20.96",
+                        "balanceQuantity": "9",
+                        "balanceValue": "188.64",
+                        "outsidePolicy": false,
+                        "bonusItem": [],
+                        "__typename": "item"
+                    },
+                    "__typename": "returnMaterialInformation"
+                },
+                {
+                    "item": {
+                        "assignmentNumber": "1080004900",
+                        "referenceDocument": "0085377939",
+                        "purchaseNumberC": "test for return 4",
+                        "poMethod": "",
+                        "createdDate": "20211202",
+                        "currency": "SGD",
+                        "plant": "2617",
+                        "material": "000000000021026760",
+                        "materialDescription": "Physiogel CR A.I. Cream 50ml",
+                        "itemNumber": "000010",
+                        "targetQuantity": "10",
+                        "storeLocation": "1001",
+                        "batch": "230721",
+                        "highLevelItemCode": "",
+                        "orderReason": "",
+                        "priceDate": "20211202",
+                        "unitPrice": "20.96",
+                        "totalPrice": "209.60000000000002",
+                        "principalCode": "0000100762",
+                        "principalName": "GSK Consumer Healthcare",
+                        "expiryDate": "20240131",
+                        "eligibleForReturn": true,
+                        "schedules": [
+                            {
+                                "scheduledLine": "00001",
+                                "requestDate": "20211202",
+                                "__typename": "schedule"
+                            }
+                        ],
+                        "conditions": [],
+                        "texts": [],
+                        "suggestedPriceOverride": "20.96",
+                        "balanceQuantity": "9",
+                        "balanceValue": "188.64",
+                        "outsidePolicy": false,
+                        "bonusItem": [],
+                        "__typename": "item"
+                    },
+                    "__typename": "returnMaterialInformation"
+                },
+                {
+                    "item": {
+                        "assignmentNumber": "1080004901",
+                        "referenceDocument": "0085377940",
+                        "purchaseNumberC": "test for return 4",
+                        "poMethod": "",
+                        "createdDate": "20211202",
+                        "currency": "SGD",
+                        "plant": "2617",
+                        "material": "000000000021026760",
+                        "materialDescription": "Physiogel CR A.I. Cream 50ml",
+                        "itemNumber": "000010",
+                        "targetQuantity": "10",
+                        "storeLocation": "1001",
+                        "batch": "230721",
+                        "highLevelItemCode": "",
+                        "orderReason": "",
+                        "priceDate": "20211202",
+                        "unitPrice": "20.96",
+                        "totalPrice": "209.60000000000002",
+                        "principalCode": "0000100762",
+                        "principalName": "GSK Consumer Healthcare",
+                        "expiryDate": "20240131",
+                        "eligibleForReturn": true,
+                        "schedules": [
+                            {
+                                "scheduledLine": "00001",
+                                "requestDate": "20211202",
+                                "__typename": "schedule"
+                            }
+                        ],
+                        "conditions": [],
+                        "texts": [],
+                        "suggestedPriceOverride": "20.96",
+                        "balanceQuantity": "9",
+                        "balanceValue": "188.64",
+                        "outsidePolicy": false,
+                        "bonusItem": [],
+                        "__typename": "item"
+                    },
+                    "__typename": "returnMaterialInformation"
+                },
+                {
+                    "item": {
+                        "assignmentNumber": "1080004902",
+                        "referenceDocument": "0085377941",
+                        "purchaseNumberC": "test for return 4",
+                        "poMethod": "",
+                        "createdDate": "20211202",
+                        "currency": "SGD",
+                        "plant": "2617",
+                        "material": "000000000021026760",
+                        "materialDescription": "Physiogel CR A.I. Cream 50ml",
+                        "itemNumber": "000010",
+                        "targetQuantity": "10",
+                        "storeLocation": "1001",
+                        "batch": "230721",
+                        "highLevelItemCode": "",
+                        "orderReason": "",
+                        "priceDate": "20211202",
+                        "unitPrice": "20.96",
+                        "totalPrice": "209.60000000000002",
+                        "principalCode": "0000100762",
+                        "principalName": "GSK Consumer Healthcare",
+                        "expiryDate": "20240131",
+                        "eligibleForReturn": true,
+                        "schedules": [
+                            {
+                                "scheduledLine": "00001",
+                                "requestDate": "20211202",
+                                "__typename": "schedule"
+                            }
+                        ],
+                        "conditions": [],
+                        "texts": [],
+                        "suggestedPriceOverride": "20.96",
+                        "balanceQuantity": "9",
+                        "balanceValue": "188.64",
+                        "outsidePolicy": false,
+                        "bonusItem": [],
+                        "__typename": "item"
+                    },
+                    "__typename": "returnMaterialInformation"
+                },
+                {
+                    "item": {
+                        "assignmentNumber": "1080004903",
+                        "referenceDocument": "0085377942",
+                        "purchaseNumberC": "test for return 4",
+                        "poMethod": "",
+                        "createdDate": "20211202",
+                        "currency": "SGD",
+                        "plant": "2617",
+                        "material": "000000000021026760",
+                        "materialDescription": "Physiogel CR A.I. Cream 50ml",
+                        "itemNumber": "000010",
+                        "targetQuantity": "10",
+                        "storeLocation": "1001",
+                        "batch": "230721",
+                        "highLevelItemCode": "",
+                        "orderReason": "",
+                        "priceDate": "20211202",
+                        "unitPrice": "20.96",
+                        "totalPrice": "209.60000000000002",
+                        "principalCode": "0000100762",
+                        "principalName": "GSK Consumer Healthcare",
+                        "expiryDate": "20240131",
+                        "eligibleForReturn": true,
+                        "schedules": [
+                            {
+                                "scheduledLine": "00001",
+                                "requestDate": "20211202",
+                                "__typename": "schedule"
+                            }
+                        ],
+                        "conditions": [],
+                        "texts": [],
+                        "suggestedPriceOverride": "20.96",
+                        "balanceQuantity": "9",
+                        "balanceValue": "188.64",
+                        "outsidePolicy": false,
+                        "bonusItem": [],
+                        "__typename": "item"
+                    },
+                    "__typename": "returnMaterialInformation"
+                },
+                {
+                    "item": {
+                        "assignmentNumber": "1080004904",
+                        "referenceDocument": "0085377943",
+                        "purchaseNumberC": "test for return 4",
+                        "poMethod": "",
+                        "createdDate": "20211202",
+                        "currency": "SGD",
+                        "plant": "2617",
+                        "material": "000000000021026760",
+                        "materialDescription": "Physiogel CR A.I. Cream 50ml",
+                        "itemNumber": "000010",
+                        "targetQuantity": "10",
+                        "storeLocation": "1001",
+                        "batch": "230721",
+                        "highLevelItemCode": "",
+                        "orderReason": "",
+                        "priceDate": "20211202",
+                        "unitPrice": "20.96",
+                        "totalPrice": "209.60000000000002",
+                        "principalCode": "0000100762",
+                        "principalName": "GSK Consumer Healthcare",
+                        "expiryDate": "20240131",
+                        "eligibleForReturn": true,
+                        "schedules": [
+                            {
+                                "scheduledLine": "00001",
+                                "requestDate": "20211202",
+                                "__typename": "schedule"
+                            }
+                        ],
+                        "conditions": [],
+                        "texts": [],
+                        "suggestedPriceOverride": "20.96",
+                        "balanceQuantity": "9",
+                        "balanceValue": "188.64",
+                        "outsidePolicy": false,
+                        "bonusItem": [],
+                        "__typename": "item"
+                    },
+                    "__typename": "returnMaterialInformation"
+                },
+                {
+                    "item": {
+                        "assignmentNumber": "1080004905",
+                        "referenceDocument": "0085377944",
+                        "purchaseNumberC": "test for return 4",
+                        "poMethod": "",
+                        "createdDate": "20211202",
+                        "currency": "SGD",
+                        "plant": "2617",
+                        "material": "000000000021026760",
+                        "materialDescription": "Physiogel CR A.I. Cream 50ml",
+                        "itemNumber": "000010",
+                        "targetQuantity": "10",
+                        "storeLocation": "1001",
+                        "batch": "230721",
+                        "highLevelItemCode": "",
+                        "orderReason": "",
+                        "priceDate": "20211202",
+                        "unitPrice": "20.96",
+                        "totalPrice": "209.60000000000002",
+                        "principalCode": "0000100762",
+                        "principalName": "GSK Consumer Healthcare",
+                        "expiryDate": "20240131",
+                        "eligibleForReturn": true,
+                        "schedules": [
+                            {
+                                "scheduledLine": "00001",
+                                "requestDate": "20211202",
+                                "__typename": "schedule"
+                            }
+                        ],
+                        "conditions": [],
+                        "texts": [],
+                        "suggestedPriceOverride": "20.96",
+                        "balanceQuantity": "9",
+                        "balanceValue": "188.64",
+                        "outsidePolicy": false,
+                        "bonusItem": [],
+                        "__typename": "item"
+                    },
+                    "__typename": "returnMaterialInformation"
+                },
+                {
+                    "item": {
+                        "assignmentNumber": "1080004906",
+                        "referenceDocument": "0085377945",
+                        "purchaseNumberC": "test for return 4",
+                        "poMethod": "",
+                        "createdDate": "20211202",
+                        "currency": "SGD",
+                        "plant": "2617",
+                        "material": "000000000021026760",
+                        "materialDescription": "Physiogel CR A.I. Cream 50ml",
+                        "itemNumber": "000010",
+                        "targetQuantity": "10",
+                        "storeLocation": "1001",
+                        "batch": "230721",
+                        "highLevelItemCode": "",
+                        "orderReason": "",
+                        "priceDate": "20211202",
+                        "unitPrice": "20.96",
+                        "totalPrice": "209.60000000000002",
+                        "principalCode": "0000100762",
+                        "principalName": "GSK Consumer Healthcare",
+                        "expiryDate": "20240131",
+                        "eligibleForReturn": true,
+                        "schedules": [
+                            {
+                                "scheduledLine": "00001",
+                                "requestDate": "20211202",
+                                "__typename": "schedule"
+                            }
+                        ],
+                        "conditions": [],
+                        "texts": [],
+                        "suggestedPriceOverride": "20.96",
+                        "balanceQuantity": "9",
+                        "balanceValue": "188.64",
+                        "outsidePolicy": false,
+                        "bonusItem": [],
+                        "__typename": "item"
+                    },
+                    "__typename": "returnMaterialInformation"
+                },
+                {
+                    "item": {
+                        "assignmentNumber": "1080004907",
+                        "referenceDocument": "0085377946",
+                        "purchaseNumberC": "test for return 4",
+                        "poMethod": "",
+                        "createdDate": "20211202",
+                        "currency": "SGD",
+                        "plant": "2617",
+                        "material": "000000000021026760",
+                        "materialDescription": "Physiogel CR A.I. Cream 50ml",
+                        "itemNumber": "000010",
+                        "targetQuantity": "10",
+                        "storeLocation": "1001",
+                        "batch": "230721",
+                        "highLevelItemCode": "",
+                        "orderReason": "",
+                        "priceDate": "20211202",
+                        "unitPrice": "20.96",
+                        "totalPrice": "209.60000000000002",
+                        "principalCode": "0000100762",
+                        "principalName": "GSK Consumer Healthcare",
+                        "expiryDate": "20240131",
+                        "eligibleForReturn": true,
+                        "schedules": [
+                            {
+                                "scheduledLine": "00001",
+                                "requestDate": "20211202",
+                                "__typename": "schedule"
+                            }
+                        ],
+                        "conditions": [],
+                        "texts": [],
+                        "suggestedPriceOverride": "20.96",
+                        "balanceQuantity": "9",
+                        "balanceValue": "188.64",
+                        "outsidePolicy": false,
+                        "bonusItem": [],
+                        "__typename": "item"
+                    },
+                    "__typename": "returnMaterialInformation"
+                },
+                {
+                    "item": {
+                        "assignmentNumber": "1080004908",
+                        "referenceDocument": "0085377947",
+                        "purchaseNumberC": "test for return 4",
+                        "poMethod": "",
+                        "createdDate": "20211202",
+                        "currency": "SGD",
+                        "plant": "2617",
+                        "material": "000000000021026760",
+                        "materialDescription": "Physiogel CR A.I. Cream 50ml",
+                        "itemNumber": "000010",
+                        "targetQuantity": "10",
+                        "storeLocation": "1001",
+                        "batch": "230721",
+                        "highLevelItemCode": "",
+                        "orderReason": "",
+                        "priceDate": "20211202",
+                        "unitPrice": "20.96",
+                        "totalPrice": "209.60000000000002",
+                        "principalCode": "0000100762",
+                        "principalName": "GSK Consumer Healthcare",
+                        "expiryDate": "20240131",
+                        "eligibleForReturn": true,
+                        "schedules": [
+                            {
+                                "scheduledLine": "00001",
+                                "requestDate": "20211202",
+                                "__typename": "schedule"
+                            }
+                        ],
+                        "conditions": [],
+                        "texts": [],
+                        "suggestedPriceOverride": "20.96",
+                        "balanceQuantity": "9",
+                        "balanceValue": "188.64",
+                        "outsidePolicy": false,
+                        "bonusItem": [],
+                        "__typename": "item"
+                    },
+                    "__typename": "returnMaterialInformation"
                 }
             ],
             "__typename": "searchReturnMaterialsResponse"

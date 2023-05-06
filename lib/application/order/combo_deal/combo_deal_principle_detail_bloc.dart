@@ -21,7 +21,7 @@ part 'combo_deal_principle_detail_event.dart';
 part 'combo_deal_principle_detail_state.dart';
 part 'combo_deal_principle_detail_bloc.freezed.dart';
 
-const int _defaultPageSize = 10;
+const int _pageSize = 20;
 
 class ComboDealPrincipleDetailBloc
     extends Bloc<ComboDealPrincipleDetailEvent, ComboDealPrincipleDetailState> {
@@ -55,7 +55,7 @@ class ComboDealPrincipleDetailBloc
         salesOrganisation: e.salesOrganisation,
         customerCodeInfo: e.customerCodeInfo,
         shipToInfo: e.shipToInfo,
-        pageSize: _defaultPageSize,
+        pageSize: _pageSize,
         offset: 0,
         principles: e.principles,
       );
@@ -92,7 +92,7 @@ class ComboDealPrincipleDetailBloc
               isFetchingMaterials: false,
               isFetchingComboInfo: true,
               isFetchingPrice: true,
-              canLoadMore: materialList.length >= _defaultPageSize,
+              canLoadMore: materialList.length >= _pageSize,
               itemPageNumber: 1,
               items: newItems,
             ),
@@ -113,8 +113,8 @@ class ComboDealPrincipleDetailBloc
         salesOrganisation: e.salesOrganisation,
         customerCodeInfo: e.customerCodeInfo,
         shipToInfo: e.shipToInfo,
-        pageSize: _defaultPageSize,
-        offset: state.itemPageNumber * _defaultPageSize,
+        pageSize: _pageSize,
+        offset: state.itemPageNumber * _pageSize,
         principles: e.principles,
       );
 
@@ -133,7 +133,7 @@ class ComboDealPrincipleDetailBloc
               isFetchingMaterials: false,
               isFetchingComboInfo: true,
               isFetchingPrice: true,
-              canLoadMore: materialList.length >= _defaultPageSize,
+              canLoadMore: materialList.length >= _pageSize,
               itemPageNumber: state.itemPageNumber + 1,
               items: Map.from(state.items)
                 ..addAll(

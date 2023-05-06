@@ -12,7 +12,7 @@ part 'return_summary_event.dart';
 part 'return_summary_state.dart';
 part 'return_summary_bloc.freezed.dart';
 
-const int _pageSize = 10;
+const int _pageSize = 20;
 
 class ReturnSummaryBloc extends Bloc<ReturnSummaryEvent, ReturnSummaryState> {
   final IReturnSummaryRepository returnSummaryRepository;

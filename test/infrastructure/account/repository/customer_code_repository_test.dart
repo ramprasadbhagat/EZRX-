@@ -48,7 +48,7 @@ void main() {
     customerCodeRemoteDataSourceMock = CustomerCodeRemoteDataSourceMock();
 
     offset = 0;
-    pageSize = 10;
+    pageSize = 20;
     hideCustomer = true;
     mockCustomerCode = 'mockCustomerCode';
     mockSalesOrg = SalesOrganisation.empty().copyWith(

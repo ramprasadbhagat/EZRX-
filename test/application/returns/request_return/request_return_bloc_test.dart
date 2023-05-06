@@ -18,7 +18,7 @@ import 'package:mocktail/mocktail.dart';
 class ReturnRequestRepositoryMock extends Mock
     implements RequestReturnRepository {}
 
-const _defaultPageSize = 10;
+const _defaultPageSize = 20;
 
 void main() {
   final repository = ReturnRequestRepositoryMock();

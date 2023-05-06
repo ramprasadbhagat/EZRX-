@@ -235,7 +235,7 @@ void main() {
             salesOrganisation: SalesOrganisation.empty(),
             customerCodeInfo: CustomerCodeInfo.empty(),
             shipToInfo: ShipToInfo.empty(),
-            pageSize: 10,
+            pageSize: 20,
             offset: 0,
             principles: ['fake-principle'],
           )).thenAnswer(
@@ -295,7 +295,7 @@ void main() {
             salesOrganisation: SalesOrganisation.empty(),
             customerCodeInfo: CustomerCodeInfo.empty(),
             shipToInfo: ShipToInfo.empty(),
-            pageSize: 10,
+            pageSize: 20,
             offset: 0,
             principles: ['fake-principle'],
           )).thenAnswer(
@@ -351,7 +351,7 @@ void main() {
             salesOrganisation: SalesOrganisation.empty(),
             customerCodeInfo: CustomerCodeInfo.empty(),
             shipToInfo: ShipToInfo.empty(),
-            pageSize: 10,
+            pageSize: 20,
             offset: 0,
             principles: ['fake-principle'],
           )).thenAnswer(
@@ -454,8 +454,8 @@ void main() {
             salesOrganisation: SalesOrganisation.empty(),
             customerCodeInfo: CustomerCodeInfo.empty(),
             shipToInfo: ShipToInfo.empty(),
-            pageSize: 10,
-            offset: 10,
+            pageSize: 20,
+            offset: 20,
             principles: ['fake-principle'],
           )).thenAnswer(
         (invocation) async => Right(
@@ -522,8 +522,8 @@ void main() {
             salesOrganisation: SalesOrganisation.empty(),
             customerCodeInfo: CustomerCodeInfo.empty(),
             shipToInfo: ShipToInfo.empty(),
-            pageSize: 10,
-            offset: 10,
+            pageSize: 20,
+            offset: 20,
             principles: ['fake-principle'],
           )).thenAnswer(
         (invocation) async => const Left(ApiFailure.other('fake-message')),

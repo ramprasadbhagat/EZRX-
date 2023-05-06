@@ -18,7 +18,7 @@ part 'covid_material_list_event.dart';
 part 'covid_material_list_state.dart';
 part 'covid_material_list_bloc.freezed.dart';
 
-const int _pageSize = 10;
+const int _pageSize = 20;
 
 class CovidMaterialListBloc
     extends Bloc<CovidMaterialListEvent, CovidMaterialListState> {
