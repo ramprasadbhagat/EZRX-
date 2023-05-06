@@ -115,7 +115,7 @@ class OrderHistoryListTile extends StatelessWidget {
               BalanceTextRow(
                 key: Key('materialId${orderHistoryItem.materialNumber.getOrDefaultValue('')}'),
                 keyText: 'Material ID'.tr(),
-                valueText: orderHistoryItem.materialNumber.displayMatNo,
+                valueText: orderHistoryItem.materialNumber.displayMatNo.tr(),
               ),
               BalanceTextRow(
                 keyText: 'Material Name'.tr(),

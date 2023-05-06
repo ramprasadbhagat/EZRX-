@@ -125,7 +125,7 @@ class OrderItemBonusCard extends StatelessWidget {
                       BalanceTextRow(
                         keyText: 'Material ID'.tr(),
                         valueText: orderHistoryDetailsBonusAggregate
-                            .orderItem.materialNumber.displayMatNo,
+                            .orderItem.materialNumber.displayMatNo.tr(),
                         valueTextLoading: state.isLoading,
                         keyFlex: 1,
                         valueFlex: 1,
@@ -198,7 +198,7 @@ class OrderItemBonusCard extends StatelessWidget {
                       BalanceTextRow(
                         keyText: 'Remarks'.tr(),
                         valueText: orderHistoryDetailsBonusAggregate
-                            .orderItem.lineReferenceNotes.displayRemarks,
+                            .orderItem.lineReferenceNotes.displayRemarks.tr(),
                         valueTextLoading: state.isLoading,
                         keyFlex: 1,
                         valueFlex: 1,
@@ -270,7 +270,7 @@ class OrderItemBonusCard extends StatelessWidget {
                                     BalanceTextRow(
                                       keyText: 'Material ID'.tr(),
                                       valueText:
-                                          orderItem.materialNumber.displayMatNo,
+                                          orderItem.materialNumber.displayMatNo.tr(),
                                       valueTextLoading: state.isLoading,
                                       keyFlex: 1,
                                       valueFlex: 1,
@@ -305,7 +305,7 @@ class OrderItemBonusCard extends StatelessWidget {
                                       BalanceTextRow(
                                         keyText: 'Remarks'.tr(),
                                         valueText: orderItem
-                                            .lineReferenceNotes.displayRemarks,
+                                            .lineReferenceNotes.displayRemarks.tr(),
                                         valueTextLoading: state.isLoading,
                                         keyFlex: 1,
                                         valueFlex: 1,

@@ -60,7 +60,7 @@ class _BonusItemTile extends StatelessWidget {
             ),
           BalanceTextRow(
             keyText: 'Material Number'.tr(),
-            valueText: bonusItem.materialInfo.materialNumber.displayMatNo,
+            valueText: bonusItem.materialInfo.materialNumber.displayMatNo.tr(),
             keyFlex: 1,
             valueFlex: 1,
           ),

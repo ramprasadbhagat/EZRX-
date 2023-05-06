@@ -83,7 +83,7 @@ class _UpdateBonusState extends State<UpdateBonus> {
                 ),
                 Center(
                   child: Text(
-                    widget.materialInfo.materialNumber.displayMatNo,
+                    widget.materialInfo.materialNumber.displayMatNo.tr(),
                     style: Theme.of(context).textTheme.titleSmall?.apply(
                           color: ZPColors.lightGray,
                         ),

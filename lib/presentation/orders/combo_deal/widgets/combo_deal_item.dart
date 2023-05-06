@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_material_detail_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
@@ -46,7 +47,7 @@ class ComboDealItem extends StatelessWidget {
                   children: [
                     Expanded(
                       child: Text(
-                        material.materialInfo.materialNumber.displayMatNo,
+                        material.materialInfo.materialNumber.displayMatNo.tr(),
                         style: Theme.of(context).textTheme.titleSmall?.apply(
                               color: ZPColors.kPrimaryColor,
                             ),

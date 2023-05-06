@@ -170,7 +170,7 @@ class PolicyConfigurationListItem extends StatelessWidget {
                 style: Theme.of(context).textTheme.titleSmall,
               ),
               Text(
-                '${'Principal Name'.tr()}: ${policyConfigurationItem.principalName.name}',
+                '${'Principal Name'.tr()}: ${policyConfigurationItem.principalName.name.tr()}',
                 style: Theme.of(context).textTheme.titleSmall?.apply(
                       color: ZPColors.lightGray,
                     ),

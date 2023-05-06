@@ -176,7 +176,7 @@ class _ComboDealItem extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Text(
-                      material.materialInfo.materialNumber.displayMatNo,
+                      material.materialInfo.materialNumber.displayMatNo.tr(),
                       style: Theme.of(context).textTheme.titleSmall?.apply(
                             color: ZPColors.kPrimaryColor,
                           ),

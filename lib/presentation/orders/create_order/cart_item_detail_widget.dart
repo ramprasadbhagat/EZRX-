@@ -74,7 +74,7 @@ class _CartItemDetailWidgetState extends State<CartItemDetailWidget> {
               ),
         ),
         Text(
-          widget.cartItem.materialInfo.materialNumber.displayMatNo,
+          widget.cartItem.materialInfo.materialNumber.displayMatNo.tr(),
           style: Theme.of(context).textTheme.titleMedium?.apply(
                 color: ZPColors.darkGray,
               ),
@@ -171,14 +171,14 @@ class _CartItemDetailWidgetState extends State<CartItemDetailWidget> {
                   enableVat
                       ? BalanceTextRow(
                           keyText: 'Unit price before $taxCode'.tr(),
-                          valueText: cartItem.display(PriceType.finalPrice),
+                          valueText: cartItem.display(PriceType.finalPrice).tr(),
                           keyFlex: 1,
                           valueFlex: 1,
                         )
                       : const SizedBox.shrink(),
                   BalanceTextRow(
                     keyText: 'Unit Price'.tr(),
-                    valueText: cartItem.display(PriceType.unitPrice),
+                    valueText: cartItem.display(PriceType.unitPrice).tr(),
                     keyFlex: 1,
                     valueFlex: 1,
                   ),
@@ -186,14 +186,14 @@ class _CartItemDetailWidgetState extends State<CartItemDetailWidget> {
                       ? BalanceTextRow(
                           keyText: 'Total price before $taxCode'.tr(),
                           valueText:
-                              cartItem.display(PriceType.finalPriceTotal),
+                              cartItem.display(PriceType.finalPriceTotal).tr(),
                           keyFlex: 1,
                           valueFlex: 1,
                         )
                       : const SizedBox.shrink(),
                   BalanceTextRow(
                     keyText: 'Total Price'.tr(),
-                    valueText: cartItem.display(PriceType.unitPriceTotal),
+                    valueText: cartItem.display(PriceType.unitPriceTotal).tr(),
                     keyFlex: 1,
                     valueFlex: 1,
                   ),

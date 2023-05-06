@@ -672,7 +672,7 @@ List<_OrderSummaryDetails> _getTextRowLevelsForCustomerInfo(
     ),
     _OrderSummaryDetails(
       key: 'Customer Email'.tr(),
-      value: customer.customerEmailAddress,
+      value: customer.customerEmailAddress.tr(),
     ),
     _OrderSummaryDetails(
       key: 'Customer ship to ID'.tr(),
@@ -684,7 +684,7 @@ List<_OrderSummaryDetails> _getTextRowLevelsForCustomerInfo(
     ),
     _OrderSummaryDetails(
       key: 'Customer Classification'.tr(),
-      value: customer.customerClassification.displayCustomerClassification,
+      value: customer.customerClassification.displayCustomerClassification.tr(),
     ),
     _OrderSummaryDetails(
       key: 'Customer Local Group'.tr(),

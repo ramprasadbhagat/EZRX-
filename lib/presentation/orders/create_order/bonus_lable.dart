@@ -137,7 +137,7 @@ class _ExpandedBonusLabelState extends State<ExpandedBonusLabel> {
                 style: Theme.of(context).textTheme.titleSmall,
               ).tr(),
               Text(
-                widget.bonus.materialNumber.displayMatNo,
+                widget.bonus.materialNumber.displayMatNo.tr(),
                 style: Theme.of(context).textTheme.titleSmall,
               ).tr(),
               Text(

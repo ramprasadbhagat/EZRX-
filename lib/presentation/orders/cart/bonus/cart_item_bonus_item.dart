@@ -86,7 +86,7 @@ class _BonusItemTileState extends State<BonusItemTile> {
                       //       ),
                       // ),
                       Text(
-                        '${'Mat No : '.tr()}${widget.bonusItem.materialInfo.materialNumber.displayMatNo}',
+                        '${'Mat No : '.tr()}${widget.bonusItem.materialInfo.materialNumber.displayMatNo.tr()}',
                         style: Theme.of(context).textTheme.titleSmall?.apply(
                               color: ZPColors.lightGray,
                             ),

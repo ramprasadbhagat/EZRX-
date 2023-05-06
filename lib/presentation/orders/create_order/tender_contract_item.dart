@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -82,14 +83,14 @@ class TenderContractHeader extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Contract - ${tenderContract.contractNumber.displayTenderContractNumber}',
+          'Contract - ${tenderContract.contractNumber.displayTenderContractNumber.tr()}',
           style: Theme.of(context).textTheme.titleSmall?.apply(
                 color: ZPColors.black,
               ),
         ),
         !tenderContract.tenderOrderReason.isEmpty
             ? Text(
-                '${tenderContract.tenderOrderReason.displayTenderContractReason} : Tender with Contract',
+                '${tenderContract.tenderOrderReason.displayTenderContractReason.tr()} : Tender with Contract',
                 style: Theme.of(context).textTheme.titleSmall?.apply(
                       color: ZPColors.lightGray,
                     ),
@@ -123,20 +124,20 @@ class TenderContractBody extends StatelessWidget {
             children: [
               TenderInfoText(
                 title: 'Contract Reference',
-                info: tenderContract.contractReference.displayContractReference,
+                info: tenderContract.contractReference.displayContractReference.tr(),
               ),
               TenderInfoText(
                 title: 'Material Visa Number',
-                info: tenderContract.tenderVisaNumber.displayTenderVisaNumber,
+                info: tenderContract.tenderVisaNumber.displayTenderVisaNumber.tr(),
               ),
               TenderInfoText(
                 title: 'Sales District',
-                info: tenderContract.salesDistrict.displaySalesDistrict,
+                info: tenderContract.salesDistrict.displaySalesDistrict.tr(),
               ),
               TenderInfoText(
                 title: 'Announcement Letter Number',
                 info: tenderContract
-                    .announcementLetterNumber.displayAnnouncementLetterNumber,
+                    .announcementLetterNumber.displayAnnouncementLetterNumber.tr(),
               ),
             ],
           ),
@@ -156,7 +157,7 @@ class TenderContractBody extends StatelessWidget {
               TenderInfoText(
                 title: 'Contract Expiry Date',
                 info:
-                    tenderContract.contractExpiryDate.displayContractExpiryDate,
+                    tenderContract.contractExpiryDate.displayContractExpiryDate.tr(),
               ),
             ],
           ),

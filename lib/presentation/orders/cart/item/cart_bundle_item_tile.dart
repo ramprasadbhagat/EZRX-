@@ -84,7 +84,7 @@ class CartBundleItemTile extends StatelessWidget {
                               children: [
                                 Flexible(
                                   child: Text(
-                                    materialCommonInfo.bundle.bundleName.name,
+                                    materialCommonInfo.bundle.bundleName.name.tr(),
                                     style:
                                         Theme.of(context).textTheme.titleSmall,
                                   ),
@@ -125,7 +125,7 @@ class CartBundleItemTile extends StatelessWidget {
                               children: [
                                 enableMaterialLevelTax
                                     ? Text(
-                                        '${'Price before $taxCode: '.tr()}${materialCommonInfo.display(PriceType.finalPrice)}',
+                                        '${'Price before $taxCode: '.tr()}${materialCommonInfo.display(PriceType.finalPrice).tr()}',
                                         style: Theme.of(context)
                                             .textTheme
                                             .titleSmall
@@ -257,7 +257,7 @@ class _BundleMaterialItemState extends State<_BundleMaterialItem> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    widget.material.materialInfo.materialNumber.displayMatNo,
+                    widget.material.materialInfo.materialNumber.displayMatNo.tr(),
                     style: Theme.of(context).textTheme.titleSmall?.apply(
                           color: ZPColors.kPrimaryColor,
                         ),

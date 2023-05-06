@@ -73,7 +73,7 @@ class MaterialListItem extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        materialInfo.materialNumber.displayMatNo,
+                        materialInfo.materialNumber.displayMatNo.tr(),
                         style: Theme.of(context).textTheme.titleSmall?.apply(
                               color: ZPColors.lightGray,
                             ),
@@ -394,7 +394,7 @@ class _PriceLabel extends StatelessWidget {
                   : const SizedBox.shrink(),
               context.read<SalesOrgBloc>().state.configs.enableVat
                   ? Text(
-                      '${'Price before ${context.read<SalesOrgBloc>().state.salesOrg.taxCode}: '.tr()}${priceAggregate.display(PriceType.finalPrice)}',
+                      '${'Price before ${context.read<SalesOrgBloc>().state.salesOrg.taxCode}: '.tr()}${priceAggregate.display(PriceType.finalPrice).tr()}',
                       key: Key(
                         'priceBefore${materialInfo.materialNumber.getOrDefaultValue('')}',
                       ),
@@ -405,7 +405,7 @@ class _PriceLabel extends StatelessWidget {
                   : const SizedBox.shrink(),
               context.read<SalesOrgBloc>().state.configs.enableListPrice
                   ? Text(
-                      '${'List Price:'.tr()}${priceAggregate.display(PriceType.listPrice)}',
+                      '${'List Price:'.tr()}${priceAggregate.display(PriceType.listPrice).tr()}',
                       key: Key(
                         'listPrice${materialInfo.materialNumber.getOrDefaultValue('')}',
                       ),
@@ -415,7 +415,7 @@ class _PriceLabel extends StatelessWidget {
                     )
                   : const SizedBox.shrink(),
               Text(
-                '${'Unit Price:'.tr()} ${priceAggregate.display(PriceType.unitPrice)}',
+                '${'Unit Price:'.tr()} ${priceAggregate.display(PriceType.unitPrice).tr()}',
                 style: Theme.of(context).textTheme.titleSmall?.apply(
                       color: ZPColors.black,
                     ),

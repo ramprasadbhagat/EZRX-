@@ -68,7 +68,7 @@ List<SoldToDetails> _getTextRowLevelsForSoldToInfo(
     ),
     SoldToDetails(
       key: 'Phone'.tr(),
-      value: customer.telephoneNumber.displayTelephoneNumber,
+      value: customer.telephoneNumber.displayTelephoneNumber.tr(),
     ),
   ];
 }

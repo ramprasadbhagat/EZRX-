@@ -59,17 +59,17 @@ class SavedOrderItem extends StatelessWidget {
                     ),
               ),
               Text(
-                order.companyName.name,
+                order.companyName.name.tr(),
                 style: Theme.of(context).textTheme.titleSmall,
               ),
               Text(
-                '${'Sold To IDs:'.tr()} ${order.soldToParty.name}',
+                '${'Sold To IDs:'.tr()} ${order.soldToParty.name.tr()}',
                 style: Theme.of(context).textTheme.titleSmall?.apply(
                       color: ZPColors.lightGray,
                     ),
               ),
               Text(
-                '${'Ship To IDs:'.tr()} ${order.shipToParty.name}',
+                '${'Ship To IDs:'.tr()} ${order.shipToParty.name.tr()}',
                 style: Theme.of(context).textTheme.titleSmall?.apply(
                       color: ZPColors.lightGray,
                     ),

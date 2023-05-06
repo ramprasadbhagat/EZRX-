@@ -82,7 +82,7 @@ class OrderTenderContractCard extends StatelessWidget {
                     BalanceTextRow(
                       keyText: 'Mat No:'.tr(),
                       valueText: orderHistoryDetailsBonusAggregate
-                          .orderItem.materialNumber.displayMatNo,
+                          .orderItem.materialNumber.displayMatNo.tr(),
                       valueTextLoading: isLoading,
                       keyFlex: 1,
                       valueFlex: 1,

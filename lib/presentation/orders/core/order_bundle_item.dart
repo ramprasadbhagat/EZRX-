@@ -175,7 +175,7 @@ class OrderBundleItem extends StatelessWidget {
                     info: Row(
                       children: [
                         Text(
-                          material.materialNumber.displayMatNo,
+                          material.materialNumber.displayMatNo.tr(),
                           style: const TextStyle(
                             color: ZPColors.darkerGreen,
                             fontSize: 14.0,
@@ -346,7 +346,7 @@ class _MaterialPriceInfo extends StatelessWidget {
           );
 
           return Text(
-            priceAggregate.display(priceType),
+            priceAggregate.display(priceType).tr(),
             style: const TextStyle(
               color: ZPColors.darkerGreen,
               fontSize: 14.0,
@@ -355,9 +355,9 @@ class _MaterialPriceInfo extends StatelessWidget {
           );
         }
 
-        return const Text(
-          'NA',
-          style: TextStyle(
+        return Text(
+          'NA'.tr(),
+          style: const TextStyle(
             color: ZPColors.darkerGreen,
             fontSize: 14.0,
             fontWeight: FontWeight.w400,

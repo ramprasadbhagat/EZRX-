@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -21,14 +22,14 @@ class TenderContractDetailsTile extends StatelessWidget {
 
         ),
         Text(
-          'Contract:  ${tenderContract.contractNumber.displayTenderContractNumber}',
+          'Contract:  ${tenderContract.contractNumber.displayTenderContractNumber.tr()}',
           style: Theme.of(context).textTheme.titleSmall?.apply(
                 color: ZPColors.black,
               ),
         ),
         !tenderContract.tenderOrderReason.isEmpty
             ? Text(
-                '${tenderContract.tenderOrderReason.displayTenderContractReason} : Tender with Contract',
+                '${tenderContract.tenderOrderReason.displayTenderContractReason.tr()} : Tender with Contract',
                 style: Theme.of(context).textTheme.titleSmall?.apply(
                       color: ZPColors.lightGray,
                     ),
@@ -46,14 +47,14 @@ class TenderContractDetailsTile extends StatelessWidget {
           keyFlex: 1,
           valueFlex: 1,
           keyText: 'Contact Reference',
-          valueText: tenderContract.contractReference.displayContractReference,
+          valueText: tenderContract.contractReference.displayContractReference.tr(),
         ),
         BalanceTextRow(
           keyFlex: 1,
           valueFlex: 1,
           keyText: 'Package Description',
           valueText: tenderContract
-              .tenderPackageDescription.displayTenderPackageDescription,
+              .tenderPackageDescription.displayTenderPackageDescription.tr(),
         ),
       ],
     );

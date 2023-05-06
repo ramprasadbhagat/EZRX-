@@ -155,13 +155,13 @@ class _OrderTemplateDetailPageState extends State<OrderTemplateDetailPage> {
                             ? OrderBundleItem(
                                 material: material,
                                 materialNumber:
-                                    material.materialNumber.displayMatNo,
+                                    material.materialNumber.displayMatNo.tr(),
                                 qty: material.qty.toString(),
                               )
                             : OrderMaterialItem(
                                 materialQueryInfo: material.queryInfo,
                                 materialNumber:
-                                    material.materialNumber.displayMatNo,
+                                    material.materialNumber.displayMatNo.tr(),
                                 qty: material.qty.toString(),
                               ),
                         if (material.bonuses.isNotEmpty)

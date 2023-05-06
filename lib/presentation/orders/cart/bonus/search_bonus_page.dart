@@ -72,7 +72,7 @@ class BonusAddPage extends StatelessWidget {
                                       children: <Widget>[
                                         Text(
                                           state.bonus[i].materialNumber
-                                              .displayMatNo,
+                                              .displayMatNo.tr(),
                                           style: Theme.of(context)
                                               .textTheme
                                               .titleSmall

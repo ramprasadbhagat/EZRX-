@@ -57,7 +57,7 @@ class HistoryOrderSummarySection extends StatelessWidget {
                   return orderItem.bonusList.isNotEmpty
                       ? OrderItemBonusCard(
                           key: Key(
-                            'orderItemBonusCard-${orderItem.orderItem.materialNumber.displayMatNo}-$index',
+                            'orderItemBonusCard-${orderItem.orderItem.materialNumber.displayMatNo.tr()}-$index',
                           ),
                           orderHistoryDetailsBonusAggregate: orderItem,
                         )

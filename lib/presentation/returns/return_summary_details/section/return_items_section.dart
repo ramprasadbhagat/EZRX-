@@ -59,7 +59,7 @@ class ReturnItemsSection extends StatelessWidget {
                             keyFlex: 3,
                             valueFlex: 5,
                             keyText: 'Material Number'.tr(),
-                            valueText: e.materialNumber.displayMatNo,
+                            valueText: e.materialNumber.displayMatNo.tr(),
                             valueTextLoading: state.isLoading,
                           ),
                           BalanceTextRow(

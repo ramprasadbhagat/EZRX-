@@ -132,7 +132,7 @@ class CartMaterialItemTile extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            material.materialInfo.materialNumber.displayMatNo,
+                            material.materialInfo.materialNumber.displayMatNo.tr(),
                             style:
                                 Theme.of(context).textTheme.titleSmall?.apply(
                                       color: ZPColors.lightGray,
@@ -411,7 +411,7 @@ class CartMaterialItemTileDetails extends StatelessWidget {
                     children: [
                       if (enableMaterialLevelTax)
                         Text(
-                          '${'Price before $taxCode: '.tr()}${material.display(PriceType.finalPrice)}',
+                          '${'Price before $taxCode: '.tr()}${material.display(PriceType.finalPrice).tr()}',
                           key: Key(
                             'pricebefore${material.getMaterialNumber.getOrDefaultValue('')}',
                           ),
@@ -426,7 +426,7 @@ class CartMaterialItemTileDetails extends StatelessWidget {
                         ),
                       if (enableListPrice)
                         Text(
-                          '${'List Price:'.tr()} ${material.display(PriceType.listPrice)}',
+                          '${'List Price:'.tr()} ${material.display(PriceType.listPrice).tr()}',
                           key: const Key('listPrice'),
                           style: Theme.of(context).textTheme.titleSmall?.apply(
                                 color: isPriceOverride
@@ -438,7 +438,7 @@ class CartMaterialItemTileDetails extends StatelessWidget {
                               ),
                         ),
                       Text(
-                        '${'Unit Price:'.tr()} ${material.display(PriceType.unitPrice)}',
+                        '${'Unit Price:'.tr()} ${material.display(PriceType.unitPrice).tr()}',
                         key: const Key('unitPrice'),
                         style: Theme.of(context).textTheme.titleSmall?.apply(
                               color: isPriceOverride
@@ -451,7 +451,7 @@ class CartMaterialItemTileDetails extends StatelessWidget {
                       ),
                       if (isOrderSummaryView)
                         Text(
-                          '${'Total Price'.tr()}: ${material.display(PriceType.unitPriceTotal)}',
+                          '${'Total Price'.tr()}: ${material.display(PriceType.unitPriceTotal).tr()}',
                           style: Theme.of(context).textTheme.titleSmall?.apply(
                                 color: isPriceOverride
                                     ? ZPColors.red

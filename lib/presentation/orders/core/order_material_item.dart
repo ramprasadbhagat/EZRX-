@@ -65,7 +65,7 @@ class OrderMaterialItem extends StatelessWidget {
                         )
                       : itemInfo == null
                           ? Text(
-                              'NA',
+                              'NA'.tr(),
                               style: Theme.of(context)
                                   .textTheme
                                   .titleMedium
@@ -276,7 +276,7 @@ class _MaterialPriceInfo extends StatelessWidget {
           );
 
           return Text(
-            ': ${priceAggregate.display(priceType)}',
+            ': ${priceAggregate.display(priceType).tr()}',
             style: Theme.of(context).textTheme.titleSmall?.apply(
                   color: ZPColors.darkerGreen,
                 ),
@@ -284,7 +284,7 @@ class _MaterialPriceInfo extends StatelessWidget {
         }
 
         return Text(
-          'NA',
+          'NA'.tr(),
           style: Theme.of(context).textTheme.titleSmall?.apply(
                 color: ZPColors.darkerGreen,
               ),

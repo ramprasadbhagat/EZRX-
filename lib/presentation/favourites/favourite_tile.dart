@@ -90,7 +90,7 @@ class FavouriteListTile extends StatelessWidget {
                         ),
                   ),
                   Text(
-                    favourite.materialNumber.displayMatNo,
+                    favourite.materialNumber.displayMatNo.tr(),
                     style: Theme.of(context).textTheme.titleSmall?.apply(
                           color: ZPColors.lightGray,
                         ),
@@ -122,7 +122,7 @@ class FavouriteListTile extends StatelessWidget {
                                         .configs
                                         .enableVat
                                     ? Text(
-                                        '${'Price before ${context.read<SalesOrgBloc>().state.salesOrg.taxCode}: '.tr()}${priceAggregate.display(PriceType.finalPrice)}',
+                                        '${'Price before ${context.read<SalesOrgBloc>().state.salesOrg.taxCode}: '.tr()}${priceAggregate.display(PriceType.finalPrice).tr()}',
                                         key: const Key('priceBefore'),
                                         style: Theme.of(context)
                                             .textTheme
@@ -133,7 +133,7 @@ class FavouriteListTile extends StatelessWidget {
                                       )
                                     : const SizedBox.shrink(),
                                 Text(
-                                  '${'Unit Price:'.tr()}${priceAggregate.display(PriceType.unitPrice)}',
+                                  '${'Unit Price:'.tr()}${priceAggregate.display(PriceType.unitPrice).tr()}',
                                   style: Theme.of(context)
                                       .textTheme
                                       .titleSmall

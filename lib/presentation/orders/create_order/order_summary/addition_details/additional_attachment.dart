@@ -161,12 +161,12 @@ class _PoUploadOptionPickerState extends State<_PoUploadOptionPicker> {
   Widget build(BuildContext context) {
     return PlatformAlertDialog(
       key: const ValueKey('poAttachmentUploadDialog'),
-      title: const Text(
-        'Upload Attachment',
-      ).tr(),
-      content: const Text(
-        'Choose a photo or a file',
-      ).tr(),
+      title: Text(
+        'Upload Attachment'.tr(),
+      ),
+      content: Text(
+        'Choose a photo or a file'.tr(),
+      ),
       actions: [
         PlatformDialogAction(
           key: const Key('poAttachmentPhotoUploadButton'),
@@ -176,7 +176,7 @@ class _PoUploadOptionPickerState extends State<_PoUploadOptionPicker> {
                 Icons.image,
                 color: ZPColors.kPrimaryColor,
               ),
-              const Text('Photos').tr(),
+               Text('Photos'.tr()),
             ],
           ),
           onPressed: () => uploadFile(
@@ -196,7 +196,7 @@ class _PoUploadOptionPickerState extends State<_PoUploadOptionPicker> {
                 Icons.folder,
                 color: ZPColors.kPrimaryColor,
               ),
-              const Text('Files').tr(),
+              Text('Files'.tr()),
             ],
           ),
           onPressed: () => uploadFile(

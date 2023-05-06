@@ -590,7 +590,7 @@ void main() {
         );
         expect(
           customPriceAggregate.display(PriceType.unitPriceTotal),
-          'NA',
+          'NA(Price)',
         );
       },
     );
@@ -605,7 +605,7 @@ void main() {
         );
         expect(
           customPriceAggregate.display(PriceType.unitPriceTotal),
-          'NA',
+          'NA(Price)',
         );
       },
     );
@@ -620,7 +620,7 @@ void main() {
         );
         expect(
           customPriceAggregate.display(PriceType.unitPriceTotal),
-          'NA',
+          'NA(Price)',
         );
       },
     );
@@ -635,7 +635,7 @@ void main() {
         );
         expect(
           customPriceAggregate.display(PriceType.unitPriceTotal),
-          'NA',
+          'NA(Price)',
         );
       },
     );

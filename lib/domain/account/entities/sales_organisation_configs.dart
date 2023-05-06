@@ -158,11 +158,12 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
         '\n',);
         return message.toString();
       case 'TW':
-        message.writeAll([
+        message.writeAll({
           '$bullet $inclusivetaxtext',
           '$bullet 本網站價格及搭贈資訊係以前日資料為基礎揭示，本公司仍須以今日之授權生效的價格為最終銷售發票開立之根據',
           '$bullet 金額 ${currency.code} 0 以上即可送出訂單，當日最低訂單配送金額須滿 ${currency.code} 2500',
-        ]);
+        },
+        '\n',);
         return message.toString();
       case 'PH':
         message.writeAll({

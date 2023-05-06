@@ -129,7 +129,7 @@ class HistoryOrderDetailSection extends StatelessWidget {
             BalanceTextRow(
               keyText: 'Special Instructions'.tr(),
               valueText: orderDetails.orderHistoryDetailsSpecialInstructions
-                  .displaySpecialInstructions,
+                  .displaySpecialInstructions.tr(),
               valueTextLoading: state.isLoading,
               keyFlex: 1,
               valueFlex: 1,
@@ -145,7 +145,7 @@ class HistoryOrderDetailSection extends StatelessWidget {
             BalanceTextRow(
               keyText: 'PO No.'.tr(),
               valueText: orderDetails.orderHistoryDetailsShippingInformation
-                  .pOReference.displayPOReference,
+                  .pOReference.displayPOReference.tr(),
               valueTextLoading: state.isLoading,
               keyFlex: 1,
               valueFlex: 1,
@@ -160,7 +160,7 @@ class HistoryOrderDetailSection extends StatelessWidget {
             BalanceTextRow(
               keyText: 'Contact Number'.tr(),
               valueText: orderDetails.orderHistoryDetailsOrderHeader
-                  .telephoneNumber.displayTelephoneNumber,
+                  .telephoneNumber.displayTelephoneNumber.tr(),
               valueTextLoading: state.isLoading,
               keyFlex: 1,
               valueFlex: 1,
@@ -168,7 +168,7 @@ class HistoryOrderDetailSection extends StatelessWidget {
             BalanceTextRow(
               keyText: 'Customer Classification'.tr(),
               valueText: customerCodeInfo
-                  .customerClassification.displayCustomerClassification,
+                  .customerClassification.displayCustomerClassification.tr(),
               keyFlex: 1,
               valueFlex: 1,
             ),
@@ -183,7 +183,7 @@ class HistoryOrderDetailSection extends StatelessWidget {
                     key: const ValueKey('paymentTerm'),
                     keyText: 'Payment Term'.tr(),
                     valueText: orderDetails.orderHistoryDetailsPaymentTerm
-                        .paymentTermCode.displayPaymentTermCode,
+                        .paymentTermCode.displayPaymentTermCode.tr(),
                     valueTextLoading: state.isLoading,
                     keyFlex: 1,
                     valueFlex: 1,
@@ -193,7 +193,7 @@ class HistoryOrderDetailSection extends StatelessWidget {
                 ? BalanceTextRow(
                     keyText: 'Payment Term Description'.tr(),
                     valueText: orderDetails.orderHistoryDetailsPaymentTerm
-                        .paymentTermDescription.displayPaymentTermDescription,
+                        .paymentTermDescription.displayPaymentTermDescription.tr(),
                     valueTextLoading: state.isLoading,
                     keyFlex: 1,
                     valueFlex: 1,

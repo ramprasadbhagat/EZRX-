@@ -30,7 +30,7 @@ class SaveTemplateTextField extends StatelessWidget {
                 maxLines: 1,
                 maxLength: 35,
                 decoration: InputDecoration(
-                  labelText: 'Template name'.tr(),
+                  labelText: 'Template Name'.tr(),
                 ),
                 onChanged: (value) => context.read<OrderTemplateListBloc>().add(
                       OrderTemplateListEvent.templateNameChanged(value),

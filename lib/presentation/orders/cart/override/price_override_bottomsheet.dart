@@ -204,8 +204,8 @@ class _PriceOverrideField extends StatelessWidget {
           key: const Key('priceOverrideTextFormField'),
           decoration: InputDecoration(
             hintText: 'Enter price override',
-            prefixText: isVN ? null : '  $currencyCode',
-            suffixText: isVN ? '$currencyCode  ' : null,
+            prefixText: isVN ? null : '  ${currencyCode.tr()}',
+            suffixText: isVN ? '${currencyCode.tr()}  ' : null,
             contentPadding: EdgeInsets.zero,
           ),
           style: Theme.of(context).textTheme.titleSmall,
