@@ -60,7 +60,7 @@ class MaterialInfoScanner {
 
     if (_camera != null) await _dataCaptureContext.setFrameSource(_camera!);
 
-    enableSymbologies(Symbology.values);
+    enableSymbologies(config.enabledSymbologies);
     _barcodeCaptureSettings.locationSelection =
         RectangularLocationSelection.withSize(
       SizeWithUnit(
@@ -85,7 +85,7 @@ class MaterialInfoScanner {
     _dataCaptureContext =
         DataCaptureContext.forLicenseKey(config.scanditLicenseKey);
     await _dataCaptureContext.setFrameSource(source);
-    enableSymbologies(Symbology.values);
+    enableSymbologies(config.enabledSymbologies);
 
     _barcodeCapture =
         BarcodeCapture.forContext(_dataCaptureContext, _barcodeCaptureSettings);
