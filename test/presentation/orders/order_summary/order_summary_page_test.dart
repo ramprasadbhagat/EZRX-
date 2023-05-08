@@ -1377,7 +1377,7 @@ void main() {
         await tester.pumpWidget(getWidget());
         await tester.pump();
         final orderSummary = find.byKey(
-          const Key('orderSUmmaryBlocConsumer'),
+          const Key('orderSummaryBlocConsumer'),
           skipOffstage: false,
         );
         expect(orderSummary, findsOneWidget);
@@ -2450,7 +2450,7 @@ void main() {
         if (orderSummaryBlocMock.state.step == 4) {
           if (!orderEligibilityBlocMock.state.isMinOrderValuePassed) {
             final warningText = find.textContaining(
-                'Note : Minimum order value criteria doesnt match! Please update your cart to proceed.'
+                'Note : Minimum order value criteria does not match! Please update your cart to proceed.'
                     .tr());
             expect(warningText, findsWidgets);
           }
