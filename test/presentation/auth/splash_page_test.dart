@@ -9,6 +9,7 @@ import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
+import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/covid_material_list/covid_material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_bundle_list/material_bundle_list_bloc.dart';
@@ -136,6 +137,9 @@ class ReturnApproverFilterBlocMock
 
 class RemoteConfigServiceMock extends Mock implements RemoteConfigService {}
 
+class DeepLinkingMockBloc extends MockBloc<DeepLinkingEvent, DeepLinkingState>
+    implements DeepLinkingBloc {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
@@ -166,6 +170,7 @@ void main() {
   late ReturnApproverFilterBlocMock returnApproverFilterBlocMock;
   late AnnouncementBloc announcementBlocMock;
   late RemoteConfigService remoteConfigServiceMock;
+  late DeepLinkingBloc deepLinkingBlocMock;
 
   final fakeSalesOrganisation =
       SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601'));
@@ -223,6 +228,7 @@ void main() {
       returnApproverBlocMock = ReturnApproverBlocMock();
       returnApproverFilterBlocMock = ReturnApproverFilterBlocMock();
       announcementBlocMock = AnnouncementBlocMock();
+      deepLinkingBlocMock = DeepLinkingMockBloc();
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
       when(() => orderDocumentTypeMock.state).thenReturn(
         OrderDocumentTypeState.initial().copyWith(
@@ -263,6 +269,8 @@ void main() {
           .thenReturn(ReturnApproverFilterState.initial());
       when(() => announcementBlocMock.state)
           .thenReturn(AnnouncementState.initial());
+      when(() => deepLinkingBlocMock.state)
+          .thenReturn(const DeepLinkingState.initial());
     });
 
     Future getWidget(tester) async {
@@ -310,6 +318,9 @@ void main() {
                 create: (context) => returnApproverFilterBlocMock),
             BlocProvider<AnnouncementBloc>(
                 create: (context) => announcementBlocMock),
+            BlocProvider<DeepLinkingBloc>(
+              create: (context) => deepLinkingBlocMock,
+            ),
           ],
           child: const SplashPage(),
         ),

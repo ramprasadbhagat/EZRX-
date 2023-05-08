@@ -9,6 +9,7 @@ import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
+import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
@@ -66,6 +67,9 @@ class OrderDocumentTypeMockBloc
     extends MockBloc<OrderDocumentTypeEvent, OrderDocumentTypeState>
     implements OrderDocumentTypeBloc {}
 
+class DeepLinkingMockBloc extends MockBloc<DeepLinkingEvent, DeepLinkingState>
+    implements DeepLinkingBloc {}
+
 class AutoRouterMock extends Mock implements AppRouter {
   @override
   String currentPath = '';
@@ -76,6 +80,7 @@ void main() {
   late LoginFormBloc loginBlocMock;
   late AuthBloc authBlocMock;
   late AnnouncementBloc announcementBlocMock;
+  late DeepLinkingBloc deepLinkingBlocMock;
   final UserBloc userBlocMock = UserBlocMock();
   final SalesOrgBloc salesOrgBlocMock = SalesOrgBlocMock();
   final CustomerCodeBloc customerCodeBlocMock = CustomerCodeBlocMock();
@@ -102,6 +107,7 @@ void main() {
       authBlocMock = AuthBlocMock();
       announcementBlocMock = AnnnouncementBlocMock();
       orderDocumentTypeBlocMock = OrderDocumentTypeMockBloc();
+      deepLinkingBlocMock = DeepLinkingMockBloc();
 
       when(() => loginBlocMock.state).thenReturn(LoginFormState.initial());
       when(() => announcementBlocMock.state)
@@ -120,6 +126,8 @@ void main() {
       when(() => orderDocumentTypeBlocMock.state)
           .thenReturn(OrderDocumentTypeState.initial());
       when(() => authBlocMock.state).thenReturn(const AuthState.initial());
+      when(() => deepLinkingBlocMock.state)
+          .thenReturn(const DeepLinkingState.initial());
     });
 
     Widget loginTestPage() => WidgetUtils.getScopedWidget(
@@ -245,6 +253,9 @@ void main() {
             ),
             BlocProvider<OrderDocumentTypeBloc>(
               create: (context) => orderDocumentTypeBlocMock,
+            ),
+            BlocProvider<DeepLinkingBloc>(
+              create: (context) => deepLinkingBlocMock,
             ),
           ],
           child: const SplashPage(),

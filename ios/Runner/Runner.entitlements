@@ -7,7 +7,7 @@
 	<key>com.apple.developer.associated-domains</key>
 	<array>
 		<string>applinks:ezrx.com</string>
-		<string>applinks:zpprodapiportalapimgmt.apimanagement.ap1.hana.ondemand.com</string>
+		<string>applinks:$(DYNAMIC_LINK_URI_PREFIX)</string>
 	</array>
 </dict>
 </plist>

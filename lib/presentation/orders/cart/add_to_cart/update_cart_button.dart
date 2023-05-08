@@ -1,9 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
@@ -22,70 +19,47 @@ class UpdateCartButton extends StatelessWidget {
     required this.cartItem,
   }) : super(key: key);
 
-  bool isSelectedTenderContractValid(BuildContext context) {
-    final cartItems = context.read<CartBloc>().state.cartItems.allMaterials;
-    final tenderContractInCart = cartItems.isEmpty
-        ? TenderContract.empty()
-        : cartItems
-            .firstWhere(
-              (element) => element.tenderContract.tenderOrderReason.is730,
-              orElse: () => cartItems.first,
-            )
-            .tenderContract;
-    final selectedTenderContractReason = context
-        .read<TenderContractBloc>()
-        .state
-        .selectedTenderContract
-        .tenderOrderReason;
-    final tenderContractInCartReason = tenderContractInCart.tenderOrderReason;
-
-    return cartItems.isEmpty || cartItems.length == 1
-        ? true
-        : ((tenderContractInCartReason.is730 ==
-                selectedTenderContractReason.is730) ||
-            (!tenderContractInCartReason.is730 ==
-                !selectedTenderContractReason.is730));
-  }
-
-  bool isValidQuantitySelected(BuildContext context) {
-    final selectedQuantity = cartItem.quantity;
-    final selectedTenderContract =
-        context.read<TenderContractBloc>().state.selectedTenderContract;
-
-    return selectedTenderContract == TenderContract.empty() ||
-        selectedTenderContract == TenderContract.noContract() ||
-        selectedQuantity <= selectedTenderContract.remainingTenderQuantity;
-  }
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<TenderContractBloc, TenderContractState>(
       buildWhen: (previous, current) =>
-          previous.selectedTenderContract != current.selectedTenderContract,
-      builder: (builderContext, state) {
+          previous.selectedTenderContract != current.selectedTenderContract ||
+          previous.isFetching != current.isFetching,
+      builder: (context, state) {
         return Column(
           children: [
-            isSelectedTenderContractValid(context)
-                ? const SizedBox.shrink()
-                : const Text(
-                    'Tender material 730 cannot be combined with any other material in the cart.',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: ZPColors.red,
-                    ),
-                  ),
+            if (!_isSelectedTenderContractValid(
+              context: context,
+              selectedContract: state.selectedTenderContract,
+            ))
+              const Text(
+                'Tender material 730 cannot be combined with any other material in the cart.',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: ZPColors.red,
+                ),
+              ),
             SafeArea(
               child: ElevatedButton(
                 key: const Key('updateCart'),
-                style: isSelectedTenderContractValid(context) &&
-                        isValidQuantitySelected(context)
+                style: _buttonEnabled(
+                  context: context,
+                  isFetching: state.isFetching,
+                  selectedContract: state.selectedTenderContract,
+                )
                     ? null
                     : ElevatedButton.styleFrom(
                         backgroundColor: ZPColors.lightGray,
                       ),
-                onPressed: () => isSelectedTenderContractValid(context) &&
-                        isValidQuantitySelected(context)
-                    ? _updateCart(context, cartItem)
+                onPressed: () => _buttonEnabled(
+                  context: context,
+                  isFetching: state.isFetching,
+                  selectedContract: state.selectedTenderContract,
+                )
+                    ? _updateCart(
+                        context: context,
+                        selectedContract: state.selectedTenderContract,
+                      )
                     : null,
                 child: const Text('Update Cart').tr(),
               ),
@@ -96,29 +70,69 @@ class UpdateCartButton extends StatelessWidget {
     );
   }
 
-  void _updateCart(BuildContext context, PriceAggregate selectedCartItem) {
-    final selectedTenderContract =
-        context.read<TenderContractBloc>().state.selectedTenderContract;
+  bool _buttonEnabled({
+    required BuildContext context,
+    required TenderContract selectedContract,
+    required bool isFetching,
+  }) {
+    return _isSelectedTenderContractValid(
+          context: context,
+          selectedContract: selectedContract,
+        ) &&
+        _isValidQuantitySelected(
+          selectedContract: selectedContract,
+        ) &&
+        !isFetching;
+  }
+
+  bool _isSelectedTenderContractValid({
+    required BuildContext context,
+    required TenderContract selectedContract,
+  }) {
+    final cartItems = context.read<CartBloc>().state.cartItems.allMaterials;
+    final tenderContractInCart = cartItems.isEmpty
+        ? TenderContract.empty()
+        : cartItems
+            .firstWhere(
+              (element) => element.tenderContract.tenderOrderReason.is730,
+              orElse: () => cartItems.first,
+            )
+            .tenderContract;
+    final selectedTenderContractReason = selectedContract.tenderOrderReason;
+    final tenderContractInCartReason = tenderContractInCart.tenderOrderReason;
+
+    return cartItems.isEmpty || cartItems.length == 1
+        ? true
+        : tenderContractInCartReason.is730 ==
+            selectedTenderContractReason.is730;
+  }
+
+  bool _isValidQuantitySelected({
+    required TenderContract selectedContract,
+  }) {
+    return selectedContract == TenderContract.empty() ||
+        selectedContract == TenderContract.noContract() ||
+        cartItem.quantity <= selectedContract.remainingTenderQuantity;
+  }
+
+  void _updateCart({
+    required BuildContext context,
+    required TenderContract selectedContract,
+  }) {
+    final eligibilityState = context.read<EligibilityBloc>().state;
 
     context.read<CartBloc>().add(
           CartEvent.addMaterialToCart(
-            item: cartItem.copyWith(tenderContract: selectedTenderContract),
-            customerCodeInfo:
-                context.read<CustomerCodeBloc>().state.customerCodeInfo,
+            item: cartItem.copyWith(tenderContract: selectedContract),
+            customerCodeInfo: eligibilityState.customerCodeInfo,
             overrideQty: true,
-            doNotallowOutOfStockMaterial: context
-                .read<EligibilityBloc>()
-                .state
-                .doNotAllowOutOfStockMaterials,
-            salesOrganisation:
-                context.read<SalesOrgBloc>().state.salesOrganisation,
-            salesOrganisationConfigs:
-                context.read<SalesOrgBloc>().state.configs,
-            shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
-              isSpecialOrderType: context
-                  .read<OrderDocumentTypeBloc>()
-                  .state
-                  .isSpecialOrderType,
+            doNotallowOutOfStockMaterial:
+                eligibilityState.doNotAllowOutOfStockMaterials,
+            salesOrganisation: eligibilityState.salesOrganisation,
+            salesOrganisationConfigs: eligibilityState.salesOrgConfigs,
+            shipToInfo: eligibilityState.shipToInfo,
+            isSpecialOrderType:
+                context.read<OrderDocumentTypeBloc>().state.isSpecialOrderType,
           ),
         );
     context.router.pop();

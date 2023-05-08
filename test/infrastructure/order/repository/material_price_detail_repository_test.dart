@@ -131,7 +131,7 @@ void main() {
         (invocation) async => fakeQueryResponseNotEnableZDP5,
       );
 
-      final result = await repository.getMaterialDetail(
+      final result = await repository.getMaterialDetailList(
         salesOrganisation: fakeSaleOrg,
         salesOrganisationConfigs: fakeSaleOrgConfig,
         customerCodeInfo: fakeCustomerCodeInfo,
@@ -156,7 +156,7 @@ void main() {
       when(() => localDataSourceMock.getMaterialDetailList())
           .thenThrow((invocation) async => MockException());
 
-      final result = await repository.getMaterialDetail(
+      final result = await repository.getMaterialDetailList(
         salesOrganisation: fakeSaleOrg,
         salesOrganisationConfigs: fakeSaleOrgConfig,
         customerCodeInfo: fakeCustomerCodeInfo,
@@ -193,7 +193,7 @@ void main() {
         (invocation) async => fakeQueryResponseNotEnableZDP5,
       );
 
-      final result = await repository.getMaterialDetail(
+      final result = await repository.getMaterialDetailList(
         salesOrganisation: fakeSaleOrg,
         salesOrganisationConfigs: fakeSaleOrgConfig,
         customerCodeInfo: fakeCustomerCodeInfo,
@@ -238,7 +238,7 @@ void main() {
         ),
       ).thenThrow((invocation) async => MockException());
 
-      final result = await repository.getMaterialDetail(
+      final result = await repository.getMaterialDetailList(
         salesOrganisation: fakeSaleOrg,
         salesOrganisationConfigs: fakeSaleOrgConfig,
         customerCodeInfo: fakeCustomerCodeInfo,
@@ -256,7 +256,7 @@ void main() {
         (invocation) async => fakeQueryResponseWhenEnableZDP5,
       );
 
-      final result = await repository.getMaterialDetail(
+      final result = await repository.getMaterialDetailList(
         salesOrganisation: fakeSaleOrg,
         salesOrganisationConfigs: fakeSaleConfigEnableZDP5,
         customerCodeInfo: fakeCustomerCodeInfo,
@@ -275,7 +275,7 @@ void main() {
         (invocation) async => MockException(),
       );
 
-      final result = await repository.getMaterialDetail(
+      final result = await repository.getMaterialDetailList(
         salesOrganisation: SalesOrganisation.empty(),
         salesOrganisationConfigs: fakeSaleConfigEnableZDP5,
         customerCodeInfo: fakeCustomerCodeInfo,
@@ -324,7 +324,7 @@ void main() {
         (invocation) async => fakeQueryResponseWhenEnableZDP5,
       );
 
-      final result = await repository.getMaterialDetail(
+      final result = await repository.getMaterialDetailList(
         salesOrganisation: fakeSaleOrg,
         salesOrganisationConfigs: fakeSaleConfigEnableZDP5,
         customerCodeInfo: fakeCustomerCodeInfo,
@@ -392,7 +392,7 @@ void main() {
                 'fake-material-3': true,
               })).thenThrow((invocation) async => MockException());
 
-      final result = await repository.getMaterialDetail(
+      final result = await repository.getMaterialDetailList(
         salesOrganisation: fakeSaleOrg,
         salesOrganisationConfigs: fakeSaleConfigEnableZDP5,
         customerCodeInfo: fakeCustomerCodeInfo,
@@ -435,7 +435,7 @@ void main() {
         (invocation) async => fakeQueryResponseWhenEnableZDP5WithOverride,
       );
 
-      final result = await repository.getMaterialDetail(
+      final result = await repository.getMaterialDetailList(
         salesOrganisation: fakeSaleOrg,
         salesOrganisationConfigs: fakeSaleOrgConfig,
         customerCodeInfo: fakeCustomerCodeInfo,
@@ -485,7 +485,7 @@ void main() {
         (invocation) async => MockException(),
       );
 
-      final result = await repository.getMaterialDetailZDP5Enabled(
+      final result = await repository.getMaterialDetailListWithZDP5Enabled(
         salesOrganisation: fakeSaleOrg,
         salesOrganisationConfigs: fakeSaleOrgConfig,
         customerCodeInfo: fakeCustomerCodeInfo,
@@ -513,7 +513,7 @@ void main() {
         (invocation) async => fakeQueryResponseWhenEnableZDP5WithOverride,
       );
 
-      final result = await repository.getMaterialDetail(
+      final result = await repository.getMaterialDetailList(
         salesOrganisation: fakeSaleOrg,
         salesOrganisationConfigs: fakeSaleOrgConfig,
         customerCodeInfo: fakeCustomerCodeInfo,
@@ -540,7 +540,7 @@ void main() {
         (invocation) async => MockException(),
       );
 
-      final result = await repository.getMaterialDetailZDP5Enabled(
+      final result = await repository.getMaterialDetailListWithZDP5Enabled(
         salesOrganisation: fakeSaleOrg,
         salesOrganisationConfigs: fakeSaleOrgConfig,
         customerCodeInfo: fakeCustomerCodeInfo,

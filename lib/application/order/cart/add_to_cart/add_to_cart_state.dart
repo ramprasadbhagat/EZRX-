@@ -6,11 +6,13 @@ class AddToCartState with _$AddToCartState {
 
   const factory AddToCartState({
     required PriceAggregate cartItem,
-    required int quantity,
+    required bool isFetching,
+    required Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
   }) = _AddToCartState;
 
   factory AddToCartState.initial() => AddToCartState(
         cartItem: PriceAggregate.empty(),
-        quantity: 1,
+        isFetching: true,
+        apiFailureOrSuccessOption: none(),
       );
 }

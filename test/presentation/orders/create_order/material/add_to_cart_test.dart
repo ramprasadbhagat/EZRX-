@@ -221,6 +221,7 @@ void main() {
     testWidgets('Add to Cart zmg Discount Material', (tester) async {
       when(() => addToCartBlocMock.state).thenReturn(
         AddToCartState.initial().copyWith(
+          isFetching: false,
           cartItem: priceAggregate.copyWith(
             price: priceAggregate.price.copyWith(
               zmgDiscount: true,
@@ -228,11 +229,6 @@ void main() {
           ),
         ),
       );
-      whenListen(
-          addToCartBlocMock,
-          Stream.fromIterable([
-            addToCartBlocMock.state,
-          ]));
 
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial()
           .copyWith(
@@ -257,6 +253,7 @@ void main() {
         (tester) async {
       when(() => addToCartBlocMock.state).thenReturn(
         AddToCartState.initial().copyWith(
+          isFetching: false,
           cartItem: priceAggregate.copyWith(
               price: priceAggregate.price.copyWith(
                 zmgDiscount: true,
@@ -288,6 +285,7 @@ void main() {
         (tester) async {
       when(() => addToCartBlocMock.state).thenReturn(
         AddToCartState.initial().copyWith(
+          isFetching: false,
           cartItem: priceAggregate.copyWith(
               price: priceAggregate.price.copyWith(
                 zmgDiscount: false,
@@ -303,11 +301,6 @@ void main() {
               selectedTenderContract: TenderContract.empty().copyWith(
                   contractNumber: TenderContractNumber.tenderContractItemNumber(
                       '0000123'))));
-      whenListen(
-          tenderContractBlocMock,
-          Stream.fromIterable([
-            tenderContractBlocMock.state,
-          ]));
 
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial()
           .copyWith(
@@ -334,6 +327,7 @@ void main() {
     testWidgets('Add to Cart bonus material', (tester) async {
       when(() => addToCartBlocMock.state).thenReturn(
         AddToCartState.initial().copyWith(
+          isFetching: false,
           cartItem: priceAggregate.copyWith(
             materialInfo: MaterialInfo.empty().copyWith(
                 hasValidTenderContract: true,
@@ -357,11 +351,6 @@ void main() {
           ),
         ),
       );
-      whenListen(
-          addToCartBlocMock,
-          Stream.fromIterable([
-            addToCartBlocMock.state,
-          ]));
 
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial()
           .copyWith(
@@ -389,6 +378,7 @@ void main() {
     testWidgets('Add to Cart Tire Discount Material', (tester) async {
       when(() => addToCartBlocMock.state).thenReturn(
         AddToCartState.initial().copyWith(
+          isFetching: false,
           cartItem: priceAggregate.copyWith(
               price: priceAggregate.price.copyWith(zmgDiscount: false)),
         ),
@@ -540,6 +530,7 @@ void main() {
       );
       when(() => addToCartBlocMock.state).thenReturn(
         AddToCartState.initial().copyWith(
+          isFetching: false,
           cartItem: priceAggregate.copyWith(
             price: priceAggregate.price.copyWith(
               zmgDiscount: true,
@@ -560,11 +551,6 @@ void main() {
             optionOf(const Left(ApiFailure.other('authentication failed'))),
         isFetching: true,
       ));
-      whenListen(
-          tenderContractBlocMock,
-          Stream.fromIterable([
-            tenderContractBlocMock.state,
-          ]));
 
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial()
           .copyWith(
@@ -588,6 +574,7 @@ void main() {
         (tester) async {
       when(() => addToCartBlocMock.state).thenReturn(
         AddToCartState.initial().copyWith(
+          isFetching: false,
           cartItem: priceAggregate.copyWith(
             price: priceAggregate.price.copyWith(
               zmgDiscount: true,
@@ -614,11 +601,6 @@ void main() {
                 contractNumber:
                     TenderContractNumber.tenderContractItemNumber('0000125'),
                 tenderOrderReason: TenderContractReason('730'))
-          ]));
-      whenListen(
-          tenderContractBlocMock,
-          Stream.fromIterable([
-            tenderContractBlocMock.state,
           ]));
 
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial()
@@ -656,7 +638,9 @@ void main() {
         when(
           () => addToCartBlocMock.state,
         ).thenReturn(
-          AddToCartState.initial(),
+          AddToCartState.initial().copyWith(
+            isFetching: false,
+          ),
         );
 
         final fakeUser = User.empty().copyWith(
@@ -693,7 +677,9 @@ void main() {
         when(
           () => addToCartBlocMock.state,
         ).thenReturn(
-          AddToCartState.initial(),
+          AddToCartState.initial().copyWith(
+            isFetching: false,
+          ),
         );
 
         final fakeUser = User.empty().copyWith(
@@ -730,7 +716,9 @@ void main() {
         when(
           () => addToCartBlocMock.state,
         ).thenReturn(
-          AddToCartState.initial(),
+          AddToCartState.initial().copyWith(
+            isFetching: false,
+          ),
         );
 
         final fakeUser = User.empty().copyWith(
@@ -767,7 +755,9 @@ void main() {
         when(
           () => addToCartBlocMock.state,
         ).thenReturn(
-          AddToCartState.initial(),
+          AddToCartState.initial().copyWith(
+            isFetching: false,
+          ),
         );
 
         final fakeUser = User.empty().copyWith(
@@ -845,6 +835,7 @@ void main() {
       (tester) async {
         when(() => addToCartBlocMock.state).thenReturn(
           AddToCartState.initial().copyWith(
+            isFetching: false,
             cartItem: priceAggregate.copyWith(
               isSpecialOrderType: true,
               price: priceAggregate.price.copyWith(
@@ -919,6 +910,7 @@ void main() {
       (tester) async {
         when(() => addToCartBlocMock.state).thenReturn(
           AddToCartState.initial().copyWith(
+            isFetching: false,
             cartItem: priceAggregate.copyWith(
               isSpecialOrderType: true,
               price: priceAggregate.price.copyWith(
@@ -996,6 +988,7 @@ void main() {
       (tester) async {
         when(() => addToCartBlocMock.state).thenReturn(
           AddToCartState.initial().copyWith(
+            isFetching: false,
             cartItem: priceAggregate.copyWith(
               price: priceAggregate.price.copyWith(
                 zmgDiscount: true,
@@ -1241,7 +1234,7 @@ void main() {
           find.byIcon(Icons.favorite_border_outlined);
 
       await tester.tap(favoriteButtonBorderOutlined);
-      await tester.pumpAndSettle();
+      await tester.pump();
       expect(find.byIcon(Icons.favorite), findsOneWidget);
       await tester.pump();
     });

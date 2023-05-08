@@ -19,7 +19,15 @@ mixin _$AddToCartEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() fetch,
+    required TResult Function(
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            ShipToInfo shipToCode,
+            MaterialNumber materialNumber,
+            int cartZmgQtyExcludeCurrent,
+            bool isSpecialOrderType)
+        fetch,
     required TResult Function(PriceAggregate cartItem) setCartItem,
     required TResult Function(int quantity, int cartZmgQtyExcludeCurrent)
         updateQuantity,
@@ -28,7 +36,15 @@ mixin _$AddToCartEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function()? fetch,
+    TResult? Function(
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            ShipToInfo shipToCode,
+            MaterialNumber materialNumber,
+            int cartZmgQtyExcludeCurrent,
+            bool isSpecialOrderType)?
+        fetch,
     TResult? Function(PriceAggregate cartItem)? setCartItem,
     TResult? Function(int quantity, int cartZmgQtyExcludeCurrent)?
         updateQuantity,
@@ -37,7 +53,15 @@ mixin _$AddToCartEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? fetch,
+    TResult Function(
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            ShipToInfo shipToCode,
+            MaterialNumber materialNumber,
+            int cartZmgQtyExcludeCurrent,
+            bool isSpecialOrderType)?
+        fetch,
     TResult Function(PriceAggregate cartItem)? setCartItem,
     TResult Function(int quantity, int cartZmgQtyExcludeCurrent)?
         updateQuantity,
@@ -128,7 +152,15 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() fetch,
+    required TResult Function(
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            ShipToInfo shipToCode,
+            MaterialNumber materialNumber,
+            int cartZmgQtyExcludeCurrent,
+            bool isSpecialOrderType)
+        fetch,
     required TResult Function(PriceAggregate cartItem) setCartItem,
     required TResult Function(int quantity, int cartZmgQtyExcludeCurrent)
         updateQuantity,
@@ -140,7 +172,15 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function()? fetch,
+    TResult? Function(
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            ShipToInfo shipToCode,
+            MaterialNumber materialNumber,
+            int cartZmgQtyExcludeCurrent,
+            bool isSpecialOrderType)?
+        fetch,
     TResult? Function(PriceAggregate cartItem)? setCartItem,
     TResult? Function(int quantity, int cartZmgQtyExcludeCurrent)?
         updateQuantity,
@@ -152,7 +192,15 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? fetch,
+    TResult Function(
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            ShipToInfo shipToCode,
+            MaterialNumber materialNumber,
+            int cartZmgQtyExcludeCurrent,
+            bool isSpecialOrderType)?
+        fetch,
     TResult Function(PriceAggregate cartItem)? setCartItem,
     TResult Function(int quantity, int cartZmgQtyExcludeCurrent)?
         updateQuantity,
@@ -210,6 +258,20 @@ abstract class _Initialized implements AddToCartEvent {
 abstract class _$$_FetchCopyWith<$Res> {
   factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
       __$$_FetchCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {CustomerCodeInfo customerCode,
+      SalesOrganisation salesOrganisation,
+      SalesOrganisationConfigs salesOrganisationConfigs,
+      ShipToInfo shipToCode,
+      MaterialNumber materialNumber,
+      int cartZmgQtyExcludeCurrent,
+      bool isSpecialOrderType});
+
+  $CustomerCodeInfoCopyWith<$Res> get customerCode;
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
+  $SalesOrganisationConfigsCopyWith<$Res> get salesOrganisationConfigs;
+  $ShipToInfoCopyWith<$Res> get shipToCode;
 }
 
 /// @nodoc
@@ -218,63 +280,237 @@ class __$$_FetchCopyWithImpl<$Res>
     implements _$$_FetchCopyWith<$Res> {
   __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? customerCode = null,
+    Object? salesOrganisation = null,
+    Object? salesOrganisationConfigs = null,
+    Object? shipToCode = null,
+    Object? materialNumber = null,
+    Object? cartZmgQtyExcludeCurrent = null,
+    Object? isSpecialOrderType = null,
+  }) {
+    return _then(_$_Fetch(
+      customerCode: null == customerCode
+          ? _value.customerCode
+          : customerCode // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
+      salesOrganisation: null == salesOrganisation
+          ? _value.salesOrganisation
+          : salesOrganisation // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
+      salesOrganisationConfigs: null == salesOrganisationConfigs
+          ? _value.salesOrganisationConfigs
+          : salesOrganisationConfigs // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisationConfigs,
+      shipToCode: null == shipToCode
+          ? _value.shipToCode
+          : shipToCode // ignore: cast_nullable_to_non_nullable
+              as ShipToInfo,
+      materialNumber: null == materialNumber
+          ? _value.materialNumber
+          : materialNumber // ignore: cast_nullable_to_non_nullable
+              as MaterialNumber,
+      cartZmgQtyExcludeCurrent: null == cartZmgQtyExcludeCurrent
+          ? _value.cartZmgQtyExcludeCurrent
+          : cartZmgQtyExcludeCurrent // ignore: cast_nullable_to_non_nullable
+              as int,
+      isSpecialOrderType: null == isSpecialOrderType
+          ? _value.isSpecialOrderType
+          : isSpecialOrderType // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CustomerCodeInfoCopyWith<$Res> get customerCode {
+    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCode, (value) {
+      return _then(_value.copyWith(customerCode: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
+    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
+      return _then(_value.copyWith(salesOrganisation: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationConfigsCopyWith<$Res> get salesOrganisationConfigs {
+    return $SalesOrganisationConfigsCopyWith<$Res>(
+        _value.salesOrganisationConfigs, (value) {
+      return _then(_value.copyWith(salesOrganisationConfigs: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ShipToInfoCopyWith<$Res> get shipToCode {
+    return $ShipToInfoCopyWith<$Res>(_value.shipToCode, (value) {
+      return _then(_value.copyWith(shipToCode: value));
+    });
+  }
 }
 
 /// @nodoc
 
 class _$_Fetch implements _Fetch {
-  const _$_Fetch();
+  const _$_Fetch(
+      {required this.customerCode,
+      required this.salesOrganisation,
+      required this.salesOrganisationConfigs,
+      required this.shipToCode,
+      required this.materialNumber,
+      required this.cartZmgQtyExcludeCurrent,
+      required this.isSpecialOrderType});
+
+  @override
+  final CustomerCodeInfo customerCode;
+  @override
+  final SalesOrganisation salesOrganisation;
+  @override
+  final SalesOrganisationConfigs salesOrganisationConfigs;
+  @override
+  final ShipToInfo shipToCode;
+  @override
+  final MaterialNumber materialNumber;
+  @override
+  final int cartZmgQtyExcludeCurrent;
+  @override
+  final bool isSpecialOrderType;
 
   @override
   String toString() {
-    return 'AddToCartEvent.fetch()';
+    return 'AddToCartEvent.fetch(customerCode: $customerCode, salesOrganisation: $salesOrganisation, salesOrganisationConfigs: $salesOrganisationConfigs, shipToCode: $shipToCode, materialNumber: $materialNumber, cartZmgQtyExcludeCurrent: $cartZmgQtyExcludeCurrent, isSpecialOrderType: $isSpecialOrderType)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Fetch);
+        (other.runtimeType == runtimeType &&
+            other is _$_Fetch &&
+            (identical(other.customerCode, customerCode) ||
+                other.customerCode == customerCode) &&
+            (identical(other.salesOrganisation, salesOrganisation) ||
+                other.salesOrganisation == salesOrganisation) &&
+            (identical(
+                    other.salesOrganisationConfigs, salesOrganisationConfigs) ||
+                other.salesOrganisationConfigs == salesOrganisationConfigs) &&
+            (identical(other.shipToCode, shipToCode) ||
+                other.shipToCode == shipToCode) &&
+            (identical(other.materialNumber, materialNumber) ||
+                other.materialNumber == materialNumber) &&
+            (identical(
+                    other.cartZmgQtyExcludeCurrent, cartZmgQtyExcludeCurrent) ||
+                other.cartZmgQtyExcludeCurrent == cartZmgQtyExcludeCurrent) &&
+            (identical(other.isSpecialOrderType, isSpecialOrderType) ||
+                other.isSpecialOrderType == isSpecialOrderType));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(
+      runtimeType,
+      customerCode,
+      salesOrganisation,
+      salesOrganisationConfigs,
+      shipToCode,
+      materialNumber,
+      cartZmgQtyExcludeCurrent,
+      isSpecialOrderType);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
+      __$$_FetchCopyWithImpl<_$_Fetch>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() fetch,
+    required TResult Function(
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            ShipToInfo shipToCode,
+            MaterialNumber materialNumber,
+            int cartZmgQtyExcludeCurrent,
+            bool isSpecialOrderType)
+        fetch,
     required TResult Function(PriceAggregate cartItem) setCartItem,
     required TResult Function(int quantity, int cartZmgQtyExcludeCurrent)
         updateQuantity,
   }) {
-    return fetch();
+    return fetch(
+        customerCode,
+        salesOrganisation,
+        salesOrganisationConfigs,
+        shipToCode,
+        materialNumber,
+        cartZmgQtyExcludeCurrent,
+        isSpecialOrderType);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function()? fetch,
+    TResult? Function(
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            ShipToInfo shipToCode,
+            MaterialNumber materialNumber,
+            int cartZmgQtyExcludeCurrent,
+            bool isSpecialOrderType)?
+        fetch,
     TResult? Function(PriceAggregate cartItem)? setCartItem,
     TResult? Function(int quantity, int cartZmgQtyExcludeCurrent)?
         updateQuantity,
   }) {
-    return fetch?.call();
+    return fetch?.call(
+        customerCode,
+        salesOrganisation,
+        salesOrganisationConfigs,
+        shipToCode,
+        materialNumber,
+        cartZmgQtyExcludeCurrent,
+        isSpecialOrderType);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? fetch,
+    TResult Function(
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            ShipToInfo shipToCode,
+            MaterialNumber materialNumber,
+            int cartZmgQtyExcludeCurrent,
+            bool isSpecialOrderType)?
+        fetch,
     TResult Function(PriceAggregate cartItem)? setCartItem,
     TResult Function(int quantity, int cartZmgQtyExcludeCurrent)?
         updateQuantity,
     required TResult orElse(),
   }) {
     if (fetch != null) {
-      return fetch();
+      return fetch(
+          customerCode,
+          salesOrganisation,
+          salesOrganisationConfigs,
+          shipToCode,
+          materialNumber,
+          cartZmgQtyExcludeCurrent,
+          isSpecialOrderType);
     }
     return orElse();
   }
@@ -318,7 +554,25 @@ class _$_Fetch implements _Fetch {
 }
 
 abstract class _Fetch implements AddToCartEvent {
-  const factory _Fetch() = _$_Fetch;
+  const factory _Fetch(
+      {required final CustomerCodeInfo customerCode,
+      required final SalesOrganisation salesOrganisation,
+      required final SalesOrganisationConfigs salesOrganisationConfigs,
+      required final ShipToInfo shipToCode,
+      required final MaterialNumber materialNumber,
+      required final int cartZmgQtyExcludeCurrent,
+      required final bool isSpecialOrderType}) = _$_Fetch;
+
+  CustomerCodeInfo get customerCode;
+  SalesOrganisation get salesOrganisation;
+  SalesOrganisationConfigs get salesOrganisationConfigs;
+  ShipToInfo get shipToCode;
+  MaterialNumber get materialNumber;
+  int get cartZmgQtyExcludeCurrent;
+  bool get isSpecialOrderType;
+  @JsonKey(ignore: true)
+  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -397,7 +651,15 @@ class _$_SetCartItem implements _SetCartItem {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() fetch,
+    required TResult Function(
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            ShipToInfo shipToCode,
+            MaterialNumber materialNumber,
+            int cartZmgQtyExcludeCurrent,
+            bool isSpecialOrderType)
+        fetch,
     required TResult Function(PriceAggregate cartItem) setCartItem,
     required TResult Function(int quantity, int cartZmgQtyExcludeCurrent)
         updateQuantity,
@@ -409,7 +671,15 @@ class _$_SetCartItem implements _SetCartItem {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function()? fetch,
+    TResult? Function(
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            ShipToInfo shipToCode,
+            MaterialNumber materialNumber,
+            int cartZmgQtyExcludeCurrent,
+            bool isSpecialOrderType)?
+        fetch,
     TResult? Function(PriceAggregate cartItem)? setCartItem,
     TResult? Function(int quantity, int cartZmgQtyExcludeCurrent)?
         updateQuantity,
@@ -421,7 +691,15 @@ class _$_SetCartItem implements _SetCartItem {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? fetch,
+    TResult Function(
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            ShipToInfo shipToCode,
+            MaterialNumber materialNumber,
+            int cartZmgQtyExcludeCurrent,
+            bool isSpecialOrderType)?
+        fetch,
     TResult Function(PriceAggregate cartItem)? setCartItem,
     TResult Function(int quantity, int cartZmgQtyExcludeCurrent)?
         updateQuantity,
@@ -557,7 +835,15 @@ class _$_UpdateQuantity implements _UpdateQuantity {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function() fetch,
+    required TResult Function(
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            ShipToInfo shipToCode,
+            MaterialNumber materialNumber,
+            int cartZmgQtyExcludeCurrent,
+            bool isSpecialOrderType)
+        fetch,
     required TResult Function(PriceAggregate cartItem) setCartItem,
     required TResult Function(int quantity, int cartZmgQtyExcludeCurrent)
         updateQuantity,
@@ -569,7 +855,15 @@ class _$_UpdateQuantity implements _UpdateQuantity {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function()? fetch,
+    TResult? Function(
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            ShipToInfo shipToCode,
+            MaterialNumber materialNumber,
+            int cartZmgQtyExcludeCurrent,
+            bool isSpecialOrderType)?
+        fetch,
     TResult? Function(PriceAggregate cartItem)? setCartItem,
     TResult? Function(int quantity, int cartZmgQtyExcludeCurrent)?
         updateQuantity,
@@ -581,7 +875,15 @@ class _$_UpdateQuantity implements _UpdateQuantity {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function()? fetch,
+    TResult Function(
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            ShipToInfo shipToCode,
+            MaterialNumber materialNumber,
+            int cartZmgQtyExcludeCurrent,
+            bool isSpecialOrderType)?
+        fetch,
     TResult Function(PriceAggregate cartItem)? setCartItem,
     TResult Function(int quantity, int cartZmgQtyExcludeCurrent)?
         updateQuantity,
@@ -646,7 +948,9 @@ abstract class _UpdateQuantity implements AddToCartEvent {
 /// @nodoc
 mixin _$AddToCartState {
   PriceAggregate get cartItem => throw _privateConstructorUsedError;
-  int get quantity => throw _privateConstructorUsedError;
+  bool get isFetching => throw _privateConstructorUsedError;
+  Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AddToCartStateCopyWith<AddToCartState> get copyWith =>
@@ -659,7 +963,10 @@ abstract class $AddToCartStateCopyWith<$Res> {
           AddToCartState value, $Res Function(AddToCartState) then) =
       _$AddToCartStateCopyWithImpl<$Res, AddToCartState>;
   @useResult
-  $Res call({PriceAggregate cartItem, int quantity});
+  $Res call(
+      {PriceAggregate cartItem,
+      bool isFetching,
+      Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption});
 
   $PriceAggregateCopyWith<$Res> get cartItem;
 }
@@ -678,17 +985,22 @@ class _$AddToCartStateCopyWithImpl<$Res, $Val extends AddToCartState>
   @override
   $Res call({
     Object? cartItem = null,
-    Object? quantity = null,
+    Object? isFetching = null,
+    Object? apiFailureOrSuccessOption = null,
   }) {
     return _then(_value.copyWith(
       cartItem: null == cartItem
           ? _value.cartItem
           : cartItem // ignore: cast_nullable_to_non_nullable
               as PriceAggregate,
-      quantity: null == quantity
-          ? _value.quantity
-          : quantity // ignore: cast_nullable_to_non_nullable
-              as int,
+      isFetching: null == isFetching
+          ? _value.isFetching
+          : isFetching // ignore: cast_nullable_to_non_nullable
+              as bool,
+      apiFailureOrSuccessOption: null == apiFailureOrSuccessOption
+          ? _value.apiFailureOrSuccessOption
+          : apiFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
+              as Option<Either<ApiFailure, dynamic>>,
     ) as $Val);
   }
 
@@ -709,7 +1021,10 @@ abstract class _$$_AddToCartStateCopyWith<$Res>
       __$$_AddToCartStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({PriceAggregate cartItem, int quantity});
+  $Res call(
+      {PriceAggregate cartItem,
+      bool isFetching,
+      Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption});
 
   @override
   $PriceAggregateCopyWith<$Res> get cartItem;
@@ -727,17 +1042,22 @@ class __$$_AddToCartStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? cartItem = null,
-    Object? quantity = null,
+    Object? isFetching = null,
+    Object? apiFailureOrSuccessOption = null,
   }) {
     return _then(_$_AddToCartState(
       cartItem: null == cartItem
           ? _value.cartItem
           : cartItem // ignore: cast_nullable_to_non_nullable
               as PriceAggregate,
-      quantity: null == quantity
-          ? _value.quantity
-          : quantity // ignore: cast_nullable_to_non_nullable
-              as int,
+      isFetching: null == isFetching
+          ? _value.isFetching
+          : isFetching // ignore: cast_nullable_to_non_nullable
+              as bool,
+      apiFailureOrSuccessOption: null == apiFailureOrSuccessOption
+          ? _value.apiFailureOrSuccessOption
+          : apiFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
+              as Option<Either<ApiFailure, dynamic>>,
     ));
   }
 }
@@ -745,17 +1065,22 @@ class __$$_AddToCartStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_AddToCartState extends _AddToCartState {
-  const _$_AddToCartState({required this.cartItem, required this.quantity})
+  const _$_AddToCartState(
+      {required this.cartItem,
+      required this.isFetching,
+      required this.apiFailureOrSuccessOption})
       : super._();
 
   @override
   final PriceAggregate cartItem;
   @override
-  final int quantity;
+  final bool isFetching;
+  @override
+  final Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption;
 
   @override
   String toString() {
-    return 'AddToCartState(cartItem: $cartItem, quantity: $quantity)';
+    return 'AddToCartState(cartItem: $cartItem, isFetching: $isFetching, apiFailureOrSuccessOption: $apiFailureOrSuccessOption)';
   }
 
   @override
@@ -765,12 +1090,16 @@ class _$_AddToCartState extends _AddToCartState {
             other is _$_AddToCartState &&
             (identical(other.cartItem, cartItem) ||
                 other.cartItem == cartItem) &&
-            (identical(other.quantity, quantity) ||
-                other.quantity == quantity));
+            (identical(other.isFetching, isFetching) ||
+                other.isFetching == isFetching) &&
+            (identical(other.apiFailureOrSuccessOption,
+                    apiFailureOrSuccessOption) ||
+                other.apiFailureOrSuccessOption == apiFailureOrSuccessOption));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, cartItem, quantity);
+  int get hashCode =>
+      Object.hash(runtimeType, cartItem, isFetching, apiFailureOrSuccessOption);
 
   @JsonKey(ignore: true)
   @override
@@ -782,13 +1111,17 @@ class _$_AddToCartState extends _AddToCartState {
 abstract class _AddToCartState extends AddToCartState {
   const factory _AddToCartState(
       {required final PriceAggregate cartItem,
-      required final int quantity}) = _$_AddToCartState;
+      required final bool isFetching,
+      required final Option<Either<ApiFailure, dynamic>>
+          apiFailureOrSuccessOption}) = _$_AddToCartState;
   const _AddToCartState._() : super._();
 
   @override
   PriceAggregate get cartItem;
   @override
-  int get quantity;
+  bool get isFetching;
+  @override
+  Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption;
   @override
   @JsonKey(ignore: true)
   _$$_AddToCartStateCopyWith<_$_AddToCartState> get copyWith =>

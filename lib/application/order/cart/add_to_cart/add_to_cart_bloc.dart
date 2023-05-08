@@ -1,4 +1,12 @@
+import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/order/repository/i_material_price_detail_repository.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -7,7 +15,11 @@ part 'add_to_cart_state.dart';
 part 'add_to_cart_bloc.freezed.dart';
 
 class AddToCartBloc extends Bloc<AddToCartEvent, AddToCartState> {
-  AddToCartBloc() : super(AddToCartState.initial()) {
+  final IMaterialPriceDetailRepository materialPriceDetailRepository;
+
+  AddToCartBloc({
+    required this.materialPriceDetailRepository,
+  }) : super(AddToCartState.initial()) {
     on<AddToCartEvent>(_onEvent);
   }
 
@@ -17,9 +29,61 @@ class AddToCartBloc extends Bloc<AddToCartEvent, AddToCartState> {
   ) async {
     await event.map(
       initialized: (_) async => emit(AddToCartState.initial()),
-      fetch: (e) async {},
+      fetch: (e) async {
+        emit(
+          state.copyWith(
+            isFetching: true,
+            apiFailureOrSuccessOption: none(),
+            cartItem: PriceAggregate.empty(),
+          ),
+        );
+
+        final failureOrSuccess =
+            await materialPriceDetailRepository.getMaterialDetail(
+          materialNumber: e.materialNumber,
+          isComboDealMaterials: false,
+          customerCodeInfo: e.customerCode,
+          salesOrganisation: e.salesOrganisation,
+          salesOrganisationConfigs: e.salesOrganisationConfigs,
+          shipToCodeInfo: e.shipToCode,
+        );
+
+        await failureOrSuccess.fold(
+          (failure) async {
+            emit(
+              state.copyWith(
+                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+                isFetching: false,
+              ),
+            );
+          },
+          (materialPriceDetail) async {
+            add(
+              _SetCartItem(
+                PriceAggregate.empty().copyWith(
+                  materialInfo: materialPriceDetail.info,
+                  price: materialPriceDetail.price,
+                  salesOrgConfig: e.salesOrganisationConfigs,
+                  isSpecialOrderType: e.isSpecialOrderType,
+                ),
+              ),
+            );
+            add(
+              _UpdateQuantity(
+                1,
+                e.cartZmgQtyExcludeCurrent,
+              ),
+            );
+          },
+        );
+      },
       setCartItem: (e) async {
-        emit(state.copyWith(cartItem: e.cartItem));
+        emit(
+          state.copyWith(
+            cartItem: e.cartItem,
+            isFetching: false,
+          ),
+        );
       },
       updateQuantity: (e) async {
         final newDiscountedMaterialCount = _calculateDiscountedMaterialCount(
@@ -33,7 +97,6 @@ class AddToCartBloc extends Bloc<AddToCartEvent, AddToCartState> {
               quantity: e.quantity,
               discountedMaterialCount: newDiscountedMaterialCount,
             ),
-            quantity: e.quantity,
           ),
         );
       },

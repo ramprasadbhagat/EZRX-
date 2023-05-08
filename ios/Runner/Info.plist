@@ -59,8 +59,6 @@
 		<false/>
 		<key>ITSAppUsesNonExemptEncryption</key>
 		<false/>
-		<key>FlutterDeepLinkingEnabled</key>
-		<true/>
 		<key>CFBundleURLTypes</key>
 		<array>
 			<dict>
@@ -81,6 +79,16 @@
 				<key>CFBundleURLSchemes</key>
 				<array>
 					<string>ezrx</string>
+				</array>
+			</dict>
+			<dict>
+				<key>CFBundleTypeRole</key>
+				<string>Editor</string>
+				<key>CFBundleURLName</key>
+				<string>ezrxmobile.page.link</string>
+				<key>CFBundleURLSchemes</key>
+				<array>
+					<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 				</array>
 			</dict>
 		</array>
@@ -113,6 +121,6 @@
 		<key>UISupportsDocumentBrowser</key>
 		<true/>
 		<key>UIApplicationSupportsIndirectInputEvents</key>
-	<true/>
+		<true/>
 </dict>
 </plist>

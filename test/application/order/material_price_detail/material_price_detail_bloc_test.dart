@@ -326,7 +326,7 @@ void main() {
       ),
       setUp: () {
         when(
-          () => priceRepository.getMaterialDetail(
+          () => priceRepository.getMaterialDetailList(
             customerCodeInfo: fakeCustomerCodeInfo,
             salesOrganisation: fakeSaleOrg,
             salesOrganisationConfigs: fakeSaleOrgConfig,
@@ -430,7 +430,7 @@ void main() {
             ),
         setUp: () {
           when(
-            () => priceRepository.getMaterialDetail(
+            () => priceRepository.getMaterialDetailList(
               customerCodeInfo: fakeCustomerCodeInfo,
               salesOrganisation: fakeSaleOrg,
               salesOrganisationConfigs: fakeSaleOrgConfig,

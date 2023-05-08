@@ -6,7 +6,7 @@ import 'package:ezrxmobile/application/order/tender_contract/tender_contract_blo
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/update_cart.dart';
 import 'package:ezrxmobile/presentation/orders/cart/bonus/choose_bonus_sheet.dart';
@@ -16,6 +16,66 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CartBottomSheet {
+  static void showQuickAddToCartBottomSheet({
+    required BuildContext context,
+    required String materialNumber,
+  }) {
+    final cartState = context.read<CartBloc>().state;
+    final eligibilityState = context.read<EligibilityBloc>().state;
+    final isSpecialOrderType =
+        context.read<OrderDocumentTypeBloc>().state.isSpecialOrderType;
+
+    final material = PriceAggregate.empty().copyWith(
+      materialInfo: MaterialInfo.empty().copyWith(
+        materialNumber: MaterialNumber(materialNumber),
+      ),
+    );
+    final currentCartItem =
+        cartState.getMaterialCartItem(material: material).materials.first;
+    final isPresentInCart = currentCartItem != PriceAggregate.empty();
+
+    if (isPresentInCart) {
+      showUpdateCartBottomSheet(
+        context: context,
+        cartItem: currentCartItem,
+      );
+    } else {
+      showModalBottomSheet(
+        barrierColor: ZPColors.white,
+        context: context,
+        enableDrag: false,
+        isScrollControlled: true,
+        useSafeArea: true,
+        builder: (_) {
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider<TenderContractBloc>(
+                create: (context) => locator<TenderContractBloc>(),
+              ),
+              BlocProvider<AddToCartBloc>(
+                create: (context) => locator<AddToCartBloc>()
+                  ..add(
+                    AddToCartEvent.fetch(
+                      customerCode: eligibilityState.customerCodeInfo,
+                      salesOrganisation: eligibilityState.salesOrganisation,
+                      salesOrganisationConfigs:
+                          eligibilityState.salesOrgConfigs,
+                      shipToCode: eligibilityState.shipToInfo,
+                      materialNumber: material.getMaterialNumber,
+                      cartZmgQtyExcludeCurrent:
+                          cartState.zmgMaterialWithoutMaterial(material),
+                      isSpecialOrderType: isSpecialOrderType,
+                    ),
+                  ),
+              ),
+            ],
+            child: const AddToCart(isCovid19Tab: false),
+          );
+        },
+      );
+    }
+  }
+
   static void showAddToCartBottomSheet({
     required BuildContext context,
     required PriceAggregate priceAggregate,
@@ -28,7 +88,10 @@ class CartBottomSheet {
         .first;
     final isPresentInCart = currentCartItem != PriceAggregate.empty();
     if (isPresentInCart) {
-      showUpdateCartBottomSheet(context: context, cartItem: currentCartItem);
+      showUpdateCartBottomSheet(
+        context: context,
+        cartItem: currentCartItem,
+      );
     } else {
       final addToCartItem = priceAggregate.copyWith(
         isSpecialOrderType:
@@ -45,25 +108,7 @@ class CartBottomSheet {
           return MultiBlocProvider(
             providers: [
               BlocProvider<TenderContractBloc>(
-                create: (context) {
-                  final bloc = locator<TenderContractBloc>();
-                  final eligibilityBloc = context.read<EligibilityBloc>();
-                  if (priceAggregate.materialInfo.hasValidTenderContract) {
-                    bloc.add(
-                      TenderContractEvent.fetch(
-                        customerCodeInfo:
-                            eligibilityBloc.state.customerCodeInfo,
-                        salesOrganisation:
-                            eligibilityBloc.state.salesOrganisation,
-                        shipToInfo: eligibilityBloc.state.shipToInfo,
-                        materialInfo: priceAggregate.materialInfo,
-                        defaultSelectedTenderContract: TenderContract.empty(),
-                      ),
-                    );
-                  }
-
-                  return bloc;
-                },
+                create: (context) => locator<TenderContractBloc>(),
               ),
               BlocProvider<AddToCartBloc>(
                 create: (context) => locator<AddToCartBloc>()
@@ -116,24 +161,7 @@ class CartBottomSheet {
                 ),
             ),
             BlocProvider<TenderContractBloc>(
-              create: (context) {
-                final bloc = locator<TenderContractBloc>();
-                final eligibilityBloc = context.read<EligibilityBloc>();
-                if (cartItem.materialInfo.hasValidTenderContract) {
-                  bloc.add(
-                    TenderContractEvent.fetch(
-                      customerCodeInfo: eligibilityBloc.state.customerCodeInfo,
-                      salesOrganisation:
-                          eligibilityBloc.state.salesOrganisation,
-                      shipToInfo: eligibilityBloc.state.shipToInfo,
-                      materialInfo: cartItem.materialInfo,
-                      defaultSelectedTenderContract: cartItem.tenderContract,
-                    ),
-                  );
-                }
-
-                return bloc;
-              },
+              create: (context) => locator<TenderContractBloc>(),
             ),
           ],
           child: const UpdateCart(),

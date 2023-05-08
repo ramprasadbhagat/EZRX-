@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
@@ -14,10 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SelectContract extends StatelessWidget {
-  final MaterialInfo materialInfo;
-
-  const SelectContract({Key? key, required this.materialInfo})
-      : super(key: key);
+  const SelectContract({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +37,7 @@ class SelectContract extends StatelessWidget {
                 ),
           ),
           const SizedBox(height: 15),
-          TenderContractList(materialInfo: materialInfo),
+          const TenderContractList(),
         ],
       ),
     );
@@ -49,10 +45,7 @@ class SelectContract extends StatelessWidget {
 }
 
 class TenderContractList extends StatelessWidget {
-  final MaterialInfo materialInfo;
-
-  const TenderContractList({Key? key, required this.materialInfo})
-      : super(key: key);
+  const TenderContractList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

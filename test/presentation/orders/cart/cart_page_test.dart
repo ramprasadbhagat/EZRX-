@@ -990,6 +990,7 @@ void main() {
         ));
         when(() => addToCartBlocMock.state).thenReturn(
           AddToCartState.initial().copyWith(
+            isFetching: false,
             cartItem: PriceAggregate.empty().copyWith(
               materialInfo: MaterialInfo.empty().copyWith(
                 materialNumber: MaterialNumber('000000000023168451'),
@@ -1311,6 +1312,7 @@ void main() {
         );
         when(() => addToCartBlocMock.state).thenReturn(
           AddToCartState.initial().copyWith(
+            isFetching: false,
             cartItem: PriceAggregate.empty().copyWith(
               price: Price.empty().copyWith(
                 tiers: [
@@ -1645,6 +1647,7 @@ void main() {
             ]));
         when(() => addToCartBlocMock.state).thenReturn(
           AddToCartState.initial().copyWith(
+            isFetching: false,
             cartItem: mockCartItemBundles.first.copyWith(
               materialInfo: MaterialInfo.empty().copyWith(
                   hasValidTenderContract: true,
@@ -1715,6 +1718,7 @@ void main() {
             ]));
         when(() => addToCartBlocMock.state).thenReturn(
           AddToCartState.initial().copyWith(
+            isFetching: false,
             cartItem: mockCartItemBundles.first.copyWith(
               materialInfo: MaterialInfo.empty().copyWith(
                   hasValidTenderContract: true,

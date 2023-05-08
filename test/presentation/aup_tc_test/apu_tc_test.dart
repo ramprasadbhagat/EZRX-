@@ -9,6 +9,7 @@ import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.dart';
+import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
@@ -72,6 +73,9 @@ class OrderDocumentTypeMockBloc
     extends MockBloc<OrderDocumentTypeEvent, OrderDocumentTypeState>
     implements OrderDocumentTypeBloc {}
 
+class DeepLinkingMockBloc extends MockBloc<DeepLinkingEvent, DeepLinkingState>
+    implements DeepLinkingBloc {}
+
 void main() {
   late GetIt locator;
   late SalesOrgBloc mockSalesOrgBloc;
@@ -85,6 +89,7 @@ void main() {
   late EligibilityBloc eligibilityBlocMock;
   late ResetPasswordBloc resetPasswordBlocMock;
   late OrderDocumentTypeBloc orderDocumentTypeBlocMock;
+  late DeepLinkingBloc deepLinkingBlocMock;
 
   setUpAll(() async {
     setupLocator();
@@ -124,6 +129,7 @@ void main() {
     resetPasswordBlocMock = ResetPasswordMockBloc();
     orderDocumentTypeBlocMock = OrderDocumentTypeMockBloc();
     announcementBlocMock = AnnouncementBlocMock();
+    deepLinkingBlocMock = DeepLinkingMockBloc();
     when(() => userBlocMock.state).thenReturn(UserState.initial());
 
     when(() => cartBlocMock.state).thenReturn(CartState.initial());
@@ -139,6 +145,8 @@ void main() {
     when(() => authBlocMock.state).thenReturn(const AuthState.initial());
     when(() => announcementBlocMock.state)
         .thenReturn(AnnouncementState.initial());
+    when(() => deepLinkingBlocMock.state)
+        .thenReturn(const DeepLinkingState.initial());
   });
 
   group('AupTc Widget Show hide base on state.showTermsAndConditon true', () {
@@ -229,6 +237,9 @@ void main() {
             ),
             BlocProvider<AnnouncementBloc>(
               create: (context) => announcementBlocMock,
+            ),
+            BlocProvider<DeepLinkingBloc>(
+              create: (context) => deepLinkingBlocMock,
             ),
           ],
           child: const SplashPage(),

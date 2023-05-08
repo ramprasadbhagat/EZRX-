@@ -32,7 +32,6 @@ class BalanceTextRow extends StatelessWidget {
         vertical: 2.0,
       ),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
             flex: keyFlex,

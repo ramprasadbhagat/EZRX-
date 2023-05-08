@@ -145,7 +145,7 @@ class MaterialPriceDetailBloc
             return;
           }
 
-          final failureOrSuccess = await priceRepository.getMaterialDetail(
+          final failureOrSuccess = await priceRepository.getMaterialDetailList(
             salesOrganisation: e.salesOrganisation,
             salesOrganisationConfigs: e.salesOrganisationConfigs,
             customerCodeInfo: e.customerCode,
@@ -199,7 +199,7 @@ class MaterialPriceDetailBloc
             emit: emit,
           );
 
-          final failureOrSuccess = await priceRepository.getMaterialDetail(
+          final failureOrSuccess = await priceRepository.getMaterialDetailList(
             salesOrganisation: e.salesOrganisation,
             salesOrganisationConfigs: e.salesOrganisationConfigs,
             customerCodeInfo: e.customerCode,

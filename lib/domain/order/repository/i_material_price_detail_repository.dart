@@ -6,10 +6,21 @@ import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/material_price_detail.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 
 abstract class IMaterialPriceDetailRepository {
-  Future<Either<ApiFailure, Map<MaterialQueryInfo, MaterialPriceDetail>>>
+  Future<Either<ApiFailure, MaterialPriceDetail>>
       getMaterialDetail({
+    required SalesOrganisation salesOrganisation,
+    required SalesOrganisationConfigs salesOrganisationConfigs,
+    required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToCodeInfo,
+    required MaterialNumber materialNumber,
+    bool isComboDealMaterials = false,
+  });
+
+  Future<Either<ApiFailure, Map<MaterialQueryInfo, MaterialPriceDetail>>>
+      getMaterialDetailList({
     required SalesOrganisation salesOrganisation,
     required SalesOrganisationConfigs salesOrganisationConfigs,
     required CustomerCodeInfo customerCodeInfo,
@@ -19,7 +30,7 @@ abstract class IMaterialPriceDetailRepository {
   });
 
   Future<Either<ApiFailure, List<MaterialPriceDetail>>>
-      getMaterialDetailZDP5Enabled({
+      getMaterialDetailListWithZDP5Enabled({
     required SalesOrganisation salesOrganisation,
     required SalesOrganisationConfigs salesOrganisationConfigs,
     required CustomerCodeInfo customerCodeInfo,

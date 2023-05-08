@@ -135,6 +135,7 @@ class QuantityIconShimmer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         LoadingShimmer.withChild(
           child: QuantityIcon(

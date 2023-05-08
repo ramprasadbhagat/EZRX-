@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_material_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_list_bloc.dart';
 import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
@@ -341,6 +342,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider<ReturnSummaryDetailsBloc>(
           create: (context) => locator<ReturnSummaryDetailsBloc>(),
+        ),
+        BlocProvider<DeepLinkingBloc>(
+          create: (context) => locator<DeepLinkingBloc>(),
         ),
       ],
       child: MaterialApp.router(

@@ -11,6 +11,7 @@ import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
 import 'package:ezrxmobile/application/auth/proxy_login/proxy_login_form_bloc.dart';
 import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.dart';
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
+import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/application/favourites/favourite_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
@@ -37,6 +38,7 @@ import 'package:ezrxmobile/application/returns/return_request_type_code/return_r
 import 'package:ezrxmobile/infrastructure/core/common/file_path_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/order_storage.dart';
+import 'package:ezrxmobile/infrastructure/deep_linking/repository/deep_linking_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/combo_deal_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/combo_deal_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/combo_deal_remote.dart';
@@ -273,12 +275,6 @@ void setupLocator() {
     () => OktaLoginServices(config: locator<Config>()),
   );
 
-  locator.registerLazySingleton(
-    () => DynamicLinksService(
-      config: locator<Config>(),
-      appRouter: locator<AppRouter>(),
-    ),
-  );
   locator.registerLazySingleton(() => PerformanceMonitorService());
   locator.registerLazySingleton(() => FirebaseAnalyticsService(
         analytics: FirebaseAnalytics.instance,
@@ -1473,7 +1469,9 @@ void setupLocator() {
   //============================================================
 
   locator.registerFactory(
-    () => AddToCartBloc(),
+    () => AddToCartBloc(
+      materialPriceDetailRepository: locator<MaterialPriceDetailRepository>(),
+    ),
   );
 
   locator.registerLazySingleton(() => StockInfoLocalDataSource());
@@ -1772,6 +1770,28 @@ void setupLocator() {
       httpService: locator<HttpService>(),
       requestInformationQuery: locator<RequestInformationQuery>(),
       dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+    ),
+  );
+
+  //============================================================
+  // Deep Linking
+  //
+  //============================================================
+  locator.registerLazySingleton(
+    () => DynamicLinksService(
+      config: locator<Config>(),
+      appRouter: locator<AppRouter>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => DeepLinkingRepository(),
+  );
+
+  locator.registerLazySingleton(
+    () => DeepLinkingBloc(
+      repository: locator<DeepLinkingRepository>(),
+      service: locator<DynamicLinksService>(),
     ),
   );
 }

@@ -9,6 +9,7 @@ import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/material_price_detail.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/repository/i_material_price_detail_repository.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_price_detail_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_price_detail_remote.dart';
 
@@ -24,8 +25,36 @@ class MaterialPriceDetailRepository implements IMaterialPriceDetailRepository {
   });
 
   @override
+  Future<Either<ApiFailure, MaterialPriceDetail>> getMaterialDetail({
+    required SalesOrganisation salesOrganisation,
+    required SalesOrganisationConfigs salesOrganisationConfigs,
+    required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToCodeInfo,
+    required MaterialNumber materialNumber,
+    bool isComboDealMaterials = false,
+  }) async {
+    final queryInfo = MaterialQueryInfo.empty().copyWith(
+      value: materialNumber,
+    );
+    final materialDetailList = await getMaterialDetailList(
+      salesOrganisation: salesOrganisation,
+      salesOrganisationConfigs: salesOrganisationConfigs,
+      customerCodeInfo: customerCodeInfo,
+      shipToCodeInfo: shipToCodeInfo,
+      materialQueryList: [queryInfo],
+    );
+
+    return materialDetailList.fold(
+      (failure) => Left(failure),
+      (materialDetailMap) => Right(
+        materialDetailMap[queryInfo] ?? MaterialPriceDetail.empty(),
+      ),
+    );
+  }
+
+  @override
   Future<Either<ApiFailure, Map<MaterialQueryInfo, MaterialPriceDetail>>>
-      getMaterialDetail({
+      getMaterialDetailList({
     required SalesOrganisation salesOrganisation,
     required SalesOrganisationConfigs salesOrganisationConfigs,
     required CustomerCodeInfo customerCodeInfo,
@@ -123,7 +152,8 @@ class MaterialPriceDetailRepository implements IMaterialPriceDetailRepository {
           ): data,
       };
 
-      final materialDetailZDP5EnabledMap = await getMaterialDetailZDP5Enabled(
+      final materialDetailZDP5EnabledMap =
+          await getMaterialDetailListWithZDP5Enabled(
         salesOrganisation: salesOrganisation,
         salesOrganisationConfigs: salesOrganisationConfigs,
         customerCodeInfo: customerCodeInfo,
@@ -150,7 +180,7 @@ class MaterialPriceDetailRepository implements IMaterialPriceDetailRepository {
 
   @override
   Future<Either<ApiFailure, List<MaterialPriceDetail>>>
-      getMaterialDetailZDP5Enabled({
+      getMaterialDetailListWithZDP5Enabled({
     required SalesOrganisation salesOrganisation,
     required SalesOrganisationConfigs salesOrganisationConfigs,
     required CustomerCodeInfo customerCodeInfo,

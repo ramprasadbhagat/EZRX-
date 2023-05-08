@@ -1,18 +1,20 @@
+import 'dart:async';
+
+import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 
 class DynamicLinksService {
   static final _dynamicLinks = FirebaseDynamicLinks.instance;
   final Config config;
   final AppRouter appRouter;
 
-  DynamicLinksService({required this.config, required this.appRouter}) {
-    _initDynamicLinks();
-  }
+  DynamicLinksService({required this.config, required this.appRouter});
 
-  Future<void> _initDynamicLinks() async {
+  Future<StreamSubscription> initDynamicLinks() async {
     // 1. Get the initial dynamic link if the app is opened with a dynamic link
     final data = await _dynamicLinks.getInitialLink();
 
@@ -21,10 +23,8 @@ class DynamicLinksService {
 
     // 3. Register a link callback to fire if the app is opened up from the background
     // using a dynamic link.
-    _dynamicLinks.onLink.listen((PendingDynamicLinkData data) {
+    return _dynamicLinks.onLink.listen((PendingDynamicLinkData data) {
       _handleDeepLink(data);
-    }).onError((error) {
-      debugPrint('Link Failed: ${error.message}');
     });
   }
 
@@ -33,6 +33,9 @@ class DynamicLinksService {
     if (deepLink != null) {
       // appRouter.pushNamed(message.data['route_name']);
       debugPrint('_handleDeepLink | deeplink: $deepLink');
+      locator<DeepLinkingBloc>().add(
+        DeepLinkingEvent.addPendingLink(deepLink),
+      );
     }
   }
 

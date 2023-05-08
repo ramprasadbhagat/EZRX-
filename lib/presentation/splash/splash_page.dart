@@ -1,10 +1,13 @@
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
+import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/deep_linking/error/redirect_failures.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/application/returns/returns_overview/returns_overview_bloc.dart';
+import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/cart_bottom_sheet.dart';
 import 'package:universal_io/io.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -362,6 +365,41 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                     ),
                   );
             }
+
+            context.read<DeepLinkingBloc>().add(
+                  const DeepLinkingEvent.initialize(),
+                );
+          },
+        ),
+        BlocListener<DeepLinkingBloc, DeepLinkingState>(
+          listener: (context, state) {
+            state.when(
+              initial: () {},
+              linkPending: (_) {
+                final eligibilityState = context.read<EligibilityBloc>().state;
+
+                context.read<DeepLinkingBloc>().add(
+                      DeepLinkingEvent.consumePendingLink(
+                        selectedSalesOrganisation:
+                            eligibilityState.salesOrganisation,
+                        selectedCustomerCode: eligibilityState.customerCodeInfo,
+                        selectedShipTo: eligibilityState.shipToInfo,
+                      ),
+                    );
+              },
+              redirectMaterialDetail: (materialNumber) {
+                CartBottomSheet.showQuickAddToCartBottomSheet(
+                  context: context,
+                  materialNumber: materialNumber,
+                );
+              },
+              error: (error) {
+                showSnackBar(
+                  context: context,
+                  message: error.failureMessage.tr(),
+                );
+              },
+            );
           },
         ),
         BlocListener<OrderDocumentTypeBloc, OrderDocumentTypeState>(

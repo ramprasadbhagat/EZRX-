@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
@@ -24,75 +23,43 @@ class AddToCartButton extends StatelessWidget {
     required this.cartItem,
   }) : super(key: key);
 
-  bool isSelectedTenderContractValid(BuildContext context) {
-    final cartItems = context.read<CartBloc>().state.cartItems.allMaterials;
-    final tenderContractInCart = cartItems.isEmpty
-        ? TenderContract.empty()
-        : cartItems
-            .firstWhere(
-              (element) => element.tenderContract.tenderOrderReason.is730,
-              orElse: () => cartItems.first,
-            )
-            .tenderContract;
-    final selectedTenderContractReason = context
-        .read<TenderContractBloc>()
-        .state
-        .selectedTenderContract
-        .tenderOrderReason;
-    final tenderContractInCartReason = tenderContractInCart.tenderOrderReason;
-
-    return cartItems.isEmpty
-        ? true
-        : ((tenderContractInCartReason.is730 ==
-                selectedTenderContractReason.is730) ||
-            (!tenderContractInCartReason.is730 ==
-                !selectedTenderContractReason.is730));
-  }
-
-  bool isValidQuantitySelected(BuildContext context) {
-    final selectedQuantity = cartItem.quantity;
-    final selectedTenderContract =
-        context.read<TenderContractBloc>().state.selectedTenderContract;
-
-    return selectedTenderContract == TenderContract.empty() ||
-        selectedTenderContract == TenderContract.noContract() ||
-        selectedQuantity <= selectedTenderContract.remainingTenderQuantity;
-  }
-
   @override
   Widget build(BuildContext context) {
-    final userCanCreateOrder =
-        context.read<UserBloc>().state.userCanCreateOrder;
-
     return BlocBuilder<TenderContractBloc, TenderContractState>(
       buildWhen: (previous, current) =>
           previous.selectedTenderContract != current.selectedTenderContract,
       builder: (builderContext, state) {
         return Column(
           children: [
-            isSelectedTenderContractValid(context)
-                ? const SizedBox.shrink()
-                : const Text(
-                    'Tender material 730 cannot be combined with any other material in the cart.',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: ZPColors.red,
-                    ),
-                  ),
-            if (userCanCreateOrder)
+            if (!_isSelectedTenderContractValid(
+              context: context,
+              selectedContract: state.selectedTenderContract,
+            ))
+              const Text(
+                'Tender material 730 cannot be combined with any other material in the cart.',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: ZPColors.red,
+                ),
+              ),
+            if (context.read<UserBloc>().state.userCanCreateOrder)
               SafeArea(
                 child: ElevatedButton(
                   key: const Key('addMaterialToCart'),
-                  style: isAddToCartAllowed &&
-                          isSelectedTenderContractValid(context) &&
-                          isValidQuantitySelected(context)
+                  style: _buttonEnabled(
+                    context: context,
+                    isFetching: state.isFetching,
+                    selectedContract: state.selectedTenderContract,
+                  )
                       ? null
                       : ElevatedButton.styleFrom(
                           backgroundColor: ZPColors.lightGray,
                         ),
-                  onPressed: () => isAddToCartAllowed &&
-                          isSelectedTenderContractValid(context) &&
-                          isValidQuantitySelected(context)
+                  onPressed: () => _buttonEnabled(
+                    context: context,
+                    isFetching: state.isFetching,
+                    selectedContract: state.selectedTenderContract,
+                  )
                       ? _addToCart(context, cartItem)
                       : null,
                   child: const Text('Add to Cart').tr(),
@@ -102,6 +69,52 @@ class AddToCartButton extends StatelessWidget {
         );
       },
     );
+  }
+
+  bool _buttonEnabled({
+    required BuildContext context,
+    required TenderContract selectedContract,
+    required bool isFetching,
+  }) {
+    return _isSelectedTenderContractValid(
+          context: context,
+          selectedContract: selectedContract,
+        ) &&
+        _isValidQuantitySelected(
+          selectedContract: selectedContract,
+        ) &&
+        !isFetching &&
+        isAddToCartAllowed;
+  }
+
+  bool _isSelectedTenderContractValid({
+    required BuildContext context,
+    required TenderContract selectedContract,
+  }) {
+    final cartItems = context.read<CartBloc>().state.cartItems.allMaterials;
+    final tenderContractInCart = cartItems.isEmpty
+        ? TenderContract.empty()
+        : cartItems
+            .firstWhere(
+              (element) => element.tenderContract.tenderOrderReason.is730,
+              orElse: () => cartItems.first,
+            )
+            .tenderContract;
+    final selectedTenderContractReason = selectedContract.tenderOrderReason;
+    final tenderContractInCartReason = tenderContractInCart.tenderOrderReason;
+
+    return cartItems.isEmpty
+        ? true
+        : tenderContractInCartReason.is730 ==
+            selectedTenderContractReason.is730;
+  }
+
+  bool _isValidQuantitySelected({
+    required TenderContract selectedContract,
+  }) {
+    return selectedContract == TenderContract.empty() ||
+        selectedContract == TenderContract.noContract() ||
+        cartItem.quantity <= selectedContract.remainingTenderQuantity;
   }
 
   void _addToCart(BuildContext context, PriceAggregate selectedCartItem) {
@@ -151,7 +164,7 @@ class AddToCartButton extends StatelessWidget {
               customerCodeInfo: eligibilityState.customerCodeInfo,
               salesOrganisation: eligibilityState.salesOrganisation,
               salesOrganisationConfigs: eligibilityState.salesOrgConfigs,
-              shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+              shipToInfo: eligibilityState.shipToInfo,
               doNotallowOutOfStockMaterial:
                   eligibilityState.doNotAllowOutOfStockMaterials,
               isSpecialOrderType: context
