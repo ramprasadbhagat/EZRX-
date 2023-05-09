@@ -274,13 +274,13 @@ void main() {
     Widget getScopedWidget(Widget child) {
       return EasyLocalization(
         supportedLocales: const [
-          Locale('en', 'SG'),
+          Locale('en'),
         ],
         path: 'assets/langs/langs.csv',
-        startLocale: const Locale('en', 'SG'),
-        fallbackLocale: const Locale('en', 'SG'),
+        startLocale: const Locale('en'),
+        fallbackLocale: const Locale('en'),
         saveLocale: true,
-        useOnlyLangCode: false,
+        useOnlyLangCode: true,
         assetLoader: CsvAssetLoader(),
         child: WidgetUtils.getScopedWidget(
           autoRouterMock: autoRouterMock,
@@ -922,8 +922,7 @@ void main() {
       expect(find.text(fakeKey), findsNWidgets(2));
     });
 
-    testWidgets(
-        'Please enter at least 2 characters. with clear icon tapped',
+    testWidgets('Please enter at least 2 characters. with clear icon tapped',
         (WidgetTester tester) async {
       final expectedCustomerCodeListStates = [
         CovidMaterialListState.initial().copyWith(isFetching: true),
@@ -953,8 +952,7 @@ void main() {
       expect(textField, findsOneWidget);
       await tester.pump(const Duration(seconds: 2));
 
-      expect(find.text('Please enter at least 2 characters.'),
-          findsOneWidget);
+      expect(find.text('Please enter at least 2 characters.'), findsOneWidget);
       final iconsClear = find.byIcon(Icons.clear);
       expect(iconsClear, findsOneWidget);
       await tester.tap(iconsClear);

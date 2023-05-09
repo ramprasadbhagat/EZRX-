@@ -219,6 +219,7 @@ String salesOrgCountry(String salesOrg) {
     '3152': 'KR',
     '3153': 'KR',
     '1500': 'KH',
+    '1501': 'KH',
   };
 
   return salesOrgCountryMap[salesOrg] ?? 'Unknown';

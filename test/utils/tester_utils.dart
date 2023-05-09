@@ -17,6 +17,7 @@ class TesterUtils {
     bool isAutoRouteEnabled = false,
     AppRouter? autoRouterMock,
     List<BlocProvider<StateStreamableSource<Object?>>>? providers,
+    List<Locale>? supportedLocales,
   }) async {
     await tester.runAsync(() async {
       SharedPreferences.setMockInitialValues({});
@@ -25,24 +26,25 @@ class TesterUtils {
       EasyLocalization.logger.enableLevels = [];
       await tester.pumpWidget(
         EasyLocalization(
-          supportedLocales: [
-            locale,
-          ],
+          supportedLocales: supportedLocales ??
+              [
+                locale,
+              ],
           path: 'assets/langs/langs.csv',
           startLocale: locale,
           fallbackLocale: locale,
           saveLocale: true,
-          useOnlyLangCode: false,
+          useOnlyLangCode: true,
           assetLoader: CsvAssetLoader(),
           child: isAutoRouteEnabled
               ? MaterialFrameWrapper(
-                usingLocalization: true,
-                child: WidgetUtils.getScopedWidget(
+                  usingLocalization: true,
+                  child: WidgetUtils.getScopedWidget(
                     autoRouterMock: autoRouterMock!,
                     providers: providers!,
                     child: home,
                   ),
-              )
+                )
               : MaterialFrameWrapper(
                   usingLocalization: true,
                   child: home,

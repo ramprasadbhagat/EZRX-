@@ -243,13 +243,13 @@ void main() {
         return await tester.pumpWidget(
           EasyLocalization(
             supportedLocales: const [
-              Locale('en', 'SG'),
+              Locale('en'),
             ],
             path: 'assets/langs/langs.csv',
-            startLocale: const Locale('en', 'SG'),
-            fallbackLocale: const Locale('en', 'SG'),
+            startLocale: const Locale('en'),
+            fallbackLocale: const Locale('en'),
             saveLocale: true,
-            useOnlyLangCode: false,
+            useOnlyLangCode: true,
             assetLoader: CsvAssetLoader(),
             child: WidgetUtils.getScopedWidget(
               autoRouterMock: autoRouterMock,
@@ -331,8 +331,6 @@ void main() {
           expect(paymentsExpansionTile, findsNothing);
         },
       );
-
-     
 
       testWidgets(
         'Home Screen orders is disabled, history is enabled when user is client admin/user, accessRight->orders is true and disableCreateOrder is true',

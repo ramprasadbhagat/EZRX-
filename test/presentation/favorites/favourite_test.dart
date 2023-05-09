@@ -73,7 +73,6 @@ class AddToCartBlocMock extends MockBloc<AddToCartEvent, AddToCartState>
 class OrderDocumentTypeBlocMock
     extends MockBloc<OrderDocumentTypeEvent, OrderDocumentTypeState>
     implements OrderDocumentTypeBloc {}
-    
 
 void main() {
   var mockFavouriteBloc = MockFavouriteBloc();
@@ -156,13 +155,13 @@ void main() {
       Widget getFavoritePage() {
         return EasyLocalization(
           supportedLocales: const [
-            Locale('en', 'SG'),
+            Locale('en'),
           ],
           path: 'assets/langs/langs.csv',
-          startLocale: const Locale('en', 'SG'),
-          fallbackLocale: const Locale('en', 'SG'),
+          startLocale: const Locale('en'),
+          fallbackLocale: const Locale('en'),
           saveLocale: true,
-          useOnlyLangCode: false,
+          useOnlyLangCode: true,
           assetLoader: CsvAssetLoader(),
           child: MaterialFrameWrapper(
             child: MultiBlocProvider(

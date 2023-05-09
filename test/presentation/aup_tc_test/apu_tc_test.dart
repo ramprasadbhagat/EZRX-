@@ -325,7 +325,7 @@ void main() {
     await TesterUtils.setUpLocalizationWrapper(
         tester: tester,
         home: const SettingsPage(),
-        locale: const Locale('en', 'SG'),
+        locale: const Locale('en'),
         isAutoRouteEnabled: true,
         autoRouterMock: autoRouterMock,
         providers: [
@@ -337,6 +337,9 @@ void main() {
           ),
           BlocProvider<AnnouncementBloc>(
             create: (context) => announcementBlocMock,
+          ),
+          BlocProvider<SalesOrgBloc>(
+            create: (context) => mockSalesOrgBloc,
           ),
         ]);
     await tester.pump();
@@ -370,7 +373,7 @@ void main() {
     await TesterUtils.setUpLocalizationWrapper(
         tester: tester,
         home: const SettingsPage(),
-        locale: const Locale('en', 'SG'),
+        locale: const Locale('en'),
         isAutoRouteEnabled: true,
         autoRouterMock: autoRouterMock,
         providers: [
@@ -392,7 +395,7 @@ void main() {
     await TesterUtils.setUpLocalizationWrapper(
         tester: tester,
         home: const SettingsPage(),
-        locale: const Locale('en', 'SG'),
+        locale: const Locale('en'),
         isAutoRouteEnabled: true,
         autoRouterMock: autoRouterMock,
         providers: [
@@ -417,7 +420,7 @@ void main() {
     await TesterUtils.setUpLocalizationWrapper(
         tester: tester,
         home: const SettingsPage(),
-        locale: const Locale('en', 'SG'),
+        locale: const Locale('en'),
         isAutoRouteEnabled: true,
         autoRouterMock: autoRouterMock,
         providers: [
@@ -439,7 +442,7 @@ void main() {
     await TesterUtils.setUpLocalizationWrapper(
         tester: tester,
         home: const SettingsPage(),
-        locale: const Locale('en', 'SG'),
+        locale: const Locale('en'),
         isAutoRouteEnabled: true,
         autoRouterMock: autoRouterMock,
         providers: [

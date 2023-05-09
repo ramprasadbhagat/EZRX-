@@ -72,7 +72,7 @@ void main() {
       return TesterUtils.setUpLocalizationWrapper(
         tester: tester,
         home: home,
-        locale: const Locale('en', 'SG'),
+        locale: const Locale('en'),
         isAutoRouteEnabled: true,
         autoRouterMock: autoRouterMock,
         providers: [

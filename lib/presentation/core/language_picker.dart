@@ -17,62 +17,36 @@ class LanguagePicker extends StatelessWidget {
       actions: <Widget>[
         PlatformDialogAction(
           key: const Key('englishLanguageTile'),
-          child: Text(const Locale('en', 'SG').languageString()),
-          onPressed: () => _returnCurrentLocale(
-            languageCode: 'en',
-            countryCode: 'SG',
-          ),
+          child: Text(const Locale('en').languageString()),
+          onPressed: () => onPressed(const Locale('en')),
         ),
         PlatformDialogAction(
           key: const Key('thaiLanguageTile'),
-          child: Text(const Locale('th', 'TH').languageString()),
-          onPressed: () => _returnCurrentLocale(
-            languageCode: 'th',
-            countryCode: 'TH',
-          ),
+          child: Text(const Locale('th').languageString()),
+          onPressed: () => onPressed(const Locale('th')),
         ),
         PlatformDialogAction(
           key: const Key('mandarinLanguageTile'),
-          child: Text(const Locale('zh', 'TW').languageString()),
-          onPressed: () => _returnCurrentLocale(
-            languageCode: 'zh',
-            countryCode: 'TW',
-          ),
+          child: Text(const Locale('zh').languageString()),
+          onPressed: () => onPressed(const Locale('zh')),
         ),
         PlatformDialogAction(
           key: const Key('burmeseLanguageTile'),
-          child: Text(const Locale('my', 'MY').languageString()),
-          onPressed: () => _returnCurrentLocale(
-            languageCode: 'my',
-            countryCode: 'MY',
-          ),
+          child: Text(const Locale('my').languageString()),
+          onPressed: () => onPressed(const Locale('my')),
         ),
         PlatformDialogAction(
           key: const Key('vietnameseLanguageTile'),
-          child: Text(const Locale('vi', 'VN').languageString()),
-          onPressed: () => _returnCurrentLocale(
-            languageCode: 'vi',
-            countryCode: 'VN',
-          ),
+          child: Text(const Locale('vi').languageString()),
+          onPressed: () => onPressed(const Locale('vi')),
         ),
         PlatformDialogAction(
           key: const Key('khmerLanguageTile'),
-          child: Text(const Locale('km', 'KH').languageString()),
-          onPressed: () => _returnCurrentLocale(
-            languageCode: 'km',
-            countryCode: 'KH',
-          ),
+          child: Text(const Locale('km').languageString()),
+          onPressed: () => onPressed(const Locale('km')),
         ),
       ],
     );
-  }
-
-  void _returnCurrentLocale({
-    required String languageCode,
-    required String countryCode,
-  }) {
-    final locale = Locale(languageCode, countryCode);
-    onPressed(locale);
   }
 }
 

@@ -216,13 +216,13 @@ void main() {
       [List<BlocProvider> additionalProviders = const []]) {
     return EasyLocalization(
       supportedLocales: const [
-        Locale('en', 'SG'),
+        Locale('en'),
       ],
       path: 'assets/langs/langs.csv',
-      startLocale: const Locale('en', 'SG'),
-      fallbackLocale: const Locale('en', 'SG'),
+      startLocale: const Locale('en'),
+      fallbackLocale: const Locale('en'),
       saveLocale: true,
-      useOnlyLangCode: false,
+      useOnlyLangCode: true,
       assetLoader: CsvAssetLoader(),
       child: WidgetUtils.getScopedWidget(
         autoRouterMock: autoRouterMock,

@@ -51,13 +51,13 @@ void main() {
   Widget getWUT(Widget widget) {
     return EasyLocalization(
       supportedLocales: const [
-        Locale('en', 'SG'),
+        Locale('en'),
       ],
       path: 'assets/langs/langs.csv',
-      startLocale: const Locale('en', 'SG'),
-      fallbackLocale: const Locale('en', 'SG'),
+      startLocale: const Locale('en'),
+      fallbackLocale: const Locale('en'),
       saveLocale: true,
-      useOnlyLangCode: false,
+      useOnlyLangCode: true,
       assetLoader: CsvAssetLoader(),
       child: WidgetUtils.getScopedWidget(
         autoRouterMock: autoRouterMock,
@@ -79,7 +79,7 @@ void main() {
       // arrange
       when(() => orderHistoryDetailsBloc.state).thenReturn(
           OrderHistoryDetailsState.initial().copyWith(isLoading: false));
-     
+
       const fakeInstructions = 'Special instructions test';
       when(() => orderHistoryDetailsBloc.state).thenReturn(
           OrderHistoryDetailsState.initial().copyWith(
@@ -100,8 +100,7 @@ void main() {
       expect(noteText, findsOneWidget);
     });
 
-    testWidgets('should display Reference Note',
-        (WidgetTester tester) async {
+    testWidgets('should display Reference Note', (WidgetTester tester) async {
       // arrange
       when(() => orderHistoryDetailsBloc.state).thenReturn(
           OrderHistoryDetailsState.initial().copyWith(isLoading: false));
@@ -124,6 +123,5 @@ void main() {
       // assert
       expect(noteText, findsOneWidget);
     });
-
   });
 }

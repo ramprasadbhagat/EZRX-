@@ -147,17 +147,17 @@ void runAppWithCrashlyticsAndLocalization() {
     () => runApp(
       EasyLocalization(
         supportedLocales: const [
-          Locale('en', 'SG'),
-          Locale('th', 'TH'),
-          Locale('zh', 'TW'),
-          Locale('my', 'MY'),
-          Locale('vi', 'VN'),
-          Locale('km', 'KH'),
+          Locale('en'),
+          Locale('th'),
+          Locale('zh'),
+          Locale('my'),
+          Locale('vi'),
+          Locale('km'),
         ],
         path: 'assets/langs/langs.csv',
-        fallbackLocale: const Locale('en', 'SG'),
+        fallbackLocale: const Locale('en'),
         saveLocale: true,
-        useOnlyLangCode: false,
+        useOnlyLangCode: true,
         assetLoader: CsvAssetLoader(),
         child: Sizer(
           builder: (context, orientation, deviceType) {
