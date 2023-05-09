@@ -21,47 +21,17 @@ class HomeNavigationTabbar extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.showTermsAndConditon != current.showTermsAndConditon,
       builder: (context, state) {
+        final orientation = MediaQuery.of(context).orientation;
+        
         return state.showTermsAndConditon
             ? const AupTCDialog(
                 key: ValueKey('auptcscreen'),
               )
             : WillPopScope(
                 onWillPop: () async => false,
-                child: SizerUtil.deviceType == DeviceType.mobile
+                child: SizerUtil.deviceType != DeviceType.mobile &&
+                orientation == Orientation.landscape
                     ? BlocBuilder<UserBloc, UserState>(
-                        buildWhen: (previous, current) => previous != current,
-                        builder: (context, state) {
-                          return AutoTabsScaffold(
-                            lazyLoad: false,
-                            routes: _getTabs(context)
-                                .map((item) => item.route)
-                                .toList(),
-                            bottomNavigationBuilder: (_, tabsRouter) {
-                              return BottomNavigationBar(
-                                key: const Key('homeTabbar'),
-                                currentIndex: tabsRouter.activeIndex,
-                                onTap: (index) {
-                                  _trackEvents(
-                                    context: context,
-                                    index: index,
-                                  );
-
-                                  tabsRouter.setActiveIndex(index);
-                                },
-                                items: _getTabs(context)
-                                    .map(
-                                      (item) => BottomNavigationBarItem(
-                                        icon: item.icon,
-                                        label: item.label.tr(),
-                                      ),
-                                    )
-                                    .toList(),
-                              );
-                            },
-                          );
-                        },
-                      )
-                    : BlocBuilder<UserBloc, UserState>(
                         buildWhen: (previous, current) => previous != current,
                         builder: (context, state) {
                           return AutoTabsRouter(
@@ -105,6 +75,38 @@ class HomeNavigationTabbar extends StatelessWidget {
                                   ),
                                   Expanded(child: child),
                                 ],
+                              );
+                            },
+                          );
+                        },
+                      )
+                    : BlocBuilder<UserBloc, UserState>(
+                        buildWhen: (previous, current) => previous != current,
+                        builder: (context, state) {
+                          return AutoTabsScaffold(
+                            lazyLoad: false,
+                            routes: _getTabs(context)
+                                .map((item) => item.route)
+                                .toList(),
+                            bottomNavigationBuilder: (_, tabsRouter) {
+                              return BottomNavigationBar(
+                                key: const Key('homeTabbar'),
+                                currentIndex: tabsRouter.activeIndex,
+                                onTap: (index) {
+                                  _trackEvents(
+                                    context: context,
+                                    index: index,
+                                  );
+                                  tabsRouter.setActiveIndex(index);
+                                },
+                                items: _getTabs(context)
+                                    .map(
+                                      (item) => BottomNavigationBarItem(
+                                        icon: item.icon,
+                                        label: item.label.tr(),
+                                      ),
+                                    )
+                                    .toList(),
                               );
                             },
                           );

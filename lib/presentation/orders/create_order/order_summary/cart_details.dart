@@ -103,6 +103,7 @@ class _CartItemsSection extends StatelessWidget {
         );
 
         return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Disclaimer(),
             BalanceTextRow(
