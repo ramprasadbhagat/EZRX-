@@ -1,4 +1,3 @@
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
@@ -15,7 +14,6 @@ import 'package:ezrxmobile/presentation/orders/core/account_suspended_warning.da
 import 'package:ezrxmobile/presentation/orders/core/edi_user_banner.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:ezrxmobile/locator.dart';
@@ -28,6 +26,7 @@ class HomeTab extends StatelessWidget {
     trackMixpanelEvent(
       MixpanelEvents.homePageView,
     );
+    final configService = locator<RemoteConfigService>();
 
     return Scaffold(
       key: const Key('homeScreen'),
@@ -62,17 +61,10 @@ class HomeTab extends StatelessWidget {
             key: ValueKey('HomeBanner'),
           ),
           const OrdersExpansionTile(),
-          locator<RemoteConfigService>().getReturnsConfig()
+          configService.getReturnsConfig()
               ? const ReturnsExpansionTile()
               : const SizedBox.shrink(),
-          locator<RemoteConfigService>().getPaymentsConfig() &&
-                  context
-                      .read<UserBloc>()
-                      .state
-                      .user
-                      .role
-                      .type
-                      .isPaymentsAccessible
+          configService.getPaymentsConfig()
               ? const PaymentsExpansionTile()
               : const SizedBox.shrink(),
         ],

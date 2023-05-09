@@ -24,34 +24,37 @@ class PaymentsExpansionTile extends StatelessWidget {
           paymentSummaryTile,
         ];
 
-        return custom.ExpansionTile(
-          initiallyExpanded: true,
-          title: Padding(
-            padding: const EdgeInsets.only(left: 15),
-            child: Text(
-              'Payments'.tr(),
-              style: Theme.of(context).textTheme.titleMedium,
-            ),
-          ),
-          children: <Widget>[
-            GridView.count(
-              crossAxisCount: 3,
-              childAspectRatio: (1 / .6),
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              children: tiles
-                  .mapIndexed(
-                    (index, e) => TileCard(
-                      key: tiles[index].key,
-                      // key: const Key('PaymentsTileCard'),
-                      homePageTile: tiles[index],
-                    ),
-                  )
-                  .toList(),
-            ),
-          ],
-        );
+        return !state.user.role.type.isPaymentsAccessible
+            ? const SizedBox.shrink()
+            : custom.ExpansionTile(
+                key: const Key('paymentsExpansionTile'),
+                initiallyExpanded: true,
+                title: Padding(
+                  padding: const EdgeInsets.only(left: 15),
+                  child: Text(
+                    'Payments'.tr(),
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                ),
+                children: <Widget>[
+                  GridView.count(
+                    crossAxisCount: 3,
+                    childAspectRatio: (1 / .6),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    children: tiles
+                        .mapIndexed(
+                          (index, e) => TileCard(
+                            key: tiles[index].key,
+                            homePageTile: tiles[index],
+                          ),
+                        )
+                        .toList(),
+                  ),
+                ],
+              );
       },
     );
   }

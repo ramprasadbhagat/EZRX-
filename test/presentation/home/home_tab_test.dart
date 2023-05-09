@@ -16,6 +16,7 @@ import 'package:ezrxmobile/application/order/material_list/material_list_bloc.da
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
+import 'package:ezrxmobile/application/returns/returns_overview/returns_overview_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/access_right.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
@@ -95,6 +96,10 @@ class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 
 class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
 
+class ReturnsOverviewBlocMock
+    extends MockBloc<ReturnsOverviewEvent, ReturnsOverviewState>
+    implements ReturnsOverviewBloc {}
+
 class MockHTTPService extends Mock implements HttpService {}
 
 class AutoRouterMock extends Mock implements AppRouter {}
@@ -118,6 +123,7 @@ void main() {
   late MockAupTcBloc mockAupTcBloc;
   late AnnouncementBloc announcementBlocMock;
   late UserBlocMock userBlocMock;
+  late ReturnsOverviewBlocMock returnsOverviewBlocMock;
   late HttpService mockHTTPService;
   late AppRouter autoRouterMock;
   late RemoteConfigService remoteConfigServiceMock;
@@ -182,6 +188,7 @@ void main() {
         mockBannerBloc = BannerBlocMock();
         eligibilityBlocMock = EligibilityBlocMock();
         shipToCodeBlocMock = ShipToCodeBlocMock();
+        returnsOverviewBlocMock = ReturnsOverviewBlocMock();
         authBlocMock = AuthBlocMock();
         announcementBlocMock = AnnouncementBlocMock();
         userBlocMock = UserBlocMock();
@@ -222,10 +229,14 @@ void main() {
           ),
         );
         when(() => remoteConfigServiceMock.getReturnsConfig()).thenReturn(true);
-        when(() => remoteConfigServiceMock.getPaymentsConfig()).thenReturn(true);
+        when(() => remoteConfigServiceMock.getPaymentsConfig())
+            .thenReturn(true);
         when(() => authBlocMock.state).thenReturn(const AuthState.initial());
         when(() => announcementBlocMock.state)
             .thenReturn(AnnouncementState.initial());
+        when(() => returnsOverviewBlocMock.state).thenReturn(
+          ReturnsOverviewState.initial(),
+        );
       });
 
       Future getWidget(tester) async {
@@ -264,6 +275,8 @@ void main() {
                 BlocProvider<AuthBloc>(create: (context) => authBlocMock),
                 BlocProvider<AnnouncementBloc>(
                     create: (context) => announcementBlocMock),
+                BlocProvider<ReturnsOverviewBloc>(
+                    create: (context) => returnsOverviewBlocMock),
               ],
               child: const HomeTab(),
             ),
@@ -272,7 +285,83 @@ void main() {
       }
 
       testWidgets(
+        'Hide paymentsExpansionTile when enablePayments is false',
+        (WidgetTester tester) async {
+          VisibilityDetectorController.instance.updateInterval = Duration.zero;
+          when(() => remoteConfigServiceMock.getPaymentsConfig())
+              .thenReturn(false);
+          when(() => userBlocMock.state).thenReturn(
+            UserState.initial().copyWith(
+              user: fakeUser.copyWith(
+                role: Role.empty().copyWith(
+                  type: RoleType('root_admin'),
+                ),
+              ),
+            ),
+          );
+
+          await getWidget(tester);
+          await tester.pump();
+          final paymentsExpansionTile =
+              find.byKey(const Key('paymentsExpansionTile'));
+          expect(paymentsExpansionTile, findsNothing);
+        },
+      );
+
+      testWidgets(
+        'Show paymentsExpansionTile when enablePayments is true',
+        (WidgetTester tester) async {
+          VisibilityDetectorController.instance.updateInterval = Duration.zero;
+          when(() => remoteConfigServiceMock.getPaymentsConfig())
+              .thenReturn(true);
+          when(() => userBlocMock.state).thenReturn(
+            UserState.initial().copyWith(
+              user: fakeUser.copyWith(
+                role: Role.empty().copyWith(
+                  type: RoleType('client_admin'),
+                ),
+              ),
+            ),
+          );
+
+          await getWidget(tester);
+          await tester.pump();
+          final paymentsExpansionTile =
+              find.byKey(const Key('paymentsExpansionTile'));
+          expect(paymentsExpansionTile, findsNothing);
+        },
+      );
+
+     
+
+      testWidgets(
         'Home Screen orders is disabled, history is enabled when user is client admin/user, accessRight->orders is true and disableCreateOrder is true',
+        (WidgetTester tester) async {
+          VisibilityDetectorController.instance.updateInterval = Duration.zero;
+          when(() => userBlocMock.state).thenReturn(
+            UserState.initial().copyWith(
+              user: fakeUser.copyWith(
+                role: Role.empty().copyWith(
+                  type: RoleType('client_admin'),
+                ),
+                accessRight: AccessRight.empty().copyWith(
+                  orders: true,
+                ),
+                disableCreateOrder: true,
+              ),
+            ),
+          );
+
+          await getWidget(tester);
+          await tester.pump();
+          final orderExpansionTile =
+              find.byKey(const Key('orderExpansionTile'));
+          expect(orderExpansionTile, findsNothing);
+        },
+      );
+
+      testWidgets(
+        'Show payment when user is client admin/user, accessRight->orders is true and disableCreateOrder is true',
         (WidgetTester tester) async {
           VisibilityDetectorController.instance.updateInterval = Duration.zero;
           when(() => userBlocMock.state).thenReturn(
