@@ -13,7 +13,6 @@ import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
-import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 
@@ -57,139 +56,137 @@ class CartPage extends StatelessWidget {
                 ),
               );
         }
-        state.apiFailureOrSuccessOption.fold(
-          () {},
-          (either) => either.fold(
-            (failure) {
-              ErrorUtils.handleApiFailure(context, failure);
-            },
-            (_) {},
-          ),
-        );
       },
       buildWhen: (previous, current) => previous != current,
       builder: (context, state) {
         final taxCode = context.read<SalesOrgBloc>().state.salesOrg.taxCode;
 
-        return Scaffold(
-          key: const Key('cartpage'),
-          appBar: AppBar(
-            title: Text(
-              '${'My Cart'.tr()} (${state.cartItems.length})',
+        return GestureDetector(
+          onTap: () {
+            FocusManager.instance.primaryFocus?.unfocus();
+          },
+          child: Scaffold(
+            key: const Key('cartpage'),
+            appBar: AppBar(
+              title: Text(
+                '${'My Cart'.tr()} (${state.cartItems.length})',
+              ),
             ),
-          ),
-          body: Column(
-            children: [
-              AnnouncementWidget(
-                currentPath: context.router.currentPath,
-              ),
-              const AccountSuspendedBanner(),
-              Expanded(
-                child: ScrollList<CartItem>(
-                  emptyMessage: 'Cart is Empty'.tr(),
-                  onRefresh: () {
-                    context.read<CartBloc>().add(
-                          CartEvent.fetch(
-                            customerCodeInfo: context
-                                .read<CustomerCodeBloc>()
-                                .state
-                                .customerCodeInfo,
-                            salesOrganisationConfigs:
-                                context.read<SalesOrgBloc>().state.configs,
-                            shipToInfo:
-                                context.read<ShipToCodeBloc>().state.shipToInfo,
-                            doNotAllowOutOfStockMaterials: context
-                                .read<EligibilityBloc>()
-                                .state
-                                .doNotAllowOutOfStockMaterials,
-                            salesOrganisation: context
-                                .read<SalesOrgBloc>()
-                                .state
-                                .salesOrganisation,
-                            comboDealEligible: context
-                                .read<EligibilityBloc>()
-                                .state
-                                .comboDealEligible,
-                            isSpecialOrderType: context
-                                .read<OrderDocumentTypeBloc>()
-                                .state
-                                .isSpecialOrderType,
-                          ),
-                        );
-                  },
-                  isLoading: state.isFetching && state.cartItems.isEmpty,
-                  itemBuilder: (context, index, item) {
-                    switch (item.itemType) {
-                      case CartItemType.material:
-                        return CartMaterialItemTile(
-                          cartItem: item,
-                          key: ValueKey(
-                            '${item.materials.first.materialInfo.materialNumber.getValue()}${item.materials.first.quantity}',
-                          ),
-                          taxCode: taxCode,
-                          showCheckBox: true,
-                        );
-                      case CartItemType.bundle:
-                        return CartBundleItemTile(
-                          cartItem: item,
-                          taxCode: taxCode,
-                          showCheckBox: true,
-                        );
-                      case CartItemType.comboDeal:
-                        return CartComboDealItem(
-                          cartItem: item,
-                          showCheckBox: true,
-                        );
-                    }
-                  },
-                  items: state.cartItems,
+            body: Column(
+              children: [
+                AnnouncementWidget(
+                  currentPath: context.router.currentPath,
                 ),
-              ),
-              state.cartItems.isEmpty
-                  ? const SizedBox.shrink()
-                  : Container(
-                      width: double.infinity,
-                      padding: const EdgeInsets.only(top: 10),
-                      decoration: const BoxDecoration(
-                        boxShadow: <BoxShadow>[
-                          BoxShadow(
-                            color: Colors.black54,
-                            blurRadius: 2.0,
-                            offset: Offset(0.0, 0.75),
-                          ),
-                        ],
-                        color: ZPColors.white,
-                      ),
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: const [
-                              _SelectAllButton(),
-                              _TotalSection(),
-                            ],
-                          ),
-                          const SizedBox(height: 10),
-                          SafeArea(
-                            child: ElevatedButton(
-                              key: const ValueKey('orderSummaryButton'),
-                              onPressed: state.selectedCartItems.isEmpty
-                                  ? null
-                                  : () {
-                                      FocusScope.of(context)
-                                          .requestFocus(FocusNode());
-                                      trackMixpanelEvent(
-                                        MixpanelEvents.goToOrderSummary,
-                                      );
-                                      _goToOrderSummary(context);
-                                    },
-                              child: const Text('Order Summary').tr(),
+                const AccountSuspendedBanner(),
+                Expanded(
+                  child: ScrollList<CartItem>(
+                    emptyMessage: 'Cart is Empty'.tr(),
+                    onRefresh: () {
+                      context.read<CartBloc>().add(
+                            CartEvent.fetch(
+                              customerCodeInfo: context
+                                  .read<CustomerCodeBloc>()
+                                  .state
+                                  .customerCodeInfo,
+                              salesOrganisationConfigs:
+                                  context.read<SalesOrgBloc>().state.configs,
+                              shipToInfo: context
+                                  .read<ShipToCodeBloc>()
+                                  .state
+                                  .shipToInfo,
+                              doNotAllowOutOfStockMaterials: context
+                                  .read<EligibilityBloc>()
+                                  .state
+                                  .doNotAllowOutOfStockMaterials,
+                              salesOrganisation: context
+                                  .read<SalesOrgBloc>()
+                                  .state
+                                  .salesOrganisation,
+                              comboDealEligible: context
+                                  .read<EligibilityBloc>()
+                                  .state
+                                  .comboDealEligible,
+                              isSpecialOrderType: context
+                                  .read<OrderDocumentTypeBloc>()
+                                  .state
+                                  .isSpecialOrderType,
                             ),
-                          ),
-                        ],
+                          );
+                    },
+                    isLoading: state.isFetching && state.cartItems.isEmpty,
+                    itemBuilder: (context, index, item) {
+                      switch (item.itemType) {
+                        case CartItemType.material:
+                          return CartMaterialItemTile(
+                            cartItem: item,
+                            key: ValueKey(
+                              '${item.materials.first.materialInfo.materialNumber.getValue()}${item.materials.first.quantity}',
+                            ),
+                            taxCode: taxCode,
+                            showCheckBox: true,
+                          );
+                        case CartItemType.bundle:
+                          return CartBundleItemTile(
+                            cartItem: item,
+                            taxCode: taxCode,
+                            showCheckBox: true,
+                          );
+                        case CartItemType.comboDeal:
+                          return CartComboDealItem(
+                            cartItem: item,
+                            showCheckBox: true,
+                          );
+                      }
+                    },
+                    items: state.cartItems,
+                  ),
+                ),
+                state.cartItems.isEmpty
+                    ? const SizedBox.shrink()
+                    : Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.only(top: 10),
+                        decoration: const BoxDecoration(
+                          boxShadow: <BoxShadow>[
+                            BoxShadow(
+                              color: Colors.black54,
+                              blurRadius: 2.0,
+                              offset: Offset(0.0, 0.75),
+                            ),
+                          ],
+                          color: ZPColors.white,
+                        ),
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: const [
+                                _SelectAllButton(),
+                                _TotalSection(),
+                              ],
+                            ),
+                            const SizedBox(height: 10),
+                            SafeArea(
+                              child: ElevatedButton(
+                                key: const ValueKey('orderSummaryButton'),
+                                onPressed: state.selectedCartItems.isEmpty
+                                    ? null
+                                    : () {
+                                        FocusScope.of(context)
+                                            .requestFocus(FocusNode());
+                                        trackMixpanelEvent(
+                                          MixpanelEvents.goToOrderSummary,
+                                        );
+                                        _goToOrderSummary(context);
+                                      },
+                                child: const Text('Order Summary').tr(),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-            ],
+              ],
+            ),
           ),
         );
       },

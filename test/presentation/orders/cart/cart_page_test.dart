@@ -1,6 +1,10 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
@@ -43,29 +47,18 @@ import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/cart_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/discount_override_repository.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
-// import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/update_cart_button.dart';
-// import 'package:ezrxmobile/presentation/orders/cart/cart_bundle_item_tile.dart';
-// import 'package:ezrxmobile/presentation/orders/cart/cart_material_item_tile.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_page.dart';
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_bundle_item_tile.dart';
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_material_item_tile.dart';
-// import 'package:ezrxmobile/presentation/orders/cart/item/cart_bundle_item_tile.dart';
-// import 'package:ezrxmobile/presentation/orders/cart/item/cart_material_item_tile.dart';
 import 'package:ezrxmobile/presentation/orders/core/account_suspended_warning.dart';
-// import 'package:ezrxmobile/presentation/orders/create_order/update_cart_button.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
 
 import '../../../utils/widget_utils.dart';
 import '../../order_history/order_history_details_widget_test.dart';
@@ -609,32 +602,6 @@ void main() {
           await tester.pump();
           final cartPage = find.byKey(const Key('cartpage'));
           expect(cartPage, findsOneWidget);
-        },
-      );
-      testWidgets(
-        'Load Cart Page with Error',
-        (tester) async {
-          when(() => cartBloc.state).thenReturn(CartState.initial().copyWith(
-            apiFailureOrSuccessOption: none(),
-            isFetching: false,
-          ));
-          final expectedStates = [
-            CartState.initial().copyWith(
-              isFetching: false,
-              apiFailureOrSuccessOption: optionOf(
-                const Left(
-                  ApiFailure.other('fake-error'),
-                ),
-              ),
-            ),
-          ];
-          whenListen(cartBloc, Stream.fromIterable(expectedStates));
-          await tester.pumpWidget(getWidget());
-          await tester.pump();
-          final cartPage = find.byKey(const Key('cartpage'));
-          expect(cartPage, findsOneWidget);
-          final errorMessage = find.byKey(const Key('snackBarMessage'));
-          expect(errorMessage, findsOneWidget);
         },
       );
       testWidgets('Test fetch fail Dynamic', (tester) async {

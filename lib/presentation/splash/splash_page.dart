@@ -3,6 +3,7 @@ import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/domain/deep_linking/error/redirect_failures.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
@@ -31,7 +32,6 @@ import 'package:ezrxmobile/application/returns/return_request_type_code/return_r
 import 'package:ezrxmobile/application/returns/usage_code/usage_code_bloc.dart';
 import 'package:ezrxmobile/application/returns/user_restriction/user_restriction_list_bloc.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
@@ -182,11 +182,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               () {},
               (either) => either.fold(
                 (failure) {
-                  final failureMessage = failure.failureMessage;
-                  showSnackBar(
-                    context: context,
-                    message: failureMessage,
-                  );
+                  ErrorUtils.handleApiFailure(context, failure);
                 },
                 (_) {},
               ),

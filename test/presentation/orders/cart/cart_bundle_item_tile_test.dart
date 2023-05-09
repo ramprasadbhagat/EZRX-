@@ -13,18 +13,20 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/order/entities/bundle.dart';
+import 'package:ezrxmobile/domain/order/entities/bundle_info.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/cart_repository.dart';
+import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_bundle_item_tile.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/quantity_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-
 
 import '../../../utils/widget_utils.dart';
 import '../order_success/order_success_page_test.dart';
@@ -54,22 +56,19 @@ class CustomerCodeBlocMock
 class ShipToBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState>
     implements ShipToCodeBloc {}
 
-
-
 class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
-
 
 class MaterialPriceBlocMock
     extends MockBloc<MaterialPriceEvent, MaterialPriceState>
     implements MaterialPriceBloc {}
-    
+
 void main() {
   late SalesOrgBloc salesOrgBloc;
   late EligibilityBloc eligibilityBloc;
   late CustomerCodeBloc customerCodeBloc;
   late TenderContractBloc tenderContractBloc;
   late ShipToCodeBloc shipToCodeBloc;
-  
+
   late CartBloc cartBloc;
   late CartItem bundleItem;
   late List<PriceAggregate> priceAggregates;
@@ -83,7 +82,7 @@ void main() {
       shipToCodeBloc = ShipToBlocMock();
       cartBloc = CartBlocMock();
       tenderContractBloc = TenderContractBlocMock();
-      
+
       priceAggregates = <PriceAggregate>[
         PriceAggregate.empty().copyWith(
           quantity: 2,
@@ -142,17 +141,15 @@ void main() {
           title: 'Tests',
           home: Scaffold(
             body: SingleChildScrollView(
-              child:CartBundleItemTile(
-                  cartItem: bundleItem,
-                  showCheckBox: true,
-                ),
+              child: CartBundleItemTile(
+                cartItem: bundleItem,
+                showCheckBox: true,
+              ),
             ),
           ),
         ),
       );
     }
-    
-    
 
     testWidgets(
       'bundle item quantity decrement with min quantity is 0',
@@ -173,12 +170,12 @@ void main() {
         await tester.pump();
 
         await tester.tap(quantityInput.first, warnIfMissed: false);
-        final cartDelete = find.byKey(ValueKey('cartDelete${bundleItem.materials.first.getMaterialNumber.getOrDefaultValue('')}'));
+        final cartDelete = find.byKey(ValueKey(
+            'cartDelete${bundleItem.materials.first.getMaterialNumber.getOrDefaultValue('')}'));
         expect(cartDelete, findsOneWidget);
-        final expiryDate = find.byKey(
-            ValueKey('expiryDate${priceAggregates.first.getMaterialNumber.getOrDefaultValue('')}'));
+        final expiryDate = find.byKey(ValueKey(
+            'expiryDate${priceAggregates.first.getMaterialNumber.getOrDefaultValue('')}'));
         expect(expiryDate, findsOneWidget);
-
 
         await tester.tap(cartDelete);
 
@@ -198,173 +195,218 @@ void main() {
       },
     );
 
-    // testWidgets(
-    //   'bundle item quantity update',
-    //   (tester) async {
+    testWidgets(
+      'bundle item quantity update',
+      (tester) async {
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+        final quantityInput = find.byType(QuantityInput);
+        expect(quantityInput, findsNWidgets(2));
+        await tester.ensureVisible(quantityInput.first);
+        await tester.showKeyboard(quantityInput.first);
+        await tester.enterText(quantityInput.first, '12');
+        FocusManager.instance.primaryFocus?.unfocus();
+        await tester.pump();
+        verify(
+          () => cartBloc.add(
+            CartEvent.updateMaterialQtyInCartItem(
+              currentItem: bundleItem,
+              updatedQtyItem: bundleItem.materials.first.copyWith(quantity: 12),
+              customerCodeInfo: CustomerCodeInfo.empty(),
+              doNotallowOutOfStockMaterial: true,
+              salesOrganisation: SalesOrganisation.empty(),
+              salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+              shipToInfo: ShipToInfo.empty(),
+            ),
+          ),
+        ).called(1);
+      },
+    );
 
-    //     await tester.pumpWidget(getWidget());
-    //     await tester.pump();
-    //     final quantityInput = find.byType(QuantityInput);
-    //     expect(quantityInput, findsNWidgets(2));
-    //     await tester.ensureVisible(quantityInput.first);
-    //     await tester.pump();
-    //     await tester.tap(quantityInput.first, warnIfMissed: false);
-    //     await tester.enterText(quantityInput.first, '12');
-    //     await tester.pump();
-    //     verify(
-    //       () => cartBloc.add(
-    //         CartEvent.updateCartItem(
-    //           item: bundleItem.materials.first.copyWith(quantity: 12),
-    //           customerCodeInfo: CustomerCodeInfo.empty(),
-    //           doNotallowOutOfStockMaterial: true,
-    //           salesOrganisation: SalesOrganisation.empty(),
-    //           salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-    //           shipToInfo: ShipToInfo.empty(),
-    //         ),
-    //       ),
-    //     ).called(1);
-    //   },
-    // );
+    testWidgets(
+      'bundle item quantity clear',
+      (tester) async {
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+        final quantityInput = find.byType(QuantityInput);
+        expect(quantityInput, findsNWidgets(2));
+        await tester.ensureVisible(quantityInput.first);
+        await tester.showKeyboard(quantityInput.first);
+        await tester.enterText(quantityInput.first, '');
+        FocusManager.instance.primaryFocus?.unfocus();
+        await tester.pump();
+        verify(
+          () => cartBloc.add(
+            CartEvent.updateMaterialQtyInCartItem(
+              currentItem: bundleItem,
+              updatedQtyItem: bundleItem.materials.first.copyWith(quantity: 1),
+              customerCodeInfo: CustomerCodeInfo.empty(),
+              doNotallowOutOfStockMaterial: true,
+              salesOrganisation: SalesOrganisation.empty(),
+              salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+              shipToInfo: ShipToInfo.empty(),
+            ),
+          ),
+        ).called(1);
+      },
+    );
 
-    // testWidgets(
-    //   'bundle item quantity increment',
-    //   (tester) async {
+    testWidgets(
+      'bundle item quantity increment',
+      (tester) async {
+        await tester.pumpWidget(getWidget());
+        final quantityInput = find.byType(QuantityInput);
+        expect(quantityInput, findsNWidgets(2));
+        await tester.ensureVisible(quantityInput.first);
+        await tester.pump();
+        await tester.tap(quantityInput.first, warnIfMissed: false);
+        final cartAdd = find.byKey(
+          ValueKey('cartAdd${priceAggregates.first.materialNumberString}'),
+        );
+        expect(cartAdd, findsOneWidget);
+        await tester.tap(cartAdd);
+        verify(
+          () => cartBloc.add(
+            CartEvent.updateMaterialQtyInCartItem(
+              currentItem: bundleItem,
+              updatedQtyItem: bundleItem.materials.first.copyWith(quantity: 3),
+              customerCodeInfo: CustomerCodeInfo.empty(),
+              doNotallowOutOfStockMaterial: true,
+              salesOrganisation: SalesOrganisation.empty(),
+              salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+              shipToInfo: ShipToInfo.empty(),
+            ),
+          ),
+        ).called(1);
+      },
+    );
 
-    //     await tester.pumpWidget(getWidget());
-    //     final quantityInput = find.byType(QuantityInput);
-    //     expect(quantityInput, findsNWidgets(2));
-    //     await tester.ensureVisible(quantityInput.first);
-    //     await tester.pump();
-    //     await tester.tap(quantityInput.first, warnIfMissed: false);
-    //     final cartAdd = find.byKey(const ValueKey('cartAdd'));
-    //     expect(cartAdd, findsNWidgets(2));
-    //     await tester.tap(cartAdd.first);
+    testWidgets(
+      'bundle item quantity decrement',
+      (tester) async {
+        await tester.pumpWidget(getWidget());
+        final quantityInput = find.byType(QuantityInput);
+        expect(quantityInput, findsNWidgets(2));
+        await tester.ensureVisible(quantityInput.first);
+        await tester.pump();
+        await tester.tap(quantityInput.first, warnIfMissed: false);
+        final cartAdd = find.byKey(
+          ValueKey('cartDelete${priceAggregates.first.materialNumberString}'),
+        );
+        expect(cartAdd, findsOneWidget);
+        await tester.tap(cartAdd);
+        verify(
+          () => cartBloc.add(
+            CartEvent.updateMaterialQtyInCartItem(
+              currentItem: bundleItem,
+              updatedQtyItem: bundleItem.materials.first.copyWith(quantity: 1),
+              customerCodeInfo: CustomerCodeInfo.empty(),
+              doNotallowOutOfStockMaterial: true,
+              salesOrganisation: SalesOrganisation.empty(),
+              salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+              shipToInfo: ShipToInfo.empty(),
+            ),
+          ),
+        ).called(1);
+      },
+    );
 
-    //     verify(
-    //       () => cartBloc.add(
-    //          CartEvent.addBundleToCart(
-    //           bundleItems: priceAggregates,
-    //           customerCodeInfo: CustomerCodeInfo.empty(),
-    //           doNotallowOutOfStockMaterial: true,
-    //           salesOrganisation: SalesOrganisation.empty(),
-    //           salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-    //           shipToInfo: ShipToInfo.empty(),
-    //         ),
-    //       ),
-    //     ).called(1);
-    //   },
-    // );
+    testWidgets(
+      'bundle item delete',
+      (tester) async {
+        await tester.pumpWidget(getWidget());
+        final bundleCart = find.byType(CustomSlidable);
+        expect(bundleCart, findsOneWidget);
+        await tester.dragFrom(
+            const Offset(500.0, 20.0), const Offset(-200.0, 10.0));
+        await tester.pump();
+        final deleteIcon = find.byIcon(Icons.delete_outline);
+        expect(deleteIcon, findsOneWidget);
+        await tester.tap(deleteIcon);
 
-    // testWidgets(
-    //   'bundle item delete',
-    //   (tester) async {
-    //     await tester.pumpWidget(getWidget());
-    //     final bundleCart = find.byType(CustomSlidable);
-    //     expect(bundleCart, findsOneWidget);
-    //     await tester.dragFrom(
-    //         const Offset(500.0, 20.0), const Offset(-200.0, 10.0));
-    //     await tester.pump();
-    //     final deleteIcon = find.byIcon(Icons.delete_outline);
-    //     expect(deleteIcon, findsOneWidget);
-    //     await tester.tap(deleteIcon);
+        verify(
+          () => cartBloc.add(
+            CartEvent.removeFromCart(
+              item: bundleItem,
+            ),
+          ),
+        ).called(1);
+      },
+    );
 
-    //     verify(
-    //       () => cartBloc.add(
-    //         CartEvent.removeFromCart(
-    //           item: bundleItem,
-    //         ),
-    //       ),
-    //     ).called(1);
-    //     verify(
-    //       () => cartBloc.add(
-    //         CartEvent.removeFromCart(
-    //           item: bundleItem,
-    //         ),
-    //       ),
-    //     ).called(1);
-    //   },
-    // );
+    testWidgets(
+      'bundle item onCheck',
+      (tester) async {
+        await tester.pumpWidget(getWidget());
+        final bundleCartCheckbox = find.byType(Checkbox);
+        expect(bundleCartCheckbox, findsOneWidget);
+        await tester.tap(bundleCartCheckbox);
 
-    // testWidgets(
-    //   'bundle item onCheck',
-    //   (tester) async {
-    //     await tester.pumpWidget(getWidget());
-    //     final bundleCartCheckbox = find.byType(Checkbox);
-    //     expect(bundleCartCheckbox, findsOneWidget);
-    //     await tester.tap(bundleCartCheckbox);
+        verify(
+          () => cartBloc.add(
+            CartEvent.selectButtonTapped(
+              cartItem: bundleItem,
+            ),
+          ),
+        ).called(1);
+      },
+    );
 
-    //     verify(
-    //       () => cartBloc.add(
-    //         CartEvent.updateSelectedItem(
-    //           item: bundleItem.materials.first,
-    //         ),
-    //       ),
-    //     ).called(1);
-    //     verify(
-    //       () => cartBloc.add(
-    //         CartEvent.updateSelectedItem(
-    //           item: bundleItem.materials.last,
-    //         ),
-    //       ),
-    //     ).called(1);
-    //   },
-    // );
+    testWidgets(
+      'bundle item Widget test',
+      (tester) async {
+        when(() => salesOrgBloc.state).thenReturn(
+          SalesOrgState.initial().copyWith(
+            configs: SalesOrganisationConfigs.empty()
+                .copyWith(enableListPrice: true),
+          ),
+        );
 
-    // testWidgets(
-    //   'bundle item Widget test',
-    //   (tester) async {
-    //     when(() => salesOrgBloc.state).thenReturn(
-    //       SalesOrgState.initial().copyWith(
-    //         configs: SalesOrganisationConfigs.empty()
-    //             .copyWith(enableListPrice: true),
-    //       ),
-    //     );
-
-    //     final expectedStates = [
-    //       CartState.initial().copyWith(
-    //         isFetching: true,
-    //       ),
-    //       CartState.initial().copyWith(
-    //         isFetching: false,
-    //       ),
-    //     ];
-    //     whenListen(cartBloc, Stream.fromIterable(expectedStates));
-    //     bundleItem = bundleItem.copyWith(
-    //       materials: bundleItem.materials
-    //           .map(
-    //             (e) => e.copyWith(
-    //               bundle: Bundle.empty().copyWith(
-    //                 bundleInformation: [
-    //                   BundleInfo(
-    //                     quantity: 1,
-    //                     rate: 1,
-    //                     sequence: 1,
-    //                     type: MaterialBundleType('test bundleInfoMessage'),
-    //                   ),
-    //                   BundleInfo(
-    //                     quantity: 1,
-    //                     rate: 1,
-    //                     sequence: 1,
-    //                     type: MaterialBundleType('test bundleInfoMessage'),
-    //                   ),
-    //                 ],
-    //               ),
-    //               salesOrgConfig: SalesOrganisationConfigs.empty()
-    //                   .copyWith(enableDefaultMD: true),
-    //               materialInfo: e.materialInfo
-    //                   .copyWith(defaultMaterialDescription: 'Test Description'),
-    //             ),
-    //           )
-    //           .toList(),
-    //     );
-    //     await tester.pumpWidget(getWidget());
-    //     final description = find.textContaining('Test Description');
-    //     expect(description, findsAtLeastNWidgets(2));
-    //     final listPrice = find.textContaining('List Price');
-    //     expect(listPrice, findsOneWidget);
-    //     final bundleInfoMessage = find.textContaining('test bundleInfoMessage');
-    //     expect(bundleInfoMessage, findsAtLeastNWidgets(2));
-    //   },
-    // );
+        final expectedStates = [
+          CartState.initial().copyWith(
+            isFetching: true,
+          ),
+          CartState.initial().copyWith(
+            isFetching: false,
+          ),
+        ];
+        whenListen(cartBloc, Stream.fromIterable(expectedStates));
+        bundleItem = bundleItem.copyWith(
+          materials: bundleItem.materials
+              .map(
+                (e) => e.copyWith(
+                  bundle: Bundle.empty().copyWith(
+                    bundleInformation: [
+                      BundleInfo(
+                        quantity: 1,
+                        rate: 1,
+                        sequence: 1,
+                        type: DiscountType('test bundleInfoMessage'),
+                      ),
+                      BundleInfo(
+                        quantity: 1,
+                        rate: 1,
+                        sequence: 1,
+                        type: DiscountType('test bundleInfoMessage'),
+                      ),
+                    ],
+                  ),
+                  salesOrgConfig: SalesOrganisationConfigs.empty()
+                      .copyWith(enableDefaultMD: true),
+                  materialInfo: e.materialInfo
+                      .copyWith(defaultMaterialDescription: 'Test Description'),
+                ),
+              )
+              .toList(),
+        );
+        await tester.pumpWidget(getWidget());
+        final description = find.textContaining('Test Description');
+        expect(description, findsAtLeastNWidgets(2));
+        final listPrice = find.textContaining('List Price');
+        expect(listPrice, findsOneWidget);
+        final bundleInfoMessage = find.textContaining('test bundleInfoMessage');
+        expect(bundleInfoMessage, findsAtLeastNWidgets(2));
+      },
+    );
   });
 }

@@ -11,21 +11,29 @@ import 'package:ezrxmobile/application/order/material_price/material_price_bloc.
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
+import 'package:ezrxmobile/domain/order/entities/price_bonus.dart';
+import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_material_item_tile.dart';
+import 'package:ezrxmobile/presentation/orders/create_order/cart_item_bonus_detail_widget.dart';
+import 'package:ezrxmobile/presentation/orders/create_order/price_tier_label.dart';
+import 'package:ezrxmobile/presentation/orders/create_order/quantity_input.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-
 
 import '../../../utils/widget_utils.dart';
 
@@ -51,8 +59,6 @@ class CustomerCodeBlocMock
 
 class ShipToBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState>
     implements ShipToCodeBloc {}
-
-
 
 class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
 
@@ -81,11 +87,11 @@ void main() {
   late EligibilityBloc eligibilityBloc;
   late CustomerCodeBloc customerCodeBloc;
   late ShipToCodeBloc shipToCodeBloc;
-  
+
   late CartBloc cartBloc;
   late MaterialPriceBloc materialPriceBloc;
   late Map<MaterialNumber, Price> mockPriceList;
-  late List<PriceAggregate> priceAggregates;
+  late PriceAggregate priceAggregate;
   late CartItem cartMaterialItem;
   late OrderEligibilityBloc orderEligibilityBlocMock;
   late AddToCartBloc addToCartBlocMock;
@@ -145,67 +151,63 @@ void main() {
       when(() => priceOverrideMockBloc.state).thenReturn(
         PriceOverrideState.initial(),
       );
-      priceAggregates = <PriceAggregate>[
-        PriceAggregate.empty().copyWith(
-          quantity: 2,
-          materialInfo: MaterialInfo.empty().copyWith(
-              materialNumber: MaterialNumber('000000000023168451'),
-              materialDescription: ' Triglyceride Mosys D',
-              principalData: PrincipalData.empty().copyWith(
-                principalName: PrincipalName('台灣拜耳股份有限公司'),
-              ),
-              genericMaterialName: "Dostinex Tab 0.5mg 2's (Program stock)"),
-        ),
-      ];
-      cartMaterialItem = CartItem(
-        materials: priceAggregates,
-        itemType: CartItemType.material,
+      priceAggregate = PriceAggregate.empty().copyWith(
+        quantity: 2,
+        materialInfo: MaterialInfo.empty().copyWith(
+            materialNumber: MaterialNumber('000000000023168451'),
+            materialDescription: ' Triglyceride Mosys D',
+            principalData: PrincipalData.empty().copyWith(
+              principalName: PrincipalName('台灣拜耳股份有限公司'),
+            ),
+            genericMaterialName: "Dostinex Tab 0.5mg 2's (Program stock)"),
       );
+      cartMaterialItem = CartItem.material(priceAggregate);
     },
   );
-  group('Cart Item Tile Test', () {
-    Widget getWidget() {
-      return WidgetUtils.getScopedWidget(
-        autoRouterMock: autoRouter,
-        providers: [
-          BlocProvider<TenderContractBloc>(
-              create: (context) => tenderContractBlocMock),
-          BlocProvider<OrderDocumentTypeBloc>(
-              create: (context) => orderDocumentTypeBlocMock),
-          BlocProvider<UserBloc>(create: (context) => userBlockMock),
-          BlocProvider<EligibilityBloc>(create: (context) => eligibilityBloc),
-          BlocProvider<ShipToCodeBloc>(create: (context) => shipToCodeBloc),
-          BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBloc),
-          BlocProvider<CartBloc>(create: (context) => cartBloc),
-          BlocProvider<CustomerCodeBloc>(
-            create: (context) => customerCodeBloc,
-          ),
-          BlocProvider<MaterialPriceBloc>(
-            create: (context) => materialPriceBloc,
-          ),
-          BlocProvider<OrderEligibilityBloc>(
-            create: (context) => orderEligibilityBlocMock,
-          ),
-          BlocProvider<AddToCartBloc>(create: ((context) => addToCartBlocMock)),
-          BlocProvider<PriceOverrideBloc>(
-            create: (context) => priceOverrideMockBloc,
-          ),
-        ],
-        child: MaterialApp(
-          title: 'Tests',
-          home: Scaffold(
-            body: SingleChildScrollView(
-              child: CartMaterialItemTile(
-                cartItem: cartMaterialItem,
-                showCheckBox: true,
-                isOrderSummaryView: true,
-              ),
+
+  Widget getWidget() {
+    return WidgetUtils.getScopedWidget(
+      autoRouterMock: autoRouter,
+      providers: [
+        BlocProvider<TenderContractBloc>(
+            create: (context) => tenderContractBlocMock),
+        BlocProvider<OrderDocumentTypeBloc>(
+            create: (context) => orderDocumentTypeBlocMock),
+        BlocProvider<UserBloc>(create: (context) => userBlockMock),
+        BlocProvider<EligibilityBloc>(create: (context) => eligibilityBloc),
+        BlocProvider<ShipToCodeBloc>(create: (context) => shipToCodeBloc),
+        BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBloc),
+        BlocProvider<CartBloc>(create: (context) => cartBloc),
+        BlocProvider<CustomerCodeBloc>(
+          create: (context) => customerCodeBloc,
+        ),
+        BlocProvider<MaterialPriceBloc>(
+          create: (context) => materialPriceBloc,
+        ),
+        BlocProvider<OrderEligibilityBloc>(
+          create: (context) => orderEligibilityBlocMock,
+        ),
+        BlocProvider<AddToCartBloc>(create: ((context) => addToCartBlocMock)),
+        BlocProvider<PriceOverrideBloc>(
+          create: (context) => priceOverrideMockBloc,
+        ),
+      ],
+      child: MaterialApp(
+        title: 'Tests',
+        home: Scaffold(
+          body: SingleChildScrollView(
+            child: CartMaterialItemTile(
+              cartItem: cartMaterialItem,
+              showCheckBox: true,
+              isOrderSummaryView: true,
             ),
           ),
         ),
-      );
-    }
+      ),
+    );
+  }
 
+  group('Cart Item Tile Test', () {
     testWidgets(
       'cart item price before check when enable vat at total level enabled',
       (tester) async {
@@ -241,215 +243,252 @@ void main() {
     });
   });
 
-  //   testWidgets(
-  //     'cart item quantity update',
-  //     (tester) async {
-  //       final expectedStates = [
-  //         CartState.initial().copyWith(
-  //           isFetching: true,
-  //         ),
-  //         CartState.initial().copyWith(
-  //           isFetching: false,
-  //           cartItemList: priceAggregates,
-  //         ),
-  //       ];
-  //       whenListen(cartBloc, Stream.fromIterable(expectedStates));
+  testWidgets(
+    'cart item quantity update',
+    (tester) async {
+      final expectedStates = [
+        CartState.initial().copyWith(
+          isFetching: true,
+        ),
+        CartState.initial().copyWith(
+          isFetching: false,
+          cartItems: [cartMaterialItem],
+        ),
+      ];
+      whenListen(cartBloc, Stream.fromIterable(expectedStates));
 
-  //       await tester.pumpWidget(getWidget());
-  //       await tester.pump();
-  //       final quantityInput = find.byType(QuantityInput);
-  //       expect(quantityInput, findsOneWidget);
-  //       await tester.enterText(quantityInput.first, '12');
-  //       verify(
-  //         () => cartBloc.add(
-  //           CartEvent.updateCartItem(
-  //             item: priceAggregates.first.copyWith(quantity: 12),
-  //             customerCodeInfo: CustomerCodeInfo.empty(),
-  //             doNotallowOutOfStockMaterial: true,
-  //             salesOrganisation: SalesOrganisation.empty(),
-  //             salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-  //             shipToInfo: ShipToInfo.empty(),
-  //           ),
-  //         ),
-  //       ).called(1);
-  //     },
-  //   );
+      await tester.pumpWidget(getWidget());
+      await tester.pump();
+      final quantityInput = find.byType(QuantityInput);
 
-  //   testWidgets(
-  //     'cart item Increment',
-  //     (tester) async {
-  //       final expectedStates = [
-  //         CartState.initial().copyWith(
-  //           isFetching: true,
-  //         ),
-  //         CartState.initial().copyWith(
-  //           isFetching: false,
-  //           cartItemList: priceAggregates,
-  //         ),
-  //       ];
-  //       whenListen(cartBloc, Stream.fromIterable(expectedStates));
+      expect(quantityInput, findsOneWidget);
+      await tester.showKeyboard(quantityInput);
+      await tester.enterText(quantityInput.first, '12');
+      FocusManager.instance.primaryFocus?.unfocus();
+      await tester.pump();
 
-  //       await tester.pumpWidget(getWidget());
-  //       await tester.pump();
-  //       final quantityInput = find.byType(QuantityInput);
-  //       expect(quantityInput, findsOneWidget);
-  //       final cartAdd = find.byKey(const ValueKey('cartAdd'));
-  //       expect(cartAdd, findsOneWidget);
-  //       await tester.tap(cartAdd, warnIfMissed: false);
-  //       verify(
-  //         () => cartBloc.add(
-  //           CartEvent.addToCart(
-  //             item: priceAggregates.first.copyWith(quantity: 1),
-  //             customerCodeInfo: CustomerCodeInfo.empty(),
-  //             doNotallowOutOfStockMaterial: true,
-  //             salesOrganisation: SalesOrganisation.empty(),
-  //             salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-  //             shipToInfo: ShipToInfo.empty(),
-  //           ),
-  //         ),
-  //       ).called(1);
-  //     },
-  //   );
+      verify(
+        () => cartBloc.add(
+          CartEvent.addMaterialToCart(
+            item: priceAggregate.copyWith(quantity: 12),
+            overrideQty: true,
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            doNotallowOutOfStockMaterial: true,
+            salesOrganisation: SalesOrganisation.empty(),
+            salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+            shipToInfo: ShipToInfo.empty(),
+            isSpecialOrderType: false,
+          ),
+        ),
+      ).called(1);
+    },
+  );
 
-  //   testWidgets(
-  //     'Cart item quntity decrement',
-  //     (tester) async {
+  testWidgets(
+    'cart item quantity clear',
+    (tester) async {
+      final expectedStates = [
+        CartState.initial().copyWith(
+          isFetching: true,
+        ),
+        CartState.initial().copyWith(
+          isFetching: false,
+          cartItems: [cartMaterialItem],
+        ),
+      ];
+      whenListen(cartBloc, Stream.fromIterable(expectedStates));
 
-  //       await tester.pumpWidget(getWidget());
-  //       await tester.pump();
-  //       final cartDelete = find.byKey(const ValueKey('cartDelete'));
-  //       expect(cartDelete, findsOneWidget);
-  //       await tester.ensureVisible(cartDelete.first);
-  //       await tester.tap(cartDelete.first);
+      await tester.pumpWidget(getWidget());
+      await tester.pump();
+      final quantityInput = find.byType(QuantityInput);
 
-  //       verify(
-  //         () => cartBloc.add(
-  //           CartEvent.addToCart(
-  //             item: priceAggregates.first.copyWith(quantity: -1),
-  //             customerCodeInfo: CustomerCodeInfo.empty(),
-  //             doNotallowOutOfStockMaterial: true,
-  //             salesOrganisation: SalesOrganisation.empty(),
-  //             salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
-  //             shipToInfo: ShipToInfo.empty(),
-  //           ),
-  //         ),
-  //       ).called(1);
-  //     },
-  //   );
+      expect(quantityInput, findsOneWidget);
+      await tester.showKeyboard(quantityInput);
+      await tester.enterText(quantityInput.first, '');
+      FocusManager.instance.primaryFocus?.unfocus();
+      await tester.pump();
 
-  //   testWidgets(
-  //     'Cart item delete',
-  //     (tester) async {
-  //       await tester.pumpWidget(getWidget());
-  //       final cartItemSlidable = find.byType(CustomSlidable);
-  //       expect(cartItemSlidable, findsOneWidget);
-  //       await tester.dragFrom(
-  //           const Offset(500.0, 20.0), const Offset(-200.0, 10.0));
-  //       await tester.pump();
-  //       final deleteIcon = find.byIcon(Icons.delete_outline);
-  //       expect(deleteIcon, findsOneWidget);
-  //       await tester.tap(deleteIcon);
+      verify(
+        () => cartBloc.add(
+          CartEvent.addMaterialToCart(
+            item: priceAggregate.copyWith(quantity: 1),
+            overrideQty: true,
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            doNotallowOutOfStockMaterial: true,
+            salesOrganisation: SalesOrganisation.empty(),
+            salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+            shipToInfo: ShipToInfo.empty(),
+            isSpecialOrderType: false,
+          ),
+        ),
+      ).called(1);
+    },
+  );
 
-  //       verify(
-  //         () => cartBloc.add(
-  //           CartEvent.removeFromCart(
-  //             item: priceAggregates.first,
-  //           ),
-  //         ),
-  //       ).called(1);
-  //     },
-  //   );
+  testWidgets(
+    'cart item Increment',
+    (tester) async {
+      final expectedStates = [
+        CartState.initial().copyWith(
+          isFetching: true,
+        ),
+        CartState.initial().copyWith(
+          isFetching: false,
+          cartItems: [cartMaterialItem],
+        ),
+      ];
+      whenListen(cartBloc, Stream.fromIterable(expectedStates));
 
-  //   testWidgets(
-  //     'cart item onCheck',
-  //     (tester) async {
-  //       await tester.pumpWidget(getWidget());
-  //       final caritItemCheckbox = find.byType(Checkbox);
-  //       expect(caritItemCheckbox, findsOneWidget);
-  //       await tester.tap(caritItemCheckbox);
+      await tester.pumpWidget(getWidget());
+      await tester.pump();
+      final quantityInput = find.byType(QuantityInput);
+      expect(quantityInput, findsOneWidget);
+      final cartAdd = find.byKey(const ValueKey('cartAdd000000000023168451'));
+      expect(cartAdd, findsOneWidget);
+      await tester.tap(cartAdd, warnIfMissed: false);
+      verify(
+        () => cartBloc.add(
+          CartEvent.addMaterialToCart(
+            item: priceAggregate.copyWith(quantity: 1),
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            doNotallowOutOfStockMaterial: true,
+            salesOrganisation: SalesOrganisation.empty(),
+            salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+            shipToInfo: ShipToInfo.empty(),
+          ),
+        ),
+      ).called(1);
+    },
+  );
 
-  //       verify(
-  //         () => cartBloc.add(
-  //           CartEvent.updateSelectedItem(
-  //             item: priceAggregates.first,
-  //           ),
-  //         ),
-  //       ).called(1);
-  //     },
-  //   );
+  testWidgets(
+    'Cart item quantity decrement',
+    (tester) async {
+      await tester.pumpWidget(getWidget());
+      await tester.pump();
+      final cartDelete =
+          find.byKey(const ValueKey('cartDelete000000000023168451'));
+      expect(cartDelete, findsOneWidget);
+      await tester.ensureVisible(cartDelete.first);
+      await tester.tap(cartDelete.first);
 
-  //   testWidgets(
-  //     'Cart item Widget test',
-  //     (tester) async {
-  //       priceAggregates = priceAggregates
-  //           .map(
-  //             (e) => e.copyWith(
-  //               price: e.price.copyWith(tiers: [
-  //                 PriceTier.empty().copyWith(
-  //                   items: [
-  //                     PriceTierItem.empty().copyWith(rate: 1),
-  //                     PriceTierItem.empty().copyWith(rate: 2)
-  //                   ],
-  //                 )
-  //               ], bonuses: [
-  //                 PriceBonus.empty().copyWith(
-  //                   items: [
-  //                     PriceBonusItem.empty().copyWith(bonusMaterials: [
-  //                       BonusMaterial.empty().copyWith(
-  //                         calculation: BonusMaterialCalculation('913'),
-  //                       )
-  //                     ])
-  //                   ],
-  //                 )
-  //               ]),
-  //             ),
-  //           )
-  //           .toList();
-  //       when(() => salesOrgBloc.state).thenReturn(
-  //         SalesOrgState.initial().copyWith(
-  //           configs: SalesOrganisationConfigs.empty().copyWith(
-  //             enableListPrice: true,
-  //             enableRemarks: true,
-  //           ),
-  //         ),
-  //       );
+      verify(
+        () => cartBloc.add(
+          CartEvent.addMaterialToCart(
+            item: priceAggregate.copyWith(quantity: -1),
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            doNotallowOutOfStockMaterial: true,
+            salesOrganisation: SalesOrganisation.empty(),
+            salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+            shipToInfo: ShipToInfo.empty(),
+          ),
+        ),
+      ).called(1);
+    },
+  );
 
-  //       final expectedStates = [
-  //         CartState.initial().copyWith(
-  //           isFetching: true,
-  //         ),
-  //         CartState.initial().copyWith(
-  //           isFetching: false,
-  //           cartItemList: priceAggregates,
-  //         ),
-  //       ];
-  //       whenListen(cartBloc, Stream.fromIterable(expectedStates));
-  //       priceAggregates = priceAggregates
-  //           .map(
-  //             (PriceAggregate e) => e.copyWith(
-  //               salesOrgConfig: SalesOrganisationConfigs.empty().copyWith(
-  //                 enableDefaultMD: true,
-  //                 expiryDateDisplay: true,
-  //               ),
-  //               materialInfo: e.materialInfo
-  //                   .copyWith(defaultMaterialDescription: 'Test Description'),
-  //             ),
-  //           )
-  //           .toList();
-  //       await tester.pumpWidget(getWidget());
-  //       final description = find.textContaining('Test Description');
-  //       expect(description, findsOneWidget);
-  //       final listPrice = find.textContaining('List Price');
-  //       expect(listPrice, findsOneWidget);
-  //       final priceTierLabel = find.byType(PriceTierLabel);
-  //       expect(priceTierLabel, findsNWidgets(2));
-  //       final expiryDate = find.textContaining('Expiry Date');
-  //       expect(expiryDate, findsAtLeastNWidgets(1));
-  //       final bonusDetails = find.byType(BonusDetails);
-  //       expect(bonusDetails, findsOneWidget);
-  //     },
-  //   );
+  testWidgets(
+    'Cart item delete',
+    (tester) async {
+      await tester.pumpWidget(getWidget());
+      final cartItemSlidable = find.byType(CustomSlidable);
+      expect(cartItemSlidable, findsOneWidget);
+      await tester.dragFrom(
+          const Offset(500.0, 20.0), const Offset(-200.0, 10.0));
+      await tester.pump();
+      final deleteIcon = find.byIcon(Icons.delete_outline);
+      expect(deleteIcon, findsOneWidget);
+      await tester.tap(deleteIcon);
 
+      verify(
+        () => cartBloc.add(
+          CartEvent.removeFromCart(
+            item: cartMaterialItem,
+          ),
+        ),
+      ).called(1);
+    },
+  );
+
+  testWidgets(
+    'cart item onCheck',
+    (tester) async {
+      await tester.pumpWidget(getWidget());
+      final caritItemCheckbox = find.byType(Checkbox);
+      expect(caritItemCheckbox, findsOneWidget);
+      await tester.tap(caritItemCheckbox);
+
+      verify(
+        () => cartBloc.add(
+          CartEvent.selectButtonTapped(
+            cartItem: cartMaterialItem,
+          ),
+        ),
+      ).called(1);
+    },
+  );
+
+  testWidgets(
+    'Cart item Widget test',
+    (tester) async {
+      priceAggregate = priceAggregate.copyWith(
+        salesOrgConfig: SalesOrganisationConfigs.empty().copyWith(
+          enableDefaultMD: true,
+          expiryDateDisplay: true,
+          enableListPrice: true,
+        ),
+        materialInfo: priceAggregate.materialInfo
+            .copyWith(defaultMaterialDescription: 'Test Description'),
+        price: priceAggregate.price.copyWith(tiers: [
+          PriceTier.empty().copyWith(
+            items: [
+              PriceTierItem.empty().copyWith(rate: 1),
+              PriceTierItem.empty().copyWith(rate: 2)
+            ],
+          )
+        ], bonuses: [
+          PriceBonus.empty().copyWith(
+            items: [
+              PriceBonusItem.empty().copyWith(bonusMaterials: [
+                BonusMaterial.empty().copyWith(
+                  calculation: BonusMaterialCalculation('913'),
+                )
+              ])
+            ],
+          )
+        ]),
+      );
+      cartMaterialItem = CartItem.material(priceAggregate);
+      when(() => cartBloc.state).thenReturn(
+        CartState.initial().copyWith(
+          isFetching: false,
+          cartItems: [cartMaterialItem],
+        ),
+      );
+      when(() => salesOrgBloc.state).thenReturn(
+        SalesOrgState.initial().copyWith(
+          configs: SalesOrganisationConfigs.empty().copyWith(
+            enableRemarks: true,
+            enableListPrice: true,
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(getWidget());
+      final description = find.textContaining('Test Description');
+      expect(description, findsOneWidget);
+      final listPrice = find.textContaining('List Price');
+      expect(listPrice, findsOneWidget);
+      final priceTierLabel = find.byType(PriceTierLabel);
+      expect(priceTierLabel, findsNWidgets(2));
+      final expiryDate = find.textContaining('Expiry Date');
+      expect(expiryDate, findsAtLeastNWidgets(1));
+      final bonusDetails = find.byType(BonusDetails);
+      expect(bonusDetails, findsOneWidget);
+    },
+  );
+
+  //TODO: Add test for PriceOverride Cart item price
   //   testWidgets(
   //     '=> PriceOverRide(True) Cart item Price override test\n salesRep:True, \npriceOverride:True, \ndisableOrderType: True, \nhasPriceOverride: True, \nOrderType: ZPFC ',
   //     (tester) async {
@@ -983,6 +1022,8 @@ void main() {
   //       expect(priceOverrideSubmitButton, findsNothing);
   //     },
   //   );
+
+  //TODO: Add widget test for adding/updating remarks
   //   testWidgets(
   //     'Cart item Widget remarks edit',
   //     (tester) async {

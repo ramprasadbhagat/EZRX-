@@ -84,7 +84,8 @@ class CartBundleItemTile extends StatelessWidget {
                               children: [
                                 Flexible(
                                   child: Text(
-                                    materialCommonInfo.bundle.bundleName.name.tr(),
+                                    materialCommonInfo.bundle.bundleName.name
+                                        .tr(),
                                     style:
                                         Theme.of(context).textTheme.titleSmall,
                                   ),
@@ -197,7 +198,9 @@ class CartBundleItemTile extends StatelessWidget {
                         title: Padding(
                           padding: EdgeInsets.only(left: showCheckBox ? 40 : 0),
                           child: _BundleMaterialItem(
-                            key: Key('bundleMaterial${material.materialInfo.materialNumber.getOrDefaultValue('')}${material.quantity}'),
+                            key: Key(
+                              'bundleMaterial${material.materialInfo.materialNumber.getOrDefaultValue('')}${material.quantity}',
+                            ),
                             cartItem: cartItem,
                             material: material,
                           ),
@@ -257,7 +260,8 @@ class _BundleMaterialItemState extends State<_BundleMaterialItem> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    widget.material.materialInfo.materialNumber.displayMatNo.tr(),
+                    widget.material.materialInfo.materialNumber.displayMatNo
+                        .tr(),
                     style: Theme.of(context).textTheme.titleSmall?.apply(
                           color: ZPColors.kPrimaryColor,
                         ),
@@ -295,24 +299,28 @@ class _BundleMaterialItemState extends State<_BundleMaterialItem> {
             ],
           ),
         ),
-        BlocBuilder<CartBloc, CartState>(
+        BlocConsumer<CartBloc, CartState>(
+          listenWhen: (previous, current) =>
+              previous.isFetching != current.isFetching && !current.isFetching,
+          listener: (context, state) {
+            controller.text = widget.material.quantity.toString();
+          },
           buildWhen: (previous, current) =>
               previous.isFetching != current.isFetching,
           builder: (context, state) {
-            return QuantityInput(
-              isEnabled:
-                  widget.material.tenderContract == TenderContract.empty() &&
-                      !state.isFetching,
-              quantityTextKey: Key(
-                'cartItem${widget.material.getMaterialNumber.getOrDefaultValue('')}',
-              ),
-              controller: controller,
-              onFieldChange: (value) {
+            return Focus(
+              onFocusChange: (isFocused) {
+                if (isFocused) return;
+                if (controller.text.isEmpty) {
+                  controller.text = '1';
+                }
+                final newQty = int.parse(controller.text);
+                if (newQty == widget.material.quantity) return;
                 context.read<CartBloc>().add(
                       CartEvent.updateMaterialQtyInCartItem(
                         currentItem: widget.cartItem,
                         updatedQtyItem:
-                            widget.material.copyWith(quantity: value),
+                            widget.material.copyWith(quantity: newQty),
                         customerCodeInfo: context
                             .read<CustomerCodeBloc>()
                             .state
@@ -332,62 +340,72 @@ class _BundleMaterialItemState extends State<_BundleMaterialItem> {
                       ),
                     );
               },
-              minusPressed: (k) {
-                context.read<CartBloc>().add(
-                      CartEvent.updateMaterialQtyInCartItem(
-                        currentItem: widget.cartItem,
-                        updatedQtyItem: widget.material.copyWith(quantity: k),
-                        customerCodeInfo: context
-                            .read<CustomerCodeBloc>()
-                            .state
-                            .customerCodeInfo,
-                        doNotallowOutOfStockMaterial: context
-                            .read<EligibilityBloc>()
-                            .state
-                            .doNotAllowOutOfStockMaterials,
-                        salesOrganisation: context
-                            .read<SalesOrgBloc>()
-                            .state
-                            .salesOrganisation,
-                        salesOrganisationConfigs:
-                            context.read<SalesOrgBloc>().state.configs,
-                        shipToInfo:
-                            context.read<ShipToCodeBloc>().state.shipToInfo,
-                      ),
-                    );
-              },
-              addPressed: (k) {
-                context.read<CartBloc>().add(
-                      CartEvent.updateMaterialQtyInCartItem(
-                        currentItem: widget.cartItem,
-                        updatedQtyItem: widget.material.copyWith(quantity: k),
-                        customerCodeInfo: context
-                            .read<CustomerCodeBloc>()
-                            .state
-                            .customerCodeInfo,
-                        doNotallowOutOfStockMaterial: context
-                            .read<EligibilityBloc>()
-                            .state
-                            .doNotAllowOutOfStockMaterials,
-                        salesOrganisation: context
-                            .read<SalesOrgBloc>()
-                            .state
-                            .salesOrganisation,
-                        salesOrganisationConfigs:
-                            context.read<SalesOrgBloc>().state.configs,
-                        shipToInfo:
-                            context.read<ShipToCodeBloc>().state.shipToInfo,
-                      ),
-                    );
-              },
-              quantityAddKey: Key(
-                'cartAdd${widget.material.getMaterialNumber.getOrCrash()}',
+              child: QuantityInput(
+                isEnabled:
+                    widget.material.tenderContract == TenderContract.empty() &&
+                        !state.isFetching,
+                quantityTextKey: Key(
+                  'cartItem${widget.material.getMaterialNumber.getOrDefaultValue('')}',
+                ),
+                controller: controller,
+                onFieldChange: (value) {},
+                minusPressed: (k) {
+                  context.read<CartBloc>().add(
+                        CartEvent.updateMaterialQtyInCartItem(
+                          currentItem: widget.cartItem,
+                          updatedQtyItem: widget.material.copyWith(quantity: k),
+                          customerCodeInfo: context
+                              .read<CustomerCodeBloc>()
+                              .state
+                              .customerCodeInfo,
+                          doNotallowOutOfStockMaterial: context
+                              .read<EligibilityBloc>()
+                              .state
+                              .doNotAllowOutOfStockMaterials,
+                          salesOrganisation: context
+                              .read<SalesOrgBloc>()
+                              .state
+                              .salesOrganisation,
+                          salesOrganisationConfigs:
+                              context.read<SalesOrgBloc>().state.configs,
+                          shipToInfo:
+                              context.read<ShipToCodeBloc>().state.shipToInfo,
+                        ),
+                      );
+                },
+                addPressed: (k) {
+                  context.read<CartBloc>().add(
+                        CartEvent.updateMaterialQtyInCartItem(
+                          currentItem: widget.cartItem,
+                          updatedQtyItem: widget.material.copyWith(quantity: k),
+                          customerCodeInfo: context
+                              .read<CustomerCodeBloc>()
+                              .state
+                              .customerCodeInfo,
+                          doNotallowOutOfStockMaterial: context
+                              .read<EligibilityBloc>()
+                              .state
+                              .doNotAllowOutOfStockMaterials,
+                          salesOrganisation: context
+                              .read<SalesOrgBloc>()
+                              .state
+                              .salesOrganisation,
+                          salesOrganisationConfigs:
+                              context.read<SalesOrgBloc>().state.configs,
+                          shipToInfo:
+                              context.read<ShipToCodeBloc>().state.shipToInfo,
+                        ),
+                      );
+                },
+                quantityAddKey: Key(
+                  'cartAdd${widget.material.getMaterialNumber.getOrCrash()}',
+                ),
+                quantityDeleteKey: Key(
+                  'cartDelete${widget.material.getMaterialNumber.getOrCrash()}',
+                ),
+                minimumQty: 0,
+                isLoading: state.isFetching,
               ),
-              quantityDeleteKey: Key(
-                'cartDelete${widget.material.getMaterialNumber.getOrCrash()}',
-              ),
-              minimumQty: 0,
-              isLoading: state.isFetching,
             );
           },
         ),

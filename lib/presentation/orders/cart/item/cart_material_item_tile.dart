@@ -31,14 +31,12 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CartMaterialItemTile extends StatelessWidget {
+class CartMaterialItemTile extends StatefulWidget {
   final CartItem cartItem;
 
   final String taxCode;
   final bool showCheckBox;
   final bool isOrderSummaryView;
-
-  PriceAggregate get material => cartItem.materials.first;
 
   const CartMaterialItemTile({
     Key? key,
@@ -47,6 +45,27 @@ class CartMaterialItemTile extends StatelessWidget {
     this.showCheckBox = false,
     this.isOrderSummaryView = false,
   }) : super(key: key);
+
+  @override
+  State<CartMaterialItemTile> createState() => _CartMaterialItemTileState();
+}
+
+class _CartMaterialItemTileState extends State<CartMaterialItemTile> {
+  late final TextEditingController controller;
+
+  PriceAggregate get material => widget.cartItem.materials.first;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = TextEditingController(text: material.quantity.toString());
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,33 +87,38 @@ class CartMaterialItemTile extends StatelessWidget {
                     label: 'Delete',
                     icon: Icons.delete_outline,
                     onPressed: (context) => context.read<CartBloc>().add(
-                          CartEvent.removeFromCart(item: cartItem),
+                          CartEvent.removeFromCart(item: widget.cartItem),
                         ),
                   ),
                 ],
                 borderRadius: 8,
                 child: ListTile(
-                  contentPadding: showCheckBox ? EdgeInsets.zero : null,
+                  contentPadding: widget.showCheckBox ? EdgeInsets.zero : null,
                   key: Key(
                     'materialCartItem${material.materialInfo.materialNumber.getOrDefaultValue('')}',
                   ),
                   onTap: () {
+                    if (controller.text.isEmpty) {
+                      controller.text = '1';
+                    }
                     CartBottomSheet.showUpdateCartBottomSheet(
                       context: context,
-                      cartItem: material,
+                      cartItem: material.copyWith(
+                        quantity: int.parse(controller.text),
+                      ),
                     );
                   },
-                  leading: showCheckBox
+                  leading: widget.showCheckBox
                       ? Checkbox(
                           onChanged: (value) {
                             if (value == null) return;
                             context.read<CartBloc>().add(
                                   CartEvent.selectButtonTapped(
-                                    cartItem: cartItem,
+                                    cartItem: widget.cartItem,
                                   ),
                                 );
                           },
-                          value: cartItem.isSelected,
+                          value: widget.cartItem.isSelected,
                         )
                       : null,
                   title: Column(
@@ -116,11 +140,12 @@ class CartMaterialItemTile extends StatelessWidget {
                             padding: const EdgeInsets.only(right: 8),
                             constraints: const BoxConstraints(),
                             key: Key(
-                              'deleteFromCart${material.materialInfo.materialNumber.getOrDefaultValue('')}',),
+                              'deleteFromCart${material.materialInfo.materialNumber.getOrDefaultValue('')}',
+                            ),
                             onPressed: () {
                               context.read<CartBloc>().add(
                                     CartEvent.removeFromCart(
-                                      item: cartItem,
+                                      item: widget.cartItem,
                                     ),
                                   );
                             },
@@ -132,7 +157,8 @@ class CartMaterialItemTile extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            material.materialInfo.materialNumber.displayMatNo.tr(),
+                            material.materialInfo.materialNumber.displayMatNo
+                                .tr(),
                             style:
                                 Theme.of(context).textTheme.titleSmall?.apply(
                                       color: ZPColors.lightGray,
@@ -153,13 +179,16 @@ class CartMaterialItemTile extends StatelessWidget {
                         children: [
                           CartMaterialItemTileDetails(
                             material: material,
-                            taxCode: taxCode,
-                            isOrderSummaryView: isOrderSummaryView,
-                            cartItem: cartItem,
+                            taxCode: widget.taxCode,
+                            isOrderSummaryView: widget.isOrderSummaryView,
+                            cartItem: widget.cartItem,
                           ),
                           Column(
                             children: [
-                              _CartItemQuantityInput(cartItem: material),
+                              _CartItemQuantityInput(
+                                cartItem: material,
+                                controller: controller,
+                              ),
                               if (context
                                       .read<EligibilityBloc>()
                                       .state
@@ -182,7 +211,7 @@ class CartMaterialItemTile extends StatelessWidget {
                           ),
                         ],
                       ),
-                      if (isOrderSummaryView &&
+                      if (widget.isOrderSummaryView &&
                           material.tenderContract != TenderContract.empty())
                         TenderContractDetailsTile(
                           tenderContract: material.tenderContract,
@@ -198,11 +227,13 @@ class CartMaterialItemTile extends StatelessWidget {
                           message:
                               '${'Remarks: '.tr()}${material.materialInfo.remarks}',
                           showEditDeleteDialog: EditDeleteDialog(
-                            key: Key('editDeleteDialog${material.materialInfo.materialNumber.getOrDefaultValue('')}'),
+                            key: Key(
+                              'editDeleteDialog${material.materialInfo.materialNumber.getOrDefaultValue('')}',
+                            ),
                             onDelete: () {
                               context.read<CartBloc>().add(
                                     CartEvent.addRemarkToCartItem(
-                                      item: cartItem,
+                                      item: widget.cartItem,
                                       message: '',
                                     ),
                                   );
@@ -210,7 +241,7 @@ class CartMaterialItemTile extends StatelessWidget {
                             onEdit: () {
                               AddRemarkDialog.cartItem(
                                 context: context,
-                                cartItem: cartItem,
+                                cartItem: widget.cartItem,
                                 isEdit: true,
                               );
                             },
@@ -224,18 +255,19 @@ class CartMaterialItemTile extends StatelessWidget {
                   context.read<SalesOrgBloc>().state.configs.enableRemarks)
                 AddRemarksButton(
                   key: Key(
-                    'addRemarks${material.materialInfo.materialNumber.getOrDefaultValue('')}',),
+                    'addRemarks${material.materialInfo.materialNumber.getOrDefaultValue('')}',
+                  ),
                   onPressed: () {
                     AddRemarkDialog.cartItem(
                       context: context,
-                      cartItem: cartItem,
+                      cartItem: widget.cartItem,
                     );
                   },
                 ),
               if (material.notHavingContract && !isSpecialOrderType)
                 BounsTile(
                   material: material,
-                  cartItem: cartItem,
+                  cartItem: widget.cartItem,
                 ),
             ],
           ),
@@ -471,64 +503,41 @@ class CartMaterialItemTileDetails extends StatelessWidget {
   }
 }
 
-class _CartItemQuantityInput extends StatefulWidget {
+class _CartItemQuantityInput extends StatelessWidget {
   final PriceAggregate cartItem;
+  final TextEditingController controller;
 
-  const _CartItemQuantityInput({Key? key, required this.cartItem})
-      : super(key: key);
-
-  @override
-  State<_CartItemQuantityInput> createState() => _CartItemQuantityInputState();
-}
-
-class _CartItemQuantityInputState extends State<_CartItemQuantityInput> {
-  final controller = TextEditingController();
-
-  @override
-  void initState() {
-    controller.value = TextEditingValue(
-      text: widget.cartItem.quantity.toString(),
-      selection: TextSelection.collapsed(
-        offset: controller.selection.base.offset,
-      ),
-    );
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
+  const _CartItemQuantityInput({
+    Key? key,
+    required this.cartItem,
+    required this.controller,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final isSpecialOrderType =
         context.read<OrderDocumentTypeBloc>().state.isSpecialOrderType;
 
-    return BlocBuilder<CartBloc, CartState>(
+    return BlocConsumer<CartBloc, CartState>(
+      listenWhen: (previous, current) =>
+          previous.isFetching != current.isFetching && !current.isFetching,
+      listener: (context, state) {
+        controller.text = cartItem.quantity.toString();
+      },
       buildWhen: (previous, current) =>
           previous.isFetching != current.isFetching,
       builder: (context, state) {
-        controller.text = widget.cartItem.quantity.toString();
-
-        return QuantityInput(
-          isEnabled: !widget.cartItem.materialInfo.hasValidTenderContract &&
-              !state.isFetching,
-          quantityAddKey: Key(
-            'cartAdd${widget.cartItem.getMaterialNumber.getOrDefaultValue('')}',
-          ),
-          quantityDeleteKey: Key(
-            'cartDelete${widget.cartItem.getMaterialNumber.getOrDefaultValue('')}',
-          ),
-          quantityTextKey: Key(
-            'cartItem${widget.cartItem.getMaterialNumber.getOrDefaultValue('')}',
-          ),
-          controller: controller,
-          onFieldChange: (value) {
+        return Focus(
+          onFocusChange: (isFocused) {
+            if (isFocused) return;
+            if (controller.text.isEmpty) {
+              controller.text = '1';
+            }
+            final newQty = int.parse(controller.text);
+            if (newQty == cartItem.quantity) return;
             context.read<CartBloc>().add(
                   CartEvent.addMaterialToCart(
-                    item: widget.cartItem.copyWith(quantity: value),
+                    item: cartItem.copyWith(quantity: newQty),
                     overrideQty: true,
                     customerCodeInfo:
                         context.read<CustomerCodeBloc>().state.customerCodeInfo,
@@ -545,45 +554,66 @@ class _CartItemQuantityInputState extends State<_CartItemQuantityInput> {
                   ),
                 );
           },
-          minusPressed: (k) {
-            context.read<CartBloc>().add(
-                  CartEvent.addMaterialToCart(
-                    item: widget.cartItem.copyWith(quantity: -1),
-                    customerCodeInfo:
-                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                    doNotallowOutOfStockMaterial: context
-                        .read<EligibilityBloc>()
-                        .state
-                        .doNotAllowOutOfStockMaterials,
-                    salesOrganisation:
-                        context.read<SalesOrgBloc>().state.salesOrganisation,
-                    salesOrganisationConfigs:
-                        context.read<SalesOrgBloc>().state.configs,
-                    shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
-                    isSpecialOrderType: isSpecialOrderType,
-                  ),
-                );
-          },
-          addPressed: (k) {
-            context.read<CartBloc>().add(
-                  CartEvent.addMaterialToCart(
-                    item: widget.cartItem.copyWith(quantity: 1),
-                    customerCodeInfo:
-                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                    doNotallowOutOfStockMaterial: context
-                        .read<EligibilityBloc>()
-                        .state
-                        .doNotAllowOutOfStockMaterials,
-                    salesOrganisation:
-                        context.read<SalesOrgBloc>().state.salesOrganisation,
-                    salesOrganisationConfigs:
-                        context.read<SalesOrgBloc>().state.configs,
-                    shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
-                    isSpecialOrderType: isSpecialOrderType,
-                  ),
-                );
-          },
-          isLoading: state.isFetching,
+          child: QuantityInput(
+            isEnabled: !cartItem.materialInfo.hasValidTenderContract &&
+                !state.isFetching,
+            quantityAddKey: Key(
+              'cartAdd${cartItem.getMaterialNumber.getOrDefaultValue('')}',
+            ),
+            quantityDeleteKey: Key(
+              'cartDelete${cartItem.getMaterialNumber.getOrDefaultValue('')}',
+            ),
+            quantityTextKey: Key(
+              'cartItem${cartItem.getMaterialNumber.getOrDefaultValue('')}',
+            ),
+            controller: controller,
+            onFieldChange: (value) {},
+            minusPressed: (k) {
+              context.read<CartBloc>().add(
+                    CartEvent.addMaterialToCart(
+                      item: cartItem.copyWith(quantity: -1),
+                      customerCodeInfo: context
+                          .read<CustomerCodeBloc>()
+                          .state
+                          .customerCodeInfo,
+                      doNotallowOutOfStockMaterial: context
+                          .read<EligibilityBloc>()
+                          .state
+                          .doNotAllowOutOfStockMaterials,
+                      salesOrganisation:
+                          context.read<SalesOrgBloc>().state.salesOrganisation,
+                      salesOrganisationConfigs:
+                          context.read<SalesOrgBloc>().state.configs,
+                      shipToInfo:
+                          context.read<ShipToCodeBloc>().state.shipToInfo,
+                      isSpecialOrderType: isSpecialOrderType,
+                    ),
+                  );
+            },
+            addPressed: (k) {
+              context.read<CartBloc>().add(
+                    CartEvent.addMaterialToCart(
+                      item: cartItem.copyWith(quantity: 1),
+                      customerCodeInfo: context
+                          .read<CustomerCodeBloc>()
+                          .state
+                          .customerCodeInfo,
+                      doNotallowOutOfStockMaterial: context
+                          .read<EligibilityBloc>()
+                          .state
+                          .doNotAllowOutOfStockMaterials,
+                      salesOrganisation:
+                          context.read<SalesOrgBloc>().state.salesOrganisation,
+                      salesOrganisationConfigs:
+                          context.read<SalesOrgBloc>().state.configs,
+                      shipToInfo:
+                          context.read<ShipToCodeBloc>().state.shipToInfo,
+                      isSpecialOrderType: isSpecialOrderType,
+                    ),
+                  );
+            },
+            isLoading: state.isFetching,
+          ),
         );
       },
     );
