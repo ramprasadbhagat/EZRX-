@@ -1,7 +1,14 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/entities/material_price_detail.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
@@ -83,13 +90,111 @@ void main() {
         ],
       );
 
-      //TODO; Add new test later
-      // blocTest<AddToCartBloc, AddToCartState>(
-      //   'Fetch AddToCartBloc',
-      //   build: () => AddToCartBloc(materialPriceDetailRepository: mockRepository),
-      //   act: (bloc) => bloc.add(const AddToCartEvent.fetch()),
-      //   expect: () => [],
-      // );
+      blocTest<AddToCartBloc, AddToCartState>(
+        'Fetch failure',
+        build: () =>
+            AddToCartBloc(materialPriceDetailRepository: mockRepository),
+        setUp: () {
+          when(
+            () => mockRepository.getMaterialDetail(
+              customerCodeInfo: CustomerCodeInfo.empty(),
+              salesOrganisation: SalesOrganisation.empty(),
+              salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+              shipToCodeInfo: ShipToInfo.empty(),
+              materialNumber: MaterialNumber('fake-number'),
+            ),
+          ).thenAnswer(
+            (_) async => const Left(
+              ApiFailure.other('fake-error'),
+            ),
+          );
+        },
+        act: (bloc) => bloc.add(
+          AddToCartEvent.fetch(
+            customerCode: CustomerCodeInfo.empty(),
+            salesOrganisation: SalesOrganisation.empty(),
+            salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+            shipToCode: ShipToInfo.empty(),
+            cartZmgQtyExcludeCurrent: 0,
+            isSpecialOrderType: true,
+            materialNumber: MaterialNumber('fake-number'),
+          ),
+        ),
+        expect: () => [
+          AddToCartState.initial().copyWith(
+            apiFailureOrSuccessOption: none(),
+            cartItem: PriceAggregate.empty(),
+            isFetching: true,
+          ),
+          AddToCartState.initial().copyWith(
+            apiFailureOrSuccessOption: optionOf(
+              const Left(
+                ApiFailure.other('fake-error'),
+              ),
+            ),
+            isFetching: false,
+          ),
+        ],
+      );
+
+      blocTest<AddToCartBloc, AddToCartState>(
+        'Fetch success',
+        build: () =>
+            AddToCartBloc(materialPriceDetailRepository: mockRepository),
+        setUp: () {
+          when(
+            () => mockRepository.getMaterialDetail(
+              customerCodeInfo: CustomerCodeInfo.empty(),
+              salesOrganisation: SalesOrganisation.empty(),
+              salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+              shipToCodeInfo: ShipToInfo.empty(),
+              materialNumber: MaterialNumber('fake-number'),
+            ),
+          ).thenAnswer(
+            (_) async => Right(
+              MaterialPriceDetail.empty().copyWith(
+                info: MaterialInfo.empty().copyWith(
+                  materialNumber: MaterialNumber('fake-number'),
+                ),
+                price: Price.empty().copyWith(
+                  materialNumber: MaterialNumber('fake-number'),
+                ),
+              ),
+            ),
+          );
+        },
+        act: (bloc) => bloc.add(
+          AddToCartEvent.fetch(
+            customerCode: CustomerCodeInfo.empty(),
+            salesOrganisation: SalesOrganisation.empty(),
+            salesOrganisationConfigs: SalesOrganisationConfigs.empty(),
+            shipToCode: ShipToInfo.empty(),
+            cartZmgQtyExcludeCurrent: 0,
+            isSpecialOrderType: true,
+            materialNumber: MaterialNumber('fake-number'),
+          ),
+        ),
+        expect: () => [
+          AddToCartState.initial().copyWith(
+            apiFailureOrSuccessOption: none(),
+            cartItem: PriceAggregate.empty(),
+            isFetching: true,
+          ),
+          AddToCartState.initial().copyWith(
+            cartItem: PriceAggregate.empty().copyWith(
+              materialInfo: MaterialInfo.empty().copyWith(
+                materialNumber: MaterialNumber('fake-number'),
+              ),
+              price: Price.empty().copyWith(
+                materialNumber: MaterialNumber('fake-number'),
+              ),
+              salesOrgConfig: SalesOrganisationConfigs.empty(),
+              isSpecialOrderType: true,
+            ),
+            isFetching: false,
+          ),
+        ],
+      );
 
       blocTest<AddToCartBloc, AddToCartState>(
         'SetCartItem AddToCartBloc',
@@ -262,8 +367,8 @@ void main() {
       blocTest<AddToCartBloc, AddToCartState>(
         'Tire Material UpdateQuantity AddToCartBloc for Material with Trie discount enable in cart',
         setUp: () {
-          addToCartQuantity = 5;
-          onCartDiscountProductQuantity = 0;
+          addToCartQuantity = 3;
+          onCartDiscountProductQuantity = 2;
         },
         build: () =>
             AddToCartBloc(materialPriceDetailRepository: mockRepository),
@@ -288,67 +393,19 @@ void main() {
             bloc.state.cartItem.finalPrice,
             mockCartItemList.first.price
                 .copyWith(zmgDiscount: true)
-                .priceTireItem
-                .first
+                .priceTireItem[1]
                 .rate,
           );
           expect(
             bloc.state.cartItem.finalPriceTotal,
             mockCartItemList.first.price
                     .copyWith(zmgDiscount: true)
-                    .priceTireItem
-                    .first
+                    .priceTireItem[1]
                     .rate *
                 addToCartQuantity,
           );
         },
       );
-
-      // blocTest<AddToCartBloc, AddToCartState>(
-      //   'Tire Material UpdateQuantity AddToCartBloc for Material with Trie discount enable in cart',
-      //   setUp: () {
-      //     addToCartQuantity = 3;
-      //     onCartDiscountProductQuantity = 2;
-      //   },
-      //   build: () => AddToCartBloc(materialPriceDetailRepository: mockRepository),
-      //   seed: () => AddToCartState.initial().copyWith(
-      //     cartItem: mockCartItemList.first,
-      //   ),
-      //   act: (bloc) => bloc.add(AddToCartEvent.updateQuantity(
-      //     addToCartQuantity,
-      //     onCartDiscountProductQuantity,
-      //   )),
-      //   expect: () => [
-      //     AddToCartState.initial().copyWith(
-      //       cartItem: mockCartItemList.first.copyWith(
-      //         discountedMaterialCount:
-      //             addToCartQuantity + onCartDiscountProductQuantity,
-      //         quantity: addToCartQuantity,
-      //         price: mockCartItemList.first.price.copyWith(),
-      //       ),
-      //       quantity: addToCartQuantity,
-      //     ),
-      //   ],
-      //   verify: (AddToCartBloc bloc) {
-      //     expect(
-      //       bloc.state.cartItem.finalPrice,
-      //       mockCartItemList.first.price
-      //           .copyWith(zmgDiscount: true)
-      //           .priceTireItem
-      //           .first
-      //           .rate,
-      //     );
-      //     expect(
-      //       bloc.state.cartItem.finalPriceTotal,
-      //       mockCartItemList.first.price
-      //               .copyWith(zmgDiscount: true)
-      //               .priceTireItem
-      //               .first
-      //               .rate *
-      //           addToCartQuantity,
-      //     );
-      //   },
-      // );
     },
   );
 }

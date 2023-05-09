@@ -13,7 +13,7 @@ part 'deep_linking_event.dart';
 part 'deep_linking_state.dart';
 part 'deep_linking_bloc.freezed.dart';
 
-//TODO: Add bloc_test + widget_test
+//TODO: widget_test
 
 class DeepLinkingBloc extends Bloc<DeepLinkingEvent, DeepLinkingState> {
   final DynamicLinksService service;

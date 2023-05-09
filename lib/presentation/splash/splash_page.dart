@@ -57,7 +57,7 @@ class SplashPage extends StatefulWidget {
 
 class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
   DateTime dateTime = DateTime.now();
-
+  
   @override
   void initState() {
     super.initState();
