@@ -19,32 +19,38 @@ mixin _$RedirectFailure {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() materialDetailRoute,
+    required TResult Function() historyDetailRoute,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? materialDetailRoute,
+    TResult? Function()? historyDetailRoute,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? materialDetailRoute,
+    TResult Function()? historyDetailRoute,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_MaterialDetailRoute value) materialDetailRoute,
+    required TResult Function(_HistoryDetailRoute value) historyDetailRoute,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_MaterialDetailRoute value)? materialDetailRoute,
+    TResult? Function(_HistoryDetailRoute value)? historyDetailRoute,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_MaterialDetailRoute value)? materialDetailRoute,
+    TResult Function(_HistoryDetailRoute value)? historyDetailRoute,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -107,6 +113,7 @@ class _$_MaterialDetailRoute implements _MaterialDetailRoute {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() materialDetailRoute,
+    required TResult Function() historyDetailRoute,
   }) {
     return materialDetailRoute();
   }
@@ -115,6 +122,7 @@ class _$_MaterialDetailRoute implements _MaterialDetailRoute {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? materialDetailRoute,
+    TResult? Function()? historyDetailRoute,
   }) {
     return materialDetailRoute?.call();
   }
@@ -123,6 +131,7 @@ class _$_MaterialDetailRoute implements _MaterialDetailRoute {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? materialDetailRoute,
+    TResult Function()? historyDetailRoute,
     required TResult orElse(),
   }) {
     if (materialDetailRoute != null) {
@@ -135,6 +144,7 @@ class _$_MaterialDetailRoute implements _MaterialDetailRoute {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_MaterialDetailRoute value) materialDetailRoute,
+    required TResult Function(_HistoryDetailRoute value) historyDetailRoute,
   }) {
     return materialDetailRoute(this);
   }
@@ -143,6 +153,7 @@ class _$_MaterialDetailRoute implements _MaterialDetailRoute {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_MaterialDetailRoute value)? materialDetailRoute,
+    TResult? Function(_HistoryDetailRoute value)? historyDetailRoute,
   }) {
     return materialDetailRoute?.call(this);
   }
@@ -151,6 +162,7 @@ class _$_MaterialDetailRoute implements _MaterialDetailRoute {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_MaterialDetailRoute value)? materialDetailRoute,
+    TResult Function(_HistoryDetailRoute value)? historyDetailRoute,
     required TResult orElse(),
   }) {
     if (materialDetailRoute != null) {
@@ -162,4 +174,106 @@ class _$_MaterialDetailRoute implements _MaterialDetailRoute {
 
 abstract class _MaterialDetailRoute implements RedirectFailure {
   const factory _MaterialDetailRoute() = _$_MaterialDetailRoute;
+}
+
+/// @nodoc
+abstract class _$$_HistoryDetailRouteCopyWith<$Res> {
+  factory _$$_HistoryDetailRouteCopyWith(_$_HistoryDetailRoute value,
+          $Res Function(_$_HistoryDetailRoute) then) =
+      __$$_HistoryDetailRouteCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_HistoryDetailRouteCopyWithImpl<$Res>
+    extends _$RedirectFailureCopyWithImpl<$Res, _$_HistoryDetailRoute>
+    implements _$$_HistoryDetailRouteCopyWith<$Res> {
+  __$$_HistoryDetailRouteCopyWithImpl(
+      _$_HistoryDetailRoute _value, $Res Function(_$_HistoryDetailRoute) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_HistoryDetailRoute implements _HistoryDetailRoute {
+  const _$_HistoryDetailRoute();
+
+  @override
+  String toString() {
+    return 'RedirectFailure.historyDetailRoute()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_HistoryDetailRoute);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() materialDetailRoute,
+    required TResult Function() historyDetailRoute,
+  }) {
+    return historyDetailRoute();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? materialDetailRoute,
+    TResult? Function()? historyDetailRoute,
+  }) {
+    return historyDetailRoute?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? materialDetailRoute,
+    TResult Function()? historyDetailRoute,
+    required TResult orElse(),
+  }) {
+    if (historyDetailRoute != null) {
+      return historyDetailRoute();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_MaterialDetailRoute value) materialDetailRoute,
+    required TResult Function(_HistoryDetailRoute value) historyDetailRoute,
+  }) {
+    return historyDetailRoute(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_MaterialDetailRoute value)? materialDetailRoute,
+    TResult? Function(_HistoryDetailRoute value)? historyDetailRoute,
+  }) {
+    return historyDetailRoute?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_MaterialDetailRoute value)? materialDetailRoute,
+    TResult Function(_HistoryDetailRoute value)? historyDetailRoute,
+    required TResult orElse(),
+  }) {
+    if (historyDetailRoute != null) {
+      return historyDetailRoute(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _HistoryDetailRoute implements RedirectFailure {
+  const factory _HistoryDetailRoute() = _$_HistoryDetailRoute;
 }

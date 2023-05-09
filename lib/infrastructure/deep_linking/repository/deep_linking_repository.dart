@@ -7,7 +7,6 @@ import 'package:ezrxmobile/domain/deep_linking/repository/i_deep_linking_reposit
 
 class DeepLinkingRepository implements IDeepLinkingRepository {
   DeepLinkingRepository();
-
   @override
   Either<RedirectFailure, String> extractMaterialNumber({
     required SalesOrganisation selectedSalesOrganisation,
@@ -30,5 +29,27 @@ class DeepLinkingRepository implements IDeepLinkingRepository {
         : const Left(
             RedirectFailure.materialDetailRoute(),
           );
+  }
+
+  @override
+  Either<RedirectFailure, String> extractOrderHistory({
+    required SalesOrganisation selectedSalesOrganisation,
+    required CustomerCodeInfo selectedCustomerCode,
+    required ShipToInfo selectedShipTo,
+    required Uri link,
+  }) {
+    final salesOrg = link.queryParameters['salesorg'];
+    final customerCode = link.queryParameters['customer'];
+    final shipToCode = link.queryParameters['shipto'];
+    final history = link.queryParameters['history'] ?? '';
+    final isValidLink =
+        salesOrg == selectedSalesOrganisation.salesOrg.getValue() &&
+            customerCode == selectedCustomerCode.customerCodeSoldTo &&
+            shipToCode == selectedShipTo.shipToCustomerCode &&
+            history.isNotEmpty;
+
+    return isValidLink
+        ? Right(history)
+        : const Left(RedirectFailure.historyDetailRoute());
   }
 }

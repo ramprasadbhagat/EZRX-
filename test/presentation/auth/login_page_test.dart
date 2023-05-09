@@ -256,7 +256,7 @@ void main() {
             ),
             BlocProvider<DeepLinkingBloc>(
               create: (context) => deepLinkingBlocMock,
-            ),
+            )
           ],
           child: const SplashPage(),
         ),

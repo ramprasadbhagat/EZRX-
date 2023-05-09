@@ -80,7 +80,6 @@ extension ApiFailureExt on ApiFailure {
       invalidFileFormat: (_) =>
           'Unable to upload file as either file format not supported or something wrong with the file',
       uploadCountExcideLimit: (_) => 'Number of files exceeds the criteria',
-
     );
 
     return failureMessage;

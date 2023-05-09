@@ -563,6 +563,7 @@ mixin _$DeepLinkingState {
     required TResult Function() initial,
     required TResult Function(Uri link) linkPending,
     required TResult Function(String materialNumber) redirectMaterialDetail,
+    required TResult Function(String history) redirectHistoryDetail,
     required TResult Function(RedirectFailure failure) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -571,6 +572,7 @@ mixin _$DeepLinkingState {
     TResult? Function()? initial,
     TResult? Function(Uri link)? linkPending,
     TResult? Function(String materialNumber)? redirectMaterialDetail,
+    TResult? Function(String history)? redirectHistoryDetail,
     TResult? Function(RedirectFailure failure)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -579,6 +581,7 @@ mixin _$DeepLinkingState {
     TResult Function()? initial,
     TResult Function(Uri link)? linkPending,
     TResult Function(String materialNumber)? redirectMaterialDetail,
+    TResult Function(String history)? redirectHistoryDetail,
     TResult Function(RedirectFailure failure)? error,
     required TResult orElse(),
   }) =>
@@ -589,6 +592,8 @@ mixin _$DeepLinkingState {
     required TResult Function(_LinkPending value) linkPending,
     required TResult Function(_RedirectMaterialDetail value)
         redirectMaterialDetail,
+    required TResult Function(_RedirectHistoryDetail value)
+        redirectHistoryDetail,
     required TResult Function(_Error value) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -597,6 +602,7 @@ mixin _$DeepLinkingState {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_LinkPending value)? linkPending,
     TResult? Function(_RedirectMaterialDetail value)? redirectMaterialDetail,
+    TResult? Function(_RedirectHistoryDetail value)? redirectHistoryDetail,
     TResult? Function(_Error value)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -605,6 +611,7 @@ mixin _$DeepLinkingState {
     TResult Function(_Initial value)? initial,
     TResult Function(_LinkPending value)? linkPending,
     TResult Function(_RedirectMaterialDetail value)? redirectMaterialDetail,
+    TResult Function(_RedirectHistoryDetail value)? redirectHistoryDetail,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) =>
@@ -669,6 +676,7 @@ class _$_Initial implements _Initial {
     required TResult Function() initial,
     required TResult Function(Uri link) linkPending,
     required TResult Function(String materialNumber) redirectMaterialDetail,
+    required TResult Function(String history) redirectHistoryDetail,
     required TResult Function(RedirectFailure failure) error,
   }) {
     return initial();
@@ -680,6 +688,7 @@ class _$_Initial implements _Initial {
     TResult? Function()? initial,
     TResult? Function(Uri link)? linkPending,
     TResult? Function(String materialNumber)? redirectMaterialDetail,
+    TResult? Function(String history)? redirectHistoryDetail,
     TResult? Function(RedirectFailure failure)? error,
   }) {
     return initial?.call();
@@ -691,6 +700,7 @@ class _$_Initial implements _Initial {
     TResult Function()? initial,
     TResult Function(Uri link)? linkPending,
     TResult Function(String materialNumber)? redirectMaterialDetail,
+    TResult Function(String history)? redirectHistoryDetail,
     TResult Function(RedirectFailure failure)? error,
     required TResult orElse(),
   }) {
@@ -707,6 +717,8 @@ class _$_Initial implements _Initial {
     required TResult Function(_LinkPending value) linkPending,
     required TResult Function(_RedirectMaterialDetail value)
         redirectMaterialDetail,
+    required TResult Function(_RedirectHistoryDetail value)
+        redirectHistoryDetail,
     required TResult Function(_Error value) error,
   }) {
     return initial(this);
@@ -718,6 +730,7 @@ class _$_Initial implements _Initial {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_LinkPending value)? linkPending,
     TResult? Function(_RedirectMaterialDetail value)? redirectMaterialDetail,
+    TResult? Function(_RedirectHistoryDetail value)? redirectHistoryDetail,
     TResult? Function(_Error value)? error,
   }) {
     return initial?.call(this);
@@ -729,6 +742,7 @@ class _$_Initial implements _Initial {
     TResult Function(_Initial value)? initial,
     TResult Function(_LinkPending value)? linkPending,
     TResult Function(_RedirectMaterialDetail value)? redirectMaterialDetail,
+    TResult Function(_RedirectHistoryDetail value)? redirectHistoryDetail,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -810,6 +824,7 @@ class _$_LinkPending implements _LinkPending {
     required TResult Function() initial,
     required TResult Function(Uri link) linkPending,
     required TResult Function(String materialNumber) redirectMaterialDetail,
+    required TResult Function(String history) redirectHistoryDetail,
     required TResult Function(RedirectFailure failure) error,
   }) {
     return linkPending(link);
@@ -821,6 +836,7 @@ class _$_LinkPending implements _LinkPending {
     TResult? Function()? initial,
     TResult? Function(Uri link)? linkPending,
     TResult? Function(String materialNumber)? redirectMaterialDetail,
+    TResult? Function(String history)? redirectHistoryDetail,
     TResult? Function(RedirectFailure failure)? error,
   }) {
     return linkPending?.call(link);
@@ -832,6 +848,7 @@ class _$_LinkPending implements _LinkPending {
     TResult Function()? initial,
     TResult Function(Uri link)? linkPending,
     TResult Function(String materialNumber)? redirectMaterialDetail,
+    TResult Function(String history)? redirectHistoryDetail,
     TResult Function(RedirectFailure failure)? error,
     required TResult orElse(),
   }) {
@@ -848,6 +865,8 @@ class _$_LinkPending implements _LinkPending {
     required TResult Function(_LinkPending value) linkPending,
     required TResult Function(_RedirectMaterialDetail value)
         redirectMaterialDetail,
+    required TResult Function(_RedirectHistoryDetail value)
+        redirectHistoryDetail,
     required TResult Function(_Error value) error,
   }) {
     return linkPending(this);
@@ -859,6 +878,7 @@ class _$_LinkPending implements _LinkPending {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_LinkPending value)? linkPending,
     TResult? Function(_RedirectMaterialDetail value)? redirectMaterialDetail,
+    TResult? Function(_RedirectHistoryDetail value)? redirectHistoryDetail,
     TResult? Function(_Error value)? error,
   }) {
     return linkPending?.call(this);
@@ -870,6 +890,7 @@ class _$_LinkPending implements _LinkPending {
     TResult Function(_Initial value)? initial,
     TResult Function(_LinkPending value)? linkPending,
     TResult Function(_RedirectMaterialDetail value)? redirectMaterialDetail,
+    TResult Function(_RedirectHistoryDetail value)? redirectHistoryDetail,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -958,6 +979,7 @@ class _$_RedirectMaterialDetail implements _RedirectMaterialDetail {
     required TResult Function() initial,
     required TResult Function(Uri link) linkPending,
     required TResult Function(String materialNumber) redirectMaterialDetail,
+    required TResult Function(String history) redirectHistoryDetail,
     required TResult Function(RedirectFailure failure) error,
   }) {
     return redirectMaterialDetail(materialNumber);
@@ -969,6 +991,7 @@ class _$_RedirectMaterialDetail implements _RedirectMaterialDetail {
     TResult? Function()? initial,
     TResult? Function(Uri link)? linkPending,
     TResult? Function(String materialNumber)? redirectMaterialDetail,
+    TResult? Function(String history)? redirectHistoryDetail,
     TResult? Function(RedirectFailure failure)? error,
   }) {
     return redirectMaterialDetail?.call(materialNumber);
@@ -980,6 +1003,7 @@ class _$_RedirectMaterialDetail implements _RedirectMaterialDetail {
     TResult Function()? initial,
     TResult Function(Uri link)? linkPending,
     TResult Function(String materialNumber)? redirectMaterialDetail,
+    TResult Function(String history)? redirectHistoryDetail,
     TResult Function(RedirectFailure failure)? error,
     required TResult orElse(),
   }) {
@@ -996,6 +1020,8 @@ class _$_RedirectMaterialDetail implements _RedirectMaterialDetail {
     required TResult Function(_LinkPending value) linkPending,
     required TResult Function(_RedirectMaterialDetail value)
         redirectMaterialDetail,
+    required TResult Function(_RedirectHistoryDetail value)
+        redirectHistoryDetail,
     required TResult Function(_Error value) error,
   }) {
     return redirectMaterialDetail(this);
@@ -1007,6 +1033,7 @@ class _$_RedirectMaterialDetail implements _RedirectMaterialDetail {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_LinkPending value)? linkPending,
     TResult? Function(_RedirectMaterialDetail value)? redirectMaterialDetail,
+    TResult? Function(_RedirectHistoryDetail value)? redirectHistoryDetail,
     TResult? Function(_Error value)? error,
   }) {
     return redirectMaterialDetail?.call(this);
@@ -1018,6 +1045,7 @@ class _$_RedirectMaterialDetail implements _RedirectMaterialDetail {
     TResult Function(_Initial value)? initial,
     TResult Function(_LinkPending value)? linkPending,
     TResult Function(_RedirectMaterialDetail value)? redirectMaterialDetail,
+    TResult Function(_RedirectHistoryDetail value)? redirectHistoryDetail,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -1035,6 +1063,161 @@ abstract class _RedirectMaterialDetail implements DeepLinkingState {
   String get materialNumber;
   @JsonKey(ignore: true)
   _$$_RedirectMaterialDetailCopyWith<_$_RedirectMaterialDetail> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_RedirectHistoryDetailCopyWith<$Res> {
+  factory _$$_RedirectHistoryDetailCopyWith(_$_RedirectHistoryDetail value,
+          $Res Function(_$_RedirectHistoryDetail) then) =
+      __$$_RedirectHistoryDetailCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String history});
+}
+
+/// @nodoc
+class __$$_RedirectHistoryDetailCopyWithImpl<$Res>
+    extends _$DeepLinkingStateCopyWithImpl<$Res, _$_RedirectHistoryDetail>
+    implements _$$_RedirectHistoryDetailCopyWith<$Res> {
+  __$$_RedirectHistoryDetailCopyWithImpl(_$_RedirectHistoryDetail _value,
+      $Res Function(_$_RedirectHistoryDetail) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? history = null,
+  }) {
+    return _then(_$_RedirectHistoryDetail(
+      null == history
+          ? _value.history
+          : history // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_RedirectHistoryDetail implements _RedirectHistoryDetail {
+  const _$_RedirectHistoryDetail(this.history);
+
+  @override
+  final String history;
+
+  @override
+  String toString() {
+    return 'DeepLinkingState.redirectHistoryDetail(history: $history)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_RedirectHistoryDetail &&
+            (identical(other.history, history) || other.history == history));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, history);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_RedirectHistoryDetailCopyWith<_$_RedirectHistoryDetail> get copyWith =>
+      __$$_RedirectHistoryDetailCopyWithImpl<_$_RedirectHistoryDetail>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(Uri link) linkPending,
+    required TResult Function(String materialNumber) redirectMaterialDetail,
+    required TResult Function(String history) redirectHistoryDetail,
+    required TResult Function(RedirectFailure failure) error,
+  }) {
+    return redirectHistoryDetail(history);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(Uri link)? linkPending,
+    TResult? Function(String materialNumber)? redirectMaterialDetail,
+    TResult? Function(String history)? redirectHistoryDetail,
+    TResult? Function(RedirectFailure failure)? error,
+  }) {
+    return redirectHistoryDetail?.call(history);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(Uri link)? linkPending,
+    TResult Function(String materialNumber)? redirectMaterialDetail,
+    TResult Function(String history)? redirectHistoryDetail,
+    TResult Function(RedirectFailure failure)? error,
+    required TResult orElse(),
+  }) {
+    if (redirectHistoryDetail != null) {
+      return redirectHistoryDetail(history);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_LinkPending value) linkPending,
+    required TResult Function(_RedirectMaterialDetail value)
+        redirectMaterialDetail,
+    required TResult Function(_RedirectHistoryDetail value)
+        redirectHistoryDetail,
+    required TResult Function(_Error value) error,
+  }) {
+    return redirectHistoryDetail(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_LinkPending value)? linkPending,
+    TResult? Function(_RedirectMaterialDetail value)? redirectMaterialDetail,
+    TResult? Function(_RedirectHistoryDetail value)? redirectHistoryDetail,
+    TResult? Function(_Error value)? error,
+  }) {
+    return redirectHistoryDetail?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_LinkPending value)? linkPending,
+    TResult Function(_RedirectMaterialDetail value)? redirectMaterialDetail,
+    TResult Function(_RedirectHistoryDetail value)? redirectHistoryDetail,
+    TResult Function(_Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (redirectHistoryDetail != null) {
+      return redirectHistoryDetail(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _RedirectHistoryDetail implements DeepLinkingState {
+  const factory _RedirectHistoryDetail(final String history) =
+      _$_RedirectHistoryDetail;
+
+  String get history;
+  @JsonKey(ignore: true)
+  _$$_RedirectHistoryDetailCopyWith<_$_RedirectHistoryDetail> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1113,6 +1296,7 @@ class _$_Error implements _Error {
     required TResult Function() initial,
     required TResult Function(Uri link) linkPending,
     required TResult Function(String materialNumber) redirectMaterialDetail,
+    required TResult Function(String history) redirectHistoryDetail,
     required TResult Function(RedirectFailure failure) error,
   }) {
     return error(failure);
@@ -1124,6 +1308,7 @@ class _$_Error implements _Error {
     TResult? Function()? initial,
     TResult? Function(Uri link)? linkPending,
     TResult? Function(String materialNumber)? redirectMaterialDetail,
+    TResult? Function(String history)? redirectHistoryDetail,
     TResult? Function(RedirectFailure failure)? error,
   }) {
     return error?.call(failure);
@@ -1135,6 +1320,7 @@ class _$_Error implements _Error {
     TResult Function()? initial,
     TResult Function(Uri link)? linkPending,
     TResult Function(String materialNumber)? redirectMaterialDetail,
+    TResult Function(String history)? redirectHistoryDetail,
     TResult Function(RedirectFailure failure)? error,
     required TResult orElse(),
   }) {
@@ -1151,6 +1337,8 @@ class _$_Error implements _Error {
     required TResult Function(_LinkPending value) linkPending,
     required TResult Function(_RedirectMaterialDetail value)
         redirectMaterialDetail,
+    required TResult Function(_RedirectHistoryDetail value)
+        redirectHistoryDetail,
     required TResult Function(_Error value) error,
   }) {
     return error(this);
@@ -1162,6 +1350,7 @@ class _$_Error implements _Error {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_LinkPending value)? linkPending,
     TResult? Function(_RedirectMaterialDetail value)? redirectMaterialDetail,
+    TResult? Function(_RedirectHistoryDetail value)? redirectHistoryDetail,
     TResult? Function(_Error value)? error,
   }) {
     return error?.call(this);
@@ -1173,6 +1362,7 @@ class _$_Error implements _Error {
     TResult Function(_Initial value)? initial,
     TResult Function(_LinkPending value)? linkPending,
     TResult Function(_RedirectMaterialDetail value)? redirectMaterialDetail,
+    TResult Function(_RedirectHistoryDetail value)? redirectHistoryDetail,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {

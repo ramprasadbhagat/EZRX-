@@ -11,4 +11,10 @@ abstract class IDeepLinkingRepository {
     required ShipToInfo selectedShipTo,
     required Uri link,
   });
+  Either<RedirectFailure, String> extractOrderHistory({
+    required SalesOrganisation selectedSalesOrganisation,
+    required CustomerCodeInfo selectedCustomerCode,
+    required ShipToInfo selectedShipTo,
+    required Uri link,
+  });
 }

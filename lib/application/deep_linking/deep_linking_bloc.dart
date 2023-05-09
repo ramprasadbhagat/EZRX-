@@ -38,25 +38,46 @@ class DeepLinkingBloc extends Bloc<DeepLinkingEvent, DeepLinkingState> {
           state.when(
             initial: () {},
             linkPending: (link) {
-              if (link.path.startsWith('/material_detail')) {
-                final failureOrSuccess = repository.extractMaterialNumber(
-                  selectedSalesOrganisation: event.selectedSalesOrganisation,
-                  selectedCustomerCode: event.selectedCustomerCode,
-                  selectedShipTo: event.selectedShipTo,
-                  link: link,
-                );
+              switch (link.path) {
+                case '/material_detail':
+                  final failureOrSuccess = repository.extractMaterialNumber(
+                    selectedSalesOrganisation: event.selectedSalesOrganisation,
+                    selectedCustomerCode: event.selectedCustomerCode,
+                    selectedShipTo: event.selectedShipTo,
+                    link: link,
+                  );
 
-                failureOrSuccess.fold(
-                  (error) => emit(
-                    DeepLinkingState.error(error),
-                  ),
-                  (materialNumber) => emit(
-                    DeepLinkingState.redirectMaterialDetail(materialNumber),
-                  ),
-                );
+                  failureOrSuccess.fold(
+                    (error) => emit(
+                      DeepLinkingState.error(error),
+                    ),
+                    (materialNumber) => emit(
+                      DeepLinkingState.redirectMaterialDetail(materialNumber),
+                    ),
+                  );
+                  break;
+                case '/history_details':
+                  final failureOrSuccess = repository.extractOrderHistory(
+                    selectedSalesOrganisation: event.selectedSalesOrganisation,
+                    selectedCustomerCode: event.selectedCustomerCode,
+                    selectedShipTo: event.selectedShipTo,
+                    link: link,
+                  );
+
+                  failureOrSuccess.fold(
+                    (error) => emit(
+                      DeepLinkingState.error(error),
+                    ),
+                    (history) => emit(
+                      DeepLinkingState.redirectHistoryDetail(history),
+                    ),
+                  );
+                  break;
+                default:
               }
             },
             redirectMaterialDetail: (_) {},
+            redirectHistoryDetail: (_) {},
             error: (_) {},
           );
         },

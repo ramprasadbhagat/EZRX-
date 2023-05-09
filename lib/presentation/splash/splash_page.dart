@@ -1,10 +1,15 @@
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
+import 'package:ezrxmobile/application/order/order_history_details/order_history_details_bloc.dart';
+import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/domain/deep_linking/error/redirect_failures.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/application/returns/returns_overview/returns_overview_bloc.dart';
@@ -330,7 +335,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
         BlocListener<EligibilityBloc, EligibilityState>(
           listenWhen: (previous, current) =>
               previous.shipToInfo != current.shipToInfo,
-          listener: (context, state) {
+          listener: (context, state) async {
             context.read<CartBloc>().add(
                   CartEvent.fetch(
                     doNotAllowOutOfStockMaterials:
@@ -369,11 +374,11 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
         ),
         BlocListener<DeepLinkingBloc, DeepLinkingState>(
           listener: (context, state) {
+            final eligibilityState = context.read<EligibilityBloc>().state;
+
             state.when(
               initial: () {},
               linkPending: (_) {
-                final eligibilityState = context.read<EligibilityBloc>().state;
-
                 context.read<DeepLinkingBloc>().add(
                       DeepLinkingEvent.consumePendingLink(
                         selectedSalesOrganisation:
@@ -388,6 +393,31 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                   context: context,
                   materialNumber: materialNumber,
                 );
+              },
+              redirectHistoryDetail: (history) {
+                context.read<OrderHistoryDetailsBloc>().add(
+                      OrderHistoryDetailsEvent.fetch(
+                        user: context.read<UserBloc>().state.user,
+                        orderHistoryItem: OrderHistoryItem.empty().copyWith(
+                          orderNumber: OrderNumber(history),
+                        ),
+                      ),
+                    );
+                context.router.push(HistoryDetailsRoute(
+                  orderHistoryItem: OrderHistoryItem.empty()
+                      .copyWith(orderNumber: OrderNumber(history)),
+                  billToInfo:
+                      eligibilityState.customerCodeInfo.billToInfos.isNotEmpty
+                          ? eligibilityState.customerCodeInfo.billToInfos.first
+                          : BillToInfo.empty(),
+                  customerCodeInfo: eligibilityState.customerCodeInfo,
+                  orderHistoryBasicInfo: context
+                      .read<OrderHistoryListBloc>()
+                      .state
+                      .orderHistoryList
+                      .orderBasicInformation,
+                  salesOrgConfigs: eligibilityState.salesOrgConfigs,
+                ));
               },
               error: (error) {
                 showSnackBar(

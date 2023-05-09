@@ -140,6 +140,8 @@ class RemoteConfigServiceMock extends Mock implements RemoteConfigService {}
 class DeepLinkingMockBloc extends MockBloc<DeepLinkingEvent, DeepLinkingState>
     implements DeepLinkingBloc {}
 
+
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
@@ -229,6 +231,7 @@ void main() {
       returnApproverFilterBlocMock = ReturnApproverFilterBlocMock();
       announcementBlocMock = AnnouncementBlocMock();
       deepLinkingBlocMock = DeepLinkingMockBloc();
+
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
       when(() => orderDocumentTypeMock.state).thenReturn(
         OrderDocumentTypeState.initial().copyWith(

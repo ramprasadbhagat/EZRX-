@@ -196,7 +196,7 @@ void main() {
     });
 
     testWidgets(
-        'Test - AupTc Widget Show AupTcBloc state.showTermsAndConditon=false',
+        'Test - AupTc Widget Show AupTcBloc state.showTermsAndCondition=false',
         (tester) async {
       when(() => mockAupTcBloc.state).thenReturn(
         AupTcState.initial().copyWith(
@@ -245,7 +245,7 @@ void main() {
           child: const SplashPage(),
         ),
       );
-      await tester.pump();
+      await tester.pumpAndSettle();
       final auptcscreen = find.byKey(const Key('auptcscreen'));
       expect(auptcscreen, findsNothing);
     });
