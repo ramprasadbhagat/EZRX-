@@ -42,6 +42,7 @@ class MaterialPriceDetailRepository implements IMaterialPriceDetailRepository {
       customerCodeInfo: customerCodeInfo,
       shipToCodeInfo: shipToCodeInfo,
       materialQueryList: [queryInfo],
+      isComboDealMaterials: isComboDealMaterials,
     );
 
     return materialDetailList.fold(
@@ -106,6 +107,7 @@ class MaterialPriceDetailRepository implements IMaterialPriceDetailRepository {
 
       materialDetails.addAll(
         {
+
           for (final materialDetail in materialDetailData)
             materialQueryList.firstWhere(
               (element) => element.value == materialDetail.price.materialNumber,

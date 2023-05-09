@@ -24,6 +24,9 @@ class MaterialDetailLocalDataSourceMock extends Mock
 
 class ConfigMock extends Mock implements Config {}
 
+class MaterialPriceDetailRepositoryMock extends Mock
+    implements MaterialPriceDetailRepository {}
+
 void main() {
   late MaterialPriceDetailRepository repository;
   late MaterialPriceDetailRemoteDataSource remoteDataSourceMock;
@@ -458,24 +461,6 @@ void main() {
     test('Get MaterialDetails from remote fail ZDP8 override', () async {
       when(() => configMock.appFlavor).thenReturn(Flavor.dev);
 
-      // when(
-      //       () => remoteDataSourceMock.getMaterialDetail(
-      //     salesOrgCode: 'fake-saleOrg',
-      //     customerCode: 'fake-customer-code',
-      //     shipToCode: 'fake-ship-to-code',
-      //     language: '',
-      //     queryString: [
-      //       {
-      //         'MaterialNumber': 'fake-material-1',
-      //         'ZDP8': 1,
-      //         'ZPO1': 1,
-      //       },
-      //     ],
-      //   ),
-      // ).thenThrow(
-      //       (invocation) async => MockException(),
-      // );
-
       when(() => remoteDataSourceMock.getMaterialDetailZDP5Enabled(
           salesOrgCode: '',
           customerCode: '',
@@ -558,6 +543,101 @@ void main() {
                 fakeQueryResponseWhenEnableZDP5WithOverride[0],
           },
         );
+      });
+    });
+
+    group('Get single material detail', () {
+      test('- local success', () async {
+        when(() => configMock.appFlavor).thenReturn(Flavor.mock);
+        when(() => localDataSourceMock.getMaterialDetailList()).thenAnswer(
+          (invocation) async => [fakeQueryResponseNotEnableZDP5.first],
+        );
+
+        final result = await repository.getMaterialDetail(
+          salesOrganisation: fakeSaleOrg,
+          salesOrganisationConfigs: fakeSaleOrgConfig,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToCodeInfo: fakeShipToInfo,
+          materialNumber: fakeQuery.first.value,
+        );
+
+        expect(result.isRight(), true);
+        await result.fold((l) async {}, (r) async {
+          expect(r, fakeQueryResponseNotEnableZDP5[0]);
+        });
+      });
+      test('- local fail', () async {
+        when(() => configMock.appFlavor).thenReturn(Flavor.mock);
+        when(() => localDataSourceMock.getMaterialDetailList())
+            .thenThrow((invocation) async => MockException());
+
+        final result = await repository.getMaterialDetail(
+          salesOrganisation: fakeSaleOrg,
+          salesOrganisationConfigs: fakeSaleOrgConfig,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToCodeInfo: fakeShipToInfo,
+          materialNumber: fakeQuery.first.value,
+        );
+
+        expect(result.isLeft(), true);
+      });
+      test('- remote success', () async {
+        when(() => configMock.appFlavor).thenReturn(Flavor.dev);
+
+        when(
+          () => remoteDataSourceMock.getMaterialDetail(
+            salesOrgCode: 'fake-saleOrg',
+            customerCode: 'fake-customer-code',
+            shipToCode: 'fake-ship-to-code',
+            language: '',
+            listPriceOnly: false,
+            queryString: [
+              {'MaterialNumber': 'fake-material-1'}
+            ],
+          ),
+        ).thenAnswer(
+          (invocation) async => [fakeQueryResponseNotEnableZDP5.first],
+        );
+
+        final result = await repository.getMaterialDetail(
+          salesOrganisation: fakeSaleOrg,
+          salesOrganisationConfigs: fakeSaleOrgConfig,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToCodeInfo: fakeShipToInfo,
+          materialNumber: fakeQuery.first.value,
+        );
+
+        expect(result.isRight(), true);
+
+        await result.fold((l) async {}, (r) async {
+          expect(r, fakeQueryResponseNotEnableZDP5[0]);
+        });
+      });
+      test('- remote fail', () async {
+        when(() => configMock.appFlavor).thenReturn(Flavor.dev);
+
+        when(
+          () => remoteDataSourceMock.getMaterialDetail(
+            salesOrgCode: 'fake-saleOrg',
+            customerCode: 'fake-customer-code',
+            shipToCode: 'fake-ship-to-code',
+            listPriceOnly: false,
+            language: '',
+            queryString: [
+              {'MaterialNumber': 'fake-material-1'}
+            ],
+          ),
+        ).thenThrow((invocation) async => MockException());
+
+        final result = await repository.getMaterialDetail(
+          salesOrganisation: fakeSaleOrg,
+          salesOrganisationConfigs: fakeSaleOrgConfig,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToCodeInfo: fakeShipToInfo,
+          materialNumber: fakeQuery.first.value,
+        );
+
+        expect(result.isLeft(), true);
       });
     });
   });
