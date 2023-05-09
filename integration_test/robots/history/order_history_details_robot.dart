@@ -13,6 +13,7 @@ class OrderHistoryDetailsRobot {
   final backButton =
       find.byKey(const ValueKey('backToOrderHistoryDetailsPage'));
   final reOrderButton = find.byKey(const Key('reOrderButton'));
+  final topMenuReOrderButton = find.byKey(const Key('addToCartPressed'));
 
   void verify() {
     final orderHistoryDetails =
@@ -42,6 +43,11 @@ class OrderHistoryDetailsRobot {
   void verifyPaymentTerm(String value) {
     final paymentTerm = find.byKey(Key('Payment Term$value'));
     expect(paymentTerm, findsOneWidget);
+  }
+
+  void verifyPaymentTermIsDisabled() {
+    final paymentTerm = find.byKey(const Key('paymentTerm'));
+    expect(paymentTerm, findsNothing);
   }
 
   Future<void> tapOrderDetails() async {
@@ -178,6 +184,15 @@ class OrderHistoryDetailsRobot {
 
   Future<void> tapReOrderButton() async {
     await tester.tap(reOrderButton);
+    await tester.pumpAndSettle();
+  }
+
+  void findTopmenuReOrderButton() {
+    expect(topMenuReOrderButton, findsOneWidget);
+  }
+
+  Future<void> tapTopMenuReOrderButton() async {
+    await tester.tap(topMenuReOrderButton);
     await tester.pumpAndSettle();
   }
 

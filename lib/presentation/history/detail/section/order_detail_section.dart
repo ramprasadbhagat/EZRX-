@@ -191,6 +191,7 @@ class HistoryOrderDetailSection extends StatelessWidget {
                 : const SizedBox.shrink(),
             paymentTermDisplay
                 ? BalanceTextRow(
+                    key: const ValueKey('paymentTermDisplay'),
                     keyText: 'Payment Term Description'.tr(),
                     valueText: orderDetails.orderHistoryDetailsPaymentTerm
                         .paymentTermDescription.displayPaymentTermDescription.tr(),

@@ -8,9 +8,17 @@ class MaterialRootRobot {
   final bundles = find.byKey(const Key('bundles'));
   final material = find.byKey(const Key('material'));
   final covid = find.byKey(const Key('covid-19'));
+  final announcementCloseIcon = find.byKey(const Key('announcementCloseIcon'));
 
   void verify() {
     expect(find.byKey(const Key('materialRootPage')), findsOneWidget);
+  }
+
+  Future<void> findAndCloseAnnouncementIcon() async {
+    if (announcementCloseIcon.evaluate().isNotEmpty) {
+      await tester.tap(announcementCloseIcon.first);
+      await tester.pumpAndSettle();
+    }
   }
 
   void findBundlesTab() {
@@ -50,6 +58,4 @@ class MaterialRootRobot {
     navigator.pop();
     await tester.pumpAndSettle();
   }
-
-  
 }

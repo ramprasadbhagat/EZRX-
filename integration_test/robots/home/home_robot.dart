@@ -42,15 +42,6 @@ class HomeRobot {
     await tester.tap(salesOrgOption);
     await tester.pumpAndSettle();
   }
-  
-  void findAnnouncementCloseIcon() {
-    expect(announcementCloseIcon, findsOneWidget);
-  }
-
-  Future<void> closeAnnouncement() async {
-    await tester.tap(announcementCloseIcon);
-    await tester.pumpAndSettle();
-  }
 
   void findAccountTab() {
     expect(accountTabbar, findsOneWidget);
@@ -99,6 +90,13 @@ class HomeRobot {
     expect(createOrder, findsOneWidget);
     await tester.tap(createOrder);
     await tester.pumpAndSettle();
+  }
+
+  Future<void> findAndCloseAnnouncementIcon() async {
+    if (announcementCloseIcon.evaluate().isNotEmpty) {
+      await tester.tap(announcementCloseIcon.first);
+      await tester.pumpAndSettle();
+    }
   }
 
   void findFavoriteTab() {

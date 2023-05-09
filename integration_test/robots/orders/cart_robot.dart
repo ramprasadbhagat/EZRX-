@@ -19,8 +19,7 @@ class CartRobot {
   }
 
   void verifyExpiryMaterial(String materialNumber) {
-    final expiryDate = find.byKey(Key('expiryDate$materialNumber'));
-    expect(expiryDate, findsNothing);
+    expect(find.byKey(Key('expiryDate$materialNumber')), findsOneWidget);
   }
 
   void verifyHideStockDisplay() {
@@ -47,6 +46,13 @@ class CartRobot {
   void verifyDiscountOverridePercentage(double discountPercentage) {
     expect(find.byKey(Key('discountOverridePercentage$discountPercentage')),
         findsOneWidget);
+  }
+
+  void verifyEnableListPrice(String currency, String price) {
+    final listPriceLabel = find.textContaining('List Price: $currency $price');
+    expect(listPriceLabel, findsOneWidget);
+    final listPrice = find.byKey(const Key('listPrice'));
+    expect(listPrice, findsOneWidget);
   }
 
   void findMaterialItem(String materialNumber, int quantity) {
@@ -212,6 +218,11 @@ class CartRobot {
   void verifyTotal(String currencyCode, String price) {
     final totals = find.textContaining('$currencyCode $price');
     expect(totals, findsNWidgets(2));
+  }
+
+  void verifyConcreteTotal(String currencyCode, String price) {
+    final totals = find.byKey(Key('Grand Total$currencyCode $price'));
+    expect(totals, findsNWidgets(1));
   }
 
   Future<void> deleteMaterial(String materialNumber) async {

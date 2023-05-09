@@ -7,6 +7,7 @@ class OrderConfirmationRobot {
   OrderConfirmationRobot(this.tester);
 
   final orderHistory = find.byKey(const Key('goToOrderHistory'));
+  final createNewOrder = find.byKey(const Key('createNewOrder'));
 
   void verify() {
     final orderConfirmationScreen = find.byKey(const Key('orderSuccessKey'));
@@ -24,8 +25,12 @@ class OrderConfirmationRobot {
   }
 
   void findCreateNewOrderButton() {
-    final createNewOrder = find.byKey(const Key('createNewOrder'));
     expect(createNewOrder, findsOneWidget);
+  }
+
+  Future<void> tapCreateNewOrderButton() async {
+    await tester.tap(createNewOrder);
+    await tester.pumpAndSettle();
   }
 
   void findGoToOrderHistoryButton() {

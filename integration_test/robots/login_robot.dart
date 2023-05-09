@@ -6,6 +6,8 @@ class LoginRobot {
 
   LoginRobot(this.tester);
 
+  final announcementCloseIcon = find.byKey(const Key('announcementCloseIcon'));
+
   Future<void> login(String username, String password) async {
     final loginUsernameField = find.byKey(const Key('loginUsernameField'));
     expect(loginUsernameField, findsOneWidget);
@@ -23,5 +25,12 @@ class LoginRobot {
     await tester.ensureVisible(loginSubmitButton);
     await tester.tap(loginSubmitButton);
     await tester.pumpAndSettle();
+  }
+
+  Future<void> findAndCloseAnnouncementIcon() async {
+    if (announcementCloseIcon.evaluate().isNotEmpty) {
+      await tester.tap(announcementCloseIcon.first);
+      await tester.pumpAndSettle();
+    }
   }
 }

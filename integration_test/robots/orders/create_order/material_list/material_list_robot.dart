@@ -18,6 +18,18 @@ class MaterialListRobot {
     expect(orderTypeSelector, findsNothing);
   }
 
+  void verifyDefaultMaterialDescription({required String materialNumber}) {
+    final defaultMaterialDescription =
+        find.byKey(Key('defaultMaterialDescription$materialNumber'));
+    expect(defaultMaterialDescription, findsOneWidget);
+  }
+
+  void verifyGenericMaterialDescription({required String materialNumber}) {
+    final genericMaterialDescription =
+        find.byKey(Key('genericMaterial$materialNumber'));
+    expect(genericMaterialDescription, findsOneWidget);
+  }
+
   Future<void> search(String materialNumber) async {
     final materialSearchField = find.byKey(const Key('materialSearchField'));
     expect(materialSearchField, findsOneWidget);
@@ -32,12 +44,7 @@ class MaterialListRobot {
   }
 
   void verifyCurrencyCheck(String currencyCode) {
-    final existPrice =
-        find.textContaining('${'List Price:'.tr()}NA').evaluate().isEmpty;
-    if (existPrice) {
-      expect(find.textContaining(currencyCode), findsWidgets);
-    }
-    expect(find.textContaining(currencyCode), findsNothing);
+    expect(find.textContaining(currencyCode), findsWidgets);
   }
 
   void verifyEnableGMC() {

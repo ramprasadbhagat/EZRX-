@@ -13,10 +13,13 @@ class OrderSummaryRobot {
   final submitButton =
       find.byKey(const Key('submitButtonKey'), skipOffstage: false).last;
   final saveButton = find.text('Save', skipOffstage: false).last;
+  final updateButton = find.text('Update', skipOffstage: false).last;
   final orderTemplate = find.byKey(const Key('orderSummarySaveTemplate'));
   final saveTemplateButton = find.byKey(const Key('saveButton'));
   final specialInstructionField =
       find.byKey(const Key('specialInstructionKey'));
+  final poReference = find.byKey(const Key('customerPOReferenceKey'));
+  final contactPerson = find.byKey(const Key('contactPersonKey'));
 
   void verify() {
     expect(find.byKey(const Key('orderSummaryKey')), findsOneWidget);
@@ -65,9 +68,11 @@ class OrderSummaryRobot {
     await tester.pumpAndSettle();
   }
 
-  Future<void> enterContactPerson(String value) async {
-    final contactPerson = find.byKey(const Key('contactPersonKey'));
+  void findContactPerson() {
     expect(contactPerson, findsOneWidget);
+  }
+
+  Future<void> enterContactPerson(String value) async {
     await tester.enterText(contactPerson, value);
     await tester.pumpAndSettle();
   }
@@ -77,8 +82,21 @@ class OrderSummaryRobot {
     await tester.pumpAndSettle(const Duration(seconds: 2));
   }
 
+  void findCustomerPOReference() {
+    expect(poReference, findsOneWidget);
+  }
+
+  Future<void> enterCustomerPOReference(String value) async {
+    await tester.enterText(poReference, value);
+    await tester.pumpAndSettle();
+  }
+
   void findSelectPaymentTerm() {
     expect(selectPaymentTerm, findsOneWidget);
+  }
+
+  void doNotFindSelectPaymentTerm() {
+    expect(selectPaymentTerm, findsNothing);
   }
 
   Future<void> tapSelectPaymentTerm() async {
@@ -89,8 +107,7 @@ class OrderSummaryRobot {
   }
 
   void allowMinimumOrderAmount(String amount) {
-    expect(find.byKey(const Key('minimumOrderAmount')), findsOneWidget);
-    expect(find.textContaining(amount), findsWidgets);
+    expect(find.byKey(Key('Min. Order Value$amount')), findsOneWidget);
   }
 
   void findBundleItem(String bundleCode) {
@@ -127,6 +144,15 @@ class OrderSummaryRobot {
   void verifyTotals(String currency, String price) {
     final subTotal = find.textContaining(': $currency $price');
     expect(subTotal, findsNWidgets(3));
+  }
+
+  void verifyIfHideStockDisplayIsEnable(String materialNumber) {
+    final stockInfo = find.byKey(Key('Stock$materialNumber'));
+    expect(stockInfo, findsNothing);
+  }
+
+  bool verifyPOReferenceValidationCheck() {
+    return find.textContaining('PO Reference Required').evaluate().isNotEmpty;
   }
 
   void findMaterialItem(String materialNumber, int quantity) {
@@ -234,6 +260,10 @@ class OrderSummaryRobot {
 
   void findSave() {
     expect(saveButton, findsOneWidget);
+  }
+
+  void findUpdate() {
+    expect(updateButton, findsOneWidget);
   }
 
   Future<void> tapSave() async {

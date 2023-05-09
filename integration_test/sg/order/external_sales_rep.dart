@@ -100,12 +100,10 @@ void main() {
 
     //init app
     await runAppForTesting(tester);
-
+    await loginRobot.findAndCloseAnnouncementIcon();
     await loginRobot.login(username, password);
-
-    homeRobot.findAnnouncementCloseIcon();
-    await homeRobot.closeAnnouncement();
     //select sales org
+    await homeRobot.findAndCloseAnnouncementIcon();
     homeRobot.findSalesOrgSelector();
     await homeRobot.tapSalesOrgSelector();
     await homeRobot.selectSalesOrg(salesOrg);
@@ -127,18 +125,18 @@ void main() {
     homeRobot.verifyEdiCustomer();
     //create order for EDi customer
     await homeRobot.goToCreateOrder();
+
     materialRootRobot.verify();
+    await materialRootRobot.findAndCloseAnnouncementIcon();
     materialRootRobot.findBundlesTab();
     await materialRootRobot.tapBundlesTab();
     //add bundles
     bundleListRobot.verify();
     await bundleListRobot.tapBundle(bundleCode);
     bundleDetailRobot.verify();
-    await bundleDetailRobot.changeBundleMaterialQuantity(
-        bundleMaterial1, 8);
+    await bundleDetailRobot.changeBundleMaterialQuantity(bundleMaterial1, 8);
     await bundleDetailRobot.tapAddBundleMaterialQuantity(bundleMaterial1);
-    await bundleDetailRobot
-        .tapDeductBundleMaterialQuantity(bundleMaterial1);
+    await bundleDetailRobot.tapDeductBundleMaterialQuantity(bundleMaterial1);
     await bundleDetailRobot.addBundlesToCart();
     await cartRobot.goBack();
     await bundleDetailRobot.goBack();
@@ -232,7 +230,8 @@ void main() {
     orderSummaryRobot.findBundleItem(bundleCode);
     orderSummaryRobot.findBundleMaterialItem(bundleMaterial1, 10);
     orderSummaryRobot.verifyBundleMaterialListPrice(true, currency, '100.00');
-    orderSummaryRobot.verifyBundleMaterialUnitPrice(true, '- $currency', '15.00');
+    orderSummaryRobot.verifyBundleMaterialUnitPrice(
+        true, '- $currency', '15.00');
     orderSummaryRobot.verifyBundleMaterialTotalDiscount(
         true, '- $currency', '150.00');
     orderSummaryRobot.findSave();

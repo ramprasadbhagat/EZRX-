@@ -187,6 +187,7 @@ class OrderItemBonusCard extends StatelessWidget {
                         ),
                       if (enableTaxDisplay)
                         BalanceTextRow(
+                          key: const Key('enableTaxDisplay'),
                           keyText: 'Included Tax '.tr(),
                           valueText: orderHistoryDetailsBonusAggregate
                               .orderItem.tax

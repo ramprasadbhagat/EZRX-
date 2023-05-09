@@ -32,6 +32,11 @@ class OrderHistoryRobot {
     await tester.pumpAndSettle();
   }
 
+  Future<void> getKeyboardDown() async {
+    await tester.testTextInput.receiveAction(TextInputAction.done);
+    await tester.pumpAndSettle(const Duration(seconds: 2));
+  }
+
   void findOrderedItem() {
     expect(orderedItem, findsOneWidget);
   }

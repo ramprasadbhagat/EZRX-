@@ -86,12 +86,9 @@ void main() {
 
     //init app
     await runAppForTesting(tester);
-
+    await loginRobot.findAndCloseAnnouncementIcon();
     await loginRobot.login(username, password);
-    
-    homeRobot.findAnnouncementCloseIcon();
-    await homeRobot.closeAnnouncement();
-
+    await homeRobot.findAndCloseAnnouncementIcon();
     //select sales org
     homeRobot.findSalesOrgSelector();
     await homeRobot.tapSalesOrgSelector();
@@ -113,7 +110,7 @@ void main() {
 
     //create order for customer
     await homeRobot.goToCreateOrder();
-
+    await materialRootRobot.findAndCloseAnnouncementIcon();
     materialListRobot.verify();
     //Disable Order Type Selection
     materialListRobot.verifyDisableOrderTypeSelection();
@@ -181,8 +178,7 @@ void main() {
     await orderSummaryRobot
         .enterSpecialInstruction('external special instruction');
     //Enable Contact Person
-    await orderSummaryRobot
-        .enterContactPerson('Contact Person 1');
+    await orderSummaryRobot.enterContactPerson('Contact Person 1');
     await orderSummaryRobot.getKeyboardDown();
     //Enable Payment Terms
     orderSummaryRobot.findSelectPaymentTerm();
@@ -284,8 +280,7 @@ void main() {
     orderSummaryRobot.findSpecialInstruction();
     await orderSummaryRobot.enterSpecialInstruction('special instruction');
     //Enable Contact Person
-    await orderSummaryRobot
-        .enterContactPerson('Contact Person 2');
+    await orderSummaryRobot.enterContactPerson('Contact Person 2');
     await orderSummaryRobot.getKeyboardDown();
     //Enable Payment Terms
     orderSummaryRobot.findSelectPaymentTerm();
@@ -330,8 +325,7 @@ void main() {
     orderSummaryRobot.findSpecialInstruction();
     await orderSummaryRobot.enterSpecialInstruction('specialInstruction1');
     //Enable Contact Person
-    await orderSummaryRobot
-        .enterContactPerson('Contact Person 3');
+    await orderSummaryRobot.enterContactPerson('Contact Person 3');
     await orderSummaryRobot.getKeyboardDown();
     orderSummaryRobot.findContinueButton(3);
     await orderSummaryRobot.tapContinueButton(3);

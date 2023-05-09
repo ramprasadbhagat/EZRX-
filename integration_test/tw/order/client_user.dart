@@ -10,6 +10,7 @@ import '../../robots/home/home_robot.dart';
 import '../../robots/login_robot.dart';
 import '../../robots/orders/create_order/material_list/material_detail_robot.dart';
 import '../../robots/orders/create_order/material_list/material_list_robot.dart';
+import '../../robots/orders/create_order/material_root_robot.dart';
 import '../../robots/orders/create_order/order_confirmation_robot.dart';
 import '../../robots/history/order_history_details_robot.dart';
 import '../../robots/history/order_history_robot.dart';
@@ -38,6 +39,7 @@ void main() {
   late FavoriteRobot favoriteRobot;
   late OrderTemplateListRobot orderTemplateListRobot;
   late OrderTemplateDetailRobot orderTemplateDetailRobot;
+  late MaterialRootRobot materialRootRobot;
 
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
@@ -49,6 +51,7 @@ void main() {
     customerSearchRobot = CustomerSearchRobot(tester);
     shipToSearchRobot = ShipToSearchRobot(tester);
     materialListRobot = MaterialListRobot(tester);
+    materialRootRobot = MaterialRootRobot(tester);
     materialDetailRobot = MaterialDetailRobot(tester);
     cartRobot = CartRobot(tester);
     orderSummaryRobot = OrderSummaryRobot(tester);
@@ -63,10 +66,9 @@ void main() {
 
     //init app
     await runAppForTesting(tester);
-
+    await loginRobot.findAndCloseAnnouncementIcon();
     await loginRobot.login('twclientuser', 'St@ysafe01');
-    homeRobot.findAnnouncementCloseIcon();
-    await homeRobot.closeAnnouncement();
+    await homeRobot.findAndCloseAnnouncementIcon();
     homeRobot.findSalesOrgSelector();
     await homeRobot.tapSalesOrgSelector();
     await homeRobot.selectSalesOrg('2800');
@@ -83,6 +85,7 @@ void main() {
     await shipToSearchRobot.tapShipToCode(shipToCode: '0070100095');
     homeRobot.verify();
     await homeRobot.goToCreateOrder();
+    await materialRootRobot.findAndCloseAnnouncementIcon();
     materialListRobot.verify();
     await materialListRobot.search('451');
     materialListRobot.verifyEnableListPrice('000000000023168451');
