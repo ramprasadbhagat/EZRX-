@@ -1,4 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
@@ -12,10 +16,44 @@ import 'package:ezrxmobile/presentation/orders/create_order/select_contract.dart
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter_svg/svg.dart';
 
-class UpdateCart extends StatelessWidget {
+class UpdateCart extends StatelessWidget implements AutoRouteWrapper {
+  final PriceAggregate material;
+
   const UpdateCart({
     Key? key,
+    required this.material,
   }) : super(key: key);
+
+  @override
+  Widget wrappedRoute(BuildContext context) {
+    final cartState = context.read<CartBloc>().state;
+    final isSpecialOrderType =
+        context.read<OrderDocumentTypeBloc>().state.isSpecialOrderType;
+    final updateCartItem = material.copyWith(
+      isSpecialOrderType: isSpecialOrderType,
+    );
+
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<AddToCartBloc>(
+          create: (context) => locator<AddToCartBloc>()
+            ..add(
+              AddToCartEvent.setCartItem(updateCartItem),
+            )
+            ..add(
+              AddToCartEvent.updateQuantity(
+                material.quantity,
+                cartState.zmgMaterialWithoutMaterial(updateCartItem),
+              ),
+            ),
+        ),
+        BlocProvider<TenderContractBloc>(
+          create: (context) => locator<TenderContractBloc>(),
+        ),
+      ],
+      child: this,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {

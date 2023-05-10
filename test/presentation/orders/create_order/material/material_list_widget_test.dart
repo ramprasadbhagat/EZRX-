@@ -49,7 +49,6 @@ import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/custom_selector.dart';
-import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/add_to_cart.dart';
 import 'package:ezrxmobile/presentation/orders/combo_deal/widgets/combo_deal_label.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/favorite_button.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/material_list/material_list.dart';
@@ -1990,7 +1989,7 @@ void main() {
 
       await tester.pump();
 
-      expect(find.byType(AddToCart), findsOneWidget);
+      expect(autoRouterMock.currentPath, 'orders/add_to_cart');
     });
     testWidgets(
         'Opening combo deal detail after scanning and fetching price successfully',

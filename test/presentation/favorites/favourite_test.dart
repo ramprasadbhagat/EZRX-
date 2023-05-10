@@ -1,7 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
@@ -25,13 +23,14 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/presentation/favourites/favourite_tab.dart';
 import 'package:ezrxmobile/presentation/favourites/favourite_tile.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../application/auth/auth_bloc_test.dart';
-import '../../utils/material_frame_wrapper.dart';
+import '../../utils/widget_utils.dart';
 import '../order_history/order_history_details_widget_test.dart';
 
 class UserMockBloc extends MockBloc<UserEvent, UserState> implements UserBloc {}
@@ -88,6 +87,7 @@ void main() {
   late AuthBloc authBlocMock;
   late AnnouncementBloc announcementBlocMock;
   late OrderDocumentTypeBloc orderDocumentTypeBlocMock;
+  late AppRouter autoRouterMock;
 
   final mockFavourite1 = Favourite(
     id: 'fake-id-1',
@@ -111,6 +111,8 @@ void main() {
         () => mockMaterialPriceDetailBloc);
     locator.registerLazySingleton(() => MixpanelService());
     locator<MixpanelService>().init(mixpanel: MixpanelMock());
+    locator.registerLazySingleton(() => AppRouter());
+    autoRouterMock = locator<AppRouter>();
   });
 
   void initialSetup() {
@@ -153,49 +155,34 @@ void main() {
     'Favourite',
     () {
       Widget getFavoritePage() {
-        return EasyLocalization(
-          supportedLocales: const [
-            Locale('en'),
-          ],
-          path: 'assets/langs/langs.csv',
-          startLocale: const Locale('en'),
-          fallbackLocale: const Locale('en'),
-          saveLocale: true,
-          useOnlyLangCode: true,
-          assetLoader: CsvAssetLoader(),
-          child: MaterialFrameWrapper(
-            child: MultiBlocProvider(
-              providers: [
-                BlocProvider<AuthBloc>(create: (context) => authBlocMock),
-                BlocProvider<UserBloc>(create: (context) => userBlocMock),
-                BlocProvider<SalesOrgBloc>(
-                    create: ((context) => salesOrgMockBloc)),
-                BlocProvider<CustomerCodeBloc>(
-                    create: ((context) => customerCodeMockBloc)),
-                BlocProvider<ShipToCodeBloc>(
-                    create: ((context) => shipToCodeMockBloc)),
-                BlocProvider<EligibilityBloc>(
-                    create: ((context) => eligibilityMockBloc)),
-                BlocProvider<FavouriteBloc>(
-                    create: (context) => mockFavouriteBloc),
-                BlocProvider<CartBloc>(create: (context) => cartMockBloc),
-                BlocProvider<MaterialPriceDetailBloc>(
-                  create: (context) => mockMaterialPriceDetailBloc,
-                ),
-                BlocProvider<EligibilityBloc>(
-                    create: (context) => mockEligiblityBloc),
-                BlocProvider<AddToCartBloc>(
-                    create: (context) => addToCartBlocMock),
-                BlocProvider<OrderDocumentTypeBloc>(
-                  create: (context) => orderDocumentTypeBlocMock,
-                ),
-                BlocProvider<AuthBloc>(create: (context) => authBlocMock),
-                BlocProvider<AnnouncementBloc>(
-                    create: (context) => announcementBlocMock),
-              ],
-              child: const FavouritesTab(),
+        return WidgetUtils.getScopedWidget(
+          autoRouterMock: autoRouterMock,
+          providers: [
+            BlocProvider<AuthBloc>(create: (context) => authBlocMock),
+            BlocProvider<UserBloc>(create: (context) => userBlocMock),
+            BlocProvider<SalesOrgBloc>(create: ((context) => salesOrgMockBloc)),
+            BlocProvider<CustomerCodeBloc>(
+                create: ((context) => customerCodeMockBloc)),
+            BlocProvider<ShipToCodeBloc>(
+                create: ((context) => shipToCodeMockBloc)),
+            BlocProvider<EligibilityBloc>(
+                create: ((context) => eligibilityMockBloc)),
+            BlocProvider<FavouriteBloc>(create: (context) => mockFavouriteBloc),
+            BlocProvider<CartBloc>(create: (context) => cartMockBloc),
+            BlocProvider<MaterialPriceDetailBloc>(
+              create: (context) => mockMaterialPriceDetailBloc,
             ),
-          ),
+            BlocProvider<EligibilityBloc>(
+                create: (context) => mockEligiblityBloc),
+            BlocProvider<AddToCartBloc>(create: (context) => addToCartBlocMock),
+            BlocProvider<OrderDocumentTypeBloc>(
+              create: (context) => orderDocumentTypeBlocMock,
+            ),
+            BlocProvider<AuthBloc>(create: (context) => authBlocMock),
+            BlocProvider<AnnouncementBloc>(
+                create: (context) => announcementBlocMock),
+          ],
+          child: const FavouritesTab(),
         );
       }
 

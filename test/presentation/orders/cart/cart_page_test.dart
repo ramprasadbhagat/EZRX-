@@ -52,7 +52,6 @@ import 'package:ezrxmobile/infrastructure/order/repository/cart_repository.dart'
 import 'package:ezrxmobile/infrastructure/order/repository/discount_override_repository.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
-import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/update_cart_button.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_page.dart';
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_bundle_item_tile.dart';
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_material_item_tile.dart';
@@ -993,11 +992,6 @@ void main() {
             isFetching: false,
           ),
         );
-        whenListen(
-            addToCartBlocMock,
-            Stream.fromIterable([
-              addToCartBlocMock.state,
-            ]));
 
         await tester.pumpWidget(Material(child: getWidget()));
         await tester.pump();
@@ -1008,13 +1002,7 @@ void main() {
           tierLabel,
         );
         await tester.pump();
-        expect(find.byKey(const Key('updateCartBottomSheet')), findsOneWidget);
-        expect(find.byKey(const Key('priceTierLable')), findsWidgets);
-
-        final itemQuantityChange = find.byKey(const Key('item'));
-        expect(itemQuantityChange, findsOneWidget);
-        await tester.enterText(itemQuantityChange, '12');
-        expect(find.text('12'), findsAtLeastNWidgets(1));
+        expect(autoRouter.currentPath, 'orders/update_cart');
       });
 
       testWidgets('Check if price is not overrided ', (tester) async {
@@ -1300,8 +1288,7 @@ void main() {
           tierDiscountLable,
         );
         await tester.pump();
-        expect(find.byKey(const Key('updateCartBottomSheet')), findsOneWidget);
-        expect(find.byKey(const Key('priceTierLable')), findsWidgets);
+        expect(autoRouter.currentPath, 'orders/update_cart');
       });
 
       testWidgets('Test have Bundle Discount cart item', (tester) async {
@@ -1639,9 +1626,7 @@ void main() {
         expect(item, findsOneWidget);
         await tester.tap(item);
         await tester.pump();
-        final updateCartBottomSheet = find.byType(UpdateCartButton);
-        expect(updateCartBottomSheet, findsOneWidget);
-        await tester.pump();
+        expect(autoRouter.currentPath, 'orders/update_cart');
       });
 
       testWidgets('Test have cart item update cart button pressed',
@@ -1710,16 +1695,7 @@ void main() {
         expect(item, findsOneWidget);
         await tester.tap(item);
         await tester.pump();
-        final updateCartBottomSheet = find.byType(UpdateCartButton);
-        expect(updateCartBottomSheet, findsOneWidget);
-        await tester.pumpAndSettle();
-        final updateCartButton = find.byKey(const Key('updateCart'));
-        expect(updateCartButton, findsOneWidget);
-        await tester.tap(
-          updateCartButton,
-          warnIfMissed: false,
-        );
-        await tester.pump();
+        expect(autoRouter.currentPath, 'orders/update_cart');
       });
 
       testWidgets('Test to have correct GST and totalPrice', (tester) async {

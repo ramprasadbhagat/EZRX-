@@ -213,7 +213,10 @@ void main() {
             BlocProvider<FavouriteBloc>(
                 create: ((context) => mockFavouriteBloc)),
           ],
-          child: child,
+          child: AddToCart(
+            isCovid19Tab: false,
+            material: priceAggregate,
+          ),
         ),
       );
     }
@@ -234,8 +237,9 @@ void main() {
           .copyWith(
               salesOrganisation: SalesOrganisation.empty()
                   .copyWith(salesOrg: SalesOrg('SG'))));
-      await tester.pumpWidget(getScopedWidget(const AddToCart(
+      await tester.pumpWidget(getScopedWidget(AddToCart(
         isCovid19Tab: false,
+        material: priceAggregate,
       )));
       await tester.pump();
       final tirePriceLable = find.byKey(const Key('priceTierLable'));
@@ -268,8 +272,9 @@ void main() {
           .copyWith(
               salesOrganisation: SalesOrganisation.empty()
                   .copyWith(salesOrg: SalesOrg('SG'))));
-      await tester.pumpWidget(getScopedWidget(const AddToCart(
+      await tester.pumpWidget(getScopedWidget(AddToCart(
         isCovid19Tab: false,
+        material: priceAggregate,
       )));
       await tester.pump();
 
@@ -306,8 +311,9 @@ void main() {
           .copyWith(
               salesOrganisation: SalesOrganisation.empty()
                   .copyWith(salesOrg: SalesOrg('SG'))));
-      await tester.pumpWidget(getScopedWidget(const AddToCart(
+      await tester.pumpWidget(getScopedWidget(AddToCart(
         isCovid19Tab: false,
+        material: priceAggregate,
       )));
       await tester.pump();
 
@@ -356,9 +362,8 @@ void main() {
           .copyWith(
               salesOrganisation: SalesOrganisation.empty()
                   .copyWith(salesOrg: SalesOrg('SG'))));
-      await tester.pumpWidget(getScopedWidget(const AddToCart(
-        isCovid19Tab: false,
-      )));
+      await tester.pumpWidget(getScopedWidget(
+          AddToCart(isCovid19Tab: false, material: priceAggregate)));
       await tester.pump();
 
       final bonusDetailsWidget = find.byType(BonusDetails);
@@ -388,9 +393,8 @@ void main() {
           .copyWith(
               salesOrganisation: SalesOrganisation.empty()
                   .copyWith(salesOrg: SalesOrg('SG'))));
-      await tester.pumpWidget(getScopedWidget(const AddToCart(
-        isCovid19Tab: false,
-      )));
+      await tester.pumpWidget(getScopedWidget(
+          AddToCart(isCovid19Tab: false, material: priceAggregate)));
       await tester.pump();
       final tirePriceLable = find.byKey(const Key('priceTierLable'));
 
@@ -556,9 +560,8 @@ void main() {
           .copyWith(
               salesOrganisation: SalesOrganisation.empty()
                   .copyWith(salesOrg: SalesOrg('SG'))));
-      await tester.pumpWidget(getScopedWidget(const AddToCart(
-        isCovid19Tab: false,
-      )));
+      await tester.pumpWidget(getScopedWidget(
+          AddToCart(isCovid19Tab: false, material: priceAggregate)));
       await tester.pump();
       final tirePriceLable = find.byKey(const Key('priceTierLable'));
 
@@ -607,9 +610,8 @@ void main() {
           .copyWith(
               salesOrganisation: SalesOrganisation.empty()
                   .copyWith(salesOrg: SalesOrg('SG'))));
-      await tester.pumpWidget(getScopedWidget(const AddToCart(
-        isCovid19Tab: false,
-      )));
+      await tester.pumpWidget(getScopedWidget(
+          AddToCart(isCovid19Tab: false, material: priceAggregate)));
 
       final tenderContract = find.byKey(Key(tenderContractBlocMock
           .state
@@ -662,7 +664,8 @@ void main() {
         );
 
         await tester.pumpWidget(
-          getScopedWidget(const AddToCart(isCovid19Tab: false)),
+          getScopedWidget(
+              AddToCart(isCovid19Tab: false, material: priceAggregate)),
         );
         await tester.pump();
 
@@ -701,7 +704,8 @@ void main() {
         );
 
         await tester.pumpWidget(
-          getScopedWidget(const AddToCart(isCovid19Tab: false)),
+          getScopedWidget(
+              AddToCart(isCovid19Tab: false, material: priceAggregate)),
         );
         await tester.pump();
 
@@ -740,7 +744,8 @@ void main() {
         );
 
         await tester.pumpWidget(
-          getScopedWidget(const AddToCart(isCovid19Tab: false)),
+          getScopedWidget(
+              AddToCart(isCovid19Tab: false, material: priceAggregate)),
         );
         await tester.pump();
 
@@ -780,7 +785,8 @@ void main() {
         );
 
         await tester.pumpWidget(
-          getScopedWidget(const AddToCart(isCovid19Tab: false)),
+          getScopedWidget(
+              AddToCart(isCovid19Tab: false, material: priceAggregate)),
         );
         await tester.pump();
 
@@ -821,7 +827,8 @@ void main() {
         );
 
         await tester.pumpWidget(
-          getScopedWidget(const AddToCart(isCovid19Tab: false)),
+          getScopedWidget(
+              AddToCart(isCovid19Tab: false, material: priceAggregate)),
         );
         await tester.pump();
 
@@ -886,7 +893,8 @@ void main() {
         );
 
         await tester.pumpWidget(
-          getScopedWidget(const AddToCart(isCovid19Tab: false)),
+          getScopedWidget(
+              AddToCart(isCovid19Tab: false, material: priceAggregate)),
         );
         await tester.pump();
         tester.binding.window.physicalSizeTestValue = const Size(1080, 1920);
@@ -964,7 +972,8 @@ void main() {
         );
 
         await tester.pumpWidget(
-          getScopedWidget(const AddToCart(isCovid19Tab: false)),
+          getScopedWidget(
+              AddToCart(isCovid19Tab: false, material: priceAggregate)),
         );
         await tester.pump();
         tester.binding.window.physicalSizeTestValue = const Size(1080, 1920);
@@ -1039,7 +1048,8 @@ void main() {
         );
 
         await tester.pumpWidget(
-          getScopedWidget(const AddToCart(isCovid19Tab: false)),
+          getScopedWidget(
+              AddToCart(isCovid19Tab: false, material: priceAggregate)),
         );
         await tester.pump();
         tester.binding.window.physicalSizeTestValue = const Size(1080, 1920);
@@ -1162,7 +1172,8 @@ void main() {
         );
 
         await tester.pumpWidget(
-          getScopedWidget(const AddToCart(isCovid19Tab: false)),
+          getScopedWidget(
+              AddToCart(isCovid19Tab: false, material: priceAggregate)),
         );
         await tester.pump();
         tester.binding.window.physicalSizeTestValue = const Size(1080, 1920);
@@ -1227,7 +1238,8 @@ void main() {
           ]));
 
       await tester.pumpWidget(
-        getScopedWidget(const AddToCart(isCovid19Tab: false)),
+        getScopedWidget(
+            AddToCart(isCovid19Tab: false, material: priceAggregate)),
       );
 
       final favoriteButtonBorderOutlined =

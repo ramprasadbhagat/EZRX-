@@ -38,10 +38,7 @@ class FavouritesTab extends StatelessWidget implements AutoRouteWrapper {
     return Scaffold(
       key: const Key('favouritesPage'),
       appBar: AppBar(
-        title: Text(
-          'Favourites'.tr(),
-          locale: context.locale,
-        ).tr(),
+        title: const Text('Favourites').tr(),
         automaticallyImplyLeading: false,
         actions: const [CartButton()],
       ),

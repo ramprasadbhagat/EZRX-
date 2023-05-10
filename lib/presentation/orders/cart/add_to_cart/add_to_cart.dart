@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
@@ -22,13 +24,69 @@ import 'package:ezrxmobile/presentation/orders/create_order/select_contract.dart
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter_svg/svg.dart';
 
-class AddToCart extends StatelessWidget {
+class AddToCart extends StatelessWidget implements AutoRouteWrapper {
   final bool isCovid19Tab;
+  final PriceAggregate material;
+  final bool isShortcutAccess;
 
   const AddToCart({
     Key? key,
     required this.isCovid19Tab,
+    required this.material,
+    this.isShortcutAccess = false,
   }) : super(key: key);
+
+  @override
+  Widget wrappedRoute(BuildContext context) {
+    final eligibilityState = context.read<EligibilityBloc>().state;
+    final cartState = context.read<CartBloc>().state;
+    final isSpecialOrderType =
+        context.read<OrderDocumentTypeBloc>().state.isSpecialOrderType;
+    final addToCartItem = material.copyWith(
+      isSpecialOrderType: isSpecialOrderType,
+    );
+
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<TenderContractBloc>(
+          create: (context) => locator<TenderContractBloc>(),
+        ),
+        BlocProvider<AddToCartBloc>(
+          create: (context) {
+            final bloc = locator<AddToCartBloc>();
+            if (isShortcutAccess) {
+              bloc.add(
+                AddToCartEvent.fetch(
+                  customerCode: eligibilityState.customerCodeInfo,
+                  salesOrganisation: eligibilityState.salesOrganisation,
+                  salesOrganisationConfigs: eligibilityState.salesOrgConfigs,
+                  shipToCode: eligibilityState.shipToInfo,
+                  materialNumber: addToCartItem.getMaterialNumber,
+                  cartZmgQtyExcludeCurrent:
+                      cartState.zmgMaterialWithoutMaterial(addToCartItem),
+                  isSpecialOrderType: isSpecialOrderType,
+                ),
+              );
+            } else {
+              bloc
+                ..add(
+                  AddToCartEvent.setCartItem(addToCartItem),
+                )
+                ..add(
+                  AddToCartEvent.updateQuantity(
+                    1,
+                    cartState.zmgMaterialWithoutMaterial(addToCartItem),
+                  ),
+                );
+            }
+
+            return bloc;
+          },
+        ),
+      ],
+      child: this,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {

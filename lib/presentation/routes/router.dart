@@ -1,5 +1,7 @@
 //ignore_for_file: unused-files
 import 'package:auto_route/auto_route.dart';
+import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/add_to_cart.dart';
+import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/update_cart.dart';
 import 'package:ezrxmobile/presentation/account/admin_po_attachment/admin_po_attachment_page.dart';
 import 'package:ezrxmobile/presentation/orders/cart/bonus/search_bonus_page.dart';
 import 'package:ezrxmobile/presentation/orders/combo_deal/combo_deal_material_detail_page.dart';
@@ -122,6 +124,18 @@ import 'package:ezrxmobile/presentation/orders/create_order/scan_material_info.d
     AutoRoute(
       path: 'orders/combo_deal_principle_detail',
       page: ComboDealPrincipleDetailPage,
+    ),
+    CustomRoute(
+      path: 'orders/add_to_cart',
+      page: AddToCart,
+      transitionsBuilder: TransitionsBuilders.slideBottom,
+      fullscreenDialog: true,
+    ),
+    CustomRoute(
+      path: 'orders/update_cart',
+      page: UpdateCart,
+      transitionsBuilder: TransitionsBuilders.slideBottom,
+      fullscreenDialog: true,
     ),
     AutoRoute(
       path: 'admin_po_attachment',
