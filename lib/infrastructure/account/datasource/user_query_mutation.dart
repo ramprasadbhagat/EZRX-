@@ -32,7 +32,8 @@ class UserQueryMutation {
             Products,
             Services,
             Analytics,
-            LoyaltyScheme
+            LoyaltyScheme,
+            AdminPOAttachment
           },
           salesOrganization,
           firstName,

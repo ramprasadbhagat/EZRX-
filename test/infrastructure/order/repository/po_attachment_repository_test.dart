@@ -107,8 +107,10 @@ void main() {
       );
 
       final result = await poAttachmentRepository.downloadFiles(
-        [PoDocuments.empty().copyWith(name: 'fake-name', url: 'fake-url')],
-        AttachmentType.downloadAttachment,
+        files: [
+          PoDocuments.empty().copyWith(name: 'fake-name', url: 'fake-url')
+        ],
+        attachmentType: AttachmentType.downloadAttachment,
       );
       expect(
         result.isRight(),
@@ -120,8 +122,10 @@ void main() {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
 
       final result = await poAttachmentRepository.downloadFiles(
-        [PoDocuments.empty().copyWith(name: 'fake-name', url: 'fake-url')],
-        AttachmentType.downloadAttachment,
+        files: [
+          PoDocuments.empty().copyWith(name: 'fake-name', url: 'fake-url')
+        ],
+        attachmentType: AttachmentType.downloadAttachment,
       );
       expect(
         result.isLeft(),
@@ -149,8 +153,10 @@ void main() {
       );
 
       final result = await poAttachmentRepository.downloadFiles(
-        [PoDocuments.empty().copyWith(name: 'fake-name', url: 'fake-url')],
-        AttachmentType.downloadPOAttachment,
+        files: [
+          PoDocuments.empty().copyWith(name: 'fake-name', url: 'fake-url')
+        ],
+        attachmentType: AttachmentType.downloadPOAttachment,
       );
       expect(
         result.isRight(),
@@ -163,8 +169,10 @@ void main() {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
 
       final result = await poAttachmentRepository.downloadFiles(
-        [PoDocuments.empty().copyWith(name: 'fake-name', url: 'fake-url')],
-        AttachmentType.downloadAttachment,
+        files: [
+          PoDocuments.empty().copyWith(name: 'fake-name', url: 'fake-url')
+        ],
+        attachmentType: AttachmentType.downloadAttachment,
       );
       expect(
         result.isLeft(),

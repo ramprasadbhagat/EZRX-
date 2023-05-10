@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
+import 'package:ezrxmobile/application/admin_po_attachment/admin_po_attachment_bloc.dart';
+import 'package:ezrxmobile/application/admin_po_attachment/filter/admin_po_attachment_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_material_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_list_bloc.dart';
 import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
@@ -200,7 +202,9 @@ class App extends StatelessWidget {
               locator<SalesOrgBloc>()..add(const SalesOrgEvent.initialized()),
         ),
         BlocProvider<CustomerCodeBloc>(
-          create: (context) => locator<CustomerCodeBloc>(),
+          create: (context) =>
+              locator<CustomerCodeBloc>(),
+          
         ),
         BlocProvider<UserRestrictionListBloc>(
           create: (context) => locator<UserRestrictionListBloc>(),
@@ -345,6 +349,12 @@ class App extends StatelessWidget {
         ),
         BlocProvider<DeepLinkingBloc>(
           create: (context) => locator<DeepLinkingBloc>(),
+        ),
+        BlocProvider<AdminPoAttachmentBloc>(
+          create: (context) => locator<AdminPoAttachmentBloc>(),
+        ),
+        BlocProvider<AdminPoAttachmentFilterBloc>(
+          create: (context) => locator<AdminPoAttachmentFilterBloc>(),
         ),
       ],
       child: MaterialApp.router(

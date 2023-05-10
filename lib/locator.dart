@@ -4,6 +4,8 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_rep/sales_rep_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/admin_po_attachment/admin_po_attachment_bloc.dart';
+import 'package:ezrxmobile/application/admin_po_attachment/filter/admin_po_attachment_filter_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
@@ -30,6 +32,10 @@ import 'package:ezrxmobile/application/returns/return_summary_details/return_sum
 import 'package:ezrxmobile/application/returns/return_summary_filter/return_summary_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/returns_overview/returns_overview_bloc.dart';
 import 'package:ezrxmobile/domain/order/repository/i_combo_deal_repository.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/admin_po_attachment_local.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/admin_po_attachment_query_mutation.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/admin_po_attachment_remote.dart';
+import 'package:ezrxmobile/infrastructure/account/repository/admin_po_attachment_repository.dart';
 import 'package:ezrxmobile/infrastructure/core/common/device_info.dart';
 import 'package:ezrxmobile/infrastructure/core/common/file_picker.dart';
 import 'package:ezrxmobile/infrastructure/core/common/permission_service.dart';
@@ -668,11 +674,13 @@ void setupLocator() {
     ),
   );
 
-  locator.registerLazySingleton(
+  locator.registerFactory(
     () => CustomerCodeBloc(
       customerCodeRepository: locator<CustomerCodeRepository>(),
     ),
   );
+
+
 
   //============================================================
   //  Ship To Code
@@ -1779,8 +1787,8 @@ void setupLocator() {
   //============================================================
   locator.registerLazySingleton(
     () => DynamicLinksService(
-      config: locator<Config>(),
-      appRouter: locator<AppRouter>(),
+        config: locator<Config>(),
+        appRouter: locator<AppRouter>(),
     ),
   );
 
@@ -1794,4 +1802,51 @@ void setupLocator() {
       service: locator<DynamicLinksService>(),
     ),
   );
+
+  //============================================================
+  //  Admin Po Attachment
+  //
+  //============================================================
+
+  locator.registerLazySingleton(
+    () => AdminPoAttachmentLocalDataSource(),
+  );
+
+  locator.registerLazySingleton(
+    () => AdminPoAttachmentQueryMutation(),
+  );
+
+  locator.registerLazySingleton(
+    () => AdminPoAttachmentRemoteDataSource(
+      config: locator<Config>(),
+      adminPoAttachmentQueryMutation: locator<AdminPoAttachmentQueryMutation>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+      httpService: locator<HttpService>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => AdminPoAttachmentRepository(
+      config: locator<Config>(),
+      localDataSource: locator<AdminPoAttachmentLocalDataSource>(),
+      remoteDataSource: locator<AdminPoAttachmentRemoteDataSource>(),
+    ),
+  );
+
+
+  locator.registerLazySingleton(
+    () => AdminPoAttachmentBloc(
+      repository: locator<AdminPoAttachmentRepository>(),
+    ),
+  );
+
+  //============================================================
+  //  Po Attachment Filter
+  //
+  //============================================================
+
+  locator.registerLazySingleton(
+    () => AdminPoAttachmentFilterBloc(),
+  );
+
 }

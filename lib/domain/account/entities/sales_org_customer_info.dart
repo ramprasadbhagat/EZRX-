@@ -17,4 +17,9 @@ class SalesOrgCustomerInfo with _$SalesOrgCustomerInfo {
         customerCodeSoldTo: CustomerCode(''),
         shipToInfos: <SalesOrgShipToInfo>[],
       );
+
+  factory SalesOrgCustomerInfo.all() => SalesOrgCustomerInfo(
+        customerCodeSoldTo: CustomerCode('all'),
+        shipToInfos: <SalesOrgShipToInfo>[],
+      );
 }

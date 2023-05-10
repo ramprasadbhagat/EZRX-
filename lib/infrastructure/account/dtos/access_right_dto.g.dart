@@ -16,6 +16,7 @@ _$_AccessRightDto _$$_AccessRightDtoFromJson(Map<String, dynamic> json) =>
       services: json['Services'] as bool? ?? false,
       analytics: json['Analytics'] as bool? ?? false,
       loyaltyScheme: json['LoyaltyScheme'] as bool? ?? false,
+      adminPOAttachment: json['AdminPOAttachment'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_AccessRightDtoToJson(_$_AccessRightDto instance) =>
@@ -28,4 +29,5 @@ Map<String, dynamic> _$$_AccessRightDtoToJson(_$_AccessRightDto instance) =>
       'Services': instance.services,
       'Analytics': instance.analytics,
       'LoyaltyScheme': instance.loyaltyScheme,
+      'AdminPOAttachment': instance.adminPOAttachment,
     };

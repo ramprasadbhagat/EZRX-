@@ -345,4 +345,17 @@ class Config {
         Symbology.qr,
         Symbology.upce,
       ];
+      
+  List<String> get allowedExtensions => [
+        'jpg',
+        'pdf',
+        'doc',
+        'png',
+        'jpeg',
+        'csv',
+        'pdf',
+        'xlsx',
+        'xls',
+        'heic',
+      ];
 }

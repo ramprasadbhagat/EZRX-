@@ -44,4 +44,5 @@ class CustomerCodeState with _$CustomerCodeState {
   List<ShipToInfo> get shipToInfos => customerCodeInfo.shipToInfos;
 
   bool get apiSuccess => apiFailureOrSuccessOption.isNone();
+
 }

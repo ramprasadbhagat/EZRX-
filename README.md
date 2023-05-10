@@ -92,7 +92,7 @@ type command `make run_sg_external_test` to run integration test
 ### How to `bloc_test` the loading_more function
 Let's assume that we test loading_more function for load a page 2
 1. Use `seed` to setup a `state` with page 1 response for `bloc`
-2. Setup a mock `repository` with parameters and a `pageSize` equals to page 1 lenght
+2. Setup a mock `repository` with parameters and a `pageSize` equals to page 1 length
 3. Use `act` to add load_more `event` to `bloc`
 4. `expect` section will be the same as when we test the `fetch` function, except that the `state` will have both page 1 and page 2 response
 

@@ -35,4 +35,5 @@ class UserState with _$UserState {
           ? user.disableCreateOrder
           : true
       : !user.accessRight.orders;
+
 }

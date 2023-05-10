@@ -20,12 +20,8 @@ mixin _$CustomerCodeEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(CustomerCodeInfo customerCodeInfo) selected,
-    required TResult Function(
-            bool isRefresh,
-            String searchText,
-            bool hidecustomer,
-            User userInfo,
-            SalesOrganisation selectedSalesOrg)
+    required TResult Function(String searchText, bool hidecustomer,
+            User userInfo, SalesOrganisation selectedSalesOrg)
         fetch,
     required TResult Function(bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)
@@ -43,8 +39,8 @@ mixin _$CustomerCodeEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(CustomerCodeInfo customerCodeInfo)? selected,
-    TResult? Function(bool isRefresh, String searchText, bool hidecustomer,
-            User userInfo, SalesOrganisation selectedSalesOrg)?
+    TResult? Function(String searchText, bool hidecustomer, User userInfo,
+            SalesOrganisation selectedSalesOrg)?
         fetch,
     TResult? Function(bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
@@ -62,8 +58,8 @@ mixin _$CustomerCodeEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(CustomerCodeInfo customerCodeInfo)? selected,
-    TResult Function(bool isRefresh, String searchText, bool hidecustomer,
-            User userInfo, SalesOrganisation selectedSalesOrg)?
+    TResult Function(String searchText, bool hidecustomer, User userInfo,
+            SalesOrganisation selectedSalesOrg)?
         fetch,
     TResult Function(bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
@@ -173,12 +169,8 @@ class _$_Initialized implements _Initialized {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(CustomerCodeInfo customerCodeInfo) selected,
-    required TResult Function(
-            bool isRefresh,
-            String searchText,
-            bool hidecustomer,
-            User userInfo,
-            SalesOrganisation selectedSalesOrg)
+    required TResult Function(String searchText, bool hidecustomer,
+            User userInfo, SalesOrganisation selectedSalesOrg)
         fetch,
     required TResult Function(bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)
@@ -199,8 +191,8 @@ class _$_Initialized implements _Initialized {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(CustomerCodeInfo customerCodeInfo)? selected,
-    TResult? Function(bool isRefresh, String searchText, bool hidecustomer,
-            User userInfo, SalesOrganisation selectedSalesOrg)?
+    TResult? Function(String searchText, bool hidecustomer, User userInfo,
+            SalesOrganisation selectedSalesOrg)?
         fetch,
     TResult? Function(bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
@@ -221,8 +213,8 @@ class _$_Initialized implements _Initialized {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(CustomerCodeInfo customerCodeInfo)? selected,
-    TResult Function(bool isRefresh, String searchText, bool hidecustomer,
-            User userInfo, SalesOrganisation selectedSalesOrg)?
+    TResult Function(String searchText, bool hidecustomer, User userInfo,
+            SalesOrganisation selectedSalesOrg)?
         fetch,
     TResult Function(bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
@@ -371,12 +363,8 @@ class _$_Selected implements _Selected {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(CustomerCodeInfo customerCodeInfo) selected,
-    required TResult Function(
-            bool isRefresh,
-            String searchText,
-            bool hidecustomer,
-            User userInfo,
-            SalesOrganisation selectedSalesOrg)
+    required TResult Function(String searchText, bool hidecustomer,
+            User userInfo, SalesOrganisation selectedSalesOrg)
         fetch,
     required TResult Function(bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)
@@ -397,8 +385,8 @@ class _$_Selected implements _Selected {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(CustomerCodeInfo customerCodeInfo)? selected,
-    TResult? Function(bool isRefresh, String searchText, bool hidecustomer,
-            User userInfo, SalesOrganisation selectedSalesOrg)?
+    TResult? Function(String searchText, bool hidecustomer, User userInfo,
+            SalesOrganisation selectedSalesOrg)?
         fetch,
     TResult? Function(bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
@@ -419,8 +407,8 @@ class _$_Selected implements _Selected {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(CustomerCodeInfo customerCodeInfo)? selected,
-    TResult Function(bool isRefresh, String searchText, bool hidecustomer,
-            User userInfo, SalesOrganisation selectedSalesOrg)?
+    TResult Function(String searchText, bool hidecustomer, User userInfo,
+            SalesOrganisation selectedSalesOrg)?
         fetch,
     TResult Function(bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
@@ -504,8 +492,7 @@ abstract class _$$_FetchCopyWith<$Res> {
       __$$_FetchCopyWithImpl<$Res>;
   @useResult
   $Res call(
-      {bool isRefresh,
-      String searchText,
+      {String searchText,
       bool hidecustomer,
       User userInfo,
       SalesOrganisation selectedSalesOrg});
@@ -524,17 +511,12 @@ class __$$_FetchCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isRefresh = null,
     Object? searchText = null,
     Object? hidecustomer = null,
     Object? userInfo = null,
     Object? selectedSalesOrg = null,
   }) {
     return _then(_$_Fetch(
-      isRefresh: null == isRefresh
-          ? _value.isRefresh
-          : isRefresh // ignore: cast_nullable_to_non_nullable
-              as bool,
       searchText: null == searchText
           ? _value.searchText
           : searchText // ignore: cast_nullable_to_non_nullable
@@ -575,15 +557,11 @@ class __$$_FetchCopyWithImpl<$Res>
 
 class _$_Fetch implements _Fetch {
   const _$_Fetch(
-      {this.isRefresh = false,
-      this.searchText = '',
+      {this.searchText = '',
       required this.hidecustomer,
       required this.userInfo,
       required this.selectedSalesOrg});
 
-  @override
-  @JsonKey()
-  final bool isRefresh;
   @override
   @JsonKey()
   final String searchText;
@@ -596,7 +574,7 @@ class _$_Fetch implements _Fetch {
 
   @override
   String toString() {
-    return 'CustomerCodeEvent.fetch(isRefresh: $isRefresh, searchText: $searchText, hidecustomer: $hidecustomer, userInfo: $userInfo, selectedSalesOrg: $selectedSalesOrg)';
+    return 'CustomerCodeEvent.fetch(searchText: $searchText, hidecustomer: $hidecustomer, userInfo: $userInfo, selectedSalesOrg: $selectedSalesOrg)';
   }
 
   @override
@@ -604,8 +582,6 @@ class _$_Fetch implements _Fetch {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Fetch &&
-            (identical(other.isRefresh, isRefresh) ||
-                other.isRefresh == isRefresh) &&
             (identical(other.searchText, searchText) ||
                 other.searchText == searchText) &&
             (identical(other.hidecustomer, hidecustomer) ||
@@ -617,8 +593,8 @@ class _$_Fetch implements _Fetch {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isRefresh, searchText,
-      hidecustomer, userInfo, selectedSalesOrg);
+  int get hashCode => Object.hash(
+      runtimeType, searchText, hidecustomer, userInfo, selectedSalesOrg);
 
   @JsonKey(ignore: true)
   @override
@@ -631,12 +607,8 @@ class _$_Fetch implements _Fetch {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(CustomerCodeInfo customerCodeInfo) selected,
-    required TResult Function(
-            bool isRefresh,
-            String searchText,
-            bool hidecustomer,
-            User userInfo,
-            SalesOrganisation selectedSalesOrg)
+    required TResult Function(String searchText, bool hidecustomer,
+            User userInfo, SalesOrganisation selectedSalesOrg)
         fetch,
     required TResult Function(bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)
@@ -649,8 +621,7 @@ class _$_Fetch implements _Fetch {
         loadStoredCustomerCode,
     required TResult Function(String searchKey) updateSearchKey,
   }) {
-    return fetch(
-        isRefresh, searchText, hidecustomer, userInfo, selectedSalesOrg);
+    return fetch(searchText, hidecustomer, userInfo, selectedSalesOrg);
   }
 
   @override
@@ -658,8 +629,8 @@ class _$_Fetch implements _Fetch {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(CustomerCodeInfo customerCodeInfo)? selected,
-    TResult? Function(bool isRefresh, String searchText, bool hidecustomer,
-            User userInfo, SalesOrganisation selectedSalesOrg)?
+    TResult? Function(String searchText, bool hidecustomer, User userInfo,
+            SalesOrganisation selectedSalesOrg)?
         fetch,
     TResult? Function(bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
@@ -672,8 +643,7 @@ class _$_Fetch implements _Fetch {
         loadStoredCustomerCode,
     TResult? Function(String searchKey)? updateSearchKey,
   }) {
-    return fetch?.call(
-        isRefresh, searchText, hidecustomer, userInfo, selectedSalesOrg);
+    return fetch?.call(searchText, hidecustomer, userInfo, selectedSalesOrg);
   }
 
   @override
@@ -681,8 +651,8 @@ class _$_Fetch implements _Fetch {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(CustomerCodeInfo customerCodeInfo)? selected,
-    TResult Function(bool isRefresh, String searchText, bool hidecustomer,
-            User userInfo, SalesOrganisation selectedSalesOrg)?
+    TResult Function(String searchText, bool hidecustomer, User userInfo,
+            SalesOrganisation selectedSalesOrg)?
         fetch,
     TResult Function(bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
@@ -697,8 +667,7 @@ class _$_Fetch implements _Fetch {
     required TResult orElse(),
   }) {
     if (fetch != null) {
-      return fetch(
-          isRefresh, searchText, hidecustomer, userInfo, selectedSalesOrg);
+      return fetch(searchText, hidecustomer, userInfo, selectedSalesOrg);
     }
     return orElse();
   }
@@ -753,13 +722,11 @@ class _$_Fetch implements _Fetch {
 
 abstract class _Fetch implements CustomerCodeEvent {
   const factory _Fetch(
-      {final bool isRefresh,
-      final String searchText,
+      {final String searchText,
       required final bool hidecustomer,
       required final User userInfo,
       required final SalesOrganisation selectedSalesOrg}) = _$_Fetch;
 
-  bool get isRefresh;
   String get searchText;
   bool get hidecustomer;
   User get userInfo;
@@ -876,12 +843,8 @@ class _$_Search implements _Search {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(CustomerCodeInfo customerCodeInfo) selected,
-    required TResult Function(
-            bool isRefresh,
-            String searchText,
-            bool hidecustomer,
-            User userInfo,
-            SalesOrganisation selectedSalesOrg)
+    required TResult Function(String searchText, bool hidecustomer,
+            User userInfo, SalesOrganisation selectedSalesOrg)
         fetch,
     required TResult Function(bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)
@@ -902,8 +865,8 @@ class _$_Search implements _Search {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(CustomerCodeInfo customerCodeInfo)? selected,
-    TResult? Function(bool isRefresh, String searchText, bool hidecustomer,
-            User userInfo, SalesOrganisation selectedSalesOrg)?
+    TResult? Function(String searchText, bool hidecustomer, User userInfo,
+            SalesOrganisation selectedSalesOrg)?
         fetch,
     TResult? Function(bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
@@ -924,8 +887,8 @@ class _$_Search implements _Search {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(CustomerCodeInfo customerCodeInfo)? selected,
-    TResult Function(bool isRefresh, String searchText, bool hidecustomer,
-            User userInfo, SalesOrganisation selectedSalesOrg)?
+    TResult Function(String searchText, bool hidecustomer, User userInfo,
+            SalesOrganisation selectedSalesOrg)?
         fetch,
     TResult Function(bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
@@ -1116,12 +1079,8 @@ class _$_LoadMore implements _LoadMore {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(CustomerCodeInfo customerCodeInfo) selected,
-    required TResult Function(
-            bool isRefresh,
-            String searchText,
-            bool hidecustomer,
-            User userInfo,
-            SalesOrganisation selectedSalesOrg)
+    required TResult Function(String searchText, bool hidecustomer,
+            User userInfo, SalesOrganisation selectedSalesOrg)
         fetch,
     required TResult Function(bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)
@@ -1142,8 +1101,8 @@ class _$_LoadMore implements _LoadMore {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(CustomerCodeInfo customerCodeInfo)? selected,
-    TResult? Function(bool isRefresh, String searchText, bool hidecustomer,
-            User userInfo, SalesOrganisation selectedSalesOrg)?
+    TResult? Function(String searchText, bool hidecustomer, User userInfo,
+            SalesOrganisation selectedSalesOrg)?
         fetch,
     TResult? Function(bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
@@ -1164,8 +1123,8 @@ class _$_LoadMore implements _LoadMore {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(CustomerCodeInfo customerCodeInfo)? selected,
-    TResult Function(bool isRefresh, String searchText, bool hidecustomer,
-            User userInfo, SalesOrganisation selectedSalesOrg)?
+    TResult Function(String searchText, bool hidecustomer, User userInfo,
+            SalesOrganisation selectedSalesOrg)?
         fetch,
     TResult Function(bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
@@ -1357,12 +1316,8 @@ class _$_LoadStoredCustomerCode implements _LoadStoredCustomerCode {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(CustomerCodeInfo customerCodeInfo) selected,
-    required TResult Function(
-            bool isRefresh,
-            String searchText,
-            bool hidecustomer,
-            User userInfo,
-            SalesOrganisation selectedSalesOrg)
+    required TResult Function(String searchText, bool hidecustomer,
+            User userInfo, SalesOrganisation selectedSalesOrg)
         fetch,
     required TResult Function(bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)
@@ -1383,8 +1338,8 @@ class _$_LoadStoredCustomerCode implements _LoadStoredCustomerCode {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(CustomerCodeInfo customerCodeInfo)? selected,
-    TResult? Function(bool isRefresh, String searchText, bool hidecustomer,
-            User userInfo, SalesOrganisation selectedSalesOrg)?
+    TResult? Function(String searchText, bool hidecustomer, User userInfo,
+            SalesOrganisation selectedSalesOrg)?
         fetch,
     TResult? Function(bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
@@ -1406,8 +1361,8 @@ class _$_LoadStoredCustomerCode implements _LoadStoredCustomerCode {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(CustomerCodeInfo customerCodeInfo)? selected,
-    TResult Function(bool isRefresh, String searchText, bool hidecustomer,
-            User userInfo, SalesOrganisation selectedSalesOrg)?
+    TResult Function(String searchText, bool hidecustomer, User userInfo,
+            SalesOrganisation selectedSalesOrg)?
         fetch,
     TResult Function(bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
@@ -1557,12 +1512,8 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(CustomerCodeInfo customerCodeInfo) selected,
-    required TResult Function(
-            bool isRefresh,
-            String searchText,
-            bool hidecustomer,
-            User userInfo,
-            SalesOrganisation selectedSalesOrg)
+    required TResult Function(String searchText, bool hidecustomer,
+            User userInfo, SalesOrganisation selectedSalesOrg)
         fetch,
     required TResult Function(bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)
@@ -1583,8 +1534,8 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(CustomerCodeInfo customerCodeInfo)? selected,
-    TResult? Function(bool isRefresh, String searchText, bool hidecustomer,
-            User userInfo, SalesOrganisation selectedSalesOrg)?
+    TResult? Function(String searchText, bool hidecustomer, User userInfo,
+            SalesOrganisation selectedSalesOrg)?
         fetch,
     TResult? Function(bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
@@ -1605,8 +1556,8 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(CustomerCodeInfo customerCodeInfo)? selected,
-    TResult Function(bool isRefresh, String searchText, bool hidecustomer,
-            User userInfo, SalesOrganisation selectedSalesOrg)?
+    TResult Function(String searchText, bool hidecustomer, User userInfo,
+            SalesOrganisation selectedSalesOrg)?
         fetch,
     TResult Function(bool hidecustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?

@@ -15,6 +15,7 @@ class AccessRight with _$AccessRight {
     required bool services,
     required bool analytics,
     required bool loyaltyScheme,
+    required bool adminPOAttachment,
   }) = _AccessRight;
 
   factory AccessRight.empty() => const AccessRight(
@@ -26,5 +27,6 @@ class AccessRight with _$AccessRight {
         services: false,
         analytics: false,
         loyaltyScheme: false,
+        adminPOAttachment: false,
       );
 }

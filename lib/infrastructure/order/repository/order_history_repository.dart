@@ -58,7 +58,7 @@ class OrderHistoryRepository implements IOrderHistoryRepository {
               soldTo: soldTo.customerCodeSoldTo,
               pageSize: pageSize,
               offset: offset,
-              language: salesOrgConfig.getConfigLangauge,
+              language: salesOrgConfig.getConfigLanguage,
               userName: user.username.getOrCrash(),
               orderBy: orderBy,
               sort: sort,

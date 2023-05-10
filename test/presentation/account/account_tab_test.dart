@@ -3,6 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
@@ -51,6 +52,8 @@ class AutoRouterMock extends Mock implements AppRouter {}
 
 class FavoriteRemoteDataSourceMock extends Mock
     implements FavouriteRemoteDataSource {}
+class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
+    implements EligibilityBloc {}
 
 final locator = GetIt.instance;
 
@@ -105,8 +108,7 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   late UserBloc userBlocMock;
   late SalesOrgBloc salesOrgBlocMock;
-  //late FavouriteRemoteDataSource favoriteRemoteSource;
-
+  late EligibilityBloc eligibilityBlocMock;
   late CustomerCodeBloc customerCodeBlocMock;
   late ShipToCodeBloc shipToCodeBlocMock;
   late AuthBloc authBlocMock;
@@ -127,6 +129,7 @@ void main() {
       announcementBlocMock = AnnouncementBlocMock();
       autoRouterMock = locator<AppRouter>();
       cartBlocMock = CartBlocMock();
+      eligibilityBlocMock = EligibilityBlocMock();
       when(() => userBlocMock.state).thenReturn(UserState.initial());
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
       when(() => cartBlocMock.state).thenReturn(CartState.initial());
@@ -137,6 +140,8 @@ void main() {
       when(() => authBlocMock.state).thenReturn(const AuthState.initial());
       when(() => announcementBlocMock.state)
           .thenReturn(AnnouncementState.initial());
+      when(() => eligibilityBlocMock.state)
+          .thenReturn(EligibilityState.initial());
     });
 
     Widget getScopedWidget() {
@@ -153,6 +158,9 @@ void main() {
         child: WidgetUtils.getScopedWidget(
           autoRouterMock: autoRouterMock,
           providers: [
+            BlocProvider<EligibilityBloc>(
+              create: (context) => eligibilityBlocMock,
+            ),
             BlocProvider<UserBloc>(create: (context) => userBlocMock),
             BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBlocMock),
             BlocProvider<CustomerCodeBloc>(

@@ -126,14 +126,14 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
         enableGMN:false,
       );
 
-  String get getConfigLangauge {
+  String get getConfigLanguage {
     return languageFilter ? languageValue.getOrDefaultValue('') : '';
   }
 
   bool get shouldDisplayVATInPercentage =>
       enableVat && !currency.isVN || enableTaxAtTotalLevelOnly;
 
-  String get getConfigLangaugeDefaultEnglish =>
+  String get getConfigLanguageDefaultEnglish =>
       languageFilter ? languageValue.getOrDefaultValue('E') : 'E';
 
   List<String> get getExcludePrincipal {

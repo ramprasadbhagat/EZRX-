@@ -24,7 +24,7 @@ class FilterCountButton extends StatelessWidget {
                   color: ZPColors.kPrimaryColor,
                 ),
           ).tr(),
-          if (filterisNotEmpty)
+          if (filterIsNotEmpty)
             Text(
               ' ($filterCount) '.tr(),
               key: const ValueKey('filterCount'),
@@ -42,5 +42,5 @@ class FilterCountButton extends StatelessWidget {
     );
   }
 
-  bool get filterisNotEmpty => filterCount != 0;
+  bool get filterIsNotEmpty => filterCount != 0;
 }

@@ -68,7 +68,7 @@ class MaterialListRepository implements IMaterialListRepository {
               offset: offset,
               orderBy: orderBy,
               searchKey: searchKey,
-              language: salesOrgConfig.getConfigLangauge,
+              language: salesOrgConfig.getConfigLanguage,
               gimmickMaterial: salesOrgConfig.enableGimmickMaterial,
               itemBrandList: selectedMaterialFilter.uniqueItemBrand,
               therapeuticClassList:
@@ -87,7 +87,7 @@ class MaterialListRepository implements IMaterialListRepository {
               offset: offset,
               orderBy: orderBy,
               searchKey: searchKey,
-              language: salesOrgConfig.getConfigLangauge,
+              language: salesOrgConfig.getConfigLanguage,
               principalNameList: selectedMaterialFilter.uniquePrincipalName,
               itemBrandList: selectedMaterialFilter.uniqueItemBrand,
               therapeuticClassList:
@@ -141,7 +141,7 @@ class MaterialListRepository implements IMaterialListRepository {
               offset: offset,
               orderBy: orderBy,
               searchKey: searchKey,
-              language: salesOrgConfig.getConfigLangauge,
+              language: salesOrgConfig.getConfigLanguage,
               gimmickMaterial: salesOrgConfig.enableGimmickMaterial,
               isForFOC: isForFoc,
               selectedMaterialFilter: selectedMaterialFilter,
@@ -155,7 +155,7 @@ class MaterialListRepository implements IMaterialListRepository {
               offset: offset,
               orderBy: orderBy,
               searchKey: searchKey,
-              language: salesOrgConfig.getConfigLangauge,
+              language: salesOrgConfig.getConfigLanguage,
               principalNameList: selectedMaterialFilter.uniquePrincipalName,
               itemBrandList: selectedMaterialFilter.uniqueItemBrand,
               therapeuticClassList:

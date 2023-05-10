@@ -23,7 +23,8 @@
              "Products":true,
              "Services":true,
              "Analytics":true,
-             "LoyaltyScheme":false
+            "LoyaltyScheme": false,
+            "AdminPOAttachment": true
           },
           "salesOrganization":"3070",
           "firstName":"Mobile",

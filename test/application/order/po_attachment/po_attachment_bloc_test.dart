@@ -78,7 +78,9 @@ void main() {
             ),
           );
           when(() => poAttachmentRepository.downloadFiles(
-              poDocumentsList, AttachmentType.downloadPOAttachment)).thenAnswer(
+                files: poDocumentsList,
+                attachmentType: AttachmentType.downloadPOAttachment,
+              )).thenAnswer(
             (invocation) async => const Left(
               ApiFailure.other('fake-error'),
             ),
@@ -111,7 +113,9 @@ void main() {
             ),
           );
           when(() => poAttachmentRepository.downloadFiles(
-              poDocumentsList, AttachmentType.downloadPOAttachment)).thenAnswer(
+              files: poDocumentsList,
+              attachmentType: AttachmentType.downloadPOAttachment,
+              )).thenAnswer(
             (invocation) async => const Right(
               [],
             ),

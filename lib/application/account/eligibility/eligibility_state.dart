@@ -192,4 +192,6 @@ class EligibilityState with _$EligibilityState {
 
   bool get isMYMarketSalesRep =>
       user.role.type.isSalesRepRole && salesOrganisation.salesOrg.isMY;
+      
+      
 }

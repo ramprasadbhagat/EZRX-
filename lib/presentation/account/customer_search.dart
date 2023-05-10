@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/admin_po_attachment/filter/admin_po_attachment_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -74,7 +75,7 @@ class _AppBarState extends State<_AppBar> {
     final searchText = _customerCodeBloc.state.searchKey;
     if (_customerCodeBloc.state.isSearchActive && searchText.isValid()) {
       _searchController.value = TextEditingValue(
-        text: searchText.getOrCrash(),
+        text: searchText.getOrDefaultValue(''),
         selection: TextSelection.collapsed(
           offset: _searchController.selection.base.offset,
         ),
@@ -154,7 +155,6 @@ class _AppBarState extends State<_AppBar> {
                     CustomerCodeEvent.fetch(
                       userInfo: _userBloc.state.user,
                       selectedSalesOrg: _salesOrgBloc.state.salesOrganisation,
-                      isRefresh: true,
                       hidecustomer: _salesOrgBloc.state.hideCustomer,
                     ),
                   );
@@ -213,7 +213,6 @@ class _BodyContent extends StatelessWidget {
                 CustomerCodeEvent.fetch(
                   userInfo: userBloc.state.user,
                   selectedSalesOrg: salesOrgBloc.state.salesOrganisation,
-                  isRefresh: true,
                   hidecustomer: false,
                 ),
               );
@@ -282,6 +281,17 @@ class _ListContent extends StatelessWidget {
             ],
           ),
           onTap: () {
+            if (context.router.stack.last.name ==
+                AdminPoAttachmentPageRoute.name) {
+              context.router.pop();
+              context.read<AdminPoAttachmentFilterBloc>().add(
+                    AdminPoAttachmentFilterEvent.soldToChanged(
+                      customerCodeInfo,
+                    ),
+                  );
+
+              return;
+            }
             if (customerCodeInfo != customerBloc.state.customerCodeInfo &&
                 cartBloc.state.cartItems.isNotEmpty) {
               ConfirmClearDialog.show(

@@ -24,6 +24,7 @@ mixin _$AccessRight {
   bool get services => throw _privateConstructorUsedError;
   bool get analytics => throw _privateConstructorUsedError;
   bool get loyaltyScheme => throw _privateConstructorUsedError;
+  bool get adminPOAttachment => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AccessRightCopyWith<AccessRight> get copyWith =>
@@ -44,7 +45,8 @@ abstract class $AccessRightCopyWith<$Res> {
       bool products,
       bool services,
       bool analytics,
-      bool loyaltyScheme});
+      bool loyaltyScheme,
+      bool adminPOAttachment});
 }
 
 /// @nodoc
@@ -68,6 +70,7 @@ class _$AccessRightCopyWithImpl<$Res, $Val extends AccessRight>
     Object? services = null,
     Object? analytics = null,
     Object? loyaltyScheme = null,
+    Object? adminPOAttachment = null,
   }) {
     return _then(_value.copyWith(
       users: null == users
@@ -102,6 +105,10 @@ class _$AccessRightCopyWithImpl<$Res, $Val extends AccessRight>
           ? _value.loyaltyScheme
           : loyaltyScheme // ignore: cast_nullable_to_non_nullable
               as bool,
+      adminPOAttachment: null == adminPOAttachment
+          ? _value.adminPOAttachment
+          : adminPOAttachment // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -122,7 +129,8 @@ abstract class _$$_AccessRightCopyWith<$Res>
       bool products,
       bool services,
       bool analytics,
-      bool loyaltyScheme});
+      bool loyaltyScheme,
+      bool adminPOAttachment});
 }
 
 /// @nodoc
@@ -144,6 +152,7 @@ class __$$_AccessRightCopyWithImpl<$Res>
     Object? services = null,
     Object? analytics = null,
     Object? loyaltyScheme = null,
+    Object? adminPOAttachment = null,
   }) {
     return _then(_$_AccessRight(
       users: null == users
@@ -178,6 +187,10 @@ class __$$_AccessRightCopyWithImpl<$Res>
           ? _value.loyaltyScheme
           : loyaltyScheme // ignore: cast_nullable_to_non_nullable
               as bool,
+      adminPOAttachment: null == adminPOAttachment
+          ? _value.adminPOAttachment
+          : adminPOAttachment // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -193,7 +206,8 @@ class _$_AccessRight extends _AccessRight {
       required this.products,
       required this.services,
       required this.analytics,
-      required this.loyaltyScheme})
+      required this.loyaltyScheme,
+      required this.adminPOAttachment})
       : super._();
 
   @override
@@ -212,10 +226,12 @@ class _$_AccessRight extends _AccessRight {
   final bool analytics;
   @override
   final bool loyaltyScheme;
+  @override
+  final bool adminPOAttachment;
 
   @override
   String toString() {
-    return 'AccessRight(users: $users, orders: $orders, promos: $promos, hCPHUB: $hCPHUB, products: $products, services: $services, analytics: $analytics, loyaltyScheme: $loyaltyScheme)';
+    return 'AccessRight(users: $users, orders: $orders, promos: $promos, hCPHUB: $hCPHUB, products: $products, services: $services, analytics: $analytics, loyaltyScheme: $loyaltyScheme, adminPOAttachment: $adminPOAttachment)';
   }
 
   @override
@@ -234,12 +250,14 @@ class _$_AccessRight extends _AccessRight {
             (identical(other.analytics, analytics) ||
                 other.analytics == analytics) &&
             (identical(other.loyaltyScheme, loyaltyScheme) ||
-                other.loyaltyScheme == loyaltyScheme));
+                other.loyaltyScheme == loyaltyScheme) &&
+            (identical(other.adminPOAttachment, adminPOAttachment) ||
+                other.adminPOAttachment == adminPOAttachment));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, users, orders, promos, hCPHUB,
-      products, services, analytics, loyaltyScheme);
+      products, services, analytics, loyaltyScheme, adminPOAttachment);
 
   @JsonKey(ignore: true)
   @override
@@ -257,7 +275,8 @@ abstract class _AccessRight extends AccessRight {
       required final bool products,
       required final bool services,
       required final bool analytics,
-      required final bool loyaltyScheme}) = _$_AccessRight;
+      required final bool loyaltyScheme,
+      required final bool adminPOAttachment}) = _$_AccessRight;
   const _AccessRight._() : super._();
 
   @override
@@ -276,6 +295,8 @@ abstract class _AccessRight extends AccessRight {
   bool get analytics;
   @override
   bool get loyaltyScheme;
+  @override
+  bool get adminPOAttachment;
   @override
   @JsonKey(ignore: true)
   _$$_AccessRightCopyWith<_$_AccessRight> get copyWith =>

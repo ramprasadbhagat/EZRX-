@@ -29,8 +29,8 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
       emit(state.copyWith(searchKey: SearchKey.search(e.searchKey)));
     });
     on<_Selected>((e, emit) async {
-      await customerCodeRepository.storeCustomerCode(
-        customerCode: e.customerCodeInfo.customerCodeSoldTo,
+        await customerCodeRepository.storeCustomerCode(
+          customerCode: e.customerCodeInfo.customerCodeSoldTo,
       );
       emit(state.copyWith(customerCodeInfo: e.customerCodeInfo));
     });

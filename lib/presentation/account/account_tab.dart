@@ -35,6 +35,7 @@ class AccountTab extends StatelessWidget {
               const _SupportTile(),
               const _SettingsTile(),
               const _PaymentConfigurationTile(),
+              const _AdminPoAttachment(),
             ],
           ).toList(),
         ),
@@ -137,6 +138,27 @@ class _SupportTile extends StatelessWidget {
           },
         );
       },
+    );
+  }
+}
+
+class _AdminPoAttachment extends StatelessWidget {
+  const _AdminPoAttachment({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<UserBloc, UserState>(
+      builder: (context, state) => state.user.accessRight.adminPOAttachment
+          ? ListTile(
+              key: const Key('admin_po_attachment_tile'),
+              leading: const Icon(Icons.attach_file_outlined),
+              title: Text(
+                'Po Attachment',
+                locale: context.locale,
+              ).tr(),
+              onTap: () => context.router.pushNamed('admin_po_attachment'),
+            )
+          : const SizedBox.shrink(),
     );
   }
 }

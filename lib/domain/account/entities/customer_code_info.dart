@@ -83,4 +83,6 @@ class CustomerCodeInfo with _$CustomerCodeInfo {
         ? emailAddresses.first.value.getOrElse(() => 'NA')
         : 'NA';
   }
+
+  int get countWhenValid => this != CustomerCodeInfo.empty() ? 1 : 0;
 }

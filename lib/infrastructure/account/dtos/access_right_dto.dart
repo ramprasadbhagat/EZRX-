@@ -18,6 +18,8 @@ class AccessRightDto with _$AccessRightDto {
     @JsonKey(name: 'Analytics', defaultValue: false) required bool analytics,
     @JsonKey(name: 'LoyaltyScheme', defaultValue: false)
         required bool loyaltyScheme,
+    @JsonKey(name: 'AdminPOAttachment', defaultValue: false)
+        required bool adminPOAttachment,
   }) = _AccessRightDto;
 
   AccessRight toDomain() {
@@ -30,6 +32,7 @@ class AccessRightDto with _$AccessRightDto {
       services: services,
       analytics: analytics,
       loyaltyScheme: loyaltyScheme,
+      adminPOAttachment: adminPOAttachment,
     );
   }
 
@@ -43,6 +46,7 @@ class AccessRightDto with _$AccessRightDto {
       services: accessRight.services,
       analytics: accessRight.analytics,
       loyaltyScheme: accessRight.loyaltyScheme,
+      adminPOAttachment: accessRight.adminPOAttachment,
     );
   }
 
@@ -55,6 +59,7 @@ class AccessRightDto with _$AccessRightDto {
     services: false,
     analytics: false,
     loyaltyScheme: false,
+    adminPOAttachment: false,
   );
 
   factory AccessRightDto.fromJson(Map<String, dynamic> json) =>

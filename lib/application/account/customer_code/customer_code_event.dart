@@ -8,7 +8,6 @@ class CustomerCodeEvent with _$CustomerCodeEvent {
   }) = _Selected;
 
   const factory CustomerCodeEvent.fetch({
-    @Default(false) bool isRefresh,
     @Default('') String searchText,
     required bool hidecustomer,
     required User userInfo,

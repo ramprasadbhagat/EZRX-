@@ -37,7 +37,7 @@ class MaterialFilterRepository implements IMaterialFilterRepository {
     final shipToCode = shipToInfo.shipToCustomerCode;
     final userName = user.username.getOrCrash();
     final gimmickMaterial = salesOrgConfig.enableGimmickMaterial;
-    final language = salesOrgConfig.getConfigLangauge;
+    final language = salesOrgConfig.getConfigLanguage;
 
     if (config.appFlavor == Flavor.mock) {
       try {

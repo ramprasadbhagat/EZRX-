@@ -1,3 +1,5 @@
+import 'package:ezrxmobile/application/admin_po_attachment/admin_po_attachment_bloc.dart';
+import 'package:ezrxmobile/application/admin_po_attachment/filter/admin_po_attachment_filter_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_details/order_history_details_bloc.dart';
@@ -5,6 +7,8 @@ import 'package:ezrxmobile/application/order/order_history_list/order_history_li
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
+import 'package:ezrxmobile/application/returns/returns_overview/returns_overview_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/admin_po_attachment_filter.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/domain/deep_linking/error/redirect_failures.dart';
@@ -12,7 +16,6 @@ import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
-import 'package:ezrxmobile/application/returns/returns_overview/returns_overview_bloc.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/cart_bottom_sheet.dart';
 import 'package:universal_io/io.dart';
 import 'package:auto_route/auto_route.dart';
@@ -333,24 +336,25 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
           },
         ),
         BlocListener<EligibilityBloc, EligibilityState>(
-          listenWhen: (previous, current) =>
-              previous.shipToInfo != current.shipToInfo,
-          listener: (context, state) async {
-            context.read<CartBloc>().add(
-                  CartEvent.fetch(
-                    doNotAllowOutOfStockMaterials:
-                        state.doNotAllowOutOfStockMaterials,
-                    customerCodeInfo: state.customerCodeInfo,
-                    salesOrganisationConfigs: state.salesOrgConfigs,
-                    salesOrganisation: state.salesOrganisation,
-                    shipToInfo: state.shipToInfo,
-                    comboDealEligible: state.comboDealEligible,
-                    isSpecialOrderType: context
-                        .read<OrderDocumentTypeBloc>()
-                        .state
-                        .isSpecialOrderType,
-                  ),
-                );
+            listenWhen: (previous, current) =>
+                previous.shipToInfo != current.shipToInfo,
+            listener: (context, state) {
+            _getAdminPoAttachment(state);
+              context.read<CartBloc>().add(
+                    CartEvent.fetch(
+                      doNotAllowOutOfStockMaterials:
+                          state.doNotAllowOutOfStockMaterials,
+                      customerCodeInfo: state.customerCodeInfo,
+                      salesOrganisationConfigs: state.salesOrgConfigs,
+                      salesOrganisation: state.salesOrganisation,
+                      shipToInfo: state.shipToInfo,
+                      comboDealEligible: state.comboDealEligible,
+                      isSpecialOrderType: context
+                          .read<OrderDocumentTypeBloc>()
+                          .state
+                          .isSpecialOrderType,
+                    ),
+                  );
 
             final enableReturn =
                 locator<RemoteConfigService>().getReturnsConfig() &&
@@ -366,7 +370,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                     ),
                   );
             }
-
             context.read<DeepLinkingBloc>().add(
                   const DeepLinkingEvent.initialize(),
                 );
@@ -528,6 +531,25 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
         );
       },
     );
+  }
+
+  void _getAdminPoAttachment(EligibilityState eligibilityState) {
+    if (!eligibilityState.user.accessRight.adminPOAttachment) return;
+    final salesOrg = eligibilityState.salesOrganisation.salesOrg;
+    final customerCodeInfo = eligibilityState.customerCodeInfo;
+
+    context.read<AdminPoAttachmentFilterBloc>()
+      ..add(AdminPoAttachmentFilterEvent.salesOrgChanged(salesOrg))
+      ..add(AdminPoAttachmentFilterEvent.soldToChanged(customerCodeInfo));
+
+    context.read<AdminPoAttachmentBloc>().add(
+          AdminPoAttachmentEvent.fetch(
+            adminPoAttachmentFilter: AdminPoAttachmentFilter.empty().copyWith(
+              salesOrg: salesOrg,
+              soldTo: customerCodeInfo,
+            ),
+          ),
+        );
   }
 }
 

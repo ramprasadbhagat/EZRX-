@@ -1,0 +1,74 @@
+{
+    "data": {
+        "getPOAttachment": [
+            {
+                "salesOrderNumber": "0200206459",
+                "ezrxReferenceNumber": "EZRX-a8eb7df",
+                "createdBy": "ezrx, test05",
+                "createdTime": "2023-04-25T21:14:45.862895Z",
+                "documentUrl": "https://ezrxprdpo.blob.core.windows.net/ezrx-th/po-bucket/2023/ezrxtest05_0000101464_0071057759_1682428473090_ezrxtest05_0000101464_0071057759_1682405678587_ezrxtest05_0030147366_0071038218_1682373649763_IMG_20230425_033036.jpg",
+                "documentName": "ezrxtest05_0000101464_0071057759_1682428473090_ezrxtest05_0000101464_0071057759_1682405678587_ezrxtest05_0030147366_0071038218_1682373649763_IMG_20230425_033036.jpg",
+                "salesOrg": "2902",
+                "soldToCode": "0000101464",
+                "shipToCode": "0071057759",
+                "tempOrderNumber": "c47fa00e-ecbc-4b7a-a8b3-cc0ee10eb239",
+                "__typename": "POAttachmentResponse"
+            },
+            {
+                "salesOrderNumber": "0200207238",
+                "ezrxReferenceNumber": "EZRX-7016a83",
+                "createdBy": "ezrx, test05",
+                "createdTime": "2023-04-25T20:47:27.63815Z",
+                "documentUrl": "https://ezrxprdpo.blob.core.windows.net/ezrx-th/po-bucket/2023/ezrxtest05_0000101464_0071057759_1682426825225_ezrxtest05_0030147366_0071038218_1682373649763_IMG_20230425_033036.jpg",
+                "documentName": "ezrxtest05_0000101464_0071057759_1682426825225_ezrxtest05_0030147366_0071038218_1682373649763_IMG_20230425_033036.jpg",
+                "salesOrg": "2902",
+                "soldToCode": "0000101464",
+                "shipToCode": "0071057759",
+                "tempOrderNumber": "c48b56d4-52a2-40e7-82dd-7306f64734fc",
+                "__typename": "POAttachmentResponse"
+            },
+            {
+                "salesOrderNumber": "0200206520",
+                "ezrxReferenceNumber": "EZRX-7a01a7e",
+                "createdBy": "ezrx, test05",
+                "createdTime": "2023-04-25T15:36:33.381201Z",
+                "documentUrl": "https://ezrxprdpo.blob.core.windows.net/ezrx-th/po-bucket/2023/ezrxtest05_0000101464_0071057759_1682405678587_ezrxtest05_0030147366_0071038218_1682373649763_IMG_20230425_033036.jpg",
+                "documentName": "ezrxtest05_0000101464_0071057759_1682405678587_ezrxtest05_0030147366_0071038218_1682373649763_IMG_20230425_033036.jpg",
+                "salesOrg": "2902",
+                "soldToCode": "0000101464",
+                "shipToCode": "0071057759",
+                "tempOrderNumber": "c8a7bf14-6a7c-46ab-8091-ccf31fe42964",
+                "__typename": "POAttachmentResponse"
+            },
+            {
+                "salesOrderNumber": "",
+                "ezrxReferenceNumber": "EZRX-7289ac0",
+                "createdBy": "ezrx, test05",
+                "createdTime": "2023-04-25T06:01:06.005184Z",
+                "documentUrl": "https://ezrxprdpo.blob.core.windows.net/ezrx-th/po-bucket/2023/ezrxtest05_0030147366_0071038218_1682373649765_IMG_20230425_033035.jpg",
+                "documentName": "ezrxtest05_0030147366_0071038218_1682373649765_IMG_20230425_033035.jpg",
+                "salesOrg": "2902",
+                "soldToCode": "0030147366",
+                "shipToCode": "0071038218",
+                "tempOrderNumber": "264dcb4e-b0ae-4c13-8b82-5ffc7a5775b9",
+                "__typename": "POAttachmentResponse"
+            },
+            {
+                "salesOrderNumber": "",
+                "ezrxReferenceNumber": "EZRX-7289ac0",
+                "createdBy": "ezrx, test05",
+                "createdTime": "2023-04-25T06:01:05.947333Z",
+                "documentUrl": "https://ezrxprdpo.blob.core.windows.net/ezrx-th/po-bucket/2023/ezrxtest05_0030147366_0071038218_1682373649763_IMG_20230425_033036.jpg",
+                "documentName": "ezrxtest05_0030147366_0071038218_1682373649763_IMG_20230425_033036.jpg",
+                "salesOrg": "2902",
+                "soldToCode": "0030147366",
+                "shipToCode": "0071038218",
+                "tempOrderNumber": "264dcb4e-b0ae-4c13-8b82-5ffc7a5775b9",
+                "__typename": "POAttachmentResponse"
+            }
+        ]
+    },
+    "extensions": {
+        "trace-id": "c7796da56ec849d1b90594d3c0166706"
+    }
+}

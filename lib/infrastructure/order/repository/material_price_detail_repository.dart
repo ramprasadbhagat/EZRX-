@@ -87,7 +87,7 @@ class MaterialPriceDetailRepository implements IMaterialPriceDetailRepository {
         final salesOrgCode = salesOrganisation.salesOrg.getOrCrash();
         final customerCode = customerCodeInfo.customerCodeSoldTo;
         final shipToCode = shipToCodeInfo.shipToCustomerCode;
-        final language = salesOrganisationConfigs.getConfigLangauge;
+        final language = salesOrganisationConfigs.getConfigLanguage;
         final queryMaterialNumbers = materialQueryList
             .map(
               (e) => e.priceQuery,
@@ -208,7 +208,7 @@ class MaterialPriceDetailRepository implements IMaterialPriceDetailRepository {
       final salesOrgCode = salesOrganisation.salesOrg.getOrCrash();
       final customerCode = customerCodeInfo.customerCodeSoldTo;
       final shipToCode = shipToCodeInfo.shipToCustomerCode;
-      final language = salesOrganisationConfigs.getConfigLangauge;
+      final language = salesOrganisationConfigs.getConfigLanguage;
       final queryMaterialNumbers = materialQueryList.map(
         (materialQueryInfo, materialDetail) => MapEntry(
           materialQueryInfo.value.getOrCrash(),

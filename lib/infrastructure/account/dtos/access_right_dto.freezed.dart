@@ -36,6 +36,8 @@ mixin _$AccessRightDto {
   bool get analytics => throw _privateConstructorUsedError;
   @JsonKey(name: 'LoyaltyScheme', defaultValue: false)
   bool get loyaltyScheme => throw _privateConstructorUsedError;
+  @JsonKey(name: 'AdminPOAttachment', defaultValue: false)
+  bool get adminPOAttachment => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -50,14 +52,24 @@ abstract class $AccessRightDtoCopyWith<$Res> {
       _$AccessRightDtoCopyWithImpl<$Res, AccessRightDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'Users', defaultValue: false) bool users,
-      @JsonKey(name: 'Orders', defaultValue: false) bool orders,
-      @JsonKey(name: 'Promos', defaultValue: false) bool promos,
-      @JsonKey(name: 'HCPHUB', defaultValue: false) bool hCPHUB,
-      @JsonKey(name: 'Products', defaultValue: false) bool products,
-      @JsonKey(name: 'Services', defaultValue: false) bool services,
-      @JsonKey(name: 'Analytics', defaultValue: false) bool analytics,
-      @JsonKey(name: 'LoyaltyScheme', defaultValue: false) bool loyaltyScheme});
+      {@JsonKey(name: 'Users', defaultValue: false)
+          bool users,
+      @JsonKey(name: 'Orders', defaultValue: false)
+          bool orders,
+      @JsonKey(name: 'Promos', defaultValue: false)
+          bool promos,
+      @JsonKey(name: 'HCPHUB', defaultValue: false)
+          bool hCPHUB,
+      @JsonKey(name: 'Products', defaultValue: false)
+          bool products,
+      @JsonKey(name: 'Services', defaultValue: false)
+          bool services,
+      @JsonKey(name: 'Analytics', defaultValue: false)
+          bool analytics,
+      @JsonKey(name: 'LoyaltyScheme', defaultValue: false)
+          bool loyaltyScheme,
+      @JsonKey(name: 'AdminPOAttachment', defaultValue: false)
+          bool adminPOAttachment});
 }
 
 /// @nodoc
@@ -81,6 +93,7 @@ class _$AccessRightDtoCopyWithImpl<$Res, $Val extends AccessRightDto>
     Object? services = null,
     Object? analytics = null,
     Object? loyaltyScheme = null,
+    Object? adminPOAttachment = null,
   }) {
     return _then(_value.copyWith(
       users: null == users
@@ -115,6 +128,10 @@ class _$AccessRightDtoCopyWithImpl<$Res, $Val extends AccessRightDto>
           ? _value.loyaltyScheme
           : loyaltyScheme // ignore: cast_nullable_to_non_nullable
               as bool,
+      adminPOAttachment: null == adminPOAttachment
+          ? _value.adminPOAttachment
+          : adminPOAttachment // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -128,14 +145,24 @@ abstract class _$$_AccessRightDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'Users', defaultValue: false) bool users,
-      @JsonKey(name: 'Orders', defaultValue: false) bool orders,
-      @JsonKey(name: 'Promos', defaultValue: false) bool promos,
-      @JsonKey(name: 'HCPHUB', defaultValue: false) bool hCPHUB,
-      @JsonKey(name: 'Products', defaultValue: false) bool products,
-      @JsonKey(name: 'Services', defaultValue: false) bool services,
-      @JsonKey(name: 'Analytics', defaultValue: false) bool analytics,
-      @JsonKey(name: 'LoyaltyScheme', defaultValue: false) bool loyaltyScheme});
+      {@JsonKey(name: 'Users', defaultValue: false)
+          bool users,
+      @JsonKey(name: 'Orders', defaultValue: false)
+          bool orders,
+      @JsonKey(name: 'Promos', defaultValue: false)
+          bool promos,
+      @JsonKey(name: 'HCPHUB', defaultValue: false)
+          bool hCPHUB,
+      @JsonKey(name: 'Products', defaultValue: false)
+          bool products,
+      @JsonKey(name: 'Services', defaultValue: false)
+          bool services,
+      @JsonKey(name: 'Analytics', defaultValue: false)
+          bool analytics,
+      @JsonKey(name: 'LoyaltyScheme', defaultValue: false)
+          bool loyaltyScheme,
+      @JsonKey(name: 'AdminPOAttachment', defaultValue: false)
+          bool adminPOAttachment});
 }
 
 /// @nodoc
@@ -157,6 +184,7 @@ class __$$_AccessRightDtoCopyWithImpl<$Res>
     Object? services = null,
     Object? analytics = null,
     Object? loyaltyScheme = null,
+    Object? adminPOAttachment = null,
   }) {
     return _then(_$_AccessRightDto(
       users: null == users
@@ -191,6 +219,10 @@ class __$$_AccessRightDtoCopyWithImpl<$Res>
           ? _value.loyaltyScheme
           : loyaltyScheme // ignore: cast_nullable_to_non_nullable
               as bool,
+      adminPOAttachment: null == adminPOAttachment
+          ? _value.adminPOAttachment
+          : adminPOAttachment // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -214,7 +246,9 @@ class _$_AccessRightDto extends _AccessRightDto {
       @JsonKey(name: 'Analytics', defaultValue: false)
           required this.analytics,
       @JsonKey(name: 'LoyaltyScheme', defaultValue: false)
-          required this.loyaltyScheme})
+          required this.loyaltyScheme,
+      @JsonKey(name: 'AdminPOAttachment', defaultValue: false)
+          required this.adminPOAttachment})
       : super._();
 
   factory _$_AccessRightDto.fromJson(Map<String, dynamic> json) =>
@@ -244,10 +278,13 @@ class _$_AccessRightDto extends _AccessRightDto {
   @override
   @JsonKey(name: 'LoyaltyScheme', defaultValue: false)
   final bool loyaltyScheme;
+  @override
+  @JsonKey(name: 'AdminPOAttachment', defaultValue: false)
+  final bool adminPOAttachment;
 
   @override
   String toString() {
-    return 'AccessRightDto(users: $users, orders: $orders, promos: $promos, hCPHUB: $hCPHUB, products: $products, services: $services, analytics: $analytics, loyaltyScheme: $loyaltyScheme)';
+    return 'AccessRightDto(users: $users, orders: $orders, promos: $promos, hCPHUB: $hCPHUB, products: $products, services: $services, analytics: $analytics, loyaltyScheme: $loyaltyScheme, adminPOAttachment: $adminPOAttachment)';
   }
 
   @override
@@ -266,13 +303,15 @@ class _$_AccessRightDto extends _AccessRightDto {
             (identical(other.analytics, analytics) ||
                 other.analytics == analytics) &&
             (identical(other.loyaltyScheme, loyaltyScheme) ||
-                other.loyaltyScheme == loyaltyScheme));
+                other.loyaltyScheme == loyaltyScheme) &&
+            (identical(other.adminPOAttachment, adminPOAttachment) ||
+                other.adminPOAttachment == adminPOAttachment));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, users, orders, promos, hCPHUB,
-      products, services, analytics, loyaltyScheme);
+      products, services, analytics, loyaltyScheme, adminPOAttachment);
 
   @JsonKey(ignore: true)
   @override
@@ -305,7 +344,9 @@ abstract class _AccessRightDto extends AccessRightDto {
       @JsonKey(name: 'Analytics', defaultValue: false)
           required final bool analytics,
       @JsonKey(name: 'LoyaltyScheme', defaultValue: false)
-          required final bool loyaltyScheme}) = _$_AccessRightDto;
+          required final bool loyaltyScheme,
+      @JsonKey(name: 'AdminPOAttachment', defaultValue: false)
+          required final bool adminPOAttachment}) = _$_AccessRightDto;
   const _AccessRightDto._() : super._();
 
   factory _AccessRightDto.fromJson(Map<String, dynamic> json) =
@@ -335,6 +376,9 @@ abstract class _AccessRightDto extends AccessRightDto {
   @override
   @JsonKey(name: 'LoyaltyScheme', defaultValue: false)
   bool get loyaltyScheme;
+  @override
+  @JsonKey(name: 'AdminPOAttachment', defaultValue: false)
+  bool get adminPOAttachment;
   @override
   @JsonKey(ignore: true)
   _$$_AccessRightDtoCopyWith<_$_AccessRightDto> get copyWith =>

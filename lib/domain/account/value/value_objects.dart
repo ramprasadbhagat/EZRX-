@@ -88,6 +88,8 @@ class SalesOrg extends ValueObject<String> {
     return countrySupportOrderType(country);
   }
 
+  int get countWhenValid => isValid() ? 1 : 0;
+  
   const SalesOrg._(this.value);
 }
 

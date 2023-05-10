@@ -5,13 +5,12 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/additional_details_data.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/infrastructure/core/common/file_picker.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
-import 'package:ezrxmobile/infrastructure/order/repository/po_attachment_repository.dart';
-import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/order_summary/addition_details/additional_attachment.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:file_picker/file_picker.dart';
@@ -20,6 +19,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../utils/widget_utils.dart';
@@ -50,9 +50,11 @@ void main() {
   late PoAttachmentBloc poAttachmentBlocMock;
   late FilePickerService filePickerService;
   late EligibilityBloc eligibilityBlocMock;
+  late GetIt locator;
 
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
+    locator = GetIt.instance;
     filePickerService = FilePickerServiceMock();
     autoRouterMock = AppRouter();
     eligibilityBlocMock = EligibilityBlocMock();
@@ -60,6 +62,7 @@ void main() {
     locator.registerLazySingleton(() => MixpanelService());
     locator<MixpanelService>().init(mixpanel: MixpanelMock());
     locator.registerLazySingleton(() => filePickerService);
+    GetIt.instance.registerSingleton<Config>(Config());
     const MethodChannel('dev.fluttercommunity.plus/device_info')
         .setMockMethodCallHandler((MethodCall methodCall) async {
       if (methodCall.method == 'getAndroidDeviceInfo') {
@@ -309,7 +312,7 @@ void main() {
       when(() => filePickerService.pickFiles(
           allowMultiple: true,
           fileType: FileType.custom,
-          allowedExtensions: allowedExtensions,
+          allowedExtensions: locator<Config>().allowedExtensions,
         ),
       ).thenAnswer(
         (invocation) async => const FilePickerResult([]),
@@ -340,7 +343,7 @@ void main() {
       when(() => filePickerService.pickFiles(
           allowMultiple: true,
           fileType: FileType.custom,
-          allowedExtensions: allowedExtensions)).thenAnswer(
+          allowedExtensions: locator<Config>().allowedExtensions)).thenAnswer(
         (invocation) async => FilePickerResult([
           PlatformFile(
             name: 'fake-name',

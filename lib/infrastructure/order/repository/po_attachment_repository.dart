@@ -19,6 +19,7 @@ import 'package:ezrxmobile/infrastructure/core/common/permission_service.dart';
 import 'package:ezrxmobile/infrastructure/core/common/file_path_helper.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/po_document_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/po_document_remote.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:open_file_safe/open_file_safe.dart' as ofs;
@@ -48,10 +49,10 @@ class PoAttachmentRepository implements IpoAttachmentRepository {
   });
 
   @override
-  Future<Either<ApiFailure, List<File>>> downloadFiles(
-    List<PoDocuments> files,
-    AttachmentType attachmentType,
-  ) async {
+  Future<Either<ApiFailure, List<File>>> downloadFiles({
+    required List<PoDocuments> files,
+    required AttachmentType attachmentType,
+  }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
         final localFile = Future.wait(files.map(
@@ -230,7 +231,7 @@ class PoAttachmentRepository implements IpoAttachmentRepository {
             ? FileType.custom
             : FileType.image,
         allowedExtensions: uploadOptionType == UploadOptionType.file
-            ? allowedExtensions
+            ? locator<Config>().allowedExtensions
             : null,
       );
       final files = List<PlatformFile>.from(result?.files ?? [])
@@ -284,15 +285,4 @@ class PoAttachmentRepository implements IpoAttachmentRepository {
 
 }
 
-const allowedExtensions = [
-  'jpg',
-  'pdf',
-  'doc',
-  'png',
-  'jpge',
-  'csv',
-  'pdf',
-  'xlsx',
-  'xls',
-  'heic',
-];
+

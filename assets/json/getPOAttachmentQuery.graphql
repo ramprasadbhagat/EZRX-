@@ -1,0 +1,54 @@
+{
+  "operationName": "getPOAttachmentQuery",
+  "variables": {
+    "first": 11,
+    "after": 0,
+    "fromDate": "2023-04-04",
+    "toDate": "2023-04-27"
+  },
+  "query": "query getPOAttachmentQuery($soldTo: String, $fromDate: String, $toDate: String, $shipTo: String, $salesOrg: String, $fileName: String, $exRxNo: String, $first: Int!, $after: Int!, $orderNumber: String) {\n  getPOAttachment(soldTo: $soldTo, fromDate: $fromDate, toDate: $toDate, shipTo: $shipTo, salesOrg: $salesOrg, fileName: $fileName, exRxNo: $exRxNo, first: $first, after: $after, orderNumber: $orderNumber) {\n    salesOrderNumber\n    ezrxReferenceNumber\n    createdBy\n    createdTime\n    documentUrl\n    documentName\n    salesOrg\n    soldToCode\n    shipToCode\n    tempOrderNumber\n    __typename\n  }\n}\n"
+}
+
+query getPOAttachmentQuery(
+    $soldTo: String, 
+    $fromDate: String, 
+    $toDate: String, 
+    $shipTo: String, 
+    $salesOrg: String, 
+    $fileName: String, 
+    $exRxNo: String, 
+    $first: Int!, 
+    $after: Int!, 
+    $orderNumber: String
+    ){
+        getPOAttachment(
+            soldTo: $soldTo, 
+            fromDate: $fromDate, 
+            toDate: $toDate, 
+            shipTo: $shipTo, 
+            salesOrg: $salesOrg, 
+            fileName: $fileName, 
+            exRxNo: $exRxNo, 
+            first: $first, 
+            after: $after, 
+            orderNumber: $orderNumber) {
+                salesOrderNumber\n    
+                ezrxReferenceNumber
+                createdBy
+                createdTime
+                documentUrl
+                documentName
+                salesOrg
+                soldToCode
+                shipToCode
+                tempOrderNumber    
+            __typename  
+        }
+    }
+
+"variables": {
+  "first": 11,
+  "after": 0,
+  "fromDate": "2023-04-04",
+  "toDate": "2023-04-27"
+}
