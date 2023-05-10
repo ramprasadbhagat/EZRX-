@@ -34,6 +34,7 @@ class AccountTab extends StatelessWidget {
               const _LoginOnBehalfTile(),
               const _SupportTile(),
               const _SettingsTile(),
+              const _PaymentConfigurationTile(),
             ],
           ).toList(),
         ),
@@ -79,6 +80,31 @@ class _SettingsTile extends StatelessWidget {
         locale: context.locale,
       ).tr(),
       onTap: () => context.router.pushNamed('settings'),
+    );
+  }
+}
+
+class _PaymentConfigurationTile extends StatelessWidget {
+  const _PaymentConfigurationTile({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<UserBloc, UserState>(
+      buildWhen: (previous, current) =>
+          previous.user.role.type != current.user.role.type,
+      builder: (context, state) {
+        return state.user.role.type.isRootAdmin
+            ? ListTile(
+                key: const Key('paymentConfigurationTile'),
+                leading: const Icon(Icons.settings_outlined),
+                title: Text(
+                  'Payment Configuration',
+                  locale: context.locale,
+                ).tr(),
+                onTap: () {},
+              )
+            : const SizedBox.shrink();
+      },
     );
   }
 }
