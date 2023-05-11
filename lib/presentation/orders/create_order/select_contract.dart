@@ -1,16 +1,14 @@
-import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
-import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
-import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/tender_contract_item.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:ezrxmobile/domain/utils/error_utils.dart';
 
 class SelectContract extends StatelessWidget {
   const SelectContract({Key? key}) : super(key: key);
@@ -55,16 +53,7 @@ class TenderContractList extends StatelessWidget {
           () {},
           (either) => either.fold(
             (failure) {
-              final failureMessage = failure.failureMessage;
-              showSnackBar(
-                context: context,
-                message: failureMessage.tr(),
-              );
-              if (failureMessage == 'authentication failed') {
-                context.read<AuthBloc>().add(
-                      const AuthEvent.logout(),
-                    );
-              }
+              ErrorUtils.handleApiFailure(context, failure);
             },
             (_) {},
           ),

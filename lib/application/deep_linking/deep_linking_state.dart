@@ -8,5 +8,5 @@ class DeepLinkingState with _$DeepLinkingState {
       _RedirectMaterialDetail;
        const factory DeepLinkingState.redirectHistoryDetail(String history) =
       _RedirectHistoryDetail;
-  const factory DeepLinkingState.error(RedirectFailure failure) = _Error;
+  const factory DeepLinkingState.error(ApiFailure failure) = _Error;
 }

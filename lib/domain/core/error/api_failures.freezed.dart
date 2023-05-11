@@ -41,6 +41,8 @@ mixin _$ApiFailure {
     required TResult Function() storagePermissionFailed,
     required TResult Function() invalidFileFormat,
     required TResult Function() uploadCountExcideLimit,
+    required TResult Function() materialDetailRoute,
+    required TResult Function() historyDetailRoute,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -68,6 +70,8 @@ mixin _$ApiFailure {
     TResult? Function()? storagePermissionFailed,
     TResult? Function()? invalidFileFormat,
     TResult? Function()? uploadCountExcideLimit,
+    TResult? Function()? materialDetailRoute,
+    TResult? Function()? historyDetailRoute,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -95,6 +99,8 @@ mixin _$ApiFailure {
     TResult Function()? storagePermissionFailed,
     TResult Function()? invalidFileFormat,
     TResult Function()? uploadCountExcideLimit,
+    TResult Function()? materialDetailRoute,
+    TResult Function()? historyDetailRoute,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -134,6 +140,8 @@ mixin _$ApiFailure {
     required TResult Function(_InvalidFileFormat value) invalidFileFormat,
     required TResult Function(_UploadCountExcideLimit value)
         uploadCountExcideLimit,
+    required TResult Function(_MaterialDetailRoute value) materialDetailRoute,
+    required TResult Function(_HistoryDetailRoute value) historyDetailRoute,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -166,6 +174,8 @@ mixin _$ApiFailure {
     TResult? Function(_StoragePermissionFailed value)? storagePermissionFailed,
     TResult? Function(_InvalidFileFormat value)? invalidFileFormat,
     TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult? Function(_MaterialDetailRoute value)? materialDetailRoute,
+    TResult? Function(_HistoryDetailRoute value)? historyDetailRoute,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -198,6 +208,8 @@ mixin _$ApiFailure {
     TResult Function(_StoragePermissionFailed value)? storagePermissionFailed,
     TResult Function(_InvalidFileFormat value)? invalidFileFormat,
     TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult Function(_MaterialDetailRoute value)? materialDetailRoute,
+    TResult Function(_HistoryDetailRoute value)? historyDetailRoute,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -306,6 +318,8 @@ class _$_Other implements _Other {
     required TResult Function() storagePermissionFailed,
     required TResult Function() invalidFileFormat,
     required TResult Function() uploadCountExcideLimit,
+    required TResult Function() materialDetailRoute,
+    required TResult Function() historyDetailRoute,
   }) {
     return other(message);
   }
@@ -336,6 +350,8 @@ class _$_Other implements _Other {
     TResult? Function()? storagePermissionFailed,
     TResult? Function()? invalidFileFormat,
     TResult? Function()? uploadCountExcideLimit,
+    TResult? Function()? materialDetailRoute,
+    TResult? Function()? historyDetailRoute,
   }) {
     return other?.call(message);
   }
@@ -366,6 +382,8 @@ class _$_Other implements _Other {
     TResult Function()? storagePermissionFailed,
     TResult Function()? invalidFileFormat,
     TResult Function()? uploadCountExcideLimit,
+    TResult Function()? materialDetailRoute,
+    TResult Function()? historyDetailRoute,
     required TResult orElse(),
   }) {
     if (other != null) {
@@ -411,6 +429,8 @@ class _$_Other implements _Other {
     required TResult Function(_InvalidFileFormat value) invalidFileFormat,
     required TResult Function(_UploadCountExcideLimit value)
         uploadCountExcideLimit,
+    required TResult Function(_MaterialDetailRoute value) materialDetailRoute,
+    required TResult Function(_HistoryDetailRoute value) historyDetailRoute,
   }) {
     return other(this);
   }
@@ -446,6 +466,8 @@ class _$_Other implements _Other {
     TResult? Function(_StoragePermissionFailed value)? storagePermissionFailed,
     TResult? Function(_InvalidFileFormat value)? invalidFileFormat,
     TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult? Function(_MaterialDetailRoute value)? materialDetailRoute,
+    TResult? Function(_HistoryDetailRoute value)? historyDetailRoute,
   }) {
     return other?.call(this);
   }
@@ -481,6 +503,8 @@ class _$_Other implements _Other {
     TResult Function(_StoragePermissionFailed value)? storagePermissionFailed,
     TResult Function(_InvalidFileFormat value)? invalidFileFormat,
     TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult Function(_MaterialDetailRoute value)? materialDetailRoute,
+    TResult Function(_HistoryDetailRoute value)? historyDetailRoute,
     required TResult orElse(),
   }) {
     if (other != null) {
@@ -586,6 +610,8 @@ class _$_ServerError implements _ServerError {
     required TResult Function() storagePermissionFailed,
     required TResult Function() invalidFileFormat,
     required TResult Function() uploadCountExcideLimit,
+    required TResult Function() materialDetailRoute,
+    required TResult Function() historyDetailRoute,
   }) {
     return serverError(message);
   }
@@ -616,6 +642,8 @@ class _$_ServerError implements _ServerError {
     TResult? Function()? storagePermissionFailed,
     TResult? Function()? invalidFileFormat,
     TResult? Function()? uploadCountExcideLimit,
+    TResult? Function()? materialDetailRoute,
+    TResult? Function()? historyDetailRoute,
   }) {
     return serverError?.call(message);
   }
@@ -646,6 +674,8 @@ class _$_ServerError implements _ServerError {
     TResult Function()? storagePermissionFailed,
     TResult Function()? invalidFileFormat,
     TResult Function()? uploadCountExcideLimit,
+    TResult Function()? materialDetailRoute,
+    TResult Function()? historyDetailRoute,
     required TResult orElse(),
   }) {
     if (serverError != null) {
@@ -691,6 +721,8 @@ class _$_ServerError implements _ServerError {
     required TResult Function(_InvalidFileFormat value) invalidFileFormat,
     required TResult Function(_UploadCountExcideLimit value)
         uploadCountExcideLimit,
+    required TResult Function(_MaterialDetailRoute value) materialDetailRoute,
+    required TResult Function(_HistoryDetailRoute value) historyDetailRoute,
   }) {
     return serverError(this);
   }
@@ -726,6 +758,8 @@ class _$_ServerError implements _ServerError {
     TResult? Function(_StoragePermissionFailed value)? storagePermissionFailed,
     TResult? Function(_InvalidFileFormat value)? invalidFileFormat,
     TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult? Function(_MaterialDetailRoute value)? materialDetailRoute,
+    TResult? Function(_HistoryDetailRoute value)? historyDetailRoute,
   }) {
     return serverError?.call(this);
   }
@@ -761,6 +795,8 @@ class _$_ServerError implements _ServerError {
     TResult Function(_StoragePermissionFailed value)? storagePermissionFailed,
     TResult Function(_InvalidFileFormat value)? invalidFileFormat,
     TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult Function(_MaterialDetailRoute value)? materialDetailRoute,
+    TResult Function(_HistoryDetailRoute value)? historyDetailRoute,
     required TResult orElse(),
   }) {
     if (serverError != null) {
@@ -840,6 +876,8 @@ class _$_PoorConnection implements _PoorConnection {
     required TResult Function() storagePermissionFailed,
     required TResult Function() invalidFileFormat,
     required TResult Function() uploadCountExcideLimit,
+    required TResult Function() materialDetailRoute,
+    required TResult Function() historyDetailRoute,
   }) {
     return poorConnection();
   }
@@ -870,6 +908,8 @@ class _$_PoorConnection implements _PoorConnection {
     TResult? Function()? storagePermissionFailed,
     TResult? Function()? invalidFileFormat,
     TResult? Function()? uploadCountExcideLimit,
+    TResult? Function()? materialDetailRoute,
+    TResult? Function()? historyDetailRoute,
   }) {
     return poorConnection?.call();
   }
@@ -900,6 +940,8 @@ class _$_PoorConnection implements _PoorConnection {
     TResult Function()? storagePermissionFailed,
     TResult Function()? invalidFileFormat,
     TResult Function()? uploadCountExcideLimit,
+    TResult Function()? materialDetailRoute,
+    TResult Function()? historyDetailRoute,
     required TResult orElse(),
   }) {
     if (poorConnection != null) {
@@ -945,6 +987,8 @@ class _$_PoorConnection implements _PoorConnection {
     required TResult Function(_InvalidFileFormat value) invalidFileFormat,
     required TResult Function(_UploadCountExcideLimit value)
         uploadCountExcideLimit,
+    required TResult Function(_MaterialDetailRoute value) materialDetailRoute,
+    required TResult Function(_HistoryDetailRoute value) historyDetailRoute,
   }) {
     return poorConnection(this);
   }
@@ -980,6 +1024,8 @@ class _$_PoorConnection implements _PoorConnection {
     TResult? Function(_StoragePermissionFailed value)? storagePermissionFailed,
     TResult? Function(_InvalidFileFormat value)? invalidFileFormat,
     TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult? Function(_MaterialDetailRoute value)? materialDetailRoute,
+    TResult? Function(_HistoryDetailRoute value)? historyDetailRoute,
   }) {
     return poorConnection?.call(this);
   }
@@ -1015,6 +1061,8 @@ class _$_PoorConnection implements _PoorConnection {
     TResult Function(_StoragePermissionFailed value)? storagePermissionFailed,
     TResult Function(_InvalidFileFormat value)? invalidFileFormat,
     TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult Function(_MaterialDetailRoute value)? materialDetailRoute,
+    TResult Function(_HistoryDetailRoute value)? historyDetailRoute,
     required TResult orElse(),
   }) {
     if (poorConnection != null) {
@@ -1089,6 +1137,8 @@ class _$_ServerTimeout implements _ServerTimeout {
     required TResult Function() storagePermissionFailed,
     required TResult Function() invalidFileFormat,
     required TResult Function() uploadCountExcideLimit,
+    required TResult Function() materialDetailRoute,
+    required TResult Function() historyDetailRoute,
   }) {
     return serverTimeout();
   }
@@ -1119,6 +1169,8 @@ class _$_ServerTimeout implements _ServerTimeout {
     TResult? Function()? storagePermissionFailed,
     TResult? Function()? invalidFileFormat,
     TResult? Function()? uploadCountExcideLimit,
+    TResult? Function()? materialDetailRoute,
+    TResult? Function()? historyDetailRoute,
   }) {
     return serverTimeout?.call();
   }
@@ -1149,6 +1201,8 @@ class _$_ServerTimeout implements _ServerTimeout {
     TResult Function()? storagePermissionFailed,
     TResult Function()? invalidFileFormat,
     TResult Function()? uploadCountExcideLimit,
+    TResult Function()? materialDetailRoute,
+    TResult Function()? historyDetailRoute,
     required TResult orElse(),
   }) {
     if (serverTimeout != null) {
@@ -1194,6 +1248,8 @@ class _$_ServerTimeout implements _ServerTimeout {
     required TResult Function(_InvalidFileFormat value) invalidFileFormat,
     required TResult Function(_UploadCountExcideLimit value)
         uploadCountExcideLimit,
+    required TResult Function(_MaterialDetailRoute value) materialDetailRoute,
+    required TResult Function(_HistoryDetailRoute value) historyDetailRoute,
   }) {
     return serverTimeout(this);
   }
@@ -1229,6 +1285,8 @@ class _$_ServerTimeout implements _ServerTimeout {
     TResult? Function(_StoragePermissionFailed value)? storagePermissionFailed,
     TResult? Function(_InvalidFileFormat value)? invalidFileFormat,
     TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult? Function(_MaterialDetailRoute value)? materialDetailRoute,
+    TResult? Function(_HistoryDetailRoute value)? historyDetailRoute,
   }) {
     return serverTimeout?.call(this);
   }
@@ -1264,6 +1322,8 @@ class _$_ServerTimeout implements _ServerTimeout {
     TResult Function(_StoragePermissionFailed value)? storagePermissionFailed,
     TResult Function(_InvalidFileFormat value)? invalidFileFormat,
     TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult Function(_MaterialDetailRoute value)? materialDetailRoute,
+    TResult Function(_HistoryDetailRoute value)? historyDetailRoute,
     required TResult orElse(),
   }) {
     if (serverTimeout != null) {
@@ -1338,6 +1398,8 @@ class _$_UserNotFound implements _UserNotFound {
     required TResult Function() storagePermissionFailed,
     required TResult Function() invalidFileFormat,
     required TResult Function() uploadCountExcideLimit,
+    required TResult Function() materialDetailRoute,
+    required TResult Function() historyDetailRoute,
   }) {
     return userNotFound();
   }
@@ -1368,6 +1430,8 @@ class _$_UserNotFound implements _UserNotFound {
     TResult? Function()? storagePermissionFailed,
     TResult? Function()? invalidFileFormat,
     TResult? Function()? uploadCountExcideLimit,
+    TResult? Function()? materialDetailRoute,
+    TResult? Function()? historyDetailRoute,
   }) {
     return userNotFound?.call();
   }
@@ -1398,6 +1462,8 @@ class _$_UserNotFound implements _UserNotFound {
     TResult Function()? storagePermissionFailed,
     TResult Function()? invalidFileFormat,
     TResult Function()? uploadCountExcideLimit,
+    TResult Function()? materialDetailRoute,
+    TResult Function()? historyDetailRoute,
     required TResult orElse(),
   }) {
     if (userNotFound != null) {
@@ -1443,6 +1509,8 @@ class _$_UserNotFound implements _UserNotFound {
     required TResult Function(_InvalidFileFormat value) invalidFileFormat,
     required TResult Function(_UploadCountExcideLimit value)
         uploadCountExcideLimit,
+    required TResult Function(_MaterialDetailRoute value) materialDetailRoute,
+    required TResult Function(_HistoryDetailRoute value) historyDetailRoute,
   }) {
     return userNotFound(this);
   }
@@ -1478,6 +1546,8 @@ class _$_UserNotFound implements _UserNotFound {
     TResult? Function(_StoragePermissionFailed value)? storagePermissionFailed,
     TResult? Function(_InvalidFileFormat value)? invalidFileFormat,
     TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult? Function(_MaterialDetailRoute value)? materialDetailRoute,
+    TResult? Function(_HistoryDetailRoute value)? historyDetailRoute,
   }) {
     return userNotFound?.call(this);
   }
@@ -1513,6 +1583,8 @@ class _$_UserNotFound implements _UserNotFound {
     TResult Function(_StoragePermissionFailed value)? storagePermissionFailed,
     TResult Function(_InvalidFileFormat value)? invalidFileFormat,
     TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult Function(_MaterialDetailRoute value)? materialDetailRoute,
+    TResult Function(_HistoryDetailRoute value)? historyDetailRoute,
     required TResult orElse(),
   }) {
     if (userNotFound != null) {
@@ -1592,6 +1664,8 @@ class _$_InvalidEmailAndPasswordCombination
     required TResult Function() storagePermissionFailed,
     required TResult Function() invalidFileFormat,
     required TResult Function() uploadCountExcideLimit,
+    required TResult Function() materialDetailRoute,
+    required TResult Function() historyDetailRoute,
   }) {
     return invalidEmailAndPasswordCombination();
   }
@@ -1622,6 +1696,8 @@ class _$_InvalidEmailAndPasswordCombination
     TResult? Function()? storagePermissionFailed,
     TResult? Function()? invalidFileFormat,
     TResult? Function()? uploadCountExcideLimit,
+    TResult? Function()? materialDetailRoute,
+    TResult? Function()? historyDetailRoute,
   }) {
     return invalidEmailAndPasswordCombination?.call();
   }
@@ -1652,6 +1728,8 @@ class _$_InvalidEmailAndPasswordCombination
     TResult Function()? storagePermissionFailed,
     TResult Function()? invalidFileFormat,
     TResult Function()? uploadCountExcideLimit,
+    TResult Function()? materialDetailRoute,
+    TResult Function()? historyDetailRoute,
     required TResult orElse(),
   }) {
     if (invalidEmailAndPasswordCombination != null) {
@@ -1697,6 +1775,8 @@ class _$_InvalidEmailAndPasswordCombination
     required TResult Function(_InvalidFileFormat value) invalidFileFormat,
     required TResult Function(_UploadCountExcideLimit value)
         uploadCountExcideLimit,
+    required TResult Function(_MaterialDetailRoute value) materialDetailRoute,
+    required TResult Function(_HistoryDetailRoute value) historyDetailRoute,
   }) {
     return invalidEmailAndPasswordCombination(this);
   }
@@ -1732,6 +1812,8 @@ class _$_InvalidEmailAndPasswordCombination
     TResult? Function(_StoragePermissionFailed value)? storagePermissionFailed,
     TResult? Function(_InvalidFileFormat value)? invalidFileFormat,
     TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult? Function(_MaterialDetailRoute value)? materialDetailRoute,
+    TResult? Function(_HistoryDetailRoute value)? historyDetailRoute,
   }) {
     return invalidEmailAndPasswordCombination?.call(this);
   }
@@ -1767,6 +1849,8 @@ class _$_InvalidEmailAndPasswordCombination
     TResult Function(_StoragePermissionFailed value)? storagePermissionFailed,
     TResult Function(_InvalidFileFormat value)? invalidFileFormat,
     TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult Function(_MaterialDetailRoute value)? materialDetailRoute,
+    TResult Function(_HistoryDetailRoute value)? historyDetailRoute,
     required TResult orElse(),
   }) {
     if (invalidEmailAndPasswordCombination != null) {
@@ -1842,6 +1926,8 @@ class _$_AccountLocked implements _AccountLocked {
     required TResult Function() storagePermissionFailed,
     required TResult Function() invalidFileFormat,
     required TResult Function() uploadCountExcideLimit,
+    required TResult Function() materialDetailRoute,
+    required TResult Function() historyDetailRoute,
   }) {
     return accountLocked();
   }
@@ -1872,6 +1958,8 @@ class _$_AccountLocked implements _AccountLocked {
     TResult? Function()? storagePermissionFailed,
     TResult? Function()? invalidFileFormat,
     TResult? Function()? uploadCountExcideLimit,
+    TResult? Function()? materialDetailRoute,
+    TResult? Function()? historyDetailRoute,
   }) {
     return accountLocked?.call();
   }
@@ -1902,6 +1990,8 @@ class _$_AccountLocked implements _AccountLocked {
     TResult Function()? storagePermissionFailed,
     TResult Function()? invalidFileFormat,
     TResult Function()? uploadCountExcideLimit,
+    TResult Function()? materialDetailRoute,
+    TResult Function()? historyDetailRoute,
     required TResult orElse(),
   }) {
     if (accountLocked != null) {
@@ -1947,6 +2037,8 @@ class _$_AccountLocked implements _AccountLocked {
     required TResult Function(_InvalidFileFormat value) invalidFileFormat,
     required TResult Function(_UploadCountExcideLimit value)
         uploadCountExcideLimit,
+    required TResult Function(_MaterialDetailRoute value) materialDetailRoute,
+    required TResult Function(_HistoryDetailRoute value) historyDetailRoute,
   }) {
     return accountLocked(this);
   }
@@ -1982,6 +2074,8 @@ class _$_AccountLocked implements _AccountLocked {
     TResult? Function(_StoragePermissionFailed value)? storagePermissionFailed,
     TResult? Function(_InvalidFileFormat value)? invalidFileFormat,
     TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult? Function(_MaterialDetailRoute value)? materialDetailRoute,
+    TResult? Function(_HistoryDetailRoute value)? historyDetailRoute,
   }) {
     return accountLocked?.call(this);
   }
@@ -2017,6 +2111,8 @@ class _$_AccountLocked implements _AccountLocked {
     TResult Function(_StoragePermissionFailed value)? storagePermissionFailed,
     TResult Function(_InvalidFileFormat value)? invalidFileFormat,
     TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult Function(_MaterialDetailRoute value)? materialDetailRoute,
+    TResult Function(_HistoryDetailRoute value)? historyDetailRoute,
     required TResult orElse(),
   }) {
     if (accountLocked != null) {
@@ -2091,6 +2187,8 @@ class _$_AccountExpired implements _AccountExpired {
     required TResult Function() storagePermissionFailed,
     required TResult Function() invalidFileFormat,
     required TResult Function() uploadCountExcideLimit,
+    required TResult Function() materialDetailRoute,
+    required TResult Function() historyDetailRoute,
   }) {
     return accountExpired();
   }
@@ -2121,6 +2219,8 @@ class _$_AccountExpired implements _AccountExpired {
     TResult? Function()? storagePermissionFailed,
     TResult? Function()? invalidFileFormat,
     TResult? Function()? uploadCountExcideLimit,
+    TResult? Function()? materialDetailRoute,
+    TResult? Function()? historyDetailRoute,
   }) {
     return accountExpired?.call();
   }
@@ -2151,6 +2251,8 @@ class _$_AccountExpired implements _AccountExpired {
     TResult Function()? storagePermissionFailed,
     TResult Function()? invalidFileFormat,
     TResult Function()? uploadCountExcideLimit,
+    TResult Function()? materialDetailRoute,
+    TResult Function()? historyDetailRoute,
     required TResult orElse(),
   }) {
     if (accountExpired != null) {
@@ -2196,6 +2298,8 @@ class _$_AccountExpired implements _AccountExpired {
     required TResult Function(_InvalidFileFormat value) invalidFileFormat,
     required TResult Function(_UploadCountExcideLimit value)
         uploadCountExcideLimit,
+    required TResult Function(_MaterialDetailRoute value) materialDetailRoute,
+    required TResult Function(_HistoryDetailRoute value) historyDetailRoute,
   }) {
     return accountExpired(this);
   }
@@ -2231,6 +2335,8 @@ class _$_AccountExpired implements _AccountExpired {
     TResult? Function(_StoragePermissionFailed value)? storagePermissionFailed,
     TResult? Function(_InvalidFileFormat value)? invalidFileFormat,
     TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult? Function(_MaterialDetailRoute value)? materialDetailRoute,
+    TResult? Function(_HistoryDetailRoute value)? historyDetailRoute,
   }) {
     return accountExpired?.call(this);
   }
@@ -2266,6 +2372,8 @@ class _$_AccountExpired implements _AccountExpired {
     TResult Function(_StoragePermissionFailed value)? storagePermissionFailed,
     TResult Function(_InvalidFileFormat value)? invalidFileFormat,
     TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult Function(_MaterialDetailRoute value)? materialDetailRoute,
+    TResult Function(_HistoryDetailRoute value)? historyDetailRoute,
     required TResult orElse(),
   }) {
     if (accountExpired != null) {
@@ -2340,6 +2448,8 @@ class _$_TokenExpired implements _TokenExpired {
     required TResult Function() storagePermissionFailed,
     required TResult Function() invalidFileFormat,
     required TResult Function() uploadCountExcideLimit,
+    required TResult Function() materialDetailRoute,
+    required TResult Function() historyDetailRoute,
   }) {
     return tokenExpired();
   }
@@ -2370,6 +2480,8 @@ class _$_TokenExpired implements _TokenExpired {
     TResult? Function()? storagePermissionFailed,
     TResult? Function()? invalidFileFormat,
     TResult? Function()? uploadCountExcideLimit,
+    TResult? Function()? materialDetailRoute,
+    TResult? Function()? historyDetailRoute,
   }) {
     return tokenExpired?.call();
   }
@@ -2400,6 +2512,8 @@ class _$_TokenExpired implements _TokenExpired {
     TResult Function()? storagePermissionFailed,
     TResult Function()? invalidFileFormat,
     TResult Function()? uploadCountExcideLimit,
+    TResult Function()? materialDetailRoute,
+    TResult Function()? historyDetailRoute,
     required TResult orElse(),
   }) {
     if (tokenExpired != null) {
@@ -2445,6 +2559,8 @@ class _$_TokenExpired implements _TokenExpired {
     required TResult Function(_InvalidFileFormat value) invalidFileFormat,
     required TResult Function(_UploadCountExcideLimit value)
         uploadCountExcideLimit,
+    required TResult Function(_MaterialDetailRoute value) materialDetailRoute,
+    required TResult Function(_HistoryDetailRoute value) historyDetailRoute,
   }) {
     return tokenExpired(this);
   }
@@ -2480,6 +2596,8 @@ class _$_TokenExpired implements _TokenExpired {
     TResult? Function(_StoragePermissionFailed value)? storagePermissionFailed,
     TResult? Function(_InvalidFileFormat value)? invalidFileFormat,
     TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult? Function(_MaterialDetailRoute value)? materialDetailRoute,
+    TResult? Function(_HistoryDetailRoute value)? historyDetailRoute,
   }) {
     return tokenExpired?.call(this);
   }
@@ -2515,6 +2633,8 @@ class _$_TokenExpired implements _TokenExpired {
     TResult Function(_StoragePermissionFailed value)? storagePermissionFailed,
     TResult Function(_InvalidFileFormat value)? invalidFileFormat,
     TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult Function(_MaterialDetailRoute value)? materialDetailRoute,
+    TResult Function(_HistoryDetailRoute value)? historyDetailRoute,
     required TResult orElse(),
   }) {
     if (tokenExpired != null) {
@@ -2589,6 +2709,8 @@ class _$_AuthenticationFailed implements _AuthenticationFailed {
     required TResult Function() storagePermissionFailed,
     required TResult Function() invalidFileFormat,
     required TResult Function() uploadCountExcideLimit,
+    required TResult Function() materialDetailRoute,
+    required TResult Function() historyDetailRoute,
   }) {
     return authenticationFailed();
   }
@@ -2619,6 +2741,8 @@ class _$_AuthenticationFailed implements _AuthenticationFailed {
     TResult? Function()? storagePermissionFailed,
     TResult? Function()? invalidFileFormat,
     TResult? Function()? uploadCountExcideLimit,
+    TResult? Function()? materialDetailRoute,
+    TResult? Function()? historyDetailRoute,
   }) {
     return authenticationFailed?.call();
   }
@@ -2649,6 +2773,8 @@ class _$_AuthenticationFailed implements _AuthenticationFailed {
     TResult Function()? storagePermissionFailed,
     TResult Function()? invalidFileFormat,
     TResult Function()? uploadCountExcideLimit,
+    TResult Function()? materialDetailRoute,
+    TResult Function()? historyDetailRoute,
     required TResult orElse(),
   }) {
     if (authenticationFailed != null) {
@@ -2694,6 +2820,8 @@ class _$_AuthenticationFailed implements _AuthenticationFailed {
     required TResult Function(_InvalidFileFormat value) invalidFileFormat,
     required TResult Function(_UploadCountExcideLimit value)
         uploadCountExcideLimit,
+    required TResult Function(_MaterialDetailRoute value) materialDetailRoute,
+    required TResult Function(_HistoryDetailRoute value) historyDetailRoute,
   }) {
     return authenticationFailed(this);
   }
@@ -2729,6 +2857,8 @@ class _$_AuthenticationFailed implements _AuthenticationFailed {
     TResult? Function(_StoragePermissionFailed value)? storagePermissionFailed,
     TResult? Function(_InvalidFileFormat value)? invalidFileFormat,
     TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult? Function(_MaterialDetailRoute value)? materialDetailRoute,
+    TResult? Function(_HistoryDetailRoute value)? historyDetailRoute,
   }) {
     return authenticationFailed?.call(this);
   }
@@ -2764,6 +2894,8 @@ class _$_AuthenticationFailed implements _AuthenticationFailed {
     TResult Function(_StoragePermissionFailed value)? storagePermissionFailed,
     TResult Function(_InvalidFileFormat value)? invalidFileFormat,
     TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult Function(_MaterialDetailRoute value)? materialDetailRoute,
+    TResult Function(_HistoryDetailRoute value)? historyDetailRoute,
     required TResult orElse(),
   }) {
     if (authenticationFailed != null) {
@@ -2842,6 +2974,8 @@ class _$_ProxyLoginRolePermissionNotMatch
     required TResult Function() storagePermissionFailed,
     required TResult Function() invalidFileFormat,
     required TResult Function() uploadCountExcideLimit,
+    required TResult Function() materialDetailRoute,
+    required TResult Function() historyDetailRoute,
   }) {
     return proxyLoginRolePermissionNotMatch();
   }
@@ -2872,6 +3006,8 @@ class _$_ProxyLoginRolePermissionNotMatch
     TResult? Function()? storagePermissionFailed,
     TResult? Function()? invalidFileFormat,
     TResult? Function()? uploadCountExcideLimit,
+    TResult? Function()? materialDetailRoute,
+    TResult? Function()? historyDetailRoute,
   }) {
     return proxyLoginRolePermissionNotMatch?.call();
   }
@@ -2902,6 +3038,8 @@ class _$_ProxyLoginRolePermissionNotMatch
     TResult Function()? storagePermissionFailed,
     TResult Function()? invalidFileFormat,
     TResult Function()? uploadCountExcideLimit,
+    TResult Function()? materialDetailRoute,
+    TResult Function()? historyDetailRoute,
     required TResult orElse(),
   }) {
     if (proxyLoginRolePermissionNotMatch != null) {
@@ -2947,6 +3085,8 @@ class _$_ProxyLoginRolePermissionNotMatch
     required TResult Function(_InvalidFileFormat value) invalidFileFormat,
     required TResult Function(_UploadCountExcideLimit value)
         uploadCountExcideLimit,
+    required TResult Function(_MaterialDetailRoute value) materialDetailRoute,
+    required TResult Function(_HistoryDetailRoute value) historyDetailRoute,
   }) {
     return proxyLoginRolePermissionNotMatch(this);
   }
@@ -2982,6 +3122,8 @@ class _$_ProxyLoginRolePermissionNotMatch
     TResult? Function(_StoragePermissionFailed value)? storagePermissionFailed,
     TResult? Function(_InvalidFileFormat value)? invalidFileFormat,
     TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult? Function(_MaterialDetailRoute value)? materialDetailRoute,
+    TResult? Function(_HistoryDetailRoute value)? historyDetailRoute,
   }) {
     return proxyLoginRolePermissionNotMatch?.call(this);
   }
@@ -3017,6 +3159,8 @@ class _$_ProxyLoginRolePermissionNotMatch
     TResult Function(_StoragePermissionFailed value)? storagePermissionFailed,
     TResult Function(_InvalidFileFormat value)? invalidFileFormat,
     TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult Function(_MaterialDetailRoute value)? materialDetailRoute,
+    TResult Function(_HistoryDetailRoute value)? historyDetailRoute,
     required TResult orElse(),
   }) {
     if (proxyLoginRolePermissionNotMatch != null) {
@@ -3096,6 +3240,8 @@ class _$_ProxyLoginZPTargetRoleNotMatch
     required TResult Function() storagePermissionFailed,
     required TResult Function() invalidFileFormat,
     required TResult Function() uploadCountExcideLimit,
+    required TResult Function() materialDetailRoute,
+    required TResult Function() historyDetailRoute,
   }) {
     return proxyLoginZPTargetRoleNotMatch();
   }
@@ -3126,6 +3272,8 @@ class _$_ProxyLoginZPTargetRoleNotMatch
     TResult? Function()? storagePermissionFailed,
     TResult? Function()? invalidFileFormat,
     TResult? Function()? uploadCountExcideLimit,
+    TResult? Function()? materialDetailRoute,
+    TResult? Function()? historyDetailRoute,
   }) {
     return proxyLoginZPTargetRoleNotMatch?.call();
   }
@@ -3156,6 +3304,8 @@ class _$_ProxyLoginZPTargetRoleNotMatch
     TResult Function()? storagePermissionFailed,
     TResult Function()? invalidFileFormat,
     TResult Function()? uploadCountExcideLimit,
+    TResult Function()? materialDetailRoute,
+    TResult Function()? historyDetailRoute,
     required TResult orElse(),
   }) {
     if (proxyLoginZPTargetRoleNotMatch != null) {
@@ -3201,6 +3351,8 @@ class _$_ProxyLoginZPTargetRoleNotMatch
     required TResult Function(_InvalidFileFormat value) invalidFileFormat,
     required TResult Function(_UploadCountExcideLimit value)
         uploadCountExcideLimit,
+    required TResult Function(_MaterialDetailRoute value) materialDetailRoute,
+    required TResult Function(_HistoryDetailRoute value) historyDetailRoute,
   }) {
     return proxyLoginZPTargetRoleNotMatch(this);
   }
@@ -3236,6 +3388,8 @@ class _$_ProxyLoginZPTargetRoleNotMatch
     TResult? Function(_StoragePermissionFailed value)? storagePermissionFailed,
     TResult? Function(_InvalidFileFormat value)? invalidFileFormat,
     TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult? Function(_MaterialDetailRoute value)? materialDetailRoute,
+    TResult? Function(_HistoryDetailRoute value)? historyDetailRoute,
   }) {
     return proxyLoginZPTargetRoleNotMatch?.call(this);
   }
@@ -3271,6 +3425,8 @@ class _$_ProxyLoginZPTargetRoleNotMatch
     TResult Function(_StoragePermissionFailed value)? storagePermissionFailed,
     TResult Function(_InvalidFileFormat value)? invalidFileFormat,
     TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult Function(_MaterialDetailRoute value)? materialDetailRoute,
+    TResult Function(_HistoryDetailRoute value)? historyDetailRoute,
     required TResult orElse(),
   }) {
     if (proxyLoginZPTargetRoleNotMatch != null) {
@@ -3349,6 +3505,8 @@ class _$_ProxyLoginZPSalesOrgNotMatch implements _ProxyLoginZPSalesOrgNotMatch {
     required TResult Function() storagePermissionFailed,
     required TResult Function() invalidFileFormat,
     required TResult Function() uploadCountExcideLimit,
+    required TResult Function() materialDetailRoute,
+    required TResult Function() historyDetailRoute,
   }) {
     return proxyLoginZPSalesOrgNotMatch();
   }
@@ -3379,6 +3537,8 @@ class _$_ProxyLoginZPSalesOrgNotMatch implements _ProxyLoginZPSalesOrgNotMatch {
     TResult? Function()? storagePermissionFailed,
     TResult? Function()? invalidFileFormat,
     TResult? Function()? uploadCountExcideLimit,
+    TResult? Function()? materialDetailRoute,
+    TResult? Function()? historyDetailRoute,
   }) {
     return proxyLoginZPSalesOrgNotMatch?.call();
   }
@@ -3409,6 +3569,8 @@ class _$_ProxyLoginZPSalesOrgNotMatch implements _ProxyLoginZPSalesOrgNotMatch {
     TResult Function()? storagePermissionFailed,
     TResult Function()? invalidFileFormat,
     TResult Function()? uploadCountExcideLimit,
+    TResult Function()? materialDetailRoute,
+    TResult Function()? historyDetailRoute,
     required TResult orElse(),
   }) {
     if (proxyLoginZPSalesOrgNotMatch != null) {
@@ -3454,6 +3616,8 @@ class _$_ProxyLoginZPSalesOrgNotMatch implements _ProxyLoginZPSalesOrgNotMatch {
     required TResult Function(_InvalidFileFormat value) invalidFileFormat,
     required TResult Function(_UploadCountExcideLimit value)
         uploadCountExcideLimit,
+    required TResult Function(_MaterialDetailRoute value) materialDetailRoute,
+    required TResult Function(_HistoryDetailRoute value) historyDetailRoute,
   }) {
     return proxyLoginZPSalesOrgNotMatch(this);
   }
@@ -3489,6 +3653,8 @@ class _$_ProxyLoginZPSalesOrgNotMatch implements _ProxyLoginZPSalesOrgNotMatch {
     TResult? Function(_StoragePermissionFailed value)? storagePermissionFailed,
     TResult? Function(_InvalidFileFormat value)? invalidFileFormat,
     TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult? Function(_MaterialDetailRoute value)? materialDetailRoute,
+    TResult? Function(_HistoryDetailRoute value)? historyDetailRoute,
   }) {
     return proxyLoginZPSalesOrgNotMatch?.call(this);
   }
@@ -3524,6 +3690,8 @@ class _$_ProxyLoginZPSalesOrgNotMatch implements _ProxyLoginZPSalesOrgNotMatch {
     TResult Function(_StoragePermissionFailed value)? storagePermissionFailed,
     TResult Function(_InvalidFileFormat value)? invalidFileFormat,
     TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult Function(_MaterialDetailRoute value)? materialDetailRoute,
+    TResult Function(_HistoryDetailRoute value)? historyDetailRoute,
     required TResult orElse(),
   }) {
     if (proxyLoginZPSalesOrgNotMatch != null) {
@@ -3602,6 +3770,8 @@ class _$_DeviceNotSupportBiometric implements _DeviceNotSupportBiometric {
     required TResult Function() storagePermissionFailed,
     required TResult Function() invalidFileFormat,
     required TResult Function() uploadCountExcideLimit,
+    required TResult Function() materialDetailRoute,
+    required TResult Function() historyDetailRoute,
   }) {
     return deviceNotSupportBiometric();
   }
@@ -3632,6 +3802,8 @@ class _$_DeviceNotSupportBiometric implements _DeviceNotSupportBiometric {
     TResult? Function()? storagePermissionFailed,
     TResult? Function()? invalidFileFormat,
     TResult? Function()? uploadCountExcideLimit,
+    TResult? Function()? materialDetailRoute,
+    TResult? Function()? historyDetailRoute,
   }) {
     return deviceNotSupportBiometric?.call();
   }
@@ -3662,6 +3834,8 @@ class _$_DeviceNotSupportBiometric implements _DeviceNotSupportBiometric {
     TResult Function()? storagePermissionFailed,
     TResult Function()? invalidFileFormat,
     TResult Function()? uploadCountExcideLimit,
+    TResult Function()? materialDetailRoute,
+    TResult Function()? historyDetailRoute,
     required TResult orElse(),
   }) {
     if (deviceNotSupportBiometric != null) {
@@ -3707,6 +3881,8 @@ class _$_DeviceNotSupportBiometric implements _DeviceNotSupportBiometric {
     required TResult Function(_InvalidFileFormat value) invalidFileFormat,
     required TResult Function(_UploadCountExcideLimit value)
         uploadCountExcideLimit,
+    required TResult Function(_MaterialDetailRoute value) materialDetailRoute,
+    required TResult Function(_HistoryDetailRoute value) historyDetailRoute,
   }) {
     return deviceNotSupportBiometric(this);
   }
@@ -3742,6 +3918,8 @@ class _$_DeviceNotSupportBiometric implements _DeviceNotSupportBiometric {
     TResult? Function(_StoragePermissionFailed value)? storagePermissionFailed,
     TResult? Function(_InvalidFileFormat value)? invalidFileFormat,
     TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult? Function(_MaterialDetailRoute value)? materialDetailRoute,
+    TResult? Function(_HistoryDetailRoute value)? historyDetailRoute,
   }) {
     return deviceNotSupportBiometric?.call(this);
   }
@@ -3777,6 +3955,8 @@ class _$_DeviceNotSupportBiometric implements _DeviceNotSupportBiometric {
     TResult Function(_StoragePermissionFailed value)? storagePermissionFailed,
     TResult Function(_InvalidFileFormat value)? invalidFileFormat,
     TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult Function(_MaterialDetailRoute value)? materialDetailRoute,
+    TResult Function(_HistoryDetailRoute value)? historyDetailRoute,
     required TResult orElse(),
   }) {
     if (deviceNotSupportBiometric != null) {
@@ -3851,6 +4031,8 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
     required TResult Function() storagePermissionFailed,
     required TResult Function() invalidFileFormat,
     required TResult Function() uploadCountExcideLimit,
+    required TResult Function() materialDetailRoute,
+    required TResult Function() historyDetailRoute,
   }) {
     return cannotCheckBiometrics();
   }
@@ -3881,6 +4063,8 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
     TResult? Function()? storagePermissionFailed,
     TResult? Function()? invalidFileFormat,
     TResult? Function()? uploadCountExcideLimit,
+    TResult? Function()? materialDetailRoute,
+    TResult? Function()? historyDetailRoute,
   }) {
     return cannotCheckBiometrics?.call();
   }
@@ -3911,6 +4095,8 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
     TResult Function()? storagePermissionFailed,
     TResult Function()? invalidFileFormat,
     TResult Function()? uploadCountExcideLimit,
+    TResult Function()? materialDetailRoute,
+    TResult Function()? historyDetailRoute,
     required TResult orElse(),
   }) {
     if (cannotCheckBiometrics != null) {
@@ -3956,6 +4142,8 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
     required TResult Function(_InvalidFileFormat value) invalidFileFormat,
     required TResult Function(_UploadCountExcideLimit value)
         uploadCountExcideLimit,
+    required TResult Function(_MaterialDetailRoute value) materialDetailRoute,
+    required TResult Function(_HistoryDetailRoute value) historyDetailRoute,
   }) {
     return cannotCheckBiometrics(this);
   }
@@ -3991,6 +4179,8 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
     TResult? Function(_StoragePermissionFailed value)? storagePermissionFailed,
     TResult? Function(_InvalidFileFormat value)? invalidFileFormat,
     TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult? Function(_MaterialDetailRoute value)? materialDetailRoute,
+    TResult? Function(_HistoryDetailRoute value)? historyDetailRoute,
   }) {
     return cannotCheckBiometrics?.call(this);
   }
@@ -4026,6 +4216,8 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
     TResult Function(_StoragePermissionFailed value)? storagePermissionFailed,
     TResult Function(_InvalidFileFormat value)? invalidFileFormat,
     TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult Function(_MaterialDetailRoute value)? materialDetailRoute,
+    TResult Function(_HistoryDetailRoute value)? historyDetailRoute,
     required TResult orElse(),
   }) {
     if (cannotCheckBiometrics != null) {
@@ -4100,6 +4292,8 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
     required TResult Function() storagePermissionFailed,
     required TResult Function() invalidFileFormat,
     required TResult Function() uploadCountExcideLimit,
+    required TResult Function() materialDetailRoute,
+    required TResult Function() historyDetailRoute,
   }) {
     return noSupportedBiometrics();
   }
@@ -4130,6 +4324,8 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
     TResult? Function()? storagePermissionFailed,
     TResult? Function()? invalidFileFormat,
     TResult? Function()? uploadCountExcideLimit,
+    TResult? Function()? materialDetailRoute,
+    TResult? Function()? historyDetailRoute,
   }) {
     return noSupportedBiometrics?.call();
   }
@@ -4160,6 +4356,8 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
     TResult Function()? storagePermissionFailed,
     TResult Function()? invalidFileFormat,
     TResult Function()? uploadCountExcideLimit,
+    TResult Function()? materialDetailRoute,
+    TResult Function()? historyDetailRoute,
     required TResult orElse(),
   }) {
     if (noSupportedBiometrics != null) {
@@ -4205,6 +4403,8 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
     required TResult Function(_InvalidFileFormat value) invalidFileFormat,
     required TResult Function(_UploadCountExcideLimit value)
         uploadCountExcideLimit,
+    required TResult Function(_MaterialDetailRoute value) materialDetailRoute,
+    required TResult Function(_HistoryDetailRoute value) historyDetailRoute,
   }) {
     return noSupportedBiometrics(this);
   }
@@ -4240,6 +4440,8 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
     TResult? Function(_StoragePermissionFailed value)? storagePermissionFailed,
     TResult? Function(_InvalidFileFormat value)? invalidFileFormat,
     TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult? Function(_MaterialDetailRoute value)? materialDetailRoute,
+    TResult? Function(_HistoryDetailRoute value)? historyDetailRoute,
   }) {
     return noSupportedBiometrics?.call(this);
   }
@@ -4275,6 +4477,8 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
     TResult Function(_StoragePermissionFailed value)? storagePermissionFailed,
     TResult Function(_InvalidFileFormat value)? invalidFileFormat,
     TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult Function(_MaterialDetailRoute value)? materialDetailRoute,
+    TResult Function(_HistoryDetailRoute value)? historyDetailRoute,
     required TResult orElse(),
   }) {
     if (noSupportedBiometrics != null) {
@@ -4349,6 +4553,8 @@ class _$_InvalidBiometric implements _InvalidBiometric {
     required TResult Function() storagePermissionFailed,
     required TResult Function() invalidFileFormat,
     required TResult Function() uploadCountExcideLimit,
+    required TResult Function() materialDetailRoute,
+    required TResult Function() historyDetailRoute,
   }) {
     return invalidBiometric();
   }
@@ -4379,6 +4585,8 @@ class _$_InvalidBiometric implements _InvalidBiometric {
     TResult? Function()? storagePermissionFailed,
     TResult? Function()? invalidFileFormat,
     TResult? Function()? uploadCountExcideLimit,
+    TResult? Function()? materialDetailRoute,
+    TResult? Function()? historyDetailRoute,
   }) {
     return invalidBiometric?.call();
   }
@@ -4409,6 +4617,8 @@ class _$_InvalidBiometric implements _InvalidBiometric {
     TResult Function()? storagePermissionFailed,
     TResult Function()? invalidFileFormat,
     TResult Function()? uploadCountExcideLimit,
+    TResult Function()? materialDetailRoute,
+    TResult Function()? historyDetailRoute,
     required TResult orElse(),
   }) {
     if (invalidBiometric != null) {
@@ -4454,6 +4664,8 @@ class _$_InvalidBiometric implements _InvalidBiometric {
     required TResult Function(_InvalidFileFormat value) invalidFileFormat,
     required TResult Function(_UploadCountExcideLimit value)
         uploadCountExcideLimit,
+    required TResult Function(_MaterialDetailRoute value) materialDetailRoute,
+    required TResult Function(_HistoryDetailRoute value) historyDetailRoute,
   }) {
     return invalidBiometric(this);
   }
@@ -4489,6 +4701,8 @@ class _$_InvalidBiometric implements _InvalidBiometric {
     TResult? Function(_StoragePermissionFailed value)? storagePermissionFailed,
     TResult? Function(_InvalidFileFormat value)? invalidFileFormat,
     TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult? Function(_MaterialDetailRoute value)? materialDetailRoute,
+    TResult? Function(_HistoryDetailRoute value)? historyDetailRoute,
   }) {
     return invalidBiometric?.call(this);
   }
@@ -4524,6 +4738,8 @@ class _$_InvalidBiometric implements _InvalidBiometric {
     TResult Function(_StoragePermissionFailed value)? storagePermissionFailed,
     TResult Function(_InvalidFileFormat value)? invalidFileFormat,
     TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult Function(_MaterialDetailRoute value)? materialDetailRoute,
+    TResult Function(_HistoryDetailRoute value)? historyDetailRoute,
     required TResult orElse(),
   }) {
     if (invalidBiometric != null) {
@@ -4598,6 +4814,8 @@ class _$_PriceOverrideNotFound implements _PriceOverrideNotFound {
     required TResult Function() storagePermissionFailed,
     required TResult Function() invalidFileFormat,
     required TResult Function() uploadCountExcideLimit,
+    required TResult Function() materialDetailRoute,
+    required TResult Function() historyDetailRoute,
   }) {
     return priceOverrideNotFound();
   }
@@ -4628,6 +4846,8 @@ class _$_PriceOverrideNotFound implements _PriceOverrideNotFound {
     TResult? Function()? storagePermissionFailed,
     TResult? Function()? invalidFileFormat,
     TResult? Function()? uploadCountExcideLimit,
+    TResult? Function()? materialDetailRoute,
+    TResult? Function()? historyDetailRoute,
   }) {
     return priceOverrideNotFound?.call();
   }
@@ -4658,6 +4878,8 @@ class _$_PriceOverrideNotFound implements _PriceOverrideNotFound {
     TResult Function()? storagePermissionFailed,
     TResult Function()? invalidFileFormat,
     TResult Function()? uploadCountExcideLimit,
+    TResult Function()? materialDetailRoute,
+    TResult Function()? historyDetailRoute,
     required TResult orElse(),
   }) {
     if (priceOverrideNotFound != null) {
@@ -4703,6 +4925,8 @@ class _$_PriceOverrideNotFound implements _PriceOverrideNotFound {
     required TResult Function(_InvalidFileFormat value) invalidFileFormat,
     required TResult Function(_UploadCountExcideLimit value)
         uploadCountExcideLimit,
+    required TResult Function(_MaterialDetailRoute value) materialDetailRoute,
+    required TResult Function(_HistoryDetailRoute value) historyDetailRoute,
   }) {
     return priceOverrideNotFound(this);
   }
@@ -4738,6 +4962,8 @@ class _$_PriceOverrideNotFound implements _PriceOverrideNotFound {
     TResult? Function(_StoragePermissionFailed value)? storagePermissionFailed,
     TResult? Function(_InvalidFileFormat value)? invalidFileFormat,
     TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult? Function(_MaterialDetailRoute value)? materialDetailRoute,
+    TResult? Function(_HistoryDetailRoute value)? historyDetailRoute,
   }) {
     return priceOverrideNotFound?.call(this);
   }
@@ -4773,6 +4999,8 @@ class _$_PriceOverrideNotFound implements _PriceOverrideNotFound {
     TResult Function(_StoragePermissionFailed value)? storagePermissionFailed,
     TResult Function(_InvalidFileFormat value)? invalidFileFormat,
     TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult Function(_MaterialDetailRoute value)? materialDetailRoute,
+    TResult Function(_HistoryDetailRoute value)? historyDetailRoute,
     required TResult orElse(),
   }) {
     if (priceOverrideNotFound != null) {
@@ -4847,6 +5075,8 @@ class _$_ProductOutOfStock implements _ProductOutOfStock {
     required TResult Function() storagePermissionFailed,
     required TResult Function() invalidFileFormat,
     required TResult Function() uploadCountExcideLimit,
+    required TResult Function() materialDetailRoute,
+    required TResult Function() historyDetailRoute,
   }) {
     return productOutOfStock();
   }
@@ -4877,6 +5107,8 @@ class _$_ProductOutOfStock implements _ProductOutOfStock {
     TResult? Function()? storagePermissionFailed,
     TResult? Function()? invalidFileFormat,
     TResult? Function()? uploadCountExcideLimit,
+    TResult? Function()? materialDetailRoute,
+    TResult? Function()? historyDetailRoute,
   }) {
     return productOutOfStock?.call();
   }
@@ -4907,6 +5139,8 @@ class _$_ProductOutOfStock implements _ProductOutOfStock {
     TResult Function()? storagePermissionFailed,
     TResult Function()? invalidFileFormat,
     TResult Function()? uploadCountExcideLimit,
+    TResult Function()? materialDetailRoute,
+    TResult Function()? historyDetailRoute,
     required TResult orElse(),
   }) {
     if (productOutOfStock != null) {
@@ -4952,6 +5186,8 @@ class _$_ProductOutOfStock implements _ProductOutOfStock {
     required TResult Function(_InvalidFileFormat value) invalidFileFormat,
     required TResult Function(_UploadCountExcideLimit value)
         uploadCountExcideLimit,
+    required TResult Function(_MaterialDetailRoute value) materialDetailRoute,
+    required TResult Function(_HistoryDetailRoute value) historyDetailRoute,
   }) {
     return productOutOfStock(this);
   }
@@ -4987,6 +5223,8 @@ class _$_ProductOutOfStock implements _ProductOutOfStock {
     TResult? Function(_StoragePermissionFailed value)? storagePermissionFailed,
     TResult? Function(_InvalidFileFormat value)? invalidFileFormat,
     TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult? Function(_MaterialDetailRoute value)? materialDetailRoute,
+    TResult? Function(_HistoryDetailRoute value)? historyDetailRoute,
   }) {
     return productOutOfStock?.call(this);
   }
@@ -5022,6 +5260,8 @@ class _$_ProductOutOfStock implements _ProductOutOfStock {
     TResult Function(_StoragePermissionFailed value)? storagePermissionFailed,
     TResult Function(_InvalidFileFormat value)? invalidFileFormat,
     TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult Function(_MaterialDetailRoute value)? materialDetailRoute,
+    TResult Function(_HistoryDetailRoute value)? historyDetailRoute,
     required TResult orElse(),
   }) {
     if (productOutOfStock != null) {
@@ -5096,6 +5336,8 @@ class _$_PhotoPermissionFailed implements _PhotoPermissionFailed {
     required TResult Function() storagePermissionFailed,
     required TResult Function() invalidFileFormat,
     required TResult Function() uploadCountExcideLimit,
+    required TResult Function() materialDetailRoute,
+    required TResult Function() historyDetailRoute,
   }) {
     return photoPermissionFailed();
   }
@@ -5126,6 +5368,8 @@ class _$_PhotoPermissionFailed implements _PhotoPermissionFailed {
     TResult? Function()? storagePermissionFailed,
     TResult? Function()? invalidFileFormat,
     TResult? Function()? uploadCountExcideLimit,
+    TResult? Function()? materialDetailRoute,
+    TResult? Function()? historyDetailRoute,
   }) {
     return photoPermissionFailed?.call();
   }
@@ -5156,6 +5400,8 @@ class _$_PhotoPermissionFailed implements _PhotoPermissionFailed {
     TResult Function()? storagePermissionFailed,
     TResult Function()? invalidFileFormat,
     TResult Function()? uploadCountExcideLimit,
+    TResult Function()? materialDetailRoute,
+    TResult Function()? historyDetailRoute,
     required TResult orElse(),
   }) {
     if (photoPermissionFailed != null) {
@@ -5201,6 +5447,8 @@ class _$_PhotoPermissionFailed implements _PhotoPermissionFailed {
     required TResult Function(_InvalidFileFormat value) invalidFileFormat,
     required TResult Function(_UploadCountExcideLimit value)
         uploadCountExcideLimit,
+    required TResult Function(_MaterialDetailRoute value) materialDetailRoute,
+    required TResult Function(_HistoryDetailRoute value) historyDetailRoute,
   }) {
     return photoPermissionFailed(this);
   }
@@ -5236,6 +5484,8 @@ class _$_PhotoPermissionFailed implements _PhotoPermissionFailed {
     TResult? Function(_StoragePermissionFailed value)? storagePermissionFailed,
     TResult? Function(_InvalidFileFormat value)? invalidFileFormat,
     TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult? Function(_MaterialDetailRoute value)? materialDetailRoute,
+    TResult? Function(_HistoryDetailRoute value)? historyDetailRoute,
   }) {
     return photoPermissionFailed?.call(this);
   }
@@ -5271,6 +5521,8 @@ class _$_PhotoPermissionFailed implements _PhotoPermissionFailed {
     TResult Function(_StoragePermissionFailed value)? storagePermissionFailed,
     TResult Function(_InvalidFileFormat value)? invalidFileFormat,
     TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult Function(_MaterialDetailRoute value)? materialDetailRoute,
+    TResult Function(_HistoryDetailRoute value)? historyDetailRoute,
     required TResult orElse(),
   }) {
     if (photoPermissionFailed != null) {
@@ -5346,6 +5598,8 @@ class _$_StoragePermissionFailed implements _StoragePermissionFailed {
     required TResult Function() storagePermissionFailed,
     required TResult Function() invalidFileFormat,
     required TResult Function() uploadCountExcideLimit,
+    required TResult Function() materialDetailRoute,
+    required TResult Function() historyDetailRoute,
   }) {
     return storagePermissionFailed();
   }
@@ -5376,6 +5630,8 @@ class _$_StoragePermissionFailed implements _StoragePermissionFailed {
     TResult? Function()? storagePermissionFailed,
     TResult? Function()? invalidFileFormat,
     TResult? Function()? uploadCountExcideLimit,
+    TResult? Function()? materialDetailRoute,
+    TResult? Function()? historyDetailRoute,
   }) {
     return storagePermissionFailed?.call();
   }
@@ -5406,6 +5662,8 @@ class _$_StoragePermissionFailed implements _StoragePermissionFailed {
     TResult Function()? storagePermissionFailed,
     TResult Function()? invalidFileFormat,
     TResult Function()? uploadCountExcideLimit,
+    TResult Function()? materialDetailRoute,
+    TResult Function()? historyDetailRoute,
     required TResult orElse(),
   }) {
     if (storagePermissionFailed != null) {
@@ -5451,6 +5709,8 @@ class _$_StoragePermissionFailed implements _StoragePermissionFailed {
     required TResult Function(_InvalidFileFormat value) invalidFileFormat,
     required TResult Function(_UploadCountExcideLimit value)
         uploadCountExcideLimit,
+    required TResult Function(_MaterialDetailRoute value) materialDetailRoute,
+    required TResult Function(_HistoryDetailRoute value) historyDetailRoute,
   }) {
     return storagePermissionFailed(this);
   }
@@ -5486,6 +5746,8 @@ class _$_StoragePermissionFailed implements _StoragePermissionFailed {
     TResult? Function(_StoragePermissionFailed value)? storagePermissionFailed,
     TResult? Function(_InvalidFileFormat value)? invalidFileFormat,
     TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult? Function(_MaterialDetailRoute value)? materialDetailRoute,
+    TResult? Function(_HistoryDetailRoute value)? historyDetailRoute,
   }) {
     return storagePermissionFailed?.call(this);
   }
@@ -5521,6 +5783,8 @@ class _$_StoragePermissionFailed implements _StoragePermissionFailed {
     TResult Function(_StoragePermissionFailed value)? storagePermissionFailed,
     TResult Function(_InvalidFileFormat value)? invalidFileFormat,
     TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult Function(_MaterialDetailRoute value)? materialDetailRoute,
+    TResult Function(_HistoryDetailRoute value)? historyDetailRoute,
     required TResult orElse(),
   }) {
     if (storagePermissionFailed != null) {
@@ -5595,6 +5859,8 @@ class _$_InvalidFileFormat implements _InvalidFileFormat {
     required TResult Function() storagePermissionFailed,
     required TResult Function() invalidFileFormat,
     required TResult Function() uploadCountExcideLimit,
+    required TResult Function() materialDetailRoute,
+    required TResult Function() historyDetailRoute,
   }) {
     return invalidFileFormat();
   }
@@ -5625,6 +5891,8 @@ class _$_InvalidFileFormat implements _InvalidFileFormat {
     TResult? Function()? storagePermissionFailed,
     TResult? Function()? invalidFileFormat,
     TResult? Function()? uploadCountExcideLimit,
+    TResult? Function()? materialDetailRoute,
+    TResult? Function()? historyDetailRoute,
   }) {
     return invalidFileFormat?.call();
   }
@@ -5655,6 +5923,8 @@ class _$_InvalidFileFormat implements _InvalidFileFormat {
     TResult Function()? storagePermissionFailed,
     TResult Function()? invalidFileFormat,
     TResult Function()? uploadCountExcideLimit,
+    TResult Function()? materialDetailRoute,
+    TResult Function()? historyDetailRoute,
     required TResult orElse(),
   }) {
     if (invalidFileFormat != null) {
@@ -5700,6 +5970,8 @@ class _$_InvalidFileFormat implements _InvalidFileFormat {
     required TResult Function(_InvalidFileFormat value) invalidFileFormat,
     required TResult Function(_UploadCountExcideLimit value)
         uploadCountExcideLimit,
+    required TResult Function(_MaterialDetailRoute value) materialDetailRoute,
+    required TResult Function(_HistoryDetailRoute value) historyDetailRoute,
   }) {
     return invalidFileFormat(this);
   }
@@ -5735,6 +6007,8 @@ class _$_InvalidFileFormat implements _InvalidFileFormat {
     TResult? Function(_StoragePermissionFailed value)? storagePermissionFailed,
     TResult? Function(_InvalidFileFormat value)? invalidFileFormat,
     TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult? Function(_MaterialDetailRoute value)? materialDetailRoute,
+    TResult? Function(_HistoryDetailRoute value)? historyDetailRoute,
   }) {
     return invalidFileFormat?.call(this);
   }
@@ -5770,6 +6044,8 @@ class _$_InvalidFileFormat implements _InvalidFileFormat {
     TResult Function(_StoragePermissionFailed value)? storagePermissionFailed,
     TResult Function(_InvalidFileFormat value)? invalidFileFormat,
     TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult Function(_MaterialDetailRoute value)? materialDetailRoute,
+    TResult Function(_HistoryDetailRoute value)? historyDetailRoute,
     required TResult orElse(),
   }) {
     if (invalidFileFormat != null) {
@@ -5845,6 +6121,8 @@ class _$_UploadCountExcideLimit implements _UploadCountExcideLimit {
     required TResult Function() storagePermissionFailed,
     required TResult Function() invalidFileFormat,
     required TResult Function() uploadCountExcideLimit,
+    required TResult Function() materialDetailRoute,
+    required TResult Function() historyDetailRoute,
   }) {
     return uploadCountExcideLimit();
   }
@@ -5875,6 +6153,8 @@ class _$_UploadCountExcideLimit implements _UploadCountExcideLimit {
     TResult? Function()? storagePermissionFailed,
     TResult? Function()? invalidFileFormat,
     TResult? Function()? uploadCountExcideLimit,
+    TResult? Function()? materialDetailRoute,
+    TResult? Function()? historyDetailRoute,
   }) {
     return uploadCountExcideLimit?.call();
   }
@@ -5905,6 +6185,8 @@ class _$_UploadCountExcideLimit implements _UploadCountExcideLimit {
     TResult Function()? storagePermissionFailed,
     TResult Function()? invalidFileFormat,
     TResult Function()? uploadCountExcideLimit,
+    TResult Function()? materialDetailRoute,
+    TResult Function()? historyDetailRoute,
     required TResult orElse(),
   }) {
     if (uploadCountExcideLimit != null) {
@@ -5950,6 +6232,8 @@ class _$_UploadCountExcideLimit implements _UploadCountExcideLimit {
     required TResult Function(_InvalidFileFormat value) invalidFileFormat,
     required TResult Function(_UploadCountExcideLimit value)
         uploadCountExcideLimit,
+    required TResult Function(_MaterialDetailRoute value) materialDetailRoute,
+    required TResult Function(_HistoryDetailRoute value) historyDetailRoute,
   }) {
     return uploadCountExcideLimit(this);
   }
@@ -5985,6 +6269,8 @@ class _$_UploadCountExcideLimit implements _UploadCountExcideLimit {
     TResult? Function(_StoragePermissionFailed value)? storagePermissionFailed,
     TResult? Function(_InvalidFileFormat value)? invalidFileFormat,
     TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult? Function(_MaterialDetailRoute value)? materialDetailRoute,
+    TResult? Function(_HistoryDetailRoute value)? historyDetailRoute,
   }) {
     return uploadCountExcideLimit?.call(this);
   }
@@ -6020,6 +6306,8 @@ class _$_UploadCountExcideLimit implements _UploadCountExcideLimit {
     TResult Function(_StoragePermissionFailed value)? storagePermissionFailed,
     TResult Function(_InvalidFileFormat value)? invalidFileFormat,
     TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult Function(_MaterialDetailRoute value)? materialDetailRoute,
+    TResult Function(_HistoryDetailRoute value)? historyDetailRoute,
     required TResult orElse(),
   }) {
     if (uploadCountExcideLimit != null) {
@@ -6031,4 +6319,526 @@ class _$_UploadCountExcideLimit implements _UploadCountExcideLimit {
 
 abstract class _UploadCountExcideLimit implements ApiFailure {
   const factory _UploadCountExcideLimit() = _$_UploadCountExcideLimit;
+}
+
+/// @nodoc
+abstract class _$$_MaterialDetailRouteCopyWith<$Res> {
+  factory _$$_MaterialDetailRouteCopyWith(_$_MaterialDetailRoute value,
+          $Res Function(_$_MaterialDetailRoute) then) =
+      __$$_MaterialDetailRouteCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_MaterialDetailRouteCopyWithImpl<$Res>
+    extends _$ApiFailureCopyWithImpl<$Res, _$_MaterialDetailRoute>
+    implements _$$_MaterialDetailRouteCopyWith<$Res> {
+  __$$_MaterialDetailRouteCopyWithImpl(_$_MaterialDetailRoute _value,
+      $Res Function(_$_MaterialDetailRoute) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_MaterialDetailRoute implements _MaterialDetailRoute {
+  const _$_MaterialDetailRoute();
+
+  @override
+  String toString() {
+    return 'ApiFailure.materialDetailRoute()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_MaterialDetailRoute);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String message) other,
+    required TResult Function(String message) serverError,
+    required TResult Function() poorConnection,
+    required TResult Function() serverTimeout,
+    required TResult Function() userNotFound,
+    required TResult Function() invalidEmailAndPasswordCombination,
+    required TResult Function() accountLocked,
+    required TResult Function() accountExpired,
+    required TResult Function() tokenExpired,
+    required TResult Function() authenticationFailed,
+    required TResult Function() proxyLoginRolePermissionNotMatch,
+    required TResult Function() proxyLoginZPTargetRoleNotMatch,
+    required TResult Function() proxyLoginZPSalesOrgNotMatch,
+    required TResult Function() deviceNotSupportBiometric,
+    required TResult Function() cannotCheckBiometrics,
+    required TResult Function() noSupportedBiometrics,
+    required TResult Function() invalidBiometric,
+    required TResult Function() priceOverrideNotFound,
+    required TResult Function() productOutOfStock,
+    required TResult Function() photoPermissionFailed,
+    required TResult Function() storagePermissionFailed,
+    required TResult Function() invalidFileFormat,
+    required TResult Function() uploadCountExcideLimit,
+    required TResult Function() materialDetailRoute,
+    required TResult Function() historyDetailRoute,
+  }) {
+    return materialDetailRoute();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String message)? other,
+    TResult? Function(String message)? serverError,
+    TResult? Function()? poorConnection,
+    TResult? Function()? serverTimeout,
+    TResult? Function()? userNotFound,
+    TResult? Function()? invalidEmailAndPasswordCombination,
+    TResult? Function()? accountLocked,
+    TResult? Function()? accountExpired,
+    TResult? Function()? tokenExpired,
+    TResult? Function()? authenticationFailed,
+    TResult? Function()? proxyLoginRolePermissionNotMatch,
+    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
+    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult? Function()? deviceNotSupportBiometric,
+    TResult? Function()? cannotCheckBiometrics,
+    TResult? Function()? noSupportedBiometrics,
+    TResult? Function()? invalidBiometric,
+    TResult? Function()? priceOverrideNotFound,
+    TResult? Function()? productOutOfStock,
+    TResult? Function()? photoPermissionFailed,
+    TResult? Function()? storagePermissionFailed,
+    TResult? Function()? invalidFileFormat,
+    TResult? Function()? uploadCountExcideLimit,
+    TResult? Function()? materialDetailRoute,
+    TResult? Function()? historyDetailRoute,
+  }) {
+    return materialDetailRoute?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String message)? other,
+    TResult Function(String message)? serverError,
+    TResult Function()? poorConnection,
+    TResult Function()? serverTimeout,
+    TResult Function()? userNotFound,
+    TResult Function()? invalidEmailAndPasswordCombination,
+    TResult Function()? accountLocked,
+    TResult Function()? accountExpired,
+    TResult Function()? tokenExpired,
+    TResult Function()? authenticationFailed,
+    TResult Function()? proxyLoginRolePermissionNotMatch,
+    TResult Function()? proxyLoginZPTargetRoleNotMatch,
+    TResult Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult Function()? deviceNotSupportBiometric,
+    TResult Function()? cannotCheckBiometrics,
+    TResult Function()? noSupportedBiometrics,
+    TResult Function()? invalidBiometric,
+    TResult Function()? priceOverrideNotFound,
+    TResult Function()? productOutOfStock,
+    TResult Function()? photoPermissionFailed,
+    TResult Function()? storagePermissionFailed,
+    TResult Function()? invalidFileFormat,
+    TResult Function()? uploadCountExcideLimit,
+    TResult Function()? materialDetailRoute,
+    TResult Function()? historyDetailRoute,
+    required TResult orElse(),
+  }) {
+    if (materialDetailRoute != null) {
+      return materialDetailRoute();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Other value) other,
+    required TResult Function(_ServerError value) serverError,
+    required TResult Function(_PoorConnection value) poorConnection,
+    required TResult Function(_ServerTimeout value) serverTimeout,
+    required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_InvalidEmailAndPasswordCombination value)
+        invalidEmailAndPasswordCombination,
+    required TResult Function(_AccountLocked value) accountLocked,
+    required TResult Function(_AccountExpired value) accountExpired,
+    required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_AuthenticationFailed value) authenticationFailed,
+    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
+        proxyLoginRolePermissionNotMatch,
+    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
+        proxyLoginZPTargetRoleNotMatch,
+    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
+        proxyLoginZPSalesOrgNotMatch,
+    required TResult Function(_DeviceNotSupportBiometric value)
+        deviceNotSupportBiometric,
+    required TResult Function(_CannotCheckBiometrics value)
+        cannotCheckBiometrics,
+    required TResult Function(_NoSupportedBiometrics value)
+        noSupportedBiometrics,
+    required TResult Function(_InvalidBiometric value) invalidBiometric,
+    required TResult Function(_PriceOverrideNotFound value)
+        priceOverrideNotFound,
+    required TResult Function(_ProductOutOfStock value) productOutOfStock,
+    required TResult Function(_PhotoPermissionFailed value)
+        photoPermissionFailed,
+    required TResult Function(_StoragePermissionFailed value)
+        storagePermissionFailed,
+    required TResult Function(_InvalidFileFormat value) invalidFileFormat,
+    required TResult Function(_UploadCountExcideLimit value)
+        uploadCountExcideLimit,
+    required TResult Function(_MaterialDetailRoute value) materialDetailRoute,
+    required TResult Function(_HistoryDetailRoute value) historyDetailRoute,
+  }) {
+    return materialDetailRoute(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Other value)? other,
+    TResult? Function(_ServerError value)? serverError,
+    TResult? Function(_PoorConnection value)? poorConnection,
+    TResult? Function(_ServerTimeout value)? serverTimeout,
+    TResult? Function(_UserNotFound value)? userNotFound,
+    TResult? Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult? Function(_AccountLocked value)? accountLocked,
+    TResult? Function(_AccountExpired value)? accountExpired,
+    TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_AuthenticationFailed value)? authenticationFailed,
+    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
+        proxyLoginRolePermissionNotMatch,
+    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
+        proxyLoginZPTargetRoleNotMatch,
+    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
+        proxyLoginZPSalesOrgNotMatch,
+    TResult? Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
+    TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult? Function(_InvalidBiometric value)? invalidBiometric,
+    TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult? Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult? Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult? Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult? Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult? Function(_MaterialDetailRoute value)? materialDetailRoute,
+    TResult? Function(_HistoryDetailRoute value)? historyDetailRoute,
+  }) {
+    return materialDetailRoute?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Other value)? other,
+    TResult Function(_ServerError value)? serverError,
+    TResult Function(_PoorConnection value)? poorConnection,
+    TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult Function(_AccountLocked value)? accountLocked,
+    TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_AuthenticationFailed value)? authenticationFailed,
+    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
+        proxyLoginRolePermissionNotMatch,
+    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
+        proxyLoginZPTargetRoleNotMatch,
+    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
+        proxyLoginZPSalesOrgNotMatch,
+    TResult Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
+    TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult Function(_InvalidBiometric value)? invalidBiometric,
+    TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult Function(_MaterialDetailRoute value)? materialDetailRoute,
+    TResult Function(_HistoryDetailRoute value)? historyDetailRoute,
+    required TResult orElse(),
+  }) {
+    if (materialDetailRoute != null) {
+      return materialDetailRoute(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _MaterialDetailRoute implements ApiFailure {
+  const factory _MaterialDetailRoute() = _$_MaterialDetailRoute;
+}
+
+/// @nodoc
+abstract class _$$_HistoryDetailRouteCopyWith<$Res> {
+  factory _$$_HistoryDetailRouteCopyWith(_$_HistoryDetailRoute value,
+          $Res Function(_$_HistoryDetailRoute) then) =
+      __$$_HistoryDetailRouteCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_HistoryDetailRouteCopyWithImpl<$Res>
+    extends _$ApiFailureCopyWithImpl<$Res, _$_HistoryDetailRoute>
+    implements _$$_HistoryDetailRouteCopyWith<$Res> {
+  __$$_HistoryDetailRouteCopyWithImpl(
+      _$_HistoryDetailRoute _value, $Res Function(_$_HistoryDetailRoute) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_HistoryDetailRoute implements _HistoryDetailRoute {
+  const _$_HistoryDetailRoute();
+
+  @override
+  String toString() {
+    return 'ApiFailure.historyDetailRoute()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_HistoryDetailRoute);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String message) other,
+    required TResult Function(String message) serverError,
+    required TResult Function() poorConnection,
+    required TResult Function() serverTimeout,
+    required TResult Function() userNotFound,
+    required TResult Function() invalidEmailAndPasswordCombination,
+    required TResult Function() accountLocked,
+    required TResult Function() accountExpired,
+    required TResult Function() tokenExpired,
+    required TResult Function() authenticationFailed,
+    required TResult Function() proxyLoginRolePermissionNotMatch,
+    required TResult Function() proxyLoginZPTargetRoleNotMatch,
+    required TResult Function() proxyLoginZPSalesOrgNotMatch,
+    required TResult Function() deviceNotSupportBiometric,
+    required TResult Function() cannotCheckBiometrics,
+    required TResult Function() noSupportedBiometrics,
+    required TResult Function() invalidBiometric,
+    required TResult Function() priceOverrideNotFound,
+    required TResult Function() productOutOfStock,
+    required TResult Function() photoPermissionFailed,
+    required TResult Function() storagePermissionFailed,
+    required TResult Function() invalidFileFormat,
+    required TResult Function() uploadCountExcideLimit,
+    required TResult Function() materialDetailRoute,
+    required TResult Function() historyDetailRoute,
+  }) {
+    return historyDetailRoute();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String message)? other,
+    TResult? Function(String message)? serverError,
+    TResult? Function()? poorConnection,
+    TResult? Function()? serverTimeout,
+    TResult? Function()? userNotFound,
+    TResult? Function()? invalidEmailAndPasswordCombination,
+    TResult? Function()? accountLocked,
+    TResult? Function()? accountExpired,
+    TResult? Function()? tokenExpired,
+    TResult? Function()? authenticationFailed,
+    TResult? Function()? proxyLoginRolePermissionNotMatch,
+    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
+    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult? Function()? deviceNotSupportBiometric,
+    TResult? Function()? cannotCheckBiometrics,
+    TResult? Function()? noSupportedBiometrics,
+    TResult? Function()? invalidBiometric,
+    TResult? Function()? priceOverrideNotFound,
+    TResult? Function()? productOutOfStock,
+    TResult? Function()? photoPermissionFailed,
+    TResult? Function()? storagePermissionFailed,
+    TResult? Function()? invalidFileFormat,
+    TResult? Function()? uploadCountExcideLimit,
+    TResult? Function()? materialDetailRoute,
+    TResult? Function()? historyDetailRoute,
+  }) {
+    return historyDetailRoute?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String message)? other,
+    TResult Function(String message)? serverError,
+    TResult Function()? poorConnection,
+    TResult Function()? serverTimeout,
+    TResult Function()? userNotFound,
+    TResult Function()? invalidEmailAndPasswordCombination,
+    TResult Function()? accountLocked,
+    TResult Function()? accountExpired,
+    TResult Function()? tokenExpired,
+    TResult Function()? authenticationFailed,
+    TResult Function()? proxyLoginRolePermissionNotMatch,
+    TResult Function()? proxyLoginZPTargetRoleNotMatch,
+    TResult Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult Function()? deviceNotSupportBiometric,
+    TResult Function()? cannotCheckBiometrics,
+    TResult Function()? noSupportedBiometrics,
+    TResult Function()? invalidBiometric,
+    TResult Function()? priceOverrideNotFound,
+    TResult Function()? productOutOfStock,
+    TResult Function()? photoPermissionFailed,
+    TResult Function()? storagePermissionFailed,
+    TResult Function()? invalidFileFormat,
+    TResult Function()? uploadCountExcideLimit,
+    TResult Function()? materialDetailRoute,
+    TResult Function()? historyDetailRoute,
+    required TResult orElse(),
+  }) {
+    if (historyDetailRoute != null) {
+      return historyDetailRoute();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Other value) other,
+    required TResult Function(_ServerError value) serverError,
+    required TResult Function(_PoorConnection value) poorConnection,
+    required TResult Function(_ServerTimeout value) serverTimeout,
+    required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_InvalidEmailAndPasswordCombination value)
+        invalidEmailAndPasswordCombination,
+    required TResult Function(_AccountLocked value) accountLocked,
+    required TResult Function(_AccountExpired value) accountExpired,
+    required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_AuthenticationFailed value) authenticationFailed,
+    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
+        proxyLoginRolePermissionNotMatch,
+    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
+        proxyLoginZPTargetRoleNotMatch,
+    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
+        proxyLoginZPSalesOrgNotMatch,
+    required TResult Function(_DeviceNotSupportBiometric value)
+        deviceNotSupportBiometric,
+    required TResult Function(_CannotCheckBiometrics value)
+        cannotCheckBiometrics,
+    required TResult Function(_NoSupportedBiometrics value)
+        noSupportedBiometrics,
+    required TResult Function(_InvalidBiometric value) invalidBiometric,
+    required TResult Function(_PriceOverrideNotFound value)
+        priceOverrideNotFound,
+    required TResult Function(_ProductOutOfStock value) productOutOfStock,
+    required TResult Function(_PhotoPermissionFailed value)
+        photoPermissionFailed,
+    required TResult Function(_StoragePermissionFailed value)
+        storagePermissionFailed,
+    required TResult Function(_InvalidFileFormat value) invalidFileFormat,
+    required TResult Function(_UploadCountExcideLimit value)
+        uploadCountExcideLimit,
+    required TResult Function(_MaterialDetailRoute value) materialDetailRoute,
+    required TResult Function(_HistoryDetailRoute value) historyDetailRoute,
+  }) {
+    return historyDetailRoute(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Other value)? other,
+    TResult? Function(_ServerError value)? serverError,
+    TResult? Function(_PoorConnection value)? poorConnection,
+    TResult? Function(_ServerTimeout value)? serverTimeout,
+    TResult? Function(_UserNotFound value)? userNotFound,
+    TResult? Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult? Function(_AccountLocked value)? accountLocked,
+    TResult? Function(_AccountExpired value)? accountExpired,
+    TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_AuthenticationFailed value)? authenticationFailed,
+    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
+        proxyLoginRolePermissionNotMatch,
+    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
+        proxyLoginZPTargetRoleNotMatch,
+    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
+        proxyLoginZPSalesOrgNotMatch,
+    TResult? Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
+    TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult? Function(_InvalidBiometric value)? invalidBiometric,
+    TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult? Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult? Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult? Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult? Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult? Function(_MaterialDetailRoute value)? materialDetailRoute,
+    TResult? Function(_HistoryDetailRoute value)? historyDetailRoute,
+  }) {
+    return historyDetailRoute?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Other value)? other,
+    TResult Function(_ServerError value)? serverError,
+    TResult Function(_PoorConnection value)? poorConnection,
+    TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult Function(_AccountLocked value)? accountLocked,
+    TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_AuthenticationFailed value)? authenticationFailed,
+    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
+        proxyLoginRolePermissionNotMatch,
+    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
+        proxyLoginZPTargetRoleNotMatch,
+    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
+        proxyLoginZPSalesOrgNotMatch,
+    TResult Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
+    TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult Function(_InvalidBiometric value)? invalidBiometric,
+    TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult Function(_MaterialDetailRoute value)? materialDetailRoute,
+    TResult Function(_HistoryDetailRoute value)? historyDetailRoute,
+    required TResult orElse(),
+  }) {
+    if (historyDetailRoute != null) {
+      return historyDetailRoute(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _HistoryDetailRoute implements ApiFailure {
+  const factory _HistoryDetailRoute() = _$_HistoryDetailRoute;
 }

@@ -4,17 +4,17 @@ import 'package:ezrxmobile/application/returns/return_summary_details/return_sum
 
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
-import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 
 import 'package:ezrxmobile/domain/returns/entities/return_summary_requests.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
-import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/returns/return_summary_details/section/customer_details_section.dart';
 import 'package:ezrxmobile/presentation/returns/return_summary_details/section/return_details_section.dart';
 import 'package:ezrxmobile/presentation/returns/return_summary_details/section/return_items_section.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:ezrxmobile/domain/utils/error_utils.dart';
 
 class ReturnSummaryDetails extends StatelessWidget {
   final CustomerCodeInfo customerCodeInfo;
@@ -41,11 +41,7 @@ class ReturnSummaryDetails extends StatelessWidget {
           () {},
           (either) => either.fold(
             (failure) {
-              final failureMessage = failure.failureMessage;
-              showSnackBar(
-                context: context,
-                message: failureMessage.tr(),
-              );
+              ErrorUtils.handleApiFailure(context, failure);
             },
             (success) {},
           ),

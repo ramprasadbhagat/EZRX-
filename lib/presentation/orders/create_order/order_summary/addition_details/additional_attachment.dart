@@ -3,7 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
-import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
@@ -44,10 +44,7 @@ class AdditionPoAttachmentUpload extends StatelessWidget {
                 },
                 (either) => either.fold(
                   (failure) {
-                    showSnackBar(
-                      context: context,
-                      message: failure.failureMessage.tr(),
-                    );
+                    ErrorUtils.handleApiFailure(context, failure);
                   },
                   (_) {},
                 ),
@@ -176,7 +173,7 @@ class _PoUploadOptionPickerState extends State<_PoUploadOptionPicker> {
                 Icons.image,
                 color: ZPColors.kPrimaryColor,
               ),
-               Text('Photos'.tr()),
+              Text('Photos'.tr()),
             ],
           ),
           onPressed: () => uploadFile(

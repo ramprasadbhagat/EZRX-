@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
-import 'package:ezrxmobile/domain/deep_linking/error/redirect_failures.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/deep_linking/repository/i_deep_linking_repository.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/dynamic_links.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

@@ -45,6 +45,10 @@ class ApiFailure with _$ApiFailure {
   //po attachment failure
   const factory ApiFailure.invalidFileFormat() = _InvalidFileFormat;
   const factory ApiFailure.uploadCountExcideLimit() = _UploadCountExcideLimit;
+
+  //deep link route failure
+  const factory ApiFailure.materialDetailRoute() = _MaterialDetailRoute;
+  const factory ApiFailure.historyDetailRoute() = _HistoryDetailRoute;
 }
 
 extension ApiFailureExt on ApiFailure {
@@ -80,6 +84,8 @@ extension ApiFailureExt on ApiFailure {
       invalidFileFormat: (_) =>
           'Unable to upload file as either file format not supported or something wrong with the file',
       uploadCountExcideLimit: (_) => 'Number of files exceeds the criteria',
+      materialDetailRoute: (_) => 'This material is not available on your account',
+      historyDetailRoute: (_) => 'This order history is not available on your account', 
     );
 
     return failureMessage;

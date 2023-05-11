@@ -16,7 +16,7 @@ import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
-import 'package:ezrxmobile/presentation/core/snackbar.dart';
+import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/orders/core/edi_user_continue_note.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_ship_to_info.dart';
 import 'package:ezrxmobile/presentation/orders/core/order_sold_to_info.dart';
@@ -43,7 +43,7 @@ class WrapStepper extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<OrderEligibilityBloc, OrderEligibilityState>(
       buildWhen: (previous, current) =>
-      previous.grandTotal != current.grandTotal,
+          previous.grandTotal != current.grandTotal,
       builder: (context, state) {
         return _Stepper(savedOrderState: savedOrderState);
       },
@@ -104,11 +104,7 @@ class _Stepper extends StatelessWidget {
           () {},
           (either) => either.fold(
             (failure) {
-          final failureMessage = failure.toString();
-          showSnackBar(
-            context: context,
-            message: failureMessage.tr(),
-          );
+              ErrorUtils.handleApiFailure(context, failure);
         },
             (_) {},
       ),

@@ -9,13 +9,11 @@ import 'package:ezrxmobile/application/order/order_history_details/order_history
 import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
-import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_basic_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
-import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/history/detail/section/bill_to_section.dart';
 import 'package:ezrxmobile/presentation/history/detail/section/invoice_section.dart';
 import 'package:ezrxmobile/presentation/history/detail/section/order_detail_section.dart';
@@ -25,6 +23,8 @@ import 'package:ezrxmobile/presentation/history/detail/section/ship_to_section.d
 import 'package:ezrxmobile/presentation/history/detail/section/sold_to_section.dart';
 import 'package:ezrxmobile/presentation/history/detail/section/system_message_section.dart';
 import 'package:ezrxmobile/presentation/history/detail/widget/re_order_button.dart';
+
+import 'package:ezrxmobile/domain/utils/error_utils.dart';
 
 class HistoryDetails extends StatelessWidget {
   final OrderHistoryItem orderHistoryItem;
@@ -83,11 +83,7 @@ class HistoryDetails extends StatelessWidget {
               () {},
               (either) => either.fold(
                 (failure) {
-                  final failureMessage = failure.failureMessage;
-                  showSnackBar(
-                    context: context,
-                    message: failureMessage.tr(),
-                  );
+                  ErrorUtils.handleApiFailure(context, failure);
                 },
                 (success) {},
               ),

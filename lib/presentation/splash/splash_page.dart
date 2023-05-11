@@ -11,7 +11,6 @@ import 'package:ezrxmobile/application/returns/returns_overview/returns_overview
 import 'package:ezrxmobile/domain/account/entities/admin_po_attachment_filter.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
-import 'package:ezrxmobile/domain/deep_linking/error/redirect_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
@@ -60,7 +59,7 @@ class SplashPage extends StatefulWidget {
 
 class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
   DateTime dateTime = DateTime.now();
-  
+
   @override
   void initState() {
     super.initState();
@@ -423,10 +422,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                 ));
               },
               error: (error) {
-                showSnackBar(
-                  context: context,
-                  message: error.failureMessage.tr(),
-                );
+                ErrorUtils.handleApiFailure(context,error);
               },
             );
           },

@@ -2,13 +2,13 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
-import 'package:ezrxmobile/domain/deep_linking/error/redirect_failures.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/deep_linking/repository/i_deep_linking_repository.dart';
 
 class DeepLinkingRepository implements IDeepLinkingRepository {
   DeepLinkingRepository();
   @override
-  Either<RedirectFailure, String> extractMaterialNumber({
+  Either<ApiFailure, String> extractMaterialNumber({
     required SalesOrganisation selectedSalesOrganisation,
     required CustomerCodeInfo selectedCustomerCode,
     required ShipToInfo selectedShipTo,
@@ -27,12 +27,12 @@ class DeepLinkingRepository implements IDeepLinkingRepository {
     return isValidLink
         ? Right(materialNumber)
         : const Left(
-            RedirectFailure.materialDetailRoute(),
+            ApiFailure.materialDetailRoute(),
           );
   }
 
   @override
-  Either<RedirectFailure, String> extractOrderHistory({
+  Either<ApiFailure, String> extractOrderHistory({
     required SalesOrganisation selectedSalesOrganisation,
     required CustomerCodeInfo selectedCustomerCode,
     required ShipToInfo selectedShipTo,
@@ -50,6 +50,6 @@ class DeepLinkingRepository implements IDeepLinkingRepository {
 
     return isValidLink
         ? Right(history)
-        : const Left(RedirectFailure.historyDetailRoute());
+        : const Left(ApiFailure.historyDetailRoute());
   }
 }

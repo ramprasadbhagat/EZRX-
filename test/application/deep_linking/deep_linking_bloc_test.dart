@@ -6,7 +6,7 @@ import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
-import 'package:ezrxmobile/domain/deep_linking/error/redirect_failures.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/deep_linking/repository/i_deep_linking_repository.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/dynamic_links.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -75,7 +75,7 @@ void main() {
       repository: repository,
     ),
     seed: () => const DeepLinkingState.error(
-      RedirectFailure.materialDetailRoute(),
+      ApiFailure.materialDetailRoute(),
     ),
     act: (bloc) => bloc.add(
       DeepLinkingEvent.consumePendingLink(
@@ -159,7 +159,7 @@ void main() {
         ),
       ).thenReturn(
         const Left(
-          RedirectFailure.materialDetailRoute(),
+          ApiFailure.materialDetailRoute(),
         ),
       );
     },
@@ -175,7 +175,7 @@ void main() {
     ),
     expect: () => [
       const DeepLinkingState.error(
-        RedirectFailure.materialDetailRoute(),
+        ApiFailure.materialDetailRoute(),
       ),
     ],
   );
