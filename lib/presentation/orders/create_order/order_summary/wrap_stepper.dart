@@ -160,6 +160,7 @@ class _Stepper extends StatelessWidget {
                 ),
                 MovCheckMessage(
                   isMovQualified: orderEligibilityState.isMinOrderValuePassed,
+                  isAccountSuspended: orderEligibilityState.isAccountSuspended,
                   maxStepsReached: details.currentStep == state.maxSteps,
                 ),
                 Padding(

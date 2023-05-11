@@ -2443,6 +2443,7 @@ void main() {
           salesOrg: SalesOrganisation.empty().copyWith(
             salesOrg: SalesOrg('2601'),
           ),
+          grandTotal: 45.68
         ));
 
         await tester.pumpWidget(getWidget());
@@ -2453,6 +2454,87 @@ void main() {
                 'Note : Minimum order value criteria does not match! Please update your cart to proceed.'
                     .tr());
             expect(warningText, findsWidgets);
+          }
+          final submitButtonKey = find.text('Submit');
+
+          expect(submitButtonKey, findsNWidgets(5));
+          if (orderEligibilityBlocMock.state.eligibleForOrderSubmit) {
+            await tester.tap(submitButtonKey.last, warnIfMissed: false);
+            await tester.pump();
+          }
+        }
+      },
+      variant: variants,
+    );
+
+    testWidgets(
+      '=> test submitOrder button disabled and do not find MOV warning text if customer code is suspended',
+      (tester) async {
+        tester.binding.window.physicalSizeTestValue = const Size(1080, 1920);
+        tester.binding.window.devicePixelRatioTestValue = 1.0;
+        final expectedStates = [_getState(variants.currentValue!)];
+        whenListen(orderSummaryBlocMock, Stream.fromIterable(expectedStates));
+        when(() => salesOrgBlocMock.state)
+            .thenReturn(SalesOrgState.initial().copyWith(
+          configs: SalesOrganisationConfigs.empty().copyWith(
+            enableReferenceNote: true,
+            enableVat: true,
+            enableFutureDeliveryDay: true,
+            enableMobileNumber: true,
+            enableSpecialInstructions: true,
+            disableOrderType: false,
+            enableCollectiveNumber: true,
+            enablePaymentTerms: true,
+            poNumberRequired: true,
+            minOrderAmount: '0',
+          ),
+          salesOrganisation: SalesOrganisation.empty().copyWith(
+            salesOrg: SalesOrg('2601'),
+          ),
+        ));
+
+        when(
+          () => orderEligibilityBlocMock.state,
+        ).thenReturn(OrderEligibilityState.initial()
+            .copyWith(orderType: '', cartItems: [
+          PriceAggregate.empty().copyWith(
+              price: Price.empty().copyWith(
+                finalPrice: MaterialPrice(45.68)
+              ),
+              materialInfo: MaterialInfo.empty().copyWith(
+            isSampleMaterial: false,
+            isFOCMaterial:false,
+          ))
+        ],
+        configs:SalesOrganisationConfigs.empty().copyWith(
+            enableReferenceNote: true,
+            enableVat: true,
+            enableFutureDeliveryDay: true,
+            enableMobileNumber: true,
+            enableSpecialInstructions: true,
+            disableOrderType: false,
+            enableCollectiveNumber: true,
+            enablePaymentTerms: true,
+            poNumberRequired: true,
+            minOrderAmount: '0',
+          ),
+          salesOrg: SalesOrganisation.empty().copyWith(
+            salesOrg: SalesOrg('2601'),
+          ),
+          customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+            status: Status('Z1 - Suspended Customer'),
+          ),
+          grandTotal: 500
+        ));
+
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+        if (orderSummaryBlocMock.state.step == 4) {
+          if (!orderEligibilityBlocMock.state.isMinOrderValuePassed && orderEligibilityBlocMock.state.isAccountSuspended) {
+            final warningText = find.textContaining(
+                'Note : Minimum order value criteria does not match! Please update your cart to proceed.'
+                    .tr());
+            expect(warningText, findsNothing);
           }
           final submitButtonKey = find.text('Submit');
 

@@ -5,16 +5,18 @@ import 'package:flutter/material.dart';
 
 class MovCheckMessage extends StatelessWidget {
   final bool isMovQualified;
+  final bool isAccountSuspended;
   final bool maxStepsReached;
   const MovCheckMessage({
     Key? key,
     required this.isMovQualified,
+    required this.isAccountSuspended,
     required this.maxStepsReached,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    if(!isMovQualified && maxStepsReached){
+    if (!isMovQualified && maxStepsReached && !isAccountSuspended) {
       return Padding(
         key: const Key('MovCheckMessage'),
         padding: const EdgeInsets.all(8.0),
