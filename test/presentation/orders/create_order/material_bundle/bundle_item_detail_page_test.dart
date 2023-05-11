@@ -21,8 +21,10 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/bundle_aggregate.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle_info.dart';
+import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_price_detail.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -605,6 +607,51 @@ void main() {
 
         final addToCartButton = find.text('Add to Cart');
         expect(addToCartButton, findsOneWidget);
+      },
+    );
+
+    testWidgets(
+      'Test Bundle should not be added when covid material is already present in cart',
+      (tester) async {
+        when((() => cartMockBloc.state)).thenReturn(
+          CartState.initial().copyWith(
+            cartItems: [
+              CartItem.material(
+                PriceAggregate.empty().copyWith(
+                  quantity: 1,
+                  materialInfo: MaterialInfo.empty().copyWith(
+                    materialNumber: MaterialNumber('123456789'),
+                    materialGroup4: MaterialGroup.four('6A1'),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+        when((() => userMockBloc.state))
+            .thenReturn(UserState.initial().copyWith(
+          user: User.empty().copyWith(
+              accessRight: AccessRight.empty().copyWith(
+            orders: true,
+          )),
+        ));
+        await tester.pumpWidget(
+          getScopedWidget(
+            BundleItemDetailPage(
+              bundleAggregate: mockBundleAggregate,
+            ),
+          ),
+        );
+        final addToCartButton = find.text('Add to Cart');
+
+        await tester.tap(addToCartButton);
+        await tester.pump(const Duration(seconds: 2));
+
+        final snackBar = find.byKey(const Key('snackBarMessage'));
+        expect(snackBar, findsOneWidget);
+        final snackBarText =
+            'Commercial bundle cannot be combined with covid material.'.tr();
+        expect(find.text(snackBarText), findsOneWidget);
       },
     );
   });

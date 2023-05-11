@@ -23,6 +23,7 @@ import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/custom_label.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/quantity_input.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -168,50 +169,59 @@ class BundleItemDetailPage extends StatelessWidget {
     Bundle bundle,
     Map<String, TextEditingController> list,
   ) {
-    final materialPriceDetailBloc = context.read<MaterialPriceDetailBloc>();
-    final priceAggregateList = bundleAggregate.materialInfos.map((material) {
-      final itemInfo =
-          materialPriceDetailBloc.state.materialDetails[material.queryInfo];
-      if (itemInfo != null) {
-        final priceAggregate = PriceAggregate(
-          banner: BannerItem.empty(),
-          price: itemInfo.price,
-          materialInfo: itemInfo.info,
-          salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
-          quantity: int.parse(list[material.materialNumber.getOrCrash()]!.text),
-          bundle: bundle,
-          addedBonusList: [],
-          stockInfo: StockInfo.empty().copyWith(
-            materialNumber: itemInfo.info.materialNumber,
-          ),
-          tenderContract: TenderContract.empty(),
-          comboDeal: ComboDeal.empty(),
-        );
+    if (context.read<CartBloc>().state.containCovidMaterial) {
+      showSnackBar(
+        context: context,
+        message:
+            'Commercial bundle cannot be combined with covid material.'.tr(),
+      );
+    } else {
+      final materialPriceDetailBloc = context.read<MaterialPriceDetailBloc>();
+      final priceAggregateList = bundleAggregate.materialInfos.map((material) {
+        final itemInfo =
+            materialPriceDetailBloc.state.materialDetails[material.queryInfo];
+        if (itemInfo != null) {
+          final priceAggregate = PriceAggregate(
+            banner: BannerItem.empty(),
+            price: itemInfo.price,
+            materialInfo: itemInfo.info,
+            salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+            quantity:
+                int.parse(list[material.materialNumber.getOrCrash()]!.text),
+            bundle: bundle,
+            addedBonusList: [],
+            stockInfo: StockInfo.empty().copyWith(
+              materialNumber: itemInfo.info.materialNumber,
+            ),
+            tenderContract: TenderContract.empty(),
+            comboDeal: ComboDeal.empty(),
+          );
 
-        return priceAggregate;
-      }
+          return priceAggregate;
+        }
 
-      return PriceAggregate.empty();
-    }).toList();
-    context.read<CartBloc>().add(
-          CartEvent.addBundleToCart(
-            bundleItems: priceAggregateList,
-            customerCodeInfo:
-                context.read<CustomerCodeBloc>().state.customerCodeInfo,
-            salesOrganisation:
-                context.read<SalesOrgBloc>().state.salesOrganisation,
-            salesOrganisationConfigs:
-                context.read<SalesOrgBloc>().state.configs,
-            shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
-            doNotallowOutOfStockMaterial: context
-                .read<EligibilityBloc>()
-                .state
-                .doNotAllowOutOfStockMaterials,
-          ),
-        );
+        return PriceAggregate.empty();
+      }).toList();
+      context.read<CartBloc>().add(
+            CartEvent.addBundleToCart(
+              bundleItems: priceAggregateList,
+              customerCodeInfo:
+                  context.read<CustomerCodeBloc>().state.customerCodeInfo,
+              salesOrganisation:
+                  context.read<SalesOrgBloc>().state.salesOrganisation,
+              salesOrganisationConfigs:
+                  context.read<SalesOrgBloc>().state.configs,
+              shipToInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+              doNotallowOutOfStockMaterial: context
+                  .read<EligibilityBloc>()
+                  .state
+                  .doNotAllowOutOfStockMaterials,
+            ),
+          );
 
-    //TODO: Will revisit
-    context.router.pushNamed('orders/cart');
+      //TODO: Will revisit
+      context.router.pushNamed('orders/cart');
+    }
   }
 }
 
