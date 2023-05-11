@@ -18,6 +18,7 @@ void main() {
 
   group('Extract material number', () {
     const fakeMaterialNumber = 'fake-material-number';
+
     test('- success', () {
       final fakeUri = Uri(
         queryParameters: {
@@ -110,6 +111,109 @@ void main() {
       );
 
       final result = DeepLinkingRepository().extractMaterialNumber(
+        selectedSalesOrganisation: fakeSalesOrg,
+        selectedCustomerCode: fakeCustomerCode,
+        selectedShipTo: fakeShipToCode,
+        link: fakeUri,
+      );
+
+      expect(result.isLeft(), true);
+    });
+  });
+  group('Extract order history', () {
+    const fakeOrderHistory = 'fake-order-history';
+
+    test('- success for history details deeplinking', () {
+      final fakeUri = Uri(
+        queryParameters: {
+          'salesorg': 'fake-sales-org',
+          'customer': 'fake-customer-code',
+          'shipto': 'fake-ship-to-code',
+          'history': 'fake-order-history',
+        },
+      );
+
+      final result = DeepLinkingRepository().extractOrderHistory(
+        selectedSalesOrganisation: fakeSalesOrg,
+        selectedCustomerCode: fakeCustomerCode,
+        selectedShipTo: fakeShipToCode,
+        link: fakeUri,
+      );
+
+      expect(result.isRight(), true);
+      expect(result.getOrElse(() => ''), fakeOrderHistory);
+    });
+    test('- failure when history query param is empty', () {
+      final fakeUri = Uri(
+        queryParameters: {
+          'salesorg': 'fake-sales-org',
+          'customer': 'fake-customer-code',
+          'shipto': 'fake-ship-to-code',
+          'history': '',
+        },
+      );
+
+      final result = DeepLinkingRepository().extractOrderHistory(
+        selectedSalesOrganisation: fakeSalesOrg,
+        selectedCustomerCode: fakeCustomerCode,
+        selectedShipTo: fakeShipToCode,
+        link: fakeUri,
+      );
+
+      expect(result.isLeft(), true);
+    });
+
+    test('- failure when sales org is not match', () {
+      final fakeUri = Uri(
+        queryParameters: {
+          'salesorg': 'fake-sales-org1',
+          'customer': 'fake-customer-code',
+          'shipto': 'fake-ship-to-code',
+          'history': 'fake-order-history',
+        },
+      );
+
+      final result = DeepLinkingRepository().extractOrderHistory(
+        selectedSalesOrganisation: fakeSalesOrg,
+        selectedCustomerCode: fakeCustomerCode,
+        selectedShipTo: fakeShipToCode,
+        link: fakeUri,
+      );
+
+      expect(result.isLeft(), true);
+    });
+
+    test('- failure when customer code is not match', () {
+      final fakeUri = Uri(
+        queryParameters: {
+          'salesorg': 'fake-sales-org',
+          'customer': 'fake-customer-code',
+          'shipto': 'fake-ship-to-code1',
+          'history': 'fake-order-history',
+        },
+      );
+
+      final result = DeepLinkingRepository().extractOrderHistory(
+        selectedSalesOrganisation: fakeSalesOrg,
+        selectedCustomerCode: fakeCustomerCode,
+        selectedShipTo: fakeShipToCode,
+        link: fakeUri,
+      );
+
+      expect(result.isLeft(), true);
+    });
+
+    test('- failure when ship to code is not match', () {
+      final fakeUri = Uri(
+        queryParameters: {
+          'salesorg': 'fake-sales-org',
+          'customer': 'fake-customer-code',
+          'shipto': 'fake-ship-to-code1',
+          'history': 'fake-order-history',
+        },
+      );
+
+      final result = DeepLinkingRepository().extractOrderHistory(
         selectedSalesOrganisation: fakeSalesOrg,
         selectedCustomerCode: fakeCustomerCode,
         selectedShipTo: fakeShipToCode,

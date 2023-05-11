@@ -179,4 +179,76 @@ void main() {
       ),
     ],
   );
+  blocTest<DeepLinkingBloc, DeepLinkingState>(
+    'Consume redirect order history detail pending link success',
+    build: () => DeepLinkingBloc(
+      service: service,
+      repository: repository,
+    ),
+    setUp: () {
+      when(
+        () => repository.extractOrderHistory(
+          selectedSalesOrganisation: fakeSalesOrg,
+          selectedCustomerCode: fakeCustomerCode,
+          selectedShipTo: fakeShipToCode,
+          link: Uri(
+            path: '/history_details',
+          ),
+        ),
+      ).thenReturn(
+        const Right('fake-order-history'),
+      );
+    },
+    seed: () => DeepLinkingState.linkPending(
+      Uri(path: '/history_details'),
+    ),
+    act: (bloc) => bloc.add(
+      DeepLinkingEvent.consumePendingLink(
+        selectedCustomerCode: fakeCustomerCode,
+        selectedSalesOrganisation: fakeSalesOrg,
+        selectedShipTo: fakeShipToCode,
+      ),
+    ),
+    expect: () => [
+      const DeepLinkingState.redirectHistoryDetail('fake-order-history'),
+    ],
+  );
+  blocTest<DeepLinkingBloc, DeepLinkingState>(
+    'Consume redirect order history detail pending link failure',
+    build: () => DeepLinkingBloc(
+      service: service,
+      repository: repository,
+    ),
+    setUp: () {
+      when(
+        () => repository.extractOrderHistory(
+          selectedSalesOrganisation: fakeSalesOrg,
+          selectedCustomerCode: fakeCustomerCode,
+          selectedShipTo: fakeShipToCode,
+          link: Uri(
+            path: '/history_details',
+          ),
+        ),
+      ).thenReturn(
+        const Left(
+          ApiFailure.historyDetailRoute(),
+        ),
+      );
+    },
+    seed: () => DeepLinkingState.linkPending(
+      Uri(path: '/history_details'),
+    ),
+    act: (bloc) => bloc.add(
+      DeepLinkingEvent.consumePendingLink(
+        selectedCustomerCode: fakeCustomerCode,
+        selectedSalesOrganisation: fakeSalesOrg,
+        selectedShipTo: fakeShipToCode,
+      ),
+    ),
+    expect: () => [
+      const DeepLinkingState.error(
+        ApiFailure.historyDetailRoute(),
+      ),
+    ],
+  );
 }

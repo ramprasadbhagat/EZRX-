@@ -16,6 +16,8 @@ import 'package:ezrxmobile/application/order/material_bundle_list/material_bundl
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
+import 'package:ezrxmobile/application/order/order_history_details/order_history_details_bloc.dart';
+import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
@@ -52,7 +54,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:upgrader/upgrader.dart';
-
 import '../../utils/widget_utils.dart';
 import '../order_history/order_history_details_widget_test.dart';
 
@@ -140,6 +141,14 @@ class RemoteConfigServiceMock extends Mock implements RemoteConfigService {}
 class DeepLinkingMockBloc extends MockBloc<DeepLinkingEvent, DeepLinkingState>
     implements DeepLinkingBloc {}
 
+class OrderHistoryListBlocMock
+    extends MockBloc<OrderHistoryListEvent, OrderHistoryListState>
+    implements OrderHistoryListBloc {}
+
+class OrderHistoryDetailsMockBloc
+    extends MockBloc<OrderHistoryDetailsEvent, OrderHistoryDetailsState>
+    implements OrderHistoryDetailsBloc {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
@@ -171,6 +180,8 @@ void main() {
   late AnnouncementBloc announcementBlocMock;
   late RemoteConfigService remoteConfigServiceMock;
   late DeepLinkingBloc deepLinkingBlocMock;
+  late OrderHistoryListBloc mockOrderHistoryListBloc;
+  final mockOrderHistoryDetailsBloc = OrderHistoryDetailsMockBloc();
 
   final fakeSalesOrganisation =
       SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601'));
@@ -199,6 +210,8 @@ void main() {
     locator<MixpanelService>().init(mixpanel: MixpanelMock());
     locator.registerLazySingleton<RemoteConfigService>(
         () => remoteConfigServiceMock);
+
+    locator.registerLazySingleton(() => mockOrderHistoryListBloc);
   });
 
   group('Splash Screen', () {
@@ -229,6 +242,7 @@ void main() {
       returnApproverFilterBlocMock = ReturnApproverFilterBlocMock();
       announcementBlocMock = AnnouncementBlocMock();
       deepLinkingBlocMock = DeepLinkingMockBloc();
+      mockOrderHistoryListBloc = OrderHistoryListBlocMock();
 
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
       when(() => orderDocumentTypeMock.state).thenReturn(
@@ -272,6 +286,10 @@ void main() {
           .thenReturn(AnnouncementState.initial());
       when(() => deepLinkingBlocMock.state)
           .thenReturn(const DeepLinkingState.initial());
+      when(() => mockOrderHistoryListBloc.state)
+          .thenReturn(OrderHistoryListState.initial());
+      when(() => mockOrderHistoryDetailsBloc.state)
+          .thenReturn(OrderHistoryDetailsState.initial());
     });
 
     Future getWidget(tester) async {
@@ -322,6 +340,10 @@ void main() {
             BlocProvider<DeepLinkingBloc>(
               create: (context) => deepLinkingBlocMock,
             ),
+            BlocProvider<OrderHistoryListBloc>(
+                create: (context) => mockOrderHistoryListBloc),
+            BlocProvider<OrderHistoryDetailsBloc>(
+                create: (context) => mockOrderHistoryDetailsBloc),
           ],
           child: const SplashPage(),
         ),
@@ -662,6 +684,57 @@ void main() {
           ),
         ),
       ).called(0);
+    });
+
+  
+    testWidgets('DeepLinkingBloc initializes correctly',
+        (WidgetTester tester) async {
+      when(() => remoteConfigServiceMock.getReturnsConfig()).thenReturn(false);
+      whenListen(
+          eligibilityBlocMock,
+          Stream.fromIterable([
+            EligibilityState.initial(),
+            EligibilityState.initial().copyWith(
+                shipToInfo: ShipToInfo.empty()
+                    .copyWith(shipToCustomerCode: 'fake-code')),
+          ]));
+      await getWidget(tester);
+      await tester.pump();
+
+      verify(() => deepLinkingBlocMock.add(const DeepLinkingEvent.initialize()))
+          .called(1);
+    });
+
+    testWidgets('When Redirecting History page - success', (tester) async {
+      final expectedDeeplinkStates = [
+        const DeepLinkingState.initial(),
+        DeepLinkingState.linkPending(
+          Uri(path: '/history_details'),
+        ),
+        const DeepLinkingState.redirectHistoryDetail('fake-order-history'),
+      ];
+      whenListen(
+          deepLinkingBlocMock, Stream.fromIterable(expectedDeeplinkStates));
+      await getWidget(tester);
+      await tester.pump();
+      verify(() => deepLinkingBlocMock.add(DeepLinkingEvent.consumePendingLink(
+            selectedCustomerCode: CustomerCodeInfo.empty(),
+            selectedSalesOrganisation: SalesOrganisation.empty(),
+            selectedShipTo: ShipToInfo.empty(),
+          ))).called(1);
+    });
+    testWidgets('When Redirecting History page -failure ', (tester) async {
+      final expectedDeeplinkStates = [
+        const DeepLinkingState.error(
+          ApiFailure.historyDetailRoute(),
+        )
+      ];
+      whenListen(
+          deepLinkingBlocMock, Stream.fromIterable(expectedDeeplinkStates));
+      await getWidget(tester);
+      await tester.pump();
+      expect(find.text('This order history is not available on your account'),
+          findsOneWidget);
     });
   });
 }
