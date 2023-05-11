@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/payment_methods_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_rep/sales_rep_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
@@ -36,6 +37,10 @@ import 'package:ezrxmobile/infrastructure/account/datasource/admin_po_attachment
 import 'package:ezrxmobile/infrastructure/account/datasource/admin_po_attachment_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/admin_po_attachment_remote.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/admin_po_attachment_repository.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/payment_configuration_local.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/payment_configuration_query_mutation.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/payment_configuration_remote.dart';
+import 'package:ezrxmobile/infrastructure/account/repository/payment_configuration_repository.dart';
 import 'package:ezrxmobile/infrastructure/core/common/device_info.dart';
 import 'package:ezrxmobile/infrastructure/core/common/file_picker.dart';
 import 'package:ezrxmobile/infrastructure/core/common/permission_service.dart';
@@ -679,8 +684,6 @@ void setupLocator() {
       customerCodeRepository: locator<CustomerCodeRepository>(),
     ),
   );
-
-
 
   //============================================================
   //  Ship To Code
@@ -1787,8 +1790,8 @@ void setupLocator() {
   //============================================================
   locator.registerLazySingleton(
     () => DynamicLinksService(
-        config: locator<Config>(),
-        appRouter: locator<AppRouter>(),
+      config: locator<Config>(),
+      appRouter: locator<AppRouter>(),
     ),
   );
 
@@ -1833,7 +1836,6 @@ void setupLocator() {
     ),
   );
 
-
   locator.registerLazySingleton(
     () => AdminPoAttachmentBloc(
       repository: locator<AdminPoAttachmentRepository>(),
@@ -1849,4 +1851,36 @@ void setupLocator() {
     () => AdminPoAttachmentFilterBloc(),
   );
 
+  //============================================================
+  //  Payment Configuration
+  //
+  //============================================================
+
+  locator.registerLazySingleton(() => PaymentConfigurationLocalDataSource());
+
+  locator.registerLazySingleton(() => PaymentConfigurationQueryMutation());
+
+  locator.registerLazySingleton(
+    () => PaymentConfigurationRemoteDataSource(
+      httpService: locator<HttpService>(),
+      paymentConfigurationQueryMutation:
+          locator<PaymentConfigurationQueryMutation>(),
+      config: locator<Config>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => PaymentConfigurationRepository(
+      config: locator<Config>(),
+      localDataSource: locator<PaymentConfigurationLocalDataSource>(),
+      remoteDataSource: locator<PaymentConfigurationRemoteDataSource>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => PaymentMethodsBloc(
+      paymentConfigurationRepository: locator<PaymentConfigurationRepository>(),
+    ),
+  );
 }

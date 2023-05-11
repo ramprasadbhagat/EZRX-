@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/payment_methods_bloc.dart';
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/application/admin_po_attachment/admin_po_attachment_bloc.dart';
 import 'package:ezrxmobile/application/admin_po_attachment/filter/admin_po_attachment_filter_bloc.dart';
@@ -202,9 +203,7 @@ class App extends StatelessWidget {
               locator<SalesOrgBloc>()..add(const SalesOrgEvent.initialized()),
         ),
         BlocProvider<CustomerCodeBloc>(
-          create: (context) =>
-              locator<CustomerCodeBloc>(),
-          
+          create: (context) => locator<CustomerCodeBloc>(),
         ),
         BlocProvider<UserRestrictionListBloc>(
           create: (context) => locator<UserRestrictionListBloc>(),
@@ -355,6 +354,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider<AdminPoAttachmentFilterBloc>(
           create: (context) => locator<AdminPoAttachmentFilterBloc>(),
+        ),
+        BlocProvider<PaymentMethodsBloc>(
+          create: (context) => locator<PaymentMethodsBloc>(),
         ),
       ],
       child: MaterialApp.router(

@@ -33,8 +33,8 @@ class AccountTab extends StatelessWidget {
               const ProfileTile(),
               const _LoginOnBehalfTile(),
               const _SupportTile(),
-              const _SettingsTile(),
               const _PaymentConfigurationTile(),
+              const _SettingsTile(),
               const _AdminPoAttachment(),
             ],
           ).toList(),
@@ -102,7 +102,7 @@ class _PaymentConfigurationTile extends StatelessWidget {
                   'Payment Configuration',
                   locale: context.locale,
                 ).tr(),
-                onTap: () {},
+                onTap: () => context.router.pushNamed('payment_configuration'),
               )
             : const SizedBox.shrink();
       },

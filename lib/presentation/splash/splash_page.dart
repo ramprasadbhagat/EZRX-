@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/payment_methods_bloc.dart';
 import 'package:ezrxmobile/application/admin_po_attachment/admin_po_attachment_bloc.dart';
 import 'package:ezrxmobile/application/admin_po_attachment/filter/admin_po_attachment_filter_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
@@ -16,6 +17,7 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/cart_bottom_sheet.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:universal_io/io.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -42,7 +44,6 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/splash/upgrader_localization_message.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/cupertino.dart';
@@ -176,6 +177,12 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                   );
               context.read<CartBloc>().add(
                     const CartEvent.initialized(),
+                  );
+            }
+
+            if (state.user.role.type.isRootAdmin) {
+              context.read<PaymentMethodsBloc>().add(
+                    const PaymentMethodsEvent.fetch(),
                   );
             }
           },
@@ -335,25 +342,25 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
           },
         ),
         BlocListener<EligibilityBloc, EligibilityState>(
-            listenWhen: (previous, current) =>
-                previous.shipToInfo != current.shipToInfo,
-            listener: (context, state) {
+          listenWhen: (previous, current) =>
+              previous.shipToInfo != current.shipToInfo,
+          listener: (context, state) {
             _getAdminPoAttachment(state);
-              context.read<CartBloc>().add(
-                    CartEvent.fetch(
-                      doNotAllowOutOfStockMaterials:
-                          state.doNotAllowOutOfStockMaterials,
-                      customerCodeInfo: state.customerCodeInfo,
-                      salesOrganisationConfigs: state.salesOrgConfigs,
-                      salesOrganisation: state.salesOrganisation,
-                      shipToInfo: state.shipToInfo,
-                      comboDealEligible: state.comboDealEligible,
-                      isSpecialOrderType: context
-                          .read<OrderDocumentTypeBloc>()
-                          .state
-                          .isSpecialOrderType,
-                    ),
-                  );
+            context.read<CartBloc>().add(
+                  CartEvent.fetch(
+                    doNotAllowOutOfStockMaterials:
+                        state.doNotAllowOutOfStockMaterials,
+                    customerCodeInfo: state.customerCodeInfo,
+                    salesOrganisationConfigs: state.salesOrgConfigs,
+                    salesOrganisation: state.salesOrganisation,
+                    shipToInfo: state.shipToInfo,
+                    comboDealEligible: state.comboDealEligible,
+                    isSpecialOrderType: context
+                        .read<OrderDocumentTypeBloc>()
+                        .state
+                        .isSpecialOrderType,
+                  ),
+                );
 
             final enableReturn =
                 locator<RemoteConfigService>().getReturnsConfig() &&

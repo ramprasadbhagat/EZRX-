@@ -1,8 +1,10 @@
 //ignore_for_file: unused-files
 import 'package:auto_route/auto_route.dart';
+import 'package:ezrxmobile/presentation/account/payment_configuration/payment_configuration_page.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/add_to_cart.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/update_cart.dart';
 import 'package:ezrxmobile/presentation/account/admin_po_attachment/admin_po_attachment_page.dart';
+import 'package:ezrxmobile/presentation/account/payment_configuration/payment_methods/payment_methods_page.dart';
 import 'package:ezrxmobile/presentation/orders/cart/bonus/search_bonus_page.dart';
 import 'package:ezrxmobile/presentation/orders/combo_deal/combo_deal_material_detail_page.dart';
 import 'package:ezrxmobile/presentation/orders/combo_deal/combo_deal_principle_detail_page.dart';
@@ -53,6 +55,8 @@ import 'package:ezrxmobile/presentation/orders/create_order/scan_material_info.d
     AutoRoute(path: 'login', page: LoginPage),
     AutoRoute(path: 'login_on_behalf', page: LoginOnBehalfPage),
     AutoRoute(path: 'settings', page: SettingsPage),
+    AutoRoute(path: 'payment_configuration', page: PaymentConfigurationPage),
+    AutoRoute(path: 'payment_methods', page: PaymentMethodsPage),
     AutoRoute(path: 'returns/request_return', page: RequestReturn),
     AutoRoute(path: 'returns/approver_actions', page: ApproverActions),
     AutoRoute(path: 'returns/return_summary', page: ReturnSummary),

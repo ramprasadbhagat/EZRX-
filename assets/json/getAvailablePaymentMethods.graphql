@@ -1,0 +1,11 @@
+query availablePaymentMethods($request: availablePaymentMethodsRequest!) {
+  availablePaymentMethods(request: $request) {
+    salesOrg
+    paymentMethods
+  }
+}
+
+variable:
+{
+  "request": {}
+}

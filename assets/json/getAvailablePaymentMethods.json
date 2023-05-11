@@ -1,0 +1,49 @@
+{
+    "data": {
+        "availablePaymentMethods": [
+            {
+                "salesOrg": "2900",
+                "paymentMethods": "Payment Gateway"
+            },
+            {
+                "salesOrg": "2902",
+                "paymentMethods": "Payment Gateway"
+            },
+            {
+                "salesOrg": "3070",
+                "paymentMethods": "Payment Gateway"
+            },
+            {
+                "salesOrg": "2001",
+                "paymentMethods": "Payment Gateway"
+            },
+            {
+                "salesOrg": "3050",
+                "paymentMethods": "Payment Gateway"
+            },
+            {
+                "salesOrg": "2601",
+                "paymentMethods": "QR Code"
+            },
+            {
+                "salesOrg": "2501",
+                "paymentMethods": "Bank Collect"
+            },
+            {
+                "salesOrg": "2500",
+                "paymentMethods": "Bank Collect"
+            },
+            {
+                "salesOrg": "PH03",
+                "paymentMethods": "Bank Collect"
+            },
+            {
+                "salesOrg": "2601",
+                "paymentMethods": "test"
+            }
+        ]
+    },
+    "extensions": {
+        "trace-id": "58698657e4cc4dc1801f3eb1ece4243b"
+    }
+}
