@@ -55,7 +55,7 @@ class _LoginOnBehalfTile extends StatelessWidget {
         return state.userCanLoginOnBehalf
             ? ListTile(
                 key: const Key('loginOnBehalfTile'),
-                leading: const Icon(Icons.person_outline),
+                leading: const Icon(Icons.login_outlined),
                 title: Text(
                   'Login on behalf',
                   locale: context.locale,
