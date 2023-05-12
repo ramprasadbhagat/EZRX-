@@ -104,11 +104,17 @@ class BannerTile extends StatelessWidget {
                       }
                     }
                   },
-                  child: Image.memory(
-                    (image.data as Uint8List),
-                    fit: BoxFit.fitWidth,
-                    gaplessPlayback: true,
-                  ),
+                  child: banner.isEZRXBanner
+                      ? Image.memory(
+                          (image.data as Uint8List),
+                          fit: BoxFit.fitWidth,
+                          gaplessPlayback: true,
+                        )
+                      : Image.network(
+                          banner.url,
+                          fit: BoxFit.fitWidth,
+                          gaplessPlayback: true,
+                        ),
                 )
               : LoadingShimmer.logo();
         },

@@ -206,6 +206,11 @@ class RoleType extends ValueObject<String> {
       isSalesRepRole ||
       isReturnRequestor;
 
+  String get getEZReachRoleType {
+    return isSalesRepRole ? 'salesrep' : 'customer';
+  }
+
+
   const RoleType._(this.value);
 }
 

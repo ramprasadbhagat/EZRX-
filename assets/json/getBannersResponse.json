@@ -1,30 +1,73 @@
 {
-    "data":{
-       "getBanners":[
-          {
-             "id":181,
-             "url":"https://zpdigitalproducts.blob.core.windows.net/eztrade/staging/validation/ftan_1659949217_Singapore eZRx Banner_Slot 1_August .jpg",
-             "title":"Singapore Banner NDP",
-             "description":"",
-             "buttonLabel":"",
-             "urlLink":"",
-             "isPreSalesOrg":false,
-             "salesOrg":"2601",
-             "serial":5,
-             "isCustomer":false
-          },
-          {
-             "id":182,
-             "url":"https://zpdigitalproducts.blob.core.windows.net/eztrade/staging/validation/ftan_1660112274_Singapore_eZRx Banner_Live Chat_August .jpg",
-             "title":"SG2601_eZRx Live Chat (SG)",
-             "description":"",
-             "buttonLabel":"",
-             "urlLink":"",
-             "isPreSalesOrg":false,
-             "salesOrg":"2601",
-             "serial":4,
-             "isCustomer":false
-          }
+   "data": {
+       "getBanners": [
+           {
+               "id": 559,
+               "url": "https://zpdigitalproducts.blob.core.windows.net/eztrade/staging/validation/superuser_1652681790_download.png",
+               "title": "Test title",
+               "description": "",
+               "buttonLabel": "",
+               "urlLink": "ACNE-AID BAR X100G",
+               "isPreSalesOrg": false,
+               "salesOrg": "2601",
+               "serial": 9,
+               "isCustomer": false,
+               "category": "System Announcement",
+               "isKeyword": true,
+               "keyword": "ACNE-AID BAR X100G",
+               "__typename": "GetBannersResponse"
+           },
+           {
+               "id": 413,
+               "url": "https://zpdigitalproducts.blob.core.windows.net/eztrade/staging/validation/superuser_1650518830_download (1).png",
+               "title": "Test 123 ",
+               "description": "",
+               "buttonLabel": "",
+               "urlLink": "https://www.youtube.com",
+               "isPreSalesOrg": false,
+               "salesOrg": "2601",
+               "serial": 7,
+               "isCustomer": false,
+               "category": "Internal Banner",
+               "isKeyword": false,
+               "keyword": null,
+               "__typename": "GetBannersResponse"
+           },
+           {
+               "id": 576,
+               "url": "https://zpdigitalproducts.blob.core.windows.net/eztrade/staging/validation/mobiledemo_1652867904_maxresdefault.jpg",
+               "title": "ZP Title",
+               "description": "",
+               "buttonLabel": "",
+               "urlLink": "",
+               "isPreSalesOrg": false,
+               "salesOrg": "2601",
+               "serial": 5,
+               "isCustomer": true,
+               "category": "Client",
+               "isKeyword": false,
+               "keyword": "",
+               "__typename": "GetBannersResponse"
+           },
+           {
+               "id": 441,
+               "url": "https://zpdigitalproducts.blob.core.windows.net/eztrade/staging/validation/mobiledemo_1639549952_Screenshot 2021-12-15 at 11.54.35 AM.png",
+               "title": " Have You Updated?",
+               "description": "We’ve made some improvements, squashed some bugs and tightened few loose bolts. Update the eZRx mobile app today!",
+               "buttonLabel": "",
+               "urlLink": "GSK Consumer Healthcare\t",
+               "isPreSalesOrg": false,
+               "salesOrg": "2601",
+               "serial": 47,
+               "isCustomer": false,
+               "category": "Client",
+               "isKeyword": true,
+               "keyword": "GSK Consumer Healthcare",
+               "__typename": "GetBannersResponse"
+           }
        ]
-    }
- }
+   },
+   "extensions": {
+       "trace-id": "bf05a33196c64253baf08a1b5a7bee73"
+   }
+}

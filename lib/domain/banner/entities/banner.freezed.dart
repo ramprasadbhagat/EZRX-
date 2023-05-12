@@ -29,6 +29,7 @@ mixin _$BannerItem {
   bool get isKeyword => throw _privateConstructorUsedError;
   String get keyword => throw _privateConstructorUsedError;
   String get category => throw _privateConstructorUsedError;
+  bool get isEZRXBanner => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $BannerItemCopyWith<BannerItem> get copyWith =>
@@ -54,7 +55,8 @@ abstract class $BannerItemCopyWith<$Res> {
       String salesOrg,
       bool isKeyword,
       String keyword,
-      String category});
+      String category,
+      bool isEZRXBanner});
 }
 
 /// @nodoc
@@ -83,6 +85,7 @@ class _$BannerItemCopyWithImpl<$Res, $Val extends BannerItem>
     Object? isKeyword = null,
     Object? keyword = null,
     Object? category = null,
+    Object? isEZRXBanner = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -137,6 +140,10 @@ class _$BannerItemCopyWithImpl<$Res, $Val extends BannerItem>
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
               as String,
+      isEZRXBanner: null == isEZRXBanner
+          ? _value.isEZRXBanner
+          : isEZRXBanner // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -162,7 +169,8 @@ abstract class _$$_BannerItemCopyWith<$Res>
       String salesOrg,
       bool isKeyword,
       String keyword,
-      String category});
+      String category,
+      bool isEZRXBanner});
 }
 
 /// @nodoc
@@ -189,6 +197,7 @@ class __$$_BannerItemCopyWithImpl<$Res>
     Object? isKeyword = null,
     Object? keyword = null,
     Object? category = null,
+    Object? isEZRXBanner = null,
   }) {
     return _then(_$_BannerItem(
       id: null == id
@@ -243,6 +252,10 @@ class __$$_BannerItemCopyWithImpl<$Res>
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
               as String,
+      isEZRXBanner: null == isEZRXBanner
+          ? _value.isEZRXBanner
+          : isEZRXBanner // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -263,7 +276,8 @@ class _$_BannerItem extends _BannerItem {
       required this.salesOrg,
       required this.isKeyword,
       required this.keyword,
-      required this.category})
+      required this.category,
+      required this.isEZRXBanner})
       : super._();
 
   @override
@@ -292,10 +306,12 @@ class _$_BannerItem extends _BannerItem {
   final String keyword;
   @override
   final String category;
+  @override
+  final bool isEZRXBanner;
 
   @override
   String toString() {
-    return 'BannerItem(id: $id, serial: $serial, isPreSalesOrg: $isPreSalesOrg, isCustomer: $isCustomer, url: $url, title: $title, description: $description, buttonLabel: $buttonLabel, urlLink: $urlLink, salesOrg: $salesOrg, isKeyword: $isKeyword, keyword: $keyword, category: $category)';
+    return 'BannerItem(id: $id, serial: $serial, isPreSalesOrg: $isPreSalesOrg, isCustomer: $isCustomer, url: $url, title: $title, description: $description, buttonLabel: $buttonLabel, urlLink: $urlLink, salesOrg: $salesOrg, isKeyword: $isKeyword, keyword: $keyword, category: $category, isEZRXBanner: $isEZRXBanner)';
   }
 
   @override
@@ -322,7 +338,9 @@ class _$_BannerItem extends _BannerItem {
                 other.isKeyword == isKeyword) &&
             (identical(other.keyword, keyword) || other.keyword == keyword) &&
             (identical(other.category, category) ||
-                other.category == category));
+                other.category == category) &&
+            (identical(other.isEZRXBanner, isEZRXBanner) ||
+                other.isEZRXBanner == isEZRXBanner));
   }
 
   @override
@@ -340,7 +358,8 @@ class _$_BannerItem extends _BannerItem {
       salesOrg,
       isKeyword,
       keyword,
-      category);
+      category,
+      isEZRXBanner);
 
   @JsonKey(ignore: true)
   @override
@@ -363,7 +382,8 @@ abstract class _BannerItem extends BannerItem {
       required final String salesOrg,
       required final bool isKeyword,
       required final String keyword,
-      required final String category}) = _$_BannerItem;
+      required final String category,
+      required final bool isEZRXBanner}) = _$_BannerItem;
   const _BannerItem._() : super._();
 
   @override
@@ -392,6 +412,8 @@ abstract class _BannerItem extends BannerItem {
   String get keyword;
   @override
   String get category;
+  @override
+  bool get isEZRXBanner;
   @override
   @JsonKey(ignore: true)
   _$$_BannerItemCopyWith<_$_BannerItem> get copyWith =>

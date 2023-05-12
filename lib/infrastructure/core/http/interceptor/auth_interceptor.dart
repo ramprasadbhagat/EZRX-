@@ -22,7 +22,7 @@ class AuthInterceptor extends Interceptor {
   final Config config;
   final AuthQueryMutation authQueryMutation;
   final PushNotificationService pushNotificationService;
-  
+
   AuthInterceptor({
     required this.tokenStorage,
     required this.packageInfoService,
@@ -30,7 +30,6 @@ class AuthInterceptor extends Interceptor {
     required this.config,
     required this.authQueryMutation,
     required this.pushNotificationService,
-    
   });
   @override
   Future<void> onRequest(
@@ -43,7 +42,11 @@ class AuthInterceptor extends Interceptor {
         final isTokenExpired = token.toDomain().isExpired;
         final isNotMockflavor = config.appFlavor != Flavor.mock;
         if (isTokenExpired && isNotMockflavor) await _refreshToken();
-        options.headers['Authorization'] = 'Bearer V2 ${token.access}';
+        if (options.baseUrl == config.getEZReachUrl) {
+          options.headers['Authorization'] = config.eZReachToken;
+        } else {
+          options.headers['Authorization'] = 'Bearer V2 ${token.access}';
+        }
       }
       options.headers['package'] = await packageInfoService.getPackageName();
       options.headers['version'] = await packageInfoService.getVersion();

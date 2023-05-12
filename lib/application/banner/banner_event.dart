@@ -6,5 +6,7 @@ class BannerEvent with _$BannerEvent {
   const factory BannerEvent.fetch({
     required bool isPreSalesOrg,
     required SalesOrganisation salesOrganisation,
+    required String country,
+    required String role,
   }) = _Fetch;
 }

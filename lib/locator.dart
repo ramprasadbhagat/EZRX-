@@ -367,6 +367,17 @@ void setupLocator() {
     ),
   );
 
+  locator.registerLazySingleton(
+    () => HttpService(
+      config: locator<Config>(),
+      interceptors: [
+        locator<AuthInterceptor>(),
+        locator<PerformanceInterceptor>(),
+      ],
+    ),
+    instanceName: 'eZReachHttpService',
+  );
+
   locator.registerLazySingleton(() => DataSourceExceptionHandler());
 
   locator.registerLazySingleton(() => LocalAuthentication());
@@ -527,6 +538,7 @@ void setupLocator() {
     () => BannerRemoteDataSource(
       config: locator<Config>(),
       httpService: locator<HttpService>(),
+      eZReachHttpService: locator.get<HttpService>(instanceName: 'eZReachHttpService'),
       bannerQueryMutation: locator<BannerQueryMutation>(),
       dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
     ),

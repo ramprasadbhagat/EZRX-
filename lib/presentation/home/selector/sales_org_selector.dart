@@ -175,6 +175,8 @@ class SalesOrgSelector extends StatelessWidget {
           BannerEvent.fetch(
             isPreSalesOrg: false,
             salesOrganisation: state.salesOrganisation,
+            country: state.salesOrg.country,
+            role: context.read<UserBloc>().state.user.role.type.getEZReachRoleType,
           ),
         );
 

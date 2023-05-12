@@ -8,4 +8,10 @@ abstract class IBannerRepository {
     required bool isPreSalesOrg,
     required SalesOrganisation salesOrganisation,
   });
+
+  Future<Either<ApiFailure, List<BannerItem>>> getEZReachBanner({
+    required SalesOrganisation salesOrganisation,
+    required String country,
+    required String role,
+  });
 }

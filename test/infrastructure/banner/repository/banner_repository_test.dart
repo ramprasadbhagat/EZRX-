@@ -9,6 +9,7 @@ import 'package:ezrxmobile/domain/banner/entities/banner.dart';
 import 'package:ezrxmobile/infrastructure/banner/datasource/banner_local.dart';
 import 'package:ezrxmobile/infrastructure/banner/datasource/banner_remote.dart';
 import 'package:ezrxmobile/infrastructure/banner/dtos/banner_dto.dart';
+import 'package:ezrxmobile/infrastructure/banner/dtos/ez_reach_banner_dto.dart';
 import 'package:ezrxmobile/infrastructure/banner/repository/banner_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -27,7 +28,7 @@ void main() {
   late BannerRemoteDataSource remoteDataSourceMock;
   late Config configMock;
   late BannerLocalDataSource localDataSourceMock;
-  late List<BannerItem> bannerListMock;
+  late List<BannerItem> bannerListMock, eZReachBannerListMock;
   final salesOrg2601 = SalesOrg('2601');
   final mockSalesOrganisation = SalesOrganisation(
     salesOrg: salesOrg2601,
@@ -36,11 +37,13 @@ void main() {
           .copyWith(shipToInfos: [SalesOrgShipToInfo.empty()])
     ],
   );
+  const mockRole = 'customer';
+  const mockCountry = 'SG';
 
   setUpAll(
     () async {
       WidgetsFlutterBinding.ensureInitialized();
-      configMock = Config()..appFlavor = Flavor.uat;
+      configMock = Config()..appFlavor = Flavor.mock;
       localDataSourceMock = BannerLocalDataSourceMock();
       when(
         () => localDataSourceMock.getBanners(
@@ -54,6 +57,23 @@ void main() {
 
         return List.from(res['data']['getBanners'])
             .map((e) => BannerDto.fromJson(e).toDomain())
+            .toList();
+      });
+
+
+      when(
+        () => localDataSourceMock.getEZReachBanners(
+          salesOrg: mockSalesOrganisation.salesOrg.getOrCrash(),
+          role: mockRole,
+          country: mockCountry,
+        ),
+      ).thenAnswer((invocation) async {
+        final res = json.decode(
+          await rootBundle.loadString('assets/json/getEZReachBannerResponse.json'),
+        );
+
+        return List.from(res['data']['getLiveCampaigns']['data'])
+            .map((e) => EZReachBannerDto.fromJson(e).toDomain())
             .toList();
       });
 
@@ -74,13 +94,19 @@ void main() {
         salesOrg: mockSalesOrganisation.salesOrg.getOrCrash(),
       );
 
+      eZReachBannerListMock = await localDataSourceMock.getEZReachBanners(
+        salesOrg: mockSalesOrganisation.salesOrg.getOrCrash(),
+        role: mockRole,
+        country: mockCountry,
+      );
+
       when(
-        () => remoteDataSourceMock.getBanners(
+        () => localDataSourceMock.getBanners(
           isPreSalesOrg: false,
           salesOrg: mockSalesOrganisation.salesOrg.getOrCrash(),
         ),
       ).thenAnswer(
-        (invocation) async => bannerListMock,
+        (invocation) async => eZReachBannerListMock+bannerListMock,
       );
 
       final result = await repository.getBanner(
@@ -94,10 +120,15 @@ void main() {
           isPreSalesOrg: false,
           salesOrganisation: mockSalesOrganisation,
         ),
-      ).called(1);
+      ).called(2);
     });
 
     test('Get banner from remote failed', () async {
+      final repository = BannerRepository(
+        remoteDataSource: remoteDataSourceMock,
+        config: configMock..appFlavor = Flavor.uat,
+        localDataSource: localDataSourceMock,
+      );
       when(
         () => remoteDataSourceMock.getBanners(
           isPreSalesOrg: false,

@@ -79,6 +79,7 @@ class BannerDto with _$BannerDto {
       isKeyword: isKeyword,
       keyword: keyword,
       category: category,
+      isEZRXBanner:true,
     );
   }
 

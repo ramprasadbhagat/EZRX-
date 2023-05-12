@@ -27,4 +27,48 @@ class BannerQueryMutation {
     }
     ''';
   }
+
+  String getEZReachBannerQuery() {
+    return '''
+      query getLiveCampaigns(
+  \$country: String
+  \$Salesorg: String
+  \$role: String
+  \$targetProduct: String
+  \$sort: String
+) {
+  getLiveCampaigns(
+    request: {
+      country: \$country
+      Salesorg: \$Salesorg
+      role: \$role
+      targetProduct: \$targetProduct
+      sort: \$sort
+    }
+  ) {
+    statusCode
+    statusMessage
+    data {
+      bannerId
+      bannerCampaignName
+      startDate
+      bannerCampaignLocations
+      bannerUrl
+      endDate
+      websiteUrl
+      salesOrg
+      countryCode
+      bannerCountId
+      salesRep
+      status
+      customers
+      companyName
+      targetProduct
+      keyWord
+    }
+  }
+}
+
+    ''';
+  }
 }

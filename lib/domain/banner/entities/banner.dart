@@ -20,6 +20,7 @@ class BannerItem with _$BannerItem {
     required bool isKeyword,
     required String keyword,
     required String category,
+    required bool isEZRXBanner,
   }) = _BannerItem;
 
   factory BannerItem.empty() => const BannerItem(
@@ -36,5 +37,6 @@ class BannerItem with _$BannerItem {
         isKeyword: false,
         keyword: '',
         category: '',
+        isEZRXBanner: true,
       );
 }

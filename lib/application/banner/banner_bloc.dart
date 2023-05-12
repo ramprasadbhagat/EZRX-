@@ -14,8 +14,7 @@ part 'banner_state.dart';
 
 class BannerBloc extends Bloc<BannerEvent, BannerState> {
   final IBannerRepository bannerRepository;
-  BannerBloc({required this.bannerRepository})
-      : super(BannerState.initial()) {
+  BannerBloc({required this.bannerRepository}) : super(BannerState.initial()) {
     on<BannerEvent>(_onEvent);
   }
 
@@ -23,22 +22,56 @@ class BannerBloc extends Bloc<BannerEvent, BannerState> {
     await event.map(
       initialized: (e) async => emit(BannerState.initial()),
       fetch: (e) async {
-        final failureOrSuccess = await bannerRepository.getBanner(
+
+        //Fetch eZReach Banner
+        final eZReachFailureOrSuccess = await bannerRepository.getEZReachBanner(
+          salesOrganisation: e.salesOrganisation,
+          country: e.country,
+          role: e.role,
+        );
+
+        //Fetch eZRx Banner
+        final eZRxFailureOrSuccess = await bannerRepository.getBanner(
           isPreSalesOrg: e.isPreSalesOrg,
           salesOrganisation: e.salesOrganisation,
         );
 
-        failureOrSuccess.fold(
-          (failure) {
-            emit(state.copyWith(
-              banner: [BannerItem.empty()],
-              bannerFailureOrSuccessOption: optionOf(failureOrSuccess),
-            ));
+        eZReachFailureOrSuccess.fold(
+          //eZReach Banner failed
+          (failure) {            
+            eZRxFailureOrSuccess.fold(
+              (failure) => emit(
+                state.copyWith(
+                  banner: [BannerItem.empty()], //Both banners failed
+                  bannerFailureOrSuccessOption: optionOf(eZRxFailureOrSuccess),
+                ),
+              ),
+              (eZRxBannerList) => emit(
+                state.copyWith(
+                  banner: eZRxBannerList, // Only eZRx banner success
+                  bannerFailureOrSuccessOption: none(),
+                ),
+              ),
+            );
           },
-          (banner) => emit(state.copyWith(
-            banner: banner,
-            bannerFailureOrSuccessOption: none(),
-          )),
+
+           //eZReach Banner success
+          (eZReachBannerList) {
+            eZRxFailureOrSuccess.fold(
+              (failure) => emit(
+                state.copyWith(
+                  banner: eZReachBannerList, // Only eZReach banner success
+                  bannerFailureOrSuccessOption: none(),
+                ),
+              ),
+              (eZRxBannerList) => emit(
+                state.copyWith(
+                  banner: eZReachBannerList + eZRxBannerList, // Both banner success
+                  bannerFailureOrSuccessOption: none(),
+                ),
+              ),
+            );
+          },
         );
       },
     );

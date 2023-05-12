@@ -28,23 +28,55 @@ class BannerRepository implements IBannerRepository {
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
-        final banner = await localDataSource.getBanners(
+        final banners = await localDataSource.getBanners(
           isPreSalesOrg: isPreSalesOrg,
           salesOrg: salesOrganisation.salesOrg.getOrCrash(),
         );
 
-        return Right(banner);
+        return Right(banners);
       } catch (e) {
         return Left(FailureHandler.handleFailure(e));
       }
     }
     try {
-      final banner = await remoteDataSource.getBanners(
+      final banners = await remoteDataSource.getBanners(
         isPreSalesOrg: isPreSalesOrg,
         salesOrg: salesOrganisation.salesOrg.getOrCrash(),
       );
 
-      return Right(banner);
+      return Right(banners);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, List<BannerItem>>> getEZReachBanner({
+    required SalesOrganisation salesOrganisation,
+    required String country,
+    required String role,
+  }) async {
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final ezReachBanners = await localDataSource.getEZReachBanners(
+          salesOrg: salesOrganisation.salesOrg.getOrCrash(),
+          country: country,
+          role: role,
+        );
+
+        return Right(ezReachBanners);
+      } catch (e) {
+        return Left(FailureHandler.handleFailure(e));
+      }
+    }
+    try {
+      final ezReachBanners = await remoteDataSource.getEZReachBanners(
+        salesOrg: salesOrganisation.salesOrg.getOrCrash(),
+        country: country,
+        role: role,
+      );
+
+      return Right(ezReachBanners);
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
     }

@@ -33,6 +33,7 @@ void main() {
     remoteDataSource = BannerRemoteDataSource(
         config: Config(),
         httpService: service,
+        eZReachHttpService: service,
         bannerQueryMutation: BannerQueryMutation(),
         dataSourceExceptionHandler: DataSourceExceptionHandler());
 

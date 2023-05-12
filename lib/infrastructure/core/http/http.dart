@@ -33,8 +33,11 @@ class HttpService {
     dynamic data = const {}, // can be Map<String, dynamic> or FormData
     ResponseType responseType = ResponseType.json,
     String apiEndpoint = '',
+    bool overrideBaseUrl = false,
   }) async {
     try {
+      if(overrideBaseUrl) _dio.options.baseUrl = url;
+      
       _dio.options.method = method;
       _dio.options.responseType = responseType;
       _dio.options.headers['apiEndpoint'] = apiEndpoint;

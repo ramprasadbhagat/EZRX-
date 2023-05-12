@@ -25,6 +25,8 @@ void main() {
 
   final mockSalesOrg = SalesOrg('mock-salesOrg');
   final salesOrg2601 = SalesOrg('2601');
+  const role = 'customer';
+  const country = 'SG';
   final mockSalesOrganisation = SalesOrganisation(
       salesOrg: mockSalesOrg, customerInfos: <SalesOrgCustomerInfo>[]);
   final salesOrganisation2601 = SalesOrganisation(
@@ -76,15 +78,25 @@ void main() {
             )).thenAnswer(
           (invocation) async => const Left(ApiFailure.other('mock-error')),
         );
+        when(() => mockBannerRepository.getEZReachBanner(
+              salesOrganisation: mockSalesOrganisation,
+              country: country,
+              role: role,
+            )).thenAnswer(
+          (invocation) async => const Left(ApiFailure.other('mock-error')),
+        );
       },
       act: (bloc) {
         bloc.add(BannerEvent.fetch(
           isPreSalesOrg: false,
           salesOrganisation: mockSalesOrganisation,
+          role: role,
+          country: country,
         ));
       },
       expect: () => [
         BannerState.initial().copyWith(
+            banner: [BannerItem.empty()],
             bannerFailureOrSuccessOption:
                 optionOf(const Left(ApiFailure.other('mock-error'))))
       ],
@@ -102,16 +114,28 @@ void main() {
             )).thenAnswer(
           (invocation) async => Right([BannerItem.empty()]),
         );
+        when(() => mockBannerRepository.getEZReachBanner(
+              salesOrganisation: salesOrganisation2601,
+              country: country,
+              role: role,
+            )).thenAnswer(
+          (invocation) async => Right([BannerItem.empty()]),
+        );
       },
       act: (bloc) {
         bloc.add(BannerEvent.fetch(
           isPreSalesOrg: false,
           salesOrganisation: salesOrganisation2601,
+          role: role,
+          country: country,
         ));
       },
       expect: () => [
         BannerState.initial().copyWith(
-          banner: [BannerItem.empty()],
+          banner: [
+            BannerItem.empty(),
+            BannerItem.empty(),
+          ],
           bannerFailureOrSuccessOption: none(),
         )
       ],
@@ -129,31 +153,10 @@ void main() {
             )).thenAnswer(
           (invocation) async => Right([BannerItem.empty()]),
         );
-      },
-      act: (bloc) {
-        bloc.add(BannerEvent.fetch(
-          isPreSalesOrg: false,
-          salesOrganisation: mockSalesOrganisation,
-        ));
-      },
-      expect: () => [BannerState.initial()],
-    );
-
-    blocTest<BannerBloc, BannerState>(
-      'Test BannerBlocStream for SalesOrg 2601',
-      build: () => BannerBloc(
-        bannerRepository: mockBannerRepository,
-      ),
-      setUp: () {
-        when(() => mockBannerRepository.getBanner(
-              isPreSalesOrg: false,
+        when(() => mockBannerRepository.getEZReachBanner(
               salesOrganisation: mockSalesOrganisation,
-            )).thenAnswer(
-          (invocation) async => Right([BannerItem.empty()]),
-        );
-        when(() => mockBannerRepository.getBanner(
-              isPreSalesOrg: false,
-              salesOrganisation: salesOrganisation2601,
+              country: country,
+              role: role,
             )).thenAnswer(
           (invocation) async => Right([BannerItem.empty()]),
         );
@@ -162,9 +165,18 @@ void main() {
         bloc.add(BannerEvent.fetch(
           isPreSalesOrg: false,
           salesOrganisation: mockSalesOrganisation,
+          role: role,
+          country: country,
         ));
       },
-      expect: () => [BannerState.initial()],
+      expect: () => [
+        BannerState.initial().copyWith(
+          banner: [
+            BannerItem.empty(),
+            BannerItem.empty(),
+          ],
+        )
+      ],
     );
   });
 }
