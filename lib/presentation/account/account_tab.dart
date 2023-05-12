@@ -33,9 +33,9 @@ class AccountTab extends StatelessWidget {
               const ProfileTile(),
               const _LoginOnBehalfTile(),
               const _SupportTile(),
+              const _AdminPoAttachment(),
               const _PaymentConfigurationTile(),
               const _SettingsTile(),
-              const _AdminPoAttachment(),
             ],
           ).toList(),
         ),
@@ -97,7 +97,7 @@ class _PaymentConfigurationTile extends StatelessWidget {
         return state.user.role.type.isRootAdmin
             ? ListTile(
                 key: const Key('paymentConfigurationTile'),
-                leading: const Icon(Icons.settings_outlined),
+                leading: const Icon(Icons.payments_outlined),
                 title: Text(
                   'Payment Configuration',
                   locale: context.locale,

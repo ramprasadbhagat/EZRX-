@@ -1,19 +1,12 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
-import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
-import 'package:ezrxmobile/application/returns/return_summary_filter/return_summary_filter_bloc.dart';
-import 'package:ezrxmobile/application/returns/returns_overview/returns_overview_bloc.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
-import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/core/custom_expansion_tile.dart'
     as custom;
 import 'package:ezrxmobile/presentation/home/expansion_tiles/tile_card.dart';
 import 'package:ezrxmobile/presentation/home/home_tab.dart';
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
-import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -45,7 +38,7 @@ class ReturnsExpansionTile extends StatelessWidget {
             ),
           ),
           children: <Widget>[
-            const _ReturnsOverviewQuantities(),
+            // const _ReturnsOverviewQuantities(), // hide this for now
             GridView.count(
               crossAxisCount: 3,
               childAspectRatio: (1 / .6),
@@ -108,144 +101,144 @@ class ReturnsExpansionTile extends StatelessWidget {
   }
 }
 
-class _ReturnsOverviewQuantities extends StatelessWidget {
-  const _ReturnsOverviewQuantities({
-    Key? key,
-  }) : super(key: key);
+// class _ReturnsOverviewQuantities extends StatelessWidget {
+//   const _ReturnsOverviewQuantities({
+//     Key? key,
+//   }) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    final roleType = context.read<UserBloc>().state.user.role.type;
+//   @override
+//   Widget build(BuildContext context) {
+//     final roleType = context.read<UserBloc>().state.user.role.type;
 
-    return (roleType.isReturnsOverviewAccessible)
-        ? BlocBuilder<ReturnsOverviewBloc, ReturnsOverviewState>(
-            buildWhen: (previous, current) =>
-                previous.returnRequestsOverview !=
-                current.returnRequestsOverview,
-            builder: (context, state) {
-              return Card(
-                margin: const EdgeInsets.fromLTRB(12, 4, 12, 0),
-                child: Row(
-                  children: [
-                    _RequestQuantity(
-                      quantity: state.returnRequestsOverview.requestSubmitted,
-                      text: 'Submitted Requests',
-                      onTap: () {
-                        context.read<ReturnSummaryFilterBloc>().add(
-                              ReturnSummaryFilterEvent.sortByChanged(
-                                sortBy: ReturnSummaryStatus('Active'),
-                              ),
-                            );
-                        context.router.push(
-                          ReturnSummaryRoute(),
-                        );
-                      },
-                      isPendingApproval: false,
-                    ),
-                    _RequestQuantity(
-                      quantity: state.returnRequestsOverview.requestRejected,
-                      text: 'Completed Requests',
-                      onTap: () {
-                        context.read<ReturnSummaryFilterBloc>().add(
-                              ReturnSummaryFilterEvent.sortByChanged(
-                                sortBy: ReturnSummaryStatus('Completed'),
-                              ),
-                            );
-                        context.router.push(
-                          ReturnSummaryRoute(),
-                        );
-                      },
-                      isPendingApproval: false,
-                    ),
-                    _RequestQuantity(
-                      quantity:
-                          state.returnRequestsOverview.requestPendingApproval,
-                      text: 'Active Requests',
-                      onTap: () {
-                        context.read<ReturnSummaryFilterBloc>().add(
-                              ReturnSummaryFilterEvent.sortByChanged(
-                                sortBy: ReturnSummaryStatus('Active'),
-                              ),
-                            );
-                        context.router.push(
-                          ReturnSummaryRoute(),
-                        );
-                      },
-                      isPendingApproval: false,
-                    ),
-                    _RequestQuantity(
-                      quantity: state.returnRequestsOverview.requestForApproval,
-                      text: 'Pending Approvals',
-                      onTap: () {
-                        context.read<ReturnApproverFilterBloc>().add(
-                              ReturnApproverFilterEvent.sortByChanged(
-                                FilterStatus('PENDING'),
-                              ),
-                            );
-                        context.router.push(
-                          ApproverActionsRoute(),
-                        );
-                      },
-                      isPendingApproval: true,
-                    ),
-                  ],
-                ),
-              );
-            },
-          )
-        : const SizedBox.shrink();
-  }
-}
+//     return (roleType.isReturnsOverviewAccessible)
+//         ? BlocBuilder<ReturnsOverviewBloc, ReturnsOverviewState>(
+//             buildWhen: (previous, current) =>
+//                 previous.returnRequestsOverview !=
+//                 current.returnRequestsOverview,
+//             builder: (context, state) {
+//               return Card(
+//                 margin: const EdgeInsets.fromLTRB(12, 4, 12, 0),
+//                 child: Row(
+//                   children: [
+//                     _RequestQuantity(
+//                       quantity: state.returnRequestsOverview.requestSubmitted,
+//                       text: 'Submitted Requests',
+//                       onTap: () {
+//                         context.read<ReturnSummaryFilterBloc>().add(
+//                               ReturnSummaryFilterEvent.sortByChanged(
+//                                 sortBy: ReturnSummaryStatus('Active'),
+//                               ),
+//                             );
+//                         context.router.push(
+//                           ReturnSummaryRoute(),
+//                         );
+//                       },
+//                       isPendingApproval: false,
+//                     ),
+//                     _RequestQuantity(
+//                       quantity: state.returnRequestsOverview.requestRejected,
+//                       text: 'Completed Requests',
+//                       onTap: () {
+//                         context.read<ReturnSummaryFilterBloc>().add(
+//                               ReturnSummaryFilterEvent.sortByChanged(
+//                                 sortBy: ReturnSummaryStatus('Completed'),
+//                               ),
+//                             );
+//                         context.router.push(
+//                           ReturnSummaryRoute(),
+//                         );
+//                       },
+//                       isPendingApproval: false,
+//                     ),
+//                     _RequestQuantity(
+//                       quantity:
+//                           state.returnRequestsOverview.requestPendingApproval,
+//                       text: 'Active Requests',
+//                       onTap: () {
+//                         context.read<ReturnSummaryFilterBloc>().add(
+//                               ReturnSummaryFilterEvent.sortByChanged(
+//                                 sortBy: ReturnSummaryStatus('Active'),
+//                               ),
+//                             );
+//                         context.router.push(
+//                           ReturnSummaryRoute(),
+//                         );
+//                       },
+//                       isPendingApproval: false,
+//                     ),
+//                     _RequestQuantity(
+//                       quantity: state.returnRequestsOverview.requestForApproval,
+//                       text: 'Pending Approvals',
+//                       onTap: () {
+//                         context.read<ReturnApproverFilterBloc>().add(
+//                               ReturnApproverFilterEvent.sortByChanged(
+//                                 FilterStatus('PENDING'),
+//                               ),
+//                             );
+//                         context.router.push(
+//                           ApproverActionsRoute(),
+//                         );
+//                       },
+//                       isPendingApproval: true,
+//                     ),
+//                   ],
+//                 ),
+//               );
+//             },
+//           )
+//         : const SizedBox.shrink();
+//   }
+// }
 
-class _RequestQuantity extends StatelessWidget {
-  final int quantity;
-  final String text;
-  final bool isPendingApproval;
-  final VoidCallback onTap;
-  const _RequestQuantity({
-    Key? key,
-    required this.quantity,
-    required this.text,
-    required this.isPendingApproval,
-    required this.onTap,
-  }) : super(key: key);
+// class _RequestQuantity extends StatelessWidget {
+//   final int quantity;
+//   final String text;
+//   final bool isPendingApproval;
+//   final VoidCallback onTap;
+//   const _RequestQuantity({
+//     Key? key,
+//     required this.quantity,
+//     required this.text,
+//     required this.isPendingApproval,
+//     required this.onTap,
+//   }) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: Padding(
-        padding: const EdgeInsets.all(5.0),
-        child: Column(
-          children: [
-            GestureDetector(
-              onTap: onTap,
-              child: Container(
-                margin: const EdgeInsets.all(8),
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: isPendingApproval
-                      ? ZPColors.lightRed
-                      : ZPColors.secondaryBGColor,
-                ),
-                alignment: Alignment.center,
-                child: Text(
-                  quantity.toString(),
-                  style: Theme.of(context).textTheme.titleLarge,
-                ),
-              ),
-            ),
-            Text(
-              text.tr(),
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.titleSmall,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Expanded(
+//       child: Padding(
+//         padding: const EdgeInsets.all(5.0),
+//         child: Column(
+//           children: [
+//             GestureDetector(
+//               onTap: onTap,
+//               child: Container(
+//                 margin: const EdgeInsets.all(8),
+//                 padding: const EdgeInsets.all(8),
+//                 decoration: BoxDecoration(
+//                   shape: BoxShape.circle,
+//                   color: isPendingApproval
+//                       ? ZPColors.lightRed
+//                       : ZPColors.secondaryBGColor,
+//                 ),
+//                 alignment: Alignment.center,
+//                 child: Text(
+//                   quantity.toString(),
+//                   style: Theme.of(context).textTheme.titleLarge,
+//                 ),
+//               ),
+//             ),
+//             Text(
+//               text.tr(),
+//               textAlign: TextAlign.center,
+//               style: Theme.of(context).textTheme.titleSmall,
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
 
 const requestReturnTile = HomePageTile(
   key: Key('requestReturnTile'),
