@@ -401,11 +401,12 @@ class __$$_UsageCodeStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_UsageCodeState implements _UsageCodeState {
+class _$_UsageCodeState extends _UsageCodeState {
   const _$_UsageCodeState(
       {required final List<Usage> usage,
       required this.usageFailureOrSuccessOption})
-      : _usage = usage;
+      : _usage = usage,
+        super._();
 
   final List<Usage> _usage;
   @override
@@ -446,11 +447,12 @@ class _$_UsageCodeState implements _UsageCodeState {
       __$$_UsageCodeStateCopyWithImpl<_$_UsageCodeState>(this, _$identity);
 }
 
-abstract class _UsageCodeState implements UsageCodeState {
+abstract class _UsageCodeState extends UsageCodeState {
   const factory _UsageCodeState(
       {required final List<Usage> usage,
       required final Option<Either<ApiFailure, dynamic>>
           usageFailureOrSuccessOption}) = _$_UsageCodeState;
+  const _UsageCodeState._() : super._();
 
   @override
   List<Usage> get usage;

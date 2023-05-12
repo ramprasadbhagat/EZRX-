@@ -2,7 +2,11 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_schedule.dart';
+import 'package:ezrxmobile/domain/returns/entities/usage.dart';
+import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 
 part 'return_item.freezed.dart';
 
@@ -37,6 +41,10 @@ class ReturnItem with _$ReturnItem {
     required int balanceQuantity,
     required double balanceValue,
     required bool outsidePolicy,
+    @Default(false) bool isSelected,
+    required ReturnQuantity returnQuantity,
+    required Usage usage,
+    required List<PoDocuments> poDocuments,
   }) = _ReturnItem;
 
   factory ReturnItem.empty() => ReturnItem(
@@ -69,5 +77,20 @@ class ReturnItem with _$ReturnItem {
         balanceQuantity: 0,
         balanceValue: 0.0,
         outsidePolicy: false,
+        isSelected: false,
+        poDocuments: [],
+        returnQuantity: ReturnQuantity(''),
+        usage: Usage.empty(),
       );
+
+  bool get isReturnQuantityValid => returnQuantity.getIntValue != 0
+      ? returnQuantity.getIntValue > balanceQuantity
+      : true;
+
+  List<PoDocuments> updatedDocumentList(String attachmentName) => attachmentName.isNotEmpty ? 
+      poDocuments.where((element) => element.name != attachmentName).toList() : [];
+
+  List<String> get poDocumentUrl => poDocuments.map((e) => e.url).toList();
+
+  String get uniqueId => '$materialNumber$assignmentNumber';
 }

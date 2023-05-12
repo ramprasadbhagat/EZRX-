@@ -1,7 +1,6 @@
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
@@ -13,15 +12,21 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ezrxmobile/presentation/core/custom_expansion_tile.dart'
     as custom;
 
+import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
+
+import 'package:ezrxmobile/application/returns/request_return/request_return_bloc.dart';
+
 class PoAttachment extends StatefulWidget {
   final PoAttachMentRenderMode poAttachMentRenderMode;
   final List<PoDocuments> poDocuments;
   final List<PoDocuments> uploadingPocDocument;
+  final String uniqueId;
   const PoAttachment({
     Key? key,
     required this.poDocuments,
     required this.poAttachMentRenderMode,
     required this.uploadingPocDocument,
+    this.uniqueId = '',
   }) : super(key: key);
 
   @override
@@ -76,6 +81,7 @@ class _PoAttachmentState extends State<PoAttachment> {
             );
           },
           child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               if (!edit)
                 Expanded(
@@ -117,6 +123,7 @@ class _PoAttachmentState extends State<PoAttachment> {
                                       key: ValueKey(poDocuments.name),
                                       poDocuments: poDocuments,
                                       edit: edit,
+                                      uniqueId: widget.uniqueId,
                                     ),
                                   ),
                                 ],
@@ -133,6 +140,7 @@ class _PoAttachmentState extends State<PoAttachment> {
                               ),
                               poDocuments: e,
                               edit: false,
+                              uniqueId: widget.uniqueId,
                             ),
                           )
                           .toList(),
@@ -171,8 +179,9 @@ class _PoAttachmentState extends State<PoAttachment> {
                                 )
                               : const SizedBox.shrink(),
                         if (edit && widget.poDocuments.isNotEmpty)
-                          const _PoUploadDeleteAll(
-                            key: ValueKey('deleteAll'),
+                          _PoUploadDeleteAll(
+                            key: const ValueKey('deleteAll'),
+                            uniqueId: widget.uniqueId,
                           ),
                         if (widget.poDocuments.isNotEmpty)
                           InkWell(
@@ -228,7 +237,6 @@ class _PoAttachmentState extends State<PoAttachment> {
     );
   }
 
-
   int get listLength {
     final listLen = widget.poDocuments.length;
     if (widget.poAttachMentRenderMode == PoAttachMentRenderMode.edit) {
@@ -245,20 +253,33 @@ class _PoAttachmentState extends State<PoAttachment> {
 
 class _PoUploadDeleteIcon extends StatelessWidget {
   final PoDocuments poDocument;
+  final String uniqueId;
   const _PoUploadDeleteIcon({
     Key? key,
     required this.poDocument,
+    required this.uniqueId,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       key: const ValueKey('poAttachementDeleteIcon'),
-      onTap: () => context.read<AdditionalDetailsBloc>().add(
-            AdditionalDetailsEvent.removePoDocument(
-              poDocument: poDocument,
-            ),
-          ),
+      onTap: () {
+        if (uniqueId.isNotEmpty) {
+          context
+              .read<RequestReturnBloc>()
+              .add(RequestReturnEvent.deleteAttachment(
+                poDocuments: poDocument,
+                uniqueId: uniqueId,
+              ));
+        } else {
+          context
+              .read<AdditionalDetailsBloc>()
+              .add(AdditionalDetailsEvent.removePoDocument(
+                poDocument: poDocument,
+              ));
+        }
+      },
       child: const Icon(
         Icons.delete_outline_outlined,
         size: 18,
@@ -268,15 +289,28 @@ class _PoUploadDeleteIcon extends StatelessWidget {
 }
 
 class _PoUploadDeleteAll extends StatelessWidget {
-  const _PoUploadDeleteAll({Key? key}) : super(key: key);
+  final String uniqueId;
+  const _PoUploadDeleteAll({
+    Key? key,
+    required this.uniqueId,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        context.read<AdditionalDetailsBloc>().add(
-              const AdditionalDetailsEvent.removeAllPoDocument(),
-            );
+        if (uniqueId.isNotEmpty) {
+          context.read<RequestReturnBloc>().add(
+                RequestReturnEvent.deleteAttachment(
+                  poDocuments: PoDocuments.empty(),
+                  uniqueId: uniqueId,
+                ),
+              );
+        } else {
+          context.read<AdditionalDetailsBloc>().add(
+                const AdditionalDetailsEvent.removeAllPoDocument(),
+              );
+        }
       },
       child: Row(
         children: [
@@ -363,10 +397,12 @@ class PoAttachmentDownloadIndicator extends StatelessWidget {
 class _PoAttachmentWidget extends StatelessWidget {
   final PoDocuments poDocuments;
   final bool edit;
+  final String uniqueId;
   const _PoAttachmentWidget({
     Key? key,
     required this.poDocuments,
     required this.edit,
+    required this.uniqueId,
   }) : super(key: key);
 
   @override
@@ -396,6 +432,7 @@ class _PoAttachmentWidget extends StatelessWidget {
               WidgetSpan(
                 child: _PoUploadDeleteIcon(
                   poDocument: poDocuments,
+                  uniqueId: uniqueId,
                 ),
               ),
           ],

@@ -135,3 +135,27 @@ class PriceRange extends ValueObject<double> {
 
   const PriceRange._(this.value);
 }
+
+class ReturnQuantity extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory ReturnQuantity(String input) {
+    return ReturnQuantity._(Right(input));
+  }
+
+
+  factory ReturnQuantity.validatedValue(int balanceQuantity, String inputValue) {
+    return ReturnQuantity._(validateStringNotEmpty(inputValue)
+        .flatMap((input) => validateInputIsBiggerThanMaxValue(inputValue, balanceQuantity)));
+  }
+
+
+  int get getIntValue => getIntegerReturnQuantity(value.getOrElse(() => ''));
+
+  String returnValue(double unitPrice) =>
+      (getIntegerReturnQuantity(value.getOrElse(() => '')) * unitPrice)
+          .toStringAsFixed(2);
+
+  const ReturnQuantity._(this.value);
+}

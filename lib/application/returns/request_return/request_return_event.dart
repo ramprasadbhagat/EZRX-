@@ -21,4 +21,38 @@ class RequestReturnEvent with _$RequestReturnEvent {
   const factory RequestReturnEvent.sortByDate({
     required String sortDirection,
   }) = _SortByDate;
+
+  const factory RequestReturnEvent.updateReturnDetails({
+    required ReturnItem updatedItem,
+  }) = _UpdateReturnDetails;
+
+  const factory RequestReturnEvent.uploadAttachments({
+    required List<PoDocuments> poDocuments,
+    required String uniqueId,
+  }) = _UploadAttachments;
+
+  const factory RequestReturnEvent.deleteAttachment({
+    required PoDocuments poDocuments,
+    required String uniqueId,
+  }) = _DeletePoAttachment;
+
+  const factory RequestReturnEvent.updateReturnRequestReferenceNumber({
+    required String referenceNumber,
+  }) = _UpdateReturnRequestReferenceNumber;
+
+  const factory RequestReturnEvent.updateSpecialInstructions({
+    required String specialInstructions,
+  }) = _UpdateSpecialInstructions;
+
+  const factory RequestReturnEvent.initializeSelectedReturnItems() = _InitializeSelectedReturnItems;
+}
+
+
+enum RequestReturnLabel {
+  balanceQuantity,
+  returnQuantity,
+  returnValue,
+  principal,
+  referenceNumber,
+  specialInstructions,
 }

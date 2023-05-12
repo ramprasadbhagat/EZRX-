@@ -1,4 +1,3 @@
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
@@ -10,10 +9,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class ReturnSummaryDetailsAttachmentSection extends StatefulWidget {
   final List<PoDocuments> poDocuments;
   final AttachmentsUploadMode attachmentsUploadMode;
+  final int keyFlex;
+  final int valueFlex;
 
-  const ReturnSummaryDetailsAttachmentSection({ Key? key,
+  const ReturnSummaryDetailsAttachmentSection({
+    Key? key,
+    this.keyFlex = 2,
+    this.valueFlex = 3,
     required this.poDocuments,
-    required this.attachmentsUploadMode,}) : super(key: key);
+    required this.attachmentsUploadMode,
+  }) : super(key: key);
 
   @override
   State<ReturnSummaryDetailsAttachmentSection> createState() =>
@@ -52,7 +57,7 @@ class _ReturnSummaryDetailsAttachmentState
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
-                flex: 3,
+                flex: widget.keyFlex,
                 child: Text(
                   widget.attachmentsUploadMode == AttachmentsUploadMode.user
                       ? 'Attachments '
@@ -63,14 +68,25 @@ class _ReturnSummaryDetailsAttachmentState
                 ).tr(),
               ),
               Expanded(
-                flex: 5,
-                child: Column(
+                flex: widget.valueFlex,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    ...widget.poDocuments.map((poDocuments) {
-                      return _ReturnSummaryAttachmentWidget(
-                        poDocuments: poDocuments,
-                      );
-                    }).toList(),
+                    Text(
+                      ': ',
+                      style: Theme.of(context).textTheme.titleSmall,
+                    ),
+                    Expanded(
+                      child: Column(
+                        children: [
+                          ...widget.poDocuments.map((poDocuments) {
+                            return _ReturnSummaryAttachmentWidget(
+                              poDocuments: poDocuments,
+                            );
+                          }).toList(),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -80,7 +96,6 @@ class _ReturnSummaryDetailsAttachmentState
       ],
     );
   }
-
 }
 
 class _ReturnSummaryAttachmentDownloadIndicator extends StatelessWidget {
@@ -117,9 +132,9 @@ class _ReturnSummaryAttachmentDownloadIndicator extends StatelessWidget {
             ? Container(
                 height: 8,
                 width: 8,
-                margin: const EdgeInsets.symmetric(
-                  horizontal: 6,
-                  vertical: 2,
+                margin: const EdgeInsets.only(
+                  right: 6,
+                  top: 2,
                 ),
                 child: const Icon(
                   Icons.attach_file,
@@ -154,6 +169,7 @@ class _ReturnSummaryAttachmentWidget extends StatelessWidget {
       },
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _ReturnSummaryAttachmentDownloadIndicator(
             poDocuments: poDocuments,

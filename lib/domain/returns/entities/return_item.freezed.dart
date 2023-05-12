@@ -42,6 +42,10 @@ mixin _$ReturnItem {
   int get balanceQuantity => throw _privateConstructorUsedError;
   double get balanceValue => throw _privateConstructorUsedError;
   bool get outsidePolicy => throw _privateConstructorUsedError;
+  bool get isSelected => throw _privateConstructorUsedError;
+  ReturnQuantity get returnQuantity => throw _privateConstructorUsedError;
+  Usage get usage => throw _privateConstructorUsedError;
+  List<PoDocuments> get poDocuments => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ReturnItemCopyWith<ReturnItem> get copyWith =>
@@ -80,9 +84,14 @@ abstract class $ReturnItemCopyWith<$Res> {
       String suggestedPriceOverride,
       int balanceQuantity,
       double balanceValue,
-      bool outsidePolicy});
+      bool outsidePolicy,
+      bool isSelected,
+      ReturnQuantity returnQuantity,
+      Usage usage,
+      List<PoDocuments> poDocuments});
 
   $PrincipalDataCopyWith<$Res> get principalData;
+  $UsageCopyWith<$Res> get usage;
 }
 
 /// @nodoc
@@ -124,6 +133,10 @@ class _$ReturnItemCopyWithImpl<$Res, $Val extends ReturnItem>
     Object? balanceQuantity = null,
     Object? balanceValue = null,
     Object? outsidePolicy = null,
+    Object? isSelected = null,
+    Object? returnQuantity = null,
+    Object? usage = null,
+    Object? poDocuments = null,
   }) {
     return _then(_value.copyWith(
       assignmentNumber: null == assignmentNumber
@@ -230,6 +243,22 @@ class _$ReturnItemCopyWithImpl<$Res, $Val extends ReturnItem>
           ? _value.outsidePolicy
           : outsidePolicy // ignore: cast_nullable_to_non_nullable
               as bool,
+      isSelected: null == isSelected
+          ? _value.isSelected
+          : isSelected // ignore: cast_nullable_to_non_nullable
+              as bool,
+      returnQuantity: null == returnQuantity
+          ? _value.returnQuantity
+          : returnQuantity // ignore: cast_nullable_to_non_nullable
+              as ReturnQuantity,
+      usage: null == usage
+          ? _value.usage
+          : usage // ignore: cast_nullable_to_non_nullable
+              as Usage,
+      poDocuments: null == poDocuments
+          ? _value.poDocuments
+          : poDocuments // ignore: cast_nullable_to_non_nullable
+              as List<PoDocuments>,
     ) as $Val);
   }
 
@@ -238,6 +267,14 @@ class _$ReturnItemCopyWithImpl<$Res, $Val extends ReturnItem>
   $PrincipalDataCopyWith<$Res> get principalData {
     return $PrincipalDataCopyWith<$Res>(_value.principalData, (value) {
       return _then(_value.copyWith(principalData: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UsageCopyWith<$Res> get usage {
+    return $UsageCopyWith<$Res>(_value.usage, (value) {
+      return _then(_value.copyWith(usage: value) as $Val);
     });
   }
 }
@@ -276,10 +313,16 @@ abstract class _$$_ReturnItemCopyWith<$Res>
       String suggestedPriceOverride,
       int balanceQuantity,
       double balanceValue,
-      bool outsidePolicy});
+      bool outsidePolicy,
+      bool isSelected,
+      ReturnQuantity returnQuantity,
+      Usage usage,
+      List<PoDocuments> poDocuments});
 
   @override
   $PrincipalDataCopyWith<$Res> get principalData;
+  @override
+  $UsageCopyWith<$Res> get usage;
 }
 
 /// @nodoc
@@ -319,6 +362,10 @@ class __$$_ReturnItemCopyWithImpl<$Res>
     Object? balanceQuantity = null,
     Object? balanceValue = null,
     Object? outsidePolicy = null,
+    Object? isSelected = null,
+    Object? returnQuantity = null,
+    Object? usage = null,
+    Object? poDocuments = null,
   }) {
     return _then(_$_ReturnItem(
       assignmentNumber: null == assignmentNumber
@@ -425,6 +472,22 @@ class __$$_ReturnItemCopyWithImpl<$Res>
           ? _value.outsidePolicy
           : outsidePolicy // ignore: cast_nullable_to_non_nullable
               as bool,
+      isSelected: null == isSelected
+          ? _value.isSelected
+          : isSelected // ignore: cast_nullable_to_non_nullable
+              as bool,
+      returnQuantity: null == returnQuantity
+          ? _value.returnQuantity
+          : returnQuantity // ignore: cast_nullable_to_non_nullable
+              as ReturnQuantity,
+      usage: null == usage
+          ? _value.usage
+          : usage // ignore: cast_nullable_to_non_nullable
+              as Usage,
+      poDocuments: null == poDocuments
+          ? _value._poDocuments
+          : poDocuments // ignore: cast_nullable_to_non_nullable
+              as List<PoDocuments>,
     ));
   }
 }
@@ -458,8 +521,13 @@ class _$_ReturnItem extends _ReturnItem {
       required this.suggestedPriceOverride,
       required this.balanceQuantity,
       required this.balanceValue,
-      required this.outsidePolicy})
+      required this.outsidePolicy,
+      this.isSelected = false,
+      required this.returnQuantity,
+      required this.usage,
+      required final List<PoDocuments> poDocuments})
       : _schedules = schedules,
+        _poDocuments = poDocuments,
         super._();
 
   @override
@@ -520,10 +588,24 @@ class _$_ReturnItem extends _ReturnItem {
   final double balanceValue;
   @override
   final bool outsidePolicy;
+  @override
+  @JsonKey()
+  final bool isSelected;
+  @override
+  final ReturnQuantity returnQuantity;
+  @override
+  final Usage usage;
+  final List<PoDocuments> _poDocuments;
+  @override
+  List<PoDocuments> get poDocuments {
+    if (_poDocuments is EqualUnmodifiableListView) return _poDocuments;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_poDocuments);
+  }
 
   @override
   String toString() {
-    return 'ReturnItem(assignmentNumber: $assignmentNumber, referenceDocument: $referenceDocument, purchaseNumberC: $purchaseNumberC, poMethod: $poMethod, createdDate: $createdDate, currency: $currency, plant: $plant, materialNumber: $materialNumber, materialDescription: $materialDescription, itemNumber: $itemNumber, targetQuantity: $targetQuantity, storeLocation: $storeLocation, batch: $batch, highLevelItemCode: $highLevelItemCode, orderReason: $orderReason, priceDate: $priceDate, unitPrice: $unitPrice, totalPrice: $totalPrice, principalData: $principalData, expiryDate: $expiryDate, eligibleForReturn: $eligibleForReturn, schedules: $schedules, suggestedPriceOverride: $suggestedPriceOverride, balanceQuantity: $balanceQuantity, balanceValue: $balanceValue, outsidePolicy: $outsidePolicy)';
+    return 'ReturnItem(assignmentNumber: $assignmentNumber, referenceDocument: $referenceDocument, purchaseNumberC: $purchaseNumberC, poMethod: $poMethod, createdDate: $createdDate, currency: $currency, plant: $plant, materialNumber: $materialNumber, materialDescription: $materialDescription, itemNumber: $itemNumber, targetQuantity: $targetQuantity, storeLocation: $storeLocation, batch: $batch, highLevelItemCode: $highLevelItemCode, orderReason: $orderReason, priceDate: $priceDate, unitPrice: $unitPrice, totalPrice: $totalPrice, principalData: $principalData, expiryDate: $expiryDate, eligibleForReturn: $eligibleForReturn, schedules: $schedules, suggestedPriceOverride: $suggestedPriceOverride, balanceQuantity: $balanceQuantity, balanceValue: $balanceValue, outsidePolicy: $outsidePolicy, isSelected: $isSelected, returnQuantity: $returnQuantity, usage: $usage, poDocuments: $poDocuments)';
   }
 
   @override
@@ -580,7 +662,14 @@ class _$_ReturnItem extends _ReturnItem {
             (identical(other.balanceValue, balanceValue) ||
                 other.balanceValue == balanceValue) &&
             (identical(other.outsidePolicy, outsidePolicy) ||
-                other.outsidePolicy == outsidePolicy));
+                other.outsidePolicy == outsidePolicy) &&
+            (identical(other.isSelected, isSelected) ||
+                other.isSelected == isSelected) &&
+            (identical(other.returnQuantity, returnQuantity) ||
+                other.returnQuantity == returnQuantity) &&
+            (identical(other.usage, usage) || other.usage == usage) &&
+            const DeepCollectionEquality()
+                .equals(other._poDocuments, _poDocuments));
   }
 
   @override
@@ -611,7 +700,11 @@ class _$_ReturnItem extends _ReturnItem {
         suggestedPriceOverride,
         balanceQuantity,
         balanceValue,
-        outsidePolicy
+        outsidePolicy,
+        isSelected,
+        returnQuantity,
+        usage,
+        const DeepCollectionEquality().hash(_poDocuments)
       ]);
 
   @JsonKey(ignore: true)
@@ -648,7 +741,11 @@ abstract class _ReturnItem extends ReturnItem {
       required final String suggestedPriceOverride,
       required final int balanceQuantity,
       required final double balanceValue,
-      required final bool outsidePolicy}) = _$_ReturnItem;
+      required final bool outsidePolicy,
+      final bool isSelected,
+      required final ReturnQuantity returnQuantity,
+      required final Usage usage,
+      required final List<PoDocuments> poDocuments}) = _$_ReturnItem;
   const _ReturnItem._() : super._();
 
   @override
@@ -703,6 +800,14 @@ abstract class _ReturnItem extends ReturnItem {
   double get balanceValue;
   @override
   bool get outsidePolicy;
+  @override
+  bool get isSelected;
+  @override
+  ReturnQuantity get returnQuantity;
+  @override
+  Usage get usage;
+  @override
+  List<PoDocuments> get poDocuments;
   @override
   @JsonKey(ignore: true)
   _$$_ReturnItemCopyWith<_$_ReturnItem> get copyWith =>

@@ -32,6 +32,16 @@ mixin _$RequestReturnEvent {
             RequestReturnFilter requestReturnFilter)
         loadMore,
     required TResult Function(String sortDirection) sortByDate,
+    required TResult Function(ReturnItem updatedItem) updateReturnDetails,
+    required TResult Function(List<PoDocuments> poDocuments, String uniqueId)
+        uploadAttachments,
+    required TResult Function(PoDocuments poDocuments, String uniqueId)
+        deleteAttachment,
+    required TResult Function(String referenceNumber)
+        updateReturnRequestReferenceNumber,
+    required TResult Function(String specialInstructions)
+        updateSpecialInstructions,
+    required TResult Function() initializeSelectedReturnItems,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,6 +60,15 @@ mixin _$RequestReturnEvent {
             RequestReturnFilter requestReturnFilter)?
         loadMore,
     TResult? Function(String sortDirection)? sortByDate,
+    TResult? Function(ReturnItem updatedItem)? updateReturnDetails,
+    TResult? Function(List<PoDocuments> poDocuments, String uniqueId)?
+        uploadAttachments,
+    TResult? Function(PoDocuments poDocuments, String uniqueId)?
+        deleteAttachment,
+    TResult? Function(String referenceNumber)?
+        updateReturnRequestReferenceNumber,
+    TResult? Function(String specialInstructions)? updateSpecialInstructions,
+    TResult? Function()? initializeSelectedReturnItems,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -68,6 +87,15 @@ mixin _$RequestReturnEvent {
             RequestReturnFilter requestReturnFilter)?
         loadMore,
     TResult Function(String sortDirection)? sortByDate,
+    TResult Function(ReturnItem updatedItem)? updateReturnDetails,
+    TResult Function(List<PoDocuments> poDocuments, String uniqueId)?
+        uploadAttachments,
+    TResult Function(PoDocuments poDocuments, String uniqueId)?
+        deleteAttachment,
+    TResult Function(String referenceNumber)?
+        updateReturnRequestReferenceNumber,
+    TResult Function(String specialInstructions)? updateSpecialInstructions,
+    TResult Function()? initializeSelectedReturnItems,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -77,6 +105,15 @@ mixin _$RequestReturnEvent {
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_SortByDate value) sortByDate,
+    required TResult Function(_UpdateReturnDetails value) updateReturnDetails,
+    required TResult Function(_UploadAttachments value) uploadAttachments,
+    required TResult Function(_DeletePoAttachment value) deleteAttachment,
+    required TResult Function(_UpdateReturnRequestReferenceNumber value)
+        updateReturnRequestReferenceNumber,
+    required TResult Function(_UpdateSpecialInstructions value)
+        updateSpecialInstructions,
+    required TResult Function(_InitializeSelectedReturnItems value)
+        initializeSelectedReturnItems,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -85,6 +122,15 @@ mixin _$RequestReturnEvent {
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_SortByDate value)? sortByDate,
+    TResult? Function(_UpdateReturnDetails value)? updateReturnDetails,
+    TResult? Function(_UploadAttachments value)? uploadAttachments,
+    TResult? Function(_DeletePoAttachment value)? deleteAttachment,
+    TResult? Function(_UpdateReturnRequestReferenceNumber value)?
+        updateReturnRequestReferenceNumber,
+    TResult? Function(_UpdateSpecialInstructions value)?
+        updateSpecialInstructions,
+    TResult? Function(_InitializeSelectedReturnItems value)?
+        initializeSelectedReturnItems,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -93,6 +139,15 @@ mixin _$RequestReturnEvent {
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_SortByDate value)? sortByDate,
+    TResult Function(_UpdateReturnDetails value)? updateReturnDetails,
+    TResult Function(_UploadAttachments value)? uploadAttachments,
+    TResult Function(_DeletePoAttachment value)? deleteAttachment,
+    TResult Function(_UpdateReturnRequestReferenceNumber value)?
+        updateReturnRequestReferenceNumber,
+    TResult Function(_UpdateSpecialInstructions value)?
+        updateSpecialInstructions,
+    TResult Function(_InitializeSelectedReturnItems value)?
+        initializeSelectedReturnItems,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -168,6 +223,16 @@ class _$_Initialized implements _Initialized {
             RequestReturnFilter requestReturnFilter)
         loadMore,
     required TResult Function(String sortDirection) sortByDate,
+    required TResult Function(ReturnItem updatedItem) updateReturnDetails,
+    required TResult Function(List<PoDocuments> poDocuments, String uniqueId)
+        uploadAttachments,
+    required TResult Function(PoDocuments poDocuments, String uniqueId)
+        deleteAttachment,
+    required TResult Function(String referenceNumber)
+        updateReturnRequestReferenceNumber,
+    required TResult Function(String specialInstructions)
+        updateSpecialInstructions,
+    required TResult Function() initializeSelectedReturnItems,
   }) {
     return initialized();
   }
@@ -189,6 +254,15 @@ class _$_Initialized implements _Initialized {
             RequestReturnFilter requestReturnFilter)?
         loadMore,
     TResult? Function(String sortDirection)? sortByDate,
+    TResult? Function(ReturnItem updatedItem)? updateReturnDetails,
+    TResult? Function(List<PoDocuments> poDocuments, String uniqueId)?
+        uploadAttachments,
+    TResult? Function(PoDocuments poDocuments, String uniqueId)?
+        deleteAttachment,
+    TResult? Function(String referenceNumber)?
+        updateReturnRequestReferenceNumber,
+    TResult? Function(String specialInstructions)? updateSpecialInstructions,
+    TResult? Function()? initializeSelectedReturnItems,
   }) {
     return initialized?.call();
   }
@@ -210,6 +284,15 @@ class _$_Initialized implements _Initialized {
             RequestReturnFilter requestReturnFilter)?
         loadMore,
     TResult Function(String sortDirection)? sortByDate,
+    TResult Function(ReturnItem updatedItem)? updateReturnDetails,
+    TResult Function(List<PoDocuments> poDocuments, String uniqueId)?
+        uploadAttachments,
+    TResult Function(PoDocuments poDocuments, String uniqueId)?
+        deleteAttachment,
+    TResult Function(String referenceNumber)?
+        updateReturnRequestReferenceNumber,
+    TResult Function(String specialInstructions)? updateSpecialInstructions,
+    TResult Function()? initializeSelectedReturnItems,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -225,6 +308,15 @@ class _$_Initialized implements _Initialized {
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_SortByDate value) sortByDate,
+    required TResult Function(_UpdateReturnDetails value) updateReturnDetails,
+    required TResult Function(_UploadAttachments value) uploadAttachments,
+    required TResult Function(_DeletePoAttachment value) deleteAttachment,
+    required TResult Function(_UpdateReturnRequestReferenceNumber value)
+        updateReturnRequestReferenceNumber,
+    required TResult Function(_UpdateSpecialInstructions value)
+        updateSpecialInstructions,
+    required TResult Function(_InitializeSelectedReturnItems value)
+        initializeSelectedReturnItems,
   }) {
     return initialized(this);
   }
@@ -236,6 +328,15 @@ class _$_Initialized implements _Initialized {
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_SortByDate value)? sortByDate,
+    TResult? Function(_UpdateReturnDetails value)? updateReturnDetails,
+    TResult? Function(_UploadAttachments value)? uploadAttachments,
+    TResult? Function(_DeletePoAttachment value)? deleteAttachment,
+    TResult? Function(_UpdateReturnRequestReferenceNumber value)?
+        updateReturnRequestReferenceNumber,
+    TResult? Function(_UpdateSpecialInstructions value)?
+        updateSpecialInstructions,
+    TResult? Function(_InitializeSelectedReturnItems value)?
+        initializeSelectedReturnItems,
   }) {
     return initialized?.call(this);
   }
@@ -247,6 +348,15 @@ class _$_Initialized implements _Initialized {
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_SortByDate value)? sortByDate,
+    TResult Function(_UpdateReturnDetails value)? updateReturnDetails,
+    TResult Function(_UploadAttachments value)? uploadAttachments,
+    TResult Function(_DeletePoAttachment value)? deleteAttachment,
+    TResult Function(_UpdateReturnRequestReferenceNumber value)?
+        updateReturnRequestReferenceNumber,
+    TResult Function(_UpdateSpecialInstructions value)?
+        updateSpecialInstructions,
+    TResult Function(_InitializeSelectedReturnItems value)?
+        initializeSelectedReturnItems,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -411,6 +521,16 @@ class _$_Fetch implements _Fetch {
             RequestReturnFilter requestReturnFilter)
         loadMore,
     required TResult Function(String sortDirection) sortByDate,
+    required TResult Function(ReturnItem updatedItem) updateReturnDetails,
+    required TResult Function(List<PoDocuments> poDocuments, String uniqueId)
+        uploadAttachments,
+    required TResult Function(PoDocuments poDocuments, String uniqueId)
+        deleteAttachment,
+    required TResult Function(String referenceNumber)
+        updateReturnRequestReferenceNumber,
+    required TResult Function(String specialInstructions)
+        updateSpecialInstructions,
+    required TResult Function() initializeSelectedReturnItems,
   }) {
     return fetch(salesOrg, shipInfo, customerCodeInfo, requestReturnFilter);
   }
@@ -432,6 +552,15 @@ class _$_Fetch implements _Fetch {
             RequestReturnFilter requestReturnFilter)?
         loadMore,
     TResult? Function(String sortDirection)? sortByDate,
+    TResult? Function(ReturnItem updatedItem)? updateReturnDetails,
+    TResult? Function(List<PoDocuments> poDocuments, String uniqueId)?
+        uploadAttachments,
+    TResult? Function(PoDocuments poDocuments, String uniqueId)?
+        deleteAttachment,
+    TResult? Function(String referenceNumber)?
+        updateReturnRequestReferenceNumber,
+    TResult? Function(String specialInstructions)? updateSpecialInstructions,
+    TResult? Function()? initializeSelectedReturnItems,
   }) {
     return fetch?.call(
         salesOrg, shipInfo, customerCodeInfo, requestReturnFilter);
@@ -454,6 +583,15 @@ class _$_Fetch implements _Fetch {
             RequestReturnFilter requestReturnFilter)?
         loadMore,
     TResult Function(String sortDirection)? sortByDate,
+    TResult Function(ReturnItem updatedItem)? updateReturnDetails,
+    TResult Function(List<PoDocuments> poDocuments, String uniqueId)?
+        uploadAttachments,
+    TResult Function(PoDocuments poDocuments, String uniqueId)?
+        deleteAttachment,
+    TResult Function(String referenceNumber)?
+        updateReturnRequestReferenceNumber,
+    TResult Function(String specialInstructions)? updateSpecialInstructions,
+    TResult Function()? initializeSelectedReturnItems,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -469,6 +607,15 @@ class _$_Fetch implements _Fetch {
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_SortByDate value) sortByDate,
+    required TResult Function(_UpdateReturnDetails value) updateReturnDetails,
+    required TResult Function(_UploadAttachments value) uploadAttachments,
+    required TResult Function(_DeletePoAttachment value) deleteAttachment,
+    required TResult Function(_UpdateReturnRequestReferenceNumber value)
+        updateReturnRequestReferenceNumber,
+    required TResult Function(_UpdateSpecialInstructions value)
+        updateSpecialInstructions,
+    required TResult Function(_InitializeSelectedReturnItems value)
+        initializeSelectedReturnItems,
   }) {
     return fetch(this);
   }
@@ -480,6 +627,15 @@ class _$_Fetch implements _Fetch {
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_SortByDate value)? sortByDate,
+    TResult? Function(_UpdateReturnDetails value)? updateReturnDetails,
+    TResult? Function(_UploadAttachments value)? uploadAttachments,
+    TResult? Function(_DeletePoAttachment value)? deleteAttachment,
+    TResult? Function(_UpdateReturnRequestReferenceNumber value)?
+        updateReturnRequestReferenceNumber,
+    TResult? Function(_UpdateSpecialInstructions value)?
+        updateSpecialInstructions,
+    TResult? Function(_InitializeSelectedReturnItems value)?
+        initializeSelectedReturnItems,
   }) {
     return fetch?.call(this);
   }
@@ -491,6 +647,15 @@ class _$_Fetch implements _Fetch {
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_SortByDate value)? sortByDate,
+    TResult Function(_UpdateReturnDetails value)? updateReturnDetails,
+    TResult Function(_UploadAttachments value)? uploadAttachments,
+    TResult Function(_DeletePoAttachment value)? deleteAttachment,
+    TResult Function(_UpdateReturnRequestReferenceNumber value)?
+        updateReturnRequestReferenceNumber,
+    TResult Function(_UpdateSpecialInstructions value)?
+        updateSpecialInstructions,
+    TResult Function(_InitializeSelectedReturnItems value)?
+        initializeSelectedReturnItems,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -669,6 +834,16 @@ class _$_LoadMore implements _LoadMore {
             RequestReturnFilter requestReturnFilter)
         loadMore,
     required TResult Function(String sortDirection) sortByDate,
+    required TResult Function(ReturnItem updatedItem) updateReturnDetails,
+    required TResult Function(List<PoDocuments> poDocuments, String uniqueId)
+        uploadAttachments,
+    required TResult Function(PoDocuments poDocuments, String uniqueId)
+        deleteAttachment,
+    required TResult Function(String referenceNumber)
+        updateReturnRequestReferenceNumber,
+    required TResult Function(String specialInstructions)
+        updateSpecialInstructions,
+    required TResult Function() initializeSelectedReturnItems,
   }) {
     return loadMore(salesOrg, shipInfo, customerCodeInfo, requestReturnFilter);
   }
@@ -690,6 +865,15 @@ class _$_LoadMore implements _LoadMore {
             RequestReturnFilter requestReturnFilter)?
         loadMore,
     TResult? Function(String sortDirection)? sortByDate,
+    TResult? Function(ReturnItem updatedItem)? updateReturnDetails,
+    TResult? Function(List<PoDocuments> poDocuments, String uniqueId)?
+        uploadAttachments,
+    TResult? Function(PoDocuments poDocuments, String uniqueId)?
+        deleteAttachment,
+    TResult? Function(String referenceNumber)?
+        updateReturnRequestReferenceNumber,
+    TResult? Function(String specialInstructions)? updateSpecialInstructions,
+    TResult? Function()? initializeSelectedReturnItems,
   }) {
     return loadMore?.call(
         salesOrg, shipInfo, customerCodeInfo, requestReturnFilter);
@@ -712,6 +896,15 @@ class _$_LoadMore implements _LoadMore {
             RequestReturnFilter requestReturnFilter)?
         loadMore,
     TResult Function(String sortDirection)? sortByDate,
+    TResult Function(ReturnItem updatedItem)? updateReturnDetails,
+    TResult Function(List<PoDocuments> poDocuments, String uniqueId)?
+        uploadAttachments,
+    TResult Function(PoDocuments poDocuments, String uniqueId)?
+        deleteAttachment,
+    TResult Function(String referenceNumber)?
+        updateReturnRequestReferenceNumber,
+    TResult Function(String specialInstructions)? updateSpecialInstructions,
+    TResult Function()? initializeSelectedReturnItems,
     required TResult orElse(),
   }) {
     if (loadMore != null) {
@@ -728,6 +921,15 @@ class _$_LoadMore implements _LoadMore {
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_SortByDate value) sortByDate,
+    required TResult Function(_UpdateReturnDetails value) updateReturnDetails,
+    required TResult Function(_UploadAttachments value) uploadAttachments,
+    required TResult Function(_DeletePoAttachment value) deleteAttachment,
+    required TResult Function(_UpdateReturnRequestReferenceNumber value)
+        updateReturnRequestReferenceNumber,
+    required TResult Function(_UpdateSpecialInstructions value)
+        updateSpecialInstructions,
+    required TResult Function(_InitializeSelectedReturnItems value)
+        initializeSelectedReturnItems,
   }) {
     return loadMore(this);
   }
@@ -739,6 +941,15 @@ class _$_LoadMore implements _LoadMore {
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_SortByDate value)? sortByDate,
+    TResult? Function(_UpdateReturnDetails value)? updateReturnDetails,
+    TResult? Function(_UploadAttachments value)? uploadAttachments,
+    TResult? Function(_DeletePoAttachment value)? deleteAttachment,
+    TResult? Function(_UpdateReturnRequestReferenceNumber value)?
+        updateReturnRequestReferenceNumber,
+    TResult? Function(_UpdateSpecialInstructions value)?
+        updateSpecialInstructions,
+    TResult? Function(_InitializeSelectedReturnItems value)?
+        initializeSelectedReturnItems,
   }) {
     return loadMore?.call(this);
   }
@@ -750,6 +961,15 @@ class _$_LoadMore implements _LoadMore {
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_SortByDate value)? sortByDate,
+    TResult Function(_UpdateReturnDetails value)? updateReturnDetails,
+    TResult Function(_UploadAttachments value)? uploadAttachments,
+    TResult Function(_DeletePoAttachment value)? deleteAttachment,
+    TResult Function(_UpdateReturnRequestReferenceNumber value)?
+        updateReturnRequestReferenceNumber,
+    TResult Function(_UpdateSpecialInstructions value)?
+        updateSpecialInstructions,
+    TResult Function(_InitializeSelectedReturnItems value)?
+        initializeSelectedReturnItems,
     required TResult orElse(),
   }) {
     if (loadMore != null) {
@@ -854,6 +1074,16 @@ class _$_SortByDate implements _SortByDate {
             RequestReturnFilter requestReturnFilter)
         loadMore,
     required TResult Function(String sortDirection) sortByDate,
+    required TResult Function(ReturnItem updatedItem) updateReturnDetails,
+    required TResult Function(List<PoDocuments> poDocuments, String uniqueId)
+        uploadAttachments,
+    required TResult Function(PoDocuments poDocuments, String uniqueId)
+        deleteAttachment,
+    required TResult Function(String referenceNumber)
+        updateReturnRequestReferenceNumber,
+    required TResult Function(String specialInstructions)
+        updateSpecialInstructions,
+    required TResult Function() initializeSelectedReturnItems,
   }) {
     return sortByDate(sortDirection);
   }
@@ -875,6 +1105,15 @@ class _$_SortByDate implements _SortByDate {
             RequestReturnFilter requestReturnFilter)?
         loadMore,
     TResult? Function(String sortDirection)? sortByDate,
+    TResult? Function(ReturnItem updatedItem)? updateReturnDetails,
+    TResult? Function(List<PoDocuments> poDocuments, String uniqueId)?
+        uploadAttachments,
+    TResult? Function(PoDocuments poDocuments, String uniqueId)?
+        deleteAttachment,
+    TResult? Function(String referenceNumber)?
+        updateReturnRequestReferenceNumber,
+    TResult? Function(String specialInstructions)? updateSpecialInstructions,
+    TResult? Function()? initializeSelectedReturnItems,
   }) {
     return sortByDate?.call(sortDirection);
   }
@@ -896,6 +1135,15 @@ class _$_SortByDate implements _SortByDate {
             RequestReturnFilter requestReturnFilter)?
         loadMore,
     TResult Function(String sortDirection)? sortByDate,
+    TResult Function(ReturnItem updatedItem)? updateReturnDetails,
+    TResult Function(List<PoDocuments> poDocuments, String uniqueId)?
+        uploadAttachments,
+    TResult Function(PoDocuments poDocuments, String uniqueId)?
+        deleteAttachment,
+    TResult Function(String referenceNumber)?
+        updateReturnRequestReferenceNumber,
+    TResult Function(String specialInstructions)? updateSpecialInstructions,
+    TResult Function()? initializeSelectedReturnItems,
     required TResult orElse(),
   }) {
     if (sortByDate != null) {
@@ -911,6 +1159,15 @@ class _$_SortByDate implements _SortByDate {
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_SortByDate value) sortByDate,
+    required TResult Function(_UpdateReturnDetails value) updateReturnDetails,
+    required TResult Function(_UploadAttachments value) uploadAttachments,
+    required TResult Function(_DeletePoAttachment value) deleteAttachment,
+    required TResult Function(_UpdateReturnRequestReferenceNumber value)
+        updateReturnRequestReferenceNumber,
+    required TResult Function(_UpdateSpecialInstructions value)
+        updateSpecialInstructions,
+    required TResult Function(_InitializeSelectedReturnItems value)
+        initializeSelectedReturnItems,
   }) {
     return sortByDate(this);
   }
@@ -922,6 +1179,15 @@ class _$_SortByDate implements _SortByDate {
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_SortByDate value)? sortByDate,
+    TResult? Function(_UpdateReturnDetails value)? updateReturnDetails,
+    TResult? Function(_UploadAttachments value)? uploadAttachments,
+    TResult? Function(_DeletePoAttachment value)? deleteAttachment,
+    TResult? Function(_UpdateReturnRequestReferenceNumber value)?
+        updateReturnRequestReferenceNumber,
+    TResult? Function(_UpdateSpecialInstructions value)?
+        updateSpecialInstructions,
+    TResult? Function(_InitializeSelectedReturnItems value)?
+        initializeSelectedReturnItems,
   }) {
     return sortByDate?.call(this);
   }
@@ -933,6 +1199,15 @@ class _$_SortByDate implements _SortByDate {
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_SortByDate value)? sortByDate,
+    TResult Function(_UpdateReturnDetails value)? updateReturnDetails,
+    TResult Function(_UploadAttachments value)? uploadAttachments,
+    TResult Function(_DeletePoAttachment value)? deleteAttachment,
+    TResult Function(_UpdateReturnRequestReferenceNumber value)?
+        updateReturnRequestReferenceNumber,
+    TResult Function(_UpdateSpecialInstructions value)?
+        updateSpecialInstructions,
+    TResult Function(_InitializeSelectedReturnItems value)?
+        initializeSelectedReturnItems,
     required TResult orElse(),
   }) {
     if (sortByDate != null) {
@@ -953,8 +1228,1443 @@ abstract class _SortByDate implements RequestReturnEvent {
 }
 
 /// @nodoc
+abstract class _$$_UpdateReturnDetailsCopyWith<$Res> {
+  factory _$$_UpdateReturnDetailsCopyWith(_$_UpdateReturnDetails value,
+          $Res Function(_$_UpdateReturnDetails) then) =
+      __$$_UpdateReturnDetailsCopyWithImpl<$Res>;
+  @useResult
+  $Res call({ReturnItem updatedItem});
+
+  $ReturnItemCopyWith<$Res> get updatedItem;
+}
+
+/// @nodoc
+class __$$_UpdateReturnDetailsCopyWithImpl<$Res>
+    extends _$RequestReturnEventCopyWithImpl<$Res, _$_UpdateReturnDetails>
+    implements _$$_UpdateReturnDetailsCopyWith<$Res> {
+  __$$_UpdateReturnDetailsCopyWithImpl(_$_UpdateReturnDetails _value,
+      $Res Function(_$_UpdateReturnDetails) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? updatedItem = null,
+  }) {
+    return _then(_$_UpdateReturnDetails(
+      updatedItem: null == updatedItem
+          ? _value.updatedItem
+          : updatedItem // ignore: cast_nullable_to_non_nullable
+              as ReturnItem,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ReturnItemCopyWith<$Res> get updatedItem {
+    return $ReturnItemCopyWith<$Res>(_value.updatedItem, (value) {
+      return _then(_value.copyWith(updatedItem: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_UpdateReturnDetails implements _UpdateReturnDetails {
+  const _$_UpdateReturnDetails({required this.updatedItem});
+
+  @override
+  final ReturnItem updatedItem;
+
+  @override
+  String toString() {
+    return 'RequestReturnEvent.updateReturnDetails(updatedItem: $updatedItem)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_UpdateReturnDetails &&
+            (identical(other.updatedItem, updatedItem) ||
+                other.updatedItem == updatedItem));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, updatedItem);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_UpdateReturnDetailsCopyWith<_$_UpdateReturnDetails> get copyWith =>
+      __$$_UpdateReturnDetailsCopyWithImpl<_$_UpdateReturnDetails>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)
+        fetch,
+    required TResult Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)
+        loadMore,
+    required TResult Function(String sortDirection) sortByDate,
+    required TResult Function(ReturnItem updatedItem) updateReturnDetails,
+    required TResult Function(List<PoDocuments> poDocuments, String uniqueId)
+        uploadAttachments,
+    required TResult Function(PoDocuments poDocuments, String uniqueId)
+        deleteAttachment,
+    required TResult Function(String referenceNumber)
+        updateReturnRequestReferenceNumber,
+    required TResult Function(String specialInstructions)
+        updateSpecialInstructions,
+    required TResult Function() initializeSelectedReturnItems,
+  }) {
+    return updateReturnDetails(updatedItem);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)?
+        fetch,
+    TResult? Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)?
+        loadMore,
+    TResult? Function(String sortDirection)? sortByDate,
+    TResult? Function(ReturnItem updatedItem)? updateReturnDetails,
+    TResult? Function(List<PoDocuments> poDocuments, String uniqueId)?
+        uploadAttachments,
+    TResult? Function(PoDocuments poDocuments, String uniqueId)?
+        deleteAttachment,
+    TResult? Function(String referenceNumber)?
+        updateReturnRequestReferenceNumber,
+    TResult? Function(String specialInstructions)? updateSpecialInstructions,
+    TResult? Function()? initializeSelectedReturnItems,
+  }) {
+    return updateReturnDetails?.call(updatedItem);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)?
+        fetch,
+    TResult Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)?
+        loadMore,
+    TResult Function(String sortDirection)? sortByDate,
+    TResult Function(ReturnItem updatedItem)? updateReturnDetails,
+    TResult Function(List<PoDocuments> poDocuments, String uniqueId)?
+        uploadAttachments,
+    TResult Function(PoDocuments poDocuments, String uniqueId)?
+        deleteAttachment,
+    TResult Function(String referenceNumber)?
+        updateReturnRequestReferenceNumber,
+    TResult Function(String specialInstructions)? updateSpecialInstructions,
+    TResult Function()? initializeSelectedReturnItems,
+    required TResult orElse(),
+  }) {
+    if (updateReturnDetails != null) {
+      return updateReturnDetails(updatedItem);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_SortByDate value) sortByDate,
+    required TResult Function(_UpdateReturnDetails value) updateReturnDetails,
+    required TResult Function(_UploadAttachments value) uploadAttachments,
+    required TResult Function(_DeletePoAttachment value) deleteAttachment,
+    required TResult Function(_UpdateReturnRequestReferenceNumber value)
+        updateReturnRequestReferenceNumber,
+    required TResult Function(_UpdateSpecialInstructions value)
+        updateSpecialInstructions,
+    required TResult Function(_InitializeSelectedReturnItems value)
+        initializeSelectedReturnItems,
+  }) {
+    return updateReturnDetails(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_SortByDate value)? sortByDate,
+    TResult? Function(_UpdateReturnDetails value)? updateReturnDetails,
+    TResult? Function(_UploadAttachments value)? uploadAttachments,
+    TResult? Function(_DeletePoAttachment value)? deleteAttachment,
+    TResult? Function(_UpdateReturnRequestReferenceNumber value)?
+        updateReturnRequestReferenceNumber,
+    TResult? Function(_UpdateSpecialInstructions value)?
+        updateSpecialInstructions,
+    TResult? Function(_InitializeSelectedReturnItems value)?
+        initializeSelectedReturnItems,
+  }) {
+    return updateReturnDetails?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_SortByDate value)? sortByDate,
+    TResult Function(_UpdateReturnDetails value)? updateReturnDetails,
+    TResult Function(_UploadAttachments value)? uploadAttachments,
+    TResult Function(_DeletePoAttachment value)? deleteAttachment,
+    TResult Function(_UpdateReturnRequestReferenceNumber value)?
+        updateReturnRequestReferenceNumber,
+    TResult Function(_UpdateSpecialInstructions value)?
+        updateSpecialInstructions,
+    TResult Function(_InitializeSelectedReturnItems value)?
+        initializeSelectedReturnItems,
+    required TResult orElse(),
+  }) {
+    if (updateReturnDetails != null) {
+      return updateReturnDetails(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UpdateReturnDetails implements RequestReturnEvent {
+  const factory _UpdateReturnDetails({required final ReturnItem updatedItem}) =
+      _$_UpdateReturnDetails;
+
+  ReturnItem get updatedItem;
+  @JsonKey(ignore: true)
+  _$$_UpdateReturnDetailsCopyWith<_$_UpdateReturnDetails> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_UploadAttachmentsCopyWith<$Res> {
+  factory _$$_UploadAttachmentsCopyWith(_$_UploadAttachments value,
+          $Res Function(_$_UploadAttachments) then) =
+      __$$_UploadAttachmentsCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<PoDocuments> poDocuments, String uniqueId});
+}
+
+/// @nodoc
+class __$$_UploadAttachmentsCopyWithImpl<$Res>
+    extends _$RequestReturnEventCopyWithImpl<$Res, _$_UploadAttachments>
+    implements _$$_UploadAttachmentsCopyWith<$Res> {
+  __$$_UploadAttachmentsCopyWithImpl(
+      _$_UploadAttachments _value, $Res Function(_$_UploadAttachments) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? poDocuments = null,
+    Object? uniqueId = null,
+  }) {
+    return _then(_$_UploadAttachments(
+      poDocuments: null == poDocuments
+          ? _value._poDocuments
+          : poDocuments // ignore: cast_nullable_to_non_nullable
+              as List<PoDocuments>,
+      uniqueId: null == uniqueId
+          ? _value.uniqueId
+          : uniqueId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_UploadAttachments implements _UploadAttachments {
+  const _$_UploadAttachments(
+      {required final List<PoDocuments> poDocuments, required this.uniqueId})
+      : _poDocuments = poDocuments;
+
+  final List<PoDocuments> _poDocuments;
+  @override
+  List<PoDocuments> get poDocuments {
+    if (_poDocuments is EqualUnmodifiableListView) return _poDocuments;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_poDocuments);
+  }
+
+  @override
+  final String uniqueId;
+
+  @override
+  String toString() {
+    return 'RequestReturnEvent.uploadAttachments(poDocuments: $poDocuments, uniqueId: $uniqueId)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_UploadAttachments &&
+            const DeepCollectionEquality()
+                .equals(other._poDocuments, _poDocuments) &&
+            (identical(other.uniqueId, uniqueId) ||
+                other.uniqueId == uniqueId));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_poDocuments), uniqueId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_UploadAttachmentsCopyWith<_$_UploadAttachments> get copyWith =>
+      __$$_UploadAttachmentsCopyWithImpl<_$_UploadAttachments>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)
+        fetch,
+    required TResult Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)
+        loadMore,
+    required TResult Function(String sortDirection) sortByDate,
+    required TResult Function(ReturnItem updatedItem) updateReturnDetails,
+    required TResult Function(List<PoDocuments> poDocuments, String uniqueId)
+        uploadAttachments,
+    required TResult Function(PoDocuments poDocuments, String uniqueId)
+        deleteAttachment,
+    required TResult Function(String referenceNumber)
+        updateReturnRequestReferenceNumber,
+    required TResult Function(String specialInstructions)
+        updateSpecialInstructions,
+    required TResult Function() initializeSelectedReturnItems,
+  }) {
+    return uploadAttachments(poDocuments, uniqueId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)?
+        fetch,
+    TResult? Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)?
+        loadMore,
+    TResult? Function(String sortDirection)? sortByDate,
+    TResult? Function(ReturnItem updatedItem)? updateReturnDetails,
+    TResult? Function(List<PoDocuments> poDocuments, String uniqueId)?
+        uploadAttachments,
+    TResult? Function(PoDocuments poDocuments, String uniqueId)?
+        deleteAttachment,
+    TResult? Function(String referenceNumber)?
+        updateReturnRequestReferenceNumber,
+    TResult? Function(String specialInstructions)? updateSpecialInstructions,
+    TResult? Function()? initializeSelectedReturnItems,
+  }) {
+    return uploadAttachments?.call(poDocuments, uniqueId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)?
+        fetch,
+    TResult Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)?
+        loadMore,
+    TResult Function(String sortDirection)? sortByDate,
+    TResult Function(ReturnItem updatedItem)? updateReturnDetails,
+    TResult Function(List<PoDocuments> poDocuments, String uniqueId)?
+        uploadAttachments,
+    TResult Function(PoDocuments poDocuments, String uniqueId)?
+        deleteAttachment,
+    TResult Function(String referenceNumber)?
+        updateReturnRequestReferenceNumber,
+    TResult Function(String specialInstructions)? updateSpecialInstructions,
+    TResult Function()? initializeSelectedReturnItems,
+    required TResult orElse(),
+  }) {
+    if (uploadAttachments != null) {
+      return uploadAttachments(poDocuments, uniqueId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_SortByDate value) sortByDate,
+    required TResult Function(_UpdateReturnDetails value) updateReturnDetails,
+    required TResult Function(_UploadAttachments value) uploadAttachments,
+    required TResult Function(_DeletePoAttachment value) deleteAttachment,
+    required TResult Function(_UpdateReturnRequestReferenceNumber value)
+        updateReturnRequestReferenceNumber,
+    required TResult Function(_UpdateSpecialInstructions value)
+        updateSpecialInstructions,
+    required TResult Function(_InitializeSelectedReturnItems value)
+        initializeSelectedReturnItems,
+  }) {
+    return uploadAttachments(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_SortByDate value)? sortByDate,
+    TResult? Function(_UpdateReturnDetails value)? updateReturnDetails,
+    TResult? Function(_UploadAttachments value)? uploadAttachments,
+    TResult? Function(_DeletePoAttachment value)? deleteAttachment,
+    TResult? Function(_UpdateReturnRequestReferenceNumber value)?
+        updateReturnRequestReferenceNumber,
+    TResult? Function(_UpdateSpecialInstructions value)?
+        updateSpecialInstructions,
+    TResult? Function(_InitializeSelectedReturnItems value)?
+        initializeSelectedReturnItems,
+  }) {
+    return uploadAttachments?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_SortByDate value)? sortByDate,
+    TResult Function(_UpdateReturnDetails value)? updateReturnDetails,
+    TResult Function(_UploadAttachments value)? uploadAttachments,
+    TResult Function(_DeletePoAttachment value)? deleteAttachment,
+    TResult Function(_UpdateReturnRequestReferenceNumber value)?
+        updateReturnRequestReferenceNumber,
+    TResult Function(_UpdateSpecialInstructions value)?
+        updateSpecialInstructions,
+    TResult Function(_InitializeSelectedReturnItems value)?
+        initializeSelectedReturnItems,
+    required TResult orElse(),
+  }) {
+    if (uploadAttachments != null) {
+      return uploadAttachments(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UploadAttachments implements RequestReturnEvent {
+  const factory _UploadAttachments(
+      {required final List<PoDocuments> poDocuments,
+      required final String uniqueId}) = _$_UploadAttachments;
+
+  List<PoDocuments> get poDocuments;
+  String get uniqueId;
+  @JsonKey(ignore: true)
+  _$$_UploadAttachmentsCopyWith<_$_UploadAttachments> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_DeletePoAttachmentCopyWith<$Res> {
+  factory _$$_DeletePoAttachmentCopyWith(_$_DeletePoAttachment value,
+          $Res Function(_$_DeletePoAttachment) then) =
+      __$$_DeletePoAttachmentCopyWithImpl<$Res>;
+  @useResult
+  $Res call({PoDocuments poDocuments, String uniqueId});
+
+  $PoDocumentsCopyWith<$Res> get poDocuments;
+}
+
+/// @nodoc
+class __$$_DeletePoAttachmentCopyWithImpl<$Res>
+    extends _$RequestReturnEventCopyWithImpl<$Res, _$_DeletePoAttachment>
+    implements _$$_DeletePoAttachmentCopyWith<$Res> {
+  __$$_DeletePoAttachmentCopyWithImpl(
+      _$_DeletePoAttachment _value, $Res Function(_$_DeletePoAttachment) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? poDocuments = null,
+    Object? uniqueId = null,
+  }) {
+    return _then(_$_DeletePoAttachment(
+      poDocuments: null == poDocuments
+          ? _value.poDocuments
+          : poDocuments // ignore: cast_nullable_to_non_nullable
+              as PoDocuments,
+      uniqueId: null == uniqueId
+          ? _value.uniqueId
+          : uniqueId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PoDocumentsCopyWith<$Res> get poDocuments {
+    return $PoDocumentsCopyWith<$Res>(_value.poDocuments, (value) {
+      return _then(_value.copyWith(poDocuments: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_DeletePoAttachment implements _DeletePoAttachment {
+  const _$_DeletePoAttachment(
+      {required this.poDocuments, required this.uniqueId});
+
+  @override
+  final PoDocuments poDocuments;
+  @override
+  final String uniqueId;
+
+  @override
+  String toString() {
+    return 'RequestReturnEvent.deleteAttachment(poDocuments: $poDocuments, uniqueId: $uniqueId)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_DeletePoAttachment &&
+            (identical(other.poDocuments, poDocuments) ||
+                other.poDocuments == poDocuments) &&
+            (identical(other.uniqueId, uniqueId) ||
+                other.uniqueId == uniqueId));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, poDocuments, uniqueId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_DeletePoAttachmentCopyWith<_$_DeletePoAttachment> get copyWith =>
+      __$$_DeletePoAttachmentCopyWithImpl<_$_DeletePoAttachment>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)
+        fetch,
+    required TResult Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)
+        loadMore,
+    required TResult Function(String sortDirection) sortByDate,
+    required TResult Function(ReturnItem updatedItem) updateReturnDetails,
+    required TResult Function(List<PoDocuments> poDocuments, String uniqueId)
+        uploadAttachments,
+    required TResult Function(PoDocuments poDocuments, String uniqueId)
+        deleteAttachment,
+    required TResult Function(String referenceNumber)
+        updateReturnRequestReferenceNumber,
+    required TResult Function(String specialInstructions)
+        updateSpecialInstructions,
+    required TResult Function() initializeSelectedReturnItems,
+  }) {
+    return deleteAttachment(poDocuments, uniqueId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)?
+        fetch,
+    TResult? Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)?
+        loadMore,
+    TResult? Function(String sortDirection)? sortByDate,
+    TResult? Function(ReturnItem updatedItem)? updateReturnDetails,
+    TResult? Function(List<PoDocuments> poDocuments, String uniqueId)?
+        uploadAttachments,
+    TResult? Function(PoDocuments poDocuments, String uniqueId)?
+        deleteAttachment,
+    TResult? Function(String referenceNumber)?
+        updateReturnRequestReferenceNumber,
+    TResult? Function(String specialInstructions)? updateSpecialInstructions,
+    TResult? Function()? initializeSelectedReturnItems,
+  }) {
+    return deleteAttachment?.call(poDocuments, uniqueId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)?
+        fetch,
+    TResult Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)?
+        loadMore,
+    TResult Function(String sortDirection)? sortByDate,
+    TResult Function(ReturnItem updatedItem)? updateReturnDetails,
+    TResult Function(List<PoDocuments> poDocuments, String uniqueId)?
+        uploadAttachments,
+    TResult Function(PoDocuments poDocuments, String uniqueId)?
+        deleteAttachment,
+    TResult Function(String referenceNumber)?
+        updateReturnRequestReferenceNumber,
+    TResult Function(String specialInstructions)? updateSpecialInstructions,
+    TResult Function()? initializeSelectedReturnItems,
+    required TResult orElse(),
+  }) {
+    if (deleteAttachment != null) {
+      return deleteAttachment(poDocuments, uniqueId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_SortByDate value) sortByDate,
+    required TResult Function(_UpdateReturnDetails value) updateReturnDetails,
+    required TResult Function(_UploadAttachments value) uploadAttachments,
+    required TResult Function(_DeletePoAttachment value) deleteAttachment,
+    required TResult Function(_UpdateReturnRequestReferenceNumber value)
+        updateReturnRequestReferenceNumber,
+    required TResult Function(_UpdateSpecialInstructions value)
+        updateSpecialInstructions,
+    required TResult Function(_InitializeSelectedReturnItems value)
+        initializeSelectedReturnItems,
+  }) {
+    return deleteAttachment(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_SortByDate value)? sortByDate,
+    TResult? Function(_UpdateReturnDetails value)? updateReturnDetails,
+    TResult? Function(_UploadAttachments value)? uploadAttachments,
+    TResult? Function(_DeletePoAttachment value)? deleteAttachment,
+    TResult? Function(_UpdateReturnRequestReferenceNumber value)?
+        updateReturnRequestReferenceNumber,
+    TResult? Function(_UpdateSpecialInstructions value)?
+        updateSpecialInstructions,
+    TResult? Function(_InitializeSelectedReturnItems value)?
+        initializeSelectedReturnItems,
+  }) {
+    return deleteAttachment?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_SortByDate value)? sortByDate,
+    TResult Function(_UpdateReturnDetails value)? updateReturnDetails,
+    TResult Function(_UploadAttachments value)? uploadAttachments,
+    TResult Function(_DeletePoAttachment value)? deleteAttachment,
+    TResult Function(_UpdateReturnRequestReferenceNumber value)?
+        updateReturnRequestReferenceNumber,
+    TResult Function(_UpdateSpecialInstructions value)?
+        updateSpecialInstructions,
+    TResult Function(_InitializeSelectedReturnItems value)?
+        initializeSelectedReturnItems,
+    required TResult orElse(),
+  }) {
+    if (deleteAttachment != null) {
+      return deleteAttachment(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _DeletePoAttachment implements RequestReturnEvent {
+  const factory _DeletePoAttachment(
+      {required final PoDocuments poDocuments,
+      required final String uniqueId}) = _$_DeletePoAttachment;
+
+  PoDocuments get poDocuments;
+  String get uniqueId;
+  @JsonKey(ignore: true)
+  _$$_DeletePoAttachmentCopyWith<_$_DeletePoAttachment> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_UpdateReturnRequestReferenceNumberCopyWith<$Res> {
+  factory _$$_UpdateReturnRequestReferenceNumberCopyWith(
+          _$_UpdateReturnRequestReferenceNumber value,
+          $Res Function(_$_UpdateReturnRequestReferenceNumber) then) =
+      __$$_UpdateReturnRequestReferenceNumberCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String referenceNumber});
+}
+
+/// @nodoc
+class __$$_UpdateReturnRequestReferenceNumberCopyWithImpl<$Res>
+    extends _$RequestReturnEventCopyWithImpl<$Res,
+        _$_UpdateReturnRequestReferenceNumber>
+    implements _$$_UpdateReturnRequestReferenceNumberCopyWith<$Res> {
+  __$$_UpdateReturnRequestReferenceNumberCopyWithImpl(
+      _$_UpdateReturnRequestReferenceNumber _value,
+      $Res Function(_$_UpdateReturnRequestReferenceNumber) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? referenceNumber = null,
+  }) {
+    return _then(_$_UpdateReturnRequestReferenceNumber(
+      referenceNumber: null == referenceNumber
+          ? _value.referenceNumber
+          : referenceNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_UpdateReturnRequestReferenceNumber
+    implements _UpdateReturnRequestReferenceNumber {
+  const _$_UpdateReturnRequestReferenceNumber({required this.referenceNumber});
+
+  @override
+  final String referenceNumber;
+
+  @override
+  String toString() {
+    return 'RequestReturnEvent.updateReturnRequestReferenceNumber(referenceNumber: $referenceNumber)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_UpdateReturnRequestReferenceNumber &&
+            (identical(other.referenceNumber, referenceNumber) ||
+                other.referenceNumber == referenceNumber));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, referenceNumber);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_UpdateReturnRequestReferenceNumberCopyWith<
+          _$_UpdateReturnRequestReferenceNumber>
+      get copyWith => __$$_UpdateReturnRequestReferenceNumberCopyWithImpl<
+          _$_UpdateReturnRequestReferenceNumber>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)
+        fetch,
+    required TResult Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)
+        loadMore,
+    required TResult Function(String sortDirection) sortByDate,
+    required TResult Function(ReturnItem updatedItem) updateReturnDetails,
+    required TResult Function(List<PoDocuments> poDocuments, String uniqueId)
+        uploadAttachments,
+    required TResult Function(PoDocuments poDocuments, String uniqueId)
+        deleteAttachment,
+    required TResult Function(String referenceNumber)
+        updateReturnRequestReferenceNumber,
+    required TResult Function(String specialInstructions)
+        updateSpecialInstructions,
+    required TResult Function() initializeSelectedReturnItems,
+  }) {
+    return updateReturnRequestReferenceNumber(referenceNumber);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)?
+        fetch,
+    TResult? Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)?
+        loadMore,
+    TResult? Function(String sortDirection)? sortByDate,
+    TResult? Function(ReturnItem updatedItem)? updateReturnDetails,
+    TResult? Function(List<PoDocuments> poDocuments, String uniqueId)?
+        uploadAttachments,
+    TResult? Function(PoDocuments poDocuments, String uniqueId)?
+        deleteAttachment,
+    TResult? Function(String referenceNumber)?
+        updateReturnRequestReferenceNumber,
+    TResult? Function(String specialInstructions)? updateSpecialInstructions,
+    TResult? Function()? initializeSelectedReturnItems,
+  }) {
+    return updateReturnRequestReferenceNumber?.call(referenceNumber);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)?
+        fetch,
+    TResult Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)?
+        loadMore,
+    TResult Function(String sortDirection)? sortByDate,
+    TResult Function(ReturnItem updatedItem)? updateReturnDetails,
+    TResult Function(List<PoDocuments> poDocuments, String uniqueId)?
+        uploadAttachments,
+    TResult Function(PoDocuments poDocuments, String uniqueId)?
+        deleteAttachment,
+    TResult Function(String referenceNumber)?
+        updateReturnRequestReferenceNumber,
+    TResult Function(String specialInstructions)? updateSpecialInstructions,
+    TResult Function()? initializeSelectedReturnItems,
+    required TResult orElse(),
+  }) {
+    if (updateReturnRequestReferenceNumber != null) {
+      return updateReturnRequestReferenceNumber(referenceNumber);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_SortByDate value) sortByDate,
+    required TResult Function(_UpdateReturnDetails value) updateReturnDetails,
+    required TResult Function(_UploadAttachments value) uploadAttachments,
+    required TResult Function(_DeletePoAttachment value) deleteAttachment,
+    required TResult Function(_UpdateReturnRequestReferenceNumber value)
+        updateReturnRequestReferenceNumber,
+    required TResult Function(_UpdateSpecialInstructions value)
+        updateSpecialInstructions,
+    required TResult Function(_InitializeSelectedReturnItems value)
+        initializeSelectedReturnItems,
+  }) {
+    return updateReturnRequestReferenceNumber(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_SortByDate value)? sortByDate,
+    TResult? Function(_UpdateReturnDetails value)? updateReturnDetails,
+    TResult? Function(_UploadAttachments value)? uploadAttachments,
+    TResult? Function(_DeletePoAttachment value)? deleteAttachment,
+    TResult? Function(_UpdateReturnRequestReferenceNumber value)?
+        updateReturnRequestReferenceNumber,
+    TResult? Function(_UpdateSpecialInstructions value)?
+        updateSpecialInstructions,
+    TResult? Function(_InitializeSelectedReturnItems value)?
+        initializeSelectedReturnItems,
+  }) {
+    return updateReturnRequestReferenceNumber?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_SortByDate value)? sortByDate,
+    TResult Function(_UpdateReturnDetails value)? updateReturnDetails,
+    TResult Function(_UploadAttachments value)? uploadAttachments,
+    TResult Function(_DeletePoAttachment value)? deleteAttachment,
+    TResult Function(_UpdateReturnRequestReferenceNumber value)?
+        updateReturnRequestReferenceNumber,
+    TResult Function(_UpdateSpecialInstructions value)?
+        updateSpecialInstructions,
+    TResult Function(_InitializeSelectedReturnItems value)?
+        initializeSelectedReturnItems,
+    required TResult orElse(),
+  }) {
+    if (updateReturnRequestReferenceNumber != null) {
+      return updateReturnRequestReferenceNumber(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UpdateReturnRequestReferenceNumber
+    implements RequestReturnEvent {
+  const factory _UpdateReturnRequestReferenceNumber(
+          {required final String referenceNumber}) =
+      _$_UpdateReturnRequestReferenceNumber;
+
+  String get referenceNumber;
+  @JsonKey(ignore: true)
+  _$$_UpdateReturnRequestReferenceNumberCopyWith<
+          _$_UpdateReturnRequestReferenceNumber>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_UpdateSpecialInstructionsCopyWith<$Res> {
+  factory _$$_UpdateSpecialInstructionsCopyWith(
+          _$_UpdateSpecialInstructions value,
+          $Res Function(_$_UpdateSpecialInstructions) then) =
+      __$$_UpdateSpecialInstructionsCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String specialInstructions});
+}
+
+/// @nodoc
+class __$$_UpdateSpecialInstructionsCopyWithImpl<$Res>
+    extends _$RequestReturnEventCopyWithImpl<$Res, _$_UpdateSpecialInstructions>
+    implements _$$_UpdateSpecialInstructionsCopyWith<$Res> {
+  __$$_UpdateSpecialInstructionsCopyWithImpl(
+      _$_UpdateSpecialInstructions _value,
+      $Res Function(_$_UpdateSpecialInstructions) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? specialInstructions = null,
+  }) {
+    return _then(_$_UpdateSpecialInstructions(
+      specialInstructions: null == specialInstructions
+          ? _value.specialInstructions
+          : specialInstructions // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_UpdateSpecialInstructions implements _UpdateSpecialInstructions {
+  const _$_UpdateSpecialInstructions({required this.specialInstructions});
+
+  @override
+  final String specialInstructions;
+
+  @override
+  String toString() {
+    return 'RequestReturnEvent.updateSpecialInstructions(specialInstructions: $specialInstructions)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_UpdateSpecialInstructions &&
+            (identical(other.specialInstructions, specialInstructions) ||
+                other.specialInstructions == specialInstructions));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, specialInstructions);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_UpdateSpecialInstructionsCopyWith<_$_UpdateSpecialInstructions>
+      get copyWith => __$$_UpdateSpecialInstructionsCopyWithImpl<
+          _$_UpdateSpecialInstructions>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)
+        fetch,
+    required TResult Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)
+        loadMore,
+    required TResult Function(String sortDirection) sortByDate,
+    required TResult Function(ReturnItem updatedItem) updateReturnDetails,
+    required TResult Function(List<PoDocuments> poDocuments, String uniqueId)
+        uploadAttachments,
+    required TResult Function(PoDocuments poDocuments, String uniqueId)
+        deleteAttachment,
+    required TResult Function(String referenceNumber)
+        updateReturnRequestReferenceNumber,
+    required TResult Function(String specialInstructions)
+        updateSpecialInstructions,
+    required TResult Function() initializeSelectedReturnItems,
+  }) {
+    return updateSpecialInstructions(specialInstructions);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)?
+        fetch,
+    TResult? Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)?
+        loadMore,
+    TResult? Function(String sortDirection)? sortByDate,
+    TResult? Function(ReturnItem updatedItem)? updateReturnDetails,
+    TResult? Function(List<PoDocuments> poDocuments, String uniqueId)?
+        uploadAttachments,
+    TResult? Function(PoDocuments poDocuments, String uniqueId)?
+        deleteAttachment,
+    TResult? Function(String referenceNumber)?
+        updateReturnRequestReferenceNumber,
+    TResult? Function(String specialInstructions)? updateSpecialInstructions,
+    TResult? Function()? initializeSelectedReturnItems,
+  }) {
+    return updateSpecialInstructions?.call(specialInstructions);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)?
+        fetch,
+    TResult Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)?
+        loadMore,
+    TResult Function(String sortDirection)? sortByDate,
+    TResult Function(ReturnItem updatedItem)? updateReturnDetails,
+    TResult Function(List<PoDocuments> poDocuments, String uniqueId)?
+        uploadAttachments,
+    TResult Function(PoDocuments poDocuments, String uniqueId)?
+        deleteAttachment,
+    TResult Function(String referenceNumber)?
+        updateReturnRequestReferenceNumber,
+    TResult Function(String specialInstructions)? updateSpecialInstructions,
+    TResult Function()? initializeSelectedReturnItems,
+    required TResult orElse(),
+  }) {
+    if (updateSpecialInstructions != null) {
+      return updateSpecialInstructions(specialInstructions);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_SortByDate value) sortByDate,
+    required TResult Function(_UpdateReturnDetails value) updateReturnDetails,
+    required TResult Function(_UploadAttachments value) uploadAttachments,
+    required TResult Function(_DeletePoAttachment value) deleteAttachment,
+    required TResult Function(_UpdateReturnRequestReferenceNumber value)
+        updateReturnRequestReferenceNumber,
+    required TResult Function(_UpdateSpecialInstructions value)
+        updateSpecialInstructions,
+    required TResult Function(_InitializeSelectedReturnItems value)
+        initializeSelectedReturnItems,
+  }) {
+    return updateSpecialInstructions(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_SortByDate value)? sortByDate,
+    TResult? Function(_UpdateReturnDetails value)? updateReturnDetails,
+    TResult? Function(_UploadAttachments value)? uploadAttachments,
+    TResult? Function(_DeletePoAttachment value)? deleteAttachment,
+    TResult? Function(_UpdateReturnRequestReferenceNumber value)?
+        updateReturnRequestReferenceNumber,
+    TResult? Function(_UpdateSpecialInstructions value)?
+        updateSpecialInstructions,
+    TResult? Function(_InitializeSelectedReturnItems value)?
+        initializeSelectedReturnItems,
+  }) {
+    return updateSpecialInstructions?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_SortByDate value)? sortByDate,
+    TResult Function(_UpdateReturnDetails value)? updateReturnDetails,
+    TResult Function(_UploadAttachments value)? uploadAttachments,
+    TResult Function(_DeletePoAttachment value)? deleteAttachment,
+    TResult Function(_UpdateReturnRequestReferenceNumber value)?
+        updateReturnRequestReferenceNumber,
+    TResult Function(_UpdateSpecialInstructions value)?
+        updateSpecialInstructions,
+    TResult Function(_InitializeSelectedReturnItems value)?
+        initializeSelectedReturnItems,
+    required TResult orElse(),
+  }) {
+    if (updateSpecialInstructions != null) {
+      return updateSpecialInstructions(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UpdateSpecialInstructions implements RequestReturnEvent {
+  const factory _UpdateSpecialInstructions(
+          {required final String specialInstructions}) =
+      _$_UpdateSpecialInstructions;
+
+  String get specialInstructions;
+  @JsonKey(ignore: true)
+  _$$_UpdateSpecialInstructionsCopyWith<_$_UpdateSpecialInstructions>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_InitializeSelectedReturnItemsCopyWith<$Res> {
+  factory _$$_InitializeSelectedReturnItemsCopyWith(
+          _$_InitializeSelectedReturnItems value,
+          $Res Function(_$_InitializeSelectedReturnItems) then) =
+      __$$_InitializeSelectedReturnItemsCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_InitializeSelectedReturnItemsCopyWithImpl<$Res>
+    extends _$RequestReturnEventCopyWithImpl<$Res,
+        _$_InitializeSelectedReturnItems>
+    implements _$$_InitializeSelectedReturnItemsCopyWith<$Res> {
+  __$$_InitializeSelectedReturnItemsCopyWithImpl(
+      _$_InitializeSelectedReturnItems _value,
+      $Res Function(_$_InitializeSelectedReturnItems) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_InitializeSelectedReturnItems
+    implements _InitializeSelectedReturnItems {
+  const _$_InitializeSelectedReturnItems();
+
+  @override
+  String toString() {
+    return 'RequestReturnEvent.initializeSelectedReturnItems()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_InitializeSelectedReturnItems);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)
+        fetch,
+    required TResult Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)
+        loadMore,
+    required TResult Function(String sortDirection) sortByDate,
+    required TResult Function(ReturnItem updatedItem) updateReturnDetails,
+    required TResult Function(List<PoDocuments> poDocuments, String uniqueId)
+        uploadAttachments,
+    required TResult Function(PoDocuments poDocuments, String uniqueId)
+        deleteAttachment,
+    required TResult Function(String referenceNumber)
+        updateReturnRequestReferenceNumber,
+    required TResult Function(String specialInstructions)
+        updateSpecialInstructions,
+    required TResult Function() initializeSelectedReturnItems,
+  }) {
+    return initializeSelectedReturnItems();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)?
+        fetch,
+    TResult? Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)?
+        loadMore,
+    TResult? Function(String sortDirection)? sortByDate,
+    TResult? Function(ReturnItem updatedItem)? updateReturnDetails,
+    TResult? Function(List<PoDocuments> poDocuments, String uniqueId)?
+        uploadAttachments,
+    TResult? Function(PoDocuments poDocuments, String uniqueId)?
+        deleteAttachment,
+    TResult? Function(String referenceNumber)?
+        updateReturnRequestReferenceNumber,
+    TResult? Function(String specialInstructions)? updateSpecialInstructions,
+    TResult? Function()? initializeSelectedReturnItems,
+  }) {
+    return initializeSelectedReturnItems?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)?
+        fetch,
+    TResult Function(
+            SalesOrganisation salesOrg,
+            ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo,
+            RequestReturnFilter requestReturnFilter)?
+        loadMore,
+    TResult Function(String sortDirection)? sortByDate,
+    TResult Function(ReturnItem updatedItem)? updateReturnDetails,
+    TResult Function(List<PoDocuments> poDocuments, String uniqueId)?
+        uploadAttachments,
+    TResult Function(PoDocuments poDocuments, String uniqueId)?
+        deleteAttachment,
+    TResult Function(String referenceNumber)?
+        updateReturnRequestReferenceNumber,
+    TResult Function(String specialInstructions)? updateSpecialInstructions,
+    TResult Function()? initializeSelectedReturnItems,
+    required TResult orElse(),
+  }) {
+    if (initializeSelectedReturnItems != null) {
+      return initializeSelectedReturnItems();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_SortByDate value) sortByDate,
+    required TResult Function(_UpdateReturnDetails value) updateReturnDetails,
+    required TResult Function(_UploadAttachments value) uploadAttachments,
+    required TResult Function(_DeletePoAttachment value) deleteAttachment,
+    required TResult Function(_UpdateReturnRequestReferenceNumber value)
+        updateReturnRequestReferenceNumber,
+    required TResult Function(_UpdateSpecialInstructions value)
+        updateSpecialInstructions,
+    required TResult Function(_InitializeSelectedReturnItems value)
+        initializeSelectedReturnItems,
+  }) {
+    return initializeSelectedReturnItems(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_SortByDate value)? sortByDate,
+    TResult? Function(_UpdateReturnDetails value)? updateReturnDetails,
+    TResult? Function(_UploadAttachments value)? uploadAttachments,
+    TResult? Function(_DeletePoAttachment value)? deleteAttachment,
+    TResult? Function(_UpdateReturnRequestReferenceNumber value)?
+        updateReturnRequestReferenceNumber,
+    TResult? Function(_UpdateSpecialInstructions value)?
+        updateSpecialInstructions,
+    TResult? Function(_InitializeSelectedReturnItems value)?
+        initializeSelectedReturnItems,
+  }) {
+    return initializeSelectedReturnItems?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_SortByDate value)? sortByDate,
+    TResult Function(_UpdateReturnDetails value)? updateReturnDetails,
+    TResult Function(_UploadAttachments value)? uploadAttachments,
+    TResult Function(_DeletePoAttachment value)? deleteAttachment,
+    TResult Function(_UpdateReturnRequestReferenceNumber value)?
+        updateReturnRequestReferenceNumber,
+    TResult Function(_UpdateSpecialInstructions value)?
+        updateSpecialInstructions,
+    TResult Function(_InitializeSelectedReturnItems value)?
+        initializeSelectedReturnItems,
+    required TResult orElse(),
+  }) {
+    if (initializeSelectedReturnItems != null) {
+      return initializeSelectedReturnItems(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _InitializeSelectedReturnItems implements RequestReturnEvent {
+  const factory _InitializeSelectedReturnItems() =
+      _$_InitializeSelectedReturnItems;
+}
+
+/// @nodoc
 mixin _$RequestReturnState {
   List<ReturnItem> get returnItemList => throw _privateConstructorUsedError;
+  String get returnReferenceNumber => throw _privateConstructorUsedError;
+  String get specialInstructions => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption =>
       throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
@@ -974,6 +2684,8 @@ abstract class $RequestReturnStateCopyWith<$Res> {
   @useResult
   $Res call(
       {List<ReturnItem> returnItemList,
+      String returnReferenceNumber,
+      String specialInstructions,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       bool isLoading,
       bool canLoadMore,
@@ -994,6 +2706,8 @@ class _$RequestReturnStateCopyWithImpl<$Res, $Val extends RequestReturnState>
   @override
   $Res call({
     Object? returnItemList = null,
+    Object? returnReferenceNumber = null,
+    Object? specialInstructions = null,
     Object? failureOrSuccessOption = null,
     Object? isLoading = null,
     Object? canLoadMore = null,
@@ -1004,6 +2718,14 @@ class _$RequestReturnStateCopyWithImpl<$Res, $Val extends RequestReturnState>
           ? _value.returnItemList
           : returnItemList // ignore: cast_nullable_to_non_nullable
               as List<ReturnItem>,
+      returnReferenceNumber: null == returnReferenceNumber
+          ? _value.returnReferenceNumber
+          : returnReferenceNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      specialInstructions: null == specialInstructions
+          ? _value.specialInstructions
+          : specialInstructions // ignore: cast_nullable_to_non_nullable
+              as String,
       failureOrSuccessOption: null == failureOrSuccessOption
           ? _value.failureOrSuccessOption
           : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
@@ -1034,6 +2756,8 @@ abstract class _$$_RequestReturnStateCopyWith<$Res>
   @useResult
   $Res call(
       {List<ReturnItem> returnItemList,
+      String returnReferenceNumber,
+      String specialInstructions,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       bool isLoading,
       bool canLoadMore,
@@ -1052,6 +2776,8 @@ class __$$_RequestReturnStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? returnItemList = null,
+    Object? returnReferenceNumber = null,
+    Object? specialInstructions = null,
     Object? failureOrSuccessOption = null,
     Object? isLoading = null,
     Object? canLoadMore = null,
@@ -1062,6 +2788,14 @@ class __$$_RequestReturnStateCopyWithImpl<$Res>
           ? _value._returnItemList
           : returnItemList // ignore: cast_nullable_to_non_nullable
               as List<ReturnItem>,
+      returnReferenceNumber: null == returnReferenceNumber
+          ? _value.returnReferenceNumber
+          : returnReferenceNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      specialInstructions: null == specialInstructions
+          ? _value.specialInstructions
+          : specialInstructions // ignore: cast_nullable_to_non_nullable
+              as String,
       failureOrSuccessOption: null == failureOrSuccessOption
           ? _value.failureOrSuccessOption
           : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
@@ -1084,14 +2818,17 @@ class __$$_RequestReturnStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_RequestReturnState implements _RequestReturnState {
+class _$_RequestReturnState extends _RequestReturnState {
   const _$_RequestReturnState(
       {required final List<ReturnItem> returnItemList,
+      required this.returnReferenceNumber,
+      required this.specialInstructions,
       required this.failureOrSuccessOption,
       required this.isLoading,
       required this.canLoadMore,
       required this.sortDirection})
-      : _returnItemList = returnItemList;
+      : _returnItemList = returnItemList,
+        super._();
 
   final List<ReturnItem> _returnItemList;
   @override
@@ -1101,6 +2838,10 @@ class _$_RequestReturnState implements _RequestReturnState {
     return EqualUnmodifiableListView(_returnItemList);
   }
 
+  @override
+  final String returnReferenceNumber;
+  @override
+  final String specialInstructions;
   @override
   final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption;
   @override
@@ -1112,7 +2853,7 @@ class _$_RequestReturnState implements _RequestReturnState {
 
   @override
   String toString() {
-    return 'RequestReturnState(returnItemList: $returnItemList, failureOrSuccessOption: $failureOrSuccessOption, isLoading: $isLoading, canLoadMore: $canLoadMore, sortDirection: $sortDirection)';
+    return 'RequestReturnState(returnItemList: $returnItemList, returnReferenceNumber: $returnReferenceNumber, specialInstructions: $specialInstructions, failureOrSuccessOption: $failureOrSuccessOption, isLoading: $isLoading, canLoadMore: $canLoadMore, sortDirection: $sortDirection)';
   }
 
   @override
@@ -1122,6 +2863,10 @@ class _$_RequestReturnState implements _RequestReturnState {
             other is _$_RequestReturnState &&
             const DeepCollectionEquality()
                 .equals(other._returnItemList, _returnItemList) &&
+            (identical(other.returnReferenceNumber, returnReferenceNumber) ||
+                other.returnReferenceNumber == returnReferenceNumber) &&
+            (identical(other.specialInstructions, specialInstructions) ||
+                other.specialInstructions == specialInstructions) &&
             (identical(other.failureOrSuccessOption, failureOrSuccessOption) ||
                 other.failureOrSuccessOption == failureOrSuccessOption) &&
             (identical(other.isLoading, isLoading) ||
@@ -1136,6 +2881,8 @@ class _$_RequestReturnState implements _RequestReturnState {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(_returnItemList),
+      returnReferenceNumber,
+      specialInstructions,
       failureOrSuccessOption,
       isLoading,
       canLoadMore,
@@ -1149,16 +2896,23 @@ class _$_RequestReturnState implements _RequestReturnState {
           this, _$identity);
 }
 
-abstract class _RequestReturnState implements RequestReturnState {
+abstract class _RequestReturnState extends RequestReturnState {
   const factory _RequestReturnState(
       {required final List<ReturnItem> returnItemList,
+      required final String returnReferenceNumber,
+      required final String specialInstructions,
       required final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       required final bool isLoading,
       required final bool canLoadMore,
       required final String sortDirection}) = _$_RequestReturnState;
+  const _RequestReturnState._() : super._();
 
   @override
   List<ReturnItem> get returnItemList;
+  @override
+  String get returnReferenceNumber;
+  @override
+  String get specialInstructions;
   @override
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption;
   @override

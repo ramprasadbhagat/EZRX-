@@ -2,8 +2,11 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
+import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/returns/dtos/return_schedule_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+import 'package:ezrxmobile/domain/returns/entities/usage.dart';
 
 part 'return_item_dto.freezed.dart';
 part 'return_item_dto.g.dart';
@@ -125,6 +128,9 @@ class ReturnItemDto with _$ReturnItemDto {
       balanceQuantity: int.parse(balanceQuantity),
       balanceValue: double.parse(balanceValue),
       outsidePolicy: outsidePolicy,
+      poDocuments: [],
+      returnQuantity: ReturnQuantity(''),
+      usage: Usage.empty(),
     );
   }
 

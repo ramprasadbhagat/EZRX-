@@ -266,6 +266,31 @@ import 'package:ezrxmobile/infrastructure/order/repository/scan_material_info_re
 
 import 'package:ezrxmobile/infrastructure/core/material_info_scanner/material_info_scanner.dart';
 
+import 'package:ezrxmobile/application/returns/return_price/return_price_bloc.dart';
+
+import 'package:ezrxmobile/infrastructure/returns/repository/return_price_repository.dart';
+
+import 'package:ezrxmobile/infrastructure/returns/datasource/return_price_remote.dart';
+
+import 'package:ezrxmobile/infrastructure/returns/datasource/return_price_query.dart';
+
+import 'package:ezrxmobile/infrastructure/returns/datasource/return_price_local.dart';
+
+
+
+
+
+
+import 'package:ezrxmobile/infrastructure/returns/datasource/submit_return_request_mutation.dart';
+
+import 'package:ezrxmobile/infrastructure/returns/datasource/submit_return_request_local_datasource.dart';
+
+import 'package:ezrxmobile/infrastructure/returns/repository/submit_return_request_repository.dart';
+
+import 'package:ezrxmobile/infrastructure/returns/datasource/submit_return_request_remote_datasource.dart';
+
+import 'package:ezrxmobile/application/returns/submit_return/submit_return_bloc.dart';
+
 GetIt locator = GetIt.instance;
 
 void setupLocator() {
@@ -1330,7 +1355,7 @@ void setupLocator() {
     ),
   );
 
-  locator.registerLazySingleton(
+  locator.registerFactory(
     () => PoAttachmentBloc(
       poAttachmentRepository: locator<PoAttachmentRepository>(),
     ),
@@ -1803,6 +1828,81 @@ void setupLocator() {
     () => DeepLinkingBloc(
       repository: locator<DeepLinkingRepository>(),
       service: locator<DynamicLinksService>(),
+    ),
+  );
+
+  //============================================================
+  //  Return Request price
+  //
+  //============================================================
+
+  locator.registerLazySingleton(
+    () => ReturnPriceQuery(),
+  );
+
+  locator.registerLazySingleton(
+    () => ReturnPriceLocalDataSource(),
+  );
+
+  locator.registerLazySingleton(
+    () => ReturnPriceRepository(
+      config: locator<Config>(),
+      localDataSource:
+          locator<ReturnPriceLocalDataSource>(),
+      remoteDataSource: locator<ReturnPriceRemoteDataSource>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => ReturnPriceRemoteDataSource(
+      config: locator<Config>(),
+      httpService: locator<HttpService>(),
+      queryMutation: locator<ReturnPriceQuery>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => ReturnPriceBloc(
+      returnPriceRepository: locator<ReturnPriceRepository>(),
+    ),
+  );
+
+
+  //============================================================
+  //  Submit Return
+  //
+  //============================================================
+
+  locator.registerLazySingleton(
+    () => SubmitReturnRequestMutation(),
+  );
+
+  locator.registerLazySingleton(
+    () => SubmitReturnRequestLocalDataSource(),
+  );
+
+  locator.registerLazySingleton(
+    () => SubmitRequestReturnRepository(
+      config: locator<Config>(),
+      localDataSource:
+          locator<SubmitReturnRequestLocalDataSource>(),
+      remoteDataSource: locator<SubmitReturnRequestRemoteDataSource>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => SubmitReturnRequestRemoteDataSource(
+      config: locator<Config>(),
+      httpService: locator<HttpService>(),
+      returnRequestMutation: locator<SubmitReturnRequestMutation>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => SubmitReturnBloc(
+      submitRequestRepository: locator<SubmitRequestReturnRepository>(),
     ),
   );
 

@@ -178,3 +178,6 @@ String getLanguageString(String apiLanguageCode) {
 String dashIfEmpty(String text) {
   return text.isEmpty ? '-' : text;
 }
+
+int getIntegerReturnQuantity(String quantity) =>
+    quantity.isEmpty ? 0 : int.parse(quantity);

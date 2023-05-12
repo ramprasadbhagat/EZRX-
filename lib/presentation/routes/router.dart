@@ -47,6 +47,12 @@ import 'package:ezrxmobile/presentation/history/detail/history_details.dart';
 
 import 'package:ezrxmobile/presentation/orders/create_order/scan_material_info.dart';
 
+import 'package:ezrxmobile/presentation/returns/request_return/request_return_details.dart';
+
+import 'package:ezrxmobile/presentation/returns/request_return/return_details_summary_page.dart';
+
+import 'package:ezrxmobile/presentation/returns/request_return/return_request_success.dart';
+
 //ignore: unused-code
 @MaterialAutoRouter(
   replaceInRouteName: 'Page,Route,Tab',
@@ -129,6 +135,9 @@ import 'package:ezrxmobile/presentation/orders/create_order/scan_material_info.d
       path: 'orders/combo_deal_principle_detail',
       page: ComboDealPrincipleDetailPage,
     ),
+    AutoRoute(path: 'request_return_details', page: RequestReturnDetails),
+    AutoRoute(path: 'request_return_details_summary', page: RequestReturnDetailsSummaryPage),
+    AutoRoute(path: 'request_return_success', page: ReturnRequestSuccessPage),
     CustomRoute(
       path: 'orders/add_to_cart',
       page: AddToCart,

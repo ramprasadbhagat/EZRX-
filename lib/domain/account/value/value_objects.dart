@@ -170,6 +170,8 @@ class RoleType extends ValueObject<String> {
     return value.getOrElse(() => '') == 'external_sales_rep';
   }
 
+  String get orderSource => getOrderSource(value.getOrElse(() => ''));
+
   bool get isReturnRequestor {
     return value.getOrElse(() => '') == 'return_requestor';
   }

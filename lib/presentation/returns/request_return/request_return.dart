@@ -7,6 +7,8 @@ import 'package:ezrxmobile/application/returns/request_return/request_return_blo
 import 'package:ezrxmobile/application/returns/request_return_filter/request_return_filter_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
+import 'package:ezrxmobile/domain/returns/entities/usage.dart';
+import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
@@ -184,54 +186,101 @@ class _RequestReturnList extends StatelessWidget {
             ? LoadingShimmer.logo(
                 key: const Key('LoaderImage'),
               )
-            : ScrollList<ReturnItem>(
-                emptyMessage: 'No Request for Return found'.tr(),
-                onRefresh: () {
-                  context.read<RequestReturnBloc>().add(
-                        RequestReturnEvent.fetch(
-                          salesOrg: context
-                              .read<SalesOrgBloc>()
-                              .state
-                              .salesOrganisation,
-                          shipInfo:
-                              context.read<ShipToCodeBloc>().state.shipToInfo,
-                          customerCodeInfo: context
-                              .read<CustomerCodeBloc>()
-                              .state
-                              .customerCodeInfo,
-                          requestReturnFilter: context
-                              .read<RequestReturnFilterBloc>()
-                              .state
-                              .requestReturnFilter,
-                        ),
-                      );
-                },
-                onLoadingMore: () {
-                  context.read<RequestReturnBloc>().add(
-                        RequestReturnEvent.loadMore(
-                          salesOrg: context
-                              .read<SalesOrgBloc>()
-                              .state
-                              .salesOrganisation,
-                          shipInfo:
-                              context.read<ShipToCodeBloc>().state.shipToInfo,
-                          customerCodeInfo: context
-                              .read<CustomerCodeBloc>()
-                              .state
-                              .customerCodeInfo,
-                          requestReturnFilter: context
-                              .read<RequestReturnFilterBloc>()
-                              .state
-                              .requestReturnFilter,
-                        ),
-                      );
-                },
-                isLoading: state.isLoading,
-                itemBuilder: (context, index, item) => _RequestReturnListItem(
-                  returnItem: item,
-                  configs: configs,
-                ),
-                items: state.returnItemList,
+            : Column(
+                children: [
+                  Expanded(
+                    child: ScrollList<ReturnItem>(
+                      emptyMessage: 'No Request for Return found'.tr(),
+                      onRefresh: () {
+                        context.read<RequestReturnBloc>().add(
+                              RequestReturnEvent.fetch(
+                                salesOrg: context
+                                    .read<SalesOrgBloc>()
+                                    .state
+                                    .salesOrganisation,
+                                shipInfo: context
+                                    .read<ShipToCodeBloc>()
+                                    .state
+                                    .shipToInfo,
+                                customerCodeInfo: context
+                                    .read<CustomerCodeBloc>()
+                                    .state
+                                    .customerCodeInfo,
+                                requestReturnFilter: context
+                                    .read<RequestReturnFilterBloc>()
+                                    .state
+                                    .requestReturnFilter,
+                              ),
+                            );
+                      },
+                      onLoadingMore: () {
+                        context.read<RequestReturnBloc>().add(
+                              RequestReturnEvent.loadMore(
+                                salesOrg: context
+                                    .read<SalesOrgBloc>()
+                                    .state
+                                    .salesOrganisation,
+                                shipInfo: context
+                                    .read<ShipToCodeBloc>()
+                                    .state
+                                    .shipToInfo,
+                                customerCodeInfo: context
+                                    .read<CustomerCodeBloc>()
+                                    .state
+                                    .customerCodeInfo,
+                                requestReturnFilter: context
+                                    .read<RequestReturnFilterBloc>()
+                                    .state
+                                    .requestReturnFilter,
+                              ),
+                            );
+                      },
+                      isLoading: state.isLoading,
+                      itemBuilder: (context, index, item) =>
+                          _RequestReturnListItem(
+                        returnItem: item,
+                        configs: configs,
+                        index: index,
+                      ),
+                      items: state.returnItemList,
+                    ),
+                  ),
+                  BlocBuilder<RequestReturnBloc, RequestReturnState>(
+                    buildWhen: (previous, current) =>
+                        previous.returnItemList != current.returnItemList,
+                    builder: (context, state) {
+                      return state.selectedReturnItems.isNotEmpty
+                          ? Container(
+                            alignment: Alignment.center,
+                              width: double.infinity,
+                              padding: const EdgeInsets.only(top: 10),
+                              decoration: const BoxDecoration(
+                                boxShadow: <BoxShadow>[
+                                  BoxShadow(
+                                    color: Colors.black54,
+                                    blurRadius: 2.0,
+                                    offset: Offset(0.0, 0.75),
+                                  ),
+                                ],
+                                color: ZPColors.white,
+                              ),
+                              child: SafeArea(
+                                child: ElevatedButton(
+                                  key: const ValueKey(
+                                      'goToReturnsDetailsPage',),
+                                  onPressed: () {
+                                    context.router.pushNamed(
+                                      'request_return_details',
+                                    );
+                                  },
+                                  child: const Text('Next').tr(),
+                                ),
+                              ),
+                            )
+                          : const SizedBox.shrink();
+                    },
+                  ),
+                ],
               );
       },
     );
@@ -243,16 +292,44 @@ class _RequestReturnListItem extends StatelessWidget {
     Key? key,
     required this.returnItem,
     required this.configs,
+    required this.index,
   }) : super(key: key);
 
   final ReturnItem returnItem;
   final SalesOrganisationConfigs configs;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
         onTap: () {},
+        minLeadingWidth: 15.0,
+        leading: SizedBox(
+          width: 16,
+          child: BlocBuilder<RequestReturnBloc, RequestReturnState>(
+            buildWhen: (previous, current) =>
+                previous.getReturnItem(returnItem.uniqueId) !=
+                current.getReturnItem(returnItem.uniqueId),
+            builder: (context, state) {
+              return Checkbox(
+                onChanged: (value) {
+                  context.read<RequestReturnBloc>().add(
+                        RequestReturnEvent.updateReturnDetails(
+                          updatedItem: returnItem.copyWith(
+                            isSelected: value!,
+                            poDocuments: [],
+                            returnQuantity: ReturnQuantity(''),
+                            usage: Usage.empty(),
+                          ),
+                        ),
+                      );
+                },
+                value: state.getReturnItem(returnItem.uniqueId).isSelected,
+              );
+            },
+          ),
+        ),
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -290,7 +367,7 @@ class _RequestReturnListItem extends StatelessWidget {
               valueFlex: 1,
             ),
             BalanceTextRow(
-              keyText: 'Created Date'.tr(),
+              keyText: 'Invoice Date'.tr(),
               valueText: returnItem.createdDate.toValidDateString,
               keyFlex: 1,
               valueFlex: 1,

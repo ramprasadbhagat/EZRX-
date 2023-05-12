@@ -1,0 +1,16 @@
+{
+    "data": {
+        "getReturnPrice": [
+            {
+                "unitPrice": 20.96,
+                "totalPrice": 20.96,
+                "materialNumber": "000000000021026760",
+                "itemNumber": "000010",
+                "__typename": "priceResponse"
+            }
+        ]
+    },
+    "extensions": {
+        "trace-id": "4733620319774b8a881d27c41cce690a"
+    }
+}

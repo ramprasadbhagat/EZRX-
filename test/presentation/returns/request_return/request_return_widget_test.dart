@@ -189,6 +189,7 @@ void main() {
         final expectedStates = [
           RequestReturnState.initial().copyWith(
             isLoading: false,
+            returnItemList: requestReturnResponse.items,
             failureOrSuccessOption:
                 optionOf(Right(requestReturnResponse.items)),
           ),

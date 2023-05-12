@@ -92,6 +92,10 @@ import 'package:scandit_flutter_datacapture_barcode/scandit_flutter_datacapture_
 
 import 'package:ezrxmobile/infrastructure/core/material_info_scanner/material_info_scanner.dart';
 
+import 'package:ezrxmobile/application/returns/return_price/return_price_bloc.dart';
+
+import 'package:ezrxmobile/application/returns/submit_return/submit_return_bloc.dart';
+
 final _crashlytics = locator<FirebaseCrashlyticsService>().crashlytics;
 
 Future<void> _firebaseMessagingBackgroundHandler(
@@ -345,6 +349,12 @@ class App extends StatelessWidget {
         ),
         BlocProvider<ReturnSummaryDetailsBloc>(
           create: (context) => locator<ReturnSummaryDetailsBloc>(),
+        ),
+        BlocProvider<ReturnPriceBloc>(
+          create: (context) => locator<ReturnPriceBloc>(),
+        ),
+        BlocProvider<SubmitReturnBloc>(
+          create: (context) => locator<SubmitReturnBloc>(),
         ),
         BlocProvider<DeepLinkingBloc>(
           create: (context) => locator<DeepLinkingBloc>(),
