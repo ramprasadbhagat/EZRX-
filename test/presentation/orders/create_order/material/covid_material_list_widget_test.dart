@@ -346,20 +346,23 @@ void main() {
 
     testWidgets('Search input cannot be less than 3 characters.',
         (tester) async {
+      when(() => covidMaterialListBlocMock.state).thenReturn(
+          CovidMaterialListState.initial()
+              .copyWith(isFetching: false, apiFailureOrSuccessOption: none()));
       await tester.pumpWidget(getScopedWidget(const MaterialRoot()));
+      await tester.pumpAndSettle();
       final covidTabTitle = find.text('COVID-19');
       expect(covidTabTitle, findsOneWidget);
       await tester.tap(covidTabTitle);
-      await tester.pump(const Duration(seconds: 4));
+      await tester.pumpAndSettle();
       final textField = find.byType(TextFormField);
       expect(textField, findsOneWidget);
-
       await tester.enterText(textField, '1234');
-      await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pump();
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      await tester.pumpAndSettle();
       expect(
           find.text('12'), findsNothing); // 2 characters shouldn't be allowed
-
       expect(find.text('1234'), findsOneWidget);
     });
 

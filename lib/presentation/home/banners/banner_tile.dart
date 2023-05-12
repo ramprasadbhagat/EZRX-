@@ -92,7 +92,7 @@ class BannerTile extends StatelessWidget {
                               ),
                             );
 
-                        await context.router.pushNamed('orders/material_list');
+                        await context.router.pushNamed('material_root');
                       }
                     } else if (banner.urlLink.isNotEmpty) {
                       if (context.mounted) {

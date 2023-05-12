@@ -2,9 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/returns/entities/approver_rights_details.dart';
-import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/confirm_clear_cart_dialog.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -29,13 +26,6 @@ class AddEditUserRestrictionPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    trackMixpanelEvent(
-      MixpanelEvents.pageViewVisited,
-      props: {
-        MixpanelProps.pageViewName: runtimeType.toString(),
-      },
-    );
-
     return Scaffold(
       key: const Key('AddEditUserRestrictionPage'),
       backgroundColor: ZPColors.white,

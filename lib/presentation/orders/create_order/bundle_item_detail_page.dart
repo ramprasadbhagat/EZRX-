@@ -16,10 +16,7 @@ import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
-import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/custom_label.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
@@ -41,13 +38,6 @@ class BundleItemDetailPage extends StatelessWidget {
     final quantityControllerList = <String, TextEditingController>{};
     final userCanCreateOrder =
         context.read<UserBloc>().state.userCanCreateOrder;
-
-    trackMixpanelEvent(
-      MixpanelEvents.pageViewVisited,
-      props: {
-        MixpanelProps.pageViewName: runtimeType.toString(),
-      },
-    );
 
     return Scaffold(
       key: const Key('bundleItemDetailPage'),

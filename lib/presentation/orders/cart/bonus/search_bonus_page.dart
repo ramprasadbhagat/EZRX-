@@ -7,9 +7,6 @@ import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_blo
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/cart_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
@@ -44,7 +41,7 @@ class BonusAddPage extends StatelessWidget {
           builder: (context, state) {
             return state.isStarting
                 ? const SizedBox.shrink(
-                    key:  Key('empty'),
+                    key: Key('empty'),
                   )
                 : state.isFetching
                     ? LoadingShimmer.logo(key: const Key('loaderImage'))
@@ -154,7 +151,6 @@ class BonusAddPage extends StatelessWidget {
   }
 }
 
-
 class _AppBar extends StatefulWidget {
   const _AppBar({Key? key}) : super(key: key);
 
@@ -169,12 +165,6 @@ class _AppBarState extends State<_AppBar> {
   @override
   void initState() {
     bonusMaterialBloc = context.read<BonusMaterialBloc>();
-    trackMixpanelEvent(
-      MixpanelEvents.pageViewVisited,
-      props: {
-        MixpanelProps.pageViewName: 'BonusAddPage',
-      },
-    );
     super.initState();
   }
 
@@ -190,7 +180,7 @@ class _AppBarState extends State<_AppBar> {
     return CustomAppBar(
       child: BlocBuilder<BonusMaterialBloc, BonusMaterialState>(
         buildWhen: (previous, current) =>
-        previous.searchKey != current.searchKey ||
+            previous.searchKey != current.searchKey ||
             previous.isFetching != current.isFetching,
         builder: (context, state) {
           _searchController.text = state.searchKey.getOrDefaultValue('');
@@ -207,30 +197,23 @@ class _AppBarState extends State<_AppBar> {
                 bonusMaterialBloc.add(
                   BonusMaterialEvent.fetch(
                     user: context.read<UserBloc>().state.user,
-                    salesOrganisation: context
-                        .read<SalesOrgBloc>()
-                        .state
-                        .salesOrganisation,
+                    salesOrganisation:
+                        context.read<SalesOrgBloc>().state.salesOrganisation,
                     configs: context.read<SalesOrgBloc>().state.configs,
                     pickAndPack: context
                         .read<EligibilityBloc>()
                         .state
                         .getPNPValueMaterial,
-                    customerInfo: context
-                        .read<CustomerCodeBloc>()
-                        .state
-                        .customerCodeInfo,
-                    shipInfo:
-                    context.read<ShipToCodeBloc>().state.shipToInfo,
+                    customerInfo:
+                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                    shipInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
                     searchKey: value,
                   ),
                 );
               } else {
                 showSnackBar(
                   context: context,
-                  message:
-                  'Please enter at least 2 characters.'
-                      .tr(),
+                  message: 'Please enter at least 2 characters.'.tr(),
                 );
               }
             },

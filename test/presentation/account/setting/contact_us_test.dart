@@ -56,7 +56,7 @@ void main() {
           .thenReturn(AnnouncementState.initial());
     });
 
-    StackRouterScope getScopedWidget() {
+    RouteDataScope getScopedWidget() {
       return WidgetUtils.getScopedWidget(
         autoRouterMock: autoRouterMock,
         providers: [

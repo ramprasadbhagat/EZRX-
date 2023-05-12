@@ -81,12 +81,6 @@ class _AppBarState extends State<_AppBar> {
         ),
       );
     }
-    trackMixpanelEvent(
-      MixpanelEvents.pageViewVisited,
-      props: {
-        MixpanelProps.pageViewName: runtimeType.toString(),
-      },
-    );
     _salesOrgBloc = context.read<SalesOrgBloc>();
     _userBloc = context.read<UserBloc>();
     super.initState();

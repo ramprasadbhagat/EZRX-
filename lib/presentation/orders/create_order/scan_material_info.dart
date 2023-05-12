@@ -1,7 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,12 +23,7 @@ class _ScanMaterialInfoState extends State<ScanMaterialInfo>
   @override
   void initState() {
     super.initState();
-    trackMixpanelEvent(
-      MixpanelEvents.pageViewVisited,
-      props: {
-        MixpanelProps.pageViewName: 'ScanMaterialPage',
-      },
-    );
+
     _ambiguate(WidgetsBinding.instance)?.addObserver(this);
   }
 

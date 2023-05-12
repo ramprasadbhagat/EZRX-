@@ -327,6 +327,7 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => RouterObserver(
       firebaseAnalyticsService: locator<FirebaseAnalyticsService>(),
+      mixpanelService: locator<MixpanelService>(),
     ),
   );
   locator.registerLazySingleton(() => SecureStorage());

@@ -670,7 +670,7 @@ void main() {
         await getWidget(tester);
         await tester.pump();
 
-        final onTapTest = find.byKey(const Key('orders/material_list'));
+        final onTapTest = find.byKey(const Key('material_root'));
         expect(onTapTest, findsOneWidget);
         await tester.tap(onTapTest);
 

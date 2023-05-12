@@ -78,14 +78,13 @@ class _BodyContent extends StatelessWidget {
           ElevatedButton(
             key: const Key('goToOrderHistory'),
             onPressed: () {
-              context.router.pushAndPopUntil(
+              context.router.pop();
+              context.router.navigate(
                 HomeNavigationTabbarRoute(
                   children: [
                     HistoryTabRoute(),
                   ],
                 ),
-                predicate: (route) =>
-                    route.settings.name == 'HomeNavigationTabbarRoute',
               );
             },
             child: Text(

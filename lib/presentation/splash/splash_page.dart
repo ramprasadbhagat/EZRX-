@@ -119,7 +119,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                 );
               },
               unauthenticated: (unauthState) {
-                locator<MixpanelService>().resetSuperProps();
+                locator<MixpanelService>().onLogout();
                 context.read<AnnouncementBloc>().add(
                       const AnnouncementEvent.getAnnouncement(),
                     );

@@ -8,6 +8,7 @@ import 'package:ezrxmobile/presentation/core/tab_view.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/covid_material_list/covid_material_list.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/material_bundle_list.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/material_list/material_list.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -45,23 +46,36 @@ class MaterialRoot extends StatelessWidget {
               length == 1
                   ? const Expanded(child: MaterialListPage())
                   : Expanded(
-                      child: TabViewPage(
-                        length: length,
-                        tabHeaderText: [
-                          'Material'.tr(),
-                          if (isBundleMaterialEnable) 'Bundles'.tr(),
-                          if (isCovidMaterialEnable) 'COVID-19'.tr(),
-                        ],
-                        tabWidgets: [
-                          const MaterialListPage(),
+                      child: AutoTabsRouter.tabBar(
+                        routes: [
+                          const MaterialListPageRoute(),
                           if (isBundleMaterialEnable)
-                            const MaterialBundleListPage(),
+                            const MaterialBundleListPageRoute(),
                           if (isCovidMaterialEnable)
-                            const CovidMaterialListPage(
+                            CovidMaterialListPageRoute(
                               addToCart:
                                   CartBottomSheet.showAddToCartBottomSheet,
                             ),
                         ],
+                        builder: (context, child, tabController) => TabViewPage(
+                          tabController: tabController,
+                          length: length,
+                          tabHeaderText: [
+                            'Material'.tr(),
+                            if (isBundleMaterialEnable) 'Bundles'.tr(),
+                            if (isCovidMaterialEnable) 'COVID-19'.tr(),
+                          ],
+                          tabWidgets: [
+                            const MaterialListPage(),
+                            if (isBundleMaterialEnable)
+                              const MaterialBundleListPage(),
+                            if (isCovidMaterialEnable)
+                              const CovidMaterialListPage(
+                                addToCart:
+                                    CartBottomSheet.showAddToCartBottomSheet,
+                              ),
+                          ],
+                        ),
                       ),
                     ),
             ],

@@ -135,7 +135,7 @@ void main() {
       locator.unregister<AppRouter>();
     });
 
-    StackRouterScope getScopedWidget() {
+    RouteDataScope getScopedWidget() {
       return WidgetUtils.getScopedWidget(
         autoRouterMock: autoRouterMock,
         providers: [
@@ -517,7 +517,7 @@ void main() {
       when(() => autoRouterMock.pop()).thenAnswer((invocation) async => true);
     });
 
-    StackRouterScope getScopedWidget() {
+    RouteDataScope getScopedWidget() {
       return WidgetUtils.getScopedWidget(
         autoRouterMock: autoRouterMock,
         providers: [

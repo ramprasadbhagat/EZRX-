@@ -79,12 +79,6 @@ class _AppBarState extends State<_AppBar> {
         ),
       );
     }
-    trackMixpanelEvent(
-      MixpanelEvents.pageViewVisited,
-      props: {
-        MixpanelProps.pageViewName: runtimeType.toString(),
-      },
-    );
     super.initState();
   }
 
@@ -127,8 +121,7 @@ class _AppBarState extends State<_AppBar> {
             } else {
               showSnackBar(
                 context: context,
-                message:
-                    'Please enter at least 2 characters.'.tr(),
+                message: 'Please enter at least 2 characters.'.tr(),
               );
             }
           },

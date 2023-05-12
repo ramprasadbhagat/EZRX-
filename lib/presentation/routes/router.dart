@@ -8,6 +8,9 @@ import 'package:ezrxmobile/presentation/account/payment_configuration/payment_me
 import 'package:ezrxmobile/presentation/orders/cart/bonus/search_bonus_page.dart';
 import 'package:ezrxmobile/presentation/orders/combo_deal/combo_deal_material_detail_page.dart';
 import 'package:ezrxmobile/presentation/orders/combo_deal/combo_deal_principle_detail_page.dart';
+import 'package:ezrxmobile/presentation/orders/create_order/covid_material_list/covid_material_list.dart';
+import 'package:ezrxmobile/presentation/orders/create_order/material_bundle_list.dart';
+import 'package:ezrxmobile/presentation/orders/create_order/material_list/material_list.dart';
 import 'package:ezrxmobile/presentation/orders/order_success/order_success_page.dart';
 import 'package:ezrxmobile/presentation/account/account_tab.dart';
 import 'package:ezrxmobile/presentation/account/change_password/change_password_page.dart';
@@ -74,41 +77,114 @@ import 'package:ezrxmobile/presentation/returns/request_return/return_request_su
       path: 'returns/policy_configuration',
       page: PolicyConfigurationPage,
     ),
-    AutoRoute(path: 'returns/add_policy_config', page: AddPolicyConfiguration),
-    AutoRoute(path: 'web_view', page: WebViewPage),
-    AutoRoute(path: 'change_password', page: ChangePasswordPage),
-    AutoRoute(path: 'contact_us', page: ContactUsPage),
+    AutoRoute(
+      path: 'returns/add_policy_config',
+      page: AddPolicyConfiguration,
+    ),
+    AutoRoute(
+      path: 'web_view',
+      page: WebViewPage,
+    ),
+    AutoRoute(
+      path: 'change_password',
+      page: ChangePasswordPage,
+    ),
+    AutoRoute(
+      path: 'contact_us',
+      page: ContactUsPage,
+    ),
     AutoRoute(
       path: 'notification_settings',
       page: NotificationSettingsPage,
     ),
-    AutoRoute(path: 'customer_search', page: CustomerSearchPage),
-    AutoRoute(path: 'ship_to_search', page: ShiptToSearchPage),
-    AutoRoute(path: 'orders/material_list', page: MaterialRoot),
-    AutoRoute(path: 'orders/material_filter', page: MaterialFilterPage),
-    AutoRoute(path: 'tos', page: AupTCDialog),
-    AutoRoute(path: 'orders/order_template_list', page: OrderTemplateListPage),
-    AutoRoute(path: 'orders/cart', page: CartPage),
-    AutoRoute(path: 'orders/order_summary', page: OrderSummaryPage),
-    AutoRoute(path: 'orders/order_confirmation', page: OrderSuccessPage),
+    AutoRoute(
+      path: 'customer_search',
+      page: CustomerSearchPage,
+    ),
+    AutoRoute(
+      path: 'ship_to_search',
+      page: ShiptToSearchPage,
+    ),
+    AutoRoute(path: 'material_root', page: MaterialRoot, children: [
+      AutoRoute(
+        page: MaterialListPage,
+        path: 'orders/material_list',
+      ),
+      AutoRoute(
+        page: MaterialBundleListPage,
+        path: 'orders/material_bundle_list',
+      ),
+      AutoRoute(
+        page: CovidMaterialListPage,
+        path: 'orders/covid_material_list',
+      ),
+    ]),
+    AutoRoute(
+      path: 'orders/material_filter',
+      page: MaterialFilterPage,
+    ),
+    AutoRoute(
+      path: 'terms_of_service',
+      page: AupTCDialog,
+    ),
+    AutoRoute(
+      path: 'orders/order_template_list',
+      page: OrderTemplateListPage,
+    ),
+    AutoRoute(
+      path: 'orders/cart',
+      page: CartPage,
+    ),
+    AutoRoute(
+      path: 'orders/order_summary',
+      page: OrderSummaryPage,
+    ),
+    AutoRoute(
+      path: 'orders/order_confirmation',
+      page: OrderSuccessPage,
+    ),
     AutoRoute(
       path: 'orders/order_template_detail',
       page: OrderTemplateDetailPage,
     ),
     AutoRoute(
-      path: 'main_tabbar',
+      path: 'main',
       page: HomeNavigationTabbar,
       children: [
-        AutoRoute(page: HomeTab, path: 'home'),
-        AutoRoute(page: HistoryTab, path: 'orders/history'),
-        AutoRoute(page: FavouritesTab, path: 'orders/favourites'),
-        AutoRoute(page: AccountTab, path: 'core/account'),
+        AutoRoute(
+          page: HomeTab,
+          path: 'home',
+        ),
+        AutoRoute(
+          page: HistoryTab,
+          path: 'orders/history',
+        ),
+        AutoRoute(
+          page: FavouritesTab,
+          path: 'orders/favourites',
+        ),
+        AutoRoute(
+          page: AccountTab,
+          path: 'core/account',
+        ),
       ],
     ),
-    AutoRoute(path: 'orders/saved_order_list', page: SavedOrderListPage),
-    AutoRoute(path: 'orders/saved_order_detail', page: SavedOrderDetailPage),
-    AutoRoute(path: 'orders/history_details', page: HistoryDetails),
-    AutoRoute(path: 'orders/add_bonus', page: BonusAddPage),
+    AutoRoute(
+      path: 'orders/saved_order_list',
+      page: SavedOrderListPage,
+    ),
+    AutoRoute(
+      path: 'orders/saved_order_detail',
+      page: SavedOrderDetailPage,
+    ),
+    AutoRoute(
+      path: 'orders/history_details',
+      page: HistoryDetails,
+    ),
+    AutoRoute(
+      path: 'orders/add_bonus',
+      page: BonusAddPage,
+    ),
     AutoRoute(
       path: 'returns/add_edit_user_restriction',
       page: AddEditUserRestrictionPage,

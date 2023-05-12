@@ -5,6 +5,7 @@ import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 class MixpanelService {
   late Mixpanel mixpanel;
   BannerItem banner = BannerItem.empty();
+  String activeNavBarRoute = 'Home Page';
 
   void init({required Mixpanel mixpanel}) {
     this.mixpanel = mixpanel;
@@ -36,8 +37,9 @@ class MixpanelService {
     });
   }
 
-  void resetSuperProps() {
+  void onLogout() {
     mixpanel.clearSuperProperties();
+    activeNavBarRoute = 'Home Page';
   }
 
   void setUser({

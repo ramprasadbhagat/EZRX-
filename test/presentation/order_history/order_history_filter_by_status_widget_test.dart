@@ -41,7 +41,7 @@ void main() {
       when(() => mockOrderHistoryFilterByStatusBloc.state)
           .thenReturn(OrderHistoryFilterByStatusState.initial());
     });
-    StackRouterScope getWUT() {
+    RouteDataScope getWUT() {
       return WidgetUtils.getScopedWidget(
         autoRouterMock: autoRouterMock,
         providers: [
@@ -69,12 +69,12 @@ void main() {
       await tester.pumpAndSettle(const Duration(seconds: 3));
       final filtercByStatus =
           find.byKey(const Key('order_history_filter_by_status'));
-      final filterclearAllButton =
-          find.byKey(const Key('closeButton'));
+      final filterclearAllButton = find.byKey(const Key('closeButton'));
       expect(filtercByStatus, findsOneWidget);
       expect(filterclearAllButton, findsOneWidget);
 
-      final checkboxListTile = find.byKey(const Key('checkboxListTileCancelled'));
+      final checkboxListTile =
+          find.byKey(const Key('checkboxListTileCancelled'));
       expect(checkboxListTile, findsWidgets);
 
       await tester.tap(checkboxListTile.first);
@@ -84,7 +84,7 @@ void main() {
       when(() => mockOrderHistoryFilterByStatusBloc.state).thenReturn(
         OrderHistoryFilterByStatusState.initial().copyWith(
           filterByStatusName: [
-           StatusType ('Cancelled'),
+            StatusType('Cancelled'),
             StatusType('Delivered'),
           ],
         ),

@@ -137,7 +137,7 @@ void main() {
       ));
     });
 
-    StackRouterScope getWUT() {
+    RouteDataScope getWUT() {
       return WidgetUtils.getScopedWidget(
         autoRouterMock: autoRouterMock,
         providers: [

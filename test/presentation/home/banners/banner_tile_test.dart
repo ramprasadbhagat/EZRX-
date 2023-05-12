@@ -165,7 +165,7 @@ void main() {
       );
     }
 
-    StackRouterScope getScopedWidget(Config config) {
+    RouteDataScope getScopedWidget(Config config) {
       return WidgetUtils.getScopedWidget(
         autoRouterMock: autoRouterMock,
         providers: [

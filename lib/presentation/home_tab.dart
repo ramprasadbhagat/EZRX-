@@ -2,9 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
-import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/presentation/aup_tc/aup_tc.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +19,7 @@ class HomeNavigationTabbar extends StatelessWidget {
           previous.showTermsAndConditon != current.showTermsAndConditon,
       builder: (context, state) {
         final orientation = MediaQuery.of(context).orientation;
-        
+
         return state.showTermsAndConditon
             ? const AupTCDialog(
                 key: ValueKey('auptcscreen'),
@@ -30,7 +27,7 @@ class HomeNavigationTabbar extends StatelessWidget {
             : WillPopScope(
                 onWillPop: () async => false,
                 child: SizerUtil.deviceType != DeviceType.mobile &&
-                orientation == Orientation.landscape
+                        orientation == Orientation.landscape
                     ? BlocBuilder<UserBloc, UserState>(
                         buildWhen: (previous, current) => previous != current,
                         builder: (context, state) {
@@ -62,11 +59,6 @@ class HomeNavigationTabbar extends StatelessWidget {
                                         .toList(),
                                     selectedIndex: activeIndex,
                                     onDestinationSelected: (index) {
-                                      _trackEvents(
-                                        context: context,
-                                        index: index,
-                                      );
-
                                       context.navigateTo(
                                         _getTabs(context)[index].route,
                                       );
@@ -93,10 +85,6 @@ class HomeNavigationTabbar extends StatelessWidget {
                                 key: const Key('homeTabbar'),
                                 currentIndex: tabsRouter.activeIndex,
                                 onTap: (index) {
-                                  _trackEvents(
-                                    context: context,
-                                    index: index,
-                                  );
                                   tabsRouter.setActiveIndex(index);
                                 },
                                 items: _getTabs(context)
@@ -115,53 +103,6 @@ class HomeNavigationTabbar extends StatelessWidget {
               );
       },
     );
-  }
-
-  void _trackEvents({
-    required BuildContext context,
-    required int index,
-  }) {
-    if (context.read<UserBloc>().state.userCanCreateOrder) {
-      switch (index) {
-        case 0:
-          trackMixpanelEvent(
-            MixpanelEvents.pageViewVisited,
-            props: {
-              MixpanelProps.pageViewName: 'home-page',
-            },
-          );
-          break;
-        case 1:
-          trackMixpanelEvent(
-            MixpanelEvents.orderHistory,
-          );
-          break;
-        case 2:
-          trackMixpanelEvent(
-            MixpanelEvents.pageViewVisited,
-            props: {
-              MixpanelProps.pageViewName: 'favourites-page',
-            },
-          );
-          break;
-        case 3:
-          trackMixpanelEvent(
-            MixpanelEvents.pageViewVisited,
-            props: {
-              MixpanelProps.pageViewName: 'account-page',
-            },
-          );
-          break;
-        default:
-      }
-    } else {
-      trackMixpanelEvent(
-        MixpanelEvents.pageViewVisited,
-        props: {
-          MixpanelProps.pageViewName: index == 0 ? 'home-page' : 'account-page',
-        },
-      );
-    }
   }
 }
 

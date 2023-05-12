@@ -289,7 +289,7 @@ void main() {
           .thenReturn(AnnouncementState.initial());
     });
 
-    StackRouterScope getWUT() {
+    RouteDataScope getWUT() {
       return WidgetUtils.getScopedWidget(
         autoRouterMock: autoRouterMock,
         providers: [
@@ -747,8 +747,8 @@ void main() {
           downloadAttachmentBlocMock,
           Stream.fromIterable([
             PoAttachmentState.initial().copyWith(
-                fileOperationMode: FileOperationMode.none,
-                failureOrSuccessOption: none(),
+              fileOperationMode: FileOperationMode.none,
+              failureOrSuccessOption: none(),
             ),
             PoAttachmentState.initial(),
           ]));
@@ -790,7 +790,7 @@ void main() {
           downloadAttachmentBlocMock,
           Stream.fromIterable([
             PoAttachmentState.initial().copyWith(
-                fileOperationMode: FileOperationMode.download,
+              fileOperationMode: FileOperationMode.download,
             ),
             PoAttachmentState.initial(),
           ]));
@@ -833,7 +833,7 @@ void main() {
           downloadAttachmentBlocMock,
           Stream.fromIterable([
             PoAttachmentState.initial().copyWith(
-                fileOperationMode: FileOperationMode.download,
+              fileOperationMode: FileOperationMode.download,
             ),
             PoAttachmentState.initial(),
           ]));
@@ -875,7 +875,7 @@ void main() {
           downloadAttachmentBlocMock,
           Stream.fromIterable([
             PoAttachmentState.initial().copyWith(
-                fileOperationMode: FileOperationMode.view,
+              fileOperationMode: FileOperationMode.view,
             ),
             PoAttachmentState.initial(),
           ]));
