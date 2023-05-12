@@ -26,10 +26,6 @@ class AdminPoAttachmentState with _$AdminPoAttachmentState {
       )
       .toList();
 
-  bool get allSelected =>
-      adminPoAttachmentList.length == selectedItems.length &&
-      adminPoAttachmentList.isNotEmpty;
-
   bool get canDownload =>
       selectedItems.length <= _downloadLimit && selectedItems.isNotEmpty;
 }

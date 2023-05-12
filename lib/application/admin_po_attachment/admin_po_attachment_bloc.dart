@@ -12,7 +12,7 @@ part 'admin_po_attachment_event.dart';
 part 'admin_po_attachment_state.dart';
 part 'admin_po_attachment_bloc.freezed.dart';
 
-const int _pageSize = 10;
+const int _pageSize = 20;
 
 class AdminPoAttachmentBloc
     extends Bloc<AdminPoAttachmentEvent, AdminPoAttachmentState> {

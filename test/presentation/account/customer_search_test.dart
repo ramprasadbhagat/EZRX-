@@ -10,8 +10,14 @@ import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_local.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/presentation/account/customer_search.dart';
@@ -50,6 +56,9 @@ final salesOrgVariants = ValueVariant({...SalesOrgVariant.values});
 
 final customerCodeVariants = ValueVariant({...CustomerCodeVariant.values});
 
+class MockAppRouter extends Mock implements AppRouter {}
+
+class MaterialPageXMock extends Mock implements MaterialPageX {}
 
 final locator = GetIt.instance;
 
@@ -64,35 +73,35 @@ void main() {
   late CartBloc cartBlocMock;
   final fakeCustomerCodeInfo =
       CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: '0000100730');
-  // final fakeMaterialNumber = MaterialNumber('000000000023168451');
-  // final fakematerialInfo = MaterialInfo(
-  //   quantity: 0,
-  //   ean: '2234567890',
-  //   materialNumber: fakeMaterialNumber,
-  //   materialDescription: "Reag Cup 15ml 1'S",
-  //   governmentMaterialCode: '',
-  //   therapeuticClass: 'All other non-therapeutic products',
-  //   itemBrand: 'Item not listed in I',
-  //   principalData: PrincipalData(
-  //     principalName: PrincipalName('台灣羅氏醫療診斷設備(股)公司'),
-  //     principalCode: PrincipalCode('0000102004'),
-  //   ),
-  //   taxClassification: MaterialTaxClassification('Product : Full Tax'),
-  //   itemRegistrationNumber: 'NA',
-  //   unitOfMeasurement: 'EA',
-  //   materialGroup2: MaterialGroup.two(''),
-  //   materialGroup4: MaterialGroup.four('OTH'),
-  //   isSampleMaterial: false,
-  //   hidePrice: false,
-  //   hasValidTenderContract: false,
-  //   hasMandatoryTenderContract: false,
-  //   taxes: ['5'],
-  //   bundles: [],
-  //   defaultMaterialDescription: '',
-  //   isFOCMaterial: false,
-  //   remarks: '',
-  //   genericMaterialName: '',
-  // );
+  final fakeMaterialNumber = MaterialNumber('000000000023168451');
+  final fakeMaterialInfo = MaterialInfo(
+    quantity: 0,
+    ean: '2234567890',
+    materialNumber: fakeMaterialNumber,
+    materialDescription: "Reag Cup 15ml 1'S",
+    governmentMaterialCode: '',
+    therapeuticClass: 'All other non-therapeutic products',
+    itemBrand: 'Item not listed in I',
+    principalData: PrincipalData(
+      principalName: PrincipalName('台灣羅氏醫療診斷設備(股)公司'),
+      principalCode: PrincipalCode('0000102004'),
+    ),
+    taxClassification: MaterialTaxClassification('Product : Full Tax'),
+    itemRegistrationNumber: 'NA',
+    unitOfMeasurement: 'EA',
+    materialGroup2: MaterialGroup.two(''),
+    materialGroup4: MaterialGroup.four('OTH'),
+    isSampleMaterial: false,
+    hidePrice: false,
+    hasValidTenderContract: false,
+    hasMandatoryTenderContract: false,
+    taxes: ['5'],
+    bundles: [],
+    defaultMaterialDescription: '',
+    isFOCMaterial: false,
+    remarks: '',
+    genericMaterialName: '',
+  );
   late AuthBloc authBlocMock;
   late AnnouncementBloc announcementBlocMock;
   setUpAll(() {
@@ -122,6 +131,9 @@ void main() {
       when(() => announcementBlocMock.state)
           .thenReturn(AnnouncementState.initial());
     });
+    tearDownAll(() {
+      locator.unregister<AppRouter>();
+    });
 
     StackRouterScope getScopedWidget() {
       return WidgetUtils.getScopedWidget(
@@ -139,7 +151,6 @@ void main() {
         child: const CustomerSearchPage(),
       );
     }
-
 
     testWidgets('Load customer Search Widget', (tester) async {
       whenListen(
@@ -208,100 +219,6 @@ void main() {
       },
       variant: customerCodeVariants,
     );
-    // will Fix on Admin Po Attachment Test case
-    // testWidgets(
-    //   'Test when cart item is not empty',
-    //   (tester) async {
-    //     when(() => cartBlocMock.state)
-    //         .thenReturn(CartState.initial().copyWith(cartItems: [
-    //       CartItem.material(
-    //         PriceAggregate.empty().copyWith(
-    //           materialInfo: fakematerialInfo,
-    //         ),
-    //       ),
-    //     ]));
-
-    //     when(() => customerCodeBlocMock.state).thenReturn(
-    //       CustomerCodeState.initial().copyWith(customerCodeList: [
-    //         CustomerCodeInfo.empty().copyWith(
-    //           telephoneNumber: PhoneNumber('1234567890'),
-    //           customerCodeSoldTo: '123456789',
-    //           shipToInfos: <ShipToInfo>[
-    //             ShipToInfo.empty().copyWith(
-    //               shipToCustomerCode: '12345678',
-    //             ),
-    //           ],
-    //           paymentTermDescription: '30 days',
-    //         ),
-    //       ]),
-    //     );
-
-    //     await tester.pumpWidget(getScopedWidget());
-
-    //     await tester.pump();
-
-    //     final customerCodeSelect = find.byKey(const Key('customerCodeSelect'));
-
-    //     expect(customerCodeSelect, findsOneWidget);
-
-    //     await tester.pump(const Duration(seconds: 1));
-
-    //     expect(find.byType(ListTile), findsWidgets);
-
-    //     await tester.tap(
-    //       find.byType(ListTile).first,
-    //     );
-
-    //     await tester.pump(const Duration(seconds: 1));
-
-    //     expect(find.text('Change Customer Code'), findsOneWidget);
-    //     await tester.tap(find.text('Cancel'));
-    //     await tester.pumpAndSettle(const Duration(seconds: 3));
-    //     await tester.tap(find.text('Change'));
-    //     await tester.pumpAndSettle(const Duration(seconds: 3));
-    //   },
-    // );
-    // testWidgets(
-    //   'Test when cartList is empty',
-    //   (tester) async {
-    //     when(() => cartBlocMock.state).thenReturn(CartState.initial());
-
-    //     when(() => customerCodeBlocMock.state).thenReturn(
-    //       CustomerCodeState.initial().copyWith(customerCodeList: [
-    //         CustomerCodeInfo.empty().copyWith(
-    //           telephoneNumber: PhoneNumber('1234567890'),
-    //           customerCodeSoldTo: '123456789',
-    //           shipToInfos: <ShipToInfo>[
-    //             ShipToInfo.empty().copyWith(
-    //               shipToCustomerCode: '12345678',
-    //             ),
-    //           ],
-    //           paymentTermDescription: '30 days',
-    //         ),
-    //       ]),
-    //     );
-
-    //     await tester.pumpWidget(getScopedWidget());
-
-    //     await tester.pump();
-
-    //     final customerCodeSelect = find.byKey(const Key('customerCodeSelect'));
-
-    //     expect(customerCodeSelect, findsOneWidget);
-
-    //     await tester.pump(const Duration(seconds: 1));
-
-    //     expect(find.byType(ListTile), findsWidgets);
-
-    //     await tester.tap(
-    //       find.byType(ListTile).first,
-    //     );
-
-    //     await tester.pump(const Duration(seconds: 1));
-
-    //     expect(find.text('Change Customer Code'), findsNothing);
-    //   },
-    // );
     testWidgets('Please enter at least 2 characters.', (tester) async {
       await tester.pumpWidget(getScopedWidget());
       await tester.pumpAndSettle(const Duration(seconds: 3));
@@ -334,7 +251,7 @@ void main() {
 
       await tester.pump();
 
-      final nocustomerFound = find.text('No Customer Code Found');
+      final noCustomerFound = find.text('No Customer Code Found');
       final loadIndicator = find.byKey(const Key('loadIndicator'));
 
       final gesture = await tester
@@ -344,7 +261,7 @@ void main() {
 
       await tester.pump();
       expect(loadIndicator, findsOneWidget);
-      expect(nocustomerFound, findsNothing);
+      expect(noCustomerFound, findsNothing);
     });
 
     testWidgets(
@@ -372,7 +289,7 @@ void main() {
 
       await tester.pump();
 
-      final nocustomerFound = find.text('No Customer Code Found');
+      final noCustomerFound = find.text('No Customer Code Found');
       final loadIndicator = find.byKey(const Key('loadIndicator'));
 
       final gesture = await tester
@@ -382,7 +299,7 @@ void main() {
 
       await tester.pump();
       expect(loadIndicator, findsNothing);
-      expect(nocustomerFound, findsOneWidget);
+      expect(noCustomerFound, findsOneWidget);
     });
 
     testWidgets('Clear Customer code Search', (tester) async {
@@ -571,5 +488,128 @@ void main() {
       await tester.pump();
       expect(errorMessage, findsOneWidget);
     });
+  });
+
+  group('Customer Code Change with Item on cart', () {
+    setUpAll(() {
+      locator.registerLazySingleton(() => MockAppRouter());
+    });
+    setUp(() async {
+      userBlocMock = UserBlocMock();
+      salesOrgBlocMock = SalesOrgBlocMock();
+      customerCodeBlocMock = CustomerCodeBlocMock();
+      cartBlocMock = CartBlocMock();
+      authBlocMock = AuthBlocMock();
+      announcementBlocMock = AnnouncementBlocMock();
+      autoRouterMock = locator<MockAppRouter>();
+      customerCodeListMock =
+          await CustomerCodeLocalDataSource().getCustomerCodeList();
+      when(() => userBlocMock.state).thenReturn(UserState.initial());
+      when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
+      when(() => customerCodeBlocMock.state)
+          .thenReturn(CustomerCodeState.initial());
+      when(() => cartBlocMock.state).thenReturn(CartState.initial());
+      when(() => authBlocMock.state).thenReturn(const AuthState.initial());
+      when(() => announcementBlocMock.state)
+          .thenReturn(AnnouncementState.initial());
+      when(() => autoRouterMock.currentPath).thenReturn('fake-path');
+      when(() => autoRouterMock.stack).thenReturn([MaterialPageXMock()]);
+      when(() => autoRouterMock.pop()).thenAnswer((invocation) async => true);
+    });
+
+    StackRouterScope getScopedWidget() {
+      return WidgetUtils.getScopedWidget(
+        autoRouterMock: autoRouterMock,
+        providers: [
+          BlocProvider<UserBloc>(create: (context) => userBlocMock),
+          BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBlocMock),
+          BlocProvider<CustomerCodeBloc>(
+              create: (context) => customerCodeBlocMock),
+          BlocProvider<CartBloc>(create: (context) => cartBlocMock),
+          BlocProvider<AuthBloc>(create: (context) => authBlocMock),
+          BlocProvider<AnnouncementBloc>(
+              create: (context) => announcementBlocMock),
+        ],
+        child: const CustomerSearchPage(),
+      );
+    }
+
+    testWidgets(
+      'Test when cart item is not empty',
+      (tester) async {
+        when(() => cartBlocMock.state)
+            .thenReturn(CartState.initial().copyWith(cartItems: [
+          CartItem.material(
+            PriceAggregate.empty().copyWith(
+              materialInfo: fakeMaterialInfo,
+            ),
+          ),
+        ]));
+
+        when(() => customerCodeBlocMock.state).thenReturn(
+          CustomerCodeState.initial().copyWith(customerCodeList: [
+            CustomerCodeInfo.empty().copyWith(
+              telephoneNumber: PhoneNumber('1234567890'),
+              customerCodeSoldTo: '123456789',
+              shipToInfos: <ShipToInfo>[
+                ShipToInfo.empty().copyWith(
+                  shipToCustomerCode: '12345678',
+                ),
+              ],
+              paymentTermDescription: '30 days',
+            ),
+          ]),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        final customerCodeSelect = find.byKey(const Key('customerCodeSelect'));
+        expect(customerCodeSelect, findsOneWidget);
+        await tester.pump(const Duration(seconds: 1));
+        expect(find.byType(ListTile), findsWidgets);
+        await tester.tap(
+          find.byType(ListTile).first,
+        );
+        await tester.pump(const Duration(seconds: 1));
+        expect(find.text('Change Customer Code'), findsOneWidget);
+        await tester.tap(find.text('Cancel'));
+        await tester.pumpAndSettle(const Duration(seconds: 3));
+        await tester.tap(find.text('Change'));
+        await tester.pumpAndSettle(const Duration(seconds: 3));
+      },
+    );
+    testWidgets(
+      'Test when cartList is empty',
+      (tester) async {
+        when(() => cartBlocMock.state).thenReturn(CartState.initial());
+
+        when(() => customerCodeBlocMock.state).thenReturn(
+          CustomerCodeState.initial().copyWith(customerCodeList: [
+            CustomerCodeInfo.empty().copyWith(
+              telephoneNumber: PhoneNumber('1234567890'),
+              customerCodeSoldTo: '123456789',
+              shipToInfos: <ShipToInfo>[
+                ShipToInfo.empty().copyWith(
+                  shipToCustomerCode: '12345678',
+                ),
+              ],
+              paymentTermDescription: '30 days',
+            ),
+          ]),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        final customerCodeSelect = find.byKey(const Key('customerCodeSelect'));
+        expect(customerCodeSelect, findsOneWidget);
+        await tester.pump(const Duration(seconds: 1));
+        expect(find.byType(ListTile), findsWidgets);
+        await tester.tap(
+          find.byType(ListTile).first,
+        );
+        await tester.pump(const Duration(seconds: 1));
+        expect(find.text('Change Customer Code'), findsNothing);
+      },
+    );
   });
 }
