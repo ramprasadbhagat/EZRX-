@@ -11,7 +11,7 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/cart_bottom_sheet_shimmer.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/update_cart_button.dart';
-import 'package:ezrxmobile/presentation/orders/create_order/cart_item_detail_widget.dart';
+import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/cart_item_detail_widget.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/select_contract.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter_svg/svg.dart';
