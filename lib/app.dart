@@ -110,17 +110,13 @@ Future<void> _firebaseMessagingBackgroundHandler(
 
 Future<void> initialSetup({required Flavor flavor}) async {
   WidgetsFlutterBinding.ensureInitialized();
-  await ScanditFlutterDataCaptureBarcode.initialize();
   await EasyLocalization.ensureInitialized();
   setupLocator();
+
   final config = locator<Config>();
   config.appFlavor = flavor;
-  if (!kIsWeb) {
-    await Wakelock.enable();
-  }
 
   await Firebase.initializeApp(options: kIsWeb ? config.firebaseOptions : null);
-
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
   if (kDebugMode) {
@@ -139,14 +135,21 @@ Future<void> initialSetup({required Flavor flavor}) async {
   await locator<OktaLoginServices>().init();
   await locator<AccountSelectorStorage>().init();
   await locator<CartStorage>().init();
+  await locator<OrderStorage>().init();
   locator<MixpanelService>().init(
     mixpanel: await Mixpanel.init(
       config.mixpanelKey,
       trackAutomaticEvents: true,
     ),
   );
-  await locator<MaterialInfoScanner>().init();
-  await locator<OrderStorage>().init();
+
+  if (!kIsWeb) {
+    await Wakelock.enable();
+    if (locator<RemoteConfigService>().getScanToOrderConfig()) {
+      await ScanditFlutterDataCaptureBarcode.initialize();
+      await locator<MaterialInfoScanner>().init();
+    }
+  }
 }
 
 void runAppWithCrashlyticsAndLocalization() {
