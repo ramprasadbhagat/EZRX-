@@ -197,8 +197,26 @@ stages:
         changesNotSentForReview: true
 
 
+- stage: WebUatStage
+  dependsOn: []
+  displayName: WebUatStage
+  jobs:
+
+  - job: WebUatJob
+    displayName: WebUatJob
+    steps: 
+
+    - task: Bash@3
+      displayName: build Web Uat and upload to firebase hosting
+      inputs:
+        targetType: 'inline'
+        script: |
+          make build_web_uat
+          firebase deploy --token "$(FIREBASE_UAT_TOKEN)"
+
+
 - stage: MSTeamsNotificationStage
-  dependsOn: [IOSUatStage,AndroidUatStage]
+  dependsOn: [IOSUatStage,AndroidUatStage,WebUatStage]
   displayName: MSTeamsNotificationStage
   jobs:
   - job: MSTeamsNotificationUatJob

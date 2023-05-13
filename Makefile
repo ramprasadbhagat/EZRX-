@@ -4,9 +4,6 @@ BUILD := $$( echo $(STR) | cut -d '+' -f 2 )
 CLIENTUSER := 'order/client_user.dart'
 EXTERNALSALESREP := 'order/external_sales_rep.dart'
 
-
-
-
 run_test:
 	@fvm flutter analyze --fatal-infos --fatal-warnings
 	@fvm flutter pub run dart_code_metrics:metrics analyze lib --fatal-style --fatal-performance --fatal-warnings
@@ -30,10 +27,14 @@ build_ios_uat:
 	@flutter build ipa --flavor uat -t lib/main_uat.dart --release --export-options-plist=ios/config/uat/exportOptions.plist
 build_android_uat:
 	@fvm flutter build appbundle --flavor uat -t lib/main_uat.dart --release
+build_web_uat:
+	@fvm flutter build web -t lib/main_uat.dart --release
 build_ios_prod:
 	@fvm flutter build ipa --flavor prod -t lib/main_prod.dart --release --export-options-plist=ios/config/prod/exportOptions.plist
 build_android_prod:
 	@fvm flutter build appbundle --flavor prod -t lib/main_prod.dart --release
+build_web_prod:
+	@fvm flutter build web -t lib/main_prod.dart --release
 build_xctest:
 	@xcodebuild -workspace ios/Runner.xcworkspace -scheme uat -derivedDataPath build/xctest -sdk iphoneos build-for-testing
 	@zip -r ezrx_xctest.zip Debug-iphoneos build/xctest/Build/Products/uat_iphoneos16.4.xctestrun
