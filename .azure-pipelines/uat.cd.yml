@@ -207,11 +207,22 @@ stages:
     steps: 
 
     - task: Bash@3
+      displayName: flutter & firebase setup
+      inputs:
+        targetType: 'inline'
+        script: |
+          brew tap leoafarias/fvm
+          brew install fvm
+          echo Y | fvm global 3.7.5
+          fvm flutter pub get
+          brew install firebase-cli
+
+    - task: Bash@3
       displayName: build Web Uat and upload to firebase hosting
       inputs:
         targetType: 'inline'
         script: |
-          make build_web_uat
+          fvm flutter build web -t lib/main_uat.dart --release
           firebase deploy --token "$(FIREBASE_UAT_TOKEN)"
 
 
