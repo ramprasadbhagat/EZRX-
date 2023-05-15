@@ -83,7 +83,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:sizer/sizer.dart';
 import 'package:upgrader/upgrader.dart';
-import 'package:wakelock/wakelock.dart';
 
 import 'package:ezrxmobile/application/returns/return_request_type_code/return_request_type_code_bloc.dart';
 import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
@@ -112,6 +111,8 @@ Future<void> _firebaseMessagingBackgroundHandler(
 Future<void> initialSetup({required Flavor flavor}) async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
+  // TODO: Ananth remove this after your fix
+  await ScanditFlutterDataCaptureBarcode.initialize();
   setupLocator();
 
   final config = locator<Config>();
@@ -143,14 +144,17 @@ Future<void> initialSetup({required Flavor flavor}) async {
       trackAutomaticEvents: true,
     ),
   );
+  // TODO: Ananth remove this after your fix
+  await locator<MaterialInfoScanner>().init();
 
-  if (!kIsWeb) {
-    await Wakelock.enable();
-    if (locator<RemoteConfigService>().getScanToOrderConfig()) {
-      await ScanditFlutterDataCaptureBarcode.initialize();
-      await locator<MaterialInfoScanner>().init();
-    }
-  }
+  // TODO: Ananth uncomment this after your fix
+  // if (!kIsWeb) {
+  //   await Wakelock.enable();
+  //   if (locator<RemoteConfigService>().getScanToOrderConfig()) {
+  //     await ScanditFlutterDataCaptureBarcode.initialize();
+  //     await locator<MaterialInfoScanner>().init();
+  //   }
+  // }
 }
 
 void runAppWithCrashlyticsAndLocalization() {
