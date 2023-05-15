@@ -27,9 +27,14 @@ mixin _$MaterialFilterEvent {
             SalesOrganisationConfigs salesOrgConfig,
             String pickAndPack)
         fetch,
+    required TResult Function(MaterialFilterType filterType)
+        updateMaterialSelected,
     required TResult Function(
             MaterialFilterType filterType, String selectedFilter)
-        updateMaterialSelected,
+        updateTappedMaterialSelected,
+    required TResult Function() setTappedMaterialToEmpty,
+    required TResult Function(MaterialFilterType filterType)
+        initiateTappedMaterial,
     required TResult Function(String searchkey) updateSearchKey,
     required TResult Function() clearSelected,
     required TResult Function(MaterialFilterType filterType) clearAllSelected,
@@ -47,8 +52,11 @@ mixin _$MaterialFilterEvent {
             SalesOrganisationConfigs salesOrgConfig,
             String pickAndPack)?
         fetch,
+    TResult? Function(MaterialFilterType filterType)? updateMaterialSelected,
     TResult? Function(MaterialFilterType filterType, String selectedFilter)?
-        updateMaterialSelected,
+        updateTappedMaterialSelected,
+    TResult? Function()? setTappedMaterialToEmpty,
+    TResult? Function(MaterialFilterType filterType)? initiateTappedMaterial,
     TResult? Function(String searchkey)? updateSearchKey,
     TResult? Function()? clearSelected,
     TResult? Function(MaterialFilterType filterType)? clearAllSelected,
@@ -66,8 +74,11 @@ mixin _$MaterialFilterEvent {
             SalesOrganisationConfigs salesOrgConfig,
             String pickAndPack)?
         fetch,
+    TResult Function(MaterialFilterType filterType)? updateMaterialSelected,
     TResult Function(MaterialFilterType filterType, String selectedFilter)?
-        updateMaterialSelected,
+        updateTappedMaterialSelected,
+    TResult Function()? setTappedMaterialToEmpty,
+    TResult Function(MaterialFilterType filterType)? initiateTappedMaterial,
     TResult Function(String searchkey)? updateSearchKey,
     TResult Function()? clearSelected,
     TResult Function(MaterialFilterType filterType)? clearAllSelected,
@@ -81,6 +92,12 @@ mixin _$MaterialFilterEvent {
     required TResult Function(_fetch value) fetch,
     required TResult Function(_updateMaterialSelected value)
         updateMaterialSelected,
+    required TResult Function(_updateTappedMaterialSelected value)
+        updateTappedMaterialSelected,
+    required TResult Function(_SetTappedMaterialToEmpty value)
+        setTappedMaterialToEmpty,
+    required TResult Function(_InitiateTappedMaterial value)
+        initiateTappedMaterial,
     required TResult Function(_updateSearchKey value) updateSearchKey,
     required TResult Function(_clearSelected value) clearSelected,
     required TResult Function(_clearAllSelected value) clearAllSelected,
@@ -92,6 +109,11 @@ mixin _$MaterialFilterEvent {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_fetch value)? fetch,
     TResult? Function(_updateMaterialSelected value)? updateMaterialSelected,
+    TResult? Function(_updateTappedMaterialSelected value)?
+        updateTappedMaterialSelected,
+    TResult? Function(_SetTappedMaterialToEmpty value)?
+        setTappedMaterialToEmpty,
+    TResult? Function(_InitiateTappedMaterial value)? initiateTappedMaterial,
     TResult? Function(_updateSearchKey value)? updateSearchKey,
     TResult? Function(_clearSelected value)? clearSelected,
     TResult? Function(_clearAllSelected value)? clearAllSelected,
@@ -103,6 +125,10 @@ mixin _$MaterialFilterEvent {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_fetch value)? fetch,
     TResult Function(_updateMaterialSelected value)? updateMaterialSelected,
+    TResult Function(_updateTappedMaterialSelected value)?
+        updateTappedMaterialSelected,
+    TResult Function(_SetTappedMaterialToEmpty value)? setTappedMaterialToEmpty,
+    TResult Function(_InitiateTappedMaterial value)? initiateTappedMaterial,
     TResult Function(_updateSearchKey value)? updateSearchKey,
     TResult Function(_clearSelected value)? clearSelected,
     TResult Function(_clearAllSelected value)? clearAllSelected,
@@ -177,9 +203,14 @@ class _$_Initialized implements _Initialized {
             SalesOrganisationConfigs salesOrgConfig,
             String pickAndPack)
         fetch,
+    required TResult Function(MaterialFilterType filterType)
+        updateMaterialSelected,
     required TResult Function(
             MaterialFilterType filterType, String selectedFilter)
-        updateMaterialSelected,
+        updateTappedMaterialSelected,
+    required TResult Function() setTappedMaterialToEmpty,
+    required TResult Function(MaterialFilterType filterType)
+        initiateTappedMaterial,
     required TResult Function(String searchkey) updateSearchKey,
     required TResult Function() clearSelected,
     required TResult Function(MaterialFilterType filterType) clearAllSelected,
@@ -200,8 +231,11 @@ class _$_Initialized implements _Initialized {
             SalesOrganisationConfigs salesOrgConfig,
             String pickAndPack)?
         fetch,
+    TResult? Function(MaterialFilterType filterType)? updateMaterialSelected,
     TResult? Function(MaterialFilterType filterType, String selectedFilter)?
-        updateMaterialSelected,
+        updateTappedMaterialSelected,
+    TResult? Function()? setTappedMaterialToEmpty,
+    TResult? Function(MaterialFilterType filterType)? initiateTappedMaterial,
     TResult? Function(String searchkey)? updateSearchKey,
     TResult? Function()? clearSelected,
     TResult? Function(MaterialFilterType filterType)? clearAllSelected,
@@ -222,8 +256,11 @@ class _$_Initialized implements _Initialized {
             SalesOrganisationConfigs salesOrgConfig,
             String pickAndPack)?
         fetch,
+    TResult Function(MaterialFilterType filterType)? updateMaterialSelected,
     TResult Function(MaterialFilterType filterType, String selectedFilter)?
-        updateMaterialSelected,
+        updateTappedMaterialSelected,
+    TResult Function()? setTappedMaterialToEmpty,
+    TResult Function(MaterialFilterType filterType)? initiateTappedMaterial,
     TResult Function(String searchkey)? updateSearchKey,
     TResult Function()? clearSelected,
     TResult Function(MaterialFilterType filterType)? clearAllSelected,
@@ -243,6 +280,12 @@ class _$_Initialized implements _Initialized {
     required TResult Function(_fetch value) fetch,
     required TResult Function(_updateMaterialSelected value)
         updateMaterialSelected,
+    required TResult Function(_updateTappedMaterialSelected value)
+        updateTappedMaterialSelected,
+    required TResult Function(_SetTappedMaterialToEmpty value)
+        setTappedMaterialToEmpty,
+    required TResult Function(_InitiateTappedMaterial value)
+        initiateTappedMaterial,
     required TResult Function(_updateSearchKey value) updateSearchKey,
     required TResult Function(_clearSelected value) clearSelected,
     required TResult Function(_clearAllSelected value) clearAllSelected,
@@ -257,6 +300,11 @@ class _$_Initialized implements _Initialized {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_fetch value)? fetch,
     TResult? Function(_updateMaterialSelected value)? updateMaterialSelected,
+    TResult? Function(_updateTappedMaterialSelected value)?
+        updateTappedMaterialSelected,
+    TResult? Function(_SetTappedMaterialToEmpty value)?
+        setTappedMaterialToEmpty,
+    TResult? Function(_InitiateTappedMaterial value)? initiateTappedMaterial,
     TResult? Function(_updateSearchKey value)? updateSearchKey,
     TResult? Function(_clearSelected value)? clearSelected,
     TResult? Function(_clearAllSelected value)? clearAllSelected,
@@ -271,6 +319,10 @@ class _$_Initialized implements _Initialized {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_fetch value)? fetch,
     TResult Function(_updateMaterialSelected value)? updateMaterialSelected,
+    TResult Function(_updateTappedMaterialSelected value)?
+        updateTappedMaterialSelected,
+    TResult Function(_SetTappedMaterialToEmpty value)? setTappedMaterialToEmpty,
+    TResult Function(_InitiateTappedMaterial value)? initiateTappedMaterial,
     TResult Function(_updateSearchKey value)? updateSearchKey,
     TResult Function(_clearSelected value)? clearSelected,
     TResult Function(_clearAllSelected value)? clearAllSelected,
@@ -464,9 +516,14 @@ class _$_fetch implements _fetch {
             SalesOrganisationConfigs salesOrgConfig,
             String pickAndPack)
         fetch,
+    required TResult Function(MaterialFilterType filterType)
+        updateMaterialSelected,
     required TResult Function(
             MaterialFilterType filterType, String selectedFilter)
-        updateMaterialSelected,
+        updateTappedMaterialSelected,
+    required TResult Function() setTappedMaterialToEmpty,
+    required TResult Function(MaterialFilterType filterType)
+        initiateTappedMaterial,
     required TResult Function(String searchkey) updateSearchKey,
     required TResult Function() clearSelected,
     required TResult Function(MaterialFilterType filterType) clearAllSelected,
@@ -488,8 +545,11 @@ class _$_fetch implements _fetch {
             SalesOrganisationConfigs salesOrgConfig,
             String pickAndPack)?
         fetch,
+    TResult? Function(MaterialFilterType filterType)? updateMaterialSelected,
     TResult? Function(MaterialFilterType filterType, String selectedFilter)?
-        updateMaterialSelected,
+        updateTappedMaterialSelected,
+    TResult? Function()? setTappedMaterialToEmpty,
+    TResult? Function(MaterialFilterType filterType)? initiateTappedMaterial,
     TResult? Function(String searchkey)? updateSearchKey,
     TResult? Function()? clearSelected,
     TResult? Function(MaterialFilterType filterType)? clearAllSelected,
@@ -511,8 +571,11 @@ class _$_fetch implements _fetch {
             SalesOrganisationConfigs salesOrgConfig,
             String pickAndPack)?
         fetch,
+    TResult Function(MaterialFilterType filterType)? updateMaterialSelected,
     TResult Function(MaterialFilterType filterType, String selectedFilter)?
-        updateMaterialSelected,
+        updateTappedMaterialSelected,
+    TResult Function()? setTappedMaterialToEmpty,
+    TResult Function(MaterialFilterType filterType)? initiateTappedMaterial,
     TResult Function(String searchkey)? updateSearchKey,
     TResult Function()? clearSelected,
     TResult Function(MaterialFilterType filterType)? clearAllSelected,
@@ -533,6 +596,12 @@ class _$_fetch implements _fetch {
     required TResult Function(_fetch value) fetch,
     required TResult Function(_updateMaterialSelected value)
         updateMaterialSelected,
+    required TResult Function(_updateTappedMaterialSelected value)
+        updateTappedMaterialSelected,
+    required TResult Function(_SetTappedMaterialToEmpty value)
+        setTappedMaterialToEmpty,
+    required TResult Function(_InitiateTappedMaterial value)
+        initiateTappedMaterial,
     required TResult Function(_updateSearchKey value) updateSearchKey,
     required TResult Function(_clearSelected value) clearSelected,
     required TResult Function(_clearAllSelected value) clearAllSelected,
@@ -547,6 +616,11 @@ class _$_fetch implements _fetch {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_fetch value)? fetch,
     TResult? Function(_updateMaterialSelected value)? updateMaterialSelected,
+    TResult? Function(_updateTappedMaterialSelected value)?
+        updateTappedMaterialSelected,
+    TResult? Function(_SetTappedMaterialToEmpty value)?
+        setTappedMaterialToEmpty,
+    TResult? Function(_InitiateTappedMaterial value)? initiateTappedMaterial,
     TResult? Function(_updateSearchKey value)? updateSearchKey,
     TResult? Function(_clearSelected value)? clearSelected,
     TResult? Function(_clearAllSelected value)? clearAllSelected,
@@ -561,6 +635,10 @@ class _$_fetch implements _fetch {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_fetch value)? fetch,
     TResult Function(_updateMaterialSelected value)? updateMaterialSelected,
+    TResult Function(_updateTappedMaterialSelected value)?
+        updateTappedMaterialSelected,
+    TResult Function(_SetTappedMaterialToEmpty value)? setTappedMaterialToEmpty,
+    TResult Function(_InitiateTappedMaterial value)? initiateTappedMaterial,
     TResult Function(_updateSearchKey value)? updateSearchKey,
     TResult Function(_clearSelected value)? clearSelected,
     TResult Function(_clearAllSelected value)? clearAllSelected,
@@ -600,7 +678,7 @@ abstract class _$$_updateMaterialSelectedCopyWith<$Res> {
           $Res Function(_$_updateMaterialSelected) then) =
       __$$_updateMaterialSelectedCopyWithImpl<$Res>;
   @useResult
-  $Res call({MaterialFilterType filterType, String selectedFilter});
+  $Res call({MaterialFilterType filterType});
 }
 
 /// @nodoc
@@ -615,17 +693,12 @@ class __$$_updateMaterialSelectedCopyWithImpl<$Res>
   @override
   $Res call({
     Object? filterType = null,
-    Object? selectedFilter = null,
   }) {
     return _then(_$_updateMaterialSelected(
       null == filterType
           ? _value.filterType
           : filterType // ignore: cast_nullable_to_non_nullable
               as MaterialFilterType,
-      null == selectedFilter
-          ? _value.selectedFilter
-          : selectedFilter // ignore: cast_nullable_to_non_nullable
-              as String,
     ));
   }
 }
@@ -633,16 +706,14 @@ class __$$_updateMaterialSelectedCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_updateMaterialSelected implements _updateMaterialSelected {
-  const _$_updateMaterialSelected(this.filterType, this.selectedFilter);
+  const _$_updateMaterialSelected(this.filterType);
 
   @override
   final MaterialFilterType filterType;
-  @override
-  final String selectedFilter;
 
   @override
   String toString() {
-    return 'MaterialFilterEvent.updateMaterialSelected(filterType: $filterType, selectedFilter: $selectedFilter)';
+    return 'MaterialFilterEvent.updateMaterialSelected(filterType: $filterType)';
   }
 
   @override
@@ -651,13 +722,11 @@ class _$_updateMaterialSelected implements _updateMaterialSelected {
         (other.runtimeType == runtimeType &&
             other is _$_updateMaterialSelected &&
             (identical(other.filterType, filterType) ||
-                other.filterType == filterType) &&
-            (identical(other.selectedFilter, selectedFilter) ||
-                other.selectedFilter == selectedFilter));
+                other.filterType == filterType));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, filterType, selectedFilter);
+  int get hashCode => Object.hash(runtimeType, filterType);
 
   @JsonKey(ignore: true)
   @override
@@ -678,15 +747,20 @@ class _$_updateMaterialSelected implements _updateMaterialSelected {
             SalesOrganisationConfigs salesOrgConfig,
             String pickAndPack)
         fetch,
+    required TResult Function(MaterialFilterType filterType)
+        updateMaterialSelected,
     required TResult Function(
             MaterialFilterType filterType, String selectedFilter)
-        updateMaterialSelected,
+        updateTappedMaterialSelected,
+    required TResult Function() setTappedMaterialToEmpty,
+    required TResult Function(MaterialFilterType filterType)
+        initiateTappedMaterial,
     required TResult Function(String searchkey) updateSearchKey,
     required TResult Function() clearSelected,
     required TResult Function(MaterialFilterType filterType) clearAllSelected,
     required TResult Function() resetFilter,
   }) {
-    return updateMaterialSelected(filterType, selectedFilter);
+    return updateMaterialSelected(filterType);
   }
 
   @override
@@ -701,14 +775,17 @@ class _$_updateMaterialSelected implements _updateMaterialSelected {
             SalesOrganisationConfigs salesOrgConfig,
             String pickAndPack)?
         fetch,
+    TResult? Function(MaterialFilterType filterType)? updateMaterialSelected,
     TResult? Function(MaterialFilterType filterType, String selectedFilter)?
-        updateMaterialSelected,
+        updateTappedMaterialSelected,
+    TResult? Function()? setTappedMaterialToEmpty,
+    TResult? Function(MaterialFilterType filterType)? initiateTappedMaterial,
     TResult? Function(String searchkey)? updateSearchKey,
     TResult? Function()? clearSelected,
     TResult? Function(MaterialFilterType filterType)? clearAllSelected,
     TResult? Function()? resetFilter,
   }) {
-    return updateMaterialSelected?.call(filterType, selectedFilter);
+    return updateMaterialSelected?.call(filterType);
   }
 
   @override
@@ -723,8 +800,11 @@ class _$_updateMaterialSelected implements _updateMaterialSelected {
             SalesOrganisationConfigs salesOrgConfig,
             String pickAndPack)?
         fetch,
+    TResult Function(MaterialFilterType filterType)? updateMaterialSelected,
     TResult Function(MaterialFilterType filterType, String selectedFilter)?
-        updateMaterialSelected,
+        updateTappedMaterialSelected,
+    TResult Function()? setTappedMaterialToEmpty,
+    TResult Function(MaterialFilterType filterType)? initiateTappedMaterial,
     TResult Function(String searchkey)? updateSearchKey,
     TResult Function()? clearSelected,
     TResult Function(MaterialFilterType filterType)? clearAllSelected,
@@ -732,7 +812,7 @@ class _$_updateMaterialSelected implements _updateMaterialSelected {
     required TResult orElse(),
   }) {
     if (updateMaterialSelected != null) {
-      return updateMaterialSelected(filterType, selectedFilter);
+      return updateMaterialSelected(filterType);
     }
     return orElse();
   }
@@ -744,6 +824,12 @@ class _$_updateMaterialSelected implements _updateMaterialSelected {
     required TResult Function(_fetch value) fetch,
     required TResult Function(_updateMaterialSelected value)
         updateMaterialSelected,
+    required TResult Function(_updateTappedMaterialSelected value)
+        updateTappedMaterialSelected,
+    required TResult Function(_SetTappedMaterialToEmpty value)
+        setTappedMaterialToEmpty,
+    required TResult Function(_InitiateTappedMaterial value)
+        initiateTappedMaterial,
     required TResult Function(_updateSearchKey value) updateSearchKey,
     required TResult Function(_clearSelected value) clearSelected,
     required TResult Function(_clearAllSelected value) clearAllSelected,
@@ -758,6 +844,11 @@ class _$_updateMaterialSelected implements _updateMaterialSelected {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_fetch value)? fetch,
     TResult? Function(_updateMaterialSelected value)? updateMaterialSelected,
+    TResult? Function(_updateTappedMaterialSelected value)?
+        updateTappedMaterialSelected,
+    TResult? Function(_SetTappedMaterialToEmpty value)?
+        setTappedMaterialToEmpty,
+    TResult? Function(_InitiateTappedMaterial value)? initiateTappedMaterial,
     TResult? Function(_updateSearchKey value)? updateSearchKey,
     TResult? Function(_clearSelected value)? clearSelected,
     TResult? Function(_clearAllSelected value)? clearAllSelected,
@@ -772,6 +863,10 @@ class _$_updateMaterialSelected implements _updateMaterialSelected {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_fetch value)? fetch,
     TResult Function(_updateMaterialSelected value)? updateMaterialSelected,
+    TResult Function(_updateTappedMaterialSelected value)?
+        updateTappedMaterialSelected,
+    TResult Function(_SetTappedMaterialToEmpty value)? setTappedMaterialToEmpty,
+    TResult Function(_InitiateTappedMaterial value)? initiateTappedMaterial,
     TResult Function(_updateSearchKey value)? updateSearchKey,
     TResult Function(_clearSelected value)? clearSelected,
     TResult Function(_clearAllSelected value)? clearAllSelected,
@@ -786,14 +881,649 @@ class _$_updateMaterialSelected implements _updateMaterialSelected {
 }
 
 abstract class _updateMaterialSelected implements MaterialFilterEvent {
-  const factory _updateMaterialSelected(
-          final MaterialFilterType filterType, final String selectedFilter) =
+  const factory _updateMaterialSelected(final MaterialFilterType filterType) =
       _$_updateMaterialSelected;
+
+  MaterialFilterType get filterType;
+  @JsonKey(ignore: true)
+  _$$_updateMaterialSelectedCopyWith<_$_updateMaterialSelected> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_updateTappedMaterialSelectedCopyWith<$Res> {
+  factory _$$_updateTappedMaterialSelectedCopyWith(
+          _$_updateTappedMaterialSelected value,
+          $Res Function(_$_updateTappedMaterialSelected) then) =
+      __$$_updateTappedMaterialSelectedCopyWithImpl<$Res>;
+  @useResult
+  $Res call({MaterialFilterType filterType, String selectedFilter});
+}
+
+/// @nodoc
+class __$$_updateTappedMaterialSelectedCopyWithImpl<$Res>
+    extends _$MaterialFilterEventCopyWithImpl<$Res,
+        _$_updateTappedMaterialSelected>
+    implements _$$_updateTappedMaterialSelectedCopyWith<$Res> {
+  __$$_updateTappedMaterialSelectedCopyWithImpl(
+      _$_updateTappedMaterialSelected _value,
+      $Res Function(_$_updateTappedMaterialSelected) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? filterType = null,
+    Object? selectedFilter = null,
+  }) {
+    return _then(_$_updateTappedMaterialSelected(
+      null == filterType
+          ? _value.filterType
+          : filterType // ignore: cast_nullable_to_non_nullable
+              as MaterialFilterType,
+      null == selectedFilter
+          ? _value.selectedFilter
+          : selectedFilter // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_updateTappedMaterialSelected implements _updateTappedMaterialSelected {
+  const _$_updateTappedMaterialSelected(this.filterType, this.selectedFilter);
+
+  @override
+  final MaterialFilterType filterType;
+  @override
+  final String selectedFilter;
+
+  @override
+  String toString() {
+    return 'MaterialFilterEvent.updateTappedMaterialSelected(filterType: $filterType, selectedFilter: $selectedFilter)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_updateTappedMaterialSelected &&
+            (identical(other.filterType, filterType) ||
+                other.filterType == filterType) &&
+            (identical(other.selectedFilter, selectedFilter) ||
+                other.selectedFilter == selectedFilter));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, filterType, selectedFilter);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_updateTappedMaterialSelectedCopyWith<_$_updateTappedMaterialSelected>
+      get copyWith => __$$_updateTappedMaterialSelectedCopyWithImpl<
+          _$_updateTappedMaterialSelected>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SalesOrganisationConfigs salesOrgConfig,
+            String pickAndPack)
+        fetch,
+    required TResult Function(MaterialFilterType filterType)
+        updateMaterialSelected,
+    required TResult Function(
+            MaterialFilterType filterType, String selectedFilter)
+        updateTappedMaterialSelected,
+    required TResult Function() setTappedMaterialToEmpty,
+    required TResult Function(MaterialFilterType filterType)
+        initiateTappedMaterial,
+    required TResult Function(String searchkey) updateSearchKey,
+    required TResult Function() clearSelected,
+    required TResult Function(MaterialFilterType filterType) clearAllSelected,
+    required TResult Function() resetFilter,
+  }) {
+    return updateTappedMaterialSelected(filterType, selectedFilter);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SalesOrganisationConfigs salesOrgConfig,
+            String pickAndPack)?
+        fetch,
+    TResult? Function(MaterialFilterType filterType)? updateMaterialSelected,
+    TResult? Function(MaterialFilterType filterType, String selectedFilter)?
+        updateTappedMaterialSelected,
+    TResult? Function()? setTappedMaterialToEmpty,
+    TResult? Function(MaterialFilterType filterType)? initiateTappedMaterial,
+    TResult? Function(String searchkey)? updateSearchKey,
+    TResult? Function()? clearSelected,
+    TResult? Function(MaterialFilterType filterType)? clearAllSelected,
+    TResult? Function()? resetFilter,
+  }) {
+    return updateTappedMaterialSelected?.call(filterType, selectedFilter);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SalesOrganisationConfigs salesOrgConfig,
+            String pickAndPack)?
+        fetch,
+    TResult Function(MaterialFilterType filterType)? updateMaterialSelected,
+    TResult Function(MaterialFilterType filterType, String selectedFilter)?
+        updateTappedMaterialSelected,
+    TResult Function()? setTappedMaterialToEmpty,
+    TResult Function(MaterialFilterType filterType)? initiateTappedMaterial,
+    TResult Function(String searchkey)? updateSearchKey,
+    TResult Function()? clearSelected,
+    TResult Function(MaterialFilterType filterType)? clearAllSelected,
+    TResult Function()? resetFilter,
+    required TResult orElse(),
+  }) {
+    if (updateTappedMaterialSelected != null) {
+      return updateTappedMaterialSelected(filterType, selectedFilter);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_fetch value) fetch,
+    required TResult Function(_updateMaterialSelected value)
+        updateMaterialSelected,
+    required TResult Function(_updateTappedMaterialSelected value)
+        updateTappedMaterialSelected,
+    required TResult Function(_SetTappedMaterialToEmpty value)
+        setTappedMaterialToEmpty,
+    required TResult Function(_InitiateTappedMaterial value)
+        initiateTappedMaterial,
+    required TResult Function(_updateSearchKey value) updateSearchKey,
+    required TResult Function(_clearSelected value) clearSelected,
+    required TResult Function(_clearAllSelected value) clearAllSelected,
+    required TResult Function(_resetFilter value) resetFilter,
+  }) {
+    return updateTappedMaterialSelected(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_fetch value)? fetch,
+    TResult? Function(_updateMaterialSelected value)? updateMaterialSelected,
+    TResult? Function(_updateTappedMaterialSelected value)?
+        updateTappedMaterialSelected,
+    TResult? Function(_SetTappedMaterialToEmpty value)?
+        setTappedMaterialToEmpty,
+    TResult? Function(_InitiateTappedMaterial value)? initiateTappedMaterial,
+    TResult? Function(_updateSearchKey value)? updateSearchKey,
+    TResult? Function(_clearSelected value)? clearSelected,
+    TResult? Function(_clearAllSelected value)? clearAllSelected,
+    TResult? Function(_resetFilter value)? resetFilter,
+  }) {
+    return updateTappedMaterialSelected?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_fetch value)? fetch,
+    TResult Function(_updateMaterialSelected value)? updateMaterialSelected,
+    TResult Function(_updateTappedMaterialSelected value)?
+        updateTappedMaterialSelected,
+    TResult Function(_SetTappedMaterialToEmpty value)? setTappedMaterialToEmpty,
+    TResult Function(_InitiateTappedMaterial value)? initiateTappedMaterial,
+    TResult Function(_updateSearchKey value)? updateSearchKey,
+    TResult Function(_clearSelected value)? clearSelected,
+    TResult Function(_clearAllSelected value)? clearAllSelected,
+    TResult Function(_resetFilter value)? resetFilter,
+    required TResult orElse(),
+  }) {
+    if (updateTappedMaterialSelected != null) {
+      return updateTappedMaterialSelected(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _updateTappedMaterialSelected implements MaterialFilterEvent {
+  const factory _updateTappedMaterialSelected(
+          final MaterialFilterType filterType, final String selectedFilter) =
+      _$_updateTappedMaterialSelected;
 
   MaterialFilterType get filterType;
   String get selectedFilter;
   @JsonKey(ignore: true)
-  _$$_updateMaterialSelectedCopyWith<_$_updateMaterialSelected> get copyWith =>
+  _$$_updateTappedMaterialSelectedCopyWith<_$_updateTappedMaterialSelected>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_SetTappedMaterialToEmptyCopyWith<$Res> {
+  factory _$$_SetTappedMaterialToEmptyCopyWith(
+          _$_SetTappedMaterialToEmpty value,
+          $Res Function(_$_SetTappedMaterialToEmpty) then) =
+      __$$_SetTappedMaterialToEmptyCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_SetTappedMaterialToEmptyCopyWithImpl<$Res>
+    extends _$MaterialFilterEventCopyWithImpl<$Res, _$_SetTappedMaterialToEmpty>
+    implements _$$_SetTappedMaterialToEmptyCopyWith<$Res> {
+  __$$_SetTappedMaterialToEmptyCopyWithImpl(_$_SetTappedMaterialToEmpty _value,
+      $Res Function(_$_SetTappedMaterialToEmpty) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_SetTappedMaterialToEmpty implements _SetTappedMaterialToEmpty {
+  const _$_SetTappedMaterialToEmpty();
+
+  @override
+  String toString() {
+    return 'MaterialFilterEvent.setTappedMaterialToEmpty()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_SetTappedMaterialToEmpty);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SalesOrganisationConfigs salesOrgConfig,
+            String pickAndPack)
+        fetch,
+    required TResult Function(MaterialFilterType filterType)
+        updateMaterialSelected,
+    required TResult Function(
+            MaterialFilterType filterType, String selectedFilter)
+        updateTappedMaterialSelected,
+    required TResult Function() setTappedMaterialToEmpty,
+    required TResult Function(MaterialFilterType filterType)
+        initiateTappedMaterial,
+    required TResult Function(String searchkey) updateSearchKey,
+    required TResult Function() clearSelected,
+    required TResult Function(MaterialFilterType filterType) clearAllSelected,
+    required TResult Function() resetFilter,
+  }) {
+    return setTappedMaterialToEmpty();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SalesOrganisationConfigs salesOrgConfig,
+            String pickAndPack)?
+        fetch,
+    TResult? Function(MaterialFilterType filterType)? updateMaterialSelected,
+    TResult? Function(MaterialFilterType filterType, String selectedFilter)?
+        updateTappedMaterialSelected,
+    TResult? Function()? setTappedMaterialToEmpty,
+    TResult? Function(MaterialFilterType filterType)? initiateTappedMaterial,
+    TResult? Function(String searchkey)? updateSearchKey,
+    TResult? Function()? clearSelected,
+    TResult? Function(MaterialFilterType filterType)? clearAllSelected,
+    TResult? Function()? resetFilter,
+  }) {
+    return setTappedMaterialToEmpty?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SalesOrganisationConfigs salesOrgConfig,
+            String pickAndPack)?
+        fetch,
+    TResult Function(MaterialFilterType filterType)? updateMaterialSelected,
+    TResult Function(MaterialFilterType filterType, String selectedFilter)?
+        updateTappedMaterialSelected,
+    TResult Function()? setTappedMaterialToEmpty,
+    TResult Function(MaterialFilterType filterType)? initiateTappedMaterial,
+    TResult Function(String searchkey)? updateSearchKey,
+    TResult Function()? clearSelected,
+    TResult Function(MaterialFilterType filterType)? clearAllSelected,
+    TResult Function()? resetFilter,
+    required TResult orElse(),
+  }) {
+    if (setTappedMaterialToEmpty != null) {
+      return setTappedMaterialToEmpty();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_fetch value) fetch,
+    required TResult Function(_updateMaterialSelected value)
+        updateMaterialSelected,
+    required TResult Function(_updateTappedMaterialSelected value)
+        updateTappedMaterialSelected,
+    required TResult Function(_SetTappedMaterialToEmpty value)
+        setTappedMaterialToEmpty,
+    required TResult Function(_InitiateTappedMaterial value)
+        initiateTappedMaterial,
+    required TResult Function(_updateSearchKey value) updateSearchKey,
+    required TResult Function(_clearSelected value) clearSelected,
+    required TResult Function(_clearAllSelected value) clearAllSelected,
+    required TResult Function(_resetFilter value) resetFilter,
+  }) {
+    return setTappedMaterialToEmpty(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_fetch value)? fetch,
+    TResult? Function(_updateMaterialSelected value)? updateMaterialSelected,
+    TResult? Function(_updateTappedMaterialSelected value)?
+        updateTappedMaterialSelected,
+    TResult? Function(_SetTappedMaterialToEmpty value)?
+        setTappedMaterialToEmpty,
+    TResult? Function(_InitiateTappedMaterial value)? initiateTappedMaterial,
+    TResult? Function(_updateSearchKey value)? updateSearchKey,
+    TResult? Function(_clearSelected value)? clearSelected,
+    TResult? Function(_clearAllSelected value)? clearAllSelected,
+    TResult? Function(_resetFilter value)? resetFilter,
+  }) {
+    return setTappedMaterialToEmpty?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_fetch value)? fetch,
+    TResult Function(_updateMaterialSelected value)? updateMaterialSelected,
+    TResult Function(_updateTappedMaterialSelected value)?
+        updateTappedMaterialSelected,
+    TResult Function(_SetTappedMaterialToEmpty value)? setTappedMaterialToEmpty,
+    TResult Function(_InitiateTappedMaterial value)? initiateTappedMaterial,
+    TResult Function(_updateSearchKey value)? updateSearchKey,
+    TResult Function(_clearSelected value)? clearSelected,
+    TResult Function(_clearAllSelected value)? clearAllSelected,
+    TResult Function(_resetFilter value)? resetFilter,
+    required TResult orElse(),
+  }) {
+    if (setTappedMaterialToEmpty != null) {
+      return setTappedMaterialToEmpty(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SetTappedMaterialToEmpty implements MaterialFilterEvent {
+  const factory _SetTappedMaterialToEmpty() = _$_SetTappedMaterialToEmpty;
+}
+
+/// @nodoc
+abstract class _$$_InitiateTappedMaterialCopyWith<$Res> {
+  factory _$$_InitiateTappedMaterialCopyWith(_$_InitiateTappedMaterial value,
+          $Res Function(_$_InitiateTappedMaterial) then) =
+      __$$_InitiateTappedMaterialCopyWithImpl<$Res>;
+  @useResult
+  $Res call({MaterialFilterType filterType});
+}
+
+/// @nodoc
+class __$$_InitiateTappedMaterialCopyWithImpl<$Res>
+    extends _$MaterialFilterEventCopyWithImpl<$Res, _$_InitiateTappedMaterial>
+    implements _$$_InitiateTappedMaterialCopyWith<$Res> {
+  __$$_InitiateTappedMaterialCopyWithImpl(_$_InitiateTappedMaterial _value,
+      $Res Function(_$_InitiateTappedMaterial) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? filterType = null,
+  }) {
+    return _then(_$_InitiateTappedMaterial(
+      filterType: null == filterType
+          ? _value.filterType
+          : filterType // ignore: cast_nullable_to_non_nullable
+              as MaterialFilterType,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_InitiateTappedMaterial implements _InitiateTappedMaterial {
+  const _$_InitiateTappedMaterial({required this.filterType});
+
+  @override
+  final MaterialFilterType filterType;
+
+  @override
+  String toString() {
+    return 'MaterialFilterEvent.initiateTappedMaterial(filterType: $filterType)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_InitiateTappedMaterial &&
+            (identical(other.filterType, filterType) ||
+                other.filterType == filterType));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, filterType);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_InitiateTappedMaterialCopyWith<_$_InitiateTappedMaterial> get copyWith =>
+      __$$_InitiateTappedMaterialCopyWithImpl<_$_InitiateTappedMaterial>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SalesOrganisationConfigs salesOrgConfig,
+            String pickAndPack)
+        fetch,
+    required TResult Function(MaterialFilterType filterType)
+        updateMaterialSelected,
+    required TResult Function(
+            MaterialFilterType filterType, String selectedFilter)
+        updateTappedMaterialSelected,
+    required TResult Function() setTappedMaterialToEmpty,
+    required TResult Function(MaterialFilterType filterType)
+        initiateTappedMaterial,
+    required TResult Function(String searchkey) updateSearchKey,
+    required TResult Function() clearSelected,
+    required TResult Function(MaterialFilterType filterType) clearAllSelected,
+    required TResult Function() resetFilter,
+  }) {
+    return initiateTappedMaterial(filterType);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SalesOrganisationConfigs salesOrgConfig,
+            String pickAndPack)?
+        fetch,
+    TResult? Function(MaterialFilterType filterType)? updateMaterialSelected,
+    TResult? Function(MaterialFilterType filterType, String selectedFilter)?
+        updateTappedMaterialSelected,
+    TResult? Function()? setTappedMaterialToEmpty,
+    TResult? Function(MaterialFilterType filterType)? initiateTappedMaterial,
+    TResult? Function(String searchkey)? updateSearchKey,
+    TResult? Function()? clearSelected,
+    TResult? Function(MaterialFilterType filterType)? clearAllSelected,
+    TResult? Function()? resetFilter,
+  }) {
+    return initiateTappedMaterial?.call(filterType);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SalesOrganisationConfigs salesOrgConfig,
+            String pickAndPack)?
+        fetch,
+    TResult Function(MaterialFilterType filterType)? updateMaterialSelected,
+    TResult Function(MaterialFilterType filterType, String selectedFilter)?
+        updateTappedMaterialSelected,
+    TResult Function()? setTappedMaterialToEmpty,
+    TResult Function(MaterialFilterType filterType)? initiateTappedMaterial,
+    TResult Function(String searchkey)? updateSearchKey,
+    TResult Function()? clearSelected,
+    TResult Function(MaterialFilterType filterType)? clearAllSelected,
+    TResult Function()? resetFilter,
+    required TResult orElse(),
+  }) {
+    if (initiateTappedMaterial != null) {
+      return initiateTappedMaterial(filterType);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_fetch value) fetch,
+    required TResult Function(_updateMaterialSelected value)
+        updateMaterialSelected,
+    required TResult Function(_updateTappedMaterialSelected value)
+        updateTappedMaterialSelected,
+    required TResult Function(_SetTappedMaterialToEmpty value)
+        setTappedMaterialToEmpty,
+    required TResult Function(_InitiateTappedMaterial value)
+        initiateTappedMaterial,
+    required TResult Function(_updateSearchKey value) updateSearchKey,
+    required TResult Function(_clearSelected value) clearSelected,
+    required TResult Function(_clearAllSelected value) clearAllSelected,
+    required TResult Function(_resetFilter value) resetFilter,
+  }) {
+    return initiateTappedMaterial(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_fetch value)? fetch,
+    TResult? Function(_updateMaterialSelected value)? updateMaterialSelected,
+    TResult? Function(_updateTappedMaterialSelected value)?
+        updateTappedMaterialSelected,
+    TResult? Function(_SetTappedMaterialToEmpty value)?
+        setTappedMaterialToEmpty,
+    TResult? Function(_InitiateTappedMaterial value)? initiateTappedMaterial,
+    TResult? Function(_updateSearchKey value)? updateSearchKey,
+    TResult? Function(_clearSelected value)? clearSelected,
+    TResult? Function(_clearAllSelected value)? clearAllSelected,
+    TResult? Function(_resetFilter value)? resetFilter,
+  }) {
+    return initiateTappedMaterial?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_fetch value)? fetch,
+    TResult Function(_updateMaterialSelected value)? updateMaterialSelected,
+    TResult Function(_updateTappedMaterialSelected value)?
+        updateTappedMaterialSelected,
+    TResult Function(_SetTappedMaterialToEmpty value)? setTappedMaterialToEmpty,
+    TResult Function(_InitiateTappedMaterial value)? initiateTappedMaterial,
+    TResult Function(_updateSearchKey value)? updateSearchKey,
+    TResult Function(_clearSelected value)? clearSelected,
+    TResult Function(_clearAllSelected value)? clearAllSelected,
+    TResult Function(_resetFilter value)? resetFilter,
+    required TResult orElse(),
+  }) {
+    if (initiateTappedMaterial != null) {
+      return initiateTappedMaterial(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _InitiateTappedMaterial implements MaterialFilterEvent {
+  const factory _InitiateTappedMaterial(
+          {required final MaterialFilterType filterType}) =
+      _$_InitiateTappedMaterial;
+
+  MaterialFilterType get filterType;
+  @JsonKey(ignore: true)
+  _$$_InitiateTappedMaterialCopyWith<_$_InitiateTappedMaterial> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -871,9 +1601,14 @@ class _$_updateSearchKey implements _updateSearchKey {
             SalesOrganisationConfigs salesOrgConfig,
             String pickAndPack)
         fetch,
+    required TResult Function(MaterialFilterType filterType)
+        updateMaterialSelected,
     required TResult Function(
             MaterialFilterType filterType, String selectedFilter)
-        updateMaterialSelected,
+        updateTappedMaterialSelected,
+    required TResult Function() setTappedMaterialToEmpty,
+    required TResult Function(MaterialFilterType filterType)
+        initiateTappedMaterial,
     required TResult Function(String searchkey) updateSearchKey,
     required TResult Function() clearSelected,
     required TResult Function(MaterialFilterType filterType) clearAllSelected,
@@ -894,8 +1629,11 @@ class _$_updateSearchKey implements _updateSearchKey {
             SalesOrganisationConfigs salesOrgConfig,
             String pickAndPack)?
         fetch,
+    TResult? Function(MaterialFilterType filterType)? updateMaterialSelected,
     TResult? Function(MaterialFilterType filterType, String selectedFilter)?
-        updateMaterialSelected,
+        updateTappedMaterialSelected,
+    TResult? Function()? setTappedMaterialToEmpty,
+    TResult? Function(MaterialFilterType filterType)? initiateTappedMaterial,
     TResult? Function(String searchkey)? updateSearchKey,
     TResult? Function()? clearSelected,
     TResult? Function(MaterialFilterType filterType)? clearAllSelected,
@@ -916,8 +1654,11 @@ class _$_updateSearchKey implements _updateSearchKey {
             SalesOrganisationConfigs salesOrgConfig,
             String pickAndPack)?
         fetch,
+    TResult Function(MaterialFilterType filterType)? updateMaterialSelected,
     TResult Function(MaterialFilterType filterType, String selectedFilter)?
-        updateMaterialSelected,
+        updateTappedMaterialSelected,
+    TResult Function()? setTappedMaterialToEmpty,
+    TResult Function(MaterialFilterType filterType)? initiateTappedMaterial,
     TResult Function(String searchkey)? updateSearchKey,
     TResult Function()? clearSelected,
     TResult Function(MaterialFilterType filterType)? clearAllSelected,
@@ -937,6 +1678,12 @@ class _$_updateSearchKey implements _updateSearchKey {
     required TResult Function(_fetch value) fetch,
     required TResult Function(_updateMaterialSelected value)
         updateMaterialSelected,
+    required TResult Function(_updateTappedMaterialSelected value)
+        updateTappedMaterialSelected,
+    required TResult Function(_SetTappedMaterialToEmpty value)
+        setTappedMaterialToEmpty,
+    required TResult Function(_InitiateTappedMaterial value)
+        initiateTappedMaterial,
     required TResult Function(_updateSearchKey value) updateSearchKey,
     required TResult Function(_clearSelected value) clearSelected,
     required TResult Function(_clearAllSelected value) clearAllSelected,
@@ -951,6 +1698,11 @@ class _$_updateSearchKey implements _updateSearchKey {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_fetch value)? fetch,
     TResult? Function(_updateMaterialSelected value)? updateMaterialSelected,
+    TResult? Function(_updateTappedMaterialSelected value)?
+        updateTappedMaterialSelected,
+    TResult? Function(_SetTappedMaterialToEmpty value)?
+        setTappedMaterialToEmpty,
+    TResult? Function(_InitiateTappedMaterial value)? initiateTappedMaterial,
     TResult? Function(_updateSearchKey value)? updateSearchKey,
     TResult? Function(_clearSelected value)? clearSelected,
     TResult? Function(_clearAllSelected value)? clearAllSelected,
@@ -965,6 +1717,10 @@ class _$_updateSearchKey implements _updateSearchKey {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_fetch value)? fetch,
     TResult Function(_updateMaterialSelected value)? updateMaterialSelected,
+    TResult Function(_updateTappedMaterialSelected value)?
+        updateTappedMaterialSelected,
+    TResult Function(_SetTappedMaterialToEmpty value)? setTappedMaterialToEmpty,
+    TResult Function(_InitiateTappedMaterial value)? initiateTappedMaterial,
     TResult Function(_updateSearchKey value)? updateSearchKey,
     TResult Function(_clearSelected value)? clearSelected,
     TResult Function(_clearAllSelected value)? clearAllSelected,
@@ -1034,9 +1790,14 @@ class _$_clearSelected implements _clearSelected {
             SalesOrganisationConfigs salesOrgConfig,
             String pickAndPack)
         fetch,
+    required TResult Function(MaterialFilterType filterType)
+        updateMaterialSelected,
     required TResult Function(
             MaterialFilterType filterType, String selectedFilter)
-        updateMaterialSelected,
+        updateTappedMaterialSelected,
+    required TResult Function() setTappedMaterialToEmpty,
+    required TResult Function(MaterialFilterType filterType)
+        initiateTappedMaterial,
     required TResult Function(String searchkey) updateSearchKey,
     required TResult Function() clearSelected,
     required TResult Function(MaterialFilterType filterType) clearAllSelected,
@@ -1057,8 +1818,11 @@ class _$_clearSelected implements _clearSelected {
             SalesOrganisationConfigs salesOrgConfig,
             String pickAndPack)?
         fetch,
+    TResult? Function(MaterialFilterType filterType)? updateMaterialSelected,
     TResult? Function(MaterialFilterType filterType, String selectedFilter)?
-        updateMaterialSelected,
+        updateTappedMaterialSelected,
+    TResult? Function()? setTappedMaterialToEmpty,
+    TResult? Function(MaterialFilterType filterType)? initiateTappedMaterial,
     TResult? Function(String searchkey)? updateSearchKey,
     TResult? Function()? clearSelected,
     TResult? Function(MaterialFilterType filterType)? clearAllSelected,
@@ -1079,8 +1843,11 @@ class _$_clearSelected implements _clearSelected {
             SalesOrganisationConfigs salesOrgConfig,
             String pickAndPack)?
         fetch,
+    TResult Function(MaterialFilterType filterType)? updateMaterialSelected,
     TResult Function(MaterialFilterType filterType, String selectedFilter)?
-        updateMaterialSelected,
+        updateTappedMaterialSelected,
+    TResult Function()? setTappedMaterialToEmpty,
+    TResult Function(MaterialFilterType filterType)? initiateTappedMaterial,
     TResult Function(String searchkey)? updateSearchKey,
     TResult Function()? clearSelected,
     TResult Function(MaterialFilterType filterType)? clearAllSelected,
@@ -1100,6 +1867,12 @@ class _$_clearSelected implements _clearSelected {
     required TResult Function(_fetch value) fetch,
     required TResult Function(_updateMaterialSelected value)
         updateMaterialSelected,
+    required TResult Function(_updateTappedMaterialSelected value)
+        updateTappedMaterialSelected,
+    required TResult Function(_SetTappedMaterialToEmpty value)
+        setTappedMaterialToEmpty,
+    required TResult Function(_InitiateTappedMaterial value)
+        initiateTappedMaterial,
     required TResult Function(_updateSearchKey value) updateSearchKey,
     required TResult Function(_clearSelected value) clearSelected,
     required TResult Function(_clearAllSelected value) clearAllSelected,
@@ -1114,6 +1887,11 @@ class _$_clearSelected implements _clearSelected {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_fetch value)? fetch,
     TResult? Function(_updateMaterialSelected value)? updateMaterialSelected,
+    TResult? Function(_updateTappedMaterialSelected value)?
+        updateTappedMaterialSelected,
+    TResult? Function(_SetTappedMaterialToEmpty value)?
+        setTappedMaterialToEmpty,
+    TResult? Function(_InitiateTappedMaterial value)? initiateTappedMaterial,
     TResult? Function(_updateSearchKey value)? updateSearchKey,
     TResult? Function(_clearSelected value)? clearSelected,
     TResult? Function(_clearAllSelected value)? clearAllSelected,
@@ -1128,6 +1906,10 @@ class _$_clearSelected implements _clearSelected {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_fetch value)? fetch,
     TResult Function(_updateMaterialSelected value)? updateMaterialSelected,
+    TResult Function(_updateTappedMaterialSelected value)?
+        updateTappedMaterialSelected,
+    TResult Function(_SetTappedMaterialToEmpty value)? setTappedMaterialToEmpty,
+    TResult Function(_InitiateTappedMaterial value)? initiateTappedMaterial,
     TResult Function(_updateSearchKey value)? updateSearchKey,
     TResult Function(_clearSelected value)? clearSelected,
     TResult Function(_clearAllSelected value)? clearAllSelected,
@@ -1219,9 +2001,14 @@ class _$_clearAllSelected implements _clearAllSelected {
             SalesOrganisationConfigs salesOrgConfig,
             String pickAndPack)
         fetch,
+    required TResult Function(MaterialFilterType filterType)
+        updateMaterialSelected,
     required TResult Function(
             MaterialFilterType filterType, String selectedFilter)
-        updateMaterialSelected,
+        updateTappedMaterialSelected,
+    required TResult Function() setTappedMaterialToEmpty,
+    required TResult Function(MaterialFilterType filterType)
+        initiateTappedMaterial,
     required TResult Function(String searchkey) updateSearchKey,
     required TResult Function() clearSelected,
     required TResult Function(MaterialFilterType filterType) clearAllSelected,
@@ -1242,8 +2029,11 @@ class _$_clearAllSelected implements _clearAllSelected {
             SalesOrganisationConfigs salesOrgConfig,
             String pickAndPack)?
         fetch,
+    TResult? Function(MaterialFilterType filterType)? updateMaterialSelected,
     TResult? Function(MaterialFilterType filterType, String selectedFilter)?
-        updateMaterialSelected,
+        updateTappedMaterialSelected,
+    TResult? Function()? setTappedMaterialToEmpty,
+    TResult? Function(MaterialFilterType filterType)? initiateTappedMaterial,
     TResult? Function(String searchkey)? updateSearchKey,
     TResult? Function()? clearSelected,
     TResult? Function(MaterialFilterType filterType)? clearAllSelected,
@@ -1264,8 +2054,11 @@ class _$_clearAllSelected implements _clearAllSelected {
             SalesOrganisationConfigs salesOrgConfig,
             String pickAndPack)?
         fetch,
+    TResult Function(MaterialFilterType filterType)? updateMaterialSelected,
     TResult Function(MaterialFilterType filterType, String selectedFilter)?
-        updateMaterialSelected,
+        updateTappedMaterialSelected,
+    TResult Function()? setTappedMaterialToEmpty,
+    TResult Function(MaterialFilterType filterType)? initiateTappedMaterial,
     TResult Function(String searchkey)? updateSearchKey,
     TResult Function()? clearSelected,
     TResult Function(MaterialFilterType filterType)? clearAllSelected,
@@ -1285,6 +2078,12 @@ class _$_clearAllSelected implements _clearAllSelected {
     required TResult Function(_fetch value) fetch,
     required TResult Function(_updateMaterialSelected value)
         updateMaterialSelected,
+    required TResult Function(_updateTappedMaterialSelected value)
+        updateTappedMaterialSelected,
+    required TResult Function(_SetTappedMaterialToEmpty value)
+        setTappedMaterialToEmpty,
+    required TResult Function(_InitiateTappedMaterial value)
+        initiateTappedMaterial,
     required TResult Function(_updateSearchKey value) updateSearchKey,
     required TResult Function(_clearSelected value) clearSelected,
     required TResult Function(_clearAllSelected value) clearAllSelected,
@@ -1299,6 +2098,11 @@ class _$_clearAllSelected implements _clearAllSelected {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_fetch value)? fetch,
     TResult? Function(_updateMaterialSelected value)? updateMaterialSelected,
+    TResult? Function(_updateTappedMaterialSelected value)?
+        updateTappedMaterialSelected,
+    TResult? Function(_SetTappedMaterialToEmpty value)?
+        setTappedMaterialToEmpty,
+    TResult? Function(_InitiateTappedMaterial value)? initiateTappedMaterial,
     TResult? Function(_updateSearchKey value)? updateSearchKey,
     TResult? Function(_clearSelected value)? clearSelected,
     TResult? Function(_clearAllSelected value)? clearAllSelected,
@@ -1313,6 +2117,10 @@ class _$_clearAllSelected implements _clearAllSelected {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_fetch value)? fetch,
     TResult Function(_updateMaterialSelected value)? updateMaterialSelected,
+    TResult Function(_updateTappedMaterialSelected value)?
+        updateTappedMaterialSelected,
+    TResult Function(_SetTappedMaterialToEmpty value)? setTappedMaterialToEmpty,
+    TResult Function(_InitiateTappedMaterial value)? initiateTappedMaterial,
     TResult Function(_updateSearchKey value)? updateSearchKey,
     TResult Function(_clearSelected value)? clearSelected,
     TResult Function(_clearAllSelected value)? clearAllSelected,
@@ -1383,9 +2191,14 @@ class _$_resetFilter implements _resetFilter {
             SalesOrganisationConfigs salesOrgConfig,
             String pickAndPack)
         fetch,
+    required TResult Function(MaterialFilterType filterType)
+        updateMaterialSelected,
     required TResult Function(
             MaterialFilterType filterType, String selectedFilter)
-        updateMaterialSelected,
+        updateTappedMaterialSelected,
+    required TResult Function() setTappedMaterialToEmpty,
+    required TResult Function(MaterialFilterType filterType)
+        initiateTappedMaterial,
     required TResult Function(String searchkey) updateSearchKey,
     required TResult Function() clearSelected,
     required TResult Function(MaterialFilterType filterType) clearAllSelected,
@@ -1406,8 +2219,11 @@ class _$_resetFilter implements _resetFilter {
             SalesOrganisationConfigs salesOrgConfig,
             String pickAndPack)?
         fetch,
+    TResult? Function(MaterialFilterType filterType)? updateMaterialSelected,
     TResult? Function(MaterialFilterType filterType, String selectedFilter)?
-        updateMaterialSelected,
+        updateTappedMaterialSelected,
+    TResult? Function()? setTappedMaterialToEmpty,
+    TResult? Function(MaterialFilterType filterType)? initiateTappedMaterial,
     TResult? Function(String searchkey)? updateSearchKey,
     TResult? Function()? clearSelected,
     TResult? Function(MaterialFilterType filterType)? clearAllSelected,
@@ -1428,8 +2244,11 @@ class _$_resetFilter implements _resetFilter {
             SalesOrganisationConfigs salesOrgConfig,
             String pickAndPack)?
         fetch,
+    TResult Function(MaterialFilterType filterType)? updateMaterialSelected,
     TResult Function(MaterialFilterType filterType, String selectedFilter)?
-        updateMaterialSelected,
+        updateTappedMaterialSelected,
+    TResult Function()? setTappedMaterialToEmpty,
+    TResult Function(MaterialFilterType filterType)? initiateTappedMaterial,
     TResult Function(String searchkey)? updateSearchKey,
     TResult Function()? clearSelected,
     TResult Function(MaterialFilterType filterType)? clearAllSelected,
@@ -1449,6 +2268,12 @@ class _$_resetFilter implements _resetFilter {
     required TResult Function(_fetch value) fetch,
     required TResult Function(_updateMaterialSelected value)
         updateMaterialSelected,
+    required TResult Function(_updateTappedMaterialSelected value)
+        updateTappedMaterialSelected,
+    required TResult Function(_SetTappedMaterialToEmpty value)
+        setTappedMaterialToEmpty,
+    required TResult Function(_InitiateTappedMaterial value)
+        initiateTappedMaterial,
     required TResult Function(_updateSearchKey value) updateSearchKey,
     required TResult Function(_clearSelected value) clearSelected,
     required TResult Function(_clearAllSelected value) clearAllSelected,
@@ -1463,6 +2288,11 @@ class _$_resetFilter implements _resetFilter {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_fetch value)? fetch,
     TResult? Function(_updateMaterialSelected value)? updateMaterialSelected,
+    TResult? Function(_updateTappedMaterialSelected value)?
+        updateTappedMaterialSelected,
+    TResult? Function(_SetTappedMaterialToEmpty value)?
+        setTappedMaterialToEmpty,
+    TResult? Function(_InitiateTappedMaterial value)? initiateTappedMaterial,
     TResult? Function(_updateSearchKey value)? updateSearchKey,
     TResult? Function(_clearSelected value)? clearSelected,
     TResult? Function(_clearAllSelected value)? clearAllSelected,
@@ -1477,6 +2307,10 @@ class _$_resetFilter implements _resetFilter {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_fetch value)? fetch,
     TResult Function(_updateMaterialSelected value)? updateMaterialSelected,
+    TResult Function(_updateTappedMaterialSelected value)?
+        updateTappedMaterialSelected,
+    TResult Function(_SetTappedMaterialToEmpty value)? setTappedMaterialToEmpty,
+    TResult Function(_InitiateTappedMaterial value)? initiateTappedMaterial,
     TResult Function(_updateSearchKey value)? updateSearchKey,
     TResult Function(_clearSelected value)? clearSelected,
     TResult Function(_clearAllSelected value)? clearAllSelected,
@@ -1503,6 +2337,8 @@ mixin _$MaterialFilterState {
   Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption =>
       throw _privateConstructorUsedError;
   bool get isFetching => throw _privateConstructorUsedError;
+  List<String> get selectedItem => throw _privateConstructorUsedError;
+  bool get isFilterApplied => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MaterialFilterStateCopyWith<MaterialFilterState> get copyWith =>
@@ -1520,7 +2356,9 @@ abstract class $MaterialFilterStateCopyWith<$Res> {
       MaterialFilter selectedMaterialFilter,
       String searchKey,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
-      bool isFetching});
+      bool isFetching,
+      List<String> selectedItem,
+      bool isFilterApplied});
 
   $MaterialFilterCopyWith<$Res> get materialFilter;
   $MaterialFilterCopyWith<$Res> get selectedMaterialFilter;
@@ -1544,6 +2382,8 @@ class _$MaterialFilterStateCopyWithImpl<$Res, $Val extends MaterialFilterState>
     Object? searchKey = null,
     Object? apiFailureOrSuccessOption = null,
     Object? isFetching = null,
+    Object? selectedItem = null,
+    Object? isFilterApplied = null,
   }) {
     return _then(_value.copyWith(
       materialFilter: null == materialFilter
@@ -1565,6 +2405,14 @@ class _$MaterialFilterStateCopyWithImpl<$Res, $Val extends MaterialFilterState>
       isFetching: null == isFetching
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
+              as bool,
+      selectedItem: null == selectedItem
+          ? _value.selectedItem
+          : selectedItem // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      isFilterApplied: null == isFilterApplied
+          ? _value.isFilterApplied
+          : isFilterApplied // ignore: cast_nullable_to_non_nullable
               as bool,
     ) as $Val);
   }
@@ -1600,7 +2448,9 @@ abstract class _$$_MaterialFilterStateCopyWith<$Res>
       MaterialFilter selectedMaterialFilter,
       String searchKey,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
-      bool isFetching});
+      bool isFetching,
+      List<String> selectedItem,
+      bool isFilterApplied});
 
   @override
   $MaterialFilterCopyWith<$Res> get materialFilter;
@@ -1624,6 +2474,8 @@ class __$$_MaterialFilterStateCopyWithImpl<$Res>
     Object? searchKey = null,
     Object? apiFailureOrSuccessOption = null,
     Object? isFetching = null,
+    Object? selectedItem = null,
+    Object? isFilterApplied = null,
   }) {
     return _then(_$_MaterialFilterState(
       materialFilter: null == materialFilter
@@ -1646,6 +2498,14 @@ class __$$_MaterialFilterStateCopyWithImpl<$Res>
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
               as bool,
+      selectedItem: null == selectedItem
+          ? _value._selectedItem
+          : selectedItem // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      isFilterApplied: null == isFilterApplied
+          ? _value.isFilterApplied
+          : isFilterApplied // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -1658,8 +2518,11 @@ class _$_MaterialFilterState extends _MaterialFilterState {
       required this.selectedMaterialFilter,
       required this.searchKey,
       required this.apiFailureOrSuccessOption,
-      required this.isFetching})
-      : super._();
+      required this.isFetching,
+      required final List<String> selectedItem,
+      required this.isFilterApplied})
+      : _selectedItem = selectedItem,
+        super._();
 
   @override
   final MaterialFilter materialFilter;
@@ -1671,10 +2534,20 @@ class _$_MaterialFilterState extends _MaterialFilterState {
   final Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption;
   @override
   final bool isFetching;
+  final List<String> _selectedItem;
+  @override
+  List<String> get selectedItem {
+    if (_selectedItem is EqualUnmodifiableListView) return _selectedItem;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_selectedItem);
+  }
+
+  @override
+  final bool isFilterApplied;
 
   @override
   String toString() {
-    return 'MaterialFilterState(materialFilter: $materialFilter, selectedMaterialFilter: $selectedMaterialFilter, searchKey: $searchKey, apiFailureOrSuccessOption: $apiFailureOrSuccessOption, isFetching: $isFetching)';
+    return 'MaterialFilterState(materialFilter: $materialFilter, selectedMaterialFilter: $selectedMaterialFilter, searchKey: $searchKey, apiFailureOrSuccessOption: $apiFailureOrSuccessOption, isFetching: $isFetching, selectedItem: $selectedItem, isFilterApplied: $isFilterApplied)';
   }
 
   @override
@@ -1692,12 +2565,23 @@ class _$_MaterialFilterState extends _MaterialFilterState {
                     apiFailureOrSuccessOption) ||
                 other.apiFailureOrSuccessOption == apiFailureOrSuccessOption) &&
             (identical(other.isFetching, isFetching) ||
-                other.isFetching == isFetching));
+                other.isFetching == isFetching) &&
+            const DeepCollectionEquality()
+                .equals(other._selectedItem, _selectedItem) &&
+            (identical(other.isFilterApplied, isFilterApplied) ||
+                other.isFilterApplied == isFilterApplied));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, materialFilter,
-      selectedMaterialFilter, searchKey, apiFailureOrSuccessOption, isFetching);
+  int get hashCode => Object.hash(
+      runtimeType,
+      materialFilter,
+      selectedMaterialFilter,
+      searchKey,
+      apiFailureOrSuccessOption,
+      isFetching,
+      const DeepCollectionEquality().hash(_selectedItem),
+      isFilterApplied);
 
   @JsonKey(ignore: true)
   @override
@@ -1714,7 +2598,9 @@ abstract class _MaterialFilterState extends MaterialFilterState {
       required final String searchKey,
       required final Option<Either<ApiFailure, dynamic>>
           apiFailureOrSuccessOption,
-      required final bool isFetching}) = _$_MaterialFilterState;
+      required final bool isFetching,
+      required final List<String> selectedItem,
+      required final bool isFilterApplied}) = _$_MaterialFilterState;
   const _MaterialFilterState._() : super._();
 
   @override
@@ -1727,6 +2613,10 @@ abstract class _MaterialFilterState extends MaterialFilterState {
   Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption;
   @override
   bool get isFetching;
+  @override
+  List<String> get selectedItem;
+  @override
+  bool get isFilterApplied;
   @override
   @JsonKey(ignore: true)
   _$$_MaterialFilterStateCopyWith<_$_MaterialFilterState> get copyWith =>

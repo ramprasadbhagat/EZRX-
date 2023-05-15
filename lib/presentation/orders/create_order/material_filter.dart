@@ -31,8 +31,13 @@ class MaterialFilterPage extends StatelessWidget {
     return BlocConsumer<MaterialFilterBloc, MaterialFilterState>(
       listenWhen: (previous, current) =>
           previous.apiFailureOrSuccessOption !=
-          current.apiFailureOrSuccessOption,
+              current.apiFailureOrSuccessOption ||
+          (previous.isFilterApplied != current.isFilterApplied &&
+              current.isFilterApplied),
       listener: (context, state) {
+        if (state.isFilterApplied) {
+          context.router.pop();
+        }
         state.apiFailureOrSuccessOption.fold(
           () {},
           (either) => either.fold(
@@ -46,6 +51,9 @@ class MaterialFilterPage extends StatelessWidget {
       builder: (context, state) {
         return WillPopScope(
           onWillPop: () async {
+            context
+                .read<MaterialFilterBloc>()
+                .add(const MaterialFilterEvent.setTappedMaterialToEmpty());
             context.read<MaterialListBloc>().state.searchKey.isValid()
                 ? context.read<MaterialListBloc>().add(
                       MaterialListEvent.searchMaterialList(
@@ -147,6 +155,17 @@ class MaterialFilterPage extends StatelessWidget {
                 filterType: filterType,
               ),
             ),
+            floatingActionButton: ElevatedButton(
+              key: const Key('applyMaterialFilter'),
+              onPressed: () async {
+                BlocProvider.of<MaterialFilterBloc>(context).add(
+                  MaterialFilterEvent.updateMaterialSelected(
+                    filterType,
+                  ),
+                );
+              },
+              child: const Text('Apply').tr(),
+            ),
           ),
         );
       },
@@ -183,14 +202,14 @@ class _BodyContent extends StatelessWidget {
                   key: Key('filterOption-${filterList[index]}'),
                   onTap: () {
                     BlocProvider.of<MaterialFilterBloc>(context).add(
-                      MaterialFilterEvent.updateMaterialSelected(
+                      MaterialFilterEvent.updateTappedMaterialSelected(
                         filterType,
                         filterList[index],
                       ),
                     );
                   },
                   leading: Text(filterList[index]),
-                  trailing: state.isSelected(filterType, filterList[index])
+                  trailing: state.isSelected(filterList[index])
                       ? const Icon(Icons.check, color: ZPColors.secondary)
                       : const SizedBox.shrink(),
                 ),

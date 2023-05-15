@@ -211,51 +211,40 @@ void main() {
     );
 
     blocTest<MaterialFilterBloc, MaterialFilterState>(
-        'Update material selected success when filter type is principal',
-        build: () => MaterialFilterBloc(
-              materialFilterRepository: materialFilterRepositoryMock,
-            ),
-        setUp: () {
-          when(() => materialFilterRepositoryMock.updateSelectedList(
-              selectedList: MaterialFilterState.initial()
-                  .selectedMaterialFilter
-                  .uniquePrincipalName,
-              name: 'Pfizer PFE Private Limited test')).thenAnswer(
-            (invocation) => ['GSK Consumer Healthcare'],
-          );
-        },
-        act: (bloc) => bloc.add(
-            const MaterialFilterEvent.updateMaterialSelected(
-                fakeSelectedPrincipalFilterCategory,
-                'Pfizer PFE Private Limited test')),
-        expect: () => [
-              MaterialFilterState.initial().copyWith(
-                  selectedMaterialFilter: MaterialFilterState.initial()
-                      .selectedMaterialFilter
-                      .copyWith(
-                    uniquePrincipalName: ['GSK Consumer Healthcare'],
-                  ),
-                  apiFailureOrSuccessOption: none()),
-            ]);
+      'Update material selected success when filter type is principal',
+      build: () => MaterialFilterBloc(
+        materialFilterRepository: materialFilterRepositoryMock,
+      ),
+      seed: () => MaterialFilterState.initial()
+          .copyWith(selectedItem: ['GSK Consumer Healthcare']),
+      act: (bloc) => bloc.add(
+        const MaterialFilterEvent.updateMaterialSelected(
+            fakeSelectedPrincipalFilterCategory),
+      ),
+      expect: () => [
+        MaterialFilterState.initial().copyWith(
+          selectedMaterialFilter:
+              MaterialFilterState.initial().selectedMaterialFilter.copyWith(
+            uniquePrincipalName: ['GSK Consumer Healthcare'],
+          ),
+          selectedItem: ['GSK Consumer Healthcare'],
+          isFilterApplied: true,
+          apiFailureOrSuccessOption: none(),
+        ),
+      ],
+    );
 
     blocTest<MaterialFilterBloc, MaterialFilterState>(
         'Update material selected success when filter type is therapeutic',
         build: () => MaterialFilterBloc(
               materialFilterRepository: materialFilterRepositoryMock,
             ),
-        setUp: () {
-          when(() => materialFilterRepositoryMock.updateSelectedList(
-              selectedList: MaterialFilterState.initial()
-                  .selectedMaterialFilter
-                  .uniqueTherapeuticClass,
-              name: 'Other multivitamins with minerals')).thenAnswer(
-            (invocation) => ['GSK Consumer Healthcare'],
-          );
-        },
+        seed: () => MaterialFilterState.initial()
+            .copyWith(selectedItem: ['GSK Consumer Healthcare']),
         act: (bloc) => bloc.add(
-            const MaterialFilterEvent.updateMaterialSelected(
-                fakeSelectedTheraputicFilterCategory,
-                'Other multivitamins with minerals')),
+              const MaterialFilterEvent.updateMaterialSelected(
+                  fakeSelectedTheraputicFilterCategory),
+            ),
         expect: () => [
               MaterialFilterState.initial().copyWith(
                   selectedMaterialFilter: MaterialFilterState.initial()
@@ -263,35 +252,34 @@ void main() {
                       .copyWith(
                     uniqueTherapeuticClass: ['GSK Consumer Healthcare'],
                   ),
+                  selectedItem: ['GSK Consumer Healthcare'],
+                  isFilterApplied: true,
                   apiFailureOrSuccessOption: none()),
             ]);
 
     blocTest<MaterialFilterBloc, MaterialFilterState>(
-        'Update material selected success when filter type is brand',
-        build: () => MaterialFilterBloc(
-              materialFilterRepository: materialFilterRepositoryMock,
-            ),
-        setUp: () {
-          when(() => materialFilterRepositoryMock.updateSelectedList(
-              selectedList: MaterialFilterState.initial()
-                  .selectedMaterialFilter
-                  .uniqueItemBrand,
-              name: 'Ribena RTD Blueberry')).thenAnswer(
-            (invocation) => ['GSK Consumer Healthcare'],
-          );
-        },
-        act: (bloc) => bloc.add(
-            const MaterialFilterEvent.updateMaterialSelected(
-                fakeSelectedBrandFilterCategory, 'Ribena RTD Blueberry')),
-        expect: () => [
-              MaterialFilterState.initial().copyWith(
-                  selectedMaterialFilter: MaterialFilterState.initial()
-                      .selectedMaterialFilter
-                      .copyWith(
-                    uniqueItemBrand: ['GSK Consumer Healthcare'],
-                  ),
-                  apiFailureOrSuccessOption: none()),
-            ]);
+      'Update material selected success when filter type is brand',
+      build: () => MaterialFilterBloc(
+        materialFilterRepository: materialFilterRepositoryMock,
+      ),
+      seed: () => MaterialFilterState.initial()
+          .copyWith(selectedItem: ['GSK Consumer Healthcare']),
+      act: (bloc) => bloc.add(
+        const MaterialFilterEvent.updateMaterialSelected(
+            fakeSelectedBrandFilterCategory),
+      ),
+      expect: () => [
+        MaterialFilterState.initial().copyWith(
+          selectedMaterialFilter:
+              MaterialFilterState.initial().selectedMaterialFilter.copyWith(
+            uniqueItemBrand: ['GSK Consumer Healthcare'],
+          ),
+          selectedItem: ['GSK Consumer Healthcare'],
+          isFilterApplied: true,
+          apiFailureOrSuccessOption: none(),
+        ),
+      ],
+    );
     blocTest<MaterialFilterBloc, MaterialFilterState>('update searchkey',
         build: () => MaterialFilterBloc(
               materialFilterRepository: materialFilterRepositoryMock,
@@ -326,20 +314,13 @@ void main() {
       build: () => MaterialFilterBloc(
         materialFilterRepository: materialFilterRepositoryMock,
       ),
-      setUp: () {
-        when(() => materialFilterRepositoryMock.updateSelectedList(
-            selectedList: MaterialFilterState.initial()
-                .selectedMaterialFilter
-                .uniqueTherapeuticClass,
-            name: 'Other multivitamins with minerals')).thenAnswer(
-          (invocation) => ['GSK Consumer Healthcare'],
-        );
-      },
+      seed: () => MaterialFilterState.initial().copyWith(
+        selectedItem: ['GSK Consumer Healthcare'],
+      ),
       act: (bloc) {
         bloc.add(
           const MaterialFilterEvent.updateMaterialSelected(
             fakeSelectedTheraputicFilterCategory,
-            'Other multivitamins with minerals',
           ),
         );
         bloc.add(const MaterialFilterEvent.resetFilter());
@@ -350,6 +331,8 @@ void main() {
               MaterialFilterState.initial().selectedMaterialFilter.copyWith(
             uniqueTherapeuticClass: ['GSK Consumer Healthcare'],
           ),
+          selectedItem: ['GSK Consumer Healthcare'],
+          isFilterApplied: true,
           apiFailureOrSuccessOption: none(),
         ),
         MaterialFilterState.initial(),
@@ -385,6 +368,137 @@ void main() {
           ),
           apiFailureOrSuccessOption: none(),
         ),
+      ],
+    );
+
+    blocTest<MaterialFilterBloc, MaterialFilterState>(
+      'setTappedMaterialToEmpty',
+      build: () => MaterialFilterBloc(
+        materialFilterRepository: materialFilterRepositoryMock,
+      ),
+      seed: () => MaterialFilterState.initial().copyWith(
+        selectedItem: ['Principle 1'],
+      ),
+      act: (bloc) {
+        bloc.add(
+          const MaterialFilterEvent.setTappedMaterialToEmpty(),
+        );
+      },
+      expect: () => [
+        MaterialFilterState.initial().copyWith(
+          selectedItem: [],
+          apiFailureOrSuccessOption: none(),
+        ),
+      ],
+    );
+
+    blocTest<MaterialFilterBloc, MaterialFilterState>(
+      'initiateTappedMaterial',
+      build: () => MaterialFilterBloc(
+        materialFilterRepository: materialFilterRepositoryMock,
+      ),
+      seed: () => MaterialFilterState.initial().copyWith(
+        selectedMaterialFilter: MaterialFilter.empty().copyWith(
+          uniqueItemBrand: [
+            'Brand 1',
+            'Brand 2',
+            'Brand 3',
+          ],
+          uniquePrincipalName: [
+            'Principle 1',
+            'Principle 2',
+            'Principle 3',
+          ],
+          uniqueTherapeuticClass: [
+            'Therapeutic 1',
+            'Therapeutic 2',
+            'Therapeutic 3',
+          ],
+        ),
+      ),
+      act: (bloc) {
+        bloc.add(
+          const MaterialFilterEvent.initiateTappedMaterial(
+              filterType: MaterialFilterType.brand),
+        );
+      },
+      expect: () => [
+        MaterialFilterState.initial().copyWith(
+          selectedMaterialFilter: MaterialFilter.empty().copyWith(
+            uniqueItemBrand: [
+              'Brand 1',
+              'Brand 2',
+              'Brand 3',
+            ],
+            uniquePrincipalName: [
+              'Principle 1',
+              'Principle 2',
+              'Principle 3',
+            ],
+            uniqueTherapeuticClass: [
+              'Therapeutic 1',
+              'Therapeutic 2',
+              'Therapeutic 3',
+            ],
+          ),
+          selectedItem: [
+            'Brand 1',
+            'Brand 2',
+            'Brand 3',
+          ],
+          apiFailureOrSuccessOption: none(),
+        ),
+      ],
+    );
+
+    blocTest<MaterialFilterBloc, MaterialFilterState>(
+      'updateTappedMaterialSelected',
+      build: () => MaterialFilterBloc(
+        materialFilterRepository: materialFilterRepositoryMock,
+      ),
+      act: (bloc) {
+        bloc
+          ..add(
+            const MaterialFilterEvent.updateTappedMaterialSelected(
+              MaterialFilterType.principal,
+              'Principle 1',
+            ),
+          )
+          ..add(
+            const MaterialFilterEvent.updateTappedMaterialSelected(
+              MaterialFilterType.therapeutic,
+              'therapeutic 1',
+            ),
+          )
+          ..add(
+            const MaterialFilterEvent.updateTappedMaterialSelected(
+              MaterialFilterType.brand,
+              'Brand 1',
+            ),
+          );
+      },
+      expect: () => [
+        MaterialFilterState.initial().copyWith(
+          selectedItem: [
+            'Principle 1',
+          ],
+          apiFailureOrSuccessOption: none(),
+        ),
+        MaterialFilterState.initial().copyWith(
+          selectedItem: [
+            'Principle 1',
+            'therapeutic 1',
+          ],
+          apiFailureOrSuccessOption: none(),
+        ),
+        MaterialFilterState.initial().copyWith(
+          selectedItem: [
+            'Principle 1',
+            'therapeutic 1',
+            'Brand 1',
+          ],
+          apiFailureOrSuccessOption: none(),
+        )
       ],
     );
 

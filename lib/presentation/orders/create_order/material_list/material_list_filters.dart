@@ -29,13 +29,10 @@ class MaterialListFilters extends StatelessWidget {
                         color: ZPColors.primary,
                       ),
                 ),
-                onTap: () {
-                  context.router.push(
-                    MaterialFilterPageRoute(
-                      filterType: MaterialFilterType.principal,
-                    ),
-                  );
-                },
+                onTap: () => routeToMaterialFilterPage(
+                  filterType: MaterialFilterType.principal,
+                  context: context,
+                ),
               ),
               CustomSelector(
                 title: 'Therapeutic'.tr(),
@@ -46,13 +43,10 @@ class MaterialListFilters extends StatelessWidget {
                         color: ZPColors.primary,
                       ),
                 ),
-                onTap: () {
-                  context.router.push(
-                    MaterialFilterPageRoute(
-                      filterType: MaterialFilterType.therapeutic,
-                    ),
-                  );
-                },
+                onTap: () => routeToMaterialFilterPage(
+                  filterType: MaterialFilterType.therapeutic,
+                  context: context,
+                ),
               ),
               CustomSelector(
                 title: 'Brand'.tr(),
@@ -63,18 +57,31 @@ class MaterialListFilters extends StatelessWidget {
                         color: ZPColors.primary,
                       ),
                 ),
-                onTap: () {
-                  context.router.push(
-                    MaterialFilterPageRoute(
-                      filterType: MaterialFilterType.brand,
-                    ),
-                  );
-                },
+                onTap: () => routeToMaterialFilterPage(
+                  filterType: MaterialFilterType.brand,
+                  context: context,
+                ),
               ),
             ],
           ),
         );
       },
+    );
+  }
+
+  void routeToMaterialFilterPage({
+    required MaterialFilterType filterType,
+    required BuildContext context,
+  }) {
+    context.read<MaterialFilterBloc>().add(
+          MaterialFilterEvent.initiateTappedMaterial(
+            filterType: filterType,
+          ),
+        );
+    context.router.push(
+      MaterialFilterPageRoute(
+        filterType: filterType,
+      ),
     );
   }
 }

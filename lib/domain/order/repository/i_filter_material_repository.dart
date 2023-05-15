@@ -16,8 +16,4 @@ abstract class IMaterialFilterRepository {
     required User user,
     required String pickAndPack,
   });
-  List<String> updateSelectedList({
-    required List<String> selectedList,
-    required String name,
-  });
 }

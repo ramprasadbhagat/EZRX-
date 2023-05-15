@@ -67,49 +67,46 @@ class MaterialFilterBloc
       updateMaterialSelected: (e) async {
         switch (e.filterType) {
           case MaterialFilterType.principal:
-            final newUniquePrincipalName =
-                materialFilterRepository.updateSelectedList(
-              selectedList: state.selectedMaterialFilter.uniquePrincipalName,
-              name: e.selectedFilter,
-            );
-
             emit(state.copyWith(
               selectedMaterialFilter: state.selectedMaterialFilter.copyWith(
-                uniquePrincipalName: newUniquePrincipalName,
+                uniquePrincipalName: state.selectedItem,
               ),
+              isFilterApplied: true,
               apiFailureOrSuccessOption: none(),
             ));
             break;
           case MaterialFilterType.therapeutic:
-            final newUniqueTherapeuticClass =
-                materialFilterRepository.updateSelectedList(
-              selectedList: state.selectedMaterialFilter.uniqueTherapeuticClass,
-              name: e.selectedFilter,
-            );
-
             emit(state.copyWith(
               selectedMaterialFilter: state.selectedMaterialFilter.copyWith(
-                uniqueTherapeuticClass: newUniqueTherapeuticClass,
+                uniqueTherapeuticClass: state.selectedItem,
               ),
+              isFilterApplied: true,
               apiFailureOrSuccessOption: none(),
             ));
             break;
           case MaterialFilterType.brand:
           default:
-            final newUniqueItemBrand =
-                materialFilterRepository.updateSelectedList(
-              selectedList: state.selectedMaterialFilter.uniqueItemBrand,
-              name: e.selectedFilter,
-            );
-
             emit(state.copyWith(
               selectedMaterialFilter: state.selectedMaterialFilter.copyWith(
-                uniqueItemBrand: newUniqueItemBrand,
+                uniqueItemBrand: state.selectedItem,
               ),
+              isFilterApplied: true,
               apiFailureOrSuccessOption: none(),
             ));
             break;
         }
+      },
+      updateTappedMaterialSelected: (e) async {
+        final tempList = List<String>.from(state.selectedItem);
+        tempList.contains(e.selectedFilter)
+            ? tempList.remove(e.selectedFilter)
+            : tempList.add(e.selectedFilter);
+        emit(
+          state.copyWith(
+            selectedItem: tempList,
+            apiFailureOrSuccessOption: none(),
+          ),
+        );
       },
       updateSearchKey: (e) async =>
           emit(state.copyWith(searchKey: e.searchkey)),
@@ -124,6 +121,8 @@ class MaterialFilterBloc
             searchKey: '',
             selectedMaterialFilter: state.getEmptyMaterialFilter(),
             materialFilter: state.getEmptyMaterialFilter(),
+            isFilterApplied: false,
+            selectedItem: [],
           ),
         );
       },
@@ -135,6 +134,8 @@ class MaterialFilterBloc
                 selectedMaterialFilter: state.selectedMaterialFilter.copyWith(
                   uniquePrincipalName: <String>[],
                 ),
+                selectedItem: [],
+                isFilterApplied: false,
                 apiFailureOrSuccessOption: none(),
               ),
             );
@@ -145,6 +146,8 @@ class MaterialFilterBloc
                 selectedMaterialFilter: state.selectedMaterialFilter.copyWith(
                   uniqueTherapeuticClass: <String>[],
                 ),
+                selectedItem: [],
+                isFilterApplied: false,
                 apiFailureOrSuccessOption: none(),
               ),
             );
@@ -155,11 +158,41 @@ class MaterialFilterBloc
                 selectedMaterialFilter: state.selectedMaterialFilter.copyWith(
                   uniqueItemBrand: <String>[],
                 ),
+                selectedItem: [],
+                isFilterApplied: false,
                 apiFailureOrSuccessOption: none(),
               ),
             );
             break;
         }
+      },
+      setTappedMaterialToEmpty: (e) async => emit(
+        state.copyWith(
+          selectedItem: [],
+          apiFailureOrSuccessOption: none(),
+        ),
+      ),
+      initiateTappedMaterial: (e) async {
+        final tempMap = <String>[];
+        switch (e.filterType) {
+          case MaterialFilterType.principal:
+            tempMap.addAll(state.selectedMaterialFilter.uniquePrincipalName);
+            break;
+          case MaterialFilterType.therapeutic:
+            tempMap.addAll(state.selectedMaterialFilter.uniqueTherapeuticClass);
+            break;
+          case MaterialFilterType.brand:
+          default:
+            tempMap.addAll(state.selectedMaterialFilter.uniqueItemBrand);
+            break;
+        }
+        emit(
+          state.copyWith(
+            selectedItem: tempMap,
+            isFilterApplied: false,
+            apiFailureOrSuccessOption: none(),
+          ),
+        );
       },
     );
   }

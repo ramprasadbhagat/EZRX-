@@ -13,8 +13,16 @@ class MaterialFilterEvent with _$MaterialFilterEvent {
   }) = _fetch;
   const factory MaterialFilterEvent.updateMaterialSelected(
     MaterialFilterType filterType,
-    String selectedFilter,
   ) = _updateMaterialSelected;
+  const factory MaterialFilterEvent.updateTappedMaterialSelected(
+    MaterialFilterType filterType,
+    String selectedFilter,
+  ) = _updateTappedMaterialSelected;
+  const factory MaterialFilterEvent.setTappedMaterialToEmpty() =
+      _SetTappedMaterialToEmpty;
+  const factory MaterialFilterEvent.initiateTappedMaterial({
+    required MaterialFilterType filterType,
+  }) = _InitiateTappedMaterial;
   const factory MaterialFilterEvent.updateSearchKey(String searchkey) =
       _updateSearchKey;
   const factory MaterialFilterEvent.clearSelected() = _clearSelected;

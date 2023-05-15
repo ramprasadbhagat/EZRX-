@@ -72,16 +72,4 @@ class MaterialFilterRepository implements IMaterialFilterRepository {
       return Left(FailureHandler.handleFailure(e));
     }
   }
-
-  @override
-  List<String> updateSelectedList({
-    required List<String> selectedList,
-    required String name,
-  }) {
-    if (selectedList.contains(name)) {
-      return List<String>.from(selectedList)..remove(name);
-    }
-
-    return List<String>.from(selectedList)..add(name);
-  }
 }

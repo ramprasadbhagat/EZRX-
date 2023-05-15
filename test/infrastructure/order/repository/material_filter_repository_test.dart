@@ -1,4 +1,3 @@
-import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
@@ -201,16 +200,6 @@ void main() {
         result.isLeft(),
         true,
       );
-    });
-    test('updateSelectedList', () async {
-      materialFilterRepository.updateSelectedList(
-          selectedList: ['Pfizer PFE Private Limited test'],
-          name: 'Pfizer PFE Private Limited test');
-      materialFilterRepository.updateSelectedList(
-          selectedList: MaterialFilterState.initial()
-              .selectedMaterialFilter
-              .uniquePrincipalName,
-          name: 'Pfizer PFE Private Limited test');
     });
   });
 }

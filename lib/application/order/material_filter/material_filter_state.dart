@@ -9,6 +9,8 @@ class MaterialFilterState with _$MaterialFilterState {
     required String searchKey,
     required Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
     required bool isFetching,
+    required List<String> selectedItem,
+    required bool isFilterApplied,
   }) = _MaterialFilterState;
 
   factory MaterialFilterState.initial() => MaterialFilterState(
@@ -25,6 +27,8 @@ class MaterialFilterState with _$MaterialFilterState {
         ),
         searchKey: '',
         apiFailureOrSuccessOption: none(),
+        selectedItem: [],
+        isFilterApplied: false,
       );
 
   List<String> getFilterList(MaterialFilterType filterType) {
@@ -36,18 +40,6 @@ class MaterialFilterState with _$MaterialFilterState {
       case MaterialFilterType.brand:
       default:
         return materialFilter.uniqueItemBrand;
-    }
-  }
-
-  List<String> getSelectedFilterList(MaterialFilterType filterType) {
-    switch (filterType) {
-      case MaterialFilterType.principal:
-        return selectedMaterialFilter.uniquePrincipalName;
-      case MaterialFilterType.therapeutic:
-        return selectedMaterialFilter.uniqueTherapeuticClass;
-      case MaterialFilterType.brand:
-      default:
-        return selectedMaterialFilter.uniqueItemBrand;
     }
   }
 
@@ -88,8 +80,8 @@ class MaterialFilterState with _$MaterialFilterState {
     return filteredList;
   }
 
-  bool isSelected(MaterialFilterType filterType, String name) {
-    return getSelectedFilterList(filterType).contains(name);
+  bool isSelected(String name) {
+    return selectedItem.contains(name);
   }
 
   MaterialFilter getEmptyMaterialFilter() {
