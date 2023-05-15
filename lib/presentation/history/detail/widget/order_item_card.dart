@@ -120,17 +120,12 @@ class OrderItemCard extends StatelessWidget {
                         keyFlex: 1,
                         valueFlex: 1,
                       ),
-                      eligibilityBlocState
-                                  .salesOrgConfigs.disableDeliveryDate &&
-                              orderHistoryDetailsBonusAggregate
-                                  .orderItem.plannedDeliveryDate.isNotEmpty
+                      !eligibilityBlocState.salesOrgConfigs.disableDeliveryDate
                           ? BalanceTextRow(
                               key: const Key('deliveryDateTime'),
                               keyText: 'Delivery Date/Time'.tr(),
                               valueText: orderHistoryDetailsBonusAggregate
-                                  .orderItem
-                                  .plannedDeliveryDate
-                                  .toValidDateString,
+                                  .orderItem.deliveryDate,
                               valueTextLoading: state.isLoading,
                               keyFlex: 1,
                               valueFlex: 1,

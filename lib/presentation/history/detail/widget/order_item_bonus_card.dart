@@ -125,22 +125,18 @@ class OrderItemBonusCard extends StatelessWidget {
                       BalanceTextRow(
                         keyText: 'Material ID'.tr(),
                         valueText: orderHistoryDetailsBonusAggregate
-                            .orderItem.materialNumber.displayMatNo.tr(),
+                            .orderItem.materialNumber.displayMatNo
+                            .tr(),
                         valueTextLoading: state.isLoading,
                         keyFlex: 1,
                         valueFlex: 1,
                       ),
-                      eligibiltiyBlocState
-                                  .salesOrgConfigs.disableDeliveryDate &&
-                              orderHistoryDetailsBonusAggregate
-                                  .orderItem.plannedDeliveryDate.isNotEmpty
+                      !eligibiltiyBlocState.salesOrgConfigs.disableDeliveryDate
                           ? BalanceTextRow(
                               key: const Key('deliveryDateTime'),
                               keyText: 'Delivery Date/Time'.tr(),
                               valueText: orderHistoryDetailsBonusAggregate
-                                  .orderItem
-                                  .plannedDeliveryDate
-                                  .toValidDateString,
+                                  .orderItem.deliveryDate,
                               valueTextLoading: state.isLoading,
                               keyFlex: 1,
                               valueFlex: 1,
@@ -199,7 +195,8 @@ class OrderItemBonusCard extends StatelessWidget {
                       BalanceTextRow(
                         keyText: 'Remarks'.tr(),
                         valueText: orderHistoryDetailsBonusAggregate
-                            .orderItem.lineReferenceNotes.displayRemarks.tr(),
+                            .orderItem.lineReferenceNotes.displayRemarks
+                            .tr(),
                         valueTextLoading: state.isLoading,
                         keyFlex: 1,
                         valueFlex: 1,
@@ -270,19 +267,18 @@ class OrderItemBonusCard extends StatelessWidget {
                                         : const SizedBox.shrink(),
                                     BalanceTextRow(
                                       keyText: 'Material ID'.tr(),
-                                      valueText:
-                                          orderItem.materialNumber.displayMatNo.tr(),
+                                      valueText: orderItem
+                                          .materialNumber.displayMatNo
+                                          .tr(),
                                       valueTextLoading: state.isLoading,
                                       keyFlex: 1,
                                       valueFlex: 1,
                                     ),
-                                    eligibiltiyBlocState
+                                    !eligibiltiyBlocState
                                             .salesOrgConfigs.disableDeliveryDate
                                         ? BalanceTextRow(
                                             keyText: 'Delivery Date/Time'.tr(),
-                                            valueText: orderItem
-                                                .plannedDeliveryDate
-                                                .toValidDateString,
+                                            valueText: orderItem.deliveryDate,
                                             valueTextLoading: state.isLoading,
                                             keyFlex: 1,
                                             valueFlex: 1,
@@ -306,7 +302,8 @@ class OrderItemBonusCard extends StatelessWidget {
                                       BalanceTextRow(
                                         keyText: 'Remarks'.tr(),
                                         valueText: orderItem
-                                            .lineReferenceNotes.displayRemarks.tr(),
+                                            .lineReferenceNotes.displayRemarks
+                                            .tr(),
                                         valueTextLoading: state.isLoading,
                                         keyFlex: 1,
                                         valueFlex: 1,

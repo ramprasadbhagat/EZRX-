@@ -55,4 +55,7 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
       );
 
   String get batchAndExpiryDate => '$batch:${expiryDate.toValidDateString}';
+  String get deliveryDate => plannedDeliveryDate.isNotEmpty
+      ? plannedDeliveryDate.toValidDateString
+      : '-';
 }

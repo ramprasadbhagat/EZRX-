@@ -1118,12 +1118,53 @@ void main() {
       await tester.pumpWidget(getWUT());
       await tester.pump();
     });
+    testWidgets(' display Delivery date/Time Test', (tester) async {
+      final items = [
+        orderHistoryDetails.orderHistoryDetailsOrderItem.first.copyWith(
+          plannedDeliveryDate: DateTimeStringValue(orderHistoryDetails
+              .orderHistoryDetailsOrderItem.first.deliveryDate),
+        ),
+      ];
+      when(() => mockOrderHistoryDetailsBloc.state).thenReturn(
+        OrderHistoryDetailsState.initial().copyWith(
+          orderHistoryDetails: orderHistoryDetails.copyWith(
+            orderHistoryDetailsOrderItem: items,
+          ),
+          failureOrSuccessOption: none(),
+          isLoading: true,
+          showErrorMessage: false,
+        ),
+      );
+      final expectedStates = [
+        mockOrderHistoryDetailsBloc.state.copyWith(
+          isLoading: false,
+          failureOrSuccessOption: optionOf(const Right('sucess')),
+        ),
+      ];
+      whenListen(
+          mockOrderHistoryDetailsBloc, Stream.fromIterable(expectedStates));
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+          batchNumDisplay: true,
+          enableTaxDisplay: true,
+          enableRemarks: true,
+          displayOrderDiscount: true,
+          disableDeliveryDate: false,
+        )),
+      );
+
+      await tester.pumpWidget(getWUT());
+      await tester.pump();
+
+      final deliveryDate = find.byKey(const Key('deliveryDateTime'));
+      expect(deliveryDate, findsOneWidget);
+    });
 
     testWidgets('order summary bonus details  test When Product Not Available',
         (tester) async {
       final items = [
         orderHistoryDetails.orderHistoryDetailsOrderItem.first.copyWith(
-          plannedDeliveryDate: DateTimeStringValue('20220112'),
           sAPStatus: SAPStatus('Order Placed'),
         ),
         ...orderHistoryDetails.orderHistoryDetailsOrderItem.map(
@@ -1156,7 +1197,6 @@ void main() {
           enableTaxDisplay: true,
           enableRemarks: true,
           displayOrderDiscount: true,
-          disableDeliveryDate: true,
         )),
       );
       when(() => userBlocMock.state).thenReturn(
@@ -1176,10 +1216,6 @@ void main() {
 
       expect(orderItemBonusCardField, findsOneWidget);
       await tester.pump();
-
-      final deliveryDate = find.byKey(const Key('deliveryDateTime'));
-      expect(deliveryDate, findsOneWidget);
-
       final discountRate = find.byKey(const Key('discountRateForItemCard'));
 
       expect(discountRate, findsOneWidget);
@@ -1229,7 +1265,6 @@ void main() {
           enableTaxDisplay: true,
           enableRemarks: true,
           displayOrderDiscount: true,
-          disableDeliveryDate: true,
           enableOHPrice: false,
         )),
       );
@@ -1298,7 +1333,6 @@ void main() {
         (tester) async {
       final items = [
         orderHistoryDetails.orderHistoryDetailsOrderItem.first.copyWith(
-          plannedDeliveryDate: DateTimeStringValue('20220112'),
           sAPStatus: SAPStatus('Order Placed'),
         ),
       ];
@@ -1327,7 +1361,6 @@ void main() {
           enableTaxDisplay: true,
           enableRemarks: true,
           displayOrderDiscount: true,
-          disableDeliveryDate: true,
         )),
       );
       when(() => userBlocMock.state).thenReturn(
@@ -1355,9 +1388,6 @@ void main() {
 
       expect(orderItemCardField, findsOneWidget);
       await tester.pump();
-
-      final deliveryDate = find.byKey(const Key('deliveryDateTime'));
-      expect(deliveryDate, findsOneWidget);
 
       final sapStatusNotEmptyOrderItem =
           find.byKey(const Key('sapStatusNotEmpty'));
@@ -1390,7 +1420,6 @@ void main() {
           .orderHistoryDetailsOrderItem.first.materialNumber.displayMatNo;
       final items = [
         orderHistoryDetails.orderHistoryDetailsOrderItem.first.copyWith(
-          plannedDeliveryDate: DateTimeStringValue('20220112'),
           sAPStatus: SAPStatus(''),
         ),
       ];
@@ -1411,7 +1440,6 @@ void main() {
           enableTaxDisplay: true,
           enableRemarks: true,
           displayOrderDiscount: true,
-          disableDeliveryDate: true,
           enableOHPrice: false,
         )),
       );
