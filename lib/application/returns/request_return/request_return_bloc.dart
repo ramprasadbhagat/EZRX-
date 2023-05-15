@@ -26,7 +26,7 @@ class RequestReturnBloc extends Bloc<RequestReturnEvent, RequestReturnState> {
 
   RequestReturnBloc({required this.returnRequestRepository})
       : super(RequestReturnState.initial()) {
-    on(_onEvent);
+    on<RequestReturnEvent>(_onEvent);
   }
 
   Future<void> _onEvent(

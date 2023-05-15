@@ -23,769 +23,777 @@ part 'cart_state.dart';
 class CartBloc extends Bloc<CartEvent, CartState> {
   final CartRepository repository;
   CartBloc(this.repository) : super(CartState.initial()) {
-    on<_Initialized>((e, emit) async {
-      emit(CartState.initial());
-    });
-    on<_Fetch>((e, emit) async {
-      emit(state.copyWith(
-        isFetching: true,
-        apiFailureOrSuccessOption: none(),
-        cartItems: [],
-      ));
-      final failureOrSuccess = repository.fetchCart();
-      await failureOrSuccess.fold(
-        (failure) async {
-          emit(
-            state.copyWith(
-              apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-              isFetching: false,
-            ),
-          );
-        },
-        (cartItemList) async {
-          final result = await repository.saveToCartWithUpdatedStockInfo(
-            cartItem: cartItemList,
-            customerCodeInfo: e.customerCodeInfo,
-            salesOrganisationConfigs: e.salesOrganisationConfigs,
-            salesOrganisation: e.salesOrganisation,
-            shipToInfo: e.shipToInfo,
-          );
-          final cartWithStockInfo = result.getOrElse(() => <CartItem>[]);
-
-          if (cartWithStockInfo.allOutOfStock(
-            allowOutOfStock: !e.doNotAllowOutOfStockMaterials,
-          )) {
-            emit(
-              state.copyWith(
-                isFetching: false,
-              ),
-            );
-            add(const _ClearCart());
-
-            return;
-          }
-
-          if (!e.comboDealEligible) {
-            emit(
-              state.copyWith(
-                isFetching: false,
-              ),
-            );
-
-            final comboDealCartItemIds = cartWithStockInfo
-                .where((item) => item.itemType == CartItemType.comboDeal)
-                .map((item) => item.id)
-                .toList();
-
-            add(
-              _ClearSelectedItemsFromCart(
-                selectedItemIds: comboDealCartItemIds,
-              ),
-            );
-
-            return;
-          }
-
-          emit(
-            state.copyWith(
-              cartItems: repository.updateDiscountQty(
-                items: cartWithStockInfo,
-              ),
-              apiFailureOrSuccessOption: none(),
-              isFetching: false,
-            ),
-          );
-        },
-      );
-    });
-    on<_AddMaterialToCart>((e, emit) async {
-      final comboDeal = e.item.price.comboDeal;
-      final inCartComboDeal = state.getComboDealCartItem(
-        comboDealQuery: comboDeal,
-      );
-      if (inCartComboDeal.materials.isNotEmpty) {
-        add(
-          _UpdateMaterialQtyInCartItem(
-            updatedQtyItem: e.item,
-            currentItem: inCartComboDeal,
-            salesOrganisationConfigs: e.salesOrganisationConfigs,
-            salesOrganisation: e.salesOrganisation,
-            customerCodeInfo: e.customerCodeInfo,
-            shipToInfo: e.shipToInfo,
-            doNotallowOutOfStockMaterial: e.doNotallowOutOfStockMaterial,
-            overrideQty: false,
+    on<CartEvent>(_onEvent);
+  }
+  
+  Future<void> _onEvent(CartEvent event, Emitter<CartState> emit) async {
+    await event.map(
+      initialized: (e) async => emit(CartState.initial()),
+      fetch: (e) async {
+        emit(
+          state.copyWith(
+            isFetching: true,
+            apiFailureOrSuccessOption: none(),
+            cartItems: [],
           ),
         );
 
-        return;
-      }
-      emit(
-        state.copyWith(
-          apiFailureOrSuccessOption: none(),
-          isFetching: true,
-        ),
-      );
-
-      final failureOrSuccess = await repository.addItemToCart(
-        cartItem: CartItem.material(
-          e.item.copyWith(
-            isSpecialOrderType: e.isSpecialOrderType,
-          ),
-        ),
-        override: e.overrideQty,
-        customerCodeInfo: e.customerCodeInfo,
-        salesOrganisationConfigs: e.salesOrganisationConfigs,
-        salesOrganisation: e.salesOrganisation,
-        shipToInfo: e.shipToInfo,
-        doNotAllowOutOfStockMaterials: e.doNotallowOutOfStockMaterial,
-      );
-
-      await failureOrSuccess.fold(
-        (failure) {
-          emit(
-            state.copyWith(
-              apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-              isFetching: false,
-            ),
-          );
-        },
-        (cartItemList) async {
-          emit(
-            state.copyWith(
-              cartItems: repository.updateDiscountQty(
-                items: cartItemList,
+        final failureOrSuccess = repository.fetchCart();
+        await failureOrSuccess.fold(
+          (failure) async {
+            emit(
+              state.copyWith(
+                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+                isFetching: false,
               ),
-              apiFailureOrSuccessOption: none(),
-              isFetching: false,
-            ),
-          );
-          if (e.isSpecialOrderType) return;
-          add(
-            _VerifyMaterialDealBonus(
-              item: e.item,
-              salesOrganisationConfigs: e.salesOrganisationConfigs,
-              salesOrganisation: e.salesOrganisation,
-              customerCodeInfo: e.customerCodeInfo,
-              shipToInfo: e.shipToInfo,
-            ),
-          );
-        },
-      );
-    });
-    on<_DiscountOverride>((e, emit) async {
-      emit(
-        state.copyWith(
-          apiFailureOrSuccessOption: none(),
-          isFetching: true,
-        ),
-      );
-
-      final failureOrSuccess = await repository.discountOverride(
-        cartItem: CartItem.material(e.item),
-      );
-
-      await failureOrSuccess.fold(
-        (failure) {
-          emit(
-            state.copyWith(
-              apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-              isFetching: false,
-            ),
-          );
-        },
-        (cartItemList) async {
-          emit(
-            state.copyWith(
-              cartItems: cartItemList,
-              apiFailureOrSuccessOption: none(),
-              isFetching: false,
-            ),
-          );
-        },
-      );
-    });
-    on<_VerifyMaterialDealBonus>((e, emit) async {
-      final cartItem = state.getMaterialCartItem(material: e.item);
-      final material = cartItem.materials.first;
-
-      if (!material.refreshAddedBonus) {
-        return;
-      }
-      emit(
-        state.copyWith(
-          apiFailureOrSuccessOption: none(),
-          isFetching: true,
-        ),
-      );
-      final failureOrSuccess = await repository.updateMaterialDealBonus(
-        material: material,
-        customerCodeInfo: e.customerCodeInfo,
-        salesOrganisationConfigs: e.salesOrganisationConfigs,
-        salesOrganisation: e.salesOrganisation,
-        shipToInfo: e.shipToInfo,
-      );
-
-      await failureOrSuccess.fold(
-        (failure) {
-          emit(
-            state.copyWith(
-              apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-              isFetching: false,
-            ),
-          );
-        },
-        (cartItemList) async {
-          emit(
-            state.copyWith(
-              cartItems: cartItemList,
-              apiFailureOrSuccessOption: none(),
-              isFetching: false,
-            ),
-          );
-        },
-      );
-    });
-    on<_AddBundleToCart>((e, emit) async {
-      emit(
-        state.copyWith(
-          apiFailureOrSuccessOption: none(),
-          isFetching: true,
-        ),
-      );
-
-      final failureOrSuccess = await repository.addItemToCart(
-        cartItem: CartItem.bundle(e.bundleItems),
-        override: false,
-        customerCodeInfo: e.customerCodeInfo,
-        salesOrganisationConfigs: e.salesOrganisationConfigs,
-        salesOrganisation: e.salesOrganisation,
-        shipToInfo: e.shipToInfo,
-        doNotAllowOutOfStockMaterials: e.doNotallowOutOfStockMaterial,
-      );
-
-      await failureOrSuccess.fold(
-        (failure) {
-          emit(
-            state.copyWith(
-              apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-              isFetching: false,
-            ),
-          );
-        },
-        (cartItemList) async {
-          emit(
-            state.copyWith(
-              cartItems: cartItemList,
-              apiFailureOrSuccessOption: none(),
-              isFetching: false,
-            ),
-          );
-        },
-      );
-    });
-    on<_UpdateMaterialQtyInCartItem>((e, emit) async {
-      emit(
-        state.copyWith(
-          apiFailureOrSuccessOption: none(),
-          isFetching: true,
-        ),
-      );
-
-      final failureOrSuccess = await repository.updateMaterialQtyInCartItem(
-        cartItem: e.currentItem,
-        updatedQtyItem: e.updatedQtyItem,
-        customerCodeInfo: e.customerCodeInfo,
-        salesOrganisationConfigs: e.salesOrganisationConfigs,
-        salesOrganisation: e.salesOrganisation,
-        shipToInfo: e.shipToInfo,
-        doNotAllowOutOfStockMaterials: e.doNotallowOutOfStockMaterial,
-        override: e.overrideQty,
-      );
-
-      await failureOrSuccess.fold(
-        (failure) {
-          emit(
-            state.copyWith(
-              apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-              isFetching: false,
-            ),
-          );
-        },
-        (cartItemList) async {
-          emit(
-            state.copyWith(
-              cartItems: cartItemList,
-              apiFailureOrSuccessOption: none(),
-              isFetching: false,
-            ),
-          );
-        },
-      );
-    });
-    on<_RemoveFromCart>((e, emit) async {
-      emit(state.copyWith(
-        isFetching: true,
-        apiFailureOrSuccessOption: none(),
-      ));
-
-      final failureOrSuccess = await repository.deleteFromCart(
-        item: e.item,
-      );
-
-      failureOrSuccess.fold(
-        (failure) {
-          emit(
-            state.copyWith(
-              apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-              isFetching: false,
-            ),
-          );
-        },
-        (cartItemList) {
-          emit(
-            state.copyWith(
-              cartItems: repository.updateDiscountQty(items: cartItemList),
-              apiFailureOrSuccessOption: none(),
-              isFetching: false,
-            ),
-          );
-        },
-      );
-    });
-    on<_AddRemarkToCartItem>((e, emit) async {
-      emit(state.copyWith(
-        isFetching: true,
-        apiFailureOrSuccessOption: none(),
-      ));
-
-      final failureOrSuccess = await repository.addRemarkToCartItem(
-        remarkMessage: e.message,
-        item: e.item,
-      );
-
-      failureOrSuccess.fold(
-        (failure) {
-          emit(
-            state.copyWith(
-              apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-              isFetching: false,
-            ),
-          );
-        },
-        (cartItemList) {
-          emit(
-            state.copyWith(
-              cartItems: cartItemList,
-              apiFailureOrSuccessOption: none(),
-              isFetching: false,
-            ),
-          );
-        },
-      );
-    });
-    on<_AddBonusToCartItem>((e, emit) async {
-      emit(
-        state.copyWith(
-          apiFailureOrSuccessOption: none(),
-          isFetchingBonus: true,
-        ),
-      );
-
-      final failureOrSuccess = await repository.addBonusToCartItem(
-        item: e.item,
-        newBonus: e.bonusItem,
-        overrideQty: e.overrideQty,
-        customerCodeInfo: e.customerCodeInfo,
-        salesOrganisationConfigs: e.salesOrganisationConfigs,
-        salesOrganisation: e.salesOrganisation,
-        shipToInfo: e.shipToInfo,
-        doNotAllowOutOfStockMaterials: e.doNotallowOutOfStockMaterial,
-      );
-
-      await failureOrSuccess.fold(
-        (failure) {
-          emit(
-            state.copyWith(
-              apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-              isFetchingBonus: false,
-            ),
-          );
-        },
-        (cartItemList) async {
-          emit(
-            state.copyWith(
-              cartItems: cartItemList,
-              apiFailureOrSuccessOption: none(),
-              isFetchingBonus: false,
-            ),
-          );
-        },
-      );
-    });
-    on<_RemoveBonusFromCartItem>((e, emit) async {
-      emit(state.copyWith(
-        isFetching: true,
-        apiFailureOrSuccessOption: none(),
-      ));
-
-      final failureOrSuccess = await repository.deleteBonusFromCartItem(
-        item: e.item,
-        deletedBonus: e.bonusItem,
-      );
-
-      failureOrSuccess.fold(
-        (failure) {
-          emit(
-            state.copyWith(
-              apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-              isFetching: false,
-            ),
-          );
-        },
-        (cartItemList) {
-          emit(
-            state.copyWith(
-              cartItems: cartItemList,
-              apiFailureOrSuccessOption: none(),
-              isFetching: false,
-            ),
-          );
-        },
-      );
-    });
-    on<_AddRemarkToBonusItem>((e, emit) async {
-      emit(state.copyWith(
-        isFetching: true,
-        apiFailureOrSuccessOption: none(),
-      ));
-
-      final failureOrSuccess = await repository.addRemarkToBonusItem(
-        remarkMessage: e.message,
-        item: e.item,
-        bonus: e.bonusItem,
-      );
-
-      failureOrSuccess.fold(
-        (failure) {
-          emit(
-            state.copyWith(
-              apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-              isFetching: false,
-            ),
-          );
-        },
-        (cartItemList) {
-          emit(
-            state.copyWith(
-              cartItems: cartItemList,
-              apiFailureOrSuccessOption: none(),
-              isFetching: false,
-            ),
-          );
-        },
-      );
-    });
-    on<_OverrideCartItemPrice>((e, emit) async {
-      emit(state.copyWith(
-        isFetching: true,
-        apiFailureOrSuccessOption: none(),
-      ));
-
-      final failureOrSuccess = await repository.overrideCartItemPrice(
-        item: e.cartItem,
-        overridePriceList: e.overridenPrice,
-      );
-
-      failureOrSuccess.fold(
-        (failure) {
-          emit(
-            state.copyWith(
-              apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-              isFetching: false,
-            ),
-          );
-        },
-        (cartItemList) {
-          emit(
-            state.copyWith(
-              cartItems: cartItemList,
-              apiFailureOrSuccessOption: none(),
-              isFetching: false,
-            ),
-          );
-        },
-      );
-    });
-    on<_SelectButtonTapped>((e, emit) async {
-      emit(state.copyWith(
-        isFetching: true,
-        apiFailureOrSuccessOption: none(),
-      ));
-
-      final failureOrSuccess = await repository.updateSelectionInCart(
-        updatedItem: e.cartItem,
-      );
-
-      failureOrSuccess.fold(
-        (failure) {
-          emit(
-            state.copyWith(
-              apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-              isFetching: false,
-            ),
-          );
-        },
-        (cartItemList) {
-          emit(
-            state.copyWith(
-              cartItems: cartItemList,
-              apiFailureOrSuccessOption: none(),
-              isFetching: false,
-            ),
-          );
-        },
-      );
-    });
-    on<_SelectAllButtonTapped>((e, emit) async {
-      emit(state.copyWith(
-        isFetching: true,
-        apiFailureOrSuccessOption: none(),
-      ));
-
-      final failureOrSuccess = await repository.updateAllSelectionInCart(
-        currentCart: state.cartItems,
-      );
-
-      failureOrSuccess.fold(
-        (failure) {
-          emit(
-            state.copyWith(
-              apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-              isFetching: false,
-            ),
-          );
-        },
-        (cartItemList) {
-          emit(
-            state.copyWith(
-              cartItems: cartItemList,
-              apiFailureOrSuccessOption: none(),
-              isFetching: false,
-            ),
-          );
-        },
-      );
-    });
-    on<_ClearCart>((e, emit) async {
-      emit(
-        state.copyWith(
-          apiFailureOrSuccessOption: none(),
-          isClearing: true,
-        ),
-      );
-
-      final failureOrSuccess = await repository.clearCart();
-      await failureOrSuccess.fold(
-        (failure) async {
-          emit(
-            state.copyWith(
-              isClearing: false,
-              apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-            ),
-          );
-        },
-        (cartItemList) async {
-          emit(
-            CartState.initial(),
-          );
-        },
-      );
-    });
-    on<_ClearSelectedItemsFromCart>((e, emit) async {
-      emit(
-        state.copyWith(
-          apiFailureOrSuccessOption: none(),
-          isClearing: true,
-        ),
-      );
-
-      final failureOrSuccess = await repository.clearCartOnlySelectedItems(
-        selectedItemIds: e.selectedItemIds,
-      );
-      await failureOrSuccess.fold(
-        (failure) async {
-          emit(
-            state.copyWith(
-              isClearing: false,
-              apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-            ),
-          );
-        },
-        (cartItemList) async {
-          emit(
-            state.copyWith(
-              isClearing: false,
-              cartItems: cartItemList,
-            ),
-          );
-        },
-      );
-    });
-    on<_ReplaceWithOrderItems>((e, emit) async {
-      emit(
-        state.copyWith(
-          apiFailureOrSuccessOption: none(),
-          isFetching: true,
-        ),
-      );
-
-      final failureOrSuccess = await repository.replaceCartWithItems(
-        items: e.items,
-        customerCodeInfo: e.customerCodeInfo,
-        salesOrganisationConfigs: e.salesOrganisationConfigs,
-        salesOrganisation: e.salesOrganisation,
-        shipToInfo: e.shipToInfo,
-        doNotAllowOutOfStockMaterials: e.doNotallowOutOfStockMaterial,
-      );
-
-      await failureOrSuccess.fold(
-        (failure) {
-          emit(
-            state.copyWith(
-              apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-              isFetching: false,
-            ),
-          );
-        },
-        (cartItemList) async {
-          emit(
-            state.copyWith(
-              cartItems: repository.updateDiscountQty(items: cartItemList),
-              apiFailureOrSuccessOption: none(),
-              isFetching: false,
-            ),
-          );
-
-          if (state.isBonusRestricted) return;
-
-          for (final material in state.getCartItemMaterialList) {
-            final failureOrSuccess = await repository.updateMaterialDealBonus(
-              material: material.materials.first,
+            );
+          },
+          (cartItemList) async {
+            final result = await repository.saveToCartWithUpdatedStockInfo(
+              cartItem: cartItemList,
               customerCodeInfo: e.customerCodeInfo,
               salesOrganisationConfigs: e.salesOrganisationConfigs,
               salesOrganisation: e.salesOrganisation,
               shipToInfo: e.shipToInfo,
             );
+            final cartWithStockInfo = result.getOrElse(() => <CartItem>[]);
 
-            await failureOrSuccess.fold(
-              (failure) {
-                emit(
-                  state.copyWith(
-                    apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-                    isFetching: false,
-                  ),
-                );
-              },
-              (cartItemList) async {
-                if (material == state.getCartItemMaterialList.last) {
+            if (cartWithStockInfo.allOutOfStock(
+              allowOutOfStock: !e.doNotAllowOutOfStockMaterials,
+            )) {
+              emit(
+                state.copyWith(
+                  isFetching: false,
+                ),
+              );
+              add(const _ClearCart());
+
+              return;
+            }
+
+            if (!e.comboDealEligible) {
+              emit(
+                state.copyWith(
+                  isFetching: false,
+                ),
+              );
+
+              final comboDealCartItemIds = cartWithStockInfo
+                  .where((item) => item.itemType == CartItemType.comboDeal)
+                  .map((item) => item.id)
+                  .toList();
+
+              add(
+                _ClearSelectedItemsFromCart(
+                  selectedItemIds: comboDealCartItemIds,
+                ),
+              );
+
+              return;
+            }
+
+            emit(
+              state.copyWith(
+                cartItems: repository.updateDiscountQty(
+                  items: cartWithStockInfo,
+                ),
+                apiFailureOrSuccessOption: none(),
+                isFetching: false,
+              ),
+            );
+          },
+        );
+      },
+      addMaterialToCart: (e) async {
+        final comboDeal = e.item.price.comboDeal;
+        final inCartComboDeal = state.getComboDealCartItem(
+          comboDealQuery: comboDeal,
+        );
+        if (inCartComboDeal.materials.isNotEmpty) {
+          add(
+            _UpdateMaterialQtyInCartItem(
+              updatedQtyItem: e.item,
+              currentItem: inCartComboDeal,
+              salesOrganisationConfigs: e.salesOrganisationConfigs,
+              salesOrganisation: e.salesOrganisation,
+              customerCodeInfo: e.customerCodeInfo,
+              shipToInfo: e.shipToInfo,
+              doNotallowOutOfStockMaterial: e.doNotallowOutOfStockMaterial,
+              overrideQty: false,
+            ),
+          );
+
+          return;
+        }
+        emit(
+          state.copyWith(
+            apiFailureOrSuccessOption: none(),
+            isFetching: true,
+          ),
+        );
+
+        final failureOrSuccess = await repository.addItemToCart(
+          cartItem: CartItem.material(
+            e.item.copyWith(
+              isSpecialOrderType: e.isSpecialOrderType,
+            ),
+          ),
+          override: e.overrideQty,
+          customerCodeInfo: e.customerCodeInfo,
+          salesOrganisationConfigs: e.salesOrganisationConfigs,
+          salesOrganisation: e.salesOrganisation,
+          shipToInfo: e.shipToInfo,
+          doNotAllowOutOfStockMaterials: e.doNotallowOutOfStockMaterial,
+        );
+
+        await failureOrSuccess.fold(
+          (failure) {
+            emit(
+              state.copyWith(
+                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+                isFetching: false,
+              ),
+            );
+          },
+          (cartItemList) async {
+            emit(
+              state.copyWith(
+                cartItems: repository.updateDiscountQty(
+                  items: cartItemList,
+                ),
+                apiFailureOrSuccessOption: none(),
+                isFetching: false,
+              ),
+            );
+            if (e.isSpecialOrderType) return;
+            add(
+              _VerifyMaterialDealBonus(
+                item: e.item,
+                salesOrganisationConfigs: e.salesOrganisationConfigs,
+                salesOrganisation: e.salesOrganisation,
+                customerCodeInfo: e.customerCodeInfo,
+                shipToInfo: e.shipToInfo,
+              ),
+            );
+          },
+        );
+      },
+      discountOverride: (e) async {
+        emit(
+          state.copyWith(
+            apiFailureOrSuccessOption: none(),
+            isFetching: true,
+          ),
+        );
+
+        final failureOrSuccess = await repository.discountOverride(
+          cartItem: CartItem.material(e.item),
+        );
+
+        await failureOrSuccess.fold(
+          (failure) {
+            emit(
+              state.copyWith(
+                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+                isFetching: false,
+              ),
+            );
+          },
+          (cartItemList) async {
+            emit(
+              state.copyWith(
+                cartItems: cartItemList,
+                apiFailureOrSuccessOption: none(),
+                isFetching: false,
+              ),
+            );
+          },
+        );
+      },
+      verifyMaterialDealBonus: (e) async {
+        final cartItem = state.getMaterialCartItem(material: e.item);
+        final material = cartItem.materials.first;
+
+        if (!material.refreshAddedBonus) {
+          return;
+        }
+        emit(
+          state.copyWith(
+            apiFailureOrSuccessOption: none(),
+            isFetching: true,
+          ),
+        );
+        final failureOrSuccess = await repository.updateMaterialDealBonus(
+          material: material,
+          customerCodeInfo: e.customerCodeInfo,
+          salesOrganisationConfigs: e.salesOrganisationConfigs,
+          salesOrganisation: e.salesOrganisation,
+          shipToInfo: e.shipToInfo,
+        );
+
+        await failureOrSuccess.fold(
+          (failure) {
+            emit(
+              state.copyWith(
+                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+                isFetching: false,
+              ),
+            );
+          },
+          (cartItemList) async {
+            emit(
+              state.copyWith(
+                cartItems: cartItemList,
+                apiFailureOrSuccessOption: none(),
+                isFetching: false,
+              ),
+            );
+          },
+        );
+      },
+      addBundleToCart: (e) async {
+        emit(
+          state.copyWith(
+            apiFailureOrSuccessOption: none(),
+            isFetching: true,
+          ),
+        );
+
+        final failureOrSuccess = await repository.addItemToCart(
+          cartItem: CartItem.bundle(e.bundleItems),
+          override: false,
+          customerCodeInfo: e.customerCodeInfo,
+          salesOrganisationConfigs: e.salesOrganisationConfigs,
+          salesOrganisation: e.salesOrganisation,
+          shipToInfo: e.shipToInfo,
+          doNotAllowOutOfStockMaterials: e.doNotallowOutOfStockMaterial,
+        );
+
+        await failureOrSuccess.fold(
+          (failure) {
+            emit(
+              state.copyWith(
+                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+                isFetching: false,
+              ),
+            );
+          },
+          (cartItemList) async {
+            emit(
+              state.copyWith(
+                cartItems: cartItemList,
+                apiFailureOrSuccessOption: none(),
+                isFetching: false,
+              ),
+            );
+          },
+        );
+      },
+      updateMaterialQtyInCartItem: (e) async {
+        emit(
+          state.copyWith(
+            apiFailureOrSuccessOption: none(),
+            isFetching: true,
+          ),
+        );
+
+        final failureOrSuccess = await repository.updateMaterialQtyInCartItem(
+          cartItem: e.currentItem,
+          updatedQtyItem: e.updatedQtyItem,
+          customerCodeInfo: e.customerCodeInfo,
+          salesOrganisationConfigs: e.salesOrganisationConfigs,
+          salesOrganisation: e.salesOrganisation,
+          shipToInfo: e.shipToInfo,
+          doNotAllowOutOfStockMaterials: e.doNotallowOutOfStockMaterial,
+          override: e.overrideQty,
+        );
+
+        await failureOrSuccess.fold(
+          (failure) {
+            emit(
+              state.copyWith(
+                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+                isFetching: false,
+              ),
+            );
+          },
+          (cartItemList) async {
+            emit(
+              state.copyWith(
+                cartItems: cartItemList,
+                apiFailureOrSuccessOption: none(),
+                isFetching: false,
+              ),
+            );
+          },
+        );
+      },
+      removeFromCart: (e) async {
+        emit(state.copyWith(
+          isFetching: true,
+          apiFailureOrSuccessOption: none(),
+        ));
+
+        final failureOrSuccess = await repository.deleteFromCart(
+          item: e.item,
+        );
+
+        failureOrSuccess.fold(
+          (failure) {
+            emit(
+              state.copyWith(
+                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+                isFetching: false,
+              ),
+            );
+          },
+          (cartItemList) {
+            emit(
+              state.copyWith(
+                cartItems: repository.updateDiscountQty(items: cartItemList),
+                apiFailureOrSuccessOption: none(),
+                isFetching: false,
+              ),
+            );
+          },
+        );
+      },
+      addRemarkToCartItem: (e) async {
+        emit(state.copyWith(
+          isFetching: true,
+          apiFailureOrSuccessOption: none(),
+        ));
+
+        final failureOrSuccess = await repository.addRemarkToCartItem(
+          remarkMessage: e.message,
+          item: e.item,
+        );
+
+        failureOrSuccess.fold(
+          (failure) {
+            emit(
+              state.copyWith(
+                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+                isFetching: false,
+              ),
+            );
+          },
+          (cartItemList) {
+            emit(
+              state.copyWith(
+                cartItems: cartItemList,
+                apiFailureOrSuccessOption: none(),
+                isFetching: false,
+              ),
+            );
+          },
+        );
+      },
+      addBonusToCartItem: (e) async {
+        emit(
+          state.copyWith(
+            apiFailureOrSuccessOption: none(),
+            isFetchingBonus: true,
+          ),
+        );
+
+        final failureOrSuccess = await repository.addBonusToCartItem(
+          item: e.item,
+          newBonus: e.bonusItem,
+          overrideQty: e.overrideQty,
+          customerCodeInfo: e.customerCodeInfo,
+          salesOrganisationConfigs: e.salesOrganisationConfigs,
+          salesOrganisation: e.salesOrganisation,
+          shipToInfo: e.shipToInfo,
+          doNotAllowOutOfStockMaterials: e.doNotallowOutOfStockMaterial,
+        );
+
+        await failureOrSuccess.fold(
+          (failure) {
+            emit(
+              state.copyWith(
+                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+                isFetchingBonus: false,
+              ),
+            );
+          },
+          (cartItemList) async {
+            emit(
+              state.copyWith(
+                cartItems: cartItemList,
+                apiFailureOrSuccessOption: none(),
+                isFetchingBonus: false,
+              ),
+            );
+          },
+        );
+      },
+      removeBonusFromCartItem: (e) async {
+        emit(state.copyWith(
+          isFetching: true,
+          apiFailureOrSuccessOption: none(),
+        ));
+
+        final failureOrSuccess = await repository.deleteBonusFromCartItem(
+          item: e.item,
+          deletedBonus: e.bonusItem,
+        );
+
+        failureOrSuccess.fold(
+          (failure) {
+            emit(
+              state.copyWith(
+                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+                isFetching: false,
+              ),
+            );
+          },
+          (cartItemList) {
+            emit(
+              state.copyWith(
+                cartItems: cartItemList,
+                apiFailureOrSuccessOption: none(),
+                isFetching: false,
+              ),
+            );
+          },
+        );
+      },
+      addRemarkToBonusItem: (e) async {
+        emit(state.copyWith(
+          isFetching: true,
+          apiFailureOrSuccessOption: none(),
+        ));
+
+        final failureOrSuccess = await repository.addRemarkToBonusItem(
+          remarkMessage: e.message,
+          item: e.item,
+          bonus: e.bonusItem,
+        );
+
+        failureOrSuccess.fold(
+          (failure) {
+            emit(
+              state.copyWith(
+                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+                isFetching: false,
+              ),
+            );
+          },
+          (cartItemList) {
+            emit(
+              state.copyWith(
+                cartItems: cartItemList,
+                apiFailureOrSuccessOption: none(),
+                isFetching: false,
+              ),
+            );
+          },
+        );
+      },
+      overrideCartItemPrice: (e) async {
+        emit(state.copyWith(
+          isFetching: true,
+          apiFailureOrSuccessOption: none(),
+        ));
+
+        final failureOrSuccess = await repository.overrideCartItemPrice(
+          item: e.cartItem,
+          overridePriceList: e.overridenPrice,
+        );
+
+        failureOrSuccess.fold(
+          (failure) {
+            emit(
+              state.copyWith(
+                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+                isFetching: false,
+              ),
+            );
+          },
+          (cartItemList) {
+            emit(
+              state.copyWith(
+                cartItems: cartItemList,
+                apiFailureOrSuccessOption: none(),
+                isFetching: false,
+              ),
+            );
+          },
+        );
+      },
+      selectButtonTapped: (e) async {
+        emit(state.copyWith(
+          isFetching: true,
+          apiFailureOrSuccessOption: none(),
+        ));
+
+        final failureOrSuccess = await repository.updateSelectionInCart(
+          updatedItem: e.cartItem,
+        );
+
+        failureOrSuccess.fold(
+          (failure) {
+            emit(
+              state.copyWith(
+                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+                isFetching: false,
+              ),
+            );
+          },
+          (cartItemList) {
+            emit(
+              state.copyWith(
+                cartItems: cartItemList,
+                apiFailureOrSuccessOption: none(),
+                isFetching: false,
+              ),
+            );
+          },
+        );
+      },
+      selectAllButtonTapped: (e) async {
+        emit(state.copyWith(
+          isFetching: true,
+          apiFailureOrSuccessOption: none(),
+        ));
+
+        final failureOrSuccess = await repository.updateAllSelectionInCart(
+          currentCart: state.cartItems,
+        );
+
+        failureOrSuccess.fold(
+          (failure) {
+            emit(
+              state.copyWith(
+                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+                isFetching: false,
+              ),
+            );
+          },
+          (cartItemList) {
+            emit(
+              state.copyWith(
+                cartItems: cartItemList,
+                apiFailureOrSuccessOption: none(),
+                isFetching: false,
+              ),
+            );
+          },
+        );
+      },
+      clearCart: (e) async {
+        emit(
+          state.copyWith(
+            apiFailureOrSuccessOption: none(),
+            isClearing: true,
+          ),
+        );
+
+        final failureOrSuccess = await repository.clearCart();
+        await failureOrSuccess.fold(
+          (failure) async {
+            emit(
+              state.copyWith(
+                isClearing: false,
+                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+              ),
+            );
+          },
+          (cartItemList) async {
+            emit(
+              CartState.initial(),
+            );
+          },
+        );
+      },
+      clearSelectedItemsFromCart: (e) async {
+        emit(
+          state.copyWith(
+            apiFailureOrSuccessOption: none(),
+            isClearing: true,
+          ),
+        );
+
+        final failureOrSuccess = await repository.clearCartOnlySelectedItems(
+          selectedItemIds: e.selectedItemIds,
+        );
+        await failureOrSuccess.fold(
+          (failure) async {
+            emit(
+              state.copyWith(
+                isClearing: false,
+                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+              ),
+            );
+          },
+          (cartItemList) async {
+            emit(
+              state.copyWith(
+                isClearing: false,
+                cartItems: cartItemList,
+              ),
+            );
+          },
+        );
+      },
+      replaceWithOrderItems: (e) async {
+        emit(
+          state.copyWith(
+            apiFailureOrSuccessOption: none(),
+            isFetching: true,
+          ),
+        );
+
+        final failureOrSuccess = await repository.replaceCartWithItems(
+          items: e.items,
+          customerCodeInfo: e.customerCodeInfo,
+          salesOrganisationConfigs: e.salesOrganisationConfigs,
+          salesOrganisation: e.salesOrganisation,
+          shipToInfo: e.shipToInfo,
+          doNotAllowOutOfStockMaterials: e.doNotallowOutOfStockMaterial,
+        );
+
+        await failureOrSuccess.fold(
+          (failure) {
+            emit(
+              state.copyWith(
+                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+                isFetching: false,
+              ),
+            );
+          },
+          (cartItemList) async {
+            emit(
+              state.copyWith(
+                cartItems: repository.updateDiscountQty(items: cartItemList),
+                apiFailureOrSuccessOption: none(),
+                isFetching: false,
+              ),
+            );
+
+            if (state.isBonusRestricted) return;
+
+            for (final material in state.getCartItemMaterialList) {
+              final failureOrSuccess = await repository.updateMaterialDealBonus(
+                material: material.materials.first,
+                customerCodeInfo: e.customerCodeInfo,
+                salesOrganisationConfigs: e.salesOrganisationConfigs,
+                salesOrganisation: e.salesOrganisation,
+                shipToInfo: e.shipToInfo,
+              );
+
+              await failureOrSuccess.fold(
+                (failure) {
                   emit(
                     state.copyWith(
-                      cartItems: cartItemList,
-                      apiFailureOrSuccessOption: none(),
+                      apiFailureOrSuccessOption: optionOf(failureOrSuccess),
                       isFetching: false,
                     ),
                   );
-                }
-              },
-            );
-          }
-        },
-      );
-    });
-    on<_AddComboDealToCart>((e, emit) async {
-      emit(
-        state.copyWith(
-          apiFailureOrSuccessOption: none(),
-          isFetching: true,
-        ),
-      );
-
-      final comboDealItems = e.comboDealItems.map((item) {
-        final currentMaterialInCart = state.getMaterialCartItem(material: item);
-
-        return currentMaterialInCart == CartItem.materialEmpty()
-            ? item
-            : item.copyWithIncreasedQty(qty: currentMaterialInCart.totalQty);
-      }).toList();
-
-      await Future.wait(
-        comboDealItems.map(
-          (item) => repository.deleteFromCart(
-            item: CartItem.material(item),
+                },
+                (cartItemList) async {
+                  if (material == state.getCartItemMaterialList.last) {
+                    emit(
+                      state.copyWith(
+                        cartItems: cartItemList,
+                        apiFailureOrSuccessOption: none(),
+                        isFetching: false,
+                      ),
+                    );
+                  }
+                },
+              );
+            }
+          },
+        );
+      },
+      addComboDealToCart: (e) async {
+        emit(
+          state.copyWith(
+            apiFailureOrSuccessOption: none(),
+            isFetching: true,
           ),
-        ),
-      );
+        );
 
-      final failureOrSuccess = await repository.addItemToCart(
-        cartItem: CartItem.comboDeal(comboDealItems),
-        override: e.overrideQty,
-        customerCodeInfo: e.customerCodeInfo,
-        salesOrganisation: e.salesOrganisation,
-        salesOrganisationConfigs: e.salesOrganisationConfigs,
-        shipToInfo: e.shipToInfo,
-        doNotAllowOutOfStockMaterials: e.doNotallowOutOfStockMaterial,
-      );
+        final comboDealItems = e.comboDealItems.map((item) {
+          final currentMaterialInCart =
+              state.getMaterialCartItem(material: item);
 
-      await failureOrSuccess.fold(
-        (failure) {
-          emit(
-            state.copyWith(
-              apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-              isFetching: false,
-            ),
-          );
-        },
-        (cartItemList) async {
-          emit(
-            state.copyWith(
-              cartItems: cartItemList,
-              apiFailureOrSuccessOption: none(),
-              isFetching: false,
-            ),
-          );
-        },
-      );
-    });
-    on<_UpdateBatchInCartItem>((e, emit) async {
-      emit(state.copyWith(
-        isFetching: true,
-        apiFailureOrSuccessOption: none(),
-      ));
+          return currentMaterialInCart == CartItem.materialEmpty()
+              ? item
+              : item.copyWithIncreasedQty(qty: currentMaterialInCart.totalQty);
+        }).toList();
 
-      final failureOrSuccess = await repository.updatedBatchInCartItem(
-        item: e.item,
-        stockInfo: e.stockInfo,
-      );
+        await Future.wait(
+          comboDealItems.map(
+            (item) => repository.deleteFromCart(
+              item: CartItem.material(item),
+            ),
+          ),
+        );
 
-      failureOrSuccess.fold(
-        (failure) {
-          emit(
-            state.copyWith(
-              apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-              isFetching: false,
-            ),
-          );
-        },
-        (cartItemList) {
-          emit(
-            state.copyWith(
-              cartItems: cartItemList,
-              apiFailureOrSuccessOption: none(),
-              isFetching: false,
-            ),
-          );
-        },
-      );
-    });
+        final failureOrSuccess = await repository.addItemToCart(
+          cartItem: CartItem.comboDeal(comboDealItems),
+          override: e.overrideQty,
+          customerCodeInfo: e.customerCodeInfo,
+          salesOrganisation: e.salesOrganisation,
+          salesOrganisationConfigs: e.salesOrganisationConfigs,
+          shipToInfo: e.shipToInfo,
+          doNotAllowOutOfStockMaterials: e.doNotallowOutOfStockMaterial,
+        );
+
+        await failureOrSuccess.fold(
+          (failure) {
+            emit(
+              state.copyWith(
+                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+                isFetching: false,
+              ),
+            );
+          },
+          (cartItemList) async {
+            emit(
+              state.copyWith(
+                cartItems: cartItemList,
+                apiFailureOrSuccessOption: none(),
+                isFetching: false,
+              ),
+            );
+          },
+        );
+      },
+      updateBatchInCartItem: (e) async {
+        emit(state.copyWith(
+          isFetching: true,
+          apiFailureOrSuccessOption: none(),
+        ));
+
+        final failureOrSuccess = await repository.updatedBatchInCartItem(
+          item: e.item,
+          stockInfo: e.stockInfo,
+        );
+
+        failureOrSuccess.fold(
+          (failure) {
+            emit(
+              state.copyWith(
+                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+                isFetching: false,
+              ),
+            );
+          },
+          (cartItemList) {
+            emit(
+              state.copyWith(
+                cartItems: cartItemList,
+                apiFailureOrSuccessOption: none(),
+                isFetching: false,
+              ),
+            );
+          },
+        );
+      },
+    );
   }
 }

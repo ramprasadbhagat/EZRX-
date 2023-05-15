@@ -30,192 +30,201 @@ class ComboDealPrincipleDetailBloc
   ComboDealPrincipleDetailBloc({
     required this.repository,
   }) : super(ComboDealPrincipleDetailState.initial()) {
-    on<_Initialize>((e, emit) => emit(ComboDealPrincipleDetailState.initial()));
-    on<_InitFromCart>((e, emit) async {
-      emit(
-        state.copyWith(
-          items: Map.from(state.items)..addAll(e.items.mapByMaterialNumber),
-          selectedItems: Map.from(state.selectedItems)
-            ..addAll(
-              {
-                for (final item in e.items) item.getMaterialNumber: true,
-              },
-            ),
-        ),
-      );
-    });
-    on<_Fetch>((e, emit) async {
-      emit(
-        state.copyWith(
-          isFetchingMaterials: true,
-        ),
-      );
-      final failureOrSuccess = await repository.getComboDealMaterials(
-        user: e.user,
-        salesOrganisation: e.salesOrganisation,
-        customerCodeInfo: e.customerCodeInfo,
-        shipToInfo: e.shipToInfo,
-        pageSize: _pageSize,
-        offset: 0,
-        principles: e.principles,
-      );
-      failureOrSuccess.fold(
-        (failure) {
-          emit(
-            state.copyWith(
-              apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-              isFetchingMaterials: false,
-            ),
-          );
-        },
-        (materialList) {
-          final newItems = <MaterialNumber, PriceAggregate>{};
-          if (e.fetchFromCart) {
-            newItems
-              ..addAll(state.items)
+    on<ComboDealPrincipleDetailEvent>(_onEvent);
+  }
+
+  Future<void> _onEvent(
+    ComboDealPrincipleDetailEvent event,
+    Emitter<ComboDealPrincipleDetailState> emit,
+  ) async {
+    await event.map(
+      initialize: (e) async => emit(ComboDealPrincipleDetailState.initial()),
+      initFromCart: (e) async {
+        emit(
+          state.copyWith(
+            items: Map.from(state.items)..addAll(e.items.mapByMaterialNumber),
+            selectedItems: Map.from(state.selectedItems)
               ..addAll(
-                _newItemsFromMaterialList(
-                  materialList: materialList,
-                  salesConfigs: e.salesConfigs,
-                ),
-              );
-          } else {
-            newItems.addAll(
-              _itemFromMaterialList(
-                materialList: materialList,
-                salesConfigs: e.salesConfigs,
+                {
+                  for (final item in e.items) item.getMaterialNumber: true,
+                },
+              ),
+          ),
+        );
+      },
+      fetch: (e) async {
+        emit(
+          state.copyWith(
+            isFetchingMaterials: true,
+          ),
+        );
+        final failureOrSuccess = await repository.getComboDealMaterials(
+          user: e.user,
+          salesOrganisation: e.salesOrganisation,
+          customerCodeInfo: e.customerCodeInfo,
+          shipToInfo: e.shipToInfo,
+          pageSize: _pageSize,
+          offset: 0,
+          principles: e.principles,
+        );
+        failureOrSuccess.fold(
+          (failure) {
+            emit(
+              state.copyWith(
+                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+                isFetchingMaterials: false,
               ),
             );
-          }
-          emit(
-            state.copyWith(
-              isFetchingMaterials: false,
-              isFetchingComboInfo: true,
-              isFetchingPrice: true,
-              canLoadMore: materialList.length >= _pageSize,
-              itemPageNumber: 1,
-              items: newItems,
-            ),
-          );
-        },
-      );
-    });
-    on<_LoadMore>((e, emit) async {
-      if (state.isFetching || !state.canLoadMore) return;
-      emit(
-        state.copyWith(
-          isFetchingMaterials: true,
-          apiFailureOrSuccessOption: none(),
-        ),
-      );
-      final failureOrSuccess = await repository.getComboDealMaterials(
-        user: e.user,
-        salesOrganisation: e.salesOrganisation,
-        customerCodeInfo: e.customerCodeInfo,
-        shipToInfo: e.shipToInfo,
-        pageSize: _pageSize,
-        offset: state.itemPageNumber * _pageSize,
-        principles: e.principles,
-      );
-
-      await failureOrSuccess.fold(
-        (failure) async {
-          emit(
-            state.copyWith(
-              isFetchingMaterials: false,
-              apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-            ),
-          );
-        },
-        (materialList) async {
-          emit(
-            state.copyWith(
-              isFetchingMaterials: false,
-              isFetchingComboInfo: true,
-              isFetchingPrice: true,
-              canLoadMore: materialList.length >= _pageSize,
-              itemPageNumber: state.itemPageNumber + 1,
-              items: Map.from(state.items)
+          },
+          (materialList) {
+            final newItems = <MaterialNumber, PriceAggregate>{};
+            if (e.fetchFromCart) {
+              newItems
+                ..addAll(state.items)
                 ..addAll(
                   _newItemsFromMaterialList(
                     materialList: materialList,
                     salesConfigs: e.salesConfigs,
                   ),
+                );
+            } else {
+              newItems.addAll(
+                _itemFromMaterialList(
+                  materialList: materialList,
+                  salesConfigs: e.salesConfigs,
                 ),
-            ),
-          );
-        },
-      );
-    });
-    on<_SetPriceInfo>((e, emit) {
-      final itemsWithPriceInfo = state.items.map(
-        (key, value) {
-          final defaultMaterialInfo = MaterialInfo.empty().copyWith(
-            materialNumber: key,
-          );
-          final defaultPrice = Price.empty().copyWith(
-            materialNumber: key,
-          );
-
-          return MapEntry(
-            key,
-            value.copyWith(
-              materialInfo: e.priceMap[key]?.info ?? defaultMaterialInfo,
-              price: (e.priceMap[key]?.price ?? defaultPrice).copyWith(
-                comboDeal: e.comboDeal,
+              );
+            }
+            emit(
+              state.copyWith(
+                isFetchingMaterials: false,
+                isFetchingComboInfo: true,
+                isFetchingPrice: true,
+                canLoadMore: materialList.length >= _pageSize,
+                itemPageNumber: 1,
+                items: newItems,
               ),
-            ),
-          );
-        },
-      );
+            );
+          },
+        );
+      },
+      loadMore: (e) async {
+        if (state.isFetching || !state.canLoadMore) return;
+        emit(
+          state.copyWith(
+            isFetchingMaterials: true,
+            apiFailureOrSuccessOption: none(),
+          ),
+        );
+        final failureOrSuccess = await repository.getComboDealMaterials(
+          user: e.user,
+          salesOrganisation: e.salesOrganisation,
+          customerCodeInfo: e.customerCodeInfo,
+          shipToInfo: e.shipToInfo,
+          pageSize: _pageSize,
+          offset: state.itemPageNumber * _pageSize,
+          principles: e.principles,
+        );
 
-      emit(
-        state.copyWith(
-          isFetchingPrice: false,
-          items: itemsWithPriceInfo,
-        ),
-      );
-    });
-    on<_SetComboDealInfo>((e, emit) {
-      final itemsWithComboDealInfo = state.items.map(
-        (key, value) => MapEntry(
-          key,
-          value.copyWith(comboDeal: e.comboDealInfo),
-        ),
-      );
+        await failureOrSuccess.fold(
+          (failure) async {
+            emit(
+              state.copyWith(
+                isFetchingMaterials: false,
+                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+              ),
+            );
+          },
+          (materialList) async {
+            emit(
+              state.copyWith(
+                isFetchingMaterials: false,
+                isFetchingComboInfo: true,
+                isFetchingPrice: true,
+                canLoadMore: materialList.length >= _pageSize,
+                itemPageNumber: state.itemPageNumber + 1,
+                items: Map.from(state.items)
+                  ..addAll(
+                    _newItemsFromMaterialList(
+                      materialList: materialList,
+                      salesConfigs: e.salesConfigs,
+                    ),
+                  ),
+              ),
+            );
+          },
+        );
+      },
+      setPriceInfo: (e) async {
+        final itemsWithPriceInfo = state.items.map(
+          (key, value) {
+            final defaultMaterialInfo = MaterialInfo.empty().copyWith(
+              materialNumber: key,
+            );
+            final defaultPrice = Price.empty().copyWith(
+              materialNumber: key,
+            );
 
-      emit(
-        state.copyWith(
-          isFetchingComboInfo: false,
-          items: itemsWithComboDealInfo,
-        ),
-      );
-    });
-    on<_UpdateItemQuantity>((e, emit) {
-      final updatedItems = state.items.map(
-        (key, value) => MapEntry(
-          key,
-          key == e.item ? value.copyWith(quantity: e.qty) : value,
-        ),
-      );
+            return MapEntry(
+              key,
+              value.copyWith(
+                materialInfo: e.priceMap[key]?.info ?? defaultMaterialInfo,
+                price: (e.priceMap[key]?.price ?? defaultPrice).copyWith(
+                  comboDeal: e.comboDeal,
+                ),
+              ),
+            );
+          },
+        );
 
-      emit(
-        state.copyWith(
-          items: updatedItems,
-        ),
-      );
-    });
-    on<_UpdateItemSelection>((e, emit) {
-      final selectionStatus =
-          Map<MaterialNumber, bool>.from(state.selectedItems);
-      selectionStatus[e.item] = !(selectionStatus[e.item] ?? false);
+        emit(
+          state.copyWith(
+            isFetchingPrice: false,
+            items: itemsWithPriceInfo,
+          ),
+        );
+      },
+      setComboDealInfo: (e) async {
+        final itemsWithComboDealInfo = state.items.map(
+          (key, value) => MapEntry(
+            key,
+            value.copyWith(comboDeal: e.comboDealInfo),
+          ),
+        );
 
-      emit(
-        state.copyWith(
-          selectedItems: selectionStatus,
-        ),
-      );
-    });
+        emit(
+          state.copyWith(
+            isFetchingComboInfo: false,
+            items: itemsWithComboDealInfo,
+          ),
+        );
+      },
+      updateItemQuantity: (e) async {
+        final updatedItems = state.items.map(
+          (key, value) => MapEntry(
+            key,
+            key == e.item ? value.copyWith(quantity: e.qty) : value,
+          ),
+        );
+
+        emit(
+          state.copyWith(
+            items: updatedItems,
+          ),
+        );
+      },
+      updateItemSelection: (e) async {
+        final selectionStatus =
+            Map<MaterialNumber, bool>.from(state.selectedItems);
+        selectionStatus[e.item] = !(selectionStatus[e.item] ?? false);
+
+        emit(
+          state.copyWith(
+            selectedItems: selectionStatus,
+          ),
+        );
+      },
+    );
   }
 
   Map<MaterialNumber, PriceAggregate> _newItemsFromMaterialList({

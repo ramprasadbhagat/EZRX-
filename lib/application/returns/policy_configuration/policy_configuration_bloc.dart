@@ -19,7 +19,7 @@ class PolicyConfigurationBloc
   final IPolicyConfigurationRepository policyConfigurationRepository;
   PolicyConfigurationBloc({required this.policyConfigurationRepository})
       : super(PolicyConfigurationState.initial()) {
-    on(_onEvent);
+    on<PolicyConfigurationEvent>(_onEvent);
   }
 
   Future<void> _onEvent(

@@ -12,7 +12,7 @@ part 'request_return_filter_bloc.freezed.dart';
 class RequestReturnFilterBloc
     extends Bloc<RequestReturnFilterEvent, RequestReturnFilterState> {
   RequestReturnFilterBloc() : super(RequestReturnFilterState.initial()) {
-    on(_onEvent);
+    on<RequestReturnFilterEvent>(_onEvent);
   }
 
   Future<void> _onEvent(

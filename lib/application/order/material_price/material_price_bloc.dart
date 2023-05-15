@@ -17,68 +17,71 @@ class MaterialPriceBloc extends Bloc<MaterialPriceEvent, MaterialPriceState> {
   final IMaterialPriceRepository repository;
   MaterialPriceBloc({required this.repository})
       : super(MaterialPriceState.initial()) {
-    on<MaterialPriceEvent>(
-      (event, emit) async {
-        await event.map(
-          initialized: (_) async => emit(
-            MaterialPriceState.initial(),
+    on<MaterialPriceEvent>(_onEvent);
+  }
+
+  Future<void> _onEvent(
+    MaterialPriceEvent event,
+    Emitter<MaterialPriceState> emit,
+  ) async {
+    await event.map(
+      initialized: (_) async => emit(
+        MaterialPriceState.initial(),
+      ),
+      fetch: (e) async {
+        emit(
+          state.copyWith(
+            isFetching: true,
           ),
-          fetch: (e) async {
-            emit(
-              state.copyWith(
-                isFetching: true,
-              ),
-            );
+        );
 
-            _filterFOCMaterial(e.materials, emit);
+        _filterFOCMaterial(e.materials, emit);
 
-            final materialNumbers =
-                e.materials.map((e) => e.materialNumber).toList();
-            final queryMaterialNumber =
-                List<MaterialNumber>.from(materialNumbers)
-                  ..removeWhere(
-                    (element) => state.materialPrice.containsKey(
-                      element,
-                    ),
-                  );
-            if (queryMaterialNumber.isEmpty) {
-              emit(
-                state.copyWith(
-                  isFetching: false,
+        final materialNumbers =
+            e.materials.map((e) => e.materialNumber).toList();
+        final queryMaterialNumber =
+            List<MaterialNumber>.from(materialNumbers)
+              ..removeWhere(
+                (element) => state.materialPrice.containsKey(
+                  element,
                 ),
               );
+        if (queryMaterialNumber.isEmpty) {
+          emit(
+            state.copyWith(
+              isFetching: false,
+            ),
+          );
 
-              return;
-            }
+          return;
+        }
 
-            final failureOrSuccess = await repository.getMaterialPrice(
-              customerCodeInfo: e.customerCodeInfo,
-              shipToInfo: e.shipToInfo,
-              salesOrganisation: e.salesOrganisation,
-              salesConfigs: e.salesConfigs,
-              materialNumberList: queryMaterialNumber.toSet().toList(),
-              comboDealEligible: e.comboDealEligible,
+        final failureOrSuccess = await repository.getMaterialPrice(
+          customerCodeInfo: e.customerCodeInfo,
+          shipToInfo: e.shipToInfo,
+          salesOrganisation: e.salesOrganisation,
+          salesConfigs: e.salesConfigs,
+          materialNumberList: queryMaterialNumber.toSet().toList(),
+          comboDealEligible: e.comboDealEligible,
+        );
+
+        await failureOrSuccess.fold(
+          (_) async {
+            emit(
+              state.copyWith(
+                isFetching: false,
+              ),
             );
-
-            await failureOrSuccess.fold(
-              (_) async {
-                emit(
-                  state.copyWith(
-                    isFetching: false,
-                  ),
-                );
-              },
-              (newPriceFetched) async {
-                final newPriceMap =
-                    Map<MaterialNumber, Price>.from(state.materialPrice)
-                      ..addAll(newPriceFetched);
-                emit(
-                  state.copyWith(
-                    isFetching: false,
-                    materialPrice: newPriceMap,
-                  ),
-                );
-              },
+          },
+          (newPriceFetched) async {
+            final newPriceMap =
+                Map<MaterialNumber, Price>.from(state.materialPrice)
+                  ..addAll(newPriceFetched);
+            emit(
+              state.copyWith(
+                isFetching: false,
+                materialPrice: newPriceMap,
+              ),
             );
           },
         );

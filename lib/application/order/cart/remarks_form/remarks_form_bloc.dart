@@ -8,34 +8,41 @@ part 'remarks_form_bloc.freezed.dart';
 
 class RemarksFormBloc extends Bloc<RemarksFormEvent, RemarksFormState> {
   RemarksFormBloc() : super(RemarksFormState.initial()) {
-    on<_RemarksChanged>((event, emit) {
-      emit(
+    on<RemarksFormEvent>(_onEvent);
+  }
+
+  Future<void> _onEvent(
+    RemarksFormEvent event,
+    Emitter<RemarksFormState> emit,
+  ) async {
+    await event.map(
+      remarksChanged: (e) async => emit(
         state.copyWith(
-          remarks: Remarks(event.message),
+          remarks: Remarks(e.message),
         ),
-      );
-    });
-    on<_Submit>((event, emit) {
-      emit(
-        state.copyWith(
-          showErrorMessages: false,
-          isSubmitting: true,
-        ),
-      );
-      if (state.remarks.isValid()) {
+      ),
+      submit: (e) async {
         emit(
           state.copyWith(
-            isSubmitting: false,
+            showErrorMessages: false,
+            isSubmitting: true,
           ),
         );
-      } else {
-        emit(
-          state.copyWith(
-            showErrorMessages: true,
-            isSubmitting: false,
-          ),
-        );
-      }
-    });
+        if (state.remarks.isValid()) {
+          emit(
+            state.copyWith(
+              isSubmitting: false,
+            ),
+          );
+        } else {
+          emit(
+            state.copyWith(
+              showErrorMessages: true,
+              isSubmitting: false,
+            ),
+          );
+        }
+      },
+    );
   }
 }

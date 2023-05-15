@@ -17,7 +17,10 @@ class OrderDocumentTypeBloc
     on<OrderDocumentTypeEvent>(_onEvent);
   }
 
-  Future<void> _onEvent(event, emit) async {
+  Future<void> _onEvent(
+    OrderDocumentTypeEvent event,
+    Emitter<OrderDocumentTypeState> emit,
+  ) async {
     await event.map(
       initialized: (_) {
         add(const OrderDocumentTypeEvent.deleteOrderTypeFromStorage());

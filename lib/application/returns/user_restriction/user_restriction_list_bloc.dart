@@ -18,45 +18,54 @@ class UserRestrictionListBloc
   UserRestrictionListBloc({
     required this.userRestrictionRepository,
   }) : super(UserRestrictionListState.initial()) {
-    on<_Initialized>((event, emit) async {
-      emit(UserRestrictionListState.initial());
-    });
-    on<_Fetch>((event, emit) async {
-      emit(
-        state.copyWith(
-          isFetching: true,
-          usernames: <String>[],
-          apiFailureOrSuccessOption: none(),
-        ),
-      );
+    on<UserRestrictionListEvent>(_onEvent);
+  }
 
-      final failureOrSuccess = await userRestrictionRepository
-          .getUserRestrictionsList(event.salesOrg);
+  Future<void> _onEvent(
+    UserRestrictionListEvent event,
+    Emitter<UserRestrictionListState> emit,
+  ) async {
+    await event.map(
+      initialized: (e) async => emit(UserRestrictionListState.initial()),
+      fetch: (e) async {
+        emit(
+          state.copyWith(
+            isFetching: true,
+            usernames: <String>[],
+            apiFailureOrSuccessOption: none(),
+          ),
+        );
 
-      failureOrSuccess.fold(
-        (failure) {
-          emit(
-            state.copyWith(
-              isFetching: false,
-              apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-            ),
-          );
-        },
-        (usernameList) {
-          emit(
-            state.copyWith(
-              isFetching: false,
-              usernames: usernameList,
-              apiFailureOrSuccessOption: none(),
-            ),
-          );
-        },
-      );
-    });
-    on<_UpdateSearchKey>((event, emit) async {
-      emit(state.copyWith(
-        searchKey: event.searchKey,
-      ));
-    });
+        final failureOrSuccess =
+            await userRestrictionRepository.getUserRestrictionsList(e.salesOrg);
+
+        failureOrSuccess.fold(
+          (failure) {
+            emit(
+              state.copyWith(
+                isFetching: false,
+                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+              ),
+            );
+          },
+          (usernameList) {
+            emit(
+              state.copyWith(
+                isFetching: false,
+                usernames: usernameList,
+                apiFailureOrSuccessOption: none(),
+              ),
+            );
+          },
+        );
+      },
+      updateSearchKey: (e) async {
+        emit(
+          state.copyWith(
+            searchKey: e.searchKey,
+          ),
+        );
+      },
+    );
   }
 }
