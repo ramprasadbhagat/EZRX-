@@ -79,4 +79,25 @@ class MixpanelService {
   void resetBannerOrderFlow() {
     banner = BannerItem.empty();
   }
+
+  void trackNavBarEvent(String currentPage, String previousPage) {
+    final validRoutes = [
+      'Home Page',
+      'Favourites Page',
+      'Account Page',
+    ];
+    final route = validRoutes.firstWhere(
+      (route) => route == currentPage,
+      orElse: () => '',
+    );
+    if (route.isNotEmpty) {
+      final eventName = route.replaceFirst('Page', 'Nav Clicked');
+      trackEvent(
+        eventName: eventName,
+        properties: {
+          MixpanelProps.clickFrom: previousPage,
+        },
+      );
+    }
+  }
 }

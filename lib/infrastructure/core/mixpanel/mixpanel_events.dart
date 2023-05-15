@@ -31,4 +31,6 @@ class MixpanelEvents {
   static String selectTemplate = 'Select Template';
   static String createOrderFromTemplate = 'Create Order From Template';
   static String pageViewVisited = 'Pageview Visited';
+  static String thankYouToCreate = 'THANK YOU TO CREATE';
+  static String thankYouToHistory = 'THANK YOU TO HISTORY';
 }

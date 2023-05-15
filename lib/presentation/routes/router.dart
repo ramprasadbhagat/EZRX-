@@ -215,7 +215,10 @@ import 'package:ezrxmobile/presentation/returns/request_return/return_request_su
       page: ComboDealPrincipleDetailPage,
     ),
     AutoRoute(path: 'request_return_details', page: RequestReturnDetails),
-    AutoRoute(path: 'request_return_details_summary', page: RequestReturnDetailsSummaryPage),
+    AutoRoute(
+      path: 'request_return_details_summary',
+      page: RequestReturnDetailsSummaryPage,
+    ),
     AutoRoute(path: 'request_return_success', page: ReturnRequestSuccessPage),
     CustomRoute(
       path: 'orders/add_to_cart',

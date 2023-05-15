@@ -44,17 +44,25 @@ class RouterObserver extends AutoRouterObserver {
       screenClass: 'TabPageRoute',
       screenName: route.name,
     );
-    _trackMixpanelEvent(route.path, didChangeTab: true);
+    _trackMixpanelEvent(route.path, rawPreviousRoute: previousRoute.path);
   }
 
   void _trackMixpanelEvent(
     String rawRoute, {
-    bool didChangeTab = false,
+    String rawPreviousRoute = '',
   }) {
     if (rawRoute.isNotEmpty) {
-      final pageName = RouterUtils().buildRouteTrackingName(rawRoute);
-      if (didChangeTab) {
+      final routerUtils = RouterUtils();
+      final pageName = routerUtils.buildRouteTrackingName(rawRoute);
+
+      if (rawPreviousRoute.isNotEmpty) {
         mixpanelService.activeNavBarRoute = pageName;
+        final previousRoute =
+            routerUtils.buildRouteTrackingName(rawPreviousRoute);
+        mixpanelService.trackNavBarEvent(
+          pageName,
+          previousRoute,
+        );
       }
       mixpanelService.trackEvent(
         eventName: MixpanelEvents.pageViewVisited,

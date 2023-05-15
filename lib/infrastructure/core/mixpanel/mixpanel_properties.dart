@@ -27,4 +27,5 @@ class MixpanelProps {
   static String lastName = 'last_name';
   static String email = 'email';
   static String bannerType = 'banner_type';
+  static String clickFrom = 'click_from';
 }
