@@ -36,19 +36,18 @@ class ChangePasswordRepository implements IChangePasswordRepository {
       } catch (e) {
         return Left(FailureHandler.handleFailure(e));
       }
-    } else {
-      try {
-        final resetPasswordEntities =
-            await changePasswordRemoteDataSource.setUserPassword(
-          user.username.getOrCrash(),
-          oldPassword.getOrCrash(),
-          newPassword.getOrCrash(),
-        );
+    }
+    try {
+      final resetPasswordEntities =
+          await changePasswordRemoteDataSource.setUserPassword(
+        user.username.getOrCrash(),
+        oldPassword.getOrCrash(),
+        newPassword.getOrCrash(),
+      );
 
-        return Right(resetPasswordEntities);
-      } catch (e) {
-        return Left(FailureHandler.handleFailure(e));
-      }
+      return Right(resetPasswordEntities);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
     }
   }
 }

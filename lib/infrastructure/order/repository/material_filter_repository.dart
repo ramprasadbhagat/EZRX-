@@ -48,29 +48,28 @@ class MaterialFilterRepository implements IMaterialFilterRepository {
       } catch (e) {
         return Left(FailureHandler.handleFailure(e));
       }
-    } else {
-      try {
-        final filterMaterialData = user.role.type.isSalesRepRole
-            ? await filterMaterialRemoteDataSource.getFiltersSalesRep(
-                salesOrganisation: salesOrg,
-                soldToCustomerCode: customerCode,
-                shipToCustomerCode: shipToCode,
-                gimmickMaterial: gimmickMaterial,
-                pickAndPack: pickAndPack,
-                language: language,
-                userName: userName,
-              )
-            : await filterMaterialRemoteDataSource.getFilters(
-                salesOrganisation: salesOrg,
-                shipToCustomerCode: shipToCode,
-                soldToCustomerCode: customerCode,
-                language: language,
-              );
+    }
+    try {
+      final filterMaterialData = user.role.type.isSalesRepRole
+          ? await filterMaterialRemoteDataSource.getFiltersSalesRep(
+              salesOrganisation: salesOrg,
+              soldToCustomerCode: customerCode,
+              shipToCustomerCode: shipToCode,
+              gimmickMaterial: gimmickMaterial,
+              pickAndPack: pickAndPack,
+              language: language,
+              userName: userName,
+            )
+          : await filterMaterialRemoteDataSource.getFilters(
+              salesOrganisation: salesOrg,
+              shipToCustomerCode: shipToCode,
+              soldToCustomerCode: customerCode,
+              language: language,
+            );
 
-        return Right(filterMaterialData);
-      } catch (e) {
-        return Left(FailureHandler.handleFailure(e));
-      }
+      return Right(filterMaterialData);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
     }
   }
 

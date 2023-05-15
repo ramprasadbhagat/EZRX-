@@ -38,20 +38,19 @@ class TenderContractRepository implements ITenderContractRepository {
       } catch (e) {
         return Left(FailureHandler.handleFailure(e));
       }
-    } else {
-      try {
-        final tenderContractDetails =
-            await tenderContractRemoteDataSource.getTenderContractDetails(
-          materialNumber: materialNumber.getValue(),
-          salesOrg: salesOrganisation.salesOrg.getValue(),
-          selectedCustomerCode: customerCodeInfo.customerCodeSoldTo,
-          shipTo: shipToInfo.shipToCustomerCode,
-        );
+    }
+    try {
+      final tenderContractDetails =
+          await tenderContractRemoteDataSource.getTenderContractDetails(
+        materialNumber: materialNumber.getValue(),
+        salesOrg: salesOrganisation.salesOrg.getValue(),
+        selectedCustomerCode: customerCodeInfo.customerCodeSoldTo,
+        shipTo: shipToInfo.shipToCustomerCode,
+      );
 
-        return Right(tenderContractDetails);
-      } catch (e) {
-        return Left(FailureHandler.handleFailure(e));
-      }
+      return Right(tenderContractDetails);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
     }
   }
 }

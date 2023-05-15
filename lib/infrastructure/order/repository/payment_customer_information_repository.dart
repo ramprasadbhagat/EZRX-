@@ -38,18 +38,17 @@ class PaymentCustomerInformationRepository
       } catch (e) {
         return Left(FailureHandler.handleFailure(e));
       }
-    } else {
-      try {
-        final paymentCustomerInformation =
-            await remoteDataSource.getPaymentCustomerInformation(
-          customer: customerCodeInfo.customerCodeSoldTo,
-          salesOrganisation: salesOrganisation.salesOrg.getOrCrash(),
-        );
+    }
+    try {
+      final paymentCustomerInformation =
+          await remoteDataSource.getPaymentCustomerInformation(
+        customer: customerCodeInfo.customerCodeSoldTo,
+        salesOrganisation: salesOrganisation.salesOrg.getOrCrash(),
+      );
 
-        return Right(paymentCustomerInformation);
-      } catch (e) {
-        return Left(FailureHandler.handleFailure(e));
-      }
+      return Right(paymentCustomerInformation);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
     }
   }
 }

@@ -113,20 +113,18 @@ class UserRepository implements IUserRepository {
       } on MockException catch (e) {
         return Left(ApiFailure.other(e.message));
       }
-    } else {
-      try {
-        final user =
-            await remoteDataSource.updateUserNotificationAndLanguagePreference(
-          languagePreference:
-              userDetails.settings.languagePreference.getValue(),
-          emailNotification: userDetails.settings.emailNotifications,
-          userId: userDetails.id,
-        );
+    }
+    try {
+      final user =
+          await remoteDataSource.updateUserNotificationAndLanguagePreference(
+        languagePreference: userDetails.settings.languagePreference.getValue(),
+        emailNotification: userDetails.settings.emailNotifications,
+        userId: userDetails.id,
+      );
 
-        return Right(user);
-      } catch (e) {
-        return Left(FailureHandler.handleFailure(e));
-      }
+      return Right(user);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
     }
   }
 }
