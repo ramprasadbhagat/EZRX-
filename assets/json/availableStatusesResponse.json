@@ -1,0 +1,12 @@
+{
+  "data": {
+    "availableStatuses": {
+      "statuses": [
+        "Overdue",
+        "Open",
+        "Cleared",
+        "Outstanding"
+      ]
+    }
+  }
+}

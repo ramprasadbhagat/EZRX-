@@ -19,6 +19,7 @@ import 'package:ezrxmobile/application/order/order_history_list/order_history_li
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
+import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_summary/return_summary_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
@@ -103,6 +104,9 @@ class OrderHistoryFilterByStatusBlocMock extends MockBloc<
 
 class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
 
+class AllInvoicesBlocMock extends MockBloc<AllInvoicesEvent, AllInvoicesState>
+    implements AllInvoicesBloc {}
+
 class AdditionalDetailsBlocMock
     extends MockBloc<AdditionalDetailsEvent, AdditionalDetailsState>
     implements AdditionalDetailsBloc {}
@@ -160,6 +164,7 @@ void main() {
   late MaterialPriceDetailBlocMock mockMaterialPriceDetailBloc;
   late AdditionalDetailsBlocMock mockAdditionalDetailsBloc;
   late ReturnSummaryBloc returnSummaryBlocMock;
+  late AllInvoicesBlocMock allInvoicesBlocMock;
 
   final fakeSalesOrg = SalesOrganisation(
     salesOrg: SalesOrg('2601'),
@@ -192,6 +197,7 @@ void main() {
     mockMaterialPriceDetailBloc = MaterialPriceDetailBlocMock();
     mockAdditionalDetailsBloc = AdditionalDetailsBlocMock();
     returnSummaryBlocMock = ReturnSummaryBlocMock();
+    allInvoicesBlocMock = AllInvoicesBlocMock();
   });
 
   setUp(() async {
@@ -284,6 +290,8 @@ void main() {
                 create: (context) => mockAdditionalDetailsBloc),
             BlocProvider<ReturnSummaryBloc>(
                 create: (context) => returnSummaryBlocMock),
+            BlocProvider<AllInvoicesBloc>(
+                create: (context) => allInvoicesBlocMock),
           ],
           child: Material(
             child: Scaffold(

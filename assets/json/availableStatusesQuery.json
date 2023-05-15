@@ -1,0 +1,10 @@
+{
+  "operationName": "availableStatuses",
+  "variables": {
+    "request": {
+      "statusFor": "DebitItems",
+      "salesOrg": "2601"
+    }
+  },
+  "query": "query availableStatuses($request: availableStatusesRequest!) {  availableStatuses(request: $request) {   statuses  }}"
+}

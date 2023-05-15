@@ -9,10 +9,32 @@ String stringCapitalize(String text) {
   return '${text[0].toUpperCase()}${text.substring(1).toLowerCase()}';
 }
 
+bool isNotEmpty(String text) {
+  final pattern =
+      RegExp(r'^\s*$'); // matches any string is not empty or white space
+
+  return !pattern.hasMatch(text);
+}
+
+bool hasLengthN(String text, int n) {
+  final pattern = RegExp('^.{$n}\$'); // matches any string of length n
+
+  return pattern.hasMatch(text);
+}
+
+bool hasLengthGreaterThanN(String text, int n) {
+  final regex = RegExp('^.{$n,}\$'); // matches any string of length n or more
+
+  return regex.hasMatch(text.replaceAll('\n', ' '));
+}
+
+bool hasLengthEqualOrGreaterThanN(String text, int n) =>
+    hasLengthN(text, n) || hasLengthGreaterThanN(text, n);
+
 // a simple string => A Simple String
 String stringTitleCase(String text) {
   if (text.isEmpty) return '';
-  if (text.length == 1) return text;
+  if (hasLengthN(text, 1)) return text;
 
   return text
       .trim()
@@ -34,11 +56,11 @@ bool getInStock(String text) {
 }
 
 String getTelephoneNotGreaterThan16(String text) {
-  return text.length > 16 ? text.substring(0, 16) : text;
+  return hasLengthGreaterThanN(text, 16) ? text.substring(0, 16) : text;
 }
 
 bool isMinCharacter({required String input, required int minLength}) =>
-    input.length >= minLength;
+    hasLengthEqualOrGreaterThanN(input, minLength);
 
 bool isAtleastOneLowerCharacter({
   required String input,
@@ -89,7 +111,7 @@ DateTime getDeliveryDateTime(String input) {
 }
 
 String displayDateTimeStringOrEmpty(String text, String format) {
-  if (getDateTimeIntValue(text) <= 0) {
+  if (getDateTimeIntValue(text) <= 0 && !text.contains('-')) {
     return '-';
   }
   final parsedDate = tryParseDateTime(text);
@@ -112,25 +134,36 @@ String formattedDateTimeForAPI(String text) {
 }
 
 DateTime? tryParseDateTime(String input) {
-  final standardInput = input.padRight(14, '0');
-  try {
-    final year = int.parse(standardInput.substring(0, 4));
-    final month = int.parse(standardInput.substring(4, 6));
-    final day = int.parse(standardInput.substring(6, 8));
-    final hour = int.parse(standardInput.substring(8, 10));
-    final minute = int.parse(standardInput.substring(10, 12));
-    final second = int.parse(standardInput.substring(12, 14));
+  if (isNotEmpty(input)) {
+    try {
+      //input with format yyyyddmmhh
+      if (getDateTimeIntValue(input) > 0) {
+        final standardInput = input.padRight(14, '0');
+        final year = int.parse(standardInput.substring(0, 4));
+        final month = int.parse(standardInput.substring(4, 6));
+        final day = int.parse(standardInput.substring(6, 8));
+        final hour = int.parse(standardInput.substring(8, 10));
+        final minute = int.parse(standardInput.substring(10, 12));
+        final second = int.parse(standardInput.substring(12, 14));
 
-    //if length is 10, then it convert dateTime till hour
-    //yyyyddmmhh (only for principal Date)
-    if (input.length == 10) {
-      return DateTime.utc(year, month, day, hour).toLocal();
+        //if length is 10, then it convert dateTime till hour
+        //yyyyddmmhh (only for principal Date)
+        if (hasLengthN(input, 10)) {
+          return DateTime.utc(year, month, day, hour).toLocal();
+        }
+
+        return DateTime(year, month, day, hour, minute, second);
+      }
+      //input for invoices date string with format yyyy-MM-dd
+      else {
+        return DateTime.parse(input);
+      }
+    } on FormatException {
+      return null;
     }
-
-    return DateTime(year, month, day, hour, minute, second);
-  } on FormatException {
-    return null;
   }
+
+  return null;
 }
 
 DateTime? tryParseAnnouncementDateTime(String input) {

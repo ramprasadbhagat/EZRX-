@@ -45,10 +45,9 @@ import 'package:ezrxmobile/presentation/returns/return_summary/return_summary.da
 import 'package:ezrxmobile/presentation/returns/return_summary_details/return_summary_details.dart';
 import 'package:ezrxmobile/presentation/returns/user_restriction_list.dart';
 import 'package:ezrxmobile/presentation/splash/splash_page.dart';
-
 import 'package:ezrxmobile/presentation/history/detail/history_details.dart';
-
 import 'package:ezrxmobile/presentation/orders/create_order/scan_material_info.dart';
+import 'package:ezrxmobile/presentation/payments/all_invoices/all_invoices.dart';
 
 import 'package:ezrxmobile/presentation/returns/request_return/request_return_details.dart';
 
@@ -196,6 +195,10 @@ import 'package:ezrxmobile/presentation/returns/request_return/return_request_su
     AutoRoute(
       path: 'returns/return_summary_details',
       page: ReturnSummaryDetails,
+    ),
+    AutoRoute(
+      path: 'payments/all_invoices',
+      page: AllInvoicesPage,
     ),
     CustomRoute(
       path: 'orders/bundle_item_detail',

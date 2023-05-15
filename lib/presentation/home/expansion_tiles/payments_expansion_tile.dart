@@ -64,13 +64,13 @@ final allInvoicesTile = HomePageTile(
   key: const Key('allInvoicesTile'),
   title: 'All Invoices'.tr(),
   icon: Icons.description_outlined,
-  routeName: 'payments/request_payment',
+  routeName: 'payments/all_invoices',
 );
 final allCreditsTile = HomePageTile(
   key: const Key('allCreditsTile'),
   title: 'All Credits'.tr(),
   icon: Icons.monetization_on_outlined,
-  routeName: 'payments/approver_actions',
+  routeName: 'payments/all_credits',
 );
 final paymentSummaryTile = HomePageTile(
   key: const Key('paymentSummaryTile'),
