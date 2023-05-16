@@ -2,12 +2,15 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/auth/proxy_login/proxy_login_form_bloc.dart';
+import 'package:ezrxmobile/presentation/account/proxy_login.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_button.dart';
 import 'package:ezrxmobile/presentation/core/profile_tile.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 class AccountTab extends StatelessWidget {
@@ -60,7 +63,16 @@ class _LoginOnBehalfTile extends StatelessWidget {
                   'Login on behalf',
                   locale: context.locale,
                 ).tr(),
-                onTap: () => context.router.pushNamed('login_on_behalf'),
+                onTap: () {
+                  context.read<ProxyLoginFormBloc>().add(
+                        const ProxyLoginFormEvent.initialized(),
+                      );
+                  showPlatformDialog(
+                    context: context,
+                    barrierDismissible: true,
+                    builder: (_) => const LoginOnBehalfDialog(),
+                  );
+                },
               )
             : const SizedBox.shrink();
       },

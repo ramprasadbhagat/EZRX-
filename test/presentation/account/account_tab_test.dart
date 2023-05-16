@@ -9,8 +9,11 @@ import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.da
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
+import 'package:ezrxmobile/application/auth/proxy_login/proxy_login_form_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/entities/access_right.dart';
 import 'package:ezrxmobile/domain/account/entities/full_name.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
@@ -54,6 +57,14 @@ class FavoriteRemoteDataSourceMock extends Mock
     implements FavouriteRemoteDataSource {}
 class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
     implements EligibilityBloc {}
+
+class ProxyLoginFormBlocMock
+    extends MockBloc<ProxyLoginFormEvent, ProxyLoginFormState>
+    implements ProxyLoginFormBloc {}
+
+class MaterialListBlocMock
+    extends MockBloc<MaterialListEvent, MaterialListState>
+    implements MaterialListBloc {}
 
 final locator = GetIt.instance;
 
@@ -115,6 +126,8 @@ void main() {
   late AnnouncementBloc announcementBlocMock;
   late AppRouter autoRouterMock;
   late CartBloc cartBlocMock;
+  late ProxyLoginFormBloc proxyLoginFormBlocMock;
+  late MaterialListBloc materialListBlocMock;
   setUpAll(() {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton(() => AppRouter());
@@ -130,6 +143,8 @@ void main() {
       autoRouterMock = locator<AppRouter>();
       cartBlocMock = CartBlocMock();
       eligibilityBlocMock = EligibilityBlocMock();
+      proxyLoginFormBlocMock = ProxyLoginFormBlocMock();
+      materialListBlocMock = MaterialListBlocMock();
       when(() => userBlocMock.state).thenReturn(UserState.initial());
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
       when(() => cartBlocMock.state).thenReturn(CartState.initial());
@@ -142,6 +157,10 @@ void main() {
           .thenReturn(AnnouncementState.initial());
       when(() => eligibilityBlocMock.state)
           .thenReturn(EligibilityState.initial());
+      when(() => proxyLoginFormBlocMock.state)
+          .thenReturn(ProxyLoginFormState.initial());
+      when(() => materialListBlocMock.state)
+          .thenReturn(MaterialListState.initial());
     });
 
     Widget getScopedWidget() {
@@ -171,6 +190,10 @@ void main() {
             BlocProvider<AnnouncementBloc>(
                 create: (context) => announcementBlocMock),
             BlocProvider<CartBloc>(create: (context) => cartBlocMock),
+            BlocProvider<ProxyLoginFormBloc>(
+                create: (context) => proxyLoginFormBlocMock),
+            BlocProvider<MaterialListBloc>(
+                create: (context) => materialListBlocMock),
           ],
           child: const AccountTab(),
         ),
@@ -249,7 +272,7 @@ void main() {
       variant: variants,
     );
 
-    testWidgets('Tap login_on_behalf', (tester) async {
+    testWidgets('Tap login_on_behalf with cancel button click', (tester) async {
       final expectedStates = [
         UserState.initial().copyWith(
           user: User.empty().copyWith(
@@ -259,11 +282,69 @@ void main() {
         ),
       ];
       whenListen(userBlocMock, Stream.fromIterable(expectedStates));
+      final expectedStates1 = [
+        ProxyLoginFormState.initial().copyWith(
+          isSubmitting: true,
+          authFailureOrSuccessOption:
+              optionOf(const Left(ApiFailure.other('fake-error'))),
+        ),
+        ProxyLoginFormState.initial().copyWith(
+          isSubmitting: false,
+          authFailureOrSuccessOption: none(),
+        ),
+      ];
       await tester.pumpWidget(getScopedWidget());
       await tester.pump();
       final loginOnBehalfTile = find.byKey(const Key('loginOnBehalfTile'));
       expect(loginOnBehalfTile, findsOneWidget);
       await tester.tap(loginOnBehalfTile);
+      whenListen(proxyLoginFormBlocMock, Stream.fromIterable(expectedStates1));
+      await tester.pumpAndSettle();
+      final cancelKey = find.byKey(const Key('cancel'));
+      expect(cancelKey, findsOneWidget);
+      await tester.tap(cancelKey);
+      await tester.pumpAndSettle();
+      await tester.pump();
+    });
+
+    testWidgets('Tap login_on_behalf with submit button click', (tester) async {
+      final expectedStates = [
+        UserState.initial().copyWith(
+          user: User.empty().copyWith(
+            id: 'testId',
+            role: Role.empty().copyWith(type: RoleType('root_admin')),
+            accessRight: AccessRight.empty().copyWith(
+              adminPOAttachment: true,
+            ),
+          ),
+        ),
+      ];
+      whenListen(userBlocMock, Stream.fromIterable(expectedStates));
+      final expectedStates1 = [
+        ProxyLoginFormState.initial().copyWith(
+          isSubmitting: true,
+        ),
+        ProxyLoginFormState.initial().copyWith(
+          isSubmitting: false,
+          showErrorMessages: true,
+          authFailureOrSuccessOption: optionOf(const Right('success')),
+        ),
+      ];
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      final loginOnBehalfTile = find.byKey(const Key('loginOnBehalfTile'));
+      expect(loginOnBehalfTile, findsOneWidget);
+      await tester.tap(loginOnBehalfTile);
+      whenListen(proxyLoginFormBlocMock, Stream.fromIterable(expectedStates1));
+      await tester.pumpAndSettle();
+      final proxyLoginUsernameFieldKey =
+          find.byKey(const Key('proxyLoginUsernameField'));
+      expect(proxyLoginUsernameFieldKey, findsOneWidget);
+      await tester.enterText(proxyLoginUsernameFieldKey, 'test');
+      final proxyLoginSubmitButtonKey =
+          find.byKey(const Key('proxyLoginSubmitButton'));
+      expect(proxyLoginSubmitButtonKey, findsOneWidget);
+      await tester.tap(proxyLoginSubmitButtonKey);
       await tester.pump();
     });
 

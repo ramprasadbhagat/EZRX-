@@ -21,7 +21,6 @@ import 'package:ezrxmobile/presentation/account/settings_page.dart';
 import 'package:ezrxmobile/presentation/account/ship_to_search.dart';
 import 'package:ezrxmobile/presentation/aup_tc/aup_tc.dart';
 import 'package:ezrxmobile/presentation/auth/login_page.dart';
-import 'package:ezrxmobile/presentation/auth/proxy_login_page.dart';
 import 'package:ezrxmobile/presentation/core/webview_page.dart';
 import 'package:ezrxmobile/presentation/favourites/favourite_tab.dart';
 import 'package:ezrxmobile/presentation/history/history_tab.dart';
@@ -61,7 +60,6 @@ import 'package:ezrxmobile/presentation/returns/request_return/return_request_su
   routes: <AutoRoute>[
     AutoRoute(path: 'splash', page: SplashPage, initial: true),
     AutoRoute(path: 'login', page: LoginPage),
-    AutoRoute(path: 'login_on_behalf', page: LoginOnBehalfPage),
     AutoRoute(path: 'settings', page: SettingsPage),
     AutoRoute(path: 'payment_configuration', page: PaymentConfigurationPage),
     AutoRoute(path: 'payment_methods', page: PaymentMethodsPage),
