@@ -117,3 +117,12 @@ Make the below changes to your /eZRx Mobile/android/local.properties
 - flutter.minSdkVersion=24
 - flutter.targetSdkVersion=33
 - flutter.compileSdkVersion=33
+
+### How to run both iOS and Android simulator in a same time
+1. Command + P => Flutter: Select Device
+2. Open the iOS and Android simulator in sequence
+3. terminal run `fvm flutter devices`
+4. Copy the iOS and Android device ID from the list 
+5. Replace the `.vscode/launch.json` "uat-ios" and "uat-android" device ID. Save it
+6. Go to VScode left Tab number 4 Item : Run and Debug , dropdown pick "uat-all-devices", click run
+7. Do not commit this change on your branch 
