@@ -89,7 +89,7 @@ class SalesOrg extends ValueObject<String> {
   }
 
   int get countWhenValid => isValid() ? 1 : 0;
-  
+
   const SalesOrg._(this.value);
 }
 
@@ -385,4 +385,15 @@ class ComboDealUserRole extends ValueObject<int> {
   }
 
   const ComboDealUserRole._(this.value);
+}
+
+class PaymentMethod extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory PaymentMethod(String input) {
+    return PaymentMethod._(validateStringNotEmpty(input));
+  }
+
+  const PaymentMethod._(this.value);
 }

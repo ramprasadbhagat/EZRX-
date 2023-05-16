@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$AvailablePaymentMethod {
   SalesOrg get salesOrg => throw _privateConstructorUsedError;
-  String get paymentMethod => throw _privateConstructorUsedError;
+  PaymentMethod get paymentMethod => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AvailablePaymentMethodCopyWith<AvailablePaymentMethod> get copyWith =>
@@ -30,7 +30,7 @@ abstract class $AvailablePaymentMethodCopyWith<$Res> {
           $Res Function(AvailablePaymentMethod) then) =
       _$AvailablePaymentMethodCopyWithImpl<$Res, AvailablePaymentMethod>;
   @useResult
-  $Res call({SalesOrg salesOrg, String paymentMethod});
+  $Res call({SalesOrg salesOrg, PaymentMethod paymentMethod});
 }
 
 /// @nodoc
@@ -58,7 +58,7 @@ class _$AvailablePaymentMethodCopyWithImpl<$Res,
       paymentMethod: null == paymentMethod
           ? _value.paymentMethod
           : paymentMethod // ignore: cast_nullable_to_non_nullable
-              as String,
+              as PaymentMethod,
     ) as $Val);
   }
 }
@@ -71,7 +71,7 @@ abstract class _$$_AvailablePaymentMethodCopyWith<$Res>
       __$$_AvailablePaymentMethodCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({SalesOrg salesOrg, String paymentMethod});
+  $Res call({SalesOrg salesOrg, PaymentMethod paymentMethod});
 }
 
 /// @nodoc
@@ -97,7 +97,7 @@ class __$$_AvailablePaymentMethodCopyWithImpl<$Res>
       paymentMethod: null == paymentMethod
           ? _value.paymentMethod
           : paymentMethod // ignore: cast_nullable_to_non_nullable
-              as String,
+              as PaymentMethod,
     ));
   }
 }
@@ -112,7 +112,7 @@ class _$_AvailablePaymentMethod extends _AvailablePaymentMethod {
   @override
   final SalesOrg salesOrg;
   @override
-  final String paymentMethod;
+  final PaymentMethod paymentMethod;
 
   @override
   String toString() {
@@ -144,13 +144,13 @@ class _$_AvailablePaymentMethod extends _AvailablePaymentMethod {
 abstract class _AvailablePaymentMethod extends AvailablePaymentMethod {
   const factory _AvailablePaymentMethod(
       {required final SalesOrg salesOrg,
-      required final String paymentMethod}) = _$_AvailablePaymentMethod;
+      required final PaymentMethod paymentMethod}) = _$_AvailablePaymentMethod;
   const _AvailablePaymentMethod._() : super._();
 
   @override
   SalesOrg get salesOrg;
   @override
-  String get paymentMethod;
+  PaymentMethod get paymentMethod;
   @override
   @JsonKey(ignore: true)
   _$$_AvailablePaymentMethodCopyWith<_$_AvailablePaymentMethod> get copyWith =>

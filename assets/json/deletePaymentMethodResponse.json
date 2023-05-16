@@ -1,0 +1,10 @@
+{
+    "data": {
+        "deletePaymentMethods": {
+            "success": true
+        }
+    },
+    "extensions": {
+        "trace-id": "ebb3016929b64d5c9a3e7ace4beb55ae"
+    }
+}

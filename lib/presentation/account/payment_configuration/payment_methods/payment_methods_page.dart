@@ -1,9 +1,14 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/manage_payment_method/manage_payment_methods_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/payment_methods_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/available_payment_method.dart';
+import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
+import 'package:ezrxmobile/presentation/core/confirm_clear_cart_dialog.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,28 +20,33 @@ class PaymentMethodsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Payment Methods Management').tr()),
-      body: BlocBuilder<PaymentMethodsBloc, PaymentMethodsState>(
-        buildWhen: (previous, current) =>
-            previous.isFetching != current.isFetching,
-        builder: (context, state) {
-          return state.isFetching
-              ? LoadingShimmer.logo(
-                  key: const Key('loaderImage'),
-                )
-              : ScrollList<AvailablePaymentMethod>(
-                  emptyMessage: 'No payment method found'.tr(),
-                  onRefresh: () => _onRefresh(context: context),
-                  isLoading: state.isFetching,
-                  onLoadingMore: () {},
-                  itemBuilder: (context, index, item) {
-                    return _PaymentMethodListItem(
-                      paymentMethod: item,
-                      index: index,
-                    );
-                  },
-                  items: state.paymentMethodList,
-                );
-        },
+      body: AnnouncementBanner(
+        currentPath: context.router.currentPath,
+        child: BlocBuilder<PaymentMethodsBloc, PaymentMethodsState>(
+          buildWhen: (previous, current) =>
+              previous.isFetching != current.isFetching ||
+              previous.paymentMethodList != current.paymentMethodList,
+          builder: (context, state) {
+            return state.isFetching
+                ? LoadingShimmer.logo(
+                    key: const Key('loaderImage'),
+                  )
+                : ScrollList<AvailablePaymentMethod>(
+                    emptyMessage: 'No payment method found'.tr(),
+                    onRefresh: () => _onRefresh(context: context),
+                    isLoading: state.isFetching,
+                    onLoadingMore: () {},
+                    itemBuilder: (context, index, item) {
+                      return _PaymentMethodListItem(
+                        paymentMethod: item,
+                        index: index,
+                        state: state,
+                      );
+                    },
+                    items: state.paymentMethodList,
+                  );
+          },
+        ),
       ),
     );
   }
@@ -52,49 +62,120 @@ class PaymentMethodsPage extends StatelessWidget {
 class _PaymentMethodListItem extends StatelessWidget {
   final AvailablePaymentMethod paymentMethod;
   final int index;
+  final PaymentMethodsState state;
 
   const _PaymentMethodListItem({
     Key? key,
     required this.paymentMethod,
     required this.index,
+    required this.state,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: CustomSlidable(
-        endActionPaneActions: [
-          CustomSlidableAction(
-            label: 'Delete',
-            icon: Icons.delete_outline,
-            onPressed: (context) {},
-          ),
-        ],
-        borderRadius: 8,
-        child: ListTile(
-          key: Key(
-            'paymentMethod$index',
-          ),
-          onTap: () {},
-          title: Text(
-            '${paymentMethod.salesOrg.getOrCrash()} - ${paymentMethod.salesOrg.buName}',
-            style: Theme.of(context).textTheme.titleSmall?.apply(
-                  color: ZPColors.kPrimaryColor,
+    return BlocConsumer<ManagePaymentMethodsBloc, ManagePaymentMethodsState>(
+      listenWhen: (previous, current) =>
+          previous.deleteIndex != current.deleteIndex &&
+          current.deleteIndex == -1 &&
+          previous.isSubmitting != current.isSubmitting &&
+          !current.isSubmitting,
+      listener: (context, state) {
+        context
+            .read<PaymentMethodsBloc>()
+            .add(const PaymentMethodsEvent.fetch());
+      },
+      buildWhen: (previous, current) =>
+          previous.deleteIndex != current.deleteIndex,
+      builder: (context, state) {
+        return Card(
+          child: CustomSlidable(
+            endActionPaneActions: [
+              CustomSlidableAction(
+                label: 'Delete',
+                icon: Icons.delete_outline,
+                onPressed: (context) => _deletePaymentMethod(
+                  context: context,
+                  paymentMethod: paymentMethod,
+                  deleteIndex: index,
                 ),
-          ),
-          subtitle: Text(
-            paymentMethod.paymentMethod,
-            style: Theme.of(context).textTheme.titleSmall?.apply(
-                  color: ZPColors.darkGray,
+              ),
+            ],
+            borderRadius: 8,
+            child: ListTile(
+              key: Key(
+                'paymentMethod$index',
+              ),
+              onTap: () {
+                context.router.push(
+                  EditPaymentMethodsPageRoute(
+                    salesOrg: paymentMethod.salesOrg,
+                    oldPaymentMethod: paymentMethod.paymentMethod,
+                  ),
+                );
+              },
+              title: state.deleteIndex == index
+                  ? SizedBox(
+                      key: const Key('salesorg-loading'),
+                      width: 40,
+                      child: LoadingShimmer.tile(),
+                    )
+                  : Text(
+                      '${paymentMethod.salesOrg.getOrDefaultValue('')} - ${paymentMethod.salesOrg.buName}',
+                      style: Theme.of(context).textTheme.titleSmall?.apply(
+                            color: ZPColors.kPrimaryColor,
+                          ),
+                    ),
+              subtitle: state.deleteIndex == index
+                  ? SizedBox(
+                      key: const Key('paymentmethod-loading'),
+                      width: 40,
+                      child: LoadingShimmer.tile(),
+                    )
+                  : Text(
+                      paymentMethod.paymentMethod.getOrDefaultValue(''),
+                      style: Theme.of(context).textTheme.titleSmall?.apply(
+                            color: ZPColors.darkGray,
+                          ),
+                    ),
+              trailing: IconButton(
+                padding: const EdgeInsets.only(right: 8),
+                icon: const Icon(Icons.delete),
+                onPressed: () => _deletePaymentMethod(
+                  context: context,
+                  paymentMethod: paymentMethod,
+                  deleteIndex: index,
                 ),
+              ),
+            ),
           ),
-          trailing: IconButton(
-            padding: const EdgeInsets.only(right: 8),
-            icon: const Icon(Icons.delete),
-            onPressed: () {},
-          ),
-        ),
-      ),
+        );
+      },
+    );
+  }
+
+  void _deletePaymentMethod({
+    required BuildContext context,
+    required AvailablePaymentMethod paymentMethod,
+    required int deleteIndex,
+  }) {
+    ConfirmClearDialog.show(
+      context: context,
+      title: 'Delete payment method'.tr(),
+      description: 'Are you sure you want to delete this payment method?'.tr(),
+      onCancel: () {
+        context.router.pop();
+      },
+      onConfirmed: () {
+        context.read<ManagePaymentMethodsBloc>().add(
+              ManagePaymentMethodsEvent.deletePaymentMethod(
+                salesOrg: paymentMethod.salesOrg,
+                paymentMethod: paymentMethod.paymentMethod,
+                deleteIndex: deleteIndex,
+              ),
+            );
+        context.router.pop();
+      },
+      confirmText: 'Delete',
     );
   }
 }

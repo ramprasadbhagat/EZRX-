@@ -1,0 +1,11 @@
+{
+    "data": {
+        "updatePaymentMethods": {
+            "success": true,
+            "action": "Update"
+        }
+    },
+    "extensions": {
+        "trace-id": "9f4ce3082fb64d8eba072afde8082f11"
+    }
+}

@@ -1,0 +1,12 @@
+mutation deletePaymentMethods($request: deletePaymentMethodsInput!) {
+  deletePaymentMethods(input: $request) {
+    success
+  }
+}
+variable:
+{
+  "request": {
+      "salesOrg": "2601",
+      "paymentMethod": "test"
+    }
+}

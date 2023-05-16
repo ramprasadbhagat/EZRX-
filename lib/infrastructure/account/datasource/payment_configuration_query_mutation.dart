@@ -9,4 +9,25 @@ class PaymentConfigurationQueryMutation {
       }
     ''';
   }
+
+  String updatePaymentMethodsMutation() {
+    return '''
+      mutation updatePaymentMethodMutation(\$input: updatePaymentMethodsInput!) {
+        updatePaymentMethods(input: \$input) {
+          success
+          action
+        }
+      }
+    ''';
+  }
+
+  String deletePaymentMethodsMutation() {
+    return '''
+      mutation deletePaymentMethods(\$request: deletePaymentMethodsInput!) {
+        deletePaymentMethods(input: \$request) {
+          success
+        }
+      }
+    ''';
+  }
 }

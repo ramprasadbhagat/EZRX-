@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/manage_payment_method/manage_payment_methods_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/payment_methods_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_rep/sales_rep_bloc.dart';
@@ -281,11 +282,6 @@ import 'package:ezrxmobile/infrastructure/returns/datasource/return_price_query.
 
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_price_local.dart';
 
-
-
-
-
-
 import 'package:ezrxmobile/infrastructure/returns/datasource/submit_return_request_mutation.dart';
 
 import 'package:ezrxmobile/infrastructure/returns/datasource/submit_return_request_local_datasource.dart';
@@ -544,7 +540,8 @@ void setupLocator() {
     () => BannerRemoteDataSource(
       config: locator<Config>(),
       httpService: locator<HttpService>(),
-      eZReachHttpService: locator.get<HttpService>(instanceName: 'eZReachHttpService'),
+      eZReachHttpService:
+          locator.get<HttpService>(instanceName: 'eZReachHttpService'),
       bannerQueryMutation: locator<BannerQueryMutation>(),
       dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
     ),
@@ -1865,8 +1862,7 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => ReturnPriceRepository(
       config: locator<Config>(),
-      localDataSource:
-          locator<ReturnPriceLocalDataSource>(),
+      localDataSource: locator<ReturnPriceLocalDataSource>(),
       remoteDataSource: locator<ReturnPriceRemoteDataSource>(),
     ),
   );
@@ -1886,7 +1882,6 @@ void setupLocator() {
     ),
   );
 
-
   //============================================================
   //  Submit Return
   //
@@ -1903,8 +1898,7 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => SubmitRequestReturnRepository(
       config: locator<Config>(),
-      localDataSource:
-          locator<SubmitReturnRequestLocalDataSource>(),
+      localDataSource: locator<SubmitReturnRequestLocalDataSource>(),
       remoteDataSource: locator<SubmitReturnRequestRemoteDataSource>(),
     ),
   );
@@ -2000,6 +1994,11 @@ void setupLocator() {
     ),
   );
 
+  locator.registerLazySingleton(
+    () => ManagePaymentMethodsBloc(
+      paymentConfigurationRepository: locator<PaymentConfigurationRepository>(),
+    ),
+  );
   //============================================================
   //  All Invoices
   //

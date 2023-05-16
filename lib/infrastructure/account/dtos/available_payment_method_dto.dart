@@ -20,14 +20,14 @@ class AvailablePaymentMethodDto with _$AvailablePaymentMethodDto {
   ) {
     return AvailablePaymentMethodDto(
       salesOrg: paymentMethod.salesOrg.getOrCrash(),
-      paymentMethod: paymentMethod.paymentMethod,
+      paymentMethod: paymentMethod.paymentMethod.getOrCrash(),
     );
   }
 
   AvailablePaymentMethod toDomain() {
     return AvailablePaymentMethod(
       salesOrg: SalesOrg(salesOrg),
-      paymentMethod: paymentMethod,
+      paymentMethod: PaymentMethod(paymentMethod),
     );
   }
 

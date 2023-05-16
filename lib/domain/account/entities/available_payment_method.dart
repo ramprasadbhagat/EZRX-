@@ -9,11 +9,11 @@ class AvailablePaymentMethod with _$AvailablePaymentMethod {
 
   const factory AvailablePaymentMethod({
     required SalesOrg salesOrg,
-    required String paymentMethod,
+    required PaymentMethod paymentMethod,
   }) = _AvailablePaymentMethod;
 
   factory AvailablePaymentMethod.empty() => AvailablePaymentMethod(
         salesOrg: SalesOrg(''),
-        paymentMethod: '',
+        paymentMethod: PaymentMethod(''),
       );
 }
