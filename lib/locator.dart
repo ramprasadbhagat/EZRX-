@@ -38,11 +38,15 @@ import 'package:ezrxmobile/domain/order/repository/i_combo_deal_repository.dart'
 import 'package:ezrxmobile/infrastructure/account/datasource/admin_po_attachment_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/admin_po_attachment_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/admin_po_attachment_remote.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/update_sales_org_local.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/update_sales_org_mutation.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/update_sales_org_remote.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/admin_po_attachment_repository.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/payment_configuration_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/payment_configuration_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/payment_configuration_remote.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/payment_configuration_repository.dart';
+import 'package:ezrxmobile/infrastructure/account/repository/update_sales_org_repository.dart';
 import 'package:ezrxmobile/infrastructure/core/common/device_info.dart';
 import 'package:ezrxmobile/infrastructure/core/common/file_picker.dart';
 import 'package:ezrxmobile/infrastructure/core/common/permission_service.dart';
@@ -2028,6 +2032,31 @@ void setupLocator() {
       config: locator<Config>(),
       localDataSource: locator<AllInvoicesLocalDataSource>(),
       remoteDataSource: locator<AllInvoicesRemoteDataSource>(),
+    ),
+  );
+
+  //============================================================
+  //  Update Sales Org Config
+  //
+  //============================================================
+
+  locator.registerLazySingleton(() => UpdateSalesOrgQueryMutation());
+
+  locator.registerLazySingleton(
+    () => UpdateSalesOrgRemoteDataSource(
+      httpService: locator<HttpService>(),
+      updateSalesOrgQueryMutation: locator<UpdateSalesOrgQueryMutation>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+    ),
+  );
+
+  locator.registerLazySingleton(() => UpdateSalesOrgLocalDataSource());
+
+  locator.registerLazySingleton(
+    () => UpdateSalesOrgRepository(
+      config: locator<Config>(),
+      remoteDataSource: locator<UpdateSalesOrgRemoteDataSource>(),
+      localDataSource: locator<UpdateSalesOrgLocalDataSource>(),
     ),
   );
 }
