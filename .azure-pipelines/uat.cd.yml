@@ -50,7 +50,7 @@ stages:
           echo Y | fvm global 3.7.5
           fvm flutter clean
           cd ios
-          rm Pods
+          rm -rf Pods
           rm Podfile.lock
           fvm flutter pub get
           pod install
