@@ -11,8 +11,6 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_basic_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
-import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/history/detail/section/bill_to_section.dart';
 import 'package:ezrxmobile/presentation/history/detail/section/invoice_section.dart';
@@ -44,9 +42,6 @@ class HistoryDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    trackMixpanelEvent(
-      MixpanelEvents.orderDetailPageView,
-    );
     final disableCreateOrder =
         !context.read<UserBloc>().state.userCanCreateOrder;
 

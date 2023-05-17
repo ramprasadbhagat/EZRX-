@@ -11,9 +11,7 @@ import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
-import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/filter_icon.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_button.dart';
@@ -37,9 +35,6 @@ class HistoryTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    trackMixpanelEvent(
-      MixpanelEvents.orderHistoryPageView,
-    );
     const radius = 16.0;
     final buildToInformation =
         context.read<CustomerCodeBloc>().state.customerCodeInfo.billToInfos;
