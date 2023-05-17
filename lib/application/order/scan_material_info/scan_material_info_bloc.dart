@@ -23,7 +23,6 @@ class ScanMaterialInfoBloc
   late StreamController scanResultController;
   ScanMaterialInfoBloc({required this.scanInfoRepository})
       : super(ScanMaterialInfoState.initial()) {
-    scanInfoRepository.fetchBarcodeCapture().addListener(this);
     on<ScanMaterialInfoEvent>(_onEvent);
     scanResultController = StreamController<String>();
     scanResultController.stream.listen((scannedData) {
@@ -37,6 +36,7 @@ class ScanMaterialInfoBloc
   ) async {
     await event.map(
       initialized: (e) async {
+        scanInfoRepository.fetchBarcodeCapture().addListener(this);
         emit(ScanMaterialInfoState.initial());
       },
       scanMaterialNumberFromCamera: (e) async {

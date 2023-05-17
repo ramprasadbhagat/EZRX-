@@ -9,16 +9,13 @@ class MaterialInfoScanner {
   final Config config;
   MaterialInfoScanner({required this.config});
 
-  final Camera? _camera = Camera.defaultCamera;
-  final CameraSettings _cameraSettings =
-      BarcodeCapture.recommendedCameraSettings;
-
+  late Camera? _camera;
+  late CameraSettings _cameraSettings;
+  late BarcodeCaptureSettings _barcodeCaptureSettings;
   late DataCaptureContext _dataCaptureContext;
   late BarcodeCapture _barcodeCapture;
   late DataCaptureView _dataCaptureView;
   late BarcodeCaptureOverlay _overlay;
-  final BarcodeCaptureSettings _barcodeCaptureSettings =
-      BarcodeCaptureSettings();
 
   DataCaptureContext get dataCaptureContext {
     return _dataCaptureContext;
@@ -53,6 +50,9 @@ class MaterialInfoScanner {
   }
 
   Future<void> init() async {
+    _camera = Camera.defaultCamera;
+    _cameraSettings = BarcodeCapture.recommendedCameraSettings;
+    _barcodeCaptureSettings = BarcodeCaptureSettings();
     await _camera?.applySettings(_cameraSettings);
 
     _dataCaptureContext =

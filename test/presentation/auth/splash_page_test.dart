@@ -20,6 +20,7 @@ import 'package:ezrxmobile/application/order/order_history_details/order_history
 import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
+import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
 import 'package:ezrxmobile/application/returns/policy_configuration/policy_configuration_bloc.dart';
@@ -149,6 +150,10 @@ class OrderHistoryDetailsMockBloc
     extends MockBloc<OrderHistoryDetailsEvent, OrderHistoryDetailsState>
     implements OrderHistoryDetailsBloc {}
 
+class ScanMaterialInfoBlocMock
+    extends MockBloc<ScanMaterialInfoEvent, ScanMaterialInfoState>
+    implements ScanMaterialInfoBloc {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
@@ -169,6 +174,7 @@ void main() {
   late ReturnRequestTypeCodeBloc returnRequestTypeCodeBlocMock;
   late PolicyConfigurationBloc policyConfigurationListBlocMock;
   late MaterialListBloc materialListBlocMock;
+  late ScanMaterialInfoBloc scanMaterialInfoMockBloc;
 
   late MaterialFilterBloc materialFilterBlocMock;
 
@@ -204,6 +210,7 @@ void main() {
   setUpAll(() async {
     remoteConfigServiceMock = RemoteConfigServiceMock();
     when(() => remoteConfigServiceMock.getReturnsConfig()).thenReturn(true);
+    when(() => remoteConfigServiceMock.getScanToOrderConfig()).thenReturn(true);
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton(() => AppRouter());
     locator.registerLazySingleton(() => MixpanelService());
@@ -243,6 +250,7 @@ void main() {
       announcementBlocMock = AnnouncementBlocMock();
       deepLinkingBlocMock = DeepLinkingMockBloc();
       mockOrderHistoryListBloc = OrderHistoryListBlocMock();
+      scanMaterialInfoMockBloc = ScanMaterialInfoBlocMock();
 
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
       when(() => orderDocumentTypeMock.state).thenReturn(
@@ -279,6 +287,8 @@ void main() {
           .thenReturn(MaterialFilterState.initial());
       when(() => returnApproverBlocMock.state)
           .thenReturn(ReturnApproverState.initial());
+      when(() => scanMaterialInfoMockBloc.state)
+          .thenReturn(ScanMaterialInfoState.initial());
 
       when(() => returnApproverFilterBlocMock.state)
           .thenReturn(ReturnApproverFilterState.initial());
@@ -344,6 +354,8 @@ void main() {
                 create: (context) => mockOrderHistoryListBloc),
             BlocProvider<OrderHistoryDetailsBloc>(
                 create: (context) => mockOrderHistoryDetailsBloc),
+            BlocProvider<ScanMaterialInfoBloc>(
+                create: (context) => scanMaterialInfoMockBloc),
           ],
           child: const SplashPage(),
         ),
@@ -686,7 +698,6 @@ void main() {
       ).called(0);
     });
 
-  
     testWidgets('DeepLinkingBloc initializes correctly',
         (WidgetTester tester) async {
       when(() => remoteConfigServiceMock.getReturnsConfig()).thenReturn(false);

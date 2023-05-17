@@ -97,6 +97,8 @@ import 'package:ezrxmobile/application/returns/return_price/return_price_bloc.da
 
 import 'package:ezrxmobile/application/returns/submit_return/submit_return_bloc.dart';
 
+import 'package:wakelock/wakelock.dart';
+
 final _crashlytics = locator<FirebaseCrashlyticsService>().crashlytics;
 
 Future<void> _firebaseMessagingBackgroundHandler(
@@ -112,8 +114,7 @@ Future<void> _firebaseMessagingBackgroundHandler(
 Future<void> initialSetup({required Flavor flavor}) async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
-  // TODO: Ananth remove this after your fix
-  await ScanditFlutterDataCaptureBarcode.initialize();
+
   setupLocator();
 
   final config = locator<Config>();
@@ -145,17 +146,14 @@ Future<void> initialSetup({required Flavor flavor}) async {
       trackAutomaticEvents: true,
     ),
   );
-  // TODO: Ananth remove this after your fix
-  await locator<MaterialInfoScanner>().init();
 
-  // TODO: Ananth uncomment this after your fix
-  // if (!kIsWeb) {
-  //   await Wakelock.enable();
-  //   if (locator<RemoteConfigService>().getScanToOrderConfig()) {
-  //     await ScanditFlutterDataCaptureBarcode.initialize();
-  //     await locator<MaterialInfoScanner>().init();
-  //   }
-  // }
+  if (!kIsWeb) {
+    await Wakelock.enable();
+    if (locator<RemoteConfigService>().getScanToOrderConfig()) {
+      await ScanditFlutterDataCaptureBarcode.initialize();
+      await locator<MaterialInfoScanner>().init();
+    }
+  }
 }
 
 void runAppWithCrashlyticsAndLocalization() {
@@ -348,7 +346,14 @@ class App extends StatelessWidget {
           create: (context) => locator<ComboDealMaterialDetailBloc>(),
         ),
         BlocProvider<ScanMaterialInfoBloc>(
-          create: (context) => locator<ScanMaterialInfoBloc>(),
+          create: (context) {
+            final bloc = locator<ScanMaterialInfoBloc>();
+            if (locator<RemoteConfigService>().getScanToOrderConfig()) {
+              bloc.add(const ScanMaterialInfoEvent.initialized());
+            }
+
+            return bloc;
+          },
         ),
         BlocProvider<TenderContractListBloc>(
           create: (context) => locator<TenderContractListBloc>(),
