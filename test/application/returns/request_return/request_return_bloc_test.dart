@@ -6,9 +6,12 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/domain/returns/entities/request_return_filter.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request.dart';
+import 'package:ezrxmobile/domain/returns/entities/usage.dart';
+import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/request_return_local.dart';
 import 'package:ezrxmobile/infrastructure/returns/repository/request_return_repository.dart';
 import 'package:flutter/material.dart';
@@ -27,13 +30,20 @@ void main() {
   final fakeCustomerCodeInfo = CustomerCodeInfo.empty();
   final fakeRequestReturnFilter = RequestReturnFilter.empty();
 
+  late ReturnItem updatedReturnItem;
   late ReturnRequest requestReturn;
   final loadedReturnItems = <ReturnItem>[];
+  final documentList = [
+    PoDocuments.empty().copyWith(name: 'fake-name', url: 'fake-url')
+  ];
 
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
     requestReturn =
         await RequestReturnLocalDatasource().searchReturnMaterials();
+    updatedReturnItem = requestReturn.items.first.copyWith(
+      isSelected: true,
+    );
     loadedReturnItems.addAll(requestReturn.items);
     loadedReturnItems.addAll(requestReturn.items);
   });
@@ -240,8 +250,129 @@ void main() {
           ),
         ],
       );
+
+      blocTest<RequestReturnBloc, RequestReturnState>(
+        'Update return details',
+        build: () => RequestReturnBloc(returnRequestRepository: repository),
+        seed: () => RequestReturnState.initial().copyWith(
+          returnItemList: requestReturn.items,
+        ),
+        act: (bloc) => bloc
+          ..add(RequestReturnEvent.updateReturnDetails(
+              updatedItem: requestReturn.items.first.copyWith(
+            isSelected: true,
+          ))),
+        expect: () => [
+          RequestReturnState.initial().copyWith(
+              returnItemList: _updatedReturnItemList(
+                  updatedReturnItem, requestReturn.items)),
+        ],
+      );
+
+      blocTest<RequestReturnBloc, RequestReturnState>(
+        'Update return request reference number',
+        build: () => RequestReturnBloc(returnRequestRepository: repository),
+        act: (bloc) => bloc
+          ..add(const RequestReturnEvent.updateReturnRequestReferenceNumber(
+              referenceNumber: 'fake-refNumber')),
+        expect: () => [
+          RequestReturnState.initial()
+              .copyWith(returnReferenceNumber: 'fake-refNumber'),
+        ],
+      );
+
+      blocTest<RequestReturnBloc, RequestReturnState>(
+          'initialize return request',
+          build: () => RequestReturnBloc(returnRequestRepository: repository),
+          seed: () => RequestReturnState.initial().copyWith(
+                specialInstructions: 'fake-instructions',
+                returnReferenceNumber: 'fake-number',
+                returnItemList: [requestReturn.items.first],
+              ),
+          act: (bloc) => bloc
+            ..add(const RequestReturnEvent.initializeSelectedReturnItems()),
+          expect: () => [
+                RequestReturnState.initial().copyWith(
+                    specialInstructions: '',
+                    returnReferenceNumber: '',
+                    returnItemList: [
+                      requestReturn.items.first.copyWith(
+                        isSelected: false,
+                        poDocuments: [],
+                        returnQuantity: ReturnQuantity(''),
+                        usage: Usage.empty(),
+                      )
+                    ]),
+              ]);
+
+      blocTest<RequestReturnBloc, RequestReturnState>(
+        'Upload documents',
+        build: () => RequestReturnBloc(returnRequestRepository: repository),
+        seed: () => RequestReturnState.initial().copyWith(
+          returnItemList: requestReturn.items,
+        ),
+        act: (RequestReturnBloc bloc) {
+          bloc.add(
+            RequestReturnEvent.uploadAttachments(
+                poDocuments: documentList,
+                uniqueId: 'Value(Right(000000000021026760))1080004890'),
+          );
+        },
+        expect: () => [
+          RequestReturnState.initial().copyWith(
+              returnItemList: _updatedReturnItemList(
+                  requestReturn.items.first.copyWith(poDocuments: documentList),
+                  requestReturn.items)),
+        ],
+      );
+
+      blocTest<RequestReturnBloc, RequestReturnState>(
+        'delete documents',
+        build: () => RequestReturnBloc(returnRequestRepository: repository),
+        seed: () => RequestReturnState.initial().copyWith(
+          returnItemList: [requestReturn.items.first.copyWith(poDocuments: documentList)],
+        ),
+        act: (RequestReturnBloc bloc) {
+          bloc.add(
+            RequestReturnEvent.deleteAttachment(
+                poDocuments: documentList.first,
+                uniqueId: 'Value(Right(000000000021026760))1080004890'),
+          );
+        },
+        expect: () => [
+          RequestReturnState.initial()
+              .copyWith(returnItemList: [requestReturn.items.first]),
+        ],
+      );
+
+
+      blocTest<RequestReturnBloc, RequestReturnState>(
+        'update special instructions',
+        build: () => RequestReturnBloc(returnRequestRepository: repository),
+        act: (RequestReturnBloc bloc) {
+          bloc.add(
+            const RequestReturnEvent.updateSpecialInstructions(
+                specialInstructions: 'fake-instructions'),
+          );
+        },
+        expect: () => [
+          RequestReturnState.initial()
+              .copyWith(specialInstructions: 'fake-instructions'),
+        ],
+      );
     },
   );
+}
+
+List<ReturnItem> _updatedReturnItemList(
+    ReturnItem updatedItem, List<ReturnItem> returnItemList) {
+  final returnItemToUpdateIndex = returnItemList.indexWhere(
+    (element) => element.uniqueId == updatedItem.uniqueId,
+  );
+
+  return List.from(returnItemList)
+    ..removeAt(returnItemToUpdateIndex)
+    ..insert(returnItemToUpdateIndex, updatedItem);
 }
 
 List<ReturnItem> _getSortedList(List<ReturnItem> items, String order) => items
