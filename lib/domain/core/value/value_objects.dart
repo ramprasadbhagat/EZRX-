@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/core/error/errors.dart';
 import 'package:ezrxmobile/domain/core/error/failures.dart';
@@ -98,6 +100,11 @@ class DateTimeStringValue extends ValueObject<String> {
         DateTimeFormatString.displayDateFormat,
       );
 
+  String get toValidDateStringNaIfEmpty => showDateOrNAIfEmpty(
+        naIfEmptyDateTime,
+        DateTimeFormatString.displayDateFormat,
+      );
+
   String get toValidDateTimeString => displayDateTimeStringOrEmpty(
         value.getOrElse(() => ''),
         DateTimeFormatString.displayDateFormat,
@@ -145,6 +152,8 @@ class StringValue extends ValueObject<String> {
   String get displayStringValue {
     return dashIfEmpty((value.getOrElse(() => '')));
   }
+
+  Color get getPaymentAdviceColor => getValueColor(value.getOrElse(() => ''));
 
   const StringValue._(this.value);
 }

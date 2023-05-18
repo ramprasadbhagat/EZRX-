@@ -83,6 +83,8 @@ bool havingSubmitPrincipalForSalesRep(String principalCode) {
 
 Color getStatusLabelColor(String statusType) {
   switch (statusType) {
+    case 'Processed':
+    case 'Successful':
     case 'Approved for Return':
     case 'FAILED':
       return ZPColors.lightSecondary;
@@ -95,6 +97,8 @@ Color getStatusLabelColor(String statusType) {
     case 'Out for delivery':
     case 'Pending Approval':
       return ZPColors.lightRed;
+    case 'In Progress':
+     return ZPColors.lightGray;
     case 'Completed':
       return ZPColors.darkGray;
     default:

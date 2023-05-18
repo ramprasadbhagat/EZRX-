@@ -101,6 +101,8 @@ import 'package:ezrxmobile/application/returns/submit_return/submit_return_bloc.
 
 import 'package:wakelock/wakelock.dart';
 
+import 'package:ezrxmobile/application/payments/paymant_summary/payment_summary_bloc.dart';
+
 final _crashlytics = locator<FirebaseCrashlyticsService>().crashlytics;
 
 Future<void> _firebaseMessagingBackgroundHandler(
@@ -359,6 +361,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider<TenderContractListBloc>(
           create: (context) => locator<TenderContractListBloc>(),
+        ),
+         BlocProvider<PaymentSummaryBloc>(
+          create: (context) => locator<PaymentSummaryBloc>(),
         ),
         BlocProvider<ReturnSummaryFilterBloc>(
           create: (context) => locator<ReturnSummaryFilterBloc>(),

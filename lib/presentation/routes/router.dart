@@ -57,6 +57,8 @@ import 'package:ezrxmobile/presentation/returns/request_return/return_details_su
 
 import 'package:ezrxmobile/presentation/returns/request_return/return_request_success.dart';
 
+import 'package:ezrxmobile/presentation/payments/payment_summary.dart';
+
 //ignore: unused-code
 @MaterialAutoRouter(
   replaceInRouteName: 'Page,Route,Tab',
@@ -190,6 +192,10 @@ import 'package:ezrxmobile/presentation/returns/request_return/return_request_su
     AutoRoute(
       path: 'returns/add_edit_user_restriction',
       page: AddEditUserRestrictionPage,
+    ),
+    AutoRoute(
+      path: 'payments/payment_summary',
+      page: PaymentSummaryPage,
     ),
     AutoRoute(
       path: 'orders/scan_material_info',

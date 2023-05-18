@@ -21,6 +21,7 @@ import 'package:ezrxmobile/application/order/payment_customer_information/paymen
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/all_credits/all_credits_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
+import 'package:ezrxmobile/application/payments/paymant_summary/payment_summary_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_summary/return_summary_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
@@ -95,6 +96,10 @@ class PaymentCustomerInformationBlocMock extends MockBloc<
         PaymentCustomerInformationEvent, PaymentCustomerInformationState>
     implements PaymentCustomerInformationBloc {}
 
+class PaymentSummaryBlocMock
+    extends MockBloc<PaymentSummaryEvent, PaymentSummaryState>
+    implements PaymentSummaryBloc {}
+
 class OrderHistoryFilterBlocMock
     extends MockBloc<OrderHistoryFilterEvent, OrderHistoryFilterState>
     implements OrderHistoryFilterBloc {}
@@ -168,6 +173,7 @@ void main() {
   late MaterialPriceDetailBlocMock mockMaterialPriceDetailBloc;
   late AdditionalDetailsBlocMock mockAdditionalDetailsBloc;
   late ReturnSummaryBloc returnSummaryBlocMock;
+  late PaymentSummaryBloc paymentSummaryBlocMock;
   late AllInvoicesBlocMock allInvoicesBlocMock;
   late AllCreditsBlocMock allCreditsBlocMock;
 
@@ -202,6 +208,7 @@ void main() {
     mockMaterialPriceDetailBloc = MaterialPriceDetailBlocMock();
     mockAdditionalDetailsBloc = AdditionalDetailsBlocMock();
     returnSummaryBlocMock = ReturnSummaryBlocMock();
+    paymentSummaryBlocMock = PaymentSummaryBlocMock();
     allInvoicesBlocMock = AllInvoicesBlocMock();
     allCreditsBlocMock = AllCreditsBlocMock();
   });
@@ -250,6 +257,8 @@ void main() {
         .thenReturn(AdditionalDetailsState.initial());
     when(() => returnSummaryBlocMock.state)
         .thenReturn(ReturnSummaryState.initial());
+    when(() => paymentSummaryBlocMock.state)
+        .thenReturn(PaymentSummaryState.initial());
   });
 
   group('Ship Code selector Test ', () {
@@ -296,6 +305,8 @@ void main() {
                 create: (context) => mockAdditionalDetailsBloc),
             BlocProvider<ReturnSummaryBloc>(
                 create: (context) => returnSummaryBlocMock),
+            BlocProvider<PaymentSummaryBloc>(
+                create: (context) => paymentSummaryBlocMock),
             BlocProvider<AllInvoicesBloc>(
                 create: (context) => allInvoicesBlocMock),
             BlocProvider<AllCreditsBloc>(

@@ -1,6 +1,10 @@
+import 'dart:ui';
+
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/value/constants.dart';
 import 'package:intl/intl.dart';
+
+import 'package:ezrxmobile/presentation/theme/colors.dart';
 
 String stringCapitalize(String text) {
   if (text.isEmpty) return '';
@@ -122,6 +126,18 @@ String displayDateTimeStringOrEmpty(String text, String format) {
   return DateFormat(format).format(parsedDate);
 }
 
+String showDateOrNAIfEmpty(String text, String format) {
+  if (getDateTimeIntValue(text) <= 0) {
+    return 'NA';
+  }
+  final parsedDate = tryParseDateTime(text);
+  if (parsedDate == null) {
+    return '';
+  }
+
+  return DateFormat(format).format(parsedDate);
+}
+
 bool isNumericOnly(String text) => RegExp(r'^\d+$').hasMatch(text);
 
 String formattedDateTimeForAPI(String text) {
@@ -211,6 +227,9 @@ String getLanguageString(String apiLanguageCode) {
 String dashIfEmpty(String text) {
   return text.isEmpty ? '-' : text;
 }
+
+Color getValueColor(String input) =>
+    input == 'N.A.' ? ZPColors.black : ZPColors.red;
 
 int getIntegerReturnQuantity(String quantity) =>
     quantity.isEmpty ? 0 : int.parse(quantity);

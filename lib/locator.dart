@@ -298,6 +298,16 @@ import 'package:ezrxmobile/infrastructure/returns/datasource/submit_return_reque
 
 import 'package:ezrxmobile/application/returns/submit_return/submit_return_bloc.dart';
 
+import 'package:ezrxmobile/application/payments/paymant_summary/payment_summary_bloc.dart';
+
+import 'package:ezrxmobile/infrastructure/payments/repository/payment_summary_repository.dart';
+
+import 'package:ezrxmobile/infrastructure/payments/datasource/payment_summary_local_datasource.dart';
+
+import 'package:ezrxmobile/infrastructure/payments/datasource/payment_summary_remote_datasource.dart';
+
+import 'package:ezrxmobile/infrastructure/payments/datasource/payment_summary_query.dart';
+
 GetIt locator = GetIt.instance;
 
 void setupLocator() {
@@ -1734,6 +1744,42 @@ void setupLocator() {
 
   locator.registerLazySingleton(
     () => MixpanelService(),
+  );
+
+  //============================================================
+  //  Payment Summary
+  //
+  //============================================================
+
+  locator.registerLazySingleton(
+    () => PaymentSummaryBloc(
+      paymentSummaryRepository: locator<PaymentSummaryRepository>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => PaymentSummaryLocalDataSource(),
+  );
+  
+  locator.registerLazySingleton(
+    () => PaymentSummaryQuery(),
+  );
+
+  locator.registerLazySingleton(
+    () => PaymentSummaryRemoteDataSource(
+      config: locator<Config>(),
+      httpService: locator<HttpService>(),
+      paymentSummaryQuery: locator<PaymentSummaryQuery>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => PaymentSummaryRepository(
+      config: locator<Config>(),
+      localDataSource: locator<PaymentSummaryLocalDataSource>(),
+      remoteDataSource: locator<PaymentSummaryRemoteDataSource>(),
+    ),
   );
 
   //============================================================

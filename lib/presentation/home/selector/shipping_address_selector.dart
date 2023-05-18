@@ -35,6 +35,8 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:ezrxmobile/application/payments/paymant_summary/payment_summary_bloc.dart';
+
 class ShipCodeSelector extends StatelessWidget {
   const ShipCodeSelector({Key? key}) : super(key: key);
 
@@ -187,7 +189,16 @@ class ShipCodeSelector extends StatelessWidget {
                       ),
                     );
               }
-
+              context.read<PaymentSummaryBloc>().add(
+                      PaymentSummaryEvent.fetchPaymentSummaryList(
+                        salesOrganization: context
+                            .read<SalesOrgBloc>()
+                            .state
+                            .salesOrganisation,
+                        customerCodeInfo: customerCodeInfo,
+                      ),
+                    );
+              
               context.read<AdditionalDetailsBloc>().add(
                     AdditionalDetailsEvent.initialized(
                       config: context.read<SalesOrgBloc>().state.configs,

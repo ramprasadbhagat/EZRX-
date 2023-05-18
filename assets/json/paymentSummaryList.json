@@ -1,0 +1,261 @@
+{
+    "data": {
+      "customerPayment": [
+        {
+          "paymentID": "9 260120130140000237",
+          "valueDate": "2013-09-24",
+          "paymentAmount": 393.76,
+          "transactionCurrency": "SGD",
+          "paymentDocument": "0140000237",
+          "invoiceProcessingStatus": "Processed",
+          "paymentMethod": "",
+          "iban": "",
+          "bankIdentification": "",
+          "bankCountryKey": "",
+          "bankKey": "",
+          "bankAccountNumber": "",
+          "bankName": "",
+          "paymentCardID": "",
+          "paymentCardNumber": "",
+          "paymentCardHolderName": "",
+          "paymentCardMaskedNumber": "",
+          "paymentCardTypeName": "",
+          "extensibilityCustomField": {
+            "paymentBatchAdditionalInfo": [
+              {
+                "businessContext": "Y",
+                "label": "Omni Channel",
+                "technicalName": "ZZHTMCS"
+              },
+              {
+                "businessContext": "Z",
+                "label": "QR Code",
+                "technicalName": "Z_CCP_PAYMENT_QRCODE"
+              },
+              {
+                "businessContext": "Payment",
+                "label": "QR Code",
+                "technicalName": "Z_CCP_PAYMENT_QRCODE"
+              },
+              {
+                "businessContext": "Payment",
+                "label": "Payment Advice Number",
+                "technicalName": "ZZADVICE"
+              }
+            ]
+          },
+          "customId": null,
+          "tmpPaytByDigitalPaytService": null,
+          "payerByPaymentServiceProvider": null,
+          "paymentRefByPaytSrvcProvider": "",
+          "paymentServiceProvider": "",
+          "transactionStatus": null,
+          "customerInvoice": null,
+          "paymentCardData": null,
+          "paytCardVerificatDetResultText": null,
+          "disputeCaseInformationText": null,
+          "userName": null,
+          "paymentBatchAdditionalInfo": "",
+          "accountingDocExternalReference": "",
+          "zCcpPaymentQRCode": "",
+          "zzAdvice": "",
+          "adviceExpiry": "N.A.",
+          "zzHtmcs": "",
+          "createdDate": null,
+          "status": "Processed"
+        },
+        {
+          "paymentID": "9 260120130140000315",
+          "valueDate": "2013-10-11",
+          "paymentAmount": 423.82,
+          "transactionCurrency": "SGD",
+          "paymentDocument": "0140000315",
+          "invoiceProcessingStatus": "Processed",
+          "paymentMethod": "",
+          "iban": "",
+          "bankIdentification": "",
+          "bankCountryKey": "",
+          "bankKey": "",
+          "bankAccountNumber": "",
+          "bankName": "",
+          "paymentCardID": "",
+          "paymentCardNumber": "",
+          "paymentCardHolderName": "",
+          "paymentCardMaskedNumber": "",
+          "paymentCardTypeName": "",
+          "extensibilityCustomField": {
+            "paymentBatchAdditionalInfo": [
+              {
+                "businessContext": "Y",
+                "label": "Omni Channel",
+                "technicalName": "ZZHTMCS"
+              },
+              {
+                "businessContext": "Z",
+                "label": "QR Code",
+                "technicalName": "Z_CCP_PAYMENT_QRCODE"
+              },
+              {
+                "businessContext": "Payment",
+                "label": "QR Code",
+                "technicalName": "Z_CCP_PAYMENT_QRCODE"
+              },
+              {
+                "businessContext": "Payment",
+                "label": "Payment Advice Number",
+                "technicalName": "ZZADVICE"
+              }
+            ]
+          },
+          "customId": null,
+          "tmpPaytByDigitalPaytService": null,
+          "payerByPaymentServiceProvider": null,
+          "paymentRefByPaytSrvcProvider": "",
+          "paymentServiceProvider": "",
+          "transactionStatus": null,
+          "customerInvoice": null,
+          "paymentCardData": null,
+          "paytCardVerificatDetResultText": null,
+          "disputeCaseInformationText": null,
+          "userName": null,
+          "paymentBatchAdditionalInfo": "",
+          "accountingDocExternalReference": "",
+          "zCcpPaymentQRCode": "",
+          "zzAdvice": "0413101102442175",
+          "adviceExpiry": "N.A.",
+          "zzHtmcs": "",
+          "createdDate": "2013-10-11",
+          "status": "Processed"
+        },
+        {
+          "paymentID": "9 260120130140000336",
+          "valueDate": "2014-01-21",
+          "paymentAmount": 749.51,
+          "transactionCurrency": "SGD",
+          "paymentDocument": "0140000336",
+          "invoiceProcessingStatus": "Processed",
+          "paymentMethod": "",
+          "iban": "",
+          "bankIdentification": "",
+          "bankCountryKey": "",
+          "bankKey": "",
+          "bankAccountNumber": "",
+          "bankName": "",
+          "paymentCardID": "",
+          "paymentCardNumber": "",
+          "paymentCardHolderName": "",
+          "paymentCardMaskedNumber": "",
+          "paymentCardTypeName": "",
+          "extensibilityCustomField": {
+            "paymentBatchAdditionalInfo": [
+              {
+                "businessContext": "Y",
+                "label": "Omni Channel",
+                "technicalName": "ZZHTMCS"
+              },
+              {
+                "businessContext": "Z",
+                "label": "QR Code",
+                "technicalName": "Z_CCP_PAYMENT_QRCODE"
+              },
+              {
+                "businessContext": "Payment",
+                "label": "QR Code",
+                "technicalName": "Z_CCP_PAYMENT_QRCODE"
+              },
+              {
+                "businessContext": "Payment",
+                "label": "Payment Advice Number",
+                "technicalName": "ZZADVICE"
+              }
+            ]
+          },
+          "customId": null,
+          "tmpPaytByDigitalPaytService": null,
+          "payerByPaymentServiceProvider": null,
+          "paymentRefByPaytSrvcProvider": "",
+          "paymentServiceProvider": "",
+          "transactionStatus": null,
+          "customerInvoice": null,
+          "paymentCardData": null,
+          "paytCardVerificatDetResultText": null,
+          "disputeCaseInformationText": null,
+          "userName": null,
+          "paymentBatchAdditionalInfo": "",
+          "accountingDocExternalReference": "",
+          "zCcpPaymentQRCode": "",
+          "zzAdvice": "0414022706135203",
+          "adviceExpiry": "N.A.",
+          "zzHtmcs": "",
+          "createdDate": "2014-02-27",
+          "status": "Processed"
+        },
+        {
+          "paymentID": "9 260120150140000003",
+          "valueDate": "2015-02-12",
+          "paymentAmount": 1737.51,
+          "transactionCurrency": "SGD",
+          "paymentDocument": "0140000003",
+          "invoiceProcessingStatus": "Processed",
+          "paymentMethod": "",
+          "iban": "",
+          "bankIdentification": "",
+          "bankCountryKey": "",
+          "bankKey": "",
+          "bankAccountNumber": "",
+          "bankName": "",
+          "paymentCardID": "",
+          "paymentCardNumber": "",
+          "paymentCardHolderName": "",
+          "paymentCardMaskedNumber": "",
+          "paymentCardTypeName": "",
+          "extensibilityCustomField": {
+            "paymentBatchAdditionalInfo": [
+              {
+                "businessContext": "Y",
+                "label": "Omni Channel",
+                "technicalName": "ZZHTMCS"
+              },
+              {
+                "businessContext": "Z",
+                "label": "QR Code",
+                "technicalName": "Z_CCP_PAYMENT_QRCODE"
+              },
+              {
+                "businessContext": "Payment",
+                "label": "QR Code",
+                "technicalName": "Z_CCP_PAYMENT_QRCODE"
+              },
+              {
+                "businessContext": "Payment",
+                "label": "Payment Advice Number",
+                "technicalName": "ZZADVICE"
+              }
+            ]
+          },
+          "customId": null,
+          "tmpPaytByDigitalPaytService": null,
+          "payerByPaymentServiceProvider": null,
+          "paymentRefByPaytSrvcProvider": "",
+          "paymentServiceProvider": "",
+          "transactionStatus": null,
+          "customerInvoice": null,
+          "paymentCardData": null,
+          "paytCardVerificatDetResultText": null,
+          "disputeCaseInformationText": null,
+          "userName": null,
+          "paymentBatchAdditionalInfo": "",
+          "accountingDocExternalReference": "",
+          "zCcpPaymentQRCode": "",
+          "zzAdvice": "",
+          "adviceExpiry": "N.A.",
+          "zzHtmcs": "",
+          "createdDate": null,
+          "status": "Processed"
+        }
+      ]
+    },
+    "extensions": {
+      "trace-id": "05d371caf2c45609d7195111fc1451f0"
+    }
+  }
