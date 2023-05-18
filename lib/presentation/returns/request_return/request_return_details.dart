@@ -62,6 +62,7 @@ class _SelectedRequestReturnList extends StatelessWidget {
         return state.selectedReturnItems.isNotEmpty
             ? Expanded(
                 child: CustomScrollView(
+                  key: const Key('selectedReturnItemsList'),
                   slivers: [
                     SliverList(
                       delegate: SliverChildBuilderDelegate(
@@ -648,6 +649,7 @@ class _ReturnRequestNotesSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      key: const Key('requestReturnNotesSection'),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(

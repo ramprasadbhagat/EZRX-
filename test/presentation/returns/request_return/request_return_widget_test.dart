@@ -14,7 +14,9 @@ import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_name.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/request_return_filter.dart';
+import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request.dart';
 
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
@@ -413,6 +415,92 @@ void main() {
             ),
           ),
         ).called(1);
+      });
+
+
+      testWidgets('Test when at least one item is selected', (tester) async {
+        whenListen(
+          requestReturnBlocMock,
+          Stream.fromIterable(
+            [
+              RequestReturnState.initial().copyWith(
+                isLoading: true,
+                returnItemList: [
+                  ReturnItem.empty().copyWith(
+                    isSelected: false,
+                    materialNumber: MaterialNumber('mat0'),
+                    assignmentNumber: 'ass0',
+                  ),
+                ],
+              ),
+              RequestReturnState.initial().copyWith(
+                isLoading: false,
+                returnItemList: [
+                  ReturnItem.empty().copyWith(
+                    isSelected: true,
+                    materialNumber: MaterialNumber('mat1'),
+                    assignmentNumber: 'ass1',
+                  ),
+                  ReturnItem.empty().copyWith(
+                    isSelected: true,
+                    materialNumber: MaterialNumber('mat2'),
+                    assignmentNumber: 'ass2',
+                  ),
+                ],
+              ),
+            ],
+          ),
+        );
+        await getWidget(tester);
+        await tester.pumpAndSettle(const Duration(seconds: 4));
+
+        final checkBox = find.byType(Checkbox);
+        await tester.tap(checkBox.last);
+        final goToReturnsDetailsPage = find.byKey(const Key('goToReturnsDetailsPage'));
+        await tester.tap(goToReturnsDetailsPage);
+        await tester.pump();
+      });
+
+
+      testWidgets('Test when no items selected is empty', (tester) async {
+        whenListen(
+          requestReturnBlocMock,
+          Stream.fromIterable(
+            [
+              RequestReturnState.initial().copyWith(
+                isLoading: true,
+                returnItemList: [
+                  ReturnItem.empty().copyWith(
+                    isSelected: false,
+                    materialNumber: MaterialNumber('mat0'),
+                    assignmentNumber: 'ass0',
+                  ),
+                ],
+              ),
+              RequestReturnState.initial().copyWith(
+                isLoading: false,
+                returnItemList: [
+                  ReturnItem.empty().copyWith(
+                    isSelected: false,
+                    materialNumber: MaterialNumber('mat1'),
+                    assignmentNumber: 'ass1',
+                  ),
+                  ReturnItem.empty().copyWith(
+                    isSelected: false,
+                    materialNumber: MaterialNumber('mat2'),
+                    assignmentNumber: 'ass2',
+                  ),
+                ],
+              ),
+            ],
+          ),
+        );
+        await getWidget(tester);
+        await tester.pumpAndSettle(const Duration(seconds: 4));
+
+        final goToReturnsDetailsPage = find.byKey(const Key('goToReturnsDetailsPage'));
+        expect(goToReturnsDetailsPage, findsNothing);
+        
       });
     },
   );
