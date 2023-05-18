@@ -32,13 +32,13 @@ class UpdateSalesOrgRemoteDataSource {
       );
 
       _updateSalesOrgExceptionChecker(res: res);
-      if (res.data['data']['updateSalesOrgConfig']['salesOrgConfigs'] == null ||
-          res.data['data']['updateSalesOrgConfig']['salesOrgConfigs'].isEmpty) {
+      if (res.data['data']['updateSalesOrgConfig']['salesOrgConfig'] == null ||
+          res.data['data']['updateSalesOrgConfig']['salesOrgConfig'].isEmpty) {
         return UpdateSalesOrganisationConfigs.empty();
       }
 
       return UpdateSalesOrganisationConfigsDto.fromJson(
-        res.data['data']['updateSalesOrgConfig']['salesOrgConfigs'],
+        res.data['data']['updateSalesOrgConfig']['salesOrgConfig'],
       ).toDomain();
     });
   }

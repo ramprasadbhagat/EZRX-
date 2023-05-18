@@ -1,0 +1,111 @@
+mutation updateSalesorgconfigMutation($input: UpdateSalesOrgConfigInput!) {
+  updateSalesOrgConfig(input: $input) {
+    salesOrgConfig {
+      salesOrgCode
+      ponRequired
+      priceOverride
+      expiryDateDisplay
+      batchNumDisplay
+      enableBatchNumber
+      currency
+      netPriceOverride
+      languageFilter
+      enableVat
+      enableZDP5
+      languageValue
+      materialWithoutPrice
+      enableZDP8Override
+      displayOrderDiscount
+      enableIRN
+      enableTaxClassification
+      disableBundles
+      disableProcessingStatus
+      enableCollectiveNumber
+      enableGimmickMaterial
+      hideStockDisplay
+      showPOAttachment
+      disableDeliveryDate
+      enableTaxAtTotalLevelOnly
+      enableGreenDelivery
+      greenDeliveryDelayInDays
+      greenDeliveryUserRole
+      minOrderAmount
+      hideCustomer
+      disableOrderType
+      vatValue
+      enableSpecialInstructions
+      enableReferenceNote
+      enableMobileNumber
+      enablePaymentTerms
+      enableGMC
+      enableListPrice
+      enableDefaultMD
+      disablePaymentTermsDisplay
+      enableBillTo
+      enableOHPrice
+      addOosMaterials
+      oosValue
+      enableRemarks
+      enableTaxDisplay
+      enableGMN
+    }
+  }
+}
+
+
+variable:
+{
+  "input": {
+    "where": {
+      "id": 13
+    },
+    "data": {
+      "ponRequired": true,
+      "priceOverride": true,
+      "expiryDateDisplay": false,
+      "batchNumDisplay": false,
+      "currency": "php",
+      "minOrderAmount": "0",
+      "vatValue": 0,
+      "netPriceOverride": false,
+      "languageFilter": false,
+      "languageValue": "",
+      "materialWithoutPrice": true,
+      "enablePaymentTerms": false,
+      "enableMobileNumber": false,
+      "enableRemarks": true,
+      "enableListPrice": true,
+      "enableTaxDisplay": true,
+      "addOosMaterials": true,
+      "oosValue": 1,
+      "enableDefaultMD": false,
+      "enableZDP5": false,
+      "enableZDP8Override": true,
+      "enableGMC": false,
+      "enableGMN": false,
+      "enableBatchNumber": false,
+      "enableOHPrice": true,
+      "enableSpecialInstructions": true,
+      "enableReferenceNote": false,
+      "displayOrderDiscount": false,
+      "enableIRN": false,
+      "enableTaxClassification": false,
+      "disableBundles": false,
+      "disableProcessingStatus": false,
+      "disableOrderType": true,
+      "enableCollectiveNumber": false,
+      "enableGimmickMaterial": false,
+      "enableVat": false,
+      "hideCustomer": false,
+      "enableBillTo": false,
+      "disablePaymentTermsDisplay": true,
+      "hideStockDisplay": false,
+      "showPOAttachment": false,
+      "disableDeliveryDate": false,
+      "enableTaxAtTotalLevelOnly": false,
+      "enableGreenDelivery": false,
+      "greenDeliveryDelayInDays" : 0,
+      "greenDeliveryUserRole" : 0
+    }
+  }
+}

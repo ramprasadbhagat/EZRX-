@@ -1,0 +1,58 @@
+{
+    "data": {
+      "updateSalesOrgConfig": {
+        "salesOrgConfig": {
+          "salesOrgCode": "2201",
+          "ponRequired": false,
+          "priceOverride": false,
+          "expiryDateDisplay": true,
+          "batchNumDisplay": true,
+          "enableBatchNumber": false,
+          "currency": "mmk",
+          "netPriceOverride": false,
+          "languageFilter": false,
+          "enableVat": false,
+          "enableZDP5": false,
+          "languageValue": "",
+          "materialWithoutPrice": false,
+          "enableZDP8Override": false,
+          "displayOrderDiscount": false,
+          "enableIRN": false,
+          "enableTaxClassification": false,
+          "disableBundles": false,
+          "disableProcessingStatus": false,
+          "enableCollectiveNumber": true,
+          "enableGimmickMaterial": false,
+          "hideStockDisplay": false,
+          "showPOAttachment": false,
+          "disableDeliveryDate": true,
+          "enableTaxAtTotalLevelOnly": false,
+          "enableGreenDelivery": false,
+          "greenDeliveryDelayInDays": 0,
+          "greenDeliveryUserRole": 0,
+          "minOrderAmount": "0",
+          "hideCustomer": false,
+          "disableOrderType": false,
+          "vatValue": 0,
+          "enableSpecialInstructions": true,
+          "enableReferenceNote": false,
+          "enableMobileNumber": false,
+          "enablePaymentTerms": false,
+          "enableGMC": false,
+          "enableListPrice": true,
+          "enableDefaultMD": false,
+          "disablePaymentTermsDisplay": false,
+          "enableBillTo": false,
+          "enableOHPrice": true,
+          "addOosMaterials": true,
+          "oosValue": 1,
+          "enableRemarks": false,
+          "enableTaxDisplay": true,
+          "enableGMN": false
+        }
+      }
+    },
+    "extensions": {
+      "trace-id": "1e15ee12539090f1ee849128b9e32f68"
+    }
+  }
