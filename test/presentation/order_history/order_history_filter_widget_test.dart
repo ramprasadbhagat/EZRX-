@@ -1,4 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_filter/order_history_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/order_history_list/order_history_list_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -26,10 +27,14 @@ class OrderHistoryListBlocMock
 
 class MockAppRouter extends Mock implements AppRouter {}
 
+class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
+    implements SalesOrgBloc {}
+
 void main() {
   late GetIt locator;
   final mockOrderHistoryFilterBloc = OrderHistoryFilterMockBloc();
   final mockOrderHistoryFilter = OrderHistoryFilter.empty();
+  late SalesOrgBloc salesOrgBlocMock;
 
   late MockAppRouter autoRouterMock;
   final fakeToDate = DateTime.parse(
@@ -50,6 +55,7 @@ void main() {
     locator = GetIt.instance;
     locator.registerLazySingleton(() => MockAppRouter());
     locator.registerLazySingleton(() => mockOrderHistoryFilterBloc);
+    salesOrgBlocMock = SalesOrgBlocMock();
   });
   group('Order-History Filter', () {
     setUp(() {
@@ -60,6 +66,8 @@ void main() {
       autoRouterMock = locator<MockAppRouter>();
       when(() => autoRouterMock.popForced())
           .thenAnswer((invocation) async => true);
+      when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
+
     });
 
     Widget getWUT() {
@@ -68,6 +76,8 @@ void main() {
         providers: [
           BlocProvider<OrderHistoryFilterBloc>(
               create: (context) => mockOrderHistoryFilterBloc),
+          BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBlocMock),
+
         ],
         child: const OrderHistoryFilterDrawer(),
       );

@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -311,6 +312,7 @@ class _OrderDateFilter extends StatelessWidget {
               lastDate: DateTime.now(),
               initialDateRange:
                   state.orderHistoryFilter.getOrderFilterDateRange,
+              locale: context.read<SalesOrgBloc>().state.salesOrg.locale,
             );
             if (orderDateRange == null) return;
             orderHistoryFilterBloc.add(

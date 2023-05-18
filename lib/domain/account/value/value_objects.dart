@@ -4,6 +4,7 @@ import 'package:ezrxmobile/domain/account/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/core/error/failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_validators.dart';
+import 'package:flutter/material.dart';
 
 class CustomerCode extends ValueObject<String> {
   @override
@@ -89,6 +90,8 @@ class SalesOrg extends ValueObject<String> {
   }
 
   int get countWhenValid => isValid() ? 1 : 0;
+
+  Locale get locale => Locale(languageCode, country);
 
   const SalesOrg._(this.value);
 }

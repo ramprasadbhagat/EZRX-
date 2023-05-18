@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/admin_po_attachment/filter/admin_po_attachment_filter_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/admin_po_attachment_filter.dart';
@@ -34,6 +35,8 @@ class CustomerCodeBlocMock extends MockBloc<CustomerCodeEvent, CustomerCodeState
 class UserBlocMock extends MockBloc<UserEvent, UserState>
     implements UserBloc {}
 
+class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
+    implements SalesOrgBloc {}
 
 void main(){
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -43,6 +46,8 @@ void main(){
   late AdminPoAttachmentFilterBloc mockAdminPoAttachmentFilterBloc;
   late CustomerCodeBloc mockCustomerCodeBloc;
   late UserBloc mockUserBloc;
+  late SalesOrgBloc salesOrgBlocMock;
+
 
   final fakeToDate = DateTime.parse(
     DateFormat('yyyyMMdd').format(
@@ -73,6 +78,7 @@ void main(){
 
     setUp(() {
       mockEligibilityBlocMock = EligibilityBlocMock();
+      salesOrgBlocMock = SalesOrgBlocMock();
       when(() => mockEligibilityBlocMock.state).thenReturn(EligibilityState.initial());
       mockAdminPoAttachmentFilterBloc = AdminPoAttachmentFilterBlocMock();
       when(() => mockAdminPoAttachmentFilterBloc.state).thenReturn(AdminPoAttachmentFilterState.initial());
@@ -80,6 +86,7 @@ void main(){
       when(() => mockCustomerCodeBloc.state).thenReturn(CustomerCodeState.initial());
       mockUserBloc = UserBlocMock();
       when(() => mockUserBloc.state).thenReturn(UserState.initial());
+      when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
     });
 
     Widget getWUT() {
@@ -100,6 +107,8 @@ void main(){
             BlocProvider<AdminPoAttachmentFilterBloc>(create: (context) => mockAdminPoAttachmentFilterBloc),
             BlocProvider<EligibilityBloc>(create: (context) => mockEligibilityBlocMock),
             BlocProvider<UserBloc>(create: (context) => mockUserBloc),
+            BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBlocMock),
+
           ],
           child: const Material(child: AdminPoAttachmentFilterDrawer()),
         ),

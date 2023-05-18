@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/returns/request_return_filter/request_return_filter_bloc.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -308,6 +309,7 @@ class _InvoiceDateFilter extends StatelessWidget {
               lastDate: DateTime.now(),
               initialDateRange:
                   state.requestReturnFilter.getInvoiceFilterDateRange,
+              locale: context.read<SalesOrgBloc>().state.salesOrg.locale,
             );
             if (invoiceDateRange == null) return;
             requestReturnFilterBloc.add(

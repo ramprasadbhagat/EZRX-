@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_summary_filter/return_summary_filter_bloc.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -279,17 +280,18 @@ class _SubmittedDateFilter extends StatelessWidget {
           onTap: () async {
             final returnSummaryFilterBloc =
                 context.read<ReturnSummaryFilterBloc>();
-            final submiteDateRange = await showDateRangePicker(
+            final submittedDateRange = await showDateRangePicker(
               context: context,
               firstDate: DateTime.now().subtract(const Duration(days: 365)),
               lastDate: DateTime.now(),
               initialDateRange:
                   state.returnSummaryFilter.getSubmittedFilterDateRange,
+              locale: context.read<SalesOrgBloc>().state.salesOrg.locale,
             );
-            if (submiteDateRange == null) return;
+            if (submittedDateRange == null) return;
             returnSummaryFilterBloc.add(
               ReturnSummaryFilterEvent.setSubmittedDate(
-                submittedDateRange: submiteDateRange,
+                submittedDateRange: submittedDateRange,
               ),
             );
           },

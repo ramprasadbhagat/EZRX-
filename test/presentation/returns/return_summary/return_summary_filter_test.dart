@@ -1,5 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_summary_filter/return_summary_filter_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -22,9 +23,13 @@ class ReturnSummaryFilterBlocMock
     extends MockBloc<ReturnSummaryFilterEvent, ReturnSummaryFilterState>
     implements ReturnSummaryFilterBloc {}
 
+class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
+    implements SalesOrgBloc {}
+    
 void main() {
   late ReturnSummaryFilterBloc returnSummaryFilterBlocMock;
   late AppRouter autoRouterMock;
+  late SalesOrgBloc salesOrgBlocMock;
   final locator = GetIt.instance;
   final fakeToDate = DateTime.parse(
     DateFormat('yyyyMMdd').format(
@@ -44,6 +49,8 @@ void main() {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton(() => AppRouter());
     autoRouterMock = locator<AppRouter>();
+    salesOrgBlocMock = SalesOrgBlocMock();
+
   });
 
   setUp(() async {
@@ -51,6 +58,8 @@ void main() {
     returnSummaryFilterBlocMock = ReturnSummaryFilterBlocMock();
     when(() => returnSummaryFilterBlocMock.state)
         .thenReturn(ReturnSummaryFilterState.initial());
+    when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
+
   });
 
   Future getWidget(tester) async {
@@ -61,6 +70,7 @@ void main() {
           BlocProvider<ReturnSummaryFilterBloc>(
             create: (context) => returnSummaryFilterBlocMock,
           ),
+          BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBlocMock),
         ],
         child: const ReturnSummaryFilterDrawer(),
       ),

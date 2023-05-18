@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -134,7 +135,18 @@ void main() {
         expect(salesOrg.isPH, true);
       },
     );
+
+    test(
+      'should return PH when get country with SalesOrg 2500',
+      () async {
+        const input = '2601';
+        final salesOrg = SalesOrg(input);
+        final result = salesOrg.locale;
+        expect(result, const Locale('en', 'SG'));
+      },
+    );
   });
+  
 
   group('RoleType value object', () {
     test(
