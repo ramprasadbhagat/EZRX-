@@ -109,13 +109,21 @@ void main() {
 
     blocTest('setOrderDate',
       build: () => AdminPoAttachmentFilterBloc(),
-      act: (AdminPoAttachmentFilterBloc bloc) => bloc.add(AdminPoAttachmentFilterEvent.setOrderDate(orderDateRange: DateTimeRange(start: DateTime.now().subtract(const Duration(days: 7)),end: DateTime.now()))),
+      act: (AdminPoAttachmentFilterBloc bloc) => bloc.add(
+          AdminPoAttachmentFilterEvent.setOrderDate(
+              orderDateRange: DateTimeRange(
+                  start: DateTime.now().subtract(const Duration(days: 28)),
+                  end: DateTime.now()))),
       expect: () => [
         AdminPoAttachmentFilterState.initial().copyWith(
           showErrorMessages: false,
           adminPoAttachmentFilter: AdminPoAttachmentFilter.empty().copyWith(
             fromDate: DateTimeStringValue(
-              getDateStringByDateTime(DateTime.now().subtract(const Duration(days: 7))),
+              getDateStringByDateTime(
+                DateTime.now().subtract(
+                  const Duration(days: 28),
+                ),
+              ),
             ),
             toDate: DateTimeStringValue(
               getDateStringByDateTime(DateTime.now()),

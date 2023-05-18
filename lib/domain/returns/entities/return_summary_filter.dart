@@ -24,7 +24,7 @@ class ReturnSummaryFilter with _$ReturnSummaryFilter {
         dateFrom: DateTimeStringValue(
           getDateStringByDateTime(
             DateTime.now().subtract(
-              const Duration(days: 7),
+              const Duration(days: 28),
             ),
           ),
         ),

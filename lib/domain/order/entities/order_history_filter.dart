@@ -24,7 +24,7 @@ class OrderHistoryFilter with _$OrderHistoryFilter {
         principalSearch: SearchKey.searchFilter(''),
         fromDate: DateTimeStringValue(
           getDateStringByDateTime(
-            DateTime.now().subtract(const Duration(days: 7)),
+            DateTime.now().subtract(const Duration(days: 28)),
           ),
         ),
         toDate: DateTimeStringValue(

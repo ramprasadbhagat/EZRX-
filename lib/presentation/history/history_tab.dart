@@ -271,7 +271,7 @@ class HistoryTab extends StatelessWidget {
                                       ),
                                       Expanded(
                                         child: Text(
-                                          'Order dates pre-set for past 7 days. Change the date range from “Filter” for more data'
+                                          'Order dates pre-set for past 28 days. Change the date range from “Filter” for more data'
                                               .tr(),
                                           style: Theme.of(context)
                                               .textTheme

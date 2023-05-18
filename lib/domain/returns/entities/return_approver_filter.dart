@@ -26,7 +26,7 @@ class ReturnApproverFilter with _$ReturnApproverFilter {
         shipTo: SearchKey.searchFilter(''),
         fromInvoiceDate: DateTimeStringValue(
           getDateStringByDateTime(
-            DateTime.now().subtract(const Duration(days: 7)),
+            DateTime.now().subtract(const Duration(days: 28)),
           ),
         ),
         toInvoiceDate: DateTimeStringValue(

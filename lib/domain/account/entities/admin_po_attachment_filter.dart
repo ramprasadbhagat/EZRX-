@@ -26,7 +26,7 @@ class AdminPoAttachmentFilter with _$AdminPoAttachmentFilter {
         soldTo: CustomerCodeInfo.empty(),
         fromDate: DateTimeStringValue(
           getDateStringByDateTime(
-            DateTime.now().subtract(const Duration(days: 7)),
+            DateTime.now().subtract(const Duration(days: 28)),
           ),
         ),
         toDate: DateTimeStringValue(
