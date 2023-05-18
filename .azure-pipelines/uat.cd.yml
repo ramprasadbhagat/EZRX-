@@ -266,7 +266,14 @@ stages:
                 "@type": "OpenUri",
                 "name": "IOS",
                 "targets": [
-                  { "os": "default", "uri": "$(APPCENTER_APP_URL_UAT_IOS)" }
+                  { "os": "default", "uri": "$(TESTFLIGHT_APP_URL_UAT_IOS)" }
+                ]
+              },
+              {
+                "@type": "OpenUri",
+                "name": "Web",
+                "targets": [
+                  { "os": "default", "uri": "$(FIREBASE_URL_UAT_WEB)" }
                 ]
               }]
             }]
@@ -274,5 +281,6 @@ stages:
     
       env:
         APPCENTER_APP_URL_UAT_ANDROID: '$(APPCENTER_APP_URL_UAT_ANDROID)'
-        APPCENTER_APP_URL_UAT_IOS: '$(APPCENTER_APP_URL_UAT_IOS)'
+        TESTFLIGHT_APP_URL_UAT_IOS: '$(TESTFLIGHT_APP_URL_UAT_IOS)'
+        FIREBASE_URL_UAT_WEB: '$(FIREBASE_URL_UAT_WEB)'
         MICROSOFT_TEAMS_BUILD_CHANNEL: '$(MICROSOFT_TEAMS_BUILD_CHANNEL)'
