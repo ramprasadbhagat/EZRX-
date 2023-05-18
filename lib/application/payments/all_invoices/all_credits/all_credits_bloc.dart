@@ -1,44 +1,44 @@
+import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/domain/payments/repository/i_all_credits_and_invoices_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:dartz/dartz.dart';
-import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'all_invoices_event.dart';
-part 'all_invoices_state.dart';
-part 'all_invoices_bloc.freezed.dart';
+part 'all_credits_event.dart';
+part 'all_credits_state.dart';
+part 'all_credits_bloc.freezed.dart';
 
 const int _pageSize = 20;
 
-class AllInvoicesBloc extends Bloc<AllInvoicesEvent, AllInvoicesState> {
+class AllCreditsBloc extends Bloc<AllCreditsEvent, AllCreditsState> {
   final IAllCreditsAndInvoicesRepository allCreditsAndInvoicesRepository;
 
-  AllInvoicesBloc({required this.allCreditsAndInvoicesRepository})
-      : super(AllInvoicesState.initial()) {
+  AllCreditsBloc({required this.allCreditsAndInvoicesRepository})
+      : super(AllCreditsState.initial()) {
     on(_onEvent);
   }
 
   Future<void> _onEvent(
-    AllInvoicesEvent event,
-    Emitter<AllInvoicesState> emit,
+    AllCreditsEvent event,
+    Emitter<AllCreditsState> emit,
   ) async {
     await event.map(
-      initialized: (_) async => emit(AllInvoicesState.initial()),
-      fetch: (value) async {
+      initialized: (_) async => emit(AllCreditsState.initial()),
+      fetchAllCreditsList: (value) async {
         emit(
           state.copyWith(
             failureOrSuccessOption: none(),
-            invoices: <CreditAndInvoiceItem>[],
+            credits: <CreditAndInvoiceItem>[],
             totalCount: 0,
             isLoading: true,
           ),
         );
 
         final failureOrSuccess =
-            await allCreditsAndInvoicesRepository.getAllInvoices(
+            await allCreditsAndInvoicesRepository.getAllCredits(
           salesOrganisation: value.salesOrganisation,
           customerCodeInfo: value.customerCodeInfo,
           sortDirection: value.sortDirection,
@@ -55,12 +55,12 @@ class AllInvoicesBloc extends Bloc<AllInvoicesEvent, AllInvoicesState> {
               ),
             );
           },
-          (paymentData) {
+          (creditData) {
             emit(
               state.copyWith(
-                invoices: paymentData.invoices,
-                totalCount: paymentData.totalCount,
-                canLoadMore: paymentData.invoices.length >= _pageSize,
+                credits: creditData.invoices,
+                totalCount: creditData.totalCount,
+                canLoadMore: creditData.invoices.length >= _pageSize,
                 failureOrSuccessOption: none(),
                 isLoading: false,
               ),
@@ -68,7 +68,7 @@ class AllInvoicesBloc extends Bloc<AllInvoicesEvent, AllInvoicesState> {
           },
         );
       },
-      loadMore: (value) async {
+      loadMoreAllCreditsList: (value) async {
         if (state.isLoading || !state.canLoadMore) return;
 
         emit(
@@ -79,12 +79,12 @@ class AllInvoicesBloc extends Bloc<AllInvoicesEvent, AllInvoicesState> {
         );
 
         final failureOrSuccess =
-            await allCreditsAndInvoicesRepository.getAllInvoices(
+            await allCreditsAndInvoicesRepository.getAllCredits(
           salesOrganisation: value.salesOrganisation,
           customerCodeInfo: value.customerCodeInfo,
           sortDirection: value.sortDirection,
           pageSize: _pageSize,
-          offSet: state.invoices.length,
+          offSet: state.credits.length,
         );
 
         failureOrSuccess.fold(
@@ -96,14 +96,15 @@ class AllInvoicesBloc extends Bloc<AllInvoicesEvent, AllInvoicesState> {
               ),
             );
           },
-          (paymentData) {
-            final updateItemList = List<CreditAndInvoiceItem>.from(state.invoices)
-              ..addAll(paymentData.invoices);
+          (creditData) {
+            final updateItemList =
+                List<CreditAndInvoiceItem>.from(state.credits)
+                  ..addAll(creditData.invoices);
             emit(
               state.copyWith(
-                invoices: updateItemList,
-                totalCount: paymentData.totalCount,
-                canLoadMore: paymentData.invoices.length >= _pageSize,
+                credits: updateItemList,
+                totalCount: creditData.totalCount,
+                canLoadMore: creditData.invoices.length >= _pageSize,
                 failureOrSuccessOption: none(),
                 isLoading: false,
               ),

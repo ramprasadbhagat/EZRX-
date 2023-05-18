@@ -6,15 +6,15 @@ import 'package:ezrxmobile/domain/payments/entities/customer_document_header.dar
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:dartz/dartz.dart';
-import 'package:ezrxmobile/domain/payments/repository/i_all_invoices_repository.dart';
-import 'package:ezrxmobile/infrastructure/payments/datasource/all_invoices_local.dart';
-import 'package:ezrxmobile/infrastructure/payments/datasource/all_invoices_remote.dart';
+import 'package:ezrxmobile/domain/payments/repository/i_all_credits_and_invoices_repository.dart';
+import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_invoices_local.dart';
+import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_invoices_remote.dart';
 
-class AllInvoicesRepository extends IAllInvoicesRepository {
+class AllCreditsAndInvoicesRepository extends IAllCreditsAndInvoicesRepository {
   final Config config;
-  final AllInvoicesLocalDataSource localDataSource;
-  final AllInvoicesRemoteDataSource remoteDataSource;
-  AllInvoicesRepository({
+  final AllCreditsAndInvoicesLocalDataSource localDataSource;
+  final AllCreditsAndInvoicesRemoteDataSource remoteDataSource;
+  AllCreditsAndInvoicesRepository({
     required this.config,
     required this.localDataSource,
     required this.remoteDataSource,
@@ -62,7 +62,7 @@ class AllInvoicesRepository extends IAllInvoicesRepository {
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
-        final response = await localDataSource.getAllInvoices();
+        final response = await localDataSource.getCustomerDocumentHeader();
 
         return Right(response);
       } catch (e) {
@@ -76,6 +76,41 @@ class AllInvoicesRepository extends IAllInvoicesRepository {
         salesOrg: salesOrganisation.salesOrg.getOrCrash(),
         customerCode: customerCodeInfo.customerCodeSoldTo,
         sortDirection: sortDirection,
+        pageSize: pageSize,
+        offSet: offSet,
+      );
+
+      return Right(response);
+    } catch (e) {
+      return Left(
+        FailureHandler.handleFailure(e),
+      );
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, CustomerDocumentHeader>> getAllCredits({
+    required SalesOrganisation salesOrganisation,
+    required CustomerCodeInfo customerCodeInfo,
+    required String sortDirection,
+    required int pageSize,
+    required int offSet,
+  }) async {
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final response = await localDataSource.getCustomerDocumentHeader();
+
+        return Right(response);
+      } catch (e) {
+        return Left(
+          FailureHandler.handleFailure(e),
+        );
+      }
+    }
+    try {
+      final response = await remoteDataSource.getAllCredits(
+        salesOrg: salesOrganisation.salesOrg.getOrCrash(),
+        customerCode: customerCodeInfo.customerCodeSoldTo,
         pageSize: pageSize,
         offSet: offSet,
       );

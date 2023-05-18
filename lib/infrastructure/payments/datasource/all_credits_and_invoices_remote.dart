@@ -7,18 +7,18 @@ import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/payments/entities/available_statuses.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_document_header.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
-import 'package:ezrxmobile/infrastructure/payments/datasource/all_invoices_query_mutation.dart';
+import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_invoices_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/available_statuses_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/customer_document_header_dto.dart';
 
-class AllInvoicesRemoteDataSource {
+class AllCreditsAndInvoicesRemoteDataSource {
   HttpService httpService;
-  AllInvoicesQueryMutation allInvoicesQueryMutation;
+  AllCreditsAndInvoicesQueryMutation allCreditsAndInvoicesQueryMutation;
   DataSourceExceptionHandler dataSourceExceptionHandler;
   Config config;
-  AllInvoicesRemoteDataSource({
+  AllCreditsAndInvoicesRemoteDataSource({
     required this.httpService,
-    required this.allInvoicesQueryMutation,
+    required this.allCreditsAndInvoicesQueryMutation,
     required this.dataSourceExceptionHandler,
     required this.config,
   });
@@ -34,7 +34,8 @@ class AllInvoicesRemoteDataSource {
       url: '${config.urlConstants}ezpay',
       data: jsonEncode(
         {
-          'query': allInvoicesQueryMutation.getAvailableStatusesQuery(),
+          'query':
+              allCreditsAndInvoicesQueryMutation.getAvailableStatusesQuery(),
           'variables': {
             'request': {
               'statusFor': 'DebitItems',
@@ -65,7 +66,8 @@ class AllInvoicesRemoteDataSource {
       url: '${config.urlConstants}ezpay',
       data: jsonEncode(
         {
-          'query': allInvoicesQueryMutation.getAllInvoicesQuery(),
+          'query': allCreditsAndInvoicesQueryMutation
+              .getCustomerDocumentHeaderQuery(),
           'variables': {
             'input': {
               'customerCode': customerCode,
@@ -83,6 +85,44 @@ class AllInvoicesRemoteDataSource {
                 {
                   'field': filterByField,
                   'value': 'S',
+                },
+              ],
+            },
+          },
+        },
+      ),
+    );
+    _exceptionChecker(property: 'customerDocumentHeader', res: res);
+    final data = res.data['data']['customerDocumentHeader'];
+
+    return CustomerDocumentHeaderDto.fromJson(data).toDomain();
+  }
+
+  Future<CustomerDocumentHeader> getAllCredits({
+    required String customerCode,
+    required String salesOrg,
+    required int offSet,
+    required int pageSize,
+  }) async {
+    final res = await httpService.request(
+      method: 'POST',
+      url: '${config.urlConstants}ezpay',
+      data: jsonEncode(
+        {
+          'query': allCreditsAndInvoicesQueryMutation
+              .getCustomerDocumentHeaderQuery(),
+          'variables': {
+            'input': {
+              'customerCode': customerCode,
+              'salesOrg': salesOrg,
+              'first': pageSize,
+              'after': offSet,
+              'excelFor': 'Credit',
+              'orderBy': [],
+              'filterBy': [
+                {
+                  'field': 'debitCreditCode',
+                  'value': 'H',
                 },
               ],
             },

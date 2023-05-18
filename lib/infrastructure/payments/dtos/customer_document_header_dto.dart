@@ -1,5 +1,5 @@
 import 'package:ezrxmobile/domain/payments/entities/customer_document_header.dart';
-import 'package:ezrxmobile/infrastructure/payments/dtos/invoice_item_dto.dart';
+import 'package:ezrxmobile/infrastructure/payments/dtos/credit_and_invoice_item_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'customer_document_header_dto.freezed.dart';
@@ -11,9 +11,9 @@ class CustomerDocumentHeaderDto with _$CustomerDocumentHeaderDto {
   factory CustomerDocumentHeaderDto({
     @JsonKey(
       name: 'documentHeaderList',
-      defaultValue: <InvoiceItemDto>[],
+      defaultValue: <CreditAndInvoiceItemDto>[],
     )
-        required List<InvoiceItemDto> invoices,
+        required List<CreditAndInvoiceItemDto> invoices,
     @JsonKey(
       name: 'totalCount',
       defaultValue: 0,

@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
+import 'package:ezrxmobile/application/payments/all_invoices/all_credits/all_credits_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
@@ -16,17 +16,17 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-final scaffoldKey = GlobalKey<ScaffoldState>();
+class AllCreditsPage extends StatelessWidget {
+  final scaffoldKey = GlobalKey<ScaffoldState>();
 
-class AllInvoicesPage extends StatelessWidget {
-  const AllInvoicesPage({Key? key}) : super(key: key);
+  AllCreditsPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
-        title: const Text('All Invoices').tr(),
+        title: const Text('All Credits').tr(),
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(30.0),
           child: Padding(
@@ -37,7 +37,7 @@ class AllInvoicesPage extends StatelessWidget {
                 Row(
                   children: <Widget>[
                     Text(
-                      "${'Status'.tr()} : ",
+                      'Status'.tr(),
                       key: const ValueKey('status'),
                       style: Theme.of(context).textTheme.titleSmall?.apply(
                             color: ZPColors.kPrimaryColor,
@@ -50,9 +50,7 @@ class AllInvoicesPage extends StatelessWidget {
                 ),
                 FilterCountButton(
                   filterCount: 0,
-                  onTap: () {
-                    //open filter drawer
-                  },
+                  onTap: () {},
                 ),
               ],
             ),
@@ -61,18 +59,18 @@ class AllInvoicesPage extends StatelessWidget {
       ),
       body: AnnouncementBanner(
         currentPath: context.router.currentPath,
-        child: const _AllInvoicesList(),
+        child: const _AllCreditsList(),
       ),
     );
   }
 }
 
-class _AllInvoicesList extends StatelessWidget {
-  const _AllInvoicesList();
+class _AllCreditsList extends StatelessWidget {
+  const _AllCreditsList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AllInvoicesBloc, AllInvoicesState>(
+    return BlocConsumer<AllCreditsBloc, AllCreditsState>(
       listenWhen: (previous, current) =>
           previous.failureOrSuccessOption != current.failureOrSuccessOption,
       listener: (context, state) {
@@ -97,10 +95,10 @@ class _AllInvoicesList extends StatelessWidget {
                 key: const Key('LoaderImage'),
               )
             : ScrollList<CreditAndInvoiceItem>(
-                emptyMessage: 'No Request for Payment found'.tr(),
+                emptyMessage: 'No files found'.tr(),
                 onRefresh: () {
-                  context.read<AllInvoicesBloc>().add(
-                        AllInvoicesEvent.fetch(
+                  context.read<AllCreditsBloc>().add(
+                        AllCreditsEvent.fetchAllCreditsList(
                           salesOrganisation: context
                               .read<SalesOrgBloc>()
                               .state
@@ -114,8 +112,8 @@ class _AllInvoicesList extends StatelessWidget {
                       );
                 },
                 onLoadingMore: () {
-                  context.read<AllInvoicesBloc>().add(
-                        AllInvoicesEvent.loadMore(
+                  context.read<AllCreditsBloc>().add(
+                        AllCreditsEvent.loadMoreAllCreditsList(
                           salesOrganisation: context
                               .read<SalesOrgBloc>()
                               .state
@@ -129,25 +127,25 @@ class _AllInvoicesList extends StatelessWidget {
                       );
                 },
                 isLoading: state.isLoading,
-                itemBuilder: (context, index, item) => _InvoiceItem(
-                  invoiceItem: item,
+                itemBuilder: (context, index, item) => _CreditsItem(
+                  creditsItem: item,
                   configs: configs,
                 ),
-                items: state.invoices,
+                items: state.credits,
               );
       },
     );
   }
 }
 
-class _InvoiceItem extends StatelessWidget {
-  const _InvoiceItem({
+class _CreditsItem extends StatelessWidget {
+  const _CreditsItem({
     Key? key,
-    required this.invoiceItem,
+    required this.creditsItem,
     required this.configs,
   }) : super(key: key);
 
-  final CreditAndInvoiceItem invoiceItem;
+  final CreditAndInvoiceItem creditsItem;
   final SalesOrganisationConfigs configs;
 
   @override
@@ -159,38 +157,32 @@ class _InvoiceItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             BalanceTextRow(
-              keyText: 'Due Date'.tr(),
-              valueText: invoiceItem.netDueDate.toValidDateString,
+              keyText: 'Document Date'.tr(),
+              valueText: creditsItem.documentDate.toValidDateString,
               keyFlex: 1,
               valueFlex: 1,
             ),
             BalanceTextRow(
               keyText: 'Document Number'.tr(),
-              valueText: invoiceItem.accountingDocument,
+              valueText: creditsItem.accountingDocument,
               keyFlex: 1,
               valueFlex: 1,
             ),
             BalanceTextRow(
-              keyText: 'Document Date'.tr(),
-              valueText: invoiceItem.documentDate.toValidDateString,
-              keyFlex: 1,
-              valueFlex: 1,
-            ),
-            BalanceTextRow(
-              keyText: 'Debit Value (SGD)'.tr(),
+              keyText: 'Credit Amount'.tr(),
               valueText: StringUtils.displayPrice(
                 configs,
-                invoiceItem.amountInTransactionCurrency,
+                creditsItem.amountInTransactionCurrency,
               ),
               keyFlex: 1,
               valueFlex: 1,
             ),
             BalanceTextRow(
               keyText: 'Status'.tr(),
-              valueText: invoiceItem.invoiceProcessingStatus,
+              valueText: creditsItem.invoiceProcessingStatus,
               keyFlex: 1,
               valueFlex: 1,
-              isStatus: true,
+              valueColor: ZPColors.kPrimaryColor,
             ),
           ],
         ),

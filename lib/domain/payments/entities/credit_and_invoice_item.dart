@@ -1,12 +1,12 @@
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'invoice_item.freezed.dart';
+part 'credit_and_invoice_item.freezed.dart';
 
 @freezed
-class InvoiceItem with _$InvoiceItem {
-  const InvoiceItem._();
-  factory InvoiceItem({
+class CreditAndInvoiceItem with _$CreditAndInvoiceItem {
+  const CreditAndInvoiceItem._();
+  factory CreditAndInvoiceItem({
     required String companyCode,
     required String bpCustomerNumber,
     required String accountingDocument,
@@ -62,9 +62,9 @@ class InvoiceItem with _$InvoiceItem {
     required String invoiceIsResidualForInference,
     required String returnId,
     required String orderId,
-  }) = _InvoiceItem;
+  }) = _CreditAndInvoiceItem;
 
-  factory InvoiceItem.empty() => InvoiceItem(
+  factory CreditAndInvoiceItem.empty() => CreditAndInvoiceItem(
         companyCode: '',
         bpCustomerNumber: '',
         accountingDocument: '',
@@ -74,7 +74,7 @@ class InvoiceItem with _$InvoiceItem {
         specialGLCode: '',
         postingKey: '',
         postingKeyName: '',
-        netDueDate:  DateTimeStringValue(''),
+        netDueDate: DateTimeStringValue(''),
         postingDate: '',
         transactionCurrency: '',
         billingDocument: '',

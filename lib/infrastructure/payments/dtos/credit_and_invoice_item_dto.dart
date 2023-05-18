@@ -1,14 +1,14 @@
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/payments/entities/invoice_item.dart';
+import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'invoice_item_dto.freezed.dart';
-part 'invoice_item_dto.g.dart';
+part 'credit_and_invoice_item_dto.freezed.dart';
+part 'credit_and_invoice_item_dto.g.dart';
 
 @freezed
-class InvoiceItemDto with _$InvoiceItemDto {
-  const InvoiceItemDto._();
-  factory InvoiceItemDto({
+class CreditAndInvoiceItemDto with _$CreditAndInvoiceItemDto {
+  const CreditAndInvoiceItemDto._();
+  factory CreditAndInvoiceItemDto({
     @JsonKey(
       name: 'companyCode',
       defaultValue: '',
@@ -284,10 +284,10 @@ class InvoiceItemDto with _$InvoiceItemDto {
       defaultValue: '',
     )
         required String orderId,
-  }) = _InvoiceItemDto;
+  }) = _CreditAndInvoiceItemDto;
 
-  InvoiceItem toDomain() {
-    return InvoiceItem(
+  CreditAndInvoiceItem toDomain() {
+    return CreditAndInvoiceItem(
       companyCode: companyCode,
       bpCustomerNumber: bpCustomerNumber,
       accountingDocument: accountingDocument,
@@ -346,6 +346,6 @@ class InvoiceItemDto with _$InvoiceItemDto {
     );
   }
 
-  factory InvoiceItemDto.fromJson(Map<String, dynamic> json) =>
-      _$InvoiceItemDtoFromJson(json);
+  factory CreditAndInvoiceItemDto.fromJson(Map<String, dynamic> json) =>
+      _$CreditAndInvoiceItemDtoFromJson(json);
 }

@@ -1,13 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'invoice_item_dto.dart';
+part of 'credit_and_invoice_item_dto.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_InvoiceItemDto _$$_InvoiceItemDtoFromJson(Map<String, dynamic> json) =>
-    _$_InvoiceItemDto(
+_$_CreditAndInvoiceItemDto _$$_CreditAndInvoiceItemDtoFromJson(
+        Map<String, dynamic> json) =>
+    _$_CreditAndInvoiceItemDto(
       companyCode: json['companyCode'] as String? ?? '',
       bpCustomerNumber: json['bpCustomerNumber'] as String? ?? '',
       accountingDocument: json['accountingDocument'] as String? ?? '',
@@ -69,7 +70,8 @@ _$_InvoiceItemDto _$$_InvoiceItemDtoFromJson(Map<String, dynamic> json) =>
       orderId: json['orderId'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_InvoiceItemDtoToJson(_$_InvoiceItemDto instance) =>
+Map<String, dynamic> _$$_CreditAndInvoiceItemDtoToJson(
+        _$_CreditAndInvoiceItemDto instance) =>
     <String, dynamic>{
       'companyCode': instance.companyCode,
       'bpCustomerNumber': instance.bpCustomerNumber,

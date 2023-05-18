@@ -8,6 +8,7 @@ import 'package:ezrxmobile/application/admin_po_attachment/filter/admin_po_attac
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_material_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_list_bloc.dart';
 import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
+import 'package:ezrxmobile/application/payments/all_invoices/all_credits/all_credits_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_list_bloc.dart';
@@ -385,6 +386,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider<AllInvoicesBloc>(
           create: (context) => locator<AllInvoicesBloc>(),
+        ),
+        BlocProvider<AllCreditsBloc>(
+          create: (context) => locator<AllCreditsBloc>(),
         ),
         BlocProvider<ManagePaymentMethodsBloc>(
           create: (context) => locator<ManagePaymentMethodsBloc>(),

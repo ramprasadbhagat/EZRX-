@@ -21,8 +21,10 @@ CustomerDocumentHeaderDto _$CustomerDocumentHeaderDtoFromJson(
 
 /// @nodoc
 mixin _$CustomerDocumentHeaderDto {
-  @JsonKey(name: 'documentHeaderList', defaultValue: <InvoiceItemDto>[])
-  List<InvoiceItemDto> get invoices => throw _privateConstructorUsedError;
+  @JsonKey(
+      name: 'documentHeaderList', defaultValue: <CreditAndInvoiceItemDto>[])
+  List<CreditAndInvoiceItemDto> get invoices =>
+      throw _privateConstructorUsedError;
   @JsonKey(name: 'totalCount', defaultValue: 0)
   int get totalCount => throw _privateConstructorUsedError;
 
@@ -39,8 +41,8 @@ abstract class $CustomerDocumentHeaderDtoCopyWith<$Res> {
       _$CustomerDocumentHeaderDtoCopyWithImpl<$Res, CustomerDocumentHeaderDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'documentHeaderList', defaultValue: <InvoiceItemDto>[])
-          List<InvoiceItemDto> invoices,
+      {@JsonKey(name: 'documentHeaderList', defaultValue: <CreditAndInvoiceItemDto>[])
+          List<CreditAndInvoiceItemDto> invoices,
       @JsonKey(name: 'totalCount', defaultValue: 0)
           int totalCount});
 }
@@ -66,7 +68,7 @@ class _$CustomerDocumentHeaderDtoCopyWithImpl<$Res,
       invoices: null == invoices
           ? _value.invoices
           : invoices // ignore: cast_nullable_to_non_nullable
-              as List<InvoiceItemDto>,
+              as List<CreditAndInvoiceItemDto>,
       totalCount: null == totalCount
           ? _value.totalCount
           : totalCount // ignore: cast_nullable_to_non_nullable
@@ -85,8 +87,8 @@ abstract class _$$_CustomerDocumentHeaderDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'documentHeaderList', defaultValue: <InvoiceItemDto>[])
-          List<InvoiceItemDto> invoices,
+      {@JsonKey(name: 'documentHeaderList', defaultValue: <CreditAndInvoiceItemDto>[])
+          List<CreditAndInvoiceItemDto> invoices,
       @JsonKey(name: 'totalCount', defaultValue: 0)
           int totalCount});
 }
@@ -111,7 +113,7 @@ class __$$_CustomerDocumentHeaderDtoCopyWithImpl<$Res>
       invoices: null == invoices
           ? _value._invoices
           : invoices // ignore: cast_nullable_to_non_nullable
-              as List<InvoiceItemDto>,
+              as List<CreditAndInvoiceItemDto>,
       totalCount: null == totalCount
           ? _value.totalCount
           : totalCount // ignore: cast_nullable_to_non_nullable
@@ -124,8 +126,8 @@ class __$$_CustomerDocumentHeaderDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_CustomerDocumentHeaderDto extends _CustomerDocumentHeaderDto {
   _$_CustomerDocumentHeaderDto(
-      {@JsonKey(name: 'documentHeaderList', defaultValue: <InvoiceItemDto>[])
-          required final List<InvoiceItemDto> invoices,
+      {@JsonKey(name: 'documentHeaderList', defaultValue: <CreditAndInvoiceItemDto>[])
+          required final List<CreditAndInvoiceItemDto> invoices,
       @JsonKey(name: 'totalCount', defaultValue: 0)
           required this.totalCount})
       : _invoices = invoices,
@@ -134,10 +136,11 @@ class _$_CustomerDocumentHeaderDto extends _CustomerDocumentHeaderDto {
   factory _$_CustomerDocumentHeaderDto.fromJson(Map<String, dynamic> json) =>
       _$$_CustomerDocumentHeaderDtoFromJson(json);
 
-  final List<InvoiceItemDto> _invoices;
+  final List<CreditAndInvoiceItemDto> _invoices;
   @override
-  @JsonKey(name: 'documentHeaderList', defaultValue: <InvoiceItemDto>[])
-  List<InvoiceItemDto> get invoices {
+  @JsonKey(
+      name: 'documentHeaderList', defaultValue: <CreditAndInvoiceItemDto>[])
+  List<CreditAndInvoiceItemDto> get invoices {
     if (_invoices is EqualUnmodifiableListView) return _invoices;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_invoices);
@@ -184,8 +187,8 @@ class _$_CustomerDocumentHeaderDto extends _CustomerDocumentHeaderDto {
 
 abstract class _CustomerDocumentHeaderDto extends CustomerDocumentHeaderDto {
   factory _CustomerDocumentHeaderDto(
-      {@JsonKey(name: 'documentHeaderList', defaultValue: <InvoiceItemDto>[])
-          required final List<InvoiceItemDto> invoices,
+      {@JsonKey(name: 'documentHeaderList', defaultValue: <CreditAndInvoiceItemDto>[])
+          required final List<CreditAndInvoiceItemDto> invoices,
       @JsonKey(name: 'totalCount', defaultValue: 0)
           required final int totalCount}) = _$_CustomerDocumentHeaderDto;
   _CustomerDocumentHeaderDto._() : super._();
@@ -194,8 +197,9 @@ abstract class _CustomerDocumentHeaderDto extends CustomerDocumentHeaderDto {
       _$_CustomerDocumentHeaderDto.fromJson;
 
   @override
-  @JsonKey(name: 'documentHeaderList', defaultValue: <InvoiceItemDto>[])
-  List<InvoiceItemDto> get invoices;
+  @JsonKey(
+      name: 'documentHeaderList', defaultValue: <CreditAndInvoiceItemDto>[])
+  List<CreditAndInvoiceItemDto> get invoices;
   @override
   @JsonKey(name: 'totalCount', defaultValue: 0)
   int get totalCount;

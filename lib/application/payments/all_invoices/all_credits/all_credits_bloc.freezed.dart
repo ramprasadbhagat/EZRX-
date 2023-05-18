@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'all_invoices_bloc.dart';
+part of 'all_credits_bloc.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,16 +15,16 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$AllInvoicesEvent {
+mixin _$AllCreditsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, String sortDirection)
-        fetch,
+        fetchAllCreditsList,
     required TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, String sortDirection)
-        loadMore,
+        loadMoreAllCreditsList,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -32,10 +32,10 @@ mixin _$AllInvoicesEvent {
     TResult? Function()? initialized,
     TResult? Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, String sortDirection)?
-        fetch,
+        fetchAllCreditsList,
     TResult? Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, String sortDirection)?
-        loadMore,
+        loadMoreAllCreditsList,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -43,48 +43,49 @@ mixin _$AllInvoicesEvent {
     TResult Function()? initialized,
     TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, String sortDirection)?
-        fetch,
+        fetchAllCreditsList,
     TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, String sortDirection)?
-        loadMore,
+        loadMoreAllCreditsList,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_initialized value) initialized,
-    required TResult Function(_Fetch value) fetch,
-    required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_FetchAllCreditsList value) fetchAllCreditsList,
+    required TResult Function(_LoadMoreAllCreditsList value)
+        loadMoreAllCreditsList,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initialized value)? initialized,
-    TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_FetchAllCreditsList value)? fetchAllCreditsList,
+    TResult? Function(_LoadMoreAllCreditsList value)? loadMoreAllCreditsList,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_FetchAllCreditsList value)? fetchAllCreditsList,
+    TResult Function(_LoadMoreAllCreditsList value)? loadMoreAllCreditsList,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $AllInvoicesEventCopyWith<$Res> {
-  factory $AllInvoicesEventCopyWith(
-          AllInvoicesEvent value, $Res Function(AllInvoicesEvent) then) =
-      _$AllInvoicesEventCopyWithImpl<$Res, AllInvoicesEvent>;
+abstract class $AllCreditsEventCopyWith<$Res> {
+  factory $AllCreditsEventCopyWith(
+          AllCreditsEvent value, $Res Function(AllCreditsEvent) then) =
+      _$AllCreditsEventCopyWithImpl<$Res, AllCreditsEvent>;
 }
 
 /// @nodoc
-class _$AllInvoicesEventCopyWithImpl<$Res, $Val extends AllInvoicesEvent>
-    implements $AllInvoicesEventCopyWith<$Res> {
-  _$AllInvoicesEventCopyWithImpl(this._value, this._then);
+class _$AllCreditsEventCopyWithImpl<$Res, $Val extends AllCreditsEvent>
+    implements $AllCreditsEventCopyWith<$Res> {
+  _$AllCreditsEventCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -101,7 +102,7 @@ abstract class _$$_initializedCopyWith<$Res> {
 
 /// @nodoc
 class __$$_initializedCopyWithImpl<$Res>
-    extends _$AllInvoicesEventCopyWithImpl<$Res, _$_initialized>
+    extends _$AllCreditsEventCopyWithImpl<$Res, _$_initialized>
     implements _$$_initializedCopyWith<$Res> {
   __$$_initializedCopyWithImpl(
       _$_initialized _value, $Res Function(_$_initialized) _then)
@@ -115,7 +116,7 @@ class _$_initialized implements _initialized {
 
   @override
   String toString() {
-    return 'AllInvoicesEvent.initialized()';
+    return 'AllCreditsEvent.initialized()';
   }
 
   @override
@@ -133,10 +134,10 @@ class _$_initialized implements _initialized {
     required TResult Function() initialized,
     required TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, String sortDirection)
-        fetch,
+        fetchAllCreditsList,
     required TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, String sortDirection)
-        loadMore,
+        loadMoreAllCreditsList,
   }) {
     return initialized();
   }
@@ -147,10 +148,10 @@ class _$_initialized implements _initialized {
     TResult? Function()? initialized,
     TResult? Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, String sortDirection)?
-        fetch,
+        fetchAllCreditsList,
     TResult? Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, String sortDirection)?
-        loadMore,
+        loadMoreAllCreditsList,
   }) {
     return initialized?.call();
   }
@@ -161,10 +162,10 @@ class _$_initialized implements _initialized {
     TResult Function()? initialized,
     TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, String sortDirection)?
-        fetch,
+        fetchAllCreditsList,
     TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, String sortDirection)?
-        loadMore,
+        loadMoreAllCreditsList,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -177,8 +178,9 @@ class _$_initialized implements _initialized {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_initialized value) initialized,
-    required TResult Function(_Fetch value) fetch,
-    required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_FetchAllCreditsList value) fetchAllCreditsList,
+    required TResult Function(_LoadMoreAllCreditsList value)
+        loadMoreAllCreditsList,
   }) {
     return initialized(this);
   }
@@ -187,8 +189,8 @@ class _$_initialized implements _initialized {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initialized value)? initialized,
-    TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_FetchAllCreditsList value)? fetchAllCreditsList,
+    TResult? Function(_LoadMoreAllCreditsList value)? loadMoreAllCreditsList,
   }) {
     return initialized?.call(this);
   }
@@ -197,8 +199,8 @@ class _$_initialized implements _initialized {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_FetchAllCreditsList value)? fetchAllCreditsList,
+    TResult Function(_LoadMoreAllCreditsList value)? loadMoreAllCreditsList,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -208,14 +210,15 @@ class _$_initialized implements _initialized {
   }
 }
 
-abstract class _initialized implements AllInvoicesEvent {
+abstract class _initialized implements AllCreditsEvent {
   const factory _initialized() = _$_initialized;
 }
 
 /// @nodoc
-abstract class _$$_FetchCopyWith<$Res> {
-  factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
-      __$$_FetchCopyWithImpl<$Res>;
+abstract class _$$_FetchAllCreditsListCopyWith<$Res> {
+  factory _$$_FetchAllCreditsListCopyWith(_$_FetchAllCreditsList value,
+          $Res Function(_$_FetchAllCreditsList) then) =
+      __$$_FetchAllCreditsListCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {SalesOrganisation salesOrganisation,
@@ -227,10 +230,11 @@ abstract class _$$_FetchCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_FetchCopyWithImpl<$Res>
-    extends _$AllInvoicesEventCopyWithImpl<$Res, _$_Fetch>
-    implements _$$_FetchCopyWith<$Res> {
-  __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
+class __$$_FetchAllCreditsListCopyWithImpl<$Res>
+    extends _$AllCreditsEventCopyWithImpl<$Res, _$_FetchAllCreditsList>
+    implements _$$_FetchAllCreditsListCopyWith<$Res> {
+  __$$_FetchAllCreditsListCopyWithImpl(_$_FetchAllCreditsList _value,
+      $Res Function(_$_FetchAllCreditsList) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -240,7 +244,7 @@ class __$$_FetchCopyWithImpl<$Res>
     Object? customerCodeInfo = null,
     Object? sortDirection = null,
   }) {
-    return _then(_$_Fetch(
+    return _then(_$_FetchAllCreditsList(
       salesOrganisation: null == salesOrganisation
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
@@ -275,8 +279,8 @@ class __$$_FetchCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Fetch implements _Fetch {
-  const _$_Fetch(
+class _$_FetchAllCreditsList implements _FetchAllCreditsList {
+  const _$_FetchAllCreditsList(
       {required this.salesOrganisation,
       required this.customerCodeInfo,
       required this.sortDirection});
@@ -290,14 +294,14 @@ class _$_Fetch implements _Fetch {
 
   @override
   String toString() {
-    return 'AllInvoicesEvent.fetch(salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, sortDirection: $sortDirection)';
+    return 'AllCreditsEvent.fetchAllCreditsList(salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, sortDirection: $sortDirection)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Fetch &&
+            other is _$_FetchAllCreditsList &&
             (identical(other.salesOrganisation, salesOrganisation) ||
                 other.salesOrganisation == salesOrganisation) &&
             (identical(other.customerCodeInfo, customerCodeInfo) ||
@@ -313,8 +317,9 @@ class _$_Fetch implements _Fetch {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
-      __$$_FetchCopyWithImpl<_$_Fetch>(this, _$identity);
+  _$$_FetchAllCreditsListCopyWith<_$_FetchAllCreditsList> get copyWith =>
+      __$$_FetchAllCreditsListCopyWithImpl<_$_FetchAllCreditsList>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -322,12 +327,13 @@ class _$_Fetch implements _Fetch {
     required TResult Function() initialized,
     required TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, String sortDirection)
-        fetch,
+        fetchAllCreditsList,
     required TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, String sortDirection)
-        loadMore,
+        loadMoreAllCreditsList,
   }) {
-    return fetch(salesOrganisation, customerCodeInfo, sortDirection);
+    return fetchAllCreditsList(
+        salesOrganisation, customerCodeInfo, sortDirection);
   }
 
   @override
@@ -336,12 +342,13 @@ class _$_Fetch implements _Fetch {
     TResult? Function()? initialized,
     TResult? Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, String sortDirection)?
-        fetch,
+        fetchAllCreditsList,
     TResult? Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, String sortDirection)?
-        loadMore,
+        loadMoreAllCreditsList,
   }) {
-    return fetch?.call(salesOrganisation, customerCodeInfo, sortDirection);
+    return fetchAllCreditsList?.call(
+        salesOrganisation, customerCodeInfo, sortDirection);
   }
 
   @override
@@ -350,14 +357,15 @@ class _$_Fetch implements _Fetch {
     TResult Function()? initialized,
     TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, String sortDirection)?
-        fetch,
+        fetchAllCreditsList,
     TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, String sortDirection)?
-        loadMore,
+        loadMoreAllCreditsList,
     required TResult orElse(),
   }) {
-    if (fetch != null) {
-      return fetch(salesOrganisation, customerCodeInfo, sortDirection);
+    if (fetchAllCreditsList != null) {
+      return fetchAllCreditsList(
+          salesOrganisation, customerCodeInfo, sortDirection);
     }
     return orElse();
   }
@@ -366,56 +374,57 @@ class _$_Fetch implements _Fetch {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_initialized value) initialized,
-    required TResult Function(_Fetch value) fetch,
-    required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_FetchAllCreditsList value) fetchAllCreditsList,
+    required TResult Function(_LoadMoreAllCreditsList value)
+        loadMoreAllCreditsList,
   }) {
-    return fetch(this);
+    return fetchAllCreditsList(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initialized value)? initialized,
-    TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_FetchAllCreditsList value)? fetchAllCreditsList,
+    TResult? Function(_LoadMoreAllCreditsList value)? loadMoreAllCreditsList,
   }) {
-    return fetch?.call(this);
+    return fetchAllCreditsList?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_FetchAllCreditsList value)? fetchAllCreditsList,
+    TResult Function(_LoadMoreAllCreditsList value)? loadMoreAllCreditsList,
     required TResult orElse(),
   }) {
-    if (fetch != null) {
-      return fetch(this);
+    if (fetchAllCreditsList != null) {
+      return fetchAllCreditsList(this);
     }
     return orElse();
   }
 }
 
-abstract class _Fetch implements AllInvoicesEvent {
-  const factory _Fetch(
+abstract class _FetchAllCreditsList implements AllCreditsEvent {
+  const factory _FetchAllCreditsList(
       {required final SalesOrganisation salesOrganisation,
       required final CustomerCodeInfo customerCodeInfo,
-      required final String sortDirection}) = _$_Fetch;
+      required final String sortDirection}) = _$_FetchAllCreditsList;
 
   SalesOrganisation get salesOrganisation;
   CustomerCodeInfo get customerCodeInfo;
   String get sortDirection;
   @JsonKey(ignore: true)
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
+  _$$_FetchAllCreditsListCopyWith<_$_FetchAllCreditsList> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_LoadMoreCopyWith<$Res> {
-  factory _$$_LoadMoreCopyWith(
-          _$_LoadMore value, $Res Function(_$_LoadMore) then) =
-      __$$_LoadMoreCopyWithImpl<$Res>;
+abstract class _$$_LoadMoreAllCreditsListCopyWith<$Res> {
+  factory _$$_LoadMoreAllCreditsListCopyWith(_$_LoadMoreAllCreditsList value,
+          $Res Function(_$_LoadMoreAllCreditsList) then) =
+      __$$_LoadMoreAllCreditsListCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {SalesOrganisation salesOrganisation,
@@ -427,11 +436,11 @@ abstract class _$$_LoadMoreCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_LoadMoreCopyWithImpl<$Res>
-    extends _$AllInvoicesEventCopyWithImpl<$Res, _$_LoadMore>
-    implements _$$_LoadMoreCopyWith<$Res> {
-  __$$_LoadMoreCopyWithImpl(
-      _$_LoadMore _value, $Res Function(_$_LoadMore) _then)
+class __$$_LoadMoreAllCreditsListCopyWithImpl<$Res>
+    extends _$AllCreditsEventCopyWithImpl<$Res, _$_LoadMoreAllCreditsList>
+    implements _$$_LoadMoreAllCreditsListCopyWith<$Res> {
+  __$$_LoadMoreAllCreditsListCopyWithImpl(_$_LoadMoreAllCreditsList _value,
+      $Res Function(_$_LoadMoreAllCreditsList) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -441,7 +450,7 @@ class __$$_LoadMoreCopyWithImpl<$Res>
     Object? customerCodeInfo = null,
     Object? sortDirection = null,
   }) {
-    return _then(_$_LoadMore(
+    return _then(_$_LoadMoreAllCreditsList(
       salesOrganisation: null == salesOrganisation
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
@@ -476,8 +485,8 @@ class __$$_LoadMoreCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_LoadMore implements _LoadMore {
-  const _$_LoadMore(
+class _$_LoadMoreAllCreditsList implements _LoadMoreAllCreditsList {
+  const _$_LoadMoreAllCreditsList(
       {required this.salesOrganisation,
       required this.customerCodeInfo,
       required this.sortDirection});
@@ -491,14 +500,14 @@ class _$_LoadMore implements _LoadMore {
 
   @override
   String toString() {
-    return 'AllInvoicesEvent.loadMore(salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, sortDirection: $sortDirection)';
+    return 'AllCreditsEvent.loadMoreAllCreditsList(salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, sortDirection: $sortDirection)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_LoadMore &&
+            other is _$_LoadMoreAllCreditsList &&
             (identical(other.salesOrganisation, salesOrganisation) ||
                 other.salesOrganisation == salesOrganisation) &&
             (identical(other.customerCodeInfo, customerCodeInfo) ||
@@ -514,8 +523,9 @@ class _$_LoadMore implements _LoadMore {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_LoadMoreCopyWith<_$_LoadMore> get copyWith =>
-      __$$_LoadMoreCopyWithImpl<_$_LoadMore>(this, _$identity);
+  _$$_LoadMoreAllCreditsListCopyWith<_$_LoadMoreAllCreditsList> get copyWith =>
+      __$$_LoadMoreAllCreditsListCopyWithImpl<_$_LoadMoreAllCreditsList>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -523,12 +533,13 @@ class _$_LoadMore implements _LoadMore {
     required TResult Function() initialized,
     required TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, String sortDirection)
-        fetch,
+        fetchAllCreditsList,
     required TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, String sortDirection)
-        loadMore,
+        loadMoreAllCreditsList,
   }) {
-    return loadMore(salesOrganisation, customerCodeInfo, sortDirection);
+    return loadMoreAllCreditsList(
+        salesOrganisation, customerCodeInfo, sortDirection);
   }
 
   @override
@@ -537,12 +548,13 @@ class _$_LoadMore implements _LoadMore {
     TResult? Function()? initialized,
     TResult? Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, String sortDirection)?
-        fetch,
+        fetchAllCreditsList,
     TResult? Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, String sortDirection)?
-        loadMore,
+        loadMoreAllCreditsList,
   }) {
-    return loadMore?.call(salesOrganisation, customerCodeInfo, sortDirection);
+    return loadMoreAllCreditsList?.call(
+        salesOrganisation, customerCodeInfo, sortDirection);
   }
 
   @override
@@ -551,14 +563,15 @@ class _$_LoadMore implements _LoadMore {
     TResult Function()? initialized,
     TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, String sortDirection)?
-        fetch,
+        fetchAllCreditsList,
     TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo, String sortDirection)?
-        loadMore,
+        loadMoreAllCreditsList,
     required TResult orElse(),
   }) {
-    if (loadMore != null) {
-      return loadMore(salesOrganisation, customerCodeInfo, sortDirection);
+    if (loadMoreAllCreditsList != null) {
+      return loadMoreAllCreditsList(
+          salesOrganisation, customerCodeInfo, sortDirection);
     }
     return orElse();
   }
@@ -567,54 +580,55 @@ class _$_LoadMore implements _LoadMore {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_initialized value) initialized,
-    required TResult Function(_Fetch value) fetch,
-    required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_FetchAllCreditsList value) fetchAllCreditsList,
+    required TResult Function(_LoadMoreAllCreditsList value)
+        loadMoreAllCreditsList,
   }) {
-    return loadMore(this);
+    return loadMoreAllCreditsList(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initialized value)? initialized,
-    TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_FetchAllCreditsList value)? fetchAllCreditsList,
+    TResult? Function(_LoadMoreAllCreditsList value)? loadMoreAllCreditsList,
   }) {
-    return loadMore?.call(this);
+    return loadMoreAllCreditsList?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_FetchAllCreditsList value)? fetchAllCreditsList,
+    TResult Function(_LoadMoreAllCreditsList value)? loadMoreAllCreditsList,
     required TResult orElse(),
   }) {
-    if (loadMore != null) {
-      return loadMore(this);
+    if (loadMoreAllCreditsList != null) {
+      return loadMoreAllCreditsList(this);
     }
     return orElse();
   }
 }
 
-abstract class _LoadMore implements AllInvoicesEvent {
-  const factory _LoadMore(
+abstract class _LoadMoreAllCreditsList implements AllCreditsEvent {
+  const factory _LoadMoreAllCreditsList(
       {required final SalesOrganisation salesOrganisation,
       required final CustomerCodeInfo customerCodeInfo,
-      required final String sortDirection}) = _$_LoadMore;
+      required final String sortDirection}) = _$_LoadMoreAllCreditsList;
 
   SalesOrganisation get salesOrganisation;
   CustomerCodeInfo get customerCodeInfo;
   String get sortDirection;
   @JsonKey(ignore: true)
-  _$$_LoadMoreCopyWith<_$_LoadMore> get copyWith =>
+  _$$_LoadMoreAllCreditsListCopyWith<_$_LoadMoreAllCreditsList> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-mixin _$AllInvoicesState {
-  List<CreditAndInvoiceItem> get invoices => throw _privateConstructorUsedError;
+mixin _$AllCreditsState {
+  List<CreditAndInvoiceItem> get credits => throw _privateConstructorUsedError;
   int get totalCount => throw _privateConstructorUsedError;
   String get sortDirection => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption =>
@@ -623,18 +637,18 @@ mixin _$AllInvoicesState {
   bool get canLoadMore => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $AllInvoicesStateCopyWith<AllInvoicesState> get copyWith =>
+  $AllCreditsStateCopyWith<AllCreditsState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $AllInvoicesStateCopyWith<$Res> {
-  factory $AllInvoicesStateCopyWith(
-          AllInvoicesState value, $Res Function(AllInvoicesState) then) =
-      _$AllInvoicesStateCopyWithImpl<$Res, AllInvoicesState>;
+abstract class $AllCreditsStateCopyWith<$Res> {
+  factory $AllCreditsStateCopyWith(
+          AllCreditsState value, $Res Function(AllCreditsState) then) =
+      _$AllCreditsStateCopyWithImpl<$Res, AllCreditsState>;
   @useResult
   $Res call(
-      {List<CreditAndInvoiceItem> invoices,
+      {List<CreditAndInvoiceItem> credits,
       int totalCount,
       String sortDirection,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
@@ -643,9 +657,9 @@ abstract class $AllInvoicesStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$AllInvoicesStateCopyWithImpl<$Res, $Val extends AllInvoicesState>
-    implements $AllInvoicesStateCopyWith<$Res> {
-  _$AllInvoicesStateCopyWithImpl(this._value, this._then);
+class _$AllCreditsStateCopyWithImpl<$Res, $Val extends AllCreditsState>
+    implements $AllCreditsStateCopyWith<$Res> {
+  _$AllCreditsStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -655,7 +669,7 @@ class _$AllInvoicesStateCopyWithImpl<$Res, $Val extends AllInvoicesState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? invoices = null,
+    Object? credits = null,
     Object? totalCount = null,
     Object? sortDirection = null,
     Object? failureOrSuccessOption = null,
@@ -663,9 +677,9 @@ class _$AllInvoicesStateCopyWithImpl<$Res, $Val extends AllInvoicesState>
     Object? canLoadMore = null,
   }) {
     return _then(_value.copyWith(
-      invoices: null == invoices
-          ? _value.invoices
-          : invoices // ignore: cast_nullable_to_non_nullable
+      credits: null == credits
+          ? _value.credits
+          : credits // ignore: cast_nullable_to_non_nullable
               as List<CreditAndInvoiceItem>,
       totalCount: null == totalCount
           ? _value.totalCount
@@ -692,15 +706,15 @@ class _$AllInvoicesStateCopyWithImpl<$Res, $Val extends AllInvoicesState>
 }
 
 /// @nodoc
-abstract class _$$_AllInvoicesStateCopyWith<$Res>
-    implements $AllInvoicesStateCopyWith<$Res> {
-  factory _$$_AllInvoicesStateCopyWith(
-          _$_AllInvoicesState value, $Res Function(_$_AllInvoicesState) then) =
-      __$$_AllInvoicesStateCopyWithImpl<$Res>;
+abstract class _$$_AllCreditsStateCopyWith<$Res>
+    implements $AllCreditsStateCopyWith<$Res> {
+  factory _$$_AllCreditsStateCopyWith(
+          _$_AllCreditsState value, $Res Function(_$_AllCreditsState) then) =
+      __$$_AllCreditsStateCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {List<CreditAndInvoiceItem> invoices,
+      {List<CreditAndInvoiceItem> credits,
       int totalCount,
       String sortDirection,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
@@ -709,27 +723,27 @@ abstract class _$$_AllInvoicesStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AllInvoicesStateCopyWithImpl<$Res>
-    extends _$AllInvoicesStateCopyWithImpl<$Res, _$_AllInvoicesState>
-    implements _$$_AllInvoicesStateCopyWith<$Res> {
-  __$$_AllInvoicesStateCopyWithImpl(
-      _$_AllInvoicesState _value, $Res Function(_$_AllInvoicesState) _then)
+class __$$_AllCreditsStateCopyWithImpl<$Res>
+    extends _$AllCreditsStateCopyWithImpl<$Res, _$_AllCreditsState>
+    implements _$$_AllCreditsStateCopyWith<$Res> {
+  __$$_AllCreditsStateCopyWithImpl(
+      _$_AllCreditsState _value, $Res Function(_$_AllCreditsState) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? invoices = null,
+    Object? credits = null,
     Object? totalCount = null,
     Object? sortDirection = null,
     Object? failureOrSuccessOption = null,
     Object? isLoading = null,
     Object? canLoadMore = null,
   }) {
-    return _then(_$_AllInvoicesState(
-      invoices: null == invoices
-          ? _value._invoices
-          : invoices // ignore: cast_nullable_to_non_nullable
+    return _then(_$_AllCreditsState(
+      credits: null == credits
+          ? _value._credits
+          : credits // ignore: cast_nullable_to_non_nullable
               as List<CreditAndInvoiceItem>,
       totalCount: null == totalCount
           ? _value.totalCount
@@ -757,22 +771,22 @@ class __$$_AllInvoicesStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AllInvoicesState implements _AllInvoicesState {
-  const _$_AllInvoicesState(
-      {required final List<CreditAndInvoiceItem> invoices,
+class _$_AllCreditsState implements _AllCreditsState {
+  const _$_AllCreditsState(
+      {required final List<CreditAndInvoiceItem> credits,
       required this.totalCount,
       required this.sortDirection,
       required this.failureOrSuccessOption,
       required this.isLoading,
       required this.canLoadMore})
-      : _invoices = invoices;
+      : _credits = credits;
 
-  final List<CreditAndInvoiceItem> _invoices;
+  final List<CreditAndInvoiceItem> _credits;
   @override
-  List<CreditAndInvoiceItem> get invoices {
-    if (_invoices is EqualUnmodifiableListView) return _invoices;
+  List<CreditAndInvoiceItem> get credits {
+    if (_credits is EqualUnmodifiableListView) return _credits;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_invoices);
+    return EqualUnmodifiableListView(_credits);
   }
 
   @override
@@ -788,15 +802,15 @@ class _$_AllInvoicesState implements _AllInvoicesState {
 
   @override
   String toString() {
-    return 'AllInvoicesState(invoices: $invoices, totalCount: $totalCount, sortDirection: $sortDirection, failureOrSuccessOption: $failureOrSuccessOption, isLoading: $isLoading, canLoadMore: $canLoadMore)';
+    return 'AllCreditsState(credits: $credits, totalCount: $totalCount, sortDirection: $sortDirection, failureOrSuccessOption: $failureOrSuccessOption, isLoading: $isLoading, canLoadMore: $canLoadMore)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AllInvoicesState &&
-            const DeepCollectionEquality().equals(other._invoices, _invoices) &&
+            other is _$_AllCreditsState &&
+            const DeepCollectionEquality().equals(other._credits, _credits) &&
             (identical(other.totalCount, totalCount) ||
                 other.totalCount == totalCount) &&
             (identical(other.sortDirection, sortDirection) ||
@@ -812,7 +826,7 @@ class _$_AllInvoicesState implements _AllInvoicesState {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(_invoices),
+      const DeepCollectionEquality().hash(_credits),
       totalCount,
       sortDirection,
       failureOrSuccessOption,
@@ -822,21 +836,21 @@ class _$_AllInvoicesState implements _AllInvoicesState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AllInvoicesStateCopyWith<_$_AllInvoicesState> get copyWith =>
-      __$$_AllInvoicesStateCopyWithImpl<_$_AllInvoicesState>(this, _$identity);
+  _$$_AllCreditsStateCopyWith<_$_AllCreditsState> get copyWith =>
+      __$$_AllCreditsStateCopyWithImpl<_$_AllCreditsState>(this, _$identity);
 }
 
-abstract class _AllInvoicesState implements AllInvoicesState {
-  const factory _AllInvoicesState(
-      {required final List<CreditAndInvoiceItem> invoices,
+abstract class _AllCreditsState implements AllCreditsState {
+  const factory _AllCreditsState(
+      {required final List<CreditAndInvoiceItem> credits,
       required final int totalCount,
       required final String sortDirection,
       required final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       required final bool isLoading,
-      required final bool canLoadMore}) = _$_AllInvoicesState;
+      required final bool canLoadMore}) = _$_AllCreditsState;
 
   @override
-  List<CreditAndInvoiceItem> get invoices;
+  List<CreditAndInvoiceItem> get credits;
   @override
   int get totalCount;
   @override
@@ -849,6 +863,6 @@ abstract class _AllInvoicesState implements AllInvoicesState {
   bool get canLoadMore;
   @override
   @JsonKey(ignore: true)
-  _$$_AllInvoicesStateCopyWith<_$_AllInvoicesState> get copyWith =>
+  _$$_AllCreditsStateCopyWith<_$_AllCreditsState> get copyWith =>
       throw _privateConstructorUsedError;
 }

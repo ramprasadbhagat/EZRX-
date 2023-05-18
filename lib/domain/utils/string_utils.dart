@@ -19,4 +19,3 @@ class StringUtils {
     return '${salesOrgConfig.currency.code} ${formatter.format(price)}';
   }
 }
-          

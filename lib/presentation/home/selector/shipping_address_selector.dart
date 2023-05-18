@@ -19,6 +19,7 @@ import 'package:ezrxmobile/application/order/order_history_list/order_history_li
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
+import 'package:ezrxmobile/application/payments/all_invoices/all_credits/all_credits_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
 import 'package:ezrxmobile/application/returns/request_return/request_return_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_summary/return_summary_bloc.dart';
@@ -196,6 +197,17 @@ class ShipCodeSelector extends StatelessWidget {
 
               context.read<AllInvoicesBloc>().add(
                     AllInvoicesEvent.fetch(
+                      salesOrganisation:
+                          context.read<SalesOrgBloc>().state.salesOrganisation,
+                      customerCodeInfo: context
+                          .read<CustomerCodeBloc>()
+                          .state
+                          .customerCodeInfo,
+                      sortDirection: 'desc',
+                    ),
+                  );
+              context.read<AllCreditsBloc>().add(
+                    AllCreditsEvent.fetchAllCreditsList(
                       salesOrganisation:
                           context.read<SalesOrgBloc>().state.salesOrganisation,
                       customerCodeInfo: context

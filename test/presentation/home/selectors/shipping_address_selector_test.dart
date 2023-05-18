@@ -19,6 +19,7 @@ import 'package:ezrxmobile/application/order/order_history_list/order_history_li
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
+import 'package:ezrxmobile/application/payments/all_invoices/all_credits/all_credits_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_summary/return_summary_bloc.dart';
 import 'package:ezrxmobile/config.dart';
@@ -123,6 +124,9 @@ class ReturnSummaryBlocMock
     extends MockBloc<ReturnSummaryEvent, ReturnSummaryState>
     implements ReturnSummaryBloc {}
 
+class AllCreditsBlocMock extends MockBloc<AllCreditsEvent, AllCreditsState>
+    implements AllCreditsBloc {}
+
 final fakeShipToInfo =
     ShipToInfo.empty().copyWith(shipToCustomerCode: '00001234');
 
@@ -165,6 +169,7 @@ void main() {
   late AdditionalDetailsBlocMock mockAdditionalDetailsBloc;
   late ReturnSummaryBloc returnSummaryBlocMock;
   late AllInvoicesBlocMock allInvoicesBlocMock;
+  late AllCreditsBlocMock allCreditsBlocMock;
 
   final fakeSalesOrg = SalesOrganisation(
     salesOrg: SalesOrg('2601'),
@@ -198,6 +203,7 @@ void main() {
     mockAdditionalDetailsBloc = AdditionalDetailsBlocMock();
     returnSummaryBlocMock = ReturnSummaryBlocMock();
     allInvoicesBlocMock = AllInvoicesBlocMock();
+    allCreditsBlocMock = AllCreditsBlocMock();
   });
 
   setUp(() async {
@@ -292,6 +298,8 @@ void main() {
                 create: (context) => returnSummaryBlocMock),
             BlocProvider<AllInvoicesBloc>(
                 create: (context) => allInvoicesBlocMock),
+            BlocProvider<AllCreditsBloc>(
+                create: (context) => allCreditsBlocMock),
           ],
           child: Material(
             child: Scaffold(

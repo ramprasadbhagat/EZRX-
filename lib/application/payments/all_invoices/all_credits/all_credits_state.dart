@@ -1,21 +1,21 @@
-part of 'all_invoices_bloc.dart';
+part of 'all_credits_bloc.dart';
 
 @freezed
-class AllInvoicesState with _$AllInvoicesState {
-  const factory AllInvoicesState({
-    required List<CreditAndInvoiceItem> invoices,
+class AllCreditsState with _$AllCreditsState {
+  const factory AllCreditsState({
+    required List<CreditAndInvoiceItem> credits,
     required int totalCount,
     required String sortDirection,
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
     required bool isLoading,
     required bool canLoadMore,
-  }) = _AllInvoicesState;
+  }) = _AllCreditsState;
 
-  factory AllInvoicesState.initial() => AllInvoicesState(
+  factory AllCreditsState.initial() => AllCreditsState(
         failureOrSuccessOption: none(),
         isLoading: false,
         canLoadMore: true,
-        invoices: <CreditAndInvoiceItem>[],
+        credits: <CreditAndInvoiceItem>[],
         sortDirection: 'desc',
         totalCount: 0,
       );

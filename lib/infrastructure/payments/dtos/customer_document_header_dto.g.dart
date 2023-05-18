@@ -10,7 +10,8 @@ _$_CustomerDocumentHeaderDto _$$_CustomerDocumentHeaderDtoFromJson(
         Map<String, dynamic> json) =>
     _$_CustomerDocumentHeaderDto(
       invoices: (json['documentHeaderList'] as List<dynamic>?)
-              ?.map((e) => InvoiceItemDto.fromJson(e as Map<String, dynamic>))
+              ?.map((e) =>
+                  CreditAndInvoiceItemDto.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
       totalCount: json['totalCount'] as int? ?? 0,

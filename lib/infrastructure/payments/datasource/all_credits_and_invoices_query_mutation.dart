@@ -1,4 +1,4 @@
-class AllInvoicesQueryMutation {
+class AllCreditsAndInvoicesQueryMutation {
   String getAvailableStatusesQuery() {
     return '''
     query availableStatuses(\$request: availableStatusesRequest!) {
@@ -9,7 +9,7 @@ class AllInvoicesQueryMutation {
     ''';
   }
 
-  String getAllInvoicesQuery() {
+  String getCustomerDocumentHeaderQuery() {
     return '''
     query customerDocumentHeader(\$input: customerDocumentHeaderRequest!) {
       customerDocumentHeader(request: \$input) {

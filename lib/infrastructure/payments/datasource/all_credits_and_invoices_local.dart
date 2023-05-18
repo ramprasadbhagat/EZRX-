@@ -6,8 +6,8 @@ import 'package:ezrxmobile/infrastructure/payments/dtos/available_statuses_dto.d
 import 'package:ezrxmobile/infrastructure/payments/dtos/customer_document_header_dto.dart';
 import 'package:flutter/services.dart';
 
-class AllInvoicesLocalDataSource {
-  AllInvoicesLocalDataSource();
+class AllCreditsAndInvoicesLocalDataSource {
+  AllCreditsAndInvoicesLocalDataSource();
 
   Future<AvailableStatuses> getAvailableStatuses() async {
     final data = json.decode(
@@ -19,8 +19,8 @@ class AllInvoicesLocalDataSource {
 
     return AvailableStatusesDto.fromJson(res).toDomain();
   }
-  
-  Future<CustomerDocumentHeader> getAllInvoices() async {
+
+  Future<CustomerDocumentHeader> getCustomerDocumentHeader() async {
     final data = json.decode(
       await rootBundle.loadString(
         'assets/json/customerDocumentHeaderResponse.json',

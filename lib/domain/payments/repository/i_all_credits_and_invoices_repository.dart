@@ -5,7 +5,7 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/payments/entities/available_statuses.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_document_header.dart';
 
-abstract class IAllInvoicesRepository {
+abstract class IAllCreditsAndInvoicesRepository {
   Future<Either<ApiFailure, CustomerDocumentHeader>> getAllInvoices({
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
@@ -15,6 +15,13 @@ abstract class IAllInvoicesRepository {
   });
   Future<Either<ApiFailure, AvailableStatuses>> getAvailableStatuses({
     required SalesOrganisation salesOrganisation,
+    required int pageSize,
+    required int offSet,
+  });
+  Future<Either<ApiFailure, CustomerDocumentHeader>> getAllCredits({
+    required SalesOrganisation salesOrganisation,
+    required CustomerCodeInfo customerCodeInfo,
+    required String sortDirection,
     required int pageSize,
     required int offSet,
   });

@@ -26,6 +26,7 @@ import 'package:ezrxmobile/application/order/combo_deal/combo_deal_material_deta
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_list_bloc.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_principle_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
+import 'package:ezrxmobile/application/payments/all_invoices/all_credits/all_credits_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_list_bloc.dart';
@@ -217,9 +218,9 @@ import 'package:ezrxmobile/infrastructure/order/repository/payment_term_reposito
 import 'package:ezrxmobile/infrastructure/order/repository/price_override_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/tender_contract_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/valid_customer_material_repository.dart';
-import 'package:ezrxmobile/infrastructure/payments/datasource/all_invoices_local.dart';
-import 'package:ezrxmobile/infrastructure/payments/datasource/all_invoices_query_mutation.dart';
-import 'package:ezrxmobile/infrastructure/payments/datasource/all_invoices_remote.dart';
+import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_invoices_local.dart';
+import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_invoices_query_mutation.dart';
+import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_invoices_remote.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/approver_return_request_information_local.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/approver_return_request_information_remote.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/approver_return_request_query.dart';
@@ -246,7 +247,7 @@ import 'package:ezrxmobile/infrastructure/returns/datasource/usage_code_remote.d
 import 'package:ezrxmobile/infrastructure/returns/datasource/user_restriction_local.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/user_restriction_mutation.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/user_restriction_remote.dart';
-import 'package:ezrxmobile/infrastructure/payments/repository/all_invoices_repository.dart';
+import 'package:ezrxmobile/infrastructure/payments/repository/all_credits_and_invoices_repository.dart';
 import 'package:ezrxmobile/infrastructure/returns/repository/policy_configuration_repository.dart';
 import 'package:ezrxmobile/infrastructure/returns/repository/request_return_repository.dart';
 import 'package:ezrxmobile/infrastructure/returns/repository/return_approver_repository.dart';
@@ -2010,34 +2011,42 @@ void setupLocator() {
     ),
   );
   //============================================================
-  //  All Invoices
+  //  All Invoices and Credits
   //
   //============================================================
 
   locator.registerLazySingleton(
     () => AllInvoicesBloc(
-      allInvoicesRepository: locator<AllInvoicesRepository>(),
+      allCreditsAndInvoicesRepository:
+          locator<AllCreditsAndInvoicesRepository>(),
     ),
   );
   locator.registerLazySingleton(
-    () => AllInvoicesLocalDataSource(),
+    () => AllCreditsAndInvoicesLocalDataSource(),
   );
   locator.registerLazySingleton(
-    () => AllInvoicesQueryMutation(),
+    () => AllCreditsAndInvoicesQueryMutation(),
   );
   locator.registerLazySingleton(
-    () => AllInvoicesRemoteDataSource(
+    () => AllCreditsAndInvoicesRemoteDataSource(
       config: locator<Config>(),
       httpService: locator<HttpService>(),
-      allInvoicesQueryMutation: locator<AllInvoicesQueryMutation>(),
+      allCreditsAndInvoicesQueryMutation:
+          locator<AllCreditsAndInvoicesQueryMutation>(),
       dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
     ),
   );
   locator.registerLazySingleton(
-    () => AllInvoicesRepository(
+    () => AllCreditsAndInvoicesRepository(
       config: locator<Config>(),
-      localDataSource: locator<AllInvoicesLocalDataSource>(),
-      remoteDataSource: locator<AllInvoicesRemoteDataSource>(),
+      localDataSource: locator<AllCreditsAndInvoicesLocalDataSource>(),
+      remoteDataSource: locator<AllCreditsAndInvoicesRemoteDataSource>(),
+    ),
+  );
+  locator.registerLazySingleton(
+    () => AllCreditsBloc(
+      allCreditsAndInvoicesRepository:
+          locator<AllCreditsAndInvoicesRepository>(),
     ),
   );
 

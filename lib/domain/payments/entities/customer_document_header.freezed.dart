@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$CustomerDocumentHeader {
-  List<InvoiceItem> get invoices => throw _privateConstructorUsedError;
+  List<CreditAndInvoiceItem> get invoices => throw _privateConstructorUsedError;
   int get totalCount => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -30,7 +30,7 @@ abstract class $CustomerDocumentHeaderCopyWith<$Res> {
           $Res Function(CustomerDocumentHeader) then) =
       _$CustomerDocumentHeaderCopyWithImpl<$Res, CustomerDocumentHeader>;
   @useResult
-  $Res call({List<InvoiceItem> invoices, int totalCount});
+  $Res call({List<CreditAndInvoiceItem> invoices, int totalCount});
 }
 
 /// @nodoc
@@ -54,7 +54,7 @@ class _$CustomerDocumentHeaderCopyWithImpl<$Res,
       invoices: null == invoices
           ? _value.invoices
           : invoices // ignore: cast_nullable_to_non_nullable
-              as List<InvoiceItem>,
+              as List<CreditAndInvoiceItem>,
       totalCount: null == totalCount
           ? _value.totalCount
           : totalCount // ignore: cast_nullable_to_non_nullable
@@ -71,7 +71,7 @@ abstract class _$$_CustomerDocumentHeaderCopyWith<$Res>
       __$$_CustomerDocumentHeaderCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<InvoiceItem> invoices, int totalCount});
+  $Res call({List<CreditAndInvoiceItem> invoices, int totalCount});
 }
 
 /// @nodoc
@@ -93,7 +93,7 @@ class __$$_CustomerDocumentHeaderCopyWithImpl<$Res>
       invoices: null == invoices
           ? _value._invoices
           : invoices // ignore: cast_nullable_to_non_nullable
-              as List<InvoiceItem>,
+              as List<CreditAndInvoiceItem>,
       totalCount: null == totalCount
           ? _value.totalCount
           : totalCount // ignore: cast_nullable_to_non_nullable
@@ -106,13 +106,14 @@ class __$$_CustomerDocumentHeaderCopyWithImpl<$Res>
 
 class _$_CustomerDocumentHeader extends _CustomerDocumentHeader {
   _$_CustomerDocumentHeader(
-      {required final List<InvoiceItem> invoices, required this.totalCount})
+      {required final List<CreditAndInvoiceItem> invoices,
+      required this.totalCount})
       : _invoices = invoices,
         super._();
 
-  final List<InvoiceItem> _invoices;
+  final List<CreditAndInvoiceItem> _invoices;
   @override
-  List<InvoiceItem> get invoices {
+  List<CreditAndInvoiceItem> get invoices {
     if (_invoices is EqualUnmodifiableListView) return _invoices;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_invoices);
@@ -150,12 +151,12 @@ class _$_CustomerDocumentHeader extends _CustomerDocumentHeader {
 
 abstract class _CustomerDocumentHeader extends CustomerDocumentHeader {
   factory _CustomerDocumentHeader(
-      {required final List<InvoiceItem> invoices,
+      {required final List<CreditAndInvoiceItem> invoices,
       required final int totalCount}) = _$_CustomerDocumentHeader;
   _CustomerDocumentHeader._() : super._();
 
   @override
-  List<InvoiceItem> get invoices;
+  List<CreditAndInvoiceItem> get invoices;
   @override
   int get totalCount;
   @override
