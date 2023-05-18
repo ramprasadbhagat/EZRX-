@@ -41,21 +41,21 @@ build_web_prod:
 build_xctest:
 	@xcodebuild -workspace ios/Runner.xcworkspace -scheme uat -derivedDataPath build/xctest -sdk iphoneos build-for-testing
 	@zip -r ezrx_xctest.zip Debug-iphoneos build/xctest/Build/Products/uat_iphoneos16.4.xctestrun
-make reset_sg_salesorg_config:
+reset_sg_salesorg_config:
 	@fvm flutter test --flavor uat integration_test/sg/${SALESORGCONFIG}
-make reset_my_salesorg_config:
+reset_my_salesorg_config:
 	@fvm flutter test --flavor uat integration_test/my/${SALESORGCONFIG}
-make reset_vn_salesorg_config:
+reset_vn_salesorg_config:
 	@fvm flutter test --flavor uat integration_test/vn/${SALESORGCONFIG}
-make reset_th_salesorg_config:
+reset_th_salesorg_config:
 	@fvm flutter test --flavor uat integration_test/th/${SALESORGCONFIG}
-make reset_tw_salesorg_config:
+reset_tw_salesorg_config:
 	@fvm flutter test --flavor uat integration_test/tw/${SALESORGCONFIG}
-make reset_ph_salesorg_config:
+reset_ph_salesorg_config:
 	@fvm flutter test --flavor uat integration_test/ph/${SALESORGCONFIG}
-make reset_mm_salesorg_config:
+reset_mm_salesorg_config:
 	@fvm flutter test --flavor uat integration_test/mm/${SALESORGCONFIG}
-make reset_kh_salesorg_config:
+reset_kh_salesorg_config:
 	@fvm flutter test --flavor uat integration_test/kh/${SALESORGCONFIG}
 run_sg_client_test:
 	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/sg/${CLIENTUSER}
