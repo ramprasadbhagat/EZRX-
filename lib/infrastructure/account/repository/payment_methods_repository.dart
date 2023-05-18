@@ -3,21 +3,20 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/available_payment_method.dart';
 import 'package:ezrxmobile/domain/account/entities/delete_payment_method.dart';
 import 'package:ezrxmobile/domain/account/entities/edit_payment_method.dart';
-import 'package:ezrxmobile/domain/account/repository/i_payment_configuration_repository.dart';
+import 'package:ezrxmobile/domain/account/repository/i_payment_methods_repository.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
-import 'package:ezrxmobile/infrastructure/account/datasource/payment_configuration_local.dart';
-import 'package:ezrxmobile/infrastructure/account/datasource/payment_configuration_remote.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/payment_methods_local.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/payment_methods_remote.dart';
 
-class PaymentConfigurationRepository
-    implements IPaymentConfigurationRepository {
+class PaymentMethodsRepository implements IPaymentMethodsRepository {
   final Config config;
-  final PaymentConfigurationRemoteDataSource remoteDataSource;
-  final PaymentConfigurationLocalDataSource localDataSource;
+  final PaymentMethodsRemoteDataSource remoteDataSource;
+  final PaymentMethodsLocalDataSource localDataSource;
 
-  PaymentConfigurationRepository({
+  PaymentMethodsRepository({
     required this.config,
     required this.remoteDataSource,
     required this.localDataSource,
@@ -65,7 +64,7 @@ class PaymentConfigurationRepository
       return Right(
         await remoteDataSource.updatePaymentMethods(
           salesOrg: salesOrg.getOrCrash(),
-          oldPaymentMethod: oldPaymentMethod.getOrCrash(),
+          oldPaymentMethod: oldPaymentMethod.getOrDefaultValue(''),
           newPaymentMethod: newPaymentMethod.getOrCrash(),
         ),
       );

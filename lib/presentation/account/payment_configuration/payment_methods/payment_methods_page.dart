@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/add_payment_method/add_payment_method_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/manage_payment_method/manage_payment_methods_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/payment_methods_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/available_payment_method.dart';
@@ -48,6 +49,15 @@ class PaymentMethodsPage extends StatelessWidget {
           },
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          context
+              .read<AddPaymentMethodBloc>()
+              .add(const AddPaymentMethodEvent.initialized());
+          context.router.pushNamed('add_payment_methods');
+        },
+        child: const Icon(Icons.add),
+      ),
     );
   }
 
@@ -93,11 +103,14 @@ class _PaymentMethodListItem extends StatelessWidget {
               CustomSlidableAction(
                 label: 'Delete',
                 icon: Icons.delete_outline,
-                onPressed: (context) => _deletePaymentMethod(
-                  context: context,
-                  paymentMethod: paymentMethod,
-                  deleteIndex: index,
-                ),
+                onPressed: (context) =>
+                    context.read<ManagePaymentMethodsBloc>().add(
+                          ManagePaymentMethodsEvent.deletePaymentMethod(
+                            salesOrg: paymentMethod.salesOrg,
+                            paymentMethod: paymentMethod.paymentMethod,
+                            deleteIndex: index,
+                          ),
+                        ),
               ),
             ],
             borderRadius: 8,
@@ -173,6 +186,7 @@ class _PaymentMethodListItem extends StatelessWidget {
                 deleteIndex: deleteIndex,
               ),
             );
+
         context.router.pop();
       },
       confirmText: 'Delete',

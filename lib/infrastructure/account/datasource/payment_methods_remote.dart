@@ -8,21 +8,21 @@ import 'package:ezrxmobile/domain/account/entities/edit_payment_method.dart';
 import 'package:ezrxmobile/domain/account/error/payment_method_exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
-import 'package:ezrxmobile/infrastructure/account/datasource/payment_configuration_query_mutation.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/payment_methods_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/available_payment_method_dto.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/delete_payment_method_dto.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/edit_payment_method_dto.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 
-class PaymentConfigurationRemoteDataSource {
+class PaymentMethodsRemoteDataSource {
   HttpService httpService;
-  PaymentConfigurationQueryMutation paymentConfigurationQueryMutation;
+  PaymentMethodsQueryMutation paymentMethodsQueryMutation;
   DataSourceExceptionHandler dataSourceExceptionHandler;
   Config config;
 
-  PaymentConfigurationRemoteDataSource({
+  PaymentMethodsRemoteDataSource({
     required this.httpService,
-    required this.paymentConfigurationQueryMutation,
+    required this.paymentMethodsQueryMutation,
     required this.dataSourceExceptionHandler,
     required this.config,
   });
@@ -33,8 +33,8 @@ class PaymentConfigurationRemoteDataSource {
         method: 'POST',
         url: '${config.urlConstants}ezpay',
         data: jsonEncode({
-          'query': paymentConfigurationQueryMutation
-              .getAvailablePaymentMethodsQuery(),
+          'query':
+              paymentMethodsQueryMutation.getAvailablePaymentMethodsQuery(),
           'variables': {'request': {}},
         }),
         apiEndpoint: 'availablePaymentMethods',
@@ -57,8 +57,7 @@ class PaymentConfigurationRemoteDataSource {
         method: 'POST',
         url: '${config.urlConstants}ezpay',
         data: jsonEncode({
-          'query':
-              paymentConfigurationQueryMutation.updatePaymentMethodsMutation(),
+          'query': paymentMethodsQueryMutation.updatePaymentMethodsMutation(),
           'variables': {
             'input': {
               'salesOrg': salesOrg,
@@ -90,8 +89,7 @@ class PaymentConfigurationRemoteDataSource {
         method: 'POST',
         url: '${config.urlConstants}ezpay',
         data: jsonEncode({
-          'query':
-              paymentConfigurationQueryMutation.deletePaymentMethodsMutation(),
+          'query': paymentMethodsQueryMutation.deletePaymentMethodsMutation(),
           'variables': {
             'request': {
               'salesOrg': salesOrg,

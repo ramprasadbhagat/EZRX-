@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/add_payment_method/add_payment_method_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/manage_payment_method/manage_payment_methods_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/payment_methods_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
@@ -42,11 +43,11 @@ import 'package:ezrxmobile/infrastructure/account/datasource/update_sales_org_lo
 import 'package:ezrxmobile/infrastructure/account/datasource/update_sales_org_mutation.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/update_sales_org_remote.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/admin_po_attachment_repository.dart';
-import 'package:ezrxmobile/infrastructure/account/datasource/payment_configuration_local.dart';
-import 'package:ezrxmobile/infrastructure/account/datasource/payment_configuration_query_mutation.dart';
-import 'package:ezrxmobile/infrastructure/account/datasource/payment_configuration_remote.dart';
-import 'package:ezrxmobile/infrastructure/account/repository/payment_configuration_repository.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/update_sales_org_repository.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/payment_methods_remote.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/payment_methods_local.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/payment_methods_query_mutation.dart';
+import 'package:ezrxmobile/infrastructure/account/repository/payment_methods_repository.dart';
 import 'package:ezrxmobile/infrastructure/core/common/device_info.dart';
 import 'package:ezrxmobile/infrastructure/core/common/file_picker.dart';
 import 'package:ezrxmobile/infrastructure/core/common/permission_service.dart';
@@ -1970,37 +1971,42 @@ void setupLocator() {
   //
   //============================================================
 
-  locator.registerLazySingleton(() => PaymentConfigurationLocalDataSource());
+  locator.registerLazySingleton(() => PaymentMethodsLocalDataSource());
 
-  locator.registerLazySingleton(() => PaymentConfigurationQueryMutation());
+  locator.registerLazySingleton(() => PaymentMethodsQueryMutation());
 
   locator.registerLazySingleton(
-    () => PaymentConfigurationRemoteDataSource(
+    () => PaymentMethodsRemoteDataSource(
       httpService: locator<HttpService>(),
-      paymentConfigurationQueryMutation:
-          locator<PaymentConfigurationQueryMutation>(),
+      paymentMethodsQueryMutation: locator<PaymentMethodsQueryMutation>(),
       config: locator<Config>(),
       dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
     ),
   );
 
   locator.registerLazySingleton(
-    () => PaymentConfigurationRepository(
+    () => PaymentMethodsRepository(
       config: locator<Config>(),
-      localDataSource: locator<PaymentConfigurationLocalDataSource>(),
-      remoteDataSource: locator<PaymentConfigurationRemoteDataSource>(),
+      localDataSource: locator<PaymentMethodsLocalDataSource>(),
+      remoteDataSource: locator<PaymentMethodsRemoteDataSource>(),
     ),
   );
 
   locator.registerLazySingleton(
     () => PaymentMethodsBloc(
-      paymentConfigurationRepository: locator<PaymentConfigurationRepository>(),
+      paymentMethodsRepository: locator<PaymentMethodsRepository>(),
     ),
   );
 
   locator.registerLazySingleton(
     () => ManagePaymentMethodsBloc(
-      paymentConfigurationRepository: locator<PaymentConfigurationRepository>(),
+      paymentMethodsRepository: locator<PaymentMethodsRepository>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => AddPaymentMethodBloc(
+      paymentMethodsRepository: locator<PaymentMethodsRepository>(),
     ),
   );
   //============================================================

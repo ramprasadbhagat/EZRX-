@@ -5,7 +5,7 @@ import 'package:ezrxmobile/domain/account/entities/edit_payment_method.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 
-abstract class IPaymentConfigurationRepository {
+abstract class IPaymentMethodsRepository {
   Future<Either<ApiFailure, List<AvailablePaymentMethod>>>
       getAvailablePaymentMethods();
 

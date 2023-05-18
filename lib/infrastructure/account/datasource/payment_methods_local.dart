@@ -8,8 +8,8 @@ import 'package:ezrxmobile/infrastructure/account/dtos/delete_payment_method_dto
 import 'package:ezrxmobile/infrastructure/account/dtos/edit_payment_method_dto.dart';
 import 'package:flutter/services.dart';
 
-class PaymentConfigurationLocalDataSource {
-  PaymentConfigurationLocalDataSource();
+class PaymentMethodsLocalDataSource {
+  PaymentMethodsLocalDataSource();
 
   Future<List<AvailablePaymentMethod>> getAvailablePaymentMethods() async {
     final data = json.decode(

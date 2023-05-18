@@ -1,4 +1,4 @@
-class PaymentConfigurationQueryMutation {
+class PaymentMethodsQueryMutation {
   String getAvailablePaymentMethodsQuery() {
     return '''
       query availablePaymentMethods(\$request: availablePaymentMethodsRequest!) {

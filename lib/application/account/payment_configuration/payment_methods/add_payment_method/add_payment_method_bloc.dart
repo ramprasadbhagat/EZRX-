@@ -5,38 +5,34 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'manage_payment_methods_event.dart';
-part 'manage_payment_methods_state.dart';
-part 'manage_payment_methods_bloc.freezed.dart';
+part 'add_payment_method_event.dart';
+part 'add_payment_method_state.dart';
+part 'add_payment_method_bloc.freezed.dart';
 
-class ManagePaymentMethodsBloc
-    extends Bloc<ManagePaymentMethodsEvent, ManagePaymentMethodsState> {
+class AddPaymentMethodBloc
+    extends Bloc<AddPaymentMethodEvent, AddPaymentMethodState> {
   final IPaymentMethodsRepository paymentMethodsRepository;
 
-  ManagePaymentMethodsBloc({required this.paymentMethodsRepository})
-      : super(ManagePaymentMethodsState.initial()) {
-    on<ManagePaymentMethodsEvent>(_onEvent);
+  AddPaymentMethodBloc({required this.paymentMethodsRepository})
+      : super(AddPaymentMethodState.initial()) {
+    on<AddPaymentMethodEvent>(_onEvent);
   }
 
   Future<void> _onEvent(
-    ManagePaymentMethodsEvent event,
-    Emitter<ManagePaymentMethodsState> emit,
+    AddPaymentMethodEvent event,
+    Emitter<AddPaymentMethodState> emit,
   ) async {
     await event.map(
-      newPaymentMethodChanged: (e) async => emit(
-        state.copyWith(
-          paymentMethod: PaymentMethod(e.paymentMethod),
-          failureOrSuccessOption: none(),
-        ),
-      ),
-      editPaymentMethod: (e) async {
+      initialized: (_) async => emit(AddPaymentMethodState.initial()),
+      addPaymentMethod: (e) async {
         emit(
           state.copyWith(
             showErrorMessages: false,
           ),
         );
         final isPaymentMethodValid = state.paymentMethod.isValid();
-        if (isPaymentMethodValid) {
+        final isSalesOrgValid = state.salesOrg.isValid();
+        if (isPaymentMethodValid && isSalesOrgValid) {
           emit(
             state.copyWith(
               isSubmitting: true,
@@ -45,9 +41,9 @@ class ManagePaymentMethodsBloc
           );
           final failureOrSuccess =
               await paymentMethodsRepository.updatePaymentMethods(
-            salesOrg: e.salesOrg,
-            oldPaymentMethod: e.oldPaymentMethod,
+            salesOrg: state.salesOrg,
             newPaymentMethod: state.paymentMethod,
+            oldPaymentMethod: PaymentMethod(''),
           );
           await failureOrSuccess.fold(
             (failure) {
@@ -58,10 +54,11 @@ class ManagePaymentMethodsBloc
                 ),
               );
             },
-            (editPaymentMethod) async {
+            (addPaymentMethod) async {
               emit(
                 state.copyWith(
                   paymentMethod: PaymentMethod(''),
+                  salesOrg: SalesOrg(''),
                   isSubmitting: false,
                 ),
               );
@@ -73,38 +70,20 @@ class ManagePaymentMethodsBloc
           );
         }
       },
-      deletePaymentMethod: (e) async {
+      paymentMethodChanged: (e) async {
         emit(
           state.copyWith(
-            isSubmitting: true,
-            deleteIndex: e.deleteIndex,
+            paymentMethod: PaymentMethod(e.paymentMethod),
             failureOrSuccessOption: none(),
           ),
         );
-
-        final failureOrSuccess =
-            await paymentMethodsRepository.deletePaymentMethods(
-          salesOrg: e.salesOrg,
-          paymentMethod: e.paymentMethod,
-        );
-        await failureOrSuccess.fold(
-          (failure) {
-            emit(
-              state.copyWith(
-                isSubmitting: false,
-                deleteIndex: -1,
-                failureOrSuccessOption: optionOf(failureOrSuccess),
-              ),
-            );
-          },
-          (deletePaymentMethod) async {
-            emit(
-              state.copyWith(
-                deleteIndex: -1,
-                isSubmitting: false,
-              ),
-            );
-          },
+      },
+      salesOrgChanged: (e) async {
+        emit(
+          state.copyWith(
+            salesOrg: SalesOrg(e.salesOrg),
+            failureOrSuccessOption: none(),
+          ),
         );
       },
     );

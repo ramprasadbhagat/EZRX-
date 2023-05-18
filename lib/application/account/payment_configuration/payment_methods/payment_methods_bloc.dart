@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/available_payment_method.dart';
-import 'package:ezrxmobile/domain/account/repository/i_payment_configuration_repository.dart';
+import 'package:ezrxmobile/domain/account/repository/i_payment_methods_repository.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -11,9 +11,9 @@ part 'payment_methods_bloc.freezed.dart';
 
 class PaymentMethodsBloc
     extends Bloc<PaymentMethodsEvent, PaymentMethodsState> {
-  final IPaymentConfigurationRepository paymentConfigurationRepository;
+  final IPaymentMethodsRepository paymentMethodsRepository;
 
-  PaymentMethodsBloc({required this.paymentConfigurationRepository})
+  PaymentMethodsBloc({required this.paymentMethodsRepository})
       : super(PaymentMethodsState.initial()) {
     on<PaymentMethodsEvent>(_onEvent);
   }
@@ -33,7 +33,7 @@ class PaymentMethodsBloc
         );
 
         final failureOrSuccess =
-            await paymentConfigurationRepository.getAvailablePaymentMethods();
+            await paymentMethodsRepository.getAvailablePaymentMethods();
 
         failureOrSuccess.fold(
           (failure) {

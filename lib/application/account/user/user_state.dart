@@ -25,6 +25,8 @@ class UserState with _$UserState {
   bool get emailNotifications => user.settings.emailNotifications;
   List<SalesOrganisation> get userSalesOrganisations =>
       user.userSalesOrganisations;
+  List<String> get salesOrgValue =>
+      userSalesOrganisations.map((e) => e.salesOrg.getValue()).toList();
   bool get userCanCreateOrder =>
       isNotEmpty && !(isCreateOrderDisabled || user.role.type.isReturnRole);
   bool get showHistoryTab => user.role.type.isCustomer
@@ -35,5 +37,4 @@ class UserState with _$UserState {
           ? user.disableCreateOrder
           : true
       : !user.accessRight.orders;
-
 }
