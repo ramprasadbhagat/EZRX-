@@ -15,7 +15,7 @@ import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/confirm_clear_cart_dialog.dart';
 import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
-import 'package:ezrxmobile/presentation/core/snackbar.dart';
+import 'package:ezrxmobile/presentation/core/search_bar.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -116,48 +116,35 @@ class _AppBarState extends State<_AppBar> {
             ),
           );
         },
-        child: TextFormField(
+        child: SearchBar(
           key: const Key('customerCodeSearchField'),
-          autocorrect: false,
           controller: _searchController,
           enabled: !_customerCodeBloc.state.isFetching,
-          onFieldSubmitted: (value) {
-            if (SearchKey.search(value).isValid()) {
-              _customerCodeBloc.add(CustomerCodeEvent.updateSearchKey(value));
+          onSearchSubmitted: (value) {
+            _customerCodeBloc.add(CustomerCodeEvent.updateSearchKey(value));
+            _customerCodeBloc.add(
+              CustomerCodeEvent.search(
+                userInfo: _userBloc.state.user,
+                selectedSalesOrg: _salesOrgBloc.state.salesOrganisation,
+                hidecustomer: _salesOrgBloc.state.hideCustomer,
+              ),
+            );
+          },
+          suffixIconKey: const Key('clearCustomerCodeSearch'),
+          customValidator: () =>
+              SearchKey.search(_searchController.text).isValid(),
+          onClear: () {
+            if (_searchController.text.isNotEmpty) {
               _customerCodeBloc.add(
-                CustomerCodeEvent.search(
+                CustomerCodeEvent.fetch(
                   userInfo: _userBloc.state.user,
                   selectedSalesOrg: _salesOrgBloc.state.salesOrganisation,
                   hidecustomer: _salesOrgBloc.state.hideCustomer,
                 ),
               );
-            } else {
-              showSnackBar(
-                context: context,
-                message: 'Please enter at least 2 characters.'.tr(),
-              );
             }
           },
-          decoration: InputDecoration(
-            prefixIcon: const Icon(Icons.search),
-            suffixIcon: IconButton(
-              key: const Key('clearCustomerCodeSearch'),
-              icon: const Icon(Icons.clear),
-              onPressed: () {
-                if (_searchController.text.isNotEmpty) {
-                  _customerCodeBloc.add(
-                    CustomerCodeEvent.fetch(
-                      userInfo: _userBloc.state.user,
-                      selectedSalesOrg: _salesOrgBloc.state.salesOrganisation,
-                      hidecustomer: _salesOrgBloc.state.hideCustomer,
-                    ),
-                  );
-                }
-              },
-            ),
-            hintText: 'Search...'.tr(),
-            border: InputBorder.none,
-          ),
+          border: InputBorder.none,
         ),
       ),
     );

@@ -8,11 +8,11 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
+import 'package:ezrxmobile/presentation/core/search_bar.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/cart_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
-import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -69,7 +69,8 @@ class BonusAddPage extends StatelessWidget {
                                       children: <Widget>[
                                         Text(
                                           state.bonus[i].materialNumber
-                                              .displayMatNo.tr(),
+                                              .displayMatNo
+                                              .tr(),
                                           style: Theme.of(context)
                                               .textTheme
                                               .titleSmall
@@ -185,58 +186,40 @@ class _AppBarState extends State<_AppBar> {
         builder: (context, state) {
           _searchController.text = state.searchKey.getOrDefaultValue('');
 
-          return TextFormField(
+          return SearchBar(
             key: Key(
               'addBonusTextField${state.searchKey.getOrDefaultValue('')}',
             ),
             controller: _searchController,
-            autocorrect: false,
             enabled: !state.isFetching,
-            onFieldSubmitted: (value) {
-              if (SearchKey.search(value).isValid()) {
-                bonusMaterialBloc.add(
-                  BonusMaterialEvent.fetch(
-                    user: context.read<UserBloc>().state.user,
-                    salesOrganisation:
-                        context.read<SalesOrgBloc>().state.salesOrganisation,
-                    configs: context.read<SalesOrgBloc>().state.configs,
-                    pickAndPack: context
-                        .read<EligibilityBloc>()
-                        .state
-                        .getPNPValueMaterial,
-                    customerInfo:
-                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                    shipInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
-                    searchKey: value,
-                  ),
-                );
-              } else {
-                showSnackBar(
-                  context: context,
-                  message: 'Please enter at least 2 characters.'.tr(),
-                );
-              }
+            customValidator: () =>
+                SearchKey.search(_searchController.text).isValid(),
+            onSearchSubmitted: (value) {
+              bonusMaterialBloc.add(
+                BonusMaterialEvent.fetch(
+                  user: context.read<UserBloc>().state.user,
+                  salesOrganisation:
+                      context.read<SalesOrgBloc>().state.salesOrganisation,
+                  configs: context.read<SalesOrgBloc>().state.configs,
+                  pickAndPack:
+                      context.read<EligibilityBloc>().state.getPNPValueMaterial,
+                  customerInfo:
+                      context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                  shipInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+                  searchKey: value,
+                ),
+              );
             },
-            decoration: InputDecoration(
-              focusedBorder: const OutlineInputBorder(
-                borderSide: BorderSide(color: ZPColors.primary),
-              ),
-              isDense: true,
-              prefixIcon: const Icon(Icons.search),
-              suffixIcon: IconButton(
-                key: const ValueKey('addBonusTextFieldClear'),
-                icon: const Icon(Icons.clear),
-                onPressed: () {
-                  if (_searchController.text.isEmpty) return;
-                  _searchController.clear();
-                  bonusMaterialBloc.add(
-                    const BonusMaterialEvent.reset(),
-                  );
-                },
-              ),
-              hintText: 'Search...'.tr(),
-              border: InputBorder.none,
-            ),
+            isDense: true,
+            onClear: () {
+              if (_searchController.text.isEmpty) return;
+              _searchController.clear();
+              bonusMaterialBloc.add(
+                const BonusMaterialEvent.reset(),
+              );
+            },
+            suffixIconKey: const ValueKey('addBonusTextFieldClear'),
+            border: InputBorder.none,
           );
         },
       ),

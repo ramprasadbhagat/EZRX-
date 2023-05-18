@@ -9,7 +9,7 @@ import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
-import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:ezrxmobile/presentation/core/search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -186,32 +186,22 @@ class _UserRestrictionListSearchState extends State<UserRestrictionListSearch> {
       },
       buildWhen: (previous, current) => previous.searchKey != current.searchKey,
       builder: (context, snapshot) {
-        return TextField(
+        return SearchBar(
           key: const Key('userRestrictionListSearchField'),
+          suffixIconKey: const Key('clearUserRestrictionListSearch'),
           controller: _searchController,
-          onChanged: (value) {
+          onClear: () {
+            if (_searchController.text.isEmpty) return;
+            userRestrictionListBloc.add(
+              const UserRestrictionListEvent.updateSearchKey(''),
+            );
+          },
+          border: InputBorder.none,
+          onSearchChanged: (value) {
             userRestrictionListBloc
                 .add(UserRestrictionListEvent.updateSearchKey(value));
           },
-          decoration: InputDecoration(
-            focusedBorder: const OutlineInputBorder(
-              borderSide: BorderSide(color: ZPColors.primary),
-            ),
-            isDense: true,
-            prefixIcon: const Icon(Icons.search),
-            suffixIcon: IconButton(
-              key: const Key('clearUserRestrictionListSearch'),
-              icon: const Icon(Icons.clear),
-              onPressed: () {
-                if (_searchController.text.isEmpty) return;
-                userRestrictionListBloc.add(
-                  const UserRestrictionListEvent.updateSearchKey(''),
-                );
-              },
-            ),
-            hintText: 'Search...'.tr(),
-            border: InputBorder.none,
-          ),
+          isDense: true,
         );
       },
     );

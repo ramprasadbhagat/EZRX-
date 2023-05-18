@@ -26,6 +26,7 @@ import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/bonus_material_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/cart_repository.dart';
 import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/core/search_bar.dart';
 import 'package:ezrxmobile/presentation/orders/cart/bonus/search_bonus_page.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
@@ -394,15 +395,15 @@ void main() {
       final addBonusSearchField =
           find.byKey(const Key('addBonusTextFieldtest'));
       final addBonusSearchFieldWidget =
-          tester.widget<TextFormField>(addBonusSearchField);
-      expect(addBonusSearchFieldWidget.controller?.text ?? '', 'test');
+          tester.widget<SearchBar>(addBonusSearchField);
+      expect(addBonusSearchFieldWidget.controller.text, 'test');
       when(() => bonusMaterialBloc.state).thenReturn(
         BonusMaterialState.initial().copyWith(
           searchKey: SearchKey(''),
         ),
       );
       await tester.pump();
-      expect(addBonusSearchFieldWidget.controller?.text ?? '', 'test');
+      expect(addBonusSearchFieldWidget.controller.text, 'test');
     });
 
     testWidgets('Test add bonus submit search with search keyword empty',
@@ -413,9 +414,11 @@ void main() {
       await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pump();
 
-      expect(find.text(
-        'Please enter at least 2 characters.'.tr(),
-      ), findsOneWidget);
+      expect(
+          find.text(
+            'Please enter at least 2 characters.'.tr(),
+          ),
+          findsOneWidget);
     });
 
     testWidgets('Test add bonus search field clear', (tester) async {
@@ -437,9 +440,9 @@ void main() {
       await tester.tap(addBonusTextFieldClear);
       final addBonusSearchField = find.byKey(const Key('addBonusTextField'));
       final addBonusSearchFieldWidget =
-          tester.widget<TextFormField>(addBonusSearchField);
+          tester.widget<SearchBar>(addBonusSearchField);
       await tester.pump();
-      expect(addBonusSearchFieldWidget.controller?.text ?? '', '');
+      expect(addBonusSearchFieldWidget.controller.text, '');
     });
 
     testWidgets('Test add bonus Search change fetch data', (tester) async {
@@ -507,9 +510,9 @@ void main() {
       await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pump(const Duration(seconds: 1));
       final addBonusSearchFieldWidget =
-          tester.widget<TextFormField>(addBonusSearchField);
+          tester.widget<SearchBar>(addBonusSearchField);
       await tester.pump();
-      expect(addBonusSearchFieldWidget.controller?.text ?? '', 'Test');
+      expect(addBonusSearchFieldWidget.controller.text, 'Test');
     });
 
     testWidgets('Test add bonus search fail With unKnownError', (tester) async {
@@ -536,9 +539,9 @@ void main() {
       await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pump(const Duration(seconds: 1));
       final addBonusSearchFieldWidget =
-          tester.widget<TextFormField>(addBonusSearchField);
+          tester.widget<SearchBar>(addBonusSearchField);
       await tester.pump();
-      expect(addBonusSearchFieldWidget.controller?.text ?? '', 'Test');
+      expect(addBonusSearchFieldWidget.controller.text, 'Test');
     });
   });
 }

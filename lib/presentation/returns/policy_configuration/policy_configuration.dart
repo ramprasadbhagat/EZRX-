@@ -9,6 +9,7 @@ import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
+import 'package:ezrxmobile/presentation/core/search_bar.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -211,12 +212,12 @@ class _PolicyConfigurationSearchState
         _policyConfigSearchController.text =
             state.searchKey.getOrDefaultValue('');
 
-        return TextFormField(
+        return SearchBar(
           controller: _policyConfigSearchController,
           key: Key(
             'policyConfigurationSearch${state.searchKey.getOrDefaultValue('')}',
           ),
-          onFieldSubmitted: (value) {
+          onSearchSubmitted: (value) {
             context
                 .read<PolicyConfigurationBloc>()
                 .add(PolicyConfigurationEvent.fetch(
@@ -225,26 +226,20 @@ class _PolicyConfigurationSearchState
                   searchKey: value,
                 ));
           },
-          decoration: InputDecoration(
-            prefixIcon: const Icon(Icons.search),
-            suffixIcon: IconButton(
-              key: const Key('clearPolicyConfigurationSearch'),
-              icon: const Icon(Icons.clear),
-              onPressed: () {
-                if (_policyConfigSearchController.text.isEmpty) return;
-                _policyConfigSearchController.clear();
-                context
-                    .read<PolicyConfigurationBloc>()
-                    .add(PolicyConfigurationEvent.fetch(
-                      salesOrganisation:
-                          context.read<SalesOrgBloc>().state.salesOrganisation,
-                      searchKey: '',
-                    ));
-              },
-            ),
-            hintText: 'Search...'.tr(),
-            border: InputBorder.none,
-          ),
+          onClear: () {
+            if (_policyConfigSearchController.text.isEmpty) return;
+            _policyConfigSearchController.clear();
+            context
+                .read<PolicyConfigurationBloc>()
+                .add(PolicyConfigurationEvent.fetch(
+                  salesOrganisation:
+                      context.read<SalesOrgBloc>().state.salesOrganisation,
+                  searchKey: '',
+                ));
+          },
+          isDense: true,
+          border: InputBorder.none,
+          suffixIconKey: const Key('clearPolicyConfigurationSearch'),
         );
       },
     );

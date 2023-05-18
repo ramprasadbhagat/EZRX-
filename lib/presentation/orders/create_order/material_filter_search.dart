@@ -1,4 +1,4 @@
-import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/presentation/core/search_bar.dart';
 import 'package:flutter/material.dart';
 
 class MaterialFilterSearch extends StatefulWidget {
@@ -39,25 +39,19 @@ class _MaterialFilterSearch extends State<MaterialFilterSearch> {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return SearchBar(
       key: const Key('materialFilterSearchField'),
       controller: _searchController,
-      onChanged: (value) {
+      onSearchChanged: (value) {
         widget.onSearchMethod(value);
       },
-      decoration: InputDecoration(
-        suffixIcon: IconButton(
-          key: const Key('clearMaterialFilterSearch'),
-          icon: const Icon(Icons.clear),
-          onPressed: () {
-            widget.onSearchMethod('');
-            _searchController.clear();
-          },
-        ),
-        isDense: true,
-        hintText: 'Search...'.tr(),
-        border: InputBorder.none,
-      ),
+      suffixIconKey: const Key('clearMaterialFilterSearch'),
+      isDense: true,
+      border: InputBorder.none,
+      onClear: () {
+        widget.onSearchMethod('');
+        _searchController.clear();
+      },
     );
   }
 }

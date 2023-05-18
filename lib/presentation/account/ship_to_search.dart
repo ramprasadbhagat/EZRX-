@@ -13,7 +13,7 @@ import 'package:ezrxmobile/presentation/core/confirm_clear_cart_dialog.dart';
 import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:ezrxmobile/presentation/core/custom_label.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
-import 'package:ezrxmobile/presentation/core/snackbar.dart';
+import 'package:ezrxmobile/presentation/core/search_bar.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -103,47 +103,31 @@ class _AppBarState extends State<_AppBar> {
             ),
           );
         },
-        child: TextFormField(
+        child: SearchBar(
           key: const Key('shipToCodeSearchField'),
           controller: _searchController,
           enabled: !_shipToCodeBloc.state.isSearching,
-          onFieldSubmitted: (value) {
-            if (SearchKey.search(value).isValid()) {
-              context
-                  .read<ShipToCodeBloc>()
-                  .add(ShipToCodeEvent.updateSearchKey(value));
-              context.read<ShipToCodeBloc>().add(
-                    ShipToCodeEvent.search(
-                      shipToInfos:
-                          context.read<CustomerCodeBloc>().state.shipToInfos,
-                    ),
-                  );
-            } else {
-              showSnackBar(
-                context: context,
-                message: 'Please enter at least 2 characters.'.tr(),
-              );
-            }
+          onSearchSubmitted: (value) {
+            context
+                .read<ShipToCodeBloc>()
+                .add(ShipToCodeEvent.updateSearchKey(value));
+            context.read<ShipToCodeBloc>().add(
+                  ShipToCodeEvent.search(
+                    shipToInfos:
+                        context.read<CustomerCodeBloc>().state.shipToInfos,
+                  ),
+                );
           },
-          decoration: InputDecoration(
-            focusedBorder: const OutlineInputBorder(
-              borderSide: BorderSide(color: ZPColors.primary),
-            ),
-            isDense: true,
-            prefixIcon: const Icon(Icons.search),
-            suffixIcon: IconButton(
-              key: const Key('clearShipToSearch'),
-              icon: const Icon(Icons.clear),
-              onPressed: () {
-                context.read<ShipToCodeBloc>().add(ShipToCodeEvent.load(
-                      shipToInfos:
-                          context.read<CustomerCodeBloc>().state.shipToInfos,
-                    ));
-              },
-            ),
-            hintText: 'Search...'.tr(),
-            border: InputBorder.none,
-          ),
+          customValidator: () =>
+              SearchKey.search(_searchController.text).isValid(),
+          suffixIconKey: const Key('clearShipToSearch'),
+          onClear: () {
+            context.read<ShipToCodeBloc>().add(ShipToCodeEvent.load(
+                  shipToInfos:
+                      context.read<CustomerCodeBloc>().state.shipToInfos,
+                ));
+          },
+          border: InputBorder.none,
         ),
       ),
     );
