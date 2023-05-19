@@ -14,6 +14,7 @@ import 'package:ezrxmobile/infrastructure/auth/repository/auth_repository.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/push_notification.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/cart_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/cred_storage.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/setting_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/token_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/core/okta/okta_login.dart';
@@ -47,6 +48,8 @@ class CredStorageMock extends Mock implements CredStorage {}
 
 class CartStorageMock extends Mock implements CartStorage {}
 
+class SettingStorageMock extends Mock implements SettingStorage {}
+
 class AccountSelectorStorageMock extends Mock
     implements AccountSelectorStorage {}
 
@@ -57,8 +60,6 @@ class PushNotificationServiceMock extends Mock
 
 class LocalAuthenticationMock extends Mock implements LocalAuthentication {}
 
-
-
 class RoleNameMock extends Mock implements RoleName {}
 
 void main() {
@@ -67,6 +68,7 @@ void main() {
   late TokenStorage tokenStorageMock;
   late CredStorage credStorageMock;
   late CartStorage cartStorageMock;
+  late SettingStorage settingStorageMock;
   late AccountSelectorStorage accountSelectorStorageMock;
   late OktaLoginServices oktaLoginServicesMock;
   late PushNotificationService pushNotificationServiceMock;
@@ -90,6 +92,7 @@ void main() {
       remoteDataSourceMock = AuthRemoteDataSourceMock();
       accountSelectorStorageMock = AccountSelectorStorageMock();
       cartStorageMock = CartStorageMock();
+      settingStorageMock = SettingStorageMock();
       credStorageMock = CredStorageMock();
       localAuthenticationMock = LocalAuthenticationMock();
       oktaLoginServicesMock = OktaLoginServicesMock();
@@ -109,6 +112,7 @@ void main() {
         localAuthentication: localAuthenticationMock,
         oktaLoginServices: oktaLoginServicesMock,
         pushNotificationService: pushNotificationServiceMock,
+        settingStorage: settingStorageMock,
       );
       when(() => credStorageMock.get()).thenAnswer((invocation) async =>
           CredDto(username: 'username', password: 'password'));
@@ -142,19 +146,18 @@ void main() {
               biometricNotRecognized: 'Failed Attempt',
               biometricRequiredTitle: 'Supports Biometric, but not setup',
               biometricSuccess: 'Recognised you',
-              goToSettingsButton: 'Let\'s setup biometric',
-              goToSettingsDescription: 'You can setupbiometric on settings',
+              goToSettingsButton: 'Let\'s set-up biometric',
+              goToSettingsDescription: 'You can set-up biometric on settings',
             ),
             IOSAuthMessages(
               cancelButton: 'No thanks',
-              goToSettingsButton: 'Let\'s setup biometric',
-              goToSettingsDescription: 'You can setupbiometric on settings',
-              lockOut: 'you have been locked out',
+              goToSettingsButton: 'Let\'s set-up biometric',
+              goToSettingsDescription: 'You can set-up biometric on settings',
+              lockOut: 'You have been locked out',
               localizedFallbackTitle: 'Fallback',
             ),
           ],
           options: const AuthenticationOptions(
-            biometricOnly: true,
             useErrorDialogs: true,
             stickyAuth: true,
             sensitiveTransaction: true,
@@ -205,6 +208,7 @@ void main() {
           localAuthentication: localAuthenticationMock,
           oktaLoginServices: oktaLoginServicesMock,
           pushNotificationService: pushNotificationServiceMock,
+          settingStorage: settingStorageMock,
         );
         when(() => configMock.appFlavor).thenAnswer((invocation) => Flavor.uat);
 
@@ -229,6 +233,7 @@ void main() {
       'User failed to login using password with mock',
       () async {
         repository = AuthRepository(
+          settingStorage: settingStorageMock,
           mixpanelService: mixpanelService,
           remoteDataSource: remoteDataSourceMock,
           config: configMock,
@@ -262,6 +267,7 @@ void main() {
       'Allow user to login using password with mock',
       () async {
         repository = AuthRepository(
+          settingStorage: settingStorageMock,
           mixpanelService: mixpanelService,
           remoteDataSource: remoteDataSourceMock,
           config: configMock,
@@ -293,6 +299,7 @@ void main() {
       'Allow user to proxy login with mock',
       () async {
         repository = AuthRepository(
+          settingStorage: settingStorageMock,
           mixpanelService: mixpanelService,
           remoteDataSource: remoteDataSourceMock,
           config: configMock,
@@ -321,6 +328,7 @@ void main() {
       'User failed to proxy login with mock',
       () async {
         repository = AuthRepository(
+          settingStorage: settingStorageMock,
           mixpanelService: mixpanelService,
           remoteDataSource: remoteDataSourceMock,
           config: configMock,
@@ -348,6 +356,7 @@ void main() {
       'User failed to proxy login with uat',
       () async {
         repository = AuthRepository(
+          settingStorage: settingStorageMock,
           mixpanelService: mixpanelService,
           remoteDataSource: remoteDataSourceMock,
           config: configMock,
@@ -382,6 +391,7 @@ void main() {
           tokenStorage: tokenStorageMock,
           accountSelectorStorage: accountSelectorStorageMock,
           cartStorage: cartStorageMock,
+          settingStorage: settingStorageMock,
           credStorage: credStorageMock,
           localAuthentication: localAuthenticationMock,
           oktaLoginServices: oktaLoginServicesMock,
@@ -408,6 +418,7 @@ void main() {
           tokenStorage: tokenStorageMock,
           accountSelectorStorage: accountSelectorStorageMock,
           cartStorage: cartStorageMock,
+          settingStorage: settingStorageMock,
           credStorage: credStorageMock,
           localAuthentication: localAuthenticationMock,
           oktaLoginServices: oktaLoginServicesMock,
@@ -436,6 +447,7 @@ void main() {
           tokenStorage: tokenStorageMock,
           accountSelectorStorage: accountSelectorStorageMock,
           cartStorage: cartStorageMock,
+          settingStorage: settingStorageMock,
           credStorage: credStorageMock,
           localAuthentication: localAuthenticationMock,
           oktaLoginServices: oktaLoginServicesMock,
@@ -469,6 +481,7 @@ void main() {
           tokenStorage: tokenStorageMock,
           accountSelectorStorage: accountSelectorStorageMock,
           cartStorage: cartStorageMock,
+          settingStorage: settingStorageMock,
           credStorage: credStorageMock,
           localAuthentication: localAuthenticationMock,
           oktaLoginServices: oktaLoginServicesMock,
@@ -496,6 +509,7 @@ void main() {
           tokenStorage: tokenStorageMock,
           accountSelectorStorage: accountSelectorStorageMock,
           cartStorage: cartStorageMock,
+          settingStorage: settingStorageMock,
           credStorage: credStorageMock,
           localAuthentication: localAuthenticationMock,
           oktaLoginServices: oktaLoginServicesMock,
@@ -522,6 +536,7 @@ void main() {
           config: configMock,
           localDataSource: localDataSourceMock,
           tokenStorage: tokenStorageMock,
+          settingStorage: settingStorageMock,
           accountSelectorStorage: accountSelectorStorageMock,
           cartStorage: cartStorageMock,
           credStorage: credStorageMock,
@@ -553,6 +568,7 @@ void main() {
           tokenStorage: tokenStorageMock,
           accountSelectorStorage: accountSelectorStorageMock,
           cartStorage: cartStorageMock,
+          settingStorage: settingStorageMock,
           credStorage: credStorageMock,
           localAuthentication: localAuthenticationMock,
           oktaLoginServices: oktaLoginServicesMock,
@@ -587,6 +603,7 @@ void main() {
           tokenStorage: tokenStorageMock,
           accountSelectorStorage: accountSelectorStorageMock,
           cartStorage: cartStorageMock,
+          settingStorage: settingStorageMock,
           credStorage: credStorageMock,
           localAuthentication: localAuthenticationMock,
           oktaLoginServices: oktaLoginServicesMock,
@@ -609,6 +626,7 @@ void main() {
           tokenStorage: tokenStorageMock,
           accountSelectorStorage: accountSelectorStorageMock,
           cartStorage: cartStorageMock,
+          settingStorage: settingStorageMock,
           credStorage: credStorageMock,
           localAuthentication: localAuthenticationMock,
           oktaLoginServices: oktaLoginServicesMock,
@@ -643,6 +661,7 @@ void main() {
           tokenStorage: tokenStorageMock,
           accountSelectorStorage: accountSelectorStorageMock,
           cartStorage: cartStorageMock,
+          settingStorage: settingStorageMock,
           credStorage: credStorageMock,
           localAuthentication: localAuthenticationMock,
           oktaLoginServices: oktaLoginServicesMock,
@@ -669,6 +688,7 @@ void main() {
           tokenStorage: tokenStorageMock,
           accountSelectorStorage: accountSelectorStorageMock,
           cartStorage: cartStorageMock,
+          settingStorage: settingStorageMock,
           credStorage: credStorageMock,
           localAuthentication: localAuthenticationMock,
           oktaLoginServices: oktaLoginServicesMock,
@@ -702,6 +722,7 @@ void main() {
           tokenStorage: tokenStorageMock,
           accountSelectorStorage: accountSelectorStorageMock,
           cartStorage: cartStorageMock,
+          settingStorage: settingStorageMock,
           credStorage: credStorageMock,
           localAuthentication: localAuthenticationMock,
           oktaLoginServices: oktaLoginServicesMock,
@@ -736,6 +757,7 @@ void main() {
           tokenStorage: tokenStorageMock,
           accountSelectorStorage: accountSelectorStorageMock,
           cartStorage: cartStorageMock,
+          settingStorage: settingStorageMock,
           credStorage: credStorageMock,
           localAuthentication: localAuthenticationMock,
           oktaLoginServices: oktaLoginServicesMock,
@@ -756,19 +778,18 @@ void main() {
                 biometricNotRecognized: 'Failed Attempt',
                 biometricRequiredTitle: 'Supports Biometric, but not setup',
                 biometricSuccess: 'Recognised you',
-                goToSettingsButton: 'Let\'s setup biometric',
-                goToSettingsDescription: 'You can setupbiometric on settings',
+                goToSettingsButton: 'Let\'s set-up biometric',
+                goToSettingsDescription: 'You can set-up biometric on settings',
               ),
               IOSAuthMessages(
                 cancelButton: 'No thanks',
-                goToSettingsButton: 'Let\'s setup biometric',
-                goToSettingsDescription: 'You can setupbiometric on settings',
-                lockOut: 'you have been locked out',
+                goToSettingsButton: 'Let\'s set-up biometric',
+                goToSettingsDescription: 'You can set-up biometric on settings',
+                lockOut: 'You have been locked out',
                 localizedFallbackTitle: 'Fallback',
               ),
             ],
             options: const AuthenticationOptions(
-              biometricOnly: true,
               useErrorDialogs: true,
               stickyAuth: true,
               sensitiveTransaction: true,
@@ -789,6 +810,7 @@ void main() {
           tokenStorage: tokenStorageMock,
           accountSelectorStorage: accountSelectorStorageMock,
           cartStorage: cartStorageMock,
+          settingStorage: settingStorageMock,
           credStorage: credStorageMock,
           localAuthentication: localAuthenticationMock,
           oktaLoginServices: oktaLoginServicesMock,
@@ -823,6 +845,7 @@ void main() {
           accountSelectorStorage: accountSelectorStorageMock,
           cartStorage: cartStorageMock,
           credStorage: credStorageMock,
+          settingStorage: settingStorageMock,
           localAuthentication: localAuthenticationMock,
           oktaLoginServices: oktaLoginServicesMock,
           pushNotificationService: pushNotificationServiceMock,

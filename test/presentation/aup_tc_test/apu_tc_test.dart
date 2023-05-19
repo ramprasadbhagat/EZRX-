@@ -1,8 +1,10 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/settings/setting_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
@@ -73,6 +75,9 @@ class OrderDocumentTypeMockBloc
     extends MockBloc<OrderDocumentTypeEvent, OrderDocumentTypeState>
     implements OrderDocumentTypeBloc {}
 
+class SettingMockBloc extends MockBloc<SettingEvent, SettingState>
+    implements SettingBloc {}
+
 class DeepLinkingMockBloc extends MockBloc<DeepLinkingEvent, DeepLinkingState>
     implements DeepLinkingBloc {}
 
@@ -85,6 +90,7 @@ void main() {
   late MockAupTcBloc mockAupTcBloc;
   late UserBloc userBlocMock;
   late CartBloc cartBlocMock;
+  late SettingBloc settingBlocMock;
   late PaymentCustomerInformationBloc paymentCustomerInformationBlocMock;
   late EligibilityBloc eligibilityBlocMock;
   late ResetPasswordBloc resetPasswordBlocMock;
@@ -97,6 +103,7 @@ void main() {
     TestWidgetsFlutterBinding.ensureInitialized();
     mockSalesOrgBloc = SalesOrgBlocMock();
     authBlocMock = AuthBlocMock();
+    settingBlocMock = SettingMockBloc();
     announcementBlocMock = AnnouncementBlocMock();
     mockAupTcBloc = MockAupTcBloc();
     eligibilityBlocMock = EligibilityBlocMock();
@@ -133,6 +140,7 @@ void main() {
     when(() => userBlocMock.state).thenReturn(UserState.initial());
 
     when(() => cartBlocMock.state).thenReturn(CartState.initial());
+    when(() => settingBlocMock.state).thenReturn(SettingState.initial());
     when(() => paymentCustomerInformationBlocMock.state)
         .thenReturn(PaymentCustomerInformationState.initial());
     when(() => eligibilityBlocMock.state)
@@ -341,6 +349,9 @@ void main() {
           BlocProvider<SalesOrgBloc>(
             create: (context) => mockSalesOrgBloc,
           ),
+          BlocProvider<SettingBloc>(
+            create: (context) => settingBlocMock,
+          ),
         ]);
     await tester.pump();
     final tosTile = find.byKey(const Key('tostile'));
@@ -383,6 +394,9 @@ void main() {
           BlocProvider<AupTcBloc>(
             create: (context) => mockAupTcBloc,
           ),
+          BlocProvider<SettingBloc>(
+            create: (context) => settingBlocMock,
+          ),
         ]);
     await tester.pump();
     final contactUsTile = find.byKey(const Key('contactUsTile'));
@@ -408,6 +422,9 @@ void main() {
           BlocProvider<ResetPasswordBloc>(
             create: (context) => resetPasswordBlocMock,
           ),
+          BlocProvider<SettingBloc>(
+            create: (context) => settingBlocMock,
+          ),
         ]);
     await tester.pump();
     final changePasswordTile = find.byKey(const Key('changePasswordTile'));
@@ -429,6 +446,9 @@ void main() {
               create: (context) => announcementBlocMock),
           BlocProvider<AupTcBloc>(
             create: (context) => mockAupTcBloc,
+          ),
+          BlocProvider<SettingBloc>(
+            create: (context) => settingBlocMock,
           ),
         ]);
     await tester.pump();
@@ -452,6 +472,9 @@ void main() {
           BlocProvider<AupTcBloc>(
             create: (context) => mockAupTcBloc,
           ),
+          BlocProvider<SettingBloc>(
+            create: (context) => settingBlocMock,
+          ),
         ]);
     await tester.pump();
     final logoutTile = find.byKey(const Key('logoutTile'));
@@ -459,5 +482,49 @@ void main() {
     await tester.tap(logoutTile);
     // await tester.pump();
     // expect();
+  });
+
+  testWidgets('Setting screen Biometric Login with State change',
+      (tester) async {
+    final expectedStates = [
+      SettingState.initial().copyWith(
+        isBiometricEnable: true,
+        isBiometricPossible: true,
+        failureOrSuccessOption: none(),
+      ),
+      SettingState.initial().copyWith(
+        isBiometricEnable: false,
+        isBiometricPossible: true,
+        failureOrSuccessOption: none(),
+      ),
+    ];
+    whenListen(settingBlocMock, Stream.fromIterable(expectedStates));
+    await TesterUtils.setUpLocalizationWrapper(
+        tester: tester,
+        home: const SettingsPage(),
+        locale: const Locale('en'),
+        isAutoRouteEnabled: true,
+        autoRouterMock: autoRouterMock,
+        providers: [
+          BlocProvider<AuthBloc>(create: (context) => authBlocMock),
+          BlocProvider<AnnouncementBloc>(
+              create: (context) => announcementBlocMock),
+          BlocProvider<AupTcBloc>(
+            create: (context) => mockAupTcBloc,
+          ),
+          BlocProvider<SettingBloc>(
+            create: (context) => settingBlocMock,
+          ),
+        ]);
+    await tester.pump();
+    final biometricLoginToggle = find.byKey(const Key('biometricLoginToggle'));
+    expect(biometricLoginToggle, findsOneWidget);
+    await tester.tap(biometricLoginToggle);
+    await tester.pump();
+    verify(
+      () => settingBlocMock.add(const SettingEvent.toggleBiometric(
+        isBiometricEnabled: true,
+      )),
+    ).called(1);
   });
 }

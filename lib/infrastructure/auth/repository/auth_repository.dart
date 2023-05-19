@@ -19,6 +19,7 @@ import 'package:ezrxmobile/infrastructure/auth/dtos/jwt_dto.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/push_notification.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/cart_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/cred_storage.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/setting_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/token_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
@@ -39,11 +40,12 @@ class AuthRepository implements IAuthRepository {
   final TokenStorage tokenStorage;
   final CredStorage credStorage;
   final CartStorage cartStorage;
+  final SettingStorage settingStorage;
   final AccountSelectorStorage accountSelectorStorage;
   final OktaLoginServices oktaLoginServices;
   final PushNotificationService pushNotificationService;
   final LocalAuthentication localAuthentication;
-  
+
   final MixpanelService mixpanelService;
 
   AuthRepository({
@@ -53,11 +55,11 @@ class AuthRepository implements IAuthRepository {
     required this.tokenStorage,
     required this.credStorage,
     required this.cartStorage,
+    required this.settingStorage,
     required this.oktaLoginServices,
     required this.pushNotificationService,
     required this.localAuthentication,
     required this.accountSelectorStorage,
-    
     required this.mixpanelService,
   });
 
@@ -283,6 +285,7 @@ class AuthRepository implements IAuthRepository {
       await oktaLoginServices.logout();
       await accountSelectorStorage.delete();
       await cartStorage.clear();
+      await settingStorage.clear();
 
       return const Right(unit);
     } catch (e) {
@@ -354,19 +357,18 @@ class AuthRepository implements IAuthRepository {
             biometricNotRecognized: 'Failed Attempt',
             biometricRequiredTitle: 'Supports Biometric, but not setup',
             biometricSuccess: 'Recognised you',
-            goToSettingsButton: 'Let\'s setup biometric',
-            goToSettingsDescription: 'You can setupbiometric on settings',
+            goToSettingsButton: 'Let\'s set-up biometric',
+            goToSettingsDescription: 'You can set-up biometric on settings',
           ),
           IOSAuthMessages(
             cancelButton: 'No thanks',
-            goToSettingsButton: 'Let\'s setup biometric',
-            goToSettingsDescription: 'You can setupbiometric on settings',
-            lockOut: 'you have been locked out',
+            goToSettingsButton: 'Let\'s set-up biometric',
+            goToSettingsDescription: 'You can set-up biometric on settings',
+            lockOut: 'You have been locked out',
             localizedFallbackTitle: 'Fallback',
           ),
         ],
         options: const AuthenticationOptions(
-          biometricOnly: true,
           useErrorDialogs: true,
           stickyAuth: true,
           sensitiveTransaction: true,
@@ -389,12 +391,13 @@ class AuthRepository implements IAuthRepository {
       if (kIsWeb) {
         return const Left(ApiFailure.deviceNotSupportBiometric());
       }
-      if (!await localAuthentication.canCheckBiometrics) {
-        return const Left(ApiFailure.cannotCheckBiometrics());
-      }
 
       if (!await localAuthentication.isDeviceSupported()) {
         return const Left(ApiFailure.deviceNotSupportBiometric());
+      }
+
+      if (!await localAuthentication.canCheckBiometrics) {
+        return const Left(ApiFailure.cannotCheckBiometrics());
       }
 
       final availableBiometrics =
@@ -409,6 +412,67 @@ class AuthRepository implements IAuthRepository {
       }
 
       return const Right(true);
+    } on PlatformException catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  
+@override
+  Future<Either<ApiFailure, bool>> checkBiometricPermission() async {
+    try {
+      if (kIsWeb) {
+        return const Left(ApiFailure.deviceNotSupportBiometric());
+      }
+
+      if (!await localAuthentication.canCheckBiometrics) {
+        return const Left(ApiFailure.cannotCheckBiometrics());
+      }
+
+      return const Right(true);
+    } on PlatformException catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, bool>> canShowBiometricToggle() async {
+    try {
+      if (kIsWeb) {
+        return const Left(ApiFailure.deviceNotSupportBiometric());
+      }
+
+      if (!await localAuthentication.isDeviceSupported()) {
+        return const Left(ApiFailure.deviceNotSupportBiometric());
+      }
+
+      return const Right(true);
+    } on PlatformException catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Either<ApiFailure, bool> isBiometricEnabled() {
+    try {
+      final isBiometricEnabled = settingStorage.isBiometricEnabled() ?? false;
+
+      return Right(isBiometricEnabled);
+    } on PlatformException catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, Unit>> putBiometricEnabledState({
+    required bool isBiometricEnable,
+  }) async {
+    try {
+      await settingStorage.putBiometricStatus(
+        isBiometricEnabled: isBiometricEnable,
+      );
+
+      return const Right(unit);
     } on PlatformException catch (e) {
       return Left(FailureHandler.handleFailure(e));
     }

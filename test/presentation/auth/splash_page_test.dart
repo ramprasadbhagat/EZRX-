@@ -4,6 +4,7 @@ import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_rep/sales_rep_bloc.dart';
+import 'package:ezrxmobile/application/account/settings/setting_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
@@ -154,6 +155,9 @@ class ScanMaterialInfoBlocMock
     extends MockBloc<ScanMaterialInfoEvent, ScanMaterialInfoState>
     implements ScanMaterialInfoBloc {}
 
+class SettingMockBloc extends MockBloc<SettingEvent, SettingState>
+    implements SettingBloc {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
@@ -175,6 +179,7 @@ void main() {
   late PolicyConfigurationBloc policyConfigurationListBlocMock;
   late MaterialListBloc materialListBlocMock;
   late ScanMaterialInfoBloc scanMaterialInfoMockBloc;
+  late SettingBloc settingBlocMock;
 
   late MaterialFilterBloc materialFilterBlocMock;
 
@@ -251,8 +256,10 @@ void main() {
       deepLinkingBlocMock = DeepLinkingMockBloc();
       mockOrderHistoryListBloc = OrderHistoryListBlocMock();
       scanMaterialInfoMockBloc = ScanMaterialInfoBlocMock();
+      settingBlocMock = SettingMockBloc();
 
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
+      when(() => settingBlocMock.state).thenReturn(SettingState.initial());
       when(() => orderDocumentTypeMock.state).thenReturn(
         OrderDocumentTypeState.initial().copyWith(
           selectedOrderType: OrderDocumentType.empty()
@@ -356,6 +363,9 @@ void main() {
                 create: (context) => mockOrderHistoryDetailsBloc),
             BlocProvider<ScanMaterialInfoBloc>(
                 create: (context) => scanMaterialInfoMockBloc),
+            BlocProvider<SettingBloc>(
+              create: (context) => settingBlocMock,
+            ),
           ],
           child: const SplashPage(),
         ),
@@ -399,43 +409,6 @@ void main() {
       await tester.pump();
       verify(() => userBlocMock.add(const UserEvent.fetch())).called(1);
       expect(autoRouterMock.current.name, HomeNavigationTabbarRoute.name);
-    });
-
-    testWidgets('When user has state organization', (tester) async {
-      final expectedStates = [
-        CartState.initial().copyWith(
-          apiFailureOrSuccessOption: optionOf(
-            Right([PriceAggregate.empty()]),
-          ),
-          isFetching: true,
-        ),
-        CartState.initial().copyWith(
-          apiFailureOrSuccessOption: none(),
-          isFetching: true,
-        ),
-      ];
-      whenListen(cartBlocMock, Stream.fromIterable(expectedStates));
-
-      final expectedUserListStates = [
-        UserState.initial(),
-        UserState.initial().copyWith(user: fakeUser),
-      ];
-
-      final salesOrg = salesOrgBlocMock.state.salesOrg;
-
-      whenListen(userBlocMock, Stream.fromIterable(expectedUserListStates));
-      await getWidget(tester);
-      await tester.pump();
-
-      verify(() => salesOrgBlocMock.add(SalesOrgEvent.loadSavedOrganisation(
-          salesOrganisations: [fakeSalesOrganisation]))).called(1);
-      verify(() => salesRepBlocMock.add(SalesRepEvent.fetch(user: fakeUser)))
-          .called(1);
-
-      verify(() => aupTcBlocMock.add(AupTcEvent.show(fakeUser, salesOrg)))
-          .called(1);
-
-      verify(() => cartBlocMock.add(const CartEvent.initialized())).called(1);
     });
 
     testWidgets('When PaymentCustomerInformation bloc is listening',

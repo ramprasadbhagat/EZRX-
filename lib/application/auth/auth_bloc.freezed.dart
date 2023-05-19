@@ -24,6 +24,8 @@ mixin _$AuthEvent {
     required TResult Function() refreshOktaToken,
     required TResult Function(JWT oktaAccessToken) refreshEZRXToken,
     required TResult Function() logout,
+    required TResult Function() checkIfBiometricDenied,
+    required TResult Function() visitedAppSettings,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -34,6 +36,8 @@ mixin _$AuthEvent {
     TResult? Function()? refreshOktaToken,
     TResult? Function(JWT oktaAccessToken)? refreshEZRXToken,
     TResult? Function()? logout,
+    TResult? Function()? checkIfBiometricDenied,
+    TResult? Function()? visitedAppSettings,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -44,6 +48,8 @@ mixin _$AuthEvent {
     TResult Function()? refreshOktaToken,
     TResult Function(JWT oktaAccessToken)? refreshEZRXToken,
     TResult Function()? logout,
+    TResult Function()? checkIfBiometricDenied,
+    TResult Function()? visitedAppSettings,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -55,6 +61,9 @@ mixin _$AuthEvent {
     required TResult Function(_RefreshOktaToken value) refreshOktaToken,
     required TResult Function(_RefreshEZRXToken value) refreshEZRXToken,
     required TResult Function(_Logout value) logout,
+    required TResult Function(_CheckIfBiometricDenied value)
+        checkIfBiometricDenied,
+    required TResult Function(_ToggleAppSettings value) visitedAppSettings,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -65,6 +74,8 @@ mixin _$AuthEvent {
     TResult? Function(_RefreshOktaToken value)? refreshOktaToken,
     TResult? Function(_RefreshEZRXToken value)? refreshEZRXToken,
     TResult? Function(_Logout value)? logout,
+    TResult? Function(_CheckIfBiometricDenied value)? checkIfBiometricDenied,
+    TResult? Function(_ToggleAppSettings value)? visitedAppSettings,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -75,6 +86,8 @@ mixin _$AuthEvent {
     TResult Function(_RefreshOktaToken value)? refreshOktaToken,
     TResult Function(_RefreshEZRXToken value)? refreshEZRXToken,
     TResult Function(_Logout value)? logout,
+    TResult Function(_CheckIfBiometricDenied value)? checkIfBiometricDenied,
+    TResult Function(_ToggleAppSettings value)? visitedAppSettings,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -141,6 +154,8 @@ class _$_AuthInit implements _AuthInit {
     required TResult Function() refreshOktaToken,
     required TResult Function(JWT oktaAccessToken) refreshEZRXToken,
     required TResult Function() logout,
+    required TResult Function() checkIfBiometricDenied,
+    required TResult Function() visitedAppSettings,
   }) {
     return init();
   }
@@ -154,6 +169,8 @@ class _$_AuthInit implements _AuthInit {
     TResult? Function()? refreshOktaToken,
     TResult? Function(JWT oktaAccessToken)? refreshEZRXToken,
     TResult? Function()? logout,
+    TResult? Function()? checkIfBiometricDenied,
+    TResult? Function()? visitedAppSettings,
   }) {
     return init?.call();
   }
@@ -167,6 +184,8 @@ class _$_AuthInit implements _AuthInit {
     TResult Function()? refreshOktaToken,
     TResult Function(JWT oktaAccessToken)? refreshEZRXToken,
     TResult Function()? logout,
+    TResult Function()? checkIfBiometricDenied,
+    TResult Function()? visitedAppSettings,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -184,6 +203,9 @@ class _$_AuthInit implements _AuthInit {
     required TResult Function(_RefreshOktaToken value) refreshOktaToken,
     required TResult Function(_RefreshEZRXToken value) refreshEZRXToken,
     required TResult Function(_Logout value) logout,
+    required TResult Function(_CheckIfBiometricDenied value)
+        checkIfBiometricDenied,
+    required TResult Function(_ToggleAppSettings value) visitedAppSettings,
   }) {
     return init(this);
   }
@@ -197,6 +219,8 @@ class _$_AuthInit implements _AuthInit {
     TResult? Function(_RefreshOktaToken value)? refreshOktaToken,
     TResult? Function(_RefreshEZRXToken value)? refreshEZRXToken,
     TResult? Function(_Logout value)? logout,
+    TResult? Function(_CheckIfBiometricDenied value)? checkIfBiometricDenied,
+    TResult? Function(_ToggleAppSettings value)? visitedAppSettings,
   }) {
     return init?.call(this);
   }
@@ -210,6 +234,8 @@ class _$_AuthInit implements _AuthInit {
     TResult Function(_RefreshOktaToken value)? refreshOktaToken,
     TResult Function(_RefreshEZRXToken value)? refreshEZRXToken,
     TResult Function(_Logout value)? logout,
+    TResult Function(_CheckIfBiometricDenied value)? checkIfBiometricDenied,
+    TResult Function(_ToggleAppSettings value)? visitedAppSettings,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -267,6 +293,8 @@ class _$_BioCheck implements _BioCheck {
     required TResult Function() refreshOktaToken,
     required TResult Function(JWT oktaAccessToken) refreshEZRXToken,
     required TResult Function() logout,
+    required TResult Function() checkIfBiometricDenied,
+    required TResult Function() visitedAppSettings,
   }) {
     return bioCheck();
   }
@@ -280,6 +308,8 @@ class _$_BioCheck implements _BioCheck {
     TResult? Function()? refreshOktaToken,
     TResult? Function(JWT oktaAccessToken)? refreshEZRXToken,
     TResult? Function()? logout,
+    TResult? Function()? checkIfBiometricDenied,
+    TResult? Function()? visitedAppSettings,
   }) {
     return bioCheck?.call();
   }
@@ -293,6 +323,8 @@ class _$_BioCheck implements _BioCheck {
     TResult Function()? refreshOktaToken,
     TResult Function(JWT oktaAccessToken)? refreshEZRXToken,
     TResult Function()? logout,
+    TResult Function()? checkIfBiometricDenied,
+    TResult Function()? visitedAppSettings,
     required TResult orElse(),
   }) {
     if (bioCheck != null) {
@@ -310,6 +342,9 @@ class _$_BioCheck implements _BioCheck {
     required TResult Function(_RefreshOktaToken value) refreshOktaToken,
     required TResult Function(_RefreshEZRXToken value) refreshEZRXToken,
     required TResult Function(_Logout value) logout,
+    required TResult Function(_CheckIfBiometricDenied value)
+        checkIfBiometricDenied,
+    required TResult Function(_ToggleAppSettings value) visitedAppSettings,
   }) {
     return bioCheck(this);
   }
@@ -323,6 +358,8 @@ class _$_BioCheck implements _BioCheck {
     TResult? Function(_RefreshOktaToken value)? refreshOktaToken,
     TResult? Function(_RefreshEZRXToken value)? refreshEZRXToken,
     TResult? Function(_Logout value)? logout,
+    TResult? Function(_CheckIfBiometricDenied value)? checkIfBiometricDenied,
+    TResult? Function(_ToggleAppSettings value)? visitedAppSettings,
   }) {
     return bioCheck?.call(this);
   }
@@ -336,6 +373,8 @@ class _$_BioCheck implements _BioCheck {
     TResult Function(_RefreshOktaToken value)? refreshOktaToken,
     TResult Function(_RefreshEZRXToken value)? refreshEZRXToken,
     TResult Function(_Logout value)? logout,
+    TResult Function(_CheckIfBiometricDenied value)? checkIfBiometricDenied,
+    TResult Function(_ToggleAppSettings value)? visitedAppSettings,
     required TResult orElse(),
   }) {
     if (bioCheck != null) {
@@ -393,6 +432,8 @@ class _$_AuthCheck implements _AuthCheck {
     required TResult Function() refreshOktaToken,
     required TResult Function(JWT oktaAccessToken) refreshEZRXToken,
     required TResult Function() logout,
+    required TResult Function() checkIfBiometricDenied,
+    required TResult Function() visitedAppSettings,
   }) {
     return authCheck();
   }
@@ -406,6 +447,8 @@ class _$_AuthCheck implements _AuthCheck {
     TResult? Function()? refreshOktaToken,
     TResult? Function(JWT oktaAccessToken)? refreshEZRXToken,
     TResult? Function()? logout,
+    TResult? Function()? checkIfBiometricDenied,
+    TResult? Function()? visitedAppSettings,
   }) {
     return authCheck?.call();
   }
@@ -419,6 +462,8 @@ class _$_AuthCheck implements _AuthCheck {
     TResult Function()? refreshOktaToken,
     TResult Function(JWT oktaAccessToken)? refreshEZRXToken,
     TResult Function()? logout,
+    TResult Function()? checkIfBiometricDenied,
+    TResult Function()? visitedAppSettings,
     required TResult orElse(),
   }) {
     if (authCheck != null) {
@@ -436,6 +481,9 @@ class _$_AuthCheck implements _AuthCheck {
     required TResult Function(_RefreshOktaToken value) refreshOktaToken,
     required TResult Function(_RefreshEZRXToken value) refreshEZRXToken,
     required TResult Function(_Logout value) logout,
+    required TResult Function(_CheckIfBiometricDenied value)
+        checkIfBiometricDenied,
+    required TResult Function(_ToggleAppSettings value) visitedAppSettings,
   }) {
     return authCheck(this);
   }
@@ -449,6 +497,8 @@ class _$_AuthCheck implements _AuthCheck {
     TResult? Function(_RefreshOktaToken value)? refreshOktaToken,
     TResult? Function(_RefreshEZRXToken value)? refreshEZRXToken,
     TResult? Function(_Logout value)? logout,
+    TResult? Function(_CheckIfBiometricDenied value)? checkIfBiometricDenied,
+    TResult? Function(_ToggleAppSettings value)? visitedAppSettings,
   }) {
     return authCheck?.call(this);
   }
@@ -462,6 +512,8 @@ class _$_AuthCheck implements _AuthCheck {
     TResult Function(_RefreshOktaToken value)? refreshOktaToken,
     TResult Function(_RefreshEZRXToken value)? refreshEZRXToken,
     TResult Function(_Logout value)? logout,
+    TResult Function(_CheckIfBiometricDenied value)? checkIfBiometricDenied,
+    TResult Function(_ToggleAppSettings value)? visitedAppSettings,
     required TResult orElse(),
   }) {
     if (authCheck != null) {
@@ -519,6 +571,8 @@ class _$_RefreshOktaToken implements _RefreshOktaToken {
     required TResult Function() refreshOktaToken,
     required TResult Function(JWT oktaAccessToken) refreshEZRXToken,
     required TResult Function() logout,
+    required TResult Function() checkIfBiometricDenied,
+    required TResult Function() visitedAppSettings,
   }) {
     return refreshOktaToken();
   }
@@ -532,6 +586,8 @@ class _$_RefreshOktaToken implements _RefreshOktaToken {
     TResult? Function()? refreshOktaToken,
     TResult? Function(JWT oktaAccessToken)? refreshEZRXToken,
     TResult? Function()? logout,
+    TResult? Function()? checkIfBiometricDenied,
+    TResult? Function()? visitedAppSettings,
   }) {
     return refreshOktaToken?.call();
   }
@@ -545,6 +601,8 @@ class _$_RefreshOktaToken implements _RefreshOktaToken {
     TResult Function()? refreshOktaToken,
     TResult Function(JWT oktaAccessToken)? refreshEZRXToken,
     TResult Function()? logout,
+    TResult Function()? checkIfBiometricDenied,
+    TResult Function()? visitedAppSettings,
     required TResult orElse(),
   }) {
     if (refreshOktaToken != null) {
@@ -562,6 +620,9 @@ class _$_RefreshOktaToken implements _RefreshOktaToken {
     required TResult Function(_RefreshOktaToken value) refreshOktaToken,
     required TResult Function(_RefreshEZRXToken value) refreshEZRXToken,
     required TResult Function(_Logout value) logout,
+    required TResult Function(_CheckIfBiometricDenied value)
+        checkIfBiometricDenied,
+    required TResult Function(_ToggleAppSettings value) visitedAppSettings,
   }) {
     return refreshOktaToken(this);
   }
@@ -575,6 +636,8 @@ class _$_RefreshOktaToken implements _RefreshOktaToken {
     TResult? Function(_RefreshOktaToken value)? refreshOktaToken,
     TResult? Function(_RefreshEZRXToken value)? refreshEZRXToken,
     TResult? Function(_Logout value)? logout,
+    TResult? Function(_CheckIfBiometricDenied value)? checkIfBiometricDenied,
+    TResult? Function(_ToggleAppSettings value)? visitedAppSettings,
   }) {
     return refreshOktaToken?.call(this);
   }
@@ -588,6 +651,8 @@ class _$_RefreshOktaToken implements _RefreshOktaToken {
     TResult Function(_RefreshOktaToken value)? refreshOktaToken,
     TResult Function(_RefreshEZRXToken value)? refreshEZRXToken,
     TResult Function(_Logout value)? logout,
+    TResult Function(_CheckIfBiometricDenied value)? checkIfBiometricDenied,
+    TResult Function(_ToggleAppSettings value)? visitedAppSettings,
     required TResult orElse(),
   }) {
     if (refreshOktaToken != null) {
@@ -672,6 +737,8 @@ class _$_RefreshEZRXToken implements _RefreshEZRXToken {
     required TResult Function() refreshOktaToken,
     required TResult Function(JWT oktaAccessToken) refreshEZRXToken,
     required TResult Function() logout,
+    required TResult Function() checkIfBiometricDenied,
+    required TResult Function() visitedAppSettings,
   }) {
     return refreshEZRXToken(oktaAccessToken);
   }
@@ -685,6 +752,8 @@ class _$_RefreshEZRXToken implements _RefreshEZRXToken {
     TResult? Function()? refreshOktaToken,
     TResult? Function(JWT oktaAccessToken)? refreshEZRXToken,
     TResult? Function()? logout,
+    TResult? Function()? checkIfBiometricDenied,
+    TResult? Function()? visitedAppSettings,
   }) {
     return refreshEZRXToken?.call(oktaAccessToken);
   }
@@ -698,6 +767,8 @@ class _$_RefreshEZRXToken implements _RefreshEZRXToken {
     TResult Function()? refreshOktaToken,
     TResult Function(JWT oktaAccessToken)? refreshEZRXToken,
     TResult Function()? logout,
+    TResult Function()? checkIfBiometricDenied,
+    TResult Function()? visitedAppSettings,
     required TResult orElse(),
   }) {
     if (refreshEZRXToken != null) {
@@ -715,6 +786,9 @@ class _$_RefreshEZRXToken implements _RefreshEZRXToken {
     required TResult Function(_RefreshOktaToken value) refreshOktaToken,
     required TResult Function(_RefreshEZRXToken value) refreshEZRXToken,
     required TResult Function(_Logout value) logout,
+    required TResult Function(_CheckIfBiometricDenied value)
+        checkIfBiometricDenied,
+    required TResult Function(_ToggleAppSettings value) visitedAppSettings,
   }) {
     return refreshEZRXToken(this);
   }
@@ -728,6 +802,8 @@ class _$_RefreshEZRXToken implements _RefreshEZRXToken {
     TResult? Function(_RefreshOktaToken value)? refreshOktaToken,
     TResult? Function(_RefreshEZRXToken value)? refreshEZRXToken,
     TResult? Function(_Logout value)? logout,
+    TResult? Function(_CheckIfBiometricDenied value)? checkIfBiometricDenied,
+    TResult? Function(_ToggleAppSettings value)? visitedAppSettings,
   }) {
     return refreshEZRXToken?.call(this);
   }
@@ -741,6 +817,8 @@ class _$_RefreshEZRXToken implements _RefreshEZRXToken {
     TResult Function(_RefreshOktaToken value)? refreshOktaToken,
     TResult Function(_RefreshEZRXToken value)? refreshEZRXToken,
     TResult Function(_Logout value)? logout,
+    TResult Function(_CheckIfBiometricDenied value)? checkIfBiometricDenied,
+    TResult Function(_ToggleAppSettings value)? visitedAppSettings,
     required TResult orElse(),
   }) {
     if (refreshEZRXToken != null) {
@@ -802,6 +880,8 @@ class _$_Logout implements _Logout {
     required TResult Function() refreshOktaToken,
     required TResult Function(JWT oktaAccessToken) refreshEZRXToken,
     required TResult Function() logout,
+    required TResult Function() checkIfBiometricDenied,
+    required TResult Function() visitedAppSettings,
   }) {
     return logout();
   }
@@ -815,6 +895,8 @@ class _$_Logout implements _Logout {
     TResult? Function()? refreshOktaToken,
     TResult? Function(JWT oktaAccessToken)? refreshEZRXToken,
     TResult? Function()? logout,
+    TResult? Function()? checkIfBiometricDenied,
+    TResult? Function()? visitedAppSettings,
   }) {
     return logout?.call();
   }
@@ -828,6 +910,8 @@ class _$_Logout implements _Logout {
     TResult Function()? refreshOktaToken,
     TResult Function(JWT oktaAccessToken)? refreshEZRXToken,
     TResult Function()? logout,
+    TResult Function()? checkIfBiometricDenied,
+    TResult Function()? visitedAppSettings,
     required TResult orElse(),
   }) {
     if (logout != null) {
@@ -845,6 +929,9 @@ class _$_Logout implements _Logout {
     required TResult Function(_RefreshOktaToken value) refreshOktaToken,
     required TResult Function(_RefreshEZRXToken value) refreshEZRXToken,
     required TResult Function(_Logout value) logout,
+    required TResult Function(_CheckIfBiometricDenied value)
+        checkIfBiometricDenied,
+    required TResult Function(_ToggleAppSettings value) visitedAppSettings,
   }) {
     return logout(this);
   }
@@ -858,6 +945,8 @@ class _$_Logout implements _Logout {
     TResult? Function(_RefreshOktaToken value)? refreshOktaToken,
     TResult? Function(_RefreshEZRXToken value)? refreshEZRXToken,
     TResult? Function(_Logout value)? logout,
+    TResult? Function(_CheckIfBiometricDenied value)? checkIfBiometricDenied,
+    TResult? Function(_ToggleAppSettings value)? visitedAppSettings,
   }) {
     return logout?.call(this);
   }
@@ -871,6 +960,8 @@ class _$_Logout implements _Logout {
     TResult Function(_RefreshOktaToken value)? refreshOktaToken,
     TResult Function(_RefreshEZRXToken value)? refreshEZRXToken,
     TResult Function(_Logout value)? logout,
+    TResult Function(_CheckIfBiometricDenied value)? checkIfBiometricDenied,
+    TResult Function(_ToggleAppSettings value)? visitedAppSettings,
     required TResult orElse(),
   }) {
     if (logout != null) {
@@ -885,6 +976,285 @@ abstract class _Logout implements AuthEvent {
 }
 
 /// @nodoc
+abstract class _$$_CheckIfBiometricDeniedCopyWith<$Res> {
+  factory _$$_CheckIfBiometricDeniedCopyWith(_$_CheckIfBiometricDenied value,
+          $Res Function(_$_CheckIfBiometricDenied) then) =
+      __$$_CheckIfBiometricDeniedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_CheckIfBiometricDeniedCopyWithImpl<$Res>
+    extends _$AuthEventCopyWithImpl<$Res, _$_CheckIfBiometricDenied>
+    implements _$$_CheckIfBiometricDeniedCopyWith<$Res> {
+  __$$_CheckIfBiometricDeniedCopyWithImpl(_$_CheckIfBiometricDenied _value,
+      $Res Function(_$_CheckIfBiometricDenied) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_CheckIfBiometricDenied implements _CheckIfBiometricDenied {
+  const _$_CheckIfBiometricDenied();
+
+  @override
+  String toString() {
+    return 'AuthEvent.checkIfBiometricDenied()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_CheckIfBiometricDenied);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function() bioCheck,
+    required TResult Function() authCheck,
+    required TResult Function() refreshOktaToken,
+    required TResult Function(JWT oktaAccessToken) refreshEZRXToken,
+    required TResult Function() logout,
+    required TResult Function() checkIfBiometricDenied,
+    required TResult Function() visitedAppSettings,
+  }) {
+    return checkIfBiometricDenied();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? init,
+    TResult? Function()? bioCheck,
+    TResult? Function()? authCheck,
+    TResult? Function()? refreshOktaToken,
+    TResult? Function(JWT oktaAccessToken)? refreshEZRXToken,
+    TResult? Function()? logout,
+    TResult? Function()? checkIfBiometricDenied,
+    TResult? Function()? visitedAppSettings,
+  }) {
+    return checkIfBiometricDenied?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function()? bioCheck,
+    TResult Function()? authCheck,
+    TResult Function()? refreshOktaToken,
+    TResult Function(JWT oktaAccessToken)? refreshEZRXToken,
+    TResult Function()? logout,
+    TResult Function()? checkIfBiometricDenied,
+    TResult Function()? visitedAppSettings,
+    required TResult orElse(),
+  }) {
+    if (checkIfBiometricDenied != null) {
+      return checkIfBiometricDenied();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_AuthInit value) init,
+    required TResult Function(_BioCheck value) bioCheck,
+    required TResult Function(_AuthCheck value) authCheck,
+    required TResult Function(_RefreshOktaToken value) refreshOktaToken,
+    required TResult Function(_RefreshEZRXToken value) refreshEZRXToken,
+    required TResult Function(_Logout value) logout,
+    required TResult Function(_CheckIfBiometricDenied value)
+        checkIfBiometricDenied,
+    required TResult Function(_ToggleAppSettings value) visitedAppSettings,
+  }) {
+    return checkIfBiometricDenied(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_AuthInit value)? init,
+    TResult? Function(_BioCheck value)? bioCheck,
+    TResult? Function(_AuthCheck value)? authCheck,
+    TResult? Function(_RefreshOktaToken value)? refreshOktaToken,
+    TResult? Function(_RefreshEZRXToken value)? refreshEZRXToken,
+    TResult? Function(_Logout value)? logout,
+    TResult? Function(_CheckIfBiometricDenied value)? checkIfBiometricDenied,
+    TResult? Function(_ToggleAppSettings value)? visitedAppSettings,
+  }) {
+    return checkIfBiometricDenied?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_AuthInit value)? init,
+    TResult Function(_BioCheck value)? bioCheck,
+    TResult Function(_AuthCheck value)? authCheck,
+    TResult Function(_RefreshOktaToken value)? refreshOktaToken,
+    TResult Function(_RefreshEZRXToken value)? refreshEZRXToken,
+    TResult Function(_Logout value)? logout,
+    TResult Function(_CheckIfBiometricDenied value)? checkIfBiometricDenied,
+    TResult Function(_ToggleAppSettings value)? visitedAppSettings,
+    required TResult orElse(),
+  }) {
+    if (checkIfBiometricDenied != null) {
+      return checkIfBiometricDenied(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _CheckIfBiometricDenied implements AuthEvent {
+  const factory _CheckIfBiometricDenied() = _$_CheckIfBiometricDenied;
+}
+
+/// @nodoc
+abstract class _$$_ToggleAppSettingsCopyWith<$Res> {
+  factory _$$_ToggleAppSettingsCopyWith(_$_ToggleAppSettings value,
+          $Res Function(_$_ToggleAppSettings) then) =
+      __$$_ToggleAppSettingsCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_ToggleAppSettingsCopyWithImpl<$Res>
+    extends _$AuthEventCopyWithImpl<$Res, _$_ToggleAppSettings>
+    implements _$$_ToggleAppSettingsCopyWith<$Res> {
+  __$$_ToggleAppSettingsCopyWithImpl(
+      _$_ToggleAppSettings _value, $Res Function(_$_ToggleAppSettings) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_ToggleAppSettings implements _ToggleAppSettings {
+  const _$_ToggleAppSettings();
+
+  @override
+  String toString() {
+    return 'AuthEvent.visitedAppSettings()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_ToggleAppSettings);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function() bioCheck,
+    required TResult Function() authCheck,
+    required TResult Function() refreshOktaToken,
+    required TResult Function(JWT oktaAccessToken) refreshEZRXToken,
+    required TResult Function() logout,
+    required TResult Function() checkIfBiometricDenied,
+    required TResult Function() visitedAppSettings,
+  }) {
+    return visitedAppSettings();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? init,
+    TResult? Function()? bioCheck,
+    TResult? Function()? authCheck,
+    TResult? Function()? refreshOktaToken,
+    TResult? Function(JWT oktaAccessToken)? refreshEZRXToken,
+    TResult? Function()? logout,
+    TResult? Function()? checkIfBiometricDenied,
+    TResult? Function()? visitedAppSettings,
+  }) {
+    return visitedAppSettings?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function()? bioCheck,
+    TResult Function()? authCheck,
+    TResult Function()? refreshOktaToken,
+    TResult Function(JWT oktaAccessToken)? refreshEZRXToken,
+    TResult Function()? logout,
+    TResult Function()? checkIfBiometricDenied,
+    TResult Function()? visitedAppSettings,
+    required TResult orElse(),
+  }) {
+    if (visitedAppSettings != null) {
+      return visitedAppSettings();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_AuthInit value) init,
+    required TResult Function(_BioCheck value) bioCheck,
+    required TResult Function(_AuthCheck value) authCheck,
+    required TResult Function(_RefreshOktaToken value) refreshOktaToken,
+    required TResult Function(_RefreshEZRXToken value) refreshEZRXToken,
+    required TResult Function(_Logout value) logout,
+    required TResult Function(_CheckIfBiometricDenied value)
+        checkIfBiometricDenied,
+    required TResult Function(_ToggleAppSettings value) visitedAppSettings,
+  }) {
+    return visitedAppSettings(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_AuthInit value)? init,
+    TResult? Function(_BioCheck value)? bioCheck,
+    TResult? Function(_AuthCheck value)? authCheck,
+    TResult? Function(_RefreshOktaToken value)? refreshOktaToken,
+    TResult? Function(_RefreshEZRXToken value)? refreshEZRXToken,
+    TResult? Function(_Logout value)? logout,
+    TResult? Function(_CheckIfBiometricDenied value)? checkIfBiometricDenied,
+    TResult? Function(_ToggleAppSettings value)? visitedAppSettings,
+  }) {
+    return visitedAppSettings?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_AuthInit value)? init,
+    TResult Function(_BioCheck value)? bioCheck,
+    TResult Function(_AuthCheck value)? authCheck,
+    TResult Function(_RefreshOktaToken value)? refreshOktaToken,
+    TResult Function(_RefreshEZRXToken value)? refreshEZRXToken,
+    TResult Function(_Logout value)? logout,
+    TResult Function(_CheckIfBiometricDenied value)? checkIfBiometricDenied,
+    TResult Function(_ToggleAppSettings value)? visitedAppSettings,
+    required TResult orElse(),
+  }) {
+    if (visitedAppSettings != null) {
+      return visitedAppSettings(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ToggleAppSettings implements AuthEvent {
+  const factory _ToggleAppSettings() = _$_ToggleAppSettings;
+}
+
+/// @nodoc
 mixin _$AuthState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
@@ -892,6 +1262,8 @@ mixin _$AuthState {
     required TResult Function() loading,
     required TResult Function() authenticated,
     required TResult Function() unauthenticated,
+    required TResult Function() biometricDenied,
+    required TResult Function() visitedAppSettings,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -900,6 +1272,8 @@ mixin _$AuthState {
     TResult? Function()? loading,
     TResult? Function()? authenticated,
     TResult? Function()? unauthenticated,
+    TResult? Function()? biometricDenied,
+    TResult? Function()? visitedAppSettings,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -908,6 +1282,8 @@ mixin _$AuthState {
     TResult Function()? loading,
     TResult Function()? authenticated,
     TResult Function()? unauthenticated,
+    TResult Function()? biometricDenied,
+    TResult Function()? visitedAppSettings,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -917,6 +1293,8 @@ mixin _$AuthState {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Authenticated value) authenticated,
     required TResult Function(_Unauthenticated value) unauthenticated,
+    required TResult Function(_BiometricDenied value) biometricDenied,
+    required TResult Function(_VisitedAppSettings value) visitedAppSettings,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -925,6 +1303,8 @@ mixin _$AuthState {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Authenticated value)? authenticated,
     TResult? Function(_Unauthenticated value)? unauthenticated,
+    TResult? Function(_BiometricDenied value)? biometricDenied,
+    TResult? Function(_VisitedAppSettings value)? visitedAppSettings,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -933,6 +1313,8 @@ mixin _$AuthState {
     TResult Function(_Loading value)? loading,
     TResult Function(_Authenticated value)? authenticated,
     TResult Function(_Unauthenticated value)? unauthenticated,
+    TResult Function(_BiometricDenied value)? biometricDenied,
+    TResult Function(_VisitedAppSettings value)? visitedAppSettings,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -996,6 +1378,8 @@ class _$_Initial implements _Initial {
     required TResult Function() loading,
     required TResult Function() authenticated,
     required TResult Function() unauthenticated,
+    required TResult Function() biometricDenied,
+    required TResult Function() visitedAppSettings,
   }) {
     return initial();
   }
@@ -1007,6 +1391,8 @@ class _$_Initial implements _Initial {
     TResult? Function()? loading,
     TResult? Function()? authenticated,
     TResult? Function()? unauthenticated,
+    TResult? Function()? biometricDenied,
+    TResult? Function()? visitedAppSettings,
   }) {
     return initial?.call();
   }
@@ -1018,6 +1404,8 @@ class _$_Initial implements _Initial {
     TResult Function()? loading,
     TResult Function()? authenticated,
     TResult Function()? unauthenticated,
+    TResult Function()? biometricDenied,
+    TResult Function()? visitedAppSettings,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -1033,6 +1421,8 @@ class _$_Initial implements _Initial {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Authenticated value) authenticated,
     required TResult Function(_Unauthenticated value) unauthenticated,
+    required TResult Function(_BiometricDenied value) biometricDenied,
+    required TResult Function(_VisitedAppSettings value) visitedAppSettings,
   }) {
     return initial(this);
   }
@@ -1044,6 +1434,8 @@ class _$_Initial implements _Initial {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Authenticated value)? authenticated,
     TResult? Function(_Unauthenticated value)? unauthenticated,
+    TResult? Function(_BiometricDenied value)? biometricDenied,
+    TResult? Function(_VisitedAppSettings value)? visitedAppSettings,
   }) {
     return initial?.call(this);
   }
@@ -1055,6 +1447,8 @@ class _$_Initial implements _Initial {
     TResult Function(_Loading value)? loading,
     TResult Function(_Authenticated value)? authenticated,
     TResult Function(_Unauthenticated value)? unauthenticated,
+    TResult Function(_BiometricDenied value)? biometricDenied,
+    TResult Function(_VisitedAppSettings value)? visitedAppSettings,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -1109,6 +1503,8 @@ class _$_Loading implements _Loading {
     required TResult Function() loading,
     required TResult Function() authenticated,
     required TResult Function() unauthenticated,
+    required TResult Function() biometricDenied,
+    required TResult Function() visitedAppSettings,
   }) {
     return loading();
   }
@@ -1120,6 +1516,8 @@ class _$_Loading implements _Loading {
     TResult? Function()? loading,
     TResult? Function()? authenticated,
     TResult? Function()? unauthenticated,
+    TResult? Function()? biometricDenied,
+    TResult? Function()? visitedAppSettings,
   }) {
     return loading?.call();
   }
@@ -1131,6 +1529,8 @@ class _$_Loading implements _Loading {
     TResult Function()? loading,
     TResult Function()? authenticated,
     TResult Function()? unauthenticated,
+    TResult Function()? biometricDenied,
+    TResult Function()? visitedAppSettings,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -1146,6 +1546,8 @@ class _$_Loading implements _Loading {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Authenticated value) authenticated,
     required TResult Function(_Unauthenticated value) unauthenticated,
+    required TResult Function(_BiometricDenied value) biometricDenied,
+    required TResult Function(_VisitedAppSettings value) visitedAppSettings,
   }) {
     return loading(this);
   }
@@ -1157,6 +1559,8 @@ class _$_Loading implements _Loading {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Authenticated value)? authenticated,
     TResult? Function(_Unauthenticated value)? unauthenticated,
+    TResult? Function(_BiometricDenied value)? biometricDenied,
+    TResult? Function(_VisitedAppSettings value)? visitedAppSettings,
   }) {
     return loading?.call(this);
   }
@@ -1168,6 +1572,8 @@ class _$_Loading implements _Loading {
     TResult Function(_Loading value)? loading,
     TResult Function(_Authenticated value)? authenticated,
     TResult Function(_Unauthenticated value)? unauthenticated,
+    TResult Function(_BiometricDenied value)? biometricDenied,
+    TResult Function(_VisitedAppSettings value)? visitedAppSettings,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -1223,6 +1629,8 @@ class _$_Authenticated implements _Authenticated {
     required TResult Function() loading,
     required TResult Function() authenticated,
     required TResult Function() unauthenticated,
+    required TResult Function() biometricDenied,
+    required TResult Function() visitedAppSettings,
   }) {
     return authenticated();
   }
@@ -1234,6 +1642,8 @@ class _$_Authenticated implements _Authenticated {
     TResult? Function()? loading,
     TResult? Function()? authenticated,
     TResult? Function()? unauthenticated,
+    TResult? Function()? biometricDenied,
+    TResult? Function()? visitedAppSettings,
   }) {
     return authenticated?.call();
   }
@@ -1245,6 +1655,8 @@ class _$_Authenticated implements _Authenticated {
     TResult Function()? loading,
     TResult Function()? authenticated,
     TResult Function()? unauthenticated,
+    TResult Function()? biometricDenied,
+    TResult Function()? visitedAppSettings,
     required TResult orElse(),
   }) {
     if (authenticated != null) {
@@ -1260,6 +1672,8 @@ class _$_Authenticated implements _Authenticated {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Authenticated value) authenticated,
     required TResult Function(_Unauthenticated value) unauthenticated,
+    required TResult Function(_BiometricDenied value) biometricDenied,
+    required TResult Function(_VisitedAppSettings value) visitedAppSettings,
   }) {
     return authenticated(this);
   }
@@ -1271,6 +1685,8 @@ class _$_Authenticated implements _Authenticated {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Authenticated value)? authenticated,
     TResult? Function(_Unauthenticated value)? unauthenticated,
+    TResult? Function(_BiometricDenied value)? biometricDenied,
+    TResult? Function(_VisitedAppSettings value)? visitedAppSettings,
   }) {
     return authenticated?.call(this);
   }
@@ -1282,6 +1698,8 @@ class _$_Authenticated implements _Authenticated {
     TResult Function(_Loading value)? loading,
     TResult Function(_Authenticated value)? authenticated,
     TResult Function(_Unauthenticated value)? unauthenticated,
+    TResult Function(_BiometricDenied value)? biometricDenied,
+    TResult Function(_VisitedAppSettings value)? visitedAppSettings,
     required TResult orElse(),
   }) {
     if (authenticated != null) {
@@ -1337,6 +1755,8 @@ class _$_Unauthenticated implements _Unauthenticated {
     required TResult Function() loading,
     required TResult Function() authenticated,
     required TResult Function() unauthenticated,
+    required TResult Function() biometricDenied,
+    required TResult Function() visitedAppSettings,
   }) {
     return unauthenticated();
   }
@@ -1348,6 +1768,8 @@ class _$_Unauthenticated implements _Unauthenticated {
     TResult? Function()? loading,
     TResult? Function()? authenticated,
     TResult? Function()? unauthenticated,
+    TResult? Function()? biometricDenied,
+    TResult? Function()? visitedAppSettings,
   }) {
     return unauthenticated?.call();
   }
@@ -1359,6 +1781,8 @@ class _$_Unauthenticated implements _Unauthenticated {
     TResult Function()? loading,
     TResult Function()? authenticated,
     TResult Function()? unauthenticated,
+    TResult Function()? biometricDenied,
+    TResult Function()? visitedAppSettings,
     required TResult orElse(),
   }) {
     if (unauthenticated != null) {
@@ -1374,6 +1798,8 @@ class _$_Unauthenticated implements _Unauthenticated {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Authenticated value) authenticated,
     required TResult Function(_Unauthenticated value) unauthenticated,
+    required TResult Function(_BiometricDenied value) biometricDenied,
+    required TResult Function(_VisitedAppSettings value) visitedAppSettings,
   }) {
     return unauthenticated(this);
   }
@@ -1385,6 +1811,8 @@ class _$_Unauthenticated implements _Unauthenticated {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Authenticated value)? authenticated,
     TResult? Function(_Unauthenticated value)? unauthenticated,
+    TResult? Function(_BiometricDenied value)? biometricDenied,
+    TResult? Function(_VisitedAppSettings value)? visitedAppSettings,
   }) {
     return unauthenticated?.call(this);
   }
@@ -1396,6 +1824,8 @@ class _$_Unauthenticated implements _Unauthenticated {
     TResult Function(_Loading value)? loading,
     TResult Function(_Authenticated value)? authenticated,
     TResult Function(_Unauthenticated value)? unauthenticated,
+    TResult Function(_BiometricDenied value)? biometricDenied,
+    TResult Function(_VisitedAppSettings value)? visitedAppSettings,
     required TResult orElse(),
   }) {
     if (unauthenticated != null) {
@@ -1407,4 +1837,256 @@ class _$_Unauthenticated implements _Unauthenticated {
 
 abstract class _Unauthenticated implements AuthState {
   const factory _Unauthenticated() = _$_Unauthenticated;
+}
+
+/// @nodoc
+abstract class _$$_BiometricDeniedCopyWith<$Res> {
+  factory _$$_BiometricDeniedCopyWith(
+          _$_BiometricDenied value, $Res Function(_$_BiometricDenied) then) =
+      __$$_BiometricDeniedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_BiometricDeniedCopyWithImpl<$Res>
+    extends _$AuthStateCopyWithImpl<$Res, _$_BiometricDenied>
+    implements _$$_BiometricDeniedCopyWith<$Res> {
+  __$$_BiometricDeniedCopyWithImpl(
+      _$_BiometricDenied _value, $Res Function(_$_BiometricDenied) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_BiometricDenied implements _BiometricDenied {
+  const _$_BiometricDenied();
+
+  @override
+  String toString() {
+    return 'AuthState.biometricDenied()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_BiometricDenied);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function() authenticated,
+    required TResult Function() unauthenticated,
+    required TResult Function() biometricDenied,
+    required TResult Function() visitedAppSettings,
+  }) {
+    return biometricDenied();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function()? authenticated,
+    TResult? Function()? unauthenticated,
+    TResult? Function()? biometricDenied,
+    TResult? Function()? visitedAppSettings,
+  }) {
+    return biometricDenied?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? authenticated,
+    TResult Function()? unauthenticated,
+    TResult Function()? biometricDenied,
+    TResult Function()? visitedAppSettings,
+    required TResult orElse(),
+  }) {
+    if (biometricDenied != null) {
+      return biometricDenied();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Authenticated value) authenticated,
+    required TResult Function(_Unauthenticated value) unauthenticated,
+    required TResult Function(_BiometricDenied value) biometricDenied,
+    required TResult Function(_VisitedAppSettings value) visitedAppSettings,
+  }) {
+    return biometricDenied(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Authenticated value)? authenticated,
+    TResult? Function(_Unauthenticated value)? unauthenticated,
+    TResult? Function(_BiometricDenied value)? biometricDenied,
+    TResult? Function(_VisitedAppSettings value)? visitedAppSettings,
+  }) {
+    return biometricDenied?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Authenticated value)? authenticated,
+    TResult Function(_Unauthenticated value)? unauthenticated,
+    TResult Function(_BiometricDenied value)? biometricDenied,
+    TResult Function(_VisitedAppSettings value)? visitedAppSettings,
+    required TResult orElse(),
+  }) {
+    if (biometricDenied != null) {
+      return biometricDenied(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _BiometricDenied implements AuthState {
+  const factory _BiometricDenied() = _$_BiometricDenied;
+}
+
+/// @nodoc
+abstract class _$$_VisitedAppSettingsCopyWith<$Res> {
+  factory _$$_VisitedAppSettingsCopyWith(_$_VisitedAppSettings value,
+          $Res Function(_$_VisitedAppSettings) then) =
+      __$$_VisitedAppSettingsCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_VisitedAppSettingsCopyWithImpl<$Res>
+    extends _$AuthStateCopyWithImpl<$Res, _$_VisitedAppSettings>
+    implements _$$_VisitedAppSettingsCopyWith<$Res> {
+  __$$_VisitedAppSettingsCopyWithImpl(
+      _$_VisitedAppSettings _value, $Res Function(_$_VisitedAppSettings) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_VisitedAppSettings implements _VisitedAppSettings {
+  const _$_VisitedAppSettings();
+
+  @override
+  String toString() {
+    return 'AuthState.visitedAppSettings()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_VisitedAppSettings);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function() authenticated,
+    required TResult Function() unauthenticated,
+    required TResult Function() biometricDenied,
+    required TResult Function() visitedAppSettings,
+  }) {
+    return visitedAppSettings();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function()? authenticated,
+    TResult? Function()? unauthenticated,
+    TResult? Function()? biometricDenied,
+    TResult? Function()? visitedAppSettings,
+  }) {
+    return visitedAppSettings?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? authenticated,
+    TResult Function()? unauthenticated,
+    TResult Function()? biometricDenied,
+    TResult Function()? visitedAppSettings,
+    required TResult orElse(),
+  }) {
+    if (visitedAppSettings != null) {
+      return visitedAppSettings();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Authenticated value) authenticated,
+    required TResult Function(_Unauthenticated value) unauthenticated,
+    required TResult Function(_BiometricDenied value) biometricDenied,
+    required TResult Function(_VisitedAppSettings value) visitedAppSettings,
+  }) {
+    return visitedAppSettings(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Authenticated value)? authenticated,
+    TResult? Function(_Unauthenticated value)? unauthenticated,
+    TResult? Function(_BiometricDenied value)? biometricDenied,
+    TResult? Function(_VisitedAppSettings value)? visitedAppSettings,
+  }) {
+    return visitedAppSettings?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Authenticated value)? authenticated,
+    TResult Function(_Unauthenticated value)? unauthenticated,
+    TResult Function(_BiometricDenied value)? biometricDenied,
+    TResult Function(_VisitedAppSettings value)? visitedAppSettings,
+    required TResult orElse(),
+  }) {
+    if (visitedAppSettings != null) {
+      return visitedAppSettings(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _VisitedAppSettings implements AuthState {
+  const factory _VisitedAppSettings() = _$_VisitedAppSettings;
 }

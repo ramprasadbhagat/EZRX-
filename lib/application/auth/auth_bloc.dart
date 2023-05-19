@@ -29,7 +29,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             final authResultEither =
                 await authRepository.doBiometricAuthentication();
             await authResultEither.fold(
-              (error) async => emit(const AuthState.unauthenticated()),
+              (error) async => add(const AuthEvent.logout()),
               (response) async => emit(const AuthState.authenticated()),
             );
           },
@@ -39,11 +39,21 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         final result = await authRepository.tokenValid();
         await result.fold(
           (invalid) async => add(const AuthEvent.refreshOktaToken()),
-          (valid) async => add(const AuthEvent.bioCheck()),
+          (valid) async {
+            final isBiometricEnabledResult =
+                authRepository.isBiometricEnabled();
+            await isBiometricEnabledResult.fold(
+              (error) async => emit(const AuthState.authenticated()),
+              (isEnable) async {
+                isEnable
+                    ? add(const AuthEvent.checkIfBiometricDenied())
+                    : emit(const AuthState.authenticated());
+              },
+            );
+          },
         );
       },
       refreshOktaToken: (e) async {
-        emit(const AuthState.loading());
         final oktaResult = await authRepository.getOktaAccessToken();
         await oktaResult.fold(
           (failure) async => emit(const AuthState.unauthenticated()),
@@ -58,13 +68,37 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           (failure) async => emit(const AuthState.unauthenticated()),
           (login) async {
             await authRepository.storeJWT(jwt: login.jwt);
-            add(const AuthEvent.bioCheck());
+            final isBiometricEnabledResult =
+                authRepository.isBiometricEnabled();
+            await isBiometricEnabledResult.fold(
+              (error) async => emit(const AuthState.authenticated()),
+              (isEnable) async {
+                isEnable
+                    ? add(const AuthEvent.bioCheck())
+                    : emit(const AuthState.authenticated());
+              },
+            );
           },
         );
       },
       logout: (e) {
         authRepository.logout();
         emit(const AuthState.unauthenticated());
+      },
+      checkIfBiometricDenied: (e) async {
+        final failureOrSuccess =
+            await authRepository.checkBiometricPermission();
+        failureOrSuccess.fold(
+          (failure) {
+            emit(const AuthState.biometricDenied());
+          },
+          (isBiometricPossible) {
+            add(const AuthEvent.bioCheck());
+          },
+        );
+      },
+      visitedAppSettings: (e) async {
+        emit(const AuthState.visitedAppSettings());
       },
     );
   }

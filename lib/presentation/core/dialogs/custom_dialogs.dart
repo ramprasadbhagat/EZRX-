@@ -15,6 +15,7 @@ class CustomDialogs {
   }) async {
     await showDialog<void>(
       context: context,
+      barrierDismissible: false,
       builder: (BuildContext ctx) {
         return PlatformAlertDialog(
           key: const Key('confirmDialog'),

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/add_payment_method/add_payment_method_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/manage_payment_method/manage_payment_methods_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/payment_methods_bloc.dart';
+import 'package:ezrxmobile/application/account/settings/setting_bloc.dart';
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/application/admin_po_attachment/admin_po_attachment_bloc.dart';
 import 'package:ezrxmobile/application/admin_po_attachment/filter/admin_po_attachment_filter_bloc.dart';
@@ -17,6 +18,7 @@ import 'package:ezrxmobile/application/returns/approver_actions/return_approver_
 import 'package:ezrxmobile/application/returns/return_summary/return_summary_bloc.dart';
 import 'package:ezrxmobile/application/returns/request_return_filter/request_return_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_summary_details/return_summary_details_bloc.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/setting_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 import 'package:ezrxmobile/application/returns/return_summary_filter/return_summary_filter_bloc.dart';
@@ -143,6 +145,7 @@ Future<void> initialSetup({required Flavor flavor}) async {
   await locator<OktaLoginServices>().init();
   await locator<AccountSelectorStorage>().init();
   await locator<CartStorage>().init();
+  await locator<SettingStorage>().init();
   await locator<OrderStorage>().init();
   locator<MixpanelService>().init(
     mixpanel: await Mixpanel.init(
@@ -400,6 +403,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider<AddPaymentMethodBloc>(
           create: (context) => locator<AddPaymentMethodBloc>(),
+        ),
+        BlocProvider<SettingBloc>(
+          create: (context) => locator<SettingBloc>(),
         ),
       ],
       child: MaterialApp.router(

@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/payment_methods_bloc.dart';
+import 'package:ezrxmobile/application/account/settings/setting_bloc.dart';
 import 'package:ezrxmobile/application/admin_po_attachment/admin_po_attachment_bloc.dart';
 import 'package:ezrxmobile/application/admin_po_attachment/filter/admin_po_attachment_filter_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
@@ -16,8 +17,10 @@ import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/presentation/core/dialogs/custom_dialogs.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/cart_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:universal_io/io.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -94,7 +97,8 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
   void _initializeTimestamp() => dateTime = DateTime.now();
 
   bool _checkIfRefreshIsNeeded() =>
-      dateTime.difference(DateTime.now()).inMinutes >= 30;
+      dateTime.difference(DateTime.now()).inMinutes >= 30 ||
+      context.read<AuthBloc>().state == const AuthState.visitedAppSettings();
 
   @override
   Widget build(BuildContext context) {
@@ -134,33 +138,18 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                   ],
                 );
               },
+              biometricDenied: (value) {
+                _showBioMetricPermissionDialog();
+              },
+              visitedAppSettings: (value) => false,
             );
-          },
-        ),
-        BlocListener<UserBloc, UserState>(
-          listenWhen: (previous, current) =>
-              previous.user.username != current.user.username &&
-              current.user.username.isValid(),
-          listener: (context, state) {
-            final welcomeMessage =
-                '${'Welcome back'.tr()}, ${state.user.username.getOrCrash()}';
-            showSnackBar(context: context, message: welcomeMessage);
           },
         ),
         BlocListener<UserBloc, UserState>(
           listenWhen: (previous, current) => previous.user != current.user,
           listener: (context, state) {
-            if (state.haveSalesOrganisation) {
-              context.read<SalesOrgBloc>().add(
-                    SalesOrgEvent.loadSavedOrganisation(
-                      salesOrganisations: state.userSalesOrganisations,
-                    ),
-                  );
-            } else {
-              context
-                  .read<SalesOrgBloc>()
-                  .add(const SalesOrgEvent.initialized());
-            }
+            _welcomeUserMessage(state);
+            _initializeSalesOrg(state);
             if (state.isSalesRep) {
               context.read<SalesRepBloc>().add(
                     SalesRepEvent.fetch(
@@ -429,7 +418,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                 ));
               },
               error: (error) {
-                ErrorUtils.handleApiFailure(context,error);
+                ErrorUtils.handleApiFailure(context, error);
               },
             );
           },
@@ -553,6 +542,50 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
             ),
           ),
         );
+  }
+
+  void _showBioMetricPermissionDialog() {
+    CustomDialogs.confirmationDialog(
+      context: context,
+      title: 'Permission Required!',
+      message:
+          'App wants to access Face id/Biometric to secure account access for logged in user. Please go to app settings and enable it.',
+      confirmText: 'Settings',
+      cancelText: 'Logout',
+      onAcceptPressed: () async {
+        final visited = await openAppSettings();
+        if (context.mounted && visited) {
+          context.read<AuthBloc>().add(const AuthEvent.visitedAppSettings());
+        }
+      },
+      onCancelPressed: () async {
+        context.read<AuthBloc>().add(const AuthEvent.logout());
+      },
+    );
+  }
+
+  void _welcomeUserMessage(UserState userState) {
+    if (userState.user.username.isValid()) {
+      final welcomeMessage =
+          '${'Welcome back'.tr()}, ${userState.user.username.getOrCrash()}';
+      context
+          .read<SettingBloc>()
+          .add(const SettingEvent.checkIfBiometricPossible());
+      showSnackBar(context: context, message: welcomeMessage);
+    }
+  }
+
+  void _initializeSalesOrg(UserState userState) {
+    final salesOrgBloc = context.read<SalesOrgBloc>();
+    if (userState.haveSalesOrganisation) {
+      salesOrgBloc.add(
+        SalesOrgEvent.loadSavedOrganisation(
+          salesOrganisations: userState.userSalesOrganisations,
+        ),
+      );
+    } else {
+      salesOrgBloc.add(const SalesOrgEvent.initialized());
+    }
   }
 }
 

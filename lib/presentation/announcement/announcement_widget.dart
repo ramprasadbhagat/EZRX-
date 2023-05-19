@@ -51,6 +51,8 @@ class AnnouncementWidget extends StatelessWidget {
               loading: (value) => false,
               unauthenticated: (value) =>
                   displayTime.isPreLogin || displayTime.isPreAndPost,
+              biometricDenied: (value) => false,
+              visitedAppSettings: (value) => false,
             );
             final isValidModule = state.announcement.isValidModuleToDisplay(
               currentPath: currentPath,

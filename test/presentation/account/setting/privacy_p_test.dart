@@ -1,6 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_localization_loader/easy_localization_loader.dart';
+import 'package:ezrxmobile/application/account/settings/setting_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/config.dart';
@@ -22,6 +23,9 @@ class AnnouncementBlocMock
 
 class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 
+class SettingBlocMock extends MockBloc<SettingEvent, SettingState>
+    implements SettingBloc {}
+
 class AutoRouterMock extends Mock implements AppRouter {
   @override
   String currentPath = '';
@@ -29,6 +33,7 @@ class AutoRouterMock extends Mock implements AppRouter {
 
 void main() {
   late AuthBloc authBlocMock;
+  late SettingBloc settingBlocMock;
   late AnnouncementBloc announcementBlocMock;
   late AppRouter autoRouterMock;
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -36,8 +41,10 @@ void main() {
   setUp(() {
     authBlocMock = AuthBlocMock();
     autoRouterMock = AutoRouterMock();
+    settingBlocMock = SettingBlocMock();
     announcementBlocMock = AnnouncementBlocMock();
     when(() => authBlocMock.state).thenReturn(const AuthState.initial());
+    when(() => settingBlocMock.state).thenReturn(SettingState.initial());
     when(() => announcementBlocMock.state)
         .thenReturn(AnnouncementState.initial());
   });
@@ -84,6 +91,9 @@ void main() {
             BlocProvider<AuthBloc>(create: (context) => authBlocMock),
             BlocProvider<AnnouncementBloc>(
                 create: (context) => announcementBlocMock),
+            BlocProvider<SettingBloc>(
+              create: (context) => settingBlocMock,
+            ),
           ],
           child: const SettingsPage(),
         ),
@@ -105,6 +115,9 @@ void main() {
               BlocProvider<AuthBloc>(create: (context) => authBlocMock),
               BlocProvider<AnnouncementBloc>(
                   create: (context) => announcementBlocMock),
+              BlocProvider<SettingBloc>(
+                create: (context) => settingBlocMock,
+              ),
             ],
             child: WebViewPage(
               initialFile: locator<Config>().getPrivacyInitialFile,

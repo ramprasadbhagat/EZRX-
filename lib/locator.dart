@@ -5,6 +5,7 @@ import 'package:ezrxmobile/application/account/payment_configuration/payment_met
 import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/payment_methods_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_rep/sales_rep_bloc.dart';
+import 'package:ezrxmobile/application/account/settings/setting_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/admin_po_attachment/admin_po_attachment_bloc.dart';
@@ -55,6 +56,7 @@ import 'package:ezrxmobile/infrastructure/core/common/permission_service.dart';
 import 'package:ezrxmobile/application/returns/request_return/request_return_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_request_type_code/return_request_type_code_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/common/file_path_helper.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/setting_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/order_storage.dart';
 import 'package:ezrxmobile/infrastructure/deep_linking/repository/deep_linking_repository.dart';
@@ -355,6 +357,7 @@ void setupLocator() {
     () => CredStorage(secureStorage: locator<SecureStorage>()),
   );
   locator.registerLazySingleton(() => CartStorage());
+  locator.registerLazySingleton(() => SettingStorage());
   locator.registerLazySingleton(() => OrderStorage());
   locator.registerLazySingleton(
     () => MaterialInfoScanner(config: locator<Config>()),
@@ -424,6 +427,7 @@ void setupLocator() {
       tokenStorage: locator<TokenStorage>(),
       credStorage: locator<CredStorage>(),
       cartStorage: locator<CartStorage>(),
+      settingStorage: locator<SettingStorage>(),
       oktaLoginServices: locator<OktaLoginServices>(),
       pushNotificationService: locator<PushNotificationService>(),
       localAuthentication: locator<LocalAuthentication>(),
@@ -2118,6 +2122,17 @@ void setupLocator() {
       config: locator<Config>(),
       remoteDataSource: locator<UpdateSalesOrgRemoteDataSource>(),
       localDataSource: locator<UpdateSalesOrgLocalDataSource>(),
+    ),
+  );
+
+  //============================================================
+  //  Settings
+  //
+  //============================================================
+
+  locator.registerLazySingleton(
+    () => SettingBloc(
+      authRepository: locator<AuthRepository>(),
     ),
   );
 }

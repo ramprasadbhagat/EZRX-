@@ -33,4 +33,12 @@ abstract class IAuthRepository {
   });
   Future<Either<ApiFailure, bool>> doBiometricAuthentication();
   Future<Either<ApiFailure, bool>> canBeAuthenticatedAndBioAvailable();
+  Either<ApiFailure, bool> isBiometricEnabled();
+  Future<Either<ApiFailure, Unit>> putBiometricEnabledState({
+    required bool isBiometricEnable,
+  });
+
+  Future<Either<ApiFailure, bool>> canShowBiometricToggle();
+  Future<Either<ApiFailure, bool>> checkBiometricPermission();
+
 }

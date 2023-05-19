@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/settings/setting_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.dart';
 import 'package:ezrxmobile/config.dart';
@@ -9,9 +10,11 @@ import 'package:ezrxmobile/presentation/account/settings/language_tile.dart';
 import 'package:ezrxmobile/presentation/account/settings/notification_tile.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
@@ -46,6 +49,7 @@ class SettingsPage extends StatelessWidget {
                     },
                   ),
                   const LanguageTile(),
+                  const _BiometricLoginTile(),
                   ListTile(
                     key: const Key('contactUsTile'),
                     leading: const Icon(Icons.contact_support_outlined),
@@ -108,6 +112,35 @@ class SettingsPage extends StatelessWidget {
           const SafeArea(bottom: true, child: _VersionString()),
         ],
       ),
+    );
+  }
+}
+
+class _BiometricLoginTile extends StatelessWidget {
+  const _BiometricLoginTile({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<SettingBloc, SettingState>(
+      buildWhen: (previous, current) =>
+          previous.isBiometricEnable != current.isBiometricEnable,
+      builder: (context, state) {
+        return state.isBiometricPossible
+            ? ListTile(
+                key: const Key('biometricTile'),
+                leading: const Icon(Icons.fingerprint),
+                title: const Text('Biometric Login').tr(),
+                trailing: PlatformSwitch(
+                  key: const Key('biometricLoginToggle'),
+                  value: state.isBiometricEnable,
+                  activeColor: ZPColors.kPrimaryColor,
+                  onChanged: (bool val) => context.read<SettingBloc>().add(
+                        SettingEvent.toggleBiometric(isBiometricEnabled: val),
+                      ),
+                ),
+              )
+            : const SizedBox.shrink();
+      },
     );
   }
 }
