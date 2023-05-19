@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/add_payment_method/add_payment_method_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/manage_payment_method/manage_payment_methods_bloc.dart';
+import 'package:ezrxmobile/application/account/payment_configuration/bank_beneficiary/bank_beneficiary_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/payment_methods_bloc.dart';
 import 'package:ezrxmobile/application/account/settings/setting_bloc.dart';
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
@@ -406,6 +407,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider<SettingBloc>(
           create: (context) => locator<SettingBloc>(),
+        ),
+       BlocProvider<BankBeneficiaryBloc>(
+          create: (context) => locator<BankBeneficiaryBloc>(),
         ),
       ],
       child: MaterialApp.router(

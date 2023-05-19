@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/application/account/payment_configuration/bank_beneficiary/bank_beneficiary_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/payment_methods_bloc.dart';
 import 'package:ezrxmobile/application/account/settings/setting_bloc.dart';
 import 'package:ezrxmobile/application/admin_po_attachment/admin_po_attachment_bloc.dart';
@@ -173,6 +174,9 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               context.read<PaymentMethodsBloc>().add(
                     const PaymentMethodsEvent.fetch(),
                   );
+              context.read<BankBeneficiaryBloc>().add(
+                const BankBeneficiaryEvent.fetch(),
+              );
             }
           },
         ),

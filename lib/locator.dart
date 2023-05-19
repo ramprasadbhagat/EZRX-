@@ -2,6 +2,7 @@ import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/add_payment_method/add_payment_method_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/manage_payment_method/manage_payment_methods_bloc.dart';
+import 'package:ezrxmobile/application/account/payment_configuration/bank_beneficiary/bank_beneficiary_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/payment_methods_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_rep/sales_rep_bloc.dart';
@@ -41,6 +42,9 @@ import 'package:ezrxmobile/domain/order/repository/i_combo_deal_repository.dart'
 import 'package:ezrxmobile/infrastructure/account/datasource/admin_po_attachment_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/admin_po_attachment_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/admin_po_attachment_remote.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/bank_benificiary_local.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/bank_benificiary_remote.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/bank_benificiary_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/update_sales_org_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/update_sales_org_mutation.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/update_sales_org_remote.dart';
@@ -309,6 +313,9 @@ import 'package:ezrxmobile/infrastructure/payments/datasource/payment_summary_lo
 import 'package:ezrxmobile/infrastructure/payments/datasource/payment_summary_remote_datasource.dart';
 
 import 'package:ezrxmobile/infrastructure/payments/datasource/payment_summary_query.dart';
+
+import 'package:ezrxmobile/infrastructure/account/repository/bank_beneficiary_repository.dart';
+
 
 GetIt locator = GetIt.instance;
 
@@ -2060,6 +2067,36 @@ void setupLocator() {
       paymentMethodsRepository: locator<PaymentMethodsRepository>(),
     ),
   );
+  //============================================================
+  
+  //  Manage Bank Beneficiary
+  //
+  //============================================================
+
+  locator.registerLazySingleton(() => BankBeneficiaryLocalDataSource());
+
+  locator.registerLazySingleton(() => BankBeneficiaryQueryMutation());
+
+  locator.registerLazySingleton(() => BankBeneficiaryRemoteDataSource(
+        httpService: locator<HttpService>(),
+        config: locator<Config>(),
+        dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+        bankBeneficiaryQueryMutation:
+            locator<BankBeneficiaryQueryMutation>(),
+      ));
+
+  locator.registerLazySingleton(() => BankBeneficiaryRepository(
+        config: locator<Config>(),
+        localDataSource: locator<BankBeneficiaryLocalDataSource>(),
+        remoteDataSource: locator<BankBeneficiaryRemoteDataSource>(),
+      ));
+  
+  locator.registerLazySingleton(
+    () => BankBeneficiaryBloc(
+      bankBeneficiaryRepository: locator<BankBeneficiaryRepository>(),
+    ),
+  );
+
   //============================================================
   //  All Invoices and Credits
   //
