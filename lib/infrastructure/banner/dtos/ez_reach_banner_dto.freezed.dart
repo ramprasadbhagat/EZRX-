@@ -69,6 +69,9 @@ mixin _$EZReachBannerDto {
   @HiveField(15, defaultValue: <String>[])
   @JsonKey(name: 'countryCode', defaultValue: <String>[])
   List<String> get countryCode => throw _privateConstructorUsedError;
+  @HiveField(16, defaultValue: '')
+  @JsonKey(name: 'mobileBannerImg', defaultValue: '')
+  String get mobileBannerImg => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -130,7 +133,10 @@ abstract class $EZReachBannerDtoCopyWith<$Res> {
           List<String> salesOrg,
       @HiveField(15, defaultValue: <String>[])
       @JsonKey(name: 'countryCode', defaultValue: <String>[])
-          List<String> countryCode});
+          List<String> countryCode,
+      @HiveField(16, defaultValue: '')
+      @JsonKey(name: 'mobileBannerImg', defaultValue: '')
+          String mobileBannerImg});
 }
 
 /// @nodoc
@@ -162,6 +168,7 @@ class _$EZReachBannerDtoCopyWithImpl<$Res, $Val extends EZReachBannerDto>
     Object? bannerCampaignLocations = null,
     Object? salesOrg = null,
     Object? countryCode = null,
+    Object? mobileBannerImg = null,
   }) {
     return _then(_value.copyWith(
       bannerId: null == bannerId
@@ -228,6 +235,10 @@ class _$EZReachBannerDtoCopyWithImpl<$Res, $Val extends EZReachBannerDto>
           ? _value.countryCode
           : countryCode // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      mobileBannerImg: null == mobileBannerImg
+          ? _value.mobileBannerImg
+          : mobileBannerImg // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -288,7 +299,10 @@ abstract class _$$_EZReachBannerDtoCopyWith<$Res>
           List<String> salesOrg,
       @HiveField(15, defaultValue: <String>[])
       @JsonKey(name: 'countryCode', defaultValue: <String>[])
-          List<String> countryCode});
+          List<String> countryCode,
+      @HiveField(16, defaultValue: '')
+      @JsonKey(name: 'mobileBannerImg', defaultValue: '')
+          String mobileBannerImg});
 }
 
 /// @nodoc
@@ -318,6 +332,7 @@ class __$$_EZReachBannerDtoCopyWithImpl<$Res>
     Object? bannerCampaignLocations = null,
     Object? salesOrg = null,
     Object? countryCode = null,
+    Object? mobileBannerImg = null,
   }) {
     return _then(_$_EZReachBannerDto(
       bannerId: null == bannerId
@@ -384,6 +399,10 @@ class __$$_EZReachBannerDtoCopyWithImpl<$Res>
           ? _value._countryCode
           : countryCode // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      mobileBannerImg: null == mobileBannerImg
+          ? _value.mobileBannerImg
+          : mobileBannerImg // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -440,7 +459,10 @@ class _$_EZReachBannerDto extends _EZReachBannerDto {
           required final List<String> salesOrg,
       @HiveField(15, defaultValue: <String>[])
       @JsonKey(name: 'countryCode', defaultValue: <String>[])
-          required final List<String> countryCode})
+          required final List<String> countryCode,
+      @HiveField(16, defaultValue: '')
+      @JsonKey(name: 'mobileBannerImg', defaultValue: '')
+          required this.mobileBannerImg})
       : _bannerCampaignLocations = bannerCampaignLocations,
         _salesOrg = salesOrg,
         _countryCode = countryCode,
@@ -533,8 +555,13 @@ class _$_EZReachBannerDto extends _EZReachBannerDto {
   }
 
   @override
+  @HiveField(16, defaultValue: '')
+  @JsonKey(name: 'mobileBannerImg', defaultValue: '')
+  final String mobileBannerImg;
+
+  @override
   String toString() {
-    return 'EZReachBannerDto(bannerId: $bannerId, bannerCampaignName: $bannerCampaignName, startDate: $startDate, bannerUrl: $bannerUrl, endDate: $endDate, websiteUrl: $websiteUrl, bannerCountId: $bannerCountId, salesRep: $salesRep, status: $status, customers: $customers, companyName: $companyName, targetProduct: $targetProduct, keyWord: $keyWord, bannerCampaignLocations: $bannerCampaignLocations, salesOrg: $salesOrg, countryCode: $countryCode)';
+    return 'EZReachBannerDto(bannerId: $bannerId, bannerCampaignName: $bannerCampaignName, startDate: $startDate, bannerUrl: $bannerUrl, endDate: $endDate, websiteUrl: $websiteUrl, bannerCountId: $bannerCountId, salesRep: $salesRep, status: $status, customers: $customers, companyName: $companyName, targetProduct: $targetProduct, keyWord: $keyWord, bannerCampaignLocations: $bannerCampaignLocations, salesOrg: $salesOrg, countryCode: $countryCode, mobileBannerImg: $mobileBannerImg)';
   }
 
   @override
@@ -569,7 +596,9 @@ class _$_EZReachBannerDto extends _EZReachBannerDto {
                 other._bannerCampaignLocations, _bannerCampaignLocations) &&
             const DeepCollectionEquality().equals(other._salesOrg, _salesOrg) &&
             const DeepCollectionEquality()
-                .equals(other._countryCode, _countryCode));
+                .equals(other._countryCode, _countryCode) &&
+            (identical(other.mobileBannerImg, mobileBannerImg) ||
+                other.mobileBannerImg == mobileBannerImg));
   }
 
   @JsonKey(ignore: true)
@@ -591,7 +620,8 @@ class _$_EZReachBannerDto extends _EZReachBannerDto {
       keyWord,
       const DeepCollectionEquality().hash(_bannerCampaignLocations),
       const DeepCollectionEquality().hash(_salesOrg),
-      const DeepCollectionEquality().hash(_countryCode));
+      const DeepCollectionEquality().hash(_countryCode),
+      mobileBannerImg);
 
   @JsonKey(ignore: true)
   @override
@@ -656,7 +686,10 @@ abstract class _EZReachBannerDto extends EZReachBannerDto {
           required final List<String> salesOrg,
       @HiveField(15, defaultValue: <String>[])
       @JsonKey(name: 'countryCode', defaultValue: <String>[])
-          required final List<String> countryCode}) = _$_EZReachBannerDto;
+          required final List<String> countryCode,
+      @HiveField(16, defaultValue: '')
+      @JsonKey(name: 'mobileBannerImg', defaultValue: '')
+          required final String mobileBannerImg}) = _$_EZReachBannerDto;
   const _EZReachBannerDto._() : super._();
 
   factory _EZReachBannerDto.fromJson(Map<String, dynamic> json) =
@@ -726,6 +759,10 @@ abstract class _EZReachBannerDto extends EZReachBannerDto {
   @HiveField(15, defaultValue: <String>[])
   @JsonKey(name: 'countryCode', defaultValue: <String>[])
   List<String> get countryCode;
+  @override
+  @HiveField(16, defaultValue: '')
+  @JsonKey(name: 'mobileBannerImg', defaultValue: '')
+  String get mobileBannerImg;
   @override
   @JsonKey(ignore: true)
   _$$_EZReachBannerDtoCopyWith<_$_EZReachBannerDto> get copyWith =>

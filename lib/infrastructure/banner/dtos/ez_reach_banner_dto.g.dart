@@ -35,13 +35,14 @@ class EZReachBannerDtoAdapter extends TypeAdapter<_$_EZReachBannerDto> {
       salesOrg: fields[14] == null ? [] : (fields[14] as List).cast<String>(),
       countryCode:
           fields[15] == null ? [] : (fields[15] as List).cast<String>(),
+      mobileBannerImg: fields[16] == null ? '' : fields[16] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_EZReachBannerDto obj) {
     writer
-      ..writeByte(16)
+      ..writeByte(17)
       ..writeByte(0)
       ..write(obj.bannerId)
       ..writeByte(1)
@@ -68,6 +69,8 @@ class EZReachBannerDtoAdapter extends TypeAdapter<_$_EZReachBannerDto> {
       ..write(obj.targetProduct)
       ..writeByte(12)
       ..write(obj.keyWord)
+      ..writeByte(16)
+      ..write(obj.mobileBannerImg)
       ..writeByte(13)
       ..write(obj.bannerCampaignLocations)
       ..writeByte(14)
@@ -119,6 +122,7 @@ _$_EZReachBannerDto _$$_EZReachBannerDtoFromJson(Map<String, dynamic> json) =>
               ?.map((e) => e as String)
               .toList() ??
           [],
+      mobileBannerImg: json['mobileBannerImg'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_EZReachBannerDtoToJson(_$_EZReachBannerDto instance) =>
@@ -139,4 +143,5 @@ Map<String, dynamic> _$$_EZReachBannerDtoToJson(_$_EZReachBannerDto instance) =>
       'bannerCampaignLocations': instance.bannerCampaignLocations,
       'salesOrg': instance.salesOrg,
       'countryCode': instance.countryCode,
+      'mobileBannerImg': instance.mobileBannerImg,
     };

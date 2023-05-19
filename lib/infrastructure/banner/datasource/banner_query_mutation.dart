@@ -54,6 +54,7 @@ class BannerQueryMutation {
       startDate
       bannerCampaignLocations
       bannerUrl
+      mobileBannerImg
       endDate
       websiteUrl
       salesOrg

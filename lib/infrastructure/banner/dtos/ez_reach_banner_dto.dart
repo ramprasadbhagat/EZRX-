@@ -59,6 +59,9 @@ class EZReachBannerDto with _$EZReachBannerDto {
     @HiveField(15, defaultValue: <String>[])
     @JsonKey(name: 'countryCode', defaultValue: <String>[])
         required List<String> countryCode,
+    @HiveField(16, defaultValue: '')
+    @JsonKey(name: 'mobileBannerImg', defaultValue: '')
+        required String mobileBannerImg,
   }) = _EZReachBannerDto;
 
   factory EZReachBannerDto.fromJson(Map<String, dynamic> json) =>
@@ -66,7 +69,7 @@ class EZReachBannerDto with _$EZReachBannerDto {
 
   BannerItem toDomain() {
     return BannerItem.empty().copyWith(
-      url: bannerUrl,
+      url: mobileBannerImg.isEmpty ? bannerUrl : mobileBannerImg,
       title: bannerCampaignName,
       description: targetProduct,
       urlLink: websiteUrl,
