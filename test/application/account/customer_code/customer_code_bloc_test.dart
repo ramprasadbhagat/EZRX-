@@ -256,15 +256,13 @@ void main() {
         );
       },
       act: (CustomerCodeBloc bloc) {
-        bloc.add(const CustomerCodeEvent.updateSearchKey('fake-customer-code'));
         bloc.add(CustomerCodeEvent.search(
+            searchValue: 'fake-customer-code',
             hidecustomer: false,
             userInfo: fakeUser,
             selectedSalesOrg: fakeSaleOrg));
       },
       expect: () => [
-        CustomerCodeState.initial()
-            .copyWith(searchKey: SearchKey('fake-customer-code')),
         CustomerCodeState.initial().copyWith(
             isSearchActive: true,
             isFetching: true,
@@ -300,15 +298,13 @@ void main() {
         );
       },
       act: (CustomerCodeBloc bloc) {
-        bloc.add(const CustomerCodeEvent.updateSearchKey('fake-customer-code'));
         bloc.add(CustomerCodeEvent.search(
+            searchValue: 'fake-customer-code',
             hidecustomer: false,
             userInfo: fakeUser,
             selectedSalesOrg: fakeSaleOrg));
       },
       expect: () => [
-        CustomerCodeState.initial()
-            .copyWith(searchKey: SearchKey('fake-customer-code')),
         CustomerCodeState.initial().copyWith(
             isSearchActive: true,
             isFetching: true,

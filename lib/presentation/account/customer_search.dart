@@ -97,10 +97,14 @@ class _AppBarState extends State<_AppBar> {
     return CustomAppBar(
       child: BlocListener<CustomerCodeBloc, CustomerCodeState>(
         listenWhen: (previous, current) =>
-            previous.searchKey != current.searchKey,
+            previous.searchKey != current.searchKey ||
+            previous.apiFailureOrSuccessOption !=
+                current.apiFailureOrSuccessOption,
         listener: (context, state) {
           state.apiFailureOrSuccessOption.fold(
-            () {},
+            () {
+              FocusScope.of(context).requestFocus(FocusNode());
+            },
             (either) => either.fold(
               (failure) {
                 ErrorUtils.handleApiFailure(context, failure);
@@ -120,13 +124,23 @@ class _AppBarState extends State<_AppBar> {
           key: const Key('customerCodeSearchField'),
           controller: _searchController,
           enabled: !_customerCodeBloc.state.isFetching,
+          onSearchChanged: (value) {
+            _customerCodeBloc.add(
+              CustomerCodeEvent.autoSearch(
+                userInfo: _userBloc.state.user,
+                selectedSalesOrg: _salesOrgBloc.state.salesOrganisation,
+                hidecustomer: _salesOrgBloc.state.hideCustomer,
+                searchValue: value,
+              ),
+            );
+          },
           onSearchSubmitted: (value) {
-            _customerCodeBloc.add(CustomerCodeEvent.updateSearchKey(value));
             _customerCodeBloc.add(
               CustomerCodeEvent.search(
                 userInfo: _userBloc.state.user,
                 selectedSalesOrg: _salesOrgBloc.state.salesOrganisation,
                 hidecustomer: _salesOrgBloc.state.hideCustomer,
+                searchValue: value,
               ),
             );
           },

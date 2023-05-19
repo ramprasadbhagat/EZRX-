@@ -18,6 +18,7 @@ class CustomerCodeEvent with _$CustomerCodeEvent {
     required bool hidecustomer,
     required User userInfo,
     required SalesOrganisation selectedSalesOrg,
+    required String searchValue,
   }) = _Search;
 
   const factory CustomerCodeEvent.loadMore({
@@ -32,6 +33,10 @@ class CustomerCodeEvent with _$CustomerCodeEvent {
     required SalesOrganisation selectedSalesOrg,
   }) = _LoadStoredCustomerCode;
 
-  const factory CustomerCodeEvent.updateSearchKey(String searchKey) =
-      _UpdateSearchKey;
+  const factory CustomerCodeEvent.autoSearch({
+    required bool hidecustomer,
+    required User userInfo,
+    required SalesOrganisation selectedSalesOrg,
+    required String searchValue,
+  }) = _AutoSearch;
 }
