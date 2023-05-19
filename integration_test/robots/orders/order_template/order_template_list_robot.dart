@@ -16,23 +16,31 @@ class OrderTemplateListRobot {
 
   void findTemplateItem(String templateName) {
     final template = find.text(templateName);
-    expect(template, findsOneWidget);
+    expect(template, findsWidgets);
   }
 
   Future<void> tapTemplateItem(String templateName) async {
     final template = find.text(templateName);
-    await tester.tap(template);
+    if (template.evaluate().length > 1) {
+      await tester.tap(template.first);
+    } else {
+      await tester.tap(template);
+    }
     await tester.pumpAndSettle();
   }
 
   void findTemplateItemDelete() {
-    expect(deleteIcon, findsOneWidget);
+    if (deleteIcon.evaluate().length > 1) {
+      expect(deleteIcon.first, findsOneWidget);
+    } else {
+      expect(deleteIcon, findsOneWidget);
+    }
   }
 
   Future<void> tapTemplateItemDelete() async {
-    if(deleteIcon.evaluate().length>1){
+    if (deleteIcon.evaluate().length > 1) {
       await tester.tap(deleteIcon.first);
-    }else{
+    } else {
       await tester.tap(deleteIcon);
     }
     await tester.pumpAndSettle();

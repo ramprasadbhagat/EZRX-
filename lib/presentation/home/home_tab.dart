@@ -49,6 +49,7 @@ class HomeTab extends StatelessWidget {
         children: [
           AnnouncementWidget(
             currentPath: const HomeTabRoute().path,
+            key: const Key('homeTabAnnouncementWidget'),
           ),
           const EdiUserBanner(),
           const AccountSuspendedBanner(),

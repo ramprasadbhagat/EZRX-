@@ -20,6 +20,8 @@ class OrderSummaryRobot {
       find.byKey(const Key('specialInstructionKey'));
   final poReference = find.byKey(const Key('customerPOReferenceKey'));
   final contactPerson = find.byKey(const Key('contactPersonKey'));
+  final collectiveNumberField =
+      find.byKey(const Key('collectiveNumberKey'));
 
   void verify() {
     expect(find.byKey(const Key('orderSummaryKey')), findsOneWidget);
@@ -65,6 +67,15 @@ class OrderSummaryRobot {
 
   Future<void> enterSpecialInstruction(String value) async {
     await tester.enterText(specialInstructionField, value);
+    await tester.pumpAndSettle();
+  }
+
+  void findCollectiveNumber() {
+    expect(collectiveNumberField, findsOneWidget);
+  }
+
+  Future<void> enterCollectiveNumber(String value) async {
+    await tester.enterText(collectiveNumberField, value);
     await tester.pumpAndSettle();
   }
 

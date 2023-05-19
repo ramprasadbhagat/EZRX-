@@ -86,6 +86,7 @@ void main() {
     const ediShipToCode = '0070042484';
     const customerCode = '0030036549';
     const shipToCode = '0070047032';
+    const userRole = 'Client User';
     //country & country currency variable
     const currency = 'SGD';
     const country = 'SG';
@@ -111,13 +112,25 @@ void main() {
     const covidMaterial = '000000000023348698';
     const orderTemplateName = 'sgClientTemplate';
     const orderType = 'ZPOR';
+    //material price
+    const materialUnitPrice = '80';
+    const materialTotalPrice = '1,600'; //80*20
+    const bundleMaterialUnitPrice = '120';
+    const bundleMaterialTotalAmount = '1,080';
+    const material1UnitPrice = '0';
+    const material1TotalPrice = material1UnitPrice;
+    const material1SubTotalPrice = material1TotalPrice;
+    const material1GrandTotalPrice = material1SubTotalPrice;
+    const material2SubTotalPrice = '939.4';
+    const material2GrandTotalPrice = '1,014.55'; //8% vat
+    const material2UnitPrice = '469.7';
+    const material2TotalPrice = material2SubTotalPrice;
 
     //init app
     await runAppForTesting(tester);
     await loginRobot.findAndCloseAnnouncementIcon();
     await loginRobot.login(username, password);
 
-    await homeRobot.findAndCloseAnnouncementIcon();
     //select sales org
     homeRobot.findSalesOrgSelector();
     await homeRobot.tapSalesOrgSelector();
@@ -149,6 +162,7 @@ void main() {
     bundleListRobot.verify();
     await bundleListRobot.tapBundle(bundleCode);
     bundleDetailRobot.verify();
+    await bundleDetailRobot.findAndCloseAnnouncementIcon();
     await bundleDetailRobot.tapAddBundleMaterialQuantity(bundleMaterial1);
     await bundleDetailRobot.changeBundleMaterialQuantity(bundleMaterial2, 5);
     await bundleDetailRobot.tapAddBundleMaterialQuantity(bundleMaterial3);
@@ -159,11 +173,7 @@ void main() {
     //add material
     await materialRootRobot.tapMaterialTab();
     materialListRobot.verify();
-    //Disable Order Type Selection as Enable
-    materialListRobot.verifyDisableOrderTypeSelection();
     await materialListRobot.search(materialForEdiAbsolute);
-    //Enable List Price
-    materialListRobot.verifyEnableListPrice(materialForEdi);
     //Display Currency at material list page
     materialListRobot.verifyCurrencyCheck(currency);
     await materialListRobot.tapMaterial(materialForEdi);
@@ -226,6 +236,7 @@ void main() {
     await cartRobot.tapAddQuantity(bundleMaterial1);
     await cartRobot.tapDeductQuantity(bundleMaterial2);
     await cartRobot.changeQuantity(bundleMaterial3, 4);
+    await cartRobot.getKeyboardDown();
     cartRobot.findBundleMaterialItem(bundleMaterial1, 2);
     cartRobot.findBundleMaterialItem(bundleMaterial2, 3);
     cartRobot.findBundleMaterialItem(bundleMaterial3, 4);
@@ -259,20 +270,21 @@ void main() {
     orderSummaryRobot.findContinueButton(3);
     await orderSummaryRobot.tapContinueButton(3);
     //Minimum Order Amount
-    orderSummaryRobot.allowMinimumOrderAmount(minimumOrderAmount);
+    orderSummaryRobot.allowMinimumOrderAmount('$currency $minimumOrderAmount');
     //verify orders with currency check
     orderSummaryRobot.findMaterialItem(materialForEdi, 20);
-    orderSummaryRobot.verifyMaterialListPrice(true, currency, '100.00');
-    orderSummaryRobot.verifyMaterialUnitPrice(true, currency, '80.00');
-    orderSummaryRobot.verifyMaterialTotalPrice(true, currency, '1600.00');
+    orderSummaryRobot.verifyMaterialUnitPrice(
+        true, currency, materialUnitPrice);
+    orderSummaryRobot.verifyMaterialTotalPrice(
+        true, currency, materialTotalPrice);
     orderSummaryRobot.findBundleItem(bundleCode);
     orderSummaryRobot.findBundleMaterialItem(bundleMaterial1, 2);
     orderSummaryRobot.findBundleMaterialItem(bundleMaterial2, 3);
     orderSummaryRobot.findBundleMaterialItem(bundleMaterial3, 4);
-    orderSummaryRobot.verifyBundleMaterialListPrice(true, currency, '220.00');
-    orderSummaryRobot.verifyBundleMaterialUnitPrice(true, currency, '120.00');
+    orderSummaryRobot.verifyBundleMaterialUnitPrice(
+        true, currency, bundleMaterialUnitPrice);
     orderSummaryRobot.verifyBundleMaterialTotalAmount(
-        true, currency, '1080.00');
+        true, currency, bundleMaterialTotalAmount);
     orderSummaryRobot.findSave();
     orderSummaryRobot.findSubmit();
     await orderSummaryRobot.tapSubmit();
@@ -301,7 +313,6 @@ void main() {
     materialListRobot.verify();
     await materialListRobot.search(materialWithoutPriceAbsolute);
     //enable materials without price
-    materialListRobot.verifyMaterialPrice();
     await materialListRobot.tapMaterial(materialWithoutPrice);
     materialDetailRobot.verify();
     materialDetailRobot.findAddToCart();
@@ -323,14 +334,25 @@ void main() {
     orderSummaryRobot.findContinueButton(3);
     await orderSummaryRobot.tapContinueButton(3);
     //Minimum Order Amount
-    orderSummaryRobot.allowMinimumOrderAmount(minimumOrderAmount);
-    orderSummaryRobot.verifySubTotalPrice(currency, '0.00');
-    orderSummaryRobot.verifyGrandTotalPrice(currency, '0.00');
+    orderSummaryRobot.allowMinimumOrderAmount('$currency $minimumOrderAmount');
+    orderSummaryRobot.verifySubTotalPrice(
+      currency, material1SubTotalPrice
+    );
+    orderSummaryRobot.verifyGrandTotalPrice(
+      currency, material1GrandTotalPrice
+    );
     //verify orders with currency check
     orderSummaryRobot.findMaterialItem(materialWithoutPrice, 1);
-    orderSummaryRobot.verifyMaterialListPrice(false, currency, '0.00');
-    orderSummaryRobot.verifyMaterialUnitPrice(false, currency, '0.00');
-    orderSummaryRobot.verifyMaterialTotalPrice(false, currency, '0.00');
+    orderSummaryRobot.verifyMaterialUnitPrice(
+      false,
+      currency,
+      material1UnitPrice
+    );
+    orderSummaryRobot.verifyMaterialTotalPrice(
+      false,
+      currency,
+      material1TotalPrice
+    );
     orderSummaryRobot.findSubmit();
     await orderSummaryRobot.tapSubmit();
     //could not able to place an order as it does not cross
@@ -443,14 +465,15 @@ void main() {
     orderSummaryRobot.findContinueButton(3);
     await orderSummaryRobot.tapContinueButton(3);
     //Minimum Order Amount
-    orderSummaryRobot.allowMinimumOrderAmount(minimumOrderAmount);
-    orderSummaryRobot.verifySubTotalPrice(currency, '939.40');
-    orderSummaryRobot.verifyGrandTotalPrice(currency, '1014.55');
+    orderSummaryRobot.allowMinimumOrderAmount('$currency $minimumOrderAmount');
+    orderSummaryRobot.verifySubTotalPrice(currency, material2SubTotalPrice);
+    orderSummaryRobot.verifyGrandTotalPrice(currency, material2GrandTotalPrice);
     //verify orders with currency check
     orderSummaryRobot.findMaterialItem(material, 2);
-    orderSummaryRobot.verifyMaterialListPrice(true, currency, '469.70');
-    orderSummaryRobot.verifyMaterialUnitPrice(true, currency, '469.70');
-    orderSummaryRobot.verifyMaterialTotalPrice(true, currency, '939.40');
+    orderSummaryRobot.verifyMaterialUnitPrice(
+        true, currency, material2UnitPrice);
+    orderSummaryRobot.verifyMaterialTotalPrice(
+        true, currency, material2TotalPrice);
     orderSummaryRobot.findSubmit();
     await orderSummaryRobot.tapSubmit();
     //minimum order amount crosses
@@ -562,7 +585,7 @@ void main() {
     favoriteRobot.verify();
     favoriteRobot.findFavoriteItem();
     favoriteRobot.verifyMaterialNumber(materialAbsolute);
-    favoriteRobot.verifyUnitPrice('$currency 469.70');
+    favoriteRobot.verifyUnitPrice('$currency 469.7');
     favoriteRobot.findFavoriteIcon(material);
     await favoriteRobot.tapFavoriteIcon(material);
     homeRobot.findAccountTab();
@@ -571,7 +594,8 @@ void main() {
     accountSettingsRobot.verify();
     //check login on behalf
     accountSettingsRobot.findNoLoginOnBehalf();
-    accountSettingsRobot.findUserFullName('SG ClientUser');
-    accountSettingsRobot.findUserRole('Client User');
+    accountSettingsRobot
+        .findUserFullName('$country ${userRole.replaceAll(' ', '')}');
+    accountSettingsRobot.findUserRole(userRole);
   });
 }

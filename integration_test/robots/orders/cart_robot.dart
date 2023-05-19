@@ -55,9 +55,18 @@ class CartRobot {
     expect(listPrice, findsOneWidget);
   }
 
-  void findMaterialItem(String materialNumber, int quantity) {
+  void findMaterialItem(String materialNumber, int quantity, [bool shouldVisible = true]) {
     final material = find.byKey(ValueKey('$materialNumber$quantity'));
-    expect(material, findsOneWidget);
+    if(shouldVisible){
+      expect(material, findsOneWidget);
+    }else{
+      expect(material, findsNothing);
+    }
+  }
+
+  Future<void> getKeyboardDown() async {
+    await tester.testTextInput.receiveAction(TextInputAction.done);
+    await tester.pumpAndSettle(const Duration(seconds: 2));
   }
 
   Future<void> findBundleItem(String bundleCode) async {

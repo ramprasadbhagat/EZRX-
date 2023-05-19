@@ -1,25 +1,24 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
-
 import '../../core/common.dart';
 import '../../robots/account_settings_robot.dart';
-import '../../robots/orders/cart_robot.dart';
-import '../../robots/home/customer_search_robot.dart';
 import '../../robots/favorite_robot.dart';
+import '../../robots/history/order_history_details_robot.dart';
+import '../../robots/history/order_history_robot.dart';
+import '../../robots/home/customer_search_robot.dart';
 import '../../robots/home/home_robot.dart';
+import '../../robots/home/ship_to_search_robot.dart';
 import '../../robots/login_robot.dart';
-import '../../robots/orders/create_order/material_list/material_detail_robot.dart';
+import '../../robots/orders/cart_robot.dart';
 import '../../robots/orders/create_order/material_list/material_list_robot.dart';
 import '../../robots/orders/create_order/material_root_robot.dart';
 import '../../robots/orders/create_order/order_confirmation_robot.dart';
-import '../../robots/history/order_history_details_robot.dart';
-import '../../robots/history/order_history_robot.dart';
+import '../../robots/orders/create_order/order_summary_robot.dart';
+import '../../robots/orders/create_order/material_list/material_detail_robot.dart';
 import '../../robots/orders/order_template/order_template_detail_robot.dart';
 import '../../robots/orders/order_template/order_template_list_robot.dart';
 import '../../robots/orders/saved_order/saved_order_detail_robot.dart';
 import '../../robots/orders/saved_order/saved_order_list_robot.dart';
-import '../../robots/home/ship_to_search_robot.dart';
-import '../../robots/orders/create_order/order_summary_robot.dart';
 
 void main() {
   late LoginRobot loginRobot;
@@ -27,6 +26,7 @@ void main() {
   late AccountSettingsRobot accountSettingsRobot;
   late CustomerSearchRobot customerSearchRobot;
   late ShipToSearchRobot shipToSearchRobot;
+  late MaterialRootRobot materialRootRobot;
   late MaterialListRobot materialListRobot;
   late MaterialDetailRobot materialDetailRobot;
   late CartRobot cartRobot;
@@ -39,11 +39,10 @@ void main() {
   late FavoriteRobot favoriteRobot;
   late OrderTemplateListRobot orderTemplateListRobot;
   late OrderTemplateDetailRobot orderTemplateDetailRobot;
-  late MaterialRootRobot materialRootRobot;
 
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  testWidgets('E2E Client User (TW Market) - Order', (tester) async {
+  testWidgets('TW external rep - end to end - order test', (tester) async {
     //initialize neccessary robots
     loginRobot = LoginRobot(tester);
     homeRobot = HomeRobot(tester);
@@ -63,242 +62,220 @@ void main() {
     favoriteRobot = FavoriteRobot(tester);
     orderTemplateListRobot = OrderTemplateListRobot(tester);
     orderTemplateDetailRobot = OrderTemplateDetailRobot(tester);
+    materialRootRobot = MaterialRootRobot(tester);
+
+    //initialize variables
+    const username = 'twclientuser';
+    const password = 'St@ysafe01';
+    const salesOrg = '2800';
+    const customerCode = '0030038539';
+    const shipToCode = '0070100095';
+    const userRole = 'Client User';
+    //country & country currency variable
+    const currency = 'TWD';
+    const country = 'TW';
+    //postal code & phone Number
+    const minimumOrderAmount = '0';
+    const phoneNumber = '035943248';
+    const postalCode = '31010';
+    //materials
+    const materialWithoutPriceAbsolute = '23154900';
+    const materialWithoutPrice = '000000000023154900';
+    const material = '000000000023154900';
+    const materialAbsolute = '23154900';
+    const orderTemplateName = 'twClientUserTemplate';
+    const orderType = 'ZPOR';
+    const materialQuantity = 20;
+    //materials price
+    const materialUnitPrice = '0';
+    const materialListPrice = materialUnitPrice; //no deals
+    const materialTotalPrice = materialListPrice;
+    const materialSubTotalPrice = materialTotalPrice;
+    const materialGrandTotalPrice = materialSubTotalPrice; //0% vat
 
     //init app
     await runAppForTesting(tester);
     await loginRobot.findAndCloseAnnouncementIcon();
-    await loginRobot.login('twclientuser', 'St@ysafe01');
+    await loginRobot.login(username, password);
     await homeRobot.findAndCloseAnnouncementIcon();
     homeRobot.findSalesOrgSelector();
     await homeRobot.tapSalesOrgSelector();
-    await homeRobot.selectSalesOrg('2800');
+    await homeRobot.selectSalesOrg(salesOrg);
+
+    //select customer code
     homeRobot.findCustomerCodeSelector();
     await homeRobot.tapCustomerCodeSelector();
     customerSearchRobot.verify();
-    await customerSearchRobot.search('30038539');
-    await customerSearchRobot.tapCustomerCode('0030038539');
+    await customerSearchRobot.search(customerCode);
+    await customerSearchRobot.tapCustomerCode(customerCode);
     homeRobot.verify();
+    //select shipping address
     homeRobot.findShipToSelector();
     await homeRobot.tapShipToSelector();
     shipToSearchRobot.verify();
-    await shipToSearchRobot.search('0095');
-    await shipToSearchRobot.tapShipToCode(shipToCode: '0070100095');
+    await shipToSearchRobot.search(shipToCode);
+    await shipToSearchRobot.tapShipToCode(shipToCode: shipToCode);
     homeRobot.verify();
+
+    //create order for customer
     await homeRobot.goToCreateOrder();
+    materialRootRobot.verify();
     await materialRootRobot.findAndCloseAnnouncementIcon();
     materialListRobot.verify();
-    await materialListRobot.search('451');
-    materialListRobot.verifyEnableListPrice('000000000023168451');
-    materialListRobot.verifyMaterialPrice();
-    await materialListRobot.tapMaterial('000000000023168451');
-    materialDetailRobot.verify();
-    materialDetailRobot.findAddToCart();
-    await materialDetailRobot.tapAddToCart();
-    materialListRobot.verify();
-    materialListRobot.findCartButton();
-    await materialListRobot.tapCartButton();
-    cartRobot.verify();
-    cartRobot.findMaterialItem('000000000023168451', 1);
-    cartRobot.findAddQuantity('000000000023168451');
-    await cartRobot.tapAddQuantity('000000000023168451');
-    cartRobot.findMaterialItem('000000000023168451', 2);
+    await materialListRobot.search(materialWithoutPriceAbsolute);
 
-    cartRobot.verifyTotal('TWD', '0.00');
-    cartRobot.findOrderSummary();
-    await cartRobot.tapOrderSummary();
-    orderSummaryRobot.verifyCustomerEmail('NA');
-    //bug here, id comes in as 0070100095
-    //await orderSummaryRobot.verifyShipToID('0070100095');
-    orderSummaryRobot.verifySoldToID('0030038539');
-    orderSummaryRobot.findContinueButton(0);
-    await orderSummaryRobot.tapContinueButton(0);
-    orderSummaryRobot.verifySoldToID('0030038539');
-    orderSummaryRobot.verifyCountry('NTW');
-    orderSummaryRobot.verifyPhone('035943248');
-    orderSummaryRobot.verifyPostalCode('31010');
-    orderSummaryRobot.findContinueButton(1);
-    await orderSummaryRobot.tapContinueButton(1);
-    orderSummaryRobot.verifyShipToID('0070100095');
-    orderSummaryRobot.verifyCountry('NTW');
-    orderSummaryRobot.verifyPhone('035943248');
-    orderSummaryRobot.verifyPostalCode('31000');
-    orderSummaryRobot.findContinueButton(2);
-    await orderSummaryRobot.tapContinueButton(2);
-    await orderSummaryRobot.enterContactPerson('1234');
-    orderSummaryRobot.findSelectPaymentTerm();
-    await orderSummaryRobot.tapSelectPaymentTerm();
-    await orderSummaryRobot.tapPaymentTerm();
-    orderSummaryRobot.findContinueButton(3);
-    await orderSummaryRobot.tapContinueButton(3);
-    orderSummaryRobot.verifyTotals('TWD', '0.00');
-    orderSummaryRobot.findMaterialItem('000000000023168451', 2);
-    orderSummaryRobot.findAddQuantity('000000000023168451');
-    await orderSummaryRobot.tapAddQuantity('000000000023168451');
-    orderSummaryRobot.findMaterialItem('000000000023168451', 3);
-    orderSummaryRobot.verifyMaterialListPrice(false, 'TWD', '0.00');
-    orderSummaryRobot.verifyMaterialUnitPrice(false, 'TWD', '0.00');
-    orderSummaryRobot.verifyMaterialTotalPrice(false, 'TWD', '0.00');
-    orderSummaryRobot.findSave();
-    orderSummaryRobot.findSubmit();
-    await orderSummaryRobot.tapSubmit();
-    orderConfirmationRobot.verify();
-    orderConfirmationRobot.findTitle();
-    orderConfirmationRobot.findDescription();
-    orderConfirmationRobot.findCreateNewOrderButton();
-    orderConfirmationRobot.findGoToOrderHistoryButton();
-    await orderConfirmationRobot.tapGoToOrderHistoryButton();
-    orderHistoryRobot.verify();
-    orderHistoryRobot.findOrderedItem();
-    orderHistoryRobot.verifyOrderType('ZPOR');
-    orderHistoryRobot.verifyMaterialID('23168451');
-    orderHistoryRobot.verifyMaterialName('Reag Cup');
-    orderHistoryRobot.verifyQuantity('3');
-    await orderHistoryRobot.tapOrderedItem();
-    orderHistoryDetailsRobot.verify();
-    orderHistoryDetailsRobot.findOrderDetails();
-    orderHistoryDetailsRobot.verifyOrderType('ZPOR');
-    orderHistoryDetailsRobot.verifyContactPerson('1234');
-    orderHistoryDetailsRobot.verifyContactNumber('035943248');
-    orderHistoryDetailsRobot.verifyPaymentTerm('NA');
-    await orderHistoryDetailsRobot.tapOrderDetails();
-    orderHistoryDetailsRobot.findSoldToAddress();
-    orderHistoryDetailsRobot.verifySoldToID('0030038539');
-    orderHistoryDetailsRobot.verifyPostalCode('31010');
-    orderHistoryDetailsRobot.verifyCountry('NTW');
-    orderHistoryDetailsRobot.verifyPhone('035943248');
-    await orderHistoryDetailsRobot.tapSoldToAddress();
-    orderHistoryDetailsRobot.findShipToAddress();
-    orderHistoryDetailsRobot.verifyShipToID('0070100095');
-    orderHistoryDetailsRobot.verifyPostalCode('31000');
-    orderHistoryDetailsRobot.verifyCountry('NTW');
-    orderHistoryDetailsRobot.verifyPhone('035943248');
-    await orderHistoryDetailsRobot.tapShipToAddress();
-    orderHistoryDetailsRobot.findInvoices();
-    orderHistoryDetailsRobot.findOrderSummary();
-    orderHistoryDetailsRobot.verifyMaterialType('Comm');
-    orderHistoryDetailsRobot.verifyMaterialID('23168451');
-    orderHistoryDetailsRobot.verifyQuantity('3');
-    orderHistoryDetailsRobot.verifyEnableZPPrice('000000000023168451');
-    orderHistoryDetailsRobot.verifyEnableTotalPrice('000000000021022175');
-    orderHistoryDetailsRobot.verifyOrderSummaryTax('0.00');
-    await orderHistoryDetailsRobot.tapOrderSummary();
-    orderHistoryDetailsRobot.findBackButton();
-    await orderHistoryDetailsRobot.tapBackButton();
-    orderHistoryRobot.verify();
-    await homeRobot.tapHomeTab();
-    homeRobot.verify();
-    await homeRobot.goToCreateOrder();
-    materialListRobot.verify();
-    materialListRobot.verifyMaterialPrice();
-    await materialListRobot.tapMaterial('000000000023168451');
+    //Enable Government Material Code
+    materialListRobot.verifyEnableGMC();
+    //Enable List Price
+    materialListRobot.verifyEnableListPrice(materialWithoutPrice);
+
+    await materialListRobot.tapMaterial(materialWithoutPrice);
     materialDetailRobot.verify();
+    await materialDetailRobot.findAndCloseAnnouncementIcon();
+    await materialDetailRobot.changeQuantity(4);
+    await materialDetailRobot.deductQuantity();
+    await materialDetailRobot.addQuantity();
     materialDetailRobot.findAddToCart();
     await materialDetailRobot.tapAddToCart();
     materialListRobot.verify();
     materialListRobot.findCartButton();
     await materialListRobot.tapCartButton();
+    //cart page
     cartRobot.verify();
-    cartRobot.findMaterialItem('000000000023168451', 1);
+    cartRobot.findMaterialItem(materialWithoutPrice, 4);
+    //Disable GST At Total Level Only
+    //Disable GST
+    //GST value 0%
+    cartRobot.verifyVatAtTotalLevel(materialWithoutPrice, 0, false);
+    //update material quantity
+    await cartRobot.tapMaterial(materialWithoutPriceAbsolute);
+    await materialDetailRobot.changeQuantity(materialQuantity);
+    await materialDetailRobot.tapUpdateAddToCart();
+    cartRobot.verifyHideStockDisplay();
+    cartRobot.verify();
+    cartRobot.findMaterialItem(materialWithoutPrice, materialQuantity);
+    cartRobot.verifyHideStockDisplay();
     cartRobot.findOrderSummary();
     await cartRobot.tapOrderSummary();
+    //order summary pageF
+    //1. Customer details
+    orderSummaryRobot.verifySoldToID(customerCode);
+    //2. Sold to Address
     orderSummaryRobot.findContinueButton(0);
     await orderSummaryRobot.tapContinueButton(0);
+    orderSummaryRobot.verifySoldToID(customerCode);
+    orderSummaryRobot.verifyCountry(country);
+    orderSummaryRobot.verifyPhone(phoneNumber);
+    orderSummaryRobot.verifyPostalCode(postalCode);
+
+    //3. Ship to Address
     orderSummaryRobot.findContinueButton(1);
     await orderSummaryRobot.tapContinueButton(1);
+    orderSummaryRobot.verifySoldToID(customerCode);
+    orderSummaryRobot.verifyCountry(country);
+    orderSummaryRobot.verifyPhone(phoneNumber);
+    orderSummaryRobot.verifyPostalCode(postalCode);
+
+    //4. Additional Information
     orderSummaryRobot.findContinueButton(2);
     await orderSummaryRobot.tapContinueButton(2);
-    await orderSummaryRobot.enterContactPerson('4444');
+    //Enable Special Instructions
+    orderSummaryRobot.findSpecialInstruction();
+    await orderSummaryRobot
+        .enterSpecialInstruction('client special instruction');
+    //Enable Contact Person
+    await orderSummaryRobot.enterContactPerson('Contact Person 1');
+    await orderSummaryRobot.getKeyboardDown();
+    //Enable Payment Terms
     orderSummaryRobot.findSelectPaymentTerm();
     await orderSummaryRobot.tapSelectPaymentTerm();
     await orderSummaryRobot.tapPaymentTerm();
+
+    //4. Cart Details
     orderSummaryRobot.findContinueButton(3);
     await orderSummaryRobot.tapContinueButton(3);
+    //Minimum Order Amount
+    orderSummaryRobot.allowMinimumOrderAmount('$currency $minimumOrderAmount');
+    //verify orders with currency check
+    orderSummaryRobot.verifySubTotalPrice(currency, materialSubTotalPrice);
+    orderSummaryRobot.verifyGrandTotalPrice(currency, materialGrandTotalPrice);
+    orderSummaryRobot.findMaterialItem(materialWithoutPrice, materialQuantity);
+    orderSummaryRobot.verifyMaterialListPrice(
+        false, currency, materialListPrice);
+    orderSummaryRobot.verifyMaterialUnitPrice(
+        false, currency, materialUnitPrice);
+    orderSummaryRobot.verifyMaterialTotalPrice(
+        false, currency, materialTotalPrice);
     orderSummaryRobot.findSave();
-    await orderSummaryRobot.tapSave();
-    savedOrderListRobot.verify();
-    savedOrderListRobot.findOrder();
-    savedOrderListRobot.verifySoldToID('0030038539');
-    savedOrderListRobot.verifyShipToID('0070100095');
-    savedOrderListRobot.verifyOrderValue('TWD', '0.00');
-    await savedOrderListRobot.tapOrder();
-    savedOrderDetailRobot.verify();
-    savedOrderDetailRobot.verifyMaterialNumber('23168451');
-    savedOrderDetailRobot.verifyMaterialQuantity('1');
-    savedOrderDetailRobot.verifyUnitPrice('NA');
-    savedOrderDetailRobot.findAddToCart();
-    await savedOrderDetailRobot.tapAddToCart();
-    cartRobot.verify();
-    cartRobot.findOrderSummary();
-    await cartRobot.tapOrderSummary();
-    orderSummaryRobot.findContinueButton(0);
-    await orderSummaryRobot.tapContinueButton(0);
-    orderSummaryRobot.findContinueButton(1);
-    await orderSummaryRobot.tapContinueButton(1);
-    orderSummaryRobot.findContinueButton(2);
-    await orderSummaryRobot.tapContinueButton(2);
-    await orderSummaryRobot.enterContactPerson('4444');
-    orderSummaryRobot.findSelectPaymentTerm();
-    await orderSummaryRobot.tapSelectPaymentTerm();
-    await orderSummaryRobot.tapPaymentTerm();
-    orderSummaryRobot.findContinueButton(3);
-    await orderSummaryRobot.tapContinueButton(3);
     orderSummaryRobot.findSubmit();
     await orderSummaryRobot.tapSubmit();
     orderConfirmationRobot.verify();
-    orderConfirmationRobot.findGoToOrderHistoryButton();
-    await orderConfirmationRobot.tapGoToOrderHistoryButton();
-    orderHistoryRobot.verify();
-    homeRobot.findHomeTab();
-    await homeRobot.tapHomeTab();
-    await homeRobot.goToCreateOrder();
-    materialListRobot.findFavoriteIcon('23168451');
-    await materialListRobot.tapFavoriteIcon('23168451');
-    await materialListRobot.goBack();
+    await orderConfirmationRobot.goBack();
+
+    // Create Order and Save template
+    // select customer code
     homeRobot.verify();
-    homeRobot.findFavoriteTab();
-    await homeRobot.tapFavoriteTab();
-    favoriteRobot.verify();
-    favoriteRobot.findFavoriteItem();
-    favoriteRobot.verifyMaterialNumber('23168451');
-    favoriteRobot.verifyUnitPrice('NA');
-    favoriteRobot.findFavoriteIcon('000000000023168451');
-    await favoriteRobot.tapFavoriteIcon('000000000023168451');
-    homeRobot.findAccountTab();
-    await homeRobot.tapAccountTab();
-    accountSettingsRobot.findNoLoginOnBehalf();
-    homeRobot.findHomeTab();
-    await homeRobot.tapHomeTab();
     await homeRobot.goToCreateOrder();
+    //Disable Bundles
+    materialRootRobot.findNoBundleTab();
+    //Disable Order Type Selection
     materialListRobot.verify();
-    await materialListRobot.tapMaterial('000000000023168451');
+    materialListRobot.verifyDisableOrderTypeSelection();
+    await materialListRobot.clearSearchMaterial();
+    await materialListRobot.search(materialWithoutPriceAbsolute);
+
+    //Enable Government Material Code
+    materialListRobot.verifyEnableGMC();
+    //Enable List Price
+    materialListRobot.verifyEnableListPrice(materialWithoutPrice);
+
+    await materialListRobot.tapMaterial(materialWithoutPrice);
     materialDetailRobot.verify();
+    await materialDetailRobot.changeQuantity(4);
+    await materialDetailRobot.deductQuantity();
+    await materialDetailRobot.addQuantity();
     materialDetailRobot.findAddToCart();
     await materialDetailRobot.tapAddToCart();
     materialListRobot.verify();
     materialListRobot.findCartButton();
     await materialListRobot.tapCartButton();
+    //cart page
     cartRobot.verify();
-    cartRobot.findMaterialItem('000000000023168451', 1);
+    cartRobot.findMaterialItem(materialWithoutPrice, 4);
+    //Disable GST At Total Level Only
+    //Disable GST
+    //GST value 0%
+    cartRobot.verifyVatAtTotalLevel(materialWithoutPrice, 0, false);
+    //update material quantity
+    await cartRobot.tapMaterial(materialWithoutPriceAbsolute);
+    await materialDetailRobot.changeQuantity(materialQuantity);
+    await materialDetailRobot.tapUpdateAddToCart();
+    cartRobot.verify();
+    cartRobot.findMaterialItem(materialWithoutPrice, materialQuantity);
+
+    cartRobot.verifyHideStockDisplay();
     cartRobot.findOrderSummary();
     await cartRobot.tapOrderSummary();
+    //save template
     orderSummaryRobot.findOrderTemplate();
     await orderSummaryRobot.tapOrderTemplate();
-    orderSummaryRobot.findOrderTemplate();
-    await orderSummaryRobot.enterTemplateName('template1');
+    await orderSummaryRobot.enterTemplateName(orderTemplateName);
     orderSummaryRobot.findTemplateSaveButton();
     await orderSummaryRobot.tapTemplateSaveButton();
     await orderSummaryRobot.goBack();
     await cartRobot.goBack();
+    await tester.pumpAndSettle(const Duration(seconds: 2));
     await materialListRobot.goBack();
     homeRobot.findOrderTemplate();
+    //try to add save template to cart
     await homeRobot.tapOrderTemplate();
-    orderTemplateListRobot.findTemplateItem('template1');
-    await orderTemplateListRobot.tapTemplateItem('template1');
-    orderTemplateDetailRobot.verifyMaterialNumber('23168451');
-    orderTemplateDetailRobot.verifyUnitPrice('NA');
-    orderTemplateDetailRobot.verifyMaterialQuantity('1');
+    orderTemplateListRobot.findTemplateItem(orderTemplateName);
+    await orderTemplateListRobot.tapTemplateItem(orderTemplateName);
+    orderTemplateDetailRobot.verifyMaterialNumber(materialAbsolute);
+    orderTemplateDetailRobot.verifyMaterialQuantity(materialQuantity.toString());
     orderTemplateDetailRobot.findAddToCart();
     await orderTemplateDetailRobot.tapAddToCart();
+    cartRobot.verifyHideStockDisplay();
     cartRobot.verify();
     cartRobot.findOrderSummary();
     await cartRobot.tapOrderSummary();
@@ -308,20 +285,141 @@ void main() {
     await orderSummaryRobot.tapContinueButton(1);
     orderSummaryRobot.findContinueButton(2);
     await orderSummaryRobot.tapContinueButton(2);
-    await orderSummaryRobot.enterContactPerson('4444');
+    orderSummaryRobot.findSpecialInstruction();
+    await orderSummaryRobot.enterSpecialInstruction('special instruction');
+    //Enable Contact Person
+    await orderSummaryRobot.enterContactPerson('Contact Person 2');
+    await orderSummaryRobot.getKeyboardDown();
+    //Enable Payment Terms
     orderSummaryRobot.findSelectPaymentTerm();
     await orderSummaryRobot.tapSelectPaymentTerm();
     await orderSummaryRobot.tapPaymentTerm();
     orderSummaryRobot.findContinueButton(3);
     await orderSummaryRobot.tapContinueButton(3);
+    //save order
+    orderSummaryRobot.findSave();
+    await orderSummaryRobot.tapSave();
+    savedOrderListRobot.verify();
+    savedOrderListRobot.findOrder();
+    savedOrderListRobot.verifySoldToID(customerCode);
+    savedOrderListRobot.verifyShipToID(shipToCode);
+    await savedOrderListRobot.tapOrder();
+    savedOrderDetailRobot.verify();
+    savedOrderDetailRobot.verifyMaterialNumber(materialAbsolute);
+    savedOrderDetailRobot.verifyMaterialQuantity(materialQuantity.toString());
+    savedOrderDetailRobot.findAddToCart();
+    await savedOrderDetailRobot.tapAddToCart();
+    cartRobot.verifyHideStockDisplay();
+    cartRobot.verify();
+    await tester.pumpAndSettle(const Duration(seconds: 5));
+    cartRobot.findOrderSummary();
+    await cartRobot.tapOrderSummary();
+    orderSummaryRobot.verifySoldToID(customerCode);
+    orderSummaryRobot.findContinueButton(0);
+    await orderSummaryRobot.tapContinueButton(0);
+    orderSummaryRobot.verifySoldToID(customerCode);
+    orderSummaryRobot.verifyCountry(country);
+    orderSummaryRobot.verifyPhone(phoneNumber);
+    orderSummaryRobot.verifyPostalCode(postalCode);
+    orderSummaryRobot.findContinueButton(1);
+    await orderSummaryRobot.tapContinueButton(1);
+    orderSummaryRobot.verifyShipToID(shipToCode);
+    orderSummaryRobot.verifyCountry(country);
+    orderSummaryRobot.verifyPhone(phoneNumber);
+    orderSummaryRobot.verifyPostalCode(postalCode);
+    orderSummaryRobot.findContinueButton(2);
+    await orderSummaryRobot.tapContinueButton(2);
+    //Enable Special Instructions
+    orderSummaryRobot.findSpecialInstruction();
+    await orderSummaryRobot.enterSpecialInstruction('specialInstruction1');
+    //Enable Contact Person
+    await orderSummaryRobot.enterContactPerson('Contact Person 3');
+    await orderSummaryRobot.getKeyboardDown();
+    //Enable Payment Terms
+    orderSummaryRobot.findSelectPaymentTerm();
+    await orderSummaryRobot.tapSelectPaymentTerm();
+    await orderSummaryRobot.tapPaymentTerm();
+    orderSummaryRobot.findContinueButton(3);
+    await orderSummaryRobot.tapContinueButton(3);
+    //Minimum Order Amount
+    orderSummaryRobot.allowMinimumOrderAmount('$currency $minimumOrderAmount');
+    //verify orders with currency check
+    orderSummaryRobot.verifySubTotalPrice(currency, materialSubTotalPrice);
+    orderSummaryRobot.verifyGrandTotalPrice(currency, materialGrandTotalPrice);
+    orderSummaryRobot.findMaterialItem(materialWithoutPrice, materialQuantity);
+    orderSummaryRobot.verifyMaterialListPrice(
+        false, currency, materialListPrice);
+    orderSummaryRobot.verifyMaterialUnitPrice(
+        false, currency, materialUnitPrice);
+    orderSummaryRobot.verifyMaterialTotalPrice(
+        false, currency, materialTotalPrice);
     orderSummaryRobot.findSubmit();
     await orderSummaryRobot.tapSubmit();
+    //minimum order amount crosses
     orderConfirmationRobot.verify();
     orderConfirmationRobot.findGoToOrderHistoryButton();
     await orderConfirmationRobot.tapGoToOrderHistoryButton();
     orderHistoryRobot.verify();
-    homeRobot.findHomeTab();
+    //order history tab
+    orderHistoryRobot.findOrderedItem();
+    orderHistoryRobot.verifyOrderType(orderType);
+    //Disable Processing Status Display
+    orderHistoryRobot.verifyOrderProcessingStatus(false);
+    orderHistoryRobot.verifyMaterialID(materialAbsolute);
+    orderHistoryRobot.verifyQuantity(materialQuantity.toString());
+    await orderHistoryRobot.tapOrderedItem();
+    orderHistoryDetailsRobot.verify();
+    orderHistoryDetailsRobot.findOrderDetails();
+    orderHistoryDetailsRobot.verifyOrderType(orderType);
+    orderHistoryDetailsRobot.verifyContactPerson('Contact Person 3');
+    orderHistoryDetailsRobot.verifyContactNumber(phoneNumber);
+    await orderHistoryDetailsRobot.tapOrderDetails();
+    orderHistoryDetailsRobot.findSoldToAddress();
+    orderHistoryDetailsRobot.verifySoldToID(customerCode);
+    orderHistoryDetailsRobot.verifyPostalCode(postalCode);
+    orderHistoryDetailsRobot.verifyCountry(country);
+    orderHistoryDetailsRobot.verifyPhone(phoneNumber);
+    await orderHistoryDetailsRobot.tapSoldToAddress();
+    orderHistoryDetailsRobot.findShipToAddress();
+    orderHistoryDetailsRobot.verifyShipToID(shipToCode);
+    orderHistoryDetailsRobot.verifyPostalCode('31000');
+    orderHistoryDetailsRobot.verifyCountry(country);
+    orderHistoryDetailsRobot.verifyPhone(phoneNumber);
+    await orderHistoryDetailsRobot.tapShipToAddress();
+    orderHistoryDetailsRobot.findInvoices();
+    cartRobot.verifyHideStockDisplay();
+    orderHistoryDetailsRobot.findOrderSummary();
+    orderHistoryDetailsRobot.verifyMaterialType('Comm');
+    orderHistoryDetailsRobot.verifyMaterialID(materialAbsolute);
+    orderHistoryDetailsRobot.verifyQuantity(materialQuantity.toString());
+    //Enable Order History Price in history detail page
+    orderHistoryDetailsRobot.verifyEnableZPPrice(material);
+    orderHistoryDetailsRobot.verifyEnableTotalPrice(material);
+    //Enable Tax Display
+    orderHistoryDetailsRobot.verifyEnableTaxDisplay();
+    //Display Discount in Order Details
+    orderHistoryDetailsRobot.verifyDiscountRateDisplay();
+    //Display Batch Number and Expiry Date in Order Details
+    orderHistoryDetailsRobot.verifyDisplayBatchExpiryDate();
+    //Disable Delivery Time (PDD/POD)
+    orderHistoryDetailsRobot.verifyDeliveryDateTime(false);
+    //re-order
+    await orderHistoryDetailsRobot.tapOrderSummary();
+    orderHistoryDetailsRobot.findReOrderButton();
+    await orderHistoryDetailsRobot.tapReOrderButton();
+    cartRobot.verify();
+    cartRobot.findMaterialItem(material, materialQuantity);
+    await cartRobot.goBack();
+    orderHistoryRobot.verify();
+    orderHistoryRobot.findOrderHistoryFilter();
+    await orderHistoryRobot
+        .findOrderHistoryFilterByMaterialNumber(materialAbsolute);
+    await orderHistoryRobot.tapOrderHistoryFilterApplyButton();
+    orderHistoryRobot.findOrderItemByMaterialNumber(material);
     await homeRobot.tapHomeTab();
+    await homeRobot.tapHomeTab();
+    //find and delete template order
+    homeRobot.verify();
     homeRobot.findOrderTemplate();
     await homeRobot.tapOrderTemplate();
     orderTemplateListRobot.findTemplateItemDelete();
@@ -330,5 +428,42 @@ void main() {
     orderTemplateListRobot.findConfirmButton();
     await orderTemplateListRobot.tapConfirmButton();
     await orderTemplateListRobot.goBack();
+    homeRobot.verify();
+    homeRobot.findSavedOrders();
+    await homeRobot.tapSavedOrders();
+    //find and delete saved order
+    savedOrderListRobot.findOrder();
+    savedOrderListRobot.findSavedOrderItemDelete();
+    await savedOrderListRobot.tapSavedOrderItemDelete();
+    savedOrderListRobot.verifyConfirmationDialog();
+    savedOrderListRobot.findConfirmButton();
+    await savedOrderListRobot.tapConfirmButton();
+    await savedOrderListRobot.goBack();
+
+    homeRobot.verify();
+    await homeRobot.goToCreateOrder();
+    await materialListRobot.clearSearchMaterial();
+    //check favorite material
+    await materialListRobot.search(materialAbsolute);
+    materialListRobot.findFavoriteIcon(materialAbsolute);
+    await materialListRobot.tapFavoriteIcon(materialAbsolute);
+    await materialListRobot.goBack();
+    homeRobot.verify();
+    homeRobot.findFavoriteTab();
+    await homeRobot.tapFavoriteTab();
+    favoriteRobot.verify();
+    // favoriteRobot.findFavoriteItem();
+    favoriteRobot.verifyMaterialNumber(materialAbsolute);
+    favoriteRobot.findFavoriteIcon(material);
+    await favoriteRobot.tapFavoriteIcon(material);
+    homeRobot.findAccountTab();
+    await homeRobot.tapAccountTab();
+    //account page
+    accountSettingsRobot.verify();
+    //check login on behalf
+    accountSettingsRobot.findNoLoginOnBehalf();
+    accountSettingsRobot
+        .findUserFullName('$country ${userRole.replaceAll(' ', '')}');
+    accountSettingsRobot.findUserRole(userRole);
   });
 }

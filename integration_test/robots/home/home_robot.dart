@@ -7,7 +7,6 @@ class HomeRobot {
   HomeRobot(this.tester);
 
   final salesOrgSelector = find.byKey(const Key('salesOrgSelect'));
-  final announcementCloseIcon = find.byKey(const Key('announcementCloseIcon'));
   final accountTabbar = find.byKey(const Key('accountTabbar'));
   final customerCodeSelect = find.byKey(const Key('customerCodeSelect'));
   final shipToCodeSelector = find.byKey(const Key('shipToCodeSelect'));
@@ -15,6 +14,10 @@ class HomeRobot {
   final favoriteTabbar = find.byKey(const Key('favoritesTab'));
   final orderTemplate = find.text('Order Template');
   final savedOrders = find.text('Saved Orders');
+  final announcementCloseIcon = find.byKey(const Key('announcementCloseIcon'));
+  final homeTabAnnouncementWidget =
+      find.byKey(const Key('homeTabAnnouncementWidget'));
+
 
   void verify() {
     final home = find.byKey(const Key('homeScreen'));
@@ -23,6 +26,10 @@ class HomeRobot {
 
   void verifyEdiCustomer() {
     expect(find.byKey(const Key('ediCustomerOrderDisable')), findsOneWidget);
+  }
+
+  void verifySuspendedCustomer() {
+    expect(find.byKey(const Key('suspendedCustomer')), findsWidgets);
   }
 
   void findSalesOrgSelector() {
@@ -42,6 +49,7 @@ class HomeRobot {
     await tester.tap(salesOrgOption);
     await tester.pumpAndSettle();
   }
+  
 
   void findAccountTab() {
     expect(accountTabbar, findsOneWidget);
@@ -93,7 +101,8 @@ class HomeRobot {
   }
 
   Future<void> findAndCloseAnnouncementIcon() async {
-    if (announcementCloseIcon.evaluate().isNotEmpty) {
+    if (homeTabAnnouncementWidget.evaluate().isNotEmpty &&
+        announcementCloseIcon.evaluate().isNotEmpty) {
       await tester.tap(announcementCloseIcon.first);
       await tester.pumpAndSettle();
     }

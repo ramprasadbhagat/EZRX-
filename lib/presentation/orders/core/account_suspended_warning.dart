@@ -24,6 +24,7 @@ class AccountSuspendedBanner extends StatelessWidget {
                 ),
                 child: Text(
                   'Customer is suspended, please contact ZP Admin for support',
+                  key: const Key('suspendedCustomer'),
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.titleSmall?.apply(
                         color: ZPColors.white,

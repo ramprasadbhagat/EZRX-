@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 class MaterialDetailRobot {
@@ -7,6 +7,7 @@ class MaterialDetailRobot {
   MaterialDetailRobot(this.tester);
 
   final addToCart = find.byKey(const Key('addMaterialToCart'));
+  final announcementCloseIcon = find.byKey(const Key('announcementCloseIcon'));
 
   void verify() {
     final materialDetails = find.byKey(const Key('materialDetailsPage'));
@@ -47,6 +48,20 @@ class MaterialDetailRobot {
 
   Future<void> tapUpdateAddToCart() async{
     await tester.tap(find.byKey(const Key('updateCart')));
+    await tester.pumpAndSettle();
+  }
+
+  Future<void> findAndCloseAnnouncementIcon() async {
+    if (announcementCloseIcon.evaluate().isNotEmpty) {
+      await tester.tap(announcementCloseIcon.first);
+      await tester.pumpAndSettle();
+    }
+  }
+
+  Future<void> goBack() async {
+    // ignore: omit_local_variable_types
+    final NavigatorState navigator = tester.state(find.byType(Navigator));
+    navigator.pop();
     await tester.pumpAndSettle();
   }
 }

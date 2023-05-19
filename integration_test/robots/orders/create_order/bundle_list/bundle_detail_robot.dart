@@ -5,6 +5,8 @@ class BundleDetailRobot {
   late WidgetTester tester;
   BundleDetailRobot(this.tester);
 
+  final announcementCloseIcon = find.byKey(const Key('announcementCloseIcon'));
+
   void verify() {
     expect(find.byKey(const Key('bundleItemDetailPage')), findsOneWidget);
   }
@@ -43,6 +45,13 @@ class BundleDetailRobot {
     await tester.tap(addBundlesToCart);
     await tester.pumpAndSettle();
 
+  }
+
+  Future<void> findAndCloseAnnouncementIcon() async {
+    if (announcementCloseIcon.evaluate().isNotEmpty) {
+      await tester.tap(announcementCloseIcon.first);
+      await tester.pumpAndSettle();
+    }
   }
 
   Future<void> goBack() async {
