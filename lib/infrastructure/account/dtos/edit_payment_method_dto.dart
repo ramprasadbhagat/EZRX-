@@ -14,7 +14,7 @@ class EditPaymentMethodDto with _$EditPaymentMethodDto {
   }) = _EditPaymentMethodDto;
 
   factory EditPaymentMethodDto.fromDomain(
-    EditPaymentMethodDto paymentMethod,
+    EditPaymentMethod paymentMethod,
   ) {
     return EditPaymentMethodDto(
       success: paymentMethod.success,

@@ -13,7 +13,7 @@ class DeletePaymentMethodDto with _$DeletePaymentMethodDto {
   }) = _DeletePaymentMethodDto;
 
   factory DeletePaymentMethodDto.fromDomain(
-    DeletePaymentMethodDto paymentMethod,
+    DeletePaymentMethod paymentMethod,
   ) {
     return DeletePaymentMethodDto(
       success: paymentMethod.success,

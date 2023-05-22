@@ -14,7 +14,7 @@ class PaymentMethodsLocalDataSource {
   Future<List<AvailablePaymentMethod>> getAvailablePaymentMethods() async {
     final data = json.decode(
       await rootBundle
-          .loadString('assets/json/getAvailablePaymentMethods.json'),
+          .loadString('assets/json/getAvailablePaymentMethodsResponse.json'),
     );
 
     return List.from(data['data']['availablePaymentMethods'])

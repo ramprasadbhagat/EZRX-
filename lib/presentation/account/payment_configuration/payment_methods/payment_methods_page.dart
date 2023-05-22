@@ -5,8 +5,8 @@ import 'package:ezrxmobile/application/account/payment_configuration/payment_met
 import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/payment_methods_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/available_payment_method.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
-import 'package:ezrxmobile/presentation/core/confirm_clear_cart_dialog.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
+import 'package:ezrxmobile/presentation/core/dialogs/custom_dialogs.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -50,6 +50,7 @@ class PaymentMethodsPage extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        key: const Key('addPaymentMethodKey'),
         onPressed: () {
           context
               .read<AddPaymentMethodBloc>()
@@ -151,6 +152,7 @@ class _PaymentMethodListItem extends StatelessWidget {
                           ),
                     ),
               trailing: IconButton(
+                key: Key('deleteIcon$index'),
                 padding: const EdgeInsets.only(right: 8),
                 icon: const Icon(Icons.delete),
                 onPressed: () => _deletePaymentMethod(
@@ -171,24 +173,18 @@ class _PaymentMethodListItem extends StatelessWidget {
     required AvailablePaymentMethod paymentMethod,
     required int deleteIndex,
   }) {
-    ConfirmClearDialog.show(
+    CustomDialogs.confirmationDialog(
       context: context,
       title: 'Delete payment method'.tr(),
-      description: 'Are you sure you want to delete this payment method?'.tr(),
-      onCancel: () {
-        context.router.pop();
-      },
-      onConfirmed: () {
-        context.read<ManagePaymentMethodsBloc>().add(
-              ManagePaymentMethodsEvent.deletePaymentMethod(
-                salesOrg: paymentMethod.salesOrg,
-                paymentMethod: paymentMethod.paymentMethod,
-                deleteIndex: deleteIndex,
-              ),
-            );
-
-        context.router.pop();
-      },
+      message: 'Are you sure you want to delete this payment method?'.tr(),
+      //onCancelPressed: () => context.router.pop(),
+      onAcceptPressed: () async => context.read<ManagePaymentMethodsBloc>().add(
+            ManagePaymentMethodsEvent.deletePaymentMethod(
+              salesOrg: paymentMethod.salesOrg,
+              paymentMethod: paymentMethod.paymentMethod,
+              deleteIndex: deleteIndex,
+            ),
+          ),
       confirmText: 'Delete',
     );
   }
