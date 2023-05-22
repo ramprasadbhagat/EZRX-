@@ -119,6 +119,7 @@ void main() {
     materialListRobot.verifyCurrencyCheck(currency);
     await materialListRobot.tapMaterial(material);
     materialDetailRobot.verify();
+    await materialDetailRobot.findAndCloseAnnouncementIcon();
     await materialDetailRobot.changeQuantity(4);
     await materialDetailRobot.deductQuantity();
     await materialDetailRobot.addQuantity();
@@ -399,7 +400,6 @@ void main() {
     await orderHistoryRobot.tapOrderHistoryFilterApplyButton();
 
     orderHistoryRobot.findOrderItemByMaterialNumber(material);
-    await homeRobot.tapHomeTab();
     await homeRobot.tapHomeTab();
     homeRobot.verify();
     homeRobot.findOrderTemplate();

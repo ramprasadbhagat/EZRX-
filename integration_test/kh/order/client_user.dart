@@ -108,6 +108,7 @@ void main() {
     await materialListRobot.search(materialSearchText);
     await materialListRobot.tapMaterial(materialNumber);
     materialDetailRobot.verify();
+    await materialDetailRobot.findAndCloseAnnouncementIcon();
     materialDetailRobot.findAddToCart();
     await materialDetailRobot.tapAddToCart();
     materialListRobot.verify();
@@ -434,7 +435,6 @@ void main() {
     await tester.pumpAndSettle(const Duration(seconds: 3));
     await cartRobot.goBack();
     await tester.pumpAndSettle(const Duration(seconds: 3));
-    await cartRobot.goBack();
     await homeRobot.tapHomeTab();
     homeRobot.verify();
     homeRobot.findOrderTemplate();
