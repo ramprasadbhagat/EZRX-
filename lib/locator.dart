@@ -30,6 +30,7 @@ import 'package:ezrxmobile/application/order/combo_deal/combo_deal_principle_det
 import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/all_credits/all_credits_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
+import 'package:ezrxmobile/application/payments/all_invoices/filter/all_invoices_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_list_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
@@ -130,7 +131,6 @@ import 'package:ezrxmobile/infrastructure/banner/datasource/banner_local.dart';
 import 'package:ezrxmobile/infrastructure/banner/datasource/banner_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/banner/datasource/banner_remote.dart';
 import 'package:ezrxmobile/infrastructure/banner/repository/banner_repository.dart';
-
 import 'package:ezrxmobile/infrastructure/core/firebase/analytics.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/crashlytics.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/dynamic_links.dart';
@@ -269,19 +269,12 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
 import 'package:local_auth/local_auth.dart';
-
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_request_type_code_local.dart';
-
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_request_type_code_query.dart';
-
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_request_type_code_remote.dart';
-
 import 'package:ezrxmobile/infrastructure/returns/repository/return_request_type_code_repository.dart';
-
 import 'package:ezrxmobile/application/returns/user_restriction_details/user_restriction_details_bloc.dart';
-
 import 'package:ezrxmobile/infrastructure/order/repository/scan_material_info_repository.dart';
-
 import 'package:ezrxmobile/infrastructure/core/material_info_scanner/material_info_scanner.dart';
 
 import 'package:ezrxmobile/application/returns/return_price/return_price_bloc.dart';
@@ -2101,7 +2094,12 @@ void setupLocator() {
   //  All Invoices and Credits
   //
   //============================================================
-
+  locator.registerLazySingleton(
+    () => AllInvoicesFilterBloc(
+      allCreditsAndInvoicesRepository:
+          locator<AllCreditsAndInvoicesRepository>(),
+    ),
+  );
   locator.registerLazySingleton(
     () => AllInvoicesBloc(
       allCreditsAndInvoicesRepository:

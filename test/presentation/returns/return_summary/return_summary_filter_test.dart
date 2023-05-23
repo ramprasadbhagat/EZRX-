@@ -6,9 +6,7 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_summary_filter.dart';
-import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
-
 import 'package:ezrxmobile/presentation/returns/return_summary/return_summary_filter.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
@@ -138,7 +136,7 @@ void main() {
           .thenReturn(ReturnSummaryFilterState.initial().copyWith(
         showErrorMessages: true,
         returnSummaryFilter: ReturnSummaryFilter.empty().copyWith(
-          refundTotalTo: PriceRange('12'),
+          refundTotalTo: DoubleValue('12'),
         ),
       ));
 
@@ -164,7 +162,7 @@ void main() {
           .thenReturn(ReturnSummaryFilterState.initial().copyWith(
         showErrorMessages: true,
         returnSummaryFilter: ReturnSummaryFilter.empty().copyWith(
-          refundTotalFrom: PriceRange('12'),
+          refundTotalFrom: DoubleValue('12'),
         ),
       ));
 
@@ -259,7 +257,7 @@ void main() {
           .thenReturn(ReturnSummaryFilterState.initial().copyWith(
         showErrorMessages: false,
         returnSummaryFilter: ReturnSummaryFilter.empty().copyWith(
-          refundTotalFrom: PriceRange('12'),
+          refundTotalFrom: DoubleValue('12'),
         ),
       ));
       await getWidget(tester);
@@ -279,14 +277,14 @@ void main() {
     });
 
     testWidgets(
-        '=> PriceRangeError Test when refundTotalTo greater than refundTotalFrom',
+        '=> PriceRange Test when refundTotalTo greater than refundTotalFrom',
         (tester) async {
       when(() => returnSummaryFilterBlocMock.state)
           .thenReturn(ReturnSummaryFilterState.initial().copyWith(
         showErrorMessages: true,
         returnSummaryFilter: ReturnSummaryFilter.empty().copyWith(
-          refundTotalFrom: PriceRange('15'),
-          refundTotalTo: PriceRange('12'),
+          refundTotalFrom: DoubleValue('15'),
+          refundTotalTo: DoubleValue('12'),
         ),
       ));
       await getWidget(tester);

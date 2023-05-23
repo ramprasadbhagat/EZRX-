@@ -7,11 +7,11 @@ class AllInvoicesEvent with _$AllInvoicesEvent {
   const factory AllInvoicesEvent.fetch({
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
-    required String sortDirection,
+    required AllInvoicesFilter filter,
   }) = _Fetch;
   const factory AllInvoicesEvent.loadMore({
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
-    required String sortDirection,
+    required AllInvoicesFilter filter,
   }) = _LoadMore;
 }

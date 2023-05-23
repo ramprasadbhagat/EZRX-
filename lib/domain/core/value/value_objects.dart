@@ -115,6 +115,9 @@ class DateTimeStringValue extends ValueObject<String> {
   String get apiDateTimeFormat =>
       formattedDateTimeForAPI(value.getOrElse(() => ''));
 
+  String get apiDateWithDashFormat =>
+      formattedDateWithDashForAPI(value.getOrElse(() => ''));
+
   DateTime get dateTimeByDateString =>
       getDateTimeByDateString(value.getOrElse(() => ''));
 
@@ -156,4 +159,19 @@ class StringValue extends ValueObject<String> {
   Color get getPaymentAdviceColor => getValueColor(value.getOrElse(() => ''));
 
   const StringValue._(this.value);
+}
+
+
+
+class DoubleValue extends ValueObject<double> {
+  @override
+  final Either<ValueFailure<double>, double> value;
+
+  factory DoubleValue(String input) => DoubleValue._(tryParseDoubleValue(input));
+
+  String get apiParameterValue => emptyIfZero(value.getOrElse(() => 0));
+
+  String get doubleToString => emptyIfZero(value.getOrElse(() => 0));
+
+  const DoubleValue._(this.value);
 }

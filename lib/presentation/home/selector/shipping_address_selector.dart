@@ -21,10 +21,12 @@ import 'package:ezrxmobile/application/order/payment_customer_information/paymen
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/all_credits/all_credits_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
+import 'package:ezrxmobile/application/payments/all_invoices/filter/all_invoices_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/request_return/request_return_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_summary/return_summary_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_filter.dart';
+import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
 import 'package:ezrxmobile/domain/returns/entities/request_return_filter.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_summary_filter.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
@@ -34,7 +36,6 @@ import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dar
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:ezrxmobile/application/payments/paymant_summary/payment_summary_bloc.dart';
 
 class ShipCodeSelector extends StatelessWidget {
@@ -78,11 +79,7 @@ class ShipCodeSelector extends StatelessWidget {
 
               locator<MixpanelService>().registerSuperProps(
                 username: user.username.getOrDefaultValue(''),
-                salesOrg: context
-                    .read<SalesOrgBloc>()
-                    .state
-                    .salesOrg
-                    .getOrDefaultValue(''),
+                salesOrg: salesOrgState.salesOrg.getOrDefaultValue(''),
                 customerCode: customerCodeInfo.customerCodeSoldTo,
                 shipToAddress: state.shipToInfo.shipToCustomerCode,
                 userRole: user.role.type.getOrDefaultValue(''),
@@ -116,10 +113,7 @@ class ShipCodeSelector extends StatelessWidget {
                       MaterialBundleListEvent.fetch(
                         user: user,
                         customerCode: customerCodeInfo,
-                        salesOrganisation: context
-                            .read<SalesOrgBloc>()
-                            .state
-                            .salesOrganisation,
+                        salesOrganisation: salesOrgState.salesOrganisation,
                         shipToCode:
                             context.read<ShipToCodeBloc>().state.shipToInfo,
                       ),
@@ -130,7 +124,7 @@ class ShipCodeSelector extends StatelessWidget {
                     SavedOrderListEvent.fetch(
                       userInfo: user,
                       selectedSalesOrganisation:
-                          context.read<SalesOrgBloc>().state.salesOrganisation,
+                          salesOrgState.salesOrganisation,
                       selectedCustomerCode: customerCodeInfo,
                       selectedShipTo: state.shipToInfo,
                     ),
@@ -139,8 +133,7 @@ class ShipCodeSelector extends StatelessWidget {
               if (context.read<UserBloc>().state.userCanCreateOrder) {
                 context.read<OrderHistoryListBloc>().add(
                       OrderHistoryListEvent.fetch(
-                        salesOrgConfigs:
-                            context.read<SalesOrgBloc>().state.configs,
+                        salesOrgConfigs: salesOrgState.configs,
                         shipToInfo: state.shipToInfo,
                         user: user,
                         customerCodeInfo: customerCodeInfo,
@@ -166,8 +159,7 @@ class ShipCodeSelector extends StatelessWidget {
                   .read<PaymentCustomerInformationBloc>()
                   .add(PaymentCustomerInformationEvent.fetch(
                     customeCodeInfo: customerCodeInfo,
-                    salesOrganisation:
-                        context.read<SalesOrgBloc>().state.salesOrganisation,
+                    salesOrganisation: salesOrgState.salesOrganisation,
                     selectedShipToCode: context
                         .read<ShipToCodeBloc>()
                         .state
@@ -178,10 +170,7 @@ class ShipCodeSelector extends StatelessWidget {
               if (user.role.type.hasReturnsAdminAccess) {
                 context.read<RequestReturnBloc>().add(
                       RequestReturnEvent.fetch(
-                        salesOrg: context
-                            .read<SalesOrgBloc>()
-                            .state
-                            .salesOrganisation,
+                        salesOrg: salesOrgState.salesOrganisation,
                         customerCodeInfo: customerCodeInfo,
                         shipInfo:
                             context.read<ShipToCodeBloc>().state.shipToInfo,
@@ -190,31 +179,33 @@ class ShipCodeSelector extends StatelessWidget {
                     );
               }
               context.read<PaymentSummaryBloc>().add(
-                      PaymentSummaryEvent.fetchPaymentSummaryList(
-                        salesOrganization: context
-                            .read<SalesOrgBloc>()
-                            .state
-                            .salesOrganisation,
-                        customerCodeInfo: customerCodeInfo,
-                      ),
-                    );
-              
-              context.read<AdditionalDetailsBloc>().add(
-                    AdditionalDetailsEvent.initialized(
-                      config: context.read<SalesOrgBloc>().state.configs,
+                    PaymentSummaryEvent.fetchPaymentSummaryList(
+                      salesOrganization:
+                          context.read<SalesOrgBloc>().state.salesOrganisation,
                       customerCodeInfo: customerCodeInfo,
                     ),
                   );
 
+              context.read<AdditionalDetailsBloc>().add(
+                    AdditionalDetailsEvent.initialized(
+                      config: salesOrgState.configs,
+                      customerCodeInfo: customerCodeInfo,
+                    ),
+                  );
+
+              context.read<AllInvoicesFilterBloc>().add(
+                    AllInvoicesFilterEvent.fetch(
+                      salesOrganisation: salesOrgState.salesOrganisation,
+                    ),
+                  );
               context.read<AllInvoicesBloc>().add(
                     AllInvoicesEvent.fetch(
-                      salesOrganisation:
-                          context.read<SalesOrgBloc>().state.salesOrganisation,
+                      salesOrganisation: salesOrgState.salesOrganisation,
                       customerCodeInfo: context
                           .read<CustomerCodeBloc>()
                           .state
                           .customerCodeInfo,
-                      sortDirection: 'desc',
+                      filter: AllInvoicesFilter.empty(),
                     ),
                   );
               context.read<AllCreditsBloc>().add(

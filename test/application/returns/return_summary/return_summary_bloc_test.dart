@@ -47,8 +47,8 @@ void main() {
       ),
       sortBy: ReturnSummaryStatus('Active'),
       requestId: SearchKey.searchFilter('mock_id'),
-      refundTotalTo: PriceRange('100'),
-      refundTotalFrom: PriceRange('1000'),
+      refundTotalTo: DoubleValue('100'),
+      refundTotalFrom: DoubleValue('1000'),
     );
   });
 

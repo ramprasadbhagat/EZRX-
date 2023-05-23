@@ -21,6 +21,7 @@ import 'package:ezrxmobile/application/order/payment_customer_information/paymen
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/all_credits/all_credits_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
+import 'package:ezrxmobile/application/payments/all_invoices/filter/all_invoices_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/paymant_summary/payment_summary_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_summary/return_summary_bloc.dart';
 import 'package:ezrxmobile/config.dart';
@@ -109,10 +110,10 @@ class OrderHistoryFilterByStatusBlocMock extends MockBloc<
     implements OrderHistoryFilterByStatusBloc {}
 
 class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
-
 class AllInvoicesBlocMock extends MockBloc<AllInvoicesEvent, AllInvoicesState>
     implements AllInvoicesBloc {}
-
+class AllInvoicesFilterBlocMock extends MockBloc<AllInvoicesFilterEvent, AllInvoicesFilterState>
+    implements AllInvoicesFilterBloc {}
 class AdditionalDetailsBlocMock
     extends MockBloc<AdditionalDetailsEvent, AdditionalDetailsState>
     implements AdditionalDetailsBloc {}
@@ -174,6 +175,7 @@ void main() {
   late AdditionalDetailsBlocMock mockAdditionalDetailsBloc;
   late ReturnSummaryBloc returnSummaryBlocMock;
   late PaymentSummaryBloc paymentSummaryBlocMock;
+  late AllInvoicesFilterBlocMock allInvoicesFilterBlocMock;
   late AllInvoicesBlocMock allInvoicesBlocMock;
   late AllCreditsBlocMock allCreditsBlocMock;
 
@@ -209,6 +211,7 @@ void main() {
     mockAdditionalDetailsBloc = AdditionalDetailsBlocMock();
     returnSummaryBlocMock = ReturnSummaryBlocMock();
     paymentSummaryBlocMock = PaymentSummaryBlocMock();
+    allInvoicesFilterBlocMock = AllInvoicesFilterBlocMock();
     allInvoicesBlocMock = AllInvoicesBlocMock();
     allCreditsBlocMock = AllCreditsBlocMock();
   });
@@ -307,6 +310,8 @@ void main() {
                 create: (context) => returnSummaryBlocMock),
             BlocProvider<PaymentSummaryBloc>(
                 create: (context) => paymentSummaryBlocMock),
+            BlocProvider<AllInvoicesFilterBloc>(
+                create: (context) => allInvoicesFilterBlocMock),
             BlocProvider<AllInvoicesBloc>(
                 create: (context) => allInvoicesBlocMock),
             BlocProvider<AllCreditsBloc>(

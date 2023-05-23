@@ -66,7 +66,7 @@ class ReturnSummaryFilterDrawer extends StatelessWidget {
                                       .checkIfTotalRangeIsValid ||
                                   state.returnSummaryFilter
                                       .checkIfAnyRefundTotalIsEmpty))
-                          ? const PriceRangeError()
+                          ? const PriceRange()
                           : const SizedBox.shrink(),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -314,8 +314,8 @@ class _SubmittedDateFilter extends StatelessWidget {
   }
 }
 
-class PriceRangeError extends StatelessWidget {
-  const PriceRangeError({Key? key}) : super(key: key);
+class PriceRange extends StatelessWidget {
+  const PriceRange({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

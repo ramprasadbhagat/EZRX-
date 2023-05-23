@@ -120,3 +120,13 @@ Either<ValueFailure<String>, String> validateInputIsBiggerThanMaxValue(
           failedValue: maxValue.toString(),
         ));
 }
+
+Either<ValueFailure<double>, double> tryParseDoubleValue(
+  String input,
+) {
+  if (double.tryParse(input) == null) {
+    return left(const ValueFailure.invalidDoubleValue(failedValue: 0));
+  }
+
+  return Right(double.parse(input));
+}

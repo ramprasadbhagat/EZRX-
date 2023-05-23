@@ -6,7 +6,6 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/core/value/value_validators.dart';
 import 'package:ezrxmobile/domain/returns/value/value_transformers.dart';
-import 'package:ezrxmobile/domain/returns/value/value_validators.dart';
 import 'package:flutter/animation.dart';
 
 class ReturnsAllowed extends ValueObject<bool> {
@@ -121,19 +120,6 @@ class FilterStatus extends ValueObject<String> {
       );
 
   const FilterStatus._(this.value);
-}
-
-class PriceRange extends ValueObject<double> {
-  @override
-  final Either<ValueFailure<double>, double> value;
-
-  factory PriceRange(String input) => PriceRange._(validateDoubleValue(input));
-
-  String get apiParameterValue => emptyIfZero(value.getOrElse(() => 0));
-
-  String get doubleToString => emptyIfZero(value.getOrElse(() => 0));
-
-  const PriceRange._(this.value);
 }
 
 class ReturnQuantity extends ValueObject<String> {

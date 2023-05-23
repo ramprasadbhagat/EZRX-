@@ -5,8 +5,8 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ApproverReturnStatusFilterBottomShttet extends StatelessWidget {
-  const ApproverReturnStatusFilterBottomShttet({Key? key}) : super(key: key);
+class ApproverReturnStatusFilterBottomSheet extends StatelessWidget {
+  const ApproverReturnStatusFilterBottomSheet({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

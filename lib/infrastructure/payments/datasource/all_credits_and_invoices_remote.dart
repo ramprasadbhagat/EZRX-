@@ -26,8 +26,6 @@ class AllCreditsAndInvoicesRemoteDataSource {
   Future<AvailableStatuses> getAvailableStatuses({
     required String salesOrg,
     String statusFor = 'DebitItems',
-    required int offSet,
-    required int pageSize,
   }) async {
     final res = await httpService.request(
       method: 'POST',
@@ -51,13 +49,11 @@ class AllCreditsAndInvoicesRemoteDataSource {
     return AvailableStatusesDto.fromJson(data).toDomain();
   }
 
-  Future<CustomerDocumentHeader> getAllInvoices({
+  Future<CustomerDocumentHeader> filterInvoices({
     required String customerCode,
     required String salesOrg,
+    required List<Map<String, String>> filterMap,
     String sortDirection = 'desc',
-    String excelFor = 'Debit',
-    String orderByField = 'netDueDate',
-    String filterByField = 'debitCreditCode',
     required int offSet,
     required int pageSize,
   }) async {
@@ -66,27 +62,21 @@ class AllCreditsAndInvoicesRemoteDataSource {
       url: '${config.urlConstants}ezpay',
       data: jsonEncode(
         {
-          'query': allCreditsAndInvoicesQueryMutation
-              .getCustomerDocumentHeaderQuery(),
+          'query': allCreditsAndInvoicesQueryMutation.getCustomerDocumentHeaderQuery(),
           'variables': {
             'input': {
               'customerCode': customerCode,
               'salesOrg': salesOrg,
               'first': pageSize,
               'after': offSet,
-              'excelFor': excelFor,
+              'excelFor': 'Debit',
               'orderBy': [
                 {
                   'order': sortDirection,
-                  'field': orderByField,
+                  'field': 'netDueDate',
                 },
               ],
-              'filterBy': [
-                {
-                  'field': filterByField,
-                  'value': 'S',
-                },
-              ],
+              'filterBy': filterMap,
             },
           },
         },

@@ -12,6 +12,7 @@ import 'package:ezrxmobile/application/order/combo_deal/combo_deal_list_bloc.dar
 import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/all_credits/all_credits_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
+import 'package:ezrxmobile/application/payments/all_invoices/filter/all_invoices_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_list_bloc.dart';
 import 'package:ezrxmobile/application/returns/request_return/request_return_bloc.dart';
@@ -69,7 +70,6 @@ import 'package:ezrxmobile/application/returns/usage_code/usage_code_bloc.dart';
 import 'package:ezrxmobile/application/returns/user_restriction/user_restriction_list_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/account_selector_storage.dart';
-
 import 'package:ezrxmobile/infrastructure/core/firebase/analytics.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/crashlytics.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
@@ -89,13 +89,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:sizer/sizer.dart';
 import 'package:upgrader/upgrader.dart';
-
 import 'package:ezrxmobile/application/returns/return_request_type_code/return_request_type_code_bloc.dart';
 import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
-
 import 'package:ezrxmobile/application/returns/user_restriction_details/user_restriction_details_bloc.dart';
 import 'package:scandit_flutter_datacapture_barcode/scandit_flutter_datacapture_barcode.dart';
-
 import 'package:ezrxmobile/infrastructure/core/material_info_scanner/material_info_scanner.dart';
 
 import 'package:ezrxmobile/application/returns/return_price/return_price_bloc.dart';
@@ -366,7 +363,7 @@ class App extends StatelessWidget {
         BlocProvider<TenderContractListBloc>(
           create: (context) => locator<TenderContractListBloc>(),
         ),
-         BlocProvider<PaymentSummaryBloc>(
+        BlocProvider<PaymentSummaryBloc>(
           create: (context) => locator<PaymentSummaryBloc>(),
         ),
         BlocProvider<ReturnSummaryFilterBloc>(
@@ -393,6 +390,9 @@ class App extends StatelessWidget {
         BlocProvider<PaymentMethodsBloc>(
           create: (context) => locator<PaymentMethodsBloc>(),
         ),
+        BlocProvider<AllInvoicesFilterBloc>(
+          create: (context) => locator<AllInvoicesFilterBloc>(),
+        ),
         BlocProvider<AllInvoicesBloc>(
           create: (context) => locator<AllInvoicesBloc>(),
         ),
@@ -408,7 +408,7 @@ class App extends StatelessWidget {
         BlocProvider<SettingBloc>(
           create: (context) => locator<SettingBloc>(),
         ),
-       BlocProvider<BankBeneficiaryBloc>(
+        BlocProvider<BankBeneficiaryBloc>(
           create: (context) => locator<BankBeneficiaryBloc>(),
         ),
       ],

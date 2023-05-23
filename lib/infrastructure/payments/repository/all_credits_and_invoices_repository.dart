@@ -1,6 +1,7 @@
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
+import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/available_statuses.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_document_header.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -9,6 +10,7 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/payments/repository/i_all_credits_and_invoices_repository.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_invoices_local.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_invoices_remote.dart';
+import 'package:ezrxmobile/infrastructure/payments/dtos/all_invoices_filter_dto.dart';
 
 class AllCreditsAndInvoicesRepository extends IAllCreditsAndInvoicesRepository {
   final Config config;
@@ -23,8 +25,6 @@ class AllCreditsAndInvoicesRepository extends IAllCreditsAndInvoicesRepository {
   @override
   Future<Either<ApiFailure, AvailableStatuses>> getAvailableStatuses({
     required SalesOrganisation salesOrganisation,
-    required int pageSize,
-    required int offSet,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -40,8 +40,6 @@ class AllCreditsAndInvoicesRepository extends IAllCreditsAndInvoicesRepository {
     try {
       final response = await remoteDataSource.getAvailableStatuses(
         salesOrg: salesOrganisation.salesOrg.getOrCrash(),
-        pageSize: pageSize,
-        offSet: offSet,
       );
 
       return Right(response);
@@ -53,10 +51,10 @@ class AllCreditsAndInvoicesRepository extends IAllCreditsAndInvoicesRepository {
   }
 
   @override
-  Future<Either<ApiFailure, CustomerDocumentHeader>> getAllInvoices({
+  Future<Either<ApiFailure, CustomerDocumentHeader>> filterInvoices({
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
-    required String sortDirection,
+    required AllInvoicesFilter filter,
     required int pageSize,
     required int offSet,
   }) async {
@@ -72,10 +70,10 @@ class AllCreditsAndInvoicesRepository extends IAllCreditsAndInvoicesRepository {
       }
     }
     try {
-      final response = await remoteDataSource.getAllInvoices(
+      final response = await remoteDataSource.filterInvoices(
         salesOrg: salesOrganisation.salesOrg.getOrCrash(),
         customerCode: customerCodeInfo.customerCodeSoldTo,
-        sortDirection: sortDirection,
+        filterMap: AllInvoicesFilterDto.fromDomain(filter).toMapList,
         pageSize: pageSize,
         offSet: offSet,
       );

@@ -149,6 +149,15 @@ String formattedDateTimeForAPI(String text) {
   return DateFormat(DateTimeFormatString.apiDateFormat).format(parsedDate);
 }
 
+String formattedDateWithDashForAPI(String text) {
+  final parsedDate = DateTime.tryParse(text);
+  if (parsedDate == null) {
+    return '';
+  }
+
+  return DateFormat(DateTimeFormatString.apiDateWithDashFormat).format(parsedDate);
+}
+
 DateTime? tryParseDateTime(String input) {
   if (isNotEmpty(input)) {
     try {
@@ -178,7 +187,7 @@ DateTime? tryParseDateTime(String input) {
       return null;
     }
   }
-
+  
   return null;
 }
 

@@ -12,15 +12,15 @@ class ReturnSummaryFilter with _$ReturnSummaryFilter {
     required SearchKey requestId,
     required DateTimeStringValue dateFrom,
     required DateTimeStringValue dateTo,
-    required PriceRange refundTotalTo,
-    required PriceRange refundTotalFrom,
+    required DoubleValue refundTotalTo,
+    required DoubleValue refundTotalFrom,
     required ReturnSummaryStatus sortBy,
   }) = _ReturnSummaryFilter;
 
   factory ReturnSummaryFilter.empty() => ReturnSummaryFilter(
         requestId: SearchKey.searchFilter(''),
-        refundTotalTo: PriceRange(''),
-        refundTotalFrom: PriceRange(''),
+        refundTotalTo: DoubleValue(''),
+        refundTotalFrom: DoubleValue(''),
         dateFrom: DateTimeStringValue(
           getDateStringByDateTime(
             DateTime.now().subtract(

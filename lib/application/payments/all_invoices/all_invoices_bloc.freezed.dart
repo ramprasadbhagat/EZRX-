@@ -20,10 +20,10 @@ mixin _$AllInvoicesEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, String sortDirection)
+            CustomerCodeInfo customerCodeInfo, AllInvoicesFilter filter)
         fetch,
     required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, String sortDirection)
+            CustomerCodeInfo customerCodeInfo, AllInvoicesFilter filter)
         loadMore,
   }) =>
       throw _privateConstructorUsedError;
@@ -31,10 +31,10 @@ mixin _$AllInvoicesEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, String sortDirection)?
+            CustomerCodeInfo customerCodeInfo, AllInvoicesFilter filter)?
         fetch,
     TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, String sortDirection)?
+            CustomerCodeInfo customerCodeInfo, AllInvoicesFilter filter)?
         loadMore,
   }) =>
       throw _privateConstructorUsedError;
@@ -42,10 +42,10 @@ mixin _$AllInvoicesEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, String sortDirection)?
+            CustomerCodeInfo customerCodeInfo, AllInvoicesFilter filter)?
         fetch,
     TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, String sortDirection)?
+            CustomerCodeInfo customerCodeInfo, AllInvoicesFilter filter)?
         loadMore,
     required TResult orElse(),
   }) =>
@@ -132,10 +132,10 @@ class _$_initialized implements _initialized {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, String sortDirection)
+            CustomerCodeInfo customerCodeInfo, AllInvoicesFilter filter)
         fetch,
     required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, String sortDirection)
+            CustomerCodeInfo customerCodeInfo, AllInvoicesFilter filter)
         loadMore,
   }) {
     return initialized();
@@ -146,10 +146,10 @@ class _$_initialized implements _initialized {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, String sortDirection)?
+            CustomerCodeInfo customerCodeInfo, AllInvoicesFilter filter)?
         fetch,
     TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, String sortDirection)?
+            CustomerCodeInfo customerCodeInfo, AllInvoicesFilter filter)?
         loadMore,
   }) {
     return initialized?.call();
@@ -160,10 +160,10 @@ class _$_initialized implements _initialized {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, String sortDirection)?
+            CustomerCodeInfo customerCodeInfo, AllInvoicesFilter filter)?
         fetch,
     TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, String sortDirection)?
+            CustomerCodeInfo customerCodeInfo, AllInvoicesFilter filter)?
         loadMore,
     required TResult orElse(),
   }) {
@@ -220,10 +220,11 @@ abstract class _$$_FetchCopyWith<$Res> {
   $Res call(
       {SalesOrganisation salesOrganisation,
       CustomerCodeInfo customerCodeInfo,
-      String sortDirection});
+      AllInvoicesFilter filter});
 
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
+  $AllInvoicesFilterCopyWith<$Res> get filter;
 }
 
 /// @nodoc
@@ -238,7 +239,7 @@ class __$$_FetchCopyWithImpl<$Res>
   $Res call({
     Object? salesOrganisation = null,
     Object? customerCodeInfo = null,
-    Object? sortDirection = null,
+    Object? filter = null,
   }) {
     return _then(_$_Fetch(
       salesOrganisation: null == salesOrganisation
@@ -249,10 +250,10 @@ class __$$_FetchCopyWithImpl<$Res>
           ? _value.customerCodeInfo
           : customerCodeInfo // ignore: cast_nullable_to_non_nullable
               as CustomerCodeInfo,
-      sortDirection: null == sortDirection
-          ? _value.sortDirection
-          : sortDirection // ignore: cast_nullable_to_non_nullable
-              as String,
+      filter: null == filter
+          ? _value.filter
+          : filter // ignore: cast_nullable_to_non_nullable
+              as AllInvoicesFilter,
     ));
   }
 
@@ -271,6 +272,14 @@ class __$$_FetchCopyWithImpl<$Res>
       return _then(_value.copyWith(customerCodeInfo: value));
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $AllInvoicesFilterCopyWith<$Res> get filter {
+    return $AllInvoicesFilterCopyWith<$Res>(_value.filter, (value) {
+      return _then(_value.copyWith(filter: value));
+    });
+  }
 }
 
 /// @nodoc
@@ -279,18 +288,18 @@ class _$_Fetch implements _Fetch {
   const _$_Fetch(
       {required this.salesOrganisation,
       required this.customerCodeInfo,
-      required this.sortDirection});
+      required this.filter});
 
   @override
   final SalesOrganisation salesOrganisation;
   @override
   final CustomerCodeInfo customerCodeInfo;
   @override
-  final String sortDirection;
+  final AllInvoicesFilter filter;
 
   @override
   String toString() {
-    return 'AllInvoicesEvent.fetch(salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, sortDirection: $sortDirection)';
+    return 'AllInvoicesEvent.fetch(salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, filter: $filter)';
   }
 
   @override
@@ -302,13 +311,12 @@ class _$_Fetch implements _Fetch {
                 other.salesOrganisation == salesOrganisation) &&
             (identical(other.customerCodeInfo, customerCodeInfo) ||
                 other.customerCodeInfo == customerCodeInfo) &&
-            (identical(other.sortDirection, sortDirection) ||
-                other.sortDirection == sortDirection));
+            (identical(other.filter, filter) || other.filter == filter));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, salesOrganisation, customerCodeInfo, sortDirection);
+  int get hashCode =>
+      Object.hash(runtimeType, salesOrganisation, customerCodeInfo, filter);
 
   @JsonKey(ignore: true)
   @override
@@ -321,13 +329,13 @@ class _$_Fetch implements _Fetch {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, String sortDirection)
+            CustomerCodeInfo customerCodeInfo, AllInvoicesFilter filter)
         fetch,
     required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, String sortDirection)
+            CustomerCodeInfo customerCodeInfo, AllInvoicesFilter filter)
         loadMore,
   }) {
-    return fetch(salesOrganisation, customerCodeInfo, sortDirection);
+    return fetch(salesOrganisation, customerCodeInfo, filter);
   }
 
   @override
@@ -335,13 +343,13 @@ class _$_Fetch implements _Fetch {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, String sortDirection)?
+            CustomerCodeInfo customerCodeInfo, AllInvoicesFilter filter)?
         fetch,
     TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, String sortDirection)?
+            CustomerCodeInfo customerCodeInfo, AllInvoicesFilter filter)?
         loadMore,
   }) {
-    return fetch?.call(salesOrganisation, customerCodeInfo, sortDirection);
+    return fetch?.call(salesOrganisation, customerCodeInfo, filter);
   }
 
   @override
@@ -349,15 +357,15 @@ class _$_Fetch implements _Fetch {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, String sortDirection)?
+            CustomerCodeInfo customerCodeInfo, AllInvoicesFilter filter)?
         fetch,
     TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, String sortDirection)?
+            CustomerCodeInfo customerCodeInfo, AllInvoicesFilter filter)?
         loadMore,
     required TResult orElse(),
   }) {
     if (fetch != null) {
-      return fetch(salesOrganisation, customerCodeInfo, sortDirection);
+      return fetch(salesOrganisation, customerCodeInfo, filter);
     }
     return orElse();
   }
@@ -401,11 +409,11 @@ abstract class _Fetch implements AllInvoicesEvent {
   const factory _Fetch(
       {required final SalesOrganisation salesOrganisation,
       required final CustomerCodeInfo customerCodeInfo,
-      required final String sortDirection}) = _$_Fetch;
+      required final AllInvoicesFilter filter}) = _$_Fetch;
 
   SalesOrganisation get salesOrganisation;
   CustomerCodeInfo get customerCodeInfo;
-  String get sortDirection;
+  AllInvoicesFilter get filter;
   @JsonKey(ignore: true)
   _$$_FetchCopyWith<_$_Fetch> get copyWith =>
       throw _privateConstructorUsedError;
@@ -420,10 +428,11 @@ abstract class _$$_LoadMoreCopyWith<$Res> {
   $Res call(
       {SalesOrganisation salesOrganisation,
       CustomerCodeInfo customerCodeInfo,
-      String sortDirection});
+      AllInvoicesFilter filter});
 
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
+  $AllInvoicesFilterCopyWith<$Res> get filter;
 }
 
 /// @nodoc
@@ -439,7 +448,7 @@ class __$$_LoadMoreCopyWithImpl<$Res>
   $Res call({
     Object? salesOrganisation = null,
     Object? customerCodeInfo = null,
-    Object? sortDirection = null,
+    Object? filter = null,
   }) {
     return _then(_$_LoadMore(
       salesOrganisation: null == salesOrganisation
@@ -450,10 +459,10 @@ class __$$_LoadMoreCopyWithImpl<$Res>
           ? _value.customerCodeInfo
           : customerCodeInfo // ignore: cast_nullable_to_non_nullable
               as CustomerCodeInfo,
-      sortDirection: null == sortDirection
-          ? _value.sortDirection
-          : sortDirection // ignore: cast_nullable_to_non_nullable
-              as String,
+      filter: null == filter
+          ? _value.filter
+          : filter // ignore: cast_nullable_to_non_nullable
+              as AllInvoicesFilter,
     ));
   }
 
@@ -472,6 +481,14 @@ class __$$_LoadMoreCopyWithImpl<$Res>
       return _then(_value.copyWith(customerCodeInfo: value));
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $AllInvoicesFilterCopyWith<$Res> get filter {
+    return $AllInvoicesFilterCopyWith<$Res>(_value.filter, (value) {
+      return _then(_value.copyWith(filter: value));
+    });
+  }
 }
 
 /// @nodoc
@@ -480,18 +497,18 @@ class _$_LoadMore implements _LoadMore {
   const _$_LoadMore(
       {required this.salesOrganisation,
       required this.customerCodeInfo,
-      required this.sortDirection});
+      required this.filter});
 
   @override
   final SalesOrganisation salesOrganisation;
   @override
   final CustomerCodeInfo customerCodeInfo;
   @override
-  final String sortDirection;
+  final AllInvoicesFilter filter;
 
   @override
   String toString() {
-    return 'AllInvoicesEvent.loadMore(salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, sortDirection: $sortDirection)';
+    return 'AllInvoicesEvent.loadMore(salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, filter: $filter)';
   }
 
   @override
@@ -503,13 +520,12 @@ class _$_LoadMore implements _LoadMore {
                 other.salesOrganisation == salesOrganisation) &&
             (identical(other.customerCodeInfo, customerCodeInfo) ||
                 other.customerCodeInfo == customerCodeInfo) &&
-            (identical(other.sortDirection, sortDirection) ||
-                other.sortDirection == sortDirection));
+            (identical(other.filter, filter) || other.filter == filter));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, salesOrganisation, customerCodeInfo, sortDirection);
+  int get hashCode =>
+      Object.hash(runtimeType, salesOrganisation, customerCodeInfo, filter);
 
   @JsonKey(ignore: true)
   @override
@@ -522,13 +538,13 @@ class _$_LoadMore implements _LoadMore {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, String sortDirection)
+            CustomerCodeInfo customerCodeInfo, AllInvoicesFilter filter)
         fetch,
     required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, String sortDirection)
+            CustomerCodeInfo customerCodeInfo, AllInvoicesFilter filter)
         loadMore,
   }) {
-    return loadMore(salesOrganisation, customerCodeInfo, sortDirection);
+    return loadMore(salesOrganisation, customerCodeInfo, filter);
   }
 
   @override
@@ -536,13 +552,13 @@ class _$_LoadMore implements _LoadMore {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, String sortDirection)?
+            CustomerCodeInfo customerCodeInfo, AllInvoicesFilter filter)?
         fetch,
     TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, String sortDirection)?
+            CustomerCodeInfo customerCodeInfo, AllInvoicesFilter filter)?
         loadMore,
   }) {
-    return loadMore?.call(salesOrganisation, customerCodeInfo, sortDirection);
+    return loadMore?.call(salesOrganisation, customerCodeInfo, filter);
   }
 
   @override
@@ -550,15 +566,15 @@ class _$_LoadMore implements _LoadMore {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, String sortDirection)?
+            CustomerCodeInfo customerCodeInfo, AllInvoicesFilter filter)?
         fetch,
     TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, String sortDirection)?
+            CustomerCodeInfo customerCodeInfo, AllInvoicesFilter filter)?
         loadMore,
     required TResult orElse(),
   }) {
     if (loadMore != null) {
-      return loadMore(salesOrganisation, customerCodeInfo, sortDirection);
+      return loadMore(salesOrganisation, customerCodeInfo, filter);
     }
     return orElse();
   }
@@ -602,11 +618,11 @@ abstract class _LoadMore implements AllInvoicesEvent {
   const factory _LoadMore(
       {required final SalesOrganisation salesOrganisation,
       required final CustomerCodeInfo customerCodeInfo,
-      required final String sortDirection}) = _$_LoadMore;
+      required final AllInvoicesFilter filter}) = _$_LoadMore;
 
   SalesOrganisation get salesOrganisation;
   CustomerCodeInfo get customerCodeInfo;
-  String get sortDirection;
+  AllInvoicesFilter get filter;
   @JsonKey(ignore: true)
   _$$_LoadMoreCopyWith<_$_LoadMore> get copyWith =>
       throw _privateConstructorUsedError;
