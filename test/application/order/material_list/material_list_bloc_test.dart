@@ -236,6 +236,61 @@ void main() {
     );
 
     blocTest(
+      'Material List auto-search success',
+      build: () =>
+          MaterialListBloc(materialListRepository: materialListMockRepository),
+      setUp: () {
+        when(
+          () => materialListMockRepository.searchMaterialList(
+            user: mockUser,
+            salesOrganisation: mockSalesOrganisation,
+            salesOrgConfig: mockSalesOrganisationConfigs,
+            customerCodeInfo: mockCustomerCodeInfo,
+            shipToInfo: mockShipToInfo,
+            pageSize: _defaultPageSize,
+            offset: 0,
+            orderBy: 'materialDescription_asc',
+            searchKey: '1763',
+            selectedMaterialFilter: mockSelectedMaterialFilter,
+            pickAndPack: 'include',
+          ),
+        ).thenAnswer(
+          (invocation) async => Right(materialListMock),
+        );
+      },
+      act: (MaterialListBloc bloc) {
+        bloc.add(
+          MaterialListEvent.autoSearchMaterialList(
+            user: mockUser,
+            salesOrganisation: mockSalesOrganisation,
+            configs: mockSalesOrganisationConfigs,
+            customerCodeInfo: mockCustomerCodeInfo,
+            shipToInfo: mockShipToInfo,
+            selectedMaterialFilter: mockSelectedMaterialFilter,
+            pickAndPack: 'include',
+            searchKey: SearchKey('1763'),
+          ),
+        );
+      },
+      wait: const Duration(milliseconds: 3000),
+      expect: () => [
+        materialState.copyWith(
+          isFetching: true,
+          materialList: [],
+          searchKey: SearchKey('1763'),
+        ),
+        materialState.copyWith(
+          isFetching: false,
+          materialList: materialListMock,
+          apiFailureOrSuccessOption: none(),
+          canLoadMore: materialListMock.length >= _defaultPageSize,
+          nextPageIndex: 1,
+          searchKey: SearchKey('1763'),
+        ),
+      ],
+    );
+
+    blocTest(
       'Clear Material List search key',
       build: () =>
           MaterialListBloc(materialListRepository: materialListMockRepository),
@@ -293,6 +348,56 @@ void main() {
         materialState.copyWith(
           searchKey: SearchKey('1978'),
         ),
+        materialState.copyWith(
+          isFetching: true,
+          materialList: [],
+          searchKey: SearchKey('1978'),
+        ),
+        materialState.copyWith(
+          apiFailureOrSuccessOption:
+              optionOf(const Left(ApiFailure.other('fake-error'))),
+          isFetching: false,
+          searchKey: SearchKey('1978'),
+        ),
+      ],
+    );
+
+    blocTest(
+      'Material List auto-search fails',
+      build: () =>
+          MaterialListBloc(materialListRepository: materialListMockRepository),
+      setUp: () {
+        when(() => materialListMockRepository.searchMaterialList(
+            user: mockUser,
+            salesOrganisation: mockSalesOrganisation,
+            salesOrgConfig: mockSalesOrganisationConfigs,
+            customerCodeInfo: mockCustomerCodeInfo,
+            shipToInfo: mockShipToInfo,
+            pageSize: _defaultPageSize,
+            offset: 0,
+            orderBy: 'materialDescription_asc',
+            searchKey: '1978',
+            selectedMaterialFilter: mockSelectedMaterialFilter,
+            pickAndPack: 'include')).thenAnswer(
+          (invocation) async => const Left(ApiFailure.other('fake-error')),
+        );
+      },
+      act: (MaterialListBloc bloc) {
+        bloc.add(
+          MaterialListEvent.searchMaterialList(
+            user: mockUser,
+            salesOrganisation: mockSalesOrganisation,
+            configs: mockSalesOrganisationConfigs,
+            customerCodeInfo: mockCustomerCodeInfo,
+            shipToInfo: mockShipToInfo,
+            selectedMaterialFilter: mockSelectedMaterialFilter,
+            pickAndPack: 'include',
+            searchKey: SearchKey('1978'),
+          ),
+        );
+      },
+      wait: const Duration(milliseconds: 3000),
+      expect: () => [
         materialState.copyWith(
           isFetching: true,
           materialList: [],

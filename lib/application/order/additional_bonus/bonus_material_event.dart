@@ -12,6 +12,13 @@ class BonusMaterialEvent with _$BonusMaterialEvent {
     required SalesOrganisation salesOrganisation,
     required String pickAndPack,
   }) = _Fetch;
-
-  const factory BonusMaterialEvent.reset() = _Reset;
+  const factory BonusMaterialEvent.autoSearch({
+    required User user,
+    required SalesOrganisationConfigs configs,
+    required String searchKey,
+    required CustomerCodeInfo customerInfo,
+    required ShipToInfo shipInfo,
+    required SalesOrganisation salesOrganisation,
+    required String pickAndPack,
+  }) = _AutoSearch;
 }

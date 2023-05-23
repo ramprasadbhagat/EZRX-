@@ -211,6 +211,109 @@ void main() {
           ),
         ],
       );
+
+      blocTest<BonusMaterialBloc, BonusMaterialState>(
+        'Bonus Material items auto-fetch',
+        build: () {
+          return BonusMaterialBloc(
+              bonusMaterialRepository: mockBonusMaterialRepository);
+        },
+        act: (BonusMaterialBloc bloc) => bloc.add(
+          BonusMaterialEvent.autoSearch(
+            user: mockUser,
+            configs: SalesOrganisationConfigs.empty(),
+            customerInfo: CustomerCodeInfo.empty(),
+            pickAndPack: 'include',
+            salesOrganisation: SalesOrganisation.empty(),
+            searchKey: '314',
+            shipInfo: ShipToInfo.empty(),
+          ),
+        ),
+        setUp: () => when(() => mockBonusMaterialRepository.getMaterialBonus(
+              user: mockUser,
+              configs: SalesOrganisationConfigs.empty(),
+              customerInfo: CustomerCodeInfo.empty(),
+              pickAndPack: 'include',
+              salesOrganisation: SalesOrganisation.empty(),
+              searchKey: '314',
+              shipInfo: ShipToInfo.empty(),
+            )).thenAnswer(
+          (invocation) async => Right([MaterialInfo.empty()]),
+        ),
+        wait: const Duration(milliseconds: 3000),
+        expect: () => [
+          BonusMaterialState.initial().copyWith(
+            failureOrSuccessOption: none(),
+            searchKey: SearchKey('314'),
+            bonus: [],
+            isStarting: false,
+            isFetching: true,
+          ),
+          BonusMaterialState.initial().copyWith(
+            failureOrSuccessOption: none(),
+            bonus: [MaterialInfo.empty()],
+            searchKey: SearchKey('314'),
+            isStarting: false,
+            isFetching: false,
+          )
+        ],
+      );
+      blocTest<BonusMaterialBloc, BonusMaterialState>(
+        'Bonus Material items auto-fetch error',
+        build: () {
+          return BonusMaterialBloc(
+              bonusMaterialRepository: mockBonusMaterialRepository);
+        },
+        setUp: () {
+          when(
+            () => mockBonusMaterialRepository.getMaterialBonus(
+              user: mockUser,
+              configs: SalesOrganisationConfigs.empty(),
+              customerInfo: CustomerCodeInfo.empty(),
+              pickAndPack: 'include',
+              salesOrganisation: SalesOrganisation.empty(),
+              searchKey: '314',
+              shipInfo: ShipToInfo.empty(),
+            ),
+          ).thenAnswer(
+            (invocation) async => const Left(
+              ApiFailure.other('fake-error'),
+            ),
+          );
+        },
+        act: (BonusMaterialBloc bloc) => bloc.add(
+          BonusMaterialEvent.fetch(
+            user: mockUser,
+            configs: SalesOrganisationConfigs.empty(),
+            customerInfo: CustomerCodeInfo.empty(),
+            pickAndPack: 'include',
+            salesOrganisation: SalesOrganisation.empty(),
+            searchKey: '314',
+            shipInfo: ShipToInfo.empty(),
+          ),
+        ),
+        wait: const Duration(milliseconds: 3000),
+        expect: () => [
+          BonusMaterialState.initial().copyWith(
+            failureOrSuccessOption: none(),
+            searchKey: SearchKey('314'),
+            bonus: [],
+            isStarting: false,
+            isFetching: true,
+          ),
+          BonusMaterialState.initial().copyWith(
+            failureOrSuccessOption: optionOf(
+              const Left(
+                ApiFailure.other('fake-error'),
+              ),
+            ),
+            bonus: [],
+            searchKey: SearchKey('314'),
+            isStarting: false,
+            isFetching: false,
+          ),
+        ],
+      );
       blocTest<BonusMaterialBloc, BonusMaterialState>(
         'reset bloc',
         build: () {
@@ -219,7 +322,7 @@ void main() {
         },
         setUp: () {},
         act: (BonusMaterialBloc bloc) => bloc.add(
-          const BonusMaterialEvent.reset(),
+          const BonusMaterialEvent.initialized(),
         ),
         expect: () => [
           BonusMaterialState.initial().copyWith(

@@ -58,6 +58,40 @@ class MaterialListSearchBarState extends State<MaterialListSearchBar> {
             key: Key('materialSearchField${_searchController.text}'),
             controller: _searchController,
             enabled: !state.isFetching,
+            onSearchChanged: (value) {
+              _resetMixpanelOrderFlow();
+              // auto search code goes here
+              context.read<MaterialListBloc>().add(
+                    MaterialListEvent.autoSearchMaterialList(
+                      user: context.read<UserBloc>().state.user,
+                      salesOrganisation:
+                          context.read<SalesOrgBloc>().state.salesOrganisation,
+                      configs: context.read<SalesOrgBloc>().state.configs,
+                      customerCodeInfo: context
+                          .read<CustomerCodeBloc>()
+                          .state
+                          .customerCodeInfo,
+                      shipToInfo:
+                          context.read<ShipToCodeBloc>().state.shipToInfo,
+                      selectedMaterialFilter: context
+                          .read<MaterialFilterBloc>()
+                          .state
+                          .selectedMaterialFilter,
+                      pickAndPack: context
+                          .read<EligibilityBloc>()
+                          .state
+                          .getPNPValueMaterial,
+                      searchKey: SearchKey(value),
+                    ),
+                  );
+              trackMixpanelEvent(
+                MixpanelEvents.productSearch,
+                props: {
+                  MixpanelProps.searchKey:
+                      state.searchKey.getOrDefaultValue(''),
+                },
+              );
+            },
             onSearchSubmitted: (value) {
               _resetMixpanelOrderFlow();
               // search code goes here

@@ -24,7 +24,18 @@ class MaterialListEvent with _$MaterialListEvent {
     required String pickAndPack,
     required SearchKey searchKey,
     @Default(false) bool isScanSearch,
-  }) = _SearchMagerialList;
+  }) = _SearchMaterialList;
+  const factory MaterialListEvent.autoSearchMaterialList({
+    required User user,
+    required SalesOrganisation salesOrganisation,
+    required SalesOrganisationConfigs configs,
+    required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToInfo,
+    required MaterialFilter selectedMaterialFilter,
+    required String pickAndPack,
+    required SearchKey searchKey,
+    @Default(false) bool isScanSearch,
+  }) = _AutoSearchMaterialList;
   const factory MaterialListEvent.updateSearchKey({required String searchKey}) =
       _UpdateSearchKey;
   const factory MaterialListEvent.loadMore({

@@ -58,23 +58,6 @@ void main() {
     );
 
     blocTest(
-      'Covid Material List search update on empty',
-      build: () => CovidMaterialListBloc(
-          materialListRepository: materialListMockRepository),
-      act: (CovidMaterialListBloc bloc) {
-        bloc.add(
-            const CovidMaterialListEvent.updateSearchKey(searchKey: '1234'));
-      },
-      expect: () => [
-        covidMaterialState.copyWith(
-          isFetching: true,
-          materialList: [],
-          searchKey: SearchKey('1234'),
-        ),
-      ],
-    );
-
-    blocTest(
       'Material List search fetch',
       build: () => CovidMaterialListBloc(
           materialListRepository: materialListMockRepository),
@@ -98,11 +81,6 @@ void main() {
       },
       act: (CovidMaterialListBloc bloc) {
         bloc.add(
-          const CovidMaterialListEvent.updateSearchKey(
-            searchKey: '1763',
-          ),
-        );
-        bloc.add(
           CovidMaterialListEvent.searchMaterialList(
             user: mockUser,
             salesOrganisation: mockSalesOrganisation,
@@ -111,13 +89,13 @@ void main() {
             shipToInfo: mockShipToInfo,
             selectedMaterialFilter: MaterialFilter.empty(),
             pickAndPack: 'incldue',
+            searchKey: '1763',
           ),
         );
       },
       expect: () => [
-        covidMaterialState.copyWith(
+        CovidMaterialListState.initial().copyWith(
           isFetching: true,
-          materialList: [],
           searchKey: SearchKey('1763'),
         ),
         covidMaterialState.copyWith(
@@ -158,25 +136,24 @@ void main() {
       ),
       act: (CovidMaterialListBloc bloc) {
         bloc.add(
-            const CovidMaterialListEvent.updateSearchKey(searchKey: '1234'));
-
-        bloc.add(CovidMaterialListEvent.searchMaterialList(
+          CovidMaterialListEvent.searchMaterialList(
             configs: mockSalesOrganisationConfigs,
             user: mockUser,
             customerCodeInfo: mockCustomerCodeInfo,
             pickAndPack: 'only',
             salesOrganisation: mockSalesOrganisation,
             selectedMaterialFilter: mockSelectedMaterialFilter,
-            shipToInfo: mockShipToInfo));
+            shipToInfo: mockShipToInfo,
+            searchKey: '1234',
+          ),
+        );
       },
       expect: () => [
         covidMaterialState.copyWith(
           isFetching: true,
-          materialList: materialListMock,
           searchKey: SearchKey('1234'),
         ),
         covidMaterialState.copyWith(
-          materialList: materialListMock,
           apiFailureOrSuccessOption:
               optionOf(const Left(ApiFailure.other('fake-error'))),
           isFetching: false,
@@ -186,18 +163,110 @@ void main() {
     );
 
     blocTest(
-      'Clear Covid Material List search key',
+      'Material List auto-search fetch',
       build: () => CovidMaterialListBloc(
           materialListRepository: materialListMockRepository),
-      act: (CovidMaterialListBloc bloc) {
-        bloc.add(const CovidMaterialListEvent.updateSearchKey(searchKey: ''));
+      setUp: () {
+        when(() => materialListMockRepository.searchMaterialList(
+              user: mockUser,
+              salesOrganisation: mockSalesOrganisation,
+              salesOrgConfig: mockSalesOrganisationConfigs,
+              customerCodeInfo: mockCustomerCodeInfo,
+              shipToInfo: mockShipToInfo,
+              pageSize: _defaultPageSize,
+              offset: 0,
+              orderBy: 'materialDescription_asc',
+              searchKey: '1763',
+              selectedMaterialFilter: MaterialFilter.empty(),
+              pickAndPack: 'incldue',
+              isForFoc: mockUser.role.type.isSalesRepRole ? false : true,
+            )).thenAnswer(
+          (invocation) async => Right(materialListMock),
+        );
       },
+      act: (CovidMaterialListBloc bloc) {
+        bloc.add(
+          CovidMaterialListEvent.autoSearchMaterialList(
+            user: mockUser,
+            salesOrganisation: mockSalesOrganisation,
+            configs: mockSalesOrganisationConfigs,
+            customerCodeInfo: mockCustomerCodeInfo,
+            shipToInfo: mockShipToInfo,
+            selectedMaterialFilter: MaterialFilter.empty(),
+            pickAndPack: 'incldue',
+            searchKey: '1763',
+          ),
+        );
+      },
+      wait: const Duration(milliseconds: 3000),
       expect: () => [
         covidMaterialState.copyWith(
           isFetching: true,
           materialList: [],
-          searchKey: SearchKey.search(''),
-        )
+          searchKey: SearchKey('1763'),
+        ),
+        covidMaterialState.copyWith(
+          isFetching: false,
+          materialList: materialListMock,
+          apiFailureOrSuccessOption: none(),
+          canLoadMore: materialListMock.length >= _defaultPageSize,
+          nextPageIndex: 1,
+          searchKey: SearchKey('1763'),
+        ),
+      ],
+    );
+
+    blocTest(
+      'covid material list auto-search success',
+      build: () => CovidMaterialListBloc(
+          materialListRepository: materialListMockRepository),
+      setUp: () {
+        when(() => materialListMockRepository.searchMaterialList(
+              user: mockUser,
+              salesOrganisation: mockSalesOrganisation,
+              salesOrgConfig: mockSalesOrganisationConfigs,
+              customerCodeInfo: mockCustomerCodeInfo,
+              shipToInfo: mockShipToInfo,
+              pageSize: _defaultPageSize,
+              offset: 0,
+              orderBy: 'materialDescription_asc',
+              searchKey: '1234',
+              selectedMaterialFilter: MaterialFilter.empty(),
+              pickAndPack: 'only',
+              isForFoc: mockUser.role.type.isSalesRepRole ? false : true,
+            )).thenAnswer(
+          (invocation) async => const Left(ApiFailure.other('fake-error')),
+        );
+      },
+      seed: () => covidMaterialState.copyWith(
+        materialList: materialListMock,
+      ),
+      act: (CovidMaterialListBloc bloc) {
+        bloc.add(
+          CovidMaterialListEvent.autoSearchMaterialList(
+            configs: mockSalesOrganisationConfigs,
+            user: mockUser,
+            customerCodeInfo: mockCustomerCodeInfo,
+            pickAndPack: 'only',
+            salesOrganisation: mockSalesOrganisation,
+            selectedMaterialFilter: mockSelectedMaterialFilter,
+            shipToInfo: mockShipToInfo,
+            searchKey: '1234',
+          ),
+        );
+      },
+      wait: const Duration(milliseconds: 3000),
+      expect: () => [
+        covidMaterialState.copyWith(
+          isFetching: true,
+          searchKey: SearchKey('1234'),
+        ),
+        covidMaterialState.copyWith(
+          apiFailureOrSuccessOption:
+              optionOf(const Left(ApiFailure.other('fake-error'))),
+          isFetching: false,
+          searchKey: SearchKey('1234'),
+        ),
       ],
     );
 
@@ -228,12 +297,14 @@ void main() {
       },
       act: (CovidMaterialListBloc bloc) {
         bloc.add(CovidMaterialListEvent.fetch(
-            user: mockUser,
-            salesOrganisation: mockSalesOrganisation,
-            configs: mockSalesOrganisationConfigs,
-            customerCodeInfo: mockCustomerCodeInfo,
-            shipToInfo: mockShipToInfo,
-            pickAndPack: 'exclude'));
+          user: mockUser,
+          salesOrganisation: mockSalesOrganisation,
+          configs: mockSalesOrganisationConfigs,
+          customerCodeInfo: mockCustomerCodeInfo,
+          shipToInfo: mockShipToInfo,
+          pickAndPack: 'exclude',
+          searchKey: '',
+        ));
       },
       expect: () => [
         covidMaterialState.copyWith(
@@ -275,13 +346,17 @@ void main() {
         );
       },
       act: (CovidMaterialListBloc bloc) {
-        bloc.add(CovidMaterialListEvent.fetch(
+        bloc.add(
+          CovidMaterialListEvent.fetch(
             user: mockUser,
             salesOrganisation: mockSalesOrganisation,
             configs: mockSalesOrganisationConfigs,
             customerCodeInfo: mockCustomerCodeInfo,
             shipToInfo: mockShipToInfo,
-            pickAndPack: 'exclude'));
+            pickAndPack: 'exclude',
+            searchKey: '',
+          ),
+        );
       },
       expect: () => [
         covidMaterialState.copyWith(
@@ -304,19 +379,22 @@ void main() {
           materialListRepository: materialListMockRepository),
       act: (CovidMaterialListBloc bloc) {
         bloc.add(CovidMaterialListEvent.fetch(
-            user: mockUser,
-            salesOrganisation: mockSalesOrganisation,
-            configs: mockSalesOrganisationConfigs,
-            customerCodeInfo: mockCustomerCodeInfo,
-            shipToInfo: mockShipToInfo,
-            pickAndPack: 'only'));
+          user: mockUser,
+          salesOrganisation: mockSalesOrganisation,
+          configs: mockSalesOrganisationConfigs,
+          customerCodeInfo: mockCustomerCodeInfo,
+          shipToInfo: mockShipToInfo,
+          pickAndPack: 'only',
+          searchKey: '',
+        ));
         bloc.add(CovidMaterialListEvent.loadMore(
-            user: mockUser,
-            salesOrganisation: mockSalesOrganisation,
-            configs: mockSalesOrganisationConfigs,
-            customerCodeInfo: mockCustomerCodeInfo,
-            shipToInfo: mockShipToInfo,
-            pickAndPack: 'only'));
+          user: mockUser,
+          salesOrganisation: mockSalesOrganisation,
+          configs: mockSalesOrganisationConfigs,
+          customerCodeInfo: mockCustomerCodeInfo,
+          shipToInfo: mockShipToInfo,
+          pickAndPack: 'only',
+        ));
       },
       setUp: () {
         when(() => materialListMockRepository.getMaterialList(
@@ -394,6 +472,7 @@ void main() {
           customerCodeInfo: mockCustomerCodeInfo,
           shipToInfo: mockShipToInfo,
           pickAndPack: 'only',
+          searchKey: '',
         ));
         bloc.add(CovidMaterialListEvent.loadMore(
           user: mockUser,

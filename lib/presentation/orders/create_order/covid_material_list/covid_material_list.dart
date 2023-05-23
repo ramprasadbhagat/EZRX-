@@ -91,11 +91,6 @@ class _BodyContent extends StatelessWidget {
               emptyMessage: 'There are no vaccine in this customer code'.tr(),
               onRefresh: () {
                 context.read<CovidMaterialListBloc>().add(
-                      const CovidMaterialListEvent.updateSearchKey(
-                        searchKey: '',
-                      ),
-                    );
-                context.read<CovidMaterialListBloc>().add(
                       CovidMaterialListEvent.fetch(
                         user: context.read<UserBloc>().state.user,
                         salesOrganisation: context
@@ -113,6 +108,7 @@ class _BodyContent extends StatelessWidget {
                             .read<EligibilityBloc>()
                             .state
                             .getPNPValueCovidMaterial,
+                        searchKey: '',
                       ),
                     );
               },

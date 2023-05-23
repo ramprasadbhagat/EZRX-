@@ -28,7 +28,7 @@ void main() {
       baseUrl: 'https://uat.ezrx.com',
     ),
   );
-  final dioAdapter = DioAdapter(dio: dio);
+  final dioAdapter = DioAdapter(dio: dio, matcher: const UrlRequestMatcher());
   final service = HttpService.mockDio(dio);
 
   setUpAll(
@@ -188,6 +188,7 @@ void main() {
           'shipToCustomer': 'fake-shipto-code',
           'excludePrincipal': [],
           'plants': [],
+          'searchKey': '',
           'first': 10,
           'after': 0,
           'cached': true,
@@ -248,6 +249,7 @@ void main() {
           'salesOrganisation': 'fake-sales-org',
           'customerSoldToCode': 'fake-customer-code',
           'customerShipToCode': 'fake-shipto-code',
+          'searchKey': '',
           'excludePrincipal': [],
           'gimmickMaterial': false,
           'pickAndPack': '',

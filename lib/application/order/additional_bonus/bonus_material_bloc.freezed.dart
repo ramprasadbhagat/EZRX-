@@ -28,7 +28,15 @@ mixin _$BonusMaterialEvent {
             SalesOrganisation salesOrganisation,
             String pickAndPack)
         fetch,
-    required TResult Function() reset,
+    required TResult Function(
+            User user,
+            SalesOrganisationConfigs configs,
+            String searchKey,
+            CustomerCodeInfo customerInfo,
+            ShipToInfo shipInfo,
+            SalesOrganisation salesOrganisation,
+            String pickAndPack)
+        autoSearch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -43,7 +51,15 @@ mixin _$BonusMaterialEvent {
             SalesOrganisation salesOrganisation,
             String pickAndPack)?
         fetch,
-    TResult? Function()? reset,
+    TResult? Function(
+            User user,
+            SalesOrganisationConfigs configs,
+            String searchKey,
+            CustomerCodeInfo customerInfo,
+            ShipToInfo shipInfo,
+            SalesOrganisation salesOrganisation,
+            String pickAndPack)?
+        autoSearch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -58,7 +74,15 @@ mixin _$BonusMaterialEvent {
             SalesOrganisation salesOrganisation,
             String pickAndPack)?
         fetch,
-    TResult Function()? reset,
+    TResult Function(
+            User user,
+            SalesOrganisationConfigs configs,
+            String searchKey,
+            CustomerCodeInfo customerInfo,
+            ShipToInfo shipInfo,
+            SalesOrganisation salesOrganisation,
+            String pickAndPack)?
+        autoSearch,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -66,21 +90,21 @@ mixin _$BonusMaterialEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
-    required TResult Function(_Reset value) reset,
+    required TResult Function(_AutoSearch value) autoSearch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_Reset value)? reset,
+    TResult? Function(_AutoSearch value)? autoSearch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
-    TResult Function(_Reset value)? reset,
+    TResult Function(_AutoSearch value)? autoSearch,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -152,7 +176,15 @@ class _$_Initialized implements _Initialized {
             SalesOrganisation salesOrganisation,
             String pickAndPack)
         fetch,
-    required TResult Function() reset,
+    required TResult Function(
+            User user,
+            SalesOrganisationConfigs configs,
+            String searchKey,
+            CustomerCodeInfo customerInfo,
+            ShipToInfo shipInfo,
+            SalesOrganisation salesOrganisation,
+            String pickAndPack)
+        autoSearch,
   }) {
     return initialized();
   }
@@ -170,7 +202,15 @@ class _$_Initialized implements _Initialized {
             SalesOrganisation salesOrganisation,
             String pickAndPack)?
         fetch,
-    TResult? Function()? reset,
+    TResult? Function(
+            User user,
+            SalesOrganisationConfigs configs,
+            String searchKey,
+            CustomerCodeInfo customerInfo,
+            ShipToInfo shipInfo,
+            SalesOrganisation salesOrganisation,
+            String pickAndPack)?
+        autoSearch,
   }) {
     return initialized?.call();
   }
@@ -188,7 +228,15 @@ class _$_Initialized implements _Initialized {
             SalesOrganisation salesOrganisation,
             String pickAndPack)?
         fetch,
-    TResult Function()? reset,
+    TResult Function(
+            User user,
+            SalesOrganisationConfigs configs,
+            String searchKey,
+            CustomerCodeInfo customerInfo,
+            ShipToInfo shipInfo,
+            SalesOrganisation salesOrganisation,
+            String pickAndPack)?
+        autoSearch,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -202,7 +250,7 @@ class _$_Initialized implements _Initialized {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
-    required TResult Function(_Reset value) reset,
+    required TResult Function(_AutoSearch value) autoSearch,
   }) {
     return initialized(this);
   }
@@ -212,7 +260,7 @@ class _$_Initialized implements _Initialized {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_Reset value)? reset,
+    TResult? Function(_AutoSearch value)? autoSearch,
   }) {
     return initialized?.call(this);
   }
@@ -222,7 +270,7 @@ class _$_Initialized implements _Initialized {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
-    TResult Function(_Reset value)? reset,
+    TResult Function(_AutoSearch value)? autoSearch,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -422,7 +470,15 @@ class _$_Fetch implements _Fetch {
             SalesOrganisation salesOrganisation,
             String pickAndPack)
         fetch,
-    required TResult Function() reset,
+    required TResult Function(
+            User user,
+            SalesOrganisationConfigs configs,
+            String searchKey,
+            CustomerCodeInfo customerInfo,
+            ShipToInfo shipInfo,
+            SalesOrganisation salesOrganisation,
+            String pickAndPack)
+        autoSearch,
   }) {
     return fetch(user, configs, searchKey, customerInfo, shipInfo,
         salesOrganisation, pickAndPack);
@@ -441,7 +497,15 @@ class _$_Fetch implements _Fetch {
             SalesOrganisation salesOrganisation,
             String pickAndPack)?
         fetch,
-    TResult? Function()? reset,
+    TResult? Function(
+            User user,
+            SalesOrganisationConfigs configs,
+            String searchKey,
+            CustomerCodeInfo customerInfo,
+            ShipToInfo shipInfo,
+            SalesOrganisation salesOrganisation,
+            String pickAndPack)?
+        autoSearch,
   }) {
     return fetch?.call(user, configs, searchKey, customerInfo, shipInfo,
         salesOrganisation, pickAndPack);
@@ -460,7 +524,15 @@ class _$_Fetch implements _Fetch {
             SalesOrganisation salesOrganisation,
             String pickAndPack)?
         fetch,
-    TResult Function()? reset,
+    TResult Function(
+            User user,
+            SalesOrganisationConfigs configs,
+            String searchKey,
+            CustomerCodeInfo customerInfo,
+            ShipToInfo shipInfo,
+            SalesOrganisation salesOrganisation,
+            String pickAndPack)?
+        autoSearch,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -475,7 +547,7 @@ class _$_Fetch implements _Fetch {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
-    required TResult Function(_Reset value) reset,
+    required TResult Function(_AutoSearch value) autoSearch,
   }) {
     return fetch(this);
   }
@@ -485,7 +557,7 @@ class _$_Fetch implements _Fetch {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_Reset value)? reset,
+    TResult? Function(_AutoSearch value)? autoSearch,
   }) {
     return fetch?.call(this);
   }
@@ -495,7 +567,7 @@ class _$_Fetch implements _Fetch {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
-    TResult Function(_Reset value)? reset,
+    TResult Function(_AutoSearch value)? autoSearch,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -528,37 +600,179 @@ abstract class _Fetch implements BonusMaterialEvent {
 }
 
 /// @nodoc
-abstract class _$$_ResetCopyWith<$Res> {
-  factory _$$_ResetCopyWith(_$_Reset value, $Res Function(_$_Reset) then) =
-      __$$_ResetCopyWithImpl<$Res>;
+abstract class _$$_AutoSearchCopyWith<$Res> {
+  factory _$$_AutoSearchCopyWith(
+          _$_AutoSearch value, $Res Function(_$_AutoSearch) then) =
+      __$$_AutoSearchCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {User user,
+      SalesOrganisationConfigs configs,
+      String searchKey,
+      CustomerCodeInfo customerInfo,
+      ShipToInfo shipInfo,
+      SalesOrganisation salesOrganisation,
+      String pickAndPack});
+
+  $UserCopyWith<$Res> get user;
+  $SalesOrganisationConfigsCopyWith<$Res> get configs;
+  $CustomerCodeInfoCopyWith<$Res> get customerInfo;
+  $ShipToInfoCopyWith<$Res> get shipInfo;
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
 }
 
 /// @nodoc
-class __$$_ResetCopyWithImpl<$Res>
-    extends _$BonusMaterialEventCopyWithImpl<$Res, _$_Reset>
-    implements _$$_ResetCopyWith<$Res> {
-  __$$_ResetCopyWithImpl(_$_Reset _value, $Res Function(_$_Reset) _then)
+class __$$_AutoSearchCopyWithImpl<$Res>
+    extends _$BonusMaterialEventCopyWithImpl<$Res, _$_AutoSearch>
+    implements _$$_AutoSearchCopyWith<$Res> {
+  __$$_AutoSearchCopyWithImpl(
+      _$_AutoSearch _value, $Res Function(_$_AutoSearch) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? user = null,
+    Object? configs = null,
+    Object? searchKey = null,
+    Object? customerInfo = null,
+    Object? shipInfo = null,
+    Object? salesOrganisation = null,
+    Object? pickAndPack = null,
+  }) {
+    return _then(_$_AutoSearch(
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
+      configs: null == configs
+          ? _value.configs
+          : configs // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisationConfigs,
+      searchKey: null == searchKey
+          ? _value.searchKey
+          : searchKey // ignore: cast_nullable_to_non_nullable
+              as String,
+      customerInfo: null == customerInfo
+          ? _value.customerInfo
+          : customerInfo // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
+      shipInfo: null == shipInfo
+          ? _value.shipInfo
+          : shipInfo // ignore: cast_nullable_to_non_nullable
+              as ShipToInfo,
+      salesOrganisation: null == salesOrganisation
+          ? _value.salesOrganisation
+          : salesOrganisation // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
+      pickAndPack: null == pickAndPack
+          ? _value.pickAndPack
+          : pickAndPack // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationConfigsCopyWith<$Res> get configs {
+    return $SalesOrganisationConfigsCopyWith<$Res>(_value.configs, (value) {
+      return _then(_value.copyWith(configs: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CustomerCodeInfoCopyWith<$Res> get customerInfo {
+    return $CustomerCodeInfoCopyWith<$Res>(_value.customerInfo, (value) {
+      return _then(_value.copyWith(customerInfo: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ShipToInfoCopyWith<$Res> get shipInfo {
+    return $ShipToInfoCopyWith<$Res>(_value.shipInfo, (value) {
+      return _then(_value.copyWith(shipInfo: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
+    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
+      return _then(_value.copyWith(salesOrganisation: value));
+    });
+  }
 }
 
 /// @nodoc
 
-class _$_Reset implements _Reset {
-  const _$_Reset();
+class _$_AutoSearch implements _AutoSearch {
+  const _$_AutoSearch(
+      {required this.user,
+      required this.configs,
+      required this.searchKey,
+      required this.customerInfo,
+      required this.shipInfo,
+      required this.salesOrganisation,
+      required this.pickAndPack});
+
+  @override
+  final User user;
+  @override
+  final SalesOrganisationConfigs configs;
+  @override
+  final String searchKey;
+  @override
+  final CustomerCodeInfo customerInfo;
+  @override
+  final ShipToInfo shipInfo;
+  @override
+  final SalesOrganisation salesOrganisation;
+  @override
+  final String pickAndPack;
 
   @override
   String toString() {
-    return 'BonusMaterialEvent.reset()';
+    return 'BonusMaterialEvent.autoSearch(user: $user, configs: $configs, searchKey: $searchKey, customerInfo: $customerInfo, shipInfo: $shipInfo, salesOrganisation: $salesOrganisation, pickAndPack: $pickAndPack)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Reset);
+        (other.runtimeType == runtimeType &&
+            other is _$_AutoSearch &&
+            (identical(other.user, user) || other.user == user) &&
+            (identical(other.configs, configs) || other.configs == configs) &&
+            (identical(other.searchKey, searchKey) ||
+                other.searchKey == searchKey) &&
+            (identical(other.customerInfo, customerInfo) ||
+                other.customerInfo == customerInfo) &&
+            (identical(other.shipInfo, shipInfo) ||
+                other.shipInfo == shipInfo) &&
+            (identical(other.salesOrganisation, salesOrganisation) ||
+                other.salesOrganisation == salesOrganisation) &&
+            (identical(other.pickAndPack, pickAndPack) ||
+                other.pickAndPack == pickAndPack));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, user, configs, searchKey,
+      customerInfo, shipInfo, salesOrganisation, pickAndPack);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_AutoSearchCopyWith<_$_AutoSearch> get copyWith =>
+      __$$_AutoSearchCopyWithImpl<_$_AutoSearch>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -573,9 +787,18 @@ class _$_Reset implements _Reset {
             SalesOrganisation salesOrganisation,
             String pickAndPack)
         fetch,
-    required TResult Function() reset,
+    required TResult Function(
+            User user,
+            SalesOrganisationConfigs configs,
+            String searchKey,
+            CustomerCodeInfo customerInfo,
+            ShipToInfo shipInfo,
+            SalesOrganisation salesOrganisation,
+            String pickAndPack)
+        autoSearch,
   }) {
-    return reset();
+    return autoSearch(user, configs, searchKey, customerInfo, shipInfo,
+        salesOrganisation, pickAndPack);
   }
 
   @override
@@ -591,9 +814,18 @@ class _$_Reset implements _Reset {
             SalesOrganisation salesOrganisation,
             String pickAndPack)?
         fetch,
-    TResult? Function()? reset,
+    TResult? Function(
+            User user,
+            SalesOrganisationConfigs configs,
+            String searchKey,
+            CustomerCodeInfo customerInfo,
+            ShipToInfo shipInfo,
+            SalesOrganisation salesOrganisation,
+            String pickAndPack)?
+        autoSearch,
   }) {
-    return reset?.call();
+    return autoSearch?.call(user, configs, searchKey, customerInfo, shipInfo,
+        salesOrganisation, pickAndPack);
   }
 
   @override
@@ -609,11 +841,20 @@ class _$_Reset implements _Reset {
             SalesOrganisation salesOrganisation,
             String pickAndPack)?
         fetch,
-    TResult Function()? reset,
+    TResult Function(
+            User user,
+            SalesOrganisationConfigs configs,
+            String searchKey,
+            CustomerCodeInfo customerInfo,
+            ShipToInfo shipInfo,
+            SalesOrganisation salesOrganisation,
+            String pickAndPack)?
+        autoSearch,
     required TResult orElse(),
   }) {
-    if (reset != null) {
-      return reset();
+    if (autoSearch != null) {
+      return autoSearch(user, configs, searchKey, customerInfo, shipInfo,
+          salesOrganisation, pickAndPack);
     }
     return orElse();
   }
@@ -623,9 +864,9 @@ class _$_Reset implements _Reset {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
-    required TResult Function(_Reset value) reset,
+    required TResult Function(_AutoSearch value) autoSearch,
   }) {
-    return reset(this);
+    return autoSearch(this);
   }
 
   @override
@@ -633,9 +874,9 @@ class _$_Reset implements _Reset {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_Reset value)? reset,
+    TResult? Function(_AutoSearch value)? autoSearch,
   }) {
-    return reset?.call(this);
+    return autoSearch?.call(this);
   }
 
   @override
@@ -643,18 +884,36 @@ class _$_Reset implements _Reset {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
-    TResult Function(_Reset value)? reset,
+    TResult Function(_AutoSearch value)? autoSearch,
     required TResult orElse(),
   }) {
-    if (reset != null) {
-      return reset(this);
+    if (autoSearch != null) {
+      return autoSearch(this);
     }
     return orElse();
   }
 }
 
-abstract class _Reset implements BonusMaterialEvent {
-  const factory _Reset() = _$_Reset;
+abstract class _AutoSearch implements BonusMaterialEvent {
+  const factory _AutoSearch(
+      {required final User user,
+      required final SalesOrganisationConfigs configs,
+      required final String searchKey,
+      required final CustomerCodeInfo customerInfo,
+      required final ShipToInfo shipInfo,
+      required final SalesOrganisation salesOrganisation,
+      required final String pickAndPack}) = _$_AutoSearch;
+
+  User get user;
+  SalesOrganisationConfigs get configs;
+  String get searchKey;
+  CustomerCodeInfo get customerInfo;
+  ShipToInfo get shipInfo;
+  SalesOrganisation get salesOrganisation;
+  String get pickAndPack;
+  @JsonKey(ignore: true)
+  _$$_AutoSearchCopyWith<_$_AutoSearch> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc

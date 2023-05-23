@@ -45,7 +45,7 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
       },
       transformer: (events, mapper) {
         return events
-            .debounceTime(const Duration(milliseconds: 4000))
+            .debounceTime(const Duration(milliseconds: 3000))
             .asyncExpand(mapper);
       },
     );

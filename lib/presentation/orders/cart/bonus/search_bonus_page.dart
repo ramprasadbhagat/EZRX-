@@ -47,11 +47,6 @@ class BonusAddPage extends StatelessWidget {
                     ? LoadingShimmer.logo(key: const Key('loaderImage'))
                     : ScrollList<MaterialInfo>(
                         emptyMessage: 'No materials found'.tr(),
-                        // onRefresh: () {
-                        // context.read<BonusMaterialBloc>().add(
-                        //       const BonusMaterialEvent.reset(),
-                        //     );
-                        // },
                         isLoading: state.isFetching,
                         itemBuilder: (context, i, item) => Card(
                           child: Padding(
@@ -194,6 +189,22 @@ class _AppBarState extends State<_AppBar> {
             enabled: !state.isFetching,
             customValidator: () =>
                 SearchKey.search(_searchController.text).isValid(),
+            onSearchChanged: (value) {
+              bonusMaterialBloc.add(
+                BonusMaterialEvent.autoSearch(
+                  user: context.read<UserBloc>().state.user,
+                  salesOrganisation:
+                      context.read<SalesOrgBloc>().state.salesOrganisation,
+                  configs: context.read<SalesOrgBloc>().state.configs,
+                  pickAndPack:
+                      context.read<EligibilityBloc>().state.getPNPValueMaterial,
+                  customerInfo:
+                      context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                  shipInfo: context.read<ShipToCodeBloc>().state.shipToInfo,
+                  searchKey: value,
+                ),
+              );
+            },
             onSearchSubmitted: (value) {
               bonusMaterialBloc.add(
                 BonusMaterialEvent.fetch(
@@ -215,7 +226,7 @@ class _AppBarState extends State<_AppBar> {
               if (_searchController.text.isEmpty) return;
               _searchController.clear();
               bonusMaterialBloc.add(
-                const BonusMaterialEvent.reset(),
+                const BonusMaterialEvent.initialized(),
               );
             },
             suffixIconKey: const ValueKey('addBonusTextFieldClear'),

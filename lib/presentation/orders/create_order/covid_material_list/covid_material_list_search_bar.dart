@@ -56,6 +56,37 @@ class CovidMaterialListSearchBarState
             key: Key('covidMaterialSearchField${_searchController.text}'),
             controller: _searchController,
             enabled: !state.isFetching,
+            onSearchChanged: (value) {
+              context.read<CovidMaterialListBloc>().add(
+                    CovidMaterialListEvent.autoSearchMaterialList(
+                      user: context.read<UserBloc>().state.user,
+                      salesOrganisation:
+                          context.read<SalesOrgBloc>().state.salesOrganisation,
+                      configs: context.read<SalesOrgBloc>().state.configs,
+                      customerCodeInfo: context
+                          .read<CustomerCodeBloc>()
+                          .state
+                          .customerCodeInfo,
+                      shipToInfo:
+                          context.read<ShipToCodeBloc>().state.shipToInfo,
+                      selectedMaterialFilter: context
+                          .read<MaterialFilterBloc>()
+                          .state
+                          .selectedMaterialFilter,
+                      pickAndPack: context
+                          .read<EligibilityBloc>()
+                          .state
+                          .getPNPValueCovidMaterial,
+                      searchKey: value,
+                    ),
+                  );
+              trackMixpanelEvent(
+                MixpanelEvents.productSearch,
+                props: {
+                  MixpanelProps.searchKey: value,
+                },
+              );
+            },
             onSearchSubmitted: (value) {
               context.read<CovidMaterialListBloc>().add(
                     CovidMaterialListEvent.searchMaterialList(
@@ -76,7 +107,8 @@ class CovidMaterialListSearchBarState
                       pickAndPack: context
                           .read<EligibilityBloc>()
                           .state
-                          .getPNPValueMaterial,
+                          .getPNPValueCovidMaterial,
+                      searchKey: value,
                     ),
                   );
               trackMixpanelEvent(
@@ -95,12 +127,6 @@ class CovidMaterialListSearchBarState
               context.read<MaterialFilterBloc>().add(
                     const MaterialFilterEvent.clearSelected(),
                   );
-
-              context.read<CovidMaterialListBloc>().add(
-                    const CovidMaterialListEvent.updateSearchKey(
-                      searchKey: '',
-                    ),
-                  );
               // fetch code goes here
               context.read<CovidMaterialListBloc>().add(
                     CovidMaterialListEvent.fetch(
@@ -117,7 +143,8 @@ class CovidMaterialListSearchBarState
                       pickAndPack: context
                           .read<EligibilityBloc>()
                           .state
-                          .getPNPValueMaterial,
+                          .getPNPValueCovidMaterial,
+                      searchKey: '',
                     ),
                   );
             },

@@ -244,6 +244,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                       customerCodeInfo: state.customerCodeInfo,
                       shipToInfo: state.shipToInfo,
                       pickAndPack: state.getPNPValueCovidMaterial,
+                      searchKey: '',
                     ),
                   );
             }

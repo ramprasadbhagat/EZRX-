@@ -23,11 +23,13 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
@@ -923,6 +925,65 @@ void main() {
       await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pump(const Duration(seconds: 3));
       expect(find.text(fakeKey), findsNWidgets(2));
+    });
+
+    testWidgets('Test SearchBar onFieldChange test', (tester) async {
+      const fakeKey = '23168452';
+      when(() => covidMaterialListBlocMock.state).thenReturn(
+        CovidMaterialListState.initial().copyWith(
+          isFetching: false,
+        ),
+      );
+      when(() => userBlocMock.state).thenReturn(
+        UserState.initial(),
+      );
+
+      when(() => salesOrgBlocMock.state).thenReturn(
+        SalesOrgState.initial().copyWith(
+          salesOrganisation: SalesOrganisation.empty().copyWith(
+            salesOrg: SalesOrg('2601'),
+          ),
+          configs: SalesOrganisationConfigs.empty(),
+        ),
+      );
+      when(() => customerCodeBlocMock.state).thenReturn(
+        CustomerCodeState.initial(),
+      );
+
+      await tester.pumpWidget(
+        getScopedWidget(
+          CovidMaterialListPage(addToCart: ({
+            required BuildContext context,
+            required PriceAggregate priceAggregate,
+            required bool isCovid19Tab,
+          }) {
+            mockAddToCartStub.addToCart();
+          }),
+        ),
+      );
+      await tester.pump();
+
+      final findTextField = find.byKey(const Key('covidMaterialSearchField'));
+      expect(findTextField, findsOneWidget);
+      await tester.enterText(findTextField, fakeKey);
+      await tester.pump();
+      await tester.pump(const Duration(seconds: 3));
+      verify(
+        () => covidMaterialListBlocMock.add(
+          CovidMaterialListEvent.autoSearchMaterialList(
+            configs: SalesOrganisationConfigs.empty(),
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            salesOrganisation: SalesOrganisation.empty().copyWith(
+              salesOrg: SalesOrg('2601'),
+            ),
+            shipToInfo: ShipToInfo.empty(),
+            user: User.empty(),
+            pickAndPack: '',
+            selectedMaterialFilter: MaterialFilter.empty(),
+            searchKey: fakeKey,
+          ),
+        ),
+      ).called(1);
     });
 
     testWidgets('Please enter at least 2 characters. with clear icon tapped',

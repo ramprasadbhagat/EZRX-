@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
@@ -12,6 +10,7 @@ import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/repository/i_additional_bonus_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:rxdart/transformers.dart';
 
 part 'bonus_material_bloc.freezed.dart';
 part 'bonus_material_event.dart';
@@ -23,16 +22,13 @@ class BonusMaterialBloc extends Bloc<BonusMaterialEvent, BonusMaterialState> {
   BonusMaterialBloc({
     required this.bonusMaterialRepository,
   }) : super(BonusMaterialState.initial()) {
-    on<BonusMaterialEvent>(_onEvent);
-  }
-
-  Future<void> _onEvent(
-    BonusMaterialEvent event,
-    Emitter<BonusMaterialState> emit,
-  ) async {
-    await event.map(
-      initialized: (_) async => emit(BonusMaterialState.initial()),
-      fetch: (e) async {
+    on<_Initialized>(
+      (e, emit) async {
+        emit(BonusMaterialState.initial());
+      },
+    );
+    on<_Fetch>(
+      (e, emit) async {
         emit(
           state.copyWith(
             failureOrSuccessOption: none(),
@@ -72,13 +68,27 @@ class BonusMaterialBloc extends Bloc<BonusMaterialEvent, BonusMaterialState> {
           },
         );
       },
-      reset: (_Reset value) {
-        emit(state.copyWith(
-          bonus: <MaterialInfo>[],
-          isFetching: false,
-          isStarting: true,
-          searchKey: SearchKey(''),
-        ));
+    );
+    on<_AutoSearch>(
+      (e, emit) async {
+        if (e.searchKey != state.searchKey.getValue()) {
+          add(
+            _Fetch(
+              user: e.user,
+              salesOrganisation: e.salesOrganisation,
+              configs: e.configs,
+              pickAndPack: e.pickAndPack,
+              customerInfo: e.customerInfo,
+              shipInfo: e.shipInfo,
+              searchKey: e.searchKey,
+            ),
+          );
+        }
+      },
+      transformer: (events, mapper) {
+        return events
+            .debounceTime(const Duration(milliseconds: 3000))
+            .asyncExpand(mapper);
       },
     );
   }

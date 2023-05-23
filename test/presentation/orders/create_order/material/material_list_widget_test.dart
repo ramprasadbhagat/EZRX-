@@ -531,6 +531,39 @@ void main() {
     );
 
     testWidgets(
+      'Test material list auto-search',
+      (tester) async {
+        await tester.pumpWidget(getScopedWidget(
+          const MaterialListPage(),
+        ));
+        await tester.pumpAndSettle(const Duration(seconds: 3));
+        final searchField = find.byKey(const Key('materialSearchField'));
+        expect(searchField, findsOneWidget);
+        await tester.enterText(searchField, 'test');
+        await tester.pumpAndSettle(const Duration(seconds: 4));
+        verify(
+          () => materialListBlocMock.add(
+            MaterialListEvent.autoSearchMaterialList(
+              configs: SalesOrganisationConfigs.empty(),
+              customerCodeInfo: CustomerCodeInfo.empty(),
+              salesOrganisation: SalesOrganisation.empty(),
+              shipToInfo: ShipToInfo.empty(),
+              user: User.empty(),
+              pickAndPack: '',
+              selectedMaterialFilter: MaterialFilter.empty().copyWith(
+                uniqueTherapeuticClass: [
+                  'GSK Consumer Healthcare',
+                  'All other non-therapeutic products',
+                ],
+              ),
+              searchKey: SearchKey('test'),
+            ),
+          ),
+        ).called(1);
+      },
+    );
+
+    testWidgets(
       'Find Scan To Order Button as per firebase config',
       (tester) async {
         await tester.pumpWidget(getScopedWidget(
@@ -567,8 +600,7 @@ void main() {
       await tester.enterText(textField, '12');
       await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pump();
-      expect(
-          find.text('1'), findsNothing); // 1 characters shouldn't be allowed
+      expect(find.text('1'), findsNothing); // 1 characters shouldn't be allowed
 
       expect(find.text('12'), findsOneWidget);
     });
@@ -1211,7 +1243,6 @@ void main() {
       final unitPrice = find.textContaining('Unit Price:'.tr());
       expect(unitPrice, findsOneWidget);
     });
-
 
     testWidgets('test Bonus Logo', (tester) async {
       final expectedState = [

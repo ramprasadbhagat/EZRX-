@@ -324,6 +324,100 @@ void main() {
     );
 
     blocTest(
+      'Customer Code Auto-Search Success',
+      build: () =>
+          CustomerCodeBloc(customerCodeRepository: customerCodeMockRepo),
+      setUp: () {
+        when(() => customerCodeMockRepo.getCustomerCode(
+              salesOrganisation: fakeSaleOrg,
+              customerCode: 'fake-customer-code',
+              hideCustomer: false,
+              offset: 0,
+              user: fakeUser,
+              pageSize: fakePageSize,
+            )).thenAnswer(
+          (invocation) async => Right(
+            [
+              CustomerCodeInfo.empty()
+                  .copyWith(customerCodeSoldTo: 'fake-customer-code')
+            ],
+          ),
+        );
+      },
+      act: (CustomerCodeBloc bloc) {
+        bloc.add(
+          CustomerCodeEvent.autoSearch(
+            searchValue: 'fake-customer-code',
+            hidecustomer: false,
+            userInfo: fakeUser,
+            selectedSalesOrg: fakeSaleOrg,
+          ),
+        );
+      },
+      wait: const Duration(milliseconds: 3000),
+      expect: () => [
+        CustomerCodeState.initial().copyWith(
+            isSearchActive: true,
+            isFetching: true,
+            searchKey: SearchKey('fake-customer-code')),
+        CustomerCodeState.initial().copyWith(
+          customerCodeList: [
+            CustomerCodeInfo.empty()
+                .copyWith(customerCodeSoldTo: 'fake-customer-code')
+          ],
+          searchKey: SearchKey('fake-customer-code'),
+          canLoadMore: false,
+          isSearchActive: true,
+        )
+      ],
+    );
+
+    blocTest(
+      'Customer Code Auto-Search Failure',
+      build: () =>
+          CustomerCodeBloc(customerCodeRepository: customerCodeMockRepo),
+      setUp: () {
+        when(() => customerCodeMockRepo.getCustomerCode(
+              salesOrganisation: fakeSaleOrg,
+              customerCode: 'fake-customer-code',
+              hideCustomer: false,
+              offset: 0,
+              user: fakeUser,
+              pageSize: fakePageSize,
+            )).thenAnswer(
+          (invocation) async => const Left(
+            ApiFailure.other('fake-error'),
+          ),
+        );
+      },
+      act: (CustomerCodeBloc bloc) {
+        bloc.add(CustomerCodeEvent.search(
+            searchValue: 'fake-customer-code',
+            hidecustomer: false,
+            userInfo: fakeUser,
+            selectedSalesOrg: fakeSaleOrg));
+      },
+      wait: const Duration(milliseconds: 3000),
+      expect: () => [
+        CustomerCodeState.initial().copyWith(
+            isSearchActive: true,
+            isFetching: true,
+            searchKey: SearchKey('fake-customer-code')),
+        CustomerCodeState.initial().copyWith(
+            customerCodeList: [],
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            apiFailureOrSuccessOption: optionOf(
+              const Left(
+                ApiFailure.other('fake-error'),
+              ),
+            ),
+            searchKey: SearchKey('fake-customer-code'),
+            canLoadMore: false,
+            isSearchActive: true),
+      ],
+    );
+
+    blocTest(
       'Customer Code On Load More fail',
       build: () =>
           CustomerCodeBloc(customerCodeRepository: customerCodeMockRepo),

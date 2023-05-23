@@ -88,7 +88,6 @@ void main() {
   late List<MaterialInfo> mockbonusItemWithDataList;
   late PriceAggregate cartItem;
   late TenderContractBloc tenderContractBlocMock;
-  late BonusMaterialRepositoryMock bonusMaterialRepository;
   late SalesOrgBloc salesOrgBlocMock;
   late EligibilityBloc eligibilityBlocMock;
   late UserBloc userBlocMock;
@@ -109,7 +108,6 @@ void main() {
       mockAppRouter = MockAppRouter();
       bonusMaterialBloc = BonusMaterialBlocMock();
       tenderContractBlocMock = TenderContractBlocMock();
-      bonusMaterialRepository = BonusMaterialRepositoryMock();
       salesOrgBlocMock = SalesOrgBlocMock();
       eligibilityBlocMock = EligibilityBlocMock();
       userBlocMock = UserBlocMock();
@@ -446,19 +444,9 @@ void main() {
     });
 
     testWidgets('Test add bonus Search change fetch data', (tester) async {
-      bonusMaterialBloc = BonusMaterialBloc(
-        bonusMaterialRepository: bonusMaterialRepository,
+      when(() => bonusMaterialBloc.state).thenReturn(
+        BonusMaterialState.initial(),
       );
-
-      when(() => bonusMaterialRepository.getMaterialBonus(
-            user: User.empty(),
-            configs: SalesOrganisationConfigs.empty(),
-            pickAndPack: '',
-            salesOrganisation: SalesOrganisation.empty(),
-            searchKey: 'test',
-            shipInfo: ShipToInfo.empty(),
-            customerInfo: CustomerCodeInfo.empty(),
-          )).thenAnswer((invocation) async => const Right([]));
       await tester.runAsync(() async {
         await tester.pumpWidget(getWidget());
       });
@@ -466,22 +454,52 @@ void main() {
       await tester.pump();
 
       final addBonusSearchField = find.byKey(const Key('addBonusTextField'));
-      await tester.enterText(addBonusSearchField, 't');
-      await tester.pump(const Duration(seconds: 1));
       await tester.enterText(addBonusSearchField, 'test');
       await tester.pump(const Duration(seconds: 1));
-      await tester.enterText(addBonusSearchField, 'test');
-      await tester.sendKeyDownEvent(LogicalKeyboardKey.enter);
+      //await tester.sendKeyDownEvent(LogicalKeyboardKey.enter);
       await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pump(const Duration(seconds: 1));
-
-      expect(
-        bonusMaterialBloc.state,
-        BonusMaterialState.initial().copyWith(
-          searchKey: SearchKey('test'),
-          isStarting: false,
+      verify(
+        () => bonusMaterialBloc.add(
+          BonusMaterialEvent.fetch(
+            user: User.empty(),
+            configs: SalesOrganisationConfigs.empty(),
+            pickAndPack: '',
+            salesOrganisation: SalesOrganisation.empty(),
+            searchKey: 'test',
+            shipInfo: ShipToInfo.empty(),
+            customerInfo: CustomerCodeInfo.empty(),
+          ),
         ),
+      ).called(1);
+    });
+
+    testWidgets('Test add bonus Search change auto-fetch data', (tester) async {
+      when(() => bonusMaterialBloc.state).thenReturn(
+        BonusMaterialState.initial(),
       );
+      await tester.runAsync(() async {
+        await tester.pumpWidget(getWidget());
+      });
+      await tester.pumpWidget(getWidget());
+      await tester.pump();
+
+      final addBonusSearchField = find.byKey(const Key('addBonusTextField'));
+      await tester.enterText(addBonusSearchField, 'test');
+      await tester.pump(const Duration(seconds: 4));
+      verify(
+        () => bonusMaterialBloc.add(
+          BonusMaterialEvent.autoSearch(
+            user: User.empty(),
+            configs: SalesOrganisationConfigs.empty(),
+            pickAndPack: '',
+            salesOrganisation: SalesOrganisation.empty(),
+            searchKey: 'test',
+            shipInfo: ShipToInfo.empty(),
+            customerInfo: CustomerCodeInfo.empty(),
+          ),
+        ),
+      ).called(1);
     });
 
     testWidgets('Test add bonus search fail', (tester) async {
