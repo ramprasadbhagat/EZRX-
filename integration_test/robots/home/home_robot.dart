@@ -12,6 +12,7 @@ class HomeRobot {
   final shipToCodeSelector = find.byKey(const Key('shipToCodeSelect'));
   final homeTabbar = find.byKey(const Key('homeTab'));
   final favoriteTabbar = find.byKey(const Key('favoritesTab'));
+  final historyTabbar = find.byKey(const Key('historyTab'));
   final orderTemplate = find.text('Order Template');
   final savedOrders = find.text('Saved Orders');
   final announcementCloseIcon = find.byKey(const Key('announcementCloseIcon'));
@@ -115,6 +116,16 @@ class HomeRobot {
   Future<void> tapFavoriteTab() async {
     await tester.pumpAndSettle();
     await tester.tap(favoriteTabbar);
+    await tester.pumpAndSettle();
+  }
+
+  void findHistoryTab() {
+    expect(historyTabbar, findsOneWidget);
+  }
+
+  Future<void> tapHistoryTab() async {
+    await tester.pumpAndSettle();
+    await tester.tap(historyTabbar);
     await tester.pumpAndSettle();
   }
 

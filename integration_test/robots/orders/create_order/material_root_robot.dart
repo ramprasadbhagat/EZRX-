@@ -9,7 +9,6 @@ class MaterialRootRobot {
   final material = find.byKey(const Key('material'));
   final covid = find.byKey(const Key('covid-19'));
   final announcementCloseIcon = find.byKey(const Key('announcementCloseIcon'));
-
   void verify() {
     expect(find.byKey(const Key('materialRootPage')), findsOneWidget);
   }

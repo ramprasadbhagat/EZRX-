@@ -41,7 +41,7 @@ class OrderConfirmationRobot {
     await tester.tap(orderHistory);
     await tester.pumpAndSettle();
   }
-  
+
   Future<void> goBack() async {
     // ignore: omit_local_variable_types
     final NavigatorState navigator = tester.state(find.byType(Navigator));

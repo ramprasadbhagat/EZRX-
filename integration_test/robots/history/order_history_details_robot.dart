@@ -122,11 +122,6 @@ class OrderHistoryDetailsRobot {
     expect(materialID, findsWidgets);
   }
 
-  void verifyQuantity(String qty) {
-    final quantity = find.byKey(Key('Quantity$qty'));
-    expect(quantity, findsOneWidget);
-  }
-
   void verifyEnableZPPrice(
     String materialNumber,
   ) {
@@ -165,6 +160,20 @@ class OrderHistoryDetailsRobot {
     expect(find.byKey(const Key('batchNumberExpiryDate')), findsWidgets);
   }
 
+   void findReOrderButton() {
+    expect(reOrderButton, findsOneWidget);
+  }
+
+  Future<void> tapReOrderButton() async {
+    await tester.tap(reOrderButton);
+    await tester.pumpAndSettle();
+  }
+
+  void verifyQuantity(String qty) {
+    final quantity = find.byKey(Key('Quantity$qty'));
+    expect(quantity, findsOneWidget);
+  }
+
   void verifyDisplayDiscount() {
     expect(find.byKey(const Key('discountRateForItemCard')), findsWidgets);
   }
@@ -176,15 +185,6 @@ class OrderHistoryDetailsRobot {
 
   void findBackButton() {
     expect(backButton, findsOneWidget);
-  }
-
-  void findReOrderButton() {
-    expect(reOrderButton, findsOneWidget);
-  }
-
-  Future<void> tapReOrderButton() async {
-    await tester.tap(reOrderButton);
-    await tester.pumpAndSettle();
   }
 
   void findTopmenuReOrderButton() {

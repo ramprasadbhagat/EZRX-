@@ -20,8 +20,11 @@ class OrderSummaryRobot {
       find.byKey(const Key('specialInstructionKey'));
   final poReference = find.byKey(const Key('customerPOReferenceKey'));
   final contactPerson = find.byKey(const Key('contactPersonKey'));
+  final customerPOReferenceField =
+      find.byKey(const Key('customerPOReferenceKey'));
   final collectiveNumberField =
       find.byKey(const Key('collectiveNumberKey'));
+
 
   void verify() {
     expect(find.byKey(const Key('orderSummaryKey')), findsOneWidget);
@@ -59,6 +62,14 @@ class OrderSummaryRobot {
   void verifyPhone(String phoneName) {
     final phone = find.byKey(Key('Phone$phoneName'));
     expect(phone, findsWidgets);
+  }
+   void findCustomerPoReference() {
+    expect(customerPOReferenceField, findsOneWidget);
+  }
+
+  Future<void> enterCustomerPoReference(String value) async {
+    await tester.enterText(customerPOReferenceField, value);
+    await tester.pumpAndSettle();
   }
 
   void findSpecialInstruction() {
@@ -118,7 +129,7 @@ class OrderSummaryRobot {
   }
 
   void allowMinimumOrderAmount(String amount) {
-    expect(find.byKey(Key('Min. Order Value$amount')), findsOneWidget);
+    expect(find.byKey(Key('Min. Order Value$amount')),findsOneWidget);
   }
 
   void findBundleItem(String bundleCode) {

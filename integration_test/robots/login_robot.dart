@@ -5,7 +5,7 @@ class LoginRobot {
   final WidgetTester tester;
 
   LoginRobot(this.tester);
-
+  
   final announcementCloseIcon = find.byKey(const Key('announcementCloseIcon'));
 
   Future<void> login(String username, String password) async {

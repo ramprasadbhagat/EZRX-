@@ -149,7 +149,7 @@ class CartRobot {
   }
 
   Future<void> tapMaterial(String absoluteMaterialNumber) async {
-    await tester.tap(find.textContaining(absoluteMaterialNumber));
+    await tester.tap(find.textContaining(absoluteMaterialNumber).first);
     await tester.pumpAndSettle();
   }
 
@@ -164,7 +164,7 @@ class CartRobot {
 
   void verifyBonusMaterial(
       String materialNumber, bool additionalBonusFlag, int quantity) {
-    expect(find.byKey(Key('$materialNumber$additionalBonusFlag$quantity')),
+    expect(find.byKey(ValueKey('$materialNumber$additionalBonusFlag$quantity')),
         findsOneWidget);
   }
 
@@ -184,7 +184,7 @@ class CartRobot {
 
   Future<void> changePrice(int quantity) async {
     await tester.enterText(find.byKey(const Key('priceOverrideTextFormField')),
-        quantity.toString());
+    quantity.toString());
     await tester.pumpAndSettle();
   }
 
@@ -238,11 +238,22 @@ class CartRobot {
     await tester.tap(find.byKey(Key('deleteFromCart$materialNumber')));
     await tester.pumpAndSettle();
   }
+  Future<void> deleteBonusMaterial() async {
+    await tester.tap(find.byKey(const Key('deleteBonusFromCart')));
+    await tester.pumpAndSettle();
+  }
 
   Future<void> goBack() async {
     // ignore: omit_local_variable_types
     final NavigatorState navigator = tester.state(find.byType(Navigator));
     navigator.pop();
     await tester.pumpAndSettle();
+  }
+
+  void verifyUnitPrice(String currency, String price) {
+    final unitPriceLabel = find.textContaining('Unit Price: $currency $price');
+    expect(unitPriceLabel, findsOneWidget);
+    final unitPrice = find.byKey(const Key('unitPrice'));
+    expect(unitPrice, findsOneWidget);
   }
 }
