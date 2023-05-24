@@ -62,7 +62,6 @@ void main() {
     favoriteRobot = FavoriteRobot(tester);
     orderTemplateListRobot = OrderTemplateListRobot(tester);
     orderTemplateDetailRobot = OrderTemplateDetailRobot(tester);
-    materialRootRobot = MaterialRootRobot(tester);
 
     //initialize variables
     const username = 'twclientuser';

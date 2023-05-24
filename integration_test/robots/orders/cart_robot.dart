@@ -243,6 +243,10 @@ class CartRobot {
     await tester.pumpAndSettle();
   }
 
+  Future<void> verifyStockMaterial(String materialNumber) async {
+    expect(find.byKey(Key('Stock$materialNumber')), findsOneWidget);
+  }
+
   Future<void> goBack() async {
     // ignore: omit_local_variable_types
     final NavigatorState navigator = tester.state(find.byType(Navigator));

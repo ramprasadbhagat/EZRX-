@@ -397,7 +397,7 @@ class CartMaterialItemTileDetails extends StatelessWidget {
             Text(
               '${'In Stock : '.tr()}${material.stockInfo.inStock.getOrDefaultValue('')}',
               key: Key(
-                'Stock${material.materialInfo.materialNumber.getOrDefaultValue('')}${material.stockInfo.inStock.getOrDefaultValue('')}',
+                'Stock${material.materialInfo.materialNumber.getOrDefaultValue('')}',
               ),
               style: Theme.of(context).textTheme.titleSmall?.apply(
                     color: ZPColors.lightGray,

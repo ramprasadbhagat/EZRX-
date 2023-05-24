@@ -1,13 +1,19 @@
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 class OrderHistoryRobot {
   final WidgetTester tester;
 
   OrderHistoryRobot(this.tester);
-
-  final orderedItem = find.byKey(const ValueKey('historyTitle0'));
   final filterOrderHistory = find.byKey(const Key('filterOrderHistory'));
+  final orderedItem = find.byKey(const ValueKey('historyTitle0'));
+  final reOrderButton = find.byKey(const Key('reOrderButton'));
+  final filterButton = find.byKey(const Key('filterOrderHistory'));
+  final materialNumberSearchField =
+      find.byKey(const Key('filterMaterialSearchField'));
+  final filterClearButton = find.byKey(const Key('filterClearButton'));
+  final statusFilterButton = find.byKey(const Key('statusFilterButton'));
+  final closeButton = find.byKey(const Key('closeButton'));
 
   void verify() {
     final orderHistory = find.byKey(const Key('orderHistoryTab'));
@@ -69,13 +75,24 @@ class OrderHistoryRobot {
     expect(material, findsAtLeastNWidgets(1));
   }
 
-  void verifyMaterialName(String materialName) {
-    final material = find.textContaining(materialName);
-    expect(material, findsAtLeastNWidgets(1));
-  }
-
   Future<void> tapOrderedItem() async {
     await tester.tap(orderedItem);
+    await tester.pumpAndSettle();
+  }
+
+  void findFilterButton() {
+    expect(filterButton, findsOneWidget);
+  }
+
+  Future<void> tapFilterButton() async {
+    await tester.tap(filterButton);
+    await tester.pumpAndSettle();
+  }
+
+  Future<void> goBack() async {
+    // ignore: omit_local_variable_types
+    final NavigatorState navigator = tester.state(find.byType(Navigator));
+    navigator.pop();
     await tester.pumpAndSettle();
   }
 }

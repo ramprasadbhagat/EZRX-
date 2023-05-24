@@ -347,4 +347,16 @@ class OrderSummaryRobot {
     navigator.pop();
     await tester.pumpAndSettle();
   }
+
+  bool verifyPOReferenceValidation() {
+    final validationError =
+        find.textContaining('PO Reference Required').evaluate().isNotEmpty;
+    if (validationError) {
+      expect(find.textContaining('PO Reference Required'), findsNWidgets(1));
+      return true;
+    } else {
+      expect(find.textContaining('PO Reference Required'), findsNothing);
+      return false;
+    }
+  }
 }

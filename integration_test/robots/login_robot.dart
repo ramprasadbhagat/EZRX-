@@ -14,6 +14,7 @@ class LoginRobot {
     final loginPasswordField = find.byKey(const Key('loginPasswordField'));
     expect(loginPasswordField, findsOneWidget);
     final loginSubmitButton = find.byKey(const Key('loginSubmitButton'));
+
     expect(loginSubmitButton, findsOneWidget);
 
     await tester.enterText(loginUsernameField, username);

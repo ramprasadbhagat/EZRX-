@@ -19,7 +19,6 @@ class HomeRobot {
   final homeTabAnnouncementWidget =
       find.byKey(const Key('homeTabAnnouncementWidget'));
 
-
   void verify() {
     final home = find.byKey(const Key('homeScreen'));
     expect(home, findsOneWidget);
@@ -51,6 +50,14 @@ class HomeRobot {
     await tester.pumpAndSettle();
   }
   
+
+  Future<void> findAndCloseAnnouncementIcon() async {
+    if (announcementCloseIcon.evaluate().isNotEmpty &&
+        homeTabAnnouncementWidget.evaluate().isNotEmpty) {
+      await tester.tap(announcementCloseIcon.first);
+      await tester.pumpAndSettle();
+    }
+  }
 
   void findAccountTab() {
     expect(accountTabbar, findsOneWidget);
@@ -101,13 +108,7 @@ class HomeRobot {
     await tester.pumpAndSettle();
   }
 
-  Future<void> findAndCloseAnnouncementIcon() async {
-    if (homeTabAnnouncementWidget.evaluate().isNotEmpty &&
-        announcementCloseIcon.evaluate().isNotEmpty) {
-      await tester.tap(announcementCloseIcon.first);
-      await tester.pumpAndSettle();
-    }
-  }
+ 
 
   void findFavoriteTab() {
     expect(favoriteTabbar, findsOneWidget);
