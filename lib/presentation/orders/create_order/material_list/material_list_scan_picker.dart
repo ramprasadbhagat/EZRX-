@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,8 @@ class MaterialListScanPicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final eligibilityBlocState = context.read<EligibilityBloc>().state;
+
     return PlatformAlertDialog(
       key: const ValueKey('scanMaterialInfoDialog'),
       title: const Text(
@@ -37,7 +40,12 @@ class MaterialListScanPicker extends StatelessWidget {
           onPressed: () {
             context.router.pushNamed('orders/scan_material_info');
             context.read<ScanMaterialInfoBloc>().add(
-                  const ScanMaterialInfoEvent.scanMaterialNumberFromCamera(),
+                  ScanMaterialInfoEvent.scanMaterialNumberFromCamera(
+                    customerCodeInfo: eligibilityBlocState.customerCodeInfo,
+                    salesOrganisation: eligibilityBlocState.salesOrganisation,
+                    shipToInfo: eligibilityBlocState.shipToInfo,
+                    user: eligibilityBlocState.user,
+                  ),
                 );
             context.router.pop();
           },
@@ -61,7 +69,12 @@ class MaterialListScanPicker extends StatelessWidget {
           onPressed: () {
             context
                 .read<ScanMaterialInfoBloc>()
-                .add(const ScanMaterialInfoEvent.scanImageFromDeviceStorage());
+                .add(ScanMaterialInfoEvent.scanImageFromDeviceStorage(
+                  customerCodeInfo: eligibilityBlocState.customerCodeInfo,
+                  salesOrganisation: eligibilityBlocState.salesOrganisation,
+                  shipToInfo: eligibilityBlocState.shipToInfo,
+                  user: eligibilityBlocState.user,
+                ));
             context.router.pop();
           },
           cupertino: (_, __) => CupertinoDialogActionData(

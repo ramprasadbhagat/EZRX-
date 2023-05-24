@@ -340,6 +340,79 @@ class MaterialListRemoteDataSource {
     });
   }
 
+  Future<List<MaterialInfo>> getScanMaterial({
+    required String salesOrgCode,
+    required String customerCode,
+    required String shipToCode,
+    required String ean,
+  }) async {
+    return await dataSourceExceptionHandler.handle(() async {
+      final queryData = materialListQuery.getCustomerMaterialList();
+
+      final variables = {
+        'salesOrganisation': salesOrgCode,
+        'customerCode': customerCode,
+        'shipToCustomer': shipToCode,
+        'first': 1,
+        'after': 0,
+        'ean': ean,
+      };
+      final res = await httpService.request(
+        method: 'POST',
+        url: '${config.urlConstants}license',
+        data: jsonEncode({
+          'query': queryData,
+          'variables': variables,
+        }),
+        apiEndpoint: 'materialsWithMetaQuery',
+      );
+      _materialListExceptionChecker(res: res);
+      final finalData = res.data['data']['materialsWithMeta']['materials'];
+
+      return List.from(finalData)
+          .map((e) => MaterialDto.fromJson(e).toDomain())
+          .toList();
+    });
+  }
+
+  Future<List<MaterialInfo>> getScanMaterialSalesRep({
+    required String salesOrgCode,
+    required String customerCode,
+    required String shipToCode,
+    required String ean,
+    required String userName,
+  }) async {
+    return await dataSourceExceptionHandler.handle(() async {
+      final queryData = materialListQuery.getSalesRepMaterialList();
+
+      final variables = {
+        'username': userName,
+        'salesOrganisation': salesOrgCode,
+        'customerSoldToCode': customerCode,
+        'customerShipToCode': shipToCode,
+        'first': 1,
+        'after': 0,
+        'ean': ean,
+      };
+      final res = await httpService.request(
+        method: 'POST',
+        url: '${config.urlConstants}license',
+        data: jsonEncode({
+          'query': queryData,
+          'variables': variables,
+        }),
+        apiEndpoint: 'customerMaterialsForSalesRep',
+      );
+      _materialListExceptionChecker(res: res);
+      final finalData =
+          res.data['data']['customerMaterialsForSalesRep']['materials'];
+
+      return List.from(finalData)
+          .map((e) => MaterialDto.fromJson(e).toDomain())
+          .toList();
+    });
+  }
+
   void _materialListExceptionChecker({required Response<dynamic> res}) {
     if (res.data['errors'] != null && res.data['errors'].isNotEmpty) {
       throw ServerException(message: res.data['errors'][0]['message']);

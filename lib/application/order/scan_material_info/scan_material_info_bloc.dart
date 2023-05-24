@@ -1,5 +1,12 @@
 import 'dart:async';
 
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/repository/i_material_list_repository.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -20,9 +27,12 @@ class ScanMaterialInfoBloc
     extends Bloc<ScanMaterialInfoEvent, ScanMaterialInfoState>
     implements BarcodeCaptureListener {
   final IScanMaterialInfoRepository scanInfoRepository;
+  final IMaterialListRepository materialListRepository;
   late StreamController scanResultController;
-  ScanMaterialInfoBloc({required this.scanInfoRepository})
-      : super(ScanMaterialInfoState.initial()) {
+  ScanMaterialInfoBloc({
+    required this.scanInfoRepository,
+    required this.materialListRepository,
+  }) : super(ScanMaterialInfoState.initial()) {
     on<ScanMaterialInfoEvent>(_onEvent);
     scanResultController = StreamController<String>();
     scanResultController.stream.listen((scannedData) {
@@ -40,11 +50,16 @@ class ScanMaterialInfoBloc
         emit(ScanMaterialInfoState.initial());
       },
       scanMaterialNumberFromCamera: (e) async {
-        emit(ScanMaterialInfoState.initial());
+        emit(ScanMaterialInfoState.initial().copyWith(
+          salesOrganisation: e.salesOrganisation,
+          customerCodeInfo: e.customerCodeInfo,
+          shipToInfo: e.shipToInfo,
+          user: e.user,
+        ));
         final permissionsResult = await Permission.camera.request();
         if (permissionsResult.isGranted) {
           final failureOrSuccess =
-              await scanInfoRepository.scanMaterialNumberFromdeviceCamera();
+              await scanInfoRepository.scanMaterialNumberFromDeviceCamera();
           failureOrSuccess.fold(
             (failure) {
               emit(
@@ -58,7 +73,14 @@ class ScanMaterialInfoBloc
         }
       },
       scanImageFromDeviceStorage: (e) async {
-        emit(ScanMaterialInfoState.initial());
+        emit(
+          ScanMaterialInfoState.initial().copyWith(
+            salesOrganisation: e.salesOrganisation,
+            customerCodeInfo: e.customerCodeInfo,
+            shipToInfo: e.shipToInfo,
+            user: e.user,
+          ),
+        );
         final failureOrSuccess =
             await scanInfoRepository.scanImageFromDeviceStorage();
         failureOrSuccess.fold(
@@ -90,7 +112,35 @@ class ScanMaterialInfoBloc
         );
       },
       emitScannedData: (e) async {
-        emit(state.copyWith(scannedData: e.scannedRes));
+        emit(
+          state.copyWith(
+            isFetching: true,
+            apiFailureOrSuccessOption: none(),
+          ),
+        );
+        final failureOrSuccess = await materialListRepository.getScanMaterial(
+          salesOrganisation: state.salesOrganisation,
+          customerCodeInfo: state.customerCodeInfo,
+          shipToInfo: state.shipToInfo,
+          ean: Ean(e.scannedRes),
+          user: state.user,
+        );
+        failureOrSuccess.fold(
+          (failure) => emit(
+            state.copyWith(
+              apiFailureOrSuccessOption: optionOf(
+                failureOrSuccess,
+              ),
+              isFetching: false,
+            ),
+          ),
+          (material) => emit(
+            state.copyWith(
+              material: material,
+              isFetching: false,
+            ),
+          ),
+        );
         await scanInfoRepository.disableMaterialScan();
       },
     );
@@ -119,7 +169,7 @@ class ScanMaterialInfoBloc
   @override
   Future<void> close() {
     scanResultController.close();
-    
+
     return super.close();
   }
 }

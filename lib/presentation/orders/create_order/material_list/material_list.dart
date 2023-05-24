@@ -1,9 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/domain/banner/entities/banner.dart';
-import 'package:auto_route/auto_route.dart';
-import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
+import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -15,12 +14,7 @@ import 'package:ezrxmobile/application/order/material_price/material_price_bloc.
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
-import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
-import 'package:ezrxmobile/domain/order/entities/bundle.dart';
-import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
-import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
@@ -33,89 +27,29 @@ import 'package:ezrxmobile/presentation/orders/create_order/material_list/materi
 import 'package:ezrxmobile/presentation/orders/create_order/material_list/material_list_search_bar.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 
-import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
-
-import 'package:ezrxmobile/locator.dart';
-
 class MaterialListPage extends StatelessWidget {
   const MaterialListPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocListener(
-      listeners: [
-        BlocListener<ScanMaterialInfoBloc, ScanMaterialInfoState>(
-          listenWhen: (previous, current) =>
-              previous.scannedData != current.scannedData ||
-              previous.apiFailureOrSuccessOption !=
-                  current.apiFailureOrSuccessOption,
-          listener: (context, state) {
-            final eligibilityBloc = context.read<EligibilityBloc>();
-            state.apiFailureOrSuccessOption.fold(
-              () {},
-              (either) => either.fold(
-                (failure) {
-                  ErrorUtils.handleApiFailure(context, failure);
-                },
-                (_) {},
-              ),
-            );
-            if (state.scannedData.isEmpty) return;
-            context.read<MaterialListBloc>().add(
-                  MaterialListEvent.searchMaterialList(
-                    user: eligibilityBloc.state.user,
-                    salesOrganisation: eligibilityBloc.state.salesOrganisation,
-                    configs: eligibilityBloc.state.salesOrgConfigs,
-                    customerCodeInfo: eligibilityBloc.state.customerCodeInfo,
-                    shipToInfo: eligibilityBloc.state.shipToInfo,
-                    selectedMaterialFilter: context
-                        .read<MaterialFilterBloc>()
-                        .state
-                        .selectedMaterialFilter,
-                    pickAndPack: eligibilityBloc.state.getPNPValueMaterial,
-                    isScanSearch: true,
-                    searchKey: SearchKey(state.scannedData),
-                  ),
-                );
-          },
-        ),
-        BlocListener<OrderDocumentTypeBloc, OrderDocumentTypeState>(
-          listenWhen: (previous, current) =>
-              previous.selectedOrderType != current.selectedOrderType ||
-              previous.isSubmitting != current.isSubmitting,
-          listener: (context, orderDocumentTypeState) {
-            orderDocumentTypeState.orderDocumentTypeListFailureOrSuccessOption
-                .fold(
-              () {},
-              (either) => either.fold(
-                (failure) {
-                  showSnackBar(
-                    context: context,
-                    message: 'Unable to fetch Order Type',
-                  );
-                },
-                (_) {},
-              ),
-            );
-          },
-        ),
-        BlocListener<MaterialPriceBloc, MaterialPriceState>(
-          listenWhen: (previous, current) =>
-              previous.isFetching != current.isFetching && !current.isFetching,
-          listener: (context, state) {
-            final materialListState = context.read<MaterialListBloc>().state;
-
-            if (materialListState.materialList.length == 1 &&
-                materialListState.isScanFromBarcode) {
-              _onFetchScannerResult(
+    return BlocListener<OrderDocumentTypeBloc, OrderDocumentTypeState>(
+      listenWhen: (previous, current) =>
+          previous.selectedOrderType != current.selectedOrderType ||
+          previous.isSubmitting != current.isSubmitting,
+      listener: (context, orderDocumentTypeState) {
+        orderDocumentTypeState.orderDocumentTypeListFailureOrSuccessOption.fold(
+          () {},
+          (either) => either.fold(
+            (failure) {
+              showSnackBar(
                 context: context,
-                listState: materialListState,
-                priceState: state,
+                message: 'Unable to fetch Order Type',
               );
-            }
-          },
-        ),
-      ],
+            },
+            (_) {},
+          ),
+        );
+      },
       child: Scaffold(
         key: const Key('materialListPage'),
         body: BlocConsumer<MaterialListBloc, MaterialListState>(
@@ -145,20 +79,50 @@ class MaterialListPage extends StatelessWidget {
                   children: [
                     const Expanded(child: MaterialListSearchBar()),
                     locator<RemoteConfigService>().getScanToOrderConfig()
-                        ? Container(
-                            color: ZPColors.white,
-                            child: IconButton(
-                              padding: const EdgeInsets.only(right: 10),
-                              onPressed: () {
-                                showPlatformDialog(
+                        ? BlocListener<ScanMaterialInfoBloc,
+                            ScanMaterialInfoState>(
+                            listenWhen: (previous, current) =>
+                                previous.isFetching != current.isFetching &&
+                                !current.isFetching,
+                            listener: (context, state) {
+                              state.apiFailureOrSuccessOption.fold(
+                                () => CartBottomSheet
+                                    .showQuickAddToCartBottomSheet(
                                   context: context,
-                                  barrierDismissible: true,
-                                  useRootNavigator: true,
-                                  builder: (_) =>
-                                      const MaterialListScanPicker(),
-                                );
-                              },
-                              icon: const Icon(Icons.qr_code_scanner_outlined),
+                                  materialNumber: state.material.materialNumber
+                                      .getOrDefaultValue(''),
+                                ),
+                                (either) => either.fold(
+                                  (failure) {
+                                    ErrorUtils.handleApiFailure(
+                                      context,
+                                      failure,
+                                    );
+                                  },
+                                  (_) {},
+                                ),
+                              );
+                            },
+                            child: Container(
+                              color: ZPColors.white,
+                              child: IconButton(
+                                padding: const EdgeInsets.only(right: 10),
+                                onPressed: () {
+                                  trackMixpanelEvent(
+                                    MixpanelEvents.scannerClicked,
+                                  );
+                                  showPlatformDialog(
+                                    context: context,
+                                    barrierDismissible: true,
+                                    useRootNavigator: true,
+                                    builder: (_) =>
+                                        const MaterialListScanPicker(),
+                                  );
+                                },
+                                icon: const Icon(
+                                  Icons.qr_code_scanner_outlined,
+                                ),
+                              ),
                             ),
                           )
                         : const SizedBox.shrink(),
@@ -195,61 +159,6 @@ class MaterialListPage extends StatelessWidget {
           },
         ),
       ),
-    );
-  }
-
-  void _onFetchScannerResult({
-    required BuildContext context,
-    required MaterialListState listState,
-    required MaterialPriceState priceState,
-  }) {
-    final material = listState.materialList.first;
-    final eligibilityBloc = context.read<EligibilityBloc>();
-    final materialPrice = priceState.materialPrice[material.materialNumber];
-
-    final comboDealInCart = context.read<CartBloc>().state.getComboDealCartItem(
-          comboDealQuery: materialPrice!.comboDeal,
-        );
-
-    if (comboDealInCart.materials.isNotEmpty) {
-      final priceComboDeal = comboDealInCart.materials.firstPriceComboDeal;
-      final comboDealType = priceComboDeal.category.type;
-
-      if (comboDealType.isMaterialNumber) {
-        context.router.push(
-          ComboDealMaterialDetailPageRoute(
-            comboItems: comboDealInCart.materials,
-            isEdit: true,
-          ),
-        );
-      } else if (comboDealType.isPrinciple) {
-        context.router.push(
-          ComboDealPrincipleDetailPageRoute(
-            comboDeal: priceComboDeal,
-            initialComboItems: comboDealInCart.materials,
-          ),
-        );
-      }
-
-      return;
-    }
-
-    CartBottomSheet.showAddToCartBottomSheet(
-      priceAggregate: PriceAggregate(
-        banner: BannerItem.empty(),
-        price: materialPrice,
-        materialInfo: material,
-        salesOrgConfig: eligibilityBloc.state.salesOrgConfigs,
-        quantity: 1,
-        bundle: Bundle.empty(),
-        addedBonusList: [],
-        stockInfo: StockInfo.empty().copyWith(
-          materialNumber: material.materialNumber,
-        ),
-        tenderContract: TenderContract.empty(),
-        comboDeal: ComboDeal.empty(),
-      ),
-      context: context,
     );
   }
 

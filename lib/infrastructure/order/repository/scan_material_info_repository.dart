@@ -1,4 +1,8 @@
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/infrastructure/core/common/file_picker.dart';
 import 'package:scandit_flutter_datacapture_barcode/scandit_flutter_datacapture_barcode_capture.dart';
 // ignore: depend_on_referenced_packages
 import 'package:scandit_flutter_datacapture_core/scandit_flutter_datacapture_core.dart';
@@ -9,16 +13,20 @@ import 'package:ezrxmobile/infrastructure/core/material_info_scanner/material_in
 
 import 'dart:io';
 
-import 'package:file_picker/file_picker.dart';
-
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 
 class ScanMaterialInfoRepository implements IScanMaterialInfoRepository {
   final MaterialInfoScanner materialInfoScanner;
+  final MixpanelService mixpanelService;
+  final FilePickerService filePickerService;
 
-  ScanMaterialInfoRepository({required this.materialInfoScanner});
+  ScanMaterialInfoRepository({
+    required this.materialInfoScanner,
+    required this.mixpanelService,
+    required this.filePickerService,
+  });
 
   @override
   DataCaptureView dataCaptureView() {
@@ -31,14 +39,29 @@ class ScanMaterialInfoRepository implements IScanMaterialInfoRepository {
   }
 
   @override
-  Future<Either<ApiFailure, bool>> scanMaterialNumberFromdeviceCamera() async {
+  Future<Either<ApiFailure, bool>> scanMaterialNumberFromDeviceCamera() async {
     try {
       await materialInfoScanner.camera
           ?.switchToDesiredState(FrameSourceState.on);
       materialInfoScanner.barcodeCapture.isEnabled = true;
 
+      mixpanelService.trackEvent(
+        eventName: MixpanelEvents.productScannedSuccess,
+        properties: {
+          MixpanelProps.scanFrom: 'camera',
+        },
+      );
+
       return const Right(true);
     } catch (e) {
+      mixpanelService.trackEvent(
+        eventName: MixpanelEvents.productScannedFailed,
+        properties: {
+          MixpanelProps.scanFrom: 'camera',
+          MixpanelProps.errorMessage: e.toString(),
+        },
+      );
+
       return Left(FailureHandler.handleFailure(e));
     }
   }
@@ -46,10 +69,7 @@ class ScanMaterialInfoRepository implements IScanMaterialInfoRepository {
   @override
   Future<Either<ApiFailure, bool>> scanImageFromDeviceStorage() async {
     try {
-      final result = await FilePicker.platform.pickFiles(
-        type: FileType.custom,
-        allowedExtensions: ['jpg', 'png', 'jpeg'],
-      );
+      final result = await filePickerService.pickFiles();
       if (result != null) {
         final file = File(result.files.single.path!);
         final bytes = await file.readAsBytes();
@@ -59,8 +79,23 @@ class ScanMaterialInfoRepository implements IScanMaterialInfoRepository {
       }
       materialInfoScanner.barcodeCapture.isEnabled = true;
 
+      mixpanelService.trackEvent(
+        eventName: MixpanelEvents.productScannedSuccess,
+        properties: {
+          MixpanelProps.scanFrom: 'gallery',
+        },
+      );
+
       return const Right(true);
     } catch (e) {
+      mixpanelService.trackEvent(
+        eventName: MixpanelEvents.productScannedFailed,
+        properties: {
+          MixpanelProps.scanFrom: 'gallery',
+          MixpanelProps.errorMessage: e.toString(),
+        },
+      );
+
       return Left(FailureHandler.handleFailure(e));
     }
   }

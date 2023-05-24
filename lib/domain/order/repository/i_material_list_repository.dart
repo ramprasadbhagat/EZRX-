@@ -8,6 +8,7 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 
 abstract class IMaterialListRepository {
   Future<Either<ApiFailure, List<MaterialInfo>>> getMaterialList({
@@ -48,5 +49,13 @@ abstract class IMaterialListRepository {
     required int pageSize,
     required int offset,
     required List<String> principles,
+  });
+
+  Future<Either<ApiFailure, MaterialInfo>> getScanMaterial({
+    required SalesOrganisation salesOrganisation,
+    required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToInfo,
+    required Ean ean,
+    required User user,
   });
 }

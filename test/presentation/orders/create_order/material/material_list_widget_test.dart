@@ -47,6 +47,7 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 
 import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/material_list_repository.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/custom_selector.dart';
 import 'package:ezrxmobile/presentation/orders/combo_deal/widgets/combo_deal_label.dart';
@@ -144,6 +145,10 @@ class AnnouncementBlocMock
 
 class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 
+class MaterialListRepositoryMock extends Mock
+    implements MaterialListRepository {}
+
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late MaterialListBloc materialListBlocMock;
@@ -155,7 +160,7 @@ void main() {
   late MockFavouriteBloc mockFavouriteBloc;
   late MaterialPriceBloc materialPriceBlocMock;
   late CartBloc cartBlocMock;
-  // late MaterialListBloc materialListBloc;
+  late MaterialListRepository materialListRepositoryMock;
   late OrderDocumentTypeBloc orderDocumentTypeBlocMock;
   late EligibilityBlocMock eligibilityBlocMock;
   late TenderContractBloc mockTenderContractBloc;
@@ -235,6 +240,7 @@ void main() {
     locator.registerLazySingleton(() => AppRouter());
     locator.registerLazySingleton(() => mockConfig);
     locator.registerLazySingleton(() => MixpanelService());
+    locator.registerLazySingleton(() => materialListRepositoryMock);
     locator<MixpanelService>().init(mixpanel: MixpanelMock());
   });
 
@@ -307,6 +313,7 @@ void main() {
     authBlocMock = AuthBlocMock();
     announcementBlocMock = AnnouncementBlocMock();
     mockConfig = MockConfig();
+    materialListRepositoryMock = MaterialListRepositoryMock();
     mockOrderHistoryDetailsBloc = OrderHistoryDetailsBlocMock();
     when(() => remoteConfigServiceMock.getScanToOrderConfig()).thenReturn(true);
     when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
@@ -1945,72 +1952,18 @@ void main() {
       await tester.pump();
     });
 
-    testWidgets('Searching material after scanning successfully',
+    testWidgets(
+        'Opening add to cart after scanning and fetching price successfully',
         (tester) async {
+
       whenListen(
         mockScanMaterialInfoBloc,
         Stream.fromIterable(
           [
-            ScanMaterialInfoState.initial(),
+            ScanMaterialInfoState.initial().copyWith(isFetching: true),
             ScanMaterialInfoState.initial().copyWith(
-              scannedData: 'fake-material-number',
-            ),
-          ],
-        ),
-      );
-
-      await tester.pumpWidget(getScopedWidget(const MaterialListPage()));
-
-      verify(
-        () => materialListBlocMock.add(
-          MaterialListEvent.searchMaterialList(
-            configs: SalesOrganisationConfigs.empty().copyWith(
-              enableComboDeals: true,
-              comboDealsUserRole: ComboDealUserRole(1),
-            ),
-            customerCodeInfo: CustomerCodeInfo.empty().copyWith(
-              comboEligible: true,
-            ),
-            salesOrganisation: SalesOrganisation.empty(),
-            shipToInfo: ShipToInfo.empty(),
-            user: User.empty(),
-            isScanSearch: true,
-            pickAndPack: '',
-            selectedMaterialFilter: MaterialFilter.empty().copyWith(
-              uniqueTherapeuticClass: [
-                'GSK Consumer Healthcare',
-                'All other non-therapeutic products',
-              ],
-            ),
-            searchKey: SearchKey('fake-material-number'),
-          ),
-        ),
-      ).called(1);
-    });
-
-    testWidgets(
-        'Opening add to cart after scanning and fetching price successfully',
-        (tester) async {
-      when(() => materialListBlocMock.state).thenReturn(
-        MaterialListState.initial().copyWith(
-          materialList: [
-            MaterialInfo.empty().copyWith(materialNumber: fakeMaterialNumber),
-          ],
-          isScanFromBarcode: true,
-        ),
-      );
-
-      whenListen(
-        materialPriceBlocMock,
-        Stream.fromIterable(
-          [
-            MaterialPriceState.initial().copyWith(isFetching: true),
-            MaterialPriceState.initial().copyWith(
-              isFetching: false,
-              materialPrice: {
-                fakeMaterialNumber:
-                    Price.empty().copyWith(materialNumber: fakeMaterialNumber),
-              },
+              material: MaterialInfo.empty()
+                  .copyWith(materialNumber: fakeMaterialNumber),
             ),
           ],
         ),
@@ -2021,61 +1974,6 @@ void main() {
       await tester.pump();
 
       expect(autoRouterMock.currentPath, 'orders/add_to_cart');
-    });
-    testWidgets(
-        'Opening combo deal detail after scanning and fetching price successfully',
-        (tester) async {
-      final fakeComboDealPrice = Price.empty().copyWith(
-        materialNumber: fakeMaterialNumber,
-        comboDeal: PriceComboDeal.empty().copyWith(
-          category: PriceComboDealCategory(
-              type: ComboDealCategoryType('MATNR'), values: []),
-          flexibleGroup: FlexibleGroup('fake-group'),
-        ),
-      );
-
-      when(() => materialListBlocMock.state).thenReturn(
-        MaterialListState.initial().copyWith(
-          materialList: [
-            MaterialInfo.empty().copyWith(materialNumber: fakeMaterialNumber),
-          ],
-          isScanFromBarcode: true,
-        ),
-      );
-
-      when(() => cartBlocMock.state).thenReturn(
-        CartState.initial().copyWith(cartItems: [
-          CartItem.comboDeal([
-            PriceAggregate.empty().copyWith(
-              price: fakeComboDealPrice,
-            )
-          ])
-        ]),
-      );
-
-      whenListen(
-        materialPriceBlocMock,
-        Stream.fromIterable(
-          [
-            MaterialPriceState.initial().copyWith(isFetching: true),
-            MaterialPriceState.initial().copyWith(
-              isFetching: false,
-              materialPrice: {
-                fakeMaterialNumber: fakeComboDealPrice,
-              },
-            ),
-          ],
-        ),
-      );
-
-      await tester.pumpWidget(getScopedWidget(const MaterialListPage()));
-      await tester.pump();
-
-      expect(
-        (autoRouterMock.current.args as ComboDealMaterialDetailPageRouteArgs)
-            .isEdit,
-        true,
-      );
     });
   });
 

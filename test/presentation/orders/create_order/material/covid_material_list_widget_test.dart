@@ -37,6 +37,7 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 
 import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/material_list_repository.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/covid_material_list/covid_material_list.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/material_root.dart';
@@ -110,6 +111,9 @@ class AnnouncementBlocMock
 
 class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 
+class MaterialListRepositoryMock extends Mock
+    implements MaterialListRepository {}
+
 class AddToCartStub {
   void addToCart() {
     // Do nothing
@@ -141,6 +145,7 @@ void main() {
   late Config mockConfig;
   late AuthBloc authBlocMock;
   late AnnouncementBloc announcementBlocMock;
+  late MaterialListRepository materialListRepositoryMock;
 
   final fakeMaterialInfo = MaterialInfo(
     materialNumber: fakeMaterialNumber,
@@ -188,6 +193,7 @@ void main() {
     locator.registerLazySingleton(() => mockConfig);
     locator.registerLazySingleton(() => MixpanelService());
     locator<MixpanelService>().init(mixpanel: MixpanelMock());
+    locator.registerLazySingleton(() => materialListRepositoryMock);
   });
 
   group('Covid Material List Test', () {
@@ -211,6 +217,7 @@ void main() {
       authBlocMock = AuthBlocMock();
       announcementBlocMock = AnnouncementBlocMock();
       mockConfig = MockConfig();
+      materialListRepositoryMock = MaterialListRepositoryMock();
       when(() => remoteConfigServiceMock.getScanToOrderConfig())
           .thenReturn(true);
       when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);

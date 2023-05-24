@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,8 +31,16 @@ class _ScanMaterialInfoState extends State<ScanMaterialInfo>
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
+      final eligibilityBlocState = context.read<EligibilityBloc>().state;
       scanMaterialInfoBloc
-          .add(const ScanMaterialInfoEvent.scanMaterialNumberFromCamera());
+          .add(
+        ScanMaterialInfoEvent.scanMaterialNumberFromCamera(
+          customerCodeInfo: eligibilityBlocState.customerCodeInfo,
+          salesOrganisation: eligibilityBlocState.salesOrganisation,
+          shipToInfo: eligibilityBlocState.shipToInfo,
+          user: eligibilityBlocState.user,
+        ),
+      );
     } else if (state == AppLifecycleState.paused) {
       scanMaterialInfoBloc.add(const ScanMaterialInfoEvent.disableScan());
     }
@@ -50,7 +59,7 @@ class _ScanMaterialInfoState extends State<ScanMaterialInfo>
 
     return BlocConsumer<ScanMaterialInfoBloc, ScanMaterialInfoState>(
       listenWhen: (previous, current) =>
-          previous.scannedData != current.scannedData,
+          previous.isFetching != current.isFetching && current.isFetching,
       listener: (context, state) {
         context.router.pop();
       },

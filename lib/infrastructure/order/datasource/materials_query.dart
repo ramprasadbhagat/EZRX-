@@ -16,7 +16,8 @@ class MaterialsWithMetaQuery {
         \$therapeuticClassList: [String!],
         \$itemBrandList: [String!],
         \$cached: Boolean, 
-        \$isForFOC: Boolean) {
+        \$isForFOC: Boolean,
+        \$ean: String) {
             materialsWithMeta(
               customer: \$customerCode, 
               shipToCustomer: \$shipToCustomer, 
@@ -32,7 +33,8 @@ class MaterialsWithMetaQuery {
               after: \$after, 
               searchKey: \$searchKey, 
               cached: \$cached, 
-              isForFOC: \$isForFOC) {
+              isForFOC: \$isForFOC,
+              ean: \$ean) {
         rawMetaData{
           count
         }
@@ -86,7 +88,8 @@ class MaterialsWithMetaQuery {
         \$pickAndPack: String, 
         \$gimmickMaterial: Boolean, 
         \$isForFOC: Boolean, 
-        \$isSample: Boolean) { 
+        \$isSample: Boolean,
+        \$ean: String) { 
           customerMaterialsForSalesRep(
             username: \$username, 
             customerSoldToCode: \$customerSoldToCode, 
@@ -105,7 +108,8 @@ class MaterialsWithMetaQuery {
             pickAndPack: \$pickAndPack, 
             gimmickMaterial: \$gimmickMaterial, 
             isForFOC: \$isForFOC, 
-            isSample: \$isSample) {
+            isSample: \$isSample,
+            ean: \$ean) {
         rawMetaData{
           count
         }

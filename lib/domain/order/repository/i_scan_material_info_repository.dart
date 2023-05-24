@@ -6,7 +6,7 @@ import 'package:scandit_flutter_datacapture_core/scandit_flutter_datacapture_cor
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 
 abstract class IScanMaterialInfoRepository {
-  Future<Either<ApiFailure, bool>> scanMaterialNumberFromdeviceCamera();
+  Future<Either<ApiFailure, bool>> scanMaterialNumberFromDeviceCamera();
   Future<Either<ApiFailure, bool>> disableMaterialScan();
   Future<Either<ApiFailure, bool>> scanImageFromDeviceStorage();
   BarcodeCapture fetchBarcodeCapture();

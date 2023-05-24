@@ -26,4 +26,7 @@ class MixpanelEvents {
   static String pageViewVisited = 'Pageview Visited';
   static String thankYouToCreate = 'THANK YOU TO CREATE';
   static String thankYouToHistory = 'THANK YOU TO HISTORY';
+  static String scannerClicked = 'Scanner Clicked';
+  static String productScannedSuccess = 'Product Scanned Success';
+  static String productScannedFailed = 'Product Scanned Failed';
 }

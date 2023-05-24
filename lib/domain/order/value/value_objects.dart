@@ -836,3 +836,14 @@ class ZDP5Info extends ValueObject<String> {
 
   const ZDP5Info._(this.value);
 }
+
+class Ean extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory Ean(String input) {
+    return Ean._(validateStringNotEmpty(input));
+  }
+
+  const Ean._(this.value);
+}

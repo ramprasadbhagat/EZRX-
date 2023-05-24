@@ -28,4 +28,5 @@ class MixpanelProps {
   static String email = 'email';
   static String bannerType = 'banner_type';
   static String clickFrom = 'click_from';
+  static String scanFrom = 'scan_from';
 }

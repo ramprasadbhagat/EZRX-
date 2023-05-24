@@ -11,6 +11,7 @@ import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/repository/i_material_list_repository.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 
 import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_list_remote.dart';
@@ -221,5 +222,51 @@ class MaterialListRepository implements IMaterialListRepository {
     }
   }
 
+@override
+  Future<Either<ApiFailure, MaterialInfo>> getScanMaterial({
+    required User user,
+    required SalesOrganisation salesOrganisation,
+    required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToInfo,
+    required Ean ean,
+  }) async {
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final materialListData = user.role.type.isSalesRepRole
+            ? await materialListLocalDataSource.searchMaterialListSalesRep()
+            : await materialListLocalDataSource.searchMaterialList();
+
+        return Right(materialListData.first);
+      } catch (e) {
+        return Left(FailureHandler.handleFailure(e));
+      }
+    }
+
+    try {
+      final materialListData = user.role.type.isSalesRepRole
+          ? await materialListRemoteDataSource.getScanMaterialSalesRep(
+              salesOrgCode: salesOrganisation.salesOrg.getOrCrash(),
+              customerCode: customerCodeInfo.customerCodeSoldTo,
+              shipToCode: shipToInfo.shipToCustomerCode,
+              ean: ean.getOrCrash(),
+              userName: user.username.getOrCrash(),
+            )
+          : await materialListRemoteDataSource.getScanMaterial(
+              salesOrgCode: salesOrganisation.salesOrg.getOrCrash(),
+              customerCode: customerCodeInfo.customerCodeSoldTo,
+              shipToCode: shipToInfo.shipToCustomerCode,
+              ean: ean.getOrCrash(),
+            );
+      if (materialListData.isEmpty) {
+        return const Left(
+          ApiFailure.other('Unable to fetch Material'),
+        );
+      }
+
+      return Right(materialListData.first);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
   
 }

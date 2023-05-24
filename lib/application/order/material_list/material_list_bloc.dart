@@ -174,7 +174,7 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
         orderBy: 'materialDescription_asc',
         searchKey: state.searchKey.getOrDefaultValue(''),
         selectedMaterialFilter: e.selectedMaterialFilter,
-        pickAndPack: e.pickAndPack,
+        pickAndPack: e.pickAndPack, 
       );
       await failureOrSuccess.fold(
         (failure) async {
