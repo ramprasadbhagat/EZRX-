@@ -22,8 +22,8 @@ class OrderTenderContractCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final eligibiltiyBlocState = context.read<EligibilityBloc>().state;
-    final salesOrgConfigs = eligibiltiyBlocState.salesOrgConfigs;
+    final eligibilityBlocState = context.read<EligibilityBloc>().state;
+    final salesOrgConfigs = eligibilityBlocState.salesOrgConfigs;
     // final disableCreateOrder =
     //     context.read<UserBloc>().state.user.disableCreateOrder;
 
@@ -74,7 +74,7 @@ class OrderTenderContractCard extends StatelessWidget {
                       keyText: 'Type'.tr(),
                       valueText: orderHistoryDetailsBonusAggregate
                           .orderItem.type
-                          .getOrCrash(),
+                          .getOrDefaultValue(''),
                       valueTextLoading: isLoading,
                       keyFlex: 1,
                       valueFlex: 1,
@@ -133,7 +133,7 @@ class OrderTenderContractCard extends StatelessWidget {
                       keyFlex: 1,
                       valueFlex: 1,
                     ),
-                    eligibiltiyBlocState.salesOrgConfigs.batchNumDisplay
+                    eligibilityBlocState.salesOrgConfigs.batchNumDisplay
                         ? BalanceTextRow(
                             keyText: 'Batch Number'.tr(),
                             valueText: orderHistoryDetailsBonusAggregate
@@ -143,7 +143,7 @@ class OrderTenderContractCard extends StatelessWidget {
                             valueFlex: 1,
                           )
                         : const SizedBox.shrink(),
-                    eligibiltiyBlocState.salesOrgConfigs.batchNumDisplay
+                    eligibilityBlocState.salesOrgConfigs.batchNumDisplay
                         ? BalanceTextRow(
                             keyText: 'Expiry Date'.tr(),
                             valueText: orderHistoryDetailsBonusAggregate

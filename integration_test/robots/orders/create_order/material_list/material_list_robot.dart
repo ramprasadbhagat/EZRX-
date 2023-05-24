@@ -8,6 +8,9 @@ class MaterialListRobot {
   MaterialListRobot(this.tester);
 
   final cartButton = find.byKey(const Key('cartButton'));
+  final orderTypeSelector = find.byKey(const ValueKey('orderTypeSelector'));
+  final change = find.byKey(const ValueKey('Change'));
+  final cancel = find.byKey(const ValueKey('Cancel'));
 
   void verify() {
     expect(find.byKey(const Key('materialListPage')), findsOneWidget);
@@ -93,5 +96,69 @@ class MaterialListRobot {
     final NavigatorState navigator = tester.state(find.byType(Navigator));
     navigator.pop();
     await tester.pumpAndSettle();
+  }
+
+
+  void findItemRegistrationNumber(String materialNumber) {
+    final registrationNumber =
+        find.byKey(ValueKey('registrationNumber$materialNumber'));
+    expect(registrationNumber, findsOneWidget);
+  }
+
+  void verifyOrderTypeSelector() {
+    expect(orderTypeSelector, findsOneWidget);
+  }
+
+  Future<void> tapOrderTypeSelector() async {
+    await tester.tap(orderTypeSelector);
+    await tester.pumpAndSettle();
+  }
+
+  void findOrderDocumentTypeSectorDialog() {
+    final orderDocumentTypeSectorDialog =
+        find.byKey(const ValueKey('orderDocumentTypeSectorDialog'));
+    expect(orderDocumentTypeSectorDialog, findsOneWidget);
+  }
+
+  void findOrderDocumentType(String orderType) {
+    final orderDocumentType =
+        find.byKey(ValueKey('orderType${orderType.toUpperCase()}'));
+    expect(orderDocumentType, findsOneWidget);
+  }
+
+  Future<void> tapOrderType(String orderType) async {
+    final orderDocumentType =
+        find.byKey(ValueKey('orderType${orderType.toUpperCase()}'));
+    await tester.tap(orderDocumentType);
+    await tester.pumpAndSettle();
+  }
+
+  void findCartClearDialog() {
+    final orderTypeChangeCartClearDialog =
+        find.byKey(const ValueKey('customerCodeDialogChange'));
+    expect(orderTypeChangeCartClearDialog, findsOneWidget);
+  }
+
+  void findOrderTypeChangeDialogCancel() {
+    expect(cancel, findsOneWidget);
+  }
+
+  Future<void> cancelClearCart() async {
+    await tester.tap(cancel);
+    await tester.pumpAndSettle();
+  }
+
+  void findOrderTypeDialogChange() {
+    expect(change, findsOneWidget);
+  }
+
+  Future<void> clearCart() async {
+    await tester.tap(change);
+    await tester.pumpAndSettle();
+  }
+  
+  void displayPriceBeforeVat(String materialNumber) {
+    final priceBeforeVat = find.byKey(Key('priceBefore$materialNumber'));
+    expect(priceBeforeVat, findsOneWidget);
   }
 }

@@ -22,8 +22,8 @@ class OrderSummaryRobot {
   final contactPerson = find.byKey(const Key('contactPersonKey'));
   final customerPOReferenceField =
       find.byKey(const Key('customerPOReferenceKey'));
-  final collectiveNumberField =
-      find.byKey(const Key('collectiveNumberKey'));
+  final collectiveNumberField = find.byKey(const Key('collectiveNumberKey'));
+  final referenceNoteKey = find.byKey(const Key('referenceNoteKey'));
 
 
   void verify() {
@@ -63,7 +63,8 @@ class OrderSummaryRobot {
     final phone = find.byKey(Key('Phone$phoneName'));
     expect(phone, findsWidgets);
   }
-   void findCustomerPoReference() {
+
+  void findCustomerPoReference() {
     expect(customerPOReferenceField, findsOneWidget);
   }
 
@@ -129,7 +130,7 @@ class OrderSummaryRobot {
   }
 
   void allowMinimumOrderAmount(String amount) {
-    expect(find.byKey(Key('Min. Order Value$amount')),findsOneWidget);
+    expect(find.byKey(Key('Min. Order Value$amount')), findsOneWidget);
   }
 
   void findBundleItem(String bundleCode) {
@@ -152,6 +153,16 @@ class OrderSummaryRobot {
     final selectPaymentOption = find.textContaining('T025-').last;
     await tester.tap(selectPaymentOption);
     await tester.pumpAndSettle();
+  }
+
+  Future<void> scrollToContinueButton(int index) async {
+    final orderSummaryKey = find.byKey(const ValueKey('orderSummaryKey'));
+    await tester.dragUntilVisible(
+      continueButton.at(index),
+      orderSummaryKey,
+      const Offset(100, 100),
+    );
+    await tester.pump();
   }
 
   void findContinueButton(int index) {
@@ -358,5 +369,20 @@ class OrderSummaryRobot {
       expect(find.textContaining('PO Reference Required'), findsNothing);
       return false;
     }
+  }
+
+  void findReferenceNote() {
+    expect(referenceNoteKey, findsOneWidget);
+  }
+
+  Future<void> enterReferenceNote(String value) async {
+    await tester.enterText(referenceNoteKey, value);
+    await tester.pumpAndSettle();
+  }
+
+  void findPoAttachmentUpload() {
+    final findPoAttachmentUpload =
+        find.byKey(const Key('poAttachmentUploadButton'));
+    expect(findPoAttachmentUpload, findsOneWidget);
   }
 }

@@ -50,7 +50,7 @@ class OrderTypeSelector extends StatelessWidget {
               _OrderTypeSelectorField(
                 itemList: state.uniqueOrderTypeList,
                 leadingText: 'Order Type',
-                intialDropdownText: 'Please Select Order Type',
+                initialDropdownText: 'Please Select Order Type',
                 dropDownTitle: 'Please select order type',
                 orderDocumentTypeState: state,
                 orderHistoryDetailsState:
@@ -63,7 +63,7 @@ class OrderTypeSelector extends StatelessWidget {
                   child: _OrderTypeSelectorField(
                     itemList: state.reasonList,
                     leadingText: 'Reason',
-                    intialDropdownText: 'Please Select Reason',
+                    initialDropdownText: 'Please Select Reason',
                     dropDownTitle: 'Please select order reason',
                     isReason: true,
                     orderDocumentTypeState: state,
@@ -85,7 +85,7 @@ class OrderTypeSelector extends StatelessWidget {
 class _OrderTypeSelectorField extends StatelessWidget {
   final List<OrderDocumentType> itemList;
   final String leadingText;
-  final String intialDropdownText;
+  final String initialDropdownText;
   final String dropDownTitle;
   final OrderDocumentTypeState orderDocumentTypeState;
   final OrderHistoryDetailsState orderHistoryDetailsState;
@@ -94,7 +94,7 @@ class _OrderTypeSelectorField extends StatelessWidget {
     Key? key,
     required this.itemList,
     required this.leadingText,
-    this.intialDropdownText = '',
+    this.initialDropdownText = '',
     required this.dropDownTitle,
     required this.orderDocumentTypeState,
     this.isReason = false,
@@ -180,8 +180,9 @@ class _OrderTypeSelectorField extends StatelessWidget {
           ? orderDocumentTypeState.selectedReason.displayReasonText
           : displayReasonText
       : orderDocumentTypeState.isOrderTypeSelected
-          ? orderDocumentTypeState.selectedOrderType.documentType.getOrCrash()
-          : intialDropdownText;
+          ? orderDocumentTypeState.selectedOrderType.documentType
+              .getOrDefaultValue('')
+          : initialDropdownText;
 
   String get displayReasonText {
     final orderReason = orderHistoryDetailsState
@@ -242,15 +243,23 @@ class _OrderTypeSelectorField extends StatelessWidget {
       context: context,
       builder: (BuildContext ctx) {
         return PlatformAlertDialog(
+          key: const ValueKey('orderDocumentTypeSectorDialog'),
           title: Text(dropDownTitle),
           actions: itemList.map<CupertinoActionSheetAction>((i) {
             final displayText =
-                isReason ? i.displayReasonText : i.documentType.getOrCrash();
+                isReason
+                ? i.displayReasonText
+                : i.documentType.getOrDefaultValue('');
+
+            final key = isReason
+                ? i.displayReasonText
+                : i.documentType.documentTypeCode;
 
             return CupertinoActionSheetAction(
               key: Key(displayText),
               child: Text(
                 displayText,
+                key: ValueKey('orderType$key'),
                 style: Theme.of(context).textTheme.titleSmall?.copyWith(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,

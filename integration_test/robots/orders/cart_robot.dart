@@ -69,6 +69,11 @@ class CartRobot {
     await tester.pumpAndSettle(const Duration(seconds: 2));
   }
 
+  void notFindMaterialItem(String materialNumber, int quantity) {
+    final material = find.byKey(ValueKey('$materialNumber$quantity'));
+    expect(material, findsNothing);
+  }
+
   Future<void> findBundleItem(String bundleCode) async {
     final material =
         find.byKey(ValueKey('bundleCartItem$bundleCode'), skipOffstage: false);
@@ -100,8 +105,8 @@ class CartRobot {
       expect(taxCodeInPercentageKey, findsNothing);
       expect(find.textContaining('$percentage%'), findsNothing);
       expect(totalTaxKey, findsNothing);
+      expect(find.byKey(Key('pricebefore$materialNumber')), findsNothing);
     }
-    expect(find.byKey(Key('pricebefore$materialNumber')), findsNothing);
   }
 
   void findRemarkText(String remark) {
@@ -182,9 +187,9 @@ class CartRobot {
     await tester.pumpAndSettle();
   }
 
-  Future<void> changePrice(int quantity) async {
+  Future<void> changePrice(int price) async {
     await tester.enterText(find.byKey(const Key('priceOverrideTextFormField')),
-    quantity.toString());
+        price.toString());
     await tester.pumpAndSettle();
   }
 

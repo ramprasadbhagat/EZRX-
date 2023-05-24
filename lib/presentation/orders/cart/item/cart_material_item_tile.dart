@@ -132,6 +132,9 @@ class _CartMaterialItemTileState extends State<CartMaterialItemTile> {
                           Flexible(
                             child: Text(
                               material.materialInfo.materialDescription,
+                              key: ValueKey(
+                                'materialTitle${material.getMaterialNumber.getOrDefaultValue('')}',
+                              ),
                               style:
                                   Theme.of(context).textTheme.titleSmall?.apply(
                                         color: ZPColors.kPrimaryColor,

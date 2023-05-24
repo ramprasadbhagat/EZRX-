@@ -23,6 +23,9 @@ class FavoriteButton extends StatelessWidget {
         );
 
         return IconButton(
+          key: ValueKey(
+            'favouriteButton${materialInfo.materialNumber.getOrDefaultValue('')}',
+          ),
           icon: Icon(
             favourite == Favourite.empty()
                 ? Icons.favorite_border_outlined
