@@ -157,6 +157,21 @@ class CartItem with _$CartItem {
         }).toList(),
       );
 
+  CartItem copyWithPrice({
+    required Price newPrice,
+    required bool exceedQty,
+  }) =>
+      copyWith(
+        materials: materials
+            .map(
+              (material) => material.copyWith(
+                price: newPrice,
+                exceedQuantity: exceedQty,
+              ),
+            )
+            .toList(),
+      );
+
   CartItem copyWithBatch({
     required StockInfo stockInfo,
   }) =>

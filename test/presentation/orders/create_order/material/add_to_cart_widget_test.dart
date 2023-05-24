@@ -254,7 +254,13 @@ void main() {
 
       verify(
         () => addToCartBloc.add(
-          const AddToCartEvent.updateQuantity(1, 0),
+           AddToCartEvent.updateQuantity(
+            quantity: 1,
+          cartZmgQtyExcludeCurrent: 0,
+          customerCode: CustomerCodeInfo.empty(),
+          salesOrganisation: SalesOrganisation.empty(),
+          shipToCode: ShipToInfo.empty()
+          ),
         ),
       ).called(1);
     });
@@ -400,7 +406,13 @@ void main() {
 
       verify(
         () => addToCartBlocMock.add(
-          const AddToCartEvent.updateQuantity(2, 0),
+          AddToCartEvent.updateQuantity(
+            quantity: 2,
+          cartZmgQtyExcludeCurrent: 0,
+          customerCode: CustomerCodeInfo.empty(),
+          salesOrganisation: SalesOrganisation.empty(),
+          shipToCode: ShipToInfo.empty()
+          ),
         ),
       );
     });

@@ -25,6 +25,7 @@ class CartEvent with _$CartEvent {
   const factory CartEvent.discountOverride({
     required PriceAggregate item,
   }) = _DiscountOverride;
+
   const factory CartEvent.addBundleToCart({
     required List<PriceAggregate> bundleItems,
     required SalesOrganisationConfigs salesOrganisationConfigs,

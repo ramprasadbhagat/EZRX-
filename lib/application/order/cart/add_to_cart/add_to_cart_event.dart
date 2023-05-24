@@ -15,8 +15,11 @@ class AddToCartEvent with _$AddToCartEvent {
   const factory AddToCartEvent.setCartItem(
     PriceAggregate cartItem,
   ) = _SetCartItem;
-  const factory AddToCartEvent.updateQuantity(
-    int quantity,
-    int cartZmgQtyExcludeCurrent,
-  ) = _UpdateQuantity;
+  const factory AddToCartEvent.updateQuantity({
+    required int quantity,
+    required int cartZmgQtyExcludeCurrent,
+    required CustomerCodeInfo customerCode,
+    required SalesOrganisation salesOrganisation,
+    required ShipToInfo shipToCode,
+  }) = _UpdateQuantity;
 }

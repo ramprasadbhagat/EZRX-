@@ -79,22 +79,22 @@ void main() {
     MaterialPriceDetail.empty().copyWith.price(
         materialNumber: MaterialNumber('fake-material-2'),
         finalPrice: MaterialPrice(4),
-        zdp5MaxQuota: '3'),
+        zdp5MaxQuota: ZDP5Info('3')),
     MaterialPriceDetail.empty().copyWith.price(
           materialNumber: MaterialNumber('fake-material-3'),
           finalPrice: MaterialPrice(6),
-          zdp5RemainingQuota: '0',
+          zdp5RemainingQuota: ZDP5Info('0'),
         )
   ];
   final fakeQueryResponseWhenEnableZDP5 = [
     MaterialPriceDetail.empty().copyWith.price(
         materialNumber: MaterialNumber('fake-material-2'),
         finalPrice: MaterialPrice(6),
-        zdp5MaxQuota: '3'),
+        zdp5MaxQuota: ZDP5Info('3')),
     MaterialPriceDetail.empty().copyWith.price(
           materialNumber: MaterialNumber('fake-material-3'),
           finalPrice: MaterialPrice(9),
-          zdp5RemainingQuota: '0',
+          zdp5RemainingQuota: ZDP5Info('0'),
         )
   ];
   final fakeQueryResponseWhenEnableZDP5WithOverride = [
@@ -103,7 +103,7 @@ void main() {
         finalPrice: MaterialPrice(1),
         zdp8Override: Zdp8OverrideValue(1),
         priceOverride: PriceOverrideValue(1),
-        zdp5MaxQuota: '3'),
+        zdp5MaxQuota: ZDP5Info('3')),
   ];
   final fakeQueryWithOverride = [
     MaterialQueryInfo.empty().copyWith(

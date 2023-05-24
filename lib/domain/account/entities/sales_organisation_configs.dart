@@ -193,6 +193,8 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
 
   bool get enablePrincipalList => disablePrincipals && principalList.isNotEmpty;
 
+  bool get isZdp5DiscountEligible  => salesOrg.isVN && enableZDP5;
+
   SalesOrganisationConfigsPrincipal get checkIsPrincipalCodeForAllMaterial =>
       principalList.firstWhere(
           (principal) => principal.principalCode.checkIsPrincipalCodeForAll,

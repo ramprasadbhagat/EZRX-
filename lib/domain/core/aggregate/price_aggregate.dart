@@ -37,6 +37,7 @@ class PriceAggregate with _$PriceAggregate {
     required SalesOrganisationConfigs salesOrgConfig,
     required int quantity,
     @Default(0) int discountedMaterialCount,
+    @Default(false) bool exceedQuantity,
     required List<MaterialItemBonus> addedBonusList,
     required StockInfo stockInfo,
     required TenderContract tenderContract,
@@ -389,6 +390,16 @@ class PriceAggregate with _$PriceAggregate {
     }).toList();
   }
 
+  PriceAggregate copyWithPrice({
+    required Price newPrice,
+    required bool exceedQty,
+  }) =>
+      copyWith(
+        price: newPrice,
+        exceedQuantity: exceedQty,
+      );
+
+
   bool get isEligibleAddAdditionBonus =>
       !materialInfo.materialGroup4.isFOC &&
       !materialInfo.hidePrice &&
@@ -446,6 +457,25 @@ class PriceAggregate with _$PriceAggregate {
 
     return false;
   }
+
+  bool get isZdp5DiscountEligible =>
+      salesOrgConfig.salesOrg.isVN && salesOrgConfig.enableZDP5;
+
+  bool hasZdp5Validation(int quantity) =>
+      isZdp5DiscountEligible &&
+      price.zdp5RemainingQuota.hasZdp5Discount(quantity);
+
+  bool get isRemainingQuantityNotExceeded =>
+      !exceedQuantity && price.zdp5RemainingQuota.hasZdp5Discount(quantity);
+
+  bool get isRemainingQuantityExceeded =>
+      exceedQuantity &&
+      price.zdp5RemainingQuota.validateIfQuantityExceeded(quantity);
+
+  bool get hasRemainingQuotaReached =>
+      isRemainingQuantityNotExceeded || isRemainingQuantityExceeded;
+
+  bool get isPriceUpdateAvailable =>isZdp5DiscountEligible && hasRemainingQuotaReached ;
 }
 
 enum PriceType {

@@ -105,3 +105,15 @@ Color getStatusLabelColor(String statusType) {
       return ZPColors.lightYellow;
   }
 }
+
+bool validateZDP5Quantity(int quantity, String zDP5Value) =>
+    zDP5Value.isEmpty ? false : quantity > int.parse(zDP5Value);
+
+bool validateIfRemainingQtyExceeded(int quantity, String zDP5Value) =>
+    zDP5Value.isEmpty ? false : quantity <= int.parse(zDP5Value);
+
+int getParsedValue(String zDP5Value) =>
+    zDP5Value.isEmpty ? 0 : int.parse(zDP5Value);
+
+bool isValueNotEmpty(String zDP5Value) => zDP5Value.isNotEmpty;
+

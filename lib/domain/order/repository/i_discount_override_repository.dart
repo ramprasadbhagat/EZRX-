@@ -13,4 +13,12 @@ abstract class IDiscountOverrideRepository {
     required ShipToInfo shipToInfo,
     required Price price,
   });
+
+  Future<Either<ApiFailure, Price>> getMaterialPriceWithZdp5Discount({
+    required SalesOrganisation salesOrganisation,
+    required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToInfo,
+    required Price price,
+    required bool exceedQuantity,
+  });
 }

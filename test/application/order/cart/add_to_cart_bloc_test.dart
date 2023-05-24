@@ -227,8 +227,12 @@ void main() {
         seed: () =>
             AddToCartState.initial().copyWith(cartItem: mockCartItemList.first),
         act: (bloc) => bloc.add(AddToCartEvent.updateQuantity(
-          addToCartQuantity,
-          onCartDiscountProductQuantity,
+          quantity: addToCartQuantity,
+          cartZmgQtyExcludeCurrent: onCartDiscountProductQuantity,
+          customerCode: CustomerCodeInfo.empty(),
+          salesOrganisation: SalesOrganisation.empty(),
+          shipToCode: ShipToInfo.empty()
+
         )),
         expect: () => [
           AddToCartState.initial().copyWith(
@@ -273,8 +277,11 @@ void main() {
           ),
         ),
         act: (bloc) => bloc.add(AddToCartEvent.updateQuantity(
-          addToCartQuantity,
-          onCartDiscountProductQuantity,
+          quantity: addToCartQuantity,
+          cartZmgQtyExcludeCurrent: onCartDiscountProductQuantity,
+          customerCode: CustomerCodeInfo.empty(),
+          salesOrganisation: SalesOrganisation.empty(),
+          shipToCode: ShipToInfo.empty()
         )),
         expect: () => [
           AddToCartState.initial().copyWith(
@@ -324,7 +331,11 @@ void main() {
           ),
         ),
         act: (bloc) => bloc.add(AddToCartEvent.updateQuantity(
-            addToCartQuantity, onCartDiscountProductQuantity)),
+            quantity: addToCartQuantity,
+          cartZmgQtyExcludeCurrent: onCartDiscountProductQuantity,
+          customerCode: CustomerCodeInfo.empty(),
+          salesOrganisation: SalesOrganisation.empty(),
+          shipToCode: ShipToInfo.empty())),
         expect: () => [
           AddToCartState.initial().copyWith(
             cartItem: mockCartItemList.first.copyWith(
@@ -376,8 +387,11 @@ void main() {
           cartItem: mockCartItemList.first,
         ),
         act: (bloc) => bloc.add(AddToCartEvent.updateQuantity(
-          addToCartQuantity,
-          onCartDiscountProductQuantity,
+          quantity: addToCartQuantity,
+          cartZmgQtyExcludeCurrent: onCartDiscountProductQuantity,
+          customerCode: CustomerCodeInfo.empty(),
+          salesOrganisation: SalesOrganisation.empty(),
+          shipToCode: ShipToInfo.empty()
         )),
         expect: () => [
           AddToCartState.initial().copyWith(

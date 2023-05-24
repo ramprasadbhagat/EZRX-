@@ -22,6 +22,7 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 
 import 'package:ezrxmobile/infrastructure/core/local_storage/cart_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/discount_override_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/cart_item_dto.dart';
@@ -35,10 +36,11 @@ class MockConfig extends Mock implements Config {}
 
 class MockCartStorage extends Mock implements CartStorage {}
 
-
-
 class StockInfoRemoteDataSourceMock extends Mock
     implements StockInfoRemoteDataSource {}
+
+class DiscountOverrideRemoteDataSourceMock extends Mock
+    implements DiscountOverrideRemoteDataSource {}
 
 class StockInfoLocalDataSourceMock extends Mock
     implements StockInfoLocalDataSource {}
@@ -48,6 +50,7 @@ void main() {
   late CartStorage cartStorageMock;
   late StockInfoLocalDataSourceMock stockInfoLocalDataSource;
   late StockInfoRemoteDataSourceMock stockInfoRemoteDataSource;
+  late DiscountOverrideRemoteDataSource discountOverrideRemoteDataSourceMock;
   late CartRepository cartRepository;
   late CartItem fakeCartItem;
   late SalesOrganisationConfigs mockSalesOrganisationConfigs;
@@ -71,10 +74,13 @@ void main() {
     when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
     stockInfoLocalDataSource = StockInfoLocalDataSourceMock();
     stockInfoRemoteDataSource = StockInfoRemoteDataSourceMock();
+    discountOverrideRemoteDataSourceMock =
+        DiscountOverrideRemoteDataSourceMock();
     cartStorageMock = MockCartStorage();
     mixpanelService = MixpanelServiceMock();
     cartRepository = CartRepository(
       mixpanelService: mixpanelService,
+      discountOverrideRemoteDataSource: discountOverrideRemoteDataSourceMock,
       config: mockConfig,
       cartStorage: cartStorageMock,
       stockInfoLocalDataSource: stockInfoLocalDataSource,
@@ -319,8 +325,6 @@ void main() {
     expect(result.isLeft(), true);
   });
 
-  
-
   test('Test Add Item To Cart Override False - Success', () async {
     final result = await cartRepository.addItemToCart(
       cartItem: fakeCartItem,
@@ -382,7 +386,6 @@ void main() {
     );
     expect(result.isLeft(), true);
   });
-
 
   test('Test Add Remark To Cart Item - Bundle - Success', () async {
     when(

@@ -29,6 +29,7 @@ class DiscountOverrideRepository implements IDiscountOverrideRepository {
     required SalesOrganisation salesOrganisation,
     required Price price,
     required ShipToInfo shipToInfo,
+    
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -69,5 +70,43 @@ class DiscountOverrideRepository implements IDiscountOverrideRepository {
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
     }
+  }
+
+  @override
+  Future<Either<ApiFailure, Price>> getMaterialPriceWithZdp5Discount({
+    required SalesOrganisation salesOrganisation,
+    required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToInfo,
+    required Price price,
+    required bool exceedQuantity,
+  }) async{
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final priceData = await localDataSource.getPriceList();
+
+        return  Right(priceData.first);
+      } catch (e) {
+        return Left(
+          FailureHandler.handleFailure(e),
+        );
+      }
+    }
+    try {
+      final salesOrgCode = salesOrganisation.salesOrg.getOrCrash();
+      final customerCode = customerCodeInfo.customerCodeSoldTo;
+      final shipToCode = shipToInfo.shipToCustomerCode;
+
+      final priceData = await remoteDataSource.getMaterialOverridePriceList(
+        salesOrgCode: salesOrgCode,
+        customerCode: customerCode,
+        shipToCode: shipToCode,
+        materialQuery: PriceDto.fromDomain(price).materialQueryWithExceedQty(exceedQuantity),
+      );
+
+      return Right(priceData.first);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+
   }
 }

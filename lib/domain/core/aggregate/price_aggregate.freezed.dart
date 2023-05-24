@@ -24,6 +24,7 @@ mixin _$PriceAggregate {
       throw _privateConstructorUsedError;
   int get quantity => throw _privateConstructorUsedError;
   int get discountedMaterialCount => throw _privateConstructorUsedError;
+  bool get exceedQuantity => throw _privateConstructorUsedError;
   List<MaterialItemBonus> get addedBonusList =>
       throw _privateConstructorUsedError;
   StockInfo get stockInfo => throw _privateConstructorUsedError;
@@ -51,6 +52,7 @@ abstract class $PriceAggregateCopyWith<$Res> {
       SalesOrganisationConfigs salesOrgConfig,
       int quantity,
       int discountedMaterialCount,
+      bool exceedQuantity,
       List<MaterialItemBonus> addedBonusList,
       StockInfo stockInfo,
       TenderContract tenderContract,
@@ -88,6 +90,7 @@ class _$PriceAggregateCopyWithImpl<$Res, $Val extends PriceAggregate>
     Object? salesOrgConfig = null,
     Object? quantity = null,
     Object? discountedMaterialCount = null,
+    Object? exceedQuantity = null,
     Object? addedBonusList = null,
     Object? stockInfo = null,
     Object? tenderContract = null,
@@ -124,6 +127,10 @@ class _$PriceAggregateCopyWithImpl<$Res, $Val extends PriceAggregate>
           ? _value.discountedMaterialCount
           : discountedMaterialCount // ignore: cast_nullable_to_non_nullable
               as int,
+      exceedQuantity: null == exceedQuantity
+          ? _value.exceedQuantity
+          : exceedQuantity // ignore: cast_nullable_to_non_nullable
+              as bool,
       addedBonusList: null == addedBonusList
           ? _value.addedBonusList
           : addedBonusList // ignore: cast_nullable_to_non_nullable
@@ -233,6 +240,7 @@ abstract class _$$_PriceAggregateCopyWith<$Res>
       SalesOrganisationConfigs salesOrgConfig,
       int quantity,
       int discountedMaterialCount,
+      bool exceedQuantity,
       List<MaterialItemBonus> addedBonusList,
       StockInfo stockInfo,
       TenderContract tenderContract,
@@ -276,6 +284,7 @@ class __$$_PriceAggregateCopyWithImpl<$Res>
     Object? salesOrgConfig = null,
     Object? quantity = null,
     Object? discountedMaterialCount = null,
+    Object? exceedQuantity = null,
     Object? addedBonusList = null,
     Object? stockInfo = null,
     Object? tenderContract = null,
@@ -312,6 +321,10 @@ class __$$_PriceAggregateCopyWithImpl<$Res>
           ? _value.discountedMaterialCount
           : discountedMaterialCount // ignore: cast_nullable_to_non_nullable
               as int,
+      exceedQuantity: null == exceedQuantity
+          ? _value.exceedQuantity
+          : exceedQuantity // ignore: cast_nullable_to_non_nullable
+              as bool,
       addedBonusList: null == addedBonusList
           ? _value._addedBonusList
           : addedBonusList // ignore: cast_nullable_to_non_nullable
@@ -351,6 +364,7 @@ class _$_PriceAggregate extends _PriceAggregate {
       required this.salesOrgConfig,
       required this.quantity,
       this.discountedMaterialCount = 0,
+      this.exceedQuantity = false,
       required final List<MaterialItemBonus> addedBonusList,
       required this.stockInfo,
       required this.tenderContract,
@@ -376,6 +390,9 @@ class _$_PriceAggregate extends _PriceAggregate {
   @override
   @JsonKey()
   final int discountedMaterialCount;
+  @override
+  @JsonKey()
+  final bool exceedQuantity;
   final List<MaterialItemBonus> _addedBonusList;
   @override
   List<MaterialItemBonus> get addedBonusList {
@@ -404,7 +421,7 @@ class _$_PriceAggregate extends _PriceAggregate {
 
   @override
   String toString() {
-    return 'PriceAggregate(price: $price, materialInfo: $materialInfo, bundle: $bundle, banner: $banner, salesOrgConfig: $salesOrgConfig, quantity: $quantity, discountedMaterialCount: $discountedMaterialCount, addedBonusList: $addedBonusList, stockInfo: $stockInfo, tenderContract: $tenderContract, comboDeal: $comboDeal, isSpecialOrderType: $isSpecialOrderType, stockInfoList: $stockInfoList)';
+    return 'PriceAggregate(price: $price, materialInfo: $materialInfo, bundle: $bundle, banner: $banner, salesOrgConfig: $salesOrgConfig, quantity: $quantity, discountedMaterialCount: $discountedMaterialCount, exceedQuantity: $exceedQuantity, addedBonusList: $addedBonusList, stockInfo: $stockInfo, tenderContract: $tenderContract, comboDeal: $comboDeal, isSpecialOrderType: $isSpecialOrderType, stockInfoList: $stockInfoList)';
   }
 
   @override
@@ -424,6 +441,8 @@ class _$_PriceAggregate extends _PriceAggregate {
             (identical(
                     other.discountedMaterialCount, discountedMaterialCount) ||
                 other.discountedMaterialCount == discountedMaterialCount) &&
+            (identical(other.exceedQuantity, exceedQuantity) ||
+                other.exceedQuantity == exceedQuantity) &&
             const DeepCollectionEquality()
                 .equals(other._addedBonusList, _addedBonusList) &&
             (identical(other.stockInfo, stockInfo) ||
@@ -448,6 +467,7 @@ class _$_PriceAggregate extends _PriceAggregate {
       salesOrgConfig,
       quantity,
       discountedMaterialCount,
+      exceedQuantity,
       const DeepCollectionEquality().hash(_addedBonusList),
       stockInfo,
       tenderContract,
@@ -471,6 +491,7 @@ abstract class _PriceAggregate extends PriceAggregate {
       required final SalesOrganisationConfigs salesOrgConfig,
       required final int quantity,
       final int discountedMaterialCount,
+      final bool exceedQuantity,
       required final List<MaterialItemBonus> addedBonusList,
       required final StockInfo stockInfo,
       required final TenderContract tenderContract,
@@ -493,6 +514,8 @@ abstract class _PriceAggregate extends PriceAggregate {
   int get quantity;
   @override
   int get discountedMaterialCount;
+  @override
+  bool get exceedQuantity;
   @override
   List<MaterialItemBonus> get addedBonusList;
   @override

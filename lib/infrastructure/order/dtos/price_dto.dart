@@ -81,8 +81,8 @@ class PriceDto with _$PriceDto {
         bonuses: bonuses.map((e) => e.toDomain()).toList(),
         bundles: bundles.map((e) => e.toDomain()).toList(),
         overrideRulePresent: overrideRulePresent,
-        zdp5MaxQuota: zdp5MaxQuota,
-        zdp5RemainingQuota: zdp5RemainingQuota,
+        zdp5MaxQuota: ZDP5Info(zdp5MaxQuota),
+        zdp5RemainingQuota: ZDP5Info(zdp5RemainingQuota),
         zmgDiscount: zmgDiscount,
         lastPrice: MaterialPrice(listPrice),
         finalPrice: MaterialPrice(finalIndividualPrice),
@@ -103,8 +103,8 @@ class PriceDto with _$PriceDto {
       bonuses: price.bonuses.map((e) => PriceBonusDto.fromDomain(e)).toList(),
       bundles: price.bundles.map((e) => PriceBundleDto.fromDomain(e)).toList(),
       overrideRulePresent: price.overrideRulePresent,
-      zdp5MaxQuota: price.zdp5MaxQuota,
-      zdp5RemainingQuota: price.zdp5RemainingQuota,
+      zdp5MaxQuota: price.zdp5MaxQuota.getOrCrash(),
+      zdp5RemainingQuota: price.zdp5RemainingQuota.getOrCrash(),
       zmgDiscount: price.zmgDiscount,
       listPrice: price.lastPrice.getOrDefaultValue(0),
       finalIndividualPrice: price.finalPrice.getOrDefaultValue(0),
@@ -132,6 +132,15 @@ class PriceDto with _$PriceDto {
     if (zdp8Override != 0) {
       data['ZDP8'] = zdp8Override;
     }
+
+    return data;
+  }
+
+   Map<String, dynamic> materialQueryWithExceedQty(bool exceedQty) {
+    final data = <String, dynamic>{
+      'MaterialNumber': materialNumber,
+      'exceedQty': exceedQty,
+    };
 
     return data;
   }

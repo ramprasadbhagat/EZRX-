@@ -31,6 +31,8 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:ezrxmobile/presentation/core/snackbar.dart';
+
 class CartMaterialItemTile extends StatefulWidget {
   final CartItem cartItem;
 
@@ -513,6 +515,19 @@ class _CartItemQuantityInput extends StatelessWidget {
     required this.controller,
   }) : super(key: key);
 
+  void _displayZdp5ExceedWarning(BuildContext context, int value) {
+    final isZdp5Eligible = cartItem.hasZdp5Validation(value);
+
+    if (!cartItem.exceedQuantity && isZdp5Eligible) {
+      showSnackBar(
+        context: context,
+        message:
+            'You have exceeded the remaining quantity limit: ${cartItem.price.zdp5RemainingQuota.getOrDefaultValue('')}'
+                .tr(),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final isSpecialOrderType =
@@ -553,6 +568,7 @@ class _CartItemQuantityInput extends StatelessWidget {
                     isSpecialOrderType: isSpecialOrderType,
                   ),
                 );
+            _displayZdp5ExceedWarning(context, int.parse(controller.text));
           },
           child: QuantityInput(
             isEnabled: !cartItem.materialInfo.hasValidTenderContract &&
@@ -589,6 +605,7 @@ class _CartItemQuantityInput extends StatelessWidget {
                       isSpecialOrderType: isSpecialOrderType,
                     ),
                   );
+              _displayZdp5ExceedWarning(context, int.parse(controller.text));
             },
             addPressed: (k) {
               context.read<CartBloc>().add(
@@ -611,6 +628,7 @@ class _CartItemQuantityInput extends StatelessWidget {
                       isSpecialOrderType: isSpecialOrderType,
                     ),
                   );
+               _displayZdp5ExceedWarning(context, int.parse(controller.text));
             },
             isLoading: state.isFetching,
           ),

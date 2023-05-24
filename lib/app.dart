@@ -103,6 +103,7 @@ import 'package:wakelock/wakelock.dart';
 
 import 'package:ezrxmobile/application/payments/paymant_summary/payment_summary_bloc.dart';
 
+
 final _crashlytics = locator<FirebaseCrashlyticsService>().crashlytics;
 
 Future<void> _firebaseMessagingBackgroundHandler(

@@ -8,9 +8,10 @@ import 'package:ezrxmobile/domain/order/entities/material_price_detail.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+
 abstract class IMaterialPriceDetailRepository {
-  Future<Either<ApiFailure, MaterialPriceDetail>>
-      getMaterialDetail({
+  Future<Either<ApiFailure, MaterialPriceDetail>> getMaterialDetail({
     required SalesOrganisation salesOrganisation,
     required SalesOrganisationConfigs salesOrganisationConfigs,
     required CustomerCodeInfo customerCodeInfo,
@@ -36,5 +37,13 @@ abstract class IMaterialPriceDetailRepository {
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToCodeInfo,
     required Map<MaterialQueryInfo, MaterialPriceDetail> materialQueryList,
+  });
+
+  Future<Either<ApiFailure, PriceAggregate>>
+      fetchMaterialPriceWithZdp5Discount({
+    required PriceAggregate cartItem,
+    required CustomerCodeInfo customerCodeInfo,
+    required SalesOrganisation salesOrganisation,
+    required ShipToInfo shipToInfo,
   });
 }

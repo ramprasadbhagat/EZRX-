@@ -210,6 +210,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           },
         );
       },
+      
       verifyMaterialDealBonus: (e) async {
         final cartItem = state.getMaterialCartItem(material: e.item);
         final material = cartItem.materials.first;

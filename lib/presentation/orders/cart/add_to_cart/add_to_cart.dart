@@ -71,8 +71,12 @@ class AddToCart extends StatelessWidget implements AutoRouteWrapper {
                 )
                 ..add(
                   AddToCartEvent.updateQuantity(
-                    1,
-                    cartState.zmgMaterialWithoutMaterial(addToCartItem),
+                    quantity: 1,
+                    cartZmgQtyExcludeCurrent:
+                        cartState.zmgMaterialWithoutMaterial(addToCartItem),
+                    customerCode: eligibilityState.customerCodeInfo,
+                    salesOrganisation: eligibilityState.salesOrganisation,
+                    shipToCode: eligibilityState.shipToInfo,
                   ),
                 );
             }
@@ -177,12 +181,20 @@ class AddToCart extends StatelessWidget implements AutoRouteWrapper {
                             cartItem: state.cartItem,
                             onQuantityChanged: (int value) {
                               final cartItem = state.cartItem;
+                              final eligibilityState =
+                                  context.read<EligibilityBloc>().state;
                               final discountedMaterialCount = cartBloc.state
                                   .zmgMaterialWithoutMaterial(cartItem);
                               addToCartBloc.add(
                                 AddToCartEvent.updateQuantity(
-                                  value,
-                                  discountedMaterialCount,
+                                  quantity: value,
+                                  cartZmgQtyExcludeCurrent:
+                                      discountedMaterialCount,
+                                  customerCode:
+                                      eligibilityState.customerCodeInfo,
+                                  salesOrganisation:
+                                      eligibilityState.salesOrganisation,
+                                  shipToCode: eligibilityState.shipToInfo,
                                 ),
                               );
                             },

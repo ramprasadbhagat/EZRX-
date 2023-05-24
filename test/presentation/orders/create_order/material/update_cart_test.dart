@@ -136,9 +136,12 @@ void main() {
     verify(
       () => addToCartB.add(
         AddToCartEvent.updateQuantity(
-          initialItems.quantity,
-          cartBloc.state.zmgMaterialWithoutMaterial(initialItems),
-        ),
+            quantity: initialItems.quantity,
+            cartZmgQtyExcludeCurrent:
+                cartBloc.state.zmgMaterialWithoutMaterial(initialItems),
+            customerCode: CustomerCodeInfo.empty(),
+            salesOrganisation: SalesOrganisation.empty(),
+            shipToCode: ShipToInfo.empty()),
       ),
     ).called(1);
   });

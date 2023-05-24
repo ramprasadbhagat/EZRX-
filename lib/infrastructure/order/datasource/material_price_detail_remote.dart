@@ -9,6 +9,10 @@ import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_price_detail_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_price_detail_dto.dart';
 
+import 'package:ezrxmobile/domain/order/entities/price.dart';
+
+import 'package:ezrxmobile/infrastructure/order/dtos/price_dto.dart';
+
 class MaterialPriceDetailRemoteDataSource {
   HttpService httpService;
   MaterialPriceDetailQueryMutation queryMutation;
@@ -103,6 +107,38 @@ class MaterialPriceDetailRemoteDataSource {
 
       return List.from(materialDetailData)
           .map((e) => MaterialDetailDto.fromJson(e).toDomain())
+          .toList();
+    });
+  }
+
+  Future<List<Price>> getMaterialPriceWithZdp5Discount({
+    required String salesOrgCode,
+    required String customerCode,
+    required Map<String, dynamic> materialQuery,
+    required String shipToCode,
+  }) async {
+    return await dataSourceExceptionHandler.handle(() async {
+      final queryData = queryMutation.getMaterialPrice();
+      final variables = {
+        'salesOrganisation': salesOrgCode,
+        'customer': customerCode,
+        'request': [materialQuery],
+        'shipToCode': shipToCode,
+      };
+
+      final res = await httpService.request(
+        method: 'POST',
+        url: '${config.urlConstants}pricing',
+        data: jsonEncode({
+          'query': queryData,
+          'variables': variables,
+        }),
+      );
+      _materialPriceExceptionChecker(res: res);
+      final priceData = res.data['data']['price'];
+
+      return List.from(priceData)
+          .map((e) => PriceDto.fromJson(e).toDomain())
           .toList();
     });
   }

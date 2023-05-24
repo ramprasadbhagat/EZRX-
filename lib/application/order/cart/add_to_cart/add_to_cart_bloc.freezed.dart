@@ -29,7 +29,12 @@ mixin _$AddToCartEvent {
             bool isSpecialOrderType)
         fetch,
     required TResult Function(PriceAggregate cartItem) setCartItem,
-    required TResult Function(int quantity, int cartZmgQtyExcludeCurrent)
+    required TResult Function(
+            int quantity,
+            int cartZmgQtyExcludeCurrent,
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToCode)
         updateQuantity,
   }) =>
       throw _privateConstructorUsedError;
@@ -46,7 +51,12 @@ mixin _$AddToCartEvent {
             bool isSpecialOrderType)?
         fetch,
     TResult? Function(PriceAggregate cartItem)? setCartItem,
-    TResult? Function(int quantity, int cartZmgQtyExcludeCurrent)?
+    TResult? Function(
+            int quantity,
+            int cartZmgQtyExcludeCurrent,
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToCode)?
         updateQuantity,
   }) =>
       throw _privateConstructorUsedError;
@@ -63,7 +73,12 @@ mixin _$AddToCartEvent {
             bool isSpecialOrderType)?
         fetch,
     TResult Function(PriceAggregate cartItem)? setCartItem,
-    TResult Function(int quantity, int cartZmgQtyExcludeCurrent)?
+    TResult Function(
+            int quantity,
+            int cartZmgQtyExcludeCurrent,
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToCode)?
         updateQuantity,
     required TResult orElse(),
   }) =>
@@ -162,7 +177,12 @@ class _$_Initialized implements _Initialized {
             bool isSpecialOrderType)
         fetch,
     required TResult Function(PriceAggregate cartItem) setCartItem,
-    required TResult Function(int quantity, int cartZmgQtyExcludeCurrent)
+    required TResult Function(
+            int quantity,
+            int cartZmgQtyExcludeCurrent,
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToCode)
         updateQuantity,
   }) {
     return initialized();
@@ -182,7 +202,12 @@ class _$_Initialized implements _Initialized {
             bool isSpecialOrderType)?
         fetch,
     TResult? Function(PriceAggregate cartItem)? setCartItem,
-    TResult? Function(int quantity, int cartZmgQtyExcludeCurrent)?
+    TResult? Function(
+            int quantity,
+            int cartZmgQtyExcludeCurrent,
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToCode)?
         updateQuantity,
   }) {
     return initialized?.call();
@@ -202,7 +227,12 @@ class _$_Initialized implements _Initialized {
             bool isSpecialOrderType)?
         fetch,
     TResult Function(PriceAggregate cartItem)? setCartItem,
-    TResult Function(int quantity, int cartZmgQtyExcludeCurrent)?
+    TResult Function(
+            int quantity,
+            int cartZmgQtyExcludeCurrent,
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToCode)?
         updateQuantity,
     required TResult orElse(),
   }) {
@@ -444,7 +474,12 @@ class _$_Fetch implements _Fetch {
             bool isSpecialOrderType)
         fetch,
     required TResult Function(PriceAggregate cartItem) setCartItem,
-    required TResult Function(int quantity, int cartZmgQtyExcludeCurrent)
+    required TResult Function(
+            int quantity,
+            int cartZmgQtyExcludeCurrent,
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToCode)
         updateQuantity,
   }) {
     return fetch(
@@ -471,7 +506,12 @@ class _$_Fetch implements _Fetch {
             bool isSpecialOrderType)?
         fetch,
     TResult? Function(PriceAggregate cartItem)? setCartItem,
-    TResult? Function(int quantity, int cartZmgQtyExcludeCurrent)?
+    TResult? Function(
+            int quantity,
+            int cartZmgQtyExcludeCurrent,
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToCode)?
         updateQuantity,
   }) {
     return fetch?.call(
@@ -498,7 +538,12 @@ class _$_Fetch implements _Fetch {
             bool isSpecialOrderType)?
         fetch,
     TResult Function(PriceAggregate cartItem)? setCartItem,
-    TResult Function(int quantity, int cartZmgQtyExcludeCurrent)?
+    TResult Function(
+            int quantity,
+            int cartZmgQtyExcludeCurrent,
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToCode)?
         updateQuantity,
     required TResult orElse(),
   }) {
@@ -661,7 +706,12 @@ class _$_SetCartItem implements _SetCartItem {
             bool isSpecialOrderType)
         fetch,
     required TResult Function(PriceAggregate cartItem) setCartItem,
-    required TResult Function(int quantity, int cartZmgQtyExcludeCurrent)
+    required TResult Function(
+            int quantity,
+            int cartZmgQtyExcludeCurrent,
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToCode)
         updateQuantity,
   }) {
     return setCartItem(cartItem);
@@ -681,7 +731,12 @@ class _$_SetCartItem implements _SetCartItem {
             bool isSpecialOrderType)?
         fetch,
     TResult? Function(PriceAggregate cartItem)? setCartItem,
-    TResult? Function(int quantity, int cartZmgQtyExcludeCurrent)?
+    TResult? Function(
+            int quantity,
+            int cartZmgQtyExcludeCurrent,
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToCode)?
         updateQuantity,
   }) {
     return setCartItem?.call(cartItem);
@@ -701,7 +756,12 @@ class _$_SetCartItem implements _SetCartItem {
             bool isSpecialOrderType)?
         fetch,
     TResult Function(PriceAggregate cartItem)? setCartItem,
-    TResult Function(int quantity, int cartZmgQtyExcludeCurrent)?
+    TResult Function(
+            int quantity,
+            int cartZmgQtyExcludeCurrent,
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToCode)?
         updateQuantity,
     required TResult orElse(),
   }) {
@@ -764,7 +824,16 @@ abstract class _$$_UpdateQuantityCopyWith<$Res> {
           _$_UpdateQuantity value, $Res Function(_$_UpdateQuantity) then) =
       __$$_UpdateQuantityCopyWithImpl<$Res>;
   @useResult
-  $Res call({int quantity, int cartZmgQtyExcludeCurrent});
+  $Res call(
+      {int quantity,
+      int cartZmgQtyExcludeCurrent,
+      CustomerCodeInfo customerCode,
+      SalesOrganisation salesOrganisation,
+      ShipToInfo shipToCode});
+
+  $CustomerCodeInfoCopyWith<$Res> get customerCode;
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
+  $ShipToInfoCopyWith<$Res> get shipToCode;
 }
 
 /// @nodoc
@@ -780,33 +849,83 @@ class __$$_UpdateQuantityCopyWithImpl<$Res>
   $Res call({
     Object? quantity = null,
     Object? cartZmgQtyExcludeCurrent = null,
+    Object? customerCode = null,
+    Object? salesOrganisation = null,
+    Object? shipToCode = null,
   }) {
     return _then(_$_UpdateQuantity(
-      null == quantity
+      quantity: null == quantity
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
               as int,
-      null == cartZmgQtyExcludeCurrent
+      cartZmgQtyExcludeCurrent: null == cartZmgQtyExcludeCurrent
           ? _value.cartZmgQtyExcludeCurrent
           : cartZmgQtyExcludeCurrent // ignore: cast_nullable_to_non_nullable
               as int,
+      customerCode: null == customerCode
+          ? _value.customerCode
+          : customerCode // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
+      salesOrganisation: null == salesOrganisation
+          ? _value.salesOrganisation
+          : salesOrganisation // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
+      shipToCode: null == shipToCode
+          ? _value.shipToCode
+          : shipToCode // ignore: cast_nullable_to_non_nullable
+              as ShipToInfo,
     ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CustomerCodeInfoCopyWith<$Res> get customerCode {
+    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCode, (value) {
+      return _then(_value.copyWith(customerCode: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
+    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
+      return _then(_value.copyWith(salesOrganisation: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ShipToInfoCopyWith<$Res> get shipToCode {
+    return $ShipToInfoCopyWith<$Res>(_value.shipToCode, (value) {
+      return _then(_value.copyWith(shipToCode: value));
+    });
   }
 }
 
 /// @nodoc
 
 class _$_UpdateQuantity implements _UpdateQuantity {
-  const _$_UpdateQuantity(this.quantity, this.cartZmgQtyExcludeCurrent);
+  const _$_UpdateQuantity(
+      {required this.quantity,
+      required this.cartZmgQtyExcludeCurrent,
+      required this.customerCode,
+      required this.salesOrganisation,
+      required this.shipToCode});
 
   @override
   final int quantity;
   @override
   final int cartZmgQtyExcludeCurrent;
+  @override
+  final CustomerCodeInfo customerCode;
+  @override
+  final SalesOrganisation salesOrganisation;
+  @override
+  final ShipToInfo shipToCode;
 
   @override
   String toString() {
-    return 'AddToCartEvent.updateQuantity(quantity: $quantity, cartZmgQtyExcludeCurrent: $cartZmgQtyExcludeCurrent)';
+    return 'AddToCartEvent.updateQuantity(quantity: $quantity, cartZmgQtyExcludeCurrent: $cartZmgQtyExcludeCurrent, customerCode: $customerCode, salesOrganisation: $salesOrganisation, shipToCode: $shipToCode)';
   }
 
   @override
@@ -818,12 +937,18 @@ class _$_UpdateQuantity implements _UpdateQuantity {
                 other.quantity == quantity) &&
             (identical(
                     other.cartZmgQtyExcludeCurrent, cartZmgQtyExcludeCurrent) ||
-                other.cartZmgQtyExcludeCurrent == cartZmgQtyExcludeCurrent));
+                other.cartZmgQtyExcludeCurrent == cartZmgQtyExcludeCurrent) &&
+            (identical(other.customerCode, customerCode) ||
+                other.customerCode == customerCode) &&
+            (identical(other.salesOrganisation, salesOrganisation) ||
+                other.salesOrganisation == salesOrganisation) &&
+            (identical(other.shipToCode, shipToCode) ||
+                other.shipToCode == shipToCode));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, quantity, cartZmgQtyExcludeCurrent);
+  int get hashCode => Object.hash(runtimeType, quantity,
+      cartZmgQtyExcludeCurrent, customerCode, salesOrganisation, shipToCode);
 
   @JsonKey(ignore: true)
   @override
@@ -845,10 +970,16 @@ class _$_UpdateQuantity implements _UpdateQuantity {
             bool isSpecialOrderType)
         fetch,
     required TResult Function(PriceAggregate cartItem) setCartItem,
-    required TResult Function(int quantity, int cartZmgQtyExcludeCurrent)
+    required TResult Function(
+            int quantity,
+            int cartZmgQtyExcludeCurrent,
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToCode)
         updateQuantity,
   }) {
-    return updateQuantity(quantity, cartZmgQtyExcludeCurrent);
+    return updateQuantity(quantity, cartZmgQtyExcludeCurrent, customerCode,
+        salesOrganisation, shipToCode);
   }
 
   @override
@@ -865,10 +996,16 @@ class _$_UpdateQuantity implements _UpdateQuantity {
             bool isSpecialOrderType)?
         fetch,
     TResult? Function(PriceAggregate cartItem)? setCartItem,
-    TResult? Function(int quantity, int cartZmgQtyExcludeCurrent)?
+    TResult? Function(
+            int quantity,
+            int cartZmgQtyExcludeCurrent,
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToCode)?
         updateQuantity,
   }) {
-    return updateQuantity?.call(quantity, cartZmgQtyExcludeCurrent);
+    return updateQuantity?.call(quantity, cartZmgQtyExcludeCurrent,
+        customerCode, salesOrganisation, shipToCode);
   }
 
   @override
@@ -885,12 +1022,18 @@ class _$_UpdateQuantity implements _UpdateQuantity {
             bool isSpecialOrderType)?
         fetch,
     TResult Function(PriceAggregate cartItem)? setCartItem,
-    TResult Function(int quantity, int cartZmgQtyExcludeCurrent)?
+    TResult Function(
+            int quantity,
+            int cartZmgQtyExcludeCurrent,
+            CustomerCodeInfo customerCode,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToCode)?
         updateQuantity,
     required TResult orElse(),
   }) {
     if (updateQuantity != null) {
-      return updateQuantity(quantity, cartZmgQtyExcludeCurrent);
+      return updateQuantity(quantity, cartZmgQtyExcludeCurrent, customerCode,
+          salesOrganisation, shipToCode);
     }
     return orElse();
   }
@@ -935,11 +1078,17 @@ class _$_UpdateQuantity implements _UpdateQuantity {
 
 abstract class _UpdateQuantity implements AddToCartEvent {
   const factory _UpdateQuantity(
-          final int quantity, final int cartZmgQtyExcludeCurrent) =
-      _$_UpdateQuantity;
+      {required final int quantity,
+      required final int cartZmgQtyExcludeCurrent,
+      required final CustomerCodeInfo customerCode,
+      required final SalesOrganisation salesOrganisation,
+      required final ShipToInfo shipToCode}) = _$_UpdateQuantity;
 
   int get quantity;
   int get cartZmgQtyExcludeCurrent;
+  CustomerCodeInfo get customerCode;
+  SalesOrganisation get salesOrganisation;
+  ShipToInfo get shipToCode;
   @JsonKey(ignore: true)
   _$$_UpdateQuantityCopyWith<_$_UpdateQuantity> get copyWith =>
       throw _privateConstructorUsedError;

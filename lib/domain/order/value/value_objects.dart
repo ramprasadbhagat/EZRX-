@@ -812,3 +812,27 @@ class BatchNumber extends ValueObject<String> {
 
   const BatchNumber._(this.value);
 }
+
+class ZDP5Info extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory ZDP5Info(String input) {
+    return ZDP5Info._(Right(input));
+  }
+
+  bool hasZdp5Discount(int input) =>
+      validateZDP5Quantity(input, value.getOrElse(() => ''));
+
+  int get intValue => getParsedValue(value.getOrElse(() => ''));
+
+  bool validateIfQuantityExceeded(int input) =>
+      validateIfRemainingQtyExceeded(input, value.getOrElse(() => ''));
+
+  bool get isValidValue => isValueNotEmpty(value.getOrElse(() => ''));
+
+  bool hasZdp5Validation(String zdp5MaxQuota) =>
+      zdp5MaxQuota.isNotEmpty && value.getOrElse(() => '').isNotEmpty;
+
+  const ZDP5Info._(this.value);
+}

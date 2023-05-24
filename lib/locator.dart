@@ -310,6 +310,7 @@ import 'package:ezrxmobile/infrastructure/payments/datasource/payment_summary_qu
 import 'package:ezrxmobile/infrastructure/account/repository/bank_beneficiary_repository.dart';
 
 
+
 GetIt locator = GetIt.instance;
 
 void setupLocator() {
@@ -1564,6 +1565,7 @@ void setupLocator() {
       config: locator<Config>(),
       stockInfoLocalDataSource: locator<StockInfoLocalDataSource>(),
       stockInfoRemoteDataSource: locator<StockInfoRemoteDataSource>(),
+      discountOverrideRemoteDataSource: locator<DiscountOverrideRemoteDataSource>(),
     ),
   );
 

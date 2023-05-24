@@ -13,6 +13,10 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_price_detail_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_price_detail_remote.dart';
 
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+
+import 'package:ezrxmobile/infrastructure/order/dtos/price_dto.dart';
+
 class MaterialPriceDetailRepository implements IMaterialPriceDetailRepository {
   final Config config;
   final MaterialPriceDetailLocalDataSource localDataSource;
@@ -107,7 +111,6 @@ class MaterialPriceDetailRepository implements IMaterialPriceDetailRepository {
 
       materialDetails.addAll(
         {
-
           for (final materialDetail in materialDetailData)
             materialQueryList.firstWhere(
               (element) => element.value == materialDetail.price.materialNumber,
@@ -142,8 +145,8 @@ class MaterialPriceDetailRepository implements IMaterialPriceDetailRepository {
     final materialDetailWithZDP5Data = materialDetailData
         .where(
           (element) =>
-              element.price.zdp5MaxQuota.isNotEmpty ||
-              element.price.zdp5RemainingQuota.isNotEmpty,
+              element.price.zdp5MaxQuota.getOrCrash().isNotEmpty ||
+              element.price.zdp5RemainingQuota.getOrCrash().isNotEmpty,
         )
         .toList();
     if (materialDetailWithZDP5Data.isNotEmpty) {
@@ -213,10 +216,10 @@ class MaterialPriceDetailRepository implements IMaterialPriceDetailRepository {
         (materialQueryInfo, materialDetail) => MapEntry(
           materialQueryInfo.value.getOrCrash(),
           materialQueryInfo.qty.conformZDP5Rule(
-                materialDetail.price.zdp5RemainingQuota,
+                materialDetail.price.zdp5RemainingQuota.getOrCrash(),
               ) ||
               materialQueryInfo.qty.conformZDP5Rule(
-                materialDetail.price.zdp5MaxQuota,
+                materialDetail.price.zdp5MaxQuota.getOrCrash(),
               ),
         ),
       );
@@ -233,6 +236,48 @@ class MaterialPriceDetailRepository implements IMaterialPriceDetailRepository {
       return Right(
         materialDetailData,
       );
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, PriceAggregate>>
+      fetchMaterialPriceWithZdp5Discount({
+    required PriceAggregate cartItem,
+    required CustomerCodeInfo customerCodeInfo,
+    required SalesOrganisation salesOrganisation,
+    required ShipToInfo shipToInfo,
+  }) async {
+    var updatedCartItem = cartItem;
+    final salesOrgCode = salesOrganisation.salesOrg.getOrCrash();
+    final customerCode = customerCodeInfo.customerCodeSoldTo;
+    final shipToCode = shipToInfo.shipToCustomerCode;
+    final exceedQuantity = cartItem.hasZdp5Validation(cartItem.quantity);
+
+    try {
+      if (cartItem.isPriceUpdateAvailable) {
+        final newPrice =
+            await remoteDataSource.getMaterialPriceWithZdp5Discount(
+          customerCode: customerCode,
+          salesOrgCode: salesOrgCode,
+          shipToCode: shipToCode,
+          materialQuery: PriceDto.fromDomain(cartItem.price)
+              .materialQueryWithExceedQty(exceedQuantity),
+        );
+
+        updatedCartItem = updatedCartItem.copyWithPrice(
+          exceedQty: updatedCartItem.quantity >
+              updatedCartItem.price.zdp5RemainingQuota.intValue,
+          newPrice: newPrice.first.zdp5RemainingQuota.isValidValue
+              ? newPrice.first
+              : newPrice.first.copyWith(
+                  zdp5RemainingQuota: updatedCartItem.price.zdp5RemainingQuota,
+                ),
+        );
+      }
+
+      return Right(updatedCartItem);
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
     }

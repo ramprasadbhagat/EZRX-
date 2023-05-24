@@ -24,6 +24,7 @@ import '../../../../utils/material_frame_wrapper.dart';
 class SalesOrgMockBloc extends MockBloc<SalesOrgEvent, SalesOrgState>
     implements SalesOrgBloc {}
 
+
 class TenderContractBlocMock
     extends MockBloc<TenderContractEvent, TenderContractState>
     implements TenderContractBloc {}

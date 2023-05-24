@@ -21,6 +21,7 @@ void main() {
     setUp(() async {
       data = PriceAggregateDto(
         bannerDto: BannerDto.empty,
+        exceedQty: false,
         bonusItem: [
           const MaterialItemBonusDto(
               materialNumber: '',

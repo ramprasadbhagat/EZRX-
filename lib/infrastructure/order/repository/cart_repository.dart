@@ -25,11 +25,16 @@ import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_local.dart
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/cart_item_dto.dart';
 
+import 'package:ezrxmobile/infrastructure/order/dtos/price_dto.dart';
+
+import 'package:ezrxmobile/infrastructure/order/datasource/discount_override_remote.dart';
+
 class CartRepository implements ICartRepository {
   final CartStorage cartStorage;
   final Config config;
   final StockInfoLocalDataSource stockInfoLocalDataSource;
   final StockInfoRemoteDataSource stockInfoRemoteDataSource;
+  final DiscountOverrideRemoteDataSource discountOverrideRemoteDataSource;
 
   final MixpanelService mixpanelService;
 
@@ -38,6 +43,7 @@ class CartRepository implements ICartRepository {
     required this.config,
     required this.stockInfoLocalDataSource,
     required this.stockInfoRemoteDataSource,
+    required this.discountOverrideRemoteDataSource,
     required this.mixpanelService,
   });
 
@@ -82,18 +88,14 @@ class CartRepository implements ICartRepository {
         salesOrganisation: salesOrganisation,
         shipToInfo: shipToInfo,
       );
-
       final cartItemWithStock = cartItem.copyWithStockInfo(
         stockInfoMap: stockInfo.getOrElse(() => {}),
         salesOrganisationConfigs: salesOrganisationConfigs,
       );
-
       final isOutOfStockItem = cartItemWithStock
           .copyWithInStockOnly(
             allowOutOfStock: !doNotAllowOutOfStockMaterials,
-          )
-          .materials
-          .isEmpty;
+          ).materials.isEmpty;
       if (isOutOfStockItem) {
         mixpanelService.trackEvent(
           eventName: MixpanelEvents.addToCartFailed,
@@ -105,7 +107,6 @@ class CartRepository implements ICartRepository {
 
         return const Left(ApiFailure.productOutOfStock());
       }
-
       final inCartItem = cartStorage.get(id: cartItemWithStock.id)?.toDomain;
       final savedCartItem = (inCartItem != null && !override)
           ? inCartItem.copyWith(
@@ -115,20 +116,22 @@ class CartRepository implements ICartRepository {
                           .firstWhereOrNull((item) =>
                               item.getMaterialNumber ==
                               material.getMaterialNumber)
-                          ?.quantity ??
-                      0;
+                          ?.quantity ?? 0;
 
                   return material.copyWithIncreasedQty(qty: qty);
                 },
               ).toList(),
-            )
-          : cartItemWithStock;
+            ) : cartItemWithStock;  
 
-      await cartStorage.put(
-        id: savedCartItem.id,
-        item: CartItemDto.fromDomain(savedCartItem),
+      final updatedCartItem = await _verifyZdp5Discount(cartItem: savedCartItem,
+        customerCodeInfo: customerCodeInfo,
+        salesOrganisation: salesOrganisation,
+        shipToInfo: shipToInfo,
       );
-
+      await cartStorage.put(
+        id: updatedCartItem.id,
+        item: CartItemDto.fromDomain(updatedCartItem),
+      );
       final failureOrSuccess = fetchCart();
       _trackAddToCartSuccessEvent(cartItem);
 
@@ -136,14 +139,45 @@ class CartRepository implements ICartRepository {
     } catch (e) {
       mixpanelService.trackEvent(
         eventName: MixpanelEvents.addToCartFailed,
-        properties: {
-          MixpanelProps.errorMessage:
+        properties: {MixpanelProps.errorMessage:
               FailureHandler.handleFailure(e).failureMessage,
         },
       );
 
       return Left(FailureHandler.handleFailure(e));
     }
+  }
+
+  Future<CartItem> _verifyZdp5Discount({
+    required CartItem cartItem,
+    required CustomerCodeInfo customerCodeInfo,
+    required SalesOrganisation salesOrganisation,
+    required ShipToInfo shipToInfo,
+  }) async {
+    var updatedCartItem = cartItem;
+    
+    if (cartItem.materials.first.isPriceUpdateAvailable) {
+      final newPrice = await getMaterialPriceWithZdp5Discount(
+        customerCodeInfo: customerCodeInfo,
+        item: cartItem,
+        salesOrganisation: salesOrganisation,
+        shipToInfo: shipToInfo,
+      );
+      final overRidenPrice =
+          newPrice.fold((failure) => Price.empty(), (newPrice) => newPrice);
+
+      updatedCartItem = cartItem.copyWithPrice(
+        exceedQty: cartItem.totalQty > cartItem.materials.first.price.zdp5RemainingQuota.intValue,
+        newPrice: overRidenPrice.zdp5RemainingQuota.isValidValue
+            ? overRidenPrice
+            : overRidenPrice.copyWith(
+                zdp5RemainingQuota:
+                    updatedCartItem.materials.first.price.zdp5RemainingQuota,
+              ),
+      );
+    }
+
+    return updatedCartItem;
   }
 
   @override
@@ -880,6 +914,35 @@ class CartRepository implements ICartRepository {
       );
 
       return fetchCart();
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  Future<Either<ApiFailure, Price>> getMaterialPriceWithZdp5Discount({
+    required SalesOrganisation salesOrganisation,
+    required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToInfo,
+    required CartItem item,
+  }) async {
+    try {
+      final salesOrgCode = salesOrganisation.salesOrg.getOrCrash();
+      final customerCode = customerCodeInfo.customerCodeSoldTo;
+      final shipToCode = shipToInfo.shipToCustomerCode;
+      final price = item.materials.first.price;
+      final exceedQuantity =
+          item.materials.first.hasZdp5Validation(item.materials.first.quantity);
+
+      final priceData =
+          await discountOverrideRemoteDataSource.getMaterialOverridePriceList(
+        salesOrgCode: salesOrgCode,
+        customerCode: customerCode,
+        shipToCode: shipToCode,
+        materialQuery: PriceDto.fromDomain(price)
+            .materialQueryWithExceedQty(exceedQuantity),
+      );
+
+      return Right(priceData.first);
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
     }

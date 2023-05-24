@@ -22,8 +22,8 @@ mixin _$Price {
   List<PriceBonus> get bonuses => throw _privateConstructorUsedError;
   List<PriceBundle> get bundles => throw _privateConstructorUsedError;
   bool get overrideRulePresent => throw _privateConstructorUsedError;
-  String get zdp5MaxQuota => throw _privateConstructorUsedError;
-  String get zdp5RemainingQuota => throw _privateConstructorUsedError;
+  ZDP5Info get zdp5MaxQuota => throw _privateConstructorUsedError;
+  ZDP5Info get zdp5RemainingQuota => throw _privateConstructorUsedError;
   bool get zmgDiscount => throw _privateConstructorUsedError;
   MaterialPrice get lastPrice => throw _privateConstructorUsedError;
   MaterialPrice get finalPrice => throw _privateConstructorUsedError;
@@ -53,8 +53,8 @@ abstract class $PriceCopyWith<$Res> {
       List<PriceBonus> bonuses,
       List<PriceBundle> bundles,
       bool overrideRulePresent,
-      String zdp5MaxQuota,
-      String zdp5RemainingQuota,
+      ZDP5Info zdp5MaxQuota,
+      ZDP5Info zdp5RemainingQuota,
       bool zmgDiscount,
       MaterialPrice lastPrice,
       MaterialPrice finalPrice,
@@ -133,11 +133,11 @@ class _$PriceCopyWithImpl<$Res, $Val extends Price>
       zdp5MaxQuota: null == zdp5MaxQuota
           ? _value.zdp5MaxQuota
           : zdp5MaxQuota // ignore: cast_nullable_to_non_nullable
-              as String,
+              as ZDP5Info,
       zdp5RemainingQuota: null == zdp5RemainingQuota
           ? _value.zdp5RemainingQuota
           : zdp5RemainingQuota // ignore: cast_nullable_to_non_nullable
-              as String,
+              as ZDP5Info,
       zmgDiscount: null == zmgDiscount
           ? _value.zmgDiscount
           : zmgDiscount // ignore: cast_nullable_to_non_nullable
@@ -211,8 +211,8 @@ abstract class _$$_PriceCopyWith<$Res> implements $PriceCopyWith<$Res> {
       List<PriceBonus> bonuses,
       List<PriceBundle> bundles,
       bool overrideRulePresent,
-      String zdp5MaxQuota,
-      String zdp5RemainingQuota,
+      ZDP5Info zdp5MaxQuota,
+      ZDP5Info zdp5RemainingQuota,
       bool zmgDiscount,
       MaterialPrice lastPrice,
       MaterialPrice finalPrice,
@@ -288,11 +288,11 @@ class __$$_PriceCopyWithImpl<$Res> extends _$PriceCopyWithImpl<$Res, _$_Price>
       zdp5MaxQuota: null == zdp5MaxQuota
           ? _value.zdp5MaxQuota
           : zdp5MaxQuota // ignore: cast_nullable_to_non_nullable
-              as String,
+              as ZDP5Info,
       zdp5RemainingQuota: null == zdp5RemainingQuota
           ? _value.zdp5RemainingQuota
           : zdp5RemainingQuota // ignore: cast_nullable_to_non_nullable
-              as String,
+              as ZDP5Info,
       zmgDiscount: null == zmgDiscount
           ? _value.zmgDiscount
           : zmgDiscount // ignore: cast_nullable_to_non_nullable
@@ -412,9 +412,9 @@ class _$_Price extends _Price {
   @override
   final bool overrideRulePresent;
   @override
-  final String zdp5MaxQuota;
+  final ZDP5Info zdp5MaxQuota;
   @override
-  final String zdp5RemainingQuota;
+  final ZDP5Info zdp5RemainingQuota;
   @override
   final bool zmgDiscount;
   @override
@@ -530,8 +530,8 @@ abstract class _Price extends Price {
       required final List<PriceBonus> bonuses,
       required final List<PriceBundle> bundles,
       required final bool overrideRulePresent,
-      required final String zdp5MaxQuota,
-      required final String zdp5RemainingQuota,
+      required final ZDP5Info zdp5MaxQuota,
+      required final ZDP5Info zdp5RemainingQuota,
       required final bool zmgDiscount,
       required final MaterialPrice lastPrice,
       required final MaterialPrice finalPrice,
@@ -559,9 +559,9 @@ abstract class _Price extends Price {
   @override
   bool get overrideRulePresent;
   @override
-  String get zdp5MaxQuota;
+  ZDP5Info get zdp5MaxQuota;
   @override
-  String get zdp5RemainingQuota;
+  ZDP5Info get zdp5RemainingQuota;
   @override
   bool get zmgDiscount;
   @override

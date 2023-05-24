@@ -44,6 +44,8 @@ mixin _$PriceAggregateDto {
   List<StockInfoDto> get stockInfoDtoList => throw _privateConstructorUsedError;
   @HiveField(12, defaultValue: BannerDto.empty)
   BannerDto get bannerDto => throw _privateConstructorUsedError;
+  @HiveField(13, defaultValue: false)
+  bool get exceedQty => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PriceAggregateDtoCopyWith<PriceAggregateDto> get copyWith =>
@@ -82,7 +84,9 @@ abstract class $PriceAggregateDtoCopyWith<$Res> {
       @HiveField(11, defaultValue: [])
           List<StockInfoDto> stockInfoDtoList,
       @HiveField(12, defaultValue: BannerDto.empty)
-          BannerDto bannerDto});
+          BannerDto bannerDto,
+      @HiveField(13, defaultValue: false)
+          bool exceedQty});
 
   $MaterialDtoCopyWith<$Res> get materialDto;
   $PriceDtoCopyWith<$Res> get priceDto;
@@ -120,6 +124,7 @@ class _$PriceAggregateDtoCopyWithImpl<$Res, $Val extends PriceAggregateDto>
     Object? isSpecialOrderType = null,
     Object? stockInfoDtoList = null,
     Object? bannerDto = null,
+    Object? exceedQty = null,
   }) {
     return _then(_value.copyWith(
       materialDto: null == materialDto
@@ -174,6 +179,10 @@ class _$PriceAggregateDtoCopyWithImpl<$Res, $Val extends PriceAggregateDto>
           ? _value.bannerDto
           : bannerDto // ignore: cast_nullable_to_non_nullable
               as BannerDto,
+      exceedQty: null == exceedQty
+          ? _value.exceedQty
+          : exceedQty // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -277,7 +286,9 @@ abstract class _$$_PriceAggregateDtoCopyWith<$Res>
       @HiveField(11, defaultValue: [])
           List<StockInfoDto> stockInfoDtoList,
       @HiveField(12, defaultValue: BannerDto.empty)
-          BannerDto bannerDto});
+          BannerDto bannerDto,
+      @HiveField(13, defaultValue: false)
+          bool exceedQty});
 
   @override
   $MaterialDtoCopyWith<$Res> get materialDto;
@@ -321,6 +332,7 @@ class __$$_PriceAggregateDtoCopyWithImpl<$Res>
     Object? isSpecialOrderType = null,
     Object? stockInfoDtoList = null,
     Object? bannerDto = null,
+    Object? exceedQty = null,
   }) {
     return _then(_$_PriceAggregateDto(
       materialDto: null == materialDto
@@ -375,6 +387,10 @@ class __$$_PriceAggregateDtoCopyWithImpl<$Res>
           ? _value.bannerDto
           : bannerDto // ignore: cast_nullable_to_non_nullable
               as BannerDto,
+      exceedQty: null == exceedQty
+          ? _value.exceedQty
+          : exceedQty // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -409,7 +425,9 @@ class _$_PriceAggregateDto extends _PriceAggregateDto {
       @HiveField(11, defaultValue: [])
           required final List<StockInfoDto> stockInfoDtoList,
       @HiveField(12, defaultValue: BannerDto.empty)
-          required this.bannerDto})
+          required this.bannerDto,
+      @HiveField(13, defaultValue: false)
+          required this.exceedQty})
       : _bonusItem = bonusItem,
         _stockInfoDtoList = stockInfoDtoList,
         super._();
@@ -466,10 +484,13 @@ class _$_PriceAggregateDto extends _PriceAggregateDto {
   @override
   @HiveField(12, defaultValue: BannerDto.empty)
   final BannerDto bannerDto;
+  @override
+  @HiveField(13, defaultValue: false)
+  final bool exceedQty;
 
   @override
   String toString() {
-    return 'PriceAggregateDto(materialDto: $materialDto, quantity: $quantity, priceDto: $priceDto, salesOrganisationConfigsDto: $salesOrganisationConfigsDto, zmgMaterialCountOnCart: $zmgMaterialCountOnCart, bundleDto: $bundleDto, bonusItem: $bonusItem, stockInfoDto: $stockInfoDto, tenderContractDto: $tenderContractDto, comboDealDto: $comboDealDto, isSpecialOrderType: $isSpecialOrderType, stockInfoDtoList: $stockInfoDtoList, bannerDto: $bannerDto)';
+    return 'PriceAggregateDto(materialDto: $materialDto, quantity: $quantity, priceDto: $priceDto, salesOrganisationConfigsDto: $salesOrganisationConfigsDto, zmgMaterialCountOnCart: $zmgMaterialCountOnCart, bundleDto: $bundleDto, bonusItem: $bonusItem, stockInfoDto: $stockInfoDto, tenderContractDto: $tenderContractDto, comboDealDto: $comboDealDto, isSpecialOrderType: $isSpecialOrderType, stockInfoDtoList: $stockInfoDtoList, bannerDto: $bannerDto, exceedQty: $exceedQty)';
   }
 
   @override
@@ -504,7 +525,9 @@ class _$_PriceAggregateDto extends _PriceAggregateDto {
             const DeepCollectionEquality()
                 .equals(other._stockInfoDtoList, _stockInfoDtoList) &&
             (identical(other.bannerDto, bannerDto) ||
-                other.bannerDto == bannerDto));
+                other.bannerDto == bannerDto) &&
+            (identical(other.exceedQty, exceedQty) ||
+                other.exceedQty == exceedQty));
   }
 
   @override
@@ -522,7 +545,8 @@ class _$_PriceAggregateDto extends _PriceAggregateDto {
       comboDealDto,
       isSpecialOrderType,
       const DeepCollectionEquality().hash(_stockInfoDtoList),
-      bannerDto);
+      bannerDto,
+      exceedQty);
 
   @JsonKey(ignore: true)
   @override
@@ -560,7 +584,9 @@ abstract class _PriceAggregateDto extends PriceAggregateDto {
       @HiveField(11, defaultValue: [])
           required final List<StockInfoDto> stockInfoDtoList,
       @HiveField(12, defaultValue: BannerDto.empty)
-          required final BannerDto bannerDto}) = _$_PriceAggregateDto;
+          required final BannerDto bannerDto,
+      @HiveField(13, defaultValue: false)
+          required final bool exceedQty}) = _$_PriceAggregateDto;
   const _PriceAggregateDto._() : super._();
 
   @override
@@ -602,6 +628,9 @@ abstract class _PriceAggregateDto extends PriceAggregateDto {
   @override
   @HiveField(12, defaultValue: BannerDto.empty)
   BannerDto get bannerDto;
+  @override
+  @HiveField(13, defaultValue: false)
+  bool get exceedQty;
   @override
   @JsonKey(ignore: true)
   _$$_PriceAggregateDtoCopyWith<_$_PriceAggregateDto> get copyWith =>

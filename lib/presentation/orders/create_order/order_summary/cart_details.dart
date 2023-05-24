@@ -1,4 +1,3 @@
-
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
@@ -19,6 +18,8 @@ import 'package:ezrxmobile/presentation/orders/create_order/order_summary/discla
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+
+
 class CartDetails extends StatelessWidget {
   const CartDetails({Key? key}) : super(key: key);
 
@@ -27,7 +28,7 @@ class CartDetails extends StatelessWidget {
     return BlocConsumer<CartBloc, CartState>(
       key: const Key('_cartDetailsKey'),
       listenWhen: (previous, current) =>
-      previous.cartItems.isEmpty != current.cartItems.isEmpty,
+          previous.cartItems.isEmpty != current.cartItems.isEmpty,
       listener: (context, state) {
         if (state.cartItems.isEmpty &&
             !context.read<OrderSummaryBloc>().state.isSubmitSuccess) {
@@ -76,31 +77,31 @@ class _CartItemsSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<OrderDocumentTypeBloc, OrderDocumentTypeState>(
       buildWhen: (previous, current) =>
-      previous.selectedOrderType != current.selectedOrderType,
+          previous.selectedOrderType != current.selectedOrderType,
       builder: (context, state) {
         final isSpecialOrderType = state.isSpecialOrderType;
         final isMYMarketSalesRep = context.select<EligibilityBloc, bool>(
-              (bloc) => bloc.state.isMYMarketSalesRep,
+          (bloc) => bloc.state.isMYMarketSalesRep,
         );
         final isTH = context.read<SalesOrgBloc>().state.salesOrg.isTH;
 
         context.read<OrderEligibilityBloc>().add(
-          OrderEligibilityEvent.update(
-            cartItems: readyToSubmitCartItem,
-            orderType: context
-                .read<OrderDocumentTypeBloc>()
-                .state
-                .selectedOrderType
-                .documentType
-                .getOrDefaultValue(''),
-            grandTotal: cartState.grandTotal(
-              isMYMarketSalesRep: isMYMarketSalesRep,
-            ),
-            subTotal: cartState.subTotal(
-              isMYMarketSalesRep: isMYMarketSalesRep,
-            ),
-          ),
-        );
+              OrderEligibilityEvent.update(
+                cartItems: readyToSubmitCartItem,
+                orderType: context
+                    .read<OrderDocumentTypeBloc>()
+                    .state
+                    .selectedOrderType
+                    .documentType
+                    .getOrDefaultValue(''),
+                grandTotal: cartState.grandTotal(
+                  isMYMarketSalesRep: isMYMarketSalesRep,
+                ),
+                subTotal: cartState.subTotal(
+                  isMYMarketSalesRep: isMYMarketSalesRep,
+                ),
+              ),
+            );
 
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,

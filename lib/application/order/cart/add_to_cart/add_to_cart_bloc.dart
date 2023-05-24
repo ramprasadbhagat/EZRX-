@@ -70,8 +70,11 @@ class AddToCartBloc extends Bloc<AddToCartEvent, AddToCartState> {
             );
             add(
               _UpdateQuantity(
-                1,
-                e.cartZmgQtyExcludeCurrent,
+                quantity: 1,
+                cartZmgQtyExcludeCurrent: e.cartZmgQtyExcludeCurrent,
+                customerCode: e.customerCode,
+                salesOrganisation: e.salesOrganisation,
+                shipToCode: e.shipToCode,
               ),
             );
           },
@@ -86,6 +89,22 @@ class AddToCartBloc extends Bloc<AddToCartEvent, AddToCartState> {
         );
       },
       updateQuantity: (e) async {
+        if (state.cartItem.isZdp5DiscountEligible) {
+          final failureOrSuccess = await materialPriceDetailRepository
+              .fetchMaterialPriceWithZdp5Discount(
+            cartItem: state.cartItem.copyWith(quantity: e.quantity),
+            customerCodeInfo: e.customerCode,
+            salesOrganisation: e.salesOrganisation,
+            shipToInfo: e.shipToCode,
+          );
+
+          await failureOrSuccess.fold(
+            (failure) {},
+            (newItem) async {
+              emit(state.copyWith(cartItem: newItem));
+            },
+          );
+        }
         final newDiscountedMaterialCount = _calculateDiscountedMaterialCount(
           state: state,
           event: e,

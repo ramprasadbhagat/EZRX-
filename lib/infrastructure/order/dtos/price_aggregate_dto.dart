@@ -40,6 +40,7 @@ class PriceAggregateDto with _$PriceAggregateDto {
     @HiveField(11, defaultValue: [])
         required List<StockInfoDto> stockInfoDtoList,
     @HiveField(12, defaultValue: BannerDto.empty) required BannerDto bannerDto,
+    @HiveField(13, defaultValue: false) required bool exceedQty,
   }) = _PriceAggregateDto;
 
   factory PriceAggregateDto.fromDomain(PriceAggregate cart) {
@@ -64,6 +65,7 @@ class PriceAggregateDto with _$PriceAggregateDto {
       isSpecialOrderType: cart.isSpecialOrderType,
       stockInfoDtoList:
           cart.stockInfoList.map((e) => StockInfoDto.fromDomain(e)).toList(),
+      exceedQty: cart.exceedQuantity,
     );
   }
 
@@ -83,6 +85,7 @@ class PriceAggregateDto with _$PriceAggregateDto {
       tenderContract: tenderContractDto.toDomain(),
       comboDeal: comboDealDto.toDomain,
       isSpecialOrderType: isSpecialOrderType,
+      exceedQuantity: exceedQty,
       stockInfoList: stockInfoDtoList.map((e) => e.toDomain()).toList(),
     );
   }

@@ -13,6 +13,9 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:ezrxmobile/presentation/core/snackbar.dart';
+
+
 class CartItemDetailWidget extends StatefulWidget {
   const CartItemDetailWidget({
     Key? key,
@@ -48,6 +51,21 @@ class _CartItemDetailWidgetState extends State<CartItemDetailWidget> {
     if (_qty != _controller.text) {
       _controller.text = _qty;
       _controller.selection = TextSelection.collapsed(offset: _qty.length);
+    }
+  }
+
+  void _validateZdp5Quantity(BuildContext context, int value) {
+    if (!widget.cartItem.isZdp5DiscountEligible) return;
+
+    final isZdp5Eligible = widget.cartItem.hasZdp5Validation(value);
+
+    if (isZdp5Eligible) {
+      showSnackBar(
+        context: context,
+        message:
+            'You have exceeded the remaining quantity limit: ${widget.cartItem.price.zdp5RemainingQuota.getOrDefaultValue('')}'
+                .tr(),
+      );
     }
   }
 
@@ -106,12 +124,15 @@ class _CartItemDetailWidgetState extends State<CartItemDetailWidget> {
             controller: _controller,
             onFieldChange: (val) {
               widget.onQuantityChanged.call(val);
+              _validateZdp5Quantity(context, val);
             },
             minusPressed: (val) {
               widget.onQuantityChanged.call(val);
+              _validateZdp5Quantity(context, int.parse(_controller.text));
             },
             addPressed: (val) {
               widget.onQuantityChanged.call(val);
+              _validateZdp5Quantity(context, int.parse(_controller.text));
             },
           ),
         ),
@@ -126,11 +147,13 @@ class _CartItemDetailWidgetState extends State<CartItemDetailWidget> {
                 //The null check below will cover this scenario
                 if (value == null) return const SizedBox.shrink();
 
-                return state.selectedTenderContract == TenderContract.empty() ||
+                return state.selectedTenderContract ==
+                            TenderContract.empty() ||
                         state.selectedTenderContract ==
                             TenderContract.noContract() ||
                         value <=
-                            state.selectedTenderContract.remainingTenderQuantity
+                            state.selectedTenderContract
+                                .remainingTenderQuantity
                     ? const SizedBox.shrink()
                     : const Text(
                         'Please ensure the order quantity is less than \nor equal to Remaining Quantity of the contract',
@@ -146,23 +169,25 @@ class _CartItemDetailWidgetState extends State<CartItemDetailWidget> {
         ),
         BlocBuilder<TenderContractBloc, TenderContractState>(
           buildWhen: (previous, current) =>
-              previous.selectedTenderContract != current.selectedTenderContract,
+              previous.selectedTenderContract !=
+              current.selectedTenderContract,
           builder: (context, state) {
-            final cartItem = state.selectedTenderContract ==
-                        TenderContract.empty() ||
-                    state.selectedTenderContract == TenderContract.noContract()
-                ? widget.cartItem
-                : widget.cartItem.copyWith(
-                    tenderContract: state.selectedTenderContract,
-                    price: widget.cartItem.price.copyWith(
-                      finalPrice: MaterialPrice(
-                        state.selectedTenderContract.tenderPrice
-                            .tenderPriceByPricingUnit(
-                          state.selectedTenderContract.pricingUnit,
+            final cartItem =
+                state.selectedTenderContract == TenderContract.empty() ||
+                        state.selectedTenderContract ==
+                            TenderContract.noContract()
+                    ? widget.cartItem
+                    : widget.cartItem.copyWith(
+                        tenderContract: state.selectedTenderContract,
+                        price: widget.cartItem.price.copyWith(
+                          finalPrice: MaterialPrice(
+                            state.selectedTenderContract.tenderPrice
+                                .tenderPriceByPricingUnit(
+                              state.selectedTenderContract.pricingUnit,
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                  );
+                      );
 
             return Padding(
               padding: const EdgeInsets.all(20),
@@ -171,7 +196,8 @@ class _CartItemDetailWidgetState extends State<CartItemDetailWidget> {
                   enableVat
                       ? BalanceTextRow(
                           keyText: 'Unit price before $taxCode'.tr(),
-                          valueText: cartItem.display(PriceType.finalPrice).tr(),
+                          valueText:
+                              cartItem.display(PriceType.finalPrice).tr(),
                           keyFlex: 1,
                           valueFlex: 1,
                         )
@@ -185,15 +211,17 @@ class _CartItemDetailWidgetState extends State<CartItemDetailWidget> {
                   enableVat
                       ? BalanceTextRow(
                           keyText: 'Total price before $taxCode'.tr(),
-                          valueText:
-                              cartItem.display(PriceType.finalPriceTotal).tr(),
+                          valueText: cartItem
+                              .display(PriceType.finalPriceTotal)
+                              .tr(),
                           keyFlex: 1,
                           valueFlex: 1,
                         )
                       : const SizedBox.shrink(),
                   BalanceTextRow(
                     keyText: 'Total Price'.tr(),
-                    valueText: cartItem.display(PriceType.unitPriceTotal).tr(),
+                    valueText:
+                        cartItem.display(PriceType.unitPriceTotal).tr(),
                     keyFlex: 1,
                     valueFlex: 1,
                   ),
