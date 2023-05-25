@@ -1,0 +1,39 @@
+{
+  "data": {
+    "salesDistrict": [
+      {
+        "salesOrg": "3050",
+        "salesDistricts": [
+          {
+            "id": 2,
+            "salesDistrict": "HNO",
+            "salesDistrictLabel": "Phyto Hà Nội",
+            "__typename": "salesDistrictsResponse"
+          },
+          {
+            "id": 1,
+            "salesDistrict": "HCM",
+            "salesDistrictLabel": "Phyto Hồ Chí Minh",
+            "__typename": "salesDistrictsResponse"
+          }
+        ],
+        "__typename": "salesDistrictResponse"
+      },
+      {
+        "salesOrg": "2601",
+        "salesDistricts": [
+          {
+            "id": 41,
+            "salesDistrict": "Singapore",
+            "salesDistrictLabel": "SG",
+            "__typename": "salesDistrictsResponse"
+          }
+        ],
+        "__typename": "salesDistrictResponse"
+      }
+    ]
+  },
+  "extensions": {
+    "trace-id": "d2cb7a2c37e940fe8fad175af7d4cade"
+  }
+}

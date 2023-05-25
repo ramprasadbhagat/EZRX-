@@ -59,6 +59,7 @@ import 'package:ezrxmobile/presentation/returns/request_return/return_details_su
 import 'package:ezrxmobile/presentation/returns/request_return/return_request_success.dart';
 
 import 'package:ezrxmobile/presentation/payments/payment_summary.dart';
+import 'package:ezrxmobile/presentation/account/payment_configuration/sales_district/sales_district.dart';
 
 //ignore: unused-code
 @MaterialAutoRouter(
@@ -251,6 +252,7 @@ import 'package:ezrxmobile/presentation/payments/payment_summary.dart';
       path: 'admin_po_attachment',
       page: AdminPoAttachmentPage,
     ),
+    AutoRoute(path: 'payments/sales_district',page: SalesDistrictPage),
   ],
 )
 class $AppRouter {}

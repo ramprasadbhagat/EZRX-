@@ -1,0 +1,15 @@
+query salesDistrict($request: salesDistrictRequest!) {
+  salesDistrict(request: $request) {
+    salesOrg
+    salesDistricts {
+      id
+      salesDistrict
+      salesDistrictLabel
+    }
+  }
+}
+
+variable:
+{
+  "request": {}
+}

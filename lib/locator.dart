@@ -308,6 +308,11 @@ import 'package:ezrxmobile/infrastructure/payments/datasource/payment_summary_re
 import 'package:ezrxmobile/infrastructure/payments/datasource/payment_summary_query.dart';
 
 import 'package:ezrxmobile/infrastructure/account/repository/bank_beneficiary_repository.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/sales_district_local.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/sales_district_remote.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/sales_district_query_mutation.dart';
+import 'package:ezrxmobile/infrastructure/account/repository/sales_district_repository.dart';
+import 'package:ezrxmobile/application/account/payment_configuration/sales_district/sales_district_bloc.dart';
 
 
 
@@ -2092,6 +2097,38 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => BankBeneficiaryBloc(
       bankBeneficiaryRepository: locator<BankBeneficiaryRepository>(),
+    ),
+  );
+
+  //============================================================
+  //  Sales District (Payment Configuration)
+  //
+  //============================================================
+
+  locator.registerLazySingleton(() => SalesDistrictLocalDataSource());
+
+  locator.registerLazySingleton(() => SalesDistrictQueryMutation());
+
+  locator.registerLazySingleton(
+    () => SalesDistrictRemoteDataSource(
+      httpService: locator<HttpService>(),
+      salesDistrictQueryMutation: locator<SalesDistrictQueryMutation>(),
+      config: locator<Config>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => SalesDistrictRepository(
+      config: locator<Config>(),
+      localDataSource: locator<SalesDistrictLocalDataSource>(),
+      remoteDataSource: locator<SalesDistrictRemoteDataSource>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => SalesDistrictBloc(
+      salesDistrictRepository: locator<SalesDistrictRepository>(),
     ),
   );
 

@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/application/account/payment_configuration/bank_beneficiary/bank_beneficiary_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/payment_methods_bloc.dart';
+import 'package:ezrxmobile/application/account/payment_configuration/sales_district/sales_district_bloc.dart';
 import 'package:ezrxmobile/application/account/settings/setting_bloc.dart';
 import 'package:ezrxmobile/application/admin_po_attachment/admin_po_attachment_bloc.dart';
 import 'package:ezrxmobile/application/admin_po_attachment/filter/admin_po_attachment_filter_bloc.dart';
@@ -169,15 +170,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                     const CartEvent.initialized(),
                   );
             }
-
-            if (state.user.role.type.isRootAdmin) {
-              context.read<PaymentMethodsBloc>().add(
-                    const PaymentMethodsEvent.fetch(),
-                  );
-              context.read<BankBeneficiaryBloc>().add(
-                const BankBeneficiaryEvent.fetch(),
-              );
-            }
+            _initializePaymentConfiguration(state);
           },
         ),
         BlocListener<CartBloc, CartState>(
@@ -590,6 +583,20 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
       );
     } else {
       salesOrgBloc.add(const SalesOrgEvent.initialized());
+    }
+  }
+
+  void _initializePaymentConfiguration(UserState userState) {
+    if (userState.user.role.type.isRootAdmin) {
+      context.read<PaymentMethodsBloc>().add(
+            const PaymentMethodsEvent.fetch(),
+          );
+      context.read<BankBeneficiaryBloc>().add(
+            const BankBeneficiaryEvent.fetch(),
+          );
+      context.read<SalesDistrictBloc>().add(
+            const SalesDistrictEvent.fetch(),
+          );
     }
   }
 }
