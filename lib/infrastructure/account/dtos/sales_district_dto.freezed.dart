@@ -22,8 +22,8 @@ SalesDistrictDto _$SalesDistrictDtoFromJson(Map<String, dynamic> json) {
 mixin _$SalesDistrictDto {
   @JsonKey(name: 'salesOrg', defaultValue: '')
   String get salesOrg => throw _privateConstructorUsedError;
-  @JsonKey(name: 'salesDistricts')
-  List<SalesDistrictDetailsDto> get salesDistrictDetails =>
+  @JsonKey(name: 'salesDistricts', defaultValue: <SalesDistrictInfoDto>[])
+  List<SalesDistrictInfoDto> get salesDistrictInfo =>
       throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -41,8 +41,8 @@ abstract class $SalesDistrictDtoCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'salesOrg', defaultValue: '')
           String salesOrg,
-      @JsonKey(name: 'salesDistricts')
-          List<SalesDistrictDetailsDto> salesDistrictDetails});
+      @JsonKey(name: 'salesDistricts', defaultValue: <SalesDistrictInfoDto>[])
+          List<SalesDistrictInfoDto> salesDistrictInfo});
 }
 
 /// @nodoc
@@ -59,17 +59,17 @@ class _$SalesDistrictDtoCopyWithImpl<$Res, $Val extends SalesDistrictDto>
   @override
   $Res call({
     Object? salesOrg = null,
-    Object? salesDistrictDetails = null,
+    Object? salesDistrictInfo = null,
   }) {
     return _then(_value.copyWith(
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
               as String,
-      salesDistrictDetails: null == salesDistrictDetails
-          ? _value.salesDistrictDetails
-          : salesDistrictDetails // ignore: cast_nullable_to_non_nullable
-              as List<SalesDistrictDetailsDto>,
+      salesDistrictInfo: null == salesDistrictInfo
+          ? _value.salesDistrictInfo
+          : salesDistrictInfo // ignore: cast_nullable_to_non_nullable
+              as List<SalesDistrictInfoDto>,
     ) as $Val);
   }
 }
@@ -85,8 +85,8 @@ abstract class _$$_SalesDistrictDtoCopyWith<$Res>
   $Res call(
       {@JsonKey(name: 'salesOrg', defaultValue: '')
           String salesOrg,
-      @JsonKey(name: 'salesDistricts')
-          List<SalesDistrictDetailsDto> salesDistrictDetails});
+      @JsonKey(name: 'salesDistricts', defaultValue: <SalesDistrictInfoDto>[])
+          List<SalesDistrictInfoDto> salesDistrictInfo});
 }
 
 /// @nodoc
@@ -101,17 +101,17 @@ class __$$_SalesDistrictDtoCopyWithImpl<$Res>
   @override
   $Res call({
     Object? salesOrg = null,
-    Object? salesDistrictDetails = null,
+    Object? salesDistrictInfo = null,
   }) {
     return _then(_$_SalesDistrictDto(
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
               as String,
-      salesDistrictDetails: null == salesDistrictDetails
-          ? _value._salesDistrictDetails
-          : salesDistrictDetails // ignore: cast_nullable_to_non_nullable
-              as List<SalesDistrictDetailsDto>,
+      salesDistrictInfo: null == salesDistrictInfo
+          ? _value._salesDistrictInfo
+          : salesDistrictInfo // ignore: cast_nullable_to_non_nullable
+              as List<SalesDistrictInfoDto>,
     ));
   }
 }
@@ -122,9 +122,9 @@ class _$_SalesDistrictDto extends _SalesDistrictDto {
   const _$_SalesDistrictDto(
       {@JsonKey(name: 'salesOrg', defaultValue: '')
           required this.salesOrg,
-      @JsonKey(name: 'salesDistricts')
-          required final List<SalesDistrictDetailsDto> salesDistrictDetails})
-      : _salesDistrictDetails = salesDistrictDetails,
+      @JsonKey(name: 'salesDistricts', defaultValue: <SalesDistrictInfoDto>[])
+          required final List<SalesDistrictInfoDto> salesDistrictInfo})
+      : _salesDistrictInfo = salesDistrictInfo,
         super._();
 
   factory _$_SalesDistrictDto.fromJson(Map<String, dynamic> json) =>
@@ -133,19 +133,19 @@ class _$_SalesDistrictDto extends _SalesDistrictDto {
   @override
   @JsonKey(name: 'salesOrg', defaultValue: '')
   final String salesOrg;
-  final List<SalesDistrictDetailsDto> _salesDistrictDetails;
+  final List<SalesDistrictInfoDto> _salesDistrictInfo;
   @override
-  @JsonKey(name: 'salesDistricts')
-  List<SalesDistrictDetailsDto> get salesDistrictDetails {
-    if (_salesDistrictDetails is EqualUnmodifiableListView)
-      return _salesDistrictDetails;
+  @JsonKey(name: 'salesDistricts', defaultValue: <SalesDistrictInfoDto>[])
+  List<SalesDistrictInfoDto> get salesDistrictInfo {
+    if (_salesDistrictInfo is EqualUnmodifiableListView)
+      return _salesDistrictInfo;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_salesDistrictDetails);
+    return EqualUnmodifiableListView(_salesDistrictInfo);
   }
 
   @override
   String toString() {
-    return 'SalesDistrictDto(salesOrg: $salesOrg, salesDistrictDetails: $salesDistrictDetails)';
+    return 'SalesDistrictDto(salesOrg: $salesOrg, salesDistrictInfo: $salesDistrictInfo)';
   }
 
   @override
@@ -156,13 +156,13 @@ class _$_SalesDistrictDto extends _SalesDistrictDto {
             (identical(other.salesOrg, salesOrg) ||
                 other.salesOrg == salesOrg) &&
             const DeepCollectionEquality()
-                .equals(other._salesDistrictDetails, _salesDistrictDetails));
+                .equals(other._salesDistrictInfo, _salesDistrictInfo));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, salesOrg,
-      const DeepCollectionEquality().hash(_salesDistrictDetails));
+      const DeepCollectionEquality().hash(_salesDistrictInfo));
 
   @JsonKey(ignore: true)
   @override
@@ -182,9 +182,9 @@ abstract class _SalesDistrictDto extends SalesDistrictDto {
   const factory _SalesDistrictDto(
       {@JsonKey(name: 'salesOrg', defaultValue: '')
           required final String salesOrg,
-      @JsonKey(name: 'salesDistricts')
-          required final List<SalesDistrictDetailsDto>
-              salesDistrictDetails}) = _$_SalesDistrictDto;
+      @JsonKey(name: 'salesDistricts', defaultValue: <SalesDistrictInfoDto>[])
+          required final List<SalesDistrictInfoDto>
+              salesDistrictInfo}) = _$_SalesDistrictDto;
   const _SalesDistrictDto._() : super._();
 
   factory _SalesDistrictDto.fromJson(Map<String, dynamic> json) =
@@ -194,8 +194,8 @@ abstract class _SalesDistrictDto extends SalesDistrictDto {
   @JsonKey(name: 'salesOrg', defaultValue: '')
   String get salesOrg;
   @override
-  @JsonKey(name: 'salesDistricts')
-  List<SalesDistrictDetailsDto> get salesDistrictDetails;
+  @JsonKey(name: 'salesDistricts', defaultValue: <SalesDistrictInfoDto>[])
+  List<SalesDistrictInfoDto> get salesDistrictInfo;
   @override
   @JsonKey(ignore: true)
   _$$_SalesDistrictDtoCopyWith<_$_SalesDistrictDto> get copyWith =>

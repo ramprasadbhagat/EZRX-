@@ -10,7 +10,7 @@ class BankBeneficiaryState with _$BankBeneficiaryState {
     required List<BankBeneficiary> manageBenificiaryList,
     required bool isFetching,
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
-  }) = _ManageBeneficiaryState;
+  }) = _BankBeneficiaryState;
 
   factory BankBeneficiaryState.initial() => BankBeneficiaryState(
         manageBenificiaryList: <BankBeneficiary>[],

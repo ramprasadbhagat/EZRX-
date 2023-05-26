@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/sales_district/sales_district_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_district.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_district_details.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_district_info.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
@@ -68,7 +68,7 @@ class _SalesDistrictList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: salesDistrict.salesDistrictDetails
+      children: salesDistrict.salesDistrictInfo
           .map((e) => _SalesDistrictListItem(
               salesDistrictDetails: e, salesOrg: salesDistrict.salesOrg,))
           .toList(),
@@ -77,7 +77,7 @@ class _SalesDistrictList extends StatelessWidget {
 }
 
 class _SalesDistrictListItem extends StatelessWidget {
-  final SalesDistrictDetails salesDistrictDetails;
+  final SalesDistrictInfo salesDistrictDetails;
   final SalesOrg salesOrg;
   const _SalesDistrictListItem({
     Key? key,

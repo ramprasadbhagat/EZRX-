@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/account/payment_configuration/bank_beneficiary/add_beneficiary/add_beneficiary_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/add_payment_method/add_payment_method_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/manage_payment_method/manage_payment_methods_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/bank_beneficiary/bank_beneficiary_bloc.dart';
@@ -43,9 +44,9 @@ import 'package:ezrxmobile/domain/order/repository/i_combo_deal_repository.dart'
 import 'package:ezrxmobile/infrastructure/account/datasource/admin_po_attachment_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/admin_po_attachment_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/admin_po_attachment_remote.dart';
-import 'package:ezrxmobile/infrastructure/account/datasource/bank_benificiary_local.dart';
-import 'package:ezrxmobile/infrastructure/account/datasource/bank_benificiary_remote.dart';
-import 'package:ezrxmobile/infrastructure/account/datasource/bank_benificiary_query_mutation.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/bank_beneficiary_local.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/bank_beneficiary_remote.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/bank_beneficiary_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/update_sales_org_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/update_sales_org_mutation.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/update_sales_org_remote.dart';
@@ -2096,6 +2097,12 @@ void setupLocator() {
   
   locator.registerLazySingleton(
     () => BankBeneficiaryBloc(
+      bankBeneficiaryRepository: locator<BankBeneficiaryRepository>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => AddBeneficiaryBloc(
       bankBeneficiaryRepository: locator<BankBeneficiaryRepository>(),
     ),
   );

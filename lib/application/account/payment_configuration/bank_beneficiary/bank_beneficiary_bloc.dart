@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:ezrxmobile/domain/account/entities/bank_benificiary.dart';
+import 'package:ezrxmobile/domain/account/entities/bank_beneficiary.dart';
 import 'package:ezrxmobile/domain/account/repository/i_bank_beneficiary_repository.dart';
 part 'bank_beneficiary_event.dart';
 part 'bank_beneficiary_state.dart';

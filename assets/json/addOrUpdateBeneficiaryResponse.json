@@ -1,0 +1,11 @@
+{
+    "data": {
+      "addBankBeneficiary": {
+        "info": "Data Inserted Successfully",
+        "__typename": "addBankBeneficiaryResponse"
+      }
+    },
+    "extensions": {
+      "trace-id": "3f669d4ea9184375b8e104e74fb3cc4f"
+    }
+  }

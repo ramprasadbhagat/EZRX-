@@ -1,7 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/payment_configuration/bank_beneficiary/add_beneficiary/add_beneficiary_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/bank_beneficiary/bank_beneficiary_bloc.dart';
-import 'package:ezrxmobile/domain/account/entities/bank_benificiary.dart';
+import 'package:ezrxmobile/domain/account/entities/bank_beneficiary.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
@@ -46,7 +47,11 @@ class BankBenificiaryPage extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
-        onPressed: () {},
+        onPressed: () {
+          context.read<AddBeneficiaryBloc>()
+            .add(const AddBeneficiaryEvent.initialized());
+          context.router.pushNamed('payments/add_beneficiary');
+        },
       ),
     );
   }
@@ -55,9 +60,7 @@ class BankBenificiaryPage extends StatelessWidget {
     context
         .read<BankBeneficiaryBloc>()
         .add(const BankBeneficiaryEvent.initialized());
-    context
-        .read<BankBeneficiaryBloc>()
-        .add(const BankBeneficiaryEvent.fetch());
+    context.read<BankBeneficiaryBloc>().add(const BankBeneficiaryEvent.fetch());
   }
 }
 
@@ -73,9 +76,9 @@ class _BankBenificiaryListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: const EdgeInsets.symmetric(horizontal: 10,vertical: 5),
+      margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 5),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
         child: CustomSlidable(
           endActionPaneActions: [
             CustomSlidableAction(
@@ -85,46 +88,48 @@ class _BankBenificiaryListItem extends StatelessWidget {
             ),
           ],
           borderRadius: 8,
-          child:Column(
-              key:Key('bankBenificiary$index'),
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      manageBenificiary.salesOrg.getValue(),
-                      style: Theme.of(context).textTheme.titleSmall?.apply(
-                        color: ZPColors.kPrimaryColor,
-                      ),
-                    ),
-                    IconButton(
-                      icon: const Icon(Icons.delete),
-                      onPressed: () {},
-                    ),
-                  ],
-                ),
-                BalanceTextRow(
-                  keyText: 'Beneficiary Name', 
-                  valueText: manageBenificiary.beneficiaryName.displayStringValue.tr(),
-                  keyFlex: 2,
-                  valueFlex: 3,
-                ),
-                BalanceTextRow(
-                  keyText: 'Account Number', 
-                  valueText: manageBenificiary.bankAccount.displayStringValue.tr(),
-                  keyFlex: 2,
-                  valueFlex: 3,
-                ),
-                BalanceTextRow(
-                  keyText: 'Bank Name', 
-                  valueText: manageBenificiary.bankName.displayStringValue.tr(),
-                  keyFlex: 2,
-                  valueFlex: 3,
-                ),
-              ],
-            ),
+          child: Column(
+            key: Key('bankBenificiary$index'),
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    manageBenificiary.salesOrg.getValue(),
+                    style: Theme.of(context).textTheme.titleSmall?.apply(
+                          color: ZPColors.kPrimaryColor,
+                        ),
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.delete),
+                    onPressed: () {},
+                  ),
+                ],
+              ),
+              BalanceTextRow(
+                keyText: 'Beneficiary Name',
+                valueText:
+                    manageBenificiary.beneficiaryName.displayStringValue.tr(),
+                keyFlex: 2,
+                valueFlex: 3,
+              ),
+              BalanceTextRow(
+                keyText: 'Account Number',
+                valueText:
+                    manageBenificiary.bankAccount.displayStringValue.tr(),
+                keyFlex: 2,
+                valueFlex: 3,
+              ),
+              BalanceTextRow(
+                keyText: 'Bank Name',
+                valueText: manageBenificiary.bankName.displayStringValue.tr(),
+                keyFlex: 2,
+                valueFlex: 3,
+              ),
+            ],
+          ),
         ),
       ),
     );

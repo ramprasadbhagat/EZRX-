@@ -1,12 +1,16 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/account/entities/bank_benificiary.dart';
+import 'package:ezrxmobile/domain/account/entities/add_or_update_beneficiary.dart';
+import 'package:ezrxmobile/domain/account/entities/bank_beneficiary.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_district.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/account/repository/i_bank_beneficiary_repository.dart';
-import 'package:ezrxmobile/infrastructure/account/datasource/bank_benificiary_local.dart';
-import 'package:ezrxmobile/infrastructure/account/datasource/bank_benificiary_remote.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/bank_beneficiary_local.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/bank_beneficiary_remote.dart';
+import 'package:ezrxmobile/infrastructure/account/dtos/bank_beneficiary_dto.dart';
 
 class BankBeneficiaryRepository implements IBankBeneficiaryRepository {
   final Config config;
@@ -32,9 +36,54 @@ class BankBeneficiaryRepository implements IBankBeneficiaryRepository {
       }
     }
     try {
-      final manageBenificiary = await remoteDataSource.getBankBeneficiaries();
+      final manageBeneficiary = await remoteDataSource.getBankBeneficiaries();
 
-      return Right(manageBenificiary);
+      return Right(manageBeneficiary);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, List<SalesDistrict>>> getSalesDistrict(
+      {required SalesOrg salesOrg,}) async {
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final salesDistrict = await localDataSource.getSalesDistrict();
+
+        return Right(salesDistrict);
+      } on MockException catch (e) {
+        return Left(ApiFailure.other(e.message));
+      }
+    }
+    try {
+      final salesDistrict =
+          await remoteDataSource.getSalesDistrict(salesOrg: salesOrg);
+
+      return Right(salesDistrict);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, AddOrUpdateBeneficiary>> addOrUpdateBeneficiary(
+      {required BankBeneficiary beneficiaryData,}) async {
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final response = await localDataSource.addOrUpdateBeneficiary();
+
+        return Right(response);
+      } on MockException catch (e) {
+        return Left(ApiFailure.other(e.message));
+      }
+    }
+    try {
+      final response = await remoteDataSource.addOrUpdateBeneficiary(
+          beneficiaryData: BankBeneficiaryDto.fromDomain(beneficiaryData).toJson(),
+      );
+
+      return Right(response);
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
     }

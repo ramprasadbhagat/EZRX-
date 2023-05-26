@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'sales_district_details_dto.dart';
+part of 'sales_district_info_dto.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,13 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-SalesDistrictDetailsDto _$SalesDistrictDetailsDtoFromJson(
-    Map<String, dynamic> json) {
-  return _SalesDistrictDetailsDto.fromJson(json);
+SalesDistrictInfoDto _$SalesDistrictInfoDtoFromJson(Map<String, dynamic> json) {
+  return _SalesDistrictInfoDto.fromJson(json);
 }
 
 /// @nodoc
-mixin _$SalesDistrictDetailsDto {
+mixin _$SalesDistrictInfoDto {
   @JsonKey(name: 'id', defaultValue: 0)
   int get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'salesDistrict', defaultValue: '')
@@ -30,15 +29,15 @@ mixin _$SalesDistrictDetailsDto {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $SalesDistrictDetailsDtoCopyWith<SalesDistrictDetailsDto> get copyWith =>
+  $SalesDistrictInfoDtoCopyWith<SalesDistrictInfoDto> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $SalesDistrictDetailsDtoCopyWith<$Res> {
-  factory $SalesDistrictDetailsDtoCopyWith(SalesDistrictDetailsDto value,
-          $Res Function(SalesDistrictDetailsDto) then) =
-      _$SalesDistrictDetailsDtoCopyWithImpl<$Res, SalesDistrictDetailsDto>;
+abstract class $SalesDistrictInfoDtoCopyWith<$Res> {
+  factory $SalesDistrictInfoDtoCopyWith(SalesDistrictInfoDto value,
+          $Res Function(SalesDistrictInfoDto) then) =
+      _$SalesDistrictInfoDtoCopyWithImpl<$Res, SalesDistrictInfoDto>;
   @useResult
   $Res call(
       {@JsonKey(name: 'id', defaultValue: 0)
@@ -50,10 +49,10 @@ abstract class $SalesDistrictDetailsDtoCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$SalesDistrictDetailsDtoCopyWithImpl<$Res,
-        $Val extends SalesDistrictDetailsDto>
-    implements $SalesDistrictDetailsDtoCopyWith<$Res> {
-  _$SalesDistrictDetailsDtoCopyWithImpl(this._value, this._then);
+class _$SalesDistrictInfoDtoCopyWithImpl<$Res,
+        $Val extends SalesDistrictInfoDto>
+    implements $SalesDistrictInfoDtoCopyWith<$Res> {
+  _$SalesDistrictInfoDtoCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -85,11 +84,11 @@ class _$SalesDistrictDetailsDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_SalesDistrictDetailsDtoCopyWith<$Res>
-    implements $SalesDistrictDetailsDtoCopyWith<$Res> {
-  factory _$$_SalesDistrictDetailsDtoCopyWith(_$_SalesDistrictDetailsDto value,
-          $Res Function(_$_SalesDistrictDetailsDto) then) =
-      __$$_SalesDistrictDetailsDtoCopyWithImpl<$Res>;
+abstract class _$$_SalesDistrictInfoDtoCopyWith<$Res>
+    implements $SalesDistrictInfoDtoCopyWith<$Res> {
+  factory _$$_SalesDistrictInfoDtoCopyWith(_$_SalesDistrictInfoDto value,
+          $Res Function(_$_SalesDistrictInfoDto) then) =
+      __$$_SalesDistrictInfoDtoCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -102,12 +101,11 @@ abstract class _$$_SalesDistrictDetailsDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_SalesDistrictDetailsDtoCopyWithImpl<$Res>
-    extends _$SalesDistrictDetailsDtoCopyWithImpl<$Res,
-        _$_SalesDistrictDetailsDto>
-    implements _$$_SalesDistrictDetailsDtoCopyWith<$Res> {
-  __$$_SalesDistrictDetailsDtoCopyWithImpl(_$_SalesDistrictDetailsDto _value,
-      $Res Function(_$_SalesDistrictDetailsDto) _then)
+class __$$_SalesDistrictInfoDtoCopyWithImpl<$Res>
+    extends _$SalesDistrictInfoDtoCopyWithImpl<$Res, _$_SalesDistrictInfoDto>
+    implements _$$_SalesDistrictInfoDtoCopyWith<$Res> {
+  __$$_SalesDistrictInfoDtoCopyWithImpl(_$_SalesDistrictInfoDto _value,
+      $Res Function(_$_SalesDistrictInfoDto) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -117,7 +115,7 @@ class __$$_SalesDistrictDetailsDtoCopyWithImpl<$Res>
     Object? salesDistrict = null,
     Object? salesDistrictLabel = null,
   }) {
-    return _then(_$_SalesDistrictDetailsDto(
+    return _then(_$_SalesDistrictInfoDto(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -136,8 +134,8 @@ class __$$_SalesDistrictDetailsDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_SalesDistrictDetailsDto extends _SalesDistrictDetailsDto {
-  const _$_SalesDistrictDetailsDto(
+class _$_SalesDistrictInfoDto extends _SalesDistrictInfoDto {
+  const _$_SalesDistrictInfoDto(
       {@JsonKey(name: 'id', defaultValue: 0)
           required this.id,
       @JsonKey(name: 'salesDistrict', defaultValue: '')
@@ -146,8 +144,8 @@ class _$_SalesDistrictDetailsDto extends _SalesDistrictDetailsDto {
           required this.salesDistrictLabel})
       : super._();
 
-  factory _$_SalesDistrictDetailsDto.fromJson(Map<String, dynamic> json) =>
-      _$$_SalesDistrictDetailsDtoFromJson(json);
+  factory _$_SalesDistrictInfoDto.fromJson(Map<String, dynamic> json) =>
+      _$$_SalesDistrictInfoDtoFromJson(json);
 
   @override
   @JsonKey(name: 'id', defaultValue: 0)
@@ -161,14 +159,14 @@ class _$_SalesDistrictDetailsDto extends _SalesDistrictDetailsDto {
 
   @override
   String toString() {
-    return 'SalesDistrictDetailsDto(id: $id, salesDistrict: $salesDistrict, salesDistrictLabel: $salesDistrictLabel)';
+    return 'SalesDistrictInfoDto(id: $id, salesDistrict: $salesDistrict, salesDistrictLabel: $salesDistrictLabel)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SalesDistrictDetailsDto &&
+            other is _$_SalesDistrictInfoDto &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.salesDistrict, salesDistrict) ||
                 other.salesDistrict == salesDistrict) &&
@@ -184,32 +182,30 @@ class _$_SalesDistrictDetailsDto extends _SalesDistrictDetailsDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SalesDistrictDetailsDtoCopyWith<_$_SalesDistrictDetailsDto>
-      get copyWith =>
-          __$$_SalesDistrictDetailsDtoCopyWithImpl<_$_SalesDistrictDetailsDto>(
-              this, _$identity);
+  _$$_SalesDistrictInfoDtoCopyWith<_$_SalesDistrictInfoDto> get copyWith =>
+      __$$_SalesDistrictInfoDtoCopyWithImpl<_$_SalesDistrictInfoDto>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SalesDistrictDetailsDtoToJson(
+    return _$$_SalesDistrictInfoDtoToJson(
       this,
     );
   }
 }
 
-abstract class _SalesDistrictDetailsDto extends SalesDistrictDetailsDto {
-  const factory _SalesDistrictDetailsDto(
-          {@JsonKey(name: 'id', defaultValue: 0)
-              required final int id,
-          @JsonKey(name: 'salesDistrict', defaultValue: '')
-              required final String salesDistrict,
-          @JsonKey(name: 'salesDistrictLabel', defaultValue: '')
-              required final String salesDistrictLabel}) =
-      _$_SalesDistrictDetailsDto;
-  const _SalesDistrictDetailsDto._() : super._();
+abstract class _SalesDistrictInfoDto extends SalesDistrictInfoDto {
+  const factory _SalesDistrictInfoDto(
+      {@JsonKey(name: 'id', defaultValue: 0)
+          required final int id,
+      @JsonKey(name: 'salesDistrict', defaultValue: '')
+          required final String salesDistrict,
+      @JsonKey(name: 'salesDistrictLabel', defaultValue: '')
+          required final String salesDistrictLabel}) = _$_SalesDistrictInfoDto;
+  const _SalesDistrictInfoDto._() : super._();
 
-  factory _SalesDistrictDetailsDto.fromJson(Map<String, dynamic> json) =
-      _$_SalesDistrictDetailsDto.fromJson;
+  factory _SalesDistrictInfoDto.fromJson(Map<String, dynamic> json) =
+      _$_SalesDistrictInfoDto.fromJson;
 
   @override
   @JsonKey(name: 'id', defaultValue: 0)
@@ -222,6 +218,6 @@ abstract class _SalesDistrictDetailsDto extends SalesDistrictDetailsDto {
   String get salesDistrictLabel;
   @override
   @JsonKey(ignore: true)
-  _$$_SalesDistrictDetailsDtoCopyWith<_$_SalesDistrictDetailsDto>
-      get copyWith => throw _privateConstructorUsedError;
+  _$$_SalesDistrictInfoDtoCopyWith<_$_SalesDistrictInfoDto> get copyWith =>
+      throw _privateConstructorUsedError;
 }

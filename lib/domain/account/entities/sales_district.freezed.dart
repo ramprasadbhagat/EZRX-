@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$SalesDistrict {
   SalesOrg get salesOrg => throw _privateConstructorUsedError;
-  List<SalesDistrictDetails> get salesDistrictDetails =>
+  List<SalesDistrictInfo> get salesDistrictInfo =>
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -31,8 +31,7 @@ abstract class $SalesDistrictCopyWith<$Res> {
           SalesDistrict value, $Res Function(SalesDistrict) then) =
       _$SalesDistrictCopyWithImpl<$Res, SalesDistrict>;
   @useResult
-  $Res call(
-      {SalesOrg salesOrg, List<SalesDistrictDetails> salesDistrictDetails});
+  $Res call({SalesOrg salesOrg, List<SalesDistrictInfo> salesDistrictInfo});
 }
 
 /// @nodoc
@@ -49,17 +48,17 @@ class _$SalesDistrictCopyWithImpl<$Res, $Val extends SalesDistrict>
   @override
   $Res call({
     Object? salesOrg = null,
-    Object? salesDistrictDetails = null,
+    Object? salesDistrictInfo = null,
   }) {
     return _then(_value.copyWith(
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
               as SalesOrg,
-      salesDistrictDetails: null == salesDistrictDetails
-          ? _value.salesDistrictDetails
-          : salesDistrictDetails // ignore: cast_nullable_to_non_nullable
-              as List<SalesDistrictDetails>,
+      salesDistrictInfo: null == salesDistrictInfo
+          ? _value.salesDistrictInfo
+          : salesDistrictInfo // ignore: cast_nullable_to_non_nullable
+              as List<SalesDistrictInfo>,
     ) as $Val);
   }
 }
@@ -72,8 +71,7 @@ abstract class _$$_SalesDistrictCopyWith<$Res>
       __$$_SalesDistrictCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {SalesOrg salesOrg, List<SalesDistrictDetails> salesDistrictDetails});
+  $Res call({SalesOrg salesOrg, List<SalesDistrictInfo> salesDistrictInfo});
 }
 
 /// @nodoc
@@ -88,17 +86,17 @@ class __$$_SalesDistrictCopyWithImpl<$Res>
   @override
   $Res call({
     Object? salesOrg = null,
-    Object? salesDistrictDetails = null,
+    Object? salesDistrictInfo = null,
   }) {
     return _then(_$_SalesDistrict(
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
               as SalesOrg,
-      salesDistrictDetails: null == salesDistrictDetails
-          ? _value._salesDistrictDetails
-          : salesDistrictDetails // ignore: cast_nullable_to_non_nullable
-              as List<SalesDistrictDetails>,
+      salesDistrictInfo: null == salesDistrictInfo
+          ? _value._salesDistrictInfo
+          : salesDistrictInfo // ignore: cast_nullable_to_non_nullable
+              as List<SalesDistrictInfo>,
     ));
   }
 }
@@ -108,24 +106,24 @@ class __$$_SalesDistrictCopyWithImpl<$Res>
 class _$_SalesDistrict extends _SalesDistrict {
   const _$_SalesDistrict(
       {required this.salesOrg,
-      required final List<SalesDistrictDetails> salesDistrictDetails})
-      : _salesDistrictDetails = salesDistrictDetails,
+      required final List<SalesDistrictInfo> salesDistrictInfo})
+      : _salesDistrictInfo = salesDistrictInfo,
         super._();
 
   @override
   final SalesOrg salesOrg;
-  final List<SalesDistrictDetails> _salesDistrictDetails;
+  final List<SalesDistrictInfo> _salesDistrictInfo;
   @override
-  List<SalesDistrictDetails> get salesDistrictDetails {
-    if (_salesDistrictDetails is EqualUnmodifiableListView)
-      return _salesDistrictDetails;
+  List<SalesDistrictInfo> get salesDistrictInfo {
+    if (_salesDistrictInfo is EqualUnmodifiableListView)
+      return _salesDistrictInfo;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_salesDistrictDetails);
+    return EqualUnmodifiableListView(_salesDistrictInfo);
   }
 
   @override
   String toString() {
-    return 'SalesDistrict(salesOrg: $salesOrg, salesDistrictDetails: $salesDistrictDetails)';
+    return 'SalesDistrict(salesOrg: $salesOrg, salesDistrictInfo: $salesDistrictInfo)';
   }
 
   @override
@@ -136,12 +134,12 @@ class _$_SalesDistrict extends _SalesDistrict {
             (identical(other.salesOrg, salesOrg) ||
                 other.salesOrg == salesOrg) &&
             const DeepCollectionEquality()
-                .equals(other._salesDistrictDetails, _salesDistrictDetails));
+                .equals(other._salesDistrictInfo, _salesDistrictInfo));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, salesOrg,
-      const DeepCollectionEquality().hash(_salesDistrictDetails));
+      const DeepCollectionEquality().hash(_salesDistrictInfo));
 
   @JsonKey(ignore: true)
   @override
@@ -153,14 +151,14 @@ class _$_SalesDistrict extends _SalesDistrict {
 abstract class _SalesDistrict extends SalesDistrict {
   const factory _SalesDistrict(
           {required final SalesOrg salesOrg,
-          required final List<SalesDistrictDetails> salesDistrictDetails}) =
+          required final List<SalesDistrictInfo> salesDistrictInfo}) =
       _$_SalesDistrict;
   const _SalesDistrict._() : super._();
 
   @override
   SalesOrg get salesOrg;
   @override
-  List<SalesDistrictDetails> get salesDistrictDetails;
+  List<SalesDistrictInfo> get salesDistrictInfo;
   @override
   @JsonKey(ignore: true)
   _$$_SalesDistrictCopyWith<_$_SalesDistrict> get copyWith =>

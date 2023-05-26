@@ -338,11 +338,11 @@ class _$BankBeneficiaryStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ManageBeneficiaryStateCopyWith<$Res>
+abstract class _$$_BankBeneficiaryStateCopyWith<$Res>
     implements $BankBeneficiaryStateCopyWith<$Res> {
-  factory _$$_ManageBeneficiaryStateCopyWith(_$_ManageBeneficiaryState value,
-          $Res Function(_$_ManageBeneficiaryState) then) =
-      __$$_ManageBeneficiaryStateCopyWithImpl<$Res>;
+  factory _$$_BankBeneficiaryStateCopyWith(_$_BankBeneficiaryState value,
+          $Res Function(_$_BankBeneficiaryState) then) =
+      __$$_BankBeneficiaryStateCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -352,11 +352,11 @@ abstract class _$$_ManageBeneficiaryStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ManageBeneficiaryStateCopyWithImpl<$Res>
-    extends _$BankBeneficiaryStateCopyWithImpl<$Res, _$_ManageBeneficiaryState>
-    implements _$$_ManageBeneficiaryStateCopyWith<$Res> {
-  __$$_ManageBeneficiaryStateCopyWithImpl(_$_ManageBeneficiaryState _value,
-      $Res Function(_$_ManageBeneficiaryState) _then)
+class __$$_BankBeneficiaryStateCopyWithImpl<$Res>
+    extends _$BankBeneficiaryStateCopyWithImpl<$Res, _$_BankBeneficiaryState>
+    implements _$$_BankBeneficiaryStateCopyWith<$Res> {
+  __$$_BankBeneficiaryStateCopyWithImpl(_$_BankBeneficiaryState _value,
+      $Res Function(_$_BankBeneficiaryState) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -366,7 +366,7 @@ class __$$_ManageBeneficiaryStateCopyWithImpl<$Res>
     Object? isFetching = null,
     Object? failureOrSuccessOption = null,
   }) {
-    return _then(_$_ManageBeneficiaryState(
+    return _then(_$_BankBeneficiaryState(
       manageBenificiaryList: null == manageBenificiaryList
           ? _value._manageBenificiaryList
           : manageBenificiaryList // ignore: cast_nullable_to_non_nullable
@@ -385,8 +385,8 @@ class __$$_ManageBeneficiaryStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ManageBeneficiaryState extends _ManageBeneficiaryState {
-  const _$_ManageBeneficiaryState(
+class _$_BankBeneficiaryState extends _BankBeneficiaryState {
+  const _$_BankBeneficiaryState(
       {required final List<BankBeneficiary> manageBenificiaryList,
       required this.isFetching,
       required this.failureOrSuccessOption})
@@ -416,7 +416,7 @@ class _$_ManageBeneficiaryState extends _ManageBeneficiaryState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ManageBeneficiaryState &&
+            other is _$_BankBeneficiaryState &&
             const DeepCollectionEquality()
                 .equals(other._manageBenificiaryList, _manageBenificiaryList) &&
             (identical(other.isFetching, isFetching) ||
@@ -435,18 +435,18 @@ class _$_ManageBeneficiaryState extends _ManageBeneficiaryState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ManageBeneficiaryStateCopyWith<_$_ManageBeneficiaryState> get copyWith =>
-      __$$_ManageBeneficiaryStateCopyWithImpl<_$_ManageBeneficiaryState>(
+  _$$_BankBeneficiaryStateCopyWith<_$_BankBeneficiaryState> get copyWith =>
+      __$$_BankBeneficiaryStateCopyWithImpl<_$_BankBeneficiaryState>(
           this, _$identity);
 }
 
-abstract class _ManageBeneficiaryState extends BankBeneficiaryState {
-  const factory _ManageBeneficiaryState(
+abstract class _BankBeneficiaryState extends BankBeneficiaryState {
+  const factory _BankBeneficiaryState(
       {required final List<BankBeneficiary> manageBenificiaryList,
       required final bool isFetching,
       required final Option<Either<ApiFailure, dynamic>>
-          failureOrSuccessOption}) = _$_ManageBeneficiaryState;
-  const _ManageBeneficiaryState._() : super._();
+          failureOrSuccessOption}) = _$_BankBeneficiaryState;
+  const _BankBeneficiaryState._() : super._();
 
   @override
   List<BankBeneficiary> get manageBenificiaryList;
@@ -456,6 +456,6 @@ abstract class _ManageBeneficiaryState extends BankBeneficiaryState {
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption;
   @override
   @JsonKey(ignore: true)
-  _$$_ManageBeneficiaryStateCopyWith<_$_ManageBeneficiaryState> get copyWith =>
+  _$$_BankBeneficiaryStateCopyWith<_$_BankBeneficiaryState> get copyWith =>
       throw _privateConstructorUsedError;
 }

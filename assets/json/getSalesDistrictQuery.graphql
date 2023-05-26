@@ -8,8 +8,3 @@ query salesDistrict($request: salesDistrictRequest!) {
     }
   }
 }
-
-variable:
-{
-  "request": {}
-}

@@ -1,11 +1,11 @@
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
-import 'package:ezrxmobile/domain/account/entities/bank_benificiary.dart';
+import 'package:ezrxmobile/domain/account/entities/bank_beneficiary.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'bank_benificiary_dto.freezed.dart';
-part 'bank_benificiary_dto.g.dart';
+part 'bank_beneficiary_dto.freezed.dart';
+part 'bank_beneficiary_dto.g.dart';
 
 
 @freezed
@@ -13,21 +13,21 @@ class BankBeneficiaryDto with _$BankBeneficiaryDto {
   const BankBeneficiaryDto._();
 
   const factory BankBeneficiaryDto({
-    @JsonKey(name: 'salesOrg', defaultValue: '') required String salesOrg,
-    @JsonKey(name: 'bankAccount', defaultValue: '') 
+    @JsonKey(name: 'salesOrg', defaultValue: '',) required String salesOrg,
+    @JsonKey(name: 'bankAccount', defaultValue: '',toJson: valueTojson) 
     required String bankAccount,
-    @JsonKey(name: 'bankAddress', defaultValue: '') 
+    @JsonKey(name: 'bankAddress', defaultValue: '',toJson: valueTojson) 
     required String bankAddress,
-    @JsonKey(name: 'bankCode', defaultValue: '') required String bankCode,
-    @JsonKey(name: 'bankName', defaultValue: '') required String bankName,
-    @JsonKey(name: 'beneficiaryName', defaultValue: '') 
+    @JsonKey(name: 'bankCode', defaultValue: '',toJson: valueTojson) required String bankCode,
+    @JsonKey(name: 'bankName', defaultValue: '',toJson: valueTojson) required String bankName,
+    @JsonKey(name: 'beneficiaryName', defaultValue: '',toJson: valueTojson) 
     required String beneficiaryName,
-    @JsonKey(name: 'branch', defaultValue: '') required String branch,
-    @JsonKey(name: 'emailId', defaultValue: '') required String emailId,
-    @JsonKey(name: 'hdbcSwiftCode', defaultValue: '') 
+    @JsonKey(name: 'branch', defaultValue: '',toJson: valueTojson) required String branch,
+    @JsonKey(name: 'emailId', defaultValue: '',toJson: valueTojson) required String emailId,
+    @JsonKey(name: 'hdbcSwiftCode', defaultValue: '',toJson: valueTojson) 
     required String hdbcSwiftCode,
-    @JsonKey(name: 'payNowWhen', defaultValue: '') required String payNowWhen,
-    @JsonKey(name: 'salesDistrict', defaultValue: '') 
+    @JsonKey(name: 'payNowUen', defaultValue: '',toJson: valueTojson) required String payNowUen,
+    @JsonKey(name: 'salesDistrict', defaultValue: '',toJson: valueTojson) 
     required String salesDistrict,
   }) = _BankBeneficiaryDto;
 
@@ -36,15 +36,15 @@ class BankBeneficiaryDto with _$BankBeneficiaryDto {
   ) {
     return BankBeneficiaryDto(
       salesOrg: manageBenificiary.salesOrg.getOrCrash(),
-      bankAccount: manageBenificiary.bankAccount.getOrCrash(),
+      bankAccount: manageBenificiary.bankAccount.getValue(),
       bankAddress: manageBenificiary.bankAddress,
       bankCode: manageBenificiary.bankCode,
-      bankName: manageBenificiary.bankName.getOrCrash(),
-      beneficiaryName: manageBenificiary.beneficiaryName.getOrCrash(),
+      bankName: manageBenificiary.bankName.getValue(),
+      beneficiaryName: manageBenificiary.beneficiaryName.getValue(),
       branch: manageBenificiary.branch,
-      emailId: manageBenificiary.emailId.getOrCrash(),
+      emailId: manageBenificiary.emailId.getValue(),
       hdbcSwiftCode: manageBenificiary.hdbcSwiftCode,
-      payNowWhen: manageBenificiary.payNowWhen,
+      payNowUen: manageBenificiary.payNowUen,
       salesDistrict: manageBenificiary.salesDistrict,
     );
   }
@@ -60,7 +60,7 @@ class BankBeneficiaryDto with _$BankBeneficiaryDto {
       branch: branch,
       emailId: EmailAddress(emailId),
       hdbcSwiftCode: hdbcSwiftCode,
-      payNowWhen: payNowWhen,
+      payNowUen: payNowUen,
       salesDistrict: salesDistrict,
     );
   }
@@ -68,3 +68,5 @@ class BankBeneficiaryDto with _$BankBeneficiaryDto {
   factory BankBeneficiaryDto.fromJson(Map<String, dynamic> json) =>
       _$BankBeneficiaryDtoFromJson(json);
 }
+
+dynamic valueTojson(String value) => value.isNotEmpty ? value : '';

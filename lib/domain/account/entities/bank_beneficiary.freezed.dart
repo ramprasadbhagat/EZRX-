@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'bank_benificiary.dart';
+part of 'bank_beneficiary.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -25,7 +25,7 @@ mixin _$BankBeneficiary {
   String get branch => throw _privateConstructorUsedError;
   EmailAddress get emailId => throw _privateConstructorUsedError;
   String get hdbcSwiftCode => throw _privateConstructorUsedError;
-  String get payNowWhen => throw _privateConstructorUsedError;
+  String get payNowUen => throw _privateConstructorUsedError;
   String get salesDistrict => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -49,7 +49,7 @@ abstract class $BankBeneficiaryCopyWith<$Res> {
       String branch,
       EmailAddress emailId,
       String hdbcSwiftCode,
-      String payNowWhen,
+      String payNowUen,
       String salesDistrict});
 }
 
@@ -75,7 +75,7 @@ class _$BankBeneficiaryCopyWithImpl<$Res, $Val extends BankBeneficiary>
     Object? branch = null,
     Object? emailId = null,
     Object? hdbcSwiftCode = null,
-    Object? payNowWhen = null,
+    Object? payNowUen = null,
     Object? salesDistrict = null,
   }) {
     return _then(_value.copyWith(
@@ -115,9 +115,9 @@ class _$BankBeneficiaryCopyWithImpl<$Res, $Val extends BankBeneficiary>
           ? _value.hdbcSwiftCode
           : hdbcSwiftCode // ignore: cast_nullable_to_non_nullable
               as String,
-      payNowWhen: null == payNowWhen
-          ? _value.payNowWhen
-          : payNowWhen // ignore: cast_nullable_to_non_nullable
+      payNowUen: null == payNowUen
+          ? _value.payNowUen
+          : payNowUen // ignore: cast_nullable_to_non_nullable
               as String,
       salesDistrict: null == salesDistrict
           ? _value.salesDistrict
@@ -145,7 +145,7 @@ abstract class _$$_BankBeneficiaryCopyWith<$Res>
       String branch,
       EmailAddress emailId,
       String hdbcSwiftCode,
-      String payNowWhen,
+      String payNowUen,
       String salesDistrict});
 }
 
@@ -169,7 +169,7 @@ class __$$_BankBeneficiaryCopyWithImpl<$Res>
     Object? branch = null,
     Object? emailId = null,
     Object? hdbcSwiftCode = null,
-    Object? payNowWhen = null,
+    Object? payNowUen = null,
     Object? salesDistrict = null,
   }) {
     return _then(_$_BankBeneficiary(
@@ -209,9 +209,9 @@ class __$$_BankBeneficiaryCopyWithImpl<$Res>
           ? _value.hdbcSwiftCode
           : hdbcSwiftCode // ignore: cast_nullable_to_non_nullable
               as String,
-      payNowWhen: null == payNowWhen
-          ? _value.payNowWhen
-          : payNowWhen // ignore: cast_nullable_to_non_nullable
+      payNowUen: null == payNowUen
+          ? _value.payNowUen
+          : payNowUen // ignore: cast_nullable_to_non_nullable
               as String,
       salesDistrict: null == salesDistrict
           ? _value.salesDistrict
@@ -234,7 +234,7 @@ class _$_BankBeneficiary extends _BankBeneficiary {
       required this.branch,
       required this.emailId,
       required this.hdbcSwiftCode,
-      required this.payNowWhen,
+      required this.payNowUen,
       required this.salesDistrict})
       : super._();
 
@@ -257,13 +257,13 @@ class _$_BankBeneficiary extends _BankBeneficiary {
   @override
   final String hdbcSwiftCode;
   @override
-  final String payNowWhen;
+  final String payNowUen;
   @override
   final String salesDistrict;
 
   @override
   String toString() {
-    return 'BankBeneficiary(salesOrg: $salesOrg, bankAccount: $bankAccount, bankAddress: $bankAddress, bankCode: $bankCode, bankName: $bankName, beneficiaryName: $beneficiaryName, branch: $branch, emailId: $emailId, hdbcSwiftCode: $hdbcSwiftCode, payNowWhen: $payNowWhen, salesDistrict: $salesDistrict)';
+    return 'BankBeneficiary(salesOrg: $salesOrg, bankAccount: $bankAccount, bankAddress: $bankAddress, bankCode: $bankCode, bankName: $bankName, beneficiaryName: $beneficiaryName, branch: $branch, emailId: $emailId, hdbcSwiftCode: $hdbcSwiftCode, payNowUen: $payNowUen, salesDistrict: $salesDistrict)';
   }
 
   @override
@@ -287,8 +287,8 @@ class _$_BankBeneficiary extends _BankBeneficiary {
             (identical(other.emailId, emailId) || other.emailId == emailId) &&
             (identical(other.hdbcSwiftCode, hdbcSwiftCode) ||
                 other.hdbcSwiftCode == hdbcSwiftCode) &&
-            (identical(other.payNowWhen, payNowWhen) ||
-                other.payNowWhen == payNowWhen) &&
+            (identical(other.payNowUen, payNowUen) ||
+                other.payNowUen == payNowUen) &&
             (identical(other.salesDistrict, salesDistrict) ||
                 other.salesDistrict == salesDistrict));
   }
@@ -305,7 +305,7 @@ class _$_BankBeneficiary extends _BankBeneficiary {
       branch,
       emailId,
       hdbcSwiftCode,
-      payNowWhen,
+      payNowUen,
       salesDistrict);
 
   @JsonKey(ignore: true)
@@ -326,7 +326,7 @@ abstract class _BankBeneficiary extends BankBeneficiary {
       required final String branch,
       required final EmailAddress emailId,
       required final String hdbcSwiftCode,
-      required final String payNowWhen,
+      required final String payNowUen,
       required final String salesDistrict}) = _$_BankBeneficiary;
   const _BankBeneficiary._() : super._();
 
@@ -349,7 +349,7 @@ abstract class _BankBeneficiary extends BankBeneficiary {
   @override
   String get hdbcSwiftCode;
   @override
-  String get payNowWhen;
+  String get payNowUen;
   @override
   String get salesDistrict;
   @override

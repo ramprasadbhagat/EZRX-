@@ -1,6 +1,7 @@
 //ignore_for_file: unused-files
 import 'package:auto_route/auto_route.dart';
-import 'package:ezrxmobile/presentation/account/payment_configuration/bank_benificiary/bank_benificiary_page.dart';
+import 'package:ezrxmobile/presentation/account/payment_configuration/bank_benificiary/bank_beneficiary_page.dart';
+import 'package:ezrxmobile/presentation/account/payment_configuration/bank_benificiary/add_beneficiary_page.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/payment_configuration_page.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/payment_methods/add_payment_method_page.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/payment_methods/edit_payment_method_page.dart';
@@ -73,6 +74,7 @@ import 'package:ezrxmobile/presentation/account/payment_configuration/sales_dist
     AutoRoute(path: 'edit_payment_methods', page: EditPaymentMethodsPage),
     AutoRoute(path: 'add_payment_methods', page: AddPaymentMethodsPage),
     AutoRoute(path: 'payments/bank_benificiary',page: BankBenificiaryPage),
+    AutoRoute(path: 'payments/add_beneficiary',page: AddBeneficiaryPage),
     AutoRoute(path: 'returns/request_return', page: RequestReturn),
     AutoRoute(path: 'returns/approver_actions', page: ApproverActions),
     AutoRoute(path: 'returns/return_summary', page: ReturnSummary),

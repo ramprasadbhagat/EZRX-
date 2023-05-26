@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'bank_benificiary_dto.dart';
+part of 'bank_beneficiary_dto.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
@@ -18,7 +18,7 @@ _$_BankBeneficiaryDto _$$_BankBeneficiaryDtoFromJson(
       branch: json['branch'] as String? ?? '',
       emailId: json['emailId'] as String? ?? '',
       hdbcSwiftCode: json['hdbcSwiftCode'] as String? ?? '',
-      payNowWhen: json['payNowWhen'] as String? ?? '',
+      payNowUen: json['payNowUen'] as String? ?? '',
       salesDistrict: json['salesDistrict'] as String? ?? '',
     );
 
@@ -26,14 +26,14 @@ Map<String, dynamic> _$$_BankBeneficiaryDtoToJson(
         _$_BankBeneficiaryDto instance) =>
     <String, dynamic>{
       'salesOrg': instance.salesOrg,
-      'bankAccount': instance.bankAccount,
-      'bankAddress': instance.bankAddress,
-      'bankCode': instance.bankCode,
-      'bankName': instance.bankName,
-      'beneficiaryName': instance.beneficiaryName,
-      'branch': instance.branch,
-      'emailId': instance.emailId,
-      'hdbcSwiftCode': instance.hdbcSwiftCode,
-      'payNowWhen': instance.payNowWhen,
-      'salesDistrict': instance.salesDistrict,
+      'bankAccount': valueTojson(instance.bankAccount),
+      'bankAddress': valueTojson(instance.bankAddress),
+      'bankCode': valueTojson(instance.bankCode),
+      'bankName': valueTojson(instance.bankName),
+      'beneficiaryName': valueTojson(instance.beneficiaryName),
+      'branch': valueTojson(instance.branch),
+      'emailId': valueTojson(instance.emailId),
+      'hdbcSwiftCode': valueTojson(instance.hdbcSwiftCode),
+      'payNowUen': valueTojson(instance.payNowUen),
+      'salesDistrict': valueTojson(instance.salesDistrict),
     };
