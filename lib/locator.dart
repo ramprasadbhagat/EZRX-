@@ -1,6 +1,7 @@
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/bank_beneficiary/add_beneficiary/add_beneficiary_bloc.dart';
+import 'package:ezrxmobile/application/account/payment_configuration/deduction_code/view_deduction_code/deduction_code_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/add_payment_method/add_payment_method_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/manage_payment_method/manage_payment_methods_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/bank_beneficiary/bank_beneficiary_bloc.dart';
@@ -47,10 +48,14 @@ import 'package:ezrxmobile/infrastructure/account/datasource/admin_po_attachment
 import 'package:ezrxmobile/infrastructure/account/datasource/bank_beneficiary_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/bank_beneficiary_remote.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/bank_beneficiary_query_mutation.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/deduction_code_local.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/deduction_code_query_mutation.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/deduction_code_remote.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/update_sales_org_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/update_sales_org_mutation.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/update_sales_org_remote.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/admin_po_attachment_repository.dart';
+import 'package:ezrxmobile/infrastructure/account/repository/deduction_code_repository.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/update_sales_org_repository.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/payment_methods_remote.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/payment_methods_local.dart';
@@ -314,8 +319,6 @@ import 'package:ezrxmobile/infrastructure/account/datasource/sales_district_remo
 import 'package:ezrxmobile/infrastructure/account/datasource/sales_district_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/sales_district_repository.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/sales_district/sales_district_bloc.dart';
-
-
 
 GetIt locator = GetIt.instance;
 
@@ -1571,7 +1574,8 @@ void setupLocator() {
       config: locator<Config>(),
       stockInfoLocalDataSource: locator<StockInfoLocalDataSource>(),
       stockInfoRemoteDataSource: locator<StockInfoRemoteDataSource>(),
-      discountOverrideRemoteDataSource: locator<DiscountOverrideRemoteDataSource>(),
+      discountOverrideRemoteDataSource:
+          locator<DiscountOverrideRemoteDataSource>(),
     ),
   );
 
@@ -1772,7 +1776,7 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => PaymentSummaryLocalDataSource(),
   );
-  
+
   locator.registerLazySingleton(
     () => PaymentSummaryQuery(),
   );
@@ -2072,7 +2076,7 @@ void setupLocator() {
     ),
   );
   //============================================================
-  
+
   //  Manage Bank Beneficiary
   //
   //============================================================
@@ -2085,8 +2089,7 @@ void setupLocator() {
         httpService: locator<HttpService>(),
         config: locator<Config>(),
         dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
-        bankBeneficiaryQueryMutation:
-            locator<BankBeneficiaryQueryMutation>(),
+        bankBeneficiaryQueryMutation: locator<BankBeneficiaryQueryMutation>(),
       ));
 
   locator.registerLazySingleton(() => BankBeneficiaryRepository(
@@ -2094,7 +2097,7 @@ void setupLocator() {
         localDataSource: locator<BankBeneficiaryLocalDataSource>(),
         remoteDataSource: locator<BankBeneficiaryRemoteDataSource>(),
       ));
-  
+
   locator.registerLazySingleton(
     () => BankBeneficiaryBloc(
       bankBeneficiaryRepository: locator<BankBeneficiaryRepository>(),
@@ -2217,6 +2220,38 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => SettingBloc(
       authRepository: locator<AuthRepository>(),
+    ),
+  );
+
+  //============================================================
+  //  Deduction Code
+  //
+  //============================================================
+
+  locator.registerLazySingleton(() => DeductionCodeLocalDataSource());
+
+  locator.registerLazySingleton(() => DeductionCodeQueryMutation());
+
+  locator.registerLazySingleton(
+    () => DeductionCodeRemoteDataSource(
+      httpService: locator<HttpService>(),
+      deductionCodeQueryMutation: locator<DeductionCodeQueryMutation>(),
+      config: locator<Config>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => DeductionCodeRepository(
+      config: locator<Config>(),
+      localDataSource: locator<DeductionCodeLocalDataSource>(),
+      remoteDataSource: locator<DeductionCodeRemoteDataSource>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => DeductionCodeBloc(
+      deductionCodeRepository: locator<DeductionCodeRepository>(),
     ),
   );
 }

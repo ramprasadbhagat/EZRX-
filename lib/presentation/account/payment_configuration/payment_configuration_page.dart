@@ -24,7 +24,8 @@ class PaymentConfigurationPage extends StatelessWidget {
               ListTile(
                 key: const Key('bankBenificiaryTile'),
                 title: const Text('Manage Bank Benificiary').tr(),
-                onTap: () => context.router.pushNamed('payments/bank_benificiary'),
+                onTap: () =>
+                    context.router.pushNamed('payments/bank_benificiary'),
               ),
               ListTile(
                 key: const Key('paymentAdviceTile'),
@@ -34,7 +35,8 @@ class PaymentConfigurationPage extends StatelessWidget {
               ListTile(
                 key: const Key('deductionCodeTile'),
                 title: const Text('Configure Deduction Code').tr(),
-                onTap: () {},
+                onTap: () =>
+                    context.router.pushNamed('payments/deduction_code'),
               ),
               ListTile(
                 key: const Key('salesDistrictTile'),

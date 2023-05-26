@@ -213,7 +213,6 @@ class RoleType extends ValueObject<String> {
     return isSalesRepRole ? 'salesrep' : 'customer';
   }
 
-
   const RoleType._(this.value);
 }
 
