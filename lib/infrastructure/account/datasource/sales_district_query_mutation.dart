@@ -13,4 +13,14 @@ class SalesDistrictQueryMutation {
       }
     ''';
   }
+
+  String addSalesDistrictQuery() {
+    return '''
+      mutation addSalesDistrict(\$input: addSalesDistrictInput!) {
+        addSalesDistrict(input: \$input) {
+          message
+        }
+      }
+    ''';
+  }
 }

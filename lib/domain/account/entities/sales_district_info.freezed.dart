@@ -17,8 +17,8 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$SalesDistrictInfo {
   int get id => throw _privateConstructorUsedError;
-  String get salesDistrict => throw _privateConstructorUsedError;
-  String get salesDistrictLabel => throw _privateConstructorUsedError;
+  StringValue get salesDistrictHeader => throw _privateConstructorUsedError;
+  StringValue get salesDistrictLabel => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SalesDistrictInfoCopyWith<SalesDistrictInfo> get copyWith =>
@@ -31,7 +31,10 @@ abstract class $SalesDistrictInfoCopyWith<$Res> {
           SalesDistrictInfo value, $Res Function(SalesDistrictInfo) then) =
       _$SalesDistrictInfoCopyWithImpl<$Res, SalesDistrictInfo>;
   @useResult
-  $Res call({int id, String salesDistrict, String salesDistrictLabel});
+  $Res call(
+      {int id,
+      StringValue salesDistrictHeader,
+      StringValue salesDistrictLabel});
 }
 
 /// @nodoc
@@ -48,7 +51,7 @@ class _$SalesDistrictInfoCopyWithImpl<$Res, $Val extends SalesDistrictInfo>
   @override
   $Res call({
     Object? id = null,
-    Object? salesDistrict = null,
+    Object? salesDistrictHeader = null,
     Object? salesDistrictLabel = null,
   }) {
     return _then(_value.copyWith(
@@ -56,14 +59,14 @@ class _$SalesDistrictInfoCopyWithImpl<$Res, $Val extends SalesDistrictInfo>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      salesDistrict: null == salesDistrict
-          ? _value.salesDistrict
-          : salesDistrict // ignore: cast_nullable_to_non_nullable
-              as String,
+      salesDistrictHeader: null == salesDistrictHeader
+          ? _value.salesDistrictHeader
+          : salesDistrictHeader // ignore: cast_nullable_to_non_nullable
+              as StringValue,
       salesDistrictLabel: null == salesDistrictLabel
           ? _value.salesDistrictLabel
           : salesDistrictLabel // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StringValue,
     ) as $Val);
   }
 }
@@ -76,7 +79,10 @@ abstract class _$$_SalesDistrictInfoCopyWith<$Res>
       __$$_SalesDistrictInfoCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String salesDistrict, String salesDistrictLabel});
+  $Res call(
+      {int id,
+      StringValue salesDistrictHeader,
+      StringValue salesDistrictLabel});
 }
 
 /// @nodoc
@@ -91,7 +97,7 @@ class __$$_SalesDistrictInfoCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? salesDistrict = null,
+    Object? salesDistrictHeader = null,
     Object? salesDistrictLabel = null,
   }) {
     return _then(_$_SalesDistrictInfo(
@@ -99,14 +105,14 @@ class __$$_SalesDistrictInfoCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      salesDistrict: null == salesDistrict
-          ? _value.salesDistrict
-          : salesDistrict // ignore: cast_nullable_to_non_nullable
-              as String,
+      salesDistrictHeader: null == salesDistrictHeader
+          ? _value.salesDistrictHeader
+          : salesDistrictHeader // ignore: cast_nullable_to_non_nullable
+              as StringValue,
       salesDistrictLabel: null == salesDistrictLabel
           ? _value.salesDistrictLabel
           : salesDistrictLabel // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StringValue,
     ));
   }
 }
@@ -116,20 +122,20 @@ class __$$_SalesDistrictInfoCopyWithImpl<$Res>
 class _$_SalesDistrictInfo extends _SalesDistrictInfo {
   const _$_SalesDistrictInfo(
       {required this.id,
-      required this.salesDistrict,
+      required this.salesDistrictHeader,
       required this.salesDistrictLabel})
       : super._();
 
   @override
   final int id;
   @override
-  final String salesDistrict;
+  final StringValue salesDistrictHeader;
   @override
-  final String salesDistrictLabel;
+  final StringValue salesDistrictLabel;
 
   @override
   String toString() {
-    return 'SalesDistrictInfo(id: $id, salesDistrict: $salesDistrict, salesDistrictLabel: $salesDistrictLabel)';
+    return 'SalesDistrictInfo(id: $id, salesDistrictHeader: $salesDistrictHeader, salesDistrictLabel: $salesDistrictLabel)';
   }
 
   @override
@@ -138,15 +144,15 @@ class _$_SalesDistrictInfo extends _SalesDistrictInfo {
         (other.runtimeType == runtimeType &&
             other is _$_SalesDistrictInfo &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.salesDistrict, salesDistrict) ||
-                other.salesDistrict == salesDistrict) &&
+            (identical(other.salesDistrictHeader, salesDistrictHeader) ||
+                other.salesDistrictHeader == salesDistrictHeader) &&
             (identical(other.salesDistrictLabel, salesDistrictLabel) ||
                 other.salesDistrictLabel == salesDistrictLabel));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, salesDistrict, salesDistrictLabel);
+      Object.hash(runtimeType, id, salesDistrictHeader, salesDistrictLabel);
 
   @JsonKey(ignore: true)
   @override
@@ -159,16 +165,16 @@ class _$_SalesDistrictInfo extends _SalesDistrictInfo {
 abstract class _SalesDistrictInfo extends SalesDistrictInfo {
   const factory _SalesDistrictInfo(
       {required final int id,
-      required final String salesDistrict,
-      required final String salesDistrictLabel}) = _$_SalesDistrictInfo;
+      required final StringValue salesDistrictHeader,
+      required final StringValue salesDistrictLabel}) = _$_SalesDistrictInfo;
   const _SalesDistrictInfo._() : super._();
 
   @override
   int get id;
   @override
-  String get salesDistrict;
+  StringValue get salesDistrictHeader;
   @override
-  String get salesDistrictLabel;
+  StringValue get salesDistrictLabel;
   @override
   @JsonKey(ignore: true)
   _$$_SalesDistrictInfoCopyWith<_$_SalesDistrictInfo> get copyWith =>

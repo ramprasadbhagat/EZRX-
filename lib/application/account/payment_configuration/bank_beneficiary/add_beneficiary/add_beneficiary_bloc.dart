@@ -52,8 +52,10 @@ class AddBeneficiaryBloc
                 salesDistrict: salesDistrict,
                 addBeneficiaryData: state.addBeneficiaryData.copyWith(
                   salesDistrict: salesDistrict.isNotEmpty
-                    ? salesDistrict.first.salesDistrictInfo.first.salesDistrict
-                    : '',
+                      ? salesDistrict
+                          .first.salesDistrictInfo.first.salesDistrictHeader
+                          .getValue()
+                      : '',
                 ),
                 isFetching: false,
                 failureOrSuccessOption: none(),

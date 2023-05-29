@@ -18,34 +18,33 @@ class AddBeneficiaryPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Add Beneficiary'.tr())),
-      body: BlocConsumer<AddBeneficiaryBloc, AddBeneficiaryState>(
-        listenWhen: (previous, current) =>
-            previous.isSubmitting != current.isSubmitting,
-        listener: (context, state) {
-          state.failureOrSuccessOption.fold(
-            () {
-              if (!state.isSubmitting) {
-                context
-                    .read<BankBeneficiaryBloc>()
-                    .add(const BankBeneficiaryEvent.fetch());
-                context.router.pop();
-              }
-            },
-            (either) => either.fold(
-              (failure) {
-                ErrorUtils.handleApiFailure(context, failure);
+      body: AnnouncementBanner(
+        currentPath: context.router.currentPath,
+        child: BlocConsumer<AddBeneficiaryBloc, AddBeneficiaryState>(
+          listenWhen: (previous, current) =>
+              previous.isSubmitting != current.isSubmitting,
+          listener: (context, state) {
+            state.failureOrSuccessOption.fold(
+              () {
+                if (!state.isSubmitting) {
+                  context
+                      .read<BankBeneficiaryBloc>()
+                      .add(const BankBeneficiaryEvent.fetch());
+                  context.router.pop();
+                }
               },
-              (success) {},
-            ),
-          );
-        },
-        buildWhen: (previous, current) =>
-            previous.showErrorMessages != current.showErrorMessages,
-        builder: (context, state) {
-          return AnnouncementBanner(
-            currentPath: context.router.currentPath,
-            child: SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
+              (either) => either.fold(
+                (failure) {
+                  ErrorUtils.handleApiFailure(context, failure);
+                },
+                (success) {},
+              ),
+            );
+          },
+          buildWhen: (previous, current) =>
+              previous.showErrorMessages != current.showErrorMessages,
+          builder: (context, state) {
+            return SingleChildScrollView(
               child: SizedBox(
                 child: Padding(
                   padding: const EdgeInsets.all(25.0),
@@ -67,9 +66,9 @@ class AddBeneficiaryPage extends StatelessWidget {
                   ),
                 ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }
@@ -168,8 +167,8 @@ class _SalesDistrictDropdown extends StatelessWidget {
               ? state.salesDistrict.first.salesDistrictInfo.map(
                   (SalesDistrictInfo val) {
                     return DropdownMenuItem<String>(
-                      value: val.salesDistrict,
-                      child: Text(val.salesDistrictLabel),
+                      value: val.salesDistrictHeader.getValue(),
+                      child: Text(val.salesDistrictLabel.getValue()),
                     );
                   },
                 ).toList()

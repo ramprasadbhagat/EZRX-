@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/payment_configuration/sales_district/add_sales_district/add_sales_district_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/sales_district/sales_district_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_district.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_district_info.dart';
@@ -46,8 +47,15 @@ class SalesDistrictPage extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        key: const Key('addSalesDistrictKey'),
+        onPressed: () {
+          context
+              .read<AddSalesDistrictBloc>()
+              .add(const AddSalesDistrictEvent.initialized());
+          context.router
+              .pushNamed('payments/sales_district/add_sales_district');
+        },
         child: const Icon(Icons.add),
-        onPressed: () {},
       ),
     );
   }
@@ -70,7 +78,9 @@ class _SalesDistrictList extends StatelessWidget {
     return Column(
       children: salesDistrict.salesDistrictInfo
           .map((e) => _SalesDistrictListItem(
-              salesDistrictDetails: e, salesOrg: salesDistrict.salesOrg,))
+                salesDistrictDetails: e,
+                salesOrg: salesDistrict.salesOrg,
+              ))
           .toList(),
     );
   }
@@ -128,13 +138,13 @@ class _SalesDistrictListItem extends StatelessWidget {
               ),
               BalanceTextRow(
                 keyText: 'Sales District',
-                valueText: salesDistrictDetails.salesDistrict,
+                valueText: salesDistrictDetails.salesDistrictHeader.getValue(),
                 keyFlex: 2,
                 valueFlex: 3,
               ),
               BalanceTextRow(
                 keyText: 'Sales District Label',
-                valueText: salesDistrictDetails.salesDistrictLabel,
+                valueText: salesDistrictDetails.salesDistrictLabel.getValue(),
                 keyFlex: 2,
                 valueFlex: 3,
               ),

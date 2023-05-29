@@ -313,6 +313,11 @@ String roleOrderType(String roleType) {
   }
 }
 
+String showSalesDistrictUserMessage(String message) =>
+    message == 'Data Inserted Successfully'
+        ? 'Sales District added successfully'
+        : 'Sales District cannot be added';
+
 bool isZero(int value) => value == 0;
 
 String currencySymbol(String currency) {

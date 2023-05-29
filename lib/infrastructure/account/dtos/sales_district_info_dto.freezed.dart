@@ -23,7 +23,7 @@ mixin _$SalesDistrictInfoDto {
   @JsonKey(name: 'id', defaultValue: 0)
   int get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'salesDistrict', defaultValue: '')
-  String get salesDistrict => throw _privateConstructorUsedError;
+  String get salesDistrictHeader => throw _privateConstructorUsedError;
   @JsonKey(name: 'salesDistrictLabel', defaultValue: '')
   String get salesDistrictLabel => throw _privateConstructorUsedError;
 
@@ -43,7 +43,7 @@ abstract class $SalesDistrictInfoDtoCopyWith<$Res> {
       {@JsonKey(name: 'id', defaultValue: 0)
           int id,
       @JsonKey(name: 'salesDistrict', defaultValue: '')
-          String salesDistrict,
+          String salesDistrictHeader,
       @JsonKey(name: 'salesDistrictLabel', defaultValue: '')
           String salesDistrictLabel});
 }
@@ -63,7 +63,7 @@ class _$SalesDistrictInfoDtoCopyWithImpl<$Res,
   @override
   $Res call({
     Object? id = null,
-    Object? salesDistrict = null,
+    Object? salesDistrictHeader = null,
     Object? salesDistrictLabel = null,
   }) {
     return _then(_value.copyWith(
@@ -71,9 +71,9 @@ class _$SalesDistrictInfoDtoCopyWithImpl<$Res,
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      salesDistrict: null == salesDistrict
-          ? _value.salesDistrict
-          : salesDistrict // ignore: cast_nullable_to_non_nullable
+      salesDistrictHeader: null == salesDistrictHeader
+          ? _value.salesDistrictHeader
+          : salesDistrictHeader // ignore: cast_nullable_to_non_nullable
               as String,
       salesDistrictLabel: null == salesDistrictLabel
           ? _value.salesDistrictLabel
@@ -95,7 +95,7 @@ abstract class _$$_SalesDistrictInfoDtoCopyWith<$Res>
       {@JsonKey(name: 'id', defaultValue: 0)
           int id,
       @JsonKey(name: 'salesDistrict', defaultValue: '')
-          String salesDistrict,
+          String salesDistrictHeader,
       @JsonKey(name: 'salesDistrictLabel', defaultValue: '')
           String salesDistrictLabel});
 }
@@ -112,7 +112,7 @@ class __$$_SalesDistrictInfoDtoCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? salesDistrict = null,
+    Object? salesDistrictHeader = null,
     Object? salesDistrictLabel = null,
   }) {
     return _then(_$_SalesDistrictInfoDto(
@@ -120,9 +120,9 @@ class __$$_SalesDistrictInfoDtoCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      salesDistrict: null == salesDistrict
-          ? _value.salesDistrict
-          : salesDistrict // ignore: cast_nullable_to_non_nullable
+      salesDistrictHeader: null == salesDistrictHeader
+          ? _value.salesDistrictHeader
+          : salesDistrictHeader // ignore: cast_nullable_to_non_nullable
               as String,
       salesDistrictLabel: null == salesDistrictLabel
           ? _value.salesDistrictLabel
@@ -139,7 +139,7 @@ class _$_SalesDistrictInfoDto extends _SalesDistrictInfoDto {
       {@JsonKey(name: 'id', defaultValue: 0)
           required this.id,
       @JsonKey(name: 'salesDistrict', defaultValue: '')
-          required this.salesDistrict,
+          required this.salesDistrictHeader,
       @JsonKey(name: 'salesDistrictLabel', defaultValue: '')
           required this.salesDistrictLabel})
       : super._();
@@ -152,14 +152,14 @@ class _$_SalesDistrictInfoDto extends _SalesDistrictInfoDto {
   final int id;
   @override
   @JsonKey(name: 'salesDistrict', defaultValue: '')
-  final String salesDistrict;
+  final String salesDistrictHeader;
   @override
   @JsonKey(name: 'salesDistrictLabel', defaultValue: '')
   final String salesDistrictLabel;
 
   @override
   String toString() {
-    return 'SalesDistrictInfoDto(id: $id, salesDistrict: $salesDistrict, salesDistrictLabel: $salesDistrictLabel)';
+    return 'SalesDistrictInfoDto(id: $id, salesDistrictHeader: $salesDistrictHeader, salesDistrictLabel: $salesDistrictLabel)';
   }
 
   @override
@@ -168,8 +168,8 @@ class _$_SalesDistrictInfoDto extends _SalesDistrictInfoDto {
         (other.runtimeType == runtimeType &&
             other is _$_SalesDistrictInfoDto &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.salesDistrict, salesDistrict) ||
-                other.salesDistrict == salesDistrict) &&
+            (identical(other.salesDistrictHeader, salesDistrictHeader) ||
+                other.salesDistrictHeader == salesDistrictHeader) &&
             (identical(other.salesDistrictLabel, salesDistrictLabel) ||
                 other.salesDistrictLabel == salesDistrictLabel));
   }
@@ -177,7 +177,7 @@ class _$_SalesDistrictInfoDto extends _SalesDistrictInfoDto {
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, salesDistrict, salesDistrictLabel);
+      Object.hash(runtimeType, id, salesDistrictHeader, salesDistrictLabel);
 
   @JsonKey(ignore: true)
   @override
@@ -199,7 +199,7 @@ abstract class _SalesDistrictInfoDto extends SalesDistrictInfoDto {
       {@JsonKey(name: 'id', defaultValue: 0)
           required final int id,
       @JsonKey(name: 'salesDistrict', defaultValue: '')
-          required final String salesDistrict,
+          required final String salesDistrictHeader,
       @JsonKey(name: 'salesDistrictLabel', defaultValue: '')
           required final String salesDistrictLabel}) = _$_SalesDistrictInfoDto;
   const _SalesDistrictInfoDto._() : super._();
@@ -212,7 +212,7 @@ abstract class _SalesDistrictInfoDto extends SalesDistrictInfoDto {
   int get id;
   @override
   @JsonKey(name: 'salesDistrict', defaultValue: '')
-  String get salesDistrict;
+  String get salesDistrictHeader;
   @override
   @JsonKey(name: 'salesDistrictLabel', defaultValue: '')
   String get salesDistrictLabel;
