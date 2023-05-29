@@ -7,11 +7,11 @@ class AllCreditsEvent with _$AllCreditsEvent {
   const factory AllCreditsEvent.fetchAllCreditsList({
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
-    required String sortDirection,
+    required AllCreditsFilter allCreditsFilter,
   }) = _FetchAllCreditsList;
   const factory AllCreditsEvent.loadMoreAllCreditsList({
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
-    required String sortDirection,
+    required AllCreditsFilter allCreditsFilter,
   }) = _LoadMoreAllCreditsList;
 }

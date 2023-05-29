@@ -403,12 +403,12 @@ class AppRouter extends _i59.RootStackRouter {
         child: const _i40.AllInvoicesPage(),
       );
     },
-    AllCreditsPageRoute.name: (routeData) {
-      final args = routeData.argsAs<AllCreditsPageRouteArgs>(
-          orElse: () => const AllCreditsPageRouteArgs());
+    AllCreditsRoute.name: (routeData) {
+      final args = routeData.argsAs<AllCreditsRouteArgs>(
+          orElse: () => const AllCreditsRouteArgs());
       return _i59.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i41.AllCreditsPage(key: args.key),
+        child: _i41.AllCredits(key: args.key),
       );
     },
     BundleItemDetailPageRoute.name: (routeData) {
@@ -771,7 +771,7 @@ class AppRouter extends _i59.RootStackRouter {
           path: 'payments/all_invoices',
         ),
         _i59.RouteConfig(
-          AllCreditsPageRoute.name,
+          AllCreditsRoute.name,
           path: 'payments/all_credits',
         ),
         _i59.RouteConfig(
@@ -1619,26 +1619,26 @@ class AllInvoicesPageRoute extends _i59.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i41.AllCreditsPage]
-class AllCreditsPageRoute extends _i59.PageRouteInfo<AllCreditsPageRouteArgs> {
-  AllCreditsPageRoute({_i60.Key? key})
+/// [_i41.AllCredits]
+class AllCreditsRoute extends _i59.PageRouteInfo<AllCreditsRouteArgs> {
+  AllCreditsRoute({_i60.Key? key})
       : super(
-          AllCreditsPageRoute.name,
+          AllCreditsRoute.name,
           path: 'payments/all_credits',
-          args: AllCreditsPageRouteArgs(key: key),
+          args: AllCreditsRouteArgs(key: key),
         );
 
-  static const String name = 'AllCreditsPageRoute';
+  static const String name = 'AllCreditsRoute';
 }
 
-class AllCreditsPageRouteArgs {
-  const AllCreditsPageRouteArgs({this.key});
+class AllCreditsRouteArgs {
+  const AllCreditsRouteArgs({this.key});
 
   final _i60.Key? key;
 
   @override
   String toString() {
-    return 'AllCreditsPageRouteArgs{key: $key}';
+    return 'AllCreditsRouteArgs{key: $key}';
   }
 }
 

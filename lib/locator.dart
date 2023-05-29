@@ -30,7 +30,8 @@ import 'package:ezrxmobile/application/order/combo_deal/combo_deal_material_deta
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_list_bloc.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_principle_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
-import 'package:ezrxmobile/application/payments/all_invoices/all_credits/all_credits_bloc.dart';
+import 'package:ezrxmobile/application/payments/all_credits/all_credits_bloc.dart';
+import 'package:ezrxmobile/application/payments/all_credits/all_credits_filter/all_credits_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/filter/all_invoices_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
@@ -2182,6 +2183,12 @@ void setupLocator() {
   );
   locator.registerLazySingleton(
     () => AllCreditsBloc(
+      allCreditsAndInvoicesRepository:
+          locator<AllCreditsAndInvoicesRepository>(),
+    ),
+  );
+  locator.registerLazySingleton(
+    () => AllCreditsFilterBloc(
       allCreditsAndInvoicesRepository:
           locator<AllCreditsAndInvoicesRepository>(),
     ),

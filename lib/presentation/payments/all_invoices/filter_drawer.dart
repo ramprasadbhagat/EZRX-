@@ -190,7 +190,7 @@ class _DebitValueToFilter extends StatelessWidget {
       ) {
         return Expanded(
           child: TextFormField(
-            initialValue: state.allInvoicesFilter.debitValueTo.doubleToString,
+            initialValue: state.allInvoicesFilter.debitValueTo.apiParameterValue,
             onChanged: (value) => context.read<AllInvoicesFilterBloc>().add(
                   AllInvoicesFilterEvent.debitValueToChanged(
                     value.isNotEmpty
@@ -226,7 +226,7 @@ class _DebitValueFromFilter extends StatelessWidget {
       ) {
         return Expanded(
           child: TextFormField(
-            initialValue: state.allInvoicesFilter.debitValueFrom.doubleToString,
+            initialValue: state.allInvoicesFilter.debitValueFrom.apiParameterValue,
             onChanged: (value) => context.read<AllInvoicesFilterBloc>().add(
                   AllInvoicesFilterEvent.debitValueFromChanged(
                     value.isNotEmpty

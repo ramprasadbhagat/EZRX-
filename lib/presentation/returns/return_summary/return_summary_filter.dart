@@ -162,7 +162,7 @@ class _TotalPriceToFilter extends StatelessWidget {
         return Expanded(
           child: TextFormField(
             initialValue:
-                state.returnSummaryFilter.refundTotalTo.doubleToString,
+                state.returnSummaryFilter.refundTotalTo.apiParameterValue,
             onChanged: (value) => context.read<ReturnSummaryFilterBloc>().add(
                   ReturnSummaryFilterEvent.refundTotalToChanged(
                     value.isNotEmpty
@@ -199,7 +199,7 @@ class _TotalPriceFromFilter extends StatelessWidget {
         return Expanded(
           child: TextFormField(
             initialValue:
-                state.returnSummaryFilter.refundTotalFrom.doubleToString,
+                state.returnSummaryFilter.refundTotalFrom.apiParameterValue,
             onChanged: (value) => context.read<ReturnSummaryFilterBloc>().add(
                   ReturnSummaryFilterEvent.refundTotalFromChanged(
                     value.isNotEmpty

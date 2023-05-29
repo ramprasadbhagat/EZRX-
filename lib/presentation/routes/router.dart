@@ -218,7 +218,7 @@ import 'package:ezrxmobile/presentation/account/payment_configuration/sales_dist
     ),
     AutoRoute(
       path: 'payments/all_credits',
-      page: AllCreditsPage,
+      page: AllCredits,
     ),
     CustomRoute(
       path: 'orders/bundle_item_detail',

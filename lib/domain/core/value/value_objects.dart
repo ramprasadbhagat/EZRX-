@@ -161,17 +161,17 @@ class StringValue extends ValueObject<String> {
   const StringValue._(this.value);
 }
 
-
-
 class DoubleValue extends ValueObject<double> {
   @override
   final Either<ValueFailure<double>, double> value;
 
-  factory DoubleValue(String input) => DoubleValue._(tryParseDoubleValue(input));
+  factory DoubleValue(String input) =>
+      DoubleValue._(validateDoubleValue(input));
 
   String get apiParameterValue => emptyIfZero(value.getOrElse(() => 0));
 
-  String get doubleToString => emptyIfZero(value.getOrElse(() => 0));
+  String get apiParameterValueIfNegative =>
+      emptyIfZero(-1 * value.getOrElse(() => 0));
 
   const DoubleValue._(this.value);
 }

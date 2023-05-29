@@ -49,6 +49,31 @@ class AllCreditsAndInvoicesRemoteDataSource {
     return AvailableStatusesDto.fromJson(data).toDomain();
   }
 
+  Future<AvailableStatuses> getAvailableStatusesForAllCredits({
+    required String salesOrg,
+  }) async {
+    final res = await httpService.request(
+      method: 'POST',
+      url: '${config.urlConstants}ezpay',
+      data: jsonEncode(
+        {
+          'query':
+              allCreditsAndInvoicesQueryMutation.getAvailableStatusesQuery(),
+          'variables': {
+            'request': {
+              'statusFor': 'CreditItems',
+              'salesOrg': salesOrg,
+            },
+          },
+        },
+      ),
+    );
+    _exceptionChecker(property: 'availableStatuses', res: res);
+    final data = res.data['data']['availableStatuses'];
+
+    return AvailableStatusesDto.fromJson(data).toDomain();
+  }
+
   Future<CustomerDocumentHeader> filterInvoices({
     required String customerCode,
     required String salesOrg,
@@ -62,7 +87,8 @@ class AllCreditsAndInvoicesRemoteDataSource {
       url: '${config.urlConstants}ezpay',
       data: jsonEncode(
         {
-          'query': allCreditsAndInvoicesQueryMutation.getCustomerDocumentHeaderQuery(),
+          'query': allCreditsAndInvoicesQueryMutation
+              .getCustomerDocumentHeaderQuery(),
           'variables': {
             'input': {
               'customerCode': customerCode,
@@ -93,6 +119,7 @@ class AllCreditsAndInvoicesRemoteDataSource {
     required String salesOrg,
     required int offSet,
     required int pageSize,
+    required List<Map<String, dynamic>> filterQuery,
   }) async {
     final res = await httpService.request(
       method: 'POST',
@@ -109,12 +136,7 @@ class AllCreditsAndInvoicesRemoteDataSource {
               'after': offSet,
               'excelFor': 'Credit',
               'orderBy': [],
-              'filterBy': [
-                {
-                  'field': 'debitCreditCode',
-                  'value': 'H',
-                },
-              ],
+              'filterBy': filterQuery,
             },
           },
         },

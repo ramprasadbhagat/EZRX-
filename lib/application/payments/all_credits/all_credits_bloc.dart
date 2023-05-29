@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/domain/payments/repository/i_all_credits_and_invoices_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -41,9 +42,9 @@ class AllCreditsBloc extends Bloc<AllCreditsEvent, AllCreditsState> {
             await allCreditsAndInvoicesRepository.getAllCredits(
           salesOrganisation: value.salesOrganisation,
           customerCodeInfo: value.customerCodeInfo,
-          sortDirection: value.sortDirection,
           pageSize: _pageSize,
           offSet: 0,
+          allCreditsFilter: value.allCreditsFilter,
         );
 
         failureOrSuccess.fold(
@@ -82,9 +83,9 @@ class AllCreditsBloc extends Bloc<AllCreditsEvent, AllCreditsState> {
             await allCreditsAndInvoicesRepository.getAllCredits(
           salesOrganisation: value.salesOrganisation,
           customerCodeInfo: value.customerCodeInfo,
-          sortDirection: value.sortDirection,
           pageSize: _pageSize,
           offSet: state.credits.length,
+          allCreditsFilter: value.allCreditsFilter,
         );
 
         failureOrSuccess.fold(

@@ -121,7 +121,7 @@ Either<ValueFailure<String>, String> validateInputIsBiggerThanMaxValue(
         ));
 }
 
-Either<ValueFailure<double>, double> tryParseDoubleValue(
+Either<ValueFailure<double>, double> validateDoubleValue(
   String input,
 ) {
   if (double.tryParse(input) == null) {

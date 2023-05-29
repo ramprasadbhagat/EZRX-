@@ -13,7 +13,8 @@ import 'package:ezrxmobile/application/admin_po_attachment/filter/admin_po_attac
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_material_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_list_bloc.dart';
 import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
-import 'package:ezrxmobile/application/payments/all_invoices/all_credits/all_credits_bloc.dart';
+import 'package:ezrxmobile/application/payments/all_credits/all_credits_bloc.dart';
+import 'package:ezrxmobile/application/payments/all_credits/all_credits_filter/all_credits_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/filter/all_invoices_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
@@ -422,6 +423,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider<DeductionCodeBloc>(
           create: (context) => locator<DeductionCodeBloc>(),
+        ),
+        BlocProvider<AllCreditsFilterBloc>(
+          create: (context) => locator<AllCreditsFilterBloc>(),
         ),
       ],
       child: MaterialApp.router(

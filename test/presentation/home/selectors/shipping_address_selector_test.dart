@@ -19,7 +19,8 @@ import 'package:ezrxmobile/application/order/order_history_list/order_history_li
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
-import 'package:ezrxmobile/application/payments/all_invoices/all_credits/all_credits_bloc.dart';
+import 'package:ezrxmobile/application/payments/all_credits/all_credits_bloc.dart';
+import 'package:ezrxmobile/application/payments/all_credits/all_credits_filter/all_credits_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/filter/all_invoices_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/paymant_summary/payment_summary_bloc.dart';
@@ -110,10 +111,14 @@ class OrderHistoryFilterByStatusBlocMock extends MockBloc<
     implements OrderHistoryFilterByStatusBloc {}
 
 class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
+
 class AllInvoicesBlocMock extends MockBloc<AllInvoicesEvent, AllInvoicesState>
     implements AllInvoicesBloc {}
-class AllInvoicesFilterBlocMock extends MockBloc<AllInvoicesFilterEvent, AllInvoicesFilterState>
+
+class AllInvoicesFilterBlocMock
+    extends MockBloc<AllInvoicesFilterEvent, AllInvoicesFilterState>
     implements AllInvoicesFilterBloc {}
+
 class AdditionalDetailsBlocMock
     extends MockBloc<AdditionalDetailsEvent, AdditionalDetailsState>
     implements AdditionalDetailsBloc {}
@@ -132,6 +137,10 @@ class ReturnSummaryBlocMock
 
 class AllCreditsBlocMock extends MockBloc<AllCreditsEvent, AllCreditsState>
     implements AllCreditsBloc {}
+
+class AlCreditsFilterBlocMock
+    extends MockBloc<AllCreditsFilterEvent, AllCreditsFilterState>
+    implements AllCreditsFilterBloc {}
 
 final fakeShipToInfo =
     ShipToInfo.empty().copyWith(shipToCustomerCode: '00001234');
@@ -178,6 +187,7 @@ void main() {
   late AllInvoicesFilterBlocMock allInvoicesFilterBlocMock;
   late AllInvoicesBlocMock allInvoicesBlocMock;
   late AllCreditsBlocMock allCreditsBlocMock;
+  late AlCreditsFilterBlocMock alCreditsFilterBlocMock;
 
   final fakeSalesOrg = SalesOrganisation(
     salesOrg: SalesOrg('2601'),
@@ -214,6 +224,7 @@ void main() {
     allInvoicesFilterBlocMock = AllInvoicesFilterBlocMock();
     allInvoicesBlocMock = AllInvoicesBlocMock();
     allCreditsBlocMock = AllCreditsBlocMock();
+    alCreditsFilterBlocMock = AlCreditsFilterBlocMock();
   });
 
   setUp(() async {
@@ -316,6 +327,8 @@ void main() {
                 create: (context) => allInvoicesBlocMock),
             BlocProvider<AllCreditsBloc>(
                 create: (context) => allCreditsBlocMock),
+            BlocProvider<AllCreditsFilterBloc>(
+                create: (context) => alCreditsFilterBlocMock),
           ],
           child: Material(
             child: Scaffold(

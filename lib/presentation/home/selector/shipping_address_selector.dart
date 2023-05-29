@@ -19,13 +19,15 @@ import 'package:ezrxmobile/application/order/order_history_list/order_history_li
 import 'package:ezrxmobile/application/order/order_template_list/order_template_list_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/saved_order/saved_order_bloc.dart';
-import 'package:ezrxmobile/application/payments/all_invoices/all_credits/all_credits_bloc.dart';
+import 'package:ezrxmobile/application/payments/all_credits/all_credits_bloc.dart';
+import 'package:ezrxmobile/application/payments/all_credits/all_credits_filter/all_credits_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/filter/all_invoices_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/request_return/request_return_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_summary/return_summary_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_filter.dart';
+import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
 import 'package:ezrxmobile/domain/returns/entities/request_return_filter.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_summary_filter.dart';
@@ -216,7 +218,12 @@ class ShipCodeSelector extends StatelessWidget {
                           .read<CustomerCodeBloc>()
                           .state
                           .customerCodeInfo,
-                      sortDirection: 'desc',
+                      allCreditsFilter: AllCreditsFilter.empty(),
+                    ),
+                  );
+                   context.read<AllCreditsFilterBloc>().add(
+                    AllCreditsFilterEvent.fetch(
+                      salesOrganisation: salesOrgState.salesOrganisation,
                     ),
                   );
             } else {

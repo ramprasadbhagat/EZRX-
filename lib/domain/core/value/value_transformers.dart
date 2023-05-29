@@ -155,7 +155,8 @@ String formattedDateWithDashForAPI(String text) {
     return '';
   }
 
-  return DateFormat(DateTimeFormatString.apiDateWithDashFormat).format(parsedDate);
+  return DateFormat(DateTimeFormatString.apiDateWithDashFormat)
+      .format(parsedDate);
 }
 
 DateTime? tryParseDateTime(String input) {
@@ -187,7 +188,7 @@ DateTime? tryParseDateTime(String input) {
       return null;
     }
   }
-  
+
   return null;
 }
 

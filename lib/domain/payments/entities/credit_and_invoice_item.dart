@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -5,6 +6,8 @@ part 'credit_and_invoice_item.freezed.dart';
 
 @freezed
 class CreditAndInvoiceItem with _$CreditAndInvoiceItem {
+  static final formatter = NumberFormat('###,###,###,###,###.##');
+
   const CreditAndInvoiceItem._();
   factory CreditAndInvoiceItem({
     required String companyCode,
@@ -121,4 +124,7 @@ class CreditAndInvoiceItem with _$CreditAndInvoiceItem {
         returnId: '',
         orderId: '',
       );
+//to convert if amountInTransactionCurrency value is negative
+  String get convertIfAmountInTransactionCurrencyIsNegative =>
+      formatter.format(amountInTransactionCurrency * -1);
 }

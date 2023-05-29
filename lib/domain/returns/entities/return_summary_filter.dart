@@ -43,7 +43,7 @@ class ReturnSummaryFilter with _$ReturnSummaryFilter {
         start: dateFrom.dateTimeByDateString,
         end: dateTo.dateTimeByDateString,
       );
-        List<ReturnSummaryStatus> get returnSummaryFilteredStatus =>
+  List<ReturnSummaryStatus> get returnSummaryFilteredStatus =>
       returnSummaryStatus.map((e) => ReturnSummaryStatus(e)).toList();
 
   ReturnSummaryStatus get activeStatus => sortBy;
@@ -55,18 +55,15 @@ class ReturnSummaryFilter with _$ReturnSummaryFilter {
           refundTotalFrom.getOrDefaultValue(0));
 
 // to check if any filter applied
-  bool get anyFilterApplied =>
-      this != ReturnSummaryFilter.empty();
+  bool get anyFilterApplied => this != ReturnSummaryFilter.empty();
 
 //to check if both the TotalValue fields are empty
   bool get _checkIfRefundTotalIsEmpty =>
-      !refundTotalFrom.isValid() &&
-      !refundTotalTo.isValid();
+      !refundTotalFrom.isValid() && !refundTotalTo.isValid();
 
 //to check if any TotalValue fields are empty
   bool get checkIfAnyRefundTotalIsEmpty =>
-      !refundTotalFrom.isValid() ||
-      !refundTotalTo.isValid();
+      !refundTotalFrom.isValid() || !refundTotalTo.isValid();
 
 // to check the filter validation
 
