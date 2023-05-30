@@ -6,9 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AllCreditsFilterByStatus extends StatelessWidget {
-  const AllCreditsFilterByStatus({
-    Key? key,
-  }) : super(key: key);
+  const AllCreditsFilterByStatus({ Key? key,}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +19,7 @@ class AllCreditsFilterByStatus extends StatelessWidget {
         context.router.popForced();
       },
       child: Column(
+        key: const ValueKey('all_credits_filter_by_status'),
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           AppBar(

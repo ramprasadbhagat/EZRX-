@@ -249,6 +249,8 @@ class _CreditsItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
+        key: const ValueKey('creditsItemTile'),
+
         onTap: () {},
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
