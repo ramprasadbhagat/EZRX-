@@ -64,6 +64,7 @@ import 'package:ezrxmobile/infrastructure/account/datasource/payment_methods_rem
 import 'package:ezrxmobile/infrastructure/account/datasource/payment_methods_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/payment_methods_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/payment_methods_repository.dart';
+import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart';
 import 'package:ezrxmobile/infrastructure/core/common/device_info.dart';
 import 'package:ezrxmobile/infrastructure/core/common/file_picker.dart';
 import 'package:ezrxmobile/infrastructure/core/common/permission_service.dart';
@@ -432,6 +433,13 @@ void setupLocator() {
   );
 
   locator.registerLazySingleton(
+    () => ClevertapService(
+      config: locator<Config>(),
+      pushNotificationService: locator<PushNotificationService>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
     () => AuthRepository(
       accountSelectorStorage: locator<AccountSelectorStorage>(),
       config: locator<Config>(),
@@ -545,6 +553,7 @@ void setupLocator() {
 
   locator.registerLazySingleton(
     () => UserRepository(
+      clevertapService: locator<ClevertapService>(),
       config: locator<Config>(),
       remoteDataSource: locator<UserRemoteDataSource>(),
       localDataSource: locator<UserLocalDataSource>(),

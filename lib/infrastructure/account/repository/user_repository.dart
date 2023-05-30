@@ -10,6 +10,7 @@ import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/user_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/user_remote.dart';
+import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/analytics.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/crashlytics.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/token_storage.dart';
@@ -24,6 +25,7 @@ class UserRepository implements IUserRepository {
   final FirebaseCrashlyticsService firebaseCrashlyticsService;
   final TokenStorage tokenStorage;
   final MixpanelService mixpanelService;
+  final ClevertapService clevertapService;
 
   UserRepository({
     required this.config,
@@ -33,6 +35,7 @@ class UserRepository implements IUserRepository {
     required this.firebaseCrashlyticsService,
     required this.tokenStorage,
     required this.mixpanelService,
+    required this.clevertapService,
   });
 
   @override
@@ -59,6 +62,13 @@ class UserRepository implements IUserRepository {
       mixpanelService.setUser(
         firstName: user.fullName.firstName,
         lastName: user.fullName.lastName,
+        username: user.username.getOrDefaultValue(''),
+        email: user.email.getOrDefaultValue(''),
+        role: user.role.name,
+      );
+
+      await clevertapService.setUser(
+        name: user.fullName.displayFullName,
         username: user.username.getOrDefaultValue(''),
         email: user.email.getOrDefaultValue(''),
         role: user.role.name,

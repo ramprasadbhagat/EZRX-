@@ -5,6 +5,7 @@ import 'package:ezrxmobile/infrastructure/account/datasource/user_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/user_remote.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/user_repository.dart';
 import 'package:ezrxmobile/infrastructure/auth/dtos/jwt_dto.dart';
+import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/analytics.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/crashlytics.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/token_storage.dart';
@@ -26,6 +27,8 @@ class FirebaseAnalyticsMock extends Mock implements FirebaseAnalytics {}
 
 class MockTokenStorage extends Mock implements TokenStorage {}
 
+class MockClevertapService extends Mock implements ClevertapService {}
+
 class FirebaseAnalyticsObserverMock extends Mock
     implements FirebaseAnalyticsObserver {}
 
@@ -46,6 +49,8 @@ void main() {
   const rootAdminToken =
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBVVRIX1RPS0VOIjoidzl4cEFhQkRZUSIsImV4cCI6MTY2MzQwOTAzNiwiaWF0IjoxNjYzMzIyNjM2LCJpZCI6MTE0NjEsInJpZ2h0cyI6W3sidmFsdWUiOlt7ImN1c3RvbWVyQ29kZSI6ImFsbCIsInNhbGVzT3JnIjoiMjYwMSIsInNoaXBUb0NvZGUiOlsiYWxsIl19XX1dLCJyb2xlIjoiWlAgQWRtaW4iLCJzYWxlc09yZ3MiOlsiMjYwMSJdLCJ1c2VybmFtZSI6ImV6cnh0ZXN0MDUifQ.MakZTQ3JUVqeRuXQcBU1cUKmHZft5AmFPJDvuG4DjlA';
   late String date;
+  late MockClevertapService mockClevertapService;
+
   setUpAll(
     () async {
       configMock = ConfigMock();
@@ -64,7 +69,9 @@ void main() {
       firebaseCrashlyticsServiceMock = FirebaseCrashlyticsService(
         crashlytics: firebaseCrashlyticsMock,
       );
+      mockClevertapService = MockClevertapService();
       repository = UserRepository(
+        clevertapService: mockClevertapService,
         firebaseCrashlyticsService: firebaseCrashlyticsServiceMock,
         firebaseAnalyticsService: firebaseAnalyticsServiceMock,
         remoteDataSource: remoteDataSourceMock,
@@ -73,6 +80,7 @@ void main() {
         tokenStorage: tokenStorageMock,
         mixpanelService: mixpanelService,
       );
+
       date = DateTime.now().toUtc().toIso8601String();
     },
   );
@@ -81,6 +89,7 @@ void main() {
       'update notification from local datasource successfully with mock',
       () async {
         repository = UserRepository(
+          clevertapService: mockClevertapService,
           firebaseCrashlyticsService: firebaseCrashlyticsServiceMock,
           firebaseAnalyticsService: firebaseAnalyticsServiceMock,
           remoteDataSource: remoteDataSourceMock,
@@ -107,6 +116,7 @@ void main() {
       'update notification from local datasource throws error with mock',
       () async {
         repository = UserRepository(
+          clevertapService: mockClevertapService,
           firebaseCrashlyticsService: firebaseCrashlyticsServiceMock,
           firebaseAnalyticsService: firebaseAnalyticsServiceMock,
           remoteDataSource: remoteDataSourceMock,
@@ -133,6 +143,7 @@ void main() {
       'update notification from remote datasource successfully with uat',
       () async {
         repository = UserRepository(
+          clevertapService: mockClevertapService,
           firebaseCrashlyticsService: firebaseCrashlyticsServiceMock,
           firebaseAnalyticsService: firebaseAnalyticsServiceMock,
           remoteDataSource: remoteDataSourceMock,
@@ -161,6 +172,7 @@ void main() {
       'update notification from remote datasource throws error with uat',
       () async {
         repository = UserRepository(
+          clevertapService: mockClevertapService,
           firebaseCrashlyticsService: firebaseCrashlyticsServiceMock,
           firebaseAnalyticsService: firebaseAnalyticsServiceMock,
           remoteDataSource: remoteDataSourceMock,
@@ -281,6 +293,7 @@ void main() {
       'update user tc from local datasource successfully with mock',
       () async {
         repository = UserRepository(
+          clevertapService: mockClevertapService,
           firebaseCrashlyticsService: firebaseCrashlyticsServiceMock,
           firebaseAnalyticsService: firebaseAnalyticsServiceMock,
           remoteDataSource: remoteDataSourceMock,
@@ -305,6 +318,7 @@ void main() {
       'update user tc from local datasource throws error with mock',
       () async {
         repository = UserRepository(
+          clevertapService: mockClevertapService,
           firebaseCrashlyticsService: firebaseCrashlyticsServiceMock,
           firebaseAnalyticsService: firebaseAnalyticsServiceMock,
           remoteDataSource: remoteDataSourceMock,
@@ -329,6 +343,7 @@ void main() {
       'update user tc from remote datasource successfully with uat',
       () async {
         repository = UserRepository(
+          clevertapService: mockClevertapService,
           firebaseCrashlyticsService: firebaseCrashlyticsServiceMock,
           firebaseAnalyticsService: firebaseAnalyticsServiceMock,
           remoteDataSource: remoteDataSourceMock,
@@ -354,6 +369,7 @@ void main() {
       'update user tc from remote datasource throws error with uat',
       () async {
         repository = UserRepository(
+          clevertapService: mockClevertapService,
           firebaseCrashlyticsService: firebaseCrashlyticsServiceMock,
           firebaseAnalyticsService: firebaseAnalyticsServiceMock,
           remoteDataSource: remoteDataSourceMock,
@@ -379,6 +395,7 @@ void main() {
       'get user from local datasource successfully with mock',
       () async {
         repository = UserRepository(
+          clevertapService: mockClevertapService,
           firebaseCrashlyticsService: firebaseCrashlyticsServiceMock,
           firebaseAnalyticsService: firebaseAnalyticsServiceMock,
           remoteDataSource: remoteDataSourceMock,
@@ -403,6 +420,7 @@ void main() {
       'get user from local datasource throws error with mock',
       () async {
         repository = UserRepository(
+          clevertapService: mockClevertapService,
           firebaseCrashlyticsService: firebaseCrashlyticsServiceMock,
           firebaseAnalyticsService: firebaseAnalyticsServiceMock,
           remoteDataSource: remoteDataSourceMock,
@@ -427,6 +445,7 @@ void main() {
       'get user from remote datasource successfully with uat',
       () async {
         repository = UserRepository(
+          clevertapService: mockClevertapService,
           firebaseCrashlyticsService: firebaseCrashlyticsServiceMock,
           firebaseAnalyticsService: firebaseAnalyticsServiceMock,
           remoteDataSource: remoteDataSourceMock,
@@ -449,6 +468,15 @@ void main() {
         when(() => firebaseCrashlyticsServiceMock.crashlytics
                 .setUserIdentifier(User.empty().id))
             .thenAnswer((invocation) async => User.empty());
+        final mockUser = User.empty();
+        when(
+          () => mockClevertapService.setUser(
+            name: mockUser.fullName.displayFullName,
+            username: mockUser.username.getOrDefaultValue(''),
+            email: mockUser.email.getOrDefaultValue(''),
+            role: mockUser.role.name,
+          ),
+        ).thenAnswer((invocation) => Future.value());
 
         final result = await repository.getUser();
         expect(result.isRight(), true);
@@ -459,6 +487,7 @@ void main() {
       'get user from remote datasource throws error with uat',
       () async {
         repository = UserRepository(
+          clevertapService: mockClevertapService,
           firebaseCrashlyticsService: firebaseCrashlyticsServiceMock,
           firebaseAnalyticsService: firebaseAnalyticsServiceMock,
           remoteDataSource: remoteDataSourceMock,

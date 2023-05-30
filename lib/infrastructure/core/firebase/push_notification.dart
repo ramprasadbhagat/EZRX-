@@ -147,12 +147,15 @@ class PushNotificationService {
         'AppPushs onMessage : ${message?.notification?.title} ${message?.notification?.body} ${message?.data}',
       );
       if (message == null) return;
-      await _showLocalNotification(
-        message.notification.hashCode,
-        message.notification?.title,
-        message.notification?.body,
-        jsonEncode({'data': message.data}),
-      );
+      final cleverTapId = message.data['wzrk_acct_id'] ?? '';
+      if (cleverTapId.isEmpty) {
+        await _showLocalNotification(
+          message.notification.hashCode,
+          message.notification?.title,
+          message.notification?.body,
+          jsonEncode({'data': message.data}),
+        );
+      }
     });
 
     // Handle any interaction when the app is in the background via a Stream listener

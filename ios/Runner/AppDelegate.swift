@@ -1,6 +1,8 @@
 import UIKit
 import Flutter
 import FirebaseCore
+import CleverTapSDK
+import clevertap_plugin
 
 @UIApplicationMain
 @objc class AppDelegate: FlutterAppDelegate {
@@ -10,6 +12,7 @@ import FirebaseCore
   ) -> Bool {
     FirebaseApp.configure()
     GeneratedPluginRegistrant.register(with: self)
+    CleverTapPlugin.sharedInstance()?.applicationDidLaunch(options: launchOptions)
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
 }

@@ -26,6 +26,7 @@ import 'package:ezrxmobile/application/returns/approver_actions/return_approver_
 import 'package:ezrxmobile/application/returns/return_summary/return_summary_bloc.dart';
 import 'package:ezrxmobile/application/returns/request_return_filter/request_return_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_summary_details/return_summary_details_bloc.dart';
+import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/setting_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
@@ -157,6 +158,7 @@ Future<void> initialSetup({required Flavor flavor}) async {
       trackAutomaticEvents: true,
     ),
   );
+  await locator<ClevertapService>().init();
 
   if (!kIsWeb) {
     await Wakelock.enable();

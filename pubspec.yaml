@@ -87,6 +87,7 @@ dependencies:
   universal_io: ^2.0.4
   mixpanel_flutter: ^2.0.0
   visibility_detector: ^0.3.3
+  clevertap_plugin: ^1.6.1
 
 
   # The following adds the Cupertino Icons font to your application.
