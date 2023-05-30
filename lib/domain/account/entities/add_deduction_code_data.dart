@@ -2,25 +2,30 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'deduction_code.freezed.dart';
+part 'add_deduction_code_data.freezed.dart';
 
 @freezed
-class DeductionCode with _$DeductionCode {
-  const DeductionCode._();
-
-  const factory DeductionCode({
+class AddDeductionCodeData with _$AddDeductionCodeData {
+  const AddDeductionCodeData._();
+  const factory AddDeductionCodeData({
     required SalesOrg salesOrg,
     required StringValue salesDistrict,
     required StringValue deductionCode,
-    required StringValue deductionDescription,
     required StringValue amountType,
-  }) = _DeductionCode;
+    required StringValue deductionDescription,
+  }) = _AddDeductionCodeData;
 
-  factory DeductionCode.empty() => DeductionCode(
+  factory AddDeductionCodeData.empty() => AddDeductionCodeData(
         salesOrg: SalesOrg(''),
         salesDistrict: StringValue(''),
         deductionCode: StringValue(''),
-        deductionDescription: StringValue(''),
         amountType: StringValue(''),
+        deductionDescription: StringValue(''),
       );
+
+  bool get isValid =>
+      salesOrg.isValid() &&
+      deductionCode.isValid() &&
+      amountType.isValid() &&
+      deductionDescription.isValid();
 }

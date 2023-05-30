@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/domain/account/entities/deduction_code.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'deduction_code_dto.freezed.dart';
@@ -25,20 +26,20 @@ class DeductionCodeDto with _$DeductionCodeDto {
   ) {
     return DeductionCodeDto(
       salesOrg: deductionCode.salesOrg.getOrCrash(),
-      salesDistrict: deductionCode.salesDistrict,
-      deductionCode: deductionCode.deductionCode,
-      deductionDescription: deductionCode.deductionDescription,
-      amountType: deductionCode.amountType,
+      salesDistrict: deductionCode.salesDistrict.getOrCrash(),
+      deductionCode: deductionCode.deductionCode.getOrCrash(),
+      deductionDescription: deductionCode.deductionDescription.getOrCrash(),
+      amountType: deductionCode.amountType.getOrCrash(),
     );
   }
 
   DeductionCode toDomain() {
     return DeductionCode(
       salesOrg: SalesOrg(salesOrg),
-      salesDistrict: salesDistrict,
-      deductionCode: deductionCode,
-      deductionDescription: deductionDescription,
-      amountType: amountType,
+      salesDistrict: StringValue(salesDistrict),
+      deductionCode: StringValue(deductionCode),
+      deductionDescription: StringValue(deductionDescription),
+      amountType: StringValue(amountType),
     );
   }
 

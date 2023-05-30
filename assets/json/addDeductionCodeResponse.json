@@ -1,0 +1,11 @@
+{
+    "data": {
+        "addDeductionCode": {
+            "success": true,
+            "info": "Data Inserted Successfully"
+        }
+    },
+    "extensions": {
+        "trace-id": "aafaf929f518410d9ba56d4793c495a6"
+    }
+}

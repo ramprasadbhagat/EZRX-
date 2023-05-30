@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/payment_configuration/deduction_code/manage_deduction_code/manage_deduction_code_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/deduction_code/view_deduction_code/deduction_code_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/deduction_code.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
@@ -44,6 +45,16 @@ class DeductionCodeListPage extends StatelessWidget {
                   );
           },
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        key: const Key('addDeductionCodeKey'),
+        onPressed: () {
+          context
+              .read<ManageDeductionCodeBloc>()
+              .add(const ManageDeductionCodeEvent.initialized());
+          context.router.pushNamed('payments/add_deduction_code');
+        },
+        child: const Icon(Icons.add),
       ),
     );
   }
@@ -108,19 +119,19 @@ List<_DeductionCodeLabel> _getDeductionCodeLabels({
     [
       _DeductionCodeLabel(
         key: 'Sales District'.tr(),
-        value: deductionCode.salesDistrictLabel,
+        value: deductionCode.salesDistrict.displayLabel,
       ),
       _DeductionCodeLabel(
         key: 'Deduction Code'.tr(),
-        value: deductionCode.deductionCode,
+        value: deductionCode.deductionCode.getOrDefaultValue(''),
       ),
       _DeductionCodeLabel(
         key: 'Description'.tr(),
-        value: deductionCode.deductionDescription,
+        value: deductionCode.deductionDescription.getOrDefaultValue(''),
       ),
       _DeductionCodeLabel(
         key: 'Account Type'.tr(),
-        value: deductionCode.amountType,
+        value: deductionCode.amountType.getOrDefaultValue(''),
       ),
     ];
 

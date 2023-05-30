@@ -149,12 +149,14 @@ class StringValue extends ValueObject<String> {
   final Either<ValueFailure<String>, String> value;
 
   factory StringValue(String input) {
-    return StringValue._(Right(input));
+    return StringValue._(validateStringNotEmpty(input));
   }
 
   String get displayStringValue {
     return dashIfEmpty((value.getOrElse(() => '')));
   }
+
+  String get displayLabel => naIfEmpty(value.getOrElse(() => ''));
 
   Color get getPaymentAdviceColor => getValueColor(value.getOrElse(() => ''));
 

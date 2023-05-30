@@ -1,5 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/entities/add_deduction_code.dart';
+import 'package:ezrxmobile/domain/account/entities/add_deduction_code_data.dart';
 import 'package:ezrxmobile/domain/account/entities/deduction_code.dart';
 import 'package:ezrxmobile/domain/account/repository/i_deduction_code_repository.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -34,6 +36,36 @@ class DeductionCodeRepository implements IDeductionCodeRepository {
       final deductionCodes = await remoteDataSource.getDeductionCodes();
 
       return Right(deductionCodes);
+    } catch (e) {
+      return Left(
+        FailureHandler.handleFailure(e),
+      );
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, AddDeductionCode>> addDeductionCodes({
+    required AddDeductionCodeData deductionCode,
+  }) async {
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final deductionCodes = await localDataSource.addDeductionCode();
+
+        return Right(deductionCodes);
+      } on MockException catch (e) {
+        return Left(ApiFailure.other(e.message));
+      }
+    }
+    try {
+      final addDeductionCode = await remoteDataSource.addDeductionCode(
+        amountType: deductionCode.amountType.getOrCrash(),
+        deductionCode: deductionCode.deductionCode.getOrCrash(),
+        deductionDescription: deductionCode.deductionDescription.getOrCrash(),
+        salesDistrict: deductionCode.salesDistrict.getOrCrash(),
+        salesOrg: deductionCode.salesOrg.getOrCrash(),
+      );
+
+      return Right(addDeductionCode);
     } catch (e) {
       return Left(
         FailureHandler.handleFailure(e),

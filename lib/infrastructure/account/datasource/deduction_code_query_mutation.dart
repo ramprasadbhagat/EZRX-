@@ -12,4 +12,15 @@ class DeductionCodeQueryMutation {
       }
     ''';
   }
+
+  String addDeductionCodesMutation() {
+    return '''
+      mutation addDeductionCodeMutation(\$input: addDeductionCodeInput!) {
+        addDeductionCode(input: \$input) {
+          success
+          info
+        }
+      }
+    ''';
+  }
 }

@@ -1,6 +1,7 @@
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/bank_beneficiary/add_beneficiary/add_beneficiary_bloc.dart';
+import 'package:ezrxmobile/application/account/payment_configuration/deduction_code/manage_deduction_code/manage_deduction_code_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/deduction_code/view_deduction_code/deduction_code_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/add_payment_method/add_payment_method_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/manage_payment_method/manage_payment_methods_bloc.dart';
@@ -2265,6 +2266,12 @@ void setupLocator() {
 
   locator.registerLazySingleton(
     () => DeductionCodeBloc(
+      deductionCodeRepository: locator<DeductionCodeRepository>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => ManageDeductionCodeBloc(
       deductionCodeRepository: locator<DeductionCodeRepository>(),
     ),
   );
