@@ -13,7 +13,7 @@ abstract class IAllCreditsAndInvoicesRepository {
     required CustomerCodeInfo customerCodeInfo,
     required AllInvoicesFilter filter,
     required int pageSize,
-    required int offSet,
+    required int offset,
   });
   Future<Either<ApiFailure, AvailableStatuses>> getAvailableStatuses({
     required SalesOrganisation salesOrganisation,
@@ -22,7 +22,7 @@ abstract class IAllCreditsAndInvoicesRepository {
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
     required int pageSize,
-    required int offSet,
+    required int offset,
     required AllCreditsFilter allCreditsFilter,
   });
   Future<Either<ApiFailure, AvailableStatuses>>

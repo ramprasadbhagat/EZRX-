@@ -28,7 +28,7 @@ class ReturnSummaryRemoteDataSource {
     required String shipTo,
     required String username,
     required int pageSize,
-    required int offSet,
+    required int offset,
     required Map<String, dynamic> filterQuery,
 
   }) async {
@@ -44,7 +44,7 @@ class ReturnSummaryRemoteDataSource {
               'shipTo': shipTo,
               'username': username,
               'first': pageSize,
-              'after': offSet,
+              'after': offset,
               ...filterQuery,
             },
           },

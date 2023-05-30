@@ -34,7 +34,7 @@ class RequestReturnRemoteDatasource {
     required String shipTo,
     required String soldTo,
     required int pageSize,
-    required int offSet,
+    required int offset,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
       final queryData = query.getReturnRequestList();
@@ -51,7 +51,7 @@ class RequestReturnRemoteDatasource {
           'soldTo': soldTo,
           'shipTo': shipTo,
           'first': pageSize,
-          'after': offSet,
+          'after': offset,
         },
       };
 

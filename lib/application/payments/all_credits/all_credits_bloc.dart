@@ -43,7 +43,7 @@ class AllCreditsBloc extends Bloc<AllCreditsEvent, AllCreditsState> {
           salesOrganisation: value.salesOrganisation,
           customerCodeInfo: value.customerCodeInfo,
           pageSize: _pageSize,
-          offSet: 0,
+          offset: 0,
           allCreditsFilter: value.allCreditsFilter,
         );
 
@@ -84,7 +84,7 @@ class AllCreditsBloc extends Bloc<AllCreditsEvent, AllCreditsState> {
           salesOrganisation: value.salesOrganisation,
           customerCodeInfo: value.customerCodeInfo,
           pageSize: _pageSize,
-          offSet: state.credits.length,
+          offset: state.credits.length,
           allCreditsFilter: value.allCreditsFilter,
         );
 

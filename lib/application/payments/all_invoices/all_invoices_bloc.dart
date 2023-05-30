@@ -43,7 +43,7 @@ class AllInvoicesBloc extends Bloc<AllInvoicesEvent, AllInvoicesState> {
           customerCodeInfo: value.customerCodeInfo,
           filter: value.filter,
           pageSize: _pageSize,
-          offSet: 0,
+          offset: 0,
         );
 
         failureOrSuccess.fold(
@@ -83,7 +83,7 @@ class AllInvoicesBloc extends Bloc<AllInvoicesEvent, AllInvoicesState> {
           customerCodeInfo: value.customerCodeInfo,
           filter: value.filter,
           pageSize: _pageSize,
-          offSet: state.invoices.length,
+          offset: state.invoices.length,
         );
 
         failureOrSuccess.fold(

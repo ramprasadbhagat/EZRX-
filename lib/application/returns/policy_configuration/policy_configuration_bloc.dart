@@ -36,7 +36,7 @@ class PolicyConfigurationBloc
         final failureOrSuccess =
             await policyConfigurationRepository.getPolicyConfiguration(
           salesOrganisation: e.salesOrganisation,
-          offSet: state.policyConfigurationList.length,
+          offset: state.policyConfigurationList.length,
           pageSize: _pageSize,
           searchKey: SearchKey(e.searchKey),
         );
@@ -73,7 +73,7 @@ class PolicyConfigurationBloc
         final failureOrSuccess =
             await policyConfigurationRepository.getPolicyConfiguration(
           salesOrganisation: e.salesOrganisation,
-          offSet: state.policyConfigurationList.length,
+          offset: state.policyConfigurationList.length,
           pageSize: _pageSize,
           searchKey: state.searchKey,
         );

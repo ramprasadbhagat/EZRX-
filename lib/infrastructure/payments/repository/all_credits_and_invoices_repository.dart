@@ -58,7 +58,7 @@ class AllCreditsAndInvoicesRepository extends IAllCreditsAndInvoicesRepository {
     required CustomerCodeInfo customerCodeInfo,
     required AllInvoicesFilter filter,
     required int pageSize,
-    required int offSet,
+    required int offset,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -77,7 +77,7 @@ class AllCreditsAndInvoicesRepository extends IAllCreditsAndInvoicesRepository {
         customerCode: customerCodeInfo.customerCodeSoldTo,
         filterMap: AllInvoicesFilterDto.fromDomain(filter).toMapList,
         pageSize: pageSize,
-        offSet: offSet,
+        offset: offset,
       );
 
       return Right(response);
@@ -93,7 +93,7 @@ class AllCreditsAndInvoicesRepository extends IAllCreditsAndInvoicesRepository {
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
     required int pageSize,
-    required int offSet,
+    required int offset,
     required AllCreditsFilter allCreditsFilter,
   }) async {
     if (config.appFlavor == Flavor.mock) {
@@ -112,7 +112,7 @@ class AllCreditsAndInvoicesRepository extends IAllCreditsAndInvoicesRepository {
         salesOrg: salesOrganisation.salesOrg.getOrCrash(),
         customerCode: customerCodeInfo.customerCodeSoldTo,
         pageSize: pageSize,
-        offSet: offSet,
+        offset: offset,
         filterQuery:
             AllCreditsFilterDto.fromDomain(allCreditsFilter).toFilterByMapList,
       );

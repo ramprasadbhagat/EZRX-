@@ -13,6 +13,6 @@ abstract class IReturnRequestRepository {
     required ShipToInfo shipToInfo,
     required CustomerCodeInfo customerCodeInfo,
     required int pageSize,
-    required int offSet,
+    required int offset,
   });
 }

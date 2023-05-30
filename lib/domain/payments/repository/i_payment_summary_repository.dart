@@ -11,7 +11,7 @@ abstract class IPaymentSummaryRepository {
   Future<Either<ApiFailure, List<PaymentSummaryDetails>>> fetchPaymentSummaryList({
     required SalesOrganisation salesOrganization,
     required CustomerCodeInfo customerCodeInfo,
-    required int offSet,
+    required int offset,
     required int pageSize,
   });
 }

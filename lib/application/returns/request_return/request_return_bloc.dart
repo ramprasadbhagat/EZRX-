@@ -50,7 +50,7 @@ class RequestReturnBloc extends Bloc<RequestReturnEvent, RequestReturnState> {
           shipToInfo: value.shipInfo,
           customerCodeInfo: value.customerCodeInfo,
           pageSize: _pageSize,
-          offSet: 0,
+          offset: 0,
           requestReturnFilter: value.requestReturnFilter,
         );
 
@@ -91,7 +91,7 @@ class RequestReturnBloc extends Bloc<RequestReturnEvent, RequestReturnState> {
           shipToInfo: value.shipInfo,
           customerCodeInfo: value.customerCodeInfo,
           pageSize: _pageSize,
-          offSet: state.returnItemList.length,
+          offset: state.returnItemList.length,
           requestReturnFilter: value.requestReturnFilter,
         );
 

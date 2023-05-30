@@ -72,7 +72,7 @@ void main() {
         setUp: () {
           when(() => repository.getPolicyConfiguration(
               salesOrganisation: mockSalesOrg,
-              offSet: 0,
+              offset: 0,
               pageSize: _pageSize,
               searchKey: SearchKey(''))).thenAnswer(
             (invocation) async => const Left(
@@ -103,7 +103,7 @@ void main() {
         setUp: () {
           when(() => repository.getPolicyConfiguration(
               salesOrganisation: mockSalesOrg,
-              offSet: 0,
+              offset: 0,
                 pageSize: _pageSize,
               searchKey: SearchKey(''),)).thenAnswer(
             (invocation) async => Right(policyConfigurationListMock),
@@ -130,7 +130,7 @@ void main() {
         setUp: () {
           when(() => repository.getPolicyConfiguration(
               salesOrganisation: mockSalesOrg,
-              offSet: 0,
+              offset: 0,
               pageSize: 10,
               searchKey: SearchKey(''),)).thenAnswer(
             (invocation) async => Right(policyConfigurationListMock),

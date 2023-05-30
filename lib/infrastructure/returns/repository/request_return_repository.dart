@@ -29,7 +29,7 @@ class RequestReturnRepository extends IReturnRequestRepository {
     required ShipToInfo shipToInfo,
     required CustomerCodeInfo customerCodeInfo,
     required int pageSize,
-    required int offSet,
+    required int offset,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -58,7 +58,7 @@ class RequestReturnRepository extends IReturnRequestRepository {
         shipTo: shipToInfo.shipToCustomerCode,
         soldTo: customerCodeInfo.customerCodeSoldTo,
         pageSize: pageSize,
-        offSet: offSet,
+        offset: offset,
       );
 
       return Right(returnRequest);

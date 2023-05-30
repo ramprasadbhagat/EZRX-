@@ -42,7 +42,7 @@ class PaymentSummaryBloc
             await paymentSummaryRepository.fetchPaymentSummaryList(
           customerCodeInfo: e.customerCodeInfo,
           salesOrganization: e.salesOrganization,
-          offSet: state.paymentSummaryList.length,
+          offset: state.paymentSummaryList.length,
           pageSize: _pageSize,
         );
 
@@ -72,7 +72,7 @@ class PaymentSummaryBloc
             await paymentSummaryRepository.fetchPaymentSummaryList(
           customerCodeInfo: e.customerCodeInfo,
           salesOrganization: e.salesOrganization,
-          offSet: state.paymentSummaryList.length,
+          offset: state.paymentSummaryList.length,
           pageSize: _pageSize,
         );
 

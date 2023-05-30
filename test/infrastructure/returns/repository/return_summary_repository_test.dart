@@ -73,7 +73,7 @@ void main() {
         shipTo: ShipToInfo.empty(),
         user: User.empty(),
         pageSize: 1,
-        offSet: 0,
+        offset: 0,
         returnSummaryFilter: ReturnSummaryFilter.empty(),
       );
       expect(result.isRight(), true);
@@ -91,7 +91,7 @@ void main() {
         shipTo: ShipToInfo.empty(),
         user: User.empty().copyWith(username: Username('mock-username')),
         pageSize: 1,
-        offSet: 0,
+        offset: 0,
         returnSummaryFilter: ReturnSummaryFilter.empty(),
       );
       expect(result.isLeft(), true);
@@ -104,7 +104,7 @@ void main() {
             soldTo: '',
             shipTo: '',
             pageSize: 1,
-            offSet: 0,
+            offset: 0,
             username: 'mock_username',
             filterQuery: ReturnSummaryFilterDto.fromDomain(
                 ReturnSummaryFilter.empty().copyWith(
@@ -124,7 +124,7 @@ void main() {
         shipTo: ShipToInfo.empty(),
         user: User.empty().copyWith(username: Username('mock_username')),
         pageSize: 1,
-        offSet: 0,
+        offset: 0,
         returnSummaryFilter: ReturnSummaryFilter.empty().copyWith(
           dateFrom: DateTimeStringValue(getDateStringByDateTime(fakeFromDate)),
           dateTo: DateTimeStringValue(getDateStringByDateTime(fakeToDate)),
@@ -144,7 +144,7 @@ void main() {
             soldTo: '',
             shipTo: '',
             pageSize: 1,
-            offSet: 0,
+            offset: 0,
             username: 'mock_username',
             filterQuery: ReturnSummaryFilterDto.fromDomain(
                 ReturnSummaryFilter.empty().copyWith(
@@ -164,7 +164,7 @@ void main() {
         shipTo: ShipToInfo.empty(),
         user: User.empty().copyWith(username: Username('mock_username')),
         pageSize: 1,
-        offSet: 0,
+        offset: 0,
         returnSummaryFilter: ReturnSummaryFilter.empty().copyWith(
           dateFrom: DateTimeStringValue(getDateStringByDateTime(fakeFromDate)),
           dateTo: DateTimeStringValue(getDateStringByDateTime(fakeToDate)),

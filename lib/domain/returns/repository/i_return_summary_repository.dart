@@ -13,7 +13,7 @@ abstract class IReturnSummaryRepository {
     required ShipToInfo shipTo,
     required User user,
     required int pageSize,
-    required int offSet,
+    required int offset,
     required ReturnSummaryFilter returnSummaryFilter,
   });
   

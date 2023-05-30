@@ -57,7 +57,7 @@ void main() {
             shipToInfo: ShipToInfo.empty(),
             customerCodeInfo: CustomerCodeInfo.empty(),
             pageSize: 10,
-            offSet: 0,
+            offset: 0,
           );
           expect(
             result.isRight(),
@@ -77,7 +77,7 @@ void main() {
           shipToInfo: ShipToInfo.empty(),
           customerCodeInfo: CustomerCodeInfo.empty(),
           pageSize: 10,
-          offSet: 0,
+          offset: 0,
         );
         expect(
           result.isLeft(),
@@ -99,7 +99,7 @@ void main() {
               shipTo: 'shipTo',
               soldTo: 'soldTo',
               pageSize: 10,
-              offSet: 0,
+              offset: 0,
             )).thenAnswer((invocation) async => requestReturnResponse);
 
         final result = await requestReturnRepository.searchReturnRequestList(
@@ -110,7 +110,7 @@ void main() {
           customerCodeInfo:
               CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: 'soldTo'),
           pageSize: 10,
-          offSet: 0,
+          offset: 0,
         );
         expect(
           result.isRight(),
@@ -133,7 +133,7 @@ void main() {
               shipTo: 'shipTo',
               soldTo: 'soldTo',
               pageSize: 10,
-              offSet: 0,
+              offset: 0,
             )).thenAnswer((invocation) async => requestReturnResponse);
 
         final result = await requestReturnRepository.searchReturnRequestList(
@@ -146,7 +146,7 @@ void main() {
           customerCodeInfo:
               CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: 'soldTo'),
           pageSize: 10,
-          offSet: 0,
+          offset: 0,
         );
         expect(
           result.isRight(),
@@ -169,7 +169,7 @@ void main() {
             shipTo: 'shipTo',
             soldTo: 'soldTo',
             pageSize: 10,
-            offSet: 0,
+            offset: 0,
           ),
         ).thenThrow(const ApiFailure.serverTimeout());
 
@@ -181,7 +181,7 @@ void main() {
           customerCodeInfo:
               CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: 'soldTo'),
           pageSize: 10,
-          offSet: 0,
+          offset: 0,
         );
         expect(
           result.isLeft(),

@@ -9,7 +9,7 @@ abstract class IPolicyConfigurationRepository {
   Future<Either<ApiFailure, List<PolicyConfiguration>>> getPolicyConfiguration({
     required SalesOrganisation salesOrganisation,
     required SearchKey searchKey,
-    required int offSet,
+    required int offset,
     required int pageSize,
   });
   Future<Either<ApiFailure, List<PolicyConfiguration>>> getDeletePolicy({

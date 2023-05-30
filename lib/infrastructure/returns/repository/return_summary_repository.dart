@@ -29,7 +29,7 @@ class ReturnSummaryRepository implements IReturnSummaryRepository {
     required ShipToInfo shipTo,
     required User user,
     required int pageSize,
-    required int offSet,
+    required int offset,
     required ReturnSummaryFilter returnSummaryFilter,
   }) async {
     if (config.appFlavor == Flavor.mock) {
@@ -51,7 +51,7 @@ class ReturnSummaryRepository implements IReturnSummaryRepository {
         soldTo: soldTo.customerCodeSoldTo,
         username: user.username.getOrCrash(),
         pageSize: pageSize,
-        offSet: offSet,
+        offset: offset,
         filterQuery:
             ReturnSummaryFilterDto.fromDomain(returnSummaryFilter).toJson(),
 

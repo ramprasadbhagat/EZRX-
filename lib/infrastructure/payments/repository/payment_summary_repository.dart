@@ -31,7 +31,7 @@ class PaymentSummaryRepository extends IPaymentSummaryRepository {
       fetchPaymentSummaryList({
     required SalesOrganisation salesOrganization,
     required CustomerCodeInfo customerCodeInfo,
-    required int offSet,
+    required int offset,
     required int pageSize,
   }) async {
     final salesOrgCode = salesOrganization.salesOrg.getOrCrash();
@@ -49,7 +49,7 @@ class PaymentSummaryRepository extends IPaymentSummaryRepository {
      final paymentSummaryList = await remoteDataSource.getPaymentSummary(
         customerCode: customerCode,
         salesOrg: salesOrgCode,
-        offset: offSet,
+        offset: offset,
         pageSize: pageSize,
       );
     

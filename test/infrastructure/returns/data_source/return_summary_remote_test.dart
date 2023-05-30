@@ -82,7 +82,7 @@ void main() {
           shipTo: 'mock_shipTo',
           username: 'mock_username',
           pageSize: 1,
-          offSet: 0,
+          offset: 0,
           filterQuery: {},
         );
 
@@ -126,7 +126,7 @@ void main() {
           shipTo: 'mock_shipTo',
           username: 'mock_username',
           pageSize: 1,
-          offSet: 0,
+          offset: 0,
           filterQuery: {},
         ).onError((error, stackTrace) async {
           expect(error, isA<ServerException>());
@@ -171,7 +171,7 @@ void main() {
             shipTo: 'mock_shipTo',
             username: 'mock_username',
             pageSize: 1,
-            offSet: 0,
+            offset: 0,
             filterQuery: {}).onError((error, stackTrace) async {
           expect(error, isA<ServerException>());
           return Future.value(ReturnSummaryRequestByUser.empty());

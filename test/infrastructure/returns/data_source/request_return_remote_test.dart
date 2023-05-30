@@ -91,7 +91,7 @@ void main() {
             invoiceNo: '',
             materialDescription: '',
             materialNumber: '',
-            offSet: 0,
+            offset: 0,
             pageSize: 10,
             principalSearch: '',
             salesOrg: 'salesOrg',
@@ -138,7 +138,7 @@ void main() {
             shipTo: 'shipTo',
             soldTo: 'soldTo',
             pageSize: 10,
-            offSet: 0,
+            offset: 0,
           )
               .onError((error, _) async {
             expect(error, isA<ServerException>());
@@ -182,7 +182,7 @@ void main() {
             shipTo: 'shipTo',
             soldTo: 'soldTo',
             pageSize: 10,
-            offSet: 0,
+            offset: 0,
           )
               .onError((error, _) async {
             expect(error, isA<ServerException>());

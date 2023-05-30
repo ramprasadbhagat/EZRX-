@@ -32,7 +32,7 @@ class PolicyConfigurationRepository implements IPolicyConfigurationRepository {
   Future<Either<ApiFailure, List<PolicyConfiguration>>> getPolicyConfiguration({
     required SalesOrganisation salesOrganisation,
     required SearchKey searchKey,
-    required int offSet,
+    required int offset,
     required int pageSize,
   }) async {
     final searchValue = searchKey.getValue();
@@ -52,7 +52,7 @@ class PolicyConfigurationRepository implements IPolicyConfigurationRepository {
       final policyConfigurationList =
           await remoteDataSource.getPolicyConfiguration(
         salesOrg: salesOrganisation.salesOrg.getOrCrash(),
-        offSet: offSet,
+        offset: offset,
         pageSize: pageSize,
         searchKey: searchValue,
       );

@@ -75,7 +75,7 @@ void main() {
 
       final result = await policyConfigurationRepo.getPolicyConfiguration(
         salesOrganisation: mockSalesOrg,
-        offSet: 0,
+        offset: 0,
         pageSize: 10,
         searchKey: SearchKey(''),
       );
@@ -92,7 +92,7 @@ void main() {
 
       final result = await policyConfigurationRepo.getPolicyConfiguration(
         salesOrganisation: mockSalesOrg,
-        offSet: 0,
+        offset: 0,
         pageSize: 10,
         searchKey: SearchKey(''),
       );
@@ -106,14 +106,14 @@ void main() {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
       when(() => policyConfigurationRemoteSource.getPolicyConfiguration(
               salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
-              offSet: 0,
+              offset: 0,
               pageSize: 10,
               searchKey: '',))
           .thenAnswer((invocation) async => policyConfigurationListMock);
 
       final result = await policyConfigurationRepo.getPolicyConfiguration(
         salesOrganisation: mockSalesOrg,
-        offSet: 0,
+        offset: 0,
         pageSize: 10,
         searchKey: SearchKey(''),
       );
@@ -128,14 +128,14 @@ void main() {
       when(
         () => policyConfigurationRemoteSource.getPolicyConfiguration(
             salesOrg: mockSalesOrg.salesOrg.getOrDefaultValue(''),
-            offSet: 0,
+            offset: 0,
             pageSize: 10,
             searchKey: '',),
       ).thenThrow(const ApiFailure.serverTimeout());
 
       final result = await policyConfigurationRepo.getPolicyConfiguration(
         salesOrganisation: mockSalesOrg,
-        offSet: 0,
+        offset: 0,
         pageSize: 10,
         searchKey: SearchKey(''),
       );

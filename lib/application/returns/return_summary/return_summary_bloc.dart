@@ -40,7 +40,7 @@ class ReturnSummaryBloc extends Bloc<ReturnSummaryEvent, ReturnSummaryState> {
           soldTo: e.customerCodeInfo,
           shipTo: e.shipToInfo,
           pageSize: _pageSize,
-          offSet: 0,
+          offset: 0,
           returnSummaryFilter: e.returnSummaryFilter,
         );
 
@@ -79,7 +79,7 @@ class ReturnSummaryBloc extends Bloc<ReturnSummaryEvent, ReturnSummaryState> {
           soldTo: value.customerCodeInfo,
           shipTo: value.shipToInfo,
           pageSize: _pageSize,
-          offSet: state.returnSummaryList.length,
+          offset: state.returnSummaryList.length,
           returnSummaryFilter: value.returnSummaryFilter,
         );
         failureOrSuccess.fold(

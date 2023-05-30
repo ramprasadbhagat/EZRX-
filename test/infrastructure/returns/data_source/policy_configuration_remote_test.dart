@@ -113,7 +113,7 @@ void main() {
 
           final result = await remoteDataSource.getPolicyConfiguration(
             salesOrg: salesOrg,
-            offSet: 0,
+            offset: 0,
             pageSize: 10,
             searchKey: '',
           );
@@ -153,7 +153,7 @@ void main() {
           await remoteDataSource
               .getPolicyConfiguration(
             salesOrg: salesOrg,
-            offSet: 0,
+            offset: 0,
             pageSize: 10,
             searchKey: '',
           )
@@ -190,7 +190,7 @@ void main() {
           await remoteDataSource
               .getPolicyConfiguration(
             salesOrg: salesOrg,
-            offSet: 0,
+            offset: 0,
             pageSize: 10,
             searchKey: '',
           )

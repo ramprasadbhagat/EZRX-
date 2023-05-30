@@ -25,7 +25,7 @@ class PolicyConfigurationRemoteDataSource {
   Future<List<PolicyConfiguration>> getPolicyConfiguration({
     required String salesOrg,
     required String searchKey,
-    required int offSet,
+    required int offset,
     required int pageSize,
   }) async {
     return await dataSourceExceptionHandler.handle(
@@ -42,7 +42,7 @@ class PolicyConfigurationRemoteDataSource {
                   'salesOrg': salesOrg,
                   'searchKey': searchKey,
                   'first': pageSize,
-                  'after': offSet,
+                  'after': offset,
                 },
               },
             },

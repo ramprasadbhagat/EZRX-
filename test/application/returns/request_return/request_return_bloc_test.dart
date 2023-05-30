@@ -69,7 +69,7 @@ void main() {
                 salesOrganisation: fakeSalesOrg,
                 shipToInfo: fakeShipToInfo,
                 customerCodeInfo: fakeCustomerCodeInfo,
-                offSet: 0,
+                offset: 0,
                 pageSize: _defaultPageSize,
                 requestReturnFilter: fakeRequestReturnFilter,
               )).thenAnswer(
@@ -108,7 +108,7 @@ void main() {
                 salesOrganisation: fakeSalesOrg,
                 shipToInfo: fakeShipToInfo,
                 customerCodeInfo: fakeCustomerCodeInfo,
-                offSet: 0,
+                offset: 0,
                 pageSize: _defaultPageSize,
                 requestReturnFilter: fakeRequestReturnFilter,
               )).thenAnswer(
@@ -151,7 +151,7 @@ void main() {
                 salesOrganisation: fakeSalesOrg,
                 shipToInfo: fakeShipToInfo,
                 customerCodeInfo: fakeCustomerCodeInfo,
-                offSet: requestReturn.items.length,
+                offset: requestReturn.items.length,
                 pageSize: _defaultPageSize,
                 requestReturnFilter: fakeRequestReturnFilter,
               )).thenAnswer(
@@ -194,7 +194,7 @@ void main() {
                 salesOrganisation: fakeSalesOrg,
                 shipToInfo: fakeShipToInfo,
                 customerCodeInfo: fakeCustomerCodeInfo,
-                offSet: requestReturn.items.length,
+                offset: requestReturn.items.length,
                 pageSize: _defaultPageSize,
                 requestReturnFilter: fakeRequestReturnFilter,
               )).thenAnswer(

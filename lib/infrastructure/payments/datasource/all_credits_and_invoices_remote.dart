@@ -79,7 +79,7 @@ class AllCreditsAndInvoicesRemoteDataSource {
     required String salesOrg,
     required List<Map<String, String>> filterMap,
     String sortDirection = 'desc',
-    required int offSet,
+    required int offset,
     required int pageSize,
   }) async {
     final res = await httpService.request(
@@ -94,7 +94,7 @@ class AllCreditsAndInvoicesRemoteDataSource {
               'customerCode': customerCode,
               'salesOrg': salesOrg,
               'first': pageSize,
-              'after': offSet,
+              'after': offset,
               'excelFor': 'Debit',
               'orderBy': [
                 {
@@ -117,7 +117,7 @@ class AllCreditsAndInvoicesRemoteDataSource {
   Future<CustomerDocumentHeader> getAllCredits({
     required String customerCode,
     required String salesOrg,
-    required int offSet,
+    required int offset,
     required int pageSize,
     required List<Map<String, dynamic>> filterQuery,
   }) async {
@@ -133,7 +133,7 @@ class AllCreditsAndInvoicesRemoteDataSource {
               'customerCode': customerCode,
               'salesOrg': salesOrg,
               'first': pageSize,
-              'after': offSet,
+              'after': offset,
               'excelFor': 'Credit',
               'orderBy': [],
               'filterBy': filterQuery,

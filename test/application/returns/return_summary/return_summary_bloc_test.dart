@@ -75,7 +75,7 @@ void main() {
                 user:
                     User.empty().copyWith(username: Username('mock-username')),
                 pageSize: _pageSize,
-                offSet: 0,
+                offset: 0,
                 returnSummaryFilter: returnSummaryFilter,
               )).thenAnswer(
             (invocation) async =>  Right(
@@ -110,7 +110,7 @@ void main() {
                 user:
                     User.empty().copyWith(username: Username('mock-username')),
                 pageSize: _pageSize,
-                offSet: 0,
+                offset: 0,
                 returnSummaryFilter: returnSummaryFilter,
               )).thenAnswer(
             (invocation) async => const Left(
@@ -147,7 +147,7 @@ void main() {
                 user:
                     User.empty().copyWith(username: Username('mock-username')),
                 pageSize: _pageSize,
-                offSet: 0,
+                offset: 0,
                 returnSummaryFilter: returnSummaryFilter,
               )).thenAnswer(
             (invocation) async =>  Right(
@@ -183,7 +183,7 @@ void main() {
                 user:
                     User.empty().copyWith(username: Username('mock-username')),
                 pageSize: _pageSize,
-                offSet: 0,
+                offset: 0,
                 returnSummaryFilter: returnSummaryFilter,
               )).thenAnswer(
             (invocation) async => const Left(
