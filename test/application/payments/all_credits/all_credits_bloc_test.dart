@@ -72,7 +72,7 @@ void main() {
         setUp: () {
           when(() => mockAllCreditsRepository.getAllCredits(
                 pageSize: _pageSize,
-                offSet: 0,
+                offset: 0,
                 customerCodeInfo: CustomerCodeInfo.empty()
                     .copyWith(customerCodeSoldTo: '0030032223'),
                 salesOrganisation: SalesOrganisation.empty()
@@ -106,7 +106,7 @@ void main() {
         setUp: () {
           when(() => mockAllCreditsRepository.getAllCredits(
                 pageSize: _pageSize,
-                offSet: 0,
+                offset: 0,
                 customerCodeInfo: CustomerCodeInfo.empty()
                     .copyWith(customerCodeSoldTo: '0030032223'),
                 salesOrganisation: SalesOrganisation.empty()
@@ -144,7 +144,7 @@ void main() {
         setUp: () {
           when(() => mockAllCreditsRepository.getAllCredits(
                 pageSize: _pageSize,
-                offSet: 0,
+                offset: 0,
                 customerCodeInfo: CustomerCodeInfo.empty()
                     .copyWith(customerCodeSoldTo: '0030032223'),
                 salesOrganisation: SalesOrganisation.empty()
@@ -181,7 +181,7 @@ void main() {
         setUp: () {
           when(() => mockAllCreditsRepository.getAllCredits(
                 pageSize: _pageSize,
-                offSet: 0,
+                offset: 0,
                 customerCodeInfo: CustomerCodeInfo.empty()
                     .copyWith(customerCodeSoldTo: '0030032223'),
                 salesOrganisation: SalesOrganisation.empty()

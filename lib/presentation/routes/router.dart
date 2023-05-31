@@ -42,6 +42,7 @@ import 'package:ezrxmobile/presentation/orders/order_template/order_template_lis
 import 'package:ezrxmobile/presentation/orders/saved_order/saved_order_detail_page.dart';
 import 'package:ezrxmobile/presentation/orders/saved_order/saved_order_list_page.dart';
 import 'package:ezrxmobile/presentation/payments/all_credits/all_credits.dart';
+import 'package:ezrxmobile/presentation/account/payment_configuration/payment_advice_footer/payment_advice_footer_page.dart';
 import 'package:ezrxmobile/presentation/returns/add_edit_user_restrictions.dart';
 import 'package:ezrxmobile/presentation/returns/policy_configuration/add_policy_configuration.dart';
 import 'package:ezrxmobile/presentation/returns/approver_actions/approver_actions.dart';
@@ -263,6 +264,7 @@ import 'package:ezrxmobile/presentation/account/payment_configuration/sales_dist
     AutoRoute(
         path: 'payments/sales_district/add_sales_district',
         page: AddSalesDistrictPage,),
+    AutoRoute(path: 'payments/advice_footer', page: PaymentAdviceFooterPage,),
   ],
 )
 class $AppRouter {}

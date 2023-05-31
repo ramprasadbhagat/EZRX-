@@ -3,6 +3,7 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/account/payment_configuration/bank_beneficiary/add_beneficiary/add_beneficiary_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/deduction_code/manage_deduction_code/manage_deduction_code_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/deduction_code/view_deduction_code/deduction_code_bloc.dart';
+import 'package:ezrxmobile/application/account/payment_configuration/payment_advice_footer/payment_advice_footer_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/add_payment_method/add_payment_method_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/manage_payment_method/manage_payment_methods_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/bank_beneficiary/bank_beneficiary_bloc.dart';
@@ -54,6 +55,9 @@ import 'package:ezrxmobile/infrastructure/account/datasource/bank_beneficiary_qu
 import 'package:ezrxmobile/infrastructure/account/datasource/deduction_code_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/deduction_code_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/deduction_code_remote.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/payment_advice_footer_local.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/payment_advice_footer_remote.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/payment_advice_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/update_sales_org_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/update_sales_org_mutation.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/update_sales_org_remote.dart';
@@ -237,6 +241,7 @@ import 'package:ezrxmobile/infrastructure/order/repository/valid_customer_materi
 import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_invoices_local.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_invoices_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_invoices_remote.dart';
+import 'package:ezrxmobile/infrastructure/account/repository/payment_advice_footer_repository.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/approver_return_request_information_local.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/approver_return_request_information_remote.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/approver_return_request_query.dart';
@@ -2208,6 +2213,42 @@ void setupLocator() {
     () => AllCreditsFilterBloc(
       allCreditsAndInvoicesRepository:
           locator<AllCreditsAndInvoicesRepository>(),
+    ),
+  );
+
+  //============================================================
+  //  Payment Advice footer
+  //
+  //============================================================
+
+  locator.registerLazySingleton(
+    () => PaymentAdviceFooterLocalDataSource(),
+  );
+  locator.registerLazySingleton(
+    () => PaymentAdviceQueryMutation(),
+  );
+
+
+  locator.registerLazySingleton(
+    () => PaymentAdviceFooterRemoteDataSource(
+      config: locator<Config>(),
+      httpService: locator<HttpService>(),
+      paymentAdviceQueryMutation: locator<PaymentAdviceQueryMutation>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => PaymentAdviceFooterRepository(
+      config: locator<Config>(),
+      localDataSource: locator<PaymentAdviceFooterLocalDataSource>(),
+      remoteDataSource: locator<PaymentAdviceFooterRemoteDataSource>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => PaymentAdviceFooterBloc(
+      paymentAdviceFooterRepository: locator<PaymentAdviceFooterRepository>(),
     ),
   );
 

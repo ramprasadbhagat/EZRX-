@@ -1,0 +1,81 @@
+{
+    "data": {
+        "paymentAdvice": [
+            {
+                "salesOrg": "2601",
+                "salesDistrict": "",
+                "footer": "SG Footer Text",
+                "headerLogoPath": "",
+                "header": "eZRx_SG",
+                "pleaseNote": "<ul>\n\t<li>Test 30 days</li>\n\t<li><strong>Test 30 days</strong></li>\n\t<li><i>Test 3 days</i></li>\n\t<li><i><strong>Test 200 days</strong></i></li>\n</ul>\n",
+                "__typename": "paymentAdviceResponse"
+            },
+            {
+                "salesOrg": "3050",
+                "salesDistrict": "HCM",
+                "footer": "Công Ty TNHH Thương Mại và Dược Phẩm Sang. Đã đăng ký Bản quyền. Tài liệu này được tạo tự động.",
+                "headerLogoPath": "",
+                "header": "Chứng từ thanh toán",
+                "pleaseNote": "<ul>\n\t<li>Chúng tôi đang truy xuất trạng thái thanh toán của bạn từ ngân hàng. Có thể mất đến 3 giờ để trạng thái thanh toán mới được phản ánh trên eZRx.</li>\n\t<li>Thanh toán chỉ được xem là hợp lệ khi số tiền thanh toán nợ được thể hiện trong tài khoản ngân hàng của Zuellig Pharma. Thanh toán này sẽ được cập nhật trong Bản sao kê hàng tháng của chúng tôi</li>\n\t<li>Xin lưu ý rằng các chứng từ thanh toán trên hệ thống sẽ được xóa tự động nếu chúng tôi không nhận được thanh toán trong vòng <strong>30 ngày.  </strong></li>\n</ul>\n",
+                "__typename": "paymentAdviceResponse"
+            },
+            {
+                "salesOrg": "2902",
+                "salesDistrict": "",
+                "footer": "Zuellig Pharma Ltd. สงวนลิขสิทธิ์. เอกสารนี้ถูกสร้างขึ้นอัตโนมัติโดยระบบ.",
+                "headerLogoPath": "https://zpdigitalproducts.blob.core.windows.net/ezrx/prod/ezpay/payment_advice_165285543311111.png",
+                "header": "",
+                "pleaseNote": "<ul>\n\t<li>เรากำลังตรวจสอบข้อมูลสถานะการชำระเงินของคุณจากธนาคาร โดยจะใช้เวลาไม่เกิน 3 ชั่ว โมงก่อนที่สถ านะการชำระเงินใหม่จะปรากฏบน eZRx.</li>\n\t<li>การชําระเงินจะสมบูรณ์ก็ต่อเมื่อจำนวนเงินที่ชำระปรากฎในบัญชีธนาคารของบริษัทซิลลิค ฟาร์มา ซึ่งจะถูกปรับปรุงในเอกสารแจ้งยอดรายเดือนของเรา.</li>\n\t<li>โปรดทราบว่าใบแจ้งการชําระเงินที่ระบบสร้างขึ้นจะถูกลบโดยอัตโนมัติหากไม่ได้รับการชําระเงินภายใน <strong>30 วัน. </strong></li>\n</ul>\n",
+                "__typename": "paymentAdviceResponse"
+            },
+            {
+                "salesOrg": "3070",
+                "salesDistrict": "",
+                "footer": "Công Ty TNHH Thương Mại và Dược Phẩm Sang. Đã đăng ký Bản quyền. Tài liệu này được tạo tự động.",
+                "headerLogoPath": "",
+                "header": "Chứng từ thanh toán",
+                "pleaseNote": "<ul>\n\t<li>Chúng tôi đang truy xuất trạng thái thanh toán của bạn từ ngân hàng. Có thể mất đến 3 giờ để trạng thái thanh toán mới được phản ánh trên eZRx.</li>\n\t<li>Thanh toán chỉ được xem là hợp lệ khi số tiền thanh toán nợ được thể hiện trong tài khoản ngân hàng của Zuellig Pharma. Thanh toán này sẽ được cập nhật trong Bản sao kê hàng tháng của chúng tôi</li>\n\t<li>Xin lưu ý rằng các chứng từ thanh toán trên hệ thống sẽ được xóa tự động nếu chúng tôi không nhận được thanh toán trong vòng <strong>30 ngày.   </strong></li>\n</ul>\n",
+                "__typename": "paymentAdviceResponse"
+            },
+            {
+                "salesOrg": "3050",
+                "salesDistrict": "HNO",
+                "footer": "Công Ty TNHH Thương Mại và Dược Phẩm Sang. Đã đăng ký Bản quyền. Tài liệu này được tạo tự động.",
+                "headerLogoPath": "",
+                "header": "Chứng từ thanh toán",
+                "pleaseNote": "<ul>\n\t<li>Chúng tôi đang truy xuất trạng thái thanh toán của bạn từ ngân hàng. Có thể mất đến 3 giờ để trạng thái thanh toán mới được phản ánh trên eZRx.</li>\n\t<li>Thanh toán chỉ được xem là hợp lệ khi số tiền thanh toán nợ được thể hiện trong tài khoản ngân hàng của Zuellig Pharma. Thanh toán này sẽ được cập nhật trong Bản sao kê hàng tháng của chúng tôi</li>\n\t<li> Xin lưu ý rằng các chứng từ thanh toán trên hệ thống sẽ được xóa tự động nếu chúng tôi không nhận được thanh toán trong vòng <strong>30 ngày. </strong></li>\n</ul>\n",
+                "__typename": "paymentAdviceResponse"
+            },
+            {
+                "salesOrg": "2001",
+                "salesDistrict": "",
+                "footer": "Zuellig Pharma Sdn Bhd. All rights reserved. This document is automatically generated. ",
+                "headerLogoPath": "https://zpdigitalproducts.blob.core.windows.net/ezrx/prod/ezpay/payment_advice_165320554711111.png",
+                "header": "",
+                "pleaseNote": "<ul>\n\t<li>We are retrieving your payment status from the bank. It may take up to 3 hours for the new payment status to be reflected on eZRx.</li>\n\t<li>Payment is only valid when the Payment Due amount is reflected in Zuellig Pharma’s bank account, which will be updated in our monthly statement.</li>\n\t<li>Please note that system-generated payment advice(s) will be automatically deleted if payment is not received within <strong>3 days.</strong></li>\n</ul>\n",
+                "__typename": "paymentAdviceResponse"
+            },
+            {
+                "salesOrg": "2500",
+                "salesDistrict": "",
+                "footer": "Selling Pharma Corporation, All rights reserved. \nIn case you have questions please contact your local zuellig Pharma Customer Service hotline.",
+                "headerLogoPath": "https://zpdigitalproducts.blob.core.windows.net/ezrx/undefined/payment_advice_1677216876Screenshot 2023-02-24 110326.png",
+                "header": "",
+                "pleaseNote": "<ul>\n\t<li>We are retrieving your payment status from the bank. It may take up to 3 hours for the new payment status to be reflected on eZRx.</li>\n\t<li>Payment is only valid when the Payment Due amount is reflected in Zuellig Pharma’s bank account, which will be updated in our monthly statement.</li>\n\t<li>Please note that system-generated payment advice(s) will be automatically deleted if payment is not received within <strong>30 days.</strong></li>\n</ul>\n",
+                "__typename": "paymentAdviceResponse"
+            },
+            {
+                "salesOrg": "2501",
+                "salesDistrict": "",
+                "footer": "Metro Drug, Inc. All rights reserved.\nIn case you have questions please contact your local zuellig Pharma Customer Service hotline.",
+                "headerLogoPath": "https://zpdigitalproducts.blob.core.windows.net/ezrx/undefined/payment_advice_1677216915mdi metro drug Logo RGB RW white.png",
+                "header": "",
+                "pleaseNote": "<ul>\n\t<li>We are retrieving your payment status from the bank. It may take up to 3 hours for the new payment status to be reflected on eZRx.</li>\n\t<li>Payment is only valid when the Payment Due amount is reflected in Zuellig Pharma’s bank account, which will be updated in our monthly statement.</li>\n\t<li>Please note that system-generated payment advice(s) will be automatically deleted if payment is not received within <strong>30 days.</strong></li>\n</ul>\n",
+                "__typename": "paymentAdviceResponse"
+            }
+        ]
+    },
+    "extensions": {
+        "trace-id": "55d4c6967b6d4ecc880bb4d128e66609"
+    }
+}

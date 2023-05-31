@@ -77,7 +77,7 @@ void main() {
         customerCodeInfo: CustomerCodeInfo.empty(),
         salesOrganisation: SalesOrganisation.empty(),
         pageSize: 1,
-        offSet: 0,
+        offset: 0,
          allCreditsFilter: allCreditsFilter,
       );
       expect(result.isRight(), true);
@@ -94,7 +94,7 @@ void main() {
         salesOrganisation:
             SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('3500')),
         pageSize: 1,
-        offSet: 0,
+        offset: 0,
         allCreditsFilter: allCreditsFilter,
       );
       expect(result.isLeft(), true);
@@ -105,7 +105,7 @@ void main() {
             customerCode: 'mock_soldTo',
             salesOrg: 'mock_salesOrg',
             pageSize: 1,
-            offSet: 0,
+            offset: 0,
             filterQuery: AllCreditsFilterDto.fromDomain(
               AllCreditsFilter.empty().copyWith(
               documentDateFrom:
@@ -123,7 +123,7 @@ void main() {
         customerCodeInfo: CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: 'mock_soldTo' ),
         salesOrganisation: SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('mock_salesOrg')),
         pageSize: 1,
-        offSet: 0,
+        offset: 0,
          allCreditsFilter: allCreditsFilter,
       );
       expect(result.isRight(), true);
@@ -135,7 +135,7 @@ void main() {
             customerCode: 'mock_soldTo',
             salesOrg: 'mock_salesOrg',
             pageSize: 1,
-            offSet: 0,
+            offset: 0,
           filterQuery: AllCreditsFilterDto.fromDomain(
               AllCreditsFilter.empty().copyWith(
               documentDateFrom:
@@ -152,7 +152,7 @@ void main() {
         salesOrganisation:
             SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('3500')),
         pageSize: 1,
-        offSet: 0,
+          offset: 0,
         allCreditsFilter: allCreditsFilter
       );
       expect(result.isLeft(), true);

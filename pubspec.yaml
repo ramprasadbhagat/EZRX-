@@ -88,6 +88,7 @@ dependencies:
   mixpanel_flutter: ^2.0.0
   visibility_detector: ^0.3.3
   clevertap_plugin: ^1.6.1
+  flutter_html: ^2.2.1
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -116,7 +117,7 @@ dev_dependencies:
 
 dependency_overrides:
   ffi: ^2.0.1
-
+  flutter_svg: ^1.1.6
 
 
 # For information on the generic Dart part of this file, see the

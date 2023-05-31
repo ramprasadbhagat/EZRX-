@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/application/account/payment_configuration/bank_beneficiary/bank_beneficiary_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/deduction_code/view_deduction_code/deduction_code_bloc.dart';
+import 'package:ezrxmobile/application/account/payment_configuration/payment_advice_footer/payment_advice_footer_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/payment_methods_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/sales_district/sales_district_bloc.dart';
 import 'package:ezrxmobile/application/account/settings/setting_bloc.dart';
@@ -600,6 +601,9 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
           );
       context.read<DeductionCodeBloc>().add(
             const DeductionCodeEvent.fetch(),
+          );
+      context.read<PaymentAdviceFooterBloc>().add(
+            const PaymentAdviceFooterEvent.fetch(),
           );
     }
   }

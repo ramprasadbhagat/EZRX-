@@ -83,7 +83,7 @@ void main() {
             customerCode: 'mock_soldTo',
             salesOrg: 'mock_salesOrg',
             pageSize: 1,
-            offSet: 0,
+            offset: 0,
             filterQuery: []);
 
         expect(
@@ -126,7 +126,7 @@ void main() {
             customerCode: 'mock_soldTo',
             salesOrg: 'mock_salesOrg',
             pageSize: 1,
-            offSet: 0,
+            offset: 0,
             filterQuery: []).onError((error, stackTrace) async {
           expect(error, isA<ServerException>());
           return Future.value(CustomerDocumentHeader.empty());
@@ -170,7 +170,7 @@ void main() {
             customerCode: 'mock_soldTo',
             salesOrg: 'mock_salesOrg',
             pageSize: 1,
-            offSet: 0,
+            offset: 0,
             filterQuery: []).onError((error, stackTrace) async {
           expect(error, isA<ServerException>());
           return Future.value(CustomerDocumentHeader.empty());
