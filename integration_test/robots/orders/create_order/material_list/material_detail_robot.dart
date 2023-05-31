@@ -8,17 +8,22 @@ class MaterialDetailRobot {
 
   final addToCart = find.byKey(const Key('addMaterialToCart'));
   final announcementCloseIcon = find.byKey(const Key('announcementCloseIcon'));
+  final tenderContractHeading = find.byKey(const Key('selectContract'));
+  final tenderOrderInvalidQuantityError =
+      find.byKey(const Key('tenderOrderValidQuantityErrorText'));
+  final tenderOrderInvalidCombinationError =
+      find.byKey(const Key('addTOCartTenderOrderInvalidCombinationError'));
 
   void verify() {
     final materialDetails = find.byKey(const Key('materialDetailsPage'));
     expect(materialDetails, findsOneWidget);
   }
 
-  void verifyBonusesMaterial(){
+  void verifyBonusesMaterial() {
     expect(find.byKey(const Key('bonusesMaterial')), findsOneWidget);
   }
 
-  void verifyTieredPricingMaterial(){
+  void verifyTieredPricingMaterial() {
     expect(find.byKey(const Key('tieredPricing')), findsOneWidget);
   }
 
@@ -30,24 +35,52 @@ class MaterialDetailRobot {
     await tester.tap(addToCart);
     await tester.pumpAndSettle();
   }
-  
-  Future<void> addQuantity()async{
+
+  Future<void> addQuantity() async {
     await tester.tap(find.byKey(const Key('cartItemAdd')));
     await tester.pumpAndSettle();
   }
 
-  Future<void> deductQuantity()async{
+  Future<void> deductQuantity() async {
     await tester.tap(find.byKey(const Key('cartItemDelete')));
     await tester.pumpAndSettle();
   }
 
-  Future<void> changeQuantity(int quantity)async{
+  Future<void> changeQuantity(int quantity) async {
     await tester.enterText(find.byKey(const Key('item')), quantity.toString());
     await tester.pumpAndSettle();
   }
 
-  Future<void> tapUpdateAddToCart() async{
+  Future<void> tapUpdateAddToCart() async {
     await tester.tap(find.byKey(const Key('updateCart')));
+    await tester.pumpAndSettle();
+  }
+
+  Future<void> tenderOrderErrorTextVisible() async {
+    expect(tenderOrderInvalidQuantityError, findsOneWidget);
+
+    await tester.pumpAndSettle();
+  }
+
+  Future<void> tenderOrderErrorTextNotVisible() async {
+    expect(tenderOrderInvalidQuantityError, findsNothing);
+  }
+
+  void displayTenderContractErrorText() {
+    expect(tenderOrderInvalidCombinationError, findsWidgets);
+  }
+
+  void findTenderContractText() {
+    expect(tenderContractHeading, findsOneWidget);
+  }
+
+  Future<void> tapTenderContract(String tenderContractNumber) async {
+    await tester.tap(find.byKey(Key(tenderContractNumber)));
+  }
+
+  Future<void> selectTenderContract(String tenderContractNumber) async {
+    await tester
+        .tap(find.byKey(Key('tenderContractIcon$tenderContractNumber')));
     await tester.pumpAndSettle();
   }
 
@@ -63,5 +96,22 @@ class MaterialDetailRobot {
     final NavigatorState navigator = tester.state(find.byType(Navigator));
     navigator.pop();
     await tester.pumpAndSettle();
+  }
+
+  Future<void> findUnitPrice(String price) async {
+    final unitPrice = find.byKey(Key('Unit Price$price'));
+    expect(unitPrice, findsOneWidget);
+    await tester.pumpAndSettle();
+  }
+
+  void zdp5QtyExceedWarning() {
+    final warningText =
+        find.textContaining('You have exceeded the remaining quantity limit');
+    expect(warningText, findsOneWidget);
+  }
+
+  Future<void> getKeyboardDown() async {
+    await tester.testTextInput.receiveAction(TextInputAction.done);
+    await tester.pumpAndSettle(const Duration(seconds: 4));
   }
 }

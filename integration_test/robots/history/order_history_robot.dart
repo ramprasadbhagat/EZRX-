@@ -9,8 +9,6 @@ class OrderHistoryRobot {
   final orderedItem = find.byKey(const ValueKey('historyTitle0'));
   final reOrderButton = find.byKey(const Key('reOrderButton'));
   final filterButton = find.byKey(const Key('filterOrderHistory'));
-  final materialNumberSearchField =
-      find.byKey(const Key('filterMaterialSearchField'));
   final filterClearButton = find.byKey(const Key('filterClearButton'));
   final statusFilterButton = find.byKey(const Key('statusFilterButton'));
   final closeButton = find.byKey(const Key('closeButton'));
@@ -89,10 +87,13 @@ class OrderHistoryRobot {
     await tester.pumpAndSettle();
   }
 
-  Future<void> goBack() async {
-    // ignore: omit_local_variable_types
-    final NavigatorState navigator = tester.state(find.byType(Navigator));
-    navigator.pop();
+  void findFilterClearButton() {
+    expect(filterClearButton, findsOneWidget);
+  }
+
+   Future<void> tapFilterClearButton() async{
+    await tester.tap(filterClearButton);
     await tester.pumpAndSettle();
   }
+
 }

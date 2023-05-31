@@ -25,7 +25,6 @@ class OrderSummaryRobot {
   final collectiveNumberField = find.byKey(const Key('collectiveNumberKey'));
   final referenceNoteKey = find.byKey(const Key('referenceNoteKey'));
 
-
   void verify() {
     expect(find.byKey(const Key('orderSummaryKey')), findsOneWidget);
   }
@@ -211,6 +210,20 @@ class OrderSummaryRobot {
     expect(unitPrice, findsOneWidget);
   }
 
+  void verifyMaterialUnitPriceForVN(String currency, String price) {
+
+     final unitPrice = find.text('Unit Price: $price $currency');
+
+    expect(unitPrice, findsOneWidget);
+  }
+
+   void verifyMaterialTotalPriceVN(String currency, String price) {
+
+    final totalPrice = find.text('Total Price: $price $currency');
+
+    expect(totalPrice, findsOneWidget);
+  }
+
   void verifyMaterialTotalPrice(
       bool isConfigPriceEnabled, String currency, String price) {
     var totalPrice = find.text('Total Price: NA');
@@ -221,11 +234,19 @@ class OrderSummaryRobot {
   }
 
   void verifySubTotalPrice(String currency, String price) {
-    expect(find.byKey(Key('Subtotal$currency $price')), findsOneWidget);
+    if (currency.contains('VND')) {
+      expect(find.byKey(Key('Subtotal$price $currency')), findsOneWidget);
+    } else {
+      expect(find.byKey(Key('Subtotal$currency $price')), findsOneWidget);
+    }
   }
 
   void verifyGrandTotalPrice(String currency, String price) {
-    expect(find.byKey(Key('Grand Total$currency $price')), findsOneWidget);
+    if (currency.contains('VND')) {
+      expect(find.byKey(Key('Grand Total$price $currency')), findsOneWidget);
+    }else {
+      expect(find.byKey(Key('Grand Total$currency $price')), findsOneWidget);
+    }
   }
 
   void verifyBundleMaterialListPrice(

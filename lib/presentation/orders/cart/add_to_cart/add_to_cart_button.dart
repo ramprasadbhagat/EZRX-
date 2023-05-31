@@ -37,6 +37,7 @@ class AddToCartButton extends StatelessWidget {
             ))
               const Text(
                 'Tender material 730 cannot be combined with any other material in the cart.',
+                key: Key('addTOCartTenderOrderInvalidCombinationError'),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: ZPColors.red,

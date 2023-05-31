@@ -13,6 +13,7 @@ class SelectContract extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
+      key: const Key('selectContract'),
       padding: const EdgeInsets.all(8.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

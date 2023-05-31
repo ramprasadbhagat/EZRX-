@@ -162,6 +162,7 @@ class _CartItemDetailWidgetState extends State<CartItemDetailWidget> {
                         style: TextStyle(
                           color: ZPColors.red,
                         ),
+                        key: Key('tenderOrderValidQuantityErrorText'),
                       );
               },
             );

@@ -8,6 +8,7 @@ class MaterialListRobot {
   MaterialListRobot(this.tester);
 
   final cartButton = find.byKey(const Key('cartButton'));
+  final tenderContractHeading = find.byKey(const Key('selectContract'));
   final orderTypeSelector = find.byKey(const ValueKey('orderTypeSelector'));
   final change = find.byKey(const ValueKey('Change'));
   final cancel = find.byKey(const ValueKey('Cancel'));
@@ -97,7 +98,15 @@ class MaterialListRobot {
     navigator.pop();
     await tester.pumpAndSettle();
   }
+  void displayTotalTax(String materialNumber) {
+    final totalTax = find.byKey(Key('taxClassification$materialNumber'));
+    expect(totalTax, findsOneWidget);
+  }
 
+  void displayPriceBeforeVat(String materialNumber) {
+    final priceBeforeVat = find.byKey(Key('priceBefore$materialNumber'));
+    expect(priceBeforeVat, findsOneWidget);
+  }
 
   void findItemRegistrationNumber(String materialNumber) {
     final registrationNumber =
@@ -155,10 +164,5 @@ class MaterialListRobot {
   Future<void> clearCart() async {
     await tester.tap(change);
     await tester.pumpAndSettle();
-  }
-  
-  void displayPriceBeforeVat(String materialNumber) {
-    final priceBeforeVat = find.byKey(Key('priceBefore$materialNumber'));
-    expect(priceBeforeVat, findsOneWidget);
   }
 }

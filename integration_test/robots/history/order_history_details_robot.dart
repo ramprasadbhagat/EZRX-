@@ -179,11 +179,6 @@ class OrderHistoryDetailsRobot {
     expect(find.byKey(const Key('discountRateForItemCard')), findsWidgets);
   }
 
-  void verifyOrderSummaryTax(String tax) {
-    final includedTax = find.byKey(Key('Included Tax $tax'));
-    expect(includedTax, findsOneWidget);
-  }
-
   void findBackButton() {
     expect(backButton, findsOneWidget);
   }

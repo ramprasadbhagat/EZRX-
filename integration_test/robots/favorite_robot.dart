@@ -38,4 +38,9 @@ class FavoriteRobot {
     await tester.tap(favoriteIcon);
     await tester.pumpAndSettle();
   }
+
+  Future<void> refreshFavoriteList() async {
+    await tester.dragFrom(const Offset(100, 200), const Offset(100, 450));
+    await tester.pumpAndSettle();
+  }
 }

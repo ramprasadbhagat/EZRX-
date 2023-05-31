@@ -55,11 +55,12 @@ class CartRobot {
     expect(listPrice, findsOneWidget);
   }
 
-  void findMaterialItem(String materialNumber, int quantity, [bool shouldVisible = true]) {
+  void findMaterialItem(String materialNumber, int quantity,
+      [bool shouldVisible = true]) {
     final material = find.byKey(ValueKey('$materialNumber$quantity'));
-    if(shouldVisible){
+    if (shouldVisible) {
       expect(material, findsOneWidget);
-    }else{
+    } else {
       expect(material, findsNothing);
     }
   }
@@ -243,6 +244,7 @@ class CartRobot {
     await tester.tap(find.byKey(Key('deleteFromCart$materialNumber')));
     await tester.pumpAndSettle();
   }
+
   Future<void> deleteBonusMaterial() async {
     await tester.tap(find.byKey(const Key('deleteBonusFromCart')));
     await tester.pumpAndSettle();
@@ -260,9 +262,22 @@ class CartRobot {
   }
 
   void verifyUnitPrice(String currency, String price) {
-    final unitPriceLabel = find.textContaining('Unit Price: $currency $price');
-    expect(unitPriceLabel, findsOneWidget);
+    if (currency.contains('VND')) {
+      final unitPriceLabel =
+          find.textContaining('Unit Price: $price $currency');
+      expect(unitPriceLabel, findsOneWidget);
+    } else {
+      final unitPriceLabel =
+          find.textContaining('Unit Price: $currency $price');
+      expect(unitPriceLabel, findsOneWidget);
+    }
     final unitPrice = find.byKey(const Key('unitPrice'));
     expect(unitPrice, findsOneWidget);
+  }
+
+  void zdp5QtyExceedWarning(){
+    final warningText =
+        find.textContaining('You have exceeded the remaining quantity limit');
+    expect(warningText, findsOneWidget);
   }
 }
