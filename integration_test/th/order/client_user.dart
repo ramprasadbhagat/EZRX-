@@ -230,6 +230,7 @@ void main() {
       1,
     );
     await cartRobot.goBack();
+    await tester.pumpAndSettle(const Duration(seconds: 1));
     await materialListRobot.clearSearchMaterial();
     await materialListRobot.search(
       bonusMaterial.getOrDefaultValue(''),
@@ -456,9 +457,6 @@ void main() {
     await cartRobot.goBack();
     await homeRobot.tapHomeTab();
     homeRobot.verify();
-    homeRobot.findSalesOrgSelector();
-    await homeRobot.tapSalesOrgSelector();
-    await homeRobot.selectSalesOrg(salesOrg);
     homeRobot.findCustomerCodeSelector();
     await homeRobot.tapCustomerCodeSelector();
     customerSearchRobot.verify();
@@ -475,10 +473,10 @@ void main() {
     materialListRobot.verify();
     await materialListRobot.clearSearchMaterial();
     await materialListRobot.search(regularMaterial.getOrDefaultValue(''));
-    await materialListRobot.tapMaterial(regularMaterial.getOrDefaultValue(''));
     //display price before vat
     materialListRobot
         .displayPriceBeforeVat(regularMaterial.getOrDefaultValue(''));
+    await materialListRobot.tapMaterial(regularMaterial.getOrDefaultValue(''));
     materialDetailRobot.verify();
     materialDetailRobot.findAddToCart();
     await materialDetailRobot.tapAddToCart();

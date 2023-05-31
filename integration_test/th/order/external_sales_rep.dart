@@ -283,9 +283,6 @@ void main() {
       bonusMaterial.getOrDefaultValue(''),
       1,
     );
-    cartRobot.findAddQuantity(
-      bonusMaterial.getOrDefaultValue(''),
-    );
     cartRobot.verifyEnableVatAtTotalLevel(
       bonusMaterial.getOrDefaultValue(''),
       7,
@@ -452,7 +449,7 @@ void main() {
     );
     //display price before vat
     materialListRobot
-        .displayPriceBeforeVat(regularMaterial.getOrDefaultValue(''));
+        .displayPriceBeforeVat(zpfcMaterial.getOrDefaultValue(''));
     await materialListRobot.tapMaterial(
       zpfcMaterial.getOrDefaultValue(''),
     );
