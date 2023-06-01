@@ -329,6 +329,16 @@ import 'package:ezrxmobile/infrastructure/account/datasource/sales_district_quer
 import 'package:ezrxmobile/infrastructure/account/repository/sales_district_repository.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/sales_district/sales_district_bloc.dart';
 
+import 'package:ezrxmobile/application/account/payment_notification/payment_notification_bloc.dart';
+
+import 'package:ezrxmobile/infrastructure/account/repository/update_payment_notification_repository.dart';
+
+import 'package:ezrxmobile/infrastructure/account/datasource/update_payment_notification_local_datasource.dart';
+
+import 'package:ezrxmobile/infrastructure/account/datasource/update_payment_notification_mutation.dart';
+
+import 'package:ezrxmobile/infrastructure/account/datasource/update_payment_notification_remote_datasource.dart';
+
 GetIt locator = GetIt.instance;
 
 void setupLocator() {
@@ -2090,6 +2100,40 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => AddPaymentMethodBloc(
       paymentMethodsRepository: locator<PaymentMethodsRepository>(),
+    ),
+  );
+
+  //============================================================
+  // Update Payment Notification
+  //
+  //============================================================
+
+  locator.registerLazySingleton(
+    () => PaymentNotificationBloc(
+      updatePaymentNotificationRepository:
+          locator<UpdatePaymentNotificationRepository>(),
+    ),
+  );
+  locator.registerLazySingleton(
+    () => UpdatePaymentNotificationLocalDataSource(),
+  );
+  locator.registerLazySingleton(
+    () => UpdatePaymentNotificationMutation(),
+  );
+  locator.registerLazySingleton(
+    () => UpdatePaymentNotificationRemoteDataSource(
+      config: locator<Config>(),
+      httpService: locator<HttpService>(),
+      updatePaymentNotificationMutation:
+          locator<UpdatePaymentNotificationMutation>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+    ),
+  );
+  locator.registerLazySingleton(
+    () => UpdatePaymentNotificationRepository(
+      config: locator<Config>(),
+      localDataSource: locator<UpdatePaymentNotificationLocalDataSource>(),
+      remoteDataSource: locator<UpdatePaymentNotificationRemoteDataSource>(),
     ),
   );
   //============================================================

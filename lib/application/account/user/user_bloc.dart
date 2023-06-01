@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/full_name.dart';
+import 'package:ezrxmobile/domain/account/entities/payment_notification.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/repository/i_user_repository.dart';
@@ -42,7 +43,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
           ),
         );
       },
-      accptTnc: (e) async {
+      acceptTnc: (e) async {
         final failureOrSuccess = await userRepository.updateUserTc(
           state.user,
           date: e.date, // DateTime.now().toUtc().toIso8601String(),
@@ -87,6 +88,17 @@ class UserBloc extends Bloc<UserEvent, UserState> {
                 ),
               ),
               userFailureOrSuccessOption: none(),
+            ),
+          ),
+        );
+      },
+      updatePaymentNotificationSettings: (e) async {
+        emit(
+          state.copyWith(
+            user: state.user.copyWith(
+              settings: state.user.settings.copyWith(
+                paymentNotification: e.paymentNotification,
+              ),
             ),
           ),
         );

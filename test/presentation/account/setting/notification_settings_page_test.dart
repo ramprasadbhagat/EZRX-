@@ -2,12 +2,16 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_localization_loader/easy_localization_loader.dart';
+import 'package:ezrxmobile/application/account/payment_notification/payment_notification_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/payment_advice_expiry_notification.dart';
+import 'package:ezrxmobile/domain/account/entities/payment_notification.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/value/constants.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/account/notification_settings/notification_settings_page.dart';
@@ -23,6 +27,12 @@ import '../../order_history/order_history_details_widget_test.dart';
 
 class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
 
+class PaymentNotificationMockBloc
+    extends MockBloc<PaymentNotificationEvent, PaymentNotificationState>
+    implements PaymentNotificationBloc {}
+
+class RemoteConfigServiceMock extends Mock implements RemoteConfigService {}
+
 class AnnouncementBlocMock
     extends MockBloc<AnnouncementEvent, AnnouncementState>
     implements AnnouncementBloc {}
@@ -36,11 +46,20 @@ void main() async {
 
   late UserBloc userBloc;
   late AuthBloc authBlocMock;
+  late PaymentNotificationBloc paymentNotificationBlocMock;
+  late RemoteConfigService remoteConfigServiceMock;
   late AnnouncementBloc announcementBlocMock;
   setUpAll(() async {
-    setupLocator();
+    //setupLocator();
+    locator.registerLazySingleton(() => MixpanelService());
+    locator.registerLazySingleton(() => AppRouter());
     autoRouterMock = locator<AppRouter>();
     locator<MixpanelService>().init(mixpanel: MixpanelMock());
+    locator.registerLazySingleton(() => UserBlocMock());
+    locator.registerLazySingleton(() => AnnouncementBlocMock());
+    locator.registerLazySingleton(() => AuthBlocMock());
+    locator.registerLazySingleton(() => PaymentNotificationMockBloc());
+    locator.registerLazySingleton(() => remoteConfigServiceMock);
   });
 
   group('Notification Settings Page should - ', () {
@@ -59,6 +78,8 @@ void main() async {
           autoRouterMock: autoRouterMock,
           providers: [
             BlocProvider<UserBloc>(create: (context) => userBloc),
+            BlocProvider<PaymentNotificationBloc>(
+                create: (context) => paymentNotificationBlocMock),
             BlocProvider<AuthBloc>(create: (context) => authBlocMock),
             BlocProvider<AnnouncementBloc>(
                 create: (context) => announcementBlocMock),
@@ -70,6 +91,8 @@ void main() async {
 
     setUp(() {
       userBloc = UserBlocMock();
+      paymentNotificationBlocMock = PaymentNotificationMockBloc();
+      remoteConfigServiceMock = RemoteConfigServiceMock();
       authBlocMock = AuthBlocMock();
       announcementBlocMock = AnnouncementBlocMock();
       when(() => userBloc.state).thenReturn(UserState(
@@ -77,11 +100,19 @@ void main() async {
           settings: User.empty().settings.copyWith(
                 languagePreference: LanguageValue(ApiLanguageCode.english),
                 emailNotifications: false,
+                paymentNotification: PaymentNotification.empty().copyWith(disablePaymentNotification: false, paymentAdviceExpiryNotificationList: [
+                  const PaymentAdviceExpiryNotification(day: '3',disabled: false),
+                  const PaymentAdviceExpiryNotification(day: '5',disabled: false),
+                  const PaymentAdviceExpiryNotification(day: '7',disabled: false),
+                ])
               ),
         ),
         userFailureOrSuccessOption: none(),
       ));
       when(() => authBlocMock.state).thenReturn(const AuthState.initial());
+      when(() => paymentNotificationBlocMock.state).thenReturn(PaymentNotificationState.initial());
+      when(() => remoteConfigServiceMock.getPaymentsConfig())
+            .thenReturn(true);
       when(() => announcementBlocMock.state)
           .thenReturn(AnnouncementState.initial());
     });
@@ -104,6 +135,8 @@ void main() async {
       'successfully work on tapping for language preferences',
       (tester) async {
         await tester.pumpWidget(getScopedWidget());
+        when(() => remoteConfigServiceMock.getPaymentsConfig())
+              .thenReturn(true);
         await tester
             .tap(find.byKey(const Key('gestureDetectorForLanguagePicker')));
         await tester.pumpAndSettle();
@@ -121,6 +154,8 @@ void main() async {
         await tester
             .tap(find.byKey(const Key('gestureDetectorForLanguagePicker')));
         await tester.pumpAndSettle();
+         when(() => remoteConfigServiceMock.getPaymentsConfig())
+              .thenReturn(true);
 
         // select TH
         expect(
@@ -241,6 +276,8 @@ void main() async {
       'successfully work on tapping for email notifications',
       (tester) async {
         await tester.pumpWidget(getScopedWidget());
+         when(() => remoteConfigServiceMock.getPaymentsConfig())
+              .thenReturn(false);
         final switchFinder = find.byKey(const Key('flutterSwitch'));
         await tester.tap(switchFinder);
         await tester.pumpAndSettle();

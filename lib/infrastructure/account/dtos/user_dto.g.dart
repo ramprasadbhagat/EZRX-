@@ -40,6 +40,13 @@ _$_UserDto _$$_UserDtoFromJson(Map<String, dynamic> json) => _$_UserDto(
       disableCreateOrder: json['disableCreateOrder'] as bool? ?? false,
       disableReturns: json['disableReturns'] as bool? ?? false,
       hasPriceOverride: json['hasPriceOverride'] as bool? ?? false,
+      disablePaymentNotification:
+          json['disablePaymentNotification'] as bool? ?? false,
+      paymentNotification: (json['paymentNotification'] as List<dynamic>?)
+              ?.map((e) => PaymentAdviceExpiryNotificationDto.fromJson(
+                  e as Map<String, dynamic>))
+              .toList() ??
+          [],
     );
 
 Map<String, dynamic> _$$_UserDtoToJson(_$_UserDto instance) =>
@@ -65,4 +72,7 @@ Map<String, dynamic> _$$_UserDtoToJson(_$_UserDto instance) =>
       'disableCreateOrder': instance.disableCreateOrder,
       'disableReturns': instance.disableReturns,
       'hasPriceOverride': instance.hasPriceOverride,
+      'disablePaymentNotification': instance.disablePaymentNotification,
+      'paymentNotification':
+          instance.paymentNotification.map((e) => e.toJson()).toList(),
     };

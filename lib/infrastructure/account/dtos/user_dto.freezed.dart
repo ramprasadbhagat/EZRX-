@@ -66,6 +66,11 @@ mixin _$UserDto {
   bool get disableReturns => throw _privateConstructorUsedError;
   @JsonKey(name: 'hasPriceOverride', defaultValue: false)
   bool get hasPriceOverride => throw _privateConstructorUsedError;
+  @JsonKey(name: 'disablePaymentNotification', defaultValue: false)
+  bool get disablePaymentNotification => throw _privateConstructorUsedError;
+  @JsonKey(name: 'paymentNotification', defaultValue: [])
+  List<PaymentAdviceExpiryNotificationDto> get paymentNotification =>
+      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -118,7 +123,11 @@ abstract class $UserDtoCopyWith<$Res> {
       @JsonKey(name: 'disableReturns', defaultValue: false)
           bool disableReturns,
       @JsonKey(name: 'hasPriceOverride', defaultValue: false)
-          bool hasPriceOverride});
+          bool hasPriceOverride,
+      @JsonKey(name: 'disablePaymentNotification', defaultValue: false)
+          bool disablePaymentNotification,
+      @JsonKey(name: 'paymentNotification', defaultValue: [])
+          List<PaymentAdviceExpiryNotificationDto> paymentNotification});
 
   $RoleDtoCopyWith<$Res> get role;
   $AccessRightDtoCopyWith<$Res> get accessRight;
@@ -157,6 +166,8 @@ class _$UserDtoCopyWithImpl<$Res, $Val extends UserDto>
     Object? disableCreateOrder = null,
     Object? disableReturns = null,
     Object? hasPriceOverride = null,
+    Object? disablePaymentNotification = null,
+    Object? paymentNotification = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -239,6 +250,14 @@ class _$UserDtoCopyWithImpl<$Res, $Val extends UserDto>
           ? _value.hasPriceOverride
           : hasPriceOverride // ignore: cast_nullable_to_non_nullable
               as bool,
+      disablePaymentNotification: null == disablePaymentNotification
+          ? _value.disablePaymentNotification
+          : disablePaymentNotification // ignore: cast_nullable_to_non_nullable
+              as bool,
+      paymentNotification: null == paymentNotification
+          ? _value.paymentNotification
+          : paymentNotification // ignore: cast_nullable_to_non_nullable
+              as List<PaymentAdviceExpiryNotificationDto>,
     ) as $Val);
   }
 
@@ -307,7 +326,11 @@ abstract class _$$_UserDtoCopyWith<$Res> implements $UserDtoCopyWith<$Res> {
       @JsonKey(name: 'disableReturns', defaultValue: false)
           bool disableReturns,
       @JsonKey(name: 'hasPriceOverride', defaultValue: false)
-          bool hasPriceOverride});
+          bool hasPriceOverride,
+      @JsonKey(name: 'disablePaymentNotification', defaultValue: false)
+          bool disablePaymentNotification,
+      @JsonKey(name: 'paymentNotification', defaultValue: [])
+          List<PaymentAdviceExpiryNotificationDto> paymentNotification});
 
   @override
   $RoleDtoCopyWith<$Res> get role;
@@ -345,6 +368,8 @@ class __$$_UserDtoCopyWithImpl<$Res>
     Object? disableCreateOrder = null,
     Object? disableReturns = null,
     Object? hasPriceOverride = null,
+    Object? disablePaymentNotification = null,
+    Object? paymentNotification = null,
   }) {
     return _then(_$_UserDto(
       id: null == id
@@ -427,6 +452,14 @@ class __$$_UserDtoCopyWithImpl<$Res>
           ? _value.hasPriceOverride
           : hasPriceOverride // ignore: cast_nullable_to_non_nullable
               as bool,
+      disablePaymentNotification: null == disablePaymentNotification
+          ? _value.disablePaymentNotification
+          : disablePaymentNotification // ignore: cast_nullable_to_non_nullable
+              as bool,
+      paymentNotification: null == paymentNotification
+          ? _value._paymentNotification
+          : paymentNotification // ignore: cast_nullable_to_non_nullable
+              as List<PaymentAdviceExpiryNotificationDto>,
     ));
   }
 }
@@ -475,8 +508,13 @@ class _$_UserDto extends _UserDto {
       @JsonKey(name: 'disableReturns', defaultValue: false)
           required this.disableReturns,
       @JsonKey(name: 'hasPriceOverride', defaultValue: false)
-          required this.hasPriceOverride})
+          required this.hasPriceOverride,
+      @JsonKey(name: 'disablePaymentNotification', defaultValue: false)
+          required this.disablePaymentNotification,
+      @JsonKey(name: 'paymentNotification', defaultValue: [])
+          required final List<PaymentAdviceExpiryNotificationDto> paymentNotification})
       : _userSalesOrganisations = userSalesOrganisations,
+        _paymentNotification = paymentNotification,
         super._();
 
   factory _$_UserDto.fromJson(Map<String, dynamic> json) =>
@@ -553,10 +591,22 @@ class _$_UserDto extends _UserDto {
   @override
   @JsonKey(name: 'hasPriceOverride', defaultValue: false)
   final bool hasPriceOverride;
+  @override
+  @JsonKey(name: 'disablePaymentNotification', defaultValue: false)
+  final bool disablePaymentNotification;
+  final List<PaymentAdviceExpiryNotificationDto> _paymentNotification;
+  @override
+  @JsonKey(name: 'paymentNotification', defaultValue: [])
+  List<PaymentAdviceExpiryNotificationDto> get paymentNotification {
+    if (_paymentNotification is EqualUnmodifiableListView)
+      return _paymentNotification;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_paymentNotification);
+  }
 
   @override
   String toString() {
-    return 'UserDto(id: $id, username: $username, email: $email, firstName: $firstName, lastName: $lastName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, accessRight: $accessRight, emailNotifications: $emailNotifications, mobileNotifications: $mobileNotifications, languagePreference: $languagePreference, enableOrderType: $enableOrderType, acceptPrivacyPolicy: $acceptPrivacyPolicy, acceptPrivacyPolicyTime: $acceptPrivacyPolicyTime, privacyPolicyAcceptedPlatform: $privacyPolicyAcceptedPlatform, hasBonusOverride: $hasBonusOverride, disableCreateOrder: $disableCreateOrder, disableReturns: $disableReturns, hasPriceOverride: $hasPriceOverride)';
+    return 'UserDto(id: $id, username: $username, email: $email, firstName: $firstName, lastName: $lastName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, accessRight: $accessRight, emailNotifications: $emailNotifications, mobileNotifications: $mobileNotifications, languagePreference: $languagePreference, enableOrderType: $enableOrderType, acceptPrivacyPolicy: $acceptPrivacyPolicy, acceptPrivacyPolicyTime: $acceptPrivacyPolicyTime, privacyPolicyAcceptedPlatform: $privacyPolicyAcceptedPlatform, hasBonusOverride: $hasBonusOverride, disableCreateOrder: $disableCreateOrder, disableReturns: $disableReturns, hasPriceOverride: $hasPriceOverride, disablePaymentNotification: $disablePaymentNotification, paymentNotification: $paymentNotification)';
   }
 
   @override
@@ -603,7 +653,13 @@ class _$_UserDto extends _UserDto {
             (identical(other.disableReturns, disableReturns) ||
                 other.disableReturns == disableReturns) &&
             (identical(other.hasPriceOverride, hasPriceOverride) ||
-                other.hasPriceOverride == hasPriceOverride));
+                other.hasPriceOverride == hasPriceOverride) &&
+            (identical(other.disablePaymentNotification,
+                    disablePaymentNotification) ||
+                other.disablePaymentNotification ==
+                    disablePaymentNotification) &&
+            const DeepCollectionEquality()
+                .equals(other._paymentNotification, _paymentNotification));
   }
 
   @JsonKey(ignore: true)
@@ -629,7 +685,9 @@ class _$_UserDto extends _UserDto {
         hasBonusOverride,
         disableCreateOrder,
         disableReturns,
-        hasPriceOverride
+        hasPriceOverride,
+        disablePaymentNotification,
+        const DeepCollectionEquality().hash(_paymentNotification)
       ]);
 
   @JsonKey(ignore: true)
@@ -688,7 +746,11 @@ abstract class _UserDto extends UserDto {
       @JsonKey(name: 'disableReturns', defaultValue: false)
           required final bool disableReturns,
       @JsonKey(name: 'hasPriceOverride', defaultValue: false)
-          required final bool hasPriceOverride}) = _$_UserDto;
+          required final bool hasPriceOverride,
+      @JsonKey(name: 'disablePaymentNotification', defaultValue: false)
+          required final bool disablePaymentNotification,
+      @JsonKey(name: 'paymentNotification', defaultValue: [])
+          required final List<PaymentAdviceExpiryNotificationDto> paymentNotification}) = _$_UserDto;
   const _UserDto._() : super._();
 
   factory _UserDto.fromJson(Map<String, dynamic> json) = _$_UserDto.fromJson;
@@ -757,6 +819,12 @@ abstract class _UserDto extends UserDto {
   @override
   @JsonKey(name: 'hasPriceOverride', defaultValue: false)
   bool get hasPriceOverride;
+  @override
+  @JsonKey(name: 'disablePaymentNotification', defaultValue: false)
+  bool get disablePaymentNotification;
+  @override
+  @JsonKey(name: 'paymentNotification', defaultValue: [])
+  List<PaymentAdviceExpiryNotificationDto> get paymentNotification;
   @override
   @JsonKey(ignore: true)
   _$$_UserDtoCopyWith<_$_UserDto> get copyWith =>

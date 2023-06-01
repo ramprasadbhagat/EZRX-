@@ -14,6 +14,11 @@ class UserQueryMutation {
           provider,
           confirmed,
           blocked,
+          disablePaymentNotification,
+          paymentNotification{
+            day,
+            disabled
+          }
           role
           {
             id,

@@ -111,6 +111,8 @@ import 'package:wakelock/wakelock.dart';
 
 import 'package:ezrxmobile/application/payments/paymant_summary/payment_summary_bloc.dart';
 
+import 'package:ezrxmobile/application/account/payment_notification/payment_notification_bloc.dart';
+
 final _crashlytics = locator<FirebaseCrashlyticsService>().crashlytics;
 
 Future<void> _firebaseMessagingBackgroundHandler(
@@ -358,6 +360,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider<ComboDealMaterialDetailBloc>(
           create: (context) => locator<ComboDealMaterialDetailBloc>(),
+        ),
+        BlocProvider<PaymentNotificationBloc>(
+          create: (context) => locator<PaymentNotificationBloc>(),
         ),
         BlocProvider<ScanMaterialInfoBloc>(
           create: (context) {

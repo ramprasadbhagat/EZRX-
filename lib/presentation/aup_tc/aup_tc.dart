@@ -135,7 +135,7 @@ class AcceptButton extends StatelessWidget {
                   );
                 } else {
                   context.read<UserBloc>().add(
-                        UserEvent.accptTnc(
+                        UserEvent.acceptTnc(
                           date: DateTime.now().toUtc().toIso8601String(),
                         ),
                       );

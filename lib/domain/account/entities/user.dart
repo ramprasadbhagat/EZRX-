@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/domain/account/entities/access_right.dart';
 import 'package:ezrxmobile/domain/account/entities/full_name.dart';
+import 'package:ezrxmobile/domain/account/entities/payment_notification.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/setting_tc.dart';
@@ -46,6 +47,7 @@ class User with _$User {
           emailNotifications: false,
           mobileNotifications: false,
           languagePreference: LanguageValue(''),
+          paymentNotification: PaymentNotification.empty(),
         ),
         settingTc: SettingTc(
           acceptPrivacyPolicy: false,

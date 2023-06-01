@@ -150,7 +150,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
           },
         ),
         BlocListener<UserBloc, UserState>(
-          listenWhen: (previous, current) => previous.user != current.user,
+          listenWhen: (previous, current) => previous.user.id != current.user.id,
           listener: (context, state) {
             _welcomeUserMessage(state);
             _initializeSalesOrg(state);

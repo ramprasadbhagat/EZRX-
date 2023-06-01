@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/account/entities/full_name.dart';
+import 'package:ezrxmobile/domain/account/entities/payment_notification.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_org_customer_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_org_ship_to_info.dart';
@@ -11,6 +12,7 @@ import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/constants.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/access_right_dto.dart';
+import 'package:ezrxmobile/infrastructure/account/dtos/payment_advice_expiry_notification_dto.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/role_dto.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/sales_organisation_dto.dart';
 import 'package:ezrxmobile/infrastructure/core/common/dto_helper.dart';
@@ -60,6 +62,10 @@ class UserDto with _$UserDto {
         required bool disableReturns,
     @JsonKey(name: 'hasPriceOverride', defaultValue: false)
         required bool hasPriceOverride,
+    @JsonKey(name: 'disablePaymentNotification', defaultValue: false)
+        required bool disablePaymentNotification,
+    @JsonKey(name: 'paymentNotification', defaultValue: <PaymentAdviceExpiryNotificationDto>[])
+        required List<PaymentAdviceExpiryNotificationDto> paymentNotification,
   }) = _UserDto;
 
   factory UserDto.fromDomain(User user) {
@@ -87,6 +93,12 @@ class UserDto with _$UserDto {
       disableCreateOrder: user.disableCreateOrder,
       disableReturns: user.disableReturns,
       hasPriceOverride: user.hasPriceOverride,
+      disablePaymentNotification:
+          user.settings.paymentNotification.disablePaymentNotification,
+      paymentNotification: user
+          .settings.paymentNotification.paymentAdviceExpiryNotificationList
+          .map((e) => PaymentAdviceExpiryNotificationDto.fromDomain(e))
+          .toList(),
     );
   }
   static const emptyUserDto = UserDto(
@@ -108,6 +120,8 @@ class UserDto with _$UserDto {
     disableCreateOrder: false,
     disableReturns: false,
     hasPriceOverride: false,
+    disablePaymentNotification: false,
+    paymentNotification: <PaymentAdviceExpiryNotificationDto>[],
   );
   User toDomain() {
     return User(
@@ -128,6 +142,10 @@ class UserDto with _$UserDto {
         emailNotifications: emailNotifications,
         mobileNotifications: mobileNotifications,
         languagePreference: LanguageValue(languagePreference),
+        paymentNotification: PaymentNotification(
+          disablePaymentNotification: disablePaymentNotification,
+          paymentAdviceExpiryNotificationList: paymentNotification.map((e) => e.toDomain()).toList(),
+        ),
       ),
       settingTc: SettingTc(
         acceptPrivacyPolicy: acceptPrivacyPolicy,

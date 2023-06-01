@@ -18,6 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$Settings {
   bool get emailNotifications => throw _privateConstructorUsedError;
   bool get mobileNotifications => throw _privateConstructorUsedError;
+  PaymentNotification get paymentNotification =>
+      throw _privateConstructorUsedError;
   LanguageValue get languagePreference => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -33,7 +35,10 @@ abstract class $SettingsCopyWith<$Res> {
   $Res call(
       {bool emailNotifications,
       bool mobileNotifications,
+      PaymentNotification paymentNotification,
       LanguageValue languagePreference});
+
+  $PaymentNotificationCopyWith<$Res> get paymentNotification;
 }
 
 /// @nodoc
@@ -51,6 +56,7 @@ class _$SettingsCopyWithImpl<$Res, $Val extends Settings>
   $Res call({
     Object? emailNotifications = null,
     Object? mobileNotifications = null,
+    Object? paymentNotification = null,
     Object? languagePreference = null,
   }) {
     return _then(_value.copyWith(
@@ -62,11 +68,24 @@ class _$SettingsCopyWithImpl<$Res, $Val extends Settings>
           ? _value.mobileNotifications
           : mobileNotifications // ignore: cast_nullable_to_non_nullable
               as bool,
+      paymentNotification: null == paymentNotification
+          ? _value.paymentNotification
+          : paymentNotification // ignore: cast_nullable_to_non_nullable
+              as PaymentNotification,
       languagePreference: null == languagePreference
           ? _value.languagePreference
           : languagePreference // ignore: cast_nullable_to_non_nullable
               as LanguageValue,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PaymentNotificationCopyWith<$Res> get paymentNotification {
+    return $PaymentNotificationCopyWith<$Res>(_value.paymentNotification,
+        (value) {
+      return _then(_value.copyWith(paymentNotification: value) as $Val);
+    });
   }
 }
 
@@ -80,7 +99,11 @@ abstract class _$$_SettingsCopyWith<$Res> implements $SettingsCopyWith<$Res> {
   $Res call(
       {bool emailNotifications,
       bool mobileNotifications,
+      PaymentNotification paymentNotification,
       LanguageValue languagePreference});
+
+  @override
+  $PaymentNotificationCopyWith<$Res> get paymentNotification;
 }
 
 /// @nodoc
@@ -96,6 +119,7 @@ class __$$_SettingsCopyWithImpl<$Res>
   $Res call({
     Object? emailNotifications = null,
     Object? mobileNotifications = null,
+    Object? paymentNotification = null,
     Object? languagePreference = null,
   }) {
     return _then(_$_Settings(
@@ -107,6 +131,10 @@ class __$$_SettingsCopyWithImpl<$Res>
           ? _value.mobileNotifications
           : mobileNotifications // ignore: cast_nullable_to_non_nullable
               as bool,
+      paymentNotification: null == paymentNotification
+          ? _value.paymentNotification
+          : paymentNotification // ignore: cast_nullable_to_non_nullable
+              as PaymentNotification,
       languagePreference: null == languagePreference
           ? _value.languagePreference
           : languagePreference // ignore: cast_nullable_to_non_nullable
@@ -121,6 +149,7 @@ class _$_Settings extends _Settings {
   const _$_Settings(
       {required this.emailNotifications,
       required this.mobileNotifications,
+      required this.paymentNotification,
       required this.languagePreference})
       : super._();
 
@@ -129,11 +158,13 @@ class _$_Settings extends _Settings {
   @override
   final bool mobileNotifications;
   @override
+  final PaymentNotification paymentNotification;
+  @override
   final LanguageValue languagePreference;
 
   @override
   String toString() {
-    return 'Settings(emailNotifications: $emailNotifications, mobileNotifications: $mobileNotifications, languagePreference: $languagePreference)';
+    return 'Settings(emailNotifications: $emailNotifications, mobileNotifications: $mobileNotifications, paymentNotification: $paymentNotification, languagePreference: $languagePreference)';
   }
 
   @override
@@ -145,13 +176,15 @@ class _$_Settings extends _Settings {
                 other.emailNotifications == emailNotifications) &&
             (identical(other.mobileNotifications, mobileNotifications) ||
                 other.mobileNotifications == mobileNotifications) &&
+            (identical(other.paymentNotification, paymentNotification) ||
+                other.paymentNotification == paymentNotification) &&
             (identical(other.languagePreference, languagePreference) ||
                 other.languagePreference == languagePreference));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, emailNotifications, mobileNotifications, languagePreference);
+  int get hashCode => Object.hash(runtimeType, emailNotifications,
+      mobileNotifications, paymentNotification, languagePreference);
 
   @JsonKey(ignore: true)
   @override
@@ -164,6 +197,7 @@ abstract class _Settings extends Settings {
   const factory _Settings(
       {required final bool emailNotifications,
       required final bool mobileNotifications,
+      required final PaymentNotification paymentNotification,
       required final LanguageValue languagePreference}) = _$_Settings;
   const _Settings._() : super._();
 
@@ -171,6 +205,8 @@ abstract class _Settings extends Settings {
   bool get emailNotifications;
   @override
   bool get mobileNotifications;
+  @override
+  PaymentNotification get paymentNotification;
   @override
   LanguageValue get languagePreference;
   @override

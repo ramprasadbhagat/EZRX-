@@ -60,7 +60,7 @@ void main() {
         );
       },
       act: (UserBloc bloc) => bloc.add(
-        UserEvent.accptTnc(date: date),
+        UserEvent.acceptTnc(date: date),
       ),
       expect: () => [
         UserState.initial().copyWith(user: User.empty()),
@@ -77,7 +77,7 @@ void main() {
           (invocation) async => const Left(ApiFailure.other('tnc failed')),
         );
       },
-      act: (UserBloc bloc) => bloc.add(UserEvent.accptTnc(date: date)),
+      act: (UserBloc bloc) => bloc.add(UserEvent.acceptTnc(date: date)),
       expect: () => [
         UserState.initial().copyWith(
             userFailureOrSuccessOption:
