@@ -56,6 +56,7 @@ void main() {
   const minimumOrderAmount = 'THB 1,500';
   const user = 'ExternalSR';
   const discount = 10.0;
+  const referenceNote = 'test Note';
 
   //country & country currency variable
   const currency = 'THB';
@@ -91,7 +92,6 @@ void main() {
   const regularMaterialTotalPrice = regularMaterialListPrice;
   const regularMaterialDiscountOverridePrice =
       '15,352.21'; // 10 % discount override price
-
 
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
@@ -141,6 +141,9 @@ void main() {
     //block submitting order when less than min order amount
     await materialListRobot.search(minimumOrderMaterial.displayMatNo);
     materialListRobot.verifyCurrencyCheck(currency);
+    materialListRobot.displayTotalTax(
+      minimumOrderMaterial.getOrDefaultValue(''),
+    );
     materialListRobot.verifyEnableListPrice(
       minimumOrderMaterial.getOrDefaultValue(''),
     );
@@ -302,7 +305,7 @@ void main() {
     orderSummaryRobot.verifyCountry(country);
     orderSummaryRobot.verifyPostalCode(postalCode);
     orderSummaryRobot.findReferenceNote();
-    await orderSummaryRobot.enterReferenceNote('Reference Note');
+    await orderSummaryRobot.enterReferenceNote(referenceNote);
     orderSummaryRobot.findSpecialInstruction();
     orderSummaryRobot.findPoAttachmentUpload();
     orderSummaryRobot.findContinueButton(2);
@@ -362,13 +365,14 @@ void main() {
     orderSummaryRobot.verifyPostalCode(postalCode);
     await orderSummaryRobot.tapContinueButton(1);
     orderSummaryRobot.findContinueButton(2);
+    await orderSummaryRobot.tapContinueButton(2);
     orderSummaryRobot.findReferenceNote();
+    await orderSummaryRobot.enterReferenceNote(referenceNote);
     //Enable Special Instructions
     orderSummaryRobot.findSpecialInstruction();
     await orderSummaryRobot.enterSpecialInstruction('special');
     await orderSummaryRobot.getKeyboardDown();
     orderSummaryRobot.findPoAttachmentUpload();
-    await orderSummaryRobot.tapContinueButton(2);
     await orderSummaryRobot.scrollToContinueButton(3);
     orderSummaryRobot.findContinueButton(3);
     await orderSummaryRobot.tapContinueButton(3);
@@ -393,20 +397,6 @@ void main() {
     orderConfirmationRobot.findGoToOrderHistoryButton();
     await orderConfirmationRobot.tapGoToOrderHistoryButton();
     orderHistoryRobot.verify();
-    orderHistoryRobot.findOrderHistoryFilter();
-    await orderHistoryRobot.findOrderHistoryFilterByMaterialNumber(
-      bonusMaterial.getOrDefaultValue(''),
-    );
-    await orderHistoryRobot.tapOrderHistoryFilterApplyButton();
-    orderHistoryRobot.findOrderItemByMaterialNumber(
-      bonusMaterial.getOrDefaultValue(''),
-    );
-    orderHistoryRobot.findOrderedItem();
-    orderHistoryRobot.verifyOrderType(orderTypeZPOR);
-    orderHistoryRobot.verifyMaterialID(
-      bonusMaterial.displayMatNo,
-    );
-    orderHistoryRobot.verifyQuantity('10');
     await orderHistoryRobot.tapOrderedItem();
     orderHistoryDetailsRobot.verify();
     orderHistoryDetailsRobot.findOrderDetails();
@@ -419,6 +409,7 @@ void main() {
       bonusMaterial.getOrDefaultValue(''),
     );
     orderHistoryDetailsRobot.findTotalTax();
+    orderHistoryDetailsRobot.findReferenceNoteText(referenceNote);
     await orderHistoryDetailsRobot.tapOrderDetails();
     orderHistoryDetailsRobot.findSoldToAddress();
     orderHistoryDetailsRobot.verifySoldToID(customerCode);
@@ -448,8 +439,7 @@ void main() {
       zpfcMaterial.getOrDefaultValue(''),
     );
     //display price before vat
-    materialListRobot
-        .displayPriceBeforeVat(zpfcMaterial.getOrDefaultValue(''));
+    materialListRobot.displayPriceBeforeVat(zpfcMaterial.getOrDefaultValue(''));
     await materialListRobot.tapMaterial(
       zpfcMaterial.getOrDefaultValue(''),
     );

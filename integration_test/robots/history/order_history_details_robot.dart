@@ -161,7 +161,7 @@ class OrderHistoryDetailsRobot {
     expect(find.byKey(const Key('batchNumberExpiryDate')), findsWidgets);
   }
 
-   void findReOrderButton() {
+  void findReOrderButton() {
     expect(reOrderButton, findsOneWidget);
   }
 
@@ -201,4 +201,9 @@ class OrderHistoryDetailsRobot {
     expect(taxDisplay, findsOneWidget);
   }
 
+  void findReferenceNoteText(String referenceNote) {
+    final referenceNoteText =
+        find.byKey(ValueKey('Reference Note$referenceNote'));
+    expect(referenceNoteText, findsOneWidget);
+  }
 }

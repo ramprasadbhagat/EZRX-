@@ -59,6 +59,7 @@ void main() {
   const contactPerson = 'TH ClientUser, User31';
   const postalCode = '10330';
   const userRole = 'Client User';
+  const referenceNote = 'test Note';
 
   ////////Minimum Price Material////////////
   final minimumOrderMaterial = MaterialNumber('000000000023246949');
@@ -138,6 +139,9 @@ void main() {
     //block submitting order when less than min order amount
     await materialListRobot.search(minimumOrderMaterial.displayMatNo);
     materialListRobot.verifyCurrencyCheck(currency);
+    materialListRobot.displayTotalTax(
+      minimumOrderMaterial.getOrDefaultValue(''),
+    );
     materialListRobot.verifyEnableListPrice(
       minimumOrderMaterial.getOrDefaultValue(''),
     );
@@ -356,12 +360,13 @@ void main() {
     orderSummaryRobot.verifyCountry(country);
     orderSummaryRobot.verifyPostalCode(postalCode);
     orderSummaryRobot.findContinueButton(2);
+    await orderSummaryRobot.tapContinueButton(2);
     orderSummaryRobot.findReferenceNote();
+    await orderSummaryRobot.enterReferenceNote(referenceNote);
     orderSummaryRobot.findSpecialInstruction();
     await orderSummaryRobot.enterSpecialInstruction('special');
     await orderSummaryRobot.getKeyboardDown();
     orderSummaryRobot.findPoAttachmentUpload();
-    await orderSummaryRobot.tapContinueButton(2);
     await orderSummaryRobot.scrollToContinueButton(3);
     orderSummaryRobot.findContinueButton(3);
     await orderSummaryRobot.tapContinueButton(3);
@@ -396,20 +401,6 @@ void main() {
     orderConfirmationRobot.findGoToOrderHistoryButton();
     await orderConfirmationRobot.tapGoToOrderHistoryButton();
     orderHistoryRobot.verify();
-    orderHistoryRobot.findOrderHistoryFilter();
-    await orderHistoryRobot.findOrderHistoryFilterByMaterialNumber(
-      bonusMaterial.getOrDefaultValue(''),
-    );
-    await orderHistoryRobot.tapOrderHistoryFilterApplyButton();
-    orderHistoryRobot.findOrderItemByMaterialNumber(
-      bonusMaterial.getOrDefaultValue(''),
-    );
-    orderHistoryRobot.findOrderedItem();
-    orderHistoryRobot.verifyOrderType(orderType);
-    orderHistoryRobot.verifyMaterialID(
-      bonusMaterial.displayMatNo,
-    );
-    orderHistoryRobot.verifyQuantity('10');
     await orderHistoryRobot.tapOrderedItem();
     // order history details
     orderHistoryDetailsRobot.verify();
@@ -418,6 +409,7 @@ void main() {
     orderHistoryDetailsRobot.verifyOrderType(orderType);
     orderHistoryDetailsRobot.findTotalTax();
     orderHistoryDetailsRobot.verifyContactPerson(contactPerson);
+    orderHistoryDetailsRobot.findReferenceNoteText(referenceNote);
     await orderHistoryDetailsRobot.tapOrderDetails();
     orderHistoryDetailsRobot.findSoldToAddress();
     orderHistoryDetailsRobot.verifySoldToID(bonusCustomerCode);

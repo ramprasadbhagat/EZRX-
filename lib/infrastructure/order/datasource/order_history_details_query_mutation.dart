@@ -105,6 +105,7 @@ class OrderHistoryDetailsQueryMutation {
       OrderValue
       CreatedDate
       OrderReason
+      ReferenceNotes
     }
     ShippingInformation {
       Address
