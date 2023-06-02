@@ -2,7 +2,7 @@ part of 'policy_configuration_bloc.dart';
 
 @freezed
 class PolicyConfigurationEvent with _$PolicyConfigurationEvent {
-  const factory PolicyConfigurationEvent.initialized() = _initialized;
+  const factory PolicyConfigurationEvent.initialized() = _Initialized;
 
   const factory PolicyConfigurationEvent.fetch({
     required SalesOrganisation salesOrganisation,
@@ -19,4 +19,8 @@ class PolicyConfigurationEvent with _$PolicyConfigurationEvent {
   }) = _Add;
   const factory PolicyConfigurationEvent.returnsAllowedSwitch() =
       _ReturnsAllowedSwitch;
+  const factory PolicyConfigurationEvent.search({
+    required SalesOrganisation salesOrganisation,
+    required String searchKey,
+  }) = _Search;
 }

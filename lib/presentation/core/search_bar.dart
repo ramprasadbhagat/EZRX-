@@ -1,8 +1,10 @@
+import 'dart:async';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:flutter/material.dart';
 
-class SearchBar extends StatelessWidget {
+class SearchBar extends StatefulWidget {
   const SearchBar({
     Key? key,
     required this.suffixIconKey,
@@ -29,30 +31,43 @@ class SearchBar extends StatelessWidget {
   final void Function(String)? onSearchChanged;
 
   @override
+  State<SearchBar> createState() => _SearchBarState();
+}
+
+class _SearchBarState extends State<SearchBar> {
+  Timer? _debounce;
+
+  @override
+  void dispose() {
+    _debounce?.cancel();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return TextFormField(
-      controller: controller,
-      enabled: enabled,
-      onChanged: onSearchChanged,
+      controller: widget.controller,
+      enabled: widget.enabled,
+      onChanged: (value) => _onSearchChanged(context, value),
       onFieldSubmitted: (value) => _onSearch(context, value),
       decoration: InputDecoration(
-        isDense: isDense,
+        isDense: widget.isDense,
         prefixIcon: IconButton(
           splashColor: Colors.transparent,
           highlightColor: Colors.transparent,
-          key: prefixIconKey,
+          key: widget.prefixIconKey,
           icon: const Icon(Icons.search),
-          onPressed: () => _onSearch(context, controller.text),
+          onPressed: () => _onSearch(context, widget.controller.text),
         ),
         suffixIcon: IconButton(
           splashColor: Colors.transparent,
           highlightColor: Colors.transparent,
-          key: suffixIconKey,
+          key: widget.suffixIconKey,
           icon: const Icon(Icons.clear),
-          onPressed: onClear,
+          onPressed: () => _onClear(),
         ),
         hintText: 'Search...'.tr(),
-        border: border,
+        border: widget.border,
       ),
     );
   }
@@ -65,11 +80,28 @@ class SearchBar extends StatelessWidget {
   void _onSearch(BuildContext context, String value) {
     final isValid = _isValid();
     if (isValid) {
-      onSearchSubmitted?.call(value);
+      if (_debounce?.isActive ?? false) _debounce?.cancel();
+      widget.onSearchSubmitted?.call(value);
     } else {
+      if (_debounce?.isActive ?? false) _debounce?.cancel();
       _showSnackbar(context);
     }
   }
 
-  bool _isValid() => customValidator?.call() ?? true;
+  void _onSearchChanged(BuildContext context, String value) {
+    final isValid = _isValid();
+    if (isValid) {
+      if (_debounce?.isActive ?? false) _debounce?.cancel();
+      _debounce = Timer(const Duration(milliseconds: 3000), () {
+        widget.onSearchChanged?.call(value);
+      });
+    }
+  }
+
+  void _onClear() {
+      if (_debounce?.isActive ?? false) _debounce?.cancel();
+      widget.onClear.call();
+  }
+
+  bool _isValid() => widget.customValidator?.call() ?? true;
 }

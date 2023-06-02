@@ -1,3 +1,4 @@
+import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,20 +18,26 @@ int _pageSize = 20;
 class PolicyConfigurationBloc
     extends Bloc<PolicyConfigurationEvent, PolicyConfigurationState> {
   final IPolicyConfigurationRepository policyConfigurationRepository;
+
   PolicyConfigurationBloc({required this.policyConfigurationRepository})
       : super(PolicyConfigurationState.initial()) {
-    on<PolicyConfigurationEvent>(_onEvent);
-  }
-
-  Future<void> _onEvent(
-    PolicyConfigurationEvent event,
-    Emitter<PolicyConfigurationState> emit,
-  ) async {
-    await event.map(
-      initialized: (_) async => emit(PolicyConfigurationState.initial()),
-      fetch: (e) async {
+    on<_Initialized>(
+      (_, emit) async => emit(
+        PolicyConfigurationState.initial(),
+      ),
+    );
+    on<_Search> (
+          (e, emit) {
+        if (e.searchKey != state.searchKey.getValue()) {
+          add(_Fetch(searchKey: e.searchKey, salesOrganisation: e.salesOrganisation));
+        }
+      },
+    );
+    on<_Fetch>(
+      (e, emit) async {
         emit(PolicyConfigurationState.initial().copyWith(
           isLoading: true,
+          searchKey: SearchKey(e.searchKey),
         ));
 
         final failureOrSuccess =
@@ -42,14 +49,17 @@ class PolicyConfigurationBloc
         );
         failureOrSuccess.fold(
           (failure) {
+            if (emit.isDone) return;
             emit(
               state.copyWith(
                 failureOrSuccessOption: optionOf(failureOrSuccess),
                 isLoading: false,
+                searchKey: SearchKey(e.searchKey),
               ),
             );
           },
           (policyConfigurationList) {
+            if (emit.isDone) return;
             emit(
               state.copyWith(
                 policyConfigurationList: policyConfigurationList,
@@ -61,7 +71,10 @@ class PolicyConfigurationBloc
           },
         );
       },
-      loadMorePolicyConfigurations: (e) async {
+      transformer: restartable(),
+    );
+    on<_LoadMorePolicyConfigurations>(
+      (e, emit) async {
         if (state.isLoading || !state.canLoadMorePolicyConfigurations) return;
         emit(
           state.copyWith(
@@ -102,7 +115,9 @@ class PolicyConfigurationBloc
           },
         );
       },
-      delete: (e) async {
+    );
+    on<_Delete>(
+      (e, emit) async {
         emit(state.copyWith(
           failureOrSuccessOption: none(),
         ));
@@ -130,7 +145,9 @@ class PolicyConfigurationBloc
           },
         );
       },
-      add: (e) async {
+    );
+    on<_Add>(
+      (e, emit) async {
         emit(
           state.copyWith(
             failureOrSuccessOption: none(),
@@ -163,15 +180,15 @@ class PolicyConfigurationBloc
           },
         );
       },
-      returnsAllowedSwitch: (e) async {
-        emit(
-          state.copyWith(
-            returnsAllowed: ReturnsAllowed(
-              !state.returnsAllowed.getOrCrash(),
-            ),
+    );
+    on<_ReturnsAllowedSwitch>(
+      (_, emit) => emit(
+        state.copyWith(
+          returnsAllowed: ReturnsAllowed(
+            !state.returnsAllowed.getOrCrash(),
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 }

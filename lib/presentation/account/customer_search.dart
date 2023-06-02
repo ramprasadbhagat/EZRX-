@@ -120,46 +120,46 @@ class _AppBarState extends State<_AppBar> {
             ),
           );
         },
-        child: SearchBar(
-          key: const Key('customerCodeSearchField'),
-          controller: _searchController,
-          enabled: !_customerCodeBloc.state.isFetching,
-          onSearchChanged: (value) {
-            _customerCodeBloc.add(
-              CustomerCodeEvent.autoSearch(
-                userInfo: _userBloc.state.user,
-                selectedSalesOrg: _salesOrgBloc.state.salesOrganisation,
-                hidecustomer: _salesOrgBloc.state.hideCustomer,
-                searchValue: value,
-              ),
-            );
-          },
-          onSearchSubmitted: (value) {
-            _customerCodeBloc.add(
-              CustomerCodeEvent.search(
-                userInfo: _userBloc.state.user,
-                selectedSalesOrg: _salesOrgBloc.state.salesOrganisation,
-                hidecustomer: _salesOrgBloc.state.hideCustomer,
-                searchValue: value,
-              ),
-            );
-          },
-          suffixIconKey: const Key('clearCustomerCodeSearch'),
-          customValidator: () =>
-              SearchKey.search(_searchController.text).isValid(),
-          onClear: () {
-            if (_searchController.text.isNotEmpty) {
+          child: SearchBar(
+            key: const Key('customerCodeSearchField'),
+            controller: _searchController,
+            enabled: !_customerCodeBloc.state.isFetching,
+            onSearchChanged: (value) {
+                  _customerCodeBloc.add(
+                    CustomerCodeEvent.autoSearch(
+                      userInfo: _userBloc.state.user,
+                      selectedSalesOrg: _salesOrgBloc.state.salesOrganisation,
+                      hidecustomer: _salesOrgBloc.state.hideCustomer,
+                      searchValue: value,
+                    ),
+                  );
+            },
+            onSearchSubmitted: (value) {
               _customerCodeBloc.add(
-                CustomerCodeEvent.fetch(
+                CustomerCodeEvent.autoSearch(
                   userInfo: _userBloc.state.user,
                   selectedSalesOrg: _salesOrgBloc.state.salesOrganisation,
                   hidecustomer: _salesOrgBloc.state.hideCustomer,
+                  searchValue: value,
                 ),
               );
-            }
-          },
-          border: InputBorder.none,
-        ),
+            },
+            suffixIconKey: const Key('clearCustomerCodeSearch'),
+            customValidator: () =>
+                SearchKey.search(_searchController.text).isValid(),
+            onClear: () {
+              if (_searchController.text.isEmpty) return;
+              _searchController.clear();
+                _customerCodeBloc.add(
+                  CustomerCodeEvent.fetch(
+                    userInfo: _userBloc.state.user,
+                    selectedSalesOrg: _salesOrgBloc.state.salesOrganisation,
+                    hidecustomer: _salesOrgBloc.state.hideCustomer,
+                  ),
+                );
+            },
+            border: InputBorder.none,
+          ),
       ),
     );
   }

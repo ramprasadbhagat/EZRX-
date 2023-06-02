@@ -9,7 +9,6 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:rxdart/transformers.dart';
 
 part 'customer_code_bloc.freezed.dart';
 part 'customer_code_event.dart';
@@ -43,11 +42,6 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
           ));
         }
       },
-      transformer: (events, mapper) {
-        return events
-            .debounceTime(const Duration(milliseconds: 3000))
-            .asyncExpand(mapper);
-      },
     );
     on<_Search>(
       (e, emit) async {
@@ -70,26 +64,31 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
         );
         failureOrSuccess.fold(
           (failure) {
+            if (emit.isDone) return;
             emit(
               state.copyWith(
                 apiFailureOrSuccessOption: optionOf(failureOrSuccess),
                 canLoadMore: false,
                 isFetching: false,
+                searchKey: SearchKey(e.searchValue),
               ),
             );
           },
           (customerCodeList) {
+            if (emit.isDone) return;
             emit(
               state.copyWith(
                 customerCodeList: customerCodeList,
                 apiFailureOrSuccessOption: none(),
                 isFetching: false,
                 canLoadMore: customerCodeList.length >= _pageSize,
+                  searchKey: SearchKey(e.searchValue),
               ),
             );
           },
         );
       },
+      transformer: restartable(),
     );
     on<_LoadStoredCustomerCode>((e, emit) async {
       emit(state.copyWith(
@@ -164,7 +163,7 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
         var apiFailure = false;
         final finalCustomerCodeinfo = e.selectedSalesOrg.customerInfos;
         emit(CustomerCodeState.initial());
-        emit(state.copyWith(isFetching: true));
+        emit(state.copyWith(isFetching: true, searchKey: SearchKey(e.searchText)));
 
         for (final customerItem in finalCustomerCodeinfo) {
           final failureOrSuccess = await customerCodeRepository.getCustomerCode(

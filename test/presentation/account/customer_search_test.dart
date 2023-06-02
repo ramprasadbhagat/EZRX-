@@ -10,7 +10,9 @@ import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -445,6 +447,60 @@ void main() {
       await tester.pump();
       expect(find.text('123'), findsNothing);
       expect(find.text('GSK'), findsOneWidget);
+    });
+
+    testWidgets('Search', (tester) async {
+      when(() => customerCodeBlocMock.state).thenReturn(CustomerCodeState.initial().copyWith(
+          isFetching: false,
+          customerCodeList: [],
+          apiFailureOrSuccessOption: none(),
+          searchKey: SearchKey('')),);
+
+      await tester.runAsync(() async {
+        await tester.pumpWidget(getScopedWidget());
+      });
+
+      await tester.pump();
+      await tester.enterText(
+          find.byKey(const Key('customerCodeSearchField')), 'GSK');
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      verify(
+            () => customerCodeBlocMock.add(
+          CustomerCodeEvent.autoSearch(
+            userInfo: User.empty(),
+            selectedSalesOrg: SalesOrganisation.empty(),
+            hidecustomer: false,
+            searchValue: 'GSK',
+          ),
+        ),
+      ).called(1);
+    });
+
+    testWidgets('Auto Search', (tester) async {
+      when(() => customerCodeBlocMock.state).thenReturn(CustomerCodeState.initial().copyWith(
+          isFetching: false,
+          customerCodeList: [],
+          apiFailureOrSuccessOption: none(),
+          searchKey: SearchKey('')),);
+
+      await tester.runAsync(() async {
+        await tester.pumpWidget(getScopedWidget());
+      });
+
+      await tester.pump();
+      await tester.enterText(
+          find.byKey(const Key('customerCodeSearchField')), 'GSK');
+      await tester.pump(const Duration(milliseconds: 3000));
+      verify(
+            () => customerCodeBlocMock.add(
+              CustomerCodeEvent.autoSearch(
+                userInfo: User.empty(),
+                selectedSalesOrg: SalesOrganisation.empty(),
+                hidecustomer: false,
+                searchValue: 'GSK',
+              ),
+        ),
+      ).called(1);
     });
 
     testWidgets('Test error Message to Customer code Search', (tester) async {

@@ -5,7 +5,9 @@ import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/returns/policy_configuration/policy_configuration_bloc.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/policy_configuration.dart';
 
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
@@ -162,6 +164,89 @@ void main() {
       final removeWidget = tester.widget(find.byIcon(Icons.delete_outline));
       await tester.tap(find.byWidget(removeWidget));
       await tester.pump();
+    });
+
+    testWidgets('Load policy Search Widget', (tester) async {
+      await getWidget(tester);
+      final customerSearchPage =
+          find.byKey(const Key('policyConfigurationSearch'));
+      expect(customerSearchPage, findsOneWidget);
+    });
+
+    testWidgets('Search', (tester) async {
+      when(() => policyConfigurationListBlocMock.state).thenReturn(
+        PolicyConfigurationState.initial().copyWith(
+          policyConfigurationList: [],
+          searchKey: SearchKey(''),
+        ),
+      );
+      await tester.runAsync(() async {
+        await getWidget(tester);
+      });
+
+      await tester.pump();
+      await tester.enterText(
+          find.byKey(const Key('policyConfigurationSearch')), '2001');
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      verify(
+        () => policyConfigurationListBlocMock.add(
+          PolicyConfigurationEvent.search(
+            salesOrganisation: SalesOrganisation.empty(),
+            searchKey: '2001',
+          ),
+        ),
+      ).called(1);
+    });
+
+    testWidgets('Auto Search', (tester) async {
+      when(() => policyConfigurationListBlocMock.state).thenReturn(
+        PolicyConfigurationState.initial().copyWith(
+          policyConfigurationList: [],
+          searchKey: SearchKey(''),
+        ),
+      );
+      await tester.runAsync(() async {
+        await getWidget(tester);
+      });
+
+      await tester.pump();
+      await tester.enterText(
+          find.byKey(const Key('policyConfigurationSearch')), '2001');
+      await tester.pump(const Duration(seconds: 3));
+      verify(
+        () => policyConfigurationListBlocMock.add(
+          PolicyConfigurationEvent.search(
+            salesOrganisation: SalesOrganisation.empty(),
+            searchKey: '2001',
+          ),
+        ),
+      ).called(1);
+    });
+
+    testWidgets('Clear Search', (tester) async {
+      when(() => policyConfigurationListBlocMock.state).thenReturn(
+        PolicyConfigurationState.initial().copyWith(
+          policyConfigurationList: [],
+          searchKey: SearchKey('2001'),
+        ),
+      );
+      await tester.runAsync(() async {
+        await getWidget(tester);
+      });
+
+      final clearPolicyConfigurationSearch =
+          find.byKey(const Key('clearPolicyConfigurationSearch'));
+      expect(clearPolicyConfigurationSearch, findsOneWidget);
+      await tester.tap(clearPolicyConfigurationSearch);
+      await tester.pump();
+      verify(
+        () => policyConfigurationListBlocMock.add(
+          PolicyConfigurationEvent.search(
+            salesOrganisation: SalesOrganisation.empty(),
+            searchKey: '',
+          ),
+        ),
+      ).called(1);
     });
 
     testWidgets('Test fetch fail', (tester) async {

@@ -192,12 +192,17 @@ class _UserRestrictionListSearchState extends State<UserRestrictionListSearch> {
           controller: _searchController,
           onClear: () {
             if (_searchController.text.isEmpty) return;
+            _searchController.clear();
             userRestrictionListBloc.add(
               const UserRestrictionListEvent.updateSearchKey(''),
             );
           },
           border: InputBorder.none,
           onSearchChanged: (value) {
+            userRestrictionListBloc
+                .add(UserRestrictionListEvent.updateSearchKey(value));
+          },
+          onSearchSubmitted: (value) {
             userRestrictionListBloc
                 .add(UserRestrictionListEvent.updateSearchKey(value));
           },

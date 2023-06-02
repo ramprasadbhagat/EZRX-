@@ -283,11 +283,30 @@ void main() {
 
       final textField = find.byKey(const Key('userRestrictionListSearchField'));
       await tester.enterText(textField, mockSearchKey);
-      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 3000));
 
       verify(() => userRestrictionListBlocMock.add(
             UserRestrictionListEvent.updateSearchKey(mockSearchKey),
           )).called(1);
+    });
+
+    testWidgets('Submitted search text', (tester) async {
+      when(() => userRestrictionListBlocMock.state).thenReturn(
+        UserRestrictionListState.initial().copyWith(
+          usernames: mockUserNamesList,
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget(const UserRestrictionListPage()));
+      await tester.pump();
+
+      final textField = find.byKey(const Key('userRestrictionListSearchField'));
+      await tester.enterText(textField, mockSearchKey);
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+
+      verify(() => userRestrictionListBlocMock.add(
+        UserRestrictionListEvent.updateSearchKey(mockSearchKey),
+      )).called(1);
     });
   });
 }

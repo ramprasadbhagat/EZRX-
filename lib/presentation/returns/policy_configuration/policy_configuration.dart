@@ -217,10 +217,20 @@ class _PolicyConfigurationSearchState
           key: Key(
             'policyConfigurationSearch${state.searchKey.getOrDefaultValue('')}',
           ),
+          onSearchChanged: (value) {
+            final salesOrganisation =
+                context.read<SalesOrgBloc>().state.salesOrganisation;
+              context
+                  .read<PolicyConfigurationBloc>()
+                  .add(PolicyConfigurationEvent.search(
+                salesOrganisation: salesOrganisation,
+                searchKey: value,
+              ));
+          },
           onSearchSubmitted: (value) {
             context
                 .read<PolicyConfigurationBloc>()
-                .add(PolicyConfigurationEvent.fetch(
+                .add(PolicyConfigurationEvent.search(
                   salesOrganisation:
                       context.read<SalesOrgBloc>().state.salesOrganisation,
                   searchKey: value,
@@ -231,7 +241,7 @@ class _PolicyConfigurationSearchState
             _policyConfigSearchController.clear();
             context
                 .read<PolicyConfigurationBloc>()
-                .add(PolicyConfigurationEvent.fetch(
+                .add(PolicyConfigurationEvent.search(
                   salesOrganisation:
                       context.read<SalesOrgBloc>().state.salesOrganisation,
                   searchKey: '',

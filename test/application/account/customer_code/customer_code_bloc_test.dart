@@ -354,7 +354,6 @@ void main() {
           ),
         );
       },
-      wait: const Duration(milliseconds: 3000),
       expect: () => [
         CustomerCodeState.initial().copyWith(
             isSearchActive: true,
@@ -397,7 +396,6 @@ void main() {
             userInfo: fakeUser,
             selectedSalesOrg: fakeSaleOrg));
       },
-      wait: const Duration(milliseconds: 3000),
       expect: () => [
         CustomerCodeState.initial().copyWith(
             isSearchActive: true,
