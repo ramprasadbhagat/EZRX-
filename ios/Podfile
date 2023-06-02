@@ -43,6 +43,8 @@ post_install do |installer|
         '$(inherited)',
       ## dart: PermissionGroup.photos
       'PERMISSION_PHOTOS=1',
+      ## dart: PermissionGroup.camera
+      'PERMISSION_CAMERA=1',
     ]
     end
   end
