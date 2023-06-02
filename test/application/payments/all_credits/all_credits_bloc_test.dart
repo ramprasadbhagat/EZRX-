@@ -48,8 +48,8 @@ void main() {
       ),
       sortBy: 'All',
       documentNumber: DocumentNumber('mock_documentNumber'),
-      creditAmountTo: DoubleValue('100'),
-      creditAmountFrom: DoubleValue('1000'),
+      creditAmountTo: RangeValue('100'),
+      creditAmountFrom: RangeValue('1000'),
     );
   });
 
@@ -111,7 +111,7 @@ void main() {
                     .copyWith(customerCodeSoldTo: '0030032223'),
                 salesOrganisation: SalesOrganisation.empty()
                     .copyWith(salesOrg: SalesOrg('2601')),
-               allCreditsFilter: allCreditsFilter,
+                allCreditsFilter: allCreditsFilter,
               )).thenAnswer(
             (invocation) async => const Left(
               ApiFailure.other('mock-error'),
@@ -161,7 +161,7 @@ void main() {
               .copyWith(customerCodeSoldTo: '0030032223'),
           salesOrganisation:
               SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601')),
-         allCreditsFilter: allCreditsFilter,
+          allCreditsFilter: allCreditsFilter,
         )),
         expect: () => [
           AllCreditsState.initial().copyWith(

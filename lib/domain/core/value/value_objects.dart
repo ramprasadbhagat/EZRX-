@@ -163,17 +163,26 @@ class StringValue extends ValueObject<String> {
   const StringValue._(this.value);
 }
 
-class DoubleValue extends ValueObject<double> {
+class RangeValue extends ValueObject<double> {
   @override
   final Either<ValueFailure<double>, double> value;
 
-  factory DoubleValue(String input) =>
-      DoubleValue._(validateDoubleValue(input));
+  factory RangeValue(String input) => RangeValue._(validateDoubleValue(input));
 
-  String get apiParameterValue => emptyIfZero(value.getOrElse(() => 0));
+  String get apiParameterValue =>
+      value.isLeft() ? '' : value.getOrElse(() => 0).toString();
 
   String get apiParameterValueIfNegative =>
-      emptyIfZero(-1 * value.getOrElse(() => 0));
+      value.isLeft() ? '' : (-1 * value.getOrElse(() => 0)).toString();
 
-  const DoubleValue._(this.value);
+  static bool checkIfRangeIsValid(RangeValue from, RangeValue to) =>
+      (!from.isValid() && !to.isValid()) ||
+      from.isValid() &&
+          to.isValid() &&
+          (to.getOrDefaultValue(0) >= from.getOrDefaultValue(0));
+
+  static bool checkIfAnyIsEmpty(RangeValue from, RangeValue to) =>
+      !from.isValid() && to.isValid() || from.isValid() && !to.isValid();
+
+  const RangeValue._(this.value);
 }

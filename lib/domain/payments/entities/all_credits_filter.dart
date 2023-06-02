@@ -13,8 +13,8 @@ class AllCreditsFilter with _$AllCreditsFilter {
     required DocumentNumber documentNumber,
     required DateTimeStringValue documentDateFrom,
     required DateTimeStringValue documentDateTo,
-    required DoubleValue creditAmountFrom,
-    required DoubleValue creditAmountTo,
+    required RangeValue creditAmountFrom,
+    required RangeValue creditAmountTo,
     required String sortBy,
   }) = _AllCreditsFilter;
 
@@ -32,8 +32,8 @@ class AllCreditsFilter with _$AllCreditsFilter {
             DateTime.now(),
           ),
         ),
-        creditAmountTo: DoubleValue(''),
-        creditAmountFrom: DoubleValue(''),
+        creditAmountTo: RangeValue(''),
+        creditAmountFrom: RangeValue(''),
         sortBy: 'All',
       );
 
@@ -51,16 +51,11 @@ class AllCreditsFilter with _$AllCreditsFilter {
 
 // to check Credit Amount validation
   bool get checkIfCreditAmountRangeIsValid =>
-      (!creditAmountFrom.isValid() && !creditAmountTo.isValid()) ||
-      creditAmountFrom.isValid() &&
-          creditAmountTo.isValid() &&
-          (creditAmountTo.getOrDefaultValue(0) >=
-              creditAmountFrom.getOrDefaultValue(0));
+      RangeValue.checkIfRangeIsValid(creditAmountFrom, creditAmountTo);
 
 //to check if both the Credit Amount fields are empty
   bool get checkIfAnyCreditAmountIsEmpty =>
-      !creditAmountFrom.isValid() && creditAmountTo.isValid() ||
-      creditAmountFrom.isValid() && !creditAmountTo.isValid();
+      RangeValue.checkIfAnyIsEmpty(creditAmountFrom, creditAmountTo);
 
   // to check the filter validation
   bool get areFiltersValid =>

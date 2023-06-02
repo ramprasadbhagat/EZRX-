@@ -146,7 +146,7 @@ void main() {
         expect: () => [
           AllCreditsFilterState.initial().copyWith(
             allCreditsFilter: allCreditsFilter.copyWith(
-              creditAmountTo: DoubleValue('1000'),
+              creditAmountTo: RangeValue('1000'),
             ),
             showErrorMessages: false,
           ),
@@ -164,7 +164,7 @@ void main() {
         expect: () => [
           AllCreditsFilterState.initial().copyWith(
             allCreditsFilter: allCreditsFilter.copyWith(
-              creditAmountFrom: DoubleValue('100'),
+              creditAmountFrom: RangeValue('100'),
             ),
             showErrorMessages: false,
           ),
@@ -227,8 +227,8 @@ void main() {
             documentDateFrom: DateTimeStringValue(
               getDateStringByDateTime(fakeFromDate),
             ),
-            creditAmountFrom: DoubleValue('10'),
-            creditAmountTo: DoubleValue('100'),
+            creditAmountFrom: RangeValue('10'),
+            creditAmountTo: RangeValue('100'),
             sortBy: 'Cleared',
           ),
         ),
@@ -248,8 +248,8 @@ void main() {
               documentDateFrom: DateTimeStringValue(
                 getDateStringByDateTime(fakeFromDate),
               ),
-              creditAmountFrom: DoubleValue('10'),
-              creditAmountTo: DoubleValue('100'),
+              creditAmountFrom: RangeValue('10'),
+              creditAmountTo: RangeValue('100'),
               sortBy: 'Cleared',
             ),
           ),
@@ -269,8 +269,8 @@ void main() {
             documentDateFrom: DateTimeStringValue(
               getDateStringByDateTime(fakeFromDate),
             ),
-            creditAmountFrom: DoubleValue('100'),
-            creditAmountTo: DoubleValue('10'),
+            creditAmountFrom: RangeValue('100'),
+            creditAmountTo: RangeValue('10'),
             sortBy: 'Cleared',
           ),
         ),
@@ -290,8 +290,8 @@ void main() {
               documentDateFrom: DateTimeStringValue(
                 getDateStringByDateTime(fakeFromDate),
               ),
-              creditAmountFrom: DoubleValue('100'),
-              creditAmountTo: DoubleValue('10'),
+              creditAmountFrom: RangeValue('100'),
+              creditAmountTo: RangeValue('10'),
               sortBy: 'Cleared',
             ),
           ),

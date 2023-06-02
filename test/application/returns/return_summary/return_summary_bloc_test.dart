@@ -34,8 +34,13 @@ void main() {
 
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
-     requests = [
-       ReturnSummaryRequest(returnId: 'fakeApproverReturnRequestId', items: [], refundTotal: 12.0, requestStatus: ReturnSummaryStatus('PENDING') , submitDate: DateTimeStringValue('20230327')),
+    requests = [
+      ReturnSummaryRequest(
+          returnId: 'fakeApproverReturnRequestId',
+          items: [],
+          refundTotal: 12.0,
+          requestStatus: ReturnSummaryStatus('PENDING'),
+          submitDate: DateTimeStringValue('20230327')),
     ];
     mockReturnSummaryRepository = MockReturnSummaryRepository();
     returnSummaryFilter = ReturnSummaryFilter.empty().copyWith(
@@ -47,8 +52,8 @@ void main() {
       ),
       sortBy: ReturnSummaryStatus('Active'),
       requestId: SearchKey.searchFilter('mock_id'),
-      refundTotalTo: DoubleValue('100'),
-      refundTotalFrom: DoubleValue('1000'),
+      refundTotalTo: RangeValue('100'),
+      refundTotalFrom: RangeValue('1000'),
     );
   });
 
@@ -78,8 +83,8 @@ void main() {
                 offset: 0,
                 returnSummaryFilter: returnSummaryFilter,
               )).thenAnswer(
-            (invocation) async =>  Right(
-                ReturnSummaryRequestByUser(requestIds: [requests.first.returnId], requests: requests)),
+            (invocation) async => Right(ReturnSummaryRequestByUser(
+                requestIds: [requests.first.returnId], requests: requests)),
           );
         },
         act: (ReturnSummaryBloc bloc) => bloc.add(ReturnSummaryEvent.fetch(
@@ -150,8 +155,8 @@ void main() {
                 offset: 0,
                 returnSummaryFilter: returnSummaryFilter,
               )).thenAnswer(
-            (invocation) async =>  Right(
-                ReturnSummaryRequestByUser(requestIds: [requests.first.returnId], requests: requests)),
+            (invocation) async => Right(ReturnSummaryRequestByUser(
+                requestIds: [requests.first.returnId], requests: requests)),
           );
         },
         act: (ReturnSummaryBloc bloc) => bloc.add(ReturnSummaryEvent.loadMore(

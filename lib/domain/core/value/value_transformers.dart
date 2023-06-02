@@ -209,10 +209,6 @@ DateTime getDateTimeByAnnouncementDateString(String value) =>
 String getDateStringByDateTime(DateTime dateTime) =>
     DateFormat(DateTimeFormatString.apiDateFormat).format(dateTime);
 
-String emptyIfZero(double value) {
-  return value == 0 ? '' : value.toString();
-}
-
 int getDateTimeIntValue(String value) =>
     isNumericOnly(value) ? int.parse(value) : 0;
 

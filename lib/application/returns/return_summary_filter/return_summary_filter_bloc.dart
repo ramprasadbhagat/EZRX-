@@ -47,7 +47,7 @@ class ReturnSummaryFilterBloc
       refundTotalToChanged: (e) => emit(
         state.copyWith(
           returnSummaryFilter: state.returnSummaryFilter.copyWith(
-            refundTotalTo: DoubleValue(e.refundTotalTo),
+            refundTotalTo: RangeValue(e.refundTotalTo),
           ),
           showErrorMessages: false,
         ),
@@ -55,7 +55,7 @@ class ReturnSummaryFilterBloc
       refundTotalFromChanged: (e) => emit(
         state.copyWith(
           returnSummaryFilter: state.returnSummaryFilter.copyWith(
-            refundTotalFrom: DoubleValue(e.refundTotalFrom),
+            refundTotalFrom: RangeValue(e.refundTotalFrom),
           ),
           showErrorMessages: false,
         ),

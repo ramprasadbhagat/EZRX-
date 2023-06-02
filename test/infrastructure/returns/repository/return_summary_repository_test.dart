@@ -113,8 +113,8 @@ void main() {
               dateTo: DateTimeStringValue(getDateStringByDateTime(fakeToDate)),
               sortBy: ReturnSummaryStatus('Active'),
               requestId: SearchKey.searchFilter('mock_id'),
-              refundTotalTo: DoubleValue('100'),
-              refundTotalFrom: DoubleValue('1000'),
+              refundTotalTo: RangeValue('100'),
+              refundTotalFrom: RangeValue('1000'),
             )).toJson(),
           )).thenAnswer((invocation) async => mockReturnSummary);
 
@@ -130,8 +130,8 @@ void main() {
           dateTo: DateTimeStringValue(getDateStringByDateTime(fakeToDate)),
           sortBy: ReturnSummaryStatus('Active'),
           requestId: SearchKey.searchFilter('mock_id'),
-          refundTotalTo: DoubleValue('100'),
-          refundTotalFrom: DoubleValue('1000'),
+          refundTotalTo: RangeValue('100'),
+          refundTotalFrom: RangeValue('1000'),
         ),
       );
       expect(result.isRight(), true);
@@ -153,8 +153,8 @@ void main() {
               dateTo: DateTimeStringValue(getDateStringByDateTime(fakeToDate)),
               sortBy: ReturnSummaryStatus('Active'),
               requestId: SearchKey.searchFilter('mock_id'),
-              refundTotalTo: DoubleValue('100'),
-              refundTotalFrom: DoubleValue('1000'),
+              refundTotalTo: RangeValue('100'),
+              refundTotalFrom: RangeValue('1000'),
             )).toJson(),
           )).thenThrow((invocation) async => MockException());
 
@@ -170,8 +170,8 @@ void main() {
           dateTo: DateTimeStringValue(getDateStringByDateTime(fakeToDate)),
           sortBy: ReturnSummaryStatus('Active'),
           requestId: SearchKey.searchFilter('mock_id'),
-          refundTotalTo: DoubleValue('100'),
-          refundTotalFrom: DoubleValue('1000'),
+          refundTotalTo: RangeValue('100'),
+          refundTotalFrom: RangeValue('1000'),
         ),
       );
       expect(result.isLeft(), true);

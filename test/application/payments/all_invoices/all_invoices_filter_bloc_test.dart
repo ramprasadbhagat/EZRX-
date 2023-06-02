@@ -145,7 +145,7 @@ void main() {
         AllInvoicesFilterState.initial().copyWith(
           edited: true,
           allInvoicesFilter: allInvoicesFilter.copyWith(
-            debitValueTo: DoubleValue('1000'),
+            debitValueTo: RangeValue('1000'),
           ),
           showErrorMessages: false,
         ),
@@ -165,7 +165,7 @@ void main() {
         AllInvoicesFilterState.initial().copyWith(
           edited: true,
           allInvoicesFilter: allInvoicesFilter.copyWith(
-            debitValueFrom: DoubleValue('100'),
+            debitValueFrom: RangeValue('100'),
           ),
           showErrorMessages: false,
         ),
@@ -227,8 +227,8 @@ void main() {
           documentDateFrom: DateTimeStringValue(
             getDateStringByDateTime(fakeFromDate),
           ),
-          debitValueFrom: DoubleValue('1'),
-          debitValueTo: DoubleValue('10'),
+          debitValueFrom: RangeValue('1'),
+          debitValueTo: RangeValue('10'),
           filterStatus: 'Cleared',
         ),
       ),
@@ -254,8 +254,8 @@ void main() {
             documentDateFrom: DateTimeStringValue(
               getDateStringByDateTime(fakeFromDate),
             ),
-            debitValueFrom: DoubleValue('1'),
-            debitValueTo: DoubleValue('10'),
+            debitValueFrom: RangeValue('1'),
+            debitValueTo: RangeValue('10'),
             filterStatus: 'Cleared',
           ),
         ),
@@ -281,8 +281,8 @@ void main() {
           documentDateFrom: DateTimeStringValue(
             getDateStringByDateTime(fakeFromDate),
           ),
-          debitValueFrom: DoubleValue('100'),
-          debitValueTo: DoubleValue('10'),
+          debitValueFrom: RangeValue('100'),
+          debitValueTo: RangeValue('10'),
           filterStatus: 'Cleared',
         ),
       ),
@@ -308,8 +308,8 @@ void main() {
             documentDateFrom: DateTimeStringValue(
               getDateStringByDateTime(fakeFromDate),
             ),
-            debitValueFrom: DoubleValue('100'),
-            debitValueTo: DoubleValue('10'),
+            debitValueFrom: RangeValue('100'),
+            debitValueTo: RangeValue('10'),
             filterStatus: 'Cleared',
           ),
         ),
@@ -335,8 +335,8 @@ void main() {
           documentDateFrom: DateTimeStringValue(
             getDateStringByDateTime(fakeFromDate),
           ),
-          debitValueFrom: DoubleValue('1'),
-          debitValueTo: DoubleValue('10'),
+          debitValueFrom: RangeValue('1'),
+          debitValueTo: RangeValue('10'),
           filterStatus: 'Cleared',
         ),
       ),

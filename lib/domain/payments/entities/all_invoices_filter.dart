@@ -15,8 +15,8 @@ class AllInvoicesFilter with _$AllInvoicesFilter {
     required DateTimeStringValue dueDateTo,
     required DateTimeStringValue documentDateFrom,
     required DateTimeStringValue documentDateTo,
-    required DoubleValue debitValueFrom,
-    required DoubleValue debitValueTo,
+    required RangeValue debitValueFrom,
+    required RangeValue debitValueTo,
     required String filterStatus,
   }) = _AllInvoicesFilter;
 
@@ -46,8 +46,8 @@ class AllInvoicesFilter with _$AllInvoicesFilter {
             DateTime.now(),
           ),
         ),
-        debitValueFrom: DoubleValue(''),
-        debitValueTo: DoubleValue(''),
+        debitValueFrom: RangeValue(''),
+        debitValueTo: RangeValue(''),
         filterStatus: 'All',
       );
 
@@ -91,15 +91,10 @@ class AllInvoicesFilter with _$AllInvoicesFilter {
   }
 
   bool get checkIfDebitValueRangeIsValid =>
-      (!debitValueFrom.isValid() && !debitValueTo.isValid()) ||
-      debitValueFrom.isValid() &&
-          debitValueTo.isValid() &&
-          (debitValueTo.getOrDefaultValue(0) >=
-              debitValueFrom.getOrDefaultValue(0));
+      RangeValue.checkIfRangeIsValid(debitValueFrom, debitValueTo);
 
   bool get checkIfAnyDebitValueIsEmpty =>
-      !debitValueFrom.isValid() && debitValueTo.isValid() ||
-      debitValueFrom.isValid() && !debitValueTo.isValid();
+      RangeValue.checkIfAnyIsEmpty(debitValueFrom, debitValueTo);
 
   bool get isValid => anyFilterApplied && isDebitValueRangeValid;
 

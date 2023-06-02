@@ -151,7 +151,7 @@ class AllInvoicesFilterBloc
       debitValueFromChanged: (_DebitValueFromChanged e) async => emit(
         state.copyWith(
           allInvoicesFilter: state.allInvoicesFilter.copyWith(
-            debitValueFrom: DoubleValue(e.debitValueFrom),
+            debitValueFrom: RangeValue(e.debitValueFrom),
           ),
           edited: true,
           showErrorMessages: false,
@@ -160,7 +160,7 @@ class AllInvoicesFilterBloc
       debitValueToChanged: (_DebitValueToChanged e) async => emit(
         state.copyWith(
           allInvoicesFilter: state.allInvoicesFilter.copyWith(
-            debitValueTo: DoubleValue(e.debitValueTo),
+            debitValueTo: RangeValue(e.debitValueTo),
           ),
           edited: true,
           showErrorMessages: false,

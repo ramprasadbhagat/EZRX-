@@ -195,7 +195,7 @@ void main() {
 
       await tester.tap(find.text('SAVE'));
       await tester.pumpAndSettle();
-      
+
       verify(
         () => allInvoicesFilterBlocMock.add(
           AllInvoicesFilterEvent.setDocumentDate(
@@ -209,7 +209,7 @@ void main() {
           .thenReturn(AllInvoicesFilterState.initial().copyWith(
         showErrorMessages: true,
         allInvoicesFilter: AllInvoicesFilter.empty().copyWith(
-          debitValueTo: DoubleValue('12'),
+          debitValueTo: RangeValue('12'),
         ),
       ));
 
@@ -235,7 +235,7 @@ void main() {
           .thenReturn(AllInvoicesFilterState.initial().copyWith(
         showErrorMessages: true,
         allInvoicesFilter: AllInvoicesFilter.empty().copyWith(
-          debitValueFrom: DoubleValue('12'),
+          debitValueFrom: RangeValue('12'),
         ),
       ));
 
@@ -278,7 +278,7 @@ void main() {
           .thenReturn(AllInvoicesFilterState.initial().copyWith(
         showErrorMessages: false,
         allInvoicesFilter: AllInvoicesFilter.empty().copyWith(
-          debitValueFrom: DoubleValue('12'),
+          debitValueFrom: RangeValue('12'),
         ),
       ));
       await getWidget(tester);
@@ -303,8 +303,8 @@ void main() {
           .thenReturn(AllInvoicesFilterState.initial().copyWith(
         showErrorMessages: true,
         allInvoicesFilter: AllInvoicesFilter.empty().copyWith(
-          debitValueFrom: DoubleValue('15'),
-          debitValueTo: DoubleValue('12'),
+          debitValueFrom: RangeValue('15'),
+          debitValueTo: RangeValue('12'),
         ),
       ));
       await getWidget(tester);

@@ -38,8 +38,8 @@ void main() {
       ),
       sortBy: ReturnSummaryStatus('Active'),
       requestId: SearchKey.searchFilter('mock_id'),
-      refundTotalTo: DoubleValue('100'),
-      refundTotalFrom: DoubleValue('1000'),
+      refundTotalTo: RangeValue('100'),
+      refundTotalFrom: RangeValue('1000'),
     );
   });
 
@@ -136,7 +136,7 @@ void main() {
         expect: () => [
           ReturnSummaryFilterState.initial().copyWith(
             returnSummaryFilter: returnSummaryFilter.copyWith(
-              refundTotalTo: DoubleValue('1000'),
+              refundTotalTo: RangeValue('1000'),
             ),
             showErrorMessages: false,
           ),
@@ -154,7 +154,7 @@ void main() {
         expect: () => [
           ReturnSummaryFilterState.initial().copyWith(
             returnSummaryFilter: returnSummaryFilter.copyWith(
-              refundTotalFrom: DoubleValue('100'),
+              refundTotalFrom: RangeValue('100'),
             ),
             showErrorMessages: false,
           ),

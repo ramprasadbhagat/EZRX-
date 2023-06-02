@@ -60,8 +60,8 @@ void main() {
       ),
       sortBy: 'All',
       documentNumber: DocumentNumber('mock_documentNumber'),
-      creditAmountTo: DoubleValue('100'),
-      creditAmountFrom: DoubleValue('1000'),
+      creditAmountTo: RangeValue('100'),
+      creditAmountFrom: RangeValue('1000'),
     );
   });
 
@@ -78,7 +78,7 @@ void main() {
         salesOrganisation: SalesOrganisation.empty(),
         pageSize: 1,
         offset: 0,
-         allCreditsFilter: allCreditsFilter,
+        allCreditsFilter: allCreditsFilter,
       );
       expect(result.isRight(), true);
     });
@@ -107,24 +107,28 @@ void main() {
             pageSize: 1,
             offset: 0,
             filterQuery: AllCreditsFilterDto.fromDomain(
-              AllCreditsFilter.empty().copyWith(
+                AllCreditsFilter.empty().copyWith(
               documentDateFrom:
-              DateTimeStringValue(getDateStringByDateTime(fakeFromDate)),
-              documentDateTo: DateTimeStringValue(getDateStringByDateTime(fakeToDate)),
+                  DateTimeStringValue(getDateStringByDateTime(fakeFromDate)),
+              documentDateTo:
+                  DateTimeStringValue(getDateStringByDateTime(fakeToDate)),
               sortBy: 'All',
               documentNumber: DocumentNumber('mock_documentNumber'),
-              creditAmountTo: DoubleValue('100'),
-              creditAmountFrom: DoubleValue('1000'),
-              )).toFilterByMapList,)).thenAnswer(
+              creditAmountTo: RangeValue('100'),
+              creditAmountFrom: RangeValue('1000'),
+            )).toFilterByMapList,
+          )).thenAnswer(
         (invocation) async => mockCustomerDocumentHeader,
       );
 
       final result = await allCreditsAndInvoicesRepository.getAllCredits(
-        customerCodeInfo: CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: 'mock_soldTo' ),
-        salesOrganisation: SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('mock_salesOrg')),
+        customerCodeInfo: CustomerCodeInfo.empty()
+            .copyWith(customerCodeSoldTo: 'mock_soldTo'),
+        salesOrganisation: SalesOrganisation.empty()
+            .copyWith(salesOrg: SalesOrg('mock_salesOrg')),
         pageSize: 1,
         offset: 0,
-         allCreditsFilter: allCreditsFilter,
+        allCreditsFilter: allCreditsFilter,
       );
       expect(result.isRight(), true);
     });
@@ -136,25 +140,26 @@ void main() {
             salesOrg: 'mock_salesOrg',
             pageSize: 1,
             offset: 0,
-          filterQuery: AllCreditsFilterDto.fromDomain(
-              AllCreditsFilter.empty().copyWith(
+            filterQuery: AllCreditsFilterDto.fromDomain(
+                AllCreditsFilter.empty().copyWith(
               documentDateFrom:
-              DateTimeStringValue(getDateStringByDateTime(fakeFromDate)),
-              documentDateTo: DateTimeStringValue(getDateStringByDateTime(fakeToDate)),
+                  DateTimeStringValue(getDateStringByDateTime(fakeFromDate)),
+              documentDateTo:
+                  DateTimeStringValue(getDateStringByDateTime(fakeToDate)),
               sortBy: 'All',
               documentNumber: DocumentNumber('mock_documentNumber'),
-              creditAmountTo: DoubleValue('100'),
-              creditAmountFrom: DoubleValue('1000'),
-              )).toFilterByMapList,)).thenThrow((invocation) async => MockException());
+              creditAmountTo: RangeValue('100'),
+              creditAmountFrom: RangeValue('1000'),
+            )).toFilterByMapList,
+          )).thenThrow((invocation) async => MockException());
 
       final result = await allCreditsAndInvoicesRepository.getAllCredits(
-        customerCodeInfo: CustomerCodeInfo.empty(),
-        salesOrganisation:
-            SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('3500')),
-        pageSize: 1,
+          customerCodeInfo: CustomerCodeInfo.empty(),
+          salesOrganisation:
+              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('3500')),
+          pageSize: 1,
           offset: 0,
-        allCreditsFilter: allCreditsFilter
-      );
+          allCreditsFilter: allCreditsFilter);
       expect(result.isLeft(), true);
     });
   });

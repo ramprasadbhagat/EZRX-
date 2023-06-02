@@ -160,7 +160,7 @@ void main() {
           .thenReturn(AllCreditsFilterState.initial().copyWith(
         showErrorMessages: true,
         allCreditsFilter: AllCreditsFilter.empty().copyWith(
-          creditAmountTo: DoubleValue('10'),
+          creditAmountTo: RangeValue('10'),
         ),
       ));
 
@@ -185,7 +185,7 @@ void main() {
           .thenReturn(AllCreditsFilterState.initial().copyWith(
         showErrorMessages: true,
         allCreditsFilter: AllCreditsFilter.empty().copyWith(
-          creditAmountFrom: DoubleValue('1000'),
+          creditAmountFrom: RangeValue('1000'),
         ),
       ));
 
@@ -227,7 +227,7 @@ void main() {
           .thenReturn(AllCreditsFilterState.initial().copyWith(
         showErrorMessages: false,
         allCreditsFilter: AllCreditsFilter.empty().copyWith(
-          creditAmountFrom: DoubleValue('10'),
+          creditAmountFrom: RangeValue('10'),
         ),
       ));
       await getWidget(tester);
@@ -252,8 +252,8 @@ void main() {
           .thenReturn(AllCreditsFilterState.initial().copyWith(
         showErrorMessages: true,
         allCreditsFilter: AllCreditsFilter.empty().copyWith(
-          creditAmountFrom: DoubleValue('25'),
-          creditAmountTo: DoubleValue('10'),
+          creditAmountFrom: RangeValue('25'),
+          creditAmountTo: RangeValue('10'),
         ),
       ));
       await getWidget(tester);

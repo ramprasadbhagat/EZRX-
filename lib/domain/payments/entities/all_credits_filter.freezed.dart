@@ -20,8 +20,8 @@ mixin _$AllCreditsFilter {
   DateTimeStringValue get documentDateFrom =>
       throw _privateConstructorUsedError;
   DateTimeStringValue get documentDateTo => throw _privateConstructorUsedError;
-  DoubleValue get creditAmountFrom => throw _privateConstructorUsedError;
-  DoubleValue get creditAmountTo => throw _privateConstructorUsedError;
+  RangeValue get creditAmountFrom => throw _privateConstructorUsedError;
+  RangeValue get creditAmountTo => throw _privateConstructorUsedError;
   String get sortBy => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -39,8 +39,8 @@ abstract class $AllCreditsFilterCopyWith<$Res> {
       {DocumentNumber documentNumber,
       DateTimeStringValue documentDateFrom,
       DateTimeStringValue documentDateTo,
-      DoubleValue creditAmountFrom,
-      DoubleValue creditAmountTo,
+      RangeValue creditAmountFrom,
+      RangeValue creditAmountTo,
       String sortBy});
 }
 
@@ -80,11 +80,11 @@ class _$AllCreditsFilterCopyWithImpl<$Res, $Val extends AllCreditsFilter>
       creditAmountFrom: null == creditAmountFrom
           ? _value.creditAmountFrom
           : creditAmountFrom // ignore: cast_nullable_to_non_nullable
-              as DoubleValue,
+              as RangeValue,
       creditAmountTo: null == creditAmountTo
           ? _value.creditAmountTo
           : creditAmountTo // ignore: cast_nullable_to_non_nullable
-              as DoubleValue,
+              as RangeValue,
       sortBy: null == sortBy
           ? _value.sortBy
           : sortBy // ignore: cast_nullable_to_non_nullable
@@ -105,8 +105,8 @@ abstract class _$$_AllCreditsFilterCopyWith<$Res>
       {DocumentNumber documentNumber,
       DateTimeStringValue documentDateFrom,
       DateTimeStringValue documentDateTo,
-      DoubleValue creditAmountFrom,
-      DoubleValue creditAmountTo,
+      RangeValue creditAmountFrom,
+      RangeValue creditAmountTo,
       String sortBy});
 }
 
@@ -144,11 +144,11 @@ class __$$_AllCreditsFilterCopyWithImpl<$Res>
       creditAmountFrom: null == creditAmountFrom
           ? _value.creditAmountFrom
           : creditAmountFrom // ignore: cast_nullable_to_non_nullable
-              as DoubleValue,
+              as RangeValue,
       creditAmountTo: null == creditAmountTo
           ? _value.creditAmountTo
           : creditAmountTo // ignore: cast_nullable_to_non_nullable
-              as DoubleValue,
+              as RangeValue,
       sortBy: null == sortBy
           ? _value.sortBy
           : sortBy // ignore: cast_nullable_to_non_nullable
@@ -176,9 +176,9 @@ class _$_AllCreditsFilter extends _AllCreditsFilter {
   @override
   final DateTimeStringValue documentDateTo;
   @override
-  final DoubleValue creditAmountFrom;
+  final RangeValue creditAmountFrom;
   @override
-  final DoubleValue creditAmountTo;
+  final RangeValue creditAmountTo;
   @override
   final String sortBy;
 
@@ -221,8 +221,8 @@ abstract class _AllCreditsFilter extends AllCreditsFilter {
       {required final DocumentNumber documentNumber,
       required final DateTimeStringValue documentDateFrom,
       required final DateTimeStringValue documentDateTo,
-      required final DoubleValue creditAmountFrom,
-      required final DoubleValue creditAmountTo,
+      required final RangeValue creditAmountFrom,
+      required final RangeValue creditAmountTo,
       required final String sortBy}) = _$_AllCreditsFilter;
   _AllCreditsFilter._() : super._();
 
@@ -233,9 +233,9 @@ abstract class _AllCreditsFilter extends AllCreditsFilter {
   @override
   DateTimeStringValue get documentDateTo;
   @override
-  DoubleValue get creditAmountFrom;
+  RangeValue get creditAmountFrom;
   @override
-  DoubleValue get creditAmountTo;
+  RangeValue get creditAmountTo;
   @override
   String get sortBy;
   @override

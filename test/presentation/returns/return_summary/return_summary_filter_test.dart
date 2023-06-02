@@ -23,7 +23,7 @@ class ReturnSummaryFilterBlocMock
 
 class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
     implements SalesOrgBloc {}
-    
+
 void main() {
   late ReturnSummaryFilterBloc returnSummaryFilterBlocMock;
   late AppRouter autoRouterMock;
@@ -48,7 +48,6 @@ void main() {
     locator.registerLazySingleton(() => AppRouter());
     autoRouterMock = locator<AppRouter>();
     salesOrgBlocMock = SalesOrgBlocMock();
-
   });
 
   setUp(() async {
@@ -57,7 +56,6 @@ void main() {
     when(() => returnSummaryFilterBlocMock.state)
         .thenReturn(ReturnSummaryFilterState.initial());
     when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
-
   });
 
   Future getWidget(tester) async {
@@ -136,7 +134,7 @@ void main() {
           .thenReturn(ReturnSummaryFilterState.initial().copyWith(
         showErrorMessages: true,
         returnSummaryFilter: ReturnSummaryFilter.empty().copyWith(
-          refundTotalTo: DoubleValue('12'),
+          refundTotalTo: RangeValue('12'),
         ),
       ));
 
@@ -162,7 +160,7 @@ void main() {
           .thenReturn(ReturnSummaryFilterState.initial().copyWith(
         showErrorMessages: true,
         returnSummaryFilter: ReturnSummaryFilter.empty().copyWith(
-          refundTotalFrom: DoubleValue('12'),
+          refundTotalFrom: RangeValue('12'),
         ),
       ));
 
@@ -257,7 +255,7 @@ void main() {
           .thenReturn(ReturnSummaryFilterState.initial().copyWith(
         showErrorMessages: false,
         returnSummaryFilter: ReturnSummaryFilter.empty().copyWith(
-          refundTotalFrom: DoubleValue('12'),
+          refundTotalFrom: RangeValue('12'),
         ),
       ));
       await getWidget(tester);
@@ -283,8 +281,8 @@ void main() {
           .thenReturn(ReturnSummaryFilterState.initial().copyWith(
         showErrorMessages: true,
         returnSummaryFilter: ReturnSummaryFilter.empty().copyWith(
-          refundTotalFrom: DoubleValue('15'),
-          refundTotalTo: DoubleValue('12'),
+          refundTotalFrom: RangeValue('15'),
+          refundTotalTo: RangeValue('12'),
         ),
       ));
       await getWidget(tester);

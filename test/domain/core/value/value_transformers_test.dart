@@ -396,15 +396,4 @@ void main() {
       },
     );
   });
-  
-  test(
-    'should return boolean false when input String is empty',
-    () async {
-      const input = 0.0;
-      final result = emptyIfZero(
-        input,
-      );
-      expect(result, '');
-    },
-  );
 }

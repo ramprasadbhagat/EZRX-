@@ -128,7 +128,7 @@ class AllCreditsFilterBloc
       creditAmountFromChanged: (e) async => emit(
         state.copyWith(
           allCreditsFilter: state.allCreditsFilter.copyWith(
-            creditAmountFrom: DoubleValue(e.creditAmountFrom),
+            creditAmountFrom: RangeValue(e.creditAmountFrom),
           ),
           showErrorMessages: false,
         ),
@@ -136,7 +136,7 @@ class AllCreditsFilterBloc
       creditAmountToChanged: (e) async => emit(
         state.copyWith(
           allCreditsFilter: state.allCreditsFilter.copyWith(
-            creditAmountTo: DoubleValue(e.creditAmountTo),
+            creditAmountTo: RangeValue(e.creditAmountTo),
           ),
           showErrorMessages: false,
         ),

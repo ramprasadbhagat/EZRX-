@@ -12,15 +12,15 @@ class ReturnSummaryFilter with _$ReturnSummaryFilter {
     required SearchKey requestId,
     required DateTimeStringValue dateFrom,
     required DateTimeStringValue dateTo,
-    required DoubleValue refundTotalTo,
-    required DoubleValue refundTotalFrom,
+    required RangeValue refundTotalTo,
+    required RangeValue refundTotalFrom,
     required ReturnSummaryStatus sortBy,
   }) = _ReturnSummaryFilter;
 
   factory ReturnSummaryFilter.empty() => ReturnSummaryFilter(
         requestId: SearchKey.searchFilter(''),
-        refundTotalTo: DoubleValue(''),
-        refundTotalFrom: DoubleValue(''),
+        refundTotalTo: RangeValue(''),
+        refundTotalFrom: RangeValue(''),
         dateFrom: DateTimeStringValue(
           getDateStringByDateTime(
             DateTime.now().subtract(
@@ -49,27 +49,20 @@ class ReturnSummaryFilter with _$ReturnSummaryFilter {
   ReturnSummaryStatus get activeStatus => sortBy;
 // to check total value validation
   bool get checkIfTotalRangeIsValid =>
-      refundTotalFrom.isValid() &&
-      refundTotalTo.isValid() &&
-      (refundTotalTo.getOrDefaultValue(0) >=
-          refundTotalFrom.getOrDefaultValue(0));
+      RangeValue.checkIfRangeIsValid(refundTotalFrom, refundTotalTo);
 
 // to check if any filter applied
   bool get anyFilterApplied => this != ReturnSummaryFilter.empty();
 
-//to check if both the TotalValue fields are empty
-  bool get _checkIfRefundTotalIsEmpty =>
-      !refundTotalFrom.isValid() && !refundTotalTo.isValid();
-
 //to check if any TotalValue fields are empty
   bool get checkIfAnyRefundTotalIsEmpty =>
-      !refundTotalFrom.isValid() || !refundTotalTo.isValid();
+      RangeValue.checkIfAnyIsEmpty(refundTotalFrom, refundTotalTo);
 
 // to check the filter validation
 
   bool get areFiltersValid =>
       requestId.isValid() &&
-      (_checkIfRefundTotalIsEmpty || checkIfTotalRangeIsValid);
+      (!checkIfAnyRefundTotalIsEmpty && checkIfTotalRangeIsValid);
 
   int get appliedFilterCount =>
       (refundTotalTo.isValid() && refundTotalFrom.isValid() ? 1 : 0) +

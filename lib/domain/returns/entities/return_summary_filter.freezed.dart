@@ -19,8 +19,8 @@ mixin _$ReturnSummaryFilter {
   SearchKey get requestId => throw _privateConstructorUsedError;
   DateTimeStringValue get dateFrom => throw _privateConstructorUsedError;
   DateTimeStringValue get dateTo => throw _privateConstructorUsedError;
-  DoubleValue get refundTotalTo => throw _privateConstructorUsedError;
-  DoubleValue get refundTotalFrom => throw _privateConstructorUsedError;
+  RangeValue get refundTotalTo => throw _privateConstructorUsedError;
+  RangeValue get refundTotalFrom => throw _privateConstructorUsedError;
   ReturnSummaryStatus get sortBy => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -38,8 +38,8 @@ abstract class $ReturnSummaryFilterCopyWith<$Res> {
       {SearchKey requestId,
       DateTimeStringValue dateFrom,
       DateTimeStringValue dateTo,
-      DoubleValue refundTotalTo,
-      DoubleValue refundTotalFrom,
+      RangeValue refundTotalTo,
+      RangeValue refundTotalFrom,
       ReturnSummaryStatus sortBy});
 }
 
@@ -79,11 +79,11 @@ class _$ReturnSummaryFilterCopyWithImpl<$Res, $Val extends ReturnSummaryFilter>
       refundTotalTo: null == refundTotalTo
           ? _value.refundTotalTo
           : refundTotalTo // ignore: cast_nullable_to_non_nullable
-              as DoubleValue,
+              as RangeValue,
       refundTotalFrom: null == refundTotalFrom
           ? _value.refundTotalFrom
           : refundTotalFrom // ignore: cast_nullable_to_non_nullable
-              as DoubleValue,
+              as RangeValue,
       sortBy: null == sortBy
           ? _value.sortBy
           : sortBy // ignore: cast_nullable_to_non_nullable
@@ -104,8 +104,8 @@ abstract class _$$_ReturnSummaryFilterCopyWith<$Res>
       {SearchKey requestId,
       DateTimeStringValue dateFrom,
       DateTimeStringValue dateTo,
-      DoubleValue refundTotalTo,
-      DoubleValue refundTotalFrom,
+      RangeValue refundTotalTo,
+      RangeValue refundTotalFrom,
       ReturnSummaryStatus sortBy});
 }
 
@@ -143,11 +143,11 @@ class __$$_ReturnSummaryFilterCopyWithImpl<$Res>
       refundTotalTo: null == refundTotalTo
           ? _value.refundTotalTo
           : refundTotalTo // ignore: cast_nullable_to_non_nullable
-              as DoubleValue,
+              as RangeValue,
       refundTotalFrom: null == refundTotalFrom
           ? _value.refundTotalFrom
           : refundTotalFrom // ignore: cast_nullable_to_non_nullable
-              as DoubleValue,
+              as RangeValue,
       sortBy: null == sortBy
           ? _value.sortBy
           : sortBy // ignore: cast_nullable_to_non_nullable
@@ -175,9 +175,9 @@ class _$_ReturnSummaryFilter extends _ReturnSummaryFilter {
   @override
   final DateTimeStringValue dateTo;
   @override
-  final DoubleValue refundTotalTo;
+  final RangeValue refundTotalTo;
   @override
-  final DoubleValue refundTotalFrom;
+  final RangeValue refundTotalFrom;
   @override
   final ReturnSummaryStatus sortBy;
 
@@ -220,8 +220,8 @@ abstract class _ReturnSummaryFilter extends ReturnSummaryFilter {
       {required final SearchKey requestId,
       required final DateTimeStringValue dateFrom,
       required final DateTimeStringValue dateTo,
-      required final DoubleValue refundTotalTo,
-      required final DoubleValue refundTotalFrom,
+      required final RangeValue refundTotalTo,
+      required final RangeValue refundTotalFrom,
       required final ReturnSummaryStatus sortBy}) = _$_ReturnSummaryFilter;
   _ReturnSummaryFilter._() : super._();
 
@@ -232,9 +232,9 @@ abstract class _ReturnSummaryFilter extends ReturnSummaryFilter {
   @override
   DateTimeStringValue get dateTo;
   @override
-  DoubleValue get refundTotalTo;
+  RangeValue get refundTotalTo;
   @override
-  DoubleValue get refundTotalFrom;
+  RangeValue get refundTotalFrom;
   @override
   ReturnSummaryStatus get sortBy;
   @override

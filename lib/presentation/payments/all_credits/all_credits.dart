@@ -250,7 +250,6 @@ class _CreditsItem extends StatelessWidget {
     return Card(
       child: ListTile(
         key: const ValueKey('creditsItemTile'),
-
         onTap: () {},
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -271,9 +270,7 @@ class _CreditsItem extends StatelessWidget {
               keyText: 'Credit Amount'.tr(),
               valueText: StringUtils.displayPrice(
                 configs,
-                double.parse(
-                  creditsItem.convertIfAmountInTransactionCurrencyIsNegative,
-                ),
+                creditsItem.convertIfAmountInTransactionCurrencyIsNegative,
               ),
               keyFlex: 1,
               valueFlex: 1,
