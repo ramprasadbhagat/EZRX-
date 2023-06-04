@@ -1,9 +1,9 @@
 import 'dart:convert';
-import 'package:ezrxmobile/domain/account/entities/add_or_update_beneficiary.dart';
 import 'package:ezrxmobile/domain/account/entities/bank_beneficiary.dart';
+import 'package:ezrxmobile/domain/account/entities/bank_beneficiary_response.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_district.dart';
-import 'package:ezrxmobile/infrastructure/account/dtos/add_or_update_beneficiary_dto.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/bank_beneficiary_dto.dart';
+import 'package:ezrxmobile/infrastructure/account/dtos/bank_beneficiary_response_dto.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/sales_district_dto.dart';
 import 'package:flutter/services.dart';
 
@@ -30,14 +30,26 @@ class BankBeneficiaryLocalDataSource {
         .toList();
   }
 
-  Future<AddOrUpdateBeneficiary> addOrUpdateBeneficiary() async {
+  Future<BankBeneficiaryResponse> addOrUpdateBeneficiary() async {
     final data = json.decode(
       await rootBundle
           .loadString('assets/json/addOrUpdateBeneficiaryResponse.json'),
     );
 
-    return AddOrUpdateBeneficiaryDto.fromJson(
+    return BankBeneficiaryResponseDto.fromJson(
       data['data']['addBankBeneficiary'],
     ).toDomain();
   }
+
+  Future<BankBeneficiaryResponse> deleteBeneficiary() async {
+    final data = json.decode(
+      await rootBundle
+          .loadString('assets/json/deleteBeneficiaryResponse.json'),
+    );
+
+    return BankBeneficiaryResponseDto.fromJson(
+      data['data']['deleteBankBeneficiary'],
+    ).toDomain();
+  }
+  
 }

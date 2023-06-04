@@ -1,0 +1,5 @@
+mutation deleteBankBeneficiary($input: deleteBankBeneficiaryInput!) {
+  deleteBankBeneficiary(input: $input) {
+    info
+  }
+}

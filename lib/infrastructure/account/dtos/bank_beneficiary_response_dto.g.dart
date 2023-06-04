@@ -1,19 +1,19 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'add_or_update_beneficiary_dto.dart';
+part of 'bank_beneficiary_response_dto.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_AddOrUpdateBeneficiaryDto _$$_AddOrUpdateBeneficiaryDtoFromJson(
+_$_BankBeneficiaryResponseDto _$$_BankBeneficiaryResponseDtoFromJson(
         Map<String, dynamic> json) =>
-    _$_AddOrUpdateBeneficiaryDto(
+    _$_BankBeneficiaryResponseDto(
       info: json['info'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_AddOrUpdateBeneficiaryDtoToJson(
-        _$_AddOrUpdateBeneficiaryDto instance) =>
+Map<String, dynamic> _$$_BankBeneficiaryResponseDtoToJson(
+        _$_BankBeneficiaryResponseDto instance) =>
     <String, dynamic>{
       'info': instance.info,
     };

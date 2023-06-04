@@ -51,6 +51,7 @@ class BankBeneficiaryDto with _$BankBeneficiaryDto {
 
   BankBeneficiary toDomain() {
     return BankBeneficiary(
+      key: hashCode,
       salesOrg: SalesOrg(salesOrg),
       bankAccount: StringValue(bankAccount),
       bankAddress: bankAddress,
@@ -58,10 +59,11 @@ class BankBeneficiaryDto with _$BankBeneficiaryDto {
       bankName: StringValue(bankName),
       beneficiaryName: StringValue(beneficiaryName),
       branch: branch,
-      emailId: EmailAddress(emailId),
+      emailId: EmailAddress.optional(emailId),
       hdbcSwiftCode: hdbcSwiftCode,
       payNowUen: payNowUen,
       salesDistrict: salesDistrict,
+      isDeleteInProgress: false,
     );
   }
 

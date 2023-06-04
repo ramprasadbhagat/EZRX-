@@ -16,6 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$BankBeneficiary {
+  int get key => throw _privateConstructorUsedError;
   SalesOrg get salesOrg => throw _privateConstructorUsedError;
   StringValue get bankAccount => throw _privateConstructorUsedError;
   String get bankAddress => throw _privateConstructorUsedError;
@@ -27,6 +28,7 @@ mixin _$BankBeneficiary {
   String get hdbcSwiftCode => throw _privateConstructorUsedError;
   String get payNowUen => throw _privateConstructorUsedError;
   String get salesDistrict => throw _privateConstructorUsedError;
+  bool get isDeleteInProgress => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $BankBeneficiaryCopyWith<BankBeneficiary> get copyWith =>
@@ -40,7 +42,8 @@ abstract class $BankBeneficiaryCopyWith<$Res> {
       _$BankBeneficiaryCopyWithImpl<$Res, BankBeneficiary>;
   @useResult
   $Res call(
-      {SalesOrg salesOrg,
+      {int key,
+      SalesOrg salesOrg,
       StringValue bankAccount,
       String bankAddress,
       String bankCode,
@@ -50,7 +53,8 @@ abstract class $BankBeneficiaryCopyWith<$Res> {
       EmailAddress emailId,
       String hdbcSwiftCode,
       String payNowUen,
-      String salesDistrict});
+      String salesDistrict,
+      bool isDeleteInProgress});
 }
 
 /// @nodoc
@@ -66,6 +70,7 @@ class _$BankBeneficiaryCopyWithImpl<$Res, $Val extends BankBeneficiary>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? key = null,
     Object? salesOrg = null,
     Object? bankAccount = null,
     Object? bankAddress = null,
@@ -77,8 +82,13 @@ class _$BankBeneficiaryCopyWithImpl<$Res, $Val extends BankBeneficiary>
     Object? hdbcSwiftCode = null,
     Object? payNowUen = null,
     Object? salesDistrict = null,
+    Object? isDeleteInProgress = null,
   }) {
     return _then(_value.copyWith(
+      key: null == key
+          ? _value.key
+          : key // ignore: cast_nullable_to_non_nullable
+              as int,
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
@@ -123,6 +133,10 @@ class _$BankBeneficiaryCopyWithImpl<$Res, $Val extends BankBeneficiary>
           ? _value.salesDistrict
           : salesDistrict // ignore: cast_nullable_to_non_nullable
               as String,
+      isDeleteInProgress: null == isDeleteInProgress
+          ? _value.isDeleteInProgress
+          : isDeleteInProgress // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -136,7 +150,8 @@ abstract class _$$_BankBeneficiaryCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {SalesOrg salesOrg,
+      {int key,
+      SalesOrg salesOrg,
       StringValue bankAccount,
       String bankAddress,
       String bankCode,
@@ -146,7 +161,8 @@ abstract class _$$_BankBeneficiaryCopyWith<$Res>
       EmailAddress emailId,
       String hdbcSwiftCode,
       String payNowUen,
-      String salesDistrict});
+      String salesDistrict,
+      bool isDeleteInProgress});
 }
 
 /// @nodoc
@@ -160,6 +176,7 @@ class __$$_BankBeneficiaryCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? key = null,
     Object? salesOrg = null,
     Object? bankAccount = null,
     Object? bankAddress = null,
@@ -171,8 +188,13 @@ class __$$_BankBeneficiaryCopyWithImpl<$Res>
     Object? hdbcSwiftCode = null,
     Object? payNowUen = null,
     Object? salesDistrict = null,
+    Object? isDeleteInProgress = null,
   }) {
     return _then(_$_BankBeneficiary(
+      key: null == key
+          ? _value.key
+          : key // ignore: cast_nullable_to_non_nullable
+              as int,
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
@@ -217,6 +239,10 @@ class __$$_BankBeneficiaryCopyWithImpl<$Res>
           ? _value.salesDistrict
           : salesDistrict // ignore: cast_nullable_to_non_nullable
               as String,
+      isDeleteInProgress: null == isDeleteInProgress
+          ? _value.isDeleteInProgress
+          : isDeleteInProgress // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -225,7 +251,8 @@ class __$$_BankBeneficiaryCopyWithImpl<$Res>
 
 class _$_BankBeneficiary extends _BankBeneficiary {
   const _$_BankBeneficiary(
-      {required this.salesOrg,
+      {required this.key,
+      required this.salesOrg,
       required this.bankAccount,
       required this.bankAddress,
       required this.bankCode,
@@ -235,9 +262,12 @@ class _$_BankBeneficiary extends _BankBeneficiary {
       required this.emailId,
       required this.hdbcSwiftCode,
       required this.payNowUen,
-      required this.salesDistrict})
+      required this.salesDistrict,
+      required this.isDeleteInProgress})
       : super._();
 
+  @override
+  final int key;
   @override
   final SalesOrg salesOrg;
   @override
@@ -260,10 +290,12 @@ class _$_BankBeneficiary extends _BankBeneficiary {
   final String payNowUen;
   @override
   final String salesDistrict;
+  @override
+  final bool isDeleteInProgress;
 
   @override
   String toString() {
-    return 'BankBeneficiary(salesOrg: $salesOrg, bankAccount: $bankAccount, bankAddress: $bankAddress, bankCode: $bankCode, bankName: $bankName, beneficiaryName: $beneficiaryName, branch: $branch, emailId: $emailId, hdbcSwiftCode: $hdbcSwiftCode, payNowUen: $payNowUen, salesDistrict: $salesDistrict)';
+    return 'BankBeneficiary(key: $key, salesOrg: $salesOrg, bankAccount: $bankAccount, bankAddress: $bankAddress, bankCode: $bankCode, bankName: $bankName, beneficiaryName: $beneficiaryName, branch: $branch, emailId: $emailId, hdbcSwiftCode: $hdbcSwiftCode, payNowUen: $payNowUen, salesDistrict: $salesDistrict, isDeleteInProgress: $isDeleteInProgress)';
   }
 
   @override
@@ -271,6 +303,7 @@ class _$_BankBeneficiary extends _BankBeneficiary {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_BankBeneficiary &&
+            (identical(other.key, key) || other.key == key) &&
             (identical(other.salesOrg, salesOrg) ||
                 other.salesOrg == salesOrg) &&
             (identical(other.bankAccount, bankAccount) ||
@@ -290,12 +323,15 @@ class _$_BankBeneficiary extends _BankBeneficiary {
             (identical(other.payNowUen, payNowUen) ||
                 other.payNowUen == payNowUen) &&
             (identical(other.salesDistrict, salesDistrict) ||
-                other.salesDistrict == salesDistrict));
+                other.salesDistrict == salesDistrict) &&
+            (identical(other.isDeleteInProgress, isDeleteInProgress) ||
+                other.isDeleteInProgress == isDeleteInProgress));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      key,
       salesOrg,
       bankAccount,
       bankAddress,
@@ -306,7 +342,8 @@ class _$_BankBeneficiary extends _BankBeneficiary {
       emailId,
       hdbcSwiftCode,
       payNowUen,
-      salesDistrict);
+      salesDistrict,
+      isDeleteInProgress);
 
   @JsonKey(ignore: true)
   @override
@@ -317,7 +354,8 @@ class _$_BankBeneficiary extends _BankBeneficiary {
 
 abstract class _BankBeneficiary extends BankBeneficiary {
   const factory _BankBeneficiary(
-      {required final SalesOrg salesOrg,
+      {required final int key,
+      required final SalesOrg salesOrg,
       required final StringValue bankAccount,
       required final String bankAddress,
       required final String bankCode,
@@ -327,9 +365,12 @@ abstract class _BankBeneficiary extends BankBeneficiary {
       required final EmailAddress emailId,
       required final String hdbcSwiftCode,
       required final String payNowUen,
-      required final String salesDistrict}) = _$_BankBeneficiary;
+      required final String salesDistrict,
+      required final bool isDeleteInProgress}) = _$_BankBeneficiary;
   const _BankBeneficiary._() : super._();
 
+  @override
+  int get key;
   @override
   SalesOrg get salesOrg;
   @override
@@ -352,6 +393,8 @@ abstract class _BankBeneficiary extends BankBeneficiary {
   String get payNowUen;
   @override
   String get salesDistrict;
+  @override
+  bool get isDeleteInProgress;
   @override
   @JsonKey(ignore: true)
   _$$_BankBeneficiaryCopyWith<_$_BankBeneficiary> get copyWith =>

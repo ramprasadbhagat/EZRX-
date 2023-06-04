@@ -1,4 +1,4 @@
-import 'package:ezrxmobile/application/account/payment_configuration/bank_beneficiary/bank_beneficiary_bloc.dart';
+import 'package:ezrxmobile/application/account/payment_configuration/bank_beneficiary/manage_bank_beneficiary_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/deduction_code/view_deduction_code/deduction_code_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_advice_footer/payment_advice_footer_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/payment_methods_bloc.dart';
@@ -593,8 +593,8 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
       context.read<PaymentMethodsBloc>().add(
             const PaymentMethodsEvent.fetch(),
           );
-      context.read<BankBeneficiaryBloc>().add(
-            const BankBeneficiaryEvent.fetch(),
+      context.read<ManageBankBeneficiaryBloc>().add(
+            const ManageBankBeneficiaryEvent.fetch(),
           );
       context.read<SalesDistrictBloc>().add(
             const SalesDistrictEvent.fetch(),

@@ -2,15 +2,14 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/account/entities/add_or_update_beneficiary.dart';
 import 'package:ezrxmobile/domain/account/entities/bank_beneficiary.dart';
+import 'package:ezrxmobile/domain/account/entities/bank_beneficiary_response.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_district.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/bank_beneficiary_query_mutation.dart';
-import 'package:ezrxmobile/infrastructure/account/dtos/add_or_update_beneficiary_dto.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/bank_beneficiary_dto.dart';
+import 'package:ezrxmobile/infrastructure/account/dtos/bank_beneficiary_response_dto.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/sales_district_dto.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 
@@ -46,8 +45,8 @@ class BankBeneficiaryRemoteDataSource {
     });
   }
 
-  Future<List<SalesDistrict>> getSalesDistrict(
-      {required SalesOrg salesOrg,}) async {
+   Future<List<SalesDistrict>> getSalesDistrict(
+      {required String salesOrg,}) async {
     return await dataSourceExceptionHandler.handle(() async {
       final res = await httpService.request(
         method: 'POST',
@@ -56,7 +55,7 @@ class BankBeneficiaryRemoteDataSource {
           'query': bankBeneficiaryQueryMutation.getSalesDistrictQuery(),
           'variables': {
             'request': {
-              'salesOrg': salesOrg.getValue(),
+              'salesOrg': salesOrg,
             },
           },
         }),
@@ -70,7 +69,7 @@ class BankBeneficiaryRemoteDataSource {
     });
   }
 
-  Future<AddOrUpdateBeneficiary> addOrUpdateBeneficiary({
+  Future<BankBeneficiaryResponse> addOrUpdateBeneficiary({
     required Map<String, dynamic> beneficiaryData,
   }) async {
     return await dataSourceExceptionHandler.handle(
@@ -92,8 +91,41 @@ class BankBeneficiaryRemoteDataSource {
         );
         _bankBeneficiaryExceptionChecker(res: res);
 
-        return AddOrUpdateBeneficiaryDto.fromJson(
+        return BankBeneficiaryResponseDto.fromJson(
           res.data['data']['addBankBeneficiary'],
+        ).toDomain();
+      },
+    );
+  }
+
+  Future<BankBeneficiaryResponse> deleteBeneficiary({
+    required String salesOrg,
+    required String salesDistrict,
+  }) async {
+    return await dataSourceExceptionHandler.handle(
+      () async {
+        final variables = {
+          'input': {
+            'salesOrg': salesOrg,
+            'salesDistrict': salesDistrict,
+          },
+        };
+        final res = await httpService.request(
+          method: 'POST',
+          url: '${config.urlConstants}ezpayMutation',
+          data: jsonEncode(
+            {
+              'query':
+                  bankBeneficiaryQueryMutation.deleteBeneficiaryQuery(),
+              'variables': variables,
+            },
+          ),
+          apiEndpoint: 'deleteBankBeneficiary',
+        );
+        _bankBeneficiaryExceptionChecker(res: res);
+
+        return BankBeneficiaryResponseDto.fromJson(
+          res.data['data']['deleteBankBeneficiary'],
         ).toDomain();
       },
     );

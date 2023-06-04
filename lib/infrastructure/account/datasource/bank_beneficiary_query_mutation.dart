@@ -43,4 +43,14 @@ class BankBeneficiaryQueryMutation {
       }
     ''';
   }
+
+  String deleteBeneficiaryQuery() {
+    return '''
+      mutation deleteBankBeneficiary(\$input: deleteBankBeneficiaryInput!) {
+        deleteBankBeneficiary(input: \$input) {
+          info
+        }
+      }
+    ''';
+  }
 }

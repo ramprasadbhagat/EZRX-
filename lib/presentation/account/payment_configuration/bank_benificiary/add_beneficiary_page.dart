@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/payment_configuration/bank_beneficiary/add_beneficiary/add_beneficiary_bloc.dart';
-import 'package:ezrxmobile/application/account/payment_configuration/bank_beneficiary/bank_beneficiary_bloc.dart';
+import 'package:ezrxmobile/application/account/payment_configuration/bank_beneficiary/manage_bank_beneficiary_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_district_info.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
@@ -20,16 +19,13 @@ class AddBeneficiaryPage extends StatelessWidget {
       appBar: AppBar(title: Text('Add Beneficiary'.tr())),
       body: AnnouncementBanner(
         currentPath: context.router.currentPath,
-        child: BlocConsumer<AddBeneficiaryBloc, AddBeneficiaryState>(
+        child: BlocConsumer<ManageBankBeneficiaryBloc, ManageBankBeneficiaryState>(
           listenWhen: (previous, current) =>
               previous.isSubmitting != current.isSubmitting,
           listener: (context, state) {
             state.failureOrSuccessOption.fold(
               () {
                 if (!state.isSubmitting) {
-                  context
-                      .read<BankBeneficiaryBloc>()
-                      .add(const BankBeneficiaryEvent.fetch());
                   context.router.pop();
                 }
               },
@@ -37,22 +33,19 @@ class AddBeneficiaryPage extends StatelessWidget {
                 (failure) {
                   ErrorUtils.handleApiFailure(context, failure);
                 },
-                (success) {},
+                (_) {},  
               ),
             );
           },
           buildWhen: (previous, current) =>
               previous.showErrorMessages != current.showErrorMessages,
           builder: (context, state) {
-            return SingleChildScrollView(
-              child: SizedBox(
-                child: Padding(
-                  padding: const EdgeInsets.all(25.0),
-                  child: Form(
+            return Form(
                     autovalidateMode: state.showErrorMessages
                         ? AutovalidateMode.always
                         : AutovalidateMode.disabled,
-                    child: Column(
+                child: ListView(
+                  padding: const EdgeInsets.all(25.0),
                       children: [
                         _SalesOrgDropdown(state: state),
                         const SizedBox(height: 20),
@@ -62,10 +55,7 @@ class AddBeneficiaryPage extends StatelessWidget {
                         const SizedBox(height: 20),
                         const _AddBeneficiaryButton(),
                       ],
-                    ),
-                  ),
                 ),
-              ),
             );
           },
         ),
@@ -79,7 +69,7 @@ class _SalesOrgDropdown extends StatelessWidget {
     Key? key,
     required this.state,
   }) : super(key: key);
-  final AddBeneficiaryState state;
+  final ManageBankBeneficiaryState state;
   @override
   Widget build(BuildContext context) {
     final salesOrgs = context.read<UserBloc>().state.salesOrgValue;
@@ -108,23 +98,24 @@ class _SalesOrgDropdown extends StatelessWidget {
       onChanged: state.isSubmitting
           ? null
           : (value) {
-              context.read<AddBeneficiaryBloc>().add(
-                    AddBeneficiaryEvent.onValueChange(
-                      label: AddBeneficiaryLabel.selectSalesOrg,
+              context.read<ManageBankBeneficiaryBloc>().add(
+                    ManageBankBeneficiaryEvent.onValueChange(
+                      label: BeneficiaryLabel.selectSalesOrg,
                       newValue: value!,
                     ),
-                  );
-              context.read<AddBeneficiaryBloc>().add(
-                    AddBeneficiaryEvent.fetchSalesDistrict(
+              );
+              context.read<ManageBankBeneficiaryBloc>().add(
+                    ManageBankBeneficiaryEvent.fetchSalesDistrict(
+                      fromAdd: true,
                       salesOrg: SalesOrg(value),
                     ),
-                  );
+              );
             },
       validator: (_) {
         return context
-            .read<AddBeneficiaryBloc>()
+            .read<ManageBankBeneficiaryBloc>()
             .state
-            .addBeneficiaryData
+            .beneficiaryData
             .salesOrg
             .value
             .fold(
@@ -146,12 +137,12 @@ class _SalesDistrictDropdown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AddBeneficiaryBloc, AddBeneficiaryState>(
+    return BlocBuilder<ManageBankBeneficiaryBloc, ManageBankBeneficiaryState>(
       buildWhen: (previous, current) =>
           previous.isFetching != current.isFetching,
       builder: (context, state) {
-        final district = state.addBeneficiaryData.salesDistrict;
-        final labeltext = district.isEmpty
+        final district = state.beneficiaryData.salesDistrict;
+        final labelText = district.isEmpty
             ? 'No Data Available'.tr()
             : 'Select Sales District'.tr();
 
@@ -159,7 +150,7 @@ class _SalesDistrictDropdown extends StatelessWidget {
           key: const Key('salesDistrictDropdownKey'),
           isExpanded: true,
           decoration: InputDecoration(
-              labelText: labeltext, 
+              labelText: labelText, 
               enabled: district.isNotEmpty,
           ),
           value: district.isEmpty ? null : district,
@@ -175,9 +166,9 @@ class _SalesDistrictDropdown extends StatelessWidget {
               : [],
           onChanged: (value) {
             context
-                .read<AddBeneficiaryBloc>()
-                .add(AddBeneficiaryEvent.onValueChange(
-                  label: AddBeneficiaryLabel.selectSalesDistrict,
+                .read<ManageBankBeneficiaryBloc>()
+                .add(ManageBankBeneficiaryEvent.onValueChange(
+                  label: BeneficiaryLabel.selectSalesDistrict,
                   newValue: value!,
                 ));
           },
@@ -199,9 +190,9 @@ class _BeneficiaryDetailsTextFields extends StatelessWidget {
           decoration: InputDecoration(labelText: 'Beneficiary Name'.tr()),
           onChanged: (value) {
             context
-                .read<AddBeneficiaryBloc>()
-                .add(AddBeneficiaryEvent.onValueChange(
-                  label: AddBeneficiaryLabel.beneficiaryName,
+                .read<ManageBankBeneficiaryBloc>()
+                .add(ManageBankBeneficiaryEvent.onValueChange(
+                  label: BeneficiaryLabel.beneficiaryName,
                   newValue: value,
                 ));
           },
@@ -212,9 +203,9 @@ class _BeneficiaryDetailsTextFields extends StatelessWidget {
           decoration: InputDecoration(labelText: 'Bank Name'.tr()),
           onChanged: (value) {
             context
-                .read<AddBeneficiaryBloc>()
-                .add(AddBeneficiaryEvent.onValueChange(
-                  label: AddBeneficiaryLabel.bankName,
+                .read<ManageBankBeneficiaryBloc>()
+                .add(ManageBankBeneficiaryEvent.onValueChange(
+                  label: BeneficiaryLabel.bankName,
                   newValue: value,
                 ));
           },
@@ -225,9 +216,9 @@ class _BeneficiaryDetailsTextFields extends StatelessWidget {
           decoration: InputDecoration(labelText: 'Branch'.tr()),
           onChanged: (value) {
             context
-                .read<AddBeneficiaryBloc>()
-                .add(AddBeneficiaryEvent.onValueChange(
-                  label: AddBeneficiaryLabel.branch,
+                .read<ManageBankBeneficiaryBloc>()
+                .add(ManageBankBeneficiaryEvent.onValueChange(
+                  label: BeneficiaryLabel.branch,
                   newValue: value,
                 ));
           },
@@ -238,9 +229,9 @@ class _BeneficiaryDetailsTextFields extends StatelessWidget {
           decoration: InputDecoration(labelText: 'Bank Code'.tr()),
           onChanged: (value) {
             context
-                .read<AddBeneficiaryBloc>()
-                .add(AddBeneficiaryEvent.onValueChange(
-                  label: AddBeneficiaryLabel.bankCode,
+                .read<ManageBankBeneficiaryBloc>()
+                .add(ManageBankBeneficiaryEvent.onValueChange(
+                  label: BeneficiaryLabel.bankCode,
                   newValue: value,
                 ));
           },
@@ -251,9 +242,9 @@ class _BeneficiaryDetailsTextFields extends StatelessWidget {
           decoration: InputDecoration(labelText: 'Bank Account'.tr()),
           onChanged: (value) {
             context
-                .read<AddBeneficiaryBloc>()
-                .add(AddBeneficiaryEvent.onValueChange(
-                  label: AddBeneficiaryLabel.bankAccount,
+                .read<ManageBankBeneficiaryBloc>()
+                .add(ManageBankBeneficiaryEvent.onValueChange(
+                  label: BeneficiaryLabel.bankAccount,
                   newValue: value,
                 ));
           },
@@ -264,9 +255,9 @@ class _BeneficiaryDetailsTextFields extends StatelessWidget {
           decoration: InputDecoration(labelText: 'hdbc Swift Code'.tr()),
           onChanged: (value) {
             context
-                .read<AddBeneficiaryBloc>()
-                .add(AddBeneficiaryEvent.onValueChange(
-                  label: AddBeneficiaryLabel.hdbcSwiftCode,
+                .read<ManageBankBeneficiaryBloc>()
+                .add(ManageBankBeneficiaryEvent.onValueChange(
+                  label: BeneficiaryLabel.hdbcSwiftCode,
                   newValue: value,
                 ));
           },
@@ -277,9 +268,9 @@ class _BeneficiaryDetailsTextFields extends StatelessWidget {
           decoration: InputDecoration(labelText: 'Bank Address'.tr()),
           onChanged: (value) {
             context
-                .read<AddBeneficiaryBloc>()
-                .add(AddBeneficiaryEvent.onValueChange(
-                  label: AddBeneficiaryLabel.bankAddress,
+                .read<ManageBankBeneficiaryBloc>()
+                .add(ManageBankBeneficiaryEvent.onValueChange(
+                  label: BeneficiaryLabel.bankAddress,
                   newValue: value,
                 ));
           },
@@ -290,9 +281,9 @@ class _BeneficiaryDetailsTextFields extends StatelessWidget {
           decoration: InputDecoration(labelText: 'Pay Now Uen'.tr()),
           onChanged: (value) {
             context
-                .read<AddBeneficiaryBloc>()
-                .add(AddBeneficiaryEvent.onValueChange(
-                  label: AddBeneficiaryLabel.payNowUen,
+                .read<ManageBankBeneficiaryBloc>()
+                .add(ManageBankBeneficiaryEvent.onValueChange(
+                  label: BeneficiaryLabel.payNowUen,
                   newValue: value,
                 ));
           },
@@ -302,18 +293,18 @@ class _BeneficiaryDetailsTextFields extends StatelessWidget {
           key: const Key('emailIdField'),
           decoration: InputDecoration(labelText: 'Email Id'.tr()),
           onChanged: (value) {
-            context.read<AddBeneficiaryBloc>().add(
-                  AddBeneficiaryEvent.onValueChange(
-                    label: AddBeneficiaryLabel.emailId,
+            context.read<ManageBankBeneficiaryBloc>()
+                .add(ManageBankBeneficiaryEvent.onValueChange(
+                    label: BeneficiaryLabel.emailId,
                     newValue: value,
                   ),
                 );
           },
           validator: (value) {
             return context
-                .read<AddBeneficiaryBloc>()
+                .read<ManageBankBeneficiaryBloc>()
                 .state
-                .addBeneficiaryData
+                .beneficiaryData
                 .emailId
                 .value
                 .fold(
@@ -337,7 +328,7 @@ class _AddBeneficiaryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AddBeneficiaryBloc, AddBeneficiaryState>(
+    return BlocBuilder<ManageBankBeneficiaryBloc, ManageBankBeneficiaryState>(
       buildWhen: (previous, current) =>
           previous.isSubmitting != current.isSubmitting,
       builder: (context, state) {
@@ -347,8 +338,10 @@ class _AddBeneficiaryButton extends StatelessWidget {
               ? null
               : () {
                   FocusScope.of(context).unfocus();
-                  context.read<AddBeneficiaryBloc>().add(
-                        const AddBeneficiaryEvent.addBankBeneficiary(),
+                  context.read<ManageBankBeneficiaryBloc>().add(
+                        const ManageBankBeneficiaryEvent.addOrUpdateBeneficiary(
+                          isEdit: false,
+                        ),
                       );
                 },
           child: LoadingShimmer.withChild(

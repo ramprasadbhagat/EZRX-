@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/account/entities/add_or_update_beneficiary.dart';
 import 'package:ezrxmobile/domain/account/entities/bank_beneficiary.dart';
+import 'package:ezrxmobile/domain/account/entities/bank_beneficiary_response.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_district.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -58,7 +58,7 @@ class BankBeneficiaryRepository implements IBankBeneficiaryRepository {
     }
     try {
       final salesDistrict =
-          await remoteDataSource.getSalesDistrict(salesOrg: salesOrg);
+          await remoteDataSource.getSalesDistrict(salesOrg: salesOrg.getOrCrash());
 
       return Right(salesDistrict);
     } catch (e) {
@@ -67,7 +67,7 @@ class BankBeneficiaryRepository implements IBankBeneficiaryRepository {
   }
 
   @override
-  Future<Either<ApiFailure, AddOrUpdateBeneficiary>> addOrUpdateBeneficiary(
+  Future<Either<ApiFailure, BankBeneficiaryResponse>> addOrUpdateBeneficiary(
       {required BankBeneficiary beneficiaryData,}) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -81,6 +81,34 @@ class BankBeneficiaryRepository implements IBankBeneficiaryRepository {
     try {
       final response = await remoteDataSource.addOrUpdateBeneficiary(
           beneficiaryData: BankBeneficiaryDto.fromDomain(beneficiaryData).toJson(),
+      );
+
+      return Right(response);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, BankBeneficiaryResponse>> deleteBeneficiary(
+    {
+      required SalesOrg salesOrg, 
+      required String salesDistrict,
+    }
+    )async {
+   if (config.appFlavor == Flavor.mock) {
+      try {
+        final response = await localDataSource.deleteBeneficiary();
+
+        return Right(response);
+      } on MockException catch (e) {
+        return Left(ApiFailure.other(e.message));
+      }
+    }
+    try {
+      final response = await remoteDataSource.deleteBeneficiary(
+         salesOrg: salesOrg.getOrCrash(),
+         salesDistrict: salesDistrict,
       );
 
       return Right(response);

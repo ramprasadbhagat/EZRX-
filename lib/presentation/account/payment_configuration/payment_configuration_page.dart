@@ -22,10 +22,10 @@ class PaymentConfigurationPage extends StatelessWidget {
                 onTap: () => context.router.pushNamed('payment_methods'),
               ),
               ListTile(
-                key: const Key('bankBenificiaryTile'),
-                title: const Text('Manage Bank Benificiary').tr(),
+                key: const Key('bankBeneficiaryTile'),
+                title: const Text('Manage Bank Beneficiary').tr(),
                 onTap: () =>
-                    context.router.pushNamed('payments/bank_benificiary'),
+                    context.router.pushNamed('payments/bank_beneficiary'),
               ),
               ListTile(
                 key: const Key('paymentAdviceTile'),

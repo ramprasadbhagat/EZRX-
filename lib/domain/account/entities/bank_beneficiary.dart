@@ -10,6 +10,7 @@ class BankBeneficiary with _$BankBeneficiary {
   const BankBeneficiary._();
 
   const factory BankBeneficiary({
+    required int key,
     required SalesOrg salesOrg,
     required StringValue bankAccount,
     required String bankAddress,
@@ -21,19 +22,22 @@ class BankBeneficiary with _$BankBeneficiary {
     required String hdbcSwiftCode,
     required String payNowUen,
     required String salesDistrict,
+    required bool isDeleteInProgress,
   }) = _BankBeneficiary;
 
   factory BankBeneficiary.empty() => BankBeneficiary(
-    salesOrg: SalesOrg(''),
-    bankAccount: StringValue(''),
-    bankAddress: '',
-    bankCode: '',
-    bankName: StringValue(''),
-    beneficiaryName: StringValue(''),
-    branch: '',
-    emailId: EmailAddress(''),
-    hdbcSwiftCode: '',
-    payNowUen: '',
-    salesDistrict: '',
-  );
+        key: 0,
+        salesOrg: SalesOrg(''),
+        bankAccount: StringValue(''),
+        bankAddress: '',
+        bankCode: '',
+        bankName: StringValue(''),
+        beneficiaryName: StringValue(''),
+        branch: '',
+        emailId: EmailAddress.optional(''),
+        hdbcSwiftCode: '',
+        payNowUen: '',
+        salesDistrict: '',
+        isDeleteInProgress: false,
+      );
 }

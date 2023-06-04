@@ -1,11 +1,10 @@
 import 'dart:async';
-import 'package:ezrxmobile/application/account/payment_configuration/bank_beneficiary/add_beneficiary/add_beneficiary_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/deduction_code/manage_deduction_code/manage_deduction_code_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/deduction_code/view_deduction_code/deduction_code_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_advice_footer/payment_advice_footer_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/add_payment_method/add_payment_method_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/manage_payment_method/manage_payment_methods_bloc.dart';
-import 'package:ezrxmobile/application/account/payment_configuration/bank_beneficiary/bank_beneficiary_bloc.dart';
+import 'package:ezrxmobile/application/account/payment_configuration/bank_beneficiary/manage_bank_beneficiary_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/payment_methods_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/sales_district/add_sales_district/add_sales_district_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/sales_district/sales_district_bloc.dart';
@@ -422,17 +421,14 @@ class App extends StatelessWidget {
         BlocProvider<SettingBloc>(
           create: (context) => locator<SettingBloc>(),
         ),
-        BlocProvider<BankBeneficiaryBloc>(
-          create: (context) => locator<BankBeneficiaryBloc>(),
+        BlocProvider<ManageBankBeneficiaryBloc>(
+          create: (context) => locator<ManageBankBeneficiaryBloc>(),
         ),
         BlocProvider<SalesDistrictBloc>(
           create: (context) => locator<SalesDistrictBloc>(),
         ),
         BlocProvider<AddSalesDistrictBloc>(
           create: (context) => locator<AddSalesDistrictBloc>(),
-        ),
-        BlocProvider<AddBeneficiaryBloc>(
-          create: (context) => locator<AddBeneficiaryBloc>(),
         ),
         BlocProvider<DeductionCodeBloc>(
           create: (context) => locator<DeductionCodeBloc>(),

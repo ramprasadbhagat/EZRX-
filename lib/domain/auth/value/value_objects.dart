@@ -29,6 +29,15 @@ class EmailAddress extends ValueObject<String> {
     );
   }
 
+  factory EmailAddress.optional(String input) {
+    return EmailAddress._(
+      (validateStringIsEmpty(input).fold(
+        (l) => validateEmailAddress(input), 
+        (r) => Right(r),
+      )),
+    );
+  }
+
   const EmailAddress._(this.value);
 }
 
