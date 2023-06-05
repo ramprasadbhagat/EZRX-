@@ -22,6 +22,9 @@ revert_uat_tag:
 	@git tag -d uat.${VERSION}-${BUILD} && git push --delete origin uat.${VERSION}-${BUILD}
 revert_prod_tag:
 	@git tag -d prod.${VERSION}-${BUILD} && git push --delete origin prod.${VERSION}-${BUILD}
+run_uat_test:
+	@git tag -a test.uat.${VERSION}-${BUILD} -m "test uat ${VERSION}(${BUILD})" && git push origin test.uat.${VERSION}-${BUILD}
+	@git tag -d test.uat.${VERSION}-${BUILD} && git push --delete origin test.uat.${VERSION}-${BUILD}
 run_uat:
 	@fvm flutter run --flavor uat -t lib/main_stage.dart
 run_prod:

@@ -1,0 +1,321 @@
+trigger:
+  tags:
+    include:
+    - test.uat.*
+
+resources:
+- repo: self
+
+pool:
+  vmImage: 'macos-12'
+
+
+stages:
+- stage: IOSUatRegressionJob
+  dependsOn: []
+  displayName: IOSUatRegressionJob
+  jobs:
+
+  - job: SG_MARKET_TEST
+    displayName: SG_MARKET_TEST
+    steps: 
+
+    - task: Bash@3
+      displayName: flutter setup
+      inputs:
+        targetType: 'inline'
+        script: |
+          brew tap leoafarias/fvm
+          brew install fvm
+          echo Y | fvm global 3.7.5
+          fvm flutter clean
+          cd ios
+          rm Pods
+          rm Podfile.lock
+          fvm flutter pub get
+          pod install
+          cd ..
+    
+    - task: Bash@3
+      displayName: IOS simulator setup + Launch
+      inputs:
+        targetType: 'inline'
+        script: |
+          open -a simulator
+          fvm flutter emulators --launch apple_ios_simulator
+          sleep 5
+
+    - task: Bash@3
+      displayName: Integration test
+      inputs:
+        targetType: 'inline'
+        script: |
+          make reset_sg_salesorg_config
+          make run_sg_client_test
+          make run_sg_external_test
+
+  - job: MY_MARKET_TEST
+    displayName: MY_MARKET_TEST
+    steps: 
+
+    - task: Bash@3
+      displayName: flutter setup
+      inputs:
+        targetType: 'inline'
+        script: |
+          brew tap leoafarias/fvm
+          brew install fvm
+          echo Y | fvm global 3.7.5
+          fvm flutter clean
+          cd ios
+          rm Pods
+          rm Podfile.lock
+          fvm flutter pub get
+          pod install
+          cd ..
+    
+    - task: Bash@3
+      displayName: IOS simulator setup + Launch
+      inputs:
+        targetType: 'inline'
+        script: |
+          open -a simulator
+          fvm flutter emulators --launch apple_ios_simulator
+          sleep 5
+
+    - task: Bash@3
+      displayName: Integration test
+      inputs:
+        targetType: 'inline'
+        script: |
+          reset_my_salesorg_config
+          make run_my_client_test
+          make run_my_external_test
+
+  - job: VN_MARKET_TEST
+    displayName: VN_MARKET_TEST
+    steps: 
+
+    - task: Bash@3
+      displayName: flutter setup
+      inputs:
+        targetType: 'inline'
+        script: |
+          brew tap leoafarias/fvm
+          brew install fvm
+          echo Y | fvm global 3.7.5
+          fvm flutter clean
+          cd ios
+          rm Pods
+          rm Podfile.lock
+          fvm flutter pub get
+          pod install
+          cd ..
+    
+    - task: Bash@3
+      displayName: IOS simulator setup + Launch
+      inputs:
+        targetType: 'inline'
+        script: |
+          open -a simulator
+          fvm flutter emulators --launch apple_ios_simulator
+          sleep 5
+
+    - task: Bash@3
+      displayName: Integration test
+      inputs:
+        targetType: 'inline'
+        script: |
+          reset_vn_salesorg_config
+          make run_vn_client_test
+          make run_vn_external_test
+
+  - job: TH_MARKET_TEST
+    displayName: TH_MARKET_TEST
+    steps: 
+
+    - task: Bash@3
+      displayName: flutter setup
+      inputs:
+        targetType: 'inline'
+        script: |
+          brew tap leoafarias/fvm
+          brew install fvm
+          echo Y | fvm global 3.7.5
+          fvm flutter clean
+          cd ios
+          rm Pods
+          rm Podfile.lock
+          fvm flutter pub get
+          pod install
+          cd ..
+    
+    - task: Bash@3
+      displayName: IOS simulator setup + Launch
+      inputs:
+        targetType: 'inline'
+        script: |
+          open -a simulator
+          fvm flutter emulators --launch apple_ios_simulator
+          sleep 5
+
+    - task: Bash@3
+      displayName: Integration test
+      inputs:
+        targetType: 'inline'
+        script: |
+          reset_th_salesorg_config
+          make run_th_client_test
+          make run_th_external_test
+
+  - job: TW_MARKET_TEST
+    displayName: TW_MARKET_TEST
+    steps: 
+
+    - task: Bash@3
+      displayName: flutter setup
+      inputs:
+        targetType: 'inline'
+        script: |
+          brew tap leoafarias/fvm
+          brew install fvm
+          echo Y | fvm global 3.7.5
+          fvm flutter clean
+          cd ios
+          rm Pods
+          rm Podfile.lock
+          fvm flutter pub get
+          pod install
+          cd ..
+    
+    - task: Bash@3
+      displayName: IOS simulator setup + Launch
+      inputs:
+        targetType: 'inline'
+        script: |
+          open -a simulator
+          fvm flutter emulators --launch apple_ios_simulator
+          sleep 5
+
+    - task: Bash@3
+      displayName: Integration test
+      inputs:
+        targetType: 'inline'
+        script: |
+          reset_tw_salesorg_config
+          make run_tw_client_test
+          make run_tw_external_test
+
+  - job: PH_MARKET_TEST
+    displayName: PH_MARKET_TEST
+    steps: 
+
+    - task: Bash@3
+      displayName: flutter setup
+      inputs:
+        targetType: 'inline'
+        script: |
+          brew tap leoafarias/fvm
+          brew install fvm
+          echo Y | fvm global 3.7.5
+          fvm flutter clean
+          cd ios
+          rm Pods
+          rm Podfile.lock
+          fvm flutter pub get
+          pod install
+          cd ..
+    
+    - task: Bash@3
+      displayName: IOS simulator setup + Launch
+      inputs:
+        targetType: 'inline'
+        script: |
+          open -a simulator
+          fvm flutter emulators --launch apple_ios_simulator
+          sleep 5
+
+    - task: Bash@3
+      displayName: Integration test
+      inputs:
+        targetType: 'inline'
+        script: |
+          reset_ph_salesorg_config
+          make run_ph_client_test
+          make run_ph_external_test
+
+  - job: MM_MARKET_TEST
+    displayName: MM_MARKET_TEST
+    steps: 
+
+    - task: Bash@3
+      displayName: flutter setup
+      inputs:
+        targetType: 'inline'
+        script: |
+          brew tap leoafarias/fvm
+          brew install fvm
+          echo Y | fvm global 3.7.5
+          fvm flutter clean
+          cd ios
+          rm Pods
+          rm Podfile.lock
+          fvm flutter pub get
+          pod install
+          cd ..
+    
+    - task: Bash@3
+      displayName: IOS simulator setup + Launch
+      inputs:
+        targetType: 'inline'
+        script: |
+          open -a simulator
+          fvm flutter emulators --launch apple_ios_simulator
+          sleep 5
+
+    - task: Bash@3
+      displayName: Integration test
+      inputs:
+        targetType: 'inline'
+        script: |
+          reset_mm_salesorg_config
+          make run_mm_client_test
+          make run_mm_external_test
+
+  - job: KH_MARKET_TEST
+    displayName: KH_MARKET_TEST
+    steps: 
+
+    - task: Bash@3
+      displayName: flutter setup
+      inputs:
+        targetType: 'inline'
+        script: |
+          brew tap leoafarias/fvm
+          brew install fvm
+          echo Y | fvm global 3.7.5
+          fvm flutter clean
+          cd ios
+          rm Pods
+          rm Podfile.lock
+          fvm flutter pub get
+          pod install
+          cd ..
+    
+    - task: Bash@3
+      displayName: IOS simulator setup + Launch
+      inputs:
+        targetType: 'inline'
+        script: |
+          open -a simulator
+          fvm flutter emulators --launch apple_ios_simulator
+          sleep 5
+
+    - task: Bash@3
+      displayName: Integration test
+      inputs:
+        targetType: 'inline'
+        script: |
+          reset_kh_salesorg_config
+          make run_kh_client_test
+          make run_kh_external_test
