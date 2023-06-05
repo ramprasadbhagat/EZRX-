@@ -160,9 +160,7 @@ class AllCreditsAndInvoicesRemoteDataSource {
         code: res.statusCode ?? 0,
         message: res.statusMessage ?? '',
       );
-    } else if (data['data'] == null) {
-      throw ServerException(message: 'Some thing went wrong');
-    } else if (data['data'][property] == null) {
+    } else if (data['data'] == null || data['data'][property] == null) {
       throw ServerException(message: 'Some thing went wrong');
     }
   }

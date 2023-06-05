@@ -68,7 +68,9 @@ mixin _$UserDto {
   bool get hasPriceOverride => throw _privateConstructorUsedError;
   @JsonKey(name: 'disablePaymentNotification', defaultValue: false)
   bool get disablePaymentNotification => throw _privateConstructorUsedError;
-  @JsonKey(name: 'paymentNotification', defaultValue: [])
+  @JsonKey(
+      name: 'paymentNotification',
+      defaultValue: <PaymentAdviceExpiryNotificationDto>[])
   List<PaymentAdviceExpiryNotificationDto> get paymentNotification =>
       throw _privateConstructorUsedError;
 
@@ -126,7 +128,7 @@ abstract class $UserDtoCopyWith<$Res> {
           bool hasPriceOverride,
       @JsonKey(name: 'disablePaymentNotification', defaultValue: false)
           bool disablePaymentNotification,
-      @JsonKey(name: 'paymentNotification', defaultValue: [])
+      @JsonKey(name: 'paymentNotification', defaultValue: <PaymentAdviceExpiryNotificationDto>[])
           List<PaymentAdviceExpiryNotificationDto> paymentNotification});
 
   $RoleDtoCopyWith<$Res> get role;
@@ -329,7 +331,7 @@ abstract class _$$_UserDtoCopyWith<$Res> implements $UserDtoCopyWith<$Res> {
           bool hasPriceOverride,
       @JsonKey(name: 'disablePaymentNotification', defaultValue: false)
           bool disablePaymentNotification,
-      @JsonKey(name: 'paymentNotification', defaultValue: [])
+      @JsonKey(name: 'paymentNotification', defaultValue: <PaymentAdviceExpiryNotificationDto>[])
           List<PaymentAdviceExpiryNotificationDto> paymentNotification});
 
   @override
@@ -511,7 +513,7 @@ class _$_UserDto extends _UserDto {
           required this.hasPriceOverride,
       @JsonKey(name: 'disablePaymentNotification', defaultValue: false)
           required this.disablePaymentNotification,
-      @JsonKey(name: 'paymentNotification', defaultValue: [])
+      @JsonKey(name: 'paymentNotification', defaultValue: <PaymentAdviceExpiryNotificationDto>[])
           required final List<PaymentAdviceExpiryNotificationDto> paymentNotification})
       : _userSalesOrganisations = userSalesOrganisations,
         _paymentNotification = paymentNotification,
@@ -596,7 +598,9 @@ class _$_UserDto extends _UserDto {
   final bool disablePaymentNotification;
   final List<PaymentAdviceExpiryNotificationDto> _paymentNotification;
   @override
-  @JsonKey(name: 'paymentNotification', defaultValue: [])
+  @JsonKey(
+      name: 'paymentNotification',
+      defaultValue: <PaymentAdviceExpiryNotificationDto>[])
   List<PaymentAdviceExpiryNotificationDto> get paymentNotification {
     if (_paymentNotification is EqualUnmodifiableListView)
       return _paymentNotification;
@@ -749,7 +753,7 @@ abstract class _UserDto extends UserDto {
           required final bool hasPriceOverride,
       @JsonKey(name: 'disablePaymentNotification', defaultValue: false)
           required final bool disablePaymentNotification,
-      @JsonKey(name: 'paymentNotification', defaultValue: [])
+      @JsonKey(name: 'paymentNotification', defaultValue: <PaymentAdviceExpiryNotificationDto>[])
           required final List<PaymentAdviceExpiryNotificationDto> paymentNotification}) = _$_UserDto;
   const _UserDto._() : super._();
 
@@ -823,7 +827,9 @@ abstract class _UserDto extends UserDto {
   @JsonKey(name: 'disablePaymentNotification', defaultValue: false)
   bool get disablePaymentNotification;
   @override
-  @JsonKey(name: 'paymentNotification', defaultValue: [])
+  @JsonKey(
+      name: 'paymentNotification',
+      defaultValue: <PaymentAdviceExpiryNotificationDto>[])
   List<PaymentAdviceExpiryNotificationDto> get paymentNotification;
   @override
   @JsonKey(ignore: true)

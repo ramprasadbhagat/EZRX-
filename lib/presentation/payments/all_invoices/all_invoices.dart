@@ -4,6 +4,7 @@ import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/filter/all_invoices_filter_bloc.dart';
+import 'package:ezrxmobile/application/payments/invoice_details/invoice_details_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
@@ -147,10 +148,10 @@ class AllInvoicesPage extends StatelessWidget {
               currentPath: context.router.currentPath,
               child: Column(
                 children: [
-                    const AttentionRow(
-                      valueText:
-                          'All Invoices due dates and document dates pre-set for past 28 days. Change the date ranges from “Filter” for more data',
-                    ),
+                  const AttentionRow(
+                    valueText:
+                        'All Invoices due dates and document dates pre-set for past 28 days. Change the date ranges from “Filter” for more data',
+                  ),
                   Expanded(
                     child: ScrollList<CreditAndInvoiceItem>(
                       emptyMessage: 'No invoice found'.tr(),
@@ -219,7 +220,20 @@ class _InvoiceItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
-        onTap: () {},
+        onTap: () {
+          context.read<InvoiceDetailsBloc>().add(
+                InvoiceDetailsEvent.fetch(
+                  invoiceItem: invoiceItem,
+                  salesOrganisation:
+                      context.read<SalesOrgBloc>().state.salesOrganisation,
+                  customerCodeInfo:
+                      context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                ),
+              );
+          context.router.push(InvoiceDetailsPageRoute(
+            invoiceItem: invoiceItem,
+          ));
+        },
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

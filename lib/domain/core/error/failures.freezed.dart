@@ -39,6 +39,7 @@ mixin _$ValueFailure<T> {
     required TResult Function(T failedValue) exceedingMaxValue,
     required TResult Function(T failedValue) invalidDateValue,
     required TResult Function(T failedValue) invalidDoubleValue,
+    required TResult Function(T failedValue) invalidIntegerValue,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -63,6 +64,7 @@ mixin _$ValueFailure<T> {
     TResult? Function(T failedValue)? exceedingMaxValue,
     TResult? Function(T failedValue)? invalidDateValue,
     TResult? Function(T failedValue)? invalidDoubleValue,
+    TResult? Function(T failedValue)? invalidIntegerValue,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -87,6 +89,7 @@ mixin _$ValueFailure<T> {
     TResult Function(T failedValue)? exceedingMaxValue,
     TResult Function(T failedValue)? invalidDateValue,
     TResult Function(T failedValue)? invalidDoubleValue,
+    TResult Function(T failedValue)? invalidIntegerValue,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -117,6 +120,7 @@ mixin _$ValueFailure<T> {
         exceedingMaxValue,
     required TResult Function(InvalidDateValue<T> value) invalidDateValue,
     required TResult Function(InvalidDoubleValue<T> value) invalidDoubleValue,
+    required TResult Function(InvalidIntegerValue<T> value) invalidIntegerValue,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -142,6 +146,7 @@ mixin _$ValueFailure<T> {
     TResult? Function(validateExceedsMaxValue<T> value)? exceedingMaxValue,
     TResult? Function(InvalidDateValue<T> value)? invalidDateValue,
     TResult? Function(InvalidDoubleValue<T> value)? invalidDoubleValue,
+    TResult? Function(InvalidIntegerValue<T> value)? invalidIntegerValue,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -167,6 +172,7 @@ mixin _$ValueFailure<T> {
     TResult Function(validateExceedsMaxValue<T> value)? exceedingMaxValue,
     TResult Function(InvalidDateValue<T> value)? invalidDateValue,
     TResult Function(InvalidDoubleValue<T> value)? invalidDoubleValue,
+    TResult Function(InvalidIntegerValue<T> value)? invalidIntegerValue,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -306,6 +312,7 @@ class _$ExceedingLength<T> implements ExceedingLength<T> {
     required TResult Function(T failedValue) exceedingMaxValue,
     required TResult Function(T failedValue) invalidDateValue,
     required TResult Function(T failedValue) invalidDoubleValue,
+    required TResult Function(T failedValue) invalidIntegerValue,
   }) {
     return exceedingLength(failedValue, max);
   }
@@ -333,6 +340,7 @@ class _$ExceedingLength<T> implements ExceedingLength<T> {
     TResult? Function(T failedValue)? exceedingMaxValue,
     TResult? Function(T failedValue)? invalidDateValue,
     TResult? Function(T failedValue)? invalidDoubleValue,
+    TResult? Function(T failedValue)? invalidIntegerValue,
   }) {
     return exceedingLength?.call(failedValue, max);
   }
@@ -360,6 +368,7 @@ class _$ExceedingLength<T> implements ExceedingLength<T> {
     TResult Function(T failedValue)? exceedingMaxValue,
     TResult Function(T failedValue)? invalidDateValue,
     TResult Function(T failedValue)? invalidDoubleValue,
+    TResult Function(T failedValue)? invalidIntegerValue,
     required TResult orElse(),
   }) {
     if (exceedingLength != null) {
@@ -396,6 +405,7 @@ class _$ExceedingLength<T> implements ExceedingLength<T> {
         exceedingMaxValue,
     required TResult Function(InvalidDateValue<T> value) invalidDateValue,
     required TResult Function(InvalidDoubleValue<T> value) invalidDoubleValue,
+    required TResult Function(InvalidIntegerValue<T> value) invalidIntegerValue,
   }) {
     return exceedingLength(this);
   }
@@ -424,6 +434,7 @@ class _$ExceedingLength<T> implements ExceedingLength<T> {
     TResult? Function(validateExceedsMaxValue<T> value)? exceedingMaxValue,
     TResult? Function(InvalidDateValue<T> value)? invalidDateValue,
     TResult? Function(InvalidDoubleValue<T> value)? invalidDoubleValue,
+    TResult? Function(InvalidIntegerValue<T> value)? invalidIntegerValue,
   }) {
     return exceedingLength?.call(this);
   }
@@ -452,6 +463,7 @@ class _$ExceedingLength<T> implements ExceedingLength<T> {
     TResult Function(validateExceedsMaxValue<T> value)? exceedingMaxValue,
     TResult Function(InvalidDateValue<T> value)? invalidDateValue,
     TResult Function(InvalidDoubleValue<T> value)? invalidDoubleValue,
+    TResult Function(InvalidIntegerValue<T> value)? invalidIntegerValue,
     required TResult orElse(),
   }) {
     if (exceedingLength != null) {
@@ -571,6 +583,7 @@ class _$SubceedLength<T> implements SubceedLength<T> {
     required TResult Function(T failedValue) exceedingMaxValue,
     required TResult Function(T failedValue) invalidDateValue,
     required TResult Function(T failedValue) invalidDoubleValue,
+    required TResult Function(T failedValue) invalidIntegerValue,
   }) {
     return subceedLength(failedValue, min);
   }
@@ -598,6 +611,7 @@ class _$SubceedLength<T> implements SubceedLength<T> {
     TResult? Function(T failedValue)? exceedingMaxValue,
     TResult? Function(T failedValue)? invalidDateValue,
     TResult? Function(T failedValue)? invalidDoubleValue,
+    TResult? Function(T failedValue)? invalidIntegerValue,
   }) {
     return subceedLength?.call(failedValue, min);
   }
@@ -625,6 +639,7 @@ class _$SubceedLength<T> implements SubceedLength<T> {
     TResult Function(T failedValue)? exceedingMaxValue,
     TResult Function(T failedValue)? invalidDateValue,
     TResult Function(T failedValue)? invalidDoubleValue,
+    TResult Function(T failedValue)? invalidIntegerValue,
     required TResult orElse(),
   }) {
     if (subceedLength != null) {
@@ -661,6 +676,7 @@ class _$SubceedLength<T> implements SubceedLength<T> {
         exceedingMaxValue,
     required TResult Function(InvalidDateValue<T> value) invalidDateValue,
     required TResult Function(InvalidDoubleValue<T> value) invalidDoubleValue,
+    required TResult Function(InvalidIntegerValue<T> value) invalidIntegerValue,
   }) {
     return subceedLength(this);
   }
@@ -689,6 +705,7 @@ class _$SubceedLength<T> implements SubceedLength<T> {
     TResult? Function(validateExceedsMaxValue<T> value)? exceedingMaxValue,
     TResult? Function(InvalidDateValue<T> value)? invalidDateValue,
     TResult? Function(InvalidDoubleValue<T> value)? invalidDoubleValue,
+    TResult? Function(InvalidIntegerValue<T> value)? invalidIntegerValue,
   }) {
     return subceedLength?.call(this);
   }
@@ -717,6 +734,7 @@ class _$SubceedLength<T> implements SubceedLength<T> {
     TResult Function(validateExceedsMaxValue<T> value)? exceedingMaxValue,
     TResult Function(InvalidDateValue<T> value)? invalidDateValue,
     TResult Function(InvalidDoubleValue<T> value)? invalidDoubleValue,
+    TResult Function(InvalidIntegerValue<T> value)? invalidIntegerValue,
     required TResult orElse(),
   }) {
     if (subceedLength != null) {
@@ -826,6 +844,7 @@ class _$Empty<T> implements Empty<T> {
     required TResult Function(T failedValue) exceedingMaxValue,
     required TResult Function(T failedValue) invalidDateValue,
     required TResult Function(T failedValue) invalidDoubleValue,
+    required TResult Function(T failedValue) invalidIntegerValue,
   }) {
     return empty(failedValue);
   }
@@ -853,6 +872,7 @@ class _$Empty<T> implements Empty<T> {
     TResult? Function(T failedValue)? exceedingMaxValue,
     TResult? Function(T failedValue)? invalidDateValue,
     TResult? Function(T failedValue)? invalidDoubleValue,
+    TResult? Function(T failedValue)? invalidIntegerValue,
   }) {
     return empty?.call(failedValue);
   }
@@ -880,6 +900,7 @@ class _$Empty<T> implements Empty<T> {
     TResult Function(T failedValue)? exceedingMaxValue,
     TResult Function(T failedValue)? invalidDateValue,
     TResult Function(T failedValue)? invalidDoubleValue,
+    TResult Function(T failedValue)? invalidIntegerValue,
     required TResult orElse(),
   }) {
     if (empty != null) {
@@ -916,6 +937,7 @@ class _$Empty<T> implements Empty<T> {
         exceedingMaxValue,
     required TResult Function(InvalidDateValue<T> value) invalidDateValue,
     required TResult Function(InvalidDoubleValue<T> value) invalidDoubleValue,
+    required TResult Function(InvalidIntegerValue<T> value) invalidIntegerValue,
   }) {
     return empty(this);
   }
@@ -944,6 +966,7 @@ class _$Empty<T> implements Empty<T> {
     TResult? Function(validateExceedsMaxValue<T> value)? exceedingMaxValue,
     TResult? Function(InvalidDateValue<T> value)? invalidDateValue,
     TResult? Function(InvalidDoubleValue<T> value)? invalidDoubleValue,
+    TResult? Function(InvalidIntegerValue<T> value)? invalidIntegerValue,
   }) {
     return empty?.call(this);
   }
@@ -972,6 +995,7 @@ class _$Empty<T> implements Empty<T> {
     TResult Function(validateExceedsMaxValue<T> value)? exceedingMaxValue,
     TResult Function(InvalidDateValue<T> value)? invalidDateValue,
     TResult Function(InvalidDoubleValue<T> value)? invalidDoubleValue,
+    TResult Function(InvalidIntegerValue<T> value)? invalidIntegerValue,
     required TResult orElse(),
   }) {
     if (empty != null) {
@@ -1080,6 +1104,7 @@ class _$Multiline<T> implements Multiline<T> {
     required TResult Function(T failedValue) exceedingMaxValue,
     required TResult Function(T failedValue) invalidDateValue,
     required TResult Function(T failedValue) invalidDoubleValue,
+    required TResult Function(T failedValue) invalidIntegerValue,
   }) {
     return multiline(failedValue);
   }
@@ -1107,6 +1132,7 @@ class _$Multiline<T> implements Multiline<T> {
     TResult? Function(T failedValue)? exceedingMaxValue,
     TResult? Function(T failedValue)? invalidDateValue,
     TResult? Function(T failedValue)? invalidDoubleValue,
+    TResult? Function(T failedValue)? invalidIntegerValue,
   }) {
     return multiline?.call(failedValue);
   }
@@ -1134,6 +1160,7 @@ class _$Multiline<T> implements Multiline<T> {
     TResult Function(T failedValue)? exceedingMaxValue,
     TResult Function(T failedValue)? invalidDateValue,
     TResult Function(T failedValue)? invalidDoubleValue,
+    TResult Function(T failedValue)? invalidIntegerValue,
     required TResult orElse(),
   }) {
     if (multiline != null) {
@@ -1170,6 +1197,7 @@ class _$Multiline<T> implements Multiline<T> {
         exceedingMaxValue,
     required TResult Function(InvalidDateValue<T> value) invalidDateValue,
     required TResult Function(InvalidDoubleValue<T> value) invalidDoubleValue,
+    required TResult Function(InvalidIntegerValue<T> value) invalidIntegerValue,
   }) {
     return multiline(this);
   }
@@ -1198,6 +1226,7 @@ class _$Multiline<T> implements Multiline<T> {
     TResult? Function(validateExceedsMaxValue<T> value)? exceedingMaxValue,
     TResult? Function(InvalidDateValue<T> value)? invalidDateValue,
     TResult? Function(InvalidDoubleValue<T> value)? invalidDoubleValue,
+    TResult? Function(InvalidIntegerValue<T> value)? invalidIntegerValue,
   }) {
     return multiline?.call(this);
   }
@@ -1226,6 +1255,7 @@ class _$Multiline<T> implements Multiline<T> {
     TResult Function(validateExceedsMaxValue<T> value)? exceedingMaxValue,
     TResult Function(InvalidDateValue<T> value)? invalidDateValue,
     TResult Function(InvalidDoubleValue<T> value)? invalidDoubleValue,
+    TResult Function(InvalidIntegerValue<T> value)? invalidIntegerValue,
     required TResult orElse(),
   }) {
     if (multiline != null) {
@@ -1334,6 +1364,7 @@ class _$InvalidEmail<T> implements InvalidEmail<T> {
     required TResult Function(T failedValue) exceedingMaxValue,
     required TResult Function(T failedValue) invalidDateValue,
     required TResult Function(T failedValue) invalidDoubleValue,
+    required TResult Function(T failedValue) invalidIntegerValue,
   }) {
     return invalidEmail(failedValue);
   }
@@ -1361,6 +1392,7 @@ class _$InvalidEmail<T> implements InvalidEmail<T> {
     TResult? Function(T failedValue)? exceedingMaxValue,
     TResult? Function(T failedValue)? invalidDateValue,
     TResult? Function(T failedValue)? invalidDoubleValue,
+    TResult? Function(T failedValue)? invalidIntegerValue,
   }) {
     return invalidEmail?.call(failedValue);
   }
@@ -1388,6 +1420,7 @@ class _$InvalidEmail<T> implements InvalidEmail<T> {
     TResult Function(T failedValue)? exceedingMaxValue,
     TResult Function(T failedValue)? invalidDateValue,
     TResult Function(T failedValue)? invalidDoubleValue,
+    TResult Function(T failedValue)? invalidIntegerValue,
     required TResult orElse(),
   }) {
     if (invalidEmail != null) {
@@ -1424,6 +1457,7 @@ class _$InvalidEmail<T> implements InvalidEmail<T> {
         exceedingMaxValue,
     required TResult Function(InvalidDateValue<T> value) invalidDateValue,
     required TResult Function(InvalidDoubleValue<T> value) invalidDoubleValue,
+    required TResult Function(InvalidIntegerValue<T> value) invalidIntegerValue,
   }) {
     return invalidEmail(this);
   }
@@ -1452,6 +1486,7 @@ class _$InvalidEmail<T> implements InvalidEmail<T> {
     TResult? Function(validateExceedsMaxValue<T> value)? exceedingMaxValue,
     TResult? Function(InvalidDateValue<T> value)? invalidDateValue,
     TResult? Function(InvalidDoubleValue<T> value)? invalidDoubleValue,
+    TResult? Function(InvalidIntegerValue<T> value)? invalidIntegerValue,
   }) {
     return invalidEmail?.call(this);
   }
@@ -1480,6 +1515,7 @@ class _$InvalidEmail<T> implements InvalidEmail<T> {
     TResult Function(validateExceedsMaxValue<T> value)? exceedingMaxValue,
     TResult Function(InvalidDateValue<T> value)? invalidDateValue,
     TResult Function(InvalidDoubleValue<T> value)? invalidDoubleValue,
+    TResult Function(InvalidIntegerValue<T> value)? invalidIntegerValue,
     required TResult orElse(),
   }) {
     if (invalidEmail != null) {
@@ -1589,6 +1625,7 @@ class _$ShortPassword<T> implements ShortPassword<T> {
     required TResult Function(T failedValue) exceedingMaxValue,
     required TResult Function(T failedValue) invalidDateValue,
     required TResult Function(T failedValue) invalidDoubleValue,
+    required TResult Function(T failedValue) invalidIntegerValue,
   }) {
     return passwordNotMatchRequirements(failedValue);
   }
@@ -1616,6 +1653,7 @@ class _$ShortPassword<T> implements ShortPassword<T> {
     TResult? Function(T failedValue)? exceedingMaxValue,
     TResult? Function(T failedValue)? invalidDateValue,
     TResult? Function(T failedValue)? invalidDoubleValue,
+    TResult? Function(T failedValue)? invalidIntegerValue,
   }) {
     return passwordNotMatchRequirements?.call(failedValue);
   }
@@ -1643,6 +1681,7 @@ class _$ShortPassword<T> implements ShortPassword<T> {
     TResult Function(T failedValue)? exceedingMaxValue,
     TResult Function(T failedValue)? invalidDateValue,
     TResult Function(T failedValue)? invalidDoubleValue,
+    TResult Function(T failedValue)? invalidIntegerValue,
     required TResult orElse(),
   }) {
     if (passwordNotMatchRequirements != null) {
@@ -1679,6 +1718,7 @@ class _$ShortPassword<T> implements ShortPassword<T> {
         exceedingMaxValue,
     required TResult Function(InvalidDateValue<T> value) invalidDateValue,
     required TResult Function(InvalidDoubleValue<T> value) invalidDoubleValue,
+    required TResult Function(InvalidIntegerValue<T> value) invalidIntegerValue,
   }) {
     return passwordNotMatchRequirements(this);
   }
@@ -1707,6 +1747,7 @@ class _$ShortPassword<T> implements ShortPassword<T> {
     TResult? Function(validateExceedsMaxValue<T> value)? exceedingMaxValue,
     TResult? Function(InvalidDateValue<T> value)? invalidDateValue,
     TResult? Function(InvalidDoubleValue<T> value)? invalidDoubleValue,
+    TResult? Function(InvalidIntegerValue<T> value)? invalidIntegerValue,
   }) {
     return passwordNotMatchRequirements?.call(this);
   }
@@ -1735,6 +1776,7 @@ class _$ShortPassword<T> implements ShortPassword<T> {
     TResult Function(validateExceedsMaxValue<T> value)? exceedingMaxValue,
     TResult Function(InvalidDateValue<T> value)? invalidDateValue,
     TResult Function(InvalidDoubleValue<T> value)? invalidDoubleValue,
+    TResult Function(InvalidIntegerValue<T> value)? invalidIntegerValue,
     required TResult orElse(),
   }) {
     if (passwordNotMatchRequirements != null) {
@@ -1844,6 +1886,7 @@ class _$InvalidJWT<T> implements InvalidJWT<T> {
     required TResult Function(T failedValue) exceedingMaxValue,
     required TResult Function(T failedValue) invalidDateValue,
     required TResult Function(T failedValue) invalidDoubleValue,
+    required TResult Function(T failedValue) invalidIntegerValue,
   }) {
     return invalidJWT(failedValue);
   }
@@ -1871,6 +1914,7 @@ class _$InvalidJWT<T> implements InvalidJWT<T> {
     TResult? Function(T failedValue)? exceedingMaxValue,
     TResult? Function(T failedValue)? invalidDateValue,
     TResult? Function(T failedValue)? invalidDoubleValue,
+    TResult? Function(T failedValue)? invalidIntegerValue,
   }) {
     return invalidJWT?.call(failedValue);
   }
@@ -1898,6 +1942,7 @@ class _$InvalidJWT<T> implements InvalidJWT<T> {
     TResult Function(T failedValue)? exceedingMaxValue,
     TResult Function(T failedValue)? invalidDateValue,
     TResult Function(T failedValue)? invalidDoubleValue,
+    TResult Function(T failedValue)? invalidIntegerValue,
     required TResult orElse(),
   }) {
     if (invalidJWT != null) {
@@ -1934,6 +1979,7 @@ class _$InvalidJWT<T> implements InvalidJWT<T> {
         exceedingMaxValue,
     required TResult Function(InvalidDateValue<T> value) invalidDateValue,
     required TResult Function(InvalidDoubleValue<T> value) invalidDoubleValue,
+    required TResult Function(InvalidIntegerValue<T> value) invalidIntegerValue,
   }) {
     return invalidJWT(this);
   }
@@ -1962,6 +2008,7 @@ class _$InvalidJWT<T> implements InvalidJWT<T> {
     TResult? Function(validateExceedsMaxValue<T> value)? exceedingMaxValue,
     TResult? Function(InvalidDateValue<T> value)? invalidDateValue,
     TResult? Function(InvalidDoubleValue<T> value)? invalidDoubleValue,
+    TResult? Function(InvalidIntegerValue<T> value)? invalidIntegerValue,
   }) {
     return invalidJWT?.call(this);
   }
@@ -1990,6 +2037,7 @@ class _$InvalidJWT<T> implements InvalidJWT<T> {
     TResult Function(validateExceedsMaxValue<T> value)? exceedingMaxValue,
     TResult Function(InvalidDateValue<T> value)? invalidDateValue,
     TResult Function(InvalidDoubleValue<T> value)? invalidDoubleValue,
+    TResult Function(InvalidIntegerValue<T> value)? invalidIntegerValue,
     required TResult orElse(),
   }) {
     if (invalidJWT != null) {
@@ -2099,6 +2147,7 @@ class _$InvalidJWTPayload<T> implements InvalidJWTPayload<T> {
     required TResult Function(T failedValue) exceedingMaxValue,
     required TResult Function(T failedValue) invalidDateValue,
     required TResult Function(T failedValue) invalidDoubleValue,
+    required TResult Function(T failedValue) invalidIntegerValue,
   }) {
     return invalidJWTPayload(failedValue);
   }
@@ -2126,6 +2175,7 @@ class _$InvalidJWTPayload<T> implements InvalidJWTPayload<T> {
     TResult? Function(T failedValue)? exceedingMaxValue,
     TResult? Function(T failedValue)? invalidDateValue,
     TResult? Function(T failedValue)? invalidDoubleValue,
+    TResult? Function(T failedValue)? invalidIntegerValue,
   }) {
     return invalidJWTPayload?.call(failedValue);
   }
@@ -2153,6 +2203,7 @@ class _$InvalidJWTPayload<T> implements InvalidJWTPayload<T> {
     TResult Function(T failedValue)? exceedingMaxValue,
     TResult Function(T failedValue)? invalidDateValue,
     TResult Function(T failedValue)? invalidDoubleValue,
+    TResult Function(T failedValue)? invalidIntegerValue,
     required TResult orElse(),
   }) {
     if (invalidJWTPayload != null) {
@@ -2189,6 +2240,7 @@ class _$InvalidJWTPayload<T> implements InvalidJWTPayload<T> {
         exceedingMaxValue,
     required TResult Function(InvalidDateValue<T> value) invalidDateValue,
     required TResult Function(InvalidDoubleValue<T> value) invalidDoubleValue,
+    required TResult Function(InvalidIntegerValue<T> value) invalidIntegerValue,
   }) {
     return invalidJWTPayload(this);
   }
@@ -2217,6 +2269,7 @@ class _$InvalidJWTPayload<T> implements InvalidJWTPayload<T> {
     TResult? Function(validateExceedsMaxValue<T> value)? exceedingMaxValue,
     TResult? Function(InvalidDateValue<T> value)? invalidDateValue,
     TResult? Function(InvalidDoubleValue<T> value)? invalidDoubleValue,
+    TResult? Function(InvalidIntegerValue<T> value)? invalidIntegerValue,
   }) {
     return invalidJWTPayload?.call(this);
   }
@@ -2245,6 +2298,7 @@ class _$InvalidJWTPayload<T> implements InvalidJWTPayload<T> {
     TResult Function(validateExceedsMaxValue<T> value)? exceedingMaxValue,
     TResult Function(InvalidDateValue<T> value)? invalidDateValue,
     TResult Function(InvalidDoubleValue<T> value)? invalidDoubleValue,
+    TResult Function(InvalidIntegerValue<T> value)? invalidIntegerValue,
     required TResult orElse(),
   }) {
     if (invalidJWTPayload != null) {
@@ -2354,6 +2408,7 @@ class _$OneUpperCase<T> implements OneUpperCase<T> {
     required TResult Function(T failedValue) exceedingMaxValue,
     required TResult Function(T failedValue) invalidDateValue,
     required TResult Function(T failedValue) invalidDoubleValue,
+    required TResult Function(T failedValue) invalidIntegerValue,
   }) {
     return mustOneUpperCaseCharacter(failedValue);
   }
@@ -2381,6 +2436,7 @@ class _$OneUpperCase<T> implements OneUpperCase<T> {
     TResult? Function(T failedValue)? exceedingMaxValue,
     TResult? Function(T failedValue)? invalidDateValue,
     TResult? Function(T failedValue)? invalidDoubleValue,
+    TResult? Function(T failedValue)? invalidIntegerValue,
   }) {
     return mustOneUpperCaseCharacter?.call(failedValue);
   }
@@ -2408,6 +2464,7 @@ class _$OneUpperCase<T> implements OneUpperCase<T> {
     TResult Function(T failedValue)? exceedingMaxValue,
     TResult Function(T failedValue)? invalidDateValue,
     TResult Function(T failedValue)? invalidDoubleValue,
+    TResult Function(T failedValue)? invalidIntegerValue,
     required TResult orElse(),
   }) {
     if (mustOneUpperCaseCharacter != null) {
@@ -2444,6 +2501,7 @@ class _$OneUpperCase<T> implements OneUpperCase<T> {
         exceedingMaxValue,
     required TResult Function(InvalidDateValue<T> value) invalidDateValue,
     required TResult Function(InvalidDoubleValue<T> value) invalidDoubleValue,
+    required TResult Function(InvalidIntegerValue<T> value) invalidIntegerValue,
   }) {
     return mustOneUpperCaseCharacter(this);
   }
@@ -2472,6 +2530,7 @@ class _$OneUpperCase<T> implements OneUpperCase<T> {
     TResult? Function(validateExceedsMaxValue<T> value)? exceedingMaxValue,
     TResult? Function(InvalidDateValue<T> value)? invalidDateValue,
     TResult? Function(InvalidDoubleValue<T> value)? invalidDoubleValue,
+    TResult? Function(InvalidIntegerValue<T> value)? invalidIntegerValue,
   }) {
     return mustOneUpperCaseCharacter?.call(this);
   }
@@ -2500,6 +2559,7 @@ class _$OneUpperCase<T> implements OneUpperCase<T> {
     TResult Function(validateExceedsMaxValue<T> value)? exceedingMaxValue,
     TResult Function(InvalidDateValue<T> value)? invalidDateValue,
     TResult Function(InvalidDoubleValue<T> value)? invalidDoubleValue,
+    TResult Function(InvalidIntegerValue<T> value)? invalidIntegerValue,
     required TResult orElse(),
   }) {
     if (mustOneUpperCaseCharacter != null) {
@@ -2609,6 +2669,7 @@ class _$OneLowerCase<T> implements OneLowerCase<T> {
     required TResult Function(T failedValue) exceedingMaxValue,
     required TResult Function(T failedValue) invalidDateValue,
     required TResult Function(T failedValue) invalidDoubleValue,
+    required TResult Function(T failedValue) invalidIntegerValue,
   }) {
     return mustOneLowerCaseCharacter(failedValue);
   }
@@ -2636,6 +2697,7 @@ class _$OneLowerCase<T> implements OneLowerCase<T> {
     TResult? Function(T failedValue)? exceedingMaxValue,
     TResult? Function(T failedValue)? invalidDateValue,
     TResult? Function(T failedValue)? invalidDoubleValue,
+    TResult? Function(T failedValue)? invalidIntegerValue,
   }) {
     return mustOneLowerCaseCharacter?.call(failedValue);
   }
@@ -2663,6 +2725,7 @@ class _$OneLowerCase<T> implements OneLowerCase<T> {
     TResult Function(T failedValue)? exceedingMaxValue,
     TResult Function(T failedValue)? invalidDateValue,
     TResult Function(T failedValue)? invalidDoubleValue,
+    TResult Function(T failedValue)? invalidIntegerValue,
     required TResult orElse(),
   }) {
     if (mustOneLowerCaseCharacter != null) {
@@ -2699,6 +2762,7 @@ class _$OneLowerCase<T> implements OneLowerCase<T> {
         exceedingMaxValue,
     required TResult Function(InvalidDateValue<T> value) invalidDateValue,
     required TResult Function(InvalidDoubleValue<T> value) invalidDoubleValue,
+    required TResult Function(InvalidIntegerValue<T> value) invalidIntegerValue,
   }) {
     return mustOneLowerCaseCharacter(this);
   }
@@ -2727,6 +2791,7 @@ class _$OneLowerCase<T> implements OneLowerCase<T> {
     TResult? Function(validateExceedsMaxValue<T> value)? exceedingMaxValue,
     TResult? Function(InvalidDateValue<T> value)? invalidDateValue,
     TResult? Function(InvalidDoubleValue<T> value)? invalidDoubleValue,
+    TResult? Function(InvalidIntegerValue<T> value)? invalidIntegerValue,
   }) {
     return mustOneLowerCaseCharacter?.call(this);
   }
@@ -2755,6 +2820,7 @@ class _$OneLowerCase<T> implements OneLowerCase<T> {
     TResult Function(validateExceedsMaxValue<T> value)? exceedingMaxValue,
     TResult Function(InvalidDateValue<T> value)? invalidDateValue,
     TResult Function(InvalidDoubleValue<T> value)? invalidDoubleValue,
+    TResult Function(InvalidIntegerValue<T> value)? invalidIntegerValue,
     required TResult orElse(),
   }) {
     if (mustOneLowerCaseCharacter != null) {
@@ -2864,6 +2930,7 @@ class _$OneNumeric<T> implements OneNumeric<T> {
     required TResult Function(T failedValue) exceedingMaxValue,
     required TResult Function(T failedValue) invalidDateValue,
     required TResult Function(T failedValue) invalidDoubleValue,
+    required TResult Function(T failedValue) invalidIntegerValue,
   }) {
     return mustOneNumericCharacter(failedValue);
   }
@@ -2891,6 +2958,7 @@ class _$OneNumeric<T> implements OneNumeric<T> {
     TResult? Function(T failedValue)? exceedingMaxValue,
     TResult? Function(T failedValue)? invalidDateValue,
     TResult? Function(T failedValue)? invalidDoubleValue,
+    TResult? Function(T failedValue)? invalidIntegerValue,
   }) {
     return mustOneNumericCharacter?.call(failedValue);
   }
@@ -2918,6 +2986,7 @@ class _$OneNumeric<T> implements OneNumeric<T> {
     TResult Function(T failedValue)? exceedingMaxValue,
     TResult Function(T failedValue)? invalidDateValue,
     TResult Function(T failedValue)? invalidDoubleValue,
+    TResult Function(T failedValue)? invalidIntegerValue,
     required TResult orElse(),
   }) {
     if (mustOneNumericCharacter != null) {
@@ -2954,6 +3023,7 @@ class _$OneNumeric<T> implements OneNumeric<T> {
         exceedingMaxValue,
     required TResult Function(InvalidDateValue<T> value) invalidDateValue,
     required TResult Function(InvalidDoubleValue<T> value) invalidDoubleValue,
+    required TResult Function(InvalidIntegerValue<T> value) invalidIntegerValue,
   }) {
     return mustOneNumericCharacter(this);
   }
@@ -2982,6 +3052,7 @@ class _$OneNumeric<T> implements OneNumeric<T> {
     TResult? Function(validateExceedsMaxValue<T> value)? exceedingMaxValue,
     TResult? Function(InvalidDateValue<T> value)? invalidDateValue,
     TResult? Function(InvalidDoubleValue<T> value)? invalidDoubleValue,
+    TResult? Function(InvalidIntegerValue<T> value)? invalidIntegerValue,
   }) {
     return mustOneNumericCharacter?.call(this);
   }
@@ -3010,6 +3081,7 @@ class _$OneNumeric<T> implements OneNumeric<T> {
     TResult Function(validateExceedsMaxValue<T> value)? exceedingMaxValue,
     TResult Function(InvalidDateValue<T> value)? invalidDateValue,
     TResult Function(InvalidDoubleValue<T> value)? invalidDoubleValue,
+    TResult Function(InvalidIntegerValue<T> value)? invalidIntegerValue,
     required TResult orElse(),
   }) {
     if (mustOneNumericCharacter != null) {
@@ -3118,6 +3190,7 @@ class _$OneSpecial<T> implements OneSpecial<T> {
     required TResult Function(T failedValue) exceedingMaxValue,
     required TResult Function(T failedValue) invalidDateValue,
     required TResult Function(T failedValue) invalidDoubleValue,
+    required TResult Function(T failedValue) invalidIntegerValue,
   }) {
     return mustOneSpecialCharacter(failedValue);
   }
@@ -3145,6 +3218,7 @@ class _$OneSpecial<T> implements OneSpecial<T> {
     TResult? Function(T failedValue)? exceedingMaxValue,
     TResult? Function(T failedValue)? invalidDateValue,
     TResult? Function(T failedValue)? invalidDoubleValue,
+    TResult? Function(T failedValue)? invalidIntegerValue,
   }) {
     return mustOneSpecialCharacter?.call(failedValue);
   }
@@ -3172,6 +3246,7 @@ class _$OneSpecial<T> implements OneSpecial<T> {
     TResult Function(T failedValue)? exceedingMaxValue,
     TResult Function(T failedValue)? invalidDateValue,
     TResult Function(T failedValue)? invalidDoubleValue,
+    TResult Function(T failedValue)? invalidIntegerValue,
     required TResult orElse(),
   }) {
     if (mustOneSpecialCharacter != null) {
@@ -3208,6 +3283,7 @@ class _$OneSpecial<T> implements OneSpecial<T> {
         exceedingMaxValue,
     required TResult Function(InvalidDateValue<T> value) invalidDateValue,
     required TResult Function(InvalidDoubleValue<T> value) invalidDoubleValue,
+    required TResult Function(InvalidIntegerValue<T> value) invalidIntegerValue,
   }) {
     return mustOneSpecialCharacter(this);
   }
@@ -3236,6 +3312,7 @@ class _$OneSpecial<T> implements OneSpecial<T> {
     TResult? Function(validateExceedsMaxValue<T> value)? exceedingMaxValue,
     TResult? Function(InvalidDateValue<T> value)? invalidDateValue,
     TResult? Function(InvalidDoubleValue<T> value)? invalidDoubleValue,
+    TResult? Function(InvalidIntegerValue<T> value)? invalidIntegerValue,
   }) {
     return mustOneSpecialCharacter?.call(this);
   }
@@ -3264,6 +3341,7 @@ class _$OneSpecial<T> implements OneSpecial<T> {
     TResult Function(validateExceedsMaxValue<T> value)? exceedingMaxValue,
     TResult Function(InvalidDateValue<T> value)? invalidDateValue,
     TResult Function(InvalidDoubleValue<T> value)? invalidDoubleValue,
+    TResult Function(InvalidIntegerValue<T> value)? invalidIntegerValue,
     required TResult orElse(),
   }) {
     if (mustOneSpecialCharacter != null) {
@@ -3373,6 +3451,7 @@ class _$NotContainUserName<T> implements NotContainUserName<T> {
     required TResult Function(T failedValue) exceedingMaxValue,
     required TResult Function(T failedValue) invalidDateValue,
     required TResult Function(T failedValue) invalidDoubleValue,
+    required TResult Function(T failedValue) invalidIntegerValue,
   }) {
     return mustNotContainUserName(failedValue);
   }
@@ -3400,6 +3479,7 @@ class _$NotContainUserName<T> implements NotContainUserName<T> {
     TResult? Function(T failedValue)? exceedingMaxValue,
     TResult? Function(T failedValue)? invalidDateValue,
     TResult? Function(T failedValue)? invalidDoubleValue,
+    TResult? Function(T failedValue)? invalidIntegerValue,
   }) {
     return mustNotContainUserName?.call(failedValue);
   }
@@ -3427,6 +3507,7 @@ class _$NotContainUserName<T> implements NotContainUserName<T> {
     TResult Function(T failedValue)? exceedingMaxValue,
     TResult Function(T failedValue)? invalidDateValue,
     TResult Function(T failedValue)? invalidDoubleValue,
+    TResult Function(T failedValue)? invalidIntegerValue,
     required TResult orElse(),
   }) {
     if (mustNotContainUserName != null) {
@@ -3463,6 +3544,7 @@ class _$NotContainUserName<T> implements NotContainUserName<T> {
         exceedingMaxValue,
     required TResult Function(InvalidDateValue<T> value) invalidDateValue,
     required TResult Function(InvalidDoubleValue<T> value) invalidDoubleValue,
+    required TResult Function(InvalidIntegerValue<T> value) invalidIntegerValue,
   }) {
     return mustNotContainUserName(this);
   }
@@ -3491,6 +3573,7 @@ class _$NotContainUserName<T> implements NotContainUserName<T> {
     TResult? Function(validateExceedsMaxValue<T> value)? exceedingMaxValue,
     TResult? Function(InvalidDateValue<T> value)? invalidDateValue,
     TResult? Function(InvalidDoubleValue<T> value)? invalidDoubleValue,
+    TResult? Function(InvalidIntegerValue<T> value)? invalidIntegerValue,
   }) {
     return mustNotContainUserName?.call(this);
   }
@@ -3519,6 +3602,7 @@ class _$NotContainUserName<T> implements NotContainUserName<T> {
     TResult Function(validateExceedsMaxValue<T> value)? exceedingMaxValue,
     TResult Function(InvalidDateValue<T> value)? invalidDateValue,
     TResult Function(InvalidDoubleValue<T> value)? invalidDoubleValue,
+    TResult Function(InvalidIntegerValue<T> value)? invalidIntegerValue,
     required TResult orElse(),
   }) {
     if (mustNotContainUserName != null) {
@@ -3629,6 +3713,7 @@ class _$NotMatchOldPassword<T> implements NotMatchOldPassword<T> {
     required TResult Function(T failedValue) exceedingMaxValue,
     required TResult Function(T failedValue) invalidDateValue,
     required TResult Function(T failedValue) invalidDoubleValue,
+    required TResult Function(T failedValue) invalidIntegerValue,
   }) {
     return mustNotMatchOldPassword(failedValue);
   }
@@ -3656,6 +3741,7 @@ class _$NotMatchOldPassword<T> implements NotMatchOldPassword<T> {
     TResult? Function(T failedValue)? exceedingMaxValue,
     TResult? Function(T failedValue)? invalidDateValue,
     TResult? Function(T failedValue)? invalidDoubleValue,
+    TResult? Function(T failedValue)? invalidIntegerValue,
   }) {
     return mustNotMatchOldPassword?.call(failedValue);
   }
@@ -3683,6 +3769,7 @@ class _$NotMatchOldPassword<T> implements NotMatchOldPassword<T> {
     TResult Function(T failedValue)? exceedingMaxValue,
     TResult Function(T failedValue)? invalidDateValue,
     TResult Function(T failedValue)? invalidDoubleValue,
+    TResult Function(T failedValue)? invalidIntegerValue,
     required TResult orElse(),
   }) {
     if (mustNotMatchOldPassword != null) {
@@ -3719,6 +3806,7 @@ class _$NotMatchOldPassword<T> implements NotMatchOldPassword<T> {
         exceedingMaxValue,
     required TResult Function(InvalidDateValue<T> value) invalidDateValue,
     required TResult Function(InvalidDoubleValue<T> value) invalidDoubleValue,
+    required TResult Function(InvalidIntegerValue<T> value) invalidIntegerValue,
   }) {
     return mustNotMatchOldPassword(this);
   }
@@ -3747,6 +3835,7 @@ class _$NotMatchOldPassword<T> implements NotMatchOldPassword<T> {
     TResult? Function(validateExceedsMaxValue<T> value)? exceedingMaxValue,
     TResult? Function(InvalidDateValue<T> value)? invalidDateValue,
     TResult? Function(InvalidDoubleValue<T> value)? invalidDoubleValue,
+    TResult? Function(InvalidIntegerValue<T> value)? invalidIntegerValue,
   }) {
     return mustNotMatchOldPassword?.call(this);
   }
@@ -3775,6 +3864,7 @@ class _$NotMatchOldPassword<T> implements NotMatchOldPassword<T> {
     TResult Function(validateExceedsMaxValue<T> value)? exceedingMaxValue,
     TResult Function(InvalidDateValue<T> value)? invalidDateValue,
     TResult Function(InvalidDoubleValue<T> value)? invalidDoubleValue,
+    TResult Function(InvalidIntegerValue<T> value)? invalidIntegerValue,
     required TResult orElse(),
   }) {
     if (mustNotMatchOldPassword != null) {
@@ -3885,6 +3975,7 @@ class _$MatchNewPassword<T> implements MatchNewPassword<T> {
     required TResult Function(T failedValue) exceedingMaxValue,
     required TResult Function(T failedValue) invalidDateValue,
     required TResult Function(T failedValue) invalidDoubleValue,
+    required TResult Function(T failedValue) invalidIntegerValue,
   }) {
     return mustMatchNewPassword(failedValue);
   }
@@ -3912,6 +4003,7 @@ class _$MatchNewPassword<T> implements MatchNewPassword<T> {
     TResult? Function(T failedValue)? exceedingMaxValue,
     TResult? Function(T failedValue)? invalidDateValue,
     TResult? Function(T failedValue)? invalidDoubleValue,
+    TResult? Function(T failedValue)? invalidIntegerValue,
   }) {
     return mustMatchNewPassword?.call(failedValue);
   }
@@ -3939,6 +4031,7 @@ class _$MatchNewPassword<T> implements MatchNewPassword<T> {
     TResult Function(T failedValue)? exceedingMaxValue,
     TResult Function(T failedValue)? invalidDateValue,
     TResult Function(T failedValue)? invalidDoubleValue,
+    TResult Function(T failedValue)? invalidIntegerValue,
     required TResult orElse(),
   }) {
     if (mustMatchNewPassword != null) {
@@ -3975,6 +4068,7 @@ class _$MatchNewPassword<T> implements MatchNewPassword<T> {
         exceedingMaxValue,
     required TResult Function(InvalidDateValue<T> value) invalidDateValue,
     required TResult Function(InvalidDoubleValue<T> value) invalidDoubleValue,
+    required TResult Function(InvalidIntegerValue<T> value) invalidIntegerValue,
   }) {
     return mustMatchNewPassword(this);
   }
@@ -4003,6 +4097,7 @@ class _$MatchNewPassword<T> implements MatchNewPassword<T> {
     TResult? Function(validateExceedsMaxValue<T> value)? exceedingMaxValue,
     TResult? Function(InvalidDateValue<T> value)? invalidDateValue,
     TResult? Function(InvalidDoubleValue<T> value)? invalidDoubleValue,
+    TResult? Function(InvalidIntegerValue<T> value)? invalidIntegerValue,
   }) {
     return mustMatchNewPassword?.call(this);
   }
@@ -4031,6 +4126,7 @@ class _$MatchNewPassword<T> implements MatchNewPassword<T> {
     TResult Function(validateExceedsMaxValue<T> value)? exceedingMaxValue,
     TResult Function(InvalidDateValue<T> value)? invalidDateValue,
     TResult Function(InvalidDoubleValue<T> value)? invalidDoubleValue,
+    TResult Function(InvalidIntegerValue<T> value)? invalidIntegerValue,
     required TResult orElse(),
   }) {
     if (mustMatchNewPassword != null) {
@@ -4140,6 +4236,7 @@ class _$isEmpty<T> implements isEmpty<T> {
     required TResult Function(T failedValue) exceedingMaxValue,
     required TResult Function(T failedValue) invalidDateValue,
     required TResult Function(T failedValue) invalidDoubleValue,
+    required TResult Function(T failedValue) invalidIntegerValue,
   }) {
     return isEmpty(failedValue);
   }
@@ -4167,6 +4264,7 @@ class _$isEmpty<T> implements isEmpty<T> {
     TResult? Function(T failedValue)? exceedingMaxValue,
     TResult? Function(T failedValue)? invalidDateValue,
     TResult? Function(T failedValue)? invalidDoubleValue,
+    TResult? Function(T failedValue)? invalidIntegerValue,
   }) {
     return isEmpty?.call(failedValue);
   }
@@ -4194,6 +4292,7 @@ class _$isEmpty<T> implements isEmpty<T> {
     TResult Function(T failedValue)? exceedingMaxValue,
     TResult Function(T failedValue)? invalidDateValue,
     TResult Function(T failedValue)? invalidDoubleValue,
+    TResult Function(T failedValue)? invalidIntegerValue,
     required TResult orElse(),
   }) {
     if (isEmpty != null) {
@@ -4230,6 +4329,7 @@ class _$isEmpty<T> implements isEmpty<T> {
         exceedingMaxValue,
     required TResult Function(InvalidDateValue<T> value) invalidDateValue,
     required TResult Function(InvalidDoubleValue<T> value) invalidDoubleValue,
+    required TResult Function(InvalidIntegerValue<T> value) invalidIntegerValue,
   }) {
     return isEmpty(this);
   }
@@ -4258,6 +4358,7 @@ class _$isEmpty<T> implements isEmpty<T> {
     TResult? Function(validateExceedsMaxValue<T> value)? exceedingMaxValue,
     TResult? Function(InvalidDateValue<T> value)? invalidDateValue,
     TResult? Function(InvalidDoubleValue<T> value)? invalidDoubleValue,
+    TResult? Function(InvalidIntegerValue<T> value)? invalidIntegerValue,
   }) {
     return isEmpty?.call(this);
   }
@@ -4286,6 +4387,7 @@ class _$isEmpty<T> implements isEmpty<T> {
     TResult Function(validateExceedsMaxValue<T> value)? exceedingMaxValue,
     TResult Function(InvalidDateValue<T> value)? invalidDateValue,
     TResult Function(InvalidDoubleValue<T> value)? invalidDoubleValue,
+    TResult Function(InvalidIntegerValue<T> value)? invalidIntegerValue,
     required TResult orElse(),
   }) {
     if (isEmpty != null) {
@@ -4396,6 +4498,7 @@ class _$numberMustBiggerThanZero<T> implements numberMustBiggerThanZero<T> {
     required TResult Function(T failedValue) exceedingMaxValue,
     required TResult Function(T failedValue) invalidDateValue,
     required TResult Function(T failedValue) invalidDoubleValue,
+    required TResult Function(T failedValue) invalidIntegerValue,
   }) {
     return numberMustBiggerThanZero(failedValue);
   }
@@ -4423,6 +4526,7 @@ class _$numberMustBiggerThanZero<T> implements numberMustBiggerThanZero<T> {
     TResult? Function(T failedValue)? exceedingMaxValue,
     TResult? Function(T failedValue)? invalidDateValue,
     TResult? Function(T failedValue)? invalidDoubleValue,
+    TResult? Function(T failedValue)? invalidIntegerValue,
   }) {
     return numberMustBiggerThanZero?.call(failedValue);
   }
@@ -4450,6 +4554,7 @@ class _$numberMustBiggerThanZero<T> implements numberMustBiggerThanZero<T> {
     TResult Function(T failedValue)? exceedingMaxValue,
     TResult Function(T failedValue)? invalidDateValue,
     TResult Function(T failedValue)? invalidDoubleValue,
+    TResult Function(T failedValue)? invalidIntegerValue,
     required TResult orElse(),
   }) {
     if (numberMustBiggerThanZero != null) {
@@ -4486,6 +4591,7 @@ class _$numberMustBiggerThanZero<T> implements numberMustBiggerThanZero<T> {
         exceedingMaxValue,
     required TResult Function(InvalidDateValue<T> value) invalidDateValue,
     required TResult Function(InvalidDoubleValue<T> value) invalidDoubleValue,
+    required TResult Function(InvalidIntegerValue<T> value) invalidIntegerValue,
   }) {
     return numberMustBiggerThanZero(this);
   }
@@ -4514,6 +4620,7 @@ class _$numberMustBiggerThanZero<T> implements numberMustBiggerThanZero<T> {
     TResult? Function(validateExceedsMaxValue<T> value)? exceedingMaxValue,
     TResult? Function(InvalidDateValue<T> value)? invalidDateValue,
     TResult? Function(InvalidDoubleValue<T> value)? invalidDoubleValue,
+    TResult? Function(InvalidIntegerValue<T> value)? invalidIntegerValue,
   }) {
     return numberMustBiggerThanZero?.call(this);
   }
@@ -4542,6 +4649,7 @@ class _$numberMustBiggerThanZero<T> implements numberMustBiggerThanZero<T> {
     TResult Function(validateExceedsMaxValue<T> value)? exceedingMaxValue,
     TResult Function(InvalidDateValue<T> value)? invalidDateValue,
     TResult Function(InvalidDoubleValue<T> value)? invalidDoubleValue,
+    TResult Function(InvalidIntegerValue<T> value)? invalidIntegerValue,
     required TResult orElse(),
   }) {
     if (numberMustBiggerThanZero != null) {
@@ -4652,6 +4760,7 @@ class _$validateExceedsMaxValue<T> implements validateExceedsMaxValue<T> {
     required TResult Function(T failedValue) exceedingMaxValue,
     required TResult Function(T failedValue) invalidDateValue,
     required TResult Function(T failedValue) invalidDoubleValue,
+    required TResult Function(T failedValue) invalidIntegerValue,
   }) {
     return exceedingMaxValue(failedValue);
   }
@@ -4679,6 +4788,7 @@ class _$validateExceedsMaxValue<T> implements validateExceedsMaxValue<T> {
     TResult? Function(T failedValue)? exceedingMaxValue,
     TResult? Function(T failedValue)? invalidDateValue,
     TResult? Function(T failedValue)? invalidDoubleValue,
+    TResult? Function(T failedValue)? invalidIntegerValue,
   }) {
     return exceedingMaxValue?.call(failedValue);
   }
@@ -4706,6 +4816,7 @@ class _$validateExceedsMaxValue<T> implements validateExceedsMaxValue<T> {
     TResult Function(T failedValue)? exceedingMaxValue,
     TResult Function(T failedValue)? invalidDateValue,
     TResult Function(T failedValue)? invalidDoubleValue,
+    TResult Function(T failedValue)? invalidIntegerValue,
     required TResult orElse(),
   }) {
     if (exceedingMaxValue != null) {
@@ -4742,6 +4853,7 @@ class _$validateExceedsMaxValue<T> implements validateExceedsMaxValue<T> {
         exceedingMaxValue,
     required TResult Function(InvalidDateValue<T> value) invalidDateValue,
     required TResult Function(InvalidDoubleValue<T> value) invalidDoubleValue,
+    required TResult Function(InvalidIntegerValue<T> value) invalidIntegerValue,
   }) {
     return exceedingMaxValue(this);
   }
@@ -4770,6 +4882,7 @@ class _$validateExceedsMaxValue<T> implements validateExceedsMaxValue<T> {
     TResult? Function(validateExceedsMaxValue<T> value)? exceedingMaxValue,
     TResult? Function(InvalidDateValue<T> value)? invalidDateValue,
     TResult? Function(InvalidDoubleValue<T> value)? invalidDoubleValue,
+    TResult? Function(InvalidIntegerValue<T> value)? invalidIntegerValue,
   }) {
     return exceedingMaxValue?.call(this);
   }
@@ -4798,6 +4911,7 @@ class _$validateExceedsMaxValue<T> implements validateExceedsMaxValue<T> {
     TResult Function(validateExceedsMaxValue<T> value)? exceedingMaxValue,
     TResult Function(InvalidDateValue<T> value)? invalidDateValue,
     TResult Function(InvalidDoubleValue<T> value)? invalidDoubleValue,
+    TResult Function(InvalidIntegerValue<T> value)? invalidIntegerValue,
     required TResult orElse(),
   }) {
     if (exceedingMaxValue != null) {
@@ -4908,6 +5022,7 @@ class _$InvalidDateValue<T> implements InvalidDateValue<T> {
     required TResult Function(T failedValue) exceedingMaxValue,
     required TResult Function(T failedValue) invalidDateValue,
     required TResult Function(T failedValue) invalidDoubleValue,
+    required TResult Function(T failedValue) invalidIntegerValue,
   }) {
     return invalidDateValue(failedValue);
   }
@@ -4935,6 +5050,7 @@ class _$InvalidDateValue<T> implements InvalidDateValue<T> {
     TResult? Function(T failedValue)? exceedingMaxValue,
     TResult? Function(T failedValue)? invalidDateValue,
     TResult? Function(T failedValue)? invalidDoubleValue,
+    TResult? Function(T failedValue)? invalidIntegerValue,
   }) {
     return invalidDateValue?.call(failedValue);
   }
@@ -4962,6 +5078,7 @@ class _$InvalidDateValue<T> implements InvalidDateValue<T> {
     TResult Function(T failedValue)? exceedingMaxValue,
     TResult Function(T failedValue)? invalidDateValue,
     TResult Function(T failedValue)? invalidDoubleValue,
+    TResult Function(T failedValue)? invalidIntegerValue,
     required TResult orElse(),
   }) {
     if (invalidDateValue != null) {
@@ -4998,6 +5115,7 @@ class _$InvalidDateValue<T> implements InvalidDateValue<T> {
         exceedingMaxValue,
     required TResult Function(InvalidDateValue<T> value) invalidDateValue,
     required TResult Function(InvalidDoubleValue<T> value) invalidDoubleValue,
+    required TResult Function(InvalidIntegerValue<T> value) invalidIntegerValue,
   }) {
     return invalidDateValue(this);
   }
@@ -5026,6 +5144,7 @@ class _$InvalidDateValue<T> implements InvalidDateValue<T> {
     TResult? Function(validateExceedsMaxValue<T> value)? exceedingMaxValue,
     TResult? Function(InvalidDateValue<T> value)? invalidDateValue,
     TResult? Function(InvalidDoubleValue<T> value)? invalidDoubleValue,
+    TResult? Function(InvalidIntegerValue<T> value)? invalidIntegerValue,
   }) {
     return invalidDateValue?.call(this);
   }
@@ -5054,6 +5173,7 @@ class _$InvalidDateValue<T> implements InvalidDateValue<T> {
     TResult Function(validateExceedsMaxValue<T> value)? exceedingMaxValue,
     TResult Function(InvalidDateValue<T> value)? invalidDateValue,
     TResult Function(InvalidDoubleValue<T> value)? invalidDoubleValue,
+    TResult Function(InvalidIntegerValue<T> value)? invalidIntegerValue,
     required TResult orElse(),
   }) {
     if (invalidDateValue != null) {
@@ -5164,6 +5284,7 @@ class _$InvalidDoubleValue<T> implements InvalidDoubleValue<T> {
     required TResult Function(T failedValue) exceedingMaxValue,
     required TResult Function(T failedValue) invalidDateValue,
     required TResult Function(T failedValue) invalidDoubleValue,
+    required TResult Function(T failedValue) invalidIntegerValue,
   }) {
     return invalidDoubleValue(failedValue);
   }
@@ -5191,6 +5312,7 @@ class _$InvalidDoubleValue<T> implements InvalidDoubleValue<T> {
     TResult? Function(T failedValue)? exceedingMaxValue,
     TResult? Function(T failedValue)? invalidDateValue,
     TResult? Function(T failedValue)? invalidDoubleValue,
+    TResult? Function(T failedValue)? invalidIntegerValue,
   }) {
     return invalidDoubleValue?.call(failedValue);
   }
@@ -5218,6 +5340,7 @@ class _$InvalidDoubleValue<T> implements InvalidDoubleValue<T> {
     TResult Function(T failedValue)? exceedingMaxValue,
     TResult Function(T failedValue)? invalidDateValue,
     TResult Function(T failedValue)? invalidDoubleValue,
+    TResult Function(T failedValue)? invalidIntegerValue,
     required TResult orElse(),
   }) {
     if (invalidDoubleValue != null) {
@@ -5254,6 +5377,7 @@ class _$InvalidDoubleValue<T> implements InvalidDoubleValue<T> {
         exceedingMaxValue,
     required TResult Function(InvalidDateValue<T> value) invalidDateValue,
     required TResult Function(InvalidDoubleValue<T> value) invalidDoubleValue,
+    required TResult Function(InvalidIntegerValue<T> value) invalidIntegerValue,
   }) {
     return invalidDoubleValue(this);
   }
@@ -5282,6 +5406,7 @@ class _$InvalidDoubleValue<T> implements InvalidDoubleValue<T> {
     TResult? Function(validateExceedsMaxValue<T> value)? exceedingMaxValue,
     TResult? Function(InvalidDateValue<T> value)? invalidDateValue,
     TResult? Function(InvalidDoubleValue<T> value)? invalidDoubleValue,
+    TResult? Function(InvalidIntegerValue<T> value)? invalidIntegerValue,
   }) {
     return invalidDoubleValue?.call(this);
   }
@@ -5310,6 +5435,7 @@ class _$InvalidDoubleValue<T> implements InvalidDoubleValue<T> {
     TResult Function(validateExceedsMaxValue<T> value)? exceedingMaxValue,
     TResult Function(InvalidDateValue<T> value)? invalidDateValue,
     TResult Function(InvalidDoubleValue<T> value)? invalidDoubleValue,
+    TResult Function(InvalidIntegerValue<T> value)? invalidIntegerValue,
     required TResult orElse(),
   }) {
     if (invalidDoubleValue != null) {
@@ -5328,5 +5454,267 @@ abstract class InvalidDoubleValue<T> implements ValueFailure<T> {
   @override
   @JsonKey(ignore: true)
   _$$InvalidDoubleValueCopyWith<T, _$InvalidDoubleValue<T>> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$InvalidIntegerValueCopyWith<T, $Res>
+    implements $ValueFailureCopyWith<T, $Res> {
+  factory _$$InvalidIntegerValueCopyWith(_$InvalidIntegerValue<T> value,
+          $Res Function(_$InvalidIntegerValue<T>) then) =
+      __$$InvalidIntegerValueCopyWithImpl<T, $Res>;
+  @override
+  @useResult
+  $Res call({T failedValue});
+}
+
+/// @nodoc
+class __$$InvalidIntegerValueCopyWithImpl<T, $Res>
+    extends _$ValueFailureCopyWithImpl<T, $Res, _$InvalidIntegerValue<T>>
+    implements _$$InvalidIntegerValueCopyWith<T, $Res> {
+  __$$InvalidIntegerValueCopyWithImpl(_$InvalidIntegerValue<T> _value,
+      $Res Function(_$InvalidIntegerValue<T>) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? failedValue = freezed,
+  }) {
+    return _then(_$InvalidIntegerValue<T>(
+      failedValue: freezed == failedValue
+          ? _value.failedValue
+          : failedValue // ignore: cast_nullable_to_non_nullable
+              as T,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$InvalidIntegerValue<T> implements InvalidIntegerValue<T> {
+  const _$InvalidIntegerValue({required this.failedValue});
+
+  @override
+  final T failedValue;
+
+  @override
+  String toString() {
+    return 'ValueFailure<$T>.invalidIntegerValue(failedValue: $failedValue)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$InvalidIntegerValue<T> &&
+            const DeepCollectionEquality()
+                .equals(other.failedValue, failedValue));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(failedValue));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$InvalidIntegerValueCopyWith<T, _$InvalidIntegerValue<T>> get copyWith =>
+      __$$InvalidIntegerValueCopyWithImpl<T, _$InvalidIntegerValue<T>>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(T failedValue, int max) exceedingLength,
+    required TResult Function(T failedValue, int min) subceedLength,
+    required TResult Function(T failedValue) empty,
+    required TResult Function(T failedValue) multiline,
+    required TResult Function(T failedValue) invalidEmail,
+    required TResult Function(T failedValue) passwordNotMatchRequirements,
+    required TResult Function(T failedValue) invalidJWT,
+    required TResult Function(T failedValue) invalidJWTPayload,
+    required TResult Function(T failedValue) mustOneUpperCaseCharacter,
+    required TResult Function(T failedValue) mustOneLowerCaseCharacter,
+    required TResult Function(T failedValue) mustOneNumericCharacter,
+    required TResult Function(T failedValue) mustOneSpecialCharacter,
+    required TResult Function(T failedValue) mustNotContainUserName,
+    required TResult Function(T failedValue) mustNotMatchOldPassword,
+    required TResult Function(T failedValue) mustMatchNewPassword,
+    required TResult Function(T failedValue) isEmpty,
+    required TResult Function(T failedValue) numberMustBiggerThanZero,
+    required TResult Function(T failedValue) exceedingMaxValue,
+    required TResult Function(T failedValue) invalidDateValue,
+    required TResult Function(T failedValue) invalidDoubleValue,
+    required TResult Function(T failedValue) invalidIntegerValue,
+  }) {
+    return invalidIntegerValue(failedValue);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(T failedValue, int max)? exceedingLength,
+    TResult? Function(T failedValue, int min)? subceedLength,
+    TResult? Function(T failedValue)? empty,
+    TResult? Function(T failedValue)? multiline,
+    TResult? Function(T failedValue)? invalidEmail,
+    TResult? Function(T failedValue)? passwordNotMatchRequirements,
+    TResult? Function(T failedValue)? invalidJWT,
+    TResult? Function(T failedValue)? invalidJWTPayload,
+    TResult? Function(T failedValue)? mustOneUpperCaseCharacter,
+    TResult? Function(T failedValue)? mustOneLowerCaseCharacter,
+    TResult? Function(T failedValue)? mustOneNumericCharacter,
+    TResult? Function(T failedValue)? mustOneSpecialCharacter,
+    TResult? Function(T failedValue)? mustNotContainUserName,
+    TResult? Function(T failedValue)? mustNotMatchOldPassword,
+    TResult? Function(T failedValue)? mustMatchNewPassword,
+    TResult? Function(T failedValue)? isEmpty,
+    TResult? Function(T failedValue)? numberMustBiggerThanZero,
+    TResult? Function(T failedValue)? exceedingMaxValue,
+    TResult? Function(T failedValue)? invalidDateValue,
+    TResult? Function(T failedValue)? invalidDoubleValue,
+    TResult? Function(T failedValue)? invalidIntegerValue,
+  }) {
+    return invalidIntegerValue?.call(failedValue);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(T failedValue, int max)? exceedingLength,
+    TResult Function(T failedValue, int min)? subceedLength,
+    TResult Function(T failedValue)? empty,
+    TResult Function(T failedValue)? multiline,
+    TResult Function(T failedValue)? invalidEmail,
+    TResult Function(T failedValue)? passwordNotMatchRequirements,
+    TResult Function(T failedValue)? invalidJWT,
+    TResult Function(T failedValue)? invalidJWTPayload,
+    TResult Function(T failedValue)? mustOneUpperCaseCharacter,
+    TResult Function(T failedValue)? mustOneLowerCaseCharacter,
+    TResult Function(T failedValue)? mustOneNumericCharacter,
+    TResult Function(T failedValue)? mustOneSpecialCharacter,
+    TResult Function(T failedValue)? mustNotContainUserName,
+    TResult Function(T failedValue)? mustNotMatchOldPassword,
+    TResult Function(T failedValue)? mustMatchNewPassword,
+    TResult Function(T failedValue)? isEmpty,
+    TResult Function(T failedValue)? numberMustBiggerThanZero,
+    TResult Function(T failedValue)? exceedingMaxValue,
+    TResult Function(T failedValue)? invalidDateValue,
+    TResult Function(T failedValue)? invalidDoubleValue,
+    TResult Function(T failedValue)? invalidIntegerValue,
+    required TResult orElse(),
+  }) {
+    if (invalidIntegerValue != null) {
+      return invalidIntegerValue(failedValue);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(ExceedingLength<T> value) exceedingLength,
+    required TResult Function(SubceedLength<T> value) subceedLength,
+    required TResult Function(Empty<T> value) empty,
+    required TResult Function(Multiline<T> value) multiline,
+    required TResult Function(InvalidEmail<T> value) invalidEmail,
+    required TResult Function(ShortPassword<T> value)
+        passwordNotMatchRequirements,
+    required TResult Function(InvalidJWT<T> value) invalidJWT,
+    required TResult Function(InvalidJWTPayload<T> value) invalidJWTPayload,
+    required TResult Function(OneUpperCase<T> value) mustOneUpperCaseCharacter,
+    required TResult Function(OneLowerCase<T> value) mustOneLowerCaseCharacter,
+    required TResult Function(OneNumeric<T> value) mustOneNumericCharacter,
+    required TResult Function(OneSpecial<T> value) mustOneSpecialCharacter,
+    required TResult Function(NotContainUserName<T> value)
+        mustNotContainUserName,
+    required TResult Function(NotMatchOldPassword<T> value)
+        mustNotMatchOldPassword,
+    required TResult Function(MatchNewPassword<T> value) mustMatchNewPassword,
+    required TResult Function(isEmpty<T> value) isEmpty,
+    required TResult Function(numberMustBiggerThanZero<T> value)
+        numberMustBiggerThanZero,
+    required TResult Function(validateExceedsMaxValue<T> value)
+        exceedingMaxValue,
+    required TResult Function(InvalidDateValue<T> value) invalidDateValue,
+    required TResult Function(InvalidDoubleValue<T> value) invalidDoubleValue,
+    required TResult Function(InvalidIntegerValue<T> value) invalidIntegerValue,
+  }) {
+    return invalidIntegerValue(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(ExceedingLength<T> value)? exceedingLength,
+    TResult? Function(SubceedLength<T> value)? subceedLength,
+    TResult? Function(Empty<T> value)? empty,
+    TResult? Function(Multiline<T> value)? multiline,
+    TResult? Function(InvalidEmail<T> value)? invalidEmail,
+    TResult? Function(ShortPassword<T> value)? passwordNotMatchRequirements,
+    TResult? Function(InvalidJWT<T> value)? invalidJWT,
+    TResult? Function(InvalidJWTPayload<T> value)? invalidJWTPayload,
+    TResult? Function(OneUpperCase<T> value)? mustOneUpperCaseCharacter,
+    TResult? Function(OneLowerCase<T> value)? mustOneLowerCaseCharacter,
+    TResult? Function(OneNumeric<T> value)? mustOneNumericCharacter,
+    TResult? Function(OneSpecial<T> value)? mustOneSpecialCharacter,
+    TResult? Function(NotContainUserName<T> value)? mustNotContainUserName,
+    TResult? Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
+    TResult? Function(MatchNewPassword<T> value)? mustMatchNewPassword,
+    TResult? Function(isEmpty<T> value)? isEmpty,
+    TResult? Function(numberMustBiggerThanZero<T> value)?
+        numberMustBiggerThanZero,
+    TResult? Function(validateExceedsMaxValue<T> value)? exceedingMaxValue,
+    TResult? Function(InvalidDateValue<T> value)? invalidDateValue,
+    TResult? Function(InvalidDoubleValue<T> value)? invalidDoubleValue,
+    TResult? Function(InvalidIntegerValue<T> value)? invalidIntegerValue,
+  }) {
+    return invalidIntegerValue?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ExceedingLength<T> value)? exceedingLength,
+    TResult Function(SubceedLength<T> value)? subceedLength,
+    TResult Function(Empty<T> value)? empty,
+    TResult Function(Multiline<T> value)? multiline,
+    TResult Function(InvalidEmail<T> value)? invalidEmail,
+    TResult Function(ShortPassword<T> value)? passwordNotMatchRequirements,
+    TResult Function(InvalidJWT<T> value)? invalidJWT,
+    TResult Function(InvalidJWTPayload<T> value)? invalidJWTPayload,
+    TResult Function(OneUpperCase<T> value)? mustOneUpperCaseCharacter,
+    TResult Function(OneLowerCase<T> value)? mustOneLowerCaseCharacter,
+    TResult Function(OneNumeric<T> value)? mustOneNumericCharacter,
+    TResult Function(OneSpecial<T> value)? mustOneSpecialCharacter,
+    TResult Function(NotContainUserName<T> value)? mustNotContainUserName,
+    TResult Function(NotMatchOldPassword<T> value)? mustNotMatchOldPassword,
+    TResult Function(MatchNewPassword<T> value)? mustMatchNewPassword,
+    TResult Function(isEmpty<T> value)? isEmpty,
+    TResult Function(numberMustBiggerThanZero<T> value)?
+        numberMustBiggerThanZero,
+    TResult Function(validateExceedsMaxValue<T> value)? exceedingMaxValue,
+    TResult Function(InvalidDateValue<T> value)? invalidDateValue,
+    TResult Function(InvalidDoubleValue<T> value)? invalidDoubleValue,
+    TResult Function(InvalidIntegerValue<T> value)? invalidIntegerValue,
+    required TResult orElse(),
+  }) {
+    if (invalidIntegerValue != null) {
+      return invalidIntegerValue(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class InvalidIntegerValue<T> implements ValueFailure<T> {
+  const factory InvalidIntegerValue({required final T failedValue}) =
+      _$InvalidIntegerValue<T>;
+
+  @override
+  T get failedValue;
+  @override
+  @JsonKey(ignore: true)
+  _$$InvalidIntegerValueCopyWith<T, _$InvalidIntegerValue<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }

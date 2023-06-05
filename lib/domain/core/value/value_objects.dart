@@ -186,3 +186,15 @@ class RangeValue extends ValueObject<double> {
 
   const RangeValue._(this.value);
 }
+
+class IntegerValue extends ValueObject<int> {
+  @override
+  final Either<ValueFailure<int>, int> value;
+
+  factory IntegerValue(String input) =>
+      IntegerValue._(validateIntegerValue(input));
+
+  String get apiParameterValue => emptyIfZero(value.getOrElse(() => 0));
+
+  const IntegerValue._(this.value);
+}

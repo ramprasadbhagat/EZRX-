@@ -90,13 +90,16 @@ Color getStatusLabelColor(String statusType) {
       return ZPColors.lightSecondary;
     case 'Cancelled':
     case 'Failed':
-      return ZPColors.lightRed;
+    case 'Overdue':
     case 'Pending':
     case 'Picking in-progress':
     case 'Order Created':
     case 'Out for delivery':
     case 'Pending Approval':
       return ZPColors.lightRed;
+    case 'Cleared':
+    case 'Open':
+      return ZPColors.primary;
     case 'In Progress':
      return ZPColors.lightGray;
     case 'Completed':

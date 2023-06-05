@@ -26,7 +26,7 @@ mixin _$CreditAndInvoiceItem {
   String get postingKey => throw _privateConstructorUsedError;
   String get postingKeyName => throw _privateConstructorUsedError;
   DateTimeStringValue get netDueDate => throw _privateConstructorUsedError;
-  String get postingDate => throw _privateConstructorUsedError;
+  DateTimeStringValue get postingDate => throw _privateConstructorUsedError;
   String get transactionCurrency => throw _privateConstructorUsedError;
   String get billingDocument => throw _privateConstructorUsedError;
   String get referenceDocumentNumber => throw _privateConstructorUsedError;
@@ -65,7 +65,7 @@ mixin _$CreditAndInvoiceItem {
   String get disputeCaseUUID => throw _privateConstructorUsedError;
   String get disputeCaseStatus => throw _privateConstructorUsedError;
   String get disputeCaseStatusName => throw _privateConstructorUsedError;
-  String get invoiceReference => throw _privateConstructorUsedError;
+  StringValue get invoiceReference => throw _privateConstructorUsedError;
   bool get partnerFunctionIsPrintRelevant => throw _privateConstructorUsedError;
   bool get functionIsXMLRelevant => throw _privateConstructorUsedError;
   String get invoiceIsResidualForInference =>
@@ -95,7 +95,7 @@ abstract class $CreditAndInvoiceItemCopyWith<$Res> {
       String postingKey,
       String postingKeyName,
       DateTimeStringValue netDueDate,
-      String postingDate,
+      DateTimeStringValue postingDate,
       String transactionCurrency,
       String billingDocument,
       String referenceDocumentNumber,
@@ -134,7 +134,7 @@ abstract class $CreditAndInvoiceItemCopyWith<$Res> {
       String disputeCaseUUID,
       String disputeCaseStatus,
       String disputeCaseStatusName,
-      String invoiceReference,
+      StringValue invoiceReference,
       bool partnerFunctionIsPrintRelevant,
       bool functionIsXMLRelevant,
       String invoiceIsResidualForInference,
@@ -256,7 +256,7 @@ class _$CreditAndInvoiceItemCopyWithImpl<$Res,
       postingDate: null == postingDate
           ? _value.postingDate
           : postingDate // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DateTimeStringValue,
       transactionCurrency: null == transactionCurrency
           ? _value.transactionCurrency
           : transactionCurrency // ignore: cast_nullable_to_non_nullable
@@ -412,7 +412,7 @@ class _$CreditAndInvoiceItemCopyWithImpl<$Res,
       invoiceReference: null == invoiceReference
           ? _value.invoiceReference
           : invoiceReference // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StringValue,
       partnerFunctionIsPrintRelevant: null == partnerFunctionIsPrintRelevant
           ? _value.partnerFunctionIsPrintRelevant
           : partnerFunctionIsPrintRelevant // ignore: cast_nullable_to_non_nullable
@@ -456,7 +456,7 @@ abstract class _$$_CreditAndInvoiceItemCopyWith<$Res>
       String postingKey,
       String postingKeyName,
       DateTimeStringValue netDueDate,
-      String postingDate,
+      DateTimeStringValue postingDate,
       String transactionCurrency,
       String billingDocument,
       String referenceDocumentNumber,
@@ -495,7 +495,7 @@ abstract class _$$_CreditAndInvoiceItemCopyWith<$Res>
       String disputeCaseUUID,
       String disputeCaseStatus,
       String disputeCaseStatusName,
-      String invoiceReference,
+      StringValue invoiceReference,
       bool partnerFunctionIsPrintRelevant,
       bool functionIsXMLRelevant,
       String invoiceIsResidualForInference,
@@ -614,7 +614,7 @@ class __$$_CreditAndInvoiceItemCopyWithImpl<$Res>
       postingDate: null == postingDate
           ? _value.postingDate
           : postingDate // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DateTimeStringValue,
       transactionCurrency: null == transactionCurrency
           ? _value.transactionCurrency
           : transactionCurrency // ignore: cast_nullable_to_non_nullable
@@ -770,7 +770,7 @@ class __$$_CreditAndInvoiceItemCopyWithImpl<$Res>
       invoiceReference: null == invoiceReference
           ? _value.invoiceReference
           : invoiceReference // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StringValue,
       partnerFunctionIsPrintRelevant: null == partnerFunctionIsPrintRelevant
           ? _value.partnerFunctionIsPrintRelevant
           : partnerFunctionIsPrintRelevant // ignore: cast_nullable_to_non_nullable
@@ -877,7 +877,7 @@ class _$_CreditAndInvoiceItem extends _CreditAndInvoiceItem {
   @override
   final DateTimeStringValue netDueDate;
   @override
-  final String postingDate;
+  final DateTimeStringValue postingDate;
   @override
   final String transactionCurrency;
   @override
@@ -955,7 +955,7 @@ class _$_CreditAndInvoiceItem extends _CreditAndInvoiceItem {
   @override
   final String disputeCaseStatusName;
   @override
-  final String invoiceReference;
+  final StringValue invoiceReference;
   @override
   final bool partnerFunctionIsPrintRelevant;
   @override
@@ -1149,7 +1149,7 @@ abstract class _CreditAndInvoiceItem extends CreditAndInvoiceItem {
       required final String postingKey,
       required final String postingKeyName,
       required final DateTimeStringValue netDueDate,
-      required final String postingDate,
+      required final DateTimeStringValue postingDate,
       required final String transactionCurrency,
       required final String billingDocument,
       required final String referenceDocumentNumber,
@@ -1188,7 +1188,7 @@ abstract class _CreditAndInvoiceItem extends CreditAndInvoiceItem {
       required final String disputeCaseUUID,
       required final String disputeCaseStatus,
       required final String disputeCaseStatusName,
-      required final String invoiceReference,
+      required final StringValue invoiceReference,
       required final bool partnerFunctionIsPrintRelevant,
       required final bool functionIsXMLRelevant,
       required final String invoiceIsResidualForInference,
@@ -1217,7 +1217,7 @@ abstract class _CreditAndInvoiceItem extends CreditAndInvoiceItem {
   @override
   DateTimeStringValue get netDueDate;
   @override
-  String get postingDate;
+  DateTimeStringValue get postingDate;
   @override
   String get transactionCurrency;
   @override
@@ -1295,7 +1295,7 @@ abstract class _CreditAndInvoiceItem extends CreditAndInvoiceItem {
   @override
   String get disputeCaseStatusName;
   @override
-  String get invoiceReference;
+  StringValue get invoiceReference;
   @override
   bool get partnerFunctionIsPrintRelevant;
   @override

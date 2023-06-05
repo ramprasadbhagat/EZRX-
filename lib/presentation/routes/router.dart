@@ -44,6 +44,7 @@ import 'package:ezrxmobile/presentation/orders/saved_order/saved_order_detail_pa
 import 'package:ezrxmobile/presentation/orders/saved_order/saved_order_list_page.dart';
 import 'package:ezrxmobile/presentation/payments/all_credits/all_credits.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/payment_advice_footer/payment_advice_footer_page.dart';
+import 'package:ezrxmobile/presentation/payments/invoice_details/invoice_details.dart';
 import 'package:ezrxmobile/presentation/returns/add_edit_user_restrictions.dart';
 import 'package:ezrxmobile/presentation/returns/policy_configuration/add_policy_configuration.dart';
 import 'package:ezrxmobile/presentation/returns/approver_actions/approver_actions.dart';
@@ -56,13 +57,9 @@ import 'package:ezrxmobile/presentation/splash/splash_page.dart';
 import 'package:ezrxmobile/presentation/history/detail/history_details.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/scan_material_info.dart';
 import 'package:ezrxmobile/presentation/payments/all_invoices/all_invoices.dart';
-
 import 'package:ezrxmobile/presentation/returns/request_return/request_return_details.dart';
-
 import 'package:ezrxmobile/presentation/returns/request_return/return_details_summary_page.dart';
-
 import 'package:ezrxmobile/presentation/returns/request_return/return_request_success.dart';
-
 import 'package:ezrxmobile/presentation/payments/payment_summary.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/sales_district/sales_district_page.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/sales_district/add_sales_district_page.dart';
@@ -221,6 +218,10 @@ import 'package:ezrxmobile/presentation/account/payment_configuration/sales_dist
     AutoRoute(
       path: 'payments/all_invoices',
       page: AllInvoicesPage,
+    ),
+    AutoRoute(
+      path: 'payments/invoice_details',
+      page: InvoiceDetailsPage,
     ),
      AutoRoute(
       path: 'payments/all_credits',

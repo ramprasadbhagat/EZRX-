@@ -36,6 +36,7 @@ import 'package:ezrxmobile/application/payments/all_credits/all_credits_bloc.dar
 import 'package:ezrxmobile/application/payments/all_credits/all_credits_filter/all_credits_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/filter/all_invoices_filter_bloc.dart';
+import 'package:ezrxmobile/application/payments/invoice_details/invoice_details_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_list_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
@@ -241,6 +242,10 @@ import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_in
 import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_invoices_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_invoices_remote.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/payment_advice_footer_repository.dart';
+import 'package:ezrxmobile/infrastructure/payments/datasource/invoice_details_local.dart';
+import 'package:ezrxmobile/infrastructure/payments/datasource/invoice_details_query_mutation.dart';
+import 'package:ezrxmobile/infrastructure/payments/datasource/invoice_details_remote.dart';
+import 'package:ezrxmobile/infrastructure/payments/repository/invoice_details_repository.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/approver_return_request_information_local.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/approver_return_request_information_remote.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/approver_return_request_query.dart';
@@ -290,37 +295,21 @@ import 'package:ezrxmobile/infrastructure/returns/repository/return_request_type
 import 'package:ezrxmobile/application/returns/user_restriction_details/user_restriction_details_bloc.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/scan_material_info_repository.dart';
 import 'package:ezrxmobile/infrastructure/core/material_info_scanner/material_info_scanner.dart';
-
 import 'package:ezrxmobile/application/returns/return_price/return_price_bloc.dart';
-
 import 'package:ezrxmobile/infrastructure/returns/repository/return_price_repository.dart';
-
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_price_remote.dart';
-
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_price_query.dart';
-
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_price_local.dart';
-
 import 'package:ezrxmobile/infrastructure/returns/datasource/submit_return_request_mutation.dart';
-
 import 'package:ezrxmobile/infrastructure/returns/datasource/submit_return_request_local_datasource.dart';
-
 import 'package:ezrxmobile/infrastructure/returns/repository/submit_return_request_repository.dart';
-
 import 'package:ezrxmobile/infrastructure/returns/datasource/submit_return_request_remote_datasource.dart';
-
 import 'package:ezrxmobile/application/returns/submit_return/submit_return_bloc.dart';
-
 import 'package:ezrxmobile/application/payments/paymant_summary/payment_summary_bloc.dart';
-
 import 'package:ezrxmobile/infrastructure/payments/repository/payment_summary_repository.dart';
-
 import 'package:ezrxmobile/infrastructure/payments/datasource/payment_summary_local_datasource.dart';
-
 import 'package:ezrxmobile/infrastructure/payments/datasource/payment_summary_remote_datasource.dart';
-
 import 'package:ezrxmobile/infrastructure/payments/datasource/payment_summary_query.dart';
-
 import 'package:ezrxmobile/infrastructure/account/repository/bank_beneficiary_repository.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/sales_district_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/sales_district_remote.dart';
@@ -2251,6 +2240,32 @@ void setupLocator() {
     () => AllCreditsFilterBloc(
       allCreditsAndInvoicesRepository:
           locator<AllCreditsAndInvoicesRepository>(),
+    ),
+  );
+  locator.registerLazySingleton(
+    () => InvoiceDetailsRepository(
+      config: locator<Config>(),
+      localDataSource: locator<InvoiceDetailsLocalDataSource>(),
+      remoteDataSource: locator<InvoiceDetailsRemoteDataSource>(),
+    ),
+  );
+  locator.registerLazySingleton(
+    () => InvoiceDetailsBloc(
+      invoiceDetailsRepository: locator<InvoiceDetailsRepository>(),
+    ),
+  );
+  locator.registerLazySingleton(
+    () => InvoiceDetailsLocalDataSource(),
+  );
+  locator.registerLazySingleton(
+    () => InvoiceDetailsQueryMutation(),
+  );
+  locator.registerLazySingleton(
+    () => InvoiceDetailsRemoteDataSource(
+      config: locator<Config>(),
+      httpService: locator<HttpService>(),
+      invoiceDetailsQueryMutation: locator<InvoiceDetailsQueryMutation>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
     ),
   );
 

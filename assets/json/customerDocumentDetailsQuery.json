@@ -1,0 +1,14 @@
+{
+  "operationName": "customerDocumentDetails",
+  "variables": {
+    "input": {
+      "customerCode": "0030032223",
+      "salesOrg": "2601",
+      "accountingDocument": "1080005528",
+      "fiscalYear": "2023",
+      "bpCustomerNumber": "0030032223",
+      "accountingDocumentItem": "001"
+    }
+  },
+  "query": "query customerDocumentDetails($input: customerDocumentDetailsRequest!) {\n  customerDocumentDetails(request: $input) {\n    billingDocumentItem\n    salesDocumentItemType\n    material\n    billingDocumentItemText\n    billingQuantity\n    billingQuantityUnit\n    salesMeasureISOUnit\n    referenceSDDocument\n    referenceSDDocumentItem\n    referenceSDDocumentCategory\n    grossAmount\n    netAmount\n    taxAmount\n    transactionCurrency\n    __typename\n  }\n}\n"
+}

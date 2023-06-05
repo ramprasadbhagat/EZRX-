@@ -59,6 +59,7 @@ class BalanceTextRow extends StatelessWidget {
                           Flexible(
                             child: StatusLabel(
                               status: StatusType(valueText),
+                              valueColor: valueColor,
                             ),
                           ),
                         ],

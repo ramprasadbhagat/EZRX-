@@ -130,3 +130,14 @@ Either<ValueFailure<double>, double> validateDoubleValue(
 
   return Right(double.parse(input));
 }
+
+Either<ValueFailure<int>, int> validateIntegerValue(
+  String input,
+) {
+  input = input.split('.')[0];
+  if (int.tryParse(input) == null) {
+    return left(const ValueFailure.invalidIntegerValue(failedValue: 0));
+  }
+
+  return Right(int.parse(input));
+}
