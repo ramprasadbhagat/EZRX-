@@ -75,6 +75,24 @@ class PriceAggregate with _$PriceAggregate {
     );
   }
 
+  bool get additionalBonusOverride => addedBonusList.any(
+        (element) => element.bonusOverrideFlag && element.additionalBonusFlag,
+      );
+
+  bool get anyDealBonusOverride => !getMaterialItemBonus.every(
+        (element) => addedDealBonusMaterial.any(
+          (dealBonusMaterial) =>
+              element.materialNumber == dealBonusMaterial.materialNumber &&
+              element.qty == dealBonusMaterial.qty,
+        ),
+      );
+
+  bool get didPriceOrBonusOverride =>
+      (price.priceOverride.isValid() ||
+          anyDealBonusOverride ||
+          additionalBonusOverride) &&
+      (salesOrgConfig.salesOrg.isMY || salesOrgConfig.salesOrg.isSg);
+
   SubmitMaterialInfo toSubmitMaterialInfo() {
     return SubmitMaterialInfo(
       batch:
@@ -89,7 +107,11 @@ class PriceAggregate with _$PriceAggregate {
       materialNumber: materialInfo.materialNumber,
       quantity: quantity,
       salesDistrict: stockInfo.salesDistrict,
-      materialItemOverride: MaterialItemOverrideDto.fromPrice(price).toDomain(),
+      materialItemOverride: MaterialItemOverrideDto.fromPrice(
+        price.copyWith(
+          isPriceOverride: didPriceOrBonusOverride,
+        ),
+      ).toDomain(),
       tenderContract: tenderContract,
     );
   }

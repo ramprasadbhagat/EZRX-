@@ -303,7 +303,7 @@ class __$$_ValueOverrideCopyWithImpl<$Res>
 
 class _$_ValueOverride implements _ValueOverride {
   const _$_ValueOverride(
-      {this.code = 'ZP01', required this.price, required this.currency});
+      {this.code = 'ZPO1', required this.price, required this.currency});
 
   @override
   @JsonKey()

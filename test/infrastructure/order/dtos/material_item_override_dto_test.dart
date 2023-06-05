@@ -43,7 +43,8 @@ void main() {
       final configsDtoMap = MaterialItemOverrideDto.fromPrice(
         Price.empty().copyWith(
             isPriceOverride: true,
-            lastPrice: MaterialPrice(1),
+            lastPrice: MaterialPrice(2),
+            finalPrice: MaterialPrice(1),
             zdp8Override: Zdp8OverrideValue(1)),
       );
       expect(configsDtoMap.valueOverride[0].price, 1);

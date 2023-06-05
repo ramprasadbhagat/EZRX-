@@ -56,7 +56,7 @@ class MaterialItemOverrideDto with _$MaterialItemOverrideDto {
         if (price.isPriceOverride)
           ValueOverrideDto.fromDomain(
             ValueOverride.empty().copyWith(
-              price: price.lastPrice.getOrDefaultValue(0),
+              price: price.finalPrice.getOrDefaultValue(0),
             ),
           ),
       ],

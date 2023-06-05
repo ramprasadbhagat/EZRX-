@@ -23,7 +23,7 @@ class MaterialItemOverride with _$MaterialItemOverride {
 @freezed
 class ValueOverride with _$ValueOverride {
   const factory ValueOverride({
-    @Default('ZP01') String code,
+    @Default('ZPO1') String code,
     required double price,
     required Currency currency,
   }) = _ValueOverride;
