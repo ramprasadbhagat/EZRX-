@@ -311,7 +311,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "sleep 1 \n$PODS_ROOT/FirebaseCrashlytics/upload-symbols -gsp ${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist -p ios $DWARF_DSYM_FOLDER_PATH/$DWARF_DSYM_FILE_NAME\n";
+			shellScript = "sleep 1 \n\"${PODS_ROOT}/FirebaseCrashlytics/upload-symbols\" -gsp \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\" -p ios \"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}\"\n";
 		};
 		9EBE05DD287DA8B700D968FB /* Copy GoogleServices-Info.plist to the default location in app package */ = {
 			isa = PBXShellScriptBuildPhase;
