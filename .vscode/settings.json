@@ -46,4 +46,7 @@
         "jacoco.xml"
     ],
     "terminal.integrated.fontWeight": "normal",
+    "cSpell.enableFiletypes": [
+        "!yaml"
+    ],
 }
