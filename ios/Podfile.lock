@@ -275,9 +275,9 @@ PODS:
   - ScanditBarcodeCapture (6.17.2):
     - ScanditCaptureCore (= 6.17.2)
   - ScanditCaptureCore (6.17.2)
-  - SDWebImage (5.15.8):
-    - SDWebImage/Core (= 5.15.8)
-  - SDWebImage/Core (5.15.8)
+  - SDWebImage (5.16.0):
+    - SDWebImage/Core (= 5.16.0)
+  - SDWebImage/Core (5.16.0)
   - shared_preferences_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
@@ -482,7 +482,7 @@ SPEC CHECKSUMS:
   scandit_flutter_datacapture_core: 598bf12fbaf3f4edee41dd6f526f434a240644bb
   ScanditBarcodeCapture: a0e6783f2541d324192ff2484002f29ce4ddeb67
   ScanditCaptureCore: ccfe170afe14c7b60d937d0bda9f80909379cb2d
-  SDWebImage: cb032eba469c54e0000e78bcb0a13cdde0a52798
+  SDWebImage: 2aea163b50bfcb569a2726b6a754c54a4506fcf6
   shared_preferences_foundation: e2dae3258e06f44cc55f49d42024fd8dd03c590c
   sqflite: 31f7eba61e3074736dff8807a9b41581e4f7f15a
   SwiftyGif: 93a1cc87bf3a51916001cf8f3d63835fb64c819f

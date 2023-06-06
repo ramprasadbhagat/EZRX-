@@ -51,7 +51,7 @@ android {
         ndk {
             abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86_64'
         }
-        applicationId "com.zuelligpharma.ezrxmobile"
+        applicationId "com.zuelligpharma.ezrxplus"
         minSdkVersion localProperties.getProperty('flutter.minSdkVersion').toInteger()
         targetSdkVersion localProperties.getProperty('flutter.targetSdkVersion').toInteger()
         compileSdkVersion localProperties.getProperty('flutter.compileSdkVersion').toInteger()

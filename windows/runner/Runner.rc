@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "ezrxmobile" "\0"
+            VALUE "FileDescription", "ezrxplus" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "ezrxmobile" "\0"
+            VALUE "InternalName", "ezrxplus" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2022 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "ezrxmobile.exe" "\0"
-            VALUE "ProductName", "ezrxmobile" "\0"
+            VALUE "OriginalFilename", "ezrxplus.exe" "\0"
+            VALUE "ProductName", "ezrxplus" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

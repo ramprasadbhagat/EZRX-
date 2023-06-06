@@ -1,5 +1,5 @@
-# ezrxmobile
-This is second generation of eZRx mobile app created by Domain-Driven Design Architecture. 
+# ezrxmobile plus
+This is third generation of eZRx mobile app created by Domain-Driven Design Architecture. 
 To know more about Domain Driven Design in flutter please visit:
 https://resocoder.com/2020/03/09/flutter-firebase-ddd-course-1-domain-driven-design-principles/
 
@@ -62,10 +62,10 @@ You need to run the below commands from a shell.
 ### Flavor
 | Flavor| Package name | App Name | Endpoint |
 |--|--|--|--|
-| PROD |  `com.zuelligpharma.ezrxmobile`| eZRx | https://ezrx.com |
-| UAT  |  `com.zuelligpharma.ezrxmobile.uat`| eZRx Uat | https://uat.ezrx.com |
-| DEV  |  `com.zuelligpharma.ezrxmobile.dev`| eZRx Dev | https://dev.ezrx.com |
-| MOCK  |  `com.zuelligpharma.ezrxmobile.mock`| eZRx Mock | local assets json |
+| PROD |  `com.zuelligpharma.ezrxplus`| eZRx+ | https://my.ezrx.com |
+| UAT  |  `com.zuelligpharma.ezrxplus.uat`| eZRx+ Uat | https://uat-my.ezrx.com |
+| DEV  |  `com.zuelligpharma.ezrxplus.dev`| eZRx+ Dev | https://dev-my.ezrx.com |
+| MOCK  |  `com.zuelligpharma.ezrxplus.mock`| eZRx+ Mock | local assets json |
 
 ### Build app
 #### IOS

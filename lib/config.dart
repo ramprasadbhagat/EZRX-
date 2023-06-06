@@ -78,14 +78,14 @@ class Config {
   String get packageName {
     switch (appFlavor) {
       case Flavor.mock:
-        return 'com.zuelligpharma.ezrxmobile.mock';
+        return 'com.zuelligpharma.ezrxplus.mock';
       case Flavor.dev:
-        return 'com.zuelligpharma.ezrxmobile.dev';
+        return 'com.zuelligpharma.ezrxplus.dev';
       case Flavor.uat:
-        return 'com.zuelligpharma.ezrxmobile.uat';
+        return 'com.zuelligpharma.ezrxplus.uat';
       case Flavor.prod:
       default:
-        return 'com.zuelligpharma.ezrxmobile';
+        return 'com.zuelligpharma.ezrxplus';
     }
   }
 
@@ -259,15 +259,15 @@ class Config {
 
   FirebaseOptions get firebaseOptions {
     switch (appFlavor) {
-      case Flavor.uat:
+      case Flavor.mock:
         return const FirebaseOptions(
           apiKey: 'AIzaSyBFE83eBuDFuABL6UwbFqqXNz8S4Cw4jrQ',
           authDomain: 'ezrx-uat.firebaseapp.com',
           projectId: 'ezrx-uat',
           storageBucket: 'ezrx-uat.appspot.com',
           messagingSenderId: '289365077122',
-          appId: '1:289365077122:web:106ee0316ccfe49af6589b',
-          measurementId: 'G-J7T2GYDSPJ',
+          appId: '1:289365077122:web:ffb59bbd88016e7cf6589b',
+          measurementId: 'G-HGBQM0L9J3',
         );
       case Flavor.dev:
         return const FirebaseOptions(
@@ -276,40 +276,30 @@ class Config {
           projectId: 'ezrx-uat',
           storageBucket: 'ezrx-uat.appspot.com',
           messagingSenderId: '289365077122',
-          appId: '1:289365077122:web:ae78e9bb951f7dfef6589b',
-          measurementId: 'G-7JT826JZC2',
+          appId: '1:289365077122:web:b18e5cc1431e6e3df6589b',
+          measurementId: 'G-Z61EE1QCHC',
         );
-      case Flavor.mock:
+      case Flavor.uat:
         return const FirebaseOptions(
           apiKey: 'AIzaSyBFE83eBuDFuABL6UwbFqqXNz8S4Cw4jrQ',
           authDomain: 'ezrx-uat.firebaseapp.com',
           projectId: 'ezrx-uat',
           storageBucket: 'ezrx-uat.appspot.com',
           messagingSenderId: '289365077122',
-          appId: '1:289365077122:web:bab71bdd2bfbb1cbf6589b',
-          measurementId: 'G-Q6N13VZS21',
+          appId: '1:289365077122:web:7c4467b519575509f6589b',
+          measurementId: 'G-9DQSS4RCFZ',
         );
       case Flavor.prod:
-        return const FirebaseOptions(
-          apiKey: 'AIzaSyChT_XgD8A5J8QLUtSRs5TKKD8NE0JjMOU',
-          authDomain: 'ezrx-6494b.firebaseapp.com',
-          databaseURL: 'https://ezrx-6494b.firebaseio.com',
-          projectId: 'ezrx-6494b',
-          storageBucket: 'ezrx-6494b.appspot.com',
-          messagingSenderId: '1064533093414',
-          appId: '1:1064533093414:web:08aa836641a8e189800ae7',
-          measurementId: 'G-ZJDKEZ52ET',
-        );
       default:
         return const FirebaseOptions(
-          apiKey: 'AIzaSyChT_XgD8A5J8QLUtSRs5TKKD8NE0JjMOU',
+          apiKey: 'AIzaSyDHfqmNqiFyVZ0u4QLREXabDqyrRQP12OY',
           authDomain: 'ezrx-6494b.firebaseapp.com',
           databaseURL: 'https://ezrx-6494b.firebaseio.com',
           projectId: 'ezrx-6494b',
           storageBucket: 'ezrx-6494b.appspot.com',
           messagingSenderId: '1064533093414',
-          appId: '1:1064533093414:web:08aa836641a8e189800ae7',
-          measurementId: 'G-ZJDKEZ52ET',
+          appId: '1:1064533093414:web:de2a644d4926f664800ae7',
+          measurementId: 'G-V6D452L2G1',
         );
     }
   }
@@ -370,14 +360,14 @@ class Config {
 
   String get getEZReachUrl {
     switch (appFlavor) {
+      case Flavor.mock:
+        return '';
       case Flavor.dev:
       case Flavor.uat:
         return 'https://campaignengine-stg.ezreach.io/query';
       case Flavor.prod:
-        return 'https://campaignengine.ezreach.io/query';
-      case Flavor.mock:
       default:
-        return '';
+        return 'https://campaignengine.ezreach.io/query';
     }
   }
 

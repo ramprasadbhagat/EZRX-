@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>1064533093414-4vqhq90nfbtcqm8cv79jigr4ul7hdhfl.apps.googleusercontent.com</string>
+	<string>1064533093414-sp0cf0iifb6ar64nrjrhc827d5qufpd7.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.1064533093414-4vqhq90nfbtcqm8cv79jigr4ul7hdhfl</string>
+	<string>com.googleusercontent.apps.1064533093414-sp0cf0iifb6ar64nrjrhc827d5qufpd7</string>
 	<key>API_KEY</key>
 	<string>AIzaSyBZulKHEO0RaiOgnj9dkYFJiQ3KT39QwPA</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.zuelligpharma.ezrxmobile</string>
+	<string>com.zuelligpharma.ezrxplus</string>
 	<key>PROJECT_ID</key>
 	<string>ezrx-6494b</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,7 +29,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:1064533093414:ios:4b9ee6aebf9c2174800ae7</string>
+	<string>1:1064533093414:ios:09f265f1f91456f3800ae7</string>
 	<key>DATABASE_URL</key>
 	<string>https://ezrx-6494b.firebaseio.com</string>
 </dict>

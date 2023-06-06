@@ -459,10 +459,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.zuelligpharma.ezrxmobile;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zuelligpharma.ezrxplus;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = AppStore_com.zuelligpharma.ezrxmobile;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = AppStore_com.zuelligpharma.ezrxplus;
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -598,10 +598,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.zuelligpharma.ezrxmobile;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zuelligpharma.ezrxplus;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = AppStore_com.zuelligpharma.ezrxmobile;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = AppStore_com.zuelligpharma.ezrxplus;
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -631,10 +631,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.zuelligpharma.ezrxmobile;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zuelligpharma.ezrxplus;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = AppStore_com.zuelligpharma.ezrxmobile;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = AppStore_com.zuelligpharma.ezrxplus;
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -717,7 +717,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.zuelligpharma.ezrxmobile.dev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zuelligpharma.ezrxplus.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
@@ -804,10 +804,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.zuelligpharma.ezrxmobile.uat;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zuelligpharma.ezrxplus.uat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = AppStore_com.zuelligpharma.ezrxmobile.uat;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = AppStore_com.zuelligpharma.ezrxplus.uat;
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -888,7 +888,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.zuelligpharma.ezrxmobile.dev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zuelligpharma.ezrxplus.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
@@ -971,10 +971,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.zuelligpharma.ezrxmobile.uat;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zuelligpharma.ezrxplus.uat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = AppStore_com.zuelligpharma.ezrxmobile.uat;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = AppStore_com.zuelligpharma.ezrxplus.uat;
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1052,7 +1052,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.zuelligpharma.ezrxmobile.dev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zuelligpharma.ezrxplus.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
@@ -1133,10 +1133,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.zuelligpharma.ezrxmobile.uat;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zuelligpharma.ezrxplus.uat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = AppStore_com.zuelligpharma.ezrxmobile.uat;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = AppStore_com.zuelligpharma.ezrxplus.uat;
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1219,7 +1219,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.zuelligpharma.ezrxmobile.mock;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zuelligpharma.ezrxplus.mock;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
@@ -1302,7 +1302,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.zuelligpharma.ezrxmobile.mock;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zuelligpharma.ezrxplus.mock;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
@@ -1382,7 +1382,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.zuelligpharma.ezrxmobile.mock;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zuelligpharma.ezrxplus.mock;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";

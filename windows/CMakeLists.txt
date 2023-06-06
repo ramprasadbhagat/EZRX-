@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
-project(ezrxmobile LANGUAGES CXX)
+project(ezrxplus LANGUAGES CXX)
 
-set(BINARY_NAME "ezrxmobile")
+set(BINARY_NAME "ezrxplus")
 
 cmake_policy(SET CMP0063 NEW)
 
