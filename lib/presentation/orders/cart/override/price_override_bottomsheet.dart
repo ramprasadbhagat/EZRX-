@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
@@ -149,7 +150,10 @@ class _PriceSheetState extends State<PriceSheet> {
                             ? null
                             : () {
                                 FocusScope.of(context).unfocus();
-                                if (widget.item.salesOrgConfig.priceOverride) {
+                                if (context
+                                    .read<EligibilityBloc>()
+                                    .state
+                                    .isPriceOverrideEnable) {
                                   context.read<PriceOverrideBloc>().add(
                                         PriceOverrideEvent.fetch(
                                           item: widget.item,

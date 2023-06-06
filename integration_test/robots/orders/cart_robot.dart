@@ -188,9 +188,9 @@ class CartRobot {
     await tester.pumpAndSettle();
   }
 
-  Future<void> changePrice(int price) async {
+  Future<void> changePrice(double price) async {
     await tester.enterText(find.byKey(const Key('priceOverrideTextFormField')),
-        price.toString());
+        price.toStringAsFixed(2));
     await tester.pumpAndSettle();
   }
 
@@ -275,7 +275,12 @@ class CartRobot {
     expect(unitPrice, findsOneWidget);
   }
 
-  void zdp5QtyExceedWarning(){
+  void verifyUnitPriceNA() {
+    final unitPriceLabel = find.textContaining('Unit Price: NA');
+    expect(unitPriceLabel, findsOneWidget);
+  }
+
+  void zdp5QtyExceedWarning() {
     final warningText =
         find.textContaining('You have exceeded the remaining quantity limit');
     expect(warningText, findsOneWidget);

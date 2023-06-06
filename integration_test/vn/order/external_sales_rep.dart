@@ -155,6 +155,17 @@ void main() {
 
     //Delete Cart Item
     cartRobot.findMaterialItem(material1, 100);
+
+    cartRobot.verifyEnablePriceOverride(material1);
+    await cartRobot.tapPrice(material1);
+    await cartRobot.changePrice(180000);
+    await cartRobot.tapPriceOverrideButton();
+    cartRobot.verifyUnitPrice(currency, '189,000');
+    await cartRobot.tapPrice(material1);
+    await cartRobot.changePrice(189000);
+    await cartRobot.tapPriceOverrideButton();
+    cartRobot.verifyUnitPrice(currency, '198,450');
+    ////Price - overriden///
     await cartRobot.deleteMaterial(material1);
 
     await cartRobot.goBack();

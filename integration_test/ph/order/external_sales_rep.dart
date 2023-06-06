@@ -145,6 +145,17 @@ void main() {
     await materialListRobot.tapCartButton();
     //cart page
     cartRobot.verify();
+    ////Price - overriden///
+    cartRobot.verifyEnablePriceOverride(bonusMaterial);
+    await cartRobot.tapPrice(bonusMaterial);
+    await cartRobot.changePrice(80);
+    await cartRobot.tapPriceOverrideButton();
+    cartRobot.verifyUnitPrice(currency, '80');
+    await cartRobot.tapPrice(bonusMaterial);
+    await cartRobot.changePrice(290);
+    await cartRobot.tapPriceOverrideButton();
+    cartRobot.verifyUnitPrice(currency, '290');
+    ////Price - overriden///
     cartRobot.findMaterialItem(bonusMaterial, 8);
     cartRobot.findAddQuantity(bonusMaterial);
     await cartRobot.changeQuantity(bonusMaterial, 16);

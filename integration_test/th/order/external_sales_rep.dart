@@ -68,12 +68,11 @@ void main() {
 
   ////////Minimum Price Material////////////
   final minimumOrderMaterial = MaterialNumber('000000000023236010');
-  const minimumOrderMaterialUnitPrice = '1,177';
-  const minimumOrderMaterialListPrice = minimumOrderMaterialUnitPrice;
-  const minimumOrderMaterialSubTotalPrice = '1,100';
-  const minimumOrderMaterialGrandTotalPrice =
-      minimumOrderMaterialUnitPrice; //7% vat
-  const minimumOrderMaterialTotalPrice = minimumOrderMaterialUnitPrice;
+  const minimumOrderMaterialListPrice = '1,177';
+  const minimumOrderMaterialSubTotalPrice = '1,177';
+  const minimumOrderMaterialTotalPrice = '1,259.39'; //7% vat
+  const minimumOrderMaterialGrandTotalPrice = minimumOrderMaterialTotalPrice;
+  const minimumOrderMaterialUnitPrice = minimumOrderMaterialTotalPrice;
 
   /////// Bonus Material/////////////////
   final bonusMaterial = MaterialNumber('000000000023246951');
@@ -171,6 +170,16 @@ void main() {
       minimumOrderMaterial.getOrDefaultValue(''),
       1,
     );
+    cartRobot.verifyEnablePriceOverride(minimumOrderMaterial.getOrCrash());
+    await cartRobot.tapPrice(minimumOrderMaterial.getOrCrash());
+    await cartRobot.changePrice(80);
+    await cartRobot.tapPriceOverrideButton();
+    cartRobot.verifyUnitPrice(currency, '85.6');
+    await cartRobot.tapPrice(minimumOrderMaterial.getOrCrash());
+    await cartRobot.changePrice(1177);
+    await cartRobot.tapPriceOverrideButton();
+    cartRobot.verifyUnitPrice(currency, minimumOrderMaterialTotalPrice);
+    ////Price - overriden///
     cartRobot.findOrderSummary();
     await cartRobot.tapOrderSummary();
     orderSummaryRobot.findContinueButton(0);

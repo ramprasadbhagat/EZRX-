@@ -81,6 +81,7 @@ void main() {
     const remark1 = 'Good';
     const remark2 = 'Nice';
     const listPrice = '12.89';
+    const overridenPrice = 12.89;
     const userFullName = 'KH ExternalSR';
     const userFullRole = 'External Sales Rep';
     const unitPrice2 = '12.25';
@@ -143,6 +144,17 @@ void main() {
     await materialDetailRobot.tapUpdateAddToCart();
     cartRobot.verify();
     cartRobot.findMaterialItem(material, 20);
+    cartRobot.verifyEnablePriceOverride(material);
+    await cartRobot.tapPrice(material);
+    await cartRobot.changePrice(80);
+    await cartRobot.tapPriceOverrideButton();
+    cartRobot.verifyUnitPrice(currency, '76');
+    cartRobot.verifyEnablePriceOverride(material);
+    await cartRobot.tapPrice(material);
+    await cartRobot.changePrice(overridenPrice);
+    await cartRobot.tapPriceOverrideButton();
+    cartRobot.verifyUnitPrice(currency, unitPrice2);
+    ////Price - overriden///
     cartRobot.verifyEnableListPrice(currency, listPrice);
     cartRobot.verifyEnableDiscountOverrideMaterial();
     await cartRobot.setDiscountOverrideMaterial(discount);

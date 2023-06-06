@@ -73,7 +73,7 @@ void main() {
     bundleDetailRobot = BundleDetailRobot(tester);
 
     ///================================================================////
-    
+
     //initialize variables
     const username = 'myexternalsalesrep';
     const password = 'St@ysafe01';
@@ -108,12 +108,11 @@ void main() {
     //============================================================
 
     // For Tier Pricing
-    const tier1UnitPrice = '90';
-    const tier1TotalPrice = '180';
-    const tier2UnitPrice = '98';
+    const tier1TotalPrice = '196';
+    const initialUnitPrice = '80';
+    const afterUnitPrice = '98';
     const tier2TotalPrice = '9,800';
-    const tier3UnitPrice = '95';
-    const tier3TotalPrice = '19,000';
+    const tier3TotalPrice = '19,600';
 
     ///Price for P&G Principal hidePrice == true
     const pnGMaterialUnitPrice = '0';
@@ -186,18 +185,28 @@ void main() {
     //cart page
     cartRobot.verify();
     cartRobot.findMaterialItem(tieredMaterial, 2);
-    cartRobot.verifyUnitPrice(currency, tier1UnitPrice);
+    cartRobot.verifyEnablePriceOverride(tieredMaterial);
+    await cartRobot.tapPrice(tieredMaterial);
+    await cartRobot.changePrice(double.parse(initialUnitPrice));
+    await cartRobot.tapPriceOverrideButton();
+    cartRobot.verifyUnitPrice(currency, initialUnitPrice);
+    await cartRobot.tapPrice(tieredMaterial);
+    await cartRobot.changePrice(double.parse(afterUnitPrice));
+    await cartRobot.tapPriceOverrideButton();
+    cartRobot.verifyUnitPrice(currency, afterUnitPrice);
+    ////Price - overriden///
+    cartRobot.verifyUnitPrice(currency, afterUnitPrice);
     cartRobot.verifyTotal(currency, tier1TotalPrice);
     cartRobot.findAddQuantity(tieredMaterial);
     await cartRobot.changeQuantity(tieredMaterial, 100);
     await cartRobot.getKeyboardDown();
     cartRobot.findMaterialItem(tieredMaterial, 100);
-    cartRobot.verifyUnitPrice(currency, tier2UnitPrice);
+    cartRobot.verifyUnitPrice(currency, afterUnitPrice);
     cartRobot.verifyTotal(currency, tier2TotalPrice);
     await cartRobot.changeQuantity(tieredMaterial, 200);
     await cartRobot.getKeyboardDown();
     cartRobot.findMaterialItem(tieredMaterial, 200);
-    cartRobot.verifyUnitPrice(currency, tier3UnitPrice);
+    cartRobot.verifyUnitPrice(currency, afterUnitPrice);
     cartRobot.verifyTotal(currency, tier3TotalPrice);
     await tester.pumpAndSettle(const Duration(seconds: 2));
     await cartRobot.deleteMaterial(tieredMaterial);
@@ -269,11 +278,14 @@ void main() {
     //Minimum Order Amount
     orderSummaryRobot.allowMinimumOrderAmount(minimumOrderAmount);
     orderSummaryRobot.verifySubTotalPrice(currency, pnGMaterialSubTotalPrice);
-    orderSummaryRobot.verifyGrandTotalPrice(currency, pnGMaterialGrandTotalPrice);
+    orderSummaryRobot.verifyGrandTotalPrice(
+        currency, pnGMaterialGrandTotalPrice);
     //verify orders with currency check
     orderSummaryRobot.findMaterialItem(pngPrincipalMaterial, 2);
-    orderSummaryRobot.verifyMaterialUnitPrice(false, currency, pnGMaterialUnitPrice);
-    orderSummaryRobot.verifyMaterialTotalPrice(false, currency, pnGMaterialTotalPrice);
+    orderSummaryRobot.verifyMaterialUnitPrice(
+        false, currency, pnGMaterialUnitPrice);
+    orderSummaryRobot.verifyMaterialTotalPrice(
+        false, currency, pnGMaterialTotalPrice);
     orderSummaryRobot.findSubmit();
     await orderSummaryRobot.tapSubmit();
     await orderSummaryRobot.goBack();

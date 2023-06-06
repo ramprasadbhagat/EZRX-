@@ -77,7 +77,7 @@ void main() {
     const ediShipToCode = '0070042484';
     const customerCode = '0030036549';
     const shipToCode = '0070047032';
-     const userRole = 'External Sales Rep';
+    const userRole = 'External Sales Rep';
     const user = 'ExternalSR';
     //country & country currency variable
     const currency = 'SGD';
@@ -140,7 +140,7 @@ void main() {
     homeRobot.verifyEdiCustomer();
     //create order for EDi customer
     await homeRobot.goToCreateOrder();
-    
+
     materialRootRobot.verify();
     await materialRootRobot.findAndCloseAnnouncementIcon();
     materialRootRobot.findBundlesTab();
@@ -184,6 +184,18 @@ void main() {
     //Enable GST At Total Level Only
     //GST value %
     cartRobot.verifyEnableVatAtTotalLevel(materialForEdi, 8);
+
+    ////Price - overriden///
+    cartRobot.verifyEnablePriceOverride(materialForEdi);
+    await cartRobot.tapPrice(materialForEdi);
+    await cartRobot.changePrice(80);
+    await cartRobot.tapPriceOverrideButton();
+    cartRobot.verifyUnitPrice(currency, '80');
+    await cartRobot.tapPrice(materialForEdi);
+    await cartRobot.changePrice(469.7);
+    await cartRobot.tapPriceOverrideButton();
+    cartRobot.verifyUnitPrice(currency, '469.7');
+    ////Price - overriden///
     //update material quantity
     await cartRobot.tapMaterial(materialForEdiAbsolute);
     await materialDetailRobot.changeQuantity(20);
@@ -294,24 +306,14 @@ void main() {
     await orderSummaryRobot.tapContinueButton(3);
     //Minimum Order Amount
     orderSummaryRobot.allowMinimumOrderAmount('$currency $minimumOrderAmount');
-    orderSummaryRobot.verifySubTotalPrice(
-      currency, material1SubTotalPrice
-    );
-    orderSummaryRobot.verifyGrandTotalPrice(
-      currency, material1GrandTotalPrice
-    );
+    orderSummaryRobot.verifySubTotalPrice(currency, material1SubTotalPrice);
+    orderSummaryRobot.verifyGrandTotalPrice(currency, material1GrandTotalPrice);
     //verify orders with currency check
     orderSummaryRobot.findMaterialItem(materialWithoutPrice, 1);
     orderSummaryRobot.verifyMaterialUnitPrice(
-      false,
-      currency,
-      material1UnitPrice
-    );
+        false, currency, material1UnitPrice);
     orderSummaryRobot.verifyMaterialTotalPrice(
-      false,
-      currency,
-      material1TotalPrice
-    );
+        false, currency, material1TotalPrice);
     orderSummaryRobot.findSubmit();
     await orderSummaryRobot.tapSubmit();
     //could not able to place an order as it does not cross

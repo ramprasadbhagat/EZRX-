@@ -157,6 +157,12 @@ void main() {
     cartRobot.verify();
     cartRobot.findMaterialItem(materialWithoutPrice, materialQuantity);
     cartRobot.verifyHideStockDisplay();
+    cartRobot.verifyEnablePriceOverride(materialWithoutPrice);
+    await cartRobot.tapPrice(materialWithoutPrice);
+    await cartRobot.changePrice(80);
+    await cartRobot.tapPriceOverrideButton();
+    cartRobot.verifyUnitPriceNA();
+    ////Price - overriden///
     cartRobot.findOrderSummary();
     await cartRobot.tapOrderSummary();
     //order summary pageF
@@ -274,7 +280,8 @@ void main() {
     orderTemplateListRobot.findTemplateItem(orderTemplateName);
     await orderTemplateListRobot.tapTemplateItem(orderTemplateName);
     orderTemplateDetailRobot.verifyMaterialNumber(materialAbsolute);
-    orderTemplateDetailRobot.verifyMaterialQuantity(materialQuantity.toString());
+    orderTemplateDetailRobot
+        .verifyMaterialQuantity(materialQuantity.toString());
     orderTemplateDetailRobot.findAddToCart();
     await orderTemplateDetailRobot.tapAddToCart();
     cartRobot.verifyHideStockDisplay();

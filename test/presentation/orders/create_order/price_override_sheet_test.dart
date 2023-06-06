@@ -1,9 +1,16 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/role.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -22,6 +29,16 @@ import '../../../utils/widget_utils.dart';
 
 class CartMockBloc extends MockBloc<CartEvent, CartState> implements CartBloc {}
 
+class SalesOrgMockBloc extends MockBloc<SalesOrgEvent, SalesOrgState>
+    implements SalesOrgBloc {}
+
+class CustomerCodeMockBloc
+    extends MockBloc<CustomerCodeEvent, CustomerCodeState>
+    implements CustomerCodeBloc {}
+
+class EligibilityMockBloc extends MockBloc<EligibilityEvent, EligibilityState>
+    implements EligibilityBloc {}
+
 class PriceOverrideMockBloc
     extends MockBloc<PriceOverrideEvent, PriceOverrideState>
     implements PriceOverrideBloc {}
@@ -30,6 +47,9 @@ class AutoRouterMock extends Mock implements AppRouter {}
 
 void main() {
   late CartBloc cartMockBloc;
+  late SalesOrgBloc salesOrgMockBloc;
+  late CustomerCodeBloc customerCodeMockBloc;
+  late EligibilityBloc eligibilityMockBloc;
   late AppRouter autoRouterMock;
   late PriceOverrideBloc priceOverrideMockBloc;
   late List<PriceAggregate> mockPriceAggregates;
@@ -37,6 +57,9 @@ void main() {
   group('Price Override Sheet Test', () {
     setUp(() {
       cartMockBloc = CartMockBloc();
+      eligibilityMockBloc = EligibilityMockBloc();
+      salesOrgMockBloc = SalesOrgMockBloc();
+      customerCodeMockBloc = CustomerCodeMockBloc();
       autoRouterMock = AppRouter();
       priceOverrideMockBloc = PriceOverrideMockBloc();
       mockPriceAggregates = [
@@ -107,7 +130,23 @@ void main() {
       await tester.enterText(priceOverrideTextFormField, '0.11');
     });
 
-    testWidgets('Change Price Test validation error', (tester) async {
+    testWidgets('Change Price Test for salesRep user success', (tester) async {
+      when(() => salesOrgMockBloc.state).thenReturn(
+        SalesOrgState.initial(),
+      );
+      when(() => customerCodeMockBloc.state).thenReturn(
+        CustomerCodeState.initial(),
+      );
+      when(() => eligibilityMockBloc.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          user: User.empty().copyWith(
+            hasPriceOverride: true,
+            role: Role.empty().copyWith(
+              type: RoleType('internal_sales_rep'),
+            ),
+          ),
+        ),
+      );
       final expectedStates = [
         PriceOverrideState.initial(),
         PriceOverrideState.initial().copyWith(
@@ -118,11 +157,162 @@ void main() {
       ];
 
       whenListen(priceOverrideMockBloc, Stream.fromIterable(expectedStates));
-      await tester.pumpWidget(getScopedWidget(PriceSheet(
-        item: mockPriceAggregates.first.copyWith(
-            salesOrgConfig: SalesOrganisationConfigs.empty()
-                .copyWith(currency: Currency('vnd'))),
-      )));
+      await tester.pumpWidget(getScopedWidget(
+          PriceSheet(
+            item: mockPriceAggregates.first.copyWith(
+              salesOrgConfig: SalesOrganisationConfigs.empty().copyWith(
+                currency: Currency('vnd'),
+              ),
+            ),
+          ),
+          [
+            BlocProvider<EligibilityBloc>(
+              create: (context) => eligibilityMockBloc,
+            ),
+            BlocProvider<SalesOrgBloc>(
+              create: (context) => salesOrgMockBloc,
+            ),
+            BlocProvider<CustomerCodeBloc>(
+              create: (context) => customerCodeMockBloc,
+            ),
+          ]));
+
+      final priceOverrideTextFormField =
+          find.byKey(const Key('priceOverrideTextFormField'));
+      expect(priceOverrideTextFormField, findsOneWidget);
+      await tester.enterText(priceOverrideTextFormField, '0.11');
+      await tester.pump();
+      final priceOverrideSubmitButton =
+          find.byKey(const Key('priceOverrideSubmitButton'));
+      await tester.tap(priceOverrideSubmitButton);
+      await tester.pump();
+      verify(
+        () => priceOverrideMockBloc.add(
+          PriceOverrideEvent.fetch(
+            item: mockPriceAggregates.first.copyWith(
+                salesOrgConfig: SalesOrganisationConfigs.empty()
+                    .copyWith(currency: Currency('vnd'))),
+            salesOrganisation: SalesOrganisation.empty(),
+            customerCodeInfo: CustomerCodeInfo.empty(),
+          ),
+        ),
+      ).called(1);
+    });
+
+    testWidgets('Change Price Test for salesRep user not success',
+        (tester) async {
+      when(() => salesOrgMockBloc.state).thenReturn(
+        SalesOrgState.initial(),
+      );
+      when(() => customerCodeMockBloc.state).thenReturn(
+        CustomerCodeState.initial(),
+      );
+      when(() => eligibilityMockBloc.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          user: User.empty().copyWith(
+            hasPriceOverride: false,
+            role: Role.empty().copyWith(
+              type: RoleType('internal_sales_rep'),
+            ),
+          ),
+        ),
+      );
+      final expectedStates = [
+        PriceOverrideState.initial(),
+        PriceOverrideState.initial().copyWith(
+          priceOverrideValue: PriceOverrideValue(0.0),
+          isFetching: false,
+          showErrorMessages: true,
+        ),
+      ];
+
+      whenListen(priceOverrideMockBloc, Stream.fromIterable(expectedStates));
+      await tester.pumpWidget(
+        getScopedWidget(
+          PriceSheet(
+            item: mockPriceAggregates.first.copyWith(
+              salesOrgConfig: SalesOrganisationConfigs.empty().copyWith(
+                currency: Currency('vnd'),
+              ),
+            ),
+          ),
+          [
+            BlocProvider<EligibilityBloc>(
+              create: (context) => eligibilityMockBloc,
+            ),
+            BlocProvider<SalesOrgBloc>(
+              create: (context) => salesOrgMockBloc,
+            ),
+            BlocProvider<CustomerCodeBloc>(
+              create: (context) => customerCodeMockBloc,
+            ),
+          ],
+        ),
+      );
+
+      final priceOverrideTextFormField =
+          find.byKey(const Key('priceOverrideTextFormField'));
+      expect(priceOverrideTextFormField, findsOneWidget);
+      await tester.enterText(priceOverrideTextFormField, '0.11');
+      await tester.pump();
+      final priceOverrideSubmitButton =
+          find.byKey(const Key('priceOverrideSubmitButton'));
+      await tester.tap(priceOverrideSubmitButton);
+      await tester.pump();
+      verifyNever(
+        () => priceOverrideMockBloc.add(
+          PriceOverrideEvent.fetch(
+            item: mockPriceAggregates.first.copyWith(
+                salesOrgConfig: SalesOrganisationConfigs.empty()
+                    .copyWith(currency: Currency('vnd'))),
+            salesOrganisation: SalesOrganisation.empty(),
+            customerCodeInfo: CustomerCodeInfo.empty(),
+          ),
+        ),
+      );
+    });
+
+    testWidgets('Change Price Test validation error', (tester) async {
+      when(() => eligibilityMockBloc.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          user: User.empty().copyWith(
+            hasPriceOverride: false,
+            role: Role.empty().copyWith(
+              type: RoleType('internal_sales_rep'),
+            ),
+          ),
+        ),
+      );
+      final expectedStates = [
+        PriceOverrideState.initial(),
+        PriceOverrideState.initial().copyWith(
+          priceOverrideValue: PriceOverrideValue(0.0),
+          isFetching: false,
+          showErrorMessages: true,
+        ),
+      ];
+
+      whenListen(priceOverrideMockBloc, Stream.fromIterable(expectedStates));
+      await tester.pumpWidget(
+        getScopedWidget(
+          PriceSheet(
+            item: mockPriceAggregates.first.copyWith(
+                salesOrgConfig: SalesOrganisationConfigs.empty()
+                    .copyWith(currency: Currency('vnd'))),
+          ),
+          [
+            BlocProvider<EligibilityBloc>(
+              create: (context) => eligibilityMockBloc,
+            ),
+            BlocProvider<SalesOrgBloc>(
+              create: (context) => salesOrgMockBloc,
+            ),
+            BlocProvider<CustomerCodeBloc>(
+              create: (context) => customerCodeMockBloc,
+            ),
+          ],
+        ),
+      );
 
       final priceOverrideTextFormField =
           find.byKey(const Key('priceOverrideTextFormField'));

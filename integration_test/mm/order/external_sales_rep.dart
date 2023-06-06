@@ -42,7 +42,8 @@ void main() {
 
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  testWidgets('MM External Sales Rep user - end to end - order test', (tester) async {
+  testWidgets('MM External Sales Rep user - end to end - order test',
+      (tester) async {
     //initialize neccessary robots
     loginRobot = LoginRobot(tester);
     homeRobot = HomeRobot(tester);
@@ -151,6 +152,17 @@ void main() {
     await materialDetailRobot.tapUpdateAddToCart();
     cartRobot.verify();
     cartRobot.findMaterialItem(material, materialQuantity);
+
+    cartRobot.verifyEnablePriceOverride(material);
+    await cartRobot.tapPrice(material);
+    await cartRobot.changePrice(80);
+    await cartRobot.tapPriceOverrideButton();
+    cartRobot.verifyUnitPrice(currency, '80');
+    await cartRobot.tapPrice(material);
+    await cartRobot.changePrice(30);
+    await cartRobot.tapPriceOverrideButton();
+    cartRobot.verifyUnitPrice(currency, '30');
+    ////Price - overriden///
     //Display Expiry Date
     cartRobot.verifyExpiryMaterial(material);
 
