@@ -9,19 +9,18 @@ class Config {
   int httpConnectTimeout = 150000;
   int httpReceiveTimeout = 150000;
   Duration dateRangePickerDuration = const Duration(days: 1095);
-  String get targetProduct => 'EZRX';
 
   String get baseUrl {
     switch (appFlavor) {
       case Flavor.mock:
         return 'http://127.0.0.1:7091';
       case Flavor.dev:
-        return 'https://dev.ezrx.com';
+        return 'https://dev-my.ezrx.com';
       case Flavor.uat:
-        return 'https://uat.ezrx.com';
+        return 'https://uat-my.ezrx.com';
       case Flavor.prod:
       default:
-        return 'https://ezrx.com';
+        return 'https://my.ezrx.com';
     }
   }
 
@@ -34,30 +33,6 @@ class Config {
       case Flavor.mock:
       default:
         return '';
-    }
-  }
-
-  String get getPrivacyUrl {
-    switch (appFlavor) {
-      case Flavor.dev:
-      case Flavor.uat:
-      case Flavor.prod:
-        return '$baseUrl/privacy_policy';
-      case Flavor.mock:
-      default:
-        return '';
-    }
-  }
-
-  String? get getPrivacyInitialFile {
-    switch (appFlavor) {
-      case Flavor.mock:
-        return 'assets/html/eZRx-privacy_policy.html';
-      case Flavor.dev:
-      case Flavor.uat:
-      case Flavor.prod:
-      default:
-        return null;
     }
   }
 
@@ -89,6 +64,11 @@ class Config {
     }
   }
 
+  //============================================================
+  //  Okta SSO login
+  //
+  //============================================================
+
   Map<String, dynamic> get oktaConfig {
     switch (appFlavor) {
       case Flavor.mock:
@@ -112,6 +92,39 @@ class Config {
         };
     }
   }
+
+  //============================================================
+  //  Privacy Policy
+  //
+  //============================================================
+  String get getPrivacyUrl {
+    switch (appFlavor) {
+      case Flavor.dev:
+      case Flavor.uat:
+      case Flavor.prod:
+        return '$baseUrl/privacy_policy';
+      case Flavor.mock:
+      default:
+        return '';
+    }
+  }
+
+  String? get getPrivacyInitialFile {
+    switch (appFlavor) {
+      case Flavor.mock:
+        return 'assets/html/eZRx-privacy_policy.html';
+      case Flavor.dev:
+      case Flavor.uat:
+      case Flavor.prod:
+      default:
+        return null;
+    }
+  }
+
+  //============================================================
+  //  Term and Condition
+  //
+  //============================================================
 
   String get getTCENUrl {
     switch (appFlavor) {
@@ -257,6 +270,11 @@ class Config {
     }
   }
 
+  //============================================================
+  //  Firebase
+  //
+  //============================================================
+
   FirebaseOptions get firebaseOptions {
     switch (appFlavor) {
       case Flavor.mock:
@@ -304,6 +322,11 @@ class Config {
     }
   }
 
+  //============================================================
+  //  Mixpanel
+  //
+  //============================================================
+
   String get mixpanelKey {
     switch (appFlavor) {
       case Flavor.dev:
@@ -316,6 +339,11 @@ class Config {
         return 'f401c9430963bf0091150adb1a0593e3';
     }
   }
+
+  //============================================================
+  //  Scandit
+  //
+  //============================================================
 
   String get scanditLicenseKey {
     switch (appFlavor) {
@@ -352,11 +380,22 @@ class Config {
         'heic',
       ];
 
+  //============================================================
+  //  Payment advice logo
+  //
+  //============================================================
+
   List<String> get allowedExtensionsPaymentAdviceLogo => [
         'png',
         'jpg',
         'jpeg',
       ];
+  //============================================================
+  //  eZReach
+  //
+  //============================================================
+  // https://zuelligpharma.atlassian.net/wiki/spaces/CONSUB/pages/78283852/eZReach+integration+with+eZRx
+  String get targetProduct => 'EZRX+';
 
   String get getEZReachUrl {
     switch (appFlavor) {
