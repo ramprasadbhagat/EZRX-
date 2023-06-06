@@ -331,12 +331,12 @@ class Config {
     switch (appFlavor) {
       case Flavor.dev:
       case Flavor.mock:
-        return 'd39d1a5395bc4054f5d1cf296b20d80b';
+        return '54d0f06f471767440cbe387ea9b35eb6';
       case Flavor.uat:
-        return '4d4594910c5642d9da48164e39ee5134';
+        return '3d6a7eee1377f95ad8b24f204b112f24';
       case Flavor.prod:
       default:
-        return 'f401c9430963bf0091150adb1a0593e3';
+        return '8b725579df59111dd76fc65f2be558f0';
     }
   }
 

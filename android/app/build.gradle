@@ -85,9 +85,9 @@ android {
             dimension "env"
             versionNameSuffix "-mock"
             applicationIdSuffix ".mock"
-            resValue "string", "clevertap_account_id", "TEST-658-5W9-486Z"
-            resValue "string", "clevertap_token", "TEST-c05-b56"
-            resValue "string", "app_name", "eZRx Mock"
+            resValue "string", "clevertap_account_id", "TEST-464-R68-876Z"
+            resValue "string", "clevertap_token", "TEST-b62-464"
+            resValue "string", "app_name", "eZRx+ Mock"
             manifestPlaceholders += [appAuthRedirectScheme: "com.oktapreview.zuellig"]
         }
 
@@ -95,9 +95,9 @@ android {
             dimension "env"
             versionNameSuffix "-dev"
             applicationIdSuffix ".dev"
-            resValue "string", "clevertap_account_id", "TEST-658-5W9-486Z"
-            resValue "string", "clevertap_token", "TEST-c05-b56"
-            resValue "string", "app_name", "eZRx Dev"
+            resValue "string", "clevertap_account_id", "TEST-464-R68-876Z"
+            resValue "string", "clevertap_token", "TEST-b62-464"
+            resValue "string", "app_name", "eZRx+ Dev"
             manifestPlaceholders += [appAuthRedirectScheme: "com.oktapreview.zuellig"]
         }
 
@@ -105,17 +105,17 @@ android {
             dimension "env"
             versionNameSuffix "-uat"
             applicationIdSuffix ".uat"
-            resValue "string", "clevertap_account_id", "TEST-W84-8RR-486Z"
-            resValue "string", "clevertap_token", "TEST-22b-4b0"
-            resValue "string", "app_name", "eZRx Uat"
+            resValue "string", "clevertap_account_id", "TEST-798-WW8-476Z"
+            resValue "string", "clevertap_token", "TEST-b00-bca"
+            resValue "string", "app_name", "eZRx+ Uat"
             manifestPlaceholders += [appAuthRedirectScheme: "com.oktapreview.zuellig"]
         }
 
         prod {
             dimension "env"
-            resValue "string", "clevertap_account_id", "656-6W4-866Z"
-            resValue "string", "clevertap_token", "406-656"
-            resValue "string", "app_name", "eZRx"
+            resValue "string", "clevertap_account_id", "698-WW8-476Z"
+            resValue "string", "clevertap_token", "b00-bc6"
+            resValue "string", "app_name", "eZRx+"
             manifestPlaceholders += [appAuthRedirectScheme: "com.zuelligpharma.ezlogin"]
         }
 
