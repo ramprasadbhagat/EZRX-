@@ -13,9 +13,12 @@ class InvoiceDetailsLocalDataSource {
         'assets/json/customerDocumentDetailsResponse.json',
       ),
     );
-    final res = data['data']['customerDocumentDetails'];
+    final details = data['data']['customerDocumentDetails'];
+    final result = <CustomerDocumentDetail>[];
+    for (final dynamic detail in details) {
+      result.add(CustomerDocumentDetailDto.fromJson(detail).toDomain());
+    }
 
-    return res
-        .map((data) => CustomerDocumentDetailDto.fromJson(data).toDomain());
+    return result;
   }
 }

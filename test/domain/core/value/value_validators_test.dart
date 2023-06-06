@@ -484,4 +484,43 @@ void main() {
       },
     );
   });
+
+  
+
+  group('validateIntegerValue', () {
+    test(
+      'should return the integer when input is an integer string',
+      () async {
+        const input = '8';
+        final result = validateIntegerValue(
+          input,
+        );
+        expect(result, const Right(8));
+      },
+    );
+    test(
+      'should return the integer when input is a double string',
+      () async {
+        const input = '8.342';
+        final result = validateIntegerValue(
+          input,
+        );
+        expect(result, const Right(8));
+      },
+    );
+
+    test(
+      'should return failure when the string is not a number',
+      () async {
+        const input = 'any-string-not-number';
+        final result = validateIntegerValue(input);
+        expect(
+          result,
+          const Left(ValueFailure.invalidIntegerValue(
+            failedValue: 0,
+          )),
+        );
+      },
+    );
+  });
 }
