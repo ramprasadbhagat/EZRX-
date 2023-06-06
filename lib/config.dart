@@ -64,28 +64,28 @@ class Config {
   String get appName {
     switch (appFlavor) {
       case Flavor.mock:
-        return 'eZRx Mock';
+        return 'eZRx+ Mock';
       case Flavor.dev:
-        return 'eZRx Dev';
+        return 'eZRx+ Dev';
       case Flavor.uat:
-        return 'eZRx Uat';
+        return 'eZRx+ Uat';
       case Flavor.prod:
       default:
-        return 'eZRx';
+        return 'eZRx+';
     }
   }
 
   String get packageName {
     switch (appFlavor) {
       case Flavor.mock:
-        return 'com.zuelligpharma.ezrxmobile.mock';
+        return 'com.zuelligpharma.ezrxmobileplus.mock';
       case Flavor.dev:
-        return 'com.zuelligpharma.ezrxmobile.dev';
+        return 'com.zuelligpharma.ezrxmobileplus.dev';
       case Flavor.uat:
-        return 'com.zuelligpharma.ezrxmobile.uat';
+        return 'com.zuelligpharma.ezrxmobileplus.uat';
       case Flavor.prod:
       default:
-        return 'com.zuelligpharma.ezrxmobile';
+        return 'com.zuelligpharma.ezrxmobileplus';
     }
   }
 

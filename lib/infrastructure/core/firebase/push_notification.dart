@@ -42,7 +42,7 @@ class PushNotificationService {
             AndroidFlutterLocalNotificationsPlugin>()
         ?.createNotificationChannel(
           const AndroidNotificationChannel(
-            'com.zuelligpharma.ezrxmobile',
+            'com.zuelligpharma.ezrxmobileplus',
             'eZRx notification',
             importance: Importance.max,
           ),
@@ -60,7 +60,7 @@ class PushNotificationService {
     String? notificationContent,
     String payload,
   ) async {
-    const channelId = 'com.zuelligpharma.ezrxmobile';
+    const channelId = 'com.zuelligpharma.ezrxmobileplus';
     const channelTitle = 'eZRx notification';
     const notificationPriority = Priority.high;
     const notificationImportance = Importance.max;

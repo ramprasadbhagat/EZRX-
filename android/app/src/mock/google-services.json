@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:289365077122:android:12b96520deb5b021f6589b",
         "android_client_info": {
-          "package_name": "com.zuelligpharma.ezrxmobile.dev"
+          "package_name": "com.zuelligpharma.ezrxmobileplus.dev"
         }
       },
       "oauth_client": [
@@ -34,7 +34,7 @@
               "client_id": "289365077122-lkiah5ba8g9d2r9nsadfb358n2mkbb9f.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.zuelligpharma.ezrxmobile.mock"
+                "bundle_id": "com.zuelligpharma.ezrxmobileplus.mock"
               }
             }
           ]
@@ -45,7 +45,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:289365077122:android:5301e854363ee6d2f6589b",
         "android_client_info": {
-          "package_name": "com.zuelligpharma.ezrxmobile.mock"
+          "package_name": "com.zuelligpharma.ezrxmobileplus.mock"
         }
       },
       "oauth_client": [
@@ -70,7 +70,7 @@
               "client_id": "289365077122-lkiah5ba8g9d2r9nsadfb358n2mkbb9f.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.zuelligpharma.ezrxmobile.mock"
+                "bundle_id": "com.zuelligpharma.ezrxmobileplus.mock"
               }
             }
           ]
@@ -81,7 +81,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:289365077122:android:f090a3b6cfa429b2f6589b",
         "android_client_info": {
-          "package_name": "com.zuelligpharma.ezrxmobile.uat"
+          "package_name": "com.zuelligpharma.ezrxmobileplus.uat"
         }
       },
       "oauth_client": [
@@ -106,7 +106,7 @@
               "client_id": "289365077122-lkiah5ba8g9d2r9nsadfb358n2mkbb9f.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.zuelligpharma.ezrxmobile.mock"
+                "bundle_id": "com.zuelligpharma.ezrxmobileplus.mock"
               }
             }
           ]

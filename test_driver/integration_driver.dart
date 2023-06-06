@@ -6,7 +6,7 @@ import 'package:integration_test/integration_test_driver.dart';
 Future<void> main() {
   // enableFlutterDriverExtension();
   // Allow all eZRx app permission
-  const packageName = 'com.zuelligpharma.ezrxmobile.uat';
+  const packageName = 'com.zuelligpharma.ezrxmobileplus.uat';
   if (Platform.isIOS) {
     Process.run('xcrun', [
       'simctl',

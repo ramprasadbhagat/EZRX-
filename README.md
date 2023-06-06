@@ -52,10 +52,10 @@ type command `make run_sg_external_test` to run integration test
 ### Flavor
 | Flavor| Package name | App Name | Endpoint |
 |--|--|--|--|
-| PROD |  `com.zuelligpharma.ezrxmobile`| eZRx | https://ezrx.com |
-| UAT  |  `com.zuelligpharma.ezrxmobile.uat`| eZRx Uat | https://uat.ezrx.com |
-| DEV  |  `com.zuelligpharma.ezrxmobile.dev`| eZRx Dev | https://dev.ezrx.com |
-| MOCK  |  `com.zuelligpharma.ezrxmobile.mock`| eZRx Mock | local assets json |
+| PROD |  `com.zuelligpharma.ezrxmobileplus`| eZRx+ | https://my.ezrx.com |
+| UAT  |  `com.zuelligpharma.ezrxmobileplus.uat`| eZRx+ Uat | https://uat-my.ezrx.com |
+| DEV  |  `com.zuelligpharma.ezrxmobileplus.dev`| eZRx+ Dev | https://dev-dev.ezrx.com |
+| MOCK  |  `com.zuelligpharma.ezrxmobileplus.mock`| eZRx+ Mock | local assets json |
 
 ### Build app
 #### IOS

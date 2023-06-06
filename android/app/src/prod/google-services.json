@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:1064533093414:android:b0bbe76354c7c22f800ae7",
         "android_client_info": {
-          "package_name": "com.zuelligpharma.ezrxmobile"
+          "package_name": "com.zuelligpharma.ezrxmobileplus"
         }
       },
       "oauth_client": [
@@ -35,7 +35,7 @@
               "client_id": "1064533093414-4vqhq90nfbtcqm8cv79jigr4ul7hdhfl.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.zuelligpharma.ezrxmobile"
+                "bundle_id": "com.zuelligpharma.ezrxmobileplus"
               }
             }
           ]
