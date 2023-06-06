@@ -19,6 +19,7 @@ mixin _$SalesDistrictInfo {
   int get id => throw _privateConstructorUsedError;
   StringValue get salesDistrictHeader => throw _privateConstructorUsedError;
   StringValue get salesDistrictLabel => throw _privateConstructorUsedError;
+  bool get isDeleteInProgress => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SalesDistrictInfoCopyWith<SalesDistrictInfo> get copyWith =>
@@ -34,7 +35,8 @@ abstract class $SalesDistrictInfoCopyWith<$Res> {
   $Res call(
       {int id,
       StringValue salesDistrictHeader,
-      StringValue salesDistrictLabel});
+      StringValue salesDistrictLabel,
+      bool isDeleteInProgress});
 }
 
 /// @nodoc
@@ -53,6 +55,7 @@ class _$SalesDistrictInfoCopyWithImpl<$Res, $Val extends SalesDistrictInfo>
     Object? id = null,
     Object? salesDistrictHeader = null,
     Object? salesDistrictLabel = null,
+    Object? isDeleteInProgress = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -67,6 +70,10 @@ class _$SalesDistrictInfoCopyWithImpl<$Res, $Val extends SalesDistrictInfo>
           ? _value.salesDistrictLabel
           : salesDistrictLabel // ignore: cast_nullable_to_non_nullable
               as StringValue,
+      isDeleteInProgress: null == isDeleteInProgress
+          ? _value.isDeleteInProgress
+          : isDeleteInProgress // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -82,7 +89,8 @@ abstract class _$$_SalesDistrictInfoCopyWith<$Res>
   $Res call(
       {int id,
       StringValue salesDistrictHeader,
-      StringValue salesDistrictLabel});
+      StringValue salesDistrictLabel,
+      bool isDeleteInProgress});
 }
 
 /// @nodoc
@@ -99,6 +107,7 @@ class __$$_SalesDistrictInfoCopyWithImpl<$Res>
     Object? id = null,
     Object? salesDistrictHeader = null,
     Object? salesDistrictLabel = null,
+    Object? isDeleteInProgress = null,
   }) {
     return _then(_$_SalesDistrictInfo(
       id: null == id
@@ -113,6 +122,10 @@ class __$$_SalesDistrictInfoCopyWithImpl<$Res>
           ? _value.salesDistrictLabel
           : salesDistrictLabel // ignore: cast_nullable_to_non_nullable
               as StringValue,
+      isDeleteInProgress: null == isDeleteInProgress
+          ? _value.isDeleteInProgress
+          : isDeleteInProgress // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -123,7 +136,8 @@ class _$_SalesDistrictInfo extends _SalesDistrictInfo {
   const _$_SalesDistrictInfo(
       {required this.id,
       required this.salesDistrictHeader,
-      required this.salesDistrictLabel})
+      required this.salesDistrictLabel,
+      required this.isDeleteInProgress})
       : super._();
 
   @override
@@ -132,10 +146,12 @@ class _$_SalesDistrictInfo extends _SalesDistrictInfo {
   final StringValue salesDistrictHeader;
   @override
   final StringValue salesDistrictLabel;
+  @override
+  final bool isDeleteInProgress;
 
   @override
   String toString() {
-    return 'SalesDistrictInfo(id: $id, salesDistrictHeader: $salesDistrictHeader, salesDistrictLabel: $salesDistrictLabel)';
+    return 'SalesDistrictInfo(id: $id, salesDistrictHeader: $salesDistrictHeader, salesDistrictLabel: $salesDistrictLabel, isDeleteInProgress: $isDeleteInProgress)';
   }
 
   @override
@@ -147,12 +163,14 @@ class _$_SalesDistrictInfo extends _SalesDistrictInfo {
             (identical(other.salesDistrictHeader, salesDistrictHeader) ||
                 other.salesDistrictHeader == salesDistrictHeader) &&
             (identical(other.salesDistrictLabel, salesDistrictLabel) ||
-                other.salesDistrictLabel == salesDistrictLabel));
+                other.salesDistrictLabel == salesDistrictLabel) &&
+            (identical(other.isDeleteInProgress, isDeleteInProgress) ||
+                other.isDeleteInProgress == isDeleteInProgress));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, salesDistrictHeader, salesDistrictLabel);
+  int get hashCode => Object.hash(runtimeType, id, salesDistrictHeader,
+      salesDistrictLabel, isDeleteInProgress);
 
   @JsonKey(ignore: true)
   @override
@@ -166,7 +184,8 @@ abstract class _SalesDistrictInfo extends SalesDistrictInfo {
   const factory _SalesDistrictInfo(
       {required final int id,
       required final StringValue salesDistrictHeader,
-      required final StringValue salesDistrictLabel}) = _$_SalesDistrictInfo;
+      required final StringValue salesDistrictLabel,
+      required final bool isDeleteInProgress}) = _$_SalesDistrictInfo;
   const _SalesDistrictInfo._() : super._();
 
   @override
@@ -175,6 +194,8 @@ abstract class _SalesDistrictInfo extends SalesDistrictInfo {
   StringValue get salesDistrictHeader;
   @override
   StringValue get salesDistrictLabel;
+  @override
+  bool get isDeleteInProgress;
   @override
   @JsonKey(ignore: true)
   _$$_SalesDistrictInfoCopyWith<_$_SalesDistrictInfo> get copyWith =>

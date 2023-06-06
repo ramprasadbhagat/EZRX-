@@ -1,19 +1,19 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'add_sales_district_dto.dart';
+part of 'manage_sales_district_dto.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_AddSalesDistrictDto _$$_AddSalesDistrictDtoFromJson(
+_$_ManageSalesDistrictDto _$$_ManageSalesDistrictDtoFromJson(
         Map<String, dynamic> json) =>
-    _$_AddSalesDistrictDto(
+    _$_ManageSalesDistrictDto(
       message: json['message'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_AddSalesDistrictDtoToJson(
-        _$_AddSalesDistrictDto instance) =>
+Map<String, dynamic> _$$_ManageSalesDistrictDtoToJson(
+        _$_ManageSalesDistrictDto instance) =>
     <String, dynamic>{
       'message': instance.message,
     };

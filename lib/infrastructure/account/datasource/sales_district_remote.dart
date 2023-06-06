@@ -2,13 +2,13 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/account/entities/add_sales_district.dart';
+import 'package:ezrxmobile/domain/account/entities/manage_sales_district.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_district.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/sales_district_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/sales_district_dto.dart';
-import 'package:ezrxmobile/infrastructure/account/dtos/add_sales_district_dto.dart';
+import 'package:ezrxmobile/infrastructure/account/dtos/manage_sales_district_dto.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 
 class SalesDistrictRemoteDataSource {
@@ -43,7 +43,7 @@ class SalesDistrictRemoteDataSource {
     });
   }
 
-  Future<AddSalesDistrict> addSalesDistrict({
+  Future<SalesDistrictResponseMessage> addSalesDistrict({
     required String salesOrg,
     required String salesDistrict,
     required String salesDistrictLabel,
@@ -53,7 +53,7 @@ class SalesDistrictRemoteDataSource {
         method: 'POST',
         url: '${config.urlConstants}ezpayMutation',
         data: jsonEncode({
-          'query': salesDistrictQueryMutation.addSalesDistrictQuery(),
+          'query': salesDistrictQueryMutation.manageSalesDistrictQuery(),
           'variables': {
             'input': {
               'salesOrg': salesOrg,
@@ -66,8 +66,60 @@ class SalesDistrictRemoteDataSource {
       );
       _salesDistrictExceptionChecker(res: res);
 
-      return AddSalesDistrictDto.fromJson(
+      return ManageSalesDistrictDto.fromJson(
         res.data['data']['addSalesDistrict'],
+      ).toDomain();
+    });
+  }
+
+  Future<SalesDistrictResponseMessage> editSalesDistrict({
+    required int id,
+    required String salesOrg,
+    required String salesDistrict,
+    required String salesDistrictLabel,
+  }) async {
+    return await dataSourceExceptionHandler.handle(() async {
+      final res = await httpService.request(
+        method: 'POST',
+        url: '${config.urlConstants}ezpayMutation',
+        data: jsonEncode({
+          'query': salesDistrictQueryMutation.manageSalesDistrictQuery(),
+          'variables': {
+            'input': {
+              'id': id,
+              'salesOrg': salesOrg,
+              'salesDistrict': salesDistrict,
+              'salesDistrictLabel' : salesDistrictLabel,
+            },
+          },
+        }),
+        apiEndpoint: 'addSalesDistrict',
+      );
+      _salesDistrictExceptionChecker(res: res);
+
+      return ManageSalesDistrictDto.fromJson(
+        res.data['data']['addSalesDistrict'],
+      ).toDomain();
+    });
+  }
+
+  Future<SalesDistrictResponseMessage> deleteSalesDistrict({
+    required int id,
+  }) async {
+    return await dataSourceExceptionHandler.handle(() async {
+      final res = await httpService.request(
+        method: 'POST',
+        url: '${config.urlConstants}ezpayMutation',
+        data: jsonEncode({
+          'query': salesDistrictQueryMutation.deleteSalesDistrictQuery(),
+          'variables': {'id': id,},
+        }),
+        apiEndpoint: 'deleteSalesDistrict',
+      );
+      _salesDistrictExceptionChecker(res: res);
+
+      return ManageSalesDistrictDto.fromJson(
+        res.data['data']['deleteSalesDistrict'],
       ).toDomain();
     });
   }

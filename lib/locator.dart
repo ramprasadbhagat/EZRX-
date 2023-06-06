@@ -7,7 +7,6 @@ import 'package:ezrxmobile/application/account/payment_configuration/payment_met
 import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/manage_payment_method/manage_payment_methods_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/bank_beneficiary/manage_bank_beneficiary_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/payment_methods_bloc.dart';
-import 'package:ezrxmobile/application/account/payment_configuration/sales_district/add_sales_district/add_sales_district_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_rep/sales_rep_bloc.dart';
 import 'package:ezrxmobile/application/account/settings/setting_bloc.dart';
@@ -2185,11 +2184,6 @@ void setupLocator() {
     ),
   );
 
-  locator.registerLazySingleton(
-    () => AddSalesDistrictBloc(
-      salesDistrictRepository: locator<SalesDistrictRepository>(),
-    ),
-  );
 
   //============================================================
   //  All Invoices and Credits

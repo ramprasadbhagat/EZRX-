@@ -21,6 +21,7 @@ class SalesDistrictInfoDto with _$SalesDistrictInfoDto {
       id: id,
       salesDistrictHeader: StringValue(salesDistrictHeader),
       salesDistrictLabel: StringValue(salesDistrictLabel),
+      isDeleteInProgress: false,
     );
   }
 

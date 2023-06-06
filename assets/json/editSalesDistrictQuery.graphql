@@ -1,0 +1,13 @@
+mutation addSalesDistrict($input: addSalesDistrictInput!) {
+  addSalesDistrict(input: $input) {
+    message
+  }
+}
+
+variable:
+{
+  "salesOrg": "2500",
+  "salesDistrict": "sanes",
+  "salesDistrictLabel": "solute",
+  "id": 66
+}

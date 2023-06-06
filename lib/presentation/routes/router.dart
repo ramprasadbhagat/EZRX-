@@ -65,6 +65,7 @@ import 'package:ezrxmobile/presentation/returns/request_return/return_request_su
 import 'package:ezrxmobile/presentation/payments/payment_summary.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/sales_district/sales_district_page.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/sales_district/add_sales_district_page.dart';
+import 'package:ezrxmobile/presentation/account/payment_configuration/sales_district/edit_sales_district_page.dart';
 
 //ignore: unused-code
 @MaterialAutoRouter(
@@ -275,9 +276,9 @@ import 'package:ezrxmobile/presentation/account/payment_configuration/sales_dist
       page: AddSalesDistrictPage,
     ),
     AutoRoute(
-      path: 'payments/advice_footer',
-      page: PaymentAdviceFooterPage,
-    ),
+        path: 'payments/sales_district/edit_sales_district',
+        page: EditSalesDistrictPage,),
+    AutoRoute(path: 'payments/advice_footer', page: PaymentAdviceFooterPage,),
     AutoRoute(
       path: 'payments/advice_footer/add_advice_footer',
       page: AddPaymentAdviceFooterPage,

@@ -400,17 +400,3 @@ class PaymentMethod extends ValueObject<String> {
   const PaymentMethod._(this.value);
 }
 
-class SalesDistrictMessage extends ValueObject<String> {
-  @override
-  final Either<ValueFailure<String>, String> value;
-
-  factory SalesDistrictMessage(String input) {
-    return SalesDistrictMessage._(validateStringNotEmpty(input));
-  }
-
-  const SalesDistrictMessage._(this.value);
-
-  String get showUserMessage =>
-      showSalesDistrictUserMessage(value.getOrElse(() => ''));
-}
-

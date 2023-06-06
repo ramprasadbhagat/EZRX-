@@ -10,11 +10,13 @@ class SalesDistrictInfo with _$SalesDistrictInfo {
     required int id,
     required StringValue salesDistrictHeader,
     required StringValue salesDistrictLabel,
+    required bool isDeleteInProgress,
   }) = _SalesDistrictInfo;
 
   factory SalesDistrictInfo.empty() => SalesDistrictInfo(
         id: 0,
         salesDistrictHeader: StringValue(''),
         salesDistrictLabel: StringValue(''),
+        isDeleteInProgress: false,
       );
 }

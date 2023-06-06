@@ -19,38 +19,69 @@ mixin _$SalesDistrictEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
+    required TResult Function(SalesDistrictField field, String value)
+        onValueChange,
+    required TResult Function() resetField,
     required TResult Function() fetch,
+    required TResult Function() add,
+    required TResult Function() edit,
+    required TResult Function() delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
+    TResult? Function(SalesDistrictField field, String value)? onValueChange,
+    TResult? Function()? resetField,
     TResult? Function()? fetch,
+    TResult? Function()? add,
+    TResult? Function()? edit,
+    TResult? Function()? delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
+    TResult Function(SalesDistrictField field, String value)? onValueChange,
+    TResult Function()? resetField,
     TResult Function()? fetch,
+    TResult Function()? add,
+    TResult Function()? edit,
+    TResult Function()? delete,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
+    required TResult Function(_OnValueOnChange value) onValueChange,
+    required TResult Function(_ResetField value) resetField,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_Add value) add,
+    required TResult Function(_Edit value) edit,
+    required TResult Function(_Delete value) delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_OnValueOnChange value)? onValueChange,
+    TResult? Function(_ResetField value)? resetField,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_Add value)? add,
+    TResult? Function(_Edit value)? edit,
+    TResult? Function(_Delete value)? delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
+    TResult Function(_OnValueOnChange value)? onValueChange,
+    TResult Function(_ResetField value)? resetField,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_Add value)? add,
+    TResult Function(_Edit value)? edit,
+    TResult Function(_Delete value)? delete,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -113,7 +144,13 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
+    required TResult Function(SalesDistrictField field, String value)
+        onValueChange,
+    required TResult Function() resetField,
     required TResult Function() fetch,
+    required TResult Function() add,
+    required TResult Function() edit,
+    required TResult Function() delete,
   }) {
     return initialized();
   }
@@ -122,7 +159,12 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
+    TResult? Function(SalesDistrictField field, String value)? onValueChange,
+    TResult? Function()? resetField,
     TResult? Function()? fetch,
+    TResult? Function()? add,
+    TResult? Function()? edit,
+    TResult? Function()? delete,
   }) {
     return initialized?.call();
   }
@@ -131,7 +173,12 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
+    TResult Function(SalesDistrictField field, String value)? onValueChange,
+    TResult Function()? resetField,
     TResult Function()? fetch,
+    TResult Function()? add,
+    TResult Function()? edit,
+    TResult Function()? delete,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -144,7 +191,12 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
+    required TResult Function(_OnValueOnChange value) onValueChange,
+    required TResult Function(_ResetField value) resetField,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_Add value) add,
+    required TResult Function(_Edit value) edit,
+    required TResult Function(_Delete value) delete,
   }) {
     return initialized(this);
   }
@@ -153,7 +205,12 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_OnValueOnChange value)? onValueChange,
+    TResult? Function(_ResetField value)? resetField,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_Add value)? add,
+    TResult? Function(_Edit value)? edit,
+    TResult? Function(_Delete value)? delete,
   }) {
     return initialized?.call(this);
   }
@@ -162,7 +219,12 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
+    TResult Function(_OnValueOnChange value)? onValueChange,
+    TResult Function(_ResetField value)? resetField,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_Add value)? add,
+    TResult Function(_Edit value)? edit,
+    TResult Function(_Delete value)? delete,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -174,6 +236,314 @@ class _$_Initialized implements _Initialized {
 
 abstract class _Initialized implements SalesDistrictEvent {
   const factory _Initialized() = _$_Initialized;
+}
+
+/// @nodoc
+abstract class _$$_OnValueOnChangeCopyWith<$Res> {
+  factory _$$_OnValueOnChangeCopyWith(
+          _$_OnValueOnChange value, $Res Function(_$_OnValueOnChange) then) =
+      __$$_OnValueOnChangeCopyWithImpl<$Res>;
+  @useResult
+  $Res call({SalesDistrictField field, String value});
+}
+
+/// @nodoc
+class __$$_OnValueOnChangeCopyWithImpl<$Res>
+    extends _$SalesDistrictEventCopyWithImpl<$Res, _$_OnValueOnChange>
+    implements _$$_OnValueOnChangeCopyWith<$Res> {
+  __$$_OnValueOnChangeCopyWithImpl(
+      _$_OnValueOnChange _value, $Res Function(_$_OnValueOnChange) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? field = null,
+    Object? value = null,
+  }) {
+    return _then(_$_OnValueOnChange(
+      field: null == field
+          ? _value.field
+          : field // ignore: cast_nullable_to_non_nullable
+              as SalesDistrictField,
+      value: null == value
+          ? _value.value
+          : value // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_OnValueOnChange implements _OnValueOnChange {
+  const _$_OnValueOnChange({required this.field, required this.value});
+
+  @override
+  final SalesDistrictField field;
+  @override
+  final String value;
+
+  @override
+  String toString() {
+    return 'SalesDistrictEvent.onValueChange(field: $field, value: $value)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_OnValueOnChange &&
+            (identical(other.field, field) || other.field == field) &&
+            (identical(other.value, value) || other.value == value));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, field, value);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_OnValueOnChangeCopyWith<_$_OnValueOnChange> get copyWith =>
+      __$$_OnValueOnChangeCopyWithImpl<_$_OnValueOnChange>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(SalesDistrictField field, String value)
+        onValueChange,
+    required TResult Function() resetField,
+    required TResult Function() fetch,
+    required TResult Function() add,
+    required TResult Function() edit,
+    required TResult Function() delete,
+  }) {
+    return onValueChange(field, value);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(SalesDistrictField field, String value)? onValueChange,
+    TResult? Function()? resetField,
+    TResult? Function()? fetch,
+    TResult? Function()? add,
+    TResult? Function()? edit,
+    TResult? Function()? delete,
+  }) {
+    return onValueChange?.call(field, value);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(SalesDistrictField field, String value)? onValueChange,
+    TResult Function()? resetField,
+    TResult Function()? fetch,
+    TResult Function()? add,
+    TResult Function()? edit,
+    TResult Function()? delete,
+    required TResult orElse(),
+  }) {
+    if (onValueChange != null) {
+      return onValueChange(field, value);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_OnValueOnChange value) onValueChange,
+    required TResult Function(_ResetField value) resetField,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_Add value) add,
+    required TResult Function(_Edit value) edit,
+    required TResult Function(_Delete value) delete,
+  }) {
+    return onValueChange(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_OnValueOnChange value)? onValueChange,
+    TResult? Function(_ResetField value)? resetField,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_Add value)? add,
+    TResult? Function(_Edit value)? edit,
+    TResult? Function(_Delete value)? delete,
+  }) {
+    return onValueChange?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_OnValueOnChange value)? onValueChange,
+    TResult Function(_ResetField value)? resetField,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_Add value)? add,
+    TResult Function(_Edit value)? edit,
+    TResult Function(_Delete value)? delete,
+    required TResult orElse(),
+  }) {
+    if (onValueChange != null) {
+      return onValueChange(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _OnValueOnChange implements SalesDistrictEvent {
+  const factory _OnValueOnChange(
+      {required final SalesDistrictField field,
+      required final String value}) = _$_OnValueOnChange;
+
+  SalesDistrictField get field;
+  String get value;
+  @JsonKey(ignore: true)
+  _$$_OnValueOnChangeCopyWith<_$_OnValueOnChange> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_ResetFieldCopyWith<$Res> {
+  factory _$$_ResetFieldCopyWith(
+          _$_ResetField value, $Res Function(_$_ResetField) then) =
+      __$$_ResetFieldCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_ResetFieldCopyWithImpl<$Res>
+    extends _$SalesDistrictEventCopyWithImpl<$Res, _$_ResetField>
+    implements _$$_ResetFieldCopyWith<$Res> {
+  __$$_ResetFieldCopyWithImpl(
+      _$_ResetField _value, $Res Function(_$_ResetField) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_ResetField implements _ResetField {
+  const _$_ResetField();
+
+  @override
+  String toString() {
+    return 'SalesDistrictEvent.resetField()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_ResetField);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(SalesDistrictField field, String value)
+        onValueChange,
+    required TResult Function() resetField,
+    required TResult Function() fetch,
+    required TResult Function() add,
+    required TResult Function() edit,
+    required TResult Function() delete,
+  }) {
+    return resetField();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(SalesDistrictField field, String value)? onValueChange,
+    TResult? Function()? resetField,
+    TResult? Function()? fetch,
+    TResult? Function()? add,
+    TResult? Function()? edit,
+    TResult? Function()? delete,
+  }) {
+    return resetField?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(SalesDistrictField field, String value)? onValueChange,
+    TResult Function()? resetField,
+    TResult Function()? fetch,
+    TResult Function()? add,
+    TResult Function()? edit,
+    TResult Function()? delete,
+    required TResult orElse(),
+  }) {
+    if (resetField != null) {
+      return resetField();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_OnValueOnChange value) onValueChange,
+    required TResult Function(_ResetField value) resetField,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_Add value) add,
+    required TResult Function(_Edit value) edit,
+    required TResult Function(_Delete value) delete,
+  }) {
+    return resetField(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_OnValueOnChange value)? onValueChange,
+    TResult? Function(_ResetField value)? resetField,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_Add value)? add,
+    TResult? Function(_Edit value)? edit,
+    TResult? Function(_Delete value)? delete,
+  }) {
+    return resetField?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_OnValueOnChange value)? onValueChange,
+    TResult Function(_ResetField value)? resetField,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_Add value)? add,
+    TResult Function(_Edit value)? edit,
+    TResult Function(_Delete value)? delete,
+    required TResult orElse(),
+  }) {
+    if (resetField != null) {
+      return resetField(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ResetField implements SalesDistrictEvent {
+  const factory _ResetField() = _$_ResetField;
 }
 
 /// @nodoc
@@ -213,7 +583,13 @@ class _$_Fetch implements _Fetch {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
+    required TResult Function(SalesDistrictField field, String value)
+        onValueChange,
+    required TResult Function() resetField,
     required TResult Function() fetch,
+    required TResult Function() add,
+    required TResult Function() edit,
+    required TResult Function() delete,
   }) {
     return fetch();
   }
@@ -222,7 +598,12 @@ class _$_Fetch implements _Fetch {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
+    TResult? Function(SalesDistrictField field, String value)? onValueChange,
+    TResult? Function()? resetField,
     TResult? Function()? fetch,
+    TResult? Function()? add,
+    TResult? Function()? edit,
+    TResult? Function()? delete,
   }) {
     return fetch?.call();
   }
@@ -231,7 +612,12 @@ class _$_Fetch implements _Fetch {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
+    TResult Function(SalesDistrictField field, String value)? onValueChange,
+    TResult Function()? resetField,
     TResult Function()? fetch,
+    TResult Function()? add,
+    TResult Function()? edit,
+    TResult Function()? delete,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -244,7 +630,12 @@ class _$_Fetch implements _Fetch {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
+    required TResult Function(_OnValueOnChange value) onValueChange,
+    required TResult Function(_ResetField value) resetField,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_Add value) add,
+    required TResult Function(_Edit value) edit,
+    required TResult Function(_Delete value) delete,
   }) {
     return fetch(this);
   }
@@ -253,7 +644,12 @@ class _$_Fetch implements _Fetch {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_OnValueOnChange value)? onValueChange,
+    TResult? Function(_ResetField value)? resetField,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_Add value)? add,
+    TResult? Function(_Edit value)? edit,
+    TResult? Function(_Delete value)? delete,
   }) {
     return fetch?.call(this);
   }
@@ -262,7 +658,12 @@ class _$_Fetch implements _Fetch {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
+    TResult Function(_OnValueOnChange value)? onValueChange,
+    TResult Function(_ResetField value)? resetField,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_Add value)? add,
+    TResult Function(_Edit value)? edit,
+    TResult Function(_Delete value)? delete,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -277,11 +678,411 @@ abstract class _Fetch implements SalesDistrictEvent {
 }
 
 /// @nodoc
+abstract class _$$_AddCopyWith<$Res> {
+  factory _$$_AddCopyWith(_$_Add value, $Res Function(_$_Add) then) =
+      __$$_AddCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_AddCopyWithImpl<$Res>
+    extends _$SalesDistrictEventCopyWithImpl<$Res, _$_Add>
+    implements _$$_AddCopyWith<$Res> {
+  __$$_AddCopyWithImpl(_$_Add _value, $Res Function(_$_Add) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_Add implements _Add {
+  const _$_Add();
+
+  @override
+  String toString() {
+    return 'SalesDistrictEvent.add()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_Add);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(SalesDistrictField field, String value)
+        onValueChange,
+    required TResult Function() resetField,
+    required TResult Function() fetch,
+    required TResult Function() add,
+    required TResult Function() edit,
+    required TResult Function() delete,
+  }) {
+    return add();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(SalesDistrictField field, String value)? onValueChange,
+    TResult? Function()? resetField,
+    TResult? Function()? fetch,
+    TResult? Function()? add,
+    TResult? Function()? edit,
+    TResult? Function()? delete,
+  }) {
+    return add?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(SalesDistrictField field, String value)? onValueChange,
+    TResult Function()? resetField,
+    TResult Function()? fetch,
+    TResult Function()? add,
+    TResult Function()? edit,
+    TResult Function()? delete,
+    required TResult orElse(),
+  }) {
+    if (add != null) {
+      return add();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_OnValueOnChange value) onValueChange,
+    required TResult Function(_ResetField value) resetField,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_Add value) add,
+    required TResult Function(_Edit value) edit,
+    required TResult Function(_Delete value) delete,
+  }) {
+    return add(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_OnValueOnChange value)? onValueChange,
+    TResult? Function(_ResetField value)? resetField,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_Add value)? add,
+    TResult? Function(_Edit value)? edit,
+    TResult? Function(_Delete value)? delete,
+  }) {
+    return add?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_OnValueOnChange value)? onValueChange,
+    TResult Function(_ResetField value)? resetField,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_Add value)? add,
+    TResult Function(_Edit value)? edit,
+    TResult Function(_Delete value)? delete,
+    required TResult orElse(),
+  }) {
+    if (add != null) {
+      return add(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Add implements SalesDistrictEvent {
+  const factory _Add() = _$_Add;
+}
+
+/// @nodoc
+abstract class _$$_EditCopyWith<$Res> {
+  factory _$$_EditCopyWith(_$_Edit value, $Res Function(_$_Edit) then) =
+      __$$_EditCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_EditCopyWithImpl<$Res>
+    extends _$SalesDistrictEventCopyWithImpl<$Res, _$_Edit>
+    implements _$$_EditCopyWith<$Res> {
+  __$$_EditCopyWithImpl(_$_Edit _value, $Res Function(_$_Edit) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_Edit implements _Edit {
+  const _$_Edit();
+
+  @override
+  String toString() {
+    return 'SalesDistrictEvent.edit()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_Edit);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(SalesDistrictField field, String value)
+        onValueChange,
+    required TResult Function() resetField,
+    required TResult Function() fetch,
+    required TResult Function() add,
+    required TResult Function() edit,
+    required TResult Function() delete,
+  }) {
+    return edit();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(SalesDistrictField field, String value)? onValueChange,
+    TResult? Function()? resetField,
+    TResult? Function()? fetch,
+    TResult? Function()? add,
+    TResult? Function()? edit,
+    TResult? Function()? delete,
+  }) {
+    return edit?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(SalesDistrictField field, String value)? onValueChange,
+    TResult Function()? resetField,
+    TResult Function()? fetch,
+    TResult Function()? add,
+    TResult Function()? edit,
+    TResult Function()? delete,
+    required TResult orElse(),
+  }) {
+    if (edit != null) {
+      return edit();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_OnValueOnChange value) onValueChange,
+    required TResult Function(_ResetField value) resetField,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_Add value) add,
+    required TResult Function(_Edit value) edit,
+    required TResult Function(_Delete value) delete,
+  }) {
+    return edit(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_OnValueOnChange value)? onValueChange,
+    TResult? Function(_ResetField value)? resetField,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_Add value)? add,
+    TResult? Function(_Edit value)? edit,
+    TResult? Function(_Delete value)? delete,
+  }) {
+    return edit?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_OnValueOnChange value)? onValueChange,
+    TResult Function(_ResetField value)? resetField,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_Add value)? add,
+    TResult Function(_Edit value)? edit,
+    TResult Function(_Delete value)? delete,
+    required TResult orElse(),
+  }) {
+    if (edit != null) {
+      return edit(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Edit implements SalesDistrictEvent {
+  const factory _Edit() = _$_Edit;
+}
+
+/// @nodoc
+abstract class _$$_DeleteCopyWith<$Res> {
+  factory _$$_DeleteCopyWith(_$_Delete value, $Res Function(_$_Delete) then) =
+      __$$_DeleteCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_DeleteCopyWithImpl<$Res>
+    extends _$SalesDistrictEventCopyWithImpl<$Res, _$_Delete>
+    implements _$$_DeleteCopyWith<$Res> {
+  __$$_DeleteCopyWithImpl(_$_Delete _value, $Res Function(_$_Delete) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_Delete implements _Delete {
+  const _$_Delete();
+
+  @override
+  String toString() {
+    return 'SalesDistrictEvent.delete()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_Delete);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(SalesDistrictField field, String value)
+        onValueChange,
+    required TResult Function() resetField,
+    required TResult Function() fetch,
+    required TResult Function() add,
+    required TResult Function() edit,
+    required TResult Function() delete,
+  }) {
+    return delete();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(SalesDistrictField field, String value)? onValueChange,
+    TResult? Function()? resetField,
+    TResult? Function()? fetch,
+    TResult? Function()? add,
+    TResult? Function()? edit,
+    TResult? Function()? delete,
+  }) {
+    return delete?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(SalesDistrictField field, String value)? onValueChange,
+    TResult Function()? resetField,
+    TResult Function()? fetch,
+    TResult Function()? add,
+    TResult Function()? edit,
+    TResult Function()? delete,
+    required TResult orElse(),
+  }) {
+    if (delete != null) {
+      return delete();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_OnValueOnChange value) onValueChange,
+    required TResult Function(_ResetField value) resetField,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_Add value) add,
+    required TResult Function(_Edit value) edit,
+    required TResult Function(_Delete value) delete,
+  }) {
+    return delete(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_OnValueOnChange value)? onValueChange,
+    TResult? Function(_ResetField value)? resetField,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_Add value)? add,
+    TResult? Function(_Edit value)? edit,
+    TResult? Function(_Delete value)? delete,
+  }) {
+    return delete?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_OnValueOnChange value)? onValueChange,
+    TResult Function(_ResetField value)? resetField,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_Add value)? add,
+    TResult Function(_Edit value)? edit,
+    TResult Function(_Delete value)? delete,
+    required TResult orElse(),
+  }) {
+    if (delete != null) {
+      return delete(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Delete implements SalesDistrictEvent {
+  const factory _Delete() = _$_Delete;
+}
+
+/// @nodoc
 mixin _$SalesDistrictState {
   List<SalesDistrict> get salesDistrictList =>
       throw _privateConstructorUsedError;
+  SalesOrg get selectedSalesOrg => throw _privateConstructorUsedError;
+  SalesDistrictInfo get selectedSalesDistrictInfo =>
+      throw _privateConstructorUsedError;
   bool get isFetching => throw _privateConstructorUsedError;
+  bool get isSubmitting => throw _privateConstructorUsedError;
+  bool get showErrorMessages => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption =>
+      throw _privateConstructorUsedError;
+  SalesDistrictResponseMessage get salesDistrictResponseMessage =>
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -297,8 +1098,16 @@ abstract class $SalesDistrictStateCopyWith<$Res> {
   @useResult
   $Res call(
       {List<SalesDistrict> salesDistrictList,
+      SalesOrg selectedSalesOrg,
+      SalesDistrictInfo selectedSalesDistrictInfo,
       bool isFetching,
-      Option<Either<ApiFailure, dynamic>> failureOrSuccessOption});
+      bool isSubmitting,
+      bool showErrorMessages,
+      Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
+      SalesDistrictResponseMessage salesDistrictResponseMessage});
+
+  $SalesDistrictInfoCopyWith<$Res> get selectedSalesDistrictInfo;
+  $SalesDistrictResponseMessageCopyWith<$Res> get salesDistrictResponseMessage;
 }
 
 /// @nodoc
@@ -315,23 +1124,67 @@ class _$SalesDistrictStateCopyWithImpl<$Res, $Val extends SalesDistrictState>
   @override
   $Res call({
     Object? salesDistrictList = null,
+    Object? selectedSalesOrg = null,
+    Object? selectedSalesDistrictInfo = null,
     Object? isFetching = null,
+    Object? isSubmitting = null,
+    Object? showErrorMessages = null,
     Object? failureOrSuccessOption = null,
+    Object? salesDistrictResponseMessage = null,
   }) {
     return _then(_value.copyWith(
       salesDistrictList: null == salesDistrictList
           ? _value.salesDistrictList
           : salesDistrictList // ignore: cast_nullable_to_non_nullable
               as List<SalesDistrict>,
+      selectedSalesOrg: null == selectedSalesOrg
+          ? _value.selectedSalesOrg
+          : selectedSalesOrg // ignore: cast_nullable_to_non_nullable
+              as SalesOrg,
+      selectedSalesDistrictInfo: null == selectedSalesDistrictInfo
+          ? _value.selectedSalesDistrictInfo
+          : selectedSalesDistrictInfo // ignore: cast_nullable_to_non_nullable
+              as SalesDistrictInfo,
       isFetching: null == isFetching
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isSubmitting: null == isSubmitting
+          ? _value.isSubmitting
+          : isSubmitting // ignore: cast_nullable_to_non_nullable
+              as bool,
+      showErrorMessages: null == showErrorMessages
+          ? _value.showErrorMessages
+          : showErrorMessages // ignore: cast_nullable_to_non_nullable
               as bool,
       failureOrSuccessOption: null == failureOrSuccessOption
           ? _value.failureOrSuccessOption
           : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
+      salesDistrictResponseMessage: null == salesDistrictResponseMessage
+          ? _value.salesDistrictResponseMessage
+          : salesDistrictResponseMessage // ignore: cast_nullable_to_non_nullable
+              as SalesDistrictResponseMessage,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesDistrictInfoCopyWith<$Res> get selectedSalesDistrictInfo {
+    return $SalesDistrictInfoCopyWith<$Res>(_value.selectedSalesDistrictInfo,
+        (value) {
+      return _then(_value.copyWith(selectedSalesDistrictInfo: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesDistrictResponseMessageCopyWith<$Res> get salesDistrictResponseMessage {
+    return $SalesDistrictResponseMessageCopyWith<$Res>(
+        _value.salesDistrictResponseMessage, (value) {
+      return _then(
+          _value.copyWith(salesDistrictResponseMessage: value) as $Val);
+    });
   }
 }
 
@@ -345,8 +1198,18 @@ abstract class _$$_SalesDistrictStateCopyWith<$Res>
   @useResult
   $Res call(
       {List<SalesDistrict> salesDistrictList,
+      SalesOrg selectedSalesOrg,
+      SalesDistrictInfo selectedSalesDistrictInfo,
       bool isFetching,
-      Option<Either<ApiFailure, dynamic>> failureOrSuccessOption});
+      bool isSubmitting,
+      bool showErrorMessages,
+      Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
+      SalesDistrictResponseMessage salesDistrictResponseMessage});
+
+  @override
+  $SalesDistrictInfoCopyWith<$Res> get selectedSalesDistrictInfo;
+  @override
+  $SalesDistrictResponseMessageCopyWith<$Res> get salesDistrictResponseMessage;
 }
 
 /// @nodoc
@@ -361,22 +1224,47 @@ class __$$_SalesDistrictStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? salesDistrictList = null,
+    Object? selectedSalesOrg = null,
+    Object? selectedSalesDistrictInfo = null,
     Object? isFetching = null,
+    Object? isSubmitting = null,
+    Object? showErrorMessages = null,
     Object? failureOrSuccessOption = null,
+    Object? salesDistrictResponseMessage = null,
   }) {
     return _then(_$_SalesDistrictState(
       salesDistrictList: null == salesDistrictList
           ? _value._salesDistrictList
           : salesDistrictList // ignore: cast_nullable_to_non_nullable
               as List<SalesDistrict>,
+      selectedSalesOrg: null == selectedSalesOrg
+          ? _value.selectedSalesOrg
+          : selectedSalesOrg // ignore: cast_nullable_to_non_nullable
+              as SalesOrg,
+      selectedSalesDistrictInfo: null == selectedSalesDistrictInfo
+          ? _value.selectedSalesDistrictInfo
+          : selectedSalesDistrictInfo // ignore: cast_nullable_to_non_nullable
+              as SalesDistrictInfo,
       isFetching: null == isFetching
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isSubmitting: null == isSubmitting
+          ? _value.isSubmitting
+          : isSubmitting // ignore: cast_nullable_to_non_nullable
+              as bool,
+      showErrorMessages: null == showErrorMessages
+          ? _value.showErrorMessages
+          : showErrorMessages // ignore: cast_nullable_to_non_nullable
               as bool,
       failureOrSuccessOption: null == failureOrSuccessOption
           ? _value.failureOrSuccessOption
           : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
+      salesDistrictResponseMessage: null == salesDistrictResponseMessage
+          ? _value.salesDistrictResponseMessage
+          : salesDistrictResponseMessage // ignore: cast_nullable_to_non_nullable
+              as SalesDistrictResponseMessage,
     ));
   }
 }
@@ -386,8 +1274,13 @@ class __$$_SalesDistrictStateCopyWithImpl<$Res>
 class _$_SalesDistrictState extends _SalesDistrictState {
   const _$_SalesDistrictState(
       {required final List<SalesDistrict> salesDistrictList,
+      required this.selectedSalesOrg,
+      required this.selectedSalesDistrictInfo,
       required this.isFetching,
-      required this.failureOrSuccessOption})
+      required this.isSubmitting,
+      required this.showErrorMessages,
+      required this.failureOrSuccessOption,
+      required this.salesDistrictResponseMessage})
       : _salesDistrictList = salesDistrictList,
         super._();
 
@@ -401,13 +1294,23 @@ class _$_SalesDistrictState extends _SalesDistrictState {
   }
 
   @override
+  final SalesOrg selectedSalesOrg;
+  @override
+  final SalesDistrictInfo selectedSalesDistrictInfo;
+  @override
   final bool isFetching;
   @override
+  final bool isSubmitting;
+  @override
+  final bool showErrorMessages;
+  @override
   final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption;
+  @override
+  final SalesDistrictResponseMessage salesDistrictResponseMessage;
 
   @override
   String toString() {
-    return 'SalesDistrictState(salesDistrictList: $salesDistrictList, isFetching: $isFetching, failureOrSuccessOption: $failureOrSuccessOption)';
+    return 'SalesDistrictState(salesDistrictList: $salesDistrictList, selectedSalesOrg: $selectedSalesOrg, selectedSalesDistrictInfo: $selectedSalesDistrictInfo, isFetching: $isFetching, isSubmitting: $isSubmitting, showErrorMessages: $showErrorMessages, failureOrSuccessOption: $failureOrSuccessOption, salesDistrictResponseMessage: $salesDistrictResponseMessage)';
   }
 
   @override
@@ -417,18 +1320,36 @@ class _$_SalesDistrictState extends _SalesDistrictState {
             other is _$_SalesDistrictState &&
             const DeepCollectionEquality()
                 .equals(other._salesDistrictList, _salesDistrictList) &&
+            (identical(other.selectedSalesOrg, selectedSalesOrg) ||
+                other.selectedSalesOrg == selectedSalesOrg) &&
+            (identical(other.selectedSalesDistrictInfo,
+                    selectedSalesDistrictInfo) ||
+                other.selectedSalesDistrictInfo == selectedSalesDistrictInfo) &&
             (identical(other.isFetching, isFetching) ||
                 other.isFetching == isFetching) &&
+            (identical(other.isSubmitting, isSubmitting) ||
+                other.isSubmitting == isSubmitting) &&
+            (identical(other.showErrorMessages, showErrorMessages) ||
+                other.showErrorMessages == showErrorMessages) &&
             (identical(other.failureOrSuccessOption, failureOrSuccessOption) ||
-                other.failureOrSuccessOption == failureOrSuccessOption));
+                other.failureOrSuccessOption == failureOrSuccessOption) &&
+            (identical(other.salesDistrictResponseMessage,
+                    salesDistrictResponseMessage) ||
+                other.salesDistrictResponseMessage ==
+                    salesDistrictResponseMessage));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(_salesDistrictList),
+      selectedSalesOrg,
+      selectedSalesDistrictInfo,
       isFetching,
-      failureOrSuccessOption);
+      isSubmitting,
+      showErrorMessages,
+      failureOrSuccessOption,
+      salesDistrictResponseMessage);
 
   @JsonKey(ignore: true)
   @override
@@ -441,17 +1362,32 @@ class _$_SalesDistrictState extends _SalesDistrictState {
 abstract class _SalesDistrictState extends SalesDistrictState {
   const factory _SalesDistrictState(
       {required final List<SalesDistrict> salesDistrictList,
+      required final SalesOrg selectedSalesOrg,
+      required final SalesDistrictInfo selectedSalesDistrictInfo,
       required final bool isFetching,
-      required final Option<Either<ApiFailure, dynamic>>
-          failureOrSuccessOption}) = _$_SalesDistrictState;
+      required final bool isSubmitting,
+      required final bool showErrorMessages,
+      required final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
+      required final SalesDistrictResponseMessage
+          salesDistrictResponseMessage}) = _$_SalesDistrictState;
   const _SalesDistrictState._() : super._();
 
   @override
   List<SalesDistrict> get salesDistrictList;
   @override
+  SalesOrg get selectedSalesOrg;
+  @override
+  SalesDistrictInfo get selectedSalesDistrictInfo;
+  @override
   bool get isFetching;
   @override
+  bool get isSubmitting;
+  @override
+  bool get showErrorMessages;
+  @override
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption;
+  @override
+  SalesDistrictResponseMessage get salesDistrictResponseMessage;
   @override
   @JsonKey(ignore: true)
   _$$_SalesDistrictStateCopyWith<_$_SalesDistrictState> get copyWith =>

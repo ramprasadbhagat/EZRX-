@@ -14,13 +14,24 @@ class SalesDistrictQueryMutation {
     ''';
   }
 
-  String addSalesDistrictQuery() {
+  String manageSalesDistrictQuery() {
     return '''
       mutation addSalesDistrict(\$input: addSalesDistrictInput!) {
         addSalesDistrict(input: \$input) {
           message
         }
       }
+    ''';
+  }
+
+  String deleteSalesDistrictQuery() {
+    return '''
+      mutation deleteSalesDistrict(\$id: Int!) {
+        deleteSalesDistrict(id: \$id) {
+          message
+        }
+      }
+
     ''';
   }
 }

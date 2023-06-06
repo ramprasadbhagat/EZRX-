@@ -1,0 +1,10 @@
+mutation deleteSalesDistrict($id: Int!) {
+  deleteSalesDistrict(id: $id) {
+    message
+  }
+}
+
+variable:
+{
+  "id": 77
+}

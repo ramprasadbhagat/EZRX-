@@ -1,22 +1,19 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/sales_district/sales_district_bloc.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class AddSalesDistrictPage extends StatelessWidget {
-  const AddSalesDistrictPage({Key? key}) : super(key: key);
+class EditSalesDistrictPage extends StatelessWidget {
+  const EditSalesDistrictPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: const Key('addSalesDistrict'),
+      key: const Key('salesDistrictDetails'),
       appBar: AppBar(title: const Text('Sales District Details').tr()),
       body: AnnouncementBanner(
         currentPath: context.router.currentPath,
@@ -24,13 +21,11 @@ class AddSalesDistrictPage extends StatelessWidget {
           listenWhen: (previous, current) =>
               previous.isSubmitting != current.isSubmitting &&
               !current.isSubmitting,
-          listener: (context, state) {
-            state.failureOrSuccessOption.fold(
+          listener: (context, manageSalesDistrictState) {
+            manageSalesDistrictState.failureOrSuccessOption.fold(
               () {},
               (either) => either.fold(
-                (failure) {
-                  ErrorUtils.handleApiFailure(context, failure);
-                },
+                (failure) {},
                 (success) {
                   context.router.pop();
                 },
@@ -38,7 +33,8 @@ class AddSalesDistrictPage extends StatelessWidget {
             );
           },
           buildWhen: (previous, current) =>
-              previous.showErrorMessages != current.showErrorMessages,
+              previous.showErrorMessages != current.showErrorMessages ||
+              previous.isSubmitting != current.isSubmitting,
           builder: (context, state) {
             return Padding(
               padding: const EdgeInsets.all(25.0),
@@ -48,13 +44,13 @@ class AddSalesDistrictPage extends StatelessWidget {
                     : AutovalidateMode.disabled,
                 child: Column(
                   children: [
-                    _SalesOrgDropdown(state: state),
+                    _SalesOrgDropdown(),
                     const SizedBox(height: 20),
                     _SalesDistrictHeaderField(),
                     const SizedBox(height: 20),
                     _SalesDistrictLabelField(),
                     const SizedBox(height: 20),
-                    const _AddSalesDistrictButton(),
+                    _EditSalesDistrictButton(),
                   ],
                 ),
               ),
@@ -74,7 +70,9 @@ class _SalesDistrictHeaderField extends StatelessWidget {
           previous.isSubmitting != current.isSubmitting,
       builder: (context, state) {
         return TextFormField(
-          key: const Key('newSalesDistrictHeaderField'),
+          initialValue: state.selectedSalesDistrictInfo.salesDistrictHeader
+              .getOrDefaultValue(''),
+          key: const Key('newSalesDistrictLabelField'),
           autocorrect: false,
           enabled: !state.isSubmitting,
           decoration: InputDecoration(labelText: 'Sales District'.tr()),
@@ -106,6 +104,8 @@ class _SalesDistrictLabelField extends StatelessWidget {
           previous.isSubmitting != current.isSubmitting,
       builder: (context, state) {
         return TextFormField(
+          initialValue: state.selectedSalesDistrictInfo.salesDistrictLabel
+              .getOrDefaultValue(''),
           key: const Key('newSalesDistrictLabelField'),
           autocorrect: false,
           enabled: !state.isSubmitting,
@@ -131,65 +131,25 @@ class _SalesDistrictLabelField extends StatelessWidget {
 }
 
 class _SalesOrgDropdown extends StatelessWidget {
-  const _SalesOrgDropdown({
-    Key? key,
-    required this.state,
-  }) : super(key: key);
-  final SalesDistrictState state;
-
   @override
   Widget build(BuildContext context) {
-    final salesOrgs = context.read<UserBloc>().state.salesOrgValue;
-
-    return DropdownButtonFormField<String>(
+    return DropdownButtonFormField(
       key: const Key('salesOrgDropdownKey'),
       isExpanded: true,
       decoration: InputDecoration(
-        labelText: 'Select Sales Org'.tr(),
+        labelText: context
+            .read<SalesDistrictBloc>()
+            .state
+            .selectedSalesOrg
+            .getOrDefaultValue(''),
       ),
-      icon: state.isSubmitting
-          ? const SizedBox(
-              height: 15,
-              width: 15,
-              child: CircularProgressIndicator(strokeWidth: 2),
-            )
-          : null,
-      items: salesOrgs.map(
-        (String val) {
-          return DropdownMenuItem<String>(
-            value: val,
-            child: Text(SalesOrg(val).fullName),
-          );
-        },
-      ).toList(),
-      onChanged: state.isSubmitting
-          ? null
-          : (value) {
-              context.read<SalesDistrictBloc>().add(
-                    SalesDistrictEvent.onValueChange(
-                      field: SalesDistrictField.salesOrg,
-                      value: value!,
-                    ),
-                  );
-            },
-      validator: (text) {
-        return SalesOrg(text??'').value.fold(
-          (f) => f.maybeMap(
-            empty: (_) => 'Please Select Sales Org.'.tr(),
-            orElse: () => null,
-          ),
-          (_) => null,
-        );
-      },
+      onChanged: null,
+      items: const [],
     );
   }
 }
 
-class _AddSalesDistrictButton extends StatelessWidget {
-  const _AddSalesDistrictButton({
-    Key? key,
-  }) : super(key: key);
-
+class _EditSalesDistrictButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SalesDistrictBloc, SalesDistrictState>(
@@ -197,10 +157,10 @@ class _AddSalesDistrictButton extends StatelessWidget {
           previous.isSubmitting != current.isSubmitting,
       builder: (context, state) {
         return ElevatedButton(
-          key: const Key('addSalesDistrictButton'),
+          key: const Key('editSalesDistrictButton'),
           onPressed: state.isSubmitting
               ? null
-              : () => _addSubmitButtonClicked(context),
+              : () => _editSubmitButtonClicked(context),
           child: LoadingShimmer.withChild(
             enabled: state.isSubmitting,
             child: const Text('Submit').tr(),
@@ -210,10 +170,10 @@ class _AddSalesDistrictButton extends StatelessWidget {
     );
   }
 
-  void _addSubmitButtonClicked(BuildContext context) {
+  void _editSubmitButtonClicked(BuildContext context) {
     FocusScope.of(context).unfocus();
     context.read<SalesDistrictBloc>().add(
-          const SalesDistrictEvent.add(),
+          const SalesDistrictEvent.edit(),
         );
   }
 }
