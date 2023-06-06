@@ -1,0 +1,14 @@
+mutation deleteDeductionCodeMutation($input: deleteDeductionCodeInput!) {
+  deleteDeductionCode(input: $input) {
+    info
+    success
+  }
+}
+variable:
+{
+    "input": {
+      "salesOrg": "2902",
+      "salesDistrict": null,
+      "deductionCode": "dk"
+    }
+}

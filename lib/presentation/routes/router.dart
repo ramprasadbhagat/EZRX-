@@ -6,6 +6,7 @@ import 'package:ezrxmobile/presentation/account/payment_configuration/deduction_
 import 'package:ezrxmobile/presentation/account/payment_configuration/deduction_code/deduction_code_list_page.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/bank_benificiary/edit_beneficiary_page.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/payment_advice_footer/add_payment_advice_footer.dart';
+import 'package:ezrxmobile/presentation/account/payment_configuration/deduction_code/edit_deduction_code_page.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/payment_configuration_page.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/payment_methods/add_payment_method_page.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/payment_methods/edit_payment_method_page.dart';
@@ -80,7 +81,11 @@ import 'package:ezrxmobile/presentation/account/payment_configuration/sales_dist
     AutoRoute(path: 'payments/add_beneficiary', page: AddBeneficiaryPage),
     AutoRoute(path: 'payments/deduction_code', page: DeductionCodeListPage),
     AutoRoute(path: 'payments/add_deduction_code', page: AddDeductionCodePage),
-    AutoRoute(path: 'payments/edit_beneficiary',page: EditBeneficiaryPage),
+    AutoRoute(path: 'payments/edit_beneficiary', page: EditBeneficiaryPage),
+    AutoRoute(
+      path: 'payments/edit_deduction_code',
+      page: EditDeductionCodePage,
+    ),
     AutoRoute(path: 'returns/request_return', page: RequestReturn),
     AutoRoute(path: 'returns/approver_actions', page: ApproverActions),
     AutoRoute(path: 'returns/return_summary', page: ReturnSummary),
@@ -105,7 +110,7 @@ import 'package:ezrxmobile/presentation/account/payment_configuration/sales_dist
       page: ChangePasswordPage,
     ),
     AutoRoute(
-      path: 'contact_us', 
+      path: 'contact_us',
       page: ContactUsPage,
     ),
     AutoRoute(
@@ -224,7 +229,7 @@ import 'package:ezrxmobile/presentation/account/payment_configuration/sales_dist
       path: 'payments/invoice_details',
       page: InvoiceDetailsPage,
     ),
-     AutoRoute(
+    AutoRoute(
       path: 'payments/all_credits',
       page: AllCredits,
     ),
@@ -264,16 +269,19 @@ import 'package:ezrxmobile/presentation/account/payment_configuration/sales_dist
       path: 'admin_po_attachment',
       page: AdminPoAttachmentPage,
     ),
-    AutoRoute(path: 'payments/sales_district',page: SalesDistrictPage),
+    AutoRoute(path: 'payments/sales_district', page: SalesDistrictPage),
     AutoRoute(
-        path: 'payments/sales_district/add_sales_district',
-        page: AddSalesDistrictPage,),
-    AutoRoute(path: 'payments/advice_footer', page: PaymentAdviceFooterPage,),
+      path: 'payments/sales_district/add_sales_district',
+      page: AddSalesDistrictPage,
+    ),
+    AutoRoute(
+      path: 'payments/advice_footer',
+      page: PaymentAdviceFooterPage,
+    ),
     AutoRoute(
       path: 'payments/advice_footer/add_advice_footer',
       page: AddPaymentAdviceFooterPage,
     ),
-
   ],
 )
 class $AppRouter {}

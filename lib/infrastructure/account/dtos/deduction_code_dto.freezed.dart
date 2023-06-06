@@ -22,7 +22,7 @@ DeductionCodeDto _$DeductionCodeDtoFromJson(Map<String, dynamic> json) {
 mixin _$DeductionCodeDto {
   @JsonKey(name: 'salesOrg', defaultValue: '')
   String get salesOrg => throw _privateConstructorUsedError;
-  @JsonKey(name: 'salesDistrict', defaultValue: '')
+  @JsonKey(name: 'salesDistrict', defaultValue: '', toJson: valueToJson)
   String get salesDistrict => throw _privateConstructorUsedError;
   @JsonKey(name: 'deductionCode', defaultValue: '')
   String get deductionCode => throw _privateConstructorUsedError;
@@ -46,7 +46,7 @@ abstract class $DeductionCodeDtoCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'salesOrg', defaultValue: '')
           String salesOrg,
-      @JsonKey(name: 'salesDistrict', defaultValue: '')
+      @JsonKey(name: 'salesDistrict', defaultValue: '', toJson: valueToJson)
           String salesDistrict,
       @JsonKey(name: 'deductionCode', defaultValue: '')
           String deductionCode,
@@ -111,7 +111,7 @@ abstract class _$$_DeductionCodeDtoCopyWith<$Res>
   $Res call(
       {@JsonKey(name: 'salesOrg', defaultValue: '')
           String salesOrg,
-      @JsonKey(name: 'salesDistrict', defaultValue: '')
+      @JsonKey(name: 'salesDistrict', defaultValue: '', toJson: valueToJson)
           String salesDistrict,
       @JsonKey(name: 'deductionCode', defaultValue: '')
           String deductionCode,
@@ -169,7 +169,7 @@ class _$_DeductionCodeDto extends _DeductionCodeDto {
   const _$_DeductionCodeDto(
       {@JsonKey(name: 'salesOrg', defaultValue: '')
           required this.salesOrg,
-      @JsonKey(name: 'salesDistrict', defaultValue: '')
+      @JsonKey(name: 'salesDistrict', defaultValue: '', toJson: valueToJson)
           required this.salesDistrict,
       @JsonKey(name: 'deductionCode', defaultValue: '')
           required this.deductionCode,
@@ -186,7 +186,7 @@ class _$_DeductionCodeDto extends _DeductionCodeDto {
   @JsonKey(name: 'salesOrg', defaultValue: '')
   final String salesOrg;
   @override
-  @JsonKey(name: 'salesDistrict', defaultValue: '')
+  @JsonKey(name: 'salesDistrict', defaultValue: '', toJson: valueToJson)
   final String salesDistrict;
   @override
   @JsonKey(name: 'deductionCode', defaultValue: '')
@@ -243,7 +243,7 @@ abstract class _DeductionCodeDto extends DeductionCodeDto {
   const factory _DeductionCodeDto(
       {@JsonKey(name: 'salesOrg', defaultValue: '')
           required final String salesOrg,
-      @JsonKey(name: 'salesDistrict', defaultValue: '')
+      @JsonKey(name: 'salesDistrict', defaultValue: '', toJson: valueToJson)
           required final String salesDistrict,
       @JsonKey(name: 'deductionCode', defaultValue: '')
           required final String deductionCode,
@@ -260,7 +260,7 @@ abstract class _DeductionCodeDto extends DeductionCodeDto {
   @JsonKey(name: 'salesOrg', defaultValue: '')
   String get salesOrg;
   @override
-  @JsonKey(name: 'salesDistrict', defaultValue: '')
+  @JsonKey(name: 'salesDistrict', defaultValue: '', toJson: valueToJson)
   String get salesDistrict;
   @override
   @JsonKey(name: 'deductionCode', defaultValue: '')

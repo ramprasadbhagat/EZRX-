@@ -23,4 +23,15 @@ class DeductionCodeQueryMutation {
       }
     ''';
   }
+
+  String deleteDeductionCodesMutation() {
+    return '''
+      mutation deleteDeductionCodeMutation(\$input: deleteDeductionCodeInput!) {
+        deleteDeductionCode(input: \$input) {
+          info
+          success
+        }
+      }
+    ''';
+  }
 }

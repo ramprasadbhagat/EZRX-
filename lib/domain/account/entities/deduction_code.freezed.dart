@@ -16,11 +16,13 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$DeductionCode {
+  int get key => throw _privateConstructorUsedError;
   SalesOrg get salesOrg => throw _privateConstructorUsedError;
   StringValue get salesDistrict => throw _privateConstructorUsedError;
   StringValue get deductionCode => throw _privateConstructorUsedError;
   StringValue get deductionDescription => throw _privateConstructorUsedError;
   StringValue get amountType => throw _privateConstructorUsedError;
+  bool get isDeleteInProgress => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $DeductionCodeCopyWith<DeductionCode> get copyWith =>
@@ -34,11 +36,13 @@ abstract class $DeductionCodeCopyWith<$Res> {
       _$DeductionCodeCopyWithImpl<$Res, DeductionCode>;
   @useResult
   $Res call(
-      {SalesOrg salesOrg,
+      {int key,
+      SalesOrg salesOrg,
       StringValue salesDistrict,
       StringValue deductionCode,
       StringValue deductionDescription,
-      StringValue amountType});
+      StringValue amountType,
+      bool isDeleteInProgress});
 }
 
 /// @nodoc
@@ -54,13 +58,19 @@ class _$DeductionCodeCopyWithImpl<$Res, $Val extends DeductionCode>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? key = null,
     Object? salesOrg = null,
     Object? salesDistrict = null,
     Object? deductionCode = null,
     Object? deductionDescription = null,
     Object? amountType = null,
+    Object? isDeleteInProgress = null,
   }) {
     return _then(_value.copyWith(
+      key: null == key
+          ? _value.key
+          : key // ignore: cast_nullable_to_non_nullable
+              as int,
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
@@ -81,6 +91,10 @@ class _$DeductionCodeCopyWithImpl<$Res, $Val extends DeductionCode>
           ? _value.amountType
           : amountType // ignore: cast_nullable_to_non_nullable
               as StringValue,
+      isDeleteInProgress: null == isDeleteInProgress
+          ? _value.isDeleteInProgress
+          : isDeleteInProgress // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -94,11 +108,13 @@ abstract class _$$_DeductionCodeCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {SalesOrg salesOrg,
+      {int key,
+      SalesOrg salesOrg,
       StringValue salesDistrict,
       StringValue deductionCode,
       StringValue deductionDescription,
-      StringValue amountType});
+      StringValue amountType,
+      bool isDeleteInProgress});
 }
 
 /// @nodoc
@@ -112,13 +128,19 @@ class __$$_DeductionCodeCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? key = null,
     Object? salesOrg = null,
     Object? salesDistrict = null,
     Object? deductionCode = null,
     Object? deductionDescription = null,
     Object? amountType = null,
+    Object? isDeleteInProgress = null,
   }) {
     return _then(_$_DeductionCode(
+      key: null == key
+          ? _value.key
+          : key // ignore: cast_nullable_to_non_nullable
+              as int,
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
@@ -139,6 +161,10 @@ class __$$_DeductionCodeCopyWithImpl<$Res>
           ? _value.amountType
           : amountType // ignore: cast_nullable_to_non_nullable
               as StringValue,
+      isDeleteInProgress: null == isDeleteInProgress
+          ? _value.isDeleteInProgress
+          : isDeleteInProgress // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -147,13 +173,17 @@ class __$$_DeductionCodeCopyWithImpl<$Res>
 
 class _$_DeductionCode extends _DeductionCode {
   const _$_DeductionCode(
-      {required this.salesOrg,
+      {required this.key,
+      required this.salesOrg,
       required this.salesDistrict,
       required this.deductionCode,
       required this.deductionDescription,
-      required this.amountType})
+      required this.amountType,
+      required this.isDeleteInProgress})
       : super._();
 
+  @override
+  final int key;
   @override
   final SalesOrg salesOrg;
   @override
@@ -164,10 +194,12 @@ class _$_DeductionCode extends _DeductionCode {
   final StringValue deductionDescription;
   @override
   final StringValue amountType;
+  @override
+  final bool isDeleteInProgress;
 
   @override
   String toString() {
-    return 'DeductionCode(salesOrg: $salesOrg, salesDistrict: $salesDistrict, deductionCode: $deductionCode, deductionDescription: $deductionDescription, amountType: $amountType)';
+    return 'DeductionCode(key: $key, salesOrg: $salesOrg, salesDistrict: $salesDistrict, deductionCode: $deductionCode, deductionDescription: $deductionDescription, amountType: $amountType, isDeleteInProgress: $isDeleteInProgress)';
   }
 
   @override
@@ -175,6 +207,7 @@ class _$_DeductionCode extends _DeductionCode {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_DeductionCode &&
+            (identical(other.key, key) || other.key == key) &&
             (identical(other.salesOrg, salesOrg) ||
                 other.salesOrg == salesOrg) &&
             (identical(other.salesDistrict, salesDistrict) ||
@@ -184,12 +217,14 @@ class _$_DeductionCode extends _DeductionCode {
             (identical(other.deductionDescription, deductionDescription) ||
                 other.deductionDescription == deductionDescription) &&
             (identical(other.amountType, amountType) ||
-                other.amountType == amountType));
+                other.amountType == amountType) &&
+            (identical(other.isDeleteInProgress, isDeleteInProgress) ||
+                other.isDeleteInProgress == isDeleteInProgress));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, salesOrg, salesDistrict,
-      deductionCode, deductionDescription, amountType);
+  int get hashCode => Object.hash(runtimeType, key, salesOrg, salesDistrict,
+      deductionCode, deductionDescription, amountType, isDeleteInProgress);
 
   @JsonKey(ignore: true)
   @override
@@ -200,13 +235,17 @@ class _$_DeductionCode extends _DeductionCode {
 
 abstract class _DeductionCode extends DeductionCode {
   const factory _DeductionCode(
-      {required final SalesOrg salesOrg,
+      {required final int key,
+      required final SalesOrg salesOrg,
       required final StringValue salesDistrict,
       required final StringValue deductionCode,
       required final StringValue deductionDescription,
-      required final StringValue amountType}) = _$_DeductionCode;
+      required final StringValue amountType,
+      required final bool isDeleteInProgress}) = _$_DeductionCode;
   const _DeductionCode._() : super._();
 
+  @override
+  int get key;
   @override
   SalesOrg get salesOrg;
   @override
@@ -217,6 +256,8 @@ abstract class _DeductionCode extends DeductionCode {
   StringValue get deductionDescription;
   @override
   StringValue get amountType;
+  @override
+  bool get isDeleteInProgress;
   @override
   @JsonKey(ignore: true)
   _$$_DeductionCodeCopyWith<_$_DeductionCode> get copyWith =>

@@ -1,3 +1,5 @@
+import 'package:ezrxmobile/domain/core/dropdown/generic_dropdown_data.dart';
+
 enum AmountType {
   manualInput,
   autoDeduction,
@@ -20,4 +22,13 @@ extension AmountTypeExtension on AmountType {
         return 'Non Return';
     }
   }
+}
+
+extension AmountTypeListExtension on List<AmountType> {
+  List<GenericDropdownData> get items => map(
+        (e) => GenericDropdownData.empty().copyWith(
+          label: e.name,
+          value: e.name,
+        ),
+      ).toList();
 }

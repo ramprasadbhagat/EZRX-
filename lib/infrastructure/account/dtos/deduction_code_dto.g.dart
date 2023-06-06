@@ -18,7 +18,7 @@ _$_DeductionCodeDto _$$_DeductionCodeDtoFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$_DeductionCodeDtoToJson(_$_DeductionCodeDto instance) =>
     <String, dynamic>{
       'salesOrg': instance.salesOrg,
-      'salesDistrict': instance.salesDistrict,
+      'salesDistrict': valueToJson(instance.salesDistrict),
       'deductionCode': instance.deductionCode,
       'deductionDescription': instance.deductionDescription,
       'amountType': instance.amountType,

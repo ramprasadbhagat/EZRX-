@@ -77,6 +77,37 @@ class DeductionCodeRemoteDataSource {
     });
   }
 
+  Future<AddDeductionCode> deleteDeductionCode({
+    required String salesOrg,
+    required String salesDistrict,
+    required String deductionCode,
+  }) async {
+    return await dataSourceExceptionHandler.handle(() async {
+      final res = await httpService.request(
+        method: 'POST',
+        url: '${config.urlConstants}ezpay',
+        data: jsonEncode(
+          {
+            'query': deductionCodeQueryMutation.deleteDeductionCodesMutation(),
+            'variables': {
+              'input': {
+                'salesOrg': salesOrg,
+                'salesDistrict': salesDistrict,
+                'deductionCode': deductionCode,
+              },
+            },
+          },
+        ),
+        apiEndpoint: 'deleteDeductionCodeMutation',
+      );
+      _deductionCodeExceptionChecker(res: res);
+
+      return AddDeductionCodeDto.fromJson(
+        res.data['data']['deleteDeductionCode'],
+      ).toDomain();
+    });
+  }
+
   void _deductionCodeExceptionChecker({required Response<dynamic> res}) {
     if (res.data['errors'] != null && res.data['errors'].isNotEmpty) {
       throw ServerException(message: res.data['errors'][0]['message']);

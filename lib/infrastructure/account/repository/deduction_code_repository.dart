@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/add_deduction_code.dart';
-import 'package:ezrxmobile/domain/account/entities/add_deduction_code_data.dart';
 import 'package:ezrxmobile/domain/account/entities/deduction_code.dart';
 import 'package:ezrxmobile/domain/account/repository/i_deduction_code_repository.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -45,7 +44,7 @@ class DeductionCodeRepository implements IDeductionCodeRepository {
 
   @override
   Future<Either<ApiFailure, AddDeductionCode>> addDeductionCodes({
-    required AddDeductionCodeData deductionCode,
+    required DeductionCode deductionCode,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -61,11 +60,39 @@ class DeductionCodeRepository implements IDeductionCodeRepository {
         amountType: deductionCode.amountType.getOrCrash(),
         deductionCode: deductionCode.deductionCode.getOrCrash(),
         deductionDescription: deductionCode.deductionDescription.getOrCrash(),
-        salesDistrict: deductionCode.salesDistrict.getOrCrash(),
+        salesDistrict: deductionCode.salesDistrict.getOrDefaultValue(''),
         salesOrg: deductionCode.salesOrg.getOrCrash(),
       );
 
       return Right(addDeductionCode);
+    } catch (e) {
+      return Left(
+        FailureHandler.handleFailure(e),
+      );
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, AddDeductionCode>> deleteDeductionCode({
+    required DeductionCode deductionCode,
+  }) async {
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final deductionCodes = await localDataSource.deleteDeductionCode();
+
+        return Right(deductionCodes);
+      } on MockException catch (e) {
+        return Left(ApiFailure.other(e.message));
+      }
+    }
+    try {
+      final deleteDeductionCode = await remoteDataSource.deleteDeductionCode(
+        deductionCode: deductionCode.deductionCode.getOrCrash(),
+        salesDistrict: deductionCode.salesDistrict.getOrDefaultValue(''),
+        salesOrg: deductionCode.salesOrg.getOrCrash(),
+      );
+
+      return Right(deleteDeductionCode);
     } catch (e) {
       return Left(
         FailureHandler.handleFailure(e),

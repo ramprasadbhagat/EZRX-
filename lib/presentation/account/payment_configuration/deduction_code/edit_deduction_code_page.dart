@@ -17,84 +17,57 @@ import 'package:ezrxmobile/presentation/core/snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class AddDeductionCodePage extends StatelessWidget {
-  const AddDeductionCodePage({Key? key}) : super(key: key);
-
-  void _handleListener({
-    required BuildContext context,
-    required ManageDeductionCodeState state,
-  }) {
-    state.failureOrSuccessOption.fold(
-      () {
-        if (!state.isSubmitting && state.response.success) {
-          context.router.pop();
-        } else {
-          if (state.response != AddDeductionCode.empty()) {
-            showSnackBar(
-              context: context,
-              message: state.response.info.tr(),
-            );
-          } else {
-            final salesDistrict = context
-                .read<SalesDistrictBloc>()
-                .state
-                .salesDistrictList
-                .firstWhere(
-                  (element) =>
-                      element.salesOrg == state.deductionCodeData.salesOrg,
-                  orElse: () => SalesDistrict.empty(),
-                );
-            context.read<ManageDeductionCodeBloc>().add(
-                  ManageDeductionCodeEvent.onValueChange(
-                    label: DeductionCodeLabel.salesDistrict,
-                    newValue: salesDistrict.emptyOrFirstElementLabel,
-                  ),
-                );
-          }
-        }
-      },
-      (either) => either.fold(
-        (failure) {
-          ErrorUtils.handleApiFailure(context, failure);
-        },
-        (success) {},
-      ),
-    );
-  }
+class EditDeductionCodePage extends StatelessWidget {
+  const EditDeductionCodePage({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: const Key('addDeductionCode'),
-      appBar: AppBar(title: const Text('Add Deduction Code').tr()),
+      key: const Key('editDeductionCode'),
+      appBar: AppBar(title: const Text('Edit Deduction Code').tr()),
       body: AnnouncementBanner(
         currentPath: context.router.currentPath,
         child: BlocConsumer<ManageDeductionCodeBloc, ManageDeductionCodeState>(
           listenWhen: (previous, current) =>
-              previous.isSubmitting != current.isSubmitting ||
-              previous.deductionCodeData.salesOrg !=
-                  current.deductionCodeData.salesOrg,
-          listener: (context, state) => _handleListener(
-            context: context,
-            state: state,
-          ),
+              previous.isSubmitting != current.isSubmitting,
+          listener: (context, state) {
+            state.failureOrSuccessOption.fold(
+              () {
+                if (!state.isSubmitting && state.response.success) {
+                  context.router.pop();
+                } else if (state.response != AddDeductionCode.empty()) {
+                  showSnackBar(
+                    context: context,
+                    message: state.response.info.tr(),
+                  );
+                }
+              },
+              (either) => either.fold(
+                (failure) {
+                  ErrorUtils.handleApiFailure(context, failure);
+                },
+                (success) {},
+              ),
+            );
+          },
           buildWhen: (previous, current) =>
               previous.showErrorMessages != current.showErrorMessages ||
               previous.isSubmitting != current.isSubmitting,
           builder: (context, state) {
+            final deductionCodeData =
+                context.read<ManageDeductionCodeBloc>().state.deductionCodeData;
             final salesOrgList = context.read<UserBloc>().state.salesOrgValue;
             final salesDistrictList = context
                 .read<SalesDistrictBloc>()
                 .state
                 .salesDistrictList
                 .firstWhere(
-                  (element) =>
-                      element.salesOrg == state.deductionCodeData.salesOrg,
+                  (element) => element.salesOrg == deductionCodeData.salesOrg,
                   orElse: () => SalesDistrict.empty(),
                 )
                 .salesDistrictInfo;
-            final deductionCodeData =
-                context.read<ManageDeductionCodeBloc>().state.deductionCodeData;
 
             return SingleChildScrollView(
               padding: const EdgeInsets.all(25.0),
@@ -105,21 +78,9 @@ class AddDeductionCodePage extends StatelessWidget {
                 child: Column(
                   children: [
                     GenericDropdown(
-                      labelText: 'Select Sales Org'.tr(),
-                      validator: (_) => deductionCodeData.salesOrg.value.fold(
-                        (f) => f.maybeMap(
-                          empty: (_) => 'Please Select Sales Org.'.tr(),
-                          orElse: () => null,
-                        ),
-                        (_) => null,
-                      ),
-                      onChanged: (val) =>
-                          context.read<ManageDeductionCodeBloc>().add(
-                                ManageDeductionCodeEvent.onValueChange(
-                                  label: DeductionCodeLabel.salesOrg,
-                                  newValue: val ?? '',
-                                ),
-                              ),
+                      labelText: ''.tr(),
+                      validator: (_) => null,
+                      onChanged: (val) => null,
                       items: salesOrgList
                           .map(
                             (val) => GenericDropdownData(
@@ -128,8 +89,9 @@ class AddDeductionCodePage extends StatelessWidget {
                             ),
                           )
                           .toList(),
-                      isSubmitting: state.isSubmitting,
+                      isSubmitting: false,
                       value: deductionCodeData.salesOrg.getOrDefaultValue(''),
+                      isDisabled: true,
                     ),
                     const SizedBox(height: 20),
                     GenericDropdown(
@@ -159,15 +121,15 @@ class AddDeductionCodePage extends StatelessWidget {
                     const SizedBox(height: 20),
                     GenericTextField(
                       fieldKey: 'deductionCodeTextKey',
-                      labelText: 'Deduction Code'.tr(),
-                      validator: (text) =>
-                          deductionCodeData.deductionCode.value.fold(
-                        (f) => f.maybeMap(
-                          empty: (_) => 'Deduction code cannot be empty.'.tr(),
-                          orElse: () => null,
-                        ),
-                        (_) => null,
-                      ),
+                      labelText: 'Deduction Code',
+                      validator: (text) => PaymentMethod(text ?? '').value.fold(
+                            (f) => f.maybeMap(
+                              empty: (_) =>
+                                  'Deduction code cannot be empty.'.tr(),
+                              orElse: () => null,
+                            ),
+                            (_) => null,
+                          ),
                       onChanged: (val) =>
                           context.read<ManageDeductionCodeBloc>().add(
                                 ManageDeductionCodeEvent.onValueChange(
@@ -203,16 +165,15 @@ class AddDeductionCodePage extends StatelessWidget {
                     const SizedBox(height: 20),
                     GenericTextField(
                       fieldKey: 'deductionDescriptionKey',
-                      labelText: 'Deduction Description'.tr(),
-                      validator: (text) =>
-                          deductionCodeData.deductionDescription.value.fold(
-                        (f) => f.maybeMap(
-                          empty: (_) =>
-                              'Deduction Description cannot be empty.'.tr(),
-                          orElse: () => null,
-                        ),
-                        (_) => null,
-                      ),
+                      labelText: 'Deduction Description',
+                      validator: (text) => PaymentMethod(text ?? '').value.fold(
+                            (f) => f.maybeMap(
+                              empty: (_) =>
+                                  'Deduction Description cannot be empty.'.tr(),
+                              orElse: () => null,
+                            ),
+                            (_) => null,
+                          ),
                       onChanged: (val) => context
                           .read<ManageDeductionCodeBloc>()
                           .add(
@@ -226,7 +187,7 @@ class AddDeductionCodePage extends StatelessWidget {
                           .getOrDefaultValue(''),
                     ),
                     const SizedBox(height: 20),
-                    const AddDeductionCodeButton(),
+                    const EditDeductionCodeButton(),
                   ],
                 ),
               ),
@@ -238,8 +199,8 @@ class AddDeductionCodePage extends StatelessWidget {
   }
 }
 
-class AddDeductionCodeButton extends StatelessWidget {
-  const AddDeductionCodeButton({
+class EditDeductionCodeButton extends StatelessWidget {
+  const EditDeductionCodeButton({
     Key? key,
   }) : super(key: key);
 
@@ -250,20 +211,20 @@ class AddDeductionCodeButton extends StatelessWidget {
           previous.isSubmitting != current.isSubmitting,
       builder: (context, state) {
         return ElevatedButton(
-          key: const Key('addDeductionCodeButton'),
+          key: const Key('editDeductionCodeButton'),
           onPressed: state.isSubmitting
               ? null
               : () {
                   FocusScope.of(context).unfocus();
                   context.read<ManageDeductionCodeBloc>().add(
                         const ManageDeductionCodeEvent.addOrEditDeductionCode(
-                          isEdit: false,
+                          isEdit: true,
                         ),
                       );
                 },
           child: LoadingShimmer.withChild(
             enabled: state.isSubmitting,
-            child: const Text('Add Deduction Code').tr(),
+            child: const Text('Edit Deduction Code').tr(),
           ),
         );
       },

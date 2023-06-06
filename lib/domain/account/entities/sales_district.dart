@@ -13,7 +13,11 @@ class SalesDistrict with _$SalesDistrict {
   }) = _SalesDistrict;
 
   factory SalesDistrict.empty() => SalesDistrict(
-    salesOrg: SalesOrg(''),
-    salesDistrictInfo: <SalesDistrictInfo>[],
-  );
+        salesOrg: SalesOrg(''),
+        salesDistrictInfo: <SalesDistrictInfo>[],
+      );
+
+  String get emptyOrFirstElementLabel => salesDistrictInfo.isEmpty
+      ? ''
+      : salesDistrictInfo.first.salesDistrictLabel.displayStringValue;
 }

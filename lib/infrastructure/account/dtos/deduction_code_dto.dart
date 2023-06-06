@@ -11,14 +11,20 @@ class DeductionCodeDto with _$DeductionCodeDto {
   const DeductionCodeDto._();
 
   const factory DeductionCodeDto({
-    @JsonKey(name: 'salesOrg', defaultValue: '') required String salesOrg,
-    @JsonKey(name: 'salesDistrict', defaultValue: '')
+    @JsonKey(name: 'salesOrg', defaultValue: '')
+        required String salesOrg,
+    @JsonKey(
+      name: 'salesDistrict',
+      defaultValue: '',
+      toJson: valueToJson,
+    )
         required String salesDistrict,
     @JsonKey(name: 'deductionCode', defaultValue: '')
         required String deductionCode,
     @JsonKey(name: 'deductionDescription', defaultValue: '')
         required String deductionDescription,
-    @JsonKey(name: 'amountType', defaultValue: '') required String amountType,
+    @JsonKey(name: 'amountType', defaultValue: '')
+        required String amountType,
   }) = _DeductionCodeDto;
 
   factory DeductionCodeDto.fromDomain(
@@ -26,7 +32,7 @@ class DeductionCodeDto with _$DeductionCodeDto {
   ) {
     return DeductionCodeDto(
       salesOrg: deductionCode.salesOrg.getOrCrash(),
-      salesDistrict: deductionCode.salesDistrict.getOrCrash(),
+      salesDistrict: deductionCode.salesDistrict.getOrDefaultValue(''),
       deductionCode: deductionCode.deductionCode.getOrCrash(),
       deductionDescription: deductionCode.deductionDescription.getOrCrash(),
       amountType: deductionCode.amountType.getOrCrash(),
@@ -35,14 +41,18 @@ class DeductionCodeDto with _$DeductionCodeDto {
 
   DeductionCode toDomain() {
     return DeductionCode(
+      key: hashCode,
       salesOrg: SalesOrg(salesOrg),
       salesDistrict: StringValue(salesDistrict),
       deductionCode: StringValue(deductionCode),
       deductionDescription: StringValue(deductionDescription),
       amountType: StringValue(amountType),
+      isDeleteInProgress: false,
     );
   }
 
   factory DeductionCodeDto.fromJson(Map<String, dynamic> json) =>
       _$DeductionCodeDtoFromJson(json);
 }
+
+dynamic valueToJson(String value) => value.isNotEmpty ? value : null;

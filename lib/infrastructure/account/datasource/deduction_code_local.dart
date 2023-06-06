@@ -27,4 +27,14 @@ class DeductionCodeLocalDataSource {
     return AddDeductionCodeDto.fromJson(data['data']['addDeductionCode'])
         .toDomain();
   }
+
+  Future<AddDeductionCode> deleteDeductionCode() async {
+    final data = json.decode(
+      await rootBundle
+          .loadString('assets/json/deleteDeductionCodeResponse.json'),
+    );
+
+    return AddDeductionCodeDto.fromJson(data['data']['deleteDeductionCode'])
+        .toDomain();
+  }
 }
