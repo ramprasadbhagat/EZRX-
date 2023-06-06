@@ -15,4 +15,5 @@ class SalesDistrictState with _$SalesDistrictState {
         isFetching: false,
         failureOrSuccessOption: none(),
       );
+
 }

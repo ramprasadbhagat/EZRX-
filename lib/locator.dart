@@ -2,6 +2,7 @@ import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/deduction_code/manage_deduction_code/manage_deduction_code_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/deduction_code/view_deduction_code/deduction_code_bloc.dart';
+import 'package:ezrxmobile/application/account/payment_configuration/payment_advice_footer/manage_payment_advice_footer/manage_payment_advice_footer_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_advice_footer/payment_advice_footer_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/add_payment_method/add_payment_method_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/manage_payment_method/manage_payment_methods_bloc.dart';
@@ -2296,11 +2297,20 @@ void setupLocator() {
       config: locator<Config>(),
       localDataSource: locator<PaymentAdviceFooterLocalDataSource>(),
       remoteDataSource: locator<PaymentAdviceFooterRemoteDataSource>(),
+      permissionService: locator<PermissionService>(),
+      deviceInfo: locator<DeviceInfo>(),
+      filePickerService: locator<FilePickerService>(),
     ),
   );
 
   locator.registerLazySingleton(
     () => PaymentAdviceFooterBloc(
+      paymentAdviceFooterRepository: locator<PaymentAdviceFooterRepository>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => ManagePaymentAdviceFooterBloc(
       paymentAdviceFooterRepository: locator<PaymentAdviceFooterRepository>(),
     ),
   );

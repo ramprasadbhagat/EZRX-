@@ -7,7 +7,7 @@ class FilePickerService {
     List<String>? allowedExtensions,
   }) async {
     return await FilePicker.platform.pickFiles(
-      allowMultiple: true,
+      allowMultiple: allowMultiple,
       type: fileType,
       allowedExtensions: allowedExtensions,
     );

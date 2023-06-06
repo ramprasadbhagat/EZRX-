@@ -413,3 +413,4 @@ class SalesDistrictMessage extends ValueObject<String> {
   String get showUserMessage =>
       showSalesDistrictUserMessage(value.getOrElse(() => ''));
 }
+

@@ -361,6 +361,12 @@ class Config {
         'heic',
       ];
 
+  List<String> get allowedExtensionsPaymentAdviceLogo => [
+        'png',
+        'jpg',
+        'jpeg',
+      ];
+
   String get getEZReachUrl {
     switch (appFlavor) {
       case Flavor.dev:

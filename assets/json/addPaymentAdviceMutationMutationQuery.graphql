@@ -1,0 +1,16 @@
+mutation addPaymentAdviceMutation($input: addPaymentAdviceInput!) {
+  addPaymentAdvice(input: $input) {
+    info
+  }
+}
+
+variable:{
+    "input": {
+        "salesOrg": "2601",
+        "salesDistrict": "Singapore",
+        "header": "",
+        "footer": "testlsakj lsfdj lasdfjl sadfkjalsdfk ja asldfj alsdfk jasldkfj",
+        "pleaseNote": "<ul>\n\t<li>hi thiewr</li>\n</ul>\n",
+        "headerLogoPath": "https://zpdigitalproducts.blob.core.windows.net/ezrx/undefined/payment_advice_1685459898Screenshot from 2023-05-30 20-47-58.png"
+    }
+}

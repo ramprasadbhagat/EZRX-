@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/payment_configuration/payment_advice_footer/manage_payment_advice_footer/manage_payment_advice_footer_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_advice_footer/payment_advice_footer_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/payment_advice_footer.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
@@ -26,6 +27,16 @@ class PaymentAdviceFooterPage extends StatelessWidget {
         title: const Text(
           'Payment Advice Footer',
         ).tr(),
+      ),
+      floatingActionButton: FloatingActionButton(
+        key: const Key('addSalesDistrictKey'),
+        onPressed: () {
+          context.read<ManagePaymentAdviceFooterBloc>().add(
+                const ManagePaymentAdviceFooterEvent.initialized(),
+              );
+          context.router.pushNamed('payments/advice_footer/add_advice_footer');
+        },
+        child: const Icon(Icons.add),
       ),
       body: AnnouncementBanner(
         currentPath: context.router.currentPath,

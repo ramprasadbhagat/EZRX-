@@ -13,4 +13,14 @@ class PaymentAdviceQueryMutation {
     }
     ''';
   }
+
+  String addPaymentAdviceMutation() {
+    return '''
+      mutation addPaymentAdviceMutation(\$input: addPaymentAdviceInput!) {
+        addPaymentAdvice(input: \$input) {
+          info
+        }
+      }
+    ''';
+  }
 }
