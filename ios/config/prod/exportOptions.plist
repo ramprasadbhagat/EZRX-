@@ -12,8 +12,8 @@
 	<false/>
 	<key>provisioningProfiles</key>
 	<dict>
-		<key>com.zuelligpharma.ezrxmobileplus</key>
-		<string>AppStore_com.zuelligpharma.ezrxmobileplus</string>
+		<key>com.zuelligpharma.ezrxmobile</key>
+		<string>AppStore_com.zuelligpharma.ezrxmobile</string>
 	</dict>
 </dict>
 </plist>

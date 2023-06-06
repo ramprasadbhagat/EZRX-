@@ -1,4 +1,4 @@
-package com.zuelligpharma.ezrxmobileplus
+package com.zuelligpharma.ezrxmobile
 
 import io.flutter.embedding.android.FlutterFragmentActivity
 

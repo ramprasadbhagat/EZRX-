@@ -14,8 +14,8 @@
 	<string>Apple Distribution</string>
 	<key>provisioningProfiles</key>
 	<dict>
-		<key>com.zuelligpharma.ezrxmobileplus.uat</key>
-		<string>AppStore_com.zuelligpharma.ezrxmobileplus.uat</string>
+		<key>com.zuelligpharma.ezrxmobile.uat</key>
+		<string>AppStore_com.zuelligpharma.ezrxmobile.uat</string>
 	</dict>
 </dict>
 </plist>
