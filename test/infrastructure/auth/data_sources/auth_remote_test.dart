@@ -57,7 +57,7 @@ void main() {
           );
 
           dioAdapter.onPost(
-            '/api/loginV3',
+            '/api/license',
             (server) => server.reply(
               200,
               res,
@@ -77,7 +77,7 @@ void main() {
 
           expect(
             result,
-            LoginDto.fromJson(res['data']['loginV3']).toDomain(),
+            LoginDto.fromJson(res['data']['loginV4']).toDomain(),
           );
         },
       );
@@ -86,7 +86,7 @@ void main() {
         'Login with password error',
         () async {
           dioAdapter.onPost(
-            '/api/loginV3',
+            '/api/license',
             (server) => server.reply(
               200,
               {
@@ -119,7 +119,7 @@ void main() {
         'Login with password error with status code != 200',
         () async {
           dioAdapter.onPost(
-            '/api/loginV3',
+            '/api/license',
             (server) => server.reply(
               204,
               {'data': []},
@@ -151,7 +151,7 @@ void main() {
           );
 
           dioAdapter.onPost(
-            '/api/loginV3',
+            '/api/license',
             (server) => server.reply(
               200,
               res,
@@ -170,7 +170,7 @@ void main() {
 
           expect(
             result,
-            LoginDto.fromJson(res['data']['loginV3']).toDomain(),
+            LoginDto.fromJson(res['data']['loginV4']).toDomain(),
           );
         },
       );
@@ -179,7 +179,7 @@ void main() {
         'Login with Okta error',
         () async {
           dioAdapter.onPost(
-            '/api/loginV3',
+            '/api/license',
             (server) => server.reply(
               200,
               {
@@ -214,7 +214,7 @@ void main() {
           );
 
           dioAdapter.onPost(
-            '/api/loginV3',
+            '/api/license',
             (server) => server.reply(
               200,
               res,
@@ -232,7 +232,7 @@ void main() {
 
           expect(
             result,
-            LoginDto.fromJson(res['data']['proxyLoginV3']).toDomain(),
+            LoginDto.fromJson(res['data']['proxyLoginV4']).toDomain(),
           );
         },
       );
@@ -241,7 +241,7 @@ void main() {
         'Proxy Login With Username error',
         () async {
           dioAdapter.onPost(
-            '/api/loginV3',
+            '/api/license',
             (server) => server.reply(
               200,
               {

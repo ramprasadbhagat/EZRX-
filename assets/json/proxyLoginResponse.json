@@ -1,6 +1,6 @@
 {
    "data": {
-       "proxyLoginV3": {
+       "proxyLoginV4": {
            "userID": 365,
            "authenticated": true,
            "eZRxJWT": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBVVRIX1RPS0VOIjoidzl4cEFhQkRZUSIsImV4cCI6MTY2MzQwNzI4NSwiaWF0IjoxNjYzMzIwODg1LCJpZCI6MzY1LCJyaWdodHMiOlt7InZhbHVlIjpbeyJjdXN0b21lckNvZGUiOiJhbGwiLCJzYWxlc09yZyI6IjI2MDEiLCJzaGlwVG9Db2RlIjpbImFsbCJdfV19XSwicm9sZSI6IlpQIEFkbWluIiwic2FsZXNPcmdzIjpbIjI2MDEiXSwidXNlcm5hbWUiOiJzb25nIn0.nCYb0U_MzXinTNXHID8q9lKuy51z6ChcFfEIKya0yVk",

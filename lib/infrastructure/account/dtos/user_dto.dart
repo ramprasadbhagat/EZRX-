@@ -34,7 +34,6 @@ class UserDto with _$UserDto {
     @Default(RoleDto.emptyRoleDto) @JsonKey(name: 'role') RoleDto role,
     @JsonKey(name: 'customerCode', defaultValue: '')
         required String customerCode,
-    @_SalesOrganisationListConverter()
     @JsonKey(name: 'userSalesOrganisationList', defaultValue: [])
         required List<SalesOrganisationDto> userSalesOrganisations,
     @Default(AccessRightDto.emptyAccessRightDto)
@@ -48,7 +47,8 @@ class UserDto with _$UserDto {
         required String languagePreference,
     @JsonKey(name: 'enableOrderType', defaultValue: false)
         required bool enableOrderType,
-    @JsonKey(name: 'acceptPrivacyPolicy', defaultValue: false)
+    // TODO: acceptPrivacyPolicy and acceptPrivacyPolicyTime not longer in use
+    @JsonKey(name: 'acceptPrivacyPolicy', defaultValue: true)
         required bool acceptPrivacyPolicy,
     @JsonKey(name: 'acceptPrivacyPolicyTime', defaultValue: '1970-01-01 00:00:00', readValue: dateTimeStringFormatCheck)
         required String acceptPrivacyPolicyTime,
@@ -64,7 +64,9 @@ class UserDto with _$UserDto {
         required bool hasPriceOverride,
     @JsonKey(name: 'disablePaymentNotification', defaultValue: false)
         required bool disablePaymentNotification,
-    @JsonKey(name: 'paymentNotification', defaultValue: <PaymentAdviceExpiryNotificationDto>[])
+    @JsonKey(
+        name: 'paymentNotification', defaultValue: <
+            PaymentAdviceExpiryNotificationDto>[])
         required List<PaymentAdviceExpiryNotificationDto> paymentNotification,
   }) = _UserDto;
 
@@ -144,7 +146,8 @@ class UserDto with _$UserDto {
         languagePreference: LanguageValue(languagePreference),
         paymentNotification: PaymentNotification(
           disablePaymentNotification: disablePaymentNotification,
-          paymentAdviceExpiryNotificationList: paymentNotification.map((e) => e.toDomain()).toList(),
+          paymentAdviceExpiryNotificationList:
+              paymentNotification.map((e) => e.toDomain()).toList(),
         ),
       ),
       settingTc: SettingTc(
@@ -164,30 +167,6 @@ class UserDto with _$UserDto {
 
   factory UserDto.fromJson(Map<String, dynamic> json) =>
       _$UserDtoFromJson(json);
-}
-
-class _SalesOrganisationListConverter
-    extends JsonConverter<List<SalesOrganisationDto>, Map<String, dynamic>> {
-  const _SalesOrganisationListConverter();
-
-//======================================================================
-// Response give an extra 'value' level that no useful on our DTO and Entity
-// We use this way to remove it
-//
-//======================================================================
-  @override
-  List<SalesOrganisationDto> fromJson(Map<String, dynamic> json) {
-    return List.from(json['value'])
-        .map((e) => SalesOrganisationDto.fromJson(e))
-        .toList();
-  }
-
-  @override
-  Map<String, dynamic> toJson(List<SalesOrganisationDto> object) {
-    return {
-      'value': object.map((e) => {'salesOrg': e}).toList(),
-    };
-  }
 }
 
 //======================================================================

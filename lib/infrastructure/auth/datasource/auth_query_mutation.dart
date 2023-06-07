@@ -8,17 +8,31 @@ class AuthQueryMutation {
   // updating the FCM token for notifications using Firebase Cloud Messaging
   String getLoginQuery() {
     return '''
-      query (\$input:loginV3Input!){
-        loginV3(input:\$input){
-          userID
+      query (\$input:loginV4Input!){
+        loginV4(input:\$input){
           authenticated
           eZRxJWT
+          eZRxRefreshJWT
           passwordLastReset
           passwordExpiry
           email
           isAccountLocked
           isAccountExpired
           accountExpiryDate
+          supportedLanguages {
+            language
+            searchFilter
+          }
+          userMobileToken {
+            firstName
+            lastName
+            mobileTokens {
+              token
+              dateUpdated
+              provider
+            }
+            mobileNotifications
+          }
       }
     }
     ''';
@@ -28,17 +42,31 @@ class AuthQueryMutation {
   // By given admin access token + target username to get target access token
   String getProxyLoginQuery() {
     return '''
-      query (\$input:proxyLoginV3Input!){
-        proxyLoginV3(input:\$input){
-          userID
+      query (\$input:proxyLoginV4Input!){
+        proxyLoginV4(input:\$input){
           authenticated
           eZRxJWT
+          eZRxRefreshJWT
           passwordLastReset
           passwordExpiry
           email
           isAccountLocked
           isAccountExpired
           accountExpiryDate
+          supportedLanguages {
+            language
+            searchFilter
+          }
+          userMobileToken {
+            firstName
+            lastName
+            mobileTokens {
+              token
+              dateUpdated
+              provider
+            }
+            mobileNotifications
+          }
       }
     }
     ''';
@@ -118,5 +146,4 @@ class AuthQueryMutation {
       }
     ''';
   }
-
 }

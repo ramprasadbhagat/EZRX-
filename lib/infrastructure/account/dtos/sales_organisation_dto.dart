@@ -12,9 +12,9 @@ class SalesOrganisationDto with _$SalesOrganisationDto {
   const SalesOrganisationDto._();
 
   const factory SalesOrganisationDto({
-    @JsonKey(name: 'salesOrg') required String salesOrg,
-    @JsonKey(name: 'customerCode') required String customerCode,
-    @JsonKey(name: 'shipToCode') required List<String> shipToCodes,
+    @JsonKey(name: 'SalesOrg') required String salesOrg,
+    @JsonKey(name: 'CustomerCode') required String customerCode,
+    @JsonKey(name: 'ShipToCode') required List<String> shipToCodes,
   }) = _SalesOrganisationDto;
 
   factory SalesOrganisationDto.fromDomain(

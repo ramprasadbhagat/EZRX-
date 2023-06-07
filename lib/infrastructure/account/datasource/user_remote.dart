@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/setting_tc.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/error/user_exception.dart';
@@ -15,18 +16,20 @@ class UserRemoteDataSource {
   HttpService httpService;
   UserQueryMutation userQueryMutation;
   DataSourceExceptionHandler dataSourceExceptionHandler;
+  Config config;
 
   UserRemoteDataSource({
     required this.httpService,
     required this.userQueryMutation,
     required this.dataSourceExceptionHandler,
+    required this.config,
   });
 
   Future<User> getUser({required String userId}) async {
     return await dataSourceExceptionHandler.handle(() async {
       final res = await httpService.request(
         method: 'POST',
-        url: '/api/strapiEngine',
+        url: '${config.urlConstants}license',
         data: jsonEncode({
           'query': userQueryMutation.getUserQuery(),
           'variables': {'id': userId},
@@ -80,7 +83,8 @@ class UserRemoteDataSource {
       );
       _userExceptionChecker(res: res);
 
-      return SettingTcDto.fromJson(res.data['data']['updateUser']['user']).toDomain();
+      return SettingTcDto.fromJson(res.data['data']['updateUser']['user'])
+          .toDomain();
     });
   }
 

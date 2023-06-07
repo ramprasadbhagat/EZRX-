@@ -1,5 +1,5 @@
-query ($input:proxyLoginV3Input!){
-   proxyLoginV3(input:$input){
+query ($input:proxyLoginV4Input!){
+   proxyLoginV4(input:$input){
       userID
       authenticated
       eZRxJWT

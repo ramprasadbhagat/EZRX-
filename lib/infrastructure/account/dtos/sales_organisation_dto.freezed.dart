@@ -20,11 +20,11 @@ SalesOrganisationDto _$SalesOrganisationDtoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$SalesOrganisationDto {
-  @JsonKey(name: 'salesOrg')
+  @JsonKey(name: 'SalesOrg')
   String get salesOrg => throw _privateConstructorUsedError;
-  @JsonKey(name: 'customerCode')
+  @JsonKey(name: 'CustomerCode')
   String get customerCode => throw _privateConstructorUsedError;
-  @JsonKey(name: 'shipToCode')
+  @JsonKey(name: 'ShipToCode')
   List<String> get shipToCodes => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -40,9 +40,9 @@ abstract class $SalesOrganisationDtoCopyWith<$Res> {
       _$SalesOrganisationDtoCopyWithImpl<$Res, SalesOrganisationDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'salesOrg') String salesOrg,
-      @JsonKey(name: 'customerCode') String customerCode,
-      @JsonKey(name: 'shipToCode') List<String> shipToCodes});
+      {@JsonKey(name: 'SalesOrg') String salesOrg,
+      @JsonKey(name: 'CustomerCode') String customerCode,
+      @JsonKey(name: 'ShipToCode') List<String> shipToCodes});
 }
 
 /// @nodoc
@@ -89,9 +89,9 @@ abstract class _$$_SalesOrganisationDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'salesOrg') String salesOrg,
-      @JsonKey(name: 'customerCode') String customerCode,
-      @JsonKey(name: 'shipToCode') List<String> shipToCodes});
+      {@JsonKey(name: 'SalesOrg') String salesOrg,
+      @JsonKey(name: 'CustomerCode') String customerCode,
+      @JsonKey(name: 'ShipToCode') List<String> shipToCodes});
 }
 
 /// @nodoc
@@ -130,9 +130,9 @@ class __$$_SalesOrganisationDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_SalesOrganisationDto extends _SalesOrganisationDto {
   const _$_SalesOrganisationDto(
-      {@JsonKey(name: 'salesOrg') required this.salesOrg,
-      @JsonKey(name: 'customerCode') required this.customerCode,
-      @JsonKey(name: 'shipToCode') required final List<String> shipToCodes})
+      {@JsonKey(name: 'SalesOrg') required this.salesOrg,
+      @JsonKey(name: 'CustomerCode') required this.customerCode,
+      @JsonKey(name: 'ShipToCode') required final List<String> shipToCodes})
       : _shipToCodes = shipToCodes,
         super._();
 
@@ -140,14 +140,14 @@ class _$_SalesOrganisationDto extends _SalesOrganisationDto {
       _$$_SalesOrganisationDtoFromJson(json);
 
   @override
-  @JsonKey(name: 'salesOrg')
+  @JsonKey(name: 'SalesOrg')
   final String salesOrg;
   @override
-  @JsonKey(name: 'customerCode')
+  @JsonKey(name: 'CustomerCode')
   final String customerCode;
   final List<String> _shipToCodes;
   @override
-  @JsonKey(name: 'shipToCode')
+  @JsonKey(name: 'ShipToCode')
   List<String> get shipToCodes {
     if (_shipToCodes is EqualUnmodifiableListView) return _shipToCodes;
     // ignore: implicit_dynamic_type
@@ -194,11 +194,11 @@ class _$_SalesOrganisationDto extends _SalesOrganisationDto {
 
 abstract class _SalesOrganisationDto extends SalesOrganisationDto {
   const factory _SalesOrganisationDto(
-      {@JsonKey(name: 'salesOrg')
+      {@JsonKey(name: 'SalesOrg')
           required final String salesOrg,
-      @JsonKey(name: 'customerCode')
+      @JsonKey(name: 'CustomerCode')
           required final String customerCode,
-      @JsonKey(name: 'shipToCode')
+      @JsonKey(name: 'ShipToCode')
           required final List<String> shipToCodes}) = _$_SalesOrganisationDto;
   const _SalesOrganisationDto._() : super._();
 
@@ -206,13 +206,13 @@ abstract class _SalesOrganisationDto extends SalesOrganisationDto {
       _$_SalesOrganisationDto.fromJson;
 
   @override
-  @JsonKey(name: 'salesOrg')
+  @JsonKey(name: 'SalesOrg')
   String get salesOrg;
   @override
-  @JsonKey(name: 'customerCode')
+  @JsonKey(name: 'CustomerCode')
   String get customerCode;
   @override
-  @JsonKey(name: 'shipToCode')
+  @JsonKey(name: 'ShipToCode')
   List<String> get shipToCodes;
   @override
   @JsonKey(ignore: true)

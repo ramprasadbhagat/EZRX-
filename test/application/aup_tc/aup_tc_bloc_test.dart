@@ -37,7 +37,7 @@ void main() {
 
   setUpAll(() async {
     const rootAdminToken =
-        'eyJhbGciOiJIUzI1NiIshghhjggCI6IkpXVCJ9.eyJBVVRIX1RPS0VOIjoidzl4cEFhQkRZUSIsImV4cCI6MTY2MzQwOTAzNiwiaWF0IjoxNjYzMzIyNjM2LCJpZCI6MTE0NjEsInJpZ2h0cyI6W3sidmFsdWUiOlt7ImN1c3RvbWVyQ29kZSI6ImFsbCIsInNhbGVzT3JnIjoiMjYwMSIsInNoaXBUb0NvZGUiOlsiYWxsIl19XX1dLCJyb2xlIjoiWlAgQWRtaW4iLCJzYWxlc09yZ3MiOlsiMjYwMSJdLCJ1c2VybmFtZSI6ImV6cnh0ZXN0MDUifQ.MakZTQ3JUVqeRuXQcBU1cUKmHZft5AmFPJDvuG4DjlA';
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBVVRIX1RPS0VOIjoidzl4cEFhQkRZUSIsIkNSRUFURURfQVQiOjE2ODYxMTE2ODcsImV4cCI6MTY4NjExNTI4NywiaWF0IjoxNjg2MTExNjg3LCJpZCI6Mzg2MCwicmlnaHRzIjpbeyJ2YWx1ZSI6W3siY3VzdG9tZXJDb2RlIjoiYWxsIiwic2FsZXNPcmciOiIyMDAxIiwic2hpcFRvQ29kZSI6WyJhbGwiXX1dfV0sInJvbGUiOiJST09UIEFkbWluIiwic2FsZXNPcmdzIjpbIjIwMDEiXSwidXNlcm5hbWUiOiJyb290YWRtaW4ifQ.StCC3ABQsxfsnKud8SL74AV_hHQGqKhf8IoH_9pYGcM';
     //final fakeJWT = JWT(rootAdminToken);
     config = Config()..appFlavor = Flavor.mock;
     aupTcRepository = MockAupTcRepository();

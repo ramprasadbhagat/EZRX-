@@ -1,12 +1,5 @@
-// This class is responsible for all the queries for the GraphQl
-// for fetching the data from the APIs and the params are mentioned
-// in each and every query we require for the functionality
-
-class UserQueryMutation {
-  // For fetching userdata by user ID
-  String getUserQuery() {
-    return '''
-      query userQuery(\$id: Int!) {
+{
+    "query":" query userQuery(\$id: Int!) {
         user(id: \$id) {
             id
             username
@@ -94,61 +87,8 @@ class UserQueryMutation {
              directMarketing
             }
           }
-        }
-    ''';
-  }
-
-  String getAnnouncementsQuery() {
-    return '''
-    {
-      announcements {
-        id
-        active
-        description
-        startTime
-        endTime
-        type
-      }
+        },
+    "variables":{
+       "id":3860
     }
-    ''';
-  }
-  /* Query for updation of the users's notification preference accordingly for their language preference  */
-
-  String updateNotification() {
-    return '''
-      mutation updateUserMutation(\$input: UpdateUserInput!) {
-        updateUser(input: \$input) {
-          user {
-              username
-              email
-              provider
-              role{
-                  id
-              }
-              customerCode
-              shipToAddr
-              mobileNumber
-              emailNotifications
-              languagePreference
-          }
-        }
-      }
-    ''';
-  }
-
-  String updatePrivacyPolicy() {
-    return '''
-      mutation updateUserMutation(\$input: UpdateUserInput!) {
-        updateUser(input: \$input) {
-          user {
-            username
-            email
-            acceptPrivacyPolicy
-            acceptPrivacyPolicyTime
-            privacyPolicyAcceptedPlatform
-          }
-        }
-      }
-    ''';
-  }
-}
+ }

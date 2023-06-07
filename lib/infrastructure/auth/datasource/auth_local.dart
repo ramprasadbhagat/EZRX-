@@ -13,7 +13,7 @@ class AuthLocalDataSource {
       await rootBundle.loadString('assets/json/loginAdResponse.json'),
     );
 
-    return LoginDto.fromJson(data['data']['loginV3']).toDomain();
+    return LoginDto.fromJson(data['data']['loginV4']).toDomain();
   }
 
   Future<Login> loginWithOktaToken({
@@ -23,7 +23,7 @@ class AuthLocalDataSource {
       await rootBundle.loadString('assets/json/loginAdResponse.json'),
     );
 
-    return LoginDto.fromJson(data['data']['loginV3']).toDomain();
+    return LoginDto.fromJson(data['data']['loginV4']).toDomain();
   }
 
   Future<Login> proxyLoginWithUsername({required String username}) async {
@@ -31,6 +31,6 @@ class AuthLocalDataSource {
       await rootBundle.loadString('assets/json/proxyLoginResponse.json'),
     );
 
-    return LoginDto.fromJson(data['data']['proxyLoginV3']).toDomain();
+    return LoginDto.fromJson(data['data']['proxyLoginV4']).toDomain();
   }
 }

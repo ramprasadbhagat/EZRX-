@@ -559,6 +559,7 @@ void setupLocator() {
   );
   locator.registerLazySingleton(
     () => UserRemoteDataSource(
+      config: locator<Config>(),
       httpService: locator<HttpService>(),
       userQueryMutation: locator<UserQueryMutation>(),
       dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
@@ -2231,7 +2232,6 @@ void setupLocator() {
       salesDistrictRepository: locator<SalesDistrictRepository>(),
     ),
   );
-
 
   //============================================================
   //  All Invoices and Credits

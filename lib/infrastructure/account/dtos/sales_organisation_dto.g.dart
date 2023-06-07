@@ -9,9 +9,9 @@ part of 'sales_organisation_dto.dart';
 _$_SalesOrganisationDto _$$_SalesOrganisationDtoFromJson(
         Map<String, dynamic> json) =>
     _$_SalesOrganisationDto(
-      salesOrg: json['salesOrg'] as String,
-      customerCode: json['customerCode'] as String,
-      shipToCodes: (json['shipToCode'] as List<dynamic>)
+      salesOrg: json['SalesOrg'] as String,
+      customerCode: json['CustomerCode'] as String,
+      shipToCodes: (json['ShipToCode'] as List<dynamic>)
           .map((e) => e as String)
           .toList(),
     );
@@ -19,7 +19,7 @@ _$_SalesOrganisationDto _$$_SalesOrganisationDtoFromJson(
 Map<String, dynamic> _$$_SalesOrganisationDtoToJson(
         _$_SalesOrganisationDto instance) =>
     <String, dynamic>{
-      'salesOrg': instance.salesOrg,
-      'customerCode': instance.customerCode,
-      'shipToCode': instance.shipToCodes,
+      'SalesOrg': instance.salesOrg,
+      'CustomerCode': instance.customerCode,
+      'ShipToCode': instance.shipToCodes,
     };

@@ -1,15 +1,29 @@
 {
-   "data": {
-       "loginV3": {
-           "userID": 11461,
-           "authenticated": true,
-           "eZRxJWT": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBVVRIX1RPS0VOIjoidzl4cEFhQkRZUSIsImV4cCI6MTY2MzQwOTAzNiwiaWF0IjoxNjYzMzIyNjM2LCJpZCI6MTE0NjEsInJpZ2h0cyI6W3sidmFsdWUiOlt7ImN1c3RvbWVyQ29kZSI6ImFsbCIsInNhbGVzT3JnIjoiMjYwMSIsInNoaXBUb0NvZGUiOlsiYWxsIl19XX1dLCJyb2xlIjoiWlAgQWRtaW4iLCJzYWxlc09yZ3MiOlsiMjYwMSJdLCJ1c2VybmFtZSI6ImV6cnh0ZXN0MDUifQ.MakZTQ3JUVqeRuXQcBU1cUKmHZft5AmFPJDvuG4DjlA",
-           "passwordLastReset": "2022-08-04 11:38:49 +0000 UTC",
-           "passwordExpiry": "2022-12-15 07:32:57 +0000 UTC",
-           "email": "bgarcia@zuelligpharma.com",
-           "isAccountLocked": false,
-           "isAccountExpired": false,
-           "accountExpiryDate": "30828-09-14 02:48:05 +0000 UTC"
+    "data":{
+       "loginV4":{
+          "authenticated":true,
+          "eZRxJWT":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBVVRIX1RPS0VOIjoidzl4cEFhQkRZUSIsIkNSRUFURURfQVQiOjE2ODYxMTE2ODcsImV4cCI6MTY4NjExNTI4NywiaWF0IjoxNjg2MTExNjg3LCJpZCI6Mzg2MCwicmlnaHRzIjpbeyJ2YWx1ZSI6W3siY3VzdG9tZXJDb2RlIjoiYWxsIiwic2FsZXNPcmciOiIyMDAxIiwic2hpcFRvQ29kZSI6WyJhbGwiXX1dfV0sInJvbGUiOiJST09UIEFkbWluIiwic2FsZXNPcmdzIjpbIjIwMDEiXSwidXNlcm5hbWUiOiJyb290YWRtaW4ifQ.StCC3ABQsxfsnKud8SL74AV_hHQGqKhf8IoH_9pYGcM",
+          "eZRxRefreshJWT":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBVVRIX1RPS0VOIjoiZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SkJWVlJJWDFSUFMwVk9Jam9pZHpsNGNFRmhRa1JaVVNJc0lrTlNSVUZVUlVSZlFWUWlPakUyT0RZeE1URTJPRGNzSW1WNGNDSTZNVFk0TmpFeE5USTROeXdpYVdGMElqb3hOamcyTVRFeE5qZzNMQ0pwWkNJNk16ZzJNQ3dpY21sbmFIUnpJanBiZXlKMllXeDFaU0k2VzNzaVkzVnpkRzl0WlhKRGIyUmxJam9pWVd4c0lpd2ljMkZzWlhOUGNtY2lPaUl5TURBeElpd2ljMmhwY0ZSdlEyOWtaU0k2V3lKaGJHd2lYWDFkZlYwc0luSnZiR1VpT2lKU1QwOVVJRUZrYldsdUlpd2ljMkZzWlhOUGNtZHpJanBiSWpJd01ERWlYU3dpZFhObGNtNWhiV1VpT2lKeWIyOTBZV1J0YVc0aWZRLlN0Q0MzQUJRc3hmc25LdWQ4U0w3NEFWX2hIUUdxS2hmOElvSF85cFlHY00iLCJleHAiOjE2OTM4ODc2ODcsImlhdCI6MTY4NjExMTY4N30.Q0XntWunNOkjTUmiA1U-QonuCFvbFa1kivUa71Nz5L4",
+          "passwordLastReset":"2023-06-05 10:30:20 +0000 UTC",
+          "passwordExpiry":"2023-09-05 10:30:20 +0000 UTC",
+          "email":"mdas@zuelligpharma.com",
+          "isAccountLocked":false,
+          "isAccountExpired":false,
+          "accountExpiryDate":"30828-09-14 02:48:05 +0000 UTC",
+          "supportedLanguages":[
+            {
+               "language":"EN",
+               "searchFilter":true
+            }
+          ],
+          "userMobileToken":{
+             "firstName":"",
+             "lastName":"",
+             "mobileTokens":[
+                
+             ],
+             "mobileNotifications":false
+          }
        }
-   }
-}
+    }
+ }

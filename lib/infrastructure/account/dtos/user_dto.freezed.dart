@@ -34,7 +34,6 @@ mixin _$UserDto {
   RoleDto get role => throw _privateConstructorUsedError;
   @JsonKey(name: 'customerCode', defaultValue: '')
   String get customerCode => throw _privateConstructorUsedError;
-  @_SalesOrganisationListConverter()
   @JsonKey(name: 'userSalesOrganisationList', defaultValue: [])
   List<SalesOrganisationDto> get userSalesOrganisations =>
       throw _privateConstructorUsedError;
@@ -47,8 +46,9 @@ mixin _$UserDto {
   @JsonKey(name: 'languagePreference', readValue: handleEmptyLanguagePreference)
   String get languagePreference => throw _privateConstructorUsedError;
   @JsonKey(name: 'enableOrderType', defaultValue: false)
-  bool get enableOrderType => throw _privateConstructorUsedError;
-  @JsonKey(name: 'acceptPrivacyPolicy', defaultValue: false)
+  bool get enableOrderType =>
+      throw _privateConstructorUsedError; // TODO: acceptPrivacyPolicy and acceptPrivacyPolicyTime not longer in use
+  @JsonKey(name: 'acceptPrivacyPolicy', defaultValue: true)
   bool get acceptPrivacyPolicy => throw _privateConstructorUsedError;
   @JsonKey(
       name: 'acceptPrivacyPolicyTime',
@@ -99,7 +99,6 @@ abstract class $UserDtoCopyWith<$Res> {
           RoleDto role,
       @JsonKey(name: 'customerCode', defaultValue: '')
           String customerCode,
-      @_SalesOrganisationListConverter()
       @JsonKey(name: 'userSalesOrganisationList', defaultValue: [])
           List<SalesOrganisationDto> userSalesOrganisations,
       @JsonKey(name: 'accessRight')
@@ -112,7 +111,7 @@ abstract class $UserDtoCopyWith<$Res> {
           String languagePreference,
       @JsonKey(name: 'enableOrderType', defaultValue: false)
           bool enableOrderType,
-      @JsonKey(name: 'acceptPrivacyPolicy', defaultValue: false)
+      @JsonKey(name: 'acceptPrivacyPolicy', defaultValue: true)
           bool acceptPrivacyPolicy,
       @JsonKey(name: 'acceptPrivacyPolicyTime', defaultValue: '1970-01-01 00:00:00', readValue: dateTimeStringFormatCheck)
           String acceptPrivacyPolicyTime,
@@ -302,7 +301,6 @@ abstract class _$$_UserDtoCopyWith<$Res> implements $UserDtoCopyWith<$Res> {
           RoleDto role,
       @JsonKey(name: 'customerCode', defaultValue: '')
           String customerCode,
-      @_SalesOrganisationListConverter()
       @JsonKey(name: 'userSalesOrganisationList', defaultValue: [])
           List<SalesOrganisationDto> userSalesOrganisations,
       @JsonKey(name: 'accessRight')
@@ -315,7 +313,7 @@ abstract class _$$_UserDtoCopyWith<$Res> implements $UserDtoCopyWith<$Res> {
           String languagePreference,
       @JsonKey(name: 'enableOrderType', defaultValue: false)
           bool enableOrderType,
-      @JsonKey(name: 'acceptPrivacyPolicy', defaultValue: false)
+      @JsonKey(name: 'acceptPrivacyPolicy', defaultValue: true)
           bool acceptPrivacyPolicy,
       @JsonKey(name: 'acceptPrivacyPolicyTime', defaultValue: '1970-01-01 00:00:00', readValue: dateTimeStringFormatCheck)
           String acceptPrivacyPolicyTime,
@@ -484,7 +482,6 @@ class _$_UserDto extends _UserDto {
           this.role = RoleDto.emptyRoleDto,
       @JsonKey(name: 'customerCode', defaultValue: '')
           required this.customerCode,
-      @_SalesOrganisationListConverter()
       @JsonKey(name: 'userSalesOrganisationList', defaultValue: [])
           required final List<SalesOrganisationDto> userSalesOrganisations,
       @JsonKey(name: 'accessRight')
@@ -497,7 +494,7 @@ class _$_UserDto extends _UserDto {
           required this.languagePreference,
       @JsonKey(name: 'enableOrderType', defaultValue: false)
           required this.enableOrderType,
-      @JsonKey(name: 'acceptPrivacyPolicy', defaultValue: false)
+      @JsonKey(name: 'acceptPrivacyPolicy', defaultValue: true)
           required this.acceptPrivacyPolicy,
       @JsonKey(name: 'acceptPrivacyPolicyTime', defaultValue: '1970-01-01 00:00:00', readValue: dateTimeStringFormatCheck)
           required this.acceptPrivacyPolicyTime,
@@ -545,7 +542,6 @@ class _$_UserDto extends _UserDto {
   final String customerCode;
   final List<SalesOrganisationDto> _userSalesOrganisations;
   @override
-  @_SalesOrganisationListConverter()
   @JsonKey(name: 'userSalesOrganisationList', defaultValue: [])
   List<SalesOrganisationDto> get userSalesOrganisations {
     if (_userSalesOrganisations is EqualUnmodifiableListView)
@@ -569,8 +565,9 @@ class _$_UserDto extends _UserDto {
   @override
   @JsonKey(name: 'enableOrderType', defaultValue: false)
   final bool enableOrderType;
+// TODO: acceptPrivacyPolicy and acceptPrivacyPolicyTime not longer in use
   @override
-  @JsonKey(name: 'acceptPrivacyPolicy', defaultValue: false)
+  @JsonKey(name: 'acceptPrivacyPolicy', defaultValue: true)
   final bool acceptPrivacyPolicy;
   @override
   @JsonKey(
@@ -724,7 +721,6 @@ abstract class _UserDto extends UserDto {
           final RoleDto role,
       @JsonKey(name: 'customerCode', defaultValue: '')
           required final String customerCode,
-      @_SalesOrganisationListConverter()
       @JsonKey(name: 'userSalesOrganisationList', defaultValue: [])
           required final List<SalesOrganisationDto> userSalesOrganisations,
       @JsonKey(name: 'accessRight')
@@ -737,7 +733,7 @@ abstract class _UserDto extends UserDto {
           required final String languagePreference,
       @JsonKey(name: 'enableOrderType', defaultValue: false)
           required final bool enableOrderType,
-      @JsonKey(name: 'acceptPrivacyPolicy', defaultValue: false)
+      @JsonKey(name: 'acceptPrivacyPolicy', defaultValue: true)
           required final bool acceptPrivacyPolicy,
       @JsonKey(name: 'acceptPrivacyPolicyTime', defaultValue: '1970-01-01 00:00:00', readValue: dateTimeStringFormatCheck)
           required final String acceptPrivacyPolicyTime,
@@ -781,7 +777,6 @@ abstract class _UserDto extends UserDto {
   @JsonKey(name: 'customerCode', defaultValue: '')
   String get customerCode;
   @override
-  @_SalesOrganisationListConverter()
   @JsonKey(name: 'userSalesOrganisationList', defaultValue: [])
   List<SalesOrganisationDto> get userSalesOrganisations;
   @override
@@ -799,8 +794,8 @@ abstract class _UserDto extends UserDto {
   @override
   @JsonKey(name: 'enableOrderType', defaultValue: false)
   bool get enableOrderType;
-  @override
-  @JsonKey(name: 'acceptPrivacyPolicy', defaultValue: false)
+  @override // TODO: acceptPrivacyPolicy and acceptPrivacyPolicyTime not longer in use
+  @JsonKey(name: 'acceptPrivacyPolicy', defaultValue: true)
   bool get acceptPrivacyPolicy;
   @override
   @JsonKey(

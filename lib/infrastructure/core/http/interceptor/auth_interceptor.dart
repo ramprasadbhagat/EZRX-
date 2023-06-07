@@ -107,7 +107,7 @@ class AuthInterceptor extends Interceptor {
         ),
       );
       final response = await dio.request(
-        '${config.urlConstants}loginV3',
+        '${config.urlConstants}license',
         data: jsonEncode(
           {
             'query': authQueryMutation.getLoginQuery(),
@@ -129,7 +129,7 @@ class AuthInterceptor extends Interceptor {
         ),
       );
       final login =
-          LoginDto.fromJson(response.data['data']['loginV3']).toDomain();
+          LoginDto.fromJson(response.data['data']['loginV4']).toDomain();
       final newJwt = JWTDto.fromDomain(login.jwt);
       await tokenStorage.set(newJwt);
 

@@ -30,7 +30,7 @@ class AuthRemoteDataSource {
     return await dataSourceExceptionHandler.handle(() async {
       final res = await httpService.request(
         method: 'POST',
-        url: '${config.urlConstants}loginV3',
+        url: '${config.urlConstants}license',
         data: jsonEncode(
           {
             'query': authQueryMutation.getLoginQuery(),
@@ -47,11 +47,11 @@ class AuthRemoteDataSource {
             },
           },
         ),
-        apiEndpoint: 'loginV3',
+        apiEndpoint: 'loginV4',
       );
-      _authExceptionChecker(res: res, jsonKey: 'loginV3');
+      _authExceptionChecker(res: res, jsonKey: 'loginV4');
 
-      return LoginDto.fromJson(res.data['data']['loginV3']).toDomain();
+      return LoginDto.fromJson(res.data['data']['loginV4']).toDomain();
     });
   }
 
@@ -62,7 +62,7 @@ class AuthRemoteDataSource {
     return await dataSourceExceptionHandler.handle(() async {
       final res = await httpService.request(
         method: 'POST',
-        url: '${config.urlConstants}loginV3',
+        url: '${config.urlConstants}license',
         data: jsonEncode(
           {
             'query': authQueryMutation.getLoginQuery(),
@@ -79,12 +79,12 @@ class AuthRemoteDataSource {
             },
           },
         ),
-        apiEndpoint: 'loginV3',
+        apiEndpoint: 'loginV4',
       );
 
-      _authExceptionChecker(res: res, jsonKey: 'loginV3');
+      _authExceptionChecker(res: res, jsonKey: 'loginV4');
 
-      return LoginDto.fromJson(res.data['data']['loginV3']).toDomain();
+      return LoginDto.fromJson(res.data['data']['loginV4']).toDomain();
     });
   }
 
@@ -92,7 +92,7 @@ class AuthRemoteDataSource {
     return await dataSourceExceptionHandler.handle(() async {
       final res = await httpService.request(
         method: 'POST',
-        url: '${config.urlConstants}loginV3',
+        url: '${config.urlConstants}license',
         data: jsonEncode(
           {
             'query': authQueryMutation.getProxyLoginQuery(),
@@ -101,12 +101,12 @@ class AuthRemoteDataSource {
             },
           },
         ),
-        apiEndpoint: 'proxyLoginV3',
+        apiEndpoint: 'proxyLoginV4',
       );
 
-      _authExceptionChecker(res: res, jsonKey: 'proxyLoginV3');
+      _authExceptionChecker(res: res, jsonKey: 'proxyLoginV4');
 
-      return LoginDto.fromJson(res.data['data']['proxyLoginV3']).toDomain();
+      return LoginDto.fromJson(res.data['data']['proxyLoginV4']).toDomain();
     });
   }
 

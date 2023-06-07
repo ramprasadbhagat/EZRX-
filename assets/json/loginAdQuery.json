@@ -1,3 +1,0 @@
-{
-  "query": "      query ($input:loginV3Input!){\n        loginV3(input:$input){\n          userID\n          authenticated\n          eZRxJWT\n          passwordLastReset\n          passwordExpiry\n          email\n          isAccountLocked\n          isAccountExpired\n          accountExpiryDate\n      }\n    }\n    "
-}

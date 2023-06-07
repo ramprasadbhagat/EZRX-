@@ -21,7 +21,7 @@ class UserMock extends Mock implements User {}
 
 void main() {
   late UserRemoteDataSource remoteDataSource;
-  late String saleOrgName;
+  late String userId;
   locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
 
   final dio = Dio(
@@ -39,8 +39,9 @@ void main() {
         httpService: service,
         dataSourceExceptionHandler: DataSourceExceptionHandler(),
         userQueryMutation: UserQueryMutation(),
+        config: locator.get<Config>(),
       );
-      saleOrgName = '2601';
+      userId = '3860';
     },
   );
 
@@ -53,7 +54,7 @@ void main() {
         );
 
         dioAdapter.onPost(
-          '/api/strapiEngine',
+          '/api/license',
           (server) => server.reply(
             200,
             res,
@@ -62,10 +63,10 @@ void main() {
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: jsonEncode({
             'query': remoteDataSource.userQueryMutation.getUserQuery(),
-            'variables': {'id': saleOrgName},
+            'variables': {'id': userId},
           }),
         );
-        final result = await remoteDataSource.getUser(userId: saleOrgName);
+        final result = await remoteDataSource.getUser(userId: userId);
         final resTest = UserDto.fromJson(res['data']['user']).toDomain();
         expect(result.fullName, resTest.fullName);
       },
@@ -88,11 +89,11 @@ void main() {
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: jsonEncode({
             'query': remoteDataSource.userQueryMutation.getUserQuery(),
-            'variables': {'id': saleOrgName},
+            'variables': {'id': userId},
           }),
         );
         await remoteDataSource
-            .getUser(userId: saleOrgName)
+            .getUser(userId: userId)
             .onError((error, _) async {
           expect(error, isA<ServerException>());
           return Future.value(User.empty());
@@ -115,11 +116,11 @@ void main() {
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: jsonEncode({
             'query': remoteDataSource.userQueryMutation.getUserQuery(),
-            'variables': {'id': saleOrgName},
+            'variables': {'id': userId},
           }),
         );
         await remoteDataSource
-            .getUser(userId: saleOrgName)
+            .getUser(userId: userId)
             .onError((error, _) async {
           expect(error, isA<ServerException>());
           return Future.value(User.empty());
@@ -142,11 +143,11 @@ void main() {
     //       headers: {'Content-Type': 'application/json; charset=utf-8'},
     //       data: jsonEncode({
     //         'query': remoteDataSource.userQueryMutation.getUserQuery(),
-    //         'variables': {'id': saleOrgName},
+    //         'variables': {'id': userId},
     //       }),
     //     );
     //     await remoteDataSource
-    //         .getUser(userId: saleOrgName)
+    //         .getUser(userId: userId)
     //         .onError((error, _) async {
     //       expect(error, isA<UserException>userNotFound() );
     //       return Future.value(User.empty());
@@ -163,7 +164,7 @@ void main() {
         final date = DateTime.now().toUtc().toIso8601String();
         final data = {
           'input': {
-            'where': {'id': int.parse(saleOrgName)},
+            'where': {'id': int.parse(userId)},
             'data': {
               'acceptPrivacyPolicy': true,
               'acceptPrivacyPolicyTime': date, // '2022-12-27T09:37:45.843154Z',
@@ -186,7 +187,7 @@ void main() {
           }),
         );
         final result = await remoteDataSource.updateUserTC(
-          userId: saleOrgName,
+          userId: userId,
           date: date, //DateTime.now().toUtc().toIso8601String(),
         );
         final resTest =

@@ -69,24 +69,15 @@
           "passwordLastUpdate":"",
           "passwordLastRetained":"",
           "languagePreference":"EN",
-          "userSalesOrganisationList":{
-             "value":[
-                {
-                   "salesOrg":"2601",
-                   "customerCode":"all",
-                   "shipToCode":[
-                      "all"
-                   ]
-                },
-                {
-                  "salesOrg":"2900",
-                  "customerCode":"all",
-                  "shipToCode":[
-                     "all"
-                  ]
-               }
-             ]
-          },
+          "userSalesOrganisationList":[
+            {
+               "SalesOrg":"2001",
+               "CustomerCode":"all",
+               "ShipToCode":[
+                  "all"
+               ]
+            }
+         ],
           "passwordActionName":"Do It Later",
           "passwordActionTime":"2021-12-16T08:15:26.846Z",
           "disablePaymentAccess":true,

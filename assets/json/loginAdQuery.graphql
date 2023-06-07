@@ -1,0 +1,35 @@
+{
+  "query": query ($input:loginV4Input!){
+        loginV4(input:$input){
+          authenticated
+          eZRxJWT
+          eZRxRefreshJWT
+          passwordLastReset
+          passwordExpiry
+          email
+          isAccountLocked
+          isAccountExpired
+          accountExpiryDate
+          supportedLanguages {
+            language
+            searchFilter
+          }
+          userMobileToken {
+            firstName
+            lastName
+            mobileTokens {
+              token
+              dateUpdated
+              provider
+            }
+            mobileNotifications
+          }
+  }
+
+  variable : {
+    "input": {
+      "username": "rootadmin",
+      "password": "password"
+    }
+  }
+}

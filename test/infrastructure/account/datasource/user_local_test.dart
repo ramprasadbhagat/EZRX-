@@ -26,7 +26,7 @@ void main() {
           .thenAnswer((invocation) async => JWTDto(access: rootAdminToken));
 
       final user = await userLocal.getUser();
-      expect(user.id, '276');
+      expect(user.id, '3860');
     });
 
     test('getUser with empty token', () async {
@@ -34,7 +34,7 @@ void main() {
           .thenAnswer((invocation) async => JWTDto(access: ''));
 
       final user = await userLocal.getUser();
-      expect(user.id, '276');
+      expect(user.id, '3860');
     });
 
     test('getUser with other token', () async {

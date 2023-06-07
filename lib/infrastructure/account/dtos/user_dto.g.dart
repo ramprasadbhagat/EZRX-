@@ -16,10 +16,12 @@ _$_UserDto _$$_UserDtoFromJson(Map<String, dynamic> json) => _$_UserDto(
           ? RoleDto.emptyRoleDto
           : RoleDto.fromJson(json['role'] as Map<String, dynamic>),
       customerCode: json['customerCode'] as String? ?? '',
-      userSalesOrganisations: json['userSalesOrganisationList'] == null
-          ? []
-          : const _SalesOrganisationListConverter().fromJson(
-              json['userSalesOrganisationList'] as Map<String, dynamic>),
+      userSalesOrganisations:
+          (json['userSalesOrganisationList'] as List<dynamic>?)
+                  ?.map((e) =>
+                      SalesOrganisationDto.fromJson(e as Map<String, dynamic>))
+                  .toList() ??
+              [],
       accessRight: json['accessRight'] == null
           ? AccessRightDto.emptyAccessRightDto
           : AccessRightDto.fromJson(
@@ -29,7 +31,7 @@ _$_UserDto _$$_UserDtoFromJson(Map<String, dynamic> json) => _$_UserDto(
       languagePreference:
           handleEmptyLanguagePreference(json, 'languagePreference') as String,
       enableOrderType: json['enableOrderType'] as bool? ?? false,
-      acceptPrivacyPolicy: json['acceptPrivacyPolicy'] as bool? ?? false,
+      acceptPrivacyPolicy: json['acceptPrivacyPolicy'] as bool? ?? true,
       acceptPrivacyPolicyTime:
           dateTimeStringFormatCheck(json, 'acceptPrivacyPolicyTime')
                   as String? ??
@@ -58,8 +60,8 @@ Map<String, dynamic> _$$_UserDtoToJson(_$_UserDto instance) =>
       'lastName': instance.lastName,
       'role': instance.role.toJson(),
       'customerCode': instance.customerCode,
-      'userSalesOrganisationList': const _SalesOrganisationListConverter()
-          .toJson(instance.userSalesOrganisations),
+      'userSalesOrganisationList':
+          instance.userSalesOrganisations.map((e) => e.toJson()).toList(),
       'accessRight': instance.accessRight.toJson(),
       'emailNotifications': instance.emailNotifications,
       'mobileNotifications': instance.mobileNotifications,
