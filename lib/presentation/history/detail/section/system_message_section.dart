@@ -19,7 +19,7 @@ class HistorySystemMessageSection extends StatelessWidget {
 
         return Container(
           key: const ValueKey('systemMessage'),
-          color: ZPColors.systrmMessageColor,
+          color: ZPColors.systemMessageColor,
           child: ListTile(
             leading: const Icon(
               Icons.error,

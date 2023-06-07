@@ -26,12 +26,19 @@ class UserDto with _$UserDto {
   const UserDto._();
 
   const factory UserDto({
-    @JsonKey(name: 'id', defaultValue: '') required String id,
-    @JsonKey(name: 'username', defaultValue: '') required String username,
-    @JsonKey(name: 'email', defaultValue: '') required String email,
-    @JsonKey(name: 'firstName', defaultValue: '') required String firstName,
-    @JsonKey(name: 'lastName', defaultValue: '') required String lastName,
-    @Default(RoleDto.emptyRoleDto) @JsonKey(name: 'role') RoleDto role,
+    @JsonKey(name: 'id', defaultValue: '')
+        required String id,
+    @JsonKey(name: 'username', defaultValue: '')
+        required String username,
+    @JsonKey(name: 'email', defaultValue: '')
+        required String email,
+    @JsonKey(name: 'firstName', defaultValue: '')
+        required String firstName,
+    @JsonKey(name: 'lastName', defaultValue: '')
+        required String lastName,
+    @Default(RoleDto.emptyRoleDto)
+    @JsonKey(name: 'role')
+        RoleDto role,
     @JsonKey(name: 'customerCode', defaultValue: '')
         required String customerCode,
     @JsonKey(name: 'userSalesOrganisationList', defaultValue: [])
@@ -65,8 +72,9 @@ class UserDto with _$UserDto {
     @JsonKey(name: 'disablePaymentNotification', defaultValue: false)
         required bool disablePaymentNotification,
     @JsonKey(
-        name: 'paymentNotification', defaultValue: <
-            PaymentAdviceExpiryNotificationDto>[])
+      name: 'paymentNotification',
+      defaultValue: <PaymentAdviceExpiryNotificationDto>[],
+    )
         required List<PaymentAdviceExpiryNotificationDto> paymentNotification,
   }) = _UserDto;
 

@@ -108,7 +108,7 @@ class AcceptButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: ZPColors.systrmMessageColor,
+      color: ZPColors.systemMessageColor,
       child: SafeArea(
         child: Column(
           mainAxisSize: MainAxisSize.min,

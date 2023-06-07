@@ -1,8 +1,11 @@
-import 'dart:convert';
-
+import 'package:ezrxmobile/domain/account/entities/user.dart';
+import 'package:ezrxmobile/infrastructure/account/dtos/sales_organisation_dto.dart';
+import 'package:ezrxmobile/infrastructure/account/dtos/user_dto.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
+
+import 'dart:convert';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -12,12 +15,12 @@ void main() {
       data = json
           .decode(await rootBundle.loadString('assets/json/userResponse.json'));
     });
-    // TODO: V3 migrtion cause the data not longer the same , will revisit
-    // test('For _mergeSalesOrg', () async {
-    //   final user = UserDto.fromJson(data['data']['user']).toDomain();
-    //   expect(user.userSalesOrganisations.length, 19);
-    // });
+    test('For _mergeSalesOrg', () async {
+      final user = UserDto.fromJson(data['data']['user']).toDomain();
+      expect(user.userSalesOrganisations.length, 1); //19
+    });
 
+    // TODO: migrate to v3 skip this for now
     // test('For _splitSalesOrg', () async {
     //   final user = UserDto.fromJson(data['data']['user']).toDomain();
     //   final userDto = UserDto.fromDomain(user);
@@ -27,11 +30,11 @@ void main() {
     //   expect(userDto.userSalesOrganisations.length, 20);
     //   expect(userSalesOrganisationList['value'].length, 20);
     // });
-    // test('For Empty Sale Organisation DTO', () async {
-    //   final newUser = User.empty().copyWith(
-    //       userSalesOrganisations: [SalesOrganisationDto.empty().toDomain()]);
-    //   SalesOrganisationDto.empty().toJson();
-    //   expect(newUser.userSalesOrganisations.length, 1);
-    // });
+    test('For Empty Sale Organisation DTO', () async {
+      final newUser = User.empty().copyWith(
+          userSalesOrganisations: [SalesOrganisationDto.empty().toDomain()]);
+      SalesOrganisationDto.empty().toJson();
+      expect(newUser.userSalesOrganisations.length, 1);
+    });
   });
 }
