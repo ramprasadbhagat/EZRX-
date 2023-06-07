@@ -14,6 +14,7 @@ class EditBeneficiaryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: const Key('editBeneficiary'),
       appBar: AppBar(title: Text('Edit Bank Beneficiary'.tr())),
       body: AnnouncementBanner(
         currentPath: context.router.currentPath,

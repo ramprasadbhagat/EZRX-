@@ -16,6 +16,7 @@ class AddBeneficiaryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: const Key('addBeneficiary'),
       appBar: AppBar(title: Text('Add Beneficiary'.tr())),
       body: AnnouncementBanner(
         currentPath: context.router.currentPath,

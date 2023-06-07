@@ -42,6 +42,7 @@ class BankBeneficiaryPage extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        key: const Key('addBeneficiaryKey'),
         child: const Icon(Icons.add),
         onPressed: () {
           context.read<ManageBankBeneficiaryBloc>().add(
@@ -164,7 +165,10 @@ class _BankBeneficiaryListItem extends StatelessWidget {
                                 strokeWidth: 2.0,
                               ),
                           )
-                          : const Icon(Icons.delete),
+                          : Icon(
+                            Icons.delete,
+                            key: Key('deleteKey$index'),
+                          ),
                       onPressed: () => beneficiaryData.isDeleteInProgress
                           ? null
                           : _deleteBeneficiaryDialog(
