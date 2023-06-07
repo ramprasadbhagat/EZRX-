@@ -326,6 +326,19 @@ import 'package:ezrxmobile/infrastructure/account/datasource/update_payment_noti
 
 import 'package:ezrxmobile/infrastructure/account/datasource/update_payment_notification_remote_datasource.dart';
 
+
+
+
+import 'package:ezrxmobile/infrastructure/payments/repository/download_payment_attachment_repository.dart';
+
+import 'package:ezrxmobile/application/payments/download_payment_attachments/download_payment_attachments_bloc.dart';
+
+import 'package:ezrxmobile/infrastructure/payments/datasource/download_payment_attachment_local_datasource.dart';
+
+import 'package:ezrxmobile/infrastructure/payments/datasource/download_payment_attachment_remote_datasource.dart';
+
+import 'package:ezrxmobile/infrastructure/payments/datasource/download_payment_attachment_query.dart';
+
 GetIt locator = GetIt.instance;
 
 void setupLocator() {
@@ -1455,6 +1468,42 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => TenderContractListBloc(
       tenderContractRepository: locator<TenderContractRepository>(),
+    ),
+  );
+
+
+  //============================================================
+  //  Payments Download Documents
+  //
+  //============================================================
+
+  locator.registerLazySingleton(() => DownloadPaymentAttachmentQuery());
+
+  locator.registerLazySingleton(() => DownloadPaymentAttachmentLocalDataSource());
+
+  locator.registerLazySingleton(
+    () => DownloadPaymentAttachmentRemoteDataSource(
+      httpService: locator<HttpService>(),
+      downloadPaymentAttachmentQuery: locator<DownloadPaymentAttachmentQuery>(),
+      config: locator<Config>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => DownloadPaymentAttachmentRepository(
+      config: locator<Config>(),
+      localDataSource: locator<DownloadPaymentAttachmentLocalDataSource>(),
+      remoteDataSource: locator<DownloadPaymentAttachmentRemoteDataSource>(),
+      permissionService: locator<PermissionService>(),
+      deviceInfo: locator<DeviceInfo>(),
+      fileSystemHelper: locator<FileSystemHelper>(),
+    ),
+  );
+
+  locator.registerFactory(
+    () => DownloadPaymentAttachmentsBloc(
+      paymentAttachmentRepository: locator<DownloadPaymentAttachmentRepository>(),
     ),
   );
 

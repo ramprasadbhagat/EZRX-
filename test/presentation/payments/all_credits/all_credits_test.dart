@@ -9,6 +9,7 @@ import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_credits/all_credits_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_credits/all_credits_filter/all_credits_filter_bloc.dart';
+import 'package:ezrxmobile/application/payments/download_payment_attachments/download_payment_attachments_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
@@ -49,6 +50,10 @@ class CustomerCodeBlocMock
 class ShipToCodeBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState>
     implements ShipToCodeBloc {}
 
+class DownloadPaymentAttachmentsBlocMock extends MockBloc<
+        DownloadPaymentAttachmentEvent, DownloadPaymentAttachmentsState>
+    implements DownloadPaymentAttachmentsBloc {}
+
 class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
 
 class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
@@ -63,6 +68,7 @@ class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 void main() {
   late AllCreditsBloc allCreditsBlocMock;
   late AllCreditsFilterBloc allCreditsFilterBlocMock;
+  late DownloadPaymentAttachmentsBloc downloadPaymentAttachmentsBlocMock;
   late CustomerCodeBloc customerCodeBlocMock;
   late ShipToCodeBloc shipToCodeBlocMock;
   late UserBloc userBlocMock;
@@ -98,6 +104,7 @@ void main() {
     WidgetsFlutterBinding.ensureInitialized();
     allCreditsBlocMock = AllCreditsBlocMock();
     allCreditsFilterBlocMock = AllCreditsFilterBlocMock();
+    downloadPaymentAttachmentsBlocMock = DownloadPaymentAttachmentsBlocMock();
     customerCodeBlocMock = CustomerCodeBlocMock();
     shipToCodeBlocMock = ShipToCodeBlocMock();
     userBlocMock = UserBlocMock();
@@ -108,6 +115,8 @@ void main() {
     when(() => allCreditsBlocMock.state).thenReturn(AllCreditsState.initial());
     when(() => allCreditsFilterBlocMock.state)
         .thenReturn(AllCreditsFilterState.initial());
+    when(() => downloadPaymentAttachmentsBlocMock.state)
+        .thenReturn(DownloadPaymentAttachmentsState.initial());   
     when(() => customerCodeBlocMock.state)
         .thenReturn(CustomerCodeState.initial());
     when(() => shipToCodeBlocMock.state).thenReturn(ShipToCodeState.initial());
@@ -128,6 +137,9 @@ void main() {
           ),
           BlocProvider<AllCreditsFilterBloc>(
             create: (context) => allCreditsFilterBlocMock,
+          ),
+          BlocProvider<DownloadPaymentAttachmentsBloc>(
+            create: (context) => downloadPaymentAttachmentsBlocMock,
           ),
           BlocProvider<CustomerCodeBloc>(
             create: (context) => customerCodeBlocMock,

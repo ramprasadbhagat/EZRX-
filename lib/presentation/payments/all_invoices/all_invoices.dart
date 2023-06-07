@@ -23,6 +23,12 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+
+import 'package:ezrxmobile/application/payments/download_payment_attachments/download_payment_attachments_bloc.dart';
+
+import 'package:ezrxmobile/presentation/core/snackbar.dart';
+
 class AllInvoicesPage extends StatelessWidget {
   const AllInvoicesPage({Key? key}) : super(key: key);
 
@@ -34,8 +40,56 @@ class AllInvoicesPage extends StatelessWidget {
       key: scaffoldKey,
       appBar: AppBar(
         title: const Text('All Invoices').tr(),
-        //remove default right menu
-        actions: const [SizedBox.shrink()],
+        actions: [
+          BlocConsumer<DownloadPaymentAttachmentsBloc,
+              DownloadPaymentAttachmentsState>(
+            listenWhen: (previous, current) =>
+                previous.failureOrSuccessOption !=
+                    current.failureOrSuccessOption,
+            buildWhen: (previous, current) =>
+                previous.isDownloadInProgress != current.isDownloadInProgress,
+            listener: (context, state) {
+              state.failureOrSuccessOption.fold(
+                () {},
+                (either) => either.fold(
+                  (failure) {
+                    ErrorUtils.handleApiFailure(context, failure);
+                  },
+                  (_) {
+                    showSnackBar(
+                      context: context,
+                      message: 'File downloaded successfully'.tr(),
+                    );
+                  },
+                ),
+              );
+            },
+            builder: (context, state) {
+              return TextButton(
+                onPressed: state.isDownloadInProgress ? null : () {
+                  final eligibilityState =
+                      context.read<EligibilityBloc>().state;
+                  final allInvoicesFilterState =
+                      context.read<AllInvoicesFilterBloc>().state;
+                  context.read<DownloadPaymentAttachmentsBloc>().add(
+                        DownloadPaymentAttachmentEvent.fetchAllInvoiceUrl(
+                          salesOrganization: eligibilityState.salesOrganisation,
+                          customerCodeInfo: eligibilityState.customerCodeInfo,
+                          queryObject: allInvoicesFilterState.allInvoicesFilter,
+                        ),
+                      );
+                },
+                child: state.isDownloadInProgress
+                    ? const SizedBox(
+                        height: 15,
+                        width: 15,
+                        child: CircularProgressIndicator(strokeWidth: 2),
+                      )
+                    : const Text('Download').tr(),
+              );
+            },
+          ),
+        ],
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(30.0),
           child: Padding(

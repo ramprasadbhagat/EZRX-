@@ -22,6 +22,13 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+
+import 'package:ezrxmobile/application/payments/download_payment_attachments/download_payment_attachments_bloc.dart';
+
+import 'package:ezrxmobile/presentation/core/snackbar.dart';
+
+
 class AllCredits extends StatelessWidget {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -33,6 +40,61 @@ class AllCredits extends StatelessWidget {
       key: scaffoldKey,
       appBar: AppBar(
         title: const Text('All Credits').tr(),
+        actions: [
+          BlocConsumer<DownloadPaymentAttachmentsBloc,
+              DownloadPaymentAttachmentsState>(
+            listenWhen: (previous, current) =>
+                previous.failureOrSuccessOption !=
+                current.failureOrSuccessOption,
+            buildWhen: (previous, current) =>
+                previous.isDownloadInProgress != current.isDownloadInProgress,
+            listener: (context, state) {
+              state.failureOrSuccessOption.fold(
+                () {},
+                (either) => either.fold(
+                  (failure) {
+                    ErrorUtils.handleApiFailure(context, failure);
+                  },
+                  (_) {
+                    showSnackBar(
+                      context: context,
+                      message: 'File downloaded successfully'.tr(),
+                    );
+                  },
+                ),
+              );
+            },
+            builder: (context, state) {
+              return TextButton(
+                onPressed: state.isDownloadInProgress
+                    ? null
+                    : () {
+                        final eligibilityState =
+                            context.read<EligibilityBloc>().state;
+                        final allCreditsFilterState =
+                            context.read<AllCreditsFilterBloc>().state;
+                        context.read<DownloadPaymentAttachmentsBloc>().add(
+                              DownloadPaymentAttachmentEvent.fetchAllCreditUrl(
+                                salesOrganization:
+                                    eligibilityState.salesOrganisation,
+                                customerCodeInfo:
+                                    eligibilityState.customerCodeInfo,
+                                queryObject:
+                                    allCreditsFilterState.allCreditsFilter,
+                              ),
+                            );
+                      },
+                child: state.isDownloadInProgress
+                    ? const SizedBox(
+                        height: 15,
+                        width: 15,
+                        child: CircularProgressIndicator(strokeWidth: 2),
+                      )
+                    : const Text('Download').tr(),
+              );
+            },
+          ),
+        ],
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(30.0),
           child: Padding(

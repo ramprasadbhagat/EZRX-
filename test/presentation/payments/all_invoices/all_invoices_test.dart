@@ -9,6 +9,7 @@ import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/filter/all_invoices_filter_bloc.dart';
+import 'package:ezrxmobile/application/payments/download_payment_attachments/download_payment_attachments_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_address.dart';
@@ -44,6 +45,9 @@ class CustomerCodeBlocMock
     extends MockBloc<CustomerCodeEvent, CustomerCodeState>
     implements CustomerCodeBloc {}
 
+class DownloadPaymentAttachmentsBlocMock extends MockBloc<
+        DownloadPaymentAttachmentEvent, DownloadPaymentAttachmentsState>
+    implements DownloadPaymentAttachmentsBloc {}
 class ShipToCodeBlocMock extends MockBloc<ShipToCodeEvent, ShipToCodeState>
     implements ShipToCodeBloc {}
 
@@ -61,6 +65,7 @@ class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 void main() {
   late AllInvoicesBloc allInvoicesBlocMock;
   late AllInvoicesFilterBloc allInvoicesFilterBlocMock;
+  late DownloadPaymentAttachmentsBloc downloadPaymentAttachmentsBlocMock;
   late CustomerCodeBloc customerCodeBlocMock;
   late ShipToCodeBloc shipToCodeBlocMock;
   late UserBloc userBlocMock;
@@ -83,6 +88,7 @@ void main() {
     allInvoicesBlocMock = AllInvoicesBlocMock();
     allInvoicesFilterBlocMock = AllInvoicesFilterBlocMock();
     customerCodeBlocMock = CustomerCodeBlocMock();
+    downloadPaymentAttachmentsBlocMock = DownloadPaymentAttachmentsBlocMock();
     shipToCodeBlocMock = ShipToCodeBlocMock();
     userBlocMock = UserBlocMock();
     salesOrgBlocMock = SalesOrgBlocMock();
@@ -95,6 +101,8 @@ void main() {
         .thenReturn(AllInvoicesFilterState.initial());
     when(() => customerCodeBlocMock.state)
         .thenReturn(CustomerCodeState.initial());
+    when(() => downloadPaymentAttachmentsBlocMock.state)
+        .thenReturn(DownloadPaymentAttachmentsState.initial());   
     when(() => shipToCodeBlocMock.state).thenReturn(ShipToCodeState.initial());
     when(() => userBlocMock.state).thenReturn(UserState.initial());
     when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
@@ -113,6 +121,9 @@ void main() {
           ),
           BlocProvider<AllInvoicesFilterBloc>(
             create: (context) => allInvoicesFilterBlocMock,
+          ),
+          BlocProvider<DownloadPaymentAttachmentsBloc>(
+            create: (context) => downloadPaymentAttachmentsBlocMock,
           ),
           BlocProvider<CustomerCodeBloc>(
             create: (context) => customerCodeBlocMock,

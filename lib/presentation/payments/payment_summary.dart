@@ -14,6 +14,10 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 
+import 'package:ezrxmobile/application/payments/download_payment_attachments/download_payment_attachments_bloc.dart';
+
+import 'package:ezrxmobile/presentation/core/snackbar.dart';
+
 class PaymentSummaryPage extends StatelessWidget {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -28,6 +32,58 @@ class PaymentSummaryPage extends StatelessWidget {
         title: const Text(
           'Payment Summary',
         ).tr(),
+        actions: [
+          BlocConsumer<DownloadPaymentAttachmentsBloc,
+              DownloadPaymentAttachmentsState>(
+            listenWhen: (previous, current) =>
+                previous.failureOrSuccessOption !=
+                current.failureOrSuccessOption,
+            buildWhen: (previous, current) =>
+                previous.isDownloadInProgress != current.isDownloadInProgress,
+            listener: (context, state) {
+              state.failureOrSuccessOption.fold(
+                () {},
+                (either) => either.fold(
+                  (failure) {
+                    ErrorUtils.handleApiFailure(context, failure);
+                  },
+                  (_) {
+                    showSnackBar(
+                      context: context,
+                      message: 'File downloaded successfully'.tr(),
+                    );
+                  },
+                ),
+              );
+            },
+            builder: (context, state) {
+              return TextButton(
+                onPressed: state.isDownloadInProgress
+                    ? null
+                    : () {
+                        final eligibilityState =
+                            context.read<EligibilityBloc>().state;
+                        context.read<DownloadPaymentAttachmentsBloc>().add(
+                              DownloadPaymentAttachmentEvent
+                                  .fetchPaymentSummaryUrl(
+                                salesOrganization:
+                                    eligibilityState.salesOrganisation,
+                                customerCodeInfo:
+                                    eligibilityState.customerCodeInfo,
+                              ),
+                            );
+                      },
+                child: state.isDownloadInProgress
+                    ? const SizedBox(
+                        height: 15,
+                        width: 15,
+                        child: CircularProgressIndicator(strokeWidth: 2),
+                      )
+                    : const Text('Download').tr(),
+              );
+            },
+          ),
+        ],
       ),
       body: BlocConsumer<PaymentSummaryBloc, PaymentSummaryState>(
         listenWhen: (previous, current) =>
@@ -47,7 +103,7 @@ class PaymentSummaryPage extends StatelessWidget {
             previous.isFetching != current.isFetching,
         builder: (context, state) {
           final eligibilityState = context.read<EligibilityBloc>().state;
-          
+
           return AnnouncementBanner(
             currentPath: context.router.currentPath,
             child: ScrollList<PaymentSummaryDetails>(

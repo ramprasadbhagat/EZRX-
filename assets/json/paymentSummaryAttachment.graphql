@@ -1,0 +1,21 @@
+query customerPaymentExcel($request: customerPaymentRequest!) {
+  customerPaymentExcel(request: $request) {
+    url
+    __typename
+  }
+}
+
+variables
+
+{
+  "request": {
+    "customerCode": "0030032223",
+    "salesOrg": "2601",
+    "orderBy": [
+      {
+        "order": "desc",
+        "field": "createdDate"
+      }
+    ]
+  }
+}
