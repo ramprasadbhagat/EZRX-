@@ -33,6 +33,8 @@ class CustomerCodeInfo with _$CustomerCodeInfo {
     required List<SalesDealNumber> salesDeals,
     required PhoneNumber telephoneNumber,
     required String country,
+    required String floor,
+    required String houseNumber1,
   }) = _CustomerCodeInfo;
 
   factory CustomerCodeInfo.empty() => CustomerCodeInfo(
@@ -68,6 +70,8 @@ class CustomerCodeInfo with _$CustomerCodeInfo {
         salesDeals: [],
         telephoneNumber: PhoneNumber(''),
         country: '',
+        floor:'',
+        houseNumber1:'',
       );
 
   bool get hasBillToInfo {

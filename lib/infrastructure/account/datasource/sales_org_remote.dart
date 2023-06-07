@@ -22,10 +22,14 @@ class SalesOrgRemoteDataSource {
     return await dataSourceExceptionHandler.handle(() async {
       final res = await httpService.request(
         method: 'POST',
-        url: '/api/strapiEngine',
+        url: '/api/license',
         data: jsonEncode({
           'query': salesOrgQueryMutation.getSalesOrgConfigsQuery(),
-          'variables': {'salesOrg': salesOrg},
+          'variables': {
+            'request': {
+              'salesOrg': salesOrg,
+            },
+          },
         }),
         apiEndpoint: 'salesOrgConfigs',
       );

@@ -700,7 +700,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9740EEB21CF90195004384FC /* Debug.xcconfig */;
 			buildSettings = {
-				APP_DISPLAY_NAME = "eZRx Dev";
+				APP_DISPLAY_NAME = "eZRx+ Dev";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CLEVERTAP_ACCOUNT_ID = "TEST-464-R68-876Z";
@@ -786,7 +786,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9740EEB21CF90195004384FC /* Debug.xcconfig */;
 			buildSettings = {
-				APP_DISPLAY_NAME = "eZRx Uat";
+				APP_DISPLAY_NAME = "eZRx+ Uat";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CLEVERTAP_ACCOUNT_ID = "TEST-798-WW8-476Z";
@@ -871,7 +871,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7AFA3C8E1D35360C0083082E /* Release.xcconfig */;
 			buildSettings = {
-				APP_DISPLAY_NAME = "eZRx Dev";
+				APP_DISPLAY_NAME = "eZRx+ Dev";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CLEVERTAP_ACCOUNT_ID = "TEST-464-R68-876Z";
@@ -953,7 +953,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7AFA3C8E1D35360C0083082E /* Release.xcconfig */;
 			buildSettings = {
-				APP_DISPLAY_NAME = "eZRx Uat";
+				APP_DISPLAY_NAME = "eZRx+ Uat";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CLEVERTAP_ACCOUNT_ID = "TEST-798-WW8-476Z";
@@ -1035,7 +1035,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7AFA3C8E1D35360C0083082E /* Release.xcconfig */;
 			buildSettings = {
-				APP_DISPLAY_NAME = "eZRx Dev";
+				APP_DISPLAY_NAME = "eZRx+ Dev";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CLEVERTAP_ACCOUNT_ID = "TEST-464-R68-876Z";
@@ -1115,7 +1115,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7AFA3C8E1D35360C0083082E /* Release.xcconfig */;
 			buildSettings = {
-				APP_DISPLAY_NAME = "eZRx Uat";
+				APP_DISPLAY_NAME = "eZRx+ Uat";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CLEVERTAP_ACCOUNT_ID = "TEST-798-WW8-476Z";
@@ -1202,7 +1202,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9740EEB21CF90195004384FC /* Debug.xcconfig */;
 			buildSettings = {
-				APP_DISPLAY_NAME = "eZRx Mock";
+				APP_DISPLAY_NAME = "eZRx+ Mock";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CLEVERTAP_ACCOUNT_ID = "TEST-464-R68-876Z";
@@ -1285,7 +1285,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7AFA3C8E1D35360C0083082E /* Release.xcconfig */;
 			buildSettings = {
-				APP_DISPLAY_NAME = "eZRx Mock";
+				APP_DISPLAY_NAME = "eZRx+ Mock";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CLEVERTAP_ACCOUNT_ID = "TEST-464-R68-876Z";
@@ -1365,7 +1365,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7AFA3C8E1D35360C0083082E /* Release.xcconfig */;
 			buildSettings = {
-				APP_DISPLAY_NAME = "eZRx Mock";
+				APP_DISPLAY_NAME = "eZRx+ Mock";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CLEVERTAP_ACCOUNT_ID = "TEST-464-R68-876Z";

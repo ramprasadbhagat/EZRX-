@@ -39,14 +39,14 @@ class Config {
   String get appName {
     switch (appFlavor) {
       case Flavor.mock:
-        return 'eZRx Mock';
+        return 'eZRx+ Mock';
       case Flavor.dev:
-        return 'eZRx Dev';
+        return 'eZRx+ Dev';
       case Flavor.uat:
-        return 'eZRx Uat';
+        return 'eZRx+ Uat';
       case Flavor.prod:
       default:
-        return 'eZRx';
+        return 'eZRx+';
     }
   }
 
@@ -390,6 +390,7 @@ class Config {
         'jpg',
         'jpeg',
       ];
+
   //============================================================
   //  eZReach
   //

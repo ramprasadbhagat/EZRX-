@@ -20,82 +20,82 @@ BillToDto _$BillToDtoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$BillToDto {
-  @JsonKey(name: 'billToCustomerCode')
+  @JsonKey(name: 'billToCustomerCode', defaultValue: '')
   String get billToCustomerCode => throw _privateConstructorUsedError;
-  @JsonKey(name: 'defaulBillToAddress')
+  @JsonKey(name: 'defaulBillToAddress', defaultValue: true)
   bool get defaulBillToAddress => throw _privateConstructorUsedError;
-  @JsonKey(name: 'name1')
+  @JsonKey(name: 'name1', defaultValue: '')
   String get name1 => throw _privateConstructorUsedError;
-  @JsonKey(name: 'name2')
+  @JsonKey(name: 'name2', defaultValue: '')
   String get name2 => throw _privateConstructorUsedError;
-  @JsonKey(name: 'name3')
+  @JsonKey(name: 'name3', defaultValue: '')
   String get name3 => throw _privateConstructorUsedError;
-  @JsonKey(name: 'name4')
+  @JsonKey(name: 'name4', defaultValue: '')
   String get name4 => throw _privateConstructorUsedError;
-  @JsonKey(name: 'altName1')
+  @JsonKey(name: 'altName1', defaultValue: '')
   String get altName1 => throw _privateConstructorUsedError;
-  @JsonKey(name: 'altName2')
+  @JsonKey(name: 'altName2', defaultValue: '')
   String get altName2 => throw _privateConstructorUsedError;
-  @JsonKey(name: 'altName3')
+  @JsonKey(name: 'altName3', defaultValue: '')
   String get altName3 => throw _privateConstructorUsedError;
-  @JsonKey(name: 'altName4')
+  @JsonKey(name: 'altName4', defaultValue: '')
   String get altName4 => throw _privateConstructorUsedError;
-  @JsonKey(name: 'status')
+  @JsonKey(name: 'status', defaultValue: '')
   String get status => throw _privateConstructorUsedError;
-  @JsonKey(name: 'street')
+  @JsonKey(name: 'street', defaultValue: '')
   String get street => throw _privateConstructorUsedError;
-  @JsonKey(name: 'street2')
+  @JsonKey(name: 'street2', defaultValue: '')
   String get street2 => throw _privateConstructorUsedError;
-  @JsonKey(name: 'street3')
+  @JsonKey(name: 'street3', defaultValue: '')
   String get street3 => throw _privateConstructorUsedError;
-  @JsonKey(name: 'street4')
+  @JsonKey(name: 'street4', defaultValue: '')
   String get street4 => throw _privateConstructorUsedError;
-  @JsonKey(name: 'street5')
+  @JsonKey(name: 'street5', defaultValue: '')
   String get street5 => throw _privateConstructorUsedError;
-  @JsonKey(name: 'postalCode')
+  @JsonKey(name: 'postalCode', defaultValue: '')
   String get postalCode => throw _privateConstructorUsedError;
-  @JsonKey(name: 'postalCode2')
+  @JsonKey(name: 'postalCode2', defaultValue: '')
   String get postalCode2 => throw _privateConstructorUsedError;
-  @JsonKey(name: 'city1')
+  @JsonKey(name: 'city1', defaultValue: '')
   String get city1 => throw _privateConstructorUsedError;
-  @JsonKey(name: 'city2')
+  @JsonKey(name: 'city2', defaultValue: '')
   String get city2 => throw _privateConstructorUsedError;
-  @JsonKey(name: 'telephoneNumber')
+  @JsonKey(name: 'telephoneNumber', defaultValue: '')
   String get telephoneNumber => throw _privateConstructorUsedError;
-  @JsonKey(name: 'telephoneExtension')
+  @JsonKey(name: 'telephoneExtension', defaultValue: '')
   String get telephoneExtension => throw _privateConstructorUsedError;
-  @JsonKey(name: 'faxNumber')
+  @JsonKey(name: 'faxNumber', defaultValue: '')
   String get faxNumber => throw _privateConstructorUsedError;
-  @JsonKey(name: 'faxExtension')
+  @JsonKey(name: 'faxExtension', defaultValue: '')
   String get faxExtension => throw _privateConstructorUsedError;
-  @JsonKey(name: 'taxNumber')
+  @JsonKey(name: 'taxNumber', defaultValue: '')
   String get taxNumber => throw _privateConstructorUsedError;
-  @JsonKey(name: 'houseNumber1')
+  @JsonKey(name: 'houseNumber1', defaultValue: '')
   String get houseNumber1 => throw _privateConstructorUsedError;
-  @JsonKey(name: 'houseNumber2')
+  @JsonKey(name: 'houseNumber2', defaultValue: '')
   String get houseNumber2 => throw _privateConstructorUsedError;
-  @JsonKey(name: 'building')
+  @JsonKey(name: 'building', defaultValue: '')
   String get building => throw _privateConstructorUsedError;
-  @JsonKey(name: 'region')
+  @JsonKey(name: 'region', defaultValue: '')
   String get region => throw _privateConstructorUsedError;
-  @JsonKey(name: 'country')
+  @JsonKey(name: 'country', defaultValue: '')
   String get country => throw _privateConstructorUsedError;
-  @JsonKey(name: 'district')
+  @JsonKey(name: 'district', defaultValue: '')
   String get district => throw _privateConstructorUsedError;
-  @JsonKey(name: 'floor')
+  @JsonKey(name: 'floor', defaultValue: '')
   String get floor => throw _privateConstructorUsedError;
-  @JsonKey(name: 'plant')
+  @JsonKey(name: 'plant', defaultValue: '')
   String get plant => throw _privateConstructorUsedError;
-  @JsonKey(name: 'roomnumber')
+  @JsonKey(name: 'roomnumber', defaultValue: '')
   String get roomnumber => throw _privateConstructorUsedError;
-  @JsonKey(name: 'taxIncludedBySalesOrganization')
+  @JsonKey(name: 'taxIncludedBySalesOrganization', defaultValue: false)
   bool get taxIncludedBySalesOrganization => throw _privateConstructorUsedError;
-  @JsonKey(name: 'customerClassification')
+  @JsonKey(name: 'customerClassification', defaultValue: '')
   String get customerClassification => throw _privateConstructorUsedError;
-  @JsonKey(name: 'customerLocalGroup')
+  @JsonKey(name: 'customerLocalGroup', defaultValue: '')
   String get customerLocalGroup => throw _privateConstructorUsedError;
-  @JsonKey(name: 'emailAddresses')
-  List<dynamic> get emailAddresses => throw _privateConstructorUsedError;
+  @JsonKey(name: 'emailAddresses', defaultValue: <String>[])
+  List<String> get emailAddresses => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -109,82 +109,82 @@ abstract class $BillToDtoCopyWith<$Res> {
       _$BillToDtoCopyWithImpl<$Res, BillToDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'billToCustomerCode')
+      {@JsonKey(name: 'billToCustomerCode', defaultValue: '')
           String billToCustomerCode,
-      @JsonKey(name: 'defaulBillToAddress')
+      @JsonKey(name: 'defaulBillToAddress', defaultValue: true)
           bool defaulBillToAddress,
-      @JsonKey(name: 'name1')
+      @JsonKey(name: 'name1', defaultValue: '')
           String name1,
-      @JsonKey(name: 'name2')
+      @JsonKey(name: 'name2', defaultValue: '')
           String name2,
-      @JsonKey(name: 'name3')
+      @JsonKey(name: 'name3', defaultValue: '')
           String name3,
-      @JsonKey(name: 'name4')
+      @JsonKey(name: 'name4', defaultValue: '')
           String name4,
-      @JsonKey(name: 'altName1')
+      @JsonKey(name: 'altName1', defaultValue: '')
           String altName1,
-      @JsonKey(name: 'altName2')
+      @JsonKey(name: 'altName2', defaultValue: '')
           String altName2,
-      @JsonKey(name: 'altName3')
+      @JsonKey(name: 'altName3', defaultValue: '')
           String altName3,
-      @JsonKey(name: 'altName4')
+      @JsonKey(name: 'altName4', defaultValue: '')
           String altName4,
-      @JsonKey(name: 'status')
+      @JsonKey(name: 'status', defaultValue: '')
           String status,
-      @JsonKey(name: 'street')
+      @JsonKey(name: 'street', defaultValue: '')
           String street,
-      @JsonKey(name: 'street2')
+      @JsonKey(name: 'street2', defaultValue: '')
           String street2,
-      @JsonKey(name: 'street3')
+      @JsonKey(name: 'street3', defaultValue: '')
           String street3,
-      @JsonKey(name: 'street4')
+      @JsonKey(name: 'street4', defaultValue: '')
           String street4,
-      @JsonKey(name: 'street5')
+      @JsonKey(name: 'street5', defaultValue: '')
           String street5,
-      @JsonKey(name: 'postalCode')
+      @JsonKey(name: 'postalCode', defaultValue: '')
           String postalCode,
-      @JsonKey(name: 'postalCode2')
+      @JsonKey(name: 'postalCode2', defaultValue: '')
           String postalCode2,
-      @JsonKey(name: 'city1')
+      @JsonKey(name: 'city1', defaultValue: '')
           String city1,
-      @JsonKey(name: 'city2')
+      @JsonKey(name: 'city2', defaultValue: '')
           String city2,
-      @JsonKey(name: 'telephoneNumber')
+      @JsonKey(name: 'telephoneNumber', defaultValue: '')
           String telephoneNumber,
-      @JsonKey(name: 'telephoneExtension')
+      @JsonKey(name: 'telephoneExtension', defaultValue: '')
           String telephoneExtension,
-      @JsonKey(name: 'faxNumber')
+      @JsonKey(name: 'faxNumber', defaultValue: '')
           String faxNumber,
-      @JsonKey(name: 'faxExtension')
+      @JsonKey(name: 'faxExtension', defaultValue: '')
           String faxExtension,
-      @JsonKey(name: 'taxNumber')
+      @JsonKey(name: 'taxNumber', defaultValue: '')
           String taxNumber,
-      @JsonKey(name: 'houseNumber1')
+      @JsonKey(name: 'houseNumber1', defaultValue: '')
           String houseNumber1,
-      @JsonKey(name: 'houseNumber2')
+      @JsonKey(name: 'houseNumber2', defaultValue: '')
           String houseNumber2,
-      @JsonKey(name: 'building')
+      @JsonKey(name: 'building', defaultValue: '')
           String building,
-      @JsonKey(name: 'region')
+      @JsonKey(name: 'region', defaultValue: '')
           String region,
-      @JsonKey(name: 'country')
+      @JsonKey(name: 'country', defaultValue: '')
           String country,
-      @JsonKey(name: 'district')
+      @JsonKey(name: 'district', defaultValue: '')
           String district,
-      @JsonKey(name: 'floor')
+      @JsonKey(name: 'floor', defaultValue: '')
           String floor,
-      @JsonKey(name: 'plant')
+      @JsonKey(name: 'plant', defaultValue: '')
           String plant,
-      @JsonKey(name: 'roomnumber')
+      @JsonKey(name: 'roomnumber', defaultValue: '')
           String roomnumber,
-      @JsonKey(name: 'taxIncludedBySalesOrganization')
+      @JsonKey(name: 'taxIncludedBySalesOrganization', defaultValue: false)
           bool taxIncludedBySalesOrganization,
-      @JsonKey(name: 'customerClassification')
+      @JsonKey(name: 'customerClassification', defaultValue: '')
           String customerClassification,
-      @JsonKey(name: 'customerLocalGroup')
+      @JsonKey(name: 'customerLocalGroup', defaultValue: '')
           String customerLocalGroup,
-      @JsonKey(name: 'emailAddresses')
-          List<dynamic> emailAddresses});
+      @JsonKey(name: 'emailAddresses', defaultValue: <String>[])
+          List<String> emailAddresses});
 }
 
 /// @nodoc
@@ -391,7 +391,7 @@ class _$BillToDtoCopyWithImpl<$Res, $Val extends BillToDto>
       emailAddresses: null == emailAddresses
           ? _value.emailAddresses
           : emailAddresses // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
+              as List<String>,
     ) as $Val);
   }
 }
@@ -404,82 +404,82 @@ abstract class _$$_BillToDtoCopyWith<$Res> implements $BillToDtoCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'billToCustomerCode')
+      {@JsonKey(name: 'billToCustomerCode', defaultValue: '')
           String billToCustomerCode,
-      @JsonKey(name: 'defaulBillToAddress')
+      @JsonKey(name: 'defaulBillToAddress', defaultValue: true)
           bool defaulBillToAddress,
-      @JsonKey(name: 'name1')
+      @JsonKey(name: 'name1', defaultValue: '')
           String name1,
-      @JsonKey(name: 'name2')
+      @JsonKey(name: 'name2', defaultValue: '')
           String name2,
-      @JsonKey(name: 'name3')
+      @JsonKey(name: 'name3', defaultValue: '')
           String name3,
-      @JsonKey(name: 'name4')
+      @JsonKey(name: 'name4', defaultValue: '')
           String name4,
-      @JsonKey(name: 'altName1')
+      @JsonKey(name: 'altName1', defaultValue: '')
           String altName1,
-      @JsonKey(name: 'altName2')
+      @JsonKey(name: 'altName2', defaultValue: '')
           String altName2,
-      @JsonKey(name: 'altName3')
+      @JsonKey(name: 'altName3', defaultValue: '')
           String altName3,
-      @JsonKey(name: 'altName4')
+      @JsonKey(name: 'altName4', defaultValue: '')
           String altName4,
-      @JsonKey(name: 'status')
+      @JsonKey(name: 'status', defaultValue: '')
           String status,
-      @JsonKey(name: 'street')
+      @JsonKey(name: 'street', defaultValue: '')
           String street,
-      @JsonKey(name: 'street2')
+      @JsonKey(name: 'street2', defaultValue: '')
           String street2,
-      @JsonKey(name: 'street3')
+      @JsonKey(name: 'street3', defaultValue: '')
           String street3,
-      @JsonKey(name: 'street4')
+      @JsonKey(name: 'street4', defaultValue: '')
           String street4,
-      @JsonKey(name: 'street5')
+      @JsonKey(name: 'street5', defaultValue: '')
           String street5,
-      @JsonKey(name: 'postalCode')
+      @JsonKey(name: 'postalCode', defaultValue: '')
           String postalCode,
-      @JsonKey(name: 'postalCode2')
+      @JsonKey(name: 'postalCode2', defaultValue: '')
           String postalCode2,
-      @JsonKey(name: 'city1')
+      @JsonKey(name: 'city1', defaultValue: '')
           String city1,
-      @JsonKey(name: 'city2')
+      @JsonKey(name: 'city2', defaultValue: '')
           String city2,
-      @JsonKey(name: 'telephoneNumber')
+      @JsonKey(name: 'telephoneNumber', defaultValue: '')
           String telephoneNumber,
-      @JsonKey(name: 'telephoneExtension')
+      @JsonKey(name: 'telephoneExtension', defaultValue: '')
           String telephoneExtension,
-      @JsonKey(name: 'faxNumber')
+      @JsonKey(name: 'faxNumber', defaultValue: '')
           String faxNumber,
-      @JsonKey(name: 'faxExtension')
+      @JsonKey(name: 'faxExtension', defaultValue: '')
           String faxExtension,
-      @JsonKey(name: 'taxNumber')
+      @JsonKey(name: 'taxNumber', defaultValue: '')
           String taxNumber,
-      @JsonKey(name: 'houseNumber1')
+      @JsonKey(name: 'houseNumber1', defaultValue: '')
           String houseNumber1,
-      @JsonKey(name: 'houseNumber2')
+      @JsonKey(name: 'houseNumber2', defaultValue: '')
           String houseNumber2,
-      @JsonKey(name: 'building')
+      @JsonKey(name: 'building', defaultValue: '')
           String building,
-      @JsonKey(name: 'region')
+      @JsonKey(name: 'region', defaultValue: '')
           String region,
-      @JsonKey(name: 'country')
+      @JsonKey(name: 'country', defaultValue: '')
           String country,
-      @JsonKey(name: 'district')
+      @JsonKey(name: 'district', defaultValue: '')
           String district,
-      @JsonKey(name: 'floor')
+      @JsonKey(name: 'floor', defaultValue: '')
           String floor,
-      @JsonKey(name: 'plant')
+      @JsonKey(name: 'plant', defaultValue: '')
           String plant,
-      @JsonKey(name: 'roomnumber')
+      @JsonKey(name: 'roomnumber', defaultValue: '')
           String roomnumber,
-      @JsonKey(name: 'taxIncludedBySalesOrganization')
+      @JsonKey(name: 'taxIncludedBySalesOrganization', defaultValue: false)
           bool taxIncludedBySalesOrganization,
-      @JsonKey(name: 'customerClassification')
+      @JsonKey(name: 'customerClassification', defaultValue: '')
           String customerClassification,
-      @JsonKey(name: 'customerLocalGroup')
+      @JsonKey(name: 'customerLocalGroup', defaultValue: '')
           String customerLocalGroup,
-      @JsonKey(name: 'emailAddresses')
-          List<dynamic> emailAddresses});
+      @JsonKey(name: 'emailAddresses', defaultValue: <String>[])
+          List<String> emailAddresses});
 }
 
 /// @nodoc
@@ -684,7 +684,7 @@ class __$$_BillToDtoCopyWithImpl<$Res>
       emailAddresses: null == emailAddresses
           ? _value._emailAddresses
           : emailAddresses // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
+              as List<String>,
     ));
   }
 }
@@ -693,82 +693,82 @@ class __$$_BillToDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_BillToDto extends _BillToDto {
   const _$_BillToDto(
-      {@JsonKey(name: 'billToCustomerCode')
+      {@JsonKey(name: 'billToCustomerCode', defaultValue: '')
           required this.billToCustomerCode,
-      @JsonKey(name: 'defaulBillToAddress')
+      @JsonKey(name: 'defaulBillToAddress', defaultValue: true)
           required this.defaulBillToAddress,
-      @JsonKey(name: 'name1')
+      @JsonKey(name: 'name1', defaultValue: '')
           required this.name1,
-      @JsonKey(name: 'name2')
+      @JsonKey(name: 'name2', defaultValue: '')
           required this.name2,
-      @JsonKey(name: 'name3')
+      @JsonKey(name: 'name3', defaultValue: '')
           required this.name3,
-      @JsonKey(name: 'name4')
+      @JsonKey(name: 'name4', defaultValue: '')
           required this.name4,
-      @JsonKey(name: 'altName1')
+      @JsonKey(name: 'altName1', defaultValue: '')
           required this.altName1,
-      @JsonKey(name: 'altName2')
+      @JsonKey(name: 'altName2', defaultValue: '')
           required this.altName2,
-      @JsonKey(name: 'altName3')
+      @JsonKey(name: 'altName3', defaultValue: '')
           required this.altName3,
-      @JsonKey(name: 'altName4')
+      @JsonKey(name: 'altName4', defaultValue: '')
           required this.altName4,
-      @JsonKey(name: 'status')
+      @JsonKey(name: 'status', defaultValue: '')
           required this.status,
-      @JsonKey(name: 'street')
+      @JsonKey(name: 'street', defaultValue: '')
           required this.street,
-      @JsonKey(name: 'street2')
+      @JsonKey(name: 'street2', defaultValue: '')
           required this.street2,
-      @JsonKey(name: 'street3')
+      @JsonKey(name: 'street3', defaultValue: '')
           required this.street3,
-      @JsonKey(name: 'street4')
+      @JsonKey(name: 'street4', defaultValue: '')
           required this.street4,
-      @JsonKey(name: 'street5')
+      @JsonKey(name: 'street5', defaultValue: '')
           required this.street5,
-      @JsonKey(name: 'postalCode')
+      @JsonKey(name: 'postalCode', defaultValue: '')
           required this.postalCode,
-      @JsonKey(name: 'postalCode2')
+      @JsonKey(name: 'postalCode2', defaultValue: '')
           required this.postalCode2,
-      @JsonKey(name: 'city1')
+      @JsonKey(name: 'city1', defaultValue: '')
           required this.city1,
-      @JsonKey(name: 'city2')
+      @JsonKey(name: 'city2', defaultValue: '')
           required this.city2,
-      @JsonKey(name: 'telephoneNumber')
+      @JsonKey(name: 'telephoneNumber', defaultValue: '')
           required this.telephoneNumber,
-      @JsonKey(name: 'telephoneExtension')
+      @JsonKey(name: 'telephoneExtension', defaultValue: '')
           required this.telephoneExtension,
-      @JsonKey(name: 'faxNumber')
+      @JsonKey(name: 'faxNumber', defaultValue: '')
           required this.faxNumber,
-      @JsonKey(name: 'faxExtension')
+      @JsonKey(name: 'faxExtension', defaultValue: '')
           required this.faxExtension,
-      @JsonKey(name: 'taxNumber')
+      @JsonKey(name: 'taxNumber', defaultValue: '')
           required this.taxNumber,
-      @JsonKey(name: 'houseNumber1')
+      @JsonKey(name: 'houseNumber1', defaultValue: '')
           required this.houseNumber1,
-      @JsonKey(name: 'houseNumber2')
+      @JsonKey(name: 'houseNumber2', defaultValue: '')
           required this.houseNumber2,
-      @JsonKey(name: 'building')
+      @JsonKey(name: 'building', defaultValue: '')
           required this.building,
-      @JsonKey(name: 'region')
+      @JsonKey(name: 'region', defaultValue: '')
           required this.region,
-      @JsonKey(name: 'country')
+      @JsonKey(name: 'country', defaultValue: '')
           required this.country,
-      @JsonKey(name: 'district')
+      @JsonKey(name: 'district', defaultValue: '')
           required this.district,
-      @JsonKey(name: 'floor')
+      @JsonKey(name: 'floor', defaultValue: '')
           required this.floor,
-      @JsonKey(name: 'plant')
+      @JsonKey(name: 'plant', defaultValue: '')
           required this.plant,
-      @JsonKey(name: 'roomnumber')
+      @JsonKey(name: 'roomnumber', defaultValue: '')
           required this.roomnumber,
-      @JsonKey(name: 'taxIncludedBySalesOrganization')
+      @JsonKey(name: 'taxIncludedBySalesOrganization', defaultValue: false)
           required this.taxIncludedBySalesOrganization,
-      @JsonKey(name: 'customerClassification')
+      @JsonKey(name: 'customerClassification', defaultValue: '')
           required this.customerClassification,
-      @JsonKey(name: 'customerLocalGroup')
+      @JsonKey(name: 'customerLocalGroup', defaultValue: '')
           required this.customerLocalGroup,
-      @JsonKey(name: 'emailAddresses')
-          required final List<dynamic> emailAddresses})
+      @JsonKey(name: 'emailAddresses', defaultValue: <String>[])
+          required final List<String> emailAddresses})
       : _emailAddresses = emailAddresses,
         super._();
 
@@ -776,120 +776,120 @@ class _$_BillToDto extends _BillToDto {
       _$$_BillToDtoFromJson(json);
 
   @override
-  @JsonKey(name: 'billToCustomerCode')
+  @JsonKey(name: 'billToCustomerCode', defaultValue: '')
   final String billToCustomerCode;
   @override
-  @JsonKey(name: 'defaulBillToAddress')
+  @JsonKey(name: 'defaulBillToAddress', defaultValue: true)
   final bool defaulBillToAddress;
   @override
-  @JsonKey(name: 'name1')
+  @JsonKey(name: 'name1', defaultValue: '')
   final String name1;
   @override
-  @JsonKey(name: 'name2')
+  @JsonKey(name: 'name2', defaultValue: '')
   final String name2;
   @override
-  @JsonKey(name: 'name3')
+  @JsonKey(name: 'name3', defaultValue: '')
   final String name3;
   @override
-  @JsonKey(name: 'name4')
+  @JsonKey(name: 'name4', defaultValue: '')
   final String name4;
   @override
-  @JsonKey(name: 'altName1')
+  @JsonKey(name: 'altName1', defaultValue: '')
   final String altName1;
   @override
-  @JsonKey(name: 'altName2')
+  @JsonKey(name: 'altName2', defaultValue: '')
   final String altName2;
   @override
-  @JsonKey(name: 'altName3')
+  @JsonKey(name: 'altName3', defaultValue: '')
   final String altName3;
   @override
-  @JsonKey(name: 'altName4')
+  @JsonKey(name: 'altName4', defaultValue: '')
   final String altName4;
   @override
-  @JsonKey(name: 'status')
+  @JsonKey(name: 'status', defaultValue: '')
   final String status;
   @override
-  @JsonKey(name: 'street')
+  @JsonKey(name: 'street', defaultValue: '')
   final String street;
   @override
-  @JsonKey(name: 'street2')
+  @JsonKey(name: 'street2', defaultValue: '')
   final String street2;
   @override
-  @JsonKey(name: 'street3')
+  @JsonKey(name: 'street3', defaultValue: '')
   final String street3;
   @override
-  @JsonKey(name: 'street4')
+  @JsonKey(name: 'street4', defaultValue: '')
   final String street4;
   @override
-  @JsonKey(name: 'street5')
+  @JsonKey(name: 'street5', defaultValue: '')
   final String street5;
   @override
-  @JsonKey(name: 'postalCode')
+  @JsonKey(name: 'postalCode', defaultValue: '')
   final String postalCode;
   @override
-  @JsonKey(name: 'postalCode2')
+  @JsonKey(name: 'postalCode2', defaultValue: '')
   final String postalCode2;
   @override
-  @JsonKey(name: 'city1')
+  @JsonKey(name: 'city1', defaultValue: '')
   final String city1;
   @override
-  @JsonKey(name: 'city2')
+  @JsonKey(name: 'city2', defaultValue: '')
   final String city2;
   @override
-  @JsonKey(name: 'telephoneNumber')
+  @JsonKey(name: 'telephoneNumber', defaultValue: '')
   final String telephoneNumber;
   @override
-  @JsonKey(name: 'telephoneExtension')
+  @JsonKey(name: 'telephoneExtension', defaultValue: '')
   final String telephoneExtension;
   @override
-  @JsonKey(name: 'faxNumber')
+  @JsonKey(name: 'faxNumber', defaultValue: '')
   final String faxNumber;
   @override
-  @JsonKey(name: 'faxExtension')
+  @JsonKey(name: 'faxExtension', defaultValue: '')
   final String faxExtension;
   @override
-  @JsonKey(name: 'taxNumber')
+  @JsonKey(name: 'taxNumber', defaultValue: '')
   final String taxNumber;
   @override
-  @JsonKey(name: 'houseNumber1')
+  @JsonKey(name: 'houseNumber1', defaultValue: '')
   final String houseNumber1;
   @override
-  @JsonKey(name: 'houseNumber2')
+  @JsonKey(name: 'houseNumber2', defaultValue: '')
   final String houseNumber2;
   @override
-  @JsonKey(name: 'building')
+  @JsonKey(name: 'building', defaultValue: '')
   final String building;
   @override
-  @JsonKey(name: 'region')
+  @JsonKey(name: 'region', defaultValue: '')
   final String region;
   @override
-  @JsonKey(name: 'country')
+  @JsonKey(name: 'country', defaultValue: '')
   final String country;
   @override
-  @JsonKey(name: 'district')
+  @JsonKey(name: 'district', defaultValue: '')
   final String district;
   @override
-  @JsonKey(name: 'floor')
+  @JsonKey(name: 'floor', defaultValue: '')
   final String floor;
   @override
-  @JsonKey(name: 'plant')
+  @JsonKey(name: 'plant', defaultValue: '')
   final String plant;
   @override
-  @JsonKey(name: 'roomnumber')
+  @JsonKey(name: 'roomnumber', defaultValue: '')
   final String roomnumber;
   @override
-  @JsonKey(name: 'taxIncludedBySalesOrganization')
+  @JsonKey(name: 'taxIncludedBySalesOrganization', defaultValue: false)
   final bool taxIncludedBySalesOrganization;
   @override
-  @JsonKey(name: 'customerClassification')
+  @JsonKey(name: 'customerClassification', defaultValue: '')
   final String customerClassification;
   @override
-  @JsonKey(name: 'customerLocalGroup')
+  @JsonKey(name: 'customerLocalGroup', defaultValue: '')
   final String customerLocalGroup;
-  final List<dynamic> _emailAddresses;
+  final List<String> _emailAddresses;
   @override
-  @JsonKey(name: 'emailAddresses')
-  List<dynamic> get emailAddresses {
+  @JsonKey(name: 'emailAddresses', defaultValue: <String>[])
+  List<String> get emailAddresses {
     if (_emailAddresses is EqualUnmodifiableListView) return _emailAddresses;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_emailAddresses);
@@ -1029,201 +1029,201 @@ class _$_BillToDto extends _BillToDto {
 
 abstract class _BillToDto extends BillToDto {
   const factory _BillToDto(
-      {@JsonKey(name: 'billToCustomerCode')
+      {@JsonKey(name: 'billToCustomerCode', defaultValue: '')
           required final String billToCustomerCode,
-      @JsonKey(name: 'defaulBillToAddress')
+      @JsonKey(name: 'defaulBillToAddress', defaultValue: true)
           required final bool defaulBillToAddress,
-      @JsonKey(name: 'name1')
+      @JsonKey(name: 'name1', defaultValue: '')
           required final String name1,
-      @JsonKey(name: 'name2')
+      @JsonKey(name: 'name2', defaultValue: '')
           required final String name2,
-      @JsonKey(name: 'name3')
+      @JsonKey(name: 'name3', defaultValue: '')
           required final String name3,
-      @JsonKey(name: 'name4')
+      @JsonKey(name: 'name4', defaultValue: '')
           required final String name4,
-      @JsonKey(name: 'altName1')
+      @JsonKey(name: 'altName1', defaultValue: '')
           required final String altName1,
-      @JsonKey(name: 'altName2')
+      @JsonKey(name: 'altName2', defaultValue: '')
           required final String altName2,
-      @JsonKey(name: 'altName3')
+      @JsonKey(name: 'altName3', defaultValue: '')
           required final String altName3,
-      @JsonKey(name: 'altName4')
+      @JsonKey(name: 'altName4', defaultValue: '')
           required final String altName4,
-      @JsonKey(name: 'status')
+      @JsonKey(name: 'status', defaultValue: '')
           required final String status,
-      @JsonKey(name: 'street')
+      @JsonKey(name: 'street', defaultValue: '')
           required final String street,
-      @JsonKey(name: 'street2')
+      @JsonKey(name: 'street2', defaultValue: '')
           required final String street2,
-      @JsonKey(name: 'street3')
+      @JsonKey(name: 'street3', defaultValue: '')
           required final String street3,
-      @JsonKey(name: 'street4')
+      @JsonKey(name: 'street4', defaultValue: '')
           required final String street4,
-      @JsonKey(name: 'street5')
+      @JsonKey(name: 'street5', defaultValue: '')
           required final String street5,
-      @JsonKey(name: 'postalCode')
+      @JsonKey(name: 'postalCode', defaultValue: '')
           required final String postalCode,
-      @JsonKey(name: 'postalCode2')
+      @JsonKey(name: 'postalCode2', defaultValue: '')
           required final String postalCode2,
-      @JsonKey(name: 'city1')
+      @JsonKey(name: 'city1', defaultValue: '')
           required final String city1,
-      @JsonKey(name: 'city2')
+      @JsonKey(name: 'city2', defaultValue: '')
           required final String city2,
-      @JsonKey(name: 'telephoneNumber')
+      @JsonKey(name: 'telephoneNumber', defaultValue: '')
           required final String telephoneNumber,
-      @JsonKey(name: 'telephoneExtension')
+      @JsonKey(name: 'telephoneExtension', defaultValue: '')
           required final String telephoneExtension,
-      @JsonKey(name: 'faxNumber')
+      @JsonKey(name: 'faxNumber', defaultValue: '')
           required final String faxNumber,
-      @JsonKey(name: 'faxExtension')
+      @JsonKey(name: 'faxExtension', defaultValue: '')
           required final String faxExtension,
-      @JsonKey(name: 'taxNumber')
+      @JsonKey(name: 'taxNumber', defaultValue: '')
           required final String taxNumber,
-      @JsonKey(name: 'houseNumber1')
+      @JsonKey(name: 'houseNumber1', defaultValue: '')
           required final String houseNumber1,
-      @JsonKey(name: 'houseNumber2')
+      @JsonKey(name: 'houseNumber2', defaultValue: '')
           required final String houseNumber2,
-      @JsonKey(name: 'building')
+      @JsonKey(name: 'building', defaultValue: '')
           required final String building,
-      @JsonKey(name: 'region')
+      @JsonKey(name: 'region', defaultValue: '')
           required final String region,
-      @JsonKey(name: 'country')
+      @JsonKey(name: 'country', defaultValue: '')
           required final String country,
-      @JsonKey(name: 'district')
+      @JsonKey(name: 'district', defaultValue: '')
           required final String district,
-      @JsonKey(name: 'floor')
+      @JsonKey(name: 'floor', defaultValue: '')
           required final String floor,
-      @JsonKey(name: 'plant')
+      @JsonKey(name: 'plant', defaultValue: '')
           required final String plant,
-      @JsonKey(name: 'roomnumber')
+      @JsonKey(name: 'roomnumber', defaultValue: '')
           required final String roomnumber,
-      @JsonKey(name: 'taxIncludedBySalesOrganization')
+      @JsonKey(name: 'taxIncludedBySalesOrganization', defaultValue: false)
           required final bool taxIncludedBySalesOrganization,
-      @JsonKey(name: 'customerClassification')
+      @JsonKey(name: 'customerClassification', defaultValue: '')
           required final String customerClassification,
-      @JsonKey(name: 'customerLocalGroup')
+      @JsonKey(name: 'customerLocalGroup', defaultValue: '')
           required final String customerLocalGroup,
-      @JsonKey(name: 'emailAddresses')
-          required final List<dynamic> emailAddresses}) = _$_BillToDto;
+      @JsonKey(name: 'emailAddresses', defaultValue: <String>[])
+          required final List<String> emailAddresses}) = _$_BillToDto;
   const _BillToDto._() : super._();
 
   factory _BillToDto.fromJson(Map<String, dynamic> json) =
       _$_BillToDto.fromJson;
 
   @override
-  @JsonKey(name: 'billToCustomerCode')
+  @JsonKey(name: 'billToCustomerCode', defaultValue: '')
   String get billToCustomerCode;
   @override
-  @JsonKey(name: 'defaulBillToAddress')
+  @JsonKey(name: 'defaulBillToAddress', defaultValue: true)
   bool get defaulBillToAddress;
   @override
-  @JsonKey(name: 'name1')
+  @JsonKey(name: 'name1', defaultValue: '')
   String get name1;
   @override
-  @JsonKey(name: 'name2')
+  @JsonKey(name: 'name2', defaultValue: '')
   String get name2;
   @override
-  @JsonKey(name: 'name3')
+  @JsonKey(name: 'name3', defaultValue: '')
   String get name3;
   @override
-  @JsonKey(name: 'name4')
+  @JsonKey(name: 'name4', defaultValue: '')
   String get name4;
   @override
-  @JsonKey(name: 'altName1')
+  @JsonKey(name: 'altName1', defaultValue: '')
   String get altName1;
   @override
-  @JsonKey(name: 'altName2')
+  @JsonKey(name: 'altName2', defaultValue: '')
   String get altName2;
   @override
-  @JsonKey(name: 'altName3')
+  @JsonKey(name: 'altName3', defaultValue: '')
   String get altName3;
   @override
-  @JsonKey(name: 'altName4')
+  @JsonKey(name: 'altName4', defaultValue: '')
   String get altName4;
   @override
-  @JsonKey(name: 'status')
+  @JsonKey(name: 'status', defaultValue: '')
   String get status;
   @override
-  @JsonKey(name: 'street')
+  @JsonKey(name: 'street', defaultValue: '')
   String get street;
   @override
-  @JsonKey(name: 'street2')
+  @JsonKey(name: 'street2', defaultValue: '')
   String get street2;
   @override
-  @JsonKey(name: 'street3')
+  @JsonKey(name: 'street3', defaultValue: '')
   String get street3;
   @override
-  @JsonKey(name: 'street4')
+  @JsonKey(name: 'street4', defaultValue: '')
   String get street4;
   @override
-  @JsonKey(name: 'street5')
+  @JsonKey(name: 'street5', defaultValue: '')
   String get street5;
   @override
-  @JsonKey(name: 'postalCode')
+  @JsonKey(name: 'postalCode', defaultValue: '')
   String get postalCode;
   @override
-  @JsonKey(name: 'postalCode2')
+  @JsonKey(name: 'postalCode2', defaultValue: '')
   String get postalCode2;
   @override
-  @JsonKey(name: 'city1')
+  @JsonKey(name: 'city1', defaultValue: '')
   String get city1;
   @override
-  @JsonKey(name: 'city2')
+  @JsonKey(name: 'city2', defaultValue: '')
   String get city2;
   @override
-  @JsonKey(name: 'telephoneNumber')
+  @JsonKey(name: 'telephoneNumber', defaultValue: '')
   String get telephoneNumber;
   @override
-  @JsonKey(name: 'telephoneExtension')
+  @JsonKey(name: 'telephoneExtension', defaultValue: '')
   String get telephoneExtension;
   @override
-  @JsonKey(name: 'faxNumber')
+  @JsonKey(name: 'faxNumber', defaultValue: '')
   String get faxNumber;
   @override
-  @JsonKey(name: 'faxExtension')
+  @JsonKey(name: 'faxExtension', defaultValue: '')
   String get faxExtension;
   @override
-  @JsonKey(name: 'taxNumber')
+  @JsonKey(name: 'taxNumber', defaultValue: '')
   String get taxNumber;
   @override
-  @JsonKey(name: 'houseNumber1')
+  @JsonKey(name: 'houseNumber1', defaultValue: '')
   String get houseNumber1;
   @override
-  @JsonKey(name: 'houseNumber2')
+  @JsonKey(name: 'houseNumber2', defaultValue: '')
   String get houseNumber2;
   @override
-  @JsonKey(name: 'building')
+  @JsonKey(name: 'building', defaultValue: '')
   String get building;
   @override
-  @JsonKey(name: 'region')
+  @JsonKey(name: 'region', defaultValue: '')
   String get region;
   @override
-  @JsonKey(name: 'country')
+  @JsonKey(name: 'country', defaultValue: '')
   String get country;
   @override
-  @JsonKey(name: 'district')
+  @JsonKey(name: 'district', defaultValue: '')
   String get district;
   @override
-  @JsonKey(name: 'floor')
+  @JsonKey(name: 'floor', defaultValue: '')
   String get floor;
   @override
-  @JsonKey(name: 'plant')
+  @JsonKey(name: 'plant', defaultValue: '')
   String get plant;
   @override
-  @JsonKey(name: 'roomnumber')
+  @JsonKey(name: 'roomnumber', defaultValue: '')
   String get roomnumber;
   @override
-  @JsonKey(name: 'taxIncludedBySalesOrganization')
+  @JsonKey(name: 'taxIncludedBySalesOrganization', defaultValue: false)
   bool get taxIncludedBySalesOrganization;
   @override
-  @JsonKey(name: 'customerClassification')
+  @JsonKey(name: 'customerClassification', defaultValue: '')
   String get customerClassification;
   @override
-  @JsonKey(name: 'customerLocalGroup')
+  @JsonKey(name: 'customerLocalGroup', defaultValue: '')
   String get customerLocalGroup;
   @override
-  @JsonKey(name: 'emailAddresses')
-  List<dynamic> get emailAddresses;
+  @JsonKey(name: 'emailAddresses', defaultValue: <String>[])
+  List<String> get emailAddresses;
   @override
   @JsonKey(ignore: true)
   _$$_BillToDtoCopyWith<_$_BillToDto> get copyWith =>

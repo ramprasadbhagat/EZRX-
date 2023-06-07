@@ -54,7 +54,7 @@ void main() {
         );
 
         dioAdapter.onPost(
-          '/api/strapiEngine',
+          '/api/license',
           (server) => server.reply(
             200,
             res,
@@ -64,7 +64,9 @@ void main() {
           data: jsonEncode({
             'query': remoteDataSource.salesOrgQueryMutation
                 .getSalesOrgConfigsQuery(),
-            'variables': {'salesOrg': saleOrgName},
+            'variables': {
+              'request': {'salesOrg': saleOrgName},
+            },
           }),
         );
         final result = await remoteDataSource.getConfig(salesOrg: saleOrgName);
@@ -82,7 +84,7 @@ void main() {
         };
 
         dioAdapter.onPost(
-          '/api/strapiEngine',
+          '/api/license',
           (server) => server.reply(
             200,
             res,
@@ -92,7 +94,9 @@ void main() {
           data: jsonEncode({
             'query': remoteDataSource.salesOrgQueryMutation
                 .getSalesOrgConfigsQuery(),
-            'variables': {'salesOrg': saleOrgName},
+            'variables': {
+              'request': {'salesOrg': saleOrgName},
+            },
           }),
         );
         final result = await remoteDataSource.getConfig(salesOrg: saleOrgName);
@@ -107,7 +111,7 @@ void main() {
         // final data = {'userName': saleOrgName};
 
         dioAdapter.onPost(
-          '/api/strapiEngine',
+          '/api/license',
           (server) => server.reply(
             200,
             {
@@ -122,7 +126,9 @@ void main() {
           data: jsonEncode({
             'query': remoteDataSource.salesOrgQueryMutation
                 .getSalesOrgConfigsQuery(),
-            'variables': {'salesOrg': saleOrgName},
+            'variables': {
+              'request': {'salesOrg': saleOrgName},
+            },
           }),
         );
         await remoteDataSource
@@ -139,7 +145,7 @@ void main() {
         // final data = {'userName': saleOrgName};
 
         dioAdapter.onPost(
-          '/api/strapiEngine',
+          '/api/license',
           (server) => server.reply(
             201,
             {
@@ -152,7 +158,9 @@ void main() {
           data: jsonEncode({
             'query': remoteDataSource.salesOrgQueryMutation
                 .getSalesOrgConfigsQuery(),
-            'variables': {'salesOrg': saleOrgName},
+            'variables': {
+              'request': {'salesOrg': saleOrgName},
+            },
           }),
         );
         await remoteDataSource

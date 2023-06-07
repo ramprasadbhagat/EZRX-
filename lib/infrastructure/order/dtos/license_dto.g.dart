@@ -8,9 +8,9 @@ part of 'license_dto.dart';
 
 _$_licenseDto _$$_licenseDtoFromJson(Map<String, dynamic> json) =>
     _$_licenseDto(
-      licenceType: json['licenceType'] as String,
-      licenseDescription: json['licenseDescription'] as String,
-      licenseNumber: json['licenseNumber'] as String,
+      licenceType: json['licenceType'] as String? ?? '',
+      licenseDescription: json['licenseDescription'] as String? ?? '',
+      licenseNumber: json['licenseNumber'] as String? ?? '',
       validFrom: dateTimeStringFormatCheck(json, 'validFrom') as String? ?? '',
       validTo: dateTimeStringFormatCheck(json, 'validTo') as String? ?? '',
     );

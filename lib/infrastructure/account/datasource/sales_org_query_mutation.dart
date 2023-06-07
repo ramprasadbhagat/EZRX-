@@ -6,88 +6,100 @@ class SalesOrgQueryMutation {
   // For fetching Sales Organiazation Configs by salesOrg ID
   String getSalesOrgConfigsQuery() {
     return '''
-      query salesOrgConfigs(\$salesOrg: String!){
-        salesOrgConfigs(salesOrg: \$salesOrg) {
-          id
-          salesOrgCode
-          ponRequired
-          enableAnalytics
-          priceOverride
-          expiryDateDisplay
-          batchNumDisplay
-          currency
-          enableUploadAd
-          enableMobileNumber
-          enableRemarks
-          enableListPrice
-          enableTaxDisplay
-          enableDefaultMD
-          enableZDP5
-          enableZDP8Override
-          enableGMC
-          enableGreenDelivery
-          greenDeliveryDelayInDays
-          greenDeliveryUserRole
-          supportURL
-          minOrderAmount
-          netPriceOverride
-          enableFutureDeliveryDay
-          futureDeliveryDay
-          plantNumber
-          languageFilter
-          languageValue
-          materialWithoutPrice
-          enablePaymentTerms
-          enableBatchNumber
-          enableOHPrice
-          enableSpecialInstructions
-          enableReferenceNote
-          displayOrderDiscount
-          enableTaxClassification
-          supportMail
-          disableDeliveryDate
-          disablePrincipals
-          principalList {
-            value {
-              date
-              principal
-            }
-          }  
-          enable2FA
-          disableBundles
-          disableOrderType
-          disablePaymentTermsDisplay
-          netPriceOverride
-          enableCollectiveNumber
-          addOosMaterials
-          vatValue
-          enableVat
-          enableTaxAtTotalLevelOnly
-          oosValue
-          enableUnreferencedReturn
-          enableGimmickMaterial
-          enableBillTo
-          hideCustomer
-          hideStockDisplay
-          disablePayment
-          enablePartialPayment
-          disableDeals
-          showPOAttachment
-          principleDisabledDeals {
-          value {
-            principal
-           }
-          }
-          created_at
-          updated_at
-          enableLoyaltyScheme
-          disableProcessingStatus
-          enableIRN
-          enableComboDeals
-          comboDealsUserRole
-          enableGMN
-       }
+      query salesOrgConfigs(\$request: SalesOrgConfigRequest) {
+  salesOrgConfigs(request: \$request) {
+    id
+    salesOrgCode
+    ponRequired
+    enableAnalytics
+    priceOverride
+    expiryDateDisplay
+    batchNumDisplay
+    currency
+    logo
+    enableMobileNumber
+    enableRemarks
+    enableListPrice
+    enableTaxDisplay
+    addOosMaterials
+    oosValue
+    enablePartialPayment
+    enableDefaultMD
+    enableZDP8Override
+    enableGMC
+    enableGMN
+    enableUploadAd
+    topLeftAd
+    topRightAd
+    btmLeftAd
+    btmRightAd
+    supportURL
+    minOrderAmount
+    vatValue
+    netPriceOverride
+    enableFutureDeliveryDay
+    futureDeliveryDay
+    enablePaymentTerms
+    plantNumber
+    languageFilter
+    enableVat
+    enableZDP5
+    languageValue
+    materialWithoutPrice
+    enableDeliveryStatus
+    enableOMC
+    enableBatchNumber
+    enableOHPrice
+    enableSpecialInstructions
+    enableReferenceNote
+    displayOrderDiscount
+    enableIRN
+    enableTaxClassification
+    supportMail
+    disablePrincipals
+    principalList {
+      value {
+        date
+        principalName
       }
+    }
+    disableDeals
+    principleDisabledDeals {
+      value {
+        principal
+      }
+    }
+    enable2FA
+    disableBundles
+    disableProcessingStatus
+    disableOrderType
+    enableCollectiveNumber
+    enableGimmickMaterial
+    enableUnreferencedReturn
+    hideCustomer
+    enableBillTo
+    autoBlockOrders
+    disablePaymentTermsDisplay
+    disableReturnsAccess
+    disablePayment
+    disableReturnsAccessSR
+    hideStockDisplay
+    showPOAttachment
+    created_at
+    updated_at
+    enableLoyaltyScheme
+    disableOverrideFieldSR
+    disableOverrideFieldCustomer
+    disableOverrideApprovalCustomer
+    disableOverrideApprovalSR
+    disableDeliveryDate
+    allowReturnsOutsidePolicy
+    disableApproverActions
+    disableUserRestrictions
+    enableTaxAtTotalLevelOnly
+  }
+}
+
     ''';
   }
 }

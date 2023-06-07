@@ -36,6 +36,8 @@ mixin _$CustomerCodeInfo {
   List<SalesDealNumber> get salesDeals => throw _privateConstructorUsedError;
   PhoneNumber get telephoneNumber => throw _privateConstructorUsedError;
   String get country => throw _privateConstructorUsedError;
+  String get floor => throw _privateConstructorUsedError;
+  String get houseNumber1 => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CustomerCodeInfoCopyWith<CustomerCodeInfo> get copyWith =>
@@ -67,7 +69,9 @@ abstract class $CustomerCodeInfoCopyWith<$Res> {
       bool comboEligible,
       List<SalesDealNumber> salesDeals,
       PhoneNumber telephoneNumber,
-      String country});
+      String country,
+      String floor,
+      String houseNumber1});
 
   $CustomerNameCopyWith<$Res> get customerName;
   $CustomerAddressCopyWith<$Res> get customerAddress;
@@ -105,6 +109,8 @@ class _$CustomerCodeInfoCopyWithImpl<$Res, $Val extends CustomerCodeInfo>
     Object? salesDeals = null,
     Object? telephoneNumber = null,
     Object? country = null,
+    Object? floor = null,
+    Object? houseNumber1 = null,
   }) {
     return _then(_value.copyWith(
       customerCodeSoldTo: null == customerCodeSoldTo
@@ -183,6 +189,14 @@ class _$CustomerCodeInfoCopyWithImpl<$Res, $Val extends CustomerCodeInfo>
           ? _value.country
           : country // ignore: cast_nullable_to_non_nullable
               as String,
+      floor: null == floor
+          ? _value.floor
+          : floor // ignore: cast_nullable_to_non_nullable
+              as String,
+      houseNumber1: null == houseNumber1
+          ? _value.houseNumber1
+          : houseNumber1 // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 
@@ -230,7 +244,9 @@ abstract class _$$_CustomerCodeInfoCopyWith<$Res>
       bool comboEligible,
       List<SalesDealNumber> salesDeals,
       PhoneNumber telephoneNumber,
-      String country});
+      String country,
+      String floor,
+      String houseNumber1});
 
   @override
   $CustomerNameCopyWith<$Res> get customerName;
@@ -268,6 +284,8 @@ class __$$_CustomerCodeInfoCopyWithImpl<$Res>
     Object? salesDeals = null,
     Object? telephoneNumber = null,
     Object? country = null,
+    Object? floor = null,
+    Object? houseNumber1 = null,
   }) {
     return _then(_$_CustomerCodeInfo(
       customerCodeSoldTo: null == customerCodeSoldTo
@@ -346,6 +364,14 @@ class __$$_CustomerCodeInfoCopyWithImpl<$Res>
           ? _value.country
           : country // ignore: cast_nullable_to_non_nullable
               as String,
+      floor: null == floor
+          ? _value.floor
+          : floor // ignore: cast_nullable_to_non_nullable
+              as String,
+      houseNumber1: null == houseNumber1
+          ? _value.houseNumber1
+          : houseNumber1 // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -372,7 +398,9 @@ class _$_CustomerCodeInfo extends _CustomerCodeInfo {
       required this.comboEligible,
       required final List<SalesDealNumber> salesDeals,
       required this.telephoneNumber,
-      required this.country})
+      required this.country,
+      required this.floor,
+      required this.houseNumber1})
       : _shipToInfos = shipToInfos,
         _billToInfos = billToInfos,
         _emailAddresses = emailAddresses,
@@ -441,10 +469,14 @@ class _$_CustomerCodeInfo extends _CustomerCodeInfo {
   final PhoneNumber telephoneNumber;
   @override
   final String country;
+  @override
+  final String floor;
+  @override
+  final String houseNumber1;
 
   @override
   String toString() {
-    return 'CustomerCodeInfo(customerCodeSoldTo: $customerCodeSoldTo, customerName: $customerName, customerAddress: $customerAddress, status: $status, division: $division, postalCode: $postalCode, customerClassification: $customerClassification, customerLocalGroup: $customerLocalGroup, paymentTermDescription: $paymentTermDescription, shipToInfos: $shipToInfos, billToInfos: $billToInfos, emailAddresses: $emailAddresses, customerAttr7: $customerAttr7, customerGrp4: $customerGrp4, region: $region, comboEligible: $comboEligible, salesDeals: $salesDeals, telephoneNumber: $telephoneNumber, country: $country)';
+    return 'CustomerCodeInfo(customerCodeSoldTo: $customerCodeSoldTo, customerName: $customerName, customerAddress: $customerAddress, status: $status, division: $division, postalCode: $postalCode, customerClassification: $customerClassification, customerLocalGroup: $customerLocalGroup, paymentTermDescription: $paymentTermDescription, shipToInfos: $shipToInfos, billToInfos: $billToInfos, emailAddresses: $emailAddresses, customerAttr7: $customerAttr7, customerGrp4: $customerGrp4, region: $region, comboEligible: $comboEligible, salesDeals: $salesDeals, telephoneNumber: $telephoneNumber, country: $country, floor: $floor, houseNumber1: $houseNumber1)';
   }
 
   @override
@@ -486,7 +518,10 @@ class _$_CustomerCodeInfo extends _CustomerCodeInfo {
                 .equals(other._salesDeals, _salesDeals) &&
             (identical(other.telephoneNumber, telephoneNumber) ||
                 other.telephoneNumber == telephoneNumber) &&
-            (identical(other.country, country) || other.country == country));
+            (identical(other.country, country) || other.country == country) &&
+            (identical(other.floor, floor) || other.floor == floor) &&
+            (identical(other.houseNumber1, houseNumber1) ||
+                other.houseNumber1 == houseNumber1));
   }
 
   @override
@@ -510,7 +545,9 @@ class _$_CustomerCodeInfo extends _CustomerCodeInfo {
         comboEligible,
         const DeepCollectionEquality().hash(_salesDeals),
         telephoneNumber,
-        country
+        country,
+        floor,
+        houseNumber1
       ]);
 
   @JsonKey(ignore: true)
@@ -540,7 +577,9 @@ abstract class _CustomerCodeInfo extends CustomerCodeInfo {
       required final bool comboEligible,
       required final List<SalesDealNumber> salesDeals,
       required final PhoneNumber telephoneNumber,
-      required final String country}) = _$_CustomerCodeInfo;
+      required final String country,
+      required final String floor,
+      required final String houseNumber1}) = _$_CustomerCodeInfo;
   const _CustomerCodeInfo._() : super._();
 
   @override
@@ -581,6 +620,10 @@ abstract class _CustomerCodeInfo extends CustomerCodeInfo {
   PhoneNumber get telephoneNumber;
   @override
   String get country;
+  @override
+  String get floor;
+  @override
+  String get houseNumber1;
   @override
   @JsonKey(ignore: true)
   _$$_CustomerCodeInfoCopyWith<_$_CustomerCodeInfo> get copyWith =>

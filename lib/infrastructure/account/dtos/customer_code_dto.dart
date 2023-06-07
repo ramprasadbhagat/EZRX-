@@ -15,32 +15,32 @@ part 'customer_code_dto.g.dart';
 class CustomerCodeDto with _$CustomerCodeDto {
   const CustomerCodeDto._();
   const factory CustomerCodeDto({
-    @JsonKey(name: 'customerCodeSoldTo') required String customerCodeSoldTo,
-    @JsonKey(name: 'name1') required String name1,
-    @JsonKey(name: 'name2') required String name2,
-    @JsonKey(name: 'name3') required String name3,
-    @JsonKey(name: 'name4') required String name4,
-    @JsonKey(name: 'status') required String status,
-    @JsonKey(name: 'street1') required String street1,
-    @JsonKey(name: 'street2') required String street2,
-    @JsonKey(name: 'street3') required String street3,
-    @JsonKey(name: 'street4') required String street4,
-    @JsonKey(name: 'street5') required String street5,
-    @JsonKey(name: 'city1') required String city1,
-    @JsonKey(name: 'city2') required String city2,
-    @JsonKey(name: 'telephoneNumber') required String telephoneNumber,
-    @JsonKey(name: 'postalCode') required String postalCode,
+    @JsonKey(name: 'customerCodeSoldTo', defaultValue: '') required String customerCodeSoldTo,
+    @JsonKey(name: 'name1', defaultValue: '') required String name1,
+    @JsonKey(name: 'name2', defaultValue: '') required String name2,
+    @JsonKey(name: 'name3', defaultValue: '') required String name3,
+    @JsonKey(name: 'name4', defaultValue: '') required String name4,
+    @JsonKey(name: 'status', defaultValue: '') required String status,
+    @JsonKey(name: 'street1', defaultValue: '') required String street1,
+    @JsonKey(name: 'street2', defaultValue: '') required String street2,
+    @JsonKey(name: 'street3', defaultValue: '') required String street3,
+    @JsonKey(name: 'street4', defaultValue: '') required String street4,
+    @JsonKey(name: 'street5', defaultValue: '') required String street5,
+    @JsonKey(name: 'city1', defaultValue: '') required String city1,
+    @JsonKey(name: 'city2', defaultValue: '') required String city2,
+    @JsonKey(name: 'telephoneNumber', defaultValue: '') required String telephoneNumber,
+    @JsonKey(name: 'postalCode', defaultValue: '') required String postalCode,
     @JsonKey(name: 'division', defaultValue: '') required String division,
-    @JsonKey(name: 'customerClassification')
+    @JsonKey(name: 'customerClassification', defaultValue: '')
         required String customerClassification,
-    @JsonKey(name: 'customerLocalGroup') required String customerLocalGroup,
-    @JsonKey(name: 'paymentTermDescription')
+    @JsonKey(name: 'customerLocalGroup', defaultValue: '') required String customerLocalGroup,
+    @JsonKey(name: 'paymentTermDescription', defaultValue: '')
         required String paymentTermDescription,
-    @JsonKey(name: 'shipTo') required List<ShipToDto> shipToInfos,
-    @JsonKey(name: 'billTo') required List<BillToDto> billToInfos,
-    @JsonKey(name: 'customerAttr7') required String customerAttr7,
-    @JsonKey(name: 'customerGrp4') required String customerGrp4,
-    @JsonKey(name: 'region') required String region,
+    @JsonKey(name: 'shipTo', defaultValue: <ShipToDto>[]) required List<ShipToDto> shipToInfos,
+    @JsonKey(name: 'billTo', defaultValue: <BillToDto>[]) required List<BillToDto> billToInfos,
+    @JsonKey(name: 'customerAttr7', defaultValue: '') required String customerAttr7,
+    @JsonKey(name: 'customerGrp4', defaultValue: '') required String customerGrp4,
+    @JsonKey(name: 'region', defaultValue: '') required String region,
     @JsonKey(name: 'emailAddresses', defaultValue: [])
         required List<String> emailAddresses,
     @JsonKey(name: 'comboEligible', defaultValue: false)
@@ -48,6 +48,8 @@ class CustomerCodeDto with _$CustomerCodeDto {
     @JsonKey(name: 'salesDeals', defaultValue: [])
         required List<String> salesDeals,
     @JsonKey(name: 'country', defaultValue: '') required String country,
+    @JsonKey(name: 'floor', defaultValue: '') required String floor,
+    @JsonKey(name: 'houseNumber1', defaultValue: '') required String houseNumber1,
   }) = _CustomerCodeDto;
 
   CustomerCodeInfo toDomain() {
@@ -84,6 +86,8 @@ class CustomerCodeDto with _$CustomerCodeDto {
       salesDeals: salesDeals.map((e) => SalesDealNumber(e)).toList(),
       telephoneNumber: PhoneNumber(telephoneNumber),
       country: country,
+      floor:floor,
+      houseNumber1:houseNumber1,
     );
   }
 

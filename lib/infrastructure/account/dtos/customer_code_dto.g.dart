@@ -8,34 +8,36 @@ part of 'customer_code_dto.dart';
 
 _$_CustomerCodeDto _$$_CustomerCodeDtoFromJson(Map<String, dynamic> json) =>
     _$_CustomerCodeDto(
-      customerCodeSoldTo: json['customerCodeSoldTo'] as String,
-      name1: json['name1'] as String,
-      name2: json['name2'] as String,
-      name3: json['name3'] as String,
-      name4: json['name4'] as String,
-      status: json['status'] as String,
-      street1: json['street1'] as String,
-      street2: json['street2'] as String,
-      street3: json['street3'] as String,
-      street4: json['street4'] as String,
-      street5: json['street5'] as String,
-      city1: json['city1'] as String,
-      city2: json['city2'] as String,
-      telephoneNumber: json['telephoneNumber'] as String,
-      postalCode: json['postalCode'] as String,
+      customerCodeSoldTo: json['customerCodeSoldTo'] as String? ?? '',
+      name1: json['name1'] as String? ?? '',
+      name2: json['name2'] as String? ?? '',
+      name3: json['name3'] as String? ?? '',
+      name4: json['name4'] as String? ?? '',
+      status: json['status'] as String? ?? '',
+      street1: json['street1'] as String? ?? '',
+      street2: json['street2'] as String? ?? '',
+      street3: json['street3'] as String? ?? '',
+      street4: json['street4'] as String? ?? '',
+      street5: json['street5'] as String? ?? '',
+      city1: json['city1'] as String? ?? '',
+      city2: json['city2'] as String? ?? '',
+      telephoneNumber: json['telephoneNumber'] as String? ?? '',
+      postalCode: json['postalCode'] as String? ?? '',
       division: json['division'] as String? ?? '',
-      customerClassification: json['customerClassification'] as String,
-      customerLocalGroup: json['customerLocalGroup'] as String,
-      paymentTermDescription: json['paymentTermDescription'] as String,
-      shipToInfos: (json['shipTo'] as List<dynamic>)
-          .map((e) => ShipToDto.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      billToInfos: (json['billTo'] as List<dynamic>)
-          .map((e) => BillToDto.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      customerAttr7: json['customerAttr7'] as String,
-      customerGrp4: json['customerGrp4'] as String,
-      region: json['region'] as String,
+      customerClassification: json['customerClassification'] as String? ?? '',
+      customerLocalGroup: json['customerLocalGroup'] as String? ?? '',
+      paymentTermDescription: json['paymentTermDescription'] as String? ?? '',
+      shipToInfos: (json['shipTo'] as List<dynamic>?)
+              ?.map((e) => ShipToDto.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      billToInfos: (json['billTo'] as List<dynamic>?)
+              ?.map((e) => BillToDto.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      customerAttr7: json['customerAttr7'] as String? ?? '',
+      customerGrp4: json['customerGrp4'] as String? ?? '',
+      region: json['region'] as String? ?? '',
       emailAddresses: (json['emailAddresses'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
@@ -46,6 +48,8 @@ _$_CustomerCodeDto _$$_CustomerCodeDtoFromJson(Map<String, dynamic> json) =>
               .toList() ??
           [],
       country: json['country'] as String? ?? '',
+      floor: json['floor'] as String? ?? '',
+      houseNumber1: json['houseNumber1'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_CustomerCodeDtoToJson(_$_CustomerCodeDto instance) =>
@@ -78,4 +82,6 @@ Map<String, dynamic> _$$_CustomerCodeDtoToJson(_$_CustomerCodeDto instance) =>
       'comboEligible': instance.comboEligible,
       'salesDeals': instance.salesDeals,
       'country': instance.country,
+      'floor': instance.floor,
+      'houseNumber1': instance.houseNumber1,
     };

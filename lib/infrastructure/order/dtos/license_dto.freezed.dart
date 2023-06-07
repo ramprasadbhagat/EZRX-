@@ -20,11 +20,11 @@ LicenseDto _$LicenseDtoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$LicenseDto {
-  @JsonKey(name: 'licenceType')
+  @JsonKey(name: 'licenceType', defaultValue: '')
   String get licenceType => throw _privateConstructorUsedError;
-  @JsonKey(name: 'licenseDescription')
+  @JsonKey(name: 'licenseDescription', defaultValue: '')
   String get licenseDescription => throw _privateConstructorUsedError;
-  @JsonKey(name: 'licenseNumber')
+  @JsonKey(name: 'licenseNumber', defaultValue: '')
   String get licenseNumber => throw _privateConstructorUsedError;
   @JsonKey(
       name: 'validFrom', defaultValue: '', readValue: dateTimeStringFormatCheck)
@@ -46,11 +46,11 @@ abstract class $LicenseDtoCopyWith<$Res> {
       _$LicenseDtoCopyWithImpl<$Res, LicenseDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'licenceType')
+      {@JsonKey(name: 'licenceType', defaultValue: '')
           String licenceType,
-      @JsonKey(name: 'licenseDescription')
+      @JsonKey(name: 'licenseDescription', defaultValue: '')
           String licenseDescription,
-      @JsonKey(name: 'licenseNumber')
+      @JsonKey(name: 'licenseNumber', defaultValue: '')
           String licenseNumber,
       @JsonKey(name: 'validFrom', defaultValue: '', readValue: dateTimeStringFormatCheck)
           String validFrom,
@@ -111,11 +111,11 @@ abstract class _$$_licenseDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'licenceType')
+      {@JsonKey(name: 'licenceType', defaultValue: '')
           String licenceType,
-      @JsonKey(name: 'licenseDescription')
+      @JsonKey(name: 'licenseDescription', defaultValue: '')
           String licenseDescription,
-      @JsonKey(name: 'licenseNumber')
+      @JsonKey(name: 'licenseNumber', defaultValue: '')
           String licenseNumber,
       @JsonKey(name: 'validFrom', defaultValue: '', readValue: dateTimeStringFormatCheck)
           String validFrom,
@@ -169,11 +169,11 @@ class __$$_licenseDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_licenseDto extends _licenseDto {
   const _$_licenseDto(
-      {@JsonKey(name: 'licenceType')
+      {@JsonKey(name: 'licenceType', defaultValue: '')
           required this.licenceType,
-      @JsonKey(name: 'licenseDescription')
+      @JsonKey(name: 'licenseDescription', defaultValue: '')
           required this.licenseDescription,
-      @JsonKey(name: 'licenseNumber')
+      @JsonKey(name: 'licenseNumber', defaultValue: '')
           required this.licenseNumber,
       @JsonKey(name: 'validFrom', defaultValue: '', readValue: dateTimeStringFormatCheck)
           required this.validFrom,
@@ -185,13 +185,13 @@ class _$_licenseDto extends _licenseDto {
       _$$_licenseDtoFromJson(json);
 
   @override
-  @JsonKey(name: 'licenceType')
+  @JsonKey(name: 'licenceType', defaultValue: '')
   final String licenceType;
   @override
-  @JsonKey(name: 'licenseDescription')
+  @JsonKey(name: 'licenseDescription', defaultValue: '')
   final String licenseDescription;
   @override
-  @JsonKey(name: 'licenseNumber')
+  @JsonKey(name: 'licenseNumber', defaultValue: '')
   final String licenseNumber;
   @override
   @JsonKey(
@@ -244,11 +244,11 @@ class _$_licenseDto extends _licenseDto {
 
 abstract class _licenseDto extends LicenseDto {
   const factory _licenseDto(
-      {@JsonKey(name: 'licenceType')
+      {@JsonKey(name: 'licenceType', defaultValue: '')
           required final String licenceType,
-      @JsonKey(name: 'licenseDescription')
+      @JsonKey(name: 'licenseDescription', defaultValue: '')
           required final String licenseDescription,
-      @JsonKey(name: 'licenseNumber')
+      @JsonKey(name: 'licenseNumber', defaultValue: '')
           required final String licenseNumber,
       @JsonKey(name: 'validFrom', defaultValue: '', readValue: dateTimeStringFormatCheck)
           required final String validFrom,
@@ -260,13 +260,13 @@ abstract class _licenseDto extends LicenseDto {
       _$_licenseDto.fromJson;
 
   @override
-  @JsonKey(name: 'licenceType')
+  @JsonKey(name: 'licenceType', defaultValue: '')
   String get licenceType;
   @override
-  @JsonKey(name: 'licenseDescription')
+  @JsonKey(name: 'licenseDescription', defaultValue: '')
   String get licenseDescription;
   @override
-  @JsonKey(name: 'licenseNumber')
+  @JsonKey(name: 'licenseNumber', defaultValue: '')
   String get licenseNumber;
   @override
   @JsonKey(
