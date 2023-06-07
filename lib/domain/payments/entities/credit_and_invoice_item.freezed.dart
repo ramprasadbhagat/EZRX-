@@ -29,7 +29,7 @@ mixin _$CreditAndInvoiceItem {
   DateTimeStringValue get postingDate => throw _privateConstructorUsedError;
   String get transactionCurrency => throw _privateConstructorUsedError;
   String get billingDocument => throw _privateConstructorUsedError;
-  String get referenceDocumentNumber => throw _privateConstructorUsedError;
+  StringValue get referenceDocumentNumber => throw _privateConstructorUsedError;
   String get payerParty => throw _privateConstructorUsedError;
   String get payerName1 => throw _privateConstructorUsedError;
   String get dueCalculationBaseDate => throw _privateConstructorUsedError;
@@ -98,7 +98,7 @@ abstract class $CreditAndInvoiceItemCopyWith<$Res> {
       DateTimeStringValue postingDate,
       String transactionCurrency,
       String billingDocument,
-      String referenceDocumentNumber,
+      StringValue referenceDocumentNumber,
       String payerParty,
       String payerName1,
       String dueCalculationBaseDate,
@@ -268,7 +268,7 @@ class _$CreditAndInvoiceItemCopyWithImpl<$Res,
       referenceDocumentNumber: null == referenceDocumentNumber
           ? _value.referenceDocumentNumber
           : referenceDocumentNumber // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StringValue,
       payerParty: null == payerParty
           ? _value.payerParty
           : payerParty // ignore: cast_nullable_to_non_nullable
@@ -459,7 +459,7 @@ abstract class _$$_CreditAndInvoiceItemCopyWith<$Res>
       DateTimeStringValue postingDate,
       String transactionCurrency,
       String billingDocument,
-      String referenceDocumentNumber,
+      StringValue referenceDocumentNumber,
       String payerParty,
       String payerName1,
       String dueCalculationBaseDate,
@@ -626,7 +626,7 @@ class __$$_CreditAndInvoiceItemCopyWithImpl<$Res>
       referenceDocumentNumber: null == referenceDocumentNumber
           ? _value.referenceDocumentNumber
           : referenceDocumentNumber // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StringValue,
       payerParty: null == payerParty
           ? _value.payerParty
           : payerParty // ignore: cast_nullable_to_non_nullable
@@ -883,7 +883,7 @@ class _$_CreditAndInvoiceItem extends _CreditAndInvoiceItem {
   @override
   final String billingDocument;
   @override
-  final String referenceDocumentNumber;
+  final StringValue referenceDocumentNumber;
   @override
   final String payerParty;
   @override
@@ -1152,7 +1152,7 @@ abstract class _CreditAndInvoiceItem extends CreditAndInvoiceItem {
       required final DateTimeStringValue postingDate,
       required final String transactionCurrency,
       required final String billingDocument,
-      required final String referenceDocumentNumber,
+      required final StringValue referenceDocumentNumber,
       required final String payerParty,
       required final String payerName1,
       required final String dueCalculationBaseDate,
@@ -1223,7 +1223,7 @@ abstract class _CreditAndInvoiceItem extends CreditAndInvoiceItem {
   @override
   String get billingDocument;
   @override
-  String get referenceDocumentNumber;
+  StringValue get referenceDocumentNumber;
   @override
   String get payerParty;
   @override

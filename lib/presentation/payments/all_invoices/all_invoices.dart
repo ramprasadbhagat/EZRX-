@@ -4,7 +4,7 @@ import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/filter/all_invoices_filter_bloc.dart';
-import 'package:ezrxmobile/application/payments/invoice_details/invoice_details_bloc.dart';
+import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
@@ -276,9 +276,9 @@ class _InvoiceItem extends StatelessWidget {
     return Card(
       child: ListTile(
         onTap: () {
-          context.read<InvoiceDetailsBloc>().add(
-                InvoiceDetailsEvent.fetch(
-                  invoiceItem: invoiceItem,
+          context.read<CreditAndInvoiceDetailsBloc>().add(
+                CreditAndInvoiceDetailsEvent.fetch(
+                  creditAndInvoiceItem: invoiceItem,
                   salesOrganisation:
                       context.read<SalesOrgBloc>().state.salesOrganisation,
                   customerCodeInfo:

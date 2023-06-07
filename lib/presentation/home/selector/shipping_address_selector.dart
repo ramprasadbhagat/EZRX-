@@ -38,7 +38,7 @@ import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dar
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ezrxmobile/application/payments/paymant_summary/payment_summary_bloc.dart';
+import 'package:ezrxmobile/application/payments/payment_summary/payment_summary_bloc.dart';
 
 class ShipCodeSelector extends StatelessWidget {
   const ShipCodeSelector({Key? key}) : super(key: key);

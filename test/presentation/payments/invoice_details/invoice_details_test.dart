@@ -8,7 +8,7 @@ import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.da
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
-import 'package:ezrxmobile/application/payments/invoice_details/invoice_details_bloc.dart';
+import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_document_detail.dart';
@@ -28,9 +28,9 @@ import 'package:mocktail/mocktail.dart';
 import '../../../utils/widget_utils.dart';
 import '../../order_history/order_history_details_widget_test.dart';
 
-class InvoiceDetailsBlocMock
-    extends MockBloc<InvoiceDetailsEvent, InvoiceDetailsState>
-    implements InvoiceDetailsBloc {}
+class CreditAndInvoiceDetailsBlocMock
+    extends MockBloc<CreditAndInvoiceDetailsEvent, CreditAndInvoiceDetailsState>
+    implements CreditAndInvoiceDetailsBloc {}
 
 class CustomerCodeBlocMock
     extends MockBloc<CustomerCodeEvent, CustomerCodeState>
@@ -54,7 +54,7 @@ class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
     implements EligibilityBloc {}
 
 void main() {
-  late InvoiceDetailsBloc invoiceDetailsBlocMock;
+  late CreditAndInvoiceDetailsBloc creditAndInvoiceDetailsBlocMock;
   late CustomerCodeBloc customerCodeBlocMock;
   late ShipToCodeBloc shipToCodeBlocMock;
   late UserBloc userBlocMock;
@@ -65,7 +65,7 @@ void main() {
   late AnnouncementBloc announcementBlocMock;
   late EligibilityBlocMock eligibilityBlocMock;
   late CreditAndInvoiceItem fakeInvoice;
-  late List<CustomerDocumentDetail> fakeInvoiceDetails;
+  late List<CustomerDocumentDetail> fakeCreditAndInvoiceDetails;
   setUpAll(() async {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton(() => AppRouter());
@@ -76,7 +76,7 @@ void main() {
 
   setUp(() async {
     WidgetsFlutterBinding.ensureInitialized();
-    invoiceDetailsBlocMock = InvoiceDetailsBlocMock();
+    creditAndInvoiceDetailsBlocMock = CreditAndInvoiceDetailsBlocMock();
     customerCodeBlocMock = CustomerCodeBlocMock();
     shipToCodeBlocMock = ShipToCodeBlocMock();
     userBlocMock = UserBlocMock();
@@ -92,12 +92,12 @@ void main() {
       accountingDocumentItem: '001',
       invoiceProcessingStatus: 'Cleared',
     );
-    fakeInvoiceDetails = <CustomerDocumentDetail>[
+    fakeCreditAndInvoiceDetails = <CustomerDocumentDetail>[
       CustomerDocumentDetail.empty(),
     ];
 
-    when(() => invoiceDetailsBlocMock.state)
-        .thenReturn(InvoiceDetailsState.initial());
+    when(() => creditAndInvoiceDetailsBlocMock.state)
+        .thenReturn(CreditAndInvoiceDetailsState.initial());
     when(() => customerCodeBlocMock.state)
         .thenReturn(CustomerCodeState.initial());
     when(() => shipToCodeBlocMock.state).thenReturn(ShipToCodeState.initial());
@@ -115,8 +115,8 @@ void main() {
       WidgetUtils.getScopedWidget(
         autoRouterMock: autoRouterMock,
         providers: [
-          BlocProvider<InvoiceDetailsBloc>(
-            create: (context) => invoiceDetailsBlocMock,
+          BlocProvider<CreditAndInvoiceDetailsBloc>(
+            create: (context) => creditAndInvoiceDetailsBlocMock,
           ),
           BlocProvider<CustomerCodeBloc>(
             create: (context) => customerCodeBlocMock,
@@ -145,8 +145,8 @@ void main() {
 
   group('Invoice Details Screen Test', () {
     testWidgets('=> AppBar Test', (tester) async {
-      when(() => invoiceDetailsBlocMock.state)
-          .thenReturn(InvoiceDetailsState.initial().copyWith(
+      when(() => creditAndInvoiceDetailsBlocMock.state)
+          .thenReturn(CreditAndInvoiceDetailsState.initial().copyWith(
         isLoading: true,
       ));
 
@@ -161,17 +161,17 @@ void main() {
 
     testWidgets('=> BasicInformationSection test', (tester) async {
       final expectedState = [
-        InvoiceDetailsState.initial().copyWith(
+        CreditAndInvoiceDetailsState.initial().copyWith(
           failureOrSuccessOption: none(),
           isLoading: true,
         ),
-        InvoiceDetailsState.initial().copyWith(
+        CreditAndInvoiceDetailsState.initial().copyWith(
           isLoading: false,
           failureOrSuccessOption: optionOf(const Right('')),
-          details: fakeInvoiceDetails,
+          details: fakeCreditAndInvoiceDetails,
         ),
       ];
-      whenListen(invoiceDetailsBlocMock, Stream.fromIterable(expectedState));
+      whenListen(creditAndInvoiceDetailsBlocMock, Stream.fromIterable(expectedState));
 
       await getWidget(tester);
 
@@ -192,19 +192,19 @@ void main() {
       expect(findShipToText, findsOneWidget);
     });
 
-    testWidgets('=> InvoiceDetailsSection test', (tester) async {
+    testWidgets('=> CreditAndInvoiceDetailsSection test', (tester) async {
       final expectedState = [
-        InvoiceDetailsState.initial().copyWith(
+        CreditAndInvoiceDetailsState.initial().copyWith(
           failureOrSuccessOption: none(),
           isLoading: true,
         ),
-        InvoiceDetailsState.initial().copyWith(
+        CreditAndInvoiceDetailsState.initial().copyWith(
           isLoading: false,
           failureOrSuccessOption: optionOf(const Right('')),
-          details: fakeInvoiceDetails,
+          details: fakeCreditAndInvoiceDetails,
         ),
       ];
-      whenListen(invoiceDetailsBlocMock, Stream.fromIterable(expectedState));
+      whenListen(creditAndInvoiceDetailsBlocMock, Stream.fromIterable(expectedState));
 
       await getWidget(tester);
 
@@ -237,12 +237,12 @@ void main() {
     group('=> InvoiceItemsSection test', () {
       testWidgets('=> InvoiceItemsSection loading test', (tester) async {
         final expectedState = [
-          InvoiceDetailsState.initial().copyWith(
+          CreditAndInvoiceDetailsState.initial().copyWith(
             failureOrSuccessOption: none(),
             isLoading: true,
           ),
         ];
-        whenListen(invoiceDetailsBlocMock, Stream.fromIterable(expectedState));
+        whenListen(creditAndInvoiceDetailsBlocMock, Stream.fromIterable(expectedState));
 
         await getWidget(tester);
 
@@ -254,17 +254,17 @@ void main() {
       });
       testWidgets('=> Invoice Items empty', (tester) async {
         final expectedState = [
-          InvoiceDetailsState.initial().copyWith(
+          CreditAndInvoiceDetailsState.initial().copyWith(
             failureOrSuccessOption: none(),
             isLoading: true,
           ),
-          InvoiceDetailsState.initial().copyWith(
+          CreditAndInvoiceDetailsState.initial().copyWith(
             isLoading: false,
             failureOrSuccessOption: optionOf(const Right('')),
             details: <CustomerDocumentDetail>[],
           ),
         ];
-        whenListen(invoiceDetailsBlocMock, Stream.fromIterable(expectedState));
+        whenListen(creditAndInvoiceDetailsBlocMock, Stream.fromIterable(expectedState));
 
         await getWidget(tester);
         await tester.pumpAndSettle();
@@ -276,17 +276,17 @@ void main() {
 
       testWidgets('=> Invoice Items not empty', (tester) async {
         final expectedState = [
-          InvoiceDetailsState.initial().copyWith(
+          CreditAndInvoiceDetailsState.initial().copyWith(
             failureOrSuccessOption: none(),
             isLoading: true,
           ),
-          InvoiceDetailsState.initial().copyWith(
+          CreditAndInvoiceDetailsState.initial().copyWith(
             isLoading: false,
             failureOrSuccessOption: optionOf(const Right('')),
-            details: fakeInvoiceDetails,
+            details: fakeCreditAndInvoiceDetails,
           ),
         ];
-        whenListen(invoiceDetailsBlocMock, Stream.fromIterable(expectedState));
+        whenListen(creditAndInvoiceDetailsBlocMock, Stream.fromIterable(expectedState));
 
         await getWidget(tester);
         await tester.pumpAndSettle();

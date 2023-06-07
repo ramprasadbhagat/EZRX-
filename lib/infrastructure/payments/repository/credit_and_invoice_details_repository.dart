@@ -6,29 +6,29 @@ import 'package:ezrxmobile/domain/payments/entities/customer_document_detail.dar
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:dartz/dartz.dart';
-import 'package:ezrxmobile/domain/payments/repository/i_invoice_details_repository.dart';
-import 'package:ezrxmobile/infrastructure/payments/datasource/invoice_details_local.dart';
-import 'package:ezrxmobile/infrastructure/payments/datasource/invoice_details_remote.dart';
+import 'package:ezrxmobile/domain/payments/repository/i_credit_and_invoice_details_repository.dart';
+import 'package:ezrxmobile/infrastructure/payments/datasource/credit_and_invoice_details_local.dart';
+import 'package:ezrxmobile/infrastructure/payments/datasource/credit_and_invoice_details_remote.dart';
 
-class InvoiceDetailsRepository extends IInvoiceDetailsRepository {
+class CreditAndInvoiceDetailsRepository extends ICreditAndInvoiceDetailsRepository {
   final Config config;
-  final InvoiceDetailsLocalDataSource localDataSource;
-  final InvoiceDetailsRemoteDataSource remoteDataSource;
-  InvoiceDetailsRepository({
+  final CreditAndInvoiceDetailsLocalDataSource localDataSource;
+  final CreditAndInvoiceDetailsRemoteDataSource remoteDataSource;
+  CreditAndInvoiceDetailsRepository({
     required this.config,
     required this.localDataSource,
     required this.remoteDataSource,
   });
 
   @override
-  Future<Either<ApiFailure, List<CustomerDocumentDetail>>> getInvoiceDetails({
+  Future<Either<ApiFailure, List<CustomerDocumentDetail>>> getCreditAndInvoiceDetails({
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
-    required CreditAndInvoiceItem invoiceItem,
+    required CreditAndInvoiceItem creditAndInvoiceItem,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
-        final response = await localDataSource.getInvoiceDetails();
+        final response = await localDataSource.getCreditAndInvoiceDetails();
 
         return Right(response);
       } catch (e) {
@@ -38,13 +38,13 @@ class InvoiceDetailsRepository extends IInvoiceDetailsRepository {
       }
     }
     try {
-      final response = await remoteDataSource.getInvoiceDetails(
+      final response = await remoteDataSource.getCreditAndInvoiceDetails(
         salesOrg: salesOrganisation.salesOrg.getOrCrash(),
         customerCode: customerCodeInfo.customerCodeSoldTo,
-        bpCustomerNumber: invoiceItem.bpCustomerNumber,
-        fiscalYear: invoiceItem.fiscalYear,
-        accountingDocument: invoiceItem.accountingDocument,
-        accountingDocumentItem: invoiceItem.accountingDocumentItem,
+        bpCustomerNumber: creditAndInvoiceItem.bpCustomerNumber,
+        fiscalYear: creditAndInvoiceItem.fiscalYear,
+        accountingDocument: creditAndInvoiceItem.accountingDocument,
+        accountingDocumentItem: creditAndInvoiceItem.accountingDocumentItem,
       );
 
       return Right(response);

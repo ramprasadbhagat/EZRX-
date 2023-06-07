@@ -46,6 +46,7 @@ import 'package:ezrxmobile/presentation/orders/saved_order/saved_order_detail_pa
 import 'package:ezrxmobile/presentation/orders/saved_order/saved_order_list_page.dart';
 import 'package:ezrxmobile/presentation/payments/all_credits/all_credits.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/payment_advice_footer/payment_advice_footer_page.dart';
+import 'package:ezrxmobile/presentation/payments/credit_details/credit_details.dart';
 import 'package:ezrxmobile/presentation/payments/invoice_details/invoice_details.dart';
 import 'package:ezrxmobile/presentation/returns/add_edit_user_restrictions.dart';
 import 'package:ezrxmobile/presentation/returns/policy_configuration/add_policy_configuration.dart';
@@ -233,6 +234,10 @@ import 'package:ezrxmobile/presentation/account/payment_configuration/sales_dist
     AutoRoute(
       path: 'payments/all_credits',
       page: AllCredits,
+    ),
+    AutoRoute(
+      path: 'payments/credit_details',
+      page: CreditDetailsPage,
     ),
     CustomRoute(
       path: 'orders/bundle_item_detail',

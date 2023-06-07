@@ -10,11 +10,11 @@ import 'package:ezrxmobile/presentation/core/custom_expansion_tile.dart'
     as custom;
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class InvoiceItemsSection extends StatelessWidget {
-  final CreditAndInvoiceItem invoiceItem;
-  const InvoiceItemsSection({
+class CreditItemsSection extends StatelessWidget {
+  final CreditAndInvoiceItem creditItem;
+  const CreditItemsSection({
     Key? key,
-    required this.invoiceItem,
+    required this.creditItem,
   }) : super(key: key);
 
   @override
@@ -29,7 +29,7 @@ class InvoiceItemsSection extends StatelessWidget {
           initiallyExpanded: true,
           keepHeaderBorder: true,
           title: Text(
-            'Invoice Item Details'.tr(),
+            'Credit Item Details'.tr(),
             style: Theme.of(context)
                 .textTheme
                 .titleMedium
@@ -76,7 +76,7 @@ class InvoiceItemsSection extends StatelessWidget {
                                   valueFlex: 5,
                                   keyText: 'Type'.tr(),
                                   valueText: e
-                                      .salesDocumentItemType.displayStringValue,
+                                      .salesDocumentItemType.displayLabel,
                                 ),
                                 const SizedBox(height: 8),
                                 BalanceTextRow(
@@ -102,7 +102,7 @@ class InvoiceItemsSection extends StatelessWidget {
                                 BalanceTextRow(
                                   keyFlex: 3,
                                   valueFlex: 5,
-                                  keyText: 'Quantity'.tr(),
+                                  keyText: 'Return Quantity'.tr(),
                                   valueText:
                                       e.billingQuantity.apiParameterValue,
                                 ),
@@ -110,21 +110,8 @@ class InvoiceItemsSection extends StatelessWidget {
                                 BalanceTextRow(
                                   keyFlex: 3,
                                   valueFlex: 5,
-                                  keyText: 'Unit Price'.tr(),
-                                  valueText: StringUtils.displayPrice(
-                                    salesOrgConfigs,
-                                    e.netAmount,
-                                  ),
-                                ),
-                                const SizedBox(height: 8),
-                                BalanceTextRow(
-                                  keyFlex: 3,
-                                  valueFlex: 5,
-                                  keyText: 'Total Price'.tr(),
-                                  valueText: StringUtils.displayPrice(
-                                    salesOrgConfigs,
-                                    e.grossAmount,
-                                  ),
+                                  keyText: 'Return Value'.tr(),
+                                  valueText: 'N.A.',
                                 ),
                                 const SizedBox(height: 8),
                                 BalanceTextRow(
@@ -167,7 +154,7 @@ class InvoiceItemsSection extends StatelessWidget {
                                   keyFlex: 3,
                                   valueFlex: 5,
                                   keyText: 'Tax Amount'.tr(),
-                                  valueText: StringUtils.displayPrice(
+                                  valueText: StringUtils.displayNaIfPriceIsZero(
                                     salesOrgConfigs,
                                     e.taxAmount,
                                   ),

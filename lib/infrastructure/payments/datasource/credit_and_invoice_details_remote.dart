@@ -6,22 +6,22 @@ import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_document_detail.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
-import 'package:ezrxmobile/infrastructure/payments/datasource/invoice_details_query_mutation.dart';
+import 'package:ezrxmobile/infrastructure/payments/datasource/credit_and_invoice_details_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/customer_document_detail_dto.dart';
 
-class InvoiceDetailsRemoteDataSource {
+class CreditAndInvoiceDetailsRemoteDataSource {
   HttpService httpService;
-  InvoiceDetailsQueryMutation invoiceDetailsQueryMutation;
+  CreditAndInvoiceDetailsQueryMutation creditAndInvoiceDetailsQueryMutation;
   DataSourceExceptionHandler dataSourceExceptionHandler;
   Config config;
-  InvoiceDetailsRemoteDataSource({
+  CreditAndInvoiceDetailsRemoteDataSource({
     required this.httpService,
-    required this.invoiceDetailsQueryMutation,
+    required this.creditAndInvoiceDetailsQueryMutation,
     required this.dataSourceExceptionHandler,
     required this.config,
   });
 
-  Future<List<CustomerDocumentDetail>> getInvoiceDetails({
+  Future<List<CustomerDocumentDetail>> getCreditAndInvoiceDetails({
     required String customerCode,
     required String salesOrg,
     required String accountingDocument,
@@ -34,7 +34,7 @@ class InvoiceDetailsRemoteDataSource {
       url: '${config.urlConstants}ezpay',
       data: jsonEncode(
         {
-          'query': invoiceDetailsQueryMutation.getInvoiceDetails(),
+          'query': creditAndInvoiceDetailsQueryMutation.getCreditAndInvoiceDetails(),
           'variables': {
             'input': {
               'customerCode': customerCode,

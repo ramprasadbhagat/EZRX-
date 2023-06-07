@@ -35,7 +35,7 @@ import 'package:ezrxmobile/application/payments/all_credits/all_credits_bloc.dar
 import 'package:ezrxmobile/application/payments/all_credits/all_credits_filter/all_credits_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/filter/all_invoices_filter_bloc.dart';
-import 'package:ezrxmobile/application/payments/invoice_details/invoice_details_bloc.dart';
+import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_list_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
@@ -241,10 +241,10 @@ import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_in
 import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_invoices_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_invoices_remote.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/payment_advice_footer_repository.dart';
-import 'package:ezrxmobile/infrastructure/payments/datasource/invoice_details_local.dart';
-import 'package:ezrxmobile/infrastructure/payments/datasource/invoice_details_query_mutation.dart';
-import 'package:ezrxmobile/infrastructure/payments/datasource/invoice_details_remote.dart';
-import 'package:ezrxmobile/infrastructure/payments/repository/invoice_details_repository.dart';
+import 'package:ezrxmobile/infrastructure/payments/datasource/credit_and_invoice_details_local.dart';
+import 'package:ezrxmobile/infrastructure/payments/datasource/credit_and_invoice_details_query_mutation.dart';
+import 'package:ezrxmobile/infrastructure/payments/datasource/credit_and_invoice_details_remote.dart';
+import 'package:ezrxmobile/infrastructure/payments/repository/credit_and_invoice_details_repository.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/approver_return_request_information_local.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/approver_return_request_information_remote.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/approver_return_request_query.dart';
@@ -304,7 +304,7 @@ import 'package:ezrxmobile/infrastructure/returns/datasource/submit_return_reque
 import 'package:ezrxmobile/infrastructure/returns/repository/submit_return_request_repository.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/submit_return_request_remote_datasource.dart';
 import 'package:ezrxmobile/application/returns/submit_return/submit_return_bloc.dart';
-import 'package:ezrxmobile/application/payments/paymant_summary/payment_summary_bloc.dart';
+import 'package:ezrxmobile/application/payments/payment_summary/payment_summary_bloc.dart';
 import 'package:ezrxmobile/infrastructure/payments/repository/payment_summary_repository.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/payment_summary_local_datasource.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/payment_summary_remote_datasource.dart';
@@ -2285,28 +2285,28 @@ void setupLocator() {
     ),
   );
   locator.registerLazySingleton(
-    () => InvoiceDetailsRepository(
+    () => CreditAndInvoiceDetailsRepository(
       config: locator<Config>(),
-      localDataSource: locator<InvoiceDetailsLocalDataSource>(),
-      remoteDataSource: locator<InvoiceDetailsRemoteDataSource>(),
+      localDataSource: locator<CreditAndInvoiceDetailsLocalDataSource>(),
+      remoteDataSource: locator<CreditAndInvoiceDetailsRemoteDataSource>(),
     ),
   );
   locator.registerLazySingleton(
-    () => InvoiceDetailsBloc(
-      invoiceDetailsRepository: locator<InvoiceDetailsRepository>(),
+    () => CreditAndInvoiceDetailsBloc(
+      creditAndInvoiceDetailsRepository: locator<CreditAndInvoiceDetailsRepository>(),
     ),
   );
   locator.registerLazySingleton(
-    () => InvoiceDetailsLocalDataSource(),
+    () => CreditAndInvoiceDetailsLocalDataSource(),
   );
   locator.registerLazySingleton(
-    () => InvoiceDetailsQueryMutation(),
+    () => CreditAndInvoiceDetailsQueryMutation(),
   );
   locator.registerLazySingleton(
-    () => InvoiceDetailsRemoteDataSource(
+    () => CreditAndInvoiceDetailsRemoteDataSource(
       config: locator<Config>(),
       httpService: locator<HttpService>(),
-      invoiceDetailsQueryMutation: locator<InvoiceDetailsQueryMutation>(),
+      creditAndInvoiceDetailsQueryMutation: locator<CreditAndInvoiceDetailsQueryMutation>(),
       dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
     ),
   );

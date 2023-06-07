@@ -8,7 +8,7 @@ import 'package:ezrxmobile/presentation/payments/payment_summary_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:ezrxmobile/application/payments/paymant_summary/payment_summary_bloc.dart';
+import 'package:ezrxmobile/application/payments/payment_summary/payment_summary_bloc.dart';
 
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 

@@ -26,7 +26,7 @@ void main() {
   late MockAllCreditsRepository mockAllCreditsRepository;
   late AllCreditsFilter allCreditsFilter;
   late CustomerDocumentHeader credits;
-  late List<CreditAndInvoiceItem> creditsItems;
+  late List<CreditAndInvoiceItem> creditItems;
   final fakeToDate = DateTime.now();
   final fakeFromDate = DateTime.now().subtract(
     const Duration(days: 28),
@@ -38,7 +38,7 @@ void main() {
     mockAllCreditsRepository = MockAllCreditsRepository();
     credits = await AllCreditsAndInvoicesLocalDataSource()
         .getCustomerDocumentHeader();
-    creditsItems = [credits.invoices.first];
+    creditItems = [credits.invoices.first];
     allCreditsFilter = AllCreditsFilter.empty().copyWith(
       documentDateTo: DateTimeStringValue(
         getDateStringByDateTime(fakeToDate),
@@ -80,7 +80,7 @@ void main() {
                 allCreditsFilter: allCreditsFilter,
               )).thenAnswer(
             (invocation) async => Right(
-                CustomerDocumentHeader(invoices: creditsItems, totalCount: 0)),
+                CustomerDocumentHeader(invoices: creditItems, totalCount: 0)),
           );
         },
         act: (AllCreditsBloc bloc) =>
@@ -96,7 +96,7 @@ void main() {
             isLoading: true,
           ),
           AllCreditsState.initial().copyWith(
-              isLoading: false, credits: creditsItems, canLoadMore: false),
+              isLoading: false, credits: creditItems, canLoadMore: false),
         ],
       );
       blocTest(
@@ -152,7 +152,7 @@ void main() {
                 allCreditsFilter: allCreditsFilter,
               )).thenAnswer(
             (invocation) async => Right(
-                CustomerDocumentHeader(invoices: creditsItems, totalCount: 0)),
+                CustomerDocumentHeader(invoices: creditItems, totalCount: 0)),
           );
         },
         act: (AllCreditsBloc bloc) =>
@@ -170,7 +170,7 @@ void main() {
           AllCreditsState.initial().copyWith(
             isLoading: false,
             canLoadMore: false,
-            credits: creditsItems,
+            credits: creditItems,
           ),
         ],
       );

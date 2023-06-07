@@ -333,10 +333,10 @@ void main() {
         ),
       );
       await getWidget(tester);
-      final creditsItemTile = find.byKey(const Key('creditsItemTile'));
-      expect(creditsItemTile, findsWidgets);
+      final creditItemTile = find.byKey(const Key('creditItemTile'));
+      expect(creditItemTile, findsWidgets);
       await tester.drag(
-        creditsItemTile.first,
+        creditItemTile.first,
         const Offset(0.0, -10000.0),
       );
       await tester.pumpAndSettle();

@@ -301,7 +301,7 @@ class CreditAndInvoiceItemDto with _$CreditAndInvoiceItemDto {
       postingDate: DateTimeStringValue(postingDate),
       transactionCurrency: transactionCurrency,
       billingDocument: billingDocument,
-      referenceDocumentNumber: referenceDocumentNumber,
+      referenceDocumentNumber: StringValue(referenceDocumentNumber),
       payerParty: payerParty,
       payerName1: payerName1,
       dueCalculationBaseDate: dueCalculationBaseDate,

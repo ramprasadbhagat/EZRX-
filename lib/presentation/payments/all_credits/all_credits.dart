@@ -5,6 +5,7 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/ship_to_code/ship_to_code_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_credits/all_credits_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_credits/all_credits_filter/all_credits_filter_bloc.dart';
+import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
@@ -18,6 +19,7 @@ import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dar
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/payments/all_credits/all_credits_filter.dart';
 import 'package:ezrxmobile/presentation/payments/all_credits/all_credits_filter_by_status.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -281,7 +283,7 @@ class AllCredits extends StatelessWidget {
                       },
                       isLoading: allCreditsState.isLoading,
                       itemBuilder: (context, index, item) => _CreditsItem(
-                        creditsItem: item,
+                        creditItem: item,
                         configs: configs,
                       ),
                       items: allCreditsState.credits,
@@ -300,31 +302,44 @@ class AllCredits extends StatelessWidget {
 class _CreditsItem extends StatelessWidget {
   const _CreditsItem({
     Key? key,
-    required this.creditsItem,
+    required this.creditItem,
     required this.configs,
   }) : super(key: key);
 
-  final CreditAndInvoiceItem creditsItem;
+  final CreditAndInvoiceItem creditItem;
   final SalesOrganisationConfigs configs;
 
   @override
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
-        key: const ValueKey('creditsItemTile'),
-        onTap: () {},
+        key: const ValueKey('creditItemTile'),
+        onTap: () {
+          context.read<CreditAndInvoiceDetailsBloc>().add(
+                CreditAndInvoiceDetailsEvent.fetch(
+                  creditAndInvoiceItem: creditItem,
+                  salesOrganisation:
+                      context.read<SalesOrgBloc>().state.salesOrganisation,
+                  customerCodeInfo:
+                      context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                ),
+              );
+          context.router.push(CreditDetailsPageRoute(
+            creditItem: creditItem,
+          ));
+        },
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             BalanceTextRow(
               keyText: 'Document Date'.tr(),
-              valueText: creditsItem.documentDate.toValidDateString,
+              valueText: creditItem.documentDate.toValidDateString,
               keyFlex: 1,
               valueFlex: 1,
             ),
             BalanceTextRow(
               keyText: 'Document Number'.tr(),
-              valueText: creditsItem.accountingDocument,
+              valueText: creditItem.accountingDocument,
               keyFlex: 1,
               valueFlex: 1,
             ),
@@ -332,14 +347,14 @@ class _CreditsItem extends StatelessWidget {
               keyText: 'Credit Amount'.tr(),
               valueText: StringUtils.displayPrice(
                 configs,
-                creditsItem.convertIfAmountInTransactionCurrencyIsNegative,
+                creditItem.convertIfAmountInTransactionCurrencyIsNegative,
               ),
               keyFlex: 1,
               valueFlex: 1,
             ),
             BalanceTextRow(
               keyText: 'Status'.tr(),
-              valueText: creditsItem.invoiceProcessingStatus,
+              valueText: creditItem.invoiceProcessingStatus,
               keyFlex: 1,
               valueFlex: 1,
               valueColor: ZPColors.kPrimaryColor,

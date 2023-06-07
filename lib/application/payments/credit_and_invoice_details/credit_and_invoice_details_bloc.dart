@@ -6,30 +6,30 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_document_detail.dart';
-import 'package:ezrxmobile/domain/payments/repository/i_invoice_details_repository.dart';
+import 'package:ezrxmobile/domain/payments/repository/i_credit_and_invoice_details_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'invoices_details_event.dart';
-part 'invoices_details_state.dart';
-part 'invoice_details_bloc.freezed.dart';
+part 'credit_and_invoice_details_event.dart';
+part 'credit_and_invoice_details_state.dart';
+part 'credit_and_invoice_details_bloc.freezed.dart';
 
-class InvoiceDetailsBloc
-    extends Bloc<InvoiceDetailsEvent, InvoiceDetailsState> {
-  final IInvoiceDetailsRepository invoiceDetailsRepository;
-  InvoiceDetailsBloc({
-    required this.invoiceDetailsRepository,
-  }) : super(InvoiceDetailsState.initial()) {
-    on<InvoiceDetailsEvent>(_onEvent);
+class CreditAndInvoiceDetailsBloc
+    extends Bloc<CreditAndInvoiceDetailsEvent, CreditAndInvoiceDetailsState> {
+  final ICreditAndInvoiceDetailsRepository creditAndInvoiceDetailsRepository;
+  CreditAndInvoiceDetailsBloc({
+    required this.creditAndInvoiceDetailsRepository,
+  }) : super(CreditAndInvoiceDetailsState.initial()) {
+    on<CreditAndInvoiceDetailsEvent>(_onEvent);
   }
 
   Future<void> _onEvent(
-    InvoiceDetailsEvent event,
-    Emitter<InvoiceDetailsState> emit,
+    CreditAndInvoiceDetailsEvent event,
+    Emitter<CreditAndInvoiceDetailsState> emit,
   ) async {
     await event.map(
       initialized: (_Initialized e) async =>
-          emit(InvoiceDetailsState.initial()),
+          emit(CreditAndInvoiceDetailsState.initial()),
       fetch: (_Fetch e) async {
         emit(
           state.copyWith(
@@ -38,10 +38,10 @@ class InvoiceDetailsBloc
           ),
         );
         final failureOrSuccess =
-            await invoiceDetailsRepository.getInvoiceDetails(
+            await creditAndInvoiceDetailsRepository.getCreditAndInvoiceDetails(
           salesOrganisation: e.salesOrganisation,
           customerCodeInfo: e.customerCodeInfo,
-          invoiceItem: e.invoiceItem,
+          creditAndInvoiceItem: e.creditAndInvoiceItem,
         );
 
         failureOrSuccess.fold(

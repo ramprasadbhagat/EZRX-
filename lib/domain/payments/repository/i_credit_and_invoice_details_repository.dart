@@ -5,10 +5,10 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_document_detail.dart';
 
-abstract class IInvoiceDetailsRepository {
-  Future<Either<ApiFailure, List<CustomerDocumentDetail>>> getInvoiceDetails({
+abstract class ICreditAndInvoiceDetailsRepository {
+  Future<Either<ApiFailure, List<CustomerDocumentDetail>>> getCreditAndInvoiceDetails({
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
-    required CreditAndInvoiceItem invoiceItem,
+    required CreditAndInvoiceItem creditAndInvoiceItem,
   });
 }

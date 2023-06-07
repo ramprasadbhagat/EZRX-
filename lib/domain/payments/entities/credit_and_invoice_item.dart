@@ -20,7 +20,7 @@ class CreditAndInvoiceItem with _$CreditAndInvoiceItem {
     required DateTimeStringValue postingDate,
     required String transactionCurrency,
     required String billingDocument,
-    required String referenceDocumentNumber,
+    required StringValue referenceDocumentNumber,
     required String payerParty,
     required String payerName1,
     required String dueCalculationBaseDate,
@@ -78,7 +78,7 @@ class CreditAndInvoiceItem with _$CreditAndInvoiceItem {
         postingDate: DateTimeStringValue(''),
         transactionCurrency: '',
         billingDocument: '',
-        referenceDocumentNumber: '',
+        referenceDocumentNumber: StringValue(''),
         payerParty: '',
         payerName1: '',
         dueCalculationBaseDate: '',
@@ -122,6 +122,6 @@ class CreditAndInvoiceItem with _$CreditAndInvoiceItem {
         orderId: '',
       );
 //to convert if amountInTransactionCurrency value is negative
-  double get convertIfAmountInTransactionCurrencyIsNegative =>
+double get convertIfAmountInTransactionCurrencyIsNegative =>
       amountInTransactionCurrency * -1;
 }

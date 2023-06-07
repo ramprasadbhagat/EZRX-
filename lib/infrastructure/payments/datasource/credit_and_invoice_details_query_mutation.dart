@@ -1,5 +1,5 @@
-class InvoiceDetailsQueryMutation {
-  String getInvoiceDetails() {
+class CreditAndInvoiceDetailsQueryMutation {
+  String getCreditAndInvoiceDetails() {
     return '''
     query customerDocumentDetails(\$input: customerDocumentDetailsRequest!) {
       customerDocumentDetails(request: \$input) {

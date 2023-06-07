@@ -23,7 +23,7 @@ import 'package:ezrxmobile/application/payments/all_credits/all_credits_bloc.dar
 import 'package:ezrxmobile/application/payments/all_credits/all_credits_filter/all_credits_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/filter/all_invoices_filter_bloc.dart';
-import 'package:ezrxmobile/application/payments/paymant_summary/payment_summary_bloc.dart';
+import 'package:ezrxmobile/application/payments/payment_summary/payment_summary_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_summary/return_summary_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
