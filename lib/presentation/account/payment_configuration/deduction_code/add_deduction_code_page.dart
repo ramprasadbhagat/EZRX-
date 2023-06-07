@@ -105,6 +105,7 @@ class AddDeductionCodePage extends StatelessWidget {
                 child: Column(
                   children: [
                     GenericDropdown(
+                      key: const Key('salesOrgDropdownKey'),
                       labelText: 'Select Sales Org'.tr(),
                       validator: (_) => deductionCodeData.salesOrg.value.fold(
                         (f) => f.maybeMap(
@@ -133,6 +134,7 @@ class AddDeductionCodePage extends StatelessWidget {
                     ),
                     const SizedBox(height: 20),
                     GenericDropdown(
+                      key: const Key('salesDistrictDropdownKey'),
                       labelText: 'Select Sales District'.tr(),
                       validator: (_) => null,
                       onChanged: (val) =>
@@ -181,6 +183,7 @@ class AddDeductionCodePage extends StatelessWidget {
                     ),
                     const SizedBox(height: 20),
                     GenericDropdown(
+                      key: const Key('amountTypeKey'),
                       labelText: 'Amount Type'.tr(),
                       validator: (_) => deductionCodeData.amountType.value.fold(
                         (f) => f.maybeMap(

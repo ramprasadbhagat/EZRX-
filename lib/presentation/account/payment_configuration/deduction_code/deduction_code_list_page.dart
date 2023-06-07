@@ -86,9 +86,11 @@ class _DeductionCodeScrollList extends StatelessWidget {
       builder: (context, state) {
         return ScrollList<DeductionCode>(
           emptyMessage: 'No deduction code found'.tr(),
-          onRefresh: () => context
-              .read<ManageDeductionCodeBloc>()
-              .add(const ManageDeductionCodeEvent.fetch()),
+          onRefresh: () {
+            context
+                .read<ManageDeductionCodeBloc>()
+                .add(const ManageDeductionCodeEvent.fetch());
+          },
           isLoading: deductionCodeState.isFetching,
           onLoadingMore: () {},
           itemBuilder: (context, index, item) {
@@ -162,14 +164,18 @@ class _DeductionCodeListItem extends StatelessWidget {
                     IconButton(
                       iconSize: 24.0,
                       icon: deductionCode.isDeleteInProgress
-                          ? const SizedBox(
+                          ? SizedBox(
                               height: 20.0,
                               width: 20.0,
                               child: CircularProgressIndicator(
                                 strokeWidth: 2.0,
+                                key: Key('indicator$index'),
                               ),
                             )
-                          : const Icon(Icons.delete),
+                          : Icon(
+                              Icons.delete,
+                              key: Key('deleteKey$index'),
+                            ),
                       onPressed: () => deductionCode.isDeleteInProgress
                           ? null
                           : CustomDialogs.confirmationDialog(
